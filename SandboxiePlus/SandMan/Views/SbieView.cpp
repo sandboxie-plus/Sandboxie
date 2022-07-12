@@ -165,7 +165,6 @@ void CSbieView::CreateMenu()
 		m_pMenuContent->addSeparator();
 		m_pMenuExplore = m_pMenuContent->addAction(CSandMan::GetIcon("Explore"), tr("Explore Content"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRegEdit = m_pMenuContent->addAction(CSandMan::GetIcon("RegEdit"), tr("Open Registry"), this, SLOT(OnSandBoxAction()));
-	m_pMenuSnapshots = m_pMenu->addAction(CSandMan::GetIcon("Snapshots"), tr("Snapshots Manager"), this, SLOT(OnSandBoxAction()));
 	m_pMenuRecover = m_pMenu->addAction(CSandMan::GetIcon("Recover"), tr("Recover Files"), this, SLOT(OnSandBoxAction()));
 	m_pMenuCleanUp = m_pMenu->addAction(CSandMan::GetIcon("Erase"), tr("Delete Content"), this, SLOT(OnSandBoxAction()));
 	m_pMenu->addSeparator();
@@ -193,6 +192,8 @@ void CSbieView::CreateMenu()
 		m_pMenuPresetsRecovery->setCheckable(true);
 	
 	m_pMenuTools = m_pMenu->addMenu(CSandMan::GetIcon("Maintenance"), tr("Sandbox Tools"));
+		m_pMenuSnapshots = m_pMenuTools->addAction(CSandMan::GetIcon("Snapshots"), tr("Snapshots Manager"), this, SLOT(OnSandBoxAction()));
+		m_pMenuTools->addSeparator();
 		m_pMenuDuplicate = m_pMenuTools->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Box Config"), this, SLOT(OnSandBoxAction()));
 
 	m_pMenuRename = m_pMenu->addAction(CSandMan::GetIcon("Rename"), tr("Rename Sandbox"), this, SLOT(OnSandBoxAction()));
@@ -666,6 +667,9 @@ bool CSbieView::UpdateMenu()
 		iGroupe = 0;
 	}
 
+	m_CurSandBoxes = GetSelectedBoxes();
+	m_CurProcesses = GetSelectedProcesses();
+
 	bool bAdvanced = theConf->GetInt("Options/ViewMode", 1) == 1
 		|| (QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0;
 
@@ -974,14 +978,13 @@ bool CSbieView::TestNameAndWarn(const QString& Name)
 
 void CSbieView::OnSandBoxAction()
 {
-	OnSandBoxAction(qobject_cast<QAction*>(sender()));
+	OnSandBoxAction(qobject_cast<QAction*>(sender()), m_CurSandBoxes);
 }
 
-void CSbieView::OnSandBoxAction(QAction* Action)
+void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandBoxes)
 {
 	QList<SB_STATUS> Results;
 
-	QList<CSandBoxPtr> SandBoxes = CSbieView::GetSelectedBoxes();
 	if (SandBoxes.isEmpty())
 		return;
 	if (Action == m_pStopAsync)
@@ -1341,14 +1344,12 @@ void CSbieView::OnSandBoxAction(QAction* Action)
 
 void CSbieView::OnProcessAction()
 {
-	OnProcessAction(qobject_cast<QAction*>(sender()));
+	OnProcessAction(qobject_cast<QAction*>(sender()), m_CurProcesses);
 }
 
-void CSbieView::OnProcessAction(QAction* Action)
+void CSbieView::OnProcessAction(QAction* Action, const QList<CBoxedProcessPtr>& Processes)
 {
 	QList<SB_STATUS> Results;
-
-	QList<CBoxedProcessPtr> Processes = CSbieView::GetSelectedProcesses();
 
 	if (Action == m_pMenuTerminate || Action == m_pMenuBlackList)
 	{
@@ -1489,7 +1490,7 @@ void CSbieView::OnDoubleClicked(const QModelIndex& index)
 	if ((QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) == 0) {
 
 		if (index.column() == CSbieModel::ePath) {
-			OnSandBoxAction(m_pMenuExplore);
+			OnSandBoxAction(m_pMenuExplore, QList<CSandBoxPtr>() << pBox);
 			return;
 		}
 	}
@@ -1629,6 +1630,7 @@ void CSbieView::PopUpMenu(const QString& Name)
 {
 	//SelectBox(Name);
 	CSandBoxPtr pBox = theAPI->GetBoxByName(Name);
+	m_CurSandBoxes = QList<CSandBoxPtr>() << pBox;
 	if (pBox.isNull() || !UpdateMenu(false, pBox)) return;
 	m_pMenu2->exec(QCursor::pos());
 	//m_pMenu2->popup(QCursor::pos());
@@ -1637,7 +1639,9 @@ void CSbieView::PopUpMenu(const QString& Name)
 
 QMenu* CSbieView::GetMenu(const QString& Name)
 {
+	//SelectBox(Name);
 	CSandBoxPtr pBox = theAPI->GetBoxByName(Name);
+	m_CurSandBoxes = QList<CSandBoxPtr>() << pBox;
 	if (pBox.isNull()) return NULL;
 	UpdateMenu(false, pBox);
 	return m_pMenu;
@@ -1727,10 +1731,10 @@ void CSbieView::OnMoveItem(const QString& Name, const QString& To, int row)
 
 void CSbieView::OnRemoveItem() 
 {
-	if (!GetSelectedProcesses().isEmpty())
-		OnProcessAction(m_pMenuTerminate);
-	else if (!GetSelectedBoxes().isEmpty())
-		OnSandBoxAction(m_pMenuRemove);
+	if (!m_CurProcesses.isEmpty())
+		OnProcessAction(m_pMenuTerminate, m_CurProcesses);
+	else if (!m_CurSandBoxes.isEmpty())
+		OnSandBoxAction(m_pMenuRemove, m_CurSandBoxes);
 	else if (!GetSelectedGroups().isEmpty())
 		OnGroupAction(m_pDelGroupe);
 }

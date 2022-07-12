@@ -50,9 +50,9 @@ private slots:
 	void						OnGroupAction();
 	void						OnGroupAction(QAction* pAction);
 	void						OnSandBoxAction();
-	void						OnSandBoxAction(QAction* pAction);
+	void						OnSandBoxAction(QAction* pAction, const QList<CSandBoxPtr>& SandBoxes);
 	void						OnProcessAction();
-	void						OnProcessAction(QAction* pAction);
+	void						OnProcessAction(QAction* pAction, const QList<CBoxedProcessPtr>& Processes);
 
 	void						OnExpanded(const QModelIndex& index) { ChangeExpand(index, true); }
 	void						OnCollapsed(const QModelIndex& index) { ChangeExpand(index, false); }
@@ -167,4 +167,7 @@ private:
 	int						m_iMenuRun;
 
 	QFileIconProvider		m_IconProvider;
+
+	QList<CSandBoxPtr>		m_CurSandBoxes;
+	QList<CBoxedProcessPtr>	m_CurProcesses;
 };

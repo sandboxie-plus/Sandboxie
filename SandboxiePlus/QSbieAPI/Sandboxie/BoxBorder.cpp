@@ -53,8 +53,6 @@ const WCHAR *Sandboxie_WindowClassName = L"Sandboxie_BorderWindow";
 
 CBoxBorder::CBoxBorder(CSbieAPI* pApi, QObject* parent) : QThread(parent)
 {
-	m = NULL;
-
 	m_Api = pApi;
 
 	m_Running = true;
@@ -188,7 +186,6 @@ void CBoxBorder::run()
 			m->ActiveWnd = NULL;
 			m->ActivePid = 0;
 
-		hide:
 			if (m->IsBorderVisible) 
 			{
 				::ShowWindow(m->BorderWnd, SW_HIDE);
@@ -202,31 +199,35 @@ void CBoxBorder::run()
 			if (NothingChanged(hWnd, &rect, pid))
 				continue;
 
+			if (m->IsBorderVisible)
+				::ShowWindow(m->BorderWnd, SW_HIDE);
+			m->IsBorderVisible = FALSE;
+
 			m->ActiveWnd = hWnd;
 			m->ActivePid = pid;
 			memcpy(&m->ActiveRect, &rect, sizeof(RECT));
 			m->TitleState = 0;
 			if (rect.right - rect.left <= 2 || rect.bottom - rect.top <= 2)
-				goto hide;
+				continue;
 
 			HMONITOR hMonitor = MonitorFromWindow(hWnd, MONITOR_DEFAULTTONULL);
 			if (!hMonitor)
-				goto hide;
+				continue;
 			MONITORINFO Monitor;
 			memset(&Monitor, 0, sizeof(MONITORINFO));
 			Monitor.cbSize = sizeof(MONITORINFO);
 			if (!GetMonitorInfo(hMonitor, &Monitor))
-				goto hide;
+				continue;
 
 			const RECT *Desktop = &Monitor.rcMonitor;
-			if (rect.left <= Desktop->left  && rect.top <= Desktop->top &&
+			if (rect.left <= Desktop->left  && rect.top <= Desktop->top    &&
 			  rect.right >= Desktop->right && rect.bottom >= Desktop->bottom &&
 			  (Style & WS_CAPTION) != WS_CAPTION) 
-				goto hide;
+				continue;
 
 			if (m->BorderMode == 2) {
 				if(!IsMounseOnTitle(hWnd, &rect, Desktop))
-					goto hide;
+					continue;
 			}
 
 
@@ -260,6 +261,7 @@ void CBoxBorder::run()
 			if (rect.bottom == Monitor.rcWork.bottom) 
 				ah -= 1;
 
+
 			POINT Points[10];
 			int PointCount = 0;
 
@@ -280,9 +282,8 @@ void CBoxBorder::run()
 
 			HRGN hrgn = CreatePolygonRgn(Points, PointCount, ALTERNATE);
 			SetWindowRgn(m->BorderWnd, hrgn, TRUE);
-			DeleteObject(hrgn);
-
 			SetWindowPos(m->BorderWnd, NULL, ax, ay, aw, ah, SWP_SHOWWINDOW | SWP_NOACTIVATE);
+
 			m->IsBorderVisible = TRUE;
 		}
 	}
@@ -295,7 +296,6 @@ void CBoxBorder::run()
 	}
 
 	delete m;
-	m = NULL;
 }
 
 

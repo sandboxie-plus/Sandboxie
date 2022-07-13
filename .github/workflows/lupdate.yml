@@ -3,8 +3,8 @@ name: Update language files
 on:
   workflow_dispatch:
   schedule:
-    # runs every Monday
-    - cron: '0 1 * * Mon'
+    # runs every night
+    - cron: '0 2 * * *'
 
 jobs:
   SBIE_Plus_lupdate:

@@ -16,7 +16,8 @@ public:
 
 	void SetBox(const CSandBoxPtr& pBox);
 	const CSandBoxPtr& GetBox() const { return m_pBox; }
-
+	
+	virtual QTreeView*		GetTree() { return m_pTreeView; }
 
 private slots:
 	void				OnFileMenu(const QPoint &);

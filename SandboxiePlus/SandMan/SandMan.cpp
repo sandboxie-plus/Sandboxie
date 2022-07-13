@@ -419,7 +419,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 	}
 
 		m_pMenuView->addSeparator();
-		m_pMenuBrowse = m_pMenuView->addAction(/*CSandMan::GetIcon("Tree"),*/ tr("Show File Panel"), this, SLOT(OnProcView()));
+		m_pMenuBrowse = m_pMenuView->addAction(CSandMan::GetIcon("Tree"), tr("Show File Panel"), this, SLOT(OnProcView()));
 		m_pMenuBrowse->setCheckable(true);
 		m_pMenuBrowse->setShortcut(QKeySequence("Ctrl+D"));
 		m_pMenuBrowse->setShortcutContext(Qt::WidgetWithChildrenShortcut);
@@ -623,7 +623,9 @@ void CSandMan::CreateToolBar()
 	QObject::connect(m_pCleanUpButton, SIGNAL(clicked(bool)), this, SLOT(OnCleanUp()));
 	m_pToolBar->addWidget(m_pCleanUpButton);
 
-
+	
+	m_pToolBar->addSeparator();
+	m_pToolBar->addAction(m_pMenuBrowse);
 	m_pToolBar->addSeparator();
 	m_pToolBar->addAction(m_pEditIni);
 	m_pToolBar->addSeparator();
@@ -1129,6 +1131,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		}
 		else 
 			ActiveProcesses = Processes.count();
+
 
 		if (theAPI->IsBusy() || m_iDeletingContent > 0)
 			bIconBusy = true;
@@ -2442,10 +2445,20 @@ void CSandMan::SetUITheme()
 		QPalette pizzaPalete = GetBoxView()->GetTree()->palette(); // QPalette pizzaPalete = QApplication::palette();
 		SetPaleteTexture(pizzaPalete, QPalette::Base, QImage(":/Assets/background.png"));
 		GetBoxView()->GetTree()->setPalette(pizzaPalete); // QApplication::setPalette(pizzaPalete);
+		GetFileView()->GetTree()->setPalette(pizzaPalete); // QApplication::setPalette(pizzaPalete);
 	}
-	else
+	else {
 		GetBoxView()->GetTree()->setPalette(QApplication::palette());
+		GetFileView()->GetTree()->setPalette(QApplication::palette());
+	}
 
+	QPalette p = GetBoxView()->GetTree()->palette();
+	p.setColor(QPalette::Highlight, QApplication::palette().color(QPalette::Highlight));
+	p.setColor(QPalette::HighlightedText, QApplication::palette().color(QPalette::HighlightedText));
+	GetBoxView()->GetTree()->setFocusPolicy(Qt::NoFocus);
+	GetBoxView()->GetTree()->setPalette(p);
+	GetFileView()->GetTree()->setFocusPolicy(Qt::NoFocus);
+	GetFileView()->GetTree()->setPalette(p);
 
 	m_DarkTheme = bDark;
 

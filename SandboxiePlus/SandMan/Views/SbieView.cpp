@@ -76,9 +76,6 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	connect(m_pSbieModel, SIGNAL(MoveBox(const QString&, const QString&, int)), this, SLOT(OnMoveItem(const QString&, const QString&, int)));
 	connect(m_pSbieModel, SIGNAL(MoveGroup(const QString&, const QString&, int)), this, SLOT(OnMoveItem(const QString&, const QString&, int)));
 
-	//m_pSbieTree->setStyleSheet("QTreeView::item:focus {selection-background-color: yellow;}");
-	//m_pSbieTree->setFocusPolicy(Qt::NoFocus);
-
 	m_pMainLayout->addWidget(m_pSbieTree);
 	// 
 
@@ -1627,7 +1624,7 @@ QMenu* CSbieView::GetMenu(const QString& Name)
 	m_CurSandBoxes = QList<CSandBoxPtr>() << pBox;
 	if (pBox.isNull()) return NULL;
 	UpdateMenu(false, pBox);
-	return m_pMenu;
+	return m_pMenuBox;
 }
 
 void CSbieView::ShowOptions(const QString& Name)

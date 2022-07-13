@@ -21,10 +21,9 @@ CFileView::CFileView(QWidget *parent)
     m_pTreeView->setModel(m_pFileModel);
     m_pTreeView->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
-#ifdef WIN32
 	QStyle* pStyle = QStyleFactory::create("windows");
 	m_pTreeView->setStyle(pStyle);
-#endif
+
 	m_pTreeView->setExpandsOnDoubleClick(false);
 
 	m_pTreeView->setContextMenuPolicy(Qt::CustomContextMenu);

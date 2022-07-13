@@ -22,16 +22,17 @@
 
 class CSbieAPI;
 
-class QSBIEAPI_EXPORT CBoxBorder: public QThread
+class QSBIEAPI_EXPORT CBoxBorder: public QObject
 {
 	Q_OBJECT
 public:
 	CBoxBorder(CSbieAPI* pApi, QObject* parent = 0);
 	virtual ~CBoxBorder();
 
+	void		ThreadFunc();
+	void		TimerProc();
+
 protected:
-	void		run();
-	bool		m_Running;
 
 	CSbieAPI*	m_Api;
 
@@ -39,7 +40,6 @@ private:
 	struct SBoxBorder* m;
 
 	void		GetActiveWindowRect(struct HWND__* hWnd, struct tagRECT* rect);
-	bool		NothingChanged(struct HWND__* hWnd, struct tagRECT* rect, quint32 pid);
 	bool		IsMounseOnTitle(struct HWND__* hWnd, struct tagRECT* rect, const struct tagRECT* Desktop);
 	bool		CheckMousePointer();
 };

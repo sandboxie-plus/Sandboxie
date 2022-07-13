@@ -27,6 +27,10 @@ typedef HRESULT(*P_DwmGetWindowAttribute)(HWND hWnd, DWORD dwAttribute, void *pv
 
 struct SBoxBorder
 {
+	HANDLE hThread;
+	UINT_PTR dwTimerId;
+	int FastTimerStartTicks;
+
 	CSandBox* pCurrentBox;
 	COLORREF BorderColor;
 	int BorderMode;
@@ -51,25 +55,41 @@ struct SBoxBorder
 
 const WCHAR *Sandboxie_WindowClassName = L"Sandboxie_BorderWindow";
 
-CBoxBorder::CBoxBorder(CSbieAPI* pApi, QObject* parent) : QThread(parent)
+
+void CBoxBorder__TimerProc(HWND hwnd, UINT uMsg, UINT_PTR dwTimerID, DWORD dwTime)
+{
+	CBoxBorder* This = (CBoxBorder*)GetWindowLongPtr(hwnd, 0);
+	This->TimerProc();
+}
+
+DWORD WINAPI CBoxBorder__ThreadFunc(LPVOID lpParam)
+{
+	CBoxBorder* This = ((CBoxBorder*)lpParam);
+	This->ThreadFunc();
+	return 0;
+}
+
+CBoxBorder::CBoxBorder(CSbieAPI* pApi, QObject* parent) : QObject(parent)
 {
 	m_Api = pApi;
 
-	m_Running = true;
-	start();
+	m = new SBoxBorder;
+
+	m->hThread = CreateThread(NULL, 0, CBoxBorder__ThreadFunc, this, 0, NULL);
 }
 
 CBoxBorder::~CBoxBorder()
 {
-	m_Running = false;
-	if (!wait(10 * 1000))
-		terminate();
+	PostThreadMessage(GetThreadId(m->hThread), WM_QUIT, 0, 0);
+
+	if(WaitForSingleObject(m->hThread, 10*1000) == WAIT_TIMEOUT)
+		TerminateThread(m->hThread, 0);
+
+	delete m;
 }
 
-void CBoxBorder::run() 
+void CBoxBorder::ThreadFunc()
 {
-	m = new SBoxBorder;
-
 	m->pCurrentBox = NULL;
 	m->BorderColor = RGB(0, 0, 0);
 	m->BorderMode = 0;
@@ -100,7 +120,7 @@ void CBoxBorder::run()
 	wc.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS | CS_GLOBALCLASS;
 	wc.lpfnWndProc = ::DefWindowProc;
 	wc.cbClsExtra = 0;
-	wc.cbWndExtra = 0;
+	wc.cbWndExtra = sizeof(ULONG_PTR);
 	wc.hInstance = NULL; // (HINSTANCE)::GetModuleHandle(NULL);
 	wc.hIcon = NULL; // ::LoadIcon(wc.hInstance, L"AAAPPICON");
 	wc.hCursor = NULL; // ::LoadCursor(NULL, IDC_ARROW);
@@ -119,195 +139,208 @@ void CBoxBorder::run()
 	SetLayeredWindowAttributes(m->BorderWnd, 0, 192, LWA_ALPHA);
 	::ShowWindow(m->BorderWnd, SW_HIDE);
 
+	SetWindowLongPtr(m->BorderWnd, 0, ULONG_PTR(this));
 
-	while (m_Running)
+	m->FastTimerStartTicks = 0;
+	m->dwTimerId = SetTimer(m->BorderWnd, 0, 100, CBoxBorder__TimerProc);
+
+	MSG  msg;
+	while (GetMessage(&msg, NULL, 0, 0))
 	{
-		msleep(100);
-
-		HWND hWnd = GetForegroundWindow();
-		if (!hWnd)
-			continue;
-		ULONG Style = GetWindowLong(hWnd, GWL_STYLE);
-		if (!(Style & WS_VISIBLE))
-			continue;
-		ULONG pid = 0;
-		GetWindowThreadProcessId(hWnd, &pid);
-
-		CSandBoxPtr pProcessBox = m_Api->GetBoxByProcessId(pid);
-
-		if (m->pCurrentBox != pProcessBox.data())
-		{
-			m->pCurrentBox = pProcessBox.data();
-			if(!m->pCurrentBox)
-				m->BorderMode = 0;
-			else
-			{
-				m->BorderMode = 1;
-				m->BorderColor = RGB(255, 255, 0);
-				m->BorderWidth = 6;
-
-				QStringList BorderCfg = pProcessBox->GetText("BorderColor").split(",");
-				if (BorderCfg.first().left(1) == L'#')
-				{
-					bool ok = false;
-					m->BorderColor = BorderCfg.first().mid(1).toInt(&ok, 16);
-					if(!ok)
-						m->BorderColor = RGB(255, 255, 0);
-					else 
-					{
-						if (BorderCfg.count() >= 2)
-						{
-							QString StrMode = BorderCfg.at(1);
-							if (StrMode.compare("ttl", Qt::CaseInsensitive) == 0)
-								m->BorderMode = 2;
-							else if (StrMode.compare("off", Qt::CaseInsensitive) == 0)
-								m->BorderMode = 0;
-						}
-
-						if (BorderCfg.count() >= 3)
-						{
-							m->BorderWidth = BorderCfg.at(2).toInt();
-							if (!m->BorderWidth)
-								m->BorderWidth = 6;
-						}
-					}
-				}
-
-				HBRUSH hbr = CreateSolidBrush(m->BorderColor);
-				SetClassLongPtr(m->BorderWnd, GCLP_HBRBACKGROUND, (LONG_PTR)hbr);
-				if (m->BorderBrush)
-					DeleteObject(m->BorderBrush);
-				m->BorderBrush = hbr;
-			}
-		}
-
-		if (m->BorderMode == 0) // no border enabled or unsandboxed
-		{
-			m->ActiveWnd = NULL;
-			m->ActivePid = 0;
-
-			if (m->IsBorderVisible) 
-			{
-				::ShowWindow(m->BorderWnd, SW_HIDE);
-				m->IsBorderVisible = FALSE;
-			}
-		}
-		else
-		{
-			RECT rect;
-			GetActiveWindowRect(hWnd, &rect);
-			if (NothingChanged(hWnd, &rect, pid))
-				continue;
-
-			if (m->IsBorderVisible)
-				::ShowWindow(m->BorderWnd, SW_HIDE);
-			m->IsBorderVisible = FALSE;
-
-			m->ActiveWnd = hWnd;
-			m->ActivePid = pid;
-			memcpy(&m->ActiveRect, &rect, sizeof(RECT));
-			m->TitleState = 0;
-			if (rect.right - rect.left <= 2 || rect.bottom - rect.top <= 2)
-				continue;
-
-			HMONITOR hMonitor = MonitorFromWindow(hWnd, MONITOR_DEFAULTTONULL);
-			if (!hMonitor)
-				continue;
-			MONITORINFO Monitor;
-			memset(&Monitor, 0, sizeof(MONITORINFO));
-			Monitor.cbSize = sizeof(MONITORINFO);
-			if (!GetMonitorInfo(hMonitor, &Monitor))
-				continue;
-
-			const RECT *Desktop = &Monitor.rcMonitor;
-			if (rect.left <= Desktop->left  && rect.top <= Desktop->top    &&
-			  rect.right >= Desktop->right && rect.bottom >= Desktop->bottom &&
-			  (Style & WS_CAPTION) != WS_CAPTION) 
-				continue;
-
-			if (m->BorderMode == 2) {
-				if(!IsMounseOnTitle(hWnd, &rect, Desktop))
-					continue;
-			}
-
-
-			int ax = rect.left;
-			if (rect.left < Desktop->left && (Desktop->left - rect.left) < (m->BorderWidth + 4))
-				ax = Desktop->left;
-
-			int ay = rect.top;
-			if (rect.top < Desktop->top && (Desktop->top - rect.top) < (m->BorderWidth + 4))
-				ay = Desktop->top;
-
-			int aw = -ax;
-			if (rect.right > Desktop->right && (rect.right - Desktop->right) < (m->BorderWidth + 4))
-				aw += Desktop->right;
-			else
-				aw += rect.right;
-
-			int ah = -ay;
-			if (rect.bottom > Desktop->bottom && (rect.bottom - Desktop->bottom) < (m->BorderWidth + 4))
-				ah += Desktop->bottom;
-			else
-				ah += rect.bottom;
-
-
-			// 
-			// in windows 10 and 11 if this is truly fullscreen the taskbar does not appear when hidden
-			// if its 1 px less on any side it works normally, so we pick bottom as thets where the taskbar usualyl is
-			// but with the taskbar to the side it woudl also work
-			//
-
-			if (rect.bottom == Monitor.rcWork.bottom) 
-				ah -= 1;
-
-
-			POINT Points[10];
-			int PointCount = 0;
-
-	#define ADD_POINT(xx,yy) \
-			Points[PointCount].x = (xx);    \
-			Points[PointCount].y = (yy);    \
-			PointCount++;
-
-	#define ADD_SQUARE(_w,_h,_b) \
-			ADD_POINT(0 + _b, 0 + _b); \
-			ADD_POINT(_w - _b, 0 + _b); \
-			ADD_POINT(_w - _b, _h - _b); \
-			ADD_POINT(0 + _b, _h - _b); \
-			ADD_POINT(0 + _b, 0 + _b);
-
-			ADD_SQUARE(aw, ah, 0);
-			ADD_SQUARE(aw, ah, m->BorderWidth);
-
-			HRGN hrgn = CreatePolygonRgn(Points, PointCount, ALTERNATE);
-			SetWindowRgn(m->BorderWnd, hrgn, TRUE);
-			SetWindowPos(m->BorderWnd, NULL, ax, ay, aw, ah, SWP_SHOWWINDOW | SWP_NOACTIVATE);
-
-			m->IsBorderVisible = TRUE;
-		}
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
 	}
 
+	KillTimer(m->BorderWnd, m->dwTimerId);
 
 	if (m->BorderWnd) 
 	{
 		DestroyWindow(m->BorderWnd);
 		m->BorderWnd = NULL;
 	}
-
-	delete m;
 }
 
-
-bool CBoxBorder::NothingChanged(struct HWND__* hWnd, struct tagRECT* rect, quint32 pid)
+void CBoxBorder::TimerProc() 
 {
-	if (pid == m->ActivePid && hWnd == m->ActiveWnd) {
-		if (memcmp(rect, &m->ActiveRect, sizeof(RECT)) == 0) {
-			if (!m->TitleState || m->TitleState == (CheckMousePointer() ? 1 : -1))
-				return true;
+    if (m->FastTimerStartTicks && GetTickCount() - m->FastTimerStartTicks >= 1000) {
+        m->FastTimerStartTicks = 0;
+        m->dwTimerId = SetTimer(m->BorderWnd, m->dwTimerId, 100, CBoxBorder__TimerProc);
+		return;
+    }
+
+	HWND hWnd = GetForegroundWindow();
+	if (!hWnd)
+		return;
+	ULONG Style = GetWindowLong(hWnd, GWL_STYLE);
+	if (!(Style & WS_VISIBLE))
+		return;
+	ULONG pid = 0;
+	GetWindowThreadProcessId(hWnd, &pid);
+
+	CSandBoxPtr pProcessBox = m_Api->GetBoxByProcessId(pid);
+
+	if (m->pCurrentBox != pProcessBox.data())
+	{
+		m->pCurrentBox = pProcessBox.data();
+		if(!m->pCurrentBox)
+			m->BorderMode = 0;
+		else
+		{
+			m->BorderMode = 1;
+			m->BorderColor = RGB(255, 255, 0);
+			m->BorderWidth = 6;
+
+			QStringList BorderCfg = pProcessBox->GetText("BorderColor").split(",");
+			if (BorderCfg.first().left(1) == L'#')
+			{
+				bool ok = false;
+				m->BorderColor = BorderCfg.first().mid(1).toInt(&ok, 16);
+				if(!ok)
+					m->BorderColor = RGB(255, 255, 0);
+				else 
+				{
+					if (BorderCfg.count() >= 2)
+					{
+						QString StrMode = BorderCfg.at(1);
+						if (StrMode.compare("ttl", Qt::CaseInsensitive) == 0)
+							m->BorderMode = 2;
+						else if (StrMode.compare("off", Qt::CaseInsensitive) == 0)
+							m->BorderMode = 0;
+					}
+
+					if (BorderCfg.count() >= 3)
+					{
+						m->BorderWidth = BorderCfg.at(2).toInt();
+						if (!m->BorderWidth)
+							m->BorderWidth = 6;
+					}
+				}
+			}
+
+			HBRUSH hbr = CreateSolidBrush(m->BorderColor);
+			SetClassLongPtr(m->BorderWnd, GCLP_HBRBACKGROUND, (LONG_PTR)hbr);
+			if (m->BorderBrush)
+				DeleteObject(m->BorderBrush);
+			m->BorderBrush = hbr;
 		}
 	}
-	return false;
+
+	if (m->BorderMode == 0) // no border enabled or unsandboxed
+	{
+		m->ActiveWnd = NULL;
+		m->ActivePid = 0;
+
+		if (m->IsBorderVisible) 
+		{
+			::ShowWindow(m->BorderWnd, SW_HIDE);
+			m->IsBorderVisible = FALSE;
+		}
+	}
+	else
+	{
+		RECT rect;
+		GetActiveWindowRect(hWnd, &rect);
+
+		if (pid == m->ActivePid && hWnd == m->ActiveWnd) {
+			if (memcmp(&rect, &m->ActiveRect, sizeof(RECT)) == 0) { // sane rect
+				if (!m->TitleState || m->TitleState == (CheckMousePointer() ? 1 : -1))
+					return;
+			} 
+			else { // window is being moved, increase refresh speed
+                if (! m->FastTimerStartTicks)
+                    m->dwTimerId = SetTimer(m->BorderWnd, m->dwTimerId, 10, CBoxBorder__TimerProc);
+                m->FastTimerStartTicks = GetTickCount();
+            }
+		}
+
+		if (m->IsBorderVisible)
+			::ShowWindow(m->BorderWnd, SW_HIDE);
+		m->IsBorderVisible = FALSE;
+
+		m->ActiveWnd = hWnd;
+		m->ActivePid = pid;
+		memcpy(&m->ActiveRect, &rect, sizeof(RECT));
+		m->TitleState = 0;
+		if (rect.right - rect.left <= 2 || rect.bottom - rect.top <= 2)
+			return;
+
+		HMONITOR hMonitor = MonitorFromWindow(hWnd, MONITOR_DEFAULTTONULL);
+		if (!hMonitor)
+			return;
+		MONITORINFO Monitor;
+		memset(&Monitor, 0, sizeof(MONITORINFO));
+		Monitor.cbSize = sizeof(MONITORINFO);
+		if (!GetMonitorInfo(hMonitor, &Monitor))
+			return;
+
+		const RECT *Desktop = &Monitor.rcMonitor;
+		if (rect.left <= Desktop->left  && rect.top <= Desktop->top    &&
+			rect.right >= Desktop->right && rect.bottom >= Desktop->bottom &&
+			(Style & WS_CAPTION) != WS_CAPTION) 
+			return;
+
+		if (m->BorderMode == 2) {
+			if(!IsMounseOnTitle(hWnd, &rect, Desktop))
+				return;
+		}
+
+
+		int ax = rect.left;
+		if (rect.left < Desktop->left && (Desktop->left - rect.left) < (m->BorderWidth + 4))
+			ax = Desktop->left;
+
+		int ay = rect.top;
+		if (rect.top < Desktop->top && (Desktop->top - rect.top) < (m->BorderWidth + 4))
+			ay = Desktop->top;
+
+		int aw = -ax;
+		if (rect.right > Desktop->right && (rect.right - Desktop->right) < (m->BorderWidth + 4))
+			aw += Desktop->right;
+		else
+			aw += rect.right;
+
+		int ah = -ay;
+		if (rect.bottom > Desktop->bottom && (rect.bottom - Desktop->bottom) < (m->BorderWidth + 4))
+			ah += Desktop->bottom;
+		else
+			ah += rect.bottom;
+
+
+		// 
+		// in windows 10 and 11 if this is truly fullscreen the taskbar does not appear when hidden
+		// if its 1 px less on any side it works normally, so we pick bottom as thets where the taskbar usualyl is
+		// but with the taskbar to the side it woudl also work
+		//
+
+		if (rect.bottom == Monitor.rcWork.bottom) 
+			ah -= 1;
+
+
+		POINT Points[10];
+		int PointCount = 0;
+
+#define ADD_POINT(xx,yy) \
+		Points[PointCount].x = (xx);    \
+		Points[PointCount].y = (yy);    \
+		PointCount++;
+
+#define ADD_SQUARE(_w,_h,_b) \
+		ADD_POINT(0 + _b, 0 + _b); \
+		ADD_POINT(_w - _b, 0 + _b); \
+		ADD_POINT(_w - _b, _h - _b); \
+		ADD_POINT(0 + _b, _h - _b); \
+		ADD_POINT(0 + _b, 0 + _b);
+
+		ADD_SQUARE(aw, ah, 0);
+		ADD_SQUARE(aw, ah, m->BorderWidth);
+
+		HRGN hrgn = CreatePolygonRgn(Points, PointCount, ALTERNATE);
+		SetWindowRgn(m->BorderWnd, hrgn, TRUE);
+		SetWindowPos(m->BorderWnd, NULL, ax, ay, aw, ah, SWP_SHOWWINDOW | SWP_NOACTIVATE);
+
+		m->IsBorderVisible = TRUE;
+	}
+
 }
 
 void CBoxBorder::GetActiveWindowRect(struct HWND__* hWnd, struct tagRECT* rect)

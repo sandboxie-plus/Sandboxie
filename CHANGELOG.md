@@ -7,9 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.2.2 / 5.57.2] - 2022-07-13
 
 ### Fixed
-- fixed issues with frame drawing
-- fixed issues with tray and box menu introduced in the last build
-- removed focus rectangle from tree list
+- fixed issues with frame-drawing
+- fixed issues with the tray and box menu introduced in the last build
+- removed focus rectangle from the tree list
 
 ### Changed
 - refactored menu creation code
@@ -21,13 +21,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added Swedish translation to Plus UI (thanks pb1)
-- added Vintage View Mode to make sandman UI look just lien sbietrl on the first glance
+- added Vintage View Mode to make SandMan UI look like SbieCtrl
 - added alternative tray menu mechanics
-- added ability to auto generate sandbox icons based on the border color
+- added ability to auto-generate sandbox icons based on the border colour
 
 ### Changed
 - changed box group icon to a dedicated one
-- browse content is now available as a side panel in the main window
+- "browse content" is now available as a side panel in the main window
 - animated hourglass icon overlay
 
 ### Fixed

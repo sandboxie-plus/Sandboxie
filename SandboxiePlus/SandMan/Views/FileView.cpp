@@ -44,13 +44,14 @@ void CFileView::SetBox(const CSandBoxPtr& pBox)
 {
 	m_pBox = pBox;
     QString Root;
-    if (!pBox.isNull()) {
+    if (!pBox.isNull() && !pBox->IsEmpty())
         Root = pBox->GetFileRoot();
-        QDir().mkpath(Root);
+    if (Root.isEmpty()) {
+        Root = theAPI->GetSbiePath();
+        m_pTreeView->setEnabled(false);
     }
     else
-        Root = theAPI->GetSbiePath();
-    //m_pFileModel->setRootPath(Root);
+        m_pTreeView->setEnabled(true);
     m_pTreeView->setRootIndex(m_pFileModel->setRootPath(Root));
 }
 

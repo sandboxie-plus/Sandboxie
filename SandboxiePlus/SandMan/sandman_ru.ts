@@ -473,10 +473,6 @@
         <translation>Выбрать программу</translation>
     </message>
     <message>
-        <source>Browse Content</source>
-        <translation type="obsolete">Просмотр содержимого</translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsGeneral.cpp" line="215"/>
         <source>kilobytes (%1)</source>
         <translation>килобайт (%1)</translation>
@@ -932,7 +928,6 @@ Full path: %4</source>
     <message>
         <location filename="SandManRecovery.cpp" line="208"/>
         <source>the following files were recently recovered and moved out of a sandbox.</source>
-        <oldsource>the following files were recently recoered and moved oout of a sandbox.</oldsource>
         <translation>следующие файлы были недавно восстановлены и перемещены из песочницы.</translation>
     </message>
 </context>
@@ -3186,13 +3181,6 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     </message>
 </context>
 <context>
-    <name>CSupportDialog</name>
-    <message>
-        <source>%1</source>
-        <translation type="obsolete">%1</translation>
-    </message>
-</context>
-<context>
     <name>CTraceModel</name>
     <message>
         <location filename="Models/TraceModel.cpp" line="165"/>
@@ -4195,14 +4183,6 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/OptionsWindow.ui" line="2122"/>
         <source>Open access to Windows Local Security Authority</source>
         <translation>Открыть доступ к серверу проверки подлинности локальной системы безопасности</translation>
-    </message>
-    <message>
-        <source>Program Control</source>
-        <translation type="obsolete">Контроль программ</translation>
-    </message>
-    <message>
-        <source>Immediate Recovery</source>
-        <translation type="obsolete">Немедленное восстановление</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2080"/>

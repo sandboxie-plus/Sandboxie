@@ -4,6 +4,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.2.2 / 5.57.2] - 2022-07-13
+
+### Fixed
+- fixed issues with frame drawing
+- fixed issues with trax and box menu introduced in the last build
+- removed focus rectangle from tree list
+
+### Changed
+- refactored menu creation code
+
+
+
 
 ## [1.2.1 / 5.57.1] - 2022-07-11
 
@@ -16,6 +28,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - changed box group icon to a dedicated one
 - browse content is now available as a side panel in the main window
+- animated hourglass icon overlay
 
 ### Fixed
 - fixed DPI issue on Windows 7

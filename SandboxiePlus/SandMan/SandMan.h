@@ -59,6 +59,7 @@ public:
 	bool				IsDisableRecovery() {return m_pDisableRecovery && m_pDisableRecovery->isChecked();}
 	bool				IsDisableMessages() {return m_pDisableMessages && m_pDisableMessages->isChecked();}
 	CSbieView*			GetBoxView() { return m_pBoxView; }
+	CFileView*			GetFileView() { return m_pFileView; }
 
 	bool				RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir = QString());
 

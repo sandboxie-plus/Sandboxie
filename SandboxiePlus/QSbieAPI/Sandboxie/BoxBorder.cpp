@@ -56,7 +56,7 @@ struct SBoxBorder
 const WCHAR *Sandboxie_WindowClassName = L"Sandboxie_BorderWindow";
 
 
-void CBoxBorder__TimerProc(HWND hwnd, UINT uMsg, UINT_PTR dwTimerID, DWORD dwTime)
+void WINAPI CBoxBorder__TimerProc(HWND hwnd, UINT uMsg, UINT_PTR dwTimerID, DWORD dwTime)
 {
 	CBoxBorder* This = (CBoxBorder*)GetWindowLongPtr(hwnd, 0);
 	This->TimerProc();

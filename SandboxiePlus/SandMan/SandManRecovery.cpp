@@ -205,7 +205,7 @@ CRecoveryLogWnd::CRecoveryLogWnd(QWidget *parent)
 
 	connect(m_pRecoveryLog->GetTree(), SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnDblClick(QTreeWidgetItem*)));
 
-	pLayout->addWidget(new QLabel(tr("the following files were recently recoered and moved oout of a sandbox.")), 0, 0);
+	pLayout->addWidget(new QLabel(tr("the following files were recently recovered and moved out of a sandbox.")), 0, 0);
 	pLayout->addWidget(m_pRecoveryLog, 1, 0);
 	this->setLayout(pLayout);
 

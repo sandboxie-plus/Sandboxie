@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issues with frame drawing
-- fixed issues with trax and box menu introduced in the last build
+- fixed issues with tray and box menu introduced in the last build
 - removed focus rectangle from tree list
 
 ### Changed

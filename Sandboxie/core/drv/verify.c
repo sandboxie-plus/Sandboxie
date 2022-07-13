@@ -756,7 +756,6 @@ _FX NTSTATUS KphValidateCertificate(void)
             }
         }
         else if (type && _wcsicmp(type, L"EVALUATION") == 0) {
-            Verify_CertInfo.evaluation = 1;
             // evaluation
             if (level) { // in days
                 TEST_EXPIRATION((CSHORT)_wtoi(level), 0, 0);

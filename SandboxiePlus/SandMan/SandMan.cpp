@@ -1995,9 +1995,9 @@ void CSandMan::OnSettingsAction()
 		QMessageBox *msgBox = new QMessageBox(this);
 		msgBox->setAttribute(Qt::WA_DeleteOnClose);
 		msgBox->setWindowTitle("Sandboxie-Plus");
-		msgBox->setText(tr("In the Plus UI this functionality has been integrated into the main sandbox list view."));
-		msgBox->setInformativeText(tr("Using the box/group context menu you can move boxes and groups to other groups. You can also use drag an drop to move the items around. "
-			"Alternatively you can also use the arow keys while holding ALT down to move items up and down within thair group.<br />"
+		msgBox->setText(tr("In the Plus UI, this functionality has been integrated into the main sandbox list view."));
+		msgBox->setInformativeText(tr("Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. "
+			"Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.<br />"
 			"You can create new boxes and groups from the Sandbox menu."));
 		QPixmap pic(":/Assets/LayoutAndGroups.png");
 		msgBox->setIconPixmap(pic.scaled(pic.width() * 3/4, pic.height() * 3/4, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));

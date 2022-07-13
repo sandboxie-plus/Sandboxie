@@ -4,6 +4,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.2.3 / 5.57.3] - 2022-07-13
+
+### Fixed
+- fixed issues with new menu code
+
+### Changed
+- reworked frame drawing
+
+
+
 ## [1.2.2 / 5.57.2] - 2022-07-13
 
 ### Fixed

@@ -42,7 +42,12 @@ CFileView::~CFileView()
 
 void CFileView::SetBox(const CSandBoxPtr& pBox)
 {
+    if (!m_pBox.isNull()) disconnect(m_pBox.data(), SIGNAL(AboutToBeCleaned()), this, SLOT(OnAboutToBeCleaned()));
+
 	m_pBox = pBox;
+
+    if (!m_pBox.isNull()) connect(m_pBox.data(), SIGNAL(AboutToBeCleaned()), this, SLOT(OnAboutToBeCleaned()));
+
     QString Root;
     if (!pBox.isNull() && !pBox->IsEmpty())
         Root = pBox->GetFileRoot();
@@ -53,6 +58,20 @@ void CFileView::SetBox(const CSandBoxPtr& pBox)
     else
         m_pTreeView->setEnabled(true);
     m_pTreeView->setRootIndex(m_pFileModel->setRootPath(Root));
+
+    if (m_pTreeView->isEnabled()) {
+        m_pTreeView->expand(m_pFileModel->index(Root + "/drive"));
+        m_pTreeView->expand(m_pFileModel->index(Root + "/share"));
+        m_pTreeView->expand(m_pFileModel->index(Root + "/user"));
+        //m_pTreeView->expand(m_pFileModel->index(Root + "/user/all"));
+        //m_pTreeView->expand(m_pFileModel->index(Root + "/user/current"));
+    }
+}
+
+void CFileView::OnAboutToBeCleaned()
+{
+    if (sender() == m_pBox.data())
+        SetBox(CSandBoxPtr());
 }
 
 #include <windows.h>

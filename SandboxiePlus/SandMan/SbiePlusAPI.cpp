@@ -234,6 +234,8 @@ SB_PROGRESS CSandBoxPlus::CleanBox()
 {
 	((CSbiePlusAPI*)theAPI)->m_BoxMonitor->RemoveBox(this);
 	
+	emit AboutToBeCleaned();
+
 	SB_PROGRESS Status = CSandBox::CleanBox();
 
 	return Status;

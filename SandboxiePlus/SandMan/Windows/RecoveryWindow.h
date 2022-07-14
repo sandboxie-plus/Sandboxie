@@ -56,6 +56,7 @@ public slots:
 private slots:
 	void		OnAddFolder();
 	void		OnRecover();
+	void		OnDelete();
 	void		OnTargetChanged();
 	void		OnDeleteAll();
 	void		OnDeleteEverything();
@@ -69,6 +70,13 @@ protected:
 	int			FindFiles(const QString& Folder);
 	int			FindBoxFiles(const QString& Folder);
 	QPair<int, quint64> FindFiles(const QString& BoxedFolder, const QString& RealFolder, const QString& Name, const QString& ParentID = QString());
+
+	struct SRecItem {
+		QString FullPath;
+		QString RelPath;
+	};
+
+	QMap<QString, SRecItem> GetFiles();
 
 	void		RecoverFiles(bool bBrowse, QString RecoveryFolder = QString());
 

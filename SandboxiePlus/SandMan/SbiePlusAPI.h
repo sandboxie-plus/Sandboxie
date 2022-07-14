@@ -117,6 +117,9 @@ public:
 	bool					IsBusy() const { return IsSizePending() || !m_JobQueue.isEmpty(); }
 	SB_STATUS				DeleteContentAsync(bool DeleteShapshots = true, bool bOnAutoDelete = false);
 
+signals:
+	void					AboutToBeCleaned();
+	
 public slots:
 	void					OnAsyncFinished();
 	void					OnAsyncMessage(const QString& Text);

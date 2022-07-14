@@ -92,6 +92,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, bool bImmediate, QWidg
 	connect(ui.chkShowAll, SIGNAL(clicked(bool)), this, SLOT(FindFiles()));
 	connect(ui.btnRefresh, SIGNAL(clicked(bool)), this, SLOT(FindFiles()));
 	connect(ui.btnRecover, SIGNAL(clicked(bool)), this, SLOT(OnRecover()));
+	connect(ui.btnDelete, SIGNAL(clicked(bool)), this, SLOT(OnDelete()));
 	connect(ui.cmbRecover, SIGNAL(currentIndexChanged(int)), this, SLOT(OnTargetChanged()));
 	connect(ui.btnDeleteAll, SIGNAL(clicked(bool)), this, SLOT(OnDeleteAll()));
 	connect(ui.btnClose, SIGNAL(clicked(bool)), this, SLOT(close()));
@@ -227,10 +228,22 @@ void CRecoveryWindow::OnRecover()
 	RecoverFiles(false, RecoveryFolder); 
 }
 
+void CRecoveryWindow::OnDelete()
+{
+	QMap<QString, SRecItem> FileMap = GetFiles();
+
+	if (QMessageBox("Sandboxie-Plus", tr("Do you really want to delete %1 selected files?").arg(FileMap.count()), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
+		return;
+
+	foreach(const QString & FilePath, FileMap.keys())
+		QFile::remove(FilePath);
+
+	FindFiles();
+}
+
 void CRecoveryWindow::OnDeleteAll()
 {
-	this->setResult(1);
-	this->close();
+	accept();
 }
 
 void CRecoveryWindow::OnDeleteEverything()
@@ -388,13 +401,9 @@ QPair<int, quint64>	CRecoveryWindow::FindFiles(const QString& BoxedFolder, const
 	return qMakePair(Count, Size);
 }
 
-void CRecoveryWindow::RecoverFiles(bool bBrowse, QString RecoveryFolder)
+QMap<QString, CRecoveryWindow::SRecItem> CRecoveryWindow::GetFiles()
 {
 	//bool HasShare = false;
-	struct SRecItem {
-		QString FullPath;
-		QString RelPath;
-	};
 	QMap<QString, SRecItem> FileMap;
 	foreach(const QModelIndex& Index, ui.treeFiles->selectionModel()->selectedIndexes())
 	{
@@ -452,12 +461,17 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse, QString RecoveryFolder)
 		}
 	}
 
+	return FileMap;
+}
+
+void CRecoveryWindow::RecoverFiles(bool bBrowse, QString RecoveryFolder)
+{
+	QMap<QString, SRecItem> FileMap = GetFiles();
 
 	/*if (HasShare && !bBrowse) {
 		QMessageBox::warning(this, "Sandboxie-Plus", tr("One or more selected files are located on a network share, and must be recovered to a local drive, please select a folder to recover all selected files to."));
 		bBrowse = true;
 	}*/
-
 
 	if (bBrowse && RecoveryFolder.isEmpty()) {
 		RecoveryFolder = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");

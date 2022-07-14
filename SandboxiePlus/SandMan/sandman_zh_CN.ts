@@ -40,7 +40,7 @@
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="281"/>
+        <location filename="Views/FileView.cpp" line="300"/>
         <source>%1 - Files</source>
         <translation>%1 - 文件</translation>
     </message>
@@ -48,57 +48,29 @@
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="120"/>
+        <location filename="Views/FileView.cpp" line="139"/>
         <source>Create Shortcut</source>
-        <translation type="vanished">创建快捷方式</translation>
+        <translation>创建快捷方式</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="126"/>
+        <location filename="Views/FileView.cpp" line="145"/>
         <source>Recover to Any Folder</source>
-        <translation type="vanished">恢复到任意文件夹</translation>
+        <translation>恢复到任意文件夹</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="128"/>
+        <location filename="Views/FileView.cpp" line="147"/>
         <source>Recover to Same Folder</source>
         <translation>恢复到对应的目录</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="188"/>
+        <location filename="Views/FileView.cpp" line="207"/>
         <source>Select Directory</source>
-        <translation type="vanished">选择目录</translation>
+        <translation>选择目录</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="238"/>
+        <location filename="Views/FileView.cpp" line="257"/>
         <source>Create Shortcut to sandbox %1</source>
-        <translation type="vanished">为沙盒 %1 创建快捷方式</translation>
-    </message>
-</context>
-<context>
-    <name>CFileView</name>
-    <message>
-        <location filename="Views/FileView.cpp" line="120"/>
-        <source>Create Shortcut</source>
-        <translation type="unfinished">创建快捷方式</translation>
-    </message>
-    <message>
-        <location filename="Views/FileView.cpp" line="126"/>
-        <source>Recover to Any Folder</source>
-        <translation type="unfinished">恢复到任意文件夹</translation>
-    </message>
-    <message>
-        <location filename="Views/FileView.cpp" line="128"/>
-        <source>Recover to Same Folder</source>
-        <translation type="unfinished">恢复到相同文件夹</translation>
-    </message>
-    <message>
-        <location filename="Views/FileView.cpp" line="188"/>
-        <source>Select Directory</source>
-        <translation type="unfinished">选择目录</translation>
-    </message>
-    <message>
-        <location filename="Views/FileView.cpp" line="238"/>
-        <source>Create Shortcut to sandbox %1</source>
-        <translation type="unfinished">为沙盒 %1 创建快捷方式</translation>
+        <translation>为沙盒 %1 创建快捷方式</translation>
     </message>
 </context>
 <context>
@@ -983,54 +955,59 @@ Full path: %4</source>
         <translation>完整路径</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="100"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="101"/>
         <source>Remember target selection</source>
         <translation>记住对此目标的选择</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="106"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="107"/>
         <source>Delete everything, including all snapshots</source>
         <translation>删除所有内容，包括所有快照</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="132"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="133"/>
         <source>Original location</source>
         <translation>原始位置</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="133"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="134"/>
         <source>Browse for location</source>
         <translation>浏览位置</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="134"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="135"/>
         <source>Clear folder list</source>
         <translation>清除文件夹列表</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="169"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="190"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="463"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="170"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="191"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="477"/>
         <source>Select Directory</source>
         <translation>选择目录</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="249"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="235"/>
+        <source>Do you really want to delete %1 selected files?</source>
+        <translation>是否删除 % 选中的文件？</translation>
+    </message>
+    <message>
+        <location filename="Windows/RecoveryWindow.cpp" line="262"/>
         <source>Close until all programs stop in this box</source>
         <translation>关闭，在沙盒内全部程序停止后再显示</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="250"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="263"/>
         <source>Close and Disable Immediate Recovery for this box</source>
         <translation>关闭并禁用此沙盒的立即恢复功能</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="270"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="283"/>
         <source>There are %1 new files available to recover.</source>
         <translation>有 %1 个新文件可供恢复</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="499"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="513"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <oldsource>There are %1 files and %2 folders in the sandbox, occupying %3 bytes of disk space.</oldsource>
         <translation>此沙盒中共有 %1 个文件和 %2 个文件夹，占用了 %3 磁盘空间</translation>
@@ -1062,57 +1039,57 @@ Full path: %4</source>
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="264"/>
+        <location filename="SbiePlusAPI.cpp" line="266"/>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="275"/>
+        <location filename="SbiePlusAPI.cpp" line="277"/>
         <source>Application Compartment</source>
         <translation>应用隔间</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="277"/>
+        <location filename="SbiePlusAPI.cpp" line="279"/>
         <source>NOT SECURE</source>
         <translation>不安全</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="279"/>
+        <location filename="SbiePlusAPI.cpp" line="281"/>
         <source>Reduced Isolation</source>
         <translation>削弱隔离</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="281"/>
+        <location filename="SbiePlusAPI.cpp" line="283"/>
         <source>Enhanced Isolation</source>
         <translation>加强隔离</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="284"/>
+        <location filename="SbiePlusAPI.cpp" line="286"/>
         <source>Privacy Enhanced</source>
         <translation>隐私增强</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="287"/>
+        <location filename="SbiePlusAPI.cpp" line="289"/>
         <source>API Log</source>
         <translation>API 日志</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="289"/>
+        <location filename="SbiePlusAPI.cpp" line="291"/>
         <source>No INet</source>
         <translation>无网络</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="291"/>
+        <location filename="SbiePlusAPI.cpp" line="293"/>
         <source>Net Share</source>
         <translation>网络共享</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="293"/>
+        <location filename="SbiePlusAPI.cpp" line="295"/>
         <source>No Admin</source>
         <translation>无管理员</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="296"/>
+        <location filename="SbiePlusAPI.cpp" line="298"/>
         <source>Normal</source>
         <translation>标准</translation>
     </message>
@@ -1450,11 +1427,6 @@ Full path: %4</source>
         <location filename="SandMan.cpp" line="525"/>
         <source>Programs</source>
         <translation>程序</translation>
-    </message>
-    <message>
-        <location filename="SandMan.cpp" line="525"/>
-        <source>Programs</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="526"/>
@@ -4661,42 +4633,47 @@ Please note that this values are currently user specific and saved globally for 
         <translation>SandboxiePlus - 恢复</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="70"/>
+        <location filename="Forms/RecoveryWindow.ui" line="164"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="104"/>
+        <location filename="Forms/RecoveryWindow.ui" line="68"/>
         <source>Recover target:</source>
         <translation>恢复目标位置：</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="159"/>
+        <location filename="Forms/RecoveryWindow.ui" line="61"/>
         <source>Delete Content</source>
         <translation>删除内容</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="133"/>
+        <location filename="Forms/RecoveryWindow.ui" line="42"/>
         <source>Add Folder</source>
         <translation>添加文件夹</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="126"/>
+        <location filename="Forms/RecoveryWindow.ui" line="110"/>
         <source>Recover</source>
         <translation>恢复</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="140"/>
+        <location filename="Forms/RecoveryWindow.ui" line="78"/>
         <source>Refresh</source>
         <translation>刷新</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="97"/>
+        <location filename="Forms/RecoveryWindow.ui" line="142"/>
+        <source>Delete</source>
+        <translation>删除</translation>
+    </message>
+    <message>
+        <location filename="Forms/RecoveryWindow.ui" line="171"/>
         <source>Show All Files</source>
         <translation>显示所有文件</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="90"/>
+        <location filename="Forms/RecoveryWindow.ui" line="184"/>
         <source>TextLabel</source>
         <translation>文本标签</translation>
     </message>

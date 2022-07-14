@@ -50,12 +50,12 @@
     <message>
         <location filename="Views/FileView.cpp" line="120"/>
         <source>Create Shortcut</source>
-        <translation>创建快捷方式</translation>
+        <translation type="vanished">创建快捷方式</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="126"/>
         <source>Recover to Any Folder</source>
-        <translation>恢复到任意文件夹</translation>
+        <translation type="vanished">恢复到任意文件夹</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="128"/>
@@ -65,12 +65,40 @@
     <message>
         <location filename="Views/FileView.cpp" line="188"/>
         <source>Select Directory</source>
-        <translation>选择目录</translation>
+        <translation type="vanished">选择目录</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="238"/>
         <source>Create Shortcut to sandbox %1</source>
-        <translation>为沙盒 %1 创建快捷方式</translation>
+        <translation type="vanished">为沙盒 %1 创建快捷方式</translation>
+    </message>
+</context>
+<context>
+    <name>CFileView</name>
+    <message>
+        <location filename="Views/FileView.cpp" line="120"/>
+        <source>Create Shortcut</source>
+        <translation type="unfinished">创建快捷方式</translation>
+    </message>
+    <message>
+        <location filename="Views/FileView.cpp" line="126"/>
+        <source>Recover to Any Folder</source>
+        <translation type="unfinished">恢复到任意文件夹</translation>
+    </message>
+    <message>
+        <location filename="Views/FileView.cpp" line="128"/>
+        <source>Recover to Same Folder</source>
+        <translation type="unfinished">恢复到相同文件夹</translation>
+    </message>
+    <message>
+        <location filename="Views/FileView.cpp" line="188"/>
+        <source>Select Directory</source>
+        <translation type="unfinished">选择目录</translation>
+    </message>
+    <message>
+        <location filename="Views/FileView.cpp" line="238"/>
+        <source>Create Shortcut to sandbox %1</source>
+        <translation type="unfinished">为沙盒 %1 创建快捷方式</translation>
     </message>
 </context>
 <context>
@@ -1422,6 +1450,11 @@ Full path: %4</source>
         <location filename="SandMan.cpp" line="525"/>
         <source>Programs</source>
         <translation>程序</translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="525"/>
+        <source>Programs</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="526"/>

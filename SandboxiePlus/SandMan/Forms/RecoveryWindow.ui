@@ -36,8 +36,48 @@
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0" rowspan="3" colspan="5">
-        <widget class="QTreeView" name="treeFiles"/>
+       <item row="6" column="1">
+        <widget class="QPushButton" name="btnAddFolder">
+         <property name="text">
+          <string>Add Folder</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="4">
+        <widget class="QToolButton" name="btnDeleteAll">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Delete Content</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Recover target:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QPushButton" name="btnRefresh">
+         <property name="text">
+          <string>Refresh</string>
+         </property>
+        </widget>
        </item>
        <item row="3" column="0">
         <widget class="QWidget" name="finder" native="true">
@@ -49,10 +89,64 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="1" colspan="3">
+       <item row="5" column="1" colspan="4">
         <widget class="QComboBox" name="cmbRecover"/>
        </item>
-       <item row="6" column="4">
+       <item row="5" column="5">
+        <widget class="QToolButton" name="btnRecover">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Recover</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="3">
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="4" column="5">
+        <widget class="QToolButton" name="btnDelete">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Delete</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" rowspan="3" colspan="6">
+        <widget class="QTreeView" name="treeFiles"/>
+       </item>
+       <item row="6" column="5">
         <widget class="QToolButton" name="btnClose">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -72,91 +166,22 @@
         </widget>
        </item>
        <item row="6" column="2">
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="4" column="1" colspan="4">
-        <widget class="QLabel" name="lblInfo">
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
         <widget class="QCheckBox" name="chkShowAll">
          <property name="text">
           <string>Show All Files</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>Recover target:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="4">
-        <widget class="QToolButton" name="btnRecover">
+       <item row="4" column="0" colspan="5">
+        <widget class="QLabel" name="lblInfo">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="minimumSize">
-          <size>
-           <width>75</width>
-           <height>23</height>
-          </size>
-         </property>
          <property name="text">
-          <string>Recover</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="1">
-        <widget class="QPushButton" name="btnAddFolder">
-         <property name="text">
-          <string>Add Folder</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QPushButton" name="btnRefresh">
-         <property name="text">
-          <string>Refresh</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="3">
-        <widget class="QToolButton" name="btnDeleteAll">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>75</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Delete Content</string>
+          <string>TextLabel</string>
          </property>
         </widget>
        </item>
@@ -168,7 +193,6 @@
  </widget>
  <tabstops>
   <tabstop>treeFiles</tabstop>
-  <tabstop>chkShowAll</tabstop>
  </tabstops>
  <resources/>
  <connections/>

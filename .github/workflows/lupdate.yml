@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     # runs every night
-    - cron: '0 2 * * *'
+    - cron: '0 1 * * *'
 
 jobs:
   SBIE_Plus_lupdate:

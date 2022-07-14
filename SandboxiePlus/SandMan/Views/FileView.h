@@ -23,6 +23,8 @@ private slots:
 	void				OnFileMenu(const QPoint &);
 	void				OnFileDblClick(const QModelIndex &);
 
+	void				OnAboutToBeCleaned();
+
 protected:
 	CSandBoxPtr m_pBox;
 

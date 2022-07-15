@@ -40,7 +40,7 @@
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="281"/>
+        <location filename="Views/FileView.cpp" line="300"/>
         <source>%1 - Files</source>
         <translation>%1 - Файли</translation>
     </message>
@@ -68,27 +68,27 @@
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="120"/>
+        <location filename="Views/FileView.cpp" line="139"/>
         <source>Create Shortcut</source>
         <translation type="unfinished">Створити ярлик</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="126"/>
+        <location filename="Views/FileView.cpp" line="145"/>
         <source>Recover to Any Folder</source>
         <translation type="unfinished">Відновити в будь-яку папку</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="128"/>
+        <location filename="Views/FileView.cpp" line="147"/>
         <source>Recover to Same Folder</source>
         <translation type="unfinished">Відновити в цю папку</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="188"/>
+        <location filename="Views/FileView.cpp" line="207"/>
         <source>Select Directory</source>
         <translation type="unfinished">Оберіть каталог</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="238"/>
+        <location filename="Views/FileView.cpp" line="257"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -978,54 +978,59 @@ Full path: %4</source>
         <translation>Повний шлях</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="100"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="101"/>
         <source>Remember target selection</source>
         <translation>Запам&apos;ятати цей вибір</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="106"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="107"/>
         <source>Delete everything, including all snapshots</source>
         <translation>Видалити все, включаючи всі знімки</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="132"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="133"/>
         <source>Original location</source>
         <translation>Початкове розташування</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="133"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="134"/>
         <source>Browse for location</source>
         <translation>Огляд місця</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="134"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="135"/>
         <source>Clear folder list</source>
         <translation>Очистити список папок</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="169"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="190"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="463"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="170"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="191"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="477"/>
         <source>Select Directory</source>
         <translation>Оберіть каталог</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="249"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="235"/>
+        <source>Do you really want to delete %1 selected files?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/RecoveryWindow.cpp" line="262"/>
         <source>Close until all programs stop in this box</source>
         <translation>Закрити, поки всі програми зупинять роботу в контейнері</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="250"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="263"/>
         <source>Close and Disable Immediate Recovery for this box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="270"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="283"/>
         <source>There are %1 new files available to recover.</source>
         <translation>Доступно %1 нових файлів для відновлення.</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="499"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="513"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <translation>В пісочниці є %1 файл(ів) та %2 папок, які використовують %3 дискового простору.</translation>
     </message>
@@ -1056,7 +1061,7 @@ Full path: %4</source>
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="264"/>
+        <location filename="SbiePlusAPI.cpp" line="266"/>
         <source>Disabled</source>
         <translation>Вимкнений</translation>
     </message>
@@ -1065,52 +1070,52 @@ Full path: %4</source>
         <translation type="vanished">Порожньо</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="275"/>
+        <location filename="SbiePlusAPI.cpp" line="277"/>
         <source>Application Compartment</source>
         <translation>Пісочниця для додатків</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="277"/>
+        <location filename="SbiePlusAPI.cpp" line="279"/>
         <source>NOT SECURE</source>
         <translation>НЕ ЗАХИЩЕНО</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="279"/>
+        <location filename="SbiePlusAPI.cpp" line="281"/>
         <source>Reduced Isolation</source>
         <translation>Знижена ізоляція</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="281"/>
+        <location filename="SbiePlusAPI.cpp" line="283"/>
         <source>Enhanced Isolation</source>
         <translation>Посилена ізоляція</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="284"/>
+        <location filename="SbiePlusAPI.cpp" line="286"/>
         <source>Privacy Enhanced</source>
         <translation>Посилена конфіденційність</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="287"/>
+        <location filename="SbiePlusAPI.cpp" line="289"/>
         <source>API Log</source>
         <translation>Журнал API</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="289"/>
+        <location filename="SbiePlusAPI.cpp" line="291"/>
         <source>No INet</source>
         <translation>Без доступу до Інтернет</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="291"/>
+        <location filename="SbiePlusAPI.cpp" line="293"/>
         <source>Net Share</source>
         <translation>Локальна мережа</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="293"/>
+        <location filename="SbiePlusAPI.cpp" line="295"/>
         <source>No Admin</source>
         <translation>Без прав адміністратора</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="296"/>
+        <location filename="SbiePlusAPI.cpp" line="298"/>
         <source>Normal</source>
         <translation>Нормальний</translation>
     </message>
@@ -4694,42 +4699,47 @@ Please note that this values are currently user specific and saved globally for 
         <translation>SandboxiePlus - Відновлення</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="70"/>
+        <location filename="Forms/RecoveryWindow.ui" line="164"/>
         <source>Close</source>
         <translation>Закрити</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="104"/>
+        <location filename="Forms/RecoveryWindow.ui" line="68"/>
         <source>Recover target:</source>
         <translation>Місце до відновлення:</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="133"/>
+        <location filename="Forms/RecoveryWindow.ui" line="42"/>
         <source>Add Folder</source>
         <translation>Додати папку</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="159"/>
+        <location filename="Forms/RecoveryWindow.ui" line="61"/>
         <source>Delete Content</source>
         <translation>Видалити зміст</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="126"/>
+        <location filename="Forms/RecoveryWindow.ui" line="110"/>
         <source>Recover</source>
         <translation>Відновити</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="140"/>
+        <location filename="Forms/RecoveryWindow.ui" line="78"/>
         <source>Refresh</source>
         <translation>Оновити</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="97"/>
+        <location filename="Forms/RecoveryWindow.ui" line="142"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/RecoveryWindow.ui" line="171"/>
         <source>Show All Files</source>
         <translation>Показати всі файли</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="90"/>
+        <location filename="Forms/RecoveryWindow.ui" line="184"/>
         <source>TextLabel</source>
         <translation>Текстова етикетка</translation>
     </message>

@@ -40,7 +40,7 @@
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="281"/>
+        <location filename="Views/FileView.cpp" line="300"/>
         <source>%1 - Files</source>
         <translation>%1 - Bestanden</translation>
     </message>
@@ -68,27 +68,27 @@
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="120"/>
+        <location filename="Views/FileView.cpp" line="139"/>
         <source>Create Shortcut</source>
         <translation type="unfinished">Snelkoppeling aanmaken</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="126"/>
+        <location filename="Views/FileView.cpp" line="145"/>
         <source>Recover to Any Folder</source>
         <translation type="unfinished">Herstellen naar andere map</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="128"/>
+        <location filename="Views/FileView.cpp" line="147"/>
         <source>Recover to Same Folder</source>
         <translation type="unfinished">Herstellen naar zelfde map</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="188"/>
+        <location filename="Views/FileView.cpp" line="207"/>
         <source>Select Directory</source>
         <translation type="unfinished">Map selecteren</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="238"/>
+        <location filename="Views/FileView.cpp" line="257"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation type="unfinished">Snelkoppeling maken naar sandbox %1</translation>
     </message>
@@ -978,54 +978,59 @@ Volledig pad: %4</translation>
         <translation>Volledig pad</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="100"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="101"/>
         <source>Remember target selection</source>
         <translation>Doelselectie onthouden</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="106"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="107"/>
         <source>Delete everything, including all snapshots</source>
         <translation>Alles verwijderen inclusief alle snapshots</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="132"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="133"/>
         <source>Original location</source>
         <translation>Originele locatie</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="133"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="134"/>
         <source>Browse for location</source>
         <translation>Bladeren naar locatie</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="134"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="135"/>
         <source>Clear folder list</source>
         <translation>Maplijst wissen</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="169"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="190"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="463"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="170"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="191"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="477"/>
         <source>Select Directory</source>
         <translation>Map selecteren</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="249"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="235"/>
+        <source>Do you really want to delete %1 selected files?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/RecoveryWindow.cpp" line="262"/>
         <source>Close until all programs stop in this box</source>
         <translation>Sluiten totdat alle bestanden in deze box stoppen</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="250"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="263"/>
         <source>Close and Disable Immediate Recovery for this box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="270"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="283"/>
         <source>There are %1 new files available to recover.</source>
         <translation>Er zijn %1 nieuwe bestanden beschikbaar om te herstellen.</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="499"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="513"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <translation>Er zitten %1 bestanden en %2 mappen in de sandbox die %3 schijfruimte innemen.</translation>
     </message>
@@ -1056,7 +1061,7 @@ Volledig pad: %4</translation>
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="264"/>
+        <location filename="SbiePlusAPI.cpp" line="266"/>
         <source>Disabled</source>
         <translation>Uitgeschakeld</translation>
     </message>
@@ -1065,52 +1070,52 @@ Volledig pad: %4</translation>
         <translation type="vanished">Leeg</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="275"/>
+        <location filename="SbiePlusAPI.cpp" line="277"/>
         <source>Application Compartment</source>
         <translation>Toepassingscompartiment</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="277"/>
+        <location filename="SbiePlusAPI.cpp" line="279"/>
         <source>NOT SECURE</source>
         <translation>NIET VEILIG</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="279"/>
+        <location filename="SbiePlusAPI.cpp" line="281"/>
         <source>Reduced Isolation</source>
         <translation>Verminderde isolatie</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="281"/>
+        <location filename="SbiePlusAPI.cpp" line="283"/>
         <source>Enhanced Isolation</source>
         <translation>Verbeterde isolatie</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="284"/>
+        <location filename="SbiePlusAPI.cpp" line="286"/>
         <source>Privacy Enhanced</source>
         <translation>Verbeterde privacy</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="287"/>
+        <location filename="SbiePlusAPI.cpp" line="289"/>
         <source>API Log</source>
         <translation>API-log</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="289"/>
+        <location filename="SbiePlusAPI.cpp" line="291"/>
         <source>No INet</source>
         <translation>Geen INet</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="291"/>
+        <location filename="SbiePlusAPI.cpp" line="293"/>
         <source>Net Share</source>
         <translation>Net share</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="293"/>
+        <location filename="SbiePlusAPI.cpp" line="295"/>
         <source>No Admin</source>
         <translation>Geen admin</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="296"/>
+        <location filename="SbiePlusAPI.cpp" line="298"/>
         <source>Normal</source>
         <translation>Normaal</translation>
     </message>
@@ -4705,42 +4710,47 @@ Merk op dat deze waarden momenteel gebruikersspecifiek zijn en globaal worden op
         <translation>SandboxiePlus - Herstel</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="70"/>
+        <location filename="Forms/RecoveryWindow.ui" line="164"/>
         <source>Close</source>
         <translation>Sluiten</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="104"/>
+        <location filename="Forms/RecoveryWindow.ui" line="68"/>
         <source>Recover target:</source>
         <translation>Herstellen naar:</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="133"/>
+        <location filename="Forms/RecoveryWindow.ui" line="42"/>
         <source>Add Folder</source>
         <translation>Map toevoegen</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="159"/>
+        <location filename="Forms/RecoveryWindow.ui" line="61"/>
         <source>Delete Content</source>
         <translation>Inhoud verwijderen</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="126"/>
+        <location filename="Forms/RecoveryWindow.ui" line="110"/>
         <source>Recover</source>
         <translation>Herstellen</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="140"/>
+        <location filename="Forms/RecoveryWindow.ui" line="78"/>
         <source>Refresh</source>
         <translation>Vernieuwen</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="97"/>
+        <location filename="Forms/RecoveryWindow.ui" line="142"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/RecoveryWindow.ui" line="171"/>
         <source>Show All Files</source>
         <translation>Alle bestanden weergeven</translation>
     </message>
     <message>
-        <location filename="Forms/RecoveryWindow.ui" line="90"/>
+        <location filename="Forms/RecoveryWindow.ui" line="184"/>
         <source>TextLabel</source>
         <translation>Tekstlabel</translation>
     </message>

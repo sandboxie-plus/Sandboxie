@@ -3327,7 +3327,7 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="28"/>
         <source>Setup Wizard</source>
-        <translation>Assistant d&apos;installation</translation>
+        <translation>Assistant de configuration</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="39"/>

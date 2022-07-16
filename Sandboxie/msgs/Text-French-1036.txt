@@ -2637,21 +2637,21 @@ Vous pouvez toujours modifier les droits restreints en passant par la fenêtre d
 # Sandboxie Control:  Sandbox Settings:  Print Spooler
 #----------------------------------------------------------------------------
 
-3950;txt;01
-Spouleur d'impression
-.
+# 3950;txt;01
+# Spouleur d'impression
+# .
 
-3951;txt;01
-Le Spouleur d'impression de Windows fonctionne en dehors de la supervision de Sandboxie.  Une application sandboxée qui demande au Spouleur d'impression d'imprimer dans un fichier sera bloquée car ce fichier sera écrit en dehors du bac à sable.
-.
+# 3951;txt;01
+# Le Spouleur d'impression de Windows fonctionne en dehors de la supervision de Sandboxie.  Une application sandboxée qui demande au Spouleur d'impression d'imprimer dans un fichier sera bloquée car ce fichier sera écrit en dehors du bac à sable.
+# .
 
-3952;txt;01
-Si vous souhaitez autoriser le Spouleur d'impression à imprimer dans un fichier, vous pouvez activer ce paramètre. Il est recommandé d'activer cette option uniquement en cas de besoin.
-.
+# 3952;txt;01
+# Si vous souhaitez autoriser le Spouleur d'impression à imprimer dans un fichier, vous pouvez activer ce paramètre. Il est recommandé d'activer cette option uniquement en cas de besoin.
+# .
 
-3953;txt;01
-Autoriser le Spouleur d'impression de Windows à imprimer vers un fichier.
-.
+# 3953;txt;01
+# Autoriser le Spouleur d'impression de Windows à imprimer vers un fichier.
+# .
 
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  Network Files

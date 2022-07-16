@@ -5159,7 +5159,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="60"/>
-        <source>Count and display the disk space ocupied by each sandbox</source>
+        <source>Count and display the disk space occupied by each sandbox</source>
         <translation>Relever et afficher l&apos;utilisation disque de chaque bac à sable</translation>
     </message>
     <message>
@@ -5189,7 +5189,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="412"/>
-        <source>* indetermined means depanding on the view mode</source>
+        <source>* indetermined means depending on the view mode</source>
         <translation>* dépends du mode d&apos;affichage choisi</translation>
     </message>
     <message>

@@ -346,6 +346,14 @@ SBIE2104 Echec à la fermeture de cette session Windows - %2
 SBIE2108 Simulation de l'achèvement du programme '%2' réussi
 .
 
+2111;pop;inf;01      
+SBIE2111 Le processus n'est pas accessible : %3, appel %2   
+.
+
+2112;pop;inf;01
+SBIE2112 Objet non accessible : %3, appel %2
+.
+
 2191;pop;inf;01
 SBIE2191 %2 ne devra pas être mis à jour pendant son fonctionnement dans Sandboxie.
 .
@@ -360,6 +368,10 @@ SBIE2193 Assurez-vous d'avoir effacé la sandbox après le processus de mise à 
 
 2194;pop;inf;01
 SBIE2194 L'installateur de MSI a besoin que l'option %s soit placée dans l'ini, ce qui affaiblit cependant l'isolement.
+.
+
+2195;pop;inf;01
+SBIE2195 Afin de lancer Explorer.exe en bac à salbe, l'accès à l'infrastructure COM ne doit pas être en Autorisé.
 .
 
 2198;pop;inf;01
@@ -562,6 +574,10 @@ SBIE2322 Impossible de réécrire Sandboxie.ini :  %2
 SBIE2323 Erreur de chiffrement :  %2
 .
 
+325;pop;err;01
+SBIE2325 Debug :  %2  
+.
+
 2326;pop;err;01
 SBIE2326 Impossible de préparer le Registre :  %2
 .
@@ -687,6 +703,10 @@ SBIE9234 Erreur de démarrage du service %2
 
 3005;txt;01
 Cou&per
+.
+
+3107;txt;01
+Entrer le nom d'un programme ou chemin pour ouvrir le fichier dans le bac à sable courant :
 .
 
 3051;txt;01
@@ -1218,12 +1238,16 @@ Exécuter l'Explorateur &Windows
 Passer à Sandboxie-Plus
 .
 
+3468;txt;01
+Guide de migration de Sandboxie-Plus
+.
+
 3471;txt;01
-&Fermer les programmes
+Arrê&ter les programmes
 .
 
 3472;txt;01
-&Récupérer rapidement
+&Récupération rapide
 .
 
 3473;txt;01
@@ -1247,7 +1271,7 @@ Eff&acer Sandbox
 .
 
 3481;txt;01
-&Fermer programme
+Arrê&ter le programme
 .
 
 3482;txt;01
@@ -3023,6 +3047,18 @@ Ouvrir les ports RCP pour Simple Service Discovery Protocol (SSDP, UPnP)
 Ouvrir des ports RPC additionnels
 .
 
+4306;txt;01
+Ouvrir les ports RPC pour l'UAC
+.
+
+4307;txt;01
+Bloquer les processus de télémétrie communs
+.
+
+4308;txt;01
+Filtrer l'accès à \Devices\
+.
+
 #----------------------------------------------------------------------------
 # Applications - Software Compatibility
 #----------------------------------------------------------------------------
@@ -3263,6 +3299,10 @@ Autoriser l'accès direct à la gestion des sessions de %2
 
 4341;txt;01
 Autoriser l'accès direct aux Notes de %2
+.
+
+4342;txt;01
+Activer %2 correctif(s) pour Windows 11 KB5014019
 .
 
 4356;txt;02

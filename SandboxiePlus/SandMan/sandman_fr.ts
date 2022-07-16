@@ -3228,7 +3228,7 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="131"/>
         <source>%1 %</source>
-        <translation>%1%</translation>
+        <translation>%1 %</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="277"/>

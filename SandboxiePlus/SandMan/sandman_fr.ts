@@ -70,27 +70,27 @@
     <message>
         <location filename="Views/FileView.cpp" line="139"/>
         <source>Create Shortcut</source>
-        <translation type="unfinished">Créer un raccourci</translation>
+        <translation>Créer un raccourci</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="145"/>
         <source>Recover to Any Folder</source>
-        <translation type="unfinished">Récupérer vers un dossier</translation>
+        <translation>Récupérer vers un dossier</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="147"/>
         <source>Recover to Same Folder</source>
-        <translation type="unfinished">Récupérer vers le même dossier</translation>
+        <translation>Récupérer vers le même dossier</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="207"/>
         <source>Select Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner un dossier</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="257"/>
         <source>Create Shortcut to sandbox %1</source>
-        <translation type="unfinished">Créer un raccourci vers le bac à sable %1</translation>
+        <translation>Créer un raccourci vers le bac à sable %1</translation>
     </message>
 </context>
 <context>
@@ -98,17 +98,17 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="454"/>
         <source>Complete your configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminer la configuration</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="461"/>
         <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer sur Finir pour appliquer toutes les options sélectionnées et terminer la configuration.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="473"/>
         <source>Keep Sandboxie-Plus up to date.</source>
-        <translation type="unfinished"></translation>
+        <translation>Garder Sandboxie-Plus à jour.</translation>
     </message>
 </context>
 <context>
@@ -116,32 +116,32 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="107"/>
         <source>Introduction</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduction</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="111"/>
         <source>Welcome to the Setup Wizard. This wizard will help you to configure your copy of &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. You can start this wizard at any time from the Sandbox-&gt;Maintenance menu if you do not wish to complete it now.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bienvenu dans l&apos;assistant de configuration. Celui-ci vous aidera à configurer votre copie de &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. Il est possible de lancer l&apos;assistant à tout moment via le menu Bac à sable &gt; Maintenance.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="122"/>
         <source>Select how you would like to use Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez l&apos;utilisation qui sera faite de Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="125"/>
         <source>&amp;Personally, for private non-commercial use</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Personnelle, non commerciale</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="130"/>
         <source>&amp;Commercially, for business or enterprise use</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Commerciale, par une société</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="135"/>
         <source>Note: this option is immutable</source>
-        <translation type="unfinished"></translation>
+        <translation>Note : cette option ne sera plus modifiable</translation>
     </message>
 </context>
 <context>
@@ -164,7 +164,7 @@
     <message>
         <location filename="Models/MonitorModel.cpp" line="118"/>
         <source>Count</source>
-        <translation type="unfinished">Compte</translation>
+        <translation>Compte</translation>
     </message>
 </context>
 <context>
@@ -992,22 +992,22 @@ Chemin complet&#xa0;: %4</translation>
     <message>
         <location filename="SandManRecovery.cpp" line="188"/>
         <source>Sandboxie-Plus - Recovery Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Evènements de récupération</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="196"/>
         <source>Time|Box Name|File Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Heure|Nom du bac|Chemin du fichier</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="198"/>
         <source>Cleanup Recovery Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Purger les évènements</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="208"/>
         <source>the following files were recently recovered and moved out of a sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>les fichiers suivants ont récemment été récupérés et sortis d&apos;un bac à sable.</translation>
     </message>
 </context>
 <context>
@@ -1067,7 +1067,7 @@ Chemin complet&#xa0;: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="235"/>
         <source>Do you really want to delete %1 selected files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment supprimer les %1 fichiers sélectionnés ?</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="262"/>
@@ -1077,7 +1077,7 @@ Chemin complet&#xa0;: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="263"/>
         <source>Close and Disable Immediate Recovery for this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer et désactiver la récupération immédiate pour ce bac à sable</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="283"/>
@@ -1261,12 +1261,12 @@ Chemin complet&#xa0;: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="368"/>
         <source>Disable File Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Désactiver la récupération de fichiers</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="370"/>
         <source>Disable Message PopUp</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Désactiver la fenêtre des messages</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="304"/>
@@ -1338,7 +1338,7 @@ Chemin complet&#xa0;: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="320"/>
         <source>Setup Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Assistant de configuration</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="322"/>
@@ -1387,7 +1387,7 @@ Chemin complet&#xa0;: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="430"/>
         <source>Refresh View</source>
-        <translation type="unfinished"></translation>
+        <translation>Rafraîchir la vue</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="436"/>
@@ -1403,17 +1403,17 @@ Chemin complet&#xa0;: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="439"/>
         <source>Cleanup Message Log</source>
-        <translation>Purge du journal de messages</translation>
+        <translation>Purger le journal de messages</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="440"/>
         <source>Cleanup Trace Log</source>
-        <translation>Purge du journal de traçage</translation>
+        <translation>Purger le journal de traçage</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="441"/>
         <source>Cleanup Recovery Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Purger le journal de récupération</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="443"/>
@@ -1464,7 +1464,7 @@ Chemin complet&#xa0;: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="330"/>
         <source>Vintage View (like SbieCtrl)</source>
-        <translation type="unfinished"></translation>
+        <translation>Vielle apparence (à la SbieCtrl)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="340"/>
@@ -1507,92 +1507,92 @@ Chemin complet&#xa0;: %4</translation>
         <location filename="SandMan.cpp" line="378"/>
         <location filename="SandMan.cpp" line="492"/>
         <source>Is Window Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">La fenêtre est-elle dans un bac</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="422"/>
         <source>Show File Panel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Afficher le panneau des fichiers</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="481"/>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fichier</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="493"/>
         <source>Resource Access Monitor</source>
-        <translation type="unfinished">Moniteur d&apos;accès aux ressources</translation>
+        <translation>Moniteur d&apos;accès aux ressources</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="525"/>
         <source>Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Programmes</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="526"/>
         <source>Files and Folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers et dossiers</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="551"/>
         <source>Create New Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un bac à sable</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="552"/>
         <source>Create New Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un groupe</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="555"/>
         <source>Set Container Folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Définir un dossier conteneur</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="558"/>
         <source>Set Layout and Groups</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Définir les positions et les groupes</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="561"/>
         <source>Reveal Hidden Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Faire apparaître les bacs cachés</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="567"/>
         <source>&amp;Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Configurer</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="571"/>
         <source>Program Alerts</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Alertes des programmes</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="573"/>
         <source>Windows Shell Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Intégration Windows Shell</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="575"/>
         <source>Software Compatibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Compatibilité logicielle</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="581"/>
         <source>Lock Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Verrouiller la configuration</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="598"/>
         <source>Sandbox %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bac à sable %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="619"/>
         <source>Cleanup</source>
-        <translation>Nettoyage</translation>
+        <translation>Purger</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="661"/>
@@ -1617,14 +1617,14 @@ Chemin complet&#xa0;: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="782"/>
         <source>Time|Box Name|File Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Heure|Nom du bac|Chemin du fichier</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="460"/>
         <location filename="SandMan.cpp" line="530"/>
         <location filename="SandMan.cpp" line="790"/>
         <source>Recovery Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Journal de récupération</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="830"/>
@@ -1759,7 +1759,7 @@ Ce bac empêche l&apos;accès à tous les emplacements des données utilisateur,
     <message>
         <location filename="SandMan.cpp" line="1223"/>
         <source>Cleaned up removed templates...</source>
-        <translation>Nettoyage des modèles supprimés...</translation>
+        <translation>Purger les modèles supprimés...</translation>
     </message>
     <message>
         <source>Sbie Directory: %1</source>
@@ -1954,12 +1954,12 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1998"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dans l&apos;interface Plus, cette fonctionnalité a été intégrée directement dans la liste principale des bacs à sable.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1999"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>En utilisant le menu contextuel des bacs/groupes il est possible de les déplacer et réarranger. Cette possibilité est aussi présente via le glisser-déposer ou encore avec la touche ALT ainsi que les flèches.&lt;br /&gt;Il est possible de créer de nouveaux bacs et groupes depuis le menu Bac à sable.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2057"/>
@@ -1979,7 +1979,7 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2180"/>
         <source>Sandboxie config has been reloaded</source>
-        <translation type="unfinished"></translation>
+        <translation>La configuration de Sandboxie a été rechargée</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2286"/>
@@ -2348,7 +2348,7 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Models/SbieModel.cpp" line="276"/>
         <source>Empty</source>
-        <translation type="unfinished">Vide</translation>
+        <translation>Vide</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="500"/>
@@ -2373,7 +2373,7 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Models/SbieModel.cpp" line="504"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>Start Time</source>
@@ -2671,7 +2671,7 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Views/SbieView.cpp" line="166"/>
         <source>Browse Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Parcourir les fichiers</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="174"/>
@@ -2719,12 +2719,12 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
         <location filename="Views/SbieView.cpp" line="199"/>
         <location filename="Views/SbieView.cpp" line="278"/>
         <source>Sandbox Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Outils du bac à sable</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="202"/>
         <source>Duplicate Box Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Dupliquer la configuration du bac</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="204"/>
@@ -2788,57 +2788,57 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Views/SbieView.cpp" line="253"/>
         <source>Run Sandboxed</source>
-        <translation type="unfinished">Exécuter dans un bac à sable</translation>
+        <translation>Exécuter dans un bac à sable</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="254"/>
         <source>Run Web Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Lancer le navigateur web</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="255"/>
         <source>Run eMail Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>Lancer le lecteur d&apos;email</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="256"/>
         <source>Run Any Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Lancer un programme</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="257"/>
         <source>Run From Start Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Lancer depuis le menu Démarrer</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="258"/>
         <source>Run Windows Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>Lancer l&apos;explorateur de fichier</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="270"/>
         <source>Terminate Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêter les programmes</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="271"/>
         <source>Quick Recover</source>
-        <translation type="unfinished"></translation>
+        <translation>Récupération rapide</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="276"/>
         <source>Sandbox Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration du bac à sable</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="283"/>
         <source>Duplicate Sandbox Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Dupliquer la configuration du bac à sable</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="342"/>
         <source>Move Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Déplacer le groupe</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="473"/>
@@ -2929,7 +2929,7 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
         <location filename="Views/SbieView.cpp" line="205"/>
         <location filename="Views/SbieView.cpp" line="291"/>
         <source>Move Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Déplacer le bac à sable</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="279"/>
@@ -2950,12 +2950,12 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
         <location filename="Views/SbieView.cpp" line="168"/>
         <location filename="Views/SbieView.cpp" line="286"/>
         <source>Refresh Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualiser les informations</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="196"/>
         <source>Immediate Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Récupération immédiate</translation>
     </message>
     <message>
         <source>Duplicate Sandbox</source>
@@ -3094,7 +3094,7 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Views/SbieView.cpp" line="1274"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le menu Démarrer de Sandboxie va s&apos;ouvrir. Sélectionnez une application depuis ce menu afin qu&apos;un raccourci soit créé sur le bureau et que l&apos;application puisse être lancée avec Sandboxie.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1309"/>
@@ -3167,7 +3167,7 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
         <location filename="Windows/SettingsWindow.cpp" line="112"/>
         <source>Don&apos;t show any icon</source>
         <oldsource>Don&apos;t integrate links</oldsource>
-        <translation type="unfinished">Ne pas afficher d&apos;icône</translation>
+        <translation>Ne pas afficher d&apos;icône</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="113"/>
@@ -3213,22 +3213,22 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="125"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="126"/>
         <source>Native</source>
-        <translation type="unfinished"></translation>
+        <translation>Native</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="127"/>
         <source>Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="131"/>
         <source>%1 %</source>
-        <translation type="unfinished"></translation>
+        <translation>%1%</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="277"/>
@@ -3238,7 +3238,7 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="297"/>
         <source>Sandboxed Web Browser</source>
-        <translation type="unfinished">Navigateur Web en bac à sable</translation>
+        <translation>Navigateur web en bac à sable</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="447"/>
@@ -3258,7 +3258,7 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="697"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il semble que ce ne soit pas un certificat. Merci d&apos;entrer le certificat au complet.</translation>
     </message>
     <message>
         <source>This does not look like a certificate, please enter the entire certificate, not just a portion of it.</source>
@@ -3327,27 +3327,27 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="28"/>
         <source>Setup Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Assistant d&apos;installation</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="39"/>
         <source>The decision you make here will affect which page you get to see next.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le choix suivant déterminera la page d&apos;aide qui sera affichée.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="42"/>
         <source>This help is likely not to be of any help.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette aide ne sera probablement pas de grande utilité.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="46"/>
         <source>Sorry, I already gave all the help I could.</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, toute l&apos;aide disponible a été fournie.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="48"/>
         <source>Setup Wizard Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Aide de l&apos;assistant d&apos;installation</translation>
     </message>
 </context>
 <context>
@@ -3355,27 +3355,27 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="382"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; shell integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurer l&apos;intégration Shell de &lt;b&gt;Sandboxie-Plus&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="383"/>
         <source>Configure how Sandboxie-Plus should integrate with your system.</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration de l&apos;intégration de Sandboxie-Plus avec le système.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="387"/>
         <source>Start UI with Windows</source>
-        <translation type="unfinished">Démarrer l&apos;interface utilisateur avec Windows</translation>
+        <translation>Démarrer l&apos;interface utilisateur avec Windows</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="392"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation type="unfinished">Ajouter «&#xa0;Exécuter dans un bac à sable&#xa0;» au menu contextuel de l&apos;explorateur</translation>
+        <translation>Ajouter «&#xa0;Exécuter dans un bac à sable&#xa0;» au menu contextuel de l&apos;explorateur</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="397"/>
         <source>Add desktop shortcut for starting Web browser under Sandboxie</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un raccourci au bureau pour démarrer le navigateur via Sandboxie</translation>
     </message>
 </context>
 <context>
@@ -3547,7 +3547,7 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Views/TraceView.cpp" line="247"/>
         <source>Cleanup Trace Log</source>
-        <translation type="unfinished">Purge du journal de traçage</translation>
+        <translation>Purger le journal de traçage</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="567"/>
@@ -3585,7 +3585,7 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Views/TraceView.cpp" line="630"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Suivi du traçage</translation>
     </message>
 </context>
 <context>
@@ -3593,37 +3593,37 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="267"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; UI</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurer l&apos;interface de &lt;b&gt;Sandboxie-Plus&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="268"/>
         <source>Select the user interface style you prefer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisissez l&apos;interface graphique que vous préférez.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="272"/>
         <source>&amp;Advanced UI for experts</source>
-        <translation type="unfinished"></translation>
+        <translation>Interface &amp;avancée pour experts</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="277"/>
         <source>&amp;Simple UI for beginners</source>
-        <translation type="unfinished"></translation>
+        <translation>Interface &amp;simplifiée pour débutants</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="282"/>
         <source>&amp;Vintage SbieCtrl.exe UI</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vielle interface de SbieCtrl.exe</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="307"/>
         <source>Use Bright Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser le mode clair</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="311"/>
         <source>Use Dark Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser le mode sombre</translation>
     </message>
 </context>
 <context>
@@ -3631,22 +3631,22 @@ Note: La recherche de mise à jour est souvent en retard par rapport à la derni
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="418"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; network filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration du filtrage réseau de &lt;b&gt;Sandboxie-Plus&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="419"/>
         <source>Sandboxie can use the Windows Filtering Platform (WFP) to restrict network access.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie peut utiliser la plateforme de filtrage de Windows (WFP) pour restreindre l&apos;accès réseau.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="425"/>
         <source>Using WFP allows Sandboxie to reliably enforce IP/Port based rules for network access. Unlike system level application firewalls, Sandboxie can use different rules in each box for the same application. If you already have a good and reliable application firewall and do not need per box rules, you can leave this option unchecked. Without WFP enabled, Sandboxie will still be able to reliably and entirely block processes from accessing the network. However, this can cause the process to crash, as the driver blocks the required network device endpoints. Even with WFP disabled, Sandboxie offers to set IP/Port based rules, however these will be applied in user mode only and not be enforced by the driver. Hence, without WFP enabled, an intentionally malicious process could bypass those rules, but not the entire network block.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Utiliser la WFP permet à Sandboxie d&apos;appliquer efficacement des règles basées sur les IP/ports. Contrairement aux règles du pare-feu du système, Sandboxie peut utiliser différentes règles en fonctions des bacs à sable et ce pour une même application. Si vous avez déjà un pare-feu applicatif bien paramétré, efficace et ne souhaitez pas de règles spécifiques aux bacs à sable, cette option peut être désactivée. Même sans la WFP, Sandboxie sera capable d&apos;efficacement bloquer tout accès au réseau aux processus. Cependant ceci peut provoquer le plantage de certains processus, vu que le pilote bloque les accès au périphérique réseau requis. Même sans la WFP, Sandboxie offre d&apos;appliquer des règles basée sur les IP/ports, cependant cette configuration est gérée en mode utilisateur et ne sera pas contrôlée par le pilote. Ainsi, sans la WFP, un processus pourrait contourner ces règles (mais pas un blocage complet).</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="434"/>
         <source>Enable Windows Filtering Platform (WFP) support</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer le support de la plateforme de filtrage de Windows (WFP)</translation>
     </message>
 </context>
 <context>
@@ -4502,7 +4502,7 @@ Le niveau de correspondance du processus a une priorité plus élevée que la sp
         <location filename="Forms/OptionsWindow.ui" line="2087"/>
         <source>Allow use of nested job objects (works on Windows 8 and later)</source>
         <oldsource>Allow use of nested job objects (experimental, works on Windows 8 and later)</oldsource>
-        <translation type="unfinished">Autoriser l&apos;utilisation d&apos;objets de travail imbriqués (expérimental, fonctionne sur Windows 8 et plus)</translation>
+        <translation>Autoriser l&apos;utilisation d&apos;objets de travail imbriqués (expérimental, fonctionne sur Windows 8 et plus)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2094"/>
@@ -4963,7 +4963,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="142"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="164"/>
@@ -5150,7 +5150,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="290"/>
         <source>Show boxes in tray list:</source>
-        <translation>Afficher les sandbox dans la zone de notification:</translation>
+        <translation>Afficher les bacs en zone de notification:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="332"/>
@@ -5160,7 +5160,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="60"/>
         <source>Count and display the disk space ocupied by each sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Relever et afficher l&apos;utilisation disque de chaque bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="370"/>
@@ -5175,67 +5175,67 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="203"/>
         <source>Use Compact Box List</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser le mode compact</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="387"/>
         <source>Interface Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Interface graphique</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="395"/>
         <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher un fond &quot;Pizza&quot; pour la liste des bacs *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="412"/>
         <source>* indetermined means depanding on the view mode</source>
-        <translation type="unfinished"></translation>
+        <translation>* dépends du mode d&apos;affichage choisi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="419"/>
         <source>Make Box Icons match the Border Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Définir la couleur des icônes des bacs grâce à la couleur de leur bordure</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="426"/>
         <source>Use a Page Tree in the Box Options instead of Nested Tabs *</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Utiliser des pages à la place d&apos;onglets imbriqués dans les options des bacs</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="443"/>
         <source>Interface Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options graphiques</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="466"/>
         <source>Use large icons in box list *</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser de grandes icônes dans la liste des bacs *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="476"/>
         <source>High DPI Scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Adaptation aux DPI élevés</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>
         <source>Don&apos;t show icons in menus *</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne pas afficher les icônes dans les menus *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="503"/>
         <source>Use Dark Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser le thème sombre</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="513"/>
         <source>Font Scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille de la police</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="405"/>
         <source>(Restart required)</source>
-        <translation type="unfinished"></translation>
+        <translation>(redémarrage requis)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="539"/>
@@ -5355,7 +5355,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="723"/>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser l&apos;authentification de Sandboxie à la place d&apos;un jeton anonyme (expérimental)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="733"/>

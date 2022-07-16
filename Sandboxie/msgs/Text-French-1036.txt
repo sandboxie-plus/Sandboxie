@@ -36,9 +36,9 @@ SBIE1106 erreur %2, détail %3
 SBIE1108 La procédure %2 ne peut être analysée
 .
 
-1109;evt;err;01
-SBIE1109 Information de licence invalide :  %2
-.
+# 1109;evt;err;01
+# SBIE1109 Information de licence invalide :  %2
+# .
 
 1110;evt;err;01
 SBIE1110 Impossible d'intercepter le type %3, erreur %2
@@ -108,9 +108,9 @@ SBIE1153 Echec démarrage de Sandboxie. Fermez tous les programmes et réinstall
 SBIE1201 Mémoire insuffisante
 .
 
-1202;pop;err;01
-SBIE1202 Impossible de mettre à jour la licence :  %2
-.
+# 1202;pop;err;01
+# SBIE1202 Impossible de mettre à jour la licence :  %2
+# .
 
 1203;pop;err;01
 SBIE1203 Impossible de construire la liste des chemins (erreur dans %2)
@@ -190,9 +190,9 @@ SBIE1301 Le programme '%2' a démarré hors du Bac à sable
 # SBIE1302 Bac à sable '%2' n'est pas défini ou est inactif
 # .
 
-1303;pop;inf;01
-SBIE1303 Un seul Bac à sable peut être activé à la fois
-.
+# 1303;pop;inf;01
+# SBIE1303 Un seul Bac à sable peut être activé à la fois
+# .
 
 # 1304;pop;inf;01
 # SBIE1304 Simulation clavier ou souris bloquée par processus '%2'
@@ -214,9 +214,9 @@ SBIE1308 Le programme ne peut démarrer à causes des restrictions - %2
 SBIE1309 Accès refusé pour changer mot de passe du compte
 .
 
-1310;pop;inf;01
-SBIE1310 Les fonctionnalités étendues sont désactivées jusqu'à la réactivation de la licence
-.
+# 1310;pop;inf;01
+# SBIE1310 Les fonctionnalités étendues sont désactivées jusqu'à la réactivation de la licence
+# .
 
 #1311;pop;inf;01
 #SBIE1311 Blocage de la demande de changement de l'arrière-plan du bureau par processus '%2'
@@ -827,45 +827,45 @@ Veuillez fermer les programmes lancés dans le Bac à sable avant d'en effacer l
 Echec commande d'effacement :  %0
 .
 
-3231;txt;01
-Vous avez installé Sandboxie depuis plus de 30 jours.
-.
+# 3231;txt;01
+# Vous avez installé Sandboxie depuis plus de 30 jours.
+# .
 
-3232;txt;01
-L'utilisation personnelle de Sandboxie est permise aussi longtemps que vous le souhaitez.
-.
+# 3232;txt;01
+# L'utilisation personnelle de Sandboxie est permise aussi longtemps que vous le souhaitez.
+# .
 
-3233;txt;01
-La version gratuite vous fera patienter quelques secondes.
-.
+# 3233;txt;01
+# La version gratuite vous fera patienter quelques secondes.
+# .
 
-3234;txt;01
-La version libre ne permet d'utiliser qu'un Bac à sable à la fois.
-.
+# 3234;txt;01
+# La version libre ne permet d'utiliser qu'un Bac à sable à la fois.
+# .
 
-3235;txt;01
-Cette limitation est supprimée dans la version payante de Sandboxie.
-.
+# 3235;txt;01
+# Cette limitation est supprimée dans la version payante de Sandboxie.
+# .
 
-3236;txt;01
-En plus, la version payante permet d'exécuter des programmes "sandboxés" automatiquement.
-.
+# 3236;txt;01
+# En plus, la version payante permet d'exécuter des programmes "sandboxés" automatiquement.
+# .
 
-3237;txt;01
-Pour plus d'informations ou pour acheter le programme, cliquez sur le lien suivant :
-.
+# 3237;txt;01
+# Pour plus d'informations ou pour acheter le programme, cliquez sur le lien suivant :
+# .
 
-3238;txt;01
-Veuillez patienter %2 secondes
-.
+# 3238;txt;01
+# Veuillez patienter %2 secondes
+# .
 
-3239;txt;01
-Cliquez pour continuer et fermer cette fenêtre
-.
+# 3239;txt;01
+# Cliquez pour continuer et fermer cette fenêtre
+# .
 
-3240;txt;01
-Cliquez pour arrêter et fermer cette fenêtre
-.
+# 3240;txt;01
+# Cliquez pour arrêter et fermer cette fenêtre
+# .
 
 3241;txt;01
 Sandboxie demande des droits "administrateur" pour le programme qui s'exécute dans la sandbox.
@@ -1166,9 +1166,9 @@ Re&charger la configuration
 Vérifier les &mises à jour
 .
 
-3455;txt;01
-&Enregistrer Sandboxie
-.
+# 3455;txt;01
+# &Enregistrer Sandboxie
+# .
 
 3456;txt;01
 &A propos de Sandboxie
@@ -1178,9 +1178,9 @@ Vérifier les &mises à jour
 &Forum Sandboxie (Internet)
 .
 
-3458;txt;01
-Autoriser l'accès direct au cache de polices de Windows
-.
+# 3458;txt;01
+# Autoriser l'accès direct au cache de polices de Windows
+# .
 
 3459;txt;01
 Autoriser l'accès direct au pilote qWave (Google Hangouts)
@@ -2062,9 +2062,9 @@ Les paramètres s'appliqueront au prochain démarrage
 du programme.
 .
 
-3771;txt;01
-(Cette option n'est valable que pour la version enregistrée de Sandboxie)
-.
+# 3771;txt;01
+# (Cette option n'est valable que pour la version enregistrée de Sandboxie)
+# .
 
 3772;txt;02
 Etes-vous sûr vous voulez mettre %2 en programme forcé ?
@@ -3538,186 +3538,186 @@ La configuration par défaut dans Sandboxie fournit une protection complète, ma
 # licence Manager
 #----------------------------------------------------------------------------
 
-7901;txt;01
-Sandboxie licence Manager
-.
+# 7901;txt;01
+# Sandboxie licence Manager
+# .
 
-7902;txt;01
-Code système %2
-.
+# 7902;txt;01
+# Code système %2
+# .
 
-7903;txt;01
-Dans l'avenir, activer la licence sans demander.
-.
-
-#----------------------------------------------------------------------------
-
-7921;txt;01
-Sandboxie est enregistré et la licence est activée.
-.
-
-7922;txt;01
-Sandboxie est enregistré mais la licence doit être réactivée.
-.
-
-7923;txt;01
-Copie non enregistrée. Enregistrez-la aujourd'hui !
-.
-
-7924;txt;01
-La licence de Sandboxie devra être réactivée dans %2 jours.
-.
-
-7925;txt;01
-La licence de Sandboxie est activée.
-.
-
-7926;txt;01
-La date d'expiration de votre clé du produit est %2.
-.
-
-7927;txt;01
-Votre clé de produit n'a pas de date d'expiration.
-.
+# 7903;txt;01
+# Dans l'avenir, activer la licence sans demander.
+# .
 
 #----------------------------------------------------------------------------
 
-7931;txt;01
-Votre copie de Sandboxie est enregistrée avec une clé d'enregistrement obsolète.
-.
+# 7921;txt;01
+# Sandboxie est enregistré et la licence est activée.
+# .
 
-7932;txt;01
-Merci de laisser le "licence Manager" se connecter au serveur afin de mettre à jour votre clé d'enregistrement.
-Cette opération est gratuite.
-.
+# 7922;txt;01
+# Sandboxie est enregistré mais la licence doit être réactivée.
+# .
 
-7933;txt;01
-Votre clé d'enregistrement n'est pas reconnue par le serveur de licence.
-.
+# 7923;txt;01
+# Copie non enregistrée. Enregistrez-la aujourd'hui !
+# .
 
-7934;txt;01
-Si vous avez utilisé une clef d'enregistrement valide, pour laquelle vous avez payé ou qui vous a été fourni comme cadeau
-ou comme une sorte de promotion, veuillez envoyer un mail à :
-.
+# 7924;txt;01
+# La licence de Sandboxie devra être réactivée dans %2 jours.
+# .
 
-7935;txt;01
-Votre nouvelle clé de produit est :
-.
+# 7925;txt;01
+# La licence de Sandboxie est activée.
+# .
 
-7936;txt;01
-Pensez à garder votre clé de produit dans un endroit sûr pour la retrouver en cas de besoin.
-Utilisez le bouton ci-dessous pour copier votre clé de produit, vous pourrez ensuite la coller dans un document et l'imprimer.
-.
+# 7926;txt;01
+# La date d'expiration de votre clé du produit est %2.
+# .
 
-7937;txt;01
-&Mise à jour de la clé d'enregistrement pour la clé du produit 
-.
+# 7927;txt;01
+# Votre clé de produit n'a pas de date d'expiration.
+# .
 
 #----------------------------------------------------------------------------
 
-7941;txt;01
-L'enregistrement de Sandboxie se fait par un site de paiement tierce-partie.  Commencer le processus d'enregistrement en suivant le lien suivant.
-.
+# 7931;txt;01
+# Votre copie de Sandboxie est enregistrée avec une clé d'enregistrement obsolète.
+# .
 
-7942;txt;01
-Pour activer votre licence pour Sandboxie, entrer la clé de produit qui apparaît sur votre reçu de paiement,
-cliquer sur le bouton pour activer votre licence.
-.
+# 7932;txt;01
+# Merci de laisser le "licence Manager" se connecter au serveur afin de mettre à jour votre clé d'enregistrement.
+# Cette opération est gratuite.
+# .
 
-7943;txt;01
-Voulez-vous entrer une nouvelle clé de produit ?
-.
+# 7933;txt;01
+# Votre clé d'enregistrement n'est pas reconnue par le serveur de licence.
+# .
 
-7944;txt;01
-&Activer la licence
-.
+# 7934;txt;01
+# Si vous avez utilisé une clef d'enregistrement valide, pour laquelle vous avez payé ou qui vous a été fourni comme cadeau
+# ou comme une sorte de promotion, veuillez envoyer un mail à :
+# .
 
-7945;txt;01
-Votre copie de Sandboxie est maintenant enregistrée.
-.
+# 7935;txt;01
+# Votre nouvelle clé de produit est :
+# .
 
-7946;txt;01
-Merci de votre support à Sandboxie !
-.
+# 7936;txt;01
+# Pensez à garder votre clé de produit dans un endroit sûr pour la retrouver en cas de besoin.
+# Utilisez le bouton ci-dessous pour copier votre clé de produit, vous pourrez ensuite la coller dans un document et l'imprimer.
+# .
 
-#----------------------------------------------------------------------------
-
-7951;txt;01
-Voulez-vous activer la licence dès à présent ?
-.
-
-7952;txt;01
-Veuillez visiter le site web de Sandboxie via le lien ci-dessous pour commander une nouvelle clef de produit.
-.
-
-7961;txt;01
-Effacer les informations de la licence.
-.
-
-7962;txt;01
-Etes-vous sûr de vouloir effacer les informations de la licence de Sandboxie ?
-
-Vous pourrez activer votre licence à n'importe quel moment, il suffira d'entrer une clé de produit.
-.
+# 7937;txt;01
+# &Mise à jour de la clé d'enregistrement pour la clé du produit 
+# .
 
 #----------------------------------------------------------------------------
 
-7971;txt;01
-Ce n'est pas une clé de produit valide.
-.
+# 7941;txt;01
+# L'enregistrement de Sandboxie se fait par un site de paiement tierce-partie.  Commencer le processus d'enregistrement en suivant le lien suivant.
+# .
 
-7972;txt;01
-Ce n'est pas un code système valide.
-.
+# 7942;txt;01
+# Pour activer votre licence pour Sandboxie, entrer la clé de produit qui apparaît sur votre reçu de paiement,
+# cliquer sur le bouton pour activer votre licence.
+# .
 
-7973;txt;01
-Ce n'est pas une clé d'activation valide.  [%2]
-.
+# 7943;txt;01
+# Voulez-vous entrer une nouvelle clé de produit ?
+# .
 
-7974;txt;01
-Réponse invalide du serveur qui fournit la licence.
-.
+# 7944;txt;01
+# &Activer la licence
+# .
 
-7975;txt;01
-L'activation du produit a échoué :
-.
+# 7945;txt;01
+# Votre copie de Sandboxie est maintenant enregistrée.
+# .
 
-7976;txt;01
-Voulez-vous faire un autre essai ?
-.
+# 7946;txt;01
+# Merci de votre support à Sandboxie !
+# .
 
-7977;txt;01
-Si vous avez besoin d'activer votre Sandboxie sur un ordinateur et que vous ne possédez pas d'accès à internet,
-rendez-vous sur "the Sandboxie Licensing FAQ" pour avoir des informations sur l'activation hors-ligne.
-.
+#----------------------------------------------------------------------------
 
-7978;txt;01
-La date actuelle (%2) est plus récente que la date fournie par le serveur de licence (%3).
-.
+# 7951;txt;01
+# Voulez-vous activer la licence dès à présent ?
+# .
 
-7982;txt;01
-Le serveur de licence n'a pas donné de raison pour expliquer l'échec de l'activation.
-.
+# 7952;txt;01
+# Veuillez visiter le site web de Sandboxie via le lien ci-dessous pour commander une nouvelle clef de produit.
+# .
 
-7983;txt;01
-La clé de produit n'est pas reconnue par le serveur de licence.
-.
+# 7961;txt;01
+# Effacer les informations de la licence.
+# .
 
-7984;txt;01
-La clé de produit ne peut plus être utilisée au-delà de sa date d'expiration du %2.
-.
+# 7962;txt;01
+# Etes-vous sûr de vouloir effacer les informations de la licence de Sandboxie ?
+# 
+# Vous pourrez activer votre licence à n'importe quel moment, il suffira d'entrer une clé de produit.
+# .
 
-7985;txt;01
-La clé de produit a été activée sur trop d'ordinateurs.
-.
+#----------------------------------------------------------------------------
 
-7986;txt;01
-Clé de produit annulée car elle a été rendue publique sur internet.
-.
+# 7971;txt;01
+# Ce n'est pas une clé de produit valide.
+# .
 
-7987;txt;01
-Clé de produit annulée car la commande a été remboursée.
-.
+# 7972;txt;01
+# Ce n'est pas un code système valide.
+# .
+
+# 7973;txt;01
+# Ce n'est pas une clé d'activation valide.  [%2]
+# .
+
+# 7974;txt;01
+# Réponse invalide du serveur qui fournit la licence.
+# .
+
+# 7975;txt;01
+# L'activation du produit a échoué :
+# .
+
+# 7976;txt;01
+# Voulez-vous faire un autre essai ?
+# .
+
+# 7977;txt;01
+# Si vous avez besoin d'activer votre Sandboxie sur un ordinateur et que vous ne possédez pas d'accès à internet,
+# rendez-vous sur "the Sandboxie Licensing FAQ" pour avoir des informations sur l'activation hors-ligne.
+# .
+
+# 7978;txt;01
+# La date actuelle (%2) est plus récente que la date fournie par le serveur de licence (%3).
+# .
+
+# 7982;txt;01
+# Le serveur de licence n'a pas donné de raison pour expliquer l'échec de l'activation.
+# .
+
+# 7983;txt;01
+# La clé de produit n'est pas reconnue par le serveur de licence.
+# .
+
+# 7984;txt;01
+# La clé de produit ne peut plus être utilisée au-delà de sa date d'expiration du %2.
+# .
+
+# 7985;txt;01
+# La clé de produit a été activée sur trop d'ordinateurs.
+# .
+
+# 7986;txt;01
+# Clé de produit annulée car elle a été rendue publique sur internet.
+# .
+
+# 7987;txt;01
+# Clé de produit annulée car la commande a été remboursée.
+# .
 
 #----------------------------------------------------------------------------
 # SandboxieInstall

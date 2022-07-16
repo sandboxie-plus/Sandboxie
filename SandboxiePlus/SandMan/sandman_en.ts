@@ -4877,7 +4877,7 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="60"/>
-        <source>Count and display the disk space ocupied by each sandbox</source>
+        <source>Count and display the disk space occupied by each sandbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

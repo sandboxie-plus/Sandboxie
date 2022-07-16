@@ -574,7 +574,7 @@ SBIE2322 Impossible de réécrire Sandboxie.ini :  %2
 SBIE2323 Erreur de chiffrement :  %2
 .
 
-325;pop;err;01
+2325;pop;err;01
 SBIE2325 Debug :  %2  
 .
 

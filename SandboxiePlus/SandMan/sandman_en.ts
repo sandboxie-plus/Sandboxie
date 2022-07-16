@@ -4897,7 +4897,7 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="412"/>
-        <source>* indetermined means depanding on the view mode</source>
+        <source>* indetermined means depending on the selected view mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -708,7 +708,6 @@ E-posta yardımcı programı bulunamadı
 Sandboxie Kontrol programı çalıştırılamadı
 .
 
-
 3212;txt;01
 Sandboxie sürücüsü (SbieDrv) programları kendisi ile çalıştıramaz.
 Sürücünün ve Sandboxie hizmetinin (SbieSvc) çalışır durumda olduğundan emin olun.
@@ -2410,7 +2409,6 @@ Ağ dosyaları ve klasörleri normalde korumalı alan uygulamaları tarafından 
 .
 
 3957;txt;01
-
 Korumalı alandaki uygulamaların ağınızdaki dosya ve klasörlere erişmesini engellemek istiyorsanız bu ayarı etkinleştirebilirsiniz. Korumalı alan uygulamaları için ayrı dosya ve klasörler, Kaynak Erişimi -> Dosya Erişimi altında eklenerek açılabilir.
 .
 

@@ -3204,7 +3204,7 @@ NetworkAccess=iexplorer.exe,İzin Ver; bağlantı noktası=80,443; Adres=192.168
 Bu seçenekleri kontrol etmek için bir UI kullanmayı tercih ederseniz, lütfen tüm yeni özellikler için tam UI desteğine sahip Sandboxie-Plus'a yükseltin.
 .
 
-6004;pop;hata;01
+6004;pop;err;01
 %2 kutusunun %3 yapılandırması bir destekçi sertifikası gerektirir. Bu kutudaki işlemler 5 dakika sonra sonlandırılacaktır. Uzun süreli kullanım için lütfen bu projeyi desteklemeyi düşünün.
 .
 

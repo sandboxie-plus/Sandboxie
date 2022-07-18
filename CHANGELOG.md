@@ -4,6 +4,23 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.2.4 / 5.57.4] - 2022-07-??
+
+### Added
+- added delete button to the recovery window [#2024](https://github.com/sandboxie-plus/Sandboxie/issues/2024)
+
+### Changed
+
+### Fixed
+- fixed issues with file panel
+- fixed issue with key bindings [#2030](https://github.com/sandboxie-plus/Sandboxie/issues/2030)
+- fixed issue wtih RemoveSidName when terminating sbiesvc
+- fixed issue with the new hooking mechanism
+- fixed BSOD issue with win32k hooks introduced in 1.2.0 [#2035](https://github.com/sandboxie-plus/Sandboxie/issues/2035)
+
+
+
 ## [1.2.3 / 5.57.3] - 2022-07-13
 
 ### Fixed

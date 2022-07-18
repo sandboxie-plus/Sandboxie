@@ -18,7 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue wtih RemoveSidName when terminating sbiesvc
 - fixed issue with the new hooking mechanism
 - fixed BSOD issue with win32k hooks introduced in 1.2.0 [#2035](https://github.com/sandboxie-plus/Sandboxie/issues/2035)
-
+- fixed issue with element11 and electron workaround [#2023](https://github.com/sandboxie-plus/Sandboxie/issues/2023)
 
 
 ## [1.2.3 / 5.57.3] - 2022-07-13

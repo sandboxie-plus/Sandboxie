@@ -528,6 +528,25 @@ skip_e9_rewrite: ;
                         //  OutputDebugStringA(buffer);
                     }
 
+                    // brute force fallback
+                    if (!ptrVTable->offset) {
+
+                        step = VTABLE_SIZE;
+                        max_attempts = 0x40000000 / step; // 1 gig
+                        ULONG_PTR cur_attempt = 0;
+
+                        tempAddr = ((ULONG_PTR)func & 0xfffffffffffe0000);
+
+                        for (; !ptrVTable->offset && cur_attempt < (max_attempts * 2); cur_attempt++) {
+
+                            ULONG_PTR curAddr = tempAddr + (((cur_attempt + 2)/2) * step);
+                            if((cur_attempt % 2) == 0) // search booth directions alternating
+                                curAddr *= -1;
+
+                            ptrVTable->offset = VirtualAlloc((void*)curAddr, VTABLE_SIZE, MEM_COMMIT | MEM_RESERVE | MEM_TOP_DOWN, PAGE_READWRITE);
+                        }
+                    }
+
                     ptrVTable->index = 0;
                     ptrVTable->maxEntries = VTABLE_SIZE / sizeof(void*);
                 }

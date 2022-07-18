@@ -83,7 +83,7 @@ NTSTATUS RemoveSidName(const WCHAR* domain, const WCHAR* user)
     if(user != NULL)
         RtlInitUnicodeString(&add_input.AccountName, user);
 
-    status = LsaManageSidNameMapping(LsaSidNameMappingOperation_Add, input, &output);
+    status = LsaManageSidNameMapping(LsaSidNameMappingOperation_Remove, input, &output);
 
     if(output) 
         LsaFreeMemory(output);

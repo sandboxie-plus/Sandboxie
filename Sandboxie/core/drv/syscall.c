@@ -95,7 +95,6 @@ static BOOLEAN Syscall_GetKernelAddr(
 #pragma alloc_text (INIT, Syscall_Init_List)
 #pragma alloc_text (INIT, Syscall_Init_Table)
 #pragma alloc_text (INIT, Syscall_Init_ServiceData)
-#pragma alloc_text (INIT, Syscall_GetByName)
 #pragma alloc_text (INIT, Syscall_Set1)
 #pragma alloc_text (INIT, Syscall_Set2)
 #pragma alloc_text (INIT, Syscall_ErrorForAsciiName)

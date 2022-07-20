@@ -128,7 +128,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 	int FontScales[] = { 75,100,125,150,175,200,225,250,275,300,350,400, 0 };
 	for(int* pFontScales = FontScales; *pFontScales != 0; pFontScales++)
-		ui.cmbFontScale->addItem(tr("%1 %").arg(*pFontScales), *pFontScales);
+		ui.cmbFontScale->addItem(tr("%1").arg(*pFontScales), *pFontScales);
 
 	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
 	if (settings.value("CurrentBuild").toInt() >= 22000) { // Windows 11
@@ -150,6 +150,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	//connect(ui.chkOptTree, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkColorIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.cmbFontScale, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.cmbFontScale, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnChangeGUI()));
 
 
 	m_bRebuildUI = false;
@@ -330,7 +331,8 @@ void CSettingsWindow::LoadSettings()
 	ui.chkOptTree->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/OptionTree", 2)));
 	ui.chkColorIcons->setChecked(theConf->GetBool("Options/ColorBoxIcons", false));
 
-	ui.cmbFontScale->setCurrentIndex(ui.cmbFontScale->findData(theConf->GetInt("Options/FontScaling", 100)));
+	//ui.cmbFontScale->setCurrentIndex(ui.cmbFontScale->findData(theConf->GetInt("Options/FontScaling", 100)));
+	ui.cmbFontScale->setCurrentText(QString::number(theConf->GetInt("Options/FontScaling", 100)));
 
 	ui.chkNotifications->setChecked(theConf->GetBool("Options/ShowNotifications", true));
 
@@ -471,7 +473,12 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/OptionTree", CSettingsWindow__Chk2Int(ui.chkOptTree->checkState()));
 	theConf->SetValue("Options/ColorBoxIcons", ui.chkColorIcons->isChecked());
 
-	theConf->SetValue("Options/FontScaling", ui.cmbFontScale->currentData());
+	int Scaling = ui.cmbFontScale->currentText().toInt();
+	if (Scaling < 75)
+		Scaling = 75;
+	else if (Scaling > 500)
+		Scaling = 500;
+	theConf->SetValue("Options/FontScaling", Scaling);
 
 	AutorunEnable(ui.chkAutoStart->isChecked());
 

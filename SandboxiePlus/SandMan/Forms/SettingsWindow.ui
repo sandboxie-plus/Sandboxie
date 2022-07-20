@@ -483,7 +483,7 @@
            <item row="8" column="1">
             <widget class="QComboBox" name="cmbFontScale">
              <property name="editable">
-              <bool>false</bool>
+              <bool>true</bool>
              </property>
             </widget>
            </item>

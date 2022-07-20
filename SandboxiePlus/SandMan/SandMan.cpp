@@ -464,6 +464,9 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pMenuSettings = m_pMenuOptions->addAction(CSandMan::GetIcon("Settings"), tr("Global Settings"), this, SLOT(OnSettings()));
 		m_pMenuResetMsgs = m_pMenuOptions->addAction(tr("Reset all hidden messages"), this, SLOT(OnResetMsgs()));
 		m_pMenuResetGUI = m_pMenuOptions->addAction(tr("Reset all GUI options"), this, SLOT(OnResetGUI()));
+		m_pMenuResetGUI->setShortcut(QKeySequence("Ctrl+Shift+R"));
+		m_pMenuResetGUI->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		this->addAction(m_pMenuResetGUI);
 		m_pMenuOptions->addSeparator();
 		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("EditIni"), tr("Edit ini file"), this, SLOT(OnEditIni()));
 		m_pReloadIni = m_pMenuOptions->addAction(CSandMan::GetIcon("ReloadIni"), tr("Reload ini file"), this, SLOT(OnReloadIni()));
@@ -577,6 +580,9 @@ void CSandMan::CreateOldMenus()
 
 		m_pMenuResetMsgs = m_pMenuOptions->addAction(tr("Reset all hidden messages"), this, SLOT(OnResetMsgs()));
 		m_pMenuResetGUI = m_pMenuOptions->addAction(tr("Reset all GUI options"), this, SLOT(OnResetGUI()));
+		m_pMenuResetGUI->setShortcut(QKeySequence("Ctrl+Shift+R"));
+		m_pMenuResetGUI->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		this->addAction(m_pMenuResetGUI);
 		m_pMenuOptions->addSeparator();
 		QAction* m_pConfigLock = m_pMenuOptions->addAction(CSandMan::GetIcon("Lock"), tr("Lock Configuration"), this, SLOT(OnSettingsAction()));
 		m_pConfigLock->setData(CSettingsWindow::eConfigLock);
@@ -2031,6 +2037,10 @@ void CSandMan::UpdateSettings(bool bRebuildUI)
 		LoadLanguage();
 
 		StoreState();
+
+		this->removeAction(m_pRefreshAll);
+		this->removeAction(m_pMenuBrowse);
+		this->removeAction(m_pMenuResetGUI);
 
 		m_pMainWidget->deleteLater();
 		m_pMainWidget = new QWidget(this);

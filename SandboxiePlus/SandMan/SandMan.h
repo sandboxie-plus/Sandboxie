@@ -384,5 +384,15 @@ protected:
 	CPanelWidgetEx* m_pRecoveryLog;
 };
 
+#include <QStyledItemDelegate>
+class CTreeItemDelegate : public QStyledItemDelegate
+{
+	void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+	{
+		QStyleOptionViewItem opt(option);
+		opt.state &= ~QStyle::State_HasFocus;
+		QStyledItemDelegate::paint(painter, opt, index);
+	}
+};
 
 extern CSandMan* theGUI;

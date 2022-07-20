@@ -23,6 +23,7 @@ CFileView::CFileView(QWidget *parent)
 
 	QStyle* pStyle = QStyleFactory::create("windows");
 	m_pTreeView->setStyle(pStyle);
+    m_pTreeView->setItemDelegate(new CTreeItemDelegate());
 
 	m_pTreeView->setExpandsOnDoubleClick(false);
 

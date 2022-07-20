@@ -63,6 +63,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 	QStyle* pStyle = QStyleFactory::create("windows");
 	m_pSbieTree->setStyle(pStyle);
+	m_pSbieTree->setItemDelegate(new CTreeItemDelegate());
 
 	m_pSbieTree->setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(m_pSbieTree, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(OnMenu(const QPoint &)));

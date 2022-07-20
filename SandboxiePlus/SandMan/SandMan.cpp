@@ -2452,15 +2452,6 @@ void CSandMan::SetUITheme()
 		GetFileView()->GetTree()->setPalette(QApplication::palette());
 	}
 
-	// this makes the selection look a bit nicer but breaks keyboard navigation
-	/*QPalette p = GetBoxView()->GetTree()->palette();
-	p.setColor(QPalette::Highlight, QApplication::palette().color(QPalette::Highlight));
-	p.setColor(QPalette::HighlightedText, QApplication::palette().color(QPalette::HighlightedText));
-	GetBoxView()->GetTree()->setFocusPolicy(Qt::NoFocus);
-	GetBoxView()->GetTree()->setPalette(p);
-	GetFileView()->GetTree()->setFocusPolicy(Qt::NoFocus);
-	GetFileView()->GetTree()->setPalette(p);*/
-
 	m_DarkTheme = bDark;
 
 	CTreeItemModel::SetDarkMode(bDark);

@@ -367,7 +367,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 	if(bAdvanced) {
 		m_pDisableRecovery = m_pMenuFile->addAction(tr("Disable File Recovery"));
 		m_pDisableRecovery->setCheckable(true);
-		m_pDisableMessages = m_pMenuFile->addAction(tr("Disable Message PopUp"));
+		m_pDisableMessages = m_pMenuFile->addAction(tr("Disable Message Popup"));
 		m_pDisableMessages->setCheckable(true);
 	}
 	else {
@@ -485,7 +485,7 @@ void CSandMan::CreateOldMenus()
 		//m_pDisableRecovery = m_pMenuFile->addAction(tr("Disable File Recovery"));
 		//m_pDisableRecovery->setCheckable(true);
 		m_pDisableRecovery = NULL;
-		//m_pDisableMessages = m_pMenuFile->addAction(tr("Disable Message PopUp"));
+		//m_pDisableMessages = m_pMenuFile->addAction(tr("Disable Message Popup"));
 		//m_pDisableMessages->setCheckable(true);	
 		m_pDisableMessages = NULL;
 		m_pMenuFile->addSeparator();

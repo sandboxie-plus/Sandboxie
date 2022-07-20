@@ -57,7 +57,7 @@
            <item row="8" column="1" colspan="2">
             <widget class="QCheckBox" name="chkMonitorSize">
              <property name="text">
-              <string>Count and display the disk space ocupied by each sandbox</string>
+              <string>Count and display the disk space occupied by each sandbox</string>
              </property>
             </widget>
            </item>
@@ -409,7 +409,7 @@
            <item row="10" column="2" colspan="2">
             <widget class="QLabel" name="label_11">
              <property name="text">
-              <string>* indetermined means depanding on the view mode</string>
+              <string>* a partially checked checkbox will leave the behavior to be determined by the view mode.</string>
              </property>
             </widget>
            </item>

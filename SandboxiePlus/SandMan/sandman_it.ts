@@ -40,7 +40,7 @@
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="300"/>
+        <location filename="Views/FileView.cpp" line="301"/>
         <source>%1 - Files</source>
         <translation>%1 - File</translation>
     </message>
@@ -68,27 +68,27 @@
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="139"/>
+        <location filename="Views/FileView.cpp" line="140"/>
         <source>Create Shortcut</source>
         <translation type="unfinished">Crea collegamento</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="145"/>
+        <location filename="Views/FileView.cpp" line="146"/>
         <source>Recover to Any Folder</source>
         <translation type="unfinished">Recupera in un&apos;altra cartella</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="147"/>
+        <location filename="Views/FileView.cpp" line="148"/>
         <source>Recover to Same Folder</source>
         <translation type="unfinished">Recupera nella stessa cartella</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="207"/>
+        <location filename="Views/FileView.cpp" line="208"/>
         <source>Select Directory</source>
         <translation type="unfinished">Seleziona directory</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="257"/>
+        <location filename="Views/FileView.cpp" line="258"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation type="unfinished">Crea collegamento all&apos;area virtuale %1</translation>
     </message>
@@ -1038,22 +1038,22 @@ Percorso completo: %4</translation>
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="2595"/>
+        <location filename="SandMan.cpp" line="2586"/>
         <source>Waiting for folder: %1</source>
         <translation>In attesa della cartella: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2596"/>
+        <location filename="SandMan.cpp" line="2587"/>
         <source>Deleting folder: %1</source>
         <translation>Eliminazione della cartella: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2597"/>
+        <location filename="SandMan.cpp" line="2588"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>Unione cartelle: %1 &gt;&gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2598"/>
+        <location filename="SandMan.cpp" line="2589"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>Completamento unione istantanea...</translation>
     </message>
@@ -1129,22 +1129,22 @@ Percorso completo: %4</translation>
         <translation>Sandboxie Plus v%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2499"/>
+        <location filename="SandMan.cpp" line="2490"/>
         <source>Reset Columns</source>
         <translation>Reimposta colonne</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2500"/>
+        <location filename="SandMan.cpp" line="2491"/>
         <source>Copy Cell</source>
         <translation>Copia cella</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2501"/>
+        <location filename="SandMan.cpp" line="2492"/>
         <source>Copy Row</source>
         <translation>Copia riga</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2502"/>
+        <location filename="SandMan.cpp" line="2493"/>
         <source>Copy Panel</source>
         <translation>Copia riquadro</translation>
     </message>
@@ -1201,7 +1201,8 @@ Percorso completo: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="370"/>
-        <source>Disable Message PopUp</source>
+        <source>Disable Message Popup</source>
+        <oldsource>Disable Message PopUp</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1424,7 +1425,7 @@ Percorso completo: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="353"/>
-        <location filename="SandMan.cpp" line="2569"/>
+        <location filename="SandMan.cpp" line="2560"/>
         <source>About Sandboxie-Plus</source>
         <translation>Informazioni su Sandboxie Plus</translation>
     </message>
@@ -1700,7 +1701,7 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
         <translation>&lt;p&gt;È stato scaricato un aggiornamento di Sandboxie Plus nel seguente percorso:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Iniziare l&apos;installazione? Se nell&apos;area virtuale sono in esecuzione altri programmi, questi verranno terminati.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2542"/>
+        <location filename="SandMan.cpp" line="2533"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Informazioni su Sandboxie Plus&lt;/h3&gt;&lt;p&gt;Versione %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</translation>
     </message>
@@ -2140,17 +2141,17 @@ Scegliere No per selezionare: %2</translation>
         <translation type="vanished">&lt;p&gt;La nuova versione è stata scaricata nel seguente percorso:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Iniziare l&apos;installazione? Se ci sono altri programmi in esecuzione nell&apos;area virtuale, verranno terminati.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2550"/>
+        <location filename="SandMan.cpp" line="2541"/>
         <source>This copy of Sandboxie+ is certified for: %1</source>
         <translation>Questa copia di Sandboxie+ è certificata per: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2552"/>
+        <location filename="SandMan.cpp" line="2543"/>
         <source>Sandboxie+ is free for personal and non-commercial use.</source>
         <translation>Sandboxie+ è gratuito per uso personale e non commerciale.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2555"/>
+        <location filename="SandMan.cpp" line="2546"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>Sandboxie Plus è la continuazione open source di Sandboxie.&lt;br /&gt;Visita &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; per informazioni.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Versione driver: %1&lt;br /&gt;Funzioni attive: %2&lt;br /&gt;&lt;br /&gt;Icone by &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Traduzione italiana a cura di &lt;a href=&quot;https://www.eng2ita.net&quot;&gt;eng2ita.net&lt;/a&gt;&lt;br /&gt;</translation>
     </message>
@@ -2444,365 +2445,365 @@ Scegliere No per selezionare: %2</translation>
 <context>
     <name>CSbieView</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="137"/>
-        <location filename="Views/SbieView.cpp" line="245"/>
+        <location filename="Views/SbieView.cpp" line="138"/>
+        <location filename="Views/SbieView.cpp" line="246"/>
         <source>Create New Box</source>
         <translation>Crea nuova area virtuale</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="343"/>
+        <location filename="Views/SbieView.cpp" line="344"/>
         <source>Remove Group</source>
         <translation>Rimuovi gruppo</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="145"/>
+        <location filename="Views/SbieView.cpp" line="146"/>
         <source>Run</source>
         <translation>Avvia</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="146"/>
+        <location filename="Views/SbieView.cpp" line="147"/>
         <source>Run Program</source>
         <translation>Avvia programma</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="147"/>
+        <location filename="Views/SbieView.cpp" line="148"/>
         <source>Run from Start Menu</source>
         <translation>Avvia dal menu Start</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="148"/>
+        <location filename="Views/SbieView.cpp" line="149"/>
         <source>Default Web Browser</source>
         <translation>Browser Web predefinito</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="149"/>
+        <location filename="Views/SbieView.cpp" line="150"/>
         <source>Default eMail Client</source>
         <translation>Programma di posta predefinito</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="157"/>
+        <location filename="Views/SbieView.cpp" line="158"/>
         <source>Windows Explorer</source>
         <translation>Esplora risorse</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="158"/>
+        <location filename="Views/SbieView.cpp" line="159"/>
         <source>Registry Editor</source>
         <translation>Editor del Registro di sistema</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="159"/>
+        <location filename="Views/SbieView.cpp" line="160"/>
         <source>Programs and Features</source>
         <translation>Programmi e funzionalità</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="163"/>
+        <location filename="Views/SbieView.cpp" line="164"/>
         <source>Terminate All Programs</source>
         <translation>Chiudi tutti i programmi</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="169"/>
-        <location filename="Views/SbieView.cpp" line="223"/>
-        <location filename="Views/SbieView.cpp" line="287"/>
-        <location filename="Views/SbieView.cpp" line="325"/>
+        <location filename="Views/SbieView.cpp" line="170"/>
+        <location filename="Views/SbieView.cpp" line="224"/>
+        <location filename="Views/SbieView.cpp" line="288"/>
+        <location filename="Views/SbieView.cpp" line="326"/>
         <source>Create Shortcut</source>
         <translation>Crea collegamento</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="171"/>
-        <location filename="Views/SbieView.cpp" line="273"/>
+        <location filename="Views/SbieView.cpp" line="172"/>
+        <location filename="Views/SbieView.cpp" line="274"/>
         <source>Explore Content</source>
         <translation>Esplora contenuto</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="168"/>
-        <location filename="Views/SbieView.cpp" line="286"/>
+        <location filename="Views/SbieView.cpp" line="169"/>
+        <location filename="Views/SbieView.cpp" line="287"/>
         <source>Refresh Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="200"/>
-        <location filename="Views/SbieView.cpp" line="280"/>
+        <location filename="Views/SbieView.cpp" line="201"/>
+        <location filename="Views/SbieView.cpp" line="281"/>
         <source>Snapshots Manager</source>
         <translation>Gestore istantanee</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="173"/>
+        <location filename="Views/SbieView.cpp" line="174"/>
         <source>Recover Files</source>
         <translation>Recupero file</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="174"/>
-        <location filename="Views/SbieView.cpp" line="272"/>
+        <location filename="Views/SbieView.cpp" line="175"/>
+        <location filename="Views/SbieView.cpp" line="273"/>
         <source>Delete Content</source>
         <translation>Elimina contenuto</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="178"/>
+        <location filename="Views/SbieView.cpp" line="179"/>
         <source>Sandbox Presets</source>
         <translation>Opzioni rapide</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="180"/>
+        <location filename="Views/SbieView.cpp" line="181"/>
         <source>Ask for UAC Elevation</source>
         <translation>Richiedi elevazione UAC</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="181"/>
+        <location filename="Views/SbieView.cpp" line="182"/>
         <source>Drop Admin Rights</source>
         <translation>Limita privilegi amministrativi</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="182"/>
+        <location filename="Views/SbieView.cpp" line="183"/>
         <source>Emulate Admin Rights</source>
         <translation>Emula privilegi amministrativi</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="190"/>
+        <location filename="Views/SbieView.cpp" line="191"/>
         <source>Block Internet Access</source>
         <translation>Blocca accesso a internet</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="192"/>
+        <location filename="Views/SbieView.cpp" line="193"/>
         <source>Allow Network Shares</source>
         <translation>Consenti condivisione di rete</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="176"/>
+        <location filename="Views/SbieView.cpp" line="177"/>
         <source>Sandbox Options</source>
         <translation>Opzioni area virtuale</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="166"/>
+        <location filename="Views/SbieView.cpp" line="167"/>
         <source>Browse Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="196"/>
+        <location filename="Views/SbieView.cpp" line="197"/>
         <source>Immediate Recovery</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="199"/>
-        <location filename="Views/SbieView.cpp" line="278"/>
+        <location filename="Views/SbieView.cpp" line="200"/>
+        <location filename="Views/SbieView.cpp" line="279"/>
         <source>Sandbox Tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="202"/>
+        <location filename="Views/SbieView.cpp" line="203"/>
         <source>Duplicate Box Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="204"/>
-        <location filename="Views/SbieView.cpp" line="290"/>
+        <location filename="Views/SbieView.cpp" line="205"/>
+        <location filename="Views/SbieView.cpp" line="291"/>
         <source>Rename Sandbox</source>
         <translation>Rinomina area virtuale</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="205"/>
-        <location filename="Views/SbieView.cpp" line="291"/>
+        <location filename="Views/SbieView.cpp" line="206"/>
+        <location filename="Views/SbieView.cpp" line="292"/>
         <source>Move Sandbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="216"/>
-        <location filename="Views/SbieView.cpp" line="302"/>
+        <location filename="Views/SbieView.cpp" line="217"/>
+        <location filename="Views/SbieView.cpp" line="303"/>
         <source>Remove Sandbox</source>
         <translation>Elimina area virtuale</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="221"/>
-        <location filename="Views/SbieView.cpp" line="323"/>
+        <location filename="Views/SbieView.cpp" line="222"/>
+        <location filename="Views/SbieView.cpp" line="324"/>
         <source>Terminate</source>
         <translation>Termina</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="224"/>
+        <location filename="Views/SbieView.cpp" line="225"/>
         <source>Preset</source>
         <translation>Impostazioni</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="225"/>
+        <location filename="Views/SbieView.cpp" line="226"/>
         <source>Pin to Run Menu</source>
         <translation>Aggiungi al menu Avvia</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="227"/>
+        <location filename="Views/SbieView.cpp" line="228"/>
         <source>Block and Terminate</source>
         <translation>Blocca e termina</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="231"/>
+        <location filename="Views/SbieView.cpp" line="232"/>
         <source>Allow internet access</source>
         <translation>Consenti accesso a internet</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="233"/>
+        <location filename="Views/SbieView.cpp" line="234"/>
         <source>Force into this sandbox</source>
         <translation>Forza avvio su quest&apos;area virtuale</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="235"/>
+        <location filename="Views/SbieView.cpp" line="236"/>
         <source>Set Linger Process</source>
         <translation>Imposta come processo secondario</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="237"/>
+        <location filename="Views/SbieView.cpp" line="238"/>
         <source>Set Leader Process</source>
         <translation>Imposta come processo principale</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="253"/>
+        <location filename="Views/SbieView.cpp" line="254"/>
         <source>Run Sandboxed</source>
         <translation type="unfinished">Avvia nell&apos;area virtuale</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="254"/>
+        <location filename="Views/SbieView.cpp" line="255"/>
         <source>Run Web Browser</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="255"/>
+        <location filename="Views/SbieView.cpp" line="256"/>
         <source>Run eMail Reader</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="256"/>
+        <location filename="Views/SbieView.cpp" line="257"/>
         <source>Run Any Program</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="257"/>
+        <location filename="Views/SbieView.cpp" line="258"/>
         <source>Run From Start Menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="258"/>
+        <location filename="Views/SbieView.cpp" line="259"/>
         <source>Run Windows Explorer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="270"/>
+        <location filename="Views/SbieView.cpp" line="271"/>
         <source>Terminate Programs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="271"/>
+        <location filename="Views/SbieView.cpp" line="272"/>
         <source>Quick Recover</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="276"/>
+        <location filename="Views/SbieView.cpp" line="277"/>
         <source>Sandbox Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="283"/>
+        <location filename="Views/SbieView.cpp" line="284"/>
         <source>Duplicate Sandbox Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="342"/>
+        <location filename="Views/SbieView.cpp" line="343"/>
         <source>Move Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="473"/>
+        <location filename="Views/SbieView.cpp" line="474"/>
         <source>    File root: %1
 </source>
         <translation>    Percorso dei file: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="474"/>
+        <location filename="Views/SbieView.cpp" line="475"/>
         <source>    Registry root: %1
 </source>
         <translation>    Percorso del registro: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="475"/>
+        <location filename="Views/SbieView.cpp" line="476"/>
         <source>    IPC root: %1
 </source>
         <translation>    Percorso IPC: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="477"/>
+        <location filename="Views/SbieView.cpp" line="478"/>
         <source>Options:
     </source>
         <translation>Opzioni:
     </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="694"/>
+        <location filename="Views/SbieView.cpp" line="695"/>
         <source>[None]</source>
         <translation>[Nessuno]</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="924"/>
+        <location filename="Views/SbieView.cpp" line="925"/>
         <source>Please enter a new group name</source>
         <translation>Immetti un nome per il nuovo gruppo</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="795"/>
+        <location filename="Views/SbieView.cpp" line="796"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation>Eliminare il gruppo o i gruppi selezionati?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="138"/>
-        <location filename="Views/SbieView.cpp" line="246"/>
+        <location filename="Views/SbieView.cpp" line="139"/>
+        <location filename="Views/SbieView.cpp" line="247"/>
         <source>Create Box Group</source>
         <translation>Aggiungi gruppo</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="341"/>
+        <location filename="Views/SbieView.cpp" line="342"/>
         <source>Rename Group</source>
         <translation>Rinomina gruppo</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="142"/>
-        <location filename="Views/SbieView.cpp" line="250"/>
+        <location filename="Views/SbieView.cpp" line="143"/>
+        <location filename="Views/SbieView.cpp" line="251"/>
         <source>Stop Operations</source>
         <translation>Ferma operazioni</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="150"/>
+        <location filename="Views/SbieView.cpp" line="151"/>
         <source>Command Prompt</source>
         <translation>Prompt dei comandi</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="151"/>
+        <location filename="Views/SbieView.cpp" line="152"/>
         <source>Boxed Tools</source>
         <translation>Strumenti di sistema</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="152"/>
+        <location filename="Views/SbieView.cpp" line="153"/>
         <source>Command Prompt (as Admin)</source>
         <translation>Prompt dei comandi (amministratore)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="156"/>
+        <location filename="Views/SbieView.cpp" line="157"/>
         <source>Command Prompt (32-bit)</source>
         <translation>Prompt dei comandi (32-bit)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="160"/>
+        <location filename="Views/SbieView.cpp" line="161"/>
         <source>Execute Autorun Entries</source>
         <translation>Esegui i comandi in Esecuzione automatica</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="279"/>
+        <location filename="Views/SbieView.cpp" line="280"/>
         <source>Browse Content</source>
         <translation>Sfoglia contenuto</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="165"/>
+        <location filename="Views/SbieView.cpp" line="166"/>
         <source>Box Content</source>
         <translation>Contenuto area virtuale</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="172"/>
+        <location filename="Views/SbieView.cpp" line="173"/>
         <source>Open Registry</source>
         <translation>Editor del Registro di sistema</translation>
     </message>
@@ -2815,19 +2816,19 @@ Scegliere No per selezionare: %2</translation>
         <translation type="vanished">Imposta ordine e gruppi</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="206"/>
-        <location filename="Views/SbieView.cpp" line="292"/>
+        <location filename="Views/SbieView.cpp" line="207"/>
+        <location filename="Views/SbieView.cpp" line="293"/>
         <source>Move Up</source>
         <translation>Sposta in alto</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="211"/>
-        <location filename="Views/SbieView.cpp" line="297"/>
+        <location filename="Views/SbieView.cpp" line="212"/>
+        <location filename="Views/SbieView.cpp" line="298"/>
         <source>Move Down</source>
         <translation>Sposta in basso</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="785"/>
+        <location filename="Views/SbieView.cpp" line="786"/>
         <source>Please enter a new name for the Group.</source>
         <translation>Immetti un nuovo nome per il gruppo.</translation>
     </message>
@@ -2836,130 +2837,130 @@ Scegliere No per selezionare: %2</translation>
         <translation type="vanished">Il nome del gruppo risulta già in uso.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="831"/>
+        <location filename="Views/SbieView.cpp" line="832"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation>Ordina le voci per (i valori negativi spostano verso l&apos;alto, quelli positivi verso il basso):</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="865"/>
+        <location filename="Views/SbieView.cpp" line="866"/>
         <source>A group can not be its own parent.</source>
         <translation>Un gruppo non può essere il proprio genitore.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="951"/>
+        <location filename="Views/SbieView.cpp" line="952"/>
         <source>This name is already used for a Box Group.</source>
         <translation>Questo nome è già stato utilizzato per un gruppo.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="956"/>
+        <location filename="Views/SbieView.cpp" line="957"/>
         <source>This name is already used for a Sandbox.</source>
         <translation>Questo nome è già stato utilizzato per un&apos;area virtuale.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1003"/>
-        <location filename="Views/SbieView.cpp" line="1067"/>
-        <location filename="Views/SbieView.cpp" line="1276"/>
+        <location filename="Views/SbieView.cpp" line="1004"/>
+        <location filename="Views/SbieView.cpp" line="1068"/>
+        <location filename="Views/SbieView.cpp" line="1277"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Non mostrare più questo messaggio.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1058"/>
-        <location filename="Views/SbieView.cpp" line="1078"/>
-        <location filename="Views/SbieView.cpp" line="1447"/>
+        <location filename="Views/SbieView.cpp" line="1059"/>
+        <location filename="Views/SbieView.cpp" line="1079"/>
+        <location filename="Views/SbieView.cpp" line="1448"/>
         <source>This Sandbox is empty.</source>
         <translation>L&apos;area virtuale è vuota.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1085"/>
+        <location filename="Views/SbieView.cpp" line="1086"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
         <oldsource>WARNING: The opened registry editor is not sand boxed, please be careful and only do changes to the pre-selected sandbox locations.</oldsource>
         <translation>ATTENZIONE: L&apos;Editor del Registro di sistema verrà aperto fuori dall&apos;area virtuale, si prega di effettuare modifiche solo nei percorsi delle aree virtuali.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1086"/>
+        <location filename="Views/SbieView.cpp" line="1087"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>Non mostrare questo avviso in futuro</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1141"/>
+        <location filename="Views/SbieView.cpp" line="1142"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>Immetti un nuovo nome per l&apos;area virtuale duplicata.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1141"/>
+        <location filename="Views/SbieView.cpp" line="1142"/>
         <source>%1 Copy</source>
         <translation>%1 Copia</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1181"/>
+        <location filename="Views/SbieView.cpp" line="1182"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>Immetti un nuovo nome per l&apos;area virtuale.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1197"/>
+        <location filename="Views/SbieView.cpp" line="1198"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <translation>Eliminare l&apos;area virtuale o le aree virtuali selezionate?&lt;br /&gt;&lt;br /&gt;Attenzione: Il contenuto verrà anch&apos;esso eliminato!</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1217"/>
+        <location filename="Views/SbieView.cpp" line="1218"/>
         <source>This Sandbox is already empty.</source>
         <translation>L&apos;area virtuale è già vuota.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1227"/>
+        <location filename="Views/SbieView.cpp" line="1228"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
         <translation>Eliminare il contenuto dell&apos;area virtuale selezionata?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1228"/>
-        <location filename="Views/SbieView.cpp" line="1232"/>
+        <location filename="Views/SbieView.cpp" line="1229"/>
+        <location filename="Views/SbieView.cpp" line="1233"/>
         <source>Also delete all Snapshots</source>
         <translation>Elimina anche tutte le istantanee</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1231"/>
+        <location filename="Views/SbieView.cpp" line="1232"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
         <translation>Eliminare il contenuto delle aree virtuali selezionate?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1258"/>
+        <location filename="Views/SbieView.cpp" line="1259"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>Chiudere tutti i processi?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1259"/>
-        <location filename="Views/SbieView.cpp" line="1347"/>
+        <location filename="Views/SbieView.cpp" line="1260"/>
+        <location filename="Views/SbieView.cpp" line="1348"/>
         <source>Terminate without asking</source>
         <translation>Termina senza chiedere</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1274"/>
+        <location filename="Views/SbieView.cpp" line="1275"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1309"/>
-        <location filename="Views/SbieView.cpp" line="1374"/>
+        <location filename="Views/SbieView.cpp" line="1310"/>
+        <location filename="Views/SbieView.cpp" line="1375"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Crea collegamento all&apos;area virtuale %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1346"/>
+        <location filename="Views/SbieView.cpp" line="1347"/>
         <source>Do you want to %1 %2?</source>
         <translation>Vuoi %1 %2?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1346"/>
+        <location filename="Views/SbieView.cpp" line="1347"/>
         <source>the selected processes</source>
         <translation>i processi selezionati</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1407"/>
+        <location filename="Views/SbieView.cpp" line="1408"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Quest&apos;area virtuale non dispone di restrizioni a Internet, vuoi attivarle?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1487"/>
+        <location filename="Views/SbieView.cpp" line="1488"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Quest&apos;area virtuale è disattivata, vuoi attivarla?</translation>
     </message>
@@ -3310,104 +3311,104 @@ Scegliere No per selezionare: %2</translation>
 <context>
     <name>CTraceView</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="180"/>
+        <location filename="Views/TraceView.cpp" line="181"/>
         <source>Show as task tree</source>
         <translation>Mostra come albero processi</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="187"/>
+        <location filename="Views/TraceView.cpp" line="188"/>
         <source>PID:</source>
         <translation>PID:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="189"/>
-        <location filename="Views/TraceView.cpp" line="196"/>
-        <location filename="Views/TraceView.cpp" line="204"/>
+        <location filename="Views/TraceView.cpp" line="190"/>
+        <location filename="Views/TraceView.cpp" line="197"/>
         <location filename="Views/TraceView.cpp" line="205"/>
-        <location filename="Views/TraceView.cpp" line="214"/>
-        <location filename="Views/TraceView.cpp" line="442"/>
-        <location filename="Views/TraceView.cpp" line="445"/>
-        <location filename="Views/TraceView.cpp" line="525"/>
+        <location filename="Views/TraceView.cpp" line="206"/>
+        <location filename="Views/TraceView.cpp" line="215"/>
+        <location filename="Views/TraceView.cpp" line="443"/>
+        <location filename="Views/TraceView.cpp" line="446"/>
+        <location filename="Views/TraceView.cpp" line="526"/>
         <source>[All]</source>
         <translation>[Tutti]</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="194"/>
+        <location filename="Views/TraceView.cpp" line="195"/>
         <source>TID:</source>
         <translation>TID:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="201"/>
+        <location filename="Views/TraceView.cpp" line="202"/>
         <source>Type:</source>
         <translation>Tipo:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="212"/>
+        <location filename="Views/TraceView.cpp" line="213"/>
         <source>Status:</source>
         <translation>Stato:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="215"/>
+        <location filename="Views/TraceView.cpp" line="216"/>
         <source>Open</source>
         <translation>Consentito</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="216"/>
+        <location filename="Views/TraceView.cpp" line="217"/>
         <source>Closed</source>
         <translation>Non consentito</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="217"/>
+        <location filename="Views/TraceView.cpp" line="218"/>
         <source>Trace</source>
         <translation>Tracciamento</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="218"/>
+        <location filename="Views/TraceView.cpp" line="219"/>
         <source>Other</source>
         <translation>Altro</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="226"/>
+        <location filename="Views/TraceView.cpp" line="227"/>
         <source>Show All Boxes</source>
         <translation>Mostra tutte le aree virtuali</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="233"/>
+        <location filename="Views/TraceView.cpp" line="234"/>
         <source>Save to file</source>
         <translation>Salva su file</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="247"/>
+        <location filename="Views/TraceView.cpp" line="248"/>
         <source>Cleanup Trace Log</source>
         <translation type="unfinished">Pulisci log di accesso</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="567"/>
+        <location filename="Views/TraceView.cpp" line="568"/>
         <source>Save trace log to file</source>
         <translation>Salva log su file</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="573"/>
+        <location filename="Views/TraceView.cpp" line="574"/>
         <source>Failed to open log file for writing</source>
         <translation>Impossibile aprire il file di log per la scrittura</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="597"/>
+        <location filename="Views/TraceView.cpp" line="598"/>
         <source>Unknown</source>
         <translation>Sconosciuto</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="494"/>
+        <location filename="Views/TraceView.cpp" line="495"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="176"/>
+        <location filename="Views/TraceView.cpp" line="177"/>
         <source>Monitor mode</source>
         <translation>Modalità monitor</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="501"/>
+        <location filename="Views/TraceView.cpp" line="502"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
@@ -3415,7 +3416,7 @@ Scegliere No per selezionare: %2</translation>
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="630"/>
+        <location filename="Views/TraceView.cpp" line="631"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4672,7 +4673,7 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1292"/>
+        <location filename="Views/SbieView.cpp" line="1293"/>
         <source>Drive %1</source>
         <translation>Unità %1</translation>
     </message>
@@ -4680,27 +4681,27 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="2585"/>
+        <location filename="SandMan.cpp" line="2576"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2586"/>
+        <location filename="SandMan.cpp" line="2577"/>
         <source>Apply</source>
         <translation>Applica</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2587"/>
+        <location filename="SandMan.cpp" line="2578"/>
         <source>Cancel</source>
         <translation>Annulla</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2588"/>
+        <location filename="SandMan.cpp" line="2579"/>
         <source>&amp;Yes</source>
         <translation>&amp;Sì</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2589"/>
+        <location filename="SandMan.cpp" line="2580"/>
         <source>&amp;No</source>
         <translation>&amp;No</translation>
     </message>
@@ -5049,8 +5050,9 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <translation>Opzioni generali</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="60"/>
         <source>Count and display the disk space occupied by each sandbox</source>
-        <translation type="vanished">Calcola e mostra lo spazio su disco occupato da ogni area virtuale</translation>
+        <translation>Calcola e mostra lo spazio su disco occupato da ogni area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="370"/>
@@ -5069,8 +5071,9 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="60"/>
-        <source>Count and display the disk space ocupied by each sandbox</source>
-        <translation type="unfinished"></translation>
+        <source>Count and display the disk space occupied by each sandbox</source>
+        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
+        <translation type="unfinished">Calcola e mostra lo spazio su disco occupato da ogni area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="203"/>
@@ -5085,11 +5088,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="395"/>
         <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="412"/>
-        <source>* indetermined means depanding on the view mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5135,6 +5133,11 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="405"/>
         <source>(Restart required)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="412"/>
+        <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

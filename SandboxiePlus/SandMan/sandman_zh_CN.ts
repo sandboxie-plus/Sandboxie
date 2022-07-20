@@ -40,7 +40,7 @@
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="300"/>
+        <location filename="Views/FileView.cpp" line="301"/>
         <source>%1 - Files</source>
         <translation>%1 - 文件</translation>
     </message>
@@ -48,27 +48,27 @@
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="139"/>
+        <location filename="Views/FileView.cpp" line="140"/>
         <source>Create Shortcut</source>
         <translation>创建快捷方式</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="145"/>
+        <location filename="Views/FileView.cpp" line="146"/>
         <source>Recover to Any Folder</source>
         <translation>恢复到任意文件夹</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="147"/>
+        <location filename="Views/FileView.cpp" line="148"/>
         <source>Recover to Same Folder</source>
         <translation>恢复到对应的目录</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="207"/>
+        <location filename="Views/FileView.cpp" line="208"/>
         <source>Select Directory</source>
         <translation>选择目录</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="257"/>
+        <location filename="Views/FileView.cpp" line="258"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>为沙盒 %1 创建快捷方式</translation>
     </message>
@@ -1016,22 +1016,22 @@ Full path: %4</source>
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="2595"/>
+        <location filename="SandMan.cpp" line="2586"/>
         <source>Waiting for folder: %1</source>
         <translation>正在等待文件夹: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2596"/>
+        <location filename="SandMan.cpp" line="2587"/>
         <source>Deleting folder: %1</source>
         <translation>正在删除文件夹: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2597"/>
+        <location filename="SandMan.cpp" line="2588"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>正在合并文件夹: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2598"/>
+        <location filename="SandMan.cpp" line="2589"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>正在完成快照合并...</translation>
     </message>
@@ -1103,22 +1103,22 @@ Full path: %4</source>
         <translation>Sandboxie-Plus v%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2499"/>
+        <location filename="SandMan.cpp" line="2490"/>
         <source>Reset Columns</source>
         <translation>重置列</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2500"/>
+        <location filename="SandMan.cpp" line="2491"/>
         <source>Copy Cell</source>
         <translation>复制此格</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2501"/>
+        <location filename="SandMan.cpp" line="2492"/>
         <source>Copy Row</source>
         <translation>复制此行</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2502"/>
+        <location filename="SandMan.cpp" line="2493"/>
         <source>Copy Panel</source>
         <translation>复制此表</translation>
     </message>
@@ -1171,8 +1171,9 @@ Full path: %4</source>
     </message>
     <message>
         <location filename="SandMan.cpp" line="370"/>
-        <source>Disable Message PopUp</source>
-        <translation>禁用消息弹窗</translation>
+        <source>Disable Message Popup</source>
+        <oldsource>Disable Message PopUp</oldsource>
+        <translation type="unfinished">禁用消息弹窗</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="304"/>
@@ -1398,7 +1399,7 @@ Full path: %4</source>
     </message>
     <message>
         <location filename="SandMan.cpp" line="353"/>
-        <location filename="SandMan.cpp" line="2569"/>
+        <location filename="SandMan.cpp" line="2560"/>
         <source>About Sandboxie-Plus</source>
         <translation>关于 Sandboxie-Plus</translation>
     </message>
@@ -1710,22 +1711,22 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 注意: 更新检查通常落后于 GitHub 释出的版本，以确保只提供经过测试的更新</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2542"/>
+        <location filename="SandMan.cpp" line="2533"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</source>
         <translation>&lt;h3&gt;关于 Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;版本 %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2550"/>
+        <location filename="SandMan.cpp" line="2541"/>
         <source>This copy of Sandboxie+ is certified for: %1</source>
         <translation>此 Sandboxie+ 副本已授权给: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2552"/>
+        <location filename="SandMan.cpp" line="2543"/>
         <source>Sandboxie+ is free for personal and non-commercial use.</source>
         <translation>Sandboxie+ 可免费用于个人和非商业用途</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2555"/>
+        <location filename="SandMan.cpp" line="2546"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>Sandboxie-Plus 是知名程序 Sandboxie 自开源以来的一个延续&lt;br /&gt;访问 &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; 来了解更多信息&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;驱动版本: %1&lt;br /&gt;特性: %2&lt;br /&gt;&lt;br /&gt;图标来源: &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
@@ -2401,510 +2402,510 @@ No will choose: %2</source>
 <context>
     <name>CSbieView</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="137"/>
-        <location filename="Views/SbieView.cpp" line="245"/>
+        <location filename="Views/SbieView.cpp" line="138"/>
+        <location filename="Views/SbieView.cpp" line="246"/>
         <source>Create New Box</source>
         <translation>新建沙盒</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="343"/>
+        <location filename="Views/SbieView.cpp" line="344"/>
         <source>Remove Group</source>
         <translation>移除组</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="145"/>
+        <location filename="Views/SbieView.cpp" line="146"/>
         <source>Run</source>
         <translation>运行</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="146"/>
+        <location filename="Views/SbieView.cpp" line="147"/>
         <source>Run Program</source>
         <translation>运行程序</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="147"/>
+        <location filename="Views/SbieView.cpp" line="148"/>
         <source>Run from Start Menu</source>
         <translation>从开始菜单运行</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="148"/>
+        <location filename="Views/SbieView.cpp" line="149"/>
         <source>Default Web Browser</source>
         <translation>默认浏览器</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="149"/>
+        <location filename="Views/SbieView.cpp" line="150"/>
         <source>Default eMail Client</source>
         <translation>默认电子邮件客户端</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="157"/>
+        <location filename="Views/SbieView.cpp" line="158"/>
         <source>Windows Explorer</source>
         <translation>Windows 文件资源管理器</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="158"/>
+        <location filename="Views/SbieView.cpp" line="159"/>
         <source>Registry Editor</source>
         <translation>注册表编辑器</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="159"/>
+        <location filename="Views/SbieView.cpp" line="160"/>
         <source>Programs and Features</source>
         <translation>程序和功能</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="163"/>
+        <location filename="Views/SbieView.cpp" line="164"/>
         <source>Terminate All Programs</source>
         <translation>终止所有程序</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="169"/>
-        <location filename="Views/SbieView.cpp" line="223"/>
-        <location filename="Views/SbieView.cpp" line="287"/>
-        <location filename="Views/SbieView.cpp" line="325"/>
+        <location filename="Views/SbieView.cpp" line="170"/>
+        <location filename="Views/SbieView.cpp" line="224"/>
+        <location filename="Views/SbieView.cpp" line="288"/>
+        <location filename="Views/SbieView.cpp" line="326"/>
         <source>Create Shortcut</source>
         <translation>创建快捷方式</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="171"/>
-        <location filename="Views/SbieView.cpp" line="273"/>
+        <location filename="Views/SbieView.cpp" line="172"/>
+        <location filename="Views/SbieView.cpp" line="274"/>
         <source>Explore Content</source>
         <translation>浏览内容</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="200"/>
-        <location filename="Views/SbieView.cpp" line="280"/>
+        <location filename="Views/SbieView.cpp" line="201"/>
+        <location filename="Views/SbieView.cpp" line="281"/>
         <source>Snapshots Manager</source>
         <translation>快照管理器</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="173"/>
+        <location filename="Views/SbieView.cpp" line="174"/>
         <source>Recover Files</source>
         <translation>文件恢复</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="174"/>
-        <location filename="Views/SbieView.cpp" line="272"/>
+        <location filename="Views/SbieView.cpp" line="175"/>
+        <location filename="Views/SbieView.cpp" line="273"/>
         <source>Delete Content</source>
         <translation>删除内容</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="178"/>
+        <location filename="Views/SbieView.cpp" line="179"/>
         <source>Sandbox Presets</source>
         <translation>预置配置</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="180"/>
+        <location filename="Views/SbieView.cpp" line="181"/>
         <source>Ask for UAC Elevation</source>
         <translation>询问 UAC 提权</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="181"/>
+        <location filename="Views/SbieView.cpp" line="182"/>
         <source>Drop Admin Rights</source>
         <translation>解除管理员权限</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="182"/>
+        <location filename="Views/SbieView.cpp" line="183"/>
         <source>Emulate Admin Rights</source>
         <translation>模拟管理员权限</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="190"/>
+        <location filename="Views/SbieView.cpp" line="191"/>
         <source>Block Internet Access</source>
         <translation>拦截网络访问</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="192"/>
+        <location filename="Views/SbieView.cpp" line="193"/>
         <source>Allow Network Shares</source>
         <translation>允许网络共享</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="176"/>
+        <location filename="Views/SbieView.cpp" line="177"/>
         <source>Sandbox Options</source>
         <translation>沙盒选项</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="166"/>
+        <location filename="Views/SbieView.cpp" line="167"/>
         <source>Browse Files</source>
         <translation>浏览文件</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="199"/>
-        <location filename="Views/SbieView.cpp" line="278"/>
+        <location filename="Views/SbieView.cpp" line="200"/>
+        <location filename="Views/SbieView.cpp" line="279"/>
         <source>Sandbox Tools</source>
         <translation>沙盒工具</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="202"/>
+        <location filename="Views/SbieView.cpp" line="203"/>
         <source>Duplicate Box Config</source>
         <translation>重复的沙盒配置</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="204"/>
-        <location filename="Views/SbieView.cpp" line="290"/>
+        <location filename="Views/SbieView.cpp" line="205"/>
+        <location filename="Views/SbieView.cpp" line="291"/>
         <source>Rename Sandbox</source>
         <translation>重命名沙盒</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="205"/>
-        <location filename="Views/SbieView.cpp" line="291"/>
+        <location filename="Views/SbieView.cpp" line="206"/>
+        <location filename="Views/SbieView.cpp" line="292"/>
         <source>Move Sandbox</source>
         <translation>移动沙盒</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="216"/>
-        <location filename="Views/SbieView.cpp" line="302"/>
+        <location filename="Views/SbieView.cpp" line="217"/>
+        <location filename="Views/SbieView.cpp" line="303"/>
         <source>Remove Sandbox</source>
         <translation>移除沙盒</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="221"/>
-        <location filename="Views/SbieView.cpp" line="323"/>
+        <location filename="Views/SbieView.cpp" line="222"/>
+        <location filename="Views/SbieView.cpp" line="324"/>
         <source>Terminate</source>
         <translation>终止</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="224"/>
+        <location filename="Views/SbieView.cpp" line="225"/>
         <source>Preset</source>
         <translation>预设</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="225"/>
+        <location filename="Views/SbieView.cpp" line="226"/>
         <source>Pin to Run Menu</source>
         <translation>固定到运行菜单</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="227"/>
+        <location filename="Views/SbieView.cpp" line="228"/>
         <source>Block and Terminate</source>
         <translation>阻止并终止</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="231"/>
+        <location filename="Views/SbieView.cpp" line="232"/>
         <source>Allow internet access</source>
         <translation>允许网络访问</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="233"/>
+        <location filename="Views/SbieView.cpp" line="234"/>
         <source>Force into this sandbox</source>
         <translation>强制入此沙盒</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="235"/>
+        <location filename="Views/SbieView.cpp" line="236"/>
         <source>Set Linger Process</source>
         <translation>设置驻留进程</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="237"/>
+        <location filename="Views/SbieView.cpp" line="238"/>
         <source>Set Leader Process</source>
         <translation>设置引导进程</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="473"/>
+        <location filename="Views/SbieView.cpp" line="474"/>
         <source>    File root: %1
 </source>
         <translation>    文件根目录: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="474"/>
+        <location filename="Views/SbieView.cpp" line="475"/>
         <source>    Registry root: %1
 </source>
         <translation>    注册表根: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="475"/>
+        <location filename="Views/SbieView.cpp" line="476"/>
         <source>    IPC root: %1
 </source>
         <translation>    IPC 根: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="477"/>
+        <location filename="Views/SbieView.cpp" line="478"/>
         <source>Options:
     </source>
         <translation>选项:
     </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="694"/>
+        <location filename="Views/SbieView.cpp" line="695"/>
         <source>[None]</source>
         <translation>[无]</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="924"/>
+        <location filename="Views/SbieView.cpp" line="925"/>
         <source>Please enter a new group name</source>
         <translation>请输入新的组名</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="795"/>
+        <location filename="Views/SbieView.cpp" line="796"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation>确定要移除选中的组吗？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="138"/>
-        <location filename="Views/SbieView.cpp" line="246"/>
+        <location filename="Views/SbieView.cpp" line="139"/>
+        <location filename="Views/SbieView.cpp" line="247"/>
         <source>Create Box Group</source>
         <translation>新建沙盒组</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="341"/>
+        <location filename="Views/SbieView.cpp" line="342"/>
         <source>Rename Group</source>
         <translation>重命名组</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="142"/>
-        <location filename="Views/SbieView.cpp" line="250"/>
+        <location filename="Views/SbieView.cpp" line="143"/>
+        <location filename="Views/SbieView.cpp" line="251"/>
         <source>Stop Operations</source>
         <translation>停止作业</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="150"/>
+        <location filename="Views/SbieView.cpp" line="151"/>
         <source>Command Prompt</source>
         <translation>命令提示符</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="151"/>
+        <location filename="Views/SbieView.cpp" line="152"/>
         <source>Boxed Tools</source>
         <translation>沙盒工具</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="152"/>
+        <location filename="Views/SbieView.cpp" line="153"/>
         <source>Command Prompt (as Admin)</source>
         <translation>命令提示符 (管理员)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="156"/>
+        <location filename="Views/SbieView.cpp" line="157"/>
         <source>Command Prompt (32-bit)</source>
         <translation>命令提示符 (32 位)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="160"/>
+        <location filename="Views/SbieView.cpp" line="161"/>
         <source>Execute Autorun Entries</source>
         <translation>运行自动运行项目</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="279"/>
+        <location filename="Views/SbieView.cpp" line="280"/>
         <source>Browse Content</source>
         <translation>浏览内容</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="165"/>
+        <location filename="Views/SbieView.cpp" line="166"/>
         <source>Box Content</source>
         <translation>沙盒内容</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="172"/>
+        <location filename="Views/SbieView.cpp" line="173"/>
         <source>Open Registry</source>
         <translation>打开注册表</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="168"/>
-        <location filename="Views/SbieView.cpp" line="286"/>
+        <location filename="Views/SbieView.cpp" line="169"/>
+        <location filename="Views/SbieView.cpp" line="287"/>
         <source>Refresh Info</source>
         <translation>刷新信息</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="196"/>
+        <location filename="Views/SbieView.cpp" line="197"/>
         <source>Immediate Recovery</source>
         <translation>立即恢复</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="206"/>
-        <location filename="Views/SbieView.cpp" line="292"/>
+        <location filename="Views/SbieView.cpp" line="207"/>
+        <location filename="Views/SbieView.cpp" line="293"/>
         <source>Move Up</source>
         <translation>上移</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="211"/>
-        <location filename="Views/SbieView.cpp" line="297"/>
+        <location filename="Views/SbieView.cpp" line="212"/>
+        <location filename="Views/SbieView.cpp" line="298"/>
         <source>Move Down</source>
         <translation>下移</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="253"/>
+        <location filename="Views/SbieView.cpp" line="254"/>
         <source>Run Sandboxed</source>
         <translation>运行</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="254"/>
+        <location filename="Views/SbieView.cpp" line="255"/>
         <source>Run Web Browser</source>
         <translation>默认浏览器</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="255"/>
+        <location filename="Views/SbieView.cpp" line="256"/>
         <source>Run eMail Reader</source>
         <translation>默认电子邮件客户端</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="256"/>
+        <location filename="Views/SbieView.cpp" line="257"/>
         <source>Run Any Program</source>
         <translation>运行程序</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="257"/>
+        <location filename="Views/SbieView.cpp" line="258"/>
         <source>Run From Start Menu</source>
         <translation>从开始菜单运行</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="258"/>
+        <location filename="Views/SbieView.cpp" line="259"/>
         <source>Run Windows Explorer</source>
         <translation>Windows 资源管理器</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="270"/>
+        <location filename="Views/SbieView.cpp" line="271"/>
         <source>Terminate Programs</source>
         <translation>终止程序</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="271"/>
+        <location filename="Views/SbieView.cpp" line="272"/>
         <source>Quick Recover</source>
         <translation>快速恢复</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="276"/>
+        <location filename="Views/SbieView.cpp" line="277"/>
         <source>Sandbox Settings</source>
         <translation>沙盒配置</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="283"/>
+        <location filename="Views/SbieView.cpp" line="284"/>
         <source>Duplicate Sandbox Config</source>
         <translation>重复的沙盒配置</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="342"/>
+        <location filename="Views/SbieView.cpp" line="343"/>
         <source>Move Group</source>
         <translation>移动组</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="785"/>
+        <location filename="Views/SbieView.cpp" line="786"/>
         <source>Please enter a new name for the Group.</source>
         <translation>为此组指定新的名称</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="831"/>
+        <location filename="Views/SbieView.cpp" line="832"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation>将项目移动的距离(负数向上移动，正数向下移动):</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="865"/>
+        <location filename="Views/SbieView.cpp" line="866"/>
         <source>A group can not be its own parent.</source>
         <translation>组不能是自己的父级</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="951"/>
+        <location filename="Views/SbieView.cpp" line="952"/>
         <source>This name is already used for a Box Group.</source>
         <translation>名称已被用于现有的其它沙盒组</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="956"/>
+        <location filename="Views/SbieView.cpp" line="957"/>
         <source>This name is already used for a Sandbox.</source>
         <translation>名称已被用于现有的其它沙盒</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1003"/>
-        <location filename="Views/SbieView.cpp" line="1067"/>
-        <location filename="Views/SbieView.cpp" line="1276"/>
+        <location filename="Views/SbieView.cpp" line="1004"/>
+        <location filename="Views/SbieView.cpp" line="1068"/>
+        <location filename="Views/SbieView.cpp" line="1277"/>
         <source>Don&apos;t show this message again.</source>
         <translation>不再显示此消息</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1058"/>
-        <location filename="Views/SbieView.cpp" line="1078"/>
-        <location filename="Views/SbieView.cpp" line="1447"/>
+        <location filename="Views/SbieView.cpp" line="1059"/>
+        <location filename="Views/SbieView.cpp" line="1079"/>
+        <location filename="Views/SbieView.cpp" line="1448"/>
         <source>This Sandbox is empty.</source>
         <translation>此沙盒是空的</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1085"/>
+        <location filename="Views/SbieView.cpp" line="1086"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
         <translation>警告：打开的注册表编辑器未沙盒化，请审慎且仅对预先选定的沙盒节点进行修改</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1086"/>
+        <location filename="Views/SbieView.cpp" line="1087"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>不再显示此警告</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1141"/>
+        <location filename="Views/SbieView.cpp" line="1142"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>请为此复制的沙盒输入一个新名称</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1141"/>
+        <location filename="Views/SbieView.cpp" line="1142"/>
         <source>%1 Copy</source>
         <translatorcomment>沙盒名称只能包含字母、数字和下划线，不应对此处的文本进行翻译！</translatorcomment>
         <translation>%1 Copy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1181"/>
+        <location filename="Views/SbieView.cpp" line="1182"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>请为该沙盒输入新名称</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1197"/>
+        <location filename="Views/SbieView.cpp" line="1198"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <translation>确定要删除选中的沙盒？&lt;br /&gt;&lt;br /&gt;警告：沙盒内的内容也将被删除！</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1217"/>
+        <location filename="Views/SbieView.cpp" line="1218"/>
         <source>This Sandbox is already empty.</source>
         <translation>此沙盒已清空</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1227"/>
+        <location filename="Views/SbieView.cpp" line="1228"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
         <translation>确定要删除选中沙盒的内容吗？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1228"/>
-        <location filename="Views/SbieView.cpp" line="1232"/>
+        <location filename="Views/SbieView.cpp" line="1229"/>
+        <location filename="Views/SbieView.cpp" line="1233"/>
         <source>Also delete all Snapshots</source>
         <translation>同时删除所有快照</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1231"/>
+        <location filename="Views/SbieView.cpp" line="1232"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
         <translation>你真的想删除所有选定的沙盒的内容吗？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1258"/>
+        <location filename="Views/SbieView.cpp" line="1259"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>确定要终止所选沙盒中的所有进程吗？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1259"/>
-        <location filename="Views/SbieView.cpp" line="1347"/>
+        <location filename="Views/SbieView.cpp" line="1260"/>
+        <location filename="Views/SbieView.cpp" line="1348"/>
         <source>Terminate without asking</source>
         <translation>终止且不再询问</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1274"/>
+        <location filename="Views/SbieView.cpp" line="1275"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <translation>现在将显示 Sandboxie 开始菜单。从菜单中选择一个应用程序，Sandboxie 将在真实桌面上创建一个新的快捷方式图标，你可以用它来调用受 Sandboxie 监督的所选应用程序。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1309"/>
-        <location filename="Views/SbieView.cpp" line="1374"/>
+        <location filename="Views/SbieView.cpp" line="1310"/>
+        <location filename="Views/SbieView.cpp" line="1375"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>为沙盒 %1 创建快捷方式</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1346"/>
+        <location filename="Views/SbieView.cpp" line="1347"/>
         <source>Do you want to %1 %2?</source>
         <translation>确定要%1 %2 吗？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1346"/>
+        <location filename="Views/SbieView.cpp" line="1347"/>
         <source>the selected processes</source>
         <translation>选中的进程</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1407"/>
+        <location filename="Views/SbieView.cpp" line="1408"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>此沙盒无互联网限制，确定启用吗？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1487"/>
+        <location filename="Views/SbieView.cpp" line="1488"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>此沙盒已禁用，确定启用吗？</translation>
     </message>
@@ -3237,104 +3238,104 @@ No will choose: %2</source>
 <context>
     <name>CTraceView</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="176"/>
+        <location filename="Views/TraceView.cpp" line="177"/>
         <source>Monitor mode</source>
         <translation>监控模式</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="180"/>
+        <location filename="Views/TraceView.cpp" line="181"/>
         <source>Show as task tree</source>
         <translation>显示为任务树</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="187"/>
+        <location filename="Views/TraceView.cpp" line="188"/>
         <source>PID:</source>
         <translation>进程 PID：</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="189"/>
-        <location filename="Views/TraceView.cpp" line="196"/>
-        <location filename="Views/TraceView.cpp" line="204"/>
+        <location filename="Views/TraceView.cpp" line="190"/>
+        <location filename="Views/TraceView.cpp" line="197"/>
         <location filename="Views/TraceView.cpp" line="205"/>
-        <location filename="Views/TraceView.cpp" line="214"/>
-        <location filename="Views/TraceView.cpp" line="442"/>
-        <location filename="Views/TraceView.cpp" line="445"/>
-        <location filename="Views/TraceView.cpp" line="525"/>
+        <location filename="Views/TraceView.cpp" line="206"/>
+        <location filename="Views/TraceView.cpp" line="215"/>
+        <location filename="Views/TraceView.cpp" line="443"/>
+        <location filename="Views/TraceView.cpp" line="446"/>
+        <location filename="Views/TraceView.cpp" line="526"/>
         <source>[All]</source>
         <translation>[所有]</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="194"/>
+        <location filename="Views/TraceView.cpp" line="195"/>
         <source>TID:</source>
         <translation>线程 TID：</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="201"/>
+        <location filename="Views/TraceView.cpp" line="202"/>
         <source>Type:</source>
         <translation>类型：</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="212"/>
+        <location filename="Views/TraceView.cpp" line="213"/>
         <source>Status:</source>
         <translation>状态：</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="215"/>
+        <location filename="Views/TraceView.cpp" line="216"/>
         <source>Open</source>
         <translation>开放</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="216"/>
+        <location filename="Views/TraceView.cpp" line="217"/>
         <source>Closed</source>
         <translation>封禁</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="217"/>
+        <location filename="Views/TraceView.cpp" line="218"/>
         <source>Trace</source>
         <translation>跟踪</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="218"/>
+        <location filename="Views/TraceView.cpp" line="219"/>
         <source>Other</source>
         <translation>其它</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="226"/>
+        <location filename="Views/TraceView.cpp" line="227"/>
         <source>Show All Boxes</source>
         <translation>显示所有沙盒</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="233"/>
+        <location filename="Views/TraceView.cpp" line="234"/>
         <source>Save to file</source>
         <translation>保存到文件</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="247"/>
+        <location filename="Views/TraceView.cpp" line="248"/>
         <source>Cleanup Trace Log</source>
         <translation>清理跟踪日志</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="567"/>
+        <location filename="Views/TraceView.cpp" line="568"/>
         <source>Save trace log to file</source>
         <translation>保存跟踪日志到文件</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="573"/>
+        <location filename="Views/TraceView.cpp" line="574"/>
         <source>Failed to open log file for writing</source>
         <translation>无法打开日志文件进行写入</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="597"/>
+        <location filename="Views/TraceView.cpp" line="598"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="494"/>
+        <location filename="Views/TraceView.cpp" line="495"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="501"/>
+        <location filename="Views/TraceView.cpp" line="502"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
@@ -3342,7 +3343,7 @@ No will choose: %2</source>
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="630"/>
+        <location filename="Views/TraceView.cpp" line="631"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation>Sandboxie-Plus - 跟踪监测</translation>
     </message>
@@ -4592,7 +4593,7 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1292"/>
+        <location filename="Views/SbieView.cpp" line="1293"/>
         <source>Drive %1</source>
         <translation>磁盘 %1</translation>
     </message>
@@ -4600,27 +4601,27 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="2585"/>
+        <location filename="SandMan.cpp" line="2576"/>
         <source>OK</source>
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2586"/>
+        <location filename="SandMan.cpp" line="2577"/>
         <source>Apply</source>
         <translation>应用</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2587"/>
+        <location filename="SandMan.cpp" line="2578"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2588"/>
+        <location filename="SandMan.cpp" line="2579"/>
         <source>&amp;Yes</source>
         <translation>是(&amp;Y)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2589"/>
+        <location filename="SandMan.cpp" line="2580"/>
         <source>&amp;No</source>
         <translation>否(&amp;N)</translation>
     </message>
@@ -5012,8 +5013,9 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="60"/>
-        <source>Count and display the disk space ocupied by each sandbox</source>
-        <translation>统计并显示每个沙盒的磁盘空间占用情况</translation>
+        <source>Count and display the disk space occupied by each sandbox</source>
+        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
+        <translation type="unfinished">统计并显示每个沙盒的磁盘空间占用情况</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="203"/>
@@ -5031,9 +5033,8 @@ Please note that this values are currently user specific and saved globally for 
         <translation>在沙盒列表中显示“披萨”背景 *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="412"/>
         <source>* indetermined means depanding on the view mode</source>
-        <translation>带 * 标选项的展示效果取决于具体的视图模式</translation>
+        <translation type="vanished">带 * 标选项的展示效果取决于具体的视图模式</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="419"/>
@@ -5079,6 +5080,11 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="405"/>
         <source>(Restart required)</source>
         <translation>(需要重启沙盒)</translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="412"/>
+        <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="723"/>

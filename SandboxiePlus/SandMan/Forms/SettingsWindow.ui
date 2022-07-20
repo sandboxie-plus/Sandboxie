@@ -409,7 +409,7 @@
            <item row="10" column="2" colspan="2">
             <widget class="QLabel" name="label_11">
              <property name="text">
-              <string>* results may vary depending on the view mode</string>
+              <string>* a partially checked checkbox will leave the behavior to be determined by the view mode.</string>
              </property>
             </widget>
            </item>

@@ -70,27 +70,27 @@
     <message>
         <location filename="Views/FileView.cpp" line="140"/>
         <source>Create Shortcut</source>
-        <translation type="unfinished">Verknüpfung erstellen</translation>
+        <translation>Verknüpfung erstellen</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="146"/>
         <source>Recover to Any Folder</source>
-        <translation type="unfinished">Wiederherstellen in einen Ordner</translation>
+        <translation>Wiederherstellen in einen Ordner</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="148"/>
         <source>Recover to Same Folder</source>
-        <translation type="unfinished">Wiederherstellen in gleichen Ordner</translation>
+        <translation>Wiederherstellen in gleichen Ordner</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="208"/>
         <source>Select Directory</source>
-        <translation type="unfinished">Ordner auswählen</translation>
+        <translation>Ordner auswählen</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="258"/>
         <source>Create Shortcut to sandbox %1</source>
-        <translation type="unfinished">Verknüpfung zu Sandbox %1 erstellen</translation>
+        <translation>Verknüpfung zu Sandbox %1 erstellen</translation>
     </message>
 </context>
 <context>
@@ -987,22 +987,22 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandManRecovery.cpp" line="188"/>
         <source>Sandboxie-Plus - Recovery Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Wiederherstellungsprotokoll</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="196"/>
         <source>Time|Box Name|File Path</source>
-        <translation type="unfinished">Zeit|Boxname|Dateipfad</translation>
+        <translation>Zeit|Boxname|Dateipfad</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="198"/>
         <source>Cleanup Recovery Log</source>
-        <translation type="unfinished">Wiederherstellungsprotokoll aufräumen</translation>
+        <translation>Wiederherstellungsprotokoll aufräumen</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="208"/>
         <source>the following files were recently recovered and moved out of a sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>die folgenden Dateien wurden kürzlich wiederhergestellt und aus einer Sandbox verschoben.</translation>
     </message>
 </context>
 <context>
@@ -1066,7 +1066,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="235"/>
         <source>Do you really want to delete %1 selected files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie die ausgewählten Dateien %1 wirklich löschen?</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="262"/>
@@ -1268,7 +1268,7 @@ Vollständiger Pfad: %4</translation>
         <location filename="SandMan.cpp" line="370"/>
         <source>Disable Message Popup</source>
         <oldsource>Disable Message PopUp</oldsource>
-        <translation type="unfinished">Deaktiviere Nachrichten-PopUp</translation>
+        <translation>Deaktiviere Nachrichten-Popup</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="304"/>
@@ -1354,7 +1354,7 @@ Vollständiger Pfad: %4</translation>
         <location filename="SandMan.cpp" line="378"/>
         <location filename="SandMan.cpp" line="495"/>
         <source>Is Window Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Ist Fenster sangeboxt</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="401"/>
@@ -1427,57 +1427,57 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="422"/>
         <source>Show File Panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Dateipanel</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="484"/>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Datei</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="496"/>
         <source>Resource Access Monitor</source>
-        <translation type="unfinished">Ressourcenzugriffsmonitor</translation>
+        <translation>Ressourcenzugriffsmonitor</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="528"/>
         <source>Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Programme</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="529"/>
         <source>Files and Folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateien und Ordner</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="554"/>
         <source>Create New Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Sandbox erstellen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="555"/>
         <source>Create New Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Gruppe erstellen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="558"/>
         <source>Set Container Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Setze Containerordner</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="561"/>
         <source>Set Layout and Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Setze Layout und Gruppen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="564"/>
         <source>Reveal Hidden Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige versteckte Boxen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="570"/>
         <source>&amp;Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Konfigurieren</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="574"/>
@@ -1492,17 +1492,17 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="578"/>
         <source>Software Compatibility</source>
-        <translation type="unfinished">Softwarekompatibilität</translation>
+        <translation>Softwarekompatibilität</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="587"/>
         <source>Lock Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Sperre Konfiguration</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="604"/>
         <source>Sandbox %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="667"/>
@@ -2858,52 +2858,52 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Views/SbieView.cpp" line="254"/>
         <source>Run Sandboxed</source>
-        <translation type="unfinished">In Sandbox starten</translation>
+        <translation>Starte sandgeboxt</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="256"/>
         <source>Run eMail Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte E-Mailclient</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="257"/>
         <source>Run Any Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte ein Programm</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="258"/>
         <source>Run From Start Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte aus dem Startmenü</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="259"/>
         <source>Run Windows Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte Windows Explorer</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="271"/>
         <source>Terminate Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Programme beenden</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="272"/>
         <source>Quick Recover</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnellwiederherstellung</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="277"/>
         <source>Sandbox Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxeinstellungen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="284"/>
         <source>Duplicate Sandbox Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Dupliziere Sandboxkonfiguration</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="343"/>
         <source>Move Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewege Gruppe</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="786"/>
@@ -3098,24 +3098,24 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Views/SbieView.cpp" line="167"/>
         <source>Browse Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateien durchsuchen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="200"/>
         <location filename="Views/SbieView.cpp" line="279"/>
         <source>Sandbox Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxwerkzeuge</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="203"/>
         <source>Duplicate Box Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Dupliziere Boxkonfiguration</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="206"/>
         <location filename="Views/SbieView.cpp" line="292"/>
         <source>Move Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewege Sandbox</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1182"/>

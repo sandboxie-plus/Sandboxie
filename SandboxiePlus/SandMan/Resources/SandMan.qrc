@@ -73,6 +73,10 @@
         <file>Actions/UnPackBox.png</file>
         <file>Actions/PackBox.png</file>
         <file>Actions/GUI.png</file>
+        <file>Actions/Wizard.png</file>
+        <file>Actions/Magic.png</file>
+        <file>Actions/Update.png</file>
+        <file>Actions/Install.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

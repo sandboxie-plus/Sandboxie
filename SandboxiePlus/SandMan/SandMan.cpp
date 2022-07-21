@@ -317,7 +317,8 @@ void CSandMan::CreateMaintenanceMenu()
 				m_pStopSvc = m_pMaintenanceItems->addAction(tr("Stop Service"), this, SLOT(OnMaintenance()));
 				m_pUninstallSvc = m_pMaintenanceItems->addAction(tr("Uninstall Service"), this, SLOT(OnMaintenance()));
 			m_pMaintenance->addSeparator();
-			m_pSetupWizard = m_pMaintenance->addAction(CSandMan::GetIcon("Software"), tr("Setup Wizard"), this, SLOT(OnMaintenance()));
+			m_pSetupWizard = m_pMaintenance->addAction(CSandMan::GetIcon("Wizard"), tr("Setup Wizard"), this, SLOT(OnMaintenance()));
+			//m_pUpdateCore = m_pMaintenance->addAction(CSandMan::GetIcon("Install"), tr("Update Core Files"), this, SLOT(OnMaintenance()));
 			if(theGUI->IsFullyPortable())
 				m_pUninstallAll = m_pMaintenance->addAction(CSandMan::GetIcon("Uninstall"), tr("Uninstall All"), this, SLOT(OnMaintenance()));
 }
@@ -395,6 +396,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 			m_pStopAll = NULL;
 			m_pUninstallAll = NULL;
 			m_pSetupWizard = NULL;
+			//m_pUpdateCore = NULL;
 	}
 				
 		m_pMenuFile->addSeparator();
@@ -515,6 +517,7 @@ void CSandMan::CreateOldMenus()
 				m_pStopAll = NULL;
 				m_pUninstallAll = NULL;
 				m_pSetupWizard = NULL;
+				//m_pUpdateCore = NULL;
 		}
 			
 		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Exit"), this, SLOT(OnExit()));
@@ -1837,6 +1840,16 @@ void CSandMan::OnMaintenance()
 	else if (sender() == m_pUninstallSvc)
 		Status = CSbieUtils::Uninstall(CSbieUtils::eService);
 
+	else if (sender() == m_pSetupWizard) {
+		CSetupWizard::ShowWizard();
+		return;
+	}
+
+	//else if (sender() == m_pUpdateCore) {
+	//	// todo	
+	//	return;
+	//}
+
 	// uninstall	
 	else if (sender() == m_pUninstallAll) {
 
@@ -1848,10 +1861,7 @@ void CSandMan::OnMaintenance()
 		CSbieUtils::RemoveContextMenu2();
 	}
 
-	else if (sender() == m_pSetupWizard) {
-		CSetupWizard::ShowWizard();
-		return;
-	}
+
 
 	HandleMaintenance(Status);
 }
@@ -2129,6 +2139,9 @@ void CSandMan::OnResetGUI()
 	theConf->DelValue("SelectBoxWindow/Window_Geometry");
 	theConf->DelValue("SettingsWindow/Window_Geometry");
 	theConf->DelValue("SnapshotsWindow/Window_Geometry");
+
+//	theConf->SetValue("Options/DPIScaling", 1);
+	theConf->SetValue("Options/FontScaling", 100);
 
 	LoadState();
 

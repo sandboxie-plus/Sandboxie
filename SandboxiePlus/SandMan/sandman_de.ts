@@ -1348,7 +1348,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="330"/>
         <source>Vintage View (like SbieCtrl)</source>
-        <translation type="unfinished"></translation>
+        <translation>Klassische Ansicht (wie SbieCtrl)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="378"/>
@@ -1482,12 +1482,12 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="574"/>
         <source>Program Alerts</source>
-        <translation type="unfinished"></translation>
+        <translation>Programmbenachrichtigungen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="576"/>
         <source>Windows Shell Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Menüintergration</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="578"/>
@@ -2212,12 +2212,12 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="2004"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Im Plus-UI wurde diese Funktionalität in die Hauptliistenansicht der Sandboxen integriert.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2005"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit dem Box/Gruppenkontextmenü können Sie Boxen und Gruppen zu anderen Gruppen bewegen. Sie können die Elemente auch per Ziehen und Loslassen bewegen. Alternativ können Sie die Pfeiltasten nutzen, während Sie ALT gedrückt halten, um die Elemente innerhalb ihrer Gruppe rauf und runter zu bewegen.&lt;br /&gt;Sie können neue Boxen und Gruppen aus dem Sandboxmenü erstellen.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2190"/>
@@ -3191,7 +3191,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <location filename="Windows/SettingsWindow.cpp" line="112"/>
         <source>Don&apos;t show any icon</source>
         <oldsource>Don&apos;t integrate links</oldsource>
-        <translation type="unfinished">Kein Icon anzeigen</translation>
+        <translation>Kein Icon anzeigen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="113"/>
@@ -3236,23 +3236,23 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="125"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="126"/>
         <source>Native</source>
-        <translation type="unfinished"></translation>
+        <translation>Nativ</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="127"/>
         <source>Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="131"/>
         <source>%1</source>
         <oldsource>%1 %</oldsource>
-        <translation type="unfinished">%1</translation>
+        <translation>%1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="278"/>
@@ -3571,7 +3571,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Views/TraceView.cpp" line="248"/>
         <source>Cleanup Trace Log</source>
-        <translation type="unfinished">Rückverfolgungsprotokoll aufräumen</translation>
+        <translation>Rückverfolgungsprotokoll aufräumen</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="568"/>
@@ -3609,7 +3609,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Views/TraceView.cpp" line="631"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Rückverfolgungsmonitor</translation>
     </message>
 </context>
 <context>
@@ -3637,7 +3637,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="282"/>
         <source>&amp;Vintage SbieCtrl.exe UI</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Klassisches SbieCtrl.exe UI</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="307"/>
@@ -3647,7 +3647,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="311"/>
         <source>Use Dark Mode</source>
-        <translation>Nutze dunkelen Modus</translation>
+        <translation>Nutze dunklen Modus</translation>
     </message>
 </context>
 <context>
@@ -5053,7 +5053,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="142"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="171"/>
@@ -5377,67 +5377,67 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="203"/>
         <source>Use Compact Box List</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende kompakte Boxliste</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="387"/>
         <source>Interface Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Oberflächenkonfiguration</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="395"/>
         <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige &quot;Pizza&quot;-Hintergrung in der Boxliste*</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="419"/>
         <source>Make Box Icons match the Border Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Box-Iconfarbe mit der Rahmenfarbe angleichen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="426"/>
         <source>Use a Page Tree in the Box Options instead of Nested Tabs *</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende eine Baumstruktur in den Boxoptionen anstelle von verschachtelten Reitern *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="443"/>
         <source>Interface Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Oberflächenoptionen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="466"/>
         <source>Use large icons in box list *</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende große Icons in der Boxliste *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="476"/>
         <source>High DPI Scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Hohe DPI-Skalierung</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>
         <source>Don&apos;t show icons in menus *</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Icons in den Menüs anzeigen *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="503"/>
         <source>Use Dark Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Nutze dunklen Modus</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="513"/>
         <source>Font Scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftartenskalierung</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="405"/>
         <source>(Restart required)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Erfordert Neustart)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="412"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>* eine teilweise angehakte Checkbox macht das Verhalten abhängig von dem Ansichtsmodus.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="670"/>
@@ -5447,7 +5447,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="723"/>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende einen Sandboxie-Login anstelle eines anonymen Token (experimentell)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="733"/>

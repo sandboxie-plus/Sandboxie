@@ -477,7 +477,7 @@ _FX LONGLONG KphGetDate(CSHORT days, CSHORT months, CSHORT years)
 
 _FX LONGLONG KphGetDateInterval(CSHORT days, CSHORT months, CSHORT years)
 {
-    return ((LONGLONG)days + (LONGLONG)months * 30ll + (LONGLONG)years * 365ll) + 24ll * 3600ll * 10000000ll; // 100ns steps -> 1sec
+    return ((LONGLONG)days + (LONGLONG)months * 30ll + (LONGLONG)years * 365ll) * 24ll * 3600ll * 10000000ll; // 100ns steps -> 1sec
 }
 
 #define SOFTWARE_NAME L"Sandboxie-Plus"

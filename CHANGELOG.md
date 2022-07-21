@@ -5,12 +5,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.2.4 / 5.57.4] - 2022-07-??
+## [1.2.4 / 5.57.4] - 2022-07-21
 
 ### Added
 - added delete button to the recovery window [#2024](https://github.com/sandboxie-plus/Sandboxie/issues/2024)
 
 ### Changed
+- improved tree selection display
 
 ### Fixed
 - fixed issues with file panel

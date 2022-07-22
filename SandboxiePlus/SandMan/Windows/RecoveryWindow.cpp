@@ -243,7 +243,8 @@ void CRecoveryWindow::OnDelete()
 
 void CRecoveryWindow::OnDeleteAll()
 {
-	accept();
+	this->setResult(1);
+	this->close();
 }
 
 void CRecoveryWindow::OnDeleteEverything()

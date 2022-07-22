@@ -8,6 +8,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - improved a few icons
 
+### Fixed
+- fixed certificate validation issue
+
 
 ## [1.2.4 / 5.57.4] - 2022-07-21
 

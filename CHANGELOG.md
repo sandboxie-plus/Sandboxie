@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.2.5 / 5.57.5] - 2022-07-22
+
+### Changed
+- improved a few icons
+
+### Fixed
+- fixed certificate validation issue
 
 
 ## [1.2.4 / 5.57.4] - 2022-07-21

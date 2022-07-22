@@ -966,6 +966,11 @@ void CSbieView::OnSandBoxAction()
 	OnSandBoxAction(qobject_cast<QAction*>(sender()), m_CurSandBoxes);
 }
 
+void CSbieView::OnSandBoxAction(QAction* pAction)
+{
+	OnSandBoxAction(pAction, m_CurSandBoxes);
+}
+
 void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandBoxes)
 {
 	QList<SB_STATUS> Results;

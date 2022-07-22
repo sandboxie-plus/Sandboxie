@@ -50,6 +50,7 @@ private slots:
 	void						OnGroupAction();
 	void						OnGroupAction(QAction* pAction);
 	void						OnSandBoxAction();
+	void						OnSandBoxAction(QAction* pAction);
 	void						OnSandBoxAction(QAction* pAction, const QList<CSandBoxPtr>& SandBoxes);
 	void						OnProcessAction();
 	void						OnProcessAction(QAction* pAction, const QList<CBoxedProcessPtr>& Processes);

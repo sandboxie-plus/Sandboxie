@@ -3,6 +3,20 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+
+
+## [1.2.5b / 5.57.5] - 2022-07-22
+
+### Changed
+- improved a few icons
+
+### Fixed
+- fixed issue with delete all button [#2043](https://github.com/sandboxie-plus/Sandboxie/issues/2043)
+- fixed issue with box prefs [#2046](https://github.com/sandboxie-plus/Sandboxie/issues/2046)
+
+
+
+
 ## [1.2.5 / 5.57.5] - 2022-07-22
 
 ### Changed

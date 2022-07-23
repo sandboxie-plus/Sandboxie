@@ -176,9 +176,17 @@ body:
     attributes:
       label: Crash dump
       description: |
-        If applicable, provide a direct link containing the .dmp file for your crash issue!
-
-        Tip: You need to upload it on a file storage service, then share the resulting link below.
+        If applicable, provide a direct link containing the .dmp file(s) for your crash issue!
+        
+        List of crash dump locations:
+        ```
+        C:\Users\%Username%\AppData\Local\CrashDumps
+        C:\Windows\Minidump
+        C:\Sandbox\%User%\DefaultBox\user\current\AppData\Local\CrashDumps
+        C:\Sandbox\%USER%\%SANDBOX% (only if you previously set EnableMiniDump=y on your sandbox configuration)
+        ```
+        
+        Tip: You can upload the .dmp file(s) on a file storage service, then share the resulting link below.
       placeholder: https://
   - type: input
     id: logs

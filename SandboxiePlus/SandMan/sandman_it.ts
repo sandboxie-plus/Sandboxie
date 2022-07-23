@@ -1005,7 +1005,7 @@ Percorso completo: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="170"/>
         <location filename="Windows/RecoveryWindow.cpp" line="191"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="477"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="478"/>
         <source>Select Directory</source>
         <translation>Seleziona directory</translation>
     </message>
@@ -1015,22 +1015,22 @@ Percorso completo: %4</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="262"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="263"/>
         <source>Close until all programs stop in this box</source>
         <translation>Non mostrare di nuovo fino all&apos;arresto di tutti i programmi</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="263"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="264"/>
         <source>Close and Disable Immediate Recovery for this box</source>
         <translation>Chiudi e disattiva il recupero immediato per quest&apos;area virtuale</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="283"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="284"/>
         <source>There are %1 new files available to recover.</source>
         <translation>Ci sono %1 nuovi file disponibili per il recupero.</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="513"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="514"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <translation>Ci sono %1 file e %2 cartelle nell&apos;area virtuale, che occupano %3 di spazio su disco.</translation>
     </message>
@@ -2857,110 +2857,110 @@ Scegliere No per selezionare: %2</translation>
         <translation>Questo nome è già stato utilizzato per un&apos;area virtuale.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1004"/>
-        <location filename="Views/SbieView.cpp" line="1068"/>
-        <location filename="Views/SbieView.cpp" line="1277"/>
+        <location filename="Views/SbieView.cpp" line="1009"/>
+        <location filename="Views/SbieView.cpp" line="1073"/>
+        <location filename="Views/SbieView.cpp" line="1282"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Non mostrare più questo messaggio.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1059"/>
-        <location filename="Views/SbieView.cpp" line="1079"/>
-        <location filename="Views/SbieView.cpp" line="1448"/>
+        <location filename="Views/SbieView.cpp" line="1064"/>
+        <location filename="Views/SbieView.cpp" line="1084"/>
+        <location filename="Views/SbieView.cpp" line="1453"/>
         <source>This Sandbox is empty.</source>
         <translation>L&apos;area virtuale è vuota.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1086"/>
+        <location filename="Views/SbieView.cpp" line="1091"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
         <oldsource>WARNING: The opened registry editor is not sand boxed, please be careful and only do changes to the pre-selected sandbox locations.</oldsource>
         <translation>ATTENZIONE: L&apos;Editor del Registro di sistema verrà aperto fuori dall&apos;area virtuale, si prega di effettuare modifiche solo nei percorsi delle aree virtuali.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1087"/>
+        <location filename="Views/SbieView.cpp" line="1092"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>Non mostrare questo avviso in futuro</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1142"/>
+        <location filename="Views/SbieView.cpp" line="1147"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>Immetti un nuovo nome per l&apos;area virtuale duplicata.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1142"/>
+        <location filename="Views/SbieView.cpp" line="1147"/>
         <source>%1 Copy</source>
         <translation>%1 Copia</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1182"/>
+        <location filename="Views/SbieView.cpp" line="1187"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>Immetti un nuovo nome per l&apos;area virtuale.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1198"/>
+        <location filename="Views/SbieView.cpp" line="1203"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <translation>Eliminare l&apos;area virtuale o le aree virtuali selezionate?&lt;br /&gt;&lt;br /&gt;Attenzione: Il contenuto verrà anch&apos;esso eliminato!</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1218"/>
+        <location filename="Views/SbieView.cpp" line="1223"/>
         <source>This Sandbox is already empty.</source>
         <translation>L&apos;area virtuale è già vuota.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1228"/>
+        <location filename="Views/SbieView.cpp" line="1233"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
         <translation>Eliminare il contenuto dell&apos;area virtuale selezionata?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1229"/>
-        <location filename="Views/SbieView.cpp" line="1233"/>
+        <location filename="Views/SbieView.cpp" line="1234"/>
+        <location filename="Views/SbieView.cpp" line="1238"/>
         <source>Also delete all Snapshots</source>
         <translation>Elimina anche tutte le istantanee</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1232"/>
+        <location filename="Views/SbieView.cpp" line="1237"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
         <translation>Eliminare il contenuto delle aree virtuali selezionate?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1259"/>
+        <location filename="Views/SbieView.cpp" line="1264"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>Chiudere tutti i processi?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1260"/>
-        <location filename="Views/SbieView.cpp" line="1348"/>
+        <location filename="Views/SbieView.cpp" line="1265"/>
+        <location filename="Views/SbieView.cpp" line="1353"/>
         <source>Terminate without asking</source>
         <translation>Termina senza chiedere</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1275"/>
+        <location filename="Views/SbieView.cpp" line="1280"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1310"/>
-        <location filename="Views/SbieView.cpp" line="1375"/>
+        <location filename="Views/SbieView.cpp" line="1315"/>
+        <location filename="Views/SbieView.cpp" line="1380"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Crea collegamento all&apos;area virtuale %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1347"/>
+        <location filename="Views/SbieView.cpp" line="1352"/>
         <source>Do you want to %1 %2?</source>
         <translation>Vuoi %1 %2?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1347"/>
+        <location filename="Views/SbieView.cpp" line="1352"/>
         <source>the selected processes</source>
         <translation>i processi selezionati</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1408"/>
+        <location filename="Views/SbieView.cpp" line="1413"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Quest&apos;area virtuale non dispone di restrizioni a Internet, vuoi attivarle?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1488"/>
+        <location filename="Views/SbieView.cpp" line="1493"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Quest&apos;area virtuale è disattivata, vuoi attivarla?</translation>
     </message>
@@ -4674,7 +4674,7 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1293"/>
+        <location filename="Views/SbieView.cpp" line="1298"/>
         <source>Drive %1</source>
         <translation>Unità %1</translation>
     </message>

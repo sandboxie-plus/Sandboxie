@@ -1006,7 +1006,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="170"/>
         <location filename="Windows/RecoveryWindow.cpp" line="191"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="477"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="478"/>
         <source>Select Directory</source>
         <translation>選取目錄</translation>
     </message>
@@ -1016,22 +1016,22 @@ Full path: %4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="262"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="263"/>
         <source>Close until all programs stop in this box</source>
         <translation>關閉，在沙箱內全部程式停止後再顯示</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="263"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="264"/>
         <source>Close and Disable Immediate Recovery for this box</source>
         <translation>關閉並停用此沙箱的快速復原功能</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="283"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="284"/>
         <source>There are %1 new files available to recover.</source>
         <translation>有 %1 個新檔案可供恢復。</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="513"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="514"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <translation>此沙箱中共有 %1 個檔案和 %2 個資料夾，占用了 %3 磁碟空間。</translation>
     </message>
@@ -2851,110 +2851,110 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>名稱已被用於現有的其它沙箱。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1004"/>
-        <location filename="Views/SbieView.cpp" line="1068"/>
-        <location filename="Views/SbieView.cpp" line="1277"/>
+        <location filename="Views/SbieView.cpp" line="1009"/>
+        <location filename="Views/SbieView.cpp" line="1073"/>
+        <location filename="Views/SbieView.cpp" line="1282"/>
         <source>Don&apos;t show this message again.</source>
         <translation>不再顯示此訊息。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1059"/>
-        <location filename="Views/SbieView.cpp" line="1079"/>
-        <location filename="Views/SbieView.cpp" line="1448"/>
+        <location filename="Views/SbieView.cpp" line="1064"/>
+        <location filename="Views/SbieView.cpp" line="1084"/>
+        <location filename="Views/SbieView.cpp" line="1453"/>
         <source>This Sandbox is empty.</source>
         <translation>此沙箱為空。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1086"/>
+        <location filename="Views/SbieView.cpp" line="1091"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
         <translation>警告: 開啟的登錄編輯程式未沙箱化，請審慎且僅對預先選取的沙箱位置進行修改。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1087"/>
+        <location filename="Views/SbieView.cpp" line="1092"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>不再顯示此警告</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1142"/>
+        <location filename="Views/SbieView.cpp" line="1147"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>請為複製的沙箱輸入一個新名稱。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1142"/>
+        <location filename="Views/SbieView.cpp" line="1147"/>
         <source>%1 Copy</source>
         <translation>%1 Copy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1182"/>
+        <location filename="Views/SbieView.cpp" line="1187"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>請為沙箱輸入新名稱。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1198"/>
+        <location filename="Views/SbieView.cpp" line="1203"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
         <translation>確定要刪除選取的沙箱？&lt;br /&gt;&lt;br /&gt;警告：沙箱內的內容也將一併刪除！</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1218"/>
+        <location filename="Views/SbieView.cpp" line="1223"/>
         <source>This Sandbox is already empty.</source>
         <translation>此沙箱為空。</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1228"/>
+        <location filename="Views/SbieView.cpp" line="1233"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
         <translation>您確定要刪除所選沙箱的內容？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1229"/>
-        <location filename="Views/SbieView.cpp" line="1233"/>
+        <location filename="Views/SbieView.cpp" line="1234"/>
+        <location filename="Views/SbieView.cpp" line="1238"/>
         <source>Also delete all Snapshots</source>
         <translation>同時刪除所有快照</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1232"/>
+        <location filename="Views/SbieView.cpp" line="1237"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
         <translation>您確定要刪除所選沙箱的內容嗎？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1259"/>
+        <location filename="Views/SbieView.cpp" line="1264"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>您確定要終止選定沙箱中的所有處理程序嗎？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1260"/>
-        <location filename="Views/SbieView.cpp" line="1348"/>
+        <location filename="Views/SbieView.cpp" line="1265"/>
+        <location filename="Views/SbieView.cpp" line="1353"/>
         <source>Terminate without asking</source>
         <translation>終止且不再詢問</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1275"/>
+        <location filename="Views/SbieView.cpp" line="1280"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1310"/>
-        <location filename="Views/SbieView.cpp" line="1375"/>
+        <location filename="Views/SbieView.cpp" line="1315"/>
+        <location filename="Views/SbieView.cpp" line="1380"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>為沙箱 %1 建立捷徑</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1347"/>
+        <location filename="Views/SbieView.cpp" line="1352"/>
         <source>Do you want to %1 %2?</source>
         <translation>您要 %1 %2 嗎？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1347"/>
+        <location filename="Views/SbieView.cpp" line="1352"/>
         <source>the selected processes</source>
         <translation>選取的處理程序</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1408"/>
+        <location filename="Views/SbieView.cpp" line="1413"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>此沙箱無網際網路限制，確定要啟用嗎？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1488"/>
+        <location filename="Views/SbieView.cpp" line="1493"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>此沙箱已停用，是否啟用？</translation>
     </message>
@@ -4669,7 +4669,7 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1293"/>
+        <location filename="Views/SbieView.cpp" line="1298"/>
         <source>Drive %1</source>
         <translation>磁碟 %1</translation>
     </message>

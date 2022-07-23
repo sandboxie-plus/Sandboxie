@@ -1060,7 +1060,7 @@ Caminho completo: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="170"/>
         <location filename="Windows/RecoveryWindow.cpp" line="191"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="477"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="478"/>
         <source>Select Directory</source>
         <translation>Selecionar Diretório</translation>
     </message>
@@ -1070,22 +1070,22 @@ Caminho completo: %4</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="262"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="263"/>
         <source>Close until all programs stop in this box</source>
         <translation>Feche até que todos os programas parem nesta caixa</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="263"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="264"/>
         <source>Close and Disable Immediate Recovery for this box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="283"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="284"/>
         <source>There are %1 new files available to recover.</source>
         <translation>Existem %1 novos arquivos disponíveis para recuperar.</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="513"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="514"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <translation>Existem %1 arquivos e %2 pastas na caixa de areia, ocupando %3 de espaço em disco.</translation>
     </message>
@@ -2946,48 +2946,48 @@ Não vou escolher: %2</translation>
         <translation>Por favor insira um novo nome de grupo</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1086"/>
+        <location filename="Views/SbieView.cpp" line="1091"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1087"/>
+        <location filename="Views/SbieView.cpp" line="1092"/>
         <source>Don&apos;t show this warning in future</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1142"/>
+        <location filename="Views/SbieView.cpp" line="1147"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>Por favor, insira um novo nome para a Caixa de Areia duplicada.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1142"/>
+        <location filename="Views/SbieView.cpp" line="1147"/>
         <source>%1 Copy</source>
         <translation>%1 Cópia</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1229"/>
-        <location filename="Views/SbieView.cpp" line="1233"/>
+        <location filename="Views/SbieView.cpp" line="1234"/>
+        <location filename="Views/SbieView.cpp" line="1238"/>
         <source>Also delete all Snapshots</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1232"/>
+        <location filename="Views/SbieView.cpp" line="1237"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1275"/>
+        <location filename="Views/SbieView.cpp" line="1280"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1347"/>
+        <location filename="Views/SbieView.cpp" line="1352"/>
         <source>Do you want to %1 %2?</source>
         <translation>Você quer %1 %2?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1347"/>
+        <location filename="Views/SbieView.cpp" line="1352"/>
         <source>the selected processes</source>
         <translation>os processos selecionados</translation>
     </message>
@@ -3038,37 +3038,37 @@ Não vou escolher: %2</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1004"/>
-        <location filename="Views/SbieView.cpp" line="1068"/>
-        <location filename="Views/SbieView.cpp" line="1277"/>
+        <location filename="Views/SbieView.cpp" line="1009"/>
+        <location filename="Views/SbieView.cpp" line="1073"/>
+        <location filename="Views/SbieView.cpp" line="1282"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Não mostrar essa mensagem novamente.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1059"/>
-        <location filename="Views/SbieView.cpp" line="1079"/>
-        <location filename="Views/SbieView.cpp" line="1448"/>
+        <location filename="Views/SbieView.cpp" line="1064"/>
+        <location filename="Views/SbieView.cpp" line="1084"/>
+        <location filename="Views/SbieView.cpp" line="1453"/>
         <source>This Sandbox is empty.</source>
         <translation>Essa caixa está vazia.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1182"/>
+        <location filename="Views/SbieView.cpp" line="1187"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>Insira um novo nome para caixa de areia.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1198"/>
+        <location filename="Views/SbieView.cpp" line="1203"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
         <translation type="unfinished">Tem certeza de que deseja remover a(s) caixa(s) de areia selecionada(s)?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1218"/>
+        <location filename="Views/SbieView.cpp" line="1223"/>
         <source>This Sandbox is already empty.</source>
         <translation>Esta Caixa de Areia já está vazia.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1228"/>
+        <location filename="Views/SbieView.cpp" line="1233"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
         <translation>Deseja excluir o conteúdo da caixa de areia selecionada?</translation>
     </message>
@@ -3077,19 +3077,19 @@ Não vou escolher: %2</translation>
         <translation type="vanished">Tem certeza que deseja excluir o conteúdo de várias caixas de areia?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1259"/>
+        <location filename="Views/SbieView.cpp" line="1264"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>Você deseja encerrar todos os processos na(s) caixa(s) selecionada(s)?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1260"/>
-        <location filename="Views/SbieView.cpp" line="1348"/>
+        <location filename="Views/SbieView.cpp" line="1265"/>
+        <location filename="Views/SbieView.cpp" line="1353"/>
         <source>Terminate without asking</source>
         <translation>Terminar sem perguntar</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1310"/>
-        <location filename="Views/SbieView.cpp" line="1375"/>
+        <location filename="Views/SbieView.cpp" line="1315"/>
+        <location filename="Views/SbieView.cpp" line="1380"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Criar Atalho para a Caixa %1</translation>
     </message>
@@ -3099,12 +3099,12 @@ Não vou escolher: %2</translation>
         <translation type="vanished">Deseja %1 o(s) processo(s) selecionado(s)?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1408"/>
+        <location filename="Views/SbieView.cpp" line="1413"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Esta caixa não possui restrições à Internet. Deseja ativá-las?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1488"/>
+        <location filename="Views/SbieView.cpp" line="1493"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Essa caixa está desativada, deseja ativá-la?</translation>
     </message>
@@ -4920,7 +4920,7 @@ Por favor, note que este valores são atualmente para o usuário específico e s
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1293"/>
+        <location filename="Views/SbieView.cpp" line="1298"/>
         <source>Drive %1</source>
         <translation>Drive %1</translation>
     </message>

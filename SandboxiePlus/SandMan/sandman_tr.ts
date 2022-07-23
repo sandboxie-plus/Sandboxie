@@ -1052,7 +1052,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="170"/>
         <location filename="Windows/RecoveryWindow.cpp" line="191"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="477"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="478"/>
         <source>Select Directory</source>
         <translation>Dizin Seç</translation>
     </message>
@@ -1070,12 +1070,12 @@ Tam yol: %4</translation>
         <translation type="vanished">Korumalı alanda %3 bayt disk alanı kaplayan %1 dosya ve %2 dizin var.</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="513"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="514"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <translation>Korumalı Alanda %3 disk alanı kaplayan %1 dosya ve %2 klasör var.</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="283"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="284"/>
         <source>There are %1 new files available to recover.</source>
         <translation>Kurtarılabilecek %1 yeni dosya var.</translation>
     </message>
@@ -1105,7 +1105,7 @@ Tam yol: %4</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="262"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="263"/>
         <source>Close until all programs stop in this box</source>
         <translation>Bu kutuda tüm programlar durana kadar kapatın</translation>
     </message>
@@ -1115,7 +1115,7 @@ Tam yol: %4</translation>
         <translation>Tüm anlık görüntüler dahil her şeyi silin</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="263"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="264"/>
         <source>Close and Disable Immediate Recovery for this box</source>
         <translation>Bu kutu için Anında Kurtarmayı Kapatın ve Devre Dışı Bırakın</translation>
     </message>
@@ -2632,8 +2632,8 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Çalıştır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1310"/>
-        <location filename="Views/SbieView.cpp" line="1375"/>
+        <location filename="Views/SbieView.cpp" line="1315"/>
+        <location filename="Views/SbieView.cpp" line="1380"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>%1 korumalı kutusuna kısayol oluştur</translation>
     </message>
@@ -2713,7 +2713,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>[Yok]</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1182"/>
+        <location filename="Views/SbieView.cpp" line="1187"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>Lütfen Korumalı Kutu için yeni bir ad girin.</translation>
     </message>
@@ -2858,24 +2858,24 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Bu korumalı kutuya zorla</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1408"/>
+        <location filename="Views/SbieView.cpp" line="1413"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Bu kutuda İnternet kısıtlamaları yok, bunları etkinleştirmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1004"/>
-        <location filename="Views/SbieView.cpp" line="1068"/>
-        <location filename="Views/SbieView.cpp" line="1277"/>
+        <location filename="Views/SbieView.cpp" line="1009"/>
+        <location filename="Views/SbieView.cpp" line="1073"/>
+        <location filename="Views/SbieView.cpp" line="1282"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Bu mesajı bir daha gösterme.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1218"/>
+        <location filename="Views/SbieView.cpp" line="1223"/>
         <source>This Sandbox is already empty.</source>
         <translation>Bu Korumalı Alan zaten boş.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1228"/>
+        <location filename="Views/SbieView.cpp" line="1233"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
         <translation>Seçili korumalı kutunun içeriğini silmek istiyor musunuz?</translation>
     </message>
@@ -2884,19 +2884,19 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation type="vanished">Birden çok korumalı kutunun içeriğini gerçekten silmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1259"/>
+        <location filename="Views/SbieView.cpp" line="1264"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>Seçili kutu(lar)daki tüm işlemleri sonlandırmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1488"/>
+        <location filename="Views/SbieView.cpp" line="1493"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Bu kutu devre dışı, etkinleştirmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1059"/>
-        <location filename="Views/SbieView.cpp" line="1079"/>
-        <location filename="Views/SbieView.cpp" line="1448"/>
+        <location filename="Views/SbieView.cpp" line="1064"/>
+        <location filename="Views/SbieView.cpp" line="1084"/>
+        <location filename="Views/SbieView.cpp" line="1453"/>
         <source>This Sandbox is empty.</source>
         <translation>Bu Korumalı Alan boş.</translation>
     </message>
@@ -3105,23 +3105,23 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Girişleri hareket ettir (negatif değerler yukarı, pozitif değerler aşağı hareket eder):</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1260"/>
-        <location filename="Views/SbieView.cpp" line="1348"/>
+        <location filename="Views/SbieView.cpp" line="1265"/>
+        <location filename="Views/SbieView.cpp" line="1353"/>
         <source>Terminate without asking</source>
         <translation>Sormadan sonlandır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1275"/>
+        <location filename="Views/SbieView.cpp" line="1280"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1347"/>
+        <location filename="Views/SbieView.cpp" line="1352"/>
         <source>Do you want to %1 %2?</source>
         <translation>%1 %2 istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1347"/>
+        <location filename="Views/SbieView.cpp" line="1352"/>
         <source>the selected processes</source>
         <translation>seçilen işlemler</translation>
     </message>
@@ -3130,12 +3130,12 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation type="vanished">Kopyasını Oluştur</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1142"/>
+        <location filename="Views/SbieView.cpp" line="1147"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>Lütfen kopyalanan Sandbox için yeni bir ad girin.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1142"/>
+        <location filename="Views/SbieView.cpp" line="1147"/>
         <source>%1 Copy</source>
         <translation>%1 Kopya</translation>
     </message>
@@ -3146,28 +3146,28 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>İşlemleri Durdur</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1086"/>
+        <location filename="Views/SbieView.cpp" line="1091"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
         <translation>UYARI: Açılan kayıt defteri düzenleyicisi korumalı alana alınmamıştır, lütfen dikkatli olun ve yalnızca önceden seçilmiş korumalı alan konumlarında değişiklik yapın.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1087"/>
+        <location filename="Views/SbieView.cpp" line="1092"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>Bu uyarıyı gelecekte gösterme</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1198"/>
+        <location filename="Views/SbieView.cpp" line="1203"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <translation>Seçili korumalı alan(lar)ı gerçekten kaldırmak istiyor musunuz?&lt;br /&gt;&lt;br /&gt;Uyarı: Kutu içeriği de silinecek!</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1229"/>
-        <location filename="Views/SbieView.cpp" line="1233"/>
+        <location filename="Views/SbieView.cpp" line="1234"/>
+        <location filename="Views/SbieView.cpp" line="1238"/>
         <source>Also delete all Snapshots</source>
         <translation>Tüm Anlık Görüntüleri de sil</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1232"/>
+        <location filename="Views/SbieView.cpp" line="1237"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
         <translation>Seçilen tüm korumalı alan içeriğini gerçekten silmek istiyor musunuz?</translation>
     </message>
@@ -4990,7 +4990,7 @@ The process match level has a higher priority than the specificity and describes
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1293"/>
+        <location filename="Views/SbieView.cpp" line="1298"/>
         <source>Drive %1</source>
         <translation>Sürücü %1</translation>
     </message>

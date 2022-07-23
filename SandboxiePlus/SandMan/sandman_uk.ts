@@ -1005,7 +1005,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="170"/>
         <location filename="Windows/RecoveryWindow.cpp" line="191"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="477"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="478"/>
         <source>Select Directory</source>
         <translation>Оберіть каталог</translation>
     </message>
@@ -1015,22 +1015,22 @@ Full path: %4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="262"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="263"/>
         <source>Close until all programs stop in this box</source>
         <translation>Закрити, поки всі програми зупинять роботу в контейнері</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="263"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="264"/>
         <source>Close and Disable Immediate Recovery for this box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="283"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="284"/>
         <source>There are %1 new files available to recover.</source>
         <translation>Доступно %1 нових файлів для відновлення.</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="513"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="514"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <translation>В пісочниці є %1 файл(ів) та %2 папок, які використовують %3 дискового простору.</translation>
     </message>
@@ -2849,109 +2849,109 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1004"/>
-        <location filename="Views/SbieView.cpp" line="1068"/>
-        <location filename="Views/SbieView.cpp" line="1277"/>
+        <location filename="Views/SbieView.cpp" line="1009"/>
+        <location filename="Views/SbieView.cpp" line="1073"/>
+        <location filename="Views/SbieView.cpp" line="1282"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Не показувати це повідомлення знову.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1059"/>
-        <location filename="Views/SbieView.cpp" line="1079"/>
-        <location filename="Views/SbieView.cpp" line="1448"/>
+        <location filename="Views/SbieView.cpp" line="1064"/>
+        <location filename="Views/SbieView.cpp" line="1084"/>
+        <location filename="Views/SbieView.cpp" line="1453"/>
         <source>This Sandbox is empty.</source>
         <translation>Ця пісочниця порожня.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1086"/>
+        <location filename="Views/SbieView.cpp" line="1091"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
         <translation>ПОПЕРЕДЖЕННЯ: Відкритий редактор реєстру не знаходиться в пісочниці, будьте обережні та змінюйте лише попередньо вибрані розташування пісочниці.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1087"/>
+        <location filename="Views/SbieView.cpp" line="1092"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>Не показувати це попередження в майбутньому</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1142"/>
+        <location filename="Views/SbieView.cpp" line="1147"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>Будь ласка, введіть нове ім&apos;я для копії пісочниці.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1142"/>
+        <location filename="Views/SbieView.cpp" line="1147"/>
         <source>%1 Copy</source>
         <translation>%1 Копія</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1182"/>
+        <location filename="Views/SbieView.cpp" line="1187"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>Будь ласка, введіть нове ім&apos;я для пісочниці.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1198"/>
+        <location filename="Views/SbieView.cpp" line="1203"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <translation>Ви дійсно хочете видалити цю(ці) пісочницю(і)?&lt;br /&gt;&lt;br /&gt;Попередження: вміст контейнера також буде видалено!</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1218"/>
+        <location filename="Views/SbieView.cpp" line="1223"/>
         <source>This Sandbox is already empty.</source>
         <translation>Ця пісочниця вже порожня.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1228"/>
+        <location filename="Views/SbieView.cpp" line="1233"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
         <translation>Ви дійсно хочете видалити зміст цієї пісочниці?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1229"/>
-        <location filename="Views/SbieView.cpp" line="1233"/>
+        <location filename="Views/SbieView.cpp" line="1234"/>
+        <location filename="Views/SbieView.cpp" line="1238"/>
         <source>Also delete all Snapshots</source>
         <translation>Також видалити всі знімки</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1232"/>
+        <location filename="Views/SbieView.cpp" line="1237"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
         <translation>Ви дійсно хочете видалити зміст усіх обраних пісочниць?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1259"/>
+        <location filename="Views/SbieView.cpp" line="1264"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>Ви хочете зупинити всі процеси в цієї(цих) пісочниці(ь)?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1260"/>
-        <location filename="Views/SbieView.cpp" line="1348"/>
+        <location filename="Views/SbieView.cpp" line="1265"/>
+        <location filename="Views/SbieView.cpp" line="1353"/>
         <source>Terminate without asking</source>
         <translation>Зупинити без запитань</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1275"/>
+        <location filename="Views/SbieView.cpp" line="1280"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1310"/>
-        <location filename="Views/SbieView.cpp" line="1375"/>
+        <location filename="Views/SbieView.cpp" line="1315"/>
+        <location filename="Views/SbieView.cpp" line="1380"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Створити ярлик до пісочниці %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1347"/>
+        <location filename="Views/SbieView.cpp" line="1352"/>
         <source>Do you want to %1 %2?</source>
         <translation>Ви хочете %1 %2?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1347"/>
+        <location filename="Views/SbieView.cpp" line="1352"/>
         <source>the selected processes</source>
         <translation>обрані процеси</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1408"/>
+        <location filename="Views/SbieView.cpp" line="1413"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Ця пісочниця не має обмежень доступу до Інтернет, ви хочете їх увімкнути?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1488"/>
+        <location filename="Views/SbieView.cpp" line="1493"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Ця пісочниця вимкнена, ви хочете її увімкнути?</translation>
     </message>
@@ -4660,7 +4660,7 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1293"/>
+        <location filename="Views/SbieView.cpp" line="1298"/>
         <source>Drive %1</source>
         <translation>Диск %1</translation>
     </message>

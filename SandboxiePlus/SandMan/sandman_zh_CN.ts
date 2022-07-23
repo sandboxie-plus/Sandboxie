@@ -1173,7 +1173,7 @@ Full path: %4</source>
         <location filename="SandMan.cpp" line="371"/>
         <source>Disable Message Popup</source>
         <oldsource>Disable Message PopUp</oldsource>
-        <translation type="unfinished">禁用消息弹窗</translation>
+        <translation>禁用消息弹窗</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="304"/>
@@ -3010,7 +3010,7 @@ No will choose: %2</source>
         <location filename="Windows/SettingsWindow.cpp" line="131"/>
         <source>%1</source>
         <oldsource>%1 %</oldsource>
-        <translation type="unfinished">%1 %</translation>
+        <translation>%1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="278"/>
@@ -5016,7 +5016,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="60"/>
         <source>Count and display the disk space occupied by each sandbox</source>
         <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
-        <translation type="unfinished">统计并显示每个沙盒的磁盘空间占用情况</translation>
+        <translation>统计并显示每个沙盒的磁盘空间占用情况</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="203"/>
@@ -5032,10 +5032,6 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="395"/>
         <source>Show &quot;Pizza&quot; Background in box list*</source>
         <translation>在沙盒列表中显示“披萨”背景 *</translation>
-    </message>
-    <message>
-        <source>* indetermined means depanding on the view mode</source>
-        <translation type="vanished">带 * 标选项的展示效果取决于具体的视图模式</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="419"/>
@@ -5085,7 +5081,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="412"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>* 标复选框的显示效果取决于具体的视图模式</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="723"/>

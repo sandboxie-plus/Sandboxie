@@ -5,14 +5,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.2.5b / 5.57.5] - 2022-07-22
+
+
+## [1.2.6 / 5.57.6] - 2022-07-??
 
 ### Changed
-- improved a few icons
+- the access view list now adds in display the tailing * to file and key paths the same way the driver does [2039](https://github.com/sandboxie-plus/Sandboxie/issues/2039)
+- reworked saving of global options
 
 ### Fixed
 - fixed issue with delete all button [#2043](https://github.com/sandboxie-plus/Sandboxie/issues/2043)
 - fixed issue with box prefs [#2046](https://github.com/sandboxie-plus/Sandboxie/issues/2046)
+- fixed issue with Delete V2 registry
 
 
 
@@ -24,6 +28,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed certificate validation issue
+
 
 
 ## [1.2.4 / 5.57.4] - 2022-07-21

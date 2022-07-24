@@ -323,7 +323,7 @@ SBIE2102 Fichier trop gros pour le bac à sable - %2
 .
 
 2103;pop;inf;01
-SBIE2103 Échec au chargement du pilote système '%2'
+SBIE2103 Échec au chargement du pilote système « %2 »
 .
 
 2104;pop;inf;02
@@ -335,11 +335,11 @@ SBIE2104 Échec à la fermeture de cette session Windows - %2
 # .
 
 # 2106;pop;inf;01
-# SBIE2106 Veuillez activer « Exécuter comme Administrateur UAC » dans Sandboxie Control, menu Fichier
+# SBIE2106 Veuillez activer « Exécuter en tant qu'administrateur UAC » dans Sandboxie Control, menu Fichier
 # .
 
 # 2107;pop;inf;01
-# SBIE2107 Préparation assemblage WinSxS « %2 »
+# SBIE2107 Préparation de l'assemblage WinSxS « %2 »
 # .
 
 2108;pop;inf;01
@@ -694,7 +694,7 @@ SBIE9234 Erreur de démarrage du service %2
 .
 
 3003;txt;01
-&Naviguer...
+&Parcourir...
 .
 
 3004;txt;01
@@ -726,11 +726,11 @@ Démarrage de Sandboxie
 .
 
 3103;txt;01
-Tapez le nom du programme et Sandboxie l'ouvrira pour vous.
+Saisissez le nom d'un programme ou d'un dossier et Sandboxie l'ouvrira pour vous.
 .
 
 3104;txt;01
-Tapez « . » (le caractère « point ») pour explorer avec Sandboxie.
+Saisissez « . » (le caractère « point ») pour lancer l'explorateur Windows dans Sandboxie.
 .
 
 3105;txt;01
@@ -750,7 +750,7 @@ Bureau
 .
 
 3113;txt;01
-(explorer le dossier)
+(parcourir le dossier)
 .
 
 # should match the localized folder name for Programs in the Start Menu folder
@@ -1063,7 +1063,7 @@ Désactiver les programmes &forcés
 .
 
 3414;txt;01
-Exécuter comme Administrateur &UAC
+Exécuter en tant qu'administrateur &UAC
 .
 
 3415;txt;01
@@ -1671,8 +1671,8 @@ En cliquant sur OK, le mécanisme de forçage des programmes sera temporairement
 .
 
 3599;txt;01
-Vous pouvez désactiver le forçage d'un programme en maintenant enfoncé la touche « Ctrl »,
-« Maj » et « Flèche du bas » quand vous cliquez sur « Exécuter dans un bac à sable » pour ce programme.
+Vous pouvez désactiver le forçage d'un programme en maintenant enfoncées les touches « Ctrl » et 
+« Maj » quand vous cliquez sur « Exécuter dans un bac à sable » pour ce programme.
 .
 
 #----------------------------------------------------------------------------

@@ -122,7 +122,13 @@ protected:
 	bool	m_CompatChanged;
 	bool	m_FeaturesChanged;
 	bool	m_CertChanged;
+
 private:
+
+	void WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& OnValue, const QString& OffValue);
+	void WriteText(const QString& Name, const QString& Value);
+	void WriteTextList(const QString& Setting, const QStringList& List);
+
 	Ui::SettingsWindow ui;
 };
 

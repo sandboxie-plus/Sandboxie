@@ -460,6 +460,52 @@ void CSettingsWindow::UpdateCert()
 	}
 }
 
+void CSettingsWindow::WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& OnValue, const QString& OffValue)
+{
+	//if (pCheck->checkState() == Qt::PartiallyChecked)
+	//	return;
+
+	if (!pCheck->isEnabled())
+		return;
+
+	SB_STATUS Status;
+	if (pCheck->checkState() == Qt::Checked)
+	{
+		if(!OnValue.isEmpty())
+			Status = theAPI->GetGlobalSettings()->SetText(Name, OnValue);
+		else
+			Status = theAPI->GetGlobalSettings()->DelValue(Name);
+	}
+	else if (pCheck->checkState() == Qt::Unchecked)
+	{
+		if (!OffValue.isEmpty())
+			Status = theAPI->GetGlobalSettings()->SetText(Name, OffValue);
+		else
+			Status = theAPI->GetGlobalSettings()->DelValue(Name);
+	}
+
+	if (!Status)
+		throw Status;
+}
+
+void CSettingsWindow::WriteText(const QString& Name, const QString& Value)
+{
+	SB_STATUS Status;
+	if(Value.isEmpty())
+		Status = theAPI->GetGlobalSettings()->DelValue(Name);
+	else
+		Status = theAPI->GetGlobalSettings()->SetText(Name, Value);
+	if (!Status)
+		throw Status;
+}
+
+void CSettingsWindow::WriteTextList(const QString& Setting, const QStringList& List)
+{
+	SB_STATUS Status = theAPI->GetGlobalSettings()->UpdateTextList(Setting, List, false);
+	if (!Status)
+		throw Status;
+}
+
 void CSettingsWindow::SaveSettings()
 {
 	theConf->SetValue("Options/UiLanguage", ui.uiLang->currentData());
@@ -536,97 +582,91 @@ void CSettingsWindow::SaveSettings()
 
 	if (theAPI->IsConnected())
 	{
-		if (ui.fileRoot->text().isEmpty())
-			theAPI->GetGlobalSettings()->DelValue("FileRootPath"); //ui.fileRoot->setText("\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%");
-		else
-			theAPI->GetGlobalSettings()->SetText("FileRootPath", ui.fileRoot->text());
-		theAPI->GetGlobalSettings()->SetBool("SeparateUserFolders", ui.chkSeparateUserFolders->isChecked());
-
-		if (ui.regRoot->text().isEmpty())
-			theAPI->GetGlobalSettings()->DelValue("KeyRootPath"); //ui.regRoot->setText("\\REGISTRY\\USER\\Sandbox_%USER%_%SANDBOX%");
-		else
-			theAPI->GetGlobalSettings()->SetText("KeyRootPath", ui.regRoot->text());
-
-		if (ui.ipcRoot->text().isEmpty())
-			theAPI->GetGlobalSettings()->DelValue("IpcRootPath"); //ui.ipcRoot->setText("\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%");
-		else
-			theAPI->GetGlobalSettings()->SetText("IpcRootPath", ui.ipcRoot->text());
-
-
-		theAPI->GetGlobalSettings()->SetBool("NetworkEnableWFP", ui.chkWFP->isChecked());
-		theAPI->GetGlobalSettings()->SetBool("EnableObjectFiltering", ui.chkObjCb->isChecked());
-		theAPI->GetGlobalSettings()->SetBool("EnableWin32kHooks", ui.chkWin32k->isChecked());
-		theAPI->GetGlobalSettings()->SetBool("SandboxieLogon", ui.chkSbieLogon->isChecked());
-
-
-		if (m_FeaturesChanged) {
-			m_FeaturesChanged = false;
-			theAPI->ReloadConfig(true);
-		}
-
-		theAPI->GetGlobalSettings()->SetBool("EditAdminOnly", ui.chkAdminOnly->isChecked());
-
-		bool isPassSet = !theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty();
-		if (ui.chkPassRequired->isChecked())
+		try
 		{
-			if (!isPassSet && m_NewPassword.isEmpty())
-				OnSetPassword(); // request password entry if it wasn't entered already
-			if (!m_NewPassword.isEmpty()) {
-				theAPI->LockConfig(m_NewPassword); // set new/changed password
-				m_NewPassword.clear();
+			WriteText("FileRootPath", ui.fileRoot->text()); //ui.fileRoot->setText("\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%");
+			WriteAdvancedCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", "", "n");
+			WriteText("KeyRootPath", ui.regRoot->text()); //ui.regRoot->setText("\\REGISTRY\\USER\\Sandbox_%USER%_%SANDBOX%");
+			WriteText("IpcRootPath", ui.ipcRoot->text()); //ui.ipcRoot->setText("\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%");
+
+			WriteAdvancedCheck(ui.chkWFP, "NetworkEnableWFP", "y", "");
+			WriteAdvancedCheck(ui.chkObjCb, "EnableObjectFiltering", "", "n");
+			WriteAdvancedCheck(ui.chkWin32k, "EnableWin32kHooks", "", "n");
+			WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", "", "n");
+
+			if (m_FeaturesChanged) {
+				m_FeaturesChanged = false;
+				theAPI->ReloadConfig(true);
 			}
-		}
-		else if (isPassSet)
-			theAPI->LockConfig(QString()); // clear password
 
-		theAPI->GetGlobalSettings()->SetBool("ForceDisableAdminOnly", ui.chkAdminOnlyFP->isChecked());
-		theAPI->GetGlobalSettings()->SetBool("ForgetPassword", ui.chkClearPass->isChecked());
+			WriteAdvancedCheck(ui.chkAdminOnly, "EditAdminOnly", "y", "");
 
-		if (m_WarnProgsChanged)
-		{
-			theAPI->GetGlobalSettings()->SetBool("StartRunAlertDenied", ui.chkStartBlock->isChecked());
-			theAPI->GetGlobalSettings()->SetBool("NotifyStartRunAccessDenied", ui.chkStartBlockMsg->isChecked());
-
-			QStringList AlertProcess;
-			QStringList AlertFolder;
-			for (int i = 0; i < ui.treeWarnProgs->topLevelItemCount(); i++)
+			bool isPassSet = !theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty();
+			if (ui.chkPassRequired->isChecked())
 			{
-				QTreeWidgetItem* pItem = ui.treeWarnProgs->topLevelItem(i);
-				int Type = pItem->data(0, Qt::UserRole).toInt();
-				switch (Type)
+				if (!isPassSet && m_NewPassword.isEmpty())
+					OnSetPassword(); // request password entry if it wasn't entered already
+				if (!m_NewPassword.isEmpty()) {
+					theAPI->LockConfig(m_NewPassword); // set new/changed password
+					m_NewPassword.clear();
+				}
+			}
+			else if (isPassSet)
+				theAPI->LockConfig(QString()); // clear password
+
+			WriteAdvancedCheck(ui.chkAdminOnlyFP, "ForceDisableAdminOnly", "y", "");
+			WriteAdvancedCheck(ui.chkClearPass, "ForgetPassword", "y", "");
+
+			if (m_WarnProgsChanged)
+			{
+				WriteAdvancedCheck(ui.chkStartBlock, "StartRunAlertDenied", "y", "");
+				WriteAdvancedCheck(ui.chkStartBlockMsg, "NotifyStartRunAccessDenied", "", "n");
+
+				QStringList AlertProcess;
+				QStringList AlertFolder;
+				for (int i = 0; i < ui.treeWarnProgs->topLevelItemCount(); i++)
 				{
-				case 1:	AlertProcess.append(pItem->data(1, Qt::UserRole).toString()); break;
-				case 2: AlertFolder.append(pItem->data(1, Qt::UserRole).toString()); break;
+					QTreeWidgetItem* pItem = ui.treeWarnProgs->topLevelItem(i);
+					int Type = pItem->data(0, Qt::UserRole).toInt();
+					switch (Type)
+					{
+					case 1:	AlertProcess.append(pItem->data(1, Qt::UserRole).toString()); break;
+					case 2: AlertFolder.append(pItem->data(1, Qt::UserRole).toString()); break;
+					}
 				}
+
+				WriteTextList("AlertProcess", AlertProcess);
+				WriteTextList("AlertFolder", AlertFolder);
+				m_WarnProgsChanged = false;
 			}
 
-			theAPI->GetGlobalSettings()->UpdateTextList("AlertProcess", AlertProcess, false);
-			theAPI->GetGlobalSettings()->UpdateTextList("AlertFolder", AlertFolder, false);
-			m_WarnProgsChanged = false;
+			if (m_CompatChanged)
+			{
+				QStringList Used;
+				QStringList Rejected;
+				for (int i = 0; i < ui.treeCompat->topLevelItemCount(); i++) {
+					QTreeWidgetItem* pItem = ui.treeCompat->topLevelItem(i);
+					if (pItem->checkState(0) == Qt::Unchecked)
+						Rejected.append(pItem->data(0, Qt::UserRole).toString());
+					else
+						Used.append(pItem->data(0, Qt::UserRole).toString());
+				}
+
+				// retain local templates
+				foreach(const QString& Template, theAPI->GetGlobalSettings()->GetTextList("Template", false)) {
+					if (Template.left(6) == "Local_") {
+						Used.append(Template);
+					}
+				}
+
+				WriteTextList("Template", Used);
+				WriteTextList("TemplateReject", Rejected);
+				m_CompatChanged = false;
+			}
 		}
-
-		if (m_CompatChanged)
+		catch (SB_STATUS Status)
 		{
-			QStringList Used;
-			QStringList Rejected;
-			for (int i = 0; i < ui.treeCompat->topLevelItemCount(); i++) {
-				QTreeWidgetItem* pItem = ui.treeCompat->topLevelItem(i);
-				if (pItem->checkState(0) == Qt::Unchecked)
-					Rejected.append(pItem->data(0, Qt::UserRole).toString());
-				else
-					Used.append(pItem->data(0, Qt::UserRole).toString());
-			}
-
-			// retain local templates
-			foreach(const QString& Template, theAPI->GetGlobalSettings()->GetTextList("Template", false)) {
-				if (Template.left(6) == "Local_") {
-					Used.append(Template);
-				}
-			}
-
-			theAPI->GetGlobalSettings()->UpdateTextList("Template", Used, false);
-			theAPI->GetGlobalSettings()->UpdateTextList("TemplateReject", Rejected, false);
-			m_CompatChanged = false;
+			theGUI->CheckResults(QList<SB_STATUS>() << Status);
 		}
 	}
 
@@ -751,7 +791,7 @@ void CSettingsWindow::apply()
 
 void CSettingsWindow::ok()
 {
-	SaveSettings();
+	apply();
 
 	this->close();
 }

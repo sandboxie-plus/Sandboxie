@@ -70,27 +70,27 @@
     <message>
         <location filename="Views/FileView.cpp" line="140"/>
         <source>Create Shortcut</source>
-        <translation type="unfinished">Kısayol Oluştur</translation>
+        <translation>Kısayol Oluştur</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="146"/>
         <source>Recover to Any Folder</source>
-        <translation type="unfinished">Herhangi Bir Klasöre Kurtar</translation>
+        <translation>Herhangi Bir Klasöre Kurtar</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="148"/>
         <source>Recover to Same Folder</source>
-        <translation type="unfinished">Aynı Klasöre Kurtar</translation>
+        <translation>Aynı Klasöre Kurtar</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="208"/>
         <source>Select Directory</source>
-        <translation type="unfinished">Dizin Seç</translation>
+        <translation>Dizin Seç</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="258"/>
         <source>Create Shortcut to sandbox %1</source>
-        <translation type="unfinished">%1 korumalı kutusuna kısayol oluştur</translation>
+        <translation>%1 korumalı kutusuna kısayol oluştur</translation>
     </message>
 </context>
 <context>
@@ -1014,22 +1014,22 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandManRecovery.cpp" line="188"/>
         <source>Sandboxie-Plus - Recovery Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Kurtarma Günlüğü</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="196"/>
         <source>Time|Box Name|File Path</source>
-        <translation type="unfinished">Zaman|Kutu Adı|Dosya Yolu</translation>
+        <translation>Zaman|Kutu Adı|Dosya Yolu</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="198"/>
         <source>Cleanup Recovery Log</source>
-        <translation type="unfinished">Temizleme Kurtarma Günlüğü</translation>
+        <translation>Temizleme Kurtarma Günlüğü</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="208"/>
         <source>the following files were recently recovered and moved out of a sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>şu dosyalar yakın zamanda kurtarıldı ve bir korumalı alandan taşındı.</translation>
     </message>
 </context>
 <context>
@@ -1102,7 +1102,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="235"/>
         <source>Do you really want to delete %1 selected files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Seçilen %1 dosyayı gerçekten silmek istiyor musun?</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="263"/>
@@ -1738,7 +1738,7 @@ Tam yol: %4</translation>
         <location filename="SandMan.cpp" line="371"/>
         <source>Disable Message Popup</source>
         <oldsource>Disable Message PopUp</oldsource>
-        <translation type="unfinished">Mesaj Açılır Penceresini Devre Dışı Bırak</translation>
+        <translation>Mesaj Açılır Penceresini Devre Dışı Bırak</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1418"/>
@@ -1748,12 +1748,12 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2014"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus Kullanıcı Arayüzünde bu işlevsellik, ana korumalı alan liste görünümüne entegre edilmiştir.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2015"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kutu/grup bağlam menüsünü kullanarak kutuları ve grupları diğer gruplara taşıyabilirsiniz. Öğeleri hareket ettirmek için sürükle ve bırak özelliğini de kullanabilirsiniz. Alternatif olarak, öğeleri grupları içinde yukarı ve aşağı taşımak için ALT tuşunu basılı tutarken ok tuşlarını da kullanabilirsiniz.&lt;br /&gt;Sandbox menüsünden yeni kutular ve gruplar oluşturabilirsiniz.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2077"/>
@@ -2098,18 +2098,18 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="331"/>
         <source>Vintage View (like SbieCtrl)</source>
-        <translation type="unfinished"></translation>
+        <translation>Vintage Görünüm (SbieCtrl gibi)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="379"/>
         <location filename="SandMan.cpp" line="497"/>
         <source>Is Window Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Pencere Korumalı Alanda mı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="424"/>
         <source>Show File Panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Dosya Panelini Göster</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="443"/>
@@ -2125,77 +2125,77 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="486"/>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Dosya</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="498"/>
         <source>Resource Access Monitor</source>
-        <translation type="unfinished">Kaynak Erişim İzleyicisi</translation>
+        <translation>Kaynak Erişim İzleyicisi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="531"/>
         <source>Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Programlar</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="532"/>
         <source>Files and Folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Dosyalar ve Klasörler</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="557"/>
         <source>Create New Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni Korumalı Alan Oluştur</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="558"/>
         <source>Create New Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni Grup Oluştur</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="561"/>
         <source>Set Container Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Kapsayıcı Klasörünü Ayarla</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="564"/>
         <source>Set Layout and Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Düzeni ve Grupları Ayarla</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="567"/>
         <source>Reveal Hidden Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Gizli Kutuları Göster</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="573"/>
         <source>&amp;Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Yapılandır</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="577"/>
         <source>Program Alerts</source>
-        <translation type="unfinished"></translation>
+        <translation>Program Uyarıları</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="579"/>
         <source>Windows Shell Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Kabuk Entegrasyonu</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="581"/>
         <source>Software Compatibility</source>
-        <translation type="unfinished">Yazılım Uyumluluğu</translation>
+        <translation>Yazılım Uyumluluğu</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="590"/>
         <source>Lock Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapılandırmayı Kilitle</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="607"/>
         <source>Sandbox %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="791"/>
@@ -2983,13 +2983,13 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Views/SbieView.cpp" line="167"/>
         <source>Browse Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Dosyalara Gözat</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="206"/>
         <location filename="Views/SbieView.cpp" line="292"/>
         <source>Move Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı Alanı Taşı</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="280"/>
@@ -3021,12 +3021,12 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <location filename="Views/SbieView.cpp" line="200"/>
         <location filename="Views/SbieView.cpp" line="279"/>
         <source>Sandbox Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı Alan Araçları</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="203"/>
         <source>Duplicate Box Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Yinelenen Kutu Yapılandırması</translation>
     </message>
     <message>
         <source>Move Box/Group</source>
@@ -3047,52 +3047,52 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Views/SbieView.cpp" line="254"/>
         <source>Run Sandboxed</source>
-        <translation type="unfinished">Korumalı Alanda Çalıştır</translation>
+        <translation>Korumalı Alanda Çalıştır</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="256"/>
         <source>Run eMail Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>E-posta Okuyucuyu Çalıştırın</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="257"/>
         <source>Run Any Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Herhangi Bir Program Çalıştırın</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="258"/>
         <source>Run From Start Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Başlat Menüsünden Çalıştır</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="259"/>
         <source>Run Windows Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Gezgini&apos;ni çalıştırın</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="271"/>
         <source>Terminate Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Programları Sonlandır</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="272"/>
         <source>Quick Recover</source>
-        <translation type="unfinished"></translation>
+        <translation>Hızlı Kurtarma</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="277"/>
         <source>Sandbox Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı Alan Ayarları</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="284"/>
         <source>Duplicate Sandbox Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Yinelenen Korumalı Alan Yapılandırması</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="343"/>
         <source>Move Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Grubu Taşı</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="786"/>
@@ -3113,7 +3113,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Views/SbieView.cpp" line="1280"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Başlat Menüsü şimdi görüntülenecektir. Menüden bir uygulama seçin ve Sandboxie, gerçek masaüstünüzde, Sandboxie&apos;nin gözetimi altında seçilen uygulamayı çağırmak için kullanabileceğiniz bir kısayolu simgesi oluşturacaktır.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1352"/>
@@ -3316,23 +3316,23 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="125"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiçbiri</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="126"/>
         <source>Native</source>
-        <translation type="unfinished"></translation>
+        <translation>Yerli</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="127"/>
         <source>Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="131"/>
         <source>%1</source>
         <oldsource>%1 %</oldsource>
-        <translation type="unfinished">%1</translation>
+        <translation>%1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="278"/>
@@ -3596,7 +3596,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Views/TraceView.cpp" line="248"/>
         <source>Cleanup Trace Log</source>
-        <translation type="unfinished">Günlük İzlemelerini Temizle</translation>
+        <translation>Günlük İzlemelerini Temizle</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="568"/>
@@ -3624,7 +3624,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Views/TraceView.cpp" line="631"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - İzleme Monitörü</translation>
     </message>
 </context>
 <context>
@@ -3652,7 +3652,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="282"/>
         <source>&amp;Vintage SbieCtrl.exe UI</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vintage SbieCtrl.exe Kullanıcı Arayüzü</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="307"/>
@@ -5056,7 +5056,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="142"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Sil</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="171"/>
@@ -5375,7 +5375,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/SettingsWindow.ui" line="60"/>
         <source>Count and display the disk space occupied by each sandbox</source>
         <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
-        <translation type="unfinished">Her korumalı alanın kapladığı disk alanını hesaplayın ve görüntüleyin</translation>
+        <translation>Her korumalı alanın kapladığı disk alanını hesaplayın ve görüntüleyin</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="346"/>
@@ -5385,62 +5385,62 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="203"/>
         <source>Use Compact Box List</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompakt Kutu Listesini Kullan</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="387"/>
         <source>Interface Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Arayüz Yapılandırması</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="395"/>
         <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <translation type="unfinished"></translation>
+        <translation>Kutu listesinde &quot;Pizza&quot; Arka Planını Göster*</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="419"/>
         <source>Make Box Icons match the Border Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Kutu Simgelerini Kenarlık Rengiyle Eşleştirin</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="426"/>
         <source>Use a Page Tree in the Box Options instead of Nested Tabs *</source>
-        <translation type="unfinished"></translation>
+        <translation>Kutu Seçeneklerinde İç İçe Sekmeler yerine Sayfa Ağacı kullanın *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="443"/>
         <source>Interface Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Arayüz Seçenekleri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="466"/>
         <source>Use large icons in box list *</source>
-        <translation type="unfinished"></translation>
+        <translation>Kutu listesinde büyük simgeler kullanın *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="476"/>
         <source>High DPI Scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Yüksek DPI Ölçekleme</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>
         <source>Don&apos;t show icons in menus *</source>
-        <translation type="unfinished"></translation>
+        <translation>Menülerde simgeleri gösterme *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="513"/>
         <source>Font Scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazı Tipi Ölçekleme</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="405"/>
         <source>(Restart required)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Yeniden başlatma gerekiyor)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="412"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>* Kısmen işaretlenmiş bir onay kutusu, davranışı görüntüleme modu tarafından belirlenecek şekilde bırakacaktır.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="539"/>
@@ -5455,7 +5455,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="723"/>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Anonim bir token (deneysel) yerine bir Sandboxie oturum açma kullanın</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="733"/>

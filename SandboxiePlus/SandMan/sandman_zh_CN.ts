@@ -989,7 +989,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="235"/>
         <source>Do you really want to delete %1 selected files?</source>
-        <translation>是否删除 % 选中的文件？</translation>
+        <translation>是否删除 %1 选中的文件？</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="263"/>
@@ -2266,7 +2266,7 @@ No will choose: %2</source>
     <message>
         <location filename="SbieProcess.cpp" line="54"/>
         <source>Windows Explorer</source>
-        <translation>Windows 文件资源管理器</translation>
+        <translation>Windows 资源管理器</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="55"/>
@@ -2420,7 +2420,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="147"/>
         <source>Run Program</source>
-        <translation>运行程序</translation>
+        <translation>运行程序(Run)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="148"/>
@@ -2440,7 +2440,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="158"/>
         <source>Windows Explorer</source>
-        <translation>Windows 文件资源管理器</translation>
+        <translation>Windows 资源管理器</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="159"/>
@@ -2501,7 +2501,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="182"/>
         <source>Drop Admin Rights</source>
-        <translation>解除管理员权限</translation>
+        <translation>撤销管理员权限</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="183"/>
@@ -2537,7 +2537,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="203"/>
         <source>Duplicate Box Config</source>
-        <translation>重复的沙盒配置</translation>
+        <translation>复制配置</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="205"/>
@@ -2681,7 +2681,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="161"/>
         <source>Execute Autorun Entries</source>
-        <translation>运行自动运行项目</translation>
+        <translation>执行自动运行项目</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="280"/>
@@ -2707,7 +2707,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="197"/>
         <source>Immediate Recovery</source>
-        <translation>立即恢复</translation>
+        <translation>即时恢复</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="207"/>
@@ -2739,7 +2739,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="257"/>
         <source>Run Any Program</source>
-        <translation>运行程序</translation>
+        <translation>运行程序(Run)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="258"/>
@@ -2769,7 +2769,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="284"/>
         <source>Duplicate Sandbox Config</source>
-        <translation>重复的沙盒配置</translation>
+        <translation>复制配置</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="343"/>
@@ -3147,7 +3147,7 @@ No will choose: %2</source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="392"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation>向文件资源管理器添加“在沙盒中运行”右键菜单</translation>
+        <translation>在资源管理器中添加“在沙盒中运行”右键菜单</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="397"/>
@@ -4834,7 +4834,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="196"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation>向文件资源管理器添加“在沙盒中运行”右键菜单</translation>
+        <translation>在资源管理器中添加“在沙盒中运行”右键菜单</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="360"/>

@@ -436,6 +436,10 @@ SBIE2223 Dosyaları kopyalarken dosya boyut sınırını arttırmak için lütfe
 SBIE2224 Korumalı alan programı çöktü: %2
 .
 
+2225;pop;wrn;01
+SBIE2225 Bir EFS dosyasına erişim girişiminde bulunuldu: %2
+.
+
 #----------------------------------------------------------------------------
 # SbieDrv
 #

@@ -3167,68 +3167,68 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation>Detta supportercertifikat kommer &lt;font color=&apos;red&apos;&gt;utgå om %1 dagar&lt;/font&gt;, vänligen &lt;a href=&quot;sbie://update/cert&quot;&gt;skaffa ett uppdaterat certifikat&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="507"/>
+        <location filename="Windows/SettingsWindow.cpp" line="553"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>Kör &amp;osandlådad</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="704"/>
+        <location filename="Windows/SettingsWindow.cpp" line="744"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>Detta ser inte ut som ett certifikat. Vänligen ange hela certifikatet, inte bara en del av det.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="722"/>
+        <location filename="Windows/SettingsWindow.cpp" line="762"/>
         <source>This certificate is unfortunately expired.</source>
         <translation>Detta certifikat är tyvärr utgånget.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="724"/>
+        <location filename="Windows/SettingsWindow.cpp" line="764"/>
         <source>This certificate is unfortunately outdated.</source>
         <translation>Detta certifikat är tyvärr gammalt.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="727"/>
+        <location filename="Windows/SettingsWindow.cpp" line="767"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Tack för att du stöder utvecklingen av Sandboxie-Plus.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="735"/>
+        <location filename="Windows/SettingsWindow.cpp" line="775"/>
         <source>This support certificate is not valid.</source>
         <translation>Detta supportcertifikat är inte giltigt.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="766"/>
-        <location filename="Windows/SettingsWindow.cpp" line="875"/>
+        <location filename="Windows/SettingsWindow.cpp" line="806"/>
+        <location filename="Windows/SettingsWindow.cpp" line="915"/>
         <source>Select Directory</source>
         <translation>Välj katalog</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="837"/>
+        <location filename="Windows/SettingsWindow.cpp" line="877"/>
         <source>Please enter the new configuration password.</source>
         <translation>Vänligen ange det nya konfigurationslösenordet.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="841"/>
+        <location filename="Windows/SettingsWindow.cpp" line="881"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Vänligen återange det nya konfigurationslösenordet.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="846"/>
+        <location filename="Windows/SettingsWindow.cpp" line="886"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Lösenorden stämde inte, vänligen försök igen.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="856"/>
+        <location filename="Windows/SettingsWindow.cpp" line="896"/>
         <source>Process</source>
         <translation>Process</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="856"/>
+        <location filename="Windows/SettingsWindow.cpp" line="896"/>
         <source>Folder</source>
         <translation>Mapp</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="866"/>
+        <location filename="Windows/SettingsWindow.cpp" line="906"/>
         <source>Please enter a program file name</source>
         <translation>Vänligen ange ett programfilsnamn</translation>
     </message>

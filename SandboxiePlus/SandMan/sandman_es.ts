@@ -3262,68 +3262,68 @@ NO seleccionará: %2</translation>
         <translation>Este certificado de patrocinador &lt;font color=&apos;red&apos;&gt;expirará en %1 días&lt;/font&gt;, por favor &lt;a href=&quot;sbie://update/cert&quot;&gt;obtenga un certificado actualizado&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="507"/>
+        <location filename="Windows/SettingsWindow.cpp" line="553"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>Ejecutar &amp;Sin-Sandbox</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="704"/>
+        <location filename="Windows/SettingsWindow.cpp" line="744"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="722"/>
+        <location filename="Windows/SettingsWindow.cpp" line="762"/>
         <source>This certificate is unfortunately expired.</source>
         <translation>Este certificado ha expirado.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="724"/>
+        <location filename="Windows/SettingsWindow.cpp" line="764"/>
         <source>This certificate is unfortunately outdated.</source>
         <translation>Este certificado esta desactualizado.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="727"/>
+        <location filename="Windows/SettingsWindow.cpp" line="767"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Gracias por patrocinar el desarrollo de Sandboxie-Plus.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="735"/>
+        <location filename="Windows/SettingsWindow.cpp" line="775"/>
         <source>This support certificate is not valid.</source>
         <translation>Este certificado de patrocinador no es válido.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="766"/>
-        <location filename="Windows/SettingsWindow.cpp" line="875"/>
+        <location filename="Windows/SettingsWindow.cpp" line="806"/>
+        <location filename="Windows/SettingsWindow.cpp" line="915"/>
         <source>Select Directory</source>
         <translation>Seleccionar Directorio</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="837"/>
+        <location filename="Windows/SettingsWindow.cpp" line="877"/>
         <source>Please enter the new configuration password.</source>
         <translation>Por favor ingrese la nueva clave de configuracion.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="841"/>
+        <location filename="Windows/SettingsWindow.cpp" line="881"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Por favor re-ingrese la nueva clave de configuracion.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="846"/>
+        <location filename="Windows/SettingsWindow.cpp" line="886"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Las contraseñas no son iguales, vuelva a intentar por favor.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="856"/>
+        <location filename="Windows/SettingsWindow.cpp" line="896"/>
         <source>Process</source>
         <translation>Procesos</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="856"/>
+        <location filename="Windows/SettingsWindow.cpp" line="896"/>
         <source>Folder</source>
         <translation>Carpeta</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="866"/>
+        <location filename="Windows/SettingsWindow.cpp" line="906"/>
         <source>Please enter a program file name</source>
         <translation>Por favor ingrese un nombre de archivo al programa</translation>
     </message>

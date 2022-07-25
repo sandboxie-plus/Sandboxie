@@ -3208,7 +3208,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Kapat</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="837"/>
+        <location filename="Windows/SettingsWindow.cpp" line="877"/>
         <source>Please enter the new configuration password.</source>
         <translation>Lütfen yeni yapılandırma parolasını girin.</translation>
     </message>
@@ -3218,18 +3218,18 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Simge durumunda küçült</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="766"/>
-        <location filename="Windows/SettingsWindow.cpp" line="875"/>
+        <location filename="Windows/SettingsWindow.cpp" line="806"/>
+        <location filename="Windows/SettingsWindow.cpp" line="915"/>
         <source>Select Directory</source>
         <translation>Dizin Seç</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="866"/>
+        <location filename="Windows/SettingsWindow.cpp" line="906"/>
         <source>Please enter a program file name</source>
         <translation>Lütfen bir program dosyası adı girin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="856"/>
+        <location filename="Windows/SettingsWindow.cpp" line="896"/>
         <source>Folder</source>
         <translation>Klasör</translation>
     </message>
@@ -3239,7 +3239,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Kapatmadan önce sor</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="856"/>
+        <location filename="Windows/SettingsWindow.cpp" line="896"/>
         <source>Process</source>
         <translation>İşlem</translation>
     </message>
@@ -3249,12 +3249,12 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Sandboxie Plus - Ayarlar</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="841"/>
+        <location filename="Windows/SettingsWindow.cpp" line="881"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Lütfen yeni yapılandırma parolasını tekrar girin.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="846"/>
+        <location filename="Windows/SettingsWindow.cpp" line="886"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Parolalar eşleşmedi, lütfen tekrar deneyin.</translation>
     </message>
@@ -3264,12 +3264,12 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Otomatik Algıla</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="727"/>
+        <location filename="Windows/SettingsWindow.cpp" line="767"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Sandboxie-Plus&apos;ın gelişimini desteklediğiniz için teşekkür ederiz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="735"/>
+        <location filename="Windows/SettingsWindow.cpp" line="775"/>
         <source>This support certificate is not valid.</source>
         <translation>Bu destek sertifikası geçerli değil.</translation>
     </message>
@@ -3289,7 +3289,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Klasik simgesini göster</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="722"/>
+        <location filename="Windows/SettingsWindow.cpp" line="762"/>
         <source>This certificate is unfortunately expired.</source>
         <translation>Bu sertifikanın ne yazık ki süresi dolmuş.</translation>
     </message>
@@ -3350,12 +3350,12 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Bu destekçi sertifikası &lt;font color=&apos;red&apos;&gt;%1 gün içinde sona erecek&lt;/font&gt;, lütfen &lt;a href=&quot;sbie://update/cert&quot;&gt;yenilenmiş bir sertifika alın&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="507"/>
+        <location filename="Windows/SettingsWindow.cpp" line="553"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>&amp;Korumalı Alandan Olmadan Çalıştır</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="724"/>
+        <location filename="Windows/SettingsWindow.cpp" line="764"/>
         <source>This certificate is unfortunately outdated.</source>
         <translation>Bu sertifika maalesef güncel değil.</translation>
     </message>
@@ -3365,7 +3365,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Koruma Alanlı Web Tarayıcısı</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="704"/>
+        <location filename="Windows/SettingsWindow.cpp" line="744"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>Bu bir sertifikaya benzemiyor. Lütfen sertifikanın sadece bir kısmını değil tamamını girin.</translation>
     </message>

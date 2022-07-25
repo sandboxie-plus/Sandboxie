@@ -3089,13 +3089,13 @@ Scegliere No per selezionare: %2</translation>
         <translation>Questo certificato &lt;font color=&apos;red&apos;&gt;scadrà fra %1 giorni&lt;/font&gt;, si prega di &lt;a href=&quot;sbie://update/cert&quot;&gt;ottenere un certificato aggiornato&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="507"/>
+        <location filename="Windows/SettingsWindow.cpp" line="553"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translatorcomment>Voce relativa al menu contestuale dei file all&apos;interno della sandbox</translatorcomment>
         <translation>Avvia all&apos;&amp;esterno dell&apos;area virtuale</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="704"/>
+        <location filename="Windows/SettingsWindow.cpp" line="744"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>Si prega di inserire l&apos;intero certificato, non solo una parte di esso.</translation>
     </message>
@@ -3105,58 +3105,58 @@ Scegliere No per selezionare: %2</translation>
         <translation type="vanished">Si prega di inserire l&apos;intero certificato, non solo una parte di esso.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="722"/>
+        <location filename="Windows/SettingsWindow.cpp" line="762"/>
         <source>This certificate is unfortunately expired.</source>
         <translation>Questo certificato è scaduto.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="724"/>
+        <location filename="Windows/SettingsWindow.cpp" line="764"/>
         <source>This certificate is unfortunately outdated.</source>
         <translation>Questo certificato è obsoleto.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="727"/>
+        <location filename="Windows/SettingsWindow.cpp" line="767"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Grazie per aver sostenuto lo sviluppo di Sandboxie Plus.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="735"/>
+        <location filename="Windows/SettingsWindow.cpp" line="775"/>
         <source>This support certificate is not valid.</source>
         <translation>Certificato di supporto non valido.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="766"/>
-        <location filename="Windows/SettingsWindow.cpp" line="875"/>
+        <location filename="Windows/SettingsWindow.cpp" line="806"/>
+        <location filename="Windows/SettingsWindow.cpp" line="915"/>
         <source>Select Directory</source>
         <translation>Seleziona directory</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="837"/>
+        <location filename="Windows/SettingsWindow.cpp" line="877"/>
         <source>Please enter the new configuration password.</source>
         <translation>Immettere la nuova password di configurazione.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="841"/>
+        <location filename="Windows/SettingsWindow.cpp" line="881"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Reimmettere la nuova password di configurazione.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="846"/>
+        <location filename="Windows/SettingsWindow.cpp" line="886"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Le password non corrispondono, si prega di riprovare.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="856"/>
+        <location filename="Windows/SettingsWindow.cpp" line="896"/>
         <source>Process</source>
         <translation>Processo</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="856"/>
+        <location filename="Windows/SettingsWindow.cpp" line="896"/>
         <source>Folder</source>
         <translation>Cartella</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="866"/>
+        <location filename="Windows/SettingsWindow.cpp" line="906"/>
         <source>Please enter a program file name</source>
         <translation>Immettere il nome del programma (es. nomefile.exe)</translation>
     </message>

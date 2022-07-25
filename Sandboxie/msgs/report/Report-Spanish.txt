@@ -26,6 +26,10 @@ SBIE2195 To run Explorer.exe sandboxed, the access for COM infrastructure must n
 %0
 .
 
+2225;pop;wrn;01
+SBIE2225 An attempt was made to access an EFS file: %2
+.
+
 2302;pop;err;01
 SBIE2302 Process image configuration conflict: %2
 .

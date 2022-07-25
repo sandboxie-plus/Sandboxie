@@ -40,7 +40,7 @@ body:
         If applicable, in which sandboxed program did you see the problem?
         
         If not, you can type something like "Not relevant".
-      placeholder: e.g. Firefox 96.0.3 64-bit, ....
+      placeholder: e.g. Firefox 102.0.1 64-bit, ....
     validations:
       required: true
   - type: input
@@ -79,7 +79,7 @@ body:
     id: windows-version
     attributes:
       label: What is your Windows edition and version?
-      placeholder: "e.g. Windows 10 Pro 21H1 64-bit"
+      placeholder: "e.g. Windows 10 Pro 21H2 64-bit"
     validations:
       required: true
   - type: dropdown
@@ -103,14 +103,14 @@ body:
     attributes:
       label: Please mention any installed security software
       description: Even if the real-time protection is disabled, any security solution could still conflict with Sandboxie.
-      placeholder: e.g. Windows Defender
+      placeholder: e.g. Microsoft Defender Antivirus
     validations:
       required: true
   - type: input
     id: sandboxie-version
     attributes:
       label: What version of Sandboxie are you running?
-      placeholder: e.g. Sandboxie Plus 1.0.9 64-bit
+      placeholder: e.g. Sandboxie Plus 1.2.5 64-bit
     validations:
       required: true
   - type: dropdown
@@ -119,9 +119,9 @@ body:
       label: Is it a new installation of Sandboxie?
       options:
         - "I recently did a new clean installation."
-        - "I just updated Sandboxie from the previous version."
+        - "I just updated Sandboxie from a previous version (to be specified)."
         - "I recently upgraded it from an older version than v1.0.22 / 5.55.22."
-        - "I have been in the same version for a while now."
+        - "I have been using the same version for some time."
     validations:
       required: true
   - type: input
@@ -129,7 +129,7 @@ body:
     attributes:
       label: Is it a regression?
       description: If applicable, specify in which Sandboxie version this problem was introduced the first time (including any pre-release version).
-      placeholder: e.g. Since 5.55.9 64-bit
+      placeholder: e.g. Since 5.57.5 64-bit
   - type: dropdown
     id: box-types
     attributes:
@@ -183,7 +183,7 @@ body:
         C:\Users\%Username%\AppData\Local\CrashDumps
         C:\Windows\Minidump
         C:\Sandbox\%User%\DefaultBox\user\current\AppData\Local\CrashDumps
-        C:\Sandbox\%USER%\%SANDBOX% (only if you previously set EnableMiniDump=y on your sandbox configuration)
+        C:\Sandbox\%USER%\%SANDBOX% (only if you previously set EnableMiniDump=y in the sandbox section of your Sandboxie.ini file)
         ```
         
         Tip: You can upload the .dmp file(s) on a file storage service, then share the resulting link below.

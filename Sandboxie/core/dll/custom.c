@@ -135,20 +135,6 @@ _FX UCHAR GetSetCustomLevel(UCHAR SetLevel)
     if (! SetLevel) {
 
         //
-        // if UseRegDeleteV2 is set, check if RegPaths.dat was loaded
-        // if not it means the box was previusly a V1 box,
-        // hence return 0 and re run customization
-        // 
-        // note: DeleteShellAssocKeys deletes the sandboxie shell integration keys
-        // so the existence of a RegPaths.dat in a customized box is a reliable indicator
-        //
-
-        extern BOOLEAN Key_Delete_v2;
-        extern BOOLEAN Key_RegPaths_Loaded;
-        if (Key_Delete_v2 && !Key_RegPaths_Loaded)
-            return 0;
-
-        //
         // open the AutoExec key, also used to indicate if this sandbox
         // has already been customized
         //
@@ -189,6 +175,20 @@ _FX UCHAR GetSetCustomLevel(UCHAR SetLevel)
             Sbie_snwprintf(path, 256, L"%d [%08X]", -2, status);
             SbieApi_Log(2206, path);
         }
+
+        //
+        // if UseRegDeleteV2 is set, check if RegPaths.dat was loaded
+        // if not it means the box was previusly a V1 box,
+        // hence return 0 and re run customization
+        // 
+        // note: DeleteShellAssocKeys deletes the sandboxie shell integration keys
+        // so the existence of a RegPaths.dat in a customized box is a reliable indicator
+        //
+
+        extern BOOLEAN Key_Delete_v2;
+        extern BOOLEAN Key_RegPaths_Loaded;
+        if (Key_Delete_v2 && !Key_RegPaths_Loaded)
+            return 0;
 
     } else if (AutoExecHKey) {
 

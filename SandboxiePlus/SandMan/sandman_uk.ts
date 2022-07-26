@@ -6,27 +6,27 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="172"/>
         <source>Install your &lt;b&gt;Sandboxie-Plus&lt;/b&gt; support certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановіть свій сертифікат підтримки &lt;b&gt;Sandboxie-Plus&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="173"/>
         <source>If you have a supporter certificate, please fill it into the field below.</source>
-        <translation type="unfinished"></translation>
+        <translation>Якщо у вас є сертифікат підтримки, заповніть його в полі нижче.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="195"/>
         <source>Start evaluation without a certificate for a limited period of time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Розпочати оцінювання без сертифіката протягом обмеженого періоду часу.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="214"/>
         <source>To use &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in a business setting, an appropriate &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt; for business use is required. If you do not yet have the required certificate(s), you can get those from the &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com web shop&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Щоб використовувати &lt;b&gt;Sandboxie-Plus&lt;/b&gt; у бізнес-налаштуванні, відповідний &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;сертифікат підтримки&lt;/a&gt; для використання в бізнесі потрібен. Якщо у вас ще немає необхідних сертифікатів, ви можете отримати їх у &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;веб-магазині xanasoft.com&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="225"/>
         <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; надає додаткові функції та типи пісочниці виключно для &lt;u&gt;прихильників проекту&lt;/u&gt;. Пісочниці, як пісочниці з покращеною конфіденційністю, &lt;b&gt;&lt;font color=&apos;red&apos;&gt;захищає дані користувачів від незаконного доступу&lt;/font&gt;&lt;/b&gt; ізольованими програмами. Якщо ви ще не прихильник, подумайте про &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;підтримку проекту&lt;/a&gt;, щоб забезпечити подальший розвиток Sandboxie і отримати &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертифікат підтримки&lt;/a&gt;.</translation>
     </message>
 </context>
 <context>
@@ -44,53 +44,33 @@
         <source>%1 - Files</source>
         <translation>%1 - Файли</translation>
     </message>
-    <message>
-        <source>Create Shortcut</source>
-        <translation type="vanished">Створити ярлик</translation>
-    </message>
-    <message>
-        <source>Recover to Any Folder</source>
-        <translation type="vanished">Відновити в будь-яку папку</translation>
-    </message>
-    <message>
-        <source>Recover to Same Folder</source>
-        <translation type="vanished">Відновити в цю папку</translation>
-    </message>
-    <message>
-        <source>Select Directory</source>
-        <translation type="vanished">Оберіть каталог</translation>
-    </message>
-    <message>
-        <source>Create Shortcut to sandbox %1</source>
-        <translation type="vanished">Створити ярлик до контейнеру %1</translation>
-    </message>
 </context>
 <context>
     <name>CFileView</name>
     <message>
         <location filename="Views/FileView.cpp" line="140"/>
         <source>Create Shortcut</source>
-        <translation type="unfinished">Створити ярлик</translation>
+        <translation>Створити ярлик</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="146"/>
         <source>Recover to Any Folder</source>
-        <translation type="unfinished">Відновити в будь-яку папку</translation>
+        <translation>Відновити в будь-яку папку</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="148"/>
         <source>Recover to Same Folder</source>
-        <translation type="unfinished">Відновити в цю папку</translation>
+        <translation>Відновити в цю папку</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="208"/>
         <source>Select Directory</source>
-        <translation type="unfinished">Оберіть каталог</translation>
+        <translation>Оберіть каталог</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="258"/>
         <source>Create Shortcut to sandbox %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити ярлик для пісочниці %1</translation>
     </message>
 </context>
 <context>
@@ -98,17 +78,17 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="454"/>
         <source>Complete your configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Завершіть налаштування</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="461"/>
         <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Майже завершено, натисніть &quot;Готово&quot;, щоб застосувати всі вибрані параметри та завершити роботу майстра.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="473"/>
         <source>Keep Sandboxie-Plus up to date.</source>
-        <translation type="unfinished"></translation>
+        <translation>Підтримуйте Sandboxie-Plus в актуальному стані.</translation>
     </message>
 </context>
 <context>
@@ -116,32 +96,32 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="107"/>
         <source>Introduction</source>
-        <translation type="unfinished"></translation>
+        <translation>Вступ</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="111"/>
         <source>Welcome to the Setup Wizard. This wizard will help you to configure your copy of &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. You can start this wizard at any time from the Sandbox-&gt;Maintenance menu if you do not wish to complete it now.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ласкаво просимо до майстра налаштування. Цей майстер допоможе вам налаштувати вашу копію &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. Ви можете будь-коли запустити цей майстер із меню &quot;Пісочниця-&gt;Обслуговування&quot;, якщо ви не бажаєте завершувати його зараз.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="122"/>
         <source>Select how you would like to use Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть, як ви хочете використовувати Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="125"/>
         <source>&amp;Personally, for private non-commercial use</source>
-        <translation type="unfinished"></translation>
+        <translation>Особисто, для приватного некомерційного використання (&amp;P)</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="130"/>
         <source>&amp;Commercially, for business or enterprise use</source>
-        <translation type="unfinished"></translation>
+        <translation>Комерційно, для комерційного чи корпоративного використання (&amp;C)</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="135"/>
         <source>Note: this option is immutable</source>
-        <translation type="unfinished"></translation>
+        <translation>Примітка: цей параметр незмінний</translation>
     </message>
 </context>
 <context>
@@ -149,22 +129,22 @@
     <message>
         <location filename="Models/MonitorModel.cpp" line="115"/>
         <source>Type</source>
-        <translation type="unfinished">Тип</translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <location filename="Models/MonitorModel.cpp" line="116"/>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Статус</translation>
     </message>
     <message>
         <location filename="Models/MonitorModel.cpp" line="117"/>
         <source>Value</source>
-        <translation type="unfinished">Значення</translation>
+        <translation>Значення</translation>
     </message>
     <message>
         <location filename="Models/MonitorModel.cpp" line="118"/>
         <source>Count</source>
-        <translation type="unfinished"></translation>
+        <translation>Кількість</translation>
     </message>
 </context>
 <context>
@@ -491,10 +471,6 @@
         <location filename="Windows/OptionsGeneral.cpp" line="92"/>
         <source>Browse for Program</source>
         <translation>Оберіть програму</translation>
-    </message>
-    <message>
-        <source>Browse Content</source>
-        <translation type="obsolete">Переглянути зміст</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="215"/>
@@ -937,22 +913,22 @@ Full path: %4</source>
     <message>
         <location filename="SandManRecovery.cpp" line="188"/>
         <source>Sandboxie-Plus - Recovery Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Журнал відновлення</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="196"/>
         <source>Time|Box Name|File Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Час|Назва пісочниці|Шлях до файлу</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="198"/>
         <source>Cleanup Recovery Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Очищення журналу відновлення</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="208"/>
         <source>the following files were recently recovered and moved out of a sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>наступні файли нещодавно відновлено та переміщено з пісочниці.</translation>
     </message>
 </context>
 <context>
@@ -1012,17 +988,17 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="235"/>
         <source>Do you really want to delete %1 selected files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви дійсно бажаєте видалити %1 вибраних файлів?</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="263"/>
         <source>Close until all programs stop in this box</source>
-        <translation>Закрити, поки всі програми зупинять роботу в контейнері</translation>
+        <translation>Закрити, поки всі програми не зупинять роботу у пісочниці</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="264"/>
         <source>Close and Disable Immediate Recovery for this box</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрити та вимкнути негайне відновлення для цієї пісочниці</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="284"/>
@@ -1064,10 +1040,6 @@ Full path: %4</source>
         <location filename="SbiePlusAPI.cpp" line="266"/>
         <source>Disabled</source>
         <translation>Вимкнений</translation>
-    </message>
-    <message>
-        <source>Empty</source>
-        <translation type="vanished">Порожньо</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="277"/>
@@ -1191,24 +1163,19 @@ Full path: %4</source>
         <translation>Зупинити всі процеси</translation>
     </message>
     <message>
-        <source>Window Finder</source>
-        <translation type="vanished">Пошук вікна</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="369"/>
         <source>Disable File Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнути відновлення файлів</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="371"/>
         <source>Disable Message Popup</source>
-        <oldsource>Disable Message PopUp</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнути спливаюче вікно повідомлення</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="304"/>
         <source>&amp;Maintenance</source>
-        <translation>Різне (&amp;M)</translation>
+        <translation>Обслуговування (&amp;M)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="305"/>
@@ -1273,7 +1240,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="320"/>
         <source>Setup Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Майстер налаштування</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="323"/>
@@ -1320,7 +1287,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="432"/>
         <source>Refresh View</source>
-        <translation type="unfinished"></translation>
+        <translation>Майстер налаштування</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="438"/>
@@ -1345,7 +1312,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="443"/>
         <source>Cleanup Recovery Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистити журнал відновлення</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="445"/>
@@ -1431,12 +1398,12 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="557"/>
         <source>Create New Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити нову пісочницю</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="558"/>
         <source>Create New Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити нову групу</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="628"/>
@@ -1446,12 +1413,12 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="670"/>
         <source>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;There is a new build of Sandboxie-Plus available&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;Доступна нова збірка Sandboxie-Plus&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="681"/>
         <source>Click to install update</source>
-        <translation type="unfinished"></translation>
+        <translation>Натисніть, щоб встановити оновлення</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="684"/>
@@ -1461,19 +1428,19 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="685"/>
         <source>Click to open web browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Натисніть, щоб відкрити веб-браузер</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="791"/>
         <source>Time|Box Name|File Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Час|Назва пісочниці|Шлях до файлу</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="462"/>
         <location filename="SandMan.cpp" line="536"/>
         <location filename="SandMan.cpp" line="799"/>
         <source>Recovery Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Журнал відновлення</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="839"/>
@@ -1556,7 +1523,7 @@ This box prevents access to all user data locations, except explicitly granted i
     <message>
         <location filename="SandMan.cpp" line="1321"/>
         <source>Current Config: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Поточна конфігурація: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1886"/>
@@ -1606,10 +1573,6 @@ This box prevents access to all user data locations, except explicitly granted i
         <location filename="SandMan.cpp" line="1232"/>
         <source>Cleaned up removed templates...</source>
         <translation>Очищення прибраних шаблонів...</translation>
-    </message>
-    <message>
-        <source>Loaded Config: %1</source>
-        <translation type="vanished">Завантажена конфігурація: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1329"/>
@@ -1804,7 +1767,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="SandManUpdate.cpp" line="258"/>
         <source>&lt;p&gt;A Sandboxie-Plus update has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Оновлення Sandboxie-Plus завантажено в таке розташування:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Ви хочете почати встановлення? Якщо будь-які програми запущені у пісочниці, вони будуть зупинені.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2556"/>
@@ -1834,83 +1797,83 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="SandMan.cpp" line="331"/>
         <source>Vintage View (like SbieCtrl)</source>
-        <translation type="unfinished"></translation>
+        <translation>Вінтажний вид (як SbieCtrl)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="379"/>
         <location filename="SandMan.cpp" line="497"/>
         <source>Is Window Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Чи є вікно в пісочниці</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="424"/>
         <source>Show File Panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати панель файлів</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="486"/>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл (&amp;F)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="498"/>
         <source>Resource Access Monitor</source>
-        <translation type="unfinished">Монітор доступу до ресурсів</translation>
+        <translation>Монітор доступу до ресурсів</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="531"/>
         <source>Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Програми</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="532"/>
         <source>Files and Folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Файли та папки</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="561"/>
         <source>Set Container Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановити папку контейнера</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="564"/>
         <source>Set Layout and Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштувати макет та групи</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="567"/>
         <source>Reveal Hidden Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати приховані пісочниці</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="573"/>
         <source>&amp;Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштувати (&amp;C)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="577"/>
         <source>Program Alerts</source>
-        <translation type="unfinished"></translation>
+        <translation>Програмні сповіщення</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="579"/>
         <source>Windows Shell Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Інтеграція оболонки Windows</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="581"/>
         <source>Software Compatibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Сумісність програмного забезпечення</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="590"/>
         <source>Lock Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Блокування конфігурації</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="607"/>
         <source>Sandbox %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Пісочниця %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1319"/>
@@ -1955,17 +1918,17 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="SandMan.cpp" line="2014"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
-        <translation type="unfinished"></translation>
+        <translation>В інтерфейсі Plus цю функцію інтегровано в головний список ізольованого програмного середовища.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2015"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовуючи контекстне меню пісочниці/групи, ви можете переміщувати пісочниці та групи в інші групи. Ви також можете використовувати перетягування для переміщення елементів. Крім того, ви також можете використовувати клавіші зі стрілками, утримуючи натиснутою клавішу ALT, щоб переміщувати елементи вгору та вниз у їхній групі.&lt;br /&gt;Ви можете створювати нові поля та групи з меню &quot;Пісочниці&quot;.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2203"/>
         <source>Sandboxie config has been reloaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфігурацію Sandboxie перезавантажено</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2313"/>
@@ -2179,10 +2142,6 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Не вдалося завантажити оновлення з: %1</translation>
     </message>
     <message>
-        <source>&lt;p&gt;New Sandboxie-Plus has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;Нова версія Sandboxie-Plus була завантажена в: &lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Ви хочете почати інсталяцію? Якщо деякі програми вже працюють в пісочниці, то вони будуть завершені.&lt;/p&gt;</translation>
-    </message>
-    <message>
         <location filename="SbieFindWnd.cpp" line="88"/>
         <source>The selected window is running as part of program %1 in sandbox %2</source>
         <translation>Це вікно працює, як частина програми %1 в пісочниці %2</translation>
@@ -2218,7 +2177,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Models/SbieModel.cpp" line="276"/>
         <source>Empty</source>
-        <translation type="unfinished">Порожньо</translation>
+        <translation>Порожньо</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="500"/>
@@ -2243,11 +2202,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Models/SbieModel.cpp" line="504"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start Time</source>
-        <translation type="vanished">Час початку</translation>
+        <translation>Інформація</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="508"/>
@@ -2510,7 +2465,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Views/SbieView.cpp" line="169"/>
         <location filename="Views/SbieView.cpp" line="287"/>
         <source>Refresh Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Оновити інформацію</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="201"/>
@@ -2567,23 +2522,23 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Views/SbieView.cpp" line="167"/>
         <source>Browse Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Огляд файлів</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="197"/>
         <source>Immediate Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Негайне відновлення</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="200"/>
         <location filename="Views/SbieView.cpp" line="279"/>
         <source>Sandbox Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Інструменти пісочниці</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="203"/>
         <source>Duplicate Box Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Дубльована конфігурація ящика</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="205"/>
@@ -2595,7 +2550,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Views/SbieView.cpp" line="206"/>
         <location filename="Views/SbieView.cpp" line="292"/>
         <source>Move Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Перемістити пісочницю</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="217"/>
@@ -2647,57 +2602,57 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Views/SbieView.cpp" line="254"/>
         <source>Run Sandboxed</source>
-        <translation type="unfinished">Виконати у пісочниці</translation>
+        <translation>Запустити у пісочниці</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="255"/>
         <source>Run Web Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустити веб-браузер</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="256"/>
         <source>Run eMail Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустити поштовий клієнт</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="257"/>
         <source>Run Any Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустити будь-яку програму</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="258"/>
         <source>Run From Start Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустити з меню &quot;Пуск&quot;</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="259"/>
         <source>Run Windows Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустити провідник Windows</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="271"/>
         <source>Terminate Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Припинення роботи програм</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="272"/>
         <source>Quick Recover</source>
-        <translation type="unfinished"></translation>
+        <translation>Швидке відновлення</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="277"/>
         <source>Sandbox Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштування пісочниці</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="284"/>
         <source>Duplicate Sandbox Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Дублювати конфігурацію пісочниці</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="343"/>
         <source>Move Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Перемістити групу</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="474"/>
@@ -2800,14 +2755,6 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Відкрити Реєстр</translation>
     </message>
     <message>
-        <source>Duplicate Sandbox</source>
-        <translation type="vanished">Зробити копію пісочниці</translation>
-    </message>
-    <message>
-        <source>Move Box/Group</source>
-        <translation type="vanished">Перемістити пісочницю/групу</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="207"/>
         <location filename="Views/SbieView.cpp" line="293"/>
         <source>Move Up</source>
@@ -2825,10 +2772,6 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Будь ласка, введіть нову назву для групи.</translation>
     </message>
     <message>
-        <source>This Group name is already in use.</source>
-        <translation type="vanished">Це ім&apos;я групи вже використовується.</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="832"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation>Перемістити в (негативні значення піднімають вгору, позитивні - вниз):</translation>
@@ -2841,12 +2784,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Views/SbieView.cpp" line="952"/>
         <source>This name is already used for a Box Group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця назва вже використовується для групи пісочниці.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="957"/>
         <source>This name is already used for a Sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця назва вже використовується для пісочниці.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1009"/>
@@ -2927,7 +2870,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Views/SbieView.cpp" line="1280"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
-        <translation type="unfinished"></translation>
+        <translation>Тепер відобразиться меню &quot;Пуск&quot; Sandboxie. Виберіть програму з меню, і Sandboxie створить новий ярлик на вашому реальному робочому столі, який ви зможете використовувати для виклику вибраної програми під наглядом Sandboxie.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1315"/>
@@ -2994,8 +2937,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="112"/>
         <source>Don&apos;t show any icon</source>
-        <oldsource>Don&apos;t integrate links</oldsource>
-        <translation type="unfinished">Не показувати будь-яких піктограм</translation>
+        <translation>Не показувати будь-яких піктограм</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="113"/>
@@ -3040,23 +2982,22 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="125"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Жодного</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="126"/>
         <source>Native</source>
-        <translation type="unfinished"></translation>
+        <translation>Рідна</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="127"/>
         <source>Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="131"/>
         <source>%1</source>
-        <oldsource>%1 %</oldsource>
-        <translation type="unfinished">%1</translation>
+        <translation>%1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="278"/>
@@ -3066,7 +3007,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="298"/>
         <source>Sandboxed Web Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Ізольований веб-браузер</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="449"/>
@@ -3086,12 +3027,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="744"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This does not look like a certificate, please enter the entire certificate, not just a portion of it.</source>
-        <oldsource>This does not look like a certificate, please enter the entire certificate not just a portion of it.</oldsource>
-        <translation type="obsolete">Це не схоже на сертифікат, будь ласка, введіть весь сертифікат, а не лише його частину.</translation>
+        <translation>Це не схоже на сертифікат. Будь ласка, введіть весь сертифікат, а не лише його частину.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="762"/>
@@ -3155,27 +3091,27 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="28"/>
         <source>Setup Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Майстер налаштування</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="39"/>
         <source>The decision you make here will affect which page you get to see next.</source>
-        <translation type="unfinished"></translation>
+        <translation>Рішення, яке ви приймете тут, вплине на те, яку сторінку ви побачите наступною.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="42"/>
         <source>This help is likely not to be of any help.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця допомога, ймовірно, нічим не допоможе.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="46"/>
         <source>Sorry, I already gave all the help I could.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибачте, я вже надав всю допомогу.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="48"/>
         <source>Setup Wizard Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Довідка майстра налаштування</translation>
     </message>
 </context>
 <context>
@@ -3183,27 +3119,27 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="382"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; shell integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштування інтеграції оболонки &lt;b&gt;Sandboxie-Plus&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="383"/>
         <source>Configure how Sandboxie-Plus should integrate with your system.</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштуйте спосіб інтеграції Sandboxie-Plus із вашою системою.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="387"/>
         <source>Start UI with Windows</source>
-        <translation type="unfinished">Запускати UI з Windows</translation>
+        <translation>Запуск інтерфейсу користувача з Windows</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="392"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation type="unfinished">Додати &apos;Виконати в пісочниці&apos; до меню Провіднику</translation>
+        <translation>Додайте &quot;Запустити у пісочниці&quot; до контекстного меню провідника</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="397"/>
         <source>Add desktop shortcut for starting Web browser under Sandboxie</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати ярлик на робочий стіл для запуску веб-браузера у Sandboxie</translation>
     </message>
 </context>
 <context>
@@ -3250,13 +3186,6 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     </message>
 </context>
 <context>
-    <name>CSupportDialog</name>
-    <message>
-        <source>%1</source>
-        <translation type="obsolete">%1</translation>
-    </message>
-</context>
-<context>
     <name>CTraceModel</name>
     <message>
         <location filename="Models/TraceModel.cpp" line="165"/>
@@ -3272,10 +3201,6 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Models/TraceModel.cpp" line="93"/>
         <source>Process %1</source>
         <translation>Процес %1</translation>
-    </message>
-    <message>
-        <source>Thread %1</source>
-        <translation type="vanished">Потік %1</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="295"/>
@@ -3370,7 +3295,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Views/TraceView.cpp" line="248"/>
         <source>Cleanup Trace Log</source>
-        <translation type="unfinished">Очистити журнал відстеження</translation>
+        <translation>Очистити журнал відстеження</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="568"/>
@@ -3395,7 +3320,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Views/TraceView.cpp" line="177"/>
         <source>Monitor mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим монітора</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="502"/>
@@ -3408,7 +3333,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Views/TraceView.cpp" line="631"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Монітор відстеження</translation>
     </message>
 </context>
 <context>
@@ -3416,37 +3341,37 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="267"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; UI</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштування інтерфейсу користувача &lt;b&gt;Sandboxie-Plus&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="268"/>
         <source>Select the user interface style you prefer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Оберіть стиль інтерфейсу користувача, який вам більше подобається.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="272"/>
         <source>&amp;Advanced UI for experts</source>
-        <translation type="unfinished"></translation>
+        <translation>Розширений інтерфейс користувача для експертів (&amp;A)</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="277"/>
         <source>&amp;Simple UI for beginners</source>
-        <translation type="unfinished"></translation>
+        <translation>Простий інтерфейс користувача для початківців (&amp;Si)</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="282"/>
         <source>&amp;Vintage SbieCtrl.exe UI</source>
-        <translation type="unfinished"></translation>
+        <translation>Вінтажний інтерфейс SbieCtrl.exe (&amp;V)</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="307"/>
         <source>Use Bright Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати світлий режим</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="311"/>
         <source>Use Dark Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати темний режим</translation>
     </message>
 </context>
 <context>
@@ -3454,29 +3379,22 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="418"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; network filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштування мережевої фільтрації &lt;b&gt;Sandboxie-Plus&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="419"/>
         <source>Sandboxie can use the Windows Filtering Platform (WFP) to restrict network access.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie може використовувати платформу фільтрації Windows (WFP) для обмеження доступу до мережі.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="425"/>
         <source>Using WFP allows Sandboxie to reliably enforce IP/Port based rules for network access. Unlike system level application firewalls, Sandboxie can use different rules in each box for the same application. If you already have a good and reliable application firewall and do not need per box rules, you can leave this option unchecked. Without WFP enabled, Sandboxie will still be able to reliably and entirely block processes from accessing the network. However, this can cause the process to crash, as the driver blocks the required network device endpoints. Even with WFP disabled, Sandboxie offers to set IP/Port based rules, however these will be applied in user mode only and not be enforced by the driver. Hence, without WFP enabled, an intentionally malicious process could bypass those rules, but not the entire network block.</source>
-        <translation type="unfinished"></translation>
+        <translation>Використання WFP дозволяє Sandboxie надійно застосовувати правила доступу до мережі на основі IP/порту. На відміну від брандмауерів додатків системного рівня, Sandboxie може використовувати різні правила в кожному вікні для однієї програми. Якщо у вас уже є гарний і надійний брандмауер програм і вам не потрібні правила для кожного блоку, ви можете залишити цей параметр невибраним. Без увімкнення WFP Sandboxie все одно зможе надійно та повністю блокувати доступ процесів до мережі. Однак це може призвести до збою процесу, оскільки драйвер блокує необхідні кінцеві точки мережевого пристрою. Навіть якщо WFP вимкнено, Sandboxie пропонує встановити правила на основі IP/порту, однак вони будуть застосовані лише в режимі користувача і не застосовуватимуться драйвером. Отже, без увімкнення WFP зловмисний процес може обійти ці правила, але не весь блок мережі.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="434"/>
         <source>Enable Windows Filtering Platform (WFP) support</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>FileBrowserWindow</name>
-    <message>
-        <source>SandboxiePlus - Snapshots</source>
-        <translation type="vanished">SandboxiePlus - Знімки</translation>
+        <translation>Увімкнути підтримку платформи фільтрації Windows (WFP)</translation>
     </message>
 </context>
 <context>
@@ -3735,10 +3653,6 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Прибрати</translation>
     </message>
     <message>
-        <source>Program Control</source>
-        <translation type="obsolete">Програмний контроль</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="950"/>
         <location filename="Forms/OptionsWindow.ui" line="1049"/>
         <location filename="Forms/OptionsWindow.ui" line="1585"/>
@@ -3854,7 +3768,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="742"/>
         <source>Issue message 2111 when a process access is denied</source>
-        <translation type="unfinished"></translation>
+        <translation>Видавати повідомлення 2111, коли доступ до процесу заборонено</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="885"/>
@@ -4248,8 +4162,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2087"/>
         <source>Allow use of nested job objects (works on Windows 8 and later)</source>
-        <oldsource>Allow use of nested job objects (experimental, works on Windows 8 and later)</oldsource>
-        <translation type="unfinished">Дозволити використання вкладених об&apos;єктів завдань (експериментально, працює тільки в Windows 8 та вище)</translation>
+        <translation>Дозволити використання вкладених об&apos;єктів завдань (працює тільки в Windows 8 та вище)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2104"/>
@@ -4289,7 +4202,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="651"/>
         <source>Allow to read memory of unsandboxed processes (not recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити читати пам&apos;ять процесів без пісочниці (не рекомендується)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2080"/>
@@ -4733,7 +4646,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="142"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="171"/>
@@ -4835,14 +4748,6 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="360"/>
         <source>On main window close:</source>
         <translation>Коли головне вікно буде закрите:</translation>
-    </message>
-    <message>
-        <source>Use Dark Theme (fully applied after a restart)</source>
-        <translation type="vanished">Використовувати Темну тему (повноцінно застосовується після перезавантаження)</translation>
-    </message>
-    <message>
-        <source>Restart required (!)</source>
-        <translation type="vanished">Потрібен перезапуск (!)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="77"/>
@@ -4982,7 +4887,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="175"/>
         <source>General Options</source>
-        <translation type="unfinished">Загальні налаштування</translation>
+        <translation>Загальні налаштування</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="230"/>
@@ -5002,78 +4907,77 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="60"/>
         <source>Count and display the disk space occupied by each sandbox</source>
-        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Підрахувати та відобразити дисковий простір, зайнятий кожною пісочницею</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="203"/>
         <source>Use Compact Box List</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати компактний список пісочниць</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="387"/>
         <source>Interface Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфігурація інтерфейсу</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="395"/>
         <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати фон &quot;Піца&quot; у списку полів*</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="419"/>
         <source>Make Box Icons match the Border Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Зробити так, щоб значки пісочниць відповідали кольору грані</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="426"/>
         <source>Use a Page Tree in the Box Options instead of Nested Tabs *</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати дерево сторінок у параметрах вікна замість вкладених вкладок *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="443"/>
         <source>Interface Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметри інтерфейсу</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="466"/>
         <source>Use large icons in box list *</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати великі піктограми в списку *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="476"/>
         <source>High DPI Scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Високе масштабування DPI</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>
         <source>Don&apos;t show icons in menus *</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показувати піктограми в меню *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="503"/>
         <source>Use Dark Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати темну тему</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="513"/>
         <source>Font Scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштабування шрифту</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="405"/>
         <source>(Restart required)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Потрібен перезапуск)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="412"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>* частково встановлений прапорець залишить поведінку, що визначається режимом перегляду.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="723"/>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати логін Sandboxie замість анонімного токена (експериментально)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="733"/>
@@ -5184,7 +5088,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1151"/>
         <source>Download Updates automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматичне завантаження оновлень</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1070"/>

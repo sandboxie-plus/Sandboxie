@@ -12,7 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - reworked saving of global options
 
 ### Fixed
-- fixed issue with the delete-all button [#2043](https://github.com/sandboxie-plus/Sandboxie/issues/2043)
+- fixed issue with the Delete Content button [#2043](https://github.com/sandboxie-plus/Sandboxie/issues/2043)
 - fixed issue with box preferences [#2046](https://github.com/sandboxie-plus/Sandboxie/issues/2046)
 - fixed issue with the Delete V2 registry
 

@@ -9,18 +9,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - the access view list now adds in display the tailing * to file and key paths the same way the driver does [2039](https://github.com/sandboxie-plus/Sandboxie/issues/2039)
 
-
-
 ## [1.2.6 / 5.57.6] - 2022-07-25
 
 ### Changed
 - reworked saving of global options
 
 ### Fixed
-- fixed issue with delete all button [#2043](https://github.com/sandboxie-plus/Sandboxie/issues/2043)
-- fixed issue with box prefs [#2046](https://github.com/sandboxie-plus/Sandboxie/issues/2046)
-- fixed issue with Delete V2 registry
-
+- fixed issue with the Delete Content option [#2043](https://github.com/sandboxie-plus/Sandboxie/issues/2043)
+- fixed issue with box preferences [#2046](https://github.com/sandboxie-plus/Sandboxie/issues/2046)
+- fixed issue with the Delete V2 registry
 
 
 
@@ -30,31 +27,32 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - improved a few icons
 
 ### Fixed
-- fixed certificate validation issue
+- fixed a certificate validation issue
 
 
 
 ## [1.2.4 / 5.57.4] - 2022-07-21
 
 ### Added
-- added delete button to the recovery window [#2024](https://github.com/sandboxie-plus/Sandboxie/issues/2024)
+- added a delete button to the recovery window [#2024](https://github.com/sandboxie-plus/Sandboxie/issues/2024)
 
 ### Changed
-- improved tree selection display
+- improved the tree selection display
 
 ### Fixed
-- fixed issues with file panel
-- fixed issue with key bindings [#2030](https://github.com/sandboxie-plus/Sandboxie/issues/2030)
-- fixed issue wtih RemoveSidName when terminating sbiesvc
+- fixed issues with the file panel
+- fixed issue with some key bindings [#2030](https://github.com/sandboxie-plus/Sandboxie/issues/2030)
+- fixed issue with RemoveSidName when terminating SbieSvc
 - fixed issue with the new hooking mechanism
-- fixed BSOD issue with win32k hooks introduced in 1.2.0 [#2035](https://github.com/sandboxie-plus/Sandboxie/issues/2035)
+- fixed BSOD issue with Win32k hooks introduced in 1.2.0 [#2035](https://github.com/sandboxie-plus/Sandboxie/issues/2035)
 - fixed issue with element11 and electron workaround [#2023](https://github.com/sandboxie-plus/Sandboxie/issues/2023)
+
 
 
 ## [1.2.3 / 5.57.3] - 2022-07-13
 
 ### Fixed
-- fixed issues with new menu code
+- fixed issues with the new menu code
 
 ### Changed
 - reworked frame drawing
@@ -64,7 +62,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.2.2 / 5.57.2] - 2022-07-13
 
 ### Fixed
-- fixed issues with frame-drawing
+- fixed issues with frame drawing
 - fixed issues with the tray and box menu introduced in the last build
 - removed focus rectangle from the tree list
 
@@ -73,11 +71,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
 ## [1.2.1 / 5.57.1] - 2022-07-11
 
 ### Added
-- added Swedish translation to Plus UI (thanks pb1)
+- added Swedish translation to the Plus UI (thanks pb1)
 - added Vintage View Mode to make SandMan UI look like SbieCtrl
 - added alternative tray menu mechanics
 - added ability to auto-generate sandbox icons based on the border colour
@@ -94,7 +91,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
 ## [1.2.0 / 5.57.0] - 2022-06-28
 
 ### Added
@@ -103,9 +99,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - reworked hook management, unloaded DLLs are properly unhooked now [#1243](https://github.com/sandboxie-plus/Sandboxie/issues/1243)
-- box order is now stored in the Sandboxie-Plus.ini
+- the box order is now stored in Sandboxie-Plus.ini
 - improved DPI scaling behaviour
-
 
 
 
@@ -124,9 +119,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - "AllowBoxedJobs=n" is back to the default behaviour as issues were reported [#1954](https://github.com/sandboxie-plus/Sandboxie/issues/1954)
 - fixed issue with internet block [#1955](https://github.com/sandboxie-plus/Sandboxie/issues/1955)
 - fixed grouping issue in the Plus UI [#1950](https://github.com/sandboxie-plus/Sandboxie/issues/1950)
-- fixed issue with CredentialUIBroker.exe on Windows 11 with win32k hooks [#1839](https://github.com/sandboxie-plus/Sandboxie/issues/1839)
-- fixed issue with delete V2 [#1939](https://github.com/sandboxie-plus/Sandboxie/issues/1939)
-
+- fixed issue with CredentialUIBroker.exe on Windows 11 with Win32k hooks [#1839](https://github.com/sandboxie-plus/Sandboxie/issues/1839)
+- fixed issue with Delete V2 [#1939](https://github.com/sandboxie-plus/Sandboxie/issues/1939)
 
 
 
@@ -153,7 +147,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
 ## [1.1.1 / 5.56.1] - 2022-06-07
 
 ### Added
@@ -171,10 +164,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed Edge issue with Windows 11 after KB5014019
-- fixed issues with the new delete V2 mechanism when using "SeparateUserFolders=y" [#1885](https://github.com/sandboxie-plus/Sandboxie/issues/1885)
+- fixed issues with the new Delete V2 mechanism when using "SeparateUserFolders=y" [#1885](https://github.com/sandboxie-plus/Sandboxie/issues/1885)
 - fixed credential issue [#1770](https://github.com/sandboxie-plus/Sandboxie/pull/1770)
 - fixed force process priorities [#1883](https://github.com/sandboxie-plus/Sandboxie/issues/1883)
-- fixed issues with the new delete V2 mechanism
+- fixed issues with the new Delete V2 mechanism
 - fixed issue with the Windows 11 menu on older Windows builds [1877](https://github.com/sandboxie-plus/Sandboxie/issues/1877)
 - refresh now works without WatchBoxSize option [#1885](https://github.com/sandboxie-plus/Sandboxie/issues/1885)
 - fixed crash issue with WatchBoxSize=true [#1885](https://github.com/sandboxie-plus/Sandboxie/issues/1885)
@@ -185,7 +178,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with BreakoutFolder [#1908](https://github.com/sandboxie-plus/Sandboxie/issues/1908)
 - fixed issue with SbieDll.dll for x86 exception handling
 - fixed issues with application-specific hives (RegLoadAppKey) affecting Visual Studio [#1576](https://github.com/sandboxie-plus/Sandboxie/issues/1576) [#1452](https://github.com/sandboxie-plus/Sandboxie/issues/1452)
-
 
 
 
@@ -211,7 +203,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
 ## [1.0.22 / 5.55.22] - 2022-05-15
 
 ### Added
@@ -224,7 +215,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed SandMan crash issue [#1846](https://github.com/sandboxie-plus/Sandboxie/issues/1846)
 - fixed issue with Windows Server 2022 build 20348
 - fixed translation switching issues [#1852](https://github.com/sandboxie-plus/Sandboxie/issues/1852)
-
 
 
 
@@ -244,7 +234,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
 ## [1.0.20 / 5.55.20] - 2022-05-02
 
 ### Fixed
@@ -253,7 +242,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with editing start restriction entries
 - fixed issue with the network options tab [#1825](https://github.com/sandboxie-plus/Sandboxie/issues/1825)
 - fixed portable mode issue if SandMan is run as admin [#1764](https://github.com/sandboxie-plus/Sandboxie/issues/1764)
-
 
 
 
@@ -278,7 +266,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
 ## [1.0.18 / 5.55.18] - 2022-04-13
 
 ### Added
@@ -297,7 +284,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
 ## [1.0.17 / 5.55.17] - 2022-04-02
 
 ### Added
@@ -309,7 +295,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed crash issue with the new monitor mode
 - fixed issue with resource access entry parsing
-
 
 
 
@@ -367,7 +352,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.0.13 / 5.55.13] - 2022-03-08
 
-
 ### Fixed
 - FIXED SECURITY ISSUE: Hard link creation was not properly filtered (thanks Diversenok)
 - fixed issue with checking the certificate entry.
@@ -406,7 +390,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - the asynchronous box operations introduced in the last build are now disabled by default
 - moved sys tray options from general to shell integration tab
-- removed "AlwaysUseWin32kHooks", now these win32 hooks are always enabled
+- removed "AlwaysUseWin32kHooks", now these Win32 hooks are always enabled
 -- Note: you can use "UseWin32kHooks=program.exe,n" to disable them for selected programs
 - updated Listary template to v6 (by isaak654) [#1610](https://github.com/sandboxie-plus/Sandboxie/pull/1610)
 
@@ -557,7 +541,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - replaced "Open with" with a Sandboxie dialog to work on Windows 10 [#1138](https://github.com/sandboxie-plus/Sandboxie/issues/1138)
 - added ability to run Win32 store apps in App Compartment mode (on Windows 11 requires COM to be open)
--- Note: this does not mean UWP store apps, just regular win32 apps packaged to be deployed via the store
+-- Note: this does not mean UWP store apps, just regular Win32 apps packaged to be deployed via the store
 - added new debug options "UnstrippedToken=y" and "KeepUserGroup=y"
 - added double-click to recover files and folders in recovery window [#1466](https://github.com/sandboxie-plus/Sandboxie/issues/1466)
 - added Ukrainian language on Plus UI (by SuperMaxusa) [#1488](https://github.com/sandboxie-plus/Sandboxie/pull/1488)
@@ -658,6 +642,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed recovery window not refreshing count on reload [#1402](https://github.com/sandboxie-plus/Sandboxie/issues/1402)
 - fixed printing issue introduced in 1.0.0 [#1397](https://github.com/sandboxie-plus/Sandboxie/issues/1397)
 - fixed issues with CreateProcess function [#1408](https://github.com/sandboxie-plus/Sandboxie/issues/1408)
+
 
 
 ## [1.0.1 / 5.55.1] - 2021-12-06
@@ -1314,7 +1299,7 @@ Fixed issue with Windows 7
 ### Changed
 - reworked window hooking mechanism to improve performance [#697](https://github.com/sandboxie-plus/Sandboxie/issues/697) [#519](https://github.com/sandboxie-plus/Sandboxie/issues/519) [#662](https://github.com/sandboxie-plus/Sandboxie/issues/662) [#69](https://github.com/sandboxie-plus/Sandboxie/issues/69) [#109](https://github.com/sandboxie-plus/Sandboxie/issues/109) [#193](https://github.com/sandboxie-plus/Sandboxie/issues/193)
 -- resolves issues with file save dialogs taking 30+ seconds to open
--- this fix greatly improves the win32 GUI performance of sandboxed processes
+-- this fix greatly improves the Win32 GUI performance of sandboxed processes
 - reworked RPC resolver to be ini-configurable
 -- the following options are now deprecated:
 --- "UseRpcMgmtSetComTimeout=some.dll,n", so use "RpcPortBinding=some.dll,*,TimeOut=y"
@@ -1850,7 +1835,7 @@ Fixed issue with Windows 7
 - fixed issue with internet access restriction options [#177](https://github.com/sandboxie-plus/Sandboxie/issues/177) [#185](https://github.com/sandboxie-plus/Sandboxie/issues/185)
 - fixed issue deleting sandbox when located on a drive directly [#139](https://github.com/sandboxie-plus/Sandboxie/issues/139)
 
- 
+
 
 ## [0.4.2 / 5.43.6] - 2020-10-10
 
@@ -2056,4 +2041,3 @@ Fixed issue with Windows 7
 
 ### Fixed
 - fixed "Windows Installer Service could not be accessed" that got introduced with Windows 1903
-

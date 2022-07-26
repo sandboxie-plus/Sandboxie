@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.2.6 / 5.57.6] - 2022-07-??
+## [1.2.6 / 5.57.6] - 2022-07-25
 
 ### Changed
 - the access view list now adds in display the tailing * to file and key paths the same way the driver does [2039](https://github.com/sandboxie-plus/Sandboxie/issues/2039)

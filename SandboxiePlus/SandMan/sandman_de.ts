@@ -5342,7 +5342,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
     <message>
         <location filename="Forms/SettingsWindow.ui" line="97"/>
         <source>Show recoverable files as notifications</source>
-        <translation>Zeige wiederherstellbare Dateien als Benachrichtigunen</translation>
+        <translation>Zeige wiederherstellbare Dateien als Benachrichtigungen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="161"/>

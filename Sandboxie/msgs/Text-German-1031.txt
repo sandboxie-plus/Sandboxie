@@ -444,6 +444,10 @@ SBIE2223 Um das Größenlimit für zu kopierende Dateien zu erhöhen bitte diese
 SBIE2224 Sandboxtes Programm ist abgestürzt: %2
 .
 
+2225;pop;wrn;01
+SBIE2225 Es wurde versucht auf eine EFS-Datei zuzugreifen: %2
+.
+
 #----------------------------------------------------------------------------
 # SbieDrv
 #

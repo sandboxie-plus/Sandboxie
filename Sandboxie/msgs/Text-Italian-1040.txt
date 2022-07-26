@@ -492,6 +492,10 @@ SBIE2223 Per aumentare il limite della dimensione dei file copiabili, fare doppi
 SBIE2224 Si è verificato un errore durante l'esecuzione nell'area virtuale del programma: %2
 .
 
+2225;pop;wrn;01
+SBIE2225 Si è verificato un tentativo di accesso a un file EFS: %2
+.
+
 #----------------------------------------------------------------------------
 # SbieDrv
 #

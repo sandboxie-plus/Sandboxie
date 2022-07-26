@@ -2,7 +2,5 @@
 * Missing Messages in Text-Russian-1049.txt
 *==========
 
-2225;pop;wrn;01
-SBIE2225 An attempt was made to access an EFS file: %2
-.
+There are no missing messages.
 

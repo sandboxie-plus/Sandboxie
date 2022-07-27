@@ -1277,7 +1277,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
  		if (theConf->GetInt("Options/InfoMkLink", -1) == -1)
 		{
 			bool State = false;
-			CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new"
+			CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new "
 				"shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.")
 				, tr("Don't show this message again."), &State, QDialogButtonBox::Ok, QDialogButtonBox::Ok, QMessageBox::Information);
 			if (State)

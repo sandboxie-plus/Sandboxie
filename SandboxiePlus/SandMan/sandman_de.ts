@@ -1354,7 +1354,7 @@ Vollständiger Pfad: %4</translation>
         <location filename="SandMan.cpp" line="379"/>
         <location filename="SandMan.cpp" line="497"/>
         <source>Is Window Sandboxed</source>
-        <translation>Ist Fenster sangeboxt</translation>
+        <translation>Ist Fenster sandgeboxt</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="403"/>
@@ -2858,7 +2858,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Views/SbieView.cpp" line="254"/>
         <source>Run Sandboxed</source>
-        <translation>Starte sandgeboxt</translation>
+        <translation>In Sandbox ausführen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="256"/>
@@ -4942,7 +4942,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3014"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
-        <translation>Zur Kompensation des verlorenen Schuztes, suchen Sie die Einstellungsseite der Rechteabgabe in der Gruppe der Beschränkungen auf.</translation>
+        <translation>Zur Kompensation des verlorenen Schutzes, suchen Sie die Einstellungsseite der Rechteabgabe in der Gruppe der Beschränkungen auf.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3021"/>

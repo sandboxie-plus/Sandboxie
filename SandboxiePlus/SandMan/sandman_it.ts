@@ -70,27 +70,27 @@
     <message>
         <location filename="Views/FileView.cpp" line="140"/>
         <source>Create Shortcut</source>
-        <translation type="unfinished">Crea collegamento</translation>
+        <translation>Crea collegamento</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="146"/>
         <source>Recover to Any Folder</source>
-        <translation type="unfinished">Recupera in un&apos;altra cartella</translation>
+        <translation>Recupera in un&apos;altra cartella</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="148"/>
         <source>Recover to Same Folder</source>
-        <translation type="unfinished">Recupera nella stessa cartella</translation>
+        <translation>Recupera nella stessa cartella</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="208"/>
         <source>Select Directory</source>
-        <translation type="unfinished">Seleziona directory</translation>
+        <translation>Seleziona directory</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="258"/>
         <source>Create Shortcut to sandbox %1</source>
-        <translation type="unfinished">Crea collegamento all&apos;area virtuale %1</translation>
+        <translation>Crea collegamento all&apos;area virtuale %1</translation>
     </message>
 </context>
 <context>
@@ -937,22 +937,22 @@ Percorso completo: %4</translation>
     <message>
         <location filename="SandManRecovery.cpp" line="188"/>
         <source>Sandboxie-Plus - Recovery Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Plus - Log di recupero</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="196"/>
         <source>Time|Box Name|File Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Ora|Area virtuale|Percorso file</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="198"/>
         <source>Cleanup Recovery Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulisci log di recupero</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="208"/>
         <source>the following files were recently recovered and moved out of a sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">I seguenti file sono stati recuperati di recente e spostati all&apos;esterno dell&apos;area virtuale.</translation>
     </message>
 </context>
 <context>
@@ -1012,7 +1012,7 @@ Percorso completo: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="235"/>
         <source>Do you really want to delete %1 selected files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminare i file selezionati (%1)?</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="263"/>
@@ -1197,13 +1197,13 @@ Percorso completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="369"/>
         <source>Disable File Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Disattiva recupero dei file</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="371"/>
         <source>Disable Message Popup</source>
         <oldsource>Disable Message PopUp</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Disattiva popup dei messaggi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="304"/>
@@ -1346,7 +1346,7 @@ Percorso completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="443"/>
         <source>Cleanup Recovery Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulisci log di recupero</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="445"/>
@@ -1375,13 +1375,13 @@ Percorso completo: %4</translation>
         <location filename="SandMan.cpp" line="473"/>
         <location filename="SandMan.cpp" line="592"/>
         <source>Edit ini file</source>
-        <translation>Modifica file ini</translation>
+        <translation type="unfinished">Modifica configurazione file ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="474"/>
         <location filename="SandMan.cpp" line="593"/>
         <source>Reload ini file</source>
-        <translation>Ricarica file ini</translation>
+        <translation type="unfinished">Ricarica configurazione file ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="458"/>
@@ -1391,7 +1391,7 @@ Percorso completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="331"/>
         <source>Vintage View (like SbieCtrl)</source>
-        <translation type="unfinished"></translation>
+        <translation>Vista classica (stile SbieCtrl)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="341"/>
@@ -1433,87 +1433,87 @@ Percorso completo: %4</translation>
         <location filename="SandMan.cpp" line="379"/>
         <location filename="SandMan.cpp" line="497"/>
         <source>Is Window Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Strumento di controllo finestre</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="424"/>
         <source>Show File Panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra pannello dei file</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="486"/>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;File</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="498"/>
         <source>Resource Access Monitor</source>
-        <translation type="unfinished">Monitoraggio risorse</translation>
+        <translation>Monitoraggio risorse</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="531"/>
         <source>Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Programmi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="532"/>
         <source>Files and Folders</source>
-        <translation type="unfinished"></translation>
+        <translation>File e cartelle</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="557"/>
         <source>Create New Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea nuova area virtuale</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="558"/>
         <source>Create New Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea nuovo gruppo</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="561"/>
         <source>Set Container Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica percorso delle aree virtuali</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="564"/>
         <source>Set Layout and Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Imposta ordine e gruppi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="567"/>
         <source>Reveal Hidden Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra aree virtuali nascoste</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="573"/>
         <source>&amp;Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Impostazioni</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="577"/>
         <source>Program Alerts</source>
-        <translation type="unfinished"></translation>
+        <translation>Avvisi dei programmi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="579"/>
         <source>Windows Shell Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Integrazione in Windows</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="581"/>
         <source>Software Compatibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Compatibilità con i programmi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="590"/>
         <source>Lock Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Blocca configurazione</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="607"/>
         <source>Sandbox %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Area virtuale %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="628"/>
@@ -1538,14 +1538,14 @@ Percorso completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="791"/>
         <source>Time|Box Name|File Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Ora|Area virtuale|Percorso file</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="462"/>
         <location filename="SandMan.cpp" line="536"/>
         <location filename="SandMan.cpp" line="799"/>
         <source>Recovery Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Log di recupero</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="839"/>
@@ -1884,12 +1884,12 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2014"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nell&apos;interfaccia utente Plus, questa funzionalità è stata integrata nell&apos;elenco principale delle aree virtuali.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2015"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilizzando il menu contestuale dell&apos;area virtuale/gruppo, è possibile spostare aree virtuali e gruppi in altri gruppi. È inoltre prevista la possibilità di utilizzare il trascinamento per spostare gli elementi. In alternativa, è possibile utilizzare i tasti freccia tenendo premuto ALT per spostare gli elementi in alto e in basso all&apos;interno del gruppo.&lt;br /&gt;È possibile creare nuove aree virtuali e gruppi dal menu Area virtuale.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2077"/>
@@ -2226,7 +2226,7 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Models/SbieModel.cpp" line="276"/>
         <source>Empty</source>
-        <translation type="unfinished">Vuota</translation>
+        <translation>Vuota</translation>
     </message>
     <message>
         <location filename="Models/SbieModel.cpp" line="500"/>
@@ -2518,7 +2518,7 @@ Scegliere No per selezionare: %2</translation>
         <location filename="Views/SbieView.cpp" line="169"/>
         <location filename="Views/SbieView.cpp" line="287"/>
         <source>Refresh Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiorna informazioni</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="201"/>
@@ -2575,23 +2575,23 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="167"/>
         <source>Browse Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Esplora file</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="197"/>
         <source>Immediate Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Recupero immediato</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="200"/>
         <location filename="Views/SbieView.cpp" line="279"/>
         <source>Sandbox Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Strumenti area virtuale</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="203"/>
         <source>Duplicate Box Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplica configurazione area virtuale</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="205"/>
@@ -2603,7 +2603,7 @@ Scegliere No per selezionare: %2</translation>
         <location filename="Views/SbieView.cpp" line="206"/>
         <location filename="Views/SbieView.cpp" line="292"/>
         <source>Move Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta area virtuale</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="217"/>
@@ -2655,57 +2655,57 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="254"/>
         <source>Run Sandboxed</source>
-        <translation type="unfinished">Avvia nell&apos;area virtuale</translation>
+        <translation>Avvia nell&apos;area virtuale</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="255"/>
         <source>Run Web Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Avvia il browser Web</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="256"/>
         <source>Run eMail Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>Avvia il programma di posta elettronica</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="257"/>
         <source>Run Any Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Avvia un programma</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="258"/>
         <source>Run From Start Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Avvia dal menu Start</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="259"/>
         <source>Run Windows Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>Avvia Esplora risorse</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="271"/>
         <source>Terminate Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiudi tutti i programmi</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="272"/>
         <source>Quick Recover</source>
-        <translation type="unfinished"></translation>
+        <translation>Recupero veloce</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="277"/>
         <source>Sandbox Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni dell&apos;area virtuale</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="284"/>
         <source>Duplicate Sandbox Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplica configurazione area virtuale</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="343"/>
         <source>Move Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta gruppo</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="474"/>
@@ -2936,7 +2936,7 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="1280"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ora verrà visualizzato il menu Start di Sandboxie. Selezionare un programma dal menu per creare un collegamento sul desktop reale che consenta l&apos;avvio di tale programma sotto la supervisione di Sandboxie.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1315"/>
@@ -3004,7 +3004,7 @@ Scegliere No per selezionare: %2</translation>
         <location filename="Windows/SettingsWindow.cpp" line="112"/>
         <source>Don&apos;t show any icon</source>
         <oldsource>Don&apos;t integrate links</oldsource>
-        <translation type="unfinished">Disattiva</translation>
+        <translation>Disattiva icona</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="113"/>
@@ -3049,23 +3049,23 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="125"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessuno</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="126"/>
         <source>Native</source>
-        <translation type="unfinished"></translation>
+        <translation>Nativo</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="127"/>
         <source>Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="131"/>
         <source>%1</source>
         <oldsource>%1 %</oldsource>
-        <translation type="unfinished">%1</translation>
+        <translation>%1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="278"/>
@@ -3381,7 +3381,7 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Views/TraceView.cpp" line="248"/>
         <source>Cleanup Trace Log</source>
-        <translation type="unfinished">Pulisci log di accesso</translation>
+        <translation>Pulisci log di accesso</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="568"/>
@@ -3419,7 +3419,7 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Views/TraceView.cpp" line="631"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sandboxie Plus - Monitoraggio risorse</translation>
     </message>
 </context>
 <context>
@@ -3427,37 +3427,37 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="267"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; UI</source>
-        <translation type="unfinished"></translation>
+        <translation>Configura interfaccia di &lt;b&gt;Sandboxie Plus&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="268"/>
         <source>Select the user interface style you prefer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selezionare lo stile di interfaccia utente che si preferisce.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="272"/>
         <source>&amp;Advanced UI for experts</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Interfaccia &amp;avanzata per esperti</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="277"/>
         <source>&amp;Simple UI for beginners</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Interfaccia &amp;semplice per principianti</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="282"/>
         <source>&amp;Vintage SbieCtrl.exe UI</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Interfaccia &amp;classica in stile SbieCtrl.exe</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="307"/>
         <source>Use Bright Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa tema chiaro</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="311"/>
         <source>Use Dark Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa tema scuro</translation>
     </message>
 </context>
 <context>
@@ -4160,7 +4160,7 @@ Nel caso in cui siano definiti i processi principali, tutti gli altri verranno t
         <location filename="Forms/OptionsWindow.ui" line="2087"/>
         <source>Allow use of nested job objects (works on Windows 8 and later)</source>
         <oldsource>Allow use of nested job objects (experimental, works on Windows 8 and later)</oldsource>
-        <translation type="unfinished">Consenti l&apos;uso dei processi nidificati (sperimentale, per Windows 8 e versioni successive)</translation>
+        <translation>Consenti l&apos;uso dei processi nidificati (per Windows 8 e versioni successive)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2179"/>
@@ -4747,7 +4747,7 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="142"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="171"/>
@@ -5073,72 +5073,72 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="203"/>
         <source>Use Compact Box List</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa elenco ridotto di opzioni</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="387"/>
         <source>Interface Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurazione interfaccia</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="395"/>
         <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mostra lo sfondo &quot;Pizza&quot; nell&apos;elenco delle aree virtuali *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="419"/>
         <source>Make Box Icons match the Border Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Imposta le icone dell&apos;area virtuale in modo che corrispondano al colore del bordo</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="426"/>
         <source>Use a Page Tree in the Box Options instead of Nested Tabs *</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa una struttura ad albero nelle opzioni dell&apos;area virtuale invece di schede annidate *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="443"/>
         <source>Interface Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opzioni di interfaccia</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="466"/>
         <source>Use large icons in box list *</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa icone grandi nell&apos;elenco delle aree virtuali *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="476"/>
         <source>High DPI Scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Ridimensionamento DPI elevati</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>
         <source>Don&apos;t show icons in menus *</source>
-        <translation type="unfinished"></translation>
+        <translation>Non mostrare icone nei menu *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="503"/>
         <source>Use Dark Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa tema scuro</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="513"/>
         <source>Font Scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Ridimensionamento caratteri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="405"/>
         <source>(Restart required)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Riavvio richiesto)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="412"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>* le caselle di controllo con spunta parziale saranno determinate dalla modalità di visualizzazione.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="723"/>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa autenticazione di Sandboxie invece di un token anonimo (sperimentale)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="742"/>

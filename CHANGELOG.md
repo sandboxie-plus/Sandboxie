@@ -4,10 +4,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.3.0 / 5.58.0] - 2022-07-?
+## [1.2.7 / 5.57.7] - 2022-07-??
 
 ### Changed
+- SandboxieLogon is now disabled by default as it was not compatible with 3rd party antimalware tools [#2025](https://github.com/sandboxie-plus/Sandboxie/issues/2025)
 - the access view list now adds in display the tailing * to file and key paths the same way the driver does [2039](https://github.com/sandboxie-plus/Sandboxie/issues/2039)
+- setup of shell integration is now done by sandman, no longer by the installer
+- uninstaler can now remove the sandbox folders [#1235](https://github.com/sandboxie-plus/Sandboxie/pull/1235)
+
+
+
 
 ## [1.2.6 / 5.57.6] - 2022-07-25
 

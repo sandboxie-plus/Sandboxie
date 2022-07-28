@@ -429,7 +429,7 @@ void CDeleteDialog::OnOK()
         WCHAR cmd[64];
         wcscpy(cmd, L"delete_sandbox");
         //if (m_AutoDelete)
-                //wcscat(cmd, L"_silent");
+        //    wcscat(cmd, L"_silent");
         CMyApp::RunStartExe(cmd, BoxName, TRUE);
 
         box.GetBoxFile().RebuildSkeletonTree();

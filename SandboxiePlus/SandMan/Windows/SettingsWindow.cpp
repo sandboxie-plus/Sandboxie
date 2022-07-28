@@ -371,7 +371,7 @@ void CSettingsWindow::LoadSettings()
 		ui.chkWFP->setChecked(theAPI->GetGlobalSettings()->GetBool("NetworkEnableWFP", false));
 		ui.chkObjCb->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableObjectFiltering", true));
 		ui.chkWin32k->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableWin32kHooks", true));
-		ui.chkSbieLogon->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieLogon", true));
+		ui.chkSbieLogon->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieLogon", false));
 
 		ui.chkAdminOnly->setChecked(theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false));
 		ui.chkPassRequired->setChecked(!theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty());
@@ -592,7 +592,7 @@ void CSettingsWindow::SaveSettings()
 			WriteAdvancedCheck(ui.chkWFP, "NetworkEnableWFP", "y", "");
 			WriteAdvancedCheck(ui.chkObjCb, "EnableObjectFiltering", "", "n");
 			WriteAdvancedCheck(ui.chkWin32k, "EnableWin32kHooks", "", "n");
-			WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", "", "n");
+			WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", "y", "");
 
 			if (m_FeaturesChanged) {
 				m_FeaturesChanged = false;

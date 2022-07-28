@@ -42,16 +42,16 @@ PrivilegesRequiredOverridesAllowed=commandline
 
 [Tasks]
 Name: "DesktopIcon"; Description: "{cm:CreateDesktopIcon}"; MinVersion: 0.0,5.0; Check: not IsPortable
-Name: "DesktopIcon2"; Description: "{cm:AddSandboxedBrowser}"; MinVersion: 0.0,5.0; Check: not IsPortable
-Name: "AutoStartEntry"; Description: "{cm:AutoStartProgram,{#MyAppName}}"; MinVersion: 0.0,5.0; Check: not IsPortable
-Name: "AddRunSandboxed"; Description: "{cm:AddSandboxedMenu}"; MinVersion: 0.0,5.0; Check: not IsPortable
+;Name: "DesktopIcon2"; Description: "{cm:AddSandboxedBrowser}"; MinVersion: 0.0,5.0; Check: not IsPortable
+;Name: "AutoStartEntry"; Description: "{cm:AutoStartProgram,{#MyAppName}}"; MinVersion: 0.0,5.0; Check: not IsPortable
+;Name: "AddRunSandboxed"; Description: "{cm:AddSandboxedMenu}"; MinVersion: 0.0,5.0; Check: not IsPortable
 
 
 [Files]
 ; Both portable and install.
 Source: ".\Release\{#MyAppSrc}\*"; DestDir: "{app}"; MinVersion: 0.0,5.0; Flags: recursesubdirs ignoreversion; Excludes: "*.pdb"
 ; include the driver pdb
-;Source: ".\Release\{#MyAppSrc}\SbieDrv.pdb"; DestDir: "{app}"; MinVersion: 0.0,5.0; Flags: ignoreversion
+Source: ".\Release\{#MyAppSrc}\SbieDrv.pdb"; DestDir: "{app}"; MinVersion: 0.0,5.0; Flags: ignoreversion
 
 ; Only if portable.
 Source: ".\Sandboxie.ini"; DestDir: "{app}"; Flags: ignoreversion onlyifdoesntexist; Check: IsPortable
@@ -66,7 +66,7 @@ Name: "{group}\{cm:SandboxieStartMenu1}"; Filename: "{app}\Start.exe"; Parameter
 Name: "{group}\{cm:SandboxieStartMenu2}"; Filename: "{app}\Start.exe"; Parameters: "default_browser"; MinVersion: 0.0,5.0
 Name: "{group}\{cm:SandboxieStartMenu3}"; Filename: "{app}\Start.exe"; Parameters: "/box:__ask__ start_menu"; MinVersion: 0.0,5.0
 Name: "{userdesktop}\Sandboxie-Plus"; Filename: "{app}\SandMan.exe"; Tasks: DesktopIcon; MinVersion: 0.0,5.0
-Name: "{userdesktop}\{cm:SandboxedBrowser}"; Filename: "{app}\Start.exe"; Parameters: "default_browser"; Tasks: DesktopIcon2; MinVersion: 0.0,5.0
+;Name: "{userdesktop}\{cm:SandboxedBrowser}"; Filename: "{app}\Start.exe"; Parameters: "default_browser"; Tasks: DesktopIcon2; MinVersion: 0.0,5.0
 
 
 [INI]
@@ -81,23 +81,25 @@ Type: files; Name: "{app}\translations\sandman_zh-CN.qm"
 Type: files; Name: "{app}\translations\sandman_zh-TW.qm"
 Type: files; Name: "{app}\translations\sandman_pt.qm"
 Type: files; Name: "{app}\translations\sandman_ua.qm"
+Type: files; Name: "{app}\SbieDrv.sys.w10"
+Type: files; Name: "{app}\SbieDrv.sys.rc4"
 
 
 [Registry]
 ; Autostart Sandman.
-Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueName: "SandboxiePlus_AutoRun"; ValueType: string; ValueData: """{app}\SandMan.exe"" -autorun"; Flags: uninsdeletevalue; Tasks: AutoStartEntry
+;Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueName: "SandboxiePlus_AutoRun"; ValueType: string; ValueData: """{app}\SandMan.exe"" -autorun"; Flags: uninsdeletevalue; Tasks: AutoStartEntry
 
 ; AddRunSandboxed all files.
-Root: HKCU; Subkey: "Software\Classes\*\shell"; Flags: uninsdeletekeyifempty; Tasks: AddRunSandboxed
-Root: HKCU; Subkey: "Software\Classes\*\shell\sandbox"; ValueName: ""; ValueType: string; ValueData: "{cm:RunSandboxedMenu}"; Flags: uninsdeletekey; Tasks: AddRunSandboxed
-Root: HKCU; Subkey: "Software\Classes\*\shell\sandbox"; ValueName: "Icon"; ValueType: string; ValueData: """{app}\start.exe"""; Tasks: AddRunSandboxed
-Root: HKCU; Subkey: "Software\Classes\*\shell\sandbox\command"; ValueName: ""; ValueType: string; ValueData: """{app}\SandMan.exe"" /box:__ask__ ""%1"" %*"; Tasks: AddRunSandboxed
+;Root: HKCU; Subkey: "Software\Classes\*\shell"; Flags: uninsdeletekeyifempty; Tasks: AddRunSandboxed
+;Root: HKCU; Subkey: "Software\Classes\*\shell\sandbox"; ValueName: ""; ValueType: string; ValueData: "{cm:RunSandboxedMenu}"; Flags: uninsdeletekey; Tasks: AddRunSandboxed
+;Root: HKCU; Subkey: "Software\Classes\*\shell\sandbox"; ValueName: "Icon"; ValueType: string; ValueData: """{app}\start.exe"""; Tasks: AddRunSandboxed
+;Root: HKCU; Subkey: "Software\Classes\*\shell\sandbox\command"; ValueName: ""; ValueType: string; ValueData: """{app}\SandMan.exe"" /box:__ask__ ""%1"" %*"; Tasks: AddRunSandboxed
 
 ; AddRunSandboxed folder.
-Root: HKCU; Subkey: "Software\Classes\Folder\shell"; Flags: uninsdeletekeyifempty; Tasks: AddRunSandboxed
-Root: HKCU; Subkey: "Software\Classes\Folder\shell\sandbox"; ValueName: ""; ValueType: string; ValueData: "{cm:RunSandboxedMenu}"; Flags: uninsdeletekey; Tasks: AddRunSandboxed
-Root: HKCU; Subkey: "Software\Classes\Folder\shell\sandbox"; ValueName: "Icon"; ValueType: string; ValueData: """{app}\start.exe"""; Tasks: AddRunSandboxed
-Root: HKCU; Subkey: "Software\Classes\Folder\shell\sandbox\command"; ValueName: ""; ValueType: string; ValueData: """{app}\SandMan.exe"" /box:__ask__ ""%1"" %*"; Tasks: AddRunSandboxed
+;Root: HKCU; Subkey: "Software\Classes\Folder\shell"; Flags: uninsdeletekeyifempty; Tasks: AddRunSandboxed
+;Root: HKCU; Subkey: "Software\Classes\Folder\shell\sandbox"; ValueName: ""; ValueType: string; ValueData: "{cm:RunSandboxedMenu}"; Flags: uninsdeletekey; Tasks: AddRunSandboxed
+;Root: HKCU; Subkey: "Software\Classes\Folder\shell\sandbox"; ValueName: "Icon"; ValueType: string; ValueData: """{app}\start.exe"""; Tasks: AddRunSandboxed
+;Root: HKCU; Subkey: "Software\Classes\Folder\shell\sandbox\command"; ValueName: ""; ValueType: string; ValueData: """{app}\SandMan.exe"" /box:__ask__ ""%1"" %*"; Tasks: AddRunSandboxed
 
 ; External manifest for Sbie service.
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\SbieSvc"; ValueName: "PreferExternalManifest"; ValueType: dword; ValueData: "1"; Check: not IsPortable
@@ -122,8 +124,6 @@ Filename: "{app}\SandMan.exe"; StatusMsg: "Launch SandMan UI..."; Flags: postins
 
 
 [UninstallDelete]
-Type: files; Name: "{app}\SbieDrv.sys.w10"
-Type: files; Name: "{app}\SbieDrv.sys.rc4"
 Type: dirifempty; Name: "{app}"
 Type: dirifempty; Name: "{localappdata}\{#MyAppName}"
 
@@ -465,8 +465,8 @@ begin
     exit;
 
   // Require Sandman.exe to continue.
-  if not FileExists(ExpandConstant('{app}\Sandman.exe')) then
-    exit;
+  //if not FileExists(ExpandConstant('{app}\Sandman.exe')) then
+  //  exit;
 
   // Make a list.
   Paths := TStringList.Create;
@@ -513,14 +513,14 @@ begin
       IDNO: TaskRet := 2;
     end;
 
-    if TaskRet > 1 then begin
-      Log('Debug: Taskkill /IM Sandman.exe /F');
-      Exec(ExpandConstant('{sys}\taskkill.exe'), '/IM Sandman.exe /F', '', SW_HIDE, ewWaitUntilTerminated, ExecRet);
+    if TaskRet > 2 then begin
+      Log('Debug: Start terminate_all');
+      Exec(ExpandConstant('{app}\start.exe'), 'terminate_all', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
     end;
 
     if TaskRet > 2 then begin
-      Log('Debug: Sandman /RemoveSandboxes');
-      Exec(ExpandConstant('{app}\Sandman.exe'), '/RemoveSandboxes', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+      Log('Debug: Start delete_all_sandboxes');
+      Exec(ExpandConstant('{app}\start.exe'), 'delete_all_sandboxes', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
     end;
 
     if TaskRet > 1 then begin
@@ -534,6 +534,20 @@ begin
 
   // Release the list.
   Paths.Free;
+end;
+
+procedure ShellUninstall();
+var
+  ExecRet: Integer;
+begin
+
+  if FileExists(ExpandConstant('{app}\Sandman.exe')) then begin
+    Log('Debug: SandMan /ShellUninstall');
+    Exec(ExpandConstant('{app}\Sandman.exe'), '/ShellUninstall', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+  end else begin
+    Log('Debug: SbieCtrl /uninstall');
+    Exec(ExpandConstant('{app}\sbiectrl.exe'), '/uninstall', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+  end;
 end;
 
 
@@ -551,7 +565,7 @@ begin
 
   // User to confirm extra files to remove.
   if not UninstallSilent then
-    UninstallCleanup(2);
+    UninstallCleanup(3);
 
   // Shutdown service, driver and processes.
   if (ShutdownSbie() = False) then
@@ -559,4 +573,8 @@ begin
     Abort();
     exit;
   end;
+
+  // remove shell integration.
+  ShellUninstall();
+
 end;

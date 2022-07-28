@@ -49,6 +49,7 @@
 
 void List_Process_Ids(void);
 int Terminate_All_Processes(BOOL all_boxes);
+int Delete_All_Sandboxes();
 
 extern WCHAR *DoRunDialog(HINSTANCE hInstance);
 extern WCHAR *DoBoxDialog(void);
@@ -393,6 +394,7 @@ BOOL Parse_Command_Line(void)
     static const WCHAR *auto_run          = L"auto_run";
     static const WCHAR *mount_hive        = L"mount_hive";
     static const WCHAR *delete_sandbox    = L"delete_sandbox";
+    static const WCHAR *delete_all_sandboxes = L"delete_all_sandboxes";
     static const WCHAR *_logoff           = L"_logoff";
     static const WCHAR *_silent           = L"_silent";
     static const WCHAR *_phase            = L"_phase";
@@ -851,6 +853,12 @@ BOOL Parse_Command_Line(void)
         // does not return
 
         return TRUE;
+
+    // if rest is exactly "delete_all_sandboxes", do that processing
+
+    } else if (wcsncmp(cmd, delete_all_sandboxes, wcslen(delete_all_sandboxes)) == 0) {
+
+        return die(Delete_All_Sandboxes());
 
     //
     // if rest is exactly "disable_force" or "disable_force_off"

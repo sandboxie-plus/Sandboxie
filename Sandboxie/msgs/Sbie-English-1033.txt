@@ -1029,6 +1029,22 @@ Unknown user, configuration settings will not be saved
 An error occurred while applying default settings for sandbox '%2'
 .
 
+3315;txt;01
+Deleting Sandbox contents
+.
+
+3316;txt;01
+Do you want to abort the operation?
+.
+
+3317;txt;01
+Preparing to delete: %2
+.
+
+3318;txt;01
+Deleting: %2
+.
+
 # 3321;txt;01
 #   -  Logon session is sandboxed
 # .

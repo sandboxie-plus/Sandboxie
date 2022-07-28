@@ -2223,7 +2223,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="2203"/>
         <source>Sandboxie config has been reloaded</source>
-        <translation>Sandboxiekonfiguartion wurde neu geladen</translation>
+        <translation>Sandboxiekonfiguration wurde neu geladen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2312"/>

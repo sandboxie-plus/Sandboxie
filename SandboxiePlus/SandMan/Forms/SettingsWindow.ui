@@ -392,7 +392,7 @@
            <item row="3" column="1" colspan="2">
             <widget class="QCheckBox" name="chkBackground">
              <property name="text">
-              <string>Show &quot;Pizza&quot; Background in box list*</string>
+              <string>Show &quot;Pizza&quot; Background in box list *</string>
              </property>
              <property name="tristate">
               <bool>true</bool>

@@ -33,6 +33,9 @@
 #define IDBOXLIST                       1002
 #define BOX_DIALOG                      10002
 
+#define STATUS_DIALOG					10004
+#define ID_STATUS_INFO                  108
+
 // Next default values for new objects
 //
 #ifdef APSTUDIO_INVOKED

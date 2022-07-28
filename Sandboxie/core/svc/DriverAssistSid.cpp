@@ -108,7 +108,7 @@ UCHAR SandboxieSid[12] = { // S-1-5-100-
 
 bool DriverAssist::GetSandboxieSID(const WCHAR* boxname, UCHAR* pSID, DWORD dwSidSize)
 {
-    if (!SbieApi_QueryConfBool(boxname, L"SandboxieLogon", TRUE))
+    if (!SbieApi_QueryConfBool(boxname, L"SandboxieLogon", FALSE))
         return false;
 
 	WCHAR szUserName[256], szDomainName[256];

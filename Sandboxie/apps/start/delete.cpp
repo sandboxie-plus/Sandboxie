@@ -27,6 +27,15 @@
 #include "core/dll/sbiedll.h"
 #include "msgs/msgs.h"
 #include "common/my_version.h"
+#include "core/svc/SbieIniWire.h"
+#include <string>
+#include <set>
+#include "resource.h"
+#include "apps/common/CommonUtils.h"
+#define INITGUID
+#include <guiddef.h>
+#include <commdlg.h>
+#include "apps/common/MyGdi.h"
 
 
 //---------------------------------------------------------------------------
@@ -60,6 +69,198 @@ static const WCHAR *g_BoxName;
 static bool g_Logoff;
 static bool g_Silent;
 static HANDLE g_event_handle = NULL;
+
+static HICON hProgramIcon;
+static HBITMAP hLogoBitmap;
+static BOOL initialized = FALSE;
+extern BOOLEAN layout_rtl;
+static HWND status_wnd = NULL;
+static BOOL processing = TRUE;
+
+//---------------------------------------------------------------------------
+// StatusDialogProc
+//---------------------------------------------------------------------------
+
+
+INT_PTR StatusDialogProc(
+    HWND hwnd,
+    UINT uMsg,
+    WPARAM wParam,
+    LPARAM lParam)
+{
+    switch (uMsg) {
+
+        //
+        // initialize dialog
+        //
+
+        case WM_INITDIALOG:
+        {
+            RECT rc;
+
+            status_wnd = hwnd;
+
+            //
+            // position window in the middle of the screen
+            //
+
+            GetClientRect(GetDesktopWindow(), &rc);
+            int x = (rc.left + rc.right) / 3;
+            int y = (rc.top + rc.bottom) / 3;
+            GetClientRect(hwnd, &rc);
+            x -= rc.right / 2;
+            y -= rc.bottom / 2;
+            SetWindowPos(hwnd, HWND_TOP, x, y, 0, 0, SWP_NOSIZE);
+
+            //
+            // set window title
+            //
+
+            SetWindowText(hwnd, SbieDll_FormatMessage0(MSG_3315));
+
+            //
+            // set info text
+            //
+
+            //WCHAR* info = (WCHAR *)HeapAlloc(GetProcessHeap(), 0, 2048);
+
+
+            //SetDlgItemText(hwnd, ID_STATUS_INFO, info);
+            //HeapFree(GetProcessHeap(), 0, info);
+
+            //
+            // end dialog initialization
+            //
+
+            SetForegroundWindow(hwnd);  // explicitly go to foreground
+
+            return FALSE;   // don't set focus, we already did
+        }
+
+        //
+        // handle buttons
+        //
+
+        case WM_COMMAND:
+
+            if (LOWORD(wParam) == IDCANCEL) {
+
+                int rc = MessageBox(hwnd,
+                                    SbieDll_FormatMessage0(MSG_3316),
+                                    SbieDll_FormatMessage0(MSG_3315),
+                                    MB_ICONQUESTION | MB_YESNO |
+                                (layout_rtl ? MB_RTLREADING | MB_RIGHT : 0));
+
+                if (rc == IDYES)
+                    processing = 0;
+
+            }
+
+            break;
+    }
+
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// DoStatusDialog
+//---------------------------------------------------------------------------
+
+
+_FX ULONG DoStatusDialog(void *arg)
+{
+    HINSTANCE hInstance = GetModuleHandle(NULL);
+    INITCOMMONCONTROLSEX icc;
+    INT_PTR r;
+
+    if (! initialized) {
+
+        icc.dwSize = sizeof(INITCOMMONCONTROLSEX);
+        icc.dwICC = ICC_USEREX_CLASSES | ICC_TAB_CLASSES;
+        InitCommonControlsEx(&icc);
+
+        hProgramIcon = (HICON)LoadImage(
+            hInstance, MAKEINTRESOURCE(IDICON), IMAGE_ICON,
+            0, 0, LR_DEFAULTSIZE);
+
+        MyGdi_Init();
+
+        hLogoBitmap = MyGdi_CreateFromResource(L"MASTHEADLOGO");
+
+        initialized = TRUE;
+    }
+
+    if (layout_rtl) {
+
+        LPCDLGTEMPLATE tmpl = (LPCDLGTEMPLATE)Common_DlgTmplRtl(
+                                    hInstance, MAKEINTRESOURCE(STATUS_DIALOG));
+        r = DialogBoxIndirectParam(hInstance, tmpl,
+                           NULL, StatusDialogProc, (LPARAM)hInstance);
+
+    } else {
+
+        r = DialogBoxParam(hInstance, MAKEINTRESOURCE(STATUS_DIALOG),
+                           NULL, StatusDialogProc, (LPARAM)hInstance);
+    }
+
+    status_wnd = NULL;
+
+    return (r == IDOK);
+}
+
+
+//---------------------------------------------------------------------------
+// StartStatusDialog
+//---------------------------------------------------------------------------
+
+
+void StartStatusDialog()
+{
+    CreateThread(NULL, 0, DoStatusDialog, 0, 0, NULL);
+
+    for(int i=0; i < 100 && !status_wnd; i++)
+        Sleep(100);
+}
+
+
+//---------------------------------------------------------------------------
+// StopStatusDialog
+//---------------------------------------------------------------------------
+
+
+void StopStatusDialog()
+{
+    if (status_wnd)
+        EndDialog(status_wnd, IDOK);
+}
+
+
+//---------------------------------------------------------------------------
+// SetStatusInfo
+//---------------------------------------------------------------------------
+
+
+void SetStatusInfo(const WCHAR* info)
+{
+    if(status_wnd)
+        SetDlgItemText(status_wnd, ID_STATUS_INFO, info);
+}
+
+
+//---------------------------------------------------------------------------
+// SetStatusMsg
+//---------------------------------------------------------------------------
+
+
+void SetStatusMsg(ULONG msg, const WCHAR* info)
+{
+    if(status_wnd) {
+        WCHAR* str = SbieDll_FormatMessage1(msg, info);
+        SetDlgItemText(status_wnd, ID_STATUS_INFO, str);
+        LocalFree(str);
+    }
+}
 
 
 //---------------------------------------------------------------------------
@@ -283,7 +484,7 @@ void LaunchProgram(WCHAR *cmdSrc, bool bWait)
     ZeroMemory(&si, sizeof(STARTUPINFO));
     si.cb = sizeof(STARTUPINFO);
     si.dwFlags = STARTF_FORCEOFFFEEDBACK | STARTF_USESHOWWINDOW;
-    si.wShowWindow = SW_HIDE;
+    si.wShowWindow = bWait ? SW_HIDE : SW_SHOWNORMAL;
     ZeroMemory(&pi, sizeof(PROCESS_INFORMATION));
 
     BOOL ok = CreateProcess(
@@ -337,6 +538,9 @@ NOINLINE void LaunchPhase2(void)
 
 NOINLINE void DeleteFiles(void)
 {
+    //if(!g_Silent) 
+    //    StartStatusDialog();
+    
     WCHAR boxname[48];
     int index = -1;
     while (1) {
@@ -346,6 +550,9 @@ NOINLINE void DeleteFiles(void)
         g_BoxName = boxname;
         DeleteFilesInBox(boxname);
     }
+
+    //if(!g_Silent) 
+    //    StopStatusDialog();
 }
 
 
@@ -420,10 +627,12 @@ void DeleteFilesInBox(const WCHAR *boxname)
             // files, junction points, and paths that are too long
             //
 
+            SetStatusMsg(MSG_3317, BoxFolder);
             WaitForFolder(BoxFolder, 10);
 
             ProcessFiles(BoxFolder);
 
+            SetStatusMsg(MSG_3318, BoxFolder);
             WaitForFolder(BoxFolder, 10);
 
             //
@@ -763,12 +972,14 @@ mainloop:
 
     PATHELEM *elem_next = AllocPathElem(heap, BoxPath, L"");
 
-    while (1) {
+    while (processing) {
 
         PATHELEM *elem = elem_next;
         if (! elem)
             break;
         elem_next = elem->next;
+
+        SetStatusInfo(elem->path);
 
         WCHAR *search_path = AllocPathElem(heap, elem->path, L"*")->path;
         WIN32_FIND_DATA data;
@@ -777,7 +988,7 @@ mainloop:
             continue;
         bool firstTime = true;
 
-        while (1) {
+        while (processing) {
             if (firstTime)
                 firstTime = false;
             else {
@@ -932,4 +1143,65 @@ ALIGNED WCHAR *GetBoxFilePath(const WCHAR *boxname, ULONG extra)
     }
 
     return path;
+}
+
+
+//---------------------------------------------------------------------------
+// Delete_All_Sandboxes
+//---------------------------------------------------------------------------
+
+
+int Delete_All_Sandboxes()
+{
+    std::set<std::wstring> dirs_to_remove;
+
+    int index = -1;
+    WCHAR BoxName[34];
+    while (1) {
+        index = SbieApi_EnumBoxes(index, BoxName);
+        if (index == -1)
+            break;
+        WCHAR* buf = GetBoxFilePath(BoxName, 0);
+
+        while(*buf)
+        {
+            std::wstring test_path = buf;
+            size_t pos = test_path.find_last_of(L'\\');
+            test_path.erase(pos+1);
+            test_path.append(L"DONT-USE.TXT");
+            
+            if (PathFileExists(test_path.c_str()))
+                buf[pos] = L'\0';
+            else
+                break;
+        }
+
+        dirs_to_remove.insert(buf);
+        HeapFree(GetProcessHeap(), 0, buf);
+    }
+
+    StartStatusDialog();
+
+    for (auto I = dirs_to_remove.begin(); I != dirs_to_remove.end() && processing; ++I) {
+
+        const WCHAR* BoxFolder = I->c_str();
+
+        SetStatusMsg(MSG_3317, BoxFolder);
+        WaitForFolder(BoxFolder, 10);
+
+        ProcessFiles(BoxFolder);
+
+        SetStatusMsg(MSG_3318, BoxFolder);
+        WaitForFolder(BoxFolder, 10);
+
+        WCHAR cmd[1536];
+        wcscpy(cmd, L"%SystemRoot%\\System32\\cmd.exe /c rmdir /s /q \"");
+        wcscat(cmd, BoxFolder);
+        wcscat(cmd, L"\"");
+        LaunchProgram(cmd, TRUE);
+    }
+
+    StopStatusDialog();
+
+    return processing == 1 ? EXIT_SUCCESS : EXIT_FAILURE;
 }

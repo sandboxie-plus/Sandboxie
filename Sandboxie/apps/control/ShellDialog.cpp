@@ -275,7 +275,7 @@ void CShellDialog::OnCloseOrCancel()
 //---------------------------------------------------------------------------
 
 
-void CShellDialog::Sync()
+void CShellDialog::Sync(BOOL bUninstall)
 {
     //
     // initialize Shell exports (Visual C++ 6.0)
@@ -295,11 +295,11 @@ void CShellDialog::Sync()
     // sync
     //
 
-    SyncRunLogon();
-    SyncBrowserIcon(_AddDesktopIcon,     CSIDL_DESKTOPDIRECTORY, CString());
-    SyncBrowserIcon(_AddQuickLaunchIcon, CSIDL_APPDATA,       _QuickLaunch);
-    SyncContextMenu();
-    SyncSendToMenu();
+    SyncRunLogon(bUninstall);
+    SyncBrowserIcon(_AddDesktopIcon,     CSIDL_DESKTOPDIRECTORY, CString(), bUninstall);
+    SyncBrowserIcon(_AddQuickLaunchIcon, CSIDL_APPDATA,       _QuickLaunch, bUninstall);
+    SyncContextMenu(bUninstall);
+    SyncSendToMenu(bUninstall);
 }
 
 
@@ -308,7 +308,7 @@ void CShellDialog::Sync()
 //---------------------------------------------------------------------------
 
 
-void CShellDialog::SyncRunLogon()
+void CShellDialog::SyncRunLogon(BOOL bUninstall)
 {
     static const WCHAR *_RunKey =
         L"Software\\Microsoft\\Windows\\CurrentVersion\\Run";
@@ -318,8 +318,9 @@ void CShellDialog::SyncRunLogon()
     // query ini setting and actual registry information
     //
 
-    BOOL ini;
-    CUserSettings::GetInstance().GetBool(_EnableLogonStart, ini, TRUE);
+    BOOL ini = FALSE;
+    if(!bUninstall)
+        CUserSettings::GetInstance().GetBool(_EnableLogonStart, ini, TRUE);
 
     HKEY hkey;
     LONG rc = RegOpenKeyEx(HKEY_CURRENT_USER, _RunKey, 0, KEY_READ, &hkey);
@@ -377,7 +378,7 @@ void CShellDialog::SyncRunLogon()
 //---------------------------------------------------------------------------
 
 
-void CShellDialog::SyncContextMenu()
+void CShellDialog::SyncContextMenu(BOOL bUninstall)
 {
     static const WCHAR *_star   = L"*";
     static const WCHAR *_folder = L"Folder";
@@ -386,8 +387,9 @@ void CShellDialog::SyncContextMenu()
     // query ini setting and actual registry information
     //
 
-    BOOL ini;
-    CUserSettings::GetInstance().GetBool(_AddContextMenu, ini, TRUE);
+    BOOL ini = FALSE;
+    if(!bUninstall)
+        CUserSettings::GetInstance().GetBool(_AddContextMenu, ini, TRUE);
     BOOL reg = FALSE;
 
     ULONG type;
@@ -718,14 +720,15 @@ void CShellDialog::DeleteAssoc(WCHAR *path, const WCHAR *classname)
 
 
 void CShellDialog::SyncBrowserIcon(
-    const CString &setting, int nFolder, const CString &subdir)
+    const CString &setting, int nFolder, const CString &subdir, BOOL bUninstall)
 {
     //
     // query ini setting and actual filesystem information
     //
 
-    BOOL ini;
-    CUserSettings::GetInstance().GetBool(setting, ini, TRUE);
+    BOOL ini = FALSE;
+    if(!bUninstall)
+        CUserSettings::GetInstance().GetBool(setting, ini, TRUE);
 
     WCHAR path[512];
     HRESULT hr = SHGetFolderPathW(
@@ -774,15 +777,16 @@ void CShellDialog::SyncBrowserIcon(
 //---------------------------------------------------------------------------
 
 
-void CShellDialog::SyncSendToMenu()
+void CShellDialog::SyncSendToMenu(BOOL bUninstall)
 {
     if (CMyApp::m_WindowsVista) {
         SyncSendToMenuVista();
         return;
     }
 
-    BOOL ini;
-    CUserSettings::GetInstance().GetBool(_AddSendToMenu, ini, TRUE);
+    BOOL ini = FALSE;
+    if(!bUninstall)
+        CUserSettings::GetInstance().GetBool(_AddSendToMenu, ini, TRUE);
 
     WCHAR path[512];
     HRESULT hr = SHGetFolderPathW(

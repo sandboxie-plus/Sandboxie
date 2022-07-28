@@ -308,7 +308,12 @@ void COptionsWindow::AddAccessEntry(EAccessType	Type, EAccessMode Mode, QString 
 	pItem->setText(2, GetAccessModeStr(Mode));
 	pItem->setData(2, Qt::UserRole, (int)Mode);
 
-	pItem->setText(3, Path);
+	QString sPath = Path;
+	if (Type == eFile || Type == eKey) {
+		if (sPath.left(1) != "|" && !sPath.contains("*") && sPath.right(1) != "*")
+			sPath.append("*");
+	}
+	pItem->setText(3, sPath);
 	pItem->setData(3, Qt::UserRole, Path);
 
 	if(Template.isEmpty())

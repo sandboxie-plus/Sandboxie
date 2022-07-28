@@ -494,7 +494,7 @@ SBIE2224 Sandboxed program has crashed: %2
 .
 
 2225;pop;wrn;01
-SBIE2225 An attempt was made to access an EFS file: %2
+SBIE2225 Tried to access an EFS file: %2
 .
 
 #----------------------------------------------------------------------------
@@ -1027,6 +1027,22 @@ Unknown user, configuration settings will not be saved
 
 3314;txt;01
 An error occurred while applying default settings for sandbox '%2'
+.
+
+3315;txt;01
+Deleting Sandbox contents
+.
+
+3316;txt;01
+Do you want to abort the operation?
+.
+
+3317;txt;01
+Preparing to delete: %2
+.
+
+3318;txt;01
+Deleting: %2
 .
 
 # 3321;txt;01

@@ -1043,7 +1043,8 @@ WriteLoop:
     File /oname=${SANDBOXIE}WUAU.exe       "${BIN_ROOT}\SandboxieWUAU.exe"
 
     File /oname=${START_EXE} "${BIN_ROOT}\Start.exe"
-
+    File /oname=${START_EXE}.sig "${BIN_ROOT}\Start.exe.sig"
+    
     File /oname=${SBIECTRL_EXE} "${BIN_ROOT}\SbieCtrl.exe"
     File /oname=${SBIECTRL_EXE}.sig "${BIN_ROOT}\SbieCtrl.exe.sig"
 
@@ -1155,6 +1156,7 @@ Function DeleteProgramFiles
     Delete "$INSTDIR\${SANDBOXIE}RpcSs.exe"
 
     Delete "$INSTDIR\${START_EXE}"
+    Delete "$INSTDIR\${START_EXE}.sig"
 
     Delete "$INSTDIR\${SBIECTRL_EXE}"
     Delete "$INSTDIR\${SBIECTRL_EXE}.sig"

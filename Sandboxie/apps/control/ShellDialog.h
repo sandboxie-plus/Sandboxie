@@ -38,14 +38,14 @@ class CShellDialog : public CBaseDialog
 
     afx_msg void OnCloseOrCancel();
 
-    static void SyncRunLogon();
+    static void SyncRunLogon(BOOL bUninstall = FALSE);
     static void SyncSendToMenuVista();
 
     static void CreateAssoc(WCHAR *path, const WCHAR *classname);
     static void DeleteAssoc(WCHAR *path, const WCHAR *classname);
 
     static void SyncBrowserIcon(
-        const CString &setting, int nFolder, const CString &subdir);
+        const CString &setting, int nFolder, const CString &subdir, BOOL bUninstall = FALSE);
 
     static BOOL GetStartMenuShortcut(
         CString &BoxName, CString &LinkPath,
@@ -68,9 +68,9 @@ public:
     CShellDialog(CWnd *pParentWnd);
     ~CShellDialog();
 
-    static void Sync();
-    static void SyncContextMenu();
-    static void SyncSendToMenu();
+    static void Sync(BOOL bUninstall = FALSE);
+    static void SyncContextMenu(BOOL bUninstall = FALSE);
+    static void SyncSendToMenu(BOOL bUninstall = FALSE);
 
     static void CreateShortcut(CString BoxName, CString LinkPath);
 

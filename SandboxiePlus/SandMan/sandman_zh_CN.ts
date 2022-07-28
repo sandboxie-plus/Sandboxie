@@ -928,8 +928,9 @@ Full path: %4</source>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="208"/>
-        <source>the following files were recently recovered and moved out of a sandbox.</source>
-        <translation>以下是最近被恢复并移出沙盒的文件</translation>
+        <source>The following files were recently recovered and moved out of a sandbox.</source>
+        <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
+        <translation type="unfinished">以下是最近被恢复并移出沙盒的文件</translation>
     </message>
 </context>
 <context>
@@ -2880,8 +2881,9 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1280"/>
-        <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
-        <translation>现在将显示 Sandboxie 开始菜单。从菜单中选择一个应用程序，Sandboxie 将在真实桌面上创建一个新的快捷方式图标，你可以用它来调用受 Sandboxie 监督的所选应用程序。</translation>
+        <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
+        <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
+        <translation type="unfinished">现在将显示 Sandboxie 开始菜单。从菜单中选择一个应用程序，Sandboxie 将在真实桌面上创建一个新的快捷方式图标，你可以用它来调用受 Sandboxie 监督的所选应用程序。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1315"/>
@@ -5030,8 +5032,9 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="395"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <translation>在沙盒列表中显示“披萨”背景 *</translation>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
+        <translation type="unfinished">在沙盒列表中显示“披萨”背景 *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="419"/>

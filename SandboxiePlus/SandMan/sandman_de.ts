@@ -1001,8 +1001,9 @@ Vollständiger Pfad: %4</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="208"/>
-        <source>the following files were recently recovered and moved out of a sandbox.</source>
-        <translation>die folgenden Dateien wurden kürzlich wiederhergestellt und aus einer Sandbox verschoben.</translation>
+        <source>The following files were recently recovered and moved out of a sandbox.</source>
+        <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
+        <translation type="unfinished">die folgenden Dateien wurden kürzlich wiederhergestellt und aus einer Sandbox verschoben.</translation>
     </message>
 </context>
 <context>
@@ -2999,8 +3000,9 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1280"/>
-        <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
-        <translation>Das Sandboxie Startmenü wird nun angezeigt. Wählen Sie eine Applikation aus diesem Menü und Sandboxie wird eine neue Verknüpfung auf Ihrem tatsächlichen Desktop erstellen, welche Sie dazu verwenden können um die ausgewählte Applikation unter der Kontrolle von Sandboxie aufzurufen.</translation>
+        <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
+        <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
+        <translation type="unfinished">Das Sandboxie Startmenü wird nun angezeigt. Wählen Sie eine Applikation aus diesem Menü und Sandboxie wird eine neue Verknüpfung auf Ihrem tatsächlichen Desktop erstellen, welche Sie dazu verwenden können um die ausgewählte Applikation unter der Kontrolle von Sandboxie aufzurufen.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1352"/>
@@ -5386,8 +5388,9 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="395"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <translation>Zeige &quot;Pizza&quot;-Hintergrung in der Boxliste*</translation>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
+        <translation type="unfinished">Zeige &quot;Pizza&quot;-Hintergrung in der Boxliste*</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="419"/>

@@ -923,7 +923,8 @@ Full path: %4</source>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="208"/>
-        <source>the following files were recently recovered and moved out of a sandbox.</source>
+        <source>The following files were recently recovered and moved out of a sandbox.</source>
+        <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2855,7 +2856,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1280"/>
-        <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
+        <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
+        <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4895,7 +4897,8 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="395"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

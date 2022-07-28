@@ -951,7 +951,8 @@ Percorso completo: %4</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="208"/>
-        <source>the following files were recently recovered and moved out of a sandbox.</source>
+        <source>The following files were recently recovered and moved out of a sandbox.</source>
+        <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation type="unfinished">I seguenti file sono stati recuperati di recente e spostati all&apos;esterno dell&apos;area virtuale.</translation>
     </message>
 </context>
@@ -2935,7 +2936,8 @@ Scegliere No per selezionare: %2</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1280"/>
-        <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
+        <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
+        <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
         <translation type="unfinished">Ora verrà visualizzato il menu Start di Sandboxie. Selezionare un programma dal menu per creare un collegamento sul desktop reale che consenta l&apos;avvio di tale programma sotto la supervisione di Sandboxie.</translation>
     </message>
     <message>
@@ -5082,7 +5084,8 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="395"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
         <translation type="unfinished">Mostra lo sfondo &quot;Pizza&quot; nell&apos;elenco delle aree virtuali *</translation>
     </message>
     <message>

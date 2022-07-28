@@ -927,8 +927,9 @@ Full path: %4</source>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="208"/>
-        <source>the following files were recently recovered and moved out of a sandbox.</source>
-        <translation>следующие файлы были недавно восстановлены и перемещены из песочницы.</translation>
+        <source>The following files were recently recovered and moved out of a sandbox.</source>
+        <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
+        <translation type="unfinished">следующие файлы были недавно восстановлены и перемещены из песочницы.</translation>
     </message>
 </context>
 <context>
@@ -2869,8 +2870,9 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1280"/>
-        <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
-        <translation>Cтартовое меню Sandboxie теперь будет отображено. Выберите приложение из меню, и Sandboxie создаст новый ярлык на вашем реальном рабочем столе, который вы можете использовать для вызова выбранного приложения под контролем Sandboxie.</translation>
+        <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
+        <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
+        <translation type="unfinished">Cтартовое меню Sandboxie теперь будет отображено. Выберите приложение из меню, и Sandboxie создаст новый ярлык на вашем реальном рабочем столе, который вы можете использовать для вызова выбранного приложения под контролем Sandboxie.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1315"/>
@@ -4921,8 +4923,9 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="395"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <translation>Показать фон &quot;Пицца&quot; в списке песочниц*</translation>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
+        <translation type="unfinished">Показать фон &quot;Пицца&quot; в списке песочниц*</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="419"/>

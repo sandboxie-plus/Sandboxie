@@ -58,6 +58,22 @@ SBIE2325 Debug:  %2
 Type the name of a program or path to open the following file in the current sandbox:
 .
 
+3315;txt;01
+Deleting Sandbox contents
+.
+
+3316;txt;01
+Do you want to abort the operation?
+.
+
+3317;txt;01
+Preparing to delete: %2
+.
+
+3318;txt;01
+Deleting: %2
+.
+
 3426;txt;01
 &Always on Top
 .

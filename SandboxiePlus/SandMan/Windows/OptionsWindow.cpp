@@ -158,6 +158,22 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabs->setTabIcon(eTemplates, CSandMan::GetIcon("Template"));
 	ui.tabs->setTabIcon(eEditIni, CSandMan::GetIcon("EditIni"));
 
+
+	if (theConf->GetBool("Options/AltRowColors", false)) {
+		ui.treeRun->setAlternatingRowColors(true);
+		ui.treeGroups->setAlternatingRowColors(true);
+		ui.treeForced->setAlternatingRowColors(true);
+		ui.treeStop->setAlternatingRowColors(true);
+		ui.treeStart->setAlternatingRowColors(true);
+		ui.treeINet->setAlternatingRowColors(true);
+		ui.treeNetFw->setAlternatingRowColors(true);
+		ui.treeAccess->setAlternatingRowColors(true);
+		ui.treeRecovery->setAlternatingRowColors(true);
+		ui.treeTriggers->setAlternatingRowColors(true);
+		ui.treeTemplates->setAlternatingRowColors(true);
+		ui.treeFolders->setAlternatingRowColors(true);
+	}
+
 	CreateDebug();
 
 	if (m_Template)

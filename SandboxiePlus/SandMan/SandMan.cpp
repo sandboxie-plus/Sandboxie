@@ -787,6 +787,8 @@ void CSandMan::CreateView(int iViewMode)
 		// Recovery Log
 		m_pRecoveryLog = new CPanelWidgetEx();
 
+		m_pRecoveryLog->GetTree()->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
+
 		//m_pRecoveryLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
 		((QTreeWidgetEx*)m_pRecoveryLog->GetView())->setHeaderLabels(tr("Time|Box Name|File Path").split("|"));
 
@@ -1524,6 +1526,7 @@ void CSandMan::AddLogMessage(const QString& Message)
 	pItem->setText(0, QDateTime::currentDateTime().toString("hh:mm:ss.zzz"));
 	pItem->setText(1, Message);
 	m_pMessageLog->GetTree()->addTopLevelItem(pItem);
+	m_pMessageLog->GetTree()->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
 
 	m_pMessageLog->GetView()->verticalScrollBar()->setValue(m_pMessageLog->GetView()->verticalScrollBar()->maximum());
 }

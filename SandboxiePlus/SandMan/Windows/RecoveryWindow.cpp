@@ -44,6 +44,8 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, bool bImmediate, QWidg
 	ui.setupUi(this);
 	this->setWindowTitle(tr("%1 - File Recovery").arg(pBox->GetName()));
 
+	ui.treeFiles->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
+
 	m_pBox = pBox;
 
 	m_pCounter = NULL;
@@ -67,7 +69,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, bool bImmediate, QWidg
 	m_pFileModel->AddColumn(tr("File Size"), "FileSize");
 	m_pFileModel->AddColumn(tr("Full Path"), "DiskPath");
 
-	m_pSortProxy = new CSortFilterProxyModel(false, this);
+	m_pSortProxy = new CSortFilterProxyModel(this);
 	m_pSortProxy->setSortRole(Qt::EditRole);
 	m_pSortProxy->setSourceModel(m_pFileModel);
 	m_pSortProxy->setDynamicSortFilter(true);

@@ -14,6 +14,7 @@ CFileView::CFileView(QWidget *parent)
 	this->setLayout(m_pMainLayout);
 
     m_pTreeView = new QTreeView();
+    m_pTreeView->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
     m_pMainLayout->addWidget(m_pTreeView, 0, 0);
 
     m_pFileModel = new QFileSystemModel(this);

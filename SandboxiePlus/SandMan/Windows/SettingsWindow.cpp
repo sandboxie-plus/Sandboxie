@@ -65,9 +65,6 @@ SCertInfo g_CertInfo = { 0 };
 CSettingsWindow::CSettingsWindow(QWidget *parent)
 	: QDialog(parent)
 {
-	ui.setupUi(this);
-	this->setWindowTitle(tr("Sandboxie Plus - Settings"));
-
 	Qt::WindowFlags flags = windowFlags();
 	flags |= Qt::CustomizeWindowHint;
 	//flags &= ~Qt::WindowContextHelpButtonHint;
@@ -80,6 +77,13 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
+	ui.setupUi(this);
+	this->setWindowTitle(tr("Sandboxie Plus - Settings"));
+
+	if (theConf->GetBool("Options/AltRowColors", false)) {
+		ui.treeWarnProgs->setAlternatingRowColors(true);
+		ui.treeCompat->setAlternatingRowColors(true);
+	}
 
 	ui.tabs->setTabPosition(QTabWidget::West);
 	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));
@@ -144,6 +148,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 	connect(ui.cmbDPI, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkDarkTheme, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkAltRows, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkBackground, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkLargeIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkNoIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
@@ -325,6 +330,7 @@ void CSettingsWindow::LoadSettings()
 	ui.cmbDPI->setCurrentIndex(theConf->GetInt("Options/DPIScaling", 1));
 
 	ui.chkDarkTheme->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/UseDarkTheme", 2)));
+	ui.chkAltRows->setChecked(theConf->GetBool("Options/AltRowColors", false));
 	ui.chkBackground->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/UseBackground", 2)));
 	ui.chkLargeIcons->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/LargeIcons", 2)));
 	ui.chkNoIcons->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/NoIcons", 2)));
@@ -340,6 +346,7 @@ void CSettingsWindow::LoadSettings()
 
 	ui.chkShowRecovery->setChecked(theConf->GetBool("Options/ShowRecovery", false));
 	ui.chkNotifyRecovery->setChecked(!theConf->GetBool("Options/InstantRecovery", true));
+	ui.chkRecoveryTop->setChecked(theConf->GetBool("Options/RecoveryOnTop", true));
 	ui.chkAsyncBoxOps->setChecked(theConf->GetBool("Options/UseAsyncBoxOps", false));
 
 	ui.chkPanic->setChecked(theConf->GetBool("Options/EnablePanicKey", false));
@@ -513,6 +520,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/DPIScaling", ui.cmbDPI->currentData());
 
 	theConf->SetValue("Options/UseDarkTheme", CSettingsWindow__Chk2Int(ui.chkDarkTheme->checkState()));
+	theConf->SetValue("Options/AltRowColors", ui.chkAltRows->isChecked());
 	theConf->SetValue("Options/UseBackground", CSettingsWindow__Chk2Int(ui.chkBackground->checkState()));
 	theConf->SetValue("Options/LargeIcons", CSettingsWindow__Chk2Int(ui.chkLargeIcons->checkState()));
 	theConf->SetValue("Options/NoIcons", CSettingsWindow__Chk2Int(ui.chkNoIcons->checkState()));
@@ -564,6 +572,7 @@ void CSettingsWindow::SaveSettings()
 
 	theConf->SetValue("Options/ShowRecovery", ui.chkShowRecovery->isChecked());
 	theConf->SetValue("Options/InstantRecovery", !ui.chkNotifyRecovery->isChecked());
+	theConf->SetValue("Options/RecoveryOnTop", ui.chkRecoveryTop->isChecked());
 	theConf->SetValue("Options/UseAsyncBoxOps", ui.chkAsyncBoxOps->isChecked());
 
 	theConf->SetValue("Options/EnablePanicKey", ui.chkPanic->isChecked());

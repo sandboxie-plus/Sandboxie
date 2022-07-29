@@ -23,6 +23,9 @@ CSnapshotsWindow::CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	ui.setupUi(this);
 	this->setWindowTitle(tr("%1 - Snapshots").arg(pBox->GetName()));
 
+	ui.treeSnapshots->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
+
+
 	m_pBox = pBox;
 	m_SaveInfoPending = 0;
 
@@ -35,7 +38,7 @@ CSnapshotsWindow::CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	m_pSnapshotModel = new CSimpleTreeModel();
 	m_pSnapshotModel->AddColumn(tr("Snapshot"), "Name");
 
-	/*m_pSortProxy = new CSortFilterProxyModel(false, this);
+	/*m_pSortProxy = new CSortFilterProxyModel(this);
 	m_pSortProxy->setSortRole(Qt::EditRole);
 	m_pSortProxy->setSourceModel(m_pSnapshotModel);
 	m_pSortProxy->setDynamicSortFilter(true);*/

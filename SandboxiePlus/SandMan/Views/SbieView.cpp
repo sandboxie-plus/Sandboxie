@@ -29,13 +29,14 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	m_pSbieModel->SetTree(true);
 	m_pSbieModel->SetUseIcons(true);
 
-	m_pSortProxy = new CSortFilterProxyModel(false, this);
+	m_pSortProxy = new CSortFilterProxyModel(this);
 	m_pSortProxy->setSortRole(Qt::EditRole);
 	m_pSortProxy->setSourceModel(m_pSbieModel);
 	m_pSortProxy->setDynamicSortFilter(true);
 
 	// SbieTree
 	m_pSbieTree = new QTreeViewEx();
+	m_pSbieTree->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
 	m_pSbieTree->setExpandsOnDoubleClick(false);
 	//m_pSbieTree->setItemDelegate(theGUI->GetItemDelegate());
 

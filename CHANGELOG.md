@@ -6,6 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.2.7 / 5.57.7] - 2022-07-??
 
+### Added
+- addes option to alternate row color in all lists [#2073](https://github.com/sandboxie-plus/Sandboxie/issues/2073)
+
 ### Changed
 - SandboxieLogon is now disabled by default as it was not compatible with 3rd party antimalware tools [#2025](https://github.com/sandboxie-plus/Sandboxie/issues/2025)
 - the access view list now adds in display the tailing * to file and key paths the same way the driver does [2039](https://github.com/sandboxie-plus/Sandboxie/issues/2039)

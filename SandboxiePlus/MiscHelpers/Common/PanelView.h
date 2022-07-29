@@ -156,7 +156,7 @@ public:
 	{
 		m_pModel = pModel;
 
-		m_pSortProxy = new CSortFilterProxyModel(false, this);
+		m_pSortProxy = new CSortFilterProxyModel(this);
 		m_pSortProxy->setSortRole(Qt::EditRole);
 		m_pSortProxy->setSourceModel(m_pModel);
 		m_pSortProxy->setDynamicSortFilter(true);

@@ -10,7 +10,7 @@
 //class CTraceFilterProxyModel : public CSortFilterProxyModel
 //{
 //public:
-//	CTraceFilterProxyModel(QObject* parrent = 0) : CSortFilterProxyModel(false, parrent)
+//	CTraceFilterProxyModel(QObject* parrent = 0) : CSortFilterProxyModel(parrent)
 //	{
 //		m_FilterPid = 0;
 //		m_FilterTid = 0;
@@ -51,6 +51,8 @@
 CTraceTree::CTraceTree(QWidget* parent) 
 	: CPanelWidget<QTreeViewEx>(parent) 
 {
+	m_pTreeList->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
+
 	m_pTreeList->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
 	m_pTraceModel = new CTraceModel();
@@ -66,8 +68,6 @@ CTraceTree::CTraceTree(QWidget* parent)
 
 	m_pTreeList->setModel(m_pTraceModel);
 
-
-	m_pTreeList->setSelectionMode(QAbstractItemView::ExtendedSelection);
 #ifdef WIN32
 	QStyle* pStyle = QStyleFactory::create("windows");
 	m_pTreeList->setStyle(pStyle);
@@ -104,12 +104,14 @@ CTraceTree::~CTraceTree()
 CMonitorList::CMonitorList(QWidget* parent) 
 	: CPanelWidget<QTreeViewEx>(parent) 
 {
+	m_pTreeList->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
+
 	m_pTreeList->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
 	m_pMonitorModel = new CMonitorModel();
 	//connect(m_pMonitorModel, SIGNAL(NewBranche()), this, SLOT(UpdateFilters()));
 
-	m_pSortProxy = new CSortFilterProxyModel(false, this);
+	m_pSortProxy = new CSortFilterProxyModel(this);
 	m_pSortProxy->setSortRole(Qt::EditRole);
 	m_pSortProxy->setSourceModel(m_pMonitorModel);
 	m_pSortProxy->setDynamicSortFilter(true);
@@ -117,8 +119,6 @@ CMonitorList::CMonitorList(QWidget* parent)
 	m_pTreeList->setModel(m_pSortProxy);
 	m_pSortProxy->setView(m_pTreeList);
 
-
-	m_pTreeList->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
 	QStyle* pStyle = QStyleFactory::create("windows");
 	m_pTreeList->setStyle(pStyle);

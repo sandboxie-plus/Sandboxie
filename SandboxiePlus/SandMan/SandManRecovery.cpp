@@ -192,6 +192,8 @@ CRecoveryLogWnd::CRecoveryLogWnd(QWidget *parent)
 	
 	m_pRecoveryLog = new CPanelWidgetEx();
 
+	m_pRecoveryLog->GetTree()->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
+
 	//m_pRecoveryLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
 	((QTreeWidgetEx*)m_pRecoveryLog->GetView())->setHeaderLabels(tr("Time|Box Name|File Path").split("|"));
 

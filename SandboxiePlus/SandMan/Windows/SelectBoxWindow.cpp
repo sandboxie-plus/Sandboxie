@@ -87,6 +87,7 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 	ui.setupUi(this);
 	this->setWindowTitle(tr("Sandboxie-Plus - Run Sandboxed"));
 
+	ui.treeBoxes->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
 
 	connect(ui.radBoxed, SIGNAL(clicked(bool)), this, SLOT(OnBoxType()));
 	connect(ui.radUnBoxed, SIGNAL(clicked(bool)), this, SLOT(OnBoxType()));

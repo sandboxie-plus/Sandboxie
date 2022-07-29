@@ -1027,6 +1027,22 @@ Utente sconosciuto. Le impostazioni di configurazione non verranno salvate
 Si è verificato un errore durante l'applicazione delle impostazioni predefinite all'area virtuale '%2'
 .
 
+3315;txt;01
+Eliminazione del contenuto dell'area virtuale
+.
+
+3316;txt;01
+Si desidera interrompere l'operazione?
+.
+
+3317;txt;01
+Pronto per l'eliminazione: %2
+.
+
+3318;txt;01
+Eliminazione in corso: %2
+.
+
 # 3321;txt;01
 # - La sessione di accesso è nell'area virtuale
 # .

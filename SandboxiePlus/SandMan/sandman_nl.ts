@@ -329,7 +329,7 @@
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="298"/>
-        <location filename="Windows/OptionsAccess.cpp" line="489"/>
+        <location filename="Windows/OptionsAccess.cpp" line="494"/>
         <location filename="Windows/OptionsNetwork.cpp" line="435"/>
         <location filename="Windows/OptionsNetwork.cpp" line="528"/>
         <location filename="Windows/OptionsNetwork.cpp" line="641"/>
@@ -340,7 +340,7 @@
         <location filename="Windows/OptionsWindow.cpp" line="683"/>
         <location filename="Windows/OptionsWindow.cpp" line="699"/>
         <location filename="Windows/OptionsAccess.cpp" line="303"/>
-        <location filename="Windows/OptionsAccess.cpp" line="493"/>
+        <location filename="Windows/OptionsAccess.cpp" line="498"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
         <location filename="Windows/OptionsNetwork.cpp" line="440"/>
         <location filename="Windows/OptionsNetwork.cpp" line="532"/>
@@ -348,17 +348,17 @@
         <translation>Groep: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="419"/>
+        <location filename="Windows/OptionsAccess.cpp" line="424"/>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
         <translation>COM-objecten moeten via hun GUID worden opgegeven, zoals: {00000000-0000-0000-0000-000000000000}</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="425"/>
+        <location filename="Windows/OptionsAccess.cpp" line="430"/>
         <source>RT interfaces must be specified by their name.</source>
         <translation>RT-interfaces moeten via hun naam worden opgegeven.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="468"/>
+        <location filename="Windows/OptionsAccess.cpp" line="473"/>
         <location filename="Windows/OptionsGrouping.cpp" line="278"/>
         <location filename="Windows/OptionsGrouping.cpp" line="302"/>
         <location filename="Windows/OptionsNetwork.cpp" line="507"/>
@@ -366,7 +366,7 @@
         <translation>Sjabloonwaarden kunnen niet worden bewerkt.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="534"/>
+        <location filename="Windows/OptionsAccess.cpp" line="539"/>
         <location filename="Windows/OptionsRecovery.cpp" line="132"/>
         <source>Template values can not be removed.</source>
         <translation>Sjabloonwaarden kunnen niet worden verwijderd.</translation>

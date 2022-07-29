@@ -384,7 +384,7 @@
         <location filename="Windows/OptionsWindow.cpp" line="683"/>
         <location filename="Windows/OptionsWindow.cpp" line="699"/>
         <location filename="Windows/OptionsAccess.cpp" line="303"/>
-        <location filename="Windows/OptionsAccess.cpp" line="493"/>
+        <location filename="Windows/OptionsAccess.cpp" line="498"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
         <location filename="Windows/OptionsNetwork.cpp" line="440"/>
         <location filename="Windows/OptionsNetwork.cpp" line="532"/>
@@ -513,7 +513,7 @@
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="298"/>
-        <location filename="Windows/OptionsAccess.cpp" line="489"/>
+        <location filename="Windows/OptionsAccess.cpp" line="494"/>
         <location filename="Windows/OptionsNetwork.cpp" line="435"/>
         <location filename="Windows/OptionsNetwork.cpp" line="528"/>
         <location filename="Windows/OptionsNetwork.cpp" line="641"/>
@@ -521,17 +521,17 @@
         <translation>所有程序</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="419"/>
+        <location filename="Windows/OptionsAccess.cpp" line="424"/>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
         <translation>COM 对象必须用其 GUID 来指定，例如：{00000000-0000-0000-0000-000000000000}</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="425"/>
+        <location filename="Windows/OptionsAccess.cpp" line="430"/>
         <source>RT interfaces must be specified by their name.</source>
         <translation>RT 接口必须用其名称来指定</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="468"/>
+        <location filename="Windows/OptionsAccess.cpp" line="473"/>
         <location filename="Windows/OptionsGrouping.cpp" line="278"/>
         <location filename="Windows/OptionsGrouping.cpp" line="302"/>
         <location filename="Windows/OptionsNetwork.cpp" line="507"/>
@@ -539,7 +539,7 @@
         <translation>模板值无法被编辑</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="534"/>
+        <location filename="Windows/OptionsAccess.cpp" line="539"/>
         <location filename="Windows/OptionsRecovery.cpp" line="132"/>
         <source>Template values can not be removed.</source>
         <translation>模板值无法被移除</translation>
@@ -930,7 +930,7 @@ Full path: %4</source>
         <location filename="SandManRecovery.cpp" line="208"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
-        <translation type="unfinished">以下是最近被恢复并移出沙盒的文件</translation>
+        <translation>以下是最近被恢复并移出沙盒的文件</translation>
     </message>
 </context>
 <context>
@@ -2883,7 +2883,7 @@ No will choose: %2</source>
         <location filename="Views/SbieView.cpp" line="1280"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
-        <translation type="unfinished">现在将显示 Sandboxie 开始菜单。从菜单中选择一个应用程序，Sandboxie 将在真实桌面上创建一个新的快捷方式图标，你可以用它来调用受 Sandboxie 监督的所选应用程序。</translation>
+        <translation>现在将显示 Sandboxie 开始菜单。从菜单中选择一个应用程序，Sandboxie 将在真实桌面上创建一个新的快捷方式图标，你可以用它来调用所选受 Sandboxie 监督的应用程序。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1315"/>
@@ -3404,13 +3404,13 @@ No will choose: %2</source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="425"/>
         <source>Using WFP allows Sandboxie to reliably enforce IP/Port based rules for network access. Unlike system level application firewalls, Sandboxie can use different rules in each box for the same application. If you already have a good and reliable application firewall and do not need per box rules, you can leave this option unchecked. Without WFP enabled, Sandboxie will still be able to reliably and entirely block processes from accessing the network. However, this can cause the process to crash, as the driver blocks the required network device endpoints. Even with WFP disabled, Sandboxie offers to set IP/Port based rules, however these will be applied in user mode only and not be enforced by the driver. Hence, without WFP enabled, an intentionally malicious process could bypass those rules, but not the entire network block.</source>
-        <translation>启用 WFP 使 Sandboxie 能够可靠地执行基于 IP/端口 的网络访问规则。
-与系统层级的应用防火墙不同，Sandboxie 可以针对同一应用在不同的沙盒内设置不同的规则。
-如果你已有一个更友好、更可靠的应用防火墙，并且不需要针对同一应用在不同沙盒设置不同的规则，则可不勾选此选项。
-如果不启用 WFP，Sandboxie 仍然能够可靠地完全阻止进程访问网络。
-然而，这可能会导致进程崩溃，因为驱动程序会阻止程序访问请求的网络设备端点。
-即使禁用 WFP，Sandboxie 也将提供基于 IP/端口 的规则过滤功能，但此时规则只能在用户态下应用，而无法被驱动程序强制执行。
-因此，如果不启用 WFP，某些恶意程序可能可以绕过这些规则，但不能绕过整个网络区块。</translation>
+        <translation>启用 WFP 使 Sandboxie 能够可靠地执行基于 IP/端口 的网络访问规则
+与系统层级的应用防火墙不同，Sandboxie 可以针对同一应用在不同的沙盒内设置不同的规则
+如果你已有一个更友好、更可靠的应用防火墙，并且不需要针对同一应用在不同沙盒设置不同的规则，则可不勾选此选项
+如果不启用 WFP，Sandboxie 仍然能够可靠地完全阻止进程访问网络
+然而，这可能会导致进程崩溃，因为驱动程序会阻止程序访问请求的网络设备端点
+即使禁用 WFP，Sandboxie 也将提供基于 IP/端口 的规则过滤功能，但此时规则只能在用户态下应用，而无法被驱动程序强制执行
+因此，如果不启用 WFP，某些恶意程序可能可以绕过这些规则，但不能绕过整个网络区块</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="434"/>
@@ -5034,7 +5034,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="395"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="unfinished">在沙盒列表中显示“披萨”背景 *</translation>
+        <translation>在沙盒列表中显示“披萨”背景 *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="419"/>

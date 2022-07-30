@@ -882,6 +882,21 @@ Unbekannter Benutzer, die Konfiguration wird nicht gespeichert
 Es trat ein Fehler auf bei den Einstellungen für die Sandbox '%2'
 .
 
+3315;txt;01
+Lösche Sandboxinhalte
+.
+
+3316;txt;01
+Möchten Sie diesen Vorgang abbrechen?
+.
+
+3317;txt;01
+Bereite das Löschen vor: %2
+.
+
+3318;txt;01
+Lösche: %2
+.
 # 3321;txt;01
 # - Anmeldesitzung in der Sandbox
 # .

@@ -2934,8 +2934,9 @@ No will choose: %2</source>
     <name>CSettingsWindow</name>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="81"/>
-        <source>Sandboxie Plus - Settings</source>
-        <translation>Sandboxie Plus - 设置</translation>
+        <source>Sandboxie Plus - Global Settings</source>
+        <oldsource>Sandboxie Plus - Settings</oldsource>
+        <translation>Sandboxie Plus - 全局设置</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="104"/>
@@ -5089,17 +5090,17 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="182"/>
         <source>Show the Recovery Window as Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>始终置顶恢复文件窗口</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="506"/>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="550"/>
         <source>Alternate row background in lists</source>
-        <translation type="unfinished"></translation>
+        <translation>在列表中使用备用行背景</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="744"/>

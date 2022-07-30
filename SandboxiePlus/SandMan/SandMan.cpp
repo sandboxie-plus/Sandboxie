@@ -376,7 +376,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pDisableMessages = NULL;
 	}
 		m_pMenuFile->addSeparator();
-		m_pWndFinder = m_pMenuFile->addAction(CSandMan::GetIcon("finder"), tr("Is Window Sandboxed"), this, SLOT(OnWndFinder()));
+		m_pWndFinder = m_pMenuFile->addAction(CSandMan::GetIcon("finder"), tr("Is Window Sandboxed?"), this, SLOT(OnWndFinder()));
 
 	if(bAdvanced || theGUI->IsFullyPortable())
 		CreateMaintenanceMenu();
@@ -494,7 +494,7 @@ void CSandMan::CreateOldMenus()
 		//m_pDisableMessages->setCheckable(true);	
 		m_pDisableMessages = NULL;
 		m_pMenuFile->addSeparator();
-		m_pWndFinder = m_pMenuFile->addAction(CSandMan::GetIcon("finder"), tr("Is Window Sandboxed"), this, SLOT(OnWndFinder()));
+		m_pWndFinder = m_pMenuFile->addAction(CSandMan::GetIcon("finder"), tr("Is Window Sandboxed?"), this, SLOT(OnWndFinder()));
 		m_pEnableMonitoring = m_pMenuFile->addAction(CSandMan::GetIcon("SetLogging"), tr("Resource Access Monitor"), this, SLOT(OnMonitoring()));
 
 		m_pMenuFile->addSeparator();

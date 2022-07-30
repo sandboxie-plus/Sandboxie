@@ -78,7 +78,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
 	ui.setupUi(this);
-	this->setWindowTitle(tr("Sandboxie Plus - Settings"));
+	this->setWindowTitle(tr("Sandboxie Plus - Global Settings"));
 
 	if (theConf->GetBool("Options/AltRowColors", false)) {
 		ui.treeWarnProgs->setAlternatingRowColors(true);

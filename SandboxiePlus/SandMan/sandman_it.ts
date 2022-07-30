@@ -2930,8 +2930,9 @@ Scegliere No per selezionare: %2</translation>
     <name>CSettingsWindow</name>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="81"/>
-        <source>Sandboxie Plus - Settings</source>
-        <translation>Sandboxie Plus - Impostazioni</translation>
+        <source>Sandboxie Plus - Global Settings</source>
+        <oldsource>Sandboxie Plus - Settings</oldsource>
+        <translation>Sandboxie Plus - Impostazioni globali</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="104"/>

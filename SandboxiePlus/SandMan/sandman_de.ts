@@ -5445,17 +5445,17 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
     <message>
         <location filename="Forms/SettingsWindow.ui" line="182"/>
         <source>Show the Recovery Window as Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige das Wiederherstellungsfenster immer zuoberst</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="506"/>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="550"/>
         <source>Alternate row background in lists</source>
-        <translation type="unfinished"></translation>
+        <translation>Abwechslender Zeilenhintergrund bei Listen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="691"/>

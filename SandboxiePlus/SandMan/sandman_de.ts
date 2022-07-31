@@ -1356,7 +1356,7 @@ Vollständiger Pfad: %4</translation>
         <location filename="SandMan.cpp" line="497"/>
         <source>Is Window Sandboxed?</source>
         <oldsource>Is Window Sandboxed</oldsource>
-        <translation type="unfinished">Ist Fenster sandgeboxt</translation>
+        <translation>Ist das Fenster in einer Sandbox?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="403"/>
@@ -3178,7 +3178,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <location filename="Windows/SettingsWindow.cpp" line="81"/>
         <source>Sandboxie Plus - Global Settings</source>
         <oldsource>Sandboxie Plus - Settings</oldsource>
-        <translation type="unfinished">Sandboxie Plus - Einstellungen</translation>
+        <translation>Sandboxie Plus - Globale Einstellungen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="104"/>

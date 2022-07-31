@@ -55,10 +55,9 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, bool bImmediate, QWidg
 	m_bReloadPending = false;
 	m_DeleteShapshots = false;
 
-#ifdef WIN32
 	QStyle* pStyle = QStyleFactory::create("windows");
 	ui.treeFiles->setStyle(pStyle);
-#endif
+	ui.treeFiles->setItemDelegate(new CTreeItemDelegate());
 	ui.treeFiles->setExpandsOnDoubleClick(false);
 
 	ui.btnDeleteAll->setVisible(false);

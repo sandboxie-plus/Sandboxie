@@ -764,6 +764,7 @@ void CSandMan::CreateView(int iViewMode)
 
 		// Message Log
 		m_pMessageLog = new CPanelWidgetEx();
+		m_pMessageLog->GetTree()->setItemDelegate(new CTreeItemDelegate());
 
 		//m_pMessageLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
 		((QTreeWidgetEx*)m_pMessageLog->GetView())->setHeaderLabels(tr("Time|Message").split("|"));
@@ -786,6 +787,7 @@ void CSandMan::CreateView(int iViewMode)
 
 		// Recovery Log
 		m_pRecoveryLog = new CPanelWidgetEx();
+		m_pRecoveryLog->GetTree()->setItemDelegate(new CTreeItemDelegate());
 
 		m_pRecoveryLog->GetTree()->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
 

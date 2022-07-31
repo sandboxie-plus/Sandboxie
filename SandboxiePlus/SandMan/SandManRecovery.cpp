@@ -45,7 +45,7 @@ bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool
 CRecoveryWindow* CSandMan::ShowRecovery(const CSandBoxPtr& pBox, bool bFind)
 {
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
-	if (!pBoxEx) return false;
+	if (!pBoxEx) return NULL;
 	if (pBoxEx->m_pRecoveryWnd == NULL) {
 		pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox, bFind == false);
 		connect(pBoxEx->m_pRecoveryWnd, &CRecoveryWindow::Closed, [pBoxEx]() {
@@ -191,6 +191,7 @@ CRecoveryLogWnd::CRecoveryLogWnd(QWidget *parent)
 	//pLayout->setMargin(3);
 	
 	m_pRecoveryLog = new CPanelWidgetEx();
+	m_pRecoveryLog->GetTree()->setItemDelegate(new CTreeItemDelegate());
 
 	m_pRecoveryLog->GetTree()->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
 

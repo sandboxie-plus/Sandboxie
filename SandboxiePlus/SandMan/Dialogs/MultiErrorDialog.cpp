@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "../../MiscHelpers/Common/Settings.h"
 #include "MultiErrorDialog.h"
+#include "..\SandMan.h"
 
 
 CMultiErrorDialog::CMultiErrorDialog(const QString& Message, const QStringList& Errors, QWidget* parent)
@@ -13,6 +14,7 @@ CMultiErrorDialog::CMultiErrorDialog(const QString& Message, const QStringList& 
 	m_pMainLayout->addWidget(new QLabel(Message), Row++, 0, 1, 4);
 
 	m_pErrors = new CPanelWidgetEx();
+	m_pErrors->GetTree()->setItemDelegate(new CTreeItemDelegate());
 	
 	m_pErrors->GetTree()->setHeaderLabels(tr("Message").split("|"));
 

@@ -3163,8 +3163,9 @@ NO seleccionará: %2</translation>
     <name>CSettingsWindow</name>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="81"/>
-        <source>Sandboxie Plus - Settings</source>
-        <translation>Sandboxie Plus - Configuraciones</translation>
+        <source>Sandboxie Plus - Global Settings</source>
+        <oldsource>Sandboxie Plus - Settings</oldsource>
+        <translation type="unfinished">Sandboxie Plus - Configuraciones</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="104"/>

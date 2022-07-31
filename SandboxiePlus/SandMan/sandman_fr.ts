@@ -3146,8 +3146,9 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <name>CSettingsWindow</name>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="81"/>
-        <source>Sandboxie Plus - Settings</source>
-        <translation>Sandboxie Plus - Paramètres</translation>
+        <source>Sandboxie Plus - Global Settings</source>
+        <oldsource>Sandboxie Plus - Settings</oldsource>
+        <translation type="unfinished">Sandboxie Plus - Paramètres</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="104"/>

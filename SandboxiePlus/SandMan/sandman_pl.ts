@@ -3019,8 +3019,9 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <name>CSettingsWindow</name>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="81"/>
-        <source>Sandboxie Plus - Settings</source>
-        <translation>Sandboxie-Plus - Ustawienia</translation>
+        <source>Sandboxie Plus - Global Settings</source>
+        <oldsource>Sandboxie Plus - Settings</oldsource>
+        <translation type="unfinished">Sandboxie-Plus - Ustawienia</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="104"/>

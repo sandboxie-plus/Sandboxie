@@ -2983,8 +2983,9 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <name>CSettingsWindow</name>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="81"/>
-        <source>Sandboxie Plus - Settings</source>
-        <translation>Sandboxie Plus - 設定</translation>
+        <source>Sandboxie Plus - Global Settings</source>
+        <oldsource>Sandboxie Plus - Settings</oldsource>
+        <translation type="unfinished">Sandboxie Plus - 設定</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="104"/>

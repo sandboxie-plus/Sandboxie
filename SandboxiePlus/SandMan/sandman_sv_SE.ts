@@ -3060,8 +3060,9 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
     <name>CSettingsWindow</name>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="81"/>
-        <source>Sandboxie Plus - Settings</source>
-        <translation>Sandboxie-Plus - Inställningar</translation>
+        <source>Sandboxie Plus - Global Settings</source>
+        <oldsource>Sandboxie Plus - Settings</oldsource>
+        <translation type="unfinished">Sandboxie-Plus - Inställningar</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="104"/>

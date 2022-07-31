@@ -3175,9 +3175,9 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <name>CSettingsWindow</name>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="81"/>
-        <source>Sandboxie Plus - Settings</source>
-        <oldsource>Sandboxie-Plus - Settings</oldsource>
-        <translation>Sandboxie Plus - Einstellungen</translation>
+        <source>Sandboxie Plus - Global Settings</source>
+        <oldsource>Sandboxie Plus - Settings</oldsource>
+        <translation type="unfinished">Sandboxie Plus - Einstellungen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="104"/>

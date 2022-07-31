@@ -866,6 +866,22 @@ Bilinmeyen kullanıcı, konfigürasyon ayarları kaydedilmeyecek
 '%2' sandbox'ı için varsayılan ayarlar uygulanırken hata oluştu
 .
 
+3315;txt;01
+Sandbox içeriğini silme
+.
+
+3316;txt;01
+İşlemi iptal etmek istiyor musunuz?
+.
+
+3317;txt;01
+Silinmeye hazırlanıyor: %2
+.
+
+3318;txt;01
+Siliniyor: %2
+.
+
 # 3321;txt;01
 # - Kullanıcı oturumu sandbox'lı
 # .

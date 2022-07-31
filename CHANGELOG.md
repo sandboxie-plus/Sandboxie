@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.2.7 / 5.57.7] - 2022-07-??
+## [1.2.7 / 5.57.7] - 2022-07-31
 
 ### Added
 - addes option to alternate row color in all lists [#2073](https://github.com/sandboxie-plus/Sandboxie/issues/2073)

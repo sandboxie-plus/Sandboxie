@@ -1803,8 +1803,9 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="SandMan.cpp" line="379"/>
         <location filename="SandMan.cpp" line="497"/>
-        <source>Is Window Sandboxed</source>
-        <translation>Чи є вікно в пісочниці</translation>
+        <source>Is Window Sandboxed?</source>
+        <oldsource>Is Window Sandboxed</oldsource>
+        <translation type="unfinished">Чи є вікно в пісочниці</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="424"/>

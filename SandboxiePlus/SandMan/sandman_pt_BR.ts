@@ -1513,7 +1513,8 @@ Caminho completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="379"/>
         <location filename="SandMan.cpp" line="497"/>
-        <source>Is Window Sandboxed</source>
+        <source>Is Window Sandboxed?</source>
+        <oldsource>Is Window Sandboxed</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

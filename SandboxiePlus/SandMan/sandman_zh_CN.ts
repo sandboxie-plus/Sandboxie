@@ -1407,8 +1407,9 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="379"/>
         <location filename="SandMan.cpp" line="497"/>
-        <source>Is Window Sandboxed</source>
-        <translation>窗口是否在沙盒中</translation>
+        <source>Is Window Sandboxed?</source>
+        <oldsource>Is Window Sandboxed</oldsource>
+        <translation type="unfinished">窗口是否在沙盒中</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="424"/>

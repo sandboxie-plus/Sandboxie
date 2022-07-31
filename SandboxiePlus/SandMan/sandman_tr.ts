@@ -2104,8 +2104,9 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="379"/>
         <location filename="SandMan.cpp" line="497"/>
-        <source>Is Window Sandboxed</source>
-        <translation>Pencere Korumalı Alanda mı</translation>
+        <source>Is Window Sandboxed?</source>
+        <oldsource>Is Window Sandboxed</oldsource>
+        <translation type="unfinished">Pencere Korumalı Alanda mı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="424"/>

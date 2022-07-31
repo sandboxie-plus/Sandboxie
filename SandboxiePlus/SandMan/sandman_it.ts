@@ -1404,7 +1404,7 @@ Percorso completo: %4</translation>
         <location filename="SandMan.cpp" line="497"/>
         <source>Is Window Sandboxed?</source>
         <oldsource>Is Window Sandboxed</oldsource>
-        <translation type="unfinished">Strumento di controllo finestre</translation>
+        <translation>Strumento di controllo finestre</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="424"/>

@@ -150,12 +150,12 @@
 <context>
     <name>CMultiErrorDialog</name>
     <message>
-        <location filename="Dialogs/MultiErrorDialog.cpp" line="9"/>
+        <location filename="Dialogs/MultiErrorDialog.cpp" line="10"/>
         <source>Sandboxie-Plus - Error</source>
         <translation>Sandboxie-Plus - Ошибка</translation>
     </message>
     <message>
-        <location filename="Dialogs/MultiErrorDialog.cpp" line="17"/>
+        <location filename="Dialogs/MultiErrorDialog.cpp" line="19"/>
         <source>Message</source>
         <translation>Сообщение</translation>
     </message>
@@ -916,17 +916,17 @@ Full path: %4</source>
         <translation>Sandboxie-Plus - Журнал восстановления</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="198"/>
+        <location filename="SandManRecovery.cpp" line="199"/>
         <source>Time|Box Name|File Path</source>
         <translation>Время|Имя песочницы|Путь к файлу</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="200"/>
+        <location filename="SandManRecovery.cpp" line="201"/>
         <source>Cleanup Recovery Log</source>
         <translation>Очистить журнал восстановления</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="210"/>
+        <location filename="SandManRecovery.cpp" line="211"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation type="unfinished">следующие файлы были недавно восстановлены и перемещены из песочницы.</translation>
@@ -940,74 +940,74 @@ Full path: %4</source>
         <translation>%1 - Восстановление файла</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="68"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="67"/>
         <source>File Name</source>
         <translation>Имя файла</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="69"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="68"/>
         <source>File Size</source>
         <translation>Размер файла</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="70"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="69"/>
         <source>Full Path</source>
         <translation>Полный путь</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="103"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="102"/>
         <source>Remember target selection</source>
         <translation>Запомнить выбор</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="109"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="108"/>
         <source>Delete everything, including all snapshots</source>
         <translation>Удалить все, включая все снимки</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="135"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="134"/>
         <source>Original location</source>
         <translation>Исходное местоположение</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="136"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="135"/>
         <source>Browse for location</source>
         <translation>Обзор</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="137"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="136"/>
         <source>Clear folder list</source>
         <translation>Очистить список папок</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="172"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="193"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="480"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="171"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="192"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="479"/>
         <source>Select Directory</source>
         <translation>Выбрать каталог</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="237"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="236"/>
         <source>Do you really want to delete %1 selected files?</source>
         <translation>Вы действительно хотите удалить %1 выбранных файлов?</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="265"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="264"/>
         <source>Close until all programs stop in this box</source>
         <translation>Закрыть, пока все программы в этой песочнице не остановятся</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="266"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="265"/>
         <source>Close and Disable Immediate Recovery for this box</source>
         <translation>Закрыть и отключить немедленное восстановление для этой песочницы</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="286"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="285"/>
         <source>There are %1 new files available to recover.</source>
         <translation>Доступно %1 новых файлов для восстановления.</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="516"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="515"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <translation>В песочнице %1 файлов и %2 папок, которые занимают %3 дискового пространства.</translation>
     </message>
@@ -1015,22 +1015,22 @@ Full path: %4</source>
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="2612"/>
+        <location filename="SandMan.cpp" line="2614"/>
         <source>Waiting for folder: %1</source>
         <translation>Ожидание папки: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2613"/>
+        <location filename="SandMan.cpp" line="2615"/>
         <source>Deleting folder: %1</source>
         <translation>Удаление папки: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2614"/>
+        <location filename="SandMan.cpp" line="2616"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>Слияние папок: %1 и %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2615"/>
+        <location filename="SandMan.cpp" line="2617"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>Завершение слияния снимков...</translation>
     </message>
@@ -1097,42 +1097,42 @@ Full path: %4</source>
     <name>CSandMan</name>
     <message>
         <location filename="SandMan.cpp" line="126"/>
-        <location filename="SandMan.cpp" line="1317"/>
+        <location filename="SandMan.cpp" line="1319"/>
         <source>Sandboxie-Plus v%1</source>
         <translation>Sandboxie-Plus v%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2516"/>
+        <location filename="SandMan.cpp" line="2518"/>
         <source>Reset Columns</source>
         <translation>Сбросить столбцы</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2517"/>
+        <location filename="SandMan.cpp" line="2519"/>
         <source>Copy Cell</source>
         <translation>Копировать ячейку</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2518"/>
+        <location filename="SandMan.cpp" line="2520"/>
         <source>Copy Row</source>
         <translation>Копировать строку</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2519"/>
+        <location filename="SandMan.cpp" line="2521"/>
         <source>Copy Panel</source>
         <translation>Копировать панель</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="769"/>
+        <location filename="SandMan.cpp" line="770"/>
         <source>Time|Message</source>
         <translation>Время|Сообщение</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="777"/>
+        <location filename="SandMan.cpp" line="778"/>
         <source>Sbie Messages</source>
         <translation>Cообщения sbie</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="784"/>
+        <location filename="SandMan.cpp" line="785"/>
         <source>Trace Log</source>
         <translation>Журнал трассировки</translation>
     </message>
@@ -1368,7 +1368,7 @@ Full path: %4</source>
     </message>
     <message>
         <location filename="SandMan.cpp" line="354"/>
-        <location filename="SandMan.cpp" line="2586"/>
+        <location filename="SandMan.cpp" line="2588"/>
         <source>About Sandboxie-Plus</source>
         <translation>О Sandboxie-Plus</translation>
     </message>
@@ -1399,12 +1399,12 @@ Full path: %4</source>
         <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Поддержите Sandboxie-Plus на Patreon&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="841"/>
+        <location filename="SandMan.cpp" line="843"/>
         <source>Do you want to close Sandboxie Manager?</source>
         <translation>Вы хотите закрыть Sandboxie Manager?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="859"/>
+        <location filename="SandMan.cpp" line="861"/>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
 
 Do you want to do the clean up?</source>
@@ -1413,32 +1413,32 @@ Do you want to do the clean up?</source>
 Вы хотите сделать уборку?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="860"/>
-        <location filename="SandMan.cpp" line="1180"/>
-        <location filename="SandMan.cpp" line="1219"/>
-        <location filename="SandMan.cpp" line="1343"/>
-        <location filename="SandMan.cpp" line="1752"/>
-        <location filename="SandMan.cpp" line="2163"/>
+        <location filename="SandMan.cpp" line="862"/>
+        <location filename="SandMan.cpp" line="1182"/>
+        <location filename="SandMan.cpp" line="1221"/>
+        <location filename="SandMan.cpp" line="1345"/>
+        <location filename="SandMan.cpp" line="1754"/>
+        <location filename="SandMan.cpp" line="2165"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Больше не показывать это сообщение.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="972"/>
+        <location filename="SandMan.cpp" line="974"/>
         <source>This box provides enhanced security isolation, it is suitable to test untrusted software.</source>
         <translation>Эта песочница обеспечивает усиленную изоляцию безопасности, она подходит для тестирования ненадежного программного обеспечения.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="976"/>
+        <location filename="SandMan.cpp" line="978"/>
         <source>This box provides standard isolation, it is suitable to run your software to enhance security.</source>
         <translation>Эта песочница обеспечивает стандартную изоляцию, она подходит для запуска вашего программного обеспечения для повышения безопасности.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="980"/>
+        <location filename="SandMan.cpp" line="982"/>
         <source>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</source>
         <translation>Эта песочница не обеспечивает изоляцию, она предназначена для использования в качестве контейнера для приложений только для виртуализации программного обеспечения.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="985"/>
+        <location filename="SandMan.cpp" line="987"/>
         <source>
 
 This box prevents access to all user data locations, except explicitly granted in the Resource Access options.</source>
@@ -1447,54 +1447,54 @@ This box prevents access to all user data locations, except explicitly granted i
 Эта песочница ограничивает доступ ко всем путям пользовательских данных, кроме явно предоставленных в параметрах доступа к ресурсам.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1052"/>
+        <location filename="SandMan.cpp" line="1054"/>
         <source>Unknown operation &apos;%1&apos; requested via command line</source>
         <translation>Неизвестная операция &apos;%1&apos; запрошена из командной строки</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1889"/>
         <location filename="SandMan.cpp" line="1891"/>
-        <location filename="SandMan.cpp" line="2366"/>
+        <location filename="SandMan.cpp" line="1893"/>
+        <location filename="SandMan.cpp" line="2368"/>
         <source>Sandboxie-Plus - Error</source>
         <translation>Sandboxie-Plus - Ошибка</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1889"/>
+        <location filename="SandMan.cpp" line="1891"/>
         <source>Failed to stop all Sandboxie components</source>
         <translation>Не удалось остановить все компоненты Sandboxie</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1891"/>
+        <location filename="SandMan.cpp" line="1893"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>Не удалось запустить необходимые компоненты Sandboxie</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1898"/>
+        <location filename="SandMan.cpp" line="1900"/>
         <source>Maintenance operation Successful</source>
         <translation>Операция обслуживания Успешно</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1179"/>
+        <location filename="SandMan.cpp" line="1181"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
         <translation>Вы хотите проверить, есть ли новая версия Sandboxie-Plus?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1217"/>
+        <location filename="SandMan.cpp" line="1219"/>
         <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
         <translation>Некоторые шаблоны совместимости (%1) отсутствуют, вероятно, удалены. Удалить их из всех ящиков?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1234"/>
+        <location filename="SandMan.cpp" line="1236"/>
         <source>Cleaned up removed templates...</source>
         <translation>Убраны удаленные шаблоны...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1331"/>
+        <location filename="SandMan.cpp" line="1333"/>
         <source>   -   Portable</source>
         <translation>   -   Портативный</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1340"/>
+        <location filename="SandMan.cpp" line="1342"/>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?
 Yes will choose: %1
 No will choose: %2</source>
@@ -1503,27 +1503,27 @@ No will choose: %2</source>
 Нет, выберет: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2332"/>
+        <location filename="SandMan.cpp" line="2334"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
         <translation>Песочницу необходимо очистить, прежде чем ее можно будет удалить.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1637"/>
+        <location filename="SandMan.cpp" line="1639"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
         <translation>Сертификат сторонника недействителен для этой сборки, получите обновленный сертификат</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1640"/>
+        <location filename="SandMan.cpp" line="1642"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <translation>Срок действия сертификата сторонника истек%1, пожалуйста получите обновленный сертификат</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1641"/>
+        <location filename="SandMan.cpp" line="1643"/>
         <source>, but it remains valid for the current build</source>
         <translation>, но остается действительным для текущей сборки</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1643"/>
+        <location filename="SandMan.cpp" line="1645"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
         <translation>Срок действия сертификата сторонника истекает через %1&#xa0;дн., получите обновленный сертификат</translation>
     </message>
@@ -1543,7 +1543,7 @@ No will choose: %2</source>
         <translation>Обновленный сертификат недоступен.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1404"/>
+        <location filename="SandMan.cpp" line="1406"/>
         <source>Default sandbox not found; creating: %1</source>
         <translation>Песочница по умолчанию не найдена; создание: %1</translation>
     </message>
@@ -1558,27 +1558,27 @@ No will choose: %2</source>
         <translation> - Удаление содержимого песочницы</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1280"/>
+        <location filename="SandMan.cpp" line="1282"/>
         <source>Auto Deleting %1 Content</source>
         <translation>Автоудаление содержимого %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1420"/>
+        <location filename="SandMan.cpp" line="1422"/>
         <source>   -   NOT connected</source>
         <translation>   -   НЕ подключено</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1588"/>
+        <location filename="SandMan.cpp" line="1590"/>
         <source>PID %1: </source>
         <translation>ID процесса %1: </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1590"/>
+        <location filename="SandMan.cpp" line="1592"/>
         <source>%1 (%2): </source>
         <translation>%1 (%2): </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1619"/>
+        <location filename="SandMan.cpp" line="1621"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>Выбранный набор функций доступен только сторонникам проекта. Процессы, запущенные в песочнице с этим набором функций без сертификата сторонника, будут прекращены через 5 минут.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Станьте сторонником проекта&lt;/a&gt;, и получите &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат сторонника&lt;/a&gt;</translation>
     </message>
@@ -1605,82 +1605,82 @@ No will choose: %2</source>
 </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1664"/>
+        <location filename="SandMan.cpp" line="1666"/>
         <source>Only Administrators can change the config.</source>
         <translation>Только администраторы могут изменять конфигурацию.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1674"/>
+        <location filename="SandMan.cpp" line="1676"/>
         <source>Please enter the configuration password.</source>
         <translation>Пожалуйста, введите пароль конфигурации.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1682"/>
+        <location filename="SandMan.cpp" line="1684"/>
         <source>Login Failed: %1</source>
         <translation>Ошибка входа: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1707"/>
+        <location filename="SandMan.cpp" line="1709"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
         <translation>Вы хотите завершить все процессы во всех песочницах?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1708"/>
+        <location filename="SandMan.cpp" line="1710"/>
         <source>Terminate all without asking</source>
         <translation>Завершить все, не спрашивая</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1751"/>
+        <location filename="SandMan.cpp" line="1753"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>Sandboxie-Plus запущен в портативном режиме, и ему нужно создать необходимые службы. Это потребует административных привилегий.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1780"/>
+        <location filename="SandMan.cpp" line="1782"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
         <translation>ВНИМАНИЕ: другой агент (вероятно, SbieCtrl.exe) уже управляет этим сеансом Sandboxie, пожалуйста, сначала закройте его и подключитесь повторно, чтобы взять на себя управление.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1916"/>
+        <location filename="SandMan.cpp" line="1918"/>
         <source>Executing maintenance operation, please wait...</source>
         <translation>Выполняется операция обслуживания, подождите...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2080"/>
+        <location filename="SandMan.cpp" line="2082"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
         <translation>Вы также хотите сбросить скрытые окна сообщений (да) или только все сообщения журнала (нет)?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2161"/>
+        <location filename="SandMan.cpp" line="2163"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
         <translation>Изменения будут применяться автоматически при сохранении файла.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2162"/>
+        <location filename="SandMan.cpp" line="2164"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
         <translation>Изменения вступят в силу автоматически после закрытия редактора.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2312"/>
+        <location filename="SandMan.cpp" line="2314"/>
         <source>Error Status: 0x%1 (%2)</source>
         <translation>Состояние ошибки: 0x%1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2313"/>
+        <location filename="SandMan.cpp" line="2315"/>
         <source>Unknown</source>
         <translation>Неизвестно</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2336"/>
+        <location filename="SandMan.cpp" line="2338"/>
         <source>Failed to copy box data files</source>
         <translation>Не удалось скопировать файлы данных песочницы</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2341"/>
+        <location filename="SandMan.cpp" line="2343"/>
         <source>Failed to remove old box data files</source>
         <translation>Не удалось удалить старые файлы данных песочницы</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2348"/>
+        <location filename="SandMan.cpp" line="2350"/>
         <source>Unknown Error Status: 0x%1</source>
         <translation>Неизвестный статус ошибки: 0x%1</translation>
     </message>
@@ -1699,27 +1699,27 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>&lt;p&gt;Обновление Sandboxie-Plus загружено в следующее место:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Вы хотите начать установку? Если какие-либо программы работают в изолированной программной среде, они будут завершены.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2559"/>
+        <location filename="SandMan.cpp" line="2561"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</source>
         <translation>&lt;h3&gt;О Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Версия %1&lt;/p&gt;&lt;p&gt; Авторское право (c) 2020-2022 DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2567"/>
+        <location filename="SandMan.cpp" line="2569"/>
         <source>This copy of Sandboxie+ is certified for: %1</source>
         <translation>Эта копия Sandboxie+ сертифицирована для: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2569"/>
+        <location filename="SandMan.cpp" line="2571"/>
         <source>Sandboxie+ is free for personal and non-commercial use.</source>
         <translation>Sandboxie+ бесплатен для личного и некоммерческого использования.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2572"/>
+        <location filename="SandMan.cpp" line="2574"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>Sandboxie-Plus - это продолжение Sandboxie с открытым исходным кодом.&lt;br /&gt;Посетите &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; для получения дополнительной информации.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Версия драйвера: %1&lt;br /&gt;Возможности: %2&lt;br /&gt;&lt;br /&gt;Иконки взяты с &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2315"/>
+        <location filename="SandMan.cpp" line="2317"/>
         <source>Administrator rights are required for this operation.</source>
         <translation>Для этой операции требуются права администратора.</translation>
     </message>
@@ -1831,64 +1831,64 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Нажмите, чтобы открыть веб-браузер</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="793"/>
+        <location filename="SandMan.cpp" line="795"/>
         <source>Time|Box Name|File Path</source>
         <translation>Время|Имя песочницы|Путь к файлу</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="462"/>
         <location filename="SandMan.cpp" line="536"/>
-        <location filename="SandMan.cpp" line="801"/>
+        <location filename="SandMan.cpp" line="803"/>
         <source>Recovery Log</source>
         <translation>Журнал восстановления</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1259"/>
+        <location filename="SandMan.cpp" line="1261"/>
         <source>Executing OnBoxDelete: %1</source>
         <translation>Выполнение OnBoxDelete: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1300"/>
+        <location filename="SandMan.cpp" line="1302"/>
         <source>Auto deleting content of %1</source>
         <translation>Автоудаление содержимого %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1321"/>
+        <location filename="SandMan.cpp" line="1323"/>
         <source>Installation Directory: %1</source>
         <translation>Каталог установки: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1322"/>
+        <location filename="SandMan.cpp" line="1324"/>
         <source>Sandboxie-Plus Version: %1 (%2)</source>
         <translation>Sandboxie-Plus версия: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1323"/>
+        <location filename="SandMan.cpp" line="1325"/>
         <source>Current Config: %1</source>
         <translation>Текущая конфигурация: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1324"/>
+        <location filename="SandMan.cpp" line="1326"/>
         <source>Data Directory: %1</source>
         <translation>Каталог данных: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1557"/>
+        <location filename="SandMan.cpp" line="1559"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
         <translation>Программа %1, запущенная в песочнице %2, будет завершена через 5 минут, поскольку песочница была настроена на использование функций, доступных исключительно для сторонников проекта.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1559"/>
+        <location filename="SandMan.cpp" line="1561"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
         <translation>Песочница %1 настроена на использование функций, доступных исключительно для сторонников проекта, эти предустановки будут игнорироваться.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1560"/>
+        <location filename="SandMan.cpp" line="1562"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Стань сторонником проекта&lt;/a&gt;, и получи &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат сторонника&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1727"/>
+        <location filename="SandMan.cpp" line="1729"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
         <translation>Введите продолжительность в секундах, для отключения правил принудительных программ.</translation>
     </message>
@@ -1913,177 +1913,177 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Песочница %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1893"/>
+        <location filename="SandMan.cpp" line="1895"/>
         <source>Maintenance operation failed (%1)</source>
         <translation>Операция обслуживания не удалась (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2017"/>
+        <location filename="SandMan.cpp" line="2019"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
         <translation>В интерфейсе Plus, эта функция была интегрирована в основное представление списка песочницы.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2018"/>
+        <location filename="SandMan.cpp" line="2020"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
         <translation>Используя контекстное меню песочницы/группы, вы можете перемещать песочницы и группы в другие группы. Вы также можете использовать перетаскивание для перемещения элементов. В качестве альтернативы вы также можете использовать клавиши со стрелками, удерживая нажатой клавишу ALT, чтобы перемещать элементы вверх и вниз в пределах группы.&lt;br /&gt;Вы можете создавать новые песочницы и группы из меню &quot;Песочница&quot;.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2206"/>
+        <location filename="SandMan.cpp" line="2208"/>
         <source>Sandboxie config has been reloaded</source>
         <translation>Конфигурация Sandboxie перезагружена</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2316"/>
+        <location filename="SandMan.cpp" line="2318"/>
         <source>Failed to execute: %1</source>
         <translation>Не удалось выполнить: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2317"/>
+        <location filename="SandMan.cpp" line="2319"/>
         <source>Failed to connect to the driver</source>
         <translation>Не удалось подключиться к драйверу</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2318"/>
+        <location filename="SandMan.cpp" line="2320"/>
         <source>Failed to communicate with Sandboxie Service: %1</source>
         <translation>Не удалось связаться со службой Sandboxie: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2319"/>
+        <location filename="SandMan.cpp" line="2321"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
         <translation>Обнаружена несовместимая песочница %1. Совместимые версии: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2320"/>
+        <location filename="SandMan.cpp" line="2322"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
         <translation>Не удается найти путь установки Sandboxie.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2321"/>
+        <location filename="SandMan.cpp" line="2323"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
         <translation>Не удалось скопировать конфигурацию из песочницы %1: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2322"/>
+        <location filename="SandMan.cpp" line="2324"/>
         <source>A sandbox of the name %1 already exists</source>
         <translation>Песочница с именем %1 уже существует</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2323"/>
+        <location filename="SandMan.cpp" line="2325"/>
         <source>Failed to delete sandbox %1: %2</source>
         <translation>Не удалось удалить песочницу %1: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2324"/>
+        <location filename="SandMan.cpp" line="2326"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
         <translation>Имя песочницы не может быть длиннее 32 символов.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2325"/>
+        <location filename="SandMan.cpp" line="2327"/>
         <source>The sandbox name can not be a device name.</source>
         <translation>Имя песочницы не может быть именем устройства.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2326"/>
+        <location filename="SandMan.cpp" line="2328"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
         <translation>Имя песочницы может содержать только буквы, цифры и символы подчеркивания, которые отображаются как пробелы.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2327"/>
+        <location filename="SandMan.cpp" line="2329"/>
         <source>Failed to terminate all processes</source>
         <translation>Не удалось завершить все процессы</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2328"/>
+        <location filename="SandMan.cpp" line="2330"/>
         <source>Delete protection is enabled for the sandbox</source>
         <translation>Для этой песочницы включена защита от удаления</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2329"/>
+        <location filename="SandMan.cpp" line="2331"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
         <translation>Все процессы песочницы должны быть остановлены, перед удалением ее содержимого</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2330"/>
+        <location filename="SandMan.cpp" line="2332"/>
         <source>Error deleting sandbox folder: %1</source>
         <translation>Ошибка при удалении папки песочницы: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2333"/>
+        <location filename="SandMan.cpp" line="2335"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>Не удалось переместить каталог &apos;%1&apos; в &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2334"/>
+        <location filename="SandMan.cpp" line="2336"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
         <translation>Операция снимка не может быть выполнена, пока в песочнице еще выполняются процессы.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2335"/>
+        <location filename="SandMan.cpp" line="2337"/>
         <source>Failed to create directory for new snapshot</source>
         <translation>Не удалось создать каталог для нового снимка</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2337"/>
+        <location filename="SandMan.cpp" line="2339"/>
         <source>Snapshot not found</source>
         <translation>Снимок не найден</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2338"/>
+        <location filename="SandMan.cpp" line="2340"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
         <translation>Ошибка при объединении каталогов снимков &apos;%1&apos; с &apos;%2&apos;, снимок не был объединен полностью.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2339"/>
+        <location filename="SandMan.cpp" line="2341"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
         <translation>Не удалось удалить старый каталог снимков &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2340"/>
+        <location filename="SandMan.cpp" line="2342"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>Невозможно удалить снимок, который используется несколькими более поздними снимками</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2342"/>
+        <location filename="SandMan.cpp" line="2344"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
         <translation>У вас нет прав для обновления конфигурации в разделе &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2343"/>
+        <location filename="SandMan.cpp" line="2345"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
         <translation>Не удалось установить параметр конфигурации %1 в секции %2: %3</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2344"/>
+        <location filename="SandMan.cpp" line="2346"/>
         <source>Can not create snapshot of an empty sandbox</source>
         <translation>Невозможно создать снимок пустой песочницы</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2345"/>
+        <location filename="SandMan.cpp" line="2347"/>
         <source>A sandbox with that name already exists</source>
         <translation>Песочница с таким именем уже существует</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2346"/>
+        <location filename="SandMan.cpp" line="2348"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>Пароль конфигурации не должен быть длиннее 64 символов</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2347"/>
+        <location filename="SandMan.cpp" line="2349"/>
         <source>The operation was canceled by the user</source>
         <translation>Операция отменена пользователем</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2368"/>
+        <location filename="SandMan.cpp" line="2370"/>
         <source>Operation failed for %1 item(s).</source>
         <translation>Операция не удалась для %1 элемента(ов).</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2393"/>
+        <location filename="SandMan.cpp" line="2395"/>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
         <translation>Вы хотите открыть %1 в изолированном (да) или не изолированном (нет) браузере?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2394"/>
+        <location filename="SandMan.cpp" line="2396"/>
         <source>Remember choice for later.</source>
         <translation>Запомнить выбор.</translation>
     </message>
@@ -3154,37 +3154,37 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>%1 - Снимки</translation>
     </message>
     <message>
-        <location filename="Windows/SnapshotsWindow.cpp" line="39"/>
+        <location filename="Windows/SnapshotsWindow.cpp" line="38"/>
         <source>Snapshot</source>
         <translation>Снимок</translation>
     </message>
     <message>
-        <location filename="Windows/SnapshotsWindow.cpp" line="57"/>
+        <location filename="Windows/SnapshotsWindow.cpp" line="56"/>
         <source>Revert to empty box</source>
         <translation>Возврат к пустой песочнице</translation>
     </message>
     <message>
-        <location filename="Windows/SnapshotsWindow.cpp" line="104"/>
+        <location filename="Windows/SnapshotsWindow.cpp" line="103"/>
         <source> (default)</source>
         <translation> (по умолчанию)</translation>
     </message>
     <message>
-        <location filename="Windows/SnapshotsWindow.cpp" line="174"/>
+        <location filename="Windows/SnapshotsWindow.cpp" line="173"/>
         <source>Please enter a name for the new Snapshot.</source>
         <translation>Пожалуйста, введите имя для нового снимка.</translation>
     </message>
     <message>
-        <location filename="Windows/SnapshotsWindow.cpp" line="174"/>
+        <location filename="Windows/SnapshotsWindow.cpp" line="173"/>
         <source>New Snapshot</source>
         <translation>Новый снимок</translation>
     </message>
     <message>
-        <location filename="Windows/SnapshotsWindow.cpp" line="197"/>
+        <location filename="Windows/SnapshotsWindow.cpp" line="196"/>
         <source>Do you really want to switch the active snapshot? Doing so will delete the current state!</source>
         <translation>Вы действительно хотите переключить активный снимок? Это приведет к удалению текущего состояния!</translation>
     </message>
     <message>
-        <location filename="Windows/SnapshotsWindow.cpp" line="231"/>
+        <location filename="Windows/SnapshotsWindow.cpp" line="230"/>
         <source>Do you really want to delete the selected snapshot?</source>
         <translation>Вы действительно хотите удалить выбранный снимок?</translation>
     </message>
@@ -4585,27 +4585,27 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="2602"/>
+        <location filename="SandMan.cpp" line="2604"/>
         <source>OK</source>
         <translation>ОК</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2603"/>
+        <location filename="SandMan.cpp" line="2605"/>
         <source>Apply</source>
         <translation>Применить</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2604"/>
+        <location filename="SandMan.cpp" line="2606"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2605"/>
+        <location filename="SandMan.cpp" line="2607"/>
         <source>&amp;Yes</source>
         <translation>Да (&amp;Y)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2606"/>
+        <location filename="SandMan.cpp" line="2608"/>
         <source>&amp;No</source>
         <translation>Нет (&amp;N)</translation>
     </message>

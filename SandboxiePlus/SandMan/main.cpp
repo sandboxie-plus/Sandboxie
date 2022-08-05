@@ -8,6 +8,7 @@
 #include "../MiscHelpers/Common/Common.h"
 #include <windows.h>
 #include "./Windows/SettingsWindow.h"
+#include "./Wizards/SetupWizard.h"
 
 CSettings* theConf = NULL;
 
@@ -70,13 +71,19 @@ int main(int argc, char *argv[])
 
 	QStringList Args = QCoreApplication::arguments();
 	
-	int CmdPos = Args.indexOf("-open_reg", Qt::CaseInsensitive);
+	int CmdPos = Args.indexOf("/OpenReg", Qt::CaseInsensitive);
 	if (CmdPos != -1) {
 		if (Args.count() > CmdPos + 2) {
 			QProcess::startDetached(Args.at(CmdPos + 2));
 			QThread::msleep(1000);
 		}
 		ShellOpenRegKey(Args.at(CmdPos + 1));
+		return 0;
+	}
+
+	CmdPos = Args.indexOf("/ShellUninstall", Qt::CaseInsensitive);
+	if (CmdPos != -1) {
+		CSetupWizard::ShellUninstall();
 		return 0;
 	}
 

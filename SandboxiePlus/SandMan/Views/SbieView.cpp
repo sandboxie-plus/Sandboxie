@@ -1107,7 +1107,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			RegRoot[1] = QString("HKEY_USERS");
 		else if(RegRoot[1] == "MACHINE")
 			RegRoot[1] = QString("HKEY_LOCAL_MACHINE");
-		wstring params = L"-open_reg \"" + RegRoot.join("\\").toStdWString() + L"\"";
+		wstring params = L"/OpenReg \"" + RegRoot.join("\\").toStdWString() + L"\"";
 		if (SandBoxes.first()->GetActiveProcessCount() == 0)
 			params += L" \"" + theAPI->GetStartPath().toStdWString() + L" /box:" + SandBoxes.first()->GetName().toStdWString() + L" mount_hive\"";
 

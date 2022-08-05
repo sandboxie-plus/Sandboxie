@@ -20,6 +20,8 @@ public:
 
     static bool ShowWizard();
 
+    static void ShellUninstall();
+
 private slots:
     void showHelp();
 };

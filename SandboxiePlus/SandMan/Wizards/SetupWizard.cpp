@@ -6,6 +6,7 @@
 #include "../SandMan.h"
 #include "Helpers/WinAdmin.h"
 #include <QButtonGroup>
+#include "../QSbieAPI/SbieUtils.h"
 
 QString emailRegExp = QStringLiteral(".+@.+");
 
@@ -97,6 +98,16 @@ bool CSetupWizard::ShowWizard()
     return true;
 }
 
+void CSetupWizard::ShellUninstall()
+{
+    AutorunEnable(false);
+
+	CSettingsWindow__RemoveContextMenu();
+	CSbieUtils::RemoveContextMenu2();
+
+    // todo: delete desktop browser shortcut and start menu integration
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // CIntroPage
 // 
@@ -132,7 +143,7 @@ CIntroPage::CIntroPage(QWidget *parent)
     connect(m_pBusiness, SIGNAL(toggled(bool)), this, SIGNAL(completeChanged()));
     registerField("useBusiness", m_pBusiness);
 
-    QLabel* pNote = new QLabel(tr("Note: this option is immutable"));
+    QLabel* pNote = new QLabel(tr("Note: this option is persistent"));
     layout->addWidget(pNote);
 
 

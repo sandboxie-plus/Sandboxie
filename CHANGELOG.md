@@ -4,6 +4,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.2.8 / 5.57.7] - 2022-07-??
+
+### Fixed
+- fixed missing uninstal routine in sandman
+
+
+
 ## [1.2.7 / 5.57.7] - 2022-07-31
 
 ### Added

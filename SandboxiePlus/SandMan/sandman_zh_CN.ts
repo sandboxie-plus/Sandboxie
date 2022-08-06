@@ -121,11 +121,7 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="146"/>
         <source>Note: this option is persistent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note: this option is immutable</source>
-        <translation type="vanished">注意：此选项是不可撤销的</translation>
+        <translation>注意：此选项是固化的(不可改换)</translation>
     </message>
 </context>
 <context>
@@ -1413,7 +1409,7 @@ Full path: %4</source>
         <location filename="SandMan.cpp" line="497"/>
         <source>Is Window Sandboxed?</source>
         <oldsource>Is Window Sandboxed</oldsource>
-        <translation type="unfinished">窗口是否在沙盒中</translation>
+        <translation>检查窗口是否沙盒化</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="424"/>

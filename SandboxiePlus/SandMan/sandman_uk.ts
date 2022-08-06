@@ -4,27 +4,27 @@
 <context>
     <name>CCertificatePage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="172"/>
+        <location filename="Wizards/SetupWizard.cpp" line="183"/>
         <source>Install your &lt;b&gt;Sandboxie-Plus&lt;/b&gt; support certificate</source>
         <translation>Встановіть свій сертифікат підтримки &lt;b&gt;Sandboxie-Plus&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="173"/>
+        <location filename="Wizards/SetupWizard.cpp" line="184"/>
         <source>If you have a supporter certificate, please fill it into the field below.</source>
         <translation>Якщо у вас є сертифікат підтримки, заповніть його в полі нижче.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="195"/>
+        <location filename="Wizards/SetupWizard.cpp" line="206"/>
         <source>Start evaluation without a certificate for a limited period of time.</source>
         <translation>Розпочати оцінювання без сертифіката протягом обмеженого періоду часу.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="214"/>
+        <location filename="Wizards/SetupWizard.cpp" line="225"/>
         <source>To use &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in a business setting, an appropriate &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt; for business use is required. If you do not yet have the required certificate(s), you can get those from the &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com web shop&lt;/a&gt;.</source>
         <translation>Щоб використовувати &lt;b&gt;Sandboxie-Plus&lt;/b&gt; у бізнес-налаштуванні, відповідний &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;сертифікат підтримки&lt;/a&gt; для використання в бізнесі потрібен. Якщо у вас ще немає необхідних сертифікатів, ви можете отримати їх у &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;веб-магазині xanasoft.com&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="225"/>
+        <location filename="Wizards/SetupWizard.cpp" line="236"/>
         <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
         <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; надає додаткові функції та типи пісочниці виключно для &lt;u&gt;прихильників проекту&lt;/u&gt;. Пісочниці, як пісочниці з покращеною конфіденційністю, &lt;b&gt;&lt;font color=&apos;red&apos;&gt;захищає дані користувачів від незаконного доступу&lt;/font&gt;&lt;/b&gt; ізольованими програмами. Якщо ви ще не прихильник, подумайте про &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;підтримку проекту&lt;/a&gt;, щоб забезпечити подальший розвиток Sandboxie і отримати &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертифікат підтримки&lt;/a&gt;.</translation>
     </message>
@@ -76,17 +76,17 @@
 <context>
     <name>CFinishPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="454"/>
+        <location filename="Wizards/SetupWizard.cpp" line="465"/>
         <source>Complete your configuration</source>
         <translation>Завершіть налаштування</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="461"/>
+        <location filename="Wizards/SetupWizard.cpp" line="472"/>
         <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
         <translation>Майже завершено, натисніть &quot;Готово&quot;, щоб застосувати всі вибрані параметри та завершити роботу майстра.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="473"/>
+        <location filename="Wizards/SetupWizard.cpp" line="484"/>
         <source>Keep Sandboxie-Plus up to date.</source>
         <translation>Підтримуйте Sandboxie-Plus в актуальному стані.</translation>
     </message>
@@ -94,34 +94,38 @@
 <context>
     <name>CIntroPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="107"/>
+        <location filename="Wizards/SetupWizard.cpp" line="118"/>
         <source>Introduction</source>
         <translation>Вступ</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="111"/>
+        <location filename="Wizards/SetupWizard.cpp" line="122"/>
         <source>Welcome to the Setup Wizard. This wizard will help you to configure your copy of &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. You can start this wizard at any time from the Sandbox-&gt;Maintenance menu if you do not wish to complete it now.</source>
         <translation>Ласкаво просимо до майстра налаштування. Цей майстер допоможе вам налаштувати вашу копію &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. Ви можете будь-коли запустити цей майстер із меню &quot;Пісочниця-&gt;Обслуговування&quot;, якщо ви не бажаєте завершувати його зараз.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="122"/>
+        <location filename="Wizards/SetupWizard.cpp" line="133"/>
         <source>Select how you would like to use Sandboxie-Plus</source>
         <translation>Виберіть, як ви хочете використовувати Sandboxie-Plus</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="125"/>
+        <location filename="Wizards/SetupWizard.cpp" line="136"/>
         <source>&amp;Personally, for private non-commercial use</source>
         <translation>Особисто, для приватного некомерційного використання (&amp;P)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="130"/>
+        <location filename="Wizards/SetupWizard.cpp" line="141"/>
         <source>&amp;Commercially, for business or enterprise use</source>
         <translation>Комерційно, для комерційного чи корпоративного використання (&amp;C)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="135"/>
+        <location filename="Wizards/SetupWizard.cpp" line="146"/>
+        <source>Note: this option is persistent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Note: this option is immutable</source>
-        <translation>Примітка: цей параметр незмінний</translation>
+        <translation type="vanished">Примітка: цей параметр незмінний</translation>
     </message>
 </context>
 <context>
@@ -2164,7 +2168,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Sandboxie-Plus - Пошук вікон</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="110"/>
+        <location filename="main.cpp" line="117"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>Sandboxie Manager не може працювати в пісочниці!</translation>
     </message>
@@ -3093,27 +3097,27 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 <context>
     <name>CSetupWizard</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="28"/>
+        <location filename="Wizards/SetupWizard.cpp" line="29"/>
         <source>Setup Wizard</source>
         <translation>Майстер налаштування</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="39"/>
+        <location filename="Wizards/SetupWizard.cpp" line="40"/>
         <source>The decision you make here will affect which page you get to see next.</source>
         <translation>Рішення, яке ви приймете тут, вплине на те, яку сторінку ви побачите наступною.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="42"/>
+        <location filename="Wizards/SetupWizard.cpp" line="43"/>
         <source>This help is likely not to be of any help.</source>
         <translation>Ця допомога, ймовірно, нічим не допоможе.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="46"/>
+        <location filename="Wizards/SetupWizard.cpp" line="47"/>
         <source>Sorry, I already gave all the help I could.</source>
         <translation>Вибачте, я вже надав всю допомогу.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="48"/>
+        <location filename="Wizards/SetupWizard.cpp" line="49"/>
         <source>Setup Wizard Help</source>
         <translation>Довідка майстра налаштування</translation>
     </message>
@@ -3121,27 +3125,27 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 <context>
     <name>CShellPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="382"/>
+        <location filename="Wizards/SetupWizard.cpp" line="393"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; shell integration</source>
         <translation>Налаштування інтеграції оболонки &lt;b&gt;Sandboxie-Plus&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="383"/>
+        <location filename="Wizards/SetupWizard.cpp" line="394"/>
         <source>Configure how Sandboxie-Plus should integrate with your system.</source>
         <translation>Налаштуйте спосіб інтеграції Sandboxie-Plus із вашою системою.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="387"/>
+        <location filename="Wizards/SetupWizard.cpp" line="398"/>
         <source>Start UI with Windows</source>
         <translation>Запуск інтерфейсу користувача з Windows</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="392"/>
+        <location filename="Wizards/SetupWizard.cpp" line="403"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
         <translation>Додайте &quot;Запустити у пісочниці&quot; до контекстного меню провідника</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="397"/>
+        <location filename="Wizards/SetupWizard.cpp" line="408"/>
         <source>Add desktop shortcut for starting Web browser under Sandboxie</source>
         <translation>Додати ярлик на робочий стіл для запуску веб-браузера у Sandboxie</translation>
     </message>
@@ -3343,37 +3347,37 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 <context>
     <name>CUIPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="267"/>
+        <location filename="Wizards/SetupWizard.cpp" line="278"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; UI</source>
         <translation>Налаштування інтерфейсу користувача &lt;b&gt;Sandboxie-Plus&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="268"/>
+        <location filename="Wizards/SetupWizard.cpp" line="279"/>
         <source>Select the user interface style you prefer.</source>
         <translation>Оберіть стиль інтерфейсу користувача, який вам більше подобається.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="272"/>
+        <location filename="Wizards/SetupWizard.cpp" line="283"/>
         <source>&amp;Advanced UI for experts</source>
         <translation>Розширений інтерфейс користувача для експертів (&amp;A)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="277"/>
+        <location filename="Wizards/SetupWizard.cpp" line="288"/>
         <source>&amp;Simple UI for beginners</source>
         <translation>Простий інтерфейс користувача для початківців (&amp;Si)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="282"/>
+        <location filename="Wizards/SetupWizard.cpp" line="293"/>
         <source>&amp;Vintage SbieCtrl.exe UI</source>
         <translation>Вінтажний інтерфейс SbieCtrl.exe (&amp;V)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="307"/>
+        <location filename="Wizards/SetupWizard.cpp" line="318"/>
         <source>Use Bright Mode</source>
         <translation>Використовувати світлий режим</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="311"/>
+        <location filename="Wizards/SetupWizard.cpp" line="322"/>
         <source>Use Dark Mode</source>
         <translation>Використовувати темний режим</translation>
     </message>
@@ -3381,22 +3385,22 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 <context>
     <name>CWFPPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="418"/>
+        <location filename="Wizards/SetupWizard.cpp" line="429"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; network filtering</source>
         <translation>Налаштування мережевої фільтрації &lt;b&gt;Sandboxie-Plus&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="419"/>
+        <location filename="Wizards/SetupWizard.cpp" line="430"/>
         <source>Sandboxie can use the Windows Filtering Platform (WFP) to restrict network access.</source>
         <translation>Sandboxie може використовувати платформу фільтрації Windows (WFP) для обмеження доступу до мережі.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="425"/>
+        <location filename="Wizards/SetupWizard.cpp" line="436"/>
         <source>Using WFP allows Sandboxie to reliably enforce IP/Port based rules for network access. Unlike system level application firewalls, Sandboxie can use different rules in each box for the same application. If you already have a good and reliable application firewall and do not need per box rules, you can leave this option unchecked. Without WFP enabled, Sandboxie will still be able to reliably and entirely block processes from accessing the network. However, this can cause the process to crash, as the driver blocks the required network device endpoints. Even with WFP disabled, Sandboxie offers to set IP/Port based rules, however these will be applied in user mode only and not be enforced by the driver. Hence, without WFP enabled, an intentionally malicious process could bypass those rules, but not the entire network block.</source>
         <translation>Використання WFP дозволяє Sandboxie надійно застосовувати правила доступу до мережі на основі IP/порту. На відміну від брандмауерів додатків системного рівня, Sandboxie може використовувати різні правила в кожному вікні для однієї програми. Якщо у вас уже є гарний і надійний брандмауер програм і вам не потрібні правила для кожного блоку, ви можете залишити цей параметр невибраним. Без увімкнення WFP Sandboxie все одно зможе надійно та повністю блокувати доступ процесів до мережі. Однак це може призвести до збою процесу, оскільки драйвер блокує необхідні кінцеві точки мережевого пристрою. Навіть якщо WFP вимкнено, Sandboxie пропонує встановити правила на основі IP/порту, однак вони будуть застосовані лише в режимі користувача і не застосовуватимуться драйвером. Отже, без увімкнення WFP зловмисний процес може обійти ці правила, але не весь блок мережі.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="434"/>
+        <location filename="Wizards/SetupWizard.cpp" line="445"/>
         <source>Enable Windows Filtering Platform (WFP) support</source>
         <translation>Увімкнути підтримку платформи фільтрації Windows (WFP)</translation>
     </message>

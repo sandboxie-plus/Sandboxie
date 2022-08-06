@@ -90,7 +90,7 @@ jobs:
           name: Sandboxie_x86
           path: |
             Installer/SbiePlus32/*
-          retention-days: 60
+          retention-days: 1
 
       - name: Upload Sandboxie 64
         uses: actions/upload-artifact@v3
@@ -98,4 +98,4 @@ jobs:
           name: Sandboxie_x64
           path: |
             Installer/SbiePlus64/*
-          retention-days: 60
+          retention-days: 1

@@ -121,6 +121,11 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	ui.cmbTrayBoxes->addItem(tr("Active + Pinned"));
 	ui.cmbTrayBoxes->addItem(tr("Pinned Only"));
 
+	ui.cmbOnClose->addItem(tr("Close to Tray"), "ToTray");
+	ui.cmbOnClose->addItem(tr("Prompt before Close"), "Prompt");
+	ui.cmbOnClose->addItem(tr("Close"), "Close");
+
+
 	ui.cmbDPI->addItem(tr("None"), 0);
 	ui.cmbDPI->addItem(tr("Native"), 1);
 	ui.cmbDPI->addItem(tr("Qt"), 2);
@@ -158,6 +163,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	connect(ui.cmbSysTray, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
 	connect(ui.cmbTrayBoxes, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
 	connect(ui.chkCompactTray, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.cmbOnClose, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
 
 	m_FeaturesChanged = false;
 	connect(ui.chkWFP, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
@@ -357,6 +363,7 @@ void CSettingsWindow::LoadSettings()
 	ui.cmbTrayBoxes->setCurrentIndex(theConf->GetInt("Options/SysTrayFilter", 0));
 	ui.chkCompactTray->setChecked(theConf->GetBool("Options/CompactTray", false));
 	ui.chkBoxOpsNotify->setChecked(theConf->GetBool("Options/AutoBoxOpsNotify", false));
+	ui.cmbOnClose->setCurrentIndex(ui.cmbOnClose->findData(theConf->GetString("Options/OnClose", "ToTray")));
 
 
 	if (theAPI->IsConnected())
@@ -428,10 +435,6 @@ void CSettingsWindow::LoadSettings()
 	//ui.chkAutoInstall->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/InstallUpdates", 0)));
 	ui.chkAutoInstall->setVisible(false); // todo implement smart auto updater
 
-	int UpdateChannel = theConf->GetInt("Options/UpdateChannel", 0);
-	ui.radRelease->setChecked(UpdateChannel == 0);
-	ui.radPreview->setChecked(UpdateChannel == 1);
-
 	ui.chkNoCheck->setChecked(theConf->GetBool("Options/NoSupportCheck", false));
 	if(ui.chkNoCheck->isCheckable() && !g_CertInfo.expired)
 		ui.chkNoCheck->setVisible(false); // hide if not relevant
@@ -460,12 +463,6 @@ void CSettingsWindow::UpdateCert()
 				ui.lblCertExp->setText(tr("This supporter certificate will <font color='red'>expire in %1 days</font>, please <a href=\"sbie://update/cert\">get an updated certificate</a>.").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
 				ui.lblCertExp->setVisible(true);
 			}
-/*#ifdef _DEBUG
-			else {
-				ui.lblCertExp->setText(tr("This supporter certificate is valid, <a href=\"sbie://update/cert\">check for an updated certificate</a>."));
-				ui.lblCertExp->setVisible(true);
-			}
-#endif*/
 			palette.setColor(QPalette::Base, QColor(192, 255, 192));
 		}
 		ui.txtCertificate->setPalette(palette);
@@ -591,6 +588,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/SysTrayFilter", ui.cmbTrayBoxes->currentIndex());
 	theConf->SetValue("Options/CompactTray", ui.chkCompactTray->isChecked());
 	theConf->SetValue("Options/AutoBoxOpsNotify", ui.chkBoxOpsNotify->isChecked());
+	theConf->SetValue("Options/OnClose", ui.cmbOnClose->currentData());
 
 
 	if (theAPI->IsConnected())
@@ -723,11 +721,6 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/DownloadUpdates", CSettingsWindow__Chk2Int(ui.chkAutoDownload->checkState()));
 	//theConf->SetValue("Options/InstallUpdates", CSettingsWindow__Chk2Int(ui.chkAutoInstall->checkState()));
 
-	int UpdateChannel = 0; // ui.radRelease->isChecked();
-	if (ui.radPreview->isChecked())
-		UpdateChannel = 1;
-	theConf->SetValue("Options/UpdateChannel", UpdateChannel);
-
 	theConf->SetValue("Options/NoSupportCheck", ui.chkNoCheck->isChecked());
 
 	emit OptionsChanged(m_bRebuildUI);
@@ -830,6 +823,10 @@ void CSettingsWindow::OnBrowse()
 
 void CSettingsWindow::OnChange()
 {
+	QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui.cmbOnClose->model());
+	QStandardItem *item = model->item(0);
+	item->setFlags((ui.cmbSysTray->currentIndex() == 0) ? item->flags() & ~Qt::ItemIsEnabled : item->flags() | Qt::ItemIsEnabled);
+
 	if (ui.chkAutoRoot->isVisible())
 		ui.fileRoot->setEnabled(ui.chkAutoRoot->checkState() != Qt::Checked);
 

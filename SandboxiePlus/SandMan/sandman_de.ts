@@ -141,7 +141,7 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="146"/>
         <source>Note: this option is persistent</source>
-        <translation type="unfinished"></translation>
+        <translation>Notiz: Diese Option ist dauerhaft</translation>
     </message>
     <message>
         <source>Note: this option is immutable</source>

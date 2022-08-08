@@ -4,6 +4,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [1.2.9 / 5.57.7] - 2022-08-08
+
+### Fixed
+- fixed issue with context menu setup on windows 11
+- fixed column issue in vintage mode [#2103](https://github.com/sandboxie-plus/Sandboxie/issues/2103)
+
+
+
 ## [1.2.8 / 5.57.7] - 2022-08-05
 
 ### Fixed

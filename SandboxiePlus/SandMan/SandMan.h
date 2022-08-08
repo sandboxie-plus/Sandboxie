@@ -395,4 +395,14 @@ class CTreeItemDelegate : public QStyledItemDelegate
 	}
 };
 
+class CTreeItemDelegate2 : public CTreeItemDelegate
+{
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
+	{
+		QSize size = QStyledItemDelegate::sizeHint(option, index);
+		size.setHeight(32);
+		return size;
+	}
+};
+
 extern CSandMan* theGUI;

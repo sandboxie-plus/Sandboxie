@@ -518,8 +518,8 @@ QVariant CSbieModel::headerData(int section, Qt::Orientation orientation, int ro
 
 QVariant CSbieModel::data(const QModelIndex &index, int role) const
 {
-	if(m_LargeIcons && role == Qt::SizeHintRole)
-	    return QSize(32,32);
+	//if(m_LargeIcons && role == Qt::SizeHintRole)
+	//    return QSize(32,32);
 
 	return CTreeItemModel::data(index, role);
 }

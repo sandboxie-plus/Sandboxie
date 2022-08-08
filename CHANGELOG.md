@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.2.9 / 5.57.7] - 2022-08-08
+## [1.2.8b / 5.57.7] - 2022-08-08
 
 ### Fixed
 - fixed issue with context menu setup on windows 11

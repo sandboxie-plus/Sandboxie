@@ -141,7 +141,7 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="146"/>
         <source>Note: this option is persistent</source>
-        <translation type="unfinished"></translation>
+        <translation>Remarque : cestte option est persistante</translation>
     </message>
     <message>
         <source>Note: this option is immutable</source>
@@ -476,7 +476,7 @@
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="14"/>
         <source>Display [#] indicator only</source>
-        <translation>Affichage de l&apos;indicateur [#] uniquement</translation>
+        <translation>Afficher uniquement l&apos;indicateur [#]</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="15"/>
@@ -1012,7 +1012,7 @@ Chemin complet&#xa0;: %4</translation>
         <location filename="SandManRecovery.cpp" line="211"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
-        <translation type="unfinished">Les fichiers suivants ont récemment été récupérés et sortis d&apos;un bac à sable.</translation>
+        <translation>Les fichiers suivants ont récemment été récupérés et sortis d&apos;un bac à sable.</translation>
     </message>
 </context>
 <context>
@@ -1509,7 +1509,7 @@ Chemin complet&#xa0;: %4</translation>
         <location filename="SandMan.cpp" line="497"/>
         <source>Is Window Sandboxed?</source>
         <oldsource>Is Window Sandboxed</oldsource>
-        <translation type="unfinished">La fenêtre est-elle dans un bac à sable ?</translation>
+        <translation>La fenêtre est-elle dans un bac à sable ?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="424"/>
@@ -1986,7 +1986,7 @@ Non choisira&#xa0;: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2314"/>
         <source>Error Status: 0x%1 (%2)</source>
-        <translation>Erreur - Code : 0x%1 (%2)</translation>
+        <translation>Statut de l&apos;erreur : 0x%1 (%2)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2315"/>
@@ -2693,7 +2693,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Views/SbieView.cpp" line="183"/>
         <source>Drop Admin Rights</source>
-        <translation>Abandon des droits d&apos;administrateur</translation>
+        <translation>Abandonner les droits d&apos;administrateur</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="184"/>
@@ -3096,7 +3096,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Views/SbieView.cpp" line="1281"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
-        <translation type="unfinished">Le menu Démarrer de Sandboxie va maintenant s&apos;afficher. Choisissez une application depuis le menu, et Sandboxie créera une icône de nouveau raccourci sur votre bureau véritable, que vous pouvez utiliser pour invoquer l&apos;application choisie sous la supervision de Sandboxie.</translation>
+        <translation>Le menu Démarrer de Sandboxie va maintenant s&apos;afficher. Choisissez une application depuis le menu, et Sandboxie créera une icône de nouveau raccourci sur votre bureau véritable, que vous pouvez utiliser pour invoquer l&apos;application choisie sous la supervision de Sandboxie.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1316"/>
@@ -3153,7 +3153,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/SettingsWindow.cpp" line="81"/>
         <source>Sandboxie Plus - Global Settings</source>
         <oldsource>Sandboxie Plus - Settings</oldsource>
-        <translation type="unfinished">Sandboxie Plus - Paramètres</translation>
+        <translation>Sandboxie Plus - Paramètres généraux</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="104"/>
@@ -5055,7 +5055,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="32"/>
         <source>SandboxiePlus Settings</source>
-        <translation>SandboxiePlus - Paramètres</translation>
+        <translation>Paramètres de Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="52"/>
@@ -5189,7 +5189,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
         <location filename="Forms/SettingsWindow.ui" line="472"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="unfinished">Afficher l&apos;arrière-plan « Pizza » dans la liste des bacs *</translation>
+        <translation>Afficher l&apos;arrière-plan « Pizza » dans la liste des bacs *</translation>
     </message>
     <message>
         <source>* indetermined means depanding on the view mode</source>
@@ -5338,7 +5338,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="182"/>
         <source>Show the Recovery Window as Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Toujours afficher la fenêtre de récupération au-dessus</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="321"/>
@@ -5353,12 +5353,12 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="506"/>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="550"/>
         <source>Alternate row background in lists</source>
-        <translation type="unfinished"></translation>
+        <translation>Alterner l&apos;arrière-plan des lignes dans les listes</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="698"/>

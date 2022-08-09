@@ -4,6 +4,26 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.3.0 / 5.58.0] - 2022-08-09
+
+### Added
+- Added hook configuration for ntoskrnl/ntdll
+-- individual ntdll hooks can be disabled using "DisableWinNtHook=..."
+- Added new Super Extra Security Enhanced Box Mode to enable set "UseSecurityMode=y"
+-- then this setting is enabled it combines "SysCallLockDown=y" that limits the use of Nt system calls with "DropAdminRights=y" and "RestrictDevices=y"
+-- Only calls configured in the global section as "ApproveWinNtSysCall=..."/"ApproveWin32SysCall=..." wil be executed with the original token
+-- all not aproved Nt sys calls will be executed with the sandboxed token, this may break compatybility in certain scenarios
+-- hence additional syscalls may need to be allowed, this is to be done in the [GlobalSettings] and the driver must be restarted
+-- Note: Boxes created as Security Enhanced with prior builds will be displayed in the UI to normal from now on
+-- The Security Enhanced icons are now repurposed for the new Super Extra Security Enhanced Box Mode
+-- Note: The new enhanced security features require a supporter certificate
+- added browse option to the force processes tab
+
+### Changed
+- replaced the "DeviceSecurity" template with a dedicated setting "RestrictDevices=y"
+-- Note: when needed more "NormalPipePath=..." entries can be added to open specific devices
+- rule specificity is now even more specific a exact rule now overrules once that end with a wildcard
+
 
 
 ## [1.2.8b / 5.57.7] - 2022-08-08

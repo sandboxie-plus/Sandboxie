@@ -252,87 +252,87 @@
     <message>
         <location filename="OnlineUpdater.cpp" line="47"/>
         <source>Checking for updates...</source>
-        <translation type="unfinished">Prüfe auf Updates...</translation>
+        <translation>Prüfe auf Updates...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="100"/>
         <source>server not reachable</source>
-        <translation type="unfinished">Server nicht erreichbar</translation>
+        <translation>Server nicht erreichbar</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="101"/>
         <location filename="OnlineUpdater.cpp" line="103"/>
         <source>Failed to check for updates, error: %1</source>
-        <translation type="unfinished">Prüfung auf Updates fehlgeschlagen, Fehler: %1</translation>
+        <translation>Prüfung auf Updates fehlgeschlagen, Fehler: %1</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="120"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Möchten Sie zur&lt;a href=&quot;%1&quot;&gt;Infoseite gehen&lt;/a&gt;?&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Möchten Sie zur&lt;a href=&quot;%1&quot;&gt;Infoseite gehen&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="128"/>
         <source>Don&apos;t show this announcement in the future.</source>
-        <translation type="unfinished">Diese Ankündigung zukünftig nicht mehr zeigen.</translation>
+        <translation>Diese Ankündigung zukünftig nicht mehr zeigen.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="181"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;New version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Es ist eine neue Version von Sandboxie-Plus verfügbar.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Neue Version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Es ist eine neue Version von Sandboxie-Plus verfügbar.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Neue Version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="183"/>
         <source>&lt;p&gt;Do you want to download the latest version?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Möchten Sie die neuste Version herunterladen?&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Möchten Sie die neuste Version herunterladen?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="185"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Möchten Sie die &lt;a href=&quot;%1&quot;&gt;Downloadseite&lt;/a&gt; besuchen?&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Möchten Sie die &lt;a href=&quot;%1&quot;&gt;Downloadseite&lt;/a&gt; besuchen?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="193"/>
         <source>Don&apos;t show this message anymore.</source>
-        <translation type="unfinished">Diese Meldung nicht mehr anzeigen.</translation>
+        <translation>Diese Meldung nicht mehr anzeigen.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="224"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
-        <translation type="unfinished">Keine neuen Updates gefunden, Ihr Sandboxie-Plus ist aktuell.
+        <translation>Keine neuen Updates gefunden, Ihr Sandboxie-Plus ist aktuell.
 
-Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentlichungen, um sicherzustellen, dass nur geteste Updates angeboten werden.</translation>
+Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentlichungen, um sicherzustellen, dass nur getestete Updates angeboten werden.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="243"/>
         <source>Downloading new version...</source>
-        <translation type="unfinished">Lade neue Version herunter...</translation>
+        <translation>Lade neue Version herunter...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="285"/>
         <source>Failed to download update from: %1</source>
-        <translation type="unfinished">Download des Updates von: %1 fehlgeschlagen</translation>
+        <translation>Download des Updates von: %1 fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="302"/>
         <source>&lt;p&gt;A Sandboxie-Plus update has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Ein Sandboxie-Plus Update wurde zu folgendem Ort heruntergeladen:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Möchten Sie mit der Installation beginnen? Falls ein Programm in einer Sandbox läuft wird dieses beendet.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Ein Sandboxie-Plus Update wurde zu folgendem Ort heruntergeladen:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Möchten Sie mit der Installation beginnen? Falls ein Programm in einer Sandbox läuft wird dieses beendet.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="349"/>
         <source>Checking for certificate...</source>
-        <translation type="unfinished">Prüfe auf Zertifikat...</translation>
+        <translation>Prüfe auf Zertifikat...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="383"/>
         <source>No certificate found on server!</source>
-        <translation type="unfinished">Kein Zertifikat auf dem Server gefunden!</translation>
+        <translation>Kein Zertifikat auf dem Server gefunden!</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="388"/>
         <source>There is no updated certificate available.</source>
-        <translation type="unfinished">Es ist kein aktuelles Zertifikat verfügbar.</translation>
+        <translation>Es ist kein aktualisiertes Zertifikat verfügbar.</translation>
     </message>
 </context>
 <context>
@@ -2106,17 +2106,17 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="1344"/>
         <source>%1 Directory: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Ordner: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1344"/>
         <source>Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Applikation</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1344"/>
         <source>Installation</source>
-        <translation type="unfinished"></translation>
+        <translation>Installation</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1345"/>
@@ -2131,17 +2131,17 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="1418"/>
         <source> for Personal use</source>
-        <translation type="unfinished"></translation>
+        <translation> für persönliche Nutzung</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1420"/>
         <source>   -   for Non-Commercial use ONLY</source>
-        <translation type="unfinished"></translation>
+        <translation>   -   NUR für nicht-kommerzielle Nutzung</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1705"/>
         <source>The evaluation periode has expired!!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Evaluierungsphase ist abgelaufen!!!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2416"/>
@@ -2321,7 +2321,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="1975"/>
         <source>Maintenance operation completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Wartungsoperation abgeschlossen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1995"/>
@@ -3557,82 +3557,82 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/SupportDialog.cpp" line="112"/>
         <source>The installed supporter certificate &lt;b&gt;has expired %1 days ago&lt;/b&gt; and &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;must be renewed&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Das installierte Unterstützerzertifikat ist seit &lt;b&gt; %1 Tagen ablaufen &lt;/b&gt; und &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;muss erneuert werden&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="114"/>
         <source>&lt;b&gt;You have installed Sandboxie-Plus more than %1 days ago.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Sie haben Sandboxie-Plus vor mehr als %1 Tagen installiert.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="116"/>
         <source>&lt;u&gt;Commercial use of Sandboxie past the evaluation period&lt;/u&gt;, requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;u&gt;Kommerzielle Nutzung von Sandboxie nach der Evualationsphase&lt;/u&gt;, erfordert ein gültiges &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Unterstützerzertifikat&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="123"/>
         <source>The installed supporter certificate is &lt;b&gt;outdated&lt;/b&gt; and it is &lt;u&gt;not valid for&lt;b&gt; this version&lt;/b&gt;&lt;/u&gt; of Sandboxie-Plus.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Das installierte Unterstützerzertifikat ist &lt;b&gt;veraltet&lt;/b&gt; und ist &lt;u&gt;nicht gültig für&lt;b&gt; diese Version&lt;/b&gt;&lt;/u&gt; von Sandboxie-Plus.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="125"/>
         <source>The installed supporter certificate is &lt;b&gt;expired&lt;/b&gt; and &lt;u&gt;should to be renewed&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Das installierte Unterstützerzertifikat ist &lt;b&gt;abgelaufen&lt;/b&gt; und &lt;u&gt;sollte erneuert werden&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="127"/>
         <source>&lt;b&gt;You have been using Sandboxie-Plus for more than %1 days now.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Sie haben Sandboxie-Plus nun seit mehr als %1 Tage verwendet.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="130"/>
         <source>Sandboxie on ARM64 requires a valid supporter certificate for continued use.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie auf ARM64 benötigt ein gültiges Unterstützerzertifikat zur andauernden Verwendung.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="132"/>
         <source>Personal use of Sandboxie is free of charge on x86/x64, although some functionality is only available to project supporters.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Persönliche Nutzung von Sandboxie ist auf x86/x64 gratis, wenn auch einige Funktionen nur für Projektunterstützer verfügbar sind.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="135"/>
         <source>Please continue &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; by renewing your &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; and continue using the &lt;b&gt;enhanced functionality&lt;/b&gt; in new builds.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte behalten Sie &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;die Unterstützung des Projektes bei&lt;/a&gt; duch die Erneuerung Ihres &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt; Unterstützerzertifikates&lt;/a&gt; und setzen Sie die Verwendung &lt;b&gt;erweiterter Funktionalität&lt;/b&gt; in neuem Versionen fort..</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="138"/>
         <source>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;, to give you time to contemplate the option of &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie &lt;u&gt;ohne&lt;/u&gt; ein gültiges Unterstützerzertifikat wird manchmal &lt;b&gt;&lt;font color=&apos;red&apos;&gt;für ein paar Sekunden pausieren&lt;/font&gt;&lt;/b&gt;, um Ihnen Zeit zu geben die Option zu erwägen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;das Projekt zu unterstützen&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;Ein &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;Unterstützerzertifikat&lt;/a&gt; entfernt nicht nur diese Erinnerung, sondern aktiviert auch &lt;b&gt;exklusive verbesserte Funktionalität&lt;/b&gt;, welche bessere Sicherheit und Kompatibilität bieten.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="169"/>
         <source>Sandboxie-Plus - Support Reminder</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Unterstützungserinnerung</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="248"/>
         <source>%1</source>
-        <translation type="unfinished">%1</translation>
+        <translation>%1</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="255"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Beenden</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="256"/>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Weiter</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="257"/>
         <source>Get Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Zertifikat erhalten</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="258"/>
         <source>Enter Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Zertifikat eingeben</translation>
     </message>
 </context>
 <context>
@@ -4974,27 +4974,27 @@ Der Prozessübereinstimmungslevel hat eine höhere Priorität als die Genauigkei
     <message>
         <location filename="Forms/OptionsWindow.ui" line="420"/>
         <source>Security</source>
-        <translation type="unfinished"></translation>
+        <translation>Sicherheit</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="522"/>
         <source>Security enhancements</source>
-        <translation type="unfinished"></translation>
+        <translation>Sicherheitsverbesserungen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="529"/>
         <source>Use the original token only for approved NT system calls</source>
-        <translation type="unfinished"></translation>
+        <translation>Nutze den originalen Token nur für genehmigte NT Systemaufrufe</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="590"/>
         <source>Restrict driver/device access to only approved ones</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschränke Treiber/Gerätezugriff nur auf genehmigte</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="597"/>
         <source>Enable all security enhancements (make security hardened box)</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviere alle Sicherheitsverbesserungen (mache ein sicherheitsgehärtete Box)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="696"/>
@@ -5450,7 +5450,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1120"/>
         <source>Search in the Release channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche im Veröffentlichungskanal</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1140"/>
@@ -5566,9 +5566,9 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="128"/>
-        <source>Count and display the disk space occupied by each sandbox</source>
-        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
-        <translation type="unfinished">Berechne und zeige den Festplattenspeicherplatz an, der von jeder Sandbox verwendet wird</translation>
+        <source>Count and display the disk space ocupied by each sandbox</source>
+        <oldsource>Count and display the disk space occupied by each sandbox</oldsource>
+        <translation>Berechne und zeige den Festplattenspeicherplatz an, der von jeder Sandbox verwendet wird</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="352"/>
@@ -5658,9 +5658,13 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list *</source>
-        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="unfinished">Zeige &quot;Pizza&quot;-Hintergrung in der Boxliste *</translation>
+        <source>Show &quot;Pizza&quot; Background in box list*</source>
+        <translation>Zeige &quot;Pizza&quot;-Hintergrund in der Boxliste *</translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="469"/>
+        <source>* indetermined means depanding on the view mode</source>
+        <translation>* unbestimmt macht das Verhalten abhängig vom Ansichtsmodus</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>
@@ -5715,17 +5719,17 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1083"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie auf dem neusten Stand mit den laufenden Veröffentlichungen von Windows zu halten und die Kompatibilität mit allen Browsern ist eine niemals endende Aufgabe. Bitte denken Sie darüber nach diese Arbeit mit einer Spende zu unterstützen. &lt;br /&gt;Sie  können die Entwicklung mit einer &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;PayPal-Spende&lt;/a&gt;  unterstützen, was auch mit Kreditkarten funktioniert.&lt;br /&gt;Oder Sie können kontinuierliche Unterstützung bieten durch ein &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon-Abonnement&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1096"/>
         <source>Search in the Preview channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche im Vorschaukanal</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1103"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterstützer des Sandboxie-Plus Projektes können ein &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;Unterstüzerzertifikat&lt;/a&gt; erhalten. Es ist wie ein Lizenzschlüssel, aber für großartige Menschen die Freie Software verweden. :-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1113"/>

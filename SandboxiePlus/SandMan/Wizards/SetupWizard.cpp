@@ -157,6 +157,12 @@ CIntroPage::CIntroPage(QWidget *parent)
     }
 
     setLayout(layout);
+
+    if (theGUI->m_DarkTheme) {
+        QPalette palette = this->palette();
+        palette.setColor(QPalette::Base, QColor(53, 53, 53));
+        this->setPalette(palette);
+    }
 }
 
 int CIntroPage::nextId() const

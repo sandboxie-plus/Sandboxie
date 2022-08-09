@@ -30,6 +30,32 @@ Deleting: %2
 Sandboxie-Plus Migration Guide
 .
 
+6010;txt;01
+You have installed Sandboxie more than %2 days ago.
+
+So, you think David and the contributors are doing a great job?
+
+Why don't you show it by supporting the project and getting a Supporter Certificate?
+
+Sandboxie without a valid supporter certificate will now pause for a few seconds, to give you time to contemplate the possibility of supporting the project.
+.
+
+6011;txt;01
+Wait
+.
+
+6012;txt;01
+Continue
+.
+
+6013;txt;01
+Quit
+.
+
+6014;txt;01
+Get Certificate
+.
+
 8106;txt;02
 The following programs must be closed before the installation can continue.
 Click OK to close these programs and continue.  Click Cancel to abort the installation.

@@ -5336,8 +5336,8 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="128"/>
-        <source>Count and display the disk space ocupied by each sandbox</source>
-        <oldsource>Count and display the disk space occupied by each sandbox</oldsource>
+        <source>Count and display the disk space occupied by each sandbox</source>
+        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5366,6 +5366,11 @@ Por favor, note que este valores são atualmente para o usuário específico e s
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="469"/>
+        <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/SettingsWindow.ui" line="476"/>
         <source>Make Box Icons match the Border Color</source>
         <translation type="unfinished"></translation>
@@ -5382,12 +5387,8 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="469"/>
-        <source>* indetermined means depanding on the view mode</source>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

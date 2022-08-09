@@ -5243,8 +5243,8 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="128"/>
-        <source>Count and display the disk space ocupied by each sandbox</source>
-        <oldsource>Count and display the disk space occupied by each sandbox</oldsource>
+        <source>Count and display the disk space occupied by each sandbox</source>
+        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
         <translation type="unfinished">统计并显示每个沙盒的磁盘空间占用情况</translation>
     </message>
     <message>
@@ -5258,9 +5258,10 @@ Please note that this values are currently user specific and saved globally for 
         <translation>界面设置</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="459"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="vanished">在沙盒列表中显示“披萨”背景 *</translation>
+        <translation>在沙盒列表中显示“披萨”背景 *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="476"/>
@@ -5308,8 +5309,9 @@ Please note that this values are currently user specific and saved globally for 
         <translation>(需要重启沙盒)</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="469"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation type="vanished">* 标复选框的显示效果取决于具体的视图模式</translation>
+        <translation>* 标复选框的显示效果取决于具体的视图模式</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="182"/>
@@ -5318,13 +5320,9 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="469"/>
-        <source>* indetermined means depanding on the view mode</source>
-        <translation type="unfinished"></translation>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
+        <translation type="unfinished">在沙盒列表中显示“披萨”背景 *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>

@@ -5596,9 +5596,10 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
         <translation>Oberfl√§chenkonfiguration</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="459"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="vanished">Zeige &quot;Pizza&quot;-Hintergrung in der Boxliste *</translation>
+        <translation>Zeige &quot;Pizza&quot;-Hintergrung in der Boxliste *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="476"/>
@@ -5646,8 +5647,9 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
         <translation>(Erfordert Neustart)</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="469"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation type="vanished">* eine teilweise angehakte Checkbox macht das Verhalten abh√§ngig von dem Ansichtsmodus.</translation>
+        <translation>* eine teilweise angehakte Checkbox macht das Verhalten abh√§ngig von dem Ansichtsmodus.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="182"/>

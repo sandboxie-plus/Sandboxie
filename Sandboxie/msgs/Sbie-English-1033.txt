@@ -3553,7 +3553,6 @@ The legacy UI of Sandboxie classic does not implement support for this mode of o
 .
 
 6010;txt;01
-
 You have installed Sandboxie more than %2 days ago.
 
 So, you think David and the contributors are doing a great job?

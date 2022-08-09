@@ -5224,8 +5224,8 @@ istället för &quot;*&quot;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="128"/>
-        <source>Count and display the disk space ocupied by each sandbox</source>
-        <oldsource>Count and display the disk space occupied by each sandbox</oldsource>
+        <source>Count and display the disk space occupied by each sandbox</source>
+        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
         <translation type="unfinished">Räkna och visa diskutrymmet använt av varje sandlåda</translation>
     </message>
     <message>
@@ -5345,9 +5345,8 @@ istället för &quot;*&quot;.</translation>
         <translation>(Omstart krävs)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="469"/>
         <source>* indetermined means depanding on the view mode</source>
-        <translation>* obestämd betyder beroende av vyläget</translation>
+        <translation type="vanished">* obestämd betyder beroende av vyläget</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="527"/>
@@ -5375,7 +5374,13 @@ istället för &quot;*&quot;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="469"/>
+        <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

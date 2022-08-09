@@ -5566,8 +5566,8 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="128"/>
-        <source>Count and display the disk space ocupied by each sandbox</source>
-        <oldsource>Count and display the disk space occupied by each sandbox</oldsource>
+        <source>Count and display the disk space occupied by each sandbox</source>
+        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
         <translation type="unfinished">Berechne und zeige den Festplattenspeicherplatz an, der von jeder Sandbox verwendet wird</translation>
     </message>
     <message>
@@ -5596,9 +5596,10 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
         <translation>Oberfl√§chenkonfiguration</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="459"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="vanished">Zeige &quot;Pizza&quot;-Hintergrung in der Boxliste *</translation>
+        <translation>Zeige &quot;Pizza&quot;-Hintergrung in der Boxliste *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="476"/>
@@ -5646,8 +5647,9 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
         <translation>(Erfordert Neustart)</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="469"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation type="vanished">* eine teilweise angehakte Checkbox macht das Verhalten abh√§ngig von dem Ansichtsmodus.</translation>
+        <translation>* eine teilweise angehakte Checkbox macht das Verhalten abh√§ngig von dem Ansichtsmodus.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="182"/>
@@ -5656,13 +5658,9 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="469"/>
-        <source>* indetermined means depanding on the view mode</source>
-        <translation type="unfinished"></translation>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
+        <translation type="unfinished">Zeige &quot;Pizza&quot;-Hintergrung in der Boxliste *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>

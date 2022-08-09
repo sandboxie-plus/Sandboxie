@@ -5121,8 +5121,8 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="128"/>
-        <source>Count and display the disk space ocupied by each sandbox</source>
-        <oldsource>Count and display the disk space occupied by each sandbox</oldsource>
+        <source>Count and display the disk space occupied by each sandbox</source>
+        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
         <translation type="unfinished">Подсчитать и отобразить дисковое пространство, занимаемое каждой песочницей</translation>
     </message>
     <message>
@@ -5136,9 +5136,10 @@ Please note that this values are currently user specific and saved globally for 
         <translation>Конфигурация интерфейса</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="459"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="obsolete">Показать фон &quot;Пицца&quot; в списке песочниц*</translation>
+        <translation type="unfinished">Показать фон &quot;Пицца&quot; в списке песочниц*</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="476"/>
@@ -5186,8 +5187,9 @@ Please note that this values are currently user specific and saved globally for 
         <translation>(требуется перезагрузка)</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="469"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation type="vanished">* частично установленный флажок оставит поведение, определяемое режимом отображения.</translation>
+        <translation>* частично установленный флажок оставит поведение, определяемое режимом отображения.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="182"/>
@@ -5196,13 +5198,9 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="469"/>
-        <source>* indetermined means depanding on the view mode</source>
-        <translation type="unfinished"></translation>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
+        <translation type="unfinished">Показать фон &quot;Пицца&quot; в списке песочниц*</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>

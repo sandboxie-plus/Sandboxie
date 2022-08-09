@@ -5051,8 +5051,8 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="128"/>
-        <source>Count and display the disk space ocupied by each sandbox</source>
-        <oldsource>Count and display the disk space occupied by each sandbox</oldsource>
+        <source>Count and display the disk space occupied by each sandbox</source>
+        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
         <translation type="unfinished">Calcola e mostra lo spazio su disco occupato da ogni area virtuale</translation>
     </message>
     <message>
@@ -5076,9 +5076,10 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <translation>Avvio del programma</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="459"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="vanished">Mostra lo sfondo &quot;Pizza&quot; nell&apos;elenco delle aree virtuali *</translation>
+        <translation>Mostra lo sfondo &quot;Pizza&quot; nell&apos;elenco delle aree virtuali *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>
@@ -5143,13 +5144,9 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="469"/>
-        <source>* indetermined means depanding on the view mode</source>
-        <translation type="unfinished"></translation>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
+        <translation type="unfinished">Mostra lo sfondo &quot;Pizza&quot; nell&apos;elenco delle aree virtuali *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="547"/>
@@ -5293,9 +5290,10 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <translation>(Riavvio richiesto)</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="469"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
         <translatorcomment>Qui ho forzato di proposito un ritorno a capo per ragioni di lunghezza</translatorcomment>
-        <translation type="vanished">* le caselle di controllo con selezione parziale funzioneranno in modo
+        <translation>* le caselle di controllo con selezione parziale funzioneranno in modo
 diverso a seconda dell&apos;interfaccia di visualizzazione.</translation>
     </message>
     <message>

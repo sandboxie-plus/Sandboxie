@@ -5581,8 +5581,8 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="128"/>
-        <source>Count and display the disk space ocupied by each sandbox</source>
-        <oldsource>Count and display the disk space occupied by each sandbox</oldsource>
+        <source>Count and display the disk space occupied by each sandbox</source>
+        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
         <translation type="unfinished">Her korumalı alanın kapladığı disk alanını hesaplayın ve görüntüleyin</translation>
     </message>
     <message>
@@ -5601,9 +5601,10 @@ The process match level has a higher priority than the specificity and describes
         <translation>Arayüz Yapılandırması</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="459"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="obsolete">Kutu listesinde &quot;Pizza&quot; Arka Planını Göster*</translation>
+        <translation type="unfinished">Kutu listesinde &quot;Pizza&quot; Arka Planını Göster*</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="476"/>
@@ -5646,8 +5647,9 @@ The process match level has a higher priority than the specificity and describes
         <translation>(Yeniden başlatma gerekiyor)</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="469"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation type="vanished">* Kısmen işaretlenmiş bir onay kutusu, davranışı görüntüleme modu tarafından belirlenecek şekilde bırakacaktır.</translation>
+        <translation>* Kısmen işaretlenmiş bir onay kutusu, davranışı görüntüleme modu tarafından belirlenecek şekilde bırakacaktır.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="182"/>
@@ -5656,13 +5658,9 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="469"/>
-        <source>* indetermined means depanding on the view mode</source>
-        <translation type="unfinished"></translation>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
+        <translation type="unfinished">Kutu listesinde &quot;Pizza&quot; Arka Planını Göster*</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>

@@ -3008,88 +3008,88 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="283"/>
+        <location filename="Windows/SettingsWindow.cpp" line="284"/>
         <source>Run &amp;Sandboxed</source>
         <translation>Запуск в песочнице (&amp;S)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="303"/>
+        <location filename="Windows/SettingsWindow.cpp" line="305"/>
         <source>Sandboxed Web Browser</source>
         <translation>Веб-браузер в песочнице</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="456"/>
+        <location filename="Windows/SettingsWindow.cpp" line="458"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Срок действия этого сертификата сторонника истек, &lt;a href=&quot;sbie://update/cert&quot;&gt;получите обновленный сертификат&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="461"/>
+        <location filename="Windows/SettingsWindow.cpp" line="463"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Срок действия этого сертификата сторонника &lt;font color=&apos;red&apos;&gt;истечет через %1&#xa0;дн.&lt;/font&gt;, пожалуйста, &lt;a href=&quot;sbie://update/cert&quot;&gt;получите обновленный сертификат&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="561"/>
+        <location filename="Windows/SettingsWindow.cpp" line="563"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>Запуск вне песочницы (&amp;U)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="753"/>
+        <location filename="Windows/SettingsWindow.cpp" line="755"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>Это не похоже на сертификат. Пожалуйста, введите весь сертификат, а не только его часть.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="771"/>
+        <location filename="Windows/SettingsWindow.cpp" line="773"/>
         <source>This certificate is unfortunately expired.</source>
         <translation>К сожалению, срок действия этого сертификата истек.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="773"/>
+        <location filename="Windows/SettingsWindow.cpp" line="775"/>
         <source>This certificate is unfortunately outdated.</source>
         <translation>Этот сертификат, к сожалению, устарел.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="776"/>
+        <location filename="Windows/SettingsWindow.cpp" line="778"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Спасибо за поддержку разработки Sandboxie-Plus.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="784"/>
+        <location filename="Windows/SettingsWindow.cpp" line="786"/>
         <source>This support certificate is not valid.</source>
         <translation>Этот сертификат поддержки недействителен.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="815"/>
-        <location filename="Windows/SettingsWindow.cpp" line="924"/>
+        <location filename="Windows/SettingsWindow.cpp" line="817"/>
+        <location filename="Windows/SettingsWindow.cpp" line="926"/>
         <source>Select Directory</source>
         <translation>Выбрать каталог</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="886"/>
+        <location filename="Windows/SettingsWindow.cpp" line="888"/>
         <source>Please enter the new configuration password.</source>
         <translation>Пожалуйста, введите новый пароль конфигурации.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="890"/>
+        <location filename="Windows/SettingsWindow.cpp" line="892"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Пожалуйста, повторно введите новый пароль конфигурации.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="895"/>
+        <location filename="Windows/SettingsWindow.cpp" line="897"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Пароли не совпадают, повторите попытку.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="905"/>
+        <location filename="Windows/SettingsWindow.cpp" line="907"/>
         <source>Process</source>
         <translation>Процесс</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="905"/>
+        <location filename="Windows/SettingsWindow.cpp" line="907"/>
         <source>Folder</source>
         <translation>Папка</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="915"/>
+        <location filename="Windows/SettingsWindow.cpp" line="917"/>
         <source>Please enter a program file name</source>
         <translation>Пожалуйста, введите имя файла программы</translation>
     </message>

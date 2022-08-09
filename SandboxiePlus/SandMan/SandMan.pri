@@ -27,6 +27,7 @@ HEADERS += ./stdafx.h \
     ./Windows/SettingsWindow.h \
     ./Windows/OptionsWindow.h \
     ./Windows/SelectBoxWindow.h \
+    ./Windows/SupportDialog.h\
     ./OnlineUpdater.h \
     ./Wizards/SetupWizard.h
 
@@ -56,6 +57,7 @@ SOURCES += ./main.cpp \
     ./Windows/SettingsWindow.cpp \
     ./Windows/SnapshotsWindow.cpp \
     ./Windows/SelectBoxWindow.cpp \
+    ./Windows/SupportDialog.cpp\
     ./OnlineUpdater.cpp \
     ./Wizards/SetupWizard.cpp
 

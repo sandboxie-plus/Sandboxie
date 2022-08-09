@@ -40,7 +40,7 @@ void COptionsWindow::CreateAccess()
 void COptionsWindow::OnAccessChanged()
 { 
 	if (ui.chkPrivacy->isChecked() || ui.chkUseSpecificity->isChecked())
-		theGUI->CheckCertificate();
+		theGUI->CheckCertificate(this);
 
 	UpdateAccessPolicy();
 
@@ -50,20 +50,12 @@ void COptionsWindow::OnAccessChanged()
 
 void COptionsWindow::UpdateAccessPolicy()
 { 
-	if (ui.chkPrivacy->isChecked()) {
+	if (ui.chkPrivacy->isChecked() || ui.chkRestrictDevices->isChecked()) {
 		ui.chkUseSpecificity->setEnabled(false);
 		ui.chkUseSpecificity->setChecked(true);
-
-		ui.chkCloseForBox->setEnabled(false);
-		ui.chkCloseForBox->setChecked(false);
-		ui.chkNoOpenForBox->setEnabled(false);
-		ui.chkNoOpenForBox->setChecked(false);
 	}
 	else {
 		ui.chkUseSpecificity->setEnabled(true);
-
-		ui.chkCloseForBox->setEnabled(true);
-		ui.chkNoOpenForBox->setEnabled(true);
 	}
 }
 

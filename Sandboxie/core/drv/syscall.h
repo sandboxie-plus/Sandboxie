@@ -58,6 +58,7 @@ struct _SYSCALL_ENTRY {
     P_Syscall_Handler1 handler1_func;
     P_Syscall_Handler2 handler2_func;
     P_Syscall_Handler3_Support_Procmon_Stack handler3_func_support_procmon;
+    UCHAR approved;
     USHORT name_len;
     UCHAR name[1];
 

@@ -586,6 +586,9 @@ bool CSbieAPI::GetQueue()
 				case MAN_INET_BLOCKADE:
 					Data["id"] = (int)eInetBlockade;
 					break;
+				case -1:
+					Data["id"] = 0;
+					break;
 			}
 
 			emit QueuedRequest(rpl->client_pid, rpl->client_tid, rpl->req_id, Data);
@@ -625,6 +628,13 @@ void CSbieAPI::SendReplyData(quint32 RequestId, const QVariantMap& Result)
 
 			Data = QByteArray((char*)&rpl, sizeof(MAN_INET_BLOCKADE_RPL));
 			break;
+		}
+		default:
+		{
+			ULONG rpl[2];
+			rpl[0] = STATUS_SUCCESS;
+			rpl[1] = Result["retval"].toUInt();
+			Data = QByteArray((char*)&rpl, sizeof(rpl));
 		}
 	}
 
@@ -2165,6 +2175,8 @@ QString CSbieAPI::GetFeatureStr()
 		str.append("ObCB");
 	if (flags & SBIE_FEATURE_FLAG_SBIE_LOGIN)
 		str.append("SbL");
+	if (flags & SBIE_FEATURE_FLAG_SECURITY_MODE)
+		str.append("SMod");
 	if (flags & SBIE_FEATURE_FLAG_PRIVACY_MODE)
 		str.append("PMod");
 	if (flags & SBIE_FEATURE_FLAG_COMPARTMENTS)
@@ -2194,6 +2206,44 @@ quint64 CSbieAPI::GetCertState()
 		return 0;
 
 	return state;
+}
+
+SB_STATUS CSbieAPI::SetSecureParam(const QString& Name, const void* data, size_t size)
+{
+	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+	API_SECURE_PARAM_ARGS *args = (API_SECURE_PARAM_ARGS*)parms;
+
+	wstring name = Name.toStdWString();
+
+	memset(parms, 0, sizeof(parms));
+	args->func_code = API_SET_SECURE_PARAM;
+	args->param_name.val = (WCHAR*)name.c_str();
+	args->param_data.val = (void*)data;
+	args->param_size.val = size;
+
+	NTSTATUS status = m->IoControl(parms);
+	if (!NT_SUCCESS(status))
+		return SB_ERR(status);
+	return SB_OK;
+}
+
+SB_STATUS CSbieAPI::GetSecureParam(const QString& Name, void* data, size_t size)
+{
+	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+	API_SECURE_PARAM_ARGS *args = (API_SECURE_PARAM_ARGS*)parms;
+
+	wstring name = Name.toStdWString();
+
+	memset(parms, 0, sizeof(parms));
+	args->func_code = API_GET_SECURE_PARAM;
+	args->param_name.val = (WCHAR*)name.c_str();
+	args->param_data.val = (void*)data;
+	args->param_size.val = size;
+
+	NTSTATUS status = m->IoControl(parms);
+	if (!NT_SUCCESS(status))
+		return SB_ERR(status);
+	return SB_OK;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2534,4 +2584,52 @@ QString CSbieAPI::GetSbieMsgStr(quint32 code, quint32 Lang)
 	QString qStr = QString::fromWCharArray(ret_str);
 	LocalFree(ret_str);
 	return qStr.trimmed(); // note messages may have \r\n at the end
+}
+
+void CSbieAPI::LoadEventLog()
+{
+	QByteArray buff;
+	buff.resize(8 * 1024);
+
+    HANDLE hEventLog = OpenEventLog(NULL, L"System");
+
+    while (hEventLog) 
+	{
+        ULONG bytesRead, bytesNeeded;
+        if(!ReadEventLog(hEventLog, EVENTLOG_SEQUENTIAL_READ | EVENTLOG_FORWARDS_READ, 0, buff.data(), buff.size(), &bytesRead, &bytesNeeded))
+            break;
+
+        EVENTLOGRECORD *rec = (EVENTLOGRECORD *)buff.data();
+        while (bytesRead > 0) 
+		{
+			time_t recently = time(NULL) - 15 * 60;
+
+            WCHAR *source = (WCHAR *) ((UCHAR *)rec + sizeof(EVENTLOGRECORD));
+            if ((time_t)rec->TimeGenerated >= recently && (wcscmp(source, SBIEDRV) == 0 || wcscmp(source, SBIESVC) == 0)) 
+			{
+				ULONG MsgCode = rec->EventID;
+				QStringList MsgData = QStringList() << "" << "" << "";
+
+				WCHAR *str0 = (WCHAR *)((UCHAR *)rec + rec->StringOffset);
+                if (rec->NumStrings >= 2) 
+				{
+                    WCHAR *str1 = str0 + wcslen(str0) + 1;
+					MsgData[1] = QString::fromWCharArray(str1);
+					if (rec->NumStrings >= 3)
+					{
+						WCHAR *str2 = str1 + wcslen(str1) + 1;
+						MsgData[2] = QString::fromWCharArray(str2);
+					}
+                }
+
+                emit LogSbieMessage(MsgCode & 0xFFFF, MsgData, 0);
+            }
+
+            bytesRead -= rec->Length;
+            rec = (EVENTLOGRECORD *)((UCHAR *)rec + rec->Length);
+        }
+    }
+
+    if (hEventLog)
+        CloseEventLog(hEventLog);
 }

@@ -21,9 +21,9 @@
 #ifndef _MY_VERSION_H
 #define _MY_VERSION_H
 
-#define MY_VERSION_BINARY       5,57,7
-#define MY_VERSION_STRING       "5.57.7"
-#define MY_VERSION_COMPAT		"5.57.1" // this refers to the driver ABI compatibility
+#define MY_VERSION_BINARY       5,58,0
+#define MY_VERSION_STRING       "5.58.0"
+#define MY_VERSION_COMPAT		"5.58.0" // this refers to the driver ABI compatibility
 
 // These #defines are used by either Resource Compiler or NSIS installer
 #define SBIE_INSTALLER_PATH		"..\\Bin\\"

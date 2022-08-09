@@ -309,11 +309,12 @@ _FX void SbieDll_ReleaseFilePathLock()
 
 
 _FX int Process_MatchPathList(
-    WCHAR *path_lwr, ULONG path_len, LIST *list, ULONG* plevel, const WCHAR** patsrc)
+    WCHAR *path_lwr, ULONG path_len, LIST *list, ULONG* plevel, BOOLEAN* pexact, const WCHAR** patsrc)
 {
     PATTERN *pat;
     int match_len = 0;
     ULONG level = plevel ? *plevel : -1; // lower is better, 3 is max value
+    BOOLEAN exact = pexact ? *pexact : FALSE;
 
     pat = List_Head(list);
     while (pat) {
@@ -322,13 +323,21 @@ _FX int Process_MatchPathList(
         if (cur_level > level)
             goto next; // no point testing patters with a to weak level
 
+        BOOLEAN cur_exact = Pattern_Exact(pat);
+        if (!cur_exact && exact)
+            goto next; // no point testing patters with a to weak level
+
         int cur_len = Pattern_MatchX(pat, path_lwr, path_len);
         if (cur_len > match_len) {
             match_len = cur_len;
             level = cur_level;
+            exact = cur_exact;
             if (patsrc) *patsrc = Pattern_Source(pat);
             
-            // we need to test all entries to find the best match, so we don't break here
+            // we need to test all entries to find the best match, so we dont break here
+            // unless we found an exact match, than there cant be a batter one
+            if (exact)
+                break;
         }
 
         //
@@ -344,7 +353,10 @@ _FX int Process_MatchPathList(
             if (cur_len > match_len) {
                 match_len = cur_len;
                 level = cur_level;
+                exact = cur_exact;
                 if (patsrc) *patsrc = Pattern_Source(pat);
+                if (exact)
+                    break;
             }
         }
 
@@ -353,6 +365,7 @@ _FX int Process_MatchPathList(
     }
 
     if (plevel) *plevel = level;
+    if (pexact) *pexact = exact;
     return match_len;
 }
 #endif
@@ -518,9 +531,11 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
   
     //const WCHAR* curpat;
     ULONG cur_level;
+    BOOLEAN cur_exact;
     int cur_len;
     int match_len;
     ULONG level;
+    BOOLEAN exact;
 
     BOOLEAN use_rule_specificity = (path_code == L'f' || path_code == L'k' || path_code == L'i') && (Dll_ProcessFlags & SBIE_FLAG_RULE_SPECIFICITY) != 0;
 
@@ -529,6 +544,7 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
     //
 
     level = 3; // 3 - global default - lower is better, 3 is max value
+    exact = FALSE;
     match_len = 0;
     if ((path_code == L'f' || path_code == L'k' || path_code == L'i') && (Dll_ProcessFlags & SBIE_FLAG_PRIVACY_MODE) != 0) {
 
@@ -545,9 +561,11 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
     
     if (closed_list && path_len) {
         cur_level = level;
-        cur_len = Process_MatchPathList(path_lwr, path_len, closed_list, &cur_level, NULL);// &curpat);
-        if (cur_level <= level && cur_len > match_len) {
+        cur_exact = exact;
+        cur_len = Process_MatchPathList(path_lwr, path_len, closed_list, &cur_level, &cur_exact, NULL);// &curpat);
+        if (cur_level <= level && ((!exact && cur_exact) || (cur_len > match_len))) {
             level = cur_level;
+            exact = cur_exact;
             match_len = cur_len;
             //if (patsrc) *patsrc = curpat;
 
@@ -562,9 +580,11 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
     
     if (write_list && path_len) {
         cur_level = level;
-        cur_len = Process_MatchPathList(path_lwr, path_len, write_list, &cur_level, NULL);// &curpat);
-        if (cur_level <= level && cur_len > match_len) {
+        cur_exact = exact;
+        cur_len = Process_MatchPathList(path_lwr, path_len, write_list, &cur_level, &cur_exact, NULL);// &curpat);
+        if (cur_level <= level && ((!exact && cur_exact) || (cur_len > match_len))) {
             level = cur_level;
+            exact = cur_exact;
             match_len = cur_len;
             //if (patsrc) *patsrc = curpat;
 
@@ -579,9 +599,11 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
     
     if (read_list && path_len) {
         cur_level = level;
-        cur_len = Process_MatchPathList(path_lwr, path_len,read_list, &cur_level, NULL);// &curpat);
-        if (cur_level <= level && cur_len > match_len) {
+        cur_exact = exact;
+        cur_len = Process_MatchPathList(path_lwr, path_len,read_list, &cur_level, &cur_exact, NULL);// &curpat);
+        if (cur_level <= level && ((!exact && cur_exact) || (cur_len > match_len))) {
             level = cur_level;
+            exact = cur_exact;
             match_len = cur_len;
             //if (patsrc) *patsrc = curpat;
 
@@ -596,9 +618,11 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
     
     if (normal_list && path_len) {
         cur_level = level;
-        cur_len = Process_MatchPathList(path_lwr, path_len, normal_list, &cur_level, NULL);// &curpat);
-        if (cur_level <= level && cur_len > match_len) {
+        cur_exact = exact;
+        cur_len = Process_MatchPathList(path_lwr, path_len, normal_list, &cur_level, &cur_exact, NULL);// &curpat);
+        if (cur_level <= level && ((!exact && cur_exact) || (cur_len > match_len))) {
             level = cur_level;
+            exact = cur_exact;
             match_len = cur_len;
             //if (patsrc) *patsrc = curpat;
 
@@ -613,9 +637,11 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
     
     if (open_list && path_len) {
         cur_level = level;
-        cur_len = Process_MatchPathList(path_lwr, path_len, open_list, &cur_level, NULL);// &curpat);
-        if (cur_level <= level && cur_len > match_len) {
+        cur_exact = exact;
+        cur_len = Process_MatchPathList(path_lwr, path_len, open_list, &cur_level, &cur_exact, NULL);// &curpat);
+        if (cur_level <= level && ((!exact && cur_exact) || (cur_len > match_len))) {
             level = cur_level;
+            exact = cur_exact;
             match_len = cur_len;
             //if (patsrc) *patsrc = curpat;
 

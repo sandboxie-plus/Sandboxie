@@ -21,6 +21,13 @@ public:
 
 	virtual void			StopMonitor();
 
+	virtual SB_STATUS		RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
+
+	virtual bool			IsStarting(qint64 pid) const { return m_PendingStarts.contains(pid); }
+
+private slots:
+	virtual void			OnStartFinished();
+
 protected:
 	friend class CSandBoxPlus;
 
@@ -34,6 +41,8 @@ protected:
 
 	friend class CSandBoxPlus;
 	class CBoxMonitor*		m_BoxMonitor;
+
+	QSet<qint64>			m_PendingStarts;
 };
 
 ///////////////////////////////////////////////////////////////////////////////

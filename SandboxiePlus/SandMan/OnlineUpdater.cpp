@@ -1,11 +1,49 @@
+#include "stdafx.h"
+#include "OnlineUpdater.h"
+#include "../MiscHelpers/Common/Common.h"
+#include "SandMan.h"
+#include "Windows/SettingsWindow.h"
+#include <QUrlQuery>
+#include <QJsonDocument>
+#include "../MiscHelpers/Common/CheckableMessageBox.h"
+#include <QMessageBox>
 
-void CSandMan::CheckForUpdates(bool bManual)
+#include <windows.h>
+
+COnlineUpdater* g_pUpdater = NULL;
+
+COnlineUpdater::COnlineUpdater(QObject *parent) : QObject(parent) 
+{
+	m_RequestManager = NULL;
+}
+
+COnlineUpdater* COnlineUpdater::Instance()
+{
+	g_pUpdater = NULL;
+	if (!g_pUpdater)
+		g_pUpdater = new COnlineUpdater(theGUI);
+	return g_pUpdater;
+}
+
+void COnlineUpdater::Process() 
+{
+	if (g_pUpdater && !g_pUpdater->m_pUpdateProgress.isNull() && g_pUpdater->m_RequestManager != NULL) {
+		if (g_pUpdater->m_pUpdateProgress->IsCanceled()) {
+			g_pUpdater->m_pUpdateProgress->Finish(SB_OK);
+			g_pUpdater->m_pUpdateProgress.clear();
+
+			g_pUpdater->m_RequestManager->AbortAll();
+		}
+	}
+}
+
+void COnlineUpdater::CheckForUpdates(bool bManual)
 {
 	if (!m_pUpdateProgress.isNull())
 		return;
 
 	m_pUpdateProgress = CSbieProgressPtr(new CSbieProgress());
-	AddAsyncOp(m_pUpdateProgress);
+	theGUI->AddAsyncOp(m_pUpdateProgress);
 	m_pUpdateProgress->ShowMessage(tr("Checking for updates..."));
 
 	if (m_RequestManager == NULL) 
@@ -20,27 +58,30 @@ void CSandMan::CheckForUpdates(bool bManual)
 	//Query.addQueryItem("version", GetVersion());
 	Query.addQueryItem("version", QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) + "." + QString::number(VERSION_REV) + "." + QString::number(VERSION_UPD));
 	Query.addQueryItem("system", "windows-" + QSysInfo::kernelVersion() + "-" + QSysInfo::currentCpuArchitecture());
-	Query.addQueryItem("language", QString::number(m_LanguageId));
+	Query.addQueryItem("language", QString::number(theGUI->m_LanguageId));
 
 	QString UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("UPDATEKEY");
 	if (UpdateKey.isEmpty())
 		UpdateKey = theAPI->GetGlobalSettings()->GetText("UpdateKey"); // theConf->GetString("Options/UpdateKey");
 	if (!UpdateKey.isEmpty())
 		Query.addQueryItem("update_key", UpdateKey);
+	int UpdateChannel = theConf->GetInt("Options/UpdateChannel", 0);
+	Query.addQueryItem("channel", QString::number(UpdateChannel));
 	Query.addQueryItem("auto", bManual ? "0" : "1");
 
 	QUrl Url("https://sandboxie-plus.com/update.php");
 	Url.setQuery(Query);
 
 	QNetworkRequest Request = QNetworkRequest(Url);
-	Request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	//Request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	Request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
 	//Request.setRawHeader("Accept-Encoding", "gzip");
 	QNetworkReply* pReply = m_RequestManager->get(Request);
 	pReply->setProperty("manual", bManual);
 	connect(pReply, SIGNAL(finished()), this, SLOT(OnUpdateCheck()));
 }
 
-void CSandMan::OnUpdateCheck()
+void COnlineUpdater::OnUpdateCheck()
 {
 	if (m_pUpdateProgress.isNull())
 		return;
@@ -57,9 +98,9 @@ void CSandMan::OnUpdateCheck()
 	if (Data.isEmpty() || Data["error"].toBool())
 	{
 		QString Error = Data.isEmpty() ? tr("server not reachable") : Data["errorMsg"].toString();
-		OnLogMessage(tr("Failed to check for updates, error: %1").arg(Error), !bManual);
+		theGUI->OnLogMessage(tr("Failed to check for updates, error: %1").arg(Error), !bManual);
 		if (bManual)
-			QMessageBox::critical(this, "Sandboxie-Plus", tr("Failed to check for updates, error: %1").arg(Error));
+			QMessageBox::critical(theGUI, "Sandboxie-Plus", tr("Failed to check for updates, error: %1").arg(Error));
 		return;
 	}
 
@@ -78,7 +119,7 @@ void CSandMan::OnUpdateCheck()
 			if (!InfoUrl.isEmpty())
 				FullMessage += tr("<p>Do you want to go to the <a href=\"%1\">info page</a>?</p>").arg(InfoUrl);
 
-			CCheckableMessageBox mb(this);
+			CCheckableMessageBox mb(theGUI);
 			mb.setWindowTitle("Sandboxie-Plus");
 			QIcon ico(QLatin1String(":/SandMan.png"));
 			mb.setIconPixmap(ico.pixmap(64, 64));
@@ -107,13 +148,15 @@ void CSandMan::OnUpdateCheck()
 		}
 	}
 
+	//int TemplateVersion = CSbieIni("DefaultTemplates", theAPI, this).GetNum("TemplateVersion", 0, false, true);
+
 	QString VersionStr = Data["version"].toString();
 	if (!VersionStr.isEmpty()) //&& VersionStr != GetVersion())
 	{
-		UCHAR myVersion[4] = { VERSION_UPD, VERSION_REV, VERSION_MIN, VERSION_MJR }; // ntohl
-		ULONG MyVersion = *(ULONG*)&myVersion;
+		quint8 myVersion[4] = { VERSION_UPD, VERSION_REV, VERSION_MIN, VERSION_MJR }; // ntohl
+		quint32 MyVersion = *(quint32*)&myVersion;
 
-		ULONG Version = 0;
+		quint32 Version = 0;
 		QStringList Nums = VersionStr.split(".");
 		for (int i = 0, Bits = 24; i < Nums.count() && Bits >= 0; i++, Bits -= 8)
 			Version |= (Nums[i].toInt() & 0xFF) << Bits;
@@ -122,7 +165,7 @@ void CSandMan::OnUpdateCheck()
 		if (bManual || !IgnoredUpdates.contains(VersionStr)) // when checked manually always show result
 		{
 			bNothing = false;
-			//QDateTime Updated = QDateTime::fromTime_t(Data["updated"].toULongLong());
+			//QDateTime Updated = QDateTime::fromSecsSinceEpoch(Data["updated"].toULongLong());
 
 			QString DownloadUrl = Data["downloadUrl"].toString();
 			//	'sha256'
@@ -141,7 +184,7 @@ void CSandMan::OnUpdateCheck()
 				else if (!UpdateUrl.isEmpty())
 					FullMessage += tr("<p>Do you want to go to the <a href=\"%1\">download page</a>?</p>").arg(UpdateUrl);
 
-				CCheckableMessageBox mb(this);
+				CCheckableMessageBox mb(theGUI);
 				mb.setWindowTitle("Sandboxie-Plus");
 				QIcon ico(QLatin1String(":/SandMan.png"));
 				mb.setIconPixmap(ico.pixmap(64, 64));
@@ -175,19 +218,20 @@ void CSandMan::OnUpdateCheck()
 
 	if (bNothing) 
 	{
-		theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addDays(7).toTime_t());
+		theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addDays(7).toSecsSinceEpoch());
 
 		if (bManual) {
-			QMessageBox::information(this, "Sandboxie-Plus", tr("No new updates found, your Sandboxie-Plus is up-to-date.\n"
+			QMessageBox::information(theGUI, "Sandboxie-Plus", tr("No new updates found, your Sandboxie-Plus is up-to-date.\n"
 				"\nNote: The update check is often behind the latest GitHub release to ensure that only tested updates are offered."));
 		}
 	}
 }
 
-void CSandMan::DownloadUpdates(const QString& DownloadUrl, bool bManual)
+void COnlineUpdater::DownloadUpdates(const QString& DownloadUrl, bool bManual)
 {
 	QNetworkRequest Request = QNetworkRequest(DownloadUrl);
-	Request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	//Request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	Request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
 	//Request.setRawHeader("Accept-Encoding", "gzip");
 	QNetworkReply* pReply = m_RequestManager->get(Request);
 	pReply->setProperty("manual", bManual);
@@ -195,17 +239,17 @@ void CSandMan::DownloadUpdates(const QString& DownloadUrl, bool bManual)
 	connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(OnUpdateProgress(qint64, qint64)));
 
 	m_pUpdateProgress = CSbieProgressPtr(new CSbieProgress());
-	AddAsyncOp(m_pUpdateProgress);
+	theGUI->AddAsyncOp(m_pUpdateProgress);
 	m_pUpdateProgress->ShowMessage(tr("Downloading new version..."));
 }
 
-void CSandMan::OnUpdateProgress(qint64 bytes, qint64 bytesTotal)
+void COnlineUpdater::OnUpdateProgress(qint64 bytes, qint64 bytesTotal)
 {
 	if (bytesTotal != 0 && !m_pUpdateProgress.isNull())
 		m_pUpdateProgress->Progress(100 * bytes / bytesTotal);
 }
 
-void CSandMan::OnUpdateDownload()
+void COnlineUpdater::OnUpdateDownload()
 {
 	if (m_pUpdateProgress.isNull())
 		return;
@@ -238,18 +282,18 @@ void CSandMan::OnUpdateDownload()
 	m_pUpdateProgress.clear();
 
 	if (File.size() != Size) {
-		QMessageBox::critical(this, "Sandboxie-Plus", tr("Failed to download update from: %1").arg(pReply->request().url().toString()));
+		QMessageBox::critical(theGUI, "Sandboxie-Plus", tr("Failed to download update from: %1").arg(pReply->request().url().toString()));
 		return;
 	}
 
 	theConf->SetValue("Options/PendingUpdatePackage", FilePath);
-	UpdateLabel();
+	theGUI->UpdateLabel();
 
 	if (bManual)
 		InstallUpdate();
 }
 
-void CSandMan::InstallUpdate()
+void COnlineUpdater::InstallUpdate()
 {
 	QString FilePath = theConf->GetString("Options/PendingUpdatePackage");
 	if (FilePath.isEmpty())
@@ -257,17 +301,17 @@ void CSandMan::InstallUpdate()
 
 	QString Message = tr("<p>A Sandboxie-Plus update has been downloaded to the following location:</p><p><a href=\"%2\">%1</a></p><p>Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.</p>")
 		.arg(FilePath).arg("File:///" + Split2(FilePath, "/", true).first);
-	int Ret = QMessageBox("Sandboxie-Plus", Message, QMessageBox::Information, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::Cancel, this).exec();
+	int Ret = QMessageBox("Sandboxie-Plus", Message, QMessageBox::Information, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::Cancel, theGUI).exec();
 	if (Ret == QMessageBox::Cancel) {
 		theConf->DelValue("Options/PendingUpdatePackage");
-		UpdateLabel();
+		theGUI->UpdateLabel();
 	}
 	if (Ret != QMessageBox::Yes)
 		return;
 	
 	theAPI->TerminateAll();
 
-	wstring wFile = FilePath.toStdWString();
+	std::wstring wFile = FilePath.toStdWString();
 
 	SHELLEXECUTEINFO si = { 0 };
 	si.cbSize = sizeof(SHELLEXECUTEINFO);
@@ -286,13 +330,14 @@ void CSandMan::InstallUpdate()
 	}
 }
 
-void CSandMan::UpdateCert()
+void COnlineUpdater::UpdateCert()
 {
 	QString UpdateKey; // for now only patreons can update the cert automatically
-	if(GetArguments(g_Certificate, L'\n', L':').value("type").indexOf("PATREON") == 0)
-		UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("UPDATEKEY");
+	TArguments args = GetArguments(g_Certificate, L'\n', L':');
+	if(args.value("TYPE").indexOf("PATREON") == 0)
+		UpdateKey = args.value("UPDATEKEY");
 	if (UpdateKey.isEmpty()) {
-		OpenUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert");
+		theGUI->OpenUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert");
 		return;
 	}
 
@@ -300,7 +345,7 @@ void CSandMan::UpdateCert()
 		return;
 
 	m_pUpdateProgress = CSbieProgressPtr(new CSbieProgress());
-	AddAsyncOp(m_pUpdateProgress);
+	theGUI->AddAsyncOp(m_pUpdateProgress);
 	m_pUpdateProgress->ShowMessage(tr("Checking for certificate..."));
 
 	if (m_RequestManager == NULL) 
@@ -314,13 +359,14 @@ void CSandMan::UpdateCert()
 	Url.setQuery(Query);
 
 	QNetworkRequest Request = QNetworkRequest(Url);
-	Request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	//Request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	Request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
 	//Request.setRawHeader("Accept-Encoding", "gzip");
 	QNetworkReply* pReply = m_RequestManager->get(Request);
 	connect(pReply, SIGNAL(finished()), this, SLOT(OnCertCheck()));
 }
 
-void CSandMan::OnCertCheck()
+void COnlineUpdater::OnCertCheck()
 {
 	if (m_pUpdateProgress.isNull())
 		return;
@@ -334,12 +380,12 @@ void CSandMan::OnCertCheck()
 	m_pUpdateProgress.clear();
 
 	if (Code > 299 || Code < 200) {
-		QMessageBox::critical(this, "Sandboxie-Plus", tr("No certificate found on server!"));
+		QMessageBox::critical(theGUI, "Sandboxie-Plus", tr("No certificate found on server!"));
 		return;
 	}
 
 	if (Reply.replace("\r\n","\n").compare(g_Certificate.replace("\r\n","\n"), Qt::CaseInsensitive) == 0){
-		QMessageBox::information(this, "Sandboxie-Plus", tr("There is no updated certificate available."));
+		QMessageBox::information(theGUI, "Sandboxie-Plus", tr("There is no updated certificate available."));
 		return;
 	}
 
@@ -355,7 +401,7 @@ void CSandMan::OnCertCheck()
 
 	if (!theAPI->ReloadCert().IsError()) {
 		CSettingsWindow::LoadCertificate();
-		UpdateCertState();
+		theGUI->UpdateCertState();
 	}
 	else { // this should not happen
 		g_Certificate.clear();

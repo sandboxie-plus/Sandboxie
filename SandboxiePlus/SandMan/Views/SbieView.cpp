@@ -383,12 +383,12 @@ int CSbieView__ParseGroup(const QString& Grouping, QMap<QString, QStringList>& m
 			m_Groups[Parent].append(Name);
 		if (pos == -1)
 			break;
-		if (Grouping.at(pos) == "(")
+		if (Grouping.at(pos) == '(')
 		{
 			m_Groups[Name] = QStringList();
 			Index = CSbieView__ParseGroup(Grouping, m_Groups, Name, Index);
 		}
-		else if (Grouping.at(pos) == ")")
+		else if (Grouping.at(pos) == ')')
 			break;
 	}
 	return Index;
@@ -1393,8 +1393,8 @@ void CSbieView::OnProcessAction(QAction* Action, const QList<CBoxedProcessPtr>& 
 				QString FileName = pProcess->GetFileName();
 				if (FileName.indexOf(pBoxPlus->GetFileRoot(), Qt::CaseInsensitive) == 0) {
 					FileName.remove(0, pBoxPlus->GetFileRoot().length());
-					if (FileName.at(0) != "\\")
-						FileName.prepend("\\");
+					if (FileName.at(0) != '\\')
+						FileName.prepend('\\');
 				}
 
 				pBoxPlus->InsertText("RunCommand", pProcess->GetProcessName() + "|\"" + pProcess->GetFileName()+"\"");

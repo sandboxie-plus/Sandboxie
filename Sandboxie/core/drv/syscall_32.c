@@ -251,8 +251,7 @@ _FX void *Syscall_GetServiceTable(void)
 //---------------------------------------------------------------------------
 
 
-_FX ULONG Syscall_GetIndexFromNtdll(
-    UCHAR *code, const UCHAR *name, ULONG name_len)
+_FX ULONG Syscall_GetIndexFromNtdll(UCHAR *code)
 {
     ULONG index = -1;
 

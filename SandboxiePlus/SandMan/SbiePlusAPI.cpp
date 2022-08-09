@@ -86,6 +86,29 @@ void CSbiePlusAPI::StopMonitor()
 	m_BoxMonitor->Stop();
 }
 
+SB_STATUS CSbiePlusAPI::RunStart(const QString& BoxName, const QString& Command, bool Elevated, const QString& WorkingDir, QProcess* pProcess)
+{
+	if (!pProcess)
+		pProcess = new QProcess(this);
+	SB_STATUS Status = CSbieAPI::RunStart(BoxName, Command, Elevated, WorkingDir, pProcess);
+	if (pProcess->parent() == this) {
+		if (!Status.IsError()) {
+			connect(pProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(OnStartFinished()));
+			m_PendingStarts.insert(pProcess->processId());
+			return SB_OK;
+		}
+		delete pProcess;
+	}
+	return Status;
+}
+
+void CSbiePlusAPI::OnStartFinished()
+{
+	QProcess* pProcess = (QProcess*)sender();
+	m_PendingStarts.remove(pProcess->processId());
+	pProcess->deleteLater();
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // CSandBoxPlus
 //
@@ -159,7 +182,7 @@ void CSandBoxPlus::UpdateDetails()
 
 	//GetBool("SandboxieLogon", false)
 
-	m_bSecurityEnhanced = m_iUnsecureDebugging == 0 && (GetBool("DropAdminRights", false));
+	m_bSecurityEnhanced = m_iUnsecureDebugging == 0 && (GetBool("UseSecurityMode", false));
 	m_bApplicationCompartment = GetBool("NoSecurityIsolation", false);
 	m_bPrivacyEnhanced = (m_iUnsecureDebugging != 1 || m_bApplicationCompartment) && (GetBool("UsePrivacyMode", false)); // app compartments are inhenrently insecure
 

@@ -375,6 +375,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 
 				break;
 			}
+			CheckSupport();
 			show();
 		case QSystemTrayIcon::Trigger:
 			if (isVisible() && !TriggerSet)

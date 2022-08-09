@@ -417,38 +417,19 @@
            </widget>
            <widget class="QWidget" name="tab_14">
             <attribute name="title">
-             <string>Admin Rights</string>
+             <string>Security</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_53">
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_52">
-               <item row="8" column="2">
-                <spacer name="verticalSpacer_11">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+               <item row="6" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkDropRights">
+                 <property name="text">
+                  <string>Drop rights from Administrators and Power Users groups</string>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
+                </widget>
                </item>
-               <item row="8" column="3" colspan="3">
-                <spacer name="horizontalSpacer_10">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="2" column="4">
+               <item row="6" column="4">
                 <widget class="QLabel" name="label_40">
                  <property name="font">
                   <font>
@@ -462,7 +443,36 @@
                  </property>
                 </widget>
                </item>
-               <item row="0" column="0" colspan="3">
+               <item row="12" column="1">
+                <spacer name="horizontalSpacer_11">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Maximum</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="12" column="2">
+                <spacer name="verticalSpacer_11">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="4" column="0" colspan="3">
                 <widget class="QLabel" name="label_10">
                  <property name="font">
                   <font>
@@ -480,56 +490,6 @@
                 </widget>
                </item>
                <item row="5" column="1" colspan="4">
-                <widget class="QLabel" name="lblAdmin">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>CAUTION: When running under the built in administrator, processes can not drop administrative privileges.</string>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="2" colspan="4">
-                <widget class="QCheckBox" name="chkFakeElevation">
-                 <property name="text">
-                  <string>Make applications think they are running elevated (allows to run installers safely)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="2" colspan="3">
-                <widget class="QLabel" name="label_28">
-                 <property name="text">
-                  <string>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</string>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="1">
-                <spacer name="horizontalSpacer_11">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeType">
-                  <enum>QSizePolicy::Maximum</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="1" column="1" colspan="4">
                 <widget class="QLabel" name="label_35">
                  <property name="font">
                   <font>
@@ -546,17 +506,95 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkDropRights">
+               <item row="0" column="0" colspan="2">
+                <widget class="QLabel" name="label_68">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="toolTip">
+                  <string>Protect the system from sandboxed processes</string>
+                 </property>
                  <property name="text">
-                  <string>Drop rights from Administrators and Power Users groups</string>
+                  <string>Security enhancements</string>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="1" colspan="5">
+               <item row="2" column="2" colspan="4">
+                <widget class="QCheckBox" name="chkLockDown">
+                 <property name="text">
+                  <string>Use the original token only for approved NT system calls</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="11" column="2" colspan="3">
+                <widget class="QLabel" name="label_28">
+                 <property name="text">
+                  <string>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="12" column="3" colspan="3">
+                <spacer name="horizontalSpacer_10">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="9" column="1" colspan="4">
+                <widget class="QLabel" name="lblAdmin">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>CAUTION: When running under the built in administrator, processes can not drop administrative privileges.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="2" colspan="4">
+                <widget class="QCheckBox" name="chkFakeElevation">
+                 <property name="text">
+                  <string>Make applications think they are running elevated (allows to run installers safely)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="1" colspan="5">
                 <widget class="QCheckBox" name="chkMsiExemptions">
                  <property name="text">
                   <string>Allow MSIServer to run with a sandboxed system token and apply other exceptions if required</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="2" colspan="4">
+                <widget class="QCheckBox" name="chkRestrictDevices">
+                 <property name="text">
+                  <string>Restrict driver/device access to only approved ones</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1" colspan="5">
+                <widget class="QCheckBox" name="chkSecurityMode">
+                 <property name="text">
+                  <string>Enable all security enhancements (make security hardened box)</string>
                  </property>
                 </widget>
                </item>
@@ -571,32 +609,12 @@
             <layout class="QGridLayout" name="gridLayout_37">
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_36">
-               <item row="10" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkCloseClipBoard">
+               <item row="9" column="2">
+                <widget class="QCheckBox" name="chkOpenCredentials">
                  <property name="text">
-                  <string>Block read access to the clipboard</string>
+                  <string>Open Windows Credentials Store (user mode)</string>
                  </property>
                 </widget>
-               </item>
-               <item row="4" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkBlockSpooler">
-                 <property name="text">
-                  <string>Block access to the printer spooler</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="13" column="2">
-                <spacer name="horizontalSpacer_5">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
                </item>
                <item row="7" column="0" colspan="2">
                 <widget class="QLabel" name="label_18">
@@ -615,6 +633,39 @@
                  </property>
                 </widget>
                </item>
+               <item row="13" column="2">
+                <spacer name="horizontalSpacer_5">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="10" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkCloseClipBoard">
+                 <property name="text">
+                  <string>Block read access to the clipboard</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="13" column="0">
+                <spacer name="verticalSpacer_12">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
                <item row="3" column="0">
                 <widget class="QLabel" name="label_31">
                  <property name="font">
@@ -632,16 +683,10 @@
                  </property>
                 </widget>
                </item>
-               <item row="6" column="2">
-                <widget class="QCheckBox" name="chkPrintToFile">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
+               <item row="2" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkBlockNetParam">
                  <property name="text">
-                  <string>Allow the print spooler to print to files outside the sandbox</string>
+                  <string>Prevent change to network and firewall parameters (user mode)</string>
                  </property>
                 </widget>
                </item>
@@ -649,6 +694,30 @@
                 <widget class="QCheckBox" name="chkVmRead">
                  <property name="text">
                   <string>Allow to read memory of unsandboxed processes (not recommended)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_34">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="toolTip">
+                  <string>Protect the system from sandboxed processes</string>
+                 </property>
+                 <property name="text">
+                  <string>Network restrictions</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkBlockSpooler">
+                 <property name="text">
+                  <string>Block access to the printer spooler</string>
                  </property>
                 </widget>
                </item>
@@ -671,10 +740,16 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkBlockNetParam">
+               <item row="6" column="2">
+                <widget class="QCheckBox" name="chkPrintToFile">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="text">
-                  <string>Prevent change to network and firewall parameters (user mode)</string>
+                  <string>Allow the print spooler to print to files outside the sandbox</string>
                  </property>
                 </widget>
                </item>
@@ -685,49 +760,12 @@
                  </property>
                 </widget>
                </item>
-               <item row="9" column="2">
-                <widget class="QCheckBox" name="chkOpenCredentials">
-                 <property name="text">
-                  <string>Open Windows Credentials Store (user mode)</string>
-                 </property>
-                </widget>
-               </item>
                <item row="5" column="2">
                 <widget class="QCheckBox" name="chkOpenSpooler">
                  <property name="text">
                   <string>Remove spooler restriction, printers can be installed outside the sandbox</string>
                  </property>
                 </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_34">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="toolTip">
-                  <string>Protect the system from sandboxed processes</string>
-                 </property>
-                 <property name="text">
-                  <string>Network restrictions</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="13" column="0">
-                <spacer name="verticalSpacer_12">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
                </item>
                <item row="8" column="1" colspan="2">
                 <widget class="QCheckBox" name="chkOpenProtectedStorage">

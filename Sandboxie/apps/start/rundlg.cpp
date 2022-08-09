@@ -324,6 +324,7 @@ void PrepareRunAsAdmin(HWND hwnd, const WCHAR *BoxName, BOOLEAN JustAdmin)
     if (BoxName) {
 
         if ((BoxName == (WCHAR *)-1) ||
+                SbieApi_QueryConfBool(BoxName, L"UseSecurityMode", FALSE) ||
                 SbieApi_QueryConfBool(BoxName, L"DropAdminRights", FALSE)) {
 
             run_elevated_2 = FALSE;

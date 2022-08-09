@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "SbieModel.h"
 #include "../../MiscHelpers/Common/Common.h"
-#include "../../MiscHelpers/Common/IconExtreactor.h"
 #include "../SandMan.h"
 
 CSbieModel::CSbieModel(QObject *parent)

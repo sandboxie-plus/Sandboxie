@@ -71,6 +71,12 @@ const WCHAR *Pattern_Source(PATTERN *pat);
 ULONG Pattern_Level(PATTERN *pat);
 
 //
+// Pattern_Exact:  returns true if the patter has no wildcard at the end
+//
+
+BOOLEAN Pattern_Exact(PATTERN *pat);
+
+//
 // Pattern_Match:  returns TRUE if 'string' matches PATTERN object 'pattern'.
 // If 'lower' was TRUE at time of Pattern_Create(), the 'string' passed here
 // should be all lowercase characters.

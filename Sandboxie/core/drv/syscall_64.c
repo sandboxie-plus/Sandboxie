@@ -417,8 +417,7 @@ _FX void *Syscall_GetServiceTable(void)
 //---------------------------------------------------------------------------
 
 
-_FX ULONG Syscall_GetIndexFromNtdll(
-    UCHAR *code, const UCHAR *name, ULONG name_len)
+_FX ULONG Syscall_GetIndexFromNtdll(UCHAR *code)
 {
     ULONG index = -1;
 
@@ -428,17 +427,6 @@ _FX ULONG Syscall_GetIndexFromNtdll(
     if (*code == 0xB8)                      // mov eax, syscall number
         index = *(ULONG *)(code + 1);
 
-    if (index == -1) {
-
-        //
-        // on 64-bit Windows, some syscalls are fake, and should be skipped
-        //
-
-        if (*code == 0xE9 && IS_PROC_NAME(15, "QuerySystemTime")) {
-
-            index = -2;
-        }
-    }
 
     if (index == -1)
         Log_Msg1(MSG_1113, L"INDEX");

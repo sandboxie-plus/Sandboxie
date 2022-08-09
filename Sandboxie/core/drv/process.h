@@ -141,7 +141,10 @@ struct _PROCESS {
 
     BOOLEAN always_close_for_boxed;
     BOOLEAN dont_open_for_boxed;
+    BOOLEAN use_security_mode;
+    BOOLEAN is_locked_down;
 #ifdef USE_MATCH_PATH_EX
+    BOOLEAN restrict_devices;
     BOOLEAN use_rule_specificity;
     BOOLEAN use_privacy_mode;
 #endif

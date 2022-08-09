@@ -113,6 +113,8 @@ public:
 		eSbieFeaturePMod		= 0x00000004,
 		eSbieFeatureAppC		= 0x00000008,
 		eSbieFeatureSbiL		= 0x00000010,
+
+		eSbieFeatureARM64		= 0x40000000,
 		eSbieFeatureCert		= 0x80000000
 	};
 
@@ -140,14 +142,19 @@ public:
 
 	virtual quint32			GetSessionID() const;
 
+	virtual SB_STATUS		SetSecureParam(const QString& Name, const void* data, size_t size);
+	virtual SB_STATUS		GetSecureParam(const QString& Name, void* data, size_t size);
+
 
 	enum ESbieQueuedRequests
 	{
 		ePrintSpooler = -1,
 		eInvalidQueuedRequests = 0,
 		eFileMigration = 1,
-		eInetBlockade= 2,
+		eInetBlockade = 2,
 	};
+
+	void					LoadEventLog();
 
 public slots:
 	virtual void			SendReplyData(quint32 RequestId, const QVariantMap& Result);

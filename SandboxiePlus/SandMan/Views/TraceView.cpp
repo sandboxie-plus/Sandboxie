@@ -68,10 +68,9 @@ CTraceTree::CTraceTree(QWidget* parent)
 
 	m_pTreeList->setModel(m_pTraceModel);
 
-#ifdef WIN32
 	QStyle* pStyle = QStyleFactory::create("windows");
 	m_pTreeList->setStyle(pStyle);
-#endif
+	m_pTreeList->setItemDelegate(new CTreeItemDelegate());
 	m_pTreeList->setExpandsOnDoubleClick(false);
 	//m_pTreeList->setSortingEnabled(true);
 

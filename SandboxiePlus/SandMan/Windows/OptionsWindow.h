@@ -167,6 +167,7 @@ private slots:
 	void OnTab();
 
 	void OnGeneralChanged();
+	void OnSecurityMode();
 	void OnStartChanged()			{ m_StartChanged = true; OnOptChanged(); }
 	//void OnRestrictionChanged()		{ m_RestrictionChanged = true; OnOptChanged(); }
 	void OnINetBlockChanged()		{ m_INetBlockChanged = true; OnOptChanged(); }
@@ -284,6 +285,8 @@ protected:
 	void CreateGeneral();
 	void LoadGeneral();
 	void SaveGeneral();
+
+	void UpdateBoxSecurity();
 
 	void LoadGroups();
 	void LoadGroupsTmpl(bool bUpdate = false);

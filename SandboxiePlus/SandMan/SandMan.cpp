@@ -25,7 +25,9 @@
 #include "Helpers/WinAdmin.h"
 #include "../MiscHelpers/Common/OtherFunctions.h"
 #include "../MiscHelpers/Common/Common.h"
+#include "Windows/SupportDialog.h"
 #include "Views/FileView.h"
+#include "OnlineUpdater.h"
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -109,6 +111,24 @@ CSandMan::CSandMan(QWidget *parent)
 	m_DefaultPalett = QApplication::palette();
 	m_DefaultFontSize = QApplication::font().pointSizeF();
 
+	m_DarkPalett.setColor(QPalette::Window, QColor(53, 53, 53));
+	m_DarkPalett.setColor(QPalette::WindowText, Qt::white);
+	m_DarkPalett.setColor(QPalette::Base, QColor(25, 25, 25));
+	m_DarkPalett.setColor(QPalette::AlternateBase, QColor(53, 53, 53));
+	m_DarkPalett.setColor(QPalette::ToolTipBase, Qt::white);
+	m_DarkPalett.setColor(QPalette::ToolTipText, Qt::white);
+	m_DarkPalett.setColor(QPalette::Text, Qt::white);
+	m_DarkPalett.setColor(QPalette::Button, QColor(53, 53, 53));
+	m_DarkPalett.setColor(QPalette::ButtonText, Qt::white);
+	m_DarkPalett.setColor(QPalette::BrightText, Qt::red);
+	m_DarkPalett.setColor(QPalette::Link, QColor(218, 130, 42));
+	m_DarkPalett.setColor(QPalette::Highlight, QColor(42, 130, 218));
+	m_DarkPalett.setColor(QPalette::HighlightedText, Qt::black);
+	m_DarkPalett.setColor(QPalette::Disabled, QPalette::WindowText, Qt::darkGray);
+	m_DarkPalett.setColor(QPalette::Disabled, QPalette::Text, Qt::darkGray);
+	m_DarkPalett.setColor(QPalette::Disabled, QPalette::Light, Qt::black);
+	m_DarkPalett.setColor(QPalette::Disabled, QPalette::ButtonText, Qt::darkGray);
+
 	LoadLanguage();
 
 	if (!theConf->IsWritable()) {
@@ -120,8 +140,6 @@ CSandMan::CSandMan(QWidget *parent)
 	theAPI = new CSbiePlusAPI(this);
 	connect(theAPI, SIGNAL(StatusChanged()), this, SLOT(OnStatusChanged()));
 	connect(theAPI, SIGNAL(BoxClosed(const CSandBoxPtr&)), this, SLOT(OnBoxClosed(const CSandBoxPtr&)));
-
-	m_RequestManager = NULL;
 
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
 
@@ -766,6 +784,8 @@ void CSandMan::CreateView(int iViewMode)
 		m_pMessageLog = new CPanelWidgetEx();
 		m_pMessageLog->GetTree()->setItemDelegate(new CTreeItemDelegate());
 
+		m_pMessageLog->GetTree()->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
+		
 		//m_pMessageLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
 		((QTreeWidgetEx*)m_pMessageLog->GetView())->setHeaderLabels(tr("Time|Message").split("|"));
 
@@ -814,6 +834,11 @@ void CSandMan::CreateView(int iViewMode)
 	}
 }
 
+void CSandMan::CheckForUpdates(bool bManual)
+{
+	COnlineUpdater::Instance()->CheckForUpdates(bManual);
+}
+
 #include "SandManTray.cpp"
 
 void CSandMan::OnExit()
@@ -826,8 +851,7 @@ void CSandMan::closeEvent(QCloseEvent *e)
 {
 	if (!m_bExit)// && !theAPI->IsConnected())
 	{
-		QString OnClose = theConf->GetString("Options/OnClose", "ToTray");
-		if (m_pTrayIcon->isVisible() && OnClose.compare("ToTray", Qt::CaseInsensitive) == 0)
+		if (m_pTrayIcon->isVisible())
 		{
 			StoreState();
 			hide();
@@ -838,7 +862,7 @@ void CSandMan::closeEvent(QCloseEvent *e)
 			e->ignore();
 			return;
 		}
-		else if(OnClose.compare("Prompt", Qt::CaseInsensitive) == 0)
+		else
 		{
 			CExitDialog ExitDialog(tr("Do you want to close Sandboxie Manager?"));
 			if (!ExitDialog.exec())
@@ -1031,6 +1055,8 @@ void CSandMan::OnMessage(const QString& MsgData)
 			}
 		}
 
+		CSupportDialog::CheckSupport(true);
+
 		if (theConf->GetBool("Options/RunInDefaultBox", false) && (QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) == 0) {
 			theAPI->RunStart("DefaultBox", CmdLine, false, WrkDir);
 		}
@@ -1191,19 +1217,12 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 			{
 				theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addDays(1).toTime_t());
 				
-				CheckForUpdates(false);
+				COnlineUpdater::Instance()->CheckForUpdates(false);
 			}
 		}
 	}
 
-	if (!m_pUpdateProgress.isNull() && m_RequestManager != NULL) {
-		if (m_pUpdateProgress->IsCanceled()) {
-			m_pUpdateProgress->Finish(SB_OK);
-			m_pUpdateProgress.clear();
-
-			m_RequestManager->AbortAll();
-		}
-	}
+	COnlineUpdater::Process();
 
 	if (!m_MissingTemplates.isEmpty())
 	{
@@ -1319,8 +1338,10 @@ void CSandMan::OnStatusChanged()
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
 	if (isConnected)
 	{
+		bool bPortable = IsFullyPortable();
+
 		QString SbiePath = theAPI->GetSbiePath();
-		OnLogMessage(tr("Installation Directory: %1").arg(SbiePath));
+		OnLogMessage(tr("%1 Directory: %2").arg(bPortable ? tr("Application") : tr("Installation")).arg(SbiePath));
 		OnLogMessage(tr("Sandboxie-Plus Version: %1 (%2)").arg(GetVersion()).arg(theAPI->GetVersion()));
 		OnLogMessage(tr("Current Config: %1").arg(theAPI->GetIniPath()));
 		OnLogMessage(tr("Data Directory: %1").arg(QString(theConf->GetConfigDir()).replace("/","\\")));
@@ -1328,9 +1349,9 @@ void CSandMan::OnStatusChanged()
 		//statusBar()->showMessage(tr("Driver version: %1").arg(theAPI->GetVersion()));
 
 		//appTitle.append(tr("   -   Driver: v%1").arg(theAPI->GetVersion()));
-		if (IsFullyPortable())
+		if (bPortable)
 		{
-			appTitle.append(tr("   -   Portable"));
+			//appTitle.append(tr("   -   Portable"));
 
 			QString BoxPath = QDir::cleanPath(QApplication::applicationDirPath() + "/../Sandbox").replace("/", "\\");
 
@@ -1378,24 +1399,34 @@ void CSandMan::OnStatusChanged()
 
 		theAPI->WatchIni(true, theConf->GetBool("Options/WatchIni", true));
 
-		if (!theAPI->ReloadCert().IsError()) {
+		if (!theAPI->ReloadCert().IsError())
 			CSettingsWindow::LoadCertificate();
-			UpdateCertState();
-
-			if ((g_CertInfo.expired || g_CertInfo.about_to_expire) && !theConf->GetBool("Options/NoSupportCheck", false)) 
-			{
-				CSettingsWindow* pSettingsWindow = new CSettingsWindow();
-				//connect(pSettingsWindow, SIGNAL(OptionsChanged()), this, SLOT(UpdateSettings()));
-				pSettingsWindow->showTab(CSettingsWindow::eSupport);
-			}
-		}
 		else {
 			g_Certificate.clear();
-			g_CertInfo.State = 0;
 
 			QString CertPath = QCoreApplication::applicationDirPath() + "\\Certificate.dat";
 			if(QFile::exists(CertPath)) // always delete invalid certificates
 				WindowsMoveFile(CertPath.replace("/", "\\"), "");
+		}
+		UpdateCertState();
+
+		uchar UsageFlags = 0;
+		if (theAPI->GetSecureParam("UsageFlags", &UsageFlags, sizeof(UsageFlags))) {
+			if (!g_CertInfo.business) {
+				if ((UsageFlags & (2 | 1)) != 0) {
+					if(g_CertInfo.valid)
+						appTitle.append(tr(" for Personal use"));
+					else
+						appTitle.append(tr("   -   for Non-Commercial use ONLY"));
+				}
+			}
+		}
+		else { // migrate value form ini to registry // todo remove in later builds
+			int BusinessUse = theConf->GetInt("Options/BusinessUse", 2);
+			if (BusinessUse == 1) {
+				UsageFlags = 1;
+				theAPI->SetSecureParam("UsageFlags", &UsageFlags, sizeof(UsageFlags));
+			}
 		}
 		
 		g_FeatureFlags = theAPI->GetFeatureFlags();
@@ -1407,9 +1438,8 @@ void CSandMan::OnStatusChanged()
 			theAPI->CreateBox("DefaultBox");
 		}
 
-		int BusinessUse = theConf->GetInt("Options/BusinessUse", 2);
-		if (g_CertInfo.business && BusinessUse == 0) // if we have a Business cert switch to that use case
-			theConf->SetValue("Options/BusinessUse", 1);
+		if (isVisible())
+			CheckSupport();
 
 		int WizardLevel = theConf->GetBool("Options/WizardLevel", 0);
 		if (WizardLevel == 0) {
@@ -1419,7 +1449,7 @@ void CSandMan::OnStatusChanged()
 	}
 	else
 	{
-		appTitle.append(tr("   -   NOT connected").arg(theAPI->GetVersion()));
+		appTitle.append(tr("   -   NOT connected"));
 
 		m_pBoxView->Clear();
 
@@ -1486,7 +1516,21 @@ void CSandMan::OnMenuHover(QAction* action)
 
 	if (menuBar()->actions().at(2) == action && m_pSandbox)
 		CreateBoxMenu(m_pSandbox);
+}
 
+void CSandMan::CheckSupport()
+{
+	if (CSupportDialog::CheckSupport())
+		return;
+
+	static bool ReminderShown = false;
+	if (!ReminderShown && (g_CertInfo.expired || g_CertInfo.about_to_expire) && !theConf->GetBool("Options/NoSupportCheck", false)) 
+	{
+		ReminderShown = true;
+		CSettingsWindow* pSettingsWindow = new CSettingsWindow(this);
+		connect(pSettingsWindow, SIGNAL(OptionsChanged(bool)), this, SLOT(UpdateSettings(bool)));
+		pSettingsWindow->showTab(CSettingsWindow::eSupport);
+	}
 }
 
 #define HK_PANIC 1
@@ -1528,7 +1572,6 @@ void CSandMan::AddLogMessage(const QString& Message)
 	pItem->setText(0, QDateTime::currentDateTime().toString("hh:mm:ss.zzz"));
 	pItem->setText(1, Message);
 	m_pMessageLog->GetTree()->addTopLevelItem(pItem);
-	m_pMessageLog->GetTree()->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
 
 	m_pMessageLog->GetView()->verticalScrollBar()->setValue(m_pMessageLog->GetView()->verticalScrollBar()->maximum());
 }
@@ -1604,7 +1647,7 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 		m_pPopUpWindow->AddLogMessage(Message, MsgCode, MsgData, ProcessId);
 }
 
-bool CSandMan::CheckCertificate() 
+bool CSandMan::CheckCertificate(QWidget* pWidget) 
 {
 	if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) != 0)
 		return true;
@@ -1614,7 +1657,7 @@ bool CSandMan::CheckCertificate()
 	//	return false;
 	//}
 
-	QMessageBox msgBox(this);
+	QMessageBox msgBox(pWidget);
 	msgBox.setTextFormat(Qt::RichText);
 	msgBox.setIcon(QMessageBox::Information);
 	msgBox.setWindowTitle("Sandboxie-Plus");
@@ -1634,21 +1677,58 @@ void CSandMan::UpdateCertState()
 {
 	g_CertInfo.State = theAPI->GetCertState();
 
-	g_CertInfo.about_to_expire = g_CertInfo.expirers_in_sec && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30);
-	if (g_CertInfo.outdated)
-		OnLogMessage(tr("The supporter certificate is not valid for this build, please get an updated certificate"));
-	// outdated always implicates it is no longer valid
-	else if (g_CertInfo.expired) // may be still valid for the current and older builds
-		OnLogMessage(tr("The supporter certificate has expired%1, please get an updated certificate")
-			.arg(g_CertInfo.valid ? tr(", but it remains valid for the current build") : ""));
-	else if (g_CertInfo.about_to_expire)
-		OnLogMessage(tr("The supporter certificate will expire in %1 days, please get an updated certificate").arg(g_CertInfo.expirers_in_sec / (60 * 60 * 24)));
+#ifdef _DEBUG
+	int CertificateStatus = theConf->GetInt("Debug/CertificateStatus", -1);
+	switch (CertificateStatus)
+	{
+	case 0: // no certificate
+		g_CertInfo.State = 0; 
+		break;
+	case 1: // evaluation/subscription/business cert expired
+		g_CertInfo.valid = 0;
+		g_CertInfo.expired = 1;
+		break;
+	case 2: // version bound cert expired but valid for this build
+		g_CertInfo.expired = 1;
+		break;
+	case 3: // version bound cert expired and not valid for this build
+		g_CertInfo.valid = 0;
+		g_CertInfo.expired = 1;
+		g_CertInfo.outdated = 1;
+		break;
+	}
+#endif
+
+	if (g_CertInfo.evaluation)
+	{
+		if (g_CertInfo.expired)
+			OnLogMessage(tr("The evaluation periode has expired!!!"));
+	}
+	else
+	{
+		g_CertInfo.about_to_expire = g_CertInfo.expirers_in_sec > 0 && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30);
+		if (g_CertInfo.outdated)
+			OnLogMessage(tr("The supporter certificate is not valid for this build, please get an updated certificate"));
+		// outdated always implicates it is no longer valid
+		else if (g_CertInfo.expired) // may be still valid for the current and older builds
+			OnLogMessage(tr("The supporter certificate has expired%1, please get an updated certificate")
+				.arg(g_CertInfo.valid ? tr(", but it remains valid for the current build") : ""));
+		else if (g_CertInfo.about_to_expire)
+			OnLogMessage(tr("The supporter certificate will expire in %1 days, please get an updated certificate").arg(g_CertInfo.expirers_in_sec / (60 * 60 * 24)));
+	}
 
 	emit CertUpdated();
 }
 
 void CSandMan::OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data)
 {
+	if (Data["id"].toInt() == 0) 
+	{
+		QVariantMap Ret;
+		Ret["retval"] = (theAPI->IsStarting(ClientPid) || CSupportDialog::ShowDialog()) ? 1 : 0;
+		theAPI->SendReplyData(RequestId, Ret);
+		return;
+	}
 	m_pPopUpWindow->AddUserPrompt(RequestId, Data, ClientPid);
 }
 
@@ -1860,13 +1940,8 @@ void CSandMan::OnMaintenance()
 
 		Status = StopSbie(true);
 
-		AutorunEnable(false);
-
-		CSettingsWindow__RemoveContextMenu();
-		CSbieUtils::RemoveContextMenu2();
+		CSetupWizard::ShellUninstall();
 	}
-
-
 
 	HandleMaintenance(Status);
 }
@@ -1897,12 +1972,14 @@ void CSandMan::HandleMaintenance(SB_RESULT(void*) Status)
 			}
 			else
 			{
-				OnLogMessage(tr("Maintenance operation Successful"));
+				OnLogMessage(tr("Maintenance operation completed"));
 				if (m_bConnectPending) {
 
 					QTimer::singleShot(1000, [this]() {
 						SB_STATUS Status = this->ConnectSbieImpl();
 						CheckResults(QList<SB_STATUS>() << Status);
+						if (Status.IsError())
+							theAPI->LoadEventLog();
 					});
 				}
 			}
@@ -2381,9 +2458,9 @@ void CSandMan::OpenUrl(const QUrl& url)
 
 	if (scheme == "sbie") {	
 		if (path == "/package")
-			return InstallUpdate();
+			return COnlineUpdater::Instance()->InstallUpdate();
 		if (path == "/cert")
-			return UpdateCert();
+			return COnlineUpdater::Instance()->UpdateCert();
 		return OpenUrl("https://sandboxie-plus.com/sandboxie" + path);
 	}
 
@@ -2432,25 +2509,7 @@ void CSandMan::SetUITheme()
 	if (bDark)
 	{
 		QApplication::setStyle(QStyleFactory::create("Fusion"));
-		QPalette palette;
-		palette.setColor(QPalette::Window, QColor(53, 53, 53));
-		palette.setColor(QPalette::WindowText, Qt::white);
-		palette.setColor(QPalette::Base, QColor(25, 25, 25));
-		palette.setColor(QPalette::AlternateBase, QColor(53, 53, 53));
-		palette.setColor(QPalette::ToolTipBase, Qt::white);
-		palette.setColor(QPalette::ToolTipText, Qt::white);
-		palette.setColor(QPalette::Text, Qt::white);
-		palette.setColor(QPalette::Button, QColor(53, 53, 53));
-		palette.setColor(QPalette::ButtonText, Qt::white);
-		palette.setColor(QPalette::BrightText, Qt::red);
-		palette.setColor(QPalette::Link, QColor(218, 130, 42));
-		palette.setColor(QPalette::Highlight, QColor(42, 130, 218));
-		palette.setColor(QPalette::HighlightedText, Qt::black);
-		palette.setColor(QPalette::Disabled, QPalette::WindowText, Qt::darkGray);
-		palette.setColor(QPalette::Disabled, QPalette::Text, Qt::darkGray);
-		palette.setColor(QPalette::Disabled, QPalette::Light, Qt::black);
-		palette.setColor(QPalette::Disabled, QPalette::ButtonText, Qt::darkGray);
-		QApplication::setPalette(palette);
+		QApplication::setPalette(m_DarkPalett);
 	}
 	else
 	{
@@ -2617,7 +2676,5 @@ QT_TRANSLATE_NOOP("CSandBox", "Merging folders: %1 &gt;&gt; %2"),
 QT_TRANSLATE_NOOP("CSandBox", "Finishing Snapshot Merge..."),
 };
 
-
-#include "SandManUpdate.cpp"
 
 #include "SbieFindWnd.cpp"

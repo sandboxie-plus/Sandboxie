@@ -63,8 +63,8 @@ void CNewBoxWindow::OnBoxTypChanged()
 
 	ui.lblBoxInfo->setText(theGUI->GetBoxDescription(BoxType));
 
-	if(BoxType != CSandBoxPlus::eDefault && BoxType != CSandBoxPlus::eHardened)
-		theGUI->CheckCertificate();
+	if(BoxType != CSandBoxPlus::eDefault)
+		theGUI->CheckCertificate(this);
 }
 
 void CNewBoxWindow::CreateBox()
@@ -88,13 +88,15 @@ void CNewBoxWindow::CreateBox()
 			case CSandBoxPlus::eHardenedPlus:
 			case CSandBoxPlus::eHardened:
 				//pBox->SetBool("NoSecurityIsolation", false);
-				pBox->SetBool("DropAdminRights", true);
+				pBox->SetBool("UseSecurityMode", true);
+				//pBox->SetBool("DropAdminRights", true);
 				//pBox->SetBool("MsiInstallerExemptions", false);
 				pBox->SetBool("UsePrivacyMode", BoxType == CSandBoxPlus::eHardenedPlus);
 				break;
 			case CSandBoxPlus::eDefaultPlus:
 			case CSandBoxPlus::eDefault:
 				//pBox->SetBool("NoSecurityIsolation", false);
+				pBox->SetBool("UseSecurityMode", false);
 				//pBox->SetBool("DropAdminRights", false);
 				//pBox->SetBool("MsiInstallerExemptions", false);
 				//pBox->SetBool("RunServicesAsSystem", false);
@@ -102,10 +104,12 @@ void CNewBoxWindow::CreateBox()
 				break;
 			case CSandBoxPlus::eAppBoxPlus:
 			case CSandBoxPlus::eAppBox:
+				//pBox->SetBool("UseSecurityMode", false);
 				pBox->SetBool("NoSecurityIsolation", true);
 				//pBox->SetBool("RunServicesAsSystem", true);
 				pBox->SetBool("UsePrivacyMode", BoxType == CSandBoxPlus::eAppBoxPlus);
 				//pBox->InsertText("Template", "NoUACProxy"); // proxy is always needed for exes in the box
+				pBox->InsertText("Template", "RpcPortBindingsExt");
 				break;
 		}
 

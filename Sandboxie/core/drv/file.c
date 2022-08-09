@@ -146,6 +146,8 @@ static NTSTATUS File_Api_SetShortName2(
        const WCHAR *File_Mup = L"\\Device\\Mup";
        const ULONG  File_MupLen = 11;
 
+       const WCHAR *File_Device = L"\\Device\\";
+
        const WCHAR *File_NamedPipe = L"\\Device\\NamedPipe";
        const ULONG  File_NamedPipeLen = 17;
 
@@ -664,7 +666,28 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         L"\\device\\*pipe\\srvsvc",
         L"\\device\\*pipe\\wkssvc",
         L"\\device\\*pipe\\samr",
-        L"\\device\\*pipe\\netlogon"
+        L"\\device\\*pipe\\netlogon",
+        NULL
+    };
+    static const WCHAR* approved_devices[] = {
+        L"\\Device\\NamedPipe\\*",
+        L"\\Device\\CNG",
+        L"\\Device\\ConDrv\\*",
+        L"\\Device\\DeviceApi*",
+        L"\\Device\\DfsClient",
+        L"\\Device\\KsecDD",
+        L"\\Device\\MountPointManager",
+        L"\\Device\\Mup\\*",
+        L"\\Device\\Ndis",
+        L"\\Device\\PcwDrv",
+        NULL
+    };
+    static const WCHAR* drive_devices[] = {
+        L"\\Device\\Floppy*\\*",
+        L"\\Device\\CdRom*\\*",
+        L"\\Device\\HarddiskVolume*\\*",
+        L"\\Device\\Harddisk*\\*",
+        NULL
     };
 
     BOOLEAN ok;
@@ -793,6 +816,47 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         Log_MsgP1(MSG_INIT_PATHS, _WritePath, proc->pid);
         return FALSE;
     }
+
+#ifdef USE_MATCH_PATH_EX
+
+    //
+    // setup access restrictions to \Device\
+    //
+
+    if (proc->restrict_devices) {
+
+        //
+        // many 3rd party drivers are a great attack vector to gain execution in the kernel, 
+        // so we clsoe all typical endpoints except a selected few.
+        //
+
+        ok = Process_AddPath(proc, closed_file_paths, NULL, FALSE, File_Device, TRUE);
+
+        if (ok) {
+            for (i = 0; approved_devices[i] && ok; ++i) {
+                ok = Process_AddPath(
+                    proc, normal_file_paths, NULL, FALSE, approved_devices[i], FALSE);
+            }
+        }
+
+        if (ok) {
+            for (i = 0; drive_devices[i] && ok; ++i) {
+                if (proc->use_privacy_mode) { // in privacy mode the default for drives is not "normal" but "write"
+                    ok = Process_AddPath(
+                        proc, write_file_paths, NULL, FALSE, drive_devices[i], FALSE);
+                } else {
+                    ok = Process_AddPath(
+                        proc, normal_file_paths, NULL, FALSE, drive_devices[i], FALSE);
+                }
+            }
+        }
+
+        if (! ok) {
+            Log_MsgP1(MSG_INIT_PATHS, Driver_Empty, proc->pid);
+            return FALSE;
+        }
+    }
+#endif
 
     //
     // if this is a Sandboxie program (like SandboxieRpcSs), don't allow

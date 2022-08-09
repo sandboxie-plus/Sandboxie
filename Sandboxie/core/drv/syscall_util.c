@@ -37,6 +37,8 @@ _FX BOOLEAN Syscall_LoadHookMap(const WCHAR* setting_name, LIST *list)
     const WCHAR *value;
     PATTERN* pat;
 
+    const WCHAR* _SysCallPresets = L"SysCallPresets";
+
     List_Init(list);
 
     Conf_AdjustUseCount(TRUE);
@@ -47,7 +49,7 @@ _FX BOOLEAN Syscall_LoadHookMap(const WCHAR* setting_name, LIST *list)
         // get next configuration setting for this path list
         //
 
-        value = Conf_Get(NULL, setting_name, index);
+        value = Conf_Get(_SysCallPresets, setting_name, index);
         if (! value)
             break;
 
@@ -72,15 +74,21 @@ _FX BOOLEAN Syscall_LoadHookMap(const WCHAR* setting_name, LIST *list)
 //---------------------------------------------------------------------------
 
 
-_FX int Syscall_HookMapMatch(const WCHAR *name, ULONG name_len, LIST *list)
+_FX int Syscall_HookMapMatch(const UCHAR *name, ULONG name_len, LIST *list)
 {
     PATTERN* pat;
     int match_len = 0;
 
+    WCHAR wname[68];
+    ULONG i;
+    for (i = 0; i < max(name_len, 64); i++)
+        wname[i] = name[i];
+    wname[i] = 0;
+
     pat = List_Head(list);
     while (pat) {
 
-        int cur_len = Pattern_MatchX(pat, name, name_len);
+        int cur_len = Pattern_MatchX(pat, wname, name_len);
         if (cur_len > match_len) {
             match_len = cur_len;
         }
@@ -102,14 +110,8 @@ _FX BOOLEAN Syscall_TestHookMap(const UCHAR* name, ULONG name_len, LIST* enabled
     if(disabled_hooks->count == 0 && enabled_hooks->count == 0)
         return default_action;
 
-    WCHAR wname[68];
-    ULONG i;
-    for (i = 0; i < max(name_len, 64); i++)
-        wname[i] = name[i];
-    wname[i] = 0;
-
-    int disabe_match = Syscall_HookMapMatch(wname, name_len, disabled_hooks);
-    int enable_match = Syscall_HookMapMatch(wname, name_len, enabled_hooks);
+    int disabe_match = Syscall_HookMapMatch(name, name_len, disabled_hooks);
+    int enable_match = Syscall_HookMapMatch(name, name_len, enabled_hooks);
     if (disabe_match != 0 && disabe_match >= enable_match)
         return FALSE;
     if (enable_match != 0)

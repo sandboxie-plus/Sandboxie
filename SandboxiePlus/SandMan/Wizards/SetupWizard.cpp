@@ -128,8 +128,6 @@ CIntroPage::CIntroPage(QWidget *parent)
     pSpace->setMinimumHeight(16);
     layout->addWidget(pSpace);
 
-    int BusinessUse = theConf->GetInt("Options/BusinessUse", 2);
-
     m_pLabel = new QLabel(tr("Select how you would like to use Sandboxie-Plus"));
     layout->addWidget(m_pLabel);
 
@@ -146,13 +144,22 @@ CIntroPage::CIntroPage(QWidget *parent)
     QLabel* pNote = new QLabel(tr("Note: this option is persistent"));
     layout->addWidget(pNote);
 
-
+    uchar BusinessUse = 2;
+    if (!g_Certificate.isEmpty())
+        BusinessUse = g_CertInfo.business ? 1 : 0;
+    else {
+        uchar UsageFlags = 0;
+        if (theAPI->GetSecureParam("UsageFlags", &UsageFlags, sizeof(UsageFlags)))
+            BusinessUse = (UsageFlags & 1) != 0 ? 1 : 0;
+    }
     if (BusinessUse != 2) {
-        m_pLabel->setEnabled(false);
         m_pPersonal->setChecked(BusinessUse == 0);
-        m_pPersonal->setEnabled(false);
         m_pBusiness->setChecked(BusinessUse == 1);
-        m_pBusiness->setEnabled(false);
+        if ((QApplication::keyboardModifiers() & Qt::ControlModifier) == 0) {
+            m_pLabel->setEnabled(false);
+            m_pPersonal->setEnabled(false);
+            m_pBusiness->setEnabled(false);
+        }
         pNote->setEnabled(false);
     }
 
@@ -210,6 +217,10 @@ CCertificatePage::CCertificatePage(QWidget *parent)
     registerField("useCertificate", m_pCertificate, "plainText");
     
     m_pEvaluate = new QCheckBox(tr("Start evaluation without a certificate for a limited period of time."));
+    if (g_CertInfo.evaluation) {
+        m_pEvaluate->setEnabled(false);
+        m_pEvaluate->setChecked(true);
+    }
     layout->addWidget(m_pEvaluate);
     connect(m_pEvaluate, SIGNAL(toggled(bool)), this, SIGNAL(completeChanged()));
     registerField("isEvaluate", m_pEvaluate);
@@ -223,9 +234,14 @@ void CCertificatePage::initializePage()
 {
     m_pCertificate->setPlainText(g_Certificate);
 
+    uchar UsageFlags = 0;
+    theAPI->GetSecureParam("UsageFlags", &UsageFlags, sizeof(UsageFlags));
+
     if (field("useBusiness").toBool())
     {
-        theConf->SetValue("Options/BusinessUse", 1);
+        UsageFlags |= 1;
+        UsageFlags &= ~2;
+        theAPI->SetSecureParam("UsageFlags", &UsageFlags, sizeof(UsageFlags));
 
         m_pTopLabel->setText(
             tr("To use <b>Sandboxie-Plus</b> in a business setting, an appropriate <a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">support certificate</a> for business use is required. "
@@ -236,7 +252,10 @@ void CCertificatePage::initializePage()
     }
     else 
     {
-        theConf->SetValue("Options/BusinessUse", 0);
+        if((UsageFlags & 1) != 0)
+            UsageFlags |= 2;
+        UsageFlags &= ~1;
+        theAPI->SetSecureParam("UsageFlags", &UsageFlags, sizeof(UsageFlags));
 
         m_pTopLabel->setText(
             tr("<b>Sandboxie-Plus</b> provides additional features and box types exclusively to <u>project supporters</u>. "

@@ -162,8 +162,8 @@
     <ClCompile Include="SbieFindWnd.cpp">
       <Filter>SandMan</Filter>
     </ClCompile>
-    <ClCompile Include="SandManUpdate.cpp">
-      <Filter>SandMan</Filter>
+    <ClCompile Include="Windows\SupportDialog.cpp">
+      <Filter>Windows</Filter>
     </ClCompile>
     <ClCompile Include="SandManRecovery.cpp">
       <Filter>SandMan</Filter>
@@ -173,6 +173,9 @@
     </ClCompile>
     <ClCompile Include="Views\FileView.cpp">
       <Filter>Views</Filter>
+    </ClCompile>
+    <ClCompile Include="OnlineUpdater.cpp">
+      <Filter>SandMan</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -259,8 +262,14 @@
     <QtMoc Include="BoxMonitor.h">
       <Filter>SandMan</Filter>
     </QtMoc>
+    <QtMoc Include="Windows\SupportDialog.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
     <QtMoc Include="Views\FileView.h">
       <Filter>Views</Filter>
+    </QtMoc>
+    <QtMoc Include="OnlineUpdater.h">
+      <Filter>SandMan</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

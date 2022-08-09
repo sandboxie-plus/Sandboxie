@@ -69,14 +69,11 @@ public:
 	QIcon				MakeIconBusy(const QIcon& Icon, int Index = 0);
 	QString				GetBoxDescription(int boxType);
 	
-	bool				CheckCertificate();
+	bool				CheckCertificate(QWidget* pWidget);
 
 	void				UpdateTheme();
 
-	void				InstallUpdate();
-
 	void				UpdateCertState();
-	void				UpdateCert();
 
 signals:
 	void				CertUpdated();
@@ -92,6 +89,8 @@ protected:
 	QIcon				GetTrayIcon(bool isConnected = true);
 	QString				GetTrayText(bool isConnected = true);
 
+	void				CheckSupport();
+
 	void				closeEvent(QCloseEvent* e);
 
 	void				dragEnterEvent(QDragEnterEvent* e);
@@ -105,9 +104,6 @@ protected:
 	CSbieTemplates*		m_SbieTemplates;
 	
 	QMap<CSbieProgress*, CSbieProgressPtr> m_pAsyncProgress;
-
-	CNetworkAccessManager*	m_RequestManager;
-	CSbieProgressPtr	m_pUpdateProgress;
 
 	QStringList			m_MissingTemplates;
 
@@ -165,9 +161,6 @@ public slots:
 
 	void				OnBoxClosed(const CSandBoxPtr& pBox);
 
-	void				CheckForUpdates(bool bManual = true);
-	void				DownloadUpdates(const QString& DownloadUrl, bool bManual);
-
 	void				OpenUrl(const QString& url) { OpenUrl(QUrl(url)); }
 	void				OpenUrl(const QUrl& url);
 
@@ -175,6 +168,8 @@ public slots:
 
 	void				OnBoxMenu(const QPoint &);
 	void				OnBoxDblClick(QTreeWidgetItem*);
+
+	void				UpdateLabel();
 
 private slots:
 
@@ -204,6 +199,8 @@ private slots:
 	void				OnReloadIni();
 	void				OnMonitoring();
 
+	void				CheckForUpdates(bool bManual = true);
+
 	void				OnExit();
 	void				OnHelp();
 	void				OnAbout();
@@ -211,18 +208,10 @@ private slots:
 	void				OnShowHide();
 	void				OnSysTray(QSystemTrayIcon::ActivationReason Reason);
 
-	void				OnUpdateCheck();
-	void				OnUpdateProgress(qint64 bytes, qint64 bytesTotal);
-	void				OnUpdateDownload();
-
-	void				OnCertCheck();
-
 	void				SetUITheme();
 
 	void				AddLogMessage(const QString& Message);
 	void				AddFileRecovered(const QString& BoxName, const QString& FilePath);
-
-	void				UpdateLabel();
 
 private:
 
@@ -352,6 +341,7 @@ private:
 	QString				m_DefaultStyle;
 	QPalette			m_DefaultPalett;
 	double				m_DefaultFontSize;
+	QPalette			m_DarkPalett;
 
 	void				LoadLanguage();
 	void				LoadLanguage(const QString& Lang, const QString& Module, int Index);

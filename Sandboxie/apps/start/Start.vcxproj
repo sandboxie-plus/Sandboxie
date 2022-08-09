@@ -140,6 +140,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="aboutdlg.cpp" />
     <ClCompile Include="boxdlg.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">Use</PrecompiledHeader>

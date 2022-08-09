@@ -252,7 +252,7 @@ void COptionsWindow::SaveAdvanced()
 void COptionsWindow::OnIsolationChanged()
 {
 	if (ui.chkPrivacy->isChecked() || ui.chkUseSpecificity->isChecked())
-		theGUI->CheckCertificate();
+		theGUI->CheckCertificate(this);
 
 	UpdateBoxIsolation();
 
@@ -275,7 +275,7 @@ void COptionsWindow::UpdateBoxIsolation()
 	ui.chkRawDiskRead->setEnabled(!ui.chkNoSecurityIsolation->isChecked()); //  without isolation only user mode
 	ui.chkRawDiskNotify->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
-	ui.chkDropRights->setEnabled(!ui.chkNoSecurityIsolation->isChecked() && !theAPI->IsRunningAsAdmin());
+	UpdateBoxSecurity();
 
 	ui.chkBlockNetShare->setEnabled(!ui.chkNoSecurityFiltering->isChecked());
 
@@ -284,6 +284,19 @@ void COptionsWindow::UpdateBoxIsolation()
 	ui.chkPrintToFile->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityFiltering->isChecked());
 
 	ui.chkCloseClipBoard->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkVmRead->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+
+
+	if (ui.chkNoSecurityIsolation->isChecked()) {
+		ui.chkCloseForBox->setEnabled(false);
+		ui.chkCloseForBox->setChecked(false);
+		ui.chkNoOpenForBox->setEnabled(false);
+		ui.chkNoOpenForBox->setChecked(false);
+	}
+	else {
+		ui.chkCloseForBox->setEnabled(true);
+		ui.chkNoOpenForBox->setEnabled(true);
+	}
 }
 
 void COptionsWindow::OnSysSvcChanged()
@@ -518,7 +531,7 @@ void COptionsWindow::CreateDebug()
 
 			QString Description = ValueDescr.size() >= 3 ? ValueDescr[2] : ValueDescr[0];
 			int Column = 0; // use - to add up to 10 indents
-			for (; Description[0] == "-" && Column < 10; Column++) Description.remove(0, 1);
+			for (; Description[0] == '-' && Column < 10; Column++) Description.remove(0, 1);
 
 			SDbgOpt DbgOption = { ValueDescr[0], ValueDescr.size() >= 2 ? ValueDescr[1] : "y" , false};
 

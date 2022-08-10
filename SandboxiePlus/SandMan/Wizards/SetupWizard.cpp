@@ -286,7 +286,7 @@ bool CCertificatePage::isComplete() const
 
 bool CCertificatePage::validatePage()
 {
-    QByteArray Certificate = m_pCertificate->toPlainText().toLatin1();
+    QByteArray Certificate = m_pCertificate->toPlainText().toUtf8();
     if (!m_pEvaluate->isChecked() && !Certificate.isEmpty() && g_Certificate != Certificate) {
 		return CSettingsWindow::ApplyCertificate(Certificate, this);
     }

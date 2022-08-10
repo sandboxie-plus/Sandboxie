@@ -347,7 +347,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.16 / 5.55.16] - 2022-04-01
 
 ### Added
-- FIXED SECURITY ISSUE: memory of unsandboxed processes can no longer be read, exceptions are possible
+- FIXED SECURITY ISSUE ID-20: memory of unsandboxed processes can no longer be read, exceptions are possible
 -- you can use ReadIpcPath=$:program.exe to allow read access to unsandboxed processes or processes in other boxes
 - Added "Monitor Mode" to the resource access trace, similar to the old monitor view of SbieCtrl.exe
 
@@ -366,7 +366,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed memory corruption introduced in the last build causing Chrome to crash sometimes
-- FIXED SECURITY ISSUE: NtCreateSymbolicLinkObject was not filtered (thanks Diversenok)
+- FIXED SECURITY ISSUE ID-18: NtCreateSymbolicLinkObject was not filtered (thanks Diversenok)
 
 
 
@@ -392,14 +392,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue enumerating registry keys in privacy mode
 - fixed settings issue introduced in 1.0.13 [#1684](https://github.com/sandboxie-plus/Sandboxie/issues/1684)
 - fixed crash issue when parsing firewall port options
-- FIXED SECURITY ISSUE: in certain cases a sandboxed process could obtain a handle on an unsandboxed thread with write privileges [#1714](https://github.com/sandboxie-plus/Sandboxie/issues/1714)
+- FIXED SECURITY ISSUE ID-19: in certain cases a sandboxed process could obtain a handle on an unsandboxed thread with write privileges [#1714](https://github.com/sandboxie-plus/Sandboxie/issues/1714)
 
 
 
 ## [1.0.13 / 5.55.13] - 2022-03-08
 
 ### Fixed
-- FIXED SECURITY ISSUE: Hard link creation was not properly filtered (thanks Diversenok)
+- FIXED SECURITY ISSUE ID-17: Hard link creation was not properly filtered (thanks Diversenok)
 - fixed issue with checking the certificate entry.
 
 
@@ -502,7 +502,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed BreakoutProcess not working with "EnableObjectFiltering=y"
-- FIXED SECURITY ISSUE: when starting *COMSRV* unboxed, the returned process handle had full access
+- FIXED SECURITY ISSUE ID-16: when starting *COMSRV* unboxed, the returned process handle had full access
 - fixed issue with progress dialog [#1562](https://github.com/sandboxie-plus/Sandboxie/issues/1562)
 - fixed issue with handling directory junctions in Sandboxie [#1396](https://github.com/sandboxie-plus/Sandboxie/issues/1396)
 - fixed a handle leak in File_NtCloseImpl
@@ -1389,7 +1389,7 @@ Fixed issue with Windows 7
 ### Fixed
 - fixed issues with some installers introduced in 5.48.0 [#595](https://github.com/sandboxie-plus/Sandboxie/issues/595)
 - fixed "add user to sandbox" in the Plus UI [#597](https://github.com/sandboxie-plus/Sandboxie/issues/597)
-- FIXED SECURITY ISSUE: the HostInjectDll mechanism allowed for local privilege escalation (thanks hg421)
+- FIXED SECURITY ISSUE ID-15: the HostInjectDll mechanism allowed for local privilege escalation (thanks hg421)
 - Classic UI no longer allows to create a sandbox with an invalid or reserved device name [#649](https://github.com/sandboxie-plus/Sandboxie/issues/649)
 
 
@@ -1437,15 +1437,15 @@ Fixed issue with Windows 7
 - the LogApi dll is now using Sbie's tracing facility to log events instead of its own pipe server
 
 ### Fixed
-- FIXED SECURITY ISSUE: elevated sandboxed processes could access volumes/disks for reading (thanks hg421)
+- FIXED SECURITY ISSUE ID-11: elevated sandboxed processes could access volumes/disks for reading (thanks hg421)
 -- this protection option can be disabled by using "AllowRawDiskRead=y"
 - fixed crash issue around SetCurrentProcessExplicitAppUserModelID observed with GoogleUpdate.exe
 - fixed issue with Resource Monitor sort by timestamp
 - fixed invalid Opera bookmarks path (by isaak654) [#542](https://github.com/sandboxie-plus/Sandboxie/pull/542)
-- FIXED SECURITY ISSUE: a race condition in the driver allowed to obtain an elevated rights handle to a process (thanks typpos) [#549](https://github.com/sandboxie-plus/Sandboxie/pull/549)
-- FIXED SECURITY ISSUE: "\RPC Control\samss lpc" is now filtered by the driver (thanks hg421) [#553](https://github.com/sandboxie-plus/Sandboxie/issues/553)
+- FIXED SECURITY ISSUE ID-12: a race condition in the driver allowed to obtain an elevated rights handle to a process (thanks typpos) [#549](https://github.com/sandboxie-plus/Sandboxie/pull/549)
+- FIXED SECURITY ISSUE ID-13: "\RPC Control\samss lpc" is now filtered by the driver (thanks hg421) [#553](https://github.com/sandboxie-plus/Sandboxie/issues/553)
 -- this allowed elevated processes to change passwords, delete users and alike; to disable filtering use "OpenSamEndpoint=y"
-- FIXED SECURITY ISSUE: "\Device\DeviceApi\CMApi" is now filtered by the driver (thanks hg421) [#552](https://github.com/sandboxie-plus/Sandboxie/issues/552)
+- FIXED SECURITY ISSUE ID-14: "\Device\DeviceApi\CMApi" is now filtered by the driver (thanks hg421) [#552](https://github.com/sandboxie-plus/Sandboxie/issues/552)
 -- this allowed elevated processes to change hardware configuration; to disable filtering use "OpenDevCMApi=y"
 
 
@@ -1565,7 +1565,7 @@ Fixed issue with Windows 7
 - refactored some IPC code in the driver
 
 ### Fixed
-- FIXED SECURITY ISSUE: the registry isolation could be bypassed, present since Windows 10 Creators Update
+- FIXED SECURITY ISSUE ID-10: the registry isolation could be bypassed, present since Windows 10 Creators Update
 - fixed creation time not always being properly updated in the SandMan UI
 
 
@@ -1596,7 +1596,7 @@ Fixed issue with Windows 7
 ### Fixed
 - fixed a crash issue in SbieSvc.exe introduced with the last build
 - fixed issue with SandMan UI update check
-- FIXED SECURITY ISSUE: a Sandboxed process could start sandboxed as system even with DropAdminRights in place
+- FIXED SECURITY ISSUE ID-9: a Sandboxed process could start sandboxed as system even with DropAdminRights in place
 
 ### Removed
 - removed "ProtectRpcSs=y" due to incompatibility with new isolation defaults
@@ -1606,12 +1606,12 @@ Fixed issue with Windows 7
 ## [0.5.4 / 5.46.0] - 2021-01-06
 
 ### Added
-- FIXED SECURITY ISSUE: Sandboxie now strips particularly problematic privileges from sandboxed system tokens
+- FIXED SECURITY ISSUE ID-4: Sandboxie now strips particularly problematic privileges from sandboxed system tokens
 -- with those a process could attempt to bypass the sandbox isolation (thanks Diversenok)
 -- old legacy behaviour can be enabled with "StripSystemPrivileges=n" (absolutely NOT Recommended) 
 - added new isolation options "ClosePrintSpooler=y" and "OpenSmartCard=n" 
 -- those resources are open by default, but for a hardened box it is desired to close them
-- FIXED SECURITY ISSUE: added print spooler filter to prevent printers from being set up outside the sandbox
+- FIXED SECURITY ISSUE ID-5: added print spooler filter to prevent printers from being set up outside the sandbox
 -- the filter can be disabled with "OpenPrintSpooler=y"
 - added overwrite prompt when recovering an already existing file
 - added "StartProgram=", "StartService=" and "AutoExec=" options to the SandMan UI
@@ -1627,10 +1627,10 @@ Fixed issue with Windows 7
 - improved Resource Monitor status strings
 
 ### Fixed
-- FIXED SECURITY ISSUE: processes could spawn processes outside the sandbox (thanks Diversenok)
-- FIXED SECURITY ISSUE: bug in the dynamic IPC port handling allowed to bypass IPC isolation
+- FIXED SECURITY ISSUE ID-6: processes could spawn processes outside the sandbox (thanks Diversenok)
+- FIXED SECURITY ISSUE ID-7: bug in the dynamic IPC port handling allowed to bypass IPC isolation
 - fixed issue with IPC tracing
-- FIXED SECURITY ISSUE: CVE-2019-13502 "\RPC Control\LSARPC_ENDPOINT" is now filtered by the driver (thanks Diversenok)
+- FIXED SECURITY ISSUE ID-8: CVE-2019-13502 "\RPC Control\LSARPC_ENDPOINT" is now filtered by the driver (thanks Diversenok)
 -- this allowed some system options to be changed, to disable filtering use "OpenLsaEndpoint=y"
 - fixed hooking issues SBIE2303 with Chrome, Edge and possibly others [#68](https://github.com/sandboxie-plus/Sandboxie/issues/68) [#166](https://github.com/sandboxie-plus/Sandboxie/issues/166)
 - fixed failed check for running processes when performing snapshot operations
@@ -1997,9 +1997,9 @@ Fixed issue with Windows 7
 
 ### Fixed
 - added missing PreferExternalManifest initialization to portable mode
-- FIXED SECURITY ISSUE: fixed permission issues with sandboxed system processes
+- FIXED SECURITY ISSUE ID-2: fixed permission issues with sandboxed system processes
 -- Note: you can use "ExposeBoxedSystem=y" for the old behaviour (debug option)
-- FIXED SECURITY ISSUE: fixed missing SCM access check for sandboxed services (thanks Diversenok)
+- FIXED SECURITY ISSUE ID-3: fixed missing SCM access check for sandboxed services (thanks Diversenok)
 -- Note: to disable the access check use "UnrestrictedSCM=y" (debug option)
 - fixed missing initialization in service server that caused sandboxed programs to crash when querying service status
 - fixed many bugs that caused the SbieDrv.sys to BSOD when running with Driver Verifier enabled [#57](https://github.com/sandboxie-plus/Sandboxie/issues/57)
@@ -2058,7 +2058,7 @@ Fixed issue with Windows 7
 - Sbie driver now first checks the home path for the configuration file Sandboxie.ini before checking SystemRoot
 
 ### Fixed
-- FIXED SECURITY ISSUE: sandboxed processes could obtain a write handle on non sandboxed processes (thanks Diversenok)
+- FIXED SECURITY ISSUE ID-1: sandboxed processes could obtain a write handle on non sandboxed processes (thanks Diversenok)
 -- this allowed to inject code in non sandboxed processes
 - fixed issue boxed services not starting when the path contained a space
 - NtQueryInformationProcess now returns the proper sandboxed path for sandboxed processes

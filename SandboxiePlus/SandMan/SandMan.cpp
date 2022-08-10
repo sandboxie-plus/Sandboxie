@@ -28,6 +28,8 @@
 #include "Windows/SupportDialog.h"
 #include "Views/FileView.h"
 #include "OnlineUpdater.h"
+#include "../MiscHelpers/Common/NeonEffect.h"
+#include <QVariantAnimation>
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -111,19 +113,26 @@ CSandMan::CSandMan(QWidget *parent)
 	m_DefaultPalett = QApplication::palette();
 	m_DefaultFontSize = QApplication::font().pointSizeF();
 
+	m_DarkPalett.setColor(QPalette::Light, QColor(96, 96, 96));
+	m_DarkPalett.setColor(QPalette::Midlight, QColor(64, 64, 64));
+	m_DarkPalett.setColor(QPalette::Mid, QColor(48, 48, 48));
+	m_DarkPalett.setColor(QPalette::Dark, QColor(53, 53, 53));
+	m_DarkPalett.setColor(QPalette::Shadow, QColor(25, 25, 25));
 	m_DarkPalett.setColor(QPalette::Window, QColor(53, 53, 53));
 	m_DarkPalett.setColor(QPalette::WindowText, Qt::white);
 	m_DarkPalett.setColor(QPalette::Base, QColor(25, 25, 25));
 	m_DarkPalett.setColor(QPalette::AlternateBase, QColor(53, 53, 53));
-	m_DarkPalett.setColor(QPalette::ToolTipBase, Qt::white);
+	m_DarkPalett.setColor(QPalette::ToolTipBase, Qt::lightGray);
 	m_DarkPalett.setColor(QPalette::ToolTipText, Qt::white);
 	m_DarkPalett.setColor(QPalette::Text, Qt::white);
 	m_DarkPalett.setColor(QPalette::Button, QColor(53, 53, 53));
 	m_DarkPalett.setColor(QPalette::ButtonText, Qt::white);
 	m_DarkPalett.setColor(QPalette::BrightText, Qt::red);
 	m_DarkPalett.setColor(QPalette::Link, QColor(218, 130, 42));
+	m_DarkPalett.setColor(QPalette::LinkVisited, QColor(218, 130, 42));
 	m_DarkPalett.setColor(QPalette::Highlight, QColor(42, 130, 218));
 	m_DarkPalett.setColor(QPalette::HighlightedText, Qt::black);
+	m_DarkPalett.setColor(QPalette::PlaceholderText, QColor(96, 96, 96));
 	m_DarkPalett.setColor(QPalette::Disabled, QPalette::WindowText, Qt::darkGray);
 	m_DarkPalett.setColor(QPalette::Disabled, QPalette::Text, Qt::darkGray);
 	m_DarkPalett.setColor(QPalette::Disabled, QPalette::Light, Qt::black);
@@ -156,10 +165,30 @@ CSandMan::CSandMan(QWidget *parent)
 	m_bStopPending = false;
 
 	m_pMainWidget = new QWidget(this);
+
+	m_pMenuBar = menuBar();
+	connect(m_pMenuBar, SIGNAL(hovered(QAction*)), this, SLOT(OnMenuHover(QAction*)));
+
+	QWidget* pMenuWidget = new QWidget(this);
+	m_pMenuLayout = new QHBoxLayout(pMenuWidget);
+	m_pMenuLayout->setContentsMargins(0, 0, 0, 0);
+	m_pMenuLayout->addWidget(m_pMenuBar);
+	//m_pMenuLayout->addWidget(m_pLabel);
+	//m_pMenuLayout->addStretch(10);
+	setMenuWidget(pMenuWidget);
+
 	CreateUI();
 	setCentralWidget(m_pMainWidget);
 
-	SetUITheme();
+	m_pDisabledForce = new QLabel();
+	m_pDisabledRecovery = new QLabel();
+	m_pDisabledMessages = new QLabel();
+	statusBar()->addPermanentWidget(m_pDisabledForce);
+	statusBar()->addPermanentWidget(m_pDisabledRecovery);
+	statusBar()->addPermanentWidget(m_pDisabledMessages);
+	OnDisablePopUp(); // update statusbar
+
+
 
 	m_pHotkeyManager = new UGlobalHotkeys(this);
 	connect(m_pHotkeyManager, SIGNAL(activated(size_t)), SLOT(OnHotKey(size_t)));
@@ -283,7 +312,7 @@ QIcon CSandMan::GetIcon(const QString& Name, bool bAction)
 
 void CSandMan::CreateUI()
 {
-	connect(menuBar(), SIGNAL(hovered(QAction*)), this, SLOT(OnMenuHover(QAction*)));
+	SetUITheme();
 
 	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
 
@@ -298,6 +327,11 @@ void CSandMan::CreateUI()
 
 	if(iViewMode == 1)
 		CreateToolBar();
+	else {
+		m_pSeparator = NULL;
+		CreateLabel();
+		m_pMenuLayout->addWidget(m_pLabel);
+	}
 
 	CreateView(iViewMode);
 
@@ -315,6 +349,23 @@ void CSandMan::CreateUI()
 	if(m_pShowAllSessions) m_pShowAllSessions->setChecked(theConf->GetBool("Options/ShowAllSessions"));
 
 	m_pWndTopMost->setChecked(theConf->GetBool("Options/AlwaysOnTop", false));
+
+
+	// pizza background
+	int iUsePizza = theConf->GetInt("Options/UseBackground", 2);
+	if (iUsePizza == 2)
+		iUsePizza = theConf->GetInt("Options/ViewMode", 1) == 2 ? 1 : 0;
+	if (iUsePizza) 
+	{
+		QPalette pizzaPalete = GetBoxView()->GetTree()->palette(); // QPalette pizzaPalete = QApplication::palette();
+		SetPaleteTexture(pizzaPalete, QPalette::Base, QImage(":/Assets/background.png"));
+		GetBoxView()->GetTree()->setPalette(pizzaPalete); // QApplication::setPalette(pizzaPalete);
+		GetFileView()->GetTree()->setPalette(pizzaPalete); // QApplication::setPalette(pizzaPalete);
+	}
+	else {
+		GetBoxView()->GetTree()->setPalette(QApplication::palette());
+		GetFileView()->GetTree()->setPalette(QApplication::palette());
+	}
 }
 
 void CSandMan::CreateMaintenanceMenu()
@@ -356,13 +407,13 @@ void CSandMan::CreateViewBaseMenu()
 
 void CSandMan::CreateHelpMenu(bool bAdvanced)
 {
-	m_pMenuHelp = menuBar()->addMenu(tr("&Help"));
+	m_pMenuHelp = m_pMenuBar->addMenu(tr("&Help"));
 		//m_pMenuHelp->addAction(tr("Support Sandboxie-Plus on Patreon"), this, SLOT(OnHelp()));
 		m_pSupport = m_pMenuHelp->addAction(tr("Support Sandboxie-Plus with a Donation"), this, SLOT(OnHelp()));
-		if (!bAdvanced) {
-			m_pMenuHelp->removeAction(m_pSupport);
-			menuBar()->addAction(m_pSupport);
-		}
+		//if (!bAdvanced) {
+		//	m_pMenuHelp->removeAction(m_pSupport);
+		//	m_pMenuBar->addAction(m_pSupport);
+		//}
 		m_pForum = m_pMenuHelp->addAction(tr("Visit Support Forum"), this, SLOT(OnHelp()));
 		m_pManual = m_pMenuHelp->addAction(tr("Online Documentation"), this, SLOT(OnHelp()));
 		m_pMenuHelp->addSeparator();
@@ -374,9 +425,9 @@ void CSandMan::CreateHelpMenu(bool bAdvanced)
 
 void CSandMan::CreateMenus(bool bAdvanced)
 {
-	menuBar()->clear();
+	m_pMenuBar->clear();
 
-	m_pMenuFile = menuBar()->addMenu(tr("&Sandbox"));
+	m_pMenuFile = m_pMenuBar->addMenu(tr("&Sandbox"));
 		m_pNewBox = m_pMenuFile->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnSandBoxAction()));
 		m_pNewGroup = m_pMenuFile->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnSandBoxAction()));
 		m_pMenuFile->addSeparator();
@@ -384,9 +435,9 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pDisableForce = m_pMenuFile->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce()));
 		m_pDisableForce->setCheckable(true);
 	if(bAdvanced) {
-		m_pDisableRecovery = m_pMenuFile->addAction(tr("Disable File Recovery"));
+		m_pDisableRecovery = m_pMenuFile->addAction(tr("Disable File Recovery"), this, SLOT(OnDisablePopUp()));
 		m_pDisableRecovery->setCheckable(true);
-		m_pDisableMessages = m_pMenuFile->addAction(tr("Disable Message Popup"));
+		m_pDisableMessages = m_pMenuFile->addAction(tr("Disable Message PopUp"), this, SLOT(OnDisablePopUp()));
 		m_pDisableMessages->setCheckable(true);
 	}
 	else {
@@ -421,7 +472,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Exit"), this, SLOT(OnExit()));
 
 
-	m_pMenuView = menuBar()->addMenu(tr("&View"));
+	m_pMenuView = m_pMenuBar->addMenu(tr("&View"));
 
 		CreateViewBaseMenu();
 
@@ -480,7 +531,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pMenuView->addAction(CSandMan::GetIcon("Recover"), tr("Recovery Log"), this, SLOT(OnRecoveryLog()));
 	
 
-	m_pMenuOptions = menuBar()->addMenu(tr("&Options"));
+	m_pMenuOptions = m_pMenuBar->addMenu(tr("&Options"));
 		m_pMenuSettings = m_pMenuOptions->addAction(CSandMan::GetIcon("Settings"), tr("Global Settings"), this, SLOT(OnSettings()));
 		m_pMenuResetMsgs = m_pMenuOptions->addAction(tr("Reset all hidden messages"), this, SLOT(OnResetMsgs()));
 		m_pMenuResetGUI = m_pMenuOptions->addAction(tr("Reset all GUI options"), this, SLOT(OnResetGUI()));
@@ -499,9 +550,9 @@ void CSandMan::CreateMenus(bool bAdvanced)
 
 void CSandMan::CreateOldMenus()
 {
-	menuBar()->clear();
+	m_pMenuBar->clear();
 
-	m_pMenuFile = menuBar()->addMenu(tr("&File"));
+	m_pMenuFile = m_pMenuBar->addMenu(tr("&File"));
 		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
 		m_pDisableForce = m_pMenuFile->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce()));
 		m_pDisableForce->setCheckable(true);
@@ -540,7 +591,7 @@ void CSandMan::CreateOldMenus()
 			
 		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Exit"), this, SLOT(OnExit()));
 
-	m_pMenuView = menuBar()->addMenu(tr("&View"));
+	m_pMenuView = m_pMenuBar->addMenu(tr("&View"));
 
 		CreateViewBaseMenu();
 
@@ -553,6 +604,7 @@ void CSandMan::CreateOldMenus()
 		m_pMenuView->addSeparator();
 		m_pMenuView->addAction(CSandMan::GetIcon("Recover"), tr("Recovery Log"), this, SLOT(OnRecoveryLog()));
 
+		m_pMenuBrowse = NULL;
 		//m_pMenuView->addSeparator();
 		//m_pRefreshAll = m_pMenuView->addAction(CSandMan::GetIcon("Refresh"), tr("Refresh View"), this, SLOT(OnRefresh()));
 		//m_pRefreshAll->setShortcut(QKeySequence("F5"));
@@ -567,14 +619,13 @@ void CSandMan::CreateOldMenus()
 			m_pCleanUpRecovery = NULL;
 		m_pKeepTerminated = NULL;
 
-	m_pSandbox = menuBar()->addMenu(tr("&Sandbox"));
+	m_pSandbox = m_pMenuBar->addMenu(tr("&Sandbox"));
 
 		connect(m_pSandbox, SIGNAL(hovered(QAction*)), this, SLOT(OnBoxMenuHover(QAction*)));
 
 		m_pSandbox->addSeparator();
 		m_pNewBox = m_pSandbox->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Sandbox"), this, SLOT(OnSandBoxAction()));
 		m_pNewGroup = m_pSandbox->addAction(CSandMan::GetIcon("Group"), tr("Create New Group"), this, SLOT(OnSandBoxAction()));
-		m_pSandbox->addSeparator();
 
 		QAction* m_pSetContainer = m_pSandbox->addAction(CSandMan::GetIcon("Advanced"), tr("Set Container Folder"), this, SLOT(OnSettingsAction()));
 		m_pSetContainer->setData(CSettingsWindow::eAdvanced);
@@ -588,7 +639,7 @@ void CSandMan::CreateOldMenus()
 		//m_pShowAllSessions->setCheckable(true);
 		m_pShowAllSessions = NULL;
 
-	m_pMenuOptions = menuBar()->addMenu(tr("&Configure"));
+	m_pMenuOptions = m_pMenuBar->addMenu(tr("&Configure"));
 		m_pMenuSettings = m_pMenuOptions->addAction(CSandMan::GetIcon("Settings"), tr("Global Settings"), this, SLOT(OnSettings()));
 		m_pMenuOptions->addSeparator();
 
@@ -668,12 +719,24 @@ void CSandMan::CreateToolBar()
 	//m_pToolBar->addAction(m_pMenuElevate);
 
 	m_pSeparator = m_pToolBar->addSeparator();
-	m_pToolBar->addWidget(new QLabel("        "));
-	m_pLabel = new QLabel();
+	
+	CreateLabel();
+	m_pToolBar->addWidget(m_pLabel);
+}
+
+void CSandMan::CreateLabel()
+{
+	m_pLabel = new QLabel(m_pMainWidget);
 	m_pLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
 	connect(m_pLabel, SIGNAL(linkActivated(const QString&)), this, SLOT(OpenUrl(const QString&)));
-	m_pToolBar->addWidget(m_pLabel);
-	m_pToolBar->addWidget(new QLabel("        "));
+
+	m_pLabel->setAlignment(Qt::AlignCenter);
+	m_pLabel->setContentsMargins(24, 0, 24, 0);
+
+	QFont fnt = m_pLabel->font();
+	fnt.setBold(true);
+	//fnt.setWeight(QFont::DemiBold);
+	m_pLabel->setFont(fnt);
 
 	UpdateLabel();
 }
@@ -697,13 +760,79 @@ void CSandMan::UpdateLabel()
 		//m_pLabel->setStyleSheet("QLabel { link-color : red; }");
 
 		LabelTip = tr("Click to install update");
+
+		//auto neon = new CNeonEffect(10, 4, 180); // 140
+		//m_pLabel->setGraphicsEffect(NULL);
 	}
-	else if (g_Certificate.isEmpty()) {
+	else if (g_Certificate.isEmpty()) 
+	{
 		LabelText = tr("<a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Support Sandboxie-Plus on Patreon</a>");
 		LabelTip = tr("Click to open web browser");
+
+		//auto neon = new CNeonEffect(10, 4, 240);
+		auto neon = new CNeonEffect(10, 4);
+		//neon->setGlowColor(Qt::green);
+		neon->setHue(240);
+		/*if(m_DarkTheme)
+			neon->setColor(QColor(218, 130, 42));
+		else
+			neon->setColor(Qt::blue);*/
+		m_pLabel->setGraphicsEffect(neon);
+
+		/*auto glowAni = new QVariantAnimation(neon);
+		glowAni->setDuration(10000);
+		glowAni->setLoopCount(-1);
+		glowAni->setStartValue(0);
+		glowAni->setEndValue(360);
+		glowAni->setEasingCurve(QEasingCurve::InQuad);
+			connect(glowAni, &QVariantAnimation::valueChanged, [neon](const QVariant &value) {
+				neon->setHue(value.toInt());
+				qDebug() << value.toInt();
+		});
+		glowAni->start();*/
+
+		/*auto glowAni = new QVariantAnimation(neon);
+		glowAni->setDuration(3000);
+		glowAni->setLoopCount(-1);
+		glowAni->setStartValue(5);
+		glowAni->setEndValue(20);
+		glowAni->setEasingCurve(QEasingCurve::InQuad);
+			connect(glowAni, &QVariantAnimation::valueChanged, [neon](const QVariant &value) {
+				neon->setBlurRadius(value.toInt());
+				qDebug() << value.toInt();
+		});
+		glowAni->start();*/
+
+		/*auto glowAni = new QVariantAnimation(neon);
+		glowAni->setDuration(3000);
+		glowAni->setLoopCount(-1);
+		glowAni->setStartValue(1);
+		glowAni->setEndValue(20);
+		glowAni->setEasingCurve(QEasingCurve::InQuad);
+			connect(glowAni, &QVariantAnimation::valueChanged, [neon](const QVariant &value) {
+				neon->setGlow(value.toInt());
+				qDebug() << value.toInt();
+		});
+		glowAni->start();*/
+
+		/*auto glowAni = new QVariantAnimation(neon);
+		glowAni->setDuration(3000);
+		glowAni->setLoopCount(-1);
+		glowAni->setStartValue(5);
+		glowAni->setEndValue(25);
+		glowAni->setEasingCurve(QEasingCurve::InQuad);
+			connect(glowAni, &QVariantAnimation::valueChanged, [neon](const QVariant &value) {
+				int iValue = value.toInt();
+				if (iValue >= 15)
+					iValue = 30 - iValue;
+				neon->setGlow(iValue);
+				neon->setBlurRadius(iValue);
+		});
+		glowAni->start();*/
+
 	}
 
-	m_pSeparator->setVisible(!LabelText.isEmpty());
+	if(m_pSeparator) m_pSeparator->setVisible(!LabelText.isEmpty());
 	m_pLabel->setVisible(!LabelText.isEmpty());
 	m_pLabel->setText(LabelText);
 	m_pLabel->setToolTip(LabelTip);
@@ -1175,6 +1304,11 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		if (theAPI->IsBusy() || m_iDeletingContent > 0)
 			bIconBusy = true;
 
+		if (m_bIconDisabled != bForceProcessDisabled) {
+			QString Str1 = tr("No Force Process");
+			m_pDisabledForce->setText(m_pDisableForce->isChecked() ? Str1 : QString(Str1.length(), ' '));
+		}
+
 		if (m_bIconEmpty != (ActiveProcesses == 0)  || m_bIconBusy != bIconBusy || m_bIconDisabled != bForceProcessDisabled)
 		{
 			m_bIconEmpty = (ActiveProcesses == 0);
@@ -1485,11 +1619,11 @@ void CSandMan::OnStatusChanged()
 
 void CSandMan::OnMenuHover(QAction* action)
 {
-	//if (!menuBar()->actions().contains(action))
+	//if (!m_pMenuBar->actions().contains(action))
 	//	return; // ignore sub menus
 
 
-	if (menuBar()->actions().at(0) == action && m_pMaintenance)
+	if (m_pMenuBar->actions().at(0) == action && m_pMaintenance)
 	{
 		bool bConnected = theAPI->IsConnected();
 		m_pConnect->setEnabled(!bConnected);
@@ -1514,7 +1648,7 @@ void CSandMan::OnMenuHover(QAction* action)
 		//m_pMenuStopAll - always enabled
 	}
 
-	if (menuBar()->actions().at(2) == action && m_pSandbox)
+	if (m_pMenuBar->actions().at(2) == action && m_pSandbox)
 		CreateBoxMenu(m_pSandbox);
 }
 
@@ -1649,7 +1783,7 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 
 bool CSandMan::CheckCertificate(QWidget* pWidget) 
 {
-	if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) != 0)
+	if (g_CertInfo.valid)
 		return true;
 
 	//if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0) {
@@ -1817,6 +1951,15 @@ void CSandMan::OnDisableForce2()
 {
 	bool Status = m_pDisableForce2->isChecked();
 	theAPI->DisableForceProcess(Status);
+}
+
+void CSandMan::OnDisablePopUp()
+{
+	QString Str2 = tr("No Recovery");
+	if(m_pDisableRecovery) m_pDisabledRecovery->setText(m_pDisableRecovery->isChecked() ? Str2 : QString(Str2.length(), ' '));
+
+	QString Str3 = tr("No Messages");
+	if(m_pDisableMessages) m_pDisabledMessages->setText(m_pDisableMessages->isChecked() ? Str3 : QString(Str3.length(), ' '));
 }
 
 SB_RESULT(void*) CSandMan::ConnectSbie()
@@ -2130,13 +2273,17 @@ void CSandMan::UpdateSettings(bool bRebuildUI)
 
 		StoreState();
 
-		this->removeAction(m_pRefreshAll);
-		this->removeAction(m_pMenuBrowse);
-		this->removeAction(m_pMenuResetGUI);
+		if(m_pRefreshAll) this->removeAction(m_pRefreshAll);
+		if(m_pMenuBrowse) this->removeAction(m_pMenuBrowse);
+		if(m_pMenuResetGUI) this->removeAction(m_pMenuResetGUI);
 
 		m_pMainWidget->deleteLater();
 		m_pMainWidget = new QWidget(this);
+
+		m_pLabel->deleteLater();
+
 		CreateUI();
+
 		setCentralWidget(m_pMainWidget);
 
 		m_pTrayMenu->deleteLater();
@@ -2147,8 +2294,6 @@ void CSandMan::UpdateSettings(bool bRebuildUI)
 		GetBoxView()->ReloadUserConfig();
 
 		OnStatusChanged();
-
-		SetUITheme();
 
 		if(m_pTrayBoxes) m_pTrayBoxes->setStyle(QStyleFactory::create(m_DefaultStyle));
 	}
@@ -2498,6 +2643,7 @@ void CSandMan::SetUITheme()
 {
 	m_ThemeUpdatePending = false;
 
+
 	bool bDark;
 	int iDark = theConf->GetInt("Options/UseDarkTheme", 2);
 	if (iDark == 2) {
@@ -2505,17 +2651,36 @@ void CSandMan::SetUITheme()
 		bDark = (settings.value("AppsUseLightTheme") == 0);
 	} else
 		bDark = (iDark == 1);
-
+	
 	if (bDark)
-	{
-		QApplication::setStyle(QStyleFactory::create("Fusion"));
 		QApplication::setPalette(m_DarkPalett);
-	}
 	else
-	{
-		QApplication::setStyle(QStyleFactory::create(m_DefaultStyle));
 		QApplication::setPalette(m_DefaultPalett);
+	m_DarkTheme = bDark;
+
+
+	bool bFusion;
+	int iFusion = theConf->GetInt("Options/UseFusionTheme", 2);
+	if (iFusion == 2)
+		bFusion = bDark;
+	else 
+		bFusion = (iFusion == 1);
+
+	if (bFusion)
+		QApplication::setStyle(QStyleFactory::create("Fusion"));
+	else {
+		int iViewMode = theConf->GetInt("Options/ViewMode", 1);
+		QApplication::setStyle(QStyleFactory::create((bDark || iViewMode == 2) ? "Windows" : m_DefaultStyle));
 	}
+	m_FusionTheme = bFusion;
+
+
+	CTreeItemModel::SetDarkMode(bDark);
+	CListItemModel::SetDarkMode(bDark);
+	CPopUpWindow::SetDarkMode(bDark);
+	CPanelView::SetDarkMode(bDark);
+	CFinder::SetDarkMode(bDark);
+
 
 	QFont font = QApplication::font();
 	double newFontSize = m_DefaultFontSize * theConf->GetInt("Options/FontScaling", 100) / 100.0;
@@ -2523,29 +2688,6 @@ void CSandMan::SetUITheme()
 		font.setPointSizeF(newFontSize);
 		QApplication::setFont(font);
 	}
-
-	int iUsePizza = theConf->GetInt("Options/UseBackground", 2);
-	if (iUsePizza == 2)
-		iUsePizza = theConf->GetInt("Options/ViewMode", 1) == 2 ? 1 : 0;
-	if (iUsePizza) 
-	{
-		QPalette pizzaPalete = GetBoxView()->GetTree()->palette(); // QPalette pizzaPalete = QApplication::palette();
-		SetPaleteTexture(pizzaPalete, QPalette::Base, QImage(":/Assets/background.png"));
-		GetBoxView()->GetTree()->setPalette(pizzaPalete); // QApplication::setPalette(pizzaPalete);
-		GetFileView()->GetTree()->setPalette(pizzaPalete); // QApplication::setPalette(pizzaPalete);
-	}
-	else {
-		GetBoxView()->GetTree()->setPalette(QApplication::palette());
-		GetFileView()->GetTree()->setPalette(QApplication::palette());
-	}
-
-	m_DarkTheme = bDark;
-
-	CTreeItemModel::SetDarkMode(bDark);
-	CListItemModel::SetDarkMode(bDark);
-	CPopUpWindow::SetDarkMode(bDark);
-	CPanelView::SetDarkMode(bDark);
-	CFinder::SetDarkMode(bDark);
 }
 
 void CSandMan::UpdateTheme()

@@ -142,7 +142,7 @@ public:
 
 protected:
 	QMutex				m_Mutex;
-	QMap<QString, SSetting> m_DefaultValues;
+	//QMap<QString, SSetting> m_DefaultValues;
 
 	QMap<SStrRef, SCacheVal>m_ValueCache;
 

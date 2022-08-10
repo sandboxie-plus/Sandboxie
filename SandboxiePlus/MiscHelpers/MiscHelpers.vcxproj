@@ -238,6 +238,7 @@
     <QtMoc Include="Common\TreeViewEx.h" />
     <QtMoc Include="Common\TreeWidgetEx.h" />
     <ClInclude Include="Common\IconExtreactor.h" />
+    <QtMoc Include="Common\NeonEffect.h" />
     <ClInclude Include="Common\OtherFunctions.h" />
     <ClInclude Include="Common\qRC4.h" />
     <QtMoc Include="Common\NetworkAccessManager.h" />

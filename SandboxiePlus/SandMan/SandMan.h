@@ -182,6 +182,7 @@ private slots:
 	void				OnWndFinder();
 	void				OnDisableForce();
 	void				OnDisableForce2();
+	void				OnDisablePopUp();
 	void				OnMaintenance();
 
 	void				OnViewMode(QAction* action);
@@ -223,6 +224,7 @@ private:
 	void				CreateViewBaseMenu();
 	void				CreateHelpMenu(bool bAdvanced);
 	void				CreateToolBar();
+	void				CreateLabel();
 	void				CreateView(int iViewMode);
 	void				CreateTrayIcon();
 	void				CreateTrayMenu();
@@ -253,6 +255,8 @@ private:
 	CPanelWidgetEx*		m_pRecoveryLog;
 	class CRecoveryLogWnd* m_pRecoveryLogWnd;
 
+	QMenuBar*			m_pMenuBar;
+	QHBoxLayout*		m_pMenuLayout;
 
 	QMenu*				m_pMenuFile;
 	QAction*			m_pNewBox;
@@ -315,6 +319,9 @@ private:
 	QAction*			m_pAbout;
 	QAction*			m_pAboutQt;
 
+	QLabel*				m_pDisabledForce;
+	QLabel*				m_pDisabledRecovery;
+	QLabel*				m_pDisabledMessages;
 
 	// for old menu
 	QMenu*				m_pSandbox;
@@ -350,6 +357,7 @@ private:
 public:
 	quint32				m_LanguageId;
 	bool				m_DarkTheme;
+	bool				m_FusionTheme;
 };
 
 

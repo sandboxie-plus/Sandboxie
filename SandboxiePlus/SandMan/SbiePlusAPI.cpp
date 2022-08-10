@@ -133,6 +133,9 @@ CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSand
 
 	m_pOptionsWnd = NULL;
 	m_pRecoveryWnd = NULL;
+
+	m_BoxType = eDefault;
+	m_BoxColor = QColor(Qt::yellow).rgb();
 }
 
 CSandBoxPlus::~CSandBoxPlus()
@@ -266,20 +269,19 @@ SB_PROGRESS CSandBoxPlus::CleanBox()
 
 bool CSandBoxPlus::CheckUnsecureConfig() const
 {
-	//if (GetBool("UnsafeTemplate", false)) return true;
-	if (GetBool("OriginalToken", false)) return true;
-	if (GetBool("OpenToken", false)) return true;
-		if(GetBool("UnrestrictedToken", false)) return true;
-			if (GetBool("KeepTokenIntegrity", false)) return true;
-			if (GetBool("UnstrippedToken", false)) return true;
-				if (GetBool("KeepUserGroup", false)) return true;
-			if (!GetBool("AnonymousLogon", true)) return true;
-		if(GetBool("UnfilteredToken", false)) return true;
-	if (GetBool("DisableFileFilter", false)) return true;
-	if (GetBool("DisableKeyFilter", false)) return true;
-	if (GetBool("DisableObjectFilter", false)) return true;
-
-	if (GetBool("StripSystemPrivileges", false)) return true;
+	//if (GetBool("UnsafeTemplate", false, true, true)) return true;
+	if (GetBool("OriginalToken", false, true, true)) return true;
+	if (GetBool("OpenToken", false, true, true)) return true;
+		if(GetBool("UnrestrictedToken", false, true, true)) return true;
+			if (GetBool("KeepTokenIntegrity", false, true, true)) return true;
+			if (GetBool("UnstrippedToken", false, true, true)) return true;
+				if (GetBool("KeepUserGroup", false, true, true)) return true;
+			if (!GetBool("AnonymousLogon", true, true, true)) return true;
+		if(GetBool("UnfilteredToken", false, true, true)) return true;
+	if (GetBool("DisableFileFilter", false, true, true)) return true;
+	if (GetBool("DisableKeyFilter", false, true, true)) return true;
+	if (GetBool("DisableObjectFilter", false, true, true)) return true;
+	if (GetBool("StripSystemPrivileges", false, true, true)) return true;
 	return false;
 }
 

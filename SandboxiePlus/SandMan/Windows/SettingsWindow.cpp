@@ -13,7 +13,7 @@ QSize CustomTabStyle::sizeFromContents(ContentsType type, const QStyleOption* op
 	QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
 	if (type == QStyle::CT_TabBarTab) {
 		s.transpose();
-		if(theGUI->m_DarkTheme)
+		if(theGUI->m_FusionTheme)
 			s.setHeight(s.height() * 13 / 10);
 		else
 			s.setHeight(s.height() * 15 / 10);
@@ -34,6 +34,30 @@ void CustomTabStyle::drawControl(ControlElement element, const QStyleOption* opt
 		}
 	}
 	QProxyStyle::drawControl(element, option, painter, widget);
+}
+
+
+void FixTriStateBoxPallete(QWidget* pWidget)
+{
+	if (QApplication::style()->objectName() == "windows") {
+
+		//
+		// the built in "windows" theme of Qt does not properly renderd PartiallyChecked
+		// checkboxes, to remedi this issue we connect to the stateChanged slot
+		// and change the pattern to improve the rendering.
+		//
+
+		foreach(QCheckBox* pCheck, pWidget->findChildren<QCheckBox*>()) {
+			QObject::connect(pCheck, &QCheckBox::stateChanged, [pCheck](int state) {
+				if (pCheck->isTristate()) {
+					QPalette palette = QApplication::palette();
+					if (state == Qt::PartiallyChecked)
+						palette.setColor(QPalette::Base, Qt::darkGray);
+					pCheck->setPalette(palette);
+				}
+			});
+		}
+	}
 }
 
 
@@ -84,6 +108,8 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 		ui.treeWarnProgs->setAlternatingRowColors(true);
 		ui.treeCompat->setAlternatingRowColors(true);
 	}
+
+	FixTriStateBoxPallete(this);
 
 	ui.tabs->setTabPosition(QTabWidget::West);
 	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));
@@ -143,6 +169,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 
 	connect(ui.cmbDPI, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkDarkTheme, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkFusionTheme, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkAltRows, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkBackground, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkLargeIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
@@ -268,7 +295,8 @@ void CSettingsWindow__AddContextMenu(bool bAlwaysClassic)
 	if (settings.value("CurrentBuild").toInt() >= 22000 && !bAlwaysClassic) // Windows 11
 	{
 		QProcess Proc;
-		Proc.execute("rundll32.exe", QStringList() << QCoreApplication::applicationDirPath().replace("/", "\\") + "\\SbieShellExt.dll,RegisterPackage");
+		Proc.setWorkingDirectory(QCoreApplication::applicationDirPath());
+		Proc.execute("rundll32.exe", QStringList() << "SbieShellExt.dll,RegisterPackage");
 		Proc.waitForFinished();
 		return;
 	}
@@ -284,7 +312,8 @@ void CSettingsWindow__RemoveContextMenu()
 	if (settings.value("CurrentBuild").toInt() >= 22000) // Windows 11
 	{
 		QProcess Proc;
-		Proc.execute("rundll32.exe", QStringList() << QCoreApplication::applicationDirPath().replace("/", "\\") + "\\SbieShellExt.dll,RemovePackage");
+		Proc.setWorkingDirectory(QCoreApplication::applicationDirPath());
+		Proc.execute("rundll32.exe", QStringList() << "SbieShellExt.dll,RemovePackage");
 		Proc.waitForFinished();
 	}
 
@@ -324,6 +353,7 @@ void CSettingsWindow::LoadSettings()
 	ui.cmbDPI->setCurrentIndex(theConf->GetInt("Options/DPIScaling", 1));
 
 	ui.chkDarkTheme->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/UseDarkTheme", 2)));
+	ui.chkFusionTheme->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/UseFusionTheme", 2)));
 	ui.chkAltRows->setChecked(theConf->GetBool("Options/AltRowColors", false));
 	ui.chkBackground->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/UseBackground", 2)));
 	ui.chkLargeIcons->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/LargeIcons", 2)));
@@ -523,6 +553,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/DPIScaling", ui.cmbDPI->currentData());
 
 	theConf->SetValue("Options/UseDarkTheme", CSettingsWindow__Chk2Int(ui.chkDarkTheme->checkState()));
+	theConf->SetValue("Options/UseFusionTheme", CSettingsWindow__Chk2Int(ui.chkFusionTheme->checkState()));
 	theConf->SetValue("Options/AltRowColors", ui.chkAltRows->isChecked());
 	theConf->SetValue("Options/UseBackground", CSettingsWindow__Chk2Int(ui.chkBackground->checkState()));
 	theConf->SetValue("Options/LargeIcons", CSettingsWindow__Chk2Int(ui.chkLargeIcons->checkState()));

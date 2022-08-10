@@ -8,6 +8,39 @@
 #include "../MiscHelpers/Common/SettingsWidgets.h"
 #include "Helpers/WinAdmin.h"
 
+class CCertBadge: public QLabel
+{
+public:
+	CCertBadge(QWidget* parent = NULL): QLabel(parent) 
+	{
+		setPixmap(QPixmap(":/Actions/Cert.png").scaled(16, 16, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+		if (!g_CertInfo.valid) {
+			setToolTip(COptionsWindow::tr("This option requires a valid supporter certificate"));
+			setCursor(Qt::PointingHandCursor);
+		} else {
+			setToolTip(COptionsWindow::tr("Supporter exclusive option"));
+		}
+	}
+
+protected:
+	void mousePressEvent(QMouseEvent* event)
+	{
+		if(!g_CertInfo.valid)
+			theGUI->OpenUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert"));
+	}
+};
+
+void COptionsWindow__AddCertIcon(QWidget* pOriginalWidget)
+{
+	QWidget* pWidget = new QWidget();
+	QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
+	pLayout->setContentsMargins(0, 0, 0, 0);
+	pLayout->setSpacing(0);
+	pLayout->addWidget(new CCertBadge());
+	pOriginalWidget->parentWidget()->layout()->replaceWidget(pOriginalWidget, pWidget);
+	pLayout->insertWidget(0, pOriginalWidget);
+}
+
 void COptionsWindow::CreateGeneral()
 {
 	ui.cmbBoxIndicator->addItem(tr("Don't alter the window title"), "-");
@@ -18,6 +51,7 @@ void COptionsWindow::CreateGeneral()
 	ui.cmbBoxBorder->addItem(tr("Show only when title is in focus"), "ttl");
 	ui.cmbBoxBorder->addItem(tr("Always show"), "on");
 
+
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardenedPlus), tr("Hardened Sandbox with Data Protection"), (int)CSandBoxPlus::eHardenedPlus);
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardened), tr("Security Hardened Sandbox"), (int)CSandBoxPlus::eHardened);
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eDefaultPlus), tr("Sandbox with Data Protection"), (int)CSandBoxPlus::eDefaultPlus);
@@ -27,7 +61,7 @@ void COptionsWindow::CreateGeneral()
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBox), tr("Application Compartment (NO Isolation)"), (int)CSandBoxPlus::eAppBox);
 
 	ui.lblSupportCert->setVisible(false);
-	if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0)
+	if (!g_CertInfo.valid)
 	{
 		ui.lblSupportCert->setVisible(true);
 		connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
@@ -42,6 +76,13 @@ void COptionsWindow::CreateGeneral()
 			item->setFlags(disabled ? item->flags() & ~Qt::ItemIsEnabled : item->flags() | Qt::ItemIsEnabled);
 		}
 	}
+
+	QWidget* ExWidgets[] = { ui.chkSecurityMode, ui.chkLockDown, ui.chkRestrictDevices,
+		ui.chkPrivacy, ui.chkUseSpecificity,
+		ui.chkNoSecurityIsolation, ui.chkNoSecurityFiltering, NULL };
+	for(QWidget** ExWidget = ExWidgets; *ExWidget != NULL; ExWidget++)
+		COptionsWindow__AddCertIcon(*ExWidget);
+
 
 	m_HoldBoxType = false;
 

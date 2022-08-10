@@ -38,18 +38,18 @@ CSettings::CSettings(const QString& AppDir, const QString& AppName, bool bShared
 
 	m_pConf->sync();
 
-	m_DefaultValues = DefaultValues;
-	foreach (const QString& Key, m_DefaultValues.uniqueKeys())
-	{
-		const SSetting& Setting = m_DefaultValues[Key];
-		if(!m_pConf->contains(Key) || !Setting.Check(m_pConf->value(Key)))
-		{
-			if(Setting.IsBlob())
-				m_pConf->setValue(Key, Setting.Value.toByteArray().toBase64().replace("+","-").replace("/","_").replace("=",""));
-			else
-				m_pConf->setValue(Key, Setting.Value);
-		}
-	}
+	//m_DefaultValues = DefaultValues;
+	//foreach (const QString& Key, m_DefaultValues.keys())
+	//{
+	//	const SSetting& Setting = m_DefaultValues[Key];
+	//	if(!m_pConf->contains(Key) || !Setting.Check(m_pConf->value(Key)))
+	//	{
+	//		if(Setting.IsBlob())
+	//			m_pConf->setValue(Key, Setting.Value.toByteArray().toBase64().replace("+","-").replace("/","_").replace("=",""));
+	//		else
+	//			m_pConf->setValue(Key, Setting.Value);
+	//	}
+	//}
 }
 
 CSettings::~CSettings()
@@ -70,14 +70,14 @@ bool CSettings::SetValue(const QString &key, const QVariant &value)
 {
 	QMutexLocker Locker(&m_Mutex);
 
-	if (!m_DefaultValues.isEmpty())
-	{
-		ASSERT(m_pConf->contains(key));
-#ifndef _DEBUG
-		if (!m_DefaultValues[key].Check(value))
-			return false;
-#endif
-	}
+//	if (!m_DefaultValues.isEmpty())
+//	{
+//		ASSERT(m_pConf->contains(key));
+//#ifndef _DEBUG
+//		if (!m_DefaultValues[key].Check(value))
+//			return false;
+//#endif
+//	}
 
 	m_pConf->setValue(key, value);
 
@@ -89,7 +89,7 @@ QVariant CSettings::GetValue(const QString &key, const QVariant& preset)
 {
 	QMutexLocker Locker(&m_Mutex);
 
-	ASSERT(m_DefaultValues.isEmpty() || m_pConf->contains(key));	
+//	ASSERT(m_DefaultValues.isEmpty() || m_pConf->contains(key));	
 
 	return m_pConf->value(key, preset);
 }

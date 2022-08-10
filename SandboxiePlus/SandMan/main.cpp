@@ -31,6 +31,9 @@ int main(int argc, char *argv[])
 	// use a shared setting location when used in a business environment for easier administration
 	theConf = new CSettings(AppDir, "Sandboxie-Plus", g_CertInfo.business);
 
+#ifndef _DEBUG
+	InitMiniDumpWriter(QString("SandMan-v%1").arg(CSandMan::GetVersion()).toStdWString().c_str() , QString(theConf->GetConfigDir()).replace("/", "\\").toStdWString().c_str());
+#endif
 
 	// this must be done before we create QApplication
 	int DPI = theConf->GetInt("Options/DPIScaling", 1);
@@ -126,10 +129,6 @@ int main(int argc, char *argv[])
 	else if (app.sendMessage("ShowWnd"))
 		return 0;
 
-#ifndef _DEBUG
-	InitMiniDumpWriter(QString("SandMan-v%1").arg(CSandMan::GetVersion()).toStdWString().c_str() , QString(theConf->GetConfigDir()).replace("/", "\\").toStdWString().c_str());
-#endif
-
 	//QThreadPool::globalInstance()->setMaxThreadCount(theConf->GetInt("Options/MaxThreadPool", 10));
 
 	CSandMan* pWnd = new CSandMan();
@@ -145,11 +144,3 @@ int main(int argc, char *argv[])
 
 	return ret;
 }
-
-/*HANDLE hServerPipe = CreateFileW(L"\\\\.\\pipe\\qtsingleapp-sandma-ca4a-1", GENERIC_ALL, 0, NULL, OPEN_EXISTING, 0, NULL);
-if (hServerPipe != INVALID_HANDLE_VALUE) {
-	DWORD lenWritten;
-    WriteFile(hServerPipe, "test", 4, &lenWritten, NULL)
-
-    CloseHandle(hServerPipe);
-}*/

@@ -4,6 +4,7 @@
 #include "../MiscHelpers/Common/Settings.h"
 #include "../MiscHelpers/Common/TreeItemModel.h"
 #include "../MiscHelpers/Common/Common.h"
+#include "SettingsWindow.h"
 
 
 #if defined(Q_OS_WIN)
@@ -43,6 +44,8 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, bool bImmediate, QWidg
 
 	ui.setupUi(this);
 	this->setWindowTitle(tr("%1 - File Recovery").arg(pBox->GetName()));
+
+	FixTriStateBoxPallete(this);
 
 	ui.treeFiles->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
 

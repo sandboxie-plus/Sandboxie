@@ -72,27 +72,27 @@ QString CSbieIni::GetText(const QString& Setting, const QString& Default, bool b
 	return Value;
 }
 
-int CSbieIni::GetNum(const QString& Setting, int Default, bool bWithGlobal) const
+int CSbieIni::GetNum(const QString& Setting, int Default, bool bWithGlobal, bool withTemplates) const
 {
-	QString StrValue = GetText(Setting, QString(), bWithGlobal);
+	QString StrValue = GetText(Setting, QString(), bWithGlobal, true, withTemplates);
 	bool ok;
 	int Value = StrValue.toInt(&ok);
 	if (!ok) return Default;
 	return Value;
 }
 
-__int64 CSbieIni::GetNum64(const QString& Setting, __int64 Default, bool bWithGlobal) const
+__int64 CSbieIni::GetNum64(const QString& Setting, __int64 Default, bool bWithGlobal, bool withTemplates) const
 {
-	QString StrValue = GetText(Setting, QString(), bWithGlobal);
+	QString StrValue = GetText(Setting, QString(), bWithGlobal, true, withTemplates);
 	bool ok;
 	__int64 Value = StrValue.toULongLong(&ok);
 	if (!ok) return Default;
 	return Value;
 }
 
-bool CSbieIni::GetBool(const QString& Setting, bool Default, bool bWithGlobal) const
+bool CSbieIni::GetBool(const QString& Setting, bool Default, bool bWithGlobal, bool withTemplates) const
 {
-	QString StrValue = GetText(Setting, QString(), bWithGlobal);
+	QString StrValue = GetText(Setting, QString(), bWithGlobal, true, withTemplates);
 	if (StrValue.compare("y", Qt::CaseInsensitive) == 0)
 		return true;
 	if (StrValue.compare("n", Qt::CaseInsensitive) == 0)

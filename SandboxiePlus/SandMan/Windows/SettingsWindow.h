@@ -12,6 +12,8 @@ public:
 	void drawControl(ControlElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget) const;
 };
 
+void FixTriStateBoxPallete(QWidget* pWidget);
+
 class CSecretCheckBox : public QCheckBox
 {
 	Q_OBJECT

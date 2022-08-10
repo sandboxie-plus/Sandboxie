@@ -77,6 +77,7 @@
         <file>Actions/Magic.png</file>
         <file>Actions/Update.png</file>
         <file>Actions/Install.png</file>
+        <file>Actions/Cert.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

@@ -1992,7 +1992,7 @@ Fixed issue with Windows 7
 -- Note: Do NOT USE Debug Options if you don't know their security implications (!)
 - added process id to log messages very useful for debugging
 - added finder to resource log
-- added option to hide host processes "HideHostProcess=[name]"
+- added option "HideHostProcess=program.exe" to hide unsandboxed host processes
 -- Note: Sbie hides by default processes from other boxes, this behaviour can now be controlled with "HideOtherBoxes=n"
 - Sandboxed RpcSs and DcomLaunch can now be run as system with the option "ProtectRpcSs=y" however this breaks the sandboxed explorer and others
 - Built In Clsid whitelist can now be disabled with "OpenDefaultClsid=n"

@@ -232,7 +232,7 @@ private:
 
 	void				HandleMaintenance(SB_RESULT(void*) Status);
 
-	void				LoadState();
+	void				LoadState(bool bFull = true);
 	void				StoreState();
 
 	QWidget*			m_pMainWidget;

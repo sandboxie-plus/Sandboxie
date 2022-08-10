@@ -269,11 +269,13 @@ CSandMan::~CSandMan()
 	theGUI = NULL;
 }
 
-void CSandMan::LoadState()
+void CSandMan::LoadState(bool bFull)
 {
-	setWindowState(Qt::WindowNoState);
-	restoreGeometry(theConf->GetBlob("MainWindow/Window_Geometry"));
-	restoreState(theConf->GetBlob("MainWindow/Window_State"));
+	if (bFull) {
+		setWindowState(Qt::WindowNoState);
+		restoreGeometry(theConf->GetBlob("MainWindow/Window_Geometry"));
+		restoreState(theConf->GetBlob("MainWindow/Window_State"));
+	}
 
 	//m_pBoxTree->restoreState(theConf->GetBlob("MainWindow/BoxTree_Columns"));
 	if(m_pMessageLog) m_pMessageLog->GetView()->header()->restoreState(theConf->GetBlob("MainWindow/LogList_Columns"));
@@ -2157,10 +2159,11 @@ void CSandMan::OnAlwaysTop()
 	bool bAlwaysOnTop = m_pWndTopMost->isChecked();
 	theConf->SetValue("Options/AlwaysOnTop", bAlwaysOnTop);
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
-	this->show(); // why is this needed?
+	LoadState();
+	SafeShow(this); // why is this needed?
+
 	m_pPopUpWindow->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 	m_pProgressDialog->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
-	LoadState();
 }
 
 void CSandMan::OnRefresh()
@@ -2279,17 +2282,16 @@ void CSandMan::UpdateSettings(bool bRebuildUI)
 
 		m_pMainWidget->deleteLater();
 		m_pMainWidget = new QWidget(this);
+		setCentralWidget(m_pMainWidget);
 
 		m_pLabel->deleteLater();
 
 		CreateUI();
 
-		setCentralWidget(m_pMainWidget);
-
 		m_pTrayMenu->deleteLater();
 		CreateTrayMenu();
 
-		LoadState();
+		LoadState(false);
 
 		GetBoxView()->ReloadUserConfig();
 

@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue with displaying box config [#2111](https://github.com/sandboxie-plus/Sandboxie/issues/2111)
+- fixed flashign when switching views [#2050](https://github.com/sandboxie-plus/Sandboxie/issues/2050)
 
 
 

@@ -3208,6 +3208,32 @@ Sandboxie-Plus bietet verbesserten Privatsphärenschutz durch den Wechsel vom al
 Die veraltete UI von Sandboxie Classic implementiert keine Unterstützung für diesen Betriebsmodus. Obwohl er durch die ini konfiguriert werden kann, ist es ratsam die moderne Sandboxie-Plus UI (SandMan.exe) zu verwenden, falls Sie die verbesserten Privatsphärenboxen nutzen möchten.
 .
 
+6010;txt;01
+Sie haben Sandboxie seit mehr als %2 Tagen installiert.
+
+Nun, denken Sie David und die Beitragenden machen einen guten Job?
+
+Warum zeigen Sie es nicht, in dem Sie das Projekt unterstützen und ein Unterstützerzertifikat holen?
+
+Sandboxie wird nun ohne gültiges Unterstützerzertifikat für ein paar Sekunden pausieren, um Ihnen Zeit zu geben die Möglichkeit zu erwägen, das Projekt zu unterstützen.
+.
+
+6011;txt;01
+Warten
+.
+
+6012;txt;01
+Weiter
+.
+
+6013;txt;01
+Beenden
+.
+
+6014;txt;01
+Zertifikat holen
+.
+
 #----------------------------------------------------------------------------
 # Getting Started Wizard
 #----------------------------------------------------------------------------

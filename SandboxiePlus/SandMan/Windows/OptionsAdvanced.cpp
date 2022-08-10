@@ -120,7 +120,7 @@ void COptionsWindow::LoadAdvanced()
 	ShowTriggersTmpl();
 	//
 
-	ui.chkHideOtherBoxes->setChecked(m_pBox->GetBool("HideOtherBoxes", false));
+	ui.chkHideOtherBoxes->setChecked(m_pBox->GetBool("HideOtherBoxes", true));
 	QStringList Processes = m_pBox->GetTextList("HideHostProcess", m_Template);
 	ui.lstProcesses->clear();
 	ui.lstProcesses->addItems(Processes);

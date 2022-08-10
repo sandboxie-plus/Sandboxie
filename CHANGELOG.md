@@ -4,6 +4,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [1.3.1 / 5.58.1] - 2022-08-??
+
+### Added
+- added ability to switch fusion theme independant from dark theme
+
+### Changed
+- Improved info label
+- made vintage mode look even more vintage
+
+### Fixed
+- fixed issue with displaying box config [#2111](https://github.com/sandboxie-plus/Sandboxie/issues/2111)
+
+
+
 ## [1.3.0 / 5.58.0] - 2022-08-09
 
 ### Added

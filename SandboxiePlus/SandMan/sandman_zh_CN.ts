@@ -5319,12 +5319,6 @@ Please note that this values are currently user specific and saved globally for 
         <translation>始终置顶恢复文件窗口</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list *</source>
-        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="unfinished">在沙盒列表中显示“披萨”背景 *</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>
         <source>%</source>
         <translation>%</translation>

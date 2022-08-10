@@ -5657,12 +5657,6 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
         <translation>Zeige das Wiederherstellungsfenster immer zuoberst</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list *</source>
-        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="unfinished">Zeige &quot;Pizza&quot;-Hintergrung in der Boxliste *</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>
         <source>%</source>
         <translation>%</translation>

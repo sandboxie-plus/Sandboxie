@@ -5197,12 +5197,6 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list *</source>
-        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="unfinished">Показать фон &quot;Пицца&quot; в списке песочниц*</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>
         <source>%</source>
         <translation type="unfinished"></translation>

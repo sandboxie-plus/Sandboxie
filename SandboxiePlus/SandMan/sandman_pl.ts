@@ -5449,12 +5449,6 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
         <translation>Pokaż okno odzyskiwania jako Zawsze na wierzchu</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list *</source>
-        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="unfinished">Pokaż tło &quot;Pizza&quot; na liście boksów *</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>
         <source>%</source>
         <translation>%</translation>

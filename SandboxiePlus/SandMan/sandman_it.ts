@@ -5143,12 +5143,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <translation>Mostra notifica riguardante l&apos;avvio delle operazioni automatiche nell&apos;area virtuale</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list *</source>
-        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="unfinished">Mostra lo sfondo &quot;Pizza&quot; nell&apos;elenco delle aree virtuali *</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="547"/>
         <source>Advanced Config</source>
         <translation>Opzioni avanzate</translation>

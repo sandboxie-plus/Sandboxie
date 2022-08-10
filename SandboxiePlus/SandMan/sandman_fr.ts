@@ -5436,12 +5436,6 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
         <translation>Mise à l&apos;échelle des polices :</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list *</source>
-        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="unfinished">Afficher l&apos;arrière-plan « Pizza » dans la liste des bacs *</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="520"/>
         <source>(Restart required)</source>
         <translation>(Redémarrage requis)</translation>

@@ -5657,12 +5657,6 @@ The process match level has a higher priority than the specificity and describes
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list *</source>
-        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="unfinished">Kutu listesinde &quot;Pizza&quot; Arka Planını Göster*</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>
         <source>%</source>
         <translation type="unfinished"></translation>

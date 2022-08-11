@@ -439,7 +439,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 	if(bAdvanced) {
 		m_pDisableRecovery = m_pMenuFile->addAction(tr("Disable File Recovery"), this, SLOT(OnDisablePopUp()));
 		m_pDisableRecovery->setCheckable(true);
-		m_pDisableMessages = m_pMenuFile->addAction(tr("Disable Message PopUp"), this, SLOT(OnDisablePopUp()));
+		m_pDisableMessages = m_pMenuFile->addAction(tr("Disable Message Popup"), this, SLOT(OnDisablePopUp()));
 		m_pDisableMessages->setCheckable(true);
 	}
 	else {

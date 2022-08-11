@@ -356,7 +356,7 @@ Följande program måste stängas innan installationen kan fortsätta.
 .
 
 8107;txt;01
-Stäng dessa program och klicka på > Ok, för att fortsätta. Klicka på > Avsluta, för att avsluta installationen.
+Stäng dessa program och klicka på Ok, för att fortsätta. Klicka på Avsluta, för att avsluta installationen.
 .
 
 

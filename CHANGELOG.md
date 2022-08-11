@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added ability to switch fusion theme independant from dark theme
+- added ability to download updates from the support page
 
 ### Changed
 - Improved info label

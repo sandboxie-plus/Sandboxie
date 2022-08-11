@@ -7,6 +7,7 @@
 #include "../QSbieAPI/Sandboxie/SbieTemplates.h"
 #include "../QSbieAPI/SbieUtils.h"
 #include "OptionsWindow.h"
+#include "../OnlineUpdater.h"
 
 
 QSize CustomTabStyle::sizeFromContents(ContentsType type, const QStyleOption* option, const QSize& size, const QWidget* widget) const {
@@ -232,6 +233,10 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 		"UPDATEKEY: 00000000000000000000000000000000\n"
 		"SIGNATURE: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
 	);
+
+	connect(ui.lblCurrent, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
+	connect(ui.lblRelease, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
+	connect(ui.lblPreview, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
 
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
 
@@ -867,7 +872,16 @@ void CSettingsWindow::OnChange()
 
 void CSettingsWindow::OnTab()
 {
-	if (ui.tabs->currentWidget() == ui.tabEdit)
+	if (ui.tabs->currentWidget() == ui.tabSupport)
+	{
+		if (ui.lblCurrent->text().isEmpty()) {
+			if (ui.chkAutoUpdate->checkState())
+				GetUpdates();
+			else
+				ui.lblCurrent->setText(tr("<a href=\"check\">Check Now</a>"));
+		}
+	}
+	else if (ui.tabs->currentWidget() == ui.tabEdit)
 	{
 		LoadIniSection();
 		ui.txtIniSection->setReadOnly(true);
@@ -1058,6 +1072,59 @@ void CSettingsWindow::SaveIniSection()
 		theAPI->SbieIniSet("GlobalSettings", "", ui.txtIniSection->toPlainText());
 
 	LoadIniSection();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Update
+//
+
+void CSettingsWindow::GetUpdates()
+{
+	QVariantMap Params;
+	Params["channel"] = "all";
+	COnlineUpdater::Instance()->GetUpdates(this, SLOT(OnUpdateData(const QVariantMap&, const QVariantMap&)), Params);
+}
+
+void CSettingsWindow::OnUpdateData(const QVariantMap& Data, const QVariantMap& Params)
+{
+	if (Data.isEmpty() || Data["error"].toBool())
+		return;
+
+	m_UpdateData = Data;
+	QVariantList Channels = m_UpdateData["channels"].toList();
+	ui.lblCurrent->setText(tr("%1 (Current)").arg(theGUI->GetVersion()));
+	if(Channels.length() > 0) ui.lblRelease->setText(tr("<a href=\"0\">%1</a>").arg(Channels[0].toMap().value("version").toString()));
+	if(Channels.length() > 1) ui.lblPreview->setText(tr("<a href=\"1\">%1</a>").arg(Channels[1].toMap().value("version").toString()));
+}
+
+void CSettingsWindow::OnUpdate(const QString& Channel)
+{
+	if (Channel == "check")
+		GetUpdates();
+	else
+	{
+		QVariantList Channels = m_UpdateData["channels"].toList();
+		QVariantMap Data = Channels[Channel.toInt()].toMap();
+
+		QString VersionStr = Data["version"].toString();
+		if (VersionStr.isEmpty())
+			return;
+
+		QString DownloadUrl = Data["downloadUrl"].toString();
+		//	'sha256'
+		//	'signature'
+
+		if (!DownloadUrl.isEmpty())
+		{
+			if (QMessageBox("Sandboxie-Plus", tr("Do you want to download the version %1?").arg(VersionStr), QMessageBox::Question, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::NoButton, this).exec() == QMessageBox::Yes)
+				COnlineUpdater::Instance()->DownloadUpdates(DownloadUrl, true);
+		}
+		else
+		{
+			QString UpdateUrl = Data["updateUrl"].toString();
+			QDesktopServices::openUrl(UpdateUrl);
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

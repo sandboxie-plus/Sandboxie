@@ -19,7 +19,6 @@ COnlineUpdater::COnlineUpdater(QObject *parent) : QObject(parent)
 
 COnlineUpdater* COnlineUpdater::Instance()
 {
-	g_pUpdater = NULL;
 	if (!g_pUpdater)
 		g_pUpdater = new COnlineUpdater(theGUI);
 	return g_pUpdater;
@@ -37,18 +36,13 @@ void COnlineUpdater::Process()
 	}
 }
 
-void COnlineUpdater::CheckForUpdates(bool bManual)
+void COnlineUpdater::GetUpdates(QObject* receiver, const char* member, const QVariantMap& Params)
 {
-	if (!m_pUpdateProgress.isNull())
-		return;
-
-	m_pUpdateProgress = CSbieProgressPtr(new CSbieProgress());
-	theGUI->AddAsyncOp(m_pUpdateProgress);
-	m_pUpdateProgress->ShowMessage(tr("Checking for updates..."));
+	CGetUpdatesJob* pJob = new CGetUpdatesJob(Params, this);
+	QObject::connect(pJob, SIGNAL(UpdateData(const QVariantMap&, const QVariantMap&)), receiver, member, Qt::QueuedConnection);
 
 	if (m_RequestManager == NULL) 
 		m_RequestManager = new CNetworkAccessManager(30 * 1000, this);
-
 
 	QUrlQuery Query;
 	Query.addQueryItem("software", "sandboxie-plus");
@@ -65,9 +59,15 @@ void COnlineUpdater::CheckForUpdates(bool bManual)
 		UpdateKey = theAPI->GetGlobalSettings()->GetText("UpdateKey"); // theConf->GetString("Options/UpdateKey");
 	if (!UpdateKey.isEmpty())
 		Query.addQueryItem("update_key", UpdateKey);
-	int UpdateChannel = theConf->GetInt("Options/UpdateChannel", 0);
-	Query.addQueryItem("channel", QString::number(UpdateChannel));
-	Query.addQueryItem("auto", bManual ? "0" : "1");
+	if (Params.contains("channel")) 
+		Query.addQueryItem("channel", Params["channel"].toString());
+	else {
+		int UpdateChannel = theConf->GetInt("Options/UpdateChannel", 0);
+		Query.addQueryItem("channel", QString::number(UpdateChannel));
+	}
+	if(Params.contains("manual")) Query.addQueryItem("auto", Params["manual"].toBool() ? "0" : "1");
+
+	//QString Test = Query.toString();
 
 	QUrl Url("https://sandboxie-plus.com/update.php");
 	Url.setQuery(Query);
@@ -77,24 +77,52 @@ void COnlineUpdater::CheckForUpdates(bool bManual)
 	Request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
 	//Request.setRawHeader("Accept-Encoding", "gzip");
 	QNetworkReply* pReply = m_RequestManager->get(Request);
-	pReply->setProperty("manual", bManual);
+	//pReply->setProperty("manual", bManual);
 	connect(pReply, SIGNAL(finished()), this, SLOT(OnUpdateCheck()));
+
+	m_JobQueue.insert(pReply, pJob);
+}
+
+void COnlineUpdater::CheckForUpdates(bool bManual)
+{
+	if (!m_pUpdateProgress.isNull())
+		return;
+
+	m_pUpdateProgress = CSbieProgressPtr(new CSbieProgress());
+	theGUI->AddAsyncOp(m_pUpdateProgress);
+	m_pUpdateProgress->ShowMessage(tr("Checking for updates..."));
+
+	QVariantMap Params;
+	Params["manual"] = bManual;
+	GetUpdates(this, SLOT(OnUpdateData(const QVariantMap&, const QVariantMap&)), Params);
 }
 
 void COnlineUpdater::OnUpdateCheck()
 {
-	if (m_pUpdateProgress.isNull())
-		return;
-
 	QNetworkReply* pReply = qobject_cast<QNetworkReply*>(sender());
-	bool bManual = pReply->property("manual").toBool();
+	//bool bManual = pReply->property("manual").toBool();
 	QByteArray Reply = pReply->readAll();
 	pReply->deleteLater();
 
-	m_pUpdateProgress->Finish(SB_OK);
-	m_pUpdateProgress.clear();
+	CGetUpdatesJob* pJob = m_JobQueue.take(pReply);
+	if (!pJob)
+		return;
 
 	QVariantMap Data = QJsonDocument::fromJson(Reply).toVariant().toMap();
+
+	emit pJob->UpdateData(Data, pJob->m_Params);
+	pJob->deleteLater();
+}
+
+void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Params)
+{
+	bool bManual = Params["manual"].toBool();
+
+	if (!m_pUpdateProgress.isNull()) {
+		m_pUpdateProgress->Finish(SB_OK);
+		m_pUpdateProgress.clear();
+	}
+
 	if (Data.isEmpty() || Data["error"].toBool())
 	{
 		QString Error = Data.isEmpty() ? tr("server not reachable") : Data["errorMsg"].toString();

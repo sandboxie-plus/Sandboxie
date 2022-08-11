@@ -106,6 +106,10 @@ private slots:
 	void CertChanged();
 	void UpdateCert();
 
+	void GetUpdates();
+	void OnUpdateData(const QVariantMap& Data, const QVariantMap& Params);
+	void OnUpdate(const QString& Channel);
+
 protected:
 	void closeEvent(QCloseEvent *e);
 
@@ -124,6 +128,7 @@ protected:
 	bool	m_CompatChanged;
 	bool	m_FeaturesChanged;
 	bool	m_CertChanged;
+	QVariantMap m_UpdateData;
 
 private:
 

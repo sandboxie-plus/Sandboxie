@@ -2218,14 +2218,17 @@ void CSandMan::OnProcView()
 void CSandMan::OnSettings()
 {
 	static CSettingsWindow* pSettingsWindow = NULL;
-	if (pSettingsWindow == NULL)
-	{
+	if (pSettingsWindow == NULL) {
 		pSettingsWindow = new CSettingsWindow();
 		connect(pSettingsWindow, SIGNAL(OptionsChanged(bool)), this, SLOT(UpdateSettings(bool)));
 		connect(pSettingsWindow, &CSettingsWindow::Closed, [this]() {
 			pSettingsWindow = NULL;
-		});
+			});
 		SafeShow(pSettingsWindow);
+	}
+	else {
+		pSettingsWindow->setWindowState((pSettingsWindow->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+		SetForegroundWindow((HWND)pSettingsWindow->winId());
 	}
 }
 
@@ -2631,9 +2634,9 @@ void CSandMan::OpenUrl(const QUrl& url)
 QString CSandMan::GetVersion()
 {
 	QString Version = QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) //.rightJustified(2, '0')
-#if VERSION_REV > 0 || VERSION_MJR == 0
+//#if VERSION_REV > 0 || VERSION_MJR == 0
 		+ "." + QString::number(VERSION_REV)
-#endif
+//#endif
 #if VERSION_UPD > 0
 		+ QString('a' + VERSION_UPD - 1)
 #endif

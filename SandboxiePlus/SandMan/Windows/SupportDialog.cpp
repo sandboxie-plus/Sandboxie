@@ -59,21 +59,11 @@ bool CSupportDialog::CheckSupport(bool bOnRun)
 	{
 		// Note: the old sandboxie showed a message after 30 days every 12 hours for 5 seconds
 
-        int Probability = 5;
 		int Interval; // days
-        if (Days > 369) {
-            Interval = 3;
-        //    Probability = 10;
-        } else if (Days > 120) {
-            Interval = 5;
-        //    Probability = 20;
-        } else if (Days > 80) {
-            Interval = 7;
-        //    Probability = 40;
-        } else {//if (Days > 40)	
-            Interval = 10;
-        //    Probability = 80;
-        }
+        if (Days > 730) Interval = 5;
+        else if (Days > 365) Interval = 10;
+        else if (Days > 180) Interval = 20;
+        else Interval = 30;
 
 		time_t LastReminder = 0;
 		theAPI->GetSecureParam("LastReminder", &LastReminder, sizeof(LastReminder));
@@ -82,10 +72,7 @@ bool CSupportDialog::CheckSupport(bool bOnRun)
 				return false;
 		}
 
-		//if (!m_ReminderShown)
-		//	Probability /= 10;
-			
-		if ((qrand() % Probability) != 0)
+		if ((rand() % 5) != 0)
 			return false;
 	}
 	m_ReminderShown = true;

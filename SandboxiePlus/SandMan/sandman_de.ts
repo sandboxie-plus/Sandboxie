@@ -381,12 +381,12 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="18"/>
         <source>This option requires a valid supporter certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Option benötigt ein gültiges Unterstützerzertifikat</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="21"/>
         <source>Supporter exclusive option</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterstützerexklusive Option</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="46"/>
@@ -1530,7 +1530,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="440"/>
         <source>Disable Message PopUp</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktiviere Nachrichten-Popup</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="493"/>
@@ -2120,7 +2120,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="1308"/>
         <source>No Force Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein erzwungener Prozess</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1478"/>
@@ -2335,12 +2335,12 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="1958"/>
         <source>No Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Wiederherstellung</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1961"/>
         <source>No Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Nachrichten</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2113"/>
@@ -5628,7 +5628,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <location filename="Forms/SettingsWindow.ui" line="459"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="unfinished">Zeige &quot;Pizza&quot;-Hintergrund in der Boxliste *</translation>
+        <translation>Zeige &quot;Pizza&quot;-Hintergrund in der Boxliste *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="476"/>
@@ -5698,7 +5698,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="544"/>
         <source>Use Fusion Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Nutze Fusion Thema</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="688"/>

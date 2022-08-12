@@ -3444,7 +3444,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="881"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;check&quot;&gt;Jetzt prüfen&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="934"/>
@@ -3479,22 +3479,22 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1095"/>
         <source>%1 (Current)</source>
-        <translation type="unfinished"></translation>
+        <translation type>%1 (Aktuell)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1096"/>
         <source>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1097"/>
         <source>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1119"/>
         <source>Do you want to download the version %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie die Version %1 herrunterladen?</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="858"/>
@@ -5618,7 +5618,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <location filename="Forms/SettingsWindow.ui" line="128"/>
         <source>Count and display the disk space occupied by each sandbox</source>
         <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
-        <translation type="unfinished">Berechne und zeige den Festplattenspeicherplatz an, der von jeder Sandbox verwendet wird</translation>
+        <translation>Berechne und zeige den Festplattenspeicherplatz an, der von jeder Sandbox verwendet wird</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="207"/>
@@ -5649,7 +5649,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <location filename="Forms/SettingsWindow.ui" line="459"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="unfinished">Zeige &quot;Pizza&quot;-Hintergrund in der Boxliste *</translation>
+        <translation>Zeige &quot;Pizza&quot;-Hintergrund in der Boxliste *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="476"/>

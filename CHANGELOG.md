@@ -9,17 +9,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.3.1 / 5.58.1] - 2022-08-??
 
 ### Added
-- added ability to switch fusion theme independant from dark theme
+- added ability to switch fusion theme independently of the dark theme
 - added ability to download updates from the support page
+- added missing system calls to the hardened box type [88bc06a](https://github.com/sandboxie-plus/Sandboxie/commit/88bc06a0c7368a81c80a77d7a89ddc73455abb25) [b775264](https://github.com/sandboxie-plus/Sandboxie/commit/b775264a4824e49b554f1b776c377170e5f90797) (thanks Mr.X)
 
 ### Changed
-- Improved info label
-- made vintage mode look even more vintage
+- improved info label
+- vintage mode look is even more vintage
 
 ### Fixed
 - fixed issue with displaying box config [#2111](https://github.com/sandboxie-plus/Sandboxie/issues/2111)
-- fixed flashign when switching views [#2050](https://github.com/sandboxie-plus/Sandboxie/issues/2050)
-
+- fixed flashing issue when switching views [#2050](https://github.com/sandboxie-plus/Sandboxie/issues/2050)
+- fixed inconsistency with the "HideOtherBoxes" option in the Plus UI [ef4ac1b](https://github.com/sandboxie-plus/Sandboxie/commit/ef4ac1b6b34d505e46515e9aabb98411a9b1751e)
+- fixed a certificate validation issue [238cb44](https://github.com/sandboxie-plus/Sandboxie/commit/238cb44969923479148e210814ab91d2428ec4b0)
 
 
 ## [1.3.0 / 5.58.0] - 2022-08-09
@@ -1997,7 +1999,7 @@ Fixed issue with Windows 7
 - added option "HideHostProcess=program.exe" to hide unsandboxed host processes
 -- Note: Sbie hides by default processes from other boxes, this behaviour can now be controlled with "HideOtherBoxes=n"
 - Sandboxed RpcSs and DcomLaunch can now be run as system with the option "ProtectRpcSs=y" however this breaks the sandboxed explorer and others
-- Built In Clsid whitelist can now be disabled with "OpenDefaultClsid=n"
+- Built-in Clsid whitelist can now be disabled with "OpenDefaultClsid=n"
 - Processes can be now terminated with the del key, and require a confirmation
 - added sandboxed window border display to SandMan.exe
 - added notification for Sbie log messages

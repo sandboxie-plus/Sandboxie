@@ -2240,12 +2240,6 @@ Hayır şunları seçer: %2</translation>
         <translation>Vintage Görünüm (SbieCtrl gibi)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="440"/>
-        <source>Disable File Recovery</source>
-        <oldsource>Disable Message PopUp</oldsource>
-        <translation type="unfinished">Dosya Kurtarmayı Devre Dışı Bırak</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="450"/>
         <location filename="SandMan.cpp" line="568"/>
         <source>Is Window Sandboxed?</source>
@@ -5637,8 +5631,8 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="128"/>
-        <source>Count and display the disk space ocupied by each sandbox</source>
-        <oldsource>Count and display the disk space occupied by each sandbox</oldsource>
+        <source>Count and display the disk space occupied by each sandbox</source>
+        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
         <translation type="unfinished">Her korumalı alanın kapladığı disk alanını hesaplayın ve görüntüleyin</translation>
     </message>
     <message>
@@ -5658,8 +5652,8 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <oldsource>Show &quot;Pizza&quot; Background in box list *</oldsource>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
         <translation type="unfinished">Kutu listesinde &quot;Pizza&quot; Arka Planını Göster*</translation>
     </message>
     <message>
@@ -5703,17 +5697,13 @@ The process match level has a higher priority than the specificity and describes
         <translation>(Yeniden başlatma gerekiyor)</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="469"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation type="vanished">* Kısmen işaretlenmiş bir onay kutusu, davranışı görüntüleme modu tarafından belirlenecek şekilde bırakacaktır.</translation>
+        <translation>* Kısmen işaretlenmiş bir onay kutusu, davranışı görüntüleme modu tarafından belirlenecek şekilde bırakacaktır.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="182"/>
         <source>Show the Recovery Window as Always on Top</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="469"/>
-        <source>* indetermined means depanding on the view mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

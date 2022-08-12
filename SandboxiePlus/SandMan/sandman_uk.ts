@@ -1383,12 +1383,6 @@ Full path: %4</source>
         <translation>Поверх всіх вікон</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="440"/>
-        <source>Disable File Recovery</source>
-        <oldsource>Disable Message PopUp</oldsource>
-        <translation type="unfinished">Вимкнути відновлення файлів</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="484"/>
         <source>Show Hidden Boxes</source>
         <translation>Показати приховані контейнери</translation>
@@ -5177,8 +5171,8 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="128"/>
-        <source>Count and display the disk space ocupied by each sandbox</source>
-        <oldsource>Count and display the disk space occupied by each sandbox</oldsource>
+        <source>Count and display the disk space occupied by each sandbox</source>
+        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
         <translation type="unfinished">Підрахувати та відобразити дисковий простір, зайнятий кожною пісочницею</translation>
     </message>
     <message>
@@ -5193,8 +5187,8 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <oldsource>Show &quot;Pizza&quot; Background in box list *</oldsource>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
         <translation type="unfinished">Показати фон &quot;Піца&quot; у списку полів*</translation>
     </message>
     <message>
@@ -5243,17 +5237,13 @@ Please note that this values are currently user specific and saved globally for 
         <translation>(Потрібен перезапуск)</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="469"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation type="vanished">* частково встановлений прапорець залишить поведінку, що визначається режимом перегляду.</translation>
+        <translation>* частково встановлений прапорець залишить поведінку, що визначається режимом перегляду.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="182"/>
         <source>Show the Recovery Window as Always on Top</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="469"/>
-        <source>* indetermined means depanding on the view mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

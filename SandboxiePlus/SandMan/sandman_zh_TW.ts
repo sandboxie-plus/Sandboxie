@@ -1418,12 +1418,6 @@ Full path: %4</source>
         <translation>保持視窗置頂</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="440"/>
-        <source>Disable File Recovery</source>
-        <oldsource>Disable Message PopUp</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="442"/>
         <source>Disable Message Popup</source>
         <translation type="unfinished"></translation>
@@ -5162,6 +5156,11 @@ Please note that this values are currently user specific and saved globally for 
         <translation>當沙箱自動化作業事件開始執行時，跳出系統匣通知</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="469"/>
+        <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Forms/SettingsWindow.ui" line="557"/>
         <source>Advanced Config</source>
         <translation>進階設定</translation>
@@ -5259,8 +5258,8 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="128"/>
-        <source>Count and display the disk space ocupied by each sandbox</source>
-        <oldsource>Count and display the disk space occupied by each sandbox</oldsource>
+        <source>Count and display the disk space occupied by each sandbox</source>
+        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
         <translation type="unfinished">統計並顯示每個沙箱的磁碟空間佔用情況</translation>
     </message>
     <message>
@@ -5340,13 +5339,8 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <oldsource>Show &quot;Pizza&quot; Background in box list *</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="469"/>
-        <source>* indetermined means depanding on the view mode</source>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

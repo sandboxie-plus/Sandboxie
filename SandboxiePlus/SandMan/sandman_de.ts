@@ -1529,12 +1529,6 @@ Vollst√§ndiger Pfad: %4</translation>
         <translation>Spurverfolgung</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="440"/>
-        <source>Disable File Recovery</source>
-        <oldsource>Disable Message PopUp</oldsource>
-        <translation type="unfinished">Deaktiviere Nachrichten-Popup</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="495"/>
         <source>Show File Panel</source>
         <translation>Zeige Dateipanel</translation>
@@ -5622,8 +5616,8 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="128"/>
-        <source>Count and display the disk space ocupied by each sandbox</source>
-        <oldsource>Count and display the disk space occupied by each sandbox</oldsource>
+        <source>Count and display the disk space occupied by each sandbox</source>
+        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
         <translation type="unfinished">Berechne und zeige den Festplattenspeicherplatz an, der von jeder Sandbox verwendet wird</translation>
     </message>
     <message>
@@ -5653,8 +5647,8 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <oldsource>Show &quot;Pizza&quot; Background in box list *</oldsource>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
         <translation type="unfinished">Zeige &quot;Pizza&quot;-Hintergrund in der Boxliste *</translation>
     </message>
     <message>
@@ -5703,18 +5697,14 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
         <translation>(Erfordert Neustart)</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="469"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation type="vanished">* eine teilweise angehakte Checkbox macht das Verhalten abh√§ngig von dem Ansichtsmodus.</translation>
+        <translation>* eine teilweise angehakte Checkbox macht das Verhalten abh√§ngig von dem Ansichtsmodus.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="182"/>
         <source>Show the Recovery Window as Always on Top</source>
         <translation>Zeige das Wiederherstellungsfenster immer zuoberst</translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="469"/>
-        <source>* indetermined means depanding on the view mode</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>

@@ -1616,12 +1616,6 @@ Caminho completo: %4</translation>
         <translation>Sobre o Sandboxie-Plus</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="440"/>
-        <source>Disable File Recovery</source>
-        <oldsource>Disable Message PopUp</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="442"/>
         <source>Disable Message Popup</source>
         <translation type="unfinished"></translation>
@@ -5387,8 +5381,8 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="128"/>
-        <source>Count and display the disk space ocupied by each sandbox</source>
-        <oldsource>Count and display the disk space occupied by each sandbox</oldsource>
+        <source>Count and display the disk space occupied by each sandbox</source>
+        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5433,8 +5427,8 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <oldsource>Show &quot;Pizza&quot; Background in box list *</oldsource>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5517,11 +5511,6 @@ Por favor, note que este valores são atualmente para o usuário específico e s
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="469"/>
-        <source>* indetermined means depanding on the view mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="695"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
         <translation>Usar Plataforma de Filtragem do Windows para restringir o acesso à rede</translation>
@@ -5540,6 +5529,11 @@ Por favor, note que este valores são atualmente para o usuário específico e s
         <location filename="Forms/SettingsWindow.ui" line="668"/>
         <source>Sandbox default</source>
         <translation>Sandbox padrão</translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="469"/>
+        <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>

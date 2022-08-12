@@ -1645,12 +1645,6 @@ Chemin complet : %4</translation>
         <translation>À propos de Sandboxie-Plus</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="440"/>
-        <source>Disable File Recovery</source>
-        <oldsource>Disable Message PopUp</oldsource>
-        <translation type="unfinished">Désactiver la récupération de fichiers</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="450"/>
         <location filename="SandMan.cpp" line="568"/>
         <source>Is Window Sandboxed?</source>
@@ -5414,8 +5408,8 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="128"/>
-        <source>Count and display the disk space ocupied by each sandbox</source>
-        <oldsource>Count and display the disk space occupied by each sandbox</oldsource>
+        <source>Count and display the disk space occupied by each sandbox</source>
+        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
         <translation type="unfinished">Compter et afficher l&apos;espace disque occupé par chaque bac à sable</translation>
     </message>
     <message>
@@ -5440,14 +5434,13 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <oldsource>Show &quot;Pizza&quot; Background in box list *</oldsource>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
         <translation type="unfinished">Afficher l&apos;arrière-plan « Pizza » dans la liste des bacs *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="469"/>
         <source>* indetermined means depanding on the view mode</source>
-        <translation>* Dépendant du mode d&apos;affichage</translation>
+        <translation type="vanished">* Dépendant du mode d&apos;affichage</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="476"/>
@@ -5600,8 +5593,9 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
         <translation>Afficher dans la zone de notification :</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="469"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation type="vanished">* Une case partiellement cochée laissera le comportement être déterminé par le mode d&apos;affichage.</translation>
+        <translation>* Une case partiellement cochée laissera le comportement être déterminé par le mode d&apos;affichage.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>

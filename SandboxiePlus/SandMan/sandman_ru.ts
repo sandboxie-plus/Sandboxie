@@ -1950,12 +1950,6 @@ No will choose: %2</source>
         <translation>Показать панель файлов</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="440"/>
-        <source>Disable File Recovery</source>
-        <oldsource>Disable Message PopUp</oldsource>
-        <translation type="unfinished">Отключить восстановление файлов</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="602"/>
         <source>Programs</source>
         <translation>Программы</translation>
@@ -5069,8 +5063,8 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="128"/>
-        <source>Count and display the disk space ocupied by each sandbox</source>
-        <oldsource>Count and display the disk space occupied by each sandbox</oldsource>
+        <source>Count and display the disk space occupied by each sandbox</source>
+        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
         <translation type="unfinished">Подсчитать и отобразить дисковое пространство, занимаемое каждой песочницей</translation>
     </message>
     <message>
@@ -5085,8 +5079,8 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="459"/>
-        <source>Show &quot;Pizza&quot; Background in box list*</source>
-        <oldsource>Show &quot;Pizza&quot; Background in box list *</oldsource>
+        <source>Show &quot;Pizza&quot; Background in box list *</source>
+        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
         <translation type="unfinished">Показать фон &quot;Пицца&quot; в списке песочниц *</translation>
     </message>
     <message>
@@ -5135,18 +5129,14 @@ Please note that this values are currently user specific and saved globally for 
         <translation>(требуется перезагрузка)</translation>
     </message>
     <message>
+        <location filename="Forms/SettingsWindow.ui" line="469"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation type="vanished">* частично установленный флажок оставит поведение, определяемое режимом отображения.</translation>
+        <translation>* частично установленный флажок оставит поведение, определяемое режимом отображения.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="182"/>
         <source>Show the Recovery Window as Always on Top</source>
         <translation>Показывать окно восстановления поверх других</translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="469"/>
-        <source>* indetermined means depanding on the view mode</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>

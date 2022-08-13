@@ -941,9 +941,6 @@ _FX BOOLEAN File_BlockInternetAccess(PROCESS *proc)
         if (ok)         // \Device\Http\*
             ok = File_BlockInternetAccess2(proc, File_Http, +1);
 
-        if (ok && proc->use_rule_specificity)  // \Device\Http\ 
-            ok = File_BlockInternetAccess2(proc, File_Http, +1);
-
         if (ok)         // \Device\Tcp6
             ok = File_BlockInternetAccess2(proc, File_Tcp, 0);
 
@@ -965,7 +962,7 @@ _FX BOOLEAN File_BlockInternetAccess(PROCESS *proc)
         if (ok)         // \Device\Afd*
             ok = File_BlockInternetAccess2(proc, File_Afd, +1);
 
-        if (ok && proc->use_rule_specificity) // \Device\Afd
+        if (ok && proc->use_rule_specificity) // \Device\Afd - need non wildcard to overrule open rule in File_InitPaths
             ok = File_BlockInternetAccess2(proc, File_Afd, 0);
 
         if (ok)         // \Device\Nsi

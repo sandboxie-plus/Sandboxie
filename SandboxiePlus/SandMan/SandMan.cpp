@@ -1838,7 +1838,7 @@ void CSandMan::UpdateCertState()
 	if (g_CertInfo.evaluation)
 	{
 		if (g_CertInfo.expired)
-			OnLogMessage(tr("The evaluation periode has expired!!!"));
+			OnLogMessage(tr("The evaluation period has expired!!!"));
 	}
 	else
 	{

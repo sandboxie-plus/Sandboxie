@@ -217,87 +217,87 @@
     <message>
         <location filename="OnlineUpdater.cpp" line="93"/>
         <source>Checking for updates...</source>
-        <translation type="unfinished">正在检查更新...</translation>
+        <translation>正在检查更新...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="128"/>
         <source>server not reachable</source>
-        <translation type="unfinished">无法连接到服务器</translation>
+        <translation>无法连接到服务器</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="129"/>
         <location filename="OnlineUpdater.cpp" line="131"/>
         <source>Failed to check for updates, error: %1</source>
-        <translation type="unfinished">检查更新失败，错误：%1</translation>
+        <translation>检查更新失败，错误：%1</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="148"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;您是否要前往&lt; &quot;%1&quot;&gt;信息页&lt;/a&gt;？&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;您是否要前往&lt; &quot;%1&quot;&gt;信息页&lt;/a&gt;？&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="156"/>
         <source>Don&apos;t show this announcement in the future.</source>
-        <translation type="unfinished">今后不再显示此公告</translation>
+        <translation>今后不再显示此公告</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="209"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;New version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;有新版 Sandboxie-Plus 可用，&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;新版本：&lt;/font&gt;&lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;有新版 Sandboxie-Plus 可用，&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;新版本：&lt;/font&gt;&lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="211"/>
         <source>&lt;p&gt;Do you want to download the latest version?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;是否下载最新版本？&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;是否下载最新版本？&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="213"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;是否要打开&lt;a href=&quot;%1&quot;&gt;下载页面&lt;/a&gt;？&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;是否要打开&lt;a href=&quot;%1&quot;&gt;下载页面&lt;/a&gt;？&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="221"/>
         <source>Don&apos;t show this message anymore.</source>
-        <translation type="unfinished">不再显示此消息</translation>
+        <translation>不再显示此消息</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="252"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
-        <translation type="unfinished">当前没有可用的更新, Sandboxie Plus 已是最新版
+        <translation>当前没有可用的更新, Sandboxie Plus 已是最新版
 
 注意: 更新检查通常落后于 GitHub 释出的版本，以确保只提供经过测试的更新</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="271"/>
         <source>Downloading new version...</source>
-        <translation type="unfinished">正在下载新版本...</translation>
+        <translation>正在下载新版本...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="313"/>
         <source>Failed to download update from: %1</source>
-        <translation type="unfinished">从 %1 下载更新文件时失败了</translation>
+        <translation>从 %1 下载更新包失败</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="330"/>
         <source>&lt;p&gt;A Sandboxie-Plus update has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Sandboxie-Plus 更新包已下载到:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;是否立即安装?(任何在沙盒中运行的程序都将被自动终止)&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Sandboxie-Plus 更新包已下载到:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;是否立即安装?(任何在沙盒中运行的程序都将被自动终止)&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="377"/>
         <source>Checking for certificate...</source>
-        <translation type="unfinished">检索凭据...</translation>
+        <translation>检索凭据...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="411"/>
         <source>No certificate found on server!</source>
-        <translation type="unfinished">未在服务器检索到凭据！</translation>
+        <translation>未在服务器检索到凭据！</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="416"/>
         <source>There is no updated certificate available.</source>
-        <translation type="unfinished">目前没有可用的凭据更新</translation>
+        <translation>目前没有可用的凭据更新</translation>
     </message>
 </context>
 <context>
@@ -350,12 +350,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="18"/>
         <source>This option requires a valid supporter certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>此选项需要一份有效的赞助者凭据</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="21"/>
         <source>Supporter exclusive option</source>
-        <translation type="unfinished"></translation>
+        <translation>赞助者专属选项</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="46"/>
@@ -1204,7 +1204,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="1310"/>
         <source>No Force Process</source>
-        <translation type="unfinished"></translation>
+        <translation>没有必沙程序</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2724"/>
@@ -1712,17 +1712,17 @@ This box prevents access to all user data locations, except explicitly granted i
     <message>
         <location filename="SandMan.cpp" line="1480"/>
         <source>%1 Directory: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 目录: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1480"/>
         <source>Application</source>
-        <translation type="unfinished"></translation>
+        <translation>应用程序</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1480"/>
         <source>Installation</source>
-        <translation type="unfinished"></translation>
+        <translation>安装</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2111"/>
@@ -1969,12 +1969,12 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1960"/>
         <source>No Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>没有恢复文件</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1963"/>
         <source>No Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>没有消息</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1978"/>
@@ -1989,7 +1989,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2120"/>
         <source>Maintenance operation completed</source>
-        <translation type="unfinished"></translation>
+        <translation>维护作业完成</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2140"/>
@@ -2145,17 +2145,17 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1554"/>
         <source> for Personal use</source>
-        <translation type="unfinished"></translation>
+        <translation>个人用户</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1556"/>
         <source>   -   for Non-Commercial use ONLY</source>
-        <translation type="unfinished"></translation>
+        <translation>   -   仅用于非商业用途</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1841"/>
         <source>The evaluation periode has expired!!!</source>
-        <translation type="unfinished"></translation>
+        <translation>已超过评估期限！！！</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1945"/>
@@ -3200,7 +3200,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="881"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;check&quot;&gt;立即检查&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="934"/>
@@ -3235,22 +3235,22 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1095"/>
         <source>%1 (Current)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (当前通道)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1096"/>
         <source>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1097"/>
         <source>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1119"/>
         <source>Do you want to download the version %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>是否下载此版本 %1?</translation>
     </message>
 </context>
 <context>
@@ -3357,82 +3357,82 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="99"/>
         <source>The installed supporter certificate &lt;b&gt;has expired %1 days ago&lt;/b&gt; and &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;must be renewed&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>已安装的赞助者凭据&lt;b&gt;已经过期 %1 天了&lt;/b&gt;，&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;必须续期&lt;/a&gt;。&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="101"/>
         <source>&lt;b&gt;You have installed Sandboxie-Plus more than %1 days ago.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;您已安装 Sandboxie-Plus 超过 %1 天了。&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="103"/>
         <source>&lt;u&gt;Commercial use of Sandboxie past the evaluation period&lt;/u&gt;, requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;u&gt;商业使用 Sandboxie 的评估期已过&lt;/u&gt;，需要一份有效的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;赞助者凭据&lt;/a&gt;。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="110"/>
         <source>The installed supporter certificate is &lt;b&gt;outdated&lt;/b&gt; and it is &lt;u&gt;not valid for&lt;b&gt; this version&lt;/b&gt;&lt;/u&gt; of Sandboxie-Plus.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>安装的赞助者凭据&lt;b&gt;已过期&lt;/b&gt;，并且&lt;u&gt;不再适用于&lt;b&gt;此版本&lt;/b&gt;&lt;/u&gt;的 Sandboxie-Plus。&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="112"/>
         <source>The installed supporter certificate is &lt;b&gt;expired&lt;/b&gt; and &lt;u&gt;should to be renewed&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>安装的赞助者凭据&lt;b&gt;已过时&lt;/b&gt;，&lt;u&gt;应当更新&lt;/u&gt;。&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="114"/>
         <source>&lt;b&gt;You have been using Sandboxie-Plus for more than %1 days now.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;已经使用 Sandboxie-Plus 超过 %1 天了。&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="117"/>
         <source>Sandboxie on ARM64 requires a valid supporter certificate for continued use.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie 的 ARM64 支持需要一份有效的赞助者凭据。&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="119"/>
         <source>Personal use of Sandboxie is free of charge on x86/x64, although some functionality is only available to project supporters.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>个人用途的 Sandboxie 在 x86/x64 平台上是免费的，尽管有些功能只对项目赞助者开放。&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="122"/>
         <source>Please continue &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; by renewing your &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; and continue using the &lt;b&gt;enhanced functionality&lt;/b&gt; in new builds.</source>
-        <translation type="unfinished"></translation>
+        <translation>请考虑继续 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠支持该项目&lt;/a&gt;，以续签 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者凭据&lt;/a&gt;，从而继续使用新构建版本中的增强功能</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="125"/>
         <source>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;, to give you time to contemplate the option of &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie &lt;u&gt;在没有&lt;/u&gt;有效的赞助者凭据时有时会&lt;b&gt;&lt;font color=&apos;red&apos;&gt;弹窗提醒&lt;/font&gt;&lt;/b&gt;，让您考虑是否&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠支持此项目&lt;/a&gt;(但不会中断不需要赞助着凭据的沙盒内的程序)，&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者凭据&lt;/a&gt;不仅可以消除这种提醒，还可以 &lt;b&gt;提供特殊的增强功能&lt;b&gt;，实现更好的安全性和兼容性</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="156"/>
         <source>Sandboxie-Plus - Support Reminder</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - 捐赠提醒</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="235"/>
         <source>%1</source>
-        <translation type="unfinished">%1</translation>
+        <translation>%1</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="242"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>退出</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="243"/>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>继续</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="244"/>
         <source>Get Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>获取凭据</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="245"/>
         <source>Enter Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>输入凭据</translation>
     </message>
 </context>
 <context>
@@ -4350,27 +4350,27 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="420"/>
         <source>Security</source>
-        <translation type="unfinished"></translation>
+        <translation>安全选项</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="522"/>
         <source>Security enhancements</source>
-        <translation type="unfinished"></translation>
+        <translation>安全增强</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="529"/>
         <source>Use the original token only for approved NT system calls</source>
-        <translation type="unfinished"></translation>
+        <translation>只在经过批准的 NT 系统调用中使用原始令牌</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="590"/>
         <source>Restrict driver/device access to only approved ones</source>
-        <translation type="unfinished"></translation>
+        <translation>将对“驱动程序/设备”的访问限制在已批准的初次访问过的端点上</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="597"/>
         <source>Enable all security enhancements (make security hardened box)</source>
-        <translation type="unfinished"></translation>
+        <translation>启用所有安全增强功能(安全防护加固型沙盒选项)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1314"/>
@@ -5066,22 +5066,22 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1098"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>使 Sandboxie 与 Windows 的滚动更新保持同步，并和主流浏览器保持兼容性，是一项永无止境的努力，请考虑捐赠以支持这项工作&lt;br /&gt;您可以通过 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;PayPal 捐赠&lt;/a&gt; (支持使用信用卡付款)来支持项目的开发&lt;br /&gt;您也可以通过 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 订阅&lt;/a&gt; 来提供持续的捐赠支持</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1111"/>
         <source>Search in the Preview channel</source>
-        <translation type="unfinished"></translation>
+        <translation>预览通道</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1132"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus 项目的赞助者将收到 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;赞助者凭据&lt;/a&gt;，这类似于许可密钥，是为拥抱开源软件的优秀人士准备的 :-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1118"/>
         <source>Search in the Release channel</source>
-        <translation type="unfinished"></translation>
+        <translation>发布通道</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1125"/>
@@ -5295,7 +5295,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="128"/>
         <source>Count and display the disk space occupied by each sandbox</source>
         <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
-        <translation type="unfinished">统计并显示每个沙盒的磁盘空间占用情况</translation>
+        <translation>统计并显示每个沙盒的磁盘空间占用情况</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="308"/>
@@ -5311,7 +5311,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="459"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="unfinished">在沙盒列表中显示“披萨”背景 *</translation>
+        <translation>在沙盒列表中显示“披萨”背景 *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="476"/>
@@ -5376,12 +5376,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="537"/>
         <source>Alternate row background in lists</source>
-        <translation>在列表中使用备用行背景</translation>
+        <translation>在沙盒列表中使用奇偶(交替)行背景色</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="544"/>
         <source>Use Fusion Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>使用 Fusion 风格主题</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="741"/>

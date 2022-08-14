@@ -1681,9 +1681,9 @@ This box prevents access to all user data locations, except explicitly granted i
         <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?
 Yes will choose: %1
 No will choose: %2</source>
-        <translation type="unfinished">        <translation type="unfinished">Sandboxie-Plus가 휴대용 모드로 시작되었습니다. Sandbox 폴더를 상위 디렉터리에 넣으시겠습니까?
+        <translation type="unfinished">Sandboxie-Plus가 휴대용 모드로 시작되었습니다. Sandbox 폴더를 상위 디렉터리에 넣으시겠습니까?
 예 선택: %1
-아니요 선택: %2</translation></translation>
+아니요 선택: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1573"/>

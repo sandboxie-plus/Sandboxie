@@ -206,13 +206,13 @@ begin
   // Language values for Sandboxie-Plus.ini.
   case Lowercase(Language) of
     'english': Result := 'en';
-    'korean': Result := 'ko';
     'chinesesimplified': Result := 'zh_CN';
     'chinesetraditional': Result := 'zh_TW';
     'dutch': Result := 'nl';
     'french': Result := 'fr';
     'german': Result := 'de';
     'italian': Result := 'it';
+    'korean': Result := 'ko';
     'polish': Result := 'pl';
     'brazilianportuguese': Result := 'pt_BR';
     'portuguese': Result := 'pt_PT';

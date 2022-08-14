@@ -1319,8 +1319,9 @@ Chemin complet : %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1841"/>
-        <source>The evaluation periode has expired!!!</source>
-        <translation>La période d&apos;évaluation a expiré !!!</translation>
+        <source>The evaluation period has expired!!!</source>
+        <oldsource>The evaluation periode has expired!!!</oldsource>
+        <translation type="unfinished">La période d&apos;évaluation a expiré !!!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1960"/>

@@ -1818,7 +1818,8 @@ Essa caixa impede o acesso a todos os locais de dados do usuário, exceto explic
     </message>
     <message>
         <location filename="SandMan.cpp" line="1841"/>
-        <source>The evaluation periode has expired!!!</source>
+        <source>The evaluation period has expired!!!</source>
+        <oldsource>The evaluation periode has expired!!!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

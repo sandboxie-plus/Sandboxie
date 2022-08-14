@@ -2155,8 +2155,9 @@ Möchten Sie die Bereinigung durchführen?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1841"/>
-        <source>The evaluation periode has expired!!!</source>
-        <translation>Die Evaluierungsphase ist abgelaufen!!!</translation>
+        <source>The evaluation period has expired!!!</source>
+        <oldsource>The evaluation periode has expired!!!</oldsource>
+        <translation type="unfinished">Die Evaluierungsphase ist abgelaufen!!!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2566"/>

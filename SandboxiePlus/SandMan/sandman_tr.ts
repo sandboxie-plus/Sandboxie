@@ -1863,7 +1863,8 @@ Tam yol: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1841"/>
-        <source>The evaluation periode has expired!!!</source>
+        <source>The evaluation period has expired!!!</source>
+        <oldsource>The evaluation periode has expired!!!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

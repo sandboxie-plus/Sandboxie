@@ -1935,7 +1935,8 @@ Esta caja previene el acceso a todas las ubicaciones de datos de usaurio, expect
     </message>
     <message>
         <location filename="SandMan.cpp" line="1841"/>
-        <source>The evaluation periode has expired!!!</source>
+        <source>The evaluation period has expired!!!</source>
+        <oldsource>The evaluation periode has expired!!!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

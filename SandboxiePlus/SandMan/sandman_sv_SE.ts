@@ -1922,8 +1922,9 @@ Nej väljer: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1841"/>
-        <source>The evaluation periode has expired!!!</source>
-        <translation>Evalueringsperioden har utgått!</translation>
+        <source>The evaluation period has expired!!!</source>
+        <oldsource>The evaluation periode has expired!!!</oldsource>
+        <translation type="unfinished">Evalueringsperioden har utgått!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1847"/>

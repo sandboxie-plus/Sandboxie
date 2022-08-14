@@ -3274,7 +3274,7 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="101"/>
         <source>&lt;b&gt;You have installed Sandboxie-Plus more than %1 days ago.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
-        <translation>&lt;b&gt;Hai installato Sandboxie Plus più di %1 giorni fa.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>&lt;b&gt;Sandboxie Plus è stato installato più di %1 giorni fa.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="103"/>
@@ -3314,7 +3314,7 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="125"/>
         <source>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;, to give you time to contemplate the option of &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</source>
-        <translation>&lt;u&gt;Senza&lt;/u&gt; un valido certificato di supporto, Sandboxie &lt;b&gt;&lt;font color=&apos;red&apos;&gt;si fermerà per alcuni secondi&lt;/font&gt;&lt;/b&gt;per farti valutare la possibilità di &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;sostenere il progetto&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;Un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificato di supporto&lt;/a&gt; non solo rimuove questo promemoria, ma consente di attivare &lt;b&gt;funzionalità avanzate&lt;/b&gt; garantendo una maggiore sicurezza e compatibilità.</translation>
+        <translation>&lt;u&gt;Senza&lt;/u&gt; un valido certificato di supporto, Sandboxie &lt;b&gt;&lt;font color=&apos;red&apos;&gt;si fermerà per alcuni secondi&lt;/font&gt;&lt;/b&gt;in modo da valutare la possibilità di &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;sostenere il progetto&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;Un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificato di supporto&lt;/a&gt; non solo rimuove questo promemoria, ma consente di attivare &lt;b&gt;funzionalità avanzate&lt;/b&gt; garantendo una maggiore sicurezza e compatibilità.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="156"/>

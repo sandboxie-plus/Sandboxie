@@ -3453,6 +3453,31 @@ Sandboxie Plus offre una maggiore protezione della privacy passando da una modal
 L'interfaccia legacy di Sandboxie Classic non implementa il supporto per questa modalità. Sebbene possa essere configurata tramite il file ini, si prega di aggiornare a Sandboxie Plus (SandMan.exe) che consente l'uso delle aree virtuali con protezione avanzata.
 .
 
+6010;txt;01
+Sandboxie è stato installato più di %2 giorni fa.
+
+Ritieni che si stia facendo un buon lavoro?
+
+Perché non dimostrarlo sostenendo il progetto e ottenendo un certificato di supporto?
+
+Senza un valido certificato, Sandboxie si fermerà per alcuni secondi in modo da valutare la possibilità di sostenere il progetto.
+.
+
+6011;txt;01
+Attendere
+.
+
+6012;txt;01
+Continua
+.
+
+6013;txt;01
+Esci
+.
+
+6014;txt;01
+Ottieni certificato
+.
 
 #----------------------------------------------------------------------------
 # Getting Started Wizard

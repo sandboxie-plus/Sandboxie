@@ -35,6 +35,7 @@
 #define PATTERN XPATTERN
 #define _MY_POOL_H          // prevent inclusion of pool.h by pattern.h
 typedef void *POOL;
+#include "common/list.h"
 #include "common/pattern.h"
 
 

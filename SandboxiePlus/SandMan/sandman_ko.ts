@@ -3096,7 +3096,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="881"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
-        <translation type="unfinished">&lt;a href=&quot;check&quot;&gt;지금 확인&lt;/a&gt;<</translation>
+        <translation type="unfinished">&lt;a href=&quot;check&quot;&gt;지금 확인&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="934"/>

@@ -2427,7 +2427,7 @@ void CSandMan::OnEditIni()
 
 void CSandMan::OnReloadIni()
 {
-	theAPI->ReloadConfig();
+	theAPI->ReloadConfig(true);
 }
 
 void CSandMan::OnIniReloaded()

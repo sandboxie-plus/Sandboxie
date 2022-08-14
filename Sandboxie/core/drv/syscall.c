@@ -46,6 +46,8 @@ static BOOLEAN Syscall_Init_ServiceData(void);
 
 static void Syscall_ErrorForAsciiName(const UCHAR *name_a);
 
+void Syscall_Update_Lockdown();
+
 
 //---------------------------------------------------------------------------
 
@@ -979,6 +981,40 @@ _FX NTSTATUS Syscall_Api_Query(PROCESS *proc, ULONG64 *parms)
 
     return STATUS_SUCCESS;
 }
+
+
+//---------------------------------------------------------------------------
+// Syscall_Update_Lockdown
+//---------------------------------------------------------------------------
+
+
+_FX void Syscall_Update_Lockdown()
+{
+    SYSCALL_ENTRY *entry;
+
+#ifdef HOOK_WIN32K
+    Syscall_Update_Lockdown32();
+#endif
+
+    LIST approved_syscalls;
+    Syscall_LoadHookMap(L"ApproveWinNtSysCall", &approved_syscalls);
+
+    entry = List_Head(&Syscall_List);
+    while (entry) {
+
+        entry->approved = (Syscall_HookMapMatch(entry->name, entry->name_len, &approved_syscalls) != 0);
+
+        entry = List_Next(entry);
+    }
+
+    Syscall_FreeHookMap(&approved_syscalls);
+}
+
+
+//---------------------------------------------------------------------------
+// Syscall_QuerySystemInfo_SupportProcmonStack
+//---------------------------------------------------------------------------
+
 
 _FX BOOLEAN Syscall_QuerySystemInfo_SupportProcmonStack(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args)

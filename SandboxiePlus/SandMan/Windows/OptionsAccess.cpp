@@ -44,18 +44,20 @@ void COptionsWindow::OnAccessChanged()
 
 	UpdateAccessPolicy();
 
+	if ((sender() == ui.chkPrivacy || sender() == ui.chkRestrictDevices) && !(ui.chkPrivacy->isChecked() || ui.chkRestrictDevices->isChecked())) {
+		ui.chkUseSpecificity->setChecked(m_pBox->GetBool("UseRuleSpecificity", false));
+	}
+
 	m_AccessChanged = true; 
 	OnOptChanged();
 }
 
 void COptionsWindow::UpdateAccessPolicy()
 { 
+	ui.chkUseSpecificity->setEnabled(!(ui.chkPrivacy->isChecked() || ui.chkRestrictDevices->isChecked()));
+
 	if (ui.chkPrivacy->isChecked() || ui.chkRestrictDevices->isChecked()) {
-		ui.chkUseSpecificity->setEnabled(false);
 		ui.chkUseSpecificity->setChecked(true);
-	}
-	else {
-		ui.chkUseSpecificity->setEnabled(true);
 	}
 }
 

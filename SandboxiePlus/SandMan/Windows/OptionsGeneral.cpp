@@ -295,9 +295,15 @@ void COptionsWindow::UpdateBoxSecurity()
 	ui.chkLockDown->setEnabled(!ui.chkSecurityMode->isChecked());
 	ui.chkRestrictDevices->setEnabled(!ui.chkSecurityMode->isChecked());
 
-
 	if (!theAPI->IsRunningAsAdmin()) {
 		ui.chkDropRights->setEnabled(!ui.chkSecurityMode->isChecked() && !ui.chkNoSecurityIsolation->isChecked() && !theAPI->IsRunningAsAdmin());
+	}
+
+	if (ui.chkSecurityMode->isChecked()) {
+		ui.chkLockDown->setChecked(true);
+		ui.chkRestrictDevices->setChecked(true);
+
+		ui.chkDropRights->setChecked(true);
 	}
 
 	ui.chkMsiExemptions->setEnabled(!ui.chkDropRights->isChecked());
@@ -308,15 +314,19 @@ void COptionsWindow::OnSecurityMode()
 	if (ui.chkSecurityMode->isChecked() || ui.chkLockDown->isChecked() || ui.chkRestrictDevices->isChecked())
 		theGUI->CheckCertificate(this);
 
-	if (ui.chkSecurityMode->isChecked()) {
-		ui.chkLockDown->setChecked(true);
-		ui.chkRestrictDevices->setChecked(true);
-		ui.chkDropRights->setChecked(true);
-	}
-
 	UpdateBoxSecurity();
 
-	OnGeneralChanged();
+	if (sender() == ui.chkSecurityMode && !ui.chkSecurityMode->isChecked()) {
+		ui.chkLockDown->setChecked(m_pBox->GetBool("SysCallLockDown", false));
+		ui.chkRestrictDevices->setChecked(m_pBox->GetBool("RestrictDevices", false));
+		
+		ui.chkDropRights->setChecked(m_pBox->GetBool("DropAdminRights", false));
+	}
+
+	m_GeneralChanged = true;
+	OnOptChanged();
+
+	OnAccessChanged(); // for rule specificity
 }
 
 void COptionsWindow::OnPickColor()

@@ -1468,6 +1468,9 @@ _FX NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms)
             }
         }
 
+        void Syscall_Update_Lockdown();
+        Syscall_Update_Lockdown();
+
         /*
 #ifdef HOOK_WIN32K
         // must be windows 10 or later

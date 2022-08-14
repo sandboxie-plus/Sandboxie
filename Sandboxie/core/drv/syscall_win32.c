@@ -29,6 +29,8 @@ static BOOLEAN Syscall_Init_List32(void);
 
 static BOOLEAN Syscall_Init_Table32(void);
 
+void Syscall_Update_Lockdown32();
+
 
 //---------------------------------------------------------------------------
 
@@ -710,3 +712,25 @@ _FX NTSTATUS Syscall_Api_Query32(PROCESS *proc, ULONG64 *parms)
     return STATUS_SUCCESS;
 }
 
+//---------------------------------------------------------------------------
+// Syscall_Update_Lockdown32
+//---------------------------------------------------------------------------
+
+
+_FX void Syscall_Update_Lockdown32()
+{
+    SYSCALL_ENTRY *entry;
+
+    LIST approved_syscalls;
+    Syscall_LoadHookMap(L"ApproveWin32SysCall", &approved_syscalls);
+
+    entry = List_Head(&Syscall_List32);
+    while (entry) {
+
+        entry->approved = (Syscall_HookMapMatch(entry->name, entry->name_len, &approved_syscalls) != 0);
+
+        entry = List_Next(entry);
+    }
+
+    Syscall_FreeHookMap(&approved_syscalls);
+}

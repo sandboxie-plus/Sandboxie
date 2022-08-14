@@ -256,6 +256,11 @@ void COptionsWindow::OnIsolationChanged()
 
 	UpdateBoxIsolation();
 
+	if (sender() == ui.chkNoSecurityIsolation && !ui.chkNoSecurityIsolation->isChecked()) {
+		ui.chkCloseForBox->setChecked(m_pBox->GetBool("AlwaysCloseForBoxed", true));
+		ui.chkNoOpenForBox->setChecked(m_pBox->GetBool("DontOpenForBoxed", true));
+	}
+
 	m_AdvancedChanged = true;
 	OnOptChanged();
 }
@@ -275,8 +280,6 @@ void COptionsWindow::UpdateBoxIsolation()
 	ui.chkRawDiskRead->setEnabled(!ui.chkNoSecurityIsolation->isChecked()); //  without isolation only user mode
 	ui.chkRawDiskNotify->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
-	UpdateBoxSecurity();
-
 	ui.chkBlockNetShare->setEnabled(!ui.chkNoSecurityFiltering->isChecked());
 
 	ui.chkBlockSpooler->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
@@ -286,16 +289,12 @@ void COptionsWindow::UpdateBoxIsolation()
 	ui.chkCloseClipBoard->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 	ui.chkVmRead->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
+	ui.chkCloseForBox->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkNoOpenForBox->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
 	if (ui.chkNoSecurityIsolation->isChecked()) {
-		ui.chkCloseForBox->setEnabled(false);
 		ui.chkCloseForBox->setChecked(false);
-		ui.chkNoOpenForBox->setEnabled(false);
 		ui.chkNoOpenForBox->setChecked(false);
-	}
-	else {
-		ui.chkCloseForBox->setEnabled(true);
-		ui.chkNoOpenForBox->setEnabled(true);
 	}
 }
 

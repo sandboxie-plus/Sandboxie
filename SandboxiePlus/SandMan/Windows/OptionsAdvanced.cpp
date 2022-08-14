@@ -141,6 +141,14 @@ void COptionsWindow::LoadAdvanced()
 	m_AdvancedChanged = false;
 }
 
+void COptionsWindow::OnPSTChanged()
+{
+	if(!ui.chkOpenProtectedStorage->isChecked())
+		ui.chkOpenCredentials->setChecked(m_pBox->GetBool("OpenCredentials", false));
+
+	OnGeneralChanged();
+}
+
 void COptionsWindow::ShowTriggersTmpl(bool bUpdate)
 {
 	if (ui.chkShowTriggersTmpl->isChecked())

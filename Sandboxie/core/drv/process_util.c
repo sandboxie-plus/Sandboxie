@@ -854,73 +854,6 @@ _FX const WCHAR *Process_MatchPath(
 
 
 //---------------------------------------------------------------------------
-// Process_MatchPathList
-//---------------------------------------------------------------------------
-
-
-_FX int Process_MatchPathList(
-    WCHAR *path_lwr, ULONG path_len, LIST *list, ULONG* plevel, BOOLEAN* pexact, const WCHAR** patsrc)
-{
-    PATTERN *pat;
-    int match_len = 0;
-    ULONG level = plevel ? *plevel : -1; // lower is better, 3 is max value
-    BOOLEAN exact = pexact ? *pexact : FALSE;
-
-    pat = List_Head(list);
-    while (pat) {
-
-        ULONG cur_level = Pattern_Level(pat);
-        if (cur_level > level)
-            goto next; // no point testing patters with a to weak level
-
-        BOOLEAN cur_exact = Pattern_Exact(pat);
-        if (!cur_exact && exact)
-            goto next; // no point testing patters with a to weak level
-
-        int cur_len = Pattern_MatchX(pat, path_lwr, path_len);
-        if (cur_len > match_len) {
-            match_len = cur_len;
-            level = cur_level;
-            exact = cur_exact;
-            if (patsrc) *patsrc = Pattern_Source(pat);
-            
-            // we need to test all entries to find the best match, so we dont break here
-            // unless we found an exact match, than there cant be a batter one
-            if (exact)
-                break;
-        }
-
-        //
-        // if we have a pattern like C:\Windows\,
-        // we still want it to match a path like C:\Windows,
-        // hence we add a L'\\' to the path and check again
-        //
-
-        else if (path_lwr[path_len - 1] != L'\\') { 
-            path_lwr[path_len] = L'\\';
-            cur_len = Pattern_MatchX(pat, path_lwr, path_len + 1);
-            path_lwr[path_len] = L'\0';
-            if (cur_len > match_len) {
-                match_len = cur_len;
-                level = cur_level;
-                exact = cur_exact;
-                if (patsrc) *patsrc = Pattern_Source(pat);
-                if (exact)
-                    break;
-            }
-        }
-
-    next:
-        pat = List_Next(pat);
-    }
-
-    if (plevel) *plevel = level;
-    if (pexact) *pexact = exact;
-    return match_len;
-}
-
-
-//---------------------------------------------------------------------------
 // Process_MatchPathEx
 //---------------------------------------------------------------------------
 
@@ -935,13 +868,10 @@ _FX ULONG Process_MatchPathEx(
     PATTERN *pat;
     WCHAR *path_lwr;
     ULONG path_lwr_len;
-    const WCHAR* curpat;
-    ULONG cur_level;
-    BOOLEAN cur_exact;
-    int cur_len;
     int match_len;
     ULONG level;
     BOOLEAN exact;
+    USHORT wildc;
     ULONG mp_flags;
 
     path_lwr_len = (path_len + 4) * sizeof(WCHAR);
@@ -972,8 +902,10 @@ _FX ULONG Process_MatchPathEx(
     // Rules with the most exact matches overrule the more generic once.
     // The match level overrules the specificity.
     // 
+    // A rule with less wildcards will overrule one with more
+    // 
     // If a rule ends with an * it is not exact and will be overruled by an exact rule
-    //
+    // 
     // Adding UseRuleSpecificity=n disables this behavioure and reverts to the old classical one
     //
 
@@ -983,6 +915,7 @@ _FX ULONG Process_MatchPathEx(
 
     level = 3; // 3 - global default - lower is better, 3 is max value
     exact = FALSE;
+    wildc = -1; // lower is better
     match_len = 0;
     if (path_code == L'n' && proc->file_block_network_files) {
 
@@ -1018,20 +951,10 @@ _FX ULONG Process_MatchPathEx(
     // closed path list, in non specific mode has the higher priority
     // these paths are inaccessible for true and copy locations 
     //
-    
-    if (closed_list) {
-        cur_level = level;
-        cur_exact = exact;
-        cur_len = Process_MatchPathList(path_lwr, path_len, closed_list, &cur_level, &cur_exact, &curpat);
-        if (cur_level <= level && ((!exact && cur_exact) || (cur_len > match_len))) {
-            level = cur_level;
-            exact = cur_exact;
-            match_len = cur_len;
-            if (patsrc) *patsrc = curpat;
 
-            mp_flags = TRUE_PATH_CLOSED_FLAG | COPY_PATH_CLOSED_FLAG;
-            if (!proc->use_rule_specificity) goto finish;
-        }
+    if (Pattern_MatchPathListEx(path_lwr, path_len, closed_list, &level, &match_len, &exact, &wildc, patsrc)) {
+        mp_flags = TRUE_PATH_CLOSED_FLAG | COPY_PATH_CLOSED_FLAG;
+        if (!proc->use_rule_specificity) goto finish;
     }
     
     //
@@ -1039,19 +962,9 @@ _FX ULONG Process_MatchPathEx(
     // these paths allow read acces to true location and read/write access to copy location
     //
     
-    if (write_list) {
-        cur_level = level;
-        cur_exact = exact;
-        cur_len = Process_MatchPathList(path_lwr, path_len, write_list, &cur_level, &cur_exact, &curpat);
-        if (cur_level <= level && ((!exact && cur_exact) || (cur_len > match_len))) {
-            level = cur_level;
-            exact = cur_exact;
-            match_len = cur_len;
-            if (patsrc) *patsrc = curpat;
-
-            mp_flags = TRUE_PATH_CLOSED_FLAG | COPY_PATH_OPEN_FLAG;
-            if (!proc->use_rule_specificity) goto finish;
-        }
+    if (Pattern_MatchPathListEx(path_lwr, path_len, write_list, &level, &match_len, &exact, &wildc, patsrc)) {
+        mp_flags = TRUE_PATH_CLOSED_FLAG | COPY_PATH_OPEN_FLAG;
+        if (!proc->use_rule_specificity) goto finish;
     }
     
     //
@@ -1059,60 +972,30 @@ _FX ULONG Process_MatchPathEx(
     // these paths allow read only acces to true path and copy locations
     //
     
-    if (read_list) {
-        cur_level = level;
-        cur_exact = exact;
-        cur_len = Process_MatchPathList(path_lwr, path_len,read_list, &cur_level, &cur_exact, &curpat);
-        if (cur_level <= level && ((!exact && cur_exact) || (cur_len > match_len))) {
-            level = cur_level;
-            exact = cur_exact;
-            match_len = cur_len;
-            if (patsrc) *patsrc = curpat;
-
-            mp_flags = TRUE_PATH_READ_FLAG | COPY_PATH_READ_FLAG;
-            if (!proc->use_rule_specificity) goto finish;
-        }
+    if (Pattern_MatchPathListEx(path_lwr, path_len, read_list, &level, &match_len, &exact, &wildc, patsrc)) {
+        mp_flags = TRUE_PATH_READ_FLAG | COPY_PATH_READ_FLAG;
+        if (!proc->use_rule_specificity) goto finish;
     }
     
     //
     // normal path list restores normal behavioure when used in specific mode
     // these paths allow reading the true location and write to the copy location
     //
-    
-    if (normal_list) {
-        cur_level = level;
-        cur_exact = exact;
-        cur_len = Process_MatchPathList(path_lwr, path_len, normal_list, &cur_level, &cur_exact, &curpat);
-        if (cur_level <= level && ((!exact && cur_exact) || (cur_len > match_len))) {
-            level = cur_level;
-            exact = cur_exact;
-            match_len = cur_len;
-            if (patsrc) *patsrc = curpat;
 
-            mp_flags = TRUE_PATH_READ_FLAG | COPY_PATH_OPEN_FLAG;
-            // dont goto finish as open can overwrite this 
-        }
+    if (Pattern_MatchPathListEx(path_lwr, path_len, normal_list, &level, &match_len, &exact, &wildc, patsrc)) {
+        mp_flags = TRUE_PATH_READ_FLAG | COPY_PATH_OPEN_FLAG;
+        // dont goto finish as open can overwrite this 
     }
     
     //
     // open path has lowest priority in non specific mode 
     // these paths allow read/write access to the true location
     //
-    
-    if (open_list) {
-        cur_level = level;
-        cur_exact = exact;
-        cur_len = Process_MatchPathList(path_lwr, path_len, open_list, &cur_level, &cur_exact, &curpat);
-        if (cur_level <= level && ((!exact && cur_exact) || (cur_len > match_len))) {
-            level = cur_level;
-            exact = cur_exact;
-            match_len = cur_len;
-            if (patsrc) *patsrc = curpat;
 
-            mp_flags = TRUE_PATH_OPEN_FLAG;
-        }
+    if (Pattern_MatchPathListEx(path_lwr, path_len, open_list, &level, &match_len, &exact, &wildc, patsrc)) {
+        mp_flags = TRUE_PATH_OPEN_FLAG;
     }
-
+    
 
 finish:
     Mem_Free(path_lwr, path_lwr_len);

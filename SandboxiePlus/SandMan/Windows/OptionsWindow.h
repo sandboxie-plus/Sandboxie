@@ -167,6 +167,7 @@ private slots:
 	void OnTab();
 
 	void OnGeneralChanged();
+	void OnPSTChanged();
 	void OnSecurityMode();
 	void OnStartChanged()			{ m_StartChanged = true; OnOptChanged(); }
 	//void OnRestrictionChanged()		{ m_RestrictionChanged = true; OnOptChanged(); }

@@ -301,73 +301,6 @@ _FX void SbieDll_ReleaseFilePathLock()
 {
     LeaveCriticalSection(&Dll_FilePathListCritSec);
 }
-
-
-//---------------------------------------------------------------------------
-// Process_MatchPathList
-//---------------------------------------------------------------------------
-
-
-_FX int Process_MatchPathList(
-    WCHAR *path_lwr, ULONG path_len, LIST *list, ULONG* plevel, BOOLEAN* pexact, const WCHAR** patsrc)
-{
-    PATTERN *pat;
-    int match_len = 0;
-    ULONG level = plevel ? *plevel : -1; // lower is better, 3 is max value
-    BOOLEAN exact = pexact ? *pexact : FALSE;
-
-    pat = List_Head(list);
-    while (pat) {
-
-        ULONG cur_level = Pattern_Level(pat);
-        if (cur_level > level)
-            goto next; // no point testing patters with a to weak level
-
-        BOOLEAN cur_exact = Pattern_Exact(pat);
-        if (!cur_exact && exact)
-            goto next; // no point testing patters with a to weak level
-
-        int cur_len = Pattern_MatchX(pat, path_lwr, path_len);
-        if (cur_len > match_len) {
-            match_len = cur_len;
-            level = cur_level;
-            exact = cur_exact;
-            if (patsrc) *patsrc = Pattern_Source(pat);
-            
-            // we need to test all entries to find the best match, so we dont break here
-            // unless we found an exact match, than there cant be a batter one
-            if (exact)
-                break;
-        }
-
-        //
-        // if we have a pattern like C:\Windows\,
-        // we still want it to match a path like C:\Windows,
-        // hence we add a L'\\' to the path and check again
-        //
-
-        else if (path_lwr[path_len - 1] != L'\\') { 
-            path_lwr[path_len] = L'\\';
-            cur_len = Pattern_MatchX(pat, path_lwr, path_len + 1);
-            path_lwr[path_len] = L'\0';
-            if (cur_len > match_len) {
-                match_len = cur_len;
-                level = cur_level;
-                exact = cur_exact;
-                if (patsrc) *patsrc = Pattern_Source(pat);
-                if (exact)
-                    break;
-            }
-        }
-
-    next:
-        pat = List_Next(pat);
-    }
-
-    if (plevel) *plevel = level;
-    if (pexact) *pexact = exact;
-    return match_len;
-}
 #endif
 
 
@@ -529,13 +462,11 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
 
 #ifdef USE_MATCH_PATH_EX
   
-    //const WCHAR* curpat;
-    ULONG cur_level;
-    BOOLEAN cur_exact;
-    int cur_len;
+    //WCHAR* patsrc = NULL;
     int match_len;
     ULONG level;
     BOOLEAN exact;
+    USHORT wildc;
 
     BOOLEAN use_rule_specificity = (path_code == L'f' || path_code == L'k' || path_code == L'i') && (Dll_ProcessFlags & SBIE_FLAG_RULE_SPECIFICITY) != 0;
 
@@ -545,6 +476,7 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
 
     level = 3; // 3 - global default - lower is better, 3 is max value
     exact = FALSE;
+    wildc = -1; // lower is better
     match_len = 0;
     if ((path_code == L'f' || path_code == L'k' || path_code == L'i') && (Dll_ProcessFlags & SBIE_FLAG_PRIVACY_MODE) != 0) {
 
@@ -558,96 +490,47 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
     //
     // ClosedXxxPath
     //
-    
-    if (closed_list && path_len) {
-        cur_level = level;
-        cur_exact = exact;
-        cur_len = Process_MatchPathList(path_lwr, path_len, closed_list, &cur_level, &cur_exact, NULL);// &curpat);
-        if (cur_level <= level && ((!exact && cur_exact) || (cur_len > match_len))) {
-            level = cur_level;
-            exact = cur_exact;
-            match_len = cur_len;
-            //if (patsrc) *patsrc = curpat;
 
-            mp_flags = PATH_CLOSED_FLAG;
-            if (!use_rule_specificity) goto finish;
-        }
+    if (Pattern_MatchPathListEx(path_lwr, path_len, closed_list, &level, &match_len, &exact, &wildc, NULL)) { //patsrc)) {
+        mp_flags = PATH_CLOSED_FLAG;
+        if (!use_rule_specificity) goto finish;
     }
     
     //
     // WriteXxxPath
     //
     
-    if (write_list && path_len) {
-        cur_level = level;
-        cur_exact = exact;
-        cur_len = Process_MatchPathList(path_lwr, path_len, write_list, &cur_level, &cur_exact, NULL);// &curpat);
-        if (cur_level <= level && ((!exact && cur_exact) || (cur_len > match_len))) {
-            level = cur_level;
-            exact = cur_exact;
-            match_len = cur_len;
-            //if (patsrc) *patsrc = curpat;
-
-            mp_flags = PATH_WRITE_FLAG;
-            if (!use_rule_specificity) goto finish;
-        }
+    if (Pattern_MatchPathListEx(path_lwr, path_len, write_list, &level, &match_len, &exact, &wildc, NULL)) { //patsrc)) {
+        mp_flags = PATH_WRITE_FLAG;
+        if (!use_rule_specificity) goto finish;
     }
     
     //
     // ReadXxxPath
     //
     
-    if (read_list && path_len) {
-        cur_level = level;
-        cur_exact = exact;
-        cur_len = Process_MatchPathList(path_lwr, path_len,read_list, &cur_level, &cur_exact, NULL);// &curpat);
-        if (cur_level <= level && ((!exact && cur_exact) || (cur_len > match_len))) {
-            level = cur_level;
-            exact = cur_exact;
-            match_len = cur_len;
-            //if (patsrc) *patsrc = curpat;
-
-            mp_flags = PATH_OPEN_FLAG; // say its open and let the driver deny the write access
-            if (!use_rule_specificity) goto finish;
-        }
+    if (Pattern_MatchPathListEx(path_lwr, path_len, read_list, &level, &match_len, &exact, &wildc, NULL)) { //patsrc)) {
+        mp_flags = PATH_OPEN_FLAG; // say its open and let the driver deny the write access
+        if (!use_rule_specificity) goto finish;
     }
     
     //
     // NormalXxxPath
     //
     
-    if (normal_list && path_len) {
-        cur_level = level;
-        cur_exact = exact;
-        cur_len = Process_MatchPathList(path_lwr, path_len, normal_list, &cur_level, &cur_exact, NULL);// &curpat);
-        if (cur_level <= level && ((!exact && cur_exact) || (cur_len > match_len))) {
-            level = cur_level;
-            exact = cur_exact;
-            match_len = cur_len;
-            //if (patsrc) *patsrc = curpat;
-
-            mp_flags = 0;
-            // don't goto finish as open can overwrite this 
-        }
+    if (Pattern_MatchPathListEx(path_lwr, path_len, normal_list, &level, &match_len, &exact, &wildc, NULL)) { //patsrc)) {
+        mp_flags = 0;
+        // dont goto finish as open can overwrite this 
     }
 
     //
     // OpenXxxPath
     //
-    
-    if (open_list && path_len) {
-        cur_level = level;
-        cur_exact = exact;
-        cur_len = Process_MatchPathList(path_lwr, path_len, open_list, &cur_level, &cur_exact, NULL);// &curpat);
-        if (cur_level <= level && ((!exact && cur_exact) || (cur_len > match_len))) {
-            level = cur_level;
-            exact = cur_exact;
-            match_len = cur_len;
-            //if (patsrc) *patsrc = curpat;
 
-            mp_flags = PATH_OPEN_FLAG;
-        }
+    if (Pattern_MatchPathListEx(path_lwr, path_len, open_list, &level, &match_len, &exact, &wildc, NULL)) { //patsrc)) {
+        mp_flags = PATH_OPEN_FLAG;
     }
+
 
 finish:
 
@@ -770,8 +653,9 @@ finish:
             monflag |= MONITOR_DENY;
         // If hts file or key it will be logged by the driver's trace facility
         // we only have to log closed events as those never reach the driver
-        else if (monflag == MONITOR_FILE || monflag == MONITOR_KEY)
-            bMonitorLog = FALSE;
+        // we need to always log to have also logs in compartment mode
+        //else if (monflag == MONITOR_FILE || monflag == MONITOR_KEY)
+        //    bMonitorLog = FALSE;
         else if (PATH_IS_OPEN(mp_flags))
             monflag |= MONITOR_OPEN;
 

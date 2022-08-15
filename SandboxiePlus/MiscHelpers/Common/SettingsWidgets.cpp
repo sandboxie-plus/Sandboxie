@@ -80,6 +80,7 @@ CConfigDialog::CConfigDialog(QWidget* parent)
 	: QDialog(parent) 
 {
 	m_pStack = NULL;
+	m_pSearch = NULL;
 	m_pTree = NULL;
 }
 
@@ -94,12 +95,12 @@ QWidget* CConfigDialog::ConvertToTree(QTabWidget* pTabWidget)
 	QStyle* pStyle = QStyleFactory::create("windows"); // show lines
 	m_pTree->setStyle(pStyle);
 	connect(m_pTree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnItemClicked(QTreeWidgetItem*, int)));
-	QLineEdit* pSearch = new QLineEdit();
-	pSearch->setPlaceholderText(tr("Search Option"));
-	QObject::connect(pSearch, SIGNAL(returnPressed()), this, SLOT(OnSearchOption()));
+	m_pSearch = new QLineEdit();
+	m_pSearch->setPlaceholderText(tr("Search Option"));
+	QObject::connect(m_pSearch, SIGNAL(returnPressed()), this, SLOT(OnSearchOption()));
 	m_SearchI = m_SearchJ = m_SearchP = 0;
 	m_LastFound = NULL;
-	pLayout->addWidget(pSearch, 0, 0);
+	pLayout->addWidget(m_pSearch, 0, 0);
 	pLayout->addWidget(m_pTree, 1, 0);
 	m_pStack = new QStackedLayout();
 	m_pStack->setContentsMargins(0, 0, 0, 0);
@@ -189,8 +190,7 @@ QWidget* CConfigDialog__SearchOption(QTreeWidget* pTree, QStackedLayout* pStack,
 
 void CConfigDialog::OnSearchOption()
 {
-	QLineEdit* pSearch = (QLineEdit*)sender();
-	QString Text = pSearch->text().toLower();
+	QString Text = m_pSearch->text().toLower();
 
 	if (m_LastFound) {
 		//m_LastFound->setPalette(QApplication::palette());

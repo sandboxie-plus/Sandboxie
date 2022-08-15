@@ -446,6 +446,7 @@ protected:
 	virtual void OnTab(int iTabID) = 0;
 
 	QStackedLayout* m_pStack;
+	QLineEdit* m_pSearch;
 	QTreeWidget* m_pTree;
 	int m_iCurrentTab;
 	int m_SearchI;

@@ -21,7 +21,7 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="247"/>
         <source>To use &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in a business setting, an appropriate &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt; for business use is required. If you do not yet have the required certificate(s), you can get those from the &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com web shop&lt;/a&gt;.</source>
-        <translation>Um &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in einer geschäftlichen Umgebung zu verwenden, ist ein geeignetes &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Unterstützerzertifikat&lt;/a&gt; für kommerzielle Zwecke erforderlich. Wenn Sie noch kein(e) erfordliche(s/en) haben, können Sie dies(e) im &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com Webshop&lt;/a&gt; bekommen.</translation>
+        <translation>Um &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in einer geschäftlichen Umgebung zu verwenden, ist ein geeignetes &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Unterstützerzertifikat&lt;/a&gt; für kommerzielle Zwecke erforderlich. Wenn Sie noch kein(e) erforderliche(s/en) haben, können Sie dies(e) im &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com Webshop&lt;/a&gt; bekommen.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="261"/>
@@ -590,7 +590,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="101"/>
         <source>Security/Privacy</source>
-        <translation>Sicherheit/Privatspähre</translation>
+        <translation>Sicherheit/Privatsphäre</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="102"/>
@@ -1591,7 +1591,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="650"/>
         <source>Windows Shell Integration</source>
-        <translation>Windows Menüintergration</translation>
+        <translation>Windows Menüintegration</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="652"/>
@@ -1745,7 +1745,7 @@ Nein wählt: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2775"/>
         <source>This copy of Sandboxie+ is certified for: %1</source>
-        <translation>Dies Kopie von Sandboxie+ ist zertifziert für: %1</translation>
+        <translation>Diese Kopie von Sandboxie+ ist zertifiziert für: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2777"/>
@@ -1771,7 +1771,7 @@ Nein wählt: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="1851"/>
         <source>, but it remains valid for the current build</source>
-        <translation>, aber es blebt für die aktuelle Version gültig</translation>
+        <translation>, aber es bleibt für die aktuelle Version gültig</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1853"/>
@@ -2167,7 +2167,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="2567"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
-        <translation>Fehler beim Zusammenführen der Schnappschuss Ordner: &apos;%1&apos; with &apos;%2&apos;, der Schnappschuss wurde nicht vollständig zusammengeführt.</translation>
+        <translation>Fehler beim Zusammenführen der Schnappschuss Ordner: &apos;%1&apos; mit &apos;%2&apos;, der Schnappschuss wurde nicht vollständig zusammengeführt.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2568"/>
@@ -2186,7 +2186,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="2572"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
-        <translation>Fehler beimSetzen der Konfigurationsoption %1 in Sektion %2: %3</translation>
+        <translation>Fehler beim Setzen der Konfigurationsoption %1 in Sektion %2: %3</translation>
     </message>
     <message>
         <source>Unknown Error Status: %1</source>
@@ -2357,12 +2357,12 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="2245"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
-        <translation>Im Plus-UI wurde diese Funktionalität in die Hauptliistenansicht der Sandboxen integriert.</translation>
+        <translation>Im Plus-UI wurde diese Funktionalität in die Hauptlistenansicht der Sandboxen integriert.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2246"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
-        <translation>Mit dem Box/Gruppenkontextmenü können Sie Boxen und Gruppen zu anderen Gruppen bewegen. Sie können die Elemente auch per Ziehen und Loslassen bewegen. Alternativ können Sie die Pfeiltasten nutzen, während Sie ALT gedrückt halten, um die Elemente innerhalb ihrer Gruppe rauf und runter zu bewegen.&lt;br /&gt;Sie können neue Boxen und Gruppen aus dem Sandboxmenü erstellen.</translation>
+        <translation>Mit dem Box-/Gruppenkontextmenü können Sie Boxen und Gruppen zu anderen Gruppen bewegen. Sie können die Elemente auch per Ziehen und Loslassen bewegen. Alternativ können Sie die Pfeiltasten nutzen, während Sie ALT gedrückt halten, um die Elemente innerhalb ihrer Gruppe rauf und runter zu bewegen.&lt;br /&gt;Sie können neue Boxen und Gruppen aus dem Sandboxmenü erstellen.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2435"/>
@@ -2422,7 +2422,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="2622"/>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
-        <translation>Möchten Sie %1 in einem sandgeboxten (Ja) oder in einem nicht gesandboxten (Nein) Browser öffnen?</translation>
+        <translation>Möchten Sie %1 in einem sandgeboxten (Ja) oder in einem nicht sandgeboxten (Nein) Browser öffnen?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2623"/>
@@ -2476,7 +2476,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="main.cpp" line="120"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
-        <translation>Sandboxie Manager kann nicht in einer Sandbox getartet werden!</translation>
+        <translation>Sandboxie Manager kann nicht in einer Sandbox gestartet werden!</translation>
     </message>
 </context>
 <context>
@@ -2853,7 +2853,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Views/SbieView.cpp" line="343"/>
         <source>Rename Group</source>
-        <translation>Gruppe umbenenen</translation>
+        <translation>Gruppe umbenennen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="144"/>
@@ -3086,7 +3086,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Views/SbieView.cpp" line="1092"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
-        <translation>WARNUNG: Der geöffnete Registrierungseditor befindet sich nicht in einer Sandbox, bitte seinen Sie vorsichtig und nehmen nur Änderungen an den vorausgewählten Sandboxorten vor.</translation>
+        <translation>WARNUNG: Der geöffnete Registrierungseditor befindet sich nicht in einer Sandbox, bitte seien Sie vorsichtig und nehmen nur Änderungen an den vorausgewählten Sandboxorten vor.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1093"/>
@@ -3146,7 +3146,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Views/SbieView.cpp" line="1353"/>
         <source>the selected processes</source>
-        <translation>die ausgewählten Prozessse</translation>
+        <translation>die ausgewählten Prozesse</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1414"/>
@@ -3337,7 +3337,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="145"/>
         <source>Show Classic icon</source>
-        <translation>Klassiches Icon anzeigen</translation>
+        <translation>Klassisches Icon anzeigen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="147"/>
@@ -3495,7 +3495,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1119"/>
         <source>Do you want to download the version %1?</source>
-        <translation>Möchten Sie die Version %1 herrunterladen?</translation>
+        <translation>Möchten Sie die Version %1 herunterladen?</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="858"/>
@@ -3585,7 +3585,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="173"/>
         <source>Please enter a name for the new Snapshot.</source>
-        <translation>Bitte einen Namen für den neuen Schnappschuss  eingeben.</translation>
+        <translation>Bitte einen Namen für den neuen Schnappschuss eingeben.</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="173"/>
@@ -3618,7 +3618,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/SupportDialog.cpp" line="103"/>
         <source>&lt;u&gt;Commercial use of Sandboxie past the evaluation period&lt;/u&gt;, requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt;.</source>
-        <translation>&amp;lt;u&amp;gt;Kommerzielle Nutzung von Sandboxie nach der Evualationsphase&amp;lt;/u&amp;gt;, erfordert ein gültiges &amp;lt;a href=&amp;quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&amp;quot;&amp;gt;Unterstützerzertifikat&amp;lt;/a&amp;gt;.</translation>
+        <translation>&amp;lt;u&amp;gt;Kommerzielle Nutzung von Sandboxie nach der Evaluationsphase&amp;lt;/u&amp;gt;, erfordert ein gültiges &amp;lt;a href=&amp;quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&amp;quot;&amp;gt;Unterstützerzertifikat&amp;lt;/a&amp;gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="110"/>
@@ -3648,7 +3648,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/SupportDialog.cpp" line="122"/>
         <source>Please continue &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; by renewing your &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; and continue using the &lt;b&gt;enhanced functionality&lt;/b&gt; in new builds.</source>
-        <translation>Bitte behalten Sie &amp;lt;a href=&amp;quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&amp;quot;&amp;gt;die Unterstützung des Projektes bei&amp;lt;/a&amp;gt; duch die Erneuerung Ihres &amp;lt;a href=&amp;quot;https://sandboxie-plus.com/go.php?to=sbie-cert&amp;quot;&amp;gt; Unterstützerzertifikates&amp;lt;/a&amp;gt; und setzen Sie die Verwendung &amp;lt;b&amp;gt;erweiterter Funktionalität&amp;lt;/b&amp;gt; in neuem Versionen fort.</translation>
+        <translation>Bitte behalten Sie &amp;lt;a href=&amp;quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&amp;quot;&amp;gt;die Unterstützung des Projektes bei&amp;lt;/a&amp;gt; durch die Erneuerung Ihres &amp;lt;a href=&amp;quot;https://sandboxie-plus.com/go.php?to=sbie-cert&amp;quot;&amp;gt; Unterstützerzertifikates&amp;lt;/a&amp;gt; und setzen Sie die Verwendung &amp;lt;b&amp;gt;erweiterter Funktionalität&amp;lt;/b&amp;gt; in neuen Versionen fort.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="125"/>
@@ -3856,12 +3856,12 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="304"/>
         <source>Select the user interface style you prefer.</source>
-        <translation>Wählen Sie Ihren bervorzugten Stil der Nutzeroberfläche.</translation>
+        <translation>Wählen Sie Ihren bevorzugten Stil der Nutzeroberfläche.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="308"/>
         <source>&amp;Advanced UI for experts</source>
-        <translation>E&amp;rweiterte Nuzteroberfläche für Experten</translation>
+        <translation>E&amp;rweiterte Nutzeroberfläche für Experten</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="313"/>
@@ -3930,7 +3930,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="77"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation>Eine Sandbox isoliert Ihr Hostsystem von Prozessen, die in dieser Box laufen, sie hindert diese permanente Änderungen an anderen Programmen oder Daten auf Ihrem Computer zu machen. Der Level an Isolation beeinflußt Ihre Sicherheit, ebenso wie die Kompatibilität mit Programmen, somit wird es verschiedene Stufen der Isolation geben, abhängig vom ausgewählten Boxtyp. Sandboxie kann auch Ihre persönlichen Daten vor Zugriff durch Prozesse, die unter dessen Aufsicht laufen, schützen.</translation>
+        <translation>Eine Sandbox isoliert Ihr Hostsystem von Prozessen, die in dieser Box laufen, sie hindert diese permanente Änderungen an anderen Programmen oder Daten auf Ihrem Computer zu machen. Der Level an Isolation beeinflusst Ihre Sicherheit, ebenso wie die Kompatibilität mit Programmen, somit wird es verschiedene Stufen der Isolation geben, abhängig vom ausgewählten Boxtyp. Sandboxie kann auch Ihre persönlichen Daten vor Zugriff durch Prozesse, die unter dessen Aufsicht laufen, schützen.</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="94"/>
@@ -4202,12 +4202,12 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1028"/>
         <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
-        <translation>Programme die hier gelistet sind oder von den angegeben Ordnern gestartet werden, werden automatisch in dieser Sandbox ausgeführt, solange sie nicht explizit in einer anderen Sandbox gestartet werden.</translation>
+        <translation>Programme die hier gelistet sind oder von den angegebenen Ordnern gestartet werden, werden automatisch in dieser Sandbox ausgeführt, solange sie nicht explizit in einer anderen Sandbox gestartet werden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1041"/>
         <source>Stop Behaviour</source>
-        <translation>Stopverhalten</translation>
+        <translation>Stoppverhalten</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1049"/>
@@ -4262,7 +4262,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="536"/>
         <source>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
-        <translation>Notiz: MSI-Installer-Ausnahmen sollten nicht benötigt werden, aber wenn Sie auf Probleme bei der Installation einens MSI-Paketes haben, welchem Sie vertrauen, kann diese Option hilfreich sein die Installation erfolgreich abzuschließen. Sie können auch versuchen die Rechteabgabe zu deaktivieren.</translation>
+        <translation>Notiz: MSI-Installer-Ausnahmen sollten nicht benötigt werden, aber wenn Sie auf Probleme bei der Installation eines MSI-Paketes haben, welchem Sie vertrauen, kann diese Option hilfreich sein die Installation erfolgreich abzuschließen. Sie können auch versuchen die Rechteabgabe zu deaktivieren.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="97"/>
@@ -4282,7 +4282,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="127"/>
         <source>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</source>
-        <translation>&lt;b&gt;Weitere BoxTypen&lt;/b&gt; sind exklusiv verfügbar für  &lt;u&gt;Projektunterstützer&lt;/u&gt;, die verbesserten Privatspähreboxen &lt;b&gt;&lt;font color=&apos;red&apos;&gt;schützen Nutzerdaten vor unbefügtem Zugriff&lt;/font&gt;&lt;/b&gt; durch sandgeboxte Programme.&lt;br /&gt;Falls Sie noch kein Unterstützer sind, erwägen Sie bitte &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;das Projekt zu unterstützen&lt;/a&gt;, um ein &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;Unterstüzerzertifikat&lt;/a&gt; zu erhalten.&lt;br /&gt;Sie können die anderen Boxtypen testen, indem Sie Boxen mit diesen Typen erstellen, jedoch werden die Prozesse in diesen Boxen nach 5 Minuten beendet.</translation>
+        <translation>&lt;b&gt;Weitere BoxTypen&lt;/b&gt; sind exklusiv verfügbar für &lt;u&gt;Projektunterstützer&lt;/u&gt;, die verbesserten Privatsphäreboxen &lt;b&gt;&lt;font color=&apos;red&apos;&gt;schützen Nutzerdaten vor unbefugtem Zugriff&lt;/font&gt;&lt;/b&gt; durch sandgeboxte Programme.&lt;br /&gt;Falls Sie noch kein Unterstützer sind, erwägen Sie bitte &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;das Projekt zu unterstützen&lt;/a&gt;, um ein &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;Unterstützerzertifikat&lt;/a&gt; zu erhalten.&lt;br /&gt;Sie können die anderen Boxtypen testen, indem Sie Boxen mit diesen Typen erstellen, jedoch werden die Prozesse in diesen Boxen nach 5 Minuten beendet.</translation>
     </message>
     <message>
         <source>Admin Rights</source>
@@ -4544,7 +4544,7 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1967"/>
         <source>Add sandboxed processes to job objects (recommended)</source>
-        <translation>Füge gesandboxte Prozesse zu Job-Objekten hinzu (empfohlen)</translation>
+        <translation>Füge sandgeboxte Prozesse zu Job-Objekten hinzu (empfohlen)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1995"/>
@@ -4554,7 +4554,7 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     <message>
         <location filename="Forms/OptionsWindow.ui" line="773"/>
         <source>Open System Protected Storage</source>
-        <translation>Öffne systemgeschützen Speicherort</translation>
+        <translation>Öffne systemgeschützten Speicherort</translation>
     </message>
     <message>
         <source>Open Windows Credentials Store</source>
@@ -4563,7 +4563,7 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2043"/>
         <source>Don&apos;t alter window class names created by sandboxed programs</source>
-        <translation>Fensterklassen von gesandboxten Programmen nicht ändern</translation>
+        <translation>Fensterklassen von sandgeboxten Programmen nicht ändern</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2098"/>
@@ -4585,7 +4585,7 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     <message>
         <location filename="Forms/OptionsWindow.ui" line="566"/>
         <source>CAUTION: When running under the built in administrator, processes can not drop administrative privileges.</source>
-        <translation>ACHTUNG: Bei Ausführung unter dem eingebauten Administrator, können Prozessse ihre administrativen Rechten nicht abgeben.</translation>
+        <translation>ACHTUNG: Bei Ausführung unter dem eingebauten Administrator, können Prozesse ihre administrativen Rechten nicht abgeben.</translation>
     </message>
     <message>
         <source>Program/Service</source>
@@ -4602,7 +4602,7 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1953"/>
         <source>Emulate sandboxed window station for all processes</source>
-        <translation>Emuliere sandgeboste &apos;Window Stations&apos; für alle Prozesse</translation>
+        <translation>Emuliere sandgeboxte &apos;Window Stations&apos; für alle Prozesse</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2142"/>
@@ -4681,7 +4681,7 @@ Zum Dateizugriff können Sie &apos;Direkt Alle&apos; verwenden um für alle Prog
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
-        <translation>Füge Nutzerkonten und -gruppen der Liste hinzu, um die Benutzung der Sandbox auf diese Konten zu beschränken.Falls die Liste leer ist, kann die Sandbox von allen Konten genutzt werden.
+        <translation>Füge Nutzerkonten und -gruppen der Liste hinzu, um die Benutzung der Sandbox auf diese Konten zu beschränken. Falls die Liste leer ist, kann die Sandbox von allen Konten genutzt werden.
 
 Notiz: Erzwungene Programme und Ordner für eine Sandbox finden keine Anwendung auf Konten, die diese Sandbox nicht nutzen können.</translation>
     </message>
@@ -4899,7 +4899,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1467"/>
         <source>CAUTION: Windows Filtering Platform is not enabled with the driver, therefore these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</source>
-        <translation>ACHTUNG: Die Windows Filtering Platfrom wird nicht durch den Treiber ermöglicht, deshalb können diese Regeln nur im Nutzerkontext angewendet und nicht erzwungen werden!!! Dies bedeutet, dass ein bösartiges Programm diese umgehen könnte.</translation>
+        <translation>ACHTUNG: Die Windows Filtering Platform wird nicht durch den Treiber ermöglicht, deshalb können diese Regeln nur im Nutzerkontext angewendet und nicht erzwungen werden!!! Dies bedeutet, dass ein bösartiges Programm diese umgehen könnte.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2125"/>
@@ -4910,7 +4910,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2167"/>
         <source>Allow sandboxed programs to manage Hardware/Devices</source>
-        <translation>Erlaube sandbeboxten Programmen Hardware/Geräte zu verwalten</translation>
+        <translation>Erlaube sandgeboxten Programmen Hardware/Geräte zu verwalten</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2160"/>
@@ -4949,7 +4949,7 @@ Sie können stattdessen &apos;Offen für Alle&apos; verwenden damit dies für al
         <location filename="Forms/OptionsWindow.ui" line="1708"/>
         <source>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path.
 The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</source>
-        <translation>Die Regelgenauigkeit ist ein Maß wie genau eine gegebene Regel mit einen gewissen Pfad übereinstimmt; einfach gesagt ist die Genauigkeit die Länge der Zeichen vom Beginn des Pfades bis zu und inklusive des letzen übereinstimmenden Nicht-Wildcard-Zeichenkettenteils. Eine Regel, welche nur mit Dateitypen, wie &quot;*.tmp&quot; übereinstimmt, hätte die höchste Genauigkeit, da sie immer mit dem ganzen Pfad übereinstimmt.
+        <translation>Die Regelgenauigkeit ist ein Maß wie genau eine gegebene Regel mit einem gewissen Pfad übereinstimmt; einfach gesagt ist die Genauigkeit die Länge der Zeichen vom Beginn des Pfades bis zu und inklusive des letzten übereinstimmenden Nicht-Wildcard-Zeichenkettenteils. Eine Regel, welche nur mit Dateitypen, wie &quot;*.tmp&quot; übereinstimmt, hätte die höchste Genauigkeit, da sie immer mit dem ganzen Pfad übereinstimmt.
 Der Prozessübereinstimmungslevel hat eine höhere Priorität als die Genauigkeit und beschreibt wie eine Regel für einen gewissen Prozess anzuwenden ist. Regeln welche für Prozessnamen oder Gruppen gelten haben den höchsten Übereinstimmungslevel, gefolgt von der Übereinstimmung durchr Negation (z.B. Regeln werden auf alle Prozesse angewandt, außer auf bestimmte), während globale Übereinstimmungen den geringste Übereinstimmungslevel (z.B. Regel die auf jeden Prozess zutreffen) haben.</translation>
     </message>
     <message>
@@ -4960,7 +4960,7 @@ Der Prozessübereinstimmungslevel hat eine höhere Priorität als die Genauigkei
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1739"/>
         <source>Privacy Mode, block file and registry access to all locations except the generic system ones</source>
-        <translation>Privatspährenmodus, blockiere Datei und Registryzugriff zu allen Orten außer den generischen des Systems</translation>
+        <translation>Privatsphärenmodus, blockiere Datei und Registryzugriff zu allen Orten außer den generischen des Systems</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1753"/>
@@ -4985,7 +4985,7 @@ Der Prozessübereinstimmungslevel hat eine höhere Priorität als die Genauigkei
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1791"/>
         <source>Apply File and Key Open directives only to binaries located outside the sandbox.</source>
-        <translation>Wende Datei- und Schlüsselöffnungsanweisungen nur auf ausfühbaren Binärcode ausserhalb der Sandbox an.</translation>
+        <translation>Wende Datei- und Schlüsselöffnungsanweisungen nur auf ausführbaren Binärcode außerhalb der Sandbox an.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2036"/>
@@ -5015,7 +5015,7 @@ Der Prozessübereinstimmungslevel hat eine höhere Priorität als die Genauigkei
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1981"/>
         <source>Protect sandboxed SYSTEM processes from unprivileged processes</source>
-        <translation>Schütze sandgeboxte SYSTEM-Prozesse vor unpriviliegierten Prozessen</translation>
+        <translation>Schütze sandgeboxte SYSTEM-Prozesse vor unprivilegierten Prozessen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="252"/>
@@ -5080,7 +5080,7 @@ Der Prozessübereinstimmungslevel hat eine höhere Priorität als die Genauigkei
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2194"/>
         <source>Various advanced isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
-        <translation>Verschiedene erweiterte Isolationsfunktionen können die Kompatibilität mit einigen Programmen stören. Wenn Sie diese Sandbox &lt;b&gt;NICHT für Sicherheit&lt;/b&gt;, aber für einfache Übertragbarkeit von Progammen verwenden, können Sie mit Hilfe dieser Optionen Kompatibilität wiederherstellen indem Sie etwas Sicherheit opfern.</translation>
+        <translation>Verschiedene erweiterte Isolationsfunktionen können die Kompatibilität mit einigen Programmen stören. Wenn Sie diese Sandbox &lt;b&gt;NICHT für Sicherheit&lt;/b&gt;, aber für einfache Übertragbarkeit von Programmen verwenden, können Sie mit Hilfe dieser Optionen Kompatibilität wiederherstellen indem Sie etwas Sicherheit opfern.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2234"/>
@@ -5147,17 +5147,17 @@ Der Prozessübereinstimmungslevel hat eine höhere Priorität als die Genauigkei
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2473"/>
         <source>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</source>
-        <translation>Diese Kommandos werden nur ausgeführt wenn eine Box in­i­ti­a­li­sie­rt wird. Um diese erneut auszuführen, muss der Boxinhalt gelöscht werden.</translation>
+        <translation>Diese Kommandos werden nur ausgeführt wenn eine Box initialisiert wird. Um diese erneut auszuführen, muss der Boxinhalt gelöscht werden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2476"/>
         <source>On Box Init</source>
-        <translation>Bei Boxin­i­ti­a­li­sie­rung</translation>
+        <translation>Bei Boxinitialisierung</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2486"/>
         <source>Here you can specify actions to be executed automatically on various box events.</source>
-        <translation>Hier können Sie Aktionen angeben, die automatisch bei bestimmten Boxvorgängen ausgefüht werden.</translation>
+        <translation>Hier können Sie Aktionen angeben, die automatisch bei bestimmten Boxvorgängen ausgeführt werden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2737"/>
@@ -5363,7 +5363,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="40"/>
         <source>Select the sandbox in which to start the program, installer or document.</source>
-        <translation>Wählen Sie die Sandbox in welcher das Programm, der Installer oder das Dokument gestartet/geöffenet werden soll.</translation>
+        <translation>Wählen Sie die Sandbox in welcher das Programm, der Installer oder das Dokument gestartet/geöffnet werden soll.</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="51"/>
@@ -5432,7 +5432,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="192"/>
         <source>Shell Integration</source>
-        <translation>Menüintergration</translation>
+        <translation>Menüintegration</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="341"/>
@@ -5515,7 +5515,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     </message>
     <message>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation type="vanished">Sandboxie auf dem neusten Stand mit den laufenden Veröffentlichungen von Windows zu halten und die Kompatibilität mt allen WebBrowsern ist eine niemals endende Aufgabe. Bitte überlegen Sie diese Arbeit mit einer Spende zu unterstützen. &lt;br /&gt;Sie  können die Entwicklung mit einer &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal-Spende unterstützen&lt;/a&gt;, was auch mit Kreditkarten funktioniert.&lt;br /&gt;Oder Sie können kontinuierliche Unterstützung bieten durch ein &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon-Abonnement&lt;/a&gt;.</translation>
+        <translation type="vanished">Sandboxie auf dem neusten Stand mit den laufenden Veröffentlichungen von Windows zu halten und die Kompatibilität mt allen WebBrowsern ist eine niemals endende Aufgabe. Bitte überlegen Sie diese Arbeit mit einer Spende zu unterstützen. &lt;br /&gt;Sie können die Entwicklung mit einer &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal-Spende unterstützen&lt;/a&gt;, was auch mit Kreditkarten funktioniert.&lt;br /&gt;Oder Sie können kontinuierliche Unterstützung bieten durch ein &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon-Abonnement&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1072"/>
@@ -5715,7 +5715,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="537"/>
         <source>Alternate row background in lists</source>
-        <translation>Abwechslender Zeilenhintergrund bei Listen</translation>
+        <translation>Abwechselnder Zeilenhintergrund bei Listen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="544"/>
@@ -5725,7 +5725,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="688"/>
         <source>Activate Kernel Mode Object Filtering</source>
-        <translation>Aktiviere Kernelmodus-Objektfiltererung</translation>
+        <translation>Aktiviere Kernelmodus-Objektfilterung</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="741"/>
@@ -5765,7 +5765,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1098"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation>Sandboxie auf dem neusten Stand mit den laufenden Veröffentlichungen von Windows zu halten und die Kompatibilität mit allen Browsern ist eine niemals endende Aufgabe. Bitte denken Sie darüber nach diese Arbeit mit einer Spende zu unterstützen. &amp;lt;br /&amp;gt;Sie  können die Entwicklung mit einer &amp;lt;a href=&amp;quot;https://sandboxie-plus.com/go.php?to=sbie-cert&amp;quot;&amp;gt;PayPal-Spende&amp;lt;/a&amp;gt;  unterstützen, was auch mit Kreditkarten funktioniert.&amp;lt;br /&amp;gt;Oder Sie können kontinuierliche Unterstützung bieten durch ein &amp;lt;a href=&amp;quot;https://sandboxie-plus.com/go.php?to=patreon&amp;quot;&amp;gt;Patreon-Abonnement&amp;lt;/a&amp;gt;.</translation>
+        <translation>Sandboxie auf dem neusten Stand mit den laufenden Veröffentlichungen von Windows zu halten und die Kompatibilität mit allen Browsern ist eine niemals endende Aufgabe. Bitte denken Sie darüber nach diese Arbeit mit einer Spende zu unterstützen. &amp;lt;br /&amp;gt;Sie können die Entwicklung mit einer &amp;lt;a href=&amp;quot;https://sandboxie-plus.com/go.php?to=sbie-cert&amp;quot;&amp;gt;PayPal-Spende&amp;lt;/a&amp;gt; unterstützen, was auch mit Kreditkarten funktioniert.&amp;lt;br /&amp;gt;Oder Sie können kontinuierliche Unterstützung bieten durch ein &amp;lt;a href=&amp;quot;https://sandboxie-plus.com/go.php?to=patreon&amp;quot;&amp;gt;Patreon-Abonnement&amp;lt;/a&amp;gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1111"/>

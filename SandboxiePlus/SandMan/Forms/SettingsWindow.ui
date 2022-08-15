@@ -125,7 +125,7 @@
            <item row="9" column="1" colspan="2">
             <widget class="QCheckBox" name="chkMonitorSize">
              <property name="text">
-              <string>Count and display the disk space ocupied by each sandbox</string>
+              <string>Count and display the disk space occupied by each sandbox</string>
              </property>
             </widget>
            </item>
@@ -194,10 +194,77 @@
         <layout class="QGridLayout" name="gridLayout_14">
          <item row="0" column="0">
           <layout class="QGridLayout" name="gridLayout_13">
-           <item row="1" column="1" colspan="3">
-            <widget class="QCheckBox" name="chkAutoStart">
+           <item row="2" column="1" colspan="3">
+            <widget class="QCheckBox" name="chkSvcStart">
              <property name="text">
-              <string>Start UI with Windows</string>
+              <string>Start UI when a sandboxed process is started</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="0">
+            <widget class="QLabel" name="label_21">
+             <property name="text">
+              <string>Show boxes in tray list:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="openExternalLinks">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2" colspan="3">
+            <widget class="QCheckBox" name="chkAlwaysDefault">
+             <property name="text">
+              <string>Always use DefaultBox</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_6">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+               <kerning>true</kerning>
+              </font>
+             </property>
+             <property name="text">
+              <string>Start Sandbox Manager</string>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="1">
+            <spacer name="verticalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="4" column="1" colspan="3">
+            <widget class="QCheckBox" name="chkShellMenu">
+             <property name="text">
+              <string>Add 'Run Sandboxed' to the explorer context menu</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0">
+            <widget class="QLabel" name="label_20">
+             <property name="text">
+              <string>Show Icon in Systray:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="openExternalLinks">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -228,68 +295,12 @@
              </property>
             </widget>
            </item>
-           <item row="4" column="1" colspan="3">
-            <widget class="QCheckBox" name="chkShellMenu">
+           <item row="1" column="1" colspan="3">
+            <widget class="QCheckBox" name="chkAutoStart">
              <property name="text">
-              <string>Add 'Run Sandboxed' to the explorer context menu</string>
+              <string>Start UI with Windows</string>
              </property>
             </widget>
-           </item>
-           <item row="9" column="1" colspan="2">
-            <widget class="QComboBox" name="cmbTrayBoxes"/>
-           </item>
-           <item row="3" column="3">
-            <spacer name="horizontalSpacer_6">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="2" column="1" colspan="3">
-            <widget class="QCheckBox" name="chkSvcStart">
-             <property name="text">
-              <string>Start UI when a sandboxed process is started</string>
-             </property>
-            </widget>
-           </item>
-           <item row="9" column="0">
-            <widget class="QLabel" name="label_21">
-             <property name="text">
-              <string>Show boxes in tray list:</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="openExternalLinks">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="2" colspan="3">
-            <widget class="QCheckBox" name="chkShellMenu2">
-             <property name="text">
-              <string>Add 'Run Un-Sandboxed' to the context menu</string>
-             </property>
-            </widget>
-           </item>
-           <item row="11" column="1">
-            <spacer name="verticalSpacer_6">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
            </item>
            <item row="9" column="3">
             <widget class="QCheckBox" name="chkCompactTray">
@@ -298,34 +309,6 @@
              </property>
              <property name="tristate">
               <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="10" column="1" colspan="3">
-            <widget class="QCheckBox" name="chkBoxOpsNotify">
-             <property name="text">
-              <string>Show a tray notification when automatic box operations are started</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="2" colspan="3">
-            <widget class="QCheckBox" name="chkAlwaysDefault">
-             <property name="text">
-              <string>Always use DefaultBox</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_6">
-             <property name="font">
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-               <kerning>true</kerning>
-              </font>
-             </property>
-             <property name="text">
-              <string>Start Sandbox Manager</string>
              </property>
             </widget>
            </item>
@@ -341,19 +324,6 @@
               </size>
              </property>
             </spacer>
-           </item>
-           <item row="8" column="0">
-            <widget class="QLabel" name="label_20">
-             <property name="text">
-              <string>Show Icon in Systray:</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="openExternalLinks">
-              <bool>true</bool>
-             </property>
-            </widget>
            </item>
            <item row="8" column="1" colspan="2">
             <widget class="QComboBox" name="cmbSysTray"/>
@@ -371,6 +341,36 @@
               <string>Run Sandboxed - Actions</string>
              </property>
             </widget>
+           </item>
+           <item row="6" column="2" colspan="3">
+            <widget class="QCheckBox" name="chkShellMenu2">
+             <property name="text">
+              <string>Add 'Run Un-Sandboxed' to the context menu</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="1" colspan="3">
+            <widget class="QCheckBox" name="chkBoxOpsNotify">
+             <property name="text">
+              <string>Show a tray notification when automatic box operations are started</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="3">
+            <spacer name="horizontalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="9" column="1" colspan="2">
+            <widget class="QComboBox" name="cmbTrayBoxes"/>
            </item>
           </layout>
          </item>
@@ -456,7 +456,7 @@
            <item row="4" column="1" colspan="2">
             <widget class="QCheckBox" name="chkBackground">
              <property name="text">
-              <string>Show &quot;Pizza&quot; Background in box list*</string>
+              <string>Show &quot;Pizza&quot; Background in box list *</string>
              </property>
              <property name="tristate">
               <bool>true</bool>
@@ -466,7 +466,7 @@
            <item row="11" column="2" colspan="2">
             <widget class="QLabel" name="label_11">
              <property name="text">
-              <string>* indetermined means depanding on the view mode</string>
+              <string>* a partially checked checkbox will leave the behavior to be determined by the view mode.</string>
              </property>
             </widget>
            </item>
@@ -1225,15 +1225,11 @@
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QDialogButtonBox" name="buttonBox">
-         <property name="standardButtons">
-          <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

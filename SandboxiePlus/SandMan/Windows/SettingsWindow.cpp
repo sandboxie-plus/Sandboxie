@@ -125,6 +125,8 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	ui.tabs->setTabIcon(eEditIni, CSandMan::GetIcon("EditIni"));
 	ui.tabs->setTabIcon(eSupport, CSandMan::GetIcon("Support"));
 
+	if(theConf->GetInt("Options/ViewMode", 1) != 1 && (QApplication::keyboardModifiers() & Qt::ControlModifier) == 0)
+		ui.tabs->removeTab(eEditIni);
 
 	ui.tabs->setCurrentIndex(0);
 
@@ -260,15 +262,16 @@ CSettingsWindow::~CSettingsWindow()
 
 void CSettingsWindow::showTab(int Tab, bool bExclusive)
 {
-	if(Tab == CSettingsWindow::eSoftCompat)
+	ui.tabs->setCurrentIndex(Tab);
+
+	if(ui.tabs->currentWidget() == ui.tabCompat)
 		m_CompatLoaded = 2;
-	else if(Tab == CSettingsWindow::eSupport)
+	if(ui.tabs->currentWidget() == ui.tabSupport)
 		ui.chkNoCheck->setVisible(true);
 
 	if(bExclusive)
 		ui.tabs->tabBar()->setVisible(false);
 
-	ui.tabs->setCurrentIndex(Tab);
 	SafeShow(this);
 }
 

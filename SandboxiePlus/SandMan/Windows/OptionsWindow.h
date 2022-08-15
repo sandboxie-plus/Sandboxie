@@ -185,6 +185,8 @@ private slots:
 	void OnSaveIni();
 	void OnCancelEdit();
 
+	void OnSearchOption();
+
 protected:
 	friend struct SFirewallRule;
 
@@ -427,6 +429,10 @@ private:
 	QStackedLayout* m_pStack;
 	QTreeWidget* m_pTree;
 	int m_iCurrentTab;
+	int m_SearchI;
+	int m_SearchJ;
+	int m_SearchP;
+	QWidget* m_LastFound;
 
 	void ReadAdvancedCheck(const QString& Name, QCheckBox* pCheck, const QString& Value = "y");
 	void WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& Value = "y");
@@ -443,3 +449,4 @@ private:
 	};
 	QMap<QCheckBox*, SDbgOpt> m_DebugOptions;
 };
+

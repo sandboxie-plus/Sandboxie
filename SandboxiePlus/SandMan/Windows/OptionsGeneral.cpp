@@ -171,7 +171,7 @@ void COptionsWindow::LoadGeneral()
 	ui.chkDropRights->setChecked(m_pBox->GetBool("DropAdminRights", false));
 	ui.chkFakeElevation->setChecked(m_pBox->GetBool("FakeAdminRights", false));
 	ui.chkMsiExemptions->setChecked(m_pBox->GetBool("MsiInstallerExemptions", false));
-		
+
 	ui.chkBlockSpooler->setChecked(m_pBox->GetBool("ClosePrintSpooler", false));
 	ui.chkOpenSpooler->setChecked(m_pBox->GetBool("OpenPrintSpooler", false));
 	ui.chkPrintToFile->setChecked(m_pBox->GetBool("AllowSpoolerPrintToFile", false));
@@ -311,7 +311,7 @@ void COptionsWindow::UpdateBoxSecurity()
 
 void COptionsWindow::OnSecurityMode()
 {
-	if (ui.chkSecurityMode->isChecked() || ui.chkLockDown->isChecked() || ui.chkRestrictDevices->isChecked())
+	if (ui.chkSecurityMode->isChecked() || (ui.chkLockDown->isEnabled() && ui.chkLockDown->isChecked()) || (ui.chkRestrictDevices->isEnabled() && ui.chkRestrictDevices->isChecked()))
 		theGUI->CheckCertificate(this);
 
 	UpdateBoxSecurity();

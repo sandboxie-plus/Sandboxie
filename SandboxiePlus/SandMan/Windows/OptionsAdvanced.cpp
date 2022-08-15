@@ -26,7 +26,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkComTimeout, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkNoSecurityIsolation, SIGNAL(clicked(bool)), this, SLOT(OnIsolationChanged()));
-	connect(ui.chkNoSecurityFiltering, SIGNAL(clicked(bool)), this, SLOT(OnIsolationChanged()));
+	connect(ui.chkNoSecurityFiltering, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkOpenDevCMApi, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	//connect(ui.chkOpenLsaSSPI, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -259,8 +259,11 @@ void COptionsWindow::SaveAdvanced()
 
 void COptionsWindow::OnIsolationChanged()
 {
-	if (ui.chkPrivacy->isChecked() || ui.chkUseSpecificity->isChecked())
-		theGUI->CheckCertificate(this);
+	if (sender() == ui.chkNoSecurityIsolation) {
+		// we can ignore chkNoSecurityFiltering as it requires chkNoSecurityIsolation
+		if (ui.chkNoSecurityIsolation->isChecked())
+			theGUI->CheckCertificate(this);
+	}
 
 	UpdateBoxIsolation();
 

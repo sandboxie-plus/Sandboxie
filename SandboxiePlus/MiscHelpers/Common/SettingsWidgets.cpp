@@ -79,9 +79,14 @@ void CProxyEdit::OnType(int Index)
 CConfigDialog::CConfigDialog(QWidget* parent) 
 	: QDialog(parent) 
 {
+	m_pTabs = NULL;
+
 	m_pStack = NULL;
 	m_pSearch = NULL;
 	m_pTree = NULL;
+
+	m_SearchI = m_SearchJ = m_SearchP = 0;
+	m_LastFound = NULL;
 }
 
 QWidget* CConfigDialog::ConvertToTree(QTabWidget* pTabWidget)
@@ -96,10 +101,7 @@ QWidget* CConfigDialog::ConvertToTree(QTabWidget* pTabWidget)
 	m_pTree->setStyle(pStyle);
 	connect(m_pTree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnItemClicked(QTreeWidgetItem*, int)));
 	m_pSearch = new QLineEdit();
-	m_pSearch->setPlaceholderText(tr("Search Option"));
 	QObject::connect(m_pSearch, SIGNAL(returnPressed()), this, SLOT(OnSearchOption()));
-	m_SearchI = m_SearchJ = m_SearchP = 0;
-	m_LastFound = NULL;
 	pLayout->addWidget(m_pSearch, 0, 0);
 	pLayout->addWidget(m_pTree, 1, 0);
 	m_pStack = new QStackedLayout();
@@ -112,8 +114,8 @@ QWidget* CConfigDialog::ConvertToTree(QTabWidget* pTabWidget)
 		pItem->setData(1, Qt::UserRole, k);
 		pItem->setIcon(0, pTabWidget->tabIcon(i));
 		QGridLayout* pGrid = qobject_cast<QGridLayout*>(pTabWidget->widget(i)->layout());
-		QTabWidget* pTabs = pGrid ? qobject_cast<QTabWidget*>(pGrid->itemAt(0)->widget()) : NULL;
-		if (!pTabs) {
+		QTabWidget* pSubTabs = pGrid ? qobject_cast<QTabWidget*>(pGrid->itemAt(0)->widget()) : NULL;
+		if (!pSubTabs) {
 			pItem->setData(0, Qt::UserRole, m_pStack->count());
 			m_pStack->addWidget(pTabWidget->widget(i--));
 		}
@@ -121,11 +123,11 @@ QWidget* CConfigDialog::ConvertToTree(QTabWidget* pTabWidget)
 			//pItem->setData(0, Qt::UserRole, -1);
 			//pItem->setFlags(pItem->flags() & ~Qt::ItemIsSelectable);
 			pItem->setData(0, Qt::UserRole, m_pStack->count()); // take the first tab for the parent entry
-			for (int j = 0; j < pTabs->count(); j++) {
-				QTreeWidgetItem* pSubItem = new QTreeWidgetItem(QStringList() << pTabs->tabText(j));
+			for (int j = 0; j < pSubTabs->count(); j++) {
+				QTreeWidgetItem* pSubItem = new QTreeWidgetItem(QStringList() << pSubTabs->tabText(j));
 				pItem->addChild(pSubItem);
 				pSubItem->setData(0, Qt::UserRole, m_pStack->count());
-				m_pStack->addWidget(pTabs->widget(j--));
+				m_pStack->addWidget(pSubTabs->widget(j--));
 			}
 		}
 	}
@@ -134,6 +136,19 @@ QWidget* CConfigDialog::ConvertToTree(QTabWidget* pTabWidget)
 
 	pTabWidget->clear();
 	return pAltView;
+}
+
+void CConfigDialog::OnItemClicked(QTreeWidgetItem* pItem, int Column)
+{
+	int Index = pItem->data(0, Qt::UserRole).toInt();
+	if (Index != -1)
+		m_pStack->setCurrentIndex(Index);
+
+	QTreeWidgetItem* pRootItem = pItem;
+	while (pRootItem->parent()) pRootItem = pRootItem->parent();
+	int RootIndex = pRootItem->data(1, Qt::UserRole).toInt();
+	if (m_iCurrentTab != RootIndex)
+		OnTab(RootIndex);
 }
 
 template <class T>
@@ -165,7 +180,7 @@ QWidget* CConfigDialog__SearchWidget(QWidget* pParent, const QString& Text, int&
 	return NULL;
 }
 
-QWidget* CConfigDialog__SearchOption(QTreeWidget* pTree, QStackedLayout* pStack, const QString& Text, int& I, int& J, int& Pos)
+QWidget* CConfigDialog__SearchTree(QTreeWidget* pTree, QStackedLayout* pStack, const QString& Text, int& I, int& J, int& Pos)
 {
 	for (; I < pTree->topLevelItemCount(); I++) {
 		QTreeWidgetItem* pItem = pTree->topLevelItem(I);
@@ -188,6 +203,38 @@ QWidget* CConfigDialog__SearchOption(QTreeWidget* pTree, QStackedLayout* pStack,
 	return NULL;
 }
 
+QWidget* CConfigDialog__SearchTabs(QTabWidget* pTabWidget, const QString& Text, int& I, int& J, int& Pos)
+{
+	for (; I < pTabWidget->count(); I++) {
+		QGridLayout* pGrid = qobject_cast<QGridLayout*>(pTabWidget->widget(I)->layout());
+		QTabWidget* pSubTabs = pGrid ? qobject_cast<QTabWidget*>(pGrid->itemAt(0)->widget()) : NULL;
+		if (!pSubTabs) {
+			QWidget* parent = pTabWidget->widget(I);
+			if (QWidget* pWidget = CConfigDialog__SearchWidget(parent, Text, Pos))
+				return pWidget;
+		}
+		else {
+			for (; J < pSubTabs->count(); J++) {
+				QWidget* parent = pSubTabs->widget(J);
+				if (QWidget* pWidget = CConfigDialog__SearchWidget(parent, Text, Pos))
+					return pWidget;
+			}
+			J = 0;
+		}
+	}
+	I = 0;
+	return NULL;
+}
+
+QWidget* CConfigDialog::AddConfigSearch(QTabWidget* pTabs)
+{
+	m_pTabs = pTabs;
+	m_pSearch = new QLineEdit();
+	QObject::connect(m_pSearch, SIGNAL(returnPressed()), this, SLOT(OnSearchOption()));
+	m_pSearch->setMaximumWidth(150);
+	return m_pSearch;
+}
+
 void CConfigDialog::OnSearchOption()
 {
 	QString Text = m_pSearch->text().toLower();
@@ -198,20 +245,34 @@ void CConfigDialog::OnSearchOption()
 		m_LastFound->setGraphicsEffect(NULL);
 	}
 
-	QWidget* pWidget = CConfigDialog__SearchOption(m_pTree, m_pStack, Text, m_SearchI, m_SearchJ, m_SearchP);
+	QWidget* pWidget = NULL;
+	if (m_pTree) {
+		pWidget = CConfigDialog__SearchTree(m_pTree, m_pStack, Text, m_SearchI, m_SearchJ, m_SearchP);
+		if (pWidget) {
+			QTreeWidgetItem* pItem = m_pTree->topLevelItem(m_SearchI);
+			if (pItem && pItem->childCount() > 0)
+				pItem = pItem->child(m_SearchJ);
+			if (!pItem) return;
+			//m_pTree->setItemSelected(pItem, true);
+			m_pTree->setCurrentItem(pItem, 0);
+			OnItemClicked(pItem, 0);
+		}
+	}
+	else if(m_pTabs) {
+		pWidget = CConfigDialog__SearchTabs(m_pTabs, Text, m_SearchI, m_SearchJ, m_SearchP);
+		if (pWidget) {
+			QGridLayout* pGrid = qobject_cast<QGridLayout*>(m_pTabs->widget(m_SearchI)->layout());
+			QTabWidget* pSubTabs = pGrid ? qobject_cast<QTabWidget*>(pGrid->itemAt(0)->widget()) : NULL;
+			m_pTabs->setCurrentIndex(m_SearchI);
+			if (pSubTabs) pSubTabs->setCurrentIndex(m_SearchJ);
+		}
+	}
+
 	if (!pWidget) {
 		QApplication::beep();
 		return;
 	}
 	m_SearchP++; // move index to the next for the next search
-
-	QTreeWidgetItem* pItem = m_pTree->topLevelItem(m_SearchI);
-	if (pItem && pItem->childCount() > 0)
-		pItem = pItem->child(m_SearchJ);
-	if (!pItem) return;
-	//m_pTree->setItemSelected(pItem, true);
-	m_pTree->setCurrentItem(pItem, 0);
-	OnItemClicked(pItem, 0);
 
 	m_LastFound = pWidget;
 	//QPalette palette = m_LastFound->palette();
@@ -226,15 +287,3 @@ void CConfigDialog::OnSearchOption()
 	m_LastFound->setGraphicsEffect(neon);
 }
 
-void CConfigDialog::OnItemClicked(QTreeWidgetItem* pItem, int Column)
-{
-	int Index = pItem->data(0, Qt::UserRole).toInt();
-	if (Index != -1)
-		m_pStack->setCurrentIndex(Index);
-
-	QTreeWidgetItem* pRootItem = pItem;
-	while (pRootItem->parent()) pRootItem = pRootItem->parent();
-	int RootIndex = pRootItem->data(1, Qt::UserRole).toInt();
-	if (m_iCurrentTab != RootIndex)
-		OnTab(RootIndex);
-}

@@ -268,12 +268,13 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	if (iOptionTree) 
 		OnSetTree();
 	else {
-		QAction* pSetTree = new QAction();
-		connect(pSetTree, SIGNAL(triggered()), this, SLOT(OnSetTree()));
-		pSetTree->setShortcut(QKeySequence("Ctrl+F"));
-		pSetTree->setShortcutContext(Qt::WidgetWithChildrenShortcut);
-		this->addAction(pSetTree);
+		QWidget* pSearch = AddConfigSearch(ui.tabs);
+		ui.horizontalLayout->insertWidget(0, pSearch);
+		QTimer::singleShot(0, [this]() {
+			m_pSearch->setMaximumWidth(m_pTabs->tabBar()->width());
+		});
 	}
+	m_pSearch->setPlaceholderText(tr("Search Settings"));
 }
 
 void CSettingsWindow::OnSetTree()

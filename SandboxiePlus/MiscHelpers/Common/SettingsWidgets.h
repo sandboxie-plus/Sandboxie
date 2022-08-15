@@ -443,15 +443,21 @@ public slots:
 protected:
 	QWidget* ConvertToTree(QTabWidget* pTabs);
 
+	QWidget* AddConfigSearch(QTabWidget* pTabs);
+
 	virtual void OnTab(int iTabID) = 0;
+
+	QTabWidget* m_pTabs;
 
 	QStackedLayout* m_pStack;
 	QLineEdit* m_pSearch;
 	QTreeWidget* m_pTree;
+
 	int m_iCurrentTab;
+
+private:
 	int m_SearchI;
 	int m_SearchJ;
 	int m_SearchP;
 	QWidget* m_LastFound;
-
 };

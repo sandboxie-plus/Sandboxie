@@ -337,42 +337,42 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Sandboxie Plus - &apos;%1&apos; Opciones</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="349"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="353"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="356"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="360"/>
         <source>On Start</source>
         <translation>Al comenzar</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="350"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="358"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="362"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="357"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="365"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="369"/>
         <source>Run Command</source>
         <translation>Ejecutar comando</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="354"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="361"/>
         <source>Start Service</source>
         <translation>Iniciar servicio</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="357"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="364"/>
         <source>On Init</source>
         <translation>Al inicializar</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="361"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="368"/>
         <source>On Delete</source>
         <translation>Al eliminar</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="372"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="394"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="405"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="379"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="401"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="412"/>
         <source>Please enter the command line to be executed</source>
         <translation>Por favor ingrese la linea de comandos a ser ejecutada</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="539"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="546"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
@@ -481,7 +481,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>kilobytes (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="324"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="334"/>
         <source>Select color</source>
         <translation>Seleccionar color</translation>
     </message>
@@ -490,7 +490,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="vanished">Por favor entre una ruta de programa</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="335"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="345"/>
         <source>Select Program</source>
         <translation></translation>
     </message>
@@ -499,7 +499,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="vanished">Ejecutables (*.exe *.cmd);;Todos los archivos (*.*)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="383"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="390"/>
         <source>Please enter a service identifier</source>
         <translation>Por vavor ingrese un identificador de servicio</translation>
     </message>
@@ -508,26 +508,26 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="vanished">Programa</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="335"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="345"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Ejecutables (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="339"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="354"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="349"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="364"/>
         <source>Please enter a menu title</source>
         <translation>Por favor un titulo de menu</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="350"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="360"/>
         <source>Please enter a command</source>
         <translation>Por favor ingrese un comando</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="699"/>
         <location filename="Windows/OptionsWindow.cpp" line="715"/>
-        <location filename="Windows/OptionsAccess.cpp" line="295"/>
-        <location filename="Windows/OptionsAccess.cpp" line="490"/>
+        <location filename="Windows/OptionsAccess.cpp" line="297"/>
+        <location filename="Windows/OptionsAccess.cpp" line="492"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
         <location filename="Windows/OptionsNetwork.cpp" line="440"/>
         <location filename="Windows/OptionsNetwork.cpp" line="532"/>
@@ -561,7 +561,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Carpeta</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="270"/>
+        <location filename="Windows/OptionsAccess.cpp" line="272"/>
         <location filename="Windows/OptionsForce.cpp" line="120"/>
         <location filename="Windows/OptionsRecovery.cpp" line="94"/>
         <location filename="Windows/OptionsRecovery.cpp" line="105"/>
@@ -587,17 +587,17 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="vanished">Todo directo</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="235"/>
+        <location filename="Windows/OptionsAccess.cpp" line="237"/>
         <source>Closed</source>
         <translation>Cerrado</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="236"/>
+        <location filename="Windows/OptionsAccess.cpp" line="238"/>
         <source>Closed RT</source>
         <translation>RT cerrado</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="237"/>
+        <location filename="Windows/OptionsAccess.cpp" line="239"/>
         <source>Read Only</source>
         <translation>Solo lectura</translation>
     </message>
@@ -606,69 +606,69 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="vanished">Oculto</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="232"/>
+        <location filename="Windows/OptionsAccess.cpp" line="234"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="233"/>
+        <location filename="Windows/OptionsAccess.cpp" line="235"/>
         <source>Open</source>
         <translation>Abierto</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="234"/>
+        <location filename="Windows/OptionsAccess.cpp" line="236"/>
         <source>Open for All</source>
         <translation>Abierto para todos</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="238"/>
+        <location filename="Windows/OptionsAccess.cpp" line="240"/>
         <source>Box Only (Write Only)</source>
         <translation>Solo caja (solo escritura)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="240"/>
-        <location filename="Windows/OptionsAccess.cpp" line="253"/>
+        <location filename="Windows/OptionsAccess.cpp" line="242"/>
+        <location filename="Windows/OptionsAccess.cpp" line="255"/>
         <source>Unknown</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="247"/>
+        <location filename="Windows/OptionsAccess.cpp" line="249"/>
         <source>File/Folder</source>
         <translation>Archivo/Carpeta</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="248"/>
+        <location filename="Windows/OptionsAccess.cpp" line="250"/>
         <source>Registry</source>
         <translation>Registro</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="249"/>
+        <location filename="Windows/OptionsAccess.cpp" line="251"/>
         <source>IPC Path</source>
         <translation>Ruta IPC</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="250"/>
+        <location filename="Windows/OptionsAccess.cpp" line="252"/>
         <source>Wnd Class</source>
         <translation>Wnd clase</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="251"/>
+        <location filename="Windows/OptionsAccess.cpp" line="253"/>
         <source>COM Object</source>
         <translation>Objeto COM</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="258"/>
+        <location filename="Windows/OptionsAccess.cpp" line="260"/>
         <source>Select File</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="258"/>
+        <location filename="Windows/OptionsAccess.cpp" line="260"/>
         <source>All Files (*.*)</source>
         <translation>Todos los archivos (*.*)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="290"/>
-        <location filename="Windows/OptionsAccess.cpp" line="486"/>
+        <location filename="Windows/OptionsAccess.cpp" line="292"/>
+        <location filename="Windows/OptionsAccess.cpp" line="488"/>
         <location filename="Windows/OptionsNetwork.cpp" line="435"/>
         <location filename="Windows/OptionsNetwork.cpp" line="528"/>
         <location filename="Windows/OptionsNetwork.cpp" line="641"/>
@@ -676,17 +676,17 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Todos los programas</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="416"/>
+        <location filename="Windows/OptionsAccess.cpp" line="418"/>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
         <translation>Objetos COM deben especificarse por su GUID, ejemplo: {00000000-0000-0000-0000-000000000000}</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="422"/>
+        <location filename="Windows/OptionsAccess.cpp" line="424"/>
         <source>RT interfaces must be specified by their name.</source>
         <translation>Las interfaces RT deben estar especificadas por su nombre.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="465"/>
+        <location filename="Windows/OptionsAccess.cpp" line="467"/>
         <location filename="Windows/OptionsGrouping.cpp" line="278"/>
         <location filename="Windows/OptionsGrouping.cpp" line="302"/>
         <location filename="Windows/OptionsNetwork.cpp" line="507"/>
@@ -694,7 +694,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="531"/>
+        <location filename="Windows/OptionsAccess.cpp" line="533"/>
         <location filename="Windows/OptionsRecovery.cpp" line="132"/>
         <source>Template values can not be removed.</source>
         <translation></translation>
@@ -714,7 +714,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="vanished">Por favor ingrese un comando autoejecutable</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="424"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="431"/>
         <source>Please enter a program file name</source>
         <translation>Por favor ingrese un nombre de programa</translation>
     </message>

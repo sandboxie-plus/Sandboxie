@@ -3,8 +3,12 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_OptionsWindow.h"
 #include "SbiePlusAPI.h"
+#include "../../MiscHelpers/Common/SettingsWidgets.h"
 
-class COptionsWindow : public QDialog
+//////////////////////////////////////////////////////////////////////////
+// COptionsWindow
+
+class COptionsWindow : public CConfigDialog
 {
 	Q_OBJECT
 
@@ -53,8 +57,6 @@ public slots:
 	void apply();
 
 private slots:
-
-	void OnItemClicked(QTreeWidgetItem* pItem, int Column);
 
 	//void OnWithTemplates();
 
@@ -185,7 +187,7 @@ private slots:
 	void OnSaveIni();
 	void OnCancelEdit();
 
-	void OnSearchOption();
+	void OnSetTree();
 
 protected:
 	friend struct SFirewallRule;
@@ -193,6 +195,8 @@ protected:
 	void closeEvent(QCloseEvent *e);
 
 	bool eventFilter(QObject *watched, QEvent *e);
+
+	void OnTab(int iTabID);
 
 	enum ENetWfAction
 	{
@@ -424,15 +428,6 @@ protected:
 	QSet<QString> m_Programs;
 
 private:
-	void OnTab(int iTabID);
-
-	QStackedLayout* m_pStack;
-	QTreeWidget* m_pTree;
-	int m_iCurrentTab;
-	int m_SearchI;
-	int m_SearchJ;
-	int m_SearchP;
-	QWidget* m_LastFound;
 
 	void ReadAdvancedCheck(const QString& Name, QCheckBox* pCheck, const QString& Value = "y");
 	void WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& Value = "y");

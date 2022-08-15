@@ -7,7 +7,7 @@
 #include "../MiscHelpers/Common/ComboInputDialog.h"
 #include "../MiscHelpers/Common/SettingsWidgets.h"
 #include "Helpers/WinAdmin.h"
-#include "../../MiscHelpers/Common/NeonEffect.h"
+
 
 class NoEditDelegate : public QStyledItemDelegate {
 public:
@@ -111,9 +111,11 @@ protected:
 	int m_Column;
 };
 
+//////////////////////////////////////////////////////////////////////////
+// COptionsWindow
 
 COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QString& Name, QWidget *parent)
-	: QDialog(parent)
+	: CConfigDialog(parent)
 {
 	m_pBox = pBox;
 
@@ -159,8 +161,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabs->setTabIcon(eTemplates, CSandMan::GetIcon("Template"));
 	ui.tabs->setTabIcon(eEditIni, CSandMan::GetIcon("EditIni"));
 
-	if(theConf->GetInt("Options/ViewMode", 1) != 1 && (QApplication::keyboardModifiers() & Qt::ControlModifier) == 0)
-		ui.tabs->removeTab(eEditIni);
+	//if(theConf->GetInt("Options/ViewMode", 1) != 1 && (QApplication::keyboardModifiers() & Qt::ControlModifier) == 0)
+	//	ui.tabs->removeTab(eEditIni);
 
 	if (theConf->GetBool("Options/AltRowColors", false)) {
 		ui.treeRun->setAlternatingRowColors(true);
@@ -314,6 +316,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.treeAccess->viewport()->installEventFilter(this);
 	ui.treeINet->viewport()->installEventFilter(this);
 	ui.treeNetFw->viewport()->installEventFilter(this);
+	ui.treeOptions->viewport()->installEventFilter(this);
 	this->installEventFilter(this); // prevent enter from closing the dialog
 
 	restoreGeometry(theConf->GetBlob("OptionsWindow/Window_Geometry"));
@@ -349,163 +352,23 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		iOptionTree = iViewMode == 2 ? 1 : 0;
 
 	if (iOptionTree) 
-	{
-		QWidget* pAltView = new QWidget(this);
-		QGridLayout* pLayout = new QGridLayout(pAltView);
-		pLayout->setMargin(0);
-		m_pTree = new QTreeWidget();
-		m_pTree->setHeaderHidden(true);
-		m_pTree->setMinimumWidth(200);
-		QStyle* pStyle = QStyleFactory::create("windows"); // show lines
-		m_pTree->setStyle(pStyle);
-		connect(m_pTree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnItemClicked(QTreeWidgetItem*, int)));
-		QLineEdit* pSearch = new QLineEdit();
-		pSearch->setPlaceholderText(tr("Search Option"));
-		QObject::connect(pSearch, SIGNAL(returnPressed()), this, SLOT(OnSearchOption()));
-		m_SearchI = m_SearchJ = m_SearchP = 0;
-		m_LastFound = NULL;
-		pLayout->addWidget(pSearch, 0, 0);
-		pLayout->addWidget(m_pTree, 1, 0);
-		m_pStack = new QStackedLayout();
-		m_pStack->setMargin(0);
-		pLayout->addLayout(m_pStack, 0, 1, 2, 1);
-
-		for (int i = 0, k = 0; i < ui.tabs->count(); i++, k++) {
-			QTreeWidgetItem* pItem = new QTreeWidgetItem(QStringList() << ui.tabs->tabText(i));
-			m_pTree->addTopLevelItem(pItem);
-			pItem->setData(1, Qt::UserRole, k);
-			pItem->setIcon(0, ui.tabs->tabIcon(i));
-			QGridLayout* pGrid = qobject_cast<QGridLayout*>(ui.tabs->widget(i)->layout());
-			QTabWidget* pTabs = pGrid ? qobject_cast<QTabWidget*>(pGrid->itemAt(0)->widget()) : NULL;
-			if (!pTabs) {
-				pItem->setData(0, Qt::UserRole, m_pStack->count());
-				m_pStack->addWidget(ui.tabs->widget(i--));
-			}
-			else {
-				//pItem->setData(0, Qt::UserRole, -1);
-				//pItem->setFlags(pItem->flags() & ~Qt::ItemIsSelectable);
-				pItem->setData(0, Qt::UserRole, m_pStack->count()); // take the first tab for the parent entry
-				for (int j = 0; j < pTabs->count(); j++) {
-					QTreeWidgetItem* pSubItem = new QTreeWidgetItem(QStringList() << pTabs->tabText(j));
-					pItem->addChild(pSubItem);
-					pSubItem->setData(0, Qt::UserRole, m_pStack->count());
-					m_pStack->addWidget(pTabs->widget(j--));
-				}
-			}
-		}
-
-		m_pTree->expandAll();
-
-		ui.verticalLayout->replaceWidget(ui.tabs, pAltView);
-	}
+		OnSetTree();
 	else {
-		m_pStack = NULL;
-		m_pTree = NULL;
+		QAction* pSetTree = new QAction();
+		connect(pSetTree, SIGNAL(triggered()), this, SLOT(OnSetTree()));
+		pSetTree->setShortcut(QKeySequence("Ctrl+F"));
+		pSetTree->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		this->addAction(pSetTree);
 	}
 }
 
-template <class T>
-bool COptionsWindow__CompareText(T pWidget, const QString& Text)  {
-	QString Str = pWidget->text();
-	if (!Str.toLower().contains(Text))
-		return false;
-	qDebug() << Str;
-	return true;
-}
-
-QWidget* COptionsWindow__SearchWidget(QWidget* pParent, const QString& Text, int& Pos)
+void COptionsWindow::OnSetTree()
 {
-	QList<QWidget*> Widgets = pParent->findChildren<QWidget*>();
-	for (Pos; Pos < Widgets.count(); Pos++) {
-		QWidget* pWidget = Widgets[Pos];
-		if (!pWidget->isHidden()) {
-			if (QCheckBox* pCheck = qobject_cast<QCheckBox*>(pWidget)) {
-				if (COptionsWindow__CompareText(pCheck, Text))
-					return pCheck;
-			}
-			else if (QLabel* pLabel = qobject_cast<QLabel*>(pWidget)) {
-				if (COptionsWindow__CompareText(pLabel, Text))
-					return pLabel;
-			}
-		}
-	}
-	Pos = 0;
-	return NULL;
-}
-
-QWidget* COptionsWindow__SearchOption(QTreeWidget* pTree, QStackedLayout* pStack, const QString& Text, int& I, int& J, int& Pos)
-{
-	for (; I < pTree->topLevelItemCount(); I++) {
-		QTreeWidgetItem* pItem = pTree->topLevelItem(I);
-		if (pItem->childCount() == 0) {
-			int Index = pItem->data(0, Qt::UserRole).toInt();
-			if (QWidget* pWidget = COptionsWindow__SearchWidget(pStack->widget(Index), Text, Pos))
-				return pWidget;
-		}
-		else {
-			for (; J < pItem->childCount(); J++) {
-				QTreeWidgetItem* pSubItem = pItem->child(J);
-				int Index = pSubItem->data(0, Qt::UserRole).toInt();
-				if (QWidget* pWidget = COptionsWindow__SearchWidget(pStack->widget(Index), Text, Pos))
-					return pWidget;
-			}
-			J = 0;
-		}
-	}
-	I = 0;
-	return NULL;
-}
-
-void COptionsWindow::OnSearchOption()
-{
-	QLineEdit* pSearch = (QLineEdit*)sender();
-	QString Text = pSearch->text().toLower();
-
-	if (m_LastFound) {
-		//m_LastFound->setPalette(QApplication::palette());
-		//m_LastFound->setAutoFillBackground(false);
-		m_LastFound->setGraphicsEffect(NULL);
-	}
-
-	QWidget* pWidget = COptionsWindow__SearchOption(m_pTree, m_pStack, Text, m_SearchI, m_SearchJ, m_SearchP);
-	if (!pWidget) {
-		QApplication::beep();
-		return;
-	}
-	m_SearchP++; // move index to the next for the next search
-
-	QTreeWidgetItem* pItem = m_pTree->topLevelItem(m_SearchI);
-	if (pItem && pItem->childCount() > 0)
-		pItem = pItem->child(m_SearchJ);
-	if (!pItem) return;
-	//m_pTree->setItemSelected(pItem, true);
-	m_pTree->setCurrentItem(pItem, 0);
-	OnItemClicked(pItem, 0);
-
-	m_LastFound = pWidget;
-	//QPalette palette = m_LastFound->palette();
-	//palette.setColor(QPalette::Button, Qt::red);
-	//palette.setColor(QPalette::Base, Qt::red);
-	//palette.setColor(QPalette::Window, Qt::red);
-	//m_LastFound->setAutoFillBackground(true);
-	//m_LastFound->setPalette(palette);
-	auto neon = new CNeonEffect(5, 4);
-	neon->setGlowColor(Qt::red);
-	//neon->setColor(Qt::black);
-	m_LastFound->setGraphicsEffect(neon);
-}
-
-void COptionsWindow::OnItemClicked(QTreeWidgetItem* pItem, int Column)
-{
-	int Index = pItem->data(0, Qt::UserRole).toInt();
-	if (Index != -1)
-		m_pStack->setCurrentIndex(Index);
-
-	QTreeWidgetItem* pRootItem = pItem;
-	while (pRootItem->parent()) pRootItem = pRootItem->parent();
-	int RootIndex = pRootItem->data(1, Qt::UserRole).toInt();
-	if (m_iCurrentTab != RootIndex)
-		OnTab(RootIndex);
+	if (!ui.tabs) return;
+	QWidget* pAltView = ConvertToTree(ui.tabs);
+	ui.verticalLayout->replaceWidget(ui.tabs, pAltView);
+	ui.tabs->deleteLater();
+	ui.tabs = NULL;
 }
 
 void COptionsWindow::OnOptChanged() 

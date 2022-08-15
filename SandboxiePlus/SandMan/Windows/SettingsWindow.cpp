@@ -87,8 +87,8 @@ quint32 g_FeatureFlags = 0;
 QByteArray g_Certificate;
 SCertInfo g_CertInfo = { 0 };
 
-CSettingsWindow::CSettingsWindow(QWidget *parent)
-	: QDialog(parent)
+CSettingsWindow::CSettingsWindow(QWidget* parent)
+	: CConfigDialog(parent)
 {
 	Qt::WindowFlags flags = windowFlags();
 	flags |= Qt::CustomizeWindowHint;
@@ -125,8 +125,8 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	ui.tabs->setTabIcon(eEditIni, CSandMan::GetIcon("EditIni"));
 	ui.tabs->setTabIcon(eSupport, CSandMan::GetIcon("Support"));
 
-	if(theConf->GetInt("Options/ViewMode", 1) != 1 && (QApplication::keyboardModifiers() & Qt::ControlModifier) == 0)
-		ui.tabs->removeTab(eEditIni);
+	//if(theConf->GetInt("Options/ViewMode", 1) != 1 && (QApplication::keyboardModifiers() & Qt::ControlModifier) == 0)
+	//	ui.tabs->removeTab(eEditIni);
 
 	ui.tabs->setCurrentIndex(0);
 
@@ -193,6 +193,10 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	connect(ui.chkWFP, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	connect(ui.chkObjCb, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	//connect(ui.chkWin32k, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
+
+	if (settings.value("CurrentBuild").toInt() < 14393) // Windows 10 RS1 and later
+		ui.chkWin32k->setEnabled(false);
+
 	
 	m_WarnProgsChanged = false;
 
@@ -252,7 +256,33 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	connect(ui.buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(apply()));
 	connect(ui.buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
+	this->installEventFilter(this); // prevent enter from closing the dialog
+
 	restoreGeometry(theConf->GetBlob("SettingsWindow/Window_Geometry"));
+
+	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
+	int iOptionTree = theConf->GetInt("Options/OptionTree", 2);
+	if (iOptionTree == 2)
+		iOptionTree = iViewMode == 2 ? 1 : 0;
+
+	if (iOptionTree) 
+		OnSetTree();
+	else {
+		QAction* pSetTree = new QAction();
+		connect(pSetTree, SIGNAL(triggered()), this, SLOT(OnSetTree()));
+		pSetTree->setShortcut(QKeySequence("Ctrl+F"));
+		pSetTree->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		this->addAction(pSetTree);
+	}
+}
+
+void CSettingsWindow::OnSetTree()
+{
+	if (!ui.tabs) return;
+	QWidget* pAltView = ConvertToTree(ui.tabs);
+	ui.verticalLayout->replaceWidget(ui.tabs, pAltView);
+	ui.tabs->deleteLater();
+	ui.tabs = NULL;
 }
 
 CSettingsWindow::~CSettingsWindow()
@@ -262,15 +292,29 @@ CSettingsWindow::~CSettingsWindow()
 
 void CSettingsWindow::showTab(int Tab, bool bExclusive)
 {
-	ui.tabs->setCurrentIndex(Tab);
+	QWidget* pWidget;
+	if (ui.tabs) {
+		ui.tabs->setCurrentIndex(Tab);
+		pWidget = ui.tabs->currentWidget();
+	}
+	else {
+		m_pStack->setCurrentIndex(Tab);
+		pWidget = m_pStack->currentWidget();
+	}
 
-	if(ui.tabs->currentWidget() == ui.tabCompat)
+	if(pWidget == ui.tabCompat)
 		m_CompatLoaded = 2;
-	if(ui.tabs->currentWidget() == ui.tabSupport)
+	if(pWidget == ui.tabSupport)
 		ui.chkNoCheck->setVisible(true);
 
-	if(bExclusive)
-		ui.tabs->tabBar()->setVisible(false);
+	if (bExclusive) {
+		if (ui.tabs)
+			ui.tabs->tabBar()->setVisible(false);
+		else {
+			m_pTree->setVisible(false);
+			m_pSearch->setVisible(false);
+		}
+	}
 
 	SafeShow(this);
 }
@@ -279,6 +323,23 @@ void CSettingsWindow::closeEvent(QCloseEvent *e)
 {
 	emit Closed();
 	this->deleteLater();
+}
+
+bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
+{
+	if (event->type() == QEvent::KeyPress && ((QKeyEvent*)event)->key() == Qt::Key_Escape 
+		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
+	{
+		return true; // cancel event
+	}
+
+	if (event->type() == QEvent::KeyPress && (((QKeyEvent*)event)->key() == Qt::Key_Enter || ((QKeyEvent*)event)->key() == Qt::Key_Return) 
+		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
+	{
+		return true; // cancel event
+	}
+
+	return QDialog::eventFilter(source, event);
 }
 
 Qt::CheckState CSettingsWindow__IsContextMenu()
@@ -875,7 +936,12 @@ void CSettingsWindow::OnChange()
 
 void CSettingsWindow::OnTab()
 {
-	if (ui.tabs->currentWidget() == ui.tabSupport)
+	OnTab(ui.tabs->currentIndex());
+}
+
+void CSettingsWindow::OnTab(int iTabID)
+{
+	if (iTabID == eSupport)
 	{
 		if (ui.lblCurrent->text().isEmpty()) {
 			if (ui.chkAutoUpdate->checkState())
@@ -884,12 +950,12 @@ void CSettingsWindow::OnTab()
 				ui.lblCurrent->setText(tr("<a href=\"check\">Check Now</a>"));
 		}
 	}
-	else if (ui.tabs->currentWidget() == ui.tabEdit)
+	else if (iTabID == eEditIni)
 	{
 		LoadIniSection();
 		ui.txtIniSection->setReadOnly(true);
 	}
-	else if (ui.tabs->currentWidget() == ui.tabCompat && m_CompatLoaded != 1 && theAPI->IsConnected())
+	else if (iTabID == eSoftCompat && m_CompatLoaded != 1 && theAPI->IsConnected())
 	{
 		if(m_CompatLoaded == 0)
 			theGUI->GetCompat()->RunCheck();
@@ -1031,10 +1097,15 @@ void CSettingsWindow::OnDelCompat()
 
 void CSettingsWindow::SetIniEdit(bool bEnable)
 {
-	for (int i = 0; i < ui.tabs->count() - 2; i++) {
-		bool Enabled = ui.tabs->widget(i)->isEnabled();
-		ui.tabs->setTabEnabled(i, !bEnable && Enabled);
-		ui.tabs->widget(i)->setEnabled(Enabled);
+	if (m_pTree) {
+		m_pTree->setEnabled(!bEnable);
+	}
+	else {
+		for (int i = 0; i < ui.tabs->count() - 2; i++) {
+			bool Enabled = ui.tabs->widget(i)->isEnabled();
+			ui.tabs->setTabEnabled(i, !bEnable && Enabled);
+			ui.tabs->widget(i)->setEnabled(Enabled);
+		}
 	}
 	ui.btnSaveIni->setEnabled(bEnable);
 	ui.btnCancelEdit->setEnabled(bEnable);

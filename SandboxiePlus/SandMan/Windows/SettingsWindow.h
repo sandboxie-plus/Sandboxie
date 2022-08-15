@@ -3,6 +3,7 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_SettingsWindow.h"
 #include <QProxyStyle>
+#include "../../MiscHelpers/Common/SettingsWidgets.h"
 
 class CustomTabStyle : public QProxyStyle {
 public:
@@ -38,7 +39,10 @@ protected:
 	bool m_SecretMode;
 };
 
-class CSettingsWindow : public QDialog
+//////////////////////////////////////////////////////////////////////////
+// CSettingsWindow
+
+class CSettingsWindow : public CConfigDialog
 {
 	Q_OBJECT
 
@@ -110,8 +114,14 @@ private slots:
 	void OnUpdateData(const QVariantMap& Data, const QVariantMap& Params);
 	void OnUpdate(const QString& Channel);
 
+	void OnSetTree();
+
 protected:
 	void closeEvent(QCloseEvent *e);
+
+	bool eventFilter(QObject *watched, QEvent *e);
+
+	void OnTab(int iTabID);
 
 	void	AddWarnEntry(const QString& Name, int type);
 

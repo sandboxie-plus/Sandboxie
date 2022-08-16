@@ -13,7 +13,7 @@ SBIE1102 Sandboxie-Treiber (SbieDrv) wird entladen
 .
 
 1103;evt;err;01
-SBIE1103 Sandboxie-Treiber (SbieDrv) version %2 konnte nicht gestartet werden
+SBIE1103 Sandboxie-Treiber (SbieDrv) Version %2 konnte nicht gestartet werden
 .
 
 1104;evt;err;01
@@ -441,7 +441,7 @@ SBIE2223 Um das Größenlimit für zu kopierende Dateien zu erhöhen bitte diese
 .
 
 2224;pop;wrn;01
-SBIE2224 Sandboxtes Programm ist abgestürzt: %2
+SBIE2224 Sandgeboxtes Programm ist abgestürzt: %2
 .
 
 2225;pop;wrn;01
@@ -567,7 +567,7 @@ SBIE2332 Kann auf die Datei SbiePst.dat nicht zugreifen
 # .
 
 2335;pop;err;01
-SBIE2335 Initialisierung für Process %2 fehlgeschlagen
+SBIE2335 Initialisierung für Prozess %2 fehlgeschlagen
 .
 
 2336;pop;err;01

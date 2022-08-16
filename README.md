@@ -82,13 +82,14 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 - weihongx9315 - Windows Credentials fix
 
 ## Translators
-- yuhao2348732, nkh0472, yfdyh000, gexgd0419, Zerorigin, UnnamedOrange - Chinese Simplified
-- TragicLifeHu, Hulen - Chinese Traditional
+- yuhao2348732, nkh0472, yfdyh000, gexgd0419, Zerorigin, UnnamedOrange, 4rt3mi5 - Simplified Chinese
+- TragicLifeHu, Hulen - Traditional Chinese
 - RockyTDR - Dutch
 - clexanis, Mmoi-Fr - French
-- bastik-1001 - German
+- bastik-1001, APMichael - German
 - isaak654 - Italian
-- [7zip](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=10) - Polish (a new translator is needed to provide updates via pull requests)
+- VenusGirl - Korean
+- [7zip](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=20) - Polish (updates via pull requests are needed)
 - JNylson - Portuguese and Brazilian Portuguese
 - lufog - Russian
 - sebadamus - Spanish

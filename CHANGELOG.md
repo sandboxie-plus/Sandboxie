@@ -12,10 +12,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added ability to switch fusion theme independently of the dark theme
 - added ability to download updates from the support page
 - added missing system calls to the hardened box type [88bc06a](https://github.com/sandboxie-plus/Sandboxie/commit/88bc06a0c7368a81c80a77d7a89ddc73455abb25) [b775264](https://github.com/sandboxie-plus/Sandboxie/commit/b775264a4824e49b554f1b776c377170e5f90797) [04b2377](https://github.com/sandboxie-plus/Sandboxie/commit/04b23770f53597c12eda9122c774ed5165129147) (thanks Mr.X)
+- added search box to Settings and box option dialogs [#2134](https://github.com/sandboxie-plus/Sandboxie/issues/2134)
 
 ### Changed
 - improved info label
 - the look of vintage mode is even more vintage
+- realoading the config using the Sandman "Options -> Reload ini file" command now updates the list of approved syscalls
+- made rule specificity most specific now a rule with less wildcards overrules a rule with more wildcards
+-- Note: tailing wildcards are evaluated separately
 
 ### Fixed
 - fixed issue with displaying sandbox configuration [#2111](https://github.com/sandboxie-plus/Sandboxie/issues/2111)
@@ -23,6 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed inconsistency with the "HideOtherBoxes" option in the Plus UI [ef4ac1b](https://github.com/sandboxie-plus/Sandboxie/commit/ef4ac1b6b34d505e46515e9aabb98411a9b1751e)
 - fixed a certificate validation issue [238cb44](https://github.com/sandboxie-plus/Sandboxie/commit/238cb44969923479148e210814ab91d2428ec4b0)
 - fixed issue with "UseRuleSpecificity" setting [#2124](https://github.com/sandboxie-plus/Sandboxie/issues/2124) [file.c#L965-L966](https://github.com/sandboxie-plus/Sandboxie/blob/ff759692a222cf7c492cb4d5cfd76c79fbde1c2b/Sandboxie/core/drv/file.c#L965-L966)
+
 
 
 ## [1.3.0 / 5.58.0] - 2022-08-09

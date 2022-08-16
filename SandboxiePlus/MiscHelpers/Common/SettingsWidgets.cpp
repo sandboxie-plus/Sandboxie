@@ -156,7 +156,7 @@ bool CConfigDialog__CompareText(T pWidget, const QString& Text)  {
 	QString Str = pWidget->text();
 	if (!Str.toLower().contains(Text))
 		return false;
-	qDebug() << Str;
+	//qDebug() << Str;
 	return true;
 }
 

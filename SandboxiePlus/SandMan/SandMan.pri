@@ -74,6 +74,7 @@ TRANSLATIONS += sandman_de.ts \
     sandman_es.ts \
     sandman_fr.ts \
     sandman_it.ts \
+    sandman_ko.ts \
     sandman_nl.ts \
     sandman_pl.ts \
     sandman_pt_BR.ts \

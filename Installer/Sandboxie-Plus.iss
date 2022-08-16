@@ -212,6 +212,7 @@ begin
     'french': Result := 'fr';
     'german': Result := 'de';
     'italian': Result := 'it';
+    'korean': Result := 'ko';
     'polish': Result := 'pl';
     'brazilianportuguese': Result := 'pt_BR';
     'portuguese': Result := 'pt_PT';

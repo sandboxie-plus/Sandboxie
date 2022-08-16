@@ -2351,7 +2351,7 @@ void CSandMan::OnResetGUI()
 	theConf->DelValue("MainWindow/BoxTree_Columns");
 	theConf->DelValue("MainWindow/TraceLog_Columns");
 	theConf->DelValue("FileBrowserWindow/Window_Geometry");
-	theConf->DelValue("FileBrowserWindow/FileTree_Columns");
+	theConf->DelValue("MainWindow/FileTree_Columns");
 	theConf->DelValue("NewBoxWindow/Window_Geometry");
 	theConf->DelValue("OptionsWindow/Window_Geometry");
 	theConf->DelValue("OptionsWindow/Run_Columns");

@@ -40,7 +40,7 @@
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="302"/>
+        <location filename="Views/FileView.cpp" line="303"/>
         <source>%1 - Files</source>
         <translation>%1 - 檔案</translation>
     </message>
@@ -68,27 +68,27 @@
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="141"/>
+        <location filename="Views/FileView.cpp" line="142"/>
         <source>Create Shortcut</source>
         <translation type="unfinished">建立捷徑</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="147"/>
+        <location filename="Views/FileView.cpp" line="148"/>
         <source>Recover to Any Folder</source>
         <translation type="unfinished">復原到任意資料夾</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="149"/>
+        <location filename="Views/FileView.cpp" line="150"/>
         <source>Recover to Same Folder</source>
         <translation type="unfinished">復原到相同資料夾</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="209"/>
+        <location filename="Views/FileView.cpp" line="210"/>
         <source>Select Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="259"/>
+        <location filename="Views/FileView.cpp" line="260"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -812,7 +812,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="362"/>
-        <source>Search Options</source>
+        <source>Search for Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3201,7 +3201,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="277"/>
-        <source>Search Settings</source>
+        <source>Search for Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4717,8 +4717,9 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2636"/>
-        <source>API call trace (requirers logapi to be installed in the sbie dir)</source>
-        <translation>API 呼叫追蹤 (需要在沙箱資料夾中安裝所需的 logapi)</translation>
+        <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
+        <oldsource>API call trace (requirers logapi to be installed in the sbie dir)</oldsource>
+        <translation type="unfinished">API 呼叫追蹤 (需要在沙箱資料夾中安裝所需的 logapi)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2656"/>

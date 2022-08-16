@@ -40,7 +40,7 @@
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="302"/>
+        <location filename="Views/FileView.cpp" line="303"/>
         <source>%1 - Files</source>
         <translatorcomment>Plików / Pliki</translatorcomment>
         <translation>%1 - Plików</translation>
@@ -69,27 +69,27 @@
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="141"/>
+        <location filename="Views/FileView.cpp" line="142"/>
         <source>Create Shortcut</source>
         <translation>Utwórz skrót</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="147"/>
+        <location filename="Views/FileView.cpp" line="148"/>
         <source>Recover to Any Folder</source>
         <translation>Przywróć do dowolnego folderu</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="149"/>
+        <location filename="Views/FileView.cpp" line="150"/>
         <source>Recover to Same Folder</source>
         <translation>Przywróć do tego samego folderu</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="209"/>
+        <location filename="Views/FileView.cpp" line="210"/>
         <source>Select Directory</source>
         <translation>Wybierz katalog</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="259"/>
+        <location filename="Views/FileView.cpp" line="260"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Utwórz skrót do piaskownicy %1</translation>
     </message>
@@ -458,7 +458,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="362"/>
-        <source>Search Options</source>
+        <source>Search for Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3235,7 +3235,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="277"/>
-        <source>Search Settings</source>
+        <source>Search for Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4502,8 +4502,9 @@ zamiast &quot;*&quot;.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2636"/>
-        <source>API call trace (requirers logapi to be installed in the sbie dir)</source>
-        <translation>Śledzenie wywołań API (wymaga zainstalowania logapi w katalogu sbie)</translation>
+        <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
+        <oldsource>API call trace (requirers logapi to be installed in the sbie dir)</oldsource>
+        <translation type="unfinished">Śledzenie wywołań API (wymaga zainstalowania logapi w katalogu sbie)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2676"/>

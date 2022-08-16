@@ -40,7 +40,7 @@
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="302"/>
+        <location filename="Views/FileView.cpp" line="303"/>
         <source>%1 - Files</source>
         <translation>%1 - 文件</translation>
     </message>
@@ -48,27 +48,27 @@
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="141"/>
+        <location filename="Views/FileView.cpp" line="142"/>
         <source>Create Shortcut</source>
         <translation>创建快捷方式</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="147"/>
+        <location filename="Views/FileView.cpp" line="148"/>
         <source>Recover to Any Folder</source>
         <translation>恢复到任意文件夹</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="149"/>
+        <location filename="Views/FileView.cpp" line="150"/>
         <source>Recover to Same Folder</source>
         <translation>恢复到对应的目录</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="209"/>
+        <location filename="Views/FileView.cpp" line="210"/>
         <source>Select Directory</source>
         <translation>选择目录</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="259"/>
+        <location filename="Views/FileView.cpp" line="260"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>为沙盒 %1 创建快捷方式</translation>
     </message>
@@ -434,7 +434,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="362"/>
-        <source>Search Options</source>
+        <source>Search for Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3149,7 +3149,7 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="277"/>
-        <source>Search Settings</source>
+        <source>Search for Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4666,8 +4666,9 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2636"/>
-        <source>API call trace (requirers logapi to be installed in the sbie dir)</source>
-        <translation>API 调用跟踪 (需将 logapi 安装到沙盒目录)</translation>
+        <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
+        <oldsource>API call trace (requirers logapi to be installed in the sbie dir)</oldsource>
+        <translation type="unfinished">API 调用跟踪 (需将 logapi 安装到沙盒目录)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2676"/>

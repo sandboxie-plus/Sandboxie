@@ -40,7 +40,7 @@
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="302"/>
+        <location filename="Views/FileView.cpp" line="303"/>
         <source>%1 - Files</source>
         <translation>%1 - Dosyalar</translation>
     </message>
@@ -68,27 +68,27 @@
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="141"/>
+        <location filename="Views/FileView.cpp" line="142"/>
         <source>Create Shortcut</source>
         <translation>Kısayol Oluştur</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="147"/>
+        <location filename="Views/FileView.cpp" line="148"/>
         <source>Recover to Any Folder</source>
         <translation>Herhangi Bir Klasöre Kurtar</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="149"/>
+        <location filename="Views/FileView.cpp" line="150"/>
         <source>Recover to Same Folder</source>
         <translation>Aynı Klasöre Kurtar</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="209"/>
+        <location filename="Views/FileView.cpp" line="210"/>
         <source>Select Directory</source>
         <translation>Dizin Seç</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="259"/>
+        <location filename="Views/FileView.cpp" line="260"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>%1 korumalı kutusuna kısayol oluştur</translation>
     </message>
@@ -574,7 +574,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="362"/>
-        <source>Search Options</source>
+        <source>Search for Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3480,7 +3480,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="277"/>
-        <source>Search Settings</source>
+        <source>Search for Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4726,8 +4726,9 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2636"/>
-        <source>API call trace (requirers logapi to be installed in the sbie dir)</source>
-        <translation>API çağrı izleme (sbie dizinine logapi yüklenmesini gerektirir)</translation>
+        <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
+        <oldsource>API call trace (requirers logapi to be installed in the sbie dir)</oldsource>
+        <translation type="unfinished">API çağrı izleme (sbie dizinine logapi yüklenmesini gerektirir)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2676"/>

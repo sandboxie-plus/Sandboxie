@@ -274,7 +274,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 			m_pSearch->setMaximumWidth(m_pTabs->tabBar()->width());
 		});
 	}
-	m_pSearch->setPlaceholderText(tr("Search Settings"));
+	m_pSearch->setPlaceholderText(tr("Search for Settings"));
 }
 
 void CSettingsWindow::OnSetTree()

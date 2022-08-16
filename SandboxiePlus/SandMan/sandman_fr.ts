@@ -40,7 +40,7 @@
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="302"/>
+        <location filename="Views/FileView.cpp" line="303"/>
         <source>%1 - Files</source>
         <translation>%1 - Fichiers</translation>
     </message>
@@ -68,27 +68,27 @@
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="141"/>
+        <location filename="Views/FileView.cpp" line="142"/>
         <source>Create Shortcut</source>
         <translation>Créer un raccourci</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="147"/>
+        <location filename="Views/FileView.cpp" line="148"/>
         <source>Recover to Any Folder</source>
         <translation>Récupérer vers un dossier</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="149"/>
+        <location filename="Views/FileView.cpp" line="150"/>
         <source>Recover to Same Folder</source>
         <translation>Récupérer vers le même dossier</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="209"/>
+        <location filename="Views/FileView.cpp" line="210"/>
         <source>Select Directory</source>
         <translation>Sélectionner le dossier</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="259"/>
+        <location filename="Views/FileView.cpp" line="260"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Créer un raccourci vers le bac à sable %1</translation>
     </message>
@@ -862,7 +862,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="362"/>
-        <source>Search Options</source>
+        <source>Search for Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3363,7 +3363,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="277"/>
-        <source>Search Settings</source>
+        <source>Search for Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4960,8 +4960,9 @@ Remarque : Les paramètres Programmes forcés et Dossiers forcés d&apos;un bac 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2636"/>
-        <source>API call trace (requirers logapi to be installed in the sbie dir)</source>
-        <translation>Traçage des appels API (nécessite que logapi soit installé dans le répertoire sbie)</translation>
+        <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
+        <oldsource>API call trace (requirers logapi to be installed in the sbie dir)</oldsource>
+        <translation type="unfinished">Traçage des appels API (nécessite que logapi soit installé dans le répertoire sbie)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2656"/>

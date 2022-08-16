@@ -2633,7 +2633,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
                  <item row="13" column="1" colspan="4">
                   <widget class="QCheckBox" name="chkApiTrace">
                    <property name="text">
-                    <string>API call trace (requirers logapi to be installed in the sbie dir)</string>
+                    <string>API call trace (requires LogAPI to be installed in the Sbie directory)</string>
                    </property>
                   </widget>
                  </item>

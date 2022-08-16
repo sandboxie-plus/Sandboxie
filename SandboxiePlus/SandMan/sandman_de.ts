@@ -5421,7 +5421,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
         <translation>Zeige Benachrichtigungen f√ºr relevante Protokollmitteilungen</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="294"/>
+        <location filename="Forms/SettingsWindow.ui" line="334"/>
         <source>Systray options</source>
         <translation>Systemtray-Optionen</translation>
     </message>
@@ -5435,7 +5435,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
         <translation>UI Sprache:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="261"/>
+        <location filename="Forms/SettingsWindow.ui" line="210"/>
         <source>Show Icon in Systray:</source>
         <translation>Zeige Icon im System-Tray:</translation>
     </message>
@@ -5445,22 +5445,22 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
         <translation>Men√ºintegration</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="341"/>
+        <location filename="Forms/SettingsWindow.ui" line="276"/>
         <source>Run Sandboxed - Actions</source>
         <translation>Starte in Sandbox - Aktionen</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="220"/>
+        <location filename="Forms/SettingsWindow.ui" line="296"/>
         <source>Always use DefaultBox</source>
         <translation>Immer DefaultBox verwenden</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="234"/>
+        <location filename="Forms/SettingsWindow.ui" line="371"/>
         <source>Start Sandbox Manager</source>
         <translation>Starte Sandboxmanager</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="254"/>
+        <location filename="Forms/SettingsWindow.ui" line="313"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
         <translation>F√ºge &apos;In Sandbox starten&apos; zum Kontextmen√º des Explorers hinzu</translation>
     </message>
@@ -5632,22 +5632,22 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
         <translation>Berechne und zeige den Festplattenspeicherplatz an, der von jeder Sandbox verwendet wird</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="207"/>
+        <location filename="Forms/SettingsWindow.ui" line="351"/>
         <source>Show boxes in tray list:</source>
         <translation>Zeige Boxen in der Tray-Liste:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="348"/>
+        <location filename="Forms/SettingsWindow.ui" line="320"/>
         <source>Add &apos;Run Un-Sandboxed&apos; to the context menu</source>
         <translation>F√ºge &apos;&quot;Starte Nicht-Sandgeboxt&quot; zum Kontextmen√º hinzu</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="355"/>
+        <location filename="Forms/SettingsWindow.ui" line="344"/>
         <source>Show a tray notification when automatic box operations are started</source>
         <translation>Zeige Traybenachrichtigung an, wenn automatische Boxvorg√§nge gestartet wurden</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="308"/>
+        <location filename="Forms/SettingsWindow.ui" line="200"/>
         <source>Use Compact Box List</source>
         <translation>Verwende kompakte Boxliste</translation>
     </message>
@@ -5823,12 +5823,12 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
         <translation>Leere Passwort, wenn das Hauptfenster versteckt wird</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="301"/>
+        <location filename="Forms/SettingsWindow.ui" line="223"/>
         <source>Start UI with Windows</source>
         <translation>Starte Benutzeroberfl√§che mit Windows</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="200"/>
+        <location filename="Forms/SettingsWindow.ui" line="306"/>
         <source>Start UI when a sandboxed process is started</source>
         <translation>Starte Benutzeroberfl√§che, wenn ein Prozess in einer Sandbox gestartet wird</translation>
     </message>

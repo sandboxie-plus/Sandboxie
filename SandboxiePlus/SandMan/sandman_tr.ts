@@ -5515,7 +5515,7 @@ The process match level has a higher priority than the specificity and describes
         <translation type="vanished">Ana pencere kapatıldığında:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="254"/>
+        <location filename="Forms/SettingsWindow.ui" line="313"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
         <translation>Dosya gezgini bağlam menüsüne &apos;Korumalı kutuda başlat&apos; seçeneği ekle</translation>
     </message>
@@ -5578,12 +5578,12 @@ The process match level has a higher priority than the specificity and describes
         <translation>Taşınabilir kök dizin</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="301"/>
+        <location filename="Forms/SettingsWindow.ui" line="223"/>
         <source>Start UI with Windows</source>
         <translation>Windows başlangıcında kullanıcı arayüzünü başlat</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="200"/>
+        <location filename="Forms/SettingsWindow.ui" line="306"/>
         <source>Start UI when a sandboxed process is started</source>
         <translation>Korumalı kutuda bir işlem başladığında kullanıcı arayüzünü (ui) başlat</translation>
     </message>
@@ -5616,7 +5616,7 @@ The process match level has a higher priority than the specificity and describes
         <translation>Tüm kutulu işlemleri sonlandırmak için kısayol tuşu:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="294"/>
+        <location filename="Forms/SettingsWindow.ui" line="334"/>
         <source>Systray options</source>
         <translation>Sistem Tepsisi seçenekleri</translation>
     </message>
@@ -5631,12 +5631,12 @@ The process match level has a higher priority than the specificity and describes
         <translation>Kabuk Entegrasyonu</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="341"/>
+        <location filename="Forms/SettingsWindow.ui" line="276"/>
         <source>Run Sandboxed - Actions</source>
         <translation>Korumalı Alanda Çalıştır - Eylemler</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="220"/>
+        <location filename="Forms/SettingsWindow.ui" line="296"/>
         <source>Always use DefaultBox</source>
         <translation>Her zaman DefaultBox kullanın</translation>
     </message>
@@ -5647,12 +5647,12 @@ The process match level has a higher priority than the specificity and describes
         <translation type="unfinished">Her korumalı alanın kapladığı disk alanını hesaplayın ve görüntüleyin</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="234"/>
+        <location filename="Forms/SettingsWindow.ui" line="371"/>
         <source>Start Sandbox Manager</source>
         <translation>Sandbox Manager&apos;ı başlatın</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="308"/>
+        <location filename="Forms/SettingsWindow.ui" line="200"/>
         <source>Use Compact Box List</source>
         <translation>Kompakt Kutu Listesini Kullan</translation>
     </message>
@@ -5812,7 +5812,7 @@ The process match level has a higher priority than the specificity and describes
         <translation>Kurtarılabilir dosyaları bildirim olarak göster</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="261"/>
+        <location filename="Forms/SettingsWindow.ui" line="210"/>
         <source>Show Icon in Systray:</source>
         <translation>Simgeyi Sistem Tepsisinde Göster:</translation>
     </message>
@@ -5836,17 +5836,17 @@ The process match level has a higher priority than the specificity and describes
         <translation>Kutu işlemlerini mümkün olduğunda eşzamansız olarak çalıştırın (içerik silme gibi)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="207"/>
+        <location filename="Forms/SettingsWindow.ui" line="351"/>
         <source>Show boxes in tray list:</source>
         <translation>Kutuları tepsi listesinde göster:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="348"/>
+        <location filename="Forms/SettingsWindow.ui" line="320"/>
         <source>Add &apos;Run Un-Sandboxed&apos; to the context menu</source>
         <translation>Bağlam menüsüne &apos;Korumalı Alanda Çalıştır&apos;ı ekleyin</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="355"/>
+        <location filename="Forms/SettingsWindow.ui" line="344"/>
         <source>Show a tray notification when automatic box operations are started</source>
         <translation>Otomatik kutu işlemleri başlatıldığında bir tepsi bildirimi göster</translation>
     </message>

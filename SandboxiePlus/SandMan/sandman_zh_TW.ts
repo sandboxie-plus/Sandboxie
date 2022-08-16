@@ -337,83 +337,83 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>瀏覽資料夾</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="237"/>
+        <location filename="Windows/OptionsAccess.cpp" line="239"/>
         <source>Closed</source>
         <translation>封閉</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="238"/>
+        <location filename="Windows/OptionsAccess.cpp" line="240"/>
         <source>Closed RT</source>
         <translation>封閉 RT</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="239"/>
+        <location filename="Windows/OptionsAccess.cpp" line="241"/>
         <source>Read Only</source>
         <translation>唯讀</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="234"/>
+        <location filename="Windows/OptionsAccess.cpp" line="236"/>
         <source>Normal</source>
         <translation>標準</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="235"/>
+        <location filename="Windows/OptionsAccess.cpp" line="237"/>
         <source>Open</source>
         <translation>開放</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="236"/>
+        <location filename="Windows/OptionsAccess.cpp" line="238"/>
         <source>Open for All</source>
         <translation>完全開放</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="240"/>
+        <location filename="Windows/OptionsAccess.cpp" line="242"/>
         <source>Box Only (Write Only)</source>
         <translation>僅沙箱內 (唯寫)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="242"/>
-        <location filename="Windows/OptionsAccess.cpp" line="255"/>
+        <location filename="Windows/OptionsAccess.cpp" line="244"/>
+        <location filename="Windows/OptionsAccess.cpp" line="257"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="249"/>
+        <location filename="Windows/OptionsAccess.cpp" line="251"/>
         <source>File/Folder</source>
         <translation>檔案和資料夾</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="250"/>
+        <location filename="Windows/OptionsAccess.cpp" line="252"/>
         <source>Registry</source>
         <translation>登錄</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="251"/>
+        <location filename="Windows/OptionsAccess.cpp" line="253"/>
         <source>IPC Path</source>
         <translation>IPC 路徑</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="252"/>
+        <location filename="Windows/OptionsAccess.cpp" line="254"/>
         <source>Wnd Class</source>
         <translation>Wnd 元件</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="253"/>
+        <location filename="Windows/OptionsAccess.cpp" line="255"/>
         <source>COM Object</source>
         <translation>COM 物件</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="260"/>
+        <location filename="Windows/OptionsAccess.cpp" line="262"/>
         <source>Select File</source>
         <translation>選取檔案</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="260"/>
+        <location filename="Windows/OptionsAccess.cpp" line="262"/>
         <source>All Files (*.*)</source>
         <translation>所有檔案 (*.*)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="272"/>
+        <location filename="Windows/OptionsAccess.cpp" line="274"/>
         <location filename="Windows/OptionsForce.cpp" line="120"/>
         <location filename="Windows/OptionsRecovery.cpp" line="94"/>
         <location filename="Windows/OptionsRecovery.cpp" line="105"/>
@@ -421,8 +421,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>選取目錄</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="292"/>
-        <location filename="Windows/OptionsAccess.cpp" line="488"/>
+        <location filename="Windows/OptionsAccess.cpp" line="294"/>
+        <location filename="Windows/OptionsAccess.cpp" line="490"/>
         <location filename="Windows/OptionsNetwork.cpp" line="435"/>
         <location filename="Windows/OptionsNetwork.cpp" line="528"/>
         <location filename="Windows/OptionsNetwork.cpp" line="641"/>
@@ -430,10 +430,10 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>所有程式</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="699"/>
-        <location filename="Windows/OptionsWindow.cpp" line="715"/>
-        <location filename="Windows/OptionsAccess.cpp" line="297"/>
-        <location filename="Windows/OptionsAccess.cpp" line="492"/>
+        <location filename="Windows/OptionsWindow.cpp" line="663"/>
+        <location filename="Windows/OptionsWindow.cpp" line="679"/>
+        <location filename="Windows/OptionsAccess.cpp" line="299"/>
+        <location filename="Windows/OptionsAccess.cpp" line="494"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
         <location filename="Windows/OptionsNetwork.cpp" line="440"/>
         <location filename="Windows/OptionsNetwork.cpp" line="532"/>
@@ -441,17 +441,17 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>群組: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="418"/>
+        <location filename="Windows/OptionsAccess.cpp" line="420"/>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
         <translation>COM 物件必須被它們的 GUID 所指定，例如: {00000000-0000-0000-0000-000000000000}</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="424"/>
+        <location filename="Windows/OptionsAccess.cpp" line="426"/>
         <source>RT interfaces must be specified by their name.</source>
         <translation>RT 介面必須用其名稱來指定。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="467"/>
+        <location filename="Windows/OptionsAccess.cpp" line="469"/>
         <location filename="Windows/OptionsGrouping.cpp" line="278"/>
         <location filename="Windows/OptionsGrouping.cpp" line="302"/>
         <location filename="Windows/OptionsNetwork.cpp" line="507"/>
@@ -459,53 +459,53 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>範本值無法編輯。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="533"/>
+        <location filename="Windows/OptionsAccess.cpp" line="535"/>
         <location filename="Windows/OptionsRecovery.cpp" line="132"/>
         <source>Template values can not be removed.</source>
         <translation>範本值無法刪除。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="356"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="360"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="359"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="363"/>
         <source>On Start</source>
         <translation>啟動階段</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="357"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="365"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="369"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="360"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="368"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="372"/>
         <source>Run Command</source>
         <translation>執行命令</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="361"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="364"/>
         <source>Start Service</source>
         <translation>啟動服務</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="364"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="367"/>
         <source>On Init</source>
         <translation>初始化階段</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="368"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="371"/>
         <source>On Delete</source>
         <translation>刪除階段</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="379"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="401"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="412"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="382"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="404"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="415"/>
         <source>Please enter the command line to be executed</source>
         <translation>請輸入將要執行的命令列</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="431"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="434"/>
         <source>Please enter a program file name</source>
         <translation>請輸入程式檔名</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="546"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="549"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
@@ -615,7 +615,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>選擇程式</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="390"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="393"/>
         <source>Please enter a service identifier</source>
         <translation>請輸入服務識別元</translation>
     </message>
@@ -806,22 +806,27 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>確定要刪除所選的本地範本嗎？</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="141"/>
+        <location filename="Windows/OptionsWindow.cpp" line="144"/>
         <source>Sandboxie Plus - &apos;%1&apos; Options</source>
         <translation>Sandboxie Plus - &apos;%1&apos; 選項</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="643"/>
+        <location filename="Windows/OptionsWindow.cpp" line="362"/>
+        <source>Search Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsWindow.cpp" line="607"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>該沙箱已被刪除，因此設定無法儲存。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="687"/>
+        <location filename="Windows/OptionsWindow.cpp" line="651"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>部分變更未儲存，確定關閉這個選項視窗嗎？</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="708"/>
+        <location filename="Windows/OptionsWindow.cpp" line="672"/>
         <source>Enter program:</source>
         <translation>請輸入程式:</translation>
     </message>
@@ -3121,43 +3126,43 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="unfinished">Sandboxie Plus - 設定</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="131"/>
+        <location filename="Windows/SettingsWindow.cpp" line="133"/>
         <source>Auto Detection</source>
         <translation>自動偵測</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="132"/>
+        <location filename="Windows/SettingsWindow.cpp" line="134"/>
         <source>No Translation</source>
         <translation>無翻譯</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="143"/>
+        <location filename="Windows/SettingsWindow.cpp" line="145"/>
         <source>Don&apos;t show any icon</source>
         <oldsource>Don&apos;t integrate links</oldsource>
         <translation type="unfinished">不顯示任何圖示(T)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="144"/>
+        <location filename="Windows/SettingsWindow.cpp" line="146"/>
         <source>Show Plus icon</source>
         <translation>顯示 Plus 版圖示</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="145"/>
+        <location filename="Windows/SettingsWindow.cpp" line="147"/>
         <source>Show Classic icon</source>
         <translation>顯示經典版圖示</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="147"/>
+        <location filename="Windows/SettingsWindow.cpp" line="149"/>
         <source>All Boxes</source>
         <translation>所有沙箱</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="148"/>
+        <location filename="Windows/SettingsWindow.cpp" line="150"/>
         <source>Active + Pinned</source>
         <translation>啟動或已固定的沙箱</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="149"/>
+        <location filename="Windows/SettingsWindow.cpp" line="151"/>
         <source>Pinned Only</source>
         <translation>僅已固定的沙箱</translation>
     </message>
@@ -3174,53 +3179,58 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="vanished">關閉</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="151"/>
+        <location filename="Windows/SettingsWindow.cpp" line="153"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="152"/>
+        <location filename="Windows/SettingsWindow.cpp" line="154"/>
         <source>Native</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="153"/>
+        <location filename="Windows/SettingsWindow.cpp" line="155"/>
         <source>Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="157"/>
+        <location filename="Windows/SettingsWindow.cpp" line="159"/>
         <source>%1</source>
         <oldsource>%1 %</oldsource>
         <translation type="unfinished">%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="310"/>
+        <location filename="Windows/SettingsWindow.cpp" line="277"/>
+        <source>Search Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="375"/>
         <source>Run &amp;Sandboxed</source>
         <translation>在沙箱中執行(&amp;S)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="331"/>
+        <location filename="Windows/SettingsWindow.cpp" line="396"/>
         <source>Sandboxed Web Browser</source>
         <translation>沙箱化瀏覽器</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="488"/>
+        <location filename="Windows/SettingsWindow.cpp" line="553"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>此贊助者憑證已逾期，請&lt;a href=&quot;sbie://update/cert&quot;&gt;取得新憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="493"/>
+        <location filename="Windows/SettingsWindow.cpp" line="558"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>此贊助者憑證將&lt;font color=&apos;red&apos;&gt;在 %1 天後過期&lt;/font&gt;，請&lt;a href=&quot;sbie://update/cert&quot;&gt;取得新憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="600"/>
+        <location filename="Windows/SettingsWindow.cpp" line="665"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>在沙箱外執行(&amp;U)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="796"/>
+        <location filename="Windows/SettingsWindow.cpp" line="861"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>這看起來不像是一份憑證。請輸入完整的憑證，而不僅僅是其中的一部分。</translation>
     </message>
@@ -3230,83 +3240,83 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="obsolete">這看起來不像是憑證，請輸入完整憑證內容，而不僅僅是其中的一部分。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="814"/>
+        <location filename="Windows/SettingsWindow.cpp" line="879"/>
         <source>This certificate is unfortunately expired.</source>
         <translation>很不幸此憑證已逾期。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="816"/>
+        <location filename="Windows/SettingsWindow.cpp" line="881"/>
         <source>This certificate is unfortunately outdated.</source>
         <translation>很不幸此憑證已廢止。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="819"/>
+        <location filename="Windows/SettingsWindow.cpp" line="884"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>感謝您對 Sandboxie-Plus 開發工作的支持。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="827"/>
+        <location filename="Windows/SettingsWindow.cpp" line="892"/>
         <source>This support certificate is not valid.</source>
         <translation>此贊助者憑證無效。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="858"/>
-        <location filename="Windows/SettingsWindow.cpp" line="972"/>
+        <location filename="Windows/SettingsWindow.cpp" line="923"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1042"/>
         <source>Select Directory</source>
         <translation>選取目錄</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="881"/>
+        <location filename="Windows/SettingsWindow.cpp" line="951"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="934"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1004"/>
         <source>Please enter the new configuration password.</source>
         <translation>請輸入新配置密碼。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="938"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1008"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>請再次輸入新配置密碼。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="943"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1013"/>
         <source>Passwords did not match, please retry.</source>
         <translation>密碼不匹配，請重新輸入。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="953"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1023"/>
         <source>Process</source>
         <translation>處理程序</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="953"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1023"/>
         <source>Folder</source>
         <translation>資料夾</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="963"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1033"/>
         <source>Please enter a program file name</source>
         <translation>請輸入一個程式檔案名稱</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1095"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1170"/>
         <source>%1 (Current)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1096"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1171"/>
         <source>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1097"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1172"/>
         <source>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1119"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1194"/>
         <source>Do you want to download the version %1?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4920,7 +4930,7 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>ProgramsDelegate</name>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="42"/>
+        <location filename="Windows/OptionsWindow.cpp" line="43"/>
         <source>Group: %1</source>
         <translation>群組: %1</translation>
     </message>

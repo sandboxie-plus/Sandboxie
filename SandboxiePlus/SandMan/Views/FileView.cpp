@@ -20,6 +20,7 @@ CFileView::CFileView(QWidget *parent)
     m_pFileModel = new QFileSystemModel(this);
     m_pFileModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs | QDir::Files | QDir::Hidden | QDir::System);
     m_pTreeView->setModel(m_pFileModel);
+    m_pTreeView->setSortingEnabled(true);
     m_pTreeView->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
 	QStyle* pStyle = QStyleFactory::create("windows");

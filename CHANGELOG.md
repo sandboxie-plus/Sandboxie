@@ -12,19 +12,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added ability to switch fusion theme independently of the dark theme
 - added ability to download updates from the support page
 - added missing system calls to the hardened box type [88bc06a](https://github.com/sandboxie-plus/Sandboxie/commit/88bc06a0c7368a81c80a77d7a89ddc73455abb25) [b775264](https://github.com/sandboxie-plus/Sandboxie/commit/b775264a4824e49b554f1b776c377170e5f90797) [04b2377](https://github.com/sandboxie-plus/Sandboxie/commit/04b23770f53597c12eda9122c774ed5165129147) (thanks Mr.X)
-- added search box to Settings and box option dialogs [#2134](https://github.com/sandboxie-plus/Sandboxie/issues/2134)
+- added search box to the Plus UI Settings and box option dialogs [#2134](https://github.com/sandboxie-plus/Sandboxie/issues/2134)
+- added Korean translation to the Plus UI [#2133](https://github.com/sandboxie-plus/Sandboxie/pull/2133) (thanks VenusGirl)
 
 ### Changed
 - improved info label
 - the look of vintage mode is even more vintage
-- realoading the config using the Sandman "Options -> Reload ini file" command now updates the list of approved syscalls
-- made rule specificity most specific now a rule with less wildcards overrules a rule with more wildcards
+- reloading the configuration with the Sandman command "Options -> Reload ini file" now updates the list of approved syscalls
+- made rule specificity more specific, now a rule with less wildcards overrules a rule with more wildcards
 -- Note: tailing wildcards are evaluated separately
 
 ### Fixed
 - fixed issue with displaying sandbox configuration [#2111](https://github.com/sandboxie-plus/Sandboxie/issues/2111)
 - fixed flashing issue when switching views [#2050](https://github.com/sandboxie-plus/Sandboxie/issues/2050)
-- fixed inconsistency with the "HideOtherBoxes" option in the Plus UI [ef4ac1b](https://github.com/sandboxie-plus/Sandboxie/commit/ef4ac1b6b34d505e46515e9aabb98411a9b1751e)
+- fixed inconsistencies with various checkboxes in the Plus UI [ef4ac1b](https://github.com/sandboxie-plus/Sandboxie/commit/ef4ac1b6b34d505e46515e9aabb98411a9b1751e) [06c89e3](https://github.com/sandboxie-plus/Sandboxie/commit/06c89e3f45036f593fed7a0d0d59d54313e8ca77)
 - fixed a certificate validation issue [238cb44](https://github.com/sandboxie-plus/Sandboxie/commit/238cb44969923479148e210814ab91d2428ec4b0)
 - fixed issue with "UseRuleSpecificity" setting [#2124](https://github.com/sandboxie-plus/Sandboxie/issues/2124) [file.c#L965-L966](https://github.com/sandboxie-plus/Sandboxie/blob/ff759692a222cf7c492cb4d5cfd76c79fbde1c2b/Sandboxie/core/drv/file.c#L965-L966)
 
@@ -35,20 +36,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Added hook configuration for ntoskrnl/ntdll
 -- individual ntdll hooks can be disabled using "DisableWinNtHook=..."
-- Added new Super Extra Security Enhanced Box Mode to enable set "UseSecurityMode=y"
--- then this setting is enabled it combines "SysCallLockDown=y" that limits the use of Nt system calls with "DropAdminRights=y" and "RestrictDevices=y"
--- Only calls configured in the global section as "ApproveWinNtSysCall=..."/"ApproveWin32SysCall=..." wil be executed with the original token
--- all not aproved Nt sys calls will be executed with the sandboxed token, this may break compatybility in certain scenarios
--- hence additional syscalls may need to be allowed, this is to be done in the [GlobalSettings] and the driver must be restarted
--- Note: Boxes created as Security Enhanced with prior builds will be displayed in the UI to normal from now on
+- Added new Super Extra Security Enhanced Box Mode to enable "UseSecurityMode=y"
+-- when this setting is enabled, it combines "SysCallLockDown=y" that limits the use of Nt system calls with "DropAdminRights=y" and "RestrictDevices=y"
+-- Only calls configured in the global section as "ApproveWinNtSysCall=..."/"ApproveWin32SysCall=..." will be executed with the original token
+-- all not approved Nt syscalls will be executed with the sandboxed token, this may break compatibility in certain scenarios
+-- additional syscalls may need to be allowed, this has to be done in the [GlobalSettings] and the driver must be restarted
+-- Note: Boxes created as Security Enhanced with prior builds will be displayed as normal in the UI from now on
 -- The Security Enhanced icons are now repurposed for the new Super Extra Security Enhanced Box Mode
 -- Note: The new enhanced security features require a supporter certificate
 - added browse option to the force processes tab
 
 ### Changed
 - replaced the "DeviceSecurity" template with a dedicated setting "RestrictDevices=y"
--- Note: when needed more "NormalPipePath=..." entries can be added to open specific devices
-- rule specificity is now even more specific a exact rule now overrules once that end with a wildcard
+-- Note: when needed, more "NormalPipePath=..." entries can be added to open specific devices
+- rule specificity is now even more specific, an exact rule now overrules those ending with a wildcard
 
 
 

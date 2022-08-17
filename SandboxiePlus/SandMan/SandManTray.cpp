@@ -189,23 +189,99 @@ void CSandMan::OnShowHide()
 		show();
 }
 
-void CSandMan::CreateBoxMenu(QMenu* pMenu, int iOffset, int iSysTrayFilter)
+QMenu* CSandMan__GetBoxParent(const QMap<QString, QStringList>& Groups, QMap<QString, QMenu*>& GroupItems, const QIcon& Icon, int iNoIcons, QMenu* pMenu, QAction* pPos, const QString& Name, int Depth = 0)
 {
-	QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
+	if (Depth > 100)
+		return NULL;
+	for (auto I = Groups.constBegin(); I != Groups.constEnd(); ++I) {
+		if (I->contains(Name)) {
+			if (I.key().isEmpty())
+				return NULL; // global group
+			QMenu*& pParent = GroupItems[I.key()];
+			if (!pParent) {
+				pParent = new QMenu(I.key());
+				if(!iNoIcons) pParent->setIcon(Icon);
+				QAction* pMenuAction = NULL;
+				if (QMenu* pParent2 = CSandMan__GetBoxParent(Groups, GroupItems, Icon, iNoIcons, pMenu, pPos, I.key(), ++Depth))
+					pMenuAction = pParent2->addMenu(pParent);
+				else
+					pMenuAction = pMenu->insertMenu(pPos, pParent);
+				pMenuAction->setData("group:" + I.key());
+				QFont fnt = pMenuAction->font();
+				fnt.setBold(true);
+				pMenuAction->setFont(fnt);
+			}
+			return pParent;
+		}
+	}
+	return NULL;
+}
 
+double CSandMan__GetBoxOrder(const QMap<QString, QStringList>& Groups, const QString& Name, double value = 0.0, int Depth = 0) 
+{
+	if (Depth > 100)
+		return 1000000000;
+	for (auto I = Groups.constBegin(); I != Groups.constEnd(); ++I) {
+		int Pos = I->indexOf(Name);
+		if (Pos != -1) {
+			value = double(Pos) + value / 10.0;
+			if (I.key().isEmpty())
+				return value;
+			return CSandMan__GetBoxOrder(Groups, I.key(), value, ++Depth);
+		}
+	}
+	return 1000000000;
+}
+
+QAction* CSandMan__MakeBoxEntry(QMenu* pMenu, CSandBoxPlus* pBoxEx, QFileIconProvider& IconProvider, int iNoIcons, bool ColorIcons)
+{
 	static QMenu* pEmptyMenu = new QMenu();
 
-	while (!pMenu->actions().at(iOffset)->data().toString().isEmpty())
-		pMenu->removeAction(pMenu->actions().at(iOffset));
+	QAction* pBoxAction = new QAction(pBoxEx->GetName().replace("_", " "));
+	if (!iNoIcons) {
+		QIcon Icon;
+		if (ColorIcons)
+			Icon = theGUI->GetColorIcon(pBoxEx->GetColor(), pBoxEx->GetActiveProcessCount());
+		else
+			Icon = theGUI->GetBoxIcon(pBoxEx->GetType(), pBoxEx->GetActiveProcessCount() != 0);
+		pBoxAction->setIcon(Icon);
+	}
+	pBoxAction->setData("box:" + pBoxEx->GetName());
+	pBoxAction->setMenu(pEmptyMenu);
+	//pBoxAction->setIcon
+	//connect(pBoxAction, SIGNAL(triggered()), this, SLOT(OnBoxMenu()));
+	return pBoxAction;
+}
 
+void CSandMan::CreateBoxMenu(QMenu* pMenu, int iOffset, int iSysTrayFilter)
+{
 	int iNoIcons = theConf->GetInt("Options/NoIcons", 2);
 	if (iNoIcons == 2)
 		iNoIcons = theConf->GetInt("Options/ViewMode", 1) == 2 ? 1 : 0;
 	QFileIconProvider IconProvider;
 	bool ColorIcons = theConf->GetBool("Options/ColorBoxIcons", false);
 
+	while (!pMenu->actions().at(iOffset)->data().toString().isEmpty())
+		pMenu->removeAction(pMenu->actions().at(iOffset));
+
 	QAction* pPos = pMenu->actions().at(iOffset);
-	foreach(const CSandBoxPtr & pBox, Boxes)
+
+	bool bPlus = (theAPI->GetFeatureFlags() & CSbieAPI::eSbieFeatureCert) != 0;
+	QIcon Icon = QIcon(bPlus ? ":/Boxes/Group2" : ":/Boxes/Group"); // theGUI->GetBoxIcon(CSandBoxPlus::eDefault, false);
+
+	QList<CSandBoxPtr> Boxes = theAPI->GetAllBoxes().values(); // map is sorted by key (box name)
+	QMap<QString, QStringList> Groups = theGUI->GetBoxView()->GetGroups();
+
+	if (theConf->GetBool("MainWindow/BoxTree_UseOrder", false)) {
+		QMultiMap<double, CSandBoxPtr> Boxes2;
+		foreach(const CSandBoxPtr &pBox, Boxes) {
+			Boxes2.insertMulti(CSandMan__GetBoxOrder(Groups, pBox->GetName()), pBox);
+		}
+		Boxes = Boxes2.values();
+	}
+
+	QMap<QString, QMenu*> GroupItems;
+	foreach(const CSandBoxPtr &pBox, Boxes) 
 	{
 		if (!pBox->IsEnabled())
 			continue;
@@ -221,20 +297,13 @@ void CSandMan::CreateBoxMenu(QMenu* pMenu, int iOffset, int iSysTrayFilter)
 				continue;
 		}
 
-		QAction* pBoxAction = new QAction(pBox->GetName().replace("_", " "));
-		if (!iNoIcons) {
-			QIcon Icon;
-			if (ColorIcons)
-				Icon = theGUI->GetColorIcon(pBoxEx->GetColor(), pBox->GetActiveProcessCount());
-			else
-				Icon = theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount() != 0);
-			pBoxAction->setIcon(Icon);
-		}
-		pBoxAction->setData("box:" + pBox->GetName());
-		pBoxAction->setMenu(pEmptyMenu);
-		//pBoxAction->setIcon
-		//connect(pBoxAction, SIGNAL(triggered()), this, SLOT(OnBoxMenu()));
-		pMenu->insertAction(pPos, pBoxAction);
+		QMenu* pSubMenu = CSandMan__GetBoxParent(Groups, GroupItems, Icon, iNoIcons, pMenu, pPos, pBox->GetName());
+		
+		QAction* pBoxAction = CSandMan__MakeBoxEntry(pMenu, pBoxEx, IconProvider, iNoIcons, ColorIcons);
+		if (pSubMenu)
+			pSubMenu->addAction(pBoxAction);
+		else
+			pMenu->insertAction(pPos, pBoxAction);
 	}
 }
 
@@ -259,6 +328,9 @@ void CSandMan::OnBoxMenuHover(QAction* action)
 	}
 }
 
+double CSelectBoxWindow__GetBoxOrder(const QMap<QString, QStringList>& Groups, const QString& Name, double value = 0.0, int Depth = 0);
+QTreeWidgetItem* CSelectBoxWindow__GetBoxParent(const QMap<QString, QStringList>& Groups, QMap<QString, QTreeWidgetItem*>& GroupItems, QTreeWidget* treeBoxes, const QString& Name, int Depth = 0);
+
 void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 {
 	static bool TriggerSet = false;
@@ -273,6 +345,62 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 				CreateBoxMenu(m_pTrayMenu, m_iTrayPos, iSysTrayFilter);
 			else
 			{
+				QFileIconProvider IconProvider;
+				bool ColorIcons = theConf->GetBool("Options/ColorBoxIcons", false);
+
+				/**/
+				m_pTrayBoxes->clear();
+
+				QList<CSandBoxPtr> Boxes = theAPI->GetAllBoxes().values(); // map is sorted by key (box name)
+				QMap<QString, QStringList> Groups = theGUI->GetBoxView()->GetGroups();
+
+				if (theConf->GetBool("MainWindow/BoxTree_UseOrder", false)) {
+					QMultiMap<double, CSandBoxPtr> Boxes2;
+					foreach(const CSandBoxPtr &pBox, Boxes) {
+						Boxes2.insertMulti(CSelectBoxWindow__GetBoxOrder(Groups, pBox->GetName()), pBox);
+					}
+					Boxes = Boxes2.values();
+				}
+
+				QMap<QString, QTreeWidgetItem*> GroupItems;
+				foreach(const CSandBoxPtr &pBox, Boxes) 
+				{
+					if (!pBox->IsEnabled())
+						continue;
+
+					CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
+
+					if (iSysTrayFilter == 2) { // pinned only
+						if (!pBox->GetBool("PinToTray", false))
+							continue;
+					}
+					else if (iSysTrayFilter == 1) { // active + pinned
+						if (pBoxEx->GetActiveProcessCount() == 0 && !pBox->GetBool("PinToTray", false))
+							continue;
+					}
+
+					QTreeWidgetItem* pParent = CSelectBoxWindow__GetBoxParent(Groups, GroupItems, m_pTrayBoxes, pBox->GetName());
+		
+					QTreeWidgetItem* pItem = new QTreeWidgetItem();
+					pItem->setText(0, pBox->GetName().replace("_", " "));
+					pItem->setData(0, Qt::UserRole, pBox->GetName());
+					QIcon Icon;
+					QString Action = pBox->GetText("DblClickAction");
+					if(ColorIcons)
+						Icon = theGUI->GetColorIcon(pBoxEx->GetColor(), pBox->GetActiveProcessCount());
+					else
+						Icon = theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount() != 0);
+					pItem->setData(0, Qt::DecorationRole, Icon);
+					if (pParent)
+						pParent->addChild(pItem);
+					else
+						m_pTrayBoxes->addTopLevelItem(pItem);
+				}
+
+				m_pTrayBoxes->expandAll();
+				/**/
+
+				/*/
 				QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
 
 				bool bAdded = false;
@@ -286,9 +414,6 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					QString Name = pItem->data(0, Qt::UserRole).toString();
 					OldBoxes.insert(Name, pItem);
 				}
-
-				QFileIconProvider IconProvider;
-				bool ColorIcons = theConf->GetBool("Options/ColorBoxIcons", false);
 
 				foreach(const CSandBoxPtr & pBox, Boxes)
 				{
@@ -318,7 +443,10 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					}
 
 					QIcon Icon;
-					if (ColorIcons)
+					QString Action = pBox->GetText("DblClickAction");
+					if (!Action.isEmpty() && Action.left(1) != "!")
+						Icon = IconProvider.icon(QFileInfo(pBoxEx->GetCommandFile(Action)));
+					else if (ColorIcons)
 						Icon = theGUI->GetColorIcon(pBoxEx->GetColor(), pBox->GetActiveProcessCount());
 					else
 						Icon = theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount() != 0);
@@ -327,8 +455,9 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 
 				foreach(QTreeWidgetItem * pItem, OldBoxes)
 					delete pItem;
+				/*/
 
-				if (!OldBoxes.isEmpty() || bAdded)
+				//if (!OldBoxes.isEmpty() || bAdded)
 				{
 					auto palette = m_pTrayBoxes->palette();
 					palette.setColor(QPalette::Base, m_pTrayMenu->palette().color(m_DarkTheme ? QPalette::Base : QPalette::Window));

@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added missing system calls to the hardened box type [88bc06a](https://github.com/sandboxie-plus/Sandboxie/commit/88bc06a0c7368a81c80a77d7a89ddc73455abb25) [b775264](https://github.com/sandboxie-plus/Sandboxie/commit/b775264a4824e49b554f1b776c377170e5f90797) [04b2377](https://github.com/sandboxie-plus/Sandboxie/commit/04b23770f53597c12eda9122c774ed5165129147) (thanks Mr.X)
 - added search box to the Plus UI Settings and box option dialogs [#2134](https://github.com/sandboxie-plus/Sandboxie/issues/2134)
 - added Korean translation to the Plus UI [#2133](https://github.com/sandboxie-plus/Sandboxie/pull/2133) (thanks VenusGirl)
+- added grouping to sandman tray menu [#2148](https://github.com/sandboxie-plus/Sandboxie/issues/2148)
 
 ### Changed
 - improved info label

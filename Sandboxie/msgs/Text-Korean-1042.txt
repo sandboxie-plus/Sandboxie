@@ -13,7 +13,7 @@ SBIE1102 Sandboxie 드라이버 (SbieDrv)를 내리는 중
 .
 
 1103;evt;err;01
-SBIE1103 Sandboxie Sandboxie 드라이버 (SbieDrv) 버전 %2을(를) 시작하지 못했습니다
+SBIE1103 Sandboxie 드라이버 (SbieDrv) 버전 %2을(를) 시작하지 못했습니다
 .
 
 1104;evt;err;01

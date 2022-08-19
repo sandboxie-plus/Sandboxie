@@ -3616,82 +3616,82 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
 <context>
     <name>CSupportDialog</name>
     <message>
-        <location filename="Windows/SupportDialog.cpp" line="99"/>
+        <location filename="Windows/SupportDialog.cpp" line="115"/>
         <source>The installed supporter certificate &lt;b&gt;has expired %1 days ago&lt;/b&gt; and &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;must be renewed&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</source>
         <translation>Das installierte Unterstützerzertifikat ist seit &amp;lt;b&amp;gt; %1 Tagen ablaufen &amp;lt;/b&amp;gt; und &amp;lt;a href=&amp;quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&amp;quot;&amp;gt;muss erneuert werden&amp;lt;/a&amp;gt;.&amp;lt;br /&amp;gt;&amp;lt;br /&amp;gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SupportDialog.cpp" line="101"/>
+        <location filename="Windows/SupportDialog.cpp" line="117"/>
         <source>&lt;b&gt;You have installed Sandboxie-Plus more than %1 days ago.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
         <translation>&amp;lt;b&amp;gt;Sie haben Sandboxie-Plus vor mehr als %1 Tagen installiert.&amp;lt;/b&amp;gt;&amp;lt;br /&amp;gt;&amp;lt;br /&amp;gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SupportDialog.cpp" line="103"/>
+        <location filename="Windows/SupportDialog.cpp" line="119"/>
         <source>&lt;u&gt;Commercial use of Sandboxie past the evaluation period&lt;/u&gt;, requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt;.</source>
         <translation>&amp;lt;u&amp;gt;Kommerzielle Nutzung von Sandboxie nach der Evaluationsphase&amp;lt;/u&amp;gt;, erfordert ein gültiges &amp;lt;a href=&amp;quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&amp;quot;&amp;gt;Unterstützerzertifikat&amp;lt;/a&amp;gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SupportDialog.cpp" line="110"/>
+        <location filename="Windows/SupportDialog.cpp" line="126"/>
         <source>The installed supporter certificate is &lt;b&gt;outdated&lt;/b&gt; and it is &lt;u&gt;not valid for&lt;b&gt; this version&lt;/b&gt;&lt;/u&gt; of Sandboxie-Plus.&lt;br /&gt;&lt;br /&gt;</source>
         <translation>Das installierte Unterstützerzertifikat ist &amp;lt;b&amp;gt;veraltet&amp;lt;/b&amp;gt; und ist &amp;lt;u&amp;gt;nicht gültig für&amp;lt;b&amp;gt; diese Version&amp;lt;/b&amp;gt;&amp;lt;/u&amp;gt; von Sandboxie-Plus.&amp;lt;br /&amp;gt;&amp;lt;br /&amp;gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SupportDialog.cpp" line="112"/>
+        <location filename="Windows/SupportDialog.cpp" line="128"/>
         <source>The installed supporter certificate is &lt;b&gt;expired&lt;/b&gt; and &lt;u&gt;should to be renewed&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</source>
         <translation>Das installierte Unterstützerzertifikat ist &amp;lt;b&amp;gt;abgelaufen&amp;lt;/b&amp;gt; und &amp;lt;u&amp;gt;sollte erneuert werden&amp;lt;/u&amp;gt;.&amp;lt;br /&amp;gt;&amp;lt;br /&amp;gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SupportDialog.cpp" line="114"/>
+        <location filename="Windows/SupportDialog.cpp" line="130"/>
         <source>&lt;b&gt;You have been using Sandboxie-Plus for more than %1 days now.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
         <translation>&amp;lt;b&amp;gt;Sie haben Sandboxie-Plus nun seit mehr als %1 Tage verwendet.&amp;lt;/b&amp;gt;&amp;lt;br /&amp;gt;&amp;lt;br /&amp;gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SupportDialog.cpp" line="117"/>
+        <location filename="Windows/SupportDialog.cpp" line="133"/>
         <source>Sandboxie on ARM64 requires a valid supporter certificate for continued use.&lt;br /&gt;&lt;br /&gt;</source>
         <translation>Sandboxie auf ARM64 benötigt ein gültiges Unterstützerzertifikat zur andauernden Verwendung.&amp;lt;br /&amp;gt;&amp;lt;br /&amp;gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SupportDialog.cpp" line="119"/>
+        <location filename="Windows/SupportDialog.cpp" line="135"/>
         <source>Personal use of Sandboxie is free of charge on x86/x64, although some functionality is only available to project supporters.&lt;br /&gt;&lt;br /&gt;</source>
         <translation>Persönliche Nutzung von Sandboxie ist auf x86/x64 gratis, wenn auch einige Funktionen nur für Projektunterstützer verfügbar sind.&amp;lt;br /&amp;gt;&amp;lt;br /&amp;gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SupportDialog.cpp" line="122"/>
+        <location filename="Windows/SupportDialog.cpp" line="138"/>
         <source>Please continue &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; by renewing your &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; and continue using the &lt;b&gt;enhanced functionality&lt;/b&gt; in new builds.</source>
         <translation>Bitte behalten Sie &amp;lt;a href=&amp;quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&amp;quot;&amp;gt;die Unterstützung des Projektes bei&amp;lt;/a&amp;gt; durch die Erneuerung Ihres &amp;lt;a href=&amp;quot;https://sandboxie-plus.com/go.php?to=sbie-cert&amp;quot;&amp;gt; Unterstützerzertifikates&amp;lt;/a&amp;gt; und setzen Sie die Verwendung &amp;lt;b&amp;gt;erweiterter Funktionalität&amp;lt;/b&amp;gt; in neuen Versionen fort.</translation>
     </message>
     <message>
-        <location filename="Windows/SupportDialog.cpp" line="125"/>
+        <location filename="Windows/SupportDialog.cpp" line="141"/>
         <source>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;, to give you time to contemplate the option of &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</source>
         <translation>Sandboxie &lt;u&gt;ohne&lt;/u&gt;; ein gültiges Unterstützerzertifikat wird manchmal &lt;b&gt;&lt;font color=&apos;red&apos;&gt;für ein paar Sekunden pausieren&lt;/font&gt;&lt;/b&gt;, um Ihnen Zeit zu geben die Option zu erwägen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt; das Projekt zu unterstützen &lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;Ein &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;Unterstützerzertifikat&lt;/a&gt; entfernt nicht nur diese Erinnerung, sondern aktiviert auch &lt;b&gt;exklusive verbesserte Funktionalität &lt;/b&gt;, welche bessere Sicherheit und Kompatibilität bieten.</translation>
     </message>
     <message>
-        <location filename="Windows/SupportDialog.cpp" line="156"/>
+        <location filename="Windows/SupportDialog.cpp" line="172"/>
         <source>Sandboxie-Plus - Support Reminder</source>
         <translation>Sandboxie-Plus - Unterstützungserinnerung</translation>
     </message>
     <message>
-        <location filename="Windows/SupportDialog.cpp" line="235"/>
+        <location filename="Windows/SupportDialog.cpp" line="251"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SupportDialog.cpp" line="242"/>
+        <location filename="Windows/SupportDialog.cpp" line="258"/>
         <source>Quit</source>
         <translation>Beenden</translation>
     </message>
     <message>
-        <location filename="Windows/SupportDialog.cpp" line="243"/>
+        <location filename="Windows/SupportDialog.cpp" line="259"/>
         <source>Continue</source>
         <translation>Weiter</translation>
     </message>
     <message>
-        <location filename="Windows/SupportDialog.cpp" line="244"/>
+        <location filename="Windows/SupportDialog.cpp" line="260"/>
         <source>Get Certificate</source>
         <translation>Zertifikat holen</translation>
     </message>
     <message>
-        <location filename="Windows/SupportDialog.cpp" line="245"/>
+        <location filename="Windows/SupportDialog.cpp" line="261"/>
         <source>Enter Certificate</source>
         <translation>Zertifikat eingeben</translation>
     </message>

@@ -842,7 +842,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with mounted directories [#1302](https://github.com/sandboxie-plus/Sandboxie/issues/1302)
 - added missing translation for qt libraries [#1305](https://github.com/sandboxie-plus/Sandboxie/issues/1305)
 - fixed issue with Windows compatibility assistant [#1265](https://github.com/sandboxie-plus/Sandboxie/issues/1265)
-- fixed issue with process image specific settigns [#1307](https://github.com/sandboxie-plus/Sandboxie/issues/1307)
+- fixed issue with specific process image settings [#1307](https://github.com/sandboxie-plus/Sandboxie/issues/1307)
 
 
 

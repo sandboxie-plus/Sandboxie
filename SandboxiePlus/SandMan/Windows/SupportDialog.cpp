@@ -58,19 +58,35 @@ bool CSupportDialog::CheckSupport(bool bOnRun)
 	else if (!bOnARM64 && !theAPI->GetGlobalSettings()->GetBool("AlwaysShowReminder"))
 	{
 		// Note: the old sandboxie showed a message after 30 days every 12 hours for 5 seconds
+		
+		int Interval;
+        if (Days > 730) Interval = 5 * 24;
+        else if (Days > 365) Interval = 10 * 24;
+        else if (Days > 180) Interval = 20 * 24;
+        else Interval = 30 * 24;
 
-		int Interval; // days
-        if (Days > 730) Interval = 5;
-        else if (Days > 365) Interval = 10;
-        else if (Days > 180) Interval = 20;
-        else Interval = 30;
+		//USHORT ReminderRevision = 0;
+		//theAPI->GetSecureParam("ReminderRevision", &ReminderRevision, sizeof(ReminderRevision));
+
+		USHORT ReminderShedule[2*11];
+		if (theAPI->GetSecureParam("ReminderShedule", &ReminderShedule, sizeof(ReminderShedule))) {
+			for (USHORT* Cur = ReminderShedule; (ULONG_PTR)Cur < (ULONG_PTR)ReminderShedule + sizeof(ReminderShedule) && *Cur != 0; Cur += 2) {
+				if (Days > Cur[0]) {
+					if (Cur[1] < Interval) Interval = Cur[1];
+					break;
+				}
+			}
+		}
 
 		time_t LastReminder = 0;
 		theAPI->GetSecureParam("LastReminder", &LastReminder, sizeof(LastReminder));
 		if (LastReminder > 0 && LastReminder < CurretnDate.toTime_t()) {
-			if (CurretnDate.toTime_t() - LastReminder < (time_t(Interval) * 24 * 3600))
+			if (CurretnDate.toTime_t() - LastReminder < (time_t(Interval) * 3600))
 				return false;
 		}
+
+		//ULONG ReminderConfig = 0;
+		//theAPI->GetSecureParam("ReminderConfig", &ReminderConfig, sizeof(ReminderConfig));
 
 		if ((rand() % 5) != 0)
 			return false;

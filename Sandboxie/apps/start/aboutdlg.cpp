@@ -307,16 +307,27 @@ bool DoAboutDialog(bool bReminder)
             if (Days < 40)
                 return true;
 
-		    int Interval; // days
-            if (Days > 730) Interval = 5;
-            else if (Days > 365) Interval = 10;
-            else if (Days > 180) Interval = 20;
-            else Interval = 30;
+		    int Interval;
+            if (Days > 730) Interval = 5 * 24;
+            else if (Days > 365) Interval = 10 * 24;
+            else if (Days > 180) Interval = 20 * 24;
+            else Interval = 30 * 24;
+
+		    USHORT ReminderShedule[2*11];
+		    if (NT_SUCCESS(SbieApi_Call(API_GET_SECURE_PARAM, 3, L"ReminderShedule", (ULONG_PTR)&ReminderShedule, sizeof(ReminderShedule)))) {
+			    for (USHORT* Cur = ReminderShedule; (ULONG_PTR)Cur < (ULONG_PTR)ReminderShedule + sizeof(ReminderShedule) && *Cur != 0; Cur += 2) {
+				    if (Days > Cur[0]) {
+					    if (Interval > Cur[1]) 
+						    Interval = Cur[1];
+					    break;
+				    }
+			    }
+		    }
 
 			time_t LastReminder = 0;
             SbieApi_Call(API_GET_SECURE_PARAM, 3, L"LastReminder", (ULONG_PTR)&LastReminder, sizeof(LastReminder));
 			if (LastReminder > 0 && LastReminder < CurrentTime) {
-				if (CurrentTime - LastReminder < (time_t(Interval) * 24 * 3600))
+				if (CurrentTime - LastReminder < (time_t(Interval) * 3600))
 					return true;
 			}
 

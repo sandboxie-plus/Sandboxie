@@ -840,7 +840,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with box emptying [#1296](https://github.com/sandboxie-plus/Sandboxie/issues/1296)
 - fixed issues with some languages [#1304](https://github.com/sandboxie-plus/Sandboxie/issues/1304)
 - fixed issue with mounted directories [#1302](https://github.com/sandboxie-plus/Sandboxie/issues/1302)
-- added missing translation for qt libraries [#1305](https://github.com/sandboxie-plus/Sandboxie/issues/1305)
+- added missing translation for Qt libraries [#1305](https://github.com/sandboxie-plus/Sandboxie/issues/1305)
 - fixed issue with Windows compatibility assistant [#1265](https://github.com/sandboxie-plus/Sandboxie/issues/1265)
 - fixed issue with specific process image settings [#1307](https://github.com/sandboxie-plus/Sandboxie/issues/1307)
 
@@ -1780,7 +1780,7 @@ Fixed issue with Windows 7
 - added simple view mode
 
 ### Changed
-- updated SandMan UI to use Qt5.15.1
+- updated SandMan UI to use Qt 5.15.1
 
 ### Fixed
 - fixed crash issue with progress dialog

@@ -434,8 +434,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="391"/>
-        <source>Search for Options</source>
-        <translation>搜索选项</translation>
+        <source>Search for options</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="636"/>
@@ -3149,8 +3149,8 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="278"/>
-        <source>Search for Settings</source>
-        <translation>搜索设置</translation>
+        <source>Search for settings</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="376"/>

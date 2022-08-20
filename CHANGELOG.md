@@ -10,6 +10,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added icons to sub tabs in the box option dialog
 - no recovery and no message popup menu options are now persisted across ui restarts
 
+### Changed
+- sandboxie no longer issues message 1301 when forced processes has been temporary disabled
+-- the message can be re enabled with "NotifyForceProcessDisabled=y"
+
+### Fixed
+- fixed compatybility issue with Proxyfier [#2163](https://github.com/sandboxie-plus/Sandboxie/issues/2163)
+
 
 
 

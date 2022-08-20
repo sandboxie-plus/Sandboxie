@@ -202,6 +202,8 @@ SBIEDLL_EXPORT  void SbieDll_DisableElevationHook(void);
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_RegisterDllCallback(void *Callback);
 
+SBIEDLL_EXPORT  BOOLEAN SbieDll_IsDllSkipHook(const WCHAR* ImageName);
+
 SBIEDLL_EXPORT  BOOLEAN SbieDll_ExpandAndRunProgram(const WCHAR *Command);
 
 

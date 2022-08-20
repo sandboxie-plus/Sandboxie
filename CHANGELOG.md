@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.3.1 / 5.58.1] - 2022-08-??
+## [1.3.1 / 5.58.1] - 2022-08-20
 
 ### Added
 - added ability to switch fusion theme independently of the dark theme

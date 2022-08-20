@@ -433,7 +433,9 @@ void COptionsWindow::closeEvent(QCloseEvent *e)
 bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 {
 	if (event->type() == QEvent::KeyPress && ((QKeyEvent*)event)->key() == Qt::Key_Escape 
-		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
+		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier
+		&& (source == ui.treeAccess->viewport() || source == ui.treeINet->viewport() ||
+			source == ui.treeNetFw->viewport()))
 	{
 		CloseINetEdit(false);
 		CloseNetFwEdit(false);
@@ -442,7 +444,7 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 	}
 
 	if (event->type() == QEvent::KeyPress && (((QKeyEvent*)event)->key() == Qt::Key_Enter || ((QKeyEvent*)event)->key() == Qt::Key_Return) 
-		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
+		&& (((QKeyEvent*)event)->modifiers() == Qt::NoModifier || ((QKeyEvent*)event)->modifiers() == Qt::KeypadModifier))
 	{
 		CloseINetEdit(true);
 		CloseNetFwEdit(true);

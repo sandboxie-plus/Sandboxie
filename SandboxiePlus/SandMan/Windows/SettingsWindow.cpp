@@ -329,14 +329,14 @@ void CSettingsWindow::closeEvent(QCloseEvent *e)
 
 bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 {
-	if (event->type() == QEvent::KeyPress && ((QKeyEvent*)event)->key() == Qt::Key_Escape 
-		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
-	{
-		return true; // cancel event
-	}
+	//if (event->type() == QEvent::KeyPress && ((QKeyEvent*)event)->key() == Qt::Key_Escape 
+	//	&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
+	//{
+	//	return true; // cancel event
+	//}
 
 	if (event->type() == QEvent::KeyPress && (((QKeyEvent*)event)->key() == Qt::Key_Enter || ((QKeyEvent*)event)->key() == Qt::Key_Return) 
-		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
+		&& (((QKeyEvent*)event)->modifiers() == Qt::NoModifier || ((QKeyEvent*)event)->modifiers() == Qt::KeypadModifier))
 	{
 		return true; // cancel event
 	}

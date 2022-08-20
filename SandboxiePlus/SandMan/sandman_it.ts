@@ -441,12 +441,12 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
         <translation>Cerca opzioni</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="636"/>
+        <location filename="Windows/OptionsWindow.cpp" line="638"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>Questa area virtuale è stata cancellata, quindi la configurazione non può essere salvata.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="680"/>
+        <location filename="Windows/OptionsWindow.cpp" line="682"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>Alcune modifiche non sono state ancora salvate, vuoi chiudere la finestra opzioni?</translation>
     </message>
@@ -487,8 +487,8 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
         <translation>Immetti un comando</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="692"/>
-        <location filename="Windows/OptionsWindow.cpp" line="708"/>
+        <location filename="Windows/OptionsWindow.cpp" line="694"/>
+        <location filename="Windows/OptionsWindow.cpp" line="710"/>
         <location filename="Windows/OptionsAccess.cpp" line="299"/>
         <location filename="Windows/OptionsAccess.cpp" line="494"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
@@ -503,7 +503,7 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
         <translation>Immetti un nome per il nuovo gruppo</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="701"/>
+        <location filename="Windows/OptionsWindow.cpp" line="703"/>
         <source>Enter program:</source>
         <translation>Scegli il programma:</translation>
     </message>

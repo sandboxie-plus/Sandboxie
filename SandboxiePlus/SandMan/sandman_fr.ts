@@ -459,8 +459,8 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation>Tous les programmes</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="692"/>
-        <location filename="Windows/OptionsWindow.cpp" line="708"/>
+        <location filename="Windows/OptionsWindow.cpp" line="694"/>
+        <location filename="Windows/OptionsWindow.cpp" line="710"/>
         <location filename="Windows/OptionsAccess.cpp" line="299"/>
         <location filename="Windows/OptionsAccess.cpp" line="494"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
@@ -862,21 +862,22 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="391"/>
-        <source>Search for Options</source>
-        <translation>Rechercher dans les options</translation>
+        <source>Search for options</source>
+        <oldsource>Search for Options</oldsource>
+        <translation type="unfinished">Rechercher dans les options</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="636"/>
+        <location filename="Windows/OptionsWindow.cpp" line="638"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>Ce bac à sable a été supprimé par conséquent la configuration ne peut pas être sauvegardée.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="680"/>
+        <location filename="Windows/OptionsWindow.cpp" line="682"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>Certains changements n&apos;ont pas encore été enregistrés, voulez-vous vraiment fermer cette fenêtre d&apos;options ?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="701"/>
+        <location filename="Windows/OptionsWindow.cpp" line="703"/>
         <source>Enter program:</source>
         <translation>Saisir le programme :</translation>
     </message>
@@ -3398,8 +3399,9 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="278"/>
-        <source>Search for Settings</source>
-        <translation>Rechercher dans les paramètres</translation>
+        <source>Search for settings</source>
+        <oldsource>Search for Settings</oldsource>
+        <translation type="unfinished">Rechercher dans les paramètres</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="880"/>

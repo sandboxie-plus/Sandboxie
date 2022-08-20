@@ -388,7 +388,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 			m_pSearch->setMaximumWidth(m_pTabs->tabBar()->width());
 		});
 	}
-	m_pSearch->setPlaceholderText(tr("Search for Options"));
+	m_pSearch->setPlaceholderText(tr("Search for options"));
 }
 
 void COptionsWindow::OnSetTree()

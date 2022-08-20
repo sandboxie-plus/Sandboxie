@@ -4704,7 +4704,7 @@ Notiz: Erzwungene Programme und Ordner für eine Sandbox finden keine Anwendung 
         <location filename="Forms/OptionsWindow.ui" line="2636"/>
         <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
         <oldsource>API call trace (requirers logapi to be installed in the sbie dir)</oldsource>
-        <translation type="unfinished">API Aufrufsrückverfolgung (benötigt, dass logapi in den Sbie Ordner installiert wird)</translation>
+        <translation>API Aufrufsrückverfolgung (erfordert, dass LogAPI in den Sbie Ordner installiert wird)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2676"/>

@@ -141,7 +141,7 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="144"/>
         <source>Note: this option is persistent</source>
-        <translation type="unfinished"></translation>
+        <translation>Not: bu seçenek kalıcıdır</translation>
     </message>
     <message>
         <source>Note: this option is immutable</source>
@@ -252,87 +252,87 @@
     <message>
         <location filename="OnlineUpdater.cpp" line="93"/>
         <source>Checking for updates...</source>
-        <translation type="unfinished">Güncellemeler kontrol ediliyor...</translation>
+        <translation>Güncellemeler kontrol ediliyor...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="128"/>
         <source>server not reachable</source>
-        <translation type="unfinished">sunucuya ulaşılamıyor</translation>
+        <translation>sunucuya ulaşılamıyor</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="129"/>
         <location filename="OnlineUpdater.cpp" line="131"/>
         <source>Failed to check for updates, error: %1</source>
-        <translation type="unfinished">Güncellemeler kontrol edilemedi, hata: %1</translation>
+        <translation>Güncellemeler kontrol edilemedi, hata: %1</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="148"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Bilgi sayfasına &lt;a href=&quot;%1&quot;&gt;ister misiniz&lt;/a&gt;?&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Bilgi sayfasına &lt;a href=&quot;%1&quot;&gt;gitmek ister misiniz&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="156"/>
         <source>Don&apos;t show this announcement in the future.</source>
-        <translation type="unfinished">Bu duyuruyu gelecekte gösterme.</translation>
+        <translation>Bu duyuruyu gelecekte gösterme.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="209"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;New version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Sandboxie-Plus&apos;ın yeni bir sürümü var.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Yeni sürüm:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Sandboxie-Plus&apos;ın yeni bir sürümü var.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Yeni sürüm:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="211"/>
         <source>&lt;p&gt;Do you want to download the latest version?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;En son sürümü indirmek ister misiniz?&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;En son sürümü indirmek ister misiniz?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="213"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;İndirme sayfasına &lt;a href=&quot;%1&quot;&gt;gitmek ister misiniz&lt;/a&gt;?&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;İndirme sayfasına &lt;a href=&quot;%1&quot;&gt;gitmek ister misiniz&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="221"/>
         <source>Don&apos;t show this message anymore.</source>
-        <translation type="unfinished">Artık bu mesajı gösterme.</translation>
+        <translation>Artık bu mesajı gösterme.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="252"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
-        <translation type="unfinished">Yeni güncelleme bulunamadı, Sandboxie-Plus&apos;ınız güncel.
+        <translation>Yeni güncelleme bulunamadı, Sandboxie-Plus&apos;ınız güncel.
 
 Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğundan emin olmak için genellikle en son GitHub sürümünden eskidir.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="271"/>
         <source>Downloading new version...</source>
-        <translation type="unfinished">Yeni sürüm indiriliyor...</translation>
+        <translation>Yeni sürüm indiriliyor...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="313"/>
         <source>Failed to download update from: %1</source>
-        <translation type="unfinished">%1&apos;den güncelleme indirilemedi</translation>
+        <translation>%1&apos;den güncelleme indirilemedi</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="330"/>
         <source>&lt;p&gt;A Sandboxie-Plus update has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Aşağıdaki konuma bir Sandboxie-Plus güncellemesi indirildi:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Yüklemeye Başlamak istiyor musunuz? Korumalı alanda çalışan program varsa sonlandırılır.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Aşağıdaki konuma bir Sandboxie-Plus güncellemesi indirildi:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Yüklemeye Başlamak istiyor musunuz? Korumalı alanda çalışan program varsa sonlandırılır.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="377"/>
         <source>Checking for certificate...</source>
-        <translation type="unfinished">Sertifika kontrol ediliyor...</translation>
+        <translation>Sertifika kontrol ediliyor...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="411"/>
         <source>No certificate found on server!</source>
-        <translation type="unfinished">Sunucuda sertifika bulunamadı!</translation>
+        <translation>Sunucuda sertifika bulunamadı!</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="416"/>
         <source>There is no updated certificate available.</source>
-        <translation type="unfinished">Yenilenmiş bir sertifika yok.</translation>
+        <translation>Yenilenmiş bir sertifika yok.</translation>
     </message>
 </context>
 <context>
@@ -501,12 +501,12 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="18"/>
         <source>This option requires a valid supporter certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu seçenek geçerli bir destekçi sertifikası gerektirir</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="21"/>
         <source>Supporter exclusive option</source>
-        <translation type="unfinished"></translation>
+        <translation>Destekçiye özel seçenek</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="46"/>
@@ -575,7 +575,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="362"/>
         <source>Search for Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Seçeneklerde Ara</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="607"/>
@@ -1137,7 +1137,7 @@ Tam yol: %4</translation>
         <location filename="SandManRecovery.cpp" line="211"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
-        <translation type="unfinished">şu dosyalar yakın zamanda kurtarıldı ve bir korumalı alandan taşındı.</translation>
+        <translation>şu dosyalar yakın zamanda kurtarıldı ve bir korumalı alandan taşındı.</translation>
     </message>
 </context>
 <context>
@@ -1839,27 +1839,27 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="1480"/>
         <source>%1 Directory: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Dizin: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1480"/>
         <source>Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Uygulama</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1480"/>
         <source>Installation</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurulum</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1554"/>
         <source> for Personal use</source>
-        <translation type="unfinished"></translation>
+        <translation> Kişisel kullanım için</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1556"/>
         <source>   -   for Non-Commercial use ONLY</source>
-        <translation type="unfinished"></translation>
+        <translation>   -   Ticari Olmayan kullanım için</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1588"/>
@@ -1870,22 +1870,22 @@ Tam yol: %4</translation>
         <location filename="SandMan.cpp" line="1841"/>
         <source>The evaluation period has expired!!!</source>
         <oldsource>The evaluation periode has expired!!!</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Değerlendirme süresi dolmuştur!!!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1960"/>
         <source>No Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurtarma Yok</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1963"/>
         <source>No Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Mesaj Yok</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2120"/>
         <source>Maintenance operation completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Bakım işlemi tamamlandı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2245"/>
@@ -2204,7 +2204,7 @@ Bu kutu, Kaynak Erişimi seçeneklerinde açıkça verilenler dışında tüm ku
     <message>
         <location filename="SandMan.cpp" line="1310"/>
         <source>No Force Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Zorlama İşlem Yok</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1499"/>
@@ -2250,7 +2250,7 @@ Hayır şunları seçer: %2</translation>
         <location filename="SandMan.cpp" line="568"/>
         <source>Is Window Sandboxed?</source>
         <oldsource>Is Window Sandboxed</oldsource>
-        <translation type="unfinished">Pencere Korumalı Alanda mı</translation>
+        <translation>Pencere Korumalı Alanda mı?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="495"/>
@@ -3254,7 +3254,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <location filename="Views/SbieView.cpp" line="1281"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
-        <translation type="unfinished">Sandboxie Başlat Menüsü şimdi görüntülenecektir. Menüden bir uygulama seçin ve Sandboxie, gerçek masaüstünüzde, Sandboxie&apos;nin gözetimi altında seçilen uygulamayı çağırmak için kullanabileceğiniz bir kısayolu simgesi oluşturacaktır.</translation>
+        <translation>Sandboxie Başlat Menüsü şimdi görüntülenecektir. Menüden bir uygulama seçin ve Sandboxie, gerçek masaüstünüzde, Sandboxie&apos;nin gözetimi altında seçilen uygulamayı çağırmak için kullanabileceğiniz bir kısayolu simgesi oluşturacaktır.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1353"/>
@@ -3385,12 +3385,12 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <location filename="Windows/SettingsWindow.cpp" line="106"/>
         <source>Sandboxie Plus - Global Settings</source>
         <oldsource>Sandboxie Plus - Settings</oldsource>
-        <translation type="unfinished">Sandboxie Plus - Ayarlar</translation>
+        <translation>Sandboxie Plus - Genel Ayarlar</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="951"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;check&quot;&gt;Şimdi Kontrol Edin&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1008"/>
@@ -3481,7 +3481,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="277"/>
         <source>Search for Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayarlarda Ara</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="375"/>
@@ -3511,22 +3511,22 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1170"/>
         <source>%1 (Current)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (Mevcut)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1171"/>
         <source>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1172"/>
         <source>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1194"/>
         <source>Do you want to download the version %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 sürümünü indirmek istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="396"/>
@@ -3643,82 +3643,82 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Windows/SupportDialog.cpp" line="115"/>
         <source>The installed supporter certificate &lt;b&gt;has expired %1 days ago&lt;/b&gt; and &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;must be renewed&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Yüklenen destekçi sertifikasının &lt;b&gt;%1 gün önce süresi doldu&lt;/b&gt; ve &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;yenilenmesi gerekiyor&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="117"/>
         <source>&lt;b&gt;You have installed Sandboxie-Plus more than %1 days ago.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Sandboxie-Plus&apos;ı %1 günden daha uzun süre önce yüklediniz.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="119"/>
         <source>&lt;u&gt;Commercial use of Sandboxie past the evaluation period&lt;/u&gt;, requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;u&gt;Değerlendirme döneminden sonra Sandboxie&apos;nin ticari kullanımı&lt;/u&gt;, geçerli bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;destek sertifikası&lt; gerektirir /a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="126"/>
         <source>The installed supporter certificate is &lt;b&gt;outdated&lt;/b&gt; and it is &lt;u&gt;not valid for&lt;b&gt; this version&lt;/b&gt;&lt;/u&gt; of Sandboxie-Plus.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Yüklenen destekçi sertifikası &lt;b&gt;eski&lt;/b&gt; ve Sandboxie-Plus&apos;ın &lt;u&gt;bu sürüm için&lt;b&gt;geçerli değil&lt;/b&gt;&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="128"/>
         <source>The installed supporter certificate is &lt;b&gt;expired&lt;/b&gt; and &lt;u&gt;should to be renewed&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Yüklenen destekçi sertifikasının &lt;b&gt;süresi dolmuş&lt;/b&gt; ve &lt;u&gt;yenilenmesi gerekiyor&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="130"/>
         <source>&lt;b&gt;You have been using Sandboxie-Plus for more than %1 days now.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Sandboxie-Plus&apos;ı %1 günden fazla süredir kullanıyorsunuz.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="133"/>
         <source>Sandboxie on ARM64 requires a valid supporter certificate for continued use.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>ARM64&apos;teki Sandboxie, sürekli kullanım için geçerli bir destekçi sertifikası gerektirir.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="135"/>
         <source>Personal use of Sandboxie is free of charge on x86/x64, although some functionality is only available to project supporters.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie&apos;nin kişisel kullanımı, x86/x64&apos;te ücretsizdir, ancak bazı işlevler yalnızca proje destekçileri tarafından kullanılabilir.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="138"/>
         <source>Please continue &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; by renewing your &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; and continue using the &lt;b&gt;enhanced functionality&lt;/b&gt; in new builds.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lütfen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;destekçi sertifikanızı&lt;/a&gt; yenileyerek &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;bu projeyi desteklemeye&lt;/a&gt; devam edin ve yeni sürümlerde &lt;b&gt;gelişmiş işlevselliği&lt;/b&gt; kullanmaya devam edin.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="141"/>
         <source>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;, to give you time to contemplate the option of &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçerli bir destekçi sertifikası &lt;u&gt;olmadan&lt;/u&gt; Sandboxie bazen &lt;b&gt;&lt;font color=&apos;red&apos;&gt;birkaç saniye duraklar&lt;/font&gt;&lt;/b&gt;, bu da size &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;projeyi destekleme&lt;/a&gt; seçeneğini düşünmeniz için zaman tanır.&lt;br /&gt;&lt;br /&gt;Bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; yalnızca bu hatırlatıcıyı kaldırmakla kalmaz, aynı zamanda daha iyi güvenlik ve uyumluluk sağlayan &lt;b&gt;özel gelişmiş işlevsellik&lt;/b&gt; sağlar.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="172"/>
         <source>Sandboxie-Plus - Support Reminder</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Destek Hatırlatıcısı</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="251"/>
         <source>%1</source>
-        <translation type="unfinished">%1</translation>
+        <translation>%1</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="258"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Çıkış</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="259"/>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Devam et</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="260"/>
         <source>Get Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Sertifika Al</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="261"/>
         <source>Enter Certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Sertifika Girin</translation>
     </message>
 </context>
 <context>
@@ -4728,7 +4728,7 @@ Not: Bir korumalı kutuya ilişkin Zorlanmış Programlar ve Zorlanmış Dizinle
         <location filename="Forms/OptionsWindow.ui" line="2636"/>
         <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
         <oldsource>API call trace (requirers logapi to be installed in the sbie dir)</oldsource>
-        <translation type="unfinished">API çağrı izleme (sbie dizinine logapi yüklenmesini gerektirir)</translation>
+        <translation>API çağrı izleme (sbie dizinine logAPI yüklenmesini gerektirir)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2676"/>
@@ -4862,27 +4862,27 @@ Lütfen bu değerlerin şu anda kullanıcıya özel olduğunu ve tüm kutular i�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="420"/>
         <source>Security</source>
-        <translation type="unfinished"></translation>
+        <translation>Güvenlik</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="522"/>
         <source>Security enhancements</source>
-        <translation type="unfinished"></translation>
+        <translation>Güvenlik geliştirmeleri</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="529"/>
         <source>Use the original token only for approved NT system calls</source>
-        <translation type="unfinished"></translation>
+        <translation>Orijinal tokenları yalnızca onaylı NT sistem çağrıları için kullanın</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="590"/>
         <source>Restrict driver/device access to only approved ones</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürücü/cihaz erişimini yalnızca onaylanmış olanlarla kısıtlayın</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="597"/>
         <source>Enable all security enhancements (make security hardened box)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tüm güvenlik geliştirmelerini etkinleştirin (katılaştırılmış güvenlik kutusu yapın)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="607"/>
@@ -5645,7 +5645,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/SettingsWindow.ui" line="128"/>
         <source>Count and display the disk space occupied by each sandbox</source>
         <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
-        <translation type="unfinished">Her korumalı alanın kapladığı disk alanını hesaplayın ve görüntüleyin</translation>
+        <translation>Her korumalı alanın kapladığı disk alanını hesaplayın ve görüntüleyin</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="371"/>
@@ -5666,7 +5666,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/SettingsWindow.ui" line="459"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="unfinished">Kutu listesinde &quot;Pizza&quot; Arka Planını Göster*</translation>
+        <translation>Kutu listesinde &quot;Pizza&quot; Arka Planını Göster *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="476"/>
@@ -5716,22 +5716,22 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="182"/>
         <source>Show the Recovery Window as Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurtarma Penceresini Her Zaman Üstte Olarak Göster</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="493"/>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="537"/>
         <source>Alternate row background in lists</source>
-        <translation type="unfinished"></translation>
+        <translation>Alternate row background in lists</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="544"/>
         <source>Use Fusion Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Füzyon Temasını Kullan</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="557"/>
@@ -5771,22 +5771,22 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1098"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie&apos;yi Windows&apos;un devam eden sürümleriyle güncel ve tüm web tarayıcılarıyla uyumlu tutmak hiç bitmeyen bir çabadır. Lütfen bu çalışmayı bir bağışla desteklemeyi düşünün.&lt;br /&gt;Geliştirmeyi bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;PayPal bağışı&lt;/a&gt; ile destekleyebilirsiniz, kredi kartlarıyla da çalışır.&lt;br /&gt;Ya da bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon aboneliği&lt;/a&gt; ile sürekli destek sağlayabilirsiniz.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1111"/>
         <source>Search in the Preview channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Önizleme kanalında ara</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1132"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus projesinin destekçileri bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; alabilir. Bir lisans anahtarı gibi ama açık kaynaklı yazılım kullanan harika insanlar için. :-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1118"/>
         <source>Search in the Release channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürüm kanalında ara</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1125"/>

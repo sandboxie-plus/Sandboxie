@@ -78,6 +78,25 @@
         <file>Actions/Update.png</file>
         <file>Actions/Install.png</file>
         <file>Actions/Cert.png</file>
+        <file>Actions/File.png</file>
+        <file>Actions/Security.png</file>
+        <file>Actions/NoAccess.png</file>
+        <file>Actions/Entry.png</file>
+        <file>Actions/Pass.png</file>
+        <file>Actions/Fail.png</file>
+        <file>Actions/List.png</file>
+        <file>Actions/Network.png</file>
+        <file>Actions/Policy.png</file>
+        <file>Actions/Rules.png</file>
+        <file>Actions/ImmidiateRecovery.png</file>
+        <file>Actions/QuickRecovery.png</file>
+        <file>Actions/Accessibility.png</file>
+        <file>Actions/Miscellaneous.png</file>
+        <file>Actions/Fence.png</file>
+        <file>Actions/Trigger.png</file>
+        <file>Actions/Anon.png</file>
+        <file>Actions/Users.png</file>
+        <file>Actions/Bug.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

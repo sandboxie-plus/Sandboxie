@@ -127,6 +127,7 @@ QWidget* CConfigDialog::ConvertToTree(QTabWidget* pTabWidget)
 				QTreeWidgetItem* pSubItem = new QTreeWidgetItem(QStringList() << pSubTabs->tabText(j));
 				pItem->addChild(pSubItem);
 				pSubItem->setData(0, Qt::UserRole, m_pStack->count());
+				pSubItem->setIcon(0, pSubTabs->tabIcon(j));
 				m_pStack->addWidget(pSubTabs->widget(j--));
 			}
 		}

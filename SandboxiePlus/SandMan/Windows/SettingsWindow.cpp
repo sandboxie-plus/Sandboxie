@@ -12,7 +12,7 @@
 
 QSize CustomTabStyle::sizeFromContents(ContentsType type, const QStyleOption* option, const QSize& size, const QWidget* widget) const {
 	QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
-	if (type == QStyle::CT_TabBarTab) {
+	if (type == QStyle::CT_TabBarTab && widget->property("isSidebar").toBool()) {
 		s.transpose();
 		if(theGUI->m_FusionTheme)
 			s.setHeight(s.height() * 13 / 10);
@@ -24,7 +24,7 @@ QSize CustomTabStyle::sizeFromContents(ContentsType type, const QStyleOption* op
 }
 
 void CustomTabStyle::drawControl(ControlElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget) const {
-	if (element == CE_TabBarTabLabel) {
+	if (element == CE_TabBarTabLabel && widget->property("isSidebar").toBool()) {
 		if (const QStyleOptionTab* tab = qstyleoption_cast<const QStyleOptionTab*>(option)) {
 			QStyleOptionTab opt(*tab);
 			opt.shape = QTabBar::RoundedNorth;
@@ -114,6 +114,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	ui.tabs->setTabPosition(QTabWidget::West);
 	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));
+	ui.tabs->tabBar()->setProperty("isSidebar", true);
 
 	ui.tabs->setTabIcon(eOptions, CSandMan::GetIcon("Options"));
 	ui.tabs->setTabIcon(eShell, CSandMan::GetIcon("Shell"));

@@ -26,6 +26,10 @@ public:
 	//QTreeWidgetItem *itemFromIndex(const QModelIndex &index) const;
 };
 
+
+//////////////////////////////////////////////////////////////////////////
+// ProgramsDelegate
+
 class ProgramsDelegate : public QStyledItemDelegate {
 public:
 	ProgramsDelegate(COptionsWindow* pOptions, QTreeWidget* pTree, int Column, QObject* parent = 0) : QStyledItemDelegate(parent) { m_pOptions = pOptions; m_pTree = pTree; m_Column = Column; }
@@ -141,10 +145,11 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
 	ui.setupUi(this);
-	this->setWindowTitle(tr("Sandboxie Plus - '%1' Options").arg(Name));
+	this->setWindowTitle(tr("Sandboxie Plus - '%1' Options").arg(QString(Name).replace("_", " ")));
 
 	ui.tabs->setTabPosition(QTabWidget::West);
 	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));
+	ui.tabs->tabBar()->setProperty("isSidebar", true);
 
 	//this->setMinimumHeight(490);
 
@@ -349,6 +354,30 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	int iOptionTree = theConf->GetInt("Options/OptionTree", 2);
 	if (iOptionTree == 2)
 		iOptionTree = iViewMode == 2 ? 1 : 0;
+
+	ui.tabsGeneral->setTabIcon(0, CSandMan::GetIcon("Box"));
+	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("File"));
+	ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("Security"));
+	ui.tabsGeneral->setTabIcon(3, CSandMan::GetIcon("NoAccess"));
+	ui.tabsGeneral->setTabIcon(4, CSandMan::GetIcon("Run"));
+
+	ui.tabsInternet->setTabIcon(0, CSandMan::GetIcon("List"));
+	ui.tabsInternet->setTabIcon(1, CSandMan::GetIcon("Network"));
+
+	ui.tabsAccess->setTabIcon(0, CSandMan::GetIcon("Rules"));
+	ui.tabsAccess->setTabIcon(1, CSandMan::GetIcon("Policy"));
+
+	ui.tabsAdvanced->setTabIcon(0, CSandMan::GetIcon("Miscellaneous"));
+	ui.tabsAdvanced->setTabIcon(1, CSandMan::GetIcon("Fence"));
+	ui.tabsAdvanced->setTabIcon(2, CSandMan::GetIcon("Trigger"));
+	ui.tabsAdvanced->setTabIcon(3, CSandMan::GetIcon("Anon"));
+	ui.tabsAdvanced->setTabIcon(4, CSandMan::GetIcon("Users"));
+	ui.tabsAdvanced->setTabIcon(5, CSandMan::GetIcon("SetLogging"));
+	ui.tabsAdvanced->setTabIcon(6, CSandMan::GetIcon("Bug"));
+
+	ui.tabsTemplates->setTabIcon(0, CSandMan::GetIcon("Compatibility"));
+	ui.tabsTemplates->setTabIcon(1, CSandMan::GetIcon("Explore"));
+	ui.tabsTemplates->setTabIcon(2, CSandMan::GetIcon("Accessibility"));
 
 	if (iOptionTree) 
 		OnSetTree();

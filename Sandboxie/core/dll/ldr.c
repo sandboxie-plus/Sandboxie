@@ -1290,7 +1290,7 @@ _FX NTSTATUS Ldr_NtLoadDriver(UNICODE_STRING *RegistryPath)
 //---------------------------------------------------------------------------
 
 
-void Ldr_LoadSkipList()
+_FX void Ldr_LoadSkipList()
 {
     WCHAR buf[128];
     ULONG index = 0;
@@ -1311,3 +1311,21 @@ void Ldr_LoadSkipList()
             break;
     }
 }
+
+
+//---------------------------------------------------------------------------
+// SbieDll_IsDllSkipHook
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN SbieDll_IsDllSkipHook(const WCHAR* ImageName)
+{
+    DLL *dll = Ldr_Dlls;
+    while (dll->nameW) {
+        if (_wcsicmp(ImageName, dll->nameW) == 0)
+            return (dll->state & 2) != 0;
+        ++dll;
+    }
+    return FALSE;
+}
+

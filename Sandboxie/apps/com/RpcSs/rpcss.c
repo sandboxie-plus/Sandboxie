@@ -287,6 +287,9 @@ _FX LONG my_RegQueryValueExW(
 
 _FX BOOL Start_WinSock(void)
 {
+    if (SbieDll_IsDllSkipHook(L"ws2_32.dll"))
+        return TRUE;
+
     WORD wVersionRequested;
     WSADATA wsaData;
     BOOL hook_success = TRUE;

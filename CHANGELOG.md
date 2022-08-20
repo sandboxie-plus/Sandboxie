@@ -4,6 +4,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.3.2 / 5.58.2] - 2022-08-??
+
+### Added
+- added icons to sub tabs in the box option dialog
+- no recovery and no message popup menu options are now persisted across ui restarts
+
+
 
 
 ## [1.3.1 / 5.58.1] - 2022-08-20

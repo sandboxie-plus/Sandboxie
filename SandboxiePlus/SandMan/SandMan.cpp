@@ -104,6 +104,9 @@ CSandMan::CSandMan(QWidget *parent)
 
 	theGUI = this;
 
+	m_DarkTheme = false;
+	m_FusionTheme = false;
+
 	QDesktopServices::setUrlHandler("http", this, "OpenUrl");
 	QDesktopServices::setUrlHandler("https", this, "OpenUrl");
 	QDesktopServices::setUrlHandler("sbie", this, "OpenUrl");
@@ -439,8 +442,10 @@ void CSandMan::CreateMenus(bool bAdvanced)
 	if(bAdvanced) {
 		m_pDisableRecovery = m_pMenuFile->addAction(tr("Disable File Recovery"), this, SLOT(OnDisablePopUp()));
 		m_pDisableRecovery->setCheckable(true);
+		m_pDisableRecovery->setChecked(theConf->GetBool("UIConfig/DisabledRecovery", false));
 		m_pDisableMessages = m_pMenuFile->addAction(tr("Disable Message Popup"), this, SLOT(OnDisablePopUp()));
 		m_pDisableMessages->setCheckable(true);
+		m_pDisableMessages->setChecked(theConf->GetBool("UIConfig/DisableMessages", false));
 	}
 	else {
 		m_pDisableRecovery = NULL;
@@ -1958,10 +1963,16 @@ void CSandMan::OnDisableForce2()
 void CSandMan::OnDisablePopUp()
 {
 	QString Str2 = tr("No Recovery");
-	if(m_pDisableRecovery) m_pDisabledRecovery->setText(m_pDisableRecovery->isChecked() ? Str2 : QString(Str2.length(), ' '));
+	if (m_pDisableRecovery) {
+		m_pDisabledRecovery->setText(m_pDisableRecovery->isChecked() ? Str2 : QString(Str2.length(), ' '));
+		theConf->SetValue("UIConfig/DisabledRecovery", m_pDisableRecovery->isChecked());
+	}
 
 	QString Str3 = tr("No Messages");
-	if(m_pDisableMessages) m_pDisabledMessages->setText(m_pDisableMessages->isChecked() ? Str3 : QString(Str3.length(), ' '));
+	if (m_pDisableMessages) {
+		m_pDisabledMessages->setText(m_pDisableMessages->isChecked() ? Str3 : QString(Str3.length(), ' '));
+		theConf->SetValue("UIConfig/DisableMessages", m_pDisableMessages->isChecked());
+	}
 }
 
 SB_RESULT(void*) CSandMan::ConnectSbie()

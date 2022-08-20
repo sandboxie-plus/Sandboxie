@@ -575,7 +575,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="362"/>
         <source>Search for Options</source>
-        <translation>Seçenekleri Ara</translation>
+        <translation>Seçeneklerde Ara</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="607"/>
@@ -3481,7 +3481,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="277"/>
         <source>Search for Settings</source>
-        <translation>Ayarları Ara</translation>
+        <translation>Ayarlarda Ara</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="375"/>

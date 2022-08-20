@@ -83,6 +83,8 @@ void CNewBoxWindow::CreateBox()
 	{
 		CSandBoxPtr pBox = theAPI->GetBoxByName(m_Name);
 
+		pBox->SetBool("AutoRecover", true);
+
 		switch (BoxType)
 		{
 			case CSandBoxPlus::eHardenedPlus:

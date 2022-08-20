@@ -52,7 +52,6 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 
 	if (cfglvl == 0)
 	{
-		SetBool("AutoRecover", true);
 		SetBool("BlockNetworkFiles", true);
 
 		// recovery

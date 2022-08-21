@@ -435,7 +435,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="391"/>
         <source>Search for options</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索选项</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="638"/>
@@ -2161,7 +2161,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="1846"/>
         <source>The evaluation period has expired!!!</source>
         <oldsource>The evaluation periode has expired!!!</oldsource>
-        <translation type="unfinished">已超过评估期限！！！</translation>
+        <translation>已超过评估期限！！！</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1950"/>
@@ -3150,7 +3150,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="278"/>
         <source>Search for settings</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索设置</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="376"/>
@@ -3246,7 +3246,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1171"/>
         <source>%1 (Current)</source>
-        <translation>%1 (当前通道)</translation>
+        <translation>%1 (当前)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1172"/>
@@ -4376,7 +4376,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="590"/>
         <source>Restrict driver/device access to only approved ones</source>
-        <translation>将对“驱动程序/设备”的访问限制在已批准的初次访问过的端点上</translation>
+        <translation>将对“驱动程序/设备”的访问权限制在已知的终结点列表内</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="597"/>
@@ -4668,7 +4668,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/OptionsWindow.ui" line="2636"/>
         <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
         <oldsource>API call trace (requirers logapi to be installed in the sbie dir)</oldsource>
-        <translation type="unfinished">API 调用跟踪 (需将 logapi 安装到沙盒目录)</translation>
+        <translation>API 调用跟踪 (需要安装 LogAPI 模块到沙盒目录)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2676"/>

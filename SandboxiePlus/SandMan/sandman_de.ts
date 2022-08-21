@@ -476,7 +476,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="391"/>
         <source>Search for options</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach Optionen suchen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="638"/>
@@ -3438,7 +3438,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="278"/>
         <source>Search for settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach Einstellungen suchen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="880"/>

@@ -459,8 +459,8 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation>Tous les programmes</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="692"/>
-        <location filename="Windows/OptionsWindow.cpp" line="708"/>
+        <location filename="Windows/OptionsWindow.cpp" line="694"/>
+        <location filename="Windows/OptionsWindow.cpp" line="710"/>
         <location filename="Windows/OptionsAccess.cpp" line="299"/>
         <location filename="Windows/OptionsAccess.cpp" line="494"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
@@ -556,12 +556,12 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="18"/>
         <source>This option requires a valid supporter certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette option nécessite un certificat d&apos;adhérent valide</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="21"/>
         <source>Supporter exclusive option</source>
-        <translation type="unfinished"></translation>
+        <translation>Option exclusive aux adhérents</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="46"/>
@@ -863,20 +863,21 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="391"/>
         <source>Search for options</source>
-        <translation type="unfinished"></translation>
+        <oldsource>Search for Options</oldsource>
+        <translation type="unfinished">Rechercher dans les options</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="636"/>
+        <location filename="Windows/OptionsWindow.cpp" line="638"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>Ce bac à sable a été supprimé par conséquent la configuration ne peut pas être sauvegardée.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="680"/>
+        <location filename="Windows/OptionsWindow.cpp" line="682"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>Certains changements n&apos;ont pas encore été enregistrés, voulez-vous vraiment fermer cette fenêtre d&apos;options ?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="701"/>
+        <location filename="Windows/OptionsWindow.cpp" line="703"/>
         <source>Enter program:</source>
         <translation>Saisir le programme :</translation>
     </message>
@@ -928,7 +929,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/PopUpWindow.h" line="100"/>
         <source>Remember for this process</source>
-        <translation>Se souvenir pour ce processus</translation>
+        <translation>Mémoriser pour ce processus</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="110"/>
@@ -958,7 +959,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/PopUpWindow.h" line="181"/>
         <source>Request will time out in %1 sec</source>
-        <translation>La demande sera expirée dans %1 seconde</translation>
+        <translation>La demande expirera dans %1 seconde(s)</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="183"/>
@@ -1295,7 +1296,7 @@ Chemin complet : %4</translation>
     <message>
         <location filename="SandMan.cpp" line="1315"/>
         <source>No Force Process</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pas de processus forcé</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1485"/>
@@ -1326,17 +1327,17 @@ Chemin complet : %4</translation>
         <location filename="SandMan.cpp" line="1846"/>
         <source>The evaluation period has expired!!!</source>
         <oldsource>The evaluation periode has expired!!!</oldsource>
-        <translation type="unfinished">La période d&apos;évaluation a expiré !!!</translation>
+        <translation>La période d&apos;évaluation a expiré !!!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1965"/>
         <source>No Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de récupération</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1971"/>
         <source>No Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de message</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2735"/>
@@ -2844,7 +2845,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Views/SbieView.cpp" line="178"/>
         <source>Sandbox Options</source>
-        <translation>Paramètres du bac à sable</translation>
+        <translation>Options du bac à sable</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="201"/>
@@ -3181,7 +3182,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Views/SbieView.cpp" line="1204"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
-        <translation>Voulez-vous vraiment supprimer le(s) bac(s) à sable sélectionné(s) ? &lt;br /&gt;&lt;br /&gt;Attention : Le contenu de ces bacs sera aussi supprimé !</translation>
+        <translation>Voulez-vous vraiment supprimer le(s) bac(s) à sable sélectionné(s) ? &lt;br /&gt;&lt;br /&gt;Attention : Le contenu de ce(s) bac(s) sera aussi supprimé !</translation>
     </message>
     <message>
         <source>Deleting %1 content</source>
@@ -3399,7 +3400,8 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="278"/>
         <source>Search for settings</source>
-        <translation type="unfinished"></translation>
+        <oldsource>Search for Settings</oldsource>
+        <translation type="unfinished">Rechercher dans les paramètres</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="880"/>
@@ -3430,7 +3432,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="952"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;check&quot;&gt;Vérifier maintenant&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1005"/>
@@ -3465,22 +3467,22 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1171"/>
         <source>%1 (Current)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (Actuel)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1172"/>
         <source>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1173"/>
         <source>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1195"/>
         <source>Do you want to download the version %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous télécharger la version %1 ?</translation>
     </message>
 </context>
 <context>
@@ -4962,7 +4964,7 @@ Remarque : Les paramètres Programmes forcés et Dossiers forcés d&apos;un bac 
         <location filename="Forms/OptionsWindow.ui" line="2636"/>
         <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
         <oldsource>API call trace (requirers logapi to be installed in the sbie dir)</oldsource>
-        <translation type="unfinished">Traçage des appels API (nécessite que logapi soit installé dans le répertoire sbie)</translation>
+        <translation>Traçage des appels API (nécessite que LogAPI soit installé dans le répertoire de Sandboxie)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2656"/>
@@ -5422,7 +5424,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
         <location filename="Forms/SettingsWindow.ui" line="128"/>
         <source>Count and display the disk space occupied by each sandbox</source>
         <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
-        <translation type="unfinished">Compter et afficher l&apos;espace disque occupé par chaque bac à sable</translation>
+        <translation>Compter et afficher l&apos;espace disque occupé par chaque bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="320"/>
@@ -5448,7 +5450,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
         <location filename="Forms/SettingsWindow.ui" line="459"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="unfinished">Afficher l&apos;arrière-plan « Pizza » dans la liste des bacs *</translation>
+        <translation>Afficher l&apos;arrière-plan « Pizza » dans la liste des bacs *</translation>
     </message>
     <message>
         <source>* indetermined means depanding on the view mode</source>
@@ -5622,7 +5624,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="544"/>
         <source>Use Fusion Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser le thème Fusion</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="695"/>

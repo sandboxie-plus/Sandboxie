@@ -3247,6 +3247,32 @@ Sandboxie Plus, eski davranışı bir kara liste modundan, korumalı alandaki pr
 Sandboxie classic'in eski kullanıcı arayüzü, bu çalışma modu için destek uygulamaz. ini dosyası kullanılarak yapılandırılabilse de, gizliliği artırılmış kutuları kullanmak istiyorsanız modern Sandboxie-Plus UI'yi (SandMan.exe) kullanmanız önerilir.
 .
 
+6010;txt;01
+Sandboxie'yi %2 günden daha önce yüklediniz.
+
+Sence David ve katkıda bulunanlar harika bir iş çıkarıyor mu?
+
+Neden projeye destek vererek ve Destekçi Sertifikası alarak bunu göstermiyorsunuz?
+
+Geçerli bir destekçi sertifikası olmayan Sandboxie, projeyi destekleme olasılığını düşünmeniz için size zaman tanımak için şimdi birkaç saniye duraklayacaktır.
+.
+
+6011;txt;01
+Bekle
+.
+
+6012;txt;01
+Devam et
+.
+
+6013;txt;01
+Çıkış
+.
+
+6014;txt;01
+Sertifika Al
+.
+
 #----------------------------------------------------------------------------
 # Getting Started Wizard
 #----------------------------------------------------------------------------

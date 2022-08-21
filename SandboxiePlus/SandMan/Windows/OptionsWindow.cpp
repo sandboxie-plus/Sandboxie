@@ -166,6 +166,30 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabs->setTabIcon(eTemplates, CSandMan::GetIcon("Template"));
 	ui.tabs->setTabIcon(eEditIni, CSandMan::GetIcon("EditIni"));
 
+	ui.tabsGeneral->setTabIcon(0, CSandMan::GetIcon("Box"));
+	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("File"));
+	ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("Security"));
+	ui.tabsGeneral->setTabIcon(3, CSandMan::GetIcon("NoAccess"));
+	ui.tabsGeneral->setTabIcon(4, CSandMan::GetIcon("Run"));
+
+	ui.tabsInternet->setTabIcon(0, CSandMan::GetIcon("List"));
+	ui.tabsInternet->setTabIcon(1, CSandMan::GetIcon("Network"));
+
+	ui.tabsAccess->setTabIcon(0, CSandMan::GetIcon("Rules"));
+	ui.tabsAccess->setTabIcon(1, CSandMan::GetIcon("Policy"));
+
+	ui.tabsAdvanced->setTabIcon(0, CSandMan::GetIcon("Miscellaneous"));
+	ui.tabsAdvanced->setTabIcon(1, CSandMan::GetIcon("Fence"));
+	ui.tabsAdvanced->setTabIcon(2, CSandMan::GetIcon("Trigger"));
+	ui.tabsAdvanced->setTabIcon(3, CSandMan::GetIcon("Anon"));
+	ui.tabsAdvanced->setTabIcon(4, CSandMan::GetIcon("Users"));
+	ui.tabsAdvanced->setTabIcon(5, CSandMan::GetIcon("SetLogging"));
+	ui.tabsAdvanced->setTabIcon(6, CSandMan::GetIcon("Bug"));
+
+	ui.tabsTemplates->setTabIcon(0, CSandMan::GetIcon("Compatibility"));
+	ui.tabsTemplates->setTabIcon(1, CSandMan::GetIcon("Explore"));
+	ui.tabsTemplates->setTabIcon(2, CSandMan::GetIcon("Accessibility"));
+
 	//if(theConf->GetInt("Options/ViewMode", 1) != 1 && (QApplication::keyboardModifiers() & Qt::ControlModifier) == 0)
 	//	ui.tabs->removeTab(eEditIni);
 
@@ -355,30 +379,6 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	if (iOptionTree == 2)
 		iOptionTree = iViewMode == 2 ? 1 : 0;
 
-	ui.tabsGeneral->setTabIcon(0, CSandMan::GetIcon("Box"));
-	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("File"));
-	ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("Security"));
-	ui.tabsGeneral->setTabIcon(3, CSandMan::GetIcon("NoAccess"));
-	ui.tabsGeneral->setTabIcon(4, CSandMan::GetIcon("Run"));
-
-	ui.tabsInternet->setTabIcon(0, CSandMan::GetIcon("List"));
-	ui.tabsInternet->setTabIcon(1, CSandMan::GetIcon("Network"));
-
-	ui.tabsAccess->setTabIcon(0, CSandMan::GetIcon("Rules"));
-	ui.tabsAccess->setTabIcon(1, CSandMan::GetIcon("Policy"));
-
-	ui.tabsAdvanced->setTabIcon(0, CSandMan::GetIcon("Miscellaneous"));
-	ui.tabsAdvanced->setTabIcon(1, CSandMan::GetIcon("Fence"));
-	ui.tabsAdvanced->setTabIcon(2, CSandMan::GetIcon("Trigger"));
-	ui.tabsAdvanced->setTabIcon(3, CSandMan::GetIcon("Anon"));
-	ui.tabsAdvanced->setTabIcon(4, CSandMan::GetIcon("Users"));
-	ui.tabsAdvanced->setTabIcon(5, CSandMan::GetIcon("SetLogging"));
-	ui.tabsAdvanced->setTabIcon(6, CSandMan::GetIcon("Bug"));
-
-	ui.tabsTemplates->setTabIcon(0, CSandMan::GetIcon("Compatibility"));
-	ui.tabsTemplates->setTabIcon(1, CSandMan::GetIcon("Explore"));
-	ui.tabsTemplates->setTabIcon(2, CSandMan::GetIcon("Accessibility"));
-
 	if (iOptionTree) 
 		OnSetTree();
 	else {
@@ -433,7 +433,9 @@ void COptionsWindow::closeEvent(QCloseEvent *e)
 bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 {
 	if (event->type() == QEvent::KeyPress && ((QKeyEvent*)event)->key() == Qt::Key_Escape 
-		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
+		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier
+		&& (source == ui.treeAccess->viewport() || source == ui.treeINet->viewport() ||
+			source == ui.treeNetFw->viewport()))
 	{
 		CloseINetEdit(false);
 		CloseNetFwEdit(false);
@@ -442,7 +444,7 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 	}
 
 	if (event->type() == QEvent::KeyPress && (((QKeyEvent*)event)->key() == Qt::Key_Enter || ((QKeyEvent*)event)->key() == Qt::Key_Return) 
-		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
+		&& (((QKeyEvent*)event)->modifiers() == Qt::NoModifier || ((QKeyEvent*)event)->modifiers() == Qt::KeypadModifier))
 	{
 		CloseINetEdit(true);
 		CloseNetFwEdit(true);

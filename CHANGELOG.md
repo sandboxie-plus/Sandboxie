@@ -7,15 +7,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.3.2 / 5.58.2] - 2022-08-??
 
 ### Added
-- added icons to sub tabs in the box option dialog
-- no recovery and no message popup menu options are now persisted across ui restarts
+- added icons to sub tabs in the box options dialog
+- recovery and message pop-up menu options are not persisting across UI restarts any more
 
 ### Changed
-- sandboxie no longer issues message 1301 when forced processes has been temporary disabled
--- the message can be re enabled with "NotifyForceProcessDisabled=y"
+- Sandboxie no longer issues message 1301 when forced processes are temporarily disabled
+-- the message can be re-enabled with "NotifyForceProcessDisabled=y"
 
 ### Fixed
-- fixed compatybility issue with Proxyfier [#2163](https://github.com/sandboxie-plus/Sandboxie/issues/2163)
+- fixed compatibility issue with Proxyfier [#2163](https://github.com/sandboxie-plus/Sandboxie/issues/2163)
 
 
 
@@ -23,19 +23,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.3.1 / 5.58.1] - 2022-08-20
 
 ### Added
-- added ability to switch fusion theme independently of the dark theme
+- added ability to switch the fusion theme independently from the dark theme
 - added ability to download updates from the support page
 - added missing system calls to the hardened box type [88bc06a](https://github.com/sandboxie-plus/Sandboxie/commit/88bc06a0c7368a81c80a77d7a89ddc73455abb25) [b775264](https://github.com/sandboxie-plus/Sandboxie/commit/b775264a4824e49b554f1b776c377170e5f90797) [04b2377](https://github.com/sandboxie-plus/Sandboxie/commit/04b23770f53597c12eda9122c774ed5165129147) (thanks Mr.X)
-- added search box to the Plus UI Settings and box option dialogs [#2134](https://github.com/sandboxie-plus/Sandboxie/issues/2134)
+- added search box to the Plus UI Settings and box options dialog [#2134](https://github.com/sandboxie-plus/Sandboxie/issues/2134)
 - added Korean translation to the Plus UI [#2133](https://github.com/sandboxie-plus/Sandboxie/pull/2133) (thanks VenusGirl)
-- added grouping to sandman tray menu [#2148](https://github.com/sandboxie-plus/Sandboxie/issues/2148)
+- added grouping to SandMan tray menu [#2148](https://github.com/sandboxie-plus/Sandboxie/issues/2148)
 
 ### Changed
 - improved info label
-- the look of vintage mode is even more vintage
-- reloading the configuration with the Sandman command "Options -> Reload ini file" now updates the list of approved syscalls
+- the vintage mode look is even more vintage now
+- reloading the configuration with the SandMan command "Options -> Reload ini file" now updates the list of approved syscalls
 - made rule specificity more specific, now a rule with less wildcards overrules a rule with more wildcards
--- Note: tailing wildcards are evaluated separately
+-- Note: trailing wildcards are evaluated separately
 
 ### Fixed
 - fixed issue with displaying sandbox configuration [#2111](https://github.com/sandboxie-plus/Sandboxie/issues/2111)
@@ -49,17 +49,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.3.0 / 5.58.0] - 2022-08-09
 
 ### Added
-- Added hook configuration for ntoskrnl/ntdll
+- added hook configuration for ntoskrnl/ntdll
 -- individual ntdll hooks can be disabled using "DisableWinNtHook=..."
-- Added new Super Extra Security Enhanced Box Mode to enable "UseSecurityMode=y"
--- when this setting is enabled, it combines "SysCallLockDown=y" that limits the use of Nt system calls with "DropAdminRights=y" and "RestrictDevices=y"
--- Only calls configured in the global section as "ApproveWinNtSysCall=..."/"ApproveWin32SysCall=..." will be executed with the original token
--- all not approved Nt syscalls will be executed with the sandboxed token, this may break compatibility in certain scenarios
+- added new Super Extra Security Enhanced Box Mode; add "UseSecurityMode=y" to enable
+-- when this setting is enabled, it combines "SysCallLockDown=y" which limits the use of NT system calls with "DropAdminRights=y" and "RestrictDevices=y"
+-- only calls configured in the global section as "ApproveWinNtSysCall=..."/"ApproveWin32SysCall=..." will be executed with the original token
+-- all non-approved NT syscalls will be executed with the sandboxed token, this may break compatibility in certain scenarios
 -- additional syscalls may need to be allowed, this has to be done in the [GlobalSettings] and the driver must be restarted
--- Note: Boxes created as Security Enhanced with prior builds will be displayed as normal in the UI from now on
--- The Security Enhanced icons are now repurposed for the new Super Extra Security Enhanced Box Mode
+-- Note: boxes created as Security Enhanced with prior builds will be displayed as normal in the UI from now on
+-- the Security Enhanced icons are now repurposed for the new Super Extra Security Enhanced Box Mode
 -- Note: The new enhanced security features require a supporter certificate
-- added browse option to the force processes tab
+- added browse option to the "force process" tab
 
 ### Changed
 - replaced the "DeviceSecurity" template with a dedicated setting "RestrictDevices=y"
@@ -71,7 +71,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.2.8b / 5.57.7] - 2022-08-08
 
 ### Fixed
-- fixed issue with context menu setup on windows 11
+- fixed issue with context menu setup on Windows 11
 - fixed column issue in vintage mode [#2103](https://github.com/sandboxie-plus/Sandboxie/issues/2103)
 
 
@@ -90,8 +90,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - SandboxieLogon is now disabled by default as it wasn't compatible with third-party malware tools [#2025](https://github.com/sandboxie-plus/Sandboxie/issues/2025)
-- the access view list now adds the tailing "*" to file and key paths the same way the driver does [2039](https://github.com/sandboxie-plus/Sandboxie/issues/2039)
-- setup of shell integration is now done by SandMan, not the installer anymore
+- the access view list now adds the trailing "*" to file and key paths the same way the driver does [2039](https://github.com/sandboxie-plus/Sandboxie/issues/2039)
+- setup of shell integration is now done by SandMan, not the installer
 - uninstaller can now remove the sandbox folders [#1235](https://github.com/sandboxie-plus/Sandboxie/pull/1235)
 
 
@@ -391,7 +391,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - FIXED SECURITY ISSUE ID-20: memory of unsandboxed processes can no longer be read, exceptions are possible
 -- you can use ReadIpcPath=$:program.exe to allow read access to unsandboxed processes or processes in other boxes
-- Added "Monitor Mode" to the resource access trace, similar to the old monitor view of SbieCtrl.exe
+- added "Monitor Mode" to the resource access trace, similar to the old monitor view of SbieCtrl.exe
 
 ### Changed
 - EnableObjectFiltering is now set enabled by default, and replaces Sbie's old process/thread handle filter
@@ -497,7 +497,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added Options menu command to reset the GUI [#1589](https://github.com/sandboxie-plus/Sandboxie/issues/1589)
 - added "Run Un-Sandboxed" context menu option
 - added new trigger "OnBoxDelete" that allows to specify a command that is run UNBOXED just before the box content gets deleted
--- note: this can be used as a replacement to "DeleteCommand" [#591](https://github.com/sandboxie-plus/Sandboxie/issues/591)
+-- Note: this can be used as a replacement to "DeleteCommand" [#591](https://github.com/sandboxie-plus/Sandboxie/issues/591)
 - selected box operations (deletion) no longer show the progress dialog [#1061](https://github.com/sandboxie-plus/Sandboxie/issues/1061)
 -- if a box with a running operation shows a blinking hour glass icon, the context menu can be used to cancel the operation
 
@@ -681,8 +681,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.4 / 5.55.4] - 2021-12-20
 
 ### Added
-- Mechanism to hook Win32 system calls now also works for 32 bit applications running under WoW64
-- Added customization to Win32k hooking mechanism, as by default only GdiDdDDI* hooks are installed
+- mechanism to hook Win32 system calls now also works for 32 bit applications running under WoW64
+- added customization to Win32k hooking mechanism, as by default only GdiDdDDI* hooks are installed
 -- You can force the installation of other hooks by specifying them with "EnableWin32Hook=..." 
 -- or disable the installation of the default hooks with "DisableWin32Hook=..."
 -- Please note that some Win32k hooks may cause BSODs or undefined behaviour. (!)
@@ -697,7 +697,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - "EnableWin32kHooks=y" is now enabled by default, as no issues were reported in 1.0.3
 -- Note: currently only the GdiDdDDI* hooks are applied, required for Chromium HW acceleration
-- Cleaned up low level hooking code a bit
+- cleaned up low level hooking code a bit
 - "RunRpcssAsSystem=y" is now auto applied for boxes in "App Compartment" mode when "RunServicesAsSystem=y" or "MsiInstallerExemptions=y" are present
 
 ### Fixed
@@ -1676,7 +1676,7 @@ Fixed issue with Windows 7
 -- this allowed some system options to be changed, to disable filtering use "OpenLsaEndpoint=y"
 - fixed hooking issues SBIE2303 with Chrome, Edge and possibly others [#68](https://github.com/sandboxie-plus/Sandboxie/issues/68) [#166](https://github.com/sandboxie-plus/Sandboxie/issues/166)
 - fixed failed check for running processes when performing snapshot operations
-- fixed some box option checkboxes were not properly initialized
+- fixed some box options checkboxes were not properly initialized
 - fixed unavailable options are not properly disabled when SandMan is not connected to the driver
 - fixed MSI installer issue, not being able to create "C:\Config.msi" folder on Windows 20H2 [#219](https://github.com/sandboxie-plus/Sandboxie/issues/219)
 - added missing localization to generic list commands
@@ -1847,7 +1847,7 @@ Fixed issue with Windows 7
 - fixed issue when logging messages from a non-sandboxed process, added process_id parameter to API_LOG_MESSAGE_ARGS
 - fixed issues with localization
 - fixed issue using file recovery in legacy UI SbieCtrl.exe when "SeparateUserFolders=n" is set
-- when a program is blocked from starting due to restrictions no redundant messages are issues anymore
+- when a program is blocked from starting due to restrictions no redundant messages are issued any more
 - fixed UI not properly displaying async errors
 - fixed issues when a snapshot operation failed
 - fixed some special cases of IpcPath and WinClass in the new UI

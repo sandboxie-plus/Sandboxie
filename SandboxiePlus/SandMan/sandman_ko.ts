@@ -543,7 +543,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="56"/>
         <source>Security Hardened Sandbox</source>
-        <translation>Security Hardened Sandbox</translation>
+        <translation>보안 강화 샌드박스</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="57"/>
@@ -739,7 +739,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="107"/>
         <source>Torrent Client</source>
-        <translation>Torrent 클아이언트</translation>
+        <translation>Torrent 클라이언트</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="153"/>
@@ -774,7 +774,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="391"/>
         <source>Search for options</source>
-        <translation type="unfinished"></translation>
+        <translation>옵션 검색</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="638"/>
@@ -799,7 +799,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsStop.cpp" line="65"/>
         <source>Leader</source>
-        <translation>리더</translation>
+        <translation>대표</translation>
     </message>
 </context>
 <context>
@@ -1980,7 +1980,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="1846"/>
         <source>The evaluation period has expired!!!</source>
         <oldsource>The evaluation periode has expired!!!</oldsource>
-        <translation type="unfinished">평가 기간이 만료되었습니다!!!</translation>
+        <translation>평가 기간이 만료되었습니다!!!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1950"/>
@@ -2516,7 +2516,7 @@ No will choose: %2</source>
         <location filename="Views/SbieView.cpp" line="173"/>
         <location filename="Views/SbieView.cpp" line="275"/>
         <source>Explore Content</source>
-        <translation>콘텐츠 탐색</translation>
+        <translation>내용 탐색</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="202"/>
@@ -2733,7 +2733,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="281"/>
         <source>Browse Content</source>
-        <translation>콘텐츠 찾아보기</translation>
+        <translation>내용 찾아보기</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="167"/>
@@ -3049,12 +3049,12 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="278"/>
         <source>Search for settings</source>
-        <translation type="unfinished"></translation>
+        <translation>설정 검색</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="376"/>
         <source>Run &amp;Sandboxed</source>
-        <translation>샌드박스 실행(&amp;S)</translation>
+        <translation>샌드박스로 실행(&amp;S)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="397"/>
@@ -3206,7 +3206,7 @@ No will choose: %2</source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="423"/>
         <source>Start UI with Windows</source>
-        <translation>Windows를 사용하여 UI 시작</translation>
+        <translation>Windows로 UI 시작</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="428"/>
@@ -3629,7 +3629,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="428"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation>Administrators 및 Power Users 그룹에서 권한 삭제</translation>
+        <translation>관리자 및 Power Users 그룹에서 권한 삭제</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="140"/>
@@ -3659,7 +3659,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="245"/>
         <source>Show this box in the &apos;run in box&apos; selection prompt</source>
-        <translation>&apos;박스내 실행&apos; 선택 프롬프트에 이 박스 표시</translation>
+        <translation>&apos;박스안에서 실행&apos; 선택 프롬프트에 이 박스 표시</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="262"/>
@@ -3899,7 +3899,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="127"/>
         <source>&lt;b&gt;More Box Types&lt;/b&gt; are exclusively available to &lt;u&gt;project supporters&lt;/u&gt;, the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs.&lt;br /&gt;If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;, to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.&lt;br /&gt;You can test the other box types by creating new sandboxes of those types, however processes in these will be auto terminated after 5 minutes.</source>
-        <translation>&lt;b&gt;더 많은 박스 유형&lt;/b&gt;은  &lt;u&gt;프로젝트 후원자&lt;/u&gt;독점적으로 사용할 수 있으며, 개인 정보 보호 강화 박스는 샌드박스 프로그램에 의한 &lt;b&gt;&lt;font color=&apos;red&apos;&gt;불법 접근으로부터 사용자 데이터를 보호&lt;/font&gt;&lt;/b&gt;합니다.&lt;br /&gt;아직 후원자가 아닌 경우 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;후원자 인증서&lt;/a&gt;를 받을 수 있도록&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;프로젝트를 지원&lt;/a&gt;하는 방안을 고려해 주십시오.&lt;br /&gt;이러한 유형의 새 샌드박스를 만들어 다른 박스 유형을 테스트할 수 있지만, 이러한 유형의 프로세스는 5분 후에 자동으로 종료됩니다.</translation>
+        <translation>&lt;b&gt;더 많은 박스 유형&lt;/b&gt;은  &lt;u&gt;프로젝트 후원자&lt;/u&gt; 독점적으로 사용할 수 있으며, 개인 정보 보호 강화 박스는 샌드박스 프로그램에 의한 &lt;b&gt;&lt;font color=&apos;red&apos;&gt;불법 접근으로부터 사용자 데이터를 보호&lt;/font&gt;&lt;/b&gt;합니다.&lt;br /&gt;아직 후원자가 아닌 경우 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;후원자 인증서&lt;/a&gt;를 받을 수 있도록 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;프로젝트 지원&lt;/a&gt;을 고려해 주시기 바랍니다.&lt;br /&gt;이러한 유형의 새 샌드박스를 만들어 다른 박스 유형을 테스트할 수 있지만, 이러한 유형의 프로세스는 5분 후에 자동으로 종료됩니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="252"/>
@@ -3919,7 +3919,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="780"/>
         <source>Issue message 2111 when a process access is denied</source>
-        <translation>프로세스 접근이 거부되면 메시지 2111을 발행합니다</translation>
+        <translation>프로세스 접근이 거부되면 메시지 2111 발행</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="923"/>
@@ -3951,21 +3951,21 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1069"/>
         <source>Add Leader Program</source>
-        <translation>남은 프로그램 추가</translation>
+        <translation>대표 프로그램 추가</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1076"/>
         <source>Add Lingering Program</source>
-        <translation>남아 있는 프로그램 추가</translation>
+        <translation>남은 프로그램 추가</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1107"/>
         <source>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.
 
 If leader processes are defined, all others are treated as lingering processes.</source>
-        <translation>나머지 프로그램은 다른 모든 프로세스가 종료된 후에도 계속 실행 중인 경우 자동으로 종료됩니다.
+        <translation>남은 프로그램은 다른 모든 프로세스가 종료된 후에도 계속 실행 중인 경우 자동으로 종료됩니다.
 
-나머지 프로세스가 정의되어 있으면 다른 모든 프로세스가 지연 프로세스로 처리됩니다.</translation>
+대표 프로세스가 정의되면 다른 모든 프로세스는 남아있는 프로세스로 취급됩니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1122"/>
@@ -4010,7 +4010,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1247"/>
         <source>Issue message 1307 when a program is denied internet access</source>
-        <translation>프로그램이 인터넷 접근을 거부하면 메시지 1307 발생</translation>
+        <translation>프로그램이 인터넷 접근을 거부하면 메시지 1307 발행</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1261"/>
@@ -4147,7 +4147,7 @@ You can use &apos;Open for All&apos; instead to make it apply to all programs, o
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1554"/>
         <source>Add COM Object</source>
-        <translation>COM 게체 추가</translation>
+        <translation>COM 개체 추가</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1805"/>
@@ -4177,12 +4177,12 @@ You can use &apos;Open for All&apos; instead to make it apply to all programs, o
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1898"/>
         <source>You can exclude folders and file types (or file extensions) from Immediate Recovery.</source>
-        <translation>즉시 복구에서 폴더 및 파일 유형 (또는 파일 확장명)을 제외할 수 있습니다.</translation>
+        <translation>즉시 복구에서 폴더 및 파일 유형 (또는 파일 확장자)을 제외할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1908"/>
         <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
-        <translation>빠른 복구 기능이 호출되면 샌드박스 콘텐츠에 대해 다음 폴더가 확인됩니다. </translation>
+        <translation>빠른 복구 기능이 호출되면 샌드박스 내용에 대해 다음 폴더가 확인됩니다. </translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1921"/>
@@ -4202,7 +4202,7 @@ You can use &apos;Open for All&apos; instead to make it apply to all programs, o
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1974"/>
         <source>Do not start sandboxed services using a system token (recommended)</source>
-        <translation>샌드박스 프로그램에서 만든 창 클래스 이름 변경 안 함시스템 토큰을 사용하여 샌드박스 서비스를 시작하지 않음 (권장)</translation>
+        <translation>시스템 토큰을 사용하여 샌드박스 서비스를 시작하지 않음 (권장)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2098"/>
@@ -4253,7 +4253,7 @@ You can use &apos;Open for All&apos; instead to make it apply to all programs, o
         <source>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path.
 The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</source>
         <translation>규칙 특수성은 지정된 규칙이 특정 경로와 얼마나 잘 일치하는지 측정하는 것으로, 단순하게 말해서 특수성은 경로 시작부터 마지막 일치하는 비 와일드카드 하위 문자열까지 포함한 문자 길이입니다. &quot;*.tmp&quot;와 같은 파일 형식만 일치하는 규칙은 항상 전체 파일 경로와 일치하므로 가장 높은 특수성을 가집니다.
-프로세스 일치 수준은 특수성보다 높은 우선 순위를 가지며 규칙이 지정된 프로세스에 적용되는 방식을 설명합니다. 프로세스 이름 또는 그룹별로 적용되는 규칙은 일치 수준이 가장 강하고 부정에 의한 일치 수준(즉, 지정된 프로세스를 제외한 모든 프로세스에 적용되는 규칙)이 그 뒤를 이으며, 가장 낮은 일치 수준에는 전역 일치, 즉 모든 프로세스에 적용되는 규칙이 있습니다.</translation>
+프로세스 일치 수준은 특수성보다 높은 우선 순위를 가지며 규칙이 지정된 프로세스에 적용되는 방식을 설명합니다. 프로세스 이름 또는 그룹별로 적용되는 규칙은 일치 수준이 가장 강하고 부정에 의한 일치 수준 (즉, 지정된 프로세스를 제외한 모든 프로세스에 적용되는 규칙)이 그 뒤를 이으며, 가장 낮은 일치 수준에는 전역 일치, 즉 모든 프로세스에 적용되는 규칙이 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1732"/>
@@ -4273,7 +4273,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1760"/>
         <source>When the Privacy Mode is enabled, sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need explicit access to be readable and/or writable. In this mode, Rule Specificity is always enabled.</source>
-        <translation>개인 정보 모드가 활성화된 경우 샌드박스 프로세스는 C:만 읽을 수 있습니다.\Windows\*, C:\Program Files\* 및 HKLM 레지스트리의 일부 다른 위치에서는 읽기 및/또는 쓰기 가능하려면 명시적 접근 권한이 필요합니다. 이 모드에서는 규칙 특정성이 항상 활성화됩니다.</translation>
+        <translation>개인 정보 모드가 활성화된 경우 샌드박스 프로세스는 C:만 읽을 수 있습니다. \Windows\*, C:\Program Files\* 및 HKLM 레지스트리의 일부 다른 위치에서는 읽기 및/또는 쓰기 가능하려면 명시적 접근 권한이 필요합니다. 이 모드에서는 규칙 특정성이 항상 활성화됩니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1777"/>
@@ -4358,7 +4358,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2160"/>
         <source>Open access to Windows Local Security Authority</source>
-        <translation>Windows Local Security Authority에 대한 개방형 접근 권한</translation>
+        <translation>Windows 로컬 보안 기관에 대한 개방형 접근 권한</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="420"/>
@@ -4398,7 +4398,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2132"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
-        <translation>기본적으로 RpcMgmtSetComTimeout 사용을 사용하지 않도록 설정합니다(호환성 문제가 해결될 수 있음)</translation>
+        <translation>기본적으로 RpcMgmtSetComTimeout 사용을 사용하지 않도록 설정합니다 (호환성 문제가 해결될 수 있음)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2234"/>
@@ -4413,7 +4413,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2248"/>
         <source>Security Filtering used by Sandboxie to enforce filesystem and registry access restrictions, as well as to restrict process access.</source>
-        <translation>Sandboxie에서 사용하는 보안 필터링은 파일 시스템 및 레지스트리 액세스 제한을 적용하고 프로세스 접근을 제한하는 데 사용됩니다.</translation>
+        <translation>Sandboxie에서 사용하는 보안 필터링은 파일 시스템 및 레지스트리 접근 제한을 적용하고 프로세스 접근을 제한하는 데 사용됩니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2258"/>
@@ -4480,7 +4480,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2486"/>
         <source>Here you can specify actions to be executed automatically on various box events.</source>
-        <translation>여기서 다양한 박스 이벤트에 대해 자동으로 실행할 액션을 지정할 수 있습니다.</translation>
+        <translation>여기서 다양한 박스 이벤트에 대해 자동으로 실행할 동작을 지정할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2511"/>
@@ -4510,7 +4510,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2578"/>
         <source>Restrict Resource Access monitor to administrators only</source>
-        <translation>샌드박스 프로세스에서 다른 박스에서 실행 중인 프로세스를 볼 수 없도록 허용관리자로만 리소스 접근 모니터 제한</translation>
+        <translation>리소스 접근 모니터를 관리자로만 제한</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2585"/>
@@ -4535,7 +4535,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <location filename="Forms/OptionsWindow.ui" line="2636"/>
         <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
         <oldsource>API call trace (requirers logapi to be installed in the sbie dir)</oldsource>
-        <translation type="unfinished">API 호출 추적 (sbiedir에 logapi를 설치해야 함)</translation>
+        <translation>API 호출 추적 (Sbie 디렉토리에 LogAPI를 설치해야 함)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2656"/>
@@ -4564,12 +4564,12 @@ You can customize the logging using the ini by specifying
 instead of &quot;*&quot;.</source>
         <translation>드라이버에 표시된 모든 접근 이벤트를 리소스 접근 로그에 기록합니다.
 
-이 옵션은 이벤트 마스크를 &quot;*&quot; - 모든 접근 이벤트로 설정합니다
-대신
-&quot;A&quot; - 허용된 액세스
-&quot;D&quot; - 거부된 액세스
+이 옵션은 이벤트 마스크를 &quot;*&quot;로 설정합니다 - 모든 접근 이벤트
+&quot;*&quot; 대신
+&quot;A&quot; - 허용된 접근
+&quot;D&quot; - 거부된 접근
 &quot;I&quot; - 접근 요청 무시
-&quot;*&quot;을 지정하여 ini를 사용하여 로깅을 사용자 지정할 수 있습니다.</translation>
+를 지정하여 ini를 사용하여 로깅을 사용자 지정할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2723"/>
@@ -4866,7 +4866,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="73"/>
         <source>Run Sandboxed</source>
-        <translation>샌드박스 실행</translation>
+        <translation>샌드박스로 실행</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="83"/>
@@ -4939,7 +4939,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="313"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation>탐색기의 상황에 맞는 메뉴에 &apos;샌드박스 실행&apos; 추가</translation>
+        <translation>탐색기의 상황에 맞는 메뉴에 &apos;샌드박스로 실행&apos; 추가</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="104"/>
@@ -4964,7 +4964,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="320"/>
         <source>Add &apos;Run Un-Sandboxed&apos; to the context menu</source>
-        <translation>상황에 맞는 메뉴에 &apos;샌드박스가 없는 실행&apos; 추가</translation>
+        <translation>상황에 맞는 메뉴에 &apos;샌드박스가 아닌 실행&apos; 추가</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="344"/>
@@ -5039,12 +5039,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="877"/>
         <source>Password must be entered in order to make changes</source>
-        <translation>변경하려면 암호를 입력해야 합니다</translation>
+        <translation>변경하려면 암호 입력</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="863"/>
         <source>Only Administrator user accounts can make changes</source>
-        <translation>관리자 사용자 계정만 변경할 수 있습니다</translation>
+        <translation>관리자 사용자 계정만 변경할 수 있음</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="111"/>
@@ -5055,7 +5055,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="870"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
         <oldsource>Only Administrator user accounts can use Pause Forced Programs Rules command</oldsource>
-        <translation>관리자 사용자 계정만 프로그램 일시 중지 명령을 사용할 수 있습니다</translation>
+        <translation>관리자 사용자 계정만 프로그램 일시 중지 명령을 사용할 수 있음</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="582"/>
@@ -5091,7 +5091,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="128"/>
         <source>Count and display the disk space occupied by each sandbox</source>
         <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
-        <translation>각 샌드박스가 차지하는 디스크 공간 카운트 및 표시</translation>
+        <translation>각 샌드박스가 차지하는 디스크 공간을 계산하고 표시</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="200"/>
@@ -5223,7 +5223,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="826"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>프로그램이 시작되지 않을 때 메시지 1308을 발행합니다</translation>
+        <translation>프로그램이 시작되지 않을 때 메시지 1308 발행</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="834"/>

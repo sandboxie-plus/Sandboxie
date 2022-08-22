@@ -203,7 +203,7 @@ void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Pa
 				QString UpdateMsg = Data["updateMsg"].toString();
 				QString UpdateUrl = Data["updateUrl"].toString();
 
-				QString FullMessage = UpdateMsg.isEmpty() ? tr("<p>There is a new version of Sandboxie-Plus available.<br /><b><font color='red'>New version:</font> %1</b></p>").arg(VersionStr) : UpdateMsg;
+				QString FullMessage = UpdateMsg.isEmpty() ? tr("<p>There is a new version of Sandboxie-Plus available.<br /><font color='red'><b>New version:</b></font> <b>%1</b></p>").arg(VersionStr) : UpdateMsg;
 				if (!DownloadUrl.isEmpty())
 					FullMessage += tr("<p>Do you want to download the latest version?</p>");
 				else if (!UpdateUrl.isEmpty())

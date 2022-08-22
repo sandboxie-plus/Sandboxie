@@ -352,10 +352,12 @@ bool COnlineUpdater::IsVersionNewer(const QString& VersionStr)
 void COnlineUpdater::CheckPendingUpdate()
 {
 	QString VersionStr = theConf->GetString("Options/PendingUpdateVersion");
-	if (!IsVersionNewer(VersionStr))  {
+	bool bIsNewVersion = IsVersionNewer(VersionStr);
+	if (!bIsNewVersion)
 		theConf->DelValue("Options/PendingUpdateVersion");
+	QString FilePath = theConf->GetString("Options/PendingUpdatePackage");
+	if (!bIsNewVersion || !QFile::exists(FilePath))
 		theConf->DelValue("Options/PendingUpdatePackage");
-	}
 }
 
 void COnlineUpdater::DownloadUpdate()

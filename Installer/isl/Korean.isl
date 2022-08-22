@@ -1,19 +1,19 @@
-; *** Inno Setup version 6.1.0+ Korean messages ***
+﻿; *** Inno Setup version 6.1.0+ Korean messages ***
 
-; Translator: VenusGirl (venusgirl@kakao.com)
+; Translator: VenusGirl (venusgirl@outlook.com)
 ;
 ; To download user-contributed translations of this file, go to:
 ;   https://jrsoftware.org/files/istrans/
 
 ; 참고: 이 텍스트를 번역할 때는 아직 없는 메시지의 끝에
-; 마침표( .)를 추가하지 마십시오. 이러한 메시지에서 Inno Setup에서
+; 마침표(.)를 추가하지 마십시오. 이러한 메시지에서 Inno Setup에서
 ; 마침표를 자동으로 추가하기 때문입니다 (마침표를 추가하면
 ; 두 개의 마침표가 표시됨).
 
 [LangOptions]
 ; 다음 세 항목은 매우 중요합니다. 도움말 파일의
 ; '[LangOptions] 섹션' 항목을 읽고 이해하십시오.
-LanguageName=Korean
+LanguageName=한국어
 LanguageID=$0412
 LanguageCodePage=949
 ; 번역할 언어가 특수 글꼴 또는 크기를 필요로 하는 경우
@@ -115,7 +115,7 @@ BrowseDialogLabel=아래 목록에서 폴더를 선택한 후 확인을 클릭�
 NewFolderName=새 폴더
 
 ; *** "Welcome" wizard page
-WelcomeLabel1=설정 마법사에 오신 것을 환영합니다
+WelcomeLabel1=[name] 설치 마법사에 오신 것을 환영합니다
 WelcomeLabel2=컴퓨터에 [name/ver]가 설치됩니다.%n%n계속하기 전에 다른 모든 응용 프로그램을 닫는 것이 좋습니다.
 
 ; *** "Password" wizard page
@@ -149,8 +149,8 @@ UserInfoSerial=일련 번호:(&S):
 UserInfoNameRequired=이름을 입력해야 합니다.
 
 ; *** "Select Destination Location" wizard page
-WizardSelectDir=설치 위치 선택
-SelectDirDesc=[name]의 설치 위치를 선택하십시오.
+WizardSelectDir=대상 위치 선택
+SelectDirDesc=[name]을(를) 어디에 설치하시겠습니까?
 SelectDirLabel3=다음 폴더에 [name]을(를) 설치합니다.
 SelectDirBrowseLabel=계속하려면 다음을, 다른 폴더를 선택하려면 찾아보기를 클릭하십시오.
 DiskSpaceGBLabel=이 프로그램은 최소 [gb] GB의 디스크 여유 공간이 필요합니다.

@@ -336,6 +336,7 @@ void CSandMan::CreateUI()
 		m_pSeparator = NULL;
 		CreateLabel();
 		m_pMenuLayout->addWidget(m_pLabel);
+		UpdateLabel();
 	}
 
 	CreateView(iViewMode);
@@ -729,6 +730,7 @@ void CSandMan::CreateToolBar()
 	
 	CreateLabel();
 	m_pToolBar->addWidget(m_pLabel);
+	UpdateLabel();
 }
 
 void CSandMan::CreateLabel()
@@ -744,14 +746,12 @@ void CSandMan::CreateLabel()
 	fnt.setBold(true);
 	//fnt.setWeight(QFont::DemiBold);
 	m_pLabel->setFont(fnt);
-
-	COnlineUpdater::Instance()->CheckPendingUpdate();
-
-	UpdateLabel();
 }
 
 void CSandMan::UpdateLabel()
 {
+	COnlineUpdater::Instance()->CheckPendingUpdate();
+
 	QString LabelText;
 	QString LabelTip;
 

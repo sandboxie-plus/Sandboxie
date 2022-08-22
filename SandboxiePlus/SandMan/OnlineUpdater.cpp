@@ -83,7 +83,7 @@ void COnlineUpdater::GetUpdates(QObject* receiver, const char* member, const QVa
 	m_JobQueue.insert(pReply, pJob);
 }
 
-void COnlineUpdater::CheckForUpdates(bool bManual)
+void COnlineUpdater::CheckForUpdates(bool bManual, bool bDownload)
 {
 	if (!m_pUpdateProgress.isNull())
 		return;
@@ -94,6 +94,7 @@ void COnlineUpdater::CheckForUpdates(bool bManual)
 
 	QVariantMap Params;
 	Params["manual"] = bManual;
+	Params["download"] = bDownload;
 	GetUpdates(this, SLOT(OnUpdateData(const QVariantMap&, const QVariantMap&)), Params);
 }
 
@@ -117,6 +118,7 @@ void COnlineUpdater::OnUpdateCheck()
 void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Params)
 {
 	bool bManual = Params["manual"].toBool();
+	bool bDownload = Params["download"].toBool();
 
 	if (!m_pUpdateProgress.isNull()) {
 		m_pUpdateProgress->Finish(SB_OK);
@@ -181,15 +183,7 @@ void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Pa
 	QString VersionStr = Data["version"].toString();
 	if (!VersionStr.isEmpty()) //&& VersionStr != GetVersion())
 	{
-		quint8 myVersion[4] = { VERSION_UPD, VERSION_REV, VERSION_MIN, VERSION_MJR }; // ntohl
-		quint32 MyVersion = *(quint32*)&myVersion;
-
-		quint32 Version = 0;
-		QStringList Nums = VersionStr.split(".");
-		for (int i = 0, Bits = 24; i < Nums.count() && Bits >= 0; i++, Bits -= 8)
-			Version |= (Nums[i].toInt() & 0xFF) << Bits;
-
-		if (Version > MyVersion)
+		if (IsVersionNewer(VersionStr))
 		if (bManual || !IgnoredUpdates.contains(VersionStr)) // when checked manually always show result
 		{
 			bNothing = false;
@@ -199,14 +193,17 @@ void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Pa
 			//	'sha256'
 			//	'signature'
 
-			if (!DownloadUrl.isEmpty() && theConf->GetInt("Options/DownloadUpdates", 0) == 1)
+			if (!DownloadUrl.isEmpty() && (bDownload || theConf->GetInt("Options/DownloadUpdates", 0) == 1)) 
+			{
+				theConf->SetValue("Options/PendingUpdateVersion", VersionStr);
 				DownloadUpdates(DownloadUrl, bManual);
+			}
 			else
 			{
 				QString UpdateMsg = Data["updateMsg"].toString();
 				QString UpdateUrl = Data["updateUrl"].toString();
 
-				QString FullMessage = UpdateMsg.isEmpty() ? tr("<p>There is a new version of Sandboxie-Plus available.<br /><font color='red'>New version:</font> <b>%1</b></p>").arg(VersionStr) : UpdateMsg;
+				QString FullMessage = UpdateMsg.isEmpty() ? tr("<p>There is a new version of Sandboxie-Plus available.<br /><b><font color='red'>New version:</font> %1</b></p>").arg(VersionStr) : UpdateMsg;
 				if (!DownloadUrl.isEmpty())
 					FullMessage += tr("<p>Do you want to download the latest version?</p>");
 				else if (!UpdateUrl.isEmpty())
@@ -230,15 +227,26 @@ void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Pa
 
 				mb.exec();
 
-				if (mb.isChecked())
+				if (mb.isChecked()) {
+					theConf->DelValue("Options/PendingUpdateVersion");
+					theGUI->UpdateLabel();
 					theConf->SetValue("Options/IgnoredUpdates", IgnoredUpdates << VersionStr);
+				}
 
 				if (mb.clickedStandardButton() == QDialogButtonBox::Yes)
 				{
-					if (!DownloadUrl.isEmpty())
+					if (!DownloadUrl.isEmpty()) 
+					{
+						theConf->SetValue("Options/PendingUpdateVersion", VersionStr);
 						DownloadUpdates(DownloadUrl, bManual);
+					} 
 					else
 						QDesktopServices::openUrl(UpdateUrl);
+				}
+				else if (!mb.isChecked())
+				{
+					theConf->SetValue("Options/PendingUpdateVersion", VersionStr);
+					theGUI->UpdateLabel();
 				}
 			}
 		}
@@ -246,6 +254,8 @@ void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Pa
 
 	if (bNothing) 
 	{
+		theConf->DelValue("Options/PendingUpdateVersion");
+		theGUI->UpdateLabel();
 		theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addDays(7).toSecsSinceEpoch());
 
 		if (bManual) {
@@ -319,6 +329,38 @@ void COnlineUpdater::OnUpdateDownload()
 
 	if (bManual)
 		InstallUpdate();
+}
+
+bool COnlineUpdater::IsVersionNewer(const QString& VersionStr)
+{
+#ifdef _DEBUG
+	if (QApplication::keyboardModifiers() & Qt::ControlModifier)
+		return true;
+#endif
+
+	quint8 myVersion[4] = { VERSION_UPD, VERSION_REV, VERSION_MIN, VERSION_MJR }; // ntohl
+	quint32 MyVersion = *(quint32*)&myVersion;
+
+	quint32 Version = 0;
+	QStringList Nums = VersionStr.split(".");
+	for (int i = 0, Bits = 24; i < Nums.count() && Bits >= 0; i++, Bits -= 8)
+		Version |= (Nums[i].toInt() & 0xFF) << Bits;
+
+	return (Version > MyVersion);
+}
+
+void COnlineUpdater::CheckPendingUpdate()
+{
+	QString VersionStr = theConf->GetString("Options/PendingUpdateVersion");
+	if (!IsVersionNewer(VersionStr))  {
+		theConf->DelValue("Options/PendingUpdateVersion");
+		theConf->DelValue("Options/PendingUpdatePackage");
+	}
+}
+
+void COnlineUpdater::DownloadUpdate()
+{
+	CheckForUpdates(true, true);
 }
 
 void COnlineUpdater::InstallUpdate()

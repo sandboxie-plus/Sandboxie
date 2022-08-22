@@ -34,11 +34,13 @@ public:
 
 	void				GetUpdates(QObject* receiver, const char* member, const QVariantMap& Params = QVariantMap());
 
+	void				DownloadUpdate();
 	void				InstallUpdate();
 
 	void				UpdateCert();
 
-	void				CheckForUpdates(bool bManual = true);
+	void				CheckPendingUpdate();
+	void				CheckForUpdates(bool bManual = true, bool bDownload = false);
 	void				DownloadUpdates(const QString& DownloadUrl, bool bManual);
 
 private slots:
@@ -52,6 +54,7 @@ private slots:
 	void				OnCertCheck();
 
 protected:
+	bool				IsVersionNewer(const QString& VersionStr);
 
 	CNetworkAccessManager*	m_RequestManager;
 	CSbieProgressPtr	m_pUpdateProgress;

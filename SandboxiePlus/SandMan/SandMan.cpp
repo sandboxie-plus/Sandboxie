@@ -745,6 +745,8 @@ void CSandMan::CreateLabel()
 	//fnt.setWeight(QFont::DemiBold);
 	m_pLabel->setFont(fnt);
 
+	COnlineUpdater::Instance()->CheckPendingUpdate();
+
 	UpdateLabel();
 }
 
@@ -753,20 +755,20 @@ void CSandMan::UpdateLabel()
 	QString LabelText;
 	QString LabelTip;
 
-	if (!theConf->GetString("Options/PendingUpdatePackage").isEmpty()) 
+	if (!theConf->GetString("Options/PendingUpdatePackage").isEmpty())
 	{
-		LabelText = tr("<a href=\"sbie://update/package\" style=\"color: red;\">There is a new build of Sandboxie-Plus available</a>");
-
-		//QPalette palette = m_pLabel->palette();
-		//palette.setColor(QPalette::Link, Qt::red);
-		//palette.setColor(m_pLabel->backgroundRole(), Qt::yellow);
-		//palette.setColor(m_pLabel->foregroundRole(), Qt::red);
-		//m_pLabel->setAutoFillBackground(true);
-		//m_pLabel->setPalette(palette);
-
-		//m_pLabel->setStyleSheet("QLabel { link-color : red; }");
+		LabelText = tr("<a href=\"sbie://update/package\" style=\"color: red;\">There is a new build of Sandboxie-Plus ready</a>");
 
 		LabelTip = tr("Click to install update");
+
+		//auto neon = new CNeonEffect(10, 4, 180); // 140
+		//m_pLabel->setGraphicsEffect(NULL);
+	}
+	else if (!theConf->GetString("Options/PendingUpdateVersion").isEmpty())
+	{
+		LabelText = tr("<a href=\"sbie://update/check\" style=\"color: red;\">There is a new build of Sandboxie-Plus available</a>");
+
+		LabelTip = tr("Click to download update");
 
 		//auto neon = new CNeonEffect(10, 4, 180); // 140
 		//m_pLabel->setGraphicsEffect(NULL);
@@ -2618,6 +2620,8 @@ void CSandMan::OpenUrl(const QUrl& url)
 	QString query = url.query();
 
 	if (scheme == "sbie") {	
+		if (path == "/check")
+			return COnlineUpdater::Instance()->DownloadUpdate();
 		if (path == "/package")
 			return COnlineUpdater::Instance()->InstallUpdate();
 		if (path == "/cert")

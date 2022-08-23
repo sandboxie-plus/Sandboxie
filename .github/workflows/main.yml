@@ -69,7 +69,7 @@ jobs:
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
       - name: Installing Jom
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache-qt.outputs.cache-hit != 'true'
         run: SandboxiePlus\install_jom.cmd
 
       - name: Build Sandboxie-Plus 64 bit

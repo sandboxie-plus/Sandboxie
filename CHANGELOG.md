@@ -15,8 +15,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- the message can be re-enabled with "NotifyForceProcessDisabled=y"
 
 ### Fixed
-- fixed compatibility issue with Proxyfier [#2163](https://github.com/sandboxie-plus/Sandboxie/issues/2163)
-
+- fixed compatibility issue with Proxifier [#2163](https://github.com/sandboxie-plus/Sandboxie/issues/2163)
+- fixed encoding issue with Korean translation [#2173](https://github.com/sandboxie-plus/Sandboxie/pull/2173)
 
 
 

@@ -8,3 +8,7 @@ updates:
       # Check for updates to GitHub Actions
       interval: "weekly"
       day: "tuesday"
+    ignore:
+      # Ignore patch updates for actions/cache
+      - dependency-name: "actions/cache"
+        update-types: ["version-update:semver-patch"]

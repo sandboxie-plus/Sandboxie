@@ -240,13 +240,9 @@
         <translation>Non mostrare questo avviso in futuro.</translation>
     </message>
     <message>
-        <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;New version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;È disponibile una nuova versione di Sandboxie Plus.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Nuova versione:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
-    </message>
-    <message>
         <location filename="OnlineUpdater.cpp" line="206"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;New version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;È disponibile una nuova versione di Sandboxie Plus.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;Nuova versione:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="208"/>
@@ -434,10 +430,6 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
         <location filename="Windows/OptionsAccess.cpp" line="24"/>
         <source>Browse for Folder</source>
         <translation>Cerca cartella</translation>
-    </message>
-    <message>
-        <source>Search for Options</source>
-        <translation type="vanished">Cerca opzioni</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="391"/>
@@ -1604,10 +1596,6 @@ Percorso completo: %4</translation>
         <translation>Pulizia</translation>
     </message>
     <message>
-        <source>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;There is a new build of Sandboxie-Plus available&lt;/a&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;È disponibile una nuova versione di Sandboxie Plus&lt;/a&gt;</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="762"/>
         <source>Click to install update</source>
         <translation>Clicca per installare l&apos;aggiornamento</translation>
@@ -1799,17 +1787,17 @@ Effettuare la pulizia?</translation>
     <message>
         <location filename="SandMan.cpp" line="760"/>
         <source>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;There is a new build of Sandboxie-Plus ready&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;Una nuova versione di Sandboxie Plus è pronta per essere installata&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="769"/>
         <source>&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;There is a new build of Sandboxie-Plus available&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;È disponibile una nuova versione di Sandboxie Plus&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="771"/>
         <source>Click to download update</source>
-        <translation type="unfinished"></translation>
+        <translation>Clicca per scaricare l&apos;aggiornamento</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="778"/>
@@ -3077,10 +3065,6 @@ Scegliere No per selezionare: %2</translation>
         <source>%1</source>
         <oldsource>%1 %</oldsource>
         <translation>%1</translation>
-    </message>
-    <message>
-        <source>Search for Settings</source>
-        <translation type="vanished">Cerca impostazioni</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="278"/>

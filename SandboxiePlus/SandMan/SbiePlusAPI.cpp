@@ -125,6 +125,7 @@ CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSand
 	m_bPrivacyEnhanced = false;
 	m_bApplicationCompartment = false;
 	m_iUnsecureDebugging = 0;
+	m_bRootAccessOpen = false;
 
 	m_TotalSize = theConf->GetValue("SizeCache/" + m_Name, -1).toLongLong();
 
@@ -147,8 +148,7 @@ void CSandBoxPlus::UpdateDetails()
 	//m_bLogApiFound = GetTextList("OpenPipePath", false).contains("\\Device\\NamedPipe\\LogAPI");
 	m_bLogApiFound = false;
 	QStringList InjectDlls = GetTextList("InjectDll", false);
-	foreach(const QString & InjectDll, InjectDlls)
-	{
+	foreach(const QString & InjectDll, InjectDlls) {
 		if (InjectDll.contains("logapi", Qt::CaseInsensitive)) {
 			m_bLogApiFound = true;
 			break;
@@ -156,15 +156,13 @@ void CSandBoxPlus::UpdateDetails()
 	}
 
 	m_bINetBlocked = false;
-	foreach(const QString& Entry, GetTextList("ClosedFilePath", false))
-	{
+	foreach(const QString& Entry, GetTextList("ClosedFilePath", false)) {
 		if (Entry == "!<InternetAccess>,InternetAccessDevices") {
 			m_bINetBlocked = true;
 			break;
 		}
 	}
-	foreach(const QString& Entry, GetTextList("AllowNetworkAccess", false))
-	{
+	foreach(const QString& Entry, GetTextList("AllowNetworkAccess", false)) {
 		if (Entry == "!<InternetAccess>,n") {
 			m_bINetBlocked = true;
 			break;
@@ -175,6 +173,16 @@ void CSandBoxPlus::UpdateDetails()
 	m_bSharesAllowed = GetBool("BlockNetworkFiles", true) == false;
 
 	m_bDropRights = GetBool("DropAdminRights", false);
+
+	m_bRootAccessOpen = false;
+	foreach(const QString& Setting, QString("OpenFilePath|OpenKeyPath|OpenIpcPath").split("|")) {
+		foreach(const QString& Entry, GetTextList(Setting, false)) {
+			if (Entry == "*" || Entry == "\\") {
+				m_bRootAccessOpen = true;
+				break;
+			}
+		}
+	}
 
 	if (CheckUnsecureConfig())
 		m_iUnsecureDebugging = 1;
@@ -298,7 +306,9 @@ QString CSandBoxPlus::GetStatusStr() const
 	//if (m_IsEmpty)
 	//	Status.append(tr("Empty"));
 
-	if (m_bApplicationCompartment)
+	if (m_bRootAccessOpen)
+		Status.append(tr("OPEN Root Access"));
+	else if (m_bApplicationCompartment)
 		Status.append(tr("Application Compartment"));
 	else if (m_iUnsecureDebugging == 1)
 		Status.append(tr("NOT SECURE"));
@@ -326,6 +336,9 @@ QString CSandBoxPlus::GetStatusStr() const
 
 CSandBoxPlus::EBoxTypes CSandBoxPlus::GetTypeImpl() const
 {
+	if (m_bRootAccessOpen)
+		return eOpen;
+
 	if (m_bApplicationCompartment && m_bPrivacyEnhanced)
 		return eAppBoxPlus;
 	if (m_bApplicationCompartment)

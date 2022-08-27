@@ -158,6 +158,7 @@ protected:
 	bool					m_bPrivacyEnhanced;
 	bool					m_bApplicationCompartment;
 	int						m_iUnsecureDebugging;
+	bool					m_bRootAccessOpen;
 
 	quint64					m_TotalSize;
 

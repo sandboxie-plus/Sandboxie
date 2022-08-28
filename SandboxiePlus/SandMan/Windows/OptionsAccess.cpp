@@ -444,7 +444,7 @@ void COptionsWindow::CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave)
 		{
  			if (theConf->GetInt("Options/WarnOpenCOM", -1) == -1) {
 				bool State = false;
-				if (CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Opening all IPC access, also opens COM access, do you want to restrict COM to the sandbox non the less?")
+				if (CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Opening all IPC access also opens COM access, do you still want to restrict COM to the sandbox?")
 				 , tr("Don't ask in future"), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) == QDialogButtonBox::Yes)
 					SetTemplate("BoxedCOM", true); // Normal overrides Open even without rule specificity :D
 				if (State)

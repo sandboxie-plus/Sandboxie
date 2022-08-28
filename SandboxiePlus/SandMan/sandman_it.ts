@@ -307,42 +307,42 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
         <translation>Sandboxie Plus - Opzioni &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="359"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="363"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="360"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="364"/>
         <source>On Start</source>
         <translation>All&apos;avvio</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="360"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="368"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="372"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="361"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="369"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="373"/>
         <source>Run Command</source>
         <translation>Avvia comando</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="364"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="365"/>
         <source>Start Service</source>
         <translation>Avvia servizio</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="367"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="368"/>
         <source>On Init</source>
         <translation>All&apos;inizializzazione</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="371"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="372"/>
         <source>On Delete</source>
         <translation>Alla rimozione</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="382"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="404"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="415"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="383"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="405"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="416"/>
         <source>Please enter the command line to be executed</source>
         <translation>Immettere la riga di comando da eseguire</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="549"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="550"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
@@ -422,12 +422,12 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
         <translation>Sfoglia programma</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="23"/>
+        <location filename="Windows/OptionsAccess.cpp" line="24"/>
         <source>Browse for File</source>
         <translation>Cerca file</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="24"/>
+        <location filename="Windows/OptionsAccess.cpp" line="25"/>
         <source>Browse for Folder</source>
         <translation>Cerca cartella</translation>
     </message>
@@ -462,7 +462,7 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
         <translation>Seleziona programma</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="393"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="394"/>
         <source>Please enter a service identifier</source>
         <translation>Inserire un identificativo di servizio</translation>
     </message>
@@ -485,8 +485,8 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="694"/>
         <location filename="Windows/OptionsWindow.cpp" line="710"/>
-        <location filename="Windows/OptionsAccess.cpp" line="299"/>
-        <location filename="Windows/OptionsAccess.cpp" line="494"/>
+        <location filename="Windows/OptionsAccess.cpp" line="300"/>
+        <location filename="Windows/OptionsAccess.cpp" line="516"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
         <location filename="Windows/OptionsNetwork.cpp" line="440"/>
         <location filename="Windows/OptionsNetwork.cpp" line="532"/>
@@ -520,7 +520,7 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
         <translation>Cartella</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="274"/>
+        <location filename="Windows/OptionsAccess.cpp" line="275"/>
         <location filename="Windows/OptionsForce.cpp" line="120"/>
         <location filename="Windows/OptionsRecovery.cpp" line="94"/>
         <location filename="Windows/OptionsRecovery.cpp" line="105"/>
@@ -538,84 +538,84 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
         <translation>Principale</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="239"/>
+        <location filename="Windows/OptionsAccess.cpp" line="240"/>
         <source>Closed</source>
         <translation>Non consentito</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="240"/>
+        <location filename="Windows/OptionsAccess.cpp" line="241"/>
         <source>Closed RT</source>
         <translation>WinRT non consentito</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="241"/>
+        <location filename="Windows/OptionsAccess.cpp" line="242"/>
         <source>Read Only</source>
         <translation>Sola lettura</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="236"/>
+        <location filename="Windows/OptionsAccess.cpp" line="237"/>
         <source>Normal</source>
         <translation>Normale</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="237"/>
+        <location filename="Windows/OptionsAccess.cpp" line="238"/>
         <source>Open</source>
         <translation>Consenti</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="238"/>
+        <location filename="Windows/OptionsAccess.cpp" line="239"/>
         <source>Open for All</source>
         <translation>Consenti tutto</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="242"/>
+        <location filename="Windows/OptionsAccess.cpp" line="243"/>
         <source>Box Only (Write Only)</source>
         <translation>Solo area virtuale (sola scrittura)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="244"/>
-        <location filename="Windows/OptionsAccess.cpp" line="257"/>
+        <location filename="Windows/OptionsAccess.cpp" line="245"/>
+        <location filename="Windows/OptionsAccess.cpp" line="258"/>
         <source>Unknown</source>
         <translation>Sconosciuto</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="251"/>
+        <location filename="Windows/OptionsAccess.cpp" line="252"/>
         <source>File/Folder</source>
         <translation>File/Cartella</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="252"/>
+        <location filename="Windows/OptionsAccess.cpp" line="253"/>
         <source>Registry</source>
         <translation>Registro</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="253"/>
+        <location filename="Windows/OptionsAccess.cpp" line="254"/>
         <source>IPC Path</source>
         <translation>Percorso IPC</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="254"/>
+        <location filename="Windows/OptionsAccess.cpp" line="255"/>
         <source>Wnd Class</source>
         <translation>Classe finestra</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="255"/>
+        <location filename="Windows/OptionsAccess.cpp" line="256"/>
         <source>COM Object</source>
         <translation>Oggetto COM</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="262"/>
+        <location filename="Windows/OptionsAccess.cpp" line="263"/>
         <source>Select File</source>
         <translation>Seleziona file</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="262"/>
+        <location filename="Windows/OptionsAccess.cpp" line="263"/>
         <source>All Files (*.*)</source>
         <translation>Tutti i file (*.*)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="294"/>
-        <location filename="Windows/OptionsAccess.cpp" line="490"/>
+        <location filename="Windows/OptionsAccess.cpp" line="295"/>
+        <location filename="Windows/OptionsAccess.cpp" line="512"/>
         <location filename="Windows/OptionsNetwork.cpp" line="435"/>
         <location filename="Windows/OptionsNetwork.cpp" line="528"/>
         <location filename="Windows/OptionsNetwork.cpp" line="641"/>
@@ -623,17 +623,27 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
         <translation>Tutti i programmi</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="420"/>
+        <location filename="Windows/OptionsAccess.cpp" line="427"/>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
         <translation>Gli oggetti COM richiedono il rispettivo GUID, come: {00000000-0000-0000-0000-000000000000}</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="426"/>
+        <location filename="Windows/OptionsAccess.cpp" line="433"/>
         <source>RT interfaces must be specified by their name.</source>
         <translation>Le interfacce RT devono essere specificate per nome.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="469"/>
+        <location filename="Windows/OptionsAccess.cpp" line="447"/>
+        <source>Opening all IPC access also opens COM access, do you still want to restrict COM to the sandbox?</source>
+        <translation>L&apos;apertura di tutti gli accessi IPC aprirà anche l&apos;accesso COM. Limitare l&apos;accesso COM nell&apos;area virtuale?</translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsAccess.cpp" line="448"/>
+        <source>Don&apos;t ask in future</source>
+        <translation>Non chiedere in futuro</translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsAccess.cpp" line="491"/>
         <location filename="Windows/OptionsGrouping.cpp" line="278"/>
         <location filename="Windows/OptionsGrouping.cpp" line="302"/>
         <location filename="Windows/OptionsNetwork.cpp" line="507"/>
@@ -641,7 +651,7 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
         <translation>I valori predefiniti non possono essere modificati.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="535"/>
+        <location filename="Windows/OptionsAccess.cpp" line="557"/>
         <location filename="Windows/OptionsRecovery.cpp" line="132"/>
         <source>Template values can not be removed.</source>
         <translation>I valori predefiniti non possono essere rimossi.</translation>
@@ -657,7 +667,7 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
         <translation>Immettere l&apos;estensione del file da escludere</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="434"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="435"/>
         <source>Please enter a program file name</source>
         <translation>Immettere il nome del processo (es. nomefile.exe)</translation>
     </message>
@@ -1118,22 +1128,22 @@ Percorso completo: %4</translation>
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="2835"/>
+        <location filename="SandMan.cpp" line="2838"/>
         <source>Waiting for folder: %1</source>
         <translation>In attesa della cartella: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2836"/>
+        <location filename="SandMan.cpp" line="2839"/>
         <source>Deleting folder: %1</source>
         <translation>Eliminazione della cartella: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2837"/>
+        <location filename="SandMan.cpp" line="2840"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>Unione cartelle: %1 &gt;&gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2838"/>
+        <location filename="SandMan.cpp" line="2841"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>Completamento unione istantanea...</translation>
     </message>
@@ -1210,22 +1220,22 @@ Percorso completo: %4</translation>
         <translation>Sandboxie Plus v%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2739"/>
+        <location filename="SandMan.cpp" line="2742"/>
         <source>Reset Columns</source>
         <translation>Reimposta colonne</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2740"/>
+        <location filename="SandMan.cpp" line="2743"/>
         <source>Copy Cell</source>
         <translation>Copia cella</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2741"/>
+        <location filename="SandMan.cpp" line="2744"/>
         <source>Copy Row</source>
         <translation>Copia riga</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2742"/>
+        <location filename="SandMan.cpp" line="2745"/>
         <source>Copy Panel</source>
         <translation>Copia riquadro</translation>
     </message>
@@ -1503,7 +1513,7 @@ Percorso completo: %4</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="429"/>
-        <location filename="SandMan.cpp" line="2809"/>
+        <location filename="SandMan.cpp" line="2812"/>
         <source>About Sandboxie-Plus</source>
         <translation>Informazioni su Sandboxie Plus</translation>
     </message>
@@ -1642,7 +1652,7 @@ Effettuare la pulizia?</translation>
         <location filename="SandMan.cpp" line="1383"/>
         <location filename="SandMan.cpp" line="1509"/>
         <location filename="SandMan.cpp" line="1992"/>
-        <location filename="SandMan.cpp" line="2405"/>
+        <location filename="SandMan.cpp" line="2408"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Non mostrare più questo messaggio.</translation>
     </message>
@@ -1674,7 +1684,7 @@ Effettuare la pulizia?</translation>
     <message>
         <location filename="SandMan.cpp" line="2124"/>
         <location filename="SandMan.cpp" line="2126"/>
-        <location filename="SandMan.cpp" line="2608"/>
+        <location filename="SandMan.cpp" line="2611"/>
         <source>Sandboxie-Plus - Error</source>
         <translation>Sandboxie Plus - Errore</translation>
     </message>
@@ -1743,32 +1753,32 @@ Effettuare la pulizia?</translation>
         <translation>Immettere l&apos;intervallo in secondi per la disattivazione&lt;br /&gt;delle regole dei programmi ad avvio forzato.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2554"/>
+        <location filename="SandMan.cpp" line="2557"/>
         <source>Error Status: 0x%1 (%2)</source>
         <translation>Stato di errore: 0x%1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2555"/>
+        <location filename="SandMan.cpp" line="2558"/>
         <source>Unknown</source>
         <translation>Sconosciuto</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2578"/>
+        <location filename="SandMan.cpp" line="2581"/>
         <source>Failed to copy box data files</source>
         <translation>Impossibile copiare i dati dell&apos;area virtuale</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2583"/>
+        <location filename="SandMan.cpp" line="2586"/>
         <source>Failed to remove old box data files</source>
         <translation>Impossibile rimuovere i dati obsoleti dell&apos;area virtuale</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2590"/>
+        <location filename="SandMan.cpp" line="2593"/>
         <source>Unknown Error Status: 0x%1</source>
         <translation>Stato di errore sconosciuto: 0x%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2782"/>
+        <location filename="SandMan.cpp" line="2785"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Informazioni su Sandboxie Plus&lt;/h3&gt;&lt;p&gt;Versione %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</translation>
     </message>
@@ -2004,202 +2014,202 @@ Scegliere No per selezionare: %2</translation>
         <translation>Utilizzando il menu contestuale dell&apos;area virtuale/gruppo, è possibile spostare aree virtuali e gruppi in altri gruppi. È inoltre prevista la possibilità di utilizzare il trascinamento per spostare gli elementi. In alternativa, è possibile utilizzare i tasti freccia tenendo premuto ALT per spostare gli elementi in alto e in basso all&apos;interno del gruppo.&lt;br /&gt;È possibile creare nuove aree virtuali e gruppi dal menu Area virtuale.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2322"/>
+        <location filename="SandMan.cpp" line="2327"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
         <translation>Vuoi reimpostare i messaggi nascosti (sì), o soltanto i log dei messaggi (no)?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2403"/>
+        <location filename="SandMan.cpp" line="2406"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
         <translation>Le modifiche verranno applicate automaticamente ogni volta che il file viene salvato.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2404"/>
+        <location filename="SandMan.cpp" line="2407"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
         <translation>Le modifiche verranno applicate automaticamente non appena l&apos;editor viene chiuso.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2448"/>
+        <location filename="SandMan.cpp" line="2451"/>
         <source>Sandboxie config has been reloaded</source>
         <translation>La configurazione di Sandboxie è stata aggiornata</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2557"/>
+        <location filename="SandMan.cpp" line="2560"/>
         <source>Administrator rights are required for this operation.</source>
         <translation>Questa operazione richiede privilegi amministrativi.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2558"/>
+        <location filename="SandMan.cpp" line="2561"/>
         <source>Failed to execute: %1</source>
         <translation>Impossibile eseguire: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2559"/>
+        <location filename="SandMan.cpp" line="2562"/>
         <source>Failed to connect to the driver</source>
         <translation>Impossibile collegarsi al driver</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2560"/>
+        <location filename="SandMan.cpp" line="2563"/>
         <source>Failed to communicate with Sandboxie Service: %1</source>
         <translation>Impossibile comunicare con Sandboxie Service: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2561"/>
+        <location filename="SandMan.cpp" line="2564"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
         <translation>La versione di Sandboxie %1 risulta incompatibile. Versioni compatibili: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2562"/>
+        <location filename="SandMan.cpp" line="2565"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
         <translation>Impossibile trovare il percorso di installazione di Sandboxie.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2563"/>
+        <location filename="SandMan.cpp" line="2566"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
         <translation>Impossibile copiare la configurazione dall&apos;area virtuale %1: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2564"/>
+        <location filename="SandMan.cpp" line="2567"/>
         <source>A sandbox of the name %1 already exists</source>
         <translation>Un&apos;area virtuale %1 è già presente</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2565"/>
+        <location filename="SandMan.cpp" line="2568"/>
         <source>Failed to delete sandbox %1: %2</source>
         <translation>Impossibile cancellare area virtuale %1: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2566"/>
+        <location filename="SandMan.cpp" line="2569"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
         <translation>Il nome dell&apos;area virtuale non può superare i 32 caratteri.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2567"/>
+        <location filename="SandMan.cpp" line="2570"/>
         <source>The sandbox name can not be a device name.</source>
         <translation>Il nome dell&apos;area virtuale non può essere quello di un dispositivo.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2568"/>
+        <location filename="SandMan.cpp" line="2571"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
         <translation>Il nome dell&apos;area virtuale  può contenere solo lettere, cifre e trattini bassi che vengono visualizzati come spazi.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2569"/>
+        <location filename="SandMan.cpp" line="2572"/>
         <source>Failed to terminate all processes</source>
         <translation>Impossibile terminare tutti i processi</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2570"/>
+        <location filename="SandMan.cpp" line="2573"/>
         <source>Delete protection is enabled for the sandbox</source>
         <translation>Blocco di eliminazione attivo per quest&apos;area virtuale</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2571"/>
+        <location filename="SandMan.cpp" line="2574"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
         <translation>Tutti i processi dell&apos;area virtuale devono essere interrotti prima che il contenuto possa essere eliminato</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2572"/>
+        <location filename="SandMan.cpp" line="2575"/>
         <source>Error deleting sandbox folder: %1</source>
         <translation>Errore durante l&apos;eliminazione della cartella: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2574"/>
+        <location filename="SandMan.cpp" line="2577"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
         <translation>Occorre svuotare il contenuto dell&apos;area virtuale prima di poterla rimuovere.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2575"/>
+        <location filename="SandMan.cpp" line="2578"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>Impossibile spostare directory &apos;%1&apos; in &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2576"/>
+        <location filename="SandMan.cpp" line="2579"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
         <translation>Questa istantanea non può essere eseguita mentre i processi sono ancora in esecuzione nell&apos;area virtuale.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2577"/>
+        <location filename="SandMan.cpp" line="2580"/>
         <source>Failed to create directory for new snapshot</source>
         <translation>Impossibile creare directory su nuova istantanea</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2579"/>
+        <location filename="SandMan.cpp" line="2582"/>
         <source>Snapshot not found</source>
         <translation>Istantanea non trovata</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2580"/>
+        <location filename="SandMan.cpp" line="2583"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
         <translation>Errore durante l&apos;unione delle directory &apos;%1&apos; con &apos;%2&apos;: unione delle istantanee non riuscita.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2581"/>
+        <location filename="SandMan.cpp" line="2584"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
         <translation>Impossibile rimuovere directory di istantanea &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2582"/>
+        <location filename="SandMan.cpp" line="2585"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>Impossibile rimuovere un&apos;istantanea condivisa da istantanee successive</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2584"/>
+        <location filename="SandMan.cpp" line="2587"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
         <translation>Non sei autorizzato ad aggiornare la configurazione nel punto &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2585"/>
+        <location filename="SandMan.cpp" line="2588"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
         <translation>Salvataggio dell&apos;impostazione di configurazione %1 fallito nel punto %2: %3</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2586"/>
+        <location filename="SandMan.cpp" line="2589"/>
         <source>Can not create snapshot of an empty sandbox</source>
         <translation>Impossibile creare istantanea di un&apos;area virtuale vuota</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2587"/>
+        <location filename="SandMan.cpp" line="2590"/>
         <source>A sandbox with that name already exists</source>
         <translation>Un&apos;area virtuale con quel nome è già presente</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2588"/>
+        <location filename="SandMan.cpp" line="2591"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>La password non può superare i 64 caratteri</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2589"/>
+        <location filename="SandMan.cpp" line="2592"/>
         <source>The operation was canceled by the user</source>
         <translation>Operazione annullata dall&apos;utente</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2610"/>
+        <location filename="SandMan.cpp" line="2613"/>
         <source>Operation failed for %1 item(s).</source>
         <translation>Operazione fallita per %1 elemento(i).</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2637"/>
+        <location filename="SandMan.cpp" line="2640"/>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
         <translation>Aprire %1 nel browser dell&apos;area virtuale (sì) o all&apos;esterno (no)?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2638"/>
+        <location filename="SandMan.cpp" line="2641"/>
         <source>Remember choice for later.</source>
         <translation>Ricorda la scelta per dopo.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2790"/>
+        <location filename="SandMan.cpp" line="2793"/>
         <source>This copy of Sandboxie+ is certified for: %1</source>
         <translation>Questa copia di Sandboxie+ è certificata per: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2792"/>
+        <location filename="SandMan.cpp" line="2795"/>
         <source>Sandboxie+ is free for personal and non-commercial use.</source>
         <translation>Sandboxie+ è gratuito per uso personale e non commerciale.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2795"/>
+        <location filename="SandMan.cpp" line="2798"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>Sandboxie Plus è la continuazione open source di Sandboxie.&lt;br /&gt;Visita &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; per informazioni.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Versione driver: %1&lt;br /&gt;Funzioni attive: %2&lt;br /&gt;&lt;br /&gt;Icone by &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Traduzione italiana a cura di &lt;a href=&quot;https://www.eng2ita.net&quot;&gt;eng2ita.net&lt;/a&gt;&lt;br /&gt;</translation>
     </message>
@@ -4794,27 +4804,27 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="2825"/>
+        <location filename="SandMan.cpp" line="2828"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2826"/>
+        <location filename="SandMan.cpp" line="2829"/>
         <source>Apply</source>
         <translation>Applica</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2827"/>
+        <location filename="SandMan.cpp" line="2830"/>
         <source>Cancel</source>
         <translation>Annulla</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2828"/>
+        <location filename="SandMan.cpp" line="2831"/>
         <source>&amp;Yes</source>
         <translation>&amp;Sì</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2829"/>
+        <location filename="SandMan.cpp" line="2832"/>
         <source>&amp;No</source>
         <translation>&amp;No</translation>
     </message>

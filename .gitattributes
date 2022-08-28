@@ -1,0 +1,10 @@
+# Git - gitattributes Documentation:
+# https://www.git-scm.com/docs/gitattributes
+
+[attr]binary -diff -merge -text
+*.cmd text working-tree-encoding=UTF-8 eol=crlf
+*.bat text working-tree-encoding=UTF-8 eol=crlf
+Installer/isl/*.isl text eol=lf
+Sandboxie/msgs/*.txt text eol=crlf
+Sandboxie/msgs/report/*.txt text eol=lf
+SandboxiePlus/SandMan/*.ts text eol=lf

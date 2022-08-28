@@ -778,8 +778,8 @@ void COptionsWindow::UpdateCurrentTab()
 	}
 	else if (m_iCurrentTab == eAdvanced)
 	{
-		ui.chkOpenCOM->setChecked(GetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\epmapper") != NULL);
-
+		CheckOpenCOM();
+	
 		if (GetAccessEntry(eWnd, "", eOpen, "*") != NULL)
 		{
 			ui.chkNoWindowRename->setEnabled(false);

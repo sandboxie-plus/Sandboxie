@@ -9,10 +9,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added icons to sub tabs in the box options dialog
 - recovery and message pop-up menu options are not persisting across UI restarts any more
+- added new box color, a white box indicates that its not really a sandbox and is displayed when the user specified OpenFilePath=* or alike
 
 ### Changed
 - Sandboxie no longer issues message 1301 when forced processes are temporarily disabled
 -- the message can be re-enabled with "NotifyForceProcessDisabled=y"
+- reworked the "Open COM" checkbox mechanism in the plus UI
+-- Now it uses a template and it can also keep COM closed while OpenIpcPath=* is set
 
 ### Fixed
 - fixed compatibility issue with Proxifier [#2163](https://github.com/sandboxie-plus/Sandboxie/issues/2163)

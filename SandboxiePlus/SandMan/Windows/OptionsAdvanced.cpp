@@ -79,6 +79,7 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkProtectSystem->setChecked(!m_pBox->GetBool("ExposeBoxedSystem", false));
 	ui.chkDropPrivileges->setChecked(m_pBox->GetBool("StripSystemPrivileges", true));
 
+	CheckOpenCOM();
 	ui.chkComTimeout->setChecked(!m_pBox->GetBool("RpcMgmtSetComTimeout", true));
 
 	ui.chkNoSecurityIsolation->setChecked(m_pBox->GetBool("NoSecurityIsolation", false));
@@ -241,7 +242,7 @@ void COptionsWindow::SaveAdvanced()
 	WriteTextList("OnBoxDelete", DeleteCommand);
 	//
 
-	WriteAdvancedCheck(ui.chkHideOtherBoxes, "HideOtherBoxes");
+	WriteAdvancedCheck(ui.chkHideOtherBoxes, "HideOtherBoxes", "", "n");
 
 	QStringList Processes;
 	for (int i = 0; i < ui.lstProcesses->count(); i++)
@@ -322,20 +323,20 @@ void COptionsWindow::OnAdvancedChanged()
 	OnOptChanged();
 }
 
+void COptionsWindow::CheckOpenCOM()
+{
+	bool bComIpcOpen = GetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\epmapper") != NULL || GetAccessEntry(eIPC, "", eOpen, "*") != NULL;
+	if(bComIpcOpen)
+		ui.chkOpenCOM->setChecked(!m_BoxTemplates.contains("BoxedCOM"));
+	else
+		ui.chkOpenCOM->setChecked(m_BoxTemplates.contains("OpenCOM"));
+}
+
 void COptionsWindow::OnOpenCOM()
 {
-	if (ui.chkOpenCOM->isChecked()) {
-		SetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\epmapper");
-		SetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\LRPC*");
-		SetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\OLE*");
-		SetAccessEntry(eIPC, "", eOpen, "*\\BaseNamedObjects*\\__ComCatalogCache__");
-	}
-	else {
-		DelAccessEntry(eIPC, "", eOpen, "\\RPC Control\\epmapper");
-		DelAccessEntry(eIPC, "", eOpen, "\\RPC Control\\LRPC*");
-		DelAccessEntry(eIPC, "", eOpen, "\\RPC Control\\OLE*");
-		DelAccessEntry(eIPC, "", eOpen, "*\\BaseNamedObjects*\\__ComCatalogCache__");
-	}
+	bool bComIpcOpen = GetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\epmapper") != NULL || GetAccessEntry(eIPC, "", eOpen, "*") != NULL;
+	SetTemplate("OpenCOM", !bComIpcOpen && ui.chkOpenCOM->isChecked());
+	SetTemplate("BoxedCOM", bComIpcOpen && !ui.chkOpenCOM->isChecked());
 }
 
 void COptionsWindow::OnNoWindowRename()

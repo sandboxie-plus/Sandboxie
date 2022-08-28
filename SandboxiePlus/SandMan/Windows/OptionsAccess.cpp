@@ -6,6 +6,7 @@
 #include "../MiscHelpers/Common/Common.h"
 #include "../MiscHelpers/Common/ComboInputDialog.h"
 #include "../MiscHelpers/Common/SettingsWidgets.h"
+#include "../MiscHelpers/Common/CheckableMessageBox.h"
 #include "Helpers/WinAdmin.h"
 
 
@@ -304,9 +305,15 @@ void COptionsWindow::AddAccessEntry(EAccessType	Type, EAccessMode Mode, QString 
 	pItem->setText(2, GetAccessModeStr(Mode));
 	pItem->setData(2, Qt::UserRole, (int)Mode);
 
+	//////////////////////////////////////////////////////////
+	// File and Registry entries auto append a '*' wildcard 
+	// when thay don't contain any.
+	// Prepanding '|' disables this behavioure
+	//
+
 	QString sPath = Path;
-	if (Type == eFile || Type == eKey) {
-		if (sPath.left(1) != "|" && !sPath.contains("*") && sPath.right(1) != "*")
+	if (Type == eFile || Type == eKey) { 
+		if (!sPath.isEmpty() && sPath.left(1) != "|" && !sPath.contains("*") && sPath.right(1) != "*")
 			sPath.append("*");
 	}
 	pItem->setText(3, sPath);
@@ -427,6 +434,21 @@ void COptionsWindow::CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave)
 					return;
 				}
 				break;
+			}
+		}
+
+		if (pItem->data(0, Qt::UserRole).toInt() == eIPC && pMode->currentData().toInt() == eOpen 
+		  && ((pPath->text() == "*" && pItem->data(3, Qt::UserRole).toString() != "*") 
+		   || (pPath->text() == "\\*" && pItem->data(3, Qt::UserRole).toString() != "\\*"))
+		  && !m_BoxTemplates.contains("BoxedCOM"))  
+		{
+ 			if (theConf->GetInt("Options/WarnOpenCOM", -1) == -1) {
+				bool State = false;
+				if (CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Opening all IPC access, also opens COM access, do you want to restrict COM to the sandbox non the less?")
+				 , tr("Don't ask in future"), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) == QDialogButtonBox::Yes)
+					SetTemplate("BoxedCOM", true); // Normal overrides Open even without rule specificity :D
+				if (State)
+					theConf->SetValue("Options/WarnOpenCOM", 1);
 			}
 		}
 

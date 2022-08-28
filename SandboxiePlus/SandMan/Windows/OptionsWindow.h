@@ -370,6 +370,7 @@ protected:
 	void UpdateBoxIsolation();
 	void ShowTriggersTmpl(bool bUpdate = false);
 	void AddTriggerItem(const QString& Value, ETriggerAction Type, const QString& Template = QString());
+	void CheckOpenCOM();
 	//
 
 	void CreateDebug();

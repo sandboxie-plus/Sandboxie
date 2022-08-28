@@ -148,6 +148,7 @@ public slots:
 	class CRecoveryWindow*	ShowRecovery(const CSandBoxPtr& pBox, bool bFind = true);
 
 	void				UpdateSettings(bool bRebuildUI);
+	void				RebuildUI();
 	void				OnIniReloaded();
 
 	void				SetupHotKeys();

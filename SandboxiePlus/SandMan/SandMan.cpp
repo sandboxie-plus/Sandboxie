@@ -2288,33 +2288,38 @@ void CSandMan::UpdateSettings(bool bRebuildUI)
 
 	if (bRebuildUI) 
 	{
-		LoadLanguage();
-
 		StoreState();
 
-		if(m_pRefreshAll) this->removeAction(m_pRefreshAll);
-		if(m_pMenuBrowse) this->removeAction(m_pMenuBrowse);
-		if(m_pMenuResetGUI) this->removeAction(m_pMenuResetGUI);
-
-		m_pMainWidget->deleteLater();
-		m_pMainWidget = new QWidget(this);
-		setCentralWidget(m_pMainWidget);
-
-		m_pLabel->deleteLater();
-
-		CreateUI();
-
-		m_pTrayMenu->deleteLater();
-		CreateTrayMenu();
-
-		LoadState(false);
-
-		GetBoxView()->ReloadUserConfig();
-
-		OnStatusChanged();
-
-		if(m_pTrayBoxes) m_pTrayBoxes->setStyle(QStyleFactory::create(m_DefaultStyle));
+		RebuildUI();
 	}
+}
+
+void CSandMan::RebuildUI()
+{
+	LoadLanguage();
+
+	if(m_pRefreshAll) this->removeAction(m_pRefreshAll);
+	if(m_pMenuBrowse) this->removeAction(m_pMenuBrowse);
+	if(m_pMenuResetGUI) this->removeAction(m_pMenuResetGUI);
+
+	m_pMainWidget->deleteLater();
+	m_pMainWidget = new QWidget(this);
+	setCentralWidget(m_pMainWidget);
+
+	m_pLabel->deleteLater();
+
+	CreateUI();
+
+	m_pTrayMenu->deleteLater();
+	CreateTrayMenu();
+
+	LoadState(false);
+
+	GetBoxView()->ReloadUserConfig();
+
+	OnStatusChanged();
+
+	if(m_pTrayBoxes) m_pTrayBoxes->setStyle(QStyleFactory::create(m_DefaultStyle));
 }
 
 void CSandMan::OnResetMsgs()
@@ -2344,6 +2349,8 @@ void CSandMan::OnResetMsgs()
 		theConf->SetValue("Options/WarnTerminate", -1);
 
 		theConf->SetValue("Options/InfoMkLink", -1);
+
+		theConf->SetValue("Options/WarnOpenCOM", -1);
 	}
 
 	theAPI->GetUserSettings()->UpdateTextList("SbieCtrl_HideMessage", QStringList(), true);
@@ -2352,8 +2359,6 @@ void CSandMan::OnResetMsgs()
 
 void CSandMan::OnResetGUI()
 {
-	hide();
-
 	theConf->DelValue("ErrorWindow/Window_Geometry");
 	theConf->DelValue("MainWindow/Window_Geometry");
 	theConf->DelValue("MainWindow/Window_State");
@@ -2388,9 +2393,7 @@ void CSandMan::OnResetGUI()
 //	theConf->SetValue("Options/DPIScaling", 1);
 	theConf->SetValue("Options/FontScaling", 100);
 
-	LoadState();
-
-	SafeShow(this);
+	RebuildUI();
 }
 
 void CSandMan::OnEditIni()

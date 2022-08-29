@@ -432,12 +432,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="447"/>
         <source>Opening all IPC access also opens COM access, do you still want to restrict COM to the sandbox?</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 IPC 접근을 열면 COM 접근도 열립니다. 여전히 COM을 샌드박스로 제한하시겠습니까?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="448"/>
         <source>Don&apos;t ask in future</source>
-        <translation type="unfinished"></translation>
+        <translation>앞으로 묻지 않음</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="491"/>
@@ -1162,7 +1162,7 @@ Full path: %4</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="310"/>
         <source>OPEN Root Access</source>
-        <translation type="unfinished"></translation>
+        <translation>루트 접근 열기</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="312"/>

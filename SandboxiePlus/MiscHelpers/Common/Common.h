@@ -84,6 +84,21 @@ private:
 
 MISCHELPERS_EXPORT bool ReadFromDevice(QIODevice* dev, char* data, int len, int timeout = 5000);
 
+typedef struct {
+    double r;       // a fraction between 0 and 1
+    double g;       // a fraction between 0 and 1
+    double b;       // a fraction between 0 and 1
+} my_rgb;
+
+typedef struct {
+    double h;       // angle in degrees
+    double s;       // a fraction between 0 and 1
+    double v;       // a fraction between 0 and 1
+} my_hsv;
+
+my_hsv MISCHELPERS_EXPORT rgb2hsv(my_rgb in);
+my_rgb MISCHELPERS_EXPORT hsv2rgb(my_hsv in);
+
 QRgb MISCHELPERS_EXPORT change_hsv_c(QRgb rgb, float fHue, float fSat, float fVal);
 MISCHELPERS_EXPORT void GrayScale (QImage& Image);
 

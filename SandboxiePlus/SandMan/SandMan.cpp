@@ -1096,7 +1096,21 @@ QIcon CSandMan::GetColorIcon(QColor boxColor, bool inUse)
 	painter.drawPixmap(0, 0, Frame);
 	if (inUse) 
 	{	
-		rgb = change_hsv_c(rgb, -60, 2, 1); // yellow -> red
+		//rgb = change_hsv_c(rgb, -60, 2, 1); // yellow -> red
+
+		my_rgb rgb1 = { qRed(rgb), qGreen(rgb), qBlue(rgb) };
+		my_hsv hsv = rgb2hsv(rgb1);
+
+		if((hsv.h >= 30 && hsv.h < 150) || (hsv.h >= 210 && hsv.h < 330))		hsv.h -= 60;
+		else if(hsv.h >= 150 && hsv.h < 210)									hsv.h += 120;
+		else if((hsv.h >= 330 && hsv.h < 360) || (hsv.h >= 0 && hsv.h < 30))	hsv.h -= 240;
+
+		if (hsv.h < 0) hsv.h += 360;
+		else if (hsv.h >= 360) hsv.h -= 360;
+
+		my_rgb rgb2 = hsv2rgb(hsv);
+		rgb = qRgb(rgb2.r, rgb2.g, rgb2.b);
+
 		QImage MyItems = Items.toImage();
 		for (QRgb* c = (QRgb*)MyItems.bits(); c != (QRgb*)(MyItems.bits() + MyItems.byteCount()); c++) {
 			if (*c == 0xFF000000)

@@ -774,12 +774,12 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="447"/>
         <source>Opening all IPC access also opens COM access, do you still want to restrict COM to the sandbox?</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeden IPC-Zugriff zu erlauben, erlaubt auch jeden COM-Zugriff. Möchten Sie den COM-Zugriff zu der Sandbox weiterhin beschränken?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="448"/>
         <source>Don&apos;t ask in future</source>
-        <translation type="unfinished"></translation>
+        <translation>Zukünftig nicht mehr fragen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="491"/>
@@ -1256,7 +1256,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="310"/>
         <source>OPEN Root Access</source>
-        <translation type="unfinished"></translation>
+        <translation>ÖFFNE Rootzugriff</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="312"/>

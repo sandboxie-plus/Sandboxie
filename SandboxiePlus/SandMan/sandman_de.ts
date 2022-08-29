@@ -1256,7 +1256,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="310"/>
         <source>OPEN Root Access</source>
-        <translation>ÖFFNE Rootzugriff</translation>
+        <translation>Root-Zugriff ÖFFNEN</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="312"/>

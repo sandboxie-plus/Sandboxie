@@ -24,13 +24,11 @@ indent_size = unset
 
 [*.{c,h,cpp}]
 charset = utf-8
-end_of_line = crlf
 indent_style = tab
 indent_size = unset
 
 [*.{txt,cmd,bat}]
 charset = utf-8
-end_of_line = crlf
 
 # Xml files
 [*.{xml,stylecop,resx,ruleset}]
@@ -70,4 +68,3 @@ charset = utf-8-bom
 # .sln files require tabs or the solution won't load
 indent_style = tab
 indent_size = 4
-end_of_line = crlf

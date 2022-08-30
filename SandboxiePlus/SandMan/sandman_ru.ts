@@ -240,13 +240,9 @@
         <translation>Не показывать это объявление в будущем.</translation>
     </message>
     <message>
-        <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;New version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;Доступна новая версия Sandboxie-Plus.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Новая версия:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
-    </message>
-    <message>
         <location filename="OnlineUpdater.cpp" line="206"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;New version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Доступна новая версия Sandboxie-Plus.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;Новая версия:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="208"/>
@@ -432,12 +428,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="447"/>
         <source>Opening all IPC access also opens COM access, do you still want to restrict COM to the sandbox?</source>
-        <translation type="unfinished"></translation>
+        <translation>Открытие всего доступа к IPC также открывает доступ к COM, вы все еще хотите ограничить COM песочницей?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="448"/>
         <source>Don&apos;t ask in future</source>
-        <translation type="unfinished"></translation>
+        <translation>Не спрашивать в будущем</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="491"/>
@@ -512,12 +508,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="18"/>
         <source>This option requires a valid supporter certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Для этой опции требуется действующий сертификат сторонника</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="21"/>
         <source>Supporter exclusive option</source>
-        <translation type="unfinished"></translation>
+        <translation>Эксклюзивная опция для сторонников</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="46"/>
@@ -798,7 +794,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="391"/>
         <source>Search for options</source>
-        <translation type="unfinished"></translation>
+        <translation>Поиск вариантов</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="638"/>
@@ -1161,7 +1157,7 @@ Full path: %4</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="310"/>
         <source>OPEN Root Access</source>
-        <translation type="unfinished"></translation>
+        <translation>ОТКРЫТЬ Root-доступ</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="312"/>
@@ -1897,10 +1893,6 @@ No will choose: %2</source>
         <translation>Заблокировать конфигурацию</translation>
     </message>
     <message>
-        <source>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;There is a new build of Sandboxie-Plus available&lt;/a&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;Доступна новая сборка Sandboxie-Plus&lt;/a&gt;</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="762"/>
         <source>Click to install update</source>
         <translation>Нажмите, чтобы установить обновление</translation>
@@ -1990,22 +1982,22 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="760"/>
         <source>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;There is a new build of Sandboxie-Plus ready&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;Готова новая сборка Sandboxie-Plus&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="769"/>
         <source>&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;There is a new build of Sandboxie-Plus available&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;Доступна новая сборка Sandboxie-Plus&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="771"/>
         <source>Click to download update</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы скачать обновление</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1331"/>
         <source>No Force Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Не принудительный процесс</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1501"/>
@@ -2036,17 +2028,17 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="1862"/>
         <source>The evaluation period has expired!!!</source>
         <oldsource>The evaluation periode has expired!!!</oldsource>
-        <translation type="unfinished">Срок оценки истек!!!</translation>
+        <translation>Период оценки истек!!!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1981"/>
         <source>No Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет файлов для восстановления</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1987"/>
         <source>No Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет сообщений</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2142"/>
@@ -3074,7 +3066,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="278"/>
         <source>Search for settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Поиск настроек</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="376"/>
@@ -3135,7 +3127,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="952"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;check&quot;&gt;Проверить сейчас&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1005"/>
@@ -3170,22 +3162,22 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1171"/>
         <source>%1 (Current)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (Текущая)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1172"/>
         <source>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1173"/>
         <source>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1195"/>
         <source>Do you want to download the version %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите скачать версию %1?</translation>
     </message>
 </context>
 <context>
@@ -4463,7 +4455,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <location filename="Forms/OptionsWindow.ui" line="2636"/>
         <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
         <oldsource>API call trace (requirers logapi to be installed in the sbie dir)</oldsource>
-        <translation type="unfinished">Трассировка вызовов API (требуется установка logapi в каталог sbie)</translation>
+        <translation>Трассировка вызовов API (требуется, чтобы LogAPI был установлен в каталоге Sbie)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2656"/>
@@ -5110,7 +5102,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="128"/>
         <source>Count and display the disk space occupied by each sandbox</source>
         <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
-        <translation type="unfinished">Подсчитать и отобразить дисковое пространство, занимаемое каждой песочницей</translation>
+        <translation>Подсчитать и отобразить дисковое пространство, занимаемое каждой песочницей</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="200"/>
@@ -5126,7 +5118,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="459"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation type="unfinished">Показать фон &quot;Пицца&quot; в списке песочниц *</translation>
+        <translation>Показать фон &quot;Пицца&quot; в списке песочниц *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="476"/>
@@ -5196,7 +5188,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="544"/>
         <source>Use Fusion Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать тему Fusion</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="741"/>

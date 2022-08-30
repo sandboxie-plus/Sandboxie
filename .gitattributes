@@ -14,6 +14,7 @@
 *.yml text working-tree-encoding=UTF-8 eol=lf
 Installer/*.txt text working-tree-encoding=UTF-8 eol=lf
 Sandboxie/install/*.txt text working-tree-encoding=UTF-8 eol=lf
+SandboxiePlus/QtSingleApp/*.txt text working-tree-encoding=UTF-8 eol=lf
 Installer/isl/*.isl text eol=lf
 
 # Set utf-8-bom for some Inno Setup languages subject to encoding issues:
@@ -25,6 +26,13 @@ Installer/isl/Korean.isl text working-tree-encoding=UTF-8-BOM
 # Set utf-8-bom for Templates.ini file:
 # https://github.com/sandboxie-plus/Sandboxie/pull/576#issuecomment-782938792
 Sandboxie/install/Templates.ini text working-tree-encoding=UTF-8-BOM
+
+# Set crlf for the Parse script:
+# https://github.com/sandboxie-plus/Sandboxie/pull/1572
+Sandboxie/msgs/*.txt text working-tree-encoding=UTF-8 eol=crlf
+
+# Attempt to set utf-8 consistently for all reports
+Sandboxie/msgs/report/*.txt text working-tree-encoding=UTF-8
 
 # Set crlf EOL for *.bat and *.cmd files to prevent a label parser issue with lf:
 # https://serverfault.com/questions/429594/is-it-safe-to-write-batch-files-with-unix-line-endings

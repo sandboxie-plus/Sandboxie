@@ -17,7 +17,7 @@ Installer/isl/ChineseSimplified.isl text working-tree-encoding=UTF-8-BOM
 Installer/isl/ChineseTraditional.isl text working-tree-encoding=UTF-8-BOM
 Installer/isl/Korean.isl text working-tree-encoding=UTF-8-BOM
 
-# Set crlf EOL for *.bat and *.cmd files that contain call/goto block.
+# Set crlf EOL for *.bat and *.cmd files to prevent a label parser issue with lf.
 # https://serverfault.com/questions/429594/is-it-safe-to-write-batch-files-with-unix-line-endings/795638
 Installer/merge_builds.cmd eol=crlf
 Sandboxie/install/build.bat eol=crlf

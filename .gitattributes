@@ -6,6 +6,7 @@
 *.bat text working-tree-encoding=UTF-8
 *.cmd text working-tree-encoding=UTF-8
 *.ts text working-tree-encoding=UTF-8 eol=lf
+*.md text working-tree-encoding=UTF-8 eol=lf
 Installer/isl/*.isl text eol=lf
 
 # Set crlf EOL for *.bat and *.cmd files that contain call/goto block.

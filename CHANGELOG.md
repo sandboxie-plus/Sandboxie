@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.3.2 / 5.58.2] - 2022-08-??
+## [1.3.2 / 5.58.2] - 2022-08-30
 
 ### Added
 - added icons to sub tabs in the box options dialog

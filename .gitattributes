@@ -7,7 +7,15 @@
 *.cmd text working-tree-encoding=UTF-8
 *.ts text working-tree-encoding=UTF-8 eol=lf
 *.md text working-tree-encoding=UTF-8 eol=lf
+Installer/*.txt text working-tree-encoding=UTF-8 eol=lf
+Sandboxie/install/*.txt text working-tree-encoding=UTF-8 eol=lf
 Installer/isl/*.isl text eol=lf
+
+# Set utf-8-bom for some Inno Setup languages subject to encoding issues.
+# https://github.com/sandboxie-plus/Sandboxie/pull/2173
+Installer/isl/ChineseSimplified.isl text working-tree-encoding=UTF-8-BOM
+Installer/isl/ChineseTraditional.isl text working-tree-encoding=UTF-8-BOM
+Installer/isl/Korean.isl text working-tree-encoding=UTF-8-BOM
 
 # Set crlf EOL for *.bat and *.cmd files that contain call/goto block.
 # https://serverfault.com/questions/429594/is-it-safe-to-write-batch-files-with-unix-line-endings/795638

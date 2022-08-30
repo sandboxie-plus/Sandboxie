@@ -17,6 +17,10 @@ Installer/isl/ChineseSimplified.isl text working-tree-encoding=UTF-8-BOM
 Installer/isl/ChineseTraditional.isl text working-tree-encoding=UTF-8-BOM
 Installer/isl/Korean.isl text working-tree-encoding=UTF-8-BOM
 
+# Set utf-8-bom for Templates.ini file:
+# https://github.com/sandboxie-plus/Sandboxie/pull/576#issuecomment-782938792
+Sandboxie/install/Templates.ini text working-tree-encoding=UTF-8-BOM
+
 # Set crlf EOL for *.bat and *.cmd files to prevent a label parser issue with lf:
 # https://serverfault.com/questions/429594/is-it-safe-to-write-batch-files-with-unix-line-endings
 # Please uncomment the lines below only if needed

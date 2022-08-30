@@ -31,10 +31,10 @@ Further licensing information
 ======================================
 
 Sandboxie-Plus is made up of the following components, governed under various licenses:
-* SandMan the primary Sandboxie-Plus UI component, provided under a custom license.
-* QSbieAPI a stand alone re implementation of sandboxie’s API using IPC mechanisms to. communicate with sandboxie’s core components, license under the LGPL.
+* SandMan is the primary Sandboxie-Plus UI component, provided under a custom license.
+* QSbieAPI is a standalone reimplementation of Sandboxieâ€™s API using IPC mechanisms to communicate with Sandboxieâ€™s core components, licensed under the LGPL.
 * Sandboxie core components, licensed under the GPL v3.
-* MiscHelpers a generic Qt based helper library, license under the LGPL.
-* The Qt Framework which is license under the LGPL.
+* MiscHelpers is a generic Qt-based helper library, licensed under the LGPL.
+* The Qt Framework, which is licensed under the LGPL.
 * UglobalHotkey is an extension for Qt framework, which implements global hotkeys functionality and is in the Public Domain.
-* QtSingleApp a Qt Solutions Component that provides support for applications that can be only started once per user, BSD licensed.
+* QtSingleApp is a Qt Solutions component that provides support for applications that can be only started once per user, BSD-licensed.

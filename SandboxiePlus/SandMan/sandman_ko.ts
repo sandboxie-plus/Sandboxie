@@ -111,12 +111,12 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="134"/>
         <source>&amp;Personally, for private non-commercial use</source>
-        <translation>개인적으로, 사적인 비상업적 사용을 위해(&amp;P)</translation>
+        <translation>개인적, 사적인 비상업적으로 사용(&amp;P)</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="139"/>
         <source>&amp;Commercially, for business or enterprise use</source>
-        <translation>상업적으로, 비즈니스 또는 기업용으로(&amp;C)</translation>
+        <translation>상업적, 사업 또는 기업용으로 사용(&amp;C)</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="144"/>
@@ -2203,7 +2203,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2654"/>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
-        <translation>샌드박스 (예) 또는 언샌드박스 (아니오) 웹 브라우저에서 %1을 여시겠습니까?</translation>
+        <translation>샌드박스에서 (예) 또는 샌드박스가 없는 (아니오) 웹 브라우저에서 %1을 여시겠습니까?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2655"/>
@@ -2254,7 +2254,7 @@ No will choose: %2</source>
     <message>
         <location filename="main.cpp" line="120"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
-        <translation>Sandboxie 관리자를 실행할 수 없습니다!</translation>
+        <translation>Sandboxie 관리자는 샌드박스에서 실행을 할 수 없습니다!</translation>
     </message>
 </context>
 <context>
@@ -2804,7 +2804,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="255"/>
         <source>Run Sandboxed</source>
-        <translation>샌드박스 실행</translation>
+        <translation>샌드박스에서 실행</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="256"/>
@@ -2996,7 +2996,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SelectBoxWindow.cpp" line="88"/>
         <source>Sandboxie-Plus - Run Sandboxed</source>
-        <translation>Sandboxie-Plus - 샌드박스 실행</translation>
+        <translation>Sandboxie-Plus - 샌드박스에서 실행</translation>
     </message>
     <message>
         <location filename="Windows/SelectBoxWindow.cpp" line="177"/>
@@ -3087,7 +3087,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="376"/>
         <source>Run &amp;Sandboxed</source>
-        <translation>샌드박스로 실행(&amp;S)</translation>
+        <translation>샌드박스에서 실행(&amp;S)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="397"/>
@@ -3244,7 +3244,7 @@ No will choose: %2</source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="428"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation>탐색기의 상황에 맞는 메뉴에 &apos;Run Sandboxed&apos; 추가</translation>
+        <translation>탐색기의 상황에 맞는 메뉴에 &apos;샌드박스에서 실행&apos; 추가</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="433"/>
@@ -4899,7 +4899,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="73"/>
         <source>Run Sandboxed</source>
-        <translation>샌드박스로 실행</translation>
+        <translation>샌드박스에서 실행</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="83"/>
@@ -4947,7 +4947,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="276"/>
         <source>Run Sandboxed - Actions</source>
-        <translation>샌드박스 실행 - 동작</translation>
+        <translation>샌드박스에서 실행 - 동작</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="371"/>
@@ -4972,7 +4972,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="313"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation>탐색기의 상황에 맞는 메뉴에 &apos;샌드박스로 실행&apos; 추가</translation>
+        <translation>탐색기의 상황에 맞는 메뉴에 &apos;샌드박스에서 실행&apos; 추가</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="104"/>

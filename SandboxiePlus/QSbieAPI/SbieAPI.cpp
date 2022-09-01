@@ -2129,8 +2129,8 @@ SB_STATUS CSbieAPI::LockConfig(const QString& NewPassword)
 	SBIE_INI_PASSWORD_REQ *req = (SBIE_INI_PASSWORD_REQ *)malloc(REQUEST_LEN);
 	req->h.msgid = MSGID_SBIE_INI_SET_PASSWORD;
 	req->h.length = sizeof(SBIE_INI_PASSWORD_REQ);
-	m->Password.toWCharArray(req->new_password); // fix-me: potential overflow
-	req->new_password[m->Password.length()] = L'\0';
+	NewPassword.toWCharArray(req->new_password); // fix-me: potential overflow
+	req->new_password[NewPassword.length()] = L'\0';
 	SB_STATUS Status = SbieIniSet(req, req->old_password, "GlobalSettings", "*");
 	if (!Status.IsError())
 		m->Password = NewPassword;

@@ -1595,7 +1595,7 @@ void CSandMan::OnStatusChanged()
 		
 		g_FeatureFlags = theAPI->GetFeatureFlags();
 
-		SB_STATUS Status = theAPI->ReloadBoxes();
+		SB_STATUS Status = theAPI->ReloadBoxes(true);
 
 		if (!Status.IsError() && !theAPI->GetAllBoxes().contains("defaultbox")) {
 			OnLogMessage(tr("Default sandbox not found; creating: %1").arg("DefaultBox"));

@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - approved more requied sys calls
 - fixed issues when deleting box content and the view files panel is open
 - fixed issue with config protection [#2206](https://github.com/sandboxie-plus/Sandboxie/issues/2206)
+- fixed issue with default box [#2195](https://github.com/sandboxie-plus/Sandboxie/issues/2195)
 
 
 ## [1.3.2 / 5.58.2] - 2022-08-30

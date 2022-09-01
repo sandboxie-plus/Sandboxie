@@ -33,6 +33,9 @@ public:
 
 	QMap<QString, QStringList>	GetGroups() { return m_Groups; }
 
+signals:
+	void						BoxSelected();
+
 public slots:
 	void						Clear();
 	void						Refresh();

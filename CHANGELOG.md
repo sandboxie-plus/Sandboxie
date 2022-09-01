@@ -4,6 +4,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.3.3 / 5.58.3] - 2022-08-??
+
+### Fixed
+- fixed issues with group moving drag and drop
+- approved more requied sys calls
+- fixed issues when deleting box content and the view files panel is open
+
+
+
 ## [1.3.2 / 5.58.2] - 2022-08-30
 
 ### Added

@@ -773,7 +773,7 @@ void CSbieView::OnGroupAction(QAction* Action)
 
 		if (List.isEmpty())
 			return;
-
+		m_Groups[""].removeAll(Name);
 		m_Groups[List.first()].append(Name);
 	}
 	else if (Action == m_pRenGroupe)
@@ -841,11 +841,13 @@ void CSbieView::OnGroupAction(QAction* Action)
 			for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I) {
 				int pos = I->indexOf(Name);
 				if (pos != -1) {
-					if ((Offset < 0 && pos > Offset + 1) ||(Offset > 0 && pos < I->count() - Offset)){
-						QString Temp = I.value()[pos+Offset];
-						I.value()[pos+Offset] = I.value()[pos];
+					if ((Offset < 0 && pos > Offset + 1) || (Offset > 0 && pos < I->count() - Offset)) {
+						QString Temp = I.value()[pos + Offset];
+						I.value()[pos + Offset] = I.value()[pos];
 						I.value()[pos] = Temp;
 					}
+					else // out of bounds
+						QApplication::beep();
 					bFound = true;
 					break;
 				}
@@ -896,8 +898,15 @@ bool CSbieView::MoveItem(const QString& Name, const QString& To, int pos)
 
 	// remove from old
 	for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I) {
-		if (I.value().removeAll(Name))
-			From = I.key();
+		for (int i = 0; i < I.value().count(); i++) {
+			if (I.value().at(i) == Name) {
+				I.value().removeAt(i);
+				From = I.key();
+				if(From == To && i < pos)
+					pos--;
+				break;
+			}
+		}
 	}
 
 	// add to new
@@ -1534,6 +1543,8 @@ void CSbieView::ProcessSelection(const QItemSelection& selected, const QItemSele
 	}
 
 	selectionModel->select(invalid, QItemSelectionModel::Deselect);
+
+	emit BoxSelected();
 }
 
 QList<CSandBoxPtr> CSbieView::GetSelectedBoxes()

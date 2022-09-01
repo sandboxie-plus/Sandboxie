@@ -197,10 +197,10 @@ CSandMan::CSandMan(QWidget *parent)
 	connect(m_pHotkeyManager, SIGNAL(activated(size_t)), SLOT(OnHotKey(size_t)));
 	SetupHotKeys();
 
-	for (int i = 0; i < eMaxColor; i++) {
-		m_BoxIcons[i].Empty = QIcon(QString(":/Boxes/Empty%1").arg(i));
-		m_BoxIcons[i].InUse = QIcon(QString(":/Boxes/Full%1").arg(i));
-	}
+	//for (int i = 0; i < eMaxColor; i++) {
+	//	m_BoxIcons[i].Empty = QIcon(QString(":/Boxes/Empty%1").arg(i));
+	//	m_BoxIcons[i].InUse = QIcon(QString(":/Boxes/Full%1").arg(i));
+	//}
 
 	m_BoxColors[CSandBoxPlus::eHardenedPlus] = qRgb(238,35,4);
 	m_BoxColors[CSandBoxPlus::eHardened] = qRgb(247,125,2);
@@ -850,6 +850,7 @@ void CSandMan::UpdateLabel()
 void CSandMan::CreateView(int iViewMode)
 {
 	m_pBoxView = new CSbieView();
+	connect(m_pBoxView, SIGNAL(BoxSelected()), this, SLOT(OnBoxSelected()));
 	m_pFileView = new CFileView();
 
 	if (iViewMode != 1)
@@ -869,6 +870,7 @@ void CSandMan::CreateView(int iViewMode)
 		pFileLayout->addItem(new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum), 0, 0, 1, 1);
 
 		m_pBoxCombo = new QComboBox();
+		connect(m_pBoxCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(OnBoxSelected()));
 		pFileLayout->addWidget(m_pBoxCombo, 0, 1);
 
 		pFileLayout->addWidget(m_pFileView, 1, 0, 1, 2);
@@ -1046,11 +1048,11 @@ void CSandMan::closeEvent(QCloseEvent *e)
 
 QIcon CSandMan::GetBoxIcon(int boxType, bool inUse)// , int iBusy)
 {
-	EBoxColors color = eYellow;
+	//EBoxColors color = eYellow;
 	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
 	if (iViewMode != 2) {
-		//return GetColorIcon(m_BoxColors[boxType], inUse);
-		switch (boxType) {
+		return GetColorIcon(m_BoxColors[boxType], inUse);
+		/*switch (boxType) {
 		case CSandBoxPlus::eHardenedPlus:		color = eRed; break;
 		case CSandBoxPlus::eHardened:			color = eOrang; break;
 		case CSandBoxPlus::eDefaultPlus:		color = eBlue; break;
@@ -1059,13 +1061,14 @@ QIcon CSandMan::GetBoxIcon(int boxType, bool inUse)// , int iBusy)
 		case CSandBoxPlus::eAppBox:				color = eGreen; break;
 		case CSandBoxPlus::eInsecure:			color = eMagenta; break;
 		case CSandBoxPlus::eOpen:				color = eWhite; break;
-		}
+		}*/
 	}
 	//if (inBusy)
 	//	return m_BoxIcons[color].Busy;
-	if (inUse)
+	/*if (inUse)
 		return m_BoxIcons[color].InUse;
-	return m_BoxIcons[color].Empty;
+	return m_BoxIcons[color].Empty;*/
+	return GetColorIcon(m_BoxColors[CSandBoxPlus::eDefault], inUse);
 }
 
 QIcon CSandMan::GetColorIcon(QColor boxColor, bool inUse)
@@ -1107,6 +1110,7 @@ QIcon CSandMan::GetColorIcon(QColor boxColor, bool inUse)
 
 		if (hsv.h < 0) hsv.h += 360;
 		else if (hsv.h >= 360) hsv.h -= 360;
+		hsv.s = 1; // make the content always fully saturated
 
 		my_rgb rgb2 = hsv2rgb(hsv);
 		rgb = qRgb(rgb2.r, rgb2.g, rgb2.b);
@@ -1288,30 +1292,6 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 			m_pTraceView->setEnabled(bIsMonitoring);
 		}
 
-		CSandBoxPtr pBox;
-		if (m_pPanelSplitter) {
-			QList<CSandBoxPtr> boxes = m_pBoxView->GetSelectedBoxes();
-			if (m_pPanelSplitter->sizes().at(1) > 0 && m_pFileView->isVisible() && boxes.count() == 1)
-				pBox = boxes.first();
-		}
-
-		// for old menu
-		if (m_pBoxCombo && m_pViewStack->currentIndex() == 1) {
-			QString Name = m_pBoxCombo->currentData().toString();
-			if (Name.isEmpty())
-				Name = "DefaultBox";
-			pBox = theAPI->GetBoxByName(Name);
-		}
-
-		if (!pBox.isNull()) {
-			if (!m_pFileView->isEnabled()) m_pFileView->setEnabled(true);
-			if (pBox != m_pFileView->GetBox()) m_pFileView->SetBox(pBox);
-		}
-		else if (m_pFileView->isEnabled()) {
-			m_pFileView->setEnabled(false);
-			m_pFileView->SetBox(CSandBoxPtr());
-		}
-
 		QMap<quint32, CBoxedProcessPtr> Processes = theAPI->GetAllProcesses();
 		int ActiveProcesses = 0;
 		if (KeepTerminated()) {
@@ -1414,6 +1394,33 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		m_MissingTemplates.clear();
 
 		m_MissingTemplates.append("");
+	}
+}
+
+void CSandMan::OnBoxSelected()
+{
+	CSandBoxPtr pBox;
+	if (m_pPanelSplitter) {
+		QList<CSandBoxPtr> boxes = m_pBoxView->GetSelectedBoxes();
+		if (m_pPanelSplitter->sizes().at(1) > 0 && m_pFileView->isVisible() && boxes.count() == 1)
+			pBox = boxes.first();
+	}
+
+	// for vintage mode
+	if (m_pBoxCombo && m_pViewStack->currentIndex() == 1) {
+		QString Name = m_pBoxCombo->currentData().toString();
+		if (Name.isEmpty())
+			Name = "DefaultBox";
+		pBox = theAPI->GetBoxByName(Name);
+	}
+
+	if (!pBox.isNull()) {
+		if (!m_pFileView->isEnabled()) m_pFileView->setEnabled(true);
+		if (pBox != m_pFileView->GetBox()) m_pFileView->SetBox(pBox);
+	}
+	else if (m_pFileView->isEnabled()) {
+		m_pFileView->setEnabled(false);
+		m_pFileView->SetBox(CSandBoxPtr());
 	}
 }
 

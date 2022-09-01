@@ -122,16 +122,18 @@ protected:
 
 	QMap<int, QRgb> m_BoxColors;
 
-	struct SBoxIcon {
-		QIcon Empty;
-		QIcon InUse;
-		//QIcon Busy;
-	};
-	QMap<int, SBoxIcon> m_BoxIcons;
+	//struct SBoxIcon {
+	//	QIcon Empty;
+	//	QIcon InUse;
+	//	//QIcon Busy;
+	//};
+	//QMap<int, SBoxIcon> m_BoxIcons;
 
 	class UGlobalHotkeys* m_pHotkeyManager;
 
 public slots:
+	void				OnBoxSelected();
+
 	void				OnMessage(const QString& MsgData);
 
 	void				OnStatusChanged();

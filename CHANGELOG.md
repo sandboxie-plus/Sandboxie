@@ -5,18 +5,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.3.3 / 5.58.3] - 2022-08-??
+## [1.3.3 / 5.58.3] - 2022-09-??
 
 ### Added
 - added user name option to sbie log as a workaround for feature request [#2207](https://github.com/sandboxie-plus/Sandboxie/issues/2207)
 -- usage: in "HKLM\SYSTEM\CurrentControlSet\Services\SbieSvc" add REG_SZ "LogFile" with "3;[path]\Sandboxie.log"
 
 ### Changed
-- improved sandman settings behavioure for non admin users [#2123](https://github.com/sandboxie-plus/Sandboxie/issues/2123)
+- improved sandman settings behaviour for non admin users [#2123](https://github.com/sandboxie-plus/Sandboxie/issues/2123)
 
 ### Fixed
-- fixed issues with group moving drag and drop
-- approved more requied sys calls
+- fixed issues with group moving via drag and drop
+- approved more required sys calls
 - fixed issues when deleting box content and the view files panel is open
 - fixed issue with config protection [#2206](https://github.com/sandboxie-plus/Sandboxie/issues/2206)
 - fixed issue with default box [#2195](https://github.com/sandboxie-plus/Sandboxie/issues/2195)

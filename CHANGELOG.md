@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.3.3 / 5.58.3] - 2022-08-??
 
+### Added
+- added user name option to sbie log as a workaround for feature request [#2207](https://github.com/sandboxie-plus/Sandboxie/issues/2207)
+-- usage: in "HKLM\SYSTEM\CurrentControlSet\Services\SbieSvc" add REG_SZ "LogFile" with "3;[path]\Sandboxie.log"
+
 ### Changed
 - improved sandman settings behavioure for non admin users [#2123](https://github.com/sandboxie-plus/Sandboxie/issues/2123)
 

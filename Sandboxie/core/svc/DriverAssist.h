@@ -99,7 +99,7 @@ private:
 
     void LogMessage();
 
-    void LogMessage_Single(ULONG code, wchar_t* data);
+    void LogMessage_Single(ULONG code, wchar_t* data, ULONG pid);
     void LogMessage_Multi(ULONG msgid, const WCHAR *path, const WCHAR *text);
     void LogMessage_Write(const WCHAR *path, const WCHAR *text);
 

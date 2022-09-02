@@ -1205,8 +1205,28 @@ _FX void Process_LogMessage(PROCESS *proc, ULONG msgid)
 {
     BOX *box = proc->box;
     ULONG len = proc->image_name_len + box->name_len + 8 * sizeof(WCHAR);
-    WCHAR *text = Mem_Alloc(proc->pool, len);
-    RtlStringCbPrintfW(text, len, L"%s [%s]", proc->image_name, box->name);
+    WCHAR *text = NULL;
+    
+    // Check if verbose log mode is enabled
+    union {
+        KEY_VALUE_PARTIAL_INFORMATION info;
+        WCHAR space[MAX_PATH + 8];
+    } u;
+    if ( SbieDll_GetServiceRegistryValue(L"LogFile", &u.info, sizeof(u)) && u.info.Type == REG_SZ && u.info.DataLength < sizeof(u) ){
+        WCHAR LogVer = *((WCHAR *)u.info.Data);
+        LPWSTR strSid = NULL;
+        size_t pcchLength = 0;
+        if ( LogVer == L'2' && ConvertSidToStringSidW(*(proc->SandboxieLogonSid), &strSid) && NT_SUCCESS(RtlStringCchLengthW(strSid, 255, &pcchLength)) ){
+            text = Mem_Alloc(proc->pool, len+pcchLength+3);
+            RtlStringCbPrintfW(text, len, L"%s [%s] (%s)", proc->image_name, box->name, strSid);
+            LocalFree(strSid);
+            strSid = NULL;
+        }
+    }
+    if( text == NULL ){
+        text = Mem_Alloc(proc->pool, len);
+        RtlStringCbPrintfW(text, len, L"%s [%s]", proc->image_name, box->name);
+    }
     if (proc->image_from_box)
         wcscat(text, L" *");
     Log_MsgP1(msgid, text, proc->pid);

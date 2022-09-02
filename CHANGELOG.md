@@ -84,7 +84,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - replaced the "DeviceSecurity" template with a dedicated setting "RestrictDevices=y"
--- Note: when needed, more "NormalPipePath=..." entries can be added to open specific devices
+-- Note: when needed, more "NormalFilePath=..." entries can be added to open specific devices
 - rule specificity is now even more specific, an exact rule now overrules those ending with a wildcard
 
 

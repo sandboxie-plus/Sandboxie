@@ -475,6 +475,7 @@ void CSettingsWindow::LoadSettings()
 		ui.chkSbieLogon->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieLogon", false));
 
 		ui.chkAdminOnly->setChecked(theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false));
+		ui.chkAdminOnly->setEnabled(IsAdminUser());
 		ui.chkPassRequired->setChecked(!theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty());
 		ui.chkAdminOnlyFP->setChecked(theAPI->GetGlobalSettings()->GetBool("ForceDisableAdminOnly", false));
 		ui.chkClearPass->setChecked(theAPI->GetGlobalSettings()->GetBool("ForgetPassword", false));
@@ -490,7 +491,8 @@ void CSettingsWindow::LoadSettings()
 		foreach(const QString& Value, theAPI->GetGlobalSettings()->GetTextList("AlertFolder", false))
 			AddWarnEntry(Value, 2);
 	}
-	else
+	
+	if(!theAPI->IsConnected() || (theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false) && !IsAdminUser()))
 	{
 		ui.fileRoot->setEnabled(false);
 		ui.chkSeparateUserFolders->setEnabled(false);
@@ -512,6 +514,7 @@ void CSettingsWindow::LoadSettings()
 		ui.treeCompat->setEnabled(false);
 		ui.btnAddCompat->setEnabled(false);
 		ui.btnDelCompat->setEnabled(false);
+		ui.btnEditIni->setEnabled(false);
 	}
 
 

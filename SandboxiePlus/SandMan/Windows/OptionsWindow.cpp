@@ -374,6 +374,23 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	if (!Columns.isEmpty()) ui.treeTemplates->header()->restoreState(Columns);
 
 
+	if (theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false) && !IsAdminUser())
+	{
+		for (int I = 0; I < ui.tabs->count(); I++) {
+			QGridLayout* pGrid = qobject_cast<QGridLayout*>(ui.tabs->widget(I)->layout());
+			QTabWidget* pSubTabs = pGrid ? qobject_cast<QTabWidget*>(pGrid->itemAt(0)->widget()) : NULL;
+			if (!pSubTabs) {
+				ui.tabs->widget(I)->setEnabled(false);
+			}
+			else {
+				for (int J = 0; J < pSubTabs->count(); J++) {
+					pSubTabs->widget(J)->setEnabled(false);
+				}
+			}
+		}
+	}
+
+
 	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
 	int iOptionTree = theConf->GetInt("Options/OptionTree", 2);
 	if (iOptionTree == 2)

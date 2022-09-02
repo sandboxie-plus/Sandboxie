@@ -72,6 +72,36 @@ int RestartElevated(int &argc, char **argv)
 	return RunElevated(Params);
 }
 
+bool IsAdminUser(bool OnlyFull)
+{
+	HANDLE hToken;
+	if (!OpenProcessToken(GetCurrentProcess(), MAXIMUM_ALLOWED, &hToken))
+		return false;
+
+    SID_IDENTIFIER_AUTHORITY NtAuthority = SECURITY_NT_AUTHORITY;
+    PSID AdministratorsGroup;
+    BOOL bRet = AllocateAndInitializeSid(&NtAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0, &AdministratorsGroup);
+	if (bRet) {
+		if (!CheckTokenMembership(NULL, AdministratorsGroup, &bRet))
+			bRet = FALSE;
+		FreeSid(AdministratorsGroup);
+		if (!bRet || OnlyFull) {
+			OSVERSIONINFO osvi;
+			osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
+			if (GetVersionEx(&osvi) && osvi.dwMajorVersion >= 6) {
+				ULONG elevationType, len;
+				bRet = GetTokenInformation(hToken, (TOKEN_INFORMATION_CLASS)TokenElevationType, &elevationType, sizeof(elevationType), &len);
+				if (bRet && (elevationType != TokenElevationTypeFull && (OnlyFull || elevationType != TokenElevationTypeLimited)))
+					bRet = FALSE;
+			}
+		}
+	}
+
+	CloseHandle(hToken);
+
+    return !!bRet;
+}
+
 //////////////////////////////////////////////////////////////////////////////////
 // AutoRun
 

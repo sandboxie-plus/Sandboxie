@@ -1729,6 +1729,8 @@ void CSbieView::OnMoveItem(const QString& Name, const QString& To, int row)
 
 void CSbieView::OnRemoveItem() 
 {
+	UpdateMenu();
+
 	if (!m_CurProcesses.isEmpty())
 		OnProcessAction(m_pMenuTerminate, m_CurProcesses);
 	else if (!m_CurSandBoxes.isEmpty())

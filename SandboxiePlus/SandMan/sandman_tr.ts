@@ -381,8 +381,8 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Lider</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="694"/>
-        <location filename="Windows/OptionsWindow.cpp" line="710"/>
+        <location filename="Windows/OptionsWindow.cpp" line="711"/>
+        <location filename="Windows/OptionsWindow.cpp" line="727"/>
         <location filename="Windows/OptionsAccess.cpp" line="300"/>
         <location filename="Windows/OptionsAccess.cpp" line="516"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
@@ -496,7 +496,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Klasör için Göz At</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="703"/>
+        <location filename="Windows/OptionsWindow.cpp" line="720"/>
         <source>Enter program:</source>
         <translation>Program girin:</translation>
     </message>
@@ -521,17 +521,17 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Lütfen bir hizmet tanımlayıcı girin</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="391"/>
+        <location filename="Windows/OptionsWindow.cpp" line="408"/>
         <source>Search for options</source>
         <translation>Seçeneklerde ara</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="638"/>
+        <location filename="Windows/OptionsWindow.cpp" line="655"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>Bu korumalı kutu silindi, bu nedenle yapılandırma kaydedilemiyor.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="682"/>
+        <location filename="Windows/OptionsWindow.cpp" line="699"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>Bazı değişiklikler henüz kaydedilmedi, bu ayarlar penceresini gerçekten kapatmak istiyor musunuz?</translation>
     </message>
@@ -3014,28 +3014,28 @@ Hayır şunları seçer: %2</translation>
 <context>
     <name>CSettingsWindow</name>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1005"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1008"/>
         <source>Please enter the new configuration password.</source>
         <translation>Lütfen yeni yapılandırma parolasını girin.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="924"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1043"/>
+        <location filename="Windows/SettingsWindow.cpp" line="927"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1046"/>
         <source>Select Directory</source>
         <translation>Dizin Seç</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1034"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1037"/>
         <source>Please enter a program file name</source>
         <translation>Lütfen bir program dosyası adı girin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1024"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1027"/>
         <source>Folder</source>
         <translation>Klasör</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1024"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1027"/>
         <source>Process</source>
         <translation>İşlem</translation>
     </message>
@@ -3051,17 +3051,17 @@ Hayır şunları seçer: %2</translation>
         <translation>Ayarlarda ara</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="952"/>
+        <location filename="Windows/SettingsWindow.cpp" line="955"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Şimdi Kontrol Edin&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1009"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1012"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Lütfen yeni yapılandırma parolasını tekrar girin.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1014"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1017"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Parolalar eşleşmedi, lütfen tekrar deneyin.</translation>
     </message>
@@ -3071,12 +3071,12 @@ Hayır şunları seçer: %2</translation>
         <translation>Otomatik Algıla</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="885"/>
+        <location filename="Windows/SettingsWindow.cpp" line="888"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Sandboxie-Plus&apos;ın gelişimini desteklediğiniz için teşekkür ederiz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="893"/>
+        <location filename="Windows/SettingsWindow.cpp" line="896"/>
         <source>This support certificate is not valid.</source>
         <translation>Bu destek sertifikası geçerli değil.</translation>
     </message>
@@ -3096,7 +3096,7 @@ Hayır şunları seçer: %2</translation>
         <translation>Klasik simgesini göster</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="880"/>
+        <location filename="Windows/SettingsWindow.cpp" line="883"/>
         <source>This certificate is unfortunately expired.</source>
         <translation>Bu sertifikanın ne yazık ki süresi dolmuş.</translation>
     </message>
@@ -3147,42 +3147,42 @@ Hayır şunları seçer: %2</translation>
         <translation>&amp;Korumalı Alanda Çalıştır</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="554"/>
+        <location filename="Windows/SettingsWindow.cpp" line="557"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Bu destekçi sertifikasının süresi doldu, lütfen &lt;a href=&quot;sbie://update/cert&quot;&gt;yenilenmiş bir sertifika alın&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="559"/>
+        <location filename="Windows/SettingsWindow.cpp" line="562"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Bu destekçi sertifikası &lt;font color=&apos;red&apos;&gt;%1 gün içinde sona erecek&lt;/font&gt;, lütfen &lt;a href=&quot;sbie://update/cert&quot;&gt;yenilenmiş bir sertifika alın&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="666"/>
+        <location filename="Windows/SettingsWindow.cpp" line="669"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>&amp;Korumalı Alandan Olmadan Çalıştır</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="882"/>
+        <location filename="Windows/SettingsWindow.cpp" line="885"/>
         <source>This certificate is unfortunately outdated.</source>
         <translation>Bu sertifika maalesef güncel değil.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1171"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1174"/>
         <source>%1 (Current)</source>
         <translation>%1 (Mevcut)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1172"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1175"/>
         <source>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1173"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1176"/>
         <source>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1195"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1198"/>
         <source>Do you want to download the version %1?</source>
         <translation>%1 sürümünü indirmek istiyor musunuz?</translation>
     </message>
@@ -3192,7 +3192,7 @@ Hayır şunları seçer: %2</translation>
         <translation>Koruma Alanlı Web Tarayıcısı</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="862"/>
+        <location filename="Windows/SettingsWindow.cpp" line="865"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>Bu bir sertifikaya benzemiyor. Lütfen sertifikanın sadece bir kısmını değil tamamını girin.</translation>
     </message>

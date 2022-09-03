@@ -463,8 +463,8 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation>Tous les programmes</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="694"/>
-        <location filename="Windows/OptionsWindow.cpp" line="710"/>
+        <location filename="Windows/OptionsWindow.cpp" line="711"/>
+        <location filename="Windows/OptionsWindow.cpp" line="727"/>
         <location filename="Windows/OptionsAccess.cpp" line="300"/>
         <location filename="Windows/OptionsAccess.cpp" line="516"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
@@ -875,23 +875,23 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation>Sandboxie Plus - Paramètres de « %1 »</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="391"/>
+        <location filename="Windows/OptionsWindow.cpp" line="408"/>
         <source>Search for options</source>
         <oldsource>Search for Options</oldsource>
         <translation type="unfinished">Rechercher dans les options</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="638"/>
+        <location filename="Windows/OptionsWindow.cpp" line="655"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>Ce bac à sable a été supprimé par conséquent la configuration ne peut pas être sauvegardée.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="682"/>
+        <location filename="Windows/OptionsWindow.cpp" line="699"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>Certains changements n&apos;ont pas encore été enregistrés, voulez-vous vraiment fermer cette fenêtre d&apos;options ?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="703"/>
+        <location filename="Windows/OptionsWindow.cpp" line="720"/>
         <source>Enter program:</source>
         <translation>Saisir le programme :</translation>
     </message>
@@ -3406,22 +3406,22 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation>Navigateur web dans un bac à sable</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="554"/>
+        <location filename="Windows/SettingsWindow.cpp" line="557"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Ce certificat d&apos;adhérent a expiré, veuillez &lt;a href=&quot;sbie://update/cert&quot;&gt;obtenir un certificat à jour&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="559"/>
+        <location filename="Windows/SettingsWindow.cpp" line="562"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Ce certificat d&apos;adhérent va &lt;font color=&apos;red&apos;&gt;expirer dans %1 jour(s)&lt;/font&gt;, veuillez &lt;a href=&quot;sbie://update/cert&quot;&gt;obtenir une mise à jour du certificat&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="666"/>
+        <location filename="Windows/SettingsWindow.cpp" line="669"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>Exécuter &amp;en dehors d&apos;un bac à sable</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="862"/>
+        <location filename="Windows/SettingsWindow.cpp" line="865"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>Cela ne semble pas être un certificat. Veuillez saisir le certificat dans son intégralité, et non uniquement une partie.</translation>
     </message>
@@ -3437,83 +3437,83 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation type="unfinished">Rechercher dans les paramètres</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="880"/>
+        <location filename="Windows/SettingsWindow.cpp" line="883"/>
         <source>This certificate is unfortunately expired.</source>
         <translation>Ce certificat est malheureusement expiré.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="882"/>
+        <location filename="Windows/SettingsWindow.cpp" line="885"/>
         <source>This certificate is unfortunately outdated.</source>
         <translation>Ce certificat est malheureusement obsolète.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="885"/>
+        <location filename="Windows/SettingsWindow.cpp" line="888"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Merci pour votre soutien au développement de Sandboxie-Plus.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="893"/>
+        <location filename="Windows/SettingsWindow.cpp" line="896"/>
         <source>This support certificate is not valid.</source>
         <translation>Ce certificat de soutien n&apos;est pas valide.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="924"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1043"/>
+        <location filename="Windows/SettingsWindow.cpp" line="927"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1046"/>
         <source>Select Directory</source>
         <translation>Sélectionner le dossier</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="952"/>
+        <location filename="Windows/SettingsWindow.cpp" line="955"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Vérifier maintenant&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1005"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1008"/>
         <source>Please enter the new configuration password.</source>
         <translation>Veuillez saisir le nouveau mot de passe de configuration.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1009"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1012"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Veuillez saisir à nouveau le mot de passe de la configuration.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1014"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1017"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Les mots de passe ne correspondent pas, veuillez réessayer.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1024"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1027"/>
         <source>Process</source>
         <translation>Processus</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1024"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1027"/>
         <source>Folder</source>
         <translation>Dossier</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1034"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1037"/>
         <source>Please enter a program file name</source>
         <translation>Veuillez saisir le nom de fichier du programme</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1171"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1174"/>
         <source>%1 (Current)</source>
         <translation>%1 (Actuel)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1172"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1175"/>
         <source>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1173"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1176"/>
         <source>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1195"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1198"/>
         <source>Do you want to download the version %1?</source>
         <translation>Voulez-vous télécharger la version %1 ?</translation>
     </message>

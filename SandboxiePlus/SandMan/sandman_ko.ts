@@ -409,8 +409,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>모든 프로그램</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="694"/>
-        <location filename="Windows/OptionsWindow.cpp" line="710"/>
+        <location filename="Windows/OptionsWindow.cpp" line="711"/>
+        <location filename="Windows/OptionsWindow.cpp" line="727"/>
         <location filename="Windows/OptionsAccess.cpp" line="300"/>
         <location filename="Windows/OptionsAccess.cpp" line="516"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
@@ -786,22 +786,22 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Sandboxie Plus - &apos;%1&apos; 옵션</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="391"/>
+        <location filename="Windows/OptionsWindow.cpp" line="408"/>
         <source>Search for options</source>
         <translation>옵션 검색</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="638"/>
+        <location filename="Windows/OptionsWindow.cpp" line="655"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>이 샌드박스가 삭제되어 구성을 저장할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="682"/>
+        <location filename="Windows/OptionsWindow.cpp" line="699"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>일부 변경 사항이 아직 저장되지 않았습니다. 이 옵션 창을 닫으시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="703"/>
+        <location filename="Windows/OptionsWindow.cpp" line="720"/>
         <source>Enter program:</source>
         <translation>프로그램 입력:</translation>
     </message>
@@ -3095,103 +3095,103 @@ No will choose: %2</source>
         <translation>샌드박스 웹 브라우저</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="554"/>
+        <location filename="Windows/SettingsWindow.cpp" line="557"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>이 후원자 인증서가 만료되었습니다, &lt;a href=&quot;sbie://update/cert&quot;&gt;에서 업데이트된 인증서 를 받으십시오&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="559"/>
+        <location filename="Windows/SettingsWindow.cpp" line="562"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>이 후원자 인증서는 &lt;font color=&apos;red&apos;&gt; %1일 후 &lt;/font&gt;에 만료됩니다, &lt;a href=&quot;sbie://update/cert&quot;&gt;에서 업데이트된 인증서를 받으십시오&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="666"/>
+        <location filename="Windows/SettingsWindow.cpp" line="669"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>샌드박스를 사용하지 않은 실행(&amp;U)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="862"/>
+        <location filename="Windows/SettingsWindow.cpp" line="865"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>인증서로 보이지 않습니다. 인증서 일부가 아닌 전체 인증서를 입력하십시오.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="880"/>
+        <location filename="Windows/SettingsWindow.cpp" line="883"/>
         <source>This certificate is unfortunately expired.</source>
         <translation>이 인증서는 안타깝게도 만료되었습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="882"/>
+        <location filename="Windows/SettingsWindow.cpp" line="885"/>
         <source>This certificate is unfortunately outdated.</source>
         <translation>안타깝게도 이 인증서는 오래되었습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="885"/>
+        <location filename="Windows/SettingsWindow.cpp" line="888"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Sandboxie-Plus 개발을 지원해 주셔서 감사합니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="893"/>
+        <location filename="Windows/SettingsWindow.cpp" line="896"/>
         <source>This support certificate is not valid.</source>
         <translation>이 후원 인증서는 유효하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="924"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1043"/>
+        <location filename="Windows/SettingsWindow.cpp" line="927"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1046"/>
         <source>Select Directory</source>
         <translation>디렉터리 선택</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="952"/>
+        <location filename="Windows/SettingsWindow.cpp" line="955"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;지금 확인&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1005"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1008"/>
         <source>Please enter the new configuration password.</source>
         <translation>새 구성 암호를 입력하십시오.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1009"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1012"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>새 구성 암호를 다시 입력하십시오.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1014"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1017"/>
         <source>Passwords did not match, please retry.</source>
         <translation>암호가 일치하지 않습니다. 다시 시도하십시오.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1024"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1027"/>
         <source>Process</source>
         <translation>프로세스</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1024"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1027"/>
         <source>Folder</source>
         <translation>폴더</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1034"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1037"/>
         <source>Please enter a program file name</source>
         <translation>프로그램 파일 이름을 입력하십시오</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1171"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1174"/>
         <source>%1 (Current)</source>
         <translation>%1 (현재)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1172"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1175"/>
         <source>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1173"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1176"/>
         <source>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1195"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1198"/>
         <source>Do you want to download the version %1?</source>
         <translation>%1 버전을 다운로드하시겠습니까?</translation>
     </message>

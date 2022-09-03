@@ -6,8 +6,21 @@ jobs:
   publish:
     runs-on: windows-latest # action can only be run on windows
     steps:
-      - uses: vedantmgoyal2009/winget-releaser@latest
+      - name: Publish Sandboxie-Plus
+        uses: vedantmgoyal2009/winget-releaser@latest
         with:
           identifier: Sandboxie.Plus
           installers-regex: 'Sandboxie-Plus.*.exe$'
+          token: ${{ secrets.WINGET_TOKEN }}
+      - name: Get Sandboxie-Classic version
+        id: get_version
+        run: |
+          $VERSION="${{ github.event.release.name }}" -replace '^.*/ '
+          Write-Host ::set-output name=CLASSIC_VER::$VERSION
+      - name: Publish Sandboxie-Classic
+        uses: vedantmgoyal2009/winget-releaser@latest
+        with:
+          version: ${{ steps.get_version.outputs.CLASSIC_VER }}
+          identifier: Sandboxie.Classic
+          installers-regex: 'Sandboxie-Classic.*.exe$'
           token: ${{ secrets.WINGET_TOKEN }}

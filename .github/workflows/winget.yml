@@ -16,7 +16,8 @@ jobs:
         id: get_version
         run: |
           $VERSION="${{ github.event.release.name }}" -replace '^.*/ '
-          Write-Host ::set-output name=CLASSIC_VER::$VERSION
+          Write-Host "::set-output name=CLASSIC_VER::$VERSION"
+        shell: pwsh
       - name: Publish Sandboxie-Classic
         uses: vedantmgoyal2009/winget-releaser@latest
         with:

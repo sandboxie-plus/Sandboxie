@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
  * Copyright 2020 David Xanatos, xanasoft.com
  *

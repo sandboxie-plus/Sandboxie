@@ -1,4 +1,4 @@
-﻿#include <windows.h>
+#include <windows.h>
 //#include <appmodel.h>
 
 #include <winrt/Windows.Management.Deployment.h>

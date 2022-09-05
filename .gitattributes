@@ -31,9 +31,6 @@ Sandboxie/install/Templates.ini text working-tree-encoding=UTF-8 filter=utf8-aut
 # https://github.com/sandboxie-plus/Sandboxie/pull/1572
 Sandboxie/msgs/*.txt text working-tree-encoding=UTF-8 eol=crlf
 
-# Attempt to set utf-8 consistently for all reports
-Sandboxie/msgs/report/*.txt text working-tree-encoding=UTF-8
-
 # Set crlf EOL for *.bat and *.cmd files to prevent a label parser issue with lf:
 # https://serverfault.com/questions/429594/is-it-safe-to-write-batch-files-with-unix-line-endings
 # Please uncomment the lines below only if needed

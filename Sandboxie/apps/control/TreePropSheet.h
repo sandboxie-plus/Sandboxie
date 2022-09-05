@@ -536,6 +536,6 @@ private:
 /////////////////////////////////////////////////////////////////////////////
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ fügt unmittelbar vor der vorhergehenden Zeile zusätzliche Deklarationen ein.
+// Microsoft Visual C++ fÃ¼gt unmittelbar vor der vorhergehenden Zeile zusÃ¤tzliche Deklarationen ein.
 
 #endif // AFX_TREEPROPSHEET_H__50695CFB_FCE4_4188_ADB4_BF05A5488E41__INCLUDED_

@@ -187,16 +187,6 @@ _FX OB_PREOP_CALLBACK_STATUS Obj_PreOperationCallback(
         return OB_PREOP_SUCCESS;
 
     //
-    // Get the sandboxed process if this request comes form one,
-    // filter only requests from sandboxed processes
-    //
-
-    PROCESS *proc = NULL;
-    proc = Process_Find(NULL, NULL);
-    if (!proc || (proc == PROCESS_TERMINATED) || proc->bHostInject || proc->disable_object_flt)
-        return OB_PREOP_SUCCESS;
-
-    //
     // Get information about the intended operation
     //
 
@@ -231,16 +221,8 @@ _FX OB_PREOP_CALLBACK_STATUS Obj_PreOperationCallback(
     if (PreInfo->ObjectType == *PsProcessType)  {
 
         HANDLE TargetProcessId = PsGetProcessId((PEPROCESS)PreInfo->Object);
-
-        //
-        // Ignore requests for threads belonging to the current processes.
-        //
-
-        if (TargetProcessId == PsGetCurrentProcessId()) 
-            goto Exit;        
-
         PEPROCESS ProcessObject = (PEPROCESS)PreInfo->Object;
-        if (!NT_SUCCESS(Thread_CheckObject_Common(proc, ProcessObject, InitialDesiredAccess, TRUE, TRUE))) {
+        if (!NT_SUCCESS(Thread_CheckObject_CommonEx(TargetProcessId, ProcessObject, InitialDesiredAccess, TRUE, TRUE))) {
 
 #ifdef DRV_BREAKOUT
             //
@@ -248,12 +230,16 @@ _FX OB_PREOP_CALLBACK_STATUS Obj_PreOperationCallback(
             //
 
             BOOLEAN is_breakout = FALSE;
+            PROCESS *proc;
             PROCESS *proc2;
             KIRQL irql;
 
-            proc2 = Process_Find(TargetProcessId, &irql);
-            if (proc2 && Process_IsStarter(proc, proc2)) {
-                is_breakout = TRUE;
+            proc = Process_Find(NULL, NULL);
+            if (proc) {
+                proc2 = Process_Find(TargetProcessId, &irql);
+                if (proc2 && Process_IsStarter(proc, proc2)) {
+                    is_breakout = TRUE;
+                }
             }
 
             ExReleaseResourceLite(Process_ListLock);
@@ -290,16 +276,8 @@ _FX OB_PREOP_CALLBACK_STATUS Obj_PreOperationCallback(
     else if (PreInfo->ObjectType == *PsThreadType)  {
 
         HANDLE TargetProcessId = PsGetThreadProcessId ((PETHREAD)PreInfo->Object);
-
-        //
-        // Ignore requests that are trying to open/duplicate the current process.
-        //
-
-        if (TargetProcessId == PsGetCurrentProcessId()) 
-            goto Exit;
-
         PEPROCESS ProcessObject = PsGetThreadProcess((PETHREAD)PreInfo->Object);
-        if (!NT_SUCCESS(Thread_CheckObject_Common(proc, ProcessObject, InitialDesiredAccess, FALSE, TRUE))) {
+        if (!NT_SUCCESS(Thread_CheckObject_CommonEx(TargetProcessId, ProcessObject, InitialDesiredAccess, FALSE, TRUE))) {
             *DesiredAccess = 0; // deny any access
         }
         //ObjectTypeName = L"PsThreadType";

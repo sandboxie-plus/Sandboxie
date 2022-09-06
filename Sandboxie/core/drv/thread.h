@@ -99,6 +99,11 @@ NTSTATUS Thread_CheckObject_Common(
     ACCESS_MASK GrantedAccess, BOOLEAN EntireProcess,
     BOOLEAN ExplicitAccess);
 
+NTSTATUS Thread_CheckObject_CommonEx(
+    HANDLE pid, PEPROCESS ProcessObject,
+    ACCESS_MASK GrantedAccess, BOOLEAN EntireProcess,
+    BOOLEAN ExplicitAccess);
+
 //---------------------------------------------------------------------------
 
 

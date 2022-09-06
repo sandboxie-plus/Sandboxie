@@ -10,6 +10,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added username notation when the LogFile registry setting is applied as workaround for [#2207](https://github.com/sandboxie-plus/Sandboxie/issues/2207)
 -- usage: in "HKLM\SYSTEM\CurrentControlSet\Services\SbieSvc" add REG_SZ "LogFile" with "3;[path]\Sandboxie.log"
+- added option to block host processes from accessing sandboxed once [#2132](https://github.com/sandboxie-plus/Sandboxie/issues/2132)
+-- usage: DenyHostAccess=Program.exe,y
+- added compatybility template for ReHIPS
 
 ### Changed
 - improved sandman settings behaviour for non admin users [#2123](https://github.com/sandboxie-plus/Sandboxie/issues/2123)

@@ -28,6 +28,7 @@
 #include "obj.h"
 #include "session.h"
 #include "api.h"
+#include "util.h"
 
 
 //---------------------------------------------------------------------------
@@ -1126,6 +1127,87 @@ finish:
         Mem_Free(nbuf, nlen);
 
     return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Thread_CheckObject_CommonEx
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Thread_CheckObject_CommonEx(
+    HANDLE pid, PEPROCESS ProcessObject,
+    ACCESS_MASK GrantedAccess, BOOLEAN EntireProcess,
+    BOOLEAN ExplicitAccess)
+{
+    //
+    // Ignore requests for threads belonging to the current processes.
+    //
+
+    HANDLE cur_pid = PsGetCurrentProcessId();
+    if (pid == cur_pid)
+        return STATUS_SUCCESS;
+
+    //
+    // Get the sandboxed process if this request comes form one
+    //
+
+    PROCESS *proc = Process_Find(NULL, NULL);
+
+    //
+    // This functionality allows to protect boxed processes from host processes
+    // we need to grant access to sbiesvc.exe and csrss.exe
+    // 
+    // If the calling process is sandboxed the later common check will do the blocking
+    //
+
+    if (!proc || proc->bHostInject) { // caller is not sandboxed
+
+        KIRQL irql;
+        PROCESS* proc2 = Process_Find(pid, &irql);
+        BOOLEAN protect_process = FALSE;
+
+        if (proc2 && !proc2->bHostInject) { // target is sandboxed
+
+            void* nbuf = 0;
+            ULONG nlen = 0;
+            WCHAR* nptr = 0;
+            Process_GetProcessName(proc2->pool, (ULONG_PTR)cur_pid, &nbuf, &nlen, &nptr);
+            if (nbuf) {
+
+                protect_process = Process_GetConfEx_bool(proc2->box, nptr, L"DenyHostAccess", FALSE);
+
+                //
+                // in case use specified wildcard "*" always grant access to sbiesvc.exe and csrss.exe
+                //
+
+                if (protect_process && MyIsProcessRunningAsSystemAccount(cur_pid)) {
+                    if ((_wcsicmp(nptr, SBIESVC_EXE) == 0) || (_wcsicmp(nptr, L"csrss.exe") == 0))
+                        protect_process = FALSE;
+                }
+
+                Mem_Free(nbuf, nlen);
+            }
+        }
+
+        ExReleaseResourceLite(Process_ListLock);
+        KeLowerIrql(irql);
+
+        if (protect_process) {
+
+            DbgPrint("SBIE: protect boxed processes %d from %d\n", pid, cur_pid);
+            return STATUS_ACCESS_DENIED;
+        }
+    }
+
+    //
+    // filter only requests from sandboxed processes
+    //
+
+    if (!proc || (proc == PROCESS_TERMINATED) || proc->bHostInject || proc->disable_object_flt)
+        return STATUS_SUCCESS;
+
+    return Thread_CheckObject_Common(proc, ProcessObject, GrantedAccess, EntireProcess, ExplicitAccess);
 }
 
 

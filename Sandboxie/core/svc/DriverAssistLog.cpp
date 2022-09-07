@@ -206,7 +206,7 @@ void DriverAssist::LogMessage_Single(ULONG code, wchar_t* data, ULONG pid)
                 LMEM_FIXED, (wcslen(text) + UNLEN + DNLEN + 10) * sizeof(WCHAR));
             if (text2) {
 
-                wsprintf(text2, L"%s (%s\%s)", text, user, domain);
+                wsprintf(text2, L"%s (%s\\%s)", text, user, domain);
 
                 LocalFree(text);
                 text = text2;

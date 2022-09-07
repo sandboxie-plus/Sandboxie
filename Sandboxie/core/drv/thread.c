@@ -1179,11 +1179,20 @@ _FX NTSTATUS Thread_CheckObject_CommonEx(
 
                 //
                 // in case use specified wildcard "*" always grant access to sbiesvc.exe and csrss.exe
+                // and a few others
                 //
 
-                if (protect_process && MyIsProcessRunningAsSystemAccount(cur_pid)) {
-                    if ((_wcsicmp(nptr, SBIESVC_EXE) == 0) || (_wcsicmp(nptr, L"csrss.exe") == 0))
+                if (protect_process /*&& MyIsProcessRunningAsSystemAccount(cur_pid)*/) {
+                    if ((_wcsicmp(nptr, SBIESVC_EXE) == 0) || (_wcsicmp(nptr, L"csrss.exe") == 0) 
+                      || (_wcsicmp(nptr, L"conhost.exe") == 0)
+                      || (_wcsicmp(nptr, L"taskmgr.exe") == 0) || (_wcsicmp(nptr, L"sandman.exe") == 0))
                         protect_process = FALSE;
+                }
+
+                if (protect_process) {
+                    WCHAR msg_str[256];
+                    RtlStringCbPrintfW(msg_str, sizeof(msg_str), L"Protect boxed processes %s (%d) from %s (%d)", proc2->image_name, (ULONG)pid, nptr, (ULONG)cur_pid);
+                    Session_MonitorPut(MONITOR_IMAGE | MONITOR_TRACE, msg_str, PsGetCurrentProcessId());
                 }
 
                 Mem_Free(nbuf, nlen);
@@ -1193,11 +1202,8 @@ _FX NTSTATUS Thread_CheckObject_CommonEx(
         ExReleaseResourceLite(Process_ListLock);
         KeLowerIrql(irql);
 
-        if (protect_process) {
-
-            DbgPrint("SBIE: protect boxed processes %d from %d\n", pid, cur_pid);
+        if (protect_process)
             return STATUS_ACCESS_DENIED;
-        }
     }
 
     //

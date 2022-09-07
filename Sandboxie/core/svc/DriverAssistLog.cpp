@@ -200,13 +200,13 @@ void DriverAssist::LogMessage_Single(ULONG code, wchar_t* data, ULONG pid)
 
         WCHAR user[UNLEN + 1];
         WCHAR domain[DNLEN + 1];
-        if (GetUserNameFromProcess(pid, user, UNLEN + 1, domain, DNLEN + 1)) {
+        if (GetUserNameFromProcess(pid, domain, DNLEN + 1, user, UNLEN + 1)) {
 
             WCHAR *text2 = (WCHAR *)LocalAlloc(
-                LMEM_FIXED, (wcslen(text) + UNLEN + DNLEN + 10) * sizeof(WCHAR));
+                LMEM_FIXED, (wcslen(text) + DNLEN + UNLEN + 10) * sizeof(WCHAR));
             if (text2) {
 
-                wsprintf(text2, L"%s (%s\\%s)", text, user, domain);
+                wsprintf(text2, L"%s (%s\\%s)", text, domain, user);
 
                 LocalFree(text);
                 text = text2;

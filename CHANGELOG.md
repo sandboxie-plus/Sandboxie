@@ -12,6 +12,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- usage: in "HKLM\SYSTEM\CurrentControlSet\Services\SbieSvc" add REG_SZ "LogFile" with "3;[path]\Sandboxie.log"
 - added option to block host processes from accessing sandboxed once [#2132](https://github.com/sandboxie-plus/Sandboxie/issues/2132)
 -- usage: DenyHostAccess=Program.exe,y
+-- note: by default this protection only applyied for write access, that is unsandboxed processes will still be able to obtain read only access
+-- to prevent host processes from obtaining read access ConfidentialBox=y must also be set, which require a supporter certificate
 - added compatybility template for ReHIPS
 
 ### Changed

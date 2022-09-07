@@ -1,5 +1,0 @@
-# Remove the BOM from Git with a filter:
-# https://github.com/jlapolla/git-cookbook/blob/master/unicode-bom.md
-[filter "utf8-autobom"]
-        clean = sed -b -e '1!b' -e 's/^\\xEF\\xBB\\xBF//'
-        smudge = sed -b -e '1!b' -e 's/\\(^\\|^\\xEF\\xBB\\xBF\\)/\\xEF\\xBB\\xBF/'

@@ -17,16 +17,6 @@ Sandboxie/install/*.txt text working-tree-encoding=UTF-8 eol=lf
 SandboxiePlus/QtSingleApp/*.txt text working-tree-encoding=UTF-8 eol=lf
 Installer/isl/*.isl text eol=lf
 
-# Set utf-8-bom for some Inno Setup languages subject to encoding issues:
-# https://github.com/sandboxie-plus/Sandboxie/pull/2173
-Installer/isl/ChineseSimplified.isl text working-tree-encoding=UTF-8 filter=utf8-autobom
-Installer/isl/ChineseTraditional.isl text working-tree-encoding=UTF-8 filter=utf8-autobom
-Installer/isl/Korean.isl text working-tree-encoding=UTF-8 filter=utf8-autobom
-
-# Set utf-8-bom for Templates.ini file:
-# https://github.com/sandboxie-plus/Sandboxie/pull/576#issuecomment-782938792
-Sandboxie/install/Templates.ini text working-tree-encoding=UTF-8 filter=utf8-autobom
-
 # Set crlf for the Parse script:
 # https://github.com/sandboxie-plus/Sandboxie/pull/1572
 Sandboxie/msgs/*.txt text working-tree-encoding=UTF-8 eol=crlf

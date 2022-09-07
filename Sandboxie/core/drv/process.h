@@ -148,6 +148,7 @@ struct _PROCESS {
     BOOLEAN use_rule_specificity;
     BOOLEAN use_privacy_mode;
 #endif
+    BOOLEAN confidential_box;
 
     ULONG call_trace;
 

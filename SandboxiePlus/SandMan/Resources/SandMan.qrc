@@ -97,6 +97,7 @@
         <file>Actions/Anon.png</file>
         <file>Actions/Users.png</file>
         <file>Actions/Bug.png</file>
+        <file>Actions/Alarm.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

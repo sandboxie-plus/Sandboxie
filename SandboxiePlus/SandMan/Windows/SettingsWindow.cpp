@@ -120,7 +120,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.tabs->setTabIcon(eShell, CSandMan::GetIcon("Shell"));
 	ui.tabs->setTabIcon(eGuiConfig, CSandMan::GetIcon("GUI"));
 	ui.tabs->setTabIcon(eAdvanced, CSandMan::GetIcon("Advanced"));
-	ui.tabs->setTabIcon(eProgCtrl, CSandMan::GetIcon("Ampel"));
+	ui.tabs->setTabIcon(eProgCtrl, CSandMan::GetIcon("Alarm"));
 	ui.tabs->setTabIcon(eConfigLock, CSandMan::GetIcon("Lock"));
 	ui.tabs->setTabIcon(eSoftCompat, CSandMan::GetIcon("Compatibility"));
 	ui.tabs->setTabIcon(eEditIni, CSandMan::GetIcon("EditIni"));

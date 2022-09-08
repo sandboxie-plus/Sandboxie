@@ -651,7 +651,7 @@ void CSandMan::CreateOldMenus()
 		m_pMenuSettings = m_pMenuOptions->addAction(CSandMan::GetIcon("Settings"), tr("Global Settings"), this, SLOT(OnSettings()));
 		m_pMenuOptions->addSeparator();
 
-		QAction* m_pProgramAlert = m_pMenuOptions->addAction(CSandMan::GetIcon("Ampel"), tr("Program Alerts"), this, SLOT(OnSettingsAction()));
+		QAction* m_pProgramAlert = m_pMenuOptions->addAction(CSandMan::GetIcon("Alarm"), tr("Program Alerts"), this, SLOT(OnSettingsAction()));
 		m_pProgramAlert->setData(CSettingsWindow::eProgCtrl);
 		QAction* m_pWindowsShell = m_pMenuOptions->addAction(CSandMan::GetIcon("Shell"), tr("Windows Shell Integration"), this, SLOT(OnSettingsAction()));
 		m_pWindowsShell->setData(CSettingsWindow::eShell);

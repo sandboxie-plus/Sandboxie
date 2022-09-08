@@ -28,6 +28,7 @@
 #include "obj.h"
 #include "session.h"
 #include "api.h"
+#include "util.h"
 
 
 //---------------------------------------------------------------------------
@@ -1126,6 +1127,151 @@ finish:
         Mem_Free(nbuf, nlen);
 
     return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Thread_CheckObject_CommonEx
+//---------------------------------------------------------------------------
+
+
+_FX ACCESS_MASK Thread_CheckObject_CommonEx(
+    HANDLE pid, PEPROCESS ProcessObject,
+    ACCESS_MASK DesiredAccess, BOOLEAN EntireProcess,
+    BOOLEAN ExplicitAccess)
+{
+    //
+    // Ignore requests for threads belonging to the current processes.
+    //
+
+    HANDLE cur_pid = PsGetCurrentProcessId();
+    if (pid == cur_pid)
+        return DesiredAccess;
+
+    //
+    // Get the sandboxed process if this request comes form one
+    //
+
+    PROCESS *proc = Process_Find(NULL, NULL);
+
+    //
+    // This functionality allows to protect boxed processes from host processes
+    // we need to grant access to sbiesvc.exe and csrss.exe
+    // 
+    // If the calling process is sandboxed the later common check will do the blocking
+    //
+
+    if (!proc || proc->bHostInject) { // caller is not sandboxed
+
+        KIRQL irql;
+        PROCESS* proc2 = Process_Find(pid, &irql);
+        BOOLEAN protect_process = FALSE;
+
+        if (proc2 && !proc2->bHostInject) { // target is sandboxed
+
+            ACCESS_MASK WriteAccess;
+            if (EntireProcess)
+                WriteAccess = (DesiredAccess & PROCESS_DENIED_ACCESS_MASK);
+            else
+                WriteAccess = (DesiredAccess & THREAD_DENIED_ACCESS_MASK);
+
+            if (WriteAccess || proc2->confidential_box) {
+
+                void* nbuf = 0;
+                ULONG nlen = 0;
+                WCHAR* nptr = 0;
+                Process_GetProcessName(proc2->pool, (ULONG_PTR)cur_pid, &nbuf, &nlen, &nptr);
+                if (nbuf) {
+
+                    protect_process = Process_GetConfEx_bool(proc2->box, nptr, L"DenyHostAccess", FALSE);
+
+                    //
+                    // in case use specified wildcard "*" always grant access to sbiesvc.exe and csrss.exe
+                    // and a few others
+                    //
+
+                    if (protect_process /*&& MyIsProcessRunningAsSystemAccount(cur_pid)*/) {
+                        if ((_wcsicmp(nptr, SBIESVC_EXE) == 0) || (_wcsicmp(nptr, L"csrss.exe") == 0)
+                            || (_wcsicmp(nptr, L"conhost.exe") == 0)
+                            || (_wcsicmp(nptr, L"taskmgr.exe") == 0) || (_wcsicmp(nptr, L"sandman.exe") == 0))
+                            protect_process = FALSE;
+                    }
+
+                    if (protect_process) {
+                        WCHAR msg_str[256];
+                        RtlStringCbPrintfW(msg_str, sizeof(msg_str), L"Protect boxed processes %s (%d) from %s (%d) requesting 0x%08X", proc2->image_name, (ULONG)pid, nptr, (ULONG)cur_pid, DesiredAccess);
+                        Session_MonitorPut(MONITOR_IMAGE | MONITOR_TRACE, msg_str, pid);
+                    }
+
+                    Mem_Free(nbuf, nlen);
+                }
+            }
+        }
+
+        ExReleaseResourceLite(Process_ListLock);
+        KeLowerIrql(irql);
+
+        if (protect_process)
+            return 0; // deny access
+    }
+
+    //
+    // filter only requests from sandboxed processes
+    //
+
+    if (!proc || (proc == PROCESS_TERMINATED) || proc->bHostInject || proc->disable_object_flt)
+        return DesiredAccess;
+
+    if (!NT_SUCCESS(Thread_CheckObject_Common(proc, ProcessObject, DesiredAccess, EntireProcess, ExplicitAccess))) {
+
+#ifdef DRV_BREAKOUT
+        if (EntireProcess) {
+            //
+            // Check if this is a break out process
+            //
+
+            BOOLEAN is_breakout = FALSE;
+            PROCESS* proc2;
+            KIRQL irql;
+
+            proc2 = Process_Find(pid, &irql);
+            if (proc2 && Process_IsStarter(proc, proc2)) {
+                is_breakout = TRUE;
+            }
+
+            ExReleaseResourceLite(Process_ListLock);
+            KeLowerIrql(irql);
+
+            if (is_breakout) {
+
+                //
+                // this is a BreakoutProcess in this case we need to grant some permissions
+                //
+
+                return DesiredAccess & (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE |
+                    /**/PROCESS_TERMINATE |
+                    //PROCESS_CREATE_THREAD |
+                    //PROCESS_SET_SESSIONID | 
+                    /**/PROCESS_VM_OPERATION | // needed
+                    PROCESS_VM_READ |
+                    /**/PROCESS_VM_WRITE | // needed
+                    //PROCESS_DUP_HANDLE |
+                    PROCESS_CREATE_PROCESS |
+                    //PROCESS_SET_QUOTA | 
+                    /**/PROCESS_SET_INFORMATION | // needed
+                    PROCESS_QUERY_INFORMATION |
+                    /**/PROCESS_SUSPEND_RESUME | // needed
+                    PROCESS_QUERY_LIMITED_INFORMATION |
+                    //PROCESS_SET_LIMITED_INFORMATION |
+                    0);
+            }
+        }
+#endif
+
+        return 0;
+    }
+
+    return DesiredAccess;
 }
 
 

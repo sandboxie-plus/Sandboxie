@@ -148,6 +148,7 @@ struct _PROCESS {
     BOOLEAN use_rule_specificity;
     BOOLEAN use_privacy_mode;
 #endif
+    BOOLEAN confidential_box;
 
     ULONG call_trace;
 
@@ -333,12 +334,14 @@ ULONG Process_MatchPathEx(
 // Process_GetConf:  retrieves a configuration data value for a given process
 // use with Conf_AdjustUseCount to make sure the returned pointer is valid
 
+const WCHAR* Process_GetConfEx(BOX* box, const WCHAR* image_name, const WCHAR* setting);
 const WCHAR* Process_GetConf(PROCESS* proc, const WCHAR* setting);
 
 
 // Process_GetConf_bool:  parses a y/n setting.  this function does not
 // have to be protected with Conf_AdjustUseCount
 
+BOOLEAN Process_GetConfEx_bool(BOX* box, const WCHAR* image_name, const WCHAR* setting, BOOLEAN def);
 BOOLEAN Process_GetConf_bool(PROCESS* proc, const WCHAR* setting, BOOLEAN def);
 
 

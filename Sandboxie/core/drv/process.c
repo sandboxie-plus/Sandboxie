@@ -740,6 +740,7 @@ _FX PROCESS *Process_Create(
     proc->use_privacy_mode = Conf_Get_Boolean(proc->box->name, L"UsePrivacyMode", 0, FALSE); 
     proc->use_rule_specificity = proc->restrict_devices || proc->use_privacy_mode || Conf_Get_Boolean(proc->box->name, L"UseRuleSpecificity", 0, FALSE); 
 #endif
+    proc->confidential_box = Conf_Get_Boolean(proc->box->name, L"ConfidentialBox", 0, FALSE); 
 
     //
     // check certificate
@@ -764,6 +765,8 @@ _FX PROCESS *Process_Create(
 #endif
         if (proc->bAppCompartment)
             exclusive_setting = L"NoSecurityIsolation";
+        else if (proc->confidential_box)
+            exclusive_setting = L"ConfidentialBox";
 
         if (exclusive_setting) {
 

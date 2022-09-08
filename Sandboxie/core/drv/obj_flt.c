@@ -187,16 +187,6 @@ _FX OB_PREOP_CALLBACK_STATUS Obj_PreOperationCallback(
         return OB_PREOP_SUCCESS;
 
     //
-    // Get the sandboxed process if this request comes form one,
-    // filter only requests from sandboxed processes
-    //
-
-    PROCESS *proc = NULL;
-    proc = Process_Find(NULL, NULL);
-    if (!proc || (proc == PROCESS_TERMINATED) || proc->bHostInject || proc->disable_object_flt)
-        return OB_PREOP_SUCCESS;
-
-    //
     // Get information about the intended operation
     //
 
@@ -231,78 +221,14 @@ _FX OB_PREOP_CALLBACK_STATUS Obj_PreOperationCallback(
     if (PreInfo->ObjectType == *PsProcessType)  {
 
         HANDLE TargetProcessId = PsGetProcessId((PEPROCESS)PreInfo->Object);
-
-        //
-        // Ignore requests for threads belonging to the current processes.
-        //
-
-        if (TargetProcessId == PsGetCurrentProcessId()) 
-            goto Exit;        
-
         PEPROCESS ProcessObject = (PEPROCESS)PreInfo->Object;
-        if (!NT_SUCCESS(Thread_CheckObject_Common(proc, ProcessObject, InitialDesiredAccess, TRUE, TRUE))) {
-
-#ifdef DRV_BREAKOUT
-            //
-            // Check if this is a break out process
-            //
-
-            BOOLEAN is_breakout = FALSE;
-            PROCESS *proc2;
-            KIRQL irql;
-
-            proc2 = Process_Find(TargetProcessId, &irql);
-            if (proc2 && Process_IsStarter(proc, proc2)) {
-                is_breakout = TRUE;
-            }
-
-            ExReleaseResourceLite(Process_ListLock);
-            KeLowerIrql(irql);
-
-            if (is_breakout) {
-
-                //
-                // this is a BreakoutProcess in this case we need to grant some permissions
-                //
-
-                *DesiredAccess = InitialDesiredAccess & (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE |
-                                                            /**/PROCESS_TERMINATE |
-                                                            //PROCESS_CREATE_THREAD |
-                                                            //PROCESS_SET_SESSIONID | 
-                                                            /**/PROCESS_VM_OPERATION | // needed
-                                                            PROCESS_VM_READ |
-                                                            /**/PROCESS_VM_WRITE | // needed
-                                                            //PROCESS_DUP_HANDLE |
-                                                            PROCESS_CREATE_PROCESS |
-                                                            //PROCESS_SET_QUOTA | 
-                                                            /**/PROCESS_SET_INFORMATION  | // needed
-                                                            PROCESS_QUERY_INFORMATION |
-                                                            /**/PROCESS_SUSPEND_RESUME | // needed
-                                                            PROCESS_QUERY_LIMITED_INFORMATION |
-                                                            //PROCESS_SET_LIMITED_INFORMATION |
-                                                        0);
-            } else
-#endif
-                *DesiredAccess = 0; // deny any access
-        }
-        //ObjectTypeName = L"PsProcessType";
+        *DesiredAccess = Thread_CheckObject_CommonEx(TargetProcessId, ProcessObject, InitialDesiredAccess, TRUE, TRUE);
     }
     else if (PreInfo->ObjectType == *PsThreadType)  {
 
         HANDLE TargetProcessId = PsGetThreadProcessId ((PETHREAD)PreInfo->Object);
-
-        //
-        // Ignore requests that are trying to open/duplicate the current process.
-        //
-
-        if (TargetProcessId == PsGetCurrentProcessId()) 
-            goto Exit;
-
         PEPROCESS ProcessObject = PsGetThreadProcess((PETHREAD)PreInfo->Object);
-        if (!NT_SUCCESS(Thread_CheckObject_Common(proc, ProcessObject, InitialDesiredAccess, FALSE, TRUE))) {
-            *DesiredAccess = 0; // deny any access
-        }
-        //ObjectTypeName = L"PsThreadType";
+        *DesiredAccess = Thread_CheckObject_CommonEx(TargetProcessId, ProcessObject, InitialDesiredAccess, FALSE, TRUE);
     }
     else {
         DbgPrint("Sbie ObCallback: unexpected object type\n");
@@ -310,7 +236,6 @@ _FX OB_PREOP_CALLBACK_STATUS Obj_PreOperationCallback(
     }
 
 Exit:
-
     return OB_PREOP_SUCCESS;
 }
 

@@ -1198,7 +1198,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="310"/>
         <source>OPEN Root Access</source>
-        <translation>Kök Erişimini AÇ</translation>
+        <translation>Kök Erişimi AÇIK</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="312"/>

@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- note: by default, this protection only applies for write access, that is, unsandboxed processes will still be able to obtain read-only access
 -- to prevent host processes from obtaining read access, ConfidentialBox=y must also be set, which require a supporter certificate
 - added compatibility template for ReHIPS
+- added create all default folders in privacy style box [2218](https://github.com/sandboxie-plus/Sandboxie/issues/2218)
 
 ### Changed
 - improved SandMan settings behaviour for non admin users [#2123](https://github.com/sandboxie-plus/Sandboxie/issues/2123)

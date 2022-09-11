@@ -3361,11 +3361,12 @@ _FX void Key_CreateBaseFolders()
     //File_CreateBoxedPath(File_SysVolume);
 
     typedef HRESULT (*P_SHGetKnownFolderPath)(const GUID *folderid, DWORD dwFlags, HANDLE hToken, PWSTR *ppszPath);
+    typedef void (*P_CoTaskMemFree)(void *pv);
     const ULONG KF_FLAG_DONT_VERIFY = 0x00004000;
     const ULONG KF_FLAG_DONT_UNEXPAND = 0x00002000;
     //const GUID FOLDERID_Recent = { 0xAE50C081, 0xEBD2, 0x438A, { 0x86, 0x55, 0x8A, 0x09, 0x2E, 0x34, 0x98, 0x7A } };
-    
     P_SHGetKnownFolderPath SHGetKnownFolderPath = (P_SHGetKnownFolderPath) Ldr_GetProcAddrNew(DllName_shell32, L"SHGetKnownFolderPath","SHGetKnownFolderPath");
+    P_CoTaskMemFree CoTaskMemFree = (P_CoTaskMemFree) Ldr_GetProcAddrNew(DllName_ole32_or_combase, L"CoTaskMemFree","CoTaskMemFree");
     if (SHGetKnownFolderPath) {
         //GUID const * FolderIDs[] = { &FOLDERID_ProgramData, &FOLDERID_RoamingAppData, &FOLDERID_LocalAppData, &FOLDERID_LocalAppDataLow, NULL };
         GUID const* FolderIDs[] = { &FOLDERID_AccountPictures, &FOLDERID_AddNewPrograms, &FOLDERID_AdminTools, &FOLDERID_AppDataDesktop, &FOLDERID_AppDataDocuments, 
@@ -3397,6 +3398,7 @@ _FX void Key_CreateBaseFolders()
                     File_CreateBoxedPath(pathNT);
                     Dll_Free(pathNT);
                 }
+                CoTaskMemFree(path);
             }
         }
     }

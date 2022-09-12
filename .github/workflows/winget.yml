@@ -4,7 +4,7 @@ on:
     types: [released]
 jobs:
   publish-plus:
-    runs-on: windows-latest # action can only be run on windows
+    runs-on: windows-latest # action can only be run on Windows
     steps:
       - name: Publish Sandboxie-Plus
         uses: vedantmgoyal2009/winget-releaser@latest

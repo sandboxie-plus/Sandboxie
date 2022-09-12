@@ -3,15 +3,19 @@ on:
   release:
     types: [released]
 jobs:
-  publish:
+  publish-plus:
     runs-on: windows-latest # action can only be run on windows
     steps:
       - name: Publish Sandboxie-Plus
         uses: vedantmgoyal2009/winget-releaser@latest
         with:
           identifier: Sandboxie.Plus
-          installers-regex: 'Sandboxie-Plus.*.exe$'
+          installers-regex: "Sandboxie-Plus.*.exe$"
           token: ${{ secrets.WINGET_TOKEN }}
+
+  publish-classic:
+    runs-on: windows-latest
+    steps:
       - name: Get Sandboxie-Classic version
         id: get_version
         run: |
@@ -23,5 +27,5 @@ jobs:
         with:
           version: ${{ steps.get_version.outputs.CLASSIC_VER }}
           identifier: Sandboxie.Classic
-          installers-regex: 'Sandboxie-Classic.*.exe$'
+          installers-regex: "Sandboxie-Classic.*.exe$"
           token: ${{ secrets.WINGET_TOKEN }}

@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.3.3 / 5.58.3] - 2022-09-??
+## [1.3.3 / 5.58.3] - 2022-09-12
 
 ### Added
 - added domain\user notation when the LogFile registry setting is applied as workaround for [#2207](https://github.com/sandboxie-plus/Sandboxie/issues/2207)

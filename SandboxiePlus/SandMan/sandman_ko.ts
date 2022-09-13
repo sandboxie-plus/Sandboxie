@@ -4927,7 +4927,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="60"/>
         <source>Open urls from this ui sandboxed</source>
-        <translation>이 ui 샌드박스에서 URL 열기</translation>
+        <translation>이 UI 샌드박스에서 URL 열기</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="334"/>

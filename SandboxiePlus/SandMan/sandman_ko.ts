@@ -1882,7 +1882,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="574"/>
         <source>Is Window Sandboxed?</source>
         <oldsource>Is Window Sandboxed</oldsource>
-        <translation>샌드박스된 창이 있습니까?</translation>
+        <translation>샌드박스 창이 있습니까?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="501"/>
@@ -2053,7 +2053,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2472"/>
         <source>Sandboxie config has been reloaded</source>
-        <translation>Sandboxie 구성이 다시 로드되었습니다</translation>
+        <translation>Sandboxie 구성을 다시 불러왔습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2582"/>
@@ -2244,12 +2244,12 @@ No will choose: %2</source>
     <message>
         <location filename="SbieFindWnd.cpp" line="134"/>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
-        <translation>창 위로 파인더 도구를 끌어 선택한 다음 마우스를 놓아 창이 샌드박스 상태인지 확인합니다.</translation>
+        <translation>창 위로 검색기 도구를 끌어 선택한 다음 마우스를 놓아 창이 샌드박스 상태인지 확인합니다.</translation>
     </message>
     <message>
         <location filename="SbieFindWnd.cpp" line="204"/>
         <source>Sandboxie-Plus - Window Finder</source>
-        <translation>Sandboxie-Plus - 창 파인더</translation>
+        <translation>Sandboxie-Plus - 창 검색기</translation>
     </message>
     <message>
         <location filename="main.cpp" line="120"/>
@@ -4205,7 +4205,7 @@ You can use &apos;Open for All&apos; instead to make it apply to all programs, o
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1854"/>
         <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
-        <translation>파일이 생성되는 즉시 복구할 수 있도록 즉시 복구 프롬프트를 실행하십시오.</translation>
+        <translation>파일이 생성되는 즉시 복구할 수 있도록 즉시 복구 프롬프트를 실행합니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1898"/>
@@ -4259,7 +4259,7 @@ You can use &apos;Open for All&apos; instead to make it apply to all programs, o
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1981"/>
         <source>Protect sandboxed SYSTEM processes from unprivileged processes</source>
-        <translation>권한이 없는 프로세스로부터 샌드박스된 SYSTEM 프로세스 보호</translation>
+        <translation>권한이 없는 프로세스로부터 샌드박스 SYSTEM 프로세스 보호</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2101"/>
@@ -4326,7 +4326,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2036"/>
         <source>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</source>
-        <translation>샌드박스된 RpcS를 시스템 프로세스로 시작합니다 (권장하지 않음)</translation>
+        <translation>SYSTEM 프로세스로 샌드박스 RpcS 시작 (권장하지 않음)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1995"/>
@@ -4431,7 +4431,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2132"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
-        <translation>기본적으로 RpcMgmtSetComTimeout 사용을 사용하지 않도록 설정합니다 (호환성 문제가 해결될 수 있음)</translation>
+        <translation>기본적으로 RpcMgmtSetComTimeout 사용 안 함 (호환성 문제가 해결될 수 있음)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2234"/>
@@ -4922,12 +4922,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="172"/>
         <source>Show first recovery window when emptying sandboxes</source>
-        <translation>샌드박스 비울 때 첫 번째 복구 창 표시</translation>
+        <translation>샌드박스를 비울 때 첫 번째 복구 창 표시</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="60"/>
         <source>Open urls from this ui sandboxed</source>
-        <translation>샌드박스된 이 UI에서 URL 열기</translation>
+        <translation>이 ui 샌드박스에서 URL 열기</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="334"/>
@@ -4967,7 +4967,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="223"/>
         <source>Start UI with Windows</source>
-        <translation>Windows를 사용하여 UI 시작</translation>
+        <translation>Windows로 UI 시작</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="313"/>

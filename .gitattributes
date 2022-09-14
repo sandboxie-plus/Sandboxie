@@ -6,7 +6,6 @@
 *.bat text working-tree-encoding=UTF-8
 *.cmd text working-tree-encoding=UTF-8
 *.c text working-tree-encoding=UTF-8
-*.h text working-tree-encoding=UTF-8
 *.cpp text working-tree-encoding=UTF-8
 *.rc text working-tree-encoding=UTF-8
 *.ts text working-tree-encoding=UTF-8 eol=lf
@@ -16,10 +15,6 @@ Installer/*.txt text working-tree-encoding=UTF-8 eol=lf
 Sandboxie/install/*.txt text working-tree-encoding=UTF-8 eol=lf
 SandboxiePlus/QtSingleApp/*.txt text working-tree-encoding=UTF-8 eol=lf
 Installer/isl/*.isl text eol=lf
-
-# Set crlf for the Parse script:
-# https://github.com/sandboxie-plus/Sandboxie/pull/1572
-Sandboxie/msgs/*.txt text working-tree-encoding=UTF-8 eol=crlf
 
 # Set crlf EOL for *.bat and *.cmd files to prevent a label parser issue with lf:
 # https://serverfault.com/questions/429594/is-it-safe-to-write-batch-files-with-unix-line-endings

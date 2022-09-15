@@ -963,6 +963,12 @@ QString CSbieView::AddNewGroup()
 
 bool CSbieView::TestNameAndWarn(const QString& Name)
 {
+	if (Name.contains(QRegularExpression("[,()]")))
+	{
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("The Sandbox name and Box Group name cannot use the ',()' symbol."));
+		return false;
+	}
+
 	if (m_Groups.contains(Name)) {
 		QMessageBox::critical(this, "Sandboxie-Plus", tr("This name is already used for a Box Group."));
 		return false;

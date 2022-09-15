@@ -704,6 +704,9 @@ void CSbieView::RenameGroup(const QString OldName, const QString NewName)
 	auto Group = m_Groups.take(OldName);
 	m_Groups.insert(NewName, Group);
 
+	m_Collapsed.remove(OldName);
+	m_Collapsed.insert(NewName);
+
 	RenameItem(OldName, NewName);
 }
 
@@ -814,6 +817,7 @@ void CSbieView::OnGroupAction(QAction* Action)
 						break;
 					}
 				}
+				m_Collapsed.remove(Group);
 			}
 		}
 	}

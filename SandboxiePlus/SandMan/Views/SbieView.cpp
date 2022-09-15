@@ -1198,14 +1198,14 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	}
 	else if (Action == m_pMenuRename)
 	{
-		QString OldValue = SandBoxes.first()->GetName().replace("_", " ");
-		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new name for the Sandbox."), QLineEdit::Normal, OldValue);
+		QString OldValue = SandBoxes.first()->GetName();
+		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new name for the Sandbox."), QLineEdit::Normal, OldValue).replace(" ", "_");
 		if (Value.isEmpty() || Value == OldValue)
 			return;
 		if (!TestNameAndWarn(Value))
 			return;
 
-		Results.append((SandBoxes.first()->RenameBox(Value.replace(" ", "_"))));
+		Results.append((SandBoxes.first()->RenameBox(Value)));
 
 		RenameItem(OldValue, Value);
 	}
@@ -1226,6 +1226,12 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			if (!Status.IsError())
 				Status = pBox->RemoveBox();
 			Results.append(Status);
+
+			for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
+			{
+				if (I.value().removeOne(pBox->GetName()))
+					break;
+			}
 		}	
 	}
 	else if (Action == m_pMenuCleanUp)
@@ -1345,6 +1351,9 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	}
 
 	CSandMan::CheckResults(Results);
+
+	//m_UserConfigChanged = true;
+	SaveUserConfig();
 }
 
 void CSbieView::OnProcessAction()

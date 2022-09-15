@@ -1208,6 +1208,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		Results.append((SandBoxes.first()->RenameBox(Value)));
 
 		RenameItem(OldValue, Value);
+		theConf->DelValue("SizeCache/" + OldValue);
 	}
 	else if (Action == m_pMenuRecover)
 	{
@@ -1232,7 +1233,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 				if (I.value().removeOne(pBox->GetName()))
 					break;
 			}
-		}	
+		}
 	}
 	else if (Action == m_pMenuCleanUp)
 	{

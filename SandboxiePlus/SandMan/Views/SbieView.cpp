@@ -1205,10 +1205,13 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		if (!TestNameAndWarn(Value))
 			return;
 
-		Results.append((SandBoxes.first()->RenameBox(Value)));
-
-		RenameItem(OldValue, Value);
-		theConf->DelValue("SizeCache/" + OldValue);
+		SB_STATUS Status = SandBoxes.first()->RenameBox(Value);
+		if (!Status.IsError())
+		{
+			RenameItem(OldValue, Value);
+			theConf->DelValue("SizeCache/" + OldValue);
+		}
+		Results.append(Status);
 	}
 	else if (Action == m_pMenuRecover)
 	{

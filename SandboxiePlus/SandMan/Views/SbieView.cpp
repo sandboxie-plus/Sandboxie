@@ -1224,13 +1224,14 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			SB_STATUS Status = theGUI->DeleteBoxContent(pBox, CSandMan::eForDelete);
 			if (Status.GetMsgCode() == SB_Canceled)
 				break;
+			QString m_Name = pBox->GetName();
 			if (!Status.IsError())
 				Status = pBox->RemoveBox();
 			Results.append(Status);
 
 			for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
 			{
-				if (I.value().removeOne(pBox->GetName()))
+				if (I.value().removeOne(m_Name))
 					break;
 			}
 		}

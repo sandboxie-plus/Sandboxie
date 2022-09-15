@@ -777,6 +777,7 @@ void CSbieView::OnGroupAction(QAction* Action)
 		if (List.isEmpty())
 			return;
 		m_Groups[""].removeAll(Name);
+		m_Groups[List.first()].removeAll(Name);
 		m_Groups[List.first()].append(Name);
 	}
 	else if (Action == m_pRenGroupe)

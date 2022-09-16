@@ -1138,7 +1138,7 @@ quint32 CSbieAPI::GetSessionID() const
 
 SB_STATUS CSbieAPI::ReloadBoxes(bool bForceUpdate)
 {
-	if (bForceUpdate || (!m_bBoxesDirty && !m_IniWatcher.files().isEmpty()))
+	if (!bForceUpdate && !m_bBoxesDirty && !m_IniWatcher.files().isEmpty())
 		return SB_OK;
 	m_bBoxesDirty = false;
 

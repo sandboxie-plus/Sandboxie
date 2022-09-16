@@ -236,11 +236,8 @@ void CSandBoxPlus::UpdateSize()
 
 void CSandBoxPlus::SetSize(quint64 Size)
 { 
-	m_TotalSize = Size;
-	if (m_TotalSize == 0)
-		theConf->DelValue("SizeCache/" + m_Name);
-	else
-		theConf->SetValue("SizeCache/" + m_Name, Size);
+	m_TotalSize = Size; 
+	theConf->SetValue("SizeCache/" + m_Name, Size);
 }
 
 bool CSandBoxPlus::IsSizePending() const

@@ -1215,7 +1215,6 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		if (!Status.IsError())
 		{
 			RenameItem(OldValue, Value);
-			theConf->DelValue("SizeCache/" + OldValue);
 		}
 		Results.append(Status);
 	}

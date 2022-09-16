@@ -681,15 +681,15 @@ void CSbieView::UpdateMoveMenu()
 			m_pMenuMoveTo->removeAction(pAction);
 	}
 
-	foreach(QString Group, m_Groups.keys())
+	foreach(const QString Group, m_Groups.keys())
 	{
-		QString Name = Group;
-		
+		QString Name = Group, Temp = Group;
+
 		for (;;) {
-			QString Parent = FindParent(Group);
+			QString Parent = FindParent(Temp);
 			if (Parent.isEmpty())
 				break;
-			Group = Parent;
+			Temp = Parent;
 			Name.prepend(Parent + " > ");
 		}
 

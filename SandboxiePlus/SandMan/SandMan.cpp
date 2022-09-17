@@ -1597,9 +1597,19 @@ void CSandMan::OnStatusChanged()
 
 		SB_STATUS Status = theAPI->ReloadBoxes(true);
 
-		if (!Status.IsError() && !theAPI->GetAllBoxes().contains("defaultbox")) {
-			OnLogMessage(tr("Default sandbox not found; creating: %1").arg("DefaultBox"));
-			theAPI->CreateBox("DefaultBox");
+		if (!Status.IsError()) {
+
+			auto AllBoxes = theAPI->GetAllBoxes();
+
+			foreach(const QString & Key, theConf->ListKeys("SizeCache")) {
+				if (!AllBoxes.contains(Key.toLower()))
+					theConf->DelValue("SizeCache/" + Key);
+			}
+
+			if (!AllBoxes.contains("defaultbox")) {
+				OnLogMessage(tr("Default sandbox not found; creating: %1").arg("DefaultBox"));
+				theAPI->CreateBox("DefaultBox");
+			}
 		}
 
 		if (isVisible())

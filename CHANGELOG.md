@@ -9,10 +9,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.3.4 / 5.58.4] - 2022-09-??
 
 ### Added
+- Added NoRenameWinClass to the UI [#2109](https://github.com/sandboxie-plus/Sandboxie/issues/2109) to resolve issues with windows 11 explorer and other WinUI apps
+- Added Windows.UI.* to the list of hard coded well known classes
 
 ### Fixed
 - fixed issue with default box not being detected on start [#2195](https://github.com/sandboxie-plus/Sandboxie/issues/2195)
+- fixed move sandbox menu issue [2225](https://github.com/sandboxie-plus/Sandboxie/issues/2225) (thanks okrc)
 
+### Changed
+- NoRenameWinClass now supports WildCards
 
 
 

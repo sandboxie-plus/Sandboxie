@@ -83,6 +83,8 @@ static ULONG Gui_GetClassName2(
 
 static BOOLEAN Gui_IsWellKnownClass(const WCHAR *iptr);
 
+static BOOLEAN Gui_NoRenameClass(const WCHAR* iptr);
+
 static ULONG_PTR Gui_CREATESTRUCT_Handler(ULONG_PTR *args);
 
 
@@ -107,7 +109,7 @@ static ULONG Gui_BoxPrefix_Len = 0;
 
 static CRITICAL_SECTION Gui_IsOpenClass_CritSec;
 
-static GUI_NO_RENAME_WIN_CLASS *Gui_NoRenameWinClasses = NULL;
+static LIST Gui_NoRenameWinClasses;
 
 static P_CREATESTRUCT_Handler __sys_CREATESTRUCT_Handler = NULL;
 
@@ -128,6 +130,8 @@ _FX BOOLEAN Gui_InitClass(HMODULE module)
     ULONG len;
 
     InitializeCriticalSection(&Gui_IsOpenClass_CritSec);
+
+    List_Init(&Gui_NoRenameWinClasses);
 
     //
     // initialize BoxPrefix variables
@@ -185,31 +189,7 @@ _FX BOOLEAN Gui_InitClass(HMODULE module)
 
     if (Gui_RenameClasses) {
 
-        GUI_NO_RENAME_WIN_CLASS *entry;
-        WCHAR *name = Dll_AllocTemp(128 * sizeof(WCHAR));
-        ULONG name_len;
-        ULONG index = 0;
-        while (1) {
-
-            NTSTATUS status = SbieApi_QueryConf(
-                NULL, L"NoRenameWinClass", index, name, 120 * sizeof(WCHAR));
-            if (! NT_SUCCESS(status))
-                break;
-            ++index;
-
-            name[120] = L'\0';
-            name_len = wcslen(name);
-
-            entry = Dll_Alloc(sizeof(GUI_NO_RENAME_WIN_CLASS)
-                              + (name_len + 1) * sizeof(WCHAR));
-            wmemcpy(entry->name, name, name_len + 1);
-            entry->name_len = name_len;
-
-            entry->next = Gui_NoRenameWinClasses;
-            Gui_NoRenameWinClasses = entry;
-        }
-
-        Dll_Free(name);
+        Config_InitPatternList(NULL, L"NoRenameWinClass", &Gui_NoRenameWinClasses, FALSE);
     }
 
     //
@@ -359,7 +339,7 @@ _FX WCHAR *Gui_CreateClassNameW(const WCHAR *istr)
     if (wcsncmp(iptr, Gui_BoxPrefixW, Gui_BoxPrefix_Len) == 0)
         return (WCHAR *)istr;
 
-    if (Gui_IsWellKnownClass(iptr) || Gui_IsOpenClass(iptr))
+    if (Gui_NoRenameClass(iptr) || Gui_IsOpenClass(iptr))
         return (WCHAR *)istr;
 
     len = (Gui_BoxPrefix_Len + wcslen(iptr) + 1) * sizeof(WCHAR);
@@ -413,7 +393,7 @@ _FX UCHAR *Gui_CreateClassNameA(const UCHAR *istr)
         RtlInitString(&ansi, iptr);
         status = RtlAnsiStringToUnicodeString(&uni, &ansi, TRUE);
 
-        UseOldName = Gui_IsWellKnownClass(uni.Buffer);
+        UseOldName = Gui_NoRenameClass(uni.Buffer);
         if (! UseOldName)
             UseOldName = Gui_IsOpenClass(uni.Buffer);
 
@@ -995,22 +975,6 @@ _FX BOOLEAN Gui_IsWellKnownClass(const WCHAR *iptr)
     }
 
     //
-    // also treat NoRenameWinClass as well known classes
-    //
-
-    if (Gui_NoRenameWinClasses) {
-
-        GUI_NO_RENAME_WIN_CLASS *entry = Gui_NoRenameWinClasses;
-        while (entry) {
-            if (_wcsicmp(entry->name, iptr) == 0)
-                return TRUE;
-            entry = entry->next;
-        }
-        if (_wcsicmp(Dll_ImageName, L"BatManAc.exe") == 0)
-            return TRUE;
-    }
-
-    //
     // FIXME Adobe window classes having to do with the WM_CREATE problem
     //
 
@@ -1025,10 +989,64 @@ _FX BOOLEAN Gui_IsWellKnownClass(const WCHAR *iptr)
         return TRUE;
 
     //
+    // all Windows.UI.*
+    // 
+
+    if (_wcsnicmp(iptr, L"Windows.UI.", 11) == 0)
+        return TRUE;
+
+    //
     // finish
     //
 
     return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_NoRenameClass
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Gui_NoRenameClass(const WCHAR* iptr)
+{
+    //
+    // treat all well known classes as NoRenameWinClass
+    //
+
+    if (Gui_IsWellKnownClass(iptr))
+        return TRUE;
+
+    //
+    // Check NoRenameWinClass
+    //
+
+    BOOL bNoRename = FALSE;
+
+    ULONG path_len = (wcslen(iptr) + 1) * sizeof(WCHAR);
+    WCHAR* path_lwr = Dll_AllocTemp(path_len);
+    if (!path_lwr) {
+        SbieApi_Log(2305, NULL);
+        return FALSE;
+    }
+    memcpy(path_lwr, iptr, path_len);
+    _wcslwr(path_lwr);
+    path_len = wcslen(path_lwr);
+
+    PATTERN* pat = List_Head(&Gui_NoRenameWinClasses);
+    while (pat)
+    {
+        if (Pattern_Match(pat, path_lwr, path_len))
+        {
+            bNoRename = TRUE;
+            break;
+        }
+        pat = List_Next(pat);
+    }
+
+    Dll_Free(path_lwr);
+
+    return bNoRename;
 }
 
 

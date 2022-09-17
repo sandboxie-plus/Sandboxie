@@ -121,6 +121,7 @@ QString COptionsWindow::AccessTypeToName(EAccessEntry Type)
 	case eReadIpcPath:		return "ReadIpcPath";
 
 	case eOpenWinClass:		return "OpenWinClass";
+	case eNoRenameWinClass:	return "NoRenameWinClass";
 
 	case eOpenCOM:			return "OpenClsid";
 	case eClosedCOM:		return "ClosedClsid";
@@ -208,6 +209,7 @@ void COptionsWindow::ParseAndAddAccessEntry(EAccessEntry EntryType, const QStrin
 	case eReadIpcPath:		Type = eIPC;	Mode = eReadOnly; break;
 
 	case eOpenWinClass:		Type = eWnd;	Mode = eOpen;	break;
+	case eNoRenameWinClass:	Type = eWnd;	Mode = eNoRename;	break;
 
 	case eOpenCOM:			Type = eCOM;	Mode = eOpen;	break;
 	case eClosedCOM:		Type = eCOM;	Mode = eClosed;	break;
@@ -237,6 +239,7 @@ QString COptionsWindow::GetAccessModeStr(EAccessMode Mode)
 	case eNormal:		return tr("Normal");
 	case eOpen:			return tr("Open");
 	case eOpen4All:		return tr("Open for All");
+	case eNoRename:		return tr("No Rename");
 	case eClosed:		return tr("Closed");
 	case eClosedRT:		return tr("Closed RT");
 	case eReadOnly:		return tr("Read Only");
@@ -363,6 +366,7 @@ QString COptionsWindow::MakeAccessStr(EAccessType Type, EAccessMode Mode)
 		switch (Mode)
 		{
 		case eOpen:			return "OpenWinClass";
+		case eNoRename:		return "NoRenameWinClass";
 		}
 		break;
 	case eCOM:
@@ -475,7 +479,7 @@ QList<COptionsWindow::EAccessMode> COptionsWindow::GetAccessModes(EAccessType Ty
 	case eFile:			return QList<EAccessMode>() << eNormal << eOpen << eOpen4All << eClosed << eReadOnly << eBoxOnly;
 	case eKey:			return QList<EAccessMode>() << eNormal << eOpen << eOpen4All << eClosed << eReadOnly << eBoxOnly;
 	case eIPC:			return QList<EAccessMode>() << eNormal << eOpen << eClosed << eReadOnly;
-	case eWnd:			return QList<EAccessMode>() << eOpen;
+	case eWnd:			return QList<EAccessMode>() << eOpen << eNoRename;
 	case eCOM:			return QList<EAccessMode>() << eOpen << eClosed << eClosedRT;
 	}
 	return QList<EAccessMode>();
@@ -580,7 +584,9 @@ void COptionsWindow::SaveAccessList()
 	QStringList Keys = QStringList() 
 		<< "NormalFilePath" << "OpenFilePath" << "OpenPipePath" << "ClosedFilePath" << "ReadFilePath" << "WriteFilePath"
 		<< "NormalKeyPath" << "OpenKeyPath" << "OpenConfPath" << "ClosedKeyPath" << "ReadKeyPath" << "WriteKeyPath"
-		<< "NormalIpcPath"<< "OpenIpcPath" << "ClosedIpcPath" << "ReadIpcPath" << "OpenWinClass" << "OpenClsid" << "ClosedClsid" << "ClosedRT";
+		<< "NormalIpcPath"<< "OpenIpcPath" << "ClosedIpcPath" << "ReadIpcPath" 
+		<< "OpenWinClass" << "NoRenameWinClass"
+		<< "OpenClsid" << "ClosedClsid" << "ClosedRT";
 
 	QMap<QString, QList<QString>> AccessMap;
 	for (int i = 0; i < ui.treeAccess->topLevelItemCount(); i++)

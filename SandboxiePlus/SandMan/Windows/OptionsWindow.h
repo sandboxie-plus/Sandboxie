@@ -234,6 +234,7 @@ protected:
 		eReadIpcPath,
 
 		eOpenWinClass,
+		eNoRenameWinClass,
 
 		eOpenCOM,
 		eClosedCOM,
@@ -256,6 +257,7 @@ protected:
 		eNormal,
 		eOpen,
 		eOpen4All,
+		eNoRename,
 		eClosed,
 		eClosedRT,
 		eReadOnly,

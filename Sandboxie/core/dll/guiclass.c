@@ -25,20 +25,8 @@
 #include "gui_p.h"
 #include "core/svc/GuiWire.h"
 #include <stdio.h>
-
-
-//---------------------------------------------------------------------------
-// Structures and Types
-//---------------------------------------------------------------------------
-
-
-typedef struct _GUI_NO_RENAME_WIN_CLASS {
-
-    struct _GUI_NO_RENAME_WIN_CLASS *next;
-    ULONG name_len;
-    WCHAR name[1];
-
-} GUI_NO_RENAME_WIN_CLASS;
+//#include "common\pattern.h"
+BOOLEAN Pattern_Match(PATTERN* pat, const WCHAR* string, int string_len);
 
 
 //---------------------------------------------------------------------------

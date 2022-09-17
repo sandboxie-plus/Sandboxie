@@ -712,6 +712,10 @@ void CSbieView::RenameGroup(const QString OldName, const QString NewName)
 
 void CSbieView::RenameItem(const QString OldName, const QString NewName)
 {
+	quint64 Size = theConf->GetValue("SizeCache/" + OldName, -1).toLongLong();
+	theConf->DelValue("SizeCache/" + OldName);
+	if(Size != -1) theConf->SetValue("SizeCache/" + NewName, Size);
+
 	for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
 	{
 		if (I.value().removeOne(OldName))
@@ -1204,8 +1208,8 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	}
 	else if (Action == m_pMenuRename)
 	{
-		QString OldValue = SandBoxes.first()->GetName();
-		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new name for the Sandbox."), QLineEdit::Normal, OldValue).replace(" ", "_");
+		QString OldValue = SandBoxes.first()->GetName().replace("_", " ");
+		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new name for the Sandbox."), QLineEdit::Normal, OldValue);
 		if (Value.isEmpty() || Value == OldValue)
 			return;
 		if (!TestNameAndWarn(Value))
@@ -1213,9 +1217,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 
 		SB_STATUS Status = SandBoxes.first()->RenameBox(Value);
 		if (!Status.IsError())
-		{
-			RenameItem(OldValue, Value);
-		}
+			RenameItem(OldValue.replace(" ", "_"), Value.replace(" ", "_"));
 		Results.append(Status);
 	}
 	else if (Action == m_pMenuRecover)
@@ -1237,10 +1239,13 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 				Status = pBox->RemoveBox();
 			Results.append(Status);
 
-			for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
-			{
-				if (I.value().removeOne(Name))
-					break;
+			if (!Status.IsError()) {
+				theConf->DelValue("SizeCache/" + Name);
+				for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
+				{
+					if (I.value().removeOne(Name))
+						break;
+				}
 			}
 		}
 	}

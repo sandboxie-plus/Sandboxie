@@ -704,6 +704,9 @@ void CSbieView::RenameGroup(const QString OldName, const QString NewName)
 	auto Group = m_Groups.take(OldName);
 	m_Groups.insert(NewName, Group);
 
+	if (m_Collapsed.remove(OldName))
+		m_Collapsed.insert(NewName);
+
 	RenameItem(OldName, NewName);
 }
 
@@ -774,6 +777,7 @@ void CSbieView::OnGroupAction(QAction* Action)
 		if (List.isEmpty())
 			return;
 		m_Groups[""].removeAll(Name);
+		m_Groups[List.first()].removeAll(Name);
 		m_Groups[List.first()].append(Name);
 	}
 	else if (Action == m_pRenGroupe)
@@ -814,6 +818,7 @@ void CSbieView::OnGroupAction(QAction* Action)
 						break;
 					}
 				}
+				m_Collapsed.remove(Group);
 			}
 		}
 	}
@@ -958,6 +963,12 @@ QString CSbieView::AddNewGroup()
 
 bool CSbieView::TestNameAndWarn(const QString& Name)
 {
+	if (Name.contains(QRegularExpression("[,()]")))
+	{
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("The Sandbox name and Box Group name cannot use the ',()' symbol."));
+		return false;
+	}
+
 	if (m_Groups.contains(Name)) {
 		QMessageBox::critical(this, "Sandboxie-Plus", tr("This name is already used for a Box Group."));
 		return false;
@@ -1193,16 +1204,19 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	}
 	else if (Action == m_pMenuRename)
 	{
-		QString OldValue = SandBoxes.first()->GetName().replace("_", " ");
-		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new name for the Sandbox."), QLineEdit::Normal, OldValue);
+		QString OldValue = SandBoxes.first()->GetName();
+		QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a new name for the Sandbox."), QLineEdit::Normal, OldValue).replace(" ", "_");
 		if (Value.isEmpty() || Value == OldValue)
 			return;
 		if (!TestNameAndWarn(Value))
 			return;
 
-		Results.append((SandBoxes.first()->RenameBox(Value.replace(" ", "_"))));
-
-		RenameItem(OldValue, Value);
+		SB_STATUS Status = SandBoxes.first()->RenameBox(Value);
+		if (!Status.IsError())
+		{
+			RenameItem(OldValue, Value);
+		}
+		Results.append(Status);
 	}
 	else if (Action == m_pMenuRecover)
 	{
@@ -1218,10 +1232,17 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			SB_STATUS Status = theGUI->DeleteBoxContent(pBox, CSandMan::eForDelete);
 			if (Status.GetMsgCode() == SB_Canceled)
 				break;
+			QString Name = pBox->GetName();
 			if (!Status.IsError())
 				Status = pBox->RemoveBox();
 			Results.append(Status);
-		}	
+
+			for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
+			{
+				if (I.value().removeOne(Name))
+					break;
+			}
+		}
 	}
 	else if (Action == m_pMenuCleanUp)
 	{
@@ -1340,6 +1361,9 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	}
 
 	CSandMan::CheckResults(Results);
+
+	//m_UserConfigChanged = true;
+	SaveUserConfig();
 }
 
 void CSbieView::OnProcessAction()

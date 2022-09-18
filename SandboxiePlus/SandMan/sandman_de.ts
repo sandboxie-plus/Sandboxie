@@ -719,7 +719,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="242"/>
         <source>No Rename</source>
-        <translation>Nicht umbenennen</translation>
+        <translation>Kein Umbenennen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="246"/>

@@ -10,16 +10,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Added NoRenameWinClass to the UI 
-- Added Windows.UI.* to the list of hard coded well known classes to resolve issues with WinUI apps [#2109](https://github.com/sandboxie-plus/Sandboxie/issues/2109)
+- Added Windows.UI.* to the list of hardcoded well-known classes to resolve issues with WinUI apps [#2109](https://github.com/sandboxie-plus/Sandboxie/issues/2109)
 
 ### Changed
 - NoRenameWinClass now supports wildcards
-- replaced 'UseVivaldiWorkaround' with a VivaldiCompatibility template hardcoded in the templates.ini
+- replaced 'UseVivaldiWorkaround' with a VivaldiCompatibility template hardcoded in Templates.ini
 
 ### Fixed
 - fixed issue with default box not being detected on start [#2195](https://github.com/sandboxie-plus/Sandboxie/issues/2195)
-- fixed move sandbox menu issue [2225](https://github.com/sandboxie-plus/Sandboxie/issues/2225) (thanks okrc)
-- fixed issues with stale data in sandboxie ini [#2234](https://github.com/sandboxie-plus/Sandboxie/pull/2234) (thanks okrc)
+- fixed move sandbox menu issue [#2225](https://github.com/sandboxie-plus/Sandboxie/issues/2225) (thanks okrc)
+- fixed issues with stale data in Sandboxie-Plus.ini [#2234](https://github.com/sandboxie-plus/Sandboxie/pull/2234) (thanks okrc)
 - fixed autostart issue [#2219](https://github.com/sandboxie-plus/Sandboxie/issues/2219)
 
 ### Removed
@@ -37,7 +37,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- note: by default, this protection only applies for write access, that is, unsandboxed processes will still be able to obtain read-only access
 -- to prevent host processes from obtaining read access, ConfidentialBox=y must also be set, which require a supporter certificate
 - added compatibility template for ReHIPS
-- added create all default folders in privacy style box [2218](https://github.com/sandboxie-plus/Sandboxie/issues/2218)
+- added creation of all default folders in privacy box type [#2218](https://github.com/sandboxie-plus/Sandboxie/issues/2218)
 
 ### Changed
 - improved SandMan settings behaviour for non admin users [#2123](https://github.com/sandboxie-plus/Sandboxie/issues/2123)

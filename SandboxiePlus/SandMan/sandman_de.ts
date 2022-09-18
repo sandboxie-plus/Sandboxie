@@ -719,7 +719,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="242"/>
         <source>No Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Umbenennen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="246"/>
@@ -3109,7 +3109,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Views/SbieView.cpp" line="972"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox- und Boxgruppen- name können nicht die Zeichen &apos;,()&apos; enthalten.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="977"/>
@@ -4780,7 +4780,7 @@ instead of &quot;*&quot;.</source>
         <translation>Protokolliere jeden Zugriffsevent, wie er durch den Treiber gesehen wird, im Ressourcenzugriffsprotokoll.
 
 Diese Optionen setzen die Eventmaske auf &quot;*&quot; - Alle Zugriffsevents
-Sie können die Protokollierung in der INI anpassen in den Sie wie folgt wählen
+Sie können die Protokollierung in der INI anpassen, indem Sie wie folgt wählen
 &quot;A&quot; - Erlaubte Zugriffe
 &quot;D&quot; - Verweigerte Zugriffe
 &quot;I&quot; - Ignorierte Zugriffsanfragen

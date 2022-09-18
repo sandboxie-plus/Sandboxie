@@ -1522,11 +1522,13 @@ void CSandMan::OnStatusChanged()
 			int PortableRootDir = theConf->GetInt("Options/PortableRootDir", 2);
 			if (PortableRootDir == 2)
 			{
+				QString NtBoxRoot = theAPI->GetGlobalSettings()->GetText("FileRootPath", "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%", false, false).replace("GlobalSettings", "BoxName");
+
 				bool State = false;
 				PortableRootDir = CCheckableMessageBox::question(this, "Sandboxie-Plus", 
 					tr("Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?\nYes will choose: %1\nNo will choose: %2")
 					.arg(BoxPath)
-					.arg("C:\\Sandbox") // todo resolve os drive properly
+					.arg(theAPI->Nt2DosPath(NtBoxRoot))
 					, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) == QDialogButtonBox::Yes ? 1 : 0;
 
 				if (State)
@@ -1602,7 +1604,7 @@ void CSandMan::OnStatusChanged()
 			auto AllBoxes = theAPI->GetAllBoxes();
 
 			foreach(const QString & Key, theConf->ListKeys("SizeCache")) {
-				if (!AllBoxes.contains(Key.toLower()))
+				if (!AllBoxes.contains(Key.toLower()) || !theConf->GetBool("Options/WatchBoxSize", false))
 					theConf->DelValue("SizeCache/" + Key);
 			}
 

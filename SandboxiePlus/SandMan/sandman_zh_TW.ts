@@ -345,7 +345,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="242"/>
         <source>No Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>沒有重新命名</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="246"/>
@@ -1935,7 +1935,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="656"/>
         <source>Windows Shell Integration</source>
-        <translation>Windows Shell 介面整合</translation>
+        <translation>Windows 系統整合</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="658"/>
@@ -2872,7 +2872,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="972"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱名稱和沙箱群組名稱不能使用 &apos;,()&apos; 符號。</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="977"/>
@@ -4952,7 +4952,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="192"/>
         <source>Shell Integration</source>
-        <translation>滑鼠右鍵整合</translation>
+        <translation>系統整合</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="276"/>

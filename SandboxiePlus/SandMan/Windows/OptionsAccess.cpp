@@ -420,10 +420,13 @@ void COptionsWindow::CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave)
 		if (!Program.isEmpty() && Program.left(1) != "<")
 			m_Programs.insert(Program);
 
-		if (pItem->data(0, Qt::UserRole).toInt() == eCOM && !pPath->text().isEmpty())
+		EAccessMode Mode = (EAccessMode)pMode->currentData().toInt();
+		QString Path = pPath->text();
+
+		if (pItem->data(0, Qt::UserRole).toInt() == eCOM && !Path.isEmpty())
 		{
-			bool isGUID = pPath->text().length() == 38 && pPath->text().left(1) == "{" && pPath->text().right(1) == "}";
-			switch (pMode->currentData().toInt())
+			bool isGUID = Path.length() == 38 && Path.left(1) == "{" && Path.right(1) == "}";
+			switch (Mode)
 			{
 			case eOpen:
 			case eClosed:
@@ -441,14 +444,14 @@ void COptionsWindow::CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave)
 			}
 		}
 
-		if (pItem->data(0, Qt::UserRole).toInt() == eIPC && pMode->currentData().toInt() == eOpen 
-		  && ((pPath->text() == "*" && pItem->data(3, Qt::UserRole).toString() != "*") 
-		   || (pPath->text() == "\\*" && pItem->data(3, Qt::UserRole).toString() != "\\*"))
+		if (pItem->data(0, Qt::UserRole).toInt() == eIPC && Mode == eOpen 
+		  && ((Path == "*" && pItem->data(3, Qt::UserRole).toString() != "*") 
+		   || (Path == "\\*" && pItem->data(3, Qt::UserRole).toString() != "\\*"))
 		  && !m_BoxTemplates.contains("BoxedCOM"))  
 		{
  			if (theConf->GetInt("Options/WarnOpenCOM", -1) == -1) {
 				bool State = false;
-				if (CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Opening all IPC access also opens COM access, do you still want to restrict COM to the sandbox?")
+				if (CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Opening all IPC access, also opens COM access, do you want to restrict COM to the sandbox non the less?")
 				 , tr("Don't ask in future"), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) == QDialogButtonBox::Yes)
 					SetTemplate("BoxedCOM", true); // Normal overrides Open even without rule specificity :D
 				if (State)
@@ -456,11 +459,18 @@ void COptionsWindow::CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave)
 			}
 		}
 
+		if (pItem->data(0, Qt::UserRole).toInt() == eWnd && Mode == eOpen && Path == "#" && !Program.isEmpty())
+		{
+			QMessageBox::warning(this, "Sandboxie-Plus", tr("'OpenWinClass=program.exe,#' is not supported, use 'NoRenameWinClass=program.exe,*' instead"));
+			Mode = eNoRename;
+			Path = "*";
+		}
+
 		pItem->setText(1, (pNot->isChecked() ? "NOT " : "") + pCombo->currentText());
 		pItem->setData(1, Qt::UserRole, (pNot->isChecked() ? "!" : "") + Program);
-		pItem->setText(2, GetAccessModeStr((EAccessMode)pMode->currentData().toInt()));
+		pItem->setText(2, GetAccessModeStr(Mode));
 		pItem->setData(2, Qt::UserRole, pMode->currentData());
-		pItem->setText(3, pPath->text());
+		pItem->setText(3, Path);
 		pItem->setData(3, Qt::UserRole, pPath->text());
 
 		m_AccessChanged = true;

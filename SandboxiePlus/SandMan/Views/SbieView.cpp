@@ -704,9 +704,6 @@ void CSbieView::RenameGroup(const QString OldName, const QString NewName)
 	auto Group = m_Groups.take(OldName);
 	m_Groups.insert(NewName, Group);
 
-	if (m_Collapsed.remove(OldName))
-		m_Collapsed.insert(NewName);
-
 	RenameItem(OldName, NewName);
 }
 
@@ -715,6 +712,9 @@ void CSbieView::RenameItem(const QString OldName, const QString NewName)
 	quint64 Size = theConf->GetValue("SizeCache/" + OldName, -1).toLongLong();
 	theConf->DelValue("SizeCache/" + OldName);
 	if(Size != -1) theConf->SetValue("SizeCache/" + NewName, Size);
+
+	if (m_Collapsed.remove(OldName))
+		m_Collapsed.insert(NewName);
 
 	for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
 	{

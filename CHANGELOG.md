@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with default box not being detected on start [#2195](https://github.com/sandboxie-plus/Sandboxie/issues/2195)
 - fixed move sandbox menu issue [2225](https://github.com/sandboxie-plus/Sandboxie/issues/2225) (thanks okrc)
 - fixed issues with stale data in sandboxie ini [#2234](https://github.com/sandboxie-plus/Sandboxie/pull/2234) (thanks okrc)
+- fixed autostart issue [#2219](https://github.com/sandboxie-plus/Sandboxie/issues/2219)
 
 ### Removed
 - removed obsolete VPNTunnel template

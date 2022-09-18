@@ -126,8 +126,12 @@ int main(int argc, char *argv[])
 			return 0;
 		app.disableSingleApp(); // we start to do one job and exit, don't interfear with starting a regular instance
 	}
-	else if (app.sendMessage("ShowWnd"))
-		return 0;
+	else {
+		if (app.arguments().contains("-autorun") && app.isRunning())
+			return 0;
+		if (app.sendMessage("ShowWnd"))
+			return 0;
+	}
 
 	//QThreadPool::globalInstance()->setMaxThreadCount(theConf->GetInt("Options/MaxThreadPool", 10));
 

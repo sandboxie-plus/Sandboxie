@@ -20,13 +20,13 @@
 // GUI Services
 //---------------------------------------------------------------------------
 
+#define NOGDI
 #include "dll.h"
 
 #include "gui_p.h"
 #include "core/svc/GuiWire.h"
 #include <stdio.h>
-//#include "common\pattern.h"
-BOOLEAN Pattern_Match(PATTERN* pat, const WCHAR* string, int string_len);
+#include "common\pattern.h"
 
 
 //---------------------------------------------------------------------------
@@ -178,6 +178,17 @@ _FX BOOLEAN Gui_InitClass(HMODULE module)
     if (Gui_RenameClasses) {
 
         Config_InitPatternList(NULL, L"NoRenameWinClass", &Gui_NoRenameWinClasses, FALSE);
+
+        PATTERN* pat = List_Head(&Gui_NoRenameWinClasses);
+        while (pat)
+        {
+            const WCHAR* patsrc = Pattern_Source(pat);
+            if (patsrc[0] == L'*' && patsrc[1] == L'\0') {
+                Gui_RenameClasses = FALSE;
+                break;
+            }
+            pat = List_Next(pat);
+        }
     }
 
     //
@@ -194,22 +205,6 @@ _FX BOOLEAN Gui_InitClass(HMODULE module)
         const WCHAR *cmd = GetCommandLine();
         if (wcsstr(cmd, L"-Run"))
             Gui_RenameClasses = TRUE;
-    }
-
-
-    //
-    // vivaldi somehow screws up its hooks and its trampoline to NtCreateSection 
-    // ends up pointing to our RegisterClassW detour function
-    // to work around this issue we disable Gui_RenameClasses for vivaldi.exe
-    //
-
-    // $Workaround$ - 3rd party fix
-    if (Gui_RenameClasses
-                    && Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME
-                    && _wcsicmp(Dll_ImageName, L"vivaldi.exe") == 0
-                    && SbieApi_QueryConfBool(NULL, L"UseVivaldiWorkaround", TRUE)) {
-
-        Gui_RenameClasses = FALSE;
     }
 
     //

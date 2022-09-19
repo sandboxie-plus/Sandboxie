@@ -331,7 +331,7 @@ _FX BOOLEAN Proc_Init(void)
     NTSTATUS status;
 
     if(!Dll_CompartmentMode)
-        Dll_ElectronWorkaround = Config_GetSettingsForImageName_bool(L"UseElectronWorkaround", TRUE);
+        Dll_ElectronWorkaround = Config_GetSettingsForImageName_bool(L"UseElectronWorkaround", FALSE);
 
     //
     // abort if we should not hook any process creation functions

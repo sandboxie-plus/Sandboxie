@@ -14,7 +14,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - NoRenameWinClass now supports wildcards
-- replaced 'UseVivaldiWorkaround' with a VivaldiCompatibility template hardcoded in Templates.ini
 
 ### Fixed
 - fixed issue with default box not being detected on start [#2195](https://github.com/sandboxie-plus/Sandboxie/issues/2195)

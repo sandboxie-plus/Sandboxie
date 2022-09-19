@@ -22,6 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed autostart issue [#2219](https://github.com/sandboxie-plus/Sandboxie/issues/2219)
 - fixed firewall UI issue, all programs entries were missing *, prefix [#2247](https://github.com/sandboxie-plus/Sandboxie/issues/2247)
 - fixed BlockPorts template with a missing *, prefix [4420ba4](https://github.com/sandboxie-plus/Sandboxie/commit/4420ba4448a797b7369917058c34e8a78c2ec9fc)
+- fixed issue with skype 8.88 [#2217](https://github.com/sandboxie-plus/Sandboxie/issues/2217)
 
 ### Removed
 - removed obsolete VPNTunnel template

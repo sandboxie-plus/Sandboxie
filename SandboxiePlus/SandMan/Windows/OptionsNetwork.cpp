@@ -430,7 +430,7 @@ void COptionsWindow::ParseAndAddFwRule(const QString& Value, bool disabled, cons
 	QString Action = ProgAction.second.isEmpty() ? ProgAction.first : ProgAction.second;
 
 	pItem->setData(0, Qt::UserRole, Program);
-	bool bAll = Program.isEmpty();
+	bool bAll = Program.isEmpty() || Program == "*";
 	if (bAll)
 		Program = tr("All Programs");
 	bool Not = Program.left(1) == "!";
@@ -479,11 +479,11 @@ void COptionsWindow::SaveNetFwRules()
 		QString Prot = pItem->text(4);
 
 		QString Temp = GetFwRuleActionStr(Action);
-		if (!Program.isEmpty()) {
-			//if (Program.contains("=") || Program.contains(";") || Program.contains(",")) // todo: make sbie parse this proeprly
-			//	Program = "\'" + Program + "\'"; 
-			Temp.prepend(Program + ",");
-		}
+		//if (Program.contains("=") || Program.contains(";") || Program.contains(",")) // todo: make sbie parse this proeprly
+		//	Program = "\'" + Program + "\'"; 
+		if (Program.isEmpty())
+			Program = "*";
+		Temp.prepend(Program + ",");
 		QStringList Tags = QStringList(Temp);
 		if (!Port.isEmpty()) Tags.append("Port=" + Port);
 		if (!IP.isEmpty()) Tags.append("Address=" + IP);

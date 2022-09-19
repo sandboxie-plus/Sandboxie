@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.3.4 / 5.58.4] - 2022-09-??
 
 ### Added
-- Added NoRenameWinClass to the UI 
+- Added NoRenameWinClass to the Plus UI 
 - Added Windows.UI.* to the list of hardcoded well-known classes to resolve issues with WinUI apps [#2109](https://github.com/sandboxie-plus/Sandboxie/issues/2109)
 
 ### Changed
@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues with stale data in Sandboxie-Plus.ini [#2234](https://github.com/sandboxie-plus/Sandboxie/pull/2234) (thanks okrc)
 - fixed autostart issue [#2219](https://github.com/sandboxie-plus/Sandboxie/issues/2219)
 - fixed firewall UI issue, all programs entries were missing *, prefix [#2247](https://github.com/sandboxie-plus/Sandboxie/issues/2247)
+- fixed BlockPorts template with a missing *, prefix [4420ba4](https://github.com/sandboxie-plus/Sandboxie/commit/4420ba4448a797b7369917058c34e8a78c2ec9fc)
 
 ### Removed
 - removed obsolete VPNTunnel template

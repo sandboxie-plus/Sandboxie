@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.3.4 / 5.58.4] - 2022-09-??
+## [1.3.4 / 5.58.4] - 2022-09-19
 
 ### Added
 - Added NoRenameWinClass to the Plus UI 

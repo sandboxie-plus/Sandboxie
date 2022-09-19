@@ -438,16 +438,17 @@ const WCHAR* wcsnchr(const WCHAR* str, size_t max, WCHAR ch)
 
 int _inet_pton(int af, const wchar_t* src, void* dst);
 
-int _inet_xton(const WCHAR* src, ULONG max, IP_ADDRESS *dst)
+int _inet_xton(const WCHAR* src, ULONG src_len, IP_ADDRESS *dst)
 {
-	WCHAR tmp[46]; // INET6_ADDRSTRLEN 
-	wmemcpy(tmp, src, max);
+	WCHAR tmp[46 + 1]; // INET6_ADDRSTRLEN 
+	if (src_len > ARRAYSIZE(tmp) - 1) src_len = ARRAYSIZE(tmp) - 1;
+	wmemcpy(tmp, src, src_len);
+	tmp[src_len] = L'\0';
 	
-    //dst->Type = AF_INET;
-    //if (wcschr(src, L':') != NULL)
-    //    dst->Type = AF_INET6;
+	USHORT af = wcschr(tmp, L':') != NULL ? AF_INET6 : AF_INET;
+	//dst->Type = af
+    int ret = _inet_pton(af, tmp, dst->Data);
 
-    int ret = _inet_pton(wcschr(src, L':') != NULL ? AF_INET6 : AF_INET, tmp, dst->Data);
     return ret;
 }
 

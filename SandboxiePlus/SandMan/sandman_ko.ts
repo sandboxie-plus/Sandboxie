@@ -348,7 +348,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="242"/>
         <source>No Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>이름 바꾸기 안 함</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="246"/>
@@ -447,7 +447,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="464"/>
         <source>&apos;OpenWinClass=program.exe,#&apos; is not supported, use &apos;NoRenameWinClass=program.exe,*&apos; instead</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;OpenWinClass=program.exe,#&apos;는 지원되지 않으므로 대신 &apos;NoRenameWinClass=program.exe,*&apos;를 사용하십시오</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="505"/>
@@ -2884,7 +2884,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="972"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 이름 및 상자 그룹 이름에는 &apos;,(&apos;) 기호를 사용할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="977"/>
@@ -3122,7 +3122,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="669"/>
         <source>Run &amp;Un-Sandboxed</source>
-        <translation>샌드박스를 사용하지 않은 실행(&amp;U)</translation>
+        <translation>샌드박스 없이 실행(&amp;U)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="865"/>
@@ -5012,7 +5012,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="320"/>
         <source>Add &apos;Run Un-Sandboxed&apos; to the context menu</source>
-        <translation>상황에 맞는 메뉴에 &apos;샌드박스가 아닌 실행&apos; 추가</translation>
+        <translation>상황에 맞는 메뉴에 &apos;샌드박스 없이 실행&apos; 추가</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="344"/>

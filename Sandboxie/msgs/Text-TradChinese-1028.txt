@@ -982,7 +982,7 @@ Sandboxie 版本無法匹配：
 
 Sandboxie 主控台：版本 %2
 服務 (SbieSvc)：版本 %3
-驅動 (SbieDrv)：版本 %4
+驅動 (SbieDrv)版本： %4
 
 請重新安裝程式來解決此問題。
 

@@ -2,86 +2,6 @@
 * Missing Messages in Text-TradChinese-1028.txt
 *==========
 
-1222;pop;err;02
-SBIE1222 Error with security token:  %2
-.
-
-1231;pop;err;01
-SBIE1231 Initialization failed for process %3 %2
-.
-
-1316;pop;inf;01
-SBIE1316 Blocked request to generate device event in the sandbox
-.
-
-1319;pop;inf;01
-SBIE1319 Blocked spooler print to file, %2 %3
-.
-
-1320;pop;wrn;01
-SBIE1320 To allow print spooler to write outside the sandbox for this process, please double-click on this message line
-.
-
-1399;pop;inf;01
-%0
-.
-
-2111;pop;inf;01
-SBIE2111 Process is not accessible: %3, call %2
-.
-
-2112;pop;inf;01
-SBIE2112 Object is not accessible: %3, call %2
-.
-
-2194;pop;inf;01
-SBIE2194 MSI installer requires %2 option to be set in the ini, what however weakens the isolation.
-.
-
-2195;pop;inf;01
-SBIE2195 To run Explorer.exe sandboxed, the access for COM infrastructure must not be Open.
-.
-
-2198;pop;inf;01
-%0
-.
-
-2224;pop;wrn;01
-SBIE2224 Sandboxed program has crashed: %2
-.
-
-2225;pop;wrn;01
-SBIE2225 An attempt was made to access an EFS file: %2
-.
-
-2302;pop;err;01
-SBIE2302 Process image configuration conflict: %2
-.
-
-2325;pop;err;01
-SBIE2325 Debug:  %2
-.
-
-2335;pop;err;01
-SBIE2335 Initialization failed for process %2
-.
-
-2336;pop;err;01
-SBIE2336 Error in GUI server:  %2
-.
-
-2337;pop;err;01
-SBIE2337 Failed to start program:  %2
-.
-
-9234;evt;err;01
-SBIE9234 Service startup error %2
-.
-
-3107;txt;01
-Type the name of a program or path to open the following file in the current sandbox:
-.
-
 3315;txt;01
 Deleting Sandbox contents
 .
@@ -300,43 +220,6 @@ Get Certificate
 * Extraneous Messages in Text-TradChinese-1028.txt
 *==========
 
-1109;evt;err;01
-SBIE1109 1202;pop;err;01
-SBIE1202 1214;pop;err;01
-SBIE1214 1215;pop;err;01
-SBIE1215 1216;pop;err;01
-SBIE1216 1222;pop;err;01
-SBIE1222 1223;pop;err;01
-SBIE1223 1224;pop;err;01
-SBIE1224 1303;pop;inf;01
-SBIE1303 1304;pop;inf;01
-SBIE1304 1310;pop;inf;01
-SBIE1310 1311;pop;inf;01
-SBIE1311 1315;pop;inf;01
-SBIE1315 2315;pop;err;01
-SBIE2315 2334;pop;err;01
-SBIE2334 9201;evt;err;01
-SBIE9201 9202;evt;err;01
-SBIE9202 9203;evt;err;01
-SBIE9203 9204;evt;err;01
-SBIE9204 9205;evt;err;01
-SBIE9205 9206;evt;err;01
-SBIE9206 9207;evt;err;01
-SBIE9207 9208;evt;err;01
-SBIE9208 9251;evt;err;01
-SBIE9251 9252;evt;err;01
-SBIE9252 9253;evt;err;01
-SBIE9253 3211;txt;01
-Sandboxie 3231;txt;01
-3232;txt;01
-3233;txt;01
-3234;txt;01
-3235;txt;01
-3236;txt;01
-3237;txt;01
-3238;txt;01
-3239;txt;01
-3240;txt;01
 3503;txt;01
 3455;txt;01
 3542;txt;01

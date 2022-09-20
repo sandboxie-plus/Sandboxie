@@ -1230,6 +1230,10 @@ Windows 介面整合(&I)
 關於 Sandboxie(&A)
 .
 
+3457;txt;01
+Sandboxie 論壇(網頁)(&S)
+.
+
 3461;txt;01
 從沙箱中開啟(&R)
 .

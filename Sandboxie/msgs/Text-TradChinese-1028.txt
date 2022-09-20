@@ -1236,9 +1236,6 @@ Windows 介面整合(&I)
 檢查更新(&U)
 .
 
-# 3455;txt;01
-# 註冊 Sandboxie(&R)
-# .
 
 3456;txt;01
 關於 Sandboxie(&A)

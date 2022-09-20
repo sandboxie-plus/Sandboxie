@@ -1245,9 +1245,6 @@ Windows 介面整合(&I)
 Sandboxie 論壇(網頁)(&S)
 .
 
-# 3458;txt;01
-# 允許直接存取 Windows 字型快取
-# .
 
 3459;txt;01
 允許直接存取 qWave 驅動程式 (Google Hangouts)

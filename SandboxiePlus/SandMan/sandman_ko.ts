@@ -1294,7 +1294,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="438"/>
         <source>Create Box Group</source>
-        <translation>새 박스 만들기</translation>
+        <translation>박스 그룹 만들기</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="440"/>
@@ -3254,7 +3254,7 @@ No will choose: %2</source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="423"/>
         <source>Start UI with Windows</source>
-        <translation>Windows로 UI 시작</translation>
+        <translation>Windows와 함께 UI 시작</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="428"/>

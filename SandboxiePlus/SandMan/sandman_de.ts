@@ -789,7 +789,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="464"/>
         <source>&apos;OpenWinClass=program.exe,#&apos; is not supported, use &apos;NoRenameWinClass=program.exe,*&apos; instead</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;OpenWinClass=program.exe,#&apos; wird nicht unterstützt, verwenden Sie stattdessen &apos;NoRenameWinClass=program.exe,*&apos;</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="505"/>

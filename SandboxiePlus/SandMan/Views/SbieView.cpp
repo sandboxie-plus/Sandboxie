@@ -1742,7 +1742,7 @@ void CSbieView::ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes) {
 	QSet<QString> Temp = m_Collapsed;
 	foreach(QString Name, m_Collapsed)
 	{
-		if (!count_if(m_Groups.begin(), m_Groups.end(),
+		if (m_Groups.end() == find_if(m_Groups.begin(), m_Groups.end(),
 					  [Name](const QStringList& item)->int { return item.contains(Name); }))
 			Temp.remove(Name);
 	}

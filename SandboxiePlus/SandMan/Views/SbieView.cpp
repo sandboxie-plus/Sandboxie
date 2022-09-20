@@ -1241,6 +1241,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 
 			if (!Status.IsError()) {
 				theConf->DelValue("SizeCache/" + Name);
+				m_Collapsed.remove(Name);
 				for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
 				{
 					if (I.value().removeOne(Name))
@@ -1720,6 +1721,32 @@ void CSbieView::ReloadUserConfig()
 	if (Collapsed.isEmpty())
 		Collapsed = theAPI->GetUserSettings()->GetText("BoxCollapsedView");
 	m_Collapsed = SplitStr(Collapsed, ",").toSet();
+
+	ClearUserUIConfig();
+}
+
+void CSbieView::ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes) {
+	if (!AllBoxes.isEmpty())
+	{
+		for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I) {
+			QStringList Temp = I.value();
+			foreach(QString Name, I.value()) {
+				if (AllBoxes.contains(Name.toLower()) || m_Groups.keys().contains(Name))
+					continue;
+				Temp.removeOne(Name);
+			}
+			I.value() = Temp;
+		}
+	}
+
+	QSet<QString> Temp = m_Collapsed;
+	foreach(QString Name, m_Collapsed)
+	{
+		if (!count_if(m_Groups.begin(), m_Groups.end(),
+					  [Name](const QStringList& item)->int { return item.contains(Name); }))
+			Temp.remove(Name);
+	}
+	m_Collapsed = Temp;
 }
 
 void CSbieView::SaveUserConfig()

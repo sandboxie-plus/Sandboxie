@@ -1603,6 +1603,8 @@ void CSandMan::OnStatusChanged()
 
 			auto AllBoxes = theAPI->GetAllBoxes();
 
+			m_pBoxView->ClearUserUIConfig(AllBoxes);
+
 			foreach(const QString & Key, theConf->ListKeys("SizeCache")) {
 				if (!AllBoxes.contains(Key.toLower()) || !theConf->GetBool("Options/WatchBoxSize", false))
 					theConf->DelValue("SizeCache/" + Key);

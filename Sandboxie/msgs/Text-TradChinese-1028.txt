@@ -1230,19 +1230,6 @@ Windows 介面整合(&I)
 關於 Sandboxie(&A)
 .
 
-3457;txt;01
-Sandboxie 論壇(網頁)(&S)
-.
-
-
-3459;txt;01
-允許直接存取 qWave 驅動程式 (Google Hangouts)
-.
-
-3456;txt;01
-關於 Sandboxie(&A)
-.
-
 3461;txt;01
 從沙箱中開啟(&R)
 .

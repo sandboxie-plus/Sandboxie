@@ -11,7 +11,7 @@
 *.ts text working-tree-encoding=UTF-8 eol=lf
 *.md text working-tree-encoding=UTF-8 eol=lf
 *.yml text working-tree-encoding=UTF-8 eol=lf
-Installer/*.txt text working-tree-encoding=UTF-8 eol=lf
+Installer/*.txt text working-tree-encoding=UTF-8 eol=crlf
 Sandboxie/install/*.txt text working-tree-encoding=UTF-8 eol=lf
 SandboxiePlus/QtSingleApp/*.txt text working-tree-encoding=UTF-8 eol=lf
 Installer/isl/*.isl text eol=lf

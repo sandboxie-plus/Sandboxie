@@ -1725,10 +1725,12 @@ void CSbieView::ReloadUserConfig()
 	ClearUserUIConfig();
 }
 
-void CSbieView::ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes) {
+void CSbieView::ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes) 
+{
 	if (!AllBoxes.isEmpty())
 	{
-		for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I) {
+		for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I) 
+		{
 			QStringList Temp = I.value();
 			foreach(QString Name, I.value()) {
 				if (AllBoxes.contains(Name.toLower()) || m_Groups.keys().contains(Name))

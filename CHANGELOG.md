@@ -5,6 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.3.5 / 5.58.5] - 2022-09-19
+
+### Fixed
+- fixed issues with stale data in Sandboxie-Plus.ini [#2248](https://github.com/sandboxie-plus/Sandboxie/pull/2248) (thanks okrc)
+- fixed issue with dummy manifests [#2252](https://github.com/sandboxie-plus/Sandboxie/issues/2252)
+
+
+
 
 ## [1.3.4 / 5.58.4] - 2022-09-19
 

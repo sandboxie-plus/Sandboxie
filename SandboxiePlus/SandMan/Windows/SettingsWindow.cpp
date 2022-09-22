@@ -367,8 +367,8 @@ void CSettingsWindow__AddContextMenu(bool bAlwaysClassic)
 	if (CurrentVersion.value("CurrentBuild").toInt() >= 22000 && !bAlwaysClassic) // Windows 11
 	{
 		QSettings MyReg("HKEY_CURRENT_USER\\SOFTWARE\\Xanasoft\\Sandboxie-Plus\\SbieShellExt\\Lang", QSettings::NativeFormat);
-		MyReg.setValue("Open Sandboxed", CSettingsWindow::tr("Open Sandboxed"));
-		MyReg.setValue("Explore Sandboxed", CSettingsWindow::tr("Explore Sandboxed"));
+		MyReg.setValue("Open Sandboxed", CSettingsWindow::tr("Run &Sandboxed"));
+		MyReg.setValue("Explore Sandboxed", CSettingsWindow::tr("Run &Sandboxed"));
 		
 		QDir::setCurrent(QCoreApplication::applicationDirPath());
 		QProcess Proc;

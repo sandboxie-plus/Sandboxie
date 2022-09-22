@@ -51,6 +51,7 @@ public slots:
 	int			exec();
 
 	int			FindFiles();
+	void		SelectFiles();
 	void		AddFile(const QString& FilePath, const QString& BoxPath);
 
 private slots:

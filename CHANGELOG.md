@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed issues with stale data in Sandboxie-Plus.ini [#2248](https://github.com/sandboxie-plus/Sandboxie/pull/2248) (thanks okrc)
 - fixed issue with dummy manifests [#2252](https://github.com/sandboxie-plus/Sandboxie/issues/2252)
+- fixed issue with xyplorer [#2230](https://github.com/sandboxie-plus/Sandboxie/issues/2230)
 
 
 

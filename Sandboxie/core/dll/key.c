@@ -2781,7 +2781,10 @@ _FX NTSTATUS Key_NtQueryKeyImpl(
 
     if (KeyInformationClass == KeyBasicInformation ||
         KeyInformationClass == KeyNodeInformation  ||
-        KeyInformationClass == KeyFlagsInformation)
+        KeyInformationClass == KeyFlagsInformation ||
+        
+        KeyInformationClass == KeyTrustInformation ||
+        KeyInformationClass == KeyLayerInformation)
     {
         status = __sys_NtQueryKey(
             KeyHandle, KeyInformationClass, KeyInformation,

@@ -1092,6 +1092,8 @@ typedef enum _KEY_INFORMATION_CLASS {
     KeyFlagsInformation,
     KeyVirtualizationInformation,   // Windows Vista
     KeyHandleTagsInformation,       // Windows 7
+    KeyTrustInformation,
+    KeyLayerInformation,
     MaxKeyInfoClass
 } KEY_INFORMATION_CLASS;
 

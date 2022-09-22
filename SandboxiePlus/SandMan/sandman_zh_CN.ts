@@ -575,7 +575,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="242"/>
         <source>No Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>禁止重命名</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="246"/>
@@ -655,7 +655,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="464"/>
         <source>&apos;OpenWinClass=program.exe,#&apos; is not supported, use &apos;NoRenameWinClass=program.exe,*&apos; instead</source>
-        <translation type="unfinished"></translation>
+        <translation>不支持 &apos;OpenWinClass=program.exe,#&apos; 配置格式，请使用 &apos;NoRenameWinClass=program.exe,*&apos; 替换</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="505"/>
@@ -663,7 +663,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsGrouping.cpp" line="302"/>
         <location filename="Windows/OptionsNetwork.cpp" line="507"/>
         <source>Template values can not be edited.</source>
-        <translation>模板值无法被编辑</translation>
+        <translation>模板值不能被编辑</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="571"/>
@@ -1837,7 +1837,7 @@ This box prevents access to all user data locations, except explicitly granted i
     <message>
         <location filename="SandMan.cpp" line="1842"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation>选定的特性只对项目赞助者可用。如果没有赞助者凭据，在启用该特性的沙盒里启动的进程，将在 5 分钟后将被终止。&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;成为项目赞助者&lt;/a&gt;，以获得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者凭据&lt;/a&gt;</translation>
+        <translation>选定的特性只对项目赞助者可用。如果没有赞助者凭据，在启用该特性的沙盒里启动的进程，将在 5 分钟后被终止。&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;成为项目赞助者&lt;/a&gt;，以获得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者凭据&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2592"/>
@@ -2973,7 +2973,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="972"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
-        <translation type="unfinished"></translation>
+        <translation>⌈沙盒/组⌋名称不能使用 &apos;,()&apos; 等符号</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="977"/>
@@ -5401,7 +5401,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="449"/>
         <source>Don&apos;t show icons in menus *</source>
-        <translation>不在菜单中显示图标 *</translation>
+        <translation>不在任务栏托盘菜单列表中显示图标 *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="527"/>

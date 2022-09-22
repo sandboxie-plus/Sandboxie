@@ -346,8 +346,9 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 
 Qt::CheckState CSettingsWindow__IsContextMenu()
 {
-	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\PackagedCom\\Package", QSettings::NativeFormat);
-	foreach(const QString & Key, settings.childGroups()) {
+	//QSettings Package("HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\PackagedCom\\Package", QSettings::NativeFormat);
+	QSettings Package("HKEY_CURRENT_USER\\Software\\Classes\\PackagedCom\\Package", QSettings::NativeFormat);
+	foreach(const QString & Key, Package.childGroups()) {
 		if (Key.indexOf("SandboxieShell") == 0)
 			return Qt::Checked;
 	}
@@ -362,11 +363,15 @@ Qt::CheckState CSettingsWindow__IsContextMenu()
 
 void CSettingsWindow__AddContextMenu(bool bAlwaysClassic)
 {
-	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
-	if (settings.value("CurrentBuild").toInt() >= 22000 && !bAlwaysClassic) // Windows 11
+	QSettings CurrentVersion("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
+	if (CurrentVersion.value("CurrentBuild").toInt() >= 22000 && !bAlwaysClassic) // Windows 11
 	{
+		QSettings MyReg("HKEY_CURRENT_USER\\SOFTWARE\\Xanasoft\\Sandboxie-Plus\\SbieShellExt\\Lang", QSettings::NativeFormat);
+		MyReg.setValue("Open Sandboxed", CSettingsWindow::tr("Open Sandboxed"));
+		MyReg.setValue("Explore Sandboxed", CSettingsWindow::tr("Explore Sandboxed"));
+		
+		QDir::setCurrent(QCoreApplication::applicationDirPath());
 		QProcess Proc;
-		Proc.setWorkingDirectory(QCoreApplication::applicationDirPath());
 		Proc.execute("rundll32.exe", QStringList() << "SbieShellExt.dll,RegisterPackage");
 		Proc.waitForFinished();
 		return;
@@ -379,11 +384,11 @@ void CSettingsWindow__AddContextMenu(bool bAlwaysClassic)
 
 void CSettingsWindow__RemoveContextMenu()
 {
-	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
-	if (settings.value("CurrentBuild").toInt() >= 22000) // Windows 11
+	QSettings CurrentVersion("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
+	if (CurrentVersion.value("CurrentBuild").toInt() >= 22000) // Windows 11
 	{
+		QDir::setCurrent(QCoreApplication::applicationDirPath());
 		QProcess Proc;
-		Proc.setWorkingDirectory(QCoreApplication::applicationDirPath());
 		Proc.execute("rundll32.exe", QStringList() << "SbieShellExt.dll,RemovePackage");
 		Proc.waitForFinished();
 	}

@@ -14,6 +14,40 @@ using namespace Microsoft::WRL;
 
 std::wstring g_path;
 
+
+LONG GetDWORDRegKey(HKEY hKey, const std::wstring& strValueName, DWORD& nValue)
+{
+    DWORD dwBufferSize(sizeof(DWORD));
+    DWORD nResult(0);
+    LONG nError = ::RegQueryValueExW(hKey,
+        strValueName.c_str(),
+        0,
+        NULL,
+        reinterpret_cast<LPBYTE>(&nResult),
+        &dwBufferSize);
+    if (ERROR_SUCCESS == nError)
+    {
+        nValue = nResult;
+    }
+    return nError;
+}
+
+LONG GetStringRegKey(HKEY hKey, const std::wstring& strValueName, std::wstring& strValue)
+{
+    WCHAR szBuffer[512];
+    DWORD dwBufferSize = sizeof(szBuffer);
+    ULONG nError;
+    nError = RegQueryValueExW(hKey, strValueName.c_str(), 0, NULL, (LPBYTE)szBuffer, &dwBufferSize);
+    if (ERROR_SUCCESS == nError)
+    {
+        strValue = szBuffer;
+    }
+    return nError;
+}
+
+std::wstring g_ExploreSandboxed = L"Explore Sandboxed";
+std::wstring g_OpenSandboxed = L"Open Sandboxed";
+
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
                        LPVOID lpReserved
@@ -28,6 +62,14 @@ BOOL APIENTRY DllMain( HMODULE hModule,
             wchar_t* ptr = wcsrchr(path, L'\\');
             *ptr = L'\0';
             g_path = std::wstring(path);
+
+            HKEY hKey;
+            LONG lRes = RegOpenKeyExW(HKEY_CURRENT_USER, L"SOFTWARE\\Xanasoft\\Sandboxie-Plus\\SbieShellExt\\Lang", 0, KEY_READ, &hKey);
+            bool bExistsAndSuccess(lRes == ERROR_SUCCESS);
+            bool bDoesNotExistsSpecifically(lRes == ERROR_FILE_NOT_FOUND);
+            GetStringRegKey(hKey, L"Explore Sandboxed", g_ExploreSandboxed);
+            GetStringRegKey(hKey, L"Open Sandboxed", g_OpenSandboxed);
+            CloseHandle(hKey);
 
             break;
         }
@@ -154,14 +196,14 @@ protected:
 class __declspec(uuid("EA3E972D-62C7-4309-8F15-883263041E99")) ExploreCommandHandler final : public TestExplorerCommandBase
 {
 public:
-    const wchar_t* Title() override { return L"Explore Sandboxed"; }
+    const wchar_t* Title() override { return g_ExploreSandboxed.c_str(); }
     ECommand GetCommand() { return eExplore; }
 };
 
 class __declspec(uuid("3FD2D9EE-DAF9-404A-9B7E-13B2DCD63950")) OpenCommandHandler final : public TestExplorerCommandBase
 {
 public:
-    const wchar_t* Title() override { return L"Open Sandboxed"; }
+    const wchar_t* Title() override { return g_OpenSandboxed.c_str(); }
     ECommand GetCommand() { return eOpen; }
 };
 

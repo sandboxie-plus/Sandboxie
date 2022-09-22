@@ -327,6 +327,18 @@ int CRecoveryWindow::FindFiles()
 
 	m_pFileModel->Sync(m_FileMap);
 	ui.treeFiles->expandAll();
+
+	/*for (int i = 0; i < m_pFileModel->rowCount(); ++i)
+	{
+		QModelIndex ModelIndex = m_pFileModel->index(i, 0);
+		QVariant ID = m_pFileModel->GetItemID(ModelIndex);
+	}*/
+
+	QModelIndex Index = m_pFileModel->index(0, 0);
+	QModelIndex ModelIndex = m_pSortProxy->mapFromSource(Index);
+	ui.treeFiles->selectionModel()->setCurrentIndex(ModelIndex, QItemSelectionModel::SelectCurrent);
+	ui.treeFiles->setCurrentIndex(ModelIndex);
+
 	return Count;
 }
 

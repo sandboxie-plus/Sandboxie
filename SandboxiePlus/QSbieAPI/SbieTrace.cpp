@@ -59,11 +59,13 @@ QString ErrorString(qint32 err)
 	return Error;
 }
 
-CTraceEntry::CTraceEntry(quint32 ProcessId, quint32 ThreadId, quint32 Type, const QString& Message)
+CTraceEntry::CTraceEntry(quint32 ProcessId, quint32 ThreadId, quint32 Type, const QStringList& LogData)
 {
 	m_ProcessId = ProcessId;
 	m_ThreadId = ThreadId;
-	m_Message = Message;
+	m_Name = LogData.length() > 0 ? LogData.at(0) : QString("(empty)");
+	m_Message = LogData.length() > 1 ? LogData.at(1) : QString();
+	m_SubType = LogData.length() > 2 ? LogData.at(2) : QString();
 	m_Type.Flags = Type;
 
 	m_TimeStamp = QDateTime::currentDateTime(); // ms resolution
@@ -73,14 +75,14 @@ CTraceEntry::CTraceEntry(quint32 ProcessId, quint32 ThreadId, quint32 Type, cons
 	static atomic<quint64> uid = 0;
 	m_uid = uid.fetch_add(1);
 	
-	m_Counter = 0;
+	m_Counter = 1;
 
 	m_Message = m_Message.replace("\r", "").replace("\n", " ");
 
 	// if this is a set error, then get the actual error string
-	if (m_Type.Type == MONITOR_OTHER && Message.indexOf("SetError:") == 0)
+	if (m_Type.Type == MONITOR_OTHER && m_Message.indexOf("SetError:") == 0)
 	{
-		auto tmp = Message.split(":");
+		auto tmp = m_Message.split(":");
 		if (tmp.length() >= 2)
 		{
 			QString temp = tmp[1].trimmed();
@@ -134,6 +136,9 @@ QString CTraceEntry::GetTypeStr() const
 	QString Type = GetTypeStr(m_Type.Type);
 	if(Type.isEmpty())
 		Type = "Unknown: " + QString::number(m_Type.Type);
+
+	if(!m_SubType.isEmpty())
+		Type.append(" / " + m_SubType);
 
 	if (m_Type.User)
 		Type.append(" (U)");

@@ -30,7 +30,7 @@ typedef long NTSTATUS;
 // As more recent versions of ntdll.lib are not offering many CRT functions we have to create own libs.
 // See NtCRT_x64.def and NtCRT_x86.def respectively for the functions, we use a custom build step 
 // "lib /def:%(FullPath) /out:$(SolutionDir)Bin\$(PlatformName)\$(Configuration)\NtCRT.lib /machine:x64" 
-// on the apropriate def file, for x86 we use the switch /machine:x86 instead.
+// on the appropriate def file, for x86 we use the switch /machine:x86 instead.
 //
 // For the x86 build we also need _except_handler3 which we have recreated in except_handler3.asm
 //

@@ -23,19 +23,21 @@ CSnapshotsWindow::CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	ui.setupUi(this);
 	this->setWindowTitle(tr("%1 - Snapshots").arg(pBox->GetName()));
 
+	ui.treeSnapshots->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
+
+
 	m_pBox = pBox;
 	m_SaveInfoPending = 0;
 
-#ifdef WIN32
 	QStyle* pStyle = QStyleFactory::create("windows");
 	ui.treeSnapshots->setStyle(pStyle);
-#endif
+	ui.treeSnapshots->setItemDelegate(new CTreeItemDelegate());
 	ui.treeSnapshots->setExpandsOnDoubleClick(false);
 
 	m_pSnapshotModel = new CSimpleTreeModel();
 	m_pSnapshotModel->AddColumn(tr("Snapshot"), "Name");
 
-	/*m_pSortProxy = new CSortFilterProxyModel(false, this);
+	/*m_pSortProxy = new CSortFilterProxyModel(this);
 	m_pSortProxy->setSortRole(Qt::EditRole);
 	m_pSortProxy->setSourceModel(m_pSnapshotModel);
 	m_pSortProxy->setDynamicSortFilter(true);*/
@@ -179,10 +181,7 @@ void CSnapshotsWindow::OnTakeSnapshot()
 
 void CSnapshotsWindow::OnSelectSnapshot()
 {
-	QModelIndex Index = ui.treeSnapshots->currentIndex();
-	//QModelIndex ModelIndex = m_pSortProxy->mapToSource(Index);
-	//QVariant ID = m_pSnapshotModel->GetItemID(ModelIndex);
-	QVariant ID = m_pSnapshotModel->GetItemID(Index);
+	QVariant ID = GetCurrentItem();
 
 	SelectSnapshot(ID.toString());
 }
@@ -202,10 +201,7 @@ void CSnapshotsWindow::SelectSnapshot(const QString& ID)
 
 void CSnapshotsWindow::OnChangeDefault()
 {
-	QModelIndex Index = ui.treeSnapshots->currentIndex();
-	//QModelIndex ModelIndex = m_pSortProxy->mapToSource(Index);
-	//QVariant ID = m_pSnapshotModel->GetItemID(ModelIndex);
-	QVariant ID = m_pSnapshotModel->GetItemID(Index);
+	QVariant ID = GetCurrentItem();
 
 	if (ui.chkDefault->isChecked())
 		m_DefaultSnapshot = ID.toString();
@@ -217,12 +213,19 @@ void CSnapshotsWindow::OnChangeDefault()
 	UpdateSnapshots();
 }
 
-void CSnapshotsWindow::OnRemoveSnapshot()
+QVariant CSnapshotsWindow::GetCurrentItem()
 {
 	QModelIndex Index = ui.treeSnapshots->currentIndex();
+	if (!Index.isValid() && !ui.treeSnapshots->selectionModel()->selectedIndexes().isEmpty())
+		Index = ui.treeSnapshots->selectionModel()->selectedIndexes().first();
 	//QModelIndex ModelIndex = m_pSortProxy->mapToSource(Index);
 	//QVariant ID = m_pSnapshotModel->GetItemID(ModelIndex);
-	QVariant ID = m_pSnapshotModel->GetItemID(Index);
+	return m_pSnapshotModel->GetItemID(Index);
+}
+
+void CSnapshotsWindow::OnRemoveSnapshot()
+{
+	QVariant ID = GetCurrentItem();
 
 	if (QMessageBox("Sandboxie-Plus", tr("Do you really want to delete the selected snapshot?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
 		return;

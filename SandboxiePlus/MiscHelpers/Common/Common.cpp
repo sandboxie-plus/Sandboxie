@@ -96,7 +96,7 @@ quint64 GetRand64()
 {
 	quint64 Rand64;
 #ifdef USE_OPENSSL
-	int Ret = RAND_bytes((byte*)&Rand64, sizeof(uint64));
+	int Ret = RAND_bytes((byte*)&Rand64, sizeof(quint64));
 	ASSERT(Ret == 1); // An error occurs if the PRNG has not been seeded with enough randomness to ensure an unpredictable byte sequence.
 #else
 	//CryptoPP::AutoSeededRandomPool rng;
@@ -330,6 +330,149 @@ bool ReadFromDevice(QIODevice* dev, char* data, int len, int timeout)
 	return dev->read(data, len) == len;
 }
 
+my_hsv rgb2hsv(my_rgb in)
+{
+    my_hsv      out;
+    double      min, max, delta;
+
+    min = in.r < in.g ? in.r : in.g;
+    min = min  < in.b ? min  : in.b;
+
+    max = in.r > in.g ? in.r : in.g;
+    max = max  > in.b ? max  : in.b;
+
+    out.v = max;                                // v
+    delta = max - min;
+    if (delta < 0.00001)
+    {
+        out.s = 0;
+        out.h = 0; // undefined, maybe nan?
+        return out;
+    }
+    if( max > 0.0 ) { // NOTE: if Max is == 0, this divide would cause a crash
+        out.s = (delta / max);                  // s
+    } else {
+        // if max is 0, then r = g = b = 0              
+        // s = 0, h is undefined
+        out.s = 0.0;
+        out.h = NAN;                            // its now undefined
+        return out;
+    }
+    if( in.r >= max )                           // > is bogus, just keeps compilor happy
+        out.h = ( in.g - in.b ) / delta;        // between yellow & magenta
+    else
+    if( in.g >= max )
+        out.h = 2.0 + ( in.b - in.r ) / delta;  // between cyan & yellow
+    else
+        out.h = 4.0 + ( in.r - in.g ) / delta;  // between magenta & cyan
+
+    out.h *= 60.0;                              // degrees
+
+    if( out.h < 0.0 )
+        out.h += 360.0;
+
+    return out;
+}
+
+my_rgb hsv2rgb(my_hsv in)
+{
+    double      hh, p, q, t, ff;
+    long        i;
+    my_rgb      out;
+
+    if(in.s <= 0.0) {       // < is bogus, just shuts up warnings
+        out.r = in.v;
+        out.g = in.v;
+        out.b = in.v;
+        return out;
+    }
+    hh = in.h;
+    if(hh >= 360.0) hh = 0.0;
+    hh /= 60.0;
+    i = (long)hh;
+    ff = hh - i;
+    p = in.v * (1.0 - in.s);
+    q = in.v * (1.0 - (in.s * ff));
+    t = in.v * (1.0 - (in.s * (1.0 - ff)));
+
+    switch(i) {
+    case 0:
+        out.r = in.v;
+        out.g = t;
+        out.b = p;
+        break;
+    case 1:
+        out.r = q;
+        out.g = in.v;
+        out.b = p;
+        break;
+    case 2:
+        out.r = p;
+        out.g = in.v;
+        out.b = t;
+        break;
+
+    case 3:
+        out.r = p;
+        out.g = q;
+        out.b = in.v;
+        break;
+    case 4:
+        out.r = t;
+        out.g = p;
+        out.b = in.v;
+        break;
+    case 5:
+    default:
+        out.r = in.v;
+        out.g = p;
+        out.b = q;
+        break;
+    }
+    return out;     
+}
+
+uint8_t clamp(float v) //define a function to bound and round the input float value to 0-255
+{
+    if (v < 0)
+        return 0;
+    if (v > 255)
+        return 255;
+    return (uint8_t)v;
+}
+
+// http://beesbuzz.biz/code/16-hsv-color-transforms
+QRgb change_hsv_c(QRgb rgb, float fHue, float fSat, float fVal)
+{
+	float in_r = qRed(rgb);
+	float in_g = qGreen(rgb);
+	float in_b = qBlue(rgb);
+
+    const float cosA = fSat*cos(fHue*3.14159265f/180); //convert degrees to radians
+    const float sinA = fSat*sin(fHue*3.14159265f/180); //convert degrees to radians
+
+    //helpers for faster calc //first 2 could actually be precomputed
+    const float aThird = 1.0f/3.0f;
+    const float rootThird = sqrtf(aThird);
+    const float oneMinusCosA = (1.0f - cosA);
+    const float aThirdOfOneMinusCosA = aThird * oneMinusCosA;
+    const float rootThirdTimesSinA =  rootThird * sinA;
+    const float plus = aThirdOfOneMinusCosA +rootThirdTimesSinA;
+    const float minus = aThirdOfOneMinusCosA -rootThirdTimesSinA;
+
+    //calculate the rotation matrix
+    float matrix[3][3] = {
+        {   cosA + oneMinusCosA / 3.0f  , minus                         , plus                          },
+        {   plus                        , cosA + aThirdOfOneMinusCosA   , minus                         },
+        {   minus                       , plus                          , cosA + aThirdOfOneMinusCosA   }
+    };
+
+    //Use the rotation matrix to convert the RGB directly
+    float out_r = clamp((in_r*matrix[0][0] + in_g*matrix[0][1] + in_b*matrix[0][2])*fVal);
+    float out_g = clamp((in_r*matrix[1][0] + in_g*matrix[1][1] + in_b*matrix[1][2])*fVal);
+    float out_b = clamp((in_r*matrix[2][0] + in_g*matrix[2][1] + in_b*matrix[2][2])*fVal);
+    return qRgb(out_r, out_g, out_b);
+}
 
 void GrayScale (QImage& Image)
 {
@@ -429,6 +572,15 @@ QAction* MakeAction(QActionGroup* pGroup, QMenu* pParent, const QString& Text, c
 	pAction->setActionGroup(pGroup);
 	pParent->addAction(pAction);
 	return pAction;
+}
+
+void SetPaleteTexture(QPalette& palette, QPalette::ColorRole role, const QImage& image)
+{
+	for (int i = 0; i < QPalette::NColorGroups; ++i) {
+		QBrush brush(image);
+		brush.setColor(palette.brush(QPalette::ColorGroup(i), role).color());
+		palette.setBrush(QPalette::ColorGroup(i), role, brush);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

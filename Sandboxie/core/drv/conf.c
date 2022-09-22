@@ -54,7 +54,7 @@
 // Note: we want to preserver the order of the settings when enumerating
 //          hence we can not replace the list with a hash map entierly
 //          instead we use booth, here the hash map ise used only for lookups
-//          the keys in the map are only pointers to the name fileds in the list entries
+//          the keys in the map are only pointers to the name fields in the list entries
 //
 
 typedef struct _CONF_DATA {
@@ -65,7 +65,7 @@ typedef struct _CONF_DATA {
     HASH_MAP sections_map;
 #endif
     BOOLEAN home;       // TRUE if configuration read from Driver_Home_Path
-    ULONG encoding;     // 0 - unicode, 1 - utf8, 2 - unicode (byte swaped)
+    ULONG encoding;     // 0 - unicode, 1 - utf8, 2 - unicode (byte swapped)
     volatile ULONG use_count;
 
 } CONF_DATA;
@@ -1458,8 +1458,7 @@ _FX NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms)
             }
         }
 
-        BOOLEAN obj_filter_enabled = Conf_Get_Boolean(NULL, L"EnableObjectFiltering", 0, FALSE);
-        extern BOOLEAN Obj_CallbackInstalled;
+        BOOLEAN obj_filter_enabled = Conf_Get_Boolean(NULL, L"EnableObjectFiltering", 0, TRUE);
         if (Obj_CallbackInstalled != obj_filter_enabled && Driver_OsVersion > DRIVER_WINDOWS_VISTA) {
             if (obj_filter_enabled) {
                 Obj_Load_Filter();
@@ -1469,11 +1468,8 @@ _FX NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms)
             }
         }
 
-        extern UCHAR SandboxieLogonSid[SECURITY_MAX_SID_SIZE];
-        if (Conf_Get_Boolean(NULL, L"AllowSandboxieLogon", 0, FALSE) && SandboxieLogonSid[0] == 0) {
-            extern BOOLEAN Token_Init_SbieLogin(void);
-            Token_Init_SbieLogin();
-        }
+        void Syscall_Update_Lockdown();
+        Syscall_Update_Lockdown();
 
         /*
 #ifdef HOOK_WIN32K
@@ -1492,7 +1488,13 @@ _FX NTSTATUS Conf_Api_Reload(PROCESS *proc, ULONG64 *parms)
         InterlockedExchange(&reconf_lock, 0);
     }
 
-    Api_SendServiceMessage(SVC_CONFIG_UPDATED, 0, NULL);
+    //
+    // notify service about setting change
+    //
+
+    ULONG process_id = (ULONG)PsGetCurrentProcessId();
+
+    Api_SendServiceMessage(SVC_CONFIG_UPDATED, sizeof(process_id), &process_id);
 
 finish:
     return status;
@@ -1514,6 +1516,10 @@ _FX NTSTATUS Conf_Api_Query(PROCESS *proc, ULONG64 *parms)
     ULONG index;
     const WCHAR *value1;
     WCHAR *value2;
+
+    //
+    // prepare parameters
+    // 
 
     // parms[1] --> WCHAR [66] SectionName
 

@@ -1,0 +1,6 @@
+*==========
+* Missing Messages in Text-Korean-1042.txt
+*==========
+
+There are no missing messages.
+

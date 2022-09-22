@@ -291,7 +291,7 @@ static P_WinExec                    __sys_WinExec                   = NULL;
 static P_RunSetupCommandW           __sys_RunSetupCommandW          = NULL;
 
 static P_NtSetInformationProcess    __sys_NtSetInformationProcess   = NULL;
-static P_NtQueryInformationProcess  __sys_NtQueryInformationProcess = NULL;
+       P_NtQueryInformationProcess  __sys_NtQueryInformationProcess = NULL;
 
 static P_NtCreateProcessEx          __sys_NtCreateProcessEx         = NULL;
 
@@ -324,11 +324,14 @@ BOOL            Dll_ElectronWorkaround = FALSE;
 
 _FX BOOLEAN Proc_Init(void)
 {
+    HMODULE module = NULL;
+
     P_CreateProcessInternal CreateProcessInternalW;
     ANSI_STRING ansi;
     NTSTATUS status;
 
-    Dll_ElectronWorkaround = SbieApi_QueryConfBool(NULL, L"UseElectronWorkaround", TRUE);
+    if(!Dll_CompartmentMode)
+        Dll_ElectronWorkaround = Config_GetSettingsForImageName_bool(L"UseElectronWorkaround", FALSE);
 
     //
     // abort if we should not hook any process creation functions
@@ -579,53 +582,94 @@ _FX BOOL Proc_SetProcessMitigationPolicy(
 
 
 //---------------------------------------------------------------------------
+// Proc_FindArgumentEnd
+//---------------------------------------------------------------------------
+
+
+_FX const WCHAR* Proc_FindArgumentEnd(const WCHAR* arguments)
+{
+    //
+    // when suplying: "aaaa \"bb cc\"ddd\"e\\"f\" gg hh \\"ii \"jjjj kkkk"
+    // to an application for (int i = 0; i < argc; i++) printf("%s\n", argv[i]); gives:
+    // "aaaa", "bb ccddde\"f", "gg", "hh", "\"ii", "jjjj kkkk"
+    // here we exactly replicate this parsing scheme
+    //
+
+    const WCHAR* ptr = arguments;
+    BOOLEAN inq = FALSE;
+    BOOLEAN esc = FALSE;
+    for (; *ptr != L'\0'; ptr++) {
+        if (esc) 
+            esc = FALSE;
+        else {
+            if (*ptr == L'\\') {
+                esc = TRUE;
+                continue;
+            }
+            if (*ptr == L'\"') {
+                inq = !inq;
+                continue;
+            }
+        }
+        if (!inq && (*ptr == L' ' || *ptr == L'\t'))
+            break;
+    }
+    return ptr;
+}
+
+
+//---------------------------------------------------------------------------
 // Proc_CreateProcessInternalW
 //---------------------------------------------------------------------------
 
 
-void *Proc_GetImageFullPath(const WCHAR *lpApplicationName, const WCHAR *lpCommandLine)
-{
-    if ((lpApplicationName == NULL) && (lpCommandLine == NULL))
-        return NULL;
-
-    const WCHAR *start = NULL;
-    int len = 0;
-
-    if (lpApplicationName) {
-        start = lpApplicationName;
-        len = wcslen(start) + 1;    // add 1 for NULL
-    }
-    else {
-        start = lpCommandLine;
-        const WCHAR *end;
-
-        // if command line is not quoted, look for 1st space
-        if (*start != L'\"') {
-            end = start;
-            while (*end != 0 && *end != L' ')
-                end++;
-        }
-        // else, look for end quote
-        else {
-            start++;
-            end = start;
-            while (*end != 0 && *end != L'\"')
-                end++;
-        }
-        len = (int)(end - start) + 1;
-    }
-
-    WCHAR *mybuf = Dll_Alloc(len * sizeof(WCHAR));
-    if (!mybuf) {
-        return NULL;
-    }
-
-    memset(mybuf, 0xcd, len * 2);
-    wcsncpy(mybuf, start, len - 1);
-    mybuf[len - 1] = L'\0';
-
-    return mybuf;
-}
+//void *Proc_GetImageFullPath(const WCHAR *lpApplicationName, const WCHAR *lpCommandLine)
+//{
+//    if ((lpApplicationName == NULL) && (lpCommandLine == NULL))
+//        return NULL;
+//
+//    const WCHAR *start = NULL;
+//    int len = 0;
+//
+//    if (lpApplicationName) {
+//        start = lpApplicationName;
+//        len = wcslen(start) + 1;    // add 1 for NULL
+//    }
+//    else {
+//        start = lpCommandLine;
+//        const WCHAR *end;
+//
+//        // if command line is not quoted, look for 1st space
+//        if (*start != L'\"') {
+//            end = start;
+//            while (*end != 0 && *end != L' ')
+//                end++;
+//        }
+//        // else, look for end quote
+//        else {
+//            start++;
+//            end = start;
+//            while (*end != 0 && *end != L'\"')
+//                end++;
+//        }
+//        len = (int)(end - start) + 1;
+//    }
+//
+//    //
+//    // add + 4 space to be able to append a ".exe" in case its missing
+//    //
+//
+//    WCHAR *mybuf = Dll_Alloc((len + 4) * sizeof(WCHAR));
+//    if (!mybuf) {
+//        return NULL;
+//    }
+//
+//    memset(mybuf, 0xcd, (len + 4) * sizeof(WCHAR));
+//    wcsncpy(mybuf, start, len - 1);
+//    mybuf[len - 1] = L'\0';
+//
+//    return mybuf;
+//}
 
 
 //
@@ -745,19 +789,43 @@ _FX BOOL Proc_CreateProcessInternalW(
 
     if (Dll_OsBuild >= 17677) { // 10 RS5 and later
 
+        /*
         //Logic for windows 10 RS5
         WCHAR* mybuf = Proc_GetImageFullPath(lpApplicationName, lpCommandLine);
         if (mybuf == NULL)
             return FALSE;
 
         FileHandle = CreateFileW(mybuf, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+        if (FileHandle == INVALID_HANDLE_VALUE) {
+            LONG len = wcslen(mybuf);
+            if (len < 4 || _wcsicmp(mybuf - 4, L".exe") != 0) {
+                wcscat(mybuf, L".exe");
+                FileHandle = CreateFileW(mybuf, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+            }
+        }
 
         Dll_Free(mybuf);
 
         if (FileHandle != INVALID_HANDLE_VALUE) {
             Proc_StoreImagePath(TlsData, FileHandle);
             NtClose(FileHandle);
-        }
+        }*/
+
+        //
+        // invoke the real CreateProcessInternal so it can record accurate
+        //
+
+        TlsData->proc_create_process_capture_image = TRUE;
+
+        ok = __sys_CreateProcessInternalW(
+            NULL, lpApplicationName, lpCommandLine,
+            NULL, NULL, FALSE, dwCreationFlags,
+            lpEnvironment, lpCurrentDirectory,
+            lpStartupInfo, lpProcessInformation, hNewToken);
+
+        //err = GetLastError(); // == ERROR_BAD_EXE_FORMAT
+
+        TlsData->proc_create_process_capture_image = FALSE;
 
         //
         // the system may have quoted the first part of the command line,
@@ -796,7 +864,7 @@ _FX BOOL Proc_CreateProcessInternalW(
     else { // xp, 7, 8 and 10 before RS5
 
         //
-        // invoke the real CreateProcessInternal so it can record acurate
+        // invoke the real CreateProcessInternal so it can record accurate
         // paths in NtCreateSection/Proc_SectionCallback, and then fail.
         //
 
@@ -948,30 +1016,76 @@ _FX BOOL Proc_CreateProcessInternalW(
                 || SbieDll_CheckPatternInList(lpApplicationName, (ULONG)(lpProgram - lpApplicationName),  NULL, L"BreakoutFolder")) {
                 
                 const WCHAR* lpArguments = NULL;
-                if (lpCommandLine) {
-                    if (lpCommandLine[0] == L'\"') {
-                        lpArguments = wcschr(lpCommandLine + 1, L'\"');
-                        if (lpArguments) lpArguments++; // skip "
-                    }
-                    else
-                        lpArguments = wcschr(lpCommandLine, L' ');
-                    if (!lpArguments) lpArguments = wcschr(lpCommandLine, L'\0');
-                }
+                if (lpCommandLine)
+                    lpArguments = Proc_FindArgumentEnd(lpCommandLine);
 
-                WCHAR *mybuf = Dll_Alloc((wcslen(lpApplicationName) + 2 + (lpArguments ? wcslen(lpArguments) : 0) + 1) * sizeof(WCHAR));
+                WCHAR *mybuf = Dll_Alloc((wcslen(lpApplicationName) + 2 + (lpArguments ? wcslen(lpArguments) + 8192 : 0) + 1) * sizeof(WCHAR));
                 if (mybuf) {
 
                     //
                     // The breakout request is validated by the service, hence we need a clean and complete 
                     // application path and not a just a command line where the binary may be missing the .exe
-                    // and or be only relative to the workign directory, or worse the path variable.
+                    // and or be only relative to the working directory, or worse the path variable.
                     //
 
                     wcscpy(mybuf, L"\"");
                     wcscat(mybuf, lpApplicationName);
                     wcscat(mybuf, L"\"");
-                    if(lpArguments)
-                        wcscat(mybuf, lpArguments);
+                    if (lpArguments) { // must always start with a space
+                        //wcscat(mybuf, lpArguments);
+                        
+                        WCHAR* mybuff2 = mybuf + wcslen(mybuf);
+
+                        // 
+                        // add arguments one by one and if needed adapt them
+                        //
+
+                        WCHAR* temp = Dll_Alloc(sizeof(WCHAR) * 8192);
+
+                        for (const WCHAR* ptr = lpArguments; *ptr != L'\0';) {
+                            WCHAR* end = (WCHAR*)Proc_FindArgumentEnd(ptr);
+                            ULONG len = (ULONG)(end - ptr);
+                            if (len > 0) {
+                                WCHAR savechar = *end;
+                                *end = L'\0';
+
+                                const WCHAR* tmp = ptr;
+                                if (ptr[0] == L'\"') tmp++;
+                                if (((tmp[0] >= L'A' && tmp[0] <= L'Z') || (tmp[0] >= L'a' && tmp[0] <= L'z')) && tmp[1] == L':') {
+
+                                    wcscpy(temp, tmp);
+                                    if (ptr[0] == L'\"') temp[len - 2] = L'\0';
+          
+                                    HANDLE hFile = CreateFileW(temp, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+
+                                    if (hFile != INVALID_HANDLE_VALUE) {
+
+                                        BOOLEAN is_copy;
+                                        LONG status = SbieDll_GetHandlePath(hFile, temp, &is_copy);
+                                        if (status == 0 && is_copy) {
+
+                                            SbieDll_TranslateNtToDosPath(temp);
+                                            ptr = temp;
+                                            len = wcslen(ptr);
+                                        } 
+
+                                        CloseHandle(hFile);
+                                    }
+
+                                }
+
+                                wmemcpy(mybuff2, ptr, len);
+                                mybuff2 += len;                                
+
+                                *end = savechar;
+                            }
+                            *mybuff2++ = *end;
+                            if (*end != L'\0') end++;
+                            ptr = end;
+                        }
+
+                        Dll_Free(temp);
+                    }
 
                     if (! lpCurrentDirectory) { // lpCurrentDirectory must not be NULL
                         lpCurrentDirectory = Dll_Alloc(sizeof(WCHAR) * 8192);
@@ -1006,7 +1120,7 @@ _FX BOOL Proc_CreateProcessInternalW(
 
 
     //
-    // in compartment mode we dont mess around just create the process
+    // in compartment mode we don't mess around just create the process
     //
 
     // OriginalToken BEGIN
@@ -1305,7 +1419,7 @@ finish:
     {
         WCHAR msg[1024];
         Sbie_snwprintf(msg, 1024, L"CreateProcess: %s (%s); err=%d", lpApplicationName ? lpApplicationName : L"[noName]", lpCommandLine ? lpCommandLine : L"[noCmd]", ok ? 0 : err);
-        SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, msg, FALSE);
+        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, msg);
     }
 
     SetLastError(err);
@@ -1329,7 +1443,7 @@ _FX BOOL Proc_AlternateCreateProcess(
         SetLastError(ERROR_ACCESS_DENIED);
         *ReturnValue = FALSE;
 
-        SbieApi_MonitorPut(MONITOR_OTHER, L"Blocked start of an updater");
+        SbieApi_MonitorPutMsg(MONITOR_OTHER, L"Blocked start of an updater");
         return TRUE;        // exit CreateProcessInternal
     }
 
@@ -1352,13 +1466,13 @@ _FX BOOL Proc_AlternateCreateProcess(
         // don't start Kaspersky Anti Virus klwtblfs.exe component
         // because Kaspersky protects the process and we can't put
         // it into a job or inject SbieLow and so on
-        SbieApi_MonitorPut(MONITOR_OTHER, L"Blocked start of klwtblfs.exe");
+        SbieApi_MonitorPutMsg(MONITOR_OTHER, L"Blocked start of klwtblfs.exe");
         return TRUE;        // exit CreateProcessInternal
     }
     if (Dll_ImageType == DLL_IMAGE_SANDBOXIE_DCOMLAUNCH && lpCommandLine
         && wcsstr(lpCommandLine, L"smartscreen.exe")) {
 
-        SbieApi_MonitorPut(MONITOR_OTHER, L"Blocked start of smartscreen.exe");
+        SbieApi_MonitorPutMsg(MONITOR_OTHER, L"Blocked start of smartscreen.exe");
         return TRUE;        // exit CreateProcessInternal
     }
     return FALSE;           // continue with CreateProcessInternal
@@ -1867,58 +1981,56 @@ _FX NTSTATUS Proc_NtCreateUserProcess(
     _In_ ULONG ThreadFlags, // THREAD_CREATE_FLAGS_*
     _In_opt_ PVOID ProcessParameters, // PRTL_USER_PROCESS_PARAMETERS
     _Inout_ PPS_CREATE_INFO CreateInfo,
-    _In_opt_ PPS_ATTRIBUTE_LIST AttributeList)
+    _In_ PPS_ATTRIBUTE_LIST AttributeList)
 {
     NTSTATUS status;
     UNICODE_STRING objname;
 
     SIZE_T ImageNameIndex = -1;
-    for (SIZE_T i = 0; i < AttributeList->TotalLength; i++) {
+     
+    SIZE_T count = (AttributeList->TotalLength - sizeof(SIZE_T)) / sizeof(PS_ATTRIBUTE);
+    for (SIZE_T i = 0; i < count; i++) {
         if (AttributeList->Attributes[i].Attribute == 0x00020005) { // PsAttributeValue(PsAttributeImageName, FALSE, TRUE, FALSE);
             ImageNameIndex = i;
             break;
         }
     }
        
-    if (ImageNameIndex != -1) {
+    ULONG LastError;
+    THREAD_DATA *TlsData = Dll_GetTlsData(&LastError);
 
-        objname.Buffer = (WCHAR*)AttributeList->Attributes[ImageNameIndex].Value;
-        objname.Length = (USHORT)AttributeList->Attributes[ImageNameIndex].Size;
-        objname.MaximumLength = objname.Length + sizeof(wchar_t);
+    if (TlsData->proc_create_process_capture_image) {
 
-        WCHAR *TruePath;
-        WCHAR *CopyPath;
-        ULONG FileFlags;
-        if (NT_SUCCESS(File_GetName(NULL, &objname, &TruePath, &CopyPath, &FileFlags))) {
+        TlsData->proc_create_process_capture_image = FALSE;
+
+        if (ImageNameIndex != -1) {
+
+            objname.Buffer = (WCHAR*)AttributeList->Attributes[ImageNameIndex].Value;
+            objname.Length = (USHORT)AttributeList->Attributes[ImageNameIndex].Size;
+            objname.MaximumLength = objname.Length + sizeof(wchar_t);
 
             HANDLE FileHandle;
             OBJECT_ATTRIBUTES objattrs;
-            UNICODE_STRING objname2;
             IO_STATUS_BLOCK IoStatusBlock;
 
-            RtlInitUnicodeString(&objname2, CopyPath);
             InitializeObjectAttributes(
-                &objattrs, &objname2, OBJ_CASE_INSENSITIVE, NULL, NULL);
+                &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
 
-            extern P_NtCreateFile __sys_NtCreateFile;
-            status = __sys_NtCreateFile(
+            status = NtCreateFile(
                 &FileHandle, FILE_GENERIC_READ, &objattrs,
                 &IoStatusBlock, NULL, 0, FILE_SHARE_READ,
                 FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
 
             if (NT_SUCCESS(status)) {
 
-                if (SbieDll_TranslateNtToDosPath(CopyPath)) {
-                    wmemmove(CopyPath + 4, CopyPath, wcslen(CopyPath) + sizeof(WCHAR));
-                    wmemcpy(CopyPath, L"\\??\\", 4);
-
-                    AttributeList->Attributes[ImageNameIndex].Value = (ULONG_PTR)CopyPath;
-                    AttributeList->Attributes[ImageNameIndex].Size = wcslen(CopyPath) * sizeof(WCHAR);
-                }
+                Proc_StoreImagePath(TlsData, FileHandle);
 
                 NtClose(FileHandle);
             }
         }
+
+        SetLastError(LastError);
+        return STATUS_BAD_INITIAL_PC;
     }
 
     status = __sys_NtCreateUserProcess(ProcessHandle,
@@ -1932,11 +2044,6 @@ _FX NTSTATUS Proc_NtCreateUserProcess(
         ProcessParameters,
         CreateInfo,
         AttributeList);
-
-    if (ImageNameIndex != -1) {
-        AttributeList->Attributes[ImageNameIndex].Value = (ULONG_PTR)objname.Buffer;
-        AttributeList->Attributes[ImageNameIndex].Size = objname.Length;
-    }
 
     return status;
 }
@@ -2367,7 +2474,7 @@ _FX BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path)
         //SbieApi_Log(2191, SoftName);
         SbieApi_Log(2191, Dll_ImageName);
         SbieApi_Log(2192, NULL);
-        SbieApi_Log(2193, NULL);
+        //SbieApi_Log(2193, NULL);
     }
 
     return IsUpdate;
@@ -2661,6 +2768,17 @@ _FX NTSTATUS Proc_NtQueryInformationProcess(
                 RtlInitUnicodeString((UNICODE_STRING*)ProcessInformation, TruePath);    // return non-sandboxed path so caller can't tell he's sandboxed.
         }
     }
+
+	/*if (ProcessInformationClass == ProcessImageFileName && ProcessInformation != NULL) {
+
+		ULONG tmplen;
+		PUNICODE_STRING fileName = (PUNICODE_STRING)ProcessInformation;
+
+		tmplen = File_NtQueryObjectName(fileName, fileName->MaximumLength);
+
+		if (tmplen)
+			outlen = sizeof(UNICODE_STRING) + tmplen;
+	}*/
 
     return status;
 }

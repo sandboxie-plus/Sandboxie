@@ -1,0 +1,856 @@
+*==========
+* Missing Messages in Text-Finnish-1035.txt
+*==========
+
+1222;pop;err;02
+SBIE1222 Error with security token:  %2
+.
+
+1231;pop;err;01
+SBIE1231 Initialization failed for process %3 %2
+.
+
+1316;pop;inf;01
+SBIE1316 Blocked request to generate device event in the sandbox
+.
+
+1319;pop;inf;01
+SBIE1319 Blocked spooler print to file, %2 %3
+.
+
+1320;pop;wrn;01
+SBIE1320 To allow print spooler to write outside the sandbox for this process, please double-click on this message line
+.
+
+1399;pop;inf;01
+%0
+.
+
+2111;pop;inf;01
+SBIE2111 Process is not accessible: %3, call %2
+.
+
+2112;pop;inf;01
+SBIE2112 Object is not accessible: %3, call %2
+.
+
+2194;pop;inf;01
+SBIE2194 MSI installer requires %2 option to be set in the ini, what however weakens the isolation.
+.
+
+2195;pop;inf;01
+SBIE2195 To run Explorer.exe sandboxed, the access for COM infrastructure must not be Open.
+.
+
+2198;pop;inf;01
+%0
+.
+
+2224;pop;wrn;01
+SBIE2224 Sandboxed program has crashed: %2
+.
+
+2225;pop;wrn;01
+SBIE2225 An attempt was made to access an EFS file: %2
+.
+
+2302;pop;err;01
+SBIE2302 Process image configuration conflict: %2
+.
+
+2325;pop;err;01
+SBIE2325 Debug:  %2
+.
+
+2335;pop;err;01
+SBIE2335 Initialization failed for process %2
+.
+
+2336;pop;err;01
+SBIE2336 Error in GUI server:  %2
+.
+
+2337;pop;err;01
+SBIE2337 Failed to start program:  %2
+.
+
+9234;evt;err;01
+SBIE9234 Service startup error %2
+.
+
+3107;txt;01
+Type the name of a program or path to open the following file in the current sandbox:
+.
+
+3114;txt;01
+Programs
+.
+
+3315;txt;01
+Deleting Sandbox contents
+.
+
+3316;txt;01
+Do you want to abort the operation?
+.
+
+3317;txt;01
+Preparing to delete: %2
+.
+
+3318;txt;01
+Deleting: %2
+.
+
+3426;txt;01
+&Always on Top
+.
+
+3504;txt;01
+&Support Sandboxie
+.
+
+3453;txt;02
+Getting Started &Tutorial
+.
+
+3457;txt;01
+&Sandboxie Forum (Web)
+.
+
+3459;txt;01
+Allow direct access to qWave driver (Google Hangouts)
+.
+
+3460;txt;01
+Function hooking customizations
+.
+
+3467;txt;01
+Upgrade to Sandboxie-Plus
+.
+
+3468;txt;01
+Sandboxie-Plus Migration Guide
+.
+
+3484;txt;01
+Resource Access
+.
+
+3955;txt;01
+Network Files
+.
+
+3956;txt;01
+Network files and folders are normally visible to sandboxed applications.
+.
+
+3957;txt;01
+If you wish to block sandboxed applications from accessing files and folders on your network, you can enable this setting. Individual files and folders can be opened for sandboxed applications by adding them under Resource Access -> File Access.
+.
+
+3958;txt;01
+Block network files and folders unless specifically opened.
+.
+
+4104;txt;01
+Resource Access::Network Access
+.
+
+4105;txt;01
+Network Access (Firewall)
+.
+
+4295;txt;01
+Default exclusions File Migration presets
+.
+
+4296;txt;01
+Default RPC Port Bindings
+.
+
+4297;txt;01
+Open Bluetooth RPC port
+.
+
+4298;txt;01
+Open Smart Card RPC port
+.
+
+4299;txt;01
+Open Simple Service Discovery Protocol (SSDP, UPnP) RPC port
+.
+
+4300;txt;01
+Open additional RPC Port Bindings
+.
+
+4306;txt;01
+Open RPC Port Bindings for UAC
+.
+
+4307;txt;01
+Block common telemetry processes
+.
+
+4308;txt;01
+Filter access to \Devices\
+.
+
+4341;txt;01
+Allow direct access to %2 notes
+.
+
+4342;txt;01
+Enable %2 fix for Windows 11 KB5014019
+.
+
+4393;txt;01
+Media Players
+.
+
+4394;txt;01
+The following exclusions allow Media players running in this sandbox to access files outside the sandbox.
+.
+
+4395;txt;01
+Allow %2 direct access to the Photo folder for easier screen capture.
+.
+
+4396;txt;01
+Torrent Clients
+.
+
+4397;txt;01
+The following exclusions allow Torrent clients running in this sandbox to access files outside the sandbox.
+.
+
+4398;txt;01
+Allow %2 direct access to the Music folder for easier music library management.
+.
+
+6001;txt;01
+The classic Sandboxie UI (SbieCtrl.exe) has very limited
+resource monitoring and event tracing capabilities.
+
+For optimal troubleshooting it is highly advisable 
+to install the new UI, Sandboxie-Plus (SandMan.exe),
+which provides excellent tracing and monitoring capabilities.
+
+Do you want to download Sandboxie-Plus now?
+.
+
+6002;txt;01
+Visit <a ID="whats_new">sandboxie-plus.com</a> to learn about the new functionality of Sandboxie-Plus,
+or directly click <a ID="upgrade">here</a> to download the latest Sandboxie-Plus installer.
+.
+
+6003;txt;01
+The legacy UI of Sandboxie classic does not implement support for the network firewall functionality.
+
+You can though configure the feature supported by the core components using the ini file, rules are structured like following:
+NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
+
+If you prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features.
+.
+
+6004;pop;err;01
+The configuration %3 of box %2 requires a supporter certificate. Processes in this box will be terminated after 5 minutes. For prolonged use, please consider supporting this project.
+.
+
+6005;txt;01
+Note: Without administrative privileges installers will fail to start in the sandbox. Sandboxie-Plus offers an option to make many installers succeed without those privileges. You can enable this option also in the classic build manually, by adding "FakeAdminRights=y" to the ini section for this box.
+.
+
+6006;txt;01
+The legacy UI of Sandboxie classic implements only support for a couple of restriction options.
+
+Additional options like "ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" and much more can be set in the ini section for this box.
+The modern UI (SandMan.exe) also offers more customization options for Start/Run and Internet access restrictions.
+
+If you would prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features.
+.
+
+6007;txt;01
+Sandboxie Plus offers enhanced privacy protection by switching the old behavior from a black-list mode, i.e. allowing read access to the entire drive, except blocked by Closed Path or Write Path, to a white-list mode where sandboxed programs are only allowed to read generic system locations and read access to most user data must be first explicitly granted.
+
+The legacy UI of Sandboxie classic does not implement support for this mode of operation. Although it can be configured using the ini file, it is recommended to use the modern Sandboxie-Plus UI (SandMan.exe) if you want to use privacy enhanced boxes.
+.
+
+6010;txt;01
+You have installed Sandboxie more than %2 days ago.
+
+So, you think David and the contributors are doing a great job?
+
+Why don't you show it by supporting the project and getting a Supporter Certificate?
+
+Sandboxie without a valid supporter certificate will now pause for a few seconds, to give you time to contemplate the possibility of supporting the project.
+.
+
+6011;txt;01
+Wait
+.
+
+6012;txt;01
+Continue
+.
+
+6013;txt;01
+Quit
+.
+
+6014;txt;01
+Get Certificate
+.
+
+7850;txt;01
+Getting Started Tutorial - Sandboxie
+.
+
+7851;txt;01
+Getting Started with Sandboxie
+.
+
+7852;txt;01
+Welcome to Sandboxie!
+
+Sandboxie runs your programs in an isolated space which prevents them from making permanent changes to other programs and data in your computer.
+
+This tutorial briefly explains the basic principles of using Sandboxie.
+.
+
+7853;txt;01
+Note:  This tutorial is designed for use with the default sandbox, DefaultBox.
+.
+
+7854;txt;01
+How Sandboxie Works (Illustration)
+.
+
+7855;txt;01
+Start your Internet Web browser under Sandboxie
+.
+
+7856;txt;01
+Please find the shortcut on your desktop and double-click it to run your web browser in the default sandbox, DefaultBox.
+.
+
+7857;txt;01
+Click here to hide this window and show the desktop
+.
+
+7858;txt;01
+Your browser is now running inside the sandbox
+.
+
+7859;txt;01
+Programs in the sandbox can modify only the contents of the sandbox.
+
+When you save or download files, they go into the sandbox.  If you save a file to your Desktop, Documents or Downloads folders, Sandboxie offers to move the file out of the sandbox.
+
+Try it now:  Download a file in your browser to your desktop folder (in the sandbox), and recover the file to your real desktop.
+.
+
+7860;txt;01
+Delete the contents of your sandbox
+.
+
+7861;txt;01
+You can think of the sandbox as a piece of transparent paper placed between the program and your computer.  Deleting the contents of the sandbox is like discarding a used piece of paper and replacing it with a clean one.
+.
+
+7862;txt;01
+Try it now:  Delete the contents of your DefaultBox sandbox.  Please find the yellow Sandboxie icon in the highlighted corner of your screen, and click:
+.
+
+7863;txt;01
+Right-click on the yellow Sandboxie icon,
+
+then select DefaultBox, and invoke Delete Contents.
+.
+
+7864;txt;01
+Ready to go!
+.
+
+7865;txt;01
+Thank you for taking the time to go through this tutorial.  You can visit the Sandboxie web site for more tutorials and tips.
+
+The default settings in Sandboxie provide full protection, but you may wish to review the sandbox configuration commands in the Sandbox menu in the Sandboxie Control program window.
+.
+
+*==========
+* Extraneous Messages in Text-Finnish-1035.txt
+*==========
+
+1109;evt;err;01
+SBIE1109 Kelvoton lisenssitieto:  %2
+.
+
+1202;pop;err;01
+SBIE1202 Ei voi päivittää lisenssitietoa:  %2
+.
+
+1214;pop;err;01
+SBIE1214 Ei voi injektoida SbieDll %2
+.
+
+1215;pop;err;01
+SBIE1215 Ei voi selvittää polkua prosessitiedostoon %2
+.
+
+1216;pop;err;01
+SBIE1216 Ei voi tiedustella turva-ID:tä %2
+.
+
+1222;pop;err;01
+SBIE1222 Ei voi rajoittaa tunnistetta:  %2
+.
+
+1223;pop;err;01
+SBIE1223 Ei voi korvata tunnistetta:  %2
+.
+
+1224;pop;err;01
+SBIE1224 Ei voi tiedustella tunnistetta:  %2
+.
+
+1303;pop;inf;01
+SBIE1303 Vain yksi hiekkalaatikko kerrallaan voi olla aktiivi
+.
+
+1304;pop;inf;01
+SBIE1304 Estettiin jäljitelty näppäimistö- tai hiirisyöte prosessista '%2'
+.
+
+1310;pop;inf;01
+SBIE1310 Lisäominaisuudet on estetty kunnes lisenssi on uudelleenaktivoitu
+.
+
+1311;pop;inf;01
+SBIE1311 Estetty prosessin %2 pyyntö muuttaa työpöydän taustakuva on estetty
+.
+
+2315;pop;err;01
+SBIE2315 Ei voi lukita prosessitiedostoa
+.
+
+2334;pop;err;01
+SBIE2334 Ei voi ladata DLL-tiedostoa:  %2
+.
+
+9201;evt;err;01
+SBIE9201 Tunniste virhe
+.
+
+9202;evt;err;01
+SBIE9201 Tunniste virhe
+.
+
+9203;evt;err;01
+SBIE9201 Tunniste virhe
+.
+
+9204;evt;err;01
+SBIE9204 Turvakuvaus virhe
+.
+
+9205;evt;err;01
+SBIE9205 Turvakuvaus virhe
+.
+
+9206;evt;err;01
+SBIE9206 Turvakuvaus virhe
+.
+
+9207;evt;err;01
+SBIE9207 Turvakuvaus virhe
+.
+
+9208;evt;err;01
+SBIE9208 Ei voi ottaa käyttään SeRestorePrivilege
+.
+
+9251;evt;err;01
+SBIE9251 Porttitapahtuman luonti epäonnistu
+.
+
+9252;evt;err;01
+SBIE9252 Portin luonti epäonnistui
+.
+
+9253;evt;err;01
+SBIE9253 Porttisäikeen luonti epäonnistui
+.
+
+3211;txt;01
+Versioristiriita Sandboxiessa. Yritä asentaa uudelleen.
+.
+
+3231;txt;01
+Olet asentanut Sandboxien yli 30 päivää sitten.
+.
+
+3232;txt;01
+Sandboxien yksityinen käyttö on sallittu ilmaiseksi niin kauan kuin haluat.
+.
+
+3233;txt;01
+Ilmainen versio kuitenkin pysähtyy nyt muutamaksi sekunniksi.
+.
+
+3234;txt;01
+Ilmainen versio sallii yhden laatikon käytön kerrallaan.
+.
+
+3235;txt;01
+Tämä rajoitus on poistettu Sandboxien maksullisessa versiossa.
+.
+
+3236;txt;01
+Maksullinen versio mahdollistaa myös valittujen ohjelmien automaattisen laatikoinnin.
+.
+
+3237;txt;01
+Lisää tietoa ja ohjeet ohjelman ostoon saat valitsemalla seuraavan linkin:
+.
+
+3238;txt;01
+Odota vielä %2 sekuntia
+.
+
+3239;txt;01
+Sulje tämä ikkuna ja jatka
+.
+
+3240;txt;01
+Sulje tämä ikkuna ja lopeta
+.
+
+3321;txt;01
+  -  Kirjautumisistunto on hiekkalaatikoitu
+.
+
+3322;txt;01
+Kirjautumisistuntosi ajetaan Sandboxien alaisuudessa.
+Hiekkalaatikon tyhjentäminen poistaa kaikki istunnon aikana tehdyt asetukset.
+
+Käyttäjä: %2
+Hiekkalaatikko: %3
+
+Haluatko varmasti poistaa hiekkalaatikon sisällön ja kirjautua ulos?
+.
+
+3503;txt;01
+Kokeellinen Suojaustila (64-bittinen)
+.
+
+3453;txt;01
+&Aloitusohjeet (Web)
+.
+
+3455;txt;01
+&Rekisteröi Sandboxie
+.
+
+3488;txt;01
+&Poista laatikon sisältö ja kirjaudu ulos
+.
+
+3542;txt;01
+'Kokeellinen Suojaustila' parantaa 64-bittisen Sandboxien
+tarjoamaa suojausta, ja tuo sen samalle tasolle 32-bittisen Sandboxien
+tarjoaman suojauksen kanssa.
+
+TÄRKEÄÄ: 'Kokeellinen Suojaustila' käyttää Windows ytimen
+dokumentoimattomia  ominaisuuksia. Windowsin tulevaisuuden
+päivitykset saattavat vaikuttaa 'Kokeelliseen Suojaustilaan',
+ja tuloksena saattaa olla epävakaa systeemi.
+
+KÄYTTÖ OMALLA VASTUULLA.
+
+Aktivoidaksesi 'Kokeellisen Suojaustilan', sinun on
+nyt käynnistettävä tietokoneesi uudelleen.
+.
+
+3543;txt;01
+Kytkeäksesi 'Kokeellisen Suojaustilan' pois päältä,
+tietokoneesi on nyt käynnistettävä uudelleen.
+
+Huomaa että 'alennetut oikeudet' -asetus aktivoituu kaikissa
+hiekkalaatikoissa.
+.
+
+3604;txt;01
+Tervetuloa Sandboxieen
+.
+
+3605;txt;01
+
+Sandboxie ajaa ohjelmiasi hiekkalaatikoksi kutsutussa suojatussa eristetyssä tilassa.
+
+Hiekkalaatikon ohjelmat eivät pääse tekemään muutoksia tai vahinkoa koneellesi.
+
+Voit käyttää hiekkalaatikkoa myös asentaaksesi ja kokeillaksesi uusia ohjelmia.
+.
+
+3606;txt;01
+Jos olet uusi käyttäjä,
+ole hyvä ja tutustu aloitusohjeisiin.
+.
+
+3607;txt;01
+&Sandboxien käytön aloitus
+.
+
+3771;txt;01
+(Tämä toiminto on saatavilla vain Sandboxien rekisteröidyssä versiossa.)
+.
+
+3774;txt;02
+Haluatko varmasti asettaa tämän pakotetuksi käyttäjäksi: %2
+.
+
+3962;txt;01
+Pakotetut käyttäjät
+.
+
+3963;txt;01
+Jos mikä tahansa seuraavista käyttäjätileistä kirjautuu tälle tietokoneelle, koko kirjautunut istunto pakotetaan
+tähän hiekkalaatikkoon.
+.
+
+3964;txt;01
+Poistaaksesi pakotettuun käyttäjätiliin liitetyn hiekkalaatikon, kirjaudu Windowsiin tämän käyttäjän tunnuksilla
+ja poista hiekkalaatikko Sandboxien hallintaohjelmaa käyttäen.
+.
+
+3965;txt;01
+Pakotetut käyttäjät saavat etusijan Pakotettuihin ohjelmiin ja Pakotettuihin kansioihin nähden.
+.
+
+3932;txt;01
+Pääsy alhainen taso
+.
+
+3933;txt;01
+Seuraavat asetukset heikentävät Sandboxien tarjoamaa suojaa merkittävästi. Niiden käyttöönotto ei ole suositeltavaa.
+.
+
+3934;txt;01
+Salli tämän hiekkalaatikon ohjelmien ladata kernel-tason ajureita käyttöjärjestelmään.
+.
+
+3935;txt;01
+Salli tämän hiekkalaatikon ohjelmien ladata "Win32 hooks" muihin ohjelmiin.
+.
+
+3936;txt;01
+Salli tämän hiekkalaatikon ohjelmien jäljitellä näppäimistön toimintaa.
+.
+
+3937;txt;01
+Salli tämän hiekkalaatikon ohjelmien muuttaa työpöydän taustakuvaa ja muita järjestelmän parametrejä
+.
+
+3938;txt;01
+Salli tämän hiekkalaatikon ohjelmien muokata laitteistohallintaa
+.
+
+3952;txt;01
+Pääsy laitteistoon
+.
+
+3953;txt;01
+Salli tämän hiekkalaation ohjelmien muuttaa käyttäjän salasanaa
+.
+
+3954;txt;01
+Salli ohjelmien muokata verkko- ja palomuuriasetuksia
+.
+
+3946;txt;01
+Suositus on että pidät tämän asetuksen valittuna, korvataksesi ne Sandbox suojausasetukset joita ei ole tarjolla 64-bittisessä Windows versiossa.
+.
+
+3947;txt;01
+Aktivoidaksesi laajennetun suojauksen 64-bittiselle Windowsille, käytä Asetukset-valikon komentoa 'Kokeellinen Suojaus'.
+.
+
+5105;txt;01
+Lisää &käyttäjä
+.
+
+7901;txt;01
+Sandboxie Lisenssimanageri
+.
+
+7902;txt;01
+Järjestelmäkoodi %2
+.
+
+7903;txt;01
+Jatkossa aktivoi lisenssi kysymättä
+.
+
+7921;txt;01
+Sandboxie on rekisteröity ja lisenssi on aktivoitu.
+.
+
+7922;txt;01
+Sandboxie on rekisteröity mutta lisenssi tulisi nyt uudelleenaktivoida.
+.
+
+7923;txt;01
+Rekisteröimätön versio.  Rekisteröi nyt!
+.
+
+7924;txt;01
+Sandboxien lisenssi tulee uudelleenaktivoida %2 päivän kuluttua.
+.
+
+7925;txt;01
+Sandboxien lisenssi on nyt aktivoitu.
+.
+
+7926;txt;01
+Tuoteavain vanhenee %2.
+.
+
+7927;txt;01
+Tuoteavaimellasi ei ole vanhenemispäivää.
+.
+
+7931;txt;01
+Sandboxiesi on rekisteröity vanhentuneella Rekisteröintiavaimella.
+.
+
+7932;txt;01
+Ole hyvä ja salli Lisenssimanagerin ottaa yhteys Lisenssipalvelimeen ja päivittää vanha Rekisteröintiavaimesi
+uuteen Tuoteavaimeen. Päivitys on ilmainen.
+.
+
+7933;txt;01
+Lisenssipalvelin ei tunnista Rekisteröintiavaintasi.
+.
+
+7934;txt;01
+Jos olet käyttänyt oikeaa Rekisteröintiavainta jonka olet maksanut tai saanut lahjana,
+ole hyvä ja lähetä sähköpostiviesti osoitteeseen:
+.
+
+7935;txt;01
+Uusi Tuoteavaimesi on:
+.
+
+7936;txt;01
+Ole hyvä ja pidä tämä Tuoteavain turvallisessa paikassa tulevaa tarvetta varten. Alla oleva painike kopioi
+Tuoteavaimen leikekirjaan, josta voit liittää sen dokumenttiin ja tulostaa.
+.
+
+7937;txt;01
+&Päivitä Rekisteröintiavain Tuoteavaimeksi
+.
+
+7941;txt;01
+Rekisteröinti suoritetaan kolmannen osapuolen maksupalvelun avulla. Aloita rekisteröinti käymällä Sandboxien kotisivuilla seuraavan linkin kautta.
+.
+
+7942;txt;01
+Aktivoi Sandboxie lisenssi antamalla ostokuitista löytyvä Tuoteavain, ja klikkaa sen jälkeen painiketta.
+.
+
+7943;txt;01
+Haluatko antaa uuden Tuoteavaimen nyt?
+.
+
+7944;txt;01
+&Aktivoi lisenssi
+.
+
+7945;txt;01
+Kopiosi Sandboxiesta on nyt rekisteröity.
+.
+
+7946;txt;01
+Kiitos tuestasi!
+.
+
+7951;txt;01
+Haluatko aktivoida lisenssin nyt?
+.
+
+7952;txt;01
+Ole hyvä ja käytä alla olevaa linkkiä käydäksesi Sandboxien kotisivulla tilaamassa uusi Tuoteavain.
+.
+
+7961;txt;01
+Tyhjennä &lisenssitieto
+.
+
+7962;txt;01
+Haluatko varmasti tyhjentää lisenssitiedon Sandboxiessa?
+
+Voit aktivoida lisenssisi milloin tahansa antamalla Tuoteavaimen.
+.
+
+7971;txt;01
+Tämä ei ole kelvollinen Tuoteavain.
+.
+
+7972;txt;01
+Tämä ei ole kelvollinen Järjestelmäkoodi.
+.
+
+7973;txt;01
+Tämä ei ole kelvollinen Aktivointiavain.  [%2]
+.
+
+7974;txt;01
+Virheellinen vastaus Lisenssipalvelimelta.
+.
+
+7975;txt;01
+Tuoteaktivointi epäonnistui:
+.
+
+7976;txt;01
+Haluatko yrittää uudelleen nyt?
+.
+
+7977;txt;01
+Jos haluat aktivoida Sandboxien tietokoneessa jolla ei ole pääsyä Internetiin,
+ole hyvä ja katso ohjeet Sandboxie Lisensointi UKK:sta (Sandboxie Licensing FAQ) .
+.
+
+7978;txt;01
+Nykyinen päivämäärä (%2) on myöhaisempi kuin Lisensointipalvelimen lähettämä päivämäärä (%3)
+.
+
+7982;txt;01
+Lisensointiserveri ei määritellyt syytä aktivoinnin epäonnistumiselle.
+.
+
+7983;txt;01
+Lisenssipalvelin ei tunnista Tuoteavainta.
+.
+
+7984;txt;01
+Tuoteavainta ei voi käyttää vanhenemispäivän (%2) jälkeen.
+.
+
+7985;txt;01
+Tuoteavain oli aktivoitu liian moneen tietokoneeseen.
+.
+
+7986;txt;01
+Tuoteavain oli hylätty koska se oli julkistettu Internetissä.
+.
+
+7987;txt;01
+Tuoteavain oli hylätty koska tilaus oli peruttu.
+.
+
+
+

@@ -25,8 +25,10 @@
 #include "process.h"
 #include "syscall.h"
 #include "token.h"
+#include "obj.h"
 #include "session.h"
 #include "api.h"
+#include "util.h"
 
 
 //---------------------------------------------------------------------------
@@ -147,6 +149,7 @@ _FX BOOLEAN Thread_Init(void)
                     "ImpersonateAnonymousToken", Thread_ImpersonateAnonymousToken))
         return FALSE;
 
+
     //
     // set object open handlers
     //
@@ -167,6 +170,7 @@ _FX BOOLEAN Thread_Init(void)
                     "AlpcOpenSenderThread",     Thread_CheckThreadObject))
             return FALSE;
     }
+
 
     //
     // set API handlers
@@ -411,7 +415,7 @@ _FX BOOLEAN Thread_AdjustGrantedAccess(void)
 
     //
     // on Windows XP, the kernel caches a granted access value for use
-    // with the psuedo handle NtCurrentThread(), but this value is
+    // with the pseudo handle NtCurrentThread(), but this value is
     // computed using the real primary token which is highly restricted.
     // we have to fix this value
     //
@@ -947,10 +951,9 @@ _FX NTSTATUS Thread_CheckProcessObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
     ACCESS_MASK GrantedAccess)
 {
+    if (Obj_CallbackInstalled) return STATUS_SUCCESS; // ObCallbacks takes care of that already
     PEPROCESS ProcessObject = (PEPROCESS)Object;
-    ACCESS_MASK WriteAccess = (GrantedAccess & PROCESS_DENIED_ACCESS_MASK);
-    return Thread_CheckObject_Common(
-                proc, ProcessObject, GrantedAccess, WriteAccess, L'P');
+    return Thread_CheckObject_Common(proc, ProcessObject, GrantedAccess, TRUE, TRUE);
 }
 
 
@@ -963,10 +966,9 @@ _FX NTSTATUS Thread_CheckThreadObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
     ACCESS_MASK GrantedAccess)
 {
+    if (Obj_CallbackInstalled) return STATUS_SUCCESS; // ObCallbacks takes care of that already
     PEPROCESS ProcessObject = PsGetThreadProcess(Object);
-    ACCESS_MASK WriteAccess = (GrantedAccess & THREAD_DENIED_ACCESS_MASK);
-    return Thread_CheckObject_Common(
-                proc, ProcessObject, GrantedAccess, WriteAccess, L'T');
+    return Thread_CheckObject_Common(proc, ProcessObject, GrantedAccess, FALSE, TRUE);
 }
 
 
@@ -977,14 +979,43 @@ _FX NTSTATUS Thread_CheckThreadObject(
 
 _FX NTSTATUS Thread_CheckObject_Common(
     PROCESS *proc, PEPROCESS ProcessObject,
-    ACCESS_MASK GrantedAccess, ACCESS_MASK WriteAccess, WCHAR Letter1)
+    ACCESS_MASK GrantedAccess, BOOLEAN EntireProcess,
+    BOOLEAN ExplicitAccess)
 {
     ULONG_PTR pid;
     const WCHAR *pSetting;
     NTSTATUS status;
+    WCHAR Letter1;
+    ACCESS_MASK WriteAccess;
+    ACCESS_MASK ReadAccess;
+
+    BOOLEAN ShouldMonitorAccess = FALSE;
+    void *nbuf;
+    ULONG nlen;
+    WCHAR *nptr;
+
+    if (EntireProcess) {
+        Letter1 = L'P';
+        WriteAccess = (GrantedAccess & PROCESS_DENIED_ACCESS_MASK);
+        ReadAccess = (GrantedAccess & PROCESS_VM_READ); 
+
+        //
+        // PROCESS_QUERY_INFORMATION allows to steal an attached debug object
+        // using object filtering mitigates this issue 
+        // but when its not active we should block that access
+        //
+
+        if(!Obj_CallbackInstalled)
+            ReadAccess |= (GrantedAccess & PROCESS_QUERY_INFORMATION); 
+    }
+    else {
+        Letter1 = L'T';
+        WriteAccess = (GrantedAccess & THREAD_DENIED_ACCESS_MASK);
+        ReadAccess = 0;
+    }
 
     //
-    // if an error occured and can't find pid, then don't allow
+    // if an error occurred and can't find pid, then don't allow
     //
 
     pid = (ULONG_PTR)PsGetProcessId(ProcessObject);
@@ -992,24 +1023,14 @@ _FX NTSTATUS Thread_CheckObject_Common(
     if (! pid)
         return STATUS_ACCESS_DENIED;
 
-    //
-    // for read-only access to the target process, we don't care
-    // if/which boxes are involved
-    //
-
-    if (pid && (WriteAccess == 0) && !proc->hide_other_boxes) {
-        status = STATUS_SUCCESS;
-        goto trace;
-    }
+    status = STATUS_SUCCESS;
 
     //
-    // otherwise this is write access, confirm if same box
+    // allow access if it's within the same box
     //
 
-    if (Process_IsSameBox(proc, NULL, pid)) {
-        status = STATUS_SUCCESS;
-        goto trace;
-    }
+    if (Process_IsSameBox(proc, NULL, pid))
+        goto finish;
 
     //
     // also permit if process is exiting, because it is possible that
@@ -1018,52 +1039,59 @@ _FX NTSTATUS Thread_CheckObject_Common(
     // (e.g. VS2012 MSBuild.exe does this with the csc.exe compiler)
     //
 
-    if (PsGetProcessExitProcessCalled(ProcessObject)) {
-        status = STATUS_SUCCESS;
-        goto trace;
-    }
+    if (ExplicitAccess && PsGetProcessExitProcessCalled(ProcessObject))
+        goto finish;
+
 
     //
-    // write access outside box, check if we have the following setting
+    // access outside box, check if we have the following setting
     // OpenIpcPath=$:ProcessName.exe
     //
 
-    status = Process_CheckProcessName(
-                    proc, &proc->open_ipc_paths, pid, &pSetting);
+    if (Process_CheckProcessName(proc, &proc->closed_ipc_paths, pid, &pSetting)) {
 
+        status = STATUS_ACCESS_DENIED;
+
+    } else if (WriteAccess != 0 || ReadAccess != 0) {
+
+        if (!Process_CheckProcessName(proc, &proc->open_ipc_paths, pid, &pSetting)) {
+
+            if (WriteAccess != 0) {
+
+                status = STATUS_ACCESS_DENIED;
+
+            } else if (!Process_CheckProcessName(proc, &proc->read_ipc_paths, pid, &pSetting)) {
+
+                status = STATUS_ACCESS_DENIED;
+            }
+        }
+    }
+    
     //
     // log the cross-sandbox access attempt, based on the status code
     //
 
-    if (Session_MonitorCount && !proc->disable_monitor) {
+    ShouldMonitorAccess = TRUE;
 
-        void *nbuf;
-        ULONG nlen;
-        WCHAR *nptr;
+finish:
 
-        Process_GetProcessName(proc->pool, pid, &nbuf, &nlen, &nptr);
-        if (nbuf) {
-
-            ULONG mon_type = MONITOR_IPC;
-            if (NT_SUCCESS(status))
-                mon_type |= MONITOR_OPEN;
-            else
-                mon_type |= MONITOR_DENY;
-
-            --nptr; *nptr = L':';
-            --nptr; *nptr = L'$';
-
-            Session_MonitorPut(mon_type, nptr, proc->pid);
-
-            Mem_Free(nbuf, nlen);
-        }
+    Process_GetProcessName(proc->pool, pid, &nbuf, &nlen, &nptr);
+    if (nbuf) {
+        --nptr; *nptr = L':';
+        --nptr; *nptr = L'$';
     }
+
+    ULONG mon_type = MONITOR_IPC;
+    if(!NT_SUCCESS(status))
+        mon_type |= MONITOR_DENY;
+    else if (WriteAccess || ReadAccess)
+        mon_type |= MONITOR_OPEN;
+    if (!ShouldMonitorAccess)
+        mon_type |= MONITOR_TRACE;
 
     //
     // trace
     //
-
-trace:
 
     if (proc->ipc_trace & (TRACE_ALLOW | TRACE_DENY)) {
 
@@ -1080,11 +1108,170 @@ trace:
         if (Letter2) {
             RtlStringCbPrintfW(str, sizeof(str), L"(%c%c) %08X %06d",
                                 Letter1, Letter2, GrantedAccess, (int)pid);
-            Log_Debug_Msg(MONITOR_IPC | MONITOR_TRACE, str, Driver_Empty);
+            Log_Debug_Msg(mon_type, str, nptr ? nptr : Driver_Empty);
         }
     }
+    else if (ShouldMonitorAccess && Session_MonitorCount && !proc->disable_monitor && nbuf != NULL) {
+
+        Session_MonitorPut(mon_type, nptr, proc->pid);
+    }
+
+    if (ExplicitAccess && proc->ipc_warn_open_proc && (status != STATUS_SUCCESS) && (status != STATUS_BAD_INITIAL_PC)) {
+
+        WCHAR msg[256];
+        RtlStringCbPrintfW(msg, sizeof(msg), L"%s (%08X) access=%08X initialized=%d", EntireProcess ? L"OpenProcess" : L"OpenThread", status, GrantedAccess, proc->initialized);
+		Log_Msg_Process(MSG_2111, msg, nptr != NULL ? nptr : L"Unnamed process", -1, proc->pid);
+    }
+
+    if (nbuf) 
+        Mem_Free(nbuf, nlen);
 
     return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Thread_CheckObject_CommonEx
+//---------------------------------------------------------------------------
+
+
+_FX ACCESS_MASK Thread_CheckObject_CommonEx(
+    HANDLE pid, PEPROCESS ProcessObject,
+    ACCESS_MASK DesiredAccess, BOOLEAN EntireProcess,
+    BOOLEAN ExplicitAccess)
+{
+    //
+    // Ignore requests for threads belonging to the current processes.
+    //
+
+    HANDLE cur_pid = PsGetCurrentProcessId();
+    if (pid == cur_pid)
+        return DesiredAccess;
+
+    //
+    // Get the sandboxed process if this request comes form one
+    //
+
+    PROCESS *proc = Process_Find(NULL, NULL);
+
+    //
+    // This functionality allows to protect boxed processes from host processes
+    // we need to grant access to sbiesvc.exe and csrss.exe
+    // 
+    // If the calling process is sandboxed the later common check will do the blocking
+    //
+
+    if (!proc || proc->bHostInject) { // caller is not sandboxed
+
+        KIRQL irql;
+        PROCESS* proc2 = Process_Find(pid, &irql);
+        BOOLEAN protect_process = FALSE;
+
+        if (proc2 && !proc2->bHostInject) { // target is sandboxed
+
+            ACCESS_MASK WriteAccess;
+            if (EntireProcess)
+                WriteAccess = (DesiredAccess & PROCESS_DENIED_ACCESS_MASK);
+            else
+                WriteAccess = (DesiredAccess & THREAD_DENIED_ACCESS_MASK);
+
+            if (WriteAccess || proc2->confidential_box) {
+
+                void* nbuf = 0;
+                ULONG nlen = 0;
+                WCHAR* nptr = 0;
+                Process_GetProcessName(proc2->pool, (ULONG_PTR)cur_pid, &nbuf, &nlen, &nptr);
+                if (nbuf) {
+
+                    protect_process = Process_GetConfEx_bool(proc2->box, nptr, L"DenyHostAccess", FALSE);
+
+                    //
+                    // in case use specified wildcard "*" always grant access to sbiesvc.exe and csrss.exe
+                    // and a few others
+                    //
+
+                    if (protect_process /*&& MyIsProcessRunningAsSystemAccount(cur_pid)*/) {
+                        if ((_wcsicmp(nptr, SBIESVC_EXE) == 0) || (_wcsicmp(nptr, L"csrss.exe") == 0)
+                            || (_wcsicmp(nptr, L"conhost.exe") == 0)
+                            || (_wcsicmp(nptr, L"taskmgr.exe") == 0) || (_wcsicmp(nptr, L"sandman.exe") == 0))
+                            protect_process = FALSE;
+                    }
+
+                    if (protect_process) {
+                        WCHAR msg_str[256];
+                        RtlStringCbPrintfW(msg_str, sizeof(msg_str), L"Protect boxed processes %s (%d) from %s (%d) requesting 0x%08X", proc2->image_name, (ULONG)pid, nptr, (ULONG)cur_pid, DesiredAccess);
+                        Session_MonitorPut(MONITOR_IMAGE | MONITOR_TRACE, msg_str, pid);
+                    }
+
+                    Mem_Free(nbuf, nlen);
+                }
+            }
+        }
+
+        ExReleaseResourceLite(Process_ListLock);
+        KeLowerIrql(irql);
+
+        if (protect_process)
+            return 0; // deny access
+    }
+
+    //
+    // filter only requests from sandboxed processes
+    //
+
+    if (!proc || (proc == PROCESS_TERMINATED) || proc->bHostInject || proc->disable_object_flt)
+        return DesiredAccess;
+
+    if (!NT_SUCCESS(Thread_CheckObject_Common(proc, ProcessObject, DesiredAccess, EntireProcess, ExplicitAccess))) {
+
+#ifdef DRV_BREAKOUT
+        if (EntireProcess) {
+            //
+            // Check if this is a break out process
+            //
+
+            BOOLEAN is_breakout = FALSE;
+            PROCESS* proc2;
+            KIRQL irql;
+
+            proc2 = Process_Find(pid, &irql);
+            if (proc2 && Process_IsStarter(proc, proc2)) {
+                is_breakout = TRUE;
+            }
+
+            ExReleaseResourceLite(Process_ListLock);
+            KeLowerIrql(irql);
+
+            if (is_breakout) {
+
+                //
+                // this is a BreakoutProcess in this case we need to grant some permissions
+                //
+
+                return DesiredAccess & (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE |
+                    /**/PROCESS_TERMINATE |
+                    //PROCESS_CREATE_THREAD |
+                    //PROCESS_SET_SESSIONID | 
+                    /**/PROCESS_VM_OPERATION | // needed
+                    PROCESS_VM_READ |
+                    /**/PROCESS_VM_WRITE | // needed
+                    //PROCESS_DUP_HANDLE |
+                    PROCESS_CREATE_PROCESS |
+                    //PROCESS_SET_QUOTA | 
+                    /**/PROCESS_SET_INFORMATION | // needed
+                    PROCESS_QUERY_INFORMATION |
+                    /**/PROCESS_SUSPEND_RESUME | // needed
+                    PROCESS_QUERY_LIMITED_INFORMATION |
+                    //PROCESS_SET_LIMITED_INFORMATION |
+                    0);
+            }
+        }
+#endif
+
+        return 0;
+    }
+
+    return DesiredAccess;
 }
 
 

@@ -170,6 +170,12 @@ ComServer::ComServer(PipeServer *pipeServer)
     pipeServer->Register(MSGID_COM, this, Handler);
 }
 
+ComServer::~ComServer()
+{
+	// cleanup CS
+	DeleteCriticalSection(&m_SlavesLock);
+}
+
 
 //---------------------------------------------------------------------------
 // Handler
@@ -1712,7 +1718,7 @@ void ComServer::GetClassObjectSlave(void *_map, LIST *ObjectsList,
 
         //
         // elevate using CoGetObject
-        // this is primarily inteded for the firewall object
+        // this is primarily intended for the firewall object
         //
 
         typedef struct tagBIND_OPTS3 {

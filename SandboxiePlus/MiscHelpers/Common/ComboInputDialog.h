@@ -23,7 +23,7 @@ public:
     QString text() const;
     void setText(const QString &);
 
-	void addItem(const QString&, const QVariant & = QVariant());
+	void addItem(const QString&, const QVariant & = QVariant(), const QString& info = QString());
 	void setEditable(bool);
 
 	QString value() const;
@@ -52,6 +52,7 @@ public:
 
 private slots:
     void slotClicked(QAbstractButton *b);
+    void onCmbIndex(int index);
 
 private:
     CComboInputDialogPrivate *d;

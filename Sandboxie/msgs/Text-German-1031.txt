@@ -13,7 +13,7 @@ SBIE1102 Sandboxie-Treiber (SbieDrv) wird entladen
 .
 
 1103;evt;err;01
-SBIE1103 Sandboxie-Treiber (SbieDrv) version %2 konnte nicht gestartet werden
+SBIE1103 Sandboxie-Treiber (SbieDrv) Version %2 konnte nicht gestartet werden
 .
 
 1104;evt;err;01
@@ -34,10 +34,6 @@ SBIE1106 Fehler %2, Detail %3
 
 1108;evt;err;01
 SBIE1108 Prozedur %2 konnte nicht analysiert werden
-.
-
-1109;evt;err;01
-SBIE1109 Ungültige Lizenz-Informationen: %2
 .
 
 1110;evt;err;01
@@ -108,10 +104,6 @@ SBIE1153 Sandboxie-Initialisierung fehlgeschlagen. Beenden Sie alle Programme un
 SBIE1201 Nicht genügend Speicher vorhanden
 .
 
-1202;pop;err;01
-SBIE1202 Kann die Lizenz-Informationen nicht aktualisieren:  %2
-.
-
 1203;pop;err;01
 SBIE1203 Kann Pfad-Liste nicht erstellen (Fehler bei %2)
 .
@@ -132,18 +124,6 @@ SBIE1212 Verzeichnis kann nicht erstellt werden '%3' %2
 SBIE1212 Object-Verzeichnis kann nicht erstellt werden '%3' %2
 .
 
-1214;pop;err;01
-SBIE1214 Injizieren (Laden) der SbieDll in %2 nicht möglich
-.
-
-1215;pop;err;01
-SBIE1215 Auflösen des Pfades zum Programm %2 nicht möglich
-.
-
-1216;pop;err;01
-SBIE1216 Abfrage der Sicherheits-ID (SID) %2 nicht möglich
-.
-
 # 1217;pop;err;01
 # SBIE1217 Kann den übergeordneten Prozess (Parent) nicht finden
 # .
@@ -152,16 +132,12 @@ SBIE1216 Abfrage der Sicherheits-ID (SID) %2 nicht möglich
 # SBIE1221 Job kann nicht erstellt werden:  %2
 # .
 
-1222;pop;err;01
-SBIE1222 Kann den Security-Token nicht einschränken: %2
+1222;pop;err;02
+SBIE1222 Fehler mit Sicherheitstoken:  %2
 .
 
-1223;pop;err;01
-SBIE1223 Kann den Security-Token nicht ersetzen: %2
-.
-
-1224;pop;err;01
-SBIE1224 Kann den Security-Token nicht abfragen: %2
+1231;pop;err;01
+SBIE1231 Initialisierung für Prozess %3 %2 fehlgeschlagen
 .
 
 1241;pop;err;01
@@ -186,14 +162,6 @@ SBIE1301 Der Prozess '%2' wurde außerhalb der Sandbox gestartet
 # SBIE1302 Sandbox '%2' wurde nicht definiert oder aktiviert
 # .
 
-1303;pop;inf;01
-SBIE1303 Es kann nur eine Sandbox aktiv sein
-.
-
-1304;pop;inf;01
-SBIE1304 Simulierte Tastatur- oder Mauseingabe blockiert bei Prozess '%2'
-.
-
 1306;pop;inf;01
 SBIE1306 Sandboxie-Treiber (SbieDrv) kann jetzt nicht entladen werden
 .
@@ -210,14 +178,6 @@ SBIE1308 Programm kann nicht gestartet werden aufgrund von Beschränkungen - %2
 SBIE1309 Veränderung des Benutzerkonto-Kennworts wurde verweigert
 .
 
-1310;pop;inf;01
-SBIE1310 Erweiterte Funktionen sind deaktiviert bis die Lizenz erneut aktiviert wird
-.
-
-1311;pop;inf;01
-SBIE1311 Versuchte Änderung des Desktophintergrunds durch Prozess '%2' verhindert
-.
-
 1312;pop;inf;01
 SBIE1312 Ausführung eines 16-bit DOS Programms in der Sandbox blockiert
 .
@@ -230,8 +190,20 @@ SBIE1313 Direkten Datenträgerzugriff von Prozess '%2' blockiert
 SBIE1314 Änderung der Netzwerk/Firewall-Einstellungen durch Prozess '%2' verhindert
 .
 
-1315;pop;inf;01
-SBIE1315 Möglicherweise ein Konflikt mit dieser Software: %2
+1316;pop;inf;01
+SBIE1316 Anfrage zur Erzeugung eines Geräteevents in der Sandbox verhindert
+.
+
+1319;pop;inf;01
+SBIE1319 Druckerwarteschlangendruck zu Datei, %2 %3 verhindert
+.
+
+1320;pop;wrn;01
+SBIE1320 Um zu erlauben, dass die Druckerwarteschlange für diesen Prozess außerhalb der Sandbox schreiben darf, doppelklicken Sie bitte auf diese Nachricht
+.
+
+1399;pop;inf;01
+%0
 .
 
 #----------------------------------------------------------------------------
@@ -334,6 +306,14 @@ SBIE2108 Täusche erfolgreiche Ausführung vor für Programm '%2'
 # SBIE2110 Aufbereitung der WinSxS Abhängigkeiten für '%2'
 # .
 
+2111;pop;inf;01
+SBIE2111 Prozess ist nicht zugänglich: %3, Aufruf %2
+.
+
+2112;pop;inf;01
+SBIE2112 Objekt ist nicht zugänglich: %3, Aufruf %2
+.
+
 2191;pop;inf;01
 SBIE2191 %2 sollte nicht aktualisiert werden, wenn es mit Sandboxie ausgeführt wird.
 .
@@ -348,6 +328,14 @@ SBIE2193 Die Sandbox nach dem erfolgreichen Aktualisierungsprozess unbedingt lö
 
 2194;pop;inf;01
 SBIE2194 MSI-Installer benötigt die Aktivierung der %2 option in der ini-Datei, was jedoch die Sicherheit schwächen kann.
+.
+
+2195;pop;inf;01
+SBIE2195 Um Explorer.exe sandgeboxt auszuführen, darf der Zugriff auf die COM-Infrastruktur nicht geöffnet sein.
+.
+
+2198;pop;inf;01
+%0
 .
 
 2199;pop;inf;01
@@ -452,6 +440,14 @@ SBIE2222 Zum Hinzufügen des Programms zu Beschränkungen - Start/Ausführen Zug
 SBIE2223 Um das Größenlimit für zu kopierende Dateien zu erhöhen bitte diese Meldungszeile doppelklicken
 .
 
+2224;pop;wrn;01
+SBIE2224 Sandgeboxtes Programm ist abgestürzt: %2
+.
+
+2225;pop;wrn;01
+SBIE2225 Es wurde versucht auf eine EFS-Datei zuzugreifen: %2
+.
+
 #----------------------------------------------------------------------------
 # SbieDrv
 #
@@ -460,6 +456,10 @@ SBIE2223 Um das Größenlimit für zu kopierende Dateien zu erhöhen bitte diese
 
 2301;pop;err;01
 SBIE2301 %2
+.
+
+2302;pop;err;01
+SBIE2302 Prozessabbild Konfigurationskonflikt: %2
 .
 
 2303;pop;err;01
@@ -510,10 +510,6 @@ SBIE2313 Konnte %2 nicht ausführen
 SBIE2314 Prozess abbrechen %2
 .
 
-2315;pop;err;01
-SBIE2315 Konnte das ausführbare Abbild nicht bereinigen
-.
-
 2316;pop;err;01
 SBIE2316 Speicher ist fehlerhaft
 .
@@ -546,6 +542,10 @@ SBIE2322 Kann die Sandboxie.ini nicht neu schreiben: %2
 SBIE2323 Kryptographie Fehler: %2
 .
 
+2325;pop;err;01
+SBIE2325 Debug:  %2
+.
+
 2326;pop;err;01
 SBIE2326 Kann die Registrierung nicht bereitstellen: %2
 .
@@ -566,8 +566,16 @@ SBIE2332 Kann auf die Datei SbiePst.dat nicht zugreifen
 # SBIE2333 Inkompatible Software DLL gefunden: %2
 # .
 
-2334;pop;err;01
-SBIE2334 Kann diese DLL-Datei nicht laden: %2
+2335;pop;err;01
+SBIE2335 Initialisierung für Prozess %2 fehlgeschlagen
+.
+
+2336;pop;err;01
+SBIE2336 Fehler im GUI-Server:  %2
+.
+
+2337;pop;err;01
+SBIE2337 Konnte Programm nicht starten:  %2
 .
 
 #----------------------------------------------------------------------------
@@ -590,48 +598,8 @@ SBIE9154 Treiber (SbieDrv) und Dienst (SbieSvc) haben unterschiedliche Versionsn
 SBIE9156 Treiberinitialisierung nicht beendet
 .
 
-9201;evt;err;01
-SBIE9201 Fehler beim Token
-.
-
-9202;evt;err;01
-SBIE9202 Fehler beim Token
-.
-
-9203;evt;err;01
-SBIE9203 Fehler beim Token
-.
-
-9204;evt;err;01
-SBIE9204 Fehler bei der Sicherheitsbeschreibung
-.
-
-9205;evt;err;01
-SBIE9205 Fehler bei der Sicherheitsbeschreibung
-.
-
-9206;evt;err;01
-SBIE9206 Fehler bei der Sicherheitsbeschreibung
-.
-
-9207;evt;err;01
-SBIE9207 Fehler bei der Sicherheitsbeschreibung
-.
-
-9208;evt;err;01
-SBIE9208 Kann SeRestorePrivilege nicht aktivieren
-.
-
-9251;evt;err;01
-SBIE9251 LPC Port Event Erstellung gescheitert
-.
-
-9252;evt;err;01
-SBIE9252 LPC Port Erstellung gescheitert
-.
-
-9253;evt;err;01
-SBIE9253 LPC Port Thread Erstellung gescheitert
+9234;evt;err;01
+SBIE9234 Dienststartfehler %2
 .
 
 # 9302;evt;err;01
@@ -702,6 +670,10 @@ Befehl aus dem Verlauf löschen
 Wählen Sie die Sandbox aus, in der das Programm oder Dokument geöffnet werden soll.
 .
 
+3107;txt;01
+Geben Sie den Namen des Programms oder den Pfad ein, um die folgende Datei in der aktuellen Sandbox zu öffnen:
+.
+
 3111;txt;01
 Sandboxie Startmenü - %2  %0
 .
@@ -756,10 +728,6 @@ Ausführbare Datei des Standard-Email-Programms nicht gefunden
 Sandboxie Control konnte nicht gestartet werden
 .
 
-3211;txt;01
-Falsche Sandboxie-Version. Bitte installieren Sie Sandboxie neu.
-.
-
 3212;txt;01
 Der Sandboxie-Treiber (SbieDrv) ist nicht verfügbar für Programme innerhalb der Sandbox. 
 Stellen Sie daher sicher, dass der Treiber und der Dienst (SbieSvc) erfolgreich gestartet wurden.
@@ -805,46 +773,6 @@ Vor dem Löschen der Inhalte bitte alle laufenden Prozesse in dieser Sandbox bee
 
 3222;txt;01
 Löschen-Befehl fehlgeschlagen:  %0
-.
-
-3231;txt;01
-Sie haben Sandboxie vor mehr als 30 Tagen installiert.
-.
-
-3232;txt;01
-Persönlicher Gebrauch von Sandboxie ist kostenlos zulässig, solange Sie wollen.
-.
-
-3233;txt;01
-Die unlizenzierte Version pausiert hier für wenige Sekunden.
-.
-
-3234;txt;01
-Die unlizenzierte Version erlaubt nur eine Sandbox gleichzeitig.
-.
-
-3235;txt;01
-Diese Einschränkung wird mit dem Erwerb einer Lizenz aufgehoben.
-.
-
-3236;txt;01
-Die lizenzierte Version erlaubt den erzwungenen Start von Programmen in einer Sandbox.
-.
-
-3237;txt;01
-Für weitere Informationen oder den Erwerb einer Lizenz klicken Sie auf den folgenden Link:
-.
-
-3238;txt;01
-Bitte warten Sie %2 Sekunden
-.
-
-3239;txt;01
-Dieses Fenster schließen und fortsetzen
-.
-
-3240;txt;01
-Dieses Fenster schließen und beenden
 .
 
 3241;txt;01
@@ -954,6 +882,22 @@ Unbekannter Benutzer, die Konfiguration wird nicht gespeichert
 Es trat ein Fehler auf bei den Einstellungen für die Sandbox '%2'
 .
 
+3315;txt;01
+Lösche Sandboxinhalte
+.
+
+3316;txt;01
+Möchten Sie diesen Vorgang abbrechen?
+.
+
+3317;txt;01
+Bereite das Löschen vor: %2
+.
+
+3318;txt;01
+Lösche: %2
+.
+
 # 3321;txt;01
 # - Anmeldesitzung in der Sandbox
 # .
@@ -1052,6 +996,10 @@ Ressourcenzugriff-&Monitor
 &Wiederherstellungsprotokoll
 .
 
+3426;txt;01
+&Immer oben
+.
+
 3431;txt;01
 Sand&box
 .
@@ -1088,10 +1036,6 @@ Windows Explorer&integration
 Software-Kompatibilität
 .
 
-3503;txt;01
-Experimenteller Schutz (64-bit)
-.
-
 3444;txt;01
 &Meldungen zurücksetzen
 .
@@ -1102,6 +1046,10 @@ Experimenteller Schutz (64-bit)
 
 3502;txt;01
 &Konfiguration sperren
+.
+
+3504;txt;01
+&Unterstütze Sandboxie
 .
 
 3446;txt;01
@@ -1136,12 +1084,20 @@ Anlei&tung: Erste Schritte
 Nach &Updates suchen
 .
 
-3455;txt;01
-Sandboxie &registrieren
-.
-
 3456;txt;01
 &Über Sandboxie
+.
+
+3457;txt;01
+&Sandboxie Forum (Web)
+.
+
+3459;txt;01
+Erlaube direkten Zugriff auf den qWave Treiber (Google Hangouts)
+.
+
+3460;txt;01
+Funktions-Hooking Anpassungen
 .
 
 3461;txt;01
@@ -1166,6 +1122,14 @@ Emai&lprogramm starten
 
 3466;txt;01
 Windows &Explorer starten
+.
+
+3467;txt;01
+Upgrade zu Sandboxie-Plus
+.
+
+3468;txt;01
+Sandboxie-Plus Migrationsanleitung
 .
 
 3471;txt;01
@@ -1206,6 +1170,10 @@ Programmein&stellungen
 
 3483;txt;01
 &Ressourcenzugriff
+.
+
+3484;txt;01
+Ressourcenzugriff
 .
 
 3485;txt;01
@@ -1406,30 +1374,6 @@ mit "Konfiguration sperren" den Passwortschutz deaktivieren.
 
 3541;txt;01
 Öffentlich
-.
-
-3542;txt;01
-Der Experimentelle Schutz erweitert den gebotenen Schutz
-durch 64-bit Sandboxie und hebt ihn auf das gleiche Niveau,
-den auch 32-bit Sandboxie bietet.
-
-WICHTIG: Der Experimentelle Schutz verwendet nicht
-dokumentierte Funktionen des Windows Kernel. Künftige
-Updates von Windows könnten mit dem Experimentellen
-Schutz interferieren und Systeminstabilitäten verursachen.
-
-VERWENDUNG AUF EIGENES RISIKO.
-
-Zum Aktivieren des Experimentellen Schutzes müssen
-Sie den Computer jetzt neu starten.
-.
-
-3543;txt;01
-Um den Experimentellen Schutz zu deaktivieren
-müssen Sie den Computer jetzt neu starten.
-
-Bitte beachten Sie, dass die Drop Rights Einstellung
-für alle Sandboxen aktiviert wird.
 .
 
 #----------------------------------------------------------------------------
@@ -2003,10 +1947,6 @@ Die neuen Einstellungen werden nicht auf laufende
 Programm angewendet, sondern erst beim erneuten Aufruf.
 .
 
-3771;txt;01
-(Dieses Feature ist nur in der registrierten Version von Sandboxie verfügbar)
-.
-
 3772;txt;02
 Sind Sie sicher, dass Sie %2 als erzwungenes Programm starten möchten?
 .
@@ -2419,50 +2359,6 @@ Die Beschränkungen für den Start/Ausführen Zugang können Sie unter Beschrän
 .
 
 #----------------------------------------------------------------------------
-# Sandboxie Control:  Sandbox Settings:  Low Level Access
-#----------------------------------------------------------------------------
-
-3932;txt;01
-Low-Level-Zugriff
-.
-
-3933;txt;01
-Die folgenden Einstellungen arbeiten gegen die Sicherheitseinstellungen von Sandboxie. Die Aktivierung wird daher nicht empfohlen.
-.
-
-3934;txt;01
-Programme in dieser Sandbox dürfen Kernel-Treiber in das aktive Betriebssystem laden.
-.
-
-3935;txt;01
-Programme in dieser Sandbox dürfen Win32-Hooks in andere Programme laden.
-.
-
-3936;txt;01
-Programme in dieser Sandbox dürfen simulierte Tastatureingaben ausführen.
-.
-
-3937;txt;01
-Programme in dieser Sandbox dürfen den Desktophintergrund und andere Systemeinstellungen ändern.
-.
-
-3938;txt;01
-Programme in dieser Sandbox dürfen die Eigenschaften der Hardwaregeräte ändern.
-.
-
-3952;txt;01
-Hardwarezugriff
-.
-
-3953;txt;01
-Programme in dieser Sandbox dürfen das Benutzerkontokennwort ändern
-.
-
-3954;txt;01
-Programmen die Änderung der Netzwerk- und Firewall-Einstellungen erlauben
-.
-
-#----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  Drop Rights
 #----------------------------------------------------------------------------
 
@@ -2482,20 +2378,28 @@ Wenn Sie jedoch als Administrator oder Hauptbenutzer angemeldet sind, dann kann 
 Die Rechte der Administratoren- und Hauptbenutzer-Gruppe einschränken
 .
 
-3946;txt;01
-Es wird empfohlen, diese Einstellung aktiviert zu lassen. Sie dient zum Ausgleich einiger Schutzfunktionen von Sandboxie, die in den 64-bit Versionen nicht verfügbar sind.
-.
-
-3947;txt;01
-Um den Experimentellen Schutz bei 64-bit Windows zu aktivieren, wählen Sie bitte Experimenteller Schutz vom Menü Konfiguration.
-.
-
 3949;txt;01
 Die Einstellung 'Rechte einschränken' ist für die Sandbox '%2' aktiv und verhindert die Verwendung von Administratorrechten.
 
 OK klicken zum Deaktivieren der eingeschränkten Rechte für die Sandbox '%2', um hier Administratorrechte zu erlauben.
 
 Sie können die Einstellung 'Rechte einschränken' jederzeit über die Sandboxeinstellungen unter 'Beschränkungen' ändern.
+.
+
+3955;txt;01
+Netzwerkdateien
+.
+
+3956;txt;01
+Netzwerkdateien und Ordner sind normalerweise für sandgeboxte Applikationen sichtbar.
+.
+
+3957;txt;01
+Falls Sie den sandgeboxten Applikationen den Zugriff auf Dateien und Ordner in Ihrem Netzwerk verbieten möchten, aktivieren Sie diese Einstellung. Individuelle Dateien und Ordner können für sandgeboxte Applikationen freigegeben werden, durch hinzufügen unter Ressourcenzugriff -> Dateizugriff.
+.
+
+3958;txt;01
+Blockiere Netzwerkdateien und Ordner, außer speziell freigegebene.
 .
 
 #----------------------------------------------------------------------------
@@ -2692,6 +2596,14 @@ COM Zugriff (OpenClsid)
 Programme, die in der Sandbox laufen, können nicht mit COM Objekten von Programmen kommunizieren, die außerhalb der Sandbox laufen, außer die COM Klassen-ID stimmt mit einer der folgenden Klassen-IDs überein.
 .
 
+4104;txt;01
+Ressourcenzugriff::Netzwerkzugriff
+.
+
+4105;txt;01
+Netzwerkzugriff (Firewall)
+.
+
 #----------------------------------------------------------------------------
 # Applications - General
 #----------------------------------------------------------------------------
@@ -2838,6 +2750,52 @@ Standardliste der gesperrten TCP/IP Ports
 4294;txt;01
 Programme dürfen die Sprunglisten der Windows 7 Taskleiste aktualisieren
 .
+
+4295;txt;01
+Standardausnahmen für Dateimigrationsvorlagen
+.
+
+4296;txt;01
+Standard RPC Port Bindungen
+.
+
+4297;txt;01
+Öffne Bluetooth RPC Port
+.
+
+4298;txt;01
+Öffne SmartCard RPC Port
+.
+
+4299;txt;01
+Öffne Simple Service Discovery Protocol (SSDP, UPnP) RPC Port
+.
+
+4300;txt;01
+Öffne zusätzliche RPC Port Bindungen
+.
+
+4306;txt;01
+Öffne RPC Port Bindungen für UAC
+.
+
+4307;txt;01
+Blockiere bekannte Telemetrieprozesse
+.
+
+4308;txt;01
+Filtere Zugriff auf \Devices\
+.
+
+4341;txt;01
+Erlaube direkten Zugriff zu %2 Notizen
+.
+
+4342;txt;01
+Aktiviere %2 Fix für Windows 11 KB5014019
+.
+
+
 
 #----------------------------------------------------------------------------
 # Applications - Software Compatibility
@@ -3090,6 +3048,30 @@ Email-Programm
 Die folgenden Regeln erlauben Email-Programmen, ihre Daten außerhalb der Sandbox abzulegen.
 .
 
+4393;txt;01
+Mediaplayer
+.
+
+4394;txt;01
+Die folgenden Ausnahmen erlauben Mediaplayern in dieser Sandbox den Zugriff auf Dateien außerhalb der Sandbox.
+.
+
+4395;txt;01
+Erlaube %2 direkten Zugriff auf den Bilderordner für vereinfachte Bildschirmaufnahmen.
+.
+
+4396;txt;01
+Torrent Clients
+.
+
+4397;txt;01
+Die folgenden Ausnahmen erlauben Torrent Clients in dieser Sandbox den Zugriff auf Dateien außerhalb der Sandbox.
+.
+
+4398;txt;01
+Erlaube %2 direkten Zugriff auf den Musikordner für vereinfachte Musikkatalogverwaltung.
+.
+
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  User Accounts
 #----------------------------------------------------------------------------
@@ -3179,6 +3161,80 @@ Die Sandboxen in Gruppen anordnen und die Reihenfolge ihrer Auflistung anpassen.
 .
 
 #----------------------------------------------------------------------------
+
+6001;txt;01
+Das klassische Sandboxie UI (SbieCtrl.exe) hat stark eingeschränkte Ressourcenzugriffsüberwachung- und Ereignisverfolgungsmöglichkeiten.
+
+Für eine optimale Fehlersuche ist es höchst ratsam
+die neue UI Sandboxie-Plus (SandMan.exe) zu installieren,
+welche exzellente Verfolgungs- und Überwachungsmöglichkeiten bietet.
+
+Möchten Sie Sandboxie-Plus nun herunterladen?
+.
+
+6002;txt;01
+Besuchen Sie <a ID="whats_new">sandboxie-plus.com</a> um mehr über die neuen Funktionen von Sandboxie-Plus zu erfahren, oder klicken Sie <a ID="upgrade">hier</a> um den neusten Sandboxie-Plus-Installer herunterzuladen.
+.
+
+6003;txt;01
+Die veraltete UI von Sandboxie Classic implementiert keine Unterstützung für die Funktionalität der Netzwerkfirewall.
+
+Sie können jedoch in der ini die Funktion konfigurieren, die durch die Kernkomponenten unterstützt werden, mit Regeln die wie folgt strukturiert sind:
+NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
+
+Falls Sie bevorzugen diese Optionen in einer UI zu kontrollieren, upgraden Sie bitte zu Sandboxie-Plus, welches volle UI-Unterstützung für alle neuen Funktionen hat.
+.
+
+6004;pop;err;01
+Die Konfiguration %3 von Box %2 erfordert ein Unterstützerzertifikat. Prozesse in dieser Box werden nach 5 Minuten beendet. Für weitergehende Nutzung, erwägen Sie bitte die Unterstützung des Projektes.
+.
+
+6005;txt;01
+Notiz: Ohne administrative Privilegien werden Installer in der Sandbox nicht starten können. Sandboxie-Plus bietet eine Option um viele dieser Installer erfolgreich auszuführen, ohne diese Privilegien. Sie können diese Option auch in der klassischen Variante manuell aktivieren, durch hinzufügen von "FakeAdminRights=y" in der ini-Sektion für diese Box.
+.
+
+6006;txt;01
+Die veraltete UI von Sandboxie Classic implementiert Unterstützung nur für ein paar Restriktionsoptionen.
+
+Zusätzliche Optionen wie "ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" und viele mehr können durch hinzufügen in der ini-Sektion für diese Box gesetzt werden.
+Das moderne UI (SandMan.exe) bietet mehr Anpassungsoptionen für den Start/Ausführung und Internetzugriffsbeschränkungen.
+
+Falls Sie bevorzugen diese Optionen in einer UI zu kontrollieren, upgraden Sie bitte zu Sandboxie-Plus, welches volle UI-Unterstützung für alle neuen Funktionen hat.
+.
+
+6007;txt;01
+Sandboxie-Plus bietet verbesserten Privatsphärenschutz durch den Wechsel vom alten Verhalten eines Sperrlisten-Modus, z.B. dem Erlauben des Lesezugriffs auf das gesamte Laufwerk, ausschließlich blockierter Zugriffe durch Closed Path oder Write Path, zu einem Erlaubnislisten-Modus bei dem sandgeboxte Programme nur erlaubt wird auf generische Systemorte lesend zu zu greifen und Lesezugriff auf die meisten Nutzerdaten erst explizit gewährt werden muss.
+
+Die veraltete UI von Sandboxie Classic implementiert keine Unterstützung für diesen Betriebsmodus. Obwohl er durch die ini konfiguriert werden kann, ist es ratsam die moderne Sandboxie-Plus UI (SandMan.exe) zu verwenden, falls Sie die verbesserten Privatsphärenboxen nutzen möchten.
+.
+
+6010;txt;01
+Sie haben Sandboxie seit mehr als %2 Tagen installiert.
+
+Nun, denken Sie David und die Beitragenden machen einen guten Job?
+
+Warum zeigen Sie es nicht, in dem Sie das Projekt unterstützen und ein Unterstützerzertifikat holen?
+
+Sandboxie wird nun ohne gültiges Unterstützerzertifikat für ein paar Sekunden pausieren, um Ihnen Zeit zu geben die Möglichkeit zu erwägen, das Projekt zu unterstützen.
+.
+
+6011;txt;01
+Warten
+.
+
+6012;txt;01
+Weiter
+.
+
+6013;txt;01
+Beenden
+.
+
+6014;txt;01
+Zertifikat holen
+.
+
+#----------------------------------------------------------------------------
 # Getting Started Wizard
 #----------------------------------------------------------------------------
 
@@ -3256,191 +3312,6 @@ Alle Schritte abgeschlossen!
 Vielen Dank, dass Sie sich für diese Anleitung Zeit nahmen. Für weitere Anleitungen und Tipps besuchen Sie bitte die Sandboxie Webseite.
 
 Die Standardeinstellungen von Sandboxie bieten vollständigen Schutz. Die Sandboxeinstellungen finden Sie im Menü Sandbox des Sandboxie Control Fensters.
-.
-
-7866;txt;01
-Bei 64-bit Windows Systemen sollte "Experimenteller Schutz" aktiviert werden. Siehe Menü Konfiguration der Sandboxie Control.
-.
-
-#----------------------------------------------------------------------------
-# License Manager
-#----------------------------------------------------------------------------
-
-7901;txt;01
-Sandboxie Lizenzmanager
-.
-
-7902;txt;01
-Systemcode %2
-.
-
-7903;txt;01
-Zukünftig die Lizenz ohne Nachfrage aktivieren.
-.
-
-#----------------------------------------------------------------------------
-
-7921;txt;01
-Sandboxie ist registriert und die Lizenz ist aktiviert.
-.
-
-7922;txt;01
-Sandboxie ist registriert, aber die Lizenz sollte jetzt erneut aktiviert werden.
-.
-
-7923;txt;01
-Nicht registrierte Version.  Noch heute registrieren!
-.
-
-7924;txt;01
-Die Lizenz für Sandboxie muss in %2 Tagen erneut aktiviert werden.
-.
-
-7925;txt;01
-Die Lizenz für Sandboxie wurde soeben aktiviert.
-.
-
-7926;txt;01
-Das Ablaufdatum für Ihren Produktschlüssel ist %2.
-.
-
-7927;txt;01
-Ihr Produktschlüssel hat kein Ablaufdatum.
-.
-
-#----------------------------------------------------------------------------
-
-7931;txt;01
-Die Registrierung Ihrer Kopie von Sandboxie ist mit einem veralteten Registrierungsschlüssel erfolgt.
-.
-
-7932;txt;01
-Bitte erlauben Sie dem Lizenzmanager sich mit dem Lizenzserver zu verbinden, um Ihren alten Registrierungsschlüssel in einen neuen Produktschlüssel umzuwandeln. Dieser Vorgang ist für Sie vollkommen kostenlos.
-.
-
-7933;txt;01
-Ihr Registrierungsschlüssel wird vom Lizenzserver nicht anerkannt.
-.
-
-7934;txt;01
-Wenn dies ein legaler Registrierungsschlüssel ist, den Sie gekauft, geschenkt bekommen oder bei einer Promoaktion erhalten haben, dann senden Sie bitte eine E-Mail an:
-.
-
-7935;txt;01
-Ihr neuer Produktschlüssel ist:
-.
-
-7936;txt;01
-Bitte sichern Sie diesen Produktschlüssel für eine spätere Verwendung an einem geeigneten Ort. Mit der Schaltfläche unten können Sie Ihren Produktschlüssel kopieren, um ihn in ein Dokument zu speichern und auszudrucken.
-.
-
-7937;txt;01
-Registrierungsschlüssel in Produktschlüssel &umwandeln
-.
-
-#----------------------------------------------------------------------------
-
-7941;txt;01
-Die Sandboxie-Registrierung wird durch einen Drittanbieter durchgeführt. Klicken Sie auf den folgenden Link, um den Registrierungsprozess zu starten.
-.
-
-7942;txt;01
-Zur Aktivierung Ihrer Sandboxie Lizenz bitte den Produktschlüssel von Ihrem Zahlungsbeleg eingeben und dann bestätigen, um die Lizenz zu aktivieren.
-.
-
-7943;txt;01
-Möchten Sie jetzt einen neuen Produktschlüssel eingeben?
-.
-
-7944;txt;01
-&Lizenz aktivieren
-.
-
-7945;txt;01
-Ihre Kopie von Sandboxie ist nun registriert.
-.
-
-7946;txt;01
-Vielen Dank für Ihre Unterstützung!
-.
-
-#----------------------------------------------------------------------------
-
-7951;txt;01
-Möchten Sie jetzt die Lizenz aktivieren?
-.
-
-7952;txt;01
-Bitte besuchen Sie die Sandboxie Webseite über den Link unten, um einen Produktschlüssel zu bestellen.
-.
-
-7961;txt;01
-Lizenz&informationen löschen
-.
-
-7962;txt;01
-Möchten Sie die Lizenzinformationen wirklich aus Sandboxie löschen?
-
-Sie können Ihre Lizenz jederzeit durch die Eingabe eines Produktschlüssels aktivieren.
-.
-
-#----------------------------------------------------------------------------
-
-7971;txt;01
-Dies ist kein gültiger Produktschlüssel.
-.
-
-7972;txt;01
-Dies ist kein gültiger Systemcode.
-.
-
-7973;txt;01
-Dies ist kein gültiger Aktivierungsschlüssel. [%2]
-.
-
-7974;txt;01
-Ungültige Antwort vom Lizenzserver.
-.
-
-7975;txt;01
-Produktaktivierung gescheitert:
-.
-
-7976;txt;01
-Möchten Sie es noch einmal versuchen?
-.
-
-7977;txt;01
-Wenn Sie Sandboxie bei einem Computer ohne Internetzugang aktivieren möchten,
-dann lesen Sie bitte im 'Sandboxie Licensing FAQ' die Informationen zur 'Offline Activation'.
-.
-
-7978;txt;01
-Aktuelles Datum (%2) stimmt mit dem Datum des Lizenzservers (%3) nicht überein.
-.
-
-7982;txt;01
-Der Lizenzserver hat für das Scheitern der Aktivierung keine Gründe angegeben.
-.
-
-7983;txt;01
-Der Produktschlüssel wurde vom Lizenzserver nicht erkannt.
-.
-
-7984;txt;01
-Der Produktschlüssel kann nur bis zu seinem Ablaufdatum %2 verwendet werden.
-.
-
-7985;txt;01
-Der Produktschlüssel wurde auf zu vielen Computern aktiviert.
-.
-
-7986;txt;01
-Der Produktschlüssel wurde annulliert, weil er im Internet veröffentlicht wurde.
-.
-
-7987;txt;01
-Der Produktschlüssel wurde annulliert, weil der Kaufpreis rückerstattet wurde.
 .
 
 #----------------------------------------------------------------------------

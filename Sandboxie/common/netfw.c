@@ -136,7 +136,7 @@ BOOLEAN NetFw_MergePortMaps(rbtree_t* dst, rbtree_t* src, POOL* pool)
 {
 	//
 	// search for overlaps, and if found abort
-	// we merge only non overlaping ranges as single entries vs ranges have a different priority
+	// we merge only non overlapping ranges as single entries vs ranges have a different priority
 	//
 
 	for (NETFW_PORTS* src_node = (NETFW_PORTS*)rbtree_first(src); ((rbnode_t*)src_node) != RBTREE_NULL; src_node = (NETFW_PORTS*)rbtree_next((rbnode_t*)src_node)) {
@@ -224,7 +224,7 @@ BOOLEAN NetFw_MergeIPMaps(rbtree_t* dst, rbtree_t* src, POOL* pool)
 {
 	//
 	// search for overlaps, and if found abort
-	// we merge only non overlaping ranges as single entries vs ranges have a different priority
+	// we merge only non overlapping ranges as single entries vs ranges have a different priority
 	//
 
 	for (NETFW_IPS* src_node = (NETFW_IPS*)rbtree_first(src); ((rbnode_t*)src_node) != RBTREE_NULL; src_node = (NETFW_IPS*)rbtree_next((rbnode_t*)src_node)) {
@@ -302,7 +302,7 @@ void NetFw_AddRule(LIST* list, NETFW_RULE* new_rule)
 			goto next; // must be same protocol
 
 		//
-		// seams we might be able to marge these rules
+		// it seems we might be able to merge these rules
 		// now we check the convoluted case when rules havs ip's and port's set
 		//
 
@@ -438,16 +438,17 @@ const WCHAR* wcsnchr(const WCHAR* str, size_t max, WCHAR ch)
 
 int _inet_pton(int af, const wchar_t* src, void* dst);
 
-int _inet_xton(const WCHAR* src, ULONG max, IP_ADDRESS *dst)
+int _inet_xton(const WCHAR* src, ULONG src_len, IP_ADDRESS *dst)
 {
-	WCHAR tmp[46]; // INET6_ADDRSTRLEN 
-	wmemcpy(tmp, src, max);
+	WCHAR tmp[46 + 1]; // INET6_ADDRSTRLEN 
+	if (src_len > ARRAYSIZE(tmp) - 1) src_len = ARRAYSIZE(tmp) - 1;
+	wmemcpy(tmp, src, src_len);
+	tmp[src_len] = L'\0';
 	
-    //dst->Type = AF_INET;
-    //if (wcschr(src, L':') != NULL)
-    //    dst->Type = AF_INET6;
+	USHORT af = wcschr(tmp, L':') != NULL ? AF_INET6 : AF_INET;
+	//dst->Type = af
+    int ret = _inet_pton(af, tmp, dst->Data);
 
-    int ret = _inet_pton(wcschr(src, L':') != NULL ? AF_INET6 : AF_INET, tmp, dst->Data);
     return ret;
 }
 
@@ -480,7 +481,7 @@ BOOLEAN NetFw_ParseRule(NETFW_RULE* rule, const WCHAR* found_value)
             if (port_str2) {
                 port_len1 = (ULONG)(port_str2 - port_str1);
                 port_str2++; // skip dash
-                ULONG port_len2 = (ULONG)(port_end - port_str2);
+                ULONG port_len2 = (ULONG)(port_value - port_str2);
 
                 USHORT Port1 = (USHORT)_wntoi(port_str1, port_len1);
                 USHORT Port2 = (USHORT)_wntoi(port_str2, port_len2);
@@ -506,7 +507,7 @@ BOOLEAN NetFw_ParseRule(NETFW_RULE* rule, const WCHAR* found_value)
             if (ip_str2) {
                 ip_len1 = (ULONG)(ip_str2 - ip_str1);
                 ip_str2++; // skip dash
-                ULONG ip_len2 = (ULONG)(ip_end - ip_str2);
+                ULONG ip_len2 = (ULONG)(ip_value - ip_str2);
 
                 IP_ADDRESS ip1;
                 _inet_xton(ip_str1, ip_len1, &ip1);
@@ -545,6 +546,10 @@ BOOLEAN NetFw_ParseRule(NETFW_RULE* rule, const WCHAR* found_value)
 
 static int isdigit_(int c) { return (c >= '0' && c <= '9'); }
 static int isxdigit_(int c) { return (isdigit_(c) || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f')); }
+#undef isascii
+static int isascii(int iChar) { return((iChar <= 127) && (iChar >= 0)); }
+static int isalnum_(int c) { return (isdigit_(c) || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')); }
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // from BSD sources: http://code.google.com/p/plan9front/source/browse/sys/src/ape/lib/bsd/?r=320990f52487ae84e28961517a4fa0d02d473bac
@@ -646,14 +651,14 @@ static int delimchar(int c)
 {
 	if(c == '\0')
 		return 1;
-	if(c == ':' || isascii(c) && isalnum(c))
+	if(c == ':' || isascii(c) && isalnum_(c))
 		return 0;
 	return 1;
 }
 
 int _inet_pton(int af, const wchar_t *src, void *dst) // ip is always in network order !!!
 {
-	int i, elipsis = 0;
+	int i, ellipsis = 0;
 	unsigned char *to;
 	unsigned long x;
 	const wchar_t *p, *op;
@@ -691,9 +696,9 @@ int _inet_pton(int af, const wchar_t *src, void *dst) // ip is always in network
 		to[i+1] = (unsigned char)x;
 		if(*p == L':'){
 			if(*++p == L':'){        /* :: is elided zero short(s) */
-				if (elipsis)
+				if (ellipsis)
 					return 0;       /* second :: */
-				elipsis = i+2;
+				ellipsis = i+2;
 				p++;
 			}
 		} else if (p == op)             /* strtoul made no progress? */
@@ -702,8 +707,8 @@ int _inet_pton(int af, const wchar_t *src, void *dst) // ip is always in network
 	if (p == src || !delimchar(*p))
 		return 0;                               /* parse error */
 	if(i < 16){
-		memmove(&to[elipsis+16-i], &to[elipsis], i-elipsis);
-		memset(&to[elipsis], 0, 16-i);
+		memmove(&to[ellipsis+16-i], &to[ellipsis], i-ellipsis);
+		memset(&to[ellipsis], 0, 16-i);
 	}
 	return 1;
 }

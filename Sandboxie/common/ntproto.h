@@ -511,12 +511,53 @@ typedef NTSTATUS (*P_NtImpersonateThread)(
     IN  HANDLE ClientThreadHandle,
     IN  PSECURITY_QUALITY_OF_SERVICE SecurityQos);
 
+typedef NTSTATUS (*P_NtCreateSymbolicLinkObject)(
+    PHANDLE SymbolicLinkHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes,
+    PUNICODE_STRING DestinationName);
+
+typedef NTSTATUS (*P_NtOpenSymbolicLinkObject)(
+    OUT PHANDLE SymbolicLinkHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes);
+
+typedef NTSTATUS (*P_NtQuerySymbolicLinkObject)(
+    IN HANDLE SymbolicLinkHandle,
+    IN OUT PUNICODE_STRING LinkTarget,
+    OUT PULONG ReturnedLength);
+
 typedef NTSTATUS (*P_NtLoadDriver)(
     IN  PUNICODE_STRING RegistryPath);
 
 typedef NTSTATUS (*P_NtLoadKey)(
-    IN  POBJECT_ATTRIBUTES TargetObjectAttributes,
-    IN  POBJECT_ATTRIBUTES SourceObjectAttributes);
+    IN  POBJECT_ATTRIBUTES KeyObjectAttributes,
+    IN  POBJECT_ATTRIBUTES FileObjectAttributes);
+
+typedef NTSTATUS (*P_NtLoadKey2)(
+    IN  POBJECT_ATTRIBUTES KeyObjectAttributes,
+    IN  POBJECT_ATTRIBUTES FileObjectAttributes, 
+    IN  ULONG Flags);
+
+typedef NTSTATUS (*P_NtLoadKey3)(
+    IN  POBJECT_ATTRIBUTES KeyObjectAttributes,
+    IN  POBJECT_ATTRIBUTES FileObjectAttributes, 
+    IN  ULONG Flags,
+    IN  PVOID LoadArguments, 
+    IN  ULONG LoadArgumentCount, 
+    IN  ACCESS_MASK DesiredAccess, 
+    IN  HANDLE KeyHandle, 
+    IN  ULONG Unkown);
+
+typedef NTSTATUS (*P_NtLoadKeyEx)(
+    IN  POBJECT_ATTRIBUTES TargetKey,
+    IN  POBJECT_ATTRIBUTES SourceFile, 
+    IN  ULONG Flags,
+    IN  HANDLE TrustClassKey,
+    IN  PVOID Reserved,
+    IN  PVOID ObjectContext,
+    IN  PVOID CallbackReserved,
+    OUT PIO_STATUS_BLOCK IoStatusBlock);
 
 typedef NTSTATUS (*P_NtMapViewOfSection)(
     IN  HANDLE SectionHandle,
@@ -880,6 +921,11 @@ typedef NTSTATUS (*P_NtRollbackTransaction)(
 typedef NTSTATUS (*P_NtSaveKey)(
     IN  HANDLE KeyHandle,
     IN  HANDLE FileHandle);
+
+typedef NTSTATUS (*P_NtSaveKeyEx)(
+    IN  HANDLE KeyHandle,
+    IN  HANDLE FileHandle, 
+    IN  ULONG Flags);
 
 typedef NTSTATUS (*P_NtSecureConnectPort)(
     OUT PHANDLE ClientPortHandle,

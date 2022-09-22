@@ -8,13 +8,18 @@ HEADERS += ./stdafx.h \
     ./SbiePlusAPI.h \
     ./SbieProcess.h \
     ./BoxJob.h \
+    ./BoxMonitor.h \
     ./Models/SbieModel.h \
     ./Models/TraceModel.h \
+    ./Models/MonitorModel.h \
     ./Views/SbieView.h \
+    ./Views/FileView.h \
     ./Views/TraceView.h \
     ./Dialogs/MultiErrorDialog.h \
     ./Helpers/FindTool.h \
     ./Helpers/WinAdmin.h \
+    ./Helpers/ReadDirectoryChanges.h \
+    ./Helpers/ReadDirectoryChangesPrivate.h \
     ./Windows/NewBoxWindow.h \
     ./Windows/RecoveryWindow.h \
     ./Windows/PopUpWindow.h \
@@ -22,7 +27,9 @@ HEADERS += ./stdafx.h \
     ./Windows/SettingsWindow.h \
     ./Windows/OptionsWindow.h \
     ./Windows/SelectBoxWindow.h \
-    ./Windows/FileBrowserWindow.h
+    ./Windows/SupportDialog.h\
+    ./OnlineUpdater.h \
+    ./Wizards/SetupWizard.h
 
 SOURCES += ./main.cpp \
     ./stdafx.cpp \
@@ -30,32 +37,29 @@ SOURCES += ./main.cpp \
     ./SbiePlusAPI.cpp \
     ./SbieProcess.cpp \
     ./BoxJob.cpp \
+    ./BoxMonitor.cpp \
     ./Models/TraceModel.cpp \
+    ./Models/MonitorModel.cpp \
     ./Models/SbieModel.cpp \
     ./Views/SbieView.cpp \
+    ./Views/FileView.cpp \
     ./Views/TraceView.cpp \
     ./Dialogs/MultiErrorDialog.cpp \
     ./Helpers/FindTool.cpp \
     ./Helpers/WinAdmin.cpp \
+    ./Helpers/ReadDirectoryChanges.cpp \
+    ./Helpers/ReadDirectoryChangesPrivate.cpp \
     ./Helpers/WindowFromPointEx.cpp \
     ./Windows/NewBoxWindow.cpp \
     ./Windows/OptionsWindow.cpp \
-    ./Windows/OptionsAccess.cpp \
-    ./Windows/OptionsAdvanced.cpp \
-    ./Windows/OptionsForce.cpp \
-    ./Windows/OptionsGeneral.cpp \
-    ./Windows/OptionsGrouping.cpp \
-    ./Windows/OptionsNetwork.cpp \
-    ./Windows/OptionsRecovery.cpp \
-    ./Windows/OptionsStart.cpp \
-    ./Windows/OptionsStop.cpp \
-    ./Windows/OptionsTemplates.cpp \
     ./Windows/PopUpWindow.cpp \
     ./Windows/RecoveryWindow.cpp \
     ./Windows/SettingsWindow.cpp \
     ./Windows/SnapshotsWindow.cpp \
     ./Windows/SelectBoxWindow.cpp \
-    ./Windows/FileBrowserWindow.cpp
+    ./Windows/SupportDialog.cpp\
+    ./OnlineUpdater.cpp \
+    ./Wizards/SetupWizard.cpp
 
 FORMS += ./Forms/NewBoxWindow.ui \
     ./Forms/OptionsWindow.ui \
@@ -63,23 +67,24 @@ FORMS += ./Forms/NewBoxWindow.ui \
     ./Forms/RecoveryWindow.ui \
     ./Forms/SettingsWindow.ui \
     ./Forms/SnapshotsWindow.ui \
-    ./Forms/SelectBoxWindow.ui \
-    ./Forms/FileBrowserWindow.ui
+    ./Forms/SelectBoxWindow.ui
 
 TRANSLATIONS += sandman_de.ts \
     sandman_en.ts \
     sandman_es.ts \
     sandman_fr.ts \
     sandman_it.ts \
+    sandman_ko.ts \
     sandman_nl.ts \
     sandman_pl.ts \
     sandman_pt_BR.ts \
     sandman_pt_PT.ts \
     sandman_ru.ts \
+    sandman_sv_SE.ts \
+    sandman_tr.ts \
     sandman_uk.ts \
     sandman_zh_CN.ts \
     sandman_zh_TW.ts
 
-#   sandman_tr.ts (unmaintained)
 
 RESOURCES += Resources/SandMan.qrc

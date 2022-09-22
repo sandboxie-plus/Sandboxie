@@ -10,9 +10,8 @@ class MISCHELPERS_EXPORT CSortFilterProxyModel: public QSortFilterProxyModel
 	Q_OBJECT
 
 public:
-	CSortFilterProxyModel(bool bAlternate, QObject* parrent = 0) : QSortFilterProxyModel(parrent) 
+	CSortFilterProxyModel(QObject* parrent = 0) : QSortFilterProxyModel(parrent) 
 	{
-		m_bAlternate = bAlternate;
 		m_bHighLight = false;
 		m_iColumn = 0;
 		m_pView = NULL;
@@ -67,16 +66,16 @@ public:
 			//return QColor(Qt::white);
 		}
 
-		if (role == Qt::BackgroundRole)
-		{
-			if (m_bAlternate && !Data.isValid())
-			{
-				if (0 == index.row() % 2)
-					return QColor(226, 237, 253);
-				else
-					return QColor(Qt::white);
-			}
-		}
+		//if (role == Qt::BackgroundRole)
+		//{
+		//	if (m_bAlternate && !Data.isValid())
+		//	{
+		//		if (0 == index.row() % 2)
+		//			return QColor(226, 237, 253);
+		//		else
+		//			return QColor(Qt::white);
+		//	}
+		//}
 		return Data;
 	}
 
@@ -117,7 +116,6 @@ public slots:
 	}
 
 protected:
-	bool		m_bAlternate;
 	bool		m_bHighLight;
 	int			m_iColumn;
 	QTreeView*	m_pView;

@@ -357,11 +357,11 @@ _FX const WCHAR* Process_MatchImageAndGetValue(BOX *box, const WCHAR* value, con
 
 
 //---------------------------------------------------------------------------
-// Process_GetConf
+// Process_GetConfEx
 //---------------------------------------------------------------------------
 
 
-_FX const WCHAR* Process_GetConf(PROCESS *proc, const WCHAR* setting)
+_FX const WCHAR* Process_GetConfEx(BOX *box, const WCHAR *image_name, const WCHAR* setting)
 {
     ULONG index = 0;
     const WCHAR *value;
@@ -370,12 +370,12 @@ _FX const WCHAR* Process_GetConf(PROCESS *proc, const WCHAR* setting)
 
     for (index = 0; ; ++index) {
 
-        value = Conf_Get(proc->box->name, setting, index);
+        value = Conf_Get(box->name, setting, index);
         if (! value)
             break;
 
         ULONG level = -1;
-        value = Process_MatchImageAndGetValue(proc->box, value, proc->image_name, &level);
+        value = Process_MatchImageAndGetValue(box, value, image_name, &level);
         if (!value || level > found_level)
             continue;
         found_value = value;
@@ -387,18 +387,29 @@ _FX const WCHAR* Process_GetConf(PROCESS *proc, const WCHAR* setting)
 
 
 //---------------------------------------------------------------------------
-// Process_GetConf_bool
+// Process_GetConf
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Process_GetConf_bool(PROCESS *proc, const WCHAR* setting, BOOLEAN def)
+_FX const WCHAR* Process_GetConf(PROCESS* proc, const WCHAR* setting)
+{
+    return Process_GetConfEx(proc->box, proc->image_name, setting);
+}
+
+
+//---------------------------------------------------------------------------
+// Process_GetConfEx_bool
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Process_GetConfEx_bool(BOX *box, const WCHAR *image_name, const WCHAR* setting, BOOLEAN def)
 {
     const WCHAR *value;
     BOOLEAN retval;
 
     Conf_AdjustUseCount(TRUE);
 
-    value = Process_GetConf(proc, setting);
+    value = Process_GetConfEx(box, image_name, setting);
 
     retval = def;
     if (value) {
@@ -411,6 +422,17 @@ _FX BOOLEAN Process_GetConf_bool(PROCESS *proc, const WCHAR* setting, BOOLEAN de
     Conf_AdjustUseCount(FALSE);
 
     return retval;
+}
+
+
+//---------------------------------------------------------------------------
+// Process_GetConf_bool
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Process_GetConf_bool(PROCESS* proc, const WCHAR* setting, BOOLEAN def)
+{
+    return Process_GetConfEx_bool(proc->box, proc->image_name, setting, def);
 }
 
 
@@ -445,7 +467,7 @@ _FX BOOLEAN Process_GetPaths(
 
         if (closed && (*value == L'!')) {
 
-            // dont close paths for sbie components
+            // don't close paths for sbie components
             if (closed_ipc && proc->image_sbie)
                 continue; 
 
@@ -854,60 +876,6 @@ _FX const WCHAR *Process_MatchPath(
 
 
 //---------------------------------------------------------------------------
-// Process_MatchPathList
-//---------------------------------------------------------------------------
-
-
-_FX int Process_MatchPathList(
-    WCHAR *path_lwr, ULONG path_len, LIST *list, ULONG* plevel, const WCHAR** patsrc)
-{
-    PATTERN *pat;
-    int match_len = 0;
-    ULONG level = plevel ? *plevel : -1; // lower is better, 3 is max value
-
-    pat = List_Head(list);
-    while (pat) {
-
-        ULONG cur_level = Pattern_Level(pat);
-        if (cur_level > level)
-            goto next; // no point testing patters with a to weak level
-
-        int cur_len = Pattern_MatchX(pat, path_lwr, path_len);
-        if (cur_len > match_len) {
-            match_len = cur_len;
-            level = cur_level;
-            if (patsrc) *patsrc = Pattern_Source(pat);
-            
-            // we need to test all entries to find the best match, so we dont break here
-        }
-
-        //
-        // if we have a pattern like C:\Windows\,
-        // we still want it to match a path like C:\Windows,
-        // hence we add a L'\\' to the path and check again
-        //
-
-        else if (path_lwr[path_len - 1] != L'\\') { 
-            path_lwr[path_len] = L'\\';
-            cur_len = Pattern_MatchX(pat, path_lwr, path_len + 1);
-            path_lwr[path_len] = L'\0';
-            if (cur_len > match_len) {
-                match_len = cur_len;
-                level = cur_level;
-                if (patsrc) *patsrc = Pattern_Source(pat);
-            }
-        }
-
-    next:
-        pat = List_Next(pat);
-    }
-
-    if (plevel) *plevel = level;
-    return match_len;
-}
-
-
-//---------------------------------------------------------------------------
 // Process_MatchPathEx
 //---------------------------------------------------------------------------
 
@@ -922,11 +890,10 @@ _FX ULONG Process_MatchPathEx(
     PATTERN *pat;
     WCHAR *path_lwr;
     ULONG path_lwr_len;
-    const WCHAR* curpat;
-    ULONG cur_level;
-    int cur_len;
     int match_len;
     ULONG level;
+    BOOLEAN exact;
+    USHORT wildc;
     ULONG mp_flags;
 
     path_lwr_len = (path_len + 4) * sizeof(WCHAR);
@@ -956,7 +923,11 @@ _FX ULONG Process_MatchPathEx(
     //  3 - global default, eg. ...Path=...
     // Rules with the most exact matches overrule the more generic once.
     // The match level overrules the specificity.
-    //
+    // 
+    // A rule with less wildcards will overrule one with more
+    // 
+    // If a rule ends with an * it is not exact and will be overruled by an exact rule
+    // 
     // Adding UseRuleSpecificity=n disables this behavioure and reverts to the old classical one
     //
 
@@ -965,6 +936,8 @@ _FX ULONG Process_MatchPathEx(
     //
 
     level = 3; // 3 - global default - lower is better, 3 is max value
+    exact = FALSE;
+    wildc = -1; // lower is better
     match_len = 0;
     if (path_code == L'n' && proc->file_block_network_files) {
 
@@ -1000,18 +973,10 @@ _FX ULONG Process_MatchPathEx(
     // closed path list, in non specific mode has the higher priority
     // these paths are inaccessible for true and copy locations 
     //
-    
-    if (closed_list) {
-        cur_level = level;
-        cur_len = Process_MatchPathList(path_lwr, path_len, closed_list, &cur_level, &curpat);
-        if (cur_level <= level && cur_len > match_len) {
-            level = cur_level;
-            match_len = cur_len;
-            if (patsrc) *patsrc = curpat;
 
-            mp_flags = TRUE_PATH_CLOSED_FLAG | COPY_PATH_CLOSED_FLAG;
-            if (!proc->use_rule_specificity) goto finish;
-        }
+    if (Pattern_MatchPathListEx(path_lwr, path_len, closed_list, &level, &match_len, &exact, &wildc, patsrc)) {
+        mp_flags = TRUE_PATH_CLOSED_FLAG | COPY_PATH_CLOSED_FLAG;
+        if (!proc->use_rule_specificity) goto finish;
     }
     
     //
@@ -1019,17 +984,9 @@ _FX ULONG Process_MatchPathEx(
     // these paths allow read acces to true location and read/write access to copy location
     //
     
-    if (write_list) {
-        cur_level = level;
-        cur_len = Process_MatchPathList(path_lwr, path_len, write_list, &cur_level, &curpat);
-        if (cur_level <= level && cur_len > match_len) {
-            level = cur_level;
-            match_len = cur_len;
-            if (patsrc) *patsrc = curpat;
-
-            mp_flags = TRUE_PATH_CLOSED_FLAG | COPY_PATH_OPEN_FLAG;
-            if (!proc->use_rule_specificity) goto finish;
-        }
+    if (Pattern_MatchPathListEx(path_lwr, path_len, write_list, &level, &match_len, &exact, &wildc, patsrc)) {
+        mp_flags = TRUE_PATH_CLOSED_FLAG | COPY_PATH_OPEN_FLAG;
+        if (!proc->use_rule_specificity) goto finish;
     }
     
     //
@@ -1037,54 +994,30 @@ _FX ULONG Process_MatchPathEx(
     // these paths allow read only acces to true path and copy locations
     //
     
-    if (read_list) {
-        cur_level = level;
-        cur_len = Process_MatchPathList(path_lwr, path_len,read_list, &cur_level, &curpat);
-        if (cur_level <= level && cur_len > match_len) {
-            level = cur_level;
-            match_len = cur_len;
-            if (patsrc) *patsrc = curpat;
-
-            mp_flags = TRUE_PATH_READ_FLAG | COPY_PATH_READ_FLAG;
-            if (!proc->use_rule_specificity) goto finish;
-        }
+    if (Pattern_MatchPathListEx(path_lwr, path_len, read_list, &level, &match_len, &exact, &wildc, patsrc)) {
+        mp_flags = TRUE_PATH_READ_FLAG | COPY_PATH_READ_FLAG;
+        if (!proc->use_rule_specificity) goto finish;
     }
     
     //
     // normal path list restores normal behavioure when used in specific mode
     // these paths allow reading the true location and write to the copy location
     //
-    
-    if (normal_list) {
-        cur_level = level;
-        cur_len = Process_MatchPathList(path_lwr, path_len, normal_list, &cur_level, &curpat);
-        if (cur_level <= level && cur_len > match_len) {
-            level = cur_level;
-            match_len = cur_len;
-            if (patsrc) *patsrc = curpat;
 
-            mp_flags = TRUE_PATH_READ_FLAG | COPY_PATH_OPEN_FLAG;
-            // dont goto finish as open can overwrite this 
-        }
+    if (Pattern_MatchPathListEx(path_lwr, path_len, normal_list, &level, &match_len, &exact, &wildc, patsrc)) {
+        mp_flags = TRUE_PATH_READ_FLAG | COPY_PATH_OPEN_FLAG;
+        // dont goto finish as open can overwrite this 
     }
     
     //
     // open path has lowest priority in non specific mode 
     // these paths allow read/write access to the true location
     //
-    
-    if (open_list) {
-        cur_level = level;
-        cur_len = Process_MatchPathList(path_lwr, path_len, open_list, &cur_level, &curpat);
-        if (cur_level <= level && cur_len > match_len) {
-            level = cur_level;
-            match_len = cur_len;
-            if (patsrc) *patsrc = curpat;
 
-            mp_flags = TRUE_PATH_OPEN_FLAG;
-        }
+    if (Pattern_MatchPathListEx(path_lwr, path_len, open_list, &level, &match_len, &exact, &wildc, patsrc)) {
+        mp_flags = TRUE_PATH_OPEN_FLAG;
     }
-
+    
 
 finish:
     Mem_Free(path_lwr, path_lwr_len);
@@ -1173,23 +1106,23 @@ _FX void Process_GetProcessName(
 //---------------------------------------------------------------------------
 
 
-_FX NTSTATUS Process_CheckProcessName(
+_FX BOOLEAN Process_CheckProcessName(
     PROCESS *proc, LIST *open_paths, ULONG_PTR idProcess,
     const WCHAR **pSetting)
 {
-    NTSTATUS status;
+    BOOLEAN result;
     PATTERN *pat;
     void *nbuf;
     ULONG nlen;
     WCHAR *nptr;
 
-    status = STATUS_ACCESS_DENIED;
+    result = FALSE;
 
     if (pSetting)
         *pSetting = NULL;
 
     if (! idProcess)
-        return status;
+        return result;
 
     nbuf = NULL;
     nlen = 0;
@@ -1204,7 +1137,7 @@ _FX NTSTATUS Process_CheckProcessName(
 
         const WCHAR *src = Pattern_Source(pat);
         pat = List_Next(pat);
-        if (wcslen(src) > 3 && src[0] == L'$' && src[1] == L':') {
+        if (wcslen(src) >= 3 && src[0] == L'$' && src[1] == L':') {
 
             if (! nptr) {
                 Process_GetProcessName(
@@ -1212,8 +1145,8 @@ _FX NTSTATUS Process_CheckProcessName(
                 if (! nptr)
                     break;
             }
-            if (_wcsicmp(nptr, src + 2) == 0) {
-                status = STATUS_SUCCESS;
+            if (_wcsicmp(nptr, src + 2) == 0 || (src[2] == L'*' && src[3] == L'\0')) { // "$:*" is permitted
+                result = TRUE;
                 if (pSetting)
                     *pSetting = src;
                 break;
@@ -1224,7 +1157,7 @@ _FX NTSTATUS Process_CheckProcessName(
     if (nbuf)
         Mem_Free(nbuf, nlen);
 
-    return status;
+    return result;
 }
 
 
@@ -1452,6 +1385,7 @@ _FX BOOLEAN Process_IsInPcaJob(HANDLE ProcessId)
 // Process_ScheduleKillProc
 //---------------------------------------------------------------------------
 
+extern BOOLEAN Driver_FullUnload;
 
 _FX VOID Process_ScheduleKillProc(IN PVOID StartContext)
 {
@@ -1466,6 +1400,8 @@ _FX VOID Process_ScheduleKillProc(IN PVOID StartContext)
 
     __try {
     retry:
+        if (Driver_FullUnload)
+            __leave;
         status = PsLookupProcessByProcessId(process_id, &ProcessObject);
         if (NT_SUCCESS(status)) {
 
@@ -1530,7 +1466,7 @@ _FX BOOLEAN Process_ScheduleKill(PROCESS *proc, LONG delay_ms)
 
             if (proc->reason == 0)
                 RtlStringCbPrintfW(text, len, L"%s", proc->image_name);
-            else if (proc->reason != -1) // in this case we have SBIE1308 and dont want any other messages
+            else if (proc->reason != -1) // in this case we have SBIE1308 and don't want any other messages
                 RtlStringCbPrintfW(text, len, L"%s [%d]", proc->image_name, proc->reason);
             else
                 *text = 0;

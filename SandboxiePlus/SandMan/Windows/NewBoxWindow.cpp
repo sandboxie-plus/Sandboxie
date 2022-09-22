@@ -2,6 +2,7 @@
 #include "NewBoxWindow.h"
 #include "SandMan.h"
 #include "../MiscHelpers/Common/Settings.h"
+#include "Views/SbieView.h"
 
 
 CNewBoxWindow::CNewBoxWindow(QWidget *parent)
@@ -62,16 +63,19 @@ void CNewBoxWindow::OnBoxTypChanged()
 
 	ui.lblBoxInfo->setText(theGUI->GetBoxDescription(BoxType));
 
-	if(BoxType != CSandBoxPlus::eDefault && BoxType != CSandBoxPlus::eHardened)
-		theGUI->CheckCertificate();
+	if(BoxType != CSandBoxPlus::eDefault)
+		theGUI->CheckCertificate(this);
 }
 
 void CNewBoxWindow::CreateBox()
 {
 	m_Name = ui.txtName->text();
-	m_Name.replace(" ", "_");
-
 	int BoxType = ui.cmbBoxType->currentData().toInt();
+
+	if (!theGUI->GetBoxView()->TestNameAndWarn(m_Name))
+		return;
+
+	m_Name.replace(" ", "_");
 
 	SB_STATUS Status = theAPI->CreateBox(m_Name, true);
 
@@ -79,18 +83,22 @@ void CNewBoxWindow::CreateBox()
 	{
 		CSandBoxPtr pBox = theAPI->GetBoxByName(m_Name);
 
+		pBox->SetBool("AutoRecover", true);
+
 		switch (BoxType)
 		{
 			case CSandBoxPlus::eHardenedPlus:
 			case CSandBoxPlus::eHardened:
 				//pBox->SetBool("NoSecurityIsolation", false);
-				pBox->SetBool("DropAdminRights", true);
+				pBox->SetBool("UseSecurityMode", true);
+				//pBox->SetBool("DropAdminRights", true);
 				//pBox->SetBool("MsiInstallerExemptions", false);
 				pBox->SetBool("UsePrivacyMode", BoxType == CSandBoxPlus::eHardenedPlus);
 				break;
 			case CSandBoxPlus::eDefaultPlus:
 			case CSandBoxPlus::eDefault:
 				//pBox->SetBool("NoSecurityIsolation", false);
+				pBox->SetBool("UseSecurityMode", false);
 				//pBox->SetBool("DropAdminRights", false);
 				//pBox->SetBool("MsiInstallerExemptions", false);
 				//pBox->SetBool("RunServicesAsSystem", false);
@@ -98,12 +106,17 @@ void CNewBoxWindow::CreateBox()
 				break;
 			case CSandBoxPlus::eAppBoxPlus:
 			case CSandBoxPlus::eAppBox:
+				//pBox->SetBool("UseSecurityMode", false);
 				pBox->SetBool("NoSecurityIsolation", true);
 				//pBox->SetBool("RunServicesAsSystem", true);
 				pBox->SetBool("UsePrivacyMode", BoxType == CSandBoxPlus::eAppBoxPlus);
 				//pBox->InsertText("Template", "NoUACProxy"); // proxy is always needed for exes in the box
+				pBox->InsertText("Template", "RpcPortBindingsExt");
 				break;
 		}
+
+		QRgb rgb = theGUI->GetBoxColor(BoxType);
+		pBox->SetText("BorderColor", QString("#%1%2%3").arg(qBlue(rgb), 2, 16, QChar('0')).arg(qGreen(rgb), 2, 16, QChar('0')).arg(qRed(rgb), 2, 16, QChar('0')) + ",ttl");
 	}
 
 	if(Status.IsError())

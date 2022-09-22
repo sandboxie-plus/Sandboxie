@@ -82,7 +82,6 @@ const  ULONG                 tzuk = 'xobs';
 // WinMain
 //---------------------------------------------------------------------------
 
-ULONG Dll_Windows = 0;
 
 int WinMain(
     HINSTANCE hInstance,
@@ -97,9 +96,6 @@ int WinMain(
     _Ntdll      = GetModuleHandle(L"ntdll.dll");
     _Kernel32   = GetModuleHandle(L"kernel32.dll");
     GetSystemInfo(&_SystemInfo);
-    if (GetProcAddress(_Ntdll, "LdrFastFailInLoaderCallout")) {
-        Dll_Windows = 10;
-    }
 
     WCHAR *cmdline = GetCommandLine();
     if (cmdline) {
@@ -488,7 +484,9 @@ finish:
 bool CheckDropRights(const WCHAR *BoxName)
 {
     if (SbieApi_QueryConfBool(BoxName, L"NoSecurityIsolation", FALSE))
-        return false; // if we are not swaping the token we can not drop admin rights so keep this consistent
+        return false; // if we are not swapping the token we can not drop admin rights so keep this consistent
+    if (SbieApi_QueryConfBool(BoxName, L"UseSecurityMode", FALSE))
+        return true;
     if (SbieApi_QueryConfBool(BoxName, L"DropAdminRights", FALSE))
         return true;
     return false;
@@ -559,7 +557,7 @@ bool IsHostPath(HANDLE idProcess, WCHAR* dos_path)
     ULONG len = 0;
 
     //
-    // get the final file path by opening it and retreiving it from the handle
+    // get the final file path by opening it and retrieving it from the handle
     //
 
     handle = CreateFileW(dos_path, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);

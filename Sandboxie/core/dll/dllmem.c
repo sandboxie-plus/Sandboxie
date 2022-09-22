@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@
 #include "dll.h"
 #include "common/pool.h"
 #include <stdio.h>
+#include "debug.h"
 
 
 //---------------------------------------------------------------------------
@@ -282,7 +283,7 @@ _FX THREAD_DATA *Dll_GetTlsData(ULONG *pLastError)
 _FX void Dll_FreeTlsData(void)
 {
     THREAD_DATA *data;
-    ULONG depth, type;
+    ULONG depth, count;
 
     if (Dll_TlsIndex == TLS_OUT_OF_INDEXES)
         data = NULL;
@@ -295,12 +296,12 @@ _FX void Dll_FreeTlsData(void)
 
     for (depth = 0; depth < NAME_BUFFER_DEPTH; ++depth) {
 
-        for (type = 0; type < NAME_BUFFER_COUNT; ++type) {
+        for (count = 0; count < NAME_BUFFER_COUNT; ++count) {
 
-            WCHAR* buf = data->name_buffer[type][depth];
+            WCHAR* buf = data->name_buffer[count][depth];
             if (buf)
                 Dll_Free(buf);
-            data->name_buffer[type][depth] = NULL;
+            data->name_buffer[count][depth] = NULL;
         }
     }
 
@@ -313,16 +314,38 @@ _FX void Dll_FreeTlsData(void)
 //---------------------------------------------------------------------------
 
 
-ALIGNED WCHAR *Dll_GetTlsNameBuffer(
-    THREAD_DATA *data, ULONG which, ULONG size)
+#ifdef NAME_BUFFER_DEBUG
+ALIGNED WCHAR *Dll_GetTlsNameBuffer_(THREAD_DATA *data, ULONG which, ULONG size, char* func)
+#else
+ALIGNED WCHAR *Dll_GetTlsNameBuffer(THREAD_DATA *data, ULONG which, ULONG size)
+#endif
 {
     WCHAR *old_name_buffer;
     ULONG old_name_buffer_len;
     WCHAR **name_buffer;
     ULONG *name_buffer_len;
 
-    name_buffer     = &data->name_buffer    [which][data->depth];
-    name_buffer_len = &data->name_buffer_len[which][data->depth];
+    //
+    // since we have more places where we may need a name buffer now
+    // instead of sticking to "which" and doing our best to not reuse a particualr buffer thats still needed
+    // we just increment a counter and take a new buffer reach time we request one
+    //
+
+    if (which >= MISC_NAME_BUFFER)
+        which = MISC_NAME_BUFFER + data->name_buffer_count[data->name_buffer_depth]++;
+
+#ifdef NAME_BUFFER_DEBUG
+    DbgTrace("Dll_GetTlsNameBuffer, %s, %d\r\n", func, which);
+#endif
+
+    if (which >= NAME_BUFFER_COUNT - 4)
+        SbieApi_Log(2310, L"%d", which);
+    if (which >= NAME_BUFFER_COUNT) {
+        ExitProcess(-1);
+    }
+
+    name_buffer     = &data->name_buffer    [which][data->name_buffer_depth];
+    name_buffer_len = &data->name_buffer_len[which][data->name_buffer_depth];
 
     //
     // round up the requested size (+ extra padding of some bytes)
@@ -372,12 +395,21 @@ ALIGNED WCHAR *Dll_GetTlsNameBuffer(
 //---------------------------------------------------------------------------
 
 
+#ifdef NAME_BUFFER_DEBUG
+ALIGNED void Dll_PushTlsNameBuffer_(THREAD_DATA *data, char* func)
+#else
 ALIGNED void Dll_PushTlsNameBuffer(THREAD_DATA *data)
+#endif
 {
-    ++data->depth;
-    if (data->depth > NAME_BUFFER_DEPTH - 4)
-        SbieApi_Log(2310, L"%d", data->depth);
-    if (data->depth >= NAME_BUFFER_DEPTH) {
+#ifdef NAME_BUFFER_DEBUG
+    DbgTrace("Dll_PushTlsNameBuffer, %s, %d\r\n", func, data->name_buffer_depth);
+#endif
+
+    ++data->name_buffer_depth;
+    data->name_buffer_count[data->name_buffer_depth] = 0; // initialize
+    if (data->name_buffer_depth > NAME_BUFFER_DEPTH - 4)
+        SbieApi_Log(2310, L"%d", data->name_buffer_depth);
+    if (data->name_buffer_depth >= NAME_BUFFER_DEPTH) {
         ExitProcess(-1);
     }
 }
@@ -388,8 +420,16 @@ ALIGNED void Dll_PushTlsNameBuffer(THREAD_DATA *data)
 //---------------------------------------------------------------------------
 
 
+#ifdef NAME_BUFFER_DEBUG
+_FX void Dll_PopTlsNameBuffer_(THREAD_DATA *data, char* func)
+#else
 _FX void Dll_PopTlsNameBuffer(THREAD_DATA *data)
+#endif
 {
+#ifdef NAME_BUFFER_DEBUG
+    DbgTrace("Dll_PopTlsNameBuffer, %s, %d\r\n", func, data->name_buffer_depth-1);
+#endif
+
     //
     // debug checks:  the name buffer is allocated at least 64 bytes
     // more than needed.  fill these with 0xCC, andd check that later
@@ -430,14 +470,12 @@ _FX void Dll_PopTlsNameBuffer(THREAD_DATA *data)
             __debugbreak();
         }
 
-	// todo: snapshots TMPL_NAME_BUFFER
-
     }
 
 #endif // DEBUG_MEMORY
 
-    --data->depth;
-    if (data->depth < 0) {
-        SbieApi_Log(2310, L"%d", data->depth);
+    --data->name_buffer_depth;
+    if (data->name_buffer_depth < 0) {
+        SbieApi_Log(2310, L"%d", data->name_buffer_depth);
     }
 }

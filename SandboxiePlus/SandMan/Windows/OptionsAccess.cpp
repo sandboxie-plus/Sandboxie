@@ -6,6 +6,7 @@
 #include "../MiscHelpers/Common/Common.h"
 #include "../MiscHelpers/Common/ComboInputDialog.h"
 #include "../MiscHelpers/Common/SettingsWidgets.h"
+#include "../MiscHelpers/Common/CheckableMessageBox.h"
 #include "Helpers/WinAdmin.h"
 
 
@@ -39,10 +40,16 @@ void COptionsWindow::CreateAccess()
 
 void COptionsWindow::OnAccessChanged()
 { 
-	if (ui.chkPrivacy->isChecked() || ui.chkUseSpecificity->isChecked())
-		theGUI->CheckCertificate();
+	if (sender() == ui.chkPrivacy || sender() == ui.chkUseSpecificity) {
+		if (ui.chkPrivacy->isChecked() || (ui.chkUseSpecificity->isEnabled() && ui.chkUseSpecificity->isChecked()))
+			theGUI->CheckCertificate(this);
+	}
 
 	UpdateAccessPolicy();
+
+	if ((sender() == ui.chkPrivacy || sender() == ui.chkRestrictDevices) && !(ui.chkPrivacy->isChecked() || ui.chkRestrictDevices->isChecked())) {
+		ui.chkUseSpecificity->setChecked(m_pBox->GetBool("UseRuleSpecificity", false));
+	}
 
 	m_AccessChanged = true; 
 	OnOptChanged();
@@ -50,20 +57,10 @@ void COptionsWindow::OnAccessChanged()
 
 void COptionsWindow::UpdateAccessPolicy()
 { 
-	if (ui.chkPrivacy->isChecked()) {
-		ui.chkUseSpecificity->setEnabled(false);
+	ui.chkUseSpecificity->setEnabled(!(ui.chkPrivacy->isChecked() || ui.chkRestrictDevices->isChecked()));
+
+	if (ui.chkPrivacy->isChecked() || ui.chkRestrictDevices->isChecked()) {
 		ui.chkUseSpecificity->setChecked(true);
-
-		ui.chkCloseForBox->setEnabled(false);
-		ui.chkCloseForBox->setChecked(false);
-		ui.chkNoOpenForBox->setEnabled(false);
-		ui.chkNoOpenForBox->setChecked(false);
-	}
-	else {
-		ui.chkUseSpecificity->setEnabled(true);
-
-		ui.chkCloseForBox->setEnabled(true);
-		ui.chkNoOpenForBox->setEnabled(true);
 	}
 }
 
@@ -121,8 +118,10 @@ QString COptionsWindow::AccessTypeToName(EAccessEntry Type)
 	case eNormalIpcPath:	return "NormalIpcPath";
 	case eOpenIpcPath:		return "OpenIpcPath";
 	case eClosedIpcPath:	return "ClosedIpcPath";
+	case eReadIpcPath:		return "ReadIpcPath";
 
 	case eOpenWinClass:		return "OpenWinClass";
+	case eNoRenameWinClass:	return "NoRenameWinClass";
 
 	case eOpenCOM:			return "OpenClsid";
 	case eClosedCOM:		return "ClosedClsid";
@@ -210,6 +209,7 @@ void COptionsWindow::ParseAndAddAccessEntry(EAccessEntry EntryType, const QStrin
 	case eReadIpcPath:		Type = eIPC;	Mode = eReadOnly; break;
 
 	case eOpenWinClass:		Type = eWnd;	Mode = eOpen;	break;
+	case eNoRenameWinClass:	Type = eWnd;	Mode = eNoRename;	break;
 
 	case eOpenCOM:			Type = eCOM;	Mode = eOpen;	break;
 	case eClosedCOM:		Type = eCOM;	Mode = eClosed;	break;
@@ -228,8 +228,6 @@ void COptionsWindow::ParseAndAddAccessEntry(EAccessEntry EntryType, const QStrin
 	QStringList Values = Value.split(",");
 	if (Values.count() >= 2) 
 		AddAccessEntry(Type, Mode, Values[0], Values[1], disabled, Template);
-	else if (Values[0].left(2) == "$:") // special cases
-		AddAccessEntry(Type, Mode, Values[0].mid(2), "$", disabled, Template);
 	else // all programs
 		AddAccessEntry(Type, Mode, "", Values[0], disabled, Template);
 }
@@ -241,6 +239,7 @@ QString COptionsWindow::GetAccessModeStr(EAccessMode Mode)
 	case eNormal:		return tr("Normal");
 	case eOpen:			return tr("Open");
 	case eOpen4All:		return tr("Open for All");
+	case eNoRename:		return tr("No Rename");
 	case eClosed:		return tr("Closed");
 	case eClosedRT:		return tr("Closed RT");
 	case eReadOnly:		return tr("Read Only");
@@ -309,7 +308,18 @@ void COptionsWindow::AddAccessEntry(EAccessType	Type, EAccessMode Mode, QString 
 	pItem->setText(2, GetAccessModeStr(Mode));
 	pItem->setData(2, Qt::UserRole, (int)Mode);
 
-	pItem->setText(3, Path);
+	//////////////////////////////////////////////////////////
+	// File and Registry entries auto append a '*' wildcard 
+	// when thay don't contain any.
+	// Prepanding '|' disables this behavioure
+	//
+
+	QString sPath = Path;
+	if (Type == eFile || Type == eKey) { 
+		if (!sPath.isEmpty() && sPath.left(1) != "|" && !sPath.contains("*") && sPath.right(1) != "*")
+			sPath.append("*");
+	}
+	pItem->setText(3, sPath);
 	pItem->setData(3, Qt::UserRole, Path);
 
 	if(Template.isEmpty())
@@ -356,6 +366,7 @@ QString COptionsWindow::MakeAccessStr(EAccessType Type, EAccessMode Mode)
 		switch (Mode)
 		{
 		case eOpen:			return "OpenWinClass";
+		case eNoRename:		return "NoRenameWinClass";
 		}
 		break;
 	case eCOM:
@@ -393,26 +404,29 @@ void COptionsWindow::CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave)
 	if (!pProgram)
 		return;
 
-	QHBoxLayout* pLayout = (QHBoxLayout*)pProgram->layout();
-	QToolButton* pNot = (QToolButton*)pLayout->itemAt(0)->widget();
-	QComboBox* pCombo = (QComboBox*)pLayout->itemAt(1)->widget();
-
-	QComboBox* pMode = (QComboBox*)ui.treeAccess->itemWidget(pItem, 2);
-	QLineEdit* pPath = (QLineEdit*)ui.treeAccess->itemWidget(pItem, 3);
-
-	QString Program = pCombo->currentText();
-	int Index = pCombo->findText(Program);
-	if (Index != -1)
-		Program = pCombo->itemData(Index, Qt::UserRole).toString();
-	if (!Program.isEmpty() && Program.left(1) != "<")
-		m_Programs.insert(Program);
-
 	if (bSave)
 	{
-		if (pItem->data(0, Qt::UserRole).toInt() == eCOM && !pPath->text().isEmpty())
+		QHBoxLayout* pLayout = (QHBoxLayout*)pProgram->layout();
+		QToolButton* pNot = (QToolButton*)pLayout->itemAt(0)->widget();
+		QComboBox* pCombo = (QComboBox*)pLayout->itemAt(1)->widget();
+
+		QComboBox* pMode = (QComboBox*)ui.treeAccess->itemWidget(pItem, 2);
+		QLineEdit* pPath = (QLineEdit*)ui.treeAccess->itemWidget(pItem, 3);
+
+		QString Program = pCombo->currentText();
+		int Index = pCombo->findText(Program);
+		if (Index != -1)
+			Program = pCombo->itemData(Index, Qt::UserRole).toString();
+		if (!Program.isEmpty() && Program.left(1) != "<")
+			m_Programs.insert(Program);
+
+		EAccessMode Mode = (EAccessMode)pMode->currentData().toInt();
+		QString Path = pPath->text();
+
+		if (pItem->data(0, Qt::UserRole).toInt() == eCOM && !Path.isEmpty())
 		{
-			bool isGUID = pPath->text().length() == 38 && pPath->text().left(1) == "{" && pPath->text().right(1) == "}";
-			switch (pMode->currentData().toInt())
+			bool isGUID = Path.length() == 38 && Path.left(1) == "{" && Path.right(1) == "}";
+			switch (Mode)
 			{
 			case eOpen:
 			case eClosed:
@@ -430,11 +444,33 @@ void COptionsWindow::CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave)
 			}
 		}
 
+		if (pItem->data(0, Qt::UserRole).toInt() == eIPC && Mode == eOpen 
+		  && ((Path == "*" && pItem->data(3, Qt::UserRole).toString() != "*") 
+		   || (Path == "\\*" && pItem->data(3, Qt::UserRole).toString() != "\\*"))
+		  && !m_BoxTemplates.contains("BoxedCOM"))  
+		{
+ 			if (theConf->GetInt("Options/WarnOpenCOM", -1) == -1) {
+				bool State = false;
+				if (CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Opening all IPC access also opens COM access, do you still want to restrict COM to the sandbox?")
+				 , tr("Don't ask in future"), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) == QDialogButtonBox::Yes)
+					SetTemplate("BoxedCOM", true); // Normal overrides Open even without rule specificity :D
+				if (State)
+					theConf->SetValue("Options/WarnOpenCOM", 1);
+			}
+		}
+
+		if (pItem->data(0, Qt::UserRole).toInt() == eWnd && Mode == eOpen && Path == "#" && !Program.isEmpty())
+		{
+			QMessageBox::warning(this, "Sandboxie-Plus", tr("'OpenWinClass=program.exe,#' is not supported, use 'NoRenameWinClass=program.exe,*' instead"));
+			Mode = eNoRename;
+			Path = "*";
+		}
+
 		pItem->setText(1, (pNot->isChecked() ? "NOT " : "") + pCombo->currentText());
 		pItem->setData(1, Qt::UserRole, (pNot->isChecked() ? "!" : "") + Program);
-		pItem->setText(2, GetAccessModeStr((EAccessMode)pMode->currentData().toInt()));
+		pItem->setText(2, GetAccessModeStr(Mode));
 		pItem->setData(2, Qt::UserRole, pMode->currentData());
-		pItem->setText(3, pPath->text());
+		pItem->setText(3, Path);
 		pItem->setData(3, Qt::UserRole, pPath->text());
 
 		m_AccessChanged = true;
@@ -452,8 +488,8 @@ QList<COptionsWindow::EAccessMode> COptionsWindow::GetAccessModes(EAccessType Ty
 	{
 	case eFile:			return QList<EAccessMode>() << eNormal << eOpen << eOpen4All << eClosed << eReadOnly << eBoxOnly;
 	case eKey:			return QList<EAccessMode>() << eNormal << eOpen << eOpen4All << eClosed << eReadOnly << eBoxOnly;
-	case eIPC:			return QList<EAccessMode>() << eNormal << eOpen << eClosed;
-	case eWnd:			return QList<EAccessMode>() << eOpen;
+	case eIPC:			return QList<EAccessMode>() << eNormal << eOpen << eClosed << eReadOnly;
+	case eWnd:			return QList<EAccessMode>() << eOpen << eNoRename;
 	case eCOM:			return QList<EAccessMode>() << eOpen << eClosed << eClosedRT;
 	}
 	return QList<EAccessMode>();
@@ -558,7 +594,9 @@ void COptionsWindow::SaveAccessList()
 	QStringList Keys = QStringList() 
 		<< "NormalFilePath" << "OpenFilePath" << "OpenPipePath" << "ClosedFilePath" << "ReadFilePath" << "WriteFilePath"
 		<< "NormalKeyPath" << "OpenKeyPath" << "OpenConfPath" << "ClosedKeyPath" << "ReadKeyPath" << "WriteKeyPath"
-		<< "NormalIpcPath"<< "OpenIpcPath" << "ClosedIpcPath" << "ReadIpcPath" << "OpenWinClass" << "OpenClsid" << "ClosedClsid" << "ClosedRT";
+		<< "NormalIpcPath"<< "OpenIpcPath" << "ClosedIpcPath" << "ReadIpcPath" 
+		<< "OpenWinClass" << "NoRenameWinClass"
+		<< "OpenClsid" << "ClosedClsid" << "ClosedRT";
 
 	QMap<QString, QList<QString>> AccessMap;
 	for (int i = 0; i < ui.treeAccess->topLevelItemCount(); i++)
@@ -570,9 +608,7 @@ void COptionsWindow::SaveAccessList()
 		int Mode = pItem->data(2, Qt::UserRole).toInt();
 		QString Program = pItem->data(1, Qt::UserRole).toString();
 		QString Value = pItem->data(3, Qt::UserRole).toString();
-		if (Value == "$") // special cases
-			Value = "$:" + Program;
-		else if (!Program.isEmpty())
+		if (!Program.isEmpty())
 			Value.prepend(Program + ",");
 
 		QString AccessStr = MakeAccessStr((EAccessType)Type, (EAccessMode)Mode);

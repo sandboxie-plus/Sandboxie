@@ -201,5 +201,8 @@
     <QtMoc Include="Common\CheckList.h">
       <Filter>Common</Filter>
     </QtMoc>
+    <QtMoc Include="Common\NeonEffect.h">
+      <Filter>Common</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

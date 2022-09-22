@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
+  <assemblyIdentity version="1.0.0.0" name="SandboxieShell.app"/>
+  <msix xmlns="urn:schemas-microsoft-com:msix.v1"
+          publisher="E=cert@tonalio.com, CN=Tonalio GmbH, O=Tonalio GmbH, STREET=Badner Strasse 8, L=Bad Voeslau, S=Niederoesterreich, C=AT, OID.1.3.6.1.4.1.311.60.2.1.1=Wiener Neustadt, OID.1.3.6.1.4.1.311.60.2.1.2=Niederoesterreich, OID.1.3.6.1.4.1.311.60.2.1.3=AT, SERIALNUMBER=475036h, OID.2.5.4.15=Private Organization"
+          packageName="SandboxieShell"
+          applicationId="SandboxieShell"
+        />
+</assembly>

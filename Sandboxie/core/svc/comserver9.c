@@ -347,7 +347,7 @@ _FX void ComServer_RestartProgram(const WCHAR *arg)
         *ptr = L'\0';
 
 #ifdef COMSERVER_DEBUG
-    OutputDebugString(L"ComServer Restart Commmand Line:\n");
+    OutputDebugString(L"ComServer Restart Command Line:\n");
     OutputDebugString(cmd);
 #endif
 

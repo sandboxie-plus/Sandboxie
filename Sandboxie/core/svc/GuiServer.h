@@ -49,6 +49,8 @@ protected:
 
     GuiServer();
 
+	~GuiServer();
+
     static void ReportError2336(
                         ULONG session_id, ULONG errlvl, ULONG status);
 

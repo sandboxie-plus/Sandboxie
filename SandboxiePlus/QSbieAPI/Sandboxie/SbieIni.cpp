@@ -59,35 +59,40 @@ SB_STATUS CSbieIni::SetBool(const QString& Setting, bool Value)
 	return SetText(Setting, Value ? "y" : "n");
 }
 
-QString CSbieIni::GetText(const QString& Setting, const QString& Default, bool bWithGlobal) const
+QString CSbieIni::GetText(const QString& Setting, const QString& Default, bool bWithGlobal, bool bNoExpand, bool withTemplates) const
 {
-	int flags = (bWithGlobal ? 0 : CONF_GET_NO_GLOBAL) | CONF_GET_NO_EXPAND;
+	int flags = (bWithGlobal ? 0 : CONF_GET_NO_GLOBAL);
+	if (!withTemplates)
+		flags |= CONF_GET_NO_TEMPLS;
+	if (bNoExpand)
+		flags |= CONF_GET_NO_EXPAND;
+
 	QString Value = m_pAPI->SbieIniGet(m_Name, Setting, flags);
 	if (Value.isNull()) Value = Default;
 	return Value;
 }
 
-int CSbieIni::GetNum(const QString& Setting, int Default, bool bWithGlobal) const
+int CSbieIni::GetNum(const QString& Setting, int Default, bool bWithGlobal, bool withTemplates) const
 {
-	QString StrValue = GetText(Setting, QString(), bWithGlobal);
+	QString StrValue = GetText(Setting, QString(), bWithGlobal, true, withTemplates);
 	bool ok;
 	int Value = StrValue.toInt(&ok);
 	if (!ok) return Default;
 	return Value;
 }
 
-__int64 CSbieIni::GetNum64(const QString& Setting, __int64 Default, bool bWithGlobal) const
+__int64 CSbieIni::GetNum64(const QString& Setting, __int64 Default, bool bWithGlobal, bool withTemplates) const
 {
-	QString StrValue = GetText(Setting, QString(), bWithGlobal);
+	QString StrValue = GetText(Setting, QString(), bWithGlobal, true, withTemplates);
 	bool ok;
 	__int64 Value = StrValue.toULongLong(&ok);
 	if (!ok) return Default;
 	return Value;
 }
 
-bool CSbieIni::GetBool(const QString& Setting, bool Default, bool bWithGlobal) const
+bool CSbieIni::GetBool(const QString& Setting, bool Default, bool bWithGlobal, bool withTemplates) const
 {
-	QString StrValue = GetText(Setting, QString(), bWithGlobal);
+	QString StrValue = GetText(Setting, QString(), bWithGlobal, true, withTemplates);
 	if (StrValue.compare("y", Qt::CaseInsensitive) == 0)
 		return true;
 	if (StrValue.compare("n", Qt::CaseInsensitive) == 0)
@@ -136,6 +141,7 @@ SB_STATUS CSbieIni::UpdateTextList(const QString &Setting, const QStringList& Li
 QStringList CSbieIni::GetTemplates() const
 {
 	QStringList Templates;
+	Templates.append("GlobalSettings");
 
 	for (int tmpl_index = 0; ; tmpl_index++)
 	{
@@ -154,7 +160,7 @@ QStringList CSbieIni::GetTextListTmpl(const QString &Setting, const QString& Tem
 
 	for (int index = 0; ; index++)
 	{
-		QString Value = m_pAPI->SbieIniGet("Template_" + Template, Setting, index | CONF_GET_NO_GLOBAL | CONF_GET_NO_EXPAND);
+		QString Value = m_pAPI->SbieIniGet((Template != "GlobalSettings") ? "Template_" + Template : Template, Setting, index | CONF_GET_NO_GLOBAL | CONF_GET_NO_EXPAND);
 		if (Value.isNull())
 			break;
 		TextList.append(Value);

@@ -5,23 +5,23 @@
 #----------------------------------------------------------------------------
 
 1101;evt;inf;01
-SBIE1101 Sandboxie driver (SbieDrv) version %2 inläst
+SBIE1101 Sandboxies drivrutin (SbieDrv) version %2 inläst
 .
 
 1102;evt;inf;01
-SBIE1102 Sandboxie driver (SbieDrv) stänger
+SBIE1102 Sandboxies drivrutin (SbieDrv) laddar ur
 .
 
 1103;evt;err;01
-SBIE1103 Sandboxie driver (SbieDrv) version %2 kunde inte starta
+SBIE1103 Sandboxies drivrutin (SbieDrv) version %2 kunde inte starta
 .
 
 1104;evt;err;01
-SBIE1104 Det finns inte tillräckligt med systemresurser för att fullfölja inläsningen
+SBIE1104 Otillräckligt med systemresurser för att fullfölja inläsningen
 .
 
 1105;evt;err;01
-SBIE1105 Okänd operativsystemsversion:  %2
+SBIE1105 Okänd operativsystemversion:  %2
 .
 
 1106;evt;err;01
@@ -29,47 +29,47 @@ SBIE1106 fel %2, detaljer %3
 .
 
 # 1107;evt;err;01
-# SBIE1107 Kan inte få åtkomst till LokalSystem-kontot %2
+# SBIE1107 Kan inte få åtkomst till lokala systemkontot %2
 # .
 
 1108;evt;err;01
-SBIE1108 Procedur %2 kunde inte analyseras
+SBIE1108 Proceduren %2 kunde inte analyseras
 .
 
 1109;evt;err;01
-SBIE1109 Ogiltig licens-information:  %2
+SBIE1109 Ogiltig licensinformation:  %2
 .
 
 1110;evt;err;01
-SBIE1110 Kan inte hejda typ %3, error %2
+SBIE1110 Kan inte avbryta typ %3, fel %2
 .
 
 1111;evt;err;01
-SBIE1111 System DLL %3 kunde inte läsas in %2
+SBIE1111 System DLL %3 kunde inte laddas %2
 .
 
 1112;evt;err;01
-SBIE1112 Procedur %2 kunde inte hittas
+SBIE1112 Proceduren %2 kunde inte lokaliseras
 .
 
 1113;evt;err;01
-SBIE1113 Kan inte hitta Nt system service, orsak %2
+SBIE1113 Kan inte hitta Nt systemtjänst, orsak %2
 .
 
 1114;evt;err;01
-SBIE1114 Kan inte hitta Zw system service, orsak %2
+SBIE1114 Kan inte hitta Zw systemtjänst, orsak %2
 .
 
 1116;evt;err;01
-SBIE1116 Drivrutinen kunde inte registrera processen meddelande rutin %2
+SBIE1116 Drivrutinen kunde inte registrera processmeddelanderutinen %2
 .
 
 1119;evt;err;01
-SBIE1119 Kan inte skapa API enhet %2
+SBIE1119 Kan inte skapa API-enhet %2
 .
 
 1120;evt;err;01
-SBIE1120 oöverensstämmelse i tjänst %2
+SBIE1120 Oöverensstämmelse i tjänst %2
 .
 
 1121;evt;err;01
@@ -77,7 +77,7 @@ SBIE1121 Hook misslyckades för tjänst %2
 .
 
 1122;evt;err;01
-SBIE1122 Error:  %2
+SBIE1122 Fel:  %2
 .
 
 #----------------------------------------------------------------------------
@@ -91,11 +91,11 @@ SBIE1151 Kan inte utföra instruktion %2
 .
 
 1152;evt;pop;err;01
-SBIE1152 Trampolin tilldelning misslyckades %2
+SBIE1152 Trampolintilldelning misslyckades %2
 .
 
 1153;evt;pop;err;01
-SBIE1153 Sandboxie-inläsning misslyckades.  Stäng alla program och installera sen om Sandboxie eller starta om din dator.
+SBIE1153 Sandboxie-inläsning misslyckades. Stäng alla program och starta om din dator, eventuellt installera om Sandboxie.
 .
 
 #----------------------------------------------------------------------------
@@ -105,7 +105,7 @@ SBIE1153 Sandboxie-inläsning misslyckades.  Stäng alla program och installera 
 #----------------------------------------------------------------------------
 
 1201;pop;err;01
-SBIE1201 Inte tillräckligt med minne
+SBIE1201 Otillräckligt med minne
 .
 
 1202;pop;err;01
@@ -113,11 +113,11 @@ SBIE1202 Kan inte uppdatera licensinformation:  %2
 .
 
 1203;pop;err;01
-SBIE1203 Kan inte bygga väg-lista (fel i %2)
+SBIE1203 Kan inte bygga sökvägslista (fel i %2)
 .
 
 1204;pop;err;01
-SBIE1204 Skapning av sandlåda misslyckades för %3 %2
+SBIE1204 Sandlådeskapande misslyckades för %3 %2
 .
 
 1211;pop;err;01
@@ -125,24 +125,24 @@ SBIE1211 Kan inte starta sandlådning för processen %2
 .
 
 1212;pop;err;01
-SBIE1212 Kan inte skapa bibliotek '%3' %2
+SBIE1212 Kan inte skapa en katalog '%3' %2
 .
 
 1213;pop;err;01
-SBIE1213 Kan inte skapa objekt-bibliotek '%3' %2
+SBIE1213 Kan inte skapa en objektkatalog '%3' %2
 .
 
-1214;pop;err;01
-SBIE1214 Kan inte injicera SbieDll %2
-.
+# 1214;pop;err;01
+# SBIE1214 Kan inte injicera SbieDll %2
+#.
 
-1215;pop;err;01
-SBIE1215 Kan inte lösa väg till processavbilden %2
-.
+#1215;pop;err;01
+#SBIE1215 Kan inte lösa sökvägen till processavbilden %2
+# .
 
-1216;pop;err;01
-SBIE1216 Kunde inte hämta säkerhets-ID %2
-.
+# 1216;pop;err;01
+# SBIE1216 Kunde inte hämta säkerhets-ID %2
+# .
 
 # 1217;pop;err;01
 # SBIE1217 Kunde inte hitta föräldraprocess
@@ -152,24 +152,28 @@ SBIE1216 Kunde inte hämta säkerhets-ID %2
 # SBIE1221 Kan inte skapa jobb:  %2
 # .
 
-1222;pop;err;01
-SBIE1222 Kan inte begränsa tecken:  %2
+1222;pop;err;02
+SBIE1222 Fel med säkerhetstecken:  %2
 .
 
-1223;pop;err;01
-SBIE1223 Kan inte byta ut tecken:  %2
-.
+# 1223;pop;err;01
+# SBIE1223 Kan inte byta ut tecken:  %2
+# .
 
-1224;pop;err;01
-SBIE1224 Kan inte hämta tecken:  %2
+# 1224;pop;err;01
+# SBIE1224 Kan inte hämta tecken:  %2
+# .
+
+1231;pop;err;01
+SBIE1231 Start lyckades inte för process %3 %2
 .
 
 1241;pop;err;01
-SBIE1241 Kan inte lägga till registreringsdatabasen:  %2
+SBIE1241 Kan inte montera registerdatabasen:  %2
 .
 
 1242;pop;err;01
-SBIE1242 Överser buffer overflow
+SBIE1242 Övervakar buffer overflow
 .
 
 #----------------------------------------------------------------------------
@@ -182,28 +186,28 @@ SBIE1242 Överser buffer overflow
 SBIE1301 Programmet '%2' blev öppnat utanför sandlådan
 .
 
-1302;pop;inf;01
-SBIE1302 Sandlåda '%2' är inte definierad eller aktiverad
-.
+# 1302;pop;inf;01
+# SBIE1302 Sandlådan '%2' är inte definierad eller aktiverad
+# .
 
 1303;pop;inf;01
-SBIE1303 Bara en sandbox kan vara aktiv på en gång
+SBIE1303 Bara en sandbox i taget kan vara aktiv
 .
 
-1304;pop;inf;01
-SBIE1304 Blockerade simulerat tangentbord eller datormusinput från processen '%2'
-.
+# 1304;pop;inf;01
+# SBIE1304 Blockerade simulerat tangentbord eller musinflöde från processen '%2'
+# .
 
 1306;pop;inf;01
-SBIE1306 Sandboxie-drivrutin (SbieDrv) kan inte stoppas nu
+SBIE1306 Sandboxies drivrutin (SbieDrv) kan inte stoppas nu
 .
 
 1307;pop;inf;02
-SBIE1307 Programmet kan inte använda internet pga. begränsningar - %2
+SBIE1307 Programmet kan inte använda internet p.g.a begränsningar - %2
 .
 
 1308;pop;inf;02
-SBIE1308 Programmet kan inte starta pga. begränsningar - %2
+SBIE1308 Programmet kan inte starta p.g.a begränsningar - %2
 .
 
 1309;pop;inf;01
@@ -214,12 +218,40 @@ SBIE1309 Nekade försök att ändra kontots lösenord
 SBIE1310 Utvidgade funktioner är blockerade tills licensen återaktiverats
 .
 
-1311;pop;inf;01
-SBIE1311 Blockerade begäran att byta skrivbordsbakgrund av process '%2'
-.
+# 1311;pop;inf;01
+# SBIE1311 Blockerade begäran att byta skrivbordsbakgrund av process '%2'
+# .
 
 1312;pop;inf;01
-SBIE1312 Blockerade begäran att starta ett 16-bit DOS program i sandlådan
+SBIE1312 Blockerade begäran att starta ett 16-bit DOS-program i sandlådan
+.
+
+1313;pop;inf;01
+SBIE1313 Blockerade direkt diskåtkomst av process '%2'
+.
+
+1314;pop;inf;01
+SBIE1314 Blockerade förfrågan att ändra nätverk / brandväggsinställningar av process '%2'
+.
+
+# 1315;pop;inf;01
+# SBIE1315 Möjligen p.g.a programvarukonflikt:  %2
+# .
+
+1316;pop;inf;01
+SBIE1316 Blockerade förfrågan att generera enhetshändelse i sandlådan
+.
+
+1319;pop;inf;01
+SBIE1319 Blockerade Print Spooler till fil, %2 %3
+.
+
+1320;pop;wrn;01
+SBIE1320 För att tillåta Print Spooler att skriva utanför sandlådan för denna process, vänligen dubbelklicka på denna meddelandelinje
+.
+
+1399;pop;inf;01
+%0
 .
 
 #----------------------------------------------------------------------------
@@ -233,28 +265,28 @@ SBIE1401 Konfigurationsfilen hittades ej, använder standardinställningar
 .
 
 1402;evt;pop;wrn;01
-SBIE1402 Konfigurationsfil fel på rad %3:  %2
+SBIE1402 Konfigurationsfilfel på rad %3:  %2
 .
 
 1403;evt;pop;wrn;01
-SBIE1403 Konfigurationsfil fel på rad %2:  raden är för lång
+SBIE1403 Konfigurationsfilfel på rad %2:  raden är för lång
 .
 
 1404;evt;pop;wrn;01
-SBIE1404 Konfigurationsfil fel på rad %2:  för många rader
+SBIE1404 Konfigurationsfilfel på rad %2:  för många rader
 .
 
 1405;evt;pop;wrn;01
-SBIE1405 Konfigurationsfil fel på rad %2:  syntaxfel
+SBIE1405 Konfigurationsfilfel på rad %2:  syntaxfel
 .
 
 1406;evt;pop;err;01
-SBIE1406 Saknas eller ogiltig utvidgning för %3:  %2
+SBIE1406 Saknad eller ogiltig utvidgning för %3:  %2
 .
 
-1407;evt;pop;err;01
-SBIE1407 Ogiltigt värde för inställning %2, använder standardvärde
-.
+# 1407;evt;pop;err;01
+# SBIE1407 Ogiltigt värde för inställning %2, använder standardvärde
+# .
 
 1408;pop;err;01
 SBIE1408 Okänt användarnamn för SID:  %2
@@ -269,7 +301,7 @@ SBIE1410 Detta meddelande är ett tecken på ett fel i filen Templates.ini
 .
 
 1411;evt;pop;wrn;01
-SBIE1411 Sandbox %2 anger en okänd mall %3
+SBIE1411 Sandlådan %2 anger en okänd mall %3
 .
 
 1412;evt;pop;err;01
@@ -283,7 +315,7 @@ SBIE1412 I texten: %2
 #----------------------------------------------------------------------------
 
 2101;pop;inf;01
-SBIE2101 %2
+SBIE2101  Objektnamn hittades inte: %3, fel %2
 .
 
 2102;pop;inf;01
@@ -291,7 +323,7 @@ SBIE2102 Filen är för stor för att kopieras in i sandlådan - %2
 .
 
 2103;pop;inf;01
-SBIE2103 Nekade försök att läsa in systemdrivrutinen '%2'
+SBIE2103 Nekade försök att lasta systemdrivrutinen '%2'
 .
 
 2104;pop;inf;02
@@ -303,24 +335,32 @@ SBIE2104 Nekade försök att stänga av datorn - %2
 # .
 
 # 2106;pop;inf;01
-# SBIE2106 Var god slå på "Kör som UAC-administratör" i Sandboxie-kontroll, filmeny
+# SBIE2106 Var god aktivera Kör som UAC-administratör, i Sandboxie Kontrolls filmeny.
 # .
 
 # 2107;pop;inf;01
-# SBIE2107 Förbereder WinSxS assembly '%2'
+# SBIE2107 Förbereder WinSxS-montering '%2'
 # .
 
 2108;pop;inf;01
-SBIE2108 Förfalskar framgångsrik montering av programmet '%2'
+SBIE2108 Förfalskar framgångsrikt slutförande för programmet '%2'
 .
 
 # 2109;pop;inf;01
-# SBIE2109 Tryck OK när programmet eller installationen har slutförts.
+# SBIE2109 Klicka på Ok, när programmet eller installationen har slutförts.
 # .
 
 # 2110;pop;inf;01
-# SBIE2110 Förbereder WinSxS-krav för '%2'
+# SBIE2110 Förbereder WinSxS-beroenden för '%2'
 # .
+
+2111;pop;inf;01
+SBIE2111 Processen är inte åtkomlig: %3, anrop %2
+.
+
+2112;pop;inf;01
+SBIE2112 Objektet är inte åtkomligt: %3, anrop %2
+.
 
 # %2 = Mozilla Firefox
 2191;pop;inf;01
@@ -332,7 +372,19 @@ SBIE2192 För att uppdatera programmet, kör det utanför Sandboxie.
 .
 
 2193;pop;inf;01
-SBIE2193 Se till att radera sandlådan efter du uppdaterat programmet.
+SBIE2193 Se till att radera sandlådan efter att du uppdaterat programmet.
+.
+
+2194;pop;inf;01
+SBIE2194 MSI-installerare kräver %2 alternativ att anges i ini, vilket hursom försvagar isoleringen.
+.
+
+2195;pop;inf;01
+SBIE2195 För att köra Explorer.exe sandlådad, får åtkomsten till COM-infrastrukturen inte vara öppen.
+.
+
+2198;pop;inf;01
+%0
 .
 
 2199;pop;inf;01
@@ -350,7 +402,7 @@ SBIE2201 %2
 .
 
 # 2202;pop;wrn;01
-# SBIE2202 Försvunnen lista över installerade hårdvaruenheter
+# SBIE2202 Saknad lista över installerade hårdvaruenheter
 # .
 
 2203;pop;wrn;01
@@ -358,7 +410,7 @@ SBIE2203 Kunde inte kommunicera med Sandboxie-tjänsten:  %2
 .
 
 2204;pop;wrn;01
-SBIE2204 Kan inte starta tjänsten för sandlådning %2
+SBIE2204 Kan inte starta sandlådad tjänst %2
 .
 
 2205;pop;wrn;01
@@ -366,7 +418,7 @@ SBIE2205 Tjänsten genomfördes ej:  %2
 .
 
 2206;pop;wrn;01
-SBIE2206 Bearbetelsen av AutoExec-inställningar misslyckades %2
+SBIE2206 Misslyckades processa AutoExec-inställning %2
 .
 
 2207;pop;wrn;01
@@ -374,7 +426,7 @@ SBIE2207 Ogiltigt värde för inställning '%2', använder standardvärde
 .
 
 2208;pop;wrn;01
-SBIE2208 Kan inte ta bort registreringsdatabasens hive:  %2
+SBIE2208 Kan inte ta bort registerdatabasen:  %2
 .
 
 2209;pop;wrn;01
@@ -382,7 +434,7 @@ SBIE2209 Kan inte översätta SID till ett användarnamn:  %2
 .
 
 2210;pop;wrn;01
-SBIE2210 Kan inte starta Windows Explorer för:  %2
+SBIE2210 Kan inte starta utforskaren för:  %2
 .
 
 2211;pop;wrn;01
@@ -390,23 +442,23 @@ SBIE2211 Sandlådad tjänst kunde inte starta:  %2
 .
 
 2212;pop;wrn;01
-SBIE2212 Email-läsare '%2' är inte inställd på att köras sandlådad
+SBIE2212 E-postklienten '%2' är inte inställd på att köras sandlådad
 .
 
 2213;pop;wrn;01
-SBIE2213 Windows Credentials kan inte lagras i sandlådan
+SBIE2213 Windows autentiseringshanterare kan inte lagras i sandlådan
 .
 
 2214;pop;wrn;01
-SBIE2214 Begäran att starta tjänsten '%2' nekades på grund av minskade rättigheter
+SBIE2214 Begäran att starta tjänsten '%2' nekades p.g.a minskade rättigheter
 .
 
 # 2215;pop;wrn;01
-# SBIE2215 Misslyckades att förbereda WinSxS beroenden:  %2
+# SBIE2215 Misslyckades att förbereda WinSxS-beroenden:  %2
 # .
 
 # 2216;pop;wrn;01
-# SBIE2216 Fel att förbereda WinSxS assembly:  %2
+# SBIE2216 Fel vid förberedande av WinSxS-montering:  %2
 # .
 
 2217;pop;wrn;02
@@ -425,6 +477,22 @@ SBIE2219 Begäran gavs av programmet %2
 SBIE2220 För att tillåta användandet av administrativa privilegier, dubbelklicka på denna meddelandelinje.
 .
 
+2221;pop;wrn;01
+SBIE2221 För att lägga till programmet till Internetåtkomstbegränsningar, dubbelklicka på denna meddelandelinje
+.
+
+2222;pop;wrn;01
+SBIE2222 För att lägga till programmet i Start / Köråtkomstbegränsningar, dubbelklicka på denna meddelandelinje
+.
+
+2223;pop;wrn;01
+SBIE2223 För att utöka filstorleksgränsen för filkopierande, dubbelklicka på denna meddelandelinje
+.
+
+2224;pop;wrn;01
+SBIE2224 Sandlådat program har kraschat: %2
+.
+
 #----------------------------------------------------------------------------
 # SbieDrv
 #
@@ -433,6 +501,10 @@ SBIE2220 För att tillåta användandet av administrativa privilegier, dubbelkli
 
 2301;pop;err;01
 SBIE2301 %2
+.
+
+2302;pop;err;01
+SBIE2302 Processavbildkonfigurationskonflikt: %2
 .
 
 2303;pop;err;01
@@ -448,15 +520,15 @@ SBIE2305 Slut på minne
 .
 
 2306;pop;err;01
-SBIE2306 Kunde inte hitta användarmappen:  %2
+SBIE2306 Kunde inte hitta användarkatalogen:  %2
 .
 
 2307;pop;err;01
-SBIE2307 Kunde inte hitta hårddisk %2
+SBIE2307 Kunde inte kartlägga disken %2
 .
 
 2308;pop;err;01
-SBIE2308 Kunde inte skapa objektmappen:  %2
+SBIE2308 Kunde inte skapa objektkatalogen:  %2
 .
 
 2309;pop;err;01
@@ -464,15 +536,15 @@ SBIE2309 Kunde inte stänga av COM+/DCOM:  %2
 .
 
 2310;pop;err;01
-SBIE2310 Namn buffer närmar sig överflöde (%2)
+SBIE2310 Namnbuffer närmar sig överflöde (%2)
 .
 
 2311;pop;err;01
-SBIE2311 Kunde inte stänga av papperskorgen (BitBucket):  %2
+SBIE2311 Kunde inte inaktivera papperskorgen (BitBucket):  %2
 .
 
 2312;pop;err;01
-SBIE2312 Kunde inte aktivera BrowseNewProcess inställningen:  %2
+SBIE2312 Kunde inte aktivera BrowseNewProcess-inställningen:  %2
 .
 
 2313;pop;err;01
@@ -483,32 +555,32 @@ SBIE2313 Kunde inte starta %2
 SBIE2314 Avbryter process %2
 .
 
-2315;pop;err;01
-SBIE2315 Kunde inte reparera körbara avbilden
-.
+# 2315;pop;err;01
+# SBIE2315 Kunde inte reparera körbara avbilden
+# .
 
 2316;pop;err;01
 SBIE2316 Minne korrumperat
 .
 
 2317;pop;err;01
-SBIE2317Kan inte läsa in fillista väglista '%2'
+SBIE2317 Kan inte läsa in sökvägslista '%2'
 .
 
 2318;pop;err;01
-SBIE2318 DLL inläsning misslyckades för '%2'
+SBIE2318 DLL-inläsning misslyckades för '%2'
 .
 
 # 2319;pop;err;01
-# SBIE2319 Aktiveringscontext misslyckades för sandlådad process %2
+# SBIE2319 Aktiveringskontext misslyckades för sandlådad process %2
 # .
 
 # 2320;pop;err;01
-# SBIE2320 Kunde inte stänga av Windows Explorer som skrivbordsprocess:  %2
+# SBIE2320 Kunde inte stänga av utforskaren som skrivbordsprocess:  %2
 # .
 
 2321;pop;err;01
-SBIE2321 Kan inte styra enhetsöversikt:  %2
+SBIE2321 Kan inte hantera enhetskarta:  %2
 .
 
 2322;pop;err;01
@@ -516,7 +588,7 @@ SBIE2322 Kan inte skriva över Sandboxie.ini:  %2
 .
 
 2323;pop;err;01
-SBIE2323 Kryptografi fel:  %2
+SBIE2323 Kryptografifel:  %2
 .
 
 2326;pop;err;01
@@ -524,27 +596,39 @@ SBIE2326 Kan inte förbereda register:  %2
 .
 
 2327;pop;err;01
-SBIE2327 Fel i COM server:  %2
+SBIE2327 Fel i COM-server:  %2
 .
 
 2331;pop;err;01
-SBIE2331 Service start misslyckades:  %2
+SBIE2331 Tjänststart misslyckades:  %2
 .
 
 2332;pop;err;01
 SBIE2332 Kan inte öppna filen SbiePst.dat
 .
 
-2333;pop;err;01
-SBIE2333 Inkompatibelt program DLL hittat:  %2
+# 2333;pop;err;01
+# SBIE2333 DLL inkompatibelt med program hittat:  %2
+# .
+
+#2334;pop;err;01
+#SBIE2334 Kan inte ladda DLL-fil:  %2
+#.
+
+2335;pop;err;01
+SBIE2335 Inläsning lyckades inte för process %2
 .
 
-2334;pop;err;01
-SBIE2334 Kan inte ladda DLL fil:  %2
+2336;pop;err;01
+SBIE2336 Fel i GUI-servern:  %2
+.
+
+2337;pop;err;01
+SBIE2337 Lyckades inte starta programmet:  %2
 .
 
 # 2398;txt;01
-# SBIE2398 Tjänst stötte på undantag ... på addressen ...
+# SBIE2398 Tjänst stötte på undantag ... på adressen ...
 # .
 
 # 2399;txt;01
@@ -560,67 +644,71 @@ SBIE9101 Otillräckliga systemresurser
 .
 
 9153;evt;err;01
-SBIE9153 Kan inte starta drivrutin (SbieDrv)
+SBIE9153 Kan inte starta drivrutinen (SbieDrv)
 .
 
 9154;evt;err;01
-SBIE9154 Drivrutin (SbieDrv) och tjänsten (SbieSvc) har olika version nummer
+SBIE9154 Drivrutinen (SbieDrv) och tjänsten (SbieSvc) har olika versionsnummer
 .
 
 9156;evt;err;01
-SBIE9156 Drivrutin start ej slutförd.
+SBIE9156 Drivrutinstart ej slutförd.
 .
 
-9201;evt;err;01
-SBIE9201 Teckenfel
+9234;evt;err;01
+SBIE9234 Tjänststartfel %2
 .
 
-9202;evt;err;01
-SBIE9202 Teckenfel
-.
+# 9201;evt;err;01
+# SBIE9201 Teckenfel
+# .
 
-9203;evt;err;01
-SBIE9203 Teckenfel
-.
+# 9202;evt;err;01
+# SBIE9202 Teckenfel
+# .
 
-9204;evt;err;01
-SBIE9204 Säkerhetdescriptor fel
-.
+# 9203;evt;err;01
+# SBIE9203 Teckenfel
+# .
 
-9205;evt;err;01
-SBIE9205 Säkerhetdescriptor fel
-.
+# 9204;evt;err;01
+# SBIE9204 Säkerhetdescriptorfel
+# .
 
-9206;evt;err;01
-SBIE9206 Säkerhetdescriptor fel
-.
+# 9205;evt;err;01
+# SBIE9205 Säkerhetdescriptorfel
+# .
 
-9207;evt;err;01
-SBIE9207 Säkerhetdescriptor fel
-.
+# 9206;evt;err;01
+# SBIE9206 Säkerhetdescriptorfel
+# .
 
-9208;evt;err;01
-SBIE9208 Kan inte slå på SeRestorePrivilege
-.
+# 9207;evt;err;01
+# SBIE9207 Säkerhetdescriptorfel
+# .
 
-9251;evt;err;01
-SBIE9251 Port händelse skapelse misslyckades
-.
+# 9208;evt;err;01
+# SBIE9208 Kan inte aktivera SeRestorePrivilege
+# .
 
-9252;evt;err;01
-SBIE9252 Port skapelse misslyckades
-.
+# 9251;evt;err;01
+# SBIE9251 Porthändelseskapande misslyckades
+# .
 
-9253;evt;err;01
-SBIE9253 Port tråd skapelse misslyckades
-.
+# 9252;evt;err;01
+# SBIE9252 Portskapande misslyckades
+# .
+
+# 9253;evt;err;01
+# SBIE9253 Porttrådskapande misslyckades
+# .
 
 # 9302;evt;err;01
-# SBIE9302 Sektion skapelse misslyckades (enhet setup classes)
+# SBIE9302 Sektionskapande misslyckades (enhet setup classes)
 # .
 
 # 9304;evt;err;01
-# SBIE9304 Sektion skapelse misslyckades (enhet id lista)
+# SBIE9304 Sektionskapande misslyckades (enhet id lista)
 # .
 
 # 9305;evt;err;01
@@ -632,7 +720,7 @@ SBIE9253 Port tråd skapelse misslyckades
 #----------------------------------------------------------------------------
 
 3001;txt;01
-&OK
+&Ok
 .
 
 3002;txt;01
@@ -647,12 +735,16 @@ SBIE9253 Port tråd skapelse misslyckades
 &Stäng
 .
 
+3005;txt;01
+Klipp &ut
+.
+
 3051;txt;01
-Raderingsskyddet är påslaget i Sandlådan
+Raderingsskyddet är aktiverat för sandlådan
 .
 
 3052;txt;01
-Kör Sandlådad
+Kör sandlådad
 .
 
 #----------------------------------------------------------------------------
@@ -660,15 +752,15 @@ Kör Sandlådad
 #----------------------------------------------------------------------------
 
 3101;txt;01
-Sandboxie Startaren
+Sandboxie starta
 .
 
 3103;txt;01
-Skriv namnet på ett program eller en mapp och Sandboxie kommer öppna den åt dig.
+Skriv namnet på ett program eller en mapp och Sandboxie kommer öppna dessa åt dig.
 .
 
 3104;txt;01
-Skriv  .  (punkt) för att se ditt skrivbord med Sandboxie
+Skriv  .  (punkttecknet) för att se ditt skrivbord med Sandboxie
 .
 
 3105;txt;01
@@ -676,11 +768,15 @@ Ta bort kommando från kommandohistoriken
 .
 
 3106;txt;01
-Välj sandlådan du vill starta program och dokument i.
+Välj sandlådan du vill starta program eller dokument i.
+.
+
+3107;txt;01
+För in namnet på ett program eller sökvägen för att öppna filen i nuvarande sandlåda:
 .
 
 3111;txt;01
-      Sandboxie StartMeny - %2  %0
+      Sandboxie startmeny - %2  %0
 .
 
 3112;txt;01
@@ -691,8 +787,13 @@ Skrivbord
 (utforska mapp)
 .
 
+# Ska överensstämma med namnet på den lokaliserade mappen för program i startmenymappen
+3114;txt;01
+Program
+.
+
 3202;txt;01
-Okänd kommandolinje parameter:  %2
+Okänd kommandoradsparameter:  %2
 .
 
 3203;txt;01
@@ -700,7 +801,7 @@ Vägledning: Start.exe <programnamn>
 .
 
 3204;txt;01
-Okänt boxnamn parameter:  %2
+Ogiltigt lådnamn parameter:  %2
 .
 
 3205;txt;01
@@ -710,40 +811,40 @@ Kunde inte kalla program:
 .
 
 3206;txt;01
-System Error Code:
+Systemfelskod:
 .
 
 # 3207;txt;01
-# Kan inte hitta Internet Explorers exe fil
+# Kan inte hitta Internet Explorers exe-fil
 # .
 
 # 3208;txt;01
-# Kan inte hitta exe filen till standard webbläsaren
+# Kan inte hitta exe-filen till standardwebbläsaren
 # .
 
 3209;txt;01
-Kan inte hitta exe filen till standard mailklienten
+Kan inte hitta exe-filen till standard e-postklienten
 .
 
 3210;txt;01
-Could not start Sandboxie Control program
+Kunde inte starta programmet Sandboxie Kontroll
 .
 
-3211;txt;01
-Version oöverensstämmelse i Sandboxie.  Pröva att installera om Sandboxie.
-.
+# 3211;txt;01
+# Versionsoöverensstämmelse i Sandboxie.  Pröva att installera om Sandboxie.
+# .
 
 3212;txt;01
-Sandboxie drivrutinen (SbieDrv) är inte tillgänglig till sandboxie program.
-Kolla att både drivrutinen och Sandboxie service (SbieSvc) startade utan problem.
+Sandboxies drivrutin (SbieDrv) är inte tillgänglig för sandlådade program.
+Kolla att både drivrutinen och Sandboxies tjänst (SbieSvc) startade utan problem.
 .
 
 3213;txt;01
-Kunde inte starta Sandboxie COM services
+Kunde inte starta Sandboxie COM-services
 .
 
 3214;txt;01
-Radera Sandlåda %2:  %0
+Radera sandlåda %2:  %0
 .
 
 3215;txt;01
@@ -768,7 +869,7 @@ Kunde inte flytta sandlådemappen ur vägen
 .
 
 3220;txt;01
-Det uppstod ett fel med att döpa om en fil med ett långt namn i sandlådan
+Det uppstod ett fel med att döpa om en fil med ett långt namn i sandlådan.
 Sandlådan kommer inte raderas.
 .
 
@@ -821,21 +922,22 @@ Klicka för att stänga det här fönstret och stoppa.
 .
 
 3241;txt;01
-Sandboxie begär administratörrättigheter
+Sandboxie begär administratörsrättigheter
 på begäran av ett program som körs i en sandlåda.
 .
 
 3242;txt;01
 För att acceptera eller neka förfrågan, välj
-ett svar i UAC pop-up rutan.
+ett svar i UAC-popupfönstret
 .
 
 3243;txt;01
-Notera: Programmet kommer startas under Sandboxies översikt, även efter att administrativa privilegier har getts.
+Notera: Programmet kommer startas under Sandboxies översikt, 
+även efter att administrativa privilegier har getts.
 .
 
 3251;txt;01
-Kör utanför Sandlådan
+Kör utanför sandlådan
 .
 
 3252;txt;01
@@ -844,8 +946,8 @@ Starta programmet utanför Sandboxies översyn
 Detta undantag för sandlådning gäller också för
 alla andra program som startas av det här programmet.
 
-Du kan också välja den här inställningen genom att hålla ner Ctrl och Shift när du
-klickar på "kör sandlådad" kommandot
+Du kan också välja den här inställningen genom att hålla ner Ctrl+Shift när du
+klickar på kommandot Kör sandlådad.
 .
 
 3253;txt;01
@@ -853,16 +955,16 @@ klickar på "kör sandlådad" kommandot
 .
 
 3254;txt;01
-För att skippa den här sandbox valrutan kan du hålla ner ctrl
-när du klickar på "Kör sandlådad" kommandot.
+För att skippa det här sandlådevalfönstret kan du hålla ner Ctrl
+när du klickar på kommandot Kör sandlådad.
 .
 
 3255;txt;01
-Möjligheten är avstängd för att lägre rättigheter inställning är påslagen på denna sandlåda
+Altarnativet är inaktiverat för att inställningen lägre rättigheter är aktiverad på denna sandlåda
 .
 
 3256;txt;01
-Möjligheten är avstängd för att programmet redan körs med administrativa rättigheter
+Alternativet är inaktiverat för att programmet redan körs med administrativa rättigheter
 .
 
 #----------------------------------------------------------------------------
@@ -882,11 +984,11 @@ Version %2
 .
 
 3304;txt;01
-Version oöverensstämmelse i Sandboxie:
+Versionsoöverensstämmelse i Sandboxie:
 
 Sandboxie Kontroll: Version %2
-Service (SbieSvc): Version %3
-Driver (SbieDrv): Version %4
+Tjänst (SbieSvc): Version %3
+Drivrutin (SbieDrv): Version %4
 
 Installera om Sandboxie för att lösa det här problemet.
 
@@ -894,28 +996,28 @@ Avslutar.
 .
 
 # 3305;txt;01
-# Could not install tray icon.  Aborting.
+# Kunde inte installera fältikonen. Avslutar.
 # .
 
 3306;txt;01
-I fortsättningen, visa inte detta meddelande.
+Visa inte detta meddelande i fortsättningen.
 .
 
 # 3307;txt;01
-# Skriv in Program Namn
+# Skriv in programnamn
 # .
 
 # translate text but keep hash signs (#)
 3308;txt;01
-Program#*.EXE#Alla Filer#*.*##
+Program#*.EXE#Alla filer#*.*##
 .
 
 3309;txt;01
-  -  Raderar Sandlåda
+  -  Raderar sandlåda
 .
 
 3311;txt;01
-Misslyckades att uppta konfigurations inställning %3 i sektion %2:  %4
+Misslyckades att uppta konfigurationsinställning %3 i sektion %2:  %4
 .
 
 3312;txt;01
@@ -927,22 +1029,22 @@ Okänd användare, konfigurationsinställningar kommer inte sparas.
 .
 
 3314;txt;01
-Ett fel uppstod medan standardinställningarna blev aktiverade för sandboxen '%2'
+Ett fel uppstod medan standardinställningarna blev aktiverade för sandlådan '%2'
 .
 
-3321;txt;01
-  -  Inloggningssessionen är sandlådad
-.
+# 3321;txt;01
+#   -  Inloggningssessionen är sandlådad
+# .
 
-3322;txt;01
-Din inloggningssession är övervakad av Sandboxie.
-Raderande av innehållet av sandlådan kommer ta bort alla ändringar gjorda i sessionen.
+# 3322;txt;01
+# Din inloggningssession är övervakad av Sandboxie.
+# Raderande av innehållet av sandlådan kommer ta bort alla ändringar gjorda i sessionen.
 
-Användarkonto: %2
-Sandlåda: %3
+# Användarkonto: %2
+# Sandlåda: %3
 
-Är du säker på att du vill radera innehållet av sandlådan och logga ut?
-.
+# Är du säker på att du vill radera innehållet av sandlådan och logga ut?
+# .
 
 3351;txt;01
 &Ta bort
@@ -953,7 +1055,7 @@ Sandlåda: %3
 .
 
 3353;txt;01
-&Ändra/lägg till
+&Ändra / Lägg till
 .
 
 3354;txt;01
@@ -961,23 +1063,27 @@ Sandlåda: %3
 .
 
 3355;txt;01
-Lägg till &Program
+Lägg till &program
 .
 
 # 3356;txt;01
-# Lägg till &Namn
+# Lägg till &namn
 # .
 
 # 3357;txt;01
-# Lägg till &Fil
+# Lägg till &fil
 # .
 
 3358;txt;01
-Lägg till &Mapp
+Lägg till &mapp
 .
 
 3359;txt;01
-Lägg till &Användare
+Lägg till &användare
+.
+
+3360;txt;01
+Välj &alla
 .
 
 #----------------------------------------------------------------------------
@@ -989,23 +1095,23 @@ Lägg till &Användare
 .
 
 3412;txt;01
-Avsluta &Alla Program
+Avsluta &alla program
 .
 
 3413;txt;01
-Avaktivera &Tvingade Program
+Avaktivera &tvingade program
 .
 
 3414;txt;01
-Kör som &UAC Administratör
+Kör som &UAC-administratör
 .
 
 3415;txt;01
-Är &Rutan Sandlådad?
+Är &fönstret sandlådat?
 .
 
 3416;txt;01
-Resursbehörighet &Monitor
+Resursåtkomstmonitorn
 .
 
 3417;txt;01
@@ -1017,27 +1123,43 @@ Avsluta
 .
 
 3422;txt;01
-&Programs
+&Program
 .
 
 3423;txt;01
-&Filer och Mappar
+&Filer och mappar
 .
 
 3424;txt;01
-&Context Menu%2Shift+F10
+&Kontextmenu%2Shift+F10
+.
+
+3425;txt;01
+Återställnings&logg
+.
+
+3426;txt;01
+&Alltid överst
 .
 
 3431;txt;01
-Sand&box
+Sand&låda
 .
 
 3432;txt;01
-Lägg till ny Sandlåda
+Skapa en ny sandlåda
 .
 
 3433;txt;01
-Definiera mappen till innehållet
+Ange sandlådemapp
+.
+
+3434;txt;01
+Visa dold sandlåda
+.
+
+3435;txt;01
+Ange layout och grupper
 .
 
 3441;txt;01
@@ -1049,11 +1171,11 @@ Definiera mappen till innehållet
 .
 
 3443;txt;01
-Windows Shell &Integration
+Windows Skal&-integration
 .
 
 3501;txt;01
-Program &Kompatibilitet
+Program&kompatibilitet
 .
 
 3503;txt;01
@@ -1061,7 +1183,7 @@ Experimentellt skydd (64-bit)
 .
 
 3444;txt;01
-Glöm Dolda &Meddelanden
+Glöm dolda &meddelanden
 .
 
 3445;txt;02
@@ -1069,23 +1191,27 @@ Glöm Dolda &Meddelanden
 .
 
 3502;txt;01
-Lås Konfiguration
+Lås konfigurationen
 .
 
 3446;txt;01
-&Ändra Konfiguration
+&Ändra konfigurationen
 .
 
 3447;txt;01
-Ladda om Konfiguration
+Ladda om konfigurationen
 .
 
 3448;txt;01
-&Visa Alla Tips
+&Visa alla tips
 .
 
 3449;txt;01
-&Dölj Alla Tips
+&Dölj alla tips
+.
+
+3504;txt;01
+&Stöd Sandboxie
 .
 
 3451;txt;01
@@ -1093,15 +1219,15 @@ Ladda om Konfiguration
 .
 
 3452;txt;01
-&Hjälp Ämnen (Web)
+&Hjälpämnen (Nätet)
 .
 
-3453;txt;01
-Kom igång &Tutorial (Web)
+3453;txt;02
+Kom-igång-&guide (Nätet)
 .
 
 3454;txt;01
-Sök efter &Uppdateringar
+Sök efter &uppdateringar
 .
 
 3455;txt;01
@@ -1112,36 +1238,56 @@ Sök efter &Uppdateringar
 &Om Sandboxie
 .
 
+3457;txt;01
+&Sandboxie forum (Nätet)
+.
+
+3458;txt;01
+Tillåt direktåtkomst till typsnittcache
+.
+
+3459;txt;01
+Tillåt direktåtkomst till qWave drivrutin Google Hangouts)
+.
+
+3460;txt;01
+Funktionshakande anpassningar
+.
+
 3461;txt;01
-&Kör Sandlådad
+&Kör sandlådad
 .
 
 3462;txt;01
-Kör Webbläsare
+Kör webbläsare
 .
 
 3463;txt;01
-Kör Emai&lklient
+Kör e-pos&tklient
 .
 
 3464;txt;01
-Kör &Valfritt Program
+Kör &valfritt program
 .
 
 3465;txt;01
-Kör Från Start &Menyn
+Kör från start&menyn
 .
 
 3466;txt;01
-Kör &Windows Explorer
+Kör &utforskaren
+.
+
+3467;txt;01
+Uppgradera till Sandboxie-Plus
 .
 
 3471;txt;01
-&Avsluta Program
+Avsluta program
 .
 
 3472;txt;01
-&Snabb Återskapning
+&Snabb återställning
 .
 
 3473;txt;01
@@ -1149,63 +1295,71 @@ Kör &Windows Explorer
 .
 
 3474;txt;01
-&Undersök Innehåll
+&Undersök innehåll
 .
 
 3475;txt;01
-Sandlåde &Inställningar
+Sandlåde&inställningar
 .
 
 3476;txt;01
-Döp om Sandlåda
+Döp om sandlåda
 .
 
 3477;txt;01
-Ta& bort Sandlåda
+Ta& bort sandlåda
 .
 
 3481;txt;01
-&Avsluta Program
+&Avsluta program
 .
 
 3482;txt;01
-Program &Inställningar
+Program&inställningar
 .
 
 3483;txt;01
-&Resurs Åtkomst
+&Resursåtkomst
+.
+
+3484;txt;01
+Resursåtkomst
 .
 
 3485;txt;01
-Visa Ruta
+Visa Sandboxie Kontroll
 .
 
 3486;txt;01
-Dölj Ruta
+Dölj Sandboxie Kontroll
 .
 
 3487;txt;01
-&Visa Fel
+&Visa fel
 .
 
-3488;txt;01
-&Radera Sandlåda Och Logga Ut
-.
+# 3488;txt;01
+# &Radera sandlådan och logga ut
+# .
 
 3491;txt;01
-Återskapa till Samma Mapp
+Återställ till samma mapp
 .
 
 3492;txt;01
-Återskapa till &Valfri Mapp
+Återställ till &valfri mapp
 .
 
 3493;txt;01
-Läg&g Till Mapp till Snabb Återskapning
+Läg&g till mapp till snabb återställning
 .
 
 3494;txt;01
-T&a Bort Mapp från Snabb Återskapning
+T&a bort mapp från snabb återställning
+.
+
+3495;txt;01
+Skapa skrivbordsgenväg
 .
 
 #----------------------------------------------------------------------------
@@ -1213,37 +1367,36 @@ T&a Bort Mapp från Snabb Återskapning
 #----------------------------------------------------------------------------
 
 3511;txt;01
-Sandboxie Kontroll kommer nu dölja sin ruta, men kommer
-fortsätta köras.  för att visa detta fönster, dubbelklicka
-på den gula Sandboxie ikonen vid klockan.
+Sandboxie Kontroll kommer nu dölja sitt fönster men kommer
+fortsätta att köras. För att visa detta fönster, dubbelklicka
+på den gula Sandboxie-ikonen i systemfältet.
 .
 
 3512;txt;01
 Gör ändringar till konfigurationsfilen Sandboxie.ini 
-i textediterings rutan som nu har öppnats.
+i textredigeringsfönstret som nu har öppnats.
 
 Den nya konfigurationen kommer bara börja gälla
 när du har verkställt ändringarna.
 
 I de flesta fallen kommer filen verkställas av sig
-själv så fort du stänger 
-editeringsrutan.
+själv så fort du stänger redigeringsfönstret.
 
 Du kan också säga åt Sandboxie Kontroll att
-Ladda om Konfigurationen när som helst.
+ladda om konfigurationen när som helst.
 .
 
 3513;txt;01
-Sandboxie konfigurationen har blivit verkställd och
+Sandboxie-konfigurationen har blivit verkställd och
 kommer gälla för sandlådade program när de startar.
 
-Om något program redan körs sandlådad kommer
-den nya konfigurationen inte gällas för dem.
+Om något program redan körs sandlådat kommer
+den nya konfigurationen inte gälla för dem.
 .
 
 3514;txt;01
 Ett fel uppstod med att läsa konfigurationsfilen.
-Sandboxie konfigurationen har inte uppdaterats.
+Sandboxie-konfigurationen har inte uppdaterats.
 .
 
 3515;txt;01
@@ -1263,19 +1416,19 @@ PID
 .
 
 3519;txt;01
-Rutans namn
+Fönsternamn
 .
 
 3520;txt;01
-Snabb återställningsmappar
+Mappar för snabb återställning
 .
 
 3521;txt;01
-Alla Filer och Mappar
+Alla filer och mappar
 .
 
 3522;txt;01
-Hårddiskar
+Diskar
 .
 
 3523;txt;01
@@ -1299,11 +1452,11 @@ Radera innehållet i sandlådan %2 innan du kör detta kommando.
 .
 
 3528;txt;01
-Skriv In Nytt Sandlådenamn
+Skriv in nytt sandlådenamn
 .
 
 3529;txt;01
-Är du säker på att du vill ta bort sandlåda %2?
+Är du säker på att du vill ta bort sandlådan %2?
 .
 
 3530;txt;01
@@ -1311,71 +1464,73 @@ Det finns inga processer att avsluta.
 .
 
 3531;txt;01
-VARNING: Processer som kommer avslutas
-kommer inte få chansen att spara
+VARNING: Processer som kommer avslutas 
+kommer inte få chansen att spara någonting
 
-Är du säker på att du vill fortsätta med processen avsluta?
+Är du säker på att du vill fortsätta med processavslutandet?
 .
 
 3532;txt;01
-I framtiden, avsluta processer utan att fråga
+Avsluta processer i framtiden utan att fråga 
 .
 
 3533;txt;01
-Du kan kopiera och klistra filer och mappar från en sandlådad Windows Explorer
-mappruta, och klippa in dem direkt till en osandlådad mappruta.
+Du kan kopiera och klistra filer och mappar från en sandlådad utforskares mappfönster, och klippa in dem direkt till ett osandlådat mappfönster.
 .
 
 3534;txt;01
-Du kommer utforska innehållet av en sandlåda i en osandlådad
-Windows Explorer mappruta.
+Du kommer utforska innehållet av en sandlåda i en osandlådad utforskares mappfönster
+som inte övervakas av Sandboxie.
 
 Du kan öppna program och dokument som finns i sandlådan.
 Programmet eller dokumentet kommer starta under bevakning av Sandboxie.
 
 Men, det är rekommenderat att ändra innehållet av en sandlåda
-genom att använda en sandlådad instans av Windows Explorer.  För att göra det, använd
-detta kommando:  Sandlåda -> Kör Sandlådad -> Kör Windows Explorer.
+genom att använda en sandlådad instans av utforskaren.  För att göra det, använd
+detta kommando:  Sandlåda > Kör Sandlådad > Kör Utforskaren.
 .
 
 3535;txt;01
-Ett fel uppstod åtkomsten till sandlådemappen.
+Ett fel uppstod vid åtkomsten till sandlådemappen.
 .
 
 3536;txt;01
-Den 'dolda' indikatorn har blivit borttagen från alla meddelanden.
+Den dolda indikatorn, har blivit borttagen från alla meddelanden.
 .
 
 3537;txt;01
-'Visa inte detta meddelande' indikatorn har blivit borttagen från alla tips.
+Indikatorn Visa inte detta meddelande, har blivit borttagen från alla tips.
 .
 
 3538;txt;01
-'Visa inte detta meddelande' är nu med på alla tips.
+Meddelandet Visa inte detta meddelande, är nu med på alla tips.
 .
 
 3539;txt;01
 Sandlådan '%2' skapades %3 dagar sen.
 Tänk på att tömma din sandlåda då och då.
 
-För att konfigurera automatisktömning, använd Sandlådeinställnings
-kommandot från Sandlådemenyn i Sandboxie Kontroll.
+För att konfigurera automatisk tömning, använd sandlådeinställnings-
+kommandot från sandlådemenyn i Sandboxie Kontroll.
 .
 
 3540;txt;01
-Sandboxie.ini konfigurationsfilen kan inte bli ändrad för att
-den är lösenordsskyddad.  För att ändra filen, använd Lås Konfiguration
-kommandot för att låsa upp filen
+Sandboxie.ini konfigurationsfil kan inte bli ändrad för att
+den är lösenordsskyddad.  För att ändra filen använd kommandot Lås konfigurationen, 
+för att låsa upp den.
 .
 
 3541;txt;01
-Public
+Offentlig
 .
 
 3542;txt;01
-Experimentellt skydd förbättrar skyddet för 64-bit Sandboxie, och gör det till samma nivå av skydd som finns i 32-bit Sandboxie.
+Experimentellt skydd förbättrar skyddet för 64-bit Sandboxie, 
+och gör det till samma nivå av skydd som finns i 32-bit Sandboxie.
 
-VIKTIGT: Experimentellt skydd använder odokumenterade funktioner av Windows kerneln. Framtida uppdateringar till Windows kan störa Experimentellt skydd, och kan göra systemet ostabilt.
+VIKTIGT: Experimentellt skydd använder odokumenterade funktioner 
+av Windows kerneln. Framtida uppdateringar till Windows kan störa 
+Experimentellt skydd, och kan göra systemet ostabilt.
 
 ANVÄND PÅ EGEN RISK.
 
@@ -1396,34 +1551,34 @@ Notera att lägre rättigheter kommer slås på i alla sandlådor.
 Om Sandboxie
 .
 
-3604;txt;01
-Välkommen till Sandboxie
-.
+# 3604;txt;01
+# Välkommen till Sandboxie
+# .
 
-3605;txt;01
+# 3605;txt;01
+# 
+# Sandboxie kör dina program i ett skyddat isolerat område som kallas sandlåda.
+# 
+# Applikationer inuti sandlådan kan inte göra ändringar eller skada din dator.
+# 
+# Du kan också använda sandlådor för att testa nya program.
+# .
 
-Sandboxie kör dina program i ett skyddat isolerat område som kallas sandlåda
+# 3606;txt;01
+# Om du är ny till Sandboxie, 
+# ta ett ögonblick och läs Kom-igång-guiden.
+# .
 
-Applikationer inutti sandlådan kan inte göra ändringar eller skada din dator
-
-Du kan också använda sandlådor för att testa nya program.
-.
-
-3606;txt;01
-Om du är ny till Sandboxie,
-ta ett ögonblick att läsa "Kom igång" tutorialen
-.
-
-3607;txt;01
-&Komma igång med Sandboxie
-.
+# 3607;txt;01
+# &Komma igång med Sandboxie
+# .
 
 #----------------------------------------------------------------------------
 # Sandboxie Control Dialogs: Update
 #----------------------------------------------------------------------------
 
 3621;txt;01
-Leta efter Uppdateringar
+Sök efter uppdateringar
 .
 
 3622;txt;01
@@ -1435,7 +1590,7 @@ Koppla upp dig till Sandboxies hemsida för att kolla om det finns en ny version
 .
 
 3624;txt;01
-Nästa &Vecka
+Nästa &vecka
 .
 
 3625;txt;01
@@ -1443,11 +1598,11 @@ Al&drig
 .
 
 3626;txt;01
-Kolla efter uppdateringar utan att fråga i framtiden
+Sök efter uppdateringar utan att fråga i framtiden
 .
 
 3627;txt;01
-Privacy Policy:  Dina personliga data sparas inte och laddas inte upp till Sandboxie.
+Integritetspolicy: Dina personliga data sparas inte och laddas inte upp till Sandboxie.
 .
 
 3628;txt;01
@@ -1465,13 +1620,13 @@ Sandboxie %2 finns att ladda ner.
 3631;txt;01
 Ladda ner den nu?
 
-Notera:  Nerladdningen tar ungefär en minut
-Du kommer bli meddelat när nerladdningen är klar
+Notera: Nerladdningen tar ungefär en minut
+Du kommer bli meddelad när nerladdningen är klar
 .
 
 3632;txt;01
-För att ladda ner och installera den nya versionen, logga in på ett användarkonto
-med admin rättigheter och kör kommandot igen.
+För att ladda ner och installera den nya versionen, logga in på ett 
+användarkonto med adminrättigheter och kör kommandot igen.
 .
 
 3633;txt;01
@@ -1479,12 +1634,16 @@ Sandboxie %2 har laddats ner till följande plats:
 
 %3
 
-Tryck OK för att starta installationen.  Alla program i sandlådan
-kommer att avslutas.
+Klicka på Ok, för att starta installationen. Eventuella körande 
+program i sandlådan kommer att avslutas.
 .
 
 3634;txt;01
-Uppdateringsfel:  Ett fel uppstod vid försök att kontakta Sandboxies hemsida
+Uppdateringsfel: Ett fel uppstod vid försök att kontakta Sandboxies hemsida
+.
+
+3635;txt;01
+Nedladdar en ny version
 .
 
 #----------------------------------------------------------------------------
@@ -1492,7 +1651,7 @@ Uppdateringsfel:  Ett fel uppstod vid försök att kontakta Sandboxies hemsida
 #----------------------------------------------------------------------------
 
 3641;txt;01
-Öppna Webbläsare
+Öppna webbläsaren
 .
 
 3642;txt;01
@@ -1512,7 +1671,7 @@ Välj om du vill öppna följande sida i en sandlådad eller osandlådad webblä
 #----------------------------------------------------------------------------
 
 3645;txt;01
-Meddelande från Sandboxie
+Meddelanden från Sandboxie
 .
 
 3646;txt;01
@@ -1521,7 +1680,7 @@ D&ölj
 
 3647;txt;01
 Att dölja ett meddelande kommer hindra meddelandet från att visas
-i framtiden.  Att dölja meddelandet kommer inte rätta till
+i framtiden. Att dölja meddelandet kommer inte rätta till
 problemet som visade felmeddelandet.
 
 Är du säker på att du vill stänga av rapportering av meddelandet %2?
@@ -1544,12 +1703,12 @@ sekunder
 .
 
 3654;txt;01
-när du klickar på OK, kommer tvingade program mekanismen temporärt stängas av, för ett visst antal sekunder som du själv valt.
+När du klickar på Ok, kommer mekanismen för tvingade program temporärt att stängas av, för ett visst antal sekunder som du själv valt,
 eller tills du väljer den här funktionen igen.
 .
 
 3599;txt;01
-Du kan stänga av tvingade program för ett specifikt program genom att hålla ner Ctrl och Shift knapparna medan du klickar på Kör Sandlådad kommandot för programmet
+Du kan stänga av tvingade program för ett specifikt program genom att hålla ner Ctrl+Shift-knapparna, medan du klickar på kommandot Kör sandlådad, för programmet
 .
 
 #----------------------------------------------------------------------------
@@ -1557,15 +1716,15 @@ Du kan stänga av tvingade program för ett specifikt program genom att hålla n
 #----------------------------------------------------------------------------
 
 3655;txt;01
-Behörighetsmonitorn
+Resursåtkomstmonitorn
 .
 
 3656;txt;01
-Detta program övervakar program som körs under bevakning av Sandboxie, och visar resurserna som dom använder.  Var god läs om detta program innan du använder det för hjälp.
+Detta program övervakar program som körs under bevakning av Sandboxie, och visar resurserna som dom använder. Var god läs om detta program innan du använder det för hjälp.
 .
 
 3657;txt;01
-Kopiera innehållet till ctrl+v och stäng rutan
+Kopiera innehållet till Urklipp och stäng fönstret
 .
 
 #----------------------------------------------------------------------------
@@ -1573,21 +1732,21 @@ Kopiera innehållet till ctrl+v och stäng rutan
 #----------------------------------------------------------------------------
 
 3661;txt;01
-Är rutan sandlådad?
+Är fönstret sandlådat?
 .
 
 3662;txt;01
-Dra måltavlan över en ruta för att välja den, släpp sen musen för att se om rutan är sandlådad.
+Dra måltavlan över ett fönster för att välja den, släpp sen musen för att se om fönstret är sandlådat.
 
-Tryck ESC för att avbryta.
+Klicka på ESC, för att avbryta.
 .
 
 3663;txt;01
-Den valda rutan körs som en del av programmet %2 i sandlådan %3.
+Det valda fönstret körs som en del av programmet %2 i sandlådan %3.
 .
 
 3664;txt;01
-Den valda rutan körs inte i någon sandlåda.
+Det valda fönstret körs inte i någon sandlåda.
 .
 
 #----------------------------------------------------------------------------
@@ -1595,23 +1754,27 @@ Den valda rutan körs inte i någon sandlåda.
 #----------------------------------------------------------------------------
 
 3665;txt;01
-Skapa en Ny Sandlåda
+Skapa en ny sandlåda
 .
 
 3666;txt;01
-Skriv in ett namn på den nya Sandlådan
+Skriv in ett namn på den nya sandlådan
 .
 
 3667;txt;01
-Fel:  Ogiltigt sandlådenamn.  Använd bara bokstäver och siffror.  Mellanrum och andra tecken är inte tillåtna.  Namnet kan inte vara längre än 32 tecken.
+Fel: Ogiltigt sandlådenamn. Använd bara bokstäver och siffror. Mellanrum och andra tecken är inte tillåtna. Namnet kan inte vara längre än 32 tecken.
 .
 
 3668;txt;01
-Error:  Namnet används redan. Skriv in ett namn som inte används av en annan sandlåda.
+Fel: Namnet används redan. Skriv in ett namn som inte används av en annan sandlåda.
 .
 
 3669;txt;01
 Kopiera inställningar från befintlig sandlåda
+.
+
+4665;txt;01
+Fel: Namnet finns redan. Namnet används av en dold sandlåda. Använd kommandot Visa dold sandlåda, i sandlådemenyn.
 .
 
 #----------------------------------------------------------------------------
@@ -1619,27 +1782,27 @@ Kopiera inställningar från befintlig sandlåda
 #----------------------------------------------------------------------------
 
 3671;txt;01
-Välj innehållsmapp
+Ange sandlådemapp
 .
 
 3672;txt;01
-Välj hårddisken där Sandlådan kommer skapas och köras på
+Välj disken där sandlådan kommer skapas och köras på
 .
 
 3673;txt;01
-För max kompatibilitet med andra program rekommenderas det att du lämnar sandlådan på standardplatsen på hårddisken du väljer.
+För max kompatibilitet med andra program rekommenderas det att du lämnar sandlådan på standardplatsen på disken du väljer.
 .
 
 3674;txt;01
-Men, du kan också använda rutan här under för att skriva över standardplatsen
+Men, du kan också använda fönstret här under för att skriva över standardplatsen:
 .
 
 3675;txt;01
-Notera: Du borde radera innehållet i sandlådan, innan du byter plats på den.
+Notera: Du bör radera innehållet i alla sandlådor, innan du byter plats på dem.
 .
 
 3676;txt;01
-Hårddisk %2
+Disk %2
 .
 
 #----------------------------------------------------------------------------
@@ -1647,7 +1810,7 @@ Hårddisk %2
 #----------------------------------------------------------------------------
 
 3681;txt;01
-Program Varningar
+Programvarningar
 .
 
 3682;txt;01
@@ -1659,11 +1822,11 @@ När ett av följande program körs utanför någon sandlåda, kommer Sandboxie 
 #----------------------------------------------------------------------------
 
 3685;txt;01
-Windows Shell Integration
+Windows Skal-integration
 .
 
 3686;txt;01
-Starta Sandboxie Kontrollen
+Starta Sandboxie Kontroll
 .
 
 3687;txt;01
@@ -1675,15 +1838,15 @@ När ett sandlådat program startas
 .
 
 3689;txt;01
-Genvägar
+Genvägsikoner
 .
 
 3690;txt;01
-Lägg till genvägar för att starta webbläsare i Sandboxie
+Lägg till genvägar för att starta webbläsare under Sandboxie
 .
 
 3691;txt;01
-Lägg till "Quick Launch"-genvägar för att starta program i Sandboxie
+Lägg till snabbstartgenvägar för att starta webbläsare under Sandboxie
 .
 
 3692;txt;01
@@ -1691,34 +1854,38 @@ Klicka för att lägga till fler genvägar:
 .
 
 3693;txt;01
-&Lägg till Genvägsikon
+&Lägg till genvägsikon
 .
 
 3694;txt;01
-"Kör Sandlådad" möjligheter
+Kör sandlådad ageranden
 .
 
 3695;txt;01
-Lägg till högerklick "Kör Sandlådad" till filer och mappar
+Lägg till högerklicket Kör sandlådad, till filer och mappar
 .
 
 3696;txt;01
-Lägg till sandlådor som mål för for "Skicka till"
+Lägg till sandlådor som mål för utförandet Skicka till.
 .
 
 3697;txt;01
-Sandboxie Startmenyn kommer nu visas.  välj ett
+Sandboxie startmeny kommer nu visas. Välj ett
 program från menyn så kommer Sandboxie skapa en ny genvägsikon
 på ditt skrivbord som du kan använda för att starta valt program
 under tillsyn av Sandboxie.
 .
 
 3698;txt;01
-Sandlådad Webbläsare.lnk
+Sandlådad webbläsare.lnk
 .
 
 3699;txt;01
-Kör &Sandlådad
+Kör &sandlådad
+.
+
+4491;txt;01
+Öppna %2 i sandlåda %3
 .
 
 #----------------------------------------------------------------------------
@@ -1726,27 +1893,27 @@ Kör &Sandlådad
 #----------------------------------------------------------------------------
 
 3711;txt;01
-Radera Sandlåda|Snabb Återskapning
+Radera innehåll|Snabb återställning
 .
 
 3712;txt;01
-Filerna nedanför går att Snabbt Återskapas från sandlådan. Välj en fil eller en mapp och klicka på antingen Återskapa nedanför för att återskapa valda objekt.
+Filerna nedanför går att snabbt återställa från sandlådan. Välj en fil eller en mapp och klicka på någon av knapparna Återställning nedanför för att återställa valt objekt.
 .
 
 3713;txt;01
-Tryck på "Radera Sandlåda" för att stänga alla program i sandlådan för att sedan tömma den på allt innehåll.
+Klicka på Radera sandlåda, för att stänga alla program i sandlådan för att sedan tömma den på allt innehåll.
 .
 
 3714;txt;01
-&Radera Sandlåda
+&Radera sandlåda
 .
 
 3715;txt;01
-Omedelbar Återskapning
+Omedelbar återställning
 .
 
 3716;txt;02
-Dessa filer kan återskapas med omedelbar återskapning vilket kommer flytta dem ut ur sandlådan.
+Dessa filer kan återställas med omedelbar återställning vilket kommer flytta dem ut ur sandlådan.
 .
 
 3717;txt;01
@@ -1754,7 +1921,7 @@ Välj först filer från listan ovan, välj sen en plats.
 .
 
 3718;txt;01
-&Återskapa
+&Återställ
 .
 
 3719;txt;01
@@ -1762,25 +1929,25 @@ Fråga inte igen förrän &alla sandlådade program har avslutats
 .
 
 3720;txt;01
-Åter&skapa till
-Samma Mapp
+Åter&ställ till
+samma mapp
 .
 
 3721;txt;01
-Återskapa till
-&Valfri Mapp
+Återställ till
+&valfri mapp
 .
 
 3722;txt;01
-Det finns %2 filer och %3 mappar i sandlådan, vilket tar upp %4 av hårddisken.
+Det finns %2 filer och %3 mappar i sandlådan, vilket tar upp %4 av disken.
 .
 
 3723;txt;01
-Välj en mapp som filer och mappar kommer åtskapas till
+Välj en mapp som filen eller mappen kommer återställas till
 .
 
 3724;txt;01
-Eller välj en mapp från en tidigare återskapning.
+Eller välj en mapp från en tidigare återställning.
 .
 
 3725;txt;01
@@ -1788,11 +1955,11 @@ Spara valda mappar för senare användning
 .
 
 3726;txt;01
-Välj en mapp att lägga till i listan av Snabba Återställningar.
+Välj en mapp att lägga till i mapplistan för snabb återställning.
 .
 
 3727;txt;01
-Mappen lades till i listan av Snabba Återställningsmappar.
+Mappen lades till i mapplistan för snabb återställning.
 
 Men, just nu finns det inga sandlådade föremål som kan återställas
 från mappen
@@ -1803,24 +1970,60 @@ Inga filer har valts för återställning.
 .
 
 3729;txt;01
-Återställningen misslyckades.  Följande föremål kunde inte flyttas ut ur sandlådan:
+Återställningen misslyckades. Följande föremål kunde inte flyttas ut ur sandlådan:
 .
 
 3730;txt;01
-Sandlådan är tom.  Det finns inget att radera.
+Sandlådan är tom. Det finns inget att radera.
 .
 
 3731;txt;01
-Några sandlådade program kunde inte avslutas.  Sandlådan kommer inte tömmas.
+Några sandlådade program kunde inte avslutas. Sandlådan kommer inte tömmas.
 .
 
 3732;txt;01
-Det finns inga filer att återskapa just nu.
+Det finns inga filer att återställa just nu.
 .
 
 3733;txt;01
-Filen kan inte återskapas just nu för att namnet på platsen är för lång.
+Filen kan inte återställas just nu för att namnet på platsen är för lång.
 Välj en annan plats.
+.
+
+3734;txt;01
+Högerklicka på mapplistan för fler alternativ
+.
+
+3735;txt;02
+Ersätt alla filer utan fler meddelanden
+.
+
+3736;txt;01
+&Återställ && Utforska
+.
+
+3737;txt;01
+&Återställ && Kör
+.
+
+3981;txt;01
+&Öppna mappen i utforskaren utanför sandlådan
+.
+
+3982;txt;01
+Ta bort denna mapp från listan
+.
+
+3983;txt;01
+Ta bort alla mappar från listan
+.
+
+3986;txt;01
+Återställningslogg
+.
+
+3987;txt;01
+Följande filer återställdes nyligen och flyttades ut ur sandlådor.
 .
 
 #----------------------------------------------------------------------------
@@ -1840,19 +2043,19 @@ Program:
 .
 
 3744;txt;01
-Visa Sida 1
+Visa sida 1
 .
 
 3745;txt;01
-Visa Sida 2
+Visa sida 2
 .
 
 3751;txt;01
-Program Start
+Programstart
 .
 
 3752;txt;01
-När det här programmet startas utanför en Sandlåda:
+När det här programmet startas utanför en sandlåda:
 .
 
 3753;txt;01
@@ -1864,7 +2067,7 @@ Tvinga programmet att starta i denna sandlåda
 .
 
 3755;txt;01
-Program Avslut
+Programavslut
 .
 
 3756;txt;01
@@ -1872,27 +2075,27 @@ Stoppa detta program om det fortfarande är igång efter andra program har avslu
 .
 
 3757;txt;01
-Stoppa andra program efter detta ledarprogram har avslutats
+Stoppa andra program efter att detta ledarprogram har avslutats
 .
 
 3761;txt;01
-Internet Begränsningar
+Internetbegränsningar
 .
 
 3762;txt;01
-Inget program i denna sandlåda kan inte använda Internet.
+Varje program som kör i denna sandlåda kan nå internet.
 .
 
 3763;txt;01
-Program som kan använda Internet i denna sandlåda är:
+Program som kan använda internet i denna sandlåda är:
 .
 
 3764;txt;01
-Slå på begränsningar och tillåt detta program använda Internet
+Aktivera begränsningar och tillåt detta program använda internet
 .
 
 3765;txt;01
-Starta/Kör Begränsningar
+Start / Körbegränsningar
 .
 
 3766;txt;01
@@ -1904,7 +2107,7 @@ Program som kan startas i denna sandlåda:
 .
 
 3768;txt;01
-Slå på begränsningar och tillåt detta program att starta.
+Aktivera begränsningar och tillåt detta program att starta.
 .
 
 3769;txt;01
@@ -1929,12 +2132,12 @@ kommer börja gälla nästa gång dessa program startar
 Är du säker på att du vill ha %2 som en tvingad mapp?
 .
 
-3774;txt;02
-Är du säker på att du vill ha %2 som en tvingad användare?
-.
+# 3774;txt;02
+# Är du säker på att du vill ha %2 som en tvingad användare?
+# .
 
 3775;txt;02
-Du har gjort en ändring som kanske inte är lätt att ångra.
+Du har gjort en ändring som inte är helt lätt att ändra.
 .
 
 #----------------------------------------------------------------------------
@@ -1954,11 +2157,11 @@ Du måste verkställa ändringarna innan du fortsätter.
 .
 
 3804;txt;01
-Verkställ ändringar när du byter sida.
+Verkställ ändringar vid sidobyte.
 .
 
 3805;txt;01
-Alla Program
+Alla program
 .
 
 3806;txt;02
@@ -1966,15 +2169,15 @@ Listan nedanför berör:
 .
 
 3807;txt;01
-Välj en fil eller mapp att lägga till i listan av File Access exclusions.
+Välj en fil eller mapp att lägga till i listan för Blockerad filåtkomst.
 .
 
 3808;txt;01
-Lägg till Resursnamn
+Lägg till resursnamn
 .
 
 3809;txt;01
-Ändra Resursnamn
+Ändra resursnamn
 .
 
 3551;txt;01
@@ -1982,7 +2185,7 @@ Lägg till Resursnamn
 .
 
 3552;txt;01
-Omvänd innebörden för den aktuella markeringen
+Omvänd innebörden för det aktuella valet
 .
 
 #----------------------------------------------------------------------------
@@ -1994,35 +2197,35 @@ Utseende
 .
 
 3812;txt;01
-Sandlådade program under översyn av Sandboxie kommer visa Sandboxie [#]-märket i rutans titel.
+Sandlådade program under översyn av Sandboxie kommer visa Sandboxie [#]-märket i fönstrets titel.
 .
 
 3813;txt;01
-Om följande inställning är påslagen kommer rutans titel också visa namnet på sandlådan.
+Om följande inställning är aktiverad kommer fönstrets titel också visa namnet på sandlådan.
 .
 
 3814;txt;01
-Visa sandlådenamnet i rutans titel
+Visa sandlådenamnet i fönstrets titel
 .
 
 3815;txt;01
-Visa inte Sandboxie-märket i rutans titel
+Visa inte Sandboxie-märket i fönstrets titel
 .
 
 3816;txt;01
-Sandboxie kan visa en färg runt kanten på rutor som tillhör sandlådade program
+Sandboxie kan visa en färg runt kanten på fönster som tillhör sandlådade program
 .
 
 3817;txt;01
-Visa färg runt rutan
+Visa färg runt fönstret
 .
 
 3818;txt;01
-Klicka för att ändra kantfärgen
+Klicka för att ändra kantfärg
 .
 
 3819;txt;01
-Visa bara färg runt kanten på rutor när muspekaren är över sidnamnet
+Visa bara färg runt kanten på fönster när muspekaren är över sidnamnet
 .
 
 #----------------------------------------------------------------------------
@@ -2030,49 +2233,47 @@ Visa bara färg runt kanten på rutor när muspekaren är över sidnamnet
 #----------------------------------------------------------------------------
 
 # 3821;txt;01
-# Återskapning::Snabb återskapning
+# Återställning::Snabb återställning
 # .
 
 3821;txt;02
-Återskapning
+Återställning
 .
 
 3822;txt;01
-Snabb återskapning
+Snabb återställning
 .
 
 3823;txt;01
-Före sandlådan raderas, eller när du manuellt aktiverar Snabb återställning kommer följande mappar sökas efter filer. 
-Om några filer hittas kommer 
-du få chansen att flytta ut dem ur sandlådan.
+Innan sandlådan raderas, eller när du manuellt aktiverar snabb återställning kommer följande mappar sökas efter filer. Om några filer hittas kommer du få chansen att flytta ut dem ur sandlådan.
 .
 
 # 3831;txt;01
-# Recovery::Omedelbar återskapning
+# Återställning::Omedelbar återställning
 # .
 
 3832;txt;01
-Omedelbar återskapning hjälper Snabb återskapning genom att automatiskt fråga om du vill flytta ut filer när de skapas.
+Omedelbar återställning hjälper snabb återställning genom att automatiskt fråga om du vill flytta ut filer när de skapas.
 .
 
 3833;txt;01
-Aktivera Omedelbar återskapning
+Aktivera Omedelbar återställning
 .
 
 3834;txt;01
-Följande filer och filtyper kommer inte vara med i Omedelbar återskapning.
+Följande filer och filtyper kommer inte vara med i omedelbar återställning.
 .
 
 3835;txt;01
-Lägg till &Typ
+Lägg till &typ
 .
 
 3836;txt;01
-Välj en mapp för att exkludera den från Omedelbar återskapning
+Välj en mapp för att utesluta den från omedelbar återställning
 .
 
 3837;txt;01
-Skriv in en filtyp att exkludera från Omedelbar återskapning
+Skriv in en filtyp att utesluta från omedelbar återställning
 .
 
 #----------------------------------------------------------------------------
@@ -2088,11 +2289,11 @@ Radera
 .
 
 3842;txt;01
-Radera Val
+Raderingsval
 .
 
 3843;txt;01
-Innehållet av denna sandlåda kan automatiskt raderas när sandlåde programmen slutar och sandlådan blir inaktiv
+Innehållet av denna sandlåda kan automatiskt raderas när sandlådeprogrammen slutar och sandlådan blir inaktiv
 .
 
 3844;txt;01
@@ -2100,7 +2301,7 @@ Radera automatiskt innehållet av sandlådan
 .
 
 3845;txt;01
-Om några av filerna i sandlådan kan återskapas, kommer snabb återskapning starta istället för automatisk radering.
+Om några av filerna i sandlådan kan återställas, kommer snabb återställning starta istället för automatisk radering.
 .
 
 3846;txt;01
@@ -2112,11 +2313,11 @@ Ta aldrig bort denna sandlåda eller dess innehåll
 .
 
 # 3851;txt;01
-# Radera::Kommandon
+# Radera::Kommando
 # .
 
 3852;txt;01
-Radera Kommandon
+Raderingskommando
 .
 
 3853;txt;01
@@ -2128,7 +2329,7 @@ Om du ändrar denna inställning, ha med texten "%%SANDBOX%%" (med citattecken).
 .
 
 3855;txt;01
-Eller välj ett specifikt raderingskommando
+Eller välj ett specifikt raderingskommando:
 .
 
 3856;txt;01
@@ -2137,7 +2338,7 @@ Raderingskommandot använder inte "%%SANDBOX%%" (med citattecken).
 .
 
 3857;txt;01
-Var god och navigera fram till programmet- %2
+Var god och navigera till och välj programmet - %2
 .
 
 #----------------------------------------------------------------------------
@@ -2145,19 +2346,19 @@ Var god och navigera fram till programmet- %2
 #----------------------------------------------------------------------------
 
 3971;txt;01
-Program Grupper
+Programgrupper
 .
 
 3972;txt;01
-Du kan gruppera ett antal program tillsammans och ge dem ett gruppnamn. Gruppnamn användas med vissa inställningar som accepterar program namn.
+Du kan gruppera ett antal program tillsammans och ge dem ett gruppnamn. Gruppnamn kan användas med vissa inställningar som accepterar programnamn.
 .
 
 3974;txt;01
-Lägg till &Grupp
+Lägg till &grupp
 .
 
 3975;txt;01
-Skriv in nytt Gruppnamn
+Skriv in nytt gruppnamn
 .
 
 #----------------------------------------------------------------------------
@@ -2165,39 +2366,39 @@ Skriv in nytt Gruppnamn
 #----------------------------------------------------------------------------
 
 # 3861;txt;01
-# Program Start::Tvingade Mappar
+# Programstart::Tvingade mappar
 # .
 
 3861;txt;02
-Program Start
+Programstart
 .
 
 3862;txt;01
-Tvingade Mappar
+Tvingade mappar
 .
 
 3863;txt;01
-Om några program startar osandlådade från ett av följande program, kommer dem tvingas köra i denna sandlåda. Detta gäller inte om programmet startade i en annan sandlåda.
+Om några program startar osandlådade från ett av följande program, kommer de tvingas köra i denna sandlåda. Detta gäller inte om programmet startade i en annan sandlåda.
 .
 
 3864;txt;01
-Du kan tvinga Windows CD/DVD Autorun att köra i denna sandlåda, genom att ha med dina CD-ROM och DVD-ROM bokstäver i följande lista.
+Du kan tvinga Windows CD/DVD-autorun att köra i denna sandlåda, genom att ha med dina CD/DVD-ROM bokstäver i följande lista.
 .
 
 3865;txt;01
-Tvingade Mappar har företräde över Tvingade Program.
+Tvingade mappar har företräde över tvingade program.
 .
 
 3866;txt;01
-Välj en mapp att lägga till i listan över Tvingade Mappar.
+Välj en mapp att lägga till i listan över tvingade mappar.
 .
 
 # 3871;txt;01
-# Program Start::Tvingade Program
+# Programstart::Tvingade program
 # .
 
 3872;txt;01
-Tvingade Program
+Tvingade program
 .
 
 3873;txt;01
@@ -2205,11 +2406,11 @@ Om någon av följande program startar osandlådade kommer de tvingas att köras
 .
 
 # 3961;txt;01
-# Program Start::Tvingade Användare
+# Programstart::Tvingade användare
 # .
 
 3962;txt;01
-Tvingade Användare
+Tvingade användare
 .
 
 3963;txt;01
@@ -2217,11 +2418,11 @@ Om några av följande användarkonton loggar in på denna dator kommer hela inl
 .
 
 3964;txt;01
-För att radera en sandlåda förknippad med en Tvingad Användare, logga in på det kontot och ta bort sandlådan via Sandboxie Kontrollen.
+För att radera en sandlåda förknippad med en tvingad användare, logga in på det kontot och ta bort sandlådan via Sandboxie Kontroll.
 .
 
 3965;txt;01
-Tvingade Användare har behörighet över Tvingade Program och Tvingade Mappar.
+Tvingade användare har behörighet över tvingade program och tvingade mappar.
 .
 
 #----------------------------------------------------------------------------
@@ -2229,15 +2430,15 @@ Tvingade Användare har behörighet över Tvingade Program och Tvingade Mappar.
 #----------------------------------------------------------------------------
 
 # 3881;txt;01
-# Program Stopp::Kvarglömda Program
+# Programstopp::Kvarglömda program
 # .
 
 3881;txt;02
-Program Stopp
+Programstopp
 .
 
 3882;txt;01
-Kvarglömda Program
+Kvarglömda program
 .
 
 3883;txt;01
@@ -2245,7 +2446,7 @@ Följande program kommer stängas automatiskt om de finns kvar i sandlådan när
 .
 
 # 3891;txt;01
-# Program Stopp::Ledarprogram
+# Programstopp::Ledarprogram
 # .
 
 3892;txt;01
@@ -2288,12 +2489,22 @@ När en fil är för stor för att kopieras kommer meddelandet SBIE2102 att dyka
 Visa inte ett meddelande när en fil är för stor för att kopieras
 .
 
+3909;txt;01
+Filöverföringsinställningen begränsar maxstorleken för kopierandet av en fil in i sandlådan.
+
+Inställningen är för närvarande %3 kilobytes i sandlåda '%2'.
+
+Klicka på Ok, för att justera denna gräns till %4 kilobytes.
+
+Du kan också ändra gränsen via öppnande av fönstret Sandlådeinställningar, och öppna sidan Filöverföring.
+.
+
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  Internet/Start Restrictions
 #----------------------------------------------------------------------------
 
 # 3911;txt;01
-# Begränsningar::Internet Behörighet
+# Begränsningar::Internetåtkomst
 # .
 
 3911;txt;02
@@ -2301,43 +2512,51 @@ Begränsningar
 .
 
 3912;txt;01
-Internet behörighet
+Internetåtkomst
 .
 
 3913;txt;01
-Följande program är de enda programmen i sandlådan som kan använda Internet.
+Följande program är de enda programmen i sandlådan som kan använda internet.
 .
 
 3914;txt;01
-När denna funktion är påslagen kommer program i sandlådan aldrig kunna använda Internet, även om de matchar ett programnamn ovan.
+När denna funktion är aktiverad kommer program i sandlådan aldrig kunna använda internet, även om de matchar ett programnamn ovan.
 .
 
 3915;txt;01
-Visa meddelande SBIE%2 när behörighet nekas.
+Visa meddelande SBIE%2 när åtkomst nekas.
 .
 
 3916;txt;01
-&Blockera Alla Program
+&Blockera alla program
 .
 
 3917;txt;01
-&Tillåt Alla Program
+&Tillåt alla program
 .
 
 3918;txt;01
-Alla program kan använda Internet
+Alla program kan använda internet
 .
 
 3919;txt;01
-Inga program kan använda Internet
+Inga program kan använda internet
+.
+
+3920;txt;01
+Internetåtkomstbegränsningar är aktiverade i sandlåda '%2', och hindrar detta program från att tillgå internet.
+
+Klicka på Ok, för att lägga till programmet '%3' till Internetåtkomstbegränsningar i sandlåda '%2'.
+
+För att hantera Internetåtkomstbegränsningar, öppna Sandlådeinställningar och öppna Begränsningar.
 .
 
 # 3921;txt;01
-# Begränsningar::Starta/Kör Behörighet
+# Begränsningar::Start / Köråtkomst
 # .
 
 3922;txt;01
-Starta/Kör Behörighet
+Start / Köråtkomst
 .
 
 3923;txt;01
@@ -2345,11 +2564,19 @@ Följande program är de enda programmen i sandlådan som kommer kunna starta oc
 .
 
 3924;txt;01
-När denna funktion är påslagen kommer program som är installerade och nedladdade i denna sandlåda aldrig tillåtas att starta, även om de matchar programmets namn ovan.
+När denna funktion är aktiverad kommer program som är installerade och nedladdade i denna sandlåda aldrig tillåtas att starta, även om de matchar programmets namn ovan.
 .
 
 3928;txt;01
 Alla program kan startas och köras.
+.
+
+3930;txt;01
+Start / Köråtkomstbegränsningar är aktiverade i sandlåda '%2', och hindrar detta program från att starta och köra.
+
+Klicka på Ok, för att lägga till programmet '%3' till Start / Köråtkomstbegränsningar i sandlåda '%2'.
+
+För hantering av Start / Köråtkomstbegränsningar, gå till Sandlådeinställningar > Begränsningar.
 .
 
 #----------------------------------------------------------------------------
@@ -2357,59 +2584,63 @@ Alla program kan startas och köras.
 #----------------------------------------------------------------------------
 
 # 3931;txt;01
-# Begränsningar::Låg-Nivå Behörighet
+# Begränsningar::Lågnivå-åtkomst
 # .
 
-3932;txt;01
-Låg-Nivå Behörighet
-.
+# 3932;txt;01
+# Lågnivå-åtkomst
+# .
 
-3933;txt;01
-Följande inställningar sänker skyddet för Sandboxie. Att slå på dessa rekommenderas inte.
-.
+# 3933;txt;01
+# Följande inställningar sänker skyddet för Sandboxie. Att aktivera dessa rekommenderas inte.
+# .
 
-3934;txt;01
-Tillåt program i sandlådan att ladda kernel mode drivers i operativsystemet
-.
+# 3934;txt;01
+# Tillåt program att ladda kernel mode drivrutiner i operativsystemet
+# .
 
-3935;txt;01
-Tillåt program i sandlådan att ladda applikationer (Win32) hooks i andra program
-.
+# 3935;txt;01
+# Tillåt program att ladda applikationers (Win32) hooks i andra program
+# .
 
-3936;txt;01
-Tillåt program i denna sandlåda att simulera tangentbord och musinput.
-.
+# 3936;txt;01
+# Tillåt program att simulera tangentbord och musinflöde.
+# .
 
-3937;txt;01
-Tillåt program i denna sandlåda att ändra bakgrundsbild och andra systeminställningar.
-.
+# 3937;txt;01
+# Tillåt program att ändra bakgrundsbild och andra systeminställningar.
+# .
 
-3938;txt;01
-Tillåt program i denna sandlåda att ändra hårdvaruinställningar.
-.
+# 3938;txt;01
+# Tillåt program att hantera hårdvaruinställningar.
+# .
 
 # 3951;txt;01
-# Begränsningar::Hårdvarubehörighet
+# Begränsningar::Hårdvaruåtkomst
 # .
 
-3952;txt;01
-Hårdvarubehörighet
-.
+# 3952;txt;01
+# Hårdvaruåtkomst
+# .
 
-3953;txt;01
-Tillåt program i denna sandlåda att ändra Windowskontots lösenord.
-.
+# 3953;txt;01
+# Tillåt program att ändra användarkontots lösenord.
+# .
+
+# 3954;txt;01
+# Tillåt program att ändra nätverks och brandväggsinställningar
+# .
 
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  Drop Rights
 #----------------------------------------------------------------------------
 
 # 3941;txt;01
-# Begränsningar::Lägre Rättigheter
+# Begränsningar::Lägre rättigheter
 # .
 
 3942;txt;01
-Lägre Rättigheter
+Lägre rättigheter
 .
 
 3943;txt;01
@@ -2421,23 +2652,63 @@ Men, om du använder ett administratörskonto kan Sandboxie stänga av fler säk
 .
 
 3945;txt;01
-Minska Rättigheter för Administratör och power user konton.
+Minska rättigheter för administratörs och power user konton.
 .
 
-3946;txt;01
-Det är rekommenderat att du lämnar denna inställning påslagen, som kompensation för Sandboxie skydd som inte finns i 64-bit versionerna av Windows.
-.
+# 3946;txt;01
+# Det är rekommenderat att du lämnar denna inställning aktiverad, som kompensation för Sandboxie skydd som inte finns i 64-bit versionerna av Windows.
+# .
 
-3947;txt;01
-För att förbättra skyddet på 64-bit Windows, slå på Experimentellt skydd från inställningsmenyn.
-.
+# 3947;txt;01
+# För att förbättra skyddet på 64-bit Windows, slå på Experimentellt skydd från inställningsmenyn.
+# .
 
 3949;txt;01
-Lägre rättigheter inställningen är påslagen i sandlåda '%2', och förhindrar användandet av administrativa privilegier.
+Lägre rättigheter inställningen är aktiverad i sandlåda '%2', och förhindrar användandet av administrativa privilegier.
 
-Klicka OK för att stänga av lägre rättigheter för sandlådan '%2' för att tillåta användandet av administrativa privilegier i sandlådan.
+Klicka på Ok, för att stänga av Lägre rättigheter för sandlådan '%2' för att tillåta användandet av administrativa privilegier i sandlådan.
 
-Du kan alltid ändra lägre rättigheter inställningen genom att öppna sandlådeinställnings rutan och sen expandera "begränsningar".
+Du kan alltid ändra inställningen Lägre rättigheter genom att öppna Sandlådeinställningar och sen öppna Behörighetsinställningsgruppen.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Print Spooler
+#----------------------------------------------------------------------------
+
+3950;txt;01
+Print Spooler
+.
+
+3951;txt;01
+Fönstret Print Spooler körs utanför Sandboxies bevakning.  En sandlådad applikation som begär Print Spooler till en fil blockeras, för att denna fil kommer skrivas utanför sandlådan.
+.
+
+3952;txt;01
+Om du vill tillåta Print Spooler att skriva till en fil, kan du aktivera denna inställning. Det rekommenderas att bara göras när det är nödvändigt.
+.
+
+3953;txt;01
+Tillåt Print Spooler att skriva till en fil.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Network Files
+#----------------------------------------------------------------------------
+
+3955;txt;01
+Nätverksfiler
+.
+
+3956;txt;01 
+Nätverksfiler och mappar är normalt synliga för sandlådade applikationer.
+.
+
+3957;txt;01
+Om du vill blockera sandlådade applikationer från fil och folderåtkomst på ditt nätverk, kan du aktivera denna inställning. Individuella filer och mappar kan öppnas för sandlådade applikationer genom att lägga till dem i Resursåtkomst > Filåtkomst.
+.
+
+3958;txt;01
+Blockera nätverksfiler och mappar förutom vid specifikt öppnande.
 .
 
 #----------------------------------------------------------------------------
@@ -2445,11 +2716,11 @@ Du kan alltid ändra lägre rättigheter inställningen genom att öppna sandlå
 #----------------------------------------------------------------------------
 
 4001;txt;01
-Resursbegränsningar::Filbehörighet::Direktbehörighet
+Resursåtkomst::Filåtkomst::Direktåtkomst
 .
 
 4002;txt;01
-Direkt fil behörighet (OpenFilePath)
+Direkt filåtkomst (OpenFilePath)
 .
 
 4003;txt;01
@@ -2458,15 +2729,15 @@ Följande filer och mappar kommer vara direkt tillåtna för program i denna san
 
 4004;txt;01
 Detta berör inte program som har installerats eller laddats ner i sandlådan.
-Se även: Full behörighetsinställningarna
+Se även: Full åtkomst inställningarna
 .
 
 4011;txt;01
-Resursbehörighet::Filbehörighet::Full behörighet
+Resursåtkomst::Filåtkomst::Full åtkomst
 .
 
 4012;txt;01
-Full filbehörighet (OpenPipePath)
+Full filåtkomst (OpenPipePath)
 .
 
 4013;txt;01
@@ -2474,47 +2745,60 @@ Följande filer och mappar kommer kunna användas av program i denna sandlåda, 
 .
 
 4014;txt;01
-Till skillnad från Direkt fil behörighetsinställningarna, berör denna inställning alla program, även de som installerats inuti sandlådan.
+Till skillnad från inställningen direkt filåtkomst, berör denna inställning alla program, även de som installerats inuti sandlådan.
 .
 
 4021;txt;01
-Resursbehörighet::Filbehörighet::Blockerad behörighet
+Resursåtkomst::Filåtkomst::Blockerad åtkomst
 .
 
 4022;txt;01
-Blockerad filbehörighet (ClosedFilePath)
+Blockerad filåtkomst (ClosedFilePath)
 .
 
 4023;txt;01
-Följande program och filer kommer inte kunna användas/läsas av program i denna sandlåda alls.
+Följande program och filer kommer inte alls kunna användas / läsas av program i denna sandlåda.
 .
 
 4024;txt;01
-Om en fil eller mapp också finns med i en annan sorts filbehörighetinställning kommer blockerad behörighet ha företräde.
+Om en fil eller mapp också finns med i en annan sorts filåtkomstinställning kommer blockerad åtkomst ha företräde.
 .
 
 4025;txt;01
-Windows fildelning kan användas för att passera Blockerad filbehörighet. Lägg till resurser att blockera från Windows fildelning
+Windows fildelning kan användas för att passera blockerad filåtkomst. 
+Därför, lades en inställning till för att blockera åtkomst till Windows fildelningstjänst.
 .
 
 4031;txt;01
-Resursbehörighet::Filbehörighet::Läs-endast behörighet
+Resursåtkomst::Filåtkomst::Skrivskyddad åtkomst
 .
 
 4032;txt;01
-Läs-Bara behörighet (ReadFilePath)
+Skrivskyddad filåtkomst (ReadFilePath)
 .
 
 4033;txt;01
-Följande filer och mappar kommer inte kunna ändras av program som körs i denna sandlåda
+Följande filer och mappar kommer inte kunna ändras av program som körs i denna sandlåda.
 .
 
-4041;txt;01
-Resursbehörighet::Registerbehörighet::Direkt åtkomst
+4111;txt;01
+Resursåtkomst::Filåtkomst::Lässkyddad åtkomst
+.
+
+4112;txt;01
+Lässkyddad filåtkomst (WriteFilePath)
+.
+
+4113;txt;01
+Följande mappar framstår som tomma för program körandes i denna sandlåda, men programmen kan skapa nya filer inom dessa mappar i sandlådan.
+.
+
+4041;txt;01 
+Resursåtkomst::Registeråtkomst::Direktåtkomst
 .
 
 4042;txt;01
-Direkt registeråtkomst (OpenKeyPath)
+Direkt registeråtkomst(OpenKeyPath)
 .
 
 4043;txt;01
@@ -2526,11 +2810,11 @@ Detta berör inte program som har installerats eller laddats ner i denna sandlå
 .
 
 4051;txt;01
-Resursbehörighet::Registerbehörighet::Blockerad åtkomst
+Resursåtkomst::Registeråtkomst::Blockerad åtkomst
 .
 
 4052;txt;01
-Blockerad register behörighet (ClosedKeyPath)
+Blockerad registeråtkomst (ClosedKeyPath)
 .
 
 4053;txt;01
@@ -2538,31 +2822,43 @@ Följande registernycklar kommer inte kunna läsas alls av program körandes i d
 .
 
 4054;txt;01
-Om en registernyckel matchar inställningarna i någon annan behörighetsinställning kommer Blockerad åtkomst ha företräde
+Om en registernyckel matchar någon annan  registeråtkomstinställning, kommer blockerad åtkomst ha företräde
 .
 
 4061;txt;01
-Resursbehörighet::Registerbehörighet::Läs-endast åtkomst
+Resursåtkomst::Registeråtkomst::Skrivskyddad åtkomst
 .
 
 4062;txt;01
-Läs-endast register åtkomst (ReadKeyPath)
+Skrivskyddad registeråtkomst (ReadKeyPath)
 .
 
 4063;txt;01
 Följande registernycklar kommer inte kunna ändras av program i denna sandlåda.
 .
 
+4121;txt;01
+Resursåtkomst::Registeråtkomst::Lässkyddad åtkomst
+.
+
+4122;txt;01
+Lässkyddad registeråtkomst (WriteKeyPath)
+.
+
+4123;txt;01
+Följande registernycklar framstår som tomma för program körandes i denna sandlåda, men programmen kan skriva nya data inom dessa registernycklar i sandlådan.
+.
+
 4071;txt;01
-Resursbehörighet::IPC Behörighet::Direkt åtkomst
+Resursåtkomst::IPC-åtkomst::Direktåtkomst
 .
 
 4072;txt;01
-Direkt IPC Åtkomst (OpenIpcPath)
+Direkt IPC-åtkomst(OpenIpcPath)
 .
 
 4073;txt;01
-Följande NT IPC objekt kommer kunna användas av program körandes i denna sandlåda utan någon sorts sandlådning.
+Följande NT IPC-objekt kommer kunna användas av program körandes i denna sandlåda utan någon sorts sandlådning.
 .
 
 4074;txt;01
@@ -2570,23 +2866,23 @@ Denna inställning berör alla program, även de som har installerats eller ladd
 .
 
 4081;txt;01
-Resursbehörighet::IPC Behörighet::Blockerad åtkomst
+Resursåtkomst::IPC-åtkomst::Blockerad åtkomst
 .
 
 4082;txt;01
-Blockerad IPC Åtkomst (ClosedIpcPath)
+Blockerad IPC-åtkomst(ClosedIpcPath)
 .
 
 4083;txt;01
-Följande NT IPC objekt kommer inte kunna nås alls av program i denna sandlåda.
+Följande NT IPC-objekt kommer inte kunna nås alls av program i denna sandlåda.
 .
 
 4084;txt;01
-Om ett NT IPC objekt matchar någon annan inställning om NT IPC behörighet, kommer Blockerad åtkomst ha företräde.
+Om ett NT IPC-objekt matchar någon annan inställning om NT IPC-behörighet, kommer blockerad åtkomst ha företräde.
 .
 
 4091;txt;01
-Resursbehörighet::Fönsteråtkomst
+Resursåtkomst::Fönsteråtkomst
 .
 
 4092;txt;01
@@ -2594,19 +2890,27 @@ Fönsteråtkomst (OpenWinClass)
 .
 
 4093;txt;01
-Sandlådade program kan inte kommunicera med fönster som tillhör program som körs utanför sandlådan, sålänge rutan inte öppnades av en av följande rutor.
+Sandlådade program kan inte kommunicera med fönster som tillhör program som körs utanför sandlådan, så länge fönstret inte öppnades av ett av följande fönster.
 .
 
 4101;txt;01
-Resursbehörighet::COM åtkomst
+Resursåtkomst::COM-åtkomst
 .
 
 4102;txt;01
-COM åtkomst (OpenClsid)
+COM-åtkomst (OpenClsid)
 .
 
 4103;txt;01
-Sandlådat program kan inte kommunicera med COM objekt som tillhör program körandes i sandlådan, förutom om COM class IDt matchar en av följande klass IDn.
+Sandlådat program kan inte kommunicera med COM-objekt som tillhör program körandes i sandlådan, förutom om COM-class IDt matchar en av följande klass IDn.
+.
+
+4104;txt;01
+Resursåtkomst::Nätverksåtkomst
+.
+
+4105;txt;01
+Nätverksåtkomst (brandvägg)
 .
 
 #----------------------------------------------------------------------------
@@ -2618,15 +2922,15 @@ Applikationer
 .
 
 4202;txt;01
-&Visa Kod
+&Visa kod
 .
 
 4203;txt;01
-Öppna &Webbsida
+Öppna &webbsida
 .
 
 4204;txt;01
-Skapa &Ny
+Skapa &ny
 .
 
 4205;txt;01
@@ -2638,7 +2942,7 @@ Denna applikations konfiguration innehåller inte en webbadress.
 .
 
 4207;txt;01
-Öka användbarheten av Sandboxie med andra program genom att välja dem i denna listan nedanför.
+Öka användbarheten av Sandboxie med andra program genom att välja dem i denna lista nedanför.
 .
 
 # 4208;txt;01
@@ -2650,7 +2954,7 @@ Mappar
 .
 
 4210;txt;01
-Konfigurera mapparna använda av dina andra applikationer.
+Konfigurera mapparna som används av dina andra applikationer.
 .
 
 4211;txt;01
@@ -2666,7 +2970,7 @@ Alternativ plats:
 .
 
 4214;txt;02
-En alternativ plats för '%2'
+En alternativ plats för '%2' 
 bör innehålla följande fil:
 
 %3
@@ -2685,7 +2989,7 @@ Inställningarna nedan bestämmer konfigurationen för programmet '%2'.
 .
 
 4217;txt;01
-Skriv eller klistra in inställningar, tryck sen OK för att skapa en ny lokal programkonfiguration.
+Skriv eller klistra in inställningar, klicka sedan på Ok, för att skapa en ny lokal programkonfiguration.
 .
 
 4218;txt;01
@@ -2693,39 +2997,39 @@ Lokal
 .
 
 4219;txt;01
-Dina lokala (inofficiella) applikations konfigurationer.
+Dina lokala (inofficiella) applikationskonfigurationer.
 .
 
 4220;txt;01
 Den inskrivna koden innehåller ett eller fler fel.
-Kan inte skapa applikationsinställning.
+Kan inte skapa applikationskonfiguration.
 .
 
 4221;txt;01
-För att välja en mapplats för dina applikationer, se Mappsidan.
+För att välja en mapplats för dina applikationer, se sidan Mappar.
 .
 
 4222;txt;02
-Denna inställning kan inte ändras eller raderas eftersom den är
+Denna inställning kan inte ändras eller raderas eftersom den är en
 del av en applikations konfiguration:
 
 %2
 
 För att ta bort applikationsinställningen från sandlådan,
-kolla på applikationssidan i Sandlåde inställnings fönstret.
+kolla på sidan Applikationer i Sandlådeinställningar.
 .
 
 4223;txt;01
-Lokal applikations konfigurationen '%2' är nu borttagen i alla sandlådor
+Lokal applikations konfiguration '%2' är nu borttagen i alla sandlådor
 vill du radera hela denna applikations konfiguration?
 .
 
 4224;txt;01
-PDF/Utskrivning
+PDF / Utskrivning
 .
 
 4226;txt;02
-Säkerhet/Integritet
+Säkerhet / Integritet
 .
 
 4228;txt;01
@@ -2733,11 +3037,11 @@ Skrivbordsprogram
 .
 
 4230;txt;01
-Nerladdningshanterare
+Nedladdningshanterare
 .
 
 4288;txt;01
-Alla Applikationer
+Alla applikationer
 .
 
 4289;txt;01
@@ -2745,7 +3049,7 @@ Lista över alla applikationskonfigureringar, sorterad i alfabetisk ordning. Den
 .
 
 4291;txt;01
-Standardexkludering för Omedelbar Återskapning
+Standarduteslutning för omedelbar återställning
 .
 
 4292;txt;01
@@ -2756,12 +3060,52 @@ Standardlista för program fortfarande öppna i inaktiv sandlåda.
 Standardlista för blockerade TCP/IP portar
 .
 
+4294;txt;01
+Tillåt program att uppdatera hopplistor i W7`s aktivitetsfält
+.
+
+4295;txt;01
+Standarduteslutning filmigrationförinställningar
+.
+
+4296;txt;01
+Standard RPC Port Bindings
+.
+
+4297;txt;01
+Öppna Bluetooth RPC port
+.
+
+4298;txt;01
+Öppna smartkorts RPC port
+.
+
+4299;txt;01
+Öppna Simple Service Discovery Protocol (SSDP, UPnP) RPC port
+.
+
+4300;txt;01
+Öppna ytterligare RPC Port Bindings
+.
+
+4306;txt;01
+Öppna RPC Port Bindings för UAC
+.
+
+4307;txt;01
+Blockera vanliga telemetriprocesser
+.
+
+4308;txt;01
+Filtrera åtkomst till \enheter\
+.
+
 #----------------------------------------------------------------------------
 # Applications - Software Compatibility
 #----------------------------------------------------------------------------
 
 4251;txt;01
-Mjukvarukompatibilitet
+Programkompatibilitet
 .
 
 4252;txt;01
@@ -2769,24 +3113,24 @@ Sandboxie har upptäckt följande program på din dator.
 .
 
 4253;txt;01
-Tryck OK för att verkställa konfigurationsinställningar för att öka kompatibiliteten för dessa program.
+Klicka på Ok, för att verkställa konfigurationsinställningarna och öka kompatibiliteten för dessa program.
 .
 
 4254;txt;01
-Dessa konfigurationsinställningar kommer ha gälla i alla nuvarande sandlådor och alla senare skapta sandlådor
+Dessa konfigurationsinställningar kommer ha effekt i alla nuvarande sandlådor och alla senare skapta sandlådor
 .
 
 4255;txt;01
-Framtiden, kolla inte efter mjukvarokompatibilitet
+Kolla inte efter programkompatibilitet i framtiden.
 .
 
 4256;txt;01
 Denna programkonfiguration kan inte tas bort för att den är aktiv i alla sandlådor.
-För att ta bort denna applikationskonfiguration, använd Mjukvarokompatibilitets programmet från Konfigurationsmenyn.
+För att ta bort denna applikationskonfiguration, använd programmet Programkompatibilitet från menyn Konfigurera
 .
 
 4257;txt;01
-Ta bort &Gamla Inställningar
+Ta bort &gamla inställningar
 .
 
 4258;txt;01
@@ -2794,7 +3138,23 @@ Följande kompatibilitetsinställningar används inte längre:
 
 %2
 
-Tryck OK för att ta bort dessa kompatibilitetsinställningar.
+Klicka på Ok, för att ta bort dessa kompatibilitetsinställningar.
+.
+
+4451;txt;01
+Sandboxie har upptäckt dessa konfliktskapande program i ditt
+system.  Dessa applikationer kan störa Sandboxies korrekta funktion.
+
+%2
+
+Vänligen läs sidan Kända konflikter, på Sandboxies webbsida 
+för mer info och lösningar.
+
+Vill du öppna webbsidan Kända konflikter, nu?
+.
+
+4452;txt;01
+&Kända konflikter
 .
 
 #----------------------------------------------------------------------------
@@ -2802,15 +3162,15 @@ Tryck OK för att ta bort dessa kompatibilitetsinställningar.
 #----------------------------------------------------------------------------
 
 4261;txt;01
-Lås Konfiguration
+Lås konfigurationen
 .
 
 4262;txt;01
-Sandboxie kan skydda den globala konfigurationen och Sandbox inställningar från att ändras av obehöriga. Välj skyddslägen att slå på eller av.
+Sandboxie kan skydda den globala konfigurationen och sandlådeinställningar från att ändras av obehöriga. Välj skyddslägen att aktivera eller inaktivera.
 .
 
 4263;txt;01
-Bara &Administratörer kan göra ändringar
+Bara &administratörer kan göra ändringar
 .
 
 4264;txt;01
@@ -2818,28 +3178,28 @@ Bara &Administratörer kan göra ändringar
 .
 
 4265;txt;01
-&Glöm lösenord när Sandboxie Kontroll rutan döljs
+&Glöm lösenord när fönstret Sandboxie Kontroll döljs
 .
 
 4266;txt;01
-&Byt Lösenord
+&Byt lösenord
 .
 
 4267;txt;01
-Bara administratörer kan använda Stäng av Tvingade Program kommandot
+Bara administratörer kan använda stäng av tvingade program kommandot
 .
 
 4269;txt;01
-Om du vill kan du läsa om skyddet över 
-globala konfigurationen. Vill du öppna sidan om det nu?
+Om du vill kan du läsa om skyddet över globala konfigurationen. 
+Vill du öppna den sidan nu?
 .
 
 4271;txt;01
-Sandboxie konfigurationen är skyddad av ett lösenord. Skriv in lösenordet nu.
+Sandboxie-konfigurationen är skyddad av ett lösenord. Skriv in lösenordet nu.
 .
 
 4272;txt;01
-Skriv in ett nytt lösenord som kommer skydda Sandboxie konfigurationen.
+Skriv in ett nytt lösenord som kommer skydda Sandboxie-konfigurationen.
 .
 
 4273;txt;01
@@ -2867,7 +3227,7 @@ Program som startades nyss
 .
 
 4284;txt;01
-Program som är med i Sandlådeinställningarna
+Program som är med i sandlådeinställningarna
 .
 
 4285;txt;01
@@ -2879,7 +3239,7 @@ Välj eller &skriv in ett program:
 .
 
 4287;txt;01
-Öppna / Välj &Fil
+Öppna / Välj &fil
 .
 
 #----------------------------------------------------------------------------
@@ -2887,19 +3247,19 @@ Välj eller &skriv in ett program:
 #----------------------------------------------------------------------------
 
 # 4301;txt;01
-# Applikationer::Användarlätthet
+# Applikationer::Tillgänglighet
 # .
 
 4302;txt;01
-Användarlätthet
+Tillgänglighet
 .
 
 4303;txt;01
-Följande inställningar slår på användandet av Sandboxie i kombination med användarlätthets program. Notera att vissa delar av Sandboxies skydd möjligtvis försvinner när följande inställningar slås på.
+Följande inställningar aktiverar användandet av Sandboxie i kombination med tillgänglighetssprogram. Notera att vissa delar av Sandboxies skydd av nöd försvinner när följande inställningar aktiveras.
 .
 
 4304;txt;01
-Om du vill kompensera för förlorat skydd, slå på lägre rättigheter i Begränsningar inställningsrutan.
+Om du vill kompensera för förlorat skydd, aktivera Lägre rättigheter i Begränsningar i Sandlådeinställningar
 .
 
 4305;txt;03
@@ -2915,27 +3275,31 @@ Webbläsare
 .
 
 4322;txt;01
-Följande undantag tillåter webbläsare i sandlådan att göra ändringar utanför sandlådan, vilket byter en del av skydd och integritet mot mindre krångel.
+Följande undantag tillåter webbläsare i sandlådan att göra ändringar utanför sandlådan, vilket byter en del av skyddet och integriteten mot mindre krångel.
 .
 
 4323;txt;01
 Tvinga %2 att köra i denna sandlåda
 .
 
+4324;txt;02
+Tillåt direktåtkomst till %2 synka data
+.
+
 4325;txt;02
-Tillåt direkt åtkomst till %2 feeds
+Tillåt direktåtkomst till %2 feeds
 .
 
 4326;txt;02
-Tillåt direkt åtkomst till favoriter %2 favorites 
+Tillåt direktåtkomst till %2 favoriter 
 .
 
 4327;txt;01
-Lägg till Internet Explorer favoriter till Snabb Återskapningsmapparna
+Lägg till Internet Explorer`s favoriter till mapparna snabb återställning
 .
 
 4328;txt;01
-Tillåt direkt åtkomst till %2 kakor
+Tillåt direktåtkomst till %2 kakor
 .
 
 4329;txt;01
@@ -2947,27 +3311,39 @@ Spara utanför sandlådan: Kontoinformation för Hotmail och MSN Messenger
 .
 
 4331;txt;01
-Tillåt direkt åtkomst till %2 lösenord
+Tillåt direktåtkomst till %2 lösenord
 .
 
 4336;txt;02
-Tillåt direkt åtkomst till %2 bokmärken och historiedatabas
+Tillåt direktåtkomst till %2 bokmärken och historiedatabas
 .
 
 4337;txt;02
-Tillåt direkt åtkomst till %2 nätfiske databasen
+Tillåt direktåtkomst till %2 nätfiskedatabasen
 .
 
 4338;txt;02
-Tillåt direkt åtkomst till hela %2 profilmappen
+Tillåt direktåtkomst till hela %2 profilmappen
 .
 
 4339;txt;02
-Tillåt direkt åtkomst av %2 inställningarna
+Tillåt direktåtkomst till %2 inställningarna
+.
+
+4340;txt;01
+Tillåt direktåtkomst till %2 sessionshantering
+.
+
+4341;txt;01
+Tillåt direktåtkomst till %2 anteckningar
+.
+
+4342;txt;01
+Aktivera %2 fixen för W11 - KB5014019
 .
 
 4356;txt;02
-Tillåt direkt åtkomst till %2 bokmärken
+Tillåt direktåtkomst till %2 bokmärken
 .
 
 4357;txt;02
@@ -2979,12 +3355,261 @@ Tillägg
 .
 
 4391;txt;01
-Emailklient
+E-postklient
 .
 
 4392;txt;01
-Följande undantag tillåter Emailklienter körandes i denna sandlåda att nå Emailfiler utanför sandlådan.
+Följande undantag tillåter e-postklienter som körs i denna sandlåda att nå e-postfiler utanför sandlådan.
 .
+
+4393;txt;01
+Mediaspelare
+.
+
+4394;txt;01
+Följande uteslutningar tillåter mediaspelare som körs i denna sandlåda att tillgå filer utanför sandlådan.
+.
+
+4395;txt;01
+Tillåt %2 direktåtkomst till mappen Foton för enklare skärmdumpande.
+.
+
+4396;txt;01
+Torrentklienter
+.
+
+4397;txt;01
+Följande uteslutningar tillåter Torrentklienter som körs i denna sandlåda att tillgå filer utanför sandlådan.
+.
+
+4398;txt;01
+Tillåt %2 direkt åtkomst till musikmappen för enklare musikbibliotekshantering.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  User Accounts
+#----------------------------------------------------------------------------
+
+5101;txt;01
+Användarkonton
+.
+
+5102;txt;01
+Lägg till användarkonton och användargrupper till listan nedan för att begränsa sandlådeanvändandet till endast dessa konton. Om listan är tom, kan sandlådan användas av alla konton.
+.
+
+5103;txt;01
+Notera: Tvingade program och tvingade mappars inställningar för en sandlåda gäller inte för användarkonton som inte kan använda sandlådan.
+.
+
+# 5105;txt;01
+# Lägg till &användare
+# .
+
+5107;txt;01
+Ditt användarkonto har nu begränsats för användande av denna sandlåda, 
+och sandlådan kommer att tas bort från visning i huvudfönstret.
+
+För att göra sandlådan synlig och användbar, använd kommandot Visa dold sandlåda, 
+i sandlådemenyn.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Reveal Hidden Sandbox
+#---------------------------------------------------------------------
+
+5122;txt;01
+Ditt användarkonto är uteslutet från att använda någon av sandlådorna listade nedan.
+.
+
+5123;txt;01
+Följande användarkonton är tillåtna att använda den valda sandlådan just nu.
+.
+
+5124;txt;01
+Klicka på Ok, för att lägga till ditt användarkonto '%2' till sandlådan och synliggöra den i huvudfönstret. 
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Set Layout and Groups
+#----------------------------------------------------------------------------
+
+5142;txt;01
+Arrangera sandlådor i grupper och anpassa deras listordning. Använd högerklick i kontextmenyn för att hantera entrèer i layoutträdet nedan.
+.
+
+5143;txt;01
+(Överst)
+.
+
+5145;txt;01
+&Återställ standardlayouten
+.
+
+5146;txt;01
+För in &grupp
+.
+
+5147;txt;01
+&Namnändra
+.
+
+5148;txt;01
+&Radera
+.
+
+5151;txt;01
+&Flytta
+.
+
+5152;txt;01
+Flytta &upp
+.
+
+5153;txt;01
+Flytta &ner
+.
+
+5154;txt;01
+Flytta &till
+.
+
+#----------------------------------------------------------------------------
+# Plus Tips
+#----------------------------------------------------------------------------
+
+6001;txt;01
+Sandboxie-Classic UI:t (SbieCtrl.exe) har väldigt 
+begränsad resursövervakande och händelsespårningskapacitet.
+
+För optimal felsökning är det högst tillrådligt att
+installera det nya UI:t, Sandboxie-Plus (SandMan.exe),
+vilket ger utmärkt spårnings och övervakningskapacitet.
+
+Vill du ladda ner Sandboxie-Plus nu?
+.
+
+6002;txt;01
+Besök <a ID="whats_new">sandboxie-plus.com</a> to för att lära om den nya funktionaliteten hos Sandboxie-Plus,
+eller klicka direkt på <a ID="upgrade">här</a> för att nedladda den senaste Sandboxie-Plus installeraren.
+.
+
+6003;txt;01
+Legacy UI:t hos Sandboxie-Classic har inte support för nätverksbrandväggens funktionalitet.
+
+Men du kan dock konfigurera egenskapen som stöds av kärnkomponenterna genom användning av ini file, regler är strukturerade enligt följande:
+NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
+
+Om du föredrar att använda ett UI för att kontrollera dessa alternativ, uppgradera till Sandboxie-Plus, som har fullt UI-stöd för alla nya egenskaper.
+.
+
+6004;pop;err;01
+Konfigurationen %3 av låda %2 kräver ett supportercertifikat.
+.
+
+6005;txt;01
+Notera: Utan adminrättigheter misslyckas installerare att starta i sandlådan. Sandboxie-Plus erbjuder ett alternativ för många installerare att lyckas utan dessa privilegier. Du kan även aktivera detta alternativ manuellt i den klassiska versionen, genom att lägga till "FakeAdminRights=y" till ini-sektionen för denna låda.
+.
+
+6006;txt;01
+Legacy UI:t hos Sandboxie-Classic har endast stöd för några restriktionsalternativ.
+
+Ytterligare alternativ likt "ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" och mycket mer kan göras i ini-sektionen för denna låda.
+Det moderna UI:t (SandMan.exe) har också fler anpassningsalternativ för Starta/Kör och internetåtkomstbegränsningar.
+
+Om du föredrar att använda ett UI för att kontrollera dessa alternativ, uppgradera till Sandboxie-Plus, som har fullt UI-stöd för alla nya egenskaper.
+.
+
+6007;txt;01
+Sandboxie-Plus har utökat integritetsskydd via att switcha det gamla agerandet från en svartlista, t.ex, tillåter lästillgång till hela disken, förutom blockerad via Stängd sökväg eller Skriv-sökväg, till ett vitlisteläge där sandlådade program endast är tillåtna att läsa generiska systemplatser, och där lästillgång till de flesta användardata först måste bli uttalat tillåtna.
+
+Legacy UI:t hos Sandboxie-Classic har inte stöd för detta operationsläge. Fast även om det kan konfigureras via ini-filen, rekommenderas det att använda det moderna Sandboxie-Plus UI (Sandman.exe) om du vill använda integritetsutökade lådor.
+.
+
+
+#----------------------------------------------------------------------------
+# Getting Started Wizard
+#----------------------------------------------------------------------------
+
+7850;txt;01
+Kom-igång-guide - Sandboxie
+.
+
+7851;txt;01
+Kom-igång med Sandboxie
+.
+
+7852;txt;01
+Välkommen till Sandboxie!
+
+Sandboxie kör dina program i ett isolerat utrymme som förhindrar dem från att göra permanenta ändringar hos andra program och data på din dator.
+
+Denna guide förklarar kort de grundläggande principerna för Sandboxie-användande.
+.
+
+7853;txt;01
+Notera: Denna guide är utformad för användande av standardsandlådan, DefalutBox.
+.
+
+7854;txt;01
+Hur Sandboxie fungerar (Illustration)
+.
+
+7855;txt;01
+Starta din internetwebbläsare under Sandboxie
+.
+
+7856;txt;01
+Vänligen finn genvägen på ditt skrivbord och dubbelklicka den för att köra din webbläsare i standardsandlådan, DefaultBox.
+.
+
+7857;txt;01
+Klicka här för att dölja detta fönster och visa skrivbordet
+.
+
+7858;txt;01
+Din webbläsare körs nu inne i sandlådan
+.
+
+7859;txt;01
+Program i sandlådan kan enbart ändra innehållet i sandlådan.
+
+När du sparar eller nedladdar filer, hamnar de i sandlådan. Om du sparar en fil till ditt skrivbord, dokument eller nedladdningsmapparna, erbjuder Sandboxie en flyttning av filen ut ur sandlådan.
+
+Prova nu: Nedladda en fil med din webbläsare till din skrivbordsmapp (i sandlådan), och återställ filen till ditt verkliga skrivbord.
+.
+
+7860;txt;01
+Radera innehållet i din sandlåda
+.
+
+7861;txt;01
+Tänk på sandlådan som en bit genomskinligt papper placerat mellan programmet och din dator. Raderande av innehållet i sandlådan är som att kasta bort en använd pappersbit och ersätta det med ett rent.
+.
+
+7862;txt;01
+Prova nu: Radera innehållet i din Defaultbox. Vänligen finn den gula Sandboxie-ikonen uppe i hörnet på din skärm, och klicka:
+.
+
+7863;txt;01
+Högerklicka på den gula Sandboxie-ikonen,
+
+välj sedan DefaultBox, och använd - Radera innehåll.
+.
+
+7864;txt;01
+Klar att börja?
+.
+
+7865;txt;01
+Tack för att du tog dig tid att gå igenom denna guide.  Du kan besöka webbsidan för Sandboxie för fler guider och tips.
+
+Standardinställningarna i Sandboxie ger fullt skydd, men du kanske vill titta på sandlådekonfigurationskommandona i sandlådemenyn i programmetfönstret för Sandboxie Kontroll.
+.
+
+# 7866;txt;01
+# On a 64-bit Windows system, you should enable Experimental Protection. See the Configure menu in Sandboxie Control.
+# .
 
 #----------------------------------------------------------------------------
 # License Manager
@@ -3192,19 +3817,19 @@ Välj hur du vill göra:
 .
 
 8006;ins;01
-Skriv över (uppdatera) den befintliga installationen
+Uppdatera genom att skriva över befintlig installation
 .
 
 8007;ins;01
-Avinstallera (ta bort) den befintliga installationen och dess inställningar
+Avinstallera den befintliga installationen och dess inställningar
 .
 
 8008;ins;01
-Tryck Start när du vill starta
+Klicka på Starta, när du vill starta
 .
 
 8009;ins;01
-Innan du avinstallerar, använd Sandboxie kontrollen för att ta bort innehållet av dina sandlådor.
+Innan du avinstallerar, använd Sandboxie Kontroll för att ta bort innehållet i dina sandlådor.
 .
 
 8010;ins;01
@@ -3212,15 +3837,15 @@ Drivrutinsinstallation
 .
 
 8011;ins;01
-Var god och läs informationen nedan
+Var god läs informationen nedan
 .
 
 8012;ins;01
-Tryck nästa för att installera och aktivera Sandboxie system-nivådrivrutinen. Denna drivrutin är kärnan av Sandboxie programmet.
+Klicka på Nästa, för att installera och aktivera Sandboxies systemnivådrivrutin. Denna drivrutin är kärnan av Sandboxie-programmet.
 .
 
 8013;ins;01
-Du kanske behöver stänga av dina systemskydds program som du kör, vilket kan förhindra installationen av system-nivådrivrutinen.
+Du kanske behöver stänga av dina systemskyddsprogram som du kör, vilket kan förhindra installationen av systemnivådrivrutinen.
 .
 
 8014;ins;02
@@ -3232,7 +3857,7 @@ Drivrutinen installeras utan problem på de flesta datorer.
 .
 
 8016;ins;01
-Var god och vänta medan Sandboxie avinstalleras.
+Var god vänta medan Sandboxie avinstalleras.
 .
 
 8021;ins;01
@@ -3244,7 +3869,7 @@ Kör valfritt program under Sandboxies översyn.
 .
 
 8023;ins;01
-Sandboxie Startmeny.lnk
+Sandboxie startmeny.lnk
 .
 
 8024;ins;01
@@ -3260,7 +3885,7 @@ Kör standardwebbläsaren under Sandboxies översyn
 .
 
 8027;ins;01
-Kör Windows Explorer sandlådad.lnk
+Kör utforskaren sandlådad.lnk
 .
 
 8028;ins;01
@@ -3272,7 +3897,7 @@ Sandboxie Kontroll.lnk
 .
 
 8030;ins;01
-Öppna Sandboxie kontrollpanelen
+Öppna Sandboxies kontrollpanel
 .
 
 8031;ins;01
@@ -3284,7 +3909,7 @@ Avinstallera Sandboxie
 .
 
 8033;ins;01
-=copy:3698
+=kopiera:3698
 .
 
 8041;ins;01
@@ -3292,9 +3917,11 @@ Sandboxie kan bara installeras på följande versioner av Microsoft Windows:
 .
 
 8042;ins;01
-Sandboxie måste installeras på ett användarkonto på din dator.
+Sandboxie måste installeras på ett användarkonto som har adminrättigheter
+på din dator.
 
-Om du använder Windows med User Accounts Control (UAC) påslagen bör du starta installationspaketet och använda 'Kör som Administratör'.
+Om du använder Windows med User Accounts Control (UAC) aktiverat, 
+bör du starta installationspaketet och använda Kör som administratör.
 .
 
 8043;ins;01
@@ -3306,21 +3933,22 @@ Om du använder Windows med User Accounts Control (UAC) påslagen bör du starta
 .
 
 8051;ins;01
-Sandboxie Kontrollprogrammet körs.
+Programmet Sandboxie Kontroll körs.
 
-Tryck OK för att stänga den för att sen fortsätta installationen.
+Klicka på Ok, för att stänga det för att sen fortsätta installationen.
 
-Tryck Avbryt för att avbryta installationen.
+Klicka på Avbryt, för att avbryta installationen.
 .
 
 8052;ins;01
 Kan inte skapa eller uppdatera Sandboxies programfiler.
 
-Du bör se till så att Sandboxie Kontrollen inte körs och att inte finns några program som körs i en sandlåda.
+Du bör se till så att Sandboxie Kontroll inte körs,
+och att det inte finns några program som körs i en sandlåda.
 
-Tryck sen OK för att försöka igen.
+Klicka sen på Ok, för att försöka igen.
 
-Tryck annars på avbryt för att avbryta installationen.
+Klicka annars på Avbryt, för att avbryta installationen.
 .
 
 8053;ins;01
@@ -3330,9 +3958,9 @@ Tryck annars på avbryt för att avbryta installationen.
 8054;ins;01
 Vill du behålla din Sandboxie.ini konfigurationsfil?
 
-Tryck JA för att behålla konfigurationsinställningarna i din Sandboxie.ini fil.
+Klicka på Ja, för att behålla konfigurationsinställningarna i din Sandboxie.ini-fil.
 
-Tryck NEJ för att radera din Sandboxie.ini fil och förlora dina konfigurationsinställningar.
+Klicka på Nej, för att radera din Sandboxie.ini-fil samt dina konfigurationsinställningar.
 .
 
 #----------------------------------------------------------------------------
@@ -3342,7 +3970,7 @@ Tryck NEJ för att radera din Sandboxie.ini fil och förlora dina konfigurations
 8101;txt;01
 Kan inte installera drivrutinen just nu.
 
-Starta om datorn,
+Starta om datorn, 
 kör sen installationen igen
 
 Funktionen som misslyckades är: %2
@@ -3352,7 +3980,7 @@ Funktionen som misslyckades är: %2
 Kan inte avsluta tjänsten just nu.
 Tjänsten '%2' är upptagen.
 
-Tryck OK för att försöka igen.
+Klicka på Ok, för att försöka igen.
 .
 
 8103;txt;01
@@ -3372,6 +4000,6 @@ Följande program måste stängas innan installationen kan fortsätta.
 .
 
 8107;txt;01
-Stäng dessa program och tryck OK för att fortsätta.
-Tryck avsluta för att avsluta installationen.
+Stäng dessa program och klicka på Ok, för att fortsätta. Klicka på Avsluta, för att avsluta installationen.
 .
+

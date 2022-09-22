@@ -34,6 +34,7 @@ HEADERS += ./MiscHelpers.h \
     ./Common/TreeViewEx.h \
     ./Common/TreeWidgetEx.h \
     ./Common/CheckList.h \
+    ./Common/NeonEffect.h \
     ./Common/NetworkAccessManager.h
     
 SOURCES += ./MiscHelpers.cpp \

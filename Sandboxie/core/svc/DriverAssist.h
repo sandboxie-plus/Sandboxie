@@ -45,6 +45,8 @@ private:
 
     DriverAssist();
 
+	~DriverAssist();
+
     bool InitializePortAndThreads();
 
     void ShutdownPortAndThreads();
@@ -97,7 +99,7 @@ private:
 
     void LogMessage();
 
-    void LogMessage_Single(ULONG code, wchar_t* data);
+    void LogMessage_Single(ULONG code, wchar_t* data, ULONG pid);
     void LogMessage_Multi(ULONG msgid, const WCHAR *path, const WCHAR *text);
     void LogMessage_Write(const WCHAR *path, const WCHAR *text);
 
@@ -109,6 +111,14 @@ private:
 
     void InjectLow(void *_msg);
 	HANDLE InjectLow_OpenProcess(void *_msg);
+
+    //
+    // SbieLogin
+    //
+
+    bool GetSandboxieSID(const WCHAR* boxname, UCHAR* SandboxieLogonSid, DWORD dwSidSize);
+
+    void CleanUpSIDs();
 
     //
     // data

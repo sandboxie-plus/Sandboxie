@@ -422,3 +422,42 @@ public:
 signals:
 	void checkStateChanged(int Index, Qt::CheckState state);
 };
+
+
+///////////////////////////////////////////////////
+// CConfigDialog
+
+
+class MISCHELPERS_EXPORT CConfigDialog : public QDialog
+{
+	Q_OBJECT
+
+public:
+	CConfigDialog(QWidget* parent = Q_NULLPTR);
+
+public slots:
+	void OnSearchOption();
+
+	void OnItemClicked(QTreeWidgetItem* pItem, int Column);
+
+protected:
+	QWidget* ConvertToTree(QTabWidget* pTabs);
+
+	QWidget* AddConfigSearch(QTabWidget* pTabs);
+
+	virtual void OnTab(int iTabID) = 0;
+
+	QTabWidget* m_pTabs;
+
+	QStackedLayout* m_pStack;
+	QLineEdit* m_pSearch;
+	QTreeWidget* m_pTree;
+
+	int m_iCurrentTab;
+
+private:
+	int m_SearchI;
+	int m_SearchJ;
+	int m_SearchP;
+	QWidget* m_LastFound;
+};

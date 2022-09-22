@@ -1,0 +1,331 @@
+*==========
+* Missing Messages in Text-Dutch-1043.txt
+*==========
+
+2111;pop;inf;01
+SBIE2111 Process is not accessible: %3, call %2
+.
+
+2112;pop;inf;01
+SBIE2112 Object is not accessible: %3, call %2
+.
+
+2195;pop;inf;01
+SBIE2195 To run Explorer.exe sandboxed, the access for COM infrastructure must not be Open.
+.
+
+2225;pop;wrn;01
+SBIE2225 An attempt was made to access an EFS file: %2
+.
+
+2325;pop;err;01
+SBIE2325 Debug:  %2
+.
+
+3315;txt;01
+Deleting Sandbox contents
+.
+
+3316;txt;01
+Do you want to abort the operation?
+.
+
+3317;txt;01
+Preparing to delete: %2
+.
+
+3318;txt;01
+Deleting: %2
+.
+
+3468;txt;01
+Sandboxie-Plus Migration Guide
+.
+
+4342;txt;01
+Enable %2 fix for Windows 11 KB5014019
+.
+
+6010;txt;01
+You have installed Sandboxie more than %2 days ago.
+
+So, you think David and the contributors are doing a great job?
+
+Why don't you show it by supporting the project and getting a Supporter Certificate?
+
+Sandboxie without a valid supporter certificate will now pause for a few seconds, to give you time to contemplate the possibility of supporting the project.
+.
+
+6011;txt;01
+Wait
+.
+
+6012;txt;01
+Continue
+.
+
+6013;txt;01
+Quit
+.
+
+6014;txt;01
+Get Certificate
+.
+
+*==========
+* Extraneous Messages in Text-Dutch-1043.txt
+*==========
+
+1109;evt;err;01
+SBIE1109 Ongeldige licentie-informatie: %2
+.
+
+1202;pop;err;01
+SBIE1202 Kan licentie-informatie niet bijwerken: %2
+.
+
+1303;pop;inf;01
+SBIE1303 Er kan slechts een sandbox tegelijk actief zijn
+.
+
+1310;pop;inf;01
+SBIE1310 Extra functies zijn uitgeschakeld tot de licentie opnieuw geactiveerd is
+.
+
+3231;txt;01
+U hebt Sandboxie meer dan 30 dagen geleden geinstalleerd.
+.
+
+3232;txt;01
+Persoonlijk gebruik van Sandboxie is gratis toegestaan zolang u wenst.
+.
+
+3233;txt;01
+De gratis versie zal nu echter voor enkele seconden pauzeren.
+.
+
+3234;txt;01
+De gratis versie laat echter toe om 1 sandbox tegelijk te gebruiken.
+.
+
+3235;txt;01
+Deze beperking wordt verwijderd bij de betaalversie van Sandboxie.
+.
+
+3236;txt;01
+De betaalversie laat daarenboven automatisch sandboxing toe voor geselecteerde programma's.
+.
+
+3237;txt;01
+Voor meer informatie en de aankoop van de software, klik op de volgende link:
+.
+
+3238;txt;01
+Nog %2 seconden wachten
+.
+
+3239;txt;01
+Klik om dit venster te sluiten en verder te gaan
+.
+
+3240;txt;01
+Klik om dit venster te sluiten en te stoppen
+.
+
+3455;txt;01
+Sandboxie &registreren
+.
+
+3458;txt;01
+Directe toegang toestaan tot Windows lettertypecache
+.
+
+3771;txt;01
+(deze functie is alleen beschikbaar in de geregistreerde versie van Sandboxie)
+.
+
+3950;txt;01
+Printspooler
+.
+
+3951;txt;01
+De Windows printspooler draait buiten het toezicht van Sandboxie. Een gesandboxte applicatie die de printspooler vraagt om naar een bestand af te drukken zal worden geblokkeerd, omdat dit bestand buiten de sandbox zal worden geschreven.
+.
+
+3952;txt;01
+Als u de printspooler wilt toestaan af te drukken naar een bestand, kunt u deze instelling inschakelen. Het wordt aanbevolen deze optie alleen in te schakelen wanneer dat nodig is.
+.
+
+3953;txt;01
+De Windows printspooler toestaan om naar een bestand af te drukken.
+.
+
+7901;txt;01
+Sandboxie-licentiebeheerder
+.
+
+7902;txt;01
+Systeemcode %2
+.
+
+7903;txt;01
+In de toekomst de licentie activeren zonder vragen
+.
+
+7921;txt;01
+Sandboxie is geregistreerd en de licentie is geactiveerd.
+.
+
+7922;txt;01
+Sandboxie is geregistreerd maar de licentie zou nu opnieuw moeten geactiveerd zijn.
+.
+
+7923;txt;01
+Niet-geregistreerde kopie. Vandaag registreren!
+.
+
+7924;txt;01
+De licentie voor Sandboxie zal opnieuw geactiveerd moeten worden binnen %2 dagen.
+.
+
+7925;txt;01
+De licentie voor Sandboxie werd nu geactiveerd.
+.
+
+7926;txt;01
+De vervaldatum van uw productsleutel is %2.
+.
+
+7927;txt;01
+Uw productsleutel heeft geen vervaldatum.
+.
+
+7931;txt;01
+Uw kopie van sandboxie is geregistreerd met een verouderde registratiesleutel.
+.
+
+7932;txt;01
+Sta de licentiebeheerder toe om te verbinden met de licentieserver en uw oude registratiesleutel te upgraden naar een nieuwe productsleutel. U zult niets aangerekend worden voor deze upgrade.
+.
+
+7933;txt;01
+Uw registratiesleutel wordt niet herkend door de licentieserver.
+.
+
+7934;txt;01
+Contacteer support@sandboxie.com voor vragen in verband met licenties
+.
+
+7935;txt;01
+Uw nieuwe productsleutel is:
+.
+
+7936;txt;01
+Verzeker u ervan dat u deze productsleutel op een veilige plaats bewaart voor in de toekomst. Gebruik onderstaande knop om uw productsleutel naar het klembord te kopiëren, vanwaar u hem kunt plakken in een document en printen.
+.
+
+7937;txt;01
+Registratiesleutel naar productsleutel &upgraden
+.
+
+7941;txt;01
+Sandboxie-registratie wordt via een betalingsverwerker van derden gedaan. Begin het registratieproces door de Sandboxie-website te bezoeken via onderstaande link.
+.
+
+7942;txt;01
+Om uw licentie voor Sandboxie te activeren, geef de productsleutel op die in uw betalingsbewijs verschijnt, en klik op de knop om uw licentie te activeren.
+.
+
+7943;txt;01
+Wilt u nu een nieuwe productsleutel ingeven?
+.
+
+7944;txt;01
+Licentie &activeren
+.
+
+7945;txt;01
+Uw kopie van Sandboxie is nu geregistreerd.
+.
+
+7946;txt;01
+Bedankt voor het ondersteunen van Sandboxie!
+.
+
+7951;txt;01
+Wilt u de licentie nu activeren?
+.
+
+7952;txt;01
+Bezoek de Sandboxie-website via onderstaande link om een nieuwe productsleutel te bestellen.
+.
+
+7961;txt;01
+Licentie-&informatie wissen
+.
+
+7962;txt;01
+Bent u zeker dat u de licentie-informatie in Sandboxie wilt wissen?
+
+U kunt uw licentie op elk moment activeren door een productsleutel in te geven.
+.
+
+7971;txt;01
+Dit is geen geldige productsleutel.
+.
+
+7972;txt;01
+Dit is geen geldige systeemcode.
+.
+
+7973;txt;01
+Dit is geen geldige activatiesleutel. [%2]
+.
+
+7974;txt;01
+Ongeldig antwoord van de licentieserver.
+.
+
+7975;txt;01
+Product-activatie mislukt:
+.
+
+7976;txt;01
+Wilt u nu opnieuw proberen?
+.
+
+7977;txt;01
+Als u Sandboxie moet activeren op een computer die geen internettoegang heeft,
+bekijk dan de veelgestelde vragen van Sandboxie-licentie voor informatie over offline activatie.
+.
+
+7978;txt;01
+De huidige datum (%2) is later dan de datum verzonden van de licentieserver (%3).
+.
+
+7982;txt;01
+De licentieserver gaf geen reden op voor mislukking van activatie.
+.
+
+7983;txt;01
+Productsleutel wordt niet herkend door de licentieserver.
+.
+
+7984;txt;01
+Productsleutel kan niet gebruik worden na zijn vervaldatum van %2.
+.
+
+7985;txt;01
+Productsleutel werd op te veel computers geactiveerd.
+.
+
+7986;txt;01
+Productsleutel werd geannuleerd omdat hij publiek gemaakt werd op het internet.
+.
+
+7987;txt;01
+Productsleutel werd geannuleerd omdat de bestelling terugbetaald werd.
+.
+
+
+

@@ -40,6 +40,7 @@
 #define PATTERN XPATTERN
 #define _MY_POOL_H          // prevent inclusion of pool.h by pattern.h
 typedef void *POOL;
+#include "common/list.h"
 #include "common/pattern.h"
 
 
@@ -64,7 +65,7 @@ enum {
     BoxPageInternetPgm,
     BoxPageStartRunPgm,
     BoxPageDropRights,
-    BoxPagePrintSpooler,
+    // BoxPagePrintSpooler,
     BoxPageNetworkFiles,
     BoxPageOpenFile,
     BoxPageOpenPipe,
@@ -133,7 +134,7 @@ BEGIN_MESSAGE_MAP(CBoxPage, CPropertyPage)
 
     ON_COMMAND(ID_BLOCKNETWORKFILES, OnModified)
 
-    ON_COMMAND(ID_ALLOWSPOOLERPRINTTOFILE, OnModified)
+    // ON_COMMAND(ID_ALLOWSPOOLERPRINTTOFILE, OnModified)
 
     ON_CONTROL(CBN_SELENDOK, ID_FILE_PROGRAM,   FileAccess_OnSelectPgm)
     ON_CONTROL(LBN_SELCHANGE, ID_FILE_LIST,     FileAccess_OnSelectRes)
@@ -217,8 +218,8 @@ CBoxPage::CBoxPage(ULONG type, const CString &BoxName,
         template_base = L"RESTRICTPGM_PAGE";
     if (m_type == BoxPageDropRights)
         template_base = L"DROPRIGHTS_PAGE";
-    if (m_type == BoxPagePrintSpooler)
-        template_base = L"PRINTSPOOLER_PAGE";
+/*     if (m_type == BoxPagePrintSpooler)
+        template_base = L"PRINTSPOOLER_PAGE"; */
     if (m_type == BoxPageNetworkFiles)
         template_base = L"NETWORK_FILES_PAGE";
     if (m_type == BoxPageOpenFile ||
@@ -710,8 +711,8 @@ BOOL CBoxPage::OnInitDialog()
         FileMigrate_OnInitDialog(box);
     if (m_type == BoxPageDropRights)
         DropRights_OnInitDialog(box);
-    if (m_type == BoxPagePrintSpooler)
-        PrintSpooler_OnInitDialog(box);
+/*     if (m_type == BoxPagePrintSpooler)
+        PrintSpooler_OnInitDialog(box); */
     if (m_type == BoxPageNetworkFiles)
         NetworkFiles_OnInitDialog(box);
 
@@ -839,8 +840,8 @@ void CBoxPage::OnOK()
         DropRights_OnOK(box);
     if (m_type == BoxPageNetworkFiles)
         NetworkFiles_OnOK(box);
-    if (m_type == BoxPagePrintSpooler)
-        PrintSpooler_OnOK(box);
+/*     if (m_type == BoxPagePrintSpooler)
+        PrintSpooler_OnOK(box); */
 
     if (m_type == BoxPageForceFol ||
         m_type == BoxPageForcePgm ||
@@ -2671,7 +2672,7 @@ void CBoxPage::NetworkFiles_OnOK(CBox &box)
     box.GetSetBlockNetworkFiles(TRUE, enabled);
 }
 
-void CBoxPage::PrintSpooler_OnInitDialog(CBox &box)
+/* void CBoxPage::PrintSpooler_OnInitDialog(CBox &box)
 {
     GetDlgItem(ID_PAGE_LABEL_1)->SetWindowText(CMyMsg(MSG_3951));
     GetDlgItem(ID_PAGE_LABEL_2)->SetWindowText(CMyMsg(MSG_3952));
@@ -2688,7 +2689,7 @@ void CBoxPage::PrintSpooler_OnOK(CBox &box)
     CButton *pCheckBox = (CButton *)GetDlgItem(ID_ALLOWSPOOLERPRINTTOFILE);
     BOOL enabled = pCheckBox->GetCheck() == BST_CHECKED ? TRUE : FALSE;
     box.GetSetAllowSpoolerPrintToFile(TRUE, enabled);
-}
+} */
 
 
 

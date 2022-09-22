@@ -141,7 +141,7 @@ CHAR* log_buffer_get_next(LOG_BUFFER_SEQ_T seq_number, LOG_BUFFER* ptr_buffer)
 	}
 
 	if (ptr_buffer->buffer_used != 0)
-		return ptr_buffer->buffer_start_ptr; // we havn't found the next entry and we have entries, so return the first entry
+		return ptr_buffer->buffer_start_ptr; // we haven't found the next entry and we have entries, so return the first entry
 	return NULL; // the buffer is apparently empty, return NULL
 }
 

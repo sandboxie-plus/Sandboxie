@@ -87,14 +87,18 @@ QList<QVariant>	CTraceModel::Sync(const QVector<CTraceEntryPtr>& EntryList, int 
 			pNode = static_cast<STraceNode*>(MkNode(ID));
 			pNode->Values.resize(columnCount());
 			if (m_bTree) {
-				pNode->Path.append(QString("pid_%1").arg(pEntry->GetProcessId()));
-				pNode->Path.append(QString("tid_%1").arg(pEntry->GetThreadId()));
+				//pNode->Path.append(QString("pid_%1").arg(pEntry->GetProcessId()));
+				//pNode->Path.append(QString("tid_%1").arg(pEntry->GetThreadId()));
+				if (pEntry->GetProcessName().isEmpty())
+					pNode->Path.append(tr("Process %1").arg(pEntry->GetProcessId()));
+				else
+					pNode->Path.append(tr("%1 (%2)").arg(pEntry->GetProcessName()).arg(pEntry->GetProcessId()));
+				pNode->Path.append(QString("Thread %1").arg(pEntry->GetThreadId()));
 				//pNode->Path = MakePath(pEntry, EntryList);
 			}
 			pNode->pEntry = pEntry;
 			New[pNode->Path].append(pNode);
-			//Added.append(ID);
-			SetProcessName(pEntry->GetProcessName(), pEntry->GetProcessId(), pEntry->GetThreadId());
+			//SetProcessName(pEntry->GetProcessName(), pEntry->GetProcessId(), pEntry->GetThreadId());
 		}
 		else
 		{
@@ -128,7 +132,14 @@ QList<QVariant>	CTraceModel::Sync(const QVector<CTraceEntryPtr>& EntryList, int 
 			case eProcess:			Value = pEntry->GetUID(); break;
 			case eType:				Value = pEntry->GetTypeStr(); break;
 			case eStatus:			Value = pEntry->GetStautsStr(); break;
-			case eValue:			Value = pEntry->GetMessage(); break;
+			case eValue:		{			
+									QString sValue = pEntry->GetName();
+									if (!sValue.isEmpty() && !pEntry->GetMessage().isEmpty())
+										sValue += " ";
+									sValue += pEntry->GetMessage();
+									Value = sValue;
+									break;
+								}
 			}
 
 			STraceNode::SValue& ColValue = pNode->Values[section];
@@ -144,20 +155,20 @@ QList<QVariant>	CTraceModel::Sync(const QVector<CTraceEntryPtr>& EntryList, int 
 					/*case eProcess:
 					{
 						CBoxedProcessPtr pProcess = theAPI->GetProcessById(pEntry->GetProcessId());
-						ColValue.Formated = QString("%1 (%2, %3)").arg(pProcess.isNull() ? tr("Unknown") : pProcess->GetProcessName()).arg(pEntry->GetProcessId()).arg(pEntry->GetThreadId());
+						ColValue.Formatted = QString("%1 (%2, %3)").arg(pProcess.isNull() ? tr("Unknown") : pProcess->GetProcessName()).arg(pEntry->GetProcessId()).arg(pEntry->GetThreadId());
 						break;
 					}
-					case eTimeStamp:		ColValue.Formated = pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"); break;*/
+					case eTimeStamp:		ColValue.Formatted = pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"); break;*/
 					case eProcess:			
 						if(!m_bTree) {
 							QString Name = pEntry->GetProcessName();
-							ColValue.Formated = QString("%1 (%2, %3) - %4").arg(Name.isEmpty() ? tr("Unknown") : Name)
+							ColValue.Formatted = QString("%1 (%2, %3) - %4").arg(Name.isEmpty() ? tr("Unknown") : Name)
 								.arg(pEntry->GetProcessId()).arg(pEntry->GetThreadId()).arg(pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"));
 						} else 
-							ColValue.Formated = pEntry->GetTimeStamp().toString("hh:mm:ss.zzz");
+							ColValue.Formatted = pEntry->GetTimeStamp().toString("hh:mm:ss.zzz");
 						break;
-						//case eType:			ColValue.Formated = ; break;
-						//case eValue:			ColValue.Formated = ; break;
+						//case eType:			ColValue.Formatted = ; break;
+						//case eValue:			ColValue.Formatted = ; break;
 				}
 			}
 
@@ -190,15 +201,16 @@ void CTraceModel::Clear()
 	m_LastCount = 0;
 	m_LastID.clear();
 
-	foreach(quint32 pid, m_PidMap.uniqueKeys()) {
+	/*foreach(quint32 pid, m_PidMap.uniqueKeys()) {
 		SProgInfo& Info = m_PidMap[pid];
 		Info.Dirty = true;
 		Info.Threads.clear();
 	}
-	m_PidMap.clear();
+	m_PidMap.clear();*/
 	CTreeItemModel::Clear();
 }
 
+/*
 void CTraceModel::SetProcessName(const QString& Name, quint32 pid, quint32 tid)
 {
 	SProgInfo& Info = m_PidMap[pid];
@@ -227,30 +239,33 @@ void CTraceModel::LogThreadId(quint32 pid, quint32 tid)
 		emit NewBranche();
 	}
 }
+*/
 
 CTraceModel::STreeNode* CTraceModel::MkVirtualNode(const QVariant& Id, STreeNode* pParent)
 { 
 	STreeNode* pNode = CTreeItemModel::MkVirtualNode(Id, pParent);
 
-	StrPair typeId = Split2(Id.toString(), "_");
+	/*StrPair typeId = Split2(Id.toString(), "_");
 	if (typeId.first == "pid")
 	{
 		quint32 pid = typeId.second.toUInt();
 		QString Name = GetProcessName(pid);
 		pNode->Values[0].Raw = pid;
 		if(!Name.isEmpty())
-			pNode->Values[0].Formated = tr("%1 (%2)").arg(Name).arg(pid); 
+			pNode->Values[0].Formatted = tr("%1 (%2)").arg(Name).arg(pid); 
 		else
-			pNode->Values[0].Formated = tr("Process %1").arg(pid);
+			pNode->Values[0].Formatted = tr("Process %1").arg(pid);
 	}
-	else // if (typeId.first == "tid")
+	else if (typeId.first == "tid")
 	{
 		quint32 tid = typeId.second.toUInt();
 		quint32 pid = Split2(pParent->ID.toString(), "_").second.toUInt();
 		LogThreadId(pid, tid);
 		pNode->Values[0].Raw = tid;
-		pNode->Values[0].Formated = tr("Thread %1").arg(tid);
+		pNode->Values[0].Formatted = tr("Thread %1").arg(tid);
 	}
+	else*/
+		pNode->Values[0].Raw = pNode->Values[0].Formatted = Id;
 
 	return pNode;
 }

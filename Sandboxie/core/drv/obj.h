@@ -84,12 +84,14 @@ BOOLEAN Obj_HookParseProc(
 // Variables
 //---------------------------------------------------------------------------
 
+extern POBJECT_TYPE *Obj_ObjectTypes;
 
 extern const OBJECT_NAME_INFORMATION Obj_Unnamed;
 
 extern P_ObGetObjectType pObGetObjectType;
 extern P_ObQueryNameInfo pObQueryNameInfo;
 
+extern BOOLEAN Obj_CallbackInstalled;
 
 //---------------------------------------------------------------------------
 // Macros Related to ParseProcedure

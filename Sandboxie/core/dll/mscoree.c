@@ -57,8 +57,8 @@ _FX DWORD MsCorEE__CorExeMain()
 }
 
 
-// Load inject dlls in .Net process' entry (_CorExeMain).
-_FX BOOLEAN MsCorEE_Init(HMODULE hmodule)
+// Load inject dlls in .Net process's entry (_CorExeMain).
+_FX BOOLEAN MsCorEE_Init(HMODULE module)
 {
 
     // Use the code from AdvApi_Init

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -329,8 +329,10 @@ _FX void File_ReplaceFileW_3(
         (*FileFlags) &= FGN_IS_BOXED_PATH;
         if (*FileFlags) {
 
-			if (File_Snapshot != NULL)
-				File_FindSnapshotPath(&CopyPath);
+            if (File_Snapshot != NULL) {
+                WCHAR* TmplName = File_FindSnapshotPath(CopyPath);
+                if (TmplName) CopyPath = TmplName;
+            }
 
             len = (wcslen(CopyPath) + 1) * sizeof(WCHAR);
             path = Dll_AllocTemp(len);

@@ -1,0 +1,641 @@
+*==========
+* Missing Messages in Text-Spanish-1034.txt
+*==========
+
+1399;pop;inf;01
+%0
+.
+
+2111;pop;inf;01
+SBIE2111 Process is not accessible: %3, call %2
+.
+
+2112;pop;inf;01
+SBIE2112 Object is not accessible: %3, call %2
+.
+
+2194;pop;inf;01
+SBIE2194 MSI installer requires %2 option to be set in the ini, what however weakens the isolation.
+.
+
+2195;pop;inf;01
+SBIE2195 To run Explorer.exe sandboxed, the access for COM infrastructure must not be Open.
+.
+
+2198;pop;inf;01
+%0
+.
+
+2225;pop;wrn;01
+SBIE2225 An attempt was made to access an EFS file: %2
+.
+
+2302;pop;err;01
+SBIE2302 Process image configuration conflict: %2
+.
+
+2325;pop;err;01
+SBIE2325 Debug:  %2
+.
+
+3107;txt;01
+Type the name of a program or path to open the following file in the current sandbox:
+.
+
+3315;txt;01
+Deleting Sandbox contents
+.
+
+3316;txt;01
+Do you want to abort the operation?
+.
+
+3317;txt;01
+Preparing to delete: %2
+.
+
+3318;txt;01
+Deleting: %2
+.
+
+3504;txt;01
+&Support Sandboxie
+.
+
+3460;txt;01
+Function hooking customizations
+.
+
+3467;txt;01
+Upgrade to Sandboxie-Plus
+.
+
+3468;txt;01
+Sandboxie-Plus Migration Guide
+.
+
+3484;txt;01
+Resource Access
+.
+
+4104;txt;01
+Resource Access::Network Access
+.
+
+4105;txt;01
+Network Access (Firewall)
+.
+
+4295;txt;01
+Default exclusions File Migration presets
+.
+
+4296;txt;01
+Default RPC Port Bindings
+.
+
+4297;txt;01
+Open Bluetooth RPC port
+.
+
+4298;txt;01
+Open Smart Card RPC port
+.
+
+4299;txt;01
+Open Simple Service Discovery Protocol (SSDP, UPnP) RPC port
+.
+
+4300;txt;01
+Open additional RPC Port Bindings
+.
+
+4306;txt;01
+Open RPC Port Bindings for UAC
+.
+
+4307;txt;01
+Block common telemetry processes
+.
+
+4308;txt;01
+Filter access to \Devices\
+.
+
+4341;txt;01
+Allow direct access to %2 notes
+.
+
+4342;txt;01
+Enable %2 fix for Windows 11 KB5014019
+.
+
+4393;txt;01
+Media Players
+.
+
+4394;txt;01
+The following exclusions allow Media players running in this sandbox to access files outside the sandbox.
+.
+
+4395;txt;01
+Allow %2 direct access to the Photo folder for easier screen capture.
+.
+
+4396;txt;01
+Torrent Clients
+.
+
+4397;txt;01
+The following exclusions allow Torrent clients running in this sandbox to access files outside the sandbox.
+.
+
+4398;txt;01
+Allow %2 direct access to the Music folder for easier music library management.
+.
+
+6001;txt;01
+The classic Sandboxie UI (SbieCtrl.exe) has very limited
+resource monitoring and event tracing capabilities.
+
+For optimal troubleshooting it is highly advisable 
+to install the new UI, Sandboxie-Plus (SandMan.exe),
+which provides excellent tracing and monitoring capabilities.
+
+Do you want to download Sandboxie-Plus now?
+.
+
+6002;txt;01
+Visit <a ID="whats_new">sandboxie-plus.com</a> to learn about the new functionality of Sandboxie-Plus,
+or directly click <a ID="upgrade">here</a> to download the latest Sandboxie-Plus installer.
+.
+
+6003;txt;01
+The legacy UI of Sandboxie classic does not implement support for the network firewall functionality.
+
+You can though configure the feature supported by the core components using the ini file, rules are structured like following:
+NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
+
+If you prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features.
+.
+
+6004;pop;err;01
+The configuration %3 of box %2 requires a supporter certificate. Processes in this box will be terminated after 5 minutes. For prolonged use, please consider supporting this project.
+.
+
+6005;txt;01
+Note: Without administrative privileges installers will fail to start in the sandbox. Sandboxie-Plus offers an option to make many installers succeed without those privileges. You can enable this option also in the classic build manually, by adding "FakeAdminRights=y" to the ini section for this box.
+.
+
+6006;txt;01
+The legacy UI of Sandboxie classic implements only support for a couple of restriction options.
+
+Additional options like "ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" and much more can be set in the ini section for this box.
+The modern UI (SandMan.exe) also offers more customization options for Start/Run and Internet access restrictions.
+
+If you would prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features.
+.
+
+6007;txt;01
+Sandboxie Plus offers enhanced privacy protection by switching the old behavior from a black-list mode, i.e. allowing read access to the entire drive, except blocked by Closed Path or Write Path, to a white-list mode where sandboxed programs are only allowed to read generic system locations and read access to most user data must be first explicitly granted.
+
+The legacy UI of Sandboxie classic does not implement support for this mode of operation. Although it can be configured using the ini file, it is recommended to use the modern Sandboxie-Plus UI (SandMan.exe) if you want to use privacy enhanced boxes.
+.
+
+6010;txt;01
+You have installed Sandboxie more than %2 days ago.
+
+So, you think David and the contributors are doing a great job?
+
+Why don't you show it by supporting the project and getting a Supporter Certificate?
+
+Sandboxie without a valid supporter certificate will now pause for a few seconds, to give you time to contemplate the possibility of supporting the project.
+.
+
+6011;txt;01
+Wait
+.
+
+6012;txt;01
+Continue
+.
+
+6013;txt;01
+Quit
+.
+
+6014;txt;01
+Get Certificate
+.
+
+*==========
+* Extraneous Messages in Text-Spanish-1034.txt
+*==========
+
+1109;evt;err;01
+SBIE1109 La información de licencia no es válida: %2
+.
+
+1202;pop;err;01
+SBIE1202 No es posible actualizar información de licencia:  %2
+.
+
+1214;pop;err;01
+SBIE1214 No es posible inyectar SbieDll %2
+.
+
+1215;pop;err;01
+SBIE1215 No es posible resolver la ruta a la imagen del proceso %2
+.
+
+1216;pop;err;01
+SBIE1216 No se pudo consultar la ID de seguridad %2
+.
+
+1303;pop;inf;01
+SBIE1303 Sólo una sandbox puede estar activa al mismo tiempo
+.
+
+1304;pop;inf;01
+SBIE1304 Se ha bloqueado la entrada simulada de teclado o ratón para el proceso '%2'
+.
+
+1310;pop;inf;01
+SBIE1310 Las funciones adicionales estarán deshabilitadas hasta que la licencia sea reactivada
+.
+
+1311;pop;inf;01
+SBIE1311 Se ha bloqueado la solicitud de cambiar el papel tapiz del escritorio para el proceso '%2'
+.
+
+1315;pop;inf;01
+Posiblemente debido a conflictos con el sotware: %2
+.
+
+2315;pop;err;01
+SBIE2315 No se pudo reparar la imagen ejecutable
+.
+
+2334;pop;err;01
+SBIE2334 No es posible cargar el archivo DLL:  %2
+.
+
+9201;evt;err;01
+SBIE9201 Error de token
+.
+
+9202;evt;err;01
+SBIE9202 Error de token
+.
+
+9203;evt;err;01
+SBIE9203 Error de token
+.
+
+9204;evt;err;01
+SBIE9204 Error del descriptor de seguridad
+.
+
+9205;evt;err;01
+SBIE9205 Error del descriptor de seguridad
+.
+
+9206;evt;err;01
+SBIE9206 Error del descriptor de seguridad
+.
+
+9207;evt;err;01
+SBIE9207 Error del descriptor de seguridad
+.
+
+9208;evt;err;01
+SBIE9208 No es posible habilitar SeRestorePrivilege
+.
+
+9251;evt;err;01
+SBIE9251 No se ha conseguido crear evento de puerto
+.
+
+9252;evt;err;01
+SBIE9252 No se ha conseguido crear el puerto
+.
+
+9253;evt;err;01
+SBIE9253 No se ha conseguido crear proceso del puerto
+.
+
+3211;txt;01
+Conflicto de versiones en Sandboxie.  Pruebe reinstalándolo.
+.
+
+3231;txt;01
+Sandboxie se ha instalado hace más de 30 días.
+.
+
+3232;txt;01
+Se permite utilizar Sandboxie gratuitamente para uso personal, y por el tiempo que se desee.
+.
+
+3233;txt;01
+No obstante, la versión gratuita se pausará durante unos segundos.
+.
+
+3234;txt;01
+No obstante, la versión gratuita sólo permite el uso de una sandbox al mismo tiempo.
+.
+
+3235;txt;01
+La versión de pago de Sandboxie no tiene esta restricción.
+.
+
+3236;txt;01
+Además, la versión de pago permite el inicio automático de programas seleccionados en una sandbox.
+.
+
+3237;txt;01
+Para más información y para comprar el software, por favor haga clic en el siguiente enlace:
+.
+
+3238;txt;01
+Por favor, espere %2 segundos más
+.
+
+3239;txt;01
+Haga clic para cerrar esta ventana y continuar
+.
+
+3240;txt;01
+Haga clic para cerrar esta ventana y detenerse
+.
+
+3503;txt;01
+Protección Experimental (64 bits)
+.
+
+3455;txt;01
+&Registrar Sandboxie
+.
+
+3458;txt;01
+Permitir el acceso directo a la caché de fuentes de Windows
+.
+
+3542;txt;01
+El modo de Protección Experimental mejora la protección
+ofrecida por Sandboxie de 64 bits y le lleva al mismo
+nivel de protección que presenta Sandboxie de 32 bits.
+
+IMPORTANTE: Protección Experimental utiliza características
+indocumentadas del núcleo de Windows. Futuras actualizaciones
+de Windows podrían interferir con el modo de Protección
+Experimental y causar inestabilidad en el sistema.
+
+UTILÍCELO BAJO SU PROPIA RESPONSABILIDAD.
+ 
+Para activar el modo de Protección Experimental reinicie
+el equipo.
+.
+
+3543;txt;01
+Para deshabilitar el modo de Protección Experimental
+reinicie el equipo.
+ 
+Por favor, tenga en cuenta que la opción de Reducción
+de Privilegios se habilitará para todas las sandbox.
+.
+
+3771;txt;01
+(Esta función sólo está disponible en la versión registrada de Sandboxie)
+.
+
+3932;txt;01
+Acceso a Bajo Nivel
+.
+
+3933;txt;01
+Las siguientes opciones afectan seriamente a la protección proporcionada por Sandboxie. No se recomienda habilitarlas.
+.
+
+3934;txt;01
+Permitir que los programas en esta sandbox carguen controladores en modo kernel en el sistema operativo
+.
+
+3935;txt;01
+Permitir que los programas en esta sandbox al cargar una aplicación (win32) se conecten con otros programas
+.
+
+3936;txt;01
+Permitir que los programas en esta sandbox simulen entrada de teclado y ratón
+.
+
+3937;txt;01
+Permitir que los programas en esta sandbox cambien los fondos de escritorio y otros parámetros de sistema
+.
+
+3938;txt;01
+Permitir a los programas en esta sandbox configurar dispositivos de hardware
+.
+
+3950;txt;01
+Servicio de Cola de Impresión (spooler)
+.
+
+3951;txt;01
+El servicio de cola de impresión de Windows (spooler) no se ejecuta bajo supervisión de la sandbox. Las aplicaciones aisladas en la sandbox que intenten imprimir a un archivo serán bloqueadas, dado que el archivo sería escrito afuera de la sandbox
+. 
+
+3952;txt;01
+Acceso al Hardware
+.
+
+3953;txt;01
+Permitir que los programas en esta sandbox cambien la contraseña de la cuenta de usuario
+.
+
+3954;txt;01
+Permitir a los programas modificar los parámetros del firewall y la red
+.
+
+3946;txt;01
+Se recomienda que mantenga esta opción activada, como contrapartida a alguna medida de protección de Sandboxie que no están disponibles en la edición de 64-bit de Windows.
+.
+
+3947;txt;01
+Para activar la protección mejorada en Windows 64 bits utilice el comando de Protección Experimental del menú Configurar.
+.
+
+7866;txt;01
+En versiones de 64 bits de Windows, debería habilitar la Protección Experimental. Vea el menú Configurar en Control de Sandboxie.
+.
+
+7901;txt;01
+Administrador de Licencia de Sandboxie
+
+.
+
+7902;txt;01
+Código de Sistema %2
+.
+
+7903;txt;01
+A partir de ahora, activar la licencia sin preguntar
+.
+
+7921;txt;01
+Sandboxie está registrado y la licencia activada.
+.
+
+7922;txt;01
+Sandboxie está registrado pero la licencia se debería reactivar.
+.
+
+7923;txt;01
+Copia no registrada. ¡Regístrese hoy!
+.
+
+7924;txt;01
+La licencia de Sandboxie se tendrá que reactivar en %2 días.
+.
+
+7925;txt;01
+La licencia de Sandboxie se ha activado.
+.
+
+7926;txt;01
+La fecha de caducidad de su Clave de Producto es el %2.
+.
+
+7927;txt;01
+Su Clave de Producto no tiene fecha de caducidad.
+.
+
+7931;txt;01
+Su copia de Sandboxie está registrada con una Clave de Registro obsoleta.
+.
+
+7932;txt;01
+Por favor, permita que el Administrador de Licencia de Sandboxie se conecte al Servidor de Licencia y actualice su Clave de Registro antigua a una nueva Clave de Producto. Esta actualización es totalmente gratuita.
+.
+
+7933;txt;01
+El Servidor de Licencia no reconoce su Clave de Registro.
+.
+
+7934;txt;01
+Para consultas relacionadas con Claves de Registro/Producto por favor contacte a: support@sandboxie.com 
+.
+
+7935;txt;01
+Su nueva Clave de Producto es:
+.
+
+7936;txt;01
+Por favor, asegúrese de conservar esta Clave de Producto en un lugar seguro para futuras referencias. Use el botón inferior para copiar su Clave de Producto al portapapeles desde donde podrá pegarla en un documento e imprimirla.
+.
+
+7937;txt;01
+Act&ualizar Clave de Registro a Clave de Producto
+.
+
+7941;txt;01
+El registro de Sandboxie se realiza a través de un sistema de pago a terceros. Inicie el proceso de registro visitando el sitio web de Sandboxie del enlace inferior.
+.
+
+7942;txt;01
+Introduzca la Clave de Producto que aparece en su comprobante de pago y haga clic en el botón para activar su licencia de Sandboxie.
+.
+
+7943;txt;01
+¿Desea introducir una nueva Clave de Producto?
+.
+
+7944;txt;01
+&Activar Licencia
+.
+
+7945;txt;01
+Su copia de Sandboxie se ha registrado correctamente.
+.
+
+7946;txt;01
+¡Gracias por apoyar a Sandboxie!
+.
+
+7951;txt;01
+¿Desea activar la licencia?
+.
+
+7952;txt;01
+Por favor, visite el sitio web de Sandboxie siguiendo el enlace inferior para encargar una nueva Clave de Producto.
+.
+
+7961;txt;01
+Limpiar &Información de Licencia
+.
+
+7962;txt;01
+¿Realmente desea limpiar la información de la licencia en Sandboxie?
+
+Puede activar su licencia en cualquier momento introduciendo una Clave de Producto.
+.
+
+7971;txt;01
+La Clave de Producto no es válida.
+.
+
+7972;txt;01
+El Código de Sistema no es válido.
+.
+
+7973;txt;01
+La clave de Activación no es válida.  [%2]   
+.
+
+7974;txt;01
+La respuesta del Servidor de Licencia no es válida.
+.
+
+7975;txt;01
+No se ha conseguido la activación del producto:
+.
+
+7976;txt;01
+¿Desea intentarlo de nuevo?
+.
+
+7977;txt;01
+Si necesita activar Sandboxie en un equipo que no tiene acceso a Internet, véase
+en las preguntas frecuentes (FAQ), de la página web de Sandboxie, la información
+proporcionada sobre la Activación Fuera de Línea.
+.
+
+7978;txt;01
+La fecha actual (%2) es posterior a la fecha enviada por el Servidor de Licencia (%3).
+.
+
+7982;txt;01
+El Servidor de Licencia no especificó el motivo del error en la activación.
+.
+
+7983;txt;01
+La Clave de Producto no se ha reconocido por el Servidor de Licencia.
+.
+
+7984;txt;01
+La clave de Producto no puede ser usada más allá de su fecha de caducidad %2.
+.
+
+7985;txt;01
+La Clave de Producto se ha activado en demasiados equipos.
+.
+
+7986;txt;01
+La Clave de Producto se ha cancelado porque se ha publicado en Internet.
+.
+
+7987;txt;01
+La Clave de Producto se ha cancelado porque el pedido se ha reembolsado.
+.
+
+
+

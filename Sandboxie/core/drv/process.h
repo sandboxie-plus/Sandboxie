@@ -96,6 +96,8 @@ struct _PROCESS {
 
     void *primary_token;
 
+    PSID *SandboxieLogonSid;
+
     // thread data
 
     PERESOURCE threads_lock;
@@ -139,11 +141,14 @@ struct _PROCESS {
 
     BOOLEAN always_close_for_boxed;
     BOOLEAN dont_open_for_boxed;
-    BOOLEAN hide_other_boxes;
+    BOOLEAN use_security_mode;
+    BOOLEAN is_locked_down;
 #ifdef USE_MATCH_PATH_EX
+    BOOLEAN restrict_devices;
     BOOLEAN use_rule_specificity;
     BOOLEAN use_privacy_mode;
 #endif
+    BOOLEAN confidential_box;
 
     ULONG call_trace;
 
@@ -189,9 +194,11 @@ struct _PROCESS {
 #endif
     LIST open_ipc_paths;                // PATTERN elements
     LIST closed_ipc_paths;              // PATTERN elements
+    LIST read_ipc_paths;                // PATTERN elements
     ULONG ipc_trace;
     BOOLEAN disable_object_flt;
     BOOLEAN ipc_warn_startrun;
+    BOOLEAN ipc_warn_open_proc;
     BOOLEAN ipc_block_password;
     BOOLEAN ipc_open_lsa_endpoint;
     BOOLEAN ipc_open_sam_endpoint;
@@ -324,15 +331,17 @@ ULONG Process_MatchPathEx(
     LIST *read_list, LIST *write_list,
     const WCHAR** patsrc);
 
-// Process_GetConf:  retrives a configuration data value for a given process
+// Process_GetConf:  retrieves a configuration data value for a given process
 // use with Conf_AdjustUseCount to make sure the returned pointer is valid
 
+const WCHAR* Process_GetConfEx(BOX* box, const WCHAR* image_name, const WCHAR* setting);
 const WCHAR* Process_GetConf(PROCESS* proc, const WCHAR* setting);
 
 
 // Process_GetConf_bool:  parses a y/n setting.  this function does not
 // have to be protected with Conf_AdjustUseCount
 
+BOOLEAN Process_GetConfEx_bool(BOX* box, const WCHAR* image_name, const WCHAR* setting, BOOLEAN def);
 BOOLEAN Process_GetConf_bool(PROCESS* proc, const WCHAR* setting, BOOLEAN def);
 
 
@@ -371,10 +380,10 @@ void Process_GetProcessName(
 
 // Check if open_path contains setting "$:ProcessName.exe"
 // where ProcessName matches the specified idProcess.
-// If not contained, returns STATUS_ACCESS_DENIED with *pSetting = NULL
-// If contained, returns STATUS_SUCCESS with *pSetting -> matching setting
+// If not contained, returns FALSE with *pSetting = NULL
+// If contained, returns TRUE with *pSetting -> matching setting
 
-NTSTATUS Process_CheckProcessName(
+BOOLEAN Process_CheckProcessName(
     PROCESS *proc, LIST *open_paths, ULONG_PTR idProcess,
     const WCHAR **pSetting);
 

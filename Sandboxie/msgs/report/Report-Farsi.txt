@@ -1,0 +1,342 @@
+*==========
+* Missing Messages in Text-Farsi-1065.txt
+*==========
+
+1316;pop;inf;01
+SBIE1316 Blocked request to generate device event in the sandbox
+.
+
+1319;pop;inf;01
+SBIE1319 Blocked spooler print to file, %2 %3
+.
+
+1320;pop;wrn;01
+SBIE1320 To allow print spooler to write outside the sandbox for this process, please double-click on this message line
+.
+
+1399;pop;inf;01
+%0
+.
+
+2111;pop;inf;01
+SBIE2111 Process is not accessible: %3, call %2
+.
+
+2112;pop;inf;01
+SBIE2112 Object is not accessible: %3, call %2
+.
+
+2194;pop;inf;01
+SBIE2194 MSI installer requires %2 option to be set in the ini, what however weakens the isolation.
+.
+
+2195;pop;inf;01
+SBIE2195 To run Explorer.exe sandboxed, the access for COM infrastructure must not be Open.
+.
+
+2198;pop;inf;01
+%0
+.
+
+2224;pop;wrn;01
+SBIE2224 Sandboxed program has crashed: %2
+.
+
+2225;pop;wrn;01
+SBIE2225 An attempt was made to access an EFS file: %2
+.
+
+2302;pop;err;01
+SBIE2302 Process image configuration conflict: %2
+.
+
+2325;pop;err;01
+SBIE2325 Debug:  %2
+.
+
+3107;txt;01
+Type the name of a program or path to open the following file in the current sandbox:
+.
+
+3315;txt;01
+Deleting Sandbox contents
+.
+
+3316;txt;01
+Do you want to abort the operation?
+.
+
+3317;txt;01
+Preparing to delete: %2
+.
+
+3318;txt;01
+Deleting: %2
+.
+
+3426;txt;01
+&Always on Top
+.
+
+3504;txt;01
+&Support Sandboxie
+.
+
+3459;txt;01
+Allow direct access to qWave driver (Google Hangouts)
+.
+
+3460;txt;01
+Function hooking customizations
+.
+
+3461;txt;01
+&Run Sandboxed
+.
+
+3467;txt;01
+Upgrade to Sandboxie-Plus
+.
+
+3468;txt;01
+Sandboxie-Plus Migration Guide
+.
+
+3484;txt;01
+Resource Access
+.
+
+3955;txt;01
+Network Files
+.
+
+3956;txt;01
+Network files and folders are normally visible to sandboxed applications.
+.
+
+3957;txt;01
+If you wish to block sandboxed applications from accessing files and folders on your network, you can enable this setting. Individual files and folders can be opened for sandboxed applications by adding them under Resource Access -> File Access.
+.
+
+3958;txt;01
+Block network files and folders unless specifically opened.
+.
+
+4104;txt;01
+Resource Access::Network Access
+.
+
+4105;txt;01
+Network Access (Firewall)
+.
+
+4295;txt;01
+Default exclusions File Migration presets
+.
+
+4296;txt;01
+Default RPC Port Bindings
+.
+
+4297;txt;01
+Open Bluetooth RPC port
+.
+
+4298;txt;01
+Open Smart Card RPC port
+.
+
+4299;txt;01
+Open Simple Service Discovery Protocol (SSDP, UPnP) RPC port
+.
+
+4300;txt;01
+Open additional RPC Port Bindings
+.
+
+4306;txt;01
+Open RPC Port Bindings for UAC
+.
+
+4307;txt;01
+Block common telemetry processes
+.
+
+4308;txt;01
+Filter access to \Devices\
+.
+
+4341;txt;01
+Allow direct access to %2 notes
+.
+
+4342;txt;01
+Enable %2 fix for Windows 11 KB5014019
+.
+
+4393;txt;01
+Media Players
+.
+
+4394;txt;01
+The following exclusions allow Media players running in this sandbox to access files outside the sandbox.
+.
+
+4395;txt;01
+Allow %2 direct access to the Photo folder for easier screen capture.
+.
+
+4396;txt;01
+Torrent Clients
+.
+
+4397;txt;01
+The following exclusions allow Torrent clients running in this sandbox to access files outside the sandbox.
+.
+
+4398;txt;01
+Allow %2 direct access to the Music folder for easier music library management.
+.
+
+6001;txt;01
+The classic Sandboxie UI (SbieCtrl.exe) has very limited
+resource monitoring and event tracing capabilities.
+
+For optimal troubleshooting it is highly advisable 
+to install the new UI, Sandboxie-Plus (SandMan.exe),
+which provides excellent tracing and monitoring capabilities.
+
+Do you want to download Sandboxie-Plus now?
+.
+
+6002;txt;01
+Visit <a ID="whats_new">sandboxie-plus.com</a> to learn about the new functionality of Sandboxie-Plus,
+or directly click <a ID="upgrade">here</a> to download the latest Sandboxie-Plus installer.
+.
+
+6003;txt;01
+The legacy UI of Sandboxie classic does not implement support for the network firewall functionality.
+
+You can though configure the feature supported by the core components using the ini file, rules are structured like following:
+NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
+
+If you prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features.
+.
+
+6004;pop;err;01
+The configuration %3 of box %2 requires a supporter certificate. Processes in this box will be terminated after 5 minutes. For prolonged use, please consider supporting this project.
+.
+
+6005;txt;01
+Note: Without administrative privileges installers will fail to start in the sandbox. Sandboxie-Plus offers an option to make many installers succeed without those privileges. You can enable this option also in the classic build manually, by adding "FakeAdminRights=y" to the ini section for this box.
+.
+
+6006;txt;01
+The legacy UI of Sandboxie classic implements only support for a couple of restriction options.
+
+Additional options like "ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" and much more can be set in the ini section for this box.
+The modern UI (SandMan.exe) also offers more customization options for Start/Run and Internet access restrictions.
+
+If you would prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features.
+.
+
+6007;txt;01
+Sandboxie Plus offers enhanced privacy protection by switching the old behavior from a black-list mode, i.e. allowing read access to the entire drive, except blocked by Closed Path or Write Path, to a white-list mode where sandboxed programs are only allowed to read generic system locations and read access to most user data must be first explicitly granted.
+
+The legacy UI of Sandboxie classic does not implement support for this mode of operation. Although it can be configured using the ini file, it is recommended to use the modern Sandboxie-Plus UI (SandMan.exe) if you want to use privacy enhanced boxes.
+.
+
+6010;txt;01
+You have installed Sandboxie more than %2 days ago.
+
+So, you think David and the contributors are doing a great job?
+
+Why don't you show it by supporting the project and getting a Supporter Certificate?
+
+Sandboxie without a valid supporter certificate will now pause for a few seconds, to give you time to contemplate the possibility of supporting the project.
+.
+
+6011;txt;01
+Wait
+.
+
+6012;txt;01
+Continue
+.
+
+6013;txt;01
+Quit
+.
+
+6014;txt;01
+Get Certificate
+.
+
+8053;ins;01
+*** KmdUtil failed.  Installation or un-installation may not complete successfully. ***
+
+*==========
+* Extraneous Messages in Text-Farsi-1065.txt
+*==========
+
+1109;evt;err;01
+SBIE1109 1202;pop;err;01
+SBIE1202 1303;pop;inf;01
+SBIE1303 1310;pop;inf;01
+SBIE1310 1311;pop;inf;01
+SBIE1311 2334;pop;err;01
+SBIE2334 3231;txt;01
+3232;txt;01
+3233;txt;01
+3234;txt;01
+3235;txt;01
+3236;txt;01
+3237;txt;01
+3238;txt;01
+3239;txt;01
+3240;txt;01
+3455;txt;01
+&3771;txt;01
+(7901;txt;01
+7902;txt;01
+7903;txt;01
+7921;txt;01
+7922;txt;01
+7923;txt;01
+7924;txt;01
+7925;txt;01
+7926;txt;01
+7927;txt;01
+7931;txt;01
+7932;txt;01
+7933;txt;01
+7934;txt;01
+7935;txt;01
+7936;txt;01
+7937;txt;01
+7941;txt;01
+7942;txt;01
+7943;txt;01
+7944;txt;01
+7945;txt;01
+7946;txt;01
+7951;txt;01
+7952;txt;01
+7961;txt;01
+7962;txt;01
+7971;txt;01
+7972;txt;01
+7973;txt;01
+7974;txt;01
+7975;txt;01
+7976;txt;01
+7977;txt;01
+7978;txt;01
+7982;txt;01
+7983;txt;01
+7984;txt;01
+7985;txt;01
+7986;txt;01
+7987;txt;01
+
+

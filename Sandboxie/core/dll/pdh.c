@@ -47,16 +47,16 @@ static P_PdhLookupPerfNameByIndexW    __sys_PdhLookupPerfNameByIndexW = NULL;
 // Pdh_Init
 //---------------------------------------------------------------------------
 
-_FX BOOLEAN Pdh_Init(HMODULE hDll)
+_FX BOOLEAN Pdh_Init(HMODULE module)
 {
     void * PdhConnectMachineW;
     void * PdhLookupPerfNameByIndexW;
 
-    PdhConnectMachineW = (void*)GetProcAddress(hDll, "PdhConnectMachineW");
+    PdhConnectMachineW = (void*)GetProcAddress(module, "PdhConnectMachineW");
     if (PdhConnectMachineW == NULL)
         return FALSE;
 
-    PdhLookupPerfNameByIndexW = (void*)GetProcAddress(hDll, "PdhLookupPerfNameByIndexW");
+    PdhLookupPerfNameByIndexW = (void*)GetProcAddress(module, "PdhLookupPerfNameByIndexW");
     if (PdhLookupPerfNameByIndexW == NULL)
         return FALSE;
 

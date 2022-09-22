@@ -68,9 +68,9 @@ _FX BOOLEAN File_InitFileMigration(void)
     for(ULONG i=0; i < NUM_COPY_MODES; i++)
         List_Init(&File_MigrationOptions[i]);
 
-    Config_InitPatternList(NULL, L"CopyEmpty", &File_MigrationOptions[FILE_COPY_EMPTY]);
-    Config_InitPatternList(NULL, L"CopyAlways", &File_MigrationOptions[FILE_COPY_CONTENT]);
-    Config_InitPatternList(NULL, L"DontCopy", &File_MigrationOptions[FILE_DONT_COPY]);
+    Config_InitPatternList(NULL, L"CopyEmpty", &File_MigrationOptions[FILE_COPY_EMPTY], FALSE);
+    Config_InitPatternList(NULL, L"CopyAlways", &File_MigrationOptions[FILE_COPY_CONTENT], FALSE);
+    Config_InitPatternList(NULL, L"DontCopy", &File_MigrationOptions[FILE_DONT_COPY], FALSE);
 
     File_MigrationDenyWrite = Config_GetSettingsForImageName_bool(L"CopyBlockDenyWrite", FALSE);
 
@@ -100,7 +100,7 @@ _FX ULONG File_MigrateFile_GetMode(const WCHAR* TruePath, ULONGLONG file_size)
     path_len = wcslen(path_lwr);
 
     //
-    // Check what preset applyes to this file type/path
+    // Check what preset applies to this file type/path
     //
 
     for (ULONG i = 0; i < NUM_COPY_MODES; i++)
@@ -158,7 +158,7 @@ found_match:
     }
 
     //
-    // issue apropriate message if so configured, and user wasn't asked
+    // issue appropriate message if so configured, and user wasn't asked
     //
 
     else if (!File_CopyLimitSilent) 

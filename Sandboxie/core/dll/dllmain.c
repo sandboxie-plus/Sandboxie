@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -87,15 +87,12 @@ BOOLEAN Dll_RestrictedToken = FALSE;
 BOOLEAN Dll_ChromeSandbox = FALSE;
 BOOLEAN Dll_FirstProcessInBox = FALSE;
 BOOLEAN Dll_CompartmentMode = FALSE;
+//BOOLEAN Dll_AlernateIpcNaming = FALSE;
 
 ULONG Dll_ImageType = DLL_IMAGE_UNSPECIFIED;
 
 ULONG Dll_OsBuild = 0;  // initialized by Key module
 ULONG Dll_Windows = 0;
-
-#ifdef _WIN64
-CRITICAL_SECTION  VT_CriticalSection;
-#endif
 
 const UCHAR *SbieDll_Version = MY_VERSION_COMPAT;
 
@@ -154,7 +151,6 @@ _FX BOOL WINAPI DllMain(
 
     } else if (dwReason == DLL_PROCESS_ATTACH) {
 #ifdef _WIN64
-        InitializeCriticalSection(&VT_CriticalSection);
         Dll_DigitalGuardian = GetModuleHandleA("DgApi64.dll");
 #else
         Dll_DigitalGuardian = GetModuleHandleA("DgApi.dll");
@@ -166,6 +162,7 @@ _FX BOOL WINAPI DllMain(
             Dll_Windows = 8;
         }
         Dll_InitGeneric(hInstance);
+        SbieDll_HookInit();
 
     } else if (dwReason == DLL_PROCESS_DETACH) {
 
@@ -174,6 +171,7 @@ _FX BOOL WINAPI DllMain(
             File_DoAutoRecover(TRUE);
             Gui_ResetClipCursor();
         }
+
     }
 
     return TRUE;
@@ -269,6 +267,21 @@ _FX void Dll_InitInjected(void)
 
     Dll_SidStringLen = wcslen(Dll_SidString);
 
+
+    //
+    // break for the debugger, as soon as we have Dll_ImageName
+    //
+
+    if (SbieDll_CheckStringInList(Dll_ImageName, NULL, L"WaitForDebugger")) {
+    //if (SbieDll_GetSettingsForName_bool(NULL, Dll_ImageName, L"WaitForDebugger", FALSE)) {
+    //if (SbieApi_QueryConfBool(NULL, L"WaitForDebuggerAll", FALSE)) {
+        while (!IsDebuggerPresent()) {
+            OutputDebugString(L"Waiting for Debugger\n");
+            Sleep(500);
+        } __debugbreak();
+    }
+
+
     //
     // query Sandboxie home folder
     //
@@ -326,6 +339,28 @@ _FX void Dll_InitInjected(void)
     Dll_BoxKeyPathLen = wcslen(Dll_BoxKeyPath);
     Dll_BoxIpcPathLen = wcslen(Dll_BoxIpcPath);
 
+  //  Dll_AlernateIpcNaming = SbieApi_QueryConfBool(NULL, L"UseAlernateIpcNaming", FALSE);
+  //  if (Dll_AlernateIpcNaming) {
+  //
+  //      //
+  //      // instead of using a separate namespace
+  //		// just replace all \ with _ and use it as a sufix rather then an actual path
+  //      // similarly a its done for named pipes already
+  //      // this approche can help to reduce teh footprint when running in portable mode
+  //      // alternatively we could create volatile entries under AppContainerNamedObjects 
+  //      //
+  //
+  //      WCHAR* ptr = (WCHAR*)Dll_BoxIpcPath;
+  //      while (*ptr) {
+  //          WCHAR *ptr2 = wcschr(ptr, L'\\');
+  //          if (ptr2) {
+  //              ptr = ptr2;
+  //              *ptr = L'_';
+  //          } else
+  //              ptr += wcslen(ptr);
+  //      }
+  //  }
+
     //
     // check if process SID is LocalSystem
     //
@@ -348,7 +383,7 @@ _FX void Dll_InitInjected(void)
         Dll_FixWow64Syscall();
 
     if (ok)
-        ok = File_InitHandles();
+        ok = Handle_Init();
 
     if (ok)
         ok = Obj_Init();
@@ -379,6 +414,15 @@ _FX void Dll_InitInjected(void)
     if (ok) {
 
         //
+        // ipc must be initialized before anythign else to make delete v2 work
+        //
+
+        ok = Ipc_Init();
+    }
+
+    if (ok) {
+
+        //
         // Key should be initialized first, to prevent key requests
         // with MAXIMUM_ALLOWED access from failing
         //
@@ -401,9 +445,6 @@ _FX void Dll_InitInjected(void)
         ok = File_Init();
 
     if (ok)
-        ok = Ipc_Init();
-
-    if (ok)
         ok = Secure_Init();
 
     if (ok)
@@ -418,7 +459,7 @@ _FX void Dll_InitInjected(void)
     if (ok)
         ok = Gui_InitConsole1();
 
-    if (ok)
+    if (ok) // Note: Ldr_Init may cause rpcss to be started early
         ok = Ldr_Init();            // last to initialize
 
     //
@@ -439,32 +480,6 @@ _FX void Dll_InitInjected(void)
 
     if (! Dll_RestrictedToken)
         CustomizeSandbox();
-
-    /*while (! IsDebuggerPresent()) {
-        OutputDebugString(L"BREAK\n");
-        Sleep(500);
-    }
-    __debugbreak();*/
-
-    /*if (_wcsicmp(Dll_ImageName, L"iexplore.exe") == 0) {
-        WCHAR *cmd = GetCommandLine();
-        if (wcsstr(cmd, L"SCODEF")) {
-
-            while (! IsDebuggerPresent()) {
-                OutputDebugString(L"BREAK\n");
-                Sleep(500);
-            }
-            __debugbreak();
-        }
-    }*/
-
-    /*if (_wcsicmp(Dll_ImageName, L"dllhost.exe") == 0) {
-            while (! IsDebuggerPresent()) {
-                OutputDebugString(L"BREAK\n");
-                Sleep(500);
-            }
-            __debugbreak();
-    }*/
 }
 
 
@@ -801,7 +816,7 @@ _FX ULONG_PTR Dll_Ordinal1(
         Dll_InitInjected(); // install required hooks
 
         //
-        // notify RPCSS that a new proces was created in the current sandbox
+        // notify RPCSS that a new process was created in the current sandbox
         //
 
         if (Dll_ImageType != DLL_IMAGE_SANDBOXIE_RPCSS) {
@@ -819,8 +834,10 @@ _FX ULONG_PTR Dll_Ordinal1(
         //
 
         int MustRestartProcess = 0;
-        if(Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB)
-            MustRestartProcess = 1;
+        if (Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB) {
+            if (!SbieApi_QueryConfBool(NULL, L"NoRestartOnPAC", FALSE))
+                MustRestartProcess = 1;
+        }
 
         else if (Dll_ProcessFlags & SBIE_FLAG_FORCED_PROCESS) {
             if (SbieApi_QueryConfBool(NULL, L"ForceRestartAll", FALSE)
@@ -832,11 +849,21 @@ _FX ULONG_PTR Dll_Ordinal1(
 
             WCHAR text[128];
             Sbie_snwprintf(text, 128, L"Cleanly restarting forced process, reason %d", MustRestartProcess);
-            SbieApi_MonitorPut(MONITOR_OTHER, text);
+            SbieApi_MonitorPutMsg(MONITOR_OTHER, text);
 
             extern void Proc_RestartProcessOutOfPcaJob(void);
             Proc_RestartProcessOutOfPcaJob();
             // does not return
+        }
+
+        //
+        // explorer needs sandboxed COM show warnign and terminate when COM is not sandboxies
+        //
+
+        if (Dll_ImageType == DLL_IMAGE_SHELL_EXPLORER && SbieDll_IsOpenCOM()) {
+
+            SbieApi_Log(2195, NULL);
+            ExitProcess(0);
         }
     }
     else

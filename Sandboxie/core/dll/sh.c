@@ -1046,7 +1046,7 @@ _FX BOOLEAN SH32_Init(HMODULE module)
 
             *(ULONG_PTR *)&__sys_LdrGetDllHandleEx = (ULONG_PTR)
                 SbieDll_Hook("LdrGetDllHandleEx",
-                    __sys_LdrGetDllHandleEx, SH32_LdrGetDllHandleEx);
+                    __sys_LdrGetDllHandleEx, SH32_LdrGetDllHandleEx, module);
         }
 
         //
@@ -1426,7 +1426,7 @@ _FX ULONG SH_GetInternetExplorerVersion(void)
 //
 // Code running in Explorer (both Windows and Internet) may AddRef() on the
 // host process using SHGetInstanceExplorer and then forget to Release().
-// This causes a sandboxed IE or Explorer to go on running indefinately.
+// This causes a sandboxed IE or Explorer to go on running indefinitely.
 // To work around this, we have a thread that monitors the number of open
 // windows, and forces Explorer to close when there are no more windows.
 //

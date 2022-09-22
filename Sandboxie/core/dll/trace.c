@@ -61,6 +61,8 @@ static P_OutputDebugString          __sys_OutputDebugStringA        = NULL;
 
 _FX int Trace_Init(void)
 {
+    HMODULE module = NULL; // fix-me
+
 	P_RtlSetLastWin32Error RtlSetLastWin32Error;
     P_OutputDebugString OutputDebugStringW;
     P_OutputDebugString OutputDebugStringA;
@@ -101,7 +103,7 @@ ALIGNED void Trace_RtlSetLastWin32Error(ULONG err)
     if (err) {
 		WCHAR strW[64];
         Sbie_snwprintf(strW, 64, L"SetError: %d\n", err);
-		SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, strW, FALSE);
+		SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, strW);
     }
     __sys_RtlSetLastWin32Error(err);
 }
@@ -114,7 +116,7 @@ ALIGNED void Trace_RtlSetLastWin32Error(ULONG err)
 
 ALIGNED void Trace_OutputDebugStringW(const WCHAR *strW)
 {
-	SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, strW, FALSE);
+	SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, strW);
 
     __sys_OutputDebugStringW(strW);
 }
@@ -129,7 +131,7 @@ ALIGNED void Trace_OutputDebugStringA(const UCHAR *strA)
 {
 	WCHAR strW[256 + 1];
 	Sbie_snwprintf(strW, 256 + 1, L"%S", strA); // convert to WCHAR
-	SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, strW, FALSE);
+	SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, strW);
 
     __sys_OutputDebugStringA(strA);
 }

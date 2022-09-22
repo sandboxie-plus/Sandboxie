@@ -32,10 +32,6 @@ class CAboutDialog : public CBaseDialog
 
     virtual BOOL OnInitDialog();
 
-    afx_msg void OnRegister();
-
-    afx_msg void OnTutorial();
-
     virtual void OnOK();
 
 public:

@@ -46,26 +46,58 @@
         <file>HelpingHand.png</file>
         <file>Actions/RegEdit.png</file>
         <file>Actions/Software.png</file>
-        <file>IconEmpty.png</file>
-        <file>IconEmptyD.png</file>
-        <file>IconFull.png</file>
-        <file>IconFullD.png</file>
         <file>Actions/Ampel.png</file>
         <file>Actions/Compatibility.png</file>
-        <file>IconOff.png</file>
         <file>Actions/Lock.png</file>
         <file>Actions/Shell.png</file>
-        <file>IconFullDC.png</file>
-        <file>IconEmptyDC.png</file>
-        <file>IconOffC.png</file>
-        <file>IconFullC.png</file>
-        <file>IconEmptyC.png</file>
         <file>Actions/Duplicate.png</file>
         <file>Actions/Up.png</file>
         <file>Actions/Down.png</file>
         <file>Actions/All.png</file>
         <file>Actions/Save.png</file>
         <file>Actions/Uninstall.png</file>
+        <file>IconBusy.png</file>
+        <file>IconBusyC.png</file>
+        <file>IconDFP.png</file>
+        <file>IconDFPC.png</file>
+        <file>IconEmpty.png</file>
+        <file>IconEmptyC.png</file>
+        <file>IconFull.png</file>
+        <file>IconFullC.png</file>
+        <file>IconOff.png</file>
+        <file>IconOffC.png</file>
+        <file>IconOffCx.png</file>
+        <file>Actions/Monitor.png</file>
+        <file>SideLogo.png</file>
+        <file>Actions/Refresh.png</file>
+        <file>Actions/UnPackBox.png</file>
+        <file>Actions/PackBox.png</file>
+        <file>Actions/GUI.png</file>
+        <file>Actions/Wizard.png</file>
+        <file>Actions/Magic.png</file>
+        <file>Actions/Update.png</file>
+        <file>Actions/Install.png</file>
+        <file>Actions/Cert.png</file>
+        <file>Actions/File.png</file>
+        <file>Actions/Security.png</file>
+        <file>Actions/NoAccess.png</file>
+        <file>Actions/Entry.png</file>
+        <file>Actions/Pass.png</file>
+        <file>Actions/Fail.png</file>
+        <file>Actions/List.png</file>
+        <file>Actions/Network.png</file>
+        <file>Actions/Policy.png</file>
+        <file>Actions/Rules.png</file>
+        <file>Actions/ImmidiateRecovery.png</file>
+        <file>Actions/QuickRecovery.png</file>
+        <file>Actions/Accessibility.png</file>
+        <file>Actions/Miscellaneous.png</file>
+        <file>Actions/Fence.png</file>
+        <file>Actions/Trigger.png</file>
+        <file>Actions/Anon.png</file>
+        <file>Actions/Users.png</file>
+        <file>Actions/Bug.png</file>
+        <file>Actions/Alarm.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>
@@ -83,5 +115,24 @@
         <file alias="Empty6">Boxes/sandbox-o-empty.png</file>
         <file alias="Full6">Boxes/sandbox-o-full.png</file>
         <file alias="Busy">Boxes/BusyOverlay.png</file>
+        <file alias="Frame">Boxes/sandbox-frame.png</file>
+        <file alias="Items">Boxes/sandbox-items.png</file>
+        <file alias="Sand">Boxes/sandbox-sand.png</file>
+        <file alias="Empty7">Boxes/sandbox-w-empty.png</file>
+        <file alias="Full7">Boxes/sandbox-w-full.png</file>
+        <file alias="Group">Boxes/sandbox-group.png</file>
+        <file alias="Group2">Boxes/sandbox-group+.png</file>
+    </qresource>
+    <qresource prefix="/Assets">
+        <file>Advanced.png</file>
+        <file>AdvancedD.png</file>
+        <file>Simple.png</file>
+        <file>SimpleD.png</file>
+        <file>background.png</file>
+        <file>sandboxie-logo.png</file>
+        <file>sandboxie-back.png</file>
+        <file>Classic.png</file>
+        <file>ClassicD.png</file>
+        <file>LayoutAndGroups.png</file>
     </qresource>
 </RCC>

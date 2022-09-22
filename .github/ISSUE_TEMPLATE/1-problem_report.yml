@@ -1,44 +1,85 @@
 name: Problem report
 description: Please report your problem here to help us improve
-
+labels: ["Confirmation pending"]
 body:
   - type: markdown
     attributes:
       value: |
         Thanks for taking the time to fill out this report!
+        To see if your problem has already been reported, you can use the search box on the Issues and Discussions tabs.
+        Also, you may find your answer in our documentation hosted on GitHub: https://sandboxie-plus.github.io/sandboxie-docs
   - type: textarea
     id: what-happened
     attributes:
-      label: What happened?
-      description: A clear and concise description of what the problem is. You can add screenshots and provide links to help explain it.
-      placeholder: Tell us what you see! If you had a compatibility issue, you may want to include a download link to the incompatible software.
-    validations:
-      required: true
-  - type: textarea
-    id: repro
-    attributes:
-      label: To Reproduce
-      description: If applicable, write the exact steps to reproduce the behavior.
+      label: Describe what you noticed and did
+      description: |
+        It is highly recommended to write the exact steps to reproduce the behavior.
+
+        You can also add screenshots and provide links to help explain it.
       placeholder: |
+        Describe as accurately as possible what you saw and did!
         1. Go to '....'
         2. Click on '....'
         3. Scroll down to '....'
         4. See error
     validations:
+      required: true
+  - type: input
+    id: prevalence
+    attributes:
+      label: How often did you encounter it so far?
+      description: If applicable, write more details about its frequency.
+      placeholder: e.g. Whenever I ...
+    validations:
       required: false
   - type: input
+    id: sandboxed-program
+    attributes:
+      label: Affected program
+      description: |
+        If applicable, in which sandboxed program did you see the problem?
+        
+        If not, you can type something like "Not relevant".
+      placeholder: e.g. Firefox 102.0.1 64-bit, ....
+    validations:
+      required: true
+  - type: input
+    id: download-link
+    attributes:
+      label: Download link
+      description: |
+        If you had a compatibility issue, it is highly recommended to include a download link to the incompatible software.
+        
+        If not, you can type something like "Not relevant" or "Not available".
+      placeholder: https://
+    validations:
+      required: true
+  - type: dropdown
+    id: sandboxed-or-not
+    attributes:
+      label: Where is the program located?
+      description: Select "Not relevant" if you don't have any malfunctioning program to report.
+      options:
+        - "The program is installed both inside and outside the sandbox."
+        - "The program is installed only outside the sandbox."
+        - "The program is installed only inside a sandbox (NOT in the real system anyway)."
+        - "I tried to install it only inside a sandbox, but I wasn't able to achieve it."
+        - "Not relevant to my request."
+    validations:
+      required: true
+  - type: textarea
     id: expected-behavior
     attributes:
       label: Expected behavior
-      description: A clear and concise description of what you expected to happen.
-      placeholder: Tell us what you expect to see!
+      description: A clear and concise description of what you expect to see.
+      placeholder: Tell us what the default behavior should be!
     validations:
       required: true
   - type: input
     id: windows-version
     attributes:
       label: What is your Windows edition and version?
-      placeholder: "e.g. Windows 10 Pro 21H1 64-bit"
+      placeholder: "e.g. Windows 10 Pro 21H2 64-bit"
     validations:
       required: true
   - type: dropdown
@@ -62,14 +103,25 @@ body:
     attributes:
       label: Please mention any installed security software
       description: Even if the real-time protection is disabled, any security solution could still conflict with Sandboxie.
-      placeholder: e.g. Windows Defender
+      placeholder: e.g. Microsoft Defender Antivirus
     validations:
       required: true
   - type: input
     id: sandboxie-version
     attributes:
       label: What version of Sandboxie are you running?
-      placeholder: e.g. Sandboxie Plus 1.0.9 64-bit
+      placeholder: e.g. Sandboxie Plus 1.2.5 64-bit
+    validations:
+      required: true
+  - type: dropdown
+    id: installation-types
+    attributes:
+      label: Is it a new installation of Sandboxie?
+      options:
+        - "I recently did a new clean installation."
+        - "I just updated Sandboxie from a previous version (to be specified)."
+        - "I recently upgraded it from an older version than v1.0.22 / 5.55.22."
+        - "I have been using the same version for some time."
     validations:
       required: true
   - type: input
@@ -77,13 +129,7 @@ body:
     attributes:
       label: Is it a regression?
       description: If applicable, specify in which Sandboxie version this problem was introduced the first time (including any pre-release version).
-      placeholder: e.g. Since 5.55.9 64-bit
-  - type: input
-    id: browsers
-    attributes:
-      label: List of affected browsers
-      description: If applicable, in which sandboxed browsers are you seeing the problem?
-      placeholder: e.g. Firefox 96.0.3 64-bit, ....
+      placeholder: e.g. Since 5.57.5 64-bit
   - type: dropdown
     id: box-types
     attributes:
@@ -97,17 +143,6 @@ body:
         - "In an Application Compartment sandbox with no isolation (green sandbox icon)."
         - "All sandbox types (I tried them all)."
         - "I only reproduced it with Sandboxie Classic."
-        - "Not relevant to my request."
-    validations:
-      required: true
-  - type: dropdown
-    id: sandboxed-or-not
-    attributes:
-      label: Is the sandboxed program also installed outside the sandbox?
-      description: Select "Not relevant" if you don't have any malfunctioning program to report.
-      options:
-        - "Yes, it is also installed outside the sandbox."
-        - "No, it is not installed in the real system."
         - "Not relevant to my request."
     validations:
       required: true
@@ -134,16 +169,24 @@ body:
 
         Tip: You may consider to turn off non-default Windows settings.
       placeholder: |
-        I enabled the following security / policy settings outside Sandboxie:
+        e.g. I enabled the following security / policy settings outside Sandboxie:
         ....
   - type: input
     id: crashdumps
     attributes:
       label: Crash dump
       description: |
-        If applicable, provide a direct link containing the .dmp file for your crash issue!
-
-        Tip: You need to upload it on a file storage service, then share the resulting link below.
+        If applicable, provide a direct link containing the .dmp file(s) for your crash issue!
+        
+        List of crash dump locations:
+        ```
+        C:\Users\%Username%\AppData\Local\CrashDumps
+        C:\Windows\Minidump
+        C:\Sandbox\%User%\DefaultBox\user\current\AppData\Local\CrashDumps
+        C:\Sandbox\%USER%\%SANDBOX% (only if you previously set EnableMiniDump=y in the sandbox section of your Sandboxie.ini file)
+        ```
+        
+        Tip: You can upload the .dmp file(s) on a file storage service, then share the resulting link below.
       placeholder: https://
   - type: input
     id: logs
@@ -173,13 +216,3 @@ body:
         .....
 
       render: shell
-  - type: input
-    id: sandboxie-plus-config
-    attributes:
-      label: Sandboxie-Plus.ini configuration (for Plus interface issues)
-      description: |
-        Sandboxie-Plus.ini is only needed if you have specific user interface issues with Sandboxie Plus
-        (this is usually located in `C:\Users\%Username%\AppData\Local\Sandboxie-Plus` or `C:\ProgramData\Sandboxie-Plus` for corporate users).
-
-        Please copy the content on https://gist.github.com and share the resulting link below.
-      placeholder: https://

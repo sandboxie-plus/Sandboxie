@@ -1,0 +1,6 @@
+*==========
+* Missing Messages in Text-Italian-1040.txt
+*==========
+
+There are no missing messages.
+

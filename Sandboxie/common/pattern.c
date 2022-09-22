@@ -299,6 +299,29 @@ _FX ULONG Pattern_Level(PATTERN *pat)
 
 
 //---------------------------------------------------------------------------
+// Pattern_Wildcards
+//---------------------------------------------------------------------------
+
+
+_FX USHORT Pattern_Wildcards(PATTERN *pat)
+{
+    if (pat->info.num_cons == 0) return 0; // empty patters dont have wildcards
+    return pat->info.num_cons - 1; // between every constant part there is a wildcard
+}
+
+
+//---------------------------------------------------------------------------
+// Pattern_Exact
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Pattern_Exact(PATTERN *pat)
+{
+    return pat->info.f.star_at_tail == 0;
+}
+
+
+//---------------------------------------------------------------------------
 // Pattern_Match
 //---------------------------------------------------------------------------
 
@@ -599,4 +622,110 @@ _FX const WCHAR *Pattern_wcsnstr(
         ++hstr;
     }
     return NULL;
+}
+
+
+//---------------------------------------------------------------------------
+// Pattern_MatchPathList
+//---------------------------------------------------------------------------
+
+
+_FX int Pattern_MatchPathList(
+    WCHAR *path_lwr, ULONG path_len, LIST *list, ULONG* plevel, BOOLEAN* pexact, USHORT* pwildc, const WCHAR** patsrc)
+{
+    PATTERN *pat;
+    int match_len = 0;
+    ULONG level = plevel ? *plevel : -1; // lower is better, 3 is max value
+    BOOLEAN exact = pexact ? *pexact : FALSE;
+    USHORT wildc = pwildc ? *pwildc : -1; // lower is better
+
+    pat = (PATTERN*)List_Head(list);
+    while (pat) {
+
+        ULONG cur_level = Pattern_Level(pat);
+        if (cur_level > level)
+            goto next; // no point testing patters with a to weak level
+
+        BOOLEAN cur_exact = Pattern_Exact(pat);
+        if (!cur_exact && exact)
+            goto next;
+
+        USHORT cur_wildc = Pattern_Wildcards(pat);
+
+        int cur_len = Pattern_MatchX(pat, path_lwr, path_len);
+        if (cur_len > match_len) {
+            match_len = cur_len;
+            level = cur_level;
+            exact = cur_exact;
+            wildc = cur_wildc;
+            if (patsrc) *patsrc = Pattern_Source(pat);
+            
+            // we need to test all entries to find the best match, so we dont break here
+            // unless we found an exact match, than there cant be a batter one
+            if (exact)
+                break;
+        }
+
+        //
+        // if we have a pattern like C:\Windows\,
+        // we still want it to match a path like C:\Windows,
+        // hence we add a L'\\' to the path and check again
+        //
+
+        else if (path_lwr[path_len - 1] != L'\\') { 
+            path_lwr[path_len] = L'\\';
+            cur_len = Pattern_MatchX(pat, path_lwr, path_len + 1);
+            path_lwr[path_len] = L'\0';
+            if (cur_len > match_len) {
+                match_len = cur_len;
+                level = cur_level;
+                exact = cur_exact;
+                wildc = cur_wildc;
+                if (patsrc) *patsrc = Pattern_Source(pat);
+
+                if (exact)
+                    break;
+            }
+        }
+
+    next:
+        pat = (PATTERN*)List_Next(pat);
+    }
+
+    if (plevel) *plevel = level;
+    if (pexact) *pexact = exact;
+    if (pwildc) *pwildc = wildc;
+    return match_len;
+}
+
+
+//---------------------------------------------------------------------------
+// Pattern_MatchPathListEx
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Pattern_MatchPathListEx(WCHAR *path_lwr, ULONG path_len, LIST *list, ULONG* plevel, int* pmatch_len, BOOLEAN* pexact, USHORT* pwildc, const WCHAR** patsrc)
+{
+    const WCHAR* curpat;
+    ULONG cur_level;
+    BOOLEAN cur_exact;
+    USHORT cur_wildc;
+    int cur_len;
+
+    if (list && path_len) {
+        cur_level = *plevel;
+        cur_exact = *pexact;
+        cur_wildc = *pwildc;
+        cur_len = Pattern_MatchPathList(path_lwr, path_len, list, &cur_level, &cur_exact, &cur_wildc, &curpat);
+        if (cur_level <= *plevel && ((!*pexact && cur_exact) || (cur_len > *pmatch_len) || ((cur_len == *pmatch_len && cur_len > 0) && (cur_wildc < *pwildc)))) {
+            *plevel = cur_level;
+            *pexact = cur_exact;
+            *pwildc = cur_wildc;
+            *pmatch_len = cur_len;
+            if (patsrc) *patsrc = curpat;
+
+            return TRUE;
+        }
+    }
+    return FALSE;
 }

@@ -33,6 +33,19 @@
 #define IDBOXLIST                       1002
 #define BOX_DIALOG                      10002
 
+#define STATUS_DIALOG					10004
+#define ID_STATUS_INFO                  108
+
+#define ABOUT_DIALOG                    10003
+#define ID_ABOUT_LOGO                   41751
+#define ID_ABOUT_INFO					41752
+#define ID_ABOUT_FRAME                  41756
+#define ID_BUTTON_1						41757
+#define ID_BUTTON_2						41758
+#define ID_BUTTON_3						41769
+
+
+
 // Next default values for new objects
 //
 #ifdef APSTUDIO_INVOKED

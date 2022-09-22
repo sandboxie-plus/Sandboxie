@@ -79,13 +79,15 @@ static P_GetMessage                 __sys_GetMessageW               = NULL;
 
 _FX BOOLEAN Gui_InitConsole1(void)
 {
+    HMODULE module = NULL; // fix-me
+
     // NoSbieCons BEGIN
     if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"NoSandboxieConsole", FALSE)) {
 
         //
         // We need to set Gui_ConsoleHwnd in order for Gui_InitConsole2 to start up properly,
         // this functions starts a thread which listens for WM_DEVICECHANGE which we need
-        // we could go for a different signaling method in future but for now we stick to this methos
+        // we could go for a different signaling method in future but for now we stick to this method
         //
 
         Gui_ConsoleHwnd = GetConsoleWindow();

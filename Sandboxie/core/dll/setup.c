@@ -136,15 +136,15 @@ static P_CM_Add_Driver_Package_ExW  __sys_CM_Add_Driver_Package_ExW = NULL;
 //---------------------------------------------------------------------------
 
 
-#define DO_CALL_HOOK(name,devName)                              \
-    __sys_##name = SbieDll_Hook(#name, __sys_##name, devName);  \
+#define DO_CALL_HOOK(name,devName)                                      \
+    __sys_##name = SbieDll_Hook(#name, __sys_##name, devName, module);  \
     if (! __sys_##name) return FALSE;
 
-#define HOOK_AW(func)                                           \
-    DO_CALL_HOOK(func##A,Dev_##func##A);                        \
+#define HOOK_AW(func)                                                   \
+    DO_CALL_HOOK(func##A,Dev_##func##A);                                \
     DO_CALL_HOOK(func##W,Dev_##func##W);
 
-#define HOOK(func)                                              \
+#define HOOK(func)                                                      \
     DO_CALL_HOOK(func,Dev_##func);
 
 #define FIND_EP(x) __sys_##x = (P_##x) GetProcAddress(module, #x)
@@ -247,9 +247,9 @@ _FX BOOLEAN Setup_Init_CfgMgr32(HMODULE module)
 {
     FIND_EP(CM_Add_Driver_PackageW);
     FIND_EP(CM_Add_Driver_Package_ExW);
-    // Note: When the Add_Driver_Package is not hooked it will atempt to contact the deviceinstall service,
+    // Note: When the Add_Driver_Package is not hooked it will attempt to contact the deviceinstall service,
     // which uses a dynamic rpc port, heence as long as there is no blank OpenIpcPath=* this call will fail
-    // We hook these two functions only to provide the user a SBIE2205 informing, that drivers cant be installed.
+    // We hook these two functions only to provide the user a SBIE2205 informing, that drivers can't be installed.
     if (__sys_CM_Add_Driver_PackageW) {
         DO_CALL_HOOK(
             CM_Add_Driver_PackageW,Setup_CM_Add_Driver_PackageW);

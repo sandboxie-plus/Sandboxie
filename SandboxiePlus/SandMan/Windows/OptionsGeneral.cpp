@@ -8,6 +8,39 @@
 #include "../MiscHelpers/Common/SettingsWidgets.h"
 #include "Helpers/WinAdmin.h"
 
+class CCertBadge: public QLabel
+{
+public:
+	CCertBadge(QWidget* parent = NULL): QLabel(parent) 
+	{
+		setPixmap(QPixmap(":/Actions/Cert.png").scaled(16, 16, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+		if (!g_CertInfo.valid) {
+			setToolTip(COptionsWindow::tr("This option requires a valid supporter certificate"));
+			setCursor(Qt::PointingHandCursor);
+		} else {
+			setToolTip(COptionsWindow::tr("Supporter exclusive option"));
+		}
+	}
+
+protected:
+	void mousePressEvent(QMouseEvent* event)
+	{
+		if(!g_CertInfo.valid)
+			theGUI->OpenUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert"));
+	}
+};
+
+void COptionsWindow__AddCertIcon(QWidget* pOriginalWidget)
+{
+	QWidget* pWidget = new QWidget();
+	QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
+	pLayout->setContentsMargins(0, 0, 0, 0);
+	pLayout->setSpacing(0);
+	pLayout->addWidget(new CCertBadge());
+	pOriginalWidget->parentWidget()->layout()->replaceWidget(pOriginalWidget, pWidget);
+	pLayout->insertWidget(0, pOriginalWidget);
+}
+
 void COptionsWindow::CreateGeneral()
 {
 	ui.cmbBoxIndicator->addItem(tr("Don't alter the window title"), "-");
@@ -18,6 +51,7 @@ void COptionsWindow::CreateGeneral()
 	ui.cmbBoxBorder->addItem(tr("Show only when title is in focus"), "ttl");
 	ui.cmbBoxBorder->addItem(tr("Always show"), "on");
 
+
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardenedPlus), tr("Hardened Sandbox with Data Protection"), (int)CSandBoxPlus::eHardenedPlus);
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardened), tr("Security Hardened Sandbox"), (int)CSandBoxPlus::eHardened);
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eDefaultPlus), tr("Sandbox with Data Protection"), (int)CSandBoxPlus::eDefaultPlus);
@@ -27,7 +61,7 @@ void COptionsWindow::CreateGeneral()
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBox), tr("Application Compartment (NO Isolation)"), (int)CSandBoxPlus::eAppBox);
 
 	ui.lblSupportCert->setVisible(false);
-	if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0)
+	if (!g_CertInfo.valid)
 	{
 		ui.lblSupportCert->setVisible(true);
 		connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
@@ -35,7 +69,7 @@ void COptionsWindow::CreateGeneral()
 		for (int i = 0; i < ui.cmbBoxType->count(); i++)
 		{
 			int BoxType = ui.cmbBoxType->itemData(i, Qt::UserRole).toInt();
-			bool disabled = BoxType != CSandBoxPlus::eDefault && BoxType != CSandBoxPlus::eHardened;
+			bool disabled = BoxType != CSandBoxPlus::eDefault;
 
 			QStandardItemModel* model = qobject_cast<QStandardItemModel*>(ui.cmbBoxType->model());
 			QStandardItem* item = model->item(i);
@@ -43,13 +77,23 @@ void COptionsWindow::CreateGeneral()
 		}
 	}
 
+	QWidget* ExWidgets[] = { ui.chkSecurityMode, ui.chkLockDown, ui.chkRestrictDevices,
+		ui.chkPrivacy, ui.chkUseSpecificity,
+		ui.chkNoSecurityIsolation, ui.chkNoSecurityFiltering, NULL };
+	for(QWidget** ExWidget = ExWidgets; *ExWidget != NULL; ExWidget++)
+		COptionsWindow__AddCertIcon(*ExWidget);
+
+
 	m_HoldBoxType = false;
 
 	connect(ui.cmbBoxType, SIGNAL(currentIndexChanged(int)), this, SLOT(OnBoxTypChanged()));
-	connect(ui.chkDropRights, SIGNAL(clicked(bool)), this, SLOT(UpdateBoxType()));
+
+	connect(ui.chkSecurityMode, SIGNAL(clicked(bool)), this, SLOT(UpdateBoxType()));
 	connect(ui.chkPrivacy, SIGNAL(clicked(bool)), this, SLOT(UpdateBoxType()));
 	connect(ui.chkNoSecurityIsolation, SIGNAL(clicked(bool)), this, SLOT(UpdateBoxType()));
-	connect(ui.chkNoSecurityFiltering, SIGNAL(clicked(bool)), this, SLOT(UpdateBoxType()));
+	//connect(ui.chkNoSecurityFiltering, SIGNAL(clicked(bool)), this, SLOT(UpdateBoxType()));
+
+	
 
 	connect(ui.cmbBoxIndicator, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.cmbBoxBorder, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
@@ -60,6 +104,11 @@ void COptionsWindow::CreateGeneral()
 
 	connect(ui.chkBlockNetShare, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkBlockNetParam, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+
+	connect(ui.chkSecurityMode, SIGNAL(clicked(bool)), this, SLOT(OnSecurityMode()));
+	connect(ui.chkLockDown, SIGNAL(clicked(bool)), this, SLOT(OnSecurityMode()));
+	connect(ui.chkRestrictDevices, SIGNAL(clicked(bool)), this, SLOT(OnSecurityMode()));
+
 	connect(ui.chkDropRights, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkFakeElevation, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkMsiExemptions, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
@@ -68,9 +117,11 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.chkOpenSpooler, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkPrintToFile, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
+	connect(ui.chkOpenProtectedStorage, SIGNAL(clicked(bool)), this, SLOT(OnPSTChanged()));
 	connect(ui.chkOpenCredentials, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
-	connect(ui.chkOpenProtectedStorage, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkCloseClipBoard, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkVmRead, SIGNAL(clicked(bool)), this, SLOT(OnVmRead()));
+	connect(ui.chkVmReadNotify, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	//connect(ui.chkOpenSmartCard, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	//connect(ui.chkOpenBluetooth, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
@@ -91,11 +142,12 @@ void COptionsWindow::CreateGeneral()
 	ui.btnAddCmd->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnAddCmd->setMenu(pRunBtnMenu);
 	connect(ui.btnDelCmd, SIGNAL(clicked(bool)), this, SLOT(OnDelCommand()));
+	connect(ui.treeRun, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnRunChanged()));
 }
 
 void COptionsWindow::LoadGeneral()
 {
-	QString BoxNameTitle = m_pBox->GetText("BoxNameTitle", "n");
+	QString BoxNameTitle = m_pBox->GetText("BoxNameTitle", "n", false, true, false);
 	ui.cmbBoxIndicator->setCurrentIndex(ui.cmbBoxIndicator->findData(BoxNameTitle.toLower()));
 
 	QStringList BorderCfg = m_pBox->GetText("BorderColor").split(",");
@@ -111,10 +163,15 @@ void COptionsWindow::LoadGeneral()
 
 	ui.chkBlockNetShare->setChecked(m_pBox->GetBool("BlockNetworkFiles", false));
 	ui.chkBlockNetParam->setChecked(m_pBox->GetBool("BlockNetParam", true));
+	
+	ui.chkSecurityMode->setChecked(m_pBox->GetBool("UseSecurityMode", false));
+	ui.chkLockDown->setChecked(m_pBox->GetBool("SysCallLockDown", false));
+	ui.chkRestrictDevices->setChecked(m_pBox->GetBool("RestrictDevices", false));
+		
 	ui.chkDropRights->setChecked(m_pBox->GetBool("DropAdminRights", false));
 	ui.chkFakeElevation->setChecked(m_pBox->GetBool("FakeAdminRights", false));
 	ui.chkMsiExemptions->setChecked(m_pBox->GetBool("MsiInstallerExemptions", false));
-		
+
 	ui.chkBlockSpooler->setChecked(m_pBox->GetBool("ClosePrintSpooler", false));
 	ui.chkOpenSpooler->setChecked(m_pBox->GetBool("OpenPrintSpooler", false));
 	ui.chkPrintToFile->setChecked(m_pBox->GetBool("AllowSpoolerPrintToFile", false));
@@ -122,6 +179,7 @@ void COptionsWindow::LoadGeneral()
 	ui.chkOpenProtectedStorage->setChecked(m_pBox->GetBool("OpenProtectedStorage", false));
 	ui.chkOpenCredentials->setChecked(!ui.chkOpenCredentials->isEnabled() || m_pBox->GetBool("OpenCredentials", false));
 	ui.chkCloseClipBoard->setChecked(!m_pBox->GetBool("OpenClipboard", true));
+	ui.chkVmReadNotify->setChecked(m_pBox->GetBool("NotifyProcessAccessDenied", false));
 	//ui.chkOpenSmartCard->setChecked(m_pBox->GetBool("OpenSmartCard", true));
 	//ui.chkOpenBluetooth->setChecked(m_pBox->GetBool("OpenBluetooth", false));
 
@@ -166,6 +224,11 @@ void COptionsWindow::SaveGeneral()
 
 	WriteAdvancedCheck(ui.chkBlockNetShare, "BlockNetworkFiles", "y", "");
 	WriteAdvancedCheck(ui.chkBlockNetParam, "BlockNetParam", "", "n");
+
+	WriteAdvancedCheck(ui.chkSecurityMode, "UseSecurityMode", "y", "");
+	WriteAdvancedCheck(ui.chkLockDown, "SysCallLockDown", "y", "");
+	WriteAdvancedCheck(ui.chkRestrictDevices, "RestrictDevices", "y", "");
+
 	WriteAdvancedCheck(ui.chkDropRights, "DropAdminRights", "y", "");
 	WriteAdvancedCheck(ui.chkFakeElevation, "FakeAdminRights", "y", "");
 	WriteAdvancedCheck(ui.chkMsiExemptions, "MsiInstallerExemptions", "y", "");
@@ -178,6 +241,7 @@ void COptionsWindow::SaveGeneral()
 	if (ui.chkOpenCredentials->isEnabled())
 		WriteAdvancedCheck(ui.chkOpenCredentials, "OpenCredentials", "y", "");
 	WriteAdvancedCheck(ui.chkCloseClipBoard, "OpenClipboard", "n", "");
+	WriteAdvancedCheck(ui.chkVmReadNotify, "NotifyProcessAccessDenied", "y", "");
 	//WriteAdvancedCheck(ui.chkOpenSmartCard, "OpenSmartCard", "", "n");
 	//WriteAdvancedCheck(ui.chkOpenBluetooth, "OpenBluetooth", "y", "");
 
@@ -219,8 +283,50 @@ void COptionsWindow::OnGeneralChanged()
 	ui.chkOpenCredentials->setEnabled(!ui.chkOpenProtectedStorage->isChecked());
 	if (!ui.chkOpenCredentials->isEnabled()) ui.chkOpenCredentials->setChecked(true);
 
+	UpdateBoxSecurity();
+
 	m_GeneralChanged = true;
 	OnOptChanged();
+}
+
+
+void COptionsWindow::UpdateBoxSecurity()
+{
+	ui.chkLockDown->setEnabled(!ui.chkSecurityMode->isChecked());
+	ui.chkRestrictDevices->setEnabled(!ui.chkSecurityMode->isChecked());
+
+	if (!theAPI->IsRunningAsAdmin()) {
+		ui.chkDropRights->setEnabled(!ui.chkSecurityMode->isChecked() && !ui.chkNoSecurityIsolation->isChecked() && !theAPI->IsRunningAsAdmin());
+	}
+
+	if (ui.chkSecurityMode->isChecked()) {
+		ui.chkLockDown->setChecked(true);
+		ui.chkRestrictDevices->setChecked(true);
+
+		ui.chkDropRights->setChecked(true);
+	}
+
+	ui.chkMsiExemptions->setEnabled(!ui.chkDropRights->isChecked());
+}
+
+void COptionsWindow::OnSecurityMode()
+{
+	if (ui.chkSecurityMode->isChecked() || (ui.chkLockDown->isEnabled() && ui.chkLockDown->isChecked()) || (ui.chkRestrictDevices->isEnabled() && ui.chkRestrictDevices->isChecked()))
+		theGUI->CheckCertificate(this);
+
+	UpdateBoxSecurity();
+
+	if (sender() == ui.chkSecurityMode && !ui.chkSecurityMode->isChecked()) {
+		ui.chkLockDown->setChecked(m_pBox->GetBool("SysCallLockDown", false));
+		ui.chkRestrictDevices->setChecked(m_pBox->GetBool("RestrictDevices", false));
+		
+		ui.chkDropRights->setChecked(m_pBox->GetBool("DropAdminRights", false));
+	}
+
+	m_GeneralChanged = true;
+	OnOptChanged();
+
+	OnAccessChanged(); // for rule specificity
 }
 
 void COptionsWindow::OnPickColor()
@@ -287,13 +393,13 @@ void COptionsWindow::OnDelCommand()
 void COptionsWindow::UpdateBoxType()
 {
 	bool bPrivacyMode = ui.chkPrivacy->isChecked();
-	bool bNoAdmin = ui.chkDropRights->isChecked();
+	bool bSecurityMode = ui.chkSecurityMode->isChecked();
 	bool bAppBox = ui.chkNoSecurityIsolation->isChecked();
 
 	int BoxType;
 	if (bAppBox) 
 		BoxType = bPrivacyMode ? (int)CSandBoxPlus::eAppBoxPlus : (int)CSandBoxPlus::eAppBox;
-	else if (bNoAdmin) 
+	else if (bSecurityMode) 
 		BoxType = bPrivacyMode ? (int)CSandBoxPlus::eHardenedPlus : (int)CSandBoxPlus::eHardened;
 	else 
 		BoxType = bPrivacyMode ? (int)CSandBoxPlus::eDefaultPlus : (int)CSandBoxPlus::eDefault;
@@ -320,33 +426,34 @@ void COptionsWindow::OnBoxTypChanged()
 	case CSandBoxPlus::eHardened:
 		ui.chkNoSecurityIsolation->setChecked(false);
 		ui.chkNoSecurityFiltering->setChecked(false);
-		ui.chkDropRights->setChecked(true);
-		ui.chkMsiExemptions->setChecked(false);
+		ui.chkSecurityMode->setChecked(true);
 		//ui.chkRestrictServices->setChecked(true);
 		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eHardenedPlus);
 		//SetTemplate("NoUACProxy", false);
-		//SetTemplate("DeviceSecurity", true);
+		SetTemplate("RpcPortBindingsExt", false);
 		break;
 	case CSandBoxPlus::eDefaultPlus:
 	case CSandBoxPlus::eDefault:
 		ui.chkNoSecurityIsolation->setChecked(false);
 		ui.chkNoSecurityFiltering->setChecked(false);
-		ui.chkDropRights->setChecked(false);
-		ui.chkMsiExemptions->setChecked(false);
+		ui.chkSecurityMode->setChecked(false);
 		//ui.chkRestrictServices->setChecked(true);
 		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eDefaultPlus);
 		//SetTemplate("NoUACProxy", false);
-		//SetTemplate("DeviceSecurity", false);
 		break;
 	case CSandBoxPlus::eAppBoxPlus:
 	case CSandBoxPlus::eAppBox:
 		ui.chkNoSecurityIsolation->setChecked(true);
+		ui.chkSecurityMode->setChecked(false);
 		//ui.chkRestrictServices->setChecked(false);
 		ui.chkPrivacy->setChecked(BoxType == CSandBoxPlus::eAppBoxPlus);
 		//SetTemplate("NoUACProxy", true);
-		//SetTemplate("DeviceSecurity", false);
+		SetTemplate("RpcPortBindingsExt", true);
 		break;
 	}
+
+	m_BorderColor = theGUI->GetBoxColor(BoxType);
+	ui.btnBorderColor->setStyleSheet("background-color: " + m_BorderColor.name());
 
 	m_GeneralChanged = true;
 	m_AccessChanged = true;
@@ -355,5 +462,15 @@ void COptionsWindow::OnBoxTypChanged()
 	m_HoldBoxType = true;
 	UpdateBoxType();
 	m_HoldBoxType = false;
+	OnOptChanged();
+}
+
+void COptionsWindow::OnVmRead()
+{
+	if (ui.chkVmRead->isChecked())
+		SetAccessEntry(eIPC, "", eReadOnly, "$:*");
+	else
+		DelAccessEntry(eIPC, "", eReadOnly, "$:*");
+	m_AdvancedChanged = true;
 	OnOptChanged();
 }

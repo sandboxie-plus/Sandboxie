@@ -1092,6 +1092,8 @@ typedef enum _KEY_INFORMATION_CLASS {
     KeyFlagsInformation,
     KeyVirtualizationInformation,   // Windows Vista
     KeyHandleTagsInformation,       // Windows 7
+    KeyTrustInformation,
+    KeyLayerInformation,
     MaxKeyInfoClass
 } KEY_INFORMATION_CLASS;
 
@@ -2283,26 +2285,31 @@ typedef struct _RTL_DRIVE_LETTER_CURDIR {
 typedef struct _RTL_USER_PROCESS_PARAMETERS {
     ULONG MaximumLength;
     ULONG Length;
+
     ULONG Flags;
     ULONG DebugFlags;
+
     PVOID ConsoleHandle;
     ULONG ConsoleFlags;
     HANDLE StdInputHandle;
     HANDLE StdOutputHandle;
     HANDLE StdErrorHandle;
+
     UNICODE_STRING CurrentDirectoryPath;
     HANDLE CurrentDirectoryHandle;
     UNICODE_STRING DllPath;
     UNICODE_STRING ImagePathName;
     UNICODE_STRING CommandLine;
     PVOID Environment;
+
     ULONG StartingPositionLeft;
     ULONG StartingPositionTop;
     ULONG Width;
     ULONG Height;
     ULONG CharWidth;
     ULONG CharHeight;
-    ULONG ConsoleTextAttributes;
+    ULONG FillAttribute; // ConsoleTextAttributes; ???
+
     ULONG WindowFlags;
     ULONG ShowWindowFlags;
     UNICODE_STRING WindowTitle;
@@ -2310,6 +2317,17 @@ typedef struct _RTL_USER_PROCESS_PARAMETERS {
     UNICODE_STRING ShellInfo;
     UNICODE_STRING RuntimeData;
     RTL_DRIVE_LETTER_CURDIR DLCurrentDirectory[0x20];
+
+    ULONG_PTR EnvironmentSize;
+    ULONG_PTR EnvironmentVersion;
+    PVOID PackageDependencyData;
+    ULONG ProcessGroupId;
+    ULONG LoaderThreads;
+
+    UNICODE_STRING RedirectionDllName; // REDSTONE4
+    UNICODE_STRING HeapPartitionName; // 19H1
+    ULONG_PTR DefaultThreadpoolCpuSetMasks;
+    ULONG DefaultThreadpoolCpuSetMaskCount;
 } RTL_USER_PROCESS_PARAMETERS, *PRTL_USER_PROCESS_PARAMETERS;
 
 __declspec(dllimport) NTSTATUS RtlCreateProcessParameters(

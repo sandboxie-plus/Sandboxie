@@ -1,0 +1,31 @@
+name: Publish to WinGet
+on:
+  release:
+    types: [released]
+jobs:
+  publish-plus:
+    runs-on: windows-latest # action can only be run on Windows
+    steps:
+      - name: Publish Sandboxie-Plus
+        uses: vedantmgoyal2009/winget-releaser@latest
+        with:
+          identifier: Sandboxie.Plus
+          installers-regex: "Sandboxie-Plus.*.exe$"
+          token: ${{ secrets.WINGET_TOKEN }}
+
+  publish-classic:
+    runs-on: windows-latest
+    steps:
+      - name: Get Sandboxie-Classic version
+        id: get_version
+        run: |
+          $VERSION="${{ github.event.release.name }}" -replace '^.*/ '
+          Write-Host "::set-output name=CLASSIC_VER::$VERSION"
+        shell: pwsh
+      - name: Publish Sandboxie-Classic
+        uses: vedantmgoyal2009/winget-releaser@latest
+        with:
+          version: ${{ steps.get_version.outputs.CLASSIC_VER }}
+          identifier: Sandboxie.Classic
+          installers-regex: "Sandboxie-Classic.*.exe$"
+          token: ${{ secrets.WINGET_TOKEN }}

@@ -66,14 +66,17 @@ PROCESS_DATA *my_findProcessData(WCHAR *name,int createNew);
 // Functions (DllMain)
 //---------------------------------------------------------------------------
 
+SBIEDLL_EXPORT  void SbieDll_HookInit();
 
 SBIEDLL_EXPORT  void *SbieDll_Hook(
-    const char *SourceFuncName, void *SourceFunc, void *DetourFunc);
+    const char *SourceFuncName, void *SourceFunc, void *DetourFunc, HMODULE module);
 
 #define SBIEDLL_HOOK(pfx,proc)                  \
     *(ULONG_PTR *)&__sys_##proc = (ULONG_PTR)   \
-        SbieDll_Hook(#proc, proc, pfx##proc);   \
+        SbieDll_Hook(#proc, proc, pfx##proc, module);   \
     if (! __sys_##proc) return FALSE;
+
+SBIEDLL_EXPORT  void SbieDll_UnHookModule(HMODULE module);
 
 SBIEDLL_EXPORT  void SbieDll_DeviceChange(WPARAM wParam, LPARAM lParam);
 
@@ -198,6 +201,8 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_IsOpenClsid(
 SBIEDLL_EXPORT  void SbieDll_DisableElevationHook(void);
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_RegisterDllCallback(void *Callback);
+
+SBIEDLL_EXPORT  BOOLEAN SbieDll_IsDllSkipHook(const WCHAR* ImageName);
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_ExpandAndRunProgram(const WCHAR *Command);
 

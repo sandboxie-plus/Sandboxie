@@ -3,8 +3,12 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_OptionsWindow.h"
 #include "SbiePlusAPI.h"
+#include "../../MiscHelpers/Common/SettingsWidgets.h"
 
-class COptionsWindow : public QDialog
+//////////////////////////////////////////////////////////////////////////
+// COptionsWindow
+
+class COptionsWindow : public CConfigDialog
 {
 	Q_OBJECT
 
@@ -19,6 +23,22 @@ public:
 	QSet<QString>	GetPrograms() { return  m_Programs; }
 
 	static void		TriggerPathReload();
+
+	enum ETabs
+	{
+		eGeneral = 0,
+		eGroups,
+		eForce,
+		eStop,
+		eStart,
+		eInternet,
+		eAccess,
+		eRecover,
+		//eOther,
+		eAdvanced,
+		eTemplates,
+		eEditIni
+	};
 
 	enum EntryTypes {
 		eUndefined = 0,
@@ -50,6 +70,9 @@ private slots:
 	void OnBrowsePath();
 	void OnAddCommand();
 	void OnDelCommand();
+	void OnRunChanged() { m_GeneralChanged = true;  OnOptChanged(); }
+
+	void OnVmRead();
 
 	void OnAddGroup();
 	void OnAddProg();
@@ -146,6 +169,8 @@ private slots:
 	void OnTab();
 
 	void OnGeneralChanged();
+	void OnPSTChanged();
+	void OnSecurityMode();
 	void OnStartChanged()			{ m_StartChanged = true; OnOptChanged(); }
 	//void OnRestrictionChanged()		{ m_RestrictionChanged = true; OnOptChanged(); }
 	void OnINetBlockChanged()		{ m_INetBlockChanged = true; OnOptChanged(); }
@@ -162,12 +187,16 @@ private slots:
 	void OnSaveIni();
 	void OnCancelEdit();
 
+	void OnSetTree();
+
 protected:
 	friend struct SFirewallRule;
 
 	void closeEvent(QCloseEvent *e);
 
 	bool eventFilter(QObject *watched, QEvent *e);
+
+	void OnTab(int iTabID);
 
 	enum ENetWfAction
 	{
@@ -205,6 +234,7 @@ protected:
 		eReadIpcPath,
 
 		eOpenWinClass,
+		eNoRenameWinClass,
 
 		eOpenCOM,
 		eClosedCOM,
@@ -227,6 +257,7 @@ protected:
 		eNormal,
 		eOpen,
 		eOpen4All,
+		eNoRename,
 		eClosed,
 		eClosedRT,
 		eReadOnly,
@@ -263,6 +294,8 @@ protected:
 	void CreateGeneral();
 	void LoadGeneral();
 	void SaveGeneral();
+
+	void UpdateBoxSecurity();
 
 	void LoadGroups();
 	void LoadGroupsTmpl(bool bUpdate = false);
@@ -339,6 +372,7 @@ protected:
 	void UpdateBoxIsolation();
 	void ShowTriggersTmpl(bool bUpdate = false);
 	void AddTriggerItem(const QString& Value, ETriggerAction Type, const QString& Template = QString());
+	void CheckOpenCOM();
 	//
 
 	void CreateDebug();
@@ -397,6 +431,7 @@ protected:
 	QSet<QString> m_Programs;
 
 private:
+
 	void ReadAdvancedCheck(const QString& Name, QCheckBox* pCheck, const QString& Value = "y");
 	void WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& Value = "y");
 	void WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& OnValue, const QString& OffValue);
@@ -412,3 +447,4 @@ private:
 	};
 	QMap<QCheckBox*, SDbgOpt> m_DebugOptions;
 };
+

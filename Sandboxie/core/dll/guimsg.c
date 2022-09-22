@@ -132,7 +132,7 @@ static LRESULT Gui_SendMessageA_MdiCreate(HWND hWnd, LPARAM lParam);
 
 static LRESULT Gui_DispatchMessage8(const MSG *lpmsg, ULONG IsAscii);
 
-static BOOLEAN Gui_Hook_DispatchMessage8(void);
+static BOOLEAN Gui_Hook_DispatchMessage8(HMODULE module);
 
 static P_DispatchMessage8          __sys_DispatchMessage8       = 0;
 
@@ -160,7 +160,7 @@ BOOLEAN Gui_DispatchMessageCalled = FALSE;
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gui_InitMsg(void)
+_FX BOOLEAN Gui_InitMsg(HMODULE module)
 {
     //
     // hook SendMessage and PostMessage family of functions
@@ -211,7 +211,7 @@ _FX BOOLEAN Gui_InitMsg(void)
         SBIEDLL_HOOK_GUI(DispatchMessageA);
         SBIEDLL_HOOK_GUI(DispatchMessageW);
 
-    } else if (! Gui_Hook_DispatchMessage8())
+    } else if (! Gui_Hook_DispatchMessage8(module))
         return FALSE;
 
 #endif _WIN64
@@ -343,7 +343,7 @@ _FX LRESULT Gui_SendMessageTimeoutW(
             // the window of the owner of the clipboard data, in order
             // to test if the window is not hung, and display or hide
             // the Paste menu command accordingly.  make sure the
-            // command is displayed even for windows ouside the sandbox
+            // command is displayed even for windows outside the sandbox
             //
 
             if (hWnd == __sys_GetClipboardOwner()) {
@@ -796,7 +796,7 @@ fail:
     }
 
     Sbie_snwprintf(name, 48, L"$:TID=%08X:MSG=%08X", idThread, uMsg);
-    SbieApi_MonitorPut(MONITOR_WINCLASS | MONITOR_DENY, name);
+    SbieApi_MonitorPut2(MONITOR_WINCLASS | MONITOR_DENY, name, FALSE);
 
     return FALSE;
 }
@@ -852,7 +852,7 @@ _FX LRESULT Gui_DispatchMessage8(const MSG *lpmsg, ULONG IsAscii)
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gui_Hook_DispatchMessage8(void)
+_FX BOOLEAN Gui_Hook_DispatchMessage8(HMODULE module)
 {
     //
     // on Windows 8, the DispatchMessageA and DispatchMessageW functions

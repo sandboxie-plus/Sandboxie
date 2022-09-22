@@ -48,8 +48,9 @@ extern __declspec(dllexport) int __CRTDECL Sbie_snprintf(char *_Buffer, size_t C
 #define TRUE_NAME_BUFFER        0
 #define COPY_NAME_BUFFER        1
 #define TMPL_NAME_BUFFER        2
-#define NAME_BUFFER_COUNT       3
-#define NAME_BUFFER_DEPTH       24
+#define MISC_NAME_BUFFER        3 // 4, 5, 6, 7
+#define NAME_BUFFER_COUNT       8
+#define NAME_BUFFER_DEPTH       16 // 12
 
 
 #ifdef _WIN64
@@ -152,6 +153,7 @@ typedef struct _MY_LDR_WORKER_QUEUE_STUFF {
 }MY_LDR_WORKER_QUEUE_STUFF;
 #endif
 */
+
 typedef struct _THREAD_DATA {
 
     //
@@ -160,7 +162,8 @@ typedef struct _THREAD_DATA {
 
     WCHAR *name_buffer[NAME_BUFFER_COUNT][NAME_BUFFER_DEPTH];
     ULONG name_buffer_len[NAME_BUFFER_COUNT][NAME_BUFFER_DEPTH];
-    int depth;
+    int name_buffer_count[NAME_BUFFER_DEPTH];
+    int name_buffer_depth;
 
     //
     // locks
@@ -280,6 +283,7 @@ extern BOOLEAN Dll_RestrictedToken;
 extern BOOLEAN Dll_ChromeSandbox;
 extern BOOLEAN Dll_FirstProcessInBox;
 extern BOOLEAN Dll_CompartmentMode;
+//extern BOOLEAN Dll_AlernateIpcNaming;
 
 extern ULONG Dll_ImageType;
 
@@ -345,9 +349,20 @@ void Dll_FreeCode128(void *ptr);
 THREAD_DATA *Dll_GetTlsData(ULONG *pLastError);
 void Dll_FreeTlsData(void);
 
+//#define NAME_BUFFER_DEBUG
+#ifdef NAME_BUFFER_DEBUG
+WCHAR *Dll_GetTlsNameBuffer_(THREAD_DATA *data, ULONG which, ULONG size, char* func);
+void Dll_PushTlsNameBuffer_(THREAD_DATA *data, char* func);
+void Dll_PopTlsNameBuffer_(THREAD_DATA *data, char* func);
+#define Dll_GetTlsNameBuffer(x,y,z) Dll_GetTlsNameBuffer_(x, y, z, __FUNCTION__)
+#define Dll_PushTlsNameBuffer(x) Dll_PushTlsNameBuffer_(x, __FUNCTION__)
+#define Dll_PopTlsNameBuffer(x) Dll_PopTlsNameBuffer_(x, __FUNCTION__)
+#else
 WCHAR *Dll_GetTlsNameBuffer(THREAD_DATA *data, ULONG which, ULONG size);
 void Dll_PushTlsNameBuffer(THREAD_DATA *data);
 void Dll_PopTlsNameBuffer(THREAD_DATA *data);
+#endif
+
 
 
 //---------------------------------------------------------------------------
@@ -444,7 +459,7 @@ NTSTATUS Pipe_NtCreateFile(
     void *EaBuffer,
     ULONG EaLength);
 
-void File_DuplicateRecover(HANDLE OldFileHandle, HANDLE NewFileHandle);
+void Handle_SetupDuplicate(HANDLE OldFileHandle, HANDLE NewFileHandle);
 
 void File_DoAutoRecover(BOOLEAN force);
 
@@ -477,9 +492,7 @@ BOOLEAN File_IsBlockedNetParam(const WCHAR *BoxName);
 
 void File_GetSetDeviceMap(WCHAR *DeviceMap96);
 
-typedef void(*P_CloseHandler)(HANDLE handle);
-BOOLEAN File_RegisterCloseHandler(HANDLE FileHandle, P_CloseHandler CloseHandler);
-BOOLEAN File_UnRegisterCloseHandler(HANDLE FileHandle, P_CloseHandler CloseHandler);
+void File_NotifyRecover(HANDLE FileHandle);
 
 //---------------------------------------------------------------------------
 // Functions (key)
@@ -507,7 +520,7 @@ void Key_DeleteValueFromCLSID(
     const WCHAR *Xxxid, const WCHAR *Guid, const WCHAR *ValueName);
 
 void Key_CreateBaseKeys();
-//void Key_CreateBaseFolders();
+void Key_CreateBaseFolders();
 
 //---------------------------------------------------------------------------
 // Functions (sxs)
@@ -556,7 +569,7 @@ void Gui_AllowSetForegroundWindow(void);
 
 void Gdi_SplWow64(BOOLEAN Register);
 
-BOOLEAN Gdi_InitZero(void);
+BOOLEAN Gdi_InitZero(HMODULE module);
 
 void Gui_ResetClipCursor(void);
 
@@ -612,7 +625,7 @@ BOOLEAN Win32_Init(HMODULE hmodule);
 // Functions (init for DllMain)
 //---------------------------------------------------------------------------
 
-BOOLEAN File_InitHandles(void);
+BOOLEAN Handle_Init(void);
 
 BOOLEAN Key_Init(void);
 
@@ -789,7 +802,7 @@ BOOLEAN Config_MatchImage(
 
 WCHAR* Config_MatchImageAndGetValue(WCHAR* value, const WCHAR* ImageName, ULONG* pMode);
 
-BOOLEAN Config_InitPatternList(const WCHAR* boxname, const WCHAR* setting, LIST* list);
+BOOLEAN Config_InitPatternList(const WCHAR* boxname, const WCHAR* setting, LIST* list, BOOLEAN dos);
 
 VOID Config_FreePatternList(LIST* list);
 

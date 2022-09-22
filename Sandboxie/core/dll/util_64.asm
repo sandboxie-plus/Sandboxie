@@ -97,7 +97,7 @@ RpcRt_Ndr64AsyncClientCall PROC
 ;;    xor rcx,rcx     ; clear pProxyInfo
 ;;    xor rdx,rdx     ; clear nProcNum
 ;;    xor r8,r8       ; clear pReturnValue
-;	mov r8,[rsp + 8+(4*8)]			; return poitner
+;	mov r8,[rsp + 8+(4*8)]			; return pointer
     lea r9,[rsp + 8+(4*8) + 4*8]    ; setup Args -> SECURE_UAC_ARGS
     call RpcRt_Ndr64AsyncClientCall_x64
         test al,al
@@ -211,7 +211,7 @@ RpcRt_NdrAsyncClientCall PROC
 
 ;;    xor rcx,rcx     ; clear pStubDescriptor
 ;;    xor rdx,rdx     ; clear pFormat
-;	mov r8,[rsp + 8+(4*8)]			; return poitner
+;	mov r8,[rsp + 8+(4*8)]			; return pointer
     lea r8,[rsp + 8+(4*8) + 3*8]    ; Args
     call RpcRt_NdrAsyncClientCall_x64
     test al,al
@@ -231,7 +231,7 @@ CancelCallA:
 ;;;    xor rcx,rcx     ; clear pProxyInfo
 ;;;    xor rdx,rdx     ; clear nProcNum
 ;;;    xor r8,r8       ; clear pReturnValue
-;;	 mov r8,[rsp + 8+(4*8)]			 ; return poitner
+;;	 mov r8,[rsp + 8+(4*8)]			 ; return pointer
 ;    lea r8,[rsp + 8+(4*8) + 3*8]    ; Args
 ;    call RpcRt_NdrAsyncClientCall_...
 
@@ -260,7 +260,7 @@ RpcRt_NdrClientCall2 PROC
 
 ;;    xor rcx,rcx     ; clear pStubDescriptor
 ;;    xor rdx,rdx     ; clear pFormat
-;	mov r8,[rsp + 8+(4*8)]			; return poitner
+;	mov r8,[rsp + 8+(4*8)]			; return pointer
     lea r8,[rsp + 8+(4*8) + 3*8]    ; Args
     call RpcRt_NdrClientCall2_x64
     test al,al
@@ -280,7 +280,7 @@ CancelCall2:
 ;;;    xor rcx,rcx     ; clear pProxyInfo
 ;;;    xor rdx,rdx     ; clear nProcNum
 ;;;    xor r8,r8       ; clear pReturnValue
-;;	 mov r8,[rsp + 8+(4*8)]			 ; return poitner
+;;	 mov r8,[rsp + 8+(4*8)]			 ; return pointer
 ;    lea r8,[rsp + 8+(4*8) + 3*8]    ; Args
 ;    call RpcRt_NdrClientCall2_...
 
@@ -311,7 +311,7 @@ RpcRt_NdrClientCall3 PROC
 ;;    xor rcx,rcx     ; clear pProxyInfo
 ;;    xor rdx,rdx     ; clear nProcNum
 ;;    xor r8,r8       ; clear pReturnValue
-;	mov r8,[rsp + 8+(4*8)]			; return poitner
+;	mov r8,[rsp + 8+(4*8)]			; return pointer
     lea r9,[rsp + 8+(4*8) + 4*8]    ; Args
     call RpcRt_NdrClientCall3_x64
     test al,al
@@ -331,7 +331,7 @@ CancelCall3:
 ;;;    xor rcx,rcx     ; clear pProxyInfo
 ;;;    xor rdx,rdx     ; clear nProcNum
 ;;;    xor r8,r8       ; clear pReturnValue
-;;	 mov r8,[rsp + 8+(4*8)]			 ; return poitner
+;;	 mov r8,[rsp + 8+(4*8)]			 ; return pointer
 ;    lea r9,[rsp + 8+(4*8) + 4*8]    ; Args
 ;    call RpcRt_NdrClientCall3_...
 

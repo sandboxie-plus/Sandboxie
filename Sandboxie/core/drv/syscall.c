@@ -46,6 +46,8 @@ static BOOLEAN Syscall_Init_ServiceData(void);
 
 static void Syscall_ErrorForAsciiName(const UCHAR *name_a);
 
+void Syscall_Update_Lockdown();
+
 
 //---------------------------------------------------------------------------
 
@@ -54,6 +56,9 @@ static NTSTATUS Syscall_OpenHandle(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);
 
 static NTSTATUS Syscall_GetNextProcess(
+    PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);
+
+static NTSTATUS Syscall_GetNextThread(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);
 
 static NTSTATUS Syscall_DeviceIoControlFile(
@@ -77,8 +82,7 @@ static NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms);
 //---------------------------------------------------------------------------
 
 
-static ULONG Syscall_GetIndexFromNtdll(
-    UCHAR *code, const UCHAR *name, ULONG name_len);
+static ULONG Syscall_GetIndexFromNtdll(UCHAR *code);
 
 static BOOLEAN Syscall_GetKernelAddr(
     ULONG index, void **pKernelAddr, ULONG *pParamCount);
@@ -92,7 +96,6 @@ static BOOLEAN Syscall_GetKernelAddr(
 #pragma alloc_text (INIT, Syscall_Init_List)
 #pragma alloc_text (INIT, Syscall_Init_Table)
 #pragma alloc_text (INIT, Syscall_Init_ServiceData)
-#pragma alloc_text (INIT, Syscall_GetByName)
 #pragma alloc_text (INIT, Syscall_Set1)
 #pragma alloc_text (INIT, Syscall_Set2)
 #pragma alloc_text (INIT, Syscall_ErrorForAsciiName)
@@ -157,6 +160,9 @@ _FX BOOLEAN Syscall_Init(void)
     if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
         if (!Syscall_Set1("GetNextProcess", Syscall_GetNextProcess))
             return FALSE;
+
+        if (!Syscall_Set1("GetNextThread", Syscall_GetNextThread))
+            return FALSE;
     }
 
     if (!Syscall_Set1("DeviceIoControlFile", Syscall_DeviceIoControlFile))
@@ -187,6 +193,7 @@ _FX BOOLEAN Syscall_Init(void)
 
 _FX BOOLEAN Syscall_Init_List(void)
 {
+    BOOLEAN success = FALSE;
     UCHAR *name, *ntdll_code;
     void *ntos_addr;
     DLL_ENTRY *dll;
@@ -197,16 +204,26 @@ _FX BOOLEAN Syscall_Init_List(void)
     List_Init(&Syscall_List);
 
     //
+    // preapre the approve and disabled lists
+    //
+
+    LIST disabled_hooks;
+    Syscall_LoadHookMap(L"DisableWinNtHook", &disabled_hooks);
+
+    LIST approved_syscalls;
+    Syscall_LoadHookMap(L"ApproveWinNtSysCall", &approved_syscalls);
+
+    //
     // scan each ZwXxx export in NTDLL
     //
 
     dll = Dll_Load(Dll_NTDLL);
     if (! dll)
-        return FALSE;
+        goto finish;
 
     proc_offset = Dll_GetNextProc(dll, "Zw", &name, &proc_index);
     if (! proc_offset)
-        return FALSE;
+        goto finish;
 
     while (proc_offset) {
 
@@ -246,9 +263,17 @@ _FX BOOLEAN Syscall_Init_List(void)
             goto next_zwxxx;
         }
 
+        //
+        // on 64-bit Windows, some syscalls are fake, and should be skipped
+        //
+
+        if (    IS_PROC_NAME(15, "QuerySystemTime"))
+              goto next_zwxxx;
+
+
         // ICD-10607 - McAfee uses it to pass its own data in the stack. The call is not important to us. 
-        if (    IS_PROC_NAME(14, "YieldExecution"))
-            goto next_zwxxx;
+        //if (    IS_PROC_NAME(14, "YieldExecution")) // $Workaround$ - 3rd party fix
+        //    goto next_zwxxx;
 
         //
         // the Google Chrome "wow_helper" process expects NtMapViewOfSection
@@ -256,9 +281,13 @@ _FX BOOLEAN Syscall_Init_List(void)
         // Vista, this particular syscall is not very important to us, so
         // for sake of consistency, we skip hooking it on all platforms
         //
+        //if (    IS_PROC_NAME(16,  "MapViewOfSection")) // $Workaround$ - 3rd party fix
+        //    goto next_zwxxx;
 
-        if (    IS_PROC_NAME(16,  "MapViewOfSection"))
+        if(Syscall_HookMapMatch(name, name_len, &disabled_hooks))
             goto next_zwxxx;
+
+#undef IS_PROC_NAME
 
         //
         // analyze each ZwXxx export to find the service index number
@@ -270,8 +299,7 @@ _FX BOOLEAN Syscall_Init_List(void)
         ntdll_code = Dll_RvaToAddr(dll, proc_offset);
         if (ntdll_code) {
 
-            syscall_index =
-                Syscall_GetIndexFromNtdll(ntdll_code, name, name_len);
+            syscall_index = Syscall_GetIndexFromNtdll(ntdll_code);
 
             if (syscall_index == -2) {
                 //
@@ -291,7 +319,7 @@ _FX BOOLEAN Syscall_Init_List(void)
         if (! ntos_addr) {
 
             Syscall_ErrorForAsciiName(name);
-            return FALSE;
+            goto finish;
         }
 
         //
@@ -301,7 +329,7 @@ _FX BOOLEAN Syscall_Init_List(void)
         entry_len = sizeof(SYSCALL_ENTRY) + name_len + 1;
         entry = Mem_AllocEx(Driver_Pool, entry_len, TRUE);
         if (! entry)
-            return FALSE;
+            goto finish;
 
         entry->syscall_index = (USHORT)syscall_index;
         entry->param_count = (USHORT)param_count;
@@ -310,6 +338,7 @@ _FX BOOLEAN Syscall_Init_List(void)
         entry->handler1_func = NULL;
         entry->handler2_func = NULL;
         entry->handler3_func_support_procmon = NULL;
+        entry->approved = (Syscall_HookMapMatch(name, name_len, &approved_syscalls) != 0);
         entry->name_len = (USHORT)name_len;
         memcpy(entry->name, name, name_len);
         entry->name[name_len] = '\0';
@@ -328,21 +357,32 @@ next_zwxxx:
         proc_offset = Dll_GetNextProc(dll, NULL, &name, &proc_index);
     }
 
+    success = TRUE;
+
     //
     // report an error if we did not find a reasonable number of services
     //
 
     if (Syscall_MaxIndex < 100) {
         Log_Msg1(MSG_1113, L"100");
-        return FALSE;
+        success = FALSE;
     }
 
     if (Syscall_MaxIndex >= 500) {
         Log_Msg1(MSG_1113, L"500");
-        return FALSE;
+        success = FALSE;
     }
 
-    return TRUE;
+finish:
+
+    if(!success)
+        Syscall_MaxIndex = 0;
+
+    Syscall_FreeHookMap(&disabled_hooks);
+
+    Syscall_FreeHookMap(&approved_syscalls);
+
+    return success;
 }
 
 
@@ -588,6 +628,27 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
 
     //DbgPrint("[syscall] request for service %d / %08X\n", syscall_index, syscall_index);
 
+    //
+    // use direct syscalls to access 64 bit memory from a wow process 
+    // instead of using heaven's gate / wow64ext
+    //
+
+    if (syscall_index == 0xFFF && parms[3] != 0) {
+        __try {
+
+            entry = Syscall_GetByName((UCHAR*)parms[3]);
+
+            if(parms[4]) // return found index to the caller to be re used later
+                *(USHORT*)parms[4] = entry->syscall_index; 
+
+        } __except (EXCEPTION_EXECUTE_HANDLER) {
+            entry = NULL;
+        }
+    }
+    else 
+        
+    //
+
     if (Syscall_Table && (syscall_index <= Syscall_MaxIndex))
         entry = Syscall_Table[syscall_index];
     else
@@ -610,7 +671,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
     }
     else
 #endif
-
+    if(!proc->is_locked_down || entry->approved)
         Thread_SetThreadToken(proc);        // may set proc->terminated
 
     if (proc->terminated) {
@@ -741,12 +802,14 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
             if (hConnection)
             {
                 WCHAR trace_str[128];
-                RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"[syscall] %.*S, status = 0x%X, handle = %X; ", //59 chars + entry->name
+                RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"%.*S, status = 0x%X, handle = %X; ", //59 chars + entry->name
                     max(strlen(entry->name), 64), entry->name,
                     status, hConnection);
-                const WCHAR* strings[3] = { trace_str, puStr ? puStr->Buffer : NULL, NULL };
-                ULONG lengths[3] = { wcslen(trace_str), puStr ? puStr->Length / 2 : 0, 0 };
-                Session_MonitorPutEx(MONITOR_IPC | MONITOR_TRACE, strings, lengths, PsGetCurrentProcessId(), PsGetCurrentThreadId());
+                const WCHAR* strings[4] = { trace_str, trace_str + (entry->name_len + 2), puStr ? puStr->Buffer : NULL, NULL };
+                ULONG lengths[4] = {entry->name_len, wcslen(trace_str) - (entry->name_len + 4), puStr ? puStr->Length / 2 : 0, 0 };
+                Session_MonitorPutEx(MONITOR_SYSCALL | (entry->approved ? MONITOR_OPEN : MONITOR_TRACE), 
+                    strings, lengths, PsGetCurrentProcessId(), PsGetCurrentThreadId());
+
                 traced = TRUE;
             }
         }
@@ -754,11 +817,13 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
         if (!traced && ((proc->call_trace & TRACE_ALLOW) || ((status != STATUS_SUCCESS) && (proc->call_trace & TRACE_DENY))))
         {
             WCHAR trace_str[128];
-            RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"[syscall] %.*S, status = 0x%X", //59 chars + entry->name
+            RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"%.*S, status = 0x%X", //59 chars + entry->name
                 max(strlen(entry->name), 64), entry->name,
                 status);
-            const WCHAR* strings[2] = { trace_str, NULL };
-            Session_MonitorPutEx(MONITOR_SYSCALL | MONITOR_TRACE, strings, NULL, PsGetCurrentProcessId(), PsGetCurrentThreadId());
+            const WCHAR* strings[3] = { trace_str, trace_str + (entry->name_len + 2), NULL };
+            ULONG lengths[3] = {entry->name_len, wcslen(trace_str) - (entry->name_len + 2), 0 };
+            Session_MonitorPutEx(MONITOR_SYSCALL | (entry->approved ? MONITOR_OPEN : MONITOR_TRACE), 
+                strings, lengths, PsGetCurrentProcessId(), PsGetCurrentThreadId());
         }
 
 #ifdef _WIN64
@@ -917,6 +982,40 @@ _FX NTSTATUS Syscall_Api_Query(PROCESS *proc, ULONG64 *parms)
     return STATUS_SUCCESS;
 }
 
+
+//---------------------------------------------------------------------------
+// Syscall_Update_Lockdown
+//---------------------------------------------------------------------------
+
+
+_FX void Syscall_Update_Lockdown()
+{
+    SYSCALL_ENTRY *entry;
+
+#ifdef HOOK_WIN32K
+    Syscall_Update_Lockdown32();
+#endif
+
+    LIST approved_syscalls;
+    Syscall_LoadHookMap(L"ApproveWinNtSysCall", &approved_syscalls);
+
+    entry = List_Head(&Syscall_List);
+    while (entry) {
+
+        entry->approved = (Syscall_HookMapMatch(entry->name, entry->name_len, &approved_syscalls) != 0);
+
+        entry = List_Next(entry);
+    }
+
+    Syscall_FreeHookMap(&approved_syscalls);
+}
+
+
+//---------------------------------------------------------------------------
+// Syscall_QuerySystemInfo_SupportProcmonStack
+//---------------------------------------------------------------------------
+
+
 _FX BOOLEAN Syscall_QuerySystemInfo_SupportProcmonStack(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args)
 {
@@ -925,6 +1024,8 @@ _FX BOOLEAN Syscall_QuerySystemInfo_SupportProcmonStack(
     // In Win10, case 0xb9 triggers WbCreateWarbirdProcess/WbDispatchOperation/WbSetTrapFrame
     // and PspSetContextThreadInternal (Warbird operation?) to deliver a apc call in the current
     // thread in user mode. Warbird needs the real thread context.
+    // https://github.com/xpn/warbird_exploit
+    // this exploit only works on x86 windows but can still crash a x64 one
 
     // It seems only NtQuerySystemInfomation is doing this.
     // Call Syscall_Set3 in Syscall_Init if we see a different syscall does this in the future.

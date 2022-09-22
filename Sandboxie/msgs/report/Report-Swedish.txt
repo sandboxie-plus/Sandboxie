@@ -1,0 +1,363 @@
+*==========
+* Missing Messages in Text-Swedish-1053.txt
+*==========
+
+2225;pop;wrn;01
+SBIE2225 An attempt was made to access an EFS file: %2
+.
+
+2325;pop;err;01
+SBIE2325 Debug:  %2
+.
+
+3315;txt;01
+Deleting Sandbox contents
+.
+
+3316;txt;01
+Do you want to abort the operation?
+.
+
+3317;txt;01
+Preparing to delete: %2
+.
+
+3318;txt;01
+Deleting: %2
+.
+
+3468;txt;01
+Sandboxie-Plus Migration Guide
+.
+
+6010;txt;01
+You have installed Sandboxie more than %2 days ago.
+
+So, you think David and the contributors are doing a great job?
+
+Why don't you show it by supporting the project and getting a Supporter Certificate?
+
+Sandboxie without a valid supporter certificate will now pause for a few seconds, to give you time to contemplate the possibility of supporting the project.
+.
+
+6011;txt;01
+Wait
+.
+
+6012;txt;01
+Continue
+.
+
+6013;txt;01
+Quit
+.
+
+6014;txt;01
+Get Certificate
+.
+
+8106;txt;02
+The following programs must be closed before the installation can continue.
+Click OK to close these programs and continue.  Click Cancel to abort the installation.
+.
+
+*==========
+* Extraneous Messages in Text-Swedish-1053.txt
+*==========
+
+1109;evt;err;01
+SBIE1109 Ogiltig licensinformation:  %2
+.
+
+1202;pop;err;01
+SBIE1202 Kan inte uppdatera licensinformation:  %2
+.
+
+1303;pop;inf;01
+SBIE1303 Bara en sandbox i taget kan vara aktiv
+.
+
+1310;pop;inf;01
+SBIE1310 Utvidgade funktioner är blockerade tills licensen återaktiverats
+.
+
+3231;txt;01
+Du har installera Sandboxie för mer än 30 dagar sedan.
+.
+
+3232;txt;01
+Personlig användning av Sandboxie är tillåten utan betalning så länge du vill.
+.
+
+3233;txt;01
+Men, gratisversionen kommer nu pausa ett par sekunder.
+.
+
+3234;txt;01
+Men, gratisversionen tillåter bara användning av en sandbox i taget.
+.
+
+3235;txt;01
+Den här begränsningen tas bort i den köpta versionen av Sandboxie.
+.
+
+3236;txt;01
+Dessutom tillåter den köpta versionen automatisk körning av valda program i en sandbox.
+.
+
+3237;txt;01
+För mer information och för att köpa programmet, följ denna länk:
+.
+
+3238;txt;01
+Var god vänta %2 sekunder till.
+.
+
+3239;txt;01
+Klicka för att stänga det här fönstret och för att fortsätta.
+.
+
+3240;txt;01
+Klicka för att stänga det här fönstret och stoppa.
+.
+
+3503;txt;01
+Experimentellt skydd (64-bit)
+.
+
+3455;txt;01
+&Registrera Sandboxie
+.
+
+3458;txt;01
+Tillåt direktåtkomst till typsnittcache
+.
+
+3542;txt;01
+Experimentellt skydd förbättrar skyddet för 64-bit Sandboxie, 
+och gör det till samma nivå av skydd som finns i 32-bit Sandboxie.
+
+VIKTIGT: Experimentellt skydd använder odokumenterade funktioner 
+av Windows kerneln. Framtida uppdateringar till Windows kan störa 
+Experimentellt skydd, och kan göra systemet ostabilt.
+
+ANVÄND PÅ EGEN RISK.
+
+För att aktivera Experimentellt skydd måste du starta om datorn.
+.
+
+3543;txt;01
+För att stänga av Experimentellt skydd måste du starta om datorn.
+
+Notera att lägre rättigheter kommer slås på i alla sandlådor.
+.
+
+3771;txt;01
+(Denna funktion finns bara i den köpta versionen av Sandboxie)
+.
+
+3962;txt;01
+Tvingade användare
+.
+
+3963;txt;01
+Om några av följande användarkonton loggar in på denna dator kommer hela inloggningssessionen att tvingas köra i denna sandlåda.
+.
+
+3964;txt;01
+För att radera en sandlåda förknippad med en tvingad användare, logga in på det kontot och ta bort sandlådan via Sandboxie Kontroll.
+.
+
+3965;txt;01
+Tvingade användare har behörighet över tvingade program och tvingade mappar.
+.
+
+3950;txt;01
+Print Spooler
+.
+
+3951;txt;01
+Fönstret Print Spooler körs utanför Sandboxies bevakning.  En sandlådad applikation som begär Print Spooler till en fil blockeras, för att denna fil kommer skrivas utanför sandlådan.
+.
+
+3952;txt;01
+Om du vill tillåta Print Spooler att skriva till en fil, kan du aktivera denna inställning. Det rekommenderas att bara göras när det är nödvändigt.
+.
+
+3953;txt;01
+Tillåt Print Spooler att skriva till en fil.
+.
+
+7901;txt;01
+Sandboxie Licenshanteraren
+.
+
+7902;txt;01
+Systemkod %2
+.
+
+7903;txt;01
+I fortsättningen, aktivera licensen utan att fråga
+.
+
+7921;txt;01
+Sandboxie är registrerad och licensen är aktiverad.
+.
+
+7922;txt;01
+Sandboxie är registrerad, men licensen borde återaktiveras nu.
+.
+
+7923;txt;01
+Oregistrerad kopia.  Registrera idag!
+.
+
+7924;txt;01
+Licensen för Sandboxie måste återaktiveras om %2 dagar.
+.
+
+7925;txt;01
+Licensen för Sandboxie har nu aktiverats.
+.
+
+7926;txt;01
+Utgångsdatumet för din produktnyckel är %2.
+.
+
+7927;txt;01
+Din produktnyckel har inget utgångsdatum.
+.
+
+7931;txt;01
+Din kopia av Sandboxie är registrerad med en gammal produktnyckel.
+.
+
+7932;txt;01
+Vänligen tillåt licenshanteraren att koppla upp sig till licensservern och uppgradera din gamla produktnyckel till en ny produktnyckel. Du kommer inte få betala något för denna uppgradering.
+.
+
+7933;txt;01
+Din produktnyckel känns inte igen av licensservern.
+.
+
+7934;txt;01
+Om du har en riktig produktnyckel som du betalar för, fick som en gåva, skicka ett mail till:
+.
+
+7935;txt;01
+Din nya produktnyckel är:
+.
+
+7936;txt;01
+Spara denna produktnyckel i ett säkert ställe för framtida bruk. Använd knappen nedan för att kopiera din produktnyckel så du kan klistra in den i ett dokument och printa ut den.
+.
+
+7937;txt;01
+&Uppgradera din registreringsnyckel till en produktnyckel
+.
+
+7941;txt;01
+Sandboxies registrering görs genom en andrahandssida. Börja registreringsprocessen genom att trycka på länken nedan.
+.
+
+7942;txt;01
+För att aktivera din Sandboxielicens, skriv in produktnyckeln som dyker upp när du betalat, klicka sen på knappen för att aktivera din licens.
+.
+
+7943;txt;01
+Vill du skriva in din produktnyckel nu?
+.
+
+7944;txt;01
+&Aktivera licens
+.
+
+7945;txt;01
+Din kopia av Sandboxie är nu registrerad.
+.
+
+7946;txt;01
+Tack för att du stödjer Sandboxie!
+.
+
+7951;txt;01
+Vill du aktivera licensen nu?
+.
+
+7952;txt;01
+Besök Sandboxies hemsida på länken nedan för att beställa en ny produktnyckel.
+.
+
+7961;txt;01
+Ta bort licensinformation
+.
+
+7962;txt;01
+Är du säker på att du vill ta bort licensinformationen i Sandboxie?
+
+Du kan aktivera din licens när som helst genom att skriva in en produktnyckel.
+.
+
+7971;txt;01
+Detta är inte en giltig produktnyckel.
+.
+
+7972;txt;01
+Detta är inte en giltig systemkod.
+.
+
+7973;txt;01
+Detta är inte en giltig aktiveringsnyckel.  [%2]
+.
+
+7974;txt;01
+Ogiltigt svar från licensservern.
+.
+
+7975;txt;01
+Produktaktivering misslyckades:
+.
+
+7976;txt;01
+Vill du försöka igen nu?
+.
+
+7977;txt;01
+Om du behöver aktivera Sandboxie på en dator som inte har internetåtkomst,
+besök Sandboxies licens FAQ för information av offline aktivering.
+.
+
+7982;txt;01
+Licensservern skrev inte en anledning till att aktiveringen misslyckades
+.
+
+7983;txt;01
+Produktnyckeln känns inte igen av licensservern.
+.
+
+7984;txt;01
+Produktnyckeln kan inte användas när den gick ut %2.
+.
+
+7985;txt;01
+Produktnyckeln aktiverades på för många datorer.
+.
+
+7986;txt;01
+Produktnyckeln avslutades eftersom den spreds på Internet.
+.
+
+7987;txt;01
+Produktnyckeln avslutades eftersom du fick pengarna tillbaka.
+.
+
+8106;txt;01
+Följande program måste stängas innan installationen kan fortsätta.
+.
+
+8107;txt;01
+Stäng dessa program och klicka på Ok, för att fortsätta. Klicka på Avsluta, för att avsluta installationen.
+.
+
+
+

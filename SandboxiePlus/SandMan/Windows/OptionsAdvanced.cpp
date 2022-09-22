@@ -26,7 +26,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkComTimeout, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkNoSecurityIsolation, SIGNAL(clicked(bool)), this, SLOT(OnIsolationChanged()));
-	connect(ui.chkNoSecurityFiltering, SIGNAL(clicked(bool)), this, SLOT(OnIsolationChanged()));
+	connect(ui.chkNoSecurityFiltering, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkOpenDevCMApi, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	//connect(ui.chkOpenLsaSSPI, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -79,6 +79,7 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkProtectSystem->setChecked(!m_pBox->GetBool("ExposeBoxedSystem", false));
 	ui.chkDropPrivileges->setChecked(m_pBox->GetBool("StripSystemPrivileges", true));
 
+	CheckOpenCOM();
 	ui.chkComTimeout->setChecked(!m_pBox->GetBool("RpcMgmtSetComTimeout", true));
 
 	ui.chkNoSecurityIsolation->setChecked(m_pBox->GetBool("NoSecurityIsolation", false));
@@ -120,7 +121,7 @@ void COptionsWindow::LoadAdvanced()
 	ShowTriggersTmpl();
 	//
 
-	ui.chkHideOtherBoxes->setChecked(m_pBox->GetBool("HideOtherBoxes", false));
+	ui.chkHideOtherBoxes->setChecked(m_pBox->GetBool("HideOtherBoxes", true));
 	QStringList Processes = m_pBox->GetTextList("HideHostProcess", m_Template);
 	ui.lstProcesses->clear();
 	ui.lstProcesses->addItems(Processes);
@@ -141,9 +142,17 @@ void COptionsWindow::LoadAdvanced()
 	m_AdvancedChanged = false;
 }
 
+void COptionsWindow::OnPSTChanged()
+{
+	if(!ui.chkOpenProtectedStorage->isChecked())
+		ui.chkOpenCredentials->setChecked(m_pBox->GetBool("OpenCredentials", false));
+
+	OnGeneralChanged();
+}
+
 void COptionsWindow::ShowTriggersTmpl(bool bUpdate)
 {
-	if (ui.chkShowRecoveryTmpl->isChecked())
+	if (ui.chkShowTriggersTmpl->isChecked())
 	{
 		foreach(const QString& Template, m_pBox->GetTemplates())
 		{
@@ -233,7 +242,7 @@ void COptionsWindow::SaveAdvanced()
 	WriteTextList("OnBoxDelete", DeleteCommand);
 	//
 
-	WriteAdvancedCheck(ui.chkHideOtherBoxes, "HideOtherBoxes");
+	WriteAdvancedCheck(ui.chkHideOtherBoxes, "HideOtherBoxes", "", "n");
 
 	QStringList Processes;
 	for (int i = 0; i < ui.lstProcesses->count(); i++)
@@ -251,10 +260,18 @@ void COptionsWindow::SaveAdvanced()
 
 void COptionsWindow::OnIsolationChanged()
 {
-	if (ui.chkPrivacy->isChecked() || ui.chkUseSpecificity->isChecked())
-		theGUI->CheckCertificate();
+	if (sender() == ui.chkNoSecurityIsolation) {
+		// we can ignore chkNoSecurityFiltering as it requires chkNoSecurityIsolation
+		if (ui.chkNoSecurityIsolation->isChecked())
+			theGUI->CheckCertificate(this);
+	}
 
 	UpdateBoxIsolation();
+
+	if (sender() == ui.chkNoSecurityIsolation && !ui.chkNoSecurityIsolation->isChecked()) {
+		ui.chkCloseForBox->setChecked(m_pBox->GetBool("AlwaysCloseForBoxed", true));
+		ui.chkNoOpenForBox->setChecked(m_pBox->GetBool("DontOpenForBoxed", true));
+	}
 
 	m_AdvancedChanged = true;
 	OnOptChanged();
@@ -275,8 +292,6 @@ void COptionsWindow::UpdateBoxIsolation()
 	ui.chkRawDiskRead->setEnabled(!ui.chkNoSecurityIsolation->isChecked()); //  without isolation only user mode
 	ui.chkRawDiskNotify->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
 
-	ui.chkDropRights->setEnabled(!ui.chkNoSecurityIsolation->isChecked() && !theAPI->IsRunningAsAdmin());
-
 	ui.chkBlockNetShare->setEnabled(!ui.chkNoSecurityFiltering->isChecked());
 
 	ui.chkBlockSpooler->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
@@ -284,6 +299,15 @@ void COptionsWindow::UpdateBoxIsolation()
 	ui.chkPrintToFile->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityFiltering->isChecked());
 
 	ui.chkCloseClipBoard->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkVmRead->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+
+	ui.chkCloseForBox->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+	ui.chkNoOpenForBox->setEnabled(!ui.chkNoSecurityIsolation->isChecked());
+
+	if (ui.chkNoSecurityIsolation->isChecked()) {
+		ui.chkCloseForBox->setChecked(false);
+		ui.chkNoOpenForBox->setChecked(false);
+	}
 }
 
 void COptionsWindow::OnSysSvcChanged()
@@ -299,20 +323,20 @@ void COptionsWindow::OnAdvancedChanged()
 	OnOptChanged();
 }
 
+void COptionsWindow::CheckOpenCOM()
+{
+	bool bComIpcOpen = GetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\epmapper") != NULL || GetAccessEntry(eIPC, "", eOpen, "*") != NULL;
+	if(bComIpcOpen)
+		ui.chkOpenCOM->setChecked(!m_BoxTemplates.contains("BoxedCOM"));
+	else
+		ui.chkOpenCOM->setChecked(m_BoxTemplates.contains("OpenCOM"));
+}
+
 void COptionsWindow::OnOpenCOM()
 {
-	if (ui.chkOpenCOM->isChecked()) {
-		SetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\epmapper");
-		SetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\LRPC*");
-		SetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\OLE*");
-		SetAccessEntry(eIPC, "", eOpen, "*\\BaseNamedObjects*\\__ComCatalogCache__");
-	}
-	else {
-		DelAccessEntry(eIPC, "", eOpen, "\\RPC Control\\epmapper");
-		DelAccessEntry(eIPC, "", eOpen, "\\RPC Control\\LRPC*");
-		DelAccessEntry(eIPC, "", eOpen, "\\RPC Control\\OLE*");
-		DelAccessEntry(eIPC, "", eOpen, "*\\BaseNamedObjects*\\__ComCatalogCache__");
-	}
+	bool bComIpcOpen = GetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\epmapper") != NULL || GetAccessEntry(eIPC, "", eOpen, "*") != NULL;
+	SetTemplate("OpenCOM", !bComIpcOpen && ui.chkOpenCOM->isChecked());
+	SetTemplate("BoxedCOM", bComIpcOpen && !ui.chkOpenCOM->isChecked());
 }
 
 void COptionsWindow::OnNoWindowRename()
@@ -518,7 +542,7 @@ void COptionsWindow::CreateDebug()
 
 			QString Description = ValueDescr.size() >= 3 ? ValueDescr[2] : ValueDescr[0];
 			int Column = 0; // use - to add up to 10 indents
-			for (; Description[0] == "-" && Column < 10; Column++) Description.remove(0, 1);
+			for (; Description[0] == '-' && Column < 10; Column++) Description.remove(0, 1);
 
 			SDbgOpt DbgOption = { ValueDescr[0], ValueDescr.size() >= 2 ? ValueDescr[1] : "y" , false};
 

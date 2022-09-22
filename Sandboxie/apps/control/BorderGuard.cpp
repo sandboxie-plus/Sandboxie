@@ -568,6 +568,7 @@ void CBorderGuard::RefreshBorder(
 
     HRGN hrgn = CreatePolygonRgn(points, num_points, ALTERNATE);
     SetWindowRgn(m_border_hwnd, hrgn, TRUE);
+    DeleteObject(hrgn);
     SetWindowPos(m_border_hwnd, NULL, ax, ay, aw, ah,
                  SWP_SHOWWINDOW | SWP_NOACTIVATE);
 

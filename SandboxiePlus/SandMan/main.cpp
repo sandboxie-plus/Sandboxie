@@ -8,6 +8,7 @@
 #include "../MiscHelpers/Common/Common.h"
 #include <windows.h>
 #include "./Windows/SettingsWindow.h"
+#include "./Wizards/SetupWizard.h"
 
 CSettings* theConf = NULL;
 
@@ -15,11 +16,45 @@ QString g_PendingMessage;
 
 int main(int argc, char *argv[])
 {
-#ifdef Q_OS_WIN
-	//SetProcessDPIAware();
-#endif // Q_OS_WIN 
-	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling); 
-	//QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
+	qsrand(QTime::currentTime().msec());
+
+	wchar_t szPath[MAX_PATH];
+	GetModuleFileNameW(NULL, szPath, ARRAYSIZE(szPath));
+	*wcsrchr(szPath, L'\\') = L'\0';
+	QString AppDir = QString::fromWCharArray(szPath);
+
+	if (QFile::exists(AppDir + "\\Certificate.dat")) {
+		CSettingsWindow::LoadCertificate(AppDir + "\\Certificate.dat");
+		g_CertInfo.business = GetArguments(g_Certificate, L'\n', L':').value("TYPE").toUpper().contains("BUSINESS");
+	}
+
+	// use a shared setting location when used in a business environment for easier administration
+	theConf = new CSettings(AppDir, "Sandboxie-Plus", g_CertInfo.business);
+
+#ifndef _DEBUG
+	InitMiniDumpWriter(QString("SandMan-v%1").arg(CSandMan::GetVersion()).toStdWString().c_str() , QString(theConf->GetConfigDir()).replace("/", "\\").toStdWString().c_str());
+#endif
+
+	// this must be done before we create QApplication
+	int DPI = theConf->GetInt("Options/DPIScaling", 1);
+	if (DPI == 1) {
+		//SetProcessDPIAware();
+		//SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_SYSTEM_AWARE);
+		//SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_SYSTEM_AWARE);
+		typedef DPI_AWARENESS_CONTEXT(WINAPI* P_SetThreadDpiAwarenessContext)(DPI_AWARENESS_CONTEXT dpiContext);
+		P_SetThreadDpiAwarenessContext pSetThreadDpiAwarenessContext = (P_SetThreadDpiAwarenessContext)GetProcAddress(GetModuleHandle(L"user32.dll"), "SetThreadDpiAwarenessContext");
+		if(pSetThreadDpiAwarenessContext) // not present on windows 7
+			pSetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_SYSTEM_AWARE);
+		else
+			SetProcessDPIAware();
+	}
+	else if (DPI == 2) {
+		QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling); 
+	}
+	//else {
+	//	QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
+	//}
+
 
 	QtSingleApplication app(argc, argv);
 	app.setQuitOnLastWindowClosed(false);
@@ -39,13 +74,19 @@ int main(int argc, char *argv[])
 
 	QStringList Args = QCoreApplication::arguments();
 	
-	int CmdPos = Args.indexOf("-open_reg", Qt::CaseInsensitive);
+	int CmdPos = Args.indexOf("/OpenReg", Qt::CaseInsensitive);
 	if (CmdPos != -1) {
 		if (Args.count() > CmdPos + 2) {
 			QProcess::startDetached(Args.at(CmdPos + 2));
 			QThread::msleep(1000);
 		}
 		ShellOpenRegKey(Args.at(CmdPos + 1));
+		return 0;
+	}
+
+	CmdPos = Args.indexOf("/ShellUninstall", Qt::CaseInsensitive);
+	if (CmdPos != -1) {
+		CSetupWizard::ShellUninstall();
 		return 0;
 	}
 
@@ -85,20 +126,14 @@ int main(int argc, char *argv[])
 			return 0;
 		app.disableSingleApp(); // we start to do one job and exit, don't interfear with starting a regular instance
 	}
-	else if (app.sendMessage("ShowWnd"))
-		return 0;
-
-
-	if (QFile::exists(QCoreApplication::applicationDirPath() + "\\Certificate.dat")) {
-		CSettingsWindow::LoadCertificate();
-		g_CertInfo.business = GetArguments(g_Certificate, L'\n', L':').value("TYPE").toUpper().contains("BUSINESS");
+	else {
+		if (app.arguments().contains("-autorun") && app.isRunning())
+			return 0;
+		if (app.sendMessage("ShowWnd"))
+			return 0;
 	}
 
-	// use a shared setting location when used in a business environment for easier administration
-	theConf = new CSettings("Sandboxie-Plus", g_CertInfo.business);
-
 	//QThreadPool::globalInstance()->setMaxThreadCount(theConf->GetInt("Options/MaxThreadPool", 10));
-
 
 	CSandMan* pWnd = new CSandMan();
 
@@ -113,11 +148,3 @@ int main(int argc, char *argv[])
 
 	return ret;
 }
-
-/*HANDLE hServerPipe = CreateFileW(L"\\\\.\\pipe\\qtsingleapp-sandma-ca4a-1", GENERIC_ALL, 0, NULL, OPEN_EXISTING, 0, NULL);
-if (hServerPipe != INVALID_HANDLE_VALUE) {
-	DWORD lenWritten;
-    WriteFile(hServerPipe, "test", 4, &lenWritten, NULL)
-
-    CloseHandle(hServerPipe);
-}*/

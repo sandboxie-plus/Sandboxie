@@ -103,7 +103,7 @@ static BOOLEAN Gui_HookInit = FALSE;
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gui_InitWinHooks(void)
+_FX BOOLEAN Gui_InitWinHooks(HMODULE module)
 {
     InitializeCriticalSection(&Gui_HooksCritSec);
     List_Init(&Gui_Hooks);
@@ -289,7 +289,7 @@ ULONG CALLBACK Gui_HookHelperProc(LPVOID lpParam)
     // by the service worker for each session, see GuiServer::WndHookNotifySlave
     //
     // whenever a window is created the service gets notified and instructs
-    // the hooking pocess to hook the window's thread this is done using QueueUserAPC
+    // the hooking process to hook the window's thread this is done using QueueUserAPC
     // targeting this helper thread, whenever a APC is scheduled the thread 
     // will resume and execute it, it being Gui_NotifyWinHooksAPC
     //

@@ -4,13 +4,18 @@
 #include "SandMan.h"
 #include "..\MiscHelpers\Common\Common.h"
 #include <windows.h>
+#include "BoxMonitor.h"
 
 CSbiePlusAPI::CSbiePlusAPI(QObject* parent) : CSbieAPI(parent)
 {
+	m_BoxMonitor = new CBoxMonitor();
+
+	m_JobCount = 0;
 }
 
 CSbiePlusAPI::~CSbiePlusAPI()
 {
+	delete m_BoxMonitor;
 }
 
 CSandBox* CSbiePlusAPI::NewSandBox(const QString& BoxName, class CSbieAPI* pAPI)
@@ -76,6 +81,34 @@ bool CSbiePlusAPI::IsRunningAsAdmin()
 	return true;
 }
 
+void CSbiePlusAPI::StopMonitor()
+{
+	m_BoxMonitor->Stop();
+}
+
+SB_STATUS CSbiePlusAPI::RunStart(const QString& BoxName, const QString& Command, bool Elevated, const QString& WorkingDir, QProcess* pProcess)
+{
+	if (!pProcess)
+		pProcess = new QProcess(this);
+	SB_STATUS Status = CSbieAPI::RunStart(BoxName, Command, Elevated, WorkingDir, pProcess);
+	if (pProcess->parent() == this) {
+		if (!Status.IsError()) {
+			connect(pProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(OnStartFinished()));
+			m_PendingStarts.insert(pProcess->processId());
+			return SB_OK;
+		}
+		delete pProcess;
+	}
+	return Status;
+}
+
+void CSbiePlusAPI::OnStartFinished()
+{
+	QProcess* pProcess = (QProcess*)sender();
+	m_PendingStarts.remove(pProcess->processId());
+	pProcess->deleteLater();
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // CSandBoxPlus
 //
@@ -92,11 +125,18 @@ CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSand
 	m_bPrivacyEnhanced = false;
 	m_bApplicationCompartment = false;
 	m_iUnsecureDebugging = 0;
+	m_bRootAccessOpen = false;
+
+	m_TotalSize = theConf->GetValue("SizeCache/" + m_Name, -1).toLongLong();
 
 	m_SuspendRecovery = false;
+	m_IsEmpty = false;
 
 	m_pOptionsWnd = NULL;
 	m_pRecoveryWnd = NULL;
+
+	m_BoxType = eDefault;
+	m_BoxColor = QColor(Qt::yellow).rgb();
 }
 
 CSandBoxPlus::~CSandBoxPlus()
@@ -108,8 +148,7 @@ void CSandBoxPlus::UpdateDetails()
 	//m_bLogApiFound = GetTextList("OpenPipePath", false).contains("\\Device\\NamedPipe\\LogAPI");
 	m_bLogApiFound = false;
 	QStringList InjectDlls = GetTextList("InjectDll", false);
-	foreach(const QString & InjectDll, InjectDlls)
-	{
+	foreach(const QString & InjectDll, InjectDlls) {
 		if (InjectDll.contains("logapi", Qt::CaseInsensitive)) {
 			m_bLogApiFound = true;
 			break;
@@ -117,15 +156,13 @@ void CSandBoxPlus::UpdateDetails()
 	}
 
 	m_bINetBlocked = false;
-	foreach(const QString& Entry, GetTextList("ClosedFilePath", false))
-	{
+	foreach(const QString& Entry, GetTextList("ClosedFilePath", false)) {
 		if (Entry == "!<InternetAccess>,InternetAccessDevices") {
 			m_bINetBlocked = true;
 			break;
 		}
 	}
-	foreach(const QString& Entry, GetTextList("AllowNetworkAccess", false))
-	{
+	foreach(const QString& Entry, GetTextList("AllowNetworkAccess", false)) {
 		if (Entry == "!<InternetAccess>,n") {
 			m_bINetBlocked = true;
 			break;
@@ -137,6 +174,16 @@ void CSandBoxPlus::UpdateDetails()
 
 	m_bDropRights = GetBool("DropAdminRights", false);
 
+	m_bRootAccessOpen = false;
+	foreach(const QString& Setting, QString("OpenFilePath|OpenKeyPath|OpenIpcPath").split("|")) {
+		foreach(const QString& Entry, GetTextList(Setting, false)) {
+			if (Entry == "*" || Entry == "\\") {
+				m_bRootAccessOpen = true;
+				break;
+			}
+		}
+	}
+
 	if (CheckUnsecureConfig())
 		m_iUnsecureDebugging = 1;
 	else if(GetBool("ExposeBoxedSystem", false) || GetBool("UnrestrictedSCM", false) /*|| GetBool("RunServicesAsSystem", false)*/)
@@ -146,11 +193,66 @@ void CSandBoxPlus::UpdateDetails()
 
 	//GetBool("SandboxieLogon", false)
 
-	m_bSecurityEnhanced = m_iUnsecureDebugging == 0 && (GetBool("DropAdminRights", false));
+	m_bSecurityEnhanced = m_iUnsecureDebugging == 0 && (GetBool("UseSecurityMode", false));
 	m_bApplicationCompartment = GetBool("NoSecurityIsolation", false);
 	m_bPrivacyEnhanced = (m_iUnsecureDebugging != 1 || m_bApplicationCompartment) && (GetBool("UsePrivacyMode", false)); // app compartments are inhenrently insecure
 
 	CSandBox::UpdateDetails();
+
+	m_BoxType = GetTypeImpl();
+
+	QStringList BorderCfg = GetText("BorderColor").split(",");
+	m_BoxColor = QColor("#" + BorderCfg[0].mid(5, 2) + BorderCfg[0].mid(3, 2) + BorderCfg[0].mid(1, 2)).rgb();
+}
+
+void CSandBoxPlus::SetBoxPaths(const QString& FilePath, const QString& RegPath, const QString& IpcPath)
+{
+	bool bPathChanged = (FilePath != m_FilePath);
+
+	if (bPathChanged && !m_FilePath.isEmpty())
+		((CSbiePlusAPI*)theAPI)->m_BoxMonitor->RemoveBox(this);
+
+	CSandBox::SetBoxPaths(FilePath, RegPath, IpcPath);
+
+	if (m_FilePath.isEmpty()) {
+		m_IsEmpty = true;
+		return;
+	}
+
+	m_IsEmpty = IsEmpty();
+
+	if (bPathChanged && theConf->GetBool("Options/WatchBoxSize", false) && m_TotalSize == -1)
+		((CSbiePlusAPI*)theAPI)->m_BoxMonitor->ScanBox(this);
+}
+
+void CSandBoxPlus::UpdateSize()
+{
+	m_TotalSize = -1;
+	if(theConf->GetBool("Options/WatchBoxSize", false))
+		((CSbiePlusAPI*)theAPI)->m_BoxMonitor->ScanBox(this);
+
+	m_IsEmpty = IsEmpty();
+}
+
+void CSandBoxPlus::SetSize(quint64 Size)
+{ 
+	m_TotalSize = Size; 
+	theConf->SetValue("SizeCache/" + m_Name, Size);
+}
+
+bool CSandBoxPlus::IsSizePending() const
+{
+	return ((CSbiePlusAPI*)theAPI)->m_BoxMonitor->IsScanPending(this);
+}
+
+void CSandBoxPlus::OpenBox()
+{
+	CSandBox::OpenBox();
+
+	m_IsEmpty = false;
+	
+	if (theConf->GetBool("Options/WatchBoxSize", false))
+		((CSbiePlusAPI*)theAPI)->m_BoxMonitor->WatchBox(this);
 }
 
 void CSandBoxPlus::CloseBox()
@@ -158,24 +260,36 @@ void CSandBoxPlus::CloseBox()
 	CSandBox::CloseBox();
 
 	m_SuspendRecovery = false;
+
+	((CSbiePlusAPI*)theAPI)->m_BoxMonitor->CloseBox(this);
+}
+
+SB_PROGRESS CSandBoxPlus::CleanBox()
+{
+	((CSbiePlusAPI*)theAPI)->m_BoxMonitor->RemoveBox(this);
+	
+	emit AboutToBeCleaned();
+
+	SB_PROGRESS Status = CSandBox::CleanBox();
+
+	return Status;
 }
 
 bool CSandBoxPlus::CheckUnsecureConfig() const
 {
-	//if (GetBool("UnsafeTemplate", false)) return true;
-	if (GetBool("OriginalToken", false)) return true;
-	if (GetBool("OpenToken", false)) return true;
-		if(GetBool("UnrestrictedToken", false)) return true;
-			if (GetBool("KeepTokenIntegrity", false)) return true;
-			if (GetBool("UnstrippedToken", false)) return true;
-				if (GetBool("KeepUserGroup", false)) return true;
-			if (!GetBool("AnonymousLogon", true)) return true;
-		if(GetBool("UnfilteredToken", false)) return true;
-	if (GetBool("DisableFileFilter", false)) return true;
-	if (GetBool("DisableKeyFilter", false)) return true;
-	if (GetBool("DisableObjectFilter", false)) return true;
-
-	if (GetBool("StripSystemPrivileges", false)) return true;
+	//if (GetBool("UnsafeTemplate", false, true, true)) return true;
+	if (GetBool("OriginalToken", false, true, true)) return true;
+	if (GetBool("OpenToken", false, true, true)) return true;
+		if(GetBool("UnrestrictedToken", false, true, true)) return true;
+			if (GetBool("KeepTokenIntegrity", false, true, true)) return true;
+			if (GetBool("UnstrippedToken", false, true, true)) return true;
+				if (GetBool("KeepUserGroup", false, true, true)) return true;
+			if (!GetBool("AnonymousLogon", true, true, true)) return true;
+		if(GetBool("UnfilteredToken", false, true, true)) return true;
+	if (GetBool("DisableFileFilter", false, true, true)) return true;
+	if (GetBool("DisableKeyFilter", false, true, true)) return true;
+	if (GetBool("DisableObjectFilter", false, true, true)) return true;
+	if (GetBool("StripSystemPrivileges", false, true, true)) return true;
 	return false;
 }
 
@@ -189,10 +303,12 @@ QString CSandBoxPlus::GetStatusStr() const
 
 	QStringList Status;
 
-	if (IsEmpty())
-		Status.append(tr("Empty"));
+	//if (m_IsEmpty)
+	//	Status.append(tr("Empty"));
 
-	if (m_bApplicationCompartment)
+	if (m_bRootAccessOpen)
+		Status.append(tr("OPEN Root Access"));
+	else if (m_bApplicationCompartment)
 		Status.append(tr("Application Compartment"));
 	else if (m_iUnsecureDebugging == 1)
 		Status.append(tr("NOT SECURE"));
@@ -218,8 +334,11 @@ QString CSandBoxPlus::GetStatusStr() const
 	return Status.join(", ");
 }
 
-CSandBoxPlus::EBoxTypes CSandBoxPlus::GetType() const
+CSandBoxPlus::EBoxTypes CSandBoxPlus::GetTypeImpl() const
 {
+	if (m_bRootAccessOpen)
+		return eOpen;
+
 	if (m_bApplicationCompartment && m_bPrivacyEnhanced)
 		return eAppBoxPlus;
 	if (m_bApplicationCompartment)
@@ -451,6 +570,7 @@ SB_STATUS CSandBoxPlus::DeleteContentAsync(bool DeleteShapshots, bool bOnAutoDel
 
 void CSandBoxPlus::AddJobToQueue(CBoxJob* pJob)
 {
+	theAPI->m_JobCount++;
 	m_JobQueue.append(QSharedPointer<CBoxJob>(pJob));
 	if (m_JobQueue.count() == 1)
 		StartNextJob();
@@ -476,6 +596,7 @@ next:
 	else
 	{
 		m_JobQueue.removeFirst();
+		theAPI->m_JobCount--;
 		if (Status.IsError()) {
 			m_JobQueue.clear();
 			theGUI->CheckResults(QList<SB_STATUS>() << Status);
@@ -494,6 +615,7 @@ void CSandBoxPlus::OnAsyncFinished()
 	m_StatusStr.clear();
 
 	QSharedPointer<CBoxJob> pJob = m_JobQueue.takeFirst();
+	theAPI->m_JobCount--;
 	CSbieProgressPtr pProgress = pJob->GetProgress();
 	if (pProgress->IsCanceled()) {
 		m_JobQueue.clear();
@@ -509,6 +631,8 @@ void CSandBoxPlus::OnAsyncFinished()
 
 	if (!m_JobQueue.isEmpty())
 		StartNextJob();
+	else
+		UpdateSize();
 }
 
 void CSandBoxPlus::OnAsyncMessage(const QString& Text)

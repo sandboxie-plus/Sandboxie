@@ -55,7 +55,9 @@ void DriverAssist::InjectLow(void *_msg)
 {
 	SVC_PROCESS_MSG *msg = (SVC_PROCESS_MSG *)_msg;
 
+    NTSTATUS status = 0;
 	ULONG errlvl = 0;
+    UCHAR SandboxieLogonSid[SECURITY_MAX_SID_SIZE] = { 0 };
 		
 	//
 	// open new process and verify process creation time
@@ -115,7 +117,12 @@ void DriverAssist::InjectLow(void *_msg)
     // notify driver that we successfully injected the lowlevel code
     //
 
-    if (SbieApi_Call(API_INJECT_COMPLETE, 1, (ULONG_PTR)msg->process_id) == 0)
+    if (GetSandboxieSID(boxname, SandboxieLogonSid, sizeof(SandboxieLogonSid)))
+        status = SbieApi_Call(API_INJECT_COMPLETE, 2, (ULONG_PTR)msg->process_id, SandboxieLogonSid);
+    else // if that fails or is not enabled we fall back to using the anonymous logon token
+        status = SbieApi_Call(API_INJECT_COMPLETE, 1, (ULONG_PTR)msg->process_id);
+
+    if (status == 0)
         errlvl = 0;
     else
         errlvl = 0x99;

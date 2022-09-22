@@ -241,9 +241,19 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
 #ifdef USE_MATCH_PATH_EX
     static const WCHAR *normalpaths[] = {
         L"HKEY_LOCAL_MACHINE\\*",
+        //L"HKEY_CURRENT_USER\\software\\Microsoft\\*",
+        //L"HKEY_CURRENT_USER\\software\\WOW6432Node\\Microsoft\\*",
+        //L"\\REGISTRY\\USER\\*_Classes\\*",
         NULL
     };
 #endif
+    static const WCHAR *openkeys[] = {
+        // Application Hives
+        // https://docs.microsoft.com/en-us/windows/win32/api/winreg/nf-winreg-regloadappkeya
+        // https://docs.microsoft.com/en-us/windows-hardware/drivers/kernel/filtering-registry-operations-on-application-hives
+        L"\\REGISTRY\\A\\*", 
+        NULL
+    };
 
     BOOLEAN ok;
 
@@ -260,15 +270,17 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
         return FALSE;
     }
 
-    if (proc->use_privacy_mode) {
-        for (i = 0; normalpaths[i] && ok; ++i) {
-            ok = Process_AddPath(proc, &proc->normal_key_paths, _NormalPath, TRUE, normalpaths[i], FALSE);
-        }
+    if (ok && proc->use_privacy_mode) {
 
-        if (!ok) {
-            Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
-            return FALSE;
+        for (i = 0; normalpaths[i] && ok; ++i) {
+            ok = Process_AddPath(proc, &proc->normal_key_paths, NULL, 
+                                    TRUE, normalpaths[i], FALSE);
         }
+    }
+
+    if (!ok) {
+        Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
+        return FALSE;
     }
 #endif
 
@@ -290,6 +302,11 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
             Log_MsgP1(MSG_INIT_PATHS, _OpenPath, proc->pid);
             return FALSE;
         }
+    }
+
+    for (i = 0; openkeys[i] && ok; ++i) {
+        ok = Process_AddPath(
+            proc, &proc->open_key_paths, NULL, TRUE, openkeys[i], FALSE);
     }
 
     //
@@ -925,7 +942,7 @@ _FX BOOLEAN Key_MountHive3(
                 InitializeObjectAttributes(&objattrs,
                     &uni, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
 
-                // ZwLoadKey can fail with device path if current process' devicemap is null
+                // ZwLoadKey can fail with device path if current process's devicemap is null
                 // One workaround is to call ObOpenObjectByName and it will trigger devicemap
                 // to be initialized. Note, Using C: is not necessary. The disk volume doesn't
                 // need to be there.L"\\??\\A:" works in the tests.

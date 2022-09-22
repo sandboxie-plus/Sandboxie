@@ -6,13 +6,15 @@
 #include "Helpers/WinAdmin.h"
 #include "../QSbieAPI/Sandboxie/SbieTemplates.h"
 #include "../QSbieAPI/SbieUtils.h"
+#include "OptionsWindow.h"
+#include "../OnlineUpdater.h"
 
 
 QSize CustomTabStyle::sizeFromContents(ContentsType type, const QStyleOption* option, const QSize& size, const QWidget* widget) const {
 	QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
-	if (type == QStyle::CT_TabBarTab) {
+	if (type == QStyle::CT_TabBarTab && widget->property("isSidebar").toBool()) {
 		s.transpose();
-		if(theGUI->m_DarkTheme)
+		if(theGUI->m_FusionTheme)
 			s.setHeight(s.height() * 13 / 10);
 		else
 			s.setHeight(s.height() * 15 / 10);
@@ -22,7 +24,7 @@ QSize CustomTabStyle::sizeFromContents(ContentsType type, const QStyleOption* op
 }
 
 void CustomTabStyle::drawControl(ControlElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget) const {
-	if (element == CE_TabBarTabLabel) {
+	if (element == CE_TabBarTabLabel && widget->property("isSidebar").toBool()) {
 		if (const QStyleOptionTab* tab = qstyleoption_cast<const QStyleOptionTab*>(option)) {
 			QStyleOptionTab opt(*tab);
 			opt.shape = QTabBar::RoundedNorth;
@@ -33,6 +35,30 @@ void CustomTabStyle::drawControl(ControlElement element, const QStyleOption* opt
 		}
 	}
 	QProxyStyle::drawControl(element, option, painter, widget);
+}
+
+
+void FixTriStateBoxPallete(QWidget* pWidget)
+{
+	if (QApplication::style()->objectName() == "windows") {
+
+		//
+		// the built in "windows" theme of Qt does not properly renderd PartiallyChecked
+		// checkboxes, to remedi this issue we connect to the stateChanged slot
+		// and change the pattern to improve the rendering.
+		//
+
+		foreach(QCheckBox* pCheck, pWidget->findChildren<QCheckBox*>()) {
+			QObject::connect(pCheck, &QCheckBox::stateChanged, [pCheck](int state) {
+				if (pCheck->isTristate()) {
+					QPalette palette = QApplication::palette();
+					if (state == Qt::PartiallyChecked)
+						palette.setColor(QPalette::Base, Qt::darkGray);
+					pCheck->setPalette(palette);
+				}
+			});
+		}
+	}
 }
 
 
@@ -61,12 +87,9 @@ quint32 g_FeatureFlags = 0;
 QByteArray g_Certificate;
 SCertInfo g_CertInfo = { 0 };
 
-CSettingsWindow::CSettingsWindow(QWidget *parent)
-	: QDialog(parent)
+CSettingsWindow::CSettingsWindow(QWidget* parent)
+	: CConfigDialog(parent)
 {
-	ui.setupUi(this);
-	this->setWindowTitle(tr("Sandboxie Plus - Settings"));
-
 	Qt::WindowFlags flags = windowFlags();
 	flags |= Qt::CustomizeWindowHint;
 	//flags &= ~Qt::WindowContextHelpButtonHint;
@@ -79,19 +102,32 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
+	ui.setupUi(this);
+	this->setWindowTitle(tr("Sandboxie Plus - Global Settings"));
+
+	if (theConf->GetBool("Options/AltRowColors", false)) {
+		ui.treeWarnProgs->setAlternatingRowColors(true);
+		ui.treeCompat->setAlternatingRowColors(true);
+	}
+
+	FixTriStateBoxPallete(this);
 
 	ui.tabs->setTabPosition(QTabWidget::West);
 	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));
+	ui.tabs->tabBar()->setProperty("isSidebar", true);
 
-	ui.tabs->setTabIcon(0, CSandMan::GetIcon("Options"));
-	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Shell"));
-	ui.tabs->setTabIcon(2, CSandMan::GetIcon("Advanced"));
-	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Ampel"));
-	ui.tabs->setTabIcon(4, CSandMan::GetIcon("Lock"));
-	ui.tabs->setTabIcon(5, CSandMan::GetIcon("Compatibility"));
-	ui.tabs->setTabIcon(6, CSandMan::GetIcon("EditIni"));
-	ui.tabs->setTabIcon(7, CSandMan::GetIcon("Support"));
+	ui.tabs->setTabIcon(eOptions, CSandMan::GetIcon("Options"));
+	ui.tabs->setTabIcon(eShell, CSandMan::GetIcon("Shell"));
+	ui.tabs->setTabIcon(eGuiConfig, CSandMan::GetIcon("GUI"));
+	ui.tabs->setTabIcon(eAdvanced, CSandMan::GetIcon("Advanced"));
+	ui.tabs->setTabIcon(eProgCtrl, CSandMan::GetIcon("Alarm"));
+	ui.tabs->setTabIcon(eConfigLock, CSandMan::GetIcon("Lock"));
+	ui.tabs->setTabIcon(eSoftCompat, CSandMan::GetIcon("Compatibility"));
+	ui.tabs->setTabIcon(eEditIni, CSandMan::GetIcon("EditIni"));
+	ui.tabs->setTabIcon(eSupport, CSandMan::GetIcon("Support"));
 
+	//if(theConf->GetInt("Options/ViewMode", 1) != 1 && (QApplication::keyboardModifiers() & Qt::ControlModifier) == 0)
+	//	ui.tabs->removeTab(eEditIni);
 
 	ui.tabs->setCurrentIndex(0);
 
@@ -105,6 +141,7 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 		QString Lang = Locale.nativeLanguageName();
 		ui.uiLang->addItem(Lang, Code);
 	}
+	ui.uiLang->setCurrentIndex(ui.uiLang->findData(theConf->GetString("Options/UiLanguage")));
 
 	ui.cmbSysTray->addItem(tr("Don't show any icon"));
 	ui.cmbSysTray->addItem(tr("Show Plus icon"));
@@ -114,23 +151,53 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	ui.cmbTrayBoxes->addItem(tr("Active + Pinned"));
 	ui.cmbTrayBoxes->addItem(tr("Pinned Only"));
 
-	ui.cmbOnClose->addItem(tr("Close to Tray"), "ToTray");
-	ui.cmbOnClose->addItem(tr("Prompt before Close"), "Prompt");
-	ui.cmbOnClose->addItem(tr("Close"), "Close");
+	ui.cmbDPI->addItem(tr("None"), 0);
+	ui.cmbDPI->addItem(tr("Native"), 1);
+	ui.cmbDPI->addItem(tr("Qt"), 2);
 
+	int FontScales[] = { 75,100,125,150,175,200,225,250,275,300,350,400, 0 };
+	for(int* pFontScales = FontScales; *pFontScales != 0; pFontScales++)
+		ui.cmbFontScale->addItem(tr("%1").arg(*pFontScales), *pFontScales);
 
-	ui.uiLang->setCurrentIndex(ui.uiLang->findData(theConf->GetString("Options/UiLanguage")));
+	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
+	if (settings.value("CurrentBuild").toInt() >= 22000) { // Windows 11
+		QCheckBox* SecretCheckBox = new CSecretCheckBox(ui.chkShellMenu->text());
+		((QGridLayout*)((QWidget*)ui.chkShellMenu->parent())->layout())->replaceWidget(ui.chkShellMenu, SecretCheckBox);
+		ui.chkShellMenu->deleteLater();
+		ui.chkShellMenu = SecretCheckBox;
+	}
 
 	LoadSettings();
-	
+
+	connect(ui.uiLang, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
+
+	connect(ui.cmbDPI, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkDarkTheme, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkFusionTheme, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkAltRows, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkBackground, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkLargeIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkNoIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	//connect(ui.chkOptTree, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkColorIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.cmbFontScale, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.cmbFontScale, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnChangeGUI()));
+
+
+	m_bRebuildUI = false;
+
 	connect(ui.cmbSysTray, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
 	connect(ui.cmbTrayBoxes, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
-	connect(ui.cmbOnClose, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
+	connect(ui.chkCompactTray, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 
 	m_FeaturesChanged = false;
 	connect(ui.chkWFP, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	connect(ui.chkObjCb, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	//connect(ui.chkWin32k, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
+
+	if (settings.value("CurrentBuild").toInt() < 14393) // Windows 10 RS1 and later
+		ui.chkWin32k->setEnabled(false);
+
 	
 	m_WarnProgsChanged = false;
 
@@ -153,9 +220,10 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	connect(ui.btnDelCompat, SIGNAL(clicked(bool)), this, SLOT(OnDelCompat()));
 	m_CompatLoaded = 0;
 	m_CompatChanged = false;
-	ui.chkNoCompat->setChecked(theConf->GetBool("Options/AutoRunSoftCompat", true));
+	ui.chkNoCompat->setChecked(!theConf->GetBool("Options/AutoRunSoftCompat", true));
 
 	connect(ui.treeCompat, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateClicked(QTreeWidgetItem*, int)));
+	connect(ui.treeCompat, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateDoubleClicked(QTreeWidgetItem*, int)));
 
 	connect(ui.lblSupport, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 	connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
@@ -164,6 +232,18 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	m_CertChanged = false;
 	connect(ui.txtCertificate, SIGNAL(textChanged()), this, SLOT(CertChanged()));
 	connect(theGUI, SIGNAL(CertUpdated()), this, SLOT(UpdateCert()));
+
+	ui.txtCertificate->setPlaceholderText(
+		"NAME: User Name\n"
+		"LEVEL: ULTIMATE\n"
+		"DATE: dd.mm.yyyy\n"
+		"UPDATEKEY: 00000000000000000000000000000000\n"
+		"SIGNATURE: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
+	);
+
+	connect(ui.lblCurrent, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
+	connect(ui.lblRelease, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
+	connect(ui.lblPreview, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
 
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
 
@@ -177,7 +257,34 @@ CSettingsWindow::CSettingsWindow(QWidget *parent)
 	connect(ui.buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(apply()));
 	connect(ui.buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
+	this->installEventFilter(this); // prevent enter from closing the dialog
+
 	restoreGeometry(theConf->GetBlob("SettingsWindow/Window_Geometry"));
+
+	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
+	int iOptionTree = theConf->GetInt("Options/OptionTree", 2);
+	if (iOptionTree == 2)
+		iOptionTree = iViewMode == 2 ? 1 : 0;
+
+	if (iOptionTree) 
+		OnSetTree();
+	else {
+		QWidget* pSearch = AddConfigSearch(ui.tabs);
+		ui.horizontalLayout->insertWidget(0, pSearch);
+		QTimer::singleShot(0, [this]() {
+			m_pSearch->setMaximumWidth(m_pTabs->tabBar()->width());
+		});
+	}
+	m_pSearch->setPlaceholderText(tr("Search for settings"));
+}
+
+void CSettingsWindow::OnSetTree()
+{
+	if (!ui.tabs) return;
+	QWidget* pAltView = ConvertToTree(ui.tabs);
+	ui.verticalLayout->replaceWidget(ui.tabs, pAltView);
+	ui.tabs->deleteLater();
+	ui.tabs = NULL;
 }
 
 CSettingsWindow::~CSettingsWindow()
@@ -185,18 +292,33 @@ CSettingsWindow::~CSettingsWindow()
 	theConf->SetBlob("SettingsWindow/Window_Geometry",saveGeometry());
 }
 
-void CSettingsWindow::showCompat()
+void CSettingsWindow::showTab(int Tab, bool bExclusive)
 {
-	m_CompatLoaded = 2;
-	ui.tabs->setCurrentWidget(ui.tabCompat);
-	SafeShow(this);
-}
+	QWidget* pWidget;
+	if (ui.tabs) {
+		ui.tabs->setCurrentIndex(Tab);
+		pWidget = ui.tabs->currentWidget();
+	}
+	else {
+		m_pStack->setCurrentIndex(Tab);
+		pWidget = m_pStack->currentWidget();
+	}
 
-void CSettingsWindow::showSupport()
-{
-	ui.tabs->setCurrentWidget(ui.tabSupport);
+	if(pWidget == ui.tabCompat)
+		m_CompatLoaded = 2;
+	if(pWidget == ui.tabSupport)
+		ui.chkNoCheck->setVisible(true);
+
+	if (bExclusive) {
+		if (ui.tabs)
+			ui.tabs->tabBar()->setVisible(false);
+		else {
+			m_pTree->setVisible(false);
+			m_pSearch->setVisible(false);
+		}
+	}
+
 	SafeShow(this);
-	ui.chkNoCheck->setVisible(true);
 }
 
 void CSettingsWindow::closeEvent(QCloseEvent *e)
@@ -205,8 +327,32 @@ void CSettingsWindow::closeEvent(QCloseEvent *e)
 	this->deleteLater();
 }
 
+bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
+{
+	//if (event->type() == QEvent::KeyPress && ((QKeyEvent*)event)->key() == Qt::Key_Escape 
+	//	&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
+	//{
+	//	return true; // cancel event
+	//}
+
+	if (event->type() == QEvent::KeyPress && (((QKeyEvent*)event)->key() == Qt::Key_Enter || ((QKeyEvent*)event)->key() == Qt::Key_Return) 
+		&& (((QKeyEvent*)event)->modifiers() == Qt::NoModifier || ((QKeyEvent*)event)->modifiers() == Qt::KeypadModifier))
+	{
+		return true; // cancel event
+	}
+
+	return QDialog::eventFilter(source, event);
+}
+
 Qt::CheckState CSettingsWindow__IsContextMenu()
 {
+	//QSettings Package("HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\PackagedCom\\Package", QSettings::NativeFormat);
+	QSettings Package("HKEY_CURRENT_USER\\Software\\Classes\\PackagedCom\\Package", QSettings::NativeFormat);
+	foreach(const QString & Key, Package.childGroups()) {
+		if (Key.indexOf("SandboxieShell") == 0)
+			return Qt::Checked;
+	}
+
 	QString cmd = CSbieUtils::GetContextMenuStartCmd();
 	if (cmd.contains("SandMan.exe", Qt::CaseInsensitive)) 
 		return Qt::Checked; // set up and sandman
@@ -215,11 +361,46 @@ Qt::CheckState CSettingsWindow__IsContextMenu()
 	return Qt::Unchecked; // not set up
 }
 
-void CSettingsWindow__AddContextMenu()
+void CSettingsWindow__AddContextMenu(bool bAlwaysClassic)
 {
+	QSettings CurrentVersion("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
+	if (CurrentVersion.value("CurrentBuild").toInt() >= 22000 && !bAlwaysClassic) // Windows 11
+	{
+		QSettings MyReg("HKEY_CURRENT_USER\\SOFTWARE\\Xanasoft\\Sandboxie-Plus\\SbieShellExt\\Lang", QSettings::NativeFormat);
+		MyReg.setValue("Open Sandboxed", CSettingsWindow::tr("Run &Sandboxed"));
+		MyReg.setValue("Explore Sandboxed", CSettingsWindow::tr("Run &Sandboxed"));
+		
+		QDir::setCurrent(QCoreApplication::applicationDirPath());
+		QProcess Proc;
+		Proc.execute("rundll32.exe", QStringList() << "SbieShellExt.dll,RegisterPackage");
+		Proc.waitForFinished();
+		return;
+	}
+
 	CSbieUtils::AddContextMenu(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
 		CSettingsWindow::tr("Run &Sandboxed"), //CSettingsWindow::tr("Explore &Sandboxed"),
 			QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
+}
+
+void CSettingsWindow__RemoveContextMenu()
+{
+	QSettings CurrentVersion("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
+	if (CurrentVersion.value("CurrentBuild").toInt() >= 22000) // Windows 11
+	{
+		QDir::setCurrent(QCoreApplication::applicationDirPath());
+		QProcess Proc;
+		Proc.execute("rundll32.exe", QStringList() << "SbieShellExt.dll,RemovePackage");
+		Proc.waitForFinished();
+	}
+
+	CSbieUtils::RemoveContextMenu();
+}
+
+void CSettingsWindow__AddBrowserIcon()
+{
+	QString Path = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation).replace("/", "\\");
+	Path += "\\" + CSettingsWindow::tr("Sandboxed Web Browser") + ".lnk";
+	CSbieUtils::CreateShortcut(theAPI, Path, "", "", "default_browser");
 }
 
 void CSettingsWindow::LoadSettings()
@@ -245,7 +426,19 @@ void CSettingsWindow::LoadSettings()
 	ui.chkShellMenu2->setChecked(CSbieUtils::HasContextMenu2());
 	ui.chkAlwaysDefault->setChecked(theConf->GetBool("Options/RunInDefaultBox", false));
 
+	ui.cmbDPI->setCurrentIndex(theConf->GetInt("Options/DPIScaling", 1));
+
 	ui.chkDarkTheme->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/UseDarkTheme", 2)));
+	ui.chkFusionTheme->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/UseFusionTheme", 2)));
+	ui.chkAltRows->setChecked(theConf->GetBool("Options/AltRowColors", false));
+	ui.chkBackground->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/UseBackground", 2)));
+	ui.chkLargeIcons->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/LargeIcons", 2)));
+	ui.chkNoIcons->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/NoIcons", 2)));
+	ui.chkOptTree->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/OptionTree", 2)));
+	ui.chkColorIcons->setChecked(theConf->GetBool("Options/ColorBoxIcons", false));
+
+	//ui.cmbFontScale->setCurrentIndex(ui.cmbFontScale->findData(theConf->GetInt("Options/FontScaling", 100)));
+	ui.cmbFontScale->setCurrentText(QString::number(theConf->GetInt("Options/FontScaling", 100)));
 
 	ui.chkNotifications->setChecked(theConf->GetBool("Options/ShowNotifications", true));
 
@@ -253,18 +446,21 @@ void CSettingsWindow::LoadSettings()
 
 	ui.chkShowRecovery->setChecked(theConf->GetBool("Options/ShowRecovery", false));
 	ui.chkNotifyRecovery->setChecked(!theConf->GetBool("Options/InstantRecovery", true));
+	ui.chkRecoveryTop->setChecked(theConf->GetBool("Options/RecoveryOnTop", true));
 	ui.chkAsyncBoxOps->setChecked(theConf->GetBool("Options/UseAsyncBoxOps", false));
 
 	ui.chkPanic->setChecked(theConf->GetBool("Options/EnablePanicKey", false));
 	ui.keyPanic->setKeySequence(QKeySequence(theConf->GetString("Options/PanicKeySequence", "Shift+Pause")));
+
+	ui.chkMonitorSize->setChecked(theConf->GetBool("Options/WatchBoxSize", false));
 
 	ui.chkWatchConfig->setChecked(theConf->GetBool("Options/WatchIni", true));
 
 	
 	ui.cmbSysTray->setCurrentIndex(theConf->GetInt("Options/SysTrayIcon", 1));
 	ui.cmbTrayBoxes->setCurrentIndex(theConf->GetInt("Options/SysTrayFilter", 0));
+	ui.chkCompactTray->setChecked(theConf->GetBool("Options/CompactTray", false));
 	ui.chkBoxOpsNotify->setChecked(theConf->GetBool("Options/AutoBoxOpsNotify", false));
-	ui.cmbOnClose->setCurrentIndex(ui.cmbOnClose->findData(theConf->GetString("Options/OnClose", "ToTray")));
 
 
 	if (theAPI->IsConnected())
@@ -281,8 +477,10 @@ void CSettingsWindow::LoadSettings()
 		ui.chkWFP->setChecked(theAPI->GetGlobalSettings()->GetBool("NetworkEnableWFP", false));
 		ui.chkObjCb->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableObjectFiltering", true));
 		ui.chkWin32k->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableWin32kHooks", true));
+		ui.chkSbieLogon->setChecked(theAPI->GetGlobalSettings()->GetBool("SandboxieLogon", false));
 
 		ui.chkAdminOnly->setChecked(theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false));
+		ui.chkAdminOnly->setEnabled(IsAdminUser());
 		ui.chkPassRequired->setChecked(!theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty());
 		ui.chkAdminOnlyFP->setChecked(theAPI->GetGlobalSettings()->GetBool("ForceDisableAdminOnly", false));
 		ui.chkClearPass->setChecked(theAPI->GetGlobalSettings()->GetBool("ForgetPassword", false));
@@ -298,7 +496,8 @@ void CSettingsWindow::LoadSettings()
 		foreach(const QString& Value, theAPI->GetGlobalSettings()->GetTextList("AlertFolder", false))
 			AddWarnEntry(Value, 2);
 	}
-	else
+	
+	if(!theAPI->IsConnected() || (theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false) && !IsAdminUser()))
 	{
 		ui.fileRoot->setEnabled(false);
 		ui.chkSeparateUserFolders->setEnabled(false);
@@ -306,6 +505,7 @@ void CSettingsWindow::LoadSettings()
 		ui.chkWFP->setEnabled(false);
 		ui.chkObjCb->setEnabled(false);
 		ui.chkWin32k->setEnabled(false);
+		ui.chkSbieLogon->setEnabled(false);
 		ui.regRoot->setEnabled(false);
 		ui.ipcRoot->setEnabled(false);
 		ui.chkAdminOnly->setEnabled(false);
@@ -319,6 +519,7 @@ void CSettingsWindow::LoadSettings()
 		ui.treeCompat->setEnabled(false);
 		ui.btnAddCompat->setEnabled(false);
 		ui.btnDelCompat->setEnabled(false);
+		ui.btnEditIni->setEnabled(false);
 	}
 
 
@@ -330,7 +531,13 @@ void CSettingsWindow::LoadSettings()
 	UpdateCert();
 
 	ui.chkAutoUpdate->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/CheckForUpdates", 2)));
+	ui.chkAutoDownload->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/DownloadUpdates", 0)));
+	//ui.chkAutoInstall->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/InstallUpdates", 0)));
 	ui.chkAutoInstall->setVisible(false); // todo implement smart auto updater
+
+	int UpdateChannel = theConf->GetInt("Options/UpdateChannel", 0);
+	ui.radRelease->setChecked(UpdateChannel == 0);
+	ui.radPreview->setChecked(UpdateChannel == 1);
 
 	ui.chkNoCheck->setChecked(theConf->GetBool("Options/NoSupportCheck", false));
 	if(ui.chkNoCheck->isCheckable() && !g_CertInfo.expired)
@@ -360,17 +567,85 @@ void CSettingsWindow::UpdateCert()
 				ui.lblCertExp->setText(tr("This supporter certificate will <font color='red'>expire in %1 days</font>, please <a href=\"sbie://update/cert\">get an updated certificate</a>.").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
 				ui.lblCertExp->setVisible(true);
 			}
+/*#ifdef _DEBUG
+			else {
+				ui.lblCertExp->setText(tr("This supporter certificate is valid, <a href=\"sbie://update/cert\">check for an updated certificate</a>."));
+				ui.lblCertExp->setVisible(true);
+			}
+#endif*/
 			palette.setColor(QPalette::Base, QColor(192, 255, 192));
 		}
 		ui.txtCertificate->setPalette(palette);
 	}
 }
 
+void CSettingsWindow::WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& OnValue, const QString& OffValue)
+{
+	//if (pCheck->checkState() == Qt::PartiallyChecked)
+	//	return;
+
+	if (!pCheck->isEnabled())
+		return;
+
+	SB_STATUS Status;
+	if (pCheck->checkState() == Qt::Checked)
+	{
+		if(!OnValue.isEmpty())
+			Status = theAPI->GetGlobalSettings()->SetText(Name, OnValue);
+		else
+			Status = theAPI->GetGlobalSettings()->DelValue(Name);
+	}
+	else if (pCheck->checkState() == Qt::Unchecked)
+	{
+		if (!OffValue.isEmpty())
+			Status = theAPI->GetGlobalSettings()->SetText(Name, OffValue);
+		else
+			Status = theAPI->GetGlobalSettings()->DelValue(Name);
+	}
+
+	if (!Status)
+		throw Status;
+}
+
+void CSettingsWindow::WriteText(const QString& Name, const QString& Value)
+{
+	SB_STATUS Status;
+	if(Value.isEmpty())
+		Status = theAPI->GetGlobalSettings()->DelValue(Name);
+	else
+		Status = theAPI->GetGlobalSettings()->SetText(Name, Value);
+	if (!Status)
+		throw Status;
+}
+
+void CSettingsWindow::WriteTextList(const QString& Setting, const QStringList& List)
+{
+	SB_STATUS Status = theAPI->GetGlobalSettings()->UpdateTextList(Setting, List, false);
+	if (!Status)
+		throw Status;
+}
+
 void CSettingsWindow::SaveSettings()
 {
 	theConf->SetValue("Options/UiLanguage", ui.uiLang->currentData());
 
+	theConf->SetValue("Options/DPIScaling", ui.cmbDPI->currentData());
+
 	theConf->SetValue("Options/UseDarkTheme", CSettingsWindow__Chk2Int(ui.chkDarkTheme->checkState()));
+	theConf->SetValue("Options/UseFusionTheme", CSettingsWindow__Chk2Int(ui.chkFusionTheme->checkState()));
+	theConf->SetValue("Options/AltRowColors", ui.chkAltRows->isChecked());
+	theConf->SetValue("Options/UseBackground", CSettingsWindow__Chk2Int(ui.chkBackground->checkState()));
+	theConf->SetValue("Options/LargeIcons", CSettingsWindow__Chk2Int(ui.chkLargeIcons->checkState()));
+	theConf->SetValue("Options/NoIcons", CSettingsWindow__Chk2Int(ui.chkNoIcons->checkState()));
+	theConf->SetValue("Options/OptionTree", CSettingsWindow__Chk2Int(ui.chkOptTree->checkState()));
+	theConf->SetValue("Options/ColorBoxIcons", ui.chkColorIcons->isChecked());
+
+	int Scaling = ui.cmbFontScale->currentText().toInt();
+	if (Scaling < 75)
+		Scaling = 75;
+	else if (Scaling > 500)
+		Scaling = 500;
+	theConf->SetValue("Options/FontScaling", Scaling);
 
 	AutorunEnable(ui.chkAutoStart->isChecked());
 
@@ -385,10 +660,12 @@ void CSettingsWindow::SaveSettings()
 
 	if (ui.chkShellMenu->checkState() != CSettingsWindow__IsContextMenu())
 	{
-		if (ui.chkShellMenu->isChecked())
-			CSettingsWindow__AddContextMenu();
+		if (ui.chkShellMenu->isChecked()) {
+			CSecretCheckBox* SecretCheckBox = qobject_cast<CSecretCheckBox*>(ui.chkShellMenu);
+			CSettingsWindow__AddContextMenu(SecretCheckBox && SecretCheckBox->IsSecretSet());
+		}
 		else
-			CSbieUtils::RemoveContextMenu();
+			CSettingsWindow__RemoveContextMenu();
 	}
 
 	if (ui.chkShellMenu2->isChecked() != CSbieUtils::HasContextMenu2()) {
@@ -408,111 +685,109 @@ void CSettingsWindow::SaveSettings()
 
 	theConf->SetValue("Options/ShowRecovery", ui.chkShowRecovery->isChecked());
 	theConf->SetValue("Options/InstantRecovery", !ui.chkNotifyRecovery->isChecked());
+	theConf->SetValue("Options/RecoveryOnTop", ui.chkRecoveryTop->isChecked());
 	theConf->SetValue("Options/UseAsyncBoxOps", ui.chkAsyncBoxOps->isChecked());
 
 	theConf->SetValue("Options/EnablePanicKey", ui.chkPanic->isChecked());
 	theConf->SetValue("Options/PanicKeySequence", ui.keyPanic->keySequence().toString());
 	
+	theConf->SetValue("Options/WatchBoxSize", ui.chkMonitorSize->isChecked());
+
 	theConf->SetValue("Options/WatchIni", ui.chkWatchConfig->isChecked());
 
 	theConf->SetValue("Options/SysTrayIcon", ui.cmbSysTray->currentIndex());
 	theConf->SetValue("Options/SysTrayFilter", ui.cmbTrayBoxes->currentIndex());
+	theConf->SetValue("Options/CompactTray", ui.chkCompactTray->isChecked());
 	theConf->SetValue("Options/AutoBoxOpsNotify", ui.chkBoxOpsNotify->isChecked());
-	theConf->SetValue("Options/OnClose", ui.cmbOnClose->currentData());
 
 
 	if (theAPI->IsConnected())
 	{
-		if (ui.fileRoot->text().isEmpty())
-			theAPI->GetGlobalSettings()->DelValue("FileRootPath"); //ui.fileRoot->setText("\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%");
-		else
-			theAPI->GetGlobalSettings()->SetText("FileRootPath", ui.fileRoot->text());
-		theAPI->GetGlobalSettings()->SetBool("SeparateUserFolders", ui.chkSeparateUserFolders->isChecked());
-
-		if (ui.regRoot->text().isEmpty())
-			theAPI->GetGlobalSettings()->DelValue("KeyRootPath"); //ui.regRoot->setText("\\REGISTRY\\USER\\Sandbox_%USER%_%SANDBOX%");
-		else
-			theAPI->GetGlobalSettings()->SetText("KeyRootPath", ui.regRoot->text());
-
-		if (ui.ipcRoot->text().isEmpty())
-			theAPI->GetGlobalSettings()->DelValue("IpcRootPath"); //ui.ipcRoot->setText("\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%");
-		else
-			theAPI->GetGlobalSettings()->SetText("IpcRootPath", ui.ipcRoot->text());
-
-
-		theAPI->GetGlobalSettings()->SetBool("NetworkEnableWFP", ui.chkWFP->isChecked());
-		theAPI->GetGlobalSettings()->SetBool("EnableObjectFiltering", ui.chkObjCb->isChecked());
-		theAPI->GetGlobalSettings()->SetBool("EnableWin32kHooks", ui.chkWin32k->isChecked());
-
-
-		if (m_FeaturesChanged) {
-			m_FeaturesChanged = false;
-			theAPI->ReloadConfig(true);
-		}
-
-		theAPI->GetGlobalSettings()->SetBool("EditAdminOnly", ui.chkAdminOnly->isChecked());
-
-		bool isPassSet = !theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty();
-		if (ui.chkPassRequired->isChecked())
+		try
 		{
-			if (!isPassSet && m_NewPassword.isEmpty())
-				OnSetPassword(); // request password entry if it wasn't entered already
-			if (!m_NewPassword.isEmpty()) {
-				theAPI->LockConfig(m_NewPassword); // set new/changed password
-				m_NewPassword.clear();
+			WriteText("FileRootPath", ui.fileRoot->text()); //ui.fileRoot->setText("\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%");
+			WriteAdvancedCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", "", "n");
+			WriteText("KeyRootPath", ui.regRoot->text()); //ui.regRoot->setText("\\REGISTRY\\USER\\Sandbox_%USER%_%SANDBOX%");
+			WriteText("IpcRootPath", ui.ipcRoot->text()); //ui.ipcRoot->setText("\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%");
+
+			WriteAdvancedCheck(ui.chkWFP, "NetworkEnableWFP", "y", "");
+			WriteAdvancedCheck(ui.chkObjCb, "EnableObjectFiltering", "", "n");
+			WriteAdvancedCheck(ui.chkWin32k, "EnableWin32kHooks", "", "n");
+			WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", "y", "");
+
+			if (m_FeaturesChanged) {
+				m_FeaturesChanged = false;
+				theAPI->ReloadConfig(true);
 			}
-		}
-		else if (isPassSet)
-			theAPI->LockConfig(QString()); // clear password
 
-		theAPI->GetGlobalSettings()->SetBool("ForceDisableAdminOnly", ui.chkAdminOnlyFP->isChecked());
-		theAPI->GetGlobalSettings()->SetBool("ForgetPassword", ui.chkClearPass->isChecked());
+			WriteAdvancedCheck(ui.chkAdminOnly, "EditAdminOnly", "y", "");
 
-		if (m_WarnProgsChanged)
-		{
-			theAPI->GetGlobalSettings()->SetBool("StartRunAlertDenied", ui.chkStartBlock->isChecked());
-			theAPI->GetGlobalSettings()->SetBool("NotifyStartRunAccessDenied", ui.chkStartBlockMsg->isChecked());
-
-			QStringList AlertProcess;
-			QStringList AlertFolder;
-			for (int i = 0; i < ui.treeWarnProgs->topLevelItemCount(); i++)
+			bool isPassSet = !theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty();
+			if (ui.chkPassRequired->isChecked())
 			{
-				QTreeWidgetItem* pItem = ui.treeWarnProgs->topLevelItem(i);
-				int Type = pItem->data(0, Qt::UserRole).toInt();
-				switch (Type)
+				if (!isPassSet && m_NewPassword.isEmpty())
+					OnSetPassword(); // request password entry if it wasn't entered already
+				if (!m_NewPassword.isEmpty()) {
+					theAPI->LockConfig(m_NewPassword); // set new/changed password
+					m_NewPassword.clear();
+				}
+			}
+			else if (isPassSet)
+				theAPI->LockConfig(QString()); // clear password
+
+			WriteAdvancedCheck(ui.chkAdminOnlyFP, "ForceDisableAdminOnly", "y", "");
+			WriteAdvancedCheck(ui.chkClearPass, "ForgetPassword", "y", "");
+
+			if (m_WarnProgsChanged)
+			{
+				WriteAdvancedCheck(ui.chkStartBlock, "StartRunAlertDenied", "y", "");
+				WriteAdvancedCheck(ui.chkStartBlockMsg, "NotifyStartRunAccessDenied", "", "n");
+
+				QStringList AlertProcess;
+				QStringList AlertFolder;
+				for (int i = 0; i < ui.treeWarnProgs->topLevelItemCount(); i++)
 				{
-				case 1:	AlertProcess.append(pItem->data(1, Qt::UserRole).toString()); break;
-				case 2: AlertFolder.append(pItem->data(1, Qt::UserRole).toString()); break;
+					QTreeWidgetItem* pItem = ui.treeWarnProgs->topLevelItem(i);
+					int Type = pItem->data(0, Qt::UserRole).toInt();
+					switch (Type)
+					{
+					case 1:	AlertProcess.append(pItem->data(1, Qt::UserRole).toString()); break;
+					case 2: AlertFolder.append(pItem->data(1, Qt::UserRole).toString()); break;
+					}
 				}
+
+				WriteTextList("AlertProcess", AlertProcess);
+				WriteTextList("AlertFolder", AlertFolder);
+				m_WarnProgsChanged = false;
 			}
 
-			theAPI->GetGlobalSettings()->UpdateTextList("AlertProcess", AlertProcess, false);
-			theAPI->GetGlobalSettings()->UpdateTextList("AlertFolder", AlertFolder, false);
-			m_WarnProgsChanged = false;
+			if (m_CompatChanged)
+			{
+				QStringList Used;
+				QStringList Rejected;
+				for (int i = 0; i < ui.treeCompat->topLevelItemCount(); i++) {
+					QTreeWidgetItem* pItem = ui.treeCompat->topLevelItem(i);
+					if (pItem->checkState(0) == Qt::Unchecked)
+						Rejected.append(pItem->data(0, Qt::UserRole).toString());
+					else
+						Used.append(pItem->data(0, Qt::UserRole).toString());
+				}
+
+				// retain local templates
+				foreach(const QString& Template, theAPI->GetGlobalSettings()->GetTextList("Template", false)) {
+					if (Template.left(6) == "Local_") {
+						Used.append(Template);
+					}
+				}
+
+				WriteTextList("Template", Used);
+				WriteTextList("TemplateReject", Rejected);
+				m_CompatChanged = false;
+			}
 		}
-
-		if (m_CompatChanged)
+		catch (SB_STATUS Status)
 		{
-			QStringList Used;
-			QStringList Rejected;
-			for (int i = 0; i < ui.treeCompat->topLevelItemCount(); i++) {
-				QTreeWidgetItem* pItem = ui.treeCompat->topLevelItem(i);
-				if (pItem->checkState(0) == Qt::Unchecked)
-					Rejected.append(pItem->data(0, Qt::UserRole).toString());
-				else
-					Used.append(pItem->data(0, Qt::UserRole).toString());
-			}
-
-			// retain local templates
-			foreach(const QString& Template, theAPI->GetGlobalSettings()->GetTextList("Template", false)) {
-				if (Template.left(6) == "Local_") {
-					Used.append(Template);
-				}
-			}
-
-			theAPI->GetGlobalSettings()->UpdateTextList("Template", Used, false);
-			theAPI->GetGlobalSettings()->UpdateTextList("TemplateReject", Rejected, false);
-			m_CompatChanged = false;
+			theGUI->CheckResults(QList<SB_STATUS>() << Status);
 		}
 	}
 
@@ -525,63 +800,26 @@ void CSettingsWindow::SaveSettings()
 	{
 		QByteArray Certificate = ui.txtCertificate->toPlainText().toUtf8();	
 		if (g_Certificate != Certificate) {
-			
+
 			QPalette palette = QApplication::palette();
-
-			QString CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
-			if (!Certificate.isEmpty()) {
-				QString TempPath = QDir::tempPath() + "/Sbie+Certificate.dat";
-				QFile CertFile(TempPath);
-				if (CertFile.open(QFile::WriteOnly)) {
-					CertFile.write(Certificate);
-					CertFile.close();
-				}
-
-				WindowsMoveFile(TempPath.replace("/", "\\"), CertPath.replace("/", "\\"));
-			}
-			else if(!g_Certificate.isEmpty()){
-				WindowsMoveFile(CertPath.replace("/", "\\"), "");
-			}
 
 			if (theGUI->m_DarkTheme)
 				palette.setColor(QPalette::Text, Qt::black);
 
 			ui.lblCertExp->setVisible(false);
 
+			bool bRet = ApplyCertificate(Certificate, this);
+
 			if (Certificate.isEmpty())
-			{
 				palette.setColor(QPalette::Base, Qt::white);
-			}
-			else if (!theAPI->ReloadCert().IsError())
-			{
-				g_FeatureFlags = theAPI->GetFeatureFlags();
-				theGUI->UpdateCertState();
-
-				if (g_CertInfo.expired || g_CertInfo.outdated) {
-					if(g_CertInfo.expired)
-						QMessageBox::information(this, "Sandboxie-Plus", tr("This certificate is unfortunately expired."));
-					else
-						QMessageBox::information(this, "Sandboxie-Plus", tr("This certificate is unfortunately outdated."));
-
-					palette.setColor(QPalette::Base, QColor(255, 255, 192));
-					ui.lblCertExp->setVisible(true);
-				}
-				else {
-					QMessageBox::information(this, "Sandboxie-Plus", tr("Thank you for supporting the development of Sandboxie-Plus."));
-
-					palette.setColor(QPalette::Base, QColor(192, 255, 192));
-				}
+			else if (!bRet) 
+				palette.setColor(QPalette::Base, QColor(255, 192, 192));
+			else if (g_CertInfo.expired || g_CertInfo.outdated) {
+				palette.setColor(QPalette::Base, QColor(255, 255, 192));
+				ui.lblCertExp->setVisible(true);
 			}
 			else
-			{
-				QMessageBox::critical(this, "Sandboxie-Plus", tr("This support certificate is not valid."));
-
-				palette.setColor(QPalette::Base, QColor(255, 192, 192));
-				Certificate.clear();
-				g_CertInfo.State = 0;
-			}
-
-			g_Certificate = Certificate;
+				palette.setColor(QPalette::Base, QColor(192, 255, 192));
 
 			ui.txtCertificate->setPalette(palette);
 		}
@@ -590,10 +828,82 @@ void CSettingsWindow::SaveSettings()
 	}
 
 	theConf->SetValue("Options/CheckForUpdates", CSettingsWindow__Chk2Int(ui.chkAutoUpdate->checkState()));
+	theConf->SetValue("Options/DownloadUpdates", CSettingsWindow__Chk2Int(ui.chkAutoDownload->checkState()));
+	//theConf->SetValue("Options/InstallUpdates", CSettingsWindow__Chk2Int(ui.chkAutoInstall->checkState()));
+
+	int UpdateChannel = 0; // ui.radRelease->isChecked();
+	if (ui.radPreview->isChecked())
+		UpdateChannel = 1;
+	theConf->SetValue("Options/UpdateChannel", UpdateChannel);
 
 	theConf->SetValue("Options/NoSupportCheck", ui.chkNoCheck->isChecked());
 
-	emit OptionsChanged();
+	emit OptionsChanged(m_bRebuildUI);
+}
+
+bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* widget)
+{
+	QString CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
+	if (!Certificate.isEmpty()) {
+
+		auto Args = GetArguments(Certificate, L'\n', L':');
+
+		bool bLooksOk = true;
+		if (Args.value("NAME").isEmpty()) // mandatory
+			bLooksOk = false;
+		//if (Args.value("UPDATEKEY").isEmpty())
+		//	bLooksOk = false;
+		if (Args.value("SIGNATURE").isEmpty()) // absolutely mandatory
+			bLooksOk = false;
+
+		if (bLooksOk) {
+			QString TempPath = QDir::tempPath() + "/Sbie+Certificate.dat";
+			QFile CertFile(TempPath);
+			if (CertFile.open(QFile::WriteOnly)) {
+				CertFile.write(Certificate);
+				CertFile.close();
+			}
+
+			WindowsMoveFile(TempPath.replace("/", "\\"), CertPath.replace("/", "\\"));
+		}
+		else {
+			QMessageBox::critical(widget, "Sandboxie-Plus", tr("This does not look like a certificate. Please enter the entire certificate, not just a portion of it."));
+			return false;
+		}
+	}
+	else if(!g_Certificate.isEmpty()){
+		WindowsMoveFile(CertPath.replace("/", "\\"), "");
+	}
+
+	if (Certificate.isEmpty())
+		return false;
+
+	if (!theAPI->ReloadCert().IsError())
+	{
+		g_FeatureFlags = theAPI->GetFeatureFlags();
+		theGUI->UpdateCertState();
+
+		if (g_CertInfo.expired || g_CertInfo.outdated) {
+			if(g_CertInfo.expired)
+				QMessageBox::information(widget, "Sandboxie-Plus", tr("This certificate is unfortunately expired."));
+			else
+				QMessageBox::information(widget, "Sandboxie-Plus", tr("This certificate is unfortunately outdated."));
+		}
+		else {
+			QMessageBox::information(widget, "Sandboxie-Plus", tr("Thank you for supporting the development of Sandboxie-Plus."));
+		}
+
+		g_Certificate = Certificate;
+		return true;
+	}
+	else
+	{
+		QMessageBox::critical(widget, "Sandboxie-Plus", tr("This support certificate is not valid."));
+
+		g_CertInfo.State = 0;
+		g_Certificate.clear();
+		return false;
+	}
 }
 
 void CSettingsWindow::apply()
@@ -607,7 +917,7 @@ void CSettingsWindow::apply()
 
 void CSettingsWindow::ok()
 {
-	SaveSettings();
+	apply();
 
 	this->close();
 }
@@ -628,10 +938,6 @@ void CSettingsWindow::OnBrowse()
 
 void CSettingsWindow::OnChange()
 {
-	QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui.cmbOnClose->model());
-	QStandardItem *item = model->item(0);
-	item->setFlags((ui.cmbSysTray->currentIndex() == 0) ? item->flags() & ~Qt::ItemIsEnabled : item->flags() | Qt::ItemIsEnabled);
-
 	if (ui.chkAutoRoot->isVisible())
 		ui.fileRoot->setEnabled(ui.chkAutoRoot->checkState() != Qt::Checked);
 
@@ -640,12 +946,26 @@ void CSettingsWindow::OnChange()
 
 void CSettingsWindow::OnTab()
 {
-	if (ui.tabs->currentWidget() == ui.tabEdit)
+	OnTab(ui.tabs->currentIndex());
+}
+
+void CSettingsWindow::OnTab(int iTabID)
+{
+	if (iTabID == eSupport)
+	{
+		if (ui.lblCurrent->text().isEmpty()) {
+			if (ui.chkAutoUpdate->checkState())
+				GetUpdates();
+			else
+				ui.lblCurrent->setText(tr("<a href=\"check\">Check Now</a>"));
+		}
+	}
+	else if (iTabID == eEditIni)
 	{
 		LoadIniSection();
 		ui.txtIniSection->setReadOnly(true);
 	}
-	else if (ui.tabs->currentWidget() == ui.tabCompat && m_CompatLoaded != 1 && theAPI->IsConnected())
+	else if (iTabID == eSoftCompat && m_CompatLoaded != 1 && theAPI->IsConnected())
 	{
 		if(m_CompatLoaded == 0)
 			theGUI->GetCompat()->RunCheck();
@@ -660,7 +980,7 @@ void CSettingsWindow::OnTab()
 
 			QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_" + I.key(), theAPI));
 
-			QString Title = pTemplate->GetText("Tmpl.Title");
+			QString Title = pTemplate->GetText("Tmpl.Title", "", false, true, true);
 			if (Title.left(1) == "#")
 			{
 				int End = Title.mid(1).indexOf(",");
@@ -751,6 +1071,14 @@ void CSettingsWindow::OnTemplateClicked(QTreeWidgetItem* pItem, int Column)
 	m_CompatChanged = true;
 }
 
+void CSettingsWindow::OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column)
+{
+	QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_" + pItem->data(0, Qt::UserRole).toString(), theAPI));
+
+	COptionsWindow OptionsWindow(pTemplate, pItem->text(1));
+	OptionsWindow.exec();
+}
+
 void CSettingsWindow::OnAddCompat()
 {
 	QTreeWidgetItem* pItem = ui.treeCompat->currentItem();
@@ -779,10 +1107,15 @@ void CSettingsWindow::OnDelCompat()
 
 void CSettingsWindow::SetIniEdit(bool bEnable)
 {
-	for (int i = 0; i < ui.tabs->count() - 2; i++) {
-		bool Enabled = ui.tabs->widget(i)->isEnabled();
-		ui.tabs->setTabEnabled(i, !bEnable && Enabled);
-		ui.tabs->widget(i)->setEnabled(Enabled);
+	if (m_pTree) {
+		m_pTree->setEnabled(!bEnable);
+	}
+	else {
+		for (int i = 0; i < ui.tabs->count() - 2; i++) {
+			bool Enabled = ui.tabs->widget(i)->isEnabled();
+			ui.tabs->setTabEnabled(i, !bEnable && Enabled);
+			ui.tabs->widget(i)->setEnabled(Enabled);
+		}
 	}
 	ui.btnSaveIni->setEnabled(bEnable);
 	ui.btnCancelEdit->setEnabled(bEnable);
@@ -826,6 +1159,59 @@ void CSettingsWindow::SaveIniSection()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Update
+//
+
+void CSettingsWindow::GetUpdates()
+{
+	QVariantMap Params;
+	Params["channel"] = "all";
+	COnlineUpdater::Instance()->GetUpdates(this, SLOT(OnUpdateData(const QVariantMap&, const QVariantMap&)), Params);
+}
+
+void CSettingsWindow::OnUpdateData(const QVariantMap& Data, const QVariantMap& Params)
+{
+	if (Data.isEmpty() || Data["error"].toBool())
+		return;
+
+	m_UpdateData = Data;
+	QVariantList Channels = m_UpdateData["channels"].toList();
+	ui.lblCurrent->setText(tr("%1 (Current)").arg(theGUI->GetVersion()));
+	if(Channels.length() > 0) ui.lblRelease->setText(tr("<a href=\"0\">%1</a>").arg(Channels[0].toMap().value("version").toString()));
+	if(Channels.length() > 1) ui.lblPreview->setText(tr("<a href=\"1\">%1</a>").arg(Channels[1].toMap().value("version").toString()));
+}
+
+void CSettingsWindow::OnUpdate(const QString& Channel)
+{
+	if (Channel == "check")
+		GetUpdates();
+	else
+	{
+		QVariantList Channels = m_UpdateData["channels"].toList();
+		QVariantMap Data = Channels[Channel.toInt()].toMap();
+
+		QString VersionStr = Data["version"].toString();
+		if (VersionStr.isEmpty())
+			return;
+
+		QString DownloadUrl = Data["downloadUrl"].toString();
+		//	'sha256'
+		//	'signature'
+
+		if (!DownloadUrl.isEmpty())
+		{
+			if (QMessageBox("Sandboxie-Plus", tr("Do you want to download the version %1?").arg(VersionStr), QMessageBox::Question, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::NoButton, this).exec() == QMessageBox::Yes)
+				COnlineUpdater::Instance()->DownloadUpdates(DownloadUrl, true);
+		}
+		else
+		{
+			QString UpdateUrl = Data["updateUrl"].toString();
+			QDesktopServices::openUrl(UpdateUrl);
+		}
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Support
 //
 
@@ -836,13 +1222,10 @@ void CSettingsWindow::CertChanged()
 	ui.txtCertificate->setPalette(palette);
 }
 
-void CSettingsWindow::LoadCertificate()
+void CSettingsWindow::LoadCertificate(QString CertPath)
 {
-	QString CertPath;
 	if (theAPI && theAPI->IsConnected())
 		CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
-	else
-		CertPath = QCoreApplication::applicationDirPath() + "\\Certificate.dat";
 		
 	QFile CertFile(CertPath);
 	if (CertFile.open(QFile::ReadOnly)) {

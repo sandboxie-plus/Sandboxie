@@ -37,6 +37,9 @@ public:
 
 		combo = new QComboBox(q);
 
+        infoLabel =  new QLabel(q);
+        infoLabel->setVisible(false);
+        infoLabel->setWordWrap(true);
 
         buttonBox = new QDialogButtonBox(q);
         buttonBox->setOrientation(Qt::Horizontal);
@@ -53,15 +56,18 @@ public:
         QVBoxLayout *verticalLayout_2 = new QVBoxLayout(q);
         verticalLayout_2->addLayout(horizontalLayout_2);
 		verticalLayout_2->addWidget(combo);
+        verticalLayout_2->addWidget(infoLabel);
         verticalLayout_2->addItem(buttonSpacer);
         verticalLayout_2->addWidget(buttonBox);
     }
 
     QLabel *pixmapLabel;
     QLabel *messageLabel;
+    QLabel *infoLabel;
 	QComboBox* combo;
     QDialogButtonBox *buttonBox;
     QAbstractButton *clickedButton;
+    QMap<int, QString> infos;
 };
 
 CComboInputDialog::CComboInputDialog(QWidget *parent) :
@@ -71,6 +77,7 @@ CComboInputDialog::CComboInputDialog(QWidget *parent) :
     setModal(true);
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     d->combo->setFocus();
+    connect(d->combo, SIGNAL(currentIndexChanged(int)), SLOT(onCmbIndex(int)));
     connect(d->buttonBox, SIGNAL(accepted()), SLOT(accept()));
     connect(d->buttonBox, SIGNAL(rejected()), SLOT(reject()));
     connect(d->buttonBox, SIGNAL(clicked(QAbstractButton*)),
@@ -80,6 +87,14 @@ CComboInputDialog::CComboInputDialog(QWidget *parent) :
 CComboInputDialog::~CComboInputDialog()
 {
     delete d;
+}
+
+void CComboInputDialog::onCmbIndex(int index)
+{
+    QString info = d->infos[index];
+    if (!info.isEmpty())
+        d->infoLabel->setVisible(true);
+    d->infoLabel->setText(info);
 }
 
 void CComboInputDialog::slotClicked(QAbstractButton *b)
@@ -109,9 +124,11 @@ void CComboInputDialog::setText(const QString &t)
     d->messageLabel->setText(t);
 }
 
-void CComboInputDialog::addItem(const QString& t, const QVariant & v)
+void CComboInputDialog::addItem(const QString& t, const QVariant & v, const QString& info)
 {
 	d->combo->addItem(t, v);
+    if (!info.isEmpty())
+        d->infos[d->combo->count() - 1] = info;
 }
 
 void CComboInputDialog::setEditable(bool b)

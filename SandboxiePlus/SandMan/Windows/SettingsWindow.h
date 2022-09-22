@@ -3,6 +3,7 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_SettingsWindow.h"
 #include <QProxyStyle>
+#include "../../MiscHelpers/Common/SettingsWidgets.h"
 
 class CustomTabStyle : public QProxyStyle {
 public:
@@ -12,8 +13,36 @@ public:
 	void drawControl(ControlElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget) const;
 };
 
+void FixTriStateBoxPallete(QWidget* pWidget);
 
-class CSettingsWindow : public QDialog
+class CSecretCheckBox : public QCheckBox
+{
+	Q_OBJECT
+public:
+	CSecretCheckBox(const QString& Text) : QCheckBox(Text)
+	{
+		setTristate(false);
+		m_SecretMode = false;
+	}
+
+	bool IsSecretSet() const { return m_SecretMode && this->checkState() == Qt::PartiallyChecked; }
+
+protected:
+	void mouseDoubleClickEvent(QMouseEvent* e)
+	{
+		if (QApplication::keyboardModifiers() & Qt::ControlModifier) {
+			setTristate();
+			m_SecretMode = true;
+		}
+	}
+
+	bool m_SecretMode;
+};
+
+//////////////////////////////////////////////////////////////////////////
+// CSettingsWindow
+
+class CSettingsWindow : public CConfigDialog
 {
 	Q_OBJECT
 
@@ -24,24 +53,38 @@ public:
 	virtual void accept() {}
 	virtual void reject();
 
-	static void LoadCertificate();
+	static bool ApplyCertificate(const QByteArray &Certificate, QWidget* widget);
+
+	static void LoadCertificate(QString CertPath = QString());
+
+	enum ETabs {
+		eOptions = 0,
+		eShell,
+		eGuiConfig,
+		eAdvanced,
+		eProgCtrl,
+		eConfigLock,
+		eSoftCompat,
+		eEditIni,
+		eSupport
+	};
 
 signals:
-	void OptionsChanged();
+	void OptionsChanged(bool bRebuildUI = false);
 	void Closed();
 
 public slots:
 	void ok();
 	void apply();
 
-	void showCompat();
-	void showSupport();
+	void showTab(int Tab, bool bExclusive = false);
 
 private slots:
 	void OnChange();
 
 	void OnTab();
 
+	void OnChangeGUI() { m_bRebuildUI = true; }
 	void OnFeaturesChanged() { m_FeaturesChanged = true; }
 
 	void OnBrowse();
@@ -54,6 +97,7 @@ private slots:
 	void OnDelWarnProg();
 
 	void OnTemplateClicked(QTreeWidgetItem* pItem, int Column);
+	void OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column);
 	void OnAddCompat();
 	void OnDelCompat();
 
@@ -66,8 +110,18 @@ private slots:
 	void CertChanged();
 	void UpdateCert();
 
+	void GetUpdates();
+	void OnUpdateData(const QVariantMap& Data, const QVariantMap& Params);
+	void OnUpdate(const QString& Channel);
+
+	void OnSetTree();
+
 protected:
 	void closeEvent(QCloseEvent *e);
+
+	bool eventFilter(QObject *watched, QEvent *e);
+
+	void OnTab(int iTabID);
 
 	void	AddWarnEntry(const QString& Name, int type);
 
@@ -77,17 +131,27 @@ protected:
 	void	LoadIniSection();
 	void	SaveIniSection();
 
+	bool	m_bRebuildUI;
 	int 	m_CompatLoaded;
 	QString m_NewPassword;
 	bool	m_WarnProgsChanged;
 	bool	m_CompatChanged;
 	bool	m_FeaturesChanged;
 	bool	m_CertChanged;
+	QVariantMap m_UpdateData;
+
 private:
+
+	void WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& OnValue, const QString& OffValue);
+	void WriteText(const QString& Name, const QString& Value);
+	void WriteTextList(const QString& Setting, const QStringList& List);
+
 	Ui::SettingsWindow ui;
 };
 
-void CSettingsWindow__AddContextMenu();
+void CSettingsWindow__AddContextMenu(bool bAlwaysClassic = false);
+void CSettingsWindow__RemoveContextMenu();
+void CSettingsWindow__AddBrowserIcon();
 
 void WindowsMoveFile(const QString& from, const QString& to);
 
@@ -102,11 +166,12 @@ union SCertInfo {
             expired   : 1, // certificate is expired but may be active
             outdated  : 1, // certificate is expired, not anymore valid for the current build
             business  : 1, // certificate is siutable for business use
-            reservd_1 : 4,
+            evaluation: 1, // evaluation certificate
+            reservd_1 : 3,
             reservd_2 : 8,
             reservd_3 : 8,
 			reservd_4 : 8;
-		quint32 
+		qint32 
 			expirers_in_sec : 30, 
 			unused_1        : 1, // skim a couple high bits to use as flags flag, 0x3fffffff -> is 34 years count down isenough
 			about_to_expire : 1; 

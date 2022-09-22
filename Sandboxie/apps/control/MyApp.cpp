@@ -89,6 +89,10 @@ BOOL CMyApp::InitInstance()
             ForceVisible = TRUE;
         if (wcsstr(CommandLine, L"/sync"))
             ForceSync    = TRUE;
+        if (wcsstr(CommandLine, L"/uninstall")) {
+            CShellDialog::Sync(TRUE);
+            return TRUE;
+        }
     }
 
     //

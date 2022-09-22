@@ -1,5 +1,40 @@
 Copyright 2020 - 2022 David Xanatos (xanasoft.com)
 
-This software is provided under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License
+Sandboxie-Plus can be used under the following restrictions and obligations:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+   1. Whomever obtains a copy of the software is permitted 
+      to use it in any noncommercial setting to the full 
+      extend the software permits; however certain functionality
+      is only available with a support certificate which
+      can be obtained from xanasoft.com
+	  
+   2. To use the software commercially a business certificate 
+      must be obtained from xanasoft.com; however it is permitted to 
+      use the software commercially for a limited period of time
+      on no more than 3 machines for evaluation purposes.
+	  
+   3. It is permitted to redistribute the original unmodified 
+      binaries free of charge. 
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+
+Further licensing information 
+======================================
+
+Sandboxie-Plus is made up of the following components, governed under various licenses:
+* SandMan is the primary Sandboxie-Plus UI component, provided under a custom license.
+* QSbieAPI is a standalone reimplementation of Sandboxie’s API using IPC mechanisms to communicate with Sandboxie’s core components, licensed under the LGPL.
+* Sandboxie core components, licensed under the GPL v3.
+* MiscHelpers is a generic Qt-based helper library, licensed under the LGPL.
+* The Qt Framework, which is licensed under the LGPL.
+* UglobalHotkey is an extension for Qt framework, which implements global hotkeys functionality and is in the Public Domain.
+* QtSingleApp is a Qt Solutions component that provides support for applications that can be only started once per user, BSD-licensed.

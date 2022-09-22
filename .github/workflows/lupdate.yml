@@ -1,0 +1,94 @@
+name: Update language files
+
+on:
+  workflow_dispatch:
+  schedule:
+    # runs every night
+    - cron: '0 1 * * *'
+
+jobs:
+  SBIE_Plus_lupdate:
+    name: SBIE Plus lupdate
+    # Do not schedule it on forks
+    if: (github.event_name == 'schedule' && github.repository_owner == 'sandboxie-plus') || (github.event_name != 'schedule')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Install qttools5-dev-tools
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends qttools5-dev-tools
+          sudo apt-get install qt5-default
+
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Sync Sbie Plus language strings (.ts files)
+        id: check
+        shell: bash
+        working-directory: SandboxiePlus/SandMan
+        run: |
+          set +e
+          lupdate SandMan.pri
+          git diff --exit-code
+          echo "::set-output name=deploy::$?"
+
+      - name: Commit translations changes (if any)
+        if: steps.check.outputs.deploy == '1'
+        shell: bash
+        working-directory: ${{env.OUTPUT_PATH}}
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m "Sync SBIE Plus language files (lupdate)"
+          git pull --rebase=merges
+          git push
+          deploy_commit=$(git rev-parse HEAD)
+          echo "Created commit: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$deploy_commit"
+
+  SBIE_reports:
+    name: SBIE reports
+    # Do not schedule it on forks
+    if: (github.event_name == 'schedule' && github.repository_owner == 'sandboxie-plus') || (github.event_name != 'schedule')
+    runs-on: windows-2019
+    timeout-minutes: 15
+
+    steps:
+
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup msbuild
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Build Sandboxie 64 bit
+        # This is needed to compile Parse.vcxproj
+        run: |
+          msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
+          cd Sandboxie/msgs/SbieRelease
+          copy Parse.exe ../
+
+      - name: Check new Sbie strings found in Sbie-English-1033.txt
+        id: check2
+        shell: cmd
+        working-directory: Sandboxie/msgs
+        run: |
+          .\RunReport.bat
+          git diff --exit-code
+
+      - name: Commit missing strings in Sandboxie/msgs/report
+        if: steps.check2.outputs.exit_status == 0
+        shell: bash
+        working-directory: ${{env.OUTPUT_PATH}}
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add Sandboxie/msgs/report/Report-*.txt
+          git commit -m "Update SBIE language reports (RunReport)"
+          git pull --rebase=merges
+          git push
+          deploy2_commit=$(git rev-parse HEAD)
+          echo "Created commit: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$deploy2_commit"

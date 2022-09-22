@@ -191,6 +191,13 @@ void CSbieTemplates::CollectServices()
 
 void CSbieTemplates::CollectProducts()
 {
+	BOOL is64BitOperatingSystem;
+#ifdef _WIN64
+	is64BitOperatingSystem = TRUE;
+#else // ! _WIN64
+	is64BitOperatingSystem = CSbieAPI::IsWow64();
+#endif _WIN64
+
 	m_Products.clear();
 
 	ULONG DesiredAccess = KEY_READ;
@@ -219,7 +226,9 @@ void CSbieTemplates::CollectProducts()
 			break;
 		DesiredAccess |= KEY_WOW64_32KEY;
 #else // ! _WIN64
-		break;
+		if (!is64BitOperatingSystem || (DesiredAccess & KEY_WOW64_64KEY))
+			break;
+		DesiredAccess |= KEY_WOW64_64KEY;
 #endif _WIN64
 	}
 }
@@ -329,7 +338,7 @@ bool CSbieTemplates::CheckTemplate(const QString& Name)
 {
 	QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_" + Name, m_pAPI));
 
-	QString scan = pTemplate->GetText("Tmpl.Scan");
+	QString scan = pTemplate->GetText("Tmpl.Scan", QString(), false, false, true);
 	BOOL scanIpc = (scan.indexOf(L'i') != -1);
 	BOOL scanWin = (scan.indexOf(L'w') != -1);
 	BOOL scanSvc = (scan.indexOf(L's') != -1);

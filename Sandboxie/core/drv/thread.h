@@ -96,7 +96,13 @@ THREAD *Thread_GetByThreadId(PROCESS *proc, HANDLE tid);
 
 NTSTATUS Thread_CheckObject_Common(
     PROCESS *proc, PEPROCESS ProcessObject,
-    ACCESS_MASK GrantedAccess, ACCESS_MASK WriteAccess, WCHAR Letter1);
+    ACCESS_MASK GrantedAccess, BOOLEAN EntireProcess,
+    BOOLEAN ExplicitAccess);
+
+ACCESS_MASK Thread_CheckObject_CommonEx(
+    HANDLE pid, PEPROCESS ProcessObject,
+    ACCESS_MASK DesiredAccess, BOOLEAN EntireProcess,
+    BOOLEAN ExplicitAccess);
 
 //---------------------------------------------------------------------------
 

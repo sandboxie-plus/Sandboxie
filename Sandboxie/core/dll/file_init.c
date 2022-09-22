@@ -106,8 +106,6 @@ static WCHAR *File_AllocAndInitEnvironment_2(
 static void File_AdjustDrives(
     ULONG path_drive_index, BOOLEAN subst, const WCHAR *path);
 
-static void File_InitSnapshots(void);
-
 
 //---------------------------------------------------------------------------
 // Variables
@@ -123,26 +121,14 @@ static const WCHAR *File_DeviceMap_EnvVar   = ENV_VAR_PFX L"DEVICE_MAP";
 
 
 //---------------------------------------------------------------------------
-// File_InitHandles
-//---------------------------------------------------------------------------
-
-
-_FX BOOLEAN File_InitHandles(void)
-{
-    InitializeCriticalSection(&File_HandleOnClose_CritSec);
-    map_init(&File_HandleOnClose, Dll_Pool);
-
-    return TRUE;
-}
-
-
-//---------------------------------------------------------------------------
 // File_Init
 //---------------------------------------------------------------------------
 
 
 _FX BOOLEAN File_Init(void)
 {
+    HMODULE module = NULL;
+
     void *RtlGetFullPathName_UEx;
     void *GetTempPathW;
     void *NtQueryDirectoryFileEx = NULL;
@@ -158,13 +144,37 @@ _FX BOOLEAN File_Init(void)
 
     File_DriveAddSN = SbieApi_QueryConfBool(NULL, L"UseVolumeSerialNumbers", FALSE);
 
+    File_NoReparse = SbieApi_QueryConfBool(NULL, L"NoPathReparse", FALSE);
+
     if (! File_InitDrives(0xFFFFFFFF))
         return FALSE;
 
+    File_Delete_v2 = SbieApi_QueryConfBool(NULL, L"UseFileDeleteV2", FALSE);
+    if (File_Delete_v2)
+        File_InitDelete_v2();
+
+    // this is here as it requirers file stuff to be set up
+    extern BOOLEAN Key_Delete_v2;
+    BOOLEAN Key_InitDelete_v2();
+    Key_Delete_v2 = SbieApi_QueryConfBool(NULL, L"UseRegDeleteV2", FALSE);
+    if (Key_Delete_v2)
+        Key_InitDelete_v2();
+
+    // this requirers key stuff to be set up
 	if (SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE)) {
 		if (!File_InitUsers())
 			return FALSE;
 	}
+
+    if (Dll_OsBuild >= 6000) { // needed for File_GetFileName used indirectly by File_InitRecoverFolders
+
+        void *GetFinalPathNameByHandleW =
+            GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32,
+                "GetFinalPathNameByHandleW");
+        if (GetFinalPathNameByHandleW) {
+            SBIEDLL_HOOK(File_,GetFinalPathNameByHandleW);
+        }
+    }
 
 	File_InitSnapshots();
 
@@ -227,16 +237,6 @@ _FX BOOLEAN File_Init(void)
                 "DefineDosDeviceW");
         if (DefineDosDeviceW) {
             SBIEDLL_HOOK(File_,DefineDosDeviceW);
-        }
-    }
-
-    if (Dll_OsBuild >= 6000) {
-
-        void *GetFinalPathNameByHandleW =
-            GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32,
-                "GetFinalPathNameByHandleW");
-        if (GetFinalPathNameByHandleW) {
-            SBIEDLL_HOOK(File_,GetFinalPathNameByHandleW);
         }
     }
 
@@ -521,7 +521,7 @@ _FX BOOLEAN File_InitDrives(ULONG DriveMask)
 
             //
             // if the object is a valid symbolic link but we don't have
-            // acccess rights to open the symbolic link then we ask the
+            // access rights to open the symbolic link then we ask the
             // driver to query the link for us
             //
 
@@ -1787,58 +1787,4 @@ _FX void File_GetSetDeviceMap(WCHAR *DeviceMap96)
             }
         }
     }
-}
-
-
-//---------------------------------------------------------------------------
-// File_InitSnapshots
-//---------------------------------------------------------------------------
-
-// CRC
-#define CRC_WITH_ADLERTZUK64
-#include "common/crc.c"
-
-_FX void File_InitSnapshots(void)
-{
-	WCHAR ShapshotsIni[MAX_PATH] = { 0 };
-	wcscpy(ShapshotsIni, Dll_BoxFilePath);
-	wcscat(ShapshotsIni, L"\\Snapshots.ini");
-	SbieDll_TranslateNtToDosPath(ShapshotsIni);
-
-	WCHAR Shapshot[16] = { 0 };
-	GetPrivateProfileStringW(L"Current", L"Snapshot", L"", Shapshot, 16, ShapshotsIni);
-
-	if (*Shapshot == 0)
-		return; // not using snapshots
-
-	File_Snapshot = Dll_Alloc(sizeof(FILE_SNAPSHOT));
-	memzero(File_Snapshot, sizeof(FILE_SNAPSHOT));
-	wcscpy(File_Snapshot->ID, Shapshot);
-	File_Snapshot->IDlen = wcslen(Shapshot);
-	FILE_SNAPSHOT* Cur_Snapshot = File_Snapshot;
-	File_Snapshot_Count = 1;
-
-	for (;;)
-	{
-		Cur_Snapshot->ScramKey = CRC32(Cur_Snapshot->ID, Cur_Snapshot->IDlen * sizeof(WCHAR));
-
-		WCHAR ShapshotId[26] = L"Snapshot_";
-		wcscat(ShapshotId, Shapshot);
-		
-		//WCHAR ShapshotName[34] = { 0 };
-		//GetPrivateProfileStringW(ShapshotId, L"Name", L"", ShapshotName, 34, ShapshotsIni);
-		//wcscpy(Cur_Snapshot->Name, ShapshotName);
-
-		GetPrivateProfileStringW(ShapshotId, L"Parent", L"", Shapshot, 16, ShapshotsIni);
-
-		if (*Shapshot == 0)
-			break; // no more snapshots
-
-		Cur_Snapshot->Parent = Dll_Alloc(sizeof(FILE_SNAPSHOT));
-		memzero(Cur_Snapshot->Parent, sizeof(FILE_SNAPSHOT));
-		wcscpy(Cur_Snapshot->Parent->ID, Shapshot);
-		Cur_Snapshot->Parent->IDlen = wcslen(Shapshot);
-		Cur_Snapshot = Cur_Snapshot->Parent;
-		File_Snapshot_Count++;
-	}
 }

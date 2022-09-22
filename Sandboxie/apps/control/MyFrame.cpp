@@ -145,6 +145,7 @@ BEGIN_MESSAGE_MAP(CMyFrame, CFrameWnd)
     ON_COMMAND(ID_HELP_FORUM,                   OnCmdHelpForum)
 	ON_COMMAND(ID_HELP_UPDATE,                  OnCmdHelpUpdate)
     ON_COMMAND(ID_HELP_UPGRADE,                 OnCmdHelpUpgrade)
+    ON_COMMAND(ID_HELP_MIGRATION,               OnCmdHelpMigrate)
     ON_COMMAND(ID_HELP_ABOUT,                   OnCmdHelpAbout)
 
 	//ON_MESSAGE(WM_UPDATERESULT,					OnUpdateResult)
@@ -416,6 +417,18 @@ void CMyFrame::InitMenus(void)
 
     CMenu *pMenu = CMyApp::MyLoadMenu(L"TOP_MENU");
 
+    const int menuIndex = 5;
+    MENUITEMINFO mii;
+    WCHAR text[128];
+    memzero(&mii, sizeof(MENUITEMINFO));
+    mii.cbSize = sizeof(MENUITEMINFO);
+    mii.fMask = MIIM_ID | MIIM_STRING;
+    mii.dwTypeData = text;
+    mii.cch = 120;
+    ::GetMenuItemInfo(*pMenu, menuIndex, TRUE, &mii);
+    mii.fMask = MIIM_TYPE;
+    mii.fType |= MFT_RIGHTJUSTIFY;
+    ::SetMenuItemInfo(*pMenu, menuIndex, TRUE, &mii);
 
     //
     // activate main menu
@@ -1036,6 +1049,20 @@ void CMyFrame::OnCmdHelpUpdate()
 void CMyFrame::OnCmdHelpUpgrade()
 {
 	CRunBrowser x(this, L"https://sandboxie-plus.com/go.php?to=sbie-plus&tip=upgrade");
+}
+
+//---------------------------------------------------------------------------
+// OnCmdHelpMigrate
+//---------------------------------------------------------------------------
+
+extern "C" void OpenWebView(const WCHAR * url, const WCHAR * title);
+
+void CMyFrame::OnCmdHelpMigrate()
+{
+    CString url;
+    url.Format(L"https://sandboxie-plus.com/go.php?to=sbie-migration&language=%d", SbieDll_GetLanguage(NULL));
+    CMyMsg text(MSG_3468);
+    OpenWebView(url, text);
 }
 
 //---------------------------------------------------------------------------

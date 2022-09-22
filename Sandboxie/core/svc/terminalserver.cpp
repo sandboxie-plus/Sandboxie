@@ -549,8 +549,8 @@ MSG_HEADER *TerminalServer::GetUserToken(MSG_HEADER *msg)
                  && !SbieApi_QueryConfBool(boxname, L"UnfilteredToken", FALSE))
 	            // UnfilteredToken END
                 {
-                    // of one of the above is true we handle unfiltered tokens
-                    // if not we need to filter the token or else security checks in the driver wil fail!
+                    // if one of the above is true, we handle unfiltered tokens
+                    // if not, we need to filter the token, otherwise security checks in the driver will fail!
 
                     if (!NT_SUCCESS(SbieApi_Call(API_FILTER_TOKEN, 3, (ULONG_PTR)idProcess, (ULONG_PTR)hToken, (ULONG_PTR)&hFilteredToken)))
                         goto fail;

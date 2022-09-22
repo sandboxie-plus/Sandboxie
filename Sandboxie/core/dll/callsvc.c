@@ -182,7 +182,7 @@ _FX MSG_HEADER *SbieDll_CallServer(MSG_HEADER *req)
         //default: Sbie_snwprintf(dbg, 1024, L"SbieDll_CallServer: %s 0x%04x", Dll_ImageName, req->msgid);
         default: Sbie_snwprintf(dbg, 1024, L"SbieDll_CallServer: %s %s", Dll_ImageName, Trace_SbieSvcFunc2Str(req->msgid));
         }
-        SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, dbg, FALSE);
+        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, dbg);
     }
 
     //

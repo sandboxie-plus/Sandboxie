@@ -152,7 +152,7 @@ SBIE1213 Impossibile creare la cartella oggetto '%3' %2
 # SBIE1221 Impossibile creare l'attività: %2
 # .
 
-1222;pop;err;01
+1222;pop;err;02
 SBIE1222 Impossibile restringere il token: %2
 .
 
@@ -222,13 +222,13 @@ SBIE1309 Tentativo di modifica della password dell'account negato
 # SBIE1311 Richiesta di modifica dello sfondo del desktop da parte del processo '%2' bloccata
 # .
 
-# 1312;pop;inf;01
-# SBIE1312 Richiesta di esecuzione nell'area virtuale di un programma DOS a 16 bit bloccata
-# .
+1312;pop;inf;01
+SBIE1312 Richiesta di esecuzione nell'area virtuale di un programma DOS a 16 bit bloccata
+.
 
-# 1313;pop;inf;01
-# SBIE1313 Accesso diretto al disco da parte del processo '%2' bloccato
-# .
+1313;pop;inf;01
+SBIE1313 Accesso diretto al disco da parte del processo '%2' bloccato
+.
 
 1314;pop;inf;01
 SBIE1314 Richiesta di modifica delle impostazioni di rete/del firewall da parte del processo '%2' bloccata
@@ -354,6 +354,14 @@ SBIE2108 Completamento apparente del programma '%2' eseguito correttamente
 # SBIE2110 Preparazione delle dipendenze di WinSxS per '%2' in corso...
 # .
 
+2111;pop;inf;01
+SBIE2111 Impossibile accedere al processo: %3, chiamata %2
+.
+
+2112;pop;inf;01
+SBIE2112 Impossibile accedere all'oggetto: %3, chiamata %2
+.
+
 2191;pop;inf;01
 SBIE2191 Non è possibile aggiornare %2 mentre è in esecuzione nell'area virtuale.
 .
@@ -368,6 +376,10 @@ SBIE2193 Assicurarsi di eliminare l'area virtuale dopo il completamento del proc
 
 2194;pop;inf;01
 SBIE2194 Windows Installer ha richiesto l'impostazione dell'opzione %2 nel file ini, ma con un livello di isolamento inferiore.
+.
+
+2195;pop;inf;01
+SBIE2195 Per eseguire explorer.exe nell'area virtuale, occorre disattivare l'accesso all'infrastruttura COM.
 .
 
 2198;pop;inf;01
@@ -480,6 +492,10 @@ SBIE2223 Per aumentare il limite della dimensione dei file copiabili, fare doppi
 SBIE2224 Si è verificato un errore durante l'esecuzione nell'area virtuale del programma: %2
 .
 
+2225;pop;wrn;01
+SBIE2225 Si è verificato un tentativo di accesso a un file EFS: %2
+.
+
 #----------------------------------------------------------------------------
 # SbieDrv
 #
@@ -576,6 +592,10 @@ SBIE2322 Impossibile ricreare Sandboxie.ini: %2
 
 2323;pop;err;01
 SBIE2323 Errore nella crittografia:  %2
+.
+
+2325;pop;err;01
+SBIE2325 Debug:  %2
 .
 
 2326;pop;err;01
@@ -859,9 +879,9 @@ Comando di eliminazione fallito: %0
 # Sandboxie è stato installato più di 30 giorni fa.
 # .
 
-3232;txt;01
-È possibile utilizzare Sandboxie gratuitamente per tutto il tempo che vuoi.
-.
+# 3232;txt;01
+# È possibile utilizzare Sandboxie gratuitamente per tutto il tempo che vuoi.
+# .
 
 # 3233;txt;01
 # Tuttavia, il caricamento iniziale della versione gratuita durerà alcuni secondi in più.
@@ -1005,6 +1025,22 @@ Utente sconosciuto. Le impostazioni di configurazione non verranno salvate
 
 3314;txt;01
 Si è verificato un errore durante l'applicazione delle impostazioni predefinite all'area virtuale '%2'
+.
+
+3315;txt;01
+Eliminazione del contenuto dell'area virtuale
+.
+
+3316;txt;01
+Si desidera interrompere l'operazione?
+.
+
+3317;txt;01
+Pronto per l'eliminazione: %2
+.
+
+3318;txt;01
+Eliminazione in corso: %2
 .
 
 # 3321;txt;01
@@ -1251,6 +1287,10 @@ Avvia &Esplora risorse
 
 3467;txt;01
 Aggiorna a Sandboxie Plus
+.
+
+3468;txt;01
+Guida di migrazione a Sandboxie Plus
 .
 
 3471;txt;01
@@ -1509,7 +1549,7 @@ Pubblico
 # .
 
 #----------------------------------------------------------------------------
-# Sandboxie Control Dialogs: About/Welcome
+# Sandboxie Control Dialogs: About
 #----------------------------------------------------------------------------
 
 3601;txt;01
@@ -2281,26 +2321,6 @@ Cercare e selezionare il programma - %2
 .
 
 #----------------------------------------------------------------------------
-# Sandboxie Control:  Sandbox Settings:  Network Files
-#----------------------------------------------------------------------------
-
-3955;txt;01
-File di rete
-.
-
-3956;txt;01
-I file e le cartelle di rete sono normalmente visibili alle applicazioni presenti nell'area virtuale.
-.
-
-3957;txt;01
-Per impedire alle applicazioni presenti nell'area virtuale di accedere a file e cartelle di rete, è possibile attivare questa funzione. I file e le cartelle di rete possono essere aperti alle applicazioni dell'area virtuale nella sezione Accesso alle risorse -> Accesso ai file.
-.
-
-3958;txt;01
-Blocca i file e le cartelle di rete, a meno che non siano aperti individualmente.
-.
-
-#----------------------------------------------------------------------------
 # Program Groups
 #----------------------------------------------------------------------------
 
@@ -2321,7 +2341,7 @@ Inserire il nome del nuovo gruppo
 .
 
 #----------------------------------------------------------------------------
-# Sandboxie Control:  Sandbox Settings:  Forced Folders/Programs
+# Sandboxie Control:  Sandbox Settings:  Forced Folders/Programs/Users
 #----------------------------------------------------------------------------
 
 3861;txt;02
@@ -2514,45 +2534,45 @@ Per gestire la funzionalità Restrizioni Accesso dei programmi, recarsi nella se
 # Sandboxie Control:  Sandbox Settings:  Low Level Access / Hardware Access
 #----------------------------------------------------------------------------
 
-3932;txt;01
-Accesso al sistema
-.
+# 3932;txt;01
+# Accesso al sistema
+# .
 
-3933;txt;01
-Le seguenti opzioni abbassano notevolmente la protezione garantita da Sandboxie, per cui è sconsigliata la loro attivazione.
-.
+# 3933;txt;01
+# Le seguenti opzioni abbassano notevolmente la protezione garantita da Sandboxie, per cui è sconsigliata la loro attivazione.
+# .
 
-3934;txt;01
-Consenti ai programmi in esecuzione in questa area virtuale di caricare i driver della modalità kernel nel sistema operativo
-.
+# 3934;txt;01
+# Consenti ai programmi in esecuzione in questa area virtuale di caricare i driver della modalità kernel nel sistema operativo
+# .
 
-3935;txt;01
-Consenti ai programmi in esecuzione in questa area virtuale di caricare le applicazioni (Win32) facenti parte di altri programmi
-.
+# 3935;txt;01
+# Consenti ai programmi in esecuzione in questa area virtuale di caricare le applicazioni (Win32) facenti parte di altri programmi
+# .
 
-3936;txt;01
-Consenti ai programmi in esecuzione in questa area virtuale di simulare l'input di tastiera e mouse.
-.
+# 3936;txt;01
+# Consenti ai programmi in esecuzione in questa area virtuale di simulare l'input di tastiera e mouse.
+# .
 
-3937;txt;01
-Consenti ai programmi in esecuzione in questa area virtuale di cambiare lo sfondo del desktop e gli altri parametri di sistema
-.
+# 3937;txt;01
+# Consenti ai programmi in esecuzione in questa area virtuale di cambiare lo sfondo del desktop e gli altri parametri di sistema
+# .
 
-3938;txt;01
-Consenti ai programmi in esecuzione in questa area virtuale di gestire la configurazione dei dispositivi hardware
-.
+# 3938;txt;01
+# Consenti ai programmi in esecuzione in questa area virtuale di gestire la configurazione dei dispositivi hardware
+# .
 
-3952;txt;01
-Accesso all'hardware
-.
+# 3952;txt;01
+# Accesso all'hardware
+# .
 
-3953;txt;01
-Consenti ai programmi in esecuzione in questa area virtuale di modificare la password dell'account utente
-.
+# 3953;txt;01
+# Consenti ai programmi in esecuzione in questa area virtuale di modificare la password dell'account utente
+# .
 
-3954;txt;01
-Consenti ai programmi di modificare le impostazioni di rete e del firewall
-.
+# 3954;txt;01
+# Consenti ai programmi di modificare le impostazioni di rete e del firewall
+# .
 
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  Drop Rights
@@ -2574,18 +2594,58 @@ Tuttavia, se si sta utilizzando un account con privilegi amministrativi o Power 
 Limita i diritti degli utenti amministratori e Power User
 .
 
-3946;txt;01
-Si consiglia di tenere abilitata questa impostazione, utile per compensare ad alcune misure di protezione di Sandboxie non disponibili nelle versioni a 64 bit di Windows.
-.
+# 3946;txt;01
+# Si consiglia di tenere abilitata questa impostazione, utile per compensare ad alcune misure di protezione di Sandboxie non disponibili nelle versioni a 64 bit di Windows.
+# .
 
-3947;txt;01
-Per attivare una protezione migliore sulle versioni a 64 bit di Windows, utilizzare il comando Protezione sperimentale dal menu Impostazioni.
-.
+# 3947;txt;01
+# Per attivare una protezione migliore sulle versioni a 64 bit di Windows, utilizzare il comando Protezione sperimentale dal menu Impostazioni.
+# .
 
 3949;txt;01
 L'impostazione Limitazione dei diritti è abilitata nell'area virtuale '%2' e previene l'utilizzo dei privilegi di amministratore.
 Fare clic su OK per disabilitare l'impostazione Limitazione dei diritti nell'area virtuale '%2' e consentire l'utilizzo dei privilegi di amministratore.
 È possibile sempre modificare l'impostazione Limitazione dei diritti dalla sezione Restrizioni della finestra Impostazioni dell'area virtuale.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Print Spooler
+#----------------------------------------------------------------------------
+
+# 3950;txt;01
+# Spooler di stampa
+# .
+
+# 3951;txt;01
+# Lo spooler di stampa di Windows viene eseguito al di fuori della supervisione di Sandboxie. Qualsiasi applicazione eseguita nell'area virtuale che richieda allo spooler di stampare su file viene bloccata, poichè il file verrebbe scritto all'esterno dell'area virtuale.
+# .
+
+# 3952;txt;01
+# Se si desidera consentire allo spooler di stampa di stampare su un file, è possibile attivare questa impostazione. Si consiglia di attivare questa opzione solo se necessario.
+# .
+
+# 3953;txt;01
+# Consenti allo spooler di stampa di Windows di stampare su file.
+# .
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Network Files
+#----------------------------------------------------------------------------
+
+3955;txt;01
+File di rete
+.
+
+3956;txt;01
+I file e le cartelle di rete sono normalmente visibili alle applicazioni presenti nell'area virtuale.
+.
+
+3957;txt;01
+Per impedire alle applicazioni presenti nell'area virtuale di accedere a file e cartelle di rete, è possibile attivare questa funzione. I file e le cartelle di rete possono essere aperti alle applicazioni dell'area virtuale nella sezione Accesso alle risorse -> Accesso ai file.
+.
+
+3958;txt;01
+Blocca i file e le cartelle di rete, a meno che non siano aperti individualmente.
 .
 
 #----------------------------------------------------------------------------
@@ -3205,6 +3265,10 @@ Consenti l'accesso diretto alla gestione della sessione %2
 Consenti l'accesso diretto alle note di %2
 .
 
+4342;txt;01
+Attiva correzione di %2 per Windows 11 KB5014019
+.
+
 4356;txt;02
 Consenti l'accesso diretto ai segnalibri di %2
 .
@@ -3367,7 +3431,7 @@ Qualora si preferisca un'interfaccia per controllare queste opzioni, si prega di
 .
 
 6004;pop;err;01
-La configurazione dell'area virtuale selezionata richiede un certificato di supporto.
+La funzione %3 dell'area virtuale %2 richiede un certificato di supporto, o i processi verranno terminati dopo 5 minuti. Per un uso continuativo, si prega di supportare Sandboxie.
 .
 
 6005;txt;01
@@ -3389,6 +3453,31 @@ Sandboxie Plus offre una maggiore protezione della privacy passando da una modal
 L'interfaccia legacy di Sandboxie Classic non implementa il supporto per questa modalità. Sebbene possa essere configurata tramite il file ini, si prega di aggiornare a Sandboxie Plus (SandMan.exe) che consente l'uso delle aree virtuali con protezione avanzata.
 .
 
+6010;txt;01
+Sandboxie è stato installato più di %2 giorni fa.
+
+Ritieni che si stia facendo un buon lavoro?
+
+Perché non dimostrarlo sostenendo il progetto e ottenendo un certificato di supporto?
+
+Senza un valido certificato, Sandboxie si fermerà per alcuni secondi in modo da valutare la possibilità di sostenere il progetto.
+.
+
+6011;txt;01
+Attendere
+.
+
+6012;txt;01
+Continua
+.
+
+6013;txt;01
+Esci
+.
+
+6014;txt;01
+Ottieni certificato
+.
 
 #----------------------------------------------------------------------------
 # Getting Started Wizard

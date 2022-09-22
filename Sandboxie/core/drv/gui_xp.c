@@ -1311,9 +1311,11 @@ _FX ULONG_PTR Gui_NtUserPostThreadMessage(
             status = STATUS_SUCCESS;
         else {
             status = Gui_CheckBoxedThread(proc, idThread, &idProcess);
-            if (status == STATUS_ACCESS_DENIED)
-                status = Process_CheckProcessName(
-                            proc, &proc->open_win_classes, idProcess, NULL);
+            if (status == STATUS_ACCESS_DENIED) {
+                if (Process_CheckProcessName(
+                    proc, &proc->open_win_classes, idProcess, NULL))
+                        status = STATUS_SUCCESS;
+            }
         }
 
         if (Session_MonitorCount && !proc->disable_monitor) {
@@ -1506,7 +1508,7 @@ _FX ULONG_PTR Gui_NtUserSetWindowsHookEx(
         if (HookType == WH_JOURNALRECORD || HookType == WH_JOURNALPLAYBACK ||
             HookType == WH_KEYBOARD_LL || HookType == WH_MOUSE_LL) {
 
-            // MSDN explictly says these hooks are NOT injected into the target
+            // MSDN explicitly says these hooks are NOT injected into the target
 
             status = STATUS_SUCCESS;
 

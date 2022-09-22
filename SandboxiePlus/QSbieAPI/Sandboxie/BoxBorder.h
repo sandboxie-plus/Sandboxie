@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (c) 2020, David Xanatos
+ * Copyright (c) 2020-2022, David Xanatos
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -29,9 +29,10 @@ public:
 	CBoxBorder(CSbieAPI* pApi, QObject* parent = 0);
 	virtual ~CBoxBorder();
 
+	void		ThreadFunc();
+	void		TimerProc();
+
 protected:
-	void		timerEvent(QTimerEvent* pEvent);
-	int			m_uTimerID;
 
 	CSbieAPI*	m_Api;
 
@@ -39,7 +40,6 @@ private:
 	struct SBoxBorder* m;
 
 	void		GetActiveWindowRect(struct HWND__* hWnd, struct tagRECT* rect);
-	bool		NothingChanged(struct HWND__* hWnd, struct tagRECT* rect, quint32 pid);
 	bool		IsMounseOnTitle(struct HWND__* hWnd, struct tagRECT* rect, const struct tagRECT* Desktop);
 	bool		CheckMousePointer();
 };

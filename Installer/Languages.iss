@@ -14,13 +14,15 @@ Name: "dutch"; MessagesFile: "compiler:Languages\Dutch.isl"
 Name: "french"; MessagesFile: "compiler:Languages\French.isl"
 Name: "german"; MessagesFile: "compiler:Languages\German.isl"
 Name: "Italian"; MessagesFile: "compiler:Languages\Italian.isl"
+Name: "Korean"; MessagesFile: "isl\Korean.isl"
 Name: "polish"; MessagesFile: "compiler:Languages\Polish.isl"
 Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
 Name: "portuguese"; MessagesFile: "compiler:Languages\Portuguese.isl"
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
+Name: "swedish"; MessagesFile: "isl\Swedish.isl"
+Name: "turkish"; MessagesFile: "compiler:Languages\Turkish.isl"
 Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
-;Name: "turkish"; MessagesFile: "compiler:Languages\Turkish.isl"
 ;Name: "armenian"; MessagesFile: "compiler:Languages\Armenian.isl"
 ;Name: "bulgarian"; MessagesFile: "compiler:Languages\Bulgarian.isl"
 ;Name: "catalan"; MessagesFile: "compiler:Languages\Catalan.isl"
@@ -62,12 +64,12 @@ english.UninstallTaskLabel4=Remove &configuration files%nSelect this option to r
 english.UninstallTaskLabel5=Remove configuration files and &sandboxes%nSelect this option to remove all configuration files and sandboxes, including the Sandbox folder located in custom paths with FileRootPath.
 
 ; Chinese Simplified
-ChineseSimplified.AddSandboxedMenu=添加“在沙盘中运行”菜单
+ChineseSimplified.AddSandboxedMenu=添加“在沙盒中运行”菜单
 ChineseSimplified.AddSandboxedBrowser=为用 Sandboxie 启动网页浏览器添加桌面快捷方式
-ChineseSimplified.SandboxieStartMenu1=在沙盘中运行程序
-ChineseSimplified.SandboxieStartMenu2=在沙盘中运行网页浏览器
+ChineseSimplified.SandboxieStartMenu1=在沙盒中运行程序
+ChineseSimplified.SandboxieStartMenu2=在沙盒中运行网页浏览器
 ChineseSimplified.SandboxieStartMenu3=Sandboxie 开始菜单
-ChineseSimplified.SandboxedBrowser=在沙盘中运行网页浏览器
+ChineseSimplified.SandboxedBrowser=在沙盒中运行网页浏览器
 ChineseSimplified.CustomPageLabel1=选择安装方式
 ChineseSimplified.CustomPageLabel2=应当如何安装
 ChineseSimplified.CustomPageLabel3=选择安装模式
@@ -76,12 +78,12 @@ ChineseSimplified.CustomPageUpgradeMode=更新当前已安装的 {#MyAppName}
 ChineseSimplified.CustomPagePortableMode=提取全部文件到指定目录供便携化使用
 ChineseSimplified.RequiresWin7OrLater=Sandboxie-Plus 需要 Windows 7 或更高版本。
 ChineseSimplified.ClassicFound=检测到已安装 Sandboxie 原版，继续安装必须先将其卸载，是否开始卸载？
-ChineseSimplified.RunSandboxedMenu=在沙盘中运行(&S)
+ChineseSimplified.RunSandboxedMenu=在沙盒中运行(&S)
 ChineseSimplified.UninstallTaskLabel1=选择卸载方式
-ChineseSimplified.UninstallTaskLabel2=您想卸载 Sandboxie-Plus 到什么程度？
-ChineseSimplified.UninstallTaskLabel3=保留配置文件和所有沙盘(&K)%n如果您是打算重新安装 Sandboxie-Plus，这是很好的选择，不会丢失您的配置文件和沙盘。
-ChineseSimplified.UninstallTaskLabel4=移除配置文件(&C)%n选择此选项将会移除 Sandboxie.ini 和 Sandboxie-Plus.ini 配置文件，但保留您的沙盘。
-ChineseSimplified.UninstallTaskLabel5=移除配置文件和所有沙盘(&S)%n选择此选项将会移除所有配置文件和沙盘，包括 FileRootPath 所定义的路径下的 Sandbox 文件夹。
+ChineseSimplified.UninstallTaskLabel2=您想如何卸载 Sandboxie-Plus？
+ChineseSimplified.UninstallTaskLabel3=保留配置文件和所有沙盒(&K)%n如果您是打算保留当前配置并重新安装 Sandboxie-Plus，请选择此项。
+ChineseSimplified.UninstallTaskLabel4=移除配置文件(&C)%n选择此选项将会移除 Sandboxie.ini 和 Sandboxie-Plus.ini 配置文件，但保留您的沙盒。
+ChineseSimplified.UninstallTaskLabel5=移除配置文件和所有沙盒(&S)%n选择此选项将会移除所有配置文件和沙盒，包括 FileRootPath 所定义的路径下的 Sandbox 文件夹。
 
 ; Chinese Traditional
 ChineseTraditional.AddSandboxedMenu=加入「在沙箱中執行」選單
@@ -129,21 +131,21 @@ dutch.UninstallTaskLabel5=Configuratiebestanden en sandboxen verwijderen%nSelect
 
 ; French
 french.AddSandboxedMenu=Ajouter « Exécuter dans un bac à sable » au menu contextuel
-french.AddSandboxedBrowser=Ajouter un raccourci sur le bureau pour Exécuter le Navigateur Internet dans Sandboxie
-french.SandboxieStartMenu1=Exécuter un programme sandboxé
-french.SandboxieStartMenu2=Exécuter le Navigateur Internet sandboxé
+french.AddSandboxedBrowser=Ajouter un raccourci sur le bureau pour Exécuter le navigateur Internet dans Sandboxie
+french.SandboxieStartMenu1=Exécuter un programme dans un bac à sable
+french.SandboxieStartMenu2=Exécuter le navigateur Internet dans un bac à sable
 french.SandboxieStartMenu3=Exécuter dans le menu Démarrer
-french.SandboxedBrowser=Lien Navigateur Internet Sandboxé
-french.CustomPageLabel1=Sélectionnez le type d'installation
-french.CustomPageLabel2=Comment doit-on l'installer
-french.CustomPageLabel3=Choisissez le mode d'installation
+french.SandboxedBrowser=Lien navigateur Internet dans un bac à sable
+french.CustomPageLabel1=Sélectionner le type d'installation
+french.CustomPageLabel2=Comment doit-on l'installer ?
+french.CustomPageLabel3=Choisir le mode d'installation
 french.CustomPageInstallMode=Installer {#MyAppName} sur cet ordinateur
 french.CustomPageUpgradeMode=Mettre à jour l'installation de {#MyAppName} existante
 french.CustomPagePortableMode=Extraire tous les fichiers dans un répertoire pour une utilisation portable
 french.RequiresWin7OrLater=Sandboxie-Plus nécessite Windows 7 ou une version ultérieure.
-french.ClassicFound=Installation de Sandboxie Classic détectée, il doit être désinstallé d'abord, voulez-vous le désinstaller maintenant ?
+french.ClassicFound=Installation de Sandboxie Classic détectée ; il doit être désinstallé d'abord, voulez-vous le désinstaller maintenant ?
 french.RunSandboxedMenu=Exécuter dans un &bac à sable
-french.UninstallTaskLabel1=Sélectionnez le type de désinstallation
+french.UninstallTaskLabel1=Sélectionner le type de désinstallation
 french.UninstallTaskLabel2=Comment voulez-vous désinstaller Sandboxie-Plus ?
 french.UninstallTaskLabel3=&Conserver les fichiers de configuration et les bacs à sable%nCette option est la plus recommandée si vous prévoyez de réinstaller Sandboxie-Plus tout en conservant vos fichiers de configuration et vos bacs à sable.
 french.UninstallTaskLabel4=Supprimer les &fichiers de configuration%nSélectionnez cette option pour supprimer les fichiers de configuration « Sandboxie.ini » et « Sandboxie-Plus.ini » tout en conservant les bacs à sable inchangés.
@@ -194,6 +196,28 @@ Italian.UninstallTaskLabel2=Come vorresti disinstallare Sandboxie-Plus?
 Italian.UninstallTaskLabel3=&Mantieni i file di configurazione e le aree virtuali%nSelezionare questa opzione se si prevede di reinstallare Sandboxie in un secondo momento, conservando le impostazioni e le aree virtuali.
 Italian.UninstallTaskLabel4=Rimuovi i file di &configurazione%nSelezionare questa opzione per rimuovere i file di configurazione Sandboxie.ini e Sandboxie-Plus.ini, lasciando invariate le aree virtuali presenti.
 Italian.UninstallTaskLabel5=Rimuovi i file di configurazione e le &aree virtuali%nSelezionare questa opzione per rimuovere tutti i file di configurazione e le aree virtuali, inclusa la cartella Sandbox nei percorsi personalizzati mediante FileRootPath.
+
+; Korean
+Korean.AddSandboxedMenu=상황에 맞는 메뉴에 "샌드박스에서 실행" 추가
+Korean.AddSandboxedBrowser=Sandboxie에서 웹 브라우저를 시작하기 위한 바탕 화면 바로 가기 추가
+Korean.SandboxieStartMenu1=샌드박스에서 모든 프로그램 실행
+Korean.SandboxieStartMenu2=샌드박스에서 웹 브라우저 실행
+Korean.SandboxieStartMenu3=Sandboxie 시작 메뉴
+Korean.SandboxedBrowser=샌드박스에서 웹 브라우저
+Korean.CustomPageLabel1=설치 유형 선택
+Korean.CustomPageLabel2=설치 방법
+Korean.CustomPageLabel3=설치 모드 선택
+Korean.CustomPageInstallMode=이 컴퓨터에 {#MyAppName} 설치
+Korean.CustomPageUpgradeMode=기존 {#MyAppName} 설치 업데이트
+Korean.CustomPagePortableMode=휴대용 사용을 위해 모든 파일을 디렉터리에 추출
+Korean.RequiresWin7OrLater=Sandboxie-Plus를 사용하려면 Windows 7 이상이 필요합니다.
+Korean.ClassicFound=Sandboxie Classic 설치가 탐지되었습니다. 먼저 제거해야 합니다. 지금 제거하시겠습니까?
+Korean.RunSandboxedMenu=샌드박스에서 실행(&S)
+Korean.UninstallTaskLabel1=제거 유형 선택
+Korean.UninstallTaskLabel2=Sandboxie-Plus를 제거하시겠습니까?
+Korean.UninstallTaskLabel3=구성 파일 및 샌드박스 유지(&K)%n구성 파일과 샌드박스를 유지하면서 Sandboxie-Plus를 다시 설치하려는 경우 이 옵션을 사용하는 것이 가장 좋습니다.
+Korean.UninstallTaskLabel4=구성 파일 제거(&C)%n샌드박스를 변경하지 않고 Sandboxie.ini 및 Sandboxie-Plus.ini 구성 파일을 제거하려면 이 옵션을 선택합니다.
+Korean.UninstallTaskLabel5=구성 파일 및 샌드박스 제거(&S)%nFileRootPath를 사용하여 사용자 지정 경로에 있는 샌드박스 폴더를 포함하여 모든 구성 파일과 샌드박스를 제거하려면 이 옵션을 선택하십시오.
 
 ; Polish
 polish.AddSandboxedMenu=Dodaj "Uruchom w piaskownicy" do menu kontekstowego
@@ -305,6 +329,50 @@ spanish.UninstallTaskLabel3=&Mantenga los archivos de configuración y las sandb
 spanish.UninstallTaskLabel4=Eliminar archivos de &configuración%nSeleccione esta opción para eliminar los archivos de configuración Sandboxie.ini y Sandboxie-Plus.ini manteniendo las sandboxes sin cambios.
 spanish.UninstallTaskLabel5=Eliminar archivos de configuración y las &sandboxes%nSeleccione esta opción para eliminar todos los archivos de configuración y las sandboxes, incluida la carpeta Sandbox ubicada en rutas personalizadas mediante FileRootPath.
 
+; Swedish
+swedish.AddSandboxedMenu=Lägg till - Kör sandlådad, till snabbmenyn
+swedish.AddSandboxedBrowser=Lägg till skrivbordsgenväg för att starta webläsaren under Sandboxie
+swedish.SandboxieStartMenu1=Kör valfritt program sandlådat
+swedish.SandboxieStartMenu2=Kör webläsaren sandlådad
+swedish.SandboxieStartMenu3=Sandboxie startmeny
+swedish.SandboxedBrowser=Sandlådad webläsare
+swedish.CustomPageLabel1=Välj installationstyp
+swedish.CustomPageLabel2=Hur ska installeringen ske
+swedish.CustomPageLabel3=Välj installationsläget
+swedish.CustomPageInstallMode=Installera {#MyAppName} på denna dator
+swedish.CustomPageUpgradeMode=Uppdatera existerande {#MyAppName} installation
+swedish.CustomPagePortableMode=Extrahera alla filer till en katalog för portabel användning
+swedish.RequiresWin7OrLater=Sandboxie-Plus kräver Windows 7 eller senare.
+swedish.ClassicFound=Upptäckt en installation av Sandboxie Classic, den behöver avinstalleras först. Vill du avinstallera den nu?
+swedish.RunSandboxedMenu=Kör &sandlådad
+swedish.UninstallTaskLabel1=Välj avinstallationstyp
+swedish.UninstallTaskLabel2=Hur vill du avinstallera Sandboxie-Plus?
+swedish.UninstallTaskLabel3=&Behåll konfigureringsfiler och sandlådor%nDetta är det rekommenderade alternativet om du tänker installera om Sandboxie-Plus, men vill behålla dina konfigurationsfiler och sandlådor.
+swedish.UninstallTaskLabel4=Ta bort &konfigurationsfilerna%nVälj detta alternativ för att ta bort Sandboxie.ini och Sandboxie-Plus.ini:s konfigurationsfiler men behålla sandlådorna oförändrade.
+swedish.UninstallTaskLabel5=Ta bort konfigurationsfiler och &sandlådor%nVälj detta alternativ för att ta bort alla konfigurationsfiler och sandlådor, även sandlådemappen lokaliserad i anpassade sökvägar med filrotsökvägen.
+
+; Turkish
+turkish.AddSandboxedMenu=Bağlam menüsüne "Korumalı Alanda Çalıştır"ı ekle
+turkish.AddSandboxedBrowser=Korumalı Alan altında Web tarayıcısını başlatmak için masaüstü kısayolu ekle
+turkish.SandboxieStartMenu1=Korumalı Alanda herhangi bir programı çalıştırın
+turkish.SandboxieStartMenu2=Korumalı Alanda Web Tarayıcısını çalıştır
+turkish.SandboxieStartMenu3=Korumalı Alan Başlangıç Menüsü
+turkish.SandboxedBrowser=Koruma Alanlı Web Tarayıcısı
+turkish.CustomPageLabel1=Kurulum Türünü Seçin
+turkish.CustomPageLabel2=Nasıl kurulacağını seçin
+turkish.CustomPageLabel3=Yükleme Modunu seçin
+turkish.CustomPageInstallMode={#MyAppName} uygulamasını bu bilgisayara kurun
+turkish.CustomPageUpgradeMode=Mevcut {#MyAppName} kurulumunu güncelleyin
+turkish.CustomPagePortableMode=Taşınabilir kullanım için tüm dosyaları bir dizine çıkarın
+turkish.RequiresWin7OrLater=Sandboxie-Plus, Windows 7 veya sonraki bir sürümünü gerektirir.
+turkish.ClassicFound=Sandboxie Classic kurulumu algılandı, önce kaldırılması gerekiyor, şimdi kaldırmak istiyor musunuz?
+turkish.RunSandboxedMenu=&Korumalı Alanda Çalıştır
+turkish.UninstallTaskLabel1=Kaldırma Türünü Seçin
+turkish.UninstallTaskLabel2=Sandboxie-Plus'ı nasıl kaldırmak istersiniz?
+turkish.UninstallTaskLabel3=Yapılandırma dosyalarını ve korumalı alanları &sakla%nYapılandırma dosyalarınızı ve korumalı alanlarınızı korurken Sandboxie-Plus'ı yeniden yüklemeyi planlıyorsanız, bu en çok önerilen seçenektir.
+turkish.UninstallTaskLabel4=&Yapılandırma dosyalarını kaldır%nSandboxie.ini ve Sandboxie-Plus.ini yapılandırma dosyalarını, korumalı alanları değiştirmeden kaldırmak için bu seçeneği belirleyin.
+turkish.UninstallTaskLabel5=Yapılandırma dosyalarını ve &korumalı alanları kaldır%nFileRootPath ile özel yollarda bulunan Sandbox klasörü dahil tüm yapılandırma dosyalarını ve korumalı alanları kaldırmak için bu seçeneği belirleyin.
+
 ; Ukrainian
 ukrainian.AddSandboxedMenu=Додати "Виконати в пісочниці" в контекстне меню
 ukrainian.AddSandboxedBrowser=Додати ярлик на робочий стіл для запуску браузера в Sandboxie
@@ -315,7 +383,7 @@ ukrainian.SandboxedBrowser=Браузер у пісочниці
 ukrainian.CustomPageLabel1=Оберіть тип встановки
 ukrainian.CustomPageLabel2=Як потрібно встановити
 ukrainian.CustomPageLabel3=Оберіть режим встановки
-ukrainian.CustomPageInstallMode=Встановити {#MyAppName} на цьому комп'ютері
+ukrainian.CustomPageInstallMode=Встановити {#MyAppName} на цьому пристрої
 ukrainian.CustomPageUpgradeMode=Оновити існуючу встановку {#MyAppName}
 ukrainian.CustomPagePortableMode=Витягти всі файли у каталог для портативного режиму
 ukrainian.RequiresWin7OrLater=Для Sandboxie-Plus потрібно Windows 7 або новіше.

@@ -1,0 +1,387 @@
+*==========
+* Missing Messages in Text-PortugueseBr-1046.txt
+*==========
+
+1222;pop;err;02
+SBIE1222 Error with security token:  %2
+.
+
+2111;pop;inf;01
+SBIE2111 Process is not accessible: %3, call %2
+.
+
+2112;pop;inf;01
+SBIE2112 Object is not accessible: %3, call %2
+.
+
+2195;pop;inf;01
+SBIE2195 To run Explorer.exe sandboxed, the access for COM infrastructure must not be Open.
+.
+
+2225;pop;wrn;01
+SBIE2225 An attempt was made to access an EFS file: %2
+.
+
+2325;pop;err;01
+SBIE2325 Debug:  %2
+.
+
+3107;txt;01
+Type the name of a program or path to open the following file in the current sandbox:
+.
+
+3315;txt;01
+Deleting Sandbox contents
+.
+
+3316;txt;01
+Do you want to abort the operation?
+.
+
+3317;txt;01
+Preparing to delete: %2
+.
+
+3318;txt;01
+Deleting: %2
+.
+
+3468;txt;01
+Sandboxie-Plus Migration Guide
+.
+
+4300;txt;01
+Open additional RPC Port Bindings
+.
+
+4306;txt;01
+Open RPC Port Bindings for UAC
+.
+
+4307;txt;01
+Block common telemetry processes
+.
+
+4308;txt;01
+Filter access to \Devices\
+.
+
+4342;txt;01
+Enable %2 fix for Windows 11 KB5014019
+.
+
+6004;pop;err;01
+The configuration %3 of box %2 requires a supporter certificate. Processes in this box will be terminated after 5 minutes. For prolonged use, please consider supporting this project.
+.
+
+6010;txt;01
+You have installed Sandboxie more than %2 days ago.
+
+So, you think David and the contributors are doing a great job?
+
+Why don't you show it by supporting the project and getting a Supporter Certificate?
+
+Sandboxie without a valid supporter certificate will now pause for a few seconds, to give you time to contemplate the possibility of supporting the project.
+.
+
+6011;txt;01
+Wait
+.
+
+6012;txt;01
+Continue
+.
+
+6013;txt;01
+Quit
+.
+
+6014;txt;01
+Get Certificate
+.
+
+*==========
+* Extraneous Messages in Text-PortugueseBr-1046.txt
+*==========
+
+1109;evt;err;01
+SBIE1109 Informação de licença inválida: %2
+.
+
+1202;pop;err;01
+SBIE1202 Não é possível atualizar informação de licença: %2
+.
+
+1222;pop;err;01
+SBIE1222 Não é possível restringir token: %2
+.
+
+1303;pop;inf;01
+SBIE1303 Apenas uma caixa de areia pode estar ativa de cada vez
+.
+
+1310;pop;inf;01
+SBIE1310 As funções estendidas estão desabilitadas até a licença ser reativada
+.
+
+2315;pop;err;01
+SBIE2315 Não foi possível reparar imagem executável
+.
+
+3211;txt;01
+Versões não coincidem. Tente uma reinstalação.
+.
+
+3231;txt;01
+Você instalou o Sandboxie há mais de 30 dias.
+.
+
+3232;txt;01
+O uso pessoal do Sandboxie é permitido gratuitamente pelo tempo que você desejar.
+.
+
+3233;txt;01
+No entanto, a versão gratuita fará agora uma pausa por alguns segundos.
+.
+
+3234;txt;01
+No entanto, a versão gratuita permite o uso de uma caixa de cada vez.
+.
+
+3235;txt;01
+Esta restrição é removida na versão registrada do Sandboxie.
+.
+
+3236;txt;01
+Além disso, o registro possibilita a execução automática de programas dentro de uma caixa.
+.
+
+3237;txt;01
+Para mais informações, e para adquirir o software, clique no seguinte link:
+.
+
+3238;txt;01
+Por favor aguarde mais %2 segundos
+.
+
+3239;txt;01
+Clique aqui para fechar esta janela e continuar
+.
+
+3240;txt;01
+Clique aqui para fechar esta janela e cancelar
+.
+
+3503;txt;01
+Proteção Experimental (64 bits)
+.
+
+3455;txt;01
+&Registrar o Sandboxie
+.
+
+3458;txt;01
+Permitir acesso direto ao Cache de fontes do Windows
+.
+
+3771;txt;01
+(Este recurso está disponível apenas na versão registrada do Sandboxie)
+.
+
+3946;txt;01
+É recomendado manter esta opção habilitada, para compensar alguma medida de proteção do Sandboxie que não está disponível nas edições de 64 bits do Windows.
+.
+
+3947;txt;01
+Para aumentar a proteção no Windows 64 bits, use o comando Proteção Experimental no menu Configurar.
+.
+
+3950;txt;01
+Spooler de Impressão
+.
+
+3951;txt;01
+O Spooler de impressão do Windows é executado fora da supervisão do Sandboxie.  Um aplicativo com caixa de areia que solicita ao Spooler de impressão para um arquivo será bloqueado, porque este arquivo será gravado fora da caixa de areia.
+.
+
+3952;txt;01
+Se você deseja permitir que o Spooler de impressão imprima em um arquivo, você pode ativar esta configuração. Recomenda-se que você habilite essa opção somente quando necessário.
+.
+
+3953;txt;01
+Permita que o Windows Print Spooler imprima para arquivar.
+.
+
+7866;txt;01
+Na versão do Windows de 64 bits, é recomendável habilitar a Proteção Experimental. Essa opção está no menu Configurar no Controle do Sandboxie.
+.
+
+7901;txt;01
+Gerenciador de Licença do Sandboxie
+.
+
+7902;txt;01
+Código de Sistema %2
+.
+
+7903;txt;01
+No futuro, ativar a licença sem pedir permissão
+.
+
+7921;txt;01
+O Sandboxie está registrado e a licença está ativada.
+.
+
+7922;txt;01
+O Sandboxie está registrado mas a licença deve ser reativada agora.
+.
+
+7923;txt;01
+Cópia não registrada.  Registre-a já!
+.
+
+7924;txt;01
+A licença do Sandboxie deverá ser reativada em %2 dias.
+.
+
+7925;txt;01
+A licença do Sandboxie foi ativada.
+.
+
+7926;txt;01
+A sua Chave do Produto expira em %2.
+.
+
+7927;txt;01
+A sua Chave do Produto não tem uma data de validade.
+.
+
+7931;txt;01
+A sua cópia do Sandboxie está registrada com uma Chave de Registro obsoleta.
+.
+
+7932;txt;01
+Por favor permita que o Gerenciador de Licença conecte-se ao Servidor de Licença e atualize sua antiga Chave de Registro para uma nova Chave do Produto. Não serão cobradas taxas para esta atualização.
+.
+
+7933;txt;01
+A sua Chave de Registro não foi reconhecida pelo Servidor de Licença.
+.
+
+7934;txt;01
+Se você usava uma Chave de Registro legítima, pela qual você pagou, ou que você recebeu como presente, ou como parte de uma promoção, por favor envie um email a:
+.
+
+7935;txt;01
+A sua nova Chave do Produto é:
+.
+
+7936;txt;01
+Mantenha sua Chave do Produto em um local seguro para referência futura. Use o botão abaixo para copiar sua Chave do Produto para a área de transferência, de onde você poderá transferi-la para um documento e imprimi-la.
+.
+
+7937;txt;01
+Atualizar Chave de Registro para Chave do Produto
+.
+
+7941;txt;01
+O registro do Sandboxie é feito através de um gerenciador de pagamentos de terceira parte. Inicie o processo de registro visitando o web site do Sandboxie no link abaixo.
+.
+
+7942;txt;01
+Para ativar sua licença do Sandboxie, informe a Chave do Produto que está em seu recibo de pagamento e clique no botão para ativar sua licença.
+.
+
+7943;txt;01
+Deseja informar uma nova Chave do Produto agora?
+.
+
+7944;txt;01
+Ativar Licença
+.
+
+7945;txt;01
+A sua cópia do Sandboxie está registrada agora.
+.
+
+7946;txt;01
+Obrigado pelo suporte ao Sandboxie!
+.
+
+7951;txt;01
+Deseja ativar a licença agora?
+.
+
+7952;txt;01
+Por favor visite o web site do Sandboxie no link abaixo para adquirir uma nova Chave do Produto.
+.
+
+7961;txt;01
+Apagar Informações de Licença
+.
+
+7962;txt;01
+Tem certeza de que deseja apagar as informações de licença do Sandboxie?
+
+Você pode ativar sua licença a qualquer hora informando uma Chave do Produto.
+.
+
+7971;txt;01
+Esta não é uma Chave do Produto válida.
+.
+
+7972;txt;01
+Este não é um Código de Sistema válido.
+.
+
+7973;txt;01
+Esta não é uma Chave de Ativação válida. [%2]
+.
+
+7974;txt;01
+Resposta inválida do Servidor de Licença.
+.
+
+7975;txt;01
+A ativação do produto falhou:
+.
+
+7976;txt;01
+Gostaria de tentar novamente agora?
+.
+
+7977;txt;01
+Se você precisa ativar o Sandboxie em um computador que não dispõe de acesso à Internet,
+leia as FAQ de Licenciamento do Sandboxie para informações sobre Ativação Offline.
+.
+
+7978;txt;01
+A data atual (%2) está adiantada em relação à data enviada pelo Servidor de Licença (%3).
+.
+
+7982;txt;01
+O Servidor de Licença não especificou uma razão para a falha da ativação.
+.
+
+7983;txt;01
+A Chave do Produto não foi reconhecida pelo Servidor de Licença.
+.
+
+7984;txt;01
+A Chave do Produto não pode ser usada após a data de validade %2.
+.
+
+7985;txt;01
+A Chave do Produto foi ativada em muitos computadores.
+.
+
+7986;txt;01
+A Chave do Produto foi cancelada por ter se tornado pública na Internet.
+.
+
+7987;txt;01
+A Chave do Produto foi cancelada porque a compra foi ressarcida.
+.
+
+
+

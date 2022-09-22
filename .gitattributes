@@ -1,0 +1,27 @@
+# Git - gitattributes Documentation:
+# https://www.git-scm.com/docs/gitattributes
+# https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#_core_autocrlf
+
+[attr]binary -diff -merge -text
+*.bat text working-tree-encoding=UTF-8
+*.cmd text working-tree-encoding=UTF-8
+*.c text working-tree-encoding=UTF-8
+*.cpp text working-tree-encoding=UTF-8
+*.rc text working-tree-encoding=UTF-8
+*.ts text working-tree-encoding=UTF-8 eol=lf
+*.md text working-tree-encoding=UTF-8 eol=lf
+*.yml text working-tree-encoding=UTF-8 eol=lf
+Installer/*.txt text working-tree-encoding=UTF-8 eol=lf
+Sandboxie/install/*.txt text working-tree-encoding=UTF-8 eol=crlf
+SandboxiePlus/QtSingleApp/*.txt text working-tree-encoding=UTF-8 eol=lf
+Installer/isl/*.isl text eol=lf
+
+# Set crlf EOL for *.bat and *.cmd files to prevent a label parser issue with lf:
+# https://serverfault.com/questions/429594/is-it-safe-to-write-batch-files-with-unix-line-endings
+# Please uncomment the lines below only if needed
+#Sandboxie/msgs/RunReport.bat eol=crlf
+#Sandboxie/install/ParseVersion.bat eol=crlf
+#Installer/merge_builds.cmd eol=crlf
+#Sandboxie/install/build.bat eol=crlf
+#SandboxiePlus/qmake_plus.cmd eol=crlf
+#SandboxiePlus/QtSingleApp/configure.bat eol=crlf

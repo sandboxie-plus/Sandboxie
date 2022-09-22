@@ -102,6 +102,7 @@ static const WCHAR *Ipc_Mutant_TypeName     = L"Mutant";
 static const WCHAR *Ipc_Semaphore_TypeName  = L"Semaphore";
 static const WCHAR *Ipc_Section_TypeName    = L"Section";
 static const WCHAR *Ipc_JobObject_TypeName  = L"JobObject";
+static const WCHAR *Ipc_SymLink_TypeName    = L"SymbolicLinkObject";
 
 
 //---------------------------------------------------------------------------
@@ -137,6 +138,9 @@ _FX BOOLEAN Ipc_Init(void)
     if (! Ipc_Init_Type(Ipc_JobObject_TypeName, Ipc_CheckJobObject))
         return FALSE;
 
+    if (! Ipc_Init_Type(Ipc_SymLink_TypeName, Ipc_CheckGenericObject))
+        return FALSE;
+
     //
     // set object open handlers for port objects
     //
@@ -157,8 +161,7 @@ _FX BOOLEAN Ipc_Init(void)
 
     if (Driver_OsVersion > DRIVER_WINDOWS_VISTA) {
 
-        // Don't use experimental features by default
-        if (Conf_Get_Boolean(NULL, L"EnableObjectFiltering", 0, FALSE)) {
+        if (Conf_Get_Boolean(NULL, L"EnableObjectFiltering", 0, TRUE)) {
 
             if (!Obj_Load_Filter())
                 return FALSE;
@@ -381,6 +384,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
 #endif
     static const WCHAR* _OpenPath = L"OpenIpcPath";
     static const WCHAR* _ClosedPath = L"ClosedIpcPath";
+    static const WCHAR* _ReadPath = L"ReadIpcPath";
     static const WCHAR* openpaths[] = {
         L"\\Windows\\ApiPort",
         L"\\Sessions\\*\\Windows\\ApiPort",
@@ -576,6 +580,11 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
     //    NULL
     //};
 #endif
+    static const WCHAR *readpaths[] = {
+        L"\\??\\pipe\\*",
+        L"$:explorer.exe",
+        NULL
+    };
 
     ULONG i;
     BOOLEAN ok;
@@ -586,21 +595,19 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
 
 #ifdef USE_MATCH_PATH_EX
     ok = Process_GetPaths(proc, &proc->normal_ipc_paths, _NormalPath, FALSE);
+
+    //if (ok && proc->use_privacy_mode) {
+    // 
+    //    for (i = 0; normalpaths[i] && ok; ++i) {
+    //        ok = Process_AddPath(proc, &proc->normal_ipc_paths, NULL,
+    //                          TRUE, normalpaths[i], FALSE);
+    //    }
+    //}
+
     if (!ok) {
         Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
         return FALSE;
     }
-
-    //if (proc->use_privacy_mode) {
-    //    for (i = 0; normalpaths[i] && ok; ++i) {
-    //        ok = Process_AddPath(proc, &proc->normal_ipc_paths, _NormalPath, TRUE, normalpaths[i], FALSE);
-    //    }
-    //
-    //    if (! ok) {
-    //        Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
-    //        return FALSE;
-    //    }
-    //}
 #endif
 
     //
@@ -696,8 +703,34 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
         return FALSE;
     }
 
+    //
+    // read-only paths
+    //
+
+    ok = Process_GetPaths(proc, &proc->read_ipc_paths, _ReadPath, FALSE);
+
+    if (ok) {
+
+        for (i = 0; readpaths[i] && ok; ++i) {
+            ok = Process_AddPath(proc, &proc->read_ipc_paths, NULL,
+                                TRUE, readpaths[i], FALSE);
+        }
+    }
+
+    if (! ok) {
+        Log_MsgP1(MSG_INIT_PATHS, _ReadPath, proc->pid);
+        return FALSE;
+    }
+
+    //
+    // other options
+    //
+
     proc->ipc_warn_startrun = Conf_Get_Boolean(
         proc->box->name, L"NotifyStartRunAccessDenied", 0, TRUE);
+
+    proc->ipc_warn_open_proc = Conf_Get_Boolean(
+        proc->box->name, L"NotifyProcessAccessDenied", 0, FALSE);
 
     //
     // block password
@@ -1029,7 +1062,15 @@ _FX NTSTATUS Ipc_CheckGenericObject(
             }
 
             RtlStringCbPrintfW(access_str, sizeof(access_str), L"(I%c) %08X", letter, GrantedAccess);
-            Log_Debug_Msg(mon_type, access_str, Name->Buffer);
+            //Log_Debug_Msg(mon_type, access_str, Name->Buffer);
+
+            if (Session_MonitorCount) {
+	
+                POBJECT_TYPE ObjectType = pObGetObjectType(Object);
+
+		        const WCHAR* strings[4] = { Name->Buffer, access_str, ObjectType ? ObjectType->Name.Buffer : NULL, NULL };
+		        Session_MonitorPutEx(mon_type, strings, NULL, PsGetCurrentProcessId(), PsGetCurrentThreadId());
+	        }
         }
     }
 
@@ -1113,7 +1154,7 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
     HANDLE SourceHandle;
     HANDLE TargetProcessHandle;
     HANDLE *TargetHandle;
-    HANDLE TestHandle;
+    HANDLE DuplicatedHandle;
     ULONG DesiredAccess;
     ULONG HandleAttributes;
     ULONG Options;
@@ -1242,7 +1283,7 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 
         //
         // we duplicate the handle into kernel space such that that user 
-        // wont be able to grab it while we are evaluaiting it
+        // won't be able to grab it while we are evaluaiting it
         //
 
         HANDLE SourceProcessKernelHandle;
@@ -1254,20 +1295,20 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
             //
             // driver verifier wants us to provide a kernel handle as process handles
             // but the source handle must be a user handle and the ZwDuplicateObject
-            // function creates an otehr user handle hence NtClose
+            // function creates another user handle hence NtClose
             //
 
             status = ZwDuplicateObject(
                 SourceProcessKernelHandle, SourceHandle,
-                TargetProcessKernelHandle, &TestHandle,
+                TargetProcessKernelHandle, &DuplicatedHandle,
                 DesiredAccess, HandleAttributes,
                 Options & ~DUPLICATE_CLOSE_SOURCE);
 
             if (NT_SUCCESS(status)) {
 
-                status = Ipc_CheckObjectName(TestHandle, UserMode);
+                status = Ipc_CheckObjectName(DuplicatedHandle, UserMode);
 
-                NtClose(TestHandle);
+                NtClose(DuplicatedHandle);
             }
 
             ZwClose(SourceProcessKernelHandle);
@@ -1282,10 +1323,12 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 
     if (NT_SUCCESS(status)) {
 
-        status = NtDuplicateObject(
+        status = ZwDuplicateObject(
             SourceProcessHandle, SourceHandle,
-            TargetProcessHandle, TargetHandle,
+            TargetProcessHandle, &DuplicatedHandle,
             DesiredAccess, HandleAttributes, Options);
+
+        *TargetHandle = DuplicatedHandle;
     }
 
     //

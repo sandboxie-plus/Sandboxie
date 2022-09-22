@@ -8,6 +8,7 @@
 #include "../MiscHelpers/Common/SettingsWidgets.h"
 #include "Helpers/WinAdmin.h"
 
+
 class NoEditDelegate : public QStyledItemDelegate {
 public:
 	NoEditDelegate(QObject* parent = 0) : QStyledItemDelegate(parent) {}
@@ -24,6 +25,10 @@ public:
 	//QModelIndex indexFromItem(const QTreeWidgetItem *item, int column = 0) const;
 	//QTreeWidgetItem *itemFromIndex(const QModelIndex &index) const;
 };
+
+
+//////////////////////////////////////////////////////////////////////////
+// ProgramsDelegate
 
 class ProgramsDelegate : public QStyledItemDelegate {
 public:
@@ -110,9 +115,11 @@ protected:
 	int m_Column;
 };
 
+//////////////////////////////////////////////////////////////////////////
+// COptionsWindow
 
 COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QString& Name, QWidget *parent)
-	: QDialog(parent)
+	: CConfigDialog(parent)
 {
 	m_pBox = pBox;
 
@@ -138,23 +145,68 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
 	ui.setupUi(this);
-	this->setWindowTitle(tr("Sandboxie Plus - '%1' Options").arg(Name));
+	this->setWindowTitle(tr("Sandboxie Plus - '%1' Options").arg(QString(Name).replace("_", " ")));
 
 	ui.tabs->setTabPosition(QTabWidget::West);
 	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));
+	ui.tabs->tabBar()->setProperty("isSidebar", true);
 
-	ui.tabs->setTabIcon(0, CSandMan::GetIcon("Options"));
-	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Group"));
-	ui.tabs->setTabIcon(2, CSandMan::GetIcon("Force"));
-	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Stop"));
-	ui.tabs->setTabIcon(4, CSandMan::GetIcon("Start"));
-	ui.tabs->setTabIcon(5, CSandMan::GetIcon("Wall"));
-	ui.tabs->setTabIcon(6, CSandMan::GetIcon("Ampel"));
-	ui.tabs->setTabIcon(7, CSandMan::GetIcon("Recover"));
-	ui.tabs->setTabIcon(8, CSandMan::GetIcon("Advanced"));
-	ui.tabs->setTabIcon(9, CSandMan::GetIcon("Template"));
-	ui.tabs->setTabIcon(10, CSandMan::GetIcon("EditIni"));
+	//this->setMinimumHeight(490);
 
+	ui.tabs->setTabIcon(eGeneral, CSandMan::GetIcon("Options"));
+	ui.tabs->setTabIcon(eGroups, CSandMan::GetIcon("Group"));
+	ui.tabs->setTabIcon(eForce, CSandMan::GetIcon("Force"));
+	ui.tabs->setTabIcon(eStop, CSandMan::GetIcon("Stop"));
+	ui.tabs->setTabIcon(eStart, CSandMan::GetIcon("Start"));
+	ui.tabs->setTabIcon(eInternet, CSandMan::GetIcon("Wall"));
+	ui.tabs->setTabIcon(eAccess, CSandMan::GetIcon("Ampel"));
+	ui.tabs->setTabIcon(eRecover, CSandMan::GetIcon("Recover"));
+	//ui.tabs->setTabIcon(eOther, CSandMan::GetIcon("Settings"));
+	ui.tabs->setTabIcon(eAdvanced, CSandMan::GetIcon("Advanced"));
+	ui.tabs->setTabIcon(eTemplates, CSandMan::GetIcon("Template"));
+	ui.tabs->setTabIcon(eEditIni, CSandMan::GetIcon("EditIni"));
+
+	ui.tabsGeneral->setTabIcon(0, CSandMan::GetIcon("Box"));
+	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("File"));
+	ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("Security"));
+	ui.tabsGeneral->setTabIcon(3, CSandMan::GetIcon("NoAccess"));
+	ui.tabsGeneral->setTabIcon(4, CSandMan::GetIcon("Run"));
+
+	ui.tabsInternet->setTabIcon(0, CSandMan::GetIcon("List"));
+	ui.tabsInternet->setTabIcon(1, CSandMan::GetIcon("Network"));
+
+	ui.tabsAccess->setTabIcon(0, CSandMan::GetIcon("Rules"));
+	ui.tabsAccess->setTabIcon(1, CSandMan::GetIcon("Policy"));
+
+	ui.tabsAdvanced->setTabIcon(0, CSandMan::GetIcon("Miscellaneous"));
+	ui.tabsAdvanced->setTabIcon(1, CSandMan::GetIcon("Fence"));
+	ui.tabsAdvanced->setTabIcon(2, CSandMan::GetIcon("Trigger"));
+	ui.tabsAdvanced->setTabIcon(3, CSandMan::GetIcon("Anon"));
+	ui.tabsAdvanced->setTabIcon(4, CSandMan::GetIcon("Users"));
+	ui.tabsAdvanced->setTabIcon(5, CSandMan::GetIcon("SetLogging"));
+	ui.tabsAdvanced->setTabIcon(6, CSandMan::GetIcon("Bug"));
+
+	ui.tabsTemplates->setTabIcon(0, CSandMan::GetIcon("Compatibility"));
+	ui.tabsTemplates->setTabIcon(1, CSandMan::GetIcon("Explore"));
+	ui.tabsTemplates->setTabIcon(2, CSandMan::GetIcon("Accessibility"));
+
+	//if(theConf->GetInt("Options/ViewMode", 1) != 1 && (QApplication::keyboardModifiers() & Qt::ControlModifier) == 0)
+	//	ui.tabs->removeTab(eEditIni);
+
+	if (theConf->GetBool("Options/AltRowColors", false)) {
+		ui.treeRun->setAlternatingRowColors(true);
+		ui.treeGroups->setAlternatingRowColors(true);
+		ui.treeForced->setAlternatingRowColors(true);
+		ui.treeStop->setAlternatingRowColors(true);
+		ui.treeStart->setAlternatingRowColors(true);
+		ui.treeINet->setAlternatingRowColors(true);
+		ui.treeNetFw->setAlternatingRowColors(true);
+		ui.treeAccess->setAlternatingRowColors(true);
+		ui.treeRecovery->setAlternatingRowColors(true);
+		ui.treeTriggers->setAlternatingRowColors(true);
+		ui.treeTemplates->setAlternatingRowColors(true);
+		ui.treeFolders->setAlternatingRowColors(true);
+	}
 
 	CreateDebug();
 
@@ -286,11 +338,14 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	LoadConfig();
 
+	UpdateCurrentTab();
+
 	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
 
 	ui.treeAccess->viewport()->installEventFilter(this);
 	ui.treeINet->viewport()->installEventFilter(this);
 	ui.treeNetFw->viewport()->installEventFilter(this);
+	this->installEventFilter(this); // prevent enter from closing the dialog
 
 	restoreGeometry(theConf->GetBlob("OptionsWindow/Window_Geometry"));
 
@@ -317,9 +372,53 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	if (!Columns.isEmpty()) ui.treeRecovery->header()->restoreState(Columns);
 	Columns = theConf->GetBlob("OptionsWindow/Templates_Columns");
 	if (!Columns.isEmpty()) ui.treeTemplates->header()->restoreState(Columns);
+
+
+	if (theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false) && !IsAdminUser())
+	{
+		for (int I = 0; I < ui.tabs->count(); I++) {
+			QGridLayout* pGrid = qobject_cast<QGridLayout*>(ui.tabs->widget(I)->layout());
+			QTabWidget* pSubTabs = pGrid ? qobject_cast<QTabWidget*>(pGrid->itemAt(0)->widget()) : NULL;
+			if (!pSubTabs) {
+				ui.tabs->widget(I)->setEnabled(false);
+			}
+			else {
+				for (int J = 0; J < pSubTabs->count(); J++) {
+					pSubTabs->widget(J)->setEnabled(false);
+				}
+			}
+		}
+	}
+
+
+	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
+	int iOptionTree = theConf->GetInt("Options/OptionTree", 2);
+	if (iOptionTree == 2)
+		iOptionTree = iViewMode == 2 ? 1 : 0;
+
+	if (iOptionTree) 
+		OnSetTree();
+	else {
+		QWidget* pSearch = AddConfigSearch(ui.tabs);
+		ui.horizontalLayout->insertWidget(0, pSearch);
+		QTimer::singleShot(0, [this]() {
+			m_pSearch->setMaximumWidth(m_pTabs->tabBar()->width());
+		});
+	}
+	m_pSearch->setPlaceholderText(tr("Search for options"));
 }
 
-void COptionsWindow::OnOptChanged() {
+void COptionsWindow::OnSetTree()
+{
+	if (!ui.tabs) return;
+	QWidget* pAltView = ConvertToTree(ui.tabs);
+	ui.verticalLayout->replaceWidget(ui.tabs, pAltView);
+	ui.tabs->deleteLater();
+	ui.tabs = NULL;
+}
+
+void COptionsWindow::OnOptChanged() 
+{
 	if (m_HoldChange)
 		return;
 	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
@@ -351,7 +450,9 @@ void COptionsWindow::closeEvent(QCloseEvent *e)
 bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 {
 	if (event->type() == QEvent::KeyPress && ((QKeyEvent*)event)->key() == Qt::Key_Escape 
-		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
+		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier
+		&& (source == ui.treeAccess->viewport() || source == ui.treeINet->viewport() ||
+			source == ui.treeNetFw->viewport()))
 	{
 		CloseINetEdit(false);
 		CloseNetFwEdit(false);
@@ -360,7 +461,7 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 	}
 
 	if (event->type() == QEvent::KeyPress && (((QKeyEvent*)event)->key() == Qt::Key_Enter || ((QKeyEvent*)event)->key() == Qt::Key_Return) 
-		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier)
+		&& (((QKeyEvent*)event)->modifiers() == Qt::NoModifier || ((QKeyEvent*)event)->modifiers() == Qt::KeypadModifier))
 	{
 		CloseINetEdit(true);
 		CloseNetFwEdit(true);
@@ -405,6 +506,8 @@ void COptionsWindow::LoadConfig()
 {
 	m_ConfigDirty = false;
 
+	m_HoldChange = true;
+
 	LoadGeneral();
 
 	LoadGroups();
@@ -429,6 +532,8 @@ void COptionsWindow::LoadConfig()
 	LoadTemplates();
 	
 	UpdateBoxType();
+
+	m_HoldChange = false;
 }
 
 void COptionsWindow::WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& Value)
@@ -642,7 +747,14 @@ QString COptionsWindow::SelectProgram(bool bOrGroup)
 
 void COptionsWindow::OnTab()
 {
-	if (ui.tabs->currentWidget() == ui.tabEdit)
+	OnTab(ui.tabs->currentIndex());
+}
+
+void COptionsWindow::OnTab(int iTabID)
+{
+	m_iCurrentTab = iTabID;
+
+	if (m_iCurrentTab == eEditIni)
 	{
 		LoadIniSection();
 		ui.txtIniSection->setReadOnly(true);
@@ -658,7 +770,10 @@ void COptionsWindow::OnTab()
 
 void COptionsWindow::UpdateCurrentTab()
 {
-	if (ui.tabs->currentWidget() == ui.tabStart)
+	if (m_iCurrentTab == eGeneral) {
+		ui.chkVmRead->setChecked(GetAccessEntry(eIPC, "", eReadOnly, "$:*") != NULL);
+	}
+	else if (m_iCurrentTab == eStart)
 	{
 		if (GetAccessEntry(eIPC, "!<StartRunAccess>", eClosed, "*") != NULL)
 			ui.radStartSelected->setChecked(true);
@@ -672,18 +787,16 @@ void COptionsWindow::UpdateCurrentTab()
 
 		OnRestrictStart();
 	}
-	else if (ui.tabs->currentWidget() == ui.tabInternet)
+	else if (m_iCurrentTab == eInternet)
 	{
 		CheckINetBlock();
 
 		LoadBlockINet();
-
-		OnBlockINet();
 	}
-	else if (ui.tabs->currentWidget() == ui.tabAdvanced)
+	else if (m_iCurrentTab == eAdvanced)
 	{
-		ui.chkOpenCOM->setChecked(GetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\epmapper") != NULL);
-
+		CheckOpenCOM();
+	
 		if (GetAccessEntry(eWnd, "", eOpen, "*") != NULL)
 		{
 			ui.chkNoWindowRename->setEnabled(false);
@@ -703,10 +816,15 @@ void COptionsWindow::UpdateCurrentTab()
 
 void COptionsWindow::SetIniEdit(bool bEnable)
 {
-	for (int i = 0; i < ui.tabs->count() - 1; i++) {
-		bool Enabled = ui.tabs->widget(i)->isEnabled();
-		ui.tabs->setTabEnabled(i, !bEnable && Enabled);
-		ui.tabs->widget(i)->setEnabled(Enabled);
+	if (m_pTree) {
+		m_pTree->setEnabled(!bEnable);
+	}
+	else {
+		for (int i = 0; i < ui.tabs->count() - 1; i++) {
+			bool Enabled = ui.tabs->widget(i)->isEnabled();
+			ui.tabs->setTabEnabled(i, !bEnable && Enabled);
+			ui.tabs->widget(i)->setEnabled(Enabled);
+		}
 	}
 	ui.btnSaveIni->setEnabled(bEnable);
 	ui.btnCancelEdit->setEnabled(bEnable);
@@ -792,6 +910,16 @@ void COptionsWindow::SaveIniSection()
 	LoadIniSection();
 }
 
+#include "OptionsAccess.cpp"
+#include "OptionsAdvanced.cpp"
+#include "OptionsForce.cpp"
+#include "OptionsGeneral.cpp"
+#include "OptionsGrouping.cpp"
+#include "OptionsNetwork.cpp"
+#include "OptionsRecovery.cpp"
+#include "OptionsStart.cpp"
+#include "OptionsStop.cpp"
+#include "OptionsTemplates.cpp"
 
 #include <windows.h>
 

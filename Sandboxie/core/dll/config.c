@@ -300,7 +300,7 @@ _FX BOOLEAN SbieDll_GetSettingsForName_bool(
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Config_InitPatternList(const WCHAR* boxname, const WCHAR* setting, LIST* list)
+_FX BOOLEAN Config_InitPatternList(const WCHAR* boxname, const WCHAR* setting, LIST* list, BOOLEAN dos)
 {
     WCHAR conf_buf[2048];
 
@@ -315,6 +315,9 @@ _FX BOOLEAN Config_InitPatternList(const WCHAR* boxname, const WCHAR* setting, L
             break;
         ++index;
 
+        if (dos) 
+            SbieDll_TranslateNtToDosPath(conf_buf);
+        
         ULONG level;
         WCHAR* value = Config_MatchImageAndGetValue(conf_buf, Dll_ImageName, &level);
         if (value)
@@ -600,7 +603,7 @@ BOOLEAN SbieDll_CheckPatternInList(const WCHAR* string, ULONG length, const WCHA
 
     List_Init(&Patterns);
 
-    Config_InitPatternList(boxname, setting, &Patterns);
+    Config_InitPatternList(boxname, setting, &Patterns, TRUE);
 
     if (length == 0)
         length = wcslen(string);

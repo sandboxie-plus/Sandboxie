@@ -75,6 +75,33 @@ BEGIN
 END
 
 
+STATUS_DIALOG DIALOGEX 0, 0, 230, 50
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CTEXT           "",ID_STATUS_INFO,15,5,200,40
+END
+
+
+ABOUT_DIALOG DIALOGEX 0, 0, 287, 211
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "",ID_ABOUT_FRAME,27,8,226,60
+    CONTROL         "",ID_ABOUT_LOGO,"Static",SS_BITMAP | WS_GROUP,35,15,5,5
+    CTEXT           "",ID_ABOUT_INFO,15,80,255,100
+    PUSHBUTTON      "",ID_BUTTON_1,45,180,55,14
+    DEFPUSHBUTTON   "",ID_BUTTON_2,115,180,55,14
+    PUSHBUTTON      "",ID_BUTTON_3,185,180,55,14
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// IMAGE
+//
+
+MASTHEADLOGO            IMAGE                   "../res/MastheadLogo.jpg"
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version

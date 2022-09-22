@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v1.1
@@ -43,7 +43,7 @@ jobs:
 
       - name: Cache Qt
         id: cache-qt
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ runner.workspace }}\Qt
           key: Qt-5.15.2-QtCache
@@ -69,11 +69,14 @@ jobs:
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
       - name: Installing Jom
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache-qt.outputs.cache-hit != 'true'
         run: SandboxiePlus\install_jom.cmd
 
       - name: Build Sandboxie-Plus 64 bit
         run: SandboxiePlus\qmake_plus.cmd x64
+
+      - name: Build SbieShell 64 bit
+        run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=x64
 
       - name: Build Sandboxie-Plus 32 bit
         run: SandboxiePlus\qmake_plus.cmd Win32
@@ -82,7 +85,7 @@ jobs:
         run: Installer\merge_builds.cmd
 
       - name: Upload Sandboxie 32
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Sandboxie_x86
           path: |
@@ -90,7 +93,7 @@ jobs:
           retention-days: 60
 
       - name: Upload Sandboxie 64
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Sandboxie_x64
           path: |

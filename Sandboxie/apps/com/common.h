@@ -57,7 +57,7 @@ static BOOLEAN IsWindows81 = FALSE;
             SourceFunc = (void *)func;                              \
     }                                                               \
     __sys_##func =                                                  \
-        (ULONG_PTR)SbieDll_Hook(FuncName, SourceFunc, my_##func);   \
+        (ULONG_PTR)SbieDll_Hook(FuncName, SourceFunc, my_##func, KernelBase);   \
     if (! __sys_##func)                                             \
         hook_success = FALSE;                                       \
     }

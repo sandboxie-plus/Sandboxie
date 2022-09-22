@@ -28,7 +28,10 @@
 #include "core/drv/api_defs.h"
 #include "core/svc/msgids.h"
 #include "common/my_version.h"
-
+//#include "core/low/lowdata.h"
+//
+//extern SBIELOW_DATA* SbieApi_data;
+//#define SBIELOW_CALL(x) ((P_##x)&SbieApi_data->x##_code)
 
 #pragma optimize("",off)
 
@@ -107,7 +110,7 @@ _FX NTSTATUS SbieApi_Ioctl(ULONG64 *parms)
         WCHAR dbg[1024];
         extern const wchar_t* Trace_SbieDrvFunc2Str(ULONG func);
         Sbie_snwprintf(dbg, 1024, L"SbieApi_Ioctl: %s %s", Dll_ImageName, Trace_SbieDrvFunc2Str((ULONG)parms[0]));
-        SbieApi_MonitorPut2(MONITOR_OTHER | MONITOR_TRACE, dbg, FALSE);
+        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, dbg);
     }
 
     if (SbieApi_DeviceHandle == INVALID_HANDLE_VALUE) {
@@ -141,9 +144,28 @@ _FX NTSTATUS SbieApi_Ioctl(ULONG64 *parms)
         // processing a request before sending the next request
         //
 
-        status = NtDeviceIoControlFile(
-            SbieApi_DeviceHandle, NULL, NULL, NULL, &MyIoStatusBlock,
-            API_SBIEDRV_CTLCODE, parms, sizeof(ULONG64) * 8, NULL, 0);
+        extern P_NtDeviceIoControlFile __sys_NtDeviceIoControlFile;
+        if (__sys_NtDeviceIoControlFile) {
+        
+            //
+            // once NtDeviceIoControlFile is hooked, bypass it
+            //
+        
+            status = __sys_NtDeviceIoControlFile(
+                SbieApi_DeviceHandle, NULL, NULL, NULL, &MyIoStatusBlock,
+                API_SBIEDRV_CTLCODE, parms, sizeof(ULONG64) * 8, NULL, 0);
+        
+        } else {
+        
+            status = NtDeviceIoControlFile(
+                SbieApi_DeviceHandle, NULL, NULL, NULL, &MyIoStatusBlock,
+                API_SBIEDRV_CTLCODE, parms, sizeof(ULONG64) * 8, NULL, 0);
+        }
+
+        // that would be even better but would only work in the native case
+        //status = SBIELOW_CALL(NtDeviceIoControlFile)(
+        //        SbieApi_DeviceHandle, NULL, NULL, NULL, &MyIoStatusBlock,
+        //        API_SBIEDRV_CTLCODE, parms, sizeof(ULONG64) * 8, NULL, 0);
     }
 
     return status;
@@ -999,7 +1021,12 @@ _FX LONG SbieApi_CheckInternetAccess(
         //
 
         BOOLEAN chk = FALSE;
-        if (len == 6) {
+        if (len == 12) {
+            
+            if (_wcsnicmp(ptr, File_Afd, 3) == 0) // Afd\Endpoint
+                chk = TRUE;
+
+        } else if (len == 6) {
             
             if (_wcsnicmp(ptr, File_RawIp, 6) == 0)
                 chk = TRUE;
@@ -1478,6 +1505,7 @@ _FX LONG SbieApi_MonitorPut(
     return SbieApi_MonitorPut2(Type, Name, TRUE);
 }
 
+
 //---------------------------------------------------------------------------
 // SbieApi_MonitorPut2
 //---------------------------------------------------------------------------
@@ -1503,6 +1531,31 @@ _FX LONG SbieApi_MonitorPut2(
     return status;
 }
 
+
+//---------------------------------------------------------------------------
+// SbieApi_MonitorPutMsg
+//---------------------------------------------------------------------------
+
+
+_FX LONG SbieApi_MonitorPutMsg(
+    ULONG Type,
+    const WCHAR* Message)
+{
+    NTSTATUS status;
+    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+    API_MONITOR_PUT2_ARGS *args = (API_MONITOR_PUT2_ARGS *)parms;
+
+    memset(parms, 0, sizeof(parms));
+    args->func_code                 = API_MONITOR_PUT2;
+    args->log_type.val              = Type;
+    args->log_len.val64             = wcslen(Message) * sizeof(WCHAR);
+    args->log_ptr.val64             = (ULONG64)(ULONG_PTR)Message;
+    args->check_object_exists.val64 = FALSE;
+    args->is_message.val64          = TRUE;
+    status = SbieApi_Ioctl(parms);
+
+    return status;
+}
 
 //---------------------------------------------------------------------------
 // SbieApi_MonitorGet

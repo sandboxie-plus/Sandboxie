@@ -66,6 +66,12 @@ ProxyHandle::ProxyHandle(HANDLE heap, ULONG size_of_data,
     m_unique_id = 'sbox';
 }
 
+ProxyHandle::~ProxyHandle()
+{
+	// cleanup CS
+	DeleteCriticalSection(&m_lock);
+}
+
 
 //---------------------------------------------------------------------------
 // Create

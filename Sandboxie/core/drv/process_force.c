@@ -243,6 +243,11 @@ _FX BOX *Process_GetForcedStartBox(
             box = Process_CheckForceFolder(
                         &boxes, ImagePath2, force_alert, &alert);
 
+            if ((! box) && (! alert)) {
+                box = Process_CheckForceProcess(
+                    &boxes, ImageName, force_alert, &alert);
+            }
+
             if ((! box) && CurDir && (! alert)) {
                 box = Process_CheckForceFolder(
                         &boxes, CurDir, force_alert, &alert);
@@ -251,11 +256,6 @@ _FX BOX *Process_GetForcedStartBox(
             if ((! box) && DocArg && (! alert)) {
                 box = Process_CheckForceFolder(
                         &boxes, DocArg, force_alert, &alert);
-            }
-
-            if ((! box) && (! alert)) {
-                box = Process_CheckForceProcess(
-                    &boxes, ImageName, force_alert, &alert);
             }
 
             if (box && Process_IsImmersiveProcess(
@@ -284,7 +284,7 @@ _FX BOX *Process_GetForcedStartBox(
     }
 
     //
-    // check if proces should be injected
+    // check if process should be injected
     //
 
     if ((! box) && (alert != 1) && pHostInject != NULL) {
@@ -315,7 +315,7 @@ _FX BOX *Process_GetForcedStartBox(
 
 			box = (BOX *)-1;
 		}
-		else
+		else if ((force_alert == 1) && Conf_Get_Boolean(NULL, L"NotifyForceProcessDisabled", 0, FALSE))
 		{
 			Log_Msg_Process(MSG_1301, ImageName, NULL, SessionId, ProcessId);
 		}

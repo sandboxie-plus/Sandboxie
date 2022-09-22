@@ -1594,7 +1594,7 @@ _FX NTSTATUS Thread_CheckTokenObject(
     //
     // this function is called from Syscall_DuplicateHandle_2 to check
     // access granted to a token object.  if none of the special permissions
-    // were requested, we can immmediately approve the request
+    // were requested, we can immediately approve the request
     //
 
     if (! (GrantedAccess & TOKEN_DENIED_ACCESS_MASK))

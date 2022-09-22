@@ -1219,16 +1219,6 @@ void CAppPage::UpdateWebTemplates(CBox &box)
 
     UpdateTemplates2(
         box, L"opera.exe", OperaBookmarksTmpl, OperaBookmarks3, OperaBookmarks3);
-
-    //
-    // find and remove invalid OpenFilePath reference:
-    //      OpenFilePath=bookmarks.exe,bookmarks*
-    //
-
-    const CString &InvalidEntry1(L"bookmarks*");
-
-    UpdateTemplates2(
-        box, L"bookmarks.exe", L'\0', InvalidEntry1, InvalidEntry1);
 }
 
 

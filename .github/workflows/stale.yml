@@ -1,0 +1,30 @@
+name: "Mark stale issues and PRs"
+ 
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: "0 0 * * *"
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+    - uses: actions/stale@v5
+      with:
+        operations-per-run: 50
+        days-before-stale: 90
+        days-before-close: 14
+        close-issue-reason: "not_planned"
+        stale-issue-message: "As it has been 3 months since the last activity, we are automatically closing this issue in 14 days. If it is still present, please respond to help us investigate on newer Sandboxie versions. Thank you for your contribution!"
+        stale-pr-message: "This pull request is stale because it has been open for 3 months with no activity. It will be closed in 14 days if no further activity occurs. Thank you for your contribution!"
+        stale-issue-label: "stale"
+        stale-pr-label: "stale"
+        remove-stale-when-updated: true
+        exempt-all-assignees: true
+        any-of-issue-labels: "more info needed,answered?,Fixed ???,build issue,incorrect"
+        exempt-issue-labels: "Feature request,Low priority,Regression,Stalled work,ToDo ASAP,ToDo,Work in progress,Workaround,Known issue,Bug,suggestions,help wanted"
+        any-of-pr-labels: "more info needed,answered?,incorrect"
+        exempt-pr-labels: "Feature request,Low priority,dependencies,Work in progress,Stalled work,ToDo ASAP,ToDo,help wanted"

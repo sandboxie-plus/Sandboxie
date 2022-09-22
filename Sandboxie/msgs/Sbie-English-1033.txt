@@ -36,9 +36,9 @@ SBIE1106 error %2, detail %3
 SBIE1108 Procedure %2 could not be analysed
 .
 
-1109;evt;err;01
-SBIE1109 Invalid license information:  %2
-.
+# 1109;evt;err;01
+# SBIE1109 Invalid license information:  %2
+# .
 
 1110;evt;err;01
 SBIE1110 Cannot intercept type %3, error %2
@@ -108,9 +108,9 @@ SBIE1153 Sandboxie initialization failed.  Close all programs and then re-instal
 SBIE1201 Not enough memory
 .
 
-1202;pop;err;01
-SBIE1202 Cannot update license information:  %2
-.
+# 1202;pop;err;01
+# SBIE1202 Cannot update license information:  %2
+# .
 
 1203;pop;err;01
 SBIE1203 Cannot build path list (error in %2)
@@ -190,9 +190,9 @@ SBIE1301 Program '%2' was launched outside of the sandbox
 # SBIE1302 Sandbox '%2' is not defined or not enabled
 # .
 
-1303;pop;inf;01
-SBIE1303 Only one sandbox can be active at a time
-.
+# 1303;pop;inf;01
+# SBIE1303 Only one sandbox can be active at a time
+# .
 
 # 1304;pop;inf;01
 # SBIE1304 Blocked simulated keyboard or mouse input by process '%2'
@@ -214,9 +214,9 @@ SBIE1308 Program cannot start due to restrictions - %2
 SBIE1309 Denied attempt to change account password
 .
 
-1310;pop;inf;01
-SBIE1310 Extended features are disabled until the license is reactivated
-.
+# 1310;pop;inf;01
+# SBIE1310 Extended features are disabled until the license is reactivated
+# .
 
 #1311;pop;inf;01
 #SBIE1311 Blocked request to change desktop wallpaper by process '%2'
@@ -354,6 +354,14 @@ SBIE2108 Faking successful completion for program '%2'
 # SBIE2110 Preparing WinSxS dependencies for '%2'
 # .
 
+2111;pop;inf;01
+SBIE2111 Process is not accessible: %3, call %2
+.
+
+2112;pop;inf;01
+SBIE2112 Object is not accessible: %3, call %2
+.
+
 # %2 = Mozilla Firefox
 2191;pop;inf;01
 SBIE2191 %2 should not be updated while running under Sandboxie.
@@ -369,6 +377,10 @@ SBIE2193 Make sure to delete the sandbox after completing the update process.
 
 2194;pop;inf;01
 SBIE2194 MSI installer requires %2 option to be set in the ini, what however weakens the isolation.
+.
+
+2195;pop;inf;01
+SBIE2195 To run Explorer.exe sandboxed, the access for COM infrastructure must not be Open.
 .
 
 2198;pop;inf;01
@@ -481,6 +493,10 @@ SBIE2223 To increase the file size limit for copying files, please double-click 
 SBIE2224 Sandboxed program has crashed: %2
 .
 
+2225;pop;wrn;01
+SBIE2225 An attempt was made to access an EFS file: %2
+.
+
 #----------------------------------------------------------------------------
 # SbieDrv
 #
@@ -578,6 +594,10 @@ SBIE2322 Cannot rewrite Sandboxie.ini:  %2
 
 2323;pop;err;01
 SBIE2323 Cryptography error:  %2
+.
+
+2325;pop;err;01
+SBIE2325 Debug:  %2
 .
 
 2326;pop;err;01
@@ -858,45 +878,45 @@ Please terminate programs running in the sandbox before deleting its contents
 Delete command failed:  %0
 .
 
-3231;txt;01
-You have installed Sandboxie more than 30 days ago.
-.
+# 3231;txt;01
+# You have installed Sandboxie more than 30 days ago.
+# .
 
-3232;txt;01
-Personal use of Sandboxie is permitted free of charge for as long as you wish.
-.
+#3232;txt;01
+#Personal use of Sandboxie is permitted free of charge for as long as you wish.
+#.
 
-3233;txt;01
-However, the free version will now pause for a few seconds.
-.
+# 3233;txt;01
+# However, the free version will now pause for a few seconds.
+# .
 
-3234;txt;01
-However, the free version permits use of one sandbox at a time.
-.
+# 3234;txt;01
+# However, the free version permits use of one sandbox at a time.
+# .
 
-3235;txt;01
-This restriction is removed in the paid version of Sandboxie.
-.
+# 3235;txt;01
+# This restriction is removed in the paid version of Sandboxie.
+# .
 
-3236;txt;01
-In addition, the paid version enables automatic sandboxing for selected programs.
-.
+# 3236;txt;01
+# In addition, the paid version enables automatic sandboxing for selected programs.
+# .
 
-3237;txt;01
-For more information and to purchase the software, please click the following link:
-.
+# 3237;txt;01
+# For more information and to purchase the software, please click the following link:
+# .
 
-3238;txt;01
-Please wait %2 more seconds
-.
+# 3238;txt;01
+# Please wait %2 more seconds
+# .
 
-3239;txt;01
-Click to close this window and continue
-.
+# 3239;txt;01
+# Click to close this window and continue
+# .
 
-3240;txt;01
-Click to close this window and stop
-.
+# 3240;txt;01
+# Click to close this window and stop
+# .
 
 3241;txt;01
 Sandboxie is requesting Administrator privileges
@@ -1007,6 +1027,22 @@ Unknown user, configuration settings will not be saved
 
 3314;txt;01
 An error occurred while applying default settings for sandbox '%2'
+.
+
+3315;txt;01
+Deleting Sandbox contents
+.
+
+3316;txt;01
+Do you want to abort the operation?
+.
+
+3317;txt;01
+Preparing to delete: %2
+.
+
+3318;txt;01
+Deleting: %2
 .
 
 # 3321;txt;01
@@ -1207,9 +1243,9 @@ Getting Started &Tutorial
 Check for &Updates
 .
 
-3455;txt;01
-&Register Sandboxie
-.
+# 3455;txt;01
+# &Register Sandboxie
+# .
 
 3456;txt;01
 &About Sandboxie
@@ -1219,9 +1255,9 @@ Check for &Updates
 &Sandboxie Forum (Web)
 .
 
-3458;txt;01
-Allow direct access to Windows Font Cache
-.
+# 3458;txt;01
+# Allow direct access to Windows Font Cache
+# .
 
 3459;txt;01
 Allow direct access to qWave driver (Google Hangouts)
@@ -1257,6 +1293,10 @@ Run &Windows Explorer
 
 3467;txt;01
 Upgrade to Sandboxie-Plus
+.
+
+3468;txt;01
+Sandboxie-Plus Migration Guide
 .
 
 3471;txt;01
@@ -2105,9 +2145,9 @@ program that is already running.  The settings
 will apply the next time this program starts.
 .
 
-3771;txt;01
-(This feature is only available in the registered version of Sandboxie)
-.
+# 3771;txt;01
+# (This feature is only available in the registered version of Sandboxie)
+# .
 
 3772;txt;02
 Are you sure you want to set %2 as a forced program?
@@ -2660,21 +2700,21 @@ You can always change the Drop Rights setting by opening the Sandbox Settings wi
 # Sandboxie Control:  Sandbox Settings:  Print Spooler
 #----------------------------------------------------------------------------
 
-3950;txt;01
-Print Spooler
-.
+# 3950;txt;01
+# Print Spooler
+# .
 
-3951;txt;01
-The Windows Print Spooler runs outside of Sandboxie's supervision.  A sandboxed application that requests the Print Spooler print to a file will be blocked, because this file will be written outside the sandbox.
-.
+# 3951;txt;01
+# The Windows Print Spooler runs outside of Sandboxie's supervision.  A sandboxed application that requests the Print Spooler print to a file will be blocked, because this file would be written outside the sandbox.
+# .
 
-3952;txt;01
-If you wish to allow the Print Spooler to print to a file, you can enable this setting. It is recommended that you enable this option only when needed.
-.
+# 3952;txt;01
+# If you wish to allow the Print Spooler to print to a file, you can enable this setting. It is recommended that you enable this option only when needed.
+# .
 
-3953;txt;01
-Allow the Windows Print Spooler to print to file.
-.
+# 3953;txt;01
+# Allow the Windows Print Spooler to print to file.
+# .
 
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  Network Files
@@ -3324,6 +3364,10 @@ Allow direct access to %2 session management
 Allow direct access to %2 notes
 .
 
+4342;txt;01
+Enable %2 fix for Windows 11 KB5014019
+.
+
 4356;txt;02
 Allow direct access to %2 bookmarks
 .
@@ -3486,7 +3530,7 @@ If you prefer to use a UI to control these options, please upgrade to Sandboxie-
 .
 
 6004;pop;err;01
-The configuration of box %2 requires a supporter certificate.
+The configuration %3 of box %2 requires a supporter certificate. Processes in this box will be terminated after 5 minutes. For prolonged use, please consider supporting this project.
 .
 
 6005;txt;01
@@ -3508,6 +3552,31 @@ Sandboxie Plus offers enhanced privacy protection by switching the old behavior 
 The legacy UI of Sandboxie classic does not implement support for this mode of operation. Although it can be configured using the ini file, it is recommended to use the modern Sandboxie-Plus UI (SandMan.exe) if you want to use privacy enhanced boxes.
 .
 
+6010;txt;01
+You have installed Sandboxie more than %2 days ago.
+
+So, you think David and the contributors are doing a great job?
+
+Why don't you show it by supporting the project and getting a Supporter Certificate?
+
+Sandboxie without a valid supporter certificate will now pause for a few seconds, to give you time to contemplate the possibility of supporting the project.
+.
+
+6011;txt;01
+Wait
+.
+
+6012;txt;01
+Continue
+.
+
+6013;txt;01
+Quit
+.
+
+6014;txt;01
+Get Certificate
+.
 
 #----------------------------------------------------------------------------
 # Getting Started Wizard
@@ -3597,186 +3666,186 @@ The default settings in Sandboxie provide full protection, but you may wish to r
 # License Manager
 #----------------------------------------------------------------------------
 
-7901;txt;01
-Sandboxie License Manager
-.
+# 7901;txt;01
+# Sandboxie License Manager
+# .
 
-7902;txt;01
-System Code %2
-.
+# 7902;txt;01
+# System Code %2
+# .
 
-7903;txt;01
-In the future, activate the license without asking
-.
+# 7903;txt;01
+# In the future, activate the license without asking
+# .
 
 #----------------------------------------------------------------------------
 
-7921;txt;01
-Sandboxie is registered and the license is activated.
-.
+# 7921;txt;01
+# Sandboxie is registered and the license is activated.
+# .
 
-7922;txt;01
-Sandboxie is registered but the license should be reactivated now.
-.
+# 7922;txt;01
+# Sandboxie is registered but the license should be reactivated now.
+# .
 
 # was 3603;txt;01
-7923;txt;01
-Unregistered copy.  Register today!
-.
+# 7923;txt;01
+# Unregistered copy.  Register today!
+# .
 
-7924;txt;01
-The license for Sandboxie will have to be reactivated in %2 days.
-.
+# 7924;txt;01
+# The license for Sandboxie will have to be reactivated in %2 days.
+# .
 
-7925;txt;01
-The license for Sandboxie has now been activated.
-.
+# 7925;txt;01
+# The license for Sandboxie has now been activated.
+# .
 
-7926;txt;01
-The expiration date of your Product Key is %2.
-.
+# 7926;txt;01
+# The expiration date of your Product Key is %2.
+# .
 
-7927;txt;01
-Your Product Key does not have an expiration date.
-.
+# 7927;txt;01
+# Your Product Key does not have an expiration date.
+# .
 
 #----------------------------------------------------------------------------
 
-7931;txt;01
-Your copy of Sandboxie is registered with an obsolete Registration Key.
-.
+# 7931;txt;01
+# Your copy of Sandboxie is registered with an obsolete Registration Key.
+# .
 
-7932;txt;01
-Please permit the License Manager to connect to the License Server and upgrade your old Registration Key to a new Product Key.  You will not be charged any fees for this upgrade.
-.
+# 7932;txt;01
+# Please permit the License Manager to connect to the License Server and upgrade your old Registration Key to a new Product Key.  You will not be charged any fees for this upgrade.
+# .
 
-7933;txt;01
-Your Registration Key is not recognized by the License Server.
-.
+# 7933;txt;01
+# Your Registration Key is not recognized by the License Server.
+# .
 
-7934;txt;01
-For licensing questions please contact: support@sandboxie.com
-.
+# 7934;txt;01
+# For licensing questions please contact: support@sandboxie.com
+# .
 
-7935;txt;01
-Your new Product Key is:
-.
+# 7935;txt;01
+# Your new Product Key is:
+# .
 
-7936;txt;01
-Please make sure to record this Product Key in a safe place for future reference.  Use the button below to copy your Product Key to the clipboard, from which you can paste it into a document and print it.
-.
+# 7936;txt;01
+# Please make sure to record this Product Key in a safe place for future reference.  Use the button below to copy your Product Key to the clipboard, from which you can paste it into a document and print it.
+# .
 
-7937;txt;01
-&Upgrade Registration Key to Product Key
-.
+# 7937;txt;01
+# &Upgrade Registration Key to Product Key
+# .
 
 #----------------------------------------------------------------------------
 
 # was 3612;txt;01
-7941;txt;01
-Sandboxie registration is made through a third-party payment processor.  Begin the registration process by visiting the Sandboxie web site at the link below.
-.
+# 7941;txt;01
+# Sandboxie registration is made through a third-party payment processor.  Begin the registration process by visiting the Sandboxie web site at the link below.
+# .
 
-7942;txt;01
-To activate your license for Sandboxie, enter the Product Key which appears in your receipt for payment, then click the button to activate your license.
-.
+# 7942;txt;01
+# To activate your license for Sandboxie, enter the Product Key which appears in your receipt for payment, then click the button to activate your license.
+# .
 
-7943;txt;01
-Do you wish to enter a new Product Key now?
-.
+# 7943;txt;01
+# Do you wish to enter a new Product Key now?
+# .
 
-7944;txt;01
-&Activate License
-.
+# 7944;txt;01
+# &Activate License
+# .
 
 # was first line of 3617;txt;01
-7945;txt;01
-Your copy of Sandboxie is now registered.
-.
+# 7945;txt;01
+# Your copy of Sandboxie is now registered.
+# .
 
 # was second line of 3617;txt;01
-7946;txt;01
-Thank you for supporting Sandboxie!
-.
+# 7946;txt;01
+# Thank you for supporting Sandboxie!
+# .
 
 #----------------------------------------------------------------------------
 
-7951;txt;01
-Do you wish to activate the license now?
-.
+# 7951;txt;01
+# Do you wish to activate the license now?
+# .
 
-7952;txt;01
-Please visit the Sandboxie web site at the link below to order a new Product Key.
-.
+# 7952;txt;01
+# Please visit the Sandboxie web site at the link below to order a new Product Key.
+# .
 
-7961;txt;01
-Clear License &Information
-.
+# 7961;txt;01
+# Clear License &Information
+# .
 
-7962;txt;01
-Are you sure you wish to clear the license information in Sandboxie?
-
-You can activate your license at any time by entering a Product Key.
-.
+# 7962;txt;01
+# Are you sure you wish to clear the license information in Sandboxie?
+#
+# You can activate your license at any time by entering a Product Key.
+# .
 
 #----------------------------------------------------------------------------
 
-7971;txt;01
-This is not a valid Product Key.
-.
+# 7971;txt;01
+# This is not a valid Product Key.
+# .
 
-7972;txt;01
-This is not a valid System Code.
-.
+# 7972;txt;01
+# This is not a valid System Code.
+# .
 
-7973;txt;01
-This is not a valid Activation Key.  [%2]
-.
+# 7973;txt;01
+# This is not a valid Activation Key.  [%2]
+# .
 
-7974;txt;01
-Invalid response from the License Server.
-.
+# 7974;txt;01
+# Invalid response from the License Server.
+# .
 
-7975;txt;01
-Product activation failed:
-.
+# 7975;txt;01
+# Product activation failed:
+# .
 
-7976;txt;01
-Would you like to try again now?
-.
+# 7976;txt;01
+# Would you like to try again now?
+# .
 
-7977;txt;01
-If you need to activate Sandboxie on a computer that does not have Internet access,
-please see the Sandboxie Licensing FAQ for information about Offline Activation.
-.
+# 7977;txt;01
+# If you need to activate Sandboxie on a computer that does not have Internet access,
+# please see the Sandboxie Licensing FAQ for information about Offline Activation.
+# .
 
-7978;txt;01
-Current date (%2) is later than date sent from the License Server (%3).
-.
+# 7978;txt;01
+# Current date (%2) is later than date sent from the License Server (%3).
+# .
 
-7982;txt;01
-The License Server did not specify reason for failure of activation.
-.
+# 7982;txt;01
+# The License Server did not specify reason for failure of activation.
+# .
 
-7983;txt;01
-Product Key is not recognized by the License Server.
-.
+# 7983;txt;01
+# Product Key is not recognized by the License Server.
+# .
 
-7984;txt;01
-Product Key cannot be used beyond its expiration date of %2.
-.
+# 7984;txt;01
+# Product Key cannot be used beyond its expiration date of %2.
+# .
 
-7985;txt;01
-Product Key was activated on too many computers.
-.
+# 7985;txt;01
+# Product Key was activated on too many computers.
+# .
 
-7986;txt;01
-Product Key was cancelled because it was made public on the Internet.
-.
+# 7986;txt;01
+# Product Key was cancelled because it was made public on the Internet.
+# .
 
-7987;txt;01
-Product Key was cancelled because the order was refunded.
-.
+# 7987;txt;01
+# Product Key was cancelled because the order was refunded.
+# .
 
 #----------------------------------------------------------------------------
 # SandboxieInstall

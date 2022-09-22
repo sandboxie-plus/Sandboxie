@@ -46,6 +46,7 @@ enum ESbieMsgCodes
 	SB_NameExists,
 	SB_PasswordBad,
 	SB_Canceled,
+	SB_LastError
 };
 
 class CSbieStatus

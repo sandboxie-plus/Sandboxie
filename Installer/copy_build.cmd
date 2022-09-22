@@ -7,9 +7,9 @@ set qtPath=%~dp0..\..\Qt\5.15.2\msvc2019_64
 set instPath=%~dp0\SbiePlus64
 IF %archPath% == x86 (
 	set archPath=Win32
-	set instPath=%~dp0\SbiePlus32
 	set sysPath=%windir%\SysWOW64
-  set qtPath=%~dp0..\..\Qt\5.15.2\msvc2019
+	set qtPath=%~dp0..\..\Qt\5.15.2\msvc2019
+	set instPath=%~dp0\SbiePlus32
 )
 set srcPath=%~dp0..\SandboxiePlus\Bin\%archPath%\Release
 set sbiePath=%~dp0..\Sandboxie\Bin\%archPath%\SbieRelease
@@ -22,14 +22,16 @@ echo source: %sbiePath%
 
 mkdir %instPath%
 
-ECHO Copying VC Runtime
+ECHO Copying VC Runtime files
 copy %sysPath%\msvcp140.dll %instPath%\
-copy %sysPath%\vcruntime140.dll %instPath%\
 copy %sysPath%\msvcp140_1.dll %instPath%\
-copy %sysPath%\vcruntime140_1.dll %instPath%\
+copy %sysPath%\vcruntime140.dll %instPath%\
+IF %archPath% == x64 (
+	copy %sysPath%\vcruntime140_1.dll %instPath%\
+)
 
 
-ECHO Copying Qt Librarys
+ECHO Copying Qt libraries
 
 copy %qtPath%\bin\Qt5Core.dll %instPath%\
 copy %qtPath%\bin\Qt5Gui.dll %instPath%\
@@ -46,7 +48,7 @@ copy %qtPath%\plugins\platforms\qwindows.dll %instPath%\platforms\
 mkdir %instPath%\styles
 copy %qtPath%\plugins\styles\qwindowsvistastyle.dll %instPath%\styles\
 
-ECHO Copying OpenSSL libs
+ECHO Copying OpenSSL libraries
 rem copy /y %~dp0OpenSSL\%archPath%\libeay32.dll %instPath%\
 rem copy /y %~dp0OpenSSL\%archPath%\ssleay32.dll %instPath%\
 IF %archPath% == Win32 (
@@ -57,10 +59,10 @@ IF %archPath% == x64 (
   copy /y %~dp0OpenSSL\x64\libssl-1_1-x64.dll %instPath%\
   copy /y %~dp0OpenSSL\x64\libcrypto-1_1-x64.dll %instPath%\
 )
-rem for openssl
+rem for OpenSSL
 copy %sysPath%\msvcr100.dll %instPath%\
 
-ECHO Copying Project and Librarys
+ECHO Copying SandMan project and libraries
 copy %srcPath%\MiscHelpers.dll %instPath%\
 copy %srcPath%\MiscHelpers.pdb %instPath%\
 copy %srcPath%\QSbieAPI.dll %instPath%\
@@ -118,6 +120,9 @@ IF %archPath% == x64 (
   mkdir %instPath%\32\
   copy /y %~dp0..\Sandboxie\Bin\Win32\SbieRelease\SbieSvc.exe %instPath%\32\
   copy /y %~dp0..\Sandboxie\Bin\Win32\SbieRelease\SbieDll.dll %instPath%\32\
+
+  copy /y %~dp0..\SandboxiePlus\x64\Release\SbieShellExt.dll %instPath%\
+  copy /y %~dp0..\SandboxiePlus\x64\Release\SbieShellPkg.msix %instPath%\
 )
 
 copy /y %~dp0..\Sandboxie\install\Templates.ini %instPath%\

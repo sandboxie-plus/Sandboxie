@@ -36,7 +36,7 @@ class CRecoveryWindow : public QDialog
 	Q_OBJECT
 
 public:
-	CRecoveryWindow(const CSandBoxPtr& pBox, QWidget *parent = Q_NULLPTR);
+	CRecoveryWindow(const CSandBoxPtr& pBox, bool bImmediate = false, QWidget *parent = Q_NULLPTR);
 	~CRecoveryWindow();
 
 	bool		IsDeleteShapshots() { return m_DeleteShapshots; }
@@ -51,15 +51,18 @@ public slots:
 	int			exec();
 
 	int			FindFiles();
+	void		SelectFiles();
 	void		AddFile(const QString& FilePath, const QString& BoxPath);
 
 private slots:
 	void		OnAddFolder();
 	void		OnRecover();
+	void		OnDelete();
 	void		OnTargetChanged();
 	void		OnDeleteAll();
 	void		OnDeleteEverything();
 	void		OnCloseUntil();
+	void		OnAutoDisable();
 	void		OnCount(quint32 fileCount, quint32 folderCount, quint64 totalSize);
 
 protected:
@@ -68,6 +71,13 @@ protected:
 	int			FindFiles(const QString& Folder);
 	int			FindBoxFiles(const QString& Folder);
 	QPair<int, quint64> FindFiles(const QString& BoxedFolder, const QString& RealFolder, const QString& Name, const QString& ParentID = QString());
+
+	struct SRecItem {
+		QString FullPath;
+		QString RelPath;
+	};
+
+	QMap<QString, SRecItem> GetFiles();
 
 	void		RecoverFiles(bool bBrowse, QString RecoveryFolder = QString());
 
@@ -84,6 +94,7 @@ protected:
 	bool m_bTargetsChanged;
 	bool m_bReloadPending;
 	bool m_DeleteShapshots;
+	bool m_bImmediate;
 
 private:
 	Ui::RecoveryWindow ui;

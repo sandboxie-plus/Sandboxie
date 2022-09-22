@@ -362,6 +362,8 @@ void Secure_InitSecurityDescriptors(void)
 
 _FX BOOLEAN Secure_Init(void)
 {
+    HMODULE module = NULL;
+
     void *RtlQueryElevationFlags;
     void *RtlCheckTokenMembershipEx;
 
@@ -722,8 +724,17 @@ _FX NTSTATUS Secure_NtDuplicateObject(
 
         if (SourceProcessHandle == NtCurrentProcess()) {
 
-            if (TargetProcessHandle == NtCurrentProcess() && TargetHandle)
-                File_DuplicateRecover(SourceHandle, *TargetHandle);
+            if (TargetProcessHandle == NtCurrentProcess() && TargetHandle) {
+
+                //
+                // this also duplicates the "recoverability"
+                // of the old handle to the new handle.  needed in particular for
+                // SHFileOperation to recover correctly on Windows Vista
+                //
+
+                if(SourceHandle && *TargetHandle)
+                    Handle_SetupDuplicate(SourceHandle, *TargetHandle);
+            }
 
             if (SourceHandle)
                 Key_NtClose(SourceHandle);
@@ -988,8 +999,8 @@ _FX NTSTATUS Ldr_NtQueryInformationToken(
         TokenInformation, TokenInformationLength, ReturnLength);
 
     //
-    // To make the process think we need to chage here a few values
-    // we also ensure that tha token belongs to the current process
+    // To make the process think we need to change here a few values
+    // we also ensure that the token belongs to the current process
     //
 
     if (Secure_FakeAdmin && (SbieApi_QueryProcessInfoEx(0, 'ippt', (LONG_PTR)(hTokenReal ? hTokenReal : TokenHandle))))

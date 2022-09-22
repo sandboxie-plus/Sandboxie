@@ -14,6 +14,8 @@ public:
 	static void					SetMaxCellWidth(int iMaxWidth) { m_MaxCellWidth = iMaxWidth; }
 	static void					SetCellSeparator(const QString& Sep) { m_CellSeparator = Sep; }
 
+	virtual QList<QStringList>	DumpPanel();
+
 	static QString				m_CopyCell;
 	static QString				m_CopyRow;
 	static QString				m_CopyPanel;
@@ -44,6 +46,8 @@ protected slots:
 	virtual void				RecursiveCopyPanel(const QModelIndex& ModelIndex, QList<QStringList>& Rows, int Level = 0);
 
 protected:
+	void						UpdateCopyMenu();
+	void						AddCopyMenu(QMenu* pMenu, bool bAddSeparator = true);
 	void						FormatAndCopy(QList<QStringList> Rows, bool Headder = true);
 
 	QMenu*						m_pMenu;
@@ -152,7 +156,7 @@ public:
 	{
 		m_pModel = pModel;
 
-		m_pSortProxy = new CSortFilterProxyModel(false, this);
+		m_pSortProxy = new CSortFilterProxyModel(this);
 		m_pSortProxy->setSortRole(Qt::EditRole);
 		m_pSortProxy->setSourceModel(m_pModel);
 		m_pSortProxy->setDynamicSortFilter(true);

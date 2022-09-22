@@ -43,19 +43,22 @@ public:
 	virtual SB_STATUS		Connect(bool takeOver, bool withQueue);
 	virtual SB_STATUS		Disconnect();
 	virtual bool			IsConnected() const;
+	static  bool			IsWow64();
 
 	virtual QString			GetVersion();
 
 	virtual SB_STATUS		TakeOver();
-	virtual SB_STATUS		WatchIni(bool bEnable = true);
+	virtual SB_STATUS		WatchIni(bool bEnable = true, bool bReLoad = true);
 
 	virtual QString			GetSbiePath() const { return m_SbiePath; }
 	virtual QString			GetIniPath() const { return m_IniPath; }
 
+	virtual QString			ResolveAbsolutePath(const QString& Path);
+
 	virtual void			UpdateDriveLetters();
 	virtual QString			Nt2DosPath(QString NtPath, bool* pOk = NULL) const;
 
-	virtual SB_STATUS		ReloadBoxes(bool bFullUpdate = false);
+	virtual SB_STATUS		ReloadBoxes(bool bForceUpdate = false);
 	static  SB_STATUS		ValidateName(const QString& BoxName);
 	virtual SB_STATUS		CreateBox(const QString& BoxName, bool bReLoad = true);
 
@@ -75,8 +78,8 @@ public:
 	virtual bool			GetProcessExemption(quint32 process_id, quint32 action_id);
 
 	virtual QString			GetBoxedPath(const QString& BoxName, const QString& Path);
-	virtual QString			GetBoxedPath(const CSandBoxPtr& pBox, const QString& Path);
-	virtual QString			GetRealPath(const CSandBoxPtr& pBox, const QString& Path);
+	virtual QString			GetBoxedPath(CSandBox* pBox, const QString& Path);
+	virtual QString			GetRealPath(CSandBox* pBox, const QString& Path);
 
 	enum ESetMode
 	{
@@ -110,6 +113,8 @@ public:
 		eSbieFeaturePMod		= 0x00000004,
 		eSbieFeatureAppC		= 0x00000008,
 		eSbieFeatureSbiL		= 0x00000010,
+
+		eSbieFeatureARM64		= 0x40000000,
 		eSbieFeatureCert		= 0x80000000
 	};
 
@@ -137,14 +142,19 @@ public:
 
 	virtual quint32			GetSessionID() const;
 
+	virtual SB_STATUS		SetSecureParam(const QString& Name, const void* data, size_t size);
+	virtual SB_STATUS		GetSecureParam(const QString& Name, void* data, size_t size);
+
 
 	enum ESbieQueuedRequests
 	{
 		ePrintSpooler = -1,
 		eInvalidQueuedRequests = 0,
 		eFileMigration = 1,
-		eInetBlockade= 2,
+		eInetBlockade = 2,
 	};
+
+	void					LoadEventLog();
 
 public slots:
 	virtual void			SendReplyData(quint32 RequestId, const QVariantMap& Result);
@@ -156,7 +166,12 @@ signals:
 	void					LogSbieMessage(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId);
 	void					ProcessBoxed(quint32 ProcessId, const QString& Path, const QString& Box, quint32 ParentId);
 	void					FileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId);
-	void					BoxClosed(const QString& BoxName);
+
+	void					BoxAdded(const CSandBoxPtr& pBox);
+	void					BoxOpened(const CSandBoxPtr& pBox);
+	void					BoxClosed(const CSandBoxPtr& pBox);
+	void					BoxRemoved(const CSandBoxPtr& pBox);
+
 	void					NotAuthorized(bool bLoginRequired, bool &bRetry);
 	void					QueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 RequestId, const QVariantMap& Data);
 
@@ -226,8 +241,9 @@ protected:
 	QString					m_SbiePath;
 	QString					m_IniPath;
 	QFileSystemWatcher		m_IniWatcher;
-
+	bool					m_IniReLoad;
 	bool					m_bReloadPending;
+	bool					m_bBoxesDirty;
 
 	bool					m_bWithQueue;
 	bool					m_bTerminate;

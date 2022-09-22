@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap2="http://schemas.microsoft.com/appx/manifest/uap/windows10/2"
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
+  xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
+  xmlns:desktop5="http://schemas.microsoft.com/appx/manifest/desktop/windows10/5"
+  xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+  xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
+  IgnorableNamespaces="uap uap2 uap3 rescap desktop desktop4 desktop5 uap10 com">
+  <Identity Name="SandboxieShell" ProcessorArchitecture="neutral" Publisher="E=cert@tonalio.com, CN=Tonalio GmbH, O=Tonalio GmbH, STREET=Badner Strasse 8, L=Bad Voeslau, S=Niederoesterreich, C=AT, OID.1.3.6.1.4.1.311.60.2.1.1=Wiener Neustadt, OID.1.3.6.1.4.1.311.60.2.1.2=Niederoesterreich, OID.1.3.6.1.4.1.311.60.2.1.3=AT, SERIALNUMBER=475036h, OID.2.5.4.15=Private Organization" Version="1.0.0.0" />
+  <Properties>
+    <DisplayName>SandboxieShell</DisplayName>
+    <PublisherDisplayName>Sparse Package</PublisherDisplayName>
+    <Logo>Assets\storelogo.png</Logo>
+    <uap10:AllowExternalContent>true</uap10:AllowExternalContent>
+  </Properties>
+  <Resources>
+    <Resource Language="en-us" />
+  </Resources>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.18950.0" MaxVersionTested="10.0.19000.0" />
+  </Dependencies>
+  <Capabilities>
+    <rescap:Capability Name="runFullTrust" />
+    <rescap:Capability Name="unvirtualizedResources"/>
+  </Capabilities>
+  <Applications>
+    <Application Id="SandboxieShell" Executable="SbieShell.exe" uap10:TrustLevel="mediumIL" uap10:RuntimeBehavior="win32App">
+      <uap:VisualElements AppListEntry="none" DisplayName="SandboxieShell" Description="Sandboxie-Plus Shell Extension" BackgroundColor="transparent" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png">
+      </uap:VisualElements>
+      <Extensions>
+	      <desktop4:Extension Category="windows.fileExplorerContextMenus">
+		      <desktop4:FileExplorerContextMenus>
+		       <desktop5:ItemType Type="Directory">
+		        <desktop5:Verb Id="BowPad" Clsid="EA3E972D-62C7-4309-8F15-883263041E99" />
+		       </desktop5:ItemType>
+		       <desktop5:ItemType Type="Directory\Background">
+		        <desktop5:Verb Id="BowPad" Clsid="EA3E972D-62C7-4309-8F15-883263041E99" />
+		       </desktop5:ItemType>
+		       <desktop5:ItemType Type="*">
+		        <desktop5:Verb Id="BowPad" Clsid="3FD2D9EE-DAF9-404A-9B7E-13B2DCD63950" />
+		       </desktop5:ItemType>
+		      </desktop4:FileExplorerContextMenus>
+	      </desktop4:Extension>
+	      <com:Extension Category="windows.comServer">
+		      <com:ComServer>
+		       <com:SurrogateServer  DisplayName="BowPad Context Menu Handler">
+		        <com:Class Id="EA3E972D-62C7-4309-8F15-883263041E99" Path="SbieShellExt.dll" ThreadingModel="STA"/>
+		       </com:SurrogateServer>
+			   <com:SurrogateServer  DisplayName="BowPad Context Menu Handler">
+				<com:Class Id="3FD2D9EE-DAF9-404A-9B7E-13B2DCD63950" Path="SbieShellExt.dll" ThreadingModel="STA"/>
+			   </com:SurrogateServer>
+		      </com:ComServer>
+	      </com:Extension>
+      </Extensions>
+      <!-- Extensions>
+        <uap:Extension Category="windows.shareTarget">
+          <uap:ShareTarget Description="Send to Sandboxie-Plus">
+            <uap:SupportedFileTypes>
+              <uap:FileType>.jpg</uap:FileType>
+              <uap:FileType>.png</uap:FileType>
+              <uap:FileType>.gif</uap:FileType>
+            </uap:SupportedFileTypes>
+            <uap:DataFormat>StorageItems</uap:DataFormat>
+            <uap:DataFormat>Bitmap</uap:DataFormat>
+          </uap:ShareTarget>
+        </uap:Extension>
+        <desktop4:Extension Category="windows.fileExplorerContextMenus">
+          <desktop4:FileExplorerContextMenus>
+            <desktop5:ItemType Type="Directory\Background">
+              <desktop5:Verb Id="Command1" Clsid="3282E233-C5D3-4533-9B25-44B8AAAFACFA" />
+            </desktop5:ItemType>
+            <desktop5:ItemType Type="*">
+              <desktop5:Verb Id="Command4" Clsid="30DEEDF6-63EA-4042-A7D8-0A9E1B17BB99" />
+            </desktop5:ItemType>
+            <desktop5:ItemType Type=".txt">
+              <desktop5:Verb Id="Command1" Clsid="3282E233-C5D3-4533-9B25-44B8AAAFACFA" />
+              <desktop5:Verb Id="Command2" Clsid="817CF159-A4B5-41C8-8E8D-0E23A6605395" />
+              <desktop5:Verb Id="Command3" Clsid="1476525B-BBC2-4D04-B175-7E7D72F3DFF8" />
+              <desktop5:Verb Id="Command5" Clsid="50419A05-F966-47BA-B22B-299A95492348" />
+            </desktop5:ItemType>
+          </desktop4:FileExplorerContextMenus>
+        </desktop4:Extension>
+        <com:Extension Category="windows.comServer">
+          <com:ComServer>
+            <com:SurrogateServer  DisplayName="Context menu verb handler">
+              <com:Class Id="3282E233-C5D3-4533-9B25-44B8AAAFACFA" Path="SbieShellExt.dll" ThreadingModel="STA"/>
+            </com:SurrogateServer>
+            <com:SurrogateServer  DisplayName="Context menu verb handler">
+              <com:Class Id="817CF159-A4B5-41C8-8E8D-0E23A6605395" Path="SbieShellExt.dll" ThreadingModel="STA"/>
+            </com:SurrogateServer>
+            <com:SurrogateServer  DisplayName="Context menu verb handler">
+              <com:Class Id="1476525B-BBC2-4D04-B175-7E7D72F3DFF8" Path="SbieShellExt.dll" ThreadingModel="STA"/>
+            </com:SurrogateServer>
+            <com:SurrogateServer  DisplayName="Context menu verb handler">
+              <com:Class Id="30DEEDF6-63EA-4042-A7D8-0A9E1B17BB99" Path="SbieShellExt.dll" ThreadingModel="STA"/>
+            </com:SurrogateServer>
+            <com:SurrogateServer  DisplayName="Context menu verb handler">
+              <com:Class Id="50419A05-F966-47BA-B22B-299A95492348" Path="SbieShellExt.dll" ThreadingModel="STA"/>
+            </com:SurrogateServer>
+          </com:ComServer>
+        </com:Extension>
+      </Extensions -->
+    </Application>
+  </Applications>
+</Package>

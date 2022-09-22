@@ -110,7 +110,7 @@ void CSimpleTreeModel::Sync(const QMap<QVariant, QVariantMap>& List)
 				Changed = true;
 				ColValue.Raw = Value;
 
-				//ColValue.Formated = 
+				//ColValue.Formatted = 
 			}
 
 			if(State != Changed)
@@ -249,7 +249,7 @@ void CTreeItemModel::Fill(STreeNode* pParent, const QModelIndex &parent, const Q
 		{
 			i = 0;
 			pNode = MkVirtualNode(CurPath, pParent);
-			pAdded->append(CurPath);
+			if (pAdded) pAdded->append(CurPath);
 			m_Map.insert(CurPath, pNode);
 
 			//int Count = pParent->Children.count();
@@ -385,7 +385,7 @@ QVariant CTreeItemModel::NodeData(STreeNode* pNode, int role, int section) const
 		case Qt::DisplayRole:
 		{
 			STreeNode::SValue& Value = pNode->Values[section];
-			return Value.Formated.isValid() ? Value.Formated : Value.Raw;
+			return Value.Formatted.isValid() ? Value.Formatted : Value.Raw;
 		}
 		case Qt::EditRole: // sort role
 		{

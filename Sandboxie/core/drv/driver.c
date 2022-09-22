@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
  * Copyright 2020 David Xanatos, xanasoft.com
  *
@@ -111,7 +111,7 @@ PSECURITY_DESCRIPTOR Driver_LowLabelSd = NULL;
 
 volatile BOOLEAN Driver_Unloading = FALSE;
 
-static BOOLEAN Driver_FullUnload = TRUE;
+BOOLEAN Driver_FullUnload = TRUE;
 
 UNICODE_STRING Driver_Altitude;
 const WCHAR* Altitude_Str = FILTER_ALTITUDE;
@@ -615,6 +615,11 @@ void* Driver_FindMissingService(const char* ProcName, int prmcnt)
 }
 
 
+//---------------------------------------------------------------------------
+// Driver_FindMissingServices
+//---------------------------------------------------------------------------
+
+
 _FX BOOLEAN Driver_FindMissingServices(void)
 {
 #ifdef OLD_DDK
@@ -643,7 +648,7 @@ _FX BOOLEAN Driver_FindMissingServices(void)
 #endif
 
     //
-    // Retrive some unexported kernel functions that may be usefull
+    // Retrieve some unexported kernel functions that may be useful
     //
 
     ZwCreateToken = (P_NtCreateToken) Driver_FindMissingService("ZwCreateToken", 13);

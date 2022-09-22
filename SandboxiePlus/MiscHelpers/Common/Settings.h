@@ -97,7 +97,7 @@ public:
 		virtual bool IsBlob() const {return true;}
 	};
 
-	CSettings(const QString& AppName, bool bShared = false, QMap<QString, SSetting> DefaultValues = QMap<QString, SSetting>(), QObject* qObject = NULL);
+	CSettings(const QString& AppDir, const QString& AppName, bool bShared = false, QMap<QString, SSetting> DefaultValues = QMap<QString, SSetting>(), QObject* qObject = NULL);
 	virtual ~CSettings();
 
 	void				DelValue(const QString& key);
@@ -138,9 +138,11 @@ public:
 	const QString		GetConfigDir()												{QMutexLocker Locker(&m_Mutex); return m_ConfigDir;}
 	const bool			IsPortable()												{QMutexLocker Locker(&m_Mutex); return m_bPortable;}
 
+	const bool			IsWritable()												{QMutexLocker Locker(&m_Mutex); return m_pConf->isWritable();}
+
 protected:
 	QMutex				m_Mutex;
-	QMap<QString, SSetting> m_DefaultValues;
+	//QMap<QString, SSetting> m_DefaultValues;
 
 	QMap<SStrRef, SCacheVal>m_ValueCache;
 

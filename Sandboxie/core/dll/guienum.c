@@ -44,7 +44,7 @@ typedef struct _GUI_ENUM_PROC_PARM {
 //---------------------------------------------------------------------------
 
 
-static BOOLEAN Gui_HookQueryWindow(void);
+static BOOLEAN Gui_HookQueryWindow(HMODULE module);
 
 static ULONG_PTR Gui_NtUserQueryWindow(HWND hWnd, ULONG_PTR type);
 
@@ -181,7 +181,7 @@ static ULONG64 Gui_GetShellWindow_LastTicks = 0;
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gui_InitEnum(void)
+_FX BOOLEAN Gui_InitEnum(HMODULE module)
 {
     //
     // hook EnumWindow* and FindWindow* family of functions
@@ -189,7 +189,7 @@ _FX BOOLEAN Gui_InitEnum(void)
 
     if (! Gui_OpenAllWinClasses) {
 
-        if (Gui_UseProxyService && !Gui_HookQueryWindow())
+        if (Gui_UseProxyService && !Gui_HookQueryWindow(module))
             return FALSE;
 
         if (Gui_UseProxyService && !Dll_SkipHook(L"enumwin")) {
@@ -244,16 +244,11 @@ _FX BOOLEAN Gui_InitEnum(void)
     // raises an error when CreateDesktop is call.  This hook
     // is removed for chrome.  See advapi.c: AdvApi_GetSecurityInfo
 
-    if (!Config_GetSettingsForImageName_bool(L"UseSbieWndStation", TRUE) && 
-        (Dll_ImageType != DLL_IMAGE_GOOGLE_CHROME) &&
-        (Dll_ImageType != DLL_IMAGE_MOZILLA_FIREFOX)) {
-        SBIEDLL_HOOK_GUI(CreateDesktopW);
-        SBIEDLL_HOOK_GUI(CreateDesktopA);
-    }
-    else {
-        SBIEDLL_HOOK_GUI(CreateWindowStationW);
-        SBIEDLL_HOOK_GUI(CreateWindowStationA);
-    }    
+    SBIEDLL_HOOK_GUI(CreateDesktopW);
+    SBIEDLL_HOOK_GUI(CreateDesktopA);
+    
+    SBIEDLL_HOOK_GUI(CreateWindowStationW);
+    SBIEDLL_HOOK_GUI(CreateWindowStationA);
 
     return TRUE;
 }
@@ -264,7 +259,7 @@ _FX BOOLEAN Gui_InitEnum(void)
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Gui_HookQueryWindow(void)
+_FX BOOLEAN Gui_HookQueryWindow(HMODULE module)
 {
     static const WCHAR *_ProcName = L"IsHungAppWindow";
     static char *_ProcNameA = "IsHungAppWindow";
@@ -582,27 +577,46 @@ _FX HDESK Gui_OpenDesktopA(
 //---------------------------------------------------------------------------
 //Gui_CreateWindowStationW
 //---------------------------------------------------------------------------
-extern HANDLE Sandboxie_WinSta ;
 
-_FX HANDLE Gui_CreateWindowStationW (void *lpwinsta, DWORD dwFlags, ACCESS_MASK dwDesiredAccess, LPSECURITY_ATTRIBUTES lpsa) {
+
+_FX HANDLE Gui_CreateWindowStationW (void *lpwinsta, DWORD dwFlags, ACCESS_MASK dwDesiredAccess, LPSECURITY_ATTRIBUTES lpsa) 
+{
     HANDLE myHandle = 0;
 
     myHandle =  __sys_CreateWindowStationW(lpwinsta, dwFlags, dwDesiredAccess, lpsa);
-    if (!myHandle) {
+    if (myHandle)
+        return myHandle;
+
+    extern HANDLE Sandboxie_WinSta;
+    if(Sandboxie_WinSta && ((Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || Config_GetSettingsForImageName_bool(L"UseSbieWndStation", TRUE)))
         return Sandboxie_WinSta;
-    }
-    return myHandle;
+
+    SbieApi_Log(2205, L"CreateWindowStation");
+    return 0;
 }
 
-_FX HANDLE Gui_CreateWindowStationA (void *lpwinsta, DWORD dwFlags, ACCESS_MASK dwDesiredAccess, LPSECURITY_ATTRIBUTES lpsa) {
+
+//---------------------------------------------------------------------------
+//Gui_CreateWindowStationA
+//---------------------------------------------------------------------------
+
+
+_FX HANDLE Gui_CreateWindowStationA (void *lpwinsta, DWORD dwFlags, ACCESS_MASK dwDesiredAccess, LPSECURITY_ATTRIBUTES lpsa) 
+{
     HANDLE myHandle = 0;
 
     myHandle =  __sys_CreateWindowStationA(lpwinsta, dwFlags, dwDesiredAccess, lpsa);
-    if (!myHandle) {
+    if (myHandle)
+        return myHandle;
+    
+    extern HANDLE Sandboxie_WinSta;
+    if(Sandboxie_WinSta && ((Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || Config_GetSettingsForImageName_bool(L"UseSbieWndStation", TRUE)))
         return Sandboxie_WinSta;
-    }
-    return myHandle;
+
+    SbieApi_Log(2205, L"CreateWindowStation");
+    return 0;
 }
+
 //---------------------------------------------------------------------------
 // Gui_CreateDesktopW
 //---------------------------------------------------------------------------
@@ -613,16 +627,23 @@ _FX HDESK Gui_CreateDesktopW(
     ACCESS_MASK dwDesiredAccess, void *SecurityAttributes)
 {
     HANDLE rc = 0;
-    //Call the system CreateDesktopW without a security context. 
-    //This works in tandem with the Ntmarta_GetSecurityInfo hook (see in advapi.c).
-
-    //Also see comment in Ntmarta_Init at SBIEDLL_HOOK2(Ntmarta_,GetSecurityInfo) for
-    //Acrobat Reader.  This is needed to allow this process to create a desktop with
-    //the sandboxie restricted token by dropping the security context.  This won't
-    //work without the GetSecrityInfo hook.
-    rc = __sys_CreateDesktopW(lpszDesktop, NULL, NULL, dwFlags, dwDesiredAccess, NULL);
-    if (rc) {
+    
+    rc = __sys_CreateDesktopW(lpszDesktop, lpszDevice, DevMode, dwFlags, dwDesiredAccess, SecurityAttributes);
+    if (rc)
         return rc;
+
+    if ((Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER) || Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", FALSE))
+    {
+        //Call the system CreateDesktopW without a security context. 
+        //This works in tandem with the Ntmarta_GetSecurityInfo hook (see in advapi.c).
+
+        //Also see comment in Ntmarta_Init at SBIEDLL_HOOK2(Ntmarta_,GetSecurityInfo) for
+        //Acrobat Reader.  This is needed to allow this process to create a desktop with
+        //the sandboxie restricted token by dropping the security context.  This won't
+        //work without the GetSecurityInfo hook.
+        rc = __sys_CreateDesktopW(lpszDesktop, NULL, NULL, dwFlags, dwDesiredAccess, NULL);
+        //if (rc)
+            return rc;
     }
 
     SbieApi_Log(2205, L"CreateDesktop");
@@ -640,9 +661,16 @@ _FX HDESK Gui_CreateDesktopA(
     ACCESS_MASK dwDesiredAccess, void *SecurityAttributes)
 {
     HANDLE rc = 0;
-    rc = __sys_CreateDesktopA(lpszDesktop, NULL, NULL, dwFlags, dwDesiredAccess, NULL);
-    if (rc) {
+    
+    rc = __sys_CreateDesktopA(lpszDesktop, lpszDevice, DevMode, dwFlags, dwDesiredAccess, SecurityAttributes);
+    if (rc)
         return rc;
+
+    if ((Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER) || Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", FALSE))
+    {
+        rc = __sys_CreateDesktopA(lpszDesktop, NULL, NULL, dwFlags, dwDesiredAccess, NULL);
+        //if (rc)
+            return rc;
     }
 
     SbieApi_Log(2205, L"CreateDesktop");
@@ -975,7 +1003,7 @@ _FX void Gui_MonitorW(const WCHAR *clsnm, ULONG monflag, HWND hwnd)
         Sbie_snwprintf(text, 130, L"#%d", PtrToUlong(clsnm) & 0xFFFF);
     if ((! hwnd) && (! monflag))
         monflag |= MONITOR_DENY;
-    SbieApi_MonitorPut(MONITOR_WINCLASS | monflag, text);
+    SbieApi_MonitorPut2(MONITOR_WINCLASS | monflag, text, FALSE);
 }
 
 

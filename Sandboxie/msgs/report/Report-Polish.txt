@@ -1,0 +1,437 @@
+*==========
+* Missing Messages in Text-Polish-1045.txt
+*==========
+
+1222;pop;err;02
+SBIE1222 Error with security token:  %2
+.
+
+1231;pop;err;01
+SBIE1231 Initialization failed for process %3 %2
+.
+
+1316;pop;inf;01
+SBIE1316 Blocked request to generate device event in the sandbox
+.
+
+1319;pop;inf;01
+SBIE1319 Blocked spooler print to file, %2 %3
+.
+
+1320;pop;wrn;01
+SBIE1320 To allow print spooler to write outside the sandbox for this process, please double-click on this message line
+.
+
+1399;pop;inf;01
+%0
+.
+
+2111;pop;inf;01
+SBIE2111 Process is not accessible: %3, call %2
+.
+
+2112;pop;inf;01
+SBIE2112 Object is not accessible: %3, call %2
+.
+
+2194;pop;inf;01
+SBIE2194 MSI installer requires %2 option to be set in the ini, what however weakens the isolation.
+.
+
+2195;pop;inf;01
+SBIE2195 To run Explorer.exe sandboxed, the access for COM infrastructure must not be Open.
+.
+
+2198;pop;inf;01
+%0
+.
+
+2224;pop;wrn;01
+SBIE2224 Sandboxed program has crashed: %2
+.
+
+2225;pop;wrn;01
+SBIE2225 An attempt was made to access an EFS file: %2
+.
+
+2302;pop;err;01
+SBIE2302 Process image configuration conflict: %2
+.
+
+2325;pop;err;01
+SBIE2325 Debug:  %2
+.
+
+2335;pop;err;01
+SBIE2335 Initialization failed for process %2
+.
+
+2336;pop;err;01
+SBIE2336 Error in GUI server:  %2
+.
+
+2337;pop;err;01
+SBIE2337 Failed to start program:  %2
+.
+
+9234;evt;err;01
+SBIE9234 Service startup error %2
+.
+
+3107;txt;01
+Type the name of a program or path to open the following file in the current sandbox:
+.
+
+3315;txt;01
+Deleting Sandbox contents
+.
+
+3316;txt;01
+Do you want to abort the operation?
+.
+
+3317;txt;01
+Preparing to delete: %2
+.
+
+3318;txt;01
+Deleting: %2
+.
+
+3426;txt;01
+&Always on Top
+.
+
+3504;txt;01
+&Support Sandboxie
+.
+
+3457;txt;01
+&Sandboxie Forum (Web)
+.
+
+3459;txt;01
+Allow direct access to qWave driver (Google Hangouts)
+.
+
+3460;txt;01
+Function hooking customizations
+.
+
+3467;txt;01
+Upgrade to Sandboxie-Plus
+.
+
+3468;txt;01
+Sandboxie-Plus Migration Guide
+.
+
+3484;txt;01
+Resource Access
+.
+
+3955;txt;01
+Network Files
+.
+
+3956;txt;01
+Network files and folders are normally visible to sandboxed applications.
+.
+
+3957;txt;01
+If you wish to block sandboxed applications from accessing files and folders on your network, you can enable this setting. Individual files and folders can be opened for sandboxed applications by adding them under Resource Access -> File Access.
+.
+
+3958;txt;01
+Block network files and folders unless specifically opened.
+.
+
+4104;txt;01
+Resource Access::Network Access
+.
+
+4105;txt;01
+Network Access (Firewall)
+.
+
+4295;txt;01
+Default exclusions File Migration presets
+.
+
+4296;txt;01
+Default RPC Port Bindings
+.
+
+4297;txt;01
+Open Bluetooth RPC port
+.
+
+4298;txt;01
+Open Smart Card RPC port
+.
+
+4299;txt;01
+Open Simple Service Discovery Protocol (SSDP, UPnP) RPC port
+.
+
+4300;txt;01
+Open additional RPC Port Bindings
+.
+
+4306;txt;01
+Open RPC Port Bindings for UAC
+.
+
+4307;txt;01
+Block common telemetry processes
+.
+
+4308;txt;01
+Filter access to \Devices\
+.
+
+4341;txt;01
+Allow direct access to %2 notes
+.
+
+4342;txt;01
+Enable %2 fix for Windows 11 KB5014019
+.
+
+4393;txt;01
+Media Players
+.
+
+4394;txt;01
+The following exclusions allow Media players running in this sandbox to access files outside the sandbox.
+.
+
+4395;txt;01
+Allow %2 direct access to the Photo folder for easier screen capture.
+.
+
+4396;txt;01
+Torrent Clients
+.
+
+4397;txt;01
+The following exclusions allow Torrent clients running in this sandbox to access files outside the sandbox.
+.
+
+4398;txt;01
+Allow %2 direct access to the Music folder for easier music library management.
+.
+
+6001;txt;01
+The classic Sandboxie UI (SbieCtrl.exe) has very limited
+resource monitoring and event tracing capabilities.
+
+For optimal troubleshooting it is highly advisable 
+to install the new UI, Sandboxie-Plus (SandMan.exe),
+which provides excellent tracing and monitoring capabilities.
+
+Do you want to download Sandboxie-Plus now?
+.
+
+6002;txt;01
+Visit <a ID="whats_new">sandboxie-plus.com</a> to learn about the new functionality of Sandboxie-Plus,
+or directly click <a ID="upgrade">here</a> to download the latest Sandboxie-Plus installer.
+.
+
+6003;txt;01
+The legacy UI of Sandboxie classic does not implement support for the network firewall functionality.
+
+You can though configure the feature supported by the core components using the ini file, rules are structured like following:
+NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
+
+If you prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features.
+.
+
+6004;pop;err;01
+The configuration %3 of box %2 requires a supporter certificate. Processes in this box will be terminated after 5 minutes. For prolonged use, please consider supporting this project.
+.
+
+6005;txt;01
+Note: Without administrative privileges installers will fail to start in the sandbox. Sandboxie-Plus offers an option to make many installers succeed without those privileges. You can enable this option also in the classic build manually, by adding "FakeAdminRights=y" to the ini section for this box.
+.
+
+6006;txt;01
+The legacy UI of Sandboxie classic implements only support for a couple of restriction options.
+
+Additional options like "ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" and much more can be set in the ini section for this box.
+The modern UI (SandMan.exe) also offers more customization options for Start/Run and Internet access restrictions.
+
+If you would prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features.
+.
+
+6007;txt;01
+Sandboxie Plus offers enhanced privacy protection by switching the old behavior from a black-list mode, i.e. allowing read access to the entire drive, except blocked by Closed Path or Write Path, to a white-list mode where sandboxed programs are only allowed to read generic system locations and read access to most user data must be first explicitly granted.
+
+The legacy UI of Sandboxie classic does not implement support for this mode of operation. Although it can be configured using the ini file, it is recommended to use the modern Sandboxie-Plus UI (SandMan.exe) if you want to use privacy enhanced boxes.
+.
+
+6010;txt;01
+You have installed Sandboxie more than %2 days ago.
+
+So, you think David and the contributors are doing a great job?
+
+Why don't you show it by supporting the project and getting a Supporter Certificate?
+
+Sandboxie without a valid supporter certificate will now pause for a few seconds, to give you time to contemplate the possibility of supporting the project.
+.
+
+6011;txt;01
+Wait
+.
+
+6012;txt;01
+Continue
+.
+
+6013;txt;01
+Quit
+.
+
+6014;txt;01
+Get Certificate
+.
+
+*==========
+* Extraneous Messages in Text-Polish-1045.txt
+*==========
+
+1109;evt;err;01
+SBIE1109 Nieprawid1202;pop;err;01
+SBIE1202 Nie mo1214;pop;err;01
+SBIE1214 Nie mo1215;pop;err;01
+SBIE1215 Nie mo1216;pop;err;01
+SBIE1216 Nie mo1222;pop;err;01
+SBIE1222 Nie mo1223;pop;err;01
+SBIE1223 Nie mo1224;pop;err;01
+SBIE1224 Nie mo1303;pop;inf;01
+SBIE1303 W tym samym czasie mo1304;pop;inf;01
+SBIE1304 Zablokowano proces '%2' wej1310;pop;inf;01
+SBIE1310 Rozszerzone funkcje s1311;pop;inf;01
+SBIE1311 Zablokowano prób1315;pop;inf;01
+SBIE1315 Prawdopodobnie z powodu konfliktu z oprogramowaniem: %2
+.
+
+2315;pop;err;01
+SBIE2315 Nie mo2334;pop;err;01
+SBIE2334 Nie mo9201;evt;err;01
+SBIE9201 B9202;evt;err;01
+SBIE9202 B9203;evt;err;01
+SBIE9202 B9204;evt;err;01
+SBIE9204 B9205;evt;err;01
+SBIE9205 B9206;evt;err;01
+SBIE9206 B9207;evt;err;01
+SBIE9207 B9208;evt;err;01
+SBIE9208 Nie mo9251;evt;err;01
+SBIE9251 Nie mo9252;evt;err;01
+SBIE9252 Nie mo9253;evt;err;01
+SBIE9253 Nie mo3211;txt;01
+Niew3231;txt;01
+Masz zainstalowany Sandboxie d3232;txt;01
+Sandboxie mo3233;txt;01
+Wersja bezp3234;txt;01
+Wersja bezp3235;txt;01
+Te ograniczenia s3236;txt;01
+Dodatkowo p3237;txt;01
+Aby uzyska3238;txt;01
+Prosz3239;txt;01
+Kliknij, aby zamkn3240;txt;01
+Kliknij, aby zamkn3503;txt;01
+Eksperymentalna ochrona (64-bit)
+.
+
+3455;txt;01
+Za&rejestruj Sandboxie
+.
+
+3458;txt;01
+Zezwól na bezpo3542;txt;01
+Tryb Eksperymentalnej ochrony wzmacnia ochron3543;txt;01
+Aby wy3771;txt;01
+(Ta funkcja jest dost3932;txt;01
+Dost3933;txt;01
+Nast3934;txt;01
+Zezwól programom z piaskownicy na 3935;txt;01
+Zezwól programom z piaskownicy na 3936;txt;01
+Zezwól programom z piaskownicy na wytwarzanie fa3937;txt;01
+Zezwól programom z piaskownicy na zmian3938;txt;01
+Zezwól programom z piaskownicy na zarz3952;txt;01
+Dost3953;txt;01
+Zezwól programom w tej piaskownicy na zmian3954;txt;01
+Zezwalaj programom zmienia3946;txt;01
+Zalecane jest, pozostawienie tego ustawienia w3947;txt;01
+Aby uaktywni7866;txt;01
+W 64-bitowym systemie Windows, nale7901;txt;01
+Mened7902;txt;01
+Kod systemu %2
+.
+
+7903;txt;01
+W przysz7921;txt;01
+Sandboxie jest zarejestrowane i licencja jest aktywowana.
+.
+
+7922;txt;01
+Wersja zarejestrowana, ale musisz ponownie aktywowa7923;txt;01
+Niezarejestrowana kopia. Zarejestruj dzisiaj!
+.
+
+7924;txt;01
+Licencja Sandboxie musi by7925;txt;01
+Licencja Sandboxie zosta7926;txt;01
+Data wyga7927;txt;01
+Klucz produktu nie posiada daty wyga7931;txt;01
+Twojej kopia Sandboxie jest zarejestrowana za pomoc7932;txt;01
+Prosz7933;txt;01
+Klucz rejestracyjny nie jest rozpoznawany przez Serwer licencji.
+.
+
+7934;txt;01
+Je7935;txt;01
+Twój nowy klucz produktu to:
+.
+
+7936;txt;01
+Prosz7937;txt;01
+&Uaktualnienie klucza rejestracyjnego do klucza produktu
+.
+
+7941;txt;01
+Rejestracja Sandboxie jest wykonywana za pomoc7942;txt;01
+Aby aktywowa7943;txt;01
+Czy chcesz teraz wprowadzi7944;txt;01
+&Aktywacja licencji
+.
+
+7945;txt;01
+Twoja kopia Sandboxie jest teraz zarejestrowana.
+.
+
+7946;txt;01
+Dzi7951;txt;01
+Czy chcesz teraz aktywowa7952;txt;01
+Prosz7961;txt;01
+Wyczy7962;txt;01
+Czy na pewno chcesz wyczy7971;txt;01
+To nie jest prawid7972;txt;01
+To nie jest prawid7973;txt;01
+To nie jest prawid7974;txt;01
+Nieprawid7975;txt;01
+Aktywacja produktu nie powiod7976;txt;01
+Czy chcesz spróbowa7977;txt;01
+Je7978;txt;01
+Aktualna data (%2) jest pó7982;txt;01
+Serwer licencji nie okre7983;txt;01
+Klucz produktu nie jest rozpoznawany przez Serwer licencji.
+.
+
+7984;txt;01
+Klucz produktu nie mo7985;txt;01
+Klucz produktu zosta7986;txt;01
+Klucz produktu zosta7987;txt;01
+Klucz produktu zosta
+

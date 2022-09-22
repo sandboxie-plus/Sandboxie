@@ -26,12 +26,12 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Check spelling errors
         uses: codespell-project/actions-codespell@master
         with:
           check_filenames: false
-          skip: ./.git,./SandboxiePlus/MiscHelpers/*,./Sandboxie/msgs/Text-*-*.txt,./SandboxiePlus/SandMan/*.ts,./Installer/Languages.iss
+          skip: ./.git,./Sandboxie/msgs/Text-*-*.txt,./Sandboxie/msgs/report/Report-*.txt,./SandboxiePlus/SandMan/*.ts,./Installer/Languages.iss
           builtin: clear,rare,code
-          ignore_words_list: pevent,doubleclick,parm,parms,etcp,ois,ba,ptd,modell,namesd,stdio,uint,errorstring
+          ignore_words_list: pevent,doubleclick,parm,parms,etcp,ois,ba,ptd,modell,namesd,stdio,uint,errorstring,ontext,atend,deque,ecounter,nmake,namess

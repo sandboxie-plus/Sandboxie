@@ -56,7 +56,7 @@ protected:
 		struct SValue
 		{
 			QVariant Raw;
-			QVariant Formated;
+			QVariant Formatted;
 		};
 		QVector<SValue>		Values;
 	};

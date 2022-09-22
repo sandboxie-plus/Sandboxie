@@ -464,6 +464,7 @@ int Crypt_GetKeyStorageInterface(void * a, void *data, void *c)
 
         ClassPtr = (KeyInterfaceClass*)(*(ULONG_PTR *)data);
         if (__sys_CryptClassErrorHandler != ClassPtr->ErrorHandler) {
+            HMODULE module = NULL; // fix-me: 
             CryptClassErrorHandler = (P_CryptClassErrorHandler)ClassPtr->ErrorHandler;
             SBIEDLL_HOOK(Crypt_, CryptClassErrorHandler);
         }

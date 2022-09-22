@@ -232,14 +232,14 @@ void COptionsWindow::CloseINetEdit(QTreeWidgetItem* pItem, bool bSave)
 	if (!pProgram)
 		return;
 
-	//QHBoxLayout* pLayout = (QHBoxLayout*)pProgram->layout();
-	//QComboBox* pCombo = (QComboBox*)pLayout->itemAt(0)->widget();
-	QComboBox* pCombo = (QComboBox*)pProgram;
-
-	QComboBox* pMode = (QComboBox*)ui.treeINet->itemWidget(pItem, 1);
-
 	if (bSave)
 	{
+		//QHBoxLayout* pLayout = (QHBoxLayout*)pProgram->layout();
+		//QComboBox* pCombo = (QComboBox*)pLayout->itemAt(0)->widget();
+		QComboBox* pCombo = (QComboBox*)pProgram;
+
+		QComboBox* pMode = (QComboBox*)ui.treeINet->itemWidget(pItem, 1);
+
 		QString OldProgram = pItem->data(0, Qt::UserRole).toString();
 		int OldMode = pItem->data(1, Qt::UserRole).toInt();
 		if (pItem->checkState(0) == Qt::Unchecked)
@@ -266,6 +266,9 @@ void COptionsWindow::CloseINetEdit(QTreeWidgetItem* pItem, bool bSave)
 
 void COptionsWindow::OnBlockINet()
 {
+	if (m_HoldChange)
+		return;
+
 	//bool Enable = ui.chkBlockINet->isChecked();
 
 	int Mode = ui.cmbBlockINet->currentData().toInt();
@@ -421,13 +424,13 @@ void COptionsWindow::ParseAndAddFwRule(const QString& Value, bool disabled, cons
 	//NetworkAccess=explorer.exe,Allow;Port=137,138,139,445;Address=192.168.0.1-192.168.100.255;Protocol=TCP;
 
 	QString FirstStr;
-	TArguments Tags = GetArguments(Value, L';', L'=', &FirstStr);
+	TArguments Tags = GetArguments(Value, L';', L'=', &FirstStr, true);
 	StrPair ProgAction = Split2(FirstStr, ",", true);
 	QString Program = ProgAction.second.isEmpty() ? "" : ProgAction.first;
 	QString Action = ProgAction.second.isEmpty() ? ProgAction.first : ProgAction.second;
 
 	pItem->setData(0, Qt::UserRole, Program);
-	bool bAll = Program.isEmpty();
+	bool bAll = Program.isEmpty() || Program == "*";
 	if (bAll)
 		Program = tr("All Programs");
 	bool Not = Program.left(1) == "!";
@@ -476,11 +479,11 @@ void COptionsWindow::SaveNetFwRules()
 		QString Prot = pItem->text(4);
 
 		QString Temp = GetFwRuleActionStr(Action);
-		if (!Program.isEmpty()) {
-			//if (Program.contains("=") || Program.contains(";") || Program.contains(",")) // todo: make sbie parse this proeprly
-			//	Program = "\'" + Program + "\'"; 
-			Temp.prepend(Program + ",");
-		}
+		//if (Program.contains("=") || Program.contains(";") || Program.contains(",")) // todo: make sbie parse this proeprly
+		//	Program = "\'" + Program + "\'"; 
+		if (Program.isEmpty())
+			Program = "*";
+		Temp.prepend(Program + ",");
 		QStringList Tags = QStringList(Temp);
 		if (!Port.isEmpty()) Tags.append("Port=" + Port);
 		if (!IP.isEmpty()) Tags.append("Address=" + IP);
@@ -588,25 +591,25 @@ void COptionsWindow::CloseNetFwEdit(QTreeWidgetItem* pItem, bool bSave)
 	if (!pProgram)
 		return;
 
-	QHBoxLayout* pLayout = (QHBoxLayout*)pProgram->layout();
-	QToolButton* pNot = (QToolButton*)pLayout->itemAt(0)->widget();
-	QComboBox* pCombo = (QComboBox*)pLayout->itemAt(1)->widget();
-
-	QComboBox* pAction = (QComboBox*)ui.treeNetFw->itemWidget(pItem, 1);
-
-	QLineEdit* pPort = (QLineEdit*)ui.treeNetFw->itemWidget(pItem, 2);
-
-	QLineEdit* pIP = (QLineEdit*)ui.treeNetFw->itemWidget(pItem, 3);
-
-	QComboBox* pProt = (QComboBox*)ui.treeNetFw->itemWidget(pItem, 4);
-
-	QString Program = pCombo->currentText();
-	int Index = pCombo->findText(Program);
-	if (Index != -1)
-		Program = pCombo->itemData(Index, Qt::UserRole).toString();
-
 	if (bSave)
 	{
+		QHBoxLayout* pLayout = (QHBoxLayout*)pProgram->layout();
+		QToolButton* pNot = (QToolButton*)pLayout->itemAt(0)->widget();
+		QComboBox* pCombo = (QComboBox*)pLayout->itemAt(1)->widget();
+
+		QComboBox* pAction = (QComboBox*)ui.treeNetFw->itemWidget(pItem, 1);
+
+		QLineEdit* pPort = (QLineEdit*)ui.treeNetFw->itemWidget(pItem, 2);
+
+		QLineEdit* pIP = (QLineEdit*)ui.treeNetFw->itemWidget(pItem, 3);
+
+		QComboBox* pProt = (QComboBox*)ui.treeNetFw->itemWidget(pItem, 4);
+
+		QString Program = pCombo->currentText();
+		int Index = pCombo->findText(Program);
+		if (Index != -1)
+			Program = pCombo->itemData(Index, Qt::UserRole).toString();
+
 		pItem->setText(0, (pNot->isChecked() ? "NOT " : "") + pCombo->currentText());
 		pItem->setData(0, Qt::UserRole, (pNot->isChecked() ? "!" : "") + Program);
 

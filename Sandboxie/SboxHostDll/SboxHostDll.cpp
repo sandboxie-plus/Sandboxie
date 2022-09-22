@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -41,6 +42,15 @@ BOOL SboxHostDll_OpenProcessToken(HANDLE ProcessHandle, DWORD DesiredAccess, PHA
 
     if (bRet)
     {
+        // todo:
+        //HANDLE hAltToken = (HANDLE)SbieApi_QueryProcessInfoEx((HANDLE)GetProcessId(ProcessHandle), 'ptok', 0);
+        //if (hAltToken) {
+        //    CloseHandle(hToken);
+        //    if (phTokenOut)
+        //        *phTokenOut = hAltToken;
+        //    bRet = TRUE;
+        //}
+
         if (SbieApi_QueryProcessInfo((HANDLE)GetProcessId(ProcessHandle), 0) & SBIE_FLAG_VALID_PROCESS)
         {
             BOOL bNeedAnotherValidToken = FALSE;
@@ -55,7 +65,12 @@ BOOL SboxHostDll_OpenProcessToken(HANDLE ProcessHandle, DWORD DesiredAccess, PHA
                 if(token.GetUser(&userSid))
                 {
                     // this token is usable for clicktorun service
-                    if (lstrcmpi(userSid.Sid(), _T("S-1-5-7"))==0)
+                    
+                    //
+                    // keep the 2nd option in sync with SandboxieSid[12] in DriverAssistSid.cpp
+                    //
+
+                    if (lstrcmpi(userSid.Sid(), _T("S-1-5-7"))==0 || _wcsnicmp(userSid.Sid(), _T("S-1-5-100-"), 10)==0)
                     {
                         if(token.GetLogonSid(&logonSid))
                         {
@@ -131,9 +146,9 @@ BOOLEAN InitHook( HINSTANCE hSbieDll )
 {
     if (hSbieDll)
     {
-        HMODULE hAdvapi32 = GetModuleHandle(L"Advapi32.dll");
+        HMODULE module = GetModuleHandle(L"Advapi32.dll");
 
-        void *OpenProcessToken = (P_OpenProcessToken)GetProcAddress(hAdvapi32, "OpenProcessToken");
+        void *OpenProcessToken = (P_OpenProcessToken)GetProcAddress(module, "OpenProcessToken");
 
         if (OpenProcessToken)
             SBIEDLL_HOOK(SboxHostDll_, OpenProcessToken);

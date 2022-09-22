@@ -74,6 +74,10 @@ static NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms);
 
 static NTSTATUS Api_QueryDriverInfo(PROCESS *proc, ULONG64 *parms);
 
+static NTSTATUS Api_SetSecureParam(PROCESS *proc, ULONG64 *parms);
+
+static NTSTATUS Api_GetSecureParam(PROCESS *proc, ULONG64 *parms);
+
 
 //---------------------------------------------------------------------------
 
@@ -108,6 +112,8 @@ static LOG_BUFFER* Api_LogBuffer = NULL;
 
 static volatile LONG Api_UseCount = -1;
 
+
+static const WCHAR* Api_ParamPath = L"\\REGISTRY\\MACHINE\\SECURITY\\SBIE";
 
 //---------------------------------------------------------------------------
 // Api_Init
@@ -194,7 +200,10 @@ _FX BOOLEAN Api_Init(void)
 
 	Api_SetFunction(API_PROCESS_EXEMPTION_CONTROL, Api_ProcessExemptionControl);
 
-    Api_SetFunction(API_QUERY_DRIVER_INFO, Api_QueryDriverInfo);
+    Api_SetFunction(API_QUERY_DRIVER_INFO,  Api_QueryDriverInfo);
+
+    Api_SetFunction(API_SET_SECURE_PARAM,   Api_SetSecureParam);
+    Api_SetFunction(API_GET_SECURE_PARAM,   Api_GetSecureParam);
 
     if ((! Api_Functions) || (Api_Functions == (void *)-1))
         return FALSE;
@@ -694,7 +703,7 @@ _FX void Api_AddMessage(
         }
 	}
 	// else // this can only happen when the entire buffer is to small to hold this entire entry
-		// if loging fails we can't log this error :/
+		// if logging fails we can't log this error :/
 
 	Api_LeaveCriticalSection(irql);
 }
@@ -1301,9 +1310,7 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
             if (Obj_CallbackInstalled)
                 FeatureFlags |= SBIE_FEATURE_FLAG_OB_CALLBACKS;
 
-            extern UCHAR SandboxieLogonSid[SECURITY_MAX_SID_SIZE];
-            if (SandboxieLogonSid[0] != 0)
-                FeatureFlags |= SBIE_FEATURE_FLAG_SBIE_LOGIN;
+            FeatureFlags |= SBIE_FEATURE_FLAG_SBIE_LOGIN;
 
 #ifdef HOOK_WIN32K
             extern ULONG Syscall_MaxIndex32;
@@ -1315,6 +1322,7 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
 
                 FeatureFlags |= SBIE_FEATURE_FLAG_CERTIFIED;
 
+                FeatureFlags |= SBIE_FEATURE_FLAG_SECURITY_MODE;
                 FeatureFlags |= SBIE_FEATURE_FLAG_PRIVACY_MODE;
                 FeatureFlags |= SBIE_FEATURE_FLAG_COMPARTMENTS;
             }
@@ -1342,5 +1350,108 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
         status = GetExceptionCode();
     }
 
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Api_SetSecureParam
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Api_SetSecureParam(PROCESS* proc, ULONG64* parms)
+{
+    NTSTATUS status = STATUS_SUCCESS;
+    API_SECURE_PARAM_ARGS *args = (API_SECURE_PARAM_ARGS *)parms;
+	HANDLE handle = NULL;
+
+    if (proc) {
+        status = STATUS_NOT_IMPLEMENTED;
+        goto finish;
+    }
+
+    if (!MyIsCallerSigned()) {
+        status = STATUS_ACCESS_DENIED;
+        goto finish;
+    }
+
+    __try {
+
+        UNICODE_STRING KeyPath;
+        RtlInitUnicodeString(&KeyPath, Api_ParamPath);
+        UNICODE_STRING ValueName;
+        RtlInitUnicodeString(&ValueName, args->param_name.val);
+
+        OBJECT_ATTRIBUTES objattrs;
+        InitializeObjectAttributes(&objattrs, &KeyPath, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
+        ULONG Disp;
+        status = ZwCreateKey(&handle, KEY_WRITE, &objattrs, 0, NULL, REG_OPTION_NON_VOLATILE, &Disp);
+        if (status == STATUS_SUCCESS) {
+
+            status = ZwSetValueKey(handle, &ValueName, 0, REG_BINARY, (PVOID)args->param_data.val, args->param_size.val);
+        }
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    if(handle)
+        ZwClose(handle);
+
+finish:
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Api_GetSecureParam
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms)
+{
+    NTSTATUS status = STATUS_SUCCESS;
+    API_SECURE_PARAM_ARGS *args = (API_SECURE_PARAM_ARGS *)parms;
+	HANDLE handle = NULL;
+
+    if (proc) {
+        status = STATUS_NOT_IMPLEMENTED;
+        goto finish;
+    }
+
+    __try {
+
+        UNICODE_STRING KeyPath;
+        RtlInitUnicodeString(&KeyPath, Api_ParamPath);
+        UNICODE_STRING ValueName;
+        RtlInitUnicodeString(&ValueName, args->param_name.val);
+
+        OBJECT_ATTRIBUTES objattrs;
+        InitializeObjectAttributes(&objattrs, &KeyPath, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
+        status = ZwOpenKey(&handle, KEY_WRITE, &objattrs);
+        if (status == STATUS_SUCCESS) {
+
+            UCHAR tempBuffer[sizeof(KEY_VALUE_PARTIAL_INFORMATION) + sizeof(ULONG64)];
+            PVOID buffer = args->param_size.val > sizeof(tempBuffer) ? args->param_data.val : tempBuffer;
+            ULONG length = args->param_size.val > sizeof(tempBuffer) ? args->param_size.val : sizeof(tempBuffer);
+        	status = ZwQueryValueKey(handle, &ValueName, KeyValuePartialInformation, buffer, length, &length);
+	        if (NT_SUCCESS(status))
+	        {
+		        PKEY_VALUE_PARTIAL_INFORMATION info = (PKEY_VALUE_PARTIAL_INFORMATION)buffer;
+                if (info->DataLength <= args->param_size.val)
+                    memmove(args->param_data.val, info->Data, info->DataLength);
+                else
+                    return STATUS_BUFFER_TOO_SMALL;
+	        }
+        }
+
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        status = GetExceptionCode();
+    }
+
+    if(handle)
+        ZwClose(handle);
+
+finish:
     return status;
 }

@@ -16,7 +16,8 @@ void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, 
 		//		});
 		//}
 
-		pWnd->AddFile(FilePath, BoxPath);
+		if (pWnd)
+			pWnd->AddFile(FilePath, BoxPath);
 	}
 	else
 		m_pPopUpWindow->AddFileToRecover(FilePath, BoxPath, pBox, ProcessId);

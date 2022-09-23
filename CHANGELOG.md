@@ -5,19 +5,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.3.5 / 5.58.5] - 2022-09-19
+## [1.3.5 / 5.58.5] - 2022-09-xx
 
 ### Added 
-- added localization to windows 11 shell menu [#2229](https://github.com/sandboxie-plus/Sandboxie/issues/2229)
+- added localization to Windows 11 shell menu [#2229](https://github.com/sandboxie-plus/Sandboxie/issues/2229)
 
 ### Changed
-- improved recovery window behavioure [#2266](https://github.com/sandboxie-plus/Sandboxie/issues/2266)
+- improved recovery window behaviour in Plus UI [#2266](https://github.com/sandboxie-plus/Sandboxie/issues/2266)
 
 ### Fixed
 - fixed issues with stale data in Sandboxie-Plus.ini [#2248](https://github.com/sandboxie-plus/Sandboxie/pull/2248) (thanks okrc)
 - fixed issue with dummy manifests [#2252](https://github.com/sandboxie-plus/Sandboxie/issues/2252)
-- fixed issue with xyplorer [#2230](https://github.com/sandboxie-plus/Sandboxie/issues/2230)
-
+- fixed issue with XYplorer [#2230](https://github.com/sandboxie-plus/Sandboxie/issues/2230)
+- fixed crash in Plus UI [e9e21c2](https://github.com/sandboxie-plus/Sandboxie/commit/e9e21c215ed87cf1d5aa999407ab2f99d5da9e4a)
 
 
 

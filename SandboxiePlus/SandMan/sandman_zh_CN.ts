@@ -1039,22 +1039,22 @@ Full path: %4</source>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="188"/>
+        <location filename="SandManRecovery.cpp" line="189"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation>Sandboxie-Plus - 恢复日志</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="199"/>
+        <location filename="SandManRecovery.cpp" line="200"/>
         <source>Time|Box Name|File Path</source>
         <translation>时间|沙盒名称|文件路径</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="201"/>
+        <location filename="SandManRecovery.cpp" line="202"/>
         <source>Cleanup Recovery Log</source>
         <translation>清理恢复日志</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="211"/>
+        <location filename="SandManRecovery.cpp" line="212"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation>以下是最近被恢复并移出沙盒的文件</translation>
@@ -1968,22 +1968,22 @@ No will choose: %2</source>
         <translation>%1 (%2): </translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="86"/>
+        <location filename="SandManRecovery.cpp" line="87"/>
         <source>Recovering file %1 to %2</source>
         <translation>恢复文件 %1 到 %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="98"/>
+        <location filename="SandManRecovery.cpp" line="99"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>文件 %1 已存在，要覆盖它吗？</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="99"/>
+        <location filename="SandManRecovery.cpp" line="100"/>
         <source>Do this for all files!</source>
         <translation>对所有文件都执行此操作！</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="125"/>
+        <location filename="SandManRecovery.cpp" line="126"/>
         <source>Failed to recover some files: 
 </source>
         <translation>部分文件恢复失败: 

@@ -1080,22 +1080,22 @@ Full path: %4</source>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="188"/>
+        <location filename="SandManRecovery.cpp" line="189"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation>Sandboxie-Plus - Dziennik Przywracania</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="199"/>
+        <location filename="SandManRecovery.cpp" line="200"/>
         <source>Time|Box Name|File Path</source>
         <translation>Czas|Nazwa boksu|Ścieżka do pliku</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="201"/>
+        <location filename="SandManRecovery.cpp" line="202"/>
         <source>Cleanup Recovery Log</source>
         <translation>Wyczyść Dziennik Przywracania</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="211"/>
+        <location filename="SandManRecovery.cpp" line="212"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation>Następujące pliki zostały niedawno odzyskane i przeniesione z piaskownicy.</translation>
@@ -2027,22 +2027,22 @@ Nie, wybierze: %2</translation>
         <translation>%1 (%2): </translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="86"/>
+        <location filename="SandManRecovery.cpp" line="87"/>
         <source>Recovering file %1 to %2</source>
         <translation>Odtwarzanie pliku %1 do %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="98"/>
+        <location filename="SandManRecovery.cpp" line="99"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>Plik o nazwie %1 już istnieje czy ma zostać zastąpiony?</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="99"/>
+        <location filename="SandManRecovery.cpp" line="100"/>
         <source>Do this for all files!</source>
         <translation>Zrób to z wszystkimi plikami!</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="125"/>
+        <location filename="SandManRecovery.cpp" line="126"/>
         <source>Failed to recover some files: 
 </source>
         <translation>Błąd przy odtworzeniu następujących plików: 

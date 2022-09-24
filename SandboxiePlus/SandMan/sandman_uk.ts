@@ -1042,22 +1042,22 @@ Full path: %4</source>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="188"/>
+        <location filename="SandManRecovery.cpp" line="189"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation>Sandboxie-Plus - Журнал відновлення</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="199"/>
+        <location filename="SandManRecovery.cpp" line="200"/>
         <source>Time|Box Name|File Path</source>
         <translation>Час|Назва пісочниці|Шлях до файлу</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="201"/>
+        <location filename="SandManRecovery.cpp" line="202"/>
         <source>Cleanup Recovery Log</source>
         <translation>Очищення журналу відновлення</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="211"/>
+        <location filename="SandManRecovery.cpp" line="212"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation type="unfinished">наступні файли нещодавно відновлено та переміщено з пісочниці.</translation>
@@ -1820,22 +1820,22 @@ No will choose: %2</source>
         <translation>Ця функція доступна лише для спонсорів проєкту. Процеси, які працюють з цією функцією без сертифіката спонсора, будуть завершені через 5 хвилин.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Станьте спонсором проєкту&lt;/a&gt;, та отримайте &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертифікат спонсора&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="86"/>
+        <location filename="SandManRecovery.cpp" line="87"/>
         <source>Recovering file %1 to %2</source>
         <translation>Відновлення файлу %1 до %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="98"/>
+        <location filename="SandManRecovery.cpp" line="99"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>Файл %1 вже існує, ви хочете перезаписати його?</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="99"/>
+        <location filename="SandManRecovery.cpp" line="100"/>
         <source>Do this for all files!</source>
         <translation>Зробити для всіх файлів!</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="125"/>
+        <location filename="SandManRecovery.cpp" line="126"/>
         <source>Failed to recover some files: 
 </source>
         <translation>Не вдалося відновити деякі файли: 

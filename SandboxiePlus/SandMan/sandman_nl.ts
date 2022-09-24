@@ -1060,22 +1060,22 @@ Volledig pad: %4</translation>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="188"/>
+        <location filename="SandManRecovery.cpp" line="189"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="199"/>
+        <location filename="SandManRecovery.cpp" line="200"/>
         <source>Time|Box Name|File Path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="201"/>
+        <location filename="SandManRecovery.cpp" line="202"/>
         <source>Cleanup Recovery Log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="211"/>
+        <location filename="SandManRecovery.cpp" line="212"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation type="unfinished"></translation>
@@ -1890,22 +1890,22 @@ Nee zal %2 kiezen</translation>
         <translation>De geselecteerde functieset is alleen beschikbaar voor projectondersteuners. Processen die gestart zijn in een box met deze functieset ingeschakeld zonder ondersteunerscertificaat worden na 5 minuten beëindigd.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Word een projectondersteuner&lt;/a&gt; en ontvang een &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;ondersteunerscertificaat&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="86"/>
+        <location filename="SandManRecovery.cpp" line="87"/>
         <source>Recovering file %1 to %2</source>
         <translation>Bestand %1 herstellen naar %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="98"/>
+        <location filename="SandManRecovery.cpp" line="99"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>Bestand %1 bestaat al. Wilt u het overschrijven?</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="99"/>
+        <location filename="SandManRecovery.cpp" line="100"/>
         <source>Do this for all files!</source>
         <translation>Doe dit voor alle bestanden!</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="125"/>
+        <location filename="SandManRecovery.cpp" line="126"/>
         <source>Failed to recover some files: 
 </source>
         <translation>Herstellen van sommige bestanden mislukt:

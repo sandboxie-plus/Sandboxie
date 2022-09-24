@@ -1034,22 +1034,22 @@ Full path: %4</source>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="188"/>
+        <location filename="SandManRecovery.cpp" line="189"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation>Sandboxie-Plus - Журнал восстановления</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="199"/>
+        <location filename="SandManRecovery.cpp" line="200"/>
         <source>Time|Box Name|File Path</source>
         <translation>Время|Имя песочницы|Путь к файлу</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="201"/>
+        <location filename="SandManRecovery.cpp" line="202"/>
         <source>Cleanup Recovery Log</source>
         <translation>Очистить журнал восстановления</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="211"/>
+        <location filename="SandManRecovery.cpp" line="212"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <translation>Следующие файлы были недавно восстановлены и перемещены из песочницы.</translation>
     </message>
@@ -1685,22 +1685,22 @@ No will choose: %2</source>
         <translation>Выбранный набор функций доступен только сторонникам проекта. Процессы, запущенные в песочнице с этим набором функций без сертификата сторонника, будут прекращены через 5 минут.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Станьте сторонником проекта&lt;/a&gt;, и получите &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат сторонника&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="86"/>
+        <location filename="SandManRecovery.cpp" line="87"/>
         <source>Recovering file %1 to %2</source>
         <translation>Восстановление файла %1 в %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="98"/>
+        <location filename="SandManRecovery.cpp" line="99"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>Файл %1 уже существует. Вы хотите его перезаписать?</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="99"/>
+        <location filename="SandManRecovery.cpp" line="100"/>
         <source>Do this for all files!</source>
         <translation>Сделать это для всех файлов!</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="125"/>
+        <location filename="SandManRecovery.cpp" line="126"/>
         <source>Failed to recover some files: 
 </source>
         <translation>Не удалось восстановить некоторые файлы: 

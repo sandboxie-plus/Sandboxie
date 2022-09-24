@@ -1039,22 +1039,22 @@ Tam yol: %4</translation>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="188"/>
+        <location filename="SandManRecovery.cpp" line="189"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation>Sandboxie-Plus - Kurtarma Günlüğü</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="199"/>
+        <location filename="SandManRecovery.cpp" line="200"/>
         <source>Time|Box Name|File Path</source>
         <translation>Zaman|Kutu Adı|Dosya Yolu</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="201"/>
+        <location filename="SandManRecovery.cpp" line="202"/>
         <source>Cleanup Recovery Log</source>
         <translation>Temizleme Kurtarma Günlüğü</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="211"/>
+        <location filename="SandManRecovery.cpp" line="212"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation>şu dosyalar yakın zamanda kurtarıldı ve bir korumalı alandan taşındı.</translation>
@@ -1388,7 +1388,7 @@ Tam yol: %4</translation>
         <translation>Sbie Mesajları</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="125"/>
+        <location filename="SandManRecovery.cpp" line="126"/>
         <source>Failed to recover some files: 
 </source>
         <translation>Bazı dosyalar kurtarılamadı: 
@@ -1400,7 +1400,7 @@ Tam yol: %4</translation>
         <translation>&apos;%1&apos; dizini, &apos;%2&apos; dizinine taşınamadı</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="86"/>
+        <location filename="SandManRecovery.cpp" line="87"/>
         <source>Recovering file %1 to %2</source>
         <translation>%1&apos;dan %2&apos;a dosya kurtarılıyor</translation>
     </message>
@@ -1785,12 +1785,12 @@ Tam yol: %4</translation>
         <translation>Gerekli Sandboxie bileşenleri başlatılamadı</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="98"/>
+        <location filename="SandManRecovery.cpp" line="99"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>%1 dosyası zaten var, üzerine yazmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="99"/>
+        <location filename="SandManRecovery.cpp" line="100"/>
         <source>Do this for all files!</source>
         <translation>Bunu tüm dosyalar için yap!</translation>
     </message>

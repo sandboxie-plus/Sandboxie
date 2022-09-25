@@ -538,7 +538,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="242"/>
         <source>No Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeniden Adlandırma Yok</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="243"/>
@@ -599,7 +599,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="464"/>
         <source>&apos;OpenWinClass=program.exe,#&apos; is not supported, use &apos;NoRenameWinClass=program.exe,*&apos; instead</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;OpenWinClass=program.exe,#&apos; desteklenmiyor, bunun yerine &apos;NoRenameWinClass=program.exe,*&apos; kullanın</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="98"/>
@@ -2931,7 +2931,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="972"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan adı ve Kutu Grubu adı &apos;,()&apos; sembolünü kullanamaz.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1302"/>

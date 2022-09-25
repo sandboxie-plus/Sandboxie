@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with dummy manifests [#2252](https://github.com/sandboxie-plus/Sandboxie/issues/2252)
 - fixed issue with XYplorer [#2230](https://github.com/sandboxie-plus/Sandboxie/issues/2230)
 - fixed crash in Plus UI [e9e21c2](https://github.com/sandboxie-plus/Sandboxie/commit/e9e21c215ed87cf1d5aa999407ab2f99d5da9e4a)
+- fixed m_pCleanUpButton is displayed empty when NoIcons=1 [#2273](https://github.com/sandboxie-plus/Sandboxie/pull/2273) (thanks okrc)
 
 
 

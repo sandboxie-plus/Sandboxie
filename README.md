@@ -80,6 +80,10 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 - APMichael - Templates additions
 - vedantmgoyal2009 - Workflow to automate Plus releases in Windows Package Manager
 - weihongx9315 - Windows Credentials fix
+- 1mm0rt41PC - Documentation additions
+- Luro223 - Documentation additions
+- blap - Maintainer of [SandboxToys2](https://github.com/blap/SandboxToys2)
+- okrc - Code fixes
 
 ## Translators
 - yuhao2348732, nkh0472, yfdyh000, gexgd0419, Zerorigin, UnnamedOrange, 4rt3mi5 - Simplified Chinese
@@ -89,13 +93,13 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 - bastik-1001, APMichael - German
 - isaak654 - Italian
 - VenusGirl - Korean
-- [7zip](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=20) - Polish (updates via pull requests are needed)
+- [7zip](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=20) - Polish (updates via pull requests are still needed)
 - JNylson - Portuguese and Brazilian Portuguese
 - lufog - Russian
 - sebadamus - Spanish
+- pb1 - Swedish
 - xorcan, fmbxnary - Turkish
 - SuperMaxusa, lufog - Ukrainian
-- pb1 - Swedish
 
 More volunteers are welcome here! ;)
 

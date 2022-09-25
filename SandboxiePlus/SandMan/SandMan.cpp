@@ -698,6 +698,7 @@ void CSandMan::CreateToolBar()
 	//m_pToolBar->addAction(m_pMenuEmptyAll);
 	//m_pToolBar->addSeparator();
 	m_pToolBar->addAction(m_pKeepTerminated);
+	m_pToolBar->addSeparator();
 	//m_pToolBar->addAction(m_pCleanUp);
 
 	m_pCleanUpButton = new QToolButton();

@@ -698,11 +698,13 @@ void CSandMan::CreateToolBar()
 	//m_pToolBar->addAction(m_pMenuEmptyAll);
 	//m_pToolBar->addSeparator();
 	m_pToolBar->addAction(m_pKeepTerminated);
+	m_pToolBar->addSeparator();
 	//m_pToolBar->addAction(m_pCleanUp);
 
 	m_pCleanUpButton = new QToolButton();
 	m_pCleanUpButton->setIcon(CSandMan::GetIcon("Clean"));
 	m_pCleanUpButton->setToolTip(tr("Cleanup"));
+	m_pCleanUpButton->setText(tr("Cleanup"));
 	m_pCleanUpButton->setPopupMode(QToolButton::MenuButtonPopup);
 	m_pCleanUpButton->setMenu(m_pCleanUpMenu);
 	//QObject::connect(m_pCleanUpButton, SIGNAL(triggered(QAction*)), , SLOT());

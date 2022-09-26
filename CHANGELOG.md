@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.3.5 / 5.58.5] - 2022-09-xx
+## [1.3.5 / 5.58.5] - 2022-09-26
 
 ### Added 
 - added localization to Windows 11 shell menu [#2229](https://github.com/sandboxie-plus/Sandboxie/issues/2229)

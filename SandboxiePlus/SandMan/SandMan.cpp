@@ -175,7 +175,8 @@ CSandMan::CSandMan(QWidget *parent)
 	QWidget* pMenuWidget = new QWidget(this);
 	m_pMenuLayout = new QHBoxLayout(pMenuWidget);
 	m_pMenuLayout->setContentsMargins(0, 0, 0, 0);
-	m_pMenuLayout->addWidget(m_pMenuBar);
+	//m_pMenuLayout->addWidget(m_pMenuBar);
+	m_pMenuLayout->setMenuBar(m_pMenuBar);
 	//m_pMenuLayout->addWidget(m_pLabel);
 	//m_pMenuLayout->addStretch(10);
 	setMenuWidget(pMenuWidget);

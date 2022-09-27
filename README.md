@@ -1,19 +1,19 @@
-# Sandboxie
-[![GitHub Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie.svg)](https://github.com/sandboxie-plus/Sandboxie/releases/latest) [![GitHub Pre-Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie/all.svg?label=pre-release)](https://github.com/sandboxie-plus/Sandboxie/releases) [![GitHub Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/main.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions)
+# Sandboxie Plus / Classic
 
-<img align="left" src="https://user-images.githubusercontent.com/12372772/123517080-8ab20a00-d69f-11eb-8e82-2e18cf6e0303.png">
-Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT-based operating systems. It creates a sandbox-like isolated operating environment in which applications can be run or installed without permanently modifying local & mapped drives or the windows registry. An isolated virtual environment allows controlled testing of untrusted programs and web surfing.<br><br>
+[![Plus license](https://img.shields.io/badge/Plus%20license-Custom%20-blue.svg)](https://github.com/sandboxie-plus/Sandboxie/blob/master/Installer/license.txt) [![Classic license](https://img.shields.io/github/license/Sandboxie-Plus/Sandboxie?label=Classic%20license&color=blue)](https://github.com/sandboxie-plus/Sandboxie/blob/master/LICENSE) [![GitHub Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie.svg)](https://github.com/sandboxie-plus/Sandboxie/releases/latest) [![GitHub Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/main.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions) [![GitHub Codespell Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml)
 
-|  System requirements  |      Release notes     |      Security policy      |
-|         :---:         |          :---:         |          :---:            |
-| Windows 7 or higher, 32-bit or 64-bit. |  [CHANGELOG.md](https://github.com/sandboxie-plus/Sandboxie/blob/master/CHANGELOG.md)  |   [SECURITY.md](https://github.com/sandboxie-plus/Sandboxie/blob/master/SECURITY.md)  |
+Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT-based operating systems. It creates a sandbox-like isolated operating environment in which applications can be run or installed without permanently modifying local & mapped drives or the Windows registry. An isolated virtual environment allows controlled testing of untrusted programs and web surfing.<br>
 
-We encourage the developers and security community to conduct research, report issues, and suggest improvements on this code base. However, please do **not** report security vulnerabilities in public GitHub comments. This repository has a SECURITY file with instructions on responsibly reporting security vulnerabilities.
+|  System requirements  |      Release notes     |      Security policy      |      Project maintenance   |      Contribution guidelines   |
+|         :---:         |          :---:         |          :---:            |      :---:     |          :---:                 |
+| Windows 7 or higher, 32-bit or 64-bit. |  [CHANGELOG.md](https://github.com/sandboxie-plus/Sandboxie/blob/master/CHANGELOG.md)  |   [SECURITY.md](https://github.com/sandboxie-plus/Sandboxie/blob/master/SECURITY.md)  |   David Xanatos ([Roadmap](https://github.com/sandboxie-plus/Sandboxie#project-maintenance))  |   [CONTRIBUTING.md](https://github.com/sandboxie-plus/Sandboxie/blob/master/CONTRIBUTING.md)  |
 
-## Download
+## ⏬ Download
+
 [![GitHub All Releases](https://img.shields.io/github/downloads/sandboxie-plus/Sandboxie/total?style=for-the-badge)](https://github.com/sandboxie-plus/Sandboxie/releases/latest)
 
-## Features
+## 🚀 Features
+
 Sandboxie is available in two flavors, Plus and Classic. They both share the same core components, this means they have the same level of security and compatibility.
 What's different is the availability of features in the user interface.
 
@@ -31,25 +31,25 @@ Classic build has the old no longer developed MFC based UI, hence it lacks nativ
 
 If you need to check all new features at once, a good way to highlight them quickly is to find the equal sign in the [CHANGELOG.md](https://github.com/sandboxie-plus/Sandboxie/blob/master/CHANGELOG.md) file.
 
-## Documentation
+## 📚 Documentation
+
 A GitHub copy of the [Sandboxie documentation](https://sandboxie-plus.github.io/sandboxie-docs) is currently maintained, although more volunteers are needed to keep it updated with the new changes. We recommend to check also the following labels in this repository:
 
-[future development](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A"future+development") | [documentation](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Adocumentation) | [build issues](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22build+issue%22) | [known issues](https://github.com/sandboxie-plus/Sandboxie/labels/Known%20issue) | [regressions](https://github.com/sandboxie-plus/Sandboxie/issues?q=is%3Aissue+is%3Aopen+label%3Aregression) | [workaround](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Aworkaround) | [help wanted](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22help+wanted%22) | [more...](https://github.com/sandboxie-plus/Sandboxie/labels?sort=count-desc)
+[future development](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A"future+development") | [feature requests](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A"Feature+request") | [documentation](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Adocumentation) | [build issues](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22build+issue%22) | [known issues](https://github.com/sandboxie-plus/Sandboxie/labels/Known%20issue) | [regressions](https://github.com/sandboxie-plus/Sandboxie/issues?q=is%3Aissue+is%3Aopen+label%3Aregression) | [workaround](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3Aworkaround) | [help wanted](https://github.com/sandboxie-plus/Sandboxie/issues?q=label%3A%22help+wanted%22) | [more...](https://github.com/sandboxie-plus/Sandboxie/labels?sort=count-desc)
 
-A partial archive of the [old Sandboxie forum](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums) that was previously maintained by Invincea is still available. If you need to find something there, please use the corresponding [repository search](https://github.com/Sandboxie-Website-Archive/sandboxie-website-archive.github.io).
+A partial archive of the [old Sandboxie forum](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums) that was previously maintained by Invincea is still available. If you need to find something specific, it is possible to use the following [search query](https://www.ecosia.org/search?method=index&q=site%3Ahttps%3A%2F%2Fsandboxie-website-archive.github.io%2Fwww.sandboxie.com%2Fold-forums%2F).
 
-## Project maintenance
-2004 - 2013 Ronen Tzur
+## 📌 Project maintenance
 
-2013 - 2017 Invincea Inc.
+|    Project history  |      Maintainer  |
+|---------------------|------------------|
+| 2004 - 2013         | Ronen Tzur       |
+| 2013 - 2017         | Invincea Inc.    |
+| 2017 - 2020         | Sophos Group plc |
+| [Open Source release](https://github.com/sandboxie/sandboxie) |    Tom Brown     |
+| 2020 onwards        | David Xanatos ([Roadmap](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/))    |
 
-2017 - 2020 Sophos Group plc
-
-Open Source release
-
-2020 onwards David Xanatos
-
-## Project support / sponsorship
+## 📌 Project support / sponsorship
 
 [<img align="left" height="64" width="64" src="https://raw.githubusercontent.com/sandboxie-plus/Sandboxie/master/.github/images/binja-love.png">](https://binary.ninja/)
 Thank you [Vector 35](https://vector35.com/) for providing a [Binary Ninja](https://binary.ninja/) license to help with reverse engineering.
@@ -61,7 +61,8 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 <br>
 <br>
 
-## Helpful Contributors
+## 📑 Helpful Contributors
+
 - DavidBerdik - Maintainer of [Sandboxie Website Archive](https://github.com/Sandboxie-Website-Archive/sandboxie-website-archive.github.io)
 - diversenok - Security analysis & PoC's
 - stephtr - CI / Certification
@@ -85,7 +86,8 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 - blap - Maintainer of [SandboxToys2](https://github.com/blap/SandboxToys2)
 - okrc - Code fixes
 
-## Translators
+## 🌏 Translators
+
 - yuhao2348732, nkh0472, yfdyh000, gexgd0419, Zerorigin, UnnamedOrange, 4rt3mi5 - Simplified Chinese
 - TragicLifeHu, Hulen - Traditional Chinese
 - RockyTDR - Dutch
@@ -103,7 +105,6 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 
 More volunteers are welcome here! ;)
 
-## Support the project
-If you like the tool, please consider supporting it on Patreon: https://www.patreon.com/DavidXanatos
+## 🤝 Support the project
 
-Or you can donate directly via the PayPal button on my website: https://xanasoft.com
+If you find Sandboxie useful, then feel free to contribute through our [Contribution guidelines](https://github.com/sandboxie-plus/Sandboxie/blob/master/CONTRIBUTING.md).

@@ -1,4 +1,4 @@
-### Sandboxie Classic installer instructions
+## Sandboxie Classic installer instructions
 
 ### To create Sbie NSIS installer environment
 
@@ -21,15 +21,15 @@ Everything above only needs to be done once. Then your machine should be good to
 
 ### To create the Sbie installers
 
-The Sbie installer NSI file is [\install\SandboxieVS.nsi](https://github.com/sandboxie-plus/Sandboxie/blob/master/Sandboxie/install/SandboxieVS.nsi).
+The Sbie installer NSI file is [\install\SandboxieVS.nsi](../install/SandboxieVS.nsi).
 
-_Note: The following procedure is only valid for the old code signing not mediated by Microsoft, please refer to issue [#1248](https://github.com/sandboxie-plus/Sandboxie/issues/1248)._
+Note: the following procedure is only valid for the old code signing not mediated by Microsoft, please refer to issue [#1248](https://github.com/sandboxie-plus/Sandboxie/issues/1248).
 
 1) Sign the binaries (if applicable).
-2) Set the #defines in [\common\my_version.h](https://github.com/sandboxie-plus/Sandboxie/blob/master/Sandboxie/common/my_version.h) (SBIE_INSTALLER_PATH, etc.) to the location of your binaries. (These #defines are read by SandboxieVS.nsi).
-3) Edit [\install\SandboxieVS.nsi](https://github.com/sandboxie-plus/Sandboxie/blob/master/Sandboxie/install/SandboxieVS.nsi) and uncomment the `!define _BUILDARCH` for the version you want to create an installer for.
-4) In Explorer, right-click on [\install\SandboxieVS.nsi](https://github.com/sandboxie-plus/Sandboxie/blob/master/Sandboxie/install/SandboxieVS.nsi), and select `Compile NSIS Script`.
-	The resulting installer binary (SandboxieInstall64.exe or SandboxieInstall32.exe) will be saved to SBIE_INSTALLER_PATH (from [my_version.h](https://github.com/sandboxie-plus/Sandboxie/blob/master/Sandboxie/common/my_version.h)).
+2) Set the #defines in [\common\my_version.h](../common/my_version.h) (SBIE_INSTALLER_PATH, etc.) to the location of your binaries. (These #defines are read by SandboxieVS.nsi).
+3) Edit [\install\SandboxieVS.nsi](../install/SandboxieVS.nsi) and uncomment the `!define _BUILDARCH` for the version you want to create an installer for.
+4) In Explorer, right-click on [\install\SandboxieVS.nsi](../install/SandboxieVS.nsi), and select `Compile NSIS Script`.
+	The resulting installer binary (SandboxieInstall64.exe or SandboxieInstall32.exe) will be saved to SBIE_INSTALLER_PATH (from [my_version.h](../common/my_version.h)).
 5) Sign the installers.
 6) To create the combined 32/64 bit installer in Visual Studio, right-click on the `SandboxieInstall` project, click `Project Only` -> `Build Only SandboxieInstall`.
 	This will create a SandboxieInstall.exe in the install folder.

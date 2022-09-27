@@ -6,7 +6,7 @@ Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT
 
 |  System requirements  |      Release notes     |      Security policy      |      Project maintenance   |      Contribution guidelines   |
 |         :---:         |          :---:         |          :---:            |      :---:     |          :---:                 |
-| Windows 7 or higher, 32-bit or 64-bit. |  [CHANGELOG.md](https://github.com/sandboxie-plus/Sandboxie/blob/master/CHANGELOG.md)  |   [SECURITY.md](https://github.com/sandboxie-plus/Sandboxie/blob/master/SECURITY.md)  |   David Xanatos ([Roadmap](https://github.com/sandboxie-plus/Sandboxie#project-maintenance))  |   [CONTRIBUTING.md](https://github.com/sandboxie-plus/Sandboxie/blob/master/CONTRIBUTING.md)  |
+| Windows 7 or higher, 32-bit or 64-bit. |  [CHANGELOG.md](https://github.com/sandboxie-plus/Sandboxie/blob/master/CHANGELOG.md)  |   [SECURITY.md](https://github.com/sandboxie-plus/Sandboxie/blob/master/SECURITY.md)  |   David Xanatos ([Roadmap](https://github.com/sandboxie-plus/Sandboxie#-project-maintenance))  |   [CONTRIBUTING.md](https://github.com/sandboxie-plus/Sandboxie/blob/master/CONTRIBUTING.md)  |
 
 ## ⏬ Download
 

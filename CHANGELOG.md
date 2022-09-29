@@ -5,6 +5,29 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+
+## [1.4.0 / 5.59.0] - 2022-08-??
+
+### Added
+- added integrated run from start menu [#1836](https://github.com/sandboxie-plus/Sandboxie/issues/1836)
+- addes start menu enumeration [#1570](https://github.com/sandboxie-plus/Sandboxie/issues/1570)
+- added UI for breakout processes [#1904](https://github.com/sandboxie-plus/Sandboxie/issues/1904)
+- added option to customize box double click action
+- added new advnaced tab in the advanced tab alowing to configure proces specific and otehr advanced options
+- added "SeparateUserFolders=y" and "SandboxieLogon=y" to the box option dialog
+- added icons to option section labels
+
+
+### Changed
+- preapred for Qt 6.2
+- resructured the general settings page
+- resructured the sandbox options page, added a new tab and moved some of the advanced options there
+
+
+
+
 ## [1.3.5 / 5.58.5] - 2022-09-26
 
 ### Added 

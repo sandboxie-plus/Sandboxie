@@ -61,7 +61,7 @@ void CSandMan::CreateTrayMenu()
 
 		QWidget* pWidget = new CActionWidget();
 		QHBoxLayout* pLayout = new QHBoxLayout();
-		pLayout->setMargin(0);
+		pLayout->setContentsMargins(0,0,0,0);
 		pWidget->setLayout(pLayout);
 
 		m_pTrayBoxes = new QTreeWidget();
@@ -240,7 +240,10 @@ QAction* CSandMan__MakeBoxEntry(QMenu* pMenu, CSandBoxPlus* pBoxEx, QFileIconPro
 	QAction* pBoxAction = new QAction(pBoxEx->GetName().replace("_", " "));
 	if (!iNoIcons) {
 		QIcon Icon;
-		if (ColorIcons)
+		QString Action = pBoxEx->GetText("DblClickAction");
+		if (!Action.isEmpty() && Action.left(1) != "!")
+			Icon = IconProvider.icon(QFileInfo(pBoxEx->GetCommandFile(Action)));
+		else if (ColorIcons)
 			Icon = theGUI->GetColorIcon(pBoxEx->GetColor(), pBoxEx->GetActiveProcessCount());
 		else
 			Icon = theGUI->GetBoxIcon(pBoxEx->GetType(), pBoxEx->GetActiveProcessCount() != 0);
@@ -386,7 +389,9 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 					pItem->setData(0, Qt::UserRole, pBox->GetName());
 					QIcon Icon;
 					QString Action = pBox->GetText("DblClickAction");
-					if(ColorIcons)
+					if (!Action.isEmpty() && Action.left(1) != "!")
+						Icon = IconProvider.icon(QFileInfo(pBoxEx->GetCommandFile(Action)));
+					else if(ColorIcons)
 						Icon = theGUI->GetColorIcon(pBoxEx->GetColor(), pBox->GetActiveProcessCount());
 					else
 						Icon = theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount() != 0);

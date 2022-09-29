@@ -53,7 +53,7 @@ public:
 	{
 		//CComCritSecLock<CComAutoCriticalSection> lock( m_Crit, true );
 		QMutexLocker lock(&m_Mutex);
-		push_back( c );
+		this->pop_back( c );
 		//lock.Unlock();
 		lock.unlock();
 
@@ -62,7 +62,7 @@ public:
 			// If the semaphore is full, then take back the entry.
 			//lock.Lock();
 			lock.relock();
-			pop_back();
+			this->pop_back();
 			if (GetLastError() == ERROR_TOO_MANY_POSTS)
 			{
 				m_bOverflow = true;
@@ -78,15 +78,15 @@ public:
 		// If the user calls pop() more than once after the
 		// semaphore is signaled, then the semaphore count will
 		// get out of sync.  We fix that when the queue empties.
-		if (empty())
+		if (this->empty())
 		{
 			while (::WaitForSingleObject(m_hSemaphore, 0) != WAIT_TIMEOUT)
 				1;
 			return false;
 		}
 
-		c = front();
-		pop_front();
+		c = this->front();
+		this->pop_front();
 
 		return true;
 	}
@@ -97,7 +97,7 @@ public:
 		//CComCritSecLock<CComAutoCriticalSection> lock( m_Crit, true );
 		QMutexLocker lock(&m_Mutex);
 
-		for (DWORD i=0; i<size(); i++)
+		for (DWORD i=0; i< this->size(); i++)
 			WaitForSingleObject(m_hSemaphore, 0);
 
 		__super::clear();

@@ -3,7 +3,7 @@ TEMPLATE = app
 TARGET = SandMan
 PRECOMPILED_HEADER = stdafx.h
 
-QT += core gui network widgets winextras concurrent
+QT += core gui network widgets concurrent
 
 CONFIG += lrelease
 

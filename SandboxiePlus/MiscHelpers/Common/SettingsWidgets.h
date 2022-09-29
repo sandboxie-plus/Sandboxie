@@ -13,7 +13,7 @@ public:
 		setPlainText(Lines.join("\r\n"));
 	}
 	QStringList			GetLines(){
-		return toPlainText().split(QRegExp("\r?\n"));
+		return toPlainText().split(QRegularExpression("\r?\n"));
 	}
 };
 
@@ -341,7 +341,7 @@ public:
 	{
 		QWidget* pWidget = new CActionWidget(pControll->parentWidget());
         QHBoxLayout* pLayout = new QHBoxLayout();
-		pLayout->setMargin(0);
+		pLayout->setContentsMargins(0,0,0,0);
 
 		if(!IconFile.isEmpty())
 		{
@@ -445,7 +445,7 @@ protected:
 
 	QWidget* AddConfigSearch(QTabWidget* pTabs);
 
-	virtual void OnTab(int iTabID) = 0;
+	virtual void OnTab(QWidget* pTab) = 0;
 
 	QTabWidget* m_pTabs;
 
@@ -453,7 +453,7 @@ protected:
 	QLineEdit* m_pSearch;
 	QTreeWidget* m_pTree;
 
-	int m_iCurrentTab;
+	QWidget* m_pCurrentTab;
 
 private:
 	int m_SearchI;

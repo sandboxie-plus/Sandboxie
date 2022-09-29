@@ -100,7 +100,8 @@ void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QStrin
 					Q_ARG(QString, tr("Do this for all files!")),
 					Q_ARG(bool*, &forAll),
 					Q_ARG(int, QDialogButtonBox::Yes | QDialogButtonBox::No),
-					Q_ARG(int, QDialogButtonBox::No)
+					Q_ARG(int, QDialogButtonBox::No),
+					Q_ARG(int, QMessageBox::Question)
 				);
 
 				Overwrite = retVal == QDialogButtonBox::Yes ? 1 : 0;
@@ -189,7 +190,7 @@ CRecoveryLogWnd::CRecoveryLogWnd(QWidget *parent)
 	this->setWindowTitle(tr("Sandboxie-Plus - Recovery Log"));
 
 	QGridLayout* pLayout = new QGridLayout();
-	//pLayout->setMargin(3);
+	//pLayout->setContentsMargins(3,3,3,3);
 	
 	m_pRecoveryLog = new CPanelWidgetEx();
 	m_pRecoveryLog->GetTree()->setItemDelegate(new CTreeItemDelegate());

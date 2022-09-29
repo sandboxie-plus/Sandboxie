@@ -19,7 +19,7 @@ MISCHELPERS_EXPORT typedef QPair<QString,QString> StrPair;
 MISCHELPERS_EXPORT StrPair Split2(const QString& String, QString Separator = "=", bool Back = false);
 MISCHELPERS_EXPORT QStringList SplitStr(const QString& String, QString Separator);
 
-typedef MISCHELPERS_EXPORT QMap<QString,QString> TArguments;
+typedef MISCHELPERS_EXPORT QMultiMap<QString,QString> TArguments;
 TArguments MISCHELPERS_EXPORT GetArguments(const QString& Arguments, QChar Separator = L';', QChar Assigner = L'=', QString* First = NULL, bool bLowerKeys = false, bool bReadEsc = false);
 
 MISCHELPERS_EXPORT QString UnEscape(QString Text);
@@ -29,7 +29,7 @@ __inline QString FormatSizeEx(quint64 Size, bool bEx) { return bEx && (Size == 0
 MISCHELPERS_EXPORT QString FormatRate(quint64 Size, int Precision = 2);
 __inline QString FormatRateEx(quint64 Size, bool bEx) { return bEx && (Size == 0) ? QString() : FormatRate(Size); }
 MISCHELPERS_EXPORT QString FormatUnit(quint64 Size, int Precision = 0);
-MISCHELPERS_EXPORT QString	FormatTime(quint64 Time, bool ms = false);
+//MISCHELPERS_EXPORT QString	FormatTime(quint64 Time, bool ms = false);
 MISCHELPERS_EXPORT QString	FormatNumber(quint64 Number);
 __inline QString FormatNumberEx(quint64 Number, bool bEx) { return bEx && (Number == 0) ? QString() : FormatNumber(Number); }
 MISCHELPERS_EXPORT QString	FormatAddress(quint64 Address, int length = 16);
@@ -116,3 +116,9 @@ MISCHELPERS_EXPORT bool InitConsole(bool bCreateIfNeeded = true);
 
 MISCHELPERS_EXPORT void SafeShow(QWidget* pWidget);
 MISCHELPERS_EXPORT int SafeExec(QDialog* pDialog);
+
+template <typename T>
+QSet<T> ListToSet(const QList<T>& qList) { return QSet<QString>(qList.begin(), qList.end()); }
+
+template <typename T>
+QList<T> SetToList(const QSet<T>& qSet) { return QList<QString>(qSet.begin(), qSet.end()); }

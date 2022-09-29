@@ -10,6 +10,9 @@
 #include "../OnlineUpdater.h"
 
 
+#include <windows.h>
+#include <shellapi.h>
+
 QSize CustomTabStyle::sizeFromContents(ContentsType type, const QStyleOption* option, const QSize& size, const QWidget* widget) const {
 	QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
 	if (type == QStyle::CT_TabBarTab && widget->property("isSidebar").toBool()) {
@@ -59,6 +62,23 @@ void FixTriStateBoxPallete(QWidget* pWidget)
 			});
 		}
 	}
+}
+
+
+void AddIconToLabel(QLabel* pLabel, const QPixmap& Pixmap)
+{
+	QWidget* pParent = pLabel->parentWidget();
+	QWidget* pWidget = new QWidget(pParent);
+	pParent->layout()->replaceWidget(pLabel, pWidget);
+	QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
+	pLayout->setContentsMargins(0, 0, 0, 0);
+	pLayout->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+	pLayout->setSpacing(1);
+	QLabel* pIcon = new QLabel();
+	pIcon = new QLabel();
+	pIcon->setPixmap(Pixmap);
+	pLayout->addWidget(pIcon);
+	pLayout->addWidget(pLabel);
 }
 
 
@@ -116,25 +136,69 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));
 	ui.tabs->tabBar()->setProperty("isSidebar", true);
 
-	ui.tabs->setTabIcon(eOptions, CSandMan::GetIcon("Options"));
-	ui.tabs->setTabIcon(eShell, CSandMan::GetIcon("Shell"));
-	ui.tabs->setTabIcon(eGuiConfig, CSandMan::GetIcon("GUI"));
-	ui.tabs->setTabIcon(eAdvanced, CSandMan::GetIcon("Advanced"));
-	ui.tabs->setTabIcon(eProgCtrl, CSandMan::GetIcon("Alarm"));
-	ui.tabs->setTabIcon(eConfigLock, CSandMan::GetIcon("Lock"));
-	ui.tabs->setTabIcon(eSoftCompat, CSandMan::GetIcon("Compatibility"));
-	ui.tabs->setTabIcon(eEditIni, CSandMan::GetIcon("EditIni"));
-	ui.tabs->setTabIcon(eSupport, CSandMan::GetIcon("Support"));
+	ui.tabs->setTabIcon(0, CSandMan::GetIcon("Config"));
+	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Shell"));
+	ui.tabs->setTabIcon(2, CSandMan::GetIcon("GUI"));
+	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Advanced"));
+	ui.tabs->setTabIcon(4, CSandMan::GetIcon("Alarm"));
+	ui.tabs->setTabIcon(5, CSandMan::GetIcon("Lock"));
+	ui.tabs->setTabIcon(6, CSandMan::GetIcon("Compatibility"));
+	ui.tabs->setTabIcon(7, CSandMan::GetIcon("EditIni"));
+	ui.tabs->setTabIcon(8, CSandMan::GetIcon("Support"));
 
-	//if(theConf->GetInt("Options/ViewMode", 1) != 1 && (QApplication::keyboardModifiers() & Qt::ControlModifier) == 0)
-	//	ui.tabs->removeTab(eEditIni);
+	int size = 16.0;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+	size *= (QApplication::desktop()->logicalDpiX() / 96.0); // todo Qt6
+#endif
+	AddIconToLabel(ui.lblGeneral, CSandMan::GetIcon("Options").pixmap(size,size));
+	AddIconToLabel(ui.lblRecovery, CSandMan::GetIcon("Recover").pixmap(size,size));
+
+	AddIconToLabel(ui.lblStartUp, CSandMan::GetIcon("Start").pixmap(size,size));
+	AddIconToLabel(ui.lblRunBoxed, CSandMan::GetIcon("Run").pixmap(size,size));
+	AddIconToLabel(ui.lblStartMenu, CSandMan::GetIcon("StartMenu").pixmap(size,size));
+	AddIconToLabel(ui.lblSysTray, CSandMan::GetIcon("Maintenance").pixmap(size,size));
+
+	AddIconToLabel(ui.lblInterface, CSandMan::GetIcon("GUI").pixmap(size,size));
+
+	AddIconToLabel(ui.lblBoxRoot, CSandMan::GetIcon("Sandbox").pixmap(size,size));
+	AddIconToLabel(ui.lblBoxFeatures, CSandMan::GetIcon("Miscellaneous").pixmap(size,size));
+
+	AddIconToLabel(ui.lblProtection, CSandMan::GetIcon("Lock").pixmap(size,size));
+
+	AddIconToLabel(ui.lblUpdates, CSandMan::GetIcon("Update").pixmap(size,size));
+
+
+	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
+	int iOptionLayout = theConf->GetInt("Options/NewConfigLayout", 2);
+	if (iOptionLayout == 2)
+		iOptionLayout = 1; // iViewMode != 2 ? 1 : 0;
+
+	// re structure the UI a bit
+	if (iOptionLayout == 1)
+	{
+		QWidget* pWidget = new QWidget(this);
+		QGridLayout* pLayout = new QGridLayout(pWidget);
+		QTabWidget* pTabs = new QTabWidget();
+		pLayout->addWidget(pTabs, 0, 0);
+		ui.tabs->insertTab(3, pWidget, CSandMan::GetIcon("Advanced"), tr("Advanced Config"));
+		pTabs->addTab(ui.tabAdvanced, CSandMan::GetIcon("Options"), tr("Sandbox Config"));
+		pTabs->addTab(ui.tabLock, CSandMan::GetIcon("Lock"), tr("Config Protection"));
+	}
+
+	/*if (iViewMode == 0)
+	{
+		if (iOptionLayout == 1)
+			ui.tabs->removeTab(6); // ini edit
+		else 
+			ui.tabs->removeTab(7); // ini edit
+	}*/
 
 	ui.tabs->setCurrentIndex(0);
 
 	ui.uiLang->addItem(tr("Auto Detection"), "");
 	ui.uiLang->addItem(tr("No Translation"), "native");
 	QDir langDir(QApplication::applicationDirPath() + "/translations/");
-	foreach(const QString& langFile, langDir.entryList(QStringList("sandman_*.qm"), QDir::Files))
+	foreach(const QString & langFile, langDir.entryList(QStringList("sandman_*.qm"), QDir::Files))
 	{
 		QString Code = langFile.mid(8, langFile.length() - 8 - 3);
 		QLocale Locale(Code);
@@ -142,6 +206,10 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		ui.uiLang->addItem(Lang, Code);
 	}
 	ui.uiLang->setCurrentIndex(ui.uiLang->findData(theConf->GetString("Options/UiLanguage")));
+
+	ui.cmbIntegrateMenu->addItem(tr("Don't integrate links"));
+	ui.cmbIntegrateMenu->addItem(tr("As sub group"));
+	ui.cmbIntegrateMenu->addItem(tr("Fully integrate"));
 
 	ui.cmbSysTray->addItem(tr("Don't show any icon"));
 	ui.cmbSysTray->addItem(tr("Show Plus icon"));
@@ -156,11 +224,11 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.cmbDPI->addItem(tr("Qt"), 2);
 
 	int FontScales[] = { 75,100,125,150,175,200,225,250,275,300,350,400, 0 };
-	for(int* pFontScales = FontScales; *pFontScales != 0; pFontScales++)
+	for (int* pFontScales = FontScales; *pFontScales != 0; pFontScales++)
 		ui.cmbFontScale->addItem(tr("%1").arg(*pFontScales), *pFontScales);
 
-	QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
-	if (settings.value("CurrentBuild").toInt() >= 22000) { // Windows 11
+	QSettings CurrentVersion("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", QSettings::NativeFormat);
+	if (CurrentVersion.value("CurrentBuild").toInt() >= 22000) { // Windows 11
 		QCheckBox* SecretCheckBox = new CSecretCheckBox(ui.chkShellMenu->text());
 		((QGridLayout*)((QWidget*)ui.chkShellMenu->parent())->layout())->replaceWidget(ui.chkShellMenu, SecretCheckBox);
 		ui.chkShellMenu->deleteLater();
@@ -179,12 +247,15 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkLargeIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkNoIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	//connect(ui.chkOptTree, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	//connect(ui.chkNewLayout, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkColorIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.cmbFontScale, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.cmbFontScale, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnChangeGUI()));
 
 
 	m_bRebuildUI = false;
+
+	connect(ui.chkScanMenu, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 
 	connect(ui.cmbSysTray, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
 	connect(ui.cmbTrayBoxes, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
@@ -195,7 +266,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkObjCb, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	//connect(ui.chkWin32k, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 
-	if (settings.value("CurrentBuild").toInt() < 14393) // Windows 10 RS1 and later
+	if (CurrentVersion.value("CurrentBuild").toInt() < 14393) // Windows 10 RS1 and later
 		ui.chkWin32k->setEnabled(false);
 
 	
@@ -207,6 +278,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkStartBlock, SIGNAL(stateChanged(int)), this, SLOT(OnWarnChanged()));
 
 	connect(ui.chkStartBlockMsg, SIGNAL(stateChanged(int)), this, SLOT(OnWarnChanged()));
+	connect(ui.chkNotForcedMsg, SIGNAL(stateChanged(int)), this, SLOT(OnWarnChanged()));
 	connect(ui.btnAddWarnProg, SIGNAL(clicked(bool)), this, SLOT(OnAddWarnProg()));
 	connect(ui.btnAddWarnFolder, SIGNAL(clicked(bool)), this, SLOT(OnAddWarnFolder()));
 	connect(ui.btnDelWarnProg, SIGNAL(clicked(bool)), this, SLOT(OnDelWarnProg()));
@@ -261,7 +333,6 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	restoreGeometry(theConf->GetBlob("SettingsWindow/Window_Geometry"));
 
-	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
 	int iOptionTree = theConf->GetInt("Options/OptionTree", 2);
 	if (iOptionTree == 2)
 		iOptionTree = iViewMode == 2 ? 1 : 0;
@@ -274,6 +345,12 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		QTimer::singleShot(0, [this]() {
 			m_pSearch->setMaximumWidth(m_pTabs->tabBar()->width());
 		});
+
+		QAction* pSetTree = new QAction();
+		connect(pSetTree, SIGNAL(triggered()), this, SLOT(OnSetTree()));
+		pSetTree->setShortcut(QKeySequence("Ctrl+Alt+T"));
+		pSetTree->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		this->addAction(pSetTree);
 	}
 	m_pSearch->setPlaceholderText(tr("Search for settings"));
 }
@@ -294,15 +371,24 @@ CSettingsWindow::~CSettingsWindow()
 
 void CSettingsWindow::showTab(int Tab, bool bExclusive)
 {
-	QWidget* pWidget;
-	if (ui.tabs) {
-		ui.tabs->setCurrentIndex(Tab);
-		pWidget = ui.tabs->currentWidget();
+	QWidget* pWidget = NULL;
+	switch (Tab)
+	{
+	case eOptions: pWidget = ui.tabGeneral; break;
+	case eShell: pWidget = ui.tabShell; break;
+	case eGuiConfig: pWidget = ui.tabGUI; break;
+	case eAdvanced: pWidget = ui.tabAdvanced; break;
+	case eProgCtrl: pWidget = ui.tabAlerts; break;
+	case eConfigLock: pWidget = ui.tabLock; break;
+	case eSoftCompat: pWidget = ui.tabCompat; break;
+	case eEditIni: pWidget = ui.tabEdit; break;
+	case eSupport: pWidget = ui.tabSupport; break;
 	}
-	else {
-		m_pStack->setCurrentIndex(Tab);
-		pWidget = m_pStack->currentWidget();
-	}
+
+	if (ui.tabs)
+		ui.tabs->setCurrentWidget(pWidget);
+	else
+		m_pStack->setCurrentWidget(pWidget);
 
 	if(pWidget == ui.tabCompat)
 		m_CompatLoaded = 2;
@@ -435,6 +521,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkLargeIcons->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/LargeIcons", 2)));
 	ui.chkNoIcons->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/NoIcons", 2)));
 	ui.chkOptTree->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/OptionTree", 2)));
+	ui.chkNewLayout->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/NewConfigLayout", 2)));
 	ui.chkColorIcons->setChecked(theConf->GetBool("Options/ColorBoxIcons", false));
 
 	//ui.cmbFontScale->setCurrentIndex(ui.cmbFontScale->findData(theConf->GetInt("Options/FontScaling", 100)));
@@ -456,6 +543,8 @@ void CSettingsWindow::LoadSettings()
 
 	ui.chkWatchConfig->setChecked(theConf->GetBool("Options/WatchIni", true));
 
+	ui.chkScanMenu->setChecked(theConf->GetBool("Options/ScanStartMenu", true));
+	ui.cmbIntegrateMenu->setCurrentIndex(theConf->GetInt("Options/IntegrateStartMenu", 0));
 	
 	ui.cmbSysTray->setCurrentIndex(theConf->GetInt("Options/SysTrayIcon", 1));
 	ui.cmbTrayBoxes->setCurrentIndex(theConf->GetInt("Options/SysTrayFilter", 0));
@@ -487,6 +576,8 @@ void CSettingsWindow::LoadSettings()
 
 		ui.chkStartBlock->setChecked(theAPI->GetGlobalSettings()->GetBool("StartRunAlertDenied", false));
 		ui.chkStartBlockMsg->setChecked(theAPI->GetGlobalSettings()->GetBool("NotifyStartRunAccessDenied", true));
+		ui.chkNotForcedMsg->setChecked(theAPI->GetGlobalSettings()->GetBool("NotifyForceProcessDisabled", false));
+		
 		
 		ui.treeWarnProgs->clear();
 
@@ -557,7 +648,11 @@ void CSettingsWindow::UpdateCert()
 		QPalette palette = QApplication::palette();
 		if (theGUI->m_DarkTheme)
 			palette.setColor(QPalette::Text, Qt::black);
-		if (g_CertInfo.expired) {
+		if (g_CertInfo.expired
+#ifdef _DEBUG
+			|| (GetKeyState(VK_CONTROL) & 0x8000) != 0
+#endif
+			) {
 			palette.setColor(QPalette::Base, QColor(255, 255, 192));
 			ui.lblCertExp->setText(tr("This supporter certificate has expired, please <a href=\"sbie://update/cert\">get an updated certificate</a>."));
 			ui.lblCertExp->setVisible(true);
@@ -638,6 +733,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/LargeIcons", CSettingsWindow__Chk2Int(ui.chkLargeIcons->checkState()));
 	theConf->SetValue("Options/NoIcons", CSettingsWindow__Chk2Int(ui.chkNoIcons->checkState()));
 	theConf->SetValue("Options/OptionTree", CSettingsWindow__Chk2Int(ui.chkOptTree->checkState()));
+	theConf->SetValue("Options/NewConfigLayout", CSettingsWindow__Chk2Int(ui.chkNewLayout->checkState()));
 	theConf->SetValue("Options/ColorBoxIcons", ui.chkColorIcons->isChecked());
 
 	int Scaling = ui.cmbFontScale->currentText().toInt();
@@ -695,6 +791,17 @@ void CSettingsWindow::SaveSettings()
 
 	theConf->SetValue("Options/WatchIni", ui.chkWatchConfig->isChecked());
 
+	theConf->SetValue("Options/ScanStartMenu", ui.chkScanMenu->isChecked());
+	int OldIntegrateStartMenu = theConf->GetInt("Options/IntegrateStartMenu", 0);
+	theConf->SetValue("Options/IntegrateStartMenu", ui.cmbIntegrateMenu->currentIndex());
+	if (ui.cmbIntegrateMenu->currentIndex() != OldIntegrateStartMenu) {
+		if (ui.cmbIntegrateMenu->currentIndex() == 0)
+			theGUI->ClearStartMenu();
+		else
+			theGUI->SyncStartMenu();
+	}
+
+
 	theConf->SetValue("Options/SysTrayIcon", ui.cmbSysTray->currentIndex());
 	theConf->SetValue("Options/SysTrayFilter", ui.cmbTrayBoxes->currentIndex());
 	theConf->SetValue("Options/CompactTray", ui.chkCompactTray->isChecked());
@@ -742,6 +849,7 @@ void CSettingsWindow::SaveSettings()
 			{
 				WriteAdvancedCheck(ui.chkStartBlock, "StartRunAlertDenied", "y", "");
 				WriteAdvancedCheck(ui.chkStartBlockMsg, "NotifyStartRunAccessDenied", "", "n");
+				WriteAdvancedCheck(ui.chkNotForcedMsg, "NotifyForceProcessDisabled", "y", "");
 
 				QStringList AlertProcess;
 				QStringList AlertFolder;
@@ -946,12 +1054,14 @@ void CSettingsWindow::OnChange()
 
 void CSettingsWindow::OnTab()
 {
-	OnTab(ui.tabs->currentIndex());
+	OnTab(ui.tabs->currentWidget());
 }
 
-void CSettingsWindow::OnTab(int iTabID)
+void CSettingsWindow::OnTab(QWidget* pTab)
 {
-	if (iTabID == eSupport)
+	m_pCurrentTab = pTab;
+
+	if (pTab == ui.tabSupport)
 	{
 		if (ui.lblCurrent->text().isEmpty()) {
 			if (ui.chkAutoUpdate->checkState())
@@ -960,12 +1070,12 @@ void CSettingsWindow::OnTab(int iTabID)
 				ui.lblCurrent->setText(tr("<a href=\"check\">Check Now</a>"));
 		}
 	}
-	else if (iTabID == eEditIni)
+	else if (pTab == ui.tabEdit)
 	{
 		LoadIniSection();
 		ui.txtIniSection->setReadOnly(true);
 	}
-	else if (iTabID == eSoftCompat && m_CompatLoaded != 1 && theAPI->IsConnected())
+	else if (pTab == ui.tabCompat && m_CompatLoaded != 1 && theAPI->IsConnected())
 	{
 		if(m_CompatLoaded == 0)
 			theGUI->GetCompat()->RunCheck();
@@ -1224,6 +1334,13 @@ void CSettingsWindow::CertChanged()
 
 void CSettingsWindow::LoadCertificate(QString CertPath)
 {
+#ifdef _DEBUG
+	if (GetKeyState(VK_CONTROL) & 0x8000) {
+		g_Certificate.clear();
+		return;
+	}
+#endif
+
 	if (theAPI && theAPI->IsConnected())
 		CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
 		
@@ -1234,14 +1351,11 @@ void CSettingsWindow::LoadCertificate(QString CertPath)
 	}
 }
 
-#include <windows.h>
-#include <shellapi.h>
-
 void WindowsMoveFile(const QString& From, const QString& To)
 {
-	wstring from = From.toStdWString();
+	std::wstring from = From.toStdWString();
 	from.append(L"\0", 1);
-	wstring to = To.toStdWString();
+	std::wstring to = To.toStdWString();
 	to.append(L"\0", 1);
 
 	SHFILEOPSTRUCT SHFileOp;

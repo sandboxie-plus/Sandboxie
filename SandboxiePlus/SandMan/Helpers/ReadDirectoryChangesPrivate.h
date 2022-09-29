@@ -66,7 +66,7 @@ public:
 		m_hDirectory = nullptr;
 	}
 
-	const wstring& GetDirectory() { return m_wstrDirectory; }
+	const std::wstring& GetDirectory() { return m_wstrDirectory; }
 
 	CReadChangesServer* m_pServer;
 
@@ -80,7 +80,7 @@ protected:
 	// Parameters from the caller for ReadDirectoryChangesW().
 	DWORD		m_dwFilterFlags;
 	BOOL		m_bIncludeChildren;
-	wstring		m_wstrDirectory;
+	std::wstring		m_wstrDirectory;
 
 	// Result of calling CreateFile().
 	HANDLE		m_hDirectory;
@@ -91,11 +91,11 @@ protected:
 	// Data buffer for the request.
 	// Since the memory is allocated by malloc, it will always
 	// be aligned as required by ReadDirectoryChangesW().
-	vector<BYTE> m_Buffer;
+	std::vector<BYTE> m_Buffer;
 
 	// Double buffer strategy so that we can issue a new read
 	// request before we process the current buffer.
-	vector<BYTE> m_BackupBuffer;
+	std::vector<BYTE> m_BackupBuffer;
 };
 
 ///////////////////////////////////////////////////////////////////////////
@@ -135,7 +135,7 @@ public:
 
 	static void CALLBACK DetachDirectoryProc(__in  ULONG_PTR arg)
 	{
-		pair<ReadDirectoryChangesPrivate::CReadChangesServer*, wstring>* pRequest = (pair<ReadDirectoryChangesPrivate::CReadChangesServer*, wstring>*)arg;
+		std::pair<ReadDirectoryChangesPrivate::CReadChangesServer*, std::wstring>* pRequest = (std::pair<ReadDirectoryChangesPrivate::CReadChangesServer*, std::wstring>*)arg;
 		pRequest->first->DetachDirectory(pRequest);
 	}
 
@@ -174,7 +174,7 @@ protected:
 			delete pBlock;
 	}
 
-	void DetachDirectory(pair<ReadDirectoryChangesPrivate::CReadChangesServer*, wstring>* pRequest)
+	void DetachDirectory(std::pair<ReadDirectoryChangesPrivate::CReadChangesServer*, std::wstring>* pRequest)
 	{
 		for (auto I = m_pBlocks.begin(); I != m_pBlocks.end(); )
 		{
@@ -204,7 +204,7 @@ protected:
 		m_pBlocks.clear();
 	}
 
-	vector<CReadChangesRequest*> m_pBlocks;
+	std::vector<CReadChangesRequest*> m_pBlocks;
 
 	bool m_bTerminate;
 };

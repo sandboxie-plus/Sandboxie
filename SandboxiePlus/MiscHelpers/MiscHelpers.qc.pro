@@ -1,7 +1,7 @@
 
 TEMPLATE = lib
 TARGET = MiscHelpers
-QT += core network widgets winextras
+QT += core network widgets
 #CONFIG += debug
 # DEFINES += QT_LARGEFILE_SUPPORT QTSERVICE_LIB QT_WIDGETS_LIB QT_QTSINGLEAPPLICATION_EXPORT
 DEFINES += MISCHELPERS_LIB
@@ -12,7 +12,7 @@ PRECOMPILED_HEADER = stdafx.h
 #OBJECTS_DIR += debug
 #UI_DIR += ./GeneratedFiles
 #RCC_DIR += ./GeneratedFiles
-win32:LIBS += -lUser32 -lShell32
+win32:LIBS += -lUser32 -lShell32 -lOleAut32
 
 !mac:unix:QMAKE_LFLAGS += -Wl,-rpath,'\$\$ORIGIN'
 mac:QMAKE_CXXFLAGS += -std=c++11

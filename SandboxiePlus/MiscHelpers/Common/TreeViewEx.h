@@ -45,8 +45,8 @@ __inline uint qHash( const QVariant & var )
         case QVariant::DateTime:
         case QVariant::Url:
         case QVariant::Locale:
-        case QVariant::RegExp:
-                return qHash( var.toString() );
+        //case QVariant::RegExp:
+        //        return qHash( var.toString() );
             break;
         case QVariant::Map:
         case QVariant::List:

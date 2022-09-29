@@ -7,7 +7,7 @@ QWidget* CFinder::AddFinder(QWidget* pList, QObject* pFilterTarget, bool HighLig
 {
 	QWidget* pWidget = new QWidget();
 	QVBoxLayout* pLayout = new QVBoxLayout();
-	pLayout->setMargin(0);
+	pLayout->setContentsMargins(0,0,0,0);
 	pWidget->setLayout(pLayout);
 
 	pLayout->addWidget(pList);
@@ -23,7 +23,7 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, bool HighLightOption)
 :QWidget(parent)
 {
 	m_pSearchLayout = new QHBoxLayout();
-	m_pSearchLayout->setMargin(0);
+	m_pSearchLayout->setContentsMargins(0,0,0,0);
 	m_pSearchLayout->setSpacing(3);
 	m_pSearchLayout->setAlignment(Qt::AlignLeft);
 
@@ -92,7 +92,7 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, bool HighLightOption)
 	}
 
 	if (pFilterTarget) {
-		QObject::connect(this, SIGNAL(SetFilter(const QRegExp&, bool, int)), pFilterTarget, SLOT(SetFilter(const QRegExp&, bool, int)));
+		QObject::connect(this, SIGNAL(SetFilter(const QRegularExpression&, bool, int)), pFilterTarget, SLOT(SetFilter(const QRegularExpression&, bool, int)));
 		QObject::connect(this, SIGNAL(SelectNext()), pFilterTarget, SLOT(SelectNext()));
 	}
 
@@ -136,11 +136,16 @@ void CFinder::Open()
 	OnUpdate();
 }
 
-QRegExp CFinder::GetRegExp() const
+QRegularExpression CFinder::GetRegExp() const
 {
 	if (!isVisible() || m_pSearch->text().isEmpty())
-		return QRegExp();
-	return QRegExp(m_pSearch->text(), m_pCaseSensitive->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive, m_pRegExp->isChecked() ? QRegExp::RegExp : QRegExp::FixedString);
+		return QRegularExpression();
+	QString Exp;
+	if(m_pRegExp->isChecked())
+		Exp = m_pSearch->text();
+	else
+		Exp = QRegularExpression::wildcardToRegularExpression("*" + m_pSearch->text() + "*");
+	return QRegularExpression(Exp, m_pCaseSensitive->isChecked() ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
 }
 
 void CFinder::OnUpdate()
@@ -164,6 +169,6 @@ void CFinder::OnReturn()
 
 void CFinder::Close()
 {
-	emit SetFilter(QRegExp());
+	emit SetFilter(QRegularExpression());
 	hide();
 }

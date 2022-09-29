@@ -25,17 +25,32 @@ void COptionsWindow::CreateAccess()
 	pFileBtnMenu->addAction(tr("Browse for Folder"), this, SLOT(OnBrowseFolder()));
 	ui.btnAddFile->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnAddFile->setMenu(pFileBtnMenu);
+	connect(ui.chkShowFilesTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowFilesTmpl()));
+	connect(ui.btnDelFile, SIGNAL(clicked(bool)), this, SLOT(OnDelFile()));
 	connect(ui.btnAddKey, SIGNAL(clicked(bool)), this, SLOT(OnAddKey()));
+	connect(ui.chkShowKeysTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowKeysTmpl()));
+	connect(ui.btnDelKey, SIGNAL(clicked(bool)), this, SLOT(OnDelKey()));
 	connect(ui.btnAddIPC, SIGNAL(clicked(bool)), this, SLOT(OnAddIPC()));
+	connect(ui.chkShowIPCTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowIPCTmpl()));
+	connect(ui.btnDelIPC, SIGNAL(clicked(bool)), this, SLOT(OnDelIPC()));
 	connect(ui.btnAddWnd, SIGNAL(clicked(bool)), this, SLOT(OnAddWnd()));
+	connect(ui.chkShowWndTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowWndTmpl()));
+	connect(ui.btnDelWnd, SIGNAL(clicked(bool)), this, SLOT(OnDelWnd()));
 	connect(ui.btnAddCOM, SIGNAL(clicked(bool)), this, SLOT(OnAddCOM()));
-	connect(ui.chkShowAccessTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowAccessTmpl()));
-	connect(ui.btnDelAccess, SIGNAL(clicked(bool)), this, SLOT(OnDelAccess()));
+	connect(ui.chkShowCOMTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowCOMTmpl()));
+	connect(ui.btnDelCOM, SIGNAL(clicked(bool)), this, SLOT(OnDelCOM()));
+	//connect(ui.chkShowAccessTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowAccessTmpl()));
+	//connect(ui.btnDelAccess, SIGNAL(clicked(bool)), this, SLOT(OnDelAccess()));
 
-	//connect(ui.treeAccess, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnAccessItemClicked(QTreeWidgetItem*, int)));
-	connect(ui.treeAccess, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnAccessItemDoubleClicked(QTreeWidgetItem*, int)));
-	connect(ui.treeAccess, SIGNAL(itemSelectionChanged()), this, SLOT(OnAccessSelectionChanged()));
-	connect(ui.treeAccess, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnAccessChanged(QTreeWidgetItem *, int)));
+	QTreeWidget* pTrees[] = { ui.treeFiles, ui.treeKeys , ui.treeIPC, ui.treeWnd, ui.treeCOM, NULL};
+	for (QTreeWidget** pTree = pTrees; *pTree; pTree++) {
+		//connect(*pTree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnAccessItemClicked(QTreeWidgetItem*, int)));
+		connect(*pTree, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnAccessItemDoubleClicked(QTreeWidgetItem*, int)));
+		connect(*pTree, SIGNAL(itemSelectionChanged()), this, SLOT(OnAccessSelectionChanged()));
+		connect(*pTree, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnAccessChanged(QTreeWidgetItem *, int)));
+	}
+
+	connect(ui.tabsAccess, SIGNAL(currentChanged(int)), this, SLOT(OnAccessTab()));
 }
 
 void COptionsWindow::OnAccessChanged()
@@ -66,13 +81,14 @@ void COptionsWindow::UpdateAccessPolicy()
 
 QTreeWidgetItem* COptionsWindow::GetAccessEntry(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path)
 {
-	for (int i = 0; i < ui.treeAccess->topLevelItemCount(); i++)
+	QTreeWidget* pTree = GetAccessTree(Type);
+	for (int i = 0; i < pTree->topLevelItemCount(); i++)
 	{
-		QTreeWidgetItem* pItem = ui.treeAccess->topLevelItem(i);
+		QTreeWidgetItem* pItem = pTree->topLevelItem(i);
 		if (pItem->data(0, Qt::UserRole).toInt() == Type
-		 && pItem->data(1, Qt::UserRole).toString().compare(Program, Qt::CaseInsensitive) == 0
-		 && pItem->data(2, Qt::UserRole).toInt() == Mode
-		 && pItem->data(3, Qt::UserRole).toString().compare(Path, Qt::CaseInsensitive) == 0)
+			&& pItem->data(1, Qt::UserRole).toString().compare(Program, Qt::CaseInsensitive) == 0
+			&& pItem->data(2, Qt::UserRole).toInt() == Mode
+			&& pItem->data(3, Qt::UserRole).toString().compare(Path, Qt::CaseInsensitive) == 0)
 			return pItem;
 	}
 	return NULL;
@@ -137,9 +153,11 @@ void COptionsWindow::LoadAccessList()
 	ui.chkCloseForBox->setChecked(m_pBox->GetBool("AlwaysCloseForBoxed", true));
 	ui.chkNoOpenForBox->setChecked(m_pBox->GetBool("DontOpenForBoxed", true));
 
-	ui.treeAccess->clear();
+	QTreeWidget* pTrees[] = { ui.treeFiles, ui.treeKeys , ui.treeIPC, ui.treeWnd, ui.treeCOM, NULL};
+	for (QTreeWidget** pTree = pTrees; *pTree; pTree++)
+		(*pTree )->clear();
 
-	for (int i = 0; i < eMaxAccessType; i++)
+	for (int i = 0; i < eMaxAccessEntry; i++)
 	{
 		foreach(const QString& Value, m_pBox->GetTextList(AccessTypeToName((EAccessEntry)i), m_Template))
 			ParseAndAddAccessEntry((EAccessEntry)i, Value);
@@ -157,22 +175,53 @@ void COptionsWindow::LoadAccessList()
 
 void COptionsWindow::LoadAccessListTmpl(bool bUpdate)
 {
-	if (ui.chkShowAccessTmpl->isChecked())
-	{
-		foreach(const QString& Template, m_pBox->GetTemplates())
+	for (int i = 0; i < eMaxAccessType; i++) {
+		QCheckBox* pCheck = NULL;
+		switch (i)
 		{
-			for (int i = 0; i < eMaxAccessType; i++)
+		case eFile:	pCheck = ui.chkShowFilesTmpl; break;
+		case eKey:	pCheck = ui.chkShowKeysTmpl; break;
+		case eIPC:	pCheck = ui.chkShowIPCTmpl; break;
+		case eWnd:	pCheck = ui.chkShowWndTmpl; break;
+		case eCOM:	pCheck = ui.chkShowCOMTmpl;	break;
+		}
+		LoadAccessListTmpl((EAccessType)i, pCheck->isChecked(), bUpdate);
+	}
+}
+
+QTreeWidget* COptionsWindow::GetAccessTree(EAccessType Type)
+{
+	QTreeWidget* pTree = NULL;
+	switch (Type)
+	{
+	case eFile:	pTree = ui.treeFiles; break;
+	case eKey:	pTree = ui.treeKeys; break;
+	case eIPC:	pTree = ui.treeIPC; break;
+	case eWnd:	pTree = ui.treeWnd; break;
+	case eCOM:	pTree = ui.treeCOM; break;
+	}
+	return pTree;
+}
+
+void COptionsWindow::LoadAccessListTmpl(EAccessType Type, bool bChecked, bool bUpdate)
+{
+	if (bChecked)
+	{
+		foreach(EAccessMode Mode, GetAccessModes((EAccessType)Type))
+		{
+			foreach(const QString & Template, m_pBox->GetTemplates())
 			{
-				foreach(const QString& Value, m_pBox->GetTextListTmpl(AccessTypeToName((EAccessEntry)i), Template))
-					ParseAndAddAccessEntry((EAccessEntry)i, Value, false, Template);
+				foreach(const QString & Value, m_pBox->GetTextListTmpl(MakeAccessStr(Type, Mode), Template))
+					ParseAndAddAccessEntry(Type, Mode, Value, false, Template);
 			}
 		}
 	}
 	else if (bUpdate)
 	{
-		for (int i = 0; i < ui.treeAccess->topLevelItemCount(); )
+		QTreeWidget* pTree = GetAccessTree(Type);
+		for (int i = 0; i < pTree->topLevelItemCount(); )
 		{
-			QTreeWidgetItem* pItem = ui.treeAccess->topLevelItem(i);
+			QTreeWidgetItem* pItem = pTree->topLevelItem(i);
 			int Type = pItem->data(0, Qt::UserRole).toInt();
 			if (Type == -1) {
 				delete pItem;
@@ -198,7 +247,7 @@ void COptionsWindow::ParseAndAddAccessEntry(EAccessEntry EntryType, const QStrin
 
 	case eNormalKeyPath:	Type = eKey;	Mode = eNormal;	break;
 	case eOpenKeyPath:		Type = eKey;	Mode = eOpen;	break;
-	case eOpenConfPath:		Type = eKey;	Mode = eOpen4All;break;
+	case eOpenConfPath:		Type = eKey;	Mode = eOpen4All; break;
 	case eClosedKeyPath:	Type = eKey;	Mode = eClosed;	break;
 	case eReadKeyPath:		Type = eKey;	Mode = eReadOnly; break;
 	case eWriteKeyPath:		Type = eKey;	Mode = eBoxOnly; break;
@@ -218,6 +267,11 @@ void COptionsWindow::ParseAndAddAccessEntry(EAccessEntry EntryType, const QStrin
 	default:				return;
 	}
 
+	ParseAndAddAccessEntry(Type, Mode, Value, disabled, Template);
+}
+
+void COptionsWindow::ParseAndAddAccessEntry(EAccessType Type, EAccessMode Mode, const QString& Value, bool disabled, const QString& Template)
+{
 	//
 	// Mind this special cases
 	// OpenIpcPath=$:program.exe <- full access into the address space of a target process running outside the sandbox. 
@@ -226,6 +280,15 @@ void COptionsWindow::ParseAndAddAccessEntry(EAccessEntry EntryType, const QStrin
 	//
 
 	QStringList Values = Value.split(",");
+
+	if (Type == eWnd && Mode == eOpen) {
+		int pos = Values.count() >= 2 ? 1 : 0;
+		if (Values[pos].right(11).compare("/IgnoreUIPI", Qt::CaseInsensitive) == 0) {
+			Mode = eIgnoreUIPI;
+			Values[pos].truncate(Values[pos].length() - 11);
+		}
+	}
+
 	if (Values.count() >= 2) 
 		AddAccessEntry(Type, Mode, Values[0], Values[1], disabled, Template);
 	else // all programs
@@ -244,6 +307,7 @@ QString COptionsWindow::GetAccessModeStr(EAccessMode Mode)
 	case eClosedRT:		return tr("Closed RT");
 	case eReadOnly:		return tr("Read Only");
 	case eBoxOnly:		return tr("Box Only (Write Only)");
+	case eIgnoreUIPI:	return tr("Ignore UIPI");
 	}
 	return tr("Unknown");
 }
@@ -285,7 +349,7 @@ void COptionsWindow::OnBrowseFolder()
 	OnOptChanged();
 }
 
-void COptionsWindow::AddAccessEntry(EAccessType	Type, EAccessMode Mode, QString Program, const QString& Path, bool disabled, const QString& Template)
+void COptionsWindow::AddAccessEntry(EAccessType Type, EAccessMode Mode, QString Program, const QString& Path, bool disabled, const QString& Template)
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
 
@@ -324,7 +388,9 @@ void COptionsWindow::AddAccessEntry(EAccessType	Type, EAccessMode Mode, QString 
 
 	if(Template.isEmpty())
 		pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
-	ui.treeAccess->addTopLevelItem(pItem);
+
+	QTreeWidget* pTree = GetAccessTree(Type);
+	pTree->addTopLevelItem(pItem);
 }
 
 QString COptionsWindow::MakeAccessStr(EAccessType Type, EAccessMode Mode)
@@ -391,16 +457,21 @@ QString COptionsWindow::MakeAccessStr(EAccessType Type, EAccessMode Mode)
 
 void COptionsWindow::CloseAccessEdit(bool bSave)
 {
-	for (int i = 0; i < ui.treeAccess->topLevelItemCount(); i++)
-	{
-		QTreeWidgetItem* pItem = ui.treeAccess->topLevelItem(i);
-		CloseAccessEdit(pItem, bSave);
+	QTreeWidget* pTrees[] = { ui.treeFiles, ui.treeKeys , ui.treeIPC, ui.treeWnd, ui.treeCOM, NULL};
+	for (QTreeWidget** pTree = pTrees; *pTree; pTree++) {
+		for (int i = 0; i < (*pTree)->topLevelItemCount(); i++)
+		{
+			QTreeWidgetItem* pItem = (*pTree)->topLevelItem(i);
+			CloseAccessEdit(pItem, bSave);
+		}
 	}
 }
 
 void COptionsWindow::CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave)
 {
-	QWidget* pProgram = ui.treeAccess->itemWidget(pItem, 1);
+	QTreeWidget* pTree = pItem->treeWidget();
+
+	QWidget* pProgram = pTree->itemWidget(pItem, 1);
 	if (!pProgram)
 		return;
 
@@ -410,8 +481,8 @@ void COptionsWindow::CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave)
 		QToolButton* pNot = (QToolButton*)pLayout->itemAt(0)->widget();
 		QComboBox* pCombo = (QComboBox*)pLayout->itemAt(1)->widget();
 
-		QComboBox* pMode = (QComboBox*)ui.treeAccess->itemWidget(pItem, 2);
-		QLineEdit* pPath = (QLineEdit*)ui.treeAccess->itemWidget(pItem, 3);
+		QComboBox* pMode = (QComboBox*)pTree->itemWidget(pItem, 2);
+		QLineEdit* pPath = (QLineEdit*)pTree->itemWidget(pItem, 3);
 
 		QString Program = pCombo->currentText();
 		int Index = pCombo->findText(Program);
@@ -477,9 +548,9 @@ void COptionsWindow::CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave)
 		OnOptChanged();
 	}
 
-	ui.treeAccess->setItemWidget(pItem, 1, NULL);
-	ui.treeAccess->setItemWidget(pItem, 2, NULL);
-	ui.treeAccess->setItemWidget(pItem, 3, NULL);
+	pTree->setItemWidget(pItem, 1, NULL);
+	pTree->setItemWidget(pItem, 2, NULL);
+	pTree->setItemWidget(pItem, 3, NULL);
 }
 
 QList<COptionsWindow::EAccessMode> COptionsWindow::GetAccessModes(EAccessType Type)
@@ -489,7 +560,7 @@ QList<COptionsWindow::EAccessMode> COptionsWindow::GetAccessModes(EAccessType Ty
 	case eFile:			return QList<EAccessMode>() << eNormal << eOpen << eOpen4All << eClosed << eReadOnly << eBoxOnly;
 	case eKey:			return QList<EAccessMode>() << eNormal << eOpen << eOpen4All << eClosed << eReadOnly << eBoxOnly;
 	case eIPC:			return QList<EAccessMode>() << eNormal << eOpen << eClosed << eReadOnly;
-	case eWnd:			return QList<EAccessMode>() << eOpen << eNoRename;
+	case eWnd:			return QList<EAccessMode>() << eOpen << eNoRename << eIgnoreUIPI;
 	case eCOM:			return QList<EAccessMode>() << eOpen << eClosed << eClosedRT;
 	}
 	return QList<EAccessMode>();
@@ -499,6 +570,8 @@ void COptionsWindow::OnAccessItemDoubleClicked(QTreeWidgetItem* pItem, int Colum
 {
 	//if (Column == 0)
 	//	return;
+
+	QTreeWidget* pTree = (QTreeWidget*)sender();
 
 	int Type = pItem->data(0, Qt::UserRole).toInt();
 	if (Type == -1) {
@@ -511,7 +584,7 @@ void COptionsWindow::OnAccessItemDoubleClicked(QTreeWidgetItem* pItem, int Colum
 	QWidget* pProgram = new QWidget();
 	pProgram->setAutoFillBackground(true);
 	QHBoxLayout* pLayout = new QHBoxLayout();
-	pLayout->setMargin(0);
+	pLayout->setContentsMargins(0,0,0,0);
 	pLayout->setSpacing(0);
 	pProgram->setLayout(pLayout);
 	QToolButton* pNot = new QToolButton(pProgram);
@@ -540,17 +613,17 @@ void COptionsWindow::OnAccessItemDoubleClicked(QTreeWidgetItem* pItem, int Colum
 		pCombo->setCurrentText(Program);
 	pLayout->addWidget(pCombo);
 
-	ui.treeAccess->setItemWidget(pItem, 1, pProgram);
+	pTree->setItemWidget(pItem, 1, pProgram);
 
 	QComboBox* pMode = new QComboBox();
 	foreach(EAccessMode Mode, GetAccessModes((EAccessType)Type))
 		pMode->addItem(GetAccessModeStr(Mode), (int)Mode);
 	pMode->setCurrentIndex(pMode->findData(pItem->data(2, Qt::UserRole)));
-	ui.treeAccess->setItemWidget(pItem, 2, pMode);
+	pTree->setItemWidget(pItem, 2, pMode);
 
 	QLineEdit* pPath = new QLineEdit();
 	pPath->setText(pItem->data(3, Qt::UserRole).toString());
-	ui.treeAccess->setItemWidget(pItem, 3, pPath);
+	pTree->setItemWidget(pItem, 3, pPath);
 }
 
 void COptionsWindow::OnAccessChanged(QTreeWidgetItem* pItem, int Column)
@@ -562,24 +635,17 @@ void COptionsWindow::OnAccessChanged(QTreeWidgetItem* pItem, int Column)
 	OnOptChanged();
 }
 
-void COptionsWindow::DeleteAccessEntry(QTreeWidgetItem* pItem)
+void COptionsWindow::DeleteAccessEntry(QTreeWidgetItem* pItem, int Column)
 {
 	if (!pItem)
 		return;
 
-	if (pItem->data(0, Qt::UserRole).toInt() == -1) {
+	if (pItem->data(Column, Qt::UserRole).toInt() == -1) {
 		QMessageBox::warning(this, "SandboxiePlus", tr("Template values can not be removed."));
 		return;
 	}
 
 	delete pItem;
-}
-
-void COptionsWindow::OnDelAccess()
-{
-	DeleteAccessEntry(ui.treeAccess->currentItem());
-	m_AccessChanged = true;
-	OnOptChanged();
 }
 
 void COptionsWindow::SaveAccessList()
@@ -599,22 +665,33 @@ void COptionsWindow::SaveAccessList()
 		<< "OpenClsid" << "ClosedClsid" << "ClosedRT";
 
 	QMap<QString, QList<QString>> AccessMap;
-	for (int i = 0; i < ui.treeAccess->topLevelItemCount(); i++)
-	{
-		QTreeWidgetItem* pItem = ui.treeAccess->topLevelItem(i);
-		int Type = pItem->data(0, Qt::UserRole).toInt();
-		if (Type == -1)
-			continue; // entry from template
-		int Mode = pItem->data(2, Qt::UserRole).toInt();
-		QString Program = pItem->data(1, Qt::UserRole).toString();
-		QString Value = pItem->data(3, Qt::UserRole).toString();
-		if (!Program.isEmpty())
-			Value.prepend(Program + ",");
 
-		QString AccessStr = MakeAccessStr((EAccessType)Type, (EAccessMode)Mode);
-		if (pItem->checkState(0) == Qt::Unchecked)
-			AccessStr += "Disabled";
-		AccessMap[AccessStr].append(Value);
+
+	QTreeWidget* pTrees[] = { ui.treeFiles, ui.treeKeys , ui.treeIPC, ui.treeWnd, ui.treeCOM, NULL};
+	for (QTreeWidget** pTree = pTrees; *pTree; pTree++)
+	{
+		for (int i = 0; i < (*pTree)->topLevelItemCount(); i++)
+		{
+			QTreeWidgetItem* pItem = (*pTree)->topLevelItem(i);
+			int Type = pItem->data(0, Qt::UserRole).toInt();
+			if (Type == -1)
+				continue; // entry from template
+			int Mode = pItem->data(2, Qt::UserRole).toInt();
+			QString Program = pItem->data(1, Qt::UserRole).toString();
+			QString Value = pItem->data(3, Qt::UserRole).toString();
+			if (!Program.isEmpty())
+				Value.prepend(Program + ",");
+
+			if (Type == eWnd && Mode == eIgnoreUIPI) {
+				Mode = eOpen;
+				Value.append("/IgnoreUIPI");
+			}
+
+			QString AccessStr = MakeAccessStr((EAccessType)Type, (EAccessMode)Mode);
+			if (pItem->checkState(0) == Qt::Unchecked)
+				AccessStr += "Disabled";
+			AccessMap[AccessStr].append(Value);
+		}
 	}
 
 	foreach(const QString & Key, Keys) {

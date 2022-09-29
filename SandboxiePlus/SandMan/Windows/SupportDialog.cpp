@@ -12,13 +12,13 @@ QDateTime GetSbieInstallationDate()
 	time_t InstalDate = 0;
 	theAPI->GetSecureParam("InstallationDate", &InstalDate, sizeof(InstalDate));
 
-	time_t CurrentDate = QDateTime::currentDateTimeUtc().toTime_t();
+	time_t CurrentDate = QDateTime::currentDateTimeUtc().toSecsSinceEpoch();
 	if (InstalDate == 0 || InstalDate > CurrentDate) {
 		InstalDate = CurrentDate;
 		theAPI->SetSecureParam("InstallationDate", &InstalDate, sizeof(InstalDate));
 	}
 
-	return QDateTime::fromTime_t(InstalDate);
+	return QDateTime::fromSecsSinceEpoch(InstalDate);
 }
 
 bool CSupportDialog::IsBusinessUse()
@@ -80,8 +80,8 @@ bool CSupportDialog::CheckSupport(bool bOnRun)
 
 		time_t LastReminder = 0;
 		theAPI->GetSecureParam("LastReminder", &LastReminder, sizeof(LastReminder));
-		if (LastReminder > 0 && LastReminder < CurretnDate.toTime_t()) {
-			if (CurretnDate.toTime_t() - LastReminder < (time_t(Interval) * 3600))
+		if (LastReminder > 0 && LastReminder < CurretnDate.toSecsSinceEpoch()) {
+			if (CurretnDate.toSecsSinceEpoch() - LastReminder < (time_t(Interval) * 3600))
 				return false;
 		}
 
@@ -125,7 +125,7 @@ bool CSupportDialog::ShowDialog(bool NoGo, int Wait)
 		if (g_CertInfo.outdated)
 			Message += tr("The installed supporter certificate is <b>outdated</b> and it is <u>not valid for<b> this version</b></u> of Sandboxie-Plus.<br /><br />");
 		else if (g_CertInfo.expired)
-			Message += tr("The installed supporter certificate is <b>expired</b> and <u>should to be renewed</u>.<br /><br />");
+			Message += tr("The installed supporter certificate is <b>expired</b> and <u>should be renewed</u>.<br /><br />");
 		else
 			Message = tr("<b>You have been using Sandboxie-Plus for more than %1 days now.</b><br /><br />").arg(Days);
 
@@ -142,7 +142,7 @@ bool CSupportDialog::ShowDialog(bool NoGo, int Wait)
 				"A <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a> not just removes this reminder, but also enables <b>exclusive enhanced functionality</b> providing better security and compatibility.");
 	}
 
-	time_t LastReminder = QDateTime::currentDateTimeUtc().toTime_t();
+	time_t LastReminder = QDateTime::currentDateTimeUtc().toSecsSinceEpoch();
 	theAPI->SetSecureParam("LastReminder", &LastReminder, sizeof(LastReminder));
 
 	CSupportDialog dialog(Message, NoGo);
@@ -211,7 +211,7 @@ CSupportDialog::CSupportDialog(const QString& Message, bool NoGo, int Wait, QWid
 	verticalLayout->addLayout(gridLayout);
 
 
-	for (int s = qrand() % 3,  i = 0; i < 3; i++)
+	for (int s = rand() % 3,  i = 0; i < 3; i++)
 	{
 		QPushButton* pButton = m_Buttons[(s + i) % 3];
 		pButton->setAutoDefault(false);

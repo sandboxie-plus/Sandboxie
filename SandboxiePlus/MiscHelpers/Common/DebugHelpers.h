@@ -39,15 +39,15 @@ public:
 
 	void	DumpTrace();
 
-	void	TraceAlloc(string Name);
-	void	TraceFree(string Name);
-	void	TracePre(string Name);
+	void	TraceAlloc(std::string Name);
+	void	TraceFree(std::string Name);
+	void	TracePre(std::string Name);
 	
 
 private:
 	QMutex				m_Locker;
-	map<string,int>		m_MemoryTrace;
-	map<string,int>		m_MemoryTrace2;
+	std::map<std::string,int>		m_MemoryTrace;
+	std::map<std::string,int>		m_MemoryTrace2;
 };
 
 MISCHELPERS_EXPORT extern CMemTracer memTracer;
@@ -66,8 +66,8 @@ public:
 	void	DumpTrace();
 	void	ResetTrace();
 
-	void	TraceStart(string Name);
-	void	TraceStop(string Name);
+	void	TraceStart(std::string Name);
+	void	TraceStop(std::string Name);
 
 private:
 	struct SCycles
@@ -81,7 +81,7 @@ private:
 		quint64	Total;
 	};
 	QMutex					m_Locker;
-	map<string,SCycles>		m_CpuUsageTrace;
+	std::map<std::string,SCycles>		m_CpuUsageTrace;
 };
 
 MISCHELPERS_EXPORT extern CCpuTracer cpuTracer;
@@ -100,7 +100,7 @@ public:
 
 	void	DumpTrace();
 
-	void	TraceLock(string Name, int op);
+	void	TraceLock(std::string Name, int op);
 
 private:
 	QMutex					m_Locker;
@@ -114,7 +114,7 @@ private:
 		time_t	LockTime;
 		int		LockCount;
 	};
-	map<string,SLocks>		m_LockTrace;
+	std::map<std::string,SLocks>		m_LockTrace;
 };
 
 MISCHELPERS_EXPORT extern CLockTracer lockTracer;
@@ -126,7 +126,7 @@ MISCHELPERS_EXPORT extern CLockTracer lockTracer;
 class MISCHELPERS_EXPORT CLockerTrace
 {
 public:
-	CLockerTrace(string Name)
+	CLockerTrace(std::string Name)
 	{
 		m_Name = Name;
 		lockTracer.TraceLock(m_Name,1);
@@ -137,7 +137,7 @@ public:
 	}
 
 private:
-	string	m_Name;
+	std::string	m_Name;
 };
 
  #define TRACE_LOCKER(x)CLockerTrace LockTrace(x)

@@ -33,6 +33,38 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkOpenSamEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkOpenLsaEndpoint, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
+	connect(ui.chkSbieLogon, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+
+
+	m_AdvOptions.insert("UseWin32kHooks",				SAdvOption{eSpec, QStringList() << "y" << "n", tr("Enable the use of win32 hooks for selected processes. Note: You need to enable win32k syscall hook support globally first.")});
+	m_AdvOptions.insert("EnableMiniDump",				SAdvOption{eSpec, QStringList() << "y" << "n", tr("Enable crash dump creation in the sandbox folder")});
+	m_AdvOptions.insert("ApplyElevateCreateProcessFix", SAdvOption{eSpec, QStringList() << "y" << "n", tr("Always use ElevateCreateProcess fix, as sometimes applied by the Program Compatibility Assistant.")});
+	m_AdvOptions.insert("PreferExternalManifest",		SAdvOption{eOnlySpec, QStringList() << "y" << "n, tr("")"});
+	m_AdvOptions.insert("ExternalManifestHack",			SAdvOption{eSpec, QStringList() << "y" << "n", tr("Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes")});
+	m_AdvOptions.insert("RpcMgmtSetComTimeout",			SAdvOption{eSpec, QStringList() << "n" << "y", tr("Set RpcMgmtSetComTimeout usage for specific processes")});
+	m_AdvOptions.insert("CopyBlockDenyWrite",			SAdvOption{eSpec, QStringList() << "y" << "n", tr("Makes a write open call to a file that won't be copied fail instead of turning it read-only.")});
+	m_AdvOptions.insert("UseSbieDeskHack",				SAdvOption{eSpec, QStringList() << "y" << "n", tr("")});
+	m_AdvOptions.insert("UseSbieWndStation",			SAdvOption{eSpec, QStringList() << "n" << "y", tr("")});
+	m_AdvOptions.insert("FakeAdminRights",				SAdvOption{eOnlySpec, QStringList() << "y" << "n", tr("Make specified processes think thay have admin permissions.")});
+	m_AdvOptions.insert("WaitForDebugger",				SAdvOption{eOnlySpec, QStringList() << "y" << "n", tr("Force specified processes to wait for a debugger to attach.")});
+	m_AdvOptions.insert("BoxNameTitle",					SAdvOption{eOnlySpec, QStringList() << "y" << "n" << "-", tr("")});
+	m_AdvOptions.insert("UseFileDeleteV2",				SAdvOption{eNoSpec, QStringList() << "y" << "n", tr("")});
+	m_AdvOptions.insert("UseRegDeleteV2",				SAdvOption{eNoSpec, QStringList() << "y" << "n", tr("")});
+	m_AdvOptions.insert("FileRootPath",					SAdvOption{eNoSpec, QStringList(), tr("Sandbox file system root")});
+	m_AdvOptions.insert("KeyRootPath",					SAdvOption{eNoSpec, QStringList(), tr("Sandbox registry root")});
+	m_AdvOptions.insert("IpcRootPath",					SAdvOption{eNoSpec, QStringList(), tr("Sandbox ipc root")});
+
+		
+
+	connect(ui.btnAddOption, SIGNAL(clicked(bool)), this, SLOT(OnAddOption()));
+	connect(ui.chkShowOptionsTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowOptionTmpl()));
+	connect(ui.btnDelOption, SIGNAL(clicked(bool)), this, SLOT(OnDelOption()));
+
+	//connect(ui.treeOptions, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnOptionItemClicked(QTreeWidgetItem*, int)));
+	connect(ui.treeOptions, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnOptionItemDoubleClicked(QTreeWidgetItem*, int)));
+	connect(ui.treeOptions, SIGNAL(itemSelectionChanged()), this, SLOT(OnOptionSelectionChanged()));
+	connect(ui.treeOptions, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnOptionChanged(QTreeWidgetItem *, int)));
+
 
 	connect(ui.chkDisableMonitor, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
@@ -44,14 +76,16 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkGuiTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkComTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkNetFwTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkDnsTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkApiTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDbgTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkErrTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
-	connect(ui.treeStop, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnTriggerChanged(QTreeWidgetItem *, int)));
+	connect(ui.treeTriggers, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnTriggerChanged(QTreeWidgetItem *, int)));
 	connect(ui.btnAddAutoRun, SIGNAL(clicked(bool)), this, SLOT(OnAddAutoRun()));
 	connect(ui.btnAddAutoSvc, SIGNAL(clicked(bool)), this, SLOT(OnAddAutoSvc()));
 	connect(ui.btnAddAutoExec, SIGNAL(clicked(bool)), this, SLOT(OnAddAutoExec()));
+	connect(ui.btnAddRecoveryCmd, SIGNAL(clicked(bool)), this, SLOT(OnAddRecoveryCheck()));
 	connect(ui.btnAddDeleteCmd, SIGNAL(clicked(bool)), this, SLOT(OnAddDeleteCmd()));
 	connect(ui.btnDelAuto, SIGNAL(clicked(bool)), this, SLOT(OnDelAuto()));
 	connect(ui.chkShowTriggersTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowTriggersTmpl()));
@@ -59,6 +93,12 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkHideOtherBoxes, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.btnAddProcess, SIGNAL(clicked(bool)), this, SLOT(OnAddProcess()));
 	connect(ui.btnDelProcess, SIGNAL(clicked(bool)), this, SLOT(OnDelProcess()));
+	connect(ui.chkShowHiddenProcTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowHiddenProcTmpl()));
+
+	connect(ui.btnAddHostProcess, SIGNAL(clicked(bool)), this, SLOT(OnAddHostProcess()));
+	connect(ui.btnDelHostProcess, SIGNAL(clicked(bool)), this, SLOT(OnDelHostProcess()));
+	connect(ui.chkShowHostProcTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowHostProcTmpl()));
+	connect(ui.chkConfidential, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged())); // todo norify premium feaure
 
 	connect(ui.btnAddUser, SIGNAL(clicked(bool)), this, SLOT(OnAddUser()));
 	connect(ui.btnDelUser, SIGNAL(clicked(bool)), this, SLOT(OnDelUser()));
@@ -90,6 +130,9 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkOpenSamEndpoint->setChecked(m_pBox->GetBool("OpenSamEndpoint", false));
 	ui.chkOpenLsaEndpoint->setChecked(m_pBox->GetBool("OpenLsaEndpoint", false));
 
+	ReadGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
+
+	LoadOptionList();
 
 	bool bGlobalNoMon = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("DisableResourceMonitor", false);
 	ui.chkDisableMonitor->setChecked(m_pBox->GetBool("DisableResourceMonitor", bGlobalNoMon));
@@ -101,6 +144,7 @@ void COptionsWindow::LoadAdvanced()
 	ReadAdvancedCheck("GuiTrace", ui.chkGuiTrace, "*");
 	ReadAdvancedCheck("ClsidTrace", ui.chkComTrace, "*");
 	ReadAdvancedCheck("NetFwTrace", ui.chkNetFwTrace, "*");
+	ui.chkDnsTrace->setChecked(m_pBox->GetBool("DnsTrace", false));
 	ui.chkDbgTrace->setChecked(m_pBox->GetBool("DebugTrace", false));
 	ui.chkErrTrace->setChecked(m_pBox->GetBool("ErrorTrace", false));
 	QSharedPointer<CSandBoxPlus> pBoxPlus = m_pBox.objectCast<CSandBoxPlus>();
@@ -115,6 +159,8 @@ void COptionsWindow::LoadAdvanced()
 		AddTriggerItem(Value, eOnStartSvc);
 	foreach(const QString & Value, m_pBox->GetTextList("AutoExec", m_Template))
 		AddTriggerItem(Value, eAutoExec);
+	foreach(const QString & Value, m_pBox->GetTextList("OnFileRecovery", m_Template))
+		AddTriggerItem(Value, eRecoveryCheck);
 	foreach(const QString & Value, m_pBox->GetTextList("OnBoxDelete", m_Template))
 		AddTriggerItem(Value, eDeleteCmd);
 
@@ -122,9 +168,20 @@ void COptionsWindow::LoadAdvanced()
 	//
 
 	ui.chkHideOtherBoxes->setChecked(m_pBox->GetBool("HideOtherBoxes", true));
-	QStringList Processes = m_pBox->GetTextList("HideHostProcess", m_Template);
-	ui.lstProcesses->clear();
-	ui.lstProcesses->addItems(Processes);
+	
+	ui.treeHideProc->clear();
+	foreach(const QString& Value, m_pBox->GetTextList("HideHostProcess", m_Template))
+		AddHiddenProcEntry(Value);
+	ShowHiddenProcTmpl();
+
+	ui.treeHostProc->clear();
+	foreach(const QString & Value, m_pBox->GetTextList("DenyHostAccess", m_Template)) {
+		StrPair NameVal = Split2(Value, ",");
+		AddHostProcEntry(NameVal.first, NameVal.second.left(0).toLower() != "y");
+	}
+	ShowHostProcTmpl();
+
+	ui.chkConfidential->setChecked(m_pBox->GetBool("ConfidentialBox", false));
 
 
 	QStringList Users = m_pBox->GetText("Enabled").split(",");
@@ -162,6 +219,8 @@ void COptionsWindow::ShowTriggersTmpl(bool bUpdate)
 				AddTriggerItem(Value, eOnStartSvc, Template);
 			foreach(const QString & Value, m_pBox->GetTextListTmpl("AutoExec", Template))
 				AddTriggerItem(Value, eAutoExec, Template);
+			foreach(const QString & Value, m_pBox->GetTextListTmpl("OnFileRecovery", Template))
+				AddTriggerItem(Value, eRecoveryCheck, Template);
 			foreach(const QString & Value, m_pBox->GetTextListTmpl("OnBoxDelete", Template))
 				AddTriggerItem(Value, eDeleteCmd, Template);
 		}
@@ -204,6 +263,9 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkOpenSamEndpoint, "OpenSamEndpoint", "y", "");
 	WriteAdvancedCheck(ui.chkOpenLsaEndpoint, "OpenLsaEndpoint", "y", "");
 
+	WriteGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
+
+	SaveOptionList();
 
 	bool bGlobalNoMon = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("DisableResourceMonitor", false);
 	WriteAdvancedCheck(ui.chkDisableMonitor, "DisableResourceMonitor", bGlobalNoMon ? "" : "y", bGlobalNoMon ? "n" : "");
@@ -215,6 +277,7 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkGuiTrace, "GuiTrace", "*");
 	WriteAdvancedCheck(ui.chkComTrace, "ClsidTrace", "*");
 	WriteAdvancedCheck(ui.chkNetFwTrace, "NetFwTrace", "*");
+	WriteAdvancedCheck(ui.chkDnsTrace, "chkDnsTrace", "y");
 	WriteAdvancedCheck(ui.chkDbgTrace, "DebugTrace", "y");
 	WriteAdvancedCheck(ui.chkErrTrace, "ErrorTrace", "y");
 	QSharedPointer<CSandBoxPlus> pBoxPlus = m_pBox.objectCast<CSandBoxPlus>();
@@ -224,6 +287,7 @@ void COptionsWindow::SaveAdvanced()
 	// triggers
 	QStringList StartProgram;
 	QStringList StartService;
+	QStringList RecoveryCheck;
 	QStringList DeleteCommand;
 	QStringList AutoExec;
 	for (int i = 0; i < ui.treeTriggers->topLevelItemCount(); i++) {
@@ -233,21 +297,44 @@ void COptionsWindow::SaveAdvanced()
 		case eOnStartCmd:	StartProgram.append(pItem->text(2)); break;
 		case eOnStartSvc:	StartService.append(pItem->text(2)); break;
 		case eAutoExec:		AutoExec.append(pItem->text(2)); break;
+		case eRecoveryCheck:		RecoveryCheck.append(pItem->text(2)); break;
 		case eDeleteCmd:	DeleteCommand.append(pItem->text(2)); break;
 		}
 	}
 	WriteTextList("StartProgram", StartProgram);
 	WriteTextList("StartService", StartService);
 	WriteTextList("AutoExec", AutoExec);
+	WriteTextList("OnFileRecovery", RecoveryCheck);
 	WriteTextList("OnBoxDelete", DeleteCommand);
 	//
 
+
 	WriteAdvancedCheck(ui.chkHideOtherBoxes, "HideOtherBoxes", "", "n");
 
-	QStringList Processes;
-	for (int i = 0; i < ui.lstProcesses->count(); i++)
-		Processes.append(ui.lstProcesses->item(i)->text());
-	WriteTextList("HideHostProcess", Processes);
+	QStringList HideProcesses;
+	for (int i = 0; i < ui.treeHideProc->topLevelItemCount(); i++)
+	{
+		QTreeWidgetItem* pItem = ui.treeHideProc->topLevelItem(i);
+		int Type = pItem->data(0, Qt::UserRole).toInt();
+		if (Type == -1)
+			continue; // entry from template
+		HideProcesses.append(pItem->text(0)); 
+	}
+	WriteTextList("HideHostProcess", HideProcesses);
+
+	QStringList DenyHostProcesses;
+	for (int i = 0; i < ui.treeHostProc->topLevelItemCount(); i++)
+	{
+		QTreeWidgetItem* pItem = ui.treeHostProc->topLevelItem(i);
+		int Type = pItem->data(0, Qt::UserRole).toInt();
+		if (Type == -1)
+			continue; // entry from template
+		DenyHostProcesses.append(pItem->text(0) + "," + (pItem->data(1, Qt::UserRole).toBool() ? "n" : "y")); 
+	}
+	WriteTextList("DenyHostAccess", DenyHostProcesses);
+
+	WriteAdvancedCheck(ui.chkConfidential, "ConfidentialBox", "y", "");
+
 
 	QStringList Users;
 	for (int i = 0; i < ui.lstUsers->count(); i++)
@@ -349,6 +436,252 @@ void COptionsWindow::OnNoWindowRename()
 	OnOptChanged();
 }
 
+// options
+void COptionsWindow::LoadOptionList()
+{
+	if (!ui.treeOptions) return;
+
+	ui.treeOptions->clear();
+	foreach(const QString& Name, m_AdvOptions.keys()) {
+		foreach(const QString & Value, m_pBox->GetTextList(Name, m_Template)) {
+			QStringList Values = Value.split(",");
+			if (Values.count() >= 2) 
+				AddOptionEntry(Name, Values[0], Values[1]);
+			else if(m_AdvOptions[Name].ProcSpec != eOnlySpec) // eOnlySpec shows only process specific entries, no global once
+				AddOptionEntry(Name, "", Values[0]);
+		}
+	}
+
+	LoadOptionListTmpl();
+}
+
+void COptionsWindow::LoadOptionListTmpl(bool bUpdate)
+{
+	if (ui.chkShowOptionsTmpl->isChecked())
+	{
+		foreach(const QString& Template, m_pBox->GetTemplates())
+		{
+			foreach(const QString& Name, m_AdvOptions.keys()) {
+				foreach(const QString & Value, m_pBox->GetTextListTmpl(Name, Template)) {
+					QStringList Values = Value.split(",");
+					if (Values.count() >= 2) 
+						AddOptionEntry(Name, Values[0], Values[1], Template);
+					else // all programs
+						AddOptionEntry(Name, "", Values[0], Template);
+				}
+			}
+		}
+	}
+	else if (bUpdate)
+	{
+		for (int i = 0; i < ui.treeOptions->topLevelItemCount(); )
+		{
+			QTreeWidgetItem* pItem = ui.treeOptions->topLevelItem(i);
+			QString Name = pItem->data(0, Qt::UserRole).toString();
+			if (Name.isEmpty()) {
+				delete pItem;
+				continue; // entry from template
+			}
+			i++;
+		}
+	}
+}
+
+void COptionsWindow::SaveOptionList()
+{
+	CloseOptionEdit(true);
+
+	QMap<QString, QList<QString>> OptionMap;
+	for (int i = 0; i < ui.treeOptions->topLevelItemCount(); i++)
+	{
+		QTreeWidgetItem* pItem = ui.treeOptions->topLevelItem(i);
+		QString Name = pItem->data(0, Qt::UserRole).toString();
+		if (Name.isEmpty())
+			continue; // entry from template
+		QString Program = pItem->data(1, Qt::UserRole).toString();
+		QString Value = pItem->data(2, Qt::UserRole).toString();
+		if (!Program.isEmpty())
+			Value.prepend(Program + ",");
+
+		OptionMap[Name].append(Value);
+	}
+
+	foreach(const QString & Key, m_AdvOptions.keys()) {
+		WriteTextList(Key, OptionMap[Key]);
+	}
+}
+
+void COptionsWindow::AddOptionEntry(const QString& Name, QString Program, const QString& Value, const QString& Template)
+{
+	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+
+	pItem->setText(0, Name + (Template.isEmpty() ? "" : " (" + Template + ")"));
+	pItem->setData(0, Qt::UserRole, !Template.isEmpty() ? "" : Name);
+
+	pItem->setData(1, Qt::UserRole, Program);
+	bool bAll = Program.isEmpty();
+	if (bAll)
+		Program = tr("All Programs");
+	bool Not = Program.left(1) == "!";
+	if (Not)
+		Program.remove(0, 1);
+	//if (Program.left(1) == "<")
+	//	Program = tr("Group: %1").arg(Program.mid(1, Program.length() - 2));
+	//else if(!bAll)
+	//	m_Programs.insert(Program);
+	pItem->setText(1, (Not ? "NOT " : "") + Program);
+	
+	pItem->setText(2, Value);
+	pItem->setData(2, Qt::UserRole, Value);
+
+	//if(Template.isEmpty())
+	//	pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
+	ui.treeOptions->addTopLevelItem(pItem);
+}
+
+void COptionsWindow::OnAddOption()
+{ 
+	CComboInputDialog progDialog(this);
+	progDialog.setText(tr("Add special option:"));
+	progDialog.setEditable(true);
+
+	foreach(const QString & Name, m_AdvOptions.keys())
+		progDialog.addItem(Name, Name, m_AdvOptions[Name].Description);
+
+	progDialog.setValue("EnableMiniDump");
+
+	if (!progDialog.exec())
+		return;
+
+	QString Name = progDialog.value(); 
+
+	AddOptionEntry(Name, "Program.exe", "");
+}
+
+void COptionsWindow::OnDelOption()
+{
+	DeleteAccessEntry(ui.treeOptions->currentItem());
+	m_AdvancedChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::OnOptionItemDoubleClicked(QTreeWidgetItem* pItem, int Column)
+{
+	//if (Column == 0)
+	//	return;
+
+	QString Name = pItem->data(0, Qt::UserRole).toString();
+	if (Name.isEmpty()) {
+		QMessageBox::warning(this, "SandboxiePlus", tr("Template values can not be edited."));
+		return;
+	}
+
+	QString Program = pItem->data(1, Qt::UserRole).toString();
+
+	if (m_AdvOptions[Name].ProcSpec != eNoSpec)
+	{
+		QWidget* pProgram = new QWidget();
+		pProgram->setAutoFillBackground(true);
+		QHBoxLayout* pLayout = new QHBoxLayout();
+		pLayout->setContentsMargins(0,0,0,0);
+		pLayout->setSpacing(0);
+		pProgram->setLayout(pLayout);
+		QToolButton* pNot = new QToolButton(pProgram);
+		pNot->setText("!");
+		pNot->setCheckable(true);
+		if (Program.left(1) == "!") {
+			pNot->setChecked(true);
+			Program.remove(0, 1);
+		}
+		pLayout->addWidget(pNot);
+		QComboBox* pCombo = new QComboBox(pProgram);
+		if (m_AdvOptions[Name].ProcSpec != eOnlySpec)
+			pCombo->addItem(tr("All Programs"), "");
+
+		//foreach(const QString Group, GetCurrentGroups()){
+		//	QString GroupName = Group.mid(1, Group.length() - 2);
+		//	pCombo->addItem(tr("Group: %1").arg(GroupName), Group);
+		//}
+
+		foreach(const QString & Name, m_Programs)
+			pCombo->addItem(Name, Name);
+
+
+		pCombo->setEditable(true);
+		int Index = pCombo->findData(Program);
+		pCombo->setCurrentIndex(Index);
+		if (Index == -1)
+			pCombo->setCurrentText(Program);
+		pLayout->addWidget(pCombo);
+
+		ui.treeOptions->setItemWidget(pItem, 1, pProgram);
+	}
+
+	QComboBox* pValue = new QComboBox();
+	pValue->setEditable(true);
+	foreach(const QString& Value, m_AdvOptions[Name].Values)
+		pValue->addItem(Value);
+	//pValue->setCurrentIndex(pValue->findData(pItem->data(2, Qt::UserRole)));
+	ui.treeOptions->setItemWidget(pItem, 2, pValue);
+}
+
+void COptionsWindow::OnOptionChanged(QTreeWidgetItem* pItem, int Column)
+{
+	if (Column != 0)
+		return;
+
+	m_AdvancedChanged = true;
+	OnOptChanged();
+}
+	
+void COptionsWindow::CloseOptionEdit(bool bSave)
+{
+	if (!ui.treeOptions) return;
+
+	for (int i = 0; i < ui.treeOptions->topLevelItemCount(); i++)
+	{
+		QTreeWidgetItem* pItem = ui.treeOptions->topLevelItem(i);
+		CloseOptionEdit(pItem, bSave);
+	}
+}
+
+void COptionsWindow::CloseOptionEdit(QTreeWidgetItem* pItem, bool bSave)
+{
+	QComboBox* pValue = (QComboBox*)ui.treeOptions->itemWidget(pItem, 2);
+	if (!pValue)
+		return;
+
+	if (bSave)
+	{
+		QWidget* pProgram = ui.treeOptions->itemWidget(pItem, 1);
+		if (pProgram) 
+		{
+			QHBoxLayout* pLayout = (QHBoxLayout*)pProgram->layout();
+			QToolButton* pNot = (QToolButton*)pLayout->itemAt(0)->widget();
+			QComboBox* pCombo = (QComboBox*)pLayout->itemAt(1)->widget();
+
+			QString Program = pCombo->currentText();
+			int Index = pCombo->findText(Program);
+			if (Index != -1)
+				Program = pCombo->itemData(Index, Qt::UserRole).toString();
+			//if (!Program.isEmpty() && Program.left(1) != "<")
+			//	m_Programs.insert(Program);
+
+			pItem->setText(1, (pNot->isChecked() ? "NOT " : "") + pCombo->currentText());
+			pItem->setData(1, Qt::UserRole, (pNot->isChecked() ? "!" : "") + Program);
+		}
+		pItem->setText(2, pValue->currentText());
+		pItem->setData(2, Qt::UserRole, pValue->currentText());
+
+		m_AdvancedChanged = true;
+		OnOptChanged();
+	}
+
+	ui.treeOptions->setItemWidget(pItem, 1, NULL);
+	ui.treeOptions->setItemWidget(pItem, 2, NULL);
+}
+//
+
 // triggers
 void COptionsWindow::AddTriggerItem(const QString& Value, ETriggerAction Type, const QString& Template)
 {
@@ -368,8 +701,12 @@ void COptionsWindow::AddTriggerItem(const QString& Value, ETriggerAction Type, c
 			pItem->setText(0, tr("On Init"));
 			pItem->setText(1, tr("Run Command"));
 			break;
+		case eRecoveryCheck:
+			pItem->setText(0, tr("On File Recovery"));
+			pItem->setText(1, tr("Run Command"));
+			break;
 		case eDeleteCmd:
-			pItem->setText(0, tr("On Delete"));
+			pItem->setText(0, tr("On Delete Content"));
 			pItem->setText(1, tr("Run Command"));
 			break;
 	}
@@ -422,6 +759,17 @@ void COptionsWindow::OnAddDeleteCmd()
 	OnOptChanged();
 }
 
+void COptionsWindow::OnAddRecoveryCheck()
+{
+	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter the command line to be executed"), QLineEdit::Normal);
+	if (Value.isEmpty())
+		return;
+
+	AddTriggerItem(Value, eRecoveryCheck);
+	m_AdvancedChanged = true;
+	OnOptChanged();
+}
+
 void COptionsWindow::OnDelAuto()
 {
 	DeleteAccessEntry(ui.treeTriggers->currentItem());
@@ -432,11 +780,11 @@ void COptionsWindow::OnDelAuto()
 
 void COptionsWindow::OnAddProcess()
 {
-	QString Process = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a program file name"));
+	QString Process = SelectProgram();
 	if (Process.isEmpty())
 		return;
 
-	ui.lstProcesses->addItem(Process);
+	AddHiddenProcEntry(Process);
 
 	m_AdvancedChanged = true;
 	OnOptChanged();
@@ -444,12 +792,100 @@ void COptionsWindow::OnAddProcess()
 
 void COptionsWindow::OnDelProcess()
 {
-	foreach(QListWidgetItem* pItem, ui.lstProcesses->selectedItems())
-		delete pItem;
+	DeleteAccessEntry(ui.treeHideProc->currentItem());
+	m_AdvancedChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::OnAddHostProcess()
+{
+	QString Process = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a program file name"));
+	if (Process.isEmpty())
+		return;
+
+	AddHostProcEntry(Process);
 
 	m_AdvancedChanged = true;
 	OnOptChanged();
 }
+
+void COptionsWindow::OnDelHostProcess()
+{
+	DeleteAccessEntry(ui.treeHostProc->currentItem());
+	m_AdvancedChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::ShowHiddenProcTmpl(bool bUpdate)
+{
+	if (ui.chkShowHiddenProcTmpl->isChecked())
+	{
+		foreach(const QString& Template, m_pBox->GetTemplates())
+		{
+			foreach(const QString& Value, m_pBox->GetTextListTmpl("HideHostProcess", Template))
+				AddHiddenProcEntry(Value, Template);
+		}
+	}
+	else if (bUpdate)
+	{
+		for (int i = 0; i < ui.treeHideProc->topLevelItemCount(); )
+		{
+			QTreeWidgetItem* pItem = ui.treeHideProc->topLevelItem(i);
+			int Type = pItem->data(0, Qt::UserRole).toInt();
+			if (Type == -1) {
+				delete pItem;
+				continue; // entry from template
+			}
+			i++;
+		}
+	}
+}
+
+void COptionsWindow::ShowHostProcTmpl(bool bUpdate)
+{
+	if (ui.chkShowHostProcTmpl->isChecked())
+	{
+		foreach(const QString& Template, m_pBox->GetTemplates())
+		{
+			foreach(const QString & Value, m_pBox->GetTextListTmpl("DenyHostAccess", Template)) {
+				StrPair NameVal = Split2(Value, ",");
+				AddHostProcEntry(NameVal.first, NameVal.second.left(0).toLower() != "y", Template);
+			}
+		}
+	}
+	else if (bUpdate)
+	{
+		for (int i = 0; i < ui.treeHostProc->topLevelItemCount(); )
+		{
+			QTreeWidgetItem* pItem = ui.treeHostProc->topLevelItem(i);
+			int Type = pItem->data(0, Qt::UserRole).toInt();
+			if (Type == -1) {
+				delete pItem;
+				continue; // entry from template
+			}
+			i++;
+		}
+	}
+}
+
+void COptionsWindow::AddHiddenProcEntry(const QString& Name, const QString& Template)
+{
+	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	pItem->setText(0, Name + (Template.isEmpty() ? "" : " (" + Template + ")"));
+	pItem->setData(0, Qt::UserRole, Template.isEmpty() ? 0 : -1);
+	ui.treeHideProc->addTopLevelItem(pItem);
+}
+
+void COptionsWindow::AddHostProcEntry(const QString& Name, bool Value, const QString& Template)
+{
+	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	pItem->setText(0, Name + (Template.isEmpty() ? "" : " (" + Template + ")"));
+	pItem->setData(0, Qt::UserRole, Template.isEmpty() ? 0 : -1);
+	pItem->setText(1, Value ? tr("Deny") : tr("Allow"));
+	pItem->setData(1, Qt::UserRole, Value);
+	ui.treeHostProc->addTopLevelItem(pItem);
+}
+
 
 #include <wtypes.h>
 #include <objsel.h>

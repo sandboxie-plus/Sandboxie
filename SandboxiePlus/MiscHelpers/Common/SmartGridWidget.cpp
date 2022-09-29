@@ -8,7 +8,7 @@ CSmartGridWidget::CSmartGridWidget(QWidget* parent)
 	m_pMainLayout = new QGridLayout();
 	this->setLayout(m_pMainLayout);
 
-	m_pMainLayout->setMargin(1);
+	m_pMainLayout->setContentsMargins(1,1,1,1);
 	m_pMainLayout->setSpacing(2);
 
 	m_bReArangePending = false;
@@ -17,7 +17,7 @@ CSmartGridWidget::CSmartGridWidget(QWidget* parent)
 void CSmartGridWidget::SetBackground(const QColor& BackColor)
 {
 	QPalette pal = palette();
-	pal.setColor(QPalette::Background, BackColor);
+	pal.setColor(QPalette::Window, BackColor);
 	this->setAutoFillBackground(true);
 	this->setPalette(pal);
 }

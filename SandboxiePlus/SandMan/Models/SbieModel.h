@@ -16,7 +16,9 @@ public:
 
 	QList<QVariant>	Sync(const QMap<QString, CSandBoxPtr>& BoxList, const QMap<QString, QStringList>& Groups = QMap<QString, QStringList>(), bool ShowHidden = false);
 
-	void SetLargeIcons(bool bSet = true) { m_LargeIcons = bSet; }
+	void			SetTree(bool bTree)				{ m_bTree = bTree; }
+	bool			IsTree() const					{ return m_bTree; }
+	void			SetLargeIcons(bool bSet = true) { m_LargeIcons = bSet; }
 
 	CSandBoxPtr		GetSandBox(const QModelIndex &index) const;
 	CBoxedProcessPtr GetProcess(const QModelIndex &index) const;
@@ -65,14 +67,16 @@ protected:
 
 	struct SSandBoxNode: STreeNode
 	{
-		SSandBoxNode(const QVariant& Id) : STreeNode(Id) { inUse = false; busyState = 0; boxType = -1; boxColor = 0; OrderNumber = 0; }
+		SSandBoxNode(const QVariant& Id) : STreeNode(Id) { inUse = false; bOpen = false; busyState = 0; boxType = -1; boxColor = 0; OrderNumber = 0; }
 
 		CSandBoxPtr	pBox;
 		bool		inUse;
+		bool		bOpen;
 		int			busyState;
 		int			boxType;
 		int			boxColor;
 		int			OrderNumber;
+		QString		Action;
 
 		CBoxedProcessPtr pProcess;
 	};
@@ -93,6 +97,7 @@ protected:
 
 private:
 
+	bool								m_bTree;
 	bool m_LargeIcons;
 	//QIcon m_BoxEmpty;
 	//QIcon m_BoxInUse;

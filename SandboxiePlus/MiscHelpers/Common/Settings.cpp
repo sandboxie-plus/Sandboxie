@@ -2,6 +2,7 @@
 #include "Settings.h"
 //#include "qzlib.h"
 #include "Common.h"
+#include <QStandardPaths>
 
 bool TestWriteRight(const QString& Path)
 {

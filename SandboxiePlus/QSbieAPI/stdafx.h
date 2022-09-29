@@ -10,8 +10,6 @@
 #include <set>
 #include <memory>
 
-using namespace std;
-
 // Qt includes
 #include <QObject>
 #include <QList>
@@ -41,3 +39,4 @@ using namespace std;
 #include <QPointer>
 #include <QSharedPointer>
 #include <QFutureWatcher>
+#include <QRegularExpression>

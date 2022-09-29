@@ -15,12 +15,12 @@ public:
 
 	static QWidget* AddFinder(QWidget* pList, QObject* pFilterTarget, bool HighLightOption = true, CFinder** ppFinder = NULL);
 
-	QRegExp GetRegExp() const;
+	QRegularExpression GetRegExp() const;
 	bool GetHighLight() const	{ return m_pHighLight ? m_pHighLight->isChecked() : false; }
 	int GetColumn() const		{ return m_pColumn ? m_pColumn->currentData().toInt() : -1; }
 
 signals:
-	void				SetFilter(const QRegExp& Exp, bool bHighLight = false, int Column = -1);
+	void				SetFilter(const QRegularExpression& Exp, bool bHighLight = false, int Column = -1);
 	void				SelectNext();
 
 public slots:

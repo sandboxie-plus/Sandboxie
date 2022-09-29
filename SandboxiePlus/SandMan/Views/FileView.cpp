@@ -10,7 +10,7 @@ CFileView::CFileView(QWidget *parent)
 	: QWidget(parent)
 {
     m_pMainLayout = new QGridLayout();
-	m_pMainLayout->setMargin(0);
+	m_pMainLayout->setContentsMargins(0,0,0,0);
 	this->setLayout(m_pMainLayout);
 
     m_pTreeView = new QTreeView();
@@ -51,6 +51,8 @@ void CFileView::SetBox(const CSandBoxPtr& pBox)
 
     if (!m_pBox.isNull()) connect(m_pBox.data(), SIGNAL(AboutToBeCleaned()), this, SLOT(OnAboutToBeCleaned()));
 
+    if (!m_pFileModel) return;
+
     QString Root;
     if (!pBox.isNull() && !pBox->IsEmpty())
         Root = pBox->GetFileRoot();
@@ -60,6 +62,12 @@ void CFileView::SetBox(const CSandBoxPtr& pBox)
     }
     else
         m_pTreeView->setEnabled(true);
+
+    m_pFileModel->deleteLater();
+    m_pFileModel = new QFileSystemModel(this);
+    m_pFileModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs | QDir::Files | QDir::Hidden | QDir::System);
+    m_pTreeView->setModel(m_pFileModel);
+
     m_pTreeView->setRootIndex(m_pFileModel->setRootPath(Root));
 
     if (m_pTreeView->isEnabled()) {
@@ -106,7 +114,7 @@ void addItemToShellContextMenu(HMENU hMenu, const wchar_t *name, int ID)
     InsertMenuItem(hMenu, 0, TRUE, &menu_item_info);
 }
 
-int openShellContextMenu(const QStringList& Files, void * parentWindow)
+int openShellContextMenu(const QStringList& Files, void * parentWindow, const CSandBoxPtr& pBox)
 {
     std::list<CComHeapPtr<ITEMIDLIST_ABSOLUTE>> items;
     items.resize(Files.count());
@@ -178,6 +186,8 @@ int openShellContextMenu(const QStringList& Files, void * parentWindow)
 
 void CFileView::OnFileMenu(const QPoint&)
 {
+    if (!m_pFileModel) return;
+
     QStringList Files;
     foreach(const QModelIndex & Index, m_pTreeView->selectionModel()->selectedIndexes()) {
         QString BoxedPath = m_pFileModel->fileInfo(Index).absoluteFilePath().replace("/", "\\");
@@ -199,7 +209,7 @@ void CFileView::OnFileMenu(const QPoint&)
     if (Files.isEmpty())
         return;
 
-    int iCmd = openShellContextMenu(Files, (void*)this->winId());
+    int iCmd = openShellContextMenu(Files, (void*)this->winId(), m_pBox);
     if (iCmd == 0)
         return;
 
@@ -271,6 +281,8 @@ void CFileView::OnFileMenu(const QPoint&)
 
 void CFileView::OnFileDblClick(const QModelIndex &)
 {
+    if (!m_pFileModel) return;
+
     QString BoxedPath = m_pFileModel->fileInfo(m_pTreeView->currentIndex()).absoluteFilePath();
 
     ShellExecute(NULL, NULL, BoxedPath.toStdWString().c_str(), NULL, m_pBox->GetFileRoot().toStdWString().c_str(), SW_SHOWNORMAL);

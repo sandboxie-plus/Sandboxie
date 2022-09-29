@@ -256,18 +256,24 @@ QString CSandBox::Expand(const QString& Value)
 {
 	QString Value2 = Value;
 
-	QRegExp rx("%([a-zA-Z0-9 ]+)%");
-	for (int pos = 0; (pos = rx.indexIn(Value, pos)) != -1; ) {
-		QString var = rx.cap(1);
+	QRegularExpression rx("%([a-zA-Z0-9 ]+)%");
+	for (int pos = 0; ; ) {
+		auto result = rx.match(Value, pos);
+		if (!result.hasMatch())
+			break;
+		pos = result.capturedStart();
+		QString var = result.captured(1);
 		QString val;
-		if (var.compare("BoxPath", Qt::CaseInsensitive) == 0)
+		if (var.compare("SbieHome", Qt::CaseInsensitive) == 0)
+			val = this->m_pAPI->GetSbiePath();
+		else if (var.compare("BoxPath", Qt::CaseInsensitive) == 0)
 			val = this->GetFileRoot();
 		else if (var.compare("BoxName", Qt::CaseInsensitive) == 0)
 			val = this->GetName();
 		else
 			val = m_pAPI->SbieIniGet(this->GetName(), "%" + var + "%", 0x80000000); // CONF_JUST_EXPAND
 		Value2.replace("%" + var + "%", val);
-		pos += rx.matchedLength();
+		pos += result.capturedLength();
 	}
 
 	return Value2;
@@ -290,7 +296,7 @@ QList<SBoxSnapshot> CSandBox::GetSnapshots(QString* pCurrent, QString* pDefault)
 
 		BoxSnapshot.NameStr = ini.value(Snapshot + "/Name").toString();
 		BoxSnapshot.InfoStr = ini.value(Snapshot + "/Description").toString();
-		BoxSnapshot.SnapDate = QDateTime::fromTime_t(ini.value(Snapshot + "/SnapshotDate").toULongLong());
+		BoxSnapshot.SnapDate = QDateTime::fromSecsSinceEpoch(ini.value(Snapshot + "/SnapshotDate").toULongLong());
 
 		Snapshots.append(BoxSnapshot);
 	}
@@ -402,7 +408,7 @@ SB_PROGRESS CSandBox::TakeSnapshot(const QString& Name)
 	}
 
 	ini.setValue("Snapshot_" + ID + "/Name", Name);
-	ini.setValue("Snapshot_" + ID + "/SnapshotDate", QDateTime::currentDateTime().toTime_t());
+	ini.setValue("Snapshot_" + ID + "/SnapshotDate", QDateTime::currentDateTime().toSecsSinceEpoch());
 	QString Current = ini.value("Current/Snapshot").toString();
 	if(!Current.isEmpty())
 		ini.setValue("Snapshot_" + ID + "/Parent", Current);

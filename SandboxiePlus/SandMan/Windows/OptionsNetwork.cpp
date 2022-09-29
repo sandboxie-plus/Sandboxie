@@ -28,6 +28,16 @@ void COptionsWindow::CreateNetwork()
 	connect(ui.treeNetFw, SIGNAL(itemSelectionChanged()), this, SLOT(OnNetFwSelectionChanged()));
 	connect(ui.treeNetFw, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnNetFwChanged(QTreeWidgetItem *, int)));
 
+	connect(ui.btnAddDns, SIGNAL(clicked(bool)), this, SLOT(OnAddDnsFilter()));
+	connect(ui.btnDelDns, SIGNAL(clicked(bool)), this, SLOT(OnDelDnsFilter()));
+	ui.treeDns->setItemDelegateForColumn(0, new ProgramsDelegate(this, ui.treeDns, -1, this));
+	connect(ui.treeDns, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnDnsFilterChanged(QTreeWidgetItem *, int)));
+
+	connect(ui.btnAddProxy, SIGNAL(clicked(bool)), this, SLOT(OnAddNetProxy()));
+	connect(ui.btnDelProxy, SIGNAL(clicked(bool)), this, SLOT(OnDelNetProxy()));
+	ui.treeProxy->setItemDelegateForColumn(0, new ProgramsDelegate(this, ui.treeProxy, -1, this));
+	connect(ui.treeProxy, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnNetProxyChanged(QTreeWidgetItem *, int)));
+
 	connect(ui.chkShowNetFwTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowNetFwTmpl()));
 
 	connect(ui.txtProgFwTest, SIGNAL(textChanged(const QString&)), this, SLOT(OnTestNetFwRule()));
@@ -159,7 +169,7 @@ void COptionsWindow::OnINetItemDoubleClicked(QTreeWidgetItem* pItem, int Column)
 	//QWidget* pProgram = new QWidget();
 	//pProgram->setAutoFillBackground(true);
 	//QHBoxLayout* pLayout = new QHBoxLayout();
-	//pLayout->setMargin(0);
+	//pLayout->setContentsMargins(0,0,0,0);
 	//pLayout->setSpacing(0);
 	//pProgram->setLayout(pLayout);
 	//QComboBox* pCombo = new QComboBox(pProgram);
@@ -445,15 +455,15 @@ void COptionsWindow::ParseAndAddFwRule(const QString& Value, bool disabled, cons
 	pItem->setText(1, Action + (Template.isEmpty() ? "" : " (" + Template + ")"));
 	pItem->setData(1, Qt::UserRole, Template.isEmpty() ? (int)GetFwRuleAction(Action) : -1);
 	
-	QString Port = Tags["port"];
+	QString Port = Tags.value("port");
 	pItem->setText(2, Port);
 	pItem->setData(2, Qt::UserRole, Port);
 
-	QString IP = Tags["address"];
+	QString IP = Tags.value("address");
 	pItem->setText(3, IP);
 	pItem->setData(3, Qt::UserRole, IP);
 
-	QString Prot = Tags["protocol"];
+	QString Prot = Tags.value("protocol");
 	pItem->setText(4, Prot);
 	pItem->setData(4, Qt::UserRole, (int)GetFwRuleProt(Prot));
 
@@ -513,7 +523,7 @@ void COptionsWindow::OnNetFwItemDoubleClicked(QTreeWidgetItem* pItem, int Column
 	QWidget* pProgram = new QWidget();
 	pProgram->setAutoFillBackground(true);
 	QHBoxLayout* pLayout = new QHBoxLayout();
-	pLayout->setMargin(0);
+	pLayout->setContentsMargins(0,0,0,0);
 	pLayout->setSpacing(0);
 	pProgram->setLayout(pLayout);
 	QToolButton* pNot = new QToolButton(pProgram);
@@ -662,29 +672,214 @@ void COptionsWindow::OnDelNetFwRule()
 	OnOptChanged();
 }
 
+// dns
+void COptionsWindow::LoadDnsFilter()
+{
+	ui.treeDns->clear();
+	foreach(const QString & Value, m_pBox->GetTextList("NetworkDnsFilter", m_Template))
+		AddDnsFilter(Value);
+	foreach(const QString& Value, m_pBox->GetTextList("NetworkDnsFilterDisabled", m_Template)) 
+		AddDnsFilter(Value, true);
+	
+	m_DnsFilterChanged = false;
+}
+
+void COptionsWindow::AddDnsFilter(const QString& Value, bool disabled, const QString& Template)
+{
+	StrPair ProgDns = Split2(Value, ",");
+	if (ProgDns.second.isEmpty()) {
+		ProgDns.second = ProgDns.first;
+		ProgDns.first = "";
+	}
+	StrPair DomainIP = Split2(ProgDns.second, ":");
+	AddDnsFilter(ProgDns.first, DomainIP.first, SplitStr(DomainIP.second, ";"), disabled, Template);
+}
+
+void COptionsWindow::AddDnsFilter(const QString& Prog, const QString& Domain, const QStringList& IPs, bool disabled, const QString& Template)
+{
+	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
+	pItem->setData(1, Qt::UserRole, Template.isEmpty() ? 0 : -1);
+	SetProgramItem(Prog, pItem, 0, (Template.isEmpty() ? "" : " (" + Template + ")"));
+	if(Template.isEmpty())
+		pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+	pItem->setText(1, Domain);
+	pItem->setText(2, IPs.join(";"));
+	ui.treeDns->addTopLevelItem(pItem);
+}
+
+void COptionsWindow::SaveDnsFilter()
+{
+	QStringList NetworkDnsFilter;
+	QStringList NetworkDnsFilterDisabled;
+	for (int i = 0; i < ui.treeDns->topLevelItemCount(); i++)
+	{
+		QTreeWidgetItem* pItem = ui.treeDns->topLevelItem(i);
+		int Type = pItem->data(1, Qt::UserRole).toInt();
+		if (Type == -1)
+			continue; // entry from template
+
+		QString Prog = pItem->data(0, Qt::UserRole).toString();
+		QString Domain = pItem->text(1);
+		QString IPs = pItem->text(2);
+		QString Entry = Domain;
+		if (!IPs.isEmpty())
+			Entry.append(":" + IPs);
+		if (!Prog.isEmpty())
+			Entry.prepend(Prog + ",");
+
+		if (pItem->checkState(0) == Qt::Checked)
+			NetworkDnsFilter.append(Entry);
+		else
+			NetworkDnsFilterDisabled.append(Entry);
+	}
+	WriteTextList("NetworkDnsFilter", NetworkDnsFilter);
+	WriteTextList("NetworkDnsFilterDisabled", NetworkDnsFilterDisabled);
+
+	m_DnsFilterChanged = false;
+}
+
+void COptionsWindow::OnAddDnsFilter()
+{
+	QString Domain = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a domain to be filtered"));
+	if (Domain.isEmpty())
+		return;
+	AddDnsFilter("", Domain);
+
+	m_DnsFilterChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::OnDelDnsFilter()
+{
+	DeleteAccessEntry(ui.treeDns->currentItem(), 1);
+
+	m_DnsFilterChanged = true;
+	OnOptChanged();
+}
+//
+
+// proxy
+void COptionsWindow::LoadNetProxy()
+{
+	ui.treeProxy->clear();
+	foreach(const QString & Value, m_pBox->GetTextList("NetworkUseProxy", m_Template))
+		AddNetProxy(Value);
+	foreach(const QString& Value, m_pBox->GetTextList("NetworkUseProxyDisabled", m_Template)) 
+		AddNetProxy(Value, true);
+	foreach(const QString & Value, m_pBox->GetTextList("NetworkUseProxyV6", m_Template))
+		AddNetProxy(Value);
+	foreach(const QString& Value, m_pBox->GetTextList("NetworkUseProxyV6Disabled", m_Template)) 
+		AddNetProxy(Value, true);
+
+	m_NetProxyChanged = false;
+}
+
+void COptionsWindow::AddNetProxy(const QString& Value, bool disabled, const QString& Template)
+{
+	StrPair ProgProxy = Split2(Value, ",");
+	if (ProgProxy.second.isEmpty()) {
+		ProgProxy.second = ProgProxy.first;
+		ProgProxy.first = "";
+	}
+	AddNetProxy(ProgProxy.first, ProgProxy.second, disabled, Template);
+}
+
+void COptionsWindow::AddNetProxy(const QString& Prog, const QString& Proxy, bool disabled, const QString& Template)
+{
+	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
+	pItem->setData(1, Qt::UserRole, Template.isEmpty() ? 0 : -1);
+	SetProgramItem(Prog, pItem, 0, (Template.isEmpty() ? "" : " (" + Template + ")"));
+	if(Template.isEmpty())
+		pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+	pItem->setText(1, Proxy);
+	ui.treeProxy->addTopLevelItem(pItem);
+}
+
+void COptionsWindow::SaveNetProxy()
+{
+	QStringList NetworkUseProxy;
+	QStringList NetworkUseProxyV6;
+	QStringList NetworkUseProxyDisabled;
+	QStringList NetworkUseProxyV6Disabled;
+	for (int i = 0; i < ui.treeProxy->topLevelItemCount(); i++)
+	{
+		QTreeWidgetItem* pItem = ui.treeProxy->topLevelItem(i);
+		int Type = pItem->data(1, Qt::UserRole).toInt();
+		if (Type == -1)
+			continue; // entry from template
+
+		QString Prog = pItem->data(0, Qt::UserRole).toString();
+		QString EndPoint = pItem->text(1);
+		QString Entry = EndPoint;
+		if (!Prog.isEmpty())
+			Entry.prepend(Prog + ",");
+
+		if (pItem->checkState(0) == Qt::Checked) {
+			if(EndPoint.left(1) == "[")
+				NetworkUseProxyV6.append(Entry);
+			else
+				NetworkUseProxy.append(Entry);
+		}
+		else {
+			if(EndPoint.left(1) == "[")
+				NetworkUseProxyV6Disabled.append(Entry);
+			else
+				NetworkUseProxyDisabled.append(Entry);
+		}
+	}
+	WriteTextList("NetworkUseProxy", NetworkUseProxy);
+	WriteTextList("NetworkUseProxyV6", NetworkUseProxyV6);
+	WriteTextList("NetworkUseProxyDisabled", NetworkUseProxyDisabled);
+	WriteTextList("NetworkUseProxyV6Disabled", NetworkUseProxyV6Disabled);
+
+	m_NetProxyChanged = false;
+}
+
+void COptionsWindow::OnAddNetProxy()
+{
+	QString Proxy = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a SOCKS 5 proxy server IP and Port, <br />use format IP:Port for IPv4 and [IP]:Port for IPv6."));
+	if (Proxy.isEmpty())
+		return;
+	AddNetProxy("", Proxy);
+
+	m_NetProxyChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::OnDelNetProxy()
+{
+	DeleteAccessEntry(ui.treeProxy->currentItem(), 1);
+
+	m_NetProxyChanged = true;
+	OnOptChanged();
+}
+//
+
 void COptionsWindow__SetRowColor(QTreeWidgetItem* pItem, bool bMatch, bool bConflict = false, bool bBlock = false, bool bActive = false)
 {
 	for (int i = 0; i < pItem->columnCount(); i++)
 	{
 		if (!bMatch)
 		{
-			pItem->setBackgroundColor(i, Qt::white); // todo dark mode
+			pItem->setBackground(i, Qt::white); // todo dark mode
 		}
 		else if(bConflict)
-			pItem->setBackgroundColor(i, QColor(255, 255, 0)); // yellow
+			pItem->setBackground(i, QColor(255, 255, 0)); // yellow
 		else if (!bBlock)
 		{
 			if (bActive)
-				pItem->setBackgroundColor(i, QColor(128, 255, 128)); // dark green
+				pItem->setBackground(i, QColor(128, 255, 128)); // dark green
 			else
-				pItem->setBackgroundColor(i, QColor(224, 240, 224)); // light green
+				pItem->setBackground(i, QColor(224, 240, 224)); // light green
 		}
 		else
 		{
 			if (bActive)
-				pItem->setBackgroundColor(i, QColor(255, 128, 128)); // dark red
+				pItem->setBackground(i, QColor(255, 128, 128)); // dark red
 			else
-				pItem->setBackgroundColor(i, QColor(240, 224, 224)); // light red
+				pItem->setBackground(i, QColor(240, 224, 224)); // light red
 		}
 	}
 }

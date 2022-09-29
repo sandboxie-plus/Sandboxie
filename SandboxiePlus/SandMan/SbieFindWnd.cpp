@@ -85,14 +85,14 @@ UINT CALLBACK FindProc(HWND hwndTool, UINT uCode, HWND hwnd)
 		CBoxedProcessPtr pProcess = theAPI->GetProcessById(pid);
 		if (!pProcess.isNull()) 
 		{
-			wstring result = CSandMan::tr("The selected window is running as part of program %1 in sandbox %2").arg(pProcess->GetProcessName()).arg(pProcess->GetBoxName()).toStdWString();
+			std::wstring result = CSandMan::tr("The selected window is running as part of program %1 in sandbox %2").arg(pProcess->GetProcessName()).arg(pProcess->GetBoxName()).toStdWString();
 
 			SetWindowText(GetDlgItem(hwndTool, ID_FINDER_RESULT), result.c_str());
 			//::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_YES_BOXED), SW_SHOW);
 		}
 		else
 		{
-			wstring result = CSandMan::tr("The selected window is not running as part of any sandboxed program.").toStdWString();
+			std::wstring result = CSandMan::tr("The selected window is not running as part of any sandboxed program.").toStdWString();
 
 			SetWindowText(GetDlgItem(hwndTool, ID_FINDER_RESULT), result.c_str());
 			//::ShowWindow(GetDlgItem(hwndTool, ID_FINDER_NOT_BOXED), SW_SHOW);
@@ -131,7 +131,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			SFinderWndData &WndData = *(SFinderWndData*)createStruct->lpCreateParams;
 			SetWindowLongPtr(hwnd, 0, (LONG_PTR)&WndData);
 
-			wstring info = CSandMan::tr("Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.").toStdWString();
+			std::wstring info = CSandMan::tr("Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.").toStdWString();
 
 			CreateWindow(L"Static", L"", SS_BITMAP | SS_NOTIFY | WS_VISIBLE | WS_CHILD, DS(10), DS(10), DS(32), DS(32), hwnd, (HMENU)ID_FINDER_TARGET, NULL, NULL);
 			CreateWindow(L"Static", info.c_str(), WS_VISIBLE | WS_CHILD, DS(60), DS(10), DS(180), DS(85), hwnd, (HMENU)ID_FINDER_EXPLAIN, NULL, NULL);

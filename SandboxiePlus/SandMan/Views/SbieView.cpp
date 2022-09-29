@@ -20,7 +20,7 @@
 CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 {
 	m_pMainLayout = new QVBoxLayout();
-	m_pMainLayout->setMargin(0);
+	m_pMainLayout->setContentsMargins(0,0,0,0);
 	this->setLayout(m_pMainLayout);
 
 	//m_UserConfigChanged = false;
@@ -147,6 +147,13 @@ void CSbieView::CreateMenu()
 	m_pMenuRun = m_pMenuBox->addMenu(CSandMan::GetIcon("Start"), tr("Run"));
 		m_pMenuRunAny = m_pMenuRun->addAction(CSandMan::GetIcon("Run"), tr("Run Program"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunMenu = m_pMenuRun->addAction(CSandMan::GetIcon("StartMenu"), tr("Run from Start Menu"), this, SLOT(OnSandBoxAction()));
+		if (theConf->GetBool("Options/ScanStartMenu", true)) {
+			m_pMenuRunStart = new QMenu();
+			m_pMenuRunStart->addAction(CSandMan::GetIcon("StartMenu"), tr("(Host) Start Menu"), this, SLOT(OnSandBoxAction()));
+			m_pMenuRunStart->addSeparator();
+		}
+		else
+			m_pMenuRunStart = NULL;
 		m_pMenuRunBrowser = m_pMenuRun->addAction(CSandMan::GetIcon("Internet"), tr("Default Web Browser"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunMailer = m_pMenuRun->addAction(CSandMan::GetIcon("Email"), tr("Default eMail Client"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunCmd = m_pMenuRun->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt"), this, SLOT(OnSandBoxAction()));
@@ -257,6 +264,13 @@ void CSbieView::CreateOldMenu()
 		m_pMenuRunMailer = m_pMenuRun->addAction(CSandMan::GetIcon("Email"), tr("Run eMail Reader"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunAny = m_pMenuRun->addAction(CSandMan::GetIcon("Run"), tr("Run Any Program"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunMenu = m_pMenuRun->addAction(CSandMan::GetIcon("StartMenu"), tr("Run From Start Menu"), this, SLOT(OnSandBoxAction()));
+		if (theConf->GetBool("Options/ScanStartMenu", true)) {
+			m_pMenuRunStart = new QMenu();
+			m_pMenuRunStart->addAction(CSandMan::GetIcon("StartMenu"), tr("(Host) Start Menu"), this, SLOT(OnSandBoxAction()));
+			m_pMenuRunStart->addSeparator();
+		}
+		else
+			m_pMenuRunStart = NULL;
 		m_pMenuRunExplorer = m_pMenuRun->addAction(CSandMan::GetIcon("Explore"), tr("Run Windows Explorer"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunCmd = NULL;
 		m_pMenuRunTools = NULL;
@@ -366,7 +380,7 @@ void CSbieView::CreateTrayMenu()
 
 int CSbieView__ParseGroup(const QString& Grouping, QMap<QString, QStringList>& m_Groups, const QString& Parent = "", int Index = 0)
 {
-	QRegExp RegExp("[,()]", Qt::CaseInsensitive, QRegExp::RegExp);
+	QRegularExpression RegExp("[,()]", QRegularExpression::CaseInsensitiveOption);
 	for (; ; )
 	{
 		int pos = Grouping.indexOf(RegExp, Index);
@@ -1018,8 +1032,6 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 
 		Results.append(SandBoxes.first()->RunStart("run_dialog"));
 	}
-	else if (Action == m_pMenuRunMenu)
-		Results.append(SandBoxes.first()->RunStart("start_menu"));
 	else if (Action == m_pMenuRunBrowser)
 		Results.append(SandBoxes.first()->RunStart("default_browser"));
 	else if (Action == m_pMenuRunMailer)
@@ -1081,6 +1093,8 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		foreach(const CSandBoxPtr& pBox, SandBoxes)
 		{
 			pBox.objectCast<CSandBoxPlus>()->UpdateSize();
+			if (theConf->GetBool("Options/ScanStartMenu", true))
+				pBox.objectCast<CSandBoxPlus>()->ScanStartMenu();
 		}	
 	}
 	else if (Action == m_pMenuExplore)
@@ -1121,7 +1135,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 				theConf->SetValue("Options/WarnOpenRegistry", 1);
 		}
 
-		wstring path = QCoreApplication::applicationFilePath().toStdWString();
+		std::wstring path = QCoreApplication::applicationFilePath().toStdWString();
 
 		QStringList RegRoot = SandBoxes.first()->GetRegRoot().split("\\");
 		while (RegRoot.first().isEmpty())
@@ -1131,7 +1145,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			RegRoot[1] = QString("HKEY_USERS");
 		else if(RegRoot[1] == "MACHINE")
 			RegRoot[1] = QString("HKEY_LOCAL_MACHINE");
-		wstring params = L"/OpenReg \"" + RegRoot.join("\\").toStdWString() + L"\"";
+		std::wstring params = L"/OpenReg \"" + RegRoot.join("\\").toStdWString() + L"\"";
 		if (SandBoxes.first()->GetActiveProcessCount() == 0)
 			params += L" \"" + theAPI->GetStartPath().toStdWString() + L" /box:" + SandBoxes.first()->GetName().toStdWString() + L" mount_hive\"";
 
@@ -1335,7 +1349,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			LinkName = QObject::tr("Drive %1").arg(LinkPath.left(1));
 		else {
 			LinkName = LinkPath.mid(pos + 1);
-			pos = LinkName.indexOf(QRegExp("[" + QRegExp::escape("\":;,*?.") + "]"));
+			pos = LinkName.indexOf(QRegularExpression("[" + QRegularExpression::escape("\":;,*?.") + "]"));
 			if (pos != -1)
 				LinkName = LinkName.left(pos);
 		}
@@ -1358,7 +1372,9 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	else // custom run menu command
 	{
 		QString Command = Action->data().toString();
-		if (!Command.isEmpty())
+		if (Command.isEmpty())
+			Results.append(SandBoxes.first()->RunStart("start_menu"));
+		else
 		{
 			if (Command.left(1) == "\\" && !SandBoxes.isEmpty())
 				Command.prepend(SandBoxes.first()->GetFileRoot());
@@ -1536,8 +1552,21 @@ void CSbieView::OnDoubleClicked(const QModelIndex& index)
 		return;
 	}
 	
-	
-	ShowOptions(pBox);
+	QString Action = pBox->GetText("DblClickAction");
+	if (Action.compare("!browse", Qt::CaseInsensitive) == 0)
+		ShowBrowse(pBox);
+	else if (Action.compare("!recovery", Qt::CaseInsensitive) == 0)
+		theGUI->ShowRecovery(pBox);
+	else if (Action.compare("!run", Qt::CaseInsensitive) == 0)
+		pBox->RunStart("run_dialog");
+	else if (!Action.isEmpty() && Action.left(1) != "!")
+	{
+		if (Action.left(1) == "\\")
+			Action.prepend(pBox->GetFileRoot());
+		pBox->RunStart(Action);
+	}
+	else
+		ShowOptions(pBox);
 }
 
 void CSbieView::ProcessSelection(const QItemSelection& selected, const QItemSelection& deselected)
@@ -1605,34 +1634,68 @@ QList<CBoxedProcessPtr> CSbieView::GetSelectedProcesses()
 	return  List;
 }
 
+QMenu* CSbieView::GetMenuFolder(const QString& Folder, QMenu* pParent)
+{
+	QMenu* &pMenu = m_MenuFolders[Folder];
+	if (!pMenu)
+	{
+		QStringList Names = Folder.split("/");
+		StrPair Tmp = Split2(Folder, "/", true);
+		if (!Tmp.second.isEmpty()) {
+			pParent = GetMenuFolder(Tmp.first, pParent);
+			pMenu = pParent->addMenu(Tmp.second);
+		}
+		else
+			pMenu = pParent->addMenu(Tmp.first);
+		pMenu->setIcon(m_IconProvider.icon(QFileIconProvider::Folder));
+	}
+	return pMenu;
+}
+
+void CSbieView::UpdateStartMenu(CSandBoxPlus* pBoxEx)
+{
+	foreach(const CSandBoxPlus::SLink& Link, pBoxEx->GetStartMenu())
+	{
+		QMenu* pMenu = GetMenuFolder(Link.Folder, m_pMenuRunStart);
+
+		QAction* pAction = pMenu->addAction(Link.Name, this, SLOT(OnSandBoxAction()));
+		pAction->setIcon(m_IconProvider.icon(QFileInfo(Link.Target)));
+		pAction->setData(Link.Target);
+	}
+}
+
 void CSbieView::UpdateRunMenu(const CSandBoxPtr& pBox)
 {
+	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
+
 	while (m_iMenuRun < m_pMenuRun->actions().count())
 		m_pMenuRun->removeAction(m_pMenuRun->actions().at(m_iMenuRun));
 
-	QStringList RunOptions = pBox->GetTextList("RunCommand", true);
+	QStringList RunOptions = pBox->GetTextList("RunCommand", true, false, true);
 	foreach(const QString& RunOption, RunOptions) 
 	{
 		StrPair NameCmd = Split2(RunOption, "|");
 		QAction* pAction = m_pMenuRun->addAction(NameCmd.first, this, SLOT(OnSandBoxAction()));
 
-		QString Path = NameCmd.second;
-		if (Path.left(1) == "\"") {
-			int End = Path.indexOf("\"", 1);
-			if (End != -1) Path = Path.mid(1, End - 1);
-		}
-		else {
-			int End = Path.indexOf(" ");
-			if (End != -1) Path.truncate(End);
-		}
-
-		if (Path.left(1) == "\\")
-			Path.prepend(pBox->GetFileRoot());
-
-		pAction->setIcon(m_IconProvider.icon(QFileInfo(Path)));
+		pAction->setIcon(m_IconProvider.icon(QFileInfo(pBoxEx->GetCommandFile(NameCmd.second))));
 
 		pAction->setData(NameCmd.second);
 	}
+
+	if (!m_pMenuRunStart)
+		return;
+
+	while (m_pMenuRunStart->actions().count() > 2)
+		m_pMenuRunStart->removeAction(m_pMenuRunStart->actions().at(2));
+	while (!m_MenuFolders.isEmpty())
+		m_MenuFolders.take(m_MenuFolders.firstKey())->deleteLater();
+
+	UpdateStartMenu(pBoxEx);
+	
+	if (m_pMenuRunStart->actions().count() > 2)
+		m_pMenuRunMenu->setMenu(m_pMenuRunStart);
+	else
+		m_pMenuRunMenu->setMenu((QMenu*)NULL);
 }
 
 void CSbieView::SelectBox(const QString& Name)
@@ -1720,7 +1783,8 @@ void CSbieView::ReloadUserConfig()
 	QString Collapsed = theConf->GetString("UIConfig/BoxCollapsedView");
 	if (Collapsed.isEmpty())
 		Collapsed = theAPI->GetUserSettings()->GetText("BoxCollapsedView");
-	m_Collapsed = SplitStr(Collapsed, ",").toSet();
+	
+	m_Collapsed = ListToSet(SplitStr(Collapsed, ","));
 
 	ClearUserUIConfig();
 }
@@ -1744,7 +1808,7 @@ void CSbieView::ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes)
 	QSet<QString> Temp = m_Collapsed;
 	foreach(QString Name, m_Collapsed)
 	{
-		if (m_Groups.end() == find_if(m_Groups.begin(), m_Groups.end(),
+		if (m_Groups.end() == std::find_if(m_Groups.begin(), m_Groups.end(),
 					  [Name](const QStringList& item)->int { return item.contains(Name); }))
 			Temp.remove(Name);
 	}
@@ -1757,10 +1821,22 @@ void CSbieView::SaveUserConfig()
 	//	return;
 	//m_UserConfigChanged = false;
 
-	QString Grouping = CSbieView__SerializeGroup(m_Groups);
-	theConf->SetValue("UIConfig/BoxDisplayOrder", Grouping);
+	if (!m_Groups.isEmpty()) {
 
-	QString Collapsed = m_Collapsed.toList().join(",");
+		auto Groups = m_Groups;
+		// clean up non existing entries
+		for (auto I = Groups.begin(); I != Groups.end(); ++I) {
+			foreach(const QString &Name, I.value()) {
+				if (theAPI->GetBoxByName(Name).isNull() && !Groups.contains(Name))
+					I->removeAll(Name);
+			}
+		}
+
+		QString Grouping = CSbieView__SerializeGroup(Groups);
+		theConf->SetValue("UIConfig/BoxDisplayOrder", Grouping);
+	}
+
+	QString Collapsed = SetToList(m_Collapsed).join(",");
 	theConf->SetValue("UIConfig/BoxCollapsedView", Collapsed);
 }
 
@@ -1769,7 +1845,7 @@ void CSbieView::OnMoveItem(const QString& Name, const QString& To, int row)
 	QModelIndex index;
 	if (!To.isEmpty()) { // only groups can be parents so add the group marker "!"
 		QModelIndex index0 = m_pSbieModel->FindIndex("!" + To);
-		index = index0.child(row, 0);	
+		index = m_pSbieModel->index(row, 0, index0);
 	} else
 		index = m_pSbieModel->index(row, 0);
 	QModelIndex index2 = m_pSortProxy->mapFromSource(index);

@@ -12,7 +12,7 @@ CBoxMonitor::~CBoxMonitor()
 	Stop();
 }
 
-void CBoxMonitor::Notify(const wstring& strDirectory)
+void CBoxMonitor::Notify(const std::wstring& strDirectory)
 {
 	m_Mutex.lock();
 	m_Boxes[QString::fromStdWString(strDirectory)].Changed = true;

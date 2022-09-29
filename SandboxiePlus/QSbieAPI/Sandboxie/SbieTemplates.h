@@ -40,10 +40,10 @@ protected:
 	void InitExpandPaths(bool WithUser);
 	QString ExpandPath(QString path);
 
-	list<wstring> m_Objects;
-	list<wstring> m_Classes;
-	list<wstring> m_Services;
-	list<wstring> m_Products;
+	std::list<std::wstring> m_Objects;
+	std::list<std::wstring> m_Classes;
+	std::list<std::wstring> m_Services;
+	std::list<std::wstring> m_Products;
 
 	QMap<QString, int> m_Templates;
 

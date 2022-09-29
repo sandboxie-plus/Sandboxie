@@ -33,7 +33,7 @@
 
 #include "ThreadSafeQueue.h"
 
-typedef pair<DWORD,wstring> TDirectoryChangeNotification;
+typedef std::pair<DWORD,std::wstring> TDirectoryChangeNotification;
 
 namespace ReadDirectoryChangesPrivate
 {
@@ -78,7 +78,7 @@ namespace ReadDirectoryChangesPrivate
 ///				// We've received a notification in the queue.
 ///				{
 ///					DWORD dwAction;
-///					wstring wstrFilename;
+///					std::wstring wstrFilename;
 ///					changes.Pop(dwAction, wstrFilename);
 ///					wprintf(L"%s %s\n", ExplainAction(dwAction), wstrFilename);
 ///				}
@@ -119,7 +119,7 @@ public:
 
 	void DetachDirectory( LPCTSTR wszDirectory );
 
-	virtual void Notify( const wstring& strDirectory ) {}
+	virtual void Notify( const std::wstring& strDirectory ) {}
 
 	/// <summary>
 	/// Return a handle for the Win32 Wait... functions that will be
@@ -127,10 +127,10 @@ public:
 	/// </summary>
 	//HANDLE GetWaitHandle() { return m_Notifications.GetWaitHandle(); }
 	//
-	//bool Pop(DWORD& dwAction, wstring& wstrFilename);
+	//bool Pop(DWORD& dwAction, std::wstring& wstrFilename);
 	//
 	//// "Push" is for usage by ReadChangesRequest.  Not intended for external usage.
-	//void Push(DWORD dwAction, wstring& wstrFilename);
+	//void Push(DWORD dwAction, std::wstring& wstrFilename);
 	//
 	//// Check if the queue overflowed. If so, clear it and return true.
 	//bool CheckOverflow();

@@ -7,10 +7,18 @@ QString QTreeViewEx::m_ResetColumns = "Reset Columns";
 
 bool CTreeItemModel::m_DarkMode = false;
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+bool operator < (const QVariant& l, const QVariant& r)
+{
+	auto ret = QVariant::compare(l, r);
+	Q_ASSERT(ret != QPartialOrdering::Unordered);
+	return ret == QPartialOrdering::Less;
+}
+#endif
+
 CTreeItemModel::CTreeItemModel(QObject *parent)
 : QAbstractItemModelEx(parent)
 {
-	m_bTree = true;
 	m_bUseIcons = false;
 	m_Root = NULL;
 }
@@ -23,6 +31,7 @@ CTreeItemModel::~CTreeItemModel()
 CSimpleTreeModel::CSimpleTreeModel(QObject *parent) 
  : CTreeItemModel(parent) 
 {
+	m_bTree = true;
 	m_Root = MkNode(QVariant());
 }
 
@@ -138,7 +147,7 @@ void CTreeItemModel::Sync(QMap<QList<QVariant>, QList<STreeNode*> >& New, QHash<
 	{
 		emit layoutAboutToBeChanged();
 
-		//foreach(const QString& Path, New.uniqueKeys())
+		//foreach(const QString& Path, New.keys())
 		for(QMap<QList<QVariant>, QList<STreeNode*> >::const_iterator I = New.begin(); I != New.end(); I++)
 			Fill(m_Root, QModelIndex(), I.key(), 0, I.value(), I.key(), pAdded);
 
@@ -459,7 +468,7 @@ QVariant CTreeItemModel::NodeData(STreeNode* pNode, int role, int section) const
 Qt::ItemFlags CTreeItemModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
-        return 0;
+        return Qt::NoItemFlags;
 	if(index.column() == 0)
 		return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable;
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;

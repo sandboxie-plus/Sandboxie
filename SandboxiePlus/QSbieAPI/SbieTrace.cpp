@@ -28,6 +28,7 @@ typedef long NTSTATUS;
 #include "SbieDefs.h"
 
 #include "..\..\Sandboxie\common\win32_ntddk.h"
+#include "..\..\Sandboxie\common\defines.h"
 
 #include "..\..\Sandboxie\core\drv\api_defs.h"
 
@@ -72,7 +73,7 @@ CTraceEntry::CTraceEntry(quint32 ProcessId, quint32 ThreadId, quint32 Type, cons
 
 	m_BoxPtr = 0;
 
-	static atomic<quint64> uid = 0;
+	static std::atomic<quint64> uid = 0;
 	m_uid = uid.fetch_add(1);
 	
 	m_Counter = 1;
@@ -86,7 +87,7 @@ CTraceEntry::CTraceEntry(quint32 ProcessId, quint32 ThreadId, quint32 Type, cons
 		if (tmp.length() >= 2)
 		{
 			QString temp = tmp[1].trimmed();
-			int endPos = temp.indexOf(QRegExp("[ \r\n]"));
+			int endPos = temp.indexOf(QRegularExpression("[ \r\n]"));
 			if (endPos != -1)
 				temp.truncate(endPos);
 

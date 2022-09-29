@@ -172,9 +172,7 @@ int CComboInputDialog::findData(const QVariant & v) const
 
 QPixmap CComboInputDialog::iconPixmap() const
 {
-    if (const QPixmap *p = d->pixmapLabel->pixmap())
-        return QPixmap(*p);
-    return QPixmap();
+    return d->pixmapLabel->pixmap(Qt::ReturnByValue);
 }
 
 void CComboInputDialog::setIconPixmap(const QPixmap &p)

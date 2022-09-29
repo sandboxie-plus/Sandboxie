@@ -65,7 +65,7 @@ public:
 
 	QIcon				GetBoxIcon(int boxType, bool inUse = false);// , bool inBusy = false);
 	QRgb				GetBoxColor(int boxType) { return m_BoxColors[boxType]; }
-	QIcon				GetColorIcon(QColor boxColor, bool inUse = false);
+	QIcon				GetColorIcon(QColor boxColor, bool inUse = false/*, bool bOut = false*/);
 	QIcon				MakeIconBusy(const QIcon& Icon, int Index = 0);
 	QString				GetBoxDescription(int boxType);
 	
@@ -162,15 +162,23 @@ public slots:
 	void				OnAsyncProgress(int Progress);
 	void				OnCancelAsync();
 
+	void				OnBoxAdded(const CSandBoxPtr& pBox);
 	void				OnBoxClosed(const CSandBoxPtr& pBox);
+
+	void				OnStartMenuChanged();
+
 
 	void				OpenUrl(const QString& url) { OpenUrl(QUrl(url)); }
 	void				OpenUrl(const QUrl& url);
 
-	int					ShowQuestion(const QString& question, const QString& checkBoxText, bool* checkBoxSetting, int buttons, int defaultButton);
+	int					ShowQuestion(const QString& question, const QString& checkBoxText, bool* checkBoxSetting, int buttons, int defaultButton, int type);
+	void				ShowMessage(const QString& message, int type);
 
 	void				OnBoxMenu(const QPoint &);
 	void				OnBoxDblClick(QTreeWidgetItem*);
+
+	void				SyncStartMenu();
+	void				ClearStartMenu();
 
 	void				UpdateLabel();
 
@@ -237,6 +245,11 @@ private:
 
 	void				LoadState(bool bFull = true);
 	void				StoreState();
+
+	void				EnumBoxLinks(QMap<QString, QMap<QString, QString> >& BoxLinks, const QString& Prefix, const QString& Folder, bool bWithSubDirs = true);
+	void				CleanupShortcutPath(const QString& Path);
+	void				DeleteShortcut(const QString& Path);
+	void				CleanUpStartMenu(QMap<QString, QMap<QString, QString> >& BoxLinks);
 
 	QWidget*			m_pMainWidget;
 	QVBoxLayout*		m_pMainLayout;
@@ -346,6 +359,8 @@ private:
 	CProgressDialog*	m_pProgressDialog;
 	bool				m_pProgressModal;
 	CPopUpWindow*		m_pPopUpWindow;
+
+	bool				m_StartMenuUpdatePending;
 
 	bool				m_ThemeUpdatePending;
 	QString				m_DefaultStyle;

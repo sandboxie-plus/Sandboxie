@@ -4629,35 +4629,6 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation>Х</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="514"/>
-        <location filename="Forms/OptionsWindow.ui" line="1312"/>
-        <location filename="Forms/OptionsWindow.ui" line="1410"/>
-        <location filename="Forms/OptionsWindow.ui" line="1516"/>
-        <location filename="Forms/OptionsWindow.ui" line="1628"/>
-        <location filename="Forms/OptionsWindow.ui" line="1726"/>
-        <location filename="Forms/OptionsWindow.ui" line="1804"/>
-        <location filename="Forms/OptionsWindow.ui" line="1896"/>
-        <location filename="Forms/OptionsWindow.ui" line="2030"/>
-        <location filename="Forms/OptionsWindow.ui" line="2129"/>
-        <location filename="Forms/OptionsWindow.ui" line="2210"/>
-        <location filename="Forms/OptionsWindow.ui" line="2323"/>
-        <location filename="Forms/OptionsWindow.ui" line="2595"/>
-        <location filename="Forms/OptionsWindow.ui" line="2737"/>
-        <location filename="Forms/OptionsWindow.ui" line="2856"/>
-        <location filename="Forms/OptionsWindow.ui" line="2935"/>
-        <location filename="Forms/OptionsWindow.ui" line="3038"/>
-        <location filename="Forms/OptionsWindow.ui" line="3124"/>
-        <location filename="Forms/OptionsWindow.ui" line="3401"/>
-        <location filename="Forms/OptionsWindow.ui" line="3533"/>
-        <location filename="Forms/OptionsWindow.ui" line="3602"/>
-        <location filename="Forms/OptionsWindow.ui" line="3726"/>
-        <location filename="Forms/OptionsWindow.ui" line="3785"/>
-        <location filename="Forms/OptionsWindow.ui" line="4200"/>
-        <source>Remove</source>
-        <oldsource>Remove Rule</oldsource>
-        <translation type="unfinished">Прибрати правило</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="2744"/>
         <source>Add Rule</source>
         <translation>Додати правило</translation>

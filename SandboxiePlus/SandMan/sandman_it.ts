@@ -4481,35 +4481,6 @@ Nel caso in cui siano definiti i processi principali, tutti gli altri verranno t
         <translation>X</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="514"/>
-        <location filename="Forms/OptionsWindow.ui" line="1312"/>
-        <location filename="Forms/OptionsWindow.ui" line="1410"/>
-        <location filename="Forms/OptionsWindow.ui" line="1516"/>
-        <location filename="Forms/OptionsWindow.ui" line="1628"/>
-        <location filename="Forms/OptionsWindow.ui" line="1726"/>
-        <location filename="Forms/OptionsWindow.ui" line="1804"/>
-        <location filename="Forms/OptionsWindow.ui" line="1896"/>
-        <location filename="Forms/OptionsWindow.ui" line="2030"/>
-        <location filename="Forms/OptionsWindow.ui" line="2129"/>
-        <location filename="Forms/OptionsWindow.ui" line="2210"/>
-        <location filename="Forms/OptionsWindow.ui" line="2323"/>
-        <location filename="Forms/OptionsWindow.ui" line="2595"/>
-        <location filename="Forms/OptionsWindow.ui" line="2737"/>
-        <location filename="Forms/OptionsWindow.ui" line="2856"/>
-        <location filename="Forms/OptionsWindow.ui" line="2935"/>
-        <location filename="Forms/OptionsWindow.ui" line="3038"/>
-        <location filename="Forms/OptionsWindow.ui" line="3124"/>
-        <location filename="Forms/OptionsWindow.ui" line="3401"/>
-        <location filename="Forms/OptionsWindow.ui" line="3533"/>
-        <location filename="Forms/OptionsWindow.ui" line="3602"/>
-        <location filename="Forms/OptionsWindow.ui" line="3726"/>
-        <location filename="Forms/OptionsWindow.ui" line="3785"/>
-        <location filename="Forms/OptionsWindow.ui" line="4200"/>
-        <source>Remove</source>
-        <oldsource>Remove Rule</oldsource>
-        <translation type="unfinished">Rimuovi regola</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="257"/>
         <source>Double click action:</source>
         <translation type="unfinished"></translation>

@@ -108,6 +108,9 @@
 #include <QGridLayout>
 #include <QActionGroup>
 #include <QStandardPaths>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QDesktopWidget>
+#endif
 
 // other includes
 

@@ -180,12 +180,10 @@ body:
         If applicable, provide a direct link containing the .dmp file(s) for your crash issue!
         
         List of crash dump locations:
-        ```
-        C:\Users\%Username%\AppData\Local\CrashDumps
-        C:\Windows\Minidump
-        C:\Sandbox\%User%\DefaultBox\user\current\AppData\Local\CrashDumps
-        C:\Sandbox\%USER%\%SANDBOX% (only if you previously set EnableMiniDump=y in the sandbox section of your Sandboxie.ini file)
-        ```
+        - C:\\Users\\%Username%\\AppData\\Local\\CrashDumps
+        - C:\\Windows\\Minidump
+        - C:\\Sandbox\\%User%\\DefaultBox\\user\\current\\AppData\\Local\\CrashDumps
+        - C:\\Sandbox\\%USER%\\%SANDBOX% (only if you previously set EnableMiniDump=y in the sandbox section of your Sandboxie.ini file)
         
         Tip: You can upload the .dmp file(s) on a file storage service, then share the resulting link below.
       placeholder: https://

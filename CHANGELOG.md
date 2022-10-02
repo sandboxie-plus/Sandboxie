@@ -8,7 +8,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.4.0 / 5.59.0] - 2022-??-??
+## [1.4.1 / 5.59.1] - 2022-10-??
+
+### Changed
+- In sbie 5.28 and later WinInetCache is open, this breks IE's source view, hence it can now be disabled with 'CloseWinInetCache=y'
+
+### Fixed
+- fixed WarnProcess and WarnFolder not working with certain configurations
+
+
+
+## [1.4.0 / 5.59.0] - 2022-09-30
 
 ### Added
 - added integrated run from start menu [#1836](https://github.com/sandboxie-plus/Sandboxie/issues/1836)

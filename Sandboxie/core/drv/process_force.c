@@ -315,7 +315,7 @@ _FX BOX *Process_GetForcedStartBox(
 
 			box = (BOX *)-1;
 		}
-		else if ((force_alert == 1) && Conf_Get_Boolean(NULL, L"NotifyForceProcessDisabled", 0, FALSE))
+		else if ((force_alert == 0) || ((force_alert == 1) && Conf_Get_Boolean(NULL, L"NotifyForceProcessDisabled", 0, FALSE)))
 		{
 			Log_Msg_Process(MSG_1301, ImageName, NULL, SessionId, ProcessId);
 		}

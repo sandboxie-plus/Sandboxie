@@ -433,7 +433,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="709"/>
         <source>On Delete Content</source>
-        <translation>Beim löschen von Inhalten</translation>
+        <translation>Beim Löschen von Inhalten</translation>
     </message>
     <message>
         <source>On Delete</source>
@@ -1021,16 +1021,6 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <location filename="Windows/OptionsNetwork.cpp" line="65"/>
         <source>Block by denying access to Network devices</source>
         <translation>Blockieren durch Zugriffsverweigerung auf Netzwerkgeräte</translation>
-    </message>
-    <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="744"/>
-        <source>Please enter a domain to be filtered</source>
-        <translation>Bitte eine Domain zum Filtern eingeben</translation>
-    </message>
-    <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="842"/>
-        <source>Please enter a SOCKS 5 proxy server IP and Port, &lt;br /&gt;use format IP:Port for IPv4 and [IP]:Port for IPv6.</source>
-        <translation>Bitte eine SOCKS 5 Proxyserver-IP und Port eingeben, &lt;br /&gt;Das Format IP:Port für IPv4 und [IP]:Port für IPv6 verwenden.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="884"/>
@@ -5336,7 +5326,7 @@ Um eine Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2396"/>
         <source>Configure which processes can access COM objects.</source>
-        <translation>Konfiguriere welche Prozesse Zugriff auf COMobjekete haben.</translation>
+        <translation>Konfiguriere welche Prozesse Zugriff auf COMobjekte haben.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2408"/>
@@ -5351,7 +5341,7 @@ Um eine Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2449"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</source>
-        <translation>Wende Blockiert...=!&amp;lt;program&amp;gt;,...Regeln auch auf alle ausführbaren Binärcodes (Programme) innerhalb der Sandbox an.</translation>
+        <translation>Wende Blockiert...=!&lt;program&gt;,...Regeln auch auf alle ausführbaren Binärcodes (Programme) innerhalb der Sandbox an.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2544"/>
@@ -5424,7 +5414,7 @@ Um eine Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2912"/>
         <source>Sandboxed programs can be forced to use a preset socks5 proxy.</source>
-        <translation>Sandgeboxete Programme können gezwungen werden einen vorhandenen socks5 proxy zu verwenden.</translation>
+        <translation>Sandgeboxte Programme können gezwungen werden einen vorhandenen socks5 proxy zu verwenden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2951"/>
@@ -5756,7 +5746,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3379"/>
         <source>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</source>
-        <translation>Diese Kommando wird ausgeführt bevor eine Datei wiederhergestellt wird und der Dateipfad wird als erstes Argument weitergegeben und falls dieses Kommando etwas anderes als den Wert 0 zurückgibt, wird die Wiederherstellung blockiert</translation>
+        <translation>Dieses Kommando wird ausgeführt bevor eine Datei wiederhergestellt wird und der Dateipfad wird als erstes Argument weitergegeben und falls dieses Kommando etwas anderes als den Wert 0 zurückgibt, wird die Wiederherstellung blockiert</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3382"/>
@@ -5766,7 +5756,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3498"/>
         <source>On Delete Content</source>
-        <translation>Beim löschen von Inhalten</translation>
+        <translation>Beim Löschen von Inhalten</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3578"/>
@@ -5792,7 +5782,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3792"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</source>
-        <translation>Hier können Sie pro Prozess Optionen konfigurieren, um die Kompatibilität zu verbessern und/oder das Sandboxverhalten zu personalsieren.</translation>
+        <translation>Hier können Sie pro Prozess Optionen konfigurieren, um die Kompatibilität zu verbessern und/oder das Sandboxverhalten zu personalisieren.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3803"/>
@@ -6255,7 +6245,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="255"/>
         <source>Start Menu Integration</source>
-        <translation>Startmenü-Intergration</translation>
+        <translation>Startmenü-Integration</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="262"/>

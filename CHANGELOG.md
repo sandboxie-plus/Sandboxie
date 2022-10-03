@@ -8,23 +8,35 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.4.0 / 5.59.0] - 2022-08-??
+## [1.4.1 / 5.59.1] - 2022-10-??
+
+### Changed
+- In sbie 5.28 and later WinInetCache is open, this breks IE's source view, hence it can now be disabled with 'CloseWinInetCache=y'
+
+### Fixed
+- fixed WarnProcess and WarnFolder not working with certain configurations
+
+
+
+## [1.4.0 / 5.59.0] - 2022-09-30
 
 ### Added
 - added integrated run from start menu [#1836](https://github.com/sandboxie-plus/Sandboxie/issues/1836)
-- addes start menu enumeration [#1570](https://github.com/sandboxie-plus/Sandboxie/issues/1570)
+- added start menu enumeration [#1570](https://github.com/sandboxie-plus/Sandboxie/issues/1570)
 - added UI for breakout processes [#1904](https://github.com/sandboxie-plus/Sandboxie/issues/1904)
-- added option to customize box double click action
-- added new advnaced tab in the advanced tab alowing to configure proces specific and otehr advanced options
-- added "SeparateUserFolders=y" and "SandboxieLogon=y" to the box option dialog
+- added option to customize double-click action per sandbox
+- added new advanced tab in the advanced tab allowing to configure specific processes and other advanced options
+- added "SeparateUserFolders=y" and "SandboxieLogon=y" to the sandbox options dialog
 - added icons to option section labels
 
 
 ### Changed
-- preapred for Qt 6.2
-- resructured the general settings page
-- resructured the sandbox options page, added a new tab and moved some of the advanced options there
+- prepared for Qt 6.3.1
+- restructured the general settings page
+- restructured the sandbox options page, added a new tab and moved some of the advanced options there
 
+### Fixed
+- fixed menu bar issue in Plus UI [#2280](https://github.com/sandboxie-plus/Sandboxie/pull/2280) (thanks okrc)
 
 
 

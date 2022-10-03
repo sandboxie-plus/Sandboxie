@@ -568,8 +568,6 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
     };
     static const WCHAR* openpaths_windows10[] = {
         L"*\\BaseNamedObjects*\\CoreMessagingRegistrar",
-        L"\\RPC Control\\webcache_*",
-        L"*\\BaseNamedObjects\\windows_webcache_counters_*",
         L"*\\BaseNamedObjects\\[CoreUI]-*",
         // open paths 11
         L"*\\BaseNamedObjects\\SM*:WilStaging_*", // 22449.1000 accesses this before sbiedll load
@@ -678,6 +676,16 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
         for (i = 0; openpaths_windows10[i] && ok; ++i) {
             ok = Process_AddPath(proc, &proc->open_ipc_paths, NULL,
                 TRUE, openpaths_windows10[i], FALSE);
+        }
+
+        if (!Conf_Get_Boolean(proc->box->name, L"CloseWinInetCache", 0, FALSE)) { // this breaks IE view source, see SbieDll_IsOpenClsid
+            
+            static const WCHAR* webcache_ = L"\\RPC Control\\webcache_*";
+            static const WCHAR* windows_webcache_counters_ = L"*\\BaseNamedObjects\\windows_webcache_counters_*";
+            if (ok) ok = Process_AddPath(proc, &proc->open_ipc_paths, NULL,
+                FALSE, webcache_, FALSE);
+            if (ok) ok = Process_AddPath(proc, &proc->open_ipc_paths, NULL,
+                FALSE, windows_webcache_counters_, FALSE);
         }
     }
 

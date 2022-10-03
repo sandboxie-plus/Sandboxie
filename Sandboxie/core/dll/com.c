@@ -449,12 +449,20 @@ _FX BOOLEAN SbieDll_IsOpenClsid(
 
         if (memcmp(rclsid, &CLSID_WinMgmt,              sizeof(GUID)) == 0 ||
             memcmp(rclsid, &CLSID_NetworkListManager,   sizeof(GUID)) == 0 ||
-            memcmp(rclsid, &CLSID_ShellServiceHostBrokerProvider, sizeof(GUID)) == 0 ||
-            ((Dll_OsBuild >= 10240) && memcmp(rclsid, &CLSID_WinInetCache, sizeof(GUID)) == 0))
+            memcmp(rclsid, &CLSID_ShellServiceHostBrokerProvider, sizeof(GUID)) == 0)
         {
 
             return TRUE;
         }
+
+        // 
+        // Sbie builds after 5.27-1 broke IE's source view and cache,
+        // by opening WinInetCache here and in Ipc_InitPaths.
+        // with CloseWinInetCache=y this change can be undone
+        //
+
+        if (((Dll_OsBuild >= 10240) && memcmp(rclsid, &CLSID_WinInetCache, sizeof(GUID)) == 0) && !SbieApi_QueryConfBool(NULL, L"CloseWinInetCache", FALSE)) // this breaks IE view source
+            return TRUE;
 
         //
         // initialize list of user-configured CLSID exclusions

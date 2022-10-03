@@ -109,14 +109,6 @@ private slots:
 
 	void OnTestNetFwRule();
 	void OnClearNetFwTest();
-
-	void OnAddDnsFilter();
-	void OnDelDnsFilter();
-	void OnDnsFilterChanged(QTreeWidgetItem * pItem, int Column) { m_DnsFilterChanged = true; OnOptChanged(); }
-
-	void OnAddNetProxy();
-	void OnDelNetProxy();
-	void OnNetProxyChanged(QTreeWidgetItem * pItem, int Column) { m_NetProxyChanged = true; OnOptChanged(); }
 	//
 	
 	// access
@@ -381,16 +373,6 @@ protected:
 	void LoadNetFwRules();
 	void SaveNetFwRules();
 	void LoadNetFwRulesTmpl(bool bUpdate = false);
-
-	void LoadDnsFilter();
-	void AddDnsFilter(const QString& Value, bool disabled = false, const QString& Template = QString());
-	void AddDnsFilter(const QString& Prog, const QString& Domain, const QStringList& IPs = QStringList(), bool disabled = false, const QString& Template = QString());
-	void SaveDnsFilter();
-
-	void LoadNetProxy();
-	void AddNetProxy(const QString& Value, bool disabled = false, const QString& Template = QString());
-	void AddNetProxy(const QString& Prog, const QString& Proxy, bool disabled = false, const QString& Template = QString());
-	void SaveNetProxy();
 	//
 	
 	// access
@@ -481,8 +463,6 @@ protected:
 	//bool m_RestrictionChanged;
 	bool m_INetBlockChanged;
 	bool m_NetFwRulesChanged;
-	bool m_DnsFilterChanged;
-	bool m_NetProxyChanged;
 	bool m_AccessChanged;
 	bool m_TemplatesChanged;
 	bool m_FoldersChanged;

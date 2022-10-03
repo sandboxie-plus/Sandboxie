@@ -5341,7 +5341,7 @@ Um eine Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2449"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</source>
-        <translation>Wende Blockiert...=!&lt;program&gt;,...Regeln auch auf alle ausführbaren Binärcodes (Programme) innerhalb der Sandbox an.</translation>
+        <translation>Wende Blockiert...=!&lt;program&gt;,... Regeln auch auf alle ausführbaren Binärcodes (Programme) innerhalb der Sandbox an.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2544"/>

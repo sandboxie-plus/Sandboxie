@@ -314,68 +314,68 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="39"/>
         <source>Enable the use of win32 hooks for selected processes. Note: You need to enable win32k syscall hook support globally first.</source>
-        <translation type="unfinished"></translation>
+        <translation>对选定的进程启用 Win32 钩子(注意：需要先启用全局范围的 Win32k 系统调用钩子支持)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="40"/>
         <source>Enable crash dump creation in the sandbox folder</source>
-        <translation type="unfinished"></translation>
+        <translation>启用在沙盒目录下创建崩溃转储文件</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="41"/>
         <source>Always use ElevateCreateProcess fix, as sometimes applied by the Program Compatibility Assistant.</source>
-        <translation type="unfinished"></translation>
+        <translation>始终应用 ElevateCreateProcess 修复，偶尔会被程序兼容性助手(PCA)调用</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="43"/>
         <source>Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes</source>
-        <translation type="unfinished"></translation>
+        <translation>启用不一致的特殊 PreferExternalManifest 行为支持，某些边缘问题的修复可能需要打开此项</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="44"/>
         <source>Set RpcMgmtSetComTimeout usage for specific processes</source>
-        <translation type="unfinished"></translation>
+        <translation>为特定进程设置 RpcMgmtSetComTimeout 选项</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="45"/>
         <source>Makes a write open call to a file that won&apos;t be copied fail instead of turning it read-only.</source>
-        <translation type="unfinished"></translation>
+        <translation>使得一个禁止被复制文件的写入句柄调用失败，而不是将其变成只读</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="48"/>
         <source>Make specified processes think thay have admin permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>让指定的进程认为它们具有管理员权限</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="49"/>
         <source>Force specified processes to wait for a debugger to attach.</source>
-        <translation type="unfinished"></translation>
+        <translation>强制指定的进程等待调试器附加</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="53"/>
         <source>Sandbox file system root</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒文件系统根目录</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="54"/>
         <source>Sandbox registry root</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒注册表根目录</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="55"/>
         <source>Sandbox ipc root</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒 IPC 根目录</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="545"/>
         <source>Add special option:</source>
-        <translation type="unfinished"></translation>
+        <translation>添加特殊选项:</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="693"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="697"/>
         <source>On Start</source>
-        <translation>启动阶段</translation>
+        <translation>沙盒启动阶段</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="694"/>
@@ -393,17 +393,17 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="701"/>
         <source>On Init</source>
-        <translation>初始阶段</translation>
+        <translation>沙盒初始阶段</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="705"/>
         <source>On File Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>文件恢复阶段</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="709"/>
         <source>On Delete Content</source>
-        <translation type="unfinished"></translation>
+        <translation>内容删除阶段</translation>
     </message>
     <message>
         <source>On Delete</source>
@@ -420,7 +420,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="884"/>
         <source>Deny</source>
-        <translation type="unfinished"></translation>
+        <translation>拒绝(禁止)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="986"/>
@@ -505,22 +505,22 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="201"/>
         <source>Open Box Options</source>
-        <translation type="unfinished"></translation>
+        <translation>打开沙盒选项</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="202"/>
         <source>Browse Content</source>
-        <translation type="unfinished">浏览内容</translation>
+        <translation>浏览内容</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="203"/>
         <source>Start File Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>开始恢复文件</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="204"/>
         <source>Show Run Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>显示运行对话框</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="378"/>
@@ -537,7 +537,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="257"/>
         <source>Grouping</source>
-        <translation type="unfinished"></translation>
+        <translation>分组</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="549"/>
@@ -547,22 +547,22 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="670"/>
         <source>Box: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒: %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="671"/>
         <source>Template: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>模板: %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="672"/>
         <source>Global: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>全局: %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="673"/>
         <source>Default: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>默认: %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="839"/>
@@ -652,13 +652,13 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsForce.cpp" line="209"/>
         <location filename="Windows/OptionsForce.cpp" line="219"/>
         <source>Select Executable File</source>
-        <translation type="unfinished"></translation>
+        <translation>选择可执行文件</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="209"/>
         <location filename="Windows/OptionsForce.cpp" line="219"/>
         <source>Executable Files (*.exe)</source>
-        <translation type="unfinished"></translation>
+        <translation>可执行文件 (*.exe)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="342"/>
@@ -720,7 +720,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="310"/>
         <source>Ignore UIPI</source>
-        <translation type="unfinished"></translation>
+        <translation>忽略 UIPI</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="312"/>
@@ -1899,12 +1899,12 @@ This box prevents access to all user data locations, except explicitly granted i
     <message>
         <location filename="SandMan.cpp" line="1551"/>
         <source>Removed Shortcut: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>移除快捷方式: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1619"/>
         <source>Added Shortcut to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>添加快捷方式: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1649"/>
@@ -3041,7 +3041,7 @@ No will choose: %2</source>
         <location filename="Views/SbieView.cpp" line="152"/>
         <location filename="Views/SbieView.cpp" line="269"/>
         <source>(Host) Start Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>开始菜单(宿主)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="205"/>
@@ -3284,17 +3284,17 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="183"/>
         <source>Advanced Config</source>
-        <translation type="unfinished">高级选项</translation>
+        <translation>高级选项</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="184"/>
         <source>Sandbox Config</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒配置</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="185"/>
         <source>Config Protection</source>
-        <translation type="unfinished">保护配置</translation>
+        <translation>保护配置</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="198"/>
@@ -3309,17 +3309,17 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="210"/>
         <source>Don&apos;t integrate links</source>
-        <translation type="unfinished"></translation>
+        <translation>不整合</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="211"/>
         <source>As sub group</source>
-        <translation type="unfinished"></translation>
+        <translation>作为子组</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="212"/>
         <source>Fully integrate</source>
-        <translation type="unfinished"></translation>
+        <translation>全面整合</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="214"/>
@@ -3629,7 +3629,7 @@ No will choose: %2</source>
         <location filename="Windows/SupportDialog.cpp" line="128"/>
         <source>The installed supporter certificate is &lt;b&gt;expired&lt;/b&gt; and &lt;u&gt;should be renewed&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</source>
         <oldsource>The installed supporter certificate is &lt;b&gt;expired&lt;/b&gt; and &lt;u&gt;should to be renewed&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</oldsource>
-        <translation type="unfinished">安装的赞助者凭据&lt;b&gt;已过时&lt;/b&gt;，&lt;u&gt;应当更新&lt;/u&gt;。&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>安装的赞助者凭据&lt;b&gt;已过期&lt;/b&gt;，&lt;u&gt;应当更新&lt;/u&gt;。&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="130"/>
@@ -3915,7 +3915,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="54"/>
         <source>Box Type Preset:</source>
-        <translation>沙盒类型预设配置:</translation>
+        <translation>沙盒类型预设配置：</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="77"/>
@@ -4062,7 +4062,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="391"/>
         <source>Issue message 2102 when a file is too large</source>
-        <translation>文件太大时发出问题代码 2102</translation>
+        <translation>文件太大时，提示问题代码 2102</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="351"/>
@@ -4233,7 +4233,7 @@ No will choose: %2</source>
         <location filename="Forms/OptionsWindow.ui" line="1446"/>
         <location filename="Forms/OptionsWindow.ui" line="1561"/>
         <source>Force Folder</source>
-        <translation>必沙文件夹</translation>
+        <translation>添加目录</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1922"/>
@@ -4246,7 +4246,7 @@ No will choose: %2</source>
         <location filename="Forms/OptionsWindow.ui" line="1403"/>
         <location filename="Forms/OptionsWindow.ui" line="1535"/>
         <source>Force Program</source>
-        <translation>必沙程序</translation>
+        <translation>添加程序</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1319"/>
@@ -4278,7 +4278,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="211"/>
         <source>Box Type Preset:</source>
-        <translation>沙盒类型预设配置:</translation>
+        <translation>沙盒类型预设配置：</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="179"/>
@@ -4352,7 +4352,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1765"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>程序启动失败发出问题代码 1308</translation>
+        <translation>程序启动失败时，提示问题代码 1308</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1816"/>
@@ -4386,7 +4386,7 @@ If leader processes are defined, all others are treated as lingering processes.<
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2574"/>
         <source>Issue message 1307 when a program is denied internet access</source>
-        <translation>程序被拒绝访问网络时发出问题代码 1307</translation>
+        <translation>程序被拒绝访问网络时，提示问题代码 1307</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2602"/>
@@ -4663,190 +4663,197 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="257"/>
         <source>Double click action:</source>
-        <translation type="unfinished"></translation>
+        <translation>双击动作：</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="358"/>
         <source>Separate user folders</source>
-        <translation type="unfinished">独立的用户文件夹</translation>
+        <translation>隔离不同用户的文件夹</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="445"/>
         <source>Box Structure</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒结构</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="556"/>
         <source>Security Options</source>
-        <translation type="unfinished"></translation>
+        <translation>安全选项</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="566"/>
         <source>Security Hardening</source>
-        <translation type="unfinished"></translation>
+        <translation>安全加固</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="751"/>
         <source>Various Restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>杂项限制</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="931"/>
         <source>Security Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>安全隔离</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1081"/>
         <source>Adcanced Security</source>
-        <translation type="unfinished"></translation>
+        <translation>安全性(高级)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1089"/>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
-        <translation type="unfinished">使用 Sandboxie 限权用户，而不是匿名令牌 (实验性)</translation>
+        <translation>使用 Sandboxie 限权用户，而不是匿名令牌 (实验性)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1105"/>
         <source>Other isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>其它隔离</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1128"/>
         <source>Privilege isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>特权隔离</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1151"/>
         <source>Sandboxie token</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒令牌</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1238"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation type="unfinished"></translation>
+        <translation>使用自定义沙盒令牌可以更好地将各个沙盒相互隔离，同时可以实现在任务管理器的用户栏中显示进程所属的沙盒
+但是，某些第三方安全解决方案可能会与自定义令牌产生兼容性问题</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1329"/>
         <source>Program Control</source>
-        <translation type="unfinished">程序控制</translation>
+        <translation>程序控制</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1351"/>
         <source>Force Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>必沙程序</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1466"/>
         <source>Breakout Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>分离程序</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1568"/>
         <source>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>在此处设置的程序在启动时将被允许脱离这个沙盒，你可以把它们捕获到另一个沙盒里
+例如，让网络浏览器总是在一个专门的沙盒里打开(此功能需要安装一个有效的赞助者凭据)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1595"/>
         <source>Lingering Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>驻留程序</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1661"/>
         <source>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>其它所有程序被终止后，仍在运行的驻留程序将自动终止</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1674"/>
         <source>Leader Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>引导进程</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1740"/>
         <source>If leader processes are defined, all others are treated as lingering processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>如果定义了引导进程，其它进程将被视作驻留进程</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1869"/>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation>文件</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1962"/>
         <source>Configure which processes can access Files, Folders and Pipes. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>配置哪些进程可以访问文件、文件夹和管道
+“开放”访问权限只适用于原先已位于沙盒之外的程序二进制文件
+你可以使用“完全开放”来对所有程序开放所有权限，或者在策略标签中改变这一行为</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1976"/>
         <source>Registry</source>
-        <translation type="unfinished">注册表</translation>
+        <translation>注册表</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2069"/>
         <source>Configure which processes can access the Registry. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>配置哪些进程可以读写注册表
+“开放”访问权限只适用于原先已位于沙盒之外的程序二进制文件
+你可以使用“完全开放”来对所有程序开放所有权限，或者在策略标签中改变这一行为</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2083"/>
         <source>IPC</source>
-        <translation type="unfinished"></translation>
+        <translation>IPC</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2176"/>
         <source>Configure which processes can access NT IPC objects like ALPC ports and other processes memory and context.
 To specify a process use &apos;$:program.exe&apos; as path.</source>
-        <translation type="unfinished"></translation>
+        <translation>配置哪些进程可以访问 NT IPC 对象，如 ALPC 端口及其他进程的内存和相关运行状态环境
+如需指定一个进程，使用“$:program.exe”作为路径值(不含双引号)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2190"/>
         <source>Wnd</source>
-        <translation type="unfinished"></translation>
+        <translation>窗口</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2275"/>
         <source>Wnd Class</source>
-        <translation type="unfinished">窗口类</translation>
+        <translation>窗口类</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2290"/>
         <source>Configure which processes can access Desktop objects like Windows and alike.</source>
-        <translation type="unfinished"></translation>
+        <translation>配置哪些进程可以访问桌面对象，如 Windows 或其它类似对象</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2303"/>
         <source>COM</source>
-        <translation type="unfinished"></translation>
+        <translation>COM</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2349"/>
         <source>Class Id</source>
-        <translation type="unfinished"></translation>
+        <translation>类 Id</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2396"/>
         <source>Configure which processes can access COM objects.</source>
-        <translation type="unfinished"></translation>
+        <translation>配置哪些进程可以访问 COM 对象</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2408"/>
         <source>Don&apos;t use virtualized COM, Open access to hosts COM infrastructure (not recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>不虚拟化 COM 对象，而是开放主机的 COM 基础结构 (不推荐)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2416"/>
         <source>Access Policies</source>
-        <translation type="unfinished"></translation>
+        <translation>权限策略</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2449"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>将 Close...=!&lt;program&gt;,... 规则，应用到位于沙盒内的所有相关二进制文件</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2544"/>
         <source>Network Options</source>
-        <translation type="unfinished"></translation>
+        <translation>网络选项</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2641"/>
@@ -5025,7 +5032,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="854"/>
         <source>Issue message 2111 when a process access is denied</source>
-        <translation>进程被拒绝访问非沙盒进程内存时发出问题代码 2111</translation>
+        <translation>进程被拒绝访问非沙盒进程内存时，提示问题代码 2111</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3103"/>
@@ -5092,7 +5099,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3313"/>
         <source>On Box Start</source>
-        <translation>启动阶段</translation>
+        <translation>沙盒启动阶段</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3194"/>
@@ -5112,7 +5119,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3271"/>
         <source>On Box Init</source>
-        <translation>初始阶段</translation>
+        <translation>沙盒初始阶段</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3281"/>
@@ -5281,83 +5288,83 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2823"/>
         <source>Quick Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>快速恢复</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2902"/>
         <source>Immediate Recovery</source>
-        <translation type="unfinished">即时恢复</translation>
+        <translation>即时恢复</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2999"/>
         <source>Various Options</source>
-        <translation type="unfinished"></translation>
+        <translation>其它杂项</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3143"/>
         <source>This command will be run before the box content will be deleted</source>
-        <translation type="unfinished"></translation>
+        <translation>该命令将在删除沙盒内容之前运行</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3197"/>
         <source>On File Recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>文件恢复阶段</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3226"/>
         <source>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</source>
-        <translation type="unfinished"></translation>
+        <translation>该命令将在文件恢复前运行，文件路径将作为第一个参数被传递，如果该命令的返回值不是 0，则恢复将被阻止</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3229"/>
         <source>Run File Checker</source>
-        <translation type="unfinished"></translation>
+        <translation>运行文件检查</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3345"/>
         <source>On Delete Content</source>
-        <translation type="unfinished"></translation>
+        <translation>内容删除阶段</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3425"/>
         <source>Protect processes in this box from being accessed by specified unsandboxed host processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>保护此沙盒内的进程不被指定的非沙盒的主机进程访问</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3436"/>
         <location filename="Forms/OptionsWindow.ui" line="3500"/>
         <source>Process</source>
-        <translation type="unfinished">进程</translation>
+        <translation>进程</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3476"/>
         <source>Block also read access to processes in this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>阻止对位于该沙盒中的进程的读取访问</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3625"/>
         <source>Add Option</source>
-        <translation type="unfinished"></translation>
+        <translation>添加选项</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3639"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</source>
-        <translation type="unfinished"></translation>
+        <translation>在此处可以配置各个进程的高级选项，以提高兼容性或自定义沙盒的某些行为</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3650"/>
         <source>Option</source>
-        <translation type="unfinished"></translation>
+        <translation>选项</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3881"/>
         <source>Dns Request Logging</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS 请求记录</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3987"/>
         <source>Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>模板</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4209"/>
@@ -5584,37 +5591,37 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="112"/>
         <source>Recovery Options</source>
-        <translation type="unfinished"></translation>
+        <translation>恢复选项</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="255"/>
         <source>Start Menu Integration</source>
-        <translation type="unfinished"></translation>
+        <translation>开始菜单集成</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="319"/>
         <source>Integrate boxes with Host Start Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>整合沙盒与宿主开始菜单</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="359"/>
         <source>Scan shell folders and offer links in run menu</source>
-        <translation type="unfinished"></translation>
+        <translation>扫描系统 Shell 目录并在开始菜单中集成快捷方式</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="605"/>
         <source>Use new config dialog layout *</source>
-        <translation type="unfinished"></translation>
+        <translation>使用新的配置对话框视图 *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="812"/>
         <source>Program Alerts</source>
-        <translation type="unfinished">程序警报</translation>
+        <translation>程序警报</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="894"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>当必沙进程被禁止时，提示问题代码 1301</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="975"/>
@@ -6009,7 +6016,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="818"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>程序启动失败时发出问题代码 1308</translation>
+        <translation>程序启动失败时，提示问题代码 1308</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="983"/>

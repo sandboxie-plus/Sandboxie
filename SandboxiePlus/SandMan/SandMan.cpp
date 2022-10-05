@@ -83,6 +83,12 @@ public:
 				if (theGUI && theConf->GetInt("Options/UseDarkTheme", 2) == 2)
 					theGUI->UpdateTheme();
 			}
+			else if (msg->message == WM_SHOWWINDOW && msg->wParam)
+			{
+				QWidget* pWidget = QWidget::find((WId)msg->hwnd);
+				if (theGUI && pWidget && (pWidget->windowType() | Qt::Dialog) == Qt::Dialog)
+					theGUI->UpdateTitleTheme(msg->hwnd);
+			}
 		}
 		return false;
 	}
@@ -2919,6 +2925,37 @@ void CSandMan::SetUITheme()
 		font.setPointSizeF(newFontSize);
 		QApplication::setFont(font);
 	}
+
+#if defined(Q_OS_WIN)
+	foreach(QWidget * pWidget, QApplication::topLevelWidgets())
+	{
+		if (pWidget->isVisible())
+			SetTitleTheme((HWND)pWidget->winId());
+	}
+#endif
+}
+
+void CSandMan::SetTitleTheme(const HWND& hwnd)
+{
+	static const int CurrentVersion = QSettings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
+												QSettings::NativeFormat).value("CurrentBuild").toInt();
+	if (CurrentVersion < 22000) // Windows 11-
+		return;
+
+	HMODULE dwmapi = GetModuleHandle(L"dwmapi.dll");
+	if (dwmapi)
+	{
+		typedef HRESULT(WINAPI* P_DwmSetWindowAttribute)(HWND, DWORD, LPCVOID, DWORD);
+		P_DwmSetWindowAttribute pDwmSetWindowAttribute = reinterpret_cast<P_DwmSetWindowAttribute>(GetProcAddress(dwmapi, "DwmSetWindowAttribute"));
+		if (pDwmSetWindowAttribute)
+		{
+#ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
+#define DWMWA_USE_IMMERSIVE_DARK_MODE 20
+#endif
+			BOOL value = m_DarkTheme;
+			pDwmSetWindowAttribute(hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, &value, sizeof(value));
+		}
+	}
 }
 
 void CSandMan::UpdateTheme()
@@ -2928,6 +2965,11 @@ void CSandMan::UpdateTheme()
 		m_ThemeUpdatePending = true;
 		QTimer::singleShot(500, this, SLOT(SetUITheme()));
 	}
+}
+
+void CSandMan::UpdateTitleTheme(const HWND& hwnd)
+{
+	SetTitleTheme(hwnd);
 }
 
 void CSandMan::LoadLanguage()

@@ -72,6 +72,7 @@ public:
 	bool				CheckCertificate(QWidget* pWidget);
 
 	void				UpdateTheme();
+	void				UpdateTitleTheme(const HWND& hwnd);
 
 	void				UpdateCertState();
 
@@ -221,6 +222,7 @@ private slots:
 	void				OnSysTray(QSystemTrayIcon::ActivationReason Reason);
 
 	void				SetUITheme();
+	void				SetTitleTheme(const HWND& hwnd);
 
 	void				AddLogMessage(const QString& Message);
 	void				AddFileRecovered(const QString& BoxName, const QString& FilePath);

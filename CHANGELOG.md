@@ -9,13 +9,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.4.1 / 5.59.1] - 2022-10-??
+## [1.4.1 / 5.59.1] - 2022-10-06
 
 ### Added
-- addes dark title bar support for Windows 11 [#2299](https://github.com/sandboxie-plus/Sandboxie/pull/2299)
+- added dark title bar support for Windows 11 [#2299](https://github.com/sandboxie-plus/Sandboxie/pull/2299)
 
 ### Changed
-- In sbie 5.28 and later WinInetCache is open, this breks IE's source view, hence it can now be disabled with 'CloseWinInetCache=y'
+- in Sbie 5.28 and later WinInetCache is open, which breaks IE's source view, therefore it can now be disabled with 'CloseWinInetCache=y'
 
 ### Fixed
 - fixed WarnProcess and WarnFolder not working with certain configurations

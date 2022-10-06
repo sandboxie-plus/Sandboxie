@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.4.1 / 5.59.1] - 2022-10-06
+## [1.4.1 / 5.59.1] - 2022-10-05
 
 ### Added
 - added dark title bar support for Windows 11 [#2299](https://github.com/sandboxie-plus/Sandboxie/pull/2299)

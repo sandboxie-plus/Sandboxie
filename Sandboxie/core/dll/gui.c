@@ -207,6 +207,10 @@ BOOLEAN Gui_UseProxyService = TRUE;
 
         P_GetOpenFileNameW          __sys_GetOpenFileNameW          = NULL;
 
+		typedef BOOL(*P_ClientThreadSetup)();
+		P_ClientThreadSetup       __sys_ClientThreadSetup = NULL;
+
+		static HMODULE            g_User32_Module = NULL;
 
 //---------------------------------------------------------------------------
 // Functions
@@ -325,6 +329,8 @@ static BOOL Gui_AnimateWindow(HWND hwnd, ULONG time, ULONG flags);
 static DWORD Gui_WaitForInputIdle(HANDLE hProcess, DWORD dwMilliseconds);
 
 static BOOL Gui_AttachThreadInput(DWORD idAttach, DWORD idAttachTo, BOOL fAttach);
+
+static BOOL Gui_ClientThreadSetup();
 
 
 //---------------------------------------------------------------------------
@@ -515,7 +521,11 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     GUI_IMPORT_AW(DdeInitialize)
 
     GUI_IMPORT___(AttachThreadInput);
-
+	g_User32_Module = module;
+	__sys_ClientThreadSetup = (P_ClientThreadSetup)GetProcAddress(module, "ClientThreadSetup");
+	if (__sys_ClientThreadSetup != NULL) {
+		SBIEDLL_HOOK_GUI(ClientThreadSetup);
+	}
     ProcName = NULL;
 
 import_fail:
@@ -833,7 +843,7 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
 	if (Dll_CompartmentMode || SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE))
 		return TRUE;
 	// NoSbieDesk END
-
+	THREAD_DATA* TlsData = Dll_GetTlsData(NULL);
     //
     // process is already connected to window station, connect to desktop
     //
@@ -854,7 +864,12 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
     {
         return FALSE;
     }
+	if (TlsData->gui_connecting_desktop) {
+		// avoid re-entry
+		return TRUE;
+	}
 
+	TlsData->gui_connecting_desktop = TRUE;
     //
     // the first win32k service call (i.e. service number >= 0x1000)
     // triggers "thread GUI conversion".  the kernel system service
@@ -1047,7 +1062,7 @@ _FX BOOLEAN Gui_ConnectToWindowStationAndDesktop(HMODULE User32)
             Dll_Free(rpl);
         }
     }
-
+	TlsData->gui_connecting_desktop = FALSE;
     //
     // the first thread, as well as any subsequent new thread, has to
     // explicitly connect to a desktop object by handle, for the same
@@ -2654,4 +2669,9 @@ _FX BOOLEAN ComDlg32_Init(HMODULE module)
     //}
 
     return TRUE;
+}
+
+static BOOL Gui_ClientThreadSetup() {
+	Gui_ConnectToWindowStationAndDesktop(g_User32_Module);
+	return __sys_ClientThreadSetup();
 }

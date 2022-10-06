@@ -222,6 +222,7 @@ typedef struct _THREAD_DATA {
 
     BOOL            gui_should_suppress_msgbox;
 
+	BOOL            gui_connecting_desktop;
     //
     // sbieapi:  SbieSvc port handle
     //

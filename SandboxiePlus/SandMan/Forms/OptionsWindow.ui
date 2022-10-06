@@ -1532,7 +1532,7 @@
                   </size>
                  </property>
                  <property name="text">
-                  <string>Force Program</string>
+                  <string>Breakout Program</string>
                  </property>
                 </widget>
                </item>
@@ -1558,7 +1558,7 @@
                   </size>
                  </property>
                  <property name="text">
-                  <string>Force Folder</string>
+                  <string>Breakout Folder</string>
                  </property>
                 </widget>
                </item>

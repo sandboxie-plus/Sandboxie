@@ -29,9 +29,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added start menu enumeration [#1570](https://github.com/sandboxie-plus/Sandboxie/issues/1570)
 - added UI for breakout processes [#1904](https://github.com/sandboxie-plus/Sandboxie/issues/1904)
 - added option to customize double-click action per sandbox
-- added new advanced tab in the advanced tab allowing to configure specific processes and other advanced options
+- added new miscellaneous tab in the advanced options tab allowing to configure specific processes and other advanced options
 - added "SeparateUserFolders=y" and "SandboxieLogon=y" to the sandbox options dialog
-- added icons to option section labels
+- added icons to option labels
 
 
 ### Changed

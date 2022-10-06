@@ -31,7 +31,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option to customize double-click action per sandbox
 - added new miscellaneous tab in the advanced options tab allowing to configure specific processes and other advanced options
 - added "SeparateUserFolders=y" and "SandboxieLogon=y" to the sandbox options dialog
-- added icons to option labels
+- added icons to the section labels on the option pages
 
 
 ### Changed

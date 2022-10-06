@@ -6313,7 +6313,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
     <message>
         <location filename="Forms/SettingsWindow.ui" line="159"/>
         <source>Show the Recovery Window as Always on Top</source>
-        <translation>Zeige das Wiederherstellungsfenster immer im Vordergrund</translation>
+        <translation>Zeige das Wiederherstellungsfenster immer im Vordergrund an</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="574"/>
@@ -6437,7 +6437,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
     <message>
         <location filename="Forms/SettingsWindow.ui" line="196"/>
         <source>Show first recovery window when emptying sandboxes</source>
-        <translation>Zeige das Wiederherstellungsfenster vor dem Leeren der Sandboxen</translation>
+        <translation>Zeige das Wiederherstellungsfenster vor dem Leeren der Sandboxen an</translation>
     </message>
     <message>
         <source>Use Dark Theme (fully applied after a restart)</source>

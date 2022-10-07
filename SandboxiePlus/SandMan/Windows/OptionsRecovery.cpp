@@ -100,7 +100,7 @@ void COptionsWindow::SaveRecoveryList()
 		int Type = pItem->data(0, Qt::UserRole).toInt();
 		if (Type == -1)
 			continue; // entry from template
-		RecoverFolder.append(pItem->data(1, Qt::UserRole).toString()); 
+		RecoverFolder.append(pItem->text(0)); 
 	}
 	WriteTextList("RecoverFolder", RecoverFolder);
 
@@ -113,7 +113,7 @@ void COptionsWindow::SaveRecoveryList()
 		int Type = pItem->data(0, Qt::UserRole).toInt();
 		if (Type == -1)
 			continue; // entry from template
-		AutoRecoverIgnore.append(pItem->data(1, Qt::UserRole).toString()); 
+		AutoRecoverIgnore.append(pItem->text(0)); 
 	}
 	WriteTextList("AutoRecoverIgnore", AutoRecoverIgnore);
 

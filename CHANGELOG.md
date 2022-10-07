@@ -7,6 +7,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.4.2 / 5.59.2] - 2022-10-??
+
+### Fixed
+- fixed wrong button captions in the breakout process page
+- fixed issue with saving box recovery options
+- fixed the display problem of Sandman [#2306](https://github.com/sandboxie-plus/Sandboxie/pull/2306) (thanks okrc)
+- fixed theme not auto changing [#2307](https://github.com/sandboxie-plus/Sandboxie/pull/2307)
+
+
 
 
 ## [1.4.1 / 5.59.1] - 2022-10-05

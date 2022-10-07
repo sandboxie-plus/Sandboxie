@@ -3564,7 +3564,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="212"/>
         <source>Fully integrate</source>
-        <translation>Vollständig integriert</translation>
+        <translation>Vollständig integrieren</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="214"/>
@@ -3806,7 +3806,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="428"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation>Füge &apos;In Sandbox starten&apos; zum Kontextmenü des Explorers hinzu</translation>
+        <translation>Füge &apos;Starte Sandgeboxt&apos; zum Kontextmenü des Explorers hinzu</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="433"/>
@@ -5244,7 +5244,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1568"/>
         <source>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</source>
-        <translation>Programme die hier eingegeben werden wird erlaubt aus dieser Box auszubrechen, wenn dieser starten, sodass Sie diese in einer anderen Box einfangen können. Zum Beispiel um Ihren Browser immer in einer dafür gewidmeten Box zu öffnen. Diese Funktion verlangt ein gültiges Unterstützerzertifikat.</translation>
+        <translation>Programme die hier eingegeben werden wird erlaubt aus dieser Box auszubrechen, wenn diese starten, sodass Sie diese in einer anderen Box einfangen können. Zum Beispiel um Ihren Browser immer in einer dafür gewidmeten Box zu öffnen. Diese Funktion verlangt ein gültiges Unterstützerzertifikat.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1595"/>
@@ -5345,7 +5345,7 @@ Um eine Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2449"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</source>
-        <translation>Wende Blockiert...=!&lt;program&gt;,... Regeln auch auf alle ausführbaren Binärcodes (Programme) innerhalb der Sandbox an.</translation>
+        <translation>Wende &apos;Close...=!&lt;program&gt;,...&apos; Regeln auch auf alle ausführbaren Binärcodes (Programme) innerhalb der Sandbox an.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2544"/>
@@ -6062,7 +6062,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="894"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
-        <translation>Gebe Meldung 1301aus, wenn erzwungene Prozesse deaktiviert wurden</translation>
+        <translation>Gebe Meldung 1301 aus, wenn erzwungene Prozesse deaktiviert wurden</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="975"/>
@@ -6225,7 +6225,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="241"/>
         <source>Add &apos;Run Un-Sandboxed&apos; to the context menu</source>
-        <translation>Füge &apos;&quot;Starte Nicht-Sandgeboxt&quot; zum Kontextmenü hinzu</translation>
+        <translation>Füge &apos;Starte Nicht-Sandgeboxt&apos; zum Kontextmenü hinzu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="112"/>
@@ -6250,12 +6250,12 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="319"/>
         <source>Integrate boxes with Host Start Menu</source>
-        <translation>Integriere Boxen mit dem Startmenü des Hostrechners</translation>
+        <translation>Integriere Boxen in das Startmenü des Hostrechners</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="359"/>
         <source>Scan shell folders and offer links in run menu</source>
-        <translation>Scanne Shell-Ordner und biete Links im Startmenü</translation>
+        <translation>Scanne Shell-Ordner und biete Links im Startmenü an</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="432"/>
@@ -6321,7 +6321,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="159"/>
         <source>Show the Recovery Window as Always on Top</source>
-        <translation>Zeige das Wiederherstellungsfenster immer im Vordergrund</translation>
+        <translation>Zeige das Wiederherstellungsfenster immer im Vordergrund an</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="574"/>
@@ -6445,7 +6445,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="196"/>
         <source>Show first recovery window when emptying sandboxes</source>
-        <translation>Zeige Wiederherstellungsfenster, vor dem Leeren der Sandboxen</translation>
+        <translation>Zeige das Wiederherstellungsfenster vor dem Leeren der Sandboxen an</translation>
     </message>
     <message>
         <source>Use Dark Theme (fully applied after a restart)</source>

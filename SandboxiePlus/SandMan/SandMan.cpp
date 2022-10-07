@@ -78,7 +78,7 @@ public:
 				{
 				}*/
 			}
-			else if (msg->message == WM_DWMCOLORIZATIONCOLORCHANGED)
+			else if (msg->message == WM_SETTINGCHANGE)
 			{
 				if (theGUI && theConf->GetInt("Options/UseDarkTheme", 2) == 2)
 					theGUI->UpdateTheme();

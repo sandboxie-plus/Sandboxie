@@ -381,10 +381,6 @@ void CSandMan::CreateUI()
 		GetBoxView()->GetTree()->setPalette(pizzaPalete); // QApplication::setPalette(pizzaPalete);
 		GetFileView()->GetTree()->setPalette(pizzaPalete); // QApplication::setPalette(pizzaPalete);
 	}
-	else {
-		GetBoxView()->GetTree()->setPalette(QApplication::palette());
-		GetFileView()->GetTree()->setPalette(QApplication::palette());
-	}
 }
 
 void CSandMan::CreateMaintenanceMenu()

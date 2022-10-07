@@ -4490,7 +4490,6 @@ Não vou escolher: %2</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1446"/>
-        <location filename="Forms/OptionsWindow.ui" line="1561"/>
         <source>Force Folder</source>
         <translation>Pasta Forçada</translation>
     </message>
@@ -4503,7 +4502,6 @@ Não vou escolher: %2</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1403"/>
-        <location filename="Forms/OptionsWindow.ui" line="1535"/>
         <source>Force Program</source>
         <translation>Programa Forçado</translation>
     </message>
@@ -4784,6 +4782,16 @@ Se os processos líderes forem definidos, todos os outros serão tratados como p
     <message>
         <location filename="Forms/OptionsWindow.ui" line="751"/>
         <source>Various Restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="1535"/>
+        <source>Breakout Program</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="1561"/>
+        <source>Breakout Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

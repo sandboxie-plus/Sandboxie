@@ -4486,13 +4486,11 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1403"/>
-        <location filename="Forms/OptionsWindow.ui" line="1535"/>
         <source>Force Program</source>
         <translation>Tvinga program</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1446"/>
-        <location filename="Forms/OptionsWindow.ui" line="1561"/>
         <source>Force Folder</source>
         <translation>Tvinga mapp</translation>
     </message>
@@ -4687,6 +4685,16 @@ Om ledarprocesser är definierade, behandlas alla andra som kvardröjande progra
         <location filename="Forms/OptionsWindow.ui" line="3655"/>
         <source>Program</source>
         <translation>Program</translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="1535"/>
+        <source>Breakout Program</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="1561"/>
+        <source>Breakout Folder</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1595"/>

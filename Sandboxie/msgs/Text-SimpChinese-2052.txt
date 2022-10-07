@@ -3477,7 +3477,7 @@ Sandboxie Classic 的经典视图(SbieCtrl.exe)具有非常有限的资源监视
 .
 
 6002;txt;01
-访问s<a ID="whats_new">sandboxie-plus.com</a>了解 Sandboxie-Plus 的新功能，
+访问<a ID="whats_new">sandboxie-plus.com</a>了解 Sandboxie-Plus 的新功能，
 或直接单击<a ID="upgrade">此处</a>下载最新的 Sandboxie-Plus 安装程序。
 .
 

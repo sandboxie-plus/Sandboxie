@@ -324,36 +324,41 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	if (m_Template)
 	{
-		ui.tabGeneral->setEnabled(false);
-		ui.tabStart->setEnabled(false);
-		ui.tabInternet->setEnabled(false);
-		ui.tabAdvanced->setEnabled(false);
-		ui.tabOther->setEnabled(false);
-		ui.tabTemplates->setEnabled(false);
+		//ui.tabGeneral->setEnabled(false);
+		//ui.tabStart->setEnabled(false);
+		//ui.tabInternet->setEnabled(false);
+		//ui.tabAdvanced->setEnabled(false);
+		//ui.tabOther->setEnabled(false);
+		//ui.tabTemplates->setEnabled(false);
+		//
+		//for (int i = 0; i < ui.tabs->count(); i++) 
+		//	ui.tabs->setTabEnabled(i, ui.tabs->widget(i)->isEnabled());
 
-		for (int i = 0; i < ui.tabs->count(); i++) 
-			ui.tabs->setTabEnabled(i, ui.tabs->widget(i)->isEnabled());
+		//ui.tabs->setCurrentIndex(ui.tabs->indexOf(ui.tabAccess));
 
-		ui.tabs->setCurrentIndex(ui.tabs->indexOf(ui.tabAccess));
-
+		ui.chkShowGroupTmpl->setEnabled(false);
 		ui.chkShowForceTmpl->setEnabled(false);
+		ui.chkShowBreakoutTmpl->setEnabled(false);
 		ui.chkShowStopTmpl->setEnabled(false);
-		ui.chkShowStopTmpl->setEnabled(false);
-		ui.chkShowNetFwTmpl->setEnabled(false);
+		ui.chkShowLeaderTmpl->setEnabled(false);
+		ui.chkShowStartTmpl->setEnabled(false);
 		ui.chkShowFilesTmpl->setEnabled(false);
 		ui.chkShowKeysTmpl->setEnabled(false);
 		ui.chkShowIPCTmpl->setEnabled(false);
 		ui.chkShowWndTmpl->setEnabled(false);
 		ui.chkShowCOMTmpl->setEnabled(false);
-		//ui.chkShowAccessTmpl->setEnabled(false);
+		ui.chkShowNetFwTmpl->setEnabled(false);
 		ui.chkShowRecoveryTmpl->setEnabled(false);
 		ui.chkShowRecIgnoreTmpl->setEnabled(false);
 		ui.chkShowTriggersTmpl->setEnabled(false);
+		ui.chkShowHiddenProcTmpl->setEnabled(false);
+		ui.chkShowHostProcTmpl->setEnabled(false);
+		ui.chkShowOptionsTmpl->setEnabled(false);
 
 		//ui.chkWithTemplates->setEnabled(false);
 	}
 
-	ui.tabs->setCurrentIndex(m_Template ? 10 : 0);
+	ui.tabs->setCurrentIndex(m_Template ? ui.tabs->count()-1 : 0);
 	if(m_Template)
 		OnTab();
 

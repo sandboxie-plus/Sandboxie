@@ -215,7 +215,9 @@ void COptionsWindow::LoadGeneral()
 
 	QString Action = m_pBox->GetText("DblClickAction");
 	int pos = -1;
-	if (Action.left(1) == "!")
+	if (Action.isEmpty())
+		pos = 0;
+	else if (Action.left(1) == "!")
 		pos = ui.cmbDblClick->findData(Action);
 	else if (!Action.isEmpty()) 
 		pos = ui.cmbDblClick->findText(Action);
@@ -256,7 +258,8 @@ void COptionsWindow::SaveGeneral()
 
 	QString Action = ui.cmbDblClick->currentData().toString();
 	if (Action.isEmpty()) Action = ui.cmbDblClick->currentText();
-	m_pBox->SetText("DblClickAction", Action);
+	if (Action == "!options") m_pBox->DelValue("DblClickAction");
+	else m_pBox->SetText("DblClickAction", Action);
 
 	WriteAdvancedCheck(ui.chkBlockNetShare, "BlockNetworkFiles", "y", "");
 	WriteAdvancedCheck(ui.chkBlockNetParam, "BlockNetParam", "", "n");

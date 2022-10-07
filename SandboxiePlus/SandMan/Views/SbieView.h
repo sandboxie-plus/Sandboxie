@@ -12,6 +12,8 @@ public:
 	CSbieView(QWidget* parent = 0);
 	virtual ~CSbieView();
 
+	virtual void				SaveState();
+
 	virtual QTreeViewEx*		GetTree() { return m_pSbieTree; }
 
 	virtual QList<CSandBoxPtr>	GetSelectedBoxes();

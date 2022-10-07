@@ -40,6 +40,11 @@ CFileView::CFileView(QWidget *parent)
 
 CFileView::~CFileView()
 {
+    SaveState();
+}
+
+void CFileView::SaveState()
+{
     theConf->SetBlob("MainWindow/FileTree_Columns", m_pTreeView->header()->saveState());
 }
 

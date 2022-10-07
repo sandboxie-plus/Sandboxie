@@ -227,6 +227,8 @@ private slots:
 	void				AddLogMessage(const QString& Message);
 	void				AddFileRecovered(const QString& BoxName, const QString& FilePath);
 
+	void				commitData(QSessionManager& manager);
+
 private:
 
 	void				CreateUI();

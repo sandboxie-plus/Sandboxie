@@ -248,6 +248,8 @@ CSandMan::CSandMan(QWidget *parent)
 	connect(theAPI, SIGNAL(FileToRecover(const QString&, const QString&, const QString&, quint32)), this, SLOT(OnFileToRecover(const QString&, const QString&, const QString&, quint32)), Qt::QueuedConnection);
 	connect(theAPI, SIGNAL(ConfigReloaded()), this, SLOT(OnIniReloaded()));
 
+    connect(qApp, &QGuiApplication::commitDataRequest, this, &CSandMan::commitData);
+
 	m_uTimerID = startTimer(1000);
 
 	bool bAutoRun = QApplication::arguments().contains("-autorun");
@@ -1055,6 +1057,20 @@ void CSandMan::closeEvent(QCloseEvent *e)
 	}
 
 	QApplication::quit();
+}
+
+void CSandMan::commitData(QSessionManager& manager)
+{
+    //if (manager.allowsInteraction()) 
+	//{
+    //	manager.cancel();
+	//	return;
+    //} 
+
+	m_pBoxView->SaveState();
+	m_pFileView->SaveState();
+	StoreState();
+	theConf->Sync();
 }
 
 QIcon CSandMan::GetBoxIcon(int boxType, bool inUse)// , int iBusy)

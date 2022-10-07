@@ -14,7 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with saving box recovery options
 - fixed the display problem of Sandman [#2306](https://github.com/sandboxie-plus/Sandboxie/pull/2306) (thanks okrc)
 - fixed theme not auto changing [#2307](https://github.com/sandboxie-plus/Sandboxie/pull/2307)
-
+- fixed issue with saving sandman window state on windows shutdown
 
 
 

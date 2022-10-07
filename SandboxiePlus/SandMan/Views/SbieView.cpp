@@ -124,6 +124,11 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 CSbieView::~CSbieView()
 {
+	SaveState();
+}
+
+void CSbieView::SaveState()
+{
 	theConf->SetBlob("MainWindow/BoxTree_Columns", m_pSbieTree->saveState());
 	//theConf->SetValue("MainWindow/BoxTree_UseOrder", m_pSortProxy->sortRole() == Qt::InitialSortOrderRole);
 }

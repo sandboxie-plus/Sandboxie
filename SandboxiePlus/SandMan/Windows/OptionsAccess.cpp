@@ -312,6 +312,23 @@ QString COptionsWindow::GetAccessModeStr(EAccessMode Mode)
 	return tr("Unknown");
 }
 
+QString COptionsWindow::GetAccessModeTip(EAccessMode Mode)
+{
+	switch (Mode)
+	{
+	case eNormal:		return tr("Regular sandboxie behaviore, allow read and copy on write.");
+	case eOpen:			return tr("Allow write access outside the sandbox.");
+	case eOpen4All:		return tr("Allow write access outside the sandbox, also for applciations installed inside the sandbox.");
+	case eNoRename:		return tr("Don't rename window classes.");
+	case eClosed:		return tr("Deny access to host location and prevetn creation of boxed copy.");
+	case eClosedRT:		return tr("Block access to WinRT class.");
+	case eReadOnly:		return tr("Allow read only access only.");
+	case eBoxOnly:		return tr("Hide host files, folders or registry keys from sandboxed processes.");
+	case eIgnoreUIPI:	return tr("Ignore UIPI restrictions for processes.");
+	}
+	return tr("Unknown");
+}
+
 QString COptionsWindow::GetAccessTypeStr(EAccessType Type)
 {
 	switch (Type)
@@ -616,8 +633,10 @@ void COptionsWindow::OnAccessItemDoubleClicked(QTreeWidgetItem* pItem, int Colum
 	pTree->setItemWidget(pItem, 1, pProgram);
 
 	QComboBox* pMode = new QComboBox();
-	foreach(EAccessMode Mode, GetAccessModes((EAccessType)Type))
+	foreach(EAccessMode Mode, GetAccessModes((EAccessType)Type)) {
 		pMode->addItem(GetAccessModeStr(Mode), (int)Mode);
+		pMode->setItemData(pMode->count() - 1, GetAccessModeTip(Mode), Qt::ToolTipRole);
+	}
 	pMode->setCurrentIndex(pMode->findData(pItem->data(2, Qt::UserRole)));
 	pTree->setItemWidget(pItem, 2, pMode);
 

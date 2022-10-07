@@ -316,7 +316,7 @@ QString COptionsWindow::GetAccessModeTip(EAccessMode Mode)
 {
 	switch (Mode)
 	{
-	case eNormal:		return tr("Regular sandboxie behavior - allow read and also copy on write.");
+	case eNormal:		return tr("Regular Sandboxie behavior - allow read and also copy on write.");
 	case eOpen:			return tr("Allow write-access outside the sandbox.");
 	case eOpen4All:		return tr("Allow write-access outside the sandbox, also for applications installed inside the sandbox.");
 	case eNoRename:		return tr("Don't rename window classes.");

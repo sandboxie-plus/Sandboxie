@@ -872,47 +872,47 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="319"/>
         <source>Regular Sandboxie behavior - allow read and also copy on write.</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard Sandboxieverhalten - Erlaube lesen und auch copy on write.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="320"/>
         <source>Allow write-access outside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube Schreibzugriff außerhalb der Sandbox.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="321"/>
         <source>Allow write-access outside the sandbox, also for applications installed inside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube Schreibzugriff außerhalb der Sandbox, auch für Applikationen die in der Sandbox installiert sind.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="322"/>
         <source>Don&apos;t rename window classes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fensterklassen nicht umbenennen.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="323"/>
         <source>Deny access to host location and prevent creation of sandboxed copies.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbiete Zugriff zum Hostrechnerspeicherort und verhindere die Erzeugung von Kopien in der Sandbox.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="324"/>
         <source>Block access to WinRT class.</source>
-        <translation type="unfinished"></translation>
+        <translation>Blockiere Zugriff auf WinRT-Klassen.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="325"/>
         <source>Allow read-only access only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube ausschließlich Nur-Lesezugriffe.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="326"/>
         <source>Hide host files, folders or registry keys from sandboxed processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberge Hostrechner- Dateien, Ordner und Registryschlüssel vor sandgeboxten Prozessen.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="327"/>
         <source>Ignore UIPI restrictions for processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignoriere UIPI Restriktionen für Prozesse.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="336"/>
@@ -5280,12 +5280,12 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1535"/>
         <source>Breakout Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Breakout Programm</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1561"/>
         <source>Breakout Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Breakout Ordner</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1568"/>

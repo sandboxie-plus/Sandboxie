@@ -46,14 +46,14 @@ ULONGLONG * findChromeTarget(unsigned char* addr)
         // b8 01 00 00 00   mov eax,1
         // c3               ret
         // cc               int 3
-        if (addr[i] == 0xB8                     && addr[i + 5] == 0xC3 && addr[i + 6] == 0xCC)
+        if (addr[i] == 0xB8                         && addr[i + 5] == 0xC3 && addr[i + 6] == 0xCC)
             return NULL;
 
         // vivaldi browser variation
         // 66 B8 01 00      mov ax,1  
         // C3               ret  
         // CC               int 3
-        if (addr[i] == 0x66 && addr[1] == 0xB8  && addr[i + 4] == 0xC3 && addr[i + 5] == 0xCC)
+        if (addr[i] == 0x66 && addr[i + 1] == 0xB8  && addr[i + 4] == 0xC3 && addr[i + 5] == 0xCC)
             return NULL;
 
         if ((*(USHORT *)&addr[i] == 0x8b48)) {

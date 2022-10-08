@@ -1199,3 +1199,15 @@ _FX ULONG_PTR  DLL_FindWow64Target(ULONG_PTR address)
 }
 
 #endif ! _WIN64
+
+
+_FX VOID SbieDll_DumpProlog(void* addr, const wchar_t* func)
+{
+    wchar_t buffer[1024];
+    wchar_t* ptr = buffer;
+    ptr += Sbie_snwprintf(ptr, 256, L"%S: %p ", func, addr);
+    for (int i = 0; i < 48; i++)
+        ptr += Sbie_snwprintf(ptr, 16, L"%02x", ((BYTE*)addr)[i]);
+    wcscat(buffer, L"\r\n");
+    OutputDebugStringW(buffer);
+}

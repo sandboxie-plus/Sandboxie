@@ -20,6 +20,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with saving sandman window state on windows shutdown
 - fixed miscellaneous minor issues [#2301](https://github.com/sandboxie-plus/Sandboxie/issues/2301)
 - fixed issue with MSEdge introduced in 106.x [#2325](https://github.com/sandboxie-plus/Sandboxie/issues/2325)
+- fixed vivaldi hooking issue, UseVivaldiWorkaround is no longer needed [#1783](https://github.com/sandboxie-plus/Sandboxie/issues/1783)
+
 
 
 ## [1.4.1 / 5.59.1] - 2022-10-05

@@ -737,7 +737,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="320"/>
         <source>Allow write-access outside the sandbox.</source>
-        <translation>允许透写到沙盒外(仅当执行写操作的程序本身位于沙盒外时)</translation>
+        <translation>允许透写到沙盒外(仅当执行写操作的程序位于沙盒外时)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="321"/>

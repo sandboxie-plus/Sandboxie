@@ -18,7 +18,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed the display problem of Sandman [#2306](https://github.com/sandboxie-plus/Sandboxie/pull/2306) (thanks okrc)
 - fixed theme not auto changing [#2307](https://github.com/sandboxie-plus/Sandboxie/pull/2307)
 - fixed issue with saving sandman window state on windows shutdown
-
+- fixed miscellaneous minor issues [#2301](https://github.com/sandboxie-plus/Sandboxie/issues/2301)
+- fixed issue with MSEdge introduced in 106.x [#2325](https://github.com/sandboxie-plus/Sandboxie/issues/2325)
 
 
 ## [1.4.1 / 5.59.1] - 2022-10-05

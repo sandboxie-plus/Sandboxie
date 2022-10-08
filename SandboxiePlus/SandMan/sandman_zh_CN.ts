@@ -732,47 +732,47 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="319"/>
         <source>Regular Sandboxie behavior - allow read and also copy on write.</source>
-        <translation type="unfinished"></translation>
+        <translation>常规沙盒行为 - 允许读取及写时复制</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="320"/>
         <source>Allow write-access outside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>允许透写到沙盒外(仅当执行写操作的程序本身位于沙盒外时)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="321"/>
         <source>Allow write-access outside the sandbox, also for applications installed inside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>允许透写到沙盒外(无论执行写操作的程序是否位于沙盒内)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="322"/>
         <source>Don&apos;t rename window classes.</source>
-        <translation type="unfinished"></translation>
+        <translation>不重命名 Windows 窗口类</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="323"/>
         <source>Deny access to host location and prevent creation of sandboxed copies.</source>
-        <translation type="unfinished"></translation>
+        <translation>拒绝对主机位置的访问，防止在沙盒内创建相应的副本</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="324"/>
         <source>Block access to WinRT class.</source>
-        <translation type="unfinished"></translation>
+        <translation>阻止对 WinRT 类的访问</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="325"/>
         <source>Allow read-only access only.</source>
-        <translation type="unfinished"></translation>
+        <translation>只允许只读访问</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="326"/>
         <source>Hide host files, folders or registry keys from sandboxed processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>对沙盒内的进程隐藏主机文件、目录或注册表键值</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="327"/>
         <source>Ignore UIPI restrictions for processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>忽略对进程的 UIPI 限制</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="336"/>
@@ -4278,7 +4278,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1446"/>
         <source>Force Folder</source>
-        <translation>添加目录</translation>
+        <translation>必沙目录</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1922"/>
@@ -4290,7 +4290,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1403"/>
         <source>Force Program</source>
-        <translation>添加程序</translation>
+        <translation>必沙程序</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1319"/>
@@ -4788,12 +4788,12 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1535"/>
         <source>Breakout Program</source>
-        <translation type="unfinished"></translation>
+        <translation>分离程序</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1561"/>
         <source>Breakout Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>分离目录</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1568"/>

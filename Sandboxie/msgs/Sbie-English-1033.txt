@@ -3365,7 +3365,7 @@ Allow direct access to %2 notes
 .
 
 4342;txt;01
-Enable %2 fix for Windows 11 KB5014019
+Enable %2 compatibility workaround
 .
 
 4356;txt;02

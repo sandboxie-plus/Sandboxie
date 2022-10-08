@@ -872,7 +872,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="319"/>
         <source>Regular Sandboxie behavior - allow read and also copy on write.</source>
-        <translation>Standard Sandboxieverhalten - Erlaube lesen und auch copy on write.</translation>
+        <translation>Standard Sandboxieverhalten - Erlaube Lesezugriffe und leite Schreibzugriffe zu Kopien in der Sandbox um.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="320"/>
@@ -907,7 +907,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="326"/>
         <source>Hide host files, folders or registry keys from sandboxed processes.</source>
-        <translation>Verberge Hostrechner- Dateien, Ordner und Registryschlüssel vor sandgeboxten Prozessen.</translation>
+        <translation>Verberge Dateien, Ordner und Registryschlüssel des Hostrechners vor sandgeboxten Prozessen.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="327"/>

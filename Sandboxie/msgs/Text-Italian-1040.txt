@@ -3266,7 +3266,7 @@ Consenti l'accesso diretto alle note di %2
 .
 
 4342;txt;01
-Attiva correzione di %2 per Windows 11 KB5014019
+Attiva correzione di compatibilità per %2
 .
 
 4356;txt;02

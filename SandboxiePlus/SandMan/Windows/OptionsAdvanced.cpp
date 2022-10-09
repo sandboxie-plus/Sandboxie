@@ -633,7 +633,10 @@ void COptionsWindow::OnOptionItemDoubleClicked(QTreeWidgetItem* pItem, int Colum
 	pValue->setEditable(true);
 	foreach(const QString& Value, m_AdvOptions[Name].Values)
 		pValue->addItem(Value);
-	//pValue->setCurrentIndex(pValue->findData(pItem->data(2, Qt::UserRole)));
+	int pos = pValue->findData(pItem->data(2, Qt::UserRole));
+	pValue->setCurrentIndex(pos);
+	if (pos == -1)
+		pValue->setCurrentText(pItem->text(2));
 	ui.treeOptions->setItemWidget(pItem, 2, pValue);
 }
 

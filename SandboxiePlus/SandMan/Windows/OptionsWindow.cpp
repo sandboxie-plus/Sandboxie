@@ -168,12 +168,12 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	ui.tabsGeneral->setTabIcon(0, CSandMan::GetIcon("Box"));
 	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("File"));
-	ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("Run"));
+	ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("NoAccess"));
+	ui.tabsGeneral->setTabIcon(3, CSandMan::GetIcon("Run"));
 
 	ui.tabsSecurity->setTabIcon(0, CSandMan::GetIcon("Shield7"));
-	ui.tabsSecurity->setTabIcon(1, CSandMan::GetIcon("NoAccess"));
-	ui.tabsSecurity->setTabIcon(2, CSandMan::GetIcon("Fence"));
-	ui.tabsSecurity->setTabIcon(3, CSandMan::GetIcon("Shield12"));
+	ui.tabsSecurity->setTabIcon(1, CSandMan::GetIcon("Fence"));
+	ui.tabsSecurity->setTabIcon(2, CSandMan::GetIcon("Shield12"));
 
 	ui.tabsForce->setTabIcon(0, CSandMan::GetIcon("Force"));
 	ui.tabsForce->setTabIcon(1, CSandMan::GetIcon("Breakout"));

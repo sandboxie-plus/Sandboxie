@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added tooltips to resource access modes [#2300](https://github.com/sandboxie-plus/Sandboxie/issues/2300)
+- added UI option to control ApplyElevateCreateProcessFix [#2302](https://github.com/sandboxie-plus/Sandboxie/issues/2302)
+
+### Changed
+- Moved Restrictions tab from the new Security page back to the General page
 
 ### Fixed
 - fixed wrong button captions in the breakout process page

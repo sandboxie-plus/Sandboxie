@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed miscellaneous minor issues [#2301](https://github.com/sandboxie-plus/Sandboxie/issues/2301)
 - fixed issue with MSEdge introduced in 106.x [#2325](https://github.com/sandboxie-plus/Sandboxie/issues/2325)
 - fixed vivaldi hooking issue, UseVivaldiWorkaround is no longer needed [#1783](https://github.com/sandboxie-plus/Sandboxie/issues/1783)
+- fixed issues with misc advanced options page [#2315](https://github.com/sandboxie-plus/Sandboxie/issues/2315)
 
 
 

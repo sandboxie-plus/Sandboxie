@@ -432,8 +432,6 @@ void COptionsWindow::OnNoWindowRename()
 		SetAccessEntry(eWnd, "", eOpen, "#");
 	else
 		DelAccessEntry(eWnd, "", eOpen, "#");
-	m_AdvancedChanged = true;
-	OnOptChanged();
 }
 
 // options
@@ -492,6 +490,16 @@ void COptionsWindow::SaveOptionList()
 	CloseOptionEdit(true);
 
 	QMap<QString, QList<QString>> OptionMap;
+
+	// cache unlisted set eOnlySpec global presets
+	foreach(const QString& Name, m_AdvOptions.keys()) {
+		foreach(const QString & Value, m_pBox->GetTextList(Name, m_Template)) {
+			QStringList Values = Value.split(",");
+			if (Values.count() < 2 && m_AdvOptions[Name].ProcSpec == eOnlySpec)
+				OptionMap[Name].append(Values[0]);
+		}
+	}
+
 	for (int i = 0; i < ui.treeOptions->topLevelItemCount(); i++)
 	{
 		QTreeWidgetItem* pItem = ui.treeOptions->topLevelItem(i);

@@ -2792,7 +2792,7 @@ Erlaube direkten Zugriff zu %2 Notizen
 .
 
 4342;txt;01
-Aktiviere %2 Fix für Windows 11 KB5014019
+Aktiviere %2 Fix für Windows
 .
 
 

@@ -567,7 +567,7 @@ void COptionsWindow::OnAddOption()
 
 	QString Name = progDialog.value(); 
 
-	AddOptionEntry(Name, "Program.exe", "");
+	AddOptionEntry(Name, "", "");
 }
 
 void COptionsWindow::OnDelOption()

@@ -43,7 +43,7 @@ Sandboxie-Plus Migration Guide
 .
 
 4342;txt;01
-Enable %2 fix for Windows 11 KB5014019
+Enable %2 compatibility workaround
 .
 
 6010;txt;01

@@ -7,11 +7,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.4.2 / 5.59.2] - 2022-10-??
+## [1.4.2 / 5.59.2] - 2022-10-10
 
 ### Added
 - added tooltips to resource access modes [#2300](https://github.com/sandboxie-plus/Sandboxie/issues/2300)
 - added UI option to control ApplyElevateCreateProcessFix [#2302](https://github.com/sandboxie-plus/Sandboxie/issues/2302)
+- added message 2226 issued when a process may need 'ApplyElevateCreateProcessFix=y'
 
 ### Changed
 - Moved Restrictions tab from the new Security page back to the General page

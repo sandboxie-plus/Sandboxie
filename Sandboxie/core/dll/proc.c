@@ -1384,6 +1384,10 @@ finish:
             if (cancelled)
                 err = ERROR_CANCELLED;
         }
+        else
+        {
+            SbieApi_Log(2226, L"%S [%S]", Dll_ImageName, Dll_BoxName);
+        }
     }
 
     /*if ((! ok) && (err == ERROR_ELEVATION_REQUIRED)) {

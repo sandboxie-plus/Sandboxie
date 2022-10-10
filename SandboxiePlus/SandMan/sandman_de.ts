@@ -5776,12 +5776,12 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
     <message>
         <location filename="Forms/OptionsWindow.ui" line="455"/>
         <source>Restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Restriktionen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3110"/>
         <source>Apply ElevateCreateProcess Workaround (legacy behaviour)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wende die ElevateCreateProcess-Problemumgehung an (veraltetes Verhalten)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3150"/>

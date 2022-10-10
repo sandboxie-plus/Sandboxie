@@ -372,47 +372,47 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="319"/>
         <source>Regular Sandboxie behavior - allow read and also copy on write.</source>
-        <translation type="unfinished"></translation>
+        <translation>정기 Sandboxie 동작 - 읽기를 허용하고 쓰기 시 복사를 허용합니다.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="320"/>
         <source>Allow write-access outside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 외부에서 쓰기 접근을 허용합니다.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="321"/>
         <source>Allow write-access outside the sandbox, also for applications installed inside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 외부에 쓰기 접근을 허용하고, 샌드박스 내부에 설치된 응용 프로그램에도 쓰기 접근을 허용합니다.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="322"/>
         <source>Don&apos;t rename window classes.</source>
-        <translation type="unfinished"></translation>
+        <translation>창 클래스 이름을 바꾸지 않습니다.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="323"/>
         <source>Deny access to host location and prevent creation of sandboxed copies.</source>
-        <translation type="unfinished"></translation>
+        <translation>호스트 위치에 대한 접근을 거부하고 샌드박스 복사본이 생성되지 않도록 합니다.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="324"/>
         <source>Block access to WinRT class.</source>
-        <translation type="unfinished"></translation>
+        <translation>WinRT 클래스에 대한 접근을 차단합니다.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="325"/>
         <source>Allow read-only access only.</source>
-        <translation type="unfinished"></translation>
+        <translation>읽기 전용 접근만 허용합니다.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="326"/>
         <source>Hide host files, folders or registry keys from sandboxed processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 프로세스에서 호스트 파일, 폴더 또는 레지스트리 키를 숨깁니다.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="327"/>
         <source>Ignore UIPI restrictions for processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>프로세스에 대한 UIPI 제한을 무시합니다.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="336"/>
@@ -3902,7 +3902,7 @@ No will choose: %2</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="455"/>
         <source>Restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>제한 사항</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="571"/>
@@ -4895,12 +4895,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1535"/>
         <source>Breakout Program</source>
-        <translation type="unfinished"></translation>
+        <translation>탈옥 프로그램</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1561"/>
         <source>Breakout Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>탈옥 폴더</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1568"/>
@@ -5029,7 +5029,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3110"/>
         <source>Apply ElevateCreateProcess Workaround (legacy behaviour)</source>
-        <translation type="unfinished"></translation>
+        <translation>ElevateCreateProcess 해결 방법 적용 (레거시 동작)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3150"/>
@@ -5044,7 +5044,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3233"/>
         <source>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</source>
-        <translation type="unfinished"></translation>
+        <translation>이 명령은 파일을 복구하기 전에 실행되며 파일 경로가 첫 번째 인수로 전달됩니다. 이 명령이 0이 아닌 다른 것을 반환하는 경우 복구가 차단됩니다</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3236"/>

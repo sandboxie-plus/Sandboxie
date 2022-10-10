@@ -5360,7 +5360,7 @@ Um eine Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2290"/>
         <source>Configure which processes can access Desktop objects like Windows and alike.</source>
-        <translation>Konfiguriere welche Prozesse Zugriff auf Desktopobjekte wie Windows und dergleichen haben.</translation>
+        <translation>Konfiguriere welche Prozesse Zugriff auf Desktopobjekte wie Fenster und dergleichen haben.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2303"/>

@@ -427,47 +427,47 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="319"/>
         <source>Regular Sandboxie behavior - allow read and also copy on write.</source>
-        <translation type="unfinished"></translation>
+        <translation>Comportement normal de Sandboxie — autorise la lecture et aussi la copie à l&apos;écriture.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="320"/>
         <source>Allow write-access outside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Autorise l&apos;accès en écriture en dehors du bac à sable.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="321"/>
         <source>Allow write-access outside the sandbox, also for applications installed inside the sandbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Autorise l&apos;accès en écriture en dehors du bac à sable, également pour les applications installées dans le bac à sable.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="322"/>
         <source>Don&apos;t rename window classes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne renomme pas les classes de fenêtres.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="323"/>
         <source>Deny access to host location and prevent creation of sandboxed copies.</source>
-        <translation type="unfinished"></translation>
+        <translation>Refuse l&apos;accès à la localisation de l&apos;hôte et empêche la création de copies dans le bac à sable.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="324"/>
         <source>Block access to WinRT class.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloque l&apos;accès à la classe WinRT.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="325"/>
         <source>Allow read-only access only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Autorise uniquement l&apos;accès en lecture seule.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="326"/>
         <source>Hide host files, folders or registry keys from sandboxed processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Masque les fichiers de l&apos;hôte, les répertoires ou les clés de registre des processus dans les bacs à sable.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="327"/>
         <source>Ignore UIPI restrictions for processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignore les restrictions d&apos;isolation des privilèges de l&apos;IHM pour les processus.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="336"/>
@@ -592,12 +592,12 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="42"/>
         <source>Always use ElevateCreateProcess fix, as sometimes applied by the Program Compatibility Assistant.</source>
-        <translation>Utilise toujours le correctif ElevateCreateProcess, tel qu&apos;appliqué parfois par l&apos;Assistant de Compatibilité des Programmes.</translation>
+        <translation>Toujours utiliser le correctif ElevateCreateProcess, tel qu&apos;appliqué parfois par l&apos;Assistant de Compatibilité.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="44"/>
         <source>Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes</source>
-        <translation>Active le comportement particulier et inconsistant PreferExternalManifest, nécessaire pour certains correctifs marginaux.</translation>
+        <translation>Active le comportement particulier PreferExternalManifest, nécessaire pour certains correctifs marginaux.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="45"/>
@@ -607,7 +607,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="46"/>
         <source>Makes a write open call to a file that won&apos;t be copied fail instead of turning it read-only.</source>
-        <translation>Fait en sorte qu&apos;un appel d&apos;ouverture en écriture sur un fichier qui ne sera pas copié échoue au lieu de le passer en lecture seule.</translation>
+        <translation>Fait échouer un appel d&apos;ouverture en écriture sur un fichier qui ne sera pas copié, au lieu de le passer en lecture seule.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="49"/>
@@ -622,17 +622,17 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="54"/>
         <source>Sandbox file system root</source>
-        <translation>Racine du système de fichiers du bac à sable</translation>
+        <translation>Racine du système de fichiers du bac à sable.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="55"/>
         <source>Sandbox registry root</source>
-        <translation>Racine du registre du bac à sable</translation>
+        <translation>Racine du registre du bac à sable.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="56"/>
         <source>Sandbox ipc root</source>
-        <translation>Racine IPC du bac à sable</translation>
+        <translation>Racine IPC du bac à sable.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="558"/>
@@ -651,7 +651,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/OptionsAdvanced.cpp" line="722"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="726"/>
         <source>Run Command</source>
-        <translation>Lancer une Commande</translation>
+        <translation>Lancer une commande</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="714"/>
@@ -4882,12 +4882,14 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1535"/>
         <source>Breakout Program</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Normalement « Programme d&apos;évasion »</translatorcomment>
+        <translation>Ajouter un programme</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1561"/>
         <source>Breakout Folder</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Normlalement « Dossier d&apos;évasion »</translatorcomment>
+        <translation>Ajouter un dossier</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1595"/>
@@ -5146,7 +5148,7 @@ Pour l&apos;accès aux fichiers, vous pouvez utiliser « Toujours direct » pour
         <location filename="Forms/OptionsWindow.ui" line="1125"/>
         <location filename="Forms/OptionsWindow.ui" line="1148"/>
         <source>Protect the sandbox integrity itself</source>
-        <translation>Protéger l&apos;intégrité propre du bac à sable</translation>
+        <translation>Protège la propre intégrité du bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1171"/>
@@ -5225,7 +5227,7 @@ Le niveau de correspondance du processus a une priorité plus élevée que la sp
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2463"/>
         <source>Apply File and Key Open directives only to binaries located outside the sandbox.</source>
-        <translation>Appliquer les directives Autorisé pour les fichiers et les clés seulement aux binaires situés en dehors du bac à sable</translation>
+        <translation>Appliquer les directives « Autorisé » concernant les fichiers et les clés seulement aux binaires situés en dehors du bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1112"/>
@@ -5367,17 +5369,17 @@ Le niveau de correspondance du processus a une priorité plus élevée que la sp
         <location filename="Forms/OptionsWindow.ui" line="3172"/>
         <location filename="Forms/OptionsWindow.ui" line="3310"/>
         <source>Run Command</source>
-        <translation>Lancer une Commande</translation>
+        <translation>Lancer une commande</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3342"/>
         <source>Start Service</source>
-        <translation>Démarrer le service</translation>
+        <translation>Démarrer un service</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3317"/>
         <source>These events are executed each time a box is started</source>
-        <translation>Ces évènements sont exécutés à chaque fois qu&apos;un bac à sable est démarré</translation>
+        <translation>Ces évènements sont exécutés à chaque fois qu&apos;un bac à sable est démarré.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3320"/>
@@ -5388,7 +5390,7 @@ Le niveau de correspondance du processus a une priorité plus élevée que la sp
         <location filename="Forms/OptionsWindow.ui" line="3201"/>
         <location filename="Forms/OptionsWindow.ui" line="3349"/>
         <source>These commands are run UNBOXED just before the box content is deleted</source>
-        <translation>Ces commandes sont lancées EN DEHORS DU BAC juste avant que le contenu du bac soit supprimé</translation>
+        <translation>Ces commandes sont lancées EN DEHORS DU BAC juste avant que le contenu du bac soit supprimé.</translation>
     </message>
     <message>
         <source>On Box Delete</source>
@@ -5402,7 +5404,7 @@ Le niveau de correspondance du processus a une priorité plus élevée que la sp
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3278"/>
         <source>On Box Init</source>
-        <translation>À l&apos;initialisation</translation>
+        <translation>À l&apos;initialisation du bac</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3288"/>
@@ -5454,9 +5456,9 @@ Le niveau de correspondance du processus a une priorité plus élevée que la sp
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
-        <translation>Ajoutez des comptes et des groupes d&apos;utilisateurs à la liste ci-dessous pour limiter l&apos;utilisation du bac à sable à ces seuls comptes. Si la liste est vide, le bac à sable peut être utilisé par tous les comptes d&apos;utilisateurs.
+        <translation>Ajoutez des comptes et des groupes d&apos;utilisateurs à la liste ci-dessous pour limiter l&apos;utilisation du bac à sable à ces seuls comptes. Si la liste est vide, le bac peut être utilisé par tous les comptes d&apos;utilisateurs.
 
-Remarque : Les paramètres Programmes forcés et Dossiers forcés d&apos;un bac à sable ne s&apos;appliquent pas aux comptes utilisateurs qui ne peuvent pas utiliser le bac à sable.</translation>
+Remarque : Les paramètres Programmes forcés et Dossiers forcés d&apos;un bac à sable ne s&apos;appliquent pas aux comptes utilisateurs qui ne peuvent pas utiliser le bac.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3698"/>
@@ -5467,12 +5469,12 @@ Remarque : Les paramètres Programmes forcés et Dossiers forcés d&apos;un bac 
         <location filename="Forms/OptionsWindow.ui" line="3706"/>
         <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
         <oldsource>API call trace (requirers logapi to be installed in the sbie dir)</oldsource>
-        <translation>Traçage des appels API (nécessite que LogAPI soit installé dans le répertoire de Sandboxie)</translation>
+        <translation>Tracer les appels API (nécessite que LogAPI soit installé dans le répertoire de Sandboxie)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3726"/>
         <source>Pipe Trace</source>
-        <translation>Traçage des tubes (pipe)</translation>
+        <translation>Tracer les Pipes</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3746"/>
@@ -5506,12 +5508,12 @@ au lieu de « * ».</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3793"/>
         <source>Ntdll syscall Trace (creates a lot of output)</source>
-        <translation>Traçage des appels systèmes Ntdll (crée beaucoup de sorties)</translation>
+        <translation>Tracer les appels systèmes Ntdll (crée beaucoup de sorties)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3800"/>
         <source>File Trace</source>
-        <translation>Traçage des fichiers</translation>
+        <translation>Tracer les fichiers</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3807"/>
@@ -5521,12 +5523,12 @@ au lieu de « * ».</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3814"/>
         <source>IPC Trace</source>
-        <translation>Traçage IPC</translation>
+        <translation>Tracer IPC</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3821"/>
         <source>GUI Trace</source>
-        <translation>Traçage de l&apos;interface graphique</translation>
+        <translation>Tracer l&apos;interface graphique</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3834"/>
@@ -5536,17 +5538,17 @@ au lieu de « * ».</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3860"/>
         <source>Access Tracing</source>
-        <translation>Traçage d&apos;accès</translation>
+        <translation>Traçage des accès</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3867"/>
         <source>COM Class Trace</source>
-        <translation>Traçage des classes COM</translation>
+        <translation>Tracer les classes COM</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3874"/>
         <source>Key Trace</source>
-        <translation>Traçage des clés</translation>
+        <translation>Tracer les clés</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2656"/>
@@ -5645,7 +5647,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/OptionsWindow.ui" line="455"/>
         <source>Restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>Restrictions</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2823"/>
@@ -5665,12 +5667,12 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3110"/>
         <source>Apply ElevateCreateProcess Workaround (legacy behaviour)</source>
-        <translation type="unfinished"></translation>
+        <translation>Appliquer le palliatif ElevateCreateProcess (ancien comportement)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3150"/>
         <source>This command will be run before the box content will be deleted</source>
-        <translation>Cette commande sera exécutée avant que le contenu du bac ne soit supprimé</translation>
+        <translation>Cette commande sera exécutée avant que le contenu du bac ne soit supprimé.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3204"/>
@@ -5716,8 +5718,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3646"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
-        <oldsource>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</oldsource>
-        <translation type="unfinished">Ici vous pouvez configurer des options en fonction des processus, pour améliorer la compatibilité et/ou personnaliser le comportement de mise en bac à sable.</translation>
+        <translation>Ici vous pouvez configurer des options en fonction des processus, pour améliorer la compatibilité et/ou personnaliser le comportement de mise en bac à sable.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3657"/>
@@ -6349,7 +6350,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1026"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
-        <translation>Sandboxie a détecté les applications logicielles suivantes dans votre système. Cliquez sur OK pour appliquer les paramètres de configuration, qui amélioreront la compatibilité avec ces applications. Ces paramètres de configuration auront un effet dans tous les bacs à sable existants et dans tous les nouveaux bacs à sable.</translation>
+        <translation>Sandboxie a détecté les applications logicielles suivantes dans votre système. Cliquez sur OK pour appliquer les paramètres de configuration, qui amélioreront la compatibilité avec ces applications. Ces paramètres de configuration auront un effet dans tous les bacs à sable existants et dans tous les nouveaux.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1039"/>

@@ -2,7 +2,7 @@ name: CI
 
 on:
   workflow_dispatch:
-    branches: [ master, dev ]
+
   push:
     branches: [ master ]
   pull_request:
@@ -56,7 +56,7 @@ jobs:
       #    arch:  ${{ matrix.qt-target }}
           arch:  'win64_msvc2019_64'
       #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
-          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+      #    cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
       - name: Install Qt 32 bit
         uses: jurplel/install-qt-action@v3
@@ -66,10 +66,10 @@ jobs:
       #    arch:  ${{ matrix.qt-target }}
           arch:  'win32_msvc2019'
       #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
-          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+      #    cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
       - name: Installing Jom
-        if: steps.cache-qt.outputs.cache-hit != 'true'
+      #  if: steps.cache-qt.outputs.cache-hit != 'true'
         run: SandboxiePlus\install_jom.cmd
 
       - name: Build Sandboxie-Plus 64 bit

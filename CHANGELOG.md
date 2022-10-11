@@ -22,7 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with saving box recovery options
 - fixed the display problem of SandMan [#2306](https://github.com/sandboxie-plus/Sandboxie/pull/2306) (thanks okrc)
 - fixed theme not auto-changing [#2307](https://github.com/sandboxie-plus/Sandboxie/pull/2307)
-- fixed issue with saving SandMan window state on windows shutdown
+- fixed issue with saving SandMan window state on Windows shutdown
 - fixed miscellaneous minor issues [#2301](https://github.com/sandboxie-plus/Sandboxie/issues/2301)
 - fixed issue with Microsoft Edge introduced in 106.x [#2325](https://github.com/sandboxie-plus/Sandboxie/issues/2325)
 - fixed Vivaldi hooking issue, UseVivaldiWorkaround is no longer needed [#1783](https://github.com/sandboxie-plus/Sandboxie/issues/1783)

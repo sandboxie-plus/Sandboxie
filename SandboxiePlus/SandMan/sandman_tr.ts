@@ -4833,7 +4833,8 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3646"/>
-        <source>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</source>
+        <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
+        <oldsource>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

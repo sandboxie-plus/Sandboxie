@@ -4994,8 +4994,9 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3646"/>
-        <source>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</source>
-        <translation>Здесь вы можете настроить дополнительные параметры для каждого процесса, чтобы улучшить совместимость и/или настроить поведение песочницы.</translation>
+        <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
+        <oldsource>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</oldsource>
+        <translation type="unfinished">Здесь вы можете настроить дополнительные параметры для каждого процесса, чтобы улучшить совместимость и/или настроить поведение песочницы.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3657"/>

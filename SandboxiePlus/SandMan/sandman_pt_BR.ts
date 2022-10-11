@@ -5662,7 +5662,8 @@ Por favor, note que este valores são atualmente para o usuário específico e s
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3646"/>
-        <source>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</source>
+        <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
+        <oldsource>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -12,21 +12,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added tooltips to resource access modes [#2300](https://github.com/sandboxie-plus/Sandboxie/issues/2300)
 - added UI option to control ApplyElevateCreateProcessFix [#2302](https://github.com/sandboxie-plus/Sandboxie/issues/2302)
-- added message 2226 issued when a process may need 'ApplyElevateCreateProcessFix=y'
+- added message 2226 if a process needs 'ApplyElevateCreateProcessFix=y'
 
 ### Changed
-- Moved Restrictions tab from the new Security page back to the General page
+- moved Restrictions tab from the new Security page back to the General page
 
 ### Fixed
 - fixed wrong button captions in the breakout process page
 - fixed issue with saving box recovery options
-- fixed the display problem of Sandman [#2306](https://github.com/sandboxie-plus/Sandboxie/pull/2306) (thanks okrc)
-- fixed theme not auto changing [#2307](https://github.com/sandboxie-plus/Sandboxie/pull/2307)
-- fixed issue with saving sandman window state on windows shutdown
+- fixed the display problem of SandMan [#2306](https://github.com/sandboxie-plus/Sandboxie/pull/2306) (thanks okrc)
+- fixed theme not auto-changing [#2307](https://github.com/sandboxie-plus/Sandboxie/pull/2307)
+- fixed issue with saving SandMan window state on Windows shutdown
 - fixed miscellaneous minor issues [#2301](https://github.com/sandboxie-plus/Sandboxie/issues/2301)
-- fixed issue with MSEdge introduced in 106.x [#2325](https://github.com/sandboxie-plus/Sandboxie/issues/2325)
-- fixed vivaldi hooking issue, UseVivaldiWorkaround is no longer needed [#1783](https://github.com/sandboxie-plus/Sandboxie/issues/1783)
-- fixed issues with misc advanced options page [#2315](https://github.com/sandboxie-plus/Sandboxie/issues/2315)
+- fixed issue with Microsoft Edge introduced in 106.x [#2325](https://github.com/sandboxie-plus/Sandboxie/issues/2325)
+- fixed Vivaldi hooking issue, UseVivaldiWorkaround is no longer needed [#1783](https://github.com/sandboxie-plus/Sandboxie/issues/1783)
+- fixed issues with miscellaneous tab on the advanced options page [#2315](https://github.com/sandboxie-plus/Sandboxie/issues/2315#issuecomment-1272544086)
 
 
 

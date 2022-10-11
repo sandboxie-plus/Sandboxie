@@ -177,6 +177,8 @@ void COptionsWindow::OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column)
 	QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni(pItem->data(1, Qt::UserRole).toString(), m_pBox->GetAPI()));
 
 	COptionsWindow OptionsWindow(pTemplate, pItem->text(1));
+	QPoint ParentPos = mapToGlobal(rect().topLeft());
+	OptionsWindow.move(ParentPos.x() + 30, ParentPos.y() + 10);
 	OptionsWindow.exec();
 
 	if(pItem->text(0) == "Local")

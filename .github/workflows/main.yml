@@ -49,7 +49,7 @@ jobs:
           key: Qt-5.15.2-QtCache
 
       - name: Install Qt 64 bit
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v3
         with:
           version: '5.15.2'
           dir: ..
@@ -59,7 +59,7 @@ jobs:
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
       - name: Install Qt 32 bit
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v3
         with:
           version: '5.15.2'
           dir: ..

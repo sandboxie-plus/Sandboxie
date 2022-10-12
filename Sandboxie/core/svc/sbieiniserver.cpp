@@ -938,7 +938,7 @@ finish:
         // set a ini header with a descriptive comment
         m_pConfigIni->Sections.push_back(SIniSection{ L"" });
         m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"#" });
-        m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"# Sandboxie-Plus configuration file" });
+        m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"# Sandboxie configuration file" });
         m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"#" });
 
         m_pConfigIni->Sections.push_back(SIniSection{ L"GlobalSettings" });

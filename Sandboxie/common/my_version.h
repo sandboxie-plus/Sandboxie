@@ -72,8 +72,6 @@
 #define MY_AUTOPLAY_CLSID       0x7E950284, 0xE123, 0x49F4, \
                                 { 0xB3, 0x2B, 0xA8,0x06, 0xC0, 0x90, 0xD7, 0x47 }
 
-#define SBIECTRL_LOGO_IMAGE     "../res/MastheadLogo.jpg"
-
 #define TITLE_SUFFIX_W          L" [#]"
 #define TITLE_SUFFIX_A           " [#]"
 

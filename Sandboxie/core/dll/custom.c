@@ -1463,9 +1463,7 @@ _FX BOOLEAN Custom_OsppcDll(HMODULE module)
     InitializeObjectAttributes(
         &objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
 
-    RtlInitUnicodeString(&uni,
-        L"\\registry\\user\\current\\software"
-            L"\\Microsoft\\Office\\14.0");
+    RtlInitUnicodeString(&uni, L"\\registry\\user\\current\\software\\Microsoft\\Office\\14.0");
 
     status = Key_OpenIfBoxed(&hOfficeKey, KEY_ALL_ACCESS | Wow64, &objattrs);
     if (! NT_SUCCESS(status))

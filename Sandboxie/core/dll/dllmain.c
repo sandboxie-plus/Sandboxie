@@ -309,7 +309,9 @@ _FX void Dll_InitInjected(void)
         while (!IsDebuggerPresent()) {
             OutputDebugString(L"Waiting for Debugger\n");
             Sleep(500);
-        } __debugbreak();
+        } 
+        if(!SbieApi_QueryConfBool(NULL, L"WaitForDebuggerSilent", TRUE))
+            __debugbreak();
     }
 
 

@@ -419,12 +419,12 @@ _FX BOOLEAN Key_Init(void)
     SBIEDLL_HOOK(Key_,NtNotifyChangeMultipleKeys);
 
     void* NtRenameKey = GetProcAddress(Dll_Ntdll, "NtRenameKey");
-    if (NtRenameKey) {
+    if (NtRenameKey) { // Windows XP
         SBIEDLL_HOOK(Key_,NtRenameKey);
     }
 
     void* NtOpenKeyEx = GetProcAddress(Dll_Ntdll, "NtOpenKeyEx");
-    if (NtOpenKeyEx) {
+    if (NtOpenKeyEx) { // windows server 2008 R2
         SBIEDLL_HOOK(Key_, NtOpenKeyEx);
     }
 
@@ -432,22 +432,20 @@ _FX BOOLEAN Key_Init(void)
     SBIEDLL_HOOK(Key_, NtSaveKey);
     
     void* NtSaveKeyEx = GetProcAddress(Dll_Ntdll, "NtSaveKeyEx");
-    if (NtSaveKeyEx) {
+    if (NtSaveKeyEx) { // Windows XP
         SBIEDLL_HOOK(Key_,NtSaveKeyEx);
     }
 
     SBIEDLL_HOOK(Key_, NtLoadKey);
+    SBIEDLL_HOOK(Key_, NtLoadKey2);
 
-    void* NtLoadKey2 = GetProcAddress(Dll_Ntdll, "NtLoadKey2");
-    if (NtLoadKey2) {
-        SBIEDLL_HOOK(Key_,NtLoadKey2);
-    }
     void* NtLoadKey3 = GetProcAddress(Dll_Ntdll, "NtLoadKey3");
-    if (NtLoadKey3) {
+    if (NtLoadKey3) { // Windows 10 2004
         SBIEDLL_HOOK(Key_,NtLoadKey3);
     }
+
     void* NtLoadKeyEx = GetProcAddress(Dll_Ntdll, "NtLoadKeyEx");
-    if (NtLoadKeyEx) {
+    if (NtLoadKeyEx) { // Windows Server 2003 
         SBIEDLL_HOOK(Key_,NtLoadKeyEx);
     }
     
@@ -2869,6 +2867,7 @@ _FX NTSTATUS Key_NtQueryKeyImpl(
         KeyInformationClass != KeyCachedInformation)
     {
         status = STATUS_INVALID_PARAMETER;
+        SbieApi_Log(2205, L"NtQueryKeyImpl KeyInfo: %d", KeyInformationClass);
         __leave;
     }
 
@@ -3046,6 +3045,7 @@ _FX NTSTATUS Key_NtEnumerateKey(
         KeyInformationClass != KeyNodeInformation &&
         KeyInformationClass != KeyFullInformation)
     {
+        SbieApi_Log(2205, L"NtEnumerateKey KeyInfo: %d", KeyInformationClass);
         status = STATUS_INVALID_PARAMETER;
         __leave;
     }

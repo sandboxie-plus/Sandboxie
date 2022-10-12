@@ -105,9 +105,6 @@ static HRESULT __fastcall Com_CoUnmarshalInterface_W81(
     ULONG_PTR StreamAddr, ULONG zero, REFIID riid, void **ppv);
 #endif
 
-static HRESULT  Com_CoUnmarshalInterface_W10(
-    ULONG_PTR StreamAddr,  REFIID riid,void **ppv);
-
 static HRESULT Com_CoUnmarshalInterface(
     IStream *pStream, REFIID riid, void **ppv);
 
@@ -197,8 +194,6 @@ typedef ULONG (__fastcall *P_CoUnmarshalInterface_W8)(
 typedef ULONG (__fastcall *P_CoUnmarshalInterface_W81)(
     ULONG_PTR StreamAddr, ULONG zero, REFIID riid, void **ppv);
 
-typedef ULONG(*P_CoUnmarshalInterface_W10)(
-    ULONG_PTR StreamAddr, REFIID riid,void **ppv );
 
 typedef ULONG (*P_CoMarshalInterface)(
     IStream *pStream, REFIID riid, IUnknown *pUnknown,
@@ -239,7 +234,6 @@ P_CoUnmarshalInterface      __sys_CoUnmarshalInterface      = NULL;
 P_CoUnmarshalInterface_W8   __sys_CoUnmarshalInterface_W8   = NULL;
 P_CoUnmarshalInterface_W81  __sys_CoUnmarshalInterface_W81  = NULL;
 #endif
-P_CoUnmarshalInterface_W10  __sys_CoUnmarshalInterface_W10  = NULL;
 P_CoMarshalInterface        __sys_CoMarshalInterface        = NULL;
 
 P_CoGetPSClsid              __sys_CoGetPSClsid              = NULL;
@@ -898,12 +892,6 @@ _FX BOOLEAN Com_Hook_CoUnmarshalInterface_W8(UCHAR *code, HMODULE module)
     // have to do some __fastcall magic.  see Com_CoUnmarshalInterface_W8
     //
 
-    P_CoUnmarshalInterface_W10 CoUnmarshalInterface_W10 = (P_CoUnmarshalInterface_W10)GetProcAddress(GetModuleHandle(L"combase.dll"), "CoUnmarshalInterface");
-    if (CoUnmarshalInterface_W10) {
-        SBIEDLL_HOOK(Com_, CoUnmarshalInterface_W10);
-        return TRUE;
-    }
-
 #ifdef _WIN64
 
     if (Dll_OsBuild >= 15002) { // Windows 10 1703 preview
@@ -1114,49 +1102,7 @@ _FX HRESULT __fastcall Com_CoUnmarshalInterface_W81(
 
     return Com_CoUnmarshalInterface_Common(pStream, riid, ppv, &posl);
 }
-
-
-_FX HRESULT  Com_CoUnmarshalInterface_W10(
-    ULONG_PTR StreamAddr, REFIID riid, void **ppv)
-{
-    const HRESULT HR_OR_INVALID_OXID =
-        MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, OR_INVALID_OXID);
-    HRESULT hr;
-    LARGE_INTEGER posl;
-    ULARGE_INTEGER posu;
-    //
-    // on 32-bit Windows 8.1, combase!_CoUnmarshalInterface is a true
-    // fastcall function which gets its second argument in edx.  this is
-    // unlike the Windows 8 version which gets the second argument on the
-    // stack, which requires a small trick with ULONG64 (see above)
-    //
-
-    IStream *pStream = (IStream *)StreamAddr;
-
-    //
-    // first invoke the COM unmarshaller.  it returns OR_INVALID_OXID
-    // when the interface was marshalled in SbieSvc, because SbieSvc
-    // uses a different epmapper than the sandboxed epmapper
-    //
-
-    posl.QuadPart = 0;
-    hr = IStream_Seek(pStream, posl, STREAM_SEEK_CUR, &posu);
-    if (FAILED(hr))
-        return hr;
-
-    hr = __sys_CoUnmarshalInterface_W10(StreamAddr, riid, ppv);
-    if (hr != HR_OR_INVALID_OXID)
-        return hr;
-
-    posl.QuadPart = posu.QuadPart;
-    hr = IStream_Seek(pStream, posl, STREAM_SEEK_SET, &posu);
-    if (FAILED(hr))
-        return hr;
-
-    return Com_CoUnmarshalInterface_Common(pStream, riid, ppv, &posl);
-}
 #endif
-
 
 //---------------------------------------------------------------------------
 // Com_CoUnmarshalInterface

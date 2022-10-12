@@ -186,8 +186,8 @@ typedef NTSTATUS (*P_NtCreateKeyTransacted)(
     IN  ULONG TitleIndex,
     IN  PUNICODE_STRING Class OPTIONAL,
     IN  ULONG CreateOptions,
-    OUT PULONG Disposition OPTIONAL,
-    IN  PVOID Transaction);
+    IN  PVOID Transaction,
+    OUT PULONG Disposition OPTIONAL);
 
 typedef NTSTATUS (*P_NtCreateMutant)(
     OUT PHANDLE MutantHandle,
@@ -646,6 +646,13 @@ typedef NTSTATUS (*P_NtOpenKeyTransacted)(
     OUT PHANDLE KeyHandle,
     IN  ACCESS_MASK DesiredAccess,
     IN  POBJECT_ATTRIBUTES ObjectAttributes,
+    IN  PVOID Transaction);
+
+typedef NTSTATUS (*P_NtOpenKeyTransactedEx)(
+    OUT PHANDLE KeyHandle,
+    IN  ACCESS_MASK DesiredAccess,
+    IN  POBJECT_ATTRIBUTES ObjectAttributes,
+    IN  ULONG OpenOptions,
     IN  PVOID Transaction);
 
 typedef NTSTATUS (*P_NtOpenMutant)(

@@ -307,6 +307,14 @@ NtCreateDirectoryObject(
 );
 
 __declspec(dllimport) NTSTATUS __stdcall
+NtCreateDirectoryObjectEx(
+    OUT PHANDLE DirectoryHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN HANDLE ShadowDirectoryHandle,
+    IN ULONG Flags);
+
+__declspec(dllimport) NTSTATUS __stdcall
 NtOpenDirectoryObject(
     OUT PHANDLE             DirectoryHandle,
     IN ACCESS_MASK          DesiredAccess,
@@ -1987,6 +1995,11 @@ __declspec(dllimport) NTSTATUS __stdcall NtFlushInstructionCache(
 __declspec(dllimport) NTSTATUS __stdcall NtLoadKey(
     POBJECT_ATTRIBUTES TargetObjectAttributes,
     POBJECT_ATTRIBUTES SourceObjectAttributes);
+
+__declspec(dllimport) NTSTATUS __stdcall NtLoadKey2(
+    POBJECT_ATTRIBUTES TargetObjectAttributes,
+    POBJECT_ATTRIBUTES SourceObjectAttributes,
+    ULONG Flags);
 
 __declspec(dllimport) NTSTATUS __stdcall NtSaveKey(
     HANDLE KeyHandle,

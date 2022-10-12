@@ -25,6 +25,11 @@
 #include "lock.h"
 #include "defines.h"
 
+#ifndef KERNEL_MODE
+#ifdef _M_ARM64EC
+P_NtAllocateVirtualMemoryEx __sys_NtAllocateVirtualMemoryEx = NULL;
+#endif
+#endif
 
 //---------------------------------------------------------------------------
 // Parameters
@@ -380,12 +385,31 @@ ALIGNED void *Pool_Alloc_Mem(ULONG size, ULONG tag)
     // size parameter will be a multiple of POOL_PAGE_SIZE, and this routine
     // must return memory allocated with page-alignment
 #ifdef KERNEL_MODE
-    ptr = ExAllocatePoolWithTag(PagedPool, size, tag);
+#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
+    ptr = ExAllocatePool2(POOL_FLAG_PAGED, size, tag);
 #else
-    //ptr = VirtualAlloc(0, size, MEM_RESERVE | MEM_COMMIT | MEM_TOP_DOWN,
-    ULONG_PTR RegionSize = size;
-    NtAllocateVirtualMemory(NtCurrentProcess(), &ptr, 0, &RegionSize, MEM_RESERVE | MEM_COMMIT | MEM_TOP_DOWN,
-        ((UCHAR)tag == 0xFF ? PAGE_EXECUTE_READWRITE : PAGE_READWRITE));
+    ptr = ExAllocatePoolWithTag(PagedPool, size, tag);
+#endif
+#else
+    SIZE_T RegionSize = size;
+#ifdef _M_ARM64EC
+    if ((UCHAR)tag == 0xEC) {
+
+        //
+        // this pool is designated for native ARM code in a EC process
+        //
+
+        MEM_EXTENDED_PARAMETER Parameter = { 0 };
+	    Parameter.Type = MemExtendedParameterAttributeFlags;
+	    Parameter.ULong64 = MEM_EXTENDED_PARAMETER_EC_CODE;
+
+        __sys_NtAllocateVirtualMemoryEx(NtCurrentProcess(), &ptr, &RegionSize, MEM_RESERVE | MEM_COMMIT | MEM_TOP_DOWN,
+            PAGE_EXECUTE_READWRITE, &Parameter, 1);
+    }
+    else
+#endif
+        NtAllocateVirtualMemory(NtCurrentProcess(), &ptr, 0, &RegionSize, MEM_RESERVE | MEM_COMMIT | MEM_TOP_DOWN,
+            ((UCHAR)tag == 0xFF ? PAGE_EXECUTE_READWRITE : PAGE_READWRITE));
 #endif
     // printf("Allocated %d bytes at %08X\n", size, ptr);
 
@@ -513,8 +537,13 @@ ALIGNED POOL *Pool_CreateTagged(ULONG tag)
 
 #elif defined(KERNEL_MODE)
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
+    pool->lock = ExAllocatePool2(
+                                POOL_FLAG_NON_PAGED, sizeof(ERESOURCE), tag);
+#else
     pool->lock = ExAllocatePoolWithTag(
                                 NonPagedPool, sizeof(ERESOURCE), tag);
+#endif
     if (! pool->lock) {
         Pool_Free_Mem(page, tag);
         return NULL;

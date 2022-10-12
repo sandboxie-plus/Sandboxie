@@ -127,7 +127,7 @@ static const WCHAR *File_DeviceMap_EnvVar   = ENV_VAR_PFX L"DEVICE_MAP";
 
 _FX BOOLEAN File_Init(void)
 {
-    HMODULE module = NULL;
+    HMODULE module = Dll_Ntdll;
 
     void *RtlGetFullPathName_UEx;
     void *GetTempPathW;
@@ -1705,6 +1705,7 @@ _FX void File_GetSetDeviceMap(WCHAR *DeviceMap96)
                 NtCurrentProcess(), ProcessDeviceMap,
                 &info, sizeof(info.Set));
 
+#ifndef _WIN64
             if (status == STATUS_INFO_LENGTH_MISMATCH && Dll_IsWow64) {
 
                 //
@@ -1726,6 +1727,7 @@ _FX void File_GetSetDeviceMap(WCHAR *DeviceMap96)
                     Dll_Free(rpl);
                 }
             }
+#endif
 
             NtClose(info.Set.DirectoryHandle);
 

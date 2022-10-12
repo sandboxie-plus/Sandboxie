@@ -62,7 +62,7 @@ extern __declspec(dllexport) int __CRTDECL Sbie_snprintf(char *_Buffer, size_t C
 #ifdef _WIN64
 
 // Pointer to 64-bit PEB_LDR_DATA is at offset 0x0018 of 64-bit PEB
-#define GET_ADDR_OF_PEB __readgsqword(0x60)
+#define GET_ADDR_OF_PEB NtCurrentPeb()
 #define GET_PEB_LDR_DATA (*(PEB_LDR_DATA **)(GET_ADDR_OF_PEB + 0x18))
 #define GET_PEB_IMAGE_BASE (*(ULONG_PTR *)(GET_ADDR_OF_PEB + 0x10))
 #define GET_PEB_MAJOR_VERSION (*(USHORT *)(GET_ADDR_OF_PEB + 0x118))
@@ -251,6 +251,7 @@ extern HINSTANCE Dll_Instance;
 extern HMODULE Dll_Ntdll;
 extern HMODULE Dll_Kernel32;
 extern HMODULE Dll_KernelBase;
+// $Workaround$ - 3rd party fix
 extern HMODULE Dll_DigitalGuardian;
 
 extern const WCHAR *Dll_BoxName;
@@ -276,7 +277,15 @@ extern ULONG Dll_SessionId;
 
 extern ULONG64 Dll_ProcessFlags;
 
+#ifndef _WIN64
 extern BOOLEAN Dll_IsWow64;
+#endif
+#ifdef _M_X64
+extern BOOLEAN Dll_IsArm64ec;
+#endif
+#ifndef _M_ARM64
+extern BOOLEAN Dll_IsXtAjit;
+#endif
 extern BOOLEAN Dll_IsSystemSid;
 extern BOOLEAN Dll_InitComplete;
 extern BOOLEAN Dll_RestrictedToken;
@@ -424,7 +433,9 @@ BOOLEAN Dll_SkipHook(const WCHAR *HookName);
 
 void *Dll_JumpStub(void *OldCode, void *NewCode, ULONG_PTR StubArg);
 
+#if !defined(_M_ARM64) && !defined(_M_ARM64EC)
 ULONG_PTR *Dll_JumpStubData(void);
+#endif
 
 ULONG_PTR *Dll_JumpStubDataForCode(void *StubCode);
 

@@ -616,6 +616,11 @@ _FX NTSTATUS File_RenameOperation(
 
     info = (FILE_RENAME_INFORMATION *)Parms->SetFileInformation.InfoBuffer;
 
+#ifdef _M_ARM64
+    if (! MmIsAddressValid(info)) // todo: arm64 // fix-me: why does this happen?
+        return STATUS_ACCESS_DENIED;
+#endif
+
     FileObject = Parms->SetFileInformation.ParentOfTarget;
 
     if ((! FileObject) || (! info) || (! info->FileNameLength))
@@ -712,6 +717,7 @@ _FX NTSTATUS File_CheckFileObject(
     // function Syscall_OpenHandle in file syscall_open.c
     //
 
+    // $Workaround$ - 3rd party fix
 #ifdef _WIN64
     if (! proc->sbiedll_loaded) {
         WCHAR *Backslash = wcsrchr(NameString->Buffer, L'\\');

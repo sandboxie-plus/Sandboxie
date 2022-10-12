@@ -89,7 +89,7 @@ WCHAR *SearchUnicodeString(PCUNICODE_STRING pString1, PWCHAR pString2, BOOLEAN b
 BOOLEAN UnicodeStringStartsWith(PCUNICODE_STRING pString1, PWCHAR pString2, BOOLEAN boolCaseInSensitive);
 BOOLEAN UnicodeStringEndsWith(PCUNICODE_STRING pString1, PWCHAR pString2, BOOLEAN boolCaseInSensitive);
 BOOLEAN DoesRegValueExist(ULONG RelativeTo, WCHAR *Path, WCHAR *ValueName);
-BOOLEAN GetRegString(ULONG RelativeTo, WCHAR *Path, WCHAR *ValueName, UNICODE_STRING* pData);
+NTSTATUS GetRegString(ULONG RelativeTo, const WCHAR *Path, const WCHAR *ValueName, UNICODE_STRING* pData);
 void *memmem(const void *pSearchBuf, size_t nBufSize, const void *pPattern, size_t nPatternSize);
 
 

@@ -45,6 +45,7 @@ _FX const WCHAR *SbieDll_PortName(void)
 //---------------------------------------------------------------------------
 
 
+#ifndef _WIN64
 _FX BOOLEAN SbieDll_IsWow64(void)
 {
     //
@@ -52,8 +53,6 @@ _FX BOOLEAN SbieDll_IsWow64(void)
     // Dll_Ordinal1.  for a process outside the sandbox, we
     // initialize the variable here
     //
-
-#ifndef _WIN64
 
     static BOOLEAN init = FALSE;
     typedef BOOL (*P_IsWow64Process)(HANDLE, BOOL *);
@@ -73,10 +72,9 @@ _FX BOOLEAN SbieDll_IsWow64(void)
         init = TRUE;
     }
 
-#endif ! _WIN64
-
     return Dll_IsWow64;
 }
+#endif ! _WIN64
 
 
 //---------------------------------------------------------------------------
@@ -123,6 +121,7 @@ _FX BOOLEAN SbieDll_ConnectPort(BOOLEAN Silent)
 
         data->SizeofPortMsg = sizeof(PORT_MESSAGE);
 
+#ifndef _WIN64
         if (! Dll_BoxName)
             SbieDll_IsWow64();
 
@@ -137,6 +136,7 @@ _FX BOOLEAN SbieDll_ConnectPort(BOOLEAN Silent)
 
             data->SizeofPortMsg += sizeof(ULONG) * 4;
         }
+#endif
 
         data->MaxDataLen -= data->SizeofPortMsg;
     }

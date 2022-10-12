@@ -109,8 +109,10 @@ _FX void Key_DeleteValueFromCLSID(
     HANDLE handle;
 
     DesiredAccess = KEY_SET_VALUE;
+#ifndef _WIN64
     if (Dll_IsWow64)
         DesiredAccess |= KEY_WOW64_64KEY;
+#endif
 
     path = Dll_AllocTemp(128 * sizeof(WCHAR));
 

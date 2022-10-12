@@ -160,7 +160,7 @@ _FX void *Syscall_GetServiceTable(void)
     if (ShadowTable)
         return ShadowTable;
 
-    // Hard Offset Dependency
+    // $Offset$ - Hard Offset Dependency
 
     //Set flags2 offset
     if (Driver_OsBuild > 21286) { // 21H2

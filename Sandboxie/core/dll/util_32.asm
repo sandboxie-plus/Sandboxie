@@ -139,6 +139,7 @@ Ldr_Inject_Entry32@0        PROC C PUBLIC
     ; assumes the stack is zero
     ;
     
+    ; $Workaround$ - 3rd party fix
     lea edi,[esp-200h]
     mov ecx,200h/4
     xor eax,eax

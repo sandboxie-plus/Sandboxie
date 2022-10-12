@@ -267,7 +267,7 @@ _FX void Gui_Hook_CREATESTRUCT_Handler(void)
     Gui_HighestAddress = (ULONG_PTR)sysinfo.lpMaximumApplicationAddress;
 
 #ifdef _WIN64
-    peb = __readgsqword(0x60);
+    peb = NtCurrentPeb();
     KernelCallbackTable = *(ULONG_PTR *)(peb + 0x58);
 #else ! _WIN64
     peb = __readfsdword(0x30);    // PEB

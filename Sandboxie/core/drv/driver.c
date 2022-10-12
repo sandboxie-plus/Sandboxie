@@ -23,7 +23,12 @@
 
 #include "driver.h"
 #include "obj.h"
+#ifdef _M_ARM64
+#include "common/arm64_asm.h"
+#else
+#define HOOK_WITH_PRIVATE_PARTS
 #include "hook.h"
+#endif
 #include "conf.h"
 #include "dll.h"
 #include "api.h"
@@ -85,7 +90,7 @@ const WCHAR *Driver_S_1_5_20 = L"S-1-5-20"; //	Network Service
 
 DRIVER_OBJECT *Driver_Object;
 
-WCHAR *Driver_Version = TEXT(MY_VERSION_COMPAT);
+WCHAR *Driver_Version = TEXT(MY_VERSION_STRING);
 
 ULONG Driver_OsVersion = 0;
 ULONG Driver_OsBuild = 0;
@@ -120,14 +125,22 @@ ULONG Process_Flags1 = 0;
 ULONG Process_Flags2 = 0;
 ULONG Process_Flags3 = 0;
 
+
 //---------------------------------------------------------------------------
 
 
 #ifdef OLD_DDK
 P_NtSetInformationToken         ZwSetInformationToken       = NULL;
 #endif // OLD_DDK
+
+#ifdef _M_ARM64
+void*                           Driver_KiServiceInternal    = NULL;
+USHORT                          ZwCreateToken_num           = 0;
+USHORT                          ZwCreateTokenEx_num         = 0;
+#else
 P_NtCreateToken                 ZwCreateToken               = NULL;
 P_NtCreateTokenEx               ZwCreateTokenEx             = NULL;
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -290,9 +303,9 @@ _FX BOOLEAN Driver_CheckOsVersion(void)
             (   MajorVersion == MajorVersionMin
              && MinorVersion >= MinorVersionMin)) {
 
-        // Hard Offset Dependency
+        // $Offset$ - Hard Offset Dependency
 
-        if (MajorVersion == 10) {
+        if (MajorVersion == 10) { // for windows 11 its still 10
             Driver_OsVersion = DRIVER_WINDOWS_10;
 #ifdef _WIN64
             g_TrapFrameOffset = 0x90;
@@ -599,10 +612,53 @@ _FX BOOLEAN Driver_FindHomePath(UNICODE_STRING *RegistryPath)
 
 
 //---------------------------------------------------------------------------
-// Driver_FindMissingServices
+// Driver_FindKiServiceInternal
 //---------------------------------------------------------------------------
 
+#ifdef _M_ARM64
+_FX BOOLEAN Driver_FindKiServiceInternal()
+{
+    UCHAR *addr = (UCHAR *)ZwWaitForSingleObject; // pick some random Zw function
 
+    // a ZwXxx system service redirector looks like this in Windows 11 ARM64
+    // B0 01 80 D2 7F 1E 00 14 00 00 00 00 00 00 00 00
+    // movz x16, #svc_num
+    // b    KiServiceInternal
+
+    MOV mov;
+    mov.OP = *(ULONG*)addr;
+    addr += 4;
+
+    if (!IS_MOV(mov) || mov.Rd != 16) {
+        DbgPrint("bad MOV %d\n", mov.OP);
+        return FALSE;
+    }
+
+
+    B b;
+    b.OP = *(ULONG*)addr;
+
+    if (!IS_B(b)) {
+        DbgPrint("bad B %d\n", b.OP);
+        return FALSE;
+    }
+
+    LONG delta = (b.imm26 << 2); // * 4
+    if (delta & (1 << 27)) // if this is negative
+        delta |= 0xF0000000; // make it properly negative
+
+    Driver_KiServiceInternal = (addr + delta);
+    DbgPrint("KiServiceInternal: %p\n", Driver_KiServiceInternal);
+
+    return TRUE;
+}
+#endif
+
+//---------------------------------------------------------------------------
+// Driver_FindMissingService
+//---------------------------------------------------------------------------
+
+#ifndef _M_ARM64
 void* Driver_FindMissingService(const char* ProcName, int prmcnt)
 {
     void* ptr = Dll_GetProc(Dll_NTDLL, ProcName, FALSE);
@@ -613,7 +669,7 @@ void* Driver_FindMissingService(const char* ProcName, int prmcnt)
         return NULL;
     return svc;
 }
-
+#endif
 
 //---------------------------------------------------------------------------
 // Driver_FindMissingServices
@@ -647,9 +703,52 @@ _FX BOOLEAN Driver_FindMissingServices(void)
 	}
 #endif
 
+
     //
-    // Retrieve some unexported kernel functions that may be useful
+    // Retrive some unexported kernel functions which may be usefull
     //
+
+#ifdef _M_ARM64
+
+    //
+    // The Windows Kernel on ARM64 not only not exports ZwCreateToken/ZwCreateTokenEx
+    // but out right lacks those functions entierly.
+    // So in order to work around this limitation we implement a own system service wrapper
+    // we invoke Sbie_CallZwServiceFunction_asm with all the arguments we need
+    // and the service numebr as last 20th argument, it sets IP0/X16 and invokes KiServiceInternal
+    //
+
+    SYSCALL_ENTRY *entry = Syscall_GetByName("CreateToken");
+    if (entry) 
+        ZwCreateToken_num = entry->syscall_index;
+
+    SYSCALL_ENTRY *entry_ex = Syscall_GetByName("CreateTokenEx");
+    if (entry_ex) 
+        ZwCreateTokenEx_num = entry_ex->syscall_index;
+
+    Driver_FindKiServiceInternal();
+
+    
+    /*DbgPrint("Test 1\n");
+
+    UNICODE_STRING uni;
+    OBJECT_ATTRIBUTES objattrs;
+    RtlInitUnicodeString(&uni, L"\\??\\C:\\Temp\\test.txt");
+    InitializeObjectAttributes(&objattrs,
+        &uni, OBJ_KERNEL_HANDLE | OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+    entry = Syscall_GetByName("DeleteFile");
+    if (entry) {
+        DbgPrint("Test 2\n");
+        NTSTATUS status = Sbie_CallZwServiceFunction_asm((UINT_PTR)&objattrs,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            entry->syscall_index);
+        DbgPrint("Test 3 %d\n", status);
+    }
+
+    DbgPrint("Test 4\n");*/
+
+#else
 
     ZwCreateToken = (P_NtCreateToken) Driver_FindMissingService("ZwCreateToken", 13);
     //DbgPrint("ZwCreateToken: %p\r\n", ZwCreateToken);
@@ -657,6 +756,8 @@ _FX BOOLEAN Driver_FindMissingServices(void)
         ZwCreateTokenEx = (P_NtCreateTokenEx)Driver_FindMissingService("ZwCreateTokenEx", 17);
         //DbgPrint("ZwCreateTokenEx: %p\r\n", ZwCreateTokenEx);
     }
+
+#endif
 
     return TRUE;
 }
@@ -786,10 +887,11 @@ _FX ULONG Driver_GetRegDword(
     memzero(qrt, sizeof(qrt));
     qrt[0].Flags =  RTL_QUERY_REGISTRY_REQUIRED |
                     RTL_QUERY_REGISTRY_DIRECT |
+                    RTL_QUERY_REGISTRY_TYPECHECK |
                     RTL_QUERY_REGISTRY_NOEXPAND;
     qrt[0].Name = (WCHAR *)ValueName;
     qrt[0].EntryContext = &uni;
-    qrt[0].DefaultType = REG_NONE;
+    qrt[0].DefaultType = (REG_DWORD << RTL_QUERY_REGISTRY_TYPECHECK_SHIFT) | REG_NONE;
 
     status = RtlQueryRegistryValues(
         RTL_REGISTRY_ABSOLUTE, KeyPath, qrt, NULL, NULL);

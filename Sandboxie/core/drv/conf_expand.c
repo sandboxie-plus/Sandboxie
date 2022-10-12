@@ -23,6 +23,7 @@
 #include <stdlib.h>         // itow
 #include "conf.h"
 #include "file.h"
+#include "util.h"
 
 
 //---------------------------------------------------------------------------
@@ -123,24 +124,24 @@ _FX NTSTATUS Conf_Expand_RegValue(
     WCHAR *PageSizeBuffer)
 {
     NTSTATUS status;
-    RTL_QUERY_REGISTRY_TABLE qrt[2];
+    //RTL_QUERY_REGISTRY_TABLE qrt[2];
     UNICODE_STRING uni;
     WCHAR *KeyPath;
     ULONG KeyPath_len;
 
     memzero(PageSizeBuffer, sizeof(WCHAR) * (1024 + 4));
 
-    uni.Length = sizeof(WCHAR) * 1024;  // only half the PageSizeBuffer
-    uni.MaximumLength = uni.Length + sizeof(WCHAR);
+    uni.Length = 0;
+    uni.MaximumLength = sizeof(WCHAR) * (1024 + 1); // only half the PageSizeBuffer
     uni.Buffer = PageSizeBuffer;
 
-    memzero(qrt, sizeof(qrt));
-    qrt[0].Flags =  RTL_QUERY_REGISTRY_REQUIRED |
-                    RTL_QUERY_REGISTRY_DIRECT |
-                    RTL_QUERY_REGISTRY_NOEXPAND;
-    qrt[0].Name = (WCHAR *)ValueName;
-    qrt[0].EntryContext = &uni;
-    qrt[0].DefaultType = REG_NONE;
+    //memzero(qrt, sizeof(qrt));
+    //qrt[0].Flags =  RTL_QUERY_REGISTRY_REQUIRED |
+    //                RTL_QUERY_REGISTRY_TYPECHECK | 
+    //                RTL_QUERY_REGISTRY_NOEXPAND;
+    //qrt[0].Name = (WCHAR *)ValueName;
+    //qrt[0].EntryContext = &uni;
+    //qrt[0].DefaultType = REG_NONE;
 
     if (RootKey == RTL_REGISTRY_USER) {
 
@@ -177,7 +178,8 @@ _FX NTSTATUS Conf_Expand_RegValue(
         KeyPath = (WCHAR *)SubKeyPath;
     }
 
-    status = RtlQueryRegistryValues(RootKey, KeyPath, qrt, NULL, NULL);
+    //status = RtlQueryRegistryValues(RootKey, KeyPath, qrt, NULL, NULL);
+    status = GetRegString(RootKey, KeyPath, ValueName, &uni);
 
     if (status == STATUS_SUCCESS) {
 

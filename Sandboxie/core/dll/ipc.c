@@ -326,7 +326,7 @@ BOOLEAN RpcRt_IsDynamicPortOpen(const WCHAR* wszPortName);
 
 _FX BOOLEAN Ipc_Init(void)
 {
-    HMODULE module = NULL;
+    HMODULE module = Dll_Ntdll;
 
     void *NtAlpcCreatePort;
     void *NtAlpcConnectPort;
@@ -3678,7 +3678,7 @@ finish:
     }
 
     if (err) {
-        SbieApi_Log(2205, L"ConnectPort (%02X/%08X)", err, status);
+        SbieApi_Log(2205, L"ConnectPort (%02X/%08X) %S", err, status, TruePath);
         if (status == STATUS_SUCCESS)
             status = STATUS_INVALID_PARAMETER;
     }

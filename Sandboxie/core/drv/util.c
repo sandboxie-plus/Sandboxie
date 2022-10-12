@@ -233,12 +233,13 @@ BOOLEAN UnicodeStringEndsWith(PCUNICODE_STRING pString1, PWCHAR pString2, BOOLEA
 
 BOOLEAN DoesRegValueExist(ULONG RelativeTo, WCHAR *Path, WCHAR *ValueName)
 {
-    WCHAR DummyBuffer[1] = {0}; // if we provide a NULL buffer, this will cause a memory pool leak somewhere in the kernel
+    WCHAR DummyBuffer[1] = {0}; // if we provide a NULL buffer this wil cause a memory pool leak someware in the kernel
     UNICODE_STRING Dummy = { 0, sizeof(DummyBuffer), DummyBuffer };
-    return GetRegString(RelativeTo, Path, ValueName, &Dummy);
+    NTSTATUS status = GetRegString(RelativeTo, Path, ValueName, &Dummy);
+    return (status == STATUS_SUCCESS || status == STATUS_OBJECT_TYPE_MISMATCH);
 }
 
-BOOLEAN GetRegString(ULONG RelativeTo, WCHAR *Path, WCHAR *ValueName, UNICODE_STRING* pData)
+NTSTATUS GetRegString(ULONG RelativeTo, const WCHAR *Path, const WCHAR *ValueName, UNICODE_STRING* pData)
 {
 	NTSTATUS status;
 	RTL_QUERY_REGISTRY_TABLE qrt[2];
@@ -246,16 +247,25 @@ BOOLEAN GetRegString(ULONG RelativeTo, WCHAR *Path, WCHAR *ValueName, UNICODE_ST
 	memzero(qrt, sizeof(qrt));
 	qrt[0].Flags = RTL_QUERY_REGISTRY_REQUIRED |
 		RTL_QUERY_REGISTRY_DIRECT |
+        RTL_QUERY_REGISTRY_TYPECHECK | // fixes security violation but causes STATUS_OBJECT_TYPE_MISMATCH when buffer to small
 		RTL_QUERY_REGISTRY_NOVALUE |
 		RTL_QUERY_REGISTRY_NOEXPAND;
-	qrt[0].Name = ValueName;
+	qrt[0].Name = (WCHAR *)ValueName;
 	qrt[0].EntryContext = pData;
-	qrt[0].DefaultType = REG_NONE;
+	qrt[0].DefaultType = (REG_SZ << RTL_QUERY_REGISTRY_TYPECHECK_SHIFT) | REG_NONE;
 
 	status = RtlQueryRegistryValues(
 		RelativeTo, Path, qrt, NULL, NULL);
 
-	return (status == STATUS_SUCCESS);
+    if (status == STATUS_OBJECT_TYPE_MISMATCH) {
+
+        qrt[0].DefaultType = (REG_EXPAND_SZ << RTL_QUERY_REGISTRY_TYPECHECK_SHIFT) | REG_NONE;
+
+	    status = RtlQueryRegistryValues(
+		    RelativeTo, Path, qrt, NULL, NULL);
+    }
+
+    return status;
 }
 
 void *memmem(const void *pSearchBuf,
@@ -277,6 +287,32 @@ void *memmem(const void *pSearchBuf,
     }
 
     return NULL;
+}
+
+
+//---------------------------------------------------------------------------
+// Util_GetRegistryValue
+//---------------------------------------------------------------------------
+
+
+NTSTATUS Util_GetRegistryValue(HANDLE hKey, LPCWSTR Value, PVOID pData, SIZE_T uSize)
+{
+	UCHAR buffer[sizeof(KEY_VALUE_PARTIAL_INFORMATION) + sizeof(ULONG64)];
+	NTSTATUS status;
+	UNICODE_STRING valueName;
+	ULONG length;
+
+	RtlInitUnicodeString(&valueName, Value);
+	status = ZwQueryValueKey(hKey, &valueName, KeyValuePartialInformation, buffer, sizeof(buffer), &length);
+	if (NT_SUCCESS(status) && length <= sizeof(buffer))
+	{
+		PKEY_VALUE_PARTIAL_INFORMATION info = (PKEY_VALUE_PARTIAL_INFORMATION)buffer;
+        if (info->DataLength == uSize)
+            memcpy(pData, info->Data, uSize);
+        else
+            return STATUS_BUFFER_TOO_SMALL;
+	}
+	return status;
 }
 
 
@@ -362,6 +398,7 @@ _FX NTSTATUS MyValidateCertificate(void)
 // Util_GetProcessPidByName
 //---------------------------------------------------------------------------
 
+
 _FX HANDLE Util_GetProcessPidByName(const WCHAR* name) 
 {
     HANDLE pid = (HANDLE)-1;
@@ -405,3 +442,4 @@ retry:
 
     return pid;
 }
+

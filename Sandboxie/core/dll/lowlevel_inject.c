@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2022 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -29,6 +29,9 @@
 #include "core/low/lowdata.h"
 #include "common/win32_ntddk.h"
 #include "core/drv/api_defs.h"
+#include "common/dllimport.h"
+#include "common/arm64_asm.h"
+
 
 
 //---------------------------------------------------------------------------
@@ -47,6 +50,33 @@ typedef struct _MY_TARGETS {
 	unsigned long long data;
 } MY_TARGETS;
 
+#ifdef _M_ARM64
+
+WINBASEAPI BOOL WINAPI IsWow64Process2(
+	HANDLE hProcess,
+	USHORT* pProcessMachine,
+	USHORT* pNativeMachine
+	);
+
+WINBASEAPI BOOL WINAPI GetProcessInformation(
+    HANDLE hProcess,
+    PROCESS_INFORMATION_CLASS ProcessInformationClass,
+    LPVOID ProcessInformation,
+    DWORD ProcessInformationSize
+    );
+
+typedef PVOID (*P_VirtualAlloc2)(
+    HANDLE Process,
+    PVOID BaseAddress,
+    SIZE_T Size,
+    ULONG AllocationType,
+    ULONG PageProtection,
+    MEM_EXTENDED_PARAMETER* ExtendedParameters,
+    ULONG ParameterCount
+	);
+	
+#endif
+
 
 //---------------------------------------------------------------------------
 // Functions
@@ -54,19 +84,44 @@ typedef struct _MY_TARGETS {
 
 SBIEDLL_EXPORT  HANDLE SbieDll_InjectLow_SendHandle(HANDLE hProcess);
 
-SBIEDLL_EXPORT  void *SbieDll_InjectLow_CopyCode(
-	HANDLE hProcess, SIZE_T lowLevel_size, UCHAR *code, ULONG code_len);
-SBIEDLL_EXPORT  BOOLEAN SbieDll_InjectLow_BuildTramp(
-	BOOLEAN long_diff, UCHAR *code, ULONG_PTR addr);
-SBIEDLL_EXPORT  void *SbieDll_InjectLow_CopySyscalls(HANDLE hProcess);
-SBIEDLL_EXPORT  BOOLEAN SbieDll_InjectLow_CopyData(
+void *SbieDll_InjectLow_CopyCode(
+	HANDLE hProcess, SIZE_T lowLevel_size, UCHAR *code, ULONG code_len
+#ifdef _M_ARM64
+	, BOOLEAN use_arm64ec
+#endif
+);
+BOOLEAN SbieDll_InjectLow_BuildTramp(
+	BOOLEAN long_diff, UCHAR *code, ULONG_PTR addr
+#ifdef _M_ARM64
+	, BOOLEAN use_arm64ec
+#endif
+);
+void *SbieDll_InjectLow_CopySyscalls(HANDLE hProcess, BOOLEAN is_wow64
+#ifdef _M_ARM64
+	, BOOLEAN use_arm64ec
+#endif
+);
+void* InjectLow_AllocMemory(HANDLE hProcess, SIZE_T size, BOOLEAN executable
+#ifdef _M_ARM64
+	, BOOLEAN use_arm64ec
+#endif
+);
+BOOLEAN SbieDll_InjectLow_CopyData(
 	HANDLE hProcess, void *remote_addr, void *local_data);
 #ifdef _WIN64
-SBIEDLL_EXPORT BOOLEAN SbieDll_Has32BitJumpHorizon(void * target, void * detour);
-SBIEDLL_EXPORT void * SbieDll_InjectLow_getPage(HANDLE hProcess, void *remote_addr);
+BOOLEAN SbieDll_Has32BitJumpHorizon(void * target, void * detour);
+void * SbieDll_InjectLow_getPage(HANDLE hProcess, void *remote_addr);
 #endif
-SBIEDLL_EXPORT  BOOLEAN SbieDll_InjectLow_WriteJump(
-	HANDLE hProcess, void *remote_addr, BOOLEAN long_diff, void *localdata);
+BOOLEAN SbieDll_InjectLow_WriteJump(
+	HANDLE hProcess, void *remote_addr, BOOLEAN long_diff
+#ifdef _M_ARM64
+	, BOOLEAN use_arm64ec
+#endif
+);
+
+#if defined(_M_ARM64) || defined(_M_ARM64EC)
+ULONG Hook_GetSysCallFunc(ULONG* aCode, void** pHandleStubHijack);
+#endif
 
 //---------------------------------------------------------------------------
 // Variables
@@ -84,6 +139,17 @@ ULONG *m_syscall_data = NULL;
 
 ULONG_PTR m_LdrInitializeThunk = 0;
 
+#ifdef _M_ARM64
+
+ULONG *m_syscall_ec_data = NULL;
+
+ULONG_PTR m_LdrInitializeThunkEC = 0;
+
+P_VirtualAlloc2 __sys_VirtualAlloc2 = NULL;
+
+#endif
+
+#include "core/low/lowlevel_code.c"
 
 //---------------------------------------------------------------------------
 // InjectLow_InitHelper
@@ -154,21 +220,29 @@ _FX ULONG SbieDll_InjectLow_InitHelper()
         }
     }
 
-    if (imageBase) {
+	ULONG zzzzz;
+
+#ifdef _M_ARM64
+	zzzzz = 4;
+#else
+    if (imageBase != 0) {
 		return errlvl;
     }
+
+	zzzzz = 1;
+#endif
 
     section = IMAGE_FIRST_SECTION(nt_hdrs);
     if (nt_hdrs->FileHeader.NumberOfSections < 2) return errlvl;
     if (strncmp((char *)section[0].Name, SBIELOW_INJECTION_SECTION, strlen(SBIELOW_INJECTION_SECTION)) ||
-        strncmp((char *)section[1].Name, SBIELOW_SYMBOL_SECTION, strlen(SBIELOW_SYMBOL_SECTION))) {
+        strncmp((char *)section[zzzzz].Name, SBIELOW_SYMBOL_SECTION, strlen(SBIELOW_SYMBOL_SECTION))) {
 		return errlvl;
     }
 
 
-    targets = (MY_TARGETS *)& bindata[section[1].PointerToRawData];
-    m_sbielow_start_offset = (ULONG)targets->entry - section[0].VirtualAddress;
-    m_sbielow_data_offset = (ULONG)targets->data - section[0].VirtualAddress;
+    targets = (MY_TARGETS *)& bindata[section[zzzzz].PointerToRawData];
+    m_sbielow_start_offset = (ULONG)(targets->entry - imageBase - section[0].VirtualAddress);
+    m_sbielow_data_offset = (ULONG)(targets->data - imageBase - section[0].VirtualAddress);
 
     m_sbielow_ptr = bindata + section[0].PointerToRawData; //Old version: head;
     m_sbielow_len = section[0].SizeOfRawData; //Old version: (ULONG)(ULONG_PTR)(tail - head);
@@ -187,7 +261,23 @@ _FX ULONG SbieDll_InjectLow_InitHelper()
     if (! m_LdrInitializeThunk)
 		return errlvl;
 
-#ifdef _WIN64
+#ifdef _M_ARM64
+
+	//
+	// for x64 on arm64 we need the EC version of LdrInitializeThunk as well as VirtualAlloc2, 
+	// if those are missing we will only fail SbieDll_InjectLow for x64 processes on arm64
+	//
+
+	WCHAR path[MAX_PATH];
+	if (! GetSystemDirectory(path, MAX_PATH))
+        wcscpy(path, L"C:\\Windows\\System32");
+	wcscat(path, L"\\ntdll.dll");
+
+	m_LdrInitializeThunkEC = (ULONG_PTR)Dll_Ntdll + FindDllExportFromFile(path, "#LdrInitializeThunk");
+
+	__sys_VirtualAlloc2 = (P_VirtualAlloc2)GetProcAddress(Dll_KernelBase, "VirtualAlloc2");
+
+#elif _WIN64
     if (Dll_Windows >= 10) {
         unsigned char * code;
         code = (unsigned char *)m_LdrInitializeThunk;
@@ -196,6 +286,96 @@ _FX ULONG SbieDll_InjectLow_InitHelper()
         }
     }
 #endif
+
+    return 0;
+}
+
+#if defined(_M_ARM64) || defined(_M_ARM64EC)
+
+//---------------------------------------------------------------------------
+// SbieDll_FindFirstSysCallFunc
+//---------------------------------------------------------------------------
+
+
+_FX ULONG* SbieDll_FindFirstSysCallFunc(ULONG* aCode, void** pHandleStubHijack)
+{
+	//
+	// Scan the ntdll.dll/win32u.dll from its base up to 16mb max 
+	// in search of the first ec syscall wrapper function
+	//
+
+	__try {
+		for (ULONG pos = 0; pos < 16 * 1024 * 1024; aCode++, pos += 4) {
+			if (Hook_GetSysCallFunc(aCode, pHandleStubHijack) != -1)
+				return aCode;
+		}
+	}
+	__except (EXCEPTION_EXECUTE_HANDLER) {}
+
+	return NULL;
+}
+
+//---------------------------------------------------------------------------
+// SbieDll_GetEcExitThunkPtr
+//---------------------------------------------------------------------------
+
+
+_FX void* SbieDll_GetEcExitThunkPtr(void* HandleStubHijack)
+{
+    UCHAR* ptr = (UCHAR*)HandleStubHijack;
+
+	//
+	// Analyze the HandleStubHijack function to find the address of
+	// __os_arm64x_dispatch_call_no_redirect which points to
+	// xtajit64.dll!#BinaryTranslatorEcExitThunkCallX64 in EC processes
+	//
+
+    for (ULONG i = 0; i < 0x40; i += 4, ptr += 4) {
+
+        ADRP adrp;
+        adrp.OP = *(ULONG*)ptr;
+
+        if (IS_ADRP(adrp) && adrp.Rd == 16) { // adrp x16, 0x180379000
+
+            LDR ldr;
+            ldr.OP = *(ULONG*)(ptr + 4);
+
+            if (IS_LDR(ldr) && ldr.Rn == 16 && ldr.Rt == 16) { // ldr x16, [x16, #0xae0]
+
+                LONG delta = (adrp.immHi << 2 | adrp.immLo) << 12;
+                delta += (ldr.imm12 << ldr.size);
+
+                // Note: ADRP clears the lower 12 bits of the PC
+                return (void*)(((ULONG_PTR)ptr & ~0xFFF) + delta);
+            }
+        }
+    }
+
+    return NULL;
+}
+
+#endif
+
+//---------------------------------------------------------------------------
+// SbieDll_GetSysCallOffset
+//---------------------------------------------------------------------------
+
+
+_FX ULONG SbieDll_GetSysCallOffset(const ULONG *SyscallPtr, ULONG syscall_index)
+{
+    ULONG SyscallNum;
+
+    while (SyscallPtr[0] || SyscallPtr[1]) {
+            
+        SyscallNum = SyscallPtr[0];
+            
+        SyscallNum &= 0xFFFF; // clear the not needed param count
+            
+        if (SyscallNum == syscall_index)
+            return SyscallPtr[1];
+
+        SyscallPtr += 2;
+    }
 
     return 0;
 }
@@ -215,6 +395,9 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 	SBIELOW_EXTRA_DATA *extra;
 	WCHAR *ptr;
 	ULONG *syscall_data;
+#ifdef _M_ARM64
+	ULONG *syscall_ec_data;
+#endif
 
 	//
 	// Get the SbieDll Location
@@ -269,12 +452,12 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 		// Create a minimalistic driverless data
 		//
 
-		*syscall_data = 4 + 4 + 232; // total_size 4, extra_data_offset 4, work area sizeof(INJECT_DATA)
+		*syscall_data = sizeof(ULONG) + sizeof(ULONG); // + 248; // total_size 4, extra_data_offset 4, work area sizeof(INJECT_DATA)
 
-		const char* NtdllExports[] = { "NtDelayExecution", "NtDeviceIoControlFile", "NtFlushInstructionCache", "NtProtectVirtualMemory" };
-		for (ULONG i = 0; i < 4; ++i) {
+		const char* NtdllExports[] = NATIVE_FUNCTION_NAMES;
+		for (ULONG i = 0; i < NATIVE_FUNCTION_COUNT; ++i) {
 			void* func_ptr = GetProcAddress(Dll_Ntdll, NtdllExports[i]);
-			memcpy((void*)((ULONG_PTR)syscall_data + (4 + 4) + (32 * i)), func_ptr, 32);
+			memcpy((void*)((ULONG_PTR)syscall_data + (sizeof(ULONG) + sizeof(ULONG)) + (NATIVE_FUNCTION_SIZE * i)), func_ptr, NATIVE_FUNCTION_SIZE);
 		}
 
 		len = *syscall_data;
@@ -286,27 +469,36 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 		ULONG offset_to_extra_data;
 
 		struct _CODE {
-			UCHAR bytes[32]
-		}			saved_code[4];
+			UCHAR bytes[NATIVE_FUNCTION_SIZE]
+		}			saved_code[NATIVE_FUNCTION_COUNT];
 
-		struct _SC {
+		struct SYSCALL_INFO {
 			ULONG number;
 			ULONG offset;
 		}			sys_call_list[n + 1];
 
 		// the above is provided by the driver, the below we have to construct
 
-		struct _EX{
+		ULONG64 EcExitThunkPtr;
+
+		struct SBIELOW_EXTRA_DATA {
 			// ...
-		}			extra_data; // 40 bytes
+		}			extra_data; // 52 bytes
 
 		char LdrLoadDll_str[16]			= "LdrLoadDll";
 		char LdrGetProcAddr_str[28]		= "LdrGetProcedureAddress";
 		char NtRaiseHardError_str[20]	= "NtRaiseHardError";
 		char RtlFindActCtx_str[44]		= "RtlFindActivationContextSectionString";
+
 		wchar_t KernelDll_str[13]		= L"kernel32.dll";
-		wchar_t NativeSbieDll_str[]		= L"..\\SbieDll.dll";
-		wchar_t Wow64SbieDll_str[]		= L"..\\32\\SbieDll.dll";
+
+		wchar_t NativeSbieDll_str[]		= L"...\\SbieDll.dll";
+		wchar_t Arm64ecSbieDll_str[]	= L"...\\64\\SbieDll.dll";
+		wchar_t Wow64SbieDll_str[]		= L"...\\32\\SbieDll.dll";
+
+		struct INJECT_DATA {
+			// ...
+		}			InjectData;
 	}
 	*/
 
@@ -357,6 +549,17 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 	extra->RtlFindActCtx_offset = ULONG_DIFF(ptr, extra);
 	ptr += 44 / sizeof(WCHAR);
 
+#ifdef _M_ARM64
+	//
+	// write an ASCII string for LdrQueryImageFileExecutionOptionsEx
+	//
+
+	strcpy((char *)ptr, "LdrQueryImageFileExecutionOptionsEx");
+
+	extra->RtlImageOptionsEx_offset = ULONG_DIFF(ptr, extra);
+	ptr += 40 / sizeof(WCHAR);
+#endif
+
 	//
 	// ntdll loads kernel32 without a path, we will do the same
 	// in our hook for RtlFindActivationContextSectionString,
@@ -377,100 +580,162 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 	wcscpy(ptr, sbie_home);
 	wcscat(ptr, _SbieDll);
 
-	len = wcslen(ptr);
+	len = (ULONG)wcslen(ptr);
 	extra->NativeSbieDll_offset = ULONG_DIFF(ptr, extra);
 	extra->NativeSbieDll_length = len * sizeof(WCHAR);
 	ptr += len + 1;
 
-#ifdef _WIN64
+#ifdef _M_ARM64
+	wcscpy(ptr, sbie_home);
+	wcscat(ptr, L"\\64");
+	wcscat(ptr, _SbieDll);
 
+	len = (ULONG)wcslen(ptr);
+	extra->Arm64ecSbieDll_offset = ULONG_DIFF(ptr, extra);
+	extra->Arm64ecSbieDll_length = len * sizeof(WCHAR);
+	ptr += len + 1;
+#endif
+
+#ifdef _WIN64
 	wcscpy(ptr, sbie_home);
 	wcscat(ptr, L"\\32");
 	wcscat(ptr, _SbieDll);
 
-	len = wcslen(ptr);
+	len = (ULONG)wcslen(ptr);
 	extra->Wow64SbieDll_offset = ULONG_DIFF(ptr, extra);
 	extra->Wow64SbieDll_length = len * sizeof(WCHAR);
 	ptr += len + 1;
-
 #endif _WIN64
+
+
+	// 
+	// Note: the work area was now moved after the extra area 
+	// hence the syscall_data is no longer overwriten
+	//
+
+	extra->InjectData_offset = ULONG_DIFF(ptr, extra);
+
+#ifdef _WIN64
+
+	//
+	// Copy the required non shell code into INJECT_DATA.DetourCode_*
+	//
+
+	memcpy((UCHAR*)ptr + FIELD_OFFSET(INJECT_DATA, DetourCode_x86), SbieDll_ShellCode_x86, sizeof(SbieDll_ShellCode_x86));
+#endif
 
 	//
 	// adjust size of syscall buffer to include path strings
 	//
 
-	*syscall_data = ULONG_DIFF(ptr, syscall_data);
-
-#undef ULONG_DIFF
+	*syscall_data = ULONG_DIFF(ptr, syscall_data) + sizeof(INJECT_DATA);
 
 	m_syscall_data = syscall_data;
 
-	return STATUS_SUCCESS;
-}
 
+#ifdef _M_ARM64
 
-//---------------------------------------------------------------------------
-// FindWOW64_Ntdll
-//---------------------------------------------------------------------------
+	//
+	// create m_syscall_ec_data for arm64 ec
+	//
 
+	if (!m_syscall_ec_data) {
+		syscall_ec_data = (ULONG *)HeapAlloc(GetProcessHeap(), 0, 8192);
+		if (!syscall_ec_data)
+			return STATUS_INSUFFICIENT_RESOURCES;
+		*syscall_ec_data = 0;
+	}
+	else
+		syscall_ec_data = m_syscall_ec_data;
 
-ULONG64 SbieDll_FindWOW64_Ntdll(_In_ HANDLE ProcessHandle)
-{
-	/*typedef NTSTATUS(*P_NtQueryVirtualMemory)(
-		IN  HANDLE ProcessHandle,
-		IN  PVOID BaseAddress,
-		IN  MEMORY_INFORMATION_CLASS MemoryInformationClass,
-		OUT PVOID MemoryInformation,
-		IN  SIZE_T MemoryInformationLength,
-		OUT PSIZE_T ReturnLength OPTIONAL);
-
-	P_NtQueryVirtualMemory __sys_NtQueryVirtualMemory = (P_NtQueryVirtualMemory)GetProcAddress(_Ntdll, "NtQueryVirtualMemory");*/
-
-	static const WCHAR *_Ntdll32 = L"\\syswow64\\ntdll.dll";    // 19 chars
-
-	char buffer[512];
-
-	for (PVOID baseAddress = NULL;;)
+	if (drv_init)
 	{
-		MEMORY_BASIC_INFORMATION basicInfo;
-		if (!NT_SUCCESS(NtQueryVirtualMemory(
-			ProcessHandle,
-			baseAddress,
-			MemoryBasicInformation,
-			&basicInfo,
-			sizeof(MEMORY_BASIC_INFORMATION),
-			NULL
-		)))
-		{
-			break;
+		//
+		// Search the ntdll.dll for teh unexported syscall wrapper functions
+		//
+
+		void* HandleStubHijack = NULL;
+		ULONG* aCode = SbieDll_FindFirstSysCallFunc((ULONG*)Dll_Ntdll, &HandleStubHijack);
+
+		if (aCode == NULL) {
+			SbieApi_Log(2303, L"syscall, wrappers not found");
+			return STATUS_SUCCESS; // we will fail process cration for ec processes later
 		}
 
-		baseAddress = (PVOID)((ULONG_PTR)(baseAddress)+(ULONG_PTR)(basicInfo.RegionSize));
+		void* EcExitThunkPtr = SbieDll_GetEcExitThunkPtr(HandleStubHijack);
 
-		if (NT_SUCCESS(NtQueryVirtualMemory(
-			ProcessHandle,
-			basicInfo.AllocationBase,
-			MemoryMappedFilenameInformation,
-			buffer,
-			sizeof(buffer),
-			NULL
-		)))
-		{
-			UNICODE_STRING *FullImageName = (UNICODE_STRING*)buffer;
-			if (FullImageName->Length > 19 * sizeof(WCHAR)) {
+		//
+		// create the syscall EC data from the ntdll.sll's syscall wrapper functions
+		//
 
-				WCHAR *path = FullImageName->Buffer
-					+ FullImageName->Length / sizeof(WCHAR)
-					- 19;
-				if (_wcsicmp(path, _Ntdll32) == 0) {
+		const ULONG* SyscallPtr = (ULONG*)((ULONG64)syscall_data + sizeof(ULONG) + sizeof(ULONG) + (NATIVE_FUNCTION_SIZE * NATIVE_FUNCTION_COUNT));
+		ULONG* SyscallPtrEC = (ULONG*)((ULONG64)syscall_ec_data + sizeof(ULONG) + sizeof(ULONG) + (NATIVE_FUNCTION_SIZE * NATIVE_FUNCTION_COUNT));
 
-					return (ULONG64)basicInfo.AllocationBase;
-				}
+		for (ULONG pos = 0; pos < 128; aCode++, pos += 4) {
+
+			ULONG SyscallNum = Hook_GetSysCallFunc(aCode, NULL);
+			if (SyscallNum == -1)
+				continue;
+
+			if (SbieDll_GetSysCallOffset(SyscallPtr, SyscallNum)) {
+
+				SyscallPtrEC[0] = SyscallNum;
+				SyscallPtrEC[1] = ULONG_DIFF(aCode, Dll_Ntdll);
+				SyscallPtrEC += 2;
 			}
+
+			//if (aCode[13] != 0 || aCode[14] != 0 || aCode[15] != 0 || aCode[16] != 0)
+			//    break;
+			//aCode += (13 + 3 + 3 + 1);
+			aCode += 16;
+			pos = 0; // reset
 		}
+
+		// end marker
+		SyscallPtrEC[0] = 0;
+		SyscallPtrEC[1] = 0;
+		SyscallPtrEC += 2;
+
+		// put the EcExitThunkPtr at (extra_data_offset - 8)
+		*(ULONG64*)SyscallPtrEC = (ULONG64)EcExitThunkPtr;
+		SyscallPtrEC += sizeof(ULONG64) / sizeof(ULONG);
+
+		*syscall_ec_data = ULONG_DIFF(SyscallPtrEC, syscall_ec_data);
+	}
+	else
+	{
+		*syscall_ec_data = sizeof(ULONG) + sizeof(ULONG); // +248; // total_size 4, extra_data_offset 4, work area sizeof(INJECT_DATA)
 	}
 
-	return 0;
+	//
+	// copy the required functions duplicates to the ec data
+	//
+
+	memcpy(syscall_ec_data + 2, syscall_data + 2, NATIVE_FUNCTION_SIZE * NATIVE_FUNCTION_COUNT);
+
+	//
+	// copy the extra data section
+	//
+
+	len = *syscall_ec_data;
+	ULONG extra_len = syscall_data[0] - syscall_data[1];
+
+	memcpy((UCHAR*)syscall_ec_data + len, extra, extra_len);
+
+
+	//
+	// adjust length and extra offset
+	//
+
+	syscall_ec_data[1] = len;
+	syscall_ec_data[0] = len + extra_len;
+
+	m_syscall_ec_data = syscall_ec_data;
+#endif
+
+#undef ULONG_DIFF
+
+	return STATUS_SUCCESS;
 }
 
 
@@ -484,10 +749,62 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 	//SVC_PROCESS_MSG *msg = (SVC_PROCESS_MSG *)_msg;
 	ULONG errlvl = 0;
 
+	SBIELOW_DATA lowdata;
+	memset(&lowdata, 0, sizeof(lowdata));
+
+	lowdata.flags.init_flags = init_flags;
+
+#ifdef _M_ARM64
+	
+	USHORT ProcessMachine = 0xFFFF;
+	if (Dll_OsBuild >= 22000) { // Win 11
+		PROCESS_MACHINE_INFORMATION info;
+		if(GetProcessInformation(hProcess, (PROCESS_INFORMATION_CLASS)ProcessMachineTypeInfo, &info, sizeof(info)))
+			ProcessMachine = info.ProcessMachine;
+	} 
+	else {  // Win 10
+		IsWow64Process2(hProcess, &ProcessMachine, NULL);
+	}
+
+	if (ProcessMachine != 0xFFFF) {
+        
+		//
+        // Currently 32-bit ARM processes are not supported,
+        // there doesn't seam to be a significant amount of these out there anyways
+        //
+
+        if (ProcessMachine == IMAGE_FILE_MACHINE_ARMNT) {
+            lowdata.flags.is_wow64 = 1;
+			SetLastError(ERROR_NOT_SUPPORTED);
+			errlvl = -1;
+			goto finish;
+        }
+        else if (ProcessMachine == IMAGE_FILE_MACHINE_AMD64) {
+            lowdata.flags.is_arm64ec = 1;
+            lowdata.flags.is_xtajit = 1;
+        }
+        else if (ProcessMachine == IMAGE_FILE_MACHINE_I386) {
+            lowdata.flags.is_wow64 = 1;
+            lowdata.flags.is_xtajit = 1;
+        }
+	}
+	else {
+
+		SetLastError(ERROR_INVALID_FUNCTION);
+		errlvl = 0xCC;
+		goto finish;
+	}
+
+#endif
+
 	//
 	// verify all aspects of initialization were successful
 	//
-	if ((!m_sbielow_ptr) || (!m_syscall_data)) {
+	if ((!m_sbielow_ptr) || (!m_syscall_data)
+#ifdef _M_ARM64
+			|| (lowdata.flags.is_arm64ec && ((!m_LdrInitializeThunkEC) || (!__sys_VirtualAlloc2) || (!m_syscall_ec_data)))
+#endif
+		) {
 
 		SetLastError(ERROR_NOT_READY);
 		errlvl = 0xFF;
@@ -495,21 +812,48 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 	}
 
 	//
-	// prepare the lowdata parameters area to copy into target process
+	// prepare the lowdata paramters area to copy into target process
 	//
 
-	SBIELOW_DATA lowdata;
-	memzero(&lowdata, sizeof(lowdata));
-
-	lowdata.flags.init_flags = init_flags;
-
-#ifdef _WIN64
-	if (lowdata.flags.is_wow64)
-		lowdata.ntdll_wow64_base = SbieDll_FindWOW64_Ntdll(hProcess);
-#endif
 	lowdata.ntdll_base = (ULONG64)(ULONG_PTR)Dll_Ntdll;
 
+#ifdef _WIN64
+	static const WCHAR *_Ntdll32 = L"\\syswow64\\ntdll.dll";    // 19 chars
+#ifdef _M_ARM64
+	static const WCHAR *_NChpe32 = L"\\SyChpe32\\ntdll.dll";    // 19 chars
+
+	//
+	// Sandboxie requires CHPE to be disabled for x86 applications
+	// for simplicity and compatybility with forced processes we disable CHPE globally using the Wow64\x86\xtajit key
+	// alternatively we can hook LdrQueryImageFileExecutionOptionsEx from LowLevel.dll
+	// and return 0 for the L"LoadCHPEBinaries" option
+	// 
+	// HKLM\SOFTWARE\Microsoft\Wow64\x86\xtajit -> LoadCHPEBinaries = 0
+	// HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\{image_name} -> LoadCHPEBinaries = 0
+	// HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers -> {full_image_path} = "~ ARM64CHPEDISABLED"
+	//  
+#endif
+
+	if (lowdata.flags.is_wow64) {
+		lowdata.ntdll_wow64_base = FindDllBase64(hProcess, _Ntdll32);
+#ifdef _M_ARM64
+		if (!lowdata.ntdll_wow64_base) {
+			//lowdata.ntdll_wow64_base = FindDllBase64(hProcess, _NChpe32);
+			//if (lowdata.ntdll_wow64_base) 
+			//	lowdata.flags.is_chpe32 = 1;
+			//else {
+				SetLastError(ERROR_NOT_SUPPORTED);
+				errlvl = -2;
+				goto finish;
+			//}
+		}
+#endif
+	}
+#endif
+
 	lowdata.RealNtDeviceIoControlFile = (ULONG64)GetProcAddress((HMODULE)lowdata.ntdll_base, "NtDeviceIoControlFile");
+	lowdata.NativeNtRaiseHardError = (ULONG64)GetProcAddress((HMODULE)lowdata.ntdll_base, "NtRaiseHardError");
+
 	//
 	// on 64-bit Windows 8, there might be a difference of more than
 	// 2GB bytes between ntdll and the injected SbieLow, which requires
@@ -519,6 +863,19 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 		lowdata.flags.is_win10 = 1;
 	}
 
+#ifdef _M_ARM64
+	//
+	// Windows on Arm64 offers only 16 bytes per syscall for our detour,
+	// not enough to store the syscall number (4), load (4) a 64 bit address (8) and jump to it (4).
+	// 
+	// Hence we allocate the memory containing SystemServiceAsm in the lower 4 GB's
+	// this way we save 4 bytes on the address and can fit in the 16 bytes available
+	// 
+	// An alternative aproche is to use the jump table as 16 bytes are just enough for 
+	// a 64 bit detour, and in the jump table we have as much space per syscall as we need.
+	//
+#endif
+
 	SIZE_T lowLevel_size;
 #ifdef _WIN64 
 	BOOLEAN use_jump_Table = FALSE;
@@ -527,13 +884,18 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 	else
 #endif
 		lowLevel_size = m_sbielow_len;
-
-	void *remote_addr = SbieDll_InjectLow_CopyCode(hProcess, lowLevel_size, lowdata.LdrInitializeThunk_tramp, sizeof(lowdata.LdrInitializeThunk_tramp));
+		
+	void *remote_addr = SbieDll_InjectLow_CopyCode(hProcess, lowLevel_size, lowdata.LdrInitializeThunk_tramp, sizeof(lowdata.LdrInitializeThunk_tramp)
+#ifdef _M_ARM64
+		, (BOOLEAN)lowdata.flags.is_arm64ec
+#endif
+	);
 	if (!remote_addr) {
 		errlvl = 0x33;
 		goto finish;
 	}
-	//   if (lowdata.is_wow64 && (m_addr_high != m_addr_high_32))
+
+#ifndef _M_ARM64
 #ifdef _WIN64
 	lowdata.flags.long_diff = 1;
 	if (SbieDll_Has32BitJumpHorizon((void *)m_LdrInitializeThunk, remote_addr)) {
@@ -541,6 +903,7 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 	}
 #else
 	lowdata.flags.long_diff = 0;
+#endif
 #endif
 
 	if (dup_drv_handle)
@@ -568,7 +931,8 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 	// lowdata area (see also core/drv/syscall.c and core/low/lowdata.h)
 	//
 
-	memcpy(lowdata.NtDelayExecution_code, &m_syscall_data[2], (32 * 4));
+	memcpy(lowdata.NtDelayExecution_code, &m_syscall_data[2], (NATIVE_FUNCTION_SIZE * NATIVE_FUNCTION_COUNT));
+	// lowdata.NtDelayExecution_code
 	// lowdata.NtDeviceIoControlFile_code
 	// lowdata.NtFlushInstructionCache_code
 	// lowdata.NtProtectVirtualMemory_code
@@ -591,7 +955,11 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 		+ FIELD_OFFSET(SBIELOW_DATA, LdrInitializeThunk_tramp);
 
 	if (!SbieDll_InjectLow_BuildTramp(lowdata.flags.long_diff == 1,
-		lowdata.LdrInitializeThunk_tramp, tramp_remote_addr)) {
+		lowdata.LdrInitializeThunk_tramp, tramp_remote_addr
+#ifdef _M_ARM64
+			, (BOOLEAN)lowdata.flags.is_arm64ec
+#endif
+		)) {
 
 		//UCHAR *code = lowdata.LdrInitializeThunk_tramp;
 		//SbieApi_LogEx(msg->session_id, 2335,
@@ -611,7 +979,11 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 	// copy the syscall data buffer (m_syscall_data) to target process
 	//
 
-	void *remote_syscall_data = SbieDll_InjectLow_CopySyscalls(hProcess);
+	void* remote_syscall_data = SbieDll_InjectLow_CopySyscalls(hProcess, (BOOLEAN)lowdata.flags.is_wow64
+#ifdef _M_ARM64
+		, (BOOLEAN)lowdata.flags.is_arm64ec
+#endif
+	);
 	if (!remote_syscall_data) {
 
 		errlvl = 0x55;
@@ -636,7 +1008,11 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 	//
 	// Removed hard coded dependency on (.HEAD.00). No longer need to add 8 to
 	// the remote_addr
-	if (!SbieDll_InjectLow_WriteJump(hProcess, (UCHAR *)remote_addr + m_sbielow_start_offset, lowdata.flags.long_diff == 1, &lowdata)) {
+	if (!SbieDll_InjectLow_WriteJump(hProcess, (UCHAR *)remote_addr + m_sbielow_start_offset, lowdata.flags.long_diff == 1
+#ifdef _M_ARM64
+		, (BOOLEAN)lowdata.flags.is_arm64ec
+#endif
+	)) {
 		errlvl = 0x77;
 		goto finish;
 	}
@@ -648,6 +1024,54 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 finish:
 
 	return errlvl;
+}
+
+
+//---------------------------------------------------------------------------
+// InjectLow_AllocMemory
+//---------------------------------------------------------------------------
+
+
+_FX void* InjectLow_AllocMemory(HANDLE hProcess, SIZE_T size, BOOLEAN executable
+#ifdef _M_ARM64
+	, BOOLEAN use_arm64ec
+#endif
+) {
+	SIZE_T region_size = size;
+	void *remote_addr = NULL;
+
+#ifdef _M_ARM64
+	if (use_arm64ec && executable) 
+	{
+		MEM_EXTENDED_PARAMETER Parameter = { 0 };
+		Parameter.Type = MemExtendedParameterAttributeFlags;
+		Parameter.ULong64 = MEM_EXTENDED_PARAMETER_EC_CODE;
+
+		for (UINT_PTR base_addr = 0x10000; !remote_addr; base_addr <<= 1) {
+
+			remote_addr = __sys_VirtualAlloc2(hProcess, (void*)base_addr, region_size, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE, &Parameter, 1);
+		}
+	} 
+	else 
+#endif
+
+	//
+	// allocate virtual memory somewhere in the process.  to force an
+	// address in the low 24-bits of the address space, we have to use
+	// NtAllocateVirtalMemory and specify ZeroBits = 8 (32 - 8 = 24)
+	//
+
+	//for (int i = 8; !remote_addr && i > 2; i--) {
+	for (int i = 8; !remote_addr && i >= 0; i--) {
+		NTSTATUS status = NtAllocateVirtualMemory(hProcess, &remote_addr, i, &region_size, MEM_COMMIT | MEM_RESERVE, executable ? PAGE_EXECUTE_READWRITE : PAGE_READWRITE);
+		if (!NT_SUCCESS(status)) {
+			SetLastError(RtlNtStatusToDosError(status));
+			remote_addr = NULL;
+			region_size = size;
+		}
+	}
+
+	return remote_addr;
 }
 
 
@@ -703,20 +1127,25 @@ _FX HANDLE SbieDll_InjectLow_SendHandle(HANDLE hProcess)
 //---------------------------------------------------------------------------
 
 
-_FX void *SbieDll_InjectLow_CopyCode(HANDLE hProcess, SIZE_T lowLevel_size, UCHAR *code, ULONG code_len)
-{
-	SIZE_T region_size;
-	void *remote_addr = NULL;
-	region_size = lowLevel_size;
+_FX void *SbieDll_InjectLow_CopyCode(HANDLE hProcess, SIZE_T lowLevel_size, UCHAR *code, ULONG code_len
+#ifdef _M_ARM64
+	, BOOLEAN use_arm64ec
+#endif
+) {
+	void* remote_addr;
+	void* pLdrInitializeThunk = (void*)m_LdrInitializeThunk;
 
-	//for (int i = 8; !remote_addr && i > 2; i--) {
-	for (int i = 8; !remote_addr && i >= 0; i--) {
-		NTSTATUS status = NtAllocateVirtualMemory(hProcess, &remote_addr, i, &region_size, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
-		if (!NT_SUCCESS(status)) {
-			remote_addr = NULL;
-			region_size = lowLevel_size;
-		}
-	}
+#ifdef _M_ARM64
+	if (use_arm64ec) 
+		pLdrInitializeThunk = (void*)m_LdrInitializeThunkEC;
+#endif
+
+	remote_addr = InjectLow_AllocMemory(hProcess, lowLevel_size, TRUE
+#ifdef _M_ARM64
+		, use_arm64ec
+#endif
+	);
+
 	if (remote_addr) {
 
 		//
@@ -742,7 +1171,7 @@ _FX void *SbieDll_InjectLow_CopyCode(HANDLE hProcess, SIZE_T lowLevel_size, UCHA
 			OutputDebugStringA(buffer);
 			*/
 			vm_ok = ReadProcessMemory(
-				hProcess, (void *)m_LdrInitializeThunk, code,
+				hProcess, pLdrInitializeThunk, code,
 				len1, &len2);
 
 			if (vm_ok && len1 == len2) {
@@ -762,8 +1191,27 @@ _FX void *SbieDll_InjectLow_CopyCode(HANDLE hProcess, SIZE_T lowLevel_size, UCHA
 
 
 _FX BOOLEAN SbieDll_InjectLow_BuildTramp(
-	BOOLEAN long_diff, UCHAR *code, ULONG_PTR addr)
-{
+	BOOLEAN long_diff, UCHAR *code, ULONG_PTR addr
+#ifdef _M_ARM64
+	, BOOLEAN use_arm64ec
+#endif
+) {
+
+#ifdef _M_ARM64
+
+	//
+	// code contains already a copy of LdrInitializeThunk (48 bytes)
+	// here we need to add the jump to the original at the right location
+	//
+
+	ULONG code_len = 16; // the length of the jump to detour code
+
+	ULONG* aCode = (ULONG*)(code + code_len);
+	*aCode++ = 0x58000048;	// ldr x8, 8
+	*aCode++ = 0xD61F0100;	// br x8
+	*(DWORD64*)aCode = (use_arm64ec ? m_LdrInitializeThunkEC : m_LdrInitializeThunk) + code_len;
+
+#else
 
 #define IS_1BYTE(a)     (                 code[offset + 0] == (a))
 #define IS_2BYTE(a,b)   (IS_1BYTE(a)   && code[offset + 1] == (b))
@@ -771,7 +1219,7 @@ _FX BOOLEAN SbieDll_InjectLow_BuildTramp(
 
 	//
 	// skip past several bytes in the code copied from the top of the
-	// LdrInitializeThunk function, where we will inject a jmp sequence.
+	// LdrInitializeThunk fuction, where we will inject a jmp sequence.
 	//
 	// a simple E9 relative JMP five byte instruction in most cases,
 	// a slightly longer seven byte version in case there is a long
@@ -858,7 +1306,7 @@ _FX BOOLEAN SbieDll_InjectLow_BuildTramp(
 
 		if (Dll_Windows >= 10) {
 			code[offset] = 0x48;
-			code[offset + 1] = 0xE9;
+			code[offset + 1] = 0xE9;					// jmp
 			*(ULONG *)&code[offset + 2] = (ULONG)
 				(m_LdrInitializeThunk + offset - (addr + offset + 6));
 
@@ -876,11 +1324,14 @@ _FX BOOLEAN SbieDll_InjectLow_BuildTramp(
 		*(ULONG64 *)&code[offset + 6] = m_LdrInitializeThunk + offset;
 	}
 #else
-	code[offset] = 0xE9;
+	code[offset] = 0xE9;								// jmp 
 
 	*(ULONG *)&code[offset + 1] = (ULONG)
 		(m_LdrInitializeThunk + offset - (addr + offset + 5));
 #endif
+
+#endif
+
 	return TRUE;
 }
 
@@ -890,42 +1341,39 @@ _FX BOOLEAN SbieDll_InjectLow_BuildTramp(
 //---------------------------------------------------------------------------
 
 
-_FX void *SbieDll_InjectLow_CopySyscalls(HANDLE hProcess)
-{
-	//
-	// allocate virtual memory somewhere in the process.  to force an
-	// address in the low 24-bits of the address space, we have to use
-	// NtAllocateVirtalMemory and specify ZeroBits = 8 (32 - 8 = 24)
-	//
-
+_FX void *SbieDll_InjectLow_CopySyscalls(HANDLE hProcess, BOOLEAN is_wow64
+#ifdef _M_ARM64
+	, BOOLEAN use_arm64ec
+#endif
+) {
 	void *remote_addr = NULL;
-	SIZE_T region_size = *m_syscall_data;
-	int i;
-	NTSTATUS status;
+	ULONG* data;
+#ifdef _M_ARM64
+	if(use_arm64ec)
+		data = m_syscall_ec_data;
+	else
+#endif
+		data = m_syscall_data;
+	SIZE_T region_size = *data;
 
-	//for (i = 8; !remote_addr && i > 2; i--) {
-	for (i = 8; !remote_addr && i >= 0; i--) {
-		status = NtAllocateVirtualMemory(hProcess, &remote_addr, i, &region_size, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
-		if (!NT_SUCCESS(status)) {
-			remote_addr = NULL;
-			region_size = *m_syscall_data;
-		}
-	}
+	remote_addr = InjectLow_AllocMemory(hProcess, region_size
+		, is_wow64 // we copy the detour code into this area, hence executable = TRUE
+#ifdef _M_ARM64
+		//|| use_arm64ec
+		, FALSE
+#endif
+	);
 
-	if (!NT_SUCCESS(status)) {
-		remote_addr = NULL;
-		SetLastError(RtlNtStatusToDosError(status));
-	}
 	if (remote_addr) {
 
 		//
 		// copy the syscall data buffer into the new process
 		//
 
-		SIZE_T len1 = *m_syscall_data;
+		SIZE_T len1 = *data;
 		SIZE_T len2 = 0;
 		BOOL vm_ok = WriteProcessMemory(
-			hProcess, remote_addr, m_syscall_data, len1, &len2);
+			hProcess, remote_addr, data, len1, &len2);
 		if (vm_ok && len1 == len2) {
 
 			return remote_addr;
@@ -970,6 +1418,7 @@ _FX BOOLEAN SbieDll_InjectLow_CopyData(
 	return FALSE;
 }
 
+#ifndef _M_ARM64
 #ifdef _WIN64
 
 _FX BOOLEAN SbieDll_Has32BitJumpHorizon(void * target, void * detour)
@@ -1090,23 +1539,40 @@ _FX void * SbieDll_InjectLow_getPage(HANDLE hProcess, void *remote_addr)
 	return NULL;
 }
 #endif  //#ifdef _WIN64
+#endif //#ifndef _M_ARM64
 
 //---------------------------------------------------------------------------
 // InjectLow_WriteJump
 //---------------------------------------------------------------------------
-_FX BOOLEAN SbieDll_InjectLow_WriteJump(HANDLE hProcess, void *remote_addr, BOOLEAN long_diff, void *localdata)
-{
+_FX BOOLEAN SbieDll_InjectLow_WriteJump(HANDLE hProcess, void *remote_addr, BOOLEAN long_diff
+#ifdef _M_ARM64
+	, BOOLEAN use_arm64ec
+#endif
+) {
 	//
 	// prepare a short prolog code that jumps to the injected SbieLow
 	//
-	UCHAR jump_code[16];
+	UCHAR jump_code[20];
 	void * detour = (void *)remote_addr;
 	UCHAR *func = (UCHAR *)((ULONG_PTR)m_LdrInitializeThunk);
 	SIZE_T len1;
 	BOOL myVM;
 	ULONG myProtect;
 
-#ifdef _WIN64
+#ifdef _M_ARM64
+
+	if(use_arm64ec)
+		func = (UCHAR *)((ULONG_PTR)m_LdrInitializeThunkEC);
+
+	ULONG* aCode = (ULONG*)jump_code;
+	//*aCode++ = 0xD43E0000;	// brk #0xF000
+	*aCode++ = 0x58000048;	// ldr x8, 8
+	*aCode++ = 0xD61F0100;	// br x8
+	*(DWORD64*)aCode = (DWORD64)detour; aCode += 2;
+
+	len1 = (UCHAR*)aCode - jump_code;
+
+#elif _WIN64
 	if (!long_diff) {
 		if (Dll_Windows >= 10) {
 			len1 = 6;
@@ -1155,6 +1621,7 @@ _FX BOOLEAN SbieDll_InjectLow_WriteJump(HANDLE hProcess, void *remote_addr, BOOL
 	*(ULONG *)(jump_code + 1) = (ULONG)((ULONG_PTR)detour - (m_LdrInitializeThunk + 5));
 	//remote_addr = (void *)m_LdrInitializeThunk;
 #endif
+
 	 //
 	 // modify the bytes at LdrInitializeThunk with the prolog code
 	 //

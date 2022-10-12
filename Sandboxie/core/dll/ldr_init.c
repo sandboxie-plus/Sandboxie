@@ -30,13 +30,20 @@
 //---------------------------------------------------------------------------
 
 
-#ifdef _WIN64
+#ifdef _M_ARM64
+
+
+#define LDR_INJECT_SETTING_NAME             L"InjectDllARM64"
+#define LDR_HOST_INJECT_SETTING_NAME        L"HostInjectDllARM64"
+#define LDR_INJECT_NUM_SAVE_BYTES   16
+
+
+#elif _WIN64
 
 
 #define LDR_INJECT_SETTING_NAME             L"InjectDll64"
 #define LDR_HOST_INJECT_SETTING_NAME        L"HostInjectDll64"
 #define LDR_INJECT_NUM_SAVE_BYTES   12
-
 
 
 #else ! _WIN64
@@ -747,7 +754,16 @@ _FX void Ldr_Inject_Init(BOOLEAN bHostInject)
     if (VirtualProtect(entrypoint, LDR_INJECT_NUM_SAVE_BYTES,
                        PAGE_EXECUTE_READWRITE, &Ldr_Inject_OldProtect)) {
 
-#ifdef _WIN64
+#ifdef _M_ARM64
+
+        ULONG* aCode = (ULONG*)entrypoint;
+	    *aCode++ = 0x58000048;	// ldr x8, 8
+	    *aCode++ = 0xD63F0100;	// blr x8
+        *(ULONG_PTR*)aCode = (ULONG_PTR)Ldr_Inject_Entry64;
+
+        NtFlushInstructionCache(GetCurrentProcess(), entrypoint, LDR_INJECT_NUM_SAVE_BYTES);
+
+#elif _WIN64
 
         entrypoint[0] = 0x48;           // mov rax, Ldr_Inject_Entry64
         entrypoint[1] = 0xB8;
@@ -781,7 +797,11 @@ _FX void Ldr_Inject_Entry(ULONG_PTR *pRetAddr)
     // restore correct code sequence at the entrypoint
     //
 
+#ifdef _M_ARM64
+    entrypoint = ((UCHAR *)*pRetAddr) - (LDR_INJECT_NUM_SAVE_BYTES - sizeof(ULONG_PTR)); // after blr comes the 64bit address
+#else
     entrypoint = ((UCHAR *)*pRetAddr) - LDR_INJECT_NUM_SAVE_BYTES;
+#endif
     *pRetAddr = (ULONG_PTR)entrypoint;
 
     // If entrypoint hook is different, need to adjust offset. Copying the original byets won't have the correct offset.
@@ -804,6 +824,10 @@ _FX void Ldr_Inject_Entry(ULONG_PTR *pRetAddr)
 
     VirtualProtect(entrypoint, LDR_INJECT_NUM_SAVE_BYTES,
                    Ldr_Inject_OldProtect, &dummy_prot);
+
+#ifdef _M_ARM64
+    NtFlushInstructionCache(GetCurrentProcess(), entrypoint, LDR_INJECT_NUM_SAVE_BYTES);
+#endif
 
     if (!g_bHostInject)
     {

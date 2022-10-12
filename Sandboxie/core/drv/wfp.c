@@ -34,7 +34,12 @@
 
 extern DEVICE_OBJECT *Api_DeviceObject;
 
-#define NDIS61 1
+#ifdef _M_ARM64
+#define NDIS630 1 // windows 8.1
+#else
+#define NDIS61 1 // windows 7
+#endif
+
 
 #include "Ntifs.h"
 #include <ntddk.h>				// Windows Driver Development Kit

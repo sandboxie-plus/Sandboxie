@@ -29,7 +29,9 @@
 #include "util.h"
 #include "session.h"
 #include "token.h"
+#ifndef _M_ARM64
 #include "hook.h"
+#endif
 #include "conf.h"
 #include "common/my_version.h"
 

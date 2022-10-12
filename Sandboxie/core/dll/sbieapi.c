@@ -208,18 +208,34 @@ _FX LONG SbieApi_Call(ULONG api_code, LONG arg_num, ...)
 _FX LONG SbieApi_GetVersion(
     WCHAR *out_version)     // WCHAR [16]
 {
+    return SbieApi_GetVersionEx(out_version, NULL);
+}
+
+
+//---------------------------------------------------------------------------
+// SbieApi_GetVersionEx
+//---------------------------------------------------------------------------
+
+
+_FX LONG SbieApi_GetVersionEx(
+    WCHAR* version_string,  // WCHAR [16]
+    ULONG* abi_version)
+{
     NTSTATUS status;
     __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
     API_GET_VERSION_ARGS *args = (API_GET_VERSION_ARGS *)parms;
 
     memzero(parms, sizeof(parms));
     args->func_code = API_GET_VERSION;
-    args->string.val64 = (ULONG_PTR)out_version;
+    args->string.val = version_string;
+    args->abi_ver.val = abi_version;
 
     status = SbieApi_Ioctl(parms);
 
-    if (! NT_SUCCESS(status))
-        wcscpy(out_version, L"unknown");
+    if (! NT_SUCCESS(status)){
+        if (version_string) wcscpy(version_string, L"unknown");
+        if (abi_version) *abi_version = 0;
+    }
 
     return status;
 }

@@ -620,6 +620,10 @@ _FX BOOLEAN Scm_Init_AdvApi(HMODULE module)
 
 BOOLEAN Scm_HookRegisterServiceCtrlHandler(HMODULE module)
 {
+
+#ifndef _M_ARM64
+    // $HookHack$ - Custom, not automated, Hook no longer applyes to later windows 10 builds
+#ifdef _WIN64
     static const UCHAR PrologW[] = {
         0x45, 0x33, 0xC9,                       // xor r9d,r9d
         0x45, 0x33, 0xC0,                       // xor r8d,r8d
@@ -630,8 +634,6 @@ BOOLEAN Scm_HookRegisterServiceCtrlHandler(HMODULE module)
         0xE9                                    // jmp ...
     };
     BOOLEAN HookedRegisterServiceCtrlHandler = FALSE;
-
-#ifdef _WIN64
 
     //
     // on 64-bit Windows, ADVAPI32!RegisterServiceCtrlHandlerW is an 11-byte
@@ -662,19 +664,19 @@ BOOLEAN Scm_HookRegisterServiceCtrlHandler(HMODULE module)
         }
     }
 
+    if (HookedRegisterServiceCtrlHandler)
+        return TRUE;
 #endif _WIN64
+#endif
 
     //
     // otherwise hook the four functions normally
     //
 
-    if (! HookedRegisterServiceCtrlHandler) {
-
-        SBIEDLL_HOOK_SCM(RegisterServiceCtrlHandlerA);
-        SBIEDLL_HOOK_SCM(RegisterServiceCtrlHandlerW);
-        SBIEDLL_HOOK_SCM(RegisterServiceCtrlHandlerExA);
-        SBIEDLL_HOOK_SCM(RegisterServiceCtrlHandlerExW);
-    }
+    SBIEDLL_HOOK_SCM(RegisterServiceCtrlHandlerA);
+    SBIEDLL_HOOK_SCM(RegisterServiceCtrlHandlerW);
+    SBIEDLL_HOOK_SCM(RegisterServiceCtrlHandlerExA);
+    SBIEDLL_HOOK_SCM(RegisterServiceCtrlHandlerExW);
 
     return TRUE;
 }

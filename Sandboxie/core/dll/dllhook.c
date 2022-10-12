@@ -24,8 +24,13 @@
 #define NOGDI
 #include "dll.h"
 #include "hook.h"
+#include "debug.h"
+#include "trace.h"
 #include "common/pool.h"
 #include "common/pattern.h"
+#if defined(_M_ARM64) || defined(_M_ARM64EC)
+#include "common/arm64_asm.h"
+#endif
 #include "common/hook_util.c"
 
 //#include <stdio.h>
@@ -56,18 +61,8 @@ typedef struct _VECTOR_TABLE {
   int maxEntries;
 } VECTOR_TABLE;
 
-//BOOL bVTableEable = TRUE;
-//#define NUM_VTABLES 0x10 
 #define VTABLE_SIZE 0x4000 //16k enough for 2048 8 byte entrys
 
-//VECTOR_TABLE SbieDllVectorTable[NUM_VTABLES] = {
-//    {0,0,0},{0,0,0},{0,0,0},{0,0,0},
-//    {0,0,0},{0,0,0},{0,0,0},{0,0,0},
-//    {0,0,0},{0,0,0},{0,0,0},{0,0,0},
-//    {0,0,0},{0,0,0},{0,0,0},{0,0,0}
-//};
-
-//CRITICAL_SECTION  VT_CriticalSection;
 #endif _WIN64
 extern ULONG Dll_Windows;
 
@@ -76,6 +71,9 @@ typedef struct _MODULE_HOOK {
     LIST_ELEM   list_elem;
 
     HMODULE     module;
+#ifdef _M_ARM64EC
+    ULONG       tag;
+#endif
     POOL*       pool;
 #ifdef _WIN64
     LIST        vTables;
@@ -85,6 +83,13 @@ typedef struct _MODULE_HOOK {
 LIST Dll_ModuleHooks;
 CRITICAL_SECTION  Dll_ModuleHooks_CritSec;
 
+#ifdef _M_ARM64EC
+P_NtAllocateVirtualMemoryEx __sys_NtAllocateVirtualMemoryEx = NULL;
+#endif
+
+static const WCHAR *_fmt1 = L"%s (%d)";
+static const WCHAR *_fmt2 = L"%s (%d, %d)";
+
 
 //---------------------------------------------------------------------------
 // SbieApi_HookInit
@@ -93,13 +98,204 @@ CRITICAL_SECTION  Dll_ModuleHooks_CritSec;
 
 _FX void SbieDll_HookInit()
 {
-//#ifdef _WIN64
-//    InitializeCriticalSection(&VT_CriticalSection);
-//#endif
     InitializeCriticalSection(&Dll_ModuleHooks_CritSec);
     List_Init(&Dll_ModuleHooks);
+
+#ifdef _M_ARM64EC
+    __sys_NtAllocateVirtualMemoryEx = (P_NtAllocateVirtualMemoryEx)GetProcAddress(Dll_Ntdll, "NtAllocateVirtualMemoryEx");
+#endif
 }
 
+
+//---------------------------------------------------------------------------
+// SbieDll_GetModuleHookAndLock
+//---------------------------------------------------------------------------
+
+
+_FX MODULE_HOOK* SbieDll_GetModuleHookAndLock(HMODULE module, ULONG tag)
+{
+    //
+    // Get the module hook resource for this module, if module is NULL
+    // its NTDLL or a special case
+    //
+
+    EnterCriticalSection(&Dll_ModuleHooks_CritSec);
+
+    MODULE_HOOK* mod_hook = List_Head(&Dll_ModuleHooks);
+    while (mod_hook) {
+
+        if (mod_hook->module == module
+#ifdef _M_ARM64EC
+            && mod_hook->tag == tag
+#endif
+        ) 
+            break;
+
+        mod_hook = List_Next(mod_hook);
+    }
+
+    if (!mod_hook) {
+        mod_hook = Dll_Alloc(sizeof(MODULE_HOOK));
+        if (!mod_hook) 
+            return NULL;
+        mod_hook->module = module;
+#ifdef _M_ARM64EC
+        mod_hook->tag = tag;
+#endif
+        mod_hook->pool = NULL;
+#ifdef _WIN64
+        List_Init(&mod_hook->vTables);
+#endif
+        List_Insert_Before(&Dll_ModuleHooks, NULL, mod_hook); // insert first as we probably will use it often in the next few calls
+    }
+    if (!mod_hook->pool) {
+        mod_hook->pool = Pool_CreateTagged(tag);
+        if (!mod_hook->pool) 
+            return NULL;
+    }
+    
+    return mod_hook;
+}
+
+//---------------------------------------------------------------------------
+// SbieDll_GetHookTable
+//---------------------------------------------------------------------------
+
+
+#ifdef _WIN64
+_FX VECTOR_TABLE* SbieDll_GetHookTable(MODULE_HOOK* mod_hook, ULONG_PTR target, __int64 maxDelta, BOOLEAN longRange)
+{
+    ULONG_PTR diff;
+    __int64 delta;
+    BOOLEAN defaultRange = FALSE;
+
+    VECTOR_TABLE* ptrVTable = List_Head(&mod_hook->vTables);
+    for (;;) {
+        if (!ptrVTable || !ptrVTable->offset) { // if there is no vtable create it
+            ULONG_PTR tempAddr;
+            ULONG_PTR step = 0x20000;// + VTABLE_SIZE;
+            ULONG_PTR max_attempts = 0x4000000 / step;
+
+            // optimization for windows 7 and low memory DLL's
+            if (target < 0x80000000 && (target > 0x4000000)) {
+                step = 0x200000;
+            }
+            // optimization for windows 8.1
+            else if (target < 0x4000000) {
+                step *= -1;
+            }
+            else if (target < 0x10000000000) {
+                step *= -1;
+            }
+            else if(longRange) {
+                defaultRange = TRUE;
+            }
+
+            // sprintf(buffer,"VTable Alloc: target = %p, step = %p, default = %d\n",target,step,defaultRange);
+            // OutputDebugStringA(buffer);
+            tempAddr = (target & 0xfffffffffffe0000) - (step << 2);
+
+            if (defaultRange) {
+                tempAddr -= 0x20000000;
+            }
+
+            if (!ptrVTable) {
+
+                ptrVTable = Pool_Alloc(mod_hook->pool, sizeof(VECTOR_TABLE));
+                if (!ptrVTable) {
+                    //SbieApi_Log(2303, _fmt1, SourceFuncName, 53);
+                    break;
+                }
+
+                memset(ptrVTable, 0, sizeof(VECTOR_TABLE));
+
+                List_Insert_After(&mod_hook->vTables, NULL, ptrVTable);
+            }
+
+            for (; !ptrVTable->offset && max_attempts; tempAddr -= step, max_attempts--) {
+
+                PVOID RegionBase = (PVOID)tempAddr;
+                SIZE_T RegionSize = VTABLE_SIZE;
+#ifdef  _M_ARM64EC
+                MEM_EXTENDED_PARAMETER Parameter = { 0 };
+	            Parameter.Type = MemExtendedParameterAttributeFlags;
+	            Parameter.ULong64 = MEM_EXTENDED_PARAMETER_EC_CODE;
+
+                if (NT_SUCCESS(__sys_NtAllocateVirtualMemoryEx(NtCurrentProcess(), &RegionBase, &RegionSize, MEM_COMMIT | MEM_RESERVE | MEM_TOP_DOWN, PAGE_EXECUTE_READWRITE, &Parameter, 1)))
+                    ptrVTable->offset = RegionBase;
+#else
+                if (NT_SUCCESS(NtAllocateVirtualMemory(NtCurrentProcess(), &RegionBase, 0, &RegionSize, MEM_RESERVE | MEM_COMMIT | MEM_TOP_DOWN, PAGE_EXECUTE_READWRITE)))
+                    ptrVTable->offset = RegionBase;
+#endif
+                //ptrVTable->offset = VirtualAlloc((void*)tempAddr, VTABLE_SIZE, MEM_COMMIT | MEM_RESERVE | MEM_TOP_DOWN, PAGE_EXECUTE_READWRITE); // PAGE_READWRITE
+                //  sprintf(buffer,"VTable Offset: target = %p, offset = %p, tryAddress = %p, attempt = 0x%x\n",target,ptrVTable->offset,tempAddr,max_attempts);
+                //  OutputDebugStringA(buffer);
+            }
+
+            // brute force fallback
+            if (!ptrVTable->offset) {
+
+                step = VTABLE_SIZE;
+                max_attempts = 0x40000000 / step; // 1 gig
+                ULONG_PTR cur_attempt = 0;
+
+                tempAddr = ((ULONG_PTR)target & 0xfffffffffffe0000);
+
+                for (; !ptrVTable->offset && cur_attempt < (max_attempts * 2); cur_attempt++) {
+
+                    ULONG_PTR curAddr = tempAddr + (((cur_attempt + 2)/2) * step);
+                    if((cur_attempt % 2) == 0) // search booth directions alternating
+                        curAddr *= -1;
+
+                    PVOID RegionBase = (PVOID)curAddr;
+                    SIZE_T RegionSize = VTABLE_SIZE;
+#ifdef  _M_ARM64EC
+                    MEM_EXTENDED_PARAMETER Parameter = { 0 };
+	                Parameter.Type = MemExtendedParameterAttributeFlags;
+	                Parameter.ULong64 = MEM_EXTENDED_PARAMETER_EC_CODE;
+
+                    if (NT_SUCCESS(__sys_NtAllocateVirtualMemoryEx(NtCurrentProcess(), &RegionBase, &RegionSize, MEM_COMMIT | MEM_RESERVE | MEM_TOP_DOWN, PAGE_EXECUTE_READWRITE, &Parameter, 1)))
+                        ptrVTable->offset = RegionBase;
+#else
+                    if (NT_SUCCESS(NtAllocateVirtualMemory(NtCurrentProcess(), &RegionBase, 0, &RegionSize, MEM_RESERVE | MEM_COMMIT | MEM_TOP_DOWN, PAGE_EXECUTE_READWRITE)))
+                        ptrVTable->offset = RegionBase;
+#endif
+                }
+            }
+
+            ptrVTable->index = 0;
+            ptrVTable->maxEntries = VTABLE_SIZE / sizeof(void*);
+        }
+
+        if (ptrVTable && ptrVTable->offset) { // check if we have a vtable
+
+            diff = (ULONG_PTR) &((ULONG_PTR *)ptrVTable->offset)[ptrVTable->index];
+            diff = diff - target;
+            delta = diff;
+            delta < 0 ? delta *= -1 : delta;
+
+            // is DetourFunc in the jump range
+            if (delta < maxDelta && ptrVTable->index <= ptrVTable->maxEntries) {
+                // found a good table, break and return it
+                break;
+            }
+        }
+        else { // fail and disable vtable if it could not be initialized
+            //SbieApi_Log(2303, _fmt1, SourceFuncName, 888);
+            ptrVTable = NULL;
+            break;
+        }
+
+        ptrVTable = List_Next(ptrVTable);
+
+    }
+
+    return ptrVTable;
+}
+#endif _WIN64
+
+
+#ifndef _M_ARM64
 
 //---------------------------------------------------------------------------
 // SbieApi_HookTramp
@@ -125,15 +321,13 @@ _FX LONG SbieApi_HookTramp(void *Source, void *Trampoline)
 
 
 //---------------------------------------------------------------------------
-// SbieDll_Hook
+// SbieDll_Hook_x86
 //---------------------------------------------------------------------------
 
 
-_FX void *SbieDll_Hook(
+_FX void *SbieDll_Hook_x86(
     const char *SourceFuncName, void *SourceFunc, void *DetourFunc, HMODULE module)
 {
-    static const WCHAR *_fmt1 = L"%s (%d)";
-    static const WCHAR *_fmt2 = L"%s (%d, %d)";
     UCHAR *tramp, *func = NULL;
     void* RegionBase;
     SIZE_T RegionSize;
@@ -145,9 +339,6 @@ _FX void *SbieDll_Hook(
     BOOLEAN CallInstruction64 = FALSE;
 #endif _WIN64
 
-    if (SbieDll_FuncSkipHook(SourceFuncName))
-        return SourceFunc;
-
     //
     // validate parameters
     //
@@ -156,12 +347,6 @@ _FX void *SbieDll_Hook(
         SbieApi_Log(2303, _fmt1, SourceFuncName, 1);
         return NULL;
     }
-
-    //
-    // Chrome sandbox support
-    //
-
-    SourceFunc = Hook_CheckChromeHook(SourceFunc);
 
     //
     // if the source function begins with relative jump EB xx, it means
@@ -286,45 +471,16 @@ skip_e9_rewrite: ;
 
 #endif _WIN64
 
-
     //
-    // Get the module hook resource for this module, if module is NULL
-    // its NTDLL or a special case
+    // Get the module hook object and obtain lock on critical section
     //
 
-    EnterCriticalSection(&Dll_ModuleHooks_CritSec);
-
-    MODULE_HOOK* mod_hook = List_Head(&Dll_ModuleHooks);
-    while (mod_hook) {
-
-        if (mod_hook->module == module)
-            break;
-
-        mod_hook = List_Next(mod_hook);
-    }
-
+    MODULE_HOOK* mod_hook = SbieDll_GetModuleHookAndLock(module, tzuk | 0xFF);
     if (!mod_hook) {
-        mod_hook = Dll_Alloc(sizeof(MODULE_HOOK));
-        if (!mod_hook) {
-            SbieApi_Log(2303, _fmt1, SourceFuncName, 51);
-            goto finish;
-        }
-        mod_hook->module = module;
-        mod_hook->pool = NULL;
-#ifdef _WIN64
-        List_Init(&mod_hook->vTables);
-#endif
-        List_Insert_Before(&Dll_ModuleHooks, NULL, mod_hook); // insert first as we probably will use it often in the next few calls
+        SbieApi_Log(2303, _fmt1, SourceFuncName, 5);
+        goto finish;
     }
-    if (!mod_hook->pool) {
-        mod_hook->pool = Pool_CreateTagged(tzuk | 0xFF);
-        if (!mod_hook->pool) {
-            SbieApi_Log(2303, _fmt1, SourceFuncName, 52);
-            goto finish;
-        }
-    }
-
-
+    
     //
     // 64-bit only:  if the function begins with 'call qword ptr [x]'
     // (6 bytes) then overwrite at the call target address.
@@ -390,7 +546,7 @@ skip_e9_rewrite: ;
 
     //tramp = Dll_AllocCode128();
     tramp = Pool_Alloc(mod_hook->pool, 128);
-    if (! tramp) {
+    if (! tramp /*|| !VirtualProtect(tramp, 128, PAGE_EXECUTE_READWRITE, &dummy_prot)*/) {
         SbieApi_Log(2305, NULL);
         goto finish;
     }
@@ -467,129 +623,36 @@ skip_e9_rewrite: ;
         }
     }
 
+    //is DetourFunc in 64bit jump range
+    /*else if (1) {
+
+        func[0] = 0x48;
+        func[1] = 0xb8;
+        *(ULONG_PTR *)&func[2] = (ULONG_PTR)DetourFunc;
+        func[10] = 0xff;
+        func[11] = 0xe0;
+    }*/
+
     else {
+        
+        target = (ULONG_PTR)&func[6];
 
-        BOOLEAN hookset = FALSE;
-        BOOLEAN defaultRange = FALSE;
-        //int i;
-        //EnterCriticalSection(&VT_CriticalSection);
-
-        //if (bVTableEable) {
-            //VECTOR_TABLE *ptrVTable = SbieDllVectorTable;
-            //default step size 
-            //for (i = 0; i < NUM_VTABLES && !hookset; i++, ptrVTable++) {
-            VECTOR_TABLE* ptrVTable = List_Head(&mod_hook->vTables);
-            do {
-                //if (!ptrVTable->offset) { // if the vtable is not yet initialized initialize it
-                if (!ptrVTable || !ptrVTable->offset) { // if there is no vtable create it
-                    ULONG_PTR tempAddr;
-                    ULONG_PTR step = 0x20000;// + VTABLE_SIZE;
-                    ULONG_PTR max_attempts = 0x4000000 / step;
-
-                    // optimization for windows 7 and low memory DLL's
-                    if ((ULONG_PTR)func < 0x80000000 && ((ULONG_PTR)func > 0x4000000)) {
-                        step = 0x200000;
-                    }
-                    // optimization for windows 8.1
-                    else if ((ULONG_PTR)func < 0x4000000) {
-                        step *= -1;
-                    }
-                    else if ((ULONG_PTR)func < 0x10000000000) {
-                        step *= -1;
-                    }
-                    else {
-                        defaultRange = TRUE;
-                    }
-
-                    // sprintf(buffer,"VTable Alloc: func = %p, step = %p, default = %d\n",func,step,defaultRange);
-                    // OutputDebugStringA(buffer);
-                    tempAddr = ((ULONG_PTR)func & 0xfffffffffffe0000) - (step << 2);
-
-                    if (defaultRange) {
-                        tempAddr -= 0x20000000;
-                    }
-
-                    if (!ptrVTable) {
-
-                        ptrVTable = Pool_Alloc(mod_hook->pool, sizeof(VECTOR_TABLE));
-                        if (!ptrVTable) {
-                            SbieApi_Log(2303, _fmt1, SourceFuncName, 53);
-                            goto finish;
-                        }
-
-                        memset(ptrVTable, 0, sizeof(VECTOR_TABLE));
-
-                        List_Insert_After(&mod_hook->vTables, NULL, ptrVTable);
-                    }
-
-                    for (; !ptrVTable->offset && max_attempts; tempAddr -= step, max_attempts--) {
-                        ptrVTable->offset = VirtualAlloc((void*)tempAddr, VTABLE_SIZE, MEM_COMMIT | MEM_RESERVE | MEM_TOP_DOWN, PAGE_READWRITE);
-                        //  sprintf(buffer,"VTable Offset: func = %p, offset = %p, tryAddress = %p, attempt = 0x%x\n",func,ptrVTable->offset,tempAddr,max_attempts);
-                        //  OutputDebugStringA(buffer);
-                    }
-
-                    // brute force fallback
-                    if (!ptrVTable->offset) {
-
-                        step = VTABLE_SIZE;
-                        max_attempts = 0x40000000 / step; // 1 gig
-                        ULONG_PTR cur_attempt = 0;
-
-                        tempAddr = ((ULONG_PTR)func & 0xfffffffffffe0000);
-
-                        for (; !ptrVTable->offset && cur_attempt < (max_attempts * 2); cur_attempt++) {
-
-                            ULONG_PTR curAddr = tempAddr + (((cur_attempt + 2)/2) * step);
-                            if((cur_attempt % 2) == 0) // search booth directions alternating
-                                curAddr *= -1;
-
-                            ptrVTable->offset = VirtualAlloc((void*)curAddr, VTABLE_SIZE, MEM_COMMIT | MEM_RESERVE | MEM_TOP_DOWN, PAGE_READWRITE);
-                        }
-                    }
-
-                    ptrVTable->index = 0;
-                    ptrVTable->maxEntries = VTABLE_SIZE / sizeof(void*);
-                }
-
-                //if (ptrVTable->offset) { // check if we have an initialized vtable
-                if (ptrVTable && ptrVTable->offset) { // check if we have a vtable
-                    target = (ULONG_PTR)&func[6];
-                    diff = (ULONG_PTR) &((ULONG_PTR *)ptrVTable->offset)[ptrVTable->index];
-                    diff = diff - target;
-                    delta = diff;
-                    delta < 0 ? delta *= -1 : delta;
-
-                    // is DetourFunc in 32bit jump range
-                    if (delta < 0x80000000 && ptrVTable->index <= ptrVTable->maxEntries) {
-                        ((ULONG_PTR *)ptrVTable->offset)[ptrVTable->index] = (ULONG_PTR)DetourFunc;
-                        *(USHORT *)&func[0] = 0x25ff;       // jmp QWORD PTR [rip+diff];
-                        *(ULONG *)&func[2] = (ULONG)diff;
-						//UsedCount = 2 + 4;
-                        ptrVTable->index++;
-                        hookset = TRUE;
-                    }
-                }
-                else { // fail and disable vtable if it could not be initialized
-                    //bVTableEable = FALSE;
-                    SbieApi_Log(2303, _fmt1, SourceFuncName, 888);
-                    //LeaveCriticalSection(&VT_CriticalSection);
-                    func = NULL;
-                    goto finish;
-                }
-
-                ptrVTable = List_Next(ptrVTable);
-
-            } while (!hookset);
-            //}
-        //}
-
-        //LeaveCriticalSection(&VT_CriticalSection);
-        if (!hookset) {
+        VECTOR_TABLE* ptrVTable = SbieDll_GetHookTable(mod_hook, target, 0x80000000, TRUE);
+        if (!ptrVTable) {
             // OutputDebugStringA("Memory alloc failed: 12 Byte Patch Disabled\n");
             SbieApi_Log(2303, _fmt1, SourceFuncName, 999);
             func = NULL;
             goto finish;
         }
+
+        diff = (ULONG_PTR) &((ULONG_PTR *)ptrVTable->offset)[ptrVTable->index];
+        diff = diff - target;
+
+        ((ULONG_PTR *)ptrVTable->offset)[ptrVTable->index] = (ULONG_PTR)DetourFunc;
+        *(USHORT *)&func[0] = 0x25ff;       // jmp QWORD PTR [rip+diff];
+        *(ULONG *)&func[2] = (ULONG)diff;
+		//UsedCount = 2 + 4;
+        ptrVTable->index++;
     }
 
 #else
@@ -629,6 +692,544 @@ finish:
     LeaveCriticalSection(&Dll_ModuleHooks_CritSec);
 
     return func;
+}
+
+#endif
+
+#if defined(_M_ARM64) || defined(_M_ARM64EC)
+
+//---------------------------------------------------------------------------
+// Detours
+//---------------------------------------------------------------------------
+
+#include "../../common/Detours/detours.h"
+
+#ifdef _M_ARM64EC
+
+PVOID WINAPI DetourCopyInstructionARM64(_In_opt_ PVOID pDst,            \
+                                      _Inout_opt_ PVOID *ppDstPool,     \
+                                      _In_ PVOID pSrc,                  \
+                                      _Out_opt_ PVOID *ppTarget,        \
+                                      _Out_opt_ LONG *plExtra);         \
+
+#endif
+
+#ifdef DETOURS_ARM
+
+#define DETOURS_PFUNC_TO_PBYTE(p)  ((PBYTE)(((ULONG_PTR)(p)) & ~(ULONG_PTR)1))
+#define DETOURS_PBYTE_TO_PFUNC(p)  ((PBYTE)(((ULONG_PTR)(p)) | (ULONG_PTR)1))
+
+#endif // DETOURS_ARM
+
+typedef struct _DETOUR_ALIGN
+{
+    BYTE    obTarget        : 3;
+    BYTE    obTrampoline    : 5;
+} DETOUR_ALIGN;
+
+//C_ASSERT(sizeof(_DETOUR_ALIGN) == 1);
+
+typedef struct _DETOUR_TRAMPOLINE
+{
+    // An ARM64 instruction is 4 bytes long.
+    //
+    // The overwrite is always 2 instructions plus a literal, so 16 bytes, 4 instructions.
+    //
+    // Copied instructions can expand.
+    //
+    // The scheme using MovImmediate can cause an instruction
+    // to grow as much as 6 times.
+    // That would be Bcc or Tbz with a large address space:
+    //   4 instructions to form immediate
+    //   inverted tbz/bcc
+    //   br
+    //
+    // An expansion of 4 is not uncommon -- bl/blr and small address space:
+    //   3 instructions to form immediate
+    //   br or brl
+    //
+    // A theoretical maximum for rbCode is thefore 4*4*6 + 16 = 112 (another 16 for jmp to pbRemain).
+    //
+    // With literals, the maximum expansion is 5, including the literals: 4*4*5 + 16 = 96.
+    //
+    // The number is rounded up to 128. m_rbScratchDst should match this.
+    //
+    BYTE            rbCode[128];    // target code + jmp to pbRemain
+    BYTE            cbCode;         // size of moved target code.
+    BYTE            cbCodeBreak[3]; // padding to make debugging easier.
+    BYTE            rbRestore[24];  // original target code.
+    BYTE            cbRestore;      // size of original target code.
+    BYTE            cbRestoreBreak[3]; // padding to make debugging easier.
+    DETOUR_ALIGN    rAlign[8];      // instruction alignment array.
+    PBYTE           pbRemain;       // first instruction after moved code. [free list]
+    PBYTE           pbDetour;       // first instruction of detour function.
+} DETOUR_TRAMPOLINE, *PDETOUR_TRAMPOLINE;
+
+//C_ASSERT(sizeof(_DETOUR_TRAMPOLINE) == 184);
+
+enum {
+    SIZE_OF_JMP = 16
+};
+
+
+#define DETOUR_TRACE(x)
+
+
+void arm64_write_opcode(PBYTE *pbCode, ULONG Opcode)
+{
+    *(ULONG *)*pbCode = Opcode;
+    *pbCode += 4;
+}
+
+ULONG arm64_fetch_opcode(PBYTE pbCode)
+{
+    return *(ULONG *)pbCode;
+}
+
+BOOL arm64_detour_does_code_end_function(PBYTE pbCode)
+{
+    ULONG Opcode = arm64_fetch_opcode(pbCode);
+    if ((Opcode & 0xfffffc1f) == 0xd61f0000 ||      // br <reg>
+        (Opcode & 0xfc000000) == 0x14000000) {      // b <imm26>
+        return TRUE;
+    }
+    return FALSE;
+}
+
+ULONG arm64_detour_is_code_filler(PBYTE pbCode)
+{
+    if (*(ULONG *)pbCode == 0xd503201f) {   // nop.
+        return 4;
+    }
+    if (*(ULONG *)pbCode == 0x00000000) {   // zero-filled padding.
+        return 4;
+    }
+    return 0;
+}
+
+PBYTE arm64_detour_gen_jmp_immediate(PBYTE pbCode, PBYTE* ppPool, PBYTE pbJmpVal, BOOL tryUsePatchSpace)
+{
+    PBYTE pbLiteral;
+    if (ppPool != NULL) {
+        *ppPool = *ppPool - 8;
+        pbLiteral = *ppPool;
+    }
+    else if (tryUsePatchSpace && *(UINT_PTR*)(pbCode - 8) == 0) { // use the provided empty space
+        pbLiteral = pbCode - 8;
+    } 
+    else {
+        pbLiteral = pbCode + 8;
+    }
+
+    *((PBYTE*)pbLiteral) = pbJmpVal;
+    LONG delta = (LONG)(pbLiteral - pbCode);
+
+    arm64_write_opcode(&pbCode, 0x58000011 | (((delta / 4) & 0x7FFFF) << 5));  // LDR X17,[PC+n]
+    arm64_write_opcode(&pbCode, 0xd61f0000 | (17 << 5));                       // BR X17
+
+    if (ppPool == NULL) {
+        pbCode += 8;
+    }
+    return pbCode;
+}
+
+PBYTE arm64_detour_gen_brk(PBYTE pbCode, PBYTE pbLimit)
+{
+    while (pbCode < pbLimit) {
+        arm64_write_opcode(&pbCode, 0xd4100000 | (0xf000 << 5));
+    }
+    return pbCode;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_Hook_arm
+//---------------------------------------------------------------------------
+
+
+void* SbieDll_Hook_arm(
+    const char* SourceFuncName, void* SourceFunc, void* DetourFunc, HMODULE module)
+{
+    UCHAR *tramp, *func = NULL;
+    void* RegionBase;
+    SIZE_T RegionSize;
+    ULONG prot, dummy_prot;
+    ULONG_PTR diff;
+    ULONG_PTR target;
+
+    //
+    // validate parameters
+    //
+
+    if (! SourceFunc) {
+        SbieApi_Log(2303, _fmt1, SourceFuncName, 1);
+        return NULL;
+    }
+
+    //
+    // Get the module hook object and obtain lock on critical section
+    //
+
+#ifdef _M_ARM64EC
+    MODULE_HOOK* mod_hook = SbieDll_GetModuleHookAndLock(module, (tzuk & 0xFFFFFF00) | 0xEC);
+#else
+    MODULE_HOOK* mod_hook = SbieDll_GetModuleHookAndLock(module, tzuk | 0xFF);
+#endif
+    if (!mod_hook) {
+        SbieApi_Log(2303, _fmt1, SourceFuncName, 5);
+        goto finish;
+    }
+
+    //
+    // create the trampoline
+    //
+    tramp = Pool_Alloc(mod_hook->pool, sizeof(DETOUR_TRAMPOLINE));
+    if (! tramp /*|| !VirtualProtect(tramp, sizeof(DETOUR_TRAMPOLINE), PAGE_EXECUTE_READWRITE, &dummy_prot)*/) {
+        SbieApi_Log(2305, NULL);
+        goto finish;
+    }
+
+    //
+    // From MS detours begin:
+    //
+
+    PVOID pDetour = DetourFunc;
+    PVOID* ppPointer = &SourceFunc;
+    PBYTE pbTarget = (PBYTE)*ppPointer;
+    PDETOUR_TRAMPOLINE pTrampoline = tramp;
+
+#ifdef _M_ARM64
+    pbTarget = (PBYTE)DetourCodeFromPointer(pbTarget, NULL);
+    pDetour = DetourCodeFromPointer(pDetour, NULL);
+#endif
+    
+    DETOUR_TRACE(("detours: pbTramp=%p, pDetour=%p\n", pTrampoline, pDetour));
+
+    memset(pTrampoline->rAlign, 0, sizeof(pTrampoline->rAlign));
+
+    // Determine the number of movable target instructions.
+    PBYTE pbSrc = pbTarget;
+    PBYTE pbTrampoline = pTrampoline->rbCode;
+    PBYTE pbPool = pbTrampoline + sizeof(pTrampoline->rbCode);
+    ULONG cbTarget = 0;
+    ULONG cbJump = SIZE_OF_JMP;
+    ULONG nAlign = 0;
+
+#ifdef DETOURS_ARM
+    // On ARM, we need an extra instruction when the function isn't 32-bit aligned.
+    // Check if the existing code is another detour (or at least a similar
+    // "ldr pc, [PC+0]" jump.
+    if ((ULONG)pbTarget & 2) {
+        cbJump += 2;
+
+        ULONG op = fetch_thumb_opcode(pbSrc);
+        if (op == 0xbf00) {
+            op = fetch_thumb_opcode(pbSrc + 2);
+            if (op == 0xf8dff000) { // LDR PC,[PC]
+                *((PUSHORT&)pbTrampoline)++ = *((PUSHORT&)pbSrc)++;
+                *((PULONG&)pbTrampoline)++ = *((PULONG&)pbSrc)++;
+                *((PULONG&)pbTrampoline)++ = *((PULONG&)pbSrc)++;
+                cbTarget = (LONG)(pbSrc - pbTarget);
+                // We will fall through the "while" because cbTarget is now >= cbJump.
+            }
+        }
+    }
+    else {
+        ULONG op = fetch_thumb_opcode(pbSrc);
+        if (op == 0xf8dff000) { // LDR PC,[PC]
+            *((PULONG&)pbTrampoline)++ = *((PULONG&)pbSrc)++;
+            *((PULONG&)pbTrampoline)++ = *((PULONG&)pbSrc)++;
+            cbTarget = (LONG)(pbSrc - pbTarget);
+            // We will fall through the "while" because cbTarget is now >= cbJump.
+        }
+    }
+#endif
+
+    while (cbTarget < cbJump) {
+        PBYTE pbOp = pbSrc;
+        LONG lExtra = 0;
+
+        DETOUR_TRACE((" DetourCopyInstruction(%p,%p)\n",
+                      pbTrampoline, pbSrc));
+        pbSrc = (PBYTE)
+#ifdef _M_ARM64EC
+            DetourCopyInstructionARM64(pbTrampoline, (PVOID*)&pbPool, pbSrc, NULL, &lExtra);
+#else
+            DetourCopyInstruction(pbTrampoline, (PVOID*)&pbPool, pbSrc, NULL, &lExtra);
+#endif
+        DETOUR_TRACE((" DetourCopyInstruction() = %p (%d bytes)\n",
+                      pbSrc, (int)(pbSrc - pbOp)));
+        pbTrampoline += (pbSrc - pbOp) + lExtra;
+        cbTarget = (ULONG)(pbSrc - pbTarget);
+        pTrampoline->rAlign[nAlign].obTarget = (BYTE)cbTarget;
+        pTrampoline->rAlign[nAlign].obTrampoline = (BYTE)(pbTrampoline - pTrampoline->rbCode);
+        nAlign++;
+
+        if (nAlign >= ARRAYSIZE(pTrampoline->rAlign)) {
+            break;
+        }
+
+        if (arm64_detour_does_code_end_function(pbOp)) {
+            break;
+        }
+    }
+
+    // Consume, but don't duplicate padding if it is needed and available.
+    while (cbTarget < cbJump) {
+        LONG cFiller = arm64_detour_is_code_filler(pbSrc);
+        if (cFiller == 0) {
+            break;
+        }
+
+        pbSrc += cFiller;
+        cbTarget = (LONG)(pbSrc - pbTarget);
+    }
+
+#if DETOUR_DEBUG
+    {
+        DETOUR_TRACE((" detours: rAlign ["));
+        LONG n = 0;
+        for (n = 0; n < ARRAYSIZE(pTrampoline->rAlign); n++) {
+            if (pTrampoline->rAlign[n].obTarget == 0 &&
+                pTrampoline->rAlign[n].obTrampoline == 0) {
+                break;
+            }
+            DETOUR_TRACE((" %d/%d",
+                          pTrampoline->rAlign[n].obTarget,
+                          pTrampoline->rAlign[n].obTrampoline
+                          ));
+
+        }
+        DETOUR_TRACE((" ]\n"));
+    }
+#endif
+
+    //if (cbTarget < cbJump || nAlign > ARRAYSIZE(pTrampoline->rAlign)) {
+    if (nAlign > ARRAYSIZE(pTrampoline->rAlign)) {
+        // Too few instructions.
+        SbieApi_Log(2303, _fmt1, SourceFuncName, 2);
+        goto finish;
+    }
+
+    pTrampoline->cbCode = (BYTE)(pbTrampoline - pTrampoline->rbCode);
+    pTrampoline->cbRestore = (BYTE)cbTarget;
+    CopyMemory(pTrampoline->rbRestore, pbTarget, cbTarget);
+
+    if (cbTarget > sizeof(pTrampoline->rbCode) - cbJump) {
+        // Too many instructions.
+        SbieApi_Log(2303, _fmt1, SourceFuncName, 3);
+        goto finish;
+    }
+
+    pTrampoline->pbRemain = pbTarget + cbTarget;
+    pTrampoline->pbDetour = (PBYTE)pDetour;
+
+
+    pbTrampoline = pTrampoline->rbCode + pTrampoline->cbCode;
+    pbTrampoline = arm64_detour_gen_jmp_immediate(pbTrampoline, &pbPool, pTrampoline->pbRemain, FALSE);
+    pbTrampoline = arm64_detour_gen_brk(pbTrampoline, pbPool);
+
+    //
+    // end
+    //
+
+
+    //
+    // create the detour
+    //
+
+    func = (UCHAR *)pbTarget;
+
+    RegionBase = &func[-8]; // -8 for hotpatch area if present
+    RegionSize = 24;
+
+    if (!VirtualProtect(RegionBase, RegionSize, PAGE_EXECUTE_READWRITE, &prot)) {
+
+        //
+        // if that fails just start at the exact offset and try again
+        // without the hot patch area which we dont use anyways
+        //
+
+        RegionBase = &func[0];
+        RegionSize = 16;
+
+        if (!VirtualProtect(RegionBase, RegionSize, PAGE_EXECUTE_READWRITE, &prot)) {
+            ULONG err = GetLastError();
+            SbieApi_Log(2303, _fmt2, SourceFuncName, 33, err);
+            func = NULL;
+            goto finish;
+        }
+    }
+
+    //
+    // hook the source function
+    //
+
+    if (cbTarget >= cbJump) {
+
+        //
+        // enough space for a normal detour, we have SIZE_OF_JMP available or more
+        //
+
+        //PBYTE pbCode = arm64_detour_gen_jmp_immediate(pbTarget, NULL, pTrampoline->pbDetour, TRUE);
+        PBYTE pbCode = arm64_detour_gen_jmp_immediate(pbTarget, NULL, pTrampoline->pbDetour, FALSE);
+        pbCode = arm64_detour_gen_brk(pbCode, pTrampoline->pbRemain);
+#ifdef DETOURS_ARM
+        *o->ppbPointer = DETOURS_PBYTE_TO_PFUNC(o->pTrampoline->rbCode);
+#else
+        *ppPointer = pTrampoline->rbCode;
+#endif
+
+    } 
+
+    else {
+
+        //
+        // if we don't have SIZE_OF_JMP available, we use a jump table located
+        // within +/- 128MB which we can reach with a single branch instruction
+        //
+
+        target = (ULONG_PTR)&func[0];
+
+        VECTOR_TABLE* ptrVTable = SbieDll_GetHookTable(mod_hook, target, 0x08000000, FALSE); // +/-128MB
+        if (!ptrVTable) {
+            // OutputDebugStringA("Memory alloc failed: 12 Byte Patch Disabled\n");
+            SbieApi_Log(2303, _fmt1, SourceFuncName, 999);
+            func = NULL;
+            goto finish;
+        }
+        
+        //
+        // write jump entry
+        //
+
+        PBYTE pbJump = (PBYTE)&((ULONG_PTR *)ptrVTable->offset)[ptrVTable->index];
+
+        PBYTE pbCode = arm64_detour_gen_jmp_immediate(pbJump, NULL, pTrampoline->pbDetour, FALSE);
+        //pbCode = arm64_detour_gen_brk(pbCode, pTrampoline->pbRemain);
+        FlushInstructionCache(GetCurrentProcess(), pbJump, SIZE_OF_JMP);
+#ifdef DETOURS_ARM
+        *o->ppbPointer = DETOURS_PBYTE_TO_PFUNC(o->pTrampoline->rbCode);
+#else
+        *ppPointer = pTrampoline->rbCode;
+#endif
+
+        //
+        // write branche to jump entry
+        //
+
+        diff = (ULONG_PTR) & ((ULONG_PTR*)ptrVTable->offset)[ptrVTable->index];
+        diff = diff - target;
+
+        B b;
+        b.OP = 0x14000000;
+        b.imm26 = (ULONG)(diff >> 2);
+        arm64_write_opcode(&pbTarget, b.OP);
+
+        ptrVTable->index += SIZE_OF_JMP / sizeof(ULONG_PTR); // +16 bytes
+    }
+
+    //
+    // restore protection and fluch instruction cache
+    //
+
+	VirtualProtect(RegionBase, RegionSize, prot, &dummy_prot);
+    FlushInstructionCache(GetCurrentProcess(), RegionBase, RegionSize);
+
+    func = *ppPointer;
+    FlushInstructionCache(GetCurrentProcess(), pTrampoline->rbCode, pTrampoline->cbCode + SIZE_OF_JMP);
+
+finish:
+    LeaveCriticalSection(&Dll_ModuleHooks_CritSec);
+
+    return func;
+}
+
+#endif
+
+
+//---------------------------------------------------------------------------
+// SbieDll_Hook
+//---------------------------------------------------------------------------
+
+
+_FX void *SbieDll_Hook(
+    const char *SourceFuncName, void *SourceFunc, void *DetourFunc, HMODULE module)
+{
+    if (SbieDll_FuncSkipHook(SourceFuncName))
+        return SourceFunc;
+
+    //if (Dll_SbieTrace) {
+    //    WCHAR* ModuleName = Trace_FindModuleByAddress((void*)module);
+    //    DbgPrint("Hooking: %S!%s\r\n", ModuleName, SourceFuncName);
+    //}
+
+    //
+    // Chrome sandbox support
+    //
+
+    //void* OldSourceFunc = SourceFunc;
+
+    SourceFunc = Hook_CheckChromeHook(SourceFunc);
+
+    //if (OldSourceFunc != SourceFunc) {
+    //    WCHAR* ModuleName = Trace_FindModuleByAddress((void*)module);
+    //    DbgPrint("Found Chrome Hook on: %S!%s\r\n", ModuleName, SourceFuncName);
+    //}
+    
+
+#ifdef _M_ARM64EC
+
+    //
+    // Check if the function is a Fast Forward Sequence, if so
+    // get the target address of the EC function and hook it instead
+    // this way we can intercept also internal function calls within a dll
+    // like CreateProcessInternalW when called from CreateProcessW
+    //
+
+    extern ULONG* SbieApi_SyscallPtr;
+    if (module == Dll_Ntdll && *(USHORT*)&SourceFuncName[0] == 'tN' && SbieApi_SyscallPtr) {
+
+        USHORT index = Hook_GetSysCallIndex(SourceFunc);
+        if (index != 0xFFFF) {
+
+            ULONG SbieDll_GetSysCallOffset(const ULONG *SyscallPtr, ULONG syscall_index);
+            ULONG offset = SbieDll_GetSysCallOffset(SbieApi_SyscallPtr, index);
+            if (offset) {
+
+                void* SourceFuncEC = (void*)((UINT_PTR)Dll_Ntdll + offset);
+                return SbieDll_Hook_arm(SourceFuncName, SourceFuncEC, DetourFunc, module);
+            }
+            //else // hook disabled in driver like NtTerminateProcess
+            //    SbieApi_Log(2303, _fmt2, SourceFuncName, 69, 2);
+        }
+        else
+            SbieApi_Log(2303, _fmt2, SourceFuncName, 69, 1);
+    }
+    else
+
+    // 
+    // if module is -1 than we comes from the api redirection in Scm_SecHostDll
+    // as there we hook with other x64 code we use the regular x86 hook routime
+    //
+
+    if (module != (HMODULE)-1) {
+
+        void* SourceFuncEC = Hook_GetFFSTarget(SourceFunc);
+        if (SourceFuncEC) {
+
+            return SbieDll_Hook_arm(SourceFuncName, SourceFuncEC, DetourFunc, module);
+        }
+        else
+            SbieApi_Log(2303, _fmt1, SourceFuncName, 69);
+    }
+
+#endif
+#ifdef _M_ARM64
+    return SbieDll_Hook_arm(SourceFuncName, SourceFunc, DetourFunc, module);
+#else
+    return SbieDll_Hook_x86(SourceFuncName, SourceFunc, DetourFunc, module);
+#endif
 }
 
 
@@ -901,7 +1502,41 @@ _FX void *Dll_JumpStub(void *OldCode, void *NewCode, ULONG_PTR Arg)
     // build stub which loads eax with (code + 32) then jumps to NewCode
     //
 
-#ifdef _WIN64
+#ifdef _M_ARM64
+
+    *(ULONG*)ptr = 0x10000111;  // adr x17, 32 ; load pc register + 32 to x17
+    ptr += sizeof(ULONG);
+
+    //
+    // write jump to NewCode
+    //
+
+    *(ULONG*)ptr = 0x58000048;	// ldr x8, 8
+    ptr += sizeof(ULONG);
+    *(ULONG*)ptr = 0xD61F0100;	// br x8
+    ptr += sizeof(ULONG);
+    *(ULONG_PTR *)ptr = (ULONG_PTR)NewCode;
+    ptr += sizeof(ULONG_PTR);
+
+#else
+
+#ifdef _M_ARM64EC
+
+    //
+    // The emulator does not preserve RAX hence we use R9 instead
+    // and save R9's value to the StubData area
+    //
+
+    *ptr = 0x4C;                // mov [rip+24], r9
+    ++ptr;
+    *(USHORT *)ptr = 0x0d89;
+    ptr += sizeof(USHORT);
+    *(ULONG *)ptr = (56-7);     // save 4th argument (r9) at StubData[3]
+    ptr += sizeof(ULONG);   
+
+    *(USHORT *)ptr = 0xB949;    // movabs r9
+    ptr += sizeof(USHORT);
+#elif _WIN64
     *(USHORT *)ptr = 0xB848;    // mov rax
     ptr += sizeof(USHORT);
 #else ! _WIN64
@@ -911,8 +1546,12 @@ _FX void *Dll_JumpStub(void *OldCode, void *NewCode, ULONG_PTR Arg)
     *(ULONG_PTR *)ptr = (ULONG_PTR)(code + 32);
     ptr += sizeof(ULONG_PTR);
 
+    //
+    // write jump to NewCode
+    //
+
     *(USHORT *)ptr = 0x25FF;    // jmp dword/qword ptr [rip+6]
-    ptr += 2;
+    ptr += sizeof(USHORT);
 #ifdef _WIN64
     *(ULONG *)ptr = 0;
 #else ! _WIN64
@@ -920,6 +1559,9 @@ _FX void *Dll_JumpStub(void *OldCode, void *NewCode, ULONG_PTR Arg)
 #endif _WIN64
     ptr += sizeof(ULONG);
     *(ULONG_PTR *)ptr = (ULONG_PTR)NewCode;
+    ptr += sizeof(ULONG_PTR);
+
+#endif
 
     //
     // write data at (code + 32)
@@ -931,6 +1573,8 @@ _FX void *Dll_JumpStub(void *OldCode, void *NewCode, ULONG_PTR Arg)
     *(ULONG_PTR *)ptr = (ULONG_PTR)OldCode;
     ptr += sizeof(ULONG_PTR);
     *(ULONG_PTR *)ptr = (ULONG_PTR)Arg;
+    ptr += sizeof(ULONG_PTR);
+    // 4th argument goes here
 
     //
     // write eyecatcher at (code + 64)
@@ -947,6 +1591,7 @@ _FX void *Dll_JumpStub(void *OldCode, void *NewCode, ULONG_PTR Arg)
 //---------------------------------------------------------------------------
 
 
+#if !defined(_M_ARM64) && !defined(_M_ARM64EC)
 #pragma warning(push)
 #pragma warning(disable : 4716) // function must return a value
 _FX ULONG_PTR *Dll_JumpStubData(void)
@@ -966,6 +1611,7 @@ _FX ULONG_PTR *Dll_JumpStubData(void)
     //
 }
 #pragma warning(pop)
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -989,6 +1635,9 @@ _FX ULONG_PTR *Dll_JumpStubDataForCode(void *StubCode)
     return (ULONG_PTR *)rv;
 }
 
+
+#ifndef _WIN64
+
 #define WOW_SIZE 0x53
 #define WOW_PATCH_SIZE 7
 
@@ -997,7 +1646,6 @@ _FX ULONG_PTR *Dll_JumpStubDataForCode(void *StubCode)
 //---------------------------------------------------------------------------
 
 extern ULONG Dll_Windows;
-#ifndef _WIN64
 #define GET_ADDR_OF_PEB __readfsdword(0x30)
 #define GET_PEB_IMAGE_BUILD (*(USHORT *)(GET_ADDR_OF_PEB + 0xac))
 
@@ -1058,8 +1706,6 @@ _FX void Dll_FixWow64Syscall(void)
 
 
     if (Dll_IsWow64) {
-
-        Dll_OsBuild = GET_PEB_IMAGE_BUILD;
 
         if (Dll_Windows >= 10) {
             if (!_code) {

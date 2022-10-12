@@ -520,7 +520,7 @@ typedef struct _OBJECT_TYPE_INITIALIZER {
 
 
 typedef struct _OBJECT_TYPE {
-    ERESOURCE Mutex;
+    //ERESOURCE Mutex;              // not present in 7 or later was that in xp?
     LIST_ENTRY TypeList;
     UNICODE_STRING Name;            // Copy from object header for convenience
     PVOID DefaultObject;

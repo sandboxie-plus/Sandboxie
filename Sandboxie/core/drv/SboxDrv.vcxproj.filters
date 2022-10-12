@@ -241,10 +241,14 @@
     <ClInclude Include="dll.h">
       <Filter>syscall</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\common\arm64_asm.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="aulldvrm.asm" />
     <CustomBuild Include="util_asm.asm" />
+    <CustomBuild Include="util_arm.asm" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

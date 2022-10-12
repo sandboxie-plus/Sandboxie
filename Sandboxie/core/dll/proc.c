@@ -86,6 +86,15 @@ static _FX void Proc_FixBatchCommandLine(
 
 static void Proc_StoreImagePath(THREAD_DATA *TlsData, HANDLE FileHandle);
 
+static NTSTATUS Proc_LdrQueryImageFileExecutionOptionsEx(
+    PUNICODE_STRING SubKey,
+    PCWSTR ValueName,
+    ULONG Type,
+    PVOID Buffer,
+    ULONG BufferSize,
+    PULONG ReturnedLength,
+    BOOLEAN Wow64);
+
 static NTSTATUS Proc_RtlCreateProcessParametersEx(
     void *ProcessParameters,
     UNICODE_STRING *ImagePathName,
@@ -133,9 +142,11 @@ static BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path);
 
 //static BOOLEAN Proc_IsProcessRunning(const WCHAR *ImageToFind);
 
+#ifndef _WIN64
 static BOOLEAN Proc_IsSplWow64(
     const WCHAR *lpApplicationName, const WCHAR *lpCommandLine,
     LPPROCESS_INFORMATION lpProcessInformation);
+#endif
 
 static HRESULT Proc_RunSetupCommandW(
     HWND hWnd,
@@ -195,6 +206,15 @@ typedef BOOL (*P_CreateProcessWithTokenW)(
     void *lpCurrentDirectory,
     void *lpStartupInfo,
     LPPROCESS_INFORMATION lpProcessInformation);
+
+typedef NTSTATUS (*P_LdrQueryImageFileExecutionOptionsEx)(
+    PUNICODE_STRING SubKey,
+    PCWSTR ValueName,
+    ULONG Type,
+    PVOID Buffer,
+    ULONG BufferSize,
+    PULONG ReturnedLength,
+    BOOLEAN Wow64);
 
 typedef NTSTATUS (*P_RtlCreateProcessParametersEx)(
     void *ProcessParameters,
@@ -279,6 +299,9 @@ static P_CreateProcessInternal      __sys_CreateProcessInternalW    = NULL;
 
 static P_CreateProcessWithTokenW    __sys_CreateProcessWithTokenW   = NULL;
 
+static P_LdrQueryImageFileExecutionOptionsEx
+                                    __sys_LdrQueryImageFileExecutionOptionsEx = NULL;
+
 static P_RtlCreateProcessParametersEx
                                     __sys_RtlCreateProcessParametersEx = NULL;
 
@@ -317,6 +340,7 @@ static BOOL     g_boolWasWerFaultLastProcess = FALSE;
 
 BOOL            Dll_ElectronWorkaround = FALSE;
 
+
 //---------------------------------------------------------------------------
 // Proc_Init
 //---------------------------------------------------------------------------
@@ -324,7 +348,7 @@ BOOL            Dll_ElectronWorkaround = FALSE;
 
 _FX BOOLEAN Proc_Init(void)
 {
-    HMODULE module = NULL;
+    HMODULE module = Dll_Ntdll;
 
     P_CreateProcessInternal CreateProcessInternalW;
     ANSI_STRING ansi;
@@ -349,6 +373,9 @@ _FX BOOLEAN Proc_Init(void)
 
     SBIEDLL_HOOK(Proc_,NtQueryInformationProcess);
 
+    if (Dll_OsBuild >= 14942) // Windows 10
+        SbieDll_DisableCHPE();
+
     //
     // RtlCreateProcessParameters
     //
@@ -365,6 +392,12 @@ _FX BOOLEAN Proc_Init(void)
                 Dll_Ntdll, "NtCreateUserProcess");
         SBIEDLL_HOOK(Proc_,NtCreateUserProcess);
     }
+
+    //
+    // Kernel32 stuff
+    //
+
+    module = Dll_KernelBase;
 
     //
     // UpdateProcThreadAttribute
@@ -441,6 +474,24 @@ _FX BOOLEAN Proc_Init(void)
 
     //    SBIEDLL_HOOK(Proc_,NtCreateProcessEx);
     //}
+
+    return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_DisableCHPE
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN SbieDll_DisableCHPE(void)
+{
+    HMODULE module = Dll_Ntdll;
+
+    P_LdrQueryImageFileExecutionOptionsEx LdrQueryImageFileExecutionOptionsEx =
+        (P_LdrQueryImageFileExecutionOptionsEx) GetProcAddress(
+            Dll_Ntdll, "LdrQueryImageFileExecutionOptionsEx");
+    SBIEDLL_HOOK(Proc_, LdrQueryImageFileExecutionOptionsEx);
 
     return TRUE;
 }
@@ -1451,11 +1502,13 @@ _FX BOOL Proc_AlternateCreateProcess(
         return TRUE;        // exit CreateProcessInternal
     }
 
+#ifndef _WIN64
     if (Proc_IsSplWow64(lpApplicationName, lpCommandLine,
                         lpProcessInformation)) {
 
         return FALSE;       // continue with CreateProcessInternal
     }
+#endif
 
     if (Proc_IsForcedElevation(lpCommandLine,
                                lpCurrentDirectory,
@@ -1883,6 +1936,38 @@ _FX NTSTATUS Proc_SectionCallback(HANDLE FileHandle)
     }
 
     return STATUS_SUCCESS;
+}
+
+
+//---------------------------------------------------------------------------
+// Proc_LdrQueryImageFileExecutionOptionsEx
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Proc_LdrQueryImageFileExecutionOptionsEx(
+    PUNICODE_STRING SubKey,
+    PCWSTR ValueName,
+    ULONG Type,
+    PVOID Buffer,
+    ULONG BufferSize,
+    PULONG ReturnedLength,
+    BOOLEAN Wow64)
+{
+    //
+    // Sandboxie on ARM64 requires x86 applications NOT to use the CHPE binaries.
+    //
+    // This hook causes CreateProcessInternalW to set PsAttributeChpe = 0 which
+    // makes the kernel load the regular non hybrid version of ntdll into the new process.
+    //
+    // See comment in HookImageOptionsEx core/low/init.c for more details.
+    //
+
+	if (_wcsicmp(ValueName, L"LoadCHPEBinaries") == 0) {
+		*(ULONG*)Buffer = 0;
+		return STATUS_SUCCESS;
+	}
+
+	return __sys_LdrQueryImageFileExecutionOptionsEx(SubKey, ValueName, Type, Buffer, BufferSize, ReturnedLength, Wow64);
 }
 
 
@@ -2523,7 +2608,7 @@ _FX BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path)
 // Proc_IsSplWow64
 //---------------------------------------------------------------------------
 
-
+#ifndef _WIN64
 _FX BOOLEAN Proc_IsSplWow64(
     const WCHAR *lpApplicationName, const WCHAR *lpCommandLine,
     LPPROCESS_INFORMATION lpProcessInformation)
@@ -2551,7 +2636,7 @@ _FX BOOLEAN Proc_IsSplWow64(
 
     return TRUE;
 }
-
+#endif
 
 //---------------------------------------------------------------------------
 // Proc_Init_AdvPack
@@ -2709,9 +2794,9 @@ _FX RTL_USER_PROCESS_PARAMETERS *Proc_GetRtlUserProcessParameters(void)
     RTL_USER_PROCESS_PARAMETERS *ProcessParms =
         (RTL_USER_PROCESS_PARAMETERS *)
 #ifdef _WIN64
-            (*(ULONG_PTR *)(__readgsqword(0x60) + 0x20));
+            (*(ULONG_PTR *)(NtCurrentPeb() + 0x20));
 #else
-            (*(ULONG_PTR *)(__readfsdword(0x30) + 0x10));
+            (*(ULONG_PTR *)(NtCurrentPeb() + 0x10));
 #endif _WIN64
     return ProcessParms;
 }

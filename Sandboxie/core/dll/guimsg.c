@@ -132,7 +132,9 @@ static LRESULT Gui_SendMessageA_MdiCreate(HWND hWnd, LPARAM lParam);
 
 static LRESULT Gui_DispatchMessage8(const MSG *lpmsg, ULONG IsAscii);
 
+#ifndef _M_ARM64
 static BOOLEAN Gui_Hook_DispatchMessage8(HMODULE module);
+#endif
 
 static P_DispatchMessage8          __sys_DispatchMessage8       = 0;
 
@@ -207,12 +209,24 @@ _FX BOOLEAN Gui_InitMsg(HMODULE module)
 
 #else _WIN64
 
-    if (Dll_OsBuild < 8400) {
+    if (Dll_OsBuild >= 14942) { // Windows 10 1703 preview #7
+        HMODULE hWin32u = GetModuleHandleA("win32u.dll");
+        __sys_DispatchMessage8 = (P_DispatchMessage8)GetProcAddress(hWin32u, "NtUserDispatchMessage");
+        SBIEDLL_HOOK_GUI(DispatchMessage8);
+    }
+    else if (Dll_OsBuild < 8400) {
         SBIEDLL_HOOK_GUI(DispatchMessageA);
         SBIEDLL_HOOK_GUI(DispatchMessageW);
-
-    } else if (! Gui_Hook_DispatchMessage8(module))
+    }
+    else 
+#ifndef _M_ARM64
+    if (!Gui_Hook_DispatchMessage8(module))
+#endif
+    {
+        SbieApi_Log(2205, L"DispatchMessage8");
         return FALSE;
+    }
+   
 
 #endif _WIN64
 
@@ -851,7 +865,8 @@ _FX LRESULT Gui_DispatchMessage8(const MSG *lpmsg, ULONG IsAscii)
 // Gui_Hook_DispatchMessage8
 //---------------------------------------------------------------------------
 
-
+#ifndef _M_ARM64
+// $HookHack$ - Custom, not automated, Hook
 _FX BOOLEAN Gui_Hook_DispatchMessage8(HMODULE module)
 {
     //
@@ -869,16 +884,6 @@ _FX BOOLEAN Gui_Hook_DispatchMessage8(HMODULE module)
 
     UCHAR *a = (UCHAR *)__sys_DispatchMessageA;
     UCHAR *w = (UCHAR *)__sys_DispatchMessageW;
-
-    if (Dll_OsBuild >= 14942) {
-
-        HMODULE hWin32u;
-
-        hWin32u = GetModuleHandleA("win32u.dll");
-        __sys_DispatchMessage8 = (P_DispatchMessage8)GetProcAddress(hWin32u, "NtUserDispatchMessage");
-        SBIEDLL_HOOK_GUI(DispatchMessage8);
-        return TRUE;
-    }
 
     if (*(ULONG *)a == 0x000001BA && *(USHORT *)w == 0xD233) {
 
@@ -907,10 +912,9 @@ _FX BOOLEAN Gui_Hook_DispatchMessage8(HMODULE module)
         }
     }
 
-    SbieApi_Log(2205, L"DispatchMessage8");
     return FALSE;
 }
-
+#endif
 
 #endif _WIN64
 

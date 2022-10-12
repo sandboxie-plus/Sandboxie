@@ -1450,7 +1450,11 @@ _FX BOOLEAN Custom_OsppcDll(HMODULE module)
     ULONG zero = 0;
     ULONG ProductIndex, ValueIndex;
 
-    ULONG Wow64 = Dll_IsWow64 ? KEY_WOW64_64KEY : 0;
+    ULONG Wow64 = 0;
+#ifndef _WIN64
+    if (Dll_IsWow64)
+        Wow64 = KEY_WOW64_64KEY;
+#endif
 
     //
     // open Microsoft Office 2010 registry key
@@ -1527,6 +1531,7 @@ _FX BOOLEAN Custom_OsppcDll(HMODULE module)
     return TRUE;
 }
 
+#ifndef _M_ARM64
 
 //---------------------------------------------------------------------------
 // Custom_InternetDownloadManager
@@ -1731,3 +1736,5 @@ _FX BOOLEAN Acscmonitor_Init(HMODULE hDll)
 		CloseHandle(ThreadHandle); 
     return TRUE;
 }
+
+#endif

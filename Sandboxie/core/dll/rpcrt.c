@@ -1020,12 +1020,35 @@ void RpcRt_NdrClientCallX(const WCHAR* Function, void* ReturnAddress, PMIDL_STUB
     SbieApi_MonitorPutMsg(MONITOR_RPC | MONITOR_TRACE, text);
 }
 
+#if defined(_M_ARM64) || defined(_M_ARM64EC)
 
-#ifdef _WIN64
+ULONG_PTR RpcRt_NdrClientCall2ARM64(
+    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, void** pStack, void* ReturnAddress) {
+
+    RpcRt_NdrClientCallX(L"NdrClientCall2", ReturnAddress, pStubDescriptor, pFormat, pStack);
+
+    return FALSE; // return TRUE to not call the trampoline upon return
+}
+
+#if !defined(_M_ARM64EC)
+ULONG_PTR RpcRt_NdrClientCall3ARM64(
+    MIDL_STUBLESS_PROXY_INFO* pProxyInfo, ULONG nProcNum, void* pReturnValue, void** pStack, void* ReturnAddress) {
+
+#else
+ULONG_PTR RpcRt_NdrClientCall3ARM64(
+    MIDL_STUBLESS_PROXY_INFO* pProxyInfo, ULONG nProcNum, void* pReturnValue, void** pStack) {
+    void* ReturnAddress = *(pStack - 4);
+#endif
+
+    RpcRt_NdrClientCallX(L"NdrClientCall3", ReturnAddress, pProxyInfo->pStubDesc, pProxyInfo->ProcFormatString, pStack);
+
+    return FALSE; // return TRUE to not call the trampoline upon return
+}
+
+#elif _WIN64
 
 ULONG_PTR RpcRt_NdrClientCall2_x64(
-    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, void** pStack)
-{
+    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, void** pStack) {
     void* ReturnAddress = *(pStack - 3);
 
     RpcRt_NdrClientCallX(L"NdrClientCall2", ReturnAddress, pStubDescriptor, pFormat, pStack);
@@ -1034,8 +1057,7 @@ ULONG_PTR RpcRt_NdrClientCall2_x64(
 }
 
 ULONG_PTR RpcRt_NdrClientCall3_x64(
-    MIDL_STUBLESS_PROXY_INFO* pProxyInfo, ULONG nProcNum, void* pReturnValue, void** pStack)
-{
+    MIDL_STUBLESS_PROXY_INFO* pProxyInfo, ULONG nProcNum, void* pReturnValue, void** pStack) {
     void* ReturnAddress = *(pStack - 4);
 
     RpcRt_NdrClientCallX(L"NdrClientCall3", ReturnAddress, pProxyInfo->pStubDesc, pProxyInfo->ProcFormatString, pStack);
@@ -1047,8 +1069,8 @@ ULONG_PTR RpcRt_NdrClientCall3_x64(
 
 ULONG_PTR __cdecl RpcRt_NdrClientCall_x86(
     void* ReturnAddress,
-    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, void** pStack)
-{
+    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, void** pStack) {
+
     RpcRt_NdrClientCallX(L"NdrClientCall", ReturnAddress, pStubDescriptor, pFormat, pStack);
 
     return FALSE; // return TRUE to not call the trampoline upon return
@@ -1056,8 +1078,8 @@ ULONG_PTR __cdecl RpcRt_NdrClientCall_x86(
 
 ULONG_PTR __cdecl RpcRt_NdrClientCall2_x86(
     void* ReturnAddress,
-    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, void** pStack)
-{
+    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, void** pStack) {
+
     RpcRt_NdrClientCallX(L"NdrClientCall2", ReturnAddress, pStubDescriptor, pFormat, pStack);
 
     return FALSE; // return TRUE to not call the trampoline upon return
@@ -1070,11 +1092,44 @@ ULONG_PTR __cdecl RpcRt_NdrClientCall2_x86(
 // RpcRt_NdrAsyncClientCall
 //---------------------------------------------------------------------------
 
-#ifdef _WIN64
+#if defined(_M_ARM64) || defined(_M_ARM64EC)
+
+ULONG_PTR RpcRt_NdrAsyncClientCallARM64(
+    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, void** pStack, void* ReturnAddress) {
+
+    // pStack[0] -> RPC_ASYNC_STATE
+    // pStack[1] -> RPC_BINDING_HANDLE
+    // other args
+
+    RpcRt_NdrClientCallX(L"NdrAsyncClientCall", ReturnAddress, pStubDescriptor, pFormat, &pStack[1]);
+
+    return FALSE; // return TRUE to not call the trampoline upon return
+}
+
+#if !defined(_M_ARM64EC)
+ALIGNED BOOLEAN __cdecl RpcRt_Ndr64AsyncClientCallARM64(
+    MIDL_STUBLESS_PROXY_INFO* pProxyInfo, ULONG nProcNum, void* pReturnValue, void** pStack, void* ReturnAddress) {
+#else
+ALIGNED BOOLEAN __cdecl RpcRt_Ndr64AsyncClientCallARM64(
+    MIDL_STUBLESS_PROXY_INFO* pProxyInfo, ULONG nProcNum, void* pReturnValue, void** pStack) {
+    void* ReturnAddress = *(pStack - 4);
+#endif
+
+    if (g_rpc_client_hooks) {
+        RpcRt_NdrClientCallX(L"Ndr64AsyncClientCall", ReturnAddress, pProxyInfo->pStubDesc, pProxyInfo->ProcFormatString, &pStack[1]);
+    }
+
+    if (!SbieApi_QueryConfBool(NULL, L"NoUACProxy", FALSE))
+    if (Dll_OsBuild >= 6000) {
+        return Secure_CheckElevation((struct SECURE_UAC_ARGS*)pStack);
+    }
+    return FALSE; // return TRUE to not call the trampoline upon return
+}
+
+#elif _WIN64
 
 ULONG_PTR RpcRt_NdrAsyncClientCall_x64(
-    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, void** pStack)
-{
+    PMIDL_STUB_DESC pStubDescriptor, PFORMAT_STRING pFormat, void** pStack) {
     void* ReturnAddress = *(pStack - 3);
 
     // pStack[0] -> RPC_ASYNC_STATE
@@ -1087,8 +1142,7 @@ ULONG_PTR RpcRt_NdrAsyncClientCall_x64(
 }
 
 ALIGNED BOOLEAN __cdecl RpcRt_Ndr64AsyncClientCall_x64(
-    MIDL_STUBLESS_PROXY_INFO* pProxyInfo, ULONG nProcNum, void* pReturnValue, void** pStack)
-{
+    MIDL_STUBLESS_PROXY_INFO* pProxyInfo, ULONG nProcNum, void* pReturnValue, void** pStack) {
     void* ReturnAddress = *(pStack - 4);
 
     if (g_rpc_client_hooks) {
@@ -1106,8 +1160,8 @@ ALIGNED BOOLEAN __cdecl RpcRt_Ndr64AsyncClientCall_x64(
 
 ALIGNED BOOLEAN __cdecl RpcRt_NdrAsyncClientCall_x86(
     void* ReturnAddress,
-    PMIDL_STUB_DESC pStubDescriptor, void* pFormat, void** pStack)
-{
+    PMIDL_STUB_DESC pStubDescriptor, void* pFormat, void** pStack) {
+
     if (g_rpc_client_hooks) {
         RpcRt_NdrClientCallX(L"NdrAsyncClientCall", ReturnAddress, pStubDescriptor, pFormat, &pStack[1]);
     }

@@ -27,6 +27,9 @@
 #include "api.h"
 #include "util.h"
 #include "common/my_version.h"
+#ifdef _M_ARM64
+#include "common/arm64_asm.h"
+#endif
 #include "session.h"
 
 
@@ -284,6 +287,35 @@ _FX BOOLEAN Token_Init_SepFilterToken(void)
     ptr = MmGetSystemRoutineAddress(&uni);
     if (ptr) {
 
+#ifdef _M_ARM64
+
+        ULONG i;
+        for (i = 0; i < 256; i += 4) {
+
+            //
+            // ARM64: look for "BL SepFilterToken"
+            //
+
+            BL bl;
+            bl.OP = *(ULONG*)ptr;
+
+            if (bl.op1 == 0b00101 && bl.op2 == 0b1) {
+
+                LONG delta = (bl.imm26 << 2); // * 4
+                if (delta & (1 << 27)) // if this is negative
+                    delta |= 0xF0000000; // make it properly negative
+
+                Token_SepFilterToken = (P_SepFilterToken)(ptr + delta);
+                DbgPrint("SepFilterToken: %p\n", Token_SepFilterToken);
+
+                break;
+            }
+
+            ptr += 4;
+        }
+
+#else !_M_ARM64
+
         ULONG i;
         for (i = 0; i < 256; ++i) {
 
@@ -331,6 +363,8 @@ _FX BOOLEAN Token_Init_SepFilterToken(void)
 
             ++ptr;
         }
+
+#endif _M_ARM64
     }
 
     if (!Token_SepFilterToken) {
@@ -1553,17 +1587,23 @@ _FX NTSTATUS Token_AssignPrimaryHandle(
     // on Windows Vista and later, we need to clear the PrimaryTokenFrozen
     // bit in the EPROCESS structure before we can replace the primary token
 
-    // Hard Offset Dependency
+    // $Offset$ - Hard Offset Dependency
 
     // dt nt!_eprocess
 
     if (Driver_OsVersion >= DRIVER_WINDOWS_VISTA) {
 
-        ULONG Flags2_Offset;                // EPROCESS.Flags2
+        ULONG Flags2_Offset = 0;                // EPROCESS.Flags2
         ULONG SignatureLevel_Offset;        // EPROCESS.SignatureLevel
         ULONG MitigationFlags_Offset = 0;   // EPROCESS.MitigationFlags
-        PROCESS_INFO myProcessInfo;
-#ifdef _WIN64
+
+#ifdef _M_ARM64
+
+        Flags2_Offset = 0x418;
+        MitigationFlags_Offset = 0xA90;
+        SignatureLevel_Offset = 0x938;
+
+#elif _WIN64
 
         if (Driver_OsVersion >= DRIVER_WINDOWS_10) {
             if (Driver_OsBuild >= 19013) {
@@ -1644,42 +1684,47 @@ _FX NTSTATUS Token_AssignPrimaryHandle(
 
         }
 
+#endif _WIN64
+
         /*WCHAR msg[256];
 		swprintf(msg, L"BAM: Flags2_Offset=%d MitigationFlags_Offset=%d SignatureLevel_Offset=%d\n", Flags2_Offset, MitigationFlags_Offset, SignatureLevel_Offset);
 		Session_MonitorPut(MONITOR_OTHER, msg, PsGetCurrentProcessId());*/
 
-#endif _WIN64
-
         PtrPrimaryTokenFrozen = (ULONG *)((UCHAR *)ProcessObject + Flags2_Offset);
-        if (Driver_OsBuild >= 15031 && Driver_OsBuild < 16241) {
-            if (*PtrPrimaryTokenFrozen & 0x400) {       // DisableDynamicCode = 0x400
 
-            //Turn off signature Integrity Check
-                *(USHORT *)((UCHAR*)ProcessObject + SignatureLevel_Offset) = 0;
-
-                if (MitigationFlags_Offset) {
-                    //Turn off process level Control Flow Guard and other undocumented security settings 
-                    *(ULONG *)((UCHAR *)ProcessObject + MitigationFlags_Offset) = 0x20;
-                }
-
-            }
-            myProcessInfo.type = 2; //ProcessDynamicCodePolicy
-            myProcessInfo.data = 0; //Turn off DynamicCodePolicy
-
-            ZwSetInformationProcess(ProcessHandle, (PROCESSINFOCLASS)ProcessMitigationPolicy, &myProcessInfo, sizeof(PROCESS_INFO));
-
-        }
-        else if (Driver_OsBuild >= 16241) {
+        if (Driver_OsBuild >= 16241) {
+            
             //Turn off process level Control Flow Guard and other undocumented security settings 
             //really Flag4_Offset in this version of windows 10
-            *(UCHAR *)((UCHAR *)ProcessObject + MitigationFlags_Offset) = 0x00;
+            if(MitigationFlags_Offset)
+                *(UCHAR *)((UCHAR *)ProcessObject + MitigationFlags_Offset) = 0x00;
+
             //Turn off signature Integrity Check
-            *(USHORT *)((UCHAR*)ProcessObject + SignatureLevel_Offset) = 0;
+            if(SignatureLevel_Offset)
+                *(USHORT *)((UCHAR*)ProcessObject + SignatureLevel_Offset) = 0;
+        }
+        else if (Driver_OsBuild >= 15031) {
+
+            if (*PtrPrimaryTokenFrozen & 0x400) { // DisableDynamicCode = 0x400
+                
+                //Turn off process level Control Flow Guard and other undocumented security settings 
+                if (MitigationFlags_Offset) 
+                    *(ULONG *)((UCHAR *)ProcessObject + MitigationFlags_Offset) = 0x20;
+
+                //Turn off signature Integrity Check
+                if (SignatureLevel_Offset) 
+                    *(USHORT*)((UCHAR*)ProcessObject + SignatureLevel_Offset) = 0;
+            }
+        }
+        
+        if (Driver_OsBuild >= 15031) {
+
+            PROCESS_INFO myProcessInfo;
             myProcessInfo.type = 2; //ProcessDynamicCodePolicy
             myProcessInfo.data = 0; //Turn off DynamicCodePolicy
-
             ZwSetInformationProcess(ProcessHandle, (PROCESSINFOCLASS)ProcessMitigationPolicy, &myProcessInfo, sizeof(PROCESS_INFO));
         }
+
         SavePrimaryTokenFrozen = *PtrPrimaryTokenFrozen & 0x8000;
         *PtrPrimaryTokenFrozen &= ~SavePrimaryTokenFrozen;
     }
@@ -2176,6 +2221,25 @@ _FX NTSTATUS SbieCreateToken(PHANDLE TokenHandle, ACCESS_MASK DesiredAccess, POB
     PTOKEN_GROUPS DeviceGroups, PTOKEN_MANDATORY_POLICY MandatoryPolicy,
     PTOKEN_OWNER Owner, PTOKEN_PRIMARY_GROUP PrimaryGroup, PTOKEN_DEFAULT_DACL DefaultDacl, PTOKEN_SOURCE Source)
 {
+#ifdef _M_ARM64
+    if(!Driver_KiServiceInternal)
+        return STATUS_INVALID_SYSTEM_SERVICE;
+    
+    if (ZwCreateTokenEx_num) { // Win 8+
+        return Sbie_CallZwServiceFunction_asm((ULONG_PTR)TokenHandle, (ULONG_PTR)DesiredAccess, (ULONG_PTR)ObjectAttributes,
+            (ULONG_PTR)Type, (ULONG_PTR)AuthenticationId, (ULONG_PTR)ExpirationTime, (ULONG_PTR)User, (ULONG_PTR)Groups, (ULONG_PTR)Privileges,
+            (ULONG_PTR)UserAttributes, (ULONG_PTR)DeviceAttributes, (ULONG_PTR)DeviceGroups, (ULONG_PTR)MandatoryPolicy,
+            (ULONG_PTR)Owner, (ULONG_PTR)PrimaryGroup, (ULONG_PTR)DefaultDacl, (ULONG_PTR)Source, 
+            0, 0,
+            ZwCreateTokenEx_num);
+    }
+    if (ZwCreateToken_num) {
+        NTSTATUS status =  Sbie_CallZwServiceFunction_asm((ULONG_PTR)TokenHandle, (ULONG_PTR)DesiredAccess, (ULONG_PTR)ObjectAttributes,
+            (ULONG_PTR)Type, (ULONG_PTR)AuthenticationId, (ULONG_PTR)ExpirationTime, (ULONG_PTR)User, (ULONG_PTR)Groups, (ULONG_PTR)Privileges,
+            (ULONG_PTR)Owner, (ULONG_PTR)PrimaryGroup, (ULONG_PTR)DefaultDacl, (ULONG_PTR)Source, 
+            0, 0, 0, 0, 0, 0,
+            ZwCreateToken_num);
+#else
     if (ZwCreateTokenEx) { // Win 8+
         return ZwCreateTokenEx(TokenHandle, DesiredAccess, ObjectAttributes,
             Type, AuthenticationId, ExpirationTime, User, Groups, Privileges,
@@ -2186,7 +2250,7 @@ _FX NTSTATUS SbieCreateToken(PHANDLE TokenHandle, ACCESS_MASK DesiredAccess, POB
         NTSTATUS status =  ZwCreateToken(TokenHandle, DesiredAccess, ObjectAttributes,
             Type, AuthenticationId, ExpirationTime, User, Groups, Privileges,
             Owner, PrimaryGroup, DefaultDacl, Source);
-
+#endif
         if (NT_SUCCESS(status)) {
             if(MandatoryPolicy)
                 ZwSetInformationToken(TokenHandle, TokenMandatoryPolicy, MandatoryPolicy, sizeof(TOKEN_MANDATORY_POLICY));

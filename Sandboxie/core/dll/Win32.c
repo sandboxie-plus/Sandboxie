@@ -22,9 +22,10 @@
 
 #define NOGDI
 #include "dll.h"
+#include "debug.h"
 
 #include "common\pattern.h"
-
+#include "common\arm64_asm.h"
 #include "core/drv/api_defs.h"
 #include "core/low/lowdata.h"
 
@@ -40,6 +41,11 @@ NTSTATUS SbieApi_QueryVirtualMemory(HANDLE hProcess, DWORD64 BaseAddress, MEMORY
 BOOLEAN Win32_HookWin32WoW64();
 #endif
 
+#ifdef _M_ARM64EC
+ULONG Hook_GetSysCallFunc(ULONG* aCode, void** pHandleStubHijack);
+ULONG* SbieDll_FindFirstSysCallFunc(ULONG* aCode, void** pHandleStubHijack);
+void* SbieDll_GetEcExitThunk(void* HandleStubHijack);
+#endif
 
 ULONG SbieDll_GetSysCallOffset(const ULONG *SyscallPtr, ULONG syscall_index);
 
@@ -82,6 +88,55 @@ _FX BOOLEAN Win32_HookWin32SysCalls(HMODULE win32u_base)
     SyscallPtr = (ULONG *)(syscall_data
                          + sizeof(ULONG));         // size of buffer
 
+#ifdef _M_ARM64EC
+
+	ULONG* aCode = SbieDll_FindFirstSysCallFunc((ULONG*)win32u_base, NULL);
+	if (aCode == NULL) {
+        HeapFree(GetProcessHeap(), 0, syscall_data);
+        return FALSE;
+	}
+
+	for (ULONG pos = 0; pos < 128; aCode++, pos += 4) {
+
+		SyscallNum = Hook_GetSysCallFunc(aCode, NULL);
+		if (SyscallNum == -1)
+			continue;
+
+		if (SbieDll_GetSysCallOffset(SyscallPtr, SyscallNum)) {
+
+            RegionBase = aCode;
+
+            RegionSize = 16;
+
+            SBIELOW_CALL(NtProtectVirtualMemory)(
+                NtCurrentProcess(), &RegionBase, &RegionSize,
+                PAGE_EXECUTE_READWRITE, &OldProtect);
+
+            MOV mov;
+            mov.OP   = 0xD2800011;  // mov x17, #0xFFFF
+            mov.imm16 = (USHORT)SyscallNum; 
+            *aCode++ = mov.OP;
+	        *aCode++ = 0x18000048;	// ldr w8, 8
+	        *aCode++ = 0xD61F0100;	// br x8
+            *(ULONG*)aCode = (ULONG)(ULONG_PTR)SystemServiceAsm;
+
+            SBIELOW_CALL(NtFlushInstructionCache)(
+                NtCurrentProcess(), RegionBase, (ULONG)RegionSize);
+
+            SBIELOW_CALL(NtProtectVirtualMemory)(
+                NtCurrentProcess(), &RegionBase, &RegionSize,
+                OldProtect, &OldProtect);
+
+		}
+
+		//if (aCode[13] != 0 || aCode[14] != 0 || aCode[15] != 0 || aCode[16] != 0)
+		//    break;
+		//aCode += (13 + 3 + 3 + 1);
+		aCode += 16;
+		pos = 0; // reset
+	}
+
+#else
 
     while (SyscallPtr[0] || SyscallPtr[1]) {
 
@@ -97,7 +152,9 @@ _FX BOOLEAN Win32_HookWin32SysCalls(HMODULE win32u_base)
         //
         RegionBase = ZwXxxPtr;
 
-#ifdef _WIN64
+#ifdef _M_ARM64
+        RegionSize = 16;
+#elif _WIN64
         RegionSize = 14;
 #else ! _WIN64
         RegionSize = 10;
@@ -118,7 +175,23 @@ _FX BOOLEAN Win32_HookWin32SysCalls(HMODULE win32u_base)
 
         SyscallNum = SyscallPtr[0];
 
-#ifdef _WIN64
+#ifdef _M_ARM64
+
+        ULONG* aCode = (ULONG*)ZwXxxPtr;
+
+        MOV mov;
+        mov.OP   = 0xD2800011;  // mov x17, #0xFFFF
+        mov.imm16 = (USHORT)SyscallNum; 
+        *aCode++ = mov.OP;
+	    *aCode++ = 0x18000048;	// ldr w8, 8
+	    *aCode++ = 0xD61F0100;	// br x8
+        *(ULONG*)aCode = (ULONG)(ULONG_PTR)SystemServiceAsm;
+
+
+        SBIELOW_CALL(NtFlushInstructionCache)(
+            NtCurrentProcess(), RegionBase, (ULONG)RegionSize);
+
+#elif _WIN64
 
         ZwXxxPtr[0] = 0x49;                     // mov r10, SyscallNumber
         ZwXxxPtr[1] = 0xC7;
@@ -159,6 +232,8 @@ _FX BOOLEAN Win32_HookWin32SysCalls(HMODULE win32u_base)
 
         SyscallPtr += 2;
     }
+
+#endif
 
     HeapFree(GetProcessHeap(), 0, syscall_data);
     return TRUE;
@@ -250,6 +325,27 @@ ULONG Win32_GetSysCallNumberWoW64(DWORD64 pos, UCHAR* dll_data)
 
 
 //---------------------------------------------------------------------------
+// Win32_GetSysCallNumberArm64
+//---------------------------------------------------------------------------
+
+
+_FX ULONG Win32_GetSysCallNumberArm64(ULONG* aCode)
+{
+    //  0: e10000d4    svc  #0x1000
+    SVC svc;
+    svc.OP = aCode[0];
+    if (!IS_SVC(svc) || svc.imm16 < 0x1000) // win32 syscalls are >= 0x1000
+        return -1;
+
+    //  1: c0035fd6    ret  
+    if (aCode[1] != 0xd65f03c0)
+        return -1;
+
+    return svc.imm16;
+}
+
+
+//---------------------------------------------------------------------------
 // Win32_HookWin32WoW64
 //---------------------------------------------------------------------------
 
@@ -314,7 +410,85 @@ _FX BOOLEAN Win32_HookWin32WoW64()
     }
 
     SyscallPtr = (ULONG*)(syscall_data + sizeof(ULONG)); // size of buffer
-	
+
+    if (Dll_IsXtAjit) { // x86 on arm64
+
+        UCHAR* ZwXxxPtr;
+
+        ULONG* aCode = (ULONG*)dll_data;
+
+		for (ULONG64 pos = 0; pos < SizeRead; aCode++, pos += 4) {
+            if (Win32_GetSysCallNumberArm64(aCode) != -1)
+                break;
+		}
+
+	    if ((DWORD64)aCode >= (DWORD64)dll_data + SizeRead) {
+            SbieApi_Log(2303, L"win32k, get first syscall wrapper failed");
+            goto finish;
+	    }
+
+	    for (ULONG pos = 0; pos < 128; aCode++, pos += 4) {
+
+		    ULONG SyscallNum = Win32_GetSysCallNumberArm64(aCode);
+		    if (SyscallNum == -1)
+			    continue;
+
+		    if (SbieDll_GetSysCallOffset(SyscallPtr, SyscallNum)) {
+
+                DWORD64 offset = (DWORD64)aCode - (DWORD64)dll_data;
+
+                RegionBase = BaseAddress + offset;
+                RegionSize = 16;
+
+                //
+                // prepare call to call our SystemServiceAsm
+                //
+
+                ZwXxxPtr = aCode;
+
+                MOV mov;
+                mov.OP   = 0xD2800011;  // mov x17, #0xFFFF
+                mov.imm16 = (USHORT)SyscallNum; 
+                *aCode++ = mov.OP;
+	            *aCode++ = 0x18000048;	// ldr w8, 8
+	            *aCode++ = 0xD61F0100;	// br x8
+                *(ULONG*)aCode = (ULONG)(ULONG_PTR)SystemServiceAsm;
+
+                //
+                // overwrite the ZwXxx export to call our SystemServiceAsm,
+                // and then restore the original page protection
+                //
+
+                if (!NT_SUCCESS(SbieApi_ProtectVirtualMemory(NtCurrentProcess(), RegionBase, RegionSize, PAGE_EXECUTE_READWRITE, &OldProtect))) {
+                    SbieApi_Log(2303, L"win32k %d (1)", SyscallNum);
+                    goto finish;
+                }
+
+                if (!NT_SUCCESS(SbieApi_WriteVirtualMemory(NtCurrentProcess(), RegionBase, ZwXxxPtr, RegionSize, &SizeRead))) {
+                    SbieApi_Log(2303, L"win32k %d (2)", SyscallNum);
+                    goto finish;
+                }
+                
+                if (!NT_SUCCESS(SbieApi_FlushInstructionCache(NtCurrentProcess(), RegionBase, RegionSize))) {
+                    SbieApi_Log(2303, L"win32k %d (3)", SyscallNum);
+                    goto finish;
+                }
+
+                if (!NT_SUCCESS(SbieApi_ProtectVirtualMemory(NtCurrentProcess(), RegionBase, RegionSize, OldProtect, &OldProtect))) {
+                    SbieApi_Log(2303, L"win32k %d (4)", SyscallNum);
+                    goto finish;
+                }
+
+		    }
+
+		    //if (aCode[2] != 0 || aCode[3] != 0)
+		    //    break;
+		    aCode += 4;
+		    pos = 0; // reset
+	    }
+
+    }
+    else { // x86 on x64
 
         UCHAR ZwXxxPtr[16];
 
@@ -399,6 +573,8 @@ _FX BOOLEAN Win32_HookWin32WoW64()
             else
                 pos++;
         }
+
+    }
 
 finish:
     
@@ -574,28 +750,3 @@ NTSTATUS SbieApi_QueryVirtualMemory(HANDLE hProcess, DWORD64 BaseAddress, MEMORY
 }
 
 #endif
-
-
-//---------------------------------------------------------------------------
-// SbieDll_GetSysCallOffset
-//---------------------------------------------------------------------------
-
-
-_FX ULONG SbieDll_GetSysCallOffset(const ULONG *SyscallPtr, ULONG syscall_index)
-{
-    ULONG SyscallNum;
-
-    while (SyscallPtr[0] || SyscallPtr[1]) {
-            
-        SyscallNum = SyscallPtr[0];
-            
-        SyscallNum &= 0xFFFF; // clear the not needed param count
-            
-        if (SyscallNum == syscall_index)
-            return SyscallPtr[1];
-
-        SyscallPtr += 2;
-    }
-
-    return 0;
-}

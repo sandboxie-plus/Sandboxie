@@ -60,8 +60,7 @@ ULONG DriverAssist::StartDriverAsync(void *arg)
 
     bool ok = false;
 
-    WCHAR driver_version[16];
-    LONG rc = SbieApi_GetVersion(driver_version);
+    LONG rc = SbieApi_GetVersionEx(NULL, NULL);
     if (rc == 0) {
         ok = true;
         goto driver_started;
@@ -125,21 +124,17 @@ ULONG DriverAssist::StartDriverAsync(void *arg)
 driver_started:
 
     if (ok) {
+        ULONG drv_abi_ver = 0;
 
         for (ULONG retries = 0; retries < 20; ++retries) {
 
-            rc = SbieApi_GetVersion(driver_version);
+            rc = SbieApi_GetVersionEx(NULL, &drv_abi_ver);
             if (rc == 0)
                 break;
-            driver_version[0] = L'!';
-            driver_version[1] = L'\0';
             Sleep(500);
         }
 
-        WCHAR application_version[16];
-        wsprintf(application_version, L"%S", MY_VERSION_COMPAT);
-
-        if (wcscmp(application_version, driver_version) != 0) {
+        if (drv_abi_ver != MY_ABI_VERSION) {
             LogEvent(MSG_9234, 0x9154, 0);
             ok = false;
         }
@@ -217,6 +212,43 @@ driver_started:
 #endif
 
     if (ok) {
+
+#ifdef _M_ARM64
+
+        //
+        // Sandboxie on ARM64 requires x86 applications NOT to use the CHPE binaries.
+        // 
+        // So when ever the service starts it uses the global xtajit config to disable the use of CHPE binaries,
+        // for x86 processes and restores the original value on service shutdown.
+        //
+        // See comment in HookImageOptionsEx core/low/init.c for more details.
+        //
+
+        extern BOOLEAN DisableCHPE;
+        DisableCHPE = SbieApi_QueryConfBool(NULL, L"DisableCHPE", TRUE);
+
+        if (DisableCHPE) {
+            HKEY hkey = NULL;
+            LSTATUS rc = RegCreateKeyEx(HKEY_LOCAL_MACHINE, L"SOFTWARE\\Microsoft\\Wow64\\x86\\xtajit",
+                0, NULL, 0, KEY_ALL_ACCESS, NULL, &hkey, NULL);
+            if (rc == 0)
+            {
+                DWORD value;
+                DWORD size = sizeof(value);
+                rc = RegQueryValueEx(hkey, L"LoadCHPEBinaries_old", NULL, NULL, (BYTE*)&value, &size);
+                if (rc != 0) { // only save the old value when its not already saved
+                    rc = RegQueryValueEx(hkey, L"LoadCHPEBinaries", NULL, NULL, (BYTE*)&value, &size);
+                    if (rc == 0)
+                        RegSetValueEx(hkey, L"LoadCHPEBinaries_old", NULL, REG_DWORD, (BYTE*)&value, size);
+                }
+
+                value = 0;
+                RegSetValueEx(hkey, L"LoadCHPEBinaries", NULL, REG_DWORD, (BYTE*)&value, sizeof(value));
+
+                RegCloseKey(hkey);
+            }
+        }
+#endif
 
         //
         // trigger manual invocation of LogMessage to collect any

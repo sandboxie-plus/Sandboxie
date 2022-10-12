@@ -73,7 +73,9 @@ typedef struct _COM_IUNKNOWN {
 // Functions
 //---------------------------------------------------------------------------
 
+#ifndef _WIN64
 BOOLEAN SbieDll_IsWow64();
+#endif
 
 static BOOLEAN Com_IsFirewallClsid(REFCLSID rclsid, const WCHAR *BoxName);
 
@@ -93,6 +95,7 @@ static HRESULT Com_CoCreateInstanceEx(
     REFCLSID rclsid, void *pUnkOuter, ULONG clsctx, void *pServerInfo,
     ULONG cmq, MULTI_QI *pmqs);
 
+#ifndef _M_ARM64
 static BOOLEAN Com_Hook_CoUnmarshalInterface_W8(UCHAR *code, HMODULE module);
 
 static HRESULT __fastcall Com_CoUnmarshalInterface_W8(
@@ -100,6 +103,7 @@ static HRESULT __fastcall Com_CoUnmarshalInterface_W8(
 
 static HRESULT __fastcall Com_CoUnmarshalInterface_W81(
     ULONG_PTR StreamAddr, ULONG zero, REFIID riid, void **ppv);
+#endif
 
 static HRESULT  Com_CoUnmarshalInterface_W10(
     ULONG_PTR StreamAddr,  REFIID riid,void **ppv);
@@ -231,8 +235,10 @@ P_CoGetObject               __sys_CoGetObject               = NULL;
 P_CoCreateInstance          __sys_CoCreateInstance          = NULL;
 P_CoCreateInstanceEx        __sys_CoCreateInstanceEx        = NULL;
 P_CoUnmarshalInterface      __sys_CoUnmarshalInterface      = NULL;
+#ifndef _M_ARM64
 P_CoUnmarshalInterface_W8   __sys_CoUnmarshalInterface_W8   = NULL;
 P_CoUnmarshalInterface_W81  __sys_CoUnmarshalInterface_W81  = NULL;
+#endif
 P_CoUnmarshalInterface_W10  __sys_CoUnmarshalInterface_W10  = NULL;
 P_CoMarshalInterface        __sys_CoMarshalInterface        = NULL;
 
@@ -873,7 +879,7 @@ _FX HRESULT Com_CoCreateInstanceEx(
 // Com_Hook_CoUnmarshalInterface_W8
 //---------------------------------------------------------------------------
 
-
+#ifndef _M_ARM64
 _FX BOOLEAN Com_Hook_CoUnmarshalInterface_W8(UCHAR *code, HMODULE module)
 {
 
@@ -900,7 +906,7 @@ _FX BOOLEAN Com_Hook_CoUnmarshalInterface_W8(UCHAR *code, HMODULE module)
 
 #ifdef _WIN64
 
-    if (Dll_OsBuild >= 15002) {
+    if (Dll_OsBuild >= 15002) { // Windows 10 1703 preview
 
         if (code[0x18] == 0xe9) {
 
@@ -912,7 +918,7 @@ _FX BOOLEAN Com_Hook_CoUnmarshalInterface_W8(UCHAR *code, HMODULE module)
         }
     }
 
-    else if (Dll_OsBuild >= 14942) {
+    else if (Dll_OsBuild >= 14942) { // Windows 10 1703 preview #7
 
         if (code[0x20] == 0xe9) {
             LONG_PTR jump_target = (LONG_PTR)code + (*(LONG *)(code + 0x21)) + 0x25;
@@ -1149,6 +1155,7 @@ _FX HRESULT  Com_CoUnmarshalInterface_W10(
 
     return Com_CoUnmarshalInterface_Common(pStream, riid, ppv, &posl);
 }
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -1406,13 +1413,16 @@ _FX BOOLEAN Com_Init_ComBase(HMODULE module)
 
     if (!Ipc_OpenCOM) {
         if (Dll_OsBuild >= 8400) {
-            if (!Com_Hook_CoUnmarshalInterface_W8(
-                (UCHAR*)CoUnmarshalInterface, module))
-                return FALSE;
+            CoUnmarshalInterface = (P_CoUnmarshalInterface)GetProcAddress(GetModuleHandle(L"combase.dll"), "CoUnmarshalInterface");
+#ifndef _M_ARM64
+            // $HookHack$ - Custom, not automated, Hook for windows 8 and 8.1 and early windows 10 builds
+            if (!CoUnmarshalInterface) {
+                if (!Com_Hook_CoUnmarshalInterface_W8((UCHAR*)CoUnmarshalInterface, module))
+                    return FALSE;
+            }
+#endif
         }
-        else {
-            SBIEDLL_HOOK(Com_, CoUnmarshalInterface);
-        }
+        SBIEDLL_HOOK(Com_, CoUnmarshalInterface);
 
         SBIEDLL_HOOK(Com_, CoMarshalInterface);
         SbieDll_IsOpenClsid(&IID_IUnknown, CLSCTX_LOCAL_SERVER, NULL); // trigger list loading
@@ -1430,6 +1440,12 @@ _FX BOOLEAN Com_Init_ComBase(HMODULE module)
     WCHAR wsTraceOptions[4];
     if (SbieApi_QueryConf(NULL, L"ClsidTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS && wsTraceOptions[0] != L'\0')
         Com_TraceFlag = TRUE;
+
+    if (!__sys_RegOpenKeyExW) {
+        HMODULE module = Dll_KernelBase ? Dll_KernelBase : LoadLibrary(DllName_advapi32);
+        __sys_RegOpenKeyExW = (P_RegOpenKeyEx)GetProcAddress(module, "RegOpenKeyExW");
+        GETPROCADDR_SYS(RegCloseKey);
+    }
 
     return TRUE;
 }

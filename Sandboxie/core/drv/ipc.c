@@ -392,10 +392,13 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
         L"\\Windows\\SharedSection", // bSession0
         L"\\Sessions\\*\\BaseNamedObjects\\CrSharedMem_*",      // now required by Chromium browsers
         L"\\ThemeApiPort",
-        L"\\KnownDlls\\*",              // see Ipc_Generic_MyOpenProc_2
+        L"\\KnownDlls\\*",
 #ifdef _WIN64
-        L"\\KnownDlls32\\*",            // see Ipc_Generic_MyOpenProc_2
+        L"\\KnownDlls32\\*",
 #endif _WIN64
+#ifdef _M_ARM64
+        L"\\KnownDllsChpe32\\*",
+#endif _M_ARM64
         L"\\NLS\\*",
         L"*\\BaseNamedObjects*\\ShimCacheMutex",
         L"*\\BaseNamedObjects*\\ShimSharedMemory",

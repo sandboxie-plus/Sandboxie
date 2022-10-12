@@ -24,7 +24,9 @@
 #include "api.h"
 #include "process.h"
 #include "util.h"
+#ifndef _M_ARM64
 #include "hook.h"
+#endif
 #include "session.h"
 #include "common/my_version.h"
 #include "log_buff.h"
@@ -565,14 +567,17 @@ _FX BOOLEAN Api_FastIo_DEVICE_CONTROL(
 _FX NTSTATUS Api_GetVersion(PROCESS *proc, ULONG64 *parms)
 {
     API_GET_VERSION_ARGS *args = (API_GET_VERSION_ARGS *)parms;
-    size_t len;
-    WCHAR *pwcResult = args->string.val;
 
-    if (pwcResult == NULL)
-        return STATUS_INVALID_PARAMETER;
-    len = (wcslen(Driver_Version) + 1) * sizeof(WCHAR);
-    ProbeForWrite(pwcResult, len, sizeof(WCHAR));
-    memcpy(pwcResult, Driver_Version, len);
+    if (args->string.val != NULL) {
+        size_t len = (wcslen(Driver_Version) + 1) * sizeof(WCHAR);
+        ProbeForWrite(args->string.val, len, sizeof(WCHAR));
+        memcpy(args->string.val, Driver_Version, len);
+    }
+
+    if (args->abi_ver.val != NULL) {
+        ProbeForWrite(args->abi_ver.val, sizeof(ULONG), sizeof(ULONG));
+        *args->abi_ver.val = MY_ABI_VERSION;
+    }
 
     return STATUS_SUCCESS;
 }
@@ -1290,8 +1295,10 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
     NTSTATUS status = STATUS_SUCCESS;
     API_QUERY_DRIVER_INFO_ARGS *args = (API_QUERY_DRIVER_INFO_ARGS *)parms;
 	
-    if (proc)
+    if (proc) {
         status = STATUS_NOT_IMPLEMENTED;
+        goto finish;
+    }
 
     __try {
 
@@ -1327,6 +1334,10 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
                 FeatureFlags |= SBIE_FEATURE_FLAG_COMPARTMENTS;
             }
 
+#ifdef _M_ARM64
+            FeatureFlags |= SBIE_FEATURE_FLAG_NEW_ARCH;
+#endif
+
             *data = FeatureFlags;
         }
         else if (args->info_class.val == -1) {
@@ -1350,6 +1361,7 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
         status = GetExceptionCode();
     }
 
+finish:
     return status;
 }
 

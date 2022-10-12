@@ -249,11 +249,11 @@ static NTSTATUS Key_NtRenameKey(
     HANDLE KeyHandle, UNICODE_STRING *ReplacementName);
 
 
-//static NTSTATUS Key_NtSaveKey(
-//    HANDLE KeyHandle, HANDLE FileHandle);
-//
-//static NTSTATUS Key_NtSaveKeyEx(
-//    HANDLE KeyHandle, HANDLE FileHandle, ULONG Flags);
+static NTSTATUS Key_NtSaveKey(
+    HANDLE KeyHandle, HANDLE FileHandle);
+
+static NTSTATUS Key_NtSaveKeyEx(
+    HANDLE KeyHandle, HANDLE FileHandle, ULONG Flags);
 
 static NTSTATUS Key_NtLoadKey(
     OBJECT_ATTRIBUTES *TargetObjectAttributes,
@@ -294,8 +294,8 @@ static P_NtNotifyChangeKey          __sys_NtNotifyChangeKey         = NULL;
 static P_NtNotifyChangeMultipleKeys __sys_NtNotifyChangeMultipleKeys= NULL;
 static P_NtRenameKey                __sys_NtRenameKey               = NULL;
 
-//static P_NtSaveKey                  __sys_NtSaveKey                 = NULL;
-//static P_NtSaveKeyEx                __sys_NtSaveKeyEx               = NULL;
+static P_NtSaveKey                  __sys_NtSaveKey                 = NULL;
+static P_NtSaveKeyEx                __sys_NtSaveKeyEx               = NULL;
 static P_NtLoadKey                  __sys_NtLoadKey                 = NULL;
 static P_NtLoadKey2                 __sys_NtLoadKey2                = NULL;
 static P_NtLoadKey3                 __sys_NtLoadKey3                = NULL;
@@ -377,7 +377,7 @@ BOOLEAN Key_Delete_v2 = FALSE;
 
 _FX BOOLEAN Key_Init(void)
 {
-    HMODULE module = NULL;
+    HMODULE module = Dll_Ntdll;
 
     InitializeCriticalSection(&Key_Handles_CritSec);
 
@@ -429,12 +429,12 @@ _FX BOOLEAN Key_Init(void)
     }
 
     
-    //SBIEDLL_HOOK(Key_, NtSaveKey);
-    //
-    //void* NtSaveKeyEx = GetProcAddress(Dll_Ntdll, "NtSaveKeyEx");
-    //if (NtSaveKeyEx) {
-    //    SBIEDLL_HOOK(Key_,NtSaveKeyEx);
-    //}
+    SBIEDLL_HOOK(Key_, NtSaveKey);
+    
+    void* NtSaveKeyEx = GetProcAddress(Dll_Ntdll, "NtSaveKeyEx");
+    if (NtSaveKeyEx) {
+        SBIEDLL_HOOK(Key_,NtSaveKeyEx);
+    }
 
     SBIEDLL_HOOK(Key_, NtLoadKey);
 
@@ -451,8 +451,6 @@ _FX BOOLEAN Key_Init(void)
         SBIEDLL_HOOK(Key_,NtLoadKeyEx);
     }
     
-
-    Dll_OsBuild = GET_PEB_IMAGE_BUILD;
     return TRUE;
 }
 
@@ -832,11 +830,13 @@ check_sandbox_prefix:
 _FX NTSTATUS Key_FixNameWow64(
     ACCESS_MASK DesiredAccess, WCHAR **OutTruePath, WCHAR **OutCopyPath)
 {
+#ifndef _WIN64
     NTSTATUS status;
     OBJECT_ATTRIBUTES objattrs;
     UNICODE_STRING objname;
     HANDLE handle;
     WCHAR *TruePath, *BackslashPtr, *NewPtr;
+#endif 
 
     //
     // WOW64 Registry Redirector.  in case that either of these is true:
@@ -848,8 +848,9 @@ _FX NTSTATUS Key_FixNameWow64(
     // and then reconstruct the output TruePath and CopyPath
     //
 
+#ifndef _WIN64
     if (! Dll_IsWow64) {        // caller is 64-bit process
-
+#endif
         if (! (DesiredAccess & KEY_WOW64_32KEY))
             return STATUS_SUCCESS;
 
@@ -860,6 +861,7 @@ _FX NTSTATUS Key_FixNameWow64(
         // NoSysCallHooks END
 
         return Key_FixNameWow64_2(OutTruePath, OutCopyPath);
+#ifndef _WIN64
     }
 
     if (DesiredAccess & KEY_WOW64_64KEY)
@@ -955,6 +957,7 @@ _FX NTSTATUS Key_FixNameWow64(
     }
 
     return status;
+#endif
 }
 
 
@@ -1392,8 +1395,10 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
             if (!NT_SUCCESS(status))
                 __leave;
 
+#ifndef _WIN64
             if (Dll_IsWow64)
                 OriginalDesiredAccess = DesiredAccess;
+#endif
 
             DesiredAccess &= ~(KEY_WOW64_32KEY | KEY_WOW64_64KEY);
         }
@@ -4539,12 +4544,13 @@ finish:
 //---------------------------------------------------------------------------
 
 
-//_FX NTSTATUS Key_NtSaveKey(
-//    HANDLE KeyHandle, HANDLE FileHandle)
-//{
-//    SbieApi_Log(2205, L"NtSaveKey");
-//    return STATUS_SUCCESS;
-//}
+_FX NTSTATUS Key_NtSaveKey(
+    HANDLE KeyHandle, HANDLE FileHandle)
+{
+    // todo: copy all reg keys from host to box for the used KeyHandle such that all will be saved
+    SbieApi_Log(2205, L"NtSaveKey");
+    return __sys_NtSaveKey(KeyHandle, FileHandle);
+}
 
 
 //---------------------------------------------------------------------------
@@ -4552,12 +4558,13 @@ finish:
 //---------------------------------------------------------------------------
 
 
-//_FX NTSTATUS Key_NtSaveKeyEx(
-//    HANDLE KeyHandle, HANDLE FileHandle, ULONG Flags)
-//{
-//    SbieApi_Log(2205, L"NtSaveKeyEx");
-//    return STATUS_SUCCESS;
-//}
+_FX NTSTATUS Key_NtSaveKeyEx(
+    HANDLE KeyHandle, HANDLE FileHandle, ULONG Flags)
+{
+    // todo: copy all reg keys from host to box for the used KeyHandle such that all will be saved
+    SbieApi_Log(2205, L"NtSaveKeyEx");
+    return __sys_NtSaveKeyEx(KeyHandle, FileHandle, Flags);
+}
 
 
 //---------------------------------------------------------------------------
@@ -4577,8 +4584,12 @@ _FX WCHAR* Key_NtLoadKey_GetPath(OBJECT_ATTRIBUTES* SourceObjectAttributes)
 
         IO_STATUS_BLOCK IoStatusBlock;
 
+        //
+        // open the file for write to migrate it into the box
+        //
+
         status = NtCreateFile(
-            &FileHandle, FILE_READ_ATTRIBUTES | SYNCHRONIZE,
+            &FileHandle, FILE_GENERIC_WRITE | SYNCHRONIZE,
             SourceObjectAttributes,
             &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
             FILE_OPEN,

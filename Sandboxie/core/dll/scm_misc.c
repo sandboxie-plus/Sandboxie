@@ -146,6 +146,7 @@ _FX BOOLEAN Scm_SecHostDll(HMODULE module)
         }
     }
 
+    // $HookHack$ - API Redirection
     for (i = 0; funcNamesAW[i].FuncNameA; ++i) {
 
         void *ResPtr;
@@ -156,7 +157,7 @@ _FX BOOLEAN Scm_SecHostDll(HMODULE module)
             return FALSE;
         }
 
-        ResPtr = SbieDll_Hook((char *)funcNamesAW[i].FuncNameA, SecPtr, AdvPtr, module);
+        ResPtr = SbieDll_Hook((char *)funcNamesAW[i].FuncNameA, SecPtr, AdvPtr, (HMODULE)-1);
         if (! ResPtr)
             return FALSE;
     }

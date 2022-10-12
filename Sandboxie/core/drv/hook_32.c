@@ -174,7 +174,7 @@ _FX ULONG Hook_Find_ZwRoutine_1(ULONG ServiceNum, void **out_routine)
             break;
         }
 
-        if (*(ULONG *)addr == 0x08C2C033 && addr[4] == 0x00) {
+        if (*(ULONG *)addr == 0x08C2C033 && addr[4] == 0x00) { // $Workaround$ - 3rd party fix
             // HAL7600 activation tool overwrites ZwLockProductActivationKeys
             // with 33 C0 C2 08 00 (xor eax,eax ; ret 8), but leaves the
             // original "ret 8" at the end of the original code, so we try to

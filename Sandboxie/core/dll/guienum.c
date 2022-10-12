@@ -266,89 +266,94 @@ _FX BOOLEAN Gui_HookQueryWindow(HMODULE module)
     UCHAR *code;
     BOOLEAN ok = FALSE;
 
-    code = Ldr_GetProcAddrNew(DllName_user32, _ProcName,_ProcNameA);
+    //Windows 10 RS1 now exports win32k functions in win32u.dll
+    code = Ldr_GetProcAddrNew(L"win32u.dll", L"NtUserQueryWindow","NtUserQueryWindow");
     if (code) {
-
-        //
-        // IsHungAppWindow should start with a call to NtUserQueryWindow
-        //
-
-#ifdef _WIN64
-        const ULONG _E8_Offset = 9;
-#else ! _WIN64
-        const ULONG _E8_Offset = 10;
-#endif _WIN64
-
-        if (code[_E8_Offset] == 0xE8) {
-
-            code = code + _E8_Offset + 5
-                + (LONG_PTR)*(LONG *)(code + _E8_Offset + 1);
-
-            //
-            // make sure the address we think is NtUserQueryWindow
-            // actually looks like a syscall stub
-            //
-
-#ifdef _WIN64
-
-            if (    *(ULONG *)code == 0xB8D18B4C
-                && (*(USHORT *)(code + 8) == 0x050F) || *(USHORT *)(code + 8) == 0x04F6)
-                ok = TRUE;
-
-#else ! _WIN64
-
-            if (Dll_IsWow64) {
-
-                // 64-bit prior Windows 7
-                if ( (code[0] == 0xb8) && (code[5] == 0xba) && (*(USHORT *)(code + 10) == 0xd2ff)) {
-                    ok = TRUE;
-                }
-                else if (code[0] == 0xB8 && code[5] == 0x8D && code[9] == 0xB9 && code[14] == 0x64) {
-                    ok = TRUE;
-                }
-                // 64-bit prior Windows 7
-                else if (code[0] == 0xB8 && code[5] == 0xB9 && code[10] == 0x8D && code[14] == 0x64) {
-                    ok = TRUE;
-                }
-                // 64-bit Windows 8
-                else if (code[0] == 0xB8 && code[12] == 0xC2 && *(USHORT *)(code + 5) == 0xFF64) {
-                    ok = TRUE;
-                }
-                // 64-bit Windows 10
-                else if(code[0] == 0xB8 && code[12] == 0xC2 && *(USHORT *)(code + 5) == 0x40BA) {
-                    ok = TRUE;
-                }
-
-            } else {
-                //OutputDebugStringA("32 bit code\n");
-                // 32-bit prior to Windows 8
-                if (    code[0] == 0xB8 && code[5] == 0xBA
-                    && *(USHORT *)(code + 10) == 0x12FF)
-                    ok = TRUE;
-
-                // 32-bit Windows 8
-                if (    code[0] == 0xB8 && code[5] == 0xE8
-                    && *(SHORT *)(code + 10) == 0x08C2)
-                    ok = TRUE;
-
-                // 32-bit Windows 10
-                if (    code[0] == 0xB8 && code[5] == 0xBA
-                    && *(USHORT *)(code + 10) == 0xD2FF)
-                    ok = TRUE;
-            }
-
-#endif _WIN64
-
-        }
+        ok = TRUE;
     }
+#ifndef _M_ARM64
+    else {
 
-    if (! ok) {
-        //Windows 10 RS1 now exports win32k functions in win32u.dll
-        code = Ldr_GetProcAddrNew(L"win32u.dll", L"NtUserQueryWindow","NtUserQueryWindow");
+        code = Ldr_GetProcAddrNew(DllName_user32, _ProcName, _ProcNameA);
         if (code) {
-            ok = TRUE;
+
+            //
+            // IsHungAppWindow should start with a call to NtUserQueryWindow
+            //
+
+            // $HookHack$ - Custom, not automated, Hook
+#ifdef _WIN64
+            const ULONG _E8_Offset = 9;
+#else ! _WIN64
+            const ULONG _E8_Offset = 10;
+#endif _WIN64
+
+            if (code[_E8_Offset] == 0xE8) {
+
+                code = code + _E8_Offset + 5
+                    + (LONG_PTR) * (LONG*)(code + _E8_Offset + 1);
+
+                //
+                // make sure the address we think is NtUserQueryWindow
+                // actually looks like a syscall stub
+                //
+
+#ifdef _WIN64
+
+                if (*(ULONG*)code == 0xB8D18B4C
+                    && (*(USHORT*)(code + 8) == 0x050F) || *(USHORT*)(code + 8) == 0x04F6)
+                    ok = TRUE;
+
+#else ! _WIN64
+
+                if (Dll_IsWow64) {
+
+                    // 64-bit prior Windows 7
+                    if ((code[0] == 0xb8) && (code[5] == 0xba) && (*(USHORT*)(code + 10) == 0xd2ff)) {
+                        ok = TRUE;
+                    }
+                    else if (code[0] == 0xB8 && code[5] == 0x8D && code[9] == 0xB9 && code[14] == 0x64) {
+                        ok = TRUE;
+                    }
+                    // 64-bit prior Windows 7
+                    else if (code[0] == 0xB8 && code[5] == 0xB9 && code[10] == 0x8D && code[14] == 0x64) {
+                        ok = TRUE;
+                    }
+                    // 64-bit Windows 8
+                    else if (code[0] == 0xB8 && code[12] == 0xC2 && *(USHORT*)(code + 5) == 0xFF64) {
+                        ok = TRUE;
+                    }
+                    // 64-bit Windows 10
+                    else if (code[0] == 0xB8 && code[12] == 0xC2 && *(USHORT*)(code + 5) == 0x40BA) {
+                        ok = TRUE;
+                    }
+
+                }
+                else {
+                    //OutputDebugStringA("32 bit code\n");
+                    // 32-bit prior to Windows 8
+                    if (code[0] == 0xB8 && code[5] == 0xBA
+                        && *(USHORT*)(code + 10) == 0x12FF)
+                        ok = TRUE;
+
+                    // 32-bit Windows 8
+                    if (code[0] == 0xB8 && code[5] == 0xE8
+                        && *(SHORT*)(code + 10) == 0x08C2)
+                        ok = TRUE;
+
+                    // 32-bit Windows 10
+                    if (code[0] == 0xB8 && code[5] == 0xBA
+                        && *(USHORT*)(code + 10) == 0xD2FF)
+                        ok = TRUE;
+                }
+
+#endif _WIN64
+
+            }
         }
     }
+#endif
+
     if (!ok ){
         SbieApi_Log(2303, L"%S (0)", _ProcName);
     }

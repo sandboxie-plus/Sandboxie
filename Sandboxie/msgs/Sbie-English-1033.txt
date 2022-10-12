@@ -644,6 +644,10 @@ SBIE2336 Error in GUI server:  %2
 SBIE2337 Failed to start program:  %2
 .
 
+2338;pop;err;01
+SBIE2338 Encountered unsupported architecture in process:  %2
+.
+
 # 2398;txt;01
 # SBIE2398 Service suffers exception ... at address ...
 # .

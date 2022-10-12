@@ -2595,9 +2595,11 @@ __declspec(dllimport) NTSTATUS __stdcall NtRaiseHardError(
 
 //---------------------------------------------------------------------------
 
-#ifdef _WIN64
+#ifdef _M_ARM64
+#define NtCurrentPeb() (*((ULONG_PTR*)(__getReg(18) + 0x60)))
+#elif _WIN64
 #define NtCurrentPeb() ((ULONG_PTR)__readgsqword(0x60))
-#else ! _WIN64
+#else // _M_X86
 #define NtCurrentPeb() ((ULONG_PTR)__readfsdword(0x30))
 #endif _WIN64
 

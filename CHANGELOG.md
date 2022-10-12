@@ -5,6 +5,25 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.5.0 / 5.60.0] - 2022-09-??
+
+### Added
+- Added support for Windows on ARM64 [#1321](https://github.com/sandboxie-plus/Sandboxie/issues/1321) [#645](https://github.com/sandboxie-plus/Sandboxie/issues/645)
+-- Ported SbieDrv for ARM64 
+-- Ported low level injection mechanism for ARM64/ARM64EC
+-- Ported syscall hooks for ARM64/ARM64EC
+-- Ported SbieDll.dll to ARM64/ARM64EC
+-- Note: ARM32 on ARM64 is not implemented and will terminate with message SBIE2338
+-- Note: When Sandboxie is running, it disables the use of CHPE binaries for x86 processes globally, this is required for the forced processes functionality. This behaviour can be disabled by adding the global option "DisableCHPE=n" to the Sandboxie.ini, then x86 processes started outside the sandbox, instead of being forced, will be terminated with message SBIE2338
+
+### fixed
+- fixed issue with Win32 hooks in x86 applications
+
+### Changed
+- reworked API compatibility check
+
+
+
 
 
 ## [1.4.2 / 5.59.2] - 2022-10-10

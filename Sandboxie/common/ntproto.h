@@ -993,6 +993,16 @@ typedef NTSTATUS (*P_NtProtectVirtualMemory)(
     IN  ULONG NewProtect,
     OUT PULONG OldProtect);
 
+typedef NTSTATUS (*P_NtAllocateVirtualMemoryEx)(
+    _In_ HANDLE ProcessHandle,
+    _Inout_ _At_ (*BaseAddress, _Readable_bytes_ (*RegionSize) _Writable_bytes_ (*RegionSize) _Post_readable_byte_size_ (*RegionSize)) PVOID* BaseAddress,
+    _Inout_ PSIZE_T RegionSize,
+    _In_ ULONG AllocationType,
+    _In_ ULONG PageProtection,
+    _Inout_updates_opt_(ExtendedParameterCount) PMEM_EXTENDED_PARAMETER ExtendedParameters,
+    _In_ ULONG ExtendedParameterCount
+    );
+
 typedef NTSTATUS (*P_NtWriteFile)(
     IN  HANDLE FileHandle,
     IN  HANDLE Event OPTIONAL,

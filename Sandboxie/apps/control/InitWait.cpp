@@ -73,15 +73,17 @@ CInitWait::CInitWait(CWinApp *myApp)
 
     m_pMenu = NULL;
 
-    m_app_ver.Format(L"%S", MY_VERSION_COMPAT);
+    m_app_ver.Format(L"%S", MY_VERSION_STRING);
     m_svc_ver = L"?";
+    m_svc_abi = 0;
     m_drv_ver = L"?";
+    m_drv_abi = 0;
 
     m_try_elevate = CMyApp::m_WindowsVista;
 
     GetVersions();
 
-    if (m_app_ver == m_svc_ver && m_app_ver == m_drv_ver)
+    if (m_svc_abi == MY_ABI_VERSION && m_drv_abi == MY_ABI_VERSION)
         return;
 
     //
@@ -132,7 +134,7 @@ CInitWait::CInitWait(CWinApp *myApp)
         ::DispatchMessage(&msg);
     }
 
-    if (m_app_ver != m_svc_ver || m_app_ver != m_drv_ver)
+    if (m_svc_abi != MY_ABI_VERSION|| m_drv_abi != MY_ABI_VERSION)
         exit(0);
 
     KillTimer(ID_TIMER);
@@ -187,7 +189,8 @@ void CInitWait::GetVersions()
         if (rpl) {
             if (rpl->h.status == 0 && rpl->version[0]) {
                 m_svc_ver = rpl->version;
-                if (m_svc_ver != m_app_ver)
+                m_svc_abi = rpl->abi_ver;
+                if (m_svc_abi != MY_ABI_VERSION)
                     fail = TRUE;
             }
             SbieDll_FreeMem(rpl);
@@ -196,10 +199,10 @@ void CInitWait::GetVersions()
 
     if (m_drv_ver.GetAt(0) == L'?') {
 
-        SbieApi_GetVersion(drv_ver);
+        SbieApi_GetVersionEx(drv_ver, &m_drv_abi);
         if (drv_ver[0] && _wcsicmp(drv_ver, L"unknown") != 0) {
             m_drv_ver = drv_ver;
-            if (m_drv_ver != m_app_ver)
+            if (m_drv_abi != MY_ABI_VERSION)
                 fail = TRUE;
         }
     }
@@ -243,7 +246,7 @@ void CInitWait::OnTimer(UINT_PTR nIDEvent)
     CMyApp::ChangeTrayIcon(m_hIconPtr, CString());
 
     GetVersions();
-    if (m_app_ver == m_svc_ver && m_app_ver == m_drv_ver)
+    if (m_svc_abi == MY_ABI_VERSION && m_drv_abi == MY_ABI_VERSION)
         m_hIconPtr = NULL;
 
     else if (m_try_elevate) {

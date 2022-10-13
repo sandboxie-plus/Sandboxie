@@ -18,6 +18,10 @@ SBIE2226 Process failed to start due to missing elevation, to resolve add "Apply
 SBIE2325 Debug:  %2
 .
 
+2338;pop;err;01
+SBIE2338 Encountered unsupported architecture in process:  %2
+.
+
 3315;txt;01
 Deleting Sandbox contents
 .

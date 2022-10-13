@@ -46,6 +46,10 @@ SBIE2302 Process image configuration conflict: %2
 SBIE2325 Debug:  %2
 .
 
+2338;pop;err;01
+SBIE2338 Encountered unsupported architecture in process:  %2
+.
+
 3107;txt;01
 Type the name of a program or path to open the following file in the current sandbox:
 .

@@ -38,7 +38,6 @@ jobs:
       - name: Commit translations changes (if any)
         if: steps.check.outputs.deploy == '1'
         shell: bash
-        working-directory: ${{env.OUTPUT_PATH}}
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
@@ -80,7 +79,6 @@ jobs:
 
       - name: Commit updated strings in Sandboxie/msgs/report
         shell: bash
-        working-directory: ${{env.OUTPUT_PATH}}
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com

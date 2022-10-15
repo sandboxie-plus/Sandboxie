@@ -63,7 +63,7 @@ jobs:
       #    arch:  ${{ matrix.qt-target }}
           arch:  'win64_msvc2019_64'
       #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
-      #    cached: ${{ steps.cache-qt.outputs.cache-hit }}
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
       - name: Install Qt6 ARM64
         uses: jurplel/install-qt-action@v3
@@ -74,27 +74,27 @@ jobs:
       #    arch:  ${{ matrix.qt-target }}
           arch:  'win64_msvc2019_arm64'
       #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
-      #    cached: ${{ steps.cache-qt.outputs.cache-hit }}
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
       - name: Install Qt5 x64
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v2
         with:
           version: '5.15.2'
           dir: ..
       #    arch:  ${{ matrix.qt-target }}
           arch:  'win64_msvc2019_64'
       #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
-      #    cached: ${{ steps.cache-qt.outputs.cache-hit }}
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
       - name: Install Qt5 x86
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v2
         with:
           version: '5.15.2'
           dir: ..
       #    arch:  ${{ matrix.qt-target }}
           arch:  'win32_msvc2019'
       #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
-      #    cached: ${{ steps.cache-qt.outputs.cache-hit }}
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
       - name: Installing Jom
         if: steps.cache-qt.outputs.cache-hit != 'true'
@@ -103,14 +103,14 @@ jobs:
       - name: Build Sandboxie-Plus x64
         run: SandboxiePlus\qmake_plus.cmd x64
 
-      # - name: Build SbieShell x64
-      #   run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=x64
+      - name: Build SbieShell x64
+        run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=x64
 
       - name: Build Sandboxie-Plus ARM64
         run: SandboxiePlus\qmake_plus.cmd ARM64
 
-      # - name: Build SbieShell ARM64
-      #   run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=x64
+      - name: Build SbieShell ARM64
+        run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=ARM64
 
       - name: Build Sandboxie-Plus x86
         run: SandboxiePlus\qmake_plus.cmd Win32

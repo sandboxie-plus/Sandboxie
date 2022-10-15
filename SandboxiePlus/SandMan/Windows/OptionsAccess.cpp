@@ -551,17 +551,15 @@ void COptionsWindow::CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave)
 		{
 			QMessageBox::warning(this, "Sandboxie-Plus", tr("'OpenWinClass=program.exe,#' is not supported, use 'NoRenameWinClass=program.exe,*' instead"));
 			Mode = eNoRename;
-			pMode->setCurrentIndex(pMode->findData(Mode));
 			Path = "*";
-			pPath->setText(Path);
 		}
 
 		pItem->setText(1, (pNot->isChecked() ? "NOT " : "") + pCombo->currentText());
 		pItem->setData(1, Qt::UserRole, (pNot->isChecked() ? "!" : "") + Program);
 		pItem->setText(2, GetAccessModeStr(Mode));
-		pItem->setData(2, Qt::UserRole, pMode->currentData());
+		pItem->setData(2, Qt::UserRole, (int)Mode);
 		pItem->setText(3, Path);
-		pItem->setData(3, Qt::UserRole, pPath->text());
+		pItem->setData(3, Qt::UserRole, Path);
 
 		m_AccessChanged = true;
 		OnOptChanged();

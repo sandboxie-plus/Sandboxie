@@ -32,6 +32,7 @@ jobs:
         uses: codespell-project/actions-codespell@master
         with:
           check_filenames: false
-          skip: ./.git,./Sandboxie/msgs/Text-*-*.txt,./Sandboxie/msgs/report/Report-*.txt,./SandboxiePlus/SandMan/*.ts,./Installer/Languages.iss
+          skip: "./.git,./Sandboxie/msgs/Text-*-*.txt,./Sandboxie/msgs/report/Report-*.txt,./SandboxiePlus/SandMan/*.ts,./Installer/Languages.iss,./Installer/isl/*.isl,./Sandboxie/common/Detours/Makefile"
           builtin: clear,rare,code
-          ignore_words_list: pevent,doubleclick,parm,parms,etcp,ois,ba,ptd,modell,namesd,stdio,uint,errorstring,ontext,atend,deque,ecounter,nmake,namess
+          # only lowercase letters are allowed here
+          ignore_words_list: "pevent,doubleclick,parm,parms,etcp,ois,ba,ptd,modell,namesd,stdio,uint,errorstring,ontext,atend,deque,ecounter,nmake,namess,inh"

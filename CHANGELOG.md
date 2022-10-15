@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Avoid window overlap when editing templates [#2339](https://github.com/sandboxie-plus/Sandboxie/pull/2339) (thanks okrc)
 - Fixed the wrong write of OpenWinClass setting UI [#2347](https://github.com/sandboxie-plus/Sandboxie/pull/2347) (thanks okrc)
 - Fixed issue about Local Template [#2338](https://github.com/sandboxie-plus/Sandboxie/pull/2338) (thanks okrc)
+- fixed Edge WebView compatybility issue [#2350](https://github.com/sandboxie-plus/Sandboxie/issues/2350)
 
 ### Changed
 - reworked API compatibility check

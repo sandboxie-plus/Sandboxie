@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.5.0 / 5.60.0] - 2022-09-??
+## [1.5.0 / 5.60.0] - 2022-10-??
 
 ### Added
 - Added support for Windows on ARM64 [#1321](https://github.com/sandboxie-plus/Sandboxie/issues/1321) [#645](https://github.com/sandboxie-plus/Sandboxie/issues/645)
@@ -18,6 +18,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### fixed
 - fixed issue with Win32 hooks in x86 applications
+- Avoid window overlap when editing templates [#2339](https://github.com/sandboxie-plus/Sandboxie/pull/2339) (thanks okrc)
+- Fixed the wrong write of OpenWinClass setting UI [#2347](https://github.com/sandboxie-plus/Sandboxie/pull/2347) (thanks okrc)
+- Fixed issue about Local Template [#2338](https://github.com/sandboxie-plus/Sandboxie/pull/2338) (thanks okrc)
 
 ### Changed
 - reworked API compatibility check

@@ -103,14 +103,14 @@ jobs:
       - name: Build Sandboxie-Plus x64
         run: SandboxiePlus\qmake_plus.cmd x64
 
-      # - name: Build SbieShell x64
-      #   run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=x64
+      - name: Build SbieShell x64
+        run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=x64
 
       - name: Build Sandboxie-Plus ARM64
         run: SandboxiePlus\qmake_plus.cmd ARM64
 
-      # - name: Build SbieShell ARM64
-      #   run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=x64
+      - name: Build SbieShell ARM64
+        run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=ARM64
 
       - name: Build Sandboxie-Plus x86
         run: SandboxiePlus\qmake_plus.cmd Win32

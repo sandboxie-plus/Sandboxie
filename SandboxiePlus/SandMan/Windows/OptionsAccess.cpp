@@ -551,7 +551,9 @@ void COptionsWindow::CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave)
 		{
 			QMessageBox::warning(this, "Sandboxie-Plus", tr("'OpenWinClass=program.exe,#' is not supported, use 'NoRenameWinClass=program.exe,*' instead"));
 			Mode = eNoRename;
+			pMode->setCurrentIndex(pMode->findData(Mode));
 			Path = "*";
+			pPath->setText(Path);
 		}
 
 		pItem->setText(1, (pNot->isChecked() ? "NOT " : "") + pCombo->currentText());

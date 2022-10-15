@@ -63,7 +63,7 @@ jobs:
       #    arch:  ${{ matrix.qt-target }}
           arch:  'win64_msvc2019_64'
       #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
-          cache: true
+      #    cache: true
 
       - name: Install Qt6 ARM64
         uses: jurplel/install-qt-action@v3
@@ -74,7 +74,7 @@ jobs:
       #    arch:  ${{ matrix.qt-target }}
           arch:  'win64_msvc2019_arm64'
       #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
-          cache: true
+      #    cache: true
 
       - name: Install Qt5 x64
         uses: jurplel/install-qt-action@v2

@@ -2,7 +2,8 @@
 
 call %~dp0get_openssl.cmd
 
-call %~dp0get_qttranslations.cmd
+REM Moved to main.yml
+REM call %~dp0fix_qt5_languages.cmd
 
 cmd.exe /c %~dp0copy_build.cmd x64
 

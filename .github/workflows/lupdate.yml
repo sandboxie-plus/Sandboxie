@@ -33,7 +33,7 @@ jobs:
           set +e
           lupdate SandMan.pri
           git diff --exit-code
-          echo "::set-output name=deploy::$?"
+          echo "deploy=$?" >> $GITHUB_OUTPUT
 
       - name: Commit translations changes (if any)
         if: steps.check.outputs.deploy == '1'

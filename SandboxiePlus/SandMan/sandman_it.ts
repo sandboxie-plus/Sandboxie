@@ -925,27 +925,27 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
         <translation>Client Torrent</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="153"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="154"/>
         <source>This template is enabled globally. To configure it, use the global options.</source>
         <translation>Questo modello è attivato a livello globale. Per configurarlo, utilizza le opzioni globali.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="188"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="191"/>
         <source>Please enter the template identifier</source>
         <translation>Inserire l&apos;identificativo del modello</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="196"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="199"/>
         <source>Error: %1</source>
         <translation>Errore: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="216"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="219"/>
         <source>Only local templates can be removed!</source>
         <translation>Solo i modelli locali possono essere rimossi!</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="220"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="223"/>
         <source>Do you really want to delete the selected local template?</source>
         <translation>Eliminare il modello locale selezionato?</translation>
     </message>

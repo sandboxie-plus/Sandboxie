@@ -976,27 +976,27 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation>Klient torrent</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="153"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="154"/>
         <source>This template is enabled globally. To configure it, use the global options.</source>
         <translation>Ten szablon jest włączony globalnie. Aby go skonfigurować, użyj opcji globalnych.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="188"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="191"/>
         <source>Please enter the template identifier</source>
         <translation>Proszę wpisać identyfikator szablonu</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="196"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="199"/>
         <source>Error: %1</source>
         <translation>Błąd: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="216"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="219"/>
         <source>Only local templates can be removed!</source>
         <translation>Można usunąć tylko szablony lokalne!</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="220"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="223"/>
         <source>Do you really want to delete the selected local template?</source>
         <translation>Czy na pewno chcesz usunąć wybrany szablon lokalny?</translation>
     </message>

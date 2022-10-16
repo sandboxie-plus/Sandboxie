@@ -921,27 +921,27 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>BT 種子(Torrent)用戶端</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="153"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="154"/>
         <source>This template is enabled globally. To configure it, use the global options.</source>
         <translation>此範本已全域啟用。如需配置，請前往全域選項。</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="188"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="191"/>
         <source>Please enter the template identifier</source>
         <translation>請輸入範本識別項</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="196"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="199"/>
         <source>Error: %1</source>
         <translation>錯誤: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="216"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="219"/>
         <source>Only local templates can be removed!</source>
         <translation>僅可刪除本地範本！</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="220"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="223"/>
         <source>Do you really want to delete the selected local template?</source>
         <translation>確定要刪除所選的本地範本嗎？</translation>
     </message>

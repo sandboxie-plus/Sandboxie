@@ -987,27 +987,27 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Cliente de torrents</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="153"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="154"/>
         <source>This template is enabled globally. To configure it, use the global options.</source>
         <translation>Esta plantilla esta habilitada globalmente.  Para configurarla, utilice las opciones globales.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="188"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="191"/>
         <source>Please enter the template identifier</source>
         <translation>Por favor ingrese el identificador de template</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="196"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="199"/>
         <source>Error: %1</source>
         <translation>Error: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="216"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="219"/>
         <source>Only local templates can be removed!</source>
         <translation>Solo los templates locales puede ser eliminados!</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="220"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="223"/>
         <source>Do you really want to delete the selected local template?</source>
         <translation>Esta seguro de querer eliminar el template seleccionado local?</translation>
     </message>

@@ -932,27 +932,27 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Torrent 클라이언트</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="153"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="154"/>
         <source>This template is enabled globally. To configure it, use the global options.</source>
         <translation>이 템플릿은 전체적으로 사용 가능합니다. 구성하려면 전역 옵션을 사용하십시오.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="188"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="191"/>
         <source>Please enter the template identifier</source>
         <translation>템플릿 식별자를 입력하십시오</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="196"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="199"/>
         <source>Error: %1</source>
         <translation>오류: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="216"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="219"/>
         <source>Only local templates can be removed!</source>
         <translation>로컬 템플릿만 제거할 수 있습니다!</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="220"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="223"/>
         <source>Do you really want to delete the selected local template?</source>
         <translation>선택한 로컬 템플릿을 삭제하시겠습니까?</translation>
     </message>

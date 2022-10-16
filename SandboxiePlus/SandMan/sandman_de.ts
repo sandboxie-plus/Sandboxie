@@ -755,7 +755,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <translation>Torrentclients</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="153"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="154"/>
         <source>This template is enabled globally. To configure it, use the global options.</source>
         <translation>Diese Vorlage ist global aktiv, um sie zu konfigurieren müssen die globalen Optionen genutzt werden.</translation>
     </message>
@@ -1010,22 +1010,22 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <translation>Alle Kategorien</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="188"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="191"/>
         <source>Please enter the template identifier</source>
         <translation>Bitte Vorlagen-Identifikation eingeben</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="196"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="199"/>
         <source>Error: %1</source>
         <translation>Fehler: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="216"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="219"/>
         <source>Only local templates can be removed!</source>
         <translation>Nur lokale Vorlagen können entfernt werden!</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="220"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="223"/>
         <source>Do you really want to delete the selected local template?</source>
         <translation>Möchten Sie wirklich die ausgewählten lokalen Vorlagen löschen?</translation>
     </message>

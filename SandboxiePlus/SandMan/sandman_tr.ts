@@ -445,7 +445,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Dosya Seç</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="153"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="154"/>
         <source>This template is enabled globally. To configure it, use the global options.</source>
         <translation>Bu şablon genel (global) olarak etkindir. Yapılandırmak için genel ayarları kullanın.</translation>
     </message>
@@ -744,22 +744,22 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Torrent İstemcisi</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="188"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="191"/>
         <source>Please enter the template identifier</source>
         <translation>Lütfen şablon tanımlayıcısını girin</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="196"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="199"/>
         <source>Error: %1</source>
         <translation>Hata: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="216"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="219"/>
         <source>Only local templates can be removed!</source>
         <translation>Yalnızca yerel şablonlar kaldırılabilir!</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="220"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="223"/>
         <source>Do you really want to delete the selected local template?</source>
         <translation>Seçilen yerel şablonu gerçekten silmek istiyor musunuz?</translation>
     </message>

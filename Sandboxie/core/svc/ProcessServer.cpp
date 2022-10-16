@@ -533,14 +533,14 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
 #ifndef DRV_BREAKOUT
             if (CallerInSandbox && wcscmp(req->boxname, L"*UNBOXED*") == 0 && *cmd == L'\"') {
 
-                ULONG flags = 0;
-                if (!NT_SUCCESS(SbieApi_Call(API_QUERY_DRIVER_INFO, 2, 0, (ULONG_PTR)&flags)) || (flags & SBIE_FEATURE_FLAG_CERTIFIED) == 0) {
-                    ULONG SessionId = PipeServer::GetCallerSessionId();
-                    SbieApi_LogEx(SessionId, 6004, L"%S", boxname);
-                    lvl = 0x66;
-                    err = ERROR_NOT_SUPPORTED;
-                    goto end;
-                } 
+                //ULONG flags = 0;
+                //if (!NT_SUCCESS(SbieApi_Call(API_QUERY_DRIVER_INFO, 2, 0, (ULONG_PTR)&flags)) || (flags & SBIE_FEATURE_FLAG_CERTIFIED) == 0) {
+                //    ULONG SessionId = PipeServer::GetCallerSessionId();
+                //    SbieApi_LogEx(SessionId, 6004, L"%S", boxname);
+                //    lvl = 0x66;
+                //    err = ERROR_NOT_SUPPORTED;
+                //    goto end;
+                //} 
 
                 WCHAR* lpApplicationName = cmd + 1;
                 WCHAR* ptr = wcschr(lpApplicationName, L'\"');

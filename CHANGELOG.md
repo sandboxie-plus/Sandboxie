@@ -25,7 +25,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - reworked API compatibility check
-
+- Break out process is now available for all users
 
 
 

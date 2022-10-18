@@ -9,8 +9,7 @@ IF %1 == x86 (
 IF %1 == x64 (
   set archPath=x64
   call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-  set qtPath=%~dp0..\..\Qt\5.15.2\msvc2019_64
-REM  set qtPath=%~dp0..\..\Qt\6.3.1\msvc2019_64
+  set qtPath=%~dp0..\..\Qt\6.3.1\msvc2019_64
   set instPath=%~dp0\SbiePlus_x64
 )
 IF %1 == ARM64 (

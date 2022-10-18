@@ -50,7 +50,6 @@ IF %archPath% == Win32 (
 	copy %qtPath%\bin\Qt6Gui.dll %instPath%\
 	copy %qtPath%\bin\Qt6Network.dll %instPath%\
 	copy %qtPath%\bin\Qt6Widgets.dll %instPath%\
-	copy %qtPath%\bin\Qt6WinExtras.dll %instPath%\
 )
 
 
@@ -93,8 +92,12 @@ copy /y %~dp0..\SandboxiePlus\Build_SandMan_%archPath%\release\sandman_*.qm %ins
 copy /y %~dp0\qttranslations\qm\qt_*.qm %instPath%\translations\
 copy /y %~dp0\qttranslations\qm\qtbase_*.qm %instPath%\translations\
 copy /y %~dp0\qttranslations\qm\qtmultimedia_*.qm %instPath%\translations\
+
+IF %archPath% == Win32 (
+REM The following files are only required for Qt5 x86
 copy /y %qtPath%\translations\qtscript_*.qm %instPath%\translations\
 copy /y %qtPath%\translations\qtxmlpatterns_*.qm %instPath%\translations\
+)
 
 ECHO Copying Sandboxie
 

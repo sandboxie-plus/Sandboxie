@@ -1234,7 +1234,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		if (!TestNameAndWarn(Value))
 			return;
 
-		SB_STATUS Status = SandBoxes.first()->RenameBox(Value);
+		SB_STATUS Status = SandBoxes.first()->RenameBox(Value.replace(" ", "_"));
 		if (!Status.IsError())
 			RenameItem(OldValue.replace(" ", "_"), Value.replace(" ", "_"));
 		Results.append(Status);

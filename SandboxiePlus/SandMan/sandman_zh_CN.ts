@@ -747,7 +747,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="322"/>
         <source>Don&apos;t rename window classes.</source>
-        <translation>不重命名 Windows 窗口类</translation>
+        <translation>禁止重命名 Windows 窗口类</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="323"/>
@@ -5341,7 +5341,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="455"/>
         <source>Restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>限制选项</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2823"/>
@@ -5361,7 +5361,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3110"/>
         <source>Apply ElevateCreateProcess Workaround (legacy behaviour)</source>
-        <translation type="unfinished"></translation>
+        <translation>应用 ElevateCreateProcess 解决方案 (传统行为)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3150"/>
@@ -5413,7 +5413,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/OptionsWindow.ui" line="3646"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
         <oldsource>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</oldsource>
-        <translation type="unfinished">在此处可以配置各个进程的高级选项，以提高兼容性或自定义沙盒的某些行为</translation>
+        <translation>在此处可以配置各个进程的高级选项，以提高兼容性或自定义沙盒的某些行为</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3657"/>
@@ -5855,7 +5855,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="332"/>
         <source>Always use DefaultBox</source>
-        <translation>总是使用 DefaultBox</translation>
+        <translation>总是使用 DefaultBox 沙盒</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="282"/>
@@ -5875,7 +5875,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="629"/>
         <source>Separate user folders</source>
-        <translation>独立的用户文件夹</translation>
+        <translation>启用相互独立的用户目录(个人文件夹)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="702"/>
@@ -6065,7 +6065,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="868"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
-        <translation>下列程序在沙盒之外启动时，Sandboxie 将发出 SBIE1301 警告</translation>
+        <translation>下列程序在沙盒之外启动时，Sandboxie 将提示 SBIE1301 警告</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="878"/>

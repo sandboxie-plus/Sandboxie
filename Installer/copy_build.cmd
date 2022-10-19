@@ -38,8 +38,8 @@ copy "%redistPath%\*" %instPath%\
 
 ECHO Copying Qt libraries
 
-REM IF NOT %archPath% == ARM64 (
-IF %archPath% == Win32 (
+IF NOT %archPath% == ARM64 (
+REM IF %archPath% == Win32 (
 	copy %qtPath%\bin\Qt5Core.dll %instPath%\
 	copy %qtPath%\bin\Qt5Gui.dll %instPath%\
 	copy %qtPath%\bin\Qt5Network.dll %instPath%\

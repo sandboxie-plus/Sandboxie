@@ -94,8 +94,8 @@ copy /y %~dp0\qttranslations\qm\qt_*.qm %instPath%\translations\
 copy /y %~dp0\qttranslations\qm\qtbase_*.qm %instPath%\translations\
 copy /y %~dp0\qttranslations\qm\qtmultimedia_*.qm %instPath%\translations\
 
-IF %archPath% == Win32 (
-REM The following files are only required for Qt5 x86
+IF NOT %archPath% == ARM64 (
+REM IF %archPath% == Win32 (
 copy /y %qtPath%\translations\qtscript_*.qm %instPath%\translations\
 copy /y %qtPath%\translations\qtxmlpatterns_*.qm %instPath%\translations\
 )

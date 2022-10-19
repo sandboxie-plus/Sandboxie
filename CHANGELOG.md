@@ -816,7 +816,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- it can be enabled per process or globally using "EnableMiniDump=process.exe,y" or "EnableMiniDump=y" respectively
 -- the dump flags can be set as hex with "MiniDumpFlags=0xAABBCCDD"
 -- a preselected flag set for a verbose dump can be set with "MiniDumpFlags=Extended"
--- Note: dump files are located at: `C:\Sandbox\%USER%\%SANDBOX%`
+-- Note: dump files created with the EnableMiniDump option are located at: `C:\Sandbox\%USER%\%SANDBOX%`
 - added template support for Osiris and Slimjet browsers (by Dyras) [#1454](https://github.com/sandboxie-plus/Sandboxie/pull/1454)
 
 ### Changed

@@ -23,6 +23,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fixed issue about Local Template [#2338](https://github.com/sandboxie-plus/Sandboxie/pull/2338) (thanks okrc)
 - fixed Edge WebView compatybility issue [#2350](https://github.com/sandboxie-plus/Sandboxie/issues/2350)
 - added provisional workaround for firefox 106 content process sandbox issue
+- Fixed bug with Rename Sandbox [2358](https://github.com/sandboxie-plus/Sandboxie/pull/2358) (thanks okrc)
 
 ### Changed
 - reworked API compatibility check

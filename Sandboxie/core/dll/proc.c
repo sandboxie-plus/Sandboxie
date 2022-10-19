@@ -793,6 +793,19 @@ _FX BOOL Proc_CreateProcessInternalW(
     }
 
     //
+    // Compatybility hack for firefox 106.x
+    //
+
+    if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX && SbieApi_QueryConfBool(NULL, L"FirefoxHack1", TRUE)) {
+        if (lpCommandLine 
+            && wcsstr(lpCommandLine, L"-contentproc")
+            && wcsstr(lpCommandLine, L"-sandboxingKind 1") ) {
+            SetLastError(ERROR_ACCESS_DENIED);
+            return FALSE;
+        }
+    }
+
+    //
     // hack:  recent versions of Flash Player use the Chrome sandbox
     // architecture which conflicts with our restricted process model
     //

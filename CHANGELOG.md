@@ -22,6 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fixed the wrong write of OpenWinClass setting UI [#2347](https://github.com/sandboxie-plus/Sandboxie/pull/2347) (thanks okrc)
 - Fixed issue about Local Template [#2338](https://github.com/sandboxie-plus/Sandboxie/pull/2338) (thanks okrc)
 - fixed Edge WebView compatybility issue [#2350](https://github.com/sandboxie-plus/Sandboxie/issues/2350)
+- added provisional workaround for firefox 106 content process sandbox issue
 
 ### Changed
 - reworked API compatibility check

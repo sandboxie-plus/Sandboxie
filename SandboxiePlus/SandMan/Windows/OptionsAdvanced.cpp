@@ -41,12 +41,12 @@ void COptionsWindow::CreateAdvanced()
 	m_AdvOptions.insert("EnableMiniDump",				SAdvOption{eSpec, QStringList() << "y" << "n", tr("Enable crash dump creation in the sandbox folder")});
 	m_AdvOptions.insert("ApplyElevateCreateProcessFix", SAdvOption{eOnlySpec, QStringList() << "y" << "n", tr("Always use ElevateCreateProcess fix, as sometimes applied by the Program Compatibility Assistant.")});
 	m_AdvOptions.insert("PreferExternalManifest",		SAdvOption{eOnlySpec, QStringList() << "y" << "n, tr("")"});
-	m_AdvOptions.insert("ExternalManifestHack",			SAdvOption{eSpec, QStringList() << "y" << "n", tr("Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes")});
+	m_AdvOptions.insert("ExternalManifestHack",			SAdvOption{eSpec, QStringList() << "y" << "n", tr("Enable special inconsistent PreferExternalManifest behaviour, as needed for some Edge fixes")});
 	m_AdvOptions.insert("RpcMgmtSetComTimeout",			SAdvOption{eSpec, QStringList() << "n" << "y", tr("Set RpcMgmtSetComTimeout usage for specific processes")});
 	m_AdvOptions.insert("CopyBlockDenyWrite",			SAdvOption{eSpec, QStringList() << "y" << "n", tr("Makes a write open call to a file that won't be copied fail instead of turning it read-only.")});
 	m_AdvOptions.insert("UseSbieDeskHack",				SAdvOption{eSpec, QStringList() << "y" << "n", tr("")});
 	m_AdvOptions.insert("UseSbieWndStation",			SAdvOption{eSpec, QStringList() << "n" << "y", tr("")});
-	m_AdvOptions.insert("FakeAdminRights",				SAdvOption{eOnlySpec, QStringList() << "y" << "n", tr("Make specified processes think thay have admin permissions.")});
+	m_AdvOptions.insert("FakeAdminRights",				SAdvOption{eOnlySpec, QStringList() << "y" << "n", tr("Make specified processes think they have admin permissions.")});
 	m_AdvOptions.insert("WaitForDebugger",				SAdvOption{eOnlySpec, QStringList() << "y" << "n", tr("Force specified processes to wait for a debugger to attach.")});
 	m_AdvOptions.insert("BoxNameTitle",					SAdvOption{eOnlySpec, QStringList() << "y" << "n" << "-", tr("")});
 	m_AdvOptions.insert("UseFileDeleteV2",				SAdvOption{eNoSpec, QStringList() << "y" << "n", tr("")});

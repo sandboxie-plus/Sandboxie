@@ -19,7 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### fixed
 - fixed issue with Win32 hooks in x86 applications
 - avoid window overlap when editing templates [#2339](https://github.com/sandboxie-plus/Sandboxie/pull/2339) (thanks okrc)
-- fixed incorrect write of OpenWinClass setting UI [#2347](https://github.com/sandboxie-plus/Sandboxie/pull/2347) (thanks okrc)
+- fixed incorrect write of OpenWinClass UI setting [#2347](https://github.com/sandboxie-plus/Sandboxie/pull/2347) (thanks okrc)
 - fixed issue with local template [#2338](https://github.com/sandboxie-plus/Sandboxie/pull/2338) (thanks okrc)
 - fixed Edge WebView2 compatibility issue [#2350](https://github.com/sandboxie-plus/Sandboxie/issues/2350)
 - added provisional workaround for Firefox 106 content process sandbox issue

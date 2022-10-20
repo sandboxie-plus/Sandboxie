@@ -1078,7 +1078,7 @@
              </font>
             </property>
             <attribute name="title">
-             <string>Adcanced Security</string>
+             <string>Advanced Security</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_26">
              <item row="0" column="1">

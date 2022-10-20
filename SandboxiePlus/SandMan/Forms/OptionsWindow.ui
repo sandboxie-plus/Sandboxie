@@ -3230,7 +3230,7 @@ The process match level has a higher priority than the specificity and describes
                 </size>
                </property>
                <property name="toolTip">
-                <string>his command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</string>
+                <string>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</string>
                </property>
                <property name="text">
                 <string>Run File Checker</string>

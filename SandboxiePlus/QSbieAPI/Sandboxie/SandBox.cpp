@@ -238,6 +238,10 @@ SB_STATUS CSandBox::RenameBox(const QString& NewName)
 			Status = CSandBox__MoveFolder(m_FilePath, FilePath.join("\\"), NewName);
 			if (Status.IsError())
 				return Status;
+
+			QString FileRootPath = GetText("FileRootPath");
+			if (!FileRootPath.isEmpty())
+				SetText("FileRootPath", FilePath.join("\\") + "\\%SANDBOX%");
 		}
 	}
 	

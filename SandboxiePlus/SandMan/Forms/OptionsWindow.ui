@@ -1565,7 +1565,7 @@
                <item row="0" column="0">
                 <widget class="QLabel" name="label_69">
                  <property name="text">
-                  <string>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</string>
+                  <string>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
@@ -3230,7 +3230,7 @@ The process match level has a higher priority than the specificity and describes
                 </size>
                </property>
                <property name="toolTip">
-                <string>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</string>
+                <string>his command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</string>
                </property>
                <property name="text">
                 <string>Run File Checker</string>
@@ -3885,7 +3885,7 @@ instead of &quot;*&quot;.</string>
                <item row="10" column="4">
                 <widget class="QCheckBox" name="chkDnsTrace">
                  <property name="text">
-                  <string>Dns Request Logging</string>
+                  <string>DNS Request Logging</string>
                  </property>
                 </widget>
                </item>

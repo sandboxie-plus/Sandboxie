@@ -328,8 +328,9 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="44"/>
-        <source>Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes</source>
-        <translation>启用不一致的特殊 PreferExternalManifest 行为支持，某些边缘问题的修复可能需要打开此项</translation>
+        <source>Enable special inconsistent PreferExternalManifest behaviour, as needed for some Edge fixes</source>
+        <oldsource>Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes</oldsource>
+        <translation type="unfinished">启用不一致的特殊 PreferExternalManifest 行为支持，某些边缘问题的修复可能需要打开此项</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="45"/>
@@ -343,8 +344,9 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="49"/>
-        <source>Make specified processes think thay have admin permissions.</source>
-        <translation>让指定的进程认为它们具有管理员权限</translation>
+        <source>Make specified processes think they have admin permissions.</source>
+        <oldsource>Make specified processes think thay have admin permissions.</oldsource>
+        <translation type="unfinished">让指定的进程认为它们具有管理员权限</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="50"/>

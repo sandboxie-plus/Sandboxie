@@ -4742,8 +4742,9 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1081"/>
-        <source>Adcanced Security</source>
-        <translation>安全性(高级)</translation>
+        <source>Advanced Security</source>
+        <oldsource>Adcanced Security</oldsource>
+        <translation type="unfinished">安全性(高级)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1089"/>
@@ -4798,8 +4799,9 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1568"/>
-        <source>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</source>
-        <translation>在此处设置的程序在启动时将被允许脱离这个沙盒，你可以把它们捕获到另一个沙盒里
+        <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
+        <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
+        <translation type="unfinished">在此处设置的程序在启动时将被允许脱离这个沙盒，你可以把它们捕获到另一个沙盒里
 例如，让网络浏览器总是在一个专门的沙盒里打开(此功能需要安装一个有效的赞助者凭据)</translation>
     </message>
     <message>
@@ -5377,8 +5379,9 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3233"/>
-        <source>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</source>
-        <translation>该命令将在文件恢复前运行，文件路径将作为第一个参数被传递，如果该命令的返回值不是 0，则恢复将被阻止</translation>
+        <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
+        <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
+        <translation type="unfinished">该命令将在文件恢复前运行，文件路径将作为第一个参数被传递，如果该命令的返回值不是 0，则恢复将被阻止</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3236"/>
@@ -5424,8 +5427,9 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3888"/>
-        <source>Dns Request Logging</source>
-        <translation>DNS 请求记录</translation>
+        <source>DNS Request Logging</source>
+        <oldsource>Dns Request Logging</oldsource>
+        <translation type="unfinished">DNS 请求记录</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3994"/>

@@ -4231,8 +4231,9 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1081"/>
-        <source>Adcanced Security</source>
-        <translation>Расширенная безопасность</translation>
+        <source>Advanced Security</source>
+        <oldsource>Adcanced Security</oldsource>
+        <translation type="unfinished">Расширенная безопасность</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1089"/>
@@ -4296,8 +4297,9 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1568"/>
-        <source>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</source>
-        <translation>Программам, добавленным здесь, будет позволено запускаться вне песочницы, вы можете захватить их в другую песочницу. Например, чтобы ваш веб-браузер всегда был открыт в специальной песочнице. Для этой функции требуется установленный действительный сертификат поддержки.</translation>
+        <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
+        <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
+        <translation type="unfinished">Программам, добавленным здесь, будет позволено запускаться вне песочницы, вы можете захватить их в другую песочницу. Например, чтобы ваш веб-браузер всегда был открыт в специальной песочнице. Для этой функции требуется установленный действительный сертификат поддержки.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1585"/>
@@ -5168,8 +5170,9 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3233"/>
-        <source>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</source>
-        <translation>Эта команда будет запущена перед восстановлением файла, и путь к файлу будет передан в качестве первого аргумента, если эта команда вернет значение, отличное от 0, восстановление будет заблокировано</translation>
+        <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
+        <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
+        <translation type="unfinished">Эта команда будет запущена перед восстановлением файла, и путь к файлу будет передан в качестве первого аргумента, если эта команда вернет значение, отличное от 0, восстановление будет заблокировано</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3236"/>
@@ -5178,8 +5181,9 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3888"/>
-        <source>Dns Request Logging</source>
-        <translation>Журналирование DNS-запросов</translation>
+        <source>DNS Request Logging</source>
+        <oldsource>Dns Request Logging</oldsource>
+        <translation type="unfinished">Журналирование DNS-запросов</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3994"/>

@@ -5240,8 +5240,9 @@ an Stelle von &quot;*&quot;.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1081"/>
-        <source>Adcanced Security</source>
-        <translation>Erweiterte Sicherheit</translation>
+        <source>Advanced Security</source>
+        <oldsource>Adcanced Security</oldsource>
+        <translation type="unfinished">Erweiterte Sicherheit</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1089"/>
@@ -5290,8 +5291,9 @@ an Stelle von &quot;*&quot;.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1568"/>
-        <source>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</source>
-        <translation>Programme die hier eingegeben werden wird erlaubt aus dieser Box auszubrechen, wenn diese starten, sodass Sie diese in einer anderen Box einfangen können. Zum Beispiel um Ihren Browser immer in einer dafür gewidmeten Box zu öffnen. Diese Funktion verlangt ein gültiges Unterstützerzertifikat.</translation>
+        <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
+        <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
+        <translation type="unfinished">Programme die hier eingegeben werden wird erlaubt aus dieser Box auszubrechen, wenn diese starten, sodass Sie diese in einer anderen Box einfangen können. Zum Beispiel um Ihren Browser immer in einer dafür gewidmeten Box zu öffnen. Diese Funktion verlangt ein gültiges Unterstützerzertifikat.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1595"/>
@@ -5797,8 +5799,9 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3233"/>
-        <source>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</source>
-        <translation>Dieses Kommando wird ausgeführt bevor eine Datei wiederhergestellt wird und der Dateipfad wird als erstes Argument weitergegeben und falls dieses Kommando etwas anderes als den Wert 0 zurückgibt, wird die Wiederherstellung blockiert</translation>
+        <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
+        <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
+        <translation type="unfinished">Dieses Kommando wird ausgeführt bevor eine Datei wiederhergestellt wird und der Dateipfad wird als erstes Argument weitergegeben und falls dieses Kommando etwas anderes als den Wert 0 zurückgibt, wird die Wiederherstellung blockiert</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3236"/>
@@ -5844,8 +5847,9 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3888"/>
-        <source>Dns Request Logging</source>
-        <translation>DNS Anfrageprotokollierung</translation>
+        <source>DNS Request Logging</source>
+        <oldsource>Dns Request Logging</oldsource>
+        <translation type="unfinished">DNS Anfrageprotokollierung</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3994"/>

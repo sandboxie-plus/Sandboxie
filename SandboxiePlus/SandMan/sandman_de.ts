@@ -360,7 +360,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <location filename="Windows/OptionsAdvanced.cpp" line="44"/>
         <source>Enable special inconsistent PreferExternalManifest behaviour, as needed for some Edge fixes</source>
         <oldsource>Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes</oldsource>
-        <translation type="unfinished">Aktiviere spezielle inkonsistente PreferExternalManifest-Verhalten, da diese für einige Edge-Fixes benötigt werden</translation>
+        <translation>Aktiviere spezielle inkonsistente PreferExternalManifest-Verhalten, da diese für einige Edge-Fixes benötigt werden</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="45"/>
@@ -376,7 +376,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <location filename="Windows/OptionsAdvanced.cpp" line="49"/>
         <source>Make specified processes think they have admin permissions.</source>
         <oldsource>Make specified processes think thay have admin permissions.</oldsource>
-        <translation type="unfinished">Lass ausgewählte Prozesse denken sie hätten Adminrechte.</translation>
+        <translation>Lasse ausgewählte Prozesse denken sie hätten Adminrechte.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="50"/>
@@ -5242,7 +5242,7 @@ an Stelle von &quot;*&quot;.</translation>
         <location filename="Forms/OptionsWindow.ui" line="1081"/>
         <source>Advanced Security</source>
         <oldsource>Adcanced Security</oldsource>
-        <translation type="unfinished">Erweiterte Sicherheit</translation>
+        <translation>Erweiterte Sicherheit</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1089"/>
@@ -5293,7 +5293,7 @@ an Stelle von &quot;*&quot;.</translation>
         <location filename="Forms/OptionsWindow.ui" line="1568"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
         <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
-        <translation type="unfinished">Programme die hier eingegeben werden wird erlaubt aus dieser Box auszubrechen, wenn diese starten, sodass Sie diese in einer anderen Box einfangen können. Zum Beispiel um Ihren Browser immer in einer dafür gewidmeten Box zu öffnen. Diese Funktion verlangt ein gültiges Unterstützerzertifikat.</translation>
+        <translation>Programme die hier eingegeben werden, wird erlaubt aus dieser Box auszubrechen, wenn diese starten, sodass Sie diese in einer anderen Box einfangen können. Zum Beispiel um Ihren Browser immer in einer dafür gewidmeten Box zu öffnen.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1595"/>
@@ -5801,7 +5801,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <location filename="Forms/OptionsWindow.ui" line="3233"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
         <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
-        <translation type="unfinished">Dieses Kommando wird ausgeführt bevor eine Datei wiederhergestellt wird und der Dateipfad wird als erstes Argument weitergegeben und falls dieses Kommando etwas anderes als den Wert 0 zurückgibt, wird die Wiederherstellung blockiert</translation>
+        <translation>Dieses Kommando wird ausgeführt bevor eine Datei wiederhergestellt wird und der Dateipfad wird als erstes Argument weitergegeben und falls dieses Kommando etwas anderes als den Wert 0 zurückgibt, wird die Wiederherstellung blockiert</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3236"/>
@@ -5849,7 +5849,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <location filename="Forms/OptionsWindow.ui" line="3888"/>
         <source>DNS Request Logging</source>
         <oldsource>Dns Request Logging</oldsource>
-        <translation type="unfinished">DNS Anfrageprotokollierung</translation>
+        <translation>DNS Anfrageprotokollierung</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3994"/>

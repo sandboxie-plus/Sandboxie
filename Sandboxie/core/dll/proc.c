@@ -773,6 +773,7 @@ _FX BOOL Proc_CreateProcessInternalW(
     // Hack: by adding a parameter to the gpu renderer process, we can fix the issue.
     //
 
+    // $Workaround$ - 3rd party fix
     if ((Dll_ImageType == DLL_IMAGE_UNSPECIFIED/* || Dll_ImageType == DLL_IMAGE_ELECTRON*/) && Dll_ElectronWorkaround)
     {
         if(lpApplicationName && lpCommandLine)
@@ -793,26 +794,25 @@ _FX BOOL Proc_CreateProcessInternalW(
     }
 
     //
-    // Compatybility hack for firefox 106.x
-    //
-
-    if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX && SbieApi_QueryConfBool(NULL, L"FirefoxHack1", TRUE)) {
-        if (lpCommandLine 
-            && wcsstr(lpCommandLine, L"-contentproc")
-            && wcsstr(lpCommandLine, L"-sandboxingKind 1") ) {
-            SetLastError(ERROR_ACCESS_DENIED);
-            return FALSE;
-        }
-    }
-
-    //
     // hack:  recent versions of Flash Player use the Chrome sandbox
     // architecture which conflicts with our restricted process model
     //
 
+    // $Workaround$ - 3rd party fix
     if (Dll_ImageType == DLL_IMAGE_FLASH_PLAYER_SANDBOX ||
         Dll_ImageType == DLL_IMAGE_ACROBAT_READER ||
         Dll_ImageType == DLL_IMAGE_PLUGIN_CONTAINER)
+        hToken = NULL;
+
+    //
+    // Compatybility hack for firefox 106.x
+    //
+
+    // $Workaround$ - 3rd party fix
+    if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX && lpCommandLine 
+     // && wcsstr(lpCommandLine, L"-contentproc")
+        && wcsstr(lpCommandLine, L"-sandboxingKind")
+      )
         hToken = NULL;
 
     //

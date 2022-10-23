@@ -25,7 +25,7 @@ Version history:
 
 2.6: - - initialize() is now obsolete, no longer necessary to call
      it
-     - - Fixed race condition where multiple instances migth be started
+     - - Fixed race condition where multiple instances might be started
      - - QtSingleCoreApplication variant provided for non-GUI (console)
      usage
      - Complete reimplementation. Visible changes:

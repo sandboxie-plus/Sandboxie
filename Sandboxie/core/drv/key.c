@@ -962,8 +962,17 @@ _FX BOOLEAN Key_MountHive3(
 
                 if (! NT_SUCCESS(status))
                     Log_Status(MSG_MOUNT_FAILED, 0x22, status);
-                else
+                else {
                     ok = TRUE;
+
+                    SVC_REGHIVE_MSG msg;
+
+                    msg.process_id = (ULONG)(ULONG_PTR)proc->pid;
+                    msg.session_id = proc->box->session_id;
+                    wcscpy(msg.boxname, proc->box->name);
+
+                    Api_SendServiceMessage(SVC_MOUNTED_HIVE, sizeof(msg), &msg);
+                }
 
                 //
                 // restore original TokenDefaultDacl
@@ -1031,7 +1040,7 @@ _FX void Key_UnmountHive(PROCESS *proc)
 
     if (send_msg) {
 
-        SVC_UNMOUNT_MSG msg;
+        SVC_REGHIVE_MSG msg;
 
         msg.process_id = (ULONG)(ULONG_PTR)proc->pid;
         msg.session_id = proc->box->session_id;

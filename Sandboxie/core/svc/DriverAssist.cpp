@@ -25,6 +25,7 @@
 #include <sddl.h>
 #include <stdio.h>
 #include <psapi.h>
+#include <winioctl.h>
 
 #include "misc.h"
 #include "DriverAssist.h"
@@ -286,6 +287,11 @@ void DriverAssist::MsgWorkerThread(void *MyMsg)
         CancelProcess(data_ptr);
 
     }
+    else if (msgid == SVC_MOUNTED_HIVE) {
+
+        MountedHive(data_ptr);
+
+    }
     else if (msgid == SVC_UNMOUNT_HIVE) {
 
         UnmountHive(data_ptr);
@@ -512,13 +518,102 @@ void DriverAssist::RestartHostInjectedSvcs()
 
 
 //---------------------------------------------------------------------------
+// VolHas8dot3Support
+//---------------------------------------------------------------------------
+
+// VolumeFlags bit values (see FILE_FS_PERSISTENT_VOLUME_INFORMATION.VolumeFlags)
+#define PERSISTENT_VOLUME_STATE_SHORT_NAME_CREATION_DISABLED 0x00000001		// No 8.3 name creation on this volume
+
+//
+// Structure for FSCTL_SET_PERSISTENT_VOLUME_STATE and FSCTL_GET_PERSISTENT_VOLUME_STATE
+// The initial version will be 1.0
+//
+typedef struct _FILE_FS_PERSISTENT_VOLUME_INFORMATION {
+
+    ULONG VolumeFlags;
+    ULONG FlagMask;
+    ULONG Version;
+    ULONG Reserved;
+
+} FILE_FS_PERSISTENT_VOLUME_INFORMATION, *PFILE_FS_PERSISTENT_VOLUME_INFORMATION;
+
+// FltFsControlFile or ZwFsControlFile call # to query persistant volume info (if used in DDK)
+// CAN ALSO USE WITH: DeviceIOControl (which is what we will do)
+#define FSCTL_QUERY_PERSISTENT_VOLUME_STATE CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 143, METHOD_BUFFERED, FILE_ANY_ACCESS)  // FILE_FS_PERSISTENT_VOLUME_INFORMATION
+
+BOOL VolHas8dot3Support(WCHAR* path)
+{
+    BOOL is8Dot3 = FALSE;
+
+    NTSTATUS status;
+    HANDLE hFile;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING uni;
+    IO_STATUS_BLOCK MyIoStatusBlock;
+
+    RtlInitUnicodeString(&uni, path);
+    InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+    status = NtOpenFile(&hFile, GENERIC_READ, &objattrs, &MyIoStatusBlock, FILE_SHARE_READ | FILE_SHARE_WRITE, 0);
+    if (NT_SUCCESS(status)) {
+
+        FILE_FS_PERSISTENT_VOLUME_INFORMATION inbuf = { 0 };
+	    FILE_FS_PERSISTENT_VOLUME_INFORMATION outbuf = { 0 };
+	    inbuf.FlagMask = PERSISTENT_VOLUME_STATE_SHORT_NAME_CREATION_DISABLED;
+	    inbuf.Version = 1;
+        status = NtFsControlFile(hFile, NULL, NULL, NULL, &MyIoStatusBlock, FSCTL_QUERY_PERSISTENT_VOLUME_STATE, &inbuf, sizeof(inbuf), &outbuf, sizeof(outbuf));
+        if(NT_SUCCESS(status)) {
+
+		    is8Dot3 = (outbuf.VolumeFlags & PERSISTENT_VOLUME_STATE_SHORT_NAME_CREATION_DISABLED) ? FALSE : TRUE;
+	    }
+
+        NtClose(hFile);
+    }
+
+    return is8Dot3;
+}
+
+
+//---------------------------------------------------------------------------
+// MountedHive
+//---------------------------------------------------------------------------
+
+
+void DriverAssist::MountedHive(void *_msg)
+{
+    SVC_REGHIVE_MSG *msg = (SVC_REGHIVE_MSG *)_msg;
+    NTSTATUS status;
+    ULONG len = 0;
+    WCHAR *path;
+
+    status = SbieApi_QueryBoxPath(msg->boxname, NULL, NULL, NULL, &len, NULL, NULL);
+    if (status != 0) return;
+
+    path = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, len + 16);
+    if (! path) return;
+
+    status = SbieApi_QueryBoxPath(msg->boxname, path, NULL, NULL, &len, NULL, NULL);
+    if (status == 0 && wcslen(path) > 22) {
+
+        WCHAR* bs = wcschr(path + 22, L'\\');
+        if(bs) *bs = L'\0';
+
+        if(!VolHas8dot3Support(path))
+            SbieApi_LogEx(msg->session_id, 2227, L"%S", msg->boxname);
+    }
+
+    HeapFree(GetProcessHeap(), 0, path);
+}
+
+
+//---------------------------------------------------------------------------
 // UnmountHive
 //---------------------------------------------------------------------------
 
 
 void DriverAssist::UnmountHive(void *_msg)
 {
-    SVC_UNMOUNT_MSG *msg = (SVC_UNMOUNT_MSG *)_msg;
+    SVC_REGHIVE_MSG *msg = (SVC_REGHIVE_MSG *)_msg;
     ULONG rc, retries;
 
     //

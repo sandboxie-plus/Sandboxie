@@ -1139,7 +1139,7 @@ _FX BOOL Proc_CreateProcessInternalW(
                                 }
 
                                 wmemcpy(mybuff2, ptr, len);
-                                mybuff2 += len;                                
+                                mybuff2 += len;
 
                                 *end = savechar;
                             }
@@ -1149,6 +1149,8 @@ _FX BOOL Proc_CreateProcessInternalW(
                         }
 
                         Dll_Free(temp);
+
+                        *mybuff2 = L'\0';
                     }
 
                     if (! lpCurrentDirectory) { // lpCurrentDirectory must not be NULL

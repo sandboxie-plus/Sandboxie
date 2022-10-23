@@ -221,7 +221,7 @@ bool CXml::Parse(QString &Name, QVariant &Variant, QXmlStreamReader &xml, bool b
 
 /* SQVariants provides a lookup list of all known QVariant types for to/from string conversion
 *
-*	Note: All commented out types dont have native to string converion 
+*	Note: All commented out types don't have native to string conversion 
 *			If there is a need to use them a manual conversion must be implemented in CXml
 */
 struct SQVariants{
@@ -236,10 +236,10 @@ struct SQVariants{
 		Map.insert("ULongLong"	, QVariant::ULongLong);
 		Map.insert("Double"		, QVariant::Double);
 		Map.insert("Char"		, QVariant::Char);
-		Map.insert("Map"		, QVariant::Map);	// conainter type
-		Map.insert("List"		, QVariant::List);	// conainter type
+		Map.insert("Map"		, QVariant::Map);	// container type
+		Map.insert("List"		, QVariant::List);	// container type
 		Map.insert("String"		, QVariant::String);
-		Map.insert("StringList"	, QVariant::StringList);	// conainter type
+		Map.insert("StringList"	, QVariant::StringList);	// container type
 		Map.insert("ByteArray"	, QVariant::ByteArray);
 		//Map.insert("BitArray"	, QVariant::BitArray);
 		Map.insert("Date"		, QVariant::Date);

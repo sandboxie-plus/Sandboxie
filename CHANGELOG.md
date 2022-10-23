@@ -11,7 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added SBIE2227 warning when a sandbox is located on a volume without 8.3 name support
 
 ### Fixed
-- fixed issues when reanaming a sandbox with a custom path [#2368](https://github.com/sandboxie-plus/Sandboxie/issues/2368)
+- fixed issues when renaming a sandbox with a custom path [#2368](https://github.com/sandboxie-plus/Sandboxie/issues/2368)
 - properly fixed the Firefox 106 issue [46e9979](https://github.com/sandboxie-plus/Sandboxie/commit/46e99799e2b753b85224dc921ec141a05025acfd)
 - fixed issue with alternative UI modes [#2380](https://github.com/sandboxie-plus/Sandboxie/issues/2380)
 - fixed command line corruption with breakout processes [#2377](https://github.com/sandboxie-plus/Sandboxie/issues/2377)
@@ -35,7 +35,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with local template [#2338](https://github.com/sandboxie-plus/Sandboxie/pull/2338) (thanks okrc)
 - fixed Edge WebView2 compatibility issue [#2350](https://github.com/sandboxie-plus/Sandboxie/issues/2350)
 - added provisional workaround for Firefox 106 content process sandbox issue
-- fixed bug with renaming sandboxes [2358](https://github.com/sandboxie-plus/Sandboxie/pull/2358) (thanks okrc)
+- fixed bug with renaming sandboxes [#2358](https://github.com/sandboxie-plus/Sandboxie/pull/2358) (thanks okrc)
 
 ### Changed
 - reworked API compatibility check

@@ -217,6 +217,9 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	if ((QGuiApplication::queryKeyboardModifiers() & Qt::AltModifier) != 0)
 		iOptionLayout = !iOptionLayout;
 
+	QWidget* pDummy = new QWidget(this);
+	pDummy->setVisible(false);
+
 	ui.tabs->removeTab(9); // remove unused variouse options tab
 
 	// re structure the UI a bit
@@ -264,16 +267,16 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	{
 		if (iOptionLayout == 1) {
 			//ui.tabs->removeTab(7); // ini edit
-			ui.tabs->removeTab(5); // advanced
+			ui.tabAdvanced->setParent(pDummy); //ui.tabs->removeTab(5); // advanced
 			//ui.tabsForce->removeTab(2); // breakout
 		}
 		else {
 			//ui.tabs->removeTab(11); // ini edit
-			ui.tabs->removeTab(9); // advanced
+			ui.tabAdvanced->setParent(pDummy); //ui.tabs->removeTab(9); // advanced
 			//ui.tabsForce->removeTab(1); // breakout
 		}
-		ui.tabsSecurity->removeTab(3); // advanced security
-		ui.tabsSecurity->removeTab(2); // security isolation
+		ui.tabPrivileges->setParent(pDummy); //ui.tabsSecurity->removeTab(3); // advanced security
+		ui.tabIsolation->setParent(pDummy); //ui.tabsSecurity->removeTab(1); // security isolation
 		//ui.tabsAccess->removeTab(5); // policy
 		ui.treeOptions = NULL;
 	}

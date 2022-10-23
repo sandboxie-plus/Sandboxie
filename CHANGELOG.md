@@ -12,9 +12,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issues when reanaming a sandbox with a custom path [#2368](https://github.com/sandboxie-plus/Sandboxie/issues/2368)
-- proeprly fixed the firefox 106 issue
+- properly fixed the Firefox 106 issue [46e9979](https://github.com/sandboxie-plus/Sandboxie/commit/46e99799e2b753b85224dc921ec141a05025acfd)
 - fixed issue with alternative UI modes [#2380](https://github.com/sandboxie-plus/Sandboxie/issues/2380)
-- fixed commandline corruption with rbeakout processes [#2377](https://github.com/sandboxie-plus/Sandboxie/issues/2377)
+- fixed command line corruption with breakout processes [#2377](https://github.com/sandboxie-plus/Sandboxie/issues/2377)
 
 
 ## [1.5.0 / 5.60.0] - 2022-10-19
@@ -566,7 +566,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - EnableObjectFiltering is now set enabled by default, and replaces Sbie's old process/thread handle filter
-- the $: syntax now accepts a wildcard $:* no more specialized wildcards though
+- the `$:` syntax now accepts a wildcard `$:*` no more specialized wildcards though
 
 ### Fixed
 - fixed NtGetNextProcess being fully disabled instead of properly filtered

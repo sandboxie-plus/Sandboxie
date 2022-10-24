@@ -62,6 +62,10 @@ SBIE2225 An attempt was made to access an EFS file: %2
 SBIE2226 Process failed to start due to missing elevation, to resolve add "ApplyElevateCreateProcessFix=y" to the ini section for this box %2
 .
 
+2227;pop;wrn;01
+SBIE2227 '%2' is located on a volume which does not support 8.3 naming. This can cause to issues with older applications and installers.
+.
+
 2302;pop;err;01
 SBIE2302 Process image configuration conflict: %2
 .

@@ -3,6 +3,6 @@
 *==========
 
 2227;pop;wrn;01
-SBIE2227 '%2' is located on a volume which does not support 8.3 naming. This can cause to issues with older applications and installers.
+SBIE2227 '%2' is located on a volume which does not support 8.3 naming. This can cause issues with older applications and installers.
 .
 

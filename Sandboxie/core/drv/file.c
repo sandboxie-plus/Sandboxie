@@ -797,6 +797,13 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
 
 #ifdef USE_MATCH_PATH_EX
     ok = Process_GetPaths(proc, write_file_paths, _WritePath, TRUE);
+
+    if (ok && proc->use_privacy_mode) { // in privacy mode all drive paths are set to "write"
+        for (i = 0; drive_devices[i] && ok; ++i) {
+            ok = Process_AddPath(proc, write_file_paths, NULL, 
+                                    TRUE, drive_devices[i], FALSE);
+        }
+    }
 #else
     ok = Process_GetPaths2(
             proc, write_file_paths, closed_file_paths,
@@ -833,15 +840,10 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
             }
         }
 
-        if (ok) {
+        if (ok && !proc->use_privacy_mode) { // when not in privacy mode we need to set drive paths to "normal"
             for (i = 0; drive_devices[i] && ok; ++i) {
-                if (proc->use_privacy_mode) { // in privacy mode the default for drives is not "normal" but "write"
-                    ok = Process_AddPath(
-                        proc, write_file_paths, NULL, FALSE, drive_devices[i], FALSE);
-                } else {
-                    ok = Process_AddPath(
-                        proc, normal_file_paths, NULL, FALSE, drive_devices[i], FALSE);
-                }
+                ok = Process_AddPath(
+                    proc, normal_file_paths, NULL, FALSE, drive_devices[i], FALSE);
             }
         }
 

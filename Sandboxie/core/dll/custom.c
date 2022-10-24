@@ -75,7 +75,7 @@ _FX BOOLEAN CustomizeSandbox(void)
 
     if ((Dll_ProcessFlags & SBIE_FLAG_PRIVACY_MODE) != 0) {
 
-        Key_CreateBaseKeys();
+        //Key_CreateBaseKeys();
         Key_CreateBaseFolders();
     }
 
@@ -920,7 +920,11 @@ _FX HANDLE OpenExplorerKey(
 
     InitializeObjectAttributes(
         &objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
-    status = NtOpenKey(&HKey_Root, KEY_READ, &objattrs);
+    status = Key_OpenOrCreateIfBoxed(&HKey_Root, KEY_READ, &objattrs);
+    if (status == STATUS_BAD_INITIAL_PC) {
+        *error = 0;
+        return INVALID_HANDLE_VALUE;
+    }
 
     if (status != STATUS_SUCCESS) {
         *error = 0x99;
@@ -934,7 +938,11 @@ _FX HANDLE OpenExplorerKey(
     RtlInitUnicodeString(&uni, _Explorer);
     InitializeObjectAttributes(
         &objattrs, &uni, OBJ_CASE_INSENSITIVE, HKey_Root, NULL);
-    status = NtOpenKey(&HKey_Explorer, KEY_READ, &objattrs);
+    status = Key_OpenOrCreateIfBoxed(&HKey_Explorer, KEY_READ, &objattrs);
+    if (status == STATUS_BAD_INITIAL_PC) {
+        *error = 0;
+        return INVALID_HANDLE_VALUE;
+    }
 
     NtClose(HKey_Root);
 
@@ -951,9 +959,7 @@ _FX HANDLE OpenExplorerKey(
     InitializeObjectAttributes(
         &objattrs, &uni, OBJ_CASE_INSENSITIVE, HKey_Explorer, NULL);
 
-    status = Key_OpenOrCreateIfBoxed(
-                    &HKey_Subkey, KEY_ALL_ACCESS, &objattrs);
-
+    status = Key_OpenOrCreateIfBoxed(&HKey_Subkey, KEY_ALL_ACCESS, &objattrs);
     if (status == STATUS_BAD_INITIAL_PC) {
         *error = 0;
         return INVALID_HANDLE_VALUE;

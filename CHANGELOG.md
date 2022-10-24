@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - properly fixed the Firefox 106 issue [46e9979](https://github.com/sandboxie-plus/Sandboxie/commit/46e99799e2b753b85224dc921ec141a05025acfd)
 - fixed issue with alternative UI modes [#2380](https://github.com/sandboxie-plus/Sandboxie/issues/2380)
 - fixed command line corruption with breakout processes [#2377](https://github.com/sandboxie-plus/Sandboxie/issues/2377)
+- fixed issues with Privacy Enchanced box types
 
 
 ## [1.5.0 / 5.60.0] - 2022-10-19

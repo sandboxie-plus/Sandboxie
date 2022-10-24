@@ -1705,7 +1705,7 @@ SkipReadOnlyCheck:
 
     RtlInitUnicodeString(&objname, TruePath);
 
-    status = __sys_NtOpenKey(KeyHandle, Wow64KeyReadAccess, &objattrs);
+    status = SbieApi_OpenKey(KeyHandle, TruePath);
 
     *BackslashPtr = L'\\';
 

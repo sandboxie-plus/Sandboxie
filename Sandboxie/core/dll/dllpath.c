@@ -478,14 +478,10 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
     exact = FALSE;
     wildc = -1; // lower is better
     match_len = 0;
-    if ((path_code == L'f' || path_code == L'k' || path_code == L'i') && (Dll_ProcessFlags & SBIE_FLAG_PRIVACY_MODE) != 0) {
-
-        mp_flags = PATH_WRITE_FLAG; // write path mode
-    }
-    else {
-
-        mp_flags = 0; // normal mode
-    }
+    //if (use_privacy_mode)
+    //    mp_flags = PATH_WRITE_FLAG; // write path mode
+    //else 
+    //    mp_flags = 0; // normal mode
 
     //
     // ClosedXxxPath

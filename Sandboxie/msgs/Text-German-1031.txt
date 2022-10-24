@@ -456,6 +456,10 @@ SBIE2225 Es wurde versucht auf eine EFS-Datei zuzugreifen: %2
 SBIE2226 Prozess konnte wegen fehlenden erhöhten Rechten nicht starten; zur Behebung fügen Sie "ApplyElevateCreateProcessFix=y" zu der ini-Sektion für diese Box hinzu %2
 .
 
+2227;pop;wrn;01
+SBIE2227 '%2' befindet sich auf einem Datenträger, welcher nicht das 8.3 Namensschema unterstützt. Dies kann zu Problemen mit älteren Anwendungen und Installationsprogrammen führen.
+.
+
 #----------------------------------------------------------------------------
 # SbieDrv
 #

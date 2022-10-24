@@ -306,8 +306,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 <context>
     <name>COptionsWindow</name>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="383"/>
-        <location filename="Windows/OptionsWindow.cpp" line="396"/>
+        <location filename="Windows/OptionsWindow.cpp" line="386"/>
+        <location filename="Windows/OptionsWindow.cpp" line="399"/>
         <location filename="Windows/OptionsAccess.cpp" line="24"/>
         <source>Browse for File</source>
         <translation>파일 찾아보기</translation>
@@ -459,7 +459,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>디렉토리 선택</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="904"/>
+        <location filename="Windows/OptionsWindow.cpp" line="907"/>
         <location filename="Windows/OptionsAccess.cpp" line="379"/>
         <location filename="Windows/OptionsAccess.cpp" line="616"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="537"/>
@@ -471,8 +471,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>모든 프로그램</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="902"/>
-        <location filename="Windows/OptionsWindow.cpp" line="920"/>
+        <location filename="Windows/OptionsWindow.cpp" line="905"/>
+        <location filename="Windows/OptionsWindow.cpp" line="923"/>
         <location filename="Windows/OptionsAccess.cpp" line="384"/>
         <location filename="Windows/OptionsAccess.cpp" line="620"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
@@ -964,47 +964,47 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Sandboxie Plus - &apos;%1&apos; 옵션</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="257"/>
+        <location filename="Windows/OptionsWindow.cpp" line="260"/>
         <source>Grouping</source>
         <translation>그룹</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="554"/>
+        <location filename="Windows/OptionsWindow.cpp" line="557"/>
         <source>Search for options</source>
         <translation>옵션 검색</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="675"/>
+        <location filename="Windows/OptionsWindow.cpp" line="678"/>
         <source>Box: %1</source>
         <translation>박스: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="676"/>
+        <location filename="Windows/OptionsWindow.cpp" line="679"/>
         <source>Template: %1</source>
         <translation>템플릿: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="677"/>
+        <location filename="Windows/OptionsWindow.cpp" line="680"/>
         <source>Global: %1</source>
         <translation>전역: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="678"/>
+        <location filename="Windows/OptionsWindow.cpp" line="681"/>
         <source>Default: %1</source>
         <translation>기본값: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="844"/>
+        <location filename="Windows/OptionsWindow.cpp" line="847"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>이 샌드박스가 삭제되어 구성을 저장할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="890"/>
+        <location filename="Windows/OptionsWindow.cpp" line="893"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>일부 변경 사항이 아직 저장되지 않았습니다. 이 옵션 창을 닫으시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="913"/>
+        <location filename="Windows/OptionsWindow.cpp" line="916"/>
         <source>Enter program:</source>
         <translation>프로그램 입력:</translation>
     </message>

@@ -336,56 +336,56 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation>Sandboxie-Plus - &apos;%1&apos; Alternativ</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="257"/>
+        <location filename="Windows/OptionsWindow.cpp" line="260"/>
         <source>Grouping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="383"/>
-        <location filename="Windows/OptionsWindow.cpp" line="396"/>
+        <location filename="Windows/OptionsWindow.cpp" line="386"/>
+        <location filename="Windows/OptionsWindow.cpp" line="399"/>
         <location filename="Windows/OptionsAccess.cpp" line="24"/>
         <source>Browse for File</source>
         <translation>Bläddra efter fil</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="554"/>
+        <location filename="Windows/OptionsWindow.cpp" line="557"/>
         <source>Search for options</source>
         <oldsource>Search for Options</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="675"/>
+        <location filename="Windows/OptionsWindow.cpp" line="678"/>
         <source>Box: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="676"/>
+        <location filename="Windows/OptionsWindow.cpp" line="679"/>
         <source>Template: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="677"/>
+        <location filename="Windows/OptionsWindow.cpp" line="680"/>
         <source>Global: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="678"/>
+        <location filename="Windows/OptionsWindow.cpp" line="681"/>
         <source>Default: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="844"/>
+        <location filename="Windows/OptionsWindow.cpp" line="847"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>Denna sandlåda har blivit raderad, därför kan konfigurationen inte sparas.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="890"/>
+        <location filename="Windows/OptionsWindow.cpp" line="893"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>Vissa ändringar har inte sparats ännu, vill du verkligen stänga detta alternativsfönster?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="902"/>
-        <location filename="Windows/OptionsWindow.cpp" line="920"/>
+        <location filename="Windows/OptionsWindow.cpp" line="905"/>
+        <location filename="Windows/OptionsWindow.cpp" line="923"/>
         <location filename="Windows/OptionsAccess.cpp" line="384"/>
         <location filename="Windows/OptionsAccess.cpp" line="620"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
@@ -395,7 +395,7 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation>Grupp: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="913"/>
+        <location filename="Windows/OptionsWindow.cpp" line="916"/>
         <source>Enter program:</source>
         <translation>Ange program:</translation>
     </message>
@@ -546,7 +546,7 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation>Välj katalog</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="904"/>
+        <location filename="Windows/OptionsWindow.cpp" line="907"/>
         <location filename="Windows/OptionsAccess.cpp" line="379"/>
         <location filename="Windows/OptionsAccess.cpp" line="616"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="537"/>

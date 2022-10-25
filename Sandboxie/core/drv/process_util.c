@@ -964,7 +964,7 @@ _FX ULONG Process_MatchPathEx(
     //    // and read access to user data must be explicityl grated,
     //    // also all writes are redirected to the sandbox
     //    //
-    //    // Note: as of 1.5.1 all locations are locked down explicitly while the root mode remains normal
+    //    // Note: as of 5.60.1 all locations are locked down explicitly while the root mode remains normal
     //    //
     //    // To enable privacy enchanced mode add UsePrivacyMode=y 
     //    //

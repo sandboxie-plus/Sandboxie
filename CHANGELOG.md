@@ -9,15 +9,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added SBIE2227 warning when a sandbox is located on a volume without 8.3 name support
+- added template for Tencent QQ [#2367](https://github.com/sandboxie-plus/Sandboxie/issues/2367)
 
 ### Fixed
 - fixed issues when renaming a sandbox with a custom path [#2368](https://github.com/sandboxie-plus/Sandboxie/issues/2368)
 - properly fixed the Firefox 106 issue [46e9979](https://github.com/sandboxie-plus/Sandboxie/commit/46e99799e2b753b85224dc921ec141a05025acfd)
 - fixed issue with alternative UI modes [#2380](https://github.com/sandboxie-plus/Sandboxie/issues/2380)
 - fixed command line corruption with breakout processes [#2377](https://github.com/sandboxie-plus/Sandboxie/issues/2377)
-- fixed issues with Privacy Enchanced box types [#2342](https://github.com/sandboxie-plus/Sandboxie/issues/2342)
-- fixed issuee with boxed object directroy initialization [#2342](https://github.com/sandboxie-plus/Sandboxie/issues/2342)
-- sandboxie no longer leaves behing permanent directory objects
+- fixed issues with Privacy Enhanced box types [#2342](https://github.com/sandboxie-plus/Sandboxie/issues/2342)
+- fixed issue with boxed object directory initialization [#2342](https://github.com/sandboxie-plus/Sandboxie/issues/2342)
+- Sandboxie no longer leaves behind permanent directory objects
 
 
 ## [1.5.0 / 5.60.0] - 2022-10-19

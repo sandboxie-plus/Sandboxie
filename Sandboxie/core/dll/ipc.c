@@ -407,7 +407,9 @@ _FX BOOLEAN Ipc_Init(void)
     }
 
     //if (!Dll_AlernateIpcNaming) // alternate naming does not need an own namespace
-    Ipc_CreateObjects();
+    if (Dll_FirstProcessInBox) {
+        Ipc_CreateObjects();
+    }
 
     List_Init(&Ipc_DynamicPortNames);
 

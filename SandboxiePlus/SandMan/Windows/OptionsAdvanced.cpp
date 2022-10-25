@@ -77,7 +77,6 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkGuiTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkComTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkNetFwTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
-	connect(ui.chkDnsTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkApiTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDbgTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkErrTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -147,7 +146,6 @@ void COptionsWindow::LoadAdvanced()
 	ReadAdvancedCheck("GuiTrace", ui.chkGuiTrace, "*");
 	ReadAdvancedCheck("ClsidTrace", ui.chkComTrace, "*");
 	ReadAdvancedCheck("NetFwTrace", ui.chkNetFwTrace, "*");
-	ui.chkDnsTrace->setChecked(m_pBox->GetBool("DnsTrace", false));
 	ui.chkDbgTrace->setChecked(m_pBox->GetBool("DebugTrace", false));
 	ui.chkErrTrace->setChecked(m_pBox->GetBool("ErrorTrace", false));
 	QSharedPointer<CSandBoxPlus> pBoxPlus = m_pBox.objectCast<CSandBoxPlus>();
@@ -282,7 +280,6 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkGuiTrace, "GuiTrace", "*");
 	WriteAdvancedCheck(ui.chkComTrace, "ClsidTrace", "*");
 	WriteAdvancedCheck(ui.chkNetFwTrace, "NetFwTrace", "*");
-	WriteAdvancedCheck(ui.chkDnsTrace, "chkDnsTrace", "y");
 	WriteAdvancedCheck(ui.chkDbgTrace, "DebugTrace", "y");
 	WriteAdvancedCheck(ui.chkErrTrace, "ErrorTrace", "y");
 	QSharedPointer<CSandBoxPlus> pBoxPlus = m_pBox.objectCast<CSandBoxPlus>();

@@ -229,6 +229,7 @@
                 <widget class="QLabel" name="lblBoxType">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -242,6 +243,7 @@
                 <widget class="QLabel" name="lblAppearance">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -290,6 +292,7 @@
                 <widget class="QLabel" name="lblMigration">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -316,6 +319,7 @@
                 <widget class="QLabel" name="lblDelete">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -366,6 +370,7 @@
                 <widget class="QLabel" name="lblRawDisk">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -437,6 +442,7 @@
                 <widget class="QLabel" name="lblStructure">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -563,6 +569,7 @@
                 <widget class="QLabel" name="lblOther">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -598,6 +605,7 @@
                 <widget class="QLabel" name="lblPrinting">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -614,6 +622,7 @@
                 <widget class="QLabel" name="lblNetwork">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -766,6 +775,7 @@
                 <widget class="QLabel" name="lblElevation">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -789,6 +799,7 @@
                 <widget class="QLabel" name="label_40">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -809,6 +820,7 @@
                 <widget class="QLabel" name="lblSecurity">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -865,6 +877,7 @@
                 <widget class="QLabel" name="lblAdmin">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -891,6 +904,7 @@
                 <widget class="QLabel" name="label_35">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1028,6 +1042,7 @@
                 <widget class="QLabel" name="lblIsolation">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1044,6 +1059,7 @@
                 <widget class="QLabel" name="lblAccess">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1073,6 +1089,7 @@
            <widget class="QWidget" name="tabPrivileges">
             <property name="font">
              <font>
+              <weight>50</weight>
               <bold>false</bold>
               <kerning>true</kerning>
              </font>
@@ -1094,6 +1111,7 @@
                 <widget class="QLabel" name="lblFence">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1117,6 +1135,7 @@
                 <widget class="QLabel" name="lblPrivilege">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1140,6 +1159,7 @@
                 <widget class="QLabel" name="lblToken">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1156,6 +1176,7 @@
                 <widget class="QLabel" name="label_65">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1203,6 +1224,7 @@
                 <widget class="QLabel" name="label_64">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -2434,6 +2456,7 @@ To specify a process use '$:program.exe' as path.</string>
                 <widget class="QLabel" name="lblPolicy">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -2481,6 +2504,7 @@ To specify a process use '$:program.exe' as path.</string>
                 <widget class="QLabel" name="lblMode">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -2788,6 +2812,7 @@ The process match level has a higher priority than the specificity and describes
                 <widget class="QLabel" name="lblNoWfp">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -3003,6 +3028,7 @@ The process match level has a higher priority than the specificity and describes
           <widget class="QTabWidget" name="tabsOther">
            <property name="font">
             <font>
+             <weight>50</weight>
              <bold>false</bold>
              <kerning>true</kerning>
             </font>
@@ -3023,6 +3049,7 @@ The process match level has a higher priority than the specificity and describes
           <widget class="QTabWidget" name="tabsAdvanced">
            <property name="font">
             <font>
+             <weight>50</weight>
              <bold>false</bold>
              <kerning>true</kerning>
             </font>
@@ -3041,6 +3068,7 @@ The process match level has a higher priority than the specificity and describes
                 <widget class="QLabel" name="lblCompatibility">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -3361,6 +3389,7 @@ The process match level has a higher priority than the specificity and describes
            <widget class="QWidget" name="tabHideProc">
             <property name="font">
              <font>
+              <weight>50</weight>
               <bold>false</bold>
               <kerning>true</kerning>
              </font>
@@ -3524,6 +3553,7 @@ The process match level has a higher priority than the specificity and describes
            <widget class="QWidget" name="tabUsers">
             <property name="font">
              <font>
+              <weight>50</weight>
               <bold>false</bold>
               <kerning>true</kerning>
              </font>
@@ -3826,6 +3856,7 @@ instead of &quot;*&quot;.</string>
                 <widget class="QLabel" name="lblMonitor">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -3852,6 +3883,7 @@ instead of &quot;*&quot;.</string>
                 <widget class="QLabel" name="lblTracing">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -3882,13 +3914,6 @@ instead of &quot;*&quot;.</string>
                  </property>
                 </widget>
                </item>
-               <item row="10" column="4">
-                <widget class="QCheckBox" name="chkDnsTrace">
-                 <property name="text">
-                  <string>DNS Request Logging</string>
-                 </property>
-                </widget>
-               </item>
               </layout>
              </item>
             </layout>
@@ -3896,6 +3921,7 @@ instead of &quot;*&quot;.</string>
            <widget class="QWidget" name="tabDebug">
             <property name="font">
              <font>
+              <weight>50</weight>
               <bold>false</bold>
               <kerning>true</kerning>
              </font>
@@ -3926,8 +3952,8 @@ instead of &quot;*&quot;.</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
-                  <height>28</height>
+                  <width>685</width>
+                  <height>360</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="dbgLayout">
@@ -3951,6 +3977,7 @@ instead of &quot;*&quot;.</string>
               <widget class="QLabel" name="label_25">
                <property name="font">
                 <font>
+                 <weight>75</weight>
                  <bold>true</bold>
                  <kerning>true</kerning>
                 </font>

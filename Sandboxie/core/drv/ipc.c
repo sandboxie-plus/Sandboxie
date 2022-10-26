@@ -173,6 +173,12 @@ _FX BOOLEAN Ipc_Init(void)
         }
     }
 
+    if (Driver_OsVersion >= DRIVER_WINDOWS_8) {
+
+        if (! Syscall_Set2("AlpcConnectPortEx", Ipc_CheckPortObject))
+            return FALSE;
+    }
+
     //
     // register object filter callbacks on Vista SP1 and later
     //

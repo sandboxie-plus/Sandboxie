@@ -280,6 +280,14 @@ _FX NTSTATUS Syscall_OpenHandle(
         {
             puName = (UNICODE_STRING*)user_args[1];
         }
+        else if (strcmp(syscall_entry->name, "AlpcConnectPortEx") == 0)
+        {
+            POBJECT_ATTRIBUTES pObj = (POBJECT_ATTRIBUTES)user_args[1];
+            if (pObj && pObj->ObjectName)
+            {
+                puName = pObj->ObjectName;
+            }
+        }
         else if ((strcmp(syscall_entry->name, "CreateFile") == 0) ||
             (strcmp(syscall_entry->name, "OpenFile") == 0))
         {

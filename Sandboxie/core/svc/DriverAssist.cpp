@@ -559,8 +559,8 @@ BOOL VolHas8dot3Support(WCHAR* path)
     //if (NT_SUCCESS(status)) {
     WCHAR device[] = L"\\\\.\\X:";
     device[4] = path[0];
-    hFile = CreateFile(device, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, 0, OPEN_EXISTING, 0, (HANDLE) NULL);
-    {
+    hFile = CreateFile(device, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, 0, OPEN_EXISTING, 0, (HANDLE)NULL);
+    if (hFile != INVALID_HANDLE_VALUE) {
 
         FILE_FS_PERSISTENT_VOLUME_INFORMATION inbuf = { 0 };
 	    FILE_FS_PERSISTENT_VOLUME_INFORMATION outbuf = { 0 };

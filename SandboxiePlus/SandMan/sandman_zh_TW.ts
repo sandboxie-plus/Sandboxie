@@ -536,7 +536,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAdvanced.cpp" line="44"/>
         <source>Enable special inconsistent PreferExternalManifest behaviour, as needed for some Edge fixes</source>
         <oldsource>Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes</oldsource>
-        <translation type="unfinished">啟用不一致的特殊 PreferExternalManifest 行為支援，某些邊緣問題的修復可能需要開啟此選項</translation>
+        <translation>啟用不一致的特殊 PreferExternalManifest 行為支援，修復 Microsoft Edge 存在的某些問題可能需要開啟此選項</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="45"/>
@@ -552,7 +552,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAdvanced.cpp" line="49"/>
         <source>Make specified processes think they have admin permissions.</source>
         <oldsource>Make specified processes think thay have admin permissions.</oldsource>
-        <translation type="unfinished">讓指定的處理程序認為它們具有管理員權限。</translation>
+        <translation>讓指定的處理程序認為它們具有管理員權限。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="50"/>
@@ -4329,7 +4329,7 @@ No will choose: %2</source>
         <location filename="Forms/OptionsWindow.ui" line="1098"/>
         <source>Advanced Security</source>
         <oldsource>Adcanced Security</oldsource>
-        <translation type="unfinished">進階安全性</translation>
+        <translation>進階安全性</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1106"/>
@@ -4380,7 +4380,7 @@ No will choose: %2</source>
         <location filename="Forms/OptionsWindow.ui" line="1590"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
         <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
-        <translation type="unfinished">在此處設定的程式，在啟動時將被允許脫離這個沙箱，您可以把它們擷取到另一個沙箱裡。例如，讓網路瀏覽器總是在一個專門的沙箱裡開啟 (此功能需要安裝一個有效的贊助者憑證)。</translation>
+        <translation>在此處設定的程式，在啟動時將被允許脫離這個沙箱，您可以把它們擷取到另一個沙箱裡。例如，讓網路瀏覽器總是在一個專門的沙箱裡開啟 (此功能需要安裝一個有效的贊助者憑證)。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1617"/>
@@ -4949,7 +4949,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/OptionsWindow.ui" line="3261"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
         <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
-        <translation type="unfinished">該命令將在檔案復原前執行，檔案路徑將作為第一個參數被傳遞，如果該命令的返回值不是 0，則復原將被阻止</translation>
+        <translation>該命令將在檔案復原前執行，檔案路徑將作為第一個參數被傳遞，如果該命令的返回值不是 0，則復原將被阻止</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3264"/>
@@ -5121,11 +5121,6 @@ instead of &quot;*&quot;.</source>
         <location filename="Forms/OptionsWindow.ui" line="3913"/>
         <source>Network Firewall</source>
         <translation>網路防火牆</translation>
-    </message>
-    <message>
-        <source>DNS Request Logging</source>
-        <oldsource>Dns Request Logging</oldsource>
-        <translation type="obsolete">DNS 要求記錄</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3930"/>

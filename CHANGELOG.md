@@ -20,6 +20,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with boxed object directory initialization [#2342](https://github.com/sandboxie-plus/Sandboxie/issues/2342)
 - Sandboxie no longer leaves behind permanent directory objects
 - FIXED SECURITY ISSUE ID-21 AlpcConnectPortEx was not filtered by the driver [#2396](https://github.com/sandboxie-plus/Sandboxie/issues/2396)
+- fixed issues with program controll options [#2395](https://github.com/sandboxie-plus/Sandboxie/issues/2395)
+
 
 
 ## [1.5.0 / 5.60.0] - 2022-10-19

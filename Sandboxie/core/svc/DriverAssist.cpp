@@ -26,6 +26,7 @@
 #include <stdio.h>
 #include <psapi.h>
 #include <winioctl.h>
+#include <ioapiset.h>
 
 #include "misc.h"
 #include "DriverAssist.h"
@@ -545,24 +546,31 @@ BOOL VolHas8dot3Support(WCHAR* path)
 {
     BOOL is8Dot3 = FALSE;
 
-    NTSTATUS status;
+    //NTSTATUS status;
     HANDLE hFile;
     OBJECT_ATTRIBUTES objattrs;
     UNICODE_STRING uni;
-    IO_STATUS_BLOCK MyIoStatusBlock;
+    //IO_STATUS_BLOCK MyIoStatusBlock;
 
     RtlInitUnicodeString(&uni, path);
     InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
 
-    status = NtOpenFile(&hFile, GENERIC_READ, &objattrs, &MyIoStatusBlock, FILE_SHARE_READ | FILE_SHARE_WRITE, 0);
-    if (NT_SUCCESS(status)) {
+    //status = NtOpenFile(&hFile, GENERIC_READ, &objattrs, &MyIoStatusBlock, FILE_SHARE_READ | FILE_SHARE_WRITE, 0);
+    //if (NT_SUCCESS(status)) {
+    WCHAR device[] = L"\\\\.\\X:";
+    device[4] = path[0];
+    hFile = CreateFile(device, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, 0, OPEN_EXISTING, 0, (HANDLE) NULL);
+    {
 
         FILE_FS_PERSISTENT_VOLUME_INFORMATION inbuf = { 0 };
 	    FILE_FS_PERSISTENT_VOLUME_INFORMATION outbuf = { 0 };
 	    inbuf.FlagMask = PERSISTENT_VOLUME_STATE_SHORT_NAME_CREATION_DISABLED;
 	    inbuf.Version = 1;
-        status = NtFsControlFile(hFile, NULL, NULL, NULL, &MyIoStatusBlock, FSCTL_QUERY_PERSISTENT_VOLUME_STATE, &inbuf, sizeof(inbuf), &outbuf, sizeof(outbuf));
-        if(NT_SUCCESS(status)) {
+        
+        //status = NtFsControlFile(hFile, NULL, NULL, NULL, &MyIoStatusBlock, FSCTL_QUERY_PERSISTENT_VOLUME_STATE, &inbuf, sizeof(inbuf), &outbuf, sizeof(outbuf));
+        //if(NT_SUCCESS(status)) {
+        DWORD BytesReturned;
+        if(DeviceIoControl(hFile, FSCTL_QUERY_PERSISTENT_VOLUME_STATE, &inbuf, sizeof(inbuf), &outbuf, sizeof(outbuf), &BytesReturned, 0)){
 
 		    is8Dot3 = (outbuf.VolumeFlags & PERSISTENT_VOLUME_STATE_SHORT_NAME_CREATION_DISABLED) ? FALSE : TRUE;
 	    }
@@ -595,11 +603,11 @@ void DriverAssist::MountedHive(void *_msg)
     status = SbieApi_QueryBoxPath(msg->boxname, path, NULL, NULL, &len, NULL, NULL);
     if (status == 0 && wcslen(path) > 22) {
 
-        WCHAR* bs = wcschr(path + 22, L'\\');
-        if(bs) *bs = L'\0';
+        if (SbieDll_TranslateNtToDosPath(path)) {
 
-        if(!VolHas8dot3Support(path))
-            SbieApi_LogEx(msg->session_id, 2227, L"%S", msg->boxname);
+            if (!VolHas8dot3Support(path))
+                SbieApi_LogEx(msg->session_id, 2227, L"%S (%S)", msg->boxname, path);
+        }
     }
 
     HeapFree(GetProcessHeap(), 0, path);

@@ -544,12 +544,12 @@ typedef struct _FILE_FS_PERSISTENT_VOLUME_INFORMATION {
 
 BOOL VolHas8dot3Support(WCHAR* path)
 {
-    BOOL is8Dot3 = FALSE;
+    BOOL is8Dot3 = TRUE;
 
-    //NTSTATUS status;
     HANDLE hFile;
     OBJECT_ATTRIBUTES objattrs;
     UNICODE_STRING uni;
+    //NTSTATUS status;
     //IO_STATUS_BLOCK MyIoStatusBlock;
 
     RtlInitUnicodeString(&uni, path);
@@ -605,8 +605,10 @@ void DriverAssist::MountedHive(void *_msg)
 
         if (SbieDll_TranslateNtToDosPath(path)) {
 
-            if (!VolHas8dot3Support(path))
+            if (!VolHas8dot3Support(path)) {
+
                 SbieApi_LogEx(msg->session_id, 2227, L"%S (%S)", msg->boxname, path);
+            }
         }
     }
 

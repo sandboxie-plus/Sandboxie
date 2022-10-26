@@ -5381,7 +5381,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/OptionsWindow.ui" line="3261"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
         <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
-        <translation>该命令将在文件恢复前运行，文件路径将作为最先被传递的参数，如果该命令的返回值不是 0，则恢复将动作将被阻止</translation>
+        <translation>该命令将在文件恢复前运行，文件路径将作为最先被传递的参数，如果该命令的返回值不为 0，恢复动作将被终止</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3264"/>

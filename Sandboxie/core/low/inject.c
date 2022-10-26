@@ -379,6 +379,8 @@ _FX void InitInject(SBIELOW_DATA *data, void *DetourCode)
     {
         inject->SbieDll_Length = (SHORT)extra->NativeSbieDll_length;
         inject->SbieDll_MaxLen = inject->SbieDll_Length + sizeof(WCHAR);
+        inject->SbieDll_Buf32  =
+            (ULONG)((ULONG_PTR)extra + extra->NativeSbieDll_offset);
         inject->SbieDll_Buf64 =
             (ULONG64)((ULONG_PTR)extra + extra->NativeSbieDll_offset);
     }

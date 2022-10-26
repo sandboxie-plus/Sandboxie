@@ -8,12 +8,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.5.2 / 5.60.2] - 2022-10-??
 
 ### Changed
-- uttility groups are now cleaned up automatically
+- utility groups are now cleaned up automatically
+
+### Fixed
+- fixed issues with SBIE2227 on virtual drives
+- fixed issues on native 32-bit windows introduced with 1.5.0 [#2401](https://github.com/sandboxie-plus/Sandboxie/issues/2401)
 
 
 
 
-## [1.5.1 / 5.60.1] - 2022-10-??
+
+## [1.5.1 / 5.60.1] - 2022-10-26
 
 ### Added
 - added SBIE2227 warning when a sandbox is located on a volume without 8.3 name support

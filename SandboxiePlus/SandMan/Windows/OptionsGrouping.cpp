@@ -173,7 +173,8 @@ void COptionsWindow::AddProgramToGroup(const QString& Program, const QString& Gr
 
 bool COptionsWindow::DelProgramFromGroup(const QString& Program, const QString& Group)
 {
-	QTreeWidgetItem* pItem = FindGroupByName(Group, true);
+	QTreeWidgetItem* pItem = FindGroupByName(Group, false);
+	if (!pItem) return false;
 
 	bool bFound = false;
 	for (int j = 0; j < pItem->childCount(); j++){
@@ -181,6 +182,8 @@ bool COptionsWindow::DelProgramFromGroup(const QString& Program, const QString& 
 		if (pProgItem->data(0, Qt::UserRole).toString().compare(Program, Qt::CaseInsensitive) == 0)  {
 			delete pProgItem;
 			bFound = true;
+			if (pItem->childCount() == 0)
+				delete pItem;
 			break;
 		}
 	}

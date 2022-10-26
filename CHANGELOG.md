@@ -5,6 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.5.2 / 5.60.2] - 2022-10-??
+
+### Changed
+- uttility groups are now cleaned up automatically
+
+
+
+
 ## [1.5.1 / 5.60.1] - 2022-10-??
 
 ### Added

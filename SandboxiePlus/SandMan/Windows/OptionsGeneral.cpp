@@ -77,11 +77,13 @@ void COptionsWindow::CreateGeneral()
 		}
 	}
 
-	QWidget* ExWidgets[] = { ui.chkSecurityMode, ui.chkLockDown, ui.chkRestrictDevices,
-		ui.chkPrivacy, ui.chkUseSpecificity,
-		ui.chkNoSecurityIsolation, ui.chkNoSecurityFiltering, ui.chkConfidential, NULL };
-	for(QWidget** ExWidget = ExWidgets; *ExWidget != NULL; ExWidget++)
-		COptionsWindow__AddCertIcon(*ExWidget);
+	if (g_Certificate.isEmpty()) {
+		QWidget* ExWidgets[] = { ui.chkSecurityMode, ui.chkLockDown, ui.chkRestrictDevices,
+			ui.chkPrivacy, ui.chkUseSpecificity,
+			ui.chkNoSecurityIsolation, ui.chkNoSecurityFiltering, ui.chkConfidential, ui.chkHostProtect, NULL };
+		for (QWidget** ExWidget = ExWidgets; *ExWidget != NULL; ExWidget++)
+			COptionsWindow__AddCertIcon(*ExWidget);
+	}
 
 
 	m_HoldBoxType = false;

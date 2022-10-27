@@ -313,8 +313,8 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="595"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="585"/>
-        <location filename="Windows/OptionsGrouping.cpp" line="278"/>
-        <location filename="Windows/OptionsGrouping.cpp" line="302"/>
+        <location filename="Windows/OptionsGrouping.cpp" line="234"/>
+        <location filename="Windows/OptionsGrouping.cpp" line="258"/>
         <location filename="Windows/OptionsNetwork.cpp" line="507"/>
         <source>Template values can not be edited.</source>
         <translation>Şablon değerleri düzenlenemez.</translation>
@@ -325,15 +325,15 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation type="vanished">Oyalayıcı</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="386"/>
-        <location filename="Windows/OptionsWindow.cpp" line="399"/>
+        <location filename="Windows/OptionsWindow.cpp" line="395"/>
+        <location filename="Windows/OptionsWindow.cpp" line="408"/>
         <location filename="Windows/OptionsAccess.cpp" line="24"/>
         <source>Browse for File</source>
         <translation>Dosya için Göz At</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="414"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="429"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="416"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="431"/>
         <source>Please enter a menu title</source>
         <translation>Lütfen bir menü başlığı girin</translation>
     </message>
@@ -385,7 +385,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="148"/>
+        <location filename="Windows/OptionsWindow.cpp" line="157"/>
         <source>Sandboxie Plus - &apos;%1&apos; Options</source>
         <translation>Sandboxie Plus - &apos;%1&apos; Ayarlar</translation>
     </message>
@@ -394,8 +394,8 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation type="vanished">Lider</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="905"/>
-        <location filename="Windows/OptionsWindow.cpp" line="923"/>
+        <location filename="Windows/OptionsWindow.cpp" line="914"/>
+        <location filename="Windows/OptionsWindow.cpp" line="932"/>
         <location filename="Windows/OptionsAccess.cpp" line="384"/>
         <location filename="Windows/OptionsAccess.cpp" line="620"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
@@ -450,7 +450,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Bu şablon genel (global) olarak etkindir. Yapılandırmak için genel ayarları kullanın.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGrouping.cpp" line="273"/>
+        <location filename="Windows/OptionsGrouping.cpp" line="229"/>
         <source>Please select group first.</source>
         <translation>Lütfen önce grubu seçin.</translation>
     </message>
@@ -465,17 +465,17 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Yalnızca başlık odaktayken göster</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="410"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="412"/>
         <source>Select Program</source>
         <translation>Program Seç</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="425"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="427"/>
         <source>Please enter a command</source>
         <translation>Lütfen bir komut girin</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="314"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="316"/>
         <source>kilobytes (%1)</source>
         <translation>kilobayt (%1)</translation>
     </message>
@@ -495,7 +495,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Pencere başlığını değiştirme</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="907"/>
+        <location filename="Windows/OptionsWindow.cpp" line="916"/>
         <location filename="Windows/OptionsAccess.cpp" line="379"/>
         <location filename="Windows/OptionsAccess.cpp" line="616"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="534"/>
@@ -512,7 +512,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Klasör için Göz At</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="916"/>
+        <location filename="Windows/OptionsWindow.cpp" line="925"/>
         <source>Enter program:</source>
         <translation>Program girin:</translation>
     </message>
@@ -527,7 +527,7 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>RT arayüzleri isimleriyle belirtilmelidir.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="156"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="158"/>
         <source>Browse for Program</source>
         <translation>Program için Göz At</translation>
     </message>
@@ -537,42 +537,42 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Lütfen bir hizmet tanımlayıcı girin</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="260"/>
+        <location filename="Windows/OptionsWindow.cpp" line="269"/>
         <source>Grouping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="557"/>
+        <location filename="Windows/OptionsWindow.cpp" line="566"/>
         <source>Search for options</source>
         <translation>Seçeneklerde ara</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="678"/>
+        <location filename="Windows/OptionsWindow.cpp" line="687"/>
         <source>Box: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="679"/>
+        <location filename="Windows/OptionsWindow.cpp" line="688"/>
         <source>Template: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="680"/>
+        <location filename="Windows/OptionsWindow.cpp" line="689"/>
         <source>Global: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="681"/>
+        <location filename="Windows/OptionsWindow.cpp" line="690"/>
         <source>Default: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="847"/>
+        <location filename="Windows/OptionsWindow.cpp" line="856"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>Bu korumalı kutu silindi, bu nedenle yapılandırma kaydedilemiyor.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="893"/>
+        <location filename="Windows/OptionsWindow.cpp" line="902"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>Bazı değişiklikler henüz kaydedilmedi, bu ayarlar penceresini gerçekten kapatmak istiyor musunuz?</translation>
     </message>
@@ -870,32 +870,32 @@ Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğund
         <translation>Uygulama Bölmesi (İzolasyon YOK)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="201"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="203"/>
         <source>Open Box Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="202"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="204"/>
         <source>Browse Content</source>
         <translation type="unfinished">İçeriğe Göz Atın</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="203"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="205"/>
         <source>Start File Recovery</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="204"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="206"/>
         <source>Show Run Dialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="373"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="375"/>
         <source>Select color</source>
         <translation>Renk seç</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="410"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="412"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Çalıştırılabilir dosyalar (*.exe *.cmd)</translation>
     </message>

@@ -43,8 +43,8 @@ SetCompressor /SOLID /FINAL lzma
 ;    !define _W7DRV_COMPAT "$%SbieVer%.x86"
 ;!endif
 
-!define SBIEDRV_SYS4    "${SBIEDRV_SYS}.rc4" ; to clean up afterwards
-!define SBIEDRV_SYSX    "${SBIEDRV_SYS}.w10" ; to clean up afterwards
+;!define SBIEDRV_SYS4    "${SBIEDRV_SYS}.rc4"
+;!define SBIEDRV_SYSX    "${SBIEDRV_SYS}.w10"
 
 !define OUTFILE_BOTH    "${PRODUCT_NAME}Install.exe"
 !define NAME_Win32      "${PRODUCT_FULL_NAME} ${VERSION} (32-bit)"
@@ -1108,8 +1108,8 @@ SkipCopyInstaller:
 
     Delete "$DESKTOP\${PRODUCT_NAME} Quick Launch.lnk"
     Delete "$QUICKLAUNCH\${PRODUCT_NAME} Quick Launch.lnk"
-    Delete "$INSTDIR\${SBIEDRV_SYS4}"
-    Delete "$INSTDIR\${SBIEDRV_SYSX}"
+    Delete "$INSTDIR\${SBIEDRV_SYS}.rc4"
+    Delete "$INSTDIR\${SBIEDRV_SYS}.w10"
     Delete "$INSTDIR\${SBIEINI_EXE}.sig"
 
 FunctionEnd
@@ -1142,8 +1142,8 @@ Function DeleteProgramFiles
     Delete "$INSTDIR\${SBIEMSG_DLL}"
 
     Delete "$INSTDIR\${SBIEDRV_SYS}"
-    Delete "$INSTDIR\${SBIEDRV_SYS4}" ; leftover
-    Delete "$INSTDIR\${SBIEDRV_SYSX}" ; leftover
+    Delete "$INSTDIR\${SBIEDRV_SYS}.rc4" ; leftover
+    Delete "$INSTDIR\${SBIEDRV_SYS}.w10" ; leftover
 
     Delete "$INSTDIR\KmdUtil.exe"
 

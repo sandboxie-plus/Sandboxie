@@ -83,6 +83,7 @@ Type: files; Name: "{app}\translations\sandman_pt.qm"
 Type: files; Name: "{app}\translations\sandman_ua.qm"
 Type: files; Name: "{app}\SbieDrv.sys.w10"
 Type: files; Name: "{app}\SbieDrv.sys.rc4"
+Type: files; Name: "{app}\SbieIni.exe.sig"
 
 
 [Registry]

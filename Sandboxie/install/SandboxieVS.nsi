@@ -1044,7 +1044,7 @@ WriteLoop:
 
     File /oname=${START_EXE} "${BIN_ROOT}\Start.exe"
     File /oname=${START_EXE}.sig "${BIN_ROOT}\Start.exe.sig"
-    
+
     File /oname=${SBIECTRL_EXE} "${BIN_ROOT}\SbieCtrl.exe"
     File /oname=${SBIECTRL_EXE}.sig "${BIN_ROOT}\SbieCtrl.exe.sig"
 
@@ -1108,6 +1108,9 @@ SkipCopyInstaller:
 
     Delete "$DESKTOP\${PRODUCT_NAME} Quick Launch.lnk"
     Delete "$QUICKLAUNCH\${PRODUCT_NAME} Quick Launch.lnk"
+    Delete "$INSTDIR\${SBIEDRV_SYS}.rc4"
+    Delete "$INSTDIR\${SBIEDRV_SYS}.w10"
+    Delete "$INSTDIR\${SBIEINI_EXE}.sig"
 
 FunctionEnd
 
@@ -1139,8 +1142,8 @@ Function DeleteProgramFiles
     Delete "$INSTDIR\${SBIEMSG_DLL}"
 
     Delete "$INSTDIR\${SBIEDRV_SYS}"
-;    Delete "$INSTDIR\${SBIEDRV_SYS4}"
-;    Delete "$INSTDIR\${SBIEDRV_SYSX}"
+    Delete "$INSTDIR\${SBIEDRV_SYS}.rc4" ; leftover
+    Delete "$INSTDIR\${SBIEDRV_SYS}.w10" ; leftover
 
     Delete "$INSTDIR\KmdUtil.exe"
 
@@ -1168,6 +1171,7 @@ Function DeleteProgramFiles
     Delete "$INSTDIR\Manifest2.txt"
 
     Delete "$INSTDIR\${SBIEINI_EXE}"
+    Delete "$INSTDIR\${SBIEINI_EXE}.sig" ; leftover
 
     Delete "$INSTDIR\LICENSE.EXE"
 

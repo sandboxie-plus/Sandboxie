@@ -76,7 +76,7 @@ private slots:
 	void OnBreakoutBrowse();
 	void OnBreakoutDir();
 	void OnDelBreakout();
-	void OnShowBreakoutTmpl()		{ LoadForcedTmpl(true); }
+	void OnShowBreakoutTmpl()		{ LoadBreakoutTmpl(true); }
 
 	void OnAddLingering();
 	void OnDelStopProg();

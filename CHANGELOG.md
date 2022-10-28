@@ -5,6 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.5.3 / 5.60.3] - 2022-10-??
+
+### Fixed
+- fixed issue with box options [#2400](https://github.com/sandboxie-plus/Sandboxie/issues/2400)
+
+
+
 ## [1.5.2 / 5.60.2] - 2022-10-??
 
 ### Changed

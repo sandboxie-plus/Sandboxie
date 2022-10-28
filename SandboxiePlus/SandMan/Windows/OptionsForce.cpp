@@ -42,6 +42,7 @@ void COptionsWindow::LoadForced()
 
 
 	LoadForcedTmpl();
+	LoadBreakoutTmpl();
 
 	m_ForcedChanged = false;
 }
@@ -57,13 +58,6 @@ void COptionsWindow::LoadForcedTmpl(bool bUpdate)
 
 			foreach(const QString& Value, m_pBox->GetTextListTmpl("ForceFolder", Template))
 				AddForcedEntry(Value, (int)ePath, false, Template);
-
-
-			foreach(const QString& Value, m_pBox->GetTextListTmpl("BreakoutProcess", Template))
-				AddBreakoutEntry(Value, (int)eProcess, false, Template);
-
-			foreach(const QString& Value, m_pBox->GetTextListTmpl("BreakoutFolder", Template))
-				AddBreakoutEntry(Value, (int)ePath, false, Template);
 		}
 	}
 	else if (bUpdate)
@@ -78,7 +72,24 @@ void COptionsWindow::LoadForcedTmpl(bool bUpdate)
 			}
 			i++;
 		}
+	}
+}
 
+void COptionsWindow::LoadBreakoutTmpl(bool bUpdate)
+{
+	if (ui.chkShowBreakoutTmpl->isChecked())
+	{
+		foreach(const QString& Template, m_pBox->GetTemplates())
+		{
+			foreach(const QString& Value, m_pBox->GetTextListTmpl("BreakoutProcess", Template))
+				AddBreakoutEntry(Value, (int)eProcess, false, Template);
+
+			foreach(const QString& Value, m_pBox->GetTextListTmpl("BreakoutFolder", Template))
+				AddBreakoutEntry(Value, (int)ePath, false, Template);
+		}
+	}
+	else if (bUpdate)
+	{
 		for (int i = 0; i < ui.treeBreakout->topLevelItemCount(); )
 		{
 			QTreeWidgetItem* pItem = ui.treeBreakout->topLevelItem(i);

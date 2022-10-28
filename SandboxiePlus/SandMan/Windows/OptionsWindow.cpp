@@ -502,6 +502,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	LoadConfig();
 
+	m_pCurrentTab = ui.tabGeneral;
 	UpdateCurrentTab();
 
 	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
@@ -970,10 +971,12 @@ void COptionsWindow::OnTab(QWidget* pTab)
 
 void COptionsWindow::UpdateCurrentTab()
 {
-	if (m_pCurrentTab == ui.tabRestrictions || m_pCurrentTab == ui.tabOptions || m_pCurrentTab == ui.tabSecurity) 
+	if (m_pCurrentTab == ui.tabRestrictions || m_pCurrentTab == ui.tabOptions || m_pCurrentTab == ui.tabGeneral) 
 	{
 		ui.chkVmRead->setChecked(GetAccessEntry(eIPC, "", eReadOnly, "$:*") != NULL);
-
+	}
+	else if (m_pCurrentTab ==ui.tabPrivileges || m_pCurrentTab == ui.tabSecurity)
+	{
 		if (GetAccessEntry(eWnd, "", eOpen, "*") != NULL)
 		{
 			ui.chkAddToJob->setEnabled(false);

@@ -238,7 +238,9 @@ BOOLEAN CUpdater::QueryUpdateData(UPDATER_DATA* Context)
 	JSONObject jsonRoot;
 
 	Path.Format(L"/update.php?software=sandboxie&version=%S&system=windows-%d.%d.%d-%s&language=%d&auto=%s", MY_VERSION_STRING, 
-#ifdef _WIN64
+#ifdef _M_ARM64
+		m_osvi.dwMajorVersion, m_osvi.dwMinorVersion, m_osvi.dwBuildNumber, L"ARM64",
+#elif _WIN64
 		m_osvi.dwMajorVersion, m_osvi.dwMinorVersion, m_osvi.dwBuildNumber, L"x86_64",
 #else
 		m_osvi.dwMajorVersion, m_osvi.dwMinorVersion, m_osvi.dwBuildNumber, L"i386",

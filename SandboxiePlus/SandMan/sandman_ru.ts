@@ -535,7 +535,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAdvanced.cpp" line="44"/>
         <source>Enable special inconsistent PreferExternalManifest behaviour, as needed for some Edge fixes</source>
         <oldsource>Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes</oldsource>
-        <translation type="unfinished">Включить специальное непоследовательное PreferExternalManifest поведение, если это необходимо для некоторых крайних исправлений</translation>
+        <translation>Включить специальное непоследовательное поведение PreferExternalManifest, необходимое для некоторых исправлений Edge</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="45"/>
@@ -551,7 +551,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAdvanced.cpp" line="49"/>
         <source>Make specified processes think they have admin permissions.</source>
         <oldsource>Make specified processes think thay have admin permissions.</oldsource>
-        <translation type="unfinished">Заставить указанные процессы думать, что у них есть права администратора.</translation>
+        <translation>Заставить указанные процессы думать, что у них есть права администратора.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="50"/>
@@ -4233,7 +4233,7 @@ No will choose: %2</source>
         <location filename="Forms/OptionsWindow.ui" line="1098"/>
         <source>Advanced Security</source>
         <oldsource>Adcanced Security</oldsource>
-        <translation type="unfinished">Расширенная безопасность</translation>
+        <translation>Расширенная безопасность</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1106"/>
@@ -4299,7 +4299,7 @@ No will choose: %2</source>
         <location filename="Forms/OptionsWindow.ui" line="1590"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
         <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
-        <translation type="unfinished">Программам, добавленным здесь, будет позволено запускаться вне песочницы, вы можете захватить их в другую песочницу. Например, чтобы ваш веб-браузер всегда был открыт в специальной песочнице. Для этой функции требуется установленный действительный сертификат поддержки.</translation>
+        <translation>Программам, указанным здесь, будет разрешено выйти из этой песочницы при запуске. Также можно захватить их в другую песочницу, например, чтобы ваш веб-браузер всегда был открыт в определенной песочнице.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1607"/>
@@ -5172,17 +5172,12 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/OptionsWindow.ui" line="3261"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
         <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
-        <translation type="unfinished">Эта команда будет запущена перед восстановлением файла, и путь к файлу будет передан в качестве первого аргумента, если эта команда вернет значение, отличное от 0, восстановление будет заблокировано</translation>
+        <translation>Эта команда будет запущена перед восстановлением файла, и путь к файлу будет передан в качестве первого аргумента. Если эта команда возвращает значение, отличное от 0, восстановление будет заблокировано</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3264"/>
         <source>Run File Checker</source>
         <translation>Запустить проверку файлов</translation>
-    </message>
-    <message>
-        <source>DNS Request Logging</source>
-        <oldsource>Dns Request Logging</oldsource>
-        <translation type="obsolete">Журналирование DNS-запросов</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4021"/>

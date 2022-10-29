@@ -579,37 +579,37 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <translation>Gruppierung</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="566"/>
+        <location filename="Windows/OptionsWindow.cpp" line="567"/>
         <source>Search for options</source>
         <translation>Nach Optionen suchen</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="687"/>
+        <location filename="Windows/OptionsWindow.cpp" line="688"/>
         <source>Box: %1</source>
         <translation>Box: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="688"/>
+        <location filename="Windows/OptionsWindow.cpp" line="689"/>
         <source>Template: %1</source>
         <translation>Vorlage: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="689"/>
+        <location filename="Windows/OptionsWindow.cpp" line="690"/>
         <source>Global: %1</source>
         <translation>Global: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="690"/>
+        <location filename="Windows/OptionsWindow.cpp" line="691"/>
         <source>Default: %1</source>
         <translation>Standard: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="856"/>
+        <location filename="Windows/OptionsWindow.cpp" line="857"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>Diese Sandbox wurde gelöscht, daher kann die Konfiguration nicht gespeichert werden.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="902"/>
+        <location filename="Windows/OptionsWindow.cpp" line="903"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>Einige Änderungen wurden bisher nicht gespeichert, möchten Sie dieses Einstellungsfenster wirklich schließen?</translation>
     </message>
@@ -667,8 +667,8 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <translation>Bitte ein Kommando eingeben</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="914"/>
-        <location filename="Windows/OptionsWindow.cpp" line="932"/>
+        <location filename="Windows/OptionsWindow.cpp" line="915"/>
+        <location filename="Windows/OptionsWindow.cpp" line="933"/>
         <location filename="Windows/OptionsAccess.cpp" line="384"/>
         <location filename="Windows/OptionsAccess.cpp" line="620"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
@@ -683,7 +683,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <translation>Bitte einen Namen für die neue Gruppe eingeben</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="925"/>
+        <location filename="Windows/OptionsWindow.cpp" line="926"/>
         <source>Enter program:</source>
         <translation>Programm eingeben:</translation>
     </message>
@@ -762,20 +762,20 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <translation>Diese Vorlage ist global aktiv, um sie zu konfigurieren müssen die globalen Optionen genutzt werden.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="99"/>
         <location filename="Windows/OptionsForce.cpp" line="110"/>
+        <location filename="Windows/OptionsForce.cpp" line="121"/>
         <source>Process</source>
         <translation>Prozess</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="209"/>
-        <location filename="Windows/OptionsForce.cpp" line="219"/>
+        <location filename="Windows/OptionsForce.cpp" line="220"/>
+        <location filename="Windows/OptionsForce.cpp" line="230"/>
         <source>Select Executable File</source>
         <translation>Ausführbare Datei auswählen</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="209"/>
-        <location filename="Windows/OptionsForce.cpp" line="219"/>
+        <location filename="Windows/OptionsForce.cpp" line="220"/>
+        <location filename="Windows/OptionsForce.cpp" line="230"/>
         <source>Executable Files (*.exe)</source>
         <translation>Ausführbare Dateien (*.exe)</translation>
     </message>
@@ -785,15 +785,15 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <translation>Sandboxie Plus - &apos;%1&apos; Optionen</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="99"/>
         <location filename="Windows/OptionsForce.cpp" line="110"/>
+        <location filename="Windows/OptionsForce.cpp" line="121"/>
         <source>Folder</source>
         <translation>Ordner</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="359"/>
-        <location filename="Windows/OptionsForce.cpp" line="229"/>
-        <location filename="Windows/OptionsForce.cpp" line="239"/>
+        <location filename="Windows/OptionsForce.cpp" line="240"/>
+        <location filename="Windows/OptionsForce.cpp" line="250"/>
         <location filename="Windows/OptionsRecovery.cpp" line="125"/>
         <location filename="Windows/OptionsRecovery.cpp" line="136"/>
         <source>Select Directory</source>
@@ -952,7 +952,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <translation>Alle Dateien (*.*)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="916"/>
+        <location filename="Windows/OptionsWindow.cpp" line="917"/>
         <location filename="Windows/OptionsAccess.cpp" line="379"/>
         <location filename="Windows/OptionsAccess.cpp" line="616"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="534"/>

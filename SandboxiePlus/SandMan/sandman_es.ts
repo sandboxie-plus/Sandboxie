@@ -571,37 +571,37 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="566"/>
+        <location filename="Windows/OptionsWindow.cpp" line="567"/>
         <source>Search for options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="687"/>
+        <location filename="Windows/OptionsWindow.cpp" line="688"/>
         <source>Box: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="688"/>
+        <location filename="Windows/OptionsWindow.cpp" line="689"/>
         <source>Template: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="689"/>
+        <location filename="Windows/OptionsWindow.cpp" line="690"/>
         <source>Global: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="690"/>
+        <location filename="Windows/OptionsWindow.cpp" line="691"/>
         <source>Default: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="856"/>
+        <location filename="Windows/OptionsWindow.cpp" line="857"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="902"/>
+        <location filename="Windows/OptionsWindow.cpp" line="903"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation></translation>
     </message>
@@ -654,8 +654,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Por favor ingrese un comando</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="914"/>
-        <location filename="Windows/OptionsWindow.cpp" line="932"/>
+        <location filename="Windows/OptionsWindow.cpp" line="915"/>
+        <location filename="Windows/OptionsWindow.cpp" line="933"/>
         <location filename="Windows/OptionsAccess.cpp" line="384"/>
         <location filename="Windows/OptionsAccess.cpp" line="620"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
@@ -670,7 +670,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Por favor ingrese un nombre de  nuevo grupo</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="925"/>
+        <location filename="Windows/OptionsWindow.cpp" line="926"/>
         <source>Enter program:</source>
         <translation>Ingrese programa:</translation>
     </message>
@@ -680,33 +680,33 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Por favor selecciones un grupo primero.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="99"/>
         <location filename="Windows/OptionsForce.cpp" line="110"/>
+        <location filename="Windows/OptionsForce.cpp" line="121"/>
         <source>Process</source>
         <translation>Proceso</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="99"/>
         <location filename="Windows/OptionsForce.cpp" line="110"/>
+        <location filename="Windows/OptionsForce.cpp" line="121"/>
         <source>Folder</source>
         <translation>Carpeta</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="209"/>
-        <location filename="Windows/OptionsForce.cpp" line="219"/>
+        <location filename="Windows/OptionsForce.cpp" line="220"/>
+        <location filename="Windows/OptionsForce.cpp" line="230"/>
         <source>Select Executable File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsForce.cpp" line="209"/>
-        <location filename="Windows/OptionsForce.cpp" line="219"/>
+        <location filename="Windows/OptionsForce.cpp" line="220"/>
+        <location filename="Windows/OptionsForce.cpp" line="230"/>
         <source>Executable Files (*.exe)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="359"/>
-        <location filename="Windows/OptionsForce.cpp" line="229"/>
-        <location filename="Windows/OptionsForce.cpp" line="239"/>
+        <location filename="Windows/OptionsForce.cpp" line="240"/>
+        <location filename="Windows/OptionsForce.cpp" line="250"/>
         <location filename="Windows/OptionsRecovery.cpp" line="125"/>
         <location filename="Windows/OptionsRecovery.cpp" line="136"/>
         <source>Select Directory</source>
@@ -865,7 +865,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Todos los archivos (*.*)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="916"/>
+        <location filename="Windows/OptionsWindow.cpp" line="917"/>
         <location filename="Windows/OptionsAccess.cpp" line="379"/>
         <location filename="Windows/OptionsAccess.cpp" line="616"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="534"/>

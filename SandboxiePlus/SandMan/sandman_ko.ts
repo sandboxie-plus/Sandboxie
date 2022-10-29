@@ -555,7 +555,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAdvanced.cpp" line="49"/>
         <source>Make specified processes think they have admin permissions.</source>
         <oldsource>Make specified processes think thay have admin permissions.</oldsource>
-        <translation type="unfinished">지정된 프로세스가 관리자 권한을 가지고 있다고 생각하도록 합니다.</translation>
+        <translation>지정된 프로세스가 관리자 권한을 가지고 있다고 생각하도록 합니다.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="50"/>
@@ -4853,7 +4853,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/OptionsWindow.ui" line="1098"/>
         <source>Advanced Security</source>
         <oldsource>Adcanced Security</oldsource>
-        <translation type="unfinished">고급 보안</translation>
+        <translation>고급 보안</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1106"/>
@@ -4909,7 +4909,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/OptionsWindow.ui" line="1590"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
         <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
-        <translation type="unfinished">여기에 입력된 프로그램은 시작할 때 이 박스에서 벗어날 수 있습니다. 다른 박스에 캡처할 수 있습니다. 예를 들어 웹 브라우저를 항상 전용 박스에 열도록 합니다. 이 기능을 설치하려면 올바른 지원자 인증서를 설치해야 합니다.</translation>
+        <translation>여기에 입력된 프로그램은 시작할 때 이 박스에서 벗어날 수 있습니다. 다른 박스에 캡처할 수 있습니다. 예를 들어 웹 브라우저를 항상 전용 박스에 열도록 합니다. 이 기능을 설치하려면 올바른 지원자 인증서를 설치해야 합니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1617"/>
@@ -5049,7 +5049,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <location filename="Forms/OptionsWindow.ui" line="3261"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
         <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
-        <translation type="unfinished">이 명령은 파일을 복구하기 전에 실행되며 파일 경로가 첫 번째 인수로 전달됩니다. 이 명령이 0이 아닌 다른 것을 반환하는 경우 복구가 차단됩니다</translation>
+        <translation>이 명령은 파일을 복구하기 전에 실행되며 파일 경로가 첫 번째 인수로 전달됩니다. 이 명령이 0이 아닌 다른 것을 반환하는 경우 복구가 차단됩니다</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3264"/>
@@ -5115,7 +5115,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <location filename="Forms/OptionsWindow.ui" line="3676"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
         <oldsource>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</oldsource>
-        <translation type="unfinished">여기서 호환성 향상 및/또는 샌드박스 동작을 사용자 정의하도록 고급 프로세스별 옵션을 구성할 수 있습니다.</translation>
+        <translation>여기서 호환성 향상 및/또는 샌드박스 동작을 사용자 정의하도록 고급 프로세스별 옵션을 구성할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3687"/>

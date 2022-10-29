@@ -674,6 +674,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         L"\\Device\\Mup\\*",
         L"\\Device\\Ndis",
         L"\\Device\\PcwDrv",
+        L"\\Device\\SrpDevice", //Smart App Control
         NULL
     };
     static const WCHAR* drive_devices[] = {

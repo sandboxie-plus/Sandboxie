@@ -10,6 +10,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue with box options [#2400](https://github.com/sandboxie-plus/Sandboxie/issues/2400)
+- fixed issue with Smart App Control [#2341](https://github.com/sandboxie-plus/Sandboxie/issues/2341)
+
 
 
 

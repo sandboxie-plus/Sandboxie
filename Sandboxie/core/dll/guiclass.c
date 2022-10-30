@@ -208,21 +208,6 @@ _FX BOOLEAN Gui_InitClass(HMODULE module)
     }
 
     //
-    // vivaldi somehow screws up its hooks and its trampoline to NtCreateSection 
-    // ends up pointing to our RegisterClassW detour function
-    // to work around this issue we disable Gui_RenameClasses for vivaldi.exe
-    //
-
-    // $Workaround$ - 3rd party fix
-    if (Gui_RenameClasses
-                    && Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME
-                    && _wcsicmp(Dll_ImageName, L"vivaldi.exe") == 0
-                    && SbieApi_QueryConfBool(NULL, L"UseVivaldiWorkaround", TRUE)) {
-
-        Gui_RenameClasses = FALSE;
-    }
-
-    //
     // hook functions
     //
 
@@ -282,7 +267,7 @@ _FX void Gui_Hook_CREATESTRUCT_Handler(void)
     Gui_HighestAddress = (ULONG_PTR)sysinfo.lpMaximumApplicationAddress;
 
 #ifdef _WIN64
-    peb = __readgsqword(0x60);
+    peb = NtCurrentPeb();
     KernelCallbackTable = *(ULONG_PTR *)(peb + 0x58);
 #else ! _WIN64
     peb = __readfsdword(0x30);    // PEB

@@ -759,6 +759,15 @@ _FX BOOLEAN Gdi_InitZero(HMODULE module)
     } else
         Gdi_GdiDllInitialize = Gdi_GdiDllInitialize_XP;
 
+#ifdef _M_ARM64EC
+
+    //
+    // set module -1 to not try to find the FFS sequence
+    //
+
+    module = (HMODULE)- 1;
+#endif
+
     SBIEDLL_HOOK(Gdi_,GdiDllInitialize);
 
     return TRUE;

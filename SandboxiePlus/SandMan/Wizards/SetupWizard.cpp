@@ -399,8 +399,8 @@ void CUIPage::UpdatePreview()
     //m_pPreview->setPixmap(preview.scaled(min(m_pPreview->width(), preview.width()), min(m_pPreview->height(), preview.height()), Qt::KeepAspectRatio, Qt::SmoothTransformation));
     //m_pPreview->setPixmap(preview);
     //m_pPreview->setPixmap(preview.scaled(preview.width()*7/10, preview.height()*7/10, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    m_pPreview->setPixmap(preview.scaled(min(preview.width(), max(preview.width()*7/10, m_pPreview->width())), 
-        min(preview.height(),max(preview.height()*7/10, m_pPreview->height())), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    m_pPreview->setPixmap(preview.scaled(std::min(preview.width(), std::max(preview.width()*7/10, m_pPreview->width())),
+        std::min(preview.height(), std::max(preview.height()*7/10, m_pPreview->height())), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 int CUIPage::nextId() const

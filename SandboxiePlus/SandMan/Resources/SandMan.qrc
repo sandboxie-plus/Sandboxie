@@ -97,7 +97,44 @@
         <file>Actions/Anon.png</file>
         <file>Actions/Users.png</file>
         <file>Actions/Bug.png</file>
+        <file>Actions/Config.png</file>
+        <file>Actions/Sandbox.png</file>
+        <file>Actions/Token.png</file>
+        <file>Actions/Privilege.png</file>
+        <file>Actions/Printer.png</file>
+        <file>Actions/Move.png</file>
+        <file>Actions/Disk.png</file>
+        <file>Actions/Structure.png</file>
+        <file>Actions/Design.png</file>
+        <file>Actions/Objects.png</file>
+        <file>Actions/Program.png</file>
+        <file>Actions/Proxy.png</file>
+        <file>Actions/DNS.png</file>
         <file>Actions/Alarm.png</file>
+        <file>Actions/EFence.png</file>
+        <file>Actions/Breakout.png</file>
+        <file>Actions/Control.png</file>
+        <file>Actions/Shield.png</file>
+        <file>Actions/Shield2.png</file>
+        <file>Actions/Shield3.png</file>
+        <file>Actions/Shield4.png</file>
+        <file>Actions/Shield5.png</file>
+        <file>Actions/Shield6.png</file>
+        <file>Actions/Shield7.png</file>
+        <file>Actions/Shield8.png</file>
+        <file>Actions/Shield9.png</file>
+        <file>Actions/Shield10.png</file>
+        <file>Actions/Shield11.png</file>
+        <file>Actions/Shield12.png</file>
+        <file>Actions/Shield13.png</file>
+        <file>Actions/Shield14.png</file>
+        <file>Actions/Shield15.png</file>
+        <file>Actions/Window.png</file>
+        <file>Actions/Port.png</file>
+        <file>Actions/Pipes.png</file>
+        <file>Actions/Folder.png</file>
+        <file>Actions/BFance.png</file>
+        <file>Actions/Shield16.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>
@@ -122,6 +159,7 @@
         <file alias="Full7">Boxes/sandbox-w-full.png</file>
         <file alias="Group">Boxes/sandbox-group.png</file>
         <file alias="Group2">Boxes/sandbox-group+.png</file>
+        <file alias="Out">Boxes/sandbox-out.png</file>
     </qresource>
     <qresource prefix="/Assets">
         <file>Advanced.png</file>

@@ -3,6 +3,10 @@
 
 #include "../mischelpers_global.h"
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+bool MISCHELPERS_EXPORT operator < (const QVariant& l, const QVariant& r);
+#endif
+
 class MISCHELPERS_EXPORT CTreeItemModel : public QAbstractItemModelEx
 {
     Q_OBJECT
@@ -11,8 +15,6 @@ public:
     CTreeItemModel(QObject *parent = 0);
 	virtual ~CTreeItemModel();
 
-	void			SetTree(bool bTree)				{ m_bTree = bTree; }
-	bool			IsTree() const					{ return m_bTree; }
 	void			SetUseIcons(bool bUseIcons)		{ m_bUseIcons = bUseIcons; }
 	static void		SetDarkMode(bool bDark)			{ m_DarkMode = bDark;}
 
@@ -100,7 +102,6 @@ protected:
 
 	STreeNode*							m_Root;
 	QHash<QVariant, STreeNode*>			m_Map;
-	bool								m_bTree;
 	bool								m_bUseIcons;
 
 	static bool							m_DarkMode;
@@ -113,6 +114,9 @@ class MISCHELPERS_EXPORT CSimpleTreeModel : public CTreeItemModel
 public:
 	CSimpleTreeModel(QObject *parent = 0);
 	
+	void			SetTree(bool bTree)				{ m_bTree = bTree; }
+	bool			IsTree() const					{ return m_bTree; }
+
 	void					Sync(const QMap<QVariant, QVariantMap>& List);
 
 	void					AddColumn(const QString& Name, const QString& Key) { m_ColumnKeys.append(qMakePair(Name, Key)); }
@@ -126,5 +130,6 @@ protected:
 	QList<QVariant>			MakePath(const QVariantMap& Cur, const QMap<QVariant, QVariantMap>& List);
 	bool					TestPath(const QList<QVariant>& Path, const QVariantMap& Cur, const QMap<QVariant, QVariantMap>& List, int Index = 0);
 
+	bool								m_bTree;
 	QList<QPair<QString, QString>> m_ColumnKeys;
 };

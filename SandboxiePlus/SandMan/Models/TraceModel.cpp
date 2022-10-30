@@ -8,6 +8,9 @@
 CTraceModel::CTraceModel(QObject* parent)
 	:CTreeItemModel(parent)
 {
+	m_bTree = false;
+	m_bObjTree = false;
+
 	m_Root = MkNode(QVariant());
 
 	m_LastCount = 0;
@@ -78,6 +81,14 @@ QList<QVariant>	CTraceModel::Sync(const QVector<CTraceEntryPtr>& EntryList, int 
 
 		quint64 ID = pEntry->GetUID();
 
+		QStringList NtPath;
+		if (m_bObjTree) {
+			QString Name = pEntry->GetName();
+			if (Name.left(1) != "\\")
+				continue;
+			NtPath = Name.split("\\");
+		}
+
 		QModelIndex Index;
 
 		QHash<QVariant, STreeNode*>::iterator I = Old.find(ID);
@@ -86,7 +97,8 @@ QList<QVariant>	CTraceModel::Sync(const QVector<CTraceEntryPtr>& EntryList, int 
 		{
 			pNode = static_cast<STraceNode*>(MkNode(ID));
 			pNode->Values.resize(columnCount());
-			if (m_bTree) {
+			if (m_bTree) 
+			{
 				//pNode->Path.append(QString("pid_%1").arg(pEntry->GetProcessId()));
 				//pNode->Path.append(QString("tid_%1").arg(pEntry->GetThreadId()));
 				if (pEntry->GetProcessName().isEmpty())
@@ -95,6 +107,12 @@ QList<QVariant>	CTraceModel::Sync(const QVector<CTraceEntryPtr>& EntryList, int 
 					pNode->Path.append(tr("%1 (%2)").arg(pEntry->GetProcessName()).arg(pEntry->GetProcessId()));
 				pNode->Path.append(QString("Thread %1").arg(pEntry->GetThreadId()));
 				//pNode->Path = MakePath(pEntry, EntryList);
+			}
+			if (m_bObjTree) {
+				foreach(const QString & Part, NtPath) {
+					if(!Part.isEmpty())
+						pNode->Path.append(Part);
+				}
 			}
 			pNode->pEntry = pEntry;
 			New[pNode->Path].append(pNode);
@@ -201,7 +219,7 @@ void CTraceModel::Clear()
 	m_LastCount = 0;
 	m_LastID.clear();
 
-	/*foreach(quint32 pid, m_PidMap.uniqueKeys()) {
+	/*foreach(quint32 pid, m_PidMap.keys()) {
 		SProgInfo& Info = m_PidMap[pid];
 		Info.Dirty = true;
 		Info.Threads.clear();

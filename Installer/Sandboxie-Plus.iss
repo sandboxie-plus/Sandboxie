@@ -25,7 +25,7 @@ UninstallDisplayIcon={app}\SandMan.exe
 OutputBaseFilename={#MyAppName}-{#MyAppArch}-v{#MyAppVersion}
 Compression=lzma
 ArchitecturesAllowed={#MyAppArch}
-ArchitecturesInstallIn64BitMode=x64
+ArchitecturesInstallIn64BitMode=x64 arm64
 AllowNoIcons=yes
 AlwaysRestart=no
 LicenseFile=.\license.txt
@@ -83,6 +83,7 @@ Type: files; Name: "{app}\translations\sandman_pt.qm"
 Type: files; Name: "{app}\translations\sandman_ua.qm"
 Type: files; Name: "{app}\SbieDrv.sys.w10"
 Type: files; Name: "{app}\SbieDrv.sys.rc4"
+Type: files; Name: "{app}\SbieIni.exe.sig"
 Type: files; Name: "{userdesktop}\Sandboxie-Plus.lnk"
 Type: files; Name: "{userdesktop}\{cm:SandboxedBrowser}.lnk"
 

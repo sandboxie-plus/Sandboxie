@@ -105,7 +105,11 @@ NTSTATUS Stream_Open(
 
     *out_stream = NULL;
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
+    stream = ExAllocatePool2(POOL_FLAG_PAGED, PAGE_SIZE, tzuk);
+#else
     stream = ExAllocatePoolWithTag(PagedPool, PAGE_SIZE, tzuk);
+#endif
     if (! stream)
         return STATUS_INSUFFICIENT_RESOURCES;
 

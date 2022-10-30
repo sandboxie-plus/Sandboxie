@@ -21,9 +21,9 @@
 #ifndef _MY_VERSION_H
 #define _MY_VERSION_H
 
-#define MY_VERSION_BINARY       5,58,5
-#define MY_VERSION_STRING       "5.58.5"
-#define MY_VERSION_COMPAT		"5.58.0" // this refers to the driver ABI compatibility
+#define MY_VERSION_BINARY       5,60,3
+#define MY_VERSION_STRING       "5.60.3"
+#define MY_ABI_VERSION          0x56000
 
 // These #defines are used by either Resource Compiler or NSIS installer
 #define SBIE_INSTALLER_PATH		"..\\Bin\\"
@@ -71,8 +71,6 @@
 #define MY_AUTOPLAY_CLSID_STR   "7E950284-E123-49F4-B32B-A806C090D747"
 #define MY_AUTOPLAY_CLSID       0x7E950284, 0xE123, 0x49F4, \
                                 { 0xB3, 0x2B, 0xA8,0x06, 0xC0, 0x90, 0xD7, 0x47 }
-
-#define SBIECTRL_LOGO_IMAGE     "../res/MastheadLogo.jpg"
 
 #define TITLE_SUFFIX_W          L" [#]"
 #define TITLE_SUFFIX_A           " [#]"

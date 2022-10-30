@@ -590,6 +590,19 @@ _FX NTSTATUS Obj_GetNameOrFileName(
 //---------------------------------------------------------------------------
 
 
+#ifdef _M_ARM64
+_FX POBJECT_TYPE Obj_GetTypeObjectType(void)
+{
+    static POBJECT_TYPE _TypeObjectType = NULL;
+
+    if (!_TypeObjectType) {
+
+        _TypeObjectType = pObGetObjectType(*PsProcessType);
+    }
+
+    return _TypeObjectType;
+}
+#else
 _FX POBJECT_TYPE Obj_GetTypeObjectType(void)
 {
     static POBJECT_TYPE _TypeObjectType = NULL;
@@ -704,6 +717,7 @@ _FX POBJECT_TYPE Obj_GetTypeObjectType(void)
 
     return _TypeObjectType;
 }
+#endif
 
 
 //---------------------------------------------------------------------------

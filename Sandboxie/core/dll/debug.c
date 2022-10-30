@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2022 DavidXanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -29,6 +30,7 @@
 
 #include "dll.h"
 #include <stdio.h>
+#include "../../common/my_xeb.h"
 
 
 //---------------------------------------------------------------------------
@@ -53,6 +55,13 @@
 // Functions
 //---------------------------------------------------------------------------
 
+static NTSTATUS Debug_NtRaiseHardError(
+    NTSTATUS ErrorStatus,
+    ULONG NumberOfParameters,
+    ULONG UnicodeBitMask,
+    ULONG_PTR *Parameters,
+    ULONG ErrorOption,
+    ULONG *ErrorReturn);
 
 static void Debug_RtlSetLastWin32Error(ULONG err);
 
@@ -79,6 +88,13 @@ static NTSTATUS Debug_LdrGetDllHandle(
 //---------------------------------------------------------------------------
 
 
+typedef NTSTATUS (*P_NtRaiseHardError)(
+    NTSTATUS ErrorStatus,
+    ULONG NumberOfParameters,
+    ULONG UnicodeBitMask,
+    ULONG_PTR *Parameters,
+    ULONG ErrorOption,
+    ULONG *ErrorReturn);
 typedef void (*P_RtlSetLastWin32Error)(ULONG err);
 typedef void (*P_OutputDebugString)(const void *str);
 typedef BOOL (*P_DebugActiveProcess)(ULONG dwProcessId);
@@ -86,6 +102,7 @@ typedef BOOL (*P_WaitForDebugEvent)(
     LPDEBUG_EVENT lpDebugEvent, DWORD dwMilliseconds);
 
 
+static P_NtRaiseHardError           __sys_NtRaiseHardError          = NULL;
 static P_RtlSetLastWin32Error       __sys_RtlSetLastWin32Error      = NULL;
 static P_OutputDebugString          __sys_OutputDebugStringW        = NULL;
 static P_OutputDebugString          __sys_OutputDebugStringA        = NULL;
@@ -119,8 +136,7 @@ __declspec(dllimport) NTSTATUS LdrGetDllHandle(
 
 _FX int Debug_Init(void)
 {
-    HMODULE module = NULL; // fix-me
-
+    P_NtRaiseHardError NtRaiseHardError;
     P_OutputDebugString OutputDebugStringW;
     P_OutputDebugString OutputDebugStringA;
     P_RtlSetLastWin32Error RtlSetLastWin32Error;
@@ -131,6 +147,14 @@ _FX int Debug_Init(void)
     // intercept NTDLL entry points
     //
 
+    HMODULE module = Dll_Ntdll;
+
+    NtRaiseHardError = (P_NtRaiseHardError)
+        GetProcAddress(Dll_Ntdll, "NtRaiseHardError");
+
+    SBIEDLL_HOOK(Debug_,NtRaiseHardError);
+
+
     RtlSetLastWin32Error = (P_RtlSetLastWin32Error)
         GetProcAddress(Dll_Ntdll, "RtlSetLastWin32Error");
 
@@ -139,6 +163,8 @@ _FX int Debug_Init(void)
     //
     // intercept KERNEL32 entry points
     //
+
+    module = Dll_Kernel32;
 
     OutputDebugStringW = (P_OutputDebugString)
         GetProcAddress(Dll_Kernel32, "OutputDebugStringW");
@@ -238,6 +264,23 @@ _FX int Debug_Init(void)
 #endif
 
     return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// Debug_NtRaiseHardError
+//---------------------------------------------------------------------------
+
+
+ALIGNED NTSTATUS Debug_NtRaiseHardError(    
+    NTSTATUS ErrorStatus,
+    ULONG NumberOfParameters,
+    ULONG UnicodeBitMask,
+    ULONG_PTR *Parameters,
+    ULONG ErrorOption,
+    ULONG *ErrorReturn)
+{
+    return __sys_NtRaiseHardError(ErrorStatus, NumberOfParameters, UnicodeBitMask, Parameters, ErrorOption, ErrorReturn);
 }
 
 

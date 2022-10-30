@@ -2,5 +2,19 @@
 * Missing Messages in Text-Italian-1040.txt
 *==========
 
-There are no missing messages.
+1305;pop;inf;02
+SBIE1305 Blocked sandboxed image from being loaded - %2
+.
+
+2226;pop;wrn;01
+SBIE2226 Process failed to start due to missing elevation, to resolve add "ApplyElevateCreateProcessFix=y" to the ini section for this box %2
+.
+
+2227;pop;wrn;01
+SBIE2227 '%2' is located on a volume which does not support 8.3 naming. This can cause issues with older applications and installers.
+.
+
+2338;pop;err;01
+SBIE2338 Encountered unsupported architecture in process:  %2
+.
 

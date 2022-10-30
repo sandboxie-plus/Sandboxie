@@ -39,7 +39,7 @@ int vswprintf_l(wchar_t * _String, size_t _Count, const wchar_t * _Format, va_li
 time_t GetTime()
 {
 	QDateTime dateTime = QDateTime::currentDateTime();
-	time_t time = dateTime.toTime_t(); // returns time in seconds (since 1970-01-01T00:00:00) in UTC !
+	time_t time = dateTime.toSecsSinceEpoch(); // returns time in seconds (since 1970-01-01T00:00:00) in UTC !
 	return time;
 }
 
@@ -286,27 +286,27 @@ QString FormatUnit(quint64 Size, int Precision)
 }
 
 
-QString FormatTime(quint64 Time, bool ms)
-{
-	int miliseconds = 0;
-	if (ms) {
-		miliseconds = Time % 1000;
-		Time /= 1000;
-	}
-	int seconds = Time % 60;
-	Time /= 60;
-	int minutes = Time % 60;
-	Time /= 60;
-	int hours = Time % 24;
-	int days = Time / 24;
-	if(ms && (minutes == 0) && (hours == 0) && (days == 0))
-		return QString().sprintf("%02d.%04d", seconds, miliseconds);
-	if((hours == 0) && (days == 0))
-		return QString().sprintf("%02d:%02d", minutes, seconds);
-	if (days == 0)
-		return QString().sprintf("%02d:%02d:%02d", hours, minutes, seconds);
-	return QString().sprintf("%dd%02d:%02d:%02d", days, hours, minutes, seconds);
-}
+//QString FormatTime(quint64 Time, bool ms)
+//{
+//	int miliseconds = 0;
+//	if (ms) {
+//		miliseconds = Time % 1000;
+//		Time /= 1000;
+//	}
+//	int seconds = Time % 60;
+//	Time /= 60;
+//	int minutes = Time % 60;
+//	Time /= 60;
+//	int hours = Time % 24;
+//	int days = Time / 24;
+//	if(ms && (minutes == 0) && (hours == 0) && (days == 0))
+//		return QString().sprintf("%02d.%04d", seconds, miliseconds);
+//	if((hours == 0) && (days == 0))
+//		return QString().sprintf("%02d:%02d", minutes, seconds);
+//	if (days == 0)
+//		return QString().sprintf("%02d:%02d:%02d", hours, minutes, seconds);
+//	return QString().sprintf("%dd%02d:%02d:%02d", days, hours, minutes, seconds);
+//}
 
 QString	FormatNumber(quint64 Number)
 {
@@ -482,7 +482,7 @@ void GrayScale (QImage& Image)
 		uchar* g = (Image.bits () + 1);
 		uchar* b = (Image.bits () + 2);
 
-		uchar* end = (Image.bits() + Image.byteCount ());
+		uchar* end = (Image.bits() + Image.sizeInBytes());
 		while (r != end)
 		{
 			*r = *g = *b = (((*r + *g) >> 1) + *b) >> 1; // (r + b + g) / 3

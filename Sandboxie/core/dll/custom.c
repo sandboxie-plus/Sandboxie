@@ -75,7 +75,7 @@ _FX BOOLEAN CustomizeSandbox(void)
 
     if ((Dll_ProcessFlags & SBIE_FLAG_PRIVACY_MODE) != 0) {
 
-        Key_CreateBaseKeys();
+        //Key_CreateBaseKeys();
         Key_CreateBaseFolders();
     }
 
@@ -920,7 +920,11 @@ _FX HANDLE OpenExplorerKey(
 
     InitializeObjectAttributes(
         &objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
-    status = NtOpenKey(&HKey_Root, KEY_READ, &objattrs);
+    status = Key_OpenOrCreateIfBoxed(&HKey_Root, KEY_READ, &objattrs);
+    if (status == STATUS_BAD_INITIAL_PC) {
+        *error = 0;
+        return INVALID_HANDLE_VALUE;
+    }
 
     if (status != STATUS_SUCCESS) {
         *error = 0x99;
@@ -934,7 +938,11 @@ _FX HANDLE OpenExplorerKey(
     RtlInitUnicodeString(&uni, _Explorer);
     InitializeObjectAttributes(
         &objattrs, &uni, OBJ_CASE_INSENSITIVE, HKey_Root, NULL);
-    status = NtOpenKey(&HKey_Explorer, KEY_READ, &objattrs);
+    status = Key_OpenOrCreateIfBoxed(&HKey_Explorer, KEY_READ, &objattrs);
+    if (status == STATUS_BAD_INITIAL_PC) {
+        *error = 0;
+        return INVALID_HANDLE_VALUE;
+    }
 
     NtClose(HKey_Root);
 
@@ -951,9 +959,7 @@ _FX HANDLE OpenExplorerKey(
     InitializeObjectAttributes(
         &objattrs, &uni, OBJ_CASE_INSENSITIVE, HKey_Explorer, NULL);
 
-    status = Key_OpenOrCreateIfBoxed(
-                    &HKey_Subkey, KEY_ALL_ACCESS, &objattrs);
-
+    status = Key_OpenOrCreateIfBoxed(&HKey_Subkey, KEY_ALL_ACCESS, &objattrs);
     if (status == STATUS_BAD_INITIAL_PC) {
         *error = 0;
         return INVALID_HANDLE_VALUE;
@@ -1450,7 +1456,11 @@ _FX BOOLEAN Custom_OsppcDll(HMODULE module)
     ULONG zero = 0;
     ULONG ProductIndex, ValueIndex;
 
-    ULONG Wow64 = Dll_IsWow64 ? KEY_WOW64_64KEY : 0;
+    ULONG Wow64 = 0;
+#ifndef _WIN64
+    if (Dll_IsWow64)
+        Wow64 = KEY_WOW64_64KEY;
+#endif
 
     //
     // open Microsoft Office 2010 registry key
@@ -1459,9 +1469,7 @@ _FX BOOLEAN Custom_OsppcDll(HMODULE module)
     InitializeObjectAttributes(
         &objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
 
-    RtlInitUnicodeString(&uni,
-        L"\\registry\\user\\current\\software"
-            L"\\Microsoft\\Office\\14.0");
+    RtlInitUnicodeString(&uni, L"\\registry\\user\\current\\software\\Microsoft\\Office\\14.0");
 
     status = Key_OpenIfBoxed(&hOfficeKey, KEY_ALL_ACCESS | Wow64, &objattrs);
     if (! NT_SUCCESS(status))
@@ -1527,6 +1535,7 @@ _FX BOOLEAN Custom_OsppcDll(HMODULE module)
     return TRUE;
 }
 
+#ifndef _M_ARM64
 
 //---------------------------------------------------------------------------
 // Custom_InternetDownloadManager
@@ -1731,3 +1740,5 @@ _FX BOOLEAN Acscmonitor_Init(HMODULE hDll)
 		CloseHandle(ThreadHandle); 
     return TRUE;
 }
+
+#endif

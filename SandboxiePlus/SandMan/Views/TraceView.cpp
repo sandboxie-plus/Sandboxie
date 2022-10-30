@@ -168,7 +168,7 @@ CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 	m_FilterStatus = 0;
 
 	m_pMainLayout = new QVBoxLayout();
-	m_pMainLayout->setMargin(0);
+	m_pMainLayout->setContentsMargins(0,0,0,0);
 	this->setLayout(m_pMainLayout);
 
 	m_pTraceToolBar = new QToolBar();
@@ -252,7 +252,7 @@ CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 
 	m_pLayout->addWidget(m_pTrace);
 
-	QObject::connect(m_pTrace, SIGNAL(FilterSet(const QRegExp&, bool, int)), this, SLOT(SetFilter(const QRegExp&, bool, int)));
+	QObject::connect(m_pTrace, SIGNAL(FilterSet(const QRegularExpression&, bool, int)), this, SLOT(SetFilter(const QRegularExpression&, bool, int)));
 
 	m_pMonitor = new CMonitorList(this);
 	m_pLayout->addWidget(m_pMonitor);
@@ -461,7 +461,11 @@ void CTraceView::AddAction(QAction* pAction)
 void CTraceView::OnSetTree()
 {
 	((CTraceModel*)m_pTrace->GetModel())->SetTree(m_pTraceTree->isChecked());
+	
 	m_pTrace->m_pTraceModel->Clear();
+	Refresh();
+	m_pTrace->GetTree()->expandAll();
+
 	theConf->SetValue("Options/UseLogTree", m_pTraceTree->isChecked());
 }
 
@@ -487,7 +491,7 @@ void CTraceView::UpdateFilters()
 	quint32 cur_pid = m_pTracePid->currentData().toUInt();
 
 	QMap<quint32, SProgInfo> pids = m_PidMap;
-	foreach(quint32 pid, pids.uniqueKeys()) {
+	foreach(quint32 pid, pids.keys()) {
 		SProgInfo& Info = pids[pid];
 
 		if(m_pTracePid->findData(pid) == -1)
@@ -503,7 +507,7 @@ void CTraceView::UpdateFilters()
 	}
 }
 
-void CTraceView::SetFilter(const QRegExp& Exp, bool bHighLight, int Col)
+void CTraceView::SetFilter(const QRegularExpression& Exp, bool bHighLight, int Col)
 {
 	m_FilterExp = Exp;
 	m_bHighLight = bHighLight;
@@ -633,7 +637,7 @@ CTraceWindow::CTraceWindow(QWidget *parent)
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
 	QGridLayout* pLayout = new QGridLayout();
-	pLayout->setMargin(3);
+	pLayout->setContentsMargins(3,3,3,3);
 	pLayout->addWidget(new CTraceView(true, this), 0, 0);
 	this->setLayout(pLayout);
 

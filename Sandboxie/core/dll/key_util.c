@@ -56,7 +56,7 @@ _FX NTSTATUS Key_OpenIfBoxed(
 
         ULONG mp_flags = SbieDll_MatchPath(L'k', name);
 
-        if (mp_flags)
+        if ((mp_flags & ~PATH_WRITE_FLAG) != 0)
             status = STATUS_BAD_INITIAL_PC;
         else
             status = NtOpenKey(out_handle, access, objattrs);
@@ -109,8 +109,10 @@ _FX void Key_DeleteValueFromCLSID(
     HANDLE handle;
 
     DesiredAccess = KEY_SET_VALUE;
+#ifndef _WIN64
     if (Dll_IsWow64)
         DesiredAccess |= KEY_WOW64_64KEY;
+#endif
 
     path = Dll_AllocTemp(128 * sizeof(WCHAR));
 

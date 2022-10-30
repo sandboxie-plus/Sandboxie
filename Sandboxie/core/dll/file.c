@@ -2888,6 +2888,7 @@ ReparseLoop:
 
         if (CreateOptions & FILE_DELETE_ON_CLOSE) {
 
+            // $Workaround$ - 3rd party fix
             if (Dll_DigitalGuardian && (PATH_IS_WRITE(mp_flags) || PATH_IS_CLOSED(mp_flags)))
             {
                 HaveTrueFile = 'N';
@@ -6779,6 +6780,7 @@ _FX NTSTATUS File_RenameFile(
             {
                 status = STATUS_OBJECT_NAME_NOT_FOUND;
             }
+            // $Workaround$ - 3rd party fix
             else if (!Dll_DigitalGuardian)
             {
                 status = __sys_NtQueryFullAttributesFile(&objattrs, &open_info);
@@ -7385,6 +7387,7 @@ _FX NTSTATUS StopTailCallOptimization(NTSTATUS status)
     return status;
 }
 
+// $Workaround$ - 3rd party fix
 _FX BOOLEAN DigitalGuardian_Init(HMODULE hModule)
 {
     Dll_DigitalGuardian = hModule;

@@ -63,7 +63,7 @@ static P_NtQueryObject          __sys_NtQueryObject             = NULL;
 
 _FX BOOLEAN Obj_Init(void)
 {
-    HMODULE module = NULL;
+    HMODULE module = Dll_Ntdll;
 
 #if 0
     __sys_NtQueryObject = NtQueryObject;
@@ -71,6 +71,7 @@ _FX BOOLEAN Obj_Init(void)
     SBIEDLL_HOOK(Obj_,NtQueryObject);
     SBIEDLL_HOOK(Obj_,NtQueryVirtualMemory);
 #endif
+
     return TRUE;
 }
 

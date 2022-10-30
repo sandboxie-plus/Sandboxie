@@ -10,6 +10,10 @@ SBIE1222 Error with security token:  %2
 SBIE1231 Initialization failed for process %3 %2
 .
 
+1305;pop;inf;02
+SBIE1305 Blocked sandboxed image from being loaded - %2
+.
+
 1307;pop;inf;02
 SBIE1307 Program cannot access the Internet due to restrictions - %2
 .
@@ -90,6 +94,14 @@ SBIE2224 Sandboxed program has crashed: %2
 SBIE2225 An attempt was made to access an EFS file: %2
 .
 
+2226;pop;wrn;01
+SBIE2226 Process failed to start due to missing elevation, to resolve add "ApplyElevateCreateProcessFix=y" to the ini section for this box %2
+.
+
+2227;pop;wrn;01
+SBIE2227 '%2' is located on a volume which does not support 8.3 naming. This can cause issues with older applications and installers.
+.
+
 2302;pop;err;01
 SBIE2302 Process image configuration conflict: %2
 .
@@ -108,6 +120,10 @@ SBIE2336 Error in GUI server:  %2
 
 2337;pop;err;01
 SBIE2337 Failed to start program:  %2
+.
+
+2338;pop;err;01
+SBIE2338 Encountered unsupported architecture in process:  %2
 .
 
 9234;evt;err;01
@@ -435,7 +451,7 @@ Allow direct access to %2 notes
 .
 
 4342;txt;01
-Enable %2 fix for Windows 11 KB5014019
+Enable %2 compatibility workaround
 .
 
 4393;txt;01

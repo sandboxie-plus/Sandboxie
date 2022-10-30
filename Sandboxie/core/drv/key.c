@@ -29,7 +29,9 @@
 #include "util.h"
 #include "session.h"
 #include "token.h"
+#ifndef _M_ARM64
 #include "hook.h"
+#endif
 #include "conf.h"
 #include "common/my_version.h"
 
@@ -240,10 +242,14 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
     static const WCHAR *_WritePath = L"WriteKeyPath";
 #ifdef USE_MATCH_PATH_EX
     static const WCHAR *normalpaths[] = {
-        L"HKEY_LOCAL_MACHINE\\*",
+        //L"HKEY_LOCAL_MACHINE\\*",
         //L"HKEY_CURRENT_USER\\software\\Microsoft\\*",
         //L"HKEY_CURRENT_USER\\software\\WOW6432Node\\Microsoft\\*",
         //L"\\REGISTRY\\USER\\*_Classes\\*",
+        NULL
+    };
+    static const WCHAR *writepaths[] = {
+        L"\\REGISTRY\\USER\\*",
         NULL
     };
 #endif
@@ -271,7 +277,6 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
     }
 
     if (ok && proc->use_privacy_mode) {
-
         for (i = 0; normalpaths[i] && ok; ++i) {
             ok = Process_AddPath(proc, &proc->normal_key_paths, NULL, 
                                     TRUE, normalpaths[i], FALSE);
@@ -339,6 +344,13 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
 
 #ifdef USE_MATCH_PATH_EX
     ok = Process_GetPaths(proc, &proc->write_key_paths, _WritePath, TRUE);
+
+    if (ok && proc->use_privacy_mode) {
+        for (i = 0; writepaths[i] && ok; ++i) {
+            ok = Process_AddPath(proc, &proc->write_key_paths, NULL, 
+                                    TRUE, writepaths[i], FALSE);
+        }
+    }
 #else
     ok = Process_GetPaths2(
             proc, &proc->write_key_paths, &proc->closed_key_paths,
@@ -960,8 +972,17 @@ _FX BOOLEAN Key_MountHive3(
 
                 if (! NT_SUCCESS(status))
                     Log_Status(MSG_MOUNT_FAILED, 0x22, status);
-                else
+                else {
                     ok = TRUE;
+
+                    SVC_REGHIVE_MSG msg;
+
+                    msg.process_id = (ULONG)(ULONG_PTR)proc->pid;
+                    msg.session_id = proc->box->session_id;
+                    wcscpy(msg.boxname, proc->box->name);
+
+                    Api_SendServiceMessage(SVC_MOUNTED_HIVE, sizeof(msg), &msg);
+                }
 
                 //
                 // restore original TokenDefaultDacl
@@ -1029,7 +1050,7 @@ _FX void Key_UnmountHive(PROCESS *proc)
 
     if (send_msg) {
 
-        SVC_UNMOUNT_MSG msg;
+        SVC_REGHIVE_MSG msg;
 
         msg.process_id = (ULONG)(ULONG_PTR)proc->pid;
         msg.session_id = proc->box->session_id;

@@ -88,6 +88,12 @@ private:
     void RestartHostInjectedSvcs();
 
     //
+    // mounted registry hive
+    //
+
+    void MountedHive(void *_msg);
+
+    //
     // unmount registry hive
     //
 

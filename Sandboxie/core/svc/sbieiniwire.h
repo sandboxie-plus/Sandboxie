@@ -42,7 +42,7 @@ struct tagSBIE_INI_GET_VERSION_REQ
 struct tagSBIE_INI_GET_VERSION_RPL
 {
     MSG_HEADER h;       // status is STATUS_SUCCESS or STATUS_UNSUCCESSFUL
-    ULONG version_len;
+    ULONG abi_ver;
     WCHAR version[1];
 };
 

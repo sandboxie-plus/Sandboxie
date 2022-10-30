@@ -947,7 +947,8 @@ _FX ULONG Process_MatchPathEx(
 
         mp_flags = TRUE_PATH_CLOSED_FLAG | COPY_PATH_CLOSED_FLAG;
     }
-    else if (!proc->use_privacy_mode || path_code == L'i') {
+    //else if (!proc->use_privacy_mode || path_code == L'i') {
+    else {
 
         //
         // in normal sandbox mode we have read access to all locations unless restricted,
@@ -956,18 +957,20 @@ _FX ULONG Process_MatchPathEx(
 
         mp_flags = TRUE_PATH_READ_FLAG | COPY_PATH_OPEN_FLAG; // normal mode
     }
-    else {
-
-        //
-        // in privacy mode we only have read access to selected generic locations,
-        // and read access to user data must be explicityl grated,
-        // also all writes are redirected to the sandbox
-        //
-        // To enable privacy enchanced mode add UsePrivacyMode=y 
-        //
-
-        mp_flags = TRUE_PATH_CLOSED_FLAG | COPY_PATH_OPEN_FLAG; // write path mode
-    }
+    //else {
+    //
+    //    //
+    //    // in privacy mode we only have read access to selected generic locations,
+    //    // and read access to user data must be explicityl grated,
+    //    // also all writes are redirected to the sandbox
+    //    //
+    //    // Note: as of 5.60.1 all locations are locked down explicitly while the root mode remains normal
+    //    //
+    //    // To enable privacy enchanced mode add UsePrivacyMode=y 
+    //    //
+    //
+    //    mp_flags = TRUE_PATH_CLOSED_FLAG | COPY_PATH_OPEN_FLAG; // write path mode
+    //}
 
     //
     // closed path list, in non specific mode has the higher priority

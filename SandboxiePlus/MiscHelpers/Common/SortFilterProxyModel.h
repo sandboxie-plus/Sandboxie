@@ -30,7 +30,7 @@ public:
 			return true;
 
 		// allow the item to pass if any of the child items pass
-		if(!filterRegExp().isEmpty())
+		if(filterRegularExpression().isValid())
 		{
 			// get source-model index for current row
 			QModelIndex source_index = sourceModel()->index(source_row, 0, source_parent);
@@ -57,10 +57,10 @@ public:
 		QVariant Data = QSortFilterProxyModel::data(index, role);
 		if (m_bHighLight && role == (CFinder::GetDarkMode() ? Qt::ForegroundRole : Qt::BackgroundRole))
 		{
-			if (!filterRegExp().isEmpty())
+			if (filterRegularExpression().isValid())
 			{
 				QString Key = QSortFilterProxyModel::data(index, filterRole()).toString();
-				if (Key.contains(filterRegExp()))
+				if (Key.contains(filterRegularExpression()))
 					return QColor(Qt::yellow);
 			}
 			//return QColor(Qt::white);
@@ -80,14 +80,14 @@ public:
 	}
 
 public slots:
-	void SetFilter(const QRegExp& Exp, bool bHighLight = false, int Col = -1) // -1 = any
+	void SetFilter(const QRegularExpression& Exp, bool bHighLight = false, int Col = -1) // -1 = any
 	{
 		QModelIndex idx;
 		//if (m_pView) idx = m_pView->currentIndex();
 		m_iColumn = Col;
 		m_bHighLight = bHighLight;
 		setFilterKeyColumn(Col); 
-		setFilterRegExp(Exp);
+		setFilterRegularExpression(Exp);
 		//if (m_pView) m_pView->setCurrentIndex(idx);
 		if (m_bHighLight)
 			emit layoutChanged();
@@ -125,7 +125,7 @@ protected:
 		QModelIndex tmp = idx.sibling(idx.row(), column);
 
 		QString str = data(tmp, filterRole()).toString();
-		if (str.contains(filterRegExp()))
+		if (str.contains(filterRegularExpression()))
 			return true;
 		return false;
 	}

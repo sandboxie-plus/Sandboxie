@@ -122,7 +122,7 @@ BOOLEAN SysInfo_CanUseJobs = FALSE;
 
 _FX BOOLEAN SysInfo_Init(void)
 {
-    HMODULE module = NULL;
+    HMODULE module = Dll_Ntdll;
 
     void *NtTraceEvent;
 
@@ -146,9 +146,12 @@ _FX BOOLEAN SysInfo_Init(void)
         SBIEDLL_HOOK(SysInfo_, NtSetInformationJobObject);
     }
 
+    {
+        HMODULE module = Dll_Kernel32;
 
-    SBIEDLL_HOOK(SysInfo_,SetLocaleInfoW);
-    SBIEDLL_HOOK(SysInfo_,SetLocaleInfoA);
+        SBIEDLL_HOOK(SysInfo_, SetLocaleInfoW);
+        SBIEDLL_HOOK(SysInfo_, SetLocaleInfoA);
+    }
 
     //
     // we don't want to hook NtTraceEvent in kernel mode

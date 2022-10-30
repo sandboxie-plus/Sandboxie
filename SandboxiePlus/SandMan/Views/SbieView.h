@@ -12,6 +12,8 @@ public:
 	CSbieView(QWidget* parent = 0);
 	virtual ~CSbieView();
 
+	virtual void				SaveState();
+
 	virtual QTreeViewEx*		GetTree() { return m_pSbieTree; }
 
 	virtual QList<CSandBoxPtr>	GetSelectedBoxes();
@@ -71,6 +73,7 @@ protected:
 	virtual QTreeView*			GetView() { return m_pSbieTree; }
 	virtual QAbstractItemModel* GetModel() { return m_pSortProxy; }
 
+	virtual void				UpdateStartMenu(CSandBoxPlus* pBoxEx);
 	virtual void				UpdateRunMenu(const CSandBoxPtr& pBox);
 
 	QMap<QString, QStringList>	m_Groups;
@@ -99,6 +102,8 @@ private:
 
 	void					ChangeExpand(const QModelIndex& index, bool bExpand);
 
+	QMenu*					GetMenuFolder(const QString& Folder, QMenu* pParent);
+
 	QVBoxLayout*			m_pMainLayout;
 
 	QTreeViewEx*			m_pSbieTree;
@@ -118,6 +123,8 @@ private:
 	QMenu*					m_pMenuRun;
 	QAction*				m_pMenuRunAny;
 	QAction*				m_pMenuRunMenu;
+	QMenu*					m_pMenuRunStart;
+	QMap<QString, QMenu*>	m_MenuFolders;
 	QAction*				m_pMenuRunBrowser;
 	QAction*				m_pMenuRunMailer;
 	QMenu*					m_pMenuRunTools;

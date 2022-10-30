@@ -158,53 +158,6 @@ void COptionsWindow::OnAddGroup()
 	OnOptChanged();
 }
 
-void COptionsWindow::AddProgToGroup(QTreeWidget* pTree, const QString& Groupe, bool disabled)
-{
-	QString Value = SelectProgram();
-	if (Value.isEmpty())
-		return;
-
-	QTreeWidgetItem* pItem = new QTreeWidgetItem();
-	pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
-	SetProgramItem(Value, pItem, 0);
-	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
-	pTree->addTopLevelItem(pItem);
-
-	AddProgramToGroup(Value, Groupe);
-}
-
-void COptionsWindow::DelProgFromGroup(QTreeWidget* pTree, const QString& Groupe)
-{
-	QTreeWidgetItem* pItem = pTree->currentItem();
-	if (!pItem)
-		return;
-
-	QString Value = pItem->data(0, Qt::UserRole).toString();
-
-	delete pItem;
-
-	for (int i = 0; i < ui.treeGroups->topLevelItemCount(); i++)
-	{
-		QTreeWidgetItem* pGroupItem = ui.treeGroups->topLevelItem(i);
-		if (pGroupItem->data(0, Qt::UserRole).toString().compare(Groupe, Qt::CaseInsensitive) == 0)
-		{
-			for (int j = 0; j < pGroupItem->childCount(); j++)
-			{
-				QTreeWidgetItem* pProgItem = pGroupItem->child(j);
-				if (pProgItem->data(0, Qt::UserRole).toString().compare(Value, Qt::CaseInsensitive) == 0)
-				{
-					delete pProgItem;
-					m_GroupsChanged = true;
-					OnOptChanged();
-					break;
-				}
-			}
-			break;
-		}
-	}
-}
-
-
 void COptionsWindow::AddProgramToGroup(const QString& Program, const QString& Group)
 {
 	QTreeWidgetItem* pItem = FindGroupByName(Group, true);
@@ -220,7 +173,8 @@ void COptionsWindow::AddProgramToGroup(const QString& Program, const QString& Gr
 
 bool COptionsWindow::DelProgramFromGroup(const QString& Program, const QString& Group)
 {
-	QTreeWidgetItem* pItem = FindGroupByName(Group, true);
+	QTreeWidgetItem* pItem = FindGroupByName(Group, false);
+	if (!pItem) return false;
 
 	bool bFound = false;
 	for (int j = 0; j < pItem->childCount(); j++){
@@ -228,6 +182,8 @@ bool COptionsWindow::DelProgramFromGroup(const QString& Program, const QString& 
 		if (pProgItem->data(0, Qt::UserRole).toString().compare(Program, Qt::CaseInsensitive) == 0)  {
 			delete pProgItem;
 			bFound = true;
+			if (pItem->childCount() == 0)
+				delete pItem;
 			break;
 		}
 	}

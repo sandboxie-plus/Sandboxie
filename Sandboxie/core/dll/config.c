@@ -23,7 +23,7 @@
 #define NOGDI
 #include "dll.h"
 #include "common/pool.h"
-#include "common\pattern.h"
+#include "common/pattern.h"
 #include "core/svc/SbieIniWire.h"
 
 //---------------------------------------------------------------------------

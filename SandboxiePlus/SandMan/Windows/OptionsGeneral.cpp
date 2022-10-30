@@ -77,11 +77,13 @@ void COptionsWindow::CreateGeneral()
 		}
 	}
 
-	QWidget* ExWidgets[] = { ui.chkSecurityMode, ui.chkLockDown, ui.chkRestrictDevices,
-		ui.chkPrivacy, ui.chkUseSpecificity,
-		ui.chkNoSecurityIsolation, ui.chkNoSecurityFiltering, NULL };
-	for(QWidget** ExWidget = ExWidgets; *ExWidget != NULL; ExWidget++)
-		COptionsWindow__AddCertIcon(*ExWidget);
+	if (g_Certificate.isEmpty()) {
+		QWidget* ExWidgets[] = { ui.chkSecurityMode, ui.chkLockDown, ui.chkRestrictDevices,
+			ui.chkPrivacy, ui.chkUseSpecificity,
+			ui.chkNoSecurityIsolation, ui.chkNoSecurityFiltering, ui.chkConfidential, NULL };
+		for (QWidget** ExWidget = ExWidgets; *ExWidget != NULL; ExWidget++)
+			COptionsWindow__AddCertIcon(*ExWidget);
+	}
 
 
 	m_HoldBoxType = false;
@@ -94,6 +96,17 @@ void COptionsWindow::CreateGeneral()
 	//connect(ui.chkNoSecurityFiltering, SIGNAL(clicked(bool)), this, SLOT(UpdateBoxType()));
 
 	
+	ui.btnBorderColor->setPopupMode(QToolButton::MenuButtonPopup);
+	QMenu* pColorMenu = new QMenu(this);
+	m_pColorSlider = new QSlider(Qt::Horizontal, this);
+	m_pColorSlider->setMinimum(0);
+	m_pColorSlider->setMaximum(359);
+	m_pColorSlider->setMinimumHeight(16);
+	connect(m_pColorSlider, SIGNAL(valueChanged(int)), this, SLOT(OnColorSlider(int)));
+	QWidgetAction* pActionWidget = new QWidgetAction(this);
+    pActionWidget->setDefaultWidget(m_pColorSlider);
+	pColorMenu->addAction(pActionWidget);
+	ui.btnBorderColor->setMenu(pColorMenu);
 
 	connect(ui.cmbBoxIndicator, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.cmbBoxBorder, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
@@ -101,6 +114,8 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.spinBorderWidth, SIGNAL(valueChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkShowForRun, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkPinToTray, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+
+	connect(ui.cmbDblClick, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.chkBlockNetShare, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkBlockNetParam, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
@@ -124,6 +139,8 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.chkVmReadNotify, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	//connect(ui.chkOpenSmartCard, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	//connect(ui.chkOpenBluetooth, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+
+	connect(ui.chkSeparateUserFolders, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.txtCopyLimit, SIGNAL(textChanged(const QString&)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkCopyLimit, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
@@ -152,8 +169,7 @@ void COptionsWindow::LoadGeneral()
 
 	QStringList BorderCfg = m_pBox->GetText("BorderColor").split(",");
 	ui.cmbBoxBorder->setCurrentIndex(ui.cmbBoxBorder->findData(BorderCfg.size() >= 2 ? BorderCfg[1].toLower() : "on"));
-	m_BorderColor = QColor("#" + BorderCfg[0].mid(5, 2) + BorderCfg[0].mid(3, 2) + BorderCfg[0].mid(1, 2));
-	ui.btnBorderColor->setStyleSheet("background-color: " + m_BorderColor.name());
+	SetBoxColor(QColor("#" + BorderCfg[0].mid(5, 2) + BorderCfg[0].mid(3, 2) + BorderCfg[0].mid(1, 2)));
 	int BorderWidth = BorderCfg.count() >= 3 ? BorderCfg[2].toInt() : 0;
 	if (!BorderWidth) BorderWidth = 6;
 	ui.spinBorderWidth->setValue(BorderWidth);
@@ -183,14 +199,34 @@ void COptionsWindow::LoadGeneral()
 	//ui.chkOpenSmartCard->setChecked(m_pBox->GetBool("OpenSmartCard", true));
 	//ui.chkOpenBluetooth->setChecked(m_pBox->GetBool("OpenBluetooth", false));
 
+	ui.cmbDblClick->clear();
+	ui.cmbDblClick->addItem(tr("Open Box Options"), "!options");
+	ui.cmbDblClick->addItem(tr("Browse Content"), "!browse");
+	ui.cmbDblClick->addItem(tr("Start File Recovery"), "!recovery");
+	ui.cmbDblClick->addItem(tr("Show Run Dialog"), "!run");
+	ui.cmbDblClick->insertSeparator(4);
+
 	ui.treeRun->clear();
 	foreach(const QString& Value, m_pBox->GetTextList("RunCommand", m_Template))
 	{
 		StrPair NameCmd = Split2(Value, "|");
 		QTreeWidgetItem* pItem = new QTreeWidgetItem();
 		AddRunItem(NameCmd.first, NameCmd.second);
+		ui.cmbDblClick->addItem(NameCmd.second, "");
 	}
 
+	QString Action = m_pBox->GetText("DblClickAction");
+	int pos = -1;
+	if (Action.isEmpty())
+		pos = 0;
+	else if (Action.left(1) == "!")
+		pos = ui.cmbDblClick->findData(Action);
+	else if (!Action.isEmpty()) 
+		pos = ui.cmbDblClick->findText(Action);
+	ui.cmbDblClick->setCurrentIndex(pos);
+	if (pos == -1) ui.cmbDblClick->setCurrentText(Action);
+
+	ReadGlobalCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", true);
 
 	int iLimit = m_pBox->GetNum("CopyLimitKb", 80 * 1024);
 	ui.chkCopyLimit->setChecked(iLimit != -1);
@@ -221,6 +257,11 @@ void COptionsWindow::SaveGeneral()
 
 	WriteAdvancedCheck(ui.chkShowForRun, "ShowForRunIn", "", "n");
 	WriteAdvancedCheck(ui.chkPinToTray, "PinToTray", "y", "");
+
+	QString Action = ui.cmbDblClick->currentData().toString();
+	if (Action.isEmpty()) Action = ui.cmbDblClick->currentText();
+	if (Action == "!options") m_pBox->DelValue("DblClickAction");
+	else m_pBox->SetText("DblClickAction", Action);
 
 	WriteAdvancedCheck(ui.chkBlockNetShare, "BlockNetworkFiles", "y", "");
 	WriteAdvancedCheck(ui.chkBlockNetParam, "BlockNetParam", "", "n");
@@ -253,6 +294,7 @@ void COptionsWindow::SaveGeneral()
 	}
 	WriteTextList("RunCommand", RunCommands);
 
+	WriteGlobalCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", true);
 
 	WriteText("CopyLimitKb", ui.chkCopyLimit->isChecked() ? ui.txtCopyLimit->text() : "-1");
 	WriteAdvancedCheck(ui.chkCopyPrompt, "PromptForFileMigration", "", "n");
@@ -288,7 +330,6 @@ void COptionsWindow::OnGeneralChanged()
 	m_GeneralChanged = true;
 	OnOptChanged();
 }
-
 
 void COptionsWindow::UpdateBoxSecurity()
 {
@@ -336,8 +377,34 @@ void COptionsWindow::OnPickColor()
 		return;
 	m_GeneralChanged = true;
 	OnOptChanged();
+	SetBoxColor(color);
+}
+
+void COptionsWindow::SetBoxColor(const QColor& color)
+{
+	if (m_BorderColor == color) 
+		return;
 	m_BorderColor = color;
-	ui.btnBorderColor->setStyleSheet("background-color: " + m_BorderColor.name());
+	QRgb qrgb = color.rgba();
+	my_rgb rgb = { (double)qRed(qrgb), (double)qGreen(qrgb), (double)qBlue(qrgb) };
+	my_hsv hsv = rgb2hsv(rgb);
+	m_pColorSlider->setValue(hsv.h);
+	UpdateBoxColor();
+}
+
+void COptionsWindow::OnColorSlider(int value)
+{
+	my_hsv hsv = { (double)value, 1, 255 };
+	my_rgb rgb = hsv2rgb(hsv);
+	SetBoxColor(qRgb(rgb.r, rgb.g, rgb.b));
+}
+
+void COptionsWindow::UpdateBoxColor()
+{
+	if(theConf->GetBool("Options/ColorBoxIcons", false))
+		ui.btnBorderColor->setIcon(theGUI->GetColorIcon(m_BorderColor, true));
+	else
+		ui.btnBorderColor->setStyleSheet("background-color: " + m_BorderColor.name());
 }
 
 void COptionsWindow::OnBrowsePath()
@@ -452,8 +519,7 @@ void COptionsWindow::OnBoxTypChanged()
 		break;
 	}
 
-	m_BorderColor = theGUI->GetBoxColor(BoxType);
-	ui.btnBorderColor->setStyleSheet("background-color: " + m_BorderColor.name());
+	SetBoxColor(theGUI->GetBoxColor(BoxType));
 
 	m_GeneralChanged = true;
 	m_AccessChanged = true;

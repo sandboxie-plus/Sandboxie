@@ -19,6 +19,9 @@
 // Syscall Management, 64-bit code
 //---------------------------------------------------------------------------
 
+#ifdef _M_ARM64
+#include "common/arm64_asm.h"
+#endif
 
 //---------------------------------------------------------------------------
 // System Service Descriptor Table
@@ -111,72 +114,106 @@ _FX void *Syscall_GetMasterServiceTable(void)
 
     ExFreePoolWithTag(ptr, tzuk);
 
+
+    //
+    // next, analyze KeAddSystemServiceTable to learn where shadow table is
+    //
+
+    RtlInitUnicodeString(&uni, L"KeAddSystemServiceTable");
+    ptr = (UCHAR*)MmGetSystemRoutineAddress(&uni);
+    if (! ptr)
+        return NULL;
+
+#ifdef _M_ARM64
+
+    //MasterTable lookup for windows 11 on arm64
+
+    DbgPrint("Trying KeAddSystemServiceTable = %p, OS = %d, nt = %p, Pattern = ADRP ADD\n", ptr, Driver_OsBuild, nt);
+
+    for (i = 0; i < 0x40; i += 4, ptr += 4) {
+
+        ADRP adrp;
+        adrp.OP = *(ULONG*)ptr;
+
+        if (IS_ADRP(adrp) && adrp.Rd == 8) { // adrp x8, #0x575000
+
+            ADD add;
+            add.OP = *(ULONG*)(ptr + 4);
+
+            if (IS_ADD(add) && add.Rn == 8 && add.Rd == 12) { // add  x12, x8, #0xf80
+            
+                LONG delta = (adrp.immHi << 2 | adrp.immLo) << 12;
+                delta += add.imm12;
+
+                // Note: ADRP clears the lower 12 bits of the PC
+                nt = ((ULONG_PTR)ptr & ~0xFFF) + delta;
+
+                DbgPrint("Found KeServiceDescriptorTableShadow = %p\n", nt);
+                return (void*)nt;
+            }
+        }
+    }
+
+    return 0;
+#else
+
     //MasterTable lookup for windows 11 insider 22563 or server 2022 20348
     if (Driver_OsBuild >= 20348) {
 
         ULONG_PTR kernel_base = nt;
-        RtlInitUnicodeString(&uni, L"KeAddSystemServiceTable");
-        ptr = (UCHAR*)MmGetSystemRoutineAddress(&uni);
 
-        DbgPrint("Trying KiInitSystem = %p, OS = %d, Pattern = CMP MOV\n", ptr, Driver_OsBuild);
-        if (ptr) {
-            nt = 0;
-            //Look for the following instruction pattern
-            //CMP target address, <register>       : [0x48 || 0x4c][0x39][<0x20][4 byte offset to target]
-            //MOV qword[target address],<register> : [0x48 || 0x4c][0x89][<0x20][4 byte offset to target]
+        DbgPrint("Trying KeAddSystemServiceTable = %p, OS = %d, Pattern = CMP MOV\n", ptr, Driver_OsBuild);
 
-            //The target address discovered in this case is not the system service table but instead points
-            //to the middle of a structure that contains both the master and shadow table addresses:
-            //the shadow table is at <target address> + 0x20
-            //the master table is at <target address> - 0x20
+        nt = 0;
+        //Look for the following instruction pattern
+        //CMP target address, <register>       : [0x48 || 0x4c][0x39][<0x20][4 byte offset to target]
+        //MOV qword[target address],<register> : [0x48 || 0x4c][0x89][<0x20][4 byte offset to target]
 
-            //The following heuristic matches a 64 bit LEA (memory to register) instruction to an associated 64 bit MOV
-            //(register to memory) both instructions need to point to the same relative target address. 
-            //The target address range needs to be above (less than) the current address (reference address is the address of the following instruction) 
-            //of up to -0x200000. If a non matching 64 bit MOV follows the LEA instruction the heuristic continues to search for 
-            //a matching pair up to MAX_SERVICE_TABLE_SEARCH_SIZE bytes.
+        //The target address discovered in this case is not the system service table but instead points
+        //to the middle of a structure that contains both the master and shadow table addresses:
+        //the master table is at <target address> - 0x20
 
-            for (i = 10, ptr = ptr + 10; i < 0x200; i++, ptr++) {
-                LONG delta;
-                //filter on full 64 bit only opcodes.
-                if (*ptr == 0x48 || *ptr == 0x4c || *ptr == 0x44) { //parse rex prefix
-                    //switch(operand 1)
-                    switch (ptr[1]) {
-                        unsigned long testDelta;
-                    case 0x39:  //CMP instruction is first:  sets a target address
-                                //if another LEA in a instruction is discovered before an associated
-                                //MOV instruction is found.  A new target address is set based on the
-                                //the new LEA instruction if the target is in the target memory 
-                                //range.
-                        delta = *(LONG*)(ptr + 3);
-                        testDelta = delta * -1;
-                        if (ptr[0] == 0x44 && ptr[2] == 0x90 && delta > 0 && delta < 0x400000) {
-                            nt = kernel_base + delta;
-                            i += 6;
-                            ptr += 6;
-                        }
-                        //test operand 2 is in register range
-                        else if (ptr[2] < 0x20) {
-                            nt = (LONG_PTR)(ptr + 7) + delta;
-                            i += 6;
-                            ptr += 6;
-                        }
-                        break;
-                    case 0x89:  //MOV instruction is second: verifies the discovered target address in the
-                                //previous LEA instruction.
-                        delta = *(LONG*)(ptr + 3);
-                        //test operand 2 is in register range
-                        if (ptr[2] < 0x20 && nt && nt == (LONG_PTR)(ptr + 7) + delta) {
-                            if (Driver_OsBuild >= 17682) {
-                                nt -= 0x20;
-                            }
-                            else {
-                                nt += 0x20;
-                            }
-                            return (void*)nt;
-                        }
-                        break;
+        //The following heuristic matches a 64 bit LEA (memory to register) instruction to an associated 64 bit MOV
+        //(register to memory) both instructions need to point to the same relative target address. 
+        //The target address range needs to be above (less than) the current address (reference address is the address of the following instruction) 
+        //of up to -0x200000. If a non matching 64 bit MOV follows the LEA instruction the heuristic continues to search for 
+        //a matching pair up to MAX_SERVICE_TABLE_SEARCH_SIZE bytes.
+
+        for (i = 10, ptr = ptr + 10; i < 0x200; i++, ptr++) {
+            LONG delta;
+            //filter on full 64 bit only opcodes.
+            if (*ptr == 0x48 || *ptr == 0x4c || *ptr == 0x44) { //parse rex prefix
+                //switch(operand 1)
+                switch (ptr[1]) {
+                    unsigned long testDelta;
+                case 0x39:  //CMP instruction is first:  sets a target address
+                            //if another LEA in a instruction is discovered before an associated
+                            //MOV instruction is found.  A new target address is set based on the
+                            //the new LEA instruction if the target is in the target memory 
+                            //range.
+                    delta = *(LONG*)(ptr + 3);
+                    testDelta = delta * -1;
+                    if (ptr[0] == 0x44 && ptr[2] == 0x90 && delta > 0 && delta < 0x400000) {
+                        nt = kernel_base + delta;
+                        i += 6;
+                        ptr += 6;
                     }
+                    //test operand 2 is in register range
+                    else if (ptr[2] < 0x20) {
+                        nt = (LONG_PTR)(ptr + 7) + delta;
+                        i += 6;
+                        ptr += 6;
+                    }
+                    break;
+                case 0x89:  //MOV instruction is second: verifies the discovered target address in the
+                            //previous LEA instruction.
+                    delta = *(LONG*)(ptr + 3);
+                    //test operand 2 is in register range
+                    if (ptr[2] < 0x20 && nt && nt == (LONG_PTR)(ptr + 7) + delta) {
+                        nt -= 0x20;
+                        return (void*)nt;
+                    }
+                    break;
                 }
             }
         }
@@ -189,79 +226,72 @@ _FX void *Syscall_GetMasterServiceTable(void)
         RtlInitUnicodeString(&uni, L"KeAddSystemServiceTable");
         ptr = (UCHAR *)MmGetSystemRoutineAddress(&uni);
 
-        DbgPrint("Trying KiInitSystem = %p, OS = %d, Pattern = LEA MOV\n", ptr, Driver_OsBuild);
-        if (ptr) {
-            nt = 0;
-            //Look for the following instruction pattern
-            //LEA <register>, target address       : [0x48 || 0x4c][0x8d][<0x20][4 byte offset to target]
-            //MOV qword[target address],<register> : [0x48 || 0x4c][0x89][<0x20][4 byte offset to target]
+        DbgPrint("Trying KeAddSystemServiceTable = %p, OS = %d, Pattern = LEA MOV\n", ptr, Driver_OsBuild);
+        
+        nt = 0;
+        //Look for the following instruction pattern
+        //LEA <register>, target address       : [0x48 || 0x4c][0x8d][<0x20][4 byte offset to target]
+        //MOV qword[target address],<register> : [0x48 || 0x4c][0x89][<0x20][4 byte offset to target]
 
-            //The target address discovered in this case is not the system service table but instead points
-            //to the middle of a structure that contains both the master and shadow table addresses:
-            //the shadow table is at <target address> + 0x20
-            //the master table is at <target address> - 0x20
+        //The target address discovered in this case is not the system service table but instead points
+        //to the middle of a structure that contains both the master and shadow table addresses:
+        //the shadow table is at <target address> + 0x20
+        //the master table is at <target address> - 0x20
 
-            //The following heuristic matches a 64 bit LEA (memory to register) instruction to an associated 64 bit MOV
-            //(register to memory) both instructions need to point to the same relative target address. 
-            //The target address range needs to be above (less than) the current address (reference address is the address of the following instruction) 
-            //of up to -0x200000. If a non matching 64 bit MOV follows the LEA instruction the heuristic continues to search for 
-            //a matching pair up to MAX_SERVICE_TABLE_SEARCH_SIZE bytes.
+        //The following heuristic matches a 64 bit LEA (memory to register) instruction to an associated 64 bit MOV
+        //(register to memory) both instructions need to point to the same relative target address. 
+        //The target address range needs to be above (less than) the current address (reference address is the address of the following instruction) 
+        //of up to -0x200000. If a non matching 64 bit MOV follows the LEA instruction the heuristic continues to search for 
+        //a matching pair up to MAX_SERVICE_TABLE_SEARCH_SIZE bytes.
 
-            for (i = 10, ptr = ptr + 10; i < 0xa0; i++, ptr++) {
-                LONG delta;
-                //filter on full 64 bit only opcodes.
-                if (*ptr == 0x48 || *ptr == 0x4c || *ptr == 0x44) { //parse rex prefix
-                    //switch(operand 1)
-                    switch (ptr[1]) {
-                        unsigned long testDelta;
-                    case 0x8d:  //LEA instruction is first:  sets a target address
-                                //if another LEA in a instruction is discovered before an associated
-                                //MOV instruction is found.  A new target address is set based on the
-                                //the new LEA instruction if the target is in the target memory 
-                                //range.
-                        delta = *(LONG *)(ptr + 3);
-                        testDelta = delta * -1;
-                        if (ptr[0] == 0x44 && ptr[2] == 0x90 && delta > 0 && delta < 0x400000) {
-                            nt = kernel_base + delta;
-                            i += 6;
-                            ptr += 6;
-                        }
-                        //test operand 2 is in register range
-                        else if (ptr[2] < 0x20) {
-                            nt = (LONG_PTR)(ptr + 7) + delta;
-                            i += 6;
-                            ptr += 6;
-                        }
-                        break;
-                    case 0x89:  //MOV instruction is second: verifies the discovered target address in the
-                                //previous LEA instruction.
-                        delta = *(LONG *)(ptr + 3);
-                        //test operand 2 is in register range
-                        if (ptr[2] < 0x20 && nt && nt == (LONG_PTR)(ptr + 7) + delta) {
-                            if (Driver_OsBuild >= 17682) {
-                                nt -= 0x20;
-                            }
-                            else {
-                                nt += 0x20;
-                            }
-                            return (void *)nt;
-                        }
-                        break;
+        for (i = 10, ptr = ptr + 10; i < 0xa0; i++, ptr++) {
+            LONG delta;
+            //filter on full 64 bit only opcodes.
+            if (*ptr == 0x48 || *ptr == 0x4c || *ptr == 0x44) { //parse rex prefix
+                //switch(operand 1)
+                switch (ptr[1]) {
+                    unsigned long testDelta;
+                case 0x8d:  //LEA instruction is first:  sets a target address
+                            //if another LEA in a instruction is discovered before an associated
+                            //MOV instruction is found.  A new target address is set based on the
+                            //the new LEA instruction if the target is in the target memory 
+                            //range.
+                    delta = *(LONG *)(ptr + 3);
+                    testDelta = delta * -1;
+                    if (ptr[0] == 0x44 && ptr[2] == 0x90 && delta > 0 && delta < 0x400000) {
+                        nt = kernel_base + delta;
+                        i += 6;
+                        ptr += 6;
                     }
+                    //test operand 2 is in register range
+                    else if (ptr[2] < 0x20) {
+                        nt = (LONG_PTR)(ptr + 7) + delta;
+                        i += 6;
+                        ptr += 6;
+                    }
+                    break;
+                case 0x89:  //MOV instruction is second: verifies the discovered target address in the
+                            //previous LEA instruction.
+                    delta = *(LONG *)(ptr + 3);
+                    //test operand 2 is in register range
+                    if (ptr[2] < 0x20 && nt && nt == (LONG_PTR)(ptr + 7) + delta) {
+                        if (Driver_OsBuild >= 17682) {
+                            nt -= 0x20;
+                        }
+                        else {
+                            nt += 0x20;
+                        }
+                        return (void *)nt;
+                    }
+                    break;
                 }
             }
-            return 0; //target address not found
         }
+
+        return 0; //target address not found
     }
 
-    //
-    // next, analyze KeAddSystemServiceTable to learn where shadow table is
-    //
-
-    RtlInitUnicodeString(&uni, L"KeAddSystemServiceTable");
-    ptr = MmGetSystemRoutineAddress(&uni);
-    if (! ptr)
-        return NULL;
+    //MasterTable lookup for windows 7 and 8
 
     //
     // within the first 32 bytes, we expect the instruction "lea r11,nt"
@@ -352,6 +382,7 @@ _FX void *Syscall_GetMasterServiceTable(void)
     MasterTable = (void *)(nt + ofs32a);
 
     return MasterTable;
+#endif
 }
 
 
@@ -368,7 +399,7 @@ _FX void *Syscall_GetServiceTable(void)
     if (ShadowTable)
         return ShadowTable;
 
-    // Hard Offset Dependency
+    // $Offset$ - Hard Offset Dependency
 
     //
     // the shadow table should be 0x40 bytes before the master table,
@@ -421,12 +452,23 @@ _FX ULONG Syscall_GetIndexFromNtdll(UCHAR *code)
 {
     ULONG index = -1;
 
+#ifdef _M_ARM64
+
+    SVC svc;
+    svc.OP = *(ULONG*)code;
+
+    if (IS_SVC(svc))
+        index = svc.imm16;
+
+#else
+
     if (code[0] == 0x4C && code[1] == 0x8B && code[2] == 0xD1)
         code += 3;                          // skip mov r10, rcx
 
     if (*code == 0xB8)                      // mov eax, syscall number
         index = *(ULONG *)(code + 1);
 
+#endif
 
     if (index == -1)
         Log_Msg1(MSG_1113, L"INDEX");
@@ -454,7 +496,11 @@ _FX BOOLEAN Syscall_GetKernelAddr(
             LONG_PTR EntryValue = (LONG_PTR)ShadowTable->Addrs[index];
 
             *pKernelAddr = (UCHAR *)ShadowTable->Addrs + (EntryValue >> 4);
+#ifdef _M_ARM64
+            *pParamCount = (ULONG)(EntryValue & 0x0F) + 8;
+#else
             *pParamCount = (ULONG)(EntryValue & 0x0F) + 4;
+#endif
             return TRUE;
         }
 

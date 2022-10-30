@@ -1,5 +1,6 @@
 ;------------------------------------------------------------------------
 ; Copyright 2004-2020 Sandboxie Holdings, LLC 
+; Copyright 2021-2022 David Xanatos, xanasoft.com
 ;
 ; This program is free software: you can redistribute it and/or modify
 ;   it under the terms of the GNU General Public License as published by
@@ -78,11 +79,11 @@ _001:	pop     rcx
 		mov rbx,rcx
 		add	rcx, offset SbieLowData - _001
 		mov rdx,rbx  
-		add rdx, offset _RtlFindActivationContextSectionString - _001
+		add rdx, offset _RtlFindActivationContextSectionString64 - _001
 		mov r8,rbx
 		add r8, offset _SystemService - _001
-		mov r9,rbx
-		add r9,  offset _RtlFindActivationContextSectionString64 - _001
+		;mov r9,rbx
+		;add r9,  offset _RtlFindActivationContextSectionString - _001
         		
 		call	EntrypointC
 		
@@ -143,7 +144,7 @@ myService Proc
 		push rbp; target rsp
 		push rbx; target rip
 
-		mov r11,[rax + 0e0h] ; real NtDeviceIOControlFile
+		mov r11,[rax + 0e0h] ; SbieLow.RealNtDeviceIoControlFile
         add r11b,0fh
 
         mov rbx, r11 ; pass new rip in rbx
@@ -324,17 +325,17 @@ endif 		; 32-bit or 64-bit
 
 		
 InjectData		struct		; keep in sync with inject.c
-			dq	?
-LdrLoadDll		dq	?
-LdrGetProcAddr		dq	?
-NtRaiseHardError	dq	?
-RtlFindActCtx		dq	?
-RtlFindActCtx_Protect	dd	?
-RtlFindActCtx_Bytes 	db	12 dup (?)
-KernelDll_Unicode	dq	2 dup (?)
-SbieDll_Unicode		dq	2 dup (?)
-ModuleHandle		dq	?
-SbieDllOrdinal1		dq	?
+						dq	?				; 0x00
+LdrLoadDll				dq	?				; 0x08
+LdrGetProcAddr			dq	?				; 0x10
+NtRaiseHardError		dq	?				; 0x18
+RtlFindActCtx			dq	?				; 0x20
+RtlFindActCtx_Protect	dd	?				; 0x28
+RtlFindActCtx_Bytes 	db	20 dup (?)		; 0x2C
+KernelDll_Unicode		dq	2 dup (?)		; 0x40
+SbieDll_Unicode			dq	2 dup (?)		; 0x50
+ModuleHandle			dq	?				; 0x60
+SbieDllOrdinal1			dq	?				; 0x68
 InjectData		ends
 
 
@@ -343,95 +344,7 @@ InjectData		ends
 ;----------------------------------------------------------------------------
 
 _RtlFindActivationContextSectionString:
-ifdef _WIN64	; 64-bit
-
-	;
-	; we need the 32-bit version of RtlFindActivationContextSectionString
-	; on both 32-bit and 64-bit versions of SbieLow, because of wow64
-	;
-	; it will not compile correctly as assembly on 64-bit, so we simply
-	; dump the machine code bytes here
-	;
-	; the code bytes below are copied by InitInjectWow64 (see inject.c),
-	; make sure to keep the length in that function in sync with the code
-	;
-		
-	db	0BAh, 0, 0, 0, 0				; mov	edx, 0
-	db	056h							; push 	esi
-	db	08Bh, 0F2h						; mov	esi, edx
-	;
-	db	08Bh, 046h, 020h				; mov	eax,dword ptr [esi+20h]
-	db	08Ah, 056h, 02Ch        		; mov	dl,byte ptr [esi+2Ch]
-	db	088h, 010h						; mov	byte ptr [eax],dl
-	db	08Bh, 056h, 02Dh				; mov	edx,dword ptr [esi+2Dh]
-	db	089h, 050h, 001h				; mov	dword ptr [eax+1],edx
-	;;;;;new code for retry loop
-	db  0b9h, 010h, 0, 0, 0				; mov ecx, 10h
-	;;;;;; 
-	;for(i = 0; i < 0x10; i++) {
-	    db  051h						; push ecx
-	    db	08Dh, 046h, 058h			; lea	eax,[esi+58h]
-	    db	050h						; push	eax
-	    db	08Dh, 046h, 038h			; lea	eax,[esi+38h]
-	    db	050h						; push	eax
-	    db	06Ah, 000h					; push	0
-	    db	06Ah, 000h					; push	0
-	    db	0FFh, 056h, 008h			; call	dword ptr [esi+8]
-	    ;;;;;
-	    db  059h						; pop ecx
-	    ;;;;;
-	    db	085h, 0C0h					; test	eax,eax
-	    db  074h, 004h					; jz good
-	;}
-	db  0e2h, 0e9h						; loop retry
-	db  0ebh, 034h						; jmp error
-	;
-
-	db	08Dh, 046h, 058h				; lea	eax,[esi+58h]
-	db	050h							; push	eax
-	db	08Dh, 046h, 048h				; lea	eax,[esi+48h]
-	db	050h							; push	eax
-	db	06Ah, 000h						; push	0
-	db	06Ah, 000h						; push	0
-	db	0FFh, 056h, 008h				; call	dword ptr [esi+8]
-	;
-	db	085h, 0C0h						; test	eax,eax
-	db	075h, 021h						; jnz	error
-	;
-	db	08Dh, 046h, 060h				; lea	eax,[esi+60h]
-	db	050h							; push	eax
-	db	06Ah, 001h						; push	1
-	db	06Ah, 000h						; push	0
-	db	0FFh, 076h, 058h				; push	dword ptr [esi+58h]
-	db	0FFh, 056h, 010h				; call	dword ptr [esi+10h]
-	;
-	db	085h, 0C0h						; test	eax,eax
-	db	075h, 00Fh						; jnz	error
-	;
-	db	08Bh, 0C6h						; mov	eax, esi
-	db	087h, 044h, 024h, 008h			; xchg	eax, dword ptr [esp+8]
-	db	089h, 046h, 008h				; mov	dword ptr [esi+8],eax
-	db	08Bh, 0C6h						; mov	eax, esi
-	db	05Eh							; pop	esi
-	db	0FFh, 060h, 060h				; jmp	dword ptr [eax+60h]
-	;
-	db	050h							; push	eax
-	db	08Dh, 056h, 048h				; lea	edx,[esi+48h]
-	db	089h, 056h, 008h				; mov	dword ptr [esi+8],edx
-	db	08dh, 056h, 010h				; lea	edx,[esi+10h]
-	db	052h							; push	edx
-	db	06Ah, 001h						; push	1
-	db	08Dh, 056h, 008h				; lea	edx,[esi+8]
-	db	052h							; push	edx
-	db	06Ah, 001h						; push	1
-	db	06Ah, 001h						; push	1
-	db	068h, 042h, 001h, 000h, 0D0h	; push 0D0000142h
-	db	0FFh, 056h, 018h				; call	dword ptr [esi+18h]
-	db	058h							; pop	eax
-	db	05Eh							; pop	esi
-	db	0C2h, 14h, 00h					; ret	14h
-
-else 		; 32-bit
+ifndef _WIN64 	; 32-bit
 
 		mov	edx, 0		; edx -> inject data area
 		
@@ -576,6 +489,7 @@ dq 0h ;inject data area address
 		mov	qword ptr [rax], rdx
 		mov	edx, dword ptr [rsi].InjectData.RtlFindActCtx_Bytes + 8
 		mov	dword ptr [rax+8], edx
+
 		;
 		; call LdrLoadDll for kernel32
 		;
@@ -598,11 +512,13 @@ LdrLoadRetry:
             test rbx, rbx
 			jnz LdrLoadRetry ;loop LdrLoadRetry
 			jmp	RtlFindActivationContextSectionStringError
+LdrLoadGood:
+		mov rbx, qword ptr [rsi].InjectData.RtlFindActCtx_Bytes
+
 		;
 		; call LdrLoadDll for sbiedll
 		;
-LdrLoadGood:
-		mov rbx, qword ptr [rsi].InjectData.RtlFindActCtx_Bytes
+
 		xor	rcx, rcx
 		xor	rdx, rdx
 		lea	r8, [rsi].InjectData.SbieDll_Unicode
@@ -664,10 +580,10 @@ RtlFindActivationContextSectionStringError:
 		STATUS_DLL_INIT_FAILED  = 0C0000142h
 		FORCE_ERROR_MESSAGE_BOX = 010000000h
 		
-    		mov	qword ptr [rsp+7*8], rax	; save ntstatus
+    	mov	qword ptr [rsp+7*8], rax	; save ntstatus
     		
-    		mov	ecx, \		; ntstatus_message_code
-    			(STATUS_DLL_INIT_FAILED or FORCE_ERROR_MESSAGE_BOX)
+    	mov	ecx, \		; ntstatus_message_code
+    		(STATUS_DLL_INIT_FAILED or FORCE_ERROR_MESSAGE_BOX)
 
 		xor	rdx, rdx	; number_of_parameters_in_list
 		inc	rdx
@@ -688,7 +604,7 @@ RtlFindActivationContextSectionStringError:
 		
 		call	qword ptr [rsi].InjectData.NtRaiseHardError
 		
-		mov	rcx, qword ptr [rsp+7*8]	; restore ntstatus
+		mov	rax, qword ptr [rsp+7*8]	; restore ntstatus
 		add	rsp, 8*8
 		pop	rsi
 		ret			; return to caller with error

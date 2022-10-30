@@ -29,7 +29,9 @@
 #include "ipc.h"
 #include "api.h"
 #include "dll.h"
+#ifndef _M_ARM64
 #include "hook.h"
+#endif
 #include "session.h"
 #include "gui.h"
 #include "token.h"

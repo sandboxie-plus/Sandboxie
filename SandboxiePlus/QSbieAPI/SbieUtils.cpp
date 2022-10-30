@@ -12,6 +12,7 @@ typedef long NTSTATUS;
 #include "SbieDefs.h"
 
 #include "..\..\Sandboxie\common\win32_ntddk.h"
+#include "..\..\Sandboxie\common\defines.h"
 
 #include "SbieAPI.h"
 
@@ -159,8 +160,8 @@ SB_RESULT(void*) CSbieUtils::ElevateOps(const QStringList& Ops)
 		return result;
 	}
 
-	wstring path = QCoreApplication::applicationFilePath().toStdWString();
-	wstring params = L"-assist \"" + Ops.join("\" \"").toStdWString() + L"\"";
+	std::wstring path = QCoreApplication::applicationFilePath().toStdWString();
+	std::wstring params = L"-assist \"" + Ops.join("\" \"").toStdWString() + L"\"";
 
 	SHELLEXECUTEINFO shex;
 	memset(&shex, 0, sizeof(SHELLEXECUTEINFO));
@@ -250,7 +251,7 @@ QString CSbieUtils::GetContextMenuStartCmd()
 	HKEY hkey;
 	LONG rc = RegOpenKeyEx(HKEY_CURRENT_USER, key, 0, KEY_READ, &hkey);
 	if (rc != 0)
-		return false;
+		return QString();
 
 	ULONG type;
 	WCHAR path[512];
@@ -265,12 +266,12 @@ QString CSbieUtils::GetContextMenuStartCmd()
 
 void CSbieUtils::AddContextMenu(const QString& StartPath, const QString& RunStr, /*const QString& ExploreStr,*/ const QString& IconPath)
 {
-	wstring start_path = L"\"" + StartPath.toStdWString() + L"\"";
-	wstring icon_path = L"\"" + (IconPath.isEmpty() ? StartPath : IconPath).toStdWString() + L"\"";
+	std::wstring start_path = L"\"" + StartPath.toStdWString() + L"\"";
+	std::wstring icon_path = L"\"" + (IconPath.isEmpty() ? StartPath : IconPath).toStdWString() + L"\"";
 
 	CreateShellEntry(L"*", L"sandbox", RunStr.toStdWString(), icon_path, start_path + L" /box:__ask__ \"%1\" %*");
 
-	wstring explorer_path(512, L'\0');
+	std::wstring explorer_path(512, L'\0');
 
 	HKEY hkeyWinlogon;
 	LONG rc = RegOpenKeyEx(HKEY_LOCAL_MACHINE, L"software\\microsoft\\windows nt\\currentversion\\winlogon", 0, KEY_READ, &hkeyWinlogon);
@@ -296,7 +297,7 @@ void CSbieUtils::AddContextMenu(const QString& StartPath, const QString& RunStr,
 	CreateShellEntry(L"Folder", L"sandbox", RunStr.toStdWString(), icon_path, start_path + L" /box:__ask__ " + explorer_path + L" \"%1\""); // ExploreStr
 }
 
-void CSbieUtils::CreateShellEntry(const wstring& classname, const wstring& key, const wstring& cmdtext, const wstring& iconpath, const wstring& startcmd)
+void CSbieUtils::CreateShellEntry(const std::wstring& classname, const std::wstring& key, const std::wstring& cmdtext, const std::wstring& iconpath, const std::wstring& startcmd)
 {
 	HKEY hkey;
 	LONG rc = RegCreateKeyEx(HKEY_CURRENT_USER, (L"software\\classes\\" + classname + L"\\shell\\" + key).c_str(), 0, NULL, 0, KEY_WRITE, NULL, &hkey, NULL);
@@ -340,8 +341,8 @@ bool CSbieUtils::HasContextMenu2()
 
 void CSbieUtils::AddContextMenu2(const QString& StartPath, const QString& RunStr, const QString& IconPath)
 {
-	wstring start_path = L"\"" + StartPath.toStdWString() + L"\"";
-	wstring icon_path = L"\"" + (IconPath.isEmpty() ? StartPath : IconPath).toStdWString() + L"\",-104";
+	std::wstring start_path = L"\"" + StartPath.toStdWString() + L"\"";
+	std::wstring icon_path = L"\"" + (IconPath.isEmpty() ? StartPath : IconPath).toStdWString() + L"\",-104";
 
 	CreateShellEntry(L"*", L"unbox", RunStr.toStdWString(), icon_path, start_path + L" /disable_force \"%1\" %*");
 }

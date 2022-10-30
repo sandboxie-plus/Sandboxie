@@ -204,7 +204,7 @@ ALIGNED LPTOP_LEVEL_EXCEPTION_FILTER Dump_SetUnhandledExceptionFilter(
 
 _FX int Dump_Init(void)
 {
-    HMODULE module = NULL; // fix-me
+    HMODULE module = Dll_Kernel32;
 
     if (Dump_DbgHelpMod != NULL)
         return 2;

@@ -3302,7 +3302,7 @@ Autoriser l'accès direct aux notes de %2
 .
 
 4342;txt;01
-Activer %2 correctif(s) pour Windows 11 KB5014019
+Activer %2 correctif(s) pour Windows
 .
 
 4356;txt;02

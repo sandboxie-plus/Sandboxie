@@ -166,6 +166,7 @@ _FX WCHAR *Scm_GetServiceConfigString(SERVICE_QUERY_RPL *rpl, UCHAR type)
 {
     ULONG_PTR ptr;
 
+#ifndef _WIN64
     if (Dll_IsWow64) {
 
         //
@@ -181,7 +182,9 @@ _FX WCHAR *Scm_GetServiceConfigString(SERVICE_QUERY_RPL *rpl, UCHAR type)
         else if (type == 'P')
             ptr = (ULONG_PTR)cfg->lpBinaryPathName;
 
-    } else {
+    } else 
+#endif
+    {
 
         //
         // if not Wow64 then caller bitness matches bitness of SbieSvc
@@ -253,6 +256,7 @@ _FX void *Scm_QueryBoxedServiceByName(
             // lpLoadOrderGroup and lpDependencies
                            + sizeof(WCHAR) * 2;
 
+#ifndef _WIN64
         if (Dll_IsWow64) {
 
             //
@@ -266,6 +270,7 @@ _FX void *Scm_QueryBoxedServiceByName(
 
             service_config_len += 5 * sizeof(ULONG);
         }
+#endif
 
         //
         // DisplayName
@@ -338,19 +343,23 @@ _FX void *Scm_QueryBoxedServiceByName(
         service_config_len = sizeof(SERVICE_DESCRIPTION)
                            + (wcslen(ServiceNm) + 1) * sizeof(WCHAR);
 
+#ifndef _WIN64
         if (Dll_IsWow64) {
             // set up extra space for lpDescription
             service_config_len += sizeof(ULONG);
         }
+#endif
 
     } else if (with_service_config == SERVICE_CONFIG_FAILURE_ACTIONS) {
 
         service_config_len = sizeof(SERVICE_FAILURE_ACTIONS);
 
+#ifndef _WIN64
         if (Dll_IsWow64)  {
             // set up extra space for lpRebootMsg, lpCommand and lpsaActions
             service_config_len += 3 * sizeof(ULONG);
         }
+#endif
 
     } else if (with_service_config == 3 || with_service_config == 4) {
 
@@ -622,6 +631,7 @@ after_service_status:
         // for the pointer fields
         //
 
+#ifndef _WIN64
         if (Dll_IsWow64) {
 
             p_lpBinaryPathName = (ULONG_PTR *)(base +
@@ -637,7 +647,9 @@ after_service_status:
 
             next = (WCHAR *)(base + sizeof(QUERY_SERVICE_CONFIG_64));
 
-        } else {
+        } else 
+#endif
+        {
 
             p_lpBinaryPathName = (ULONG_PTR *)(base +
                 FIELD_OFFSET(QUERY_SERVICE_CONFIG, lpBinaryPathName));
@@ -713,8 +725,10 @@ after_service_status:
 
         ULONG_PTR base = (ULONG_PTR)&rpl->service_config;
         ULONG offset = sizeof(ULONG_PTR);
+#ifndef _WIN64
         if (Dll_IsWow64)
             offset += sizeof(ULONG);
+#endif
         *(ULONG_PTR *)base = offset;
         wcscpy((WCHAR *)(base + offset), ServiceNm);
     }
@@ -870,6 +884,7 @@ _FX BOOL Scm_QueryServiceConfigW(
         return FALSE;
     }
 
+#ifndef _WIN64
     if (Dll_IsWow64) {
 
         //
@@ -928,7 +943,9 @@ _FX BOOL Scm_QueryServiceConfigW(
             *optr = L'\0';
         }
 
-    } else {
+    } else 
+#endif
+    {
 
         //
         // copy 32-bit QUERY_SERVICE_CONFIGW structure to caller

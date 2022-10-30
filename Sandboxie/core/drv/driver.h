@@ -93,8 +93,19 @@ typedef struct _KEY_MOUNT           KEY_MOUNT;
 #ifdef OLD_DDK
 extern P_NtSetInformationToken          ZwSetInformationToken;
 #endif // OLD_DDK
+
+#ifdef _M_ARM64
+NTSTATUS Sbie_CallZwServiceFunction_asm(UINT_PTR arg1, UINT_PTR arg2, UINT_PTR arg3, UINT_PTR arg4, UINT_PTR arg5, UINT_PTR arg6, UINT_PTR arg7, UINT_PTR arg8, 
+    UINT_PTR arg9, UINT_PTR arg10, UINT_PTR arg11, UINT_PTR arg12, UINT_PTR arg13, UINT_PTR arg14, UINT_PTR arg15, UINT_PTR arg16, UINT_PTR arg17, UINT_PTR arg18, UINT_PTR arg19,
+    UINT_PTR svc_num);
+
+extern void*                            Driver_KiServiceInternal;
+extern USHORT                           ZwCreateToken_num;
+extern USHORT                           ZwCreateTokenEx_num;
+#else
 extern P_NtCreateToken                  ZwCreateToken;
 extern P_NtCreateTokenEx                ZwCreateTokenEx;
+#endif
 
 //---------------------------------------------------------------------------
 // Functions

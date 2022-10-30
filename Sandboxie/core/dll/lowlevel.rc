@@ -53,7 +53,9 @@
 
 #ifdef BUILD_UTILITY_PASS2
 
-#if MY_WIN64_FLAG
+#if MY_ARM64_FLAG
+LOWLEVEL  RCDATA     "../low/obj/ARM64/LowLevel.dll"
+#elif  MY_WIN64_FLAG
 LOWLEVEL  RCDATA     "../low/obj/amd64/LowLevel.dll"
 #else
 LOWLEVEL  RCDATA     "../low/obj/i386/LowLevel.dll"

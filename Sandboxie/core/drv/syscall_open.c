@@ -89,7 +89,11 @@ _FX HANDLE *Syscall_ReplaceTargetHandle(
     RandomIndex = (ULONG)
             (((ULONG_PTR)PsGetCurrentThread() * time.LowPart) % 64);
 
-#ifdef _WIN64
+    // $Offset$ - Hard Offset Dependency
+#ifdef _M_ARM64
+    Teb = (*((ULONG_PTR*)(__getReg(18) + 0x30)));
+    TlsSlots = (ULONG_PTR *)(Teb + 0x1480);
+#elif _WIN64
     Teb = (ULONG_PTR)__readgsqword(0x30);
     TlsSlots = (ULONG_PTR *)(Teb + 0x1480);
 #else ! _WIN64
@@ -275,6 +279,14 @@ _FX NTSTATUS Syscall_OpenHandle(
             (strcmp(syscall_entry->name, "AlpcConnectPort") == 0))
         {
             puName = (UNICODE_STRING*)user_args[1];
+        }
+        else if (strcmp(syscall_entry->name, "AlpcConnectPortEx") == 0)
+        {
+            POBJECT_ATTRIBUTES pObj = (POBJECT_ATTRIBUTES)user_args[1];
+            if (pObj && pObj->ObjectName)
+            {
+                puName = pObj->ObjectName;
+            }
         }
         else if ((strcmp(syscall_entry->name, "CreateFile") == 0) ||
             (strcmp(syscall_entry->name, "OpenFile") == 0))

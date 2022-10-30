@@ -42,9 +42,6 @@
 
 int Debug_Init(void);
 
-void DbgPrint(const char* format, ...);
-void DbgTrace(const char* format, ...);
-
 #endif  WITH_DEBUG
 
 

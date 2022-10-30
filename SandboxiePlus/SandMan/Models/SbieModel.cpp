@@ -6,6 +6,7 @@
 CSbieModel::CSbieModel(QObject *parent)
 : CTreeItemModel(parent)
 {
+	m_bTree = true;
 	m_LargeIcons = false;
 
 	//m_BoxEmpty = QIcon(":/BoxEmpty");
@@ -214,14 +215,24 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 		QMap<quint32, CBoxedProcessPtr> ProcessList = pBox->GetProcessList();
 
 		bool inUse = Sync(pBox, pNode->Path, ProcessList, New, Old, Added);
+		bool bOpen = pBoxEx->IsOpen();
 		bool Busy = pBoxEx->IsBusy();
 		int boxType = pBoxEx->GetType();
 		int boxColor = pBoxEx->GetColor();
 		
 		QIcon Icon;
-		if (pNode->inUse != inUse || (pNode->busyState || Busy) || pNode->boxType != boxType || pNode->boxColor != boxColor)
+		QString Action = pBox->GetText("DblClickAction");
+		if (!Action.isEmpty() && Action.left(1) != "!")
+		{
+			if (pNode->Action != Action || (pNode->busyState || Busy)) {
+				Icon = m_IconProvider.icon(QFileInfo(pBoxEx->GetCommandFile(Action)));
+				pNode->Action = Action;
+			}
+		}
+		else if (pNode->inUse != inUse || pNode->bOpen != bOpen || (pNode->busyState || Busy) || pNode->boxType != boxType || pNode->boxColor != boxColor)
 		{
 			pNode->inUse = inUse;
+			pNode->bOpen = bOpen;
 			pNode->boxType = boxType;
 			pNode->boxColor = boxColor;
 			//pNode->Icon = pNode->inUse ? m_BoxInUse : m_BoxEmpty;
@@ -229,6 +240,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 				Icon = theGUI->GetColorIcon(boxColor, inUse);
 			else
 				Icon = theGUI->GetBoxIcon(boxType, inUse);
+			pNode->Action.clear();
 		}
 
 		if (!Icon.isNull()) {

@@ -15,8 +15,6 @@
 #include <memory>
 
 
-using namespace std;
-
 // Qt includes
 #include <QObject>
 #include <QList>
@@ -108,6 +106,11 @@ using namespace std;
 #include <QScreen>
 #include <QRadioButton>
 #include <QGridLayout>
+#include <QActionGroup>
+#include <QStandardPaths>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QDesktopWidget>
+#endif
 
 // other includes
 

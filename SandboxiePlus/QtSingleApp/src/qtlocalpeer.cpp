@@ -43,6 +43,7 @@
 #include <QCoreApplication>
 #include <QDataStream>
 #include <QTime>
+#include <QRegularExpression>
 
 #if defined(Q_OS_WIN)
 #include <QLibrary>
@@ -80,7 +81,7 @@ QtLocalPeer::QtLocalPeer(const QString &appId, QObject* parent)
     if (prefix.isEmpty()) {
         prefix = id.section(QLatin1Char('/'), -1);
 		
-		prefix.remove(QRegExp("[^a-zA-Z]"));
+		prefix.remove(QRegularExpression("[^a-zA-Z]"));
 		prefix.truncate(6);
     }
 	else

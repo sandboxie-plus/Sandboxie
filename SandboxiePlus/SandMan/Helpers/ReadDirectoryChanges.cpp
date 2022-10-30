@@ -90,16 +90,16 @@ void CReadDirectoryChanges::DetachDirectory( LPCTSTR szDirectory )
 	if (!m_hThread)
 		Init();
 
-	pair<ReadDirectoryChangesPrivate::CReadChangesServer*, wstring>* pRequest = new pair<ReadDirectoryChangesPrivate::CReadChangesServer*, wstring>(m_pServer, szDirectory);
+	std::pair<ReadDirectoryChangesPrivate::CReadChangesServer*, std::wstring>* pRequest = new std::pair<ReadDirectoryChangesPrivate::CReadChangesServer*, std::wstring>(m_pServer, szDirectory);
 	QueueUserAPC(CReadChangesServer::DetachDirectoryProc, m_hThread, (ULONG_PTR)pRequest);
 }
 
-//void CReadDirectoryChanges::Push(DWORD dwAction, wstring& wstrFilename)
+//void CReadDirectoryChanges::Push(DWORD dwAction, std::wstring& wstrFilename)
 //{
 //	m_Notifications.push( TDirectoryChangeNotification(dwAction, wstrFilename) );
 //}
 //
-//bool  CReadDirectoryChanges::Pop(DWORD& dwAction, wstring& wstrFilename)
+//bool  CReadDirectoryChanges::Pop(DWORD& dwAction, std::wstring& wstrFilename)
 //{
 //	TDirectoryChangeNotification pair;
 //	if (!m_Notifications.pop(pair))

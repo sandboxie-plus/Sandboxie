@@ -2,7 +2,7 @@
 
 struct SNtObject
 {
-	SNtObject(const wstring& Name, HANDLE parent = NULL)
+	SNtObject(const std::wstring& Name, HANDLE parent = NULL)
 	{
 		name = Name;
 		RtlInitUnicodeString(&uni, name.c_str());
@@ -11,7 +11,7 @@ struct SNtObject
 
 	POBJECT_ATTRIBUTES Get() { return &attr; }
 
-	wstring name;
+	std::wstring name;
 	UNICODE_STRING uni;
 	OBJECT_ATTRIBUTES attr;
 

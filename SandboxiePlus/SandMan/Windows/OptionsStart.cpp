@@ -46,15 +46,35 @@ void COptionsWindow::OnRestrictStart()
 
 void COptionsWindow::OnAddStartProg()
 {
-	AddProgToGroup(ui.treeStart, "<StartRunAccess>");
+	QString Value = SelectProgram();
+	if (Value.isEmpty())
+		return;
+
+	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	pItem->setCheckState(0, Qt::Checked);
+	SetProgramItem(Value, pItem, 0);
+	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+	ui.treeStart->addTopLevelItem(pItem);
+
+	AddProgramToGroup(Value, "<StartRunAccess>");
+
 	//m_StartChanged = true;
 	//OnOptChanged();
 }
 
 void COptionsWindow::OnDelStartProg()
 {
-	DelProgFromGroup(ui.treeStart, "<StartRunAccess>");
-	DelProgFromGroup(ui.treeStart, "<StartRunAccessDisabled>");
+	QTreeWidgetItem* pItem = ui.treeStart->currentItem();
+	if (!pItem)
+		return;
+
+	QString Value = pItem->data(0, Qt::UserRole).toString();
+
+	delete pItem;
+
+	DelProgramFromGroup(Value, "<StartRunAccess>");
+	DelProgramFromGroup(Value, "<StartRunAccessDisabled>");
+
 	//m_StartChanged = true;
 	//OnOptChanged();
 }

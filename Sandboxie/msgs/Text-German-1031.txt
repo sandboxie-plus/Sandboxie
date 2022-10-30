@@ -162,6 +162,10 @@ SBIE1301 Der Prozess '%2' wurde außerhalb der Sandbox gestartet
 # SBIE1302 Sandbox '%2' wurde nicht definiert oder aktiviert
 # .
 
+1305;pop;inf;02
+SBIE1305 Blockiert, dass sandgeboxtes Abbild geladen wurde - %2
+.
+
 1306;pop;inf;01
 SBIE1306 Sandboxie-Treiber (SbieDrv) kann jetzt nicht entladen werden
 .
@@ -448,6 +452,14 @@ SBIE2224 Sandgeboxtes Programm ist abgestürzt: %2
 SBIE2225 Es wurde versucht auf eine EFS-Datei zuzugreifen: %2
 .
 
+2226;pop;wrn;01
+SBIE2226 Prozess konnte wegen fehlenden erhöhten Rechten nicht starten; zur Behebung fügen Sie "ApplyElevateCreateProcessFix=y" zu der ini-Sektion für diese Box hinzu %2
+.
+
+2227;pop;wrn;01
+SBIE2227 '%2' befindet sich auf einem Datenträger, welcher nicht das 8.3 Namensschema unterstützt. Dies kann zu Problemen mit älteren Anwendungen und Installationsprogrammen führen.
+.
+
 #----------------------------------------------------------------------------
 # SbieDrv
 #
@@ -576,6 +588,10 @@ SBIE2336 Fehler im GUI-Server:  %2
 
 2337;pop;err;01
 SBIE2337 Konnte Programm nicht starten:  %2
+.
+
+2338;pop;err;01
+SBIE2338 Nicht unterstützte Architektur in Prozess %2 vorgefunden
 .
 
 #----------------------------------------------------------------------------
@@ -2792,7 +2808,7 @@ Erlaube direkten Zugriff zu %2 Notizen
 .
 
 4342;txt;01
-Aktiviere %2 Fix für Windows 11 KB5014019
+Aktiviere %2 Fix für Windows
 .
 
 

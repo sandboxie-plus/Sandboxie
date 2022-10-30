@@ -41,7 +41,7 @@ static void Thread_Notify(HANDLE ProcessId, HANDLE ThreadId, BOOLEAN Create);
 static PROCESS *Thread_FindAndInitProcess(
     PROCESS *proc1, void *ProcessObject2, KIRQL *out_irql);
 
-static THREAD *Thread_GetOrCreate(PROCESS *proc, HANDLE tid, BOOLEAN create);
+THREAD *Thread_GetOrCreate(PROCESS *proc, HANDLE tid, BOOLEAN create);
 
 static NTSTATUS Thread_MyImpersonateClient(
     PETHREAD ThreadObject, void *TokenObject,
@@ -585,7 +585,7 @@ _FX NTSTATUS Thread_MyImpersonateClient(
     NTSTATUS status = PsImpersonateClient(ThreadObject, TokenObject,
                         CopyOnOpen, EffectiveOnly, SecurityIdentification);
 
-    // Hard Offset Dependency
+    // $Offset$ - Hard Offset Dependency
 
     // ***** ImpersonationInfo_offset is the offset of ClientSecurity field in nt!ETHREAD structure *****
 
@@ -593,7 +593,15 @@ _FX NTSTATUS Thread_MyImpersonateClient(
 
         ULONG ImpersonationInfo_offset = 0;
 
-#ifdef _WIN64
+#ifdef _M_ARM64
+
+        if (Driver_OsBuild <= 19041) // win 10
+            ImpersonationInfo_offset = 0x4C8;
+
+        else // win 11
+            ImpersonationInfo_offset = 0x518;
+
+#elif _WIN64
 
         // offset of ClientSecurity field in nt!ETHREAD structure
 
@@ -731,7 +739,7 @@ _FX NTSTATUS Thread_MyImpersonateClient(
                     if ((*ImpersonationInfo & ~7) == (ULONG_PTR)TokenObject)
                     {
                         WCHAR str[64];
-                        RtlStringCbPrintfW(str, 64, L"BAM! found: %d", i);
+                        RtlStringCbPrintfW(str, 64, L"BAM! found: %d for %d", i, Driver_OsBuild);
                         Session_MonitorPut(MONITOR_OTHER, str, PsGetCurrentProcessId());
                     }
                 }

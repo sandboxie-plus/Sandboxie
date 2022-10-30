@@ -24,22 +24,6 @@ public:
 
 	static void		TriggerPathReload();
 
-	enum ETabs
-	{
-		eGeneral = 0,
-		eGroups,
-		eForce,
-		eStop,
-		eStart,
-		eInternet,
-		eAccess,
-		eRecover,
-		//eOther,
-		eAdvanced,
-		eTemplates,
-		eEditIni
-	};
-
 	enum EntryTypes {
 		eUndefined = 0,
 		eProcess,
@@ -49,7 +33,7 @@ public:
 	};
 
 signals:
-	void OptionsChanged();
+	//void OptionsChanged();
 	void Closed();
 
 public slots:
@@ -63,6 +47,7 @@ private slots:
 	void OnOptChanged();
 
 	void OnPickColor();
+	void OnColorSlider(int value);
 
 	void OnBoxTypChanged();
 	void UpdateBoxType();
@@ -81,20 +66,30 @@ private slots:
 	void OnGroupsChanged(QTreeWidgetItem* pItem, int Index) { m_GroupsChanged = true;  OnOptChanged(); }
 
 	void OnForceProg();
+	void OnForceBrowse();
 	void OnForceDir();
 	void OnDelForce();
 	void OnShowForceTmpl()			{ LoadForcedTmpl(true); }
 	void OnForcedChanged(QTreeWidgetItem* pItem, int Index);
 
+	void OnBreakoutProg();
+	void OnBreakoutBrowse();
+	void OnBreakoutDir();
+	void OnDelBreakout();
+	void OnShowBreakoutTmpl()		{ LoadBreakoutTmpl(true); }
+
 	void OnAddLingering();
-	void OnAddLeader();
 	void OnDelStopProg();
-	void OnShowStopTmpl()			{ LoadStopTmpl(true); }
+	void OnShowStopTmpl()			{ LoadStopTmpl(true); }	
 	void OnStopChanged(QTreeWidgetItem* pItem, int Index) { m_StopChanged = true;  OnOptChanged(); }
+	void OnAddLeader();
+	void OnDelLeader();
+	void OnShowLeaderTmpl()			{ LoadLeaderTmpl(true); }	
 
 	void OnRestrictStart();
 	void OnAddStartProg();
 	void OnDelStartProg();
+	//void OnShowStartTmpl() 			{ LoadStartTmpl(true); }
 	void OnStartChanged(QTreeWidgetItem* pItem, int Index);
 
 	// net
@@ -110,13 +105,12 @@ private slots:
 	void OnNetFwChanged(QTreeWidgetItem* pItem, int Column);
 	void OnAddNetFwRule();
 	void OnDelNetFwRule();
-
 	void OnShowNetFwTmpl()			{ LoadNetFwRulesTmpl(true); }
 
 	void OnTestNetFwRule();
 	void OnClearNetFwTest();
-	//net
-	// 
+	//
+	
 	// access
 	//void OnAccessItemClicked(QTreeWidgetItem* pItem, int Column);
 	void OnAccessItemDoubleClicked(QTreeWidgetItem* pItem, int Column);
@@ -126,33 +120,61 @@ private slots:
 	void OnAddFile()				{ AddAccessEntry(eFile, eOpen, "", ""); m_AccessChanged = true; OnOptChanged(); }
 	void OnBrowseFile();
 	void OnBrowseFolder();
+	void OnDelFile()				{ DeleteAccessEntry(ui.treeFiles->currentItem()); m_AccessChanged = true; OnOptChanged(); }
+	void OnShowFilesTmpl()			{ LoadAccessListTmpl(eFile, ui.chkShowFilesTmpl->isChecked(), true); }
 	void OnAddKey()					{ AddAccessEntry(eKey, eOpen, "", ""); m_AccessChanged = true; OnOptChanged(); }
+	void OnDelKey()					{ DeleteAccessEntry(ui.treeKeys->currentItem()); m_AccessChanged = true; OnOptChanged(); }
+	void OnShowKeysTmpl()			{ LoadAccessListTmpl(eKey, ui.chkShowKeysTmpl->isChecked(), true); }
 	void OnAddIPC()					{ AddAccessEntry(eIPC, eOpen, "", ""); m_AccessChanged = true; OnOptChanged(); }
+	void OnDelIPC()					{ DeleteAccessEntry(ui.treeIPC->currentItem()); m_AccessChanged = true; OnOptChanged(); }
+	void OnShowIPCTmpl()			{ LoadAccessListTmpl(eIPC, ui.chkShowIPCTmpl->isChecked(), true); }
 	void OnAddWnd()					{ AddAccessEntry(eWnd, eOpen, "", ""); m_AccessChanged = true; OnOptChanged(); }
+	void OnDelWnd()					{ DeleteAccessEntry(ui.treeWnd->currentItem()); m_AccessChanged = true; OnOptChanged(); }
+	void OnShowWndTmpl()			{ LoadAccessListTmpl(eWnd, ui.chkShowWndTmpl->isChecked(), true); }
 	void OnAddCOM()					{ AddAccessEntry(eCOM, eOpen, "", ""); m_AccessChanged = true; OnOptChanged(); }
-	void OnDelAccess();
-	void OnShowAccessTmpl()			{ LoadAccessListTmpl(true); }
+	void OnDelCOM()					{ DeleteAccessEntry(ui.treeCOM->currentItem()); m_AccessChanged = true; OnOptChanged(); }
+	void OnShowCOMTmpl()			{ LoadAccessListTmpl(eCOM, ui.chkShowCOMTmpl->isChecked(), true); }
+	//void OnDelAccess()			{ DeleteAccessEntry(ui.treeAccess->currentItem()); m_AccessChanged = true; OnOptChanged(); }
+	//void OnShowAccessTmpl()			{ LoadAccessListTmpl(true); }
 	//
 
 	void OnAddRecFolder();
 	void OnAddRecIgnore();
 	void OnAddRecIgnoreExt();
 	void OnDelRecEntry();
+	void OnDelRecIgnoreEntry();
 	void OnShowRecoveryTmpl()		{ LoadRecoveryListTmpl(true); }
+	void OnShowRecIgnoreTmpl()		{ LoadRecIgnoreListTmpl(true); }
 
 	// advanced
 	void OnNoWindowRename();
+
+	void OnAddOption();
+	void OnShowOptionTmpl()			{ LoadOptionListTmpl(true); }
+	void OnDelOption();
+
+	//void OnOptionItemClicked(QTreeWidgetItem* pItem, int Column);
+	void OnOptionItemDoubleClicked(QTreeWidgetItem* pItem, int Column);
+	void OnOptionSelectionChanged() { CloseOptionEdit(); OnOptChanged();}
+	void OnOptionChanged(QTreeWidgetItem* pItem, int Column);
+
 
 	void OnTriggerChanged()			{ m_AdvancedChanged = true; OnOptChanged(); }
 	void OnShowTriggersTmpl()		{ ShowTriggersTmpl(true); }
 	void OnAddAutoRun();
 	void OnAddAutoSvc();
 	void OnAddAutoExec();
+	void OnAddRecoveryCheck();
 	void OnAddDeleteCmd();
 	void OnDelAuto();
 
 	void OnAddProcess();
 	void OnDelProcess();
+	void OnShowHiddenProcTmpl()		{ ShowHiddenProcTmpl(true); }
+
+	void OnAddHostProcess();
+	void OnDelHostProcess();
+	void OnShowHostProcTmpl()		{ ShowHostProcTmpl(true); }
 
 	void OnAddUser();
 	void OnDelUser();
@@ -166,7 +188,8 @@ private slots:
 	void OnFolderChanged();
 	void OnScreenReaders();
 
-	void OnTab();
+	void OnTab() { OnTab(ui.tabs->currentWidget()); }
+	void OnAccessTab()  { OnTab(ui.tabsAccess->currentWidget()); }
 
 	void OnGeneralChanged();
 	void OnPSTChanged();
@@ -196,7 +219,7 @@ protected:
 
 	bool eventFilter(QObject *watched, QEvent *e);
 
-	void OnTab(int iTabID);
+	void OnTab(QWidget* pTab);
 
 	enum ENetWfAction
 	{
@@ -240,7 +263,7 @@ protected:
 		eClosedCOM,
 		eClosedCOM_RT,
 
-		eMaxAccessType
+		eMaxAccessEntry
 	};
 
 	enum EAccessType
@@ -249,7 +272,9 @@ protected:
 		eKey,
 		eIPC,
 		eWnd,
-		eCOM
+		eCOM,
+
+		eMaxAccessType
 	};
 
 	enum EAccessMode
@@ -261,17 +286,22 @@ protected:
 		eClosed,
 		eClosedRT,
 		eReadOnly,
-		eBoxOnly
+		eBoxOnly,
+		eIgnoreUIPI
 	};
 
 	enum ETriggerAction {
 		eOnStartCmd,
 		eOnStartSvc,
 		eAutoExec,
+		eRecoveryCheck,
 		eDeleteCmd
 	};
 
-	void SetProgramItem(QString Program, QTreeWidgetItem* pItem, int Column);
+	void SetBoxColor(const QColor& color);
+	void UpdateBoxColor();
+
+	void SetProgramItem(QString Program, QTreeWidgetItem* pItem, int Column, const QString& Sufix = QString());
 
 	QString SelectProgram(bool bOrGroup = true);
 	void AddProgramToGroup(const QString& Program, const QString& Group);
@@ -282,8 +312,6 @@ protected:
 	QTreeWidgetItem* GetAccessEntry(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path);
 	void SetAccessEntry(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path);
 	void DelAccessEntry(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path);
-	void AddProgToGroup(QTreeWidget* pTree, const QString& Groupe, bool disabled = false);
-	void DelProgFromGroup(QTreeWidget* pTree, const QString& Groupe);
 
 	void LoadConfig();
 	void SaveConfig();
@@ -304,14 +332,20 @@ protected:
 	void LoadForced();
 	void LoadForcedTmpl(bool bUpdate = false);
 	void AddForcedEntry(const QString& Name, int type, bool disabled = false, const QString& Template = QString());
+	void LoadBreakoutTmpl(bool bUpdate = false);
+	void AddBreakoutEntry(const QString& Name, int type, bool disabled = false, const QString& Template = QString());
 	void SaveForced();
+
 
 	void LoadStop();
 	void LoadStopTmpl(bool bUpdate = false);
-	void AddStopEntry(const QString& Name, int type, bool disabled = false, const QString& Template = QString());
+	void LoadLeaderTmpl(bool bUpdate = false);
+	void AddStopEntry(const QString& Name, bool disabled = false, const QString& Template = QString());
+	void AddLeaderEntry(const QString& Name, bool disabled = false, const QString& Template = QString());
 	void SaveStop();
 
 	void LoadStart();
+	//void LoadStartTmpl(bool bUpdate = false);
 	void SaveStart();
 
 	// Network
@@ -345,24 +379,31 @@ protected:
 	QString	AccessTypeToName(EAccessEntry Type);
 	void LoadAccessList();
 	void LoadAccessListTmpl(bool bUpdate = false);
+	void LoadAccessListTmpl(EAccessType Type, bool bChecked, bool bUpdate = false);
 	QString	GetAccessTypeStr(EAccessType Type);
 	QString	GetAccessModeStr(EAccessMode Mode);
+	QString	GetAccessModeTip(EAccessMode Mode);
 	void ParseAndAddAccessEntry(EAccessEntry EntryType, const QString& Value, bool disabled = false, const QString& Template = QString());
-	void AddAccessEntry(EAccessType	Type, EAccessMode Mode, QString Program, const QString& Path, bool disabled = false, const QString& Template = QString());
+	void ParseAndAddAccessEntry(EAccessType Type, EAccessMode Mode, const QString& Value, bool disabled = false, const QString& Template = QString());
+	void AddAccessEntry(EAccessType Type, EAccessMode Mode, QString Program, const QString& Path, bool disabled = false, const QString& Template = QString());
 	QString MakeAccessStr(EAccessType Type, EAccessMode Mode);
 	void SaveAccessList();
 	QList<EAccessMode> GetAccessModes(EAccessType Type);
-	void DeleteAccessEntry(QTreeWidgetItem* pItem);
+	void DeleteAccessEntry(QTreeWidgetItem* pItem, int Column = 0);
 
 	void CloseAccessEdit(bool bSave = true);
 	void CloseAccessEdit(QTreeWidgetItem* pItem, bool bSave = true);
 
 	void UpdateAccessPolicy();
+
+	QTreeWidget* GetAccessTree(EAccessType Type);
 	//
 
 	void LoadRecoveryList();
 	void LoadRecoveryListTmpl(bool bUpdate = false);
-	void AddRecoveryEntry(const QString& Name, int type, const QString& Template = QString());
+	void LoadRecIgnoreListTmpl(bool bUpdate = false);
+	void AddRecoveryEntry(const QString& Name, const QString& Template = QString());
+	void AddRecIgnoreEntry(const QString& Name, const QString& Template = QString());
 	void SaveRecoveryList();
 
 	// advanced 
@@ -372,8 +413,21 @@ protected:
 	void UpdateBoxIsolation();
 	void ShowTriggersTmpl(bool bUpdate = false);
 	void AddTriggerItem(const QString& Value, ETriggerAction Type, const QString& Template = QString());
+	void ShowHiddenProcTmpl(bool bUpdate = false);
+	void ShowHostProcTmpl(bool bUpdate = false);
+	void AddHiddenProcEntry(const QString& Name, const QString& Template = QString());
+	void AddHostProcEntry(const QString& Name, bool Value = true, const QString& Template = QString());
 	void CheckOpenCOM();
 	//
+
+	void LoadOptionList();
+	void LoadOptionListTmpl(bool bUpdate = false);
+	void SaveOptionList();
+
+	void AddOptionEntry(const QString& Name, QString Program, const QString& Value, const QString& Template = QString());
+
+	void CloseOptionEdit(bool bSave = true);
+	void CloseOptionEdit(QTreeWidgetItem* pItem, bool bSave = true);
 
 	void CreateDebug();
 	void LoadDebug();
@@ -430,15 +484,33 @@ protected:
 
 	QSet<QString> m_Programs;
 
+	enum EProcCpec {
+		eNoSpec,
+		eSpec,
+		eOnlySpec,
+	};
+
+	struct SAdvOption
+	{
+		EProcCpec ProcSpec;
+		QStringList Values;
+		QString Description;
+	};
+
+	QMap<QString, SAdvOption> m_AdvOptions;
+
 private:
 
 	void ReadAdvancedCheck(const QString& Name, QCheckBox* pCheck, const QString& Value = "y");
+	void ReadGlobalCheck(QCheckBox* pCheck, const QString& Setting, bool bDefault);
+	void WriteGlobalCheck(QCheckBox* pCheck, const QString& Setting, bool bDefault);
 	void WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& Value = "y");
 	void WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& OnValue, const QString& OffValue);
 	void WriteText(const QString& Name, const QString& Value);
 	void WriteTextList(const QString& Setting, const QStringList& List);
 
 	Ui::OptionsWindow ui;
+	QSlider* m_pColorSlider;
 
 	struct SDbgOpt {
 		QString Name;

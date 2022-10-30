@@ -14,6 +14,8 @@ public:
 	CFileView(QWidget *parent = Q_NULLPTR);
 	~CFileView();
 
+	virtual void				SaveState();
+
 	void SetBox(const CSandBoxPtr& pBox);
 	const CSandBoxPtr& GetBox() const { return m_pBox; }
 	

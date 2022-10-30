@@ -232,7 +232,28 @@
     <ClCompile Include="file_snapshots.c">
       <Filter>file</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\Detours\detours.cpp">
+      <Filter>common\Detours</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Detours\disasm.cpp">
+      <Filter>common\Detours</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Detours\disolarm.cpp">
+      <Filter>common\Detours</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Detours\disolarm64.cpp">
+      <Filter>common\Detours</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Detours\disolx64.cpp">
+      <Filter>common\Detours</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Detours\disolx86.cpp">
+      <Filter>common\Detours</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\common\dllimport.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\hook_util.c">
       <Filter>common</Filter>
     </ClCompile>
   </ItemGroup>
@@ -323,7 +344,16 @@
     <ClInclude Include="handle.h">
       <Filter>obj</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\common\Detours\detours.h">
+      <Filter>common\Detours</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Detours\detver.h">
+      <Filter>common\Detours</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\common\dllimport.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\arm64_asm.h">
       <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
@@ -387,8 +417,17 @@
     <Filter Include="obj">
       <UniqueIdentifier>{05955a21-494a-4624-854e-d7c9b1e33401}</UniqueIdentifier>
     </Filter>
-    <Filter Include="common\ntdll">
-      <UniqueIdentifier>{3306e464-8b2d-48cb-8d8f-0d222f17e31d}</UniqueIdentifier>
+    <Filter Include="common\Detours">
+      <UniqueIdentifier>{2533049a-777d-4956-aa94-b09dee0483c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\NtCRT">
+      <UniqueIdentifier>{5a5af632-b07e-4e18-b7c8-f8be4f6c646f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\NtCRT\libcmt">
+      <UniqueIdentifier>{854b7879-8bf9-4399-a5d9-5d1be7278d4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\NtCRT\ntdll">
+      <UniqueIdentifier>{6dd7d86a-d2ee-465a-897e-63540d7fc47f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -400,21 +439,76 @@
     <CustomBuild Include="util_asm.asm">
       <Filter>hook</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\..\common\NtCRT\x64\ntdll.def" />
-    <CustomBuild Include="..\..\common\NtCRT\x86\ntdll.def" />
+    <CustomBuild Include="util_arm.asm">
+      <Filter>hook</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\common\NtCRT\x64\ntdll.def">
+      <Filter>common\NtCRT</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\common\NtCRT\x86\ntdll.def">
+      <Filter>common\NtCRT</Filter>
+    </CustomBuild>
+    <CustomBuild Include="util_EC.asm">
+      <Filter>hook</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <Object Include="..\..\common\NtCRT\a64ec\libcmt\chkstk_arm64ec.obj">
+      <Filter>common\NtCRT\libcmt</Filter>
+    </Object>
+    <Object Include="..\..\common\NtCRT\a64ec\libcmt\chpev2_support.obj">
+      <Filter>common\NtCRT\libcmt</Filter>
+    </Object>
+    <Object Include="..\..\common\NtCRT\a64ec\libcmt\gs_cookie.obj">
+      <Filter>common\NtCRT\libcmt</Filter>
+    </Object>
+    <Object Include="..\..\common\NtCRT\a64ec\libcmt\guard_check_arm64ec.obj">
+      <Filter>common\NtCRT\libcmt</Filter>
+    </Object>
+    <Object Include="..\..\common\NtCRT\a64ec\libcmt\guard_dispatch.obj">
+      <Filter>common\NtCRT\libcmt</Filter>
+    </Object>
+    <Object Include="..\..\common\NtCRT\a64ec\libcmt\guard_support.obj">
+      <Filter>common\NtCRT\libcmt</Filter>
+    </Object>
+    <Object Include="..\..\common\NtCRT\a64ec\libcmt\icall_helper_arm64ec.obj">
+      <Filter>common\NtCRT\libcmt</Filter>
+    </Object>
+    <Object Include="..\..\common\NtCRT\a64ec\libcmt\loadcfg.obj">
+      <Filter>common\NtCRT\libcmt</Filter>
+    </Object>
+    <Object Include="..\..\common\NtCRT\a64ec\libcmt\gshandlerseh_arm64ec.obj">
+      <Filter>common\NtCRT\libcmt</Filter>
+    </Object>
+    <Object Include="..\..\common\NtCRT\a64ec\libcmt\gshandlerseh_amd64.obj">
+      <Filter>common\NtCRT\libcmt</Filter>
+    </Object>
+    <Object Include="..\..\common\NtCRT\a64ec\libcmt\gshandler_arm64ec.obj">
+      <Filter>common\NtCRT\libcmt</Filter>
+    </Object>
+    <Object Include="..\..\common\NtCRT\a64ec\libcmt\gshandler_amd64.obj">
+      <Filter>common\NtCRT\libcmt</Filter>
+    </Object>
+    <Object Include="..\..\common\NtCRT\a64ec\libcmt\ecsecgs.obj">
+      <Filter>common\NtCRT\libcmt</Filter>
+    </Object>
+    <Object Include="..\..\common\NtCRT\a64ec\libcmt\gs_report.obj">
+      <Filter>common\NtCRT\libcmt</Filter>
+    </Object>
     <Object Include="..\..\common\NtCRT\x86\ntdll\eh3valid_user.obj">
-      <Filter>common\ntdll</Filter>
+      <Filter>common\NtCRT\ntdll</Filter>
     </Object>
     <Object Include="..\..\common\NtCRT\x86\ntdll\exsup.obj">
-      <Filter>common\ntdll</Filter>
+      <Filter>common\NtCRT\ntdll</Filter>
     </Object>
     <Object Include="..\..\common\NtCRT\x86\ntdll\exsup2.obj">
-      <Filter>common\ntdll</Filter>
+      <Filter>common\NtCRT\ntdll</Filter>
     </Object>
     <Object Include="..\..\common\NtCRT\x86\ntdll\exsup3.obj">
-      <Filter>common\ntdll</Filter>
+      <Filter>common\NtCRT\ntdll</Filter>
+    </Object>
+    <Object Include="..\..\common\NtCRT\a64ec\libcmt\atomics.obj">
+      <Filter>common\NtCRT\libcmt</Filter>
     </Object>
   </ItemGroup>
 </Project>

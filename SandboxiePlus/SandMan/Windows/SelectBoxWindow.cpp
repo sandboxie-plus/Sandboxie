@@ -125,7 +125,10 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 		pItem->setText(0, pBox->GetName().replace("_", " "));
 		pItem->setData(0, Qt::UserRole, pBox->GetName());
 		QIcon Icon;
-		if(ColorIcons)
+		QString Action = pBox->GetText("DblClickAction");
+		if (!Action.isEmpty() && Action.left(1) != "!")
+			Icon = IconProvider.icon(QFileInfo(pBoxEx->GetCommandFile(Action)));
+		else if(ColorIcons)
 			Icon = theGUI->GetColorIcon(pBoxEx->GetColor(), pBox->GetActiveProcessCount());
 		else
 			Icon = theGUI->GetBoxIcon(pBoxEx->GetType(), pBox->GetActiveProcessCount() != 0);

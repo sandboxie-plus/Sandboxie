@@ -77,6 +77,8 @@ ProtectCall4            PROC
 ProtectCall4            ENDP
 
 
+ifndef _M_ARM64EC
+
 ;----------------------------------------------------------------------------
 ; RpcRt_Ndr64AsyncClientCall
 ;----------------------------------------------------------------------------
@@ -126,6 +128,8 @@ WeHandleElevation:
 RpcRt_Ndr64AsyncClientCall ENDP
 
 
+endif
+
 ;----------------------------------------------------------------------------
 ; Ldr_Inject_Entry64
 ;----------------------------------------------------------------------------
@@ -151,6 +155,7 @@ Ldr_Inject_Entry64      PROC
     ; assumes the stack is zero
     ;
     
+    ; $Workaround$ - 3rd party fix
     lea rdi,[rsp-200h]
     mov rcx,200h/8
     xor rax,rax
@@ -166,7 +171,9 @@ Ldr_Inject_Entry64      ENDP
 ; Gui_FixupCallbackPointers
 ;----------------------------------------------------------------------------
 
-
+    nop
+    nop
+    nop
 Gui_FixupCallbackPointers   PROC
     
     ;
@@ -191,6 +198,8 @@ l02:    ret
 
 Gui_FixupCallbackPointers   ENDP
 
+
+ifndef _M_ARM64EC
 
 ;----------------------------------------------------------------------------
 ; Secure_NdrAsyncClientCall
@@ -340,4 +349,4 @@ CancelCall3:
 
 RpcRt_NdrClientCall3 ENDP
 
-
+endif

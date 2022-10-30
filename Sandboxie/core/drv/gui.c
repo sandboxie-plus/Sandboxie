@@ -322,7 +322,7 @@ _FX GUI_CLIPBOARD *Gui_GetClipboard(void)
 
     ULONG Clipboard_Offset = 0;
 
-    // Hard Offset Dependency
+    // $Offset$ - Hard Offset Dependency
 
 #ifdef _WIN64
     if (Driver_OsVersion <= DRIVER_WINDOWS_7) {

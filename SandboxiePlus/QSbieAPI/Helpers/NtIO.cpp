@@ -112,7 +112,7 @@ NTSTATUS NtIo_DeleteFolderRecursivelyImpl(POBJECT_ATTRIBUTES objattrs, bool (*cb
 
 	for ( ; status == STATUS_SUCCESS; )
 	{
-		wstring FileName;
+		std::wstring FileName;
 		ULONG FileAttributes;
 
 		PFILE_BOTH_DIRECTORY_INFORMATION Info = (PFILE_BOTH_DIRECTORY_INFORMATION)malloc(PAGE_SIZE);
@@ -286,7 +286,7 @@ NTSTATUS NtIo_MergeFolder(POBJECT_ATTRIBUTES src_objattrs, POBJECT_ATTRIBUTES de
 
 	for (; status == STATUS_SUCCESS; )
 	{
-		wstring FileName;
+		std::wstring FileName;
 		ULONG FileAttributes;
 
 		PFILE_BOTH_DIRECTORY_INFORMATION Info = (PFILE_BOTH_DIRECTORY_INFORMATION)malloc(PAGE_SIZE);

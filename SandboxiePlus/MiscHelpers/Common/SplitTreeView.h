@@ -78,7 +78,7 @@ public slots:
 	void				expand(const QModelIndex &index);
 	void				collapse(const QModelIndex &index);
     void				resizeColumnToContents(int column) { m_pList->resizeColumnToContents(column); }
-    void				sortByColumn(int column) { m_pList->sortByColumn(column); }
+    void				sortByColumn(int column) { m_pList->sortByColumn(column, m_pList->header()->sortIndicatorOrder()); }
     void				expandAll() { m_pTree->expandAll(); }
     void				collapseAll() { m_pTree->collapseAll(); }
     void				expandToDepth(int depth) { m_pTree->expandToDepth(depth); }

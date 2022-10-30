@@ -3060,7 +3060,7 @@ Sandbox dışında kaydet: Hotmail ve Messenger hesap bilgisi
 .
 
 4342;txt;01
-Windows 11 KB5014019 için %2 düzeltmesini etkinleştir
+Windows için %2 düzeltmesini etkinleştir
 .
 
 4356;txt;02

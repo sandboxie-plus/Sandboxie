@@ -1142,6 +1142,7 @@ retry:
     // then look again in HKEY_CLASSES_ROOT\Wow64
     //
 
+#ifndef _WIN64
     if (Dll_IsWow64) {
 
         wcscpy(subkey2, L"Wow6432Node\\");
@@ -1152,6 +1153,7 @@ retry:
         if (NT_SUCCESS(status))
             return hkey;
     }
+#endif
 
     //
     // if we looked at HKEY_CURRENT_USER, try again for HKEY_LOCAL_MACHINE
@@ -1771,12 +1773,16 @@ _FX HRESULT SH32_IShellExtInit_Initialize(
     void *pShellExtInit,
     void *pidlFolder, IDataObject *pDataObject, HKEY hkeyProgID)
 {
-    typedef HRESULT (*P_Initialize)(void *, void *, IDataObject *, HKEY);
+#if !defined(_M_ARM64) && !defined(_M_ARM64EC)
     ULONG_PTR *StubData = Dll_JumpStubData();
+#else
+    ULONG_PTR *StubData = (ULONG_PTR *)hkeyProgID;
+    hkeyProgID = (HKEY)StubData[3];
+#endif
 
     extern IDataObject *Ole_XDataObject_From_IDataObject(
         IDataObject *pDataObject);
-
+    typedef HRESULT (*P_Initialize)(void *, void *, IDataObject *, HKEY);
     return ((P_Initialize)StubData[1])(
                         pShellExtInit, pidlFolder,
                         Ole_XDataObject_From_IDataObject(pDataObject),
@@ -1785,12 +1791,16 @@ _FX HRESULT SH32_IShellExtInit_Initialize(
 
 
 _FX HRESULT SH32_IContextMenuHook_QueryInterface(
-    void *pContextMenu, REFIID riid, void **ppv)
-{
+    void *pContextMenu, REFIID riid, void **ppv
+#if !defined(_M_ARM64) && !defined(_M_ARM64EC)
+    ) {
+    ULONG_PTR *StubData = Dll_JumpStubData();
+#else 
+    , ULONG_PTR *StubData) {
+#endif
+
     EXTERN_C const IID IID_IShellExtInit;
     typedef HRESULT (*P_QueryInterface)(void *, REFIID, void **);
-    ULONG_PTR *StubData = Dll_JumpStubData();
-
     HRESULT hr = ((P_QueryInterface)StubData[1])(pContextMenu, riid, ppv);
     if (SUCCEEDED(hr) &&
             memcmp(riid, &IID_IShellExtInit, sizeof(GUID)) == 0) {

@@ -101,7 +101,7 @@ protected:
 		QVariantList Args;
 		long Status;
 
-		mutable atomic<int> aRefCnt;
+		mutable std::atomic<int> aRefCnt;
 	} *m;
 
 	void Attach(const CSbieStatus* p)

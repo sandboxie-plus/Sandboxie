@@ -144,7 +144,7 @@ QString CBoxedProcess__GetPebString(HANDLE ProcessHandle, PEB_OFFSET Offset)
 		return QString();
 	}
 
-	wstring s;
+	std::wstring s;
 	if (isTargetWow64Process) // OS : 64Bit, Cur : 32 or 64, Tar: 32bit
 	{
 		PVOID peb32;

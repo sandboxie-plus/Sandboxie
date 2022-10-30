@@ -31,6 +31,12 @@
 #include <stdio.h>
 #include <psapi.h>
 
+#if defined(_M_ARM64) || defined(_M_ARM64EC)
+void* Hook_GetFFSTarget(void* ptr);
+void* Hook_GetXipTarget(void* ptr, int mode);
+void* SbieDll_Hook_arm(const char* SourceFuncName, void* SourceFunc, void* DetourFunc, HMODULE module);
+#endif
+
 //---------------------------------------------------------------------------
 // Variables
 //---------------------------------------------------------------------------
@@ -679,6 +685,7 @@ _FX BOOLEAN Gui_Init3(HMODULE module)
 
 _FX void Gui_InitWindows7(void)
 {
+    // $HookHack$ - Custom, not automated, Hook
     if (Dll_KernelBase) {
 
         //
@@ -720,11 +727,47 @@ _FX void Gui_InitWindows7(void)
             SourceFunc = (UCHAR *)(*pSourceFunc);
             if (! SourceFunc)
                 continue;
-
+            
             //
             // confirm the function starts with an indirect jmp,
             // and try to replace the value at [x]
             //
+
+#ifdef _M_ARM64EC
+
+            //  48 8B FF            mov         rdi,rdi  
+            //  55                  push        rbp  
+            //  48 8B EC            mov         rbp,rsp  
+            //  5D                  pop         rbp  
+            //  90                  nop  
+            //  E9 02 48 18 00      jmp         #__GSHandlerCheck_SEH_AMD64+138h (07FFB572B8190h) 
+           
+            //  B0FFFEF0            adrp        xip0,#NtdllScrollBarWndProc_A (07FFD30995000h)  
+            //  91018210            add         xip0,xip0,#0x60  
+            //  D61F0200            br          xip0  
+
+            //  F0001050            adrp        xip0,NtUserPfn (07FFD30BA0000h)  
+            //  F9426A10            ldr         xip0,[xip0,#0x4D0]  // DefWindowProcA/DefWindowProcW
+            //  D61F0200            br          xip0  
+
+            UCHAR* Target = Hook_GetFFSTarget(SourceFunc);
+            if(Target) {
+
+                Target = Hook_GetXipTarget(Target, 1); // adrp add br
+                Target = Hook_GetXipTarget(Target, 0); // adrp ldr br
+                
+                *pSourceFunc = (ULONG_PTR)SbieDll_Hook_arm(
+                    FuncName, Target, DetourFunc, NULL);
+            }
+            else // fall back to SbieDll_Hook
+#else
+
+#ifdef _M_ARM64
+            void* ptr = Hook_GetXipTarget(SourceFunc, 1); // adrp add br
+            ptr = Hook_GetXipTarget(ptr, 0); // adrp ldr br
+            if (ptr != SourceFunc)
+                *pSourceFunc = (ULONG_PTR)ptr;
+#else
 
 #ifdef _WIN64
 
@@ -753,8 +796,10 @@ _FX void Gui_InitWindows7(void)
                 *pSourceFunc = *(ULONG_PTR *)target;
             }
 
+#endif
+#endif
             *pSourceFunc = (ULONG_PTR)SbieDll_Hook(
-                FuncName, (void *)(*pSourceFunc), DetourFunc, NULL); // fix-me: module
+                FuncName, (void *)(*pSourceFunc), DetourFunc, NULL);
         }
     }
 }

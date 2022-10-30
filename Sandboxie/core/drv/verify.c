@@ -17,6 +17,7 @@
  */
 
 #include "driver.h"
+#include "util.h"
 
 #include <bcrypt.h>
 
@@ -482,7 +483,7 @@ _FX LONGLONG KphGetDateInterval(CSHORT days, CSHORT months, CSHORT years)
 
 #define SOFTWARE_NAME L"Sandboxie-Plus"
 
-union SCertInfo {
+union _SCertInfo {
     ULONGLONG	State;
     struct {
         ULONG
@@ -490,7 +491,8 @@ union SCertInfo {
             expired   : 1, // certificate is expired but may be active
             outdated  : 1, // certificate is expired, not anymore valid for the current build
             business  : 1, // certificate is siutable for business use
-            reservd_1 : 4,
+            evaluation: 1, // evaluation certificate
+            reservd_1 : 3,
             reservd_2 : 8,
             reservd_3 : 8,
             reservd_4 : 8;
@@ -523,6 +525,8 @@ _FX NTSTATUS KphValidateCertificate(void)
     WCHAR* level = NULL;
     //WCHAR* key = NULL;
     LARGE_INTEGER cert_date = { 0 };
+
+    Verify_CertInfo.State = 0; // clear
 
     if(!NT_SUCCESS(status = MyInitHash(&hashObj)))
         goto CleanupExit;
@@ -682,7 +686,6 @@ _FX NTSTATUS KphValidateCertificate(void)
 
     status = KphVerifySignature(hash, hashSize, signature, signatureSize);
 
-    Verify_CertInfo.State = 0; // clear
     if (NT_SUCCESS(status)) {
 
         Verify_CertInfo.valid = 1;
@@ -722,8 +725,8 @@ _FX NTSTATUS KphValidateCertificate(void)
 #define TEST_CERT_DATE(days, months, years) \
             if ((cert_date.QuadPart + KphGetDateInterval(days, months, years)) < LocalTime.QuadPart){ \
                 Verify_CertInfo.expired = 1; \
-            } else \
-                Verify_CertInfo.expirers_in_sec = (ULONG)(((cert_date.QuadPart + KphGetDateInterval(0, 0, 1)) - LocalTime.QuadPart) / 10000000ll); // 100ns steps -> 1sec
+            } \
+            Verify_CertInfo.expirers_in_sec = (ULONG)(((cert_date.QuadPart + KphGetDateInterval(days, months, years)) - LocalTime.QuadPart) / 10000000ll); // 100ns steps -> 1sec
 
         // Check if the certificate is valid for the current build, failing this locks features out
 #define TEST_VALIDITY(days, months, years) \
@@ -756,6 +759,7 @@ _FX NTSTATUS KphValidateCertificate(void)
             }
         }
         else if (type && _wcsicmp(type, L"EVALUATION") == 0) {
+            Verify_CertInfo.evaluation = 1;
             // evaluation
             if (level) { // in days
                 TEST_EXPIRATION((CSHORT)_wtoi(level), 0, 0);

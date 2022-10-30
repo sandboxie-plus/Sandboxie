@@ -31,6 +31,7 @@ typedef long NTSTATUS;
 #include "SbieDefs.h"
 
 #include "..\..\Sandboxie\common\win32_ntddk.h"
+#include "..\..\Sandboxie\common\defines.h"
 
 #include "..\..\Sandboxie\core\drv\api_defs.h"
 #include "..\..\Sandboxie\core\drv\api_flags.h"
@@ -888,7 +889,7 @@ ULONG CSbieAPI__GetVolumeSN(wchar_t* path)
 
 QString CSbieAPI::ResolveAbsolutePath(const QString& Path)
 {
-	wstring path = Path.toStdWString();
+	std::wstring path = Path.toStdWString();
 	UNICODE_STRING uni;
     RtlInitUnicodeString(&uni, path.c_str());
 	OBJECT_ATTRIBUTES objattrs;
@@ -1298,8 +1299,8 @@ QString CSbieAPI::SbieIniGetEx(const QString& Section, const QString& Setting)
 
 QString CSbieAPI::SbieIniGet(const QString& Section, const QString& Setting, quint32 Index, qint32* ErrCode)
 {
-	wstring section = Section.toStdWString();
-	wstring setting = Setting.toStdWString();
+	std::wstring section = Section.toStdWString();
+	std::wstring setting = Setting.toStdWString();
 
 	WCHAR out_buffer[CONF_LINE_LEN] = { 0 };
 
@@ -1350,7 +1351,7 @@ SB_STATUS CSbieAPI::ValidateName(const QString& BoxName)
 	if(BoxName.left(13).compare("UserSettings_", Qt::CaseInsensitive) == 0)
 		return SB_ERR(SB_BadNameDev);
 
-	if (BoxName.contains(QRegExp("[^A-Za-z0-9_]")))
+	if (BoxName.contains(QRegularExpression("[^A-Za-z0-9_]")))
 		return SB_ERR(SB_BadNameChar);
 
 	return SB_OK;
@@ -1588,7 +1589,7 @@ SB_STATUS CSbieAPI__QueryBoxPath(SSbieAPI* m, const WCHAR *box_name, WCHAR *out_
 
 SB_STATUS CSbieAPI::UpdateBoxPaths(const CSandBoxPtr& pSandBox)
 {
-	wstring boxName = pSandBox->GetName().toStdWString();
+	std::wstring boxName = pSandBox->GetName().toStdWString();
 
 	ULONG filePathLength = 0;
 	ULONG keyPathLength = 0;
@@ -1597,9 +1598,9 @@ SB_STATUS CSbieAPI::UpdateBoxPaths(const CSandBoxPtr& pSandBox)
 	if (!Status)
 		return Status;
 
-	wstring FileRoot(filePathLength / 2 + 1, '\0');
-	wstring KeyRoot(keyPathLength / 2 + 1, '\0');
-	wstring IpcRoot(ipcPathLength / 2 + 1, '\0');
+	std::wstring FileRoot(filePathLength / 2 + 1, '\0');
+	std::wstring KeyRoot(keyPathLength / 2 + 1, '\0');
+	std::wstring IpcRoot(ipcPathLength / 2 + 1, '\0');
 	Status = CSbieAPI__QueryBoxPath(m, boxName.c_str(), (WCHAR*)FileRoot.data(), (WCHAR*)KeyRoot.data(), (WCHAR*)IpcRoot.data(), &filePathLength, &keyPathLength, &ipcPathLength);
 	if (!Status)
 		return Status;
@@ -2089,7 +2090,7 @@ SB_STATUS CSbieAPI::ReloadConf(quint32 flags, quint32 SessionId)
 
 bool CSbieAPI::IsBox(const QString& BoxName, bool& bIsEnabled)
 {
-	wstring box_name = BoxName.toStdWString();
+	std::wstring box_name = BoxName.toStdWString();
 
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
 	API_IS_BOX_ENABLED_ARGS *args = (API_IS_BOX_ENABLED_ARGS*)parms;
@@ -2213,7 +2214,7 @@ SB_STATUS CSbieAPI::SetSecureParam(const QString& Name, const void* data, size_t
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
 	API_SECURE_PARAM_ARGS *args = (API_SECURE_PARAM_ARGS*)parms;
 
-	wstring name = Name.toStdWString();
+	std::wstring name = Name.toStdWString();
 
 	memset(parms, 0, sizeof(parms));
 	args->func_code = API_SET_SECURE_PARAM;
@@ -2232,7 +2233,7 @@ SB_STATUS CSbieAPI::GetSecureParam(const QString& Name, void* data, size_t size)
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
 	API_SECURE_PARAM_ARGS *args = (API_SECURE_PARAM_ARGS*)parms;
 
-	wstring name = Name.toStdWString();
+	std::wstring name = Name.toStdWString();
 
 	memset(parms, 0, sizeof(parms));
 	args->func_code = API_GET_SECURE_PARAM;

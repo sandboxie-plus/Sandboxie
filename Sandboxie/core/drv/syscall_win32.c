@@ -106,7 +106,11 @@ _FX BOOLEAN Syscall_GetWin32kAddr(KSERVICE_TABLE_DESCRIPTOR *ShadowTable, ULONG 
         long EntryValue = Base_Copy[index & 0xFFF];
 
         *pKernelAddr = (UCHAR *)ShadowTable->Base + (EntryValue >> 4);
+#ifdef _M_ARM64
+        *pParamCount = (ULONG)(EntryValue & 0x0F) + 8;
+#else
         *pParamCount = (ULONG)(EntryValue & 0x0F) + 4;
+#endif
         //DbgPrint("    SysCall32 offset: %d\r\n", (ULONG)(EntryValue >> 4));
         return TRUE;
     }
@@ -543,10 +547,15 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
 
                 pTrapFrame = (PKTRAP_FRAME) *(ULONG_PTR*)((UCHAR*)pThread + g_TrapFrameOffset);
                 if (pTrapFrame) {
+#ifdef _M_ARM64
+                    ret = pTrapFrame->Pc;
+                    UserStack = pTrapFrame->Sp;
+#else
                     ret = pTrapFrame->Rip;
                     UserStack = pTrapFrame->Rsp;
                     pTrapFrame->Rsp = pTrapFrame->Rbp; //*pRbp;
                     pTrapFrame->Rip = pTrapFrame->Rbx; //*pRbx;
+#endif
                 }
             }
             else
@@ -601,8 +610,13 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
 #ifdef _WIN64
         if (g_TrapFrameOffset) {
             if (pTrapFrame) {
+#ifdef _M_ARM64
+                pTrapFrame->Pc = ret;
+                pTrapFrame->Sp = UserStack;
+#else
                 pTrapFrame->Rip = ret;
                 pTrapFrame->Rsp = UserStack;
+#endif
             }
         }
 #endif

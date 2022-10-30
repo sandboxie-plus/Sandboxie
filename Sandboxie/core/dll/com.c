@@ -73,7 +73,9 @@ typedef struct _COM_IUNKNOWN {
 // Functions
 //---------------------------------------------------------------------------
 
+#ifndef _WIN64
 BOOLEAN SbieDll_IsWow64();
+#endif
 
 static BOOLEAN Com_IsFirewallClsid(REFCLSID rclsid, const WCHAR *BoxName);
 
@@ -93,6 +95,7 @@ static HRESULT Com_CoCreateInstanceEx(
     REFCLSID rclsid, void *pUnkOuter, ULONG clsctx, void *pServerInfo,
     ULONG cmq, MULTI_QI *pmqs);
 
+#ifndef _M_ARM64
 static BOOLEAN Com_Hook_CoUnmarshalInterface_W8(UCHAR *code, HMODULE module);
 
 static HRESULT __fastcall Com_CoUnmarshalInterface_W8(
@@ -100,9 +103,7 @@ static HRESULT __fastcall Com_CoUnmarshalInterface_W8(
 
 static HRESULT __fastcall Com_CoUnmarshalInterface_W81(
     ULONG_PTR StreamAddr, ULONG zero, REFIID riid, void **ppv);
-
-static HRESULT  Com_CoUnmarshalInterface_W10(
-    ULONG_PTR StreamAddr,  REFIID riid,void **ppv);
+#endif
 
 static HRESULT Com_CoUnmarshalInterface(
     IStream *pStream, REFIID riid, void **ppv);
@@ -193,8 +194,6 @@ typedef ULONG (__fastcall *P_CoUnmarshalInterface_W8)(
 typedef ULONG (__fastcall *P_CoUnmarshalInterface_W81)(
     ULONG_PTR StreamAddr, ULONG zero, REFIID riid, void **ppv);
 
-typedef ULONG(*P_CoUnmarshalInterface_W10)(
-    ULONG_PTR StreamAddr, REFIID riid,void **ppv );
 
 typedef ULONG (*P_CoMarshalInterface)(
     IStream *pStream, REFIID riid, IUnknown *pUnknown,
@@ -231,9 +230,10 @@ P_CoGetObject               __sys_CoGetObject               = NULL;
 P_CoCreateInstance          __sys_CoCreateInstance          = NULL;
 P_CoCreateInstanceEx        __sys_CoCreateInstanceEx        = NULL;
 P_CoUnmarshalInterface      __sys_CoUnmarshalInterface      = NULL;
+#ifndef _M_ARM64
 P_CoUnmarshalInterface_W8   __sys_CoUnmarshalInterface_W8   = NULL;
 P_CoUnmarshalInterface_W81  __sys_CoUnmarshalInterface_W81  = NULL;
-P_CoUnmarshalInterface_W10  __sys_CoUnmarshalInterface_W10  = NULL;
+#endif
 P_CoMarshalInterface        __sys_CoMarshalInterface        = NULL;
 
 P_CoGetPSClsid              __sys_CoGetPSClsid              = NULL;
@@ -449,12 +449,20 @@ _FX BOOLEAN SbieDll_IsOpenClsid(
 
         if (memcmp(rclsid, &CLSID_WinMgmt,              sizeof(GUID)) == 0 ||
             memcmp(rclsid, &CLSID_NetworkListManager,   sizeof(GUID)) == 0 ||
-            memcmp(rclsid, &CLSID_ShellServiceHostBrokerProvider, sizeof(GUID)) == 0 ||
-            ((Dll_OsBuild >= 10240) && memcmp(rclsid, &CLSID_WinInetCache, sizeof(GUID)) == 0))
+            memcmp(rclsid, &CLSID_ShellServiceHostBrokerProvider, sizeof(GUID)) == 0)
         {
 
             return TRUE;
         }
+
+        // 
+        // Sbie builds after 5.27-1 broke IE's source view and cache,
+        // by opening WinInetCache here and in Ipc_InitPaths.
+        // with CloseWinInetCache=y this change can be undone
+        //
+
+        if (((Dll_OsBuild >= 10240) && memcmp(rclsid, &CLSID_WinInetCache, sizeof(GUID)) == 0) && !SbieApi_QueryConfBool(NULL, L"CloseWinInetCache", FALSE)) // this breaks IE view source
+            return TRUE;
 
         //
         // initialize list of user-configured CLSID exclusions
@@ -865,7 +873,7 @@ _FX HRESULT Com_CoCreateInstanceEx(
 // Com_Hook_CoUnmarshalInterface_W8
 //---------------------------------------------------------------------------
 
-
+#ifndef _M_ARM64
 _FX BOOLEAN Com_Hook_CoUnmarshalInterface_W8(UCHAR *code, HMODULE module)
 {
 
@@ -884,15 +892,9 @@ _FX BOOLEAN Com_Hook_CoUnmarshalInterface_W8(UCHAR *code, HMODULE module)
     // have to do some __fastcall magic.  see Com_CoUnmarshalInterface_W8
     //
 
-    P_CoUnmarshalInterface_W10 CoUnmarshalInterface_W10 = (P_CoUnmarshalInterface_W10)GetProcAddress(GetModuleHandle(L"combase.dll"), "CoUnmarshalInterface");
-    if (CoUnmarshalInterface_W10) {
-        SBIEDLL_HOOK(Com_, CoUnmarshalInterface_W10);
-        return TRUE;
-    }
-
 #ifdef _WIN64
 
-    if (Dll_OsBuild >= 15002) {
+    if (Dll_OsBuild >= 15002) { // Windows 10 1703 preview
 
         if (code[0x18] == 0xe9) {
 
@@ -904,7 +906,7 @@ _FX BOOLEAN Com_Hook_CoUnmarshalInterface_W8(UCHAR *code, HMODULE module)
         }
     }
 
-    else if (Dll_OsBuild >= 14942) {
+    else if (Dll_OsBuild >= 14942) { // Windows 10 1703 preview #7
 
         if (code[0x20] == 0xe9) {
             LONG_PTR jump_target = (LONG_PTR)code + (*(LONG *)(code + 0x21)) + 0x25;
@@ -1100,48 +1102,7 @@ _FX HRESULT __fastcall Com_CoUnmarshalInterface_W81(
 
     return Com_CoUnmarshalInterface_Common(pStream, riid, ppv, &posl);
 }
-
-
-_FX HRESULT  Com_CoUnmarshalInterface_W10(
-    ULONG_PTR StreamAddr, REFIID riid, void **ppv)
-{
-    const HRESULT HR_OR_INVALID_OXID =
-        MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, OR_INVALID_OXID);
-    HRESULT hr;
-    LARGE_INTEGER posl;
-    ULARGE_INTEGER posu;
-    //
-    // on 32-bit Windows 8.1, combase!_CoUnmarshalInterface is a true
-    // fastcall function which gets its second argument in edx.  this is
-    // unlike the Windows 8 version which gets the second argument on the
-    // stack, which requires a small trick with ULONG64 (see above)
-    //
-
-    IStream *pStream = (IStream *)StreamAddr;
-
-    //
-    // first invoke the COM unmarshaller.  it returns OR_INVALID_OXID
-    // when the interface was marshalled in SbieSvc, because SbieSvc
-    // uses a different epmapper than the sandboxed epmapper
-    //
-
-    posl.QuadPart = 0;
-    hr = IStream_Seek(pStream, posl, STREAM_SEEK_CUR, &posu);
-    if (FAILED(hr))
-        return hr;
-
-    hr = __sys_CoUnmarshalInterface_W10(StreamAddr, riid, ppv);
-    if (hr != HR_OR_INVALID_OXID)
-        return hr;
-
-    posl.QuadPart = posu.QuadPart;
-    hr = IStream_Seek(pStream, posl, STREAM_SEEK_SET, &posu);
-    if (FAILED(hr))
-        return hr;
-
-    return Com_CoUnmarshalInterface_Common(pStream, riid, ppv, &posl);
-}
-
+#endif
 
 //---------------------------------------------------------------------------
 // Com_CoUnmarshalInterface
@@ -1398,13 +1359,16 @@ _FX BOOLEAN Com_Init_ComBase(HMODULE module)
 
     if (!Ipc_OpenCOM) {
         if (Dll_OsBuild >= 8400) {
-            if (!Com_Hook_CoUnmarshalInterface_W8(
-                (UCHAR*)CoUnmarshalInterface, module))
-                return FALSE;
+            CoUnmarshalInterface = (P_CoUnmarshalInterface)GetProcAddress(GetModuleHandle(L"combase.dll"), "CoUnmarshalInterface");
+#ifndef _M_ARM64
+            // $HookHack$ - Custom, not automated, Hook for windows 8 and 8.1 and early windows 10 builds
+            if (!CoUnmarshalInterface) {
+                if (!Com_Hook_CoUnmarshalInterface_W8((UCHAR*)CoUnmarshalInterface, module))
+                    return FALSE;
+            }
+#endif
         }
-        else {
-            SBIEDLL_HOOK(Com_, CoUnmarshalInterface);
-        }
+        SBIEDLL_HOOK(Com_, CoUnmarshalInterface);
 
         SBIEDLL_HOOK(Com_, CoMarshalInterface);
         SbieDll_IsOpenClsid(&IID_IUnknown, CLSCTX_LOCAL_SERVER, NULL); // trigger list loading
@@ -1422,6 +1386,12 @@ _FX BOOLEAN Com_Init_ComBase(HMODULE module)
     WCHAR wsTraceOptions[4];
     if (SbieApi_QueryConf(NULL, L"ClsidTrace", 0, wsTraceOptions, sizeof(wsTraceOptions)) == STATUS_SUCCESS && wsTraceOptions[0] != L'\0')
         Com_TraceFlag = TRUE;
+
+    if (!__sys_RegOpenKeyExW) {
+        HMODULE module = Dll_KernelBase ? Dll_KernelBase : LoadLibrary(DllName_advapi32);
+        __sys_RegOpenKeyExW = (P_RegOpenKeyEx)GetProcAddress(module, "RegOpenKeyExW");
+        GETPROCADDR_SYS(RegCloseKey);
+    }
 
     return TRUE;
 }

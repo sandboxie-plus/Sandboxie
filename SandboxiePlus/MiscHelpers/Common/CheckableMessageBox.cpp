@@ -127,9 +127,7 @@ void CCheckableMessageBox::setText(const QString &t)
 
 QPixmap CCheckableMessageBox::iconPixmap() const
 {
-    if (const QPixmap *p = d->pixmapLabel->pixmap())
-        return QPixmap(*p);
-    return QPixmap();
+    return d->pixmapLabel->pixmap(Qt::ReturnByValue);
 }
 
 void CCheckableMessageBox::setIconPixmap(const QPixmap &p)

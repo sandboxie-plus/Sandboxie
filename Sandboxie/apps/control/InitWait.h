@@ -33,7 +33,9 @@ class CInitWait : public CWnd
 
     CString m_app_ver;
     CString m_svc_ver;
+    ULONG   m_svc_abi;
     CString m_drv_ver;
+    ULONG   m_drv_abi;
 
     HICON m_hIcon1;
     HICON m_hIcon2;

@@ -104,9 +104,6 @@ static NTSTATUS File_Generic_MyParseProc(
 static NTSTATUS File_CreatePagingFile(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);
 
-static NTSTATUS File_CreateSymbolicLinkObject(
-    PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);
-
 static void File_ReplaceTokenIfFontRequest(
     ACCESS_STATE *AccessState,
     PDEVICE_OBJECT DeviceObject, UNICODE_STRING *FileName, BOOLEAN* pbSetDirty);
@@ -224,9 +221,6 @@ _FX BOOLEAN File_Init(void)
     //
 
     if (! Syscall_Set1("CreatePagingFile", File_CreatePagingFile))
-        return FALSE;
-
-    if (! Syscall_Set1("CreateSymbolicLinkObject", File_CreateSymbolicLinkObject))
         return FALSE;
 
     //
@@ -680,6 +674,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         L"\\Device\\Mup\\*",
         L"\\Device\\Ndis",
         L"\\Device\\PcwDrv",
+        L"\\Device\\SrpDevice", //Smart App Control
         NULL
     };
     static const WCHAR* drive_devices[] = {
@@ -803,6 +798,13 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
 
 #ifdef USE_MATCH_PATH_EX
     ok = Process_GetPaths(proc, write_file_paths, _WritePath, TRUE);
+
+    if (ok && proc->use_privacy_mode) { // in privacy mode all drive paths are set to "write"
+        for (i = 0; drive_devices[i] && ok; ++i) {
+            ok = Process_AddPath(proc, write_file_paths, NULL, 
+                                    TRUE, drive_devices[i], FALSE);
+        }
+    }
 #else
     ok = Process_GetPaths2(
             proc, write_file_paths, closed_file_paths,
@@ -839,15 +841,10 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
             }
         }
 
-        if (ok) {
+        if (ok && !proc->use_privacy_mode) { // when not in privacy mode we need to set drive paths to "normal"
             for (i = 0; drive_devices[i] && ok; ++i) {
-                if (proc->use_privacy_mode) { // in privacy mode the default for drives is not "normal" but "write"
-                    ok = Process_AddPath(
-                        proc, write_file_paths, NULL, FALSE, drive_devices[i], FALSE);
-                } else {
-                    ok = Process_AddPath(
-                        proc, normal_file_paths, NULL, FALSE, drive_devices[i], FALSE);
-                }
+                ok = Process_AddPath(
+                    proc, normal_file_paths, NULL, FALSE, drive_devices[i], FALSE);
             }
         }
 
@@ -1774,18 +1771,6 @@ skip_due_to_home_folder:
 
 
 _FX NTSTATUS File_CreatePagingFile(
-    PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args)
-{
-    return STATUS_PRIVILEGE_NOT_HELD;
-}
-
-
-//---------------------------------------------------------------------------
-// File_CreateSymbolicLinkObject
-//---------------------------------------------------------------------------
-
-
-_FX NTSTATUS File_CreateSymbolicLinkObject(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args)
 {
     return STATUS_PRIVILEGE_NOT_HELD;

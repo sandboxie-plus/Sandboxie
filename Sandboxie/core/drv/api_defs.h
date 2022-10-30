@@ -176,6 +176,7 @@ enum {
     SVC_UNMOUNT_HIVE,
     SVC_LOG_MESSAGE,
     SVC_CONFIG_UPDATED,
+    SVC_MOUNTED_HIVE,
 
     SVC_LAST
 };
@@ -501,13 +502,13 @@ typedef struct _SVC_PROCESS_MSG {
 } SVC_PROCESS_MSG;
 
 
-typedef struct _SVC_UNMOUNT_MSG {
+typedef struct _SVC_REGHIVE_MSG {
 
     ULONG process_id;
     ULONG session_id;
     WCHAR boxname[34];
 
-} SVC_UNMOUNT_MSG;
+} SVC_REGHIVE_MSG;
 
 
 //---------------------------------------------------------------------------

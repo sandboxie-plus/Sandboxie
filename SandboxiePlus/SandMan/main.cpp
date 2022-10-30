@@ -16,7 +16,7 @@ QString g_PendingMessage;
 
 int main(int argc, char *argv[])
 {
-	qsrand(QTime::currentTime().msec());
+	srand(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
 
 	wchar_t szPath[MAX_PATH];
 	GetModuleFileNameW(NULL, szPath, ARRAYSIZE(szPath));

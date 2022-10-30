@@ -58,6 +58,8 @@ public:
 
 	virtual void			UpdateDetails();
 
+	virtual void			ScanStartMenu();
+
 	virtual void			SetBoxPaths(const QString& FilePath, const QString& RegPath, const QString& IpcPath);
 
 	virtual void			OpenBox();
@@ -98,8 +100,12 @@ public:
 	virtual void			SetSize(quint64 Size);				//{ m_TotalSize = Size; }
 	virtual bool			IsSizePending() const;
 
+	virtual bool			IsBoxexPath(const QString& Path);
+
 	virtual bool			IsRecoverySuspended() const			{ return m_SuspendRecovery; }
 	virtual void			SetSuspendRecovery(bool bSet = true) { m_SuspendRecovery = bSet; }
+
+	virtual QString			GetCommandFile(const QString& Command);
 
 	const QSet<QString>&	GetRecentPrograms()					{ return m_RecentPrograms; }
 
@@ -123,12 +129,24 @@ public:
 	class COptionsWindow*	m_pOptionsWnd;
 	class CRecoveryWindow*	m_pRecoveryWnd;
 
+	bool					IsOpen() const { return m_bRootAccessOpen; }
 	bool					IsBusy() const { return IsSizePending() || !m_JobQueue.isEmpty(); }
 	SB_STATUS				DeleteContentAsync(bool DeleteShapshots = true, bool bOnAutoDelete = false);
 
+	struct SLink {
+		QString Folder;
+		QString Name;
+		QString Target;
+		QString Icon;
+		int IconIndex;
+	};
+
+	QList<SLink>			GetStartMenu() const { return m_StartMenu.values(); }
+
 signals:
 	void					AboutToBeCleaned();
-	
+	void					StartMenuChanged();
+
 public slots:
 	void					OnAsyncFinished();
 	void					OnAsyncMessage(const QString& Text);
@@ -168,6 +186,7 @@ protected:
 
 	QSet<QString>			m_RecentPrograms;
 
+	QMap<QString, SLink>	m_StartMenu;
 
 	EBoxTypes				m_BoxType;
 	QRgb					m_BoxColor;

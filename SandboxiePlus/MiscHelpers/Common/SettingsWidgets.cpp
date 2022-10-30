@@ -12,7 +12,7 @@ CPathEdit::CPathEdit(bool bDirs, QWidget *parent)
 	m_bDirs = bDirs;
 
 	QHBoxLayout* pLayout = new QHBoxLayout(this);
-	pLayout->setMargin(0);
+	pLayout->setContentsMargins(0,0,0,0);
 	m_pEdit = new QLineEdit(this);
 	connect(m_pEdit, SIGNAL(textChanged(const QString &)), this, SIGNAL(textChanged(const QString &)));
 	pLayout->addWidget(m_pEdit);
@@ -41,7 +41,7 @@ CProxyEdit::CProxyEdit(QWidget *parent)
  : CTxtEdit(parent) 
 {
 	QHBoxLayout* pLayout = new QHBoxLayout(this);
-	pLayout->setMargin(0);
+	pLayout->setContentsMargins(0,0,0,0);
 
 	m_pType = new QComboBox();
 	m_pType->addItem(QString("No"));
@@ -96,7 +96,9 @@ QWidget* CConfigDialog::ConvertToTree(QTabWidget* pTabWidget)
 	pLayout->setContentsMargins(0, 0, 0, 0);
 	m_pTree = new QTreeWidget();
 	m_pTree->setHeaderHidden(true);
-	m_pTree->setMinimumWidth(200);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+	m_pTree->setMinimumWidth(200.0*(QApplication::desktop()->logicalDpiX()/96.0)); // todo Qt6
+#endif
 	QStyle* pStyle = QStyleFactory::create("windows"); // show lines
 	m_pTree->setStyle(pStyle);
 	connect(m_pTree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnItemClicked(QTreeWidgetItem*, int)));
@@ -111,7 +113,8 @@ QWidget* CConfigDialog::ConvertToTree(QTabWidget* pTabWidget)
 	for (int i = 0, k = 0; i < pTabWidget->count(); i++, k++) {
 		QTreeWidgetItem* pItem = new QTreeWidgetItem(QStringList() << pTabWidget->tabText(i));
 		m_pTree->addTopLevelItem(pItem);
-		pItem->setData(1, Qt::UserRole, k);
+		//pItem->setData(1, Qt::UserRole, k);
+		pItem->setData(1, Qt::UserRole, m_pStack->count());
 		pItem->setIcon(0, pTabWidget->tabIcon(i));
 		QGridLayout* pGrid = qobject_cast<QGridLayout*>(pTabWidget->widget(i)->layout());
 		QTabWidget* pSubTabs = pGrid ? qobject_cast<QTabWidget*>(pGrid->itemAt(0)->widget()) : NULL;
@@ -135,6 +138,11 @@ QWidget* CConfigDialog::ConvertToTree(QTabWidget* pTabWidget)
 
 	m_pTree->expandAll();
 
+	m_pTree->resizeColumnToContents(0);
+	//m_pTree->setMinimumWidth(m_pTree->columnWidth(0));
+	//m_pTree->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+	//m_pTree->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
+
 	pTabWidget->clear();
 	return pAltView;
 }
@@ -145,11 +153,14 @@ void CConfigDialog::OnItemClicked(QTreeWidgetItem* pItem, int Column)
 	if (Index != -1)
 		m_pStack->setCurrentIndex(Index);
 
-	QTreeWidgetItem* pRootItem = pItem;
-	while (pRootItem->parent()) pRootItem = pRootItem->parent();
-	int RootIndex = pRootItem->data(1, Qt::UserRole).toInt();
-	if (m_iCurrentTab != RootIndex)
-		OnTab(RootIndex);
+	//QTreeWidgetItem* pRootItem = pItem;
+	//while (pRootItem->parent()) pRootItem = pRootItem->parent();
+	//int RootIndex = pRootItem->data(1, Qt::UserRole).toInt();
+	//QWidget* pWidget = m_pStack->widget(RootIndex);
+	QWidget* pWidget = m_pStack->widget(Index);
+	qDebug() << pWidget->objectName();
+	if (m_pCurrentTab != pWidget)
+		OnTab(pWidget);
 }
 
 template <class T>

@@ -49,7 +49,7 @@ private:
 		QString Error;
 		long Status;
 
-		mutable atomic<int> aRefCnt;
+		mutable std::atomic<int> aRefCnt;
 	} *m;
 
 	SFlexError* MkError(const QString& Error, long Status)

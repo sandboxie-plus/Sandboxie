@@ -186,8 +186,8 @@ typedef NTSTATUS (*P_NtCreateKeyTransacted)(
     IN  ULONG TitleIndex,
     IN  PUNICODE_STRING Class OPTIONAL,
     IN  ULONG CreateOptions,
-    OUT PULONG Disposition OPTIONAL,
-    IN  PVOID Transaction);
+    IN  PVOID Transaction,
+    OUT PULONG Disposition OPTIONAL);
 
 typedef NTSTATUS (*P_NtCreateMutant)(
     OUT PHANDLE MutantHandle,
@@ -648,6 +648,13 @@ typedef NTSTATUS (*P_NtOpenKeyTransacted)(
     IN  POBJECT_ATTRIBUTES ObjectAttributes,
     IN  PVOID Transaction);
 
+typedef NTSTATUS (*P_NtOpenKeyTransactedEx)(
+    OUT PHANDLE KeyHandle,
+    IN  ACCESS_MASK DesiredAccess,
+    IN  POBJECT_ATTRIBUTES ObjectAttributes,
+    IN  ULONG OpenOptions,
+    IN  PVOID Transaction);
+
 typedef NTSTATUS (*P_NtOpenMutant)(
     OUT PHANDLE MutantHandle,
     IN  ACCESS_MASK DesiredAccess,
@@ -992,6 +999,16 @@ typedef NTSTATUS (*P_NtProtectVirtualMemory)(
     IN  OUT PSIZE_T RegionSize,
     IN  ULONG NewProtect,
     OUT PULONG OldProtect);
+
+typedef NTSTATUS (*P_NtAllocateVirtualMemoryEx)(
+    _In_ HANDLE ProcessHandle,
+    _Inout_ _At_ (*BaseAddress, _Readable_bytes_ (*RegionSize) _Writable_bytes_ (*RegionSize) _Post_readable_byte_size_ (*RegionSize)) PVOID* BaseAddress,
+    _Inout_ PSIZE_T RegionSize,
+    _In_ ULONG AllocationType,
+    _In_ ULONG PageProtection,
+    _Inout_updates_opt_(ExtendedParameterCount) PMEM_EXTENDED_PARAMETER ExtendedParameters,
+    _In_ ULONG ExtendedParameterCount
+    );
 
 typedef NTSTATUS (*P_NtWriteFile)(
     IN  HANDLE FileHandle,

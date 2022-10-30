@@ -3339,7 +3339,7 @@ Tillåt direktåtkomst till %2 anteckningar
 .
 
 4342;txt;01
-Aktivera %2 fixen för W11 - KB5014019
+Aktivera %2 fixen för Windows
 .
 
 4356;txt;02

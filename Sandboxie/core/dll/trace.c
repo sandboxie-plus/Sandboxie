@@ -61,7 +61,7 @@ static P_OutputDebugString          __sys_OutputDebugStringA        = NULL;
 
 _FX int Trace_Init(void)
 {
-    HMODULE module = NULL; // fix-me
+    HMODULE module = NULL;
 
 	P_RtlSetLastWin32Error RtlSetLastWin32Error;
     P_OutputDebugString OutputDebugStringW;
@@ -160,7 +160,7 @@ WCHAR* Trace_FindModuleByAddress(void* address)
     {
         Entry = CONTAINING_RECORD(Next, LDR_DATA_TABLE_ENTRY, InLoadOrderLinks);
 
-        if (Entry->DllBase < address && (UINT_PTR)Entry->DllBase + Entry->SizeOfImage > (UINT_PTR)address)
+        if (Entry->DllBase <= address && (UINT_PTR)Entry->DllBase + Entry->SizeOfImage > (UINT_PTR)address)
         {
             found = Entry->BaseDllName.Buffer;
             break;
@@ -385,7 +385,6 @@ const wchar_t* Trace_SbieGuiFunc2Str(ULONG func)
         case GUI_WND_HOOK_NOTIFY:               return L"GUI_WND_HOOK_NOTIFY";
         case GUI_WND_HOOK_REGISTER:             return L"GUI_WND_HOOK_REGISTER";
         case GUI_KILL_JOB:                      return L"GUI_KILL_JOB";
-        case GUI_MAX_REQUEST_CODE:              return L"GUI_MAX_REQUEST_CODE";
         default:                                return L"GUI_UNKNOWN";
     }
 }

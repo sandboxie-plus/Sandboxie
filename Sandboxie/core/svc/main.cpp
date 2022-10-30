@@ -77,6 +77,9 @@ const  ULONG                 tzuk = 'xobs';
 
        SYSTEM_INFO           _SystemInfo;
 
+#ifdef _M_ARM64
+       BOOLEAN               DisableCHPE = FALSE;
+#endif
 
 //---------------------------------------------------------------------------
 // WinMain
@@ -159,6 +162,10 @@ void WINAPI ServiceMain(DWORD argc, WCHAR *argv[])
     if (! SetServiceStatus(ServiceStatusHandle, &ServiceStatus))
         status = GetLastError();
 
+    /*while (! IsDebuggerPresent()) {
+        Sleep(1000);
+    } __debugbreak();*/
+
     if (status == 0)
         status = InitializeEventLog();
 
@@ -168,8 +175,11 @@ void WINAPI ServiceMain(DWORD argc, WCHAR *argv[])
             status = 0x1234;
     }
 
-    if (status == 0)
+    if (status == 0) {
         status = InitializePipe();
+
+		SbieDll_DisableCHPE();
+    }
 
     if (status == 0) {
 
@@ -244,6 +254,28 @@ DWORD WINAPI ServiceHandlerEx(
     {
         PipeServer *pipeServer = PipeServer::GetPipeServer();
         delete pipeServer;
+
+#ifdef _M_ARM64
+        if (DisableCHPE) {
+            HKEY hkey = NULL;
+            LSTATUS rc = RegCreateKeyEx(HKEY_LOCAL_MACHINE, L"SOFTWARE\\Microsoft\\Wow64\\x86\\xtajit",
+                0, NULL, 0, KEY_ALL_ACCESS, NULL, &hkey, NULL);
+            if (rc == 0)
+            {
+                DWORD value;
+                DWORD size = sizeof(value);
+                rc = RegQueryValueEx(hkey, L"LoadCHPEBinaries_old", NULL, NULL, (BYTE*)&value, &size);
+                if (rc == 0) {
+                    RegSetValueEx(hkey, L"LoadCHPEBinaries", NULL, REG_DWORD, (BYTE*)&value, size);
+                    RegDeleteValue(hkey, L"LoadCHPEBinaries_old");
+                }
+                else
+                    RegDeleteValue(hkey, L"LoadCHPEBinaries");
+
+                RegCloseKey(hkey);
+            }
+        }
+#endif
 
         ServiceStatus.dwCurrentState        = SERVICE_STOPPED;
         ServiceStatus.dwCheckPoint          = 0;

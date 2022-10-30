@@ -104,6 +104,20 @@ static const WCHAR *Ipc_Section_TypeName    = L"Section";
 static const WCHAR *Ipc_JobObject_TypeName  = L"JobObject";
 static const WCHAR *Ipc_SymLink_TypeName    = L"SymbolicLinkObject";
 
+static PERESOURCE Ipc_DirLock = NULL;
+
+static LIST Ipc_ObjDirs;
+
+//---------------------------------------------------------------------------
+// Structures and Types
+//---------------------------------------------------------------------------
+
+typedef struct _DIR_OBJ_HANDLE {
+
+    LIST_ELEM list_elem;
+    HANDLE handle;
+
+} DIR_OBJ_HANDLE;
 
 //---------------------------------------------------------------------------
 // Ipc_Init
@@ -117,6 +131,10 @@ _FX BOOLEAN Ipc_Init(void)
         "AlpcConnectPort", "AlpcCreatePort", NULL
     };
     const UCHAR **NamePtr;
+
+    if (! Mem_GetLockResource(&Ipc_DirLock, TRUE))
+        return FALSE;
+    List_Init(&Ipc_ObjDirs);
 
     //
     // set object open handlers for generic objects
@@ -153,6 +171,12 @@ _FX BOOLEAN Ipc_Init(void)
             if (! Syscall_Set2(*NamePtr, Ipc_CheckPortObject))
                 return FALSE;
         }
+    }
+
+    if (Driver_OsVersion >= DRIVER_WINDOWS_8) {
+
+        if (! Syscall_Set2("AlpcConnectPortEx", Ipc_CheckPortObject))
+            return FALSE;
     }
 
     //
@@ -304,7 +328,7 @@ _FX BOOLEAN Ipc_CreateBoxPath(PROCESS *proc)
     RtlSetDaclSecurityDescriptor(&sd, TRUE, NULL, FALSE);
     InitializeObjectAttributes(
         &objattrs, &objname,
-        OBJ_CASE_INSENSITIVE | OBJ_PERMANENT | OBJ_KERNEL_HANDLE,
+        OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, // | OBJ_PERMANENT,
         NULL, &sd);
 
     //
@@ -345,8 +369,21 @@ _FX BOOLEAN Ipc_CreateBoxPath(PROCESS *proc)
             // using the full path.  otherwise, we're done
             //
 
-            if (NT_SUCCESS(status))
-                ZwClose(handle);
+            if (NT_SUCCESS(status)) {
+
+                //ZwClose(handle);
+
+                KIRQL irql;
+                KeRaiseIrql(APC_LEVEL, &irql);
+                ExAcquireResourceExclusiveLite(Ipc_DirLock, TRUE);
+
+                DIR_OBJ_HANDLE *obj_handle = Mem_Alloc(Driver_Pool, sizeof(DIR_OBJ_HANDLE));
+                obj_handle->handle = handle;
+                List_Insert_After(&Ipc_ObjDirs, NULL, obj_handle);
+
+                ExReleaseResourceLite(Ipc_DirLock);
+                KeLowerIrql(irql);
+            }
 
             if (status == STATUS_OBJECT_NAME_COLLISION)
                 status = STATUS_SUCCESS;
@@ -392,10 +429,13 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
         L"\\Windows\\SharedSection", // bSession0
         L"\\Sessions\\*\\BaseNamedObjects\\CrSharedMem_*",      // now required by Chromium browsers
         L"\\ThemeApiPort",
-        L"\\KnownDlls\\*",              // see Ipc_Generic_MyOpenProc_2
+        L"\\KnownDlls\\*",
 #ifdef _WIN64
-        L"\\KnownDlls32\\*",            // see Ipc_Generic_MyOpenProc_2
+        L"\\KnownDlls32\\*",
 #endif _WIN64
+#ifdef _M_ARM64
+        L"\\KnownDllsChpe32\\*",
+#endif _M_ARM64
         L"\\NLS\\*",
         L"*\\BaseNamedObjects*\\ShimCacheMutex",
         L"*\\BaseNamedObjects*\\ShimSharedMemory",
@@ -568,8 +608,6 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
     };
     static const WCHAR* openpaths_windows10[] = {
         L"*\\BaseNamedObjects*\\CoreMessagingRegistrar",
-        L"\\RPC Control\\webcache_*",
-        L"*\\BaseNamedObjects\\windows_webcache_counters_*",
         L"*\\BaseNamedObjects\\[CoreUI]-*",
         // open paths 11
         L"*\\BaseNamedObjects\\SM*:WilStaging_*", // 22449.1000 accesses this before sbiedll load
@@ -678,6 +716,16 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
         for (i = 0; openpaths_windows10[i] && ok; ++i) {
             ok = Process_AddPath(proc, &proc->open_ipc_paths, NULL,
                 TRUE, openpaths_windows10[i], FALSE);
+        }
+
+        if (!Conf_Get_Boolean(proc->box->name, L"CloseWinInetCache", 0, FALSE)) { // this breaks IE view source, see SbieDll_IsOpenClsid
+            
+            static const WCHAR* webcache_ = L"\\RPC Control\\webcache_*";
+            static const WCHAR* windows_webcache_counters_ = L"*\\BaseNamedObjects\\windows_webcache_counters_*";
+            if (ok) ok = Process_AddPath(proc, &proc->open_ipc_paths, NULL,
+                FALSE, webcache_, FALSE);
+            if (ok) ok = Process_AddPath(proc, &proc->open_ipc_paths, NULL,
+                FALSE, windows_webcache_counters_, FALSE);
         }
     }
 
@@ -1484,6 +1532,7 @@ _FX NTSTATUS Ipc_Api_CreateDirOrLink(PROCESS *proc, ULONG64 *parms)
         return STATUS_NOT_IMPLEMENTED;
 
     status = STATUS_SUCCESS;
+    handle = NULL;
 
     //
     // copy first user parameter: objname
@@ -1555,7 +1604,7 @@ _FX NTSTATUS Ipc_Api_CreateDirOrLink(PROCESS *proc, ULONG64 *parms)
 
     InitializeObjectAttributes(
         &objattrs, &objname,
-        OBJ_CASE_INSENSITIVE | OBJ_PERMANENT | OBJ_KERNEL_HANDLE,
+        OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, // | OBJ_PERMANENT, 
         NULL, Driver_PublicSd);
 
     RtlInitUnicodeString(&objname, objname_buf);
@@ -1571,32 +1620,11 @@ _FX NTSTATUS Ipc_Api_CreateDirOrLink(PROCESS *proc, ULONG64 *parms)
 
             status = ZwCreateSymbolicLinkObject(
                 &handle, SYMBOLIC_LINK_ALL_ACCESS, &objattrs, &target);
-
-            if (NT_SUCCESS(status))
-                ZwClose(handle);
         }
 
         Mem_Free(target_buf, target_len + sizeof(WCHAR));
 
     } else {
-
-        if (Driver_LowLabelSd) {
-
-            //
-            // prior to version 3.68, we did not create object directories
-            // with a low integrity label.  so to make sure migration is
-            // smooth from earlier versions, we use the OBJ_OPENIF flag to
-            // force the directory to always open successfully, so that we
-            // can call ZwSetSecurityObject
-            //
-            // in later releases, when it is unlikely to still encounter
-            // object directories created without the integrity label, it
-            // would be ok to remove the OBJ_OPENIF flag, and only apply
-            // the label when actually creating the object directory
-            //
-
-            objattrs.Attributes |= OBJ_OPENIF;
-        }
 
         status = ZwCreateDirectoryObject(
             &handle, DIRECTORY_ALL_ACCESS, &objattrs);
@@ -1608,9 +1636,23 @@ _FX NTSTATUS Ipc_Api_CreateDirOrLink(PROCESS *proc, ULONG64 *parms)
                 ZwSetSecurityObject(
                     handle, LABEL_SECURITY_INFORMATION, Driver_LowLabelSd);
             }
-
-            ZwClose(handle);
         }
+    }
+
+    if (handle != NULL) {
+
+        //ZwClose(handle);
+
+        KIRQL irql;
+        KeRaiseIrql(APC_LEVEL, &irql);
+        ExAcquireResourceExclusiveLite(Ipc_DirLock, TRUE);
+
+        DIR_OBJ_HANDLE *obj_handle = Mem_Alloc(Driver_Pool, sizeof(DIR_OBJ_HANDLE));
+        obj_handle->handle = handle;
+        List_Insert_After(&Ipc_ObjDirs, NULL, obj_handle);
+
+        ExReleaseResourceLite(Ipc_DirLock);
+        KeLowerIrql(irql);
     }
 
     Mem_Free(objname_buf, objname_len + sizeof(WCHAR));
@@ -1785,4 +1827,20 @@ _FX void Ipc_Unload(void)
 {
     if (Ipc_Dynamic_Ports.pPortLock)
         Mem_FreeLockResource(&Ipc_Dynamic_Ports.pPortLock);
+
+    KIRQL irql;
+    KeRaiseIrql(APC_LEVEL, &irql);
+    ExAcquireResourceExclusiveLite(Ipc_DirLock, TRUE);
+
+    DIR_OBJ_HANDLE* obj_handle = List_Head(&Ipc_ObjDirs);
+    while (obj_handle) {
+
+        ZwClose(obj_handle->handle);
+        obj_handle = List_Next(obj_handle);
+    }
+
+    ExReleaseResourceLite(Ipc_DirLock);
+    KeLowerIrql(irql);
+
+    Mem_FreeLockResource(&Ipc_DirLock);
 }

@@ -307,6 +307,14 @@ NtCreateDirectoryObject(
 );
 
 __declspec(dllimport) NTSTATUS __stdcall
+NtCreateDirectoryObjectEx(
+    OUT PHANDLE DirectoryHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN HANDLE ShadowDirectoryHandle,
+    IN ULONG Flags);
+
+__declspec(dllimport) NTSTATUS __stdcall
 NtOpenDirectoryObject(
     OUT PHANDLE             DirectoryHandle,
     IN ACCESS_MASK          DesiredAccess,
@@ -1988,6 +1996,11 @@ __declspec(dllimport) NTSTATUS __stdcall NtLoadKey(
     POBJECT_ATTRIBUTES TargetObjectAttributes,
     POBJECT_ATTRIBUTES SourceObjectAttributes);
 
+__declspec(dllimport) NTSTATUS __stdcall NtLoadKey2(
+    POBJECT_ATTRIBUTES TargetObjectAttributes,
+    POBJECT_ATTRIBUTES SourceObjectAttributes,
+    ULONG Flags);
+
 __declspec(dllimport) NTSTATUS __stdcall NtSaveKey(
     HANDLE KeyHandle,
     HANDLE FileHandle);
@@ -2595,9 +2608,11 @@ __declspec(dllimport) NTSTATUS __stdcall NtRaiseHardError(
 
 //---------------------------------------------------------------------------
 
-#ifdef _WIN64
+#ifdef _M_ARM64
+#define NtCurrentPeb() (*((ULONG_PTR*)(__getReg(18) + 0x60)))
+#elif _WIN64
 #define NtCurrentPeb() ((ULONG_PTR)__readgsqword(0x60))
-#else ! _WIN64
+#else // _M_X86
 #define NtCurrentPeb() ((ULONG_PTR)__readfsdword(0x30))
 #endif _WIN64
 

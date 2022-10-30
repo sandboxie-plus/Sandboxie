@@ -49,7 +49,7 @@ private:
 	static void				Install(EComponent Component, QStringList& Ops);
 	static void				Uninstall(EComponent Component, QStringList& Ops);
 
-	static void				CreateShellEntry(const wstring& classname, const wstring& key, const wstring& cmdtext, const wstring& iconpath, const wstring& startcmd);
+	static void				CreateShellEntry(const std::wstring& classname, const std::wstring& key, const std::wstring& cmdtext, const std::wstring& iconpath, const std::wstring& startcmd);
 };
 
 

@@ -789,7 +789,7 @@ BOOL Parse_Command_Line(void)
 
         return TRUE;
 
-    // show abouth dialog
+    // show about dialog
 
     } else if (wcsncmp(cmd, about_dialog, wcslen(about_dialog)) == 0) {
 

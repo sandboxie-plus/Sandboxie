@@ -10,7 +10,7 @@ public:
 	CBoxMonitor();
 	~CBoxMonitor();
 
-	virtual void Notify(const wstring& strDirectory);
+	virtual void Notify(const std::wstring& strDirectory);
 
 	virtual void run();
 

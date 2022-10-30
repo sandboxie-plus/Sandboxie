@@ -11,6 +11,11 @@ public:
 	CTraceModel(QObject* parent = 0);
 	~CTraceModel();
 
+	void			SetTree(bool bTree)				{ m_bTree = bTree; }
+	bool			IsTree() const					{ return m_bTree; }
+	void			SetObjTree(bool bObjTree)		{ m_bObjTree = bObjTree; }
+	bool			IsObjTree() const				{ return m_bObjTree; }
+
 	QList<QVariant>	Sync(const QVector<CTraceEntryPtr>& EntryList, int (*Filter)(const CTraceEntryPtr&, void*), void* params);
 
 	CTraceEntryPtr	GetEntry(const QModelIndex& index) const;
@@ -51,6 +56,8 @@ protected:
 		bool				bHighLight;
 	};
 
+	bool					m_bTree;
+	bool					m_bObjTree;
 	QVariant				m_LastID;
 	int						m_LastCount;
 

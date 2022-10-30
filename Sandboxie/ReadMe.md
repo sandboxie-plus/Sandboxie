@@ -1,6 +1,6 @@
-### Sandboxie Build Instructions
+## Sandboxie Build Instructions
 
-Please note: there is another ReadMe file in the \install\ folder that explains how to create the Sandboxie installers.
+Please note: there is another [ReadMe.md](./install/ReadMe.md) file in the [\install](./install/) folder that explains how to create the Sandboxie installers.
 
 1) Sandboxie builds under MS Visual Studio 2019.
 2) Install the Windows Driver Kit (WDK) for Windows 10, version 2004:

@@ -39,6 +39,8 @@ protected:
 	bool m_SecretMode;
 };
 
+void AddIconToLabel(QLabel* pLabel, const QPixmap& Pixmap);
+
 //////////////////////////////////////////////////////////////////////////
 // CSettingsWindow
 
@@ -121,7 +123,7 @@ protected:
 
 	bool eventFilter(QObject *watched, QEvent *e);
 
-	void OnTab(int iTabID);
+	void OnTab(QWidget* pTab);
 
 	void	AddWarnEntry(const QString& Name, int type);
 

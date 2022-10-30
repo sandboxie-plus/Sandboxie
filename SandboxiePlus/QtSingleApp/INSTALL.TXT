@@ -239,7 +239,7 @@ Using the component as a DLL
 Uninstalling
 ------------
 
-    The following command will remove any fils that have been
+    The following command will remove any files that have been
     automatically placed outside the package directory itself during
     installation and building
 

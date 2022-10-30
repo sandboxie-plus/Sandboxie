@@ -434,33 +434,32 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 
 			if(is_caller_sandboxed || (args->info_type.val == 'itok' && !Session_CheckAdminAccess(TRUE)))
 				status = STATUS_ACCESS_DENIED;
+            else if(!proc->threads_lock)
+                status = STATUS_NOT_FOUND;
 			else
 			{
                 HANDLE tid = (HANDLE)(args->ext_data.val);
 
-                THREAD *thrd = Thread_GetByThreadId(proc, tid);
+                KIRQL irql2;
+                KeRaiseIrql(APC_LEVEL, &irql2);
+                ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
+
+                THREAD *thrd = Thread_GetOrCreate(proc, tid, FALSE);
 				if (thrd)
 				{
                     if (args->info_type.val == 'ttok')
                     {
                         *data = thrd->token_object ? TRUE : FALSE;
                     }
-                    else
+                    else //if (args->info_type.val == 'itok')
                     {
-                        KIRQL irql2;
                         void* ImpersonationTokenObject;
-
-                        KeRaiseIrql(APC_LEVEL, &irql2);
-                        ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
 
                         ImpersonationTokenObject = thrd->token_object;
 
                         if (ImpersonationTokenObject) {
                             ObReferenceObject(ImpersonationTokenObject);
                         }
-
-                        ExReleaseResourceLite(proc->threads_lock);
-                        KeLowerIrql(irql2);
 
                         if (ImpersonationTokenObject)
                         {
@@ -474,9 +473,14 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
                         else
                             status = STATUS_NO_IMPERSONATION_TOKEN;
                     }
+                    //else
+                    //    status = STATUS_INVALID_PARAMETER;
 				}
 				else
 					status = STATUS_NOT_FOUND;
+
+                ExReleaseResourceLite(proc->threads_lock);
+                KeLowerIrql(irql2);
 			}
 
 		} else if (args->info_type.val == 'ippt') { // is primary process token

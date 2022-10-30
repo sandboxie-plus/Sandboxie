@@ -87,10 +87,10 @@ CMemTracer memTracer;
 void CMemTracer::DumpTrace()
 {
 	QMutexLocker Locker(&m_Locker);
-	for(map<string,int>::iterator I = m_MemoryTrace.begin(); I != m_MemoryTrace.end(); I++)
+	for(std::map<std::string,int>::iterator I = m_MemoryTrace.begin(); I != m_MemoryTrace.end(); I++)
 	{
 
-		map<string,int>::iterator J = m_MemoryTrace2.find(I->first);
+		std::map<std::string,int>::iterator J = m_MemoryTrace2.find(I->first);
 		if(J != m_MemoryTrace2.end())
 			TRACE(L"MEMORY TRACE: Object '%S' has %d (%d) instances.",I->first.c_str(),I->second, J->second);
 		else
@@ -98,13 +98,13 @@ void CMemTracer::DumpTrace()
 	}
 }
 
-void CMemTracer::TraceAlloc(string Name)
+void CMemTracer::TraceAlloc(std::string Name)
 {
 	QMutexLocker Locker(&m_Locker);
 	m_MemoryTrace[Name] += 1;
 }
 
-void CMemTracer::TraceFree(string Name)
+void CMemTracer::TraceFree(std::string Name)
 {
 	QMutexLocker Locker(&m_Locker);
 	m_MemoryTrace[Name] -= 1;
@@ -114,7 +114,7 @@ void CMemTracer::TraceFree(string Name)
 		m_MemoryTrace2[Name] -= 1;
 }
 
-void CMemTracer::TracePre(string Name)
+void CMemTracer::TracePre(std::string Name)
 {
 	QMutexLocker Locker(&m_Locker);
 	m_MemoryTrace2[Name] += 1;
@@ -126,7 +126,7 @@ CCpuTracer cpuTracer;
 void CCpuTracer::DumpTrace()
 {
 	QMutexLocker Locker(&m_Locker);
-	for(map<string,SCycles>::iterator I = m_CpuUsageTrace.begin(); I != m_CpuUsageTrace.end(); I++)
+	for(std::map<std::string,SCycles>::iterator I = m_CpuUsageTrace.begin(); I != m_CpuUsageTrace.end(); I++)
 		TRACE(L"CPU TRACE: Prozedure '%S' needed %f seconds.",I->first.c_str(),(double)I->second.Total/1000000.0);
 }
 
@@ -136,13 +136,13 @@ void CCpuTracer::ResetTrace()
 	m_CpuUsageTrace.clear();
 }
 
-void CCpuTracer::TraceStart(string Name)
+void CCpuTracer::TraceStart(std::string Name)
 {
 	QMutexLocker Locker(&m_Locker);
 	m_CpuUsageTrace[Name].Counting = GetCurCycle();
 }
 
-void CCpuTracer::TraceStop(string Name)
+void CCpuTracer::TraceStop(std::string Name)
 {
 	QMutexLocker Locker(&m_Locker);
 	m_CpuUsageTrace[Name].Total += GetCurCycle() - m_CpuUsageTrace[Name].Counting;
@@ -155,11 +155,11 @@ CLockTracer lockTracer;
 void CLockTracer::DumpTrace()
 {
 	QMutexLocker Locker(&m_Locker);
-	for(map<string,SLocks>::iterator I = m_LockTrace.begin(); I != m_LockTrace.end(); I++)
+	for(std::map<std::string,SLocks>::iterator I = m_LockTrace.begin(); I != m_LockTrace.end(); I++)
 		TRACE(L"LOCK TRACE: Lock '%S' has %d Locks for %f seconds.",I->first.c_str(),I->second.LockCount, (double)(GetCurCycle()/1000 - I->second.LockTime) / 1000);
 }
 
-void CLockTracer::TraceLock(string Name, int op)
+void CLockTracer::TraceLock(std::string Name, int op)
 {
 	QMutexLocker Locker(&m_Locker);
 	SLocks &Locks =	m_LockTrace[Name];
@@ -213,7 +213,7 @@ static LONG __stdcall MyCrashHandlerExceptionFilter(EXCEPTION_POINTERS* pEx)
   bool bSuccess = false;
 
   wchar_t szMiniDumpFileName[128];
-  wsprintf(szMiniDumpFileName, L"%s %s.dmp", s_szMiniDumpName, QDateTime::currentDateTime().toString("dd.MM.yyyy hh-mm-ss,zzz").replace(QRegExp("[:*?<>|\"\\/]"), "_").toStdWString().c_str());
+  wsprintf(szMiniDumpFileName, L"%s %s.dmp", s_szMiniDumpName, QDateTime::currentDateTime().toString("dd.MM.yyyy hh-mm-ss,zzz").replace(QRegularExpression("[:*?<>|\"\\/]"), "_").toStdWString().c_str());
   
   /*wchar_t szMiniDumpPath[MAX_PATH] = { 0 };
 
@@ -348,7 +348,7 @@ void crit_err_hdlr(int sig_num, siginfo_t * info, void * ucontext)
     messages = backtrace_symbols(array, size);
 
     char szMiniDumpFileName[128];
-    sprintf(szMiniDumpFileName, "%S_%s.log", s_szMiniDumpName, QDateTime::currentDateTime().toString("dd.MM.yyyy_hh-mm-ss,zzz").replace(QRegExp("[:*?<>|\"\\/]"), "_").toStdString().c_str());
+    sprintf(szMiniDumpFileName, "%S_%s.log", s_szMiniDumpName, QDateTime::currentDateTime().toString("dd.MM.yyyy_hh-mm-ss,zzz").replace(QRegularExpression("[:*?<>|\"\\/]"), "_").toStdString().c_str());
 
     FILE* file = fopen(szMiniDumpFileName, "wb");
 

@@ -295,7 +295,7 @@ MSG_HEADER *SbieIniServer::Handler2(MSG_HEADER *msg)
 MSG_HEADER *SbieIniServer::GetVersion(MSG_HEADER *msg)
 {
     WCHAR ver_str[16];
-    wsprintf(ver_str, L"%S", MY_VERSION_COMPAT);
+    wsprintf(ver_str, L"%S", MY_VERSION_STRING);
 
     ULONG ver_len = wcslen(ver_str);
     ULONG rpl_len = sizeof(SBIE_INI_GET_USER_RPL)
@@ -306,7 +306,7 @@ MSG_HEADER *SbieIniServer::GetVersion(MSG_HEADER *msg)
         return SHORT_REPLY(STATUS_INSUFFICIENT_RESOURCES);
 
     wcscpy(rpl->version, ver_str);
-    rpl->version_len = ver_len;
+    rpl->abi_ver = MY_ABI_VERSION;
 
     return &rpl->h;
 }
@@ -938,7 +938,7 @@ finish:
         // set a ini header with a descriptive comment
         m_pConfigIni->Sections.push_back(SIniSection{ L"" });
         m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"#" });
-        m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"# Sandboxie-Plus configuration file" });
+        m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"# Sandboxie configuration file" });
         m_pConfigIni->Sections.back().Entries.push_back(SIniEntry{ L"", L"#" });
 
         m_pConfigIni->Sections.push_back(SIniSection{ L"GlobalSettings" });
@@ -1993,12 +1993,18 @@ ULONG SbieIniServer::RefreshConf()
 
     UnlockConf();
 
+    int retryCnt = 0;
+retry:
     hFile = CreateFile(
         IniPath, FILE_GENERIC_WRITE,
         FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
     if (hFile == INVALID_HANDLE_VALUE) {
+        if (GetLastError() == ERROR_SHARING_VIOLATION && retryCnt++ < 10) {
+            Sleep(100);
+            goto retry;
+        }
         SbieApi_LogEx(m_session_id, 2322, L"[15 / %d]", GetLastError());
         goto finish;
     }

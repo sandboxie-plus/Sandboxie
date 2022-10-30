@@ -229,6 +229,11 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_GetBorderColor(const WCHAR* box_name, COLORREF* 
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_IsReservedFileName(const WCHAR* name);
 
+SBIEDLL_EXPORT  void DbgPrint(const char* format, ...);
+SBIEDLL_EXPORT  void DbgTrace(const char* format, ...);
+
+SBIEDLL_EXPORT  BOOLEAN SbieDll_DisableCHPE(void);
+
 //---------------------------------------------------------------------------
 
 #ifdef __cplusplus

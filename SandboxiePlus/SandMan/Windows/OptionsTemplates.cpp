@@ -129,6 +129,7 @@ void COptionsWindow::ShowTemplates()
 		QString Name = I.value().first.mid(9);
 
 		QTreeWidgetItem* pItem = new QTreeWidgetItem();
+		pItem->setData(0, Qt::UserRole, I.key());
 		pItem->setText(0, GetCategoryName(I.key()));
 		pItem->setData(1, Qt::UserRole, I.value().first);
 		pItem->setText(1, I.value().second);
@@ -177,9 +178,11 @@ void COptionsWindow::OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column)
 	QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni(pItem->data(1, Qt::UserRole).toString(), m_pBox->GetAPI()));
 
 	COptionsWindow OptionsWindow(pTemplate, pItem->text(1));
+	QPoint ParentPos = mapToGlobal(rect().topLeft());
+	OptionsWindow.move(ParentPos.x() + 30, ParentPos.y() + 10);
 	OptionsWindow.exec();
 
-	if(pItem->text(0) == "Local")
+	if (pItem->data(0, Qt::UserRole).toString() == "Local")
 		LoadTemplates();
 }
 
@@ -211,7 +214,7 @@ void COptionsWindow::OnAddTemplates()
 void COptionsWindow::OnDelTemplates()
 {
 	QTreeWidgetItem* pItem = ui.treeTemplates->currentItem();
-	if (!pItem || pItem->text(0) != "Local")
+	if (!pItem || pItem->data(0, Qt::UserRole).toString() != "Local")
 	{
 		QMessageBox::critical(this, "Sandboxie-Plus", tr("Only local templates can be removed!"));
 		return;

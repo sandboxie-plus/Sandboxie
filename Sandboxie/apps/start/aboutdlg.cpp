@@ -317,8 +317,7 @@ bool DoAboutDialog(bool bReminder)
 		    if (NT_SUCCESS(SbieApi_Call(API_GET_SECURE_PARAM, 3, L"ReminderShedule", (ULONG_PTR)&ReminderShedule, sizeof(ReminderShedule)))) {
 			    for (USHORT* Cur = ReminderShedule; (ULONG_PTR)Cur < (ULONG_PTR)ReminderShedule + sizeof(ReminderShedule) && *Cur != 0; Cur += 2) {
 				    if (Days > Cur[0]) {
-					    if (Interval > Cur[1]) 
-						    Interval = Cur[1];
+					    if (Cur[1] < Interval) Interval = Cur[1];
 					    break;
 				    }
 			    }

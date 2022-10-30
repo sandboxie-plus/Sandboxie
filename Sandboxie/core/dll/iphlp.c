@@ -447,7 +447,9 @@ _FX ULONG IpHlp_CommonSend(         ULONG_PTR IcmpHandle,
     req->h.length = len;
     req->h.msgid = MSGID_IPHLP_SEND_ECHO;
 
+#ifndef _WIN64
     req->iswow64 = Dll_IsWow64;
+#endif
 
     req->ip6 = ip6;
     req->ex2 = ex2;

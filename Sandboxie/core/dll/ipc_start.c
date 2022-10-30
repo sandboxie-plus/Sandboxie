@@ -69,6 +69,9 @@ _FX BOOLEAN Ipc_StartServer(const WCHAR *TruePath, BOOLEAN Async)
     BOOLEAN event_created = FALSE;
     BOOLEAN bRet = TRUE;
 
+    if (SbieApi_QueryConfBool(NULL, L"NoSandboxieRpcSs", FALSE))
+        return FALSE;
+
     //
     // in async mode, several args are passed through the TruePath pointer
     //

@@ -191,7 +191,7 @@ SelectTasksLabel2=[name]을(를) 설치하는 동안 수행할 추가 작업을 
 
 ; *** "Select Start Menu Folder" wizard page
 WizardSelectProgramGroup=시작 메뉴 폴더 선택
-SelectStartMenuFolderDesc=어디에 프로그램 바로가기를 위치하겠습니까?
+SelectStartMenuFolderDesc=프로그램 바로가기의 위치가 어디입니까?
 SelectStartMenuFolderLabel3=다음 시작 메뉴 폴더에 프로그램 바로가기를 만듭니다.
 SelectStartMenuFolderBrowseLabel=계속하려면 "다음"을 클릭하고, 다른 폴더를 선택하려면 "찾아보기"를 클릭하십시오.
 MustEnterGroupName=폴더 이름을 입력하십시오.
@@ -250,9 +250,9 @@ FinishedRestartMessage=[name] 설치를 완료하려면 컴퓨터를 다시 시�
 ShowReadmeCheck=예, README 파일을 보고 싶습니다.
 YesRadio=예, 지금 컴퓨터를 다시 시작합니다(&Y)
 NoRadio=아니오, 나중에 컴퓨터를 다시 시작하겠습니다(&N)
-; used for example as 'Run MyProg.exe'
+; 예를 들어 'Run MyProg.exe'로 사용됩니다
 RunEntryExec=%1 실행
-; used for example as 'View Readme.txt'
+; 예를 들어 'Readme.txt 보기'로 사용됩니다
 RunEntryShellExec=%1 보기
 
 ; *** "Setup Needs the Next Disk" stuff
@@ -373,8 +373,8 @@ ShutdownBlockReasonUninstallingApp=%1을(를) 제거하는 중입니다.
 [CustomMessages]
 
 NameAndVersion=%1 버전 %2
-AdditionalIcons=추가 바로 가기:
-CreateDesktopIcon=바탕 화면에 바로가기 만들기(&D)
+AdditionalIcons=추가 바로가기:
+CreateDesktopIcon=바탕화면에 바로가기 만들기(&D)
 CreateQuickLaunchIcon=빠른 실행 아이콘 만들기(&Q)
 ProgramOnTheWeb=%1 웹페이지
 UninstallProgram=%1 제거

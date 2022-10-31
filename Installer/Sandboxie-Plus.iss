@@ -284,10 +284,6 @@ begin
       exit;
     end;
 
-    // Stop processes.
-    UpdateStatus(OutputProgressPage, 'Taskkill /IM Sandman.exe /IM SbieCtrl.exe /IM Start.exe /F', 30);
-    Exec(ExpandConstant('{sys}\taskkill.exe'), '/IM Sandman.exe /IM SbieCtrl.exe /IM Start.exe /F', '', SW_HIDE, ewWaitUntilTerminated, ExecRet);
-
     // Stop service and driver.
     UpdateStatus(OutputProgressPage, 'KmdUtil stop SbieSvc', 55);
     Exec(ExpandConstant('{app}\KmdUtil.exe'), 'stop SbieSvc', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
@@ -328,6 +324,8 @@ end;
 
 
 function NextButtonClick(CurPageID: Integer): Boolean;
+var
+  ExecRet: Integer;
 begin
 
   // Get mode setting from Custom page and set path for the Dir page.
@@ -346,6 +344,10 @@ begin
   // Shutdown service, driver and processes as ready to install.
   if ((CurPageID = wpReady) and (not IsPortable())) then
   begin
+    
+    // Stop processes.
+    Exec(ExpandConstant('{sys}\taskkill.exe'), '/IM Sandman.exe /IM SbieCtrl.exe /IM Start.exe /F', '', SW_HIDE, ewWaitUntilTerminated, ExecRet);
+
     Result := ShutdownSbie();
     exit;
   end;
@@ -517,7 +519,7 @@ begin
 
     if TaskRet > 2 then begin
       Log('Debug: Start terminate_all');
-      Exec(ExpandConstant('{app}\start.exe'), 'terminate_all', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
+      Exec(ExpandConstant('{app}\start.exe'), '/terminate_all', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ExecRet);
     end;
 
     if TaskRet > 2 then begin
@@ -559,11 +561,16 @@ end;
 
 
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+var
+  ExecRet: Integer;
 begin
 
   // Before the uninstallation.
   if (CurUninstallStep <> usUninstall) then
     exit;
+
+  // Stop processes.
+  Exec(ExpandConstant('{sys}\taskkill.exe'), '/IM Sandman.exe /IM SbieCtrl.exe /IM Start.exe /F', '', SW_HIDE, ewWaitUntilTerminated, ExecRet);
 
   // User to confirm extra files to remove.
   if not UninstallSilent then

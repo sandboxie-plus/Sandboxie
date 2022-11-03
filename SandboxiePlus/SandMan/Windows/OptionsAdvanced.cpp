@@ -40,7 +40,7 @@ void COptionsWindow::CreateAdvanced()
 	m_AdvOptions.insert("UseWin32kHooks",				SAdvOption{eSpec, QStringList() << "y" << "n", tr("Enable the use of win32 hooks for selected processes. Note: You need to enable win32k syscall hook support globally first.")});
 	m_AdvOptions.insert("EnableMiniDump",				SAdvOption{eSpec, QStringList() << "y" << "n", tr("Enable crash dump creation in the sandbox folder")});
 	m_AdvOptions.insert("ApplyElevateCreateProcessFix", SAdvOption{eOnlySpec, QStringList() << "y" << "n", tr("Always use ElevateCreateProcess fix, as sometimes applied by the Program Compatibility Assistant.")});
-	m_AdvOptions.insert("PreferExternalManifest",		SAdvOption{eOnlySpec, QStringList() << "y" << "n", tr("")"});
+	m_AdvOptions.insert("PreferExternalManifest",		SAdvOption{eOnlySpec, QStringList() << "y" << "n, tr("")"});
 	m_AdvOptions.insert("ExternalManifestHack",			SAdvOption{eSpec, QStringList() << "y" << "n", tr("Enable special inconsistent PreferExternalManifest behaviour, as needed for some Edge fixes")});
 	m_AdvOptions.insert("RpcMgmtSetComTimeout",			SAdvOption{eSpec, QStringList() << "n" << "y", tr("Set RpcMgmtSetComTimeout usage for specific processes")});
 	m_AdvOptions.insert("CopyBlockDenyWrite",			SAdvOption{eSpec, QStringList() << "y" << "n", tr("Makes a write open call to a file that won't be copied fail instead of turning it read-only.")});

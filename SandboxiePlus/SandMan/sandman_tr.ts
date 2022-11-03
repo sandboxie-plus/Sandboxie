@@ -1636,7 +1636,7 @@ Tam yol: %4</translation>
         <location filename="SandMan.cpp" line="562"/>
         <location filename="SandMan.cpp" line="681"/>
         <source>Reload ini file</source>
-        <translation>İni dosyasını yeniden yükle</translation>
+        <translation>Ini dosyasını yeniden yükle</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="390"/>
@@ -1766,7 +1766,7 @@ Tam yol: %4</translation>
         <location filename="SandMan.cpp" line="561"/>
         <location filename="SandMan.cpp" line="680"/>
         <source>Edit ini file</source>
-        <translation>İni dosyasını düzenle</translation>
+        <translation>Ini dosyasını düzenle</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="529"/>
@@ -2229,7 +2229,7 @@ Hayır şunları seçer: %2</translation>
         <location filename="SandMan.cpp" line="556"/>
         <location filename="SandMan.cpp" line="673"/>
         <source>Reset all GUI options</source>
-        <translation>Tüm GUI seçeneklerini sıfırla</translation>
+        <translation>Tüm GKA seçeneklerini sıfırla</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="574"/>
@@ -3735,7 +3735,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/TraceView.cpp" line="217"/>
         <source>Trace</source>
-        <translation>Takip</translation>
+        <translation>İzleme</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="218"/>
@@ -3811,7 +3811,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="318"/>
         <source>&amp;Vintage SbieCtrl.exe UI</source>
-        <translation>&amp;Vintage SbieCtrl.exe Kullanıcı Arayüzü</translation>
+        <translation>&amp;Eski SbieCtrl.exe Kullanıcı Arayüzü</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="343"/>
@@ -4280,7 +4280,7 @@ instead of &quot;*&quot;.</source>
         <translation>Sürücü tarafından görülen tüm erişim olaylarını kaynak erişim günlüğüne kaydet.
 
 Bu seçenekler olay maskesini &quot;*&quot; olarak ayarlar - Tüm erişim olayları
-İni kullanarak günlüğe kaydetmeyi özelleştirebilirsiniz.
+Ini kullanarak günlüğe kaydetmeyi özelleştirebilirsiniz.
 &quot;A&quot; - İzin verilen erişim(ler)
 &quot;D&quot; - Reddedilen erişim(ler)
 &quot;I&quot; - Yoksayılan erişim(ler)
@@ -4314,7 +4314,7 @@ Bu seçenekler olay maskesini &quot;*&quot; olarak ayarlar - Tüm erişim olayla
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4302"/>
         <source>Edit ini</source>
-        <translation>İni düzenleme</translation>
+        <translation>Ini düzenle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1341"/>
@@ -4346,7 +4346,7 @@ Bu seçenekler olay maskesini &quot;*&quot; olarak ayarlar - Tüm erişim olayla
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3851"/>
         <source>GUI Trace</source>
-        <translation>GUI İzleme</translation>
+        <translation>GKA İzleme</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3906"/>
@@ -4854,7 +4854,7 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3776"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
-        <translation>Tüm SetError&apos;ları Trace günlüğüne kaydedin (çok fazla çıktı oluşturur)</translation>
+        <translation>Tüm SetError&apos;ları İzleme günlüğüne kaydedin (çok fazla çıktı oluşturur)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3823"/>

@@ -16,6 +16,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with switching snapshots when the file panel is open
 - fixed issue with file panel when an empty box is sellected [#2419](https://github.com/sandboxie-plus/Sandboxie/issues/2419)
 - fixed not all icons being disabled with disable all icons [#2406](https://github.com/sandboxie-plus/Sandboxie/issues/2406)
+- fixed compatybility issue with MSEdge [#2312](https://github.com/sandboxie-plus/Sandboxie/issues/2312)
+
 
 
 

@@ -816,6 +816,18 @@ _FX BOOL Proc_CreateProcessInternalW(
         hToken = NULL;
 
     //
+    // MSEdge Compatybility hack
+    // workers of type cdm can't open SbeiSvc's ALPC port
+    //
+
+    // $Workaround$ - 3rd party fix
+    if(Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME && lpCommandLine
+        && wcsstr(lpCommandLine, L"--service-sandbox-type")
+      )
+        hToken = NULL;
+
+
+    //
     // use a copy path for the current directory
     // if there is a copy directory in the sandbox
     //

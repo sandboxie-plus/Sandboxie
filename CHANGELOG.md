@@ -12,11 +12,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with box options [#2400](https://github.com/sandboxie-plus/Sandboxie/issues/2400)
 - fixed issue with Smart App Control [#2341](https://github.com/sandboxie-plus/Sandboxie/issues/2341)
 - fixed issue with snapshots when using privacy boxes [#2427](https://github.com/sandboxie-plus/Sandboxie/issues/2427)
-- fixed issue with m_pColorslider changed not applied. [#2433](https://github.com/sandboxie-plus/Sandboxie/pull/2433)
+- fixed issue with m_pColorslider change not applied [#2433](https://github.com/sandboxie-plus/Sandboxie/pull/2433)
 - fixed issue with switching snapshots when the file panel is open
-- fixed issue with file panel when an empty box is sellected [#2419](https://github.com/sandboxie-plus/Sandboxie/issues/2419)
-- fixed not all icons being disabled with disable all icons [#2406](https://github.com/sandboxie-plus/Sandboxie/issues/2406)
-- fixed compatybility issue with MSEdge [#2312](https://github.com/sandboxie-plus/Sandboxie/issues/2312)
+- fixed issue with file panel when an empty box is selected [#2419](https://github.com/sandboxie-plus/Sandboxie/issues/2419)
+- fixed issue with menu icon not being disabled [#2406](https://github.com/sandboxie-plus/Sandboxie/issues/2406)
+- fixed compatibility issue with Microsoft Edge [#2312](https://github.com/sandboxie-plus/Sandboxie/issues/2312)
 
 
 
@@ -28,7 +28,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issues with SBIE2227 on virtual drives
-- fixed issues on native 32-bit windows introduced with 1.5.0 [#2401](https://github.com/sandboxie-plus/Sandboxie/issues/2401)
+- fixed issues on native 32-bit Windows introduced with 1.5.0 [#2401](https://github.com/sandboxie-plus/Sandboxie/issues/2401)
 
 
 
@@ -47,7 +47,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with boxed object directory initialization [#2342](https://github.com/sandboxie-plus/Sandboxie/issues/2342)
 - Sandboxie no longer leaves behind permanent directory objects
 - FIXED SECURITY ISSUE ID-21 AlpcConnectPortEx was not filtered by the driver [#2396](https://github.com/sandboxie-plus/Sandboxie/issues/2396)
-- fixed issues with program controll options [#2395](https://github.com/sandboxie-plus/Sandboxie/issues/2395)
+- fixed issues with program control options [#2395](https://github.com/sandboxie-plus/Sandboxie/issues/2395)
 
 
 

@@ -17,9 +17,8 @@ CFileView::CFileView(QWidget *parent)
     m_pTreeView->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
     m_pMainLayout->addWidget(m_pTreeView, 0, 0);
 
-    m_pFileModel = new QFileSystemModel(this);
-    m_pFileModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs | QDir::Files | QDir::Hidden | QDir::System);
-    m_pTreeView->setModel(m_pFileModel);
+    m_pFileModel = NULL;
+
     m_pTreeView->setSortingEnabled(true);
     m_pTreeView->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
@@ -56,26 +55,30 @@ void CFileView::SetBox(const CSandBoxPtr& pBox)
 
     if (!m_pBox.isNull()) connect(m_pBox.data(), SIGNAL(AboutToBeCleaned()), this, SLOT(OnAboutToBeCleaned()));
 
-    if (!m_pFileModel) return;
-
     QString Root;
     if (!pBox.isNull() && !pBox->IsEmpty())
         Root = pBox->GetFileRoot();
-    if (Root.isEmpty()) {
-        Root = theAPI->GetSbiePath();
-        m_pTreeView->setEnabled(false);
-    }
-    else
-        m_pTreeView->setEnabled(true);
+    //if (Root.isEmpty()) {
+    //    //Root = theAPI->GetSbiePath();
+    //    m_pTreeView->setEnabled(false);
+    //}
+    //else
+    //    m_pTreeView->setEnabled(true);
 
-    m_pFileModel->deleteLater();
-    m_pFileModel = new QFileSystemModel(this);
-    m_pFileModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs | QDir::Files | QDir::Hidden | QDir::System);
+    if (m_pFileModel) {
+        m_pFileModel->deleteLater();
+        m_pFileModel = NULL;
+    }
+    if (!Root.isEmpty()) {
+        m_pFileModel = new QFileSystemModel(this);
+        m_pFileModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs | QDir::Files | QDir::Hidden | QDir::System);
+    }
     m_pTreeView->setModel(m_pFileModel);
 
-    m_pTreeView->setRootIndex(m_pFileModel->setRootPath(Root));
+    if (!Root.isEmpty()) 
+    {
+        m_pTreeView->setRootIndex(m_pFileModel->setRootPath(Root));
 
-    if (m_pTreeView->isEnabled()) {
         m_pTreeView->expand(m_pFileModel->index(Root + "/drive"));
         m_pTreeView->expand(m_pFileModel->index(Root + "/share"));
         m_pTreeView->expand(m_pFileModel->index(Root + "/user"));

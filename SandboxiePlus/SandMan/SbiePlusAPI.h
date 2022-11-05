@@ -66,6 +66,7 @@ public:
 	virtual void			CloseBox();
 
 	virtual SB_PROGRESS		CleanBox();
+	virtual SB_PROGRESS		SelectSnapshot(const QString& ID);
 
 	virtual QString			GetStatusStr() const;
 

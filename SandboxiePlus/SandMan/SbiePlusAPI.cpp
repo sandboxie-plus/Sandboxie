@@ -399,6 +399,17 @@ SB_PROGRESS CSandBoxPlus::CleanBox()
 	return Status;
 }
 
+SB_PROGRESS CSandBoxPlus::SelectSnapshot(const QString& ID)
+{
+	((CSbiePlusAPI*)theAPI)->m_BoxMonitor->RemoveBox(this);
+
+	emit AboutToBeCleaned();
+
+	SB_PROGRESS Status = CSandBox::SelectSnapshot(ID);
+
+	return Status;
+}
+
 bool CSandBoxPlus::CheckUnsecureConfig() const
 {
 	//if (GetBool("UnsafeTemplate", false, true, true)) return true;

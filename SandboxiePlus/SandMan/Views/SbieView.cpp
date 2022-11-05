@@ -68,6 +68,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 	m_pSbieTree->setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(m_pSbieTree, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(OnMenu(const QPoint &)));
+	connect(m_pSbieTree, SIGNAL(pressed(const QModelIndex&)), this, SLOT(OnClicked(const QModelIndex&)));
 	connect(m_pSbieTree, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(OnDoubleClicked(const QModelIndex&)));
 	connect(m_pSbieTree->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), SLOT(ProcessSelection(QItemSelection, QItemSelection)));
 	connect(m_pSbieTree, SIGNAL(expanded(const QModelIndex &)), this, SLOT(OnExpanded(const QModelIndex &)));
@@ -1538,12 +1539,14 @@ void CSbieView::OnDoubleClicked(const QModelIndex& index)
 	if (pBox.isNull())
 		return;
 
-	if ((QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) == 0) {
+	if ((QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0) {
+		ShowOptions(pBox);
+		return;
+	}
 
-		if (index.column() == CSbieModel::ePath) {
-			OnSandBoxAction(m_pMenuExplore, QList<CSandBoxPtr>() << pBox);
-			return;
-		}
+	if (index.column() == CSbieModel::ePath) {
+		OnSandBoxAction(m_pMenuExplore, QList<CSandBoxPtr>() << pBox);
+		return;
 	}
 
 	//if (index.column() != CSbieModel::eName)
@@ -1572,6 +1575,11 @@ void CSbieView::OnDoubleClicked(const QModelIndex& index)
 	}
 	else
 		ShowOptions(pBox);
+}
+
+void CSbieView::OnClicked(const QModelIndex& index)
+{
+	emit BoxSelected();
 }
 
 void CSbieView::ProcessSelection(const QItemSelection& selected, const QItemSelection& deselected)
@@ -1607,8 +1615,6 @@ void CSbieView::ProcessSelection(const QItemSelection& selected, const QItemSele
 	}
 
 	selectionModel->select(invalid, QItemSelectionModel::Deselect);
-
-	emit BoxSelected();
 }
 
 QList<CSandBoxPtr> CSbieView::GetSelectedBoxes()

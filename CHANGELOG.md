@@ -6,17 +6,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.5.3 / 5.60.3] - 2022-10-??
+## [1.5.3 / 5.60.3] - 2022-11-??
 
 ### Fixed
 - fixed issue with box options [#2400](https://github.com/sandboxie-plus/Sandboxie/issues/2400)
 - fixed issue with Smart App Control [#2341](https://github.com/sandboxie-plus/Sandboxie/issues/2341)
 - fixed issue with snapshots when using privacy boxes [#2427](https://github.com/sandboxie-plus/Sandboxie/issues/2427)
 - fixed issue with m_pColorslider changed not applied. [#2433](https://github.com/sandboxie-plus/Sandboxie/pull/2433)
+- fixed issue with switching snapshots when the file panel is open
+- fixed issue with file panel when an empty box is sellected [#2419](https://github.com/sandboxie-plus/Sandboxie/issues/2419)
 
 
 
-## [1.5.2 / 5.60.2] - 2022-10-??
+## [1.5.2 / 5.60.2] - 2022-10-28
 
 ### Changed
 - utility groups are now cleaned up automatically
@@ -24,8 +26,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed issues with SBIE2227 on virtual drives
 - fixed issues on native 32-bit windows introduced with 1.5.0 [#2401](https://github.com/sandboxie-plus/Sandboxie/issues/2401)
-
-
 
 
 

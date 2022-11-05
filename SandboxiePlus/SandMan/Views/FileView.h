@@ -31,9 +31,9 @@ protected:
 	CSandBoxPtr m_pBox;
 
 private:
-	QGridLayout* m_pMainLayout;
-	QTreeView* m_pTreeView;
-	QFileSystemModel* m_pFileModel;
+	QGridLayout*		m_pMainLayout;
+	QTreeView*			m_pTreeView;
+	QFileSystemModel*	m_pFileModel;
 };
 
 

@@ -2961,13 +2961,19 @@ ReparseLoop:
 
             BOOLEAN use_rule_specificity = (Dll_ProcessFlags & SBIE_FLAG_RULE_SPECIFICITY) != 0;
 
-            if (use_rule_specificity && SbieDll_HasReadableSubPath(L'f', TruePath)){
+            if (use_rule_specificity && SbieDll_HasReadableSubPath(L'f', OriginalPath ? OriginalPath : TruePath)){
 
                 //
                 // When using Rule specificity we need to create some dummy directories 
                 //
 
                 File_CreateBoxedPath(TruePath);
+            }
+            else if (OriginalPath) {
+
+                status = File_GetFileType(&objattrs, FALSE, &FileType, NULL);
+                if (status == STATUS_NOT_A_DIRECTORY)
+                    status = STATUS_ACCESS_DENIED;
             }
             else {
 
@@ -3072,7 +3078,7 @@ ReparseLoop:
             // to make sure File_CheckCreateParameters won't fail
             //
 
-            if (PATH_IS_WRITE(mp_flags) && NT_SUCCESS(status)) {
+            if (PATH_IS_WRITE(mp_flags) && NT_SUCCESS(status) && !OriginalPath) {
                 DesiredAccess |= FILE_GENERIC_WRITE;
                 FileType &= ~(TYPE_READ_ONLY | TYPE_SYSTEM);
             }
@@ -4867,6 +4873,7 @@ _FX NTSTATUS File_NtQueryFullAttributesFileImpl(
     WCHAR *CopyPath;
     ULONG FileFlags, FileAttrs, mp_flags;
     ULONG TruePathFlags;
+    WCHAR* OriginalPath;
 
     //
     // special case:  when it starts, the Windows Explorer process looks
@@ -5002,9 +5009,12 @@ _FX NTSTATUS File_NtQueryFullAttributesFileImpl(
     // Check true path relocation
     //
 
+    OriginalPath = NULL;
     WCHAR* OldTruePath = File_ResolveTruePath(TruePath, CopyPath, &TruePathFlags);
-    if (OldTruePath)
+    if (OldTruePath) {
+        OriginalPath = TruePath;
         TruePath = OldTruePath;
+    }
 
     //
     // check if this is a write-only path.  if the path is not
@@ -5016,13 +5026,16 @@ _FX NTSTATUS File_NtQueryFullAttributesFileImpl(
 
         BOOLEAN use_rule_specificity = (Dll_ProcessFlags & SBIE_FLAG_RULE_SPECIFICITY) != 0;
 
-        if (use_rule_specificity && SbieDll_HasReadableSubPath(L'f', TruePath)){
+        if (use_rule_specificity && SbieDll_HasReadableSubPath(L'f', OriginalPath ? OriginalPath : TruePath)){
 
             //
             // When using Rule specificity we need to create some dummy directories 
             //
 
-            File_CreateBoxedPath(TruePath);
+            File_CreateBoxedPath(OriginalPath ? OriginalPath : TruePath);
+        }
+        else if (OriginalPath) {
+            ; // try TruePath which points by now to teh snapshot location
         }
         else {
 

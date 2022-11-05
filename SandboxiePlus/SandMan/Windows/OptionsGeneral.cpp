@@ -396,6 +396,8 @@ void COptionsWindow::OnColorSlider(int value)
 {
 	my_hsv hsv = { (double)value, 1, 255 };
 	my_rgb rgb = hsv2rgb(hsv);
+	m_GeneralChanged = true;
+	OnOptChanged();
 	SetBoxColor(qRgb(rgb.r, rgb.g, rgb.b));
 }
 

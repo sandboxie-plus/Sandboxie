@@ -17,7 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with file panel when an empty box is selected [#2419](https://github.com/sandboxie-plus/Sandboxie/issues/2419)
 - fixed issue with menu icon not being disabled [#2406](https://github.com/sandboxie-plus/Sandboxie/issues/2406)
 - fixed compatibility issue with Microsoft Edge [#2312](https://github.com/sandboxie-plus/Sandboxie/issues/2312)
-- fixed UsePrivacyMode=y compatybility with windows 7 [#2423](https://github.com/sandboxie-plus/Sandboxie/issues/2423)
+- fixed UsePrivacyMode=y compatibility with Windows 7 [#2423](https://github.com/sandboxie-plus/Sandboxie/issues/2423)
 
 
 

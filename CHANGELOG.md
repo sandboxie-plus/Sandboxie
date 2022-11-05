@@ -12,7 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with box options [#2400](https://github.com/sandboxie-plus/Sandboxie/issues/2400)
 - fixed issue with Smart App Control [#2341](https://github.com/sandboxie-plus/Sandboxie/issues/2341)
 - fixed issue with snapshots when using privacy boxes [#2427](https://github.com/sandboxie-plus/Sandboxie/issues/2427)
-
+- fixed issue with m_pColorslider changed not applied. [#2433](https://github.com/sandboxie-plus/Sandboxie/pull/2433)
 
 
 

@@ -3347,64 +3347,39 @@ _FX NTSTATUS File_MyQueryDirectoryFile(
 
 
 //---------------------------------------------------------------------------
-// Key_CreateBaseFolders
+// File_CreateBaseFolders
 //---------------------------------------------------------------------------
 
-#include <Knownfolders.h>
+//#include <Knownfolders.h>
 
-_FX void Key_CreateBaseFolders()
+_FX void File_CreateBaseFolders()
 {
     //
     // in privacy mode we need to pre create some folders or else programs may fail
     //
 
     //File_CreateBoxedPath(File_SysVolume);
+    // 
+    //if (SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE)) {
+    //    File_CreateBoxedPath(File_AllUsers);
+    //    File_CreateBoxedPath(File_CurrentUser);
+    //}
 
-    typedef HRESULT (*P_SHGetKnownFolderPath)(const GUID *folderid, DWORD dwFlags, HANDLE hToken, PWSTR *ppszPath);
-    typedef void (*P_CoTaskMemFree)(void *pv);
-    const ULONG KF_FLAG_DONT_VERIFY = 0x00004000;
-    const ULONG KF_FLAG_DONT_UNEXPAND = 0x00002000;
-    //const GUID FOLDERID_Recent = { 0xAE50C081, 0xEBD2, 0x438A, { 0x86, 0x55, 0x8A, 0x09, 0x2E, 0x34, 0x98, 0x7A } };
-    P_SHGetKnownFolderPath SHGetKnownFolderPath = (P_SHGetKnownFolderPath) Ldr_GetProcAddrNew(DllName_shell32, L"SHGetKnownFolderPath","SHGetKnownFolderPath");
-    P_CoTaskMemFree CoTaskMemFree = (P_CoTaskMemFree) Ldr_GetProcAddrNew(DllName_ole32_or_combase, L"CoTaskMemFree","CoTaskMemFree");
-    if (SHGetKnownFolderPath) {
-        //GUID const * FolderIDs[] = { &FOLDERID_ProgramData, &FOLDERID_RoamingAppData, &FOLDERID_LocalAppData, &FOLDERID_LocalAppDataLow, NULL };
-        GUID const* FolderIDs[] = { &FOLDERID_AccountPictures, &FOLDERID_AddNewPrograms, &FOLDERID_AdminTools, &FOLDERID_AppDataDesktop, &FOLDERID_AppDataDocuments, 
-            &FOLDERID_AppDataFavorites, &FOLDERID_AppDataProgramData, &FOLDERID_ApplicationShortcuts, &FOLDERID_AppsFolder, &FOLDERID_AppUpdates, &FOLDERID_CameraRoll, 
-            &FOLDERID_CDBurning, &FOLDERID_ChangeRemovePrograms, &FOLDERID_CommonAdminTools, &FOLDERID_CommonOEMLinks, &FOLDERID_CommonPrograms, &FOLDERID_CommonStartMenu, 
-            &FOLDERID_CommonStartup, &FOLDERID_CommonTemplates, &FOLDERID_ComputerFolder, &FOLDERID_ConflictFolder, &FOLDERID_ConnectionsFolder, &FOLDERID_Contacts, 
-            &FOLDERID_ControlPanelFolder, &FOLDERID_Cookies, &FOLDERID_Desktop, &FOLDERID_DeviceMetadataStore, &FOLDERID_Documents, &FOLDERID_DocumentsLibrary, 
-            &FOLDERID_Downloads, &FOLDERID_Favorites, &FOLDERID_Fonts, &FOLDERID_Games, &FOLDERID_GameTasks, &FOLDERID_History, &FOLDERID_HomeGroup, 
-            &FOLDERID_HomeGroupCurrentUser, &FOLDERID_ImplicitAppShortcuts, &FOLDERID_InternetCache, &FOLDERID_InternetFolder, &FOLDERID_Libraries, &FOLDERID_Links, 
-            &FOLDERID_LocalAppData, &FOLDERID_LocalAppDataLow, &FOLDERID_LocalizedResourcesDir, &FOLDERID_Music, &FOLDERID_MusicLibrary, &FOLDERID_NetHood, 
-            &FOLDERID_NetworkFolder, &FOLDERID_Objects3D, &FOLDERID_OriginalImages, &FOLDERID_PhotoAlbums, &FOLDERID_PicturesLibrary, &FOLDERID_Pictures, 
-            &FOLDERID_Playlists, &FOLDERID_PrintersFolder, &FOLDERID_PrintHood, &FOLDERID_Profile, &FOLDERID_ProgramData, &FOLDERID_ProgramFiles, &FOLDERID_ProgramFilesX64, 
-            &FOLDERID_ProgramFilesX86, &FOLDERID_ProgramFilesCommon, &FOLDERID_ProgramFilesCommonX64, &FOLDERID_ProgramFilesCommonX86, &FOLDERID_Programs, &FOLDERID_Public, 
-            &FOLDERID_PublicDesktop, &FOLDERID_PublicDocuments, &FOLDERID_PublicDownloads, &FOLDERID_PublicGameTasks, &FOLDERID_PublicLibraries, &FOLDERID_PublicMusic, 
-            &FOLDERID_PublicPictures, &FOLDERID_PublicRingtones, &FOLDERID_PublicUserTiles, &FOLDERID_PublicVideos, &FOLDERID_QuickLaunch, &FOLDERID_Recent, 
-            &FOLDERID_RecordedTVLibrary, &FOLDERID_RecycleBinFolder, &FOLDERID_ResourceDir, &FOLDERID_Ringtones, &FOLDERID_RoamingAppData, 
-            &FOLDERID_RoamedTileImages, &FOLDERID_RoamingTiles, &FOLDERID_SampleMusic, &FOLDERID_SamplePictures, &FOLDERID_SamplePlaylists, &FOLDERID_SampleVideos, 
-            &FOLDERID_SavedGames, &FOLDERID_SavedPictures, &FOLDERID_SavedPicturesLibrary, &FOLDERID_SavedSearches, &FOLDERID_Screenshots, &FOLDERID_SEARCH_CSC, 
-            &FOLDERID_SearchHistory, &FOLDERID_SearchHome, &FOLDERID_SEARCH_MAPI, &FOLDERID_SearchTemplates, &FOLDERID_SendTo, &FOLDERID_SidebarDefaultParts, 
-            &FOLDERID_SidebarParts, &FOLDERID_SkyDrive, &FOLDERID_SkyDriveCameraRoll, &FOLDERID_SkyDriveDocuments, &FOLDERID_SkyDrivePictures, &FOLDERID_StartMenu, 
-            &FOLDERID_Startup, &FOLDERID_SyncManagerFolder, &FOLDERID_SyncResultsFolder, &FOLDERID_SyncSetupFolder, &FOLDERID_System, &FOLDERID_SystemX86, 
-            &FOLDERID_Templates, &FOLDERID_UserPinned, &FOLDERID_UserProfiles, &FOLDERID_UserProgramFiles, &FOLDERID_UserProgramFilesCommon, 
-            &FOLDERID_UsersFiles, &FOLDERID_UsersLibraries, &FOLDERID_Videos, &FOLDERID_VideosLibrary, &FOLDERID_Windows, NULL };
-        for (GUID const ** FolderID = FolderIDs; *FolderID; FolderID++) {
-            WCHAR* path;
-            if (SHGetKnownFolderPath(*FolderID, KF_FLAG_DONT_VERIFY | KF_FLAG_DONT_UNEXPAND, NULL, &path) == 0) {
-                WCHAR* pathNT = File_TranslateDosToNtPath(path);
-                if (pathNT) {
-                    File_CreateBoxedPath(pathNT);
-                    Dll_Free(pathNT);
-                }
-                CoTaskMemFree(path);
+    WCHAR* Folders[] = { L"SystemRoot", L"TEMP", L"USERPROFILE", //L"windir",
+                        L"PUBLIC", L"ProgramData", L"LOCALAPPDATA", L"ALLUSERSPROFILE", L"APPDATA",
+                        L"ProgramFiles", L"ProgramFiles(x86)", L"ProgramW6432",
+                        //L"CommonProgramFiles", L"CommonProgramFiles(x86)", L"CommonProgramW6432", 
+                        NULL };
+    WCHAR path[MAX_PATH];
+    for (WCHAR** Folder = Folders; *Folder; Folder++) {
+        path[0] = 0;
+        GetEnvironmentVariable(*Folder, path, sizeof(path));
+        if (path[0]) {
+            WCHAR* pathNT = File_TranslateDosToNtPath(path);
+            if (pathNT) {
+                File_CreateBoxedPath(pathNT);
+                Dll_Free(pathNT);
             }
         }
-    }
-
-    if (SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE)) {
-        File_CreateBoxedPath(File_AllUsers);
-        File_CreateBoxedPath(File_CurrentUser);
     }
 }

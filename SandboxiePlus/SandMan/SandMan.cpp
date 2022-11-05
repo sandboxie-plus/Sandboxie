@@ -316,18 +316,18 @@ void CSandMan::StoreState()
 	if(m_pLogTabs) theConf->SetValue("MainWindow/LogTab", m_pLogTabs->currentIndex());
 }
 
-QIcon CSandMan::GetIcon(const QString& Name, bool bAction)
+QIcon CSandMan::GetIcon(const QString& Name, int iAction)
 {
 	int iNoIcons = theConf->GetInt("Options/NoIcons", 2);
 	if (iNoIcons == 2)
 		iNoIcons = theConf->GetInt("Options/ViewMode", 1) == 2 ? 1 : 0;
-	if(bAction && iNoIcons)
+	if(iAction && iNoIcons)
 		return QIcon();
 
 	QString Path = QApplication::applicationDirPath() + "/Icons/" + Name + ".png";
 	if(QFile::exists(Path))
 		return QIcon(Path);
-	return QIcon((bAction ? ":/Actions/" : ":/") + Name + ".png");
+	return QIcon((iAction == 1 ? ":/Actions/" : ":/") + Name + ".png");
 }
 
 void CSandMan::CreateUI()
@@ -437,7 +437,7 @@ void CSandMan::CreateHelpMenu(bool bAdvanced)
 		m_pUpdate = m_pMenuHelp->addAction(tr("Check for Updates"), this, SLOT(CheckForUpdates()));
 		m_pMenuHelp->addSeparator();
 		m_pAboutQt = m_pMenuHelp->addAction(tr("About the Qt Framework"), this, SLOT(OnAbout()));
-		m_pAbout = m_pMenuHelp->addAction(CSandMan::GetIcon("IconFull", false), tr("About Sandboxie-Plus"), this, SLOT(OnAbout()));
+		m_pAbout = m_pMenuHelp->addAction(CSandMan::GetIcon("IconFull", 2), tr("About Sandboxie-Plus"), this, SLOT(OnAbout()));
 }
 
 void CSandMan::CreateMenus(bool bAdvanced)

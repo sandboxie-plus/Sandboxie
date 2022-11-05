@@ -42,7 +42,7 @@ void CSandMan::CreateTrayIcon()
 void CSandMan::CreateTrayMenu()
 {
 	m_pTrayMenu = new QMenu();
-	QAction* pShowHide = m_pTrayMenu->addAction(GetIcon("IconFull", false), tr("Show/Hide"), this, SLOT(OnShowHide()));
+	QAction* pShowHide = m_pTrayMenu->addAction(GetIcon("IconFull", 2), tr("Show/Hide"), this, SLOT(OnShowHide()));
 	QFont f = pShowHide->font();
 	f.setBold(true);
 	pShowHide->setFont(f);
@@ -142,17 +142,17 @@ QIcon CSandMan::GetTrayIcon(bool isConnected)
 	QPixmap result(size);
 	result.fill(Qt::transparent); // force alpha channel
 	QPainter painter(&result);
-	QPixmap base = GetIcon(IconFile, false).pixmap(size);
+	QPixmap base = GetIcon(IconFile, 0).pixmap(size);
 	QPixmap overlay;
 
 	if (m_bIconBusy) {
 		IconFile = "IconBusy";
 		if (bClassic) { // classic has a different icon instead of an overlay
 			IconFile += "C";
-			base = GetIcon(IconFile, false).pixmap(size);
+			base = GetIcon(IconFile, 0).pixmap(size);
 		}
 		else
-			overlay = GetIcon(IconFile, false).pixmap(size);
+			overlay = GetIcon(IconFile, 0).pixmap(size);
 	}
 
 	painter.drawPixmap(0, 0, base);
@@ -161,7 +161,7 @@ QIcon CSandMan::GetTrayIcon(bool isConnected)
 	if (m_bIconDisabled) {
 		IconFile = "IconDFP";
 		if (bClassic) IconFile += "C";
-		overlay = GetIcon(IconFile, false).pixmap(size);
+		overlay = GetIcon(IconFile, 0).pixmap(size);
 		painter.drawPixmap(0, 0, overlay);
 	}
 

@@ -1347,7 +1347,7 @@ _FX NTSTATUS File_MergeCacheWin2000(
 _FX NTSTATUS File_MergeDummy(
     WCHAR *TruePath, FILE_MERGE_FILE *qfile, UNICODE_STRING *FileMask)
 {
-    NTSTATUS status = STATUS_SUCCESS;
+    NTSTATUS status;
     FILE_ID_BOTH_DIR_INFORMATION *info_area;
     FILE_ID_BOTH_DIR_INFORMATION *info_ptr;
     LIST *cache_list;
@@ -1384,7 +1384,7 @@ _FX NTSTATUS File_MergeDummy(
     PATTERN* mask = NULL;
     if (FileMask->Buffer) 
         mask = Pattern_Create(qfile->cache_pool, FileMask->Buffer, TRUE, 0);
-    WCHAR test_buf[MAX_PATH];
+    WCHAR* test_buf = Pool_Alloc(qfile->cache_pool, 0x1000);
 
     LIST* lists[4];
     SbieDll_GetReadablePaths(L'f', lists);
@@ -1405,38 +1405,70 @@ _FX NTSTATUS File_MergeDummy(
             if (_wcsnicmp(TruePath, patstr, TruePathLen) == 0 && patstr[TruePathLen] == L'\\') {
 
                 const WCHAR* ptr = &patstr[TruePathLen + 1];
-                const WCHAR* end = wcschr(ptr, L'\\');
+                WCHAR* end = wcschr(ptr, L'\\');
                 if(end == NULL) end = wcschr(ptr, L'*');
                 if(end == NULL) end = wcschr(ptr, L'\0');
-                ULONG len = (ULONG)(end - ptr);
+                ULONG name_len = (ULONG)(end - ptr);
 
                 if (mask) {
                     
-                    memcpy(test_buf, ptr, (len + 1) * sizeof(WCHAR));
+                    memcpy(test_buf, ptr, (name_len + 1) * sizeof(WCHAR));
                     _wcslwr(test_buf);
 
-                    if (!Pattern_Match(mask, test_buf, len))
+                    if (!Pattern_Match(mask, test_buf, name_len))
                         goto next;
                 }
 
-                info_ptr->FileNameLength = len * sizeof(WCHAR);
-                memcpy(info_ptr->FileName, ptr, info_ptr->FileNameLength);
-                info_ptr->FileName[info_ptr->FileNameLength] = L'\0';
+                //
+                // check if the true path exists
+                //
 
-                info_ptr->FileAttributes = FILE_ATTRIBUTE_DIRECTORY;
+                WCHAR* FakePath = Dll_AllocTemp(TruePathLen * sizeof(WCHAR) + 1 + name_len * sizeof(WCHAR) + 10);
 
-                PrevEntry = &info_ptr->NextEntryOffset;
-                info_ptr->NextEntryOffset = sizeof(FILE_ID_BOTH_DIR_INFORMATION) + info_ptr->FileNameLength + sizeof(WCHAR) + 16; // +16 some buffer space
-                info_ptr = (FILE_ID_BOTH_DIR_INFORMATION*)
-                    ((UCHAR*)info_ptr + info_ptr->NextEntryOffset);
-                // todo: fix-me possible info_area buffer overflow!!!!
-                
+                wmemcpy(FakePath, TruePath, TruePathLen * sizeof(WCHAR));
+                wcscat(FakePath, L"\\");
+                end = wcschr(FakePath, L'\0');
+                wmemcpy(end, ptr, name_len * sizeof(WCHAR));
+                end[name_len] = L'\0';
+
+                FILE_NETWORK_OPEN_INFORMATION info;
+                status = File_QueryFullAttributesDirectoryFile(FakePath, &info);
+
+                Dll_Free(FakePath);
+
+                //
+                // add directory entry
+                //
+
+                if (NT_SUCCESS(status)) {
+
+                    info_ptr->FileNameLength = name_len * sizeof(WCHAR);
+                    memcpy(info_ptr->FileName, ptr, info_ptr->FileNameLength);
+                    info_ptr->FileName[info_ptr->FileNameLength] = L'\0';
+
+                    info_ptr->LastAccessTime = info.LastAccessTime;
+                    info_ptr->LastWriteTime = info.LastWriteTime;
+                    info_ptr->ChangeTime = info.ChangeTime;
+                    info_ptr->AllocationSize = info.AllocationSize;
+                    info_ptr->EndOfFile = info.EndOfFile;
+                    info_ptr->FileAttributes = info.FileAttributes;
+
+                    PrevEntry = &info_ptr->NextEntryOffset;
+                    info_ptr->NextEntryOffset = sizeof(FILE_ID_BOTH_DIR_INFORMATION) + info_ptr->FileNameLength + sizeof(WCHAR) + 16; // +16 some buffer space
+                    info_ptr = (FILE_ID_BOTH_DIR_INFORMATION*)
+                        ((UCHAR*)info_ptr + info_ptr->NextEntryOffset);
+                    // todo: fix-me possible info_area buffer overflow!!!!
+                }
             }
 
         next:
             pat = List_Next(pat);
         }
     }
+
+    Pool_Free(test_buf, 0x1000);
+
+    status = STATUS_SUCCESS;
 
     SbieDll_ReleaseFilePathLock();
 

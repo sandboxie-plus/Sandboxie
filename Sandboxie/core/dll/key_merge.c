@@ -780,6 +780,8 @@ _FX NTSTATUS Key_MergeCacheDummys(KEY_MERGE *merge, const WCHAR *TruePath)
 
                 if (NT_SUCCESS(status)) {
 
+                    File_NtCloseImpl(KeyHandle);
+
                     name_len *= sizeof(WCHAR);
 
                     len = sizeof(KEY_MERGE_SUBKEY) + name_len + sizeof(WCHAR);

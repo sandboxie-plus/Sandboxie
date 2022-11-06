@@ -27,6 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - utility groups are now cleaned up automatically
+- improved removal of leftovers [#2409](https://github.com/sandboxie-plus/Sandboxie/pull/2409)
 
 ### Fixed
 - fixed issues with SBIE2227 on virtual drives

@@ -132,9 +132,9 @@ _FX BOOLEAN Ipc_Init(void)
     };
     const UCHAR **NamePtr;
 
+    List_Init(&Ipc_ObjDirs);
     if (! Mem_GetLockResource(&Ipc_DirLock, TRUE))
         return FALSE;
-    List_Init(&Ipc_ObjDirs);
 
     //
     // set object open handlers for generic objects
@@ -1827,6 +1827,9 @@ _FX void Ipc_Unload(void)
 {
     if (Ipc_Dynamic_Ports.pPortLock)
         Mem_FreeLockResource(&Ipc_Dynamic_Ports.pPortLock);
+
+    if (Ipc_DirLock == NULL)
+        return; // Early driver initialization failed
 
     KIRQL irql;
     KeRaiseIrql(APC_LEVEL, &irql);

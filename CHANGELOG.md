@@ -19,7 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed compatibility issue with Microsoft Edge [#2312](https://github.com/sandboxie-plus/Sandboxie/issues/2312)
 - fixed UsePrivacyMode=y compatibility with Windows 7 [#2423](https://github.com/sandboxie-plus/Sandboxie/issues/2423)
 - fixed minor issue during Sandboxie Plus uninstall [#2421](https://github.com/sandboxie-plus/Sandboxie/issues/2421)
-
+- fixed BSOD issue when driver initialization fails (introduced in 1.5.1) [#2431](https://github.com/sandboxie-plus/Sandboxie/issues/2431)
 
 
 

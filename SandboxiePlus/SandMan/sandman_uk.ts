@@ -40,7 +40,7 @@
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="320"/>
+        <location filename="Views/FileView.cpp" line="323"/>
         <source>%1 - Files</source>
         <translation>%1 - Файли</translation>
     </message>
@@ -48,27 +48,27 @@
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="155"/>
+        <location filename="Views/FileView.cpp" line="158"/>
         <source>Create Shortcut</source>
         <translation>Створити ярлик</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="161"/>
+        <location filename="Views/FileView.cpp" line="164"/>
         <source>Recover to Any Folder</source>
         <translation>Відновити в будь-яку папку</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="163"/>
+        <location filename="Views/FileView.cpp" line="166"/>
         <source>Recover to Same Folder</source>
         <translation>Відновити в цю папку</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="225"/>
+        <location filename="Views/FileView.cpp" line="228"/>
         <source>Select Directory</source>
         <translation>Оберіть каталог</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="275"/>
+        <location filename="Views/FileView.cpp" line="278"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Створити ярлик для пісочниці %1</translation>
     </message>
@@ -777,7 +777,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Оберіть колір</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="412"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="414"/>
         <source>Select Program</source>
         <translation>Вибрати програму</translation>
     </message>
@@ -787,18 +787,18 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Будь ласка, введіть індентификатор служби</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="412"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="414"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Виконавчі (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="416"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="431"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="418"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="433"/>
         <source>Please enter a menu title</source>
         <translation>Будь ласка, введіть назву меню</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="427"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="429"/>
         <source>Please enter a command</source>
         <translation>Будь ласка, введіть команду</translation>
     </message>
@@ -1360,62 +1360,62 @@ Full path: %4</source>
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="423"/>
+        <location filename="SbiePlusAPI.cpp" line="434"/>
         <source>Disabled</source>
         <translation>Вимкнений</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="434"/>
+        <location filename="SbiePlusAPI.cpp" line="445"/>
         <source>OPEN Root Access</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="436"/>
+        <location filename="SbiePlusAPI.cpp" line="447"/>
         <source>Application Compartment</source>
         <translation>Пісочниця для додатків</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="438"/>
+        <location filename="SbiePlusAPI.cpp" line="449"/>
         <source>NOT SECURE</source>
         <translation>НЕ ЗАХИЩЕНО</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="440"/>
+        <location filename="SbiePlusAPI.cpp" line="451"/>
         <source>Reduced Isolation</source>
         <translation>Знижена ізоляція</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="442"/>
+        <location filename="SbiePlusAPI.cpp" line="453"/>
         <source>Enhanced Isolation</source>
         <translation>Посилена ізоляція</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="445"/>
+        <location filename="SbiePlusAPI.cpp" line="456"/>
         <source>Privacy Enhanced</source>
         <translation>Посилена конфіденційність</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="448"/>
+        <location filename="SbiePlusAPI.cpp" line="459"/>
         <source>API Log</source>
         <translation>Журнал API</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="450"/>
+        <location filename="SbiePlusAPI.cpp" line="461"/>
         <source>No INet</source>
         <translation>Без доступу до Інтернет</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="452"/>
+        <location filename="SbiePlusAPI.cpp" line="463"/>
         <source>Net Share</source>
         <translation>Локальна мережа</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="454"/>
+        <location filename="SbiePlusAPI.cpp" line="465"/>
         <source>No Admin</source>
         <translation>Без прав адміністратора</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="457"/>
+        <location filename="SbiePlusAPI.cpp" line="468"/>
         <source>Normal</source>
         <translation>Нормальний</translation>
     </message>
@@ -2777,521 +2777,521 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 <context>
     <name>CSbieView</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="144"/>
-        <location filename="Views/SbieView.cpp" line="259"/>
+        <location filename="Views/SbieView.cpp" line="145"/>
+        <location filename="Views/SbieView.cpp" line="260"/>
         <source>Create New Box</source>
         <translation>Створити нову пісочницю</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="364"/>
+        <location filename="Views/SbieView.cpp" line="365"/>
         <source>Remove Group</source>
         <translation>Прибрати групу</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="152"/>
+        <location filename="Views/SbieView.cpp" line="153"/>
         <source>Run</source>
         <translation>Виконати</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="153"/>
+        <location filename="Views/SbieView.cpp" line="154"/>
         <source>Run Program</source>
         <translation>Виконати програму</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="154"/>
+        <location filename="Views/SbieView.cpp" line="155"/>
         <source>Run from Start Menu</source>
         <translation>Виконати з меню &apos;Пуск&apos;</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="162"/>
+        <location filename="Views/SbieView.cpp" line="163"/>
         <source>Default Web Browser</source>
         <translation>Веб-браузер за замовчуванням</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="163"/>
+        <location filename="Views/SbieView.cpp" line="164"/>
         <source>Default eMail Client</source>
         <translation>Клієнт для ел. почти за замовчуванням</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="171"/>
+        <location filename="Views/SbieView.cpp" line="172"/>
         <source>Windows Explorer</source>
         <translation>Провідник Windows (Windows Explorer)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="172"/>
+        <location filename="Views/SbieView.cpp" line="173"/>
         <source>Registry Editor</source>
         <translation>Редактор реєстру (Regedit)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="173"/>
+        <location filename="Views/SbieView.cpp" line="174"/>
         <source>Programs and Features</source>
         <translation>Програми та компоненти</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="177"/>
+        <location filename="Views/SbieView.cpp" line="178"/>
         <source>Terminate All Programs</source>
         <translation>Закрити всі програми</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="183"/>
-        <location filename="Views/SbieView.cpp" line="237"/>
-        <location filename="Views/SbieView.cpp" line="308"/>
-        <location filename="Views/SbieView.cpp" line="346"/>
+        <location filename="Views/SbieView.cpp" line="184"/>
+        <location filename="Views/SbieView.cpp" line="238"/>
+        <location filename="Views/SbieView.cpp" line="309"/>
+        <location filename="Views/SbieView.cpp" line="347"/>
         <source>Create Shortcut</source>
         <translation>Створити ярлик</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="185"/>
-        <location filename="Views/SbieView.cpp" line="294"/>
+        <location filename="Views/SbieView.cpp" line="186"/>
+        <location filename="Views/SbieView.cpp" line="295"/>
         <source>Explore Content</source>
         <translation>Переглянути зміст</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="182"/>
-        <location filename="Views/SbieView.cpp" line="307"/>
+        <location filename="Views/SbieView.cpp" line="183"/>
+        <location filename="Views/SbieView.cpp" line="308"/>
         <source>Refresh Info</source>
         <translation>Оновити інформацію</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="214"/>
-        <location filename="Views/SbieView.cpp" line="301"/>
+        <location filename="Views/SbieView.cpp" line="215"/>
+        <location filename="Views/SbieView.cpp" line="302"/>
         <source>Snapshots Manager</source>
         <translation>Менеджер знімків</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="187"/>
+        <location filename="Views/SbieView.cpp" line="188"/>
         <source>Recover Files</source>
         <translation>Відновити файли</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="188"/>
-        <location filename="Views/SbieView.cpp" line="293"/>
+        <location filename="Views/SbieView.cpp" line="189"/>
+        <location filename="Views/SbieView.cpp" line="294"/>
         <source>Delete Content</source>
         <translation>Видалити зміст</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="192"/>
+        <location filename="Views/SbieView.cpp" line="193"/>
         <source>Sandbox Presets</source>
         <translation>Перед встановлення пісочниці</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="194"/>
+        <location filename="Views/SbieView.cpp" line="195"/>
         <source>Ask for UAC Elevation</source>
         <translation>Запитати про UAC</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="195"/>
+        <location filename="Views/SbieView.cpp" line="196"/>
         <source>Drop Admin Rights</source>
         <translation>Прибрати права адміністратора</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="196"/>
+        <location filename="Views/SbieView.cpp" line="197"/>
         <source>Emulate Admin Rights</source>
         <translation>Емулювати права адміністратора</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="204"/>
+        <location filename="Views/SbieView.cpp" line="205"/>
         <source>Block Internet Access</source>
         <translation>Заблокувати доступ до Інтернету</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="206"/>
+        <location filename="Views/SbieView.cpp" line="207"/>
         <source>Allow Network Shares</source>
         <translation>Дозволити ресурси локальної мережі</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="190"/>
+        <location filename="Views/SbieView.cpp" line="191"/>
         <source>Sandbox Options</source>
         <translation>Налаштування пісочниці</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="157"/>
-        <location filename="Views/SbieView.cpp" line="274"/>
+        <location filename="Views/SbieView.cpp" line="158"/>
+        <location filename="Views/SbieView.cpp" line="275"/>
         <source>(Host) Start Menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="180"/>
+        <location filename="Views/SbieView.cpp" line="181"/>
         <source>Browse Files</source>
         <translation>Огляд файлів</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="210"/>
+        <location filename="Views/SbieView.cpp" line="211"/>
         <source>Immediate Recovery</source>
         <translation>Негайне відновлення</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="213"/>
-        <location filename="Views/SbieView.cpp" line="299"/>
+        <location filename="Views/SbieView.cpp" line="214"/>
+        <location filename="Views/SbieView.cpp" line="300"/>
         <source>Sandbox Tools</source>
         <translation>Інструменти пісочниці</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="216"/>
+        <location filename="Views/SbieView.cpp" line="217"/>
         <source>Duplicate Box Config</source>
         <translation>Дубльована конфігурація ящика</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="218"/>
-        <location filename="Views/SbieView.cpp" line="311"/>
+        <location filename="Views/SbieView.cpp" line="219"/>
+        <location filename="Views/SbieView.cpp" line="312"/>
         <source>Rename Sandbox</source>
         <translation>Перейменувати пісочницю</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="219"/>
-        <location filename="Views/SbieView.cpp" line="312"/>
+        <location filename="Views/SbieView.cpp" line="220"/>
+        <location filename="Views/SbieView.cpp" line="313"/>
         <source>Move Sandbox</source>
         <translation>Перемістити пісочницю</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="230"/>
-        <location filename="Views/SbieView.cpp" line="323"/>
+        <location filename="Views/SbieView.cpp" line="231"/>
+        <location filename="Views/SbieView.cpp" line="324"/>
         <source>Remove Sandbox</source>
         <translation>Видалити пісочницю</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="235"/>
-        <location filename="Views/SbieView.cpp" line="344"/>
+        <location filename="Views/SbieView.cpp" line="236"/>
+        <location filename="Views/SbieView.cpp" line="345"/>
         <source>Terminate</source>
         <translation>Завершити</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="238"/>
+        <location filename="Views/SbieView.cpp" line="239"/>
         <source>Preset</source>
         <translation>Готові налаштування</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="239"/>
+        <location filename="Views/SbieView.cpp" line="240"/>
         <source>Pin to Run Menu</source>
         <translation>Закріпити в меню &apos;Пуск&apos;</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="241"/>
+        <location filename="Views/SbieView.cpp" line="242"/>
         <source>Block and Terminate</source>
         <translation>Заблокувати та завершити</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="245"/>
+        <location filename="Views/SbieView.cpp" line="246"/>
         <source>Allow internet access</source>
         <translation>Дозволити доступ до Інтернету</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="247"/>
+        <location filename="Views/SbieView.cpp" line="248"/>
         <source>Force into this sandbox</source>
         <translation>Примусово в пісочниці</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="249"/>
+        <location filename="Views/SbieView.cpp" line="250"/>
         <source>Set Linger Process</source>
         <translation>Встановити затриманий процес</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="251"/>
+        <location filename="Views/SbieView.cpp" line="252"/>
         <source>Set Leader Process</source>
         <translation>Встановить лідерський процес</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="267"/>
+        <location filename="Views/SbieView.cpp" line="268"/>
         <source>Run Sandboxed</source>
         <translation>Запустити у пісочниці</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="268"/>
+        <location filename="Views/SbieView.cpp" line="269"/>
         <source>Run Web Browser</source>
         <translation>Запустити веб-браузер</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="269"/>
+        <location filename="Views/SbieView.cpp" line="270"/>
         <source>Run eMail Reader</source>
         <translation>Запустити поштовий клієнт</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="270"/>
+        <location filename="Views/SbieView.cpp" line="271"/>
         <source>Run Any Program</source>
         <translation>Запустити будь-яку програму</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="271"/>
+        <location filename="Views/SbieView.cpp" line="272"/>
         <source>Run From Start Menu</source>
         <translation>Запустити з меню &quot;Пуск&quot;</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="279"/>
+        <location filename="Views/SbieView.cpp" line="280"/>
         <source>Run Windows Explorer</source>
         <translation>Запустити провідник Windows</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="291"/>
+        <location filename="Views/SbieView.cpp" line="292"/>
         <source>Terminate Programs</source>
         <translation>Припинення роботи програм</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="292"/>
+        <location filename="Views/SbieView.cpp" line="293"/>
         <source>Quick Recover</source>
         <translation>Швидке відновлення</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="297"/>
+        <location filename="Views/SbieView.cpp" line="298"/>
         <source>Sandbox Settings</source>
         <translation>Налаштування пісочниці</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="304"/>
+        <location filename="Views/SbieView.cpp" line="305"/>
         <source>Duplicate Sandbox Config</source>
         <translation>Дублювати конфігурацію пісочниці</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="363"/>
+        <location filename="Views/SbieView.cpp" line="364"/>
         <source>Move Group</source>
         <translation>Перемістити групу</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="494"/>
+        <location filename="Views/SbieView.cpp" line="495"/>
         <source>    File root: %1
 </source>
         <translation>    Корінь файлу: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="495"/>
+        <location filename="Views/SbieView.cpp" line="496"/>
         <source>    Registry root: %1
 </source>
         <translation>    Корінь реєстру: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="496"/>
+        <location filename="Views/SbieView.cpp" line="497"/>
         <source>    IPC root: %1
 </source>
         <translation>    Корінь IPC: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="498"/>
+        <location filename="Views/SbieView.cpp" line="499"/>
         <source>Options:
     </source>
         <translation>Параметри:
     </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="715"/>
+        <location filename="Views/SbieView.cpp" line="716"/>
         <source>[None]</source>
         <translation>[Немає]</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="963"/>
+        <location filename="Views/SbieView.cpp" line="964"/>
         <source>Please enter a new group name</source>
         <translation>Будь ласка, введіть назву нової групи</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="824"/>
+        <location filename="Views/SbieView.cpp" line="825"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation>Ви дійсно хочете видалити цю(і) групу(и)?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="145"/>
-        <location filename="Views/SbieView.cpp" line="260"/>
+        <location filename="Views/SbieView.cpp" line="146"/>
+        <location filename="Views/SbieView.cpp" line="261"/>
         <source>Create Box Group</source>
         <translation>Створити групу пісочниць</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="362"/>
+        <location filename="Views/SbieView.cpp" line="363"/>
         <source>Rename Group</source>
         <translation>Перейменувати групу</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="149"/>
-        <location filename="Views/SbieView.cpp" line="264"/>
+        <location filename="Views/SbieView.cpp" line="150"/>
+        <location filename="Views/SbieView.cpp" line="265"/>
         <source>Stop Operations</source>
         <translation>Зупинити операції</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="164"/>
+        <location filename="Views/SbieView.cpp" line="165"/>
         <source>Command Prompt</source>
         <translation>Командний рядок</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="165"/>
+        <location filename="Views/SbieView.cpp" line="166"/>
         <source>Boxed Tools</source>
         <translation>Інструменти пісочниці</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="166"/>
+        <location filename="Views/SbieView.cpp" line="167"/>
         <source>Command Prompt (as Admin)</source>
         <translation>Командний рядок (від імені Адміністратора)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="170"/>
+        <location filename="Views/SbieView.cpp" line="171"/>
         <source>Command Prompt (32-bit)</source>
         <translation>Командний рядок (32-біт)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="174"/>
+        <location filename="Views/SbieView.cpp" line="175"/>
         <source>Execute Autorun Entries</source>
         <translation>Виконати Autorun</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="300"/>
+        <location filename="Views/SbieView.cpp" line="301"/>
         <source>Browse Content</source>
         <translation>Переглянути зміст</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="179"/>
+        <location filename="Views/SbieView.cpp" line="180"/>
         <source>Box Content</source>
         <translation>Зміст пісочниці</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="186"/>
+        <location filename="Views/SbieView.cpp" line="187"/>
         <source>Open Registry</source>
         <translation>Відкрити Реєстр</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="220"/>
-        <location filename="Views/SbieView.cpp" line="313"/>
+        <location filename="Views/SbieView.cpp" line="221"/>
+        <location filename="Views/SbieView.cpp" line="314"/>
         <source>Move Up</source>
         <translation>Перемістити вгору</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="225"/>
-        <location filename="Views/SbieView.cpp" line="318"/>
+        <location filename="Views/SbieView.cpp" line="226"/>
+        <location filename="Views/SbieView.cpp" line="319"/>
         <source>Move Down</source>
         <translation>Перемістити вниз</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="814"/>
+        <location filename="Views/SbieView.cpp" line="815"/>
         <source>Please enter a new name for the Group.</source>
         <translation>Будь ласка, введіть нову назву для групи.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="861"/>
+        <location filename="Views/SbieView.cpp" line="862"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation>Перемістити в (негативні значення піднімають вгору, позитивні - вниз):</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="897"/>
+        <location filename="Views/SbieView.cpp" line="898"/>
         <source>A group can not be its own parent.</source>
         <translation>Ця група не може бути власним батьком.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="991"/>
+        <location filename="Views/SbieView.cpp" line="992"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="996"/>
+        <location filename="Views/SbieView.cpp" line="997"/>
         <source>This name is already used for a Box Group.</source>
         <translation>Ця назва вже використовується для групи пісочниці.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1001"/>
+        <location filename="Views/SbieView.cpp" line="1002"/>
         <source>This name is already used for a Sandbox.</source>
         <translation>Ця назва вже використовується для пісочниці.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1051"/>
-        <location filename="Views/SbieView.cpp" line="1117"/>
-        <location filename="Views/SbieView.cpp" line="1338"/>
+        <location filename="Views/SbieView.cpp" line="1052"/>
+        <location filename="Views/SbieView.cpp" line="1118"/>
+        <location filename="Views/SbieView.cpp" line="1339"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Не показувати це повідомлення знову.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1108"/>
-        <location filename="Views/SbieView.cpp" line="1128"/>
-        <location filename="Views/SbieView.cpp" line="1514"/>
+        <location filename="Views/SbieView.cpp" line="1109"/>
+        <location filename="Views/SbieView.cpp" line="1129"/>
+        <location filename="Views/SbieView.cpp" line="1515"/>
         <source>This Sandbox is empty.</source>
         <translation>Ця пісочниця порожня.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1135"/>
+        <location filename="Views/SbieView.cpp" line="1136"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
         <translation>ПОПЕРЕДЖЕННЯ: Відкритий редактор реєстру не знаходиться в пісочниці, будьте обережні та змінюйте лише попередньо вибрані розташування пісочниці.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1136"/>
+        <location filename="Views/SbieView.cpp" line="1137"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>Не показувати це попередження в майбутньому</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1191"/>
+        <location filename="Views/SbieView.cpp" line="1192"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>Будь ласка, введіть нове ім&apos;я для копії пісочниці.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1191"/>
+        <location filename="Views/SbieView.cpp" line="1192"/>
         <source>%1 Copy</source>
         <translation>%1 Копія</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1231"/>
+        <location filename="Views/SbieView.cpp" line="1232"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>Будь ласка, введіть нове ім&apos;я для пісочниці.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1248"/>
+        <location filename="Views/SbieView.cpp" line="1249"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <translation>Ви дійсно хочете видалити цю(ці) пісочницю(і)?&lt;br /&gt;&lt;br /&gt;Попередження: вміст контейнера також буде видалено!</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1279"/>
+        <location filename="Views/SbieView.cpp" line="1280"/>
         <source>This Sandbox is already empty.</source>
         <translation>Ця пісочниця вже порожня.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1289"/>
+        <location filename="Views/SbieView.cpp" line="1290"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
         <translation>Ви дійсно хочете видалити зміст цієї пісочниці?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1290"/>
-        <location filename="Views/SbieView.cpp" line="1294"/>
+        <location filename="Views/SbieView.cpp" line="1291"/>
+        <location filename="Views/SbieView.cpp" line="1295"/>
         <source>Also delete all Snapshots</source>
         <translation>Також видалити всі знімки</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1293"/>
+        <location filename="Views/SbieView.cpp" line="1294"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
         <translation>Ви дійсно хочете видалити зміст усіх обраних пісочниць?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1320"/>
+        <location filename="Views/SbieView.cpp" line="1321"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>Ви хочете зупинити всі процеси в цієї(цих) пісочниці(ь)?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1321"/>
-        <location filename="Views/SbieView.cpp" line="1414"/>
+        <location filename="Views/SbieView.cpp" line="1322"/>
+        <location filename="Views/SbieView.cpp" line="1415"/>
         <source>Terminate without asking</source>
         <translation>Зупинити без запитань</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1336"/>
+        <location filename="Views/SbieView.cpp" line="1337"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
         <translation type="unfinished">Тепер відобразиться меню &quot;Пуск&quot; Sandboxie. Виберіть програму з меню, і Sandboxie створить новий ярлик на вашому реальному робочому столі, який ви зможете використовувати для виклику вибраної програми під наглядом Sandboxie.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1371"/>
-        <location filename="Views/SbieView.cpp" line="1441"/>
+        <location filename="Views/SbieView.cpp" line="1372"/>
+        <location filename="Views/SbieView.cpp" line="1442"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Створити ярлик до пісочниці %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1413"/>
+        <location filename="Views/SbieView.cpp" line="1414"/>
         <source>Do you want to %1 %2?</source>
         <translation>Ви хочете %1 %2?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1413"/>
+        <location filename="Views/SbieView.cpp" line="1414"/>
         <source>the selected processes</source>
         <translation>обрані процеси</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1474"/>
+        <location filename="Views/SbieView.cpp" line="1475"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Ця пісочниця не має обмежень доступу до Інтернет, ви хочете їх увімкнути?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1554"/>
+        <location filename="Views/SbieView.cpp" line="1557"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Ця пісочниця вимкнена, ви хочете її увімкнути?</translation>
     </message>
@@ -5443,7 +5443,7 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1354"/>
+        <location filename="Views/SbieView.cpp" line="1355"/>
         <source>Drive %1</source>
         <translation>Диск %1</translation>
     </message>

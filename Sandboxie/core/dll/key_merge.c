@@ -759,18 +759,7 @@ _FX NTSTATUS Key_MergeCacheDummys(KEY_MERGE *merge, const WCHAR *TruePath)
                 end[name_len] = L'\0';
 
                 HANDLE KeyHandle;
-                if (Dll_CompartmentMode) { // NoDriverAssist
-
-                    OBJECT_ATTRIBUTES objattrs;
-                    UNICODE_STRING objname;
-
-                    InitializeObjectAttributes(&objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
-
-                    RtlInitUnicodeString(&objname, FakePath);
-
-                    status = __sys_NtOpenKey(&KeyHandle, KEY_NOTIFY, &objattrs);
-                } else
-                    status = SbieApi_OpenKey(&KeyHandle, FakePath);
+                status = SbieApi_OpenKey(&KeyHandle, FakePath);
 
                 Dll_Free(FakePath);
 

@@ -222,6 +222,7 @@ begin
     'swedish': Result := 'sv_SE';
     'turkish': Result := 'tr';
     'ukrainian': Result := 'uk';
+    'vietnamese': Result := 'vi';
   end;
 end;
 

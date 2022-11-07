@@ -366,6 +366,9 @@
     <None Include="sandman_sv_SE.ts">
       <Filter>Translation Files</Filter>
     </None>
+    <None Include="sandman_vi.ts">
+      <Filter>Translation Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SandMan.rc">

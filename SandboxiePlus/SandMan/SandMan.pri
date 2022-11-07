@@ -83,6 +83,7 @@ TRANSLATIONS += sandman_de.ts \
     sandman_sv_SE.ts \
     sandman_tr.ts \
     sandman_uk.ts \
+    sandman_vi.ts \
     sandman_zh_CN.ts \
     sandman_zh_TW.ts
 

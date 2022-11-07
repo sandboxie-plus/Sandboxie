@@ -23,6 +23,7 @@ Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: "swedish"; MessagesFile: "isl\Swedish.isl"
 Name: "turkish"; MessagesFile: "compiler:Languages\Turkish.isl"
 Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
+Name: "vietnamese"; MessagesFile: "isl\Vietnamese.isl"
 ;Name: "armenian"; MessagesFile: "compiler:Languages\Armenian.isl"
 ;Name: "bulgarian"; MessagesFile: "compiler:Languages\Bulgarian.isl"
 ;Name: "catalan"; MessagesFile: "compiler:Languages\Catalan.isl"
@@ -394,3 +395,25 @@ ukrainian.UninstallTaskLabel2=Як ви хочете видалити Sandboxie-
 ukrainian.UninstallTaskLabel3=Зберігти файли конфігурації и пісочниць (&K)%nЦе найбільш рекомендований варіант, якщо ви плануете перевстановити Sandboxie-Plus, зберігши файли конфігурації и пісочниць.
 ukrainian.UninstallTaskLabel4=Видалити файли конфігурації (&C)%nОберіть цей параметр, щоб видалити файли конфігурації Sandboxie.ini та Sandboxie-Plus.ini, залишивши файли пісочниць без змін.
 ukrainian.UninstallTaskLabel5=Видалити файли конфігурації та пісочниць (&S)%nОберіть цей параметр, щоб видалити всі файли конфігурації та пісочниць, включаючи папку Sandbox, яка має місцерозташування в FileRootPath.
+
+; Vietnamese
+vietnamese.AddSandboxedMenu=Thêm "Chạy trong Sandbox" vào menu ngữ cảnh
+vietnamese.AddSandboxedBrowser=Thêm shortcut trên màn hình để khởi động trình duyệt Web trong Sandboxie
+vietnamese.SandboxieStartMenu1=Chạy chương trình bất kỳ trong sandbox
+vietnamese.SandboxieStartMenu2=Chạy trình duyệt web trong Sandbox
+vietnamese.SandboxieStartMenu3=Sandboxie Start Menu
+vietnamese.SandboxedBrowser=Trình duyệt web trong Sandbox
+vietnamese.CustomPageLabel1=Chọn loại cài đặt
+vietnamese.CustomPageLabel2=Cài đặt như thế nào
+vietnamese.CustomPageLabel3=Chọn chế độ cài đặt
+vietnamese.CustomPageInstallMode=Cài đặt {#MyAppName} trên máy tính này
+vietnamese.CustomPageUpgradeMode=Cập nhật cài đặt hiện có của {#MyAppName}
+vietnamese.CustomPagePortableMode=Giải nén tất cả các tệp vào một thư mục để sử dụng di động
+vietnamese.RequiresWin7OrLater=Sandboxie-Plus yêu cầu Windows 7 trở lên.
+vietnamese.ClassicFound=Đã phát hiện cài đặt Sandboxie Classic, nó phải được gỡ cài đặt trước, bạn có muốn gỡ cài đặt nó ngay bây giờ không?
+vietnamese.RunSandboxedMenu=Chạy trong &Sandbox
+vietnamese.UninstallTaskLabel1=Chọn loại gỡ cài đặt
+vietnamese.UninstallTaskLabel2=Bạn muốn gỡ cài đặt Sandboxie-Plus như thế nào?
+vietnamese.UninstallTaskLabel3=&Giữ các tệp cấu hình và Sandbox%nĐây là tùy chọn được đề xuất nhiều nhất nếu bạn định cài đặt lại Sandboxie-Plus trong khi vẫn giữ các tệp cấu hình và các Sandbox của mình.
+vietnamese.UninstallTaskLabel4=Xoá &tập tin cấu hình%nChọn tùy chọn này để xóa các tệp cấu hình Sandboxie.ini và Sandboxie-Plus.ini trong khi vẫn giữ nguyên các Sandbox.
+vietnamese.UninstallTaskLabel5=Xóa các tệp cấu hình và các &Sandbox%nChọn tùy chọn này để xóa tất cả các tệp cấu hình và Sandbox, bao gồm cả thư mục Sandbox nằm trong đường dẫn tùy chỉnh với FileRootPath.

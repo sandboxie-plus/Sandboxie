@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.5.3 / 5.60.3] - 2022-11-??
 
 ### Added
-- boxes set to auto delete are nor marked with a small red recycle symbol
+- boxes set to auto-delete are now marked with a small red recycle symbol
 
 ### Fixed
 - fixed issue with box options [#2400](https://github.com/sandboxie-plus/Sandboxie/issues/2400)

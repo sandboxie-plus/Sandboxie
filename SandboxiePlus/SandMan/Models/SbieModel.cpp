@@ -226,7 +226,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 		QString Action = pBox->GetText("DblClickAction");
 		if (!Action.isEmpty() && Action.left(1) != "!")
 		{
-			if (pNode->Action != Action || (pNode->busyState || Busy)) {
+			if (pNode->Action != Action || (pNode->busyState || Busy) || pNode->boxDel != boxDel) {
 				Icon = m_IconProvider.icon(QFileInfo(pBoxEx->GetCommandFile(Action)));
 				pNode->Action = Action;
 			}
@@ -242,16 +242,23 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 				Icon = theGUI->GetColorIcon(boxColor, inUse);
 			else
 				Icon = theGUI->GetBoxIcon(boxType, inUse);
-			if(boxDel && !Busy && !bVintage)
-				Icon = theGUI->MakeIconRecycle(Icon);
 			pNode->Action.clear();
 		}
 
-		if (!Icon.isNull()) {
-			if (Busy)	Icon = theGUI->MakeIconBusy(Icon, pNode->busyState++);
-			else		pNode->busyState = 0;
+		if (!Icon.isNull()) 
+		{
+			if (Busy)	
+				Icon = theGUI->MakeIconBusy(Icon, pNode->busyState++);
+			else {
+				pNode->busyState = 0;
+
+				if(boxDel && !bVintage)
+					Icon = theGUI->MakeIconRecycle(Icon);
+			}
+			
 			if (m_LargeIcons) // but not for boxes
 				Icon = QIcon(Icon.pixmap(QSize(32,32)).scaled(16, 16, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+
 			pNode->Icon = Icon;
 			Changed = 1; // set change for first column
 		}

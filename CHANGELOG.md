@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.5.3 / 5.60.3] - 2022-11-??
 
-### Changed
+### Added
 - boxes set to auto delete are nor marked with a small red recycle symbol
 
 ### Fixed
@@ -24,6 +24,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed minor issue during Sandboxie Plus uninstall [#2421](https://github.com/sandboxie-plus/Sandboxie/issues/2421)
 - fixed BSOD issue when driver initialization fails (introduced in 1.5.1) [#2431](https://github.com/sandboxie-plus/Sandboxie/issues/2431)
 - fixed fake paths being listed even if true paths do not exist [#2403](https://github.com/sandboxie-plus/Sandboxie/issues/2403)
+- fixed issue with firefox 106.x requesting write access to plugin executables [#2391](https://github.com/sandboxie-plus/Sandboxie/issues/2391) [#2411](https://github.com/sandboxie-plus/Sandboxie/issues/2411)
+
 
 
 

@@ -3128,6 +3128,18 @@ ReparseLoop:
             }
 
             //
+            // firefox starting with version 106 opens plugin exe's with GENERIC_WRITE
+            // to mitigate this issue we strip this flag when we detect that it tries to 
+            // do that with an exe that exists outside teh sandbox
+            //
+
+            if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX && (DesiredAccess & GENERIC_WRITE)) {
+                const WCHAR *dot = wcsrchr(TruePath, L'.');
+                if (dot && _wcsicmp(dot, L".exe") == 0)
+                    DesiredAccess &= ~GENERIC_WRITE;
+            }
+
+            //
             // having processed the exceptions we can decide if we are
             // going to work on the copy file, or if we are going to
             // let the system work on the true file

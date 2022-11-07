@@ -1184,6 +1184,22 @@ QIcon CSandMan::MakeIconBusy(const QIcon& Icon, int Index)
 	return QIcon(result);
 }
 
+QIcon CSandMan::MakeIconRecycle(const QIcon& Icon)
+{
+	static QPixmap overlay;
+	if(overlay.isNull())
+		overlay = QPixmap(":/Boxes/AutoDel");
+
+	QPixmap base = Icon.pixmap(32, 32);
+	QPixmap result(base.width(), base.height());
+	result.fill(Qt::transparent); // force alpha channel
+	QPainter painter(&result);
+	painter.drawPixmap(0, 0, base);
+
+	painter.drawPixmap(8, 8, overlay);
+	return QIcon(result);
+}
+
 QString CSandMan::GetBoxDescription(int boxType)
 {
 	QString Info;

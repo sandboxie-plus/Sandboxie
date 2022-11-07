@@ -119,7 +119,8 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 	bool bWatchSize = theConf->GetBool("Options/WatchBoxSize", false);
 	bool ColorIcons = theConf->GetBool("Options/ColorBoxIcons", false);
 	bool bPlus = (theAPI->GetFeatureFlags() & CSbieAPI::eSbieFeatureCert) != 0;
-	if (theConf->GetInt("Options/ViewMode", 1) == 2)
+	bool bVintage = theConf->GetInt("Options/ViewMode", 1) == 2;
+	if (bVintage)
 		bPlus = false;
 
 	foreach(const QString& Group, Groups.keys())
@@ -218,6 +219,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 		bool bOpen = pBoxEx->IsOpen();
 		bool Busy = pBoxEx->IsBusy();
 		int boxType = pBoxEx->GetType();
+		bool boxDel = pBoxEx->IsAutoDelete();
 		int boxColor = pBoxEx->GetColor();
 		
 		QIcon Icon;
@@ -229,7 +231,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 				pNode->Action = Action;
 			}
 		}
-		else if (pNode->inUse != inUse || pNode->bOpen != bOpen || (pNode->busyState || Busy) || pNode->boxType != boxType || pNode->boxColor != boxColor)
+		else if (pNode->inUse != inUse || pNode->bOpen != bOpen || (pNode->busyState || Busy) || pNode->boxType != boxType || pNode->boxColor != boxColor || pNode->boxDel != boxDel)
 		{
 			pNode->inUse = inUse;
 			pNode->bOpen = bOpen;
@@ -240,6 +242,8 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 				Icon = theGUI->GetColorIcon(boxColor, inUse);
 			else
 				Icon = theGUI->GetBoxIcon(boxType, inUse);
+			if(boxDel && !Busy && !bVintage)
+				Icon = theGUI->MakeIconRecycle(Icon);
 			pNode->Action.clear();
 		}
 

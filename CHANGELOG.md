@@ -8,6 +8,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.5.3 / 5.60.3] - 2022-11-??
 
+### Changed
+- boxes set to auto delete are nor marked with a small red recycle symbol
+
 ### Fixed
 - fixed issue with box options [#2400](https://github.com/sandboxie-plus/Sandboxie/issues/2400)
 - fixed issue with Smart App Control [#2341](https://github.com/sandboxie-plus/Sandboxie/issues/2341)

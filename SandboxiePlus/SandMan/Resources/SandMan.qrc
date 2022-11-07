@@ -160,6 +160,7 @@
         <file alias="Group">Boxes/sandbox-group.png</file>
         <file alias="Group2">Boxes/sandbox-group+.png</file>
         <file alias="Out">Boxes/sandbox-out.png</file>
+        <file alias="AutoDel">Boxes/DelOverlay.png</file>
     </qresource>
     <qresource prefix="/Assets">
         <file>Advanced.png</file>

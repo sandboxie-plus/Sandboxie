@@ -139,6 +139,7 @@ CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSand
 	m_pRecoveryWnd = NULL;
 
 	m_BoxType = eDefault;
+	m_BoxDel = false;
 	m_BoxColor = QColor(Qt::yellow).rgb();
 }
 
@@ -203,6 +204,8 @@ void CSandBoxPlus::UpdateDetails()
 	CSandBox::UpdateDetails();
 
 	m_BoxType = GetTypeImpl();
+
+	m_BoxDel = GetBool("AutoDelete", false);
 
 	QStringList BorderCfg = GetText("BorderColor").split(",");
 	m_BoxColor = QColor("#" + BorderCfg[0].mid(5, 2) + BorderCfg[0].mid(3, 2) + BorderCfg[0].mid(1, 2)).rgb();

@@ -125,6 +125,7 @@ public:
 	};
 
 	EBoxTypes				GetType() const { return m_BoxType; }
+	bool					IsAutoDelete() const { return m_BoxDel; }
 	QRgb					GetColor() const { return m_BoxColor; }
 	
 	class COptionsWindow*	m_pOptionsWnd;
@@ -190,5 +191,6 @@ protected:
 	QMap<QString, SLink>	m_StartMenu;
 
 	EBoxTypes				m_BoxType;
+	bool					m_BoxDel;
 	QRgb					m_BoxColor;
 };

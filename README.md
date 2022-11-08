@@ -85,6 +85,7 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 - Luro223 - Documentation additions
 - blap - Maintainer of [SandboxToys2](https://github.com/blap/SandboxToys2)
 - okrc - Code fixes
+- offhub - Documentation additions
 
 ## 🌏 Translators
 

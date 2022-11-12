@@ -651,7 +651,7 @@ Komut tarihçesinden komutu kaldır
 .
 
 3106;txt;01
-Doküman veya programı başlatacağınız korumalı alanı seçin.
+Belge veya programı başlatacağınız korumalı alanı seçin.
 .
 
 3107;txt;01
@@ -851,15 +851,15 @@ Programlar#*.EXE#Tüm dosyalar#*.*##
 .
 
 3311;txt;01
-%2 bölümüne %3 konfigürasyon ayarı kaydetme başarısız: %4
+%2 bölümüne %3 yapılandırma ayarı kaydetme başarısız: %4
 .
 
 3312;txt;01
-%2 bölümündeki konfigürasyonu güncelleme izniniz bulunmuyor
+%2 bölümündeki yapılandırmayı güncelleme izniniz bulunmuyor
 .
 
 3313;txt;01
-Bilinmeyen kullanıcı, konfigürasyon ayarları kaydedilmeyecek
+Bilinmeyen kullanıcı, yapılandırma ayarları kaydedilmeyecek
 .
 
 3314;txt;01
@@ -993,7 +993,7 @@ Kurtarma &Günlüğü
 .
 
 3431;txt;01
-Sand&box
+&Korumalı Alan
 .
 
 3432;txt;01
@@ -1037,15 +1037,15 @@ Gizli &Mesajları Unut
 .
 
 3502;txt;01
-&Konfigürasyonu Kilitle
+&Yapılandırmayı Kilitle
 .
 
 3446;txt;01
-&Konfigürasyonu Düzenle
+&Yapılandırmayı Düzenle
 .
 
 3447;txt;01
-Konfigürasyonu &Yeniden Yükle
+Yapılandırmayı &Yeniden Yükle
 .
 
 3448;txt;01
@@ -1216,31 +1216,31 @@ Sistem bildiri alanındaki sarı Sandboxie işaretine
 .
 
 3512;txt;01
-Değişiklikleri şimdi açılan Sandboxie.ini konfigürasyon
+Değişiklikleri şimdi açılan Sandboxie.ini yapılandırma
 dosyasına yapın.
 
-Değiştirilmiş konfigürasyon, yalnızca Konfigürasyonu
+Değiştirilmiş yapılandırma, yalnızca Yapılandırmayı
 Yeniden yükle fonksiyonu kullanıldıktan sonra etki
 edecektir.
 
-Çoğu durumda, Konfigürasyonu Yeniden yükle fonksiyonu
+Çoğu durumda, Yapılandırmayı Yeniden yükle fonksiyonu
 pencereyi kapatır kapatmaz uygulanır.
 
-Sandboxie Kontrolüne herhangi bir anda Konfigürasyonu
+Sandboxie Kontrolüne herhangi bir anda Yapılandırmayı
 Yeniden yükleme talimatını verebilirsiniz.
 .
 
 3513;txt;01
-Sandboxie konfigürasyonu yenilendi ve korumalı alandaki
+Sandboxie yapılandırmayı yenilendi ve korumalı alandaki
 programlar başlatıldıklarında uygulanacak.
 
 Eğer korumalı alandaki olan çalışır programlar varsa
-yeni konfigürasyon onlar üzerine uygulanmayacak.
+yeni yapılandırma onlar üzerine uygulanmayacak.
 .
 
 3514;txt;01
 Yapılandırma dosyası okunurken hata oluştu.
-Sandboxie konfigürasyonu yenilenmeyecek.
+Sandboxie yapılandırmayı yenilenmeyecek.
 .
 
 3515;txt;01
@@ -1327,8 +1327,8 @@ işlemlerini yapıp; korumalı alanda olmayan bir klasör penceresine yapıştı
 Korumalı alan içeriklerini korumalı alan ile saklanmayan Windows Explorer penceresinde
 görüntüleyeceksiniz.
 
-Korumalı alan içerisinde bulunan program veya dokümanları açabileceksiniz.
-Program veya doküman Sandboxie kontrolü altında başlayacaktır.
+Korumalı alan içerisinde bulunan program veya belgeleri açabileceksiniz.
+Program veya belge Sandboxie kontrolü altında başlayacaktır.
 
 Ancak, bir korumalı alan içeriklerindeki değişiklikleri Windows Explorer'ın korumalı alandaki
 örneğinde yapmanızı öneririz. Bunun için,
@@ -1359,8 +1359,8 @@ Korumalı alan menüsünden Korumalı alan Ayarlarını kullanabilirsiniz.
 .
 
 3540;txt;01
-Sandboxie.ini konfigürasyon dosyası, şifreli olduğundan düzenlenemedi.
-Dosyayı düzenleyebilmek için, Konfigürasyonu Kilitle komutunu kullanıp
+Sandboxie.ini yapılandırma dosyası, şifreli olduğundan düzenlenemedi.
+Dosyayı düzenleyebilmek için, Yapılandırmayı Kilitle komutunu kullanıp
 şifre korumayı kaldırın.
 .
 
@@ -2735,12 +2735,12 @@ Uygulamalarınız için klasör konumu belirtmek için, Klasörler sayfasına ba
 .
 
 4222;txt;02
-Bir uygulama konfigürasyonunun parçası olduğundan
+Bir uygulama yapılandırmasının parçası olduğundan
 bu ayar düzenlenemedi veya silinemedi:
 
 %2
 
-Korumalı alandan uygulama konfigürasyonunu kaldırmak için,
+Korumalı alandan uygulama yapılandırmasını kaldırmak için,
 Korumalı alan Ayarları penceresindeki Uygulama sayfalarına bakınız.
 .
 
@@ -2770,7 +2770,7 @@ Tüm Uygulamalar
 .
 
 4289;txt;01
-Alfabetik sıralı tüm uygulama konfigürasyonları. Bu liste yerel (resmi olmayan) uygulama konfigürasyonlarınızı içermez.
+Alfabetik sıralı tüm uygulama yapılandırmaları. Bu liste yerel (resmi olmayan) uygulama yapılandırmalarınızı içermez.
 .
 
 4291;txt;01
@@ -2915,16 +2915,16 @@ Sadece Yönetici hesapları &Zorunlu Programları Kapat komutunu kullanabilir
 .
 
 4269;txt;01
-Lütfen konfigürasyon koruma ile ilgili Sandboxie dokümantasyon sayfasını okuyun.
+Lütfen yapılandırma koruma ile ilgili Sandboxie belgeleme sayfasını okuyun.
 Bu sayfayı şimdi açmak ister misiniz?
 .
 
 4271;txt;01
-Sandboxie konfigürasyonu şifre ile korunuyor. Lütfen şifreyi girin.
+Sandboxie yapılandırmayı şifre ile korunuyor. Lütfen şifreyi girin.
 .
 
 4272;txt;01
-Sandboxie konfigürasyonunu korumak üzere yeni bir şifre girin.
+Sandboxie yapılandırmasını korumak üzere yeni bir şifre girin.
 .
 
 4273;txt;01

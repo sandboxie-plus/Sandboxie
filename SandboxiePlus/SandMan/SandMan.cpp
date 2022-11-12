@@ -2881,10 +2881,10 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_Canceled:		Message = tr("The operation was canceled by the user"); break;
 
 	case SBX_7zNotReady:	Message = tr("Import/Export not available, 7z.dll could not be loaded"); break;
-	case SBX_7zCreateFailed: Message = tr("Failed to Create Box Archive"); break;
+	case SBX_7zCreateFailed: Message = tr("Failed to create the box archive"); break;
 	case SBX_7zOpenFailed:	Message = tr("Failed to open the 7z archive"); break;
-	case SBX_7zExtractFailed: Message = tr("Failed to Unpack Box Archive"); break;
-	case SBX_NotBoxArchive:	Message = tr("The sellected 7z file is NOT a Box Archive"); break;
+	case SBX_7zExtractFailed: Message = tr("Failed to unpack the box archive"); break;
+	case SBX_NotBoxArchive:	Message = tr("The selected 7z file is NOT a box archive"); break;
 
 	default:				return tr("Unknown Error Status: 0x%1").arg((quint32)Error.GetStatus(), 8, 16, QChar('0'));
 	}

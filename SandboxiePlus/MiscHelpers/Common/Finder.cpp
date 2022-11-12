@@ -144,7 +144,7 @@ QRegularExpression CFinder::GetRegExp() const
 	if(m_pRegExp->isChecked())
 		Exp = m_pSearch->text();
 	else
-		Exp = QRegularExpression::wildcardToRegularExpression("*" + m_pSearch->text() + "*");
+		Exp = ".*" + QRegularExpression::escape(m_pSearch->text()) + ".*";
 	return QRegularExpression(Exp, m_pCaseSensitive->isChecked() ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
 }
 

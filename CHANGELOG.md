@@ -6,6 +6,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.6.0 / 5.61.0] - 2022-??-??
+
+### Added
+- added ability to import/export boxes into 7z files
+
+### Changed
+- restructured the box context menu a bit
+- sandman translations are now compressed and located in translations.7z
+
+
+
+
+
+
 ## [1.5.3 / 5.60.3] - 2022-11-??
 
 ### Added

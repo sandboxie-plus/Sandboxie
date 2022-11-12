@@ -20,7 +20,9 @@ public:
  
 		m_pMessageLabel = new QLabel(Prompt);
 		m_pMessageLabel->setMinimumWidth(300);
+		//m_pMessageLabel->setMinimumHeight(40);
 		m_pMessageLabel->setWordWrap(true);
+		//m_pMessageLabel->setAlignment(Qt::AlignTop);
 		m_pMainLayout->addWidget(m_pMessageLabel, 0, 0, 1, 1);
 
 		m_pProgressBar = new QProgressBar();

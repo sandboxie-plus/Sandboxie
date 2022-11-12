@@ -282,6 +282,7 @@ private:
 	QMenu*				m_pMenuFile;
 	QAction*			m_pNewBox;
 	QAction*			m_pNewGroup;
+	QAction*			m_pImportBox;
 	QAction*			m_pEmptyAll;
 	QAction*			m_pWndFinder;
 	QAction*			m_pDisableForce;
@@ -381,6 +382,7 @@ public:
 	quint32				m_LanguageId;
 	bool				m_DarkTheme;
 	bool				m_FusionTheme;
+	class C7zFileEngineHandler* m_pTranslations;
 };
 
 

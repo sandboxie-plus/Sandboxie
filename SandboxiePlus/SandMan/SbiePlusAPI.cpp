@@ -8,6 +8,8 @@
 #include "BoxMonitor.h"
 #include "..\MiscHelpers\Common\OtherFunctions.h"
 #include "../QSbieAPI/SbieUtils.h"
+#include "../MiscHelpers/Archive/Archive.h"
+#include <QtConcurrent>
 
 CSbiePlusAPI::CSbiePlusAPI(QObject* parent) : CSbieAPI(parent)
 {
@@ -145,6 +147,160 @@ CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSand
 
 CSandBoxPlus::~CSandBoxPlus()
 {
+}
+
+class QFileX : public QFile {
+public:
+	QFileX(const QString& path, const CSbieProgressPtr& pProgress, CArchive* pArchive) : QFile(path) 
+	{
+		m_pProgress = pProgress;
+		m_pArchive = pArchive;
+	}
+
+	bool open(OpenMode flags) override
+	{
+		if (m_pProgress->IsCanceled())
+			return false;
+		m_pProgress->ShowMessage(Split2(fileName(), "/", true).second);
+		m_pProgress->SetProgress((int)(m_pArchive->GetProgress() * 100.0));
+		return QFile::open(flags);
+	}
+
+protected:
+	CSbieProgressPtr m_pProgress;
+	CArchive* m_pArchive;
+};
+
+void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ExportPath, const QString& RootPath, const QString& Section)
+{
+	//CArchive Archive(ExportPath + ".tmp");
+	CArchive Archive(ExportPath);
+
+	QMap<int, QIODevice*> Files;
+
+	//QTemporaryFile* pConfigFile = new QTemporaryFile;
+	//pConfigFile->open();
+	//pConfigFile->write(Section.toUtf8());
+	//pConfigFile->close();
+	//
+	//int ArcIndex = Archive.AddFile("BoxConfig.ini");
+	//Files.insert(ArcIndex, pConfigFile);
+
+	QFile File(RootPath + "\\" + "BoxConfig.ini");
+	if (File.open(QFile::WriteOnly)) {
+		File.write(Section.toUtf8());
+		File.close();
+	}
+
+	QStringList FileList = ListDir(RootPath + "\\");
+	foreach(const QString& File, FileList)
+	{
+		StrPair RootName = Split2(File, "\\", true);
+		if(RootName.second.isEmpty())
+		{
+			RootName.second = RootName.first;
+			RootName.first = "";
+		}
+		int ArcIndex = Archive.AddFile(RootName.second);
+		if(ArcIndex != -1)
+		{
+			QString FileName = (RootName.first.isEmpty() ?  RootPath + "\\" : RootName.first) + RootName.second;
+			Files.insert(ArcIndex, new QFileX(FileName, pProgress, &Archive));
+		}
+		//else
+			// this file is already present in the archive, this should not happen !!!
+	}
+
+	SB_STATUS Status = SB_OK;
+	if (!Archive.Update(&Files)) 
+		Status = SB_ERR((ESbieMsgCodes)SBX_7zCreateFailed);
+	
+	//if(!Status.IsError() && !pProgress->IsCanceled())
+	//	QFile::rename(ExportPath + ".tmp", ExportPath);
+	//else
+	//	QFile::remove(ExportPath + ".tmp");
+
+	File.remove();
+
+	pProgress->Finish(Status);
+}
+
+SB_PROGRESS CSandBoxPlus::ExportBox(const QString& FileName)
+{
+	if (!CArchive::IsInit())
+		return SB_ERR((ESbieMsgCodes)SBX_7zNotReady);
+
+	if (theAPI->HasProcesses(m_Name))
+		return SB_ERR(SB_SnapIsRunning); // todo
+
+	if (!IsInitialized())
+		return SB_ERR(SB_SnapIsEmpty); // todo
+
+	QString Section = theAPI->SbieIniGetEx(m_Name, "");
+
+	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
+	QtConcurrent::run(CSandBoxPlus::ExportBoxAsync, pProgress, FileName, m_FilePath, Section);
+	return SB_PROGRESS(OP_ASYNC, pProgress);
+}
+
+void CSandBoxPlus::ImportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ImportPath, const QString& RootPath, const QString& BoxName)
+{
+	CArchive Archive(ImportPath);
+
+	if (Archive.Open() != 1) {
+		pProgress->Finish(SB_ERR((ESbieMsgCodes)SBX_7zOpenFailed));
+		return;
+	}
+
+	bool IsBoxArchive = false;
+
+	QMap<int, QIODevice*> Files;
+
+	for (int i = 0; i < Archive.FileCount(); i++) {
+		int ArcIndex = Archive.FindByIndex(i);
+		if(Archive.FileProperty(ArcIndex, "IsDir").toBool())
+			continue;
+		QString File = Archive.FileProperty(ArcIndex, "Path").toString();
+		if (File == "BoxConfig.ini")
+			IsBoxArchive = true;
+		Files.insert(ArcIndex, new QFileX(CArchive::PrepareExtraction(File, RootPath + "\\"), pProgress, &Archive));
+	}
+
+	if(!IsBoxArchive) {
+		pProgress->Finish(SB_ERR((ESbieMsgCodes)SBX_NotBoxArchive));
+		return;
+	}
+
+	SB_STATUS Status = SB_OK;
+	if (!Archive.Extract(&Files))
+		Status = SB_ERR((ESbieMsgCodes)SBX_7zExtractFailed);
+
+	if (!Status.IsError() && !pProgress->IsCanceled())
+	{
+		QFile File(RootPath + "\\" + "BoxConfig.ini");
+		if (File.open(QFile::ReadOnly)) {
+
+			QMetaObject::invokeMethod(theAPI, "SbieIniSetSection", Qt::BlockingQueuedConnection, // run this in the main thread
+				Q_ARG(QString, BoxName),
+				Q_ARG(QString, QString::fromUtf8(File.readAll()))
+			);
+
+			File.close();
+		}
+		File.remove();
+	}
+
+	pProgress->Finish(Status);
+}
+
+SB_PROGRESS CSandBoxPlus::ImportBox(const QString& FileName)
+{
+	if (!CArchive::IsInit())
+		return SB_ERR((ESbieMsgCodes)SBX_7zNotReady);
+
+	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
+	QtConcurrent::run(CSandBoxPlus::ImportBoxAsync, pProgress, FileName, m_FilePath, m_Name);
+	return SB_PROGRESS(OP_ASYNC, pProgress);
 }
 
 void CSandBoxPlus::UpdateDetails()

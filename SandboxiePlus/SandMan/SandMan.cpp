@@ -26,10 +26,13 @@
 #include "../MiscHelpers/Common/OtherFunctions.h"
 #include "../MiscHelpers/Common/Common.h"
 #include "Windows/SupportDialog.h"
+#include "../MiscHelpers/Archive/Archive.h"
+#include "../MiscHelpers/Archive/ArchiveFS.h"
 #include "Views/FileView.h"
 #include "OnlineUpdater.h"
 #include "../MiscHelpers/Common/NeonEffect.h"
 #include <QVariantAnimation>
+#include <QSessionManager>
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -109,6 +112,10 @@ CSandMan::CSandMan(QWidget *parent)
 
 	QApplication::instance()->installNativeEventFilter(new CNativeEventFilter);
 #endif
+
+	CArchive::Init();
+
+	m_pTranslations = new C7zFileEngineHandler(QApplication::applicationDirPath() + "/translations.7z", "lang", this);
 
 	theGUI = this;
 
@@ -447,6 +454,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 	m_pMenuFile = m_pMenuBar->addMenu(tr("&Sandbox"));
 		m_pNewBox = m_pMenuFile->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnSandBoxAction()));
 		m_pNewGroup = m_pMenuFile->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnSandBoxAction()));
+		m_pImportBox = m_pMenuFile->addAction(CSandMan::GetIcon("UnPackBox"), tr("Import Box"), this, SLOT(OnSandBoxAction()));
 		m_pMenuFile->addSeparator();
 		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
 		m_pDisableForce = m_pMenuFile->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce()));
@@ -645,6 +653,7 @@ void CSandMan::CreateOldMenus()
 		m_pSandbox->addSeparator();
 		m_pNewBox = m_pSandbox->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Sandbox"), this, SLOT(OnSandBoxAction()));
 		m_pNewGroup = m_pSandbox->addAction(CSandMan::GetIcon("Group"), tr("Create New Group"), this, SLOT(OnSandBoxAction()));
+		m_pImportBox = m_pSandbox->addAction(CSandMan::GetIcon("UnPackBox"), tr("Import Sandbox"), this, SLOT(OnSandBoxAction()));
 
 		QAction* m_pSetContainer = m_pSandbox->addAction(CSandMan::GetIcon("Advanced"), tr("Set Container Folder"), this, SLOT(OnSettingsAction()));
 		m_pSetContainer->setData(CSettingsWindow::eAdvanced);
@@ -2167,10 +2176,48 @@ void CSandMan::OnSandBoxAction()
 {
 	QAction* pAction = qobject_cast<QAction*>(sender());
 
-	if(pAction == m_pNewBox)
+	if (pAction == m_pNewBox)
 		GetBoxView()->AddNewBox();
-	else if(pAction == m_pNewGroup)
+	else if (pAction == m_pNewGroup)
 		GetBoxView()->AddNewGroup();
+	else if (pAction == m_pImportBox)
+	{
+		QString Value = QFileDialog::getOpenFileName(this, tr("Select file name"), "", tr("7-zip Archive (*.7z)"));
+		if (Value.isEmpty())
+			return;
+
+		StrPair PathName = Split2(Value, "/", true);
+		StrPair NameEx = Split2(PathName.second, ".", true);
+		QString Name = NameEx.first;
+
+		CSandBoxPtr pBox;
+		for (;;) {
+			pBox = theAPI->GetBoxByName(Name);
+			if (pBox.isNull())
+				break;
+			Name = QInputDialog::getText(this, "Sandboxie-Plus", tr("This Name is already in use, please select an alternative box name"), QLineEdit::Normal, Name);
+			if (Name.isEmpty())
+				return;
+		}
+
+		SB_PROGRESS Status = theAPI->CreateBox(Name);
+		if (!Status.IsError()) {
+			pBox = theAPI->GetBoxByName(Name);
+			if (pBox) {
+				auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+				Status = pBoxEx->ImportBox(Value);
+			}
+		}
+		if (Status.GetStatus() == OP_ASYNC) {
+			Status = theGUI->AddAsyncOp(Status.GetValue(), true, tr("Importing: %1").arg(Value));
+			if (Status.IsError()) {
+				theGUI->DeleteBoxContent(pBox, CSandMan::eForDelete);
+				pBox->RemoveBox();
+			}
+		}
+		else
+			CSandMan::CheckResults(QList<SB_STATUS>() << Status);
+	}
 }
 
 void CSandMan::OnEmptyAll()
@@ -2832,6 +2879,13 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_NameExists:		Message = tr("A sandbox with that name already exists"); break;
 	case SB_PasswordBad:	Message = tr("The config password must not be longer than 64 characters"); break;
 	case SB_Canceled:		Message = tr("The operation was canceled by the user"); break;
+
+	case SBX_7zNotReady:	Message = tr("Import/Export not available, 7z.dll could not be loaded"); break;
+	case SBX_7zCreateFailed: Message = tr("Failed to Create Box Archive"); break;
+	case SBX_7zOpenFailed:	Message = tr("Failed to open the 7z archive"); break;
+	case SBX_7zExtractFailed: Message = tr("Failed to Unpack Box Archive"); break;
+	case SBX_NotBoxArchive:	Message = tr("The sellected 7z file is NOT a Box Archive"); break;
+
 	default:				return tr("Unknown Error Status: 0x%1").arg((quint32)Error.GetStatus(), 8, 16, QChar('0'));
 	}
 
@@ -3033,7 +3087,11 @@ void CSandMan::LoadLanguage(const QString& Lang, const QString& Module, int Inde
 	QString LangAux = Lang; // Short version as fallback
 	LangAux.truncate(LangAux.lastIndexOf('_'));
 
-	QString LangDir = QApplication::applicationDirPath() + "/translations/";
+	QString LangDir;
+	if (m_pTranslations->IsOpen())
+		LangDir = m_pTranslations->Prefix() + "/";
+	else
+		LangDir = QApplication::applicationDirPath() + "/translations/";
 
 	QString LangPath = LangDir + Module + "_";
 	bool bAux = false;

@@ -189,6 +189,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Archive\Archive.cpp" />
+    <ClCompile Include="Archive\ArchiveExtractor.cpp" />
+    <ClCompile Include="Archive\ArchiveFS.cpp" />
+    <ClCompile Include="Archive\ArchiveHelper.cpp" />
+    <ClCompile Include="Archive\ArchiveInterface.cpp" />
+    <ClCompile Include="Archive\ArchiveOpener.cpp" />
+    <ClCompile Include="Archive\ArchiveThread.cpp" />
+    <ClCompile Include="Archive\ArchiveUpdater.cpp" />
+    <ClCompile Include="Archive\CachedArchive.cpp" />
+    <ClCompile Include="Archive\SplitFile.cpp" />
     <ClCompile Include="Common\CheckableMessageBox.cpp" />
     <ClCompile Include="Common\ComboInputDialog.cpp" />
     <ClCompile Include="Common\Common.cpp" />
@@ -198,6 +208,7 @@
     <ClCompile Include="Common\ItemChooser.cpp" />
     <ClCompile Include="Common\KeyValueInputDialog.cpp" />
     <ClCompile Include="Common\ListItemModel.cpp" />
+    <ClCompile Include="Common\MT\ThreadLock.cpp" />
     <ClCompile Include="Common\MultiLineInputDialog.cpp" />
     <ClCompile Include="Common\OtherFunctions.cpp" />
     <ClCompile Include="Common\PanelView.cpp" />
@@ -222,6 +233,17 @@
     <QtMoc Include="Common\CheckableMessageBox.h" />
     <QtMoc Include="Common\ComboInputDialog.h" />
     <QtMoc Include="Common\CheckList.h" />
+    <ClInclude Include="Archive\Archive.h" />
+    <ClInclude Include="Archive\ArchiveExtractor.h" />
+    <ClInclude Include="Archive\ArchiveFS.h" />
+    <ClInclude Include="Archive\ArchiveHelper.h" />
+    <ClInclude Include="Archive\ArchiveInterface.h" />
+    <ClInclude Include="Archive\ArchiveIO.h" />
+    <ClInclude Include="Archive\ArchiveOpener.h" />
+    <QtMoc Include="Archive\ArchiveThread.h" />
+    <ClInclude Include="Archive\ArchiveUpdater.h" />
+    <ClInclude Include="Archive\CachedArchive.h" />
+    <QtMoc Include="Archive\SplitFile.h" />
     <ClInclude Include="Common\Common.h" />
     <ClInclude Include="Common\DebugHelpers.h" />
     <ClInclude Include="Common\ExitDialog.h" />
@@ -244,6 +266,7 @@
     <QtMoc Include="Common\TreeItemModel.h" />
     <QtMoc Include="Common\TreeViewEx.h" />
     <QtMoc Include="Common\TreeWidgetEx.h" />
+    <ClInclude Include="Common\MT\ThreadLock.h" />
     <QtMoc Include="Common\NeonEffect.h" />
     <ClInclude Include="Common\OtherFunctions.h" />
     <ClInclude Include="Common\qRC4.h" />

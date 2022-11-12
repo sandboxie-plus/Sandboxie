@@ -185,10 +185,14 @@ void CSbieView::CreateMenu()
 		m_pMenuContent->addSeparator();
 		m_pMenuExplore = m_pMenuContent->addAction(CSandMan::GetIcon("Explore"), tr("Explore Content"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRegEdit = m_pMenuContent->addAction(CSandMan::GetIcon("RegEdit"), tr("Open Registry"), this, SLOT(OnSandBoxAction()));
+	m_pMenuSnapshots = m_pMenuBox->addAction(CSandMan::GetIcon("Snapshots"), tr("Snapshots Manager"), this, SLOT(OnSandBoxAction()));
 	m_pMenuRecover = m_pMenuBox->addAction(CSandMan::GetIcon("Recover"), tr("Recover Files"), this, SLOT(OnSandBoxAction()));
 	m_pMenuCleanUp = m_pMenuBox->addAction(CSandMan::GetIcon("Erase"), tr("Delete Content"), this, SLOT(OnSandBoxAction()));
 	m_pMenuBox->addSeparator();
 	m_pMenuOptions = m_pMenuBox->addAction(CSandMan::GetIcon("Options"), tr("Sandbox Options"), this, SLOT(OnSandBoxAction()));
+	QFont f = m_pMenuOptions->font();
+	f.setBold(true);
+	m_pMenuOptions->setFont(f);
 
 	m_pMenuPresets = m_pMenuBox->addMenu(CSandMan::GetIcon("Presets"), tr("Sandbox Presets"));
 		m_pMenuPresetsAdmin = new QActionGroup(m_pMenuPresets);
@@ -212,9 +216,8 @@ void CSbieView::CreateMenu()
 		m_pMenuPresetsRecovery->setCheckable(true);
 	
 	m_pMenuTools = m_pMenuBox->addMenu(CSandMan::GetIcon("Maintenance"), tr("Sandbox Tools"));
-		m_pMenuSnapshots = m_pMenuTools->addAction(CSandMan::GetIcon("Snapshots"), tr("Snapshots Manager"), this, SLOT(OnSandBoxAction()));
-		m_pMenuTools->addSeparator();
 		m_pMenuDuplicate = m_pMenuTools->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Box Config"), this, SLOT(OnSandBoxAction()));
+		m_pMenuExport = m_pMenuTools->addAction(CSandMan::GetIcon("PackBox"), tr("Export Box"), this, SLOT(OnSandBoxAction()));
 
 	m_pMenuRename = m_pMenuBox->addAction(CSandMan::GetIcon("Rename"), tr("Rename Sandbox"), this, SLOT(OnSandBoxAction()));
 	m_pMenuMoveTo = m_pMenuBox->addMenu(CSandMan::GetIcon("Group"), tr("Move Sandbox"));
@@ -303,6 +306,7 @@ void CSbieView::CreateOldMenu()
 
 		m_pMenuTools->addSeparator();
 		m_pMenuDuplicate = m_pMenuTools->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Sandbox Config"), this, SLOT(OnSandBoxAction()));
+		m_pMenuExport = m_pMenuTools->addAction(CSandMan::GetIcon("PackBox"), tr("Export Sandbox"), this, SLOT(OnSandBoxAction()));
 
 		m_pMenuTools->addSeparator();
 		m_pMenuRefresh = m_pMenuTools->addAction(CSandMan::GetIcon("Refresh"), tr("Refresh Info"), this, SLOT(OnSandBoxAction()));
@@ -1225,6 +1229,20 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		}
 
 		Results.append(Status);
+	}
+	else if (Action == m_pMenuExport)
+	{
+		QString Value = QFileDialog::getSaveFileName(this, tr("Select file name"), SandBoxes.first()->GetName() + ".7z", tr("7-zip Archive (*.7z)"));	
+		if (Value.isEmpty())
+			return;
+
+		CSandBoxPtr pBox = SandBoxes.first();
+		auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+		SB_PROGRESS Status = pBoxEx->ExportBox(Value);
+		if (Status.GetStatus() == OP_ASYNC)
+			theGUI->AddAsyncOp(Status.GetValue(), false, tr("Exporting: %1").arg(Value));
+		else
+			Results.append(Status);
 	}
 	else if (Action == m_pMenuRename)
 	{

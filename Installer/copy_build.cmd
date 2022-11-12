@@ -75,6 +75,10 @@ IF NOT %archPath% == Win32 (
 )
 
 
+ECHO Copying 7zip library
+copy /y %~dp07-Zip\7-Zip-%archPath%\7z.dll %instPath%\
+
+
 ECHO Copying SandMan project and libraries
 copy %srcPath%\MiscHelpers.dll %instPath%\
 copy %srcPath%\MiscHelpers.pdb %instPath%\

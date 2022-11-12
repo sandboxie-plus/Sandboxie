@@ -2,6 +2,8 @@
 
 call %~dp0get_openssl.cmd
 
+call %~dp0get_7zip.cmd
+
 REM Moved to main.yml
 REM call %~dp0fix_qt5_languages.cmd
 

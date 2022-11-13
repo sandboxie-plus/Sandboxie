@@ -1681,7 +1681,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="457"/>
         <source>Import Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Box importieren</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="475"/>
@@ -2345,7 +2345,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="656"/>
         <source>Import Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox importieren</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="782"/>
@@ -2587,22 +2587,22 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="2185"/>
         <source>Select file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateinamen auswählen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2185"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-zip Archiv (*.7z)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2198"/>
         <source>This Name is already in use, please select an alternative box name</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser name wird bereits verwendet, bitte wählen Sie einen anderen Boxnamen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2212"/>
         <source>Importing: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Importiere: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2248"/>
@@ -2697,27 +2697,27 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="2883"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Import/Export nicht verfügbar, 7z.dll konnte nicht geladen werden</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2884"/>
         <source>Failed to create the box archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte Boxarchiv nicht erzeugen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2885"/>
         <source>Failed to open the 7z archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte das 7z-Archiv nicht öffnen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2886"/>
         <source>Failed to unpack the box archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte das Boxarchiv nicht entpacken</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2887"/>
         <source>The selected 7z file is NOT a box archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Die ausgewählte 7z-Datei ist KEIN Boxarchiv</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2909"/>
@@ -3349,7 +3349,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Views/SbieView.cpp" line="309"/>
         <source>Export Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox exportieren</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="368"/>
@@ -3571,7 +3571,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Views/SbieView.cpp" line="220"/>
         <source>Export Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Box exportieren</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="223"/>
@@ -3582,17 +3582,17 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Views/SbieView.cpp" line="1235"/>
         <source>Select file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateinamen auswählen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1235"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-zip Archiv (*.7z)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1243"/>
         <source>Exporting: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportiere: %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1250"/>

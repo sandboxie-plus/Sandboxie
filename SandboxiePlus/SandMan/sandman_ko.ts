@@ -539,7 +539,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAdvanced.cpp" line="44"/>
         <source>Enable special inconsistent PreferExternalManifest behaviour, as needed for some Edge fixes</source>
         <oldsource>Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes</oldsource>
-        <translation type="unfinished">일부 가장자리 수정에 필요한 경우 일관성이 없는 특수 PreferExternalManifest 동작 사용</translation>
+        <translation>일부 가장자리 수정에 필요한 경우 일관성이 없는 특수 PreferExternalManifest 동작 사용</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="45"/>
@@ -2077,7 +2077,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="457"/>
         <source>Import Box</source>
-        <translation type="unfinished"></translation>
+        <translation>박스 가져오기</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="466"/>
@@ -2119,7 +2119,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="656"/>
         <source>Import Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>박스 가져오기</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="658"/>
@@ -2240,22 +2240,22 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2185"/>
         <source>Select file name</source>
-        <translation type="unfinished"></translation>
+        <translation>파일 이름 선택</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2185"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-zip 압축파일 (*.7z)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2198"/>
         <source>This Name is already in use, please select an alternative box name</source>
-        <translation type="unfinished"></translation>
+        <translation>이 이름은 이미 사용 중입니다. 다른 박스 이름을 선택하십시오</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2212"/>
         <source>Importing: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>가져오기: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2248"/>
@@ -2440,27 +2440,27 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2883"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>가져오기/내보내기 기능을 사용할 수 없습니다, 7z.dll을 불러올 수 없습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2884"/>
         <source>Failed to create the box archive</source>
-        <translation type="unfinished"></translation>
+        <translation>박스 압축파일을 만들지 못했습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2885"/>
         <source>Failed to open the 7z archive</source>
-        <translation type="unfinished"></translation>
+        <translation>7z 압축파일을 열지 못했습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2886"/>
         <source>Failed to unpack the box archive</source>
-        <translation type="unfinished"></translation>
+        <translation>박스 압축파일의 압축을 풀지 못했습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2887"/>
         <source>The selected 7z file is NOT a box archive</source>
-        <translation type="unfinished"></translation>
+        <translation>선택한 7z 파일이 박스 압축파일이 아닙니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2909"/>
@@ -3065,7 +3065,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="220"/>
         <source>Export Box</source>
-        <translation type="unfinished"></translation>
+        <translation>박스 내보내기</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="224"/>
@@ -3132,7 +3132,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="309"/>
         <source>Export Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 내보내기</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="368"/>
@@ -3157,7 +3157,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="996"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
-        <translation>샌드박스 이름 및 상자 그룹 이름에는 &apos;,(&apos;) 기호를 사용할 수 없습니다.</translation>
+        <translation>샌드박스 이름 및 박스 그룹 이름에는 &apos;,(&apos;) 기호를 사용할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1001"/>
@@ -3206,17 +3206,17 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="1235"/>
         <source>Select file name</source>
-        <translation type="unfinished"></translation>
+        <translation>파일 이름 선택</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1235"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-zip 압축파일 (*.7z)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1243"/>
         <source>Exporting: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>내보내기: %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1250"/>

@@ -2195,7 +2195,7 @@ void CSandMan::OnSandBoxAction()
 			pBox = theAPI->GetBoxByName(Name);
 			if (pBox.isNull())
 				break;
-			Name = QInputDialog::getText(this, "Sandboxie-Plus", tr("This Name is already in use, please select an alternative box name"), QLineEdit::Normal, Name);
+			Name = QInputDialog::getText(this, "Sandboxie-Plus", tr("This name is already in use, please select an alternative box name"), QLineEdit::Normal, Name);
 			if (Name.isEmpty())
 				return;
 		}

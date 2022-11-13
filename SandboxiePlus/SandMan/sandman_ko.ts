@@ -2249,8 +2249,9 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2198"/>
-        <source>This Name is already in use, please select an alternative box name</source>
-        <translation>이 이름은 이미 사용 중입니다. 다른 박스 이름을 선택하십시오</translation>
+        <source>This name is already in use, please select an alternative box name</source>
+        <oldsource>This Name is already in use, please select an alternative box name</oldsource>
+        <translation type="unfinished">이 이름은 이미 사용 중입니다. 다른 박스 이름을 선택하십시오</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2212"/>

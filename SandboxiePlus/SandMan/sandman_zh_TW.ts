@@ -2226,7 +2226,8 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2198"/>
-        <source>This Name is already in use, please select an alternative box name</source>
+        <source>This name is already in use, please select an alternative box name</source>
+        <oldsource>This Name is already in use, please select an alternative box name</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

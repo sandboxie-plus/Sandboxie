@@ -1802,7 +1802,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="457"/>
         <source>Import Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Alanı İçe Aktar</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="463"/>
@@ -1818,7 +1818,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="656"/>
         <source>Import Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı Alanı İçe Aktar</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="782"/>
@@ -1884,22 +1884,22 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2185"/>
         <source>Select file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Dosya adı seçin</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2185"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-zip Arşivi (*.7z)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2198"/>
         <source>This Name is already in use, please select an alternative box name</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu ad zaten kullanılıyor, lütfen alternatif bir alan adı seçin</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2212"/>
         <source>Importing: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>İçe aktarılıyor: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2263"/>
@@ -1984,27 +1984,27 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2883"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>İçe/Dışa Aktarma kullanılamıyor, 7z.dll yüklenemedi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2884"/>
         <source>Failed to create the box archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Alan arşivi oluşturulamadı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2885"/>
         <source>Failed to open the 7z archive</source>
-        <translation type="unfinished"></translation>
+        <translation>7z arşivi açılamadı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2886"/>
         <source>Failed to unpack the box archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Alan arşivi açılamadı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2887"/>
         <source>The selected 7z file is NOT a box archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Seçilen 7z dosyası bir alan arşivi DEĞİLDİR</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2936"/>
@@ -3122,7 +3122,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="220"/>
         <source>Export Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Alanı Dışa Aktar</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="224"/>
@@ -3184,7 +3184,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="309"/>
         <source>Export Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı Alanı Dışa Aktar</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="368"/>
@@ -3209,17 +3209,17 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="1235"/>
         <source>Select file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Dosya adı seçin</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1235"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-zip Arşivi (*.7z)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1243"/>
         <source>Exporting: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Dışa aktarılıyor: %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1340"/>

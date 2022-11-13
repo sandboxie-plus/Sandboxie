@@ -2445,8 +2445,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2884"/>
         <source>Failed to create the box archive</source>
-        <translatorcomment>박스 압축파일을 만들지 못했습니다</translatorcomment>
-        <translation></translation>
+        <translation>박스 압축파일을 만들지 못했습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2885"/>

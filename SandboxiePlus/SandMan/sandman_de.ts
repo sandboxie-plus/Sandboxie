@@ -2597,7 +2597,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="2198"/>
         <source>This Name is already in use, please select an alternative box name</source>
-        <translation>Dieser Name wird bereits verwendet, bitte wählen Sie einen anderen Boxnamen</translation>
+        <translation>Dieser name wird bereits verwendet, bitte wählen Sie einen anderen Boxnamen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2212"/>

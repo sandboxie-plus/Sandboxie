@@ -131,7 +131,7 @@ bool CArchiveInterface::Init()
 		return false;
 	}
 
-	//LogLine(LOG_SUCCESS | LOG_DEBUG, QObject::tr("7z: Loaded Successfuly"));
+	//LogLine(LOG_SUCCESS | LOG_DEBUG, QObject::tr("7z: Loaded Successfully"));
 	m_Operational = true;
 	return true;
 }

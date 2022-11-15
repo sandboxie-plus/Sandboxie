@@ -5430,7 +5430,7 @@ an Stelle von &quot;*&quot;.</translation>
         <source>Configure which processes can access NT IPC objects like ALPC ports and other processes memory and context.
 To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation>Konfiguriere welche Prozesse Zugriff auf NT IPC Objekte haben, wie ALPC-Ports und anderen Prozessspeicher und Kontext.
-Um eine Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</translation>
+Um einen Prozess anzugeben verwenden Sie &apos;$:program.exe&apos; als Pfad.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2212"/>

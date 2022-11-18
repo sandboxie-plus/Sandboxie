@@ -943,7 +943,10 @@ bool CSbieView::MoveItem(const QString& Name, const QString& To, int pos)
 	}
 
 	// add to new
-	m_Groups[To].insert(pos, Name);
+	if (pos < 0/* || pos > m_Groups[To].size()*/)
+		m_Groups[To].append(Name);
+	else
+		m_Groups[To].insert(pos, Name);
 
 	return From != To;
 }

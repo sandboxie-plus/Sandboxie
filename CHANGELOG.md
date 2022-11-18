@@ -24,7 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.5.3 / 5.60.3] - 2022-11-??
+## [1.5.3 / 5.60.3] - 2022-11-08
 
 ### Added
 - boxes set to auto-delete are now marked with a small red recycle symbol

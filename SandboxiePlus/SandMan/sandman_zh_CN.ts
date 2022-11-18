@@ -1735,7 +1735,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="457"/>
         <source>Import Box</source>
-        <translation type="unfinished"></translation>
+        <translation>导入沙盒</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="475"/>
@@ -1782,7 +1782,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="656"/>
         <source>Import Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>导入沙盒</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="658"/>
@@ -2219,23 +2219,23 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2185"/>
         <source>Select file name</source>
-        <translation type="unfinished"></translation>
+        <translation>选择文件名</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2185"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-zip 压缩包 (*.7z)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2198"/>
         <source>This name is already in use, please select an alternative box name</source>
         <oldsource>This Name is already in use, please select an alternative box name</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>名称已占用，请选择其他沙盒名</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2212"/>
         <source>Importing: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>正在导入：%1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2228"/>
@@ -2502,27 +2502,27 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2883"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>导入/导出不可用，无法加载 7z.dll</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2884"/>
         <source>Failed to create the box archive</source>
-        <translation type="unfinished"></translation>
+        <translation>无法创建沙盒存档</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2885"/>
         <source>Failed to open the 7z archive</source>
-        <translation type="unfinished"></translation>
+        <translation>无法打开7z存档</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2886"/>
         <source>Failed to unpack the box archive</source>
-        <translation type="unfinished"></translation>
+        <translation>无法解压沙盒存档</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2887"/>
         <source>The selected 7z file is NOT a box archive</source>
-        <translation type="unfinished"></translation>
+        <translation>所选的 7z 文件不是沙盒存档</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2909"/>
@@ -3155,7 +3155,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="220"/>
         <source>Export Box</source>
-        <translation type="unfinished"></translation>
+        <translation>导出沙盒</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="224"/>
@@ -3222,7 +3222,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="309"/>
         <source>Export Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>导出沙盒</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="368"/>
@@ -3297,17 +3297,17 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="1235"/>
         <source>Select file name</source>
-        <translation type="unfinished"></translation>
+        <translation>选择文件名</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1235"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-zip 压缩包 (*.7z)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1243"/>
         <source>Exporting: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>正在导出：%1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1250"/>

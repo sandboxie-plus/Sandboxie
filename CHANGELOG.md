@@ -16,6 +16,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - restructured the box context menu a bit
 - sandman translations are now compressed and located in translations.7z
 
+### Fixed
+- fixed issue with recycle icon not updated in time [#2457](https://github.com/sandboxie-plus/Sandboxie/issues/2457) (thanks okrc)
+- fixed issue with "index out of range" [#2470](https://github.com/sandboxie-plus/Sandboxie/pull/2470) (thanks okrc)
 
 
 

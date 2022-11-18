@@ -237,6 +237,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			pNode->bOpen = bOpen;
 			pNode->boxType = boxType;
 			pNode->boxColor = boxColor;
+			pNode->boxDel = boxDel;
 			//pNode->Icon = pNode->inUse ? m_BoxInUse : m_BoxEmpty;
 			if(ColorIcons)
 				Icon = theGUI->GetColorIcon(boxColor, inUse);

@@ -1895,7 +1895,7 @@ Tam yol: %4</translation>
         <location filename="SandMan.cpp" line="2198"/>
         <source>This name is already in use, please select an alternative box name</source>
         <oldsource>This Name is already in use, please select an alternative box name</oldsource>
-        <translation type="unfinished">Bu ad zaten kullanılıyor, lütfen alternatif bir alan adı seçin</translation>
+        <translation>Bu ad zaten kullanılıyor, lütfen başka bir kutu adı seçin</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2212"/>

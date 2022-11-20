@@ -135,7 +135,7 @@ jobs:
     #
 
       - name: Build Sandboxie-Live x86
-        run: msbuild /t:build SandboxieLive\SandboxieLive.sln /p:Configuration="Release" /p:Platform=Win32 -maxcpucount:8
+        run: msbuild /t:build SandboxieLive\SandboxieLive.sln /p:Configuration="Release" /p:Platform=x86 -maxcpucount:8
 
       - name: Build Sandboxie-Live x64
         run: msbuild /t:build SandboxieLive\SandboxieLive.sln /p:Configuration="Release" /p:Platform=x64 -maxcpucount:8

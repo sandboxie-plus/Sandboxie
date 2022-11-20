@@ -45,6 +45,7 @@ Name: "DesktopIcon"; Description: "{cm:CreateDesktopIcon}"; MinVersion: 0.0,5.0;
 ;Name: "DesktopIcon2"; Description: "{cm:AddSandboxedBrowser}"; MinVersion: 0.0,5.0; Check: not IsPortable
 ;Name: "AutoStartEntry"; Description: "{cm:AutoStartProgram,{#MyAppName}}"; MinVersion: 0.0,5.0; Check: not IsPortable
 ;Name: "AddRunSandboxed"; Description: "{cm:AddSandboxedMenu}"; MinVersion: 0.0,5.0; Check: not IsPortable
+Name: "RefreshBuild"; Description: "{cm:RefreshBuild}"; MinVersion: 0.0,5.0; Check: not IsPortable
 
 
 [Files]
@@ -116,11 +117,14 @@ Filename: "{app}\KmdUtil.exe"; Parameters: "install SbieDrv ""{app}\SbieDrv.sys"
 ; Install the Sbie service.
 Filename: "{app}\KmdUtil.exe"; Parameters: "install SbieSvc ""{app}\SbieSvc.exe"" type=own start=auto msgfile=""{app}\SbieMsg.dll"" display=""Sandboxie Service"" group=UIGroup"; StatusMsg: "KmdUtil install SbieSvc..."; Check: not IsPortable
 
+; Update metadata (templates and transaltions)
+Filename: "{app}\UpdUtil.exe"; Parameters: {code:GetParams}; StatusMsg: "UpdUtill checking for updates..."; Check: IsRefresh
+
 ; Start the Sbie service.
 Filename: "{app}\KmdUtil.exe"; Parameters: "start SbieSvc"; StatusMsg: "KmdUtil start SbieSvc"; Check: not IsPortable
 
 ; Start the Sandman UI.
-Filename: "{app}\SandMan.exe"; StatusMsg: "Launch SandMan UI..."; Flags: postinstall nowait; Check: (not IsPortable) and (not WizardSilent)
+Filename: "{app}\Start.exe"; Parameters: "open_agent:sandman.exe"; StatusMsg: "Launch SandMan UI..."; Flags: postinstall nowait; Check: IsOpenSandMan
 ;Filename: "{app}\SandMan.exe"; Parameters: "-autorun"; StatusMsg: "Launch SandMan UI..."; Flags: runasoriginaluser nowait; Check: not IsPortable
 
 
@@ -150,6 +154,14 @@ begin
   end;
 end;
 
+function IsOpenSandMan(): Boolean;
+begin
+
+  // Return True or False for the value of Check.
+  if (ExpandConstant('{param:open_agent|0}') = '1') or ((not IsPortable) and (not WizardSilent)))then begin
+    Result := True;
+  end;
+end;
 
 function IsUpgrade(): Boolean;
 var
@@ -446,6 +458,40 @@ begin
   end;
 
   Result := True;
+end;
+
+//procedure CurStepChanged(CurStep: TSetupStep);
+//var
+//  ExecRet: Integer;
+//  //params: String;
+//begin
+//
+//  // after the instalation
+//  if (CurStep <> ssPostInstall) then  
+//    exit;
+//
+//  if WizardIsTaskSelected('RefreshBuild') then
+//  begin
+//    SuppressibleMsgBox('test', mbError, MB_OK, MB_OK);
+//  end;
+//
+//end;
+
+function IsRefresh(): Boolean;
+begin
+
+  if WizardIsTaskSelected('RefreshBuild') then begin
+    Result := True;
+  end;
+end;
+
+function GetParams(Value: string): string;
+begin
+  if IsInstalled = True then begin
+    Result := 'upgrade sandboxie-plus /scope:meta /version:{#MyAppVersion}';
+  end else begin
+    Result := 'install sandboxie-plus /scope:meta /version:{#MyAppVersion}';
+  end;
 end;
 
 

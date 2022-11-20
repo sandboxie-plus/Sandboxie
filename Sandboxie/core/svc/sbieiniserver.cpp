@@ -144,7 +144,7 @@ MSG_HEADER *SbieIniServer::Handler2(MSG_HEADER *msg)
 
     if (msg->msgid == MSGID_SBIE_INI_RUN_SBIE_CTRL) {
 
-        return RunSbieCtrl(idProcess, NT_SUCCESS(status));
+        return RunSbieCtrl(msg, idProcess, NT_SUCCESS(status));
     }
 
     if (NT_SUCCESS(status))     // if sandboxed
@@ -2225,7 +2225,7 @@ void SbieIniServer::UnlockConf()
 //---------------------------------------------------------------------------
 
 
-MSG_HEADER *SbieIniServer::RunSbieCtrl(HANDLE idProcess, bool isSandboxed)
+MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool isSandboxed)
 {
     NTSTATUS status = STATUS_UNSUCCESSFUL;
     HANDLE hToken = NULL;
@@ -2274,31 +2274,49 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(HANDLE idProcess, bool isSandboxed)
     if (ok && isSandboxed) {
 
         const WCHAR *_Setting = SBIECTRL_ L"EnableAutoStart";
-        const WCHAR* _Setting2 = SBIECTRL_ L"AutoStartAgent";
         WCHAR buf[10], ch = 0;
         bool ok2 = SetUserSettingsSectionName(hToken);
         if (ok2) {
             SbieApi_QueryConfAsIs(
                 m_sectionname, _Setting, 0, buf, sizeof(buf) - 2);
             ch = towlower(buf[0]);
-
-            SbieApi_QueryConfAsIs(
-                m_sectionname, _Setting2, 0, ctrlName, sizeof(ctrlName) - 2);
         }
         if (! ch) {
             wcscpy(m_sectionname + 13, L"Default");   // UserSettings_Default
             SbieApi_QueryConfAsIs(
                 m_sectionname, _Setting, 0, buf, 8 * sizeof(WCHAR));
             ch = towlower(buf[0]);
-
-            SbieApi_QueryConfAsIs(
-                m_sectionname, _Setting2, 0, ctrlName, sizeof(ctrlName) - 2);
         }
 
         if (ch == L'n') {
             status = STATUS_LOGON_NOT_GRANTED;
             ok = FALSE;
         }
+    }
+
+    //
+    // get the agent binary name
+    //
+
+    if (isSandboxed) {
+
+        const WCHAR* _Setting2 = SBIECTRL_ L"AutoStartAgent";
+        bool ok2 = SetUserSettingsSectionName(hToken);
+        if (ok2) {
+            SbieApi_QueryConfAsIs(
+                m_sectionname, _Setting2, 0, ctrlName, sizeof(ctrlName) - 2);
+        }
+        else {
+            wcscpy(m_sectionname + 13, L"Default");   // UserSettings_Default
+            SbieApi_QueryConfAsIs(
+                m_sectionname, _Setting2, 0, ctrlName, sizeof(ctrlName) - 2);
+        }
+
+    } else if (msg->length > sizeof(MSG_HEADER)) {
+
+        ULONG len = (ULONG)(msg->length - sizeof(MSG_HEADER));
+        memcpy(ctrlName, (UCHAR*)msg + sizeof(MSG_HEADER), len);
+        ctrlName[len / sizeof(WCHAR)] = L'\0';
     }
 
     //
@@ -2310,14 +2328,14 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(HANDLE idProcess, bool isSandboxed)
         STARTUPINFO si;
         PROCESS_INFORMATION pi;
 
-        WCHAR *args;
+        WCHAR *args = NULL;
         if (isSandboxed) {
             if (*ctrlName)
                 args = L" -autorun";
-            else 
-                args = NULL;
-        } else
-            args = L" /open /sync";
+        } else {
+            if (!*ctrlName)
+                args = L" /open /sync";
+        }
 
         if (SbieDll_RunFromHome(*ctrlName ? ctrlName : SBIECTRL_EXE, args, &si, NULL)) {
 

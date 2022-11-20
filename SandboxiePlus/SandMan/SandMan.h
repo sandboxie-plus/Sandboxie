@@ -81,6 +81,7 @@ signals:
 	void				CertUpdated();
 
 protected:
+	friend class COnlineUpdater;
 	SB_RESULT(void*)	ConnectSbie();
 	SB_STATUS			ConnectSbieImpl();
 	SB_STATUS			DisconnectSbie();
@@ -379,10 +380,11 @@ private:
 	QTranslator			m_Translator[2];
 
 public:
+	class COnlineUpdater*m_pUpdater;
+
 	quint32				m_LanguageId;
 	bool				m_DarkTheme;
 	bool				m_FusionTheme;
-	class C7zFileEngineHandler* m_pTranslations;
 };
 
 

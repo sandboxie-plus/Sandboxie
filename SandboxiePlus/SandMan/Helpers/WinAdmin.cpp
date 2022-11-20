@@ -23,15 +23,15 @@ bool IsElevated()
 
 int RunElevated(const std::wstring& Params, bool bGetCode)
 {
+	// Launch itself as admin
 	wchar_t szPath[MAX_PATH];
 	if (!GetModuleFileName(NULL, szPath, ARRAYSIZE(szPath)))
-		return -3;
-	return RunElevated(std::wstring(szPath), Params, bGetCode);
+		return -104;
+	return RunElevated(std::wstring(szPath), Params, bGetCode ? 10000 : 0);
 }
 
-int RunElevated(const std::wstring& binaryPath, const std::wstring& Params, bool bGetCode)
+int RunElevated(const std::wstring& binaryPath, const std::wstring& Params, quint32 uTimeOut)
 {
-	// Launch itself as admin
 	SHELLEXECUTEINFO sei = { sizeof(sei) };
 	sei.fMask = SEE_MASK_NOCLOSEPROCESS;
 	sei.lpVerb = L"runas";
@@ -39,25 +39,26 @@ int RunElevated(const std::wstring& binaryPath, const std::wstring& Params, bool
 	sei.lpParameters = Params.c_str();
 	sei.hwnd = NULL;
 	sei.nShow = SW_NORMAL;
+
 	if (!ShellExecuteEx(&sei))
 	{
 		DWORD dwError = GetLastError();
 		if (dwError == ERROR_CANCELLED)
-			return -2; // The user refused to allow privileges elevation.
+			return -102; // The user refused to allow privileges elevation.
+		return -101;
 	}
 	else
 	{
-		if (bGetCode)
+		DWORD ExitCode = 0;
+		BOOL success = TRUE;
+		if (uTimeOut)
 		{
-			WaitForSingleObject(sei.hProcess, 10000);
-			DWORD ExitCode = -4;
-			BOOL success = GetExitCodeProcess(sei.hProcess, &ExitCode);
-			CloseHandle(sei.hProcess);
-			return success ? ExitCode : -4;
+			WaitForSingleObject(sei.hProcess, uTimeOut);
+			success = GetExitCodeProcess(sei.hProcess, &ExitCode);
 		}
-		return 0;
+		CloseHandle(sei.hProcess);
+		return success ? ExitCode : -103;
 	}
-	return -1;
 }
 
 int RestartElevated(int &argc, char **argv)

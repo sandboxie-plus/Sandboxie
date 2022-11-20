@@ -1835,7 +1835,7 @@ SB_STATUS CSbieAPI::RunSandboxed(const QString& BoxName, const QString& Command,
 		return SB_ERR(ERROR_INVALID_PARAMETER);
 
 	if (WrkDir.isEmpty())
-		WrkDir = QDir::currentPath();
+		WrkDir = QDir::currentPath().replace("/","\\");
 
 	ULONG cmd_len = Command.length();
 	ULONG dir_len = WrkDir.length();
@@ -1895,20 +1895,14 @@ SB_STATUS CSbieAPI::RunSandboxed(const QString& BoxName, const QString& Command,
 	
 
 	if (rpl->h.status != 0)
-		Status = SB_ERR(rpl->h.status);
+		return SB_ERR(rpl->h.status);
 
-	PROCESS_INFORMATION pi;
-	pi.hProcess = (HANDLE)rpl->hProcess;
-	pi.hThread = (HANDLE)rpl->hThread;
-	pi.dwProcessId = rpl->dwProcessId;
-	pi.dwThreadId = rpl->dwThreadId;
+	CloseHandle((HANDLE)rpl->hProcess);
+	CloseHandle((HANDLE)rpl->hThread);
 
 	free(rpl);
-
-	CloseHandle(pi.hProcess);
-	CloseHandle(pi.hThread);
 	
-	return Status;
+	return SB_OK;
 }
 
 SB_STATUS CSbieAPI__ProceccssExemptionControl(SSbieAPI* m, quint32 process_id, quint32 action_id, ULONG *NewState, ULONG *OldState)
@@ -2633,4 +2627,63 @@ void CSbieAPI::LoadEventLog()
 
     if (hEventLog)
         CloseEventLog(hEventLog);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Updater 
+//
+
+SB_RESULT(int) CSbieAPI::RunUpdateUtility(const QStringList& Params, quint32 Elevate, bool Wait)
+{
+	if (Params.isEmpty())
+		return SB_ERR(ERROR_INVALID_PARAMETER);
+
+	QString Command;
+	foreach(const QString & Param, Params) {
+		if (!Command.isEmpty()) Command += " ";
+		Command += "\"" + Param + "\"";
+	}
+
+	ULONG cmd_len = Command.length();
+
+	ULONG req_len = sizeof(PROCESS_RUN_UPDATER_REQ) + (cmd_len + 8) * sizeof(WCHAR);
+	PROCESS_RUN_UPDATER_REQ* req = (PROCESS_RUN_UPDATER_REQ*)malloc(req_len);
+
+	req->h.length = req_len;
+	req->h.msgid = MSGID_PROCESS_RUN_UPDATER;
+	req->elevate = Elevate;
+
+	WCHAR* ptr = (WCHAR*)((ULONG_PTR)req + sizeof(PROCESS_RUN_UPDATER_REQ));
+
+	req->cmd_ofs = (ULONG)((ULONG_PTR)ptr - (ULONG_PTR)req);
+	req->cmd_len = cmd_len;
+	if (cmd_len) {
+		Command.toWCharArray(ptr);
+		ptr += cmd_len;
+	}
+	*ptr++ = L'\0';
+
+	PROCESS_RUN_UPDATER_RPL *rpl;
+	SB_STATUS Status = CallServer(&req->h, &rpl);
+	free(req);
+	if (!Status)
+		return Status;
+	if (!rpl) 
+		return SB_ERR(ERROR_SERVER_DISABLED);
+	
+	if (rpl->h.status != 0)
+		return SB_ERR(rpl->h.status);
+
+	DWORD ExitCode = 0;
+	if (Wait) {
+		WaitForSingleObject((HANDLE)rpl->hProcess, INFINITE);
+		GetExitCodeProcess((HANDLE)rpl->hProcess, &ExitCode);
+	}
+
+	CloseHandle((HANDLE)rpl->hProcess);
+	CloseHandle((HANDLE)rpl->hThread);
+
+	free(rpl);
+
+	return CSbieResult<int>((int)ExitCode);
 }

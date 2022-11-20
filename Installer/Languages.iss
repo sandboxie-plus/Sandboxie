@@ -63,6 +63,7 @@ english.UninstallTaskLabel2=How would you like to uninstall Sandboxie-Plus?
 english.UninstallTaskLabel3=&Keep configuration files and sandboxes%nThis is the most recommended option if you plan to reinstall Sandboxie-Plus while keeping your configuration files and sandboxes.
 english.UninstallTaskLabel4=Remove &configuration files%nSelect this option to remove the Sandboxie.ini and Sandboxie-Plus.ini configuration files while keeping the sandboxes unchanged.
 english.UninstallTaskLabel5=Remove configuration files and &sandboxes%nSelect this option to remove all configuration files and sandboxes, including the Sandbox folder located in custom paths with FileRootPath.
+english.RefreshBuild=Download latest Templates.ini and translations
 
 ; Chinese Simplified
 ChineseSimplified.AddSandboxedMenu=添加“在沙盒中运行”菜单
@@ -175,6 +176,7 @@ german.UninstallTaskLabel4=&Entferne die Konfiguration%nWählen Sie diese Option
 german.UninstallTaskLabel5=Entferne die Konfiguration und alle &Sandboxen%nWählen Sie diese Option um alle Konfigurationsdateien und alle Sandboxen, inklusive des Sandboxordners im, durch die Dateisystemquelle, benutzerdefinierten Pfad.
 ; Fix issue #1333 with a space inserted before %1
 german.AutoStartProgram=Starte automatisch %1
+german.RefreshBuild=Neueste Templates.ini und Übersetzungen herunterladen
 
 ; Italian
 Italian.AddSandboxedMenu=Aggiungi l'opzione "Avvia nell'area virtuale" al menu contestuale
@@ -241,6 +243,7 @@ polish.UninstallTaskLabel2=W jaki sposób chcesz odinstalować Sandboxie-Plus?
 polish.UninstallTaskLabel3=Zachowaj pliki &konfiguracyjne i piaskownice%nJest to najbardziej zalecana opcja, jeśli planujesz reinstalować Sandboxie-Plus, zachowując pliki konfiguracyjne i piaskownice.
 polish.UninstallTaskLabel4=Usuń pliki konfigura&cyjne%nWybierz tę opcję, aby usunąć pliki konfiguracyjne Sandboxie.ini i Sandboxie-Plus.ini, zachowując piaskownice bez zmian.
 polish.UninstallTaskLabel5=Usuń pliki konfiguracyjne i pia&skownice%nWybierz tę opcję, aby usunąć wszystkie pliki konfiguracyjne i piaskownice, w tym folder Sandbox znajdujący się w niestandardowych ścieżkach z FileRootPath.
+polish.RefreshBuild=Pobierz najnowsze Templates.ini i tłumaczenia
 
 ; Brazilian Portuguese
 brazilianportuguese.AddSandboxedMenu=Adicionar "Executar na Caixa de Areia" no menu de contexto

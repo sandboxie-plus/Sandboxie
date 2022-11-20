@@ -45,6 +45,7 @@
 #define MSGID_PROCESS_RUN_SANDBOXED             0x1205
 #define MSGID_PROCESS_SET_DEVICE_MAP            0x1206
 #define MSGID_PROCESS_OPEN_DEVICE_MAP           0x1207
+#define MSGID_PROCESS_RUN_UPDATER               0x1208
 
 #define MSGID_SERVICE                           0x1300
 #define MSGID_SERVICE_START                     0x1301

@@ -19,7 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed issue with recycle icon not updated in time [#2457](https://github.com/sandboxie-plus/Sandboxie/issues/2457) (thanks okrc)
 - fixed issue with "index out of range" [#2470](https://github.com/sandboxie-plus/Sandboxie/pull/2470) (thanks okrc)
-
+- fixed encoding issue with my_version.h [#2475](https://github.com/sandboxie-plus/Sandboxie/issues/2475)
 
 
 

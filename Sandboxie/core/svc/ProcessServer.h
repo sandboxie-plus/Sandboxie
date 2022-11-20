@@ -76,7 +76,11 @@ protected:
             HANDLE CallerProcessHandle, BOOL FilterHandles, ULONG crflags,
             PROCESS_INFORMATION *piInput, PROCESS_INFORMATION *piReply);
 
+    //
+    // Run Updater
+    //
 
+    MSG_HEADER *RunUpdaterHandler(MSG_HEADER *msg);
 };
 
 

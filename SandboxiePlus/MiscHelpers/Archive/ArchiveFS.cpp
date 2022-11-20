@@ -43,15 +43,20 @@ private:
 // C7zFileEngine
 // 
 
+//QAtomicInt g_7zFileEngineCount;
+
 C7zFileEngine::C7zFileEngine(const QString& filename, CArchive* pArchive, QMutex* pMutex)
     : _flags(0), _size(0), _pos(0), _pArchive(pArchive), _pMutex(pMutex)
 {
+    //g_7zFileEngineCount++;
     setFileName(filename);
 }
 
 C7zFileEngine::~C7zFileEngine()
 {
     close();
+    //g_7zFileEngineCount--;
+    //qDebug() << "g_7zFileEngineCount" << g_7zFileEngineCount;
 }
 
 bool C7zFileEngine::open(QIODevice::OpenMode openMode)
@@ -119,7 +124,7 @@ bool C7zFileEngine::seek(qint64 pos)
 
 bool C7zFileEngine::isSequential() const
 {
-    return true;
+    return false;
 }
 
 bool C7zFileEngine::remove()

@@ -86,8 +86,6 @@ bool CSetupWizard::ShowWizard()
 
     if (wizard.field("isUpdate").toBool()) {
         theConf->SetValue("Options/CheckForUpdates", 1);
-	    theConf->SetValue("Options/DownloadUpdates", 1);
-	    theConf->SetValue("Options/InstallUpdates", 1);
     }
 
     theConf->SetValue("Options/WizardLevel", 1);

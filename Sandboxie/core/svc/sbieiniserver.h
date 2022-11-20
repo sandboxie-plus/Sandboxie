@@ -103,7 +103,7 @@ protected:
 
     bool HashPassword(const WCHAR *Password, WCHAR *Hash41);
 
-    MSG_HEADER *RunSbieCtrl(HANDLE idProcess, bool isSandboxed);
+    MSG_HEADER *RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool isSandboxed);
 
 
 protected:

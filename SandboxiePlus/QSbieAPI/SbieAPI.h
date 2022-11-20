@@ -156,6 +156,8 @@ public:
 
 	void					LoadEventLog();
 
+	virtual SB_RESULT(int)	RunUpdateUtility(const QStringList& Params, quint32 Elevate = 0, bool Wait = false);
+
 public slots:
 	virtual void			SendReplyData(quint32 RequestId, const QVariantMap& Result);
 

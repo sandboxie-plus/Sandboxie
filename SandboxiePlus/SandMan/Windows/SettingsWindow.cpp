@@ -3,11 +3,14 @@
 #include "SandMan.h"
 #include "../MiscHelpers/Common/Settings.h"
 #include "../MiscHelpers/Common/Common.h"
+#include "../MiscHelpers/Common/OtherFunctions.h"
 #include "Helpers/WinAdmin.h"
 #include "../QSbieAPI/Sandboxie/SbieTemplates.h"
 #include "../QSbieAPI/SbieUtils.h"
 #include "OptionsWindow.h"
 #include "../OnlineUpdater.h"
+#include "../MiscHelpers/Archive/ArchiveFS.h"
+#include <QJsonDocument>
 
 
 #include <windows.h>
@@ -195,17 +198,27 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	ui.tabs->setCurrentIndex(0);
 
-	ui.uiLang->addItem(tr("Auto Detection"), "");
-	ui.uiLang->addItem(tr("No Translation"), "native");
-	QDir langDir(QApplication::applicationDirPath() + "/translations/");
-	foreach(const QString & langFile, langDir.entryList(QStringList("sandman_*.qm"), QDir::Files))
 	{
-		QString Code = langFile.mid(8, langFile.length() - 8 - 3);
-		QLocale Locale(Code);
-		QString Lang = Locale.nativeLanguageName();
-		ui.uiLang->addItem(Lang, Code);
+		ui.uiLang->addItem(tr("Auto Detection"), "");
+		ui.uiLang->addItem(tr("No Translation"), "native");
+
+		C7zFileEngineHandler LangFS(QApplication::applicationDirPath() + "/translations.7z", "lang", this);
+
+		QString langDir;
+		if (LangFS.IsOpen())
+			langDir = LangFS.Prefix() + "/";
+		else
+			langDir = QApplication::applicationDirPath() + "/translations/";
+
+		foreach(const QString & langFile, QDir(langDir).entryList(QStringList("sandman_*.qm"), QDir::Files))
+		{
+			QString Code = langFile.mid(8, langFile.length() - 8 - 3);
+			QLocale Locale(Code);
+			QString Lang = Locale.nativeLanguageName();
+			ui.uiLang->addItem(Lang, Code);
+		}
+		ui.uiLang->setCurrentIndex(ui.uiLang->findData(theConf->GetString("Options/UiLanguage")));
 	}
-	ui.uiLang->setCurrentIndex(ui.uiLang->findData(theConf->GetString("Options/UiLanguage")));
 
 	ui.cmbIntegrateMenu->addItem(tr("Don't integrate links"));
 	ui.cmbIntegrateMenu->addItem(tr("As sub group"));
@@ -314,8 +327,15 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	);
 
 	connect(ui.lblCurrent, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
-	connect(ui.lblRelease, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
+	connect(ui.lblStable, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
 	connect(ui.lblPreview, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
+	connect(ui.lblLive, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
+
+	connect(ui.chkAutoUpdate, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
+
+	connect(ui.radStable, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
+	connect(ui.radPreview, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
+	connect(ui.radLive, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
 
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
 
@@ -575,7 +595,7 @@ void CSettingsWindow::LoadSettings()
 		ui.chkClearPass->setChecked(theAPI->GetGlobalSettings()->GetBool("ForgetPassword", false));
 
 		ui.chkStartBlock->setChecked(theAPI->GetGlobalSettings()->GetBool("StartRunAlertDenied", false));
-		ui.chkStartBlockMsg->setChecked(theAPI->GetGlobalSettings()->GetBool("NotifyStartRunAccessDenied", true));
+		ui.chkStartBlockMsg->setChecked(theAPI->GetGlobalSettings()->GetBool("AlertStartRunAccessDenied", true));
 		ui.chkNotForcedMsg->setChecked(theAPI->GetGlobalSettings()->GetBool("NotifyForceProcessDisabled", false));
 		
 		
@@ -622,13 +642,26 @@ void CSettingsWindow::LoadSettings()
 	UpdateCert();
 
 	ui.chkAutoUpdate->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/CheckForUpdates", 2)));
-	ui.chkAutoDownload->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/DownloadUpdates", 0)));
+	//ui.chkAutoDownload->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/DownloadUpdates", 0)));
 	//ui.chkAutoInstall->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/InstallUpdates", 0)));
-	ui.chkAutoInstall->setVisible(false); // todo implement smart auto updater
 
-	int UpdateChannel = theConf->GetInt("Options/UpdateChannel", 0);
-	ui.radRelease->setChecked(UpdateChannel == 0);
-	ui.radPreview->setChecked(UpdateChannel == 1);
+	QString ReleaseChannel = theConf->GetString("Options/ReleaseChannel", "stable");
+	ui.radStable->setChecked(ReleaseChannel == "stable");
+	ui.radPreview->setChecked(ReleaseChannel == "preview");
+	ui.radLive->setChecked(ReleaseChannel == "live");
+
+	UpdateUpdater();
+
+	ui.cmbUpdate->addItem(tr("Notify"), "notify");
+	ui.cmbUpdate->addItem(tr("Download & Notify"), "download");
+	ui.cmbUpdate->addItem(tr("Download & Install"), "install");
+	ui.cmbUpdate->setCurrentIndex(ui.cmbUpdate->findData(theConf->GetString("Options/OnNewUpdate", "install")));
+
+	ui.cmbRelease->addItem(tr("Notify"), "notify");
+	ui.cmbRelease->addItem(tr("Download & Notify"), "download");
+	ui.cmbRelease->addItem(tr("Download & Install"), "install");
+	ui.cmbRelease->setCurrentIndex(ui.cmbRelease->findData(theConf->GetString("Options/OnNewRelease", "download")));
+
 
 	ui.chkNoCheck->setChecked(theConf->GetBool("Options/NoSupportCheck", false));
 	if(ui.chkNoCheck->isCheckable() && !g_CertInfo.expired)
@@ -671,6 +704,42 @@ void CSettingsWindow::UpdateCert()
 			palette.setColor(QPalette::Base, QColor(192, 255, 192));
 		}
 		ui.txtCertificate->setPalette(palette);
+	}
+}
+
+void CSettingsWindow::UpdateUpdater()
+{
+	if (!ui.chkAutoUpdate->isChecked()) {
+		ui.cmbUpdate->setEnabled(false);
+		ui.cmbRelease->setEnabled(false);
+		ui.lblRevision->setText(QString());
+
+		if (ui.radLive->isChecked())
+			ui.radPreview->setChecked(true);
+		ui.radLive->setEnabled(false);
+	}
+	else {
+		ui.radLive->setEnabled(true);
+
+		if (ui.radLive->isChecked()) {
+			ui.cmbUpdate->setEnabled(true);
+			ui.cmbRelease->setEnabled(false);
+			ui.lblRevision->setText(tr("Live channel is distributed as revisions only"));
+		}
+		else if (!g_CertInfo.valid
+#ifdef _DEBUG
+			|| (GetKeyState(VK_CONTROL) & 0x8000) != 0
+#endif
+		) {
+			ui.cmbUpdate->setEnabled(false);
+			ui.cmbRelease->setEnabled(true);
+			ui.lblRevision->setText(tr("Supproter certificate required"));
+		}
+		else {
+			ui.cmbUpdate->setEnabled(true);
+			ui.cmbRelease->setEnabled(true);
+			ui.lblRevision->setText(QString());
+		}
 	}
 }
 
@@ -848,7 +917,7 @@ void CSettingsWindow::SaveSettings()
 			if (m_WarnProgsChanged)
 			{
 				WriteAdvancedCheck(ui.chkStartBlock, "StartRunAlertDenied", "y", "");
-				WriteAdvancedCheck(ui.chkStartBlockMsg, "NotifyStartRunAccessDenied", "", "n");
+				WriteAdvancedCheck(ui.chkStartBlockMsg, "AlertStartRunAccessDenied", "", "n");
 				WriteAdvancedCheck(ui.chkNotForcedMsg, "NotifyForceProcessDisabled", "y", "");
 
 				QStringList AlertProcess;
@@ -936,13 +1005,20 @@ void CSettingsWindow::SaveSettings()
 	}
 
 	theConf->SetValue("Options/CheckForUpdates", CSettingsWindow__Chk2Int(ui.chkAutoUpdate->checkState()));
-	theConf->SetValue("Options/DownloadUpdates", CSettingsWindow__Chk2Int(ui.chkAutoDownload->checkState()));
+	//theConf->SetValue("Options/DownloadUpdates", CSettingsWindow__Chk2Int(ui.chkAutoDownload->checkState()));
 	//theConf->SetValue("Options/InstallUpdates", CSettingsWindow__Chk2Int(ui.chkAutoInstall->checkState()));
 
-	int UpdateChannel = 0; // ui.radRelease->isChecked();
-	if (ui.radPreview->isChecked())
-		UpdateChannel = 1;
-	theConf->SetValue("Options/UpdateChannel", UpdateChannel);
+	QString ReleaseChannel;
+	if (ui.radStable->isChecked())
+		ReleaseChannel = "stable";
+	else if (ui.radPreview->isChecked())
+		ReleaseChannel = "preview";
+	else if (ui.radLive->isChecked())
+		ReleaseChannel = "live";
+	if(!ReleaseChannel.isEmpty()) theConf->SetValue("Options/ReleaseChannel", ReleaseChannel);
+
+	theConf->SetValue("Options/OnNewUpdate", ui.cmbUpdate->currentData());
+	theConf->SetValue("Options/OnNewRelease", ui.cmbRelease->currentData());
 
 	theConf->SetValue("Options/NoSupportCheck", ui.chkNoCheck->isChecked());
 
@@ -1276,7 +1352,17 @@ void CSettingsWindow::GetUpdates()
 {
 	QVariantMap Params;
 	Params["channel"] = "all";
-	COnlineUpdater::Instance()->GetUpdates(this, SLOT(OnUpdateData(const QVariantMap&, const QVariantMap&)), Params);
+	theGUI->m_pUpdater->GetUpdates(this, SLOT(OnUpdateData(const QVariantMap&, const QVariantMap&)), Params);
+}
+
+QString CSettingsWindow__MkVersion(const QString& Name, const QVariantMap& Releases)
+{
+	QVariantMap Release = Releases[Name].toMap();
+	QString Version = Release.value("version").toString();
+	//if (Release["build"].type() != QVariant::Invalid) 
+	int iUpdate = Release["iUpdate"].toInt();
+	if(iUpdate) Version += 'a' + (iUpdate - 1);
+	return QString("<a href=\"%1\">%2</a>").arg(Name, Version);
 }
 
 void CSettingsWindow::OnUpdateData(const QVariantMap& Data, const QVariantMap& Params)
@@ -1284,40 +1370,49 @@ void CSettingsWindow::OnUpdateData(const QVariantMap& Data, const QVariantMap& P
 	if (Data.isEmpty() || Data["error"].toBool())
 		return;
 
+	QString Version = QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) + "." + QString::number(VERSION_REV);
+	int iUpdate = COnlineUpdater::GetCurrentUpdate();
+	if(iUpdate) 
+		Version += QString('a' + (iUpdate - 1));
+
 	m_UpdateData = Data;
-	QVariantList Channels = m_UpdateData["channels"].toList();
-	ui.lblCurrent->setText(tr("%1 (Current)").arg(theGUI->GetVersion()));
-	if(Channels.length() > 0) ui.lblRelease->setText(tr("<a href=\"0\">%1</a>").arg(Channels[0].toMap().value("version").toString()));
-	if(Channels.length() > 1) ui.lblPreview->setText(tr("<a href=\"1\">%1</a>").arg(Channels[1].toMap().value("version").toString()));
+	QVariantMap Releases = m_UpdateData["releases"].toMap();
+	ui.lblCurrent->setText(tr("%1 (Current)").arg(Version));
+	ui.lblStable->setText(CSettingsWindow__MkVersion("stable", Releases));
+	ui.lblPreview->setText(CSettingsWindow__MkVersion("preview", Releases));
+	ui.lblLive->setText(CSettingsWindow__MkVersion("live", Releases));
 }
 
 void CSettingsWindow::OnUpdate(const QString& Channel)
 {
-	if (Channel == "check")
+	if (Channel == "check") {
 		GetUpdates();
-	else
+		return;
+	}
+	
+	QVariantMap Releases = m_UpdateData["releases"].toMap();
+	QVariantMap Release = Releases[Channel].toMap();
+
+	QString VersionStr = Release["version"].toString();
+	if (VersionStr.isEmpty())
+		return;
+
+	QVariantMap Installer = Releases["installer"].toMap();
+	QString DownloadUrl = Installer["downloadUrl"].toString();
+	//QString DownloadSig = Installer["signature"].toString();
+	// todo xxx
+	//if (!DownloadUrl.isEmpty() /*&& !DownloadSig.isEmpty()*/)
+	//{
+	//	// todo: signature
+	//	if (QMessageBox("Sandboxie-Plus", tr("Do you want to download the installer for v%1?").arg(VersionStr), QMessageBox::Question, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::NoButton, this).exec() == QMessageBox::Yes)
+	//		COnlineUpdater::Instance()->DownloadInstaller(DownloadUrl, true);
+	//}
+	//else
 	{
-		QVariantList Channels = m_UpdateData["channels"].toList();
-		QVariantMap Data = Channels[Channel.toInt()].toMap();
-
-		QString VersionStr = Data["version"].toString();
-		if (VersionStr.isEmpty())
-			return;
-
-		QString DownloadUrl = Data["downloadUrl"].toString();
-		//	'sha256'
-		//	'signature'
-
-		if (!DownloadUrl.isEmpty())
-		{
-			if (QMessageBox("Sandboxie-Plus", tr("Do you want to download the version %1?").arg(VersionStr), QMessageBox::Question, QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape, QMessageBox::NoButton, this).exec() == QMessageBox::Yes)
-				COnlineUpdater::Instance()->DownloadUpdates(DownloadUrl, true);
-		}
-		else
-		{
-			QString UpdateUrl = Data["updateUrl"].toString();
-			QDesktopServices::openUrl(UpdateUrl);
-		}
+		QString InfoUrl = Release["infoUrl"].toString();
+		if (InfoUrl.isEmpty())
+			InfoUrl = "https://sandboxie-plus.com/go.php?to=sbie-get";
+		QDesktopServices::openUrl(InfoUrl);
 	}
 }
 

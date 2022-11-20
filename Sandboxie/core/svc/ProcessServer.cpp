@@ -23,6 +23,7 @@
 #include "stdafx.h"
 
 #include <wtsapi32.h>
+#include <userenv.h>
 #include "ProcessServer.h"
 #include "Processwire.h"
 #include "DriverAssist.h"
@@ -35,6 +36,7 @@
 #include "core/dll/sbiedll.h"
 #include "core/drv/api_defs.h"
 #include <sddl.h>
+#include "sbieiniserver.h"
 
 #define SECONDS(n64)            (((LONGLONG)n64) * 10000000L)
 #define MINUTES(n64)            (SECONDS(n64) * 60)
@@ -79,6 +81,9 @@ MSG_HEADER *ProcessServer::Handler(void *_this, MSG_HEADER *msg)
 
     if (msg->msgid == MSGID_PROCESS_RUN_SANDBOXED)
         return pThis->RunSandboxedHandler(msg);
+
+    if (msg->msgid == MSGID_PROCESS_RUN_UPDATER)
+        return pThis->RunUpdaterHandler(msg);
 
     return NULL;
 }
@@ -1358,7 +1363,7 @@ BOOL ProcessServer::RunSandboxedDupAndCloseHandles(
 
     if (!FilterHandles) {      // *COMSRV* case or breakout process
 
-        if (! SbieApi_QueryProcessInfo(
+        if (! SbieApi_QueryProcessInfo( // check is sandboxed
                     (HANDLE)(ULONG_PTR)piInput->dwProcessId, 0)) {
 
             SetLastError(ERROR_PROCESS_ABORTED);
@@ -1408,4 +1413,203 @@ BOOL ProcessServer::RunSandboxedDupAndCloseHandles(
     if (! ok)
         SetLastError(LastError);
     return ok;
+}
+
+
+//---------------------------------------------------------------------------
+// RunUpdaterHandler
+//---------------------------------------------------------------------------
+
+
+MSG_HEADER *ProcessServer::RunUpdaterHandler(MSG_HEADER *msg)
+{
+    //
+    // validate request structure
+    //
+
+    ULONG err, lvl;
+
+    PROCESS_RUN_UPDATER_REQ *req = (PROCESS_RUN_UPDATER_REQ *)msg;
+    if (req->h.length < sizeof(PROCESS_RUN_UPDATER_REQ))
+        return SHORT_REPLY(STATUS_INVALID_PARAMETER);
+
+    if (!(   req->cmd_ofs                           <= PIPE_MAX_DATA_LEN
+        &&  (req->cmd_len * sizeof(WCHAR))          <= PIPE_MAX_DATA_LEN
+        &&  (req->cmd_ofs + (req->cmd_len * sizeof(WCHAR))) <= req->h.length))
+        return SHORT_REPLY(ERROR_INVALID_PARAMETER);
+
+    ULONG CallerPid = PipeServer::GetCallerProcessId();
+    ULONG CallerSession = PipeServer::GetCallerSessionId();
+    
+    //
+    // only unsandboxed signed programs are allowed to use this mechanism
+    //
+
+    if(SbieApi_QueryProcessInfo((HANDLE)(ULONG_PTR)CallerPid, 0))
+        return SHORT_REPLY(STATUS_ACCESS_DENIED);
+
+#ifndef WITH_DEBUG
+    if (!PipeServer::IsCallerSigned())
+        return SHORT_REPLY(STATUS_INVALID_SIGNATURE);
+#endif
+
+    //
+    // create full updater command line
+    //
+
+    ULONG len = MAX_PATH * 2 + req->cmd_len;
+    WCHAR *cmd = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, len * sizeof(WCHAR));
+
+    cmd[0] = L'\"';
+    GetModuleFileName(NULL, &cmd[1], MAX_PATH);
+    WCHAR *ptr = wcsrchr(cmd, L'\\');
+    if (ptr)
+        ptr[1] = L'\0';
+    wcscat(cmd, L"UpdUtil.exe\" ");
+    ptr = wcschr(cmd, L'\0');
+
+    memcpy(ptr, ((UCHAR *)&req->h) + req->cmd_ofs, req->cmd_len * sizeof(WCHAR));
+    ptr[req->cmd_len] = L'\0';
+
+    //
+    // execute request
+    //
+
+    PROCESS_INFORMATION piReply;
+    memzero(&piReply, sizeof(PROCESS_INFORMATION));
+
+    //
+    // we start by opening the calling process
+    //
+
+    HANDLE CallerProcessHandle = OpenProcess(
+        PROCESS_QUERY_INFORMATION | PROCESS_DUP_HANDLE, FALSE, CallerPid);
+
+    if (CallerProcessHandle) {
+
+        HANDLE PrimaryTokenHandle = NULL;
+
+        if (req->elevate == 2) {
+
+            //
+            // run as system, works also for non administrative users
+            //
+
+            const ULONG TOKEN_RIGHTS = TOKEN_QUERY          | TOKEN_DUPLICATE
+                                        | TOKEN_ADJUST_DEFAULT | TOKEN_ADJUST_SESSIONID
+                                        | TOKEN_ADJUST_GROUPS  | TOKEN_ASSIGN_PRIMARY;
+
+            BOOL ok = OpenProcessToken(GetCurrentProcess(), TOKEN_RIGHTS, &PrimaryTokenHandle);
+
+            if (ok) {
+                HANDLE hNewToken;
+                ok = DuplicateTokenEx(
+                    PrimaryTokenHandle, TOKEN_RIGHTS, NULL, SecurityAnonymous,
+                    TokenPrimary, &hNewToken);
+                if (ok) {
+                    CloseHandle(PrimaryTokenHandle);
+                    PrimaryTokenHandle = hNewToken;
+                }
+            }
+
+            if (ok) {
+                ok = SetTokenInformation(PrimaryTokenHandle, TokenSessionId, &CallerSession, sizeof(ULONG));
+            }
+
+        } else {
+
+            //
+            // get calling user's token
+            //
+
+            WTSQueryUserToken(CallerSession, &PrimaryTokenHandle);
+
+            if (req->elevate == 1 && !SbieIniServer::TokenIsAdmin(PrimaryTokenHandle, true)) {
+
+                //
+                // run elevated as the current user, if the user is not in the admin group
+                // this will fail, and the process started as normal user
+                //
+
+                ULONG returnLength;
+                TOKEN_LINKED_TOKEN linkedToken = {0};
+                NtQueryInformationToken(PrimaryTokenHandle, (TOKEN_INFORMATION_CLASS)TokenLinkedToken,
+                    &linkedToken, sizeof(TOKEN_LINKED_TOKEN), &returnLength);
+
+                CloseHandle(PrimaryTokenHandle);
+                PrimaryTokenHandle = linkedToken.LinkedToken;                
+            }
+        }
+
+        if (PrimaryTokenHandle) {
+
+            //
+            // copy STARTUPINFO parameters from caller
+            //
+
+            STARTUPINFO si;
+            PROCESS_INFORMATION pi;
+
+            memzero(&pi, sizeof(PROCESS_INFORMATION));
+            memzero(&si, sizeof(STARTUPINFO));
+            si.cb = sizeof(STARTUPINFO);
+            si.dwFlags = STARTF_FORCEOFFFEEDBACK;
+            si.wShowWindow = SW_SHOWNORMAL;
+
+            if (CreateProcessAsUser(PrimaryTokenHandle, NULL, cmd, NULL, NULL, FALSE, 
+                CREATE_SUSPENDED, NULL, NULL, &si, &pi)) {
+
+                //
+                // FilterHandles = TRUE to prevent privilege escalation in case 
+                // a signed but hijacked agent requested the start of a utility process
+                // and would subsequenty try to hijack the utility process.
+                //
+
+                if (RunSandboxedDupAndCloseHandles( // resumes the process if needed
+                        CallerProcessHandle, TRUE, 0, &pi, &piReply)) {
+
+                    err = 0;
+                    lvl = 0;
+
+                } else {
+
+                    err = GetLastError();
+                    lvl = 0x55;
+                }
+
+            } else {
+
+                err = GetLastError();
+                lvl = 0x44;
+            }
+
+
+            CloseHandle(PrimaryTokenHandle);
+
+        } else {
+
+            err = GetLastError();
+            lvl = 0x33;
+        }
+
+        CloseHandle(CallerProcessHandle);
+
+    } else {
+
+        err = GetLastError();
+        lvl = 0x22;
+    }
+
+    HeapFree(GetProcessHeap(), 0, cmd);
+
+    PROCESS_RUN_UPDATER_RPL *rpl = (PROCESS_RUN_UPDATER_RPL *)
+                            LONG_REPLY(sizeof(PROCESS_RUN_UPDATER_RPL));
+    if (rpl) {
+        rpl->h.status    = err;
+        rpl->hProcess    = (ULONG64)(ULONG_PTR)piReply.hProcess;
+        rpl->hThread     = (ULONG64)(ULONG_PTR)piReply.hThread;
+        rpl->dwProcessId = piReply.dwProcessId;
+        rpl->dwThreadId  = piReply.dwThreadId;
+    }
+    return (MSG_HEADER *)rpl;
 }

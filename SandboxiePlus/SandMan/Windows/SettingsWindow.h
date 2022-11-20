@@ -111,6 +111,7 @@ private slots:
 
 	void CertChanged();
 	void UpdateCert();
+	void UpdateUpdater();
 
 	void GetUpdates();
 	void OnUpdateData(const QVariantMap& Data, const QVariantMap& Params);

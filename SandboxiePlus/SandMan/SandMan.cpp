@@ -115,8 +115,6 @@ CSandMan::CSandMan(QWidget *parent)
 
 	CArchive::Init();
 
-	m_pTranslations = new C7zFileEngineHandler(QApplication::applicationDirPath() + "/translations.7z", "lang", this);
-
 	theGUI = this;
 
 	m_DarkTheme = false;
@@ -247,6 +245,7 @@ CSandMan::CSandMan(QWidget *parent)
 	m_pPopUpWindow->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 	m_pProgressDialog->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
+	m_pUpdater = new COnlineUpdater(this);
 
 	//connect(theAPI, SIGNAL(LogMessage(const QString&, bool)), this, SLOT(OnLogMessage(const QString&, bool)));
 	connect(theAPI, SIGNAL(LogSbieMessage(quint32, const QStringList&, quint32)), this, SLOT(OnLogSbieMessage(quint32, const QStringList&, quint32)));
@@ -772,25 +771,24 @@ void CSandMan::CreateLabel()
 
 void CSandMan::UpdateLabel()
 {
-	COnlineUpdater::Instance()->CheckPendingUpdate();
-
 	QString LabelText;
 	QString LabelTip;
 
-	if (!theConf->GetString("Options/PendingUpdatePackage").isEmpty())
+	if (theConf->GetBool("Updater/PendingUpdate"))
 	{
-		LabelText = tr("<a href=\"sbie://update/package\" style=\"color: red;\">There is a new build of Sandboxie-Plus ready</a>");
-
-		LabelTip = tr("Click to install update");
-
-		//auto neon = new CNeonEffect(10, 4, 180); // 140
-		//m_pLabel->setGraphicsEffect(NULL);
-	}
-	else if (!theConf->GetString("Options/PendingUpdateVersion").isEmpty())
-	{
-		LabelText = tr("<a href=\"sbie://update/check\" style=\"color: red;\">There is a new build of Sandboxie-Plus available</a>");
-
-		LabelTip = tr("Click to download update");
+		QString FilePath = theConf->GetString("Updater/InstallerPath");
+		if (!FilePath.isEmpty() && QFile::exists(FilePath)) {
+			LabelText = tr("<a href=\"sbie://update/installer\" style=\"color: red;\">There is a new Sandboxie-Plus release ready</a>");
+			LabelTip = tr("Click to run installer");
+		}
+		else if (!theConf->GetString("Updater/UpdateVersion").isEmpty()){
+			LabelText = tr("<a href=\"sbie://update/apply\" style=\"color: red;\">There is a new Sandboxie-Plus update ready</a>");
+			LabelTip = tr("Click to apply update");
+		}
+		else {
+			LabelText = tr("<a href=\"sbie://update/check\" style=\"color: red;\">There is a new build of Sandboxie-Plus available</a>");
+			LabelTip = tr("Click to download update");
+		}
 
 		//auto neon = new CNeonEffect(10, 4, 180); // 140
 		//m_pLabel->setGraphicsEffect(NULL);
@@ -998,7 +996,7 @@ void CSandMan::CreateView(int iViewMode)
 
 void CSandMan::CheckForUpdates(bool bManual)
 {
-	COnlineUpdater::Instance()->CheckForUpdates(bManual);
+	m_pUpdater->CheckForUpdates(bManual);
 }
 
 #include "SandManTray.cpp"
@@ -1399,36 +1397,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 
 	m_pBoxView->Refresh();
 
-	int iCheckUpdates = theConf->GetInt("Options/CheckForUpdates", 2);
-	if (iCheckUpdates != 0)
-	{
-		time_t NextUpdateCheck = theConf->GetUInt64("Options/NextCheckForUpdates", 0);
-		if (NextUpdateCheck == 0)
-			theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addDays(7).toSecsSinceEpoch());
-		else if(QDateTime::currentDateTime().toSecsSinceEpoch() >= NextUpdateCheck)
-		{
-			if (iCheckUpdates == 2)
-			{
-				bool bCheck = false;
-				iCheckUpdates = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Do you want to check if there is a new version of Sandboxie-Plus?")
-					, tr("Don't show this message again."), &bCheck, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) == QDialogButtonBox::Ok ? 1 : 0;
-
-				if (bCheck)
-					theConf->SetValue("Options/CheckForUpdates", iCheckUpdates);
-			}
-
-			if (iCheckUpdates == 0)
-				theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addDays(7).toSecsSinceEpoch());
-			else
-			{
-				theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addDays(1).toSecsSinceEpoch());
-				
-				COnlineUpdater::Instance()->CheckForUpdates(false);
-			}
-		}
-	}
-
-	COnlineUpdater::Process();
+	m_pUpdater->Process();
 
 	if (!m_MissingTemplates.isEmpty())
 	{
@@ -2918,14 +2887,18 @@ void CSandMan::OpenUrl(const QUrl& url)
 	QString path = url.path();	
 	QString query = url.query();
 
-	if (scheme == "sbie") {	
+	if (scheme == "sbie") {
 		if (path == "/check")
-			return COnlineUpdater::Instance()->DownloadUpdate();
-		if (path == "/package")
-			return COnlineUpdater::Instance()->InstallUpdate();
-		if (path == "/cert")
-			return COnlineUpdater::Instance()->UpdateCert();
-		return OpenUrl("https://sandboxie-plus.com/sandboxie" + path);
+			m_pUpdater->CheckForUpdates(true);
+		else if (path == "/installer")
+			m_pUpdater->RunInstaller(false);
+		else if (path == "/apply")
+			m_pUpdater->ApplyUpdate(false);
+		else if (path == "/cert")
+			m_pUpdater->UpdateCert();
+		else
+			OpenUrl("https://sandboxie-plus.com/sandboxie" + path);
+		return;
 	}
 
 	int iSandboxed = theConf->GetInt("Options/OpenUrlsSandboxed", 2);
@@ -3070,7 +3043,6 @@ void CSandMan::LoadLanguage()
 	LoadLanguage(Lang, "sandman", 0);
 	LoadLanguage(Lang, "qt", 1);
 
-
 	QTreeViewEx::m_ResetColumns = tr("Reset Columns");
 	CPanelView::m_CopyCell = tr("Copy Cell");
 	CPanelView::m_CopyRow = tr("Copy Row");
@@ -3087,9 +3059,11 @@ void CSandMan::LoadLanguage(const QString& Lang, const QString& Module, int Inde
 	QString LangAux = Lang; // Short version as fallback
 	LangAux.truncate(LangAux.lastIndexOf('_'));
 
+	C7zFileEngineHandler LangFS(QApplication::applicationDirPath() + "/translations.7z", "lang", this);
+
 	QString LangDir;
-	if (m_pTranslations->IsOpen())
-		LangDir = m_pTranslations->Prefix() + "/";
+	if (LangFS.IsOpen())
+		LangDir = LangFS.Prefix() + "/";
 	else
 		LangDir = QApplication::applicationDirPath() + "/translations/";
 

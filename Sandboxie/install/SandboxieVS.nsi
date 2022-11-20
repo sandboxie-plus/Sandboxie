@@ -838,6 +838,38 @@ Function DownloadStatPng
 ;	${EndIf}
 FunctionEnd
 
+Function CheckUpdates
+
+  StrCpy $0 "instal"
+  StrCmp $InstallType "Install" DoCheck
+  StrCpy $0 "upgrade"
+
+DoCheck:
+  DetailPrint "Running UpdUtil ..."
+  SetDetailsPrint listonly
+  
+  ExecWait '"$INSTDIR\UpdUtil.exe" $0 sandboxie /step:scan /scope:meta /version:${VERSION}' $1
+	;MessageBox MB_OK "UpdUtil: $0"
+	
+  IntCmp $1 0 is0 lessthan0 morethan0
+  is0:
+    ;DetailPrint "no update"
+    Goto NoUpdate
+  lessthan0:
+    ;DetailPrint "error"
+    Goto NoUpdate
+  morethan0:
+    DetailPrint "$$0 > 5"
+    Goto Update
+    
+Update:
+  MessageBox MB_YESNO|MB_ICONQUESTION "$(MSG_8055)" IDNO NoUpdate
+  
+  ExecWait '"$INSTDIR\UpdUtil.exe" $0 sandboxie /step:apply /scope:meta'
+    
+NoUpdate:
+  SetDetailsPrint both
+FunctionEnd
 
 Section ""
 
@@ -959,6 +991,7 @@ Install2:
 ;	!insertmacro InstallSystemDll "mfc140u.dll" false
 ;!endif
 
+    Call CheckUpdates
     Call WriteProductKey
     Call WriteShortCuts
 
@@ -1033,6 +1066,7 @@ WriteLoop:
 ;    File /oname=${SBIEDRV_SYSX} "${BIN_ROOT}\SbieDrv.sys.w10"
 
     File /oname=KmdUtil.exe "${BIN_ROOT}\KmdUtil.Exe"
+    File /oname=UpdUtil.exe "${BIN_ROOT}\UpdUtil.Exe"
 
     File /oname=SboxHostDll.dll			   "${BIN_ROOT}\SboxHostDll.dll"
 
@@ -1146,7 +1180,8 @@ Function DeleteProgramFiles
     Delete "$INSTDIR\${SBIEDRV_SYS}.w10" ; leftover
 
     Delete "$INSTDIR\KmdUtil.exe"
-
+    Delete "$INSTDIR\UpdUtil.exe"
+    
     Delete "$INSTDIR\SboxHostDll.dll"
 
     Delete "$INSTDIR\boxHostDll.dll"

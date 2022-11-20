@@ -119,6 +119,23 @@ typedef struct tagPROCESS_RUN_SANDBOXED_RPL PROCESS_RUN_SANDBOXED_RPL;
 
 
 //---------------------------------------------------------------------------
+// Run Updater Process
+//---------------------------------------------------------------------------
+
+
+struct tagPROCESS_RUN_UPDATER
+{
+    MSG_HEADER h;
+    ULONG cmd_ofs;
+    ULONG cmd_len;
+    ULONG elevate;
+};
+
+typedef struct tagPROCESS_RUN_UPDATER PROCESS_RUN_UPDATER_REQ;
+typedef struct tagPROCESS_RUN_SANDBOXED_RPL PROCESS_RUN_UPDATER_RPL;
+
+
+//---------------------------------------------------------------------------
 
 
 #endif /* _MY_PROCESSWIRE_H */

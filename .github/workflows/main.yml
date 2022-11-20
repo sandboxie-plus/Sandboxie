@@ -36,6 +36,10 @@ jobs:
     #  - name: Build Sandboxie
     #    run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform }}
 
+    #
+    # Compile Sandboxie Core
+    #
+
       - name: Build Sandboxie x86
         run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
 
@@ -47,6 +51,10 @@ jobs:
 
       - name: Build Sandboxie ARM64EC
         run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=ARM64EC -maxcpucount:8
+
+    #
+    # Prepare Qt Framework
+    #
 
       #- name: Cache Qt
       #  id: cache-qt
@@ -103,6 +111,10 @@ jobs:
       #  if: steps.cache-qt.outputs.cache-hit != 'true'
         run: SandboxiePlus\install_jom.cmd
 
+    #
+    # Compile Sandboxie Plus
+    #
+
       - name: Build Sandboxie-Plus x64
         run: SandboxiePlus\qmake_plus.cmd x64
 
@@ -117,6 +129,24 @@ jobs:
 
       - name: Build Sandboxie-Plus x86
         run: SandboxiePlus\qmake_plus.cmd Win32
+
+    #
+    # Compile Sandboxie Live Updater
+    #
+
+      - name: Build Sandboxie-Live x86
+        run: msbuild /t:build SandboxieLive\SandboxieLive.sln /p:Configuration="Release" /p:Platform=Win32 -maxcpucount:8
+
+      - name: Build Sandboxie-Live x64
+        run: msbuild /t:build SandboxieLive\SandboxieLive.sln /p:Configuration="Release" /p:Platform=x64 -maxcpucount:8
+
+      - name: Build Sandboxie-Live ARM64
+        run: msbuild /t:build SandboxieLive\SandboxieLive.sln /p:Configuration="Release" /p:Platform=ARM64 -maxcpucount:8
+        
+
+    #
+    # Merge everythign together
+    #
 
       - name: Add missing languages for Qt5 x86 (issue 1528)
         run: Installer\fix_qt5_languages.cmd Win32

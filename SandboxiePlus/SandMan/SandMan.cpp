@@ -2925,7 +2925,7 @@ QString CSandMan::GetVersion()
 		+ "." + QString::number(VERSION_REV)
 //#endif
 #if VERSION_UPD > 0
-		+ QString('a' + VERSION_UPD - 1)
+		+ QChar('a' + VERSION_UPD - 1)
 #endif
 		;
 	return Version;

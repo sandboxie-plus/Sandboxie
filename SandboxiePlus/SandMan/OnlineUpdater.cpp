@@ -290,7 +290,7 @@ bool COnlineUpdater::HandleUpdate()
 	bool bNewer;
 	if ((bNewer = IsVersionNewer(UpdateStr)) || UpdateStr == GetCurrentVersion()) {
 		int iUpdate = Update["update"].toInt();
-		if (iUpdate) UpdateStr += QString('a' + (iUpdate - 1));
+		if (iUpdate) UpdateStr += QChar('a' + (iUpdate - 1));
 		if (bNewer || iUpdate > GetCurrentUpdate()) {
 			if (ScanUpdateFiles(Update) == eNone) // check if this update has already been applied
 				theConf->SetValue("Updater/CurrentUpdate", MakeVersionStr(Update)); // cache result
@@ -871,7 +871,7 @@ QString COnlineUpdater::MakeVersionStr(const QVariantMap& Data)
 {
 	QString Str = Data["version"].toString();
 	int iUpdate = Data["update"].toInt();
-	if (iUpdate) Str += QString('a' + (iUpdate - 1));
+	if (iUpdate) Str += QChar('a' + (iUpdate - 1));
 	return Str;
 }
 

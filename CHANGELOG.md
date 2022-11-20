@@ -13,16 +13,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added ability to import/export boxes into 7z files
 - added new update mechanism allowing for incremental updates
 -- used for nightly test builds in the "live" update channel
--- used to update Templates.ini and translations adter instalation [#1105](https://github.com/sandboxie-plus/Sandboxie/issues/1105)
+-- used to update Templates.ini and translations after installation [#1105](https://github.com/sandboxie-plus/Sandboxie/issues/1105)
 
 ### Changed
 - restructured the box context menu a bit
-- sandman translations are now compressed and located in translations.7z
+- SandMan translations are now compressed and located in translations.7z
 
 ### Fixed
 - fixed issue with recycle icon not updated in time [#2457](https://github.com/sandboxie-plus/Sandboxie/issues/2457) (thanks okrc)
 - fixed issue with "index out of range" [#2470](https://github.com/sandboxie-plus/Sandboxie/pull/2470) (thanks okrc)
-- fixed issue starting sandman after install [#2284](https://github.com/sandboxie-plus/Sandboxie/issues/2284)
+- fixed issue starting SandMan after install [#2284](https://github.com/sandboxie-plus/Sandboxie/issues/2284)
+- fixed encoding issue with my_version.h [#2475](https://github.com/sandboxie-plus/Sandboxie/issues/2475)
 
 
 

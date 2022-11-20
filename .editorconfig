@@ -23,7 +23,6 @@ indent_style = tab
 indent_size = unset
 
 [*.{c,h,cpp}]
-charset = utf-8
 indent_style = tab
 indent_size = unset
 

@@ -27,7 +27,7 @@ typedef struct _LOG_BUFFER
 	SIZE_T buffer_size;
 	SIZE_T buffer_used;
 	CHAR* buffer_start_ptr;
-	CHAR buffer_data[0]; // [[SIZE 4][DATA n][SEQ 4][SITE 4]][...] // Note 2nd size tags allows to traverse the ring in booth directions
+	CHAR buffer_data[0]; // [[SIZE 4][DATA n][SEQ 4][SITE 4]][...] // Note 2nd size tags allows to traverse the ring in both directions
 } LOG_BUFFER;
 
 LOG_BUFFER* log_buffer_init(SIZE_T buffer_size);

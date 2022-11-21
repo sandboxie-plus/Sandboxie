@@ -748,7 +748,7 @@ _FX BIGNUM BigNum_Divide(
     // long division of bignum by bignum.  if the divisor is one word
     // long, calls division by integer.  if the divisor is equal to or
     // larger than the dividend, returns early.  otherwise this function
-    // sets up the data as requird by the Knuth long division algorithm,
+    // sets up the data as required by the Knuth long division algorithm,
     // implemented by the divide helper function.  the requirements are:
     //
     // - divisor must be left-shifted such that its highest bit is on

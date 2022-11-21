@@ -712,7 +712,7 @@ _FX BOOLEAN Driver_FindMissingServices(void)
 
     //
     // The Windows Kernel on ARM64 not only not exports ZwCreateToken/ZwCreateTokenEx
-    // but out right lacks those functions entierly.
+    // but out right lacks those functions entirely.
     // So in order to work around this limitation we implement a own system service wrapper
     // we invoke Sbie_CallZwServiceFunction_asm with all the arguments we need
     // and the service numebr as last 20th argument, it sets IP0/X16 and invokes KiServiceInternal

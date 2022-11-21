@@ -2052,7 +2052,7 @@ _FX NTSTATUS Sbie_SepFilterTokenHandler(void *TokenObject,
 #ifdef _WIN64
     //
     // When built with VS2019 on systems with enabled "Core Isolation" (HVCI) we get a BSOD.
-    // This is caused by "Control Flow Guard", we could eider disable it for this file or,
+    // This is caused by "Control Flow Guard", we could either disable it for this file or
     // work around this issue by providing a hand crafted wrapper function that performs the call.
     //
 
@@ -2295,7 +2295,7 @@ _FX void* Token_CreateNew(void* TokenObject, PROCESS* proc)
     SECURITY_QUALITY_OF_SERVICE SecurityQos;
 
     //
-    // Gether informations from the original token
+    // Get the information from the original token
     //
 
     if (   !NT_SUCCESS(SeQueryInformationToken(TokenObject, TokenStatistics, &LocalStatistics))

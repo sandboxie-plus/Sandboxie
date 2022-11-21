@@ -305,10 +305,10 @@ void NetFw_AddRule(LIST* list, NETFW_RULE* new_rule)
 			goto next; // must be same level and same action
 
 		if ((rule->port_map.count != 0) != (new_rule->port_map.count != 0))
-			goto next; // booth must, or must not, have Ports
+			goto next; // both must, or must not, have Ports
 		
 		if ((rule->ip_map.count != 0) != (new_rule->ip_map.count != 0))
-			goto next; // booth must, or must not, have IPs
+			goto next; // both must, or must not, have IPs
 
 		if (rule->protocol != new_rule->protocol)
 			goto next; // must be same protocol
@@ -322,7 +322,7 @@ void NetFw_AddRule(LIST* list, NETFW_RULE* new_rule)
 			
 			BOOLEAN same_ports = NetFw_MatchPortMaps(&rule->port_map, &new_rule->port_map);
 			BOOLEAN same_ips = NetFw_MatchIPMaps(&rule->ip_map, &new_rule->ip_map);
-			if (!same_ports && !same_ips) { // if neider Ports nor IP's are same 
+			if (!same_ports && !same_ips) { // if neither Ports nor IPs are same 
 				goto next; // we don't merge
 			}
 			else if (!same_ports) {
@@ -335,7 +335,7 @@ void NetFw_AddRule(LIST* list, NETFW_RULE* new_rule)
 			}
 			
 		}
-		// if we are here it means that booth rules heve eider only ports or only IP's set
+		// if we are here, it means that both rules heve either only ports or only IP's set
 		else if (rule->port_map.count != 0) {
 			if (!NetFw_MergePortMaps(&rule->port_map, &new_rule->port_map, rule->pool))
 				goto next; // merge failed
@@ -346,7 +346,7 @@ void NetFw_AddRule(LIST* list, NETFW_RULE* new_rule)
 		}
 
 		//
-		// if we are here we eider merged the rules or the rules are identical
+		// if we are here, we either merged the rules or the rules are identical
 		//
 
 		NetFw_FreeRule(new_rule);

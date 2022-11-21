@@ -610,7 +610,7 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 
 	// 
 	// Note: the work area was now moved after the extra area 
-	// hence the syscall_data is no longer overwriten
+	// hence the syscall_data is no longer overwritten
 	//
 
 	extra->InjectData_offset = ULONG_DIFF(ptr, extra);
@@ -812,7 +812,7 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 	}
 
 	//
-	// prepare the lowdata paramters area to copy into target process
+	// prepare the lowdata parameters area to copy into target process
 	//
 
 	lowdata.ntdll_base = (ULONG64)(ULONG_PTR)Dll_Ntdll;
@@ -824,7 +824,7 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 
 	//
 	// Sandboxie requires CHPE to be disabled for x86 applications
-	// for simplicity and compatybility with forced processes we disable CHPE globally using the Wow64\x86\xtajit key
+	// for simplicity and compatibility with forced processes we disable CHPE globally using the Wow64\x86\xtajit key
 	// alternatively we can hook LdrQueryImageFileExecutionOptionsEx from LowLevel.dll
 	// and return 0 for the L"LoadCHPEBinaries" option
 	// 

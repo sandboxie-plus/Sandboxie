@@ -136,7 +136,7 @@
 //  Returns:
 //      Returns the address of the next instruction (following in the source)
 //      instruction.  By subtracting pSrc from the return value, the caller
-//      can determinte the size of the instruction copied.
+//      can determinate the size of the instruction copied.
 //
 //  Comments:
 //      By following the pTarget, the caller can follow alternate

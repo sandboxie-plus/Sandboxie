@@ -650,7 +650,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         L"%SystemRoot%\\SysWoW64\\wsmsvc.dll",
         L"%SystemRoot%\\SysWoW64\\wsmauto.dll",
         L"%SystemRoot%\\SysWoW64\\winrs.exe",
-        // Note: This is not a proper fix its just a cheap mitidation!!! 
+        // Note: This is not a proper fix, just a cheap mitigation!!!
         NULL
     };
     static const WCHAR* openPipesCM[] = {
@@ -674,7 +674,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         L"\\Device\\Mup\\*",
         L"\\Device\\Ndis",
         L"\\Device\\PcwDrv",
-        L"\\Device\\SrpDevice", //Smart App Control
+        L"\\Device\\SrpDevice", // Smart App Control
         NULL
     };
     static const WCHAR* drive_devices[] = {

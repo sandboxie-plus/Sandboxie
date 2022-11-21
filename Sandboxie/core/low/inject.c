@@ -328,9 +328,9 @@ _FX void InitInject(SBIELOW_DATA *data, void *DetourCode)
 #ifdef _M_ARM64
 
     //
-    // when hooking on arm64 go for LdrLoadDll 
+    // when hooking on arm64, go for LdrLoadDll 
     // instead of RtlFindActivationContextSectionString
-    // for ARM64 booth work, but for ARM64EC hooking RtlFindActCtx fails
+    // for ARM64 both work, but for ARM64EC hooking RtlFindActCtx fails
     //
 
     if (!data->flags.is_wow64)

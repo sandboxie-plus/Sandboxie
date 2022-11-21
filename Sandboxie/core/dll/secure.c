@@ -953,7 +953,7 @@ _FX void Ldr_TestToken(HANDLE token, PHANDLE hTokenReal, BOOLEAN bImpersonate)
     }
 
     //
-    // SeAccessCheckByType requires the token to eider be 
+    // SeAccessCheckByType requires the token to either be 
     // an impersonation token of level SecurityIdentification or higher
     // or a pseudo handle, hence we have to convert the token here
     //

@@ -548,10 +548,10 @@ _FX NTSTATUS SysInfo_NtSetInformationJobObject(
     void *JobObjectInformtion, ULONG JobObjectInformtionLength)
 {
     //
-    // Since windows 8 we can have nested jobs i.e. we can have all sandboxed processes 
-    // be part of the box isoaltion job and also of for example a chrome sandbox job.
-    // Howeever we booth jobs can not specify UIRestrictions since our own job allready
-    // specified those restrictions, we dont allow a boxed process to spesify its own.
+    // Since Windows 8, we can have nested jobs, i.e. we can have all sandboxed processes 
+    // be part of the box isolation job and, for example, also part of a Chrome sandbox job.
+    // However, for both jobs we can not specify UIRestrictions. Since our own job already
+    // specified those restrictions, we do not allow a boxed process to specify its own.
     //
 
     if (SysInfo_CanUseJobs && JobObjectInformationClass == JobObjectBasicUIRestrictions)

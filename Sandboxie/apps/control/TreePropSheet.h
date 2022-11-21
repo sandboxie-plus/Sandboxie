@@ -258,7 +258,7 @@ public:
     @param hIcon
         Handle to icon that should be set for the page.
     @param unIconId
-        Ressource identifier for the icon to set.
+        Resource identifier for the icon to set.
     @param Images
         Reference of the image list to extract the icon from.
     @param nImage
@@ -266,7 +266,7 @@ public:
         as an icon.
 
     @return
-        TRUE on success, FALSE if an error occured.
+        TRUE on success, FALSE if an error occurred.
     */
     static BOOL SetPageIcon(CPropertyPage *pPage, HICON hIcon);
     static BOOL SetPageIcon(CPropertyPage *pPage, UINT unIconId);

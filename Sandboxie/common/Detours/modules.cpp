@@ -256,7 +256,7 @@ PVOID WINAPI DetourFindFunction(_In_ PCSTR pszModule,
     return (PBYTE)pldSymbol;
 #elif defined(DETOURS_ARM)
     // On the ARM, we get a raw code pointer, which we must convert into a
-    // valied Thumb2 function pointer.
+    // valid Thumb2 function pointer.
     return DETOURS_PBYTE_TO_PFUNC(symbol.Address);
 #else
     return (PBYTE)symbol.Address;
@@ -663,7 +663,7 @@ struct _DETOUR_ENUMERATE_IMPORTS_THUNK_CONTEXT
 };
 
 // Callback for DetourEnumerateImportsEx that adapts DetourEnumerateImportsEx
-// for use with a DetourEnumerateImports callback -- derefence the IAT and pass the value on.
+// for use with a DetourEnumerateImports callback -- dereference the IAT and pass the value on.
 
 static
 BOOL

@@ -145,7 +145,7 @@ jobs:
         
 
     #
-    # Merge everythign together
+    # Merge everything together
     #
 
       - name: Add missing languages for Qt5 x86 (issue 1528)

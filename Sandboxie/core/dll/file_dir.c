@@ -1684,7 +1684,7 @@ _FX NTSTATUS File_GetMergedInformation(
 
 				int cmp = RtlCompareUnicodeString(&best->name_uni, &cur->name_uni, TRUE); // CaseInSensitive
 
-				if (cmp == 0) // equal - same file in booth, use newer (best)
+				if (cmp == 0) // equal - same file in both, use newer (best)
 					cur->have_entry = FALSE;
 				else if (cmp > 0)
 					best = cur;
@@ -3282,7 +3282,7 @@ _FX NTSTATUS File_SetReparsePoint(
     }
 
     //
-    // since curt's code in the driver handles reparsing and the driver is no logner blocking this operation
+    // since Curt's code in the driver handles reparsing and the driver is no longer blocking this operation,
     // we can do it directly without the need to ask our service
     //
 

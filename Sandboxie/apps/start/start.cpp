@@ -1350,7 +1350,7 @@ void StartAutoRunKey(LPCWSTR lpKey)
 	UNICODE_STRING Data;
 	NTSTATUS Status;
 
-    // Get the native unhooked fucntion in order to enumerate only the sandboxed entries
+    // Get the native unhooked function in order to enumerate only the sandboxed entries
     P_NtOpenKey __sys_NtOpenKey = (P_NtOpenKey)SbieDll_GetSysFunction(L"NtOpenKey");
     P_NtEnumerateValueKey __sys_NtEnumerateValueKey = (P_NtEnumerateValueKey)SbieDll_GetSysFunction(L"NtEnumerateValueKey");
 
@@ -1449,7 +1449,7 @@ void StartAutoAutoFolder(LPCWSTR lpPath)
 	//HANDLE Event;
     PFILE_ID_BOTH_DIR_INFORMATION DirInformation;
 
-    // Get the native unhooked fucntion in order to enumerate only the sandboxed entries
+    // Get the native unhooked function in order to enumerate only the sandboxed entries
     P_NtCreateFile __sys_NtCreateFile = (P_NtCreateFile)SbieDll_GetSysFunction(L"NtCreateFile");
     P_NtQueryDirectoryFile __sys_NtQueryDirectoryFile = (P_NtQueryDirectoryFile)SbieDll_GetSysFunction(L"NtQueryDirectoryFile");
 	

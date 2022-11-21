@@ -24,7 +24,7 @@
 
 
 #define ERROR_INVALID		(-1)	// invalid parameter
-#define ERROR_GET			(-2)	// failed to download update informations
+#define ERROR_GET			(-2)	// failed to download update information
 #define ERROR_LOAD			(-3)	// failed to load update json file
 #define ERROR_DOWNLOAD		(-4)	// failed to download a particular file
 #define ERROR_SCAN			(-5)	// failed to scan existing installation

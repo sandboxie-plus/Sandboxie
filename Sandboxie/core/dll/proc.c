@@ -805,7 +805,7 @@ _FX BOOL Proc_CreateProcessInternalW(
         hToken = NULL;
 
     //
-    // Compatybility hack for firefox 106.x
+    // Compatibility hack for Firefox 106.x
     //
 
     // $Workaround$ - 3rd party fix
@@ -816,8 +816,8 @@ _FX BOOL Proc_CreateProcessInternalW(
         hToken = NULL;
 
     //
-    // MSEdge Compatybility hack
-    // workers of type cdm can't open SbeiSvc's ALPC port
+    // MSEdge Compatibility hack
+    // workers of type cdm can't open SbieSvc's ALPC port
     //
 
     // $Workaround$ - 3rd party fix

@@ -418,7 +418,7 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
 #elif _WIN64
 
         if (data->Sbie64bitJumpTable) {
-            // bytes overwriten /*16*/ 13;
+            // bytes overwritten /*16*/ 13;
 
             unsigned char * jTableTarget = (unsigned char *)&data->Sbie64bitJumpTable->entry[SyscallNum & 0x3ff]; // jump table is sized for up to 1024 entries
             // write new patch for jump table
@@ -464,7 +464,7 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
             ZwXxxPtr[12] = 0xE0;
         }
         else {
-            // bytes overwriten 14;
+            // bytes overwritten 14;
 
             ZwXxxPtr[0] = 0x49;                     // mov r10, SyscallNumber
             ZwXxxPtr[1] = 0xC7;
@@ -490,7 +490,7 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
             }
         }
 #else ! _WIN64
-        // bytes overwriten 10;
+        // bytes overwritten 10;
 
         ZwXxxPtr[0] = 0xB8;                 // mov eax, SyscallNumber, with param count in the highest byte
         *(ULONG *)&ZwXxxPtr[1] = SyscallNum;

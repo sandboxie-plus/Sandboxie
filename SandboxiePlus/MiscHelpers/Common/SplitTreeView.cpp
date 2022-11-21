@@ -77,7 +77,7 @@ CSplitTreeView::CSplitTreeView(QAbstractItemModel* pModel, QWidget *parent) : QW
 	connect(m_pSplitter, SIGNAL(splitterMoved(int,int)), this, SLOT(OnSplitterMoved(int,int)));
 
 	// Link selections
-	//m_pTree->setSelectionModel(m_pList->selectionModel()); // this works only when booth views share the same data model
+	//m_pTree->setSelectionModel(m_pList->selectionModel()); // this works only when both views share the same data model
 
 	connect(m_pTree->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(OnTreeSelectionChanged(QItemSelection,QItemSelection)));
 	connect(m_pList->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(OnListSelectionChanged(QItemSelection,QItemSelection)));

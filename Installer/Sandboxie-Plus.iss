@@ -117,7 +117,7 @@ Filename: "{app}\KmdUtil.exe"; Parameters: "install SbieDrv ""{app}\SbieDrv.sys"
 ; Install the Sbie service.
 Filename: "{app}\KmdUtil.exe"; Parameters: "install SbieSvc ""{app}\SbieSvc.exe"" type=own start=auto msgfile=""{app}\SbieMsg.dll"" display=""Sandboxie Service"" group=UIGroup"; StatusMsg: "KmdUtil install SbieSvc..."; Check: not IsPortable
 
-; Update metadata (templates and transaltions)
+; Update metadata (templates and translations)
 Filename: "{app}\UpdUtil.exe"; Parameters: {code:GetParams}; StatusMsg: "UpdUtill checking for updates..."; Check: IsRefresh
 
 ; Start the Sbie service.
@@ -158,7 +158,7 @@ function IsOpenSandMan(): Boolean;
 begin
 
   // Return True or False for the value of Check.
-  if (ExpandConstant('{param:open_agent|0}') = '1') or ((not IsPortable) and (not WizardSilent)))then begin
+  if (ExpandConstant('{param:open_agent|0}') = '1') or ((not IsPortable) and (not WizardSilent))) then begin
     Result := True;
   end;
 end;
@@ -466,7 +466,7 @@ end;
 //  //params: String;
 //begin
 //
-//  // after the instalation
+//  // after the installation
 //  if (CurStep <> ssPostInstall) then  
 //    exit;
 //

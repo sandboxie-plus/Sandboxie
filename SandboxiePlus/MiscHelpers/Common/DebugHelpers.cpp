@@ -274,7 +274,7 @@ void InitMiniDumpWriter(const wchar_t* Name, const wchar_t* Path)
   ASSERT(wcslen(Path) < ARRSIZE(s_szMiniDumpPath));
   wcscpy(s_szMiniDumpPath, Path);
 
-  // Initialize the member, so we do not load the dll after the exception has occured
+  // Initialize the member, so we do not load the dll after the exception has occurred
   // which might be not possible anymore...
   s_hDbgHelpMod = LoadLibrary(L"dbghelp.dll");
   if (s_hDbgHelpMod != NULL)

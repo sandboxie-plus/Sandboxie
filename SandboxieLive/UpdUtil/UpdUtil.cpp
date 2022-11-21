@@ -572,14 +572,14 @@ void PrintUsage()
 	//std::wcout << L"\t/arch:[ARM64|a64|x86_64|x64|i386|x86]" << std::endl;
 	std::wcout << L"\t/scope:[full|core|meta|lang|tmpl]" << std::endl;
 	std::wcout << L"\t\tfull - update all components" << std::endl;
-	std::wcout << L"\t\tcore - core components (for classic same as full)" << std::endl;
+	std::wcout << L"\t\tcore - core components (for classic, same as full)" << std::endl;
 	std::wcout << L"\t\tmeta - update metadata (lang and tmpl)" << std::endl;
 	std::wcout << L"\t\tlang - update language files" << std::endl;
 	std::wcout << L"\t\ttmpl - update Templates.ini" << std::endl;
 	std::wcout << L"\t/step:[get|scan|prepare|apply]" << std::endl;
-	std::wcout << L"\t\tget - download update information to " _T(UPDATE_FILE) << std::endl;
-	std::wcout << L"\t\tscan - check for updates use existing " _T(UPDATE_FILE) " if present" << std::endl;
-	std::wcout << L"\t\tprepare - download udpates but don't install" << std::endl;
+	std::wcout << L"\t\tget - download updated information to " _T(UPDATE_FILE) << std::endl;
+	std::wcout << L"\t\tscan - check for updates, use existing " _T(UPDATE_FILE) " if present" << std::endl;
+	std::wcout << L"\t\tprepare - download updates, but don't install" << std::endl;
 	std::wcout << L"\t\tapply - install updates" << std::endl;
 	std::wcout << L"" << std::endl;
 }

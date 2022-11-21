@@ -330,7 +330,7 @@ inline ULONG detour_is_code_filler(PBYTE pbCode)
 
 struct _DETOUR_TRAMPOLINE
 {
-    // An X64 instuction can be 15 bytes long.
+    // An X64 instruction can be 15 bytes long.
     // In practice 11 seems to be the limit.
     BYTE            rbCode[30];     // target code + jmp to pbRemain.
     BYTE            cbCode;         // size of moved target code.
@@ -906,7 +906,7 @@ struct _DETOUR_TRAMPOLINE
     //   3 instructions to form immediate
     //   br or brl
     //
-    // A theoretical maximum for rbCode is thefore 4*4*6 + 16 = 112 (another 16 for jmp to pbRemain).
+    // A theoretical maximum for rbCode is therefore 4*4*6 + 16 = 112 (another 16 for jmp to pbRemain).
     //
     // With literals, the maximum expansion is 5, including the literals: 4*4*5 + 16 = 96.
     //

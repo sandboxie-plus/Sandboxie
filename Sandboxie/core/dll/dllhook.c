@@ -244,7 +244,7 @@ _FX VECTOR_TABLE* SbieDll_GetHookTable(MODULE_HOOK* mod_hook, ULONG_PTR target, 
                 for (; !ptrVTable->offset && cur_attempt < (max_attempts * 2); cur_attempt++) {
 
                     ULONG_PTR curAddr = tempAddr + (((cur_attempt + 2)/2) * step);
-                    if((cur_attempt % 2) == 0) // search booth directions alternating
+                    if((cur_attempt % 2) == 0) // search both directions alternating
                         curAddr *= -1;
 
                     PVOID RegionBase = (PVOID)curAddr;
@@ -1300,7 +1300,7 @@ BOOLEAN SbieDll_FuncSkipHook(const char* func)
         ++index;
     }
 
-    // if there are no fucntions to skip configured, disable the check
+    // if there are no configured functions to skip, disable the check
     if (index == 0) Disable = TRUE;
 
     return FALSE;

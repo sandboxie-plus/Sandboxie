@@ -51,9 +51,9 @@
 //---------------------------------------------------------------------------
 
 //
-// Note: we want to preserver the order of the settings when enumerating
-//          hence we can not replace the list with a hash map entierly
-//          instead we use booth, here the hash map ise used only for lookups
+// Note: we want to preserve the order of the settings when enumerating
+//          hence we can not replace the list with a hash map entirely
+//          instead we use both, here the hash map is used only for lookups
 //          the keys in the map are only pointers to the name fields in the list entries
 //
 

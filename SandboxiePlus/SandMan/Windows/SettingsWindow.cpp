@@ -733,7 +733,7 @@ void CSettingsWindow::UpdateUpdater()
 		) {
 			ui.cmbUpdate->setEnabled(false);
 			ui.cmbRelease->setEnabled(true);
-			ui.lblRevision->setText(tr("Supproter certificate required"));
+			ui.lblRevision->setText(tr("Supporter certificate required"));
 		}
 		else {
 			ui.cmbUpdate->setEnabled(true);

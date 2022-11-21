@@ -590,9 +590,9 @@ finish:
 
 //
 // Win32_HookWin32WoW64 needs to be able to read and write the 64-bit portion of the address space
-// ther for we issue direct syscalls using 64 bit arguments to our driver's syscall interface
-// The driver accepts function names and optionaly returns the curesponding syscall index for later direct use
-// This replaces the use of heaven's gate (wow64ext) as its unavailable when running in emulation on arm64
+// therefore we issue direct syscalls using 64 bit arguments to our driver's syscall interface
+// The driver accepts function names and optionally returns the corresponding syscall index for later direct use
+// This replaces the use of heaven's gate (wow64ext), as it is unavailable when running in emulation on arm64
 //
 
 

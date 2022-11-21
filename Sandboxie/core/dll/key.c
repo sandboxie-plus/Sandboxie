@@ -1652,8 +1652,8 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
         // for write access, it would not be able to pass the WOW64 flag
         //
         // this special case makes IMHO no sense, wow registry redirection
-        // acts only on specific paths, and our sanboxed paths do not fall 
-        // into that category, hence thay dont need KEY_WOW64_xxKEY flags!
+        // acts only on specific paths, and our sandboxed paths do not fall 
+        // into that category, hence they do not need KEY_WOW64_xxKEY flags!
         //
 
         //if (OriginalDesiredAccess & (KEY_WOW64_32KEY | KEY_WOW64_64KEY))

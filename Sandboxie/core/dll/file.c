@@ -7124,10 +7124,10 @@ _FX ULONG SbieDll_GetHandlePath(
     Dll_PushTlsNameBuffer(TlsData);
 
     //
-    // This function returns actual paths as thay exist in the real filesystem
+    // This function returns actual paths as they exist in the real filesystem
     // copy paths may point to the snapshot if the file is there
-    // and true paths will point to the original location if thay rere redirected
-    // ther for calling hooked file functions on these paths may run into file not found 
+    // and true paths will point to the original location if they're redirected
+    // therefore calling hooked file functions on these paths may run into file not found 
     // when the original location is marked as deleted
     //
 

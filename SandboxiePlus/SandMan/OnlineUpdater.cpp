@@ -444,7 +444,7 @@ COnlineUpdater::EUpdateScope COnlineUpdater::GetFileScope(const QString& Path)
 		return eCore;
 	if (WildMatch(TmplFiles) || WildMatch(LangFiles))
 		return eMeta;
-	// unknwon files are handled same as known plus files
+	// unknown files are handled the same as known Plus files
 	return eFull;
 }
 
@@ -535,11 +535,11 @@ QString GetUpdErrorStr(int exitCode)
 	switch (exitCode)
 	{
 	case ERROR_INVALID: return COnlineUpdater::tr("invalid parameter");
-	case ERROR_GET: return COnlineUpdater::tr("failed to download update informations");
-	case ERROR_LOAD: return COnlineUpdater::tr("failed to load update json file");
+	case ERROR_GET: return COnlineUpdater::tr("failed to download updated information");
+	case ERROR_LOAD: return COnlineUpdater::tr("failed to load updated json file");
 	case ERROR_DOWNLOAD: return COnlineUpdater::tr("failed to download a particular file");
 	case ERROR_SCAN: return COnlineUpdater::tr("failed to scan existing installation");
-	case ERROR_SIGN: return COnlineUpdater::tr("update signature is invalid !!!");
+	case ERROR_SIGN: return COnlineUpdater::tr("updated signature is invalid !!!");
 	case ERROR_HASH: return COnlineUpdater::tr("downloaded file is corrupted");
 	case ERROR_INTERNAL: return COnlineUpdater::tr("internal error");
 	default: return COnlineUpdater::tr("unknown error");

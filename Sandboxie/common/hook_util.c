@@ -155,7 +155,7 @@ _FX USHORT Hook_GetSysCallIndex(UCHAR* SourceFunc)
 {
 
     //
-    // Standard syscall fucntion
+    // Standard syscall function
     //
     //  4C 8B D1                mov     r10, rcx
     //  B8 19000000             mov     eax, 0x19
@@ -265,7 +265,7 @@ ULONGLONG* findChromeTarget(unsigned char* addr)
     ULONGLONG target;
     ULONGLONG * ChromeTarget = NULL;
     if (!addr) return NULL;
-    // look for ADRP to soem register followed (not imminetly) by an LDR for and with the same register
+    // look for ADRP to some register followed (not imminently) by an LDR for and with the same register
     for (i = 0; i < MAX_FUNC_OPS && !ChromeTarget; i++) {
         ADRP adrp;
         adrp.OP = ((ULONG*)addr)[i];

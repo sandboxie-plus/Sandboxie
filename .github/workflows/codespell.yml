@@ -8,11 +8,15 @@ on:
     # Trigger Codespell at a scheduled time
     # * is a special character in YAML so you have to quote this string
     - cron: '30 0 * * *'
-  # Triggers the workflow on push or pull request events but only for the master branch
-  #push:
-  #  branches: [ master ]
-  #pull_request:
-  #  branches: [ master ]
+  # Triggers the workflow on push or pull request events
+ # push:
+  #  branches:
+  #  - 'master'
+  pull_request:
+    branches:
+  #  - 'master'
+    - '*typo*'
+    - '*spell*'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

@@ -109,7 +109,7 @@ SBIE1203 Yol listesi yapılamadı (%2 hatası)
 .
 
 1204;pop;err;01
-SBIE1204 %3 Korumalı alan oluşturma %2 hatasını verdi
+SBIE1204 %3 korumalı alan oluşturma %2 hatasını verdi
 .
 
 1211;pop;err;01
@@ -155,7 +155,7 @@ SBIE1301 '%2' işlemi korumalı alan dışarısında çalıştırıldı
 .
 
 # 1302;pop;inf;01
-# SBIE1302 '%2' korumalı alanı tanımlanmadı veya aktif değil
+# SBIE1302 '%2' korumalı alanı tanımlanmadı veya etkin değil
 # .
 
 1305;pop;inf;02
@@ -287,7 +287,7 @@ SBIE2104 Windows oturumunu sonlandırma girişimi başarısız - %2
 # .
 
 # 2106;pop;inf;01
-# SBIE2106 Lütfen Sandboxie Dosya menüsünden "UAC Yöneticisi olarak çalıştır" komutunu etkinleştirin.
+# SBIE2106 Lütfen Sandboxie Kontrol içindeki Dosya menüsünden "UAC Yöneticisi olarak çalıştır" komutunu etkinleştirin.
 # .
 
 # 2107;pop;inf;01
@@ -445,9 +445,8 @@ SBIE2225 Bir EFS dosyasına erişim girişiminde bulunuldu: %2
 .
 
 2226;pop;wrn;01
-SBIE2226 Eksik yükseklik nedeniyle işlem başlatılamadı, çözmek için kutu %2 için ini bölümüne "ApplyElevateCreateProcessFix=y" ekleyin
+SBIE2226 Eksik yükseklik nedeniyle işlem başlatılamadı, çözmek için alan %2 için ini bölümüne "ApplyElevateCreateProcessFix=y" ekleyin
 .
-
 2227;pop;wrn;01
 SBIE2227 %2', 8.3 adlandırmasını desteklemeyen bir birimde bulunuyor. Bu, eski uygulamalar ve yükleyicilerde sorunlara neden olabilir.
 .
@@ -603,7 +602,7 @@ SBIE9234 Hizmet başlatma hatası %2
 .
 
 # 9302;evt;err;01
-# SBIE9302 Bölüm oluşturma başarısız (sürücü kutulum sınıfları)
+# SBIE9302 Bölüm oluşturma başarısız (sürücü kurulum sınıfları)
 # .
 
 # 9304;evt;err;01
@@ -639,7 +638,7 @@ Ke&s
 .
 
 3051;txt;01
-Korumalı alan için silinme koruması aktif edildi
+Korumalı alan için silinme koruması etkinleştirildi
 .
 
 3052;txt;01
@@ -698,8 +697,9 @@ Geçersiz komut satırı parametresi:  %2
 Usage: Start.exe <program adı>
 .
 
+# Sandbox için Korumalı Alan kullanıldığından dolayı box için de alan kullandım.
 3204;txt;01
-Geçersiz kutu isim parametresi:  %2
+Geçersiz alan adı parametresi:  %2
 .
 
 3205;txt;01
@@ -791,7 +791,7 @@ Sandboxie gözetimi altında çalıştırılmaya devam edecek.
 .
 
 3251;txt;01
-Korumalı alan Dışında Çalıştır
+Korumalı Alan Dışında Çalıştır
 .
 
 3252;txt;01
@@ -840,7 +840,7 @@ Sürüm %2
 3304;txt;01
 Sandboxie sürüm uyuşmazlığı:
 
-Sandboxie Kontrolü:  Sürüm %2
+Sandboxie Kontrol: Sürüm %2
 Hizmet (SbieSvc): Sürüm %3
 Sürücü (SbieDrv): Sürüm %4
 
@@ -883,7 +883,7 @@ Bilinmeyen kullanıcı, yapılandırma ayarları kaydedilmeyecek
 .
 
 3315;txt;01
-Korumalı alan içeriğini silme
+Korumalı alan içeriği siliniyor
 .
 
 3316;txt;01
@@ -1013,7 +1013,7 @@ Kurtarma &Günlüğü
 .
 
 3432;txt;01
-Yeni Korumalı alan Oluştur
+Yeni Korumalı Alan Oluştur
 .
 
 3433;txt;01
@@ -1021,7 +1021,7 @@ Toplama Klasörü Oluştur
 .
 
 3434;txt;01
-Gizli Korumalı alanı Göster
+Gizli Korumalı Alanı Göster
 .
 
 3435;txt;01
@@ -1105,7 +1105,7 @@ qWave sürücüsüne doğrudan erişime izin ver (Google Hangouts)
 .
 
 3461;txt;01
-Korumalı alan ile &Çalıştır
+Korumalı Alan ile &Çalıştır
 .
 
 3462;txt;01
@@ -1153,15 +1153,15 @@ Programları &Kapat
 .
 
 3475;txt;01
-Korumalı alan &Ayarları
+Korumalı Alan &Ayarları
 .
 
 3476;txt;01
-Korumalı alanı Adla&ndır
+Korumalı Alanı Adla&ndır
 .
 
 3477;txt;01
-Korumalı alanı Kaldı&r
+Korumalı Alanı Kaldı&r
 .
 
 3481;txt;01
@@ -1225,7 +1225,7 @@ Masaüstü Kısayolu Oluştur
 #----------------------------------------------------------------------------
 
 3511;txt;01
-Sandboxie Kontrolü penceresini gizleyecek, fakat
+Sandboxie Kontrol penceresini gizleyecek, fakat
 çalışmasına devam edecek. Pencereyi göstermek için
 Sistem bildiri alanındaki sarı Sandboxie işaretine
 çift tıklayın.
@@ -1242,8 +1242,8 @@ edecektir.
 Çoğu durumda, Yapılandırmayı Yeniden yükle fonksiyonu
 pencereyi kapatır kapatmaz uygulanır.
 
-Sandboxie Kontrolüne herhangi bir anda Yapılandırmayı
-Yeniden yükleme talimatını verebilirsiniz.
+Ayrıca Sandboxie Kontrol'üne istediğiniz zaman Yapılandırmayı
+Yeniden Yükleme talimatı verebilirsiniz.
 .
 
 3513;txt;01
@@ -1264,7 +1264,7 @@ Korumalı alan %2
 .
 
 3516;txt;01
-Aktif
+Etkin
 .
 
 3517;txt;01
@@ -1312,11 +1312,11 @@ Bu komutu uygulamadan önce lütfen korumalı alan %2 içeriklerini silin.
 .
 
 3528;txt;01
-Yeni Korumalı alan Adı Girin
+Yeni korumalı alan adı girin
 .
 
 3529;txt;01
-Korumalı alan %2 kaldırmak istediğinizden emin misiniz?
+%2 korumalı alanı kaldırmak istediğinizden emin misiniz?
 .
 
 3530;txt;01
@@ -1340,11 +1340,11 @@ işlemlerini yapıp; korumalı alanda olmayan bir klasör penceresine yapıştı
 .
 
 3534;txt;01
-Korumalı alan içeriklerini korumalı alan ile saklanmayan Windows Explorer penceresinde
+Korumalı alan içeriklerini korumalı alan gözetimi altında çalışmayan Windows Explorer penceresinde
 görüntüleyeceksiniz.
 
 Korumalı alan içerisinde bulunan program veya belgeleri açabileceksiniz.
-Program veya belge Sandboxie kontrolü altında başlayacaktır.
+Program veya belge Sandboxie gözetimi altında başlayacaktır.
 
 Ancak, bir korumalı alan içeriklerindeki değişiklikleri Windows Explorer'ın korumalı alandaki
 örneğinde yapmanızı öneririz. Bunun için,
@@ -1368,10 +1368,12 @@ Tüm ipuçlarından 'bu mesajı gösterme' belirteci kaldırıldı.
 .
 
 3539;txt;01
-'%2' Korumalı alanı %3 gün önce oluşturulmuş.
+'%2' korumalı alanı %3 gün önce oluşturulmuş.
+
 Korumalı alanınızı zaman zaman silin.
-Otomatik silme işlemi için, Korumalı alan Kontrolü içerisindeki
-Korumalı alan menüsünden Korumalı alan Ayarlarını kullanabilirsiniz.
+
+Otomatik silme işlemi için, Sandboxie Kontrol içerisindeki
+Korumalı Alan menüsünden Korumalı Alan Ayarlarını kullanabilirsiniz.
 .
 
 3540;txt;01
@@ -1666,7 +1668,7 @@ Kabuk Bütünleştirilmesi
 .
 
 3686;txt;01
-Sandboxie Kontrolünü Başlat
+Sandboxie Kontrol'ü Başlat
 .
 
 3687;txt;01
@@ -1712,7 +1714,7 @@ Dosya ve klasörlere "Korumalı alanda Çalıştır" komutu ekle
 3697;txt;01
 Şimdi Sandboxie Başlat Menüsü gösterilecek. Menüden bir
 uygulama seçin ve gerçek masaüstünüze programın Sandboxie
-tarafından müdahale edilebilecek bir kısayolunu oluşturun.
+gözetimi altında çalıştıracak bir kısayolunu oluşturun.
 .
 
 3698;txt;01
@@ -2030,7 +2032,7 @@ Görünüm
 .
 
 3812;txt;01
-Sandboxie gözetiminde çalışan programlar pencere başlıklarında Sandboxie [#] göstericisini içereceklerdir.
+Sandboxie gözetimi altında çalışan programlar pencere başlıklarında Sandboxie [#] göstericisini içereceklerdir.
 .
 
 3813;txt;01
@@ -2118,7 +2120,7 @@ Kendiliğinden Sil
 .
 
 3843;txt;01
-Bu korumalı alan içerikleri, korumalı alandaki son program sonlanıp korumalı alan inaktif olduktan sonra otomatik olarak silinebilir.
+Bu korumalı alanın içeriği, son korumalı alan programı sonlandığında ve korumalı alan boşta kaldığında otomatik olarak silinebilir.
 .
 
 3844;txt;01
@@ -2235,7 +2237,7 @@ Aşağıdaki programlardan herhangi biri korumalı alan dışında çalışırsa
 # .
 
 # 3964;txt;01
-# Zorunlu kullanıcı hesabındaki bir korumalı alanı silmek için, ilgili kullanıcıda oturum açın ve Sandboxie Kontrolünü kullanarak korumalı alanı silin.
+# Zorunlu kullanıcı hesabındaki bir korumalı alanı silmek için, ilgili kullanıcıda oturum açın ve Sandboxie Kontrol'ü kullanarak korumalı alanı silin.
 # .
 
 # 3965;txt;01
@@ -2329,7 +2331,7 @@ Eğer belirtilmişse, bu korumalı alan içerisinden İnternet'e erişebilen pro
 .
 
 3914;txt;01
-Bu özellik aktif edildiğinde, yukarıdaki listedeki programlar da dahil olmak üzere, bu korumalı alan içerisine yüklenen (veya indirilen) programlar İnternet erişim iznine sahip olamayacaklardır.
+Bu özellik etkinleştirildiğinde, yukarıdaki listedeki programlar da dahil olmak üzere, bu korumalı alan içerisine yüklenen (veya indirilen) programlar İnternet erişim iznine sahip olamayacaklardır.
 .
 
 3915;txt;01
@@ -3096,7 +3098,7 @@ E-posta Okuyucusu
 .
 
 4392;txt;01
-Aşağıdaki hariçlemeler bu korumalı alan içerisinde çalışan Eposta okuyucularının kendi posta kutularına korumalı alan dışında erişmelerine izin verecektir.
+Aşağıdaki dışlamalar bu korumalı alan içerisinde çalışan Eposta okuyucularının kendi posta kutularına korumalı alan dışında erişmelerine izin verecektir.
 .
 
 4393;txt;01
@@ -3241,17 +3243,17 @@ Bu seçenekleri kontrol etmek için bir UI kullanmayı tercih ederseniz, lütfen
 .
 
 6004;pop;err;01
-%2 kutusunun %3 yapılandırması bir destekçi sertifikası gerektirir. Bu kutudaki işlemler 5 dakika sonra sonlandırılacaktır. Uzun süreli kullanım için lütfen bu projeyi desteklemeyi düşünün.
+%2 alanının %3 yapılandırması bir destekçi sertifikası gerektirir. Bu alandaki işlemler 5 dakika sonra sonlandırılacaktır. Uzun süreli kullanım için lütfen bu projeyi desteklemeyi düşünün.
 .
 
 6005;txt;01
-Not: Yönetici ayrıcalıkları olmadan yükleyiciler sanal alanda başlatılamaz. Sandboxie-Plus, birçok kurulumcunun bu ayrıcalıklar olmadan başarılı olmasını sağlayan bir seçenek sunar. Bu seçeneği, bu kutu için ini bölümüne "FakeAdminRights=y" ekleyerek manuel olarak klasik derlemede de etkinleştirebilirsiniz.
+Not: Yönetici ayrıcalıkları olmadan yükleyiciler sanal alanda başlatılamaz. Sandboxie-Plus, birçok kurulumcunun bu ayrıcalıklar olmadan başarılı olmasını sağlayan bir seçenek sunar. Bu seçeneği, bu alan için ini bölümüne "FakeAdminRights=y" ekleyerek manuel olarak klasik derlemede de etkinleştirebilirsiniz.
 .
 
 6006;txt;01
 Sandboxie classic'in eski kullanıcı arayüzü, yalnızca birkaç kısıtlama seçeneği için destek uygular.
 
-"ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" ve çok daha fazlası gibi ek seçenekler bu kutunun ini bölümünde ayarlanabilir.
+"ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" ve çok daha fazlası gibi ek seçenekler bu alanın ini bölümünde ayarlanabilir.
 Modern kullanıcı arabirimi (SandMan.exe), Başlat/Çalıştır ve İnternet erişim kısıtlamaları için daha fazla özelleştirme seçeneği sunar.
 
 Bu seçenekleri kontrol etmek için bir UI kullanmayı tercih ederseniz, lütfen tüm yeni özellikler için tam UI desteğine sahip Sandboxie-Plus'a yükseltin.
@@ -3260,7 +3262,7 @@ Bu seçenekleri kontrol etmek için bir UI kullanmayı tercih ederseniz, lütfen
 6007;txt;01
 Sandboxie Plus, eski davranışı bir kara liste modundan, korumalı alandaki programların yalnızca genel sistem konumlarını okumasına izin verildiği ve çoğu kullanıcı verisine okuma erişiminin öncelikle açıkça verilmesi gereken bir beyaz liste moduna geçerek gelişmiş gizlilik koruması sunar. Örneğin, Kapalı Yol veya Yazma Yolu tarafından engellenenler hariç tüm sürücüye okuma erişimine izin vermek.
 
-Sandboxie classic'in eski kullanıcı arayüzü, bu çalışma modu için destek uygulamaz. ini dosyası kullanılarak yapılandırılabilse de, gizliliği artırılmış kutuları kullanmak istiyorsanız modern Sandboxie-Plus UI'yi (SandMan.exe) kullanmanız önerilir.
+Sandboxie classic'in eski kullanıcı arayüzü, bu çalışma modu için destek uygulamaz. ini dosyası kullanılarak yapılandırılabilse de, gizliliği artırılmış alanları kullanmak istiyorsanız modern Sandboxie-Plus UI'yi (SandMan.exe) kullanmanız önerilir.
 .
 
 6010;txt;01
@@ -3410,7 +3412,7 @@ Hazır olduğunuzda Başlat tıklayın.
 .
 
 8009;ins;01
-Kaldırmadan önce, korumalı alan içeriklerini silmek için Sandboxie Kontrolünü kullanın.
+Kaldırmadan önce, korumalı alan içeriklerini silmek için Sandboxie Kontrol'ü kullanın.
 .
 
 8010;ins;01
@@ -3422,7 +3424,7 @@ Lütfen aşağıdaki bilgiye göz atın.
 .
 
 8012;ins;01
-Sandboxie sistem-seviye sürücüsünü kurup aktifleştirmek için İleri tıklayın. Bu sürücü Sandboxie uygulamasının çekirdeğini oluşturmaktadır.
+Sandboxie sistem-seviye sürücüsünü kurup etkinleştirmek için İleri tıklayın. Bu sürücü Sandboxie uygulamasının çekirdeğini oluşturmaktadır.
 .
 
 8013;ins;01
@@ -3525,7 +3527,7 @@ Tamam'a basıp kapattıktan sonra kuruluma devam edin.
 8052;ins;01
 Sandboxie program dosyaları oluşturulamadı veya güncellenemedi.
 
-Lütfen Sandboxie Kontrolünün ve korumalı alanda herhangi
+Lütfen Sandboxie Kontrol'ün ve korumalı alanda herhangi
 programın çalışmadığından emin olun.
 
 Daha sonra Tamam tıklayıp kurulumu yeniden deneyin.

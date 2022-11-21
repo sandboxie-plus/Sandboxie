@@ -216,12 +216,12 @@
     <message>
         <location filename="OnlineUpdater.cpp" line="94"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
-        <translation type="unfinished">새 버전의 Sandboxie-Plus가 있는지 확인하시겠습니까?</translation>
+        <translation>새 버전의 Sandboxie-Plus가 있는지 확인하시겠습니까?</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="95"/>
         <source>Don&apos;t show this message again.</source>
-        <translation type="unfinished">이 메시지를 다시 표시하지 않습니다.</translation>
+        <translation>이 메시지를 다시 표시하지 않습니다.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="204"/>
@@ -242,97 +242,97 @@
     <message>
         <location filename="OnlineUpdater.cpp" line="389"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;설치 프로그램을 다운로드하시겠습니까?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="391"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;업데이트를 다운로드하시겠습니까?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="393"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;update page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;a href=&quot;%1&quot;&gt;업데이트 페이지&lt;/a&gt;로 이동하시겠습니까??&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="401"/>
         <source>Don&apos;t show this update anymore.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 업데이트를 더 이상 표시하지 않습니다.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="511"/>
         <source>Downloading updates...</source>
-        <translation type="unfinished"></translation>
+        <translation>업데이트 다운로드 중...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="537"/>
         <source>invalid parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>잘못된 매개변수</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="538"/>
         <source>failed to download update informations</source>
-        <translation type="unfinished"></translation>
+        <translation>업데이트 정보를 다운로드하지 못했습니다</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="539"/>
         <source>failed to load update json file</source>
-        <translation type="unfinished"></translation>
+        <translation>업데이트 json 파일을 불러오지 못했습니다</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="540"/>
         <source>failed to download a particular file</source>
-        <translation type="unfinished"></translation>
+        <translation>특정 파일을 다운로드하지 못했습니다</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="541"/>
         <source>failed to scan existing installation</source>
-        <translation type="unfinished"></translation>
+        <translation>기존 설치를 검색하지 못했습니다</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="542"/>
         <source>update signature is invalid !!!</source>
-        <translation type="unfinished"></translation>
+        <translation>업데이트 서명이 잘못되었습니다 !!!</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="543"/>
         <source>downloaded file is corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>다운로드한 파일이 손상되었습니다</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="544"/>
         <source>internal error</source>
-        <translation type="unfinished"></translation>
+        <translation>내부 오류</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="545"/>
         <source>unknown error</source>
-        <translation type="unfinished"></translation>
+        <translation>알 수 없는 오류</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="569"/>
         <source>Failed to download updates from server, error %1</source>
-        <translation type="unfinished"></translation>
+        <translation>서버에서 업데이트를 다운로드하지 못했습니다, 오류 %1</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="588"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Sandboxie-Plus에 대한 업데이트가 다운로드되었습니다.&lt;/p&gt;&lt;p&gt;이 업데이트를 적용하시겠습니까? 샌드박스로 실행 중인 프로그램이 있으면 프로그램이 종료됩니다.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="692"/>
         <source>Downloading installer...</source>
-        <translation type="unfinished"></translation>
+        <translation>설치 프로그램을 다운로드하는 중...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="734"/>
         <source>Failed to download installer from: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>설치 관리자를 다운로드하지 못했습니다: %1</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="760"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;새 Sandboxie-Plus 설치 관리자가 다음 위치에 다운로드되었습니다:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;설치를 시작하시겠습니까? 샌드박스로 실행 중인 프로그램이 있으면 종료됩니다.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="825"/>
@@ -1869,22 +1869,22 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="781"/>
         <source>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus release ready&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;새 Sandboxie-Plus 릴리스가 준비되었습니다&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="782"/>
         <source>Click to run installer</source>
-        <translation type="unfinished"></translation>
+        <translation>설치 프로그램을 실행하려면 클릭</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="785"/>
         <source>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update ready&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;새 Sandboxie-Plus 업데이트가 준비되었습니다&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="786"/>
         <source>Click to apply update</source>
-        <translation type="unfinished"></translation>
+        <translation>업데이트를 적용하려면 클릭</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1027"/>
@@ -2366,7 +2366,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="2167"/>
         <source>This name is already in use, please select an alternative box name</source>
         <oldsource>This Name is already in use, please select an alternative box name</oldsource>
-        <translation type="unfinished">이 이름은 이미 사용 중입니다. 다른 박스 이름을 선택하십시오</translation>
+        <translation>이 이름은 이미 사용 중입니다. 다른 박스 이름을 선택하십시오</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2181"/>
@@ -3549,19 +3549,19 @@ No will choose: %2</source>
         <location filename="Windows/SettingsWindow.cpp" line="655"/>
         <location filename="Windows/SettingsWindow.cpp" line="660"/>
         <source>Notify</source>
-        <translation type="unfinished"></translation>
+        <translation>알림</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="656"/>
         <location filename="Windows/SettingsWindow.cpp" line="661"/>
         <source>Download &amp; Notify</source>
-        <translation type="unfinished"></translation>
+        <translation>다운로드하고 알림</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="657"/>
         <location filename="Windows/SettingsWindow.cpp" line="662"/>
         <source>Download &amp; Install</source>
-        <translation type="unfinished"></translation>
+        <translation>다운로드하고 설치</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="690"/>
@@ -3576,12 +3576,12 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="727"/>
         <source>Live channel is distributed as revisions only</source>
-        <translation type="unfinished"></translation>
+        <translation>라이브 채널은 리비전으로만 배포됩니다</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="736"/>
         <source>Supproter certificate required</source>
-        <translation type="unfinished"></translation>
+        <translation>지원자 인증서 필요</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="839"/>
@@ -6073,7 +6073,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="386"/>
         <source>Integrate with Host Start Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>호스트 시작 메뉴와 통합</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="611"/>
@@ -6148,22 +6148,22 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1110"/>
         <source>New full versions from the selected release channel.</source>
-        <translation type="unfinished"></translation>
+        <translation>선택한 릴리스 채널의 새 전체 버전입니다.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1113"/>
         <source>Full Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>전체 업데이트</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1146"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
-        <translation type="unfinished"></translation>
+        <translation>설치된 버전의 핫패치, Templates.ini 및 변환에 대한 업데이트입니다.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1149"/>
         <source>Version Revisions</source>
-        <translation type="unfinished"></translation>
+        <translation>버전 수정사항</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1212"/>
@@ -6173,27 +6173,27 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1219"/>
         <source>The live channel provides the latest unsigned test builds.</source>
-        <translation type="unfinished"></translation>
+        <translation>라이브 채널은 서명되지 않은 최신 테스트 빌드를 제공합니다.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1222"/>
         <source>Search in the Live channel</source>
-        <translation type="unfinished"></translation>
+        <translation>라이브 채널에서 검색</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1229"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
-        <translation type="unfinished"></translation>
+        <translation>미리보기 채널에는 최신 GitHub 사전 릴리스가 포함되어 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1293"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
-        <translation type="unfinished"></translation>
+        <translation>안정적인 채널에는 최신 안정적인 GitHub 릴리스가 포함되어 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1296"/>
         <source>Search in the Stable channel</source>
-        <translation type="unfinished"></translation>
+        <translation>안정적인 채널에서 검색</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1309"/>

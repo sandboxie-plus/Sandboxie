@@ -252,12 +252,12 @@
     <message>
         <location filename="OnlineUpdater.cpp" line="94"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
-        <translation type="unfinished">Möchten Sie prüfen, ob es eine neue Version von Sandboxie-Plus gibt?</translation>
+        <translation>Möchten Sie prüfen, ob es eine neue Version von Sandboxie-Plus gibt?</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="95"/>
         <source>Don&apos;t show this message again.</source>
-        <translation type="unfinished">Diese Meldung nicht mehr anzeigen.</translation>
+        <translation>Diese Meldung nicht mehr anzeigen.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="204"/>
@@ -278,100 +278,100 @@
     <message>
         <location filename="OnlineUpdater.cpp" line="389"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Möchten Sie den Installer runterladen?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="391"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Möchten Sie die Updates runterladen?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="393"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;update page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Möchten Sie zur &lt;a href=&quot;%1&quot;&gt;Updateseite gehen&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="401"/>
         <source>Don&apos;t show this update anymore.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Update nicht mehr anzeigen.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="511"/>
         <source>Downloading updates...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lade Updates...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="537"/>
         <source>invalid parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>ungültiger Parameter</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="538"/>
         <source>failed to download updated information</source>
         <oldsource>failed to download update informations</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Runterladen der aktualisierten Informationen</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="539"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Laden der aktualisierten JSON-Datei</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="540"/>
         <source>failed to download a particular file</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Runterladen einer bestimmten Datei</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="541"/>
         <source>failed to scan existing installation</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Überprüfen einer bestimmten Datei</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="542"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Updatesignatur ist ungültig !!!</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="543"/>
         <source>downloaded file is corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>runtergeladene Datei ist beschädigt</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="544"/>
         <source>internal error</source>
-        <translation type="unfinished"></translation>
+        <translation>interner Fehler</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="545"/>
         <source>unknown error</source>
-        <translation type="unfinished"></translation>
+        <translation>unbekannter Fehler</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="569"/>
         <source>Failed to download updates from server, error %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Runterladen der Updates vom Server, Fehler %1</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="588"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Updates für Sandboxie-Plus wurden runtergeladen.&lt;/p&gt;&lt;p&gt;Möchten Sie diese Updates anwenden? Falls Programme in einer Sandbox laufen, werden diese beendet.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="692"/>
         <source>Downloading installer...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lade Installer...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="734"/>
         <source>Failed to download installer from: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Runterladen des Installers von: %1</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="760"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ein neuer Sandboxie-Plus Installer wurde an folgenden Speicherort runtergeladen:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Möchten Sie mit der Installation beginnen? Falls Programme in einer Sandbox laufen, werden diese beendet.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="825"/>
@@ -2217,22 +2217,22 @@ Nein wählt: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="781"/>
         <source>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus release ready&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;Es ist eine neue Sandboxie-Plus Veröffentlichung verfügbar&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="782"/>
         <source>Click to run installer</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken zum Starten des Installers</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="785"/>
         <source>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update ready&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;Es ist eine neues Sandboxie-Plus Update verfügbar&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="786"/>
         <source>Click to apply update</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken zum Anwenden des Updates</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1027"/>
@@ -2716,7 +2716,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
         <location filename="SandMan.cpp" line="2167"/>
         <source>This name is already in use, please select an alternative box name</source>
         <oldsource>This Name is already in use, please select an alternative box name</oldsource>
-        <translation type="unfinished">Dieser name wird bereits verwendet, bitte wählen Sie einen anderen Boxnamen</translation>
+        <translation>Dieser Name wird bereits verwendet, bitte wählen Sie einen anderen Boxnamen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2181"/>
@@ -3927,30 +3927,30 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <location filename="Windows/SettingsWindow.cpp" line="655"/>
         <location filename="Windows/SettingsWindow.cpp" line="660"/>
         <source>Notify</source>
-        <translation type="unfinished"></translation>
+        <translation>Benachrichtigen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="656"/>
         <location filename="Windows/SettingsWindow.cpp" line="661"/>
         <source>Download &amp; Notify</source>
-        <translation type="unfinished"></translation>
+        <translation>Herunterladen &amp; Benachrichtigen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="657"/>
         <location filename="Windows/SettingsWindow.cpp" line="662"/>
         <source>Download &amp; Install</source>
-        <translation type="unfinished"></translation>
+        <translation>erunterladen &amp; Installieren</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="727"/>
         <source>Live channel is distributed as revisions only</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Livekanal wird nur mit Revisionen verteilt</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="736"/>
         <source>Supporter certificate required</source>
         <oldsource>Supproter certificate required</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Unterstützerzertifikat notwendig</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1072"/>
@@ -6564,7 +6564,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="386"/>
         <source>Integrate with Host Start Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>In das Startmenü des Hostrechners integrieren</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="536"/>
@@ -6668,47 +6668,47 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1110"/>
         <source>New full versions from the selected release channel.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue vollständige Versionen aus dem ausgewählten Veröffentlichungskanal beziehen.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1113"/>
         <source>Full Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Vollständige Updates</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1146"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hotpatches für die installierte Version, Updates für die Templates.ini und Übersetzungen.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1149"/>
         <source>Version Revisions</source>
-        <translation type="unfinished"></translation>
+        <translation>Versionsrevisionen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1219"/>
         <source>The live channel provides the latest unsigned test builds.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Livekanal bietet die aktuellsten unsignierten Testversionen.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1222"/>
         <source>Search in the Live channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche im Livekanal</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1229"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Vorschaukanal enthält die aktuellsten GitHub-Vorabveröffentlichungen.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1293"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Stabilkanal enthält die aktuellsten stabilen GitHub-Veröffentlichungen.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1296"/>
         <source>Search in the Stable channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche im Stabilkanal</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1309"/>

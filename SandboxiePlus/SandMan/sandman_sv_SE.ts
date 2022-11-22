@@ -295,12 +295,14 @@
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="538"/>
-        <source>failed to download update informations</source>
+        <source>failed to download updated information</source>
+        <oldsource>failed to download update informations</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="539"/>
-        <source>failed to load update json file</source>
+        <source>failed to load updated json file</source>
+        <oldsource>failed to load update json file</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -315,7 +317,8 @@
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="542"/>
-        <source>update signature is invalid !!!</source>
+        <source>updated signature is invalid !!!</source>
+        <oldsource>update signature is invalid !!!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3737,7 +3740,8 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="736"/>
-        <source>Supproter certificate required</source>
+        <source>Supporter certificate required</source>
+        <oldsource>Supproter certificate required</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -216,12 +216,12 @@
     <message>
         <location filename="OnlineUpdater.cpp" line="94"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
-        <translation type="unfinished">Sandboxie-Plus&apos;ın yeni sürümünü kontrol etmek ister misiniz?</translation>
+        <translation>Sandboxie-Plus&apos;ın yeni sürümünü kontrol etmek ister misiniz?</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="95"/>
         <source>Don&apos;t show this message again.</source>
-        <translation type="unfinished">Bu mesajı bir daha gösterme.</translation>
+        <translation>Bu mesajı bir daha gösterme.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="204"/>
@@ -242,100 +242,100 @@
     <message>
         <location filename="OnlineUpdater.cpp" line="389"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Yükleyiciyi indirmek istiyor musunuz?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="391"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Güncellemeleri indirmek istiyor musunuz?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="393"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;update page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;a href=&quot;%1&quot;&gt; güncelleme sayfasına&lt;/a&gt; gitmek istiyor musunuz?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="401"/>
         <source>Don&apos;t show this update anymore.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu güncellemeyi artık gösterme.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="511"/>
         <source>Downloading updates...</source>
-        <translation type="unfinished"></translation>
+        <translation>Güncellemeler indiriliyor...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="537"/>
         <source>invalid parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>geçersiz parametre</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="538"/>
         <source>failed to download updated information</source>
         <oldsource>failed to download update informations</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>güncelleme bilgisi indirilemedi</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="539"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>güncel json dosyası yüklenemedi</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="540"/>
         <source>failed to download a particular file</source>
-        <translation type="unfinished"></translation>
+        <translation>belirli bir dosya indirilemedi</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="541"/>
         <source>failed to scan existing installation</source>
-        <translation type="unfinished"></translation>
+        <translation>mevcut yükleme taranamadı</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="542"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>güncelleme imzası geçersiz!</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="543"/>
         <source>downloaded file is corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>indirilen dosya bozuk</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="544"/>
         <source>internal error</source>
-        <translation type="unfinished"></translation>
+        <translation>iç hata</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="545"/>
         <source>unknown error</source>
-        <translation type="unfinished"></translation>
+        <translation>bilinmeyen hata</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="569"/>
         <source>Failed to download updates from server, error %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Güncellemeler sunucudan indirilemedi, hata %1</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="588"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Sandboxie-Plus güncellemeleri indirildi.&lt;/p&gt;&lt;p&gt;Bu güncellemeleri uygulamak istiyor musunuz? Herhangi bir program korumalı alanda çalışıyorsa sonlandırılacaktır.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="692"/>
         <source>Downloading installer...</source>
-        <translation type="unfinished"></translation>
+        <translation>Yükleyici indiriliyor...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="734"/>
         <source>Failed to download installer from: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Şuradan yükleyici indirilemedi: %1</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="760"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Yeni bir Sandboxie-Plus yükleyicisi şu konuma indirildi:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Kuruluma başlamak istiyor musunuz? Herhangi bir program korumalı alanda çalışıyorsa sonlandırılacaktır.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="825"/>
@@ -1994,7 +1994,8 @@ Tam yol: %4</translation>
         <location filename="SandMan.cpp" line="2167"/>
         <source>This name is already in use, please select an alternative box name</source>
         <oldsource>This Name is already in use, please select an alternative box name</oldsource>
-        <translation>Bu ad zaten kullanılıyor, lütfen başka bir kutu adı seçin</translation>
+        <translatorcomment>Sandbox için Korumalı Alan kullanıldığından dolayı box için de alan kullandım.</translatorcomment>
+        <translation>Bu ad zaten kullanılıyor, lütfen alternatif bir alan adı seçin</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2181"/>
@@ -2464,22 +2465,22 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="781"/>
         <source>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus release ready&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;Yeni bir Sandboxie-Plus sürümü hazır&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="782"/>
         <source>Click to run installer</source>
-        <translation type="unfinished"></translation>
+        <translation>Yükleyiciyi çalıştırmak için tıklayın</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="785"/>
         <source>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update ready&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;Yeni bir Sandboxie-Plus güncellemesi hazır&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="786"/>
         <source>Click to apply update</source>
-        <translation type="unfinished"></translation>
+        <translation>Güncellemeyi uygulamak için tıklayın</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="975"/>
@@ -3350,7 +3351,7 @@ Hayır şunları seçer: %2</translation>
         <location filename="Views/SbieView.cpp" line="1358"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
-        <translation>Sandboxie Başlat Menüsü şimdi görüntülenecektir. Menüden bir uygulama seçin ve Sandboxie, gerçek masaüstünüzde, Sandboxie&apos;nin gözetimi altında seçilen uygulamayı çağırmak için kullanabileceğiniz bir kısayolu simgesi oluşturacaktır.</translation>
+        <translation>Sandboxie Başlat Menüsü şimdi görüntülenecektir. Menüden bir uygulama seçin ve Sandboxie, gerçek masaüstünüzde, Sandboxie&apos;nin gözetimi altında seçilen uygulamayı çağırmak için kullanabileceğiniz bir kısayol simgesi oluşturacaktır.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1435"/>
@@ -3604,19 +3605,19 @@ Hayır şunları seçer: %2</translation>
         <location filename="Windows/SettingsWindow.cpp" line="655"/>
         <location filename="Windows/SettingsWindow.cpp" line="660"/>
         <source>Notify</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildir</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="656"/>
         <location filename="Windows/SettingsWindow.cpp" line="661"/>
         <source>Download &amp; Notify</source>
-        <translation type="unfinished"></translation>
+        <translation>İndir &amp; Bildir</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="657"/>
         <location filename="Windows/SettingsWindow.cpp" line="662"/>
         <source>Download &amp; Install</source>
-        <translation type="unfinished"></translation>
+        <translation>İndir &amp; Yükle</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="690"/>
@@ -3631,13 +3632,13 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="727"/>
         <source>Live channel is distributed as revisions only</source>
-        <translation type="unfinished"></translation>
+        <translation>Canlı kanal yalnızca düzeltmeler olarak dağıtılır</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="736"/>
         <source>Supporter certificate required</source>
         <oldsource>Supproter certificate required</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Destekçi sertifikası gereklidir</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="839"/>
@@ -4092,7 +4093,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="77"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation>Korumalı alan, ana bilgisayar sisteminizi alan içinde çalışan işlemlerden izole eder, diğer programlarda ve bilgisayarınızdaki verilerde kalıcı değişiklikler yapmalarını engeller. Yalıtım düzeyi, güvenliğinizi ve uygulamalarla uyumluluğu etkiler, dolayısıyla seçilen Alan Türüne bağlı olarak farklı bir yalıtım düzeyi olacaktır. Sandboxie ayrıca kişisel verilerinize, kendi denetimi altında çalışan işlemler tarafından erişilmesine karşı da koruyabilir.</translation>
+        <translation>Korumalı alan, ana bilgisayar sisteminizi alan içinde çalışan işlemlerden izole eder, diğer programlarda ve bilgisayarınızdaki verilerde kalıcı değişiklikler yapmalarını engeller. Yalıtım düzeyi, güvenliğinizi ve uygulamalarla uyumluluğu etkiler, dolayısıyla seçilen Alan Türüne bağlı olarak farklı bir yalıtım düzeyi olacaktır. Sandboxie ayrıca kişisel verilerinize, kendi gözetimi altında çalışan işlemler tarafından erişilmesine karşı da koruyabilir.</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="94"/>
@@ -6042,27 +6043,27 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1219"/>
         <source>The live channel provides the latest unsigned test builds.</source>
-        <translation type="unfinished"></translation>
+        <translation>Canlı kanal, en son imzasız test derlemelerini sağlar.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1222"/>
         <source>Search in the Live channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Canlı kanalda ara</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1229"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ön izleme kanalı, en son GitHub ön sürümlerini içerir.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1293"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kararlı kanal, en son kararlı GitHub sürümlerini içerir.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1296"/>
         <source>Search in the Stable channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Kararlı kanalda ara</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1309"/>
@@ -6159,7 +6160,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="386"/>
         <source>Integrate with Host Start Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Ana Bilgisayar Başlat Menüsü ile entegre edin</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="611"/>
@@ -6204,22 +6205,22 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1110"/>
         <source>New full versions from the selected release channel.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seçilen yayın kanalından yeni tam sürümler.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1113"/>
         <source>Full Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Tam Güncellemeler</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1146"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurulu sürüm için hızlı yamalar, Templates.ini ve çeviri güncellemeleri.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1149"/>
         <source>Version Revisions</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürüm Düzeltmeleri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1212"/>

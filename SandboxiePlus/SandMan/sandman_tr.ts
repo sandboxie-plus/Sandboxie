@@ -273,13 +273,13 @@
         <location filename="OnlineUpdater.cpp" line="538"/>
         <source>failed to download updated information</source>
         <oldsource>failed to download update informations</oldsource>
-        <translation type="unfinished">güncelleme bilgileri indirilemedi</translation>
+        <translation>güncelleme bilgisi indirilemedi</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="539"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
-        <translation type="unfinished">güncelleme json dosyası yüklenemedi</translation>
+        <translation>güncel json dosyası yüklenemedi</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="540"/>
@@ -295,7 +295,7 @@
         <location filename="OnlineUpdater.cpp" line="542"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
-        <translation type="unfinished">güncelleme imzası geçersiz!</translation>
+        <translation>güncelleme imzası geçersiz!</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="543"/>
@@ -3638,7 +3638,7 @@ Hayır şunları seçer: %2</translation>
         <location filename="Windows/SettingsWindow.cpp" line="736"/>
         <source>Supporter certificate required</source>
         <oldsource>Supproter certificate required</oldsource>
-        <translation type="unfinished">Destekçi sertifikası gereklidir</translation>
+        <translation>Destekçi sertifikası gereklidir</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="839"/>

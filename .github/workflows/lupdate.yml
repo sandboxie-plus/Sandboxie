@@ -9,18 +9,16 @@ on:
 jobs:
   SBIE_Plus_lupdate:
     name: SBIE Plus lupdate
-    # Do not schedule it on forks
+    # Skip the job on forks
     if: (github.event_name == 'schedule' && github.repository_owner == 'sandboxie-plus') || (github.event_name != 'schedule')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 15
 
     steps:
-      - name: Install qttools5-dev-tools
+      - name: Install qt6-base-dev
         shell: bash
         run: |
-          sudo apt-get update
-          sudo apt-get install --no-install-recommends qttools5-dev-tools
-          sudo apt-get install qt5-default
+          sudo apt-get install --no-install-recommends qt6-base-dev
 
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -50,7 +48,7 @@ jobs:
 
   SBIE_reports:
     name: SBIE reports
-    # Do not schedule it on forks
+    # Skip the job on forks
     if: (github.event_name == 'schedule' && github.repository_owner == 'sandboxie-plus') || (github.event_name != 'schedule')
     runs-on: windows-2019
     timeout-minutes: 15

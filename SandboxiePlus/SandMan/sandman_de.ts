@@ -288,7 +288,7 @@
     <message>
         <location filename="OnlineUpdater.cpp" line="393"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;update page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Möchten Sie zur &lt;a href=&quot;%1&quot;&gt;Updateseite gehen&lt;/a&gt;?&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Möchten Sie zur &lt;a href=&quot;%1&quot;&gt;Updateseite&lt;/a&gt; gehen?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="401"/>
@@ -325,7 +325,7 @@
     <message>
         <location filename="OnlineUpdater.cpp" line="541"/>
         <source>failed to scan existing installation</source>
-        <translation>Fehler beim Überprüfen einer bestimmten Datei</translation>
+        <translation>Fehler beim Überprüfen der bestehenden Installation</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="542"/>
@@ -3939,7 +3939,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <location filename="Windows/SettingsWindow.cpp" line="657"/>
         <location filename="Windows/SettingsWindow.cpp" line="662"/>
         <source>Download &amp; Install</source>
-        <translation>erunterladen &amp; Installieren</translation>
+        <translation>Herunterladen &amp; Installieren</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="727"/>

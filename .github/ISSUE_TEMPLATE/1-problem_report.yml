@@ -184,6 +184,8 @@ body:
         - C:\\Windows\\Minidump
         - C:\\Sandbox\\%User%\\DefaultBox\\user\\current\\AppData\\Local\\CrashDumps
         - C:\\Sandbox\\%USER%\\%SANDBOX% (only if you previously set EnableMiniDump=y in the sandbox section of your Sandboxie.ini file)
+        - C:\\Windows\\MEMORY.DMP (known as %SystemRoot%\\MEMORY.DMP)
+        See also: [Generate a kernel or complete crash dump](https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/generate-a-kernel-or-complete-crash-dump)
         
         Tip: You can upload the .dmp file(s) on a file storage service, then share the resulting link below.
       placeholder: https://

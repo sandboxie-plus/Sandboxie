@@ -11,14 +11,14 @@ jobs:
     name: SBIE Plus lupdate
     # Skip the job on forks
     if: (github.event_name == 'schedule' && github.repository_owner == 'sandboxie-plus') || (github.event_name != 'schedule')
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     timeout-minutes: 15
 
     steps:
-      - name: Install qt6-base-dev
+      - name: Install Qt 5 packages
         shell: bash
         run: |
-          sudo apt-get install --no-install-recommends qt6-base-dev
+          sudo apt-get install --no-install-recommends qtbase5-dev qttools5-dev-tools
 
       - name: Checkout repo
         uses: actions/checkout@v3

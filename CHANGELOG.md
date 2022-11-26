@@ -5,9 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
-
-## [1.6.0 / 5.61.0] - 2022-??-??
+## [1.6.0 / 5.61.0] - 2022-11-26
 
 ### Added
 - added ability to import/export boxes into 7z files

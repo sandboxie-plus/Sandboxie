@@ -158,7 +158,7 @@ function IsOpenSandMan(): Boolean;
 begin
 
   // Return True or False for the value of Check.
-  if (ExpandConstant('{param:open_agent|0}') = '1') or ((not IsPortable) and (not WizardSilent))) then begin
+  if (ExpandConstant('{param:open_agent|0}') = '1') or ((not IsPortable) and (not WizardSilent)) then begin
     Result := True;
   end;
 end;

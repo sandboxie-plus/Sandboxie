@@ -165,7 +165,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 		QString ParentGroup = pNode->Path.isEmpty() ? "" : CSbieModel__RemoveGroupMark(pNode->Path.last().toString());
 		int OrderNumber = Groups[ParentGroup].indexOf(Group);
 		if (pNode->OrderNumber != OrderNumber) {
-			pNode->OrderNumber = OrderNumber;
+			pNode->OrderNumber = (OrderNumber == -1) ? Groups[ParentGroup].size() : OrderNumber;
 			Changed = 1;
 		}
 
@@ -209,7 +209,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 		QString Group = pNode->Path.isEmpty() ? "" : CSbieModel__RemoveGroupMark(pNode->Path.last().toString());
 		int OrderNumber = Groups[Group].indexOf(pBox->GetName());
 		if (pNode->OrderNumber != OrderNumber) {
-			pNode->OrderNumber = OrderNumber;
+			pNode->OrderNumber = (OrderNumber == -1) ? Groups[Group].size() : OrderNumber;
 			Changed = 1;
 		}
 

@@ -216,12 +216,12 @@
     <message>
         <location filename="OnlineUpdater.cpp" line="94"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
-        <translation type="unfinished">Вы хотите проверить, есть ли новая версия Sandboxie-Plus?</translation>
+        <translation>Вы хотите проверить, есть ли новая версия Sandboxie-Plus?</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="95"/>
         <source>Don&apos;t show this message again.</source>
-        <translation type="unfinished">Больше не показывать это сообщение.</translation>
+        <translation>Больше не показывать это сообщение.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="204"/>
@@ -242,100 +242,100 @@
     <message>
         <location filename="OnlineUpdater.cpp" line="389"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Вы хотите загрузить установщик?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="391"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Вы хотите загрузить обновления?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="393"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;update page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Вы хотите перейти на &lt;a href=&quot;%1&quot;&gt;страницу обновления&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="401"/>
         <source>Don&apos;t show this update anymore.</source>
-        <translation type="unfinished"></translation>
+        <translation>Больше не показывать это обновление.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="511"/>
         <source>Downloading updates...</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка обновлений...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="537"/>
         <source>invalid parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>неверный параметр</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="538"/>
         <source>failed to download updated information</source>
         <oldsource>failed to download update informations</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>не удалось загрузить обновленную информацию</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="539"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>не удалось загрузить обновленный json файл</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="540"/>
         <source>failed to download a particular file</source>
-        <translation type="unfinished"></translation>
+        <translation>не удалось загрузить определенный файл</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="541"/>
         <source>failed to scan existing installation</source>
-        <translation type="unfinished"></translation>
+        <translation>не удалось просканировать существующую установку</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="542"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>обновленная подпись недействительна !!!</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="543"/>
         <source>downloaded file is corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>загруженный файл поврежден</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="544"/>
         <source>internal error</source>
-        <translation type="unfinished"></translation>
+        <translation>внутренняя ошибка</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="545"/>
         <source>unknown error</source>
-        <translation type="unfinished"></translation>
+        <translation>неизвестная ошибка</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="569"/>
         <source>Failed to download updates from server, error %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось загрузить обновления с сервера, ошибка %1</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="588"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Обновления для Sandboxie-Plus были загружены.&lt;/p&gt;&lt;p&gt;Применить эти обновления? Если какие-либо программы работают в песочнице, они будут завершены.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="692"/>
         <source>Downloading installer...</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка установщика...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="734"/>
         <source>Failed to download installer from: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось загрузить установщик из: %1</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="760"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Новый установщик Sandboxie-Plus загружен в следующую папку:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Вы хотите начать установку? Если какие-либо программы работают в песочнице, они будут завершены.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="825"/>
@@ -353,18 +353,6 @@
         <translation>&lt;p&gt;Доступна новая версия Sandboxie-Plus.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;Новая версия:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>&lt;p&gt;Do you want to download the latest version?&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;Вы хотите скачать последнюю версию?&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;Вы хотите перейти на &lt;a href=&quot;%1&quot;&gt;страницу загрузки&lt;/a&gt;?&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>Don&apos;t show this message anymore.</source>
-        <translation type="vanished">Больше не показывать это сообщение.</translation>
-    </message>
-    <message>
         <location filename="OnlineUpdater.cpp" line="270"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
@@ -372,18 +360,6 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Новых обновлений не найдено, у вас установлена последняя версия Sandboxie-Plus.
 
 Примечание: Найденное обновлениие часто отстает от версии доступной на GitHub, чтобы гарантировать, что предлагаются только проверенные обновления.</translation>
-    </message>
-    <message>
-        <source>Downloading new version...</source>
-        <translation type="vanished">Загрузка новой версии...</translation>
-    </message>
-    <message>
-        <source>Failed to download update from: %1</source>
-        <translation type="vanished">Не удалось загрузить обновление с: %1</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;A Sandboxie-Plus update has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;Обновление Sandboxie-Plus загружено в следующее место:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Вы хотите начать установку? Если какие-либо программы работают в песочнице, они будут завершены.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="941"/>
@@ -1801,22 +1777,22 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="781"/>
         <source>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus release ready&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;Готов новый релиз Sandboxie-Plus&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="782"/>
         <source>Click to run installer</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы запустить установщик</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="785"/>
         <source>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update ready&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;Готово новое обновление Sandboxie-Plus&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="786"/>
         <source>Click to apply update</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы применить обновление</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="798"/>
@@ -1891,10 +1867,6 @@ This box prevents access to all user data locations, except explicitly granted i
         <location filename="SandMan.cpp" line="2391"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>Не удалось запустить необходимые компоненты Sandboxie</translation>
-    </message>
-    <message>
-        <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
-        <translation type="vanished">Вы хотите проверить, есть ли новая версия Sandboxie-Plus?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1413"/>
@@ -2199,10 +2171,6 @@ No will choose: %2</source>
         <translation>Заблокировать конфигурацию</translation>
     </message>
     <message>
-        <source>Click to install update</source>
-        <translation type="vanished">Нажмите, чтобы установить обновление</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="799"/>
         <source>Click to open web browser</source>
         <translation>Нажмите, чтобы открыть веб-браузер</translation>
@@ -2272,7 +2240,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="456"/>
         <source>Import Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Импорт контейнера</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="626"/>
@@ -2287,16 +2255,12 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="655"/>
         <source>Import Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Импорт песочницы</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="703"/>
         <source>Sandbox %1</source>
         <translation>Песочница %1</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;There is a new build of Sandboxie-Plus ready&lt;/a&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;Готова новая сборка Sandboxie-Plus&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="789"/>
@@ -2357,23 +2321,23 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2154"/>
         <source>Select file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите имя файла</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2154"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-zip архив (*.7z)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2167"/>
         <source>This name is already in use, please select an alternative box name</source>
         <oldsource>This Name is already in use, please select an alternative box name</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Это имя уже используется, выберите другое имя контейнера</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2181"/>
         <source>Importing: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Импорт: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2232"/>
@@ -2553,27 +2517,27 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2852"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Импорт/экспорт недоступен, не удалось загрузить 7z.dll</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2853"/>
         <source>Failed to create the box archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось создать архив контейнера</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2854"/>
         <source>Failed to open the 7z archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось открыть 7z архив</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2855"/>
         <source>Failed to unpack the box archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось распаковать архив контейнера</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2856"/>
         <source>The selected 7z file is NOT a box archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбранный 7z файл НЕ является архивом контейнера</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2878"/>
@@ -3157,7 +3121,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="220"/>
         <source>Export Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспорт контейнера</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="224"/>
@@ -3224,7 +3188,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="309"/>
         <source>Export Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспорт песочницы</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="368"/>
@@ -3298,17 +3262,17 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="1238"/>
         <source>Select file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите имя файла</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1238"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation type="unfinished"></translation>
+        <translation>7-zip архив (*.7z)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1246"/>
         <source>Exporting: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспорт: %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1253"/>
@@ -3520,19 +3484,19 @@ No will choose: %2</source>
         <location filename="Windows/SettingsWindow.cpp" line="655"/>
         <location filename="Windows/SettingsWindow.cpp" line="660"/>
         <source>Notify</source>
-        <translation type="unfinished"></translation>
+        <translation>Уведомлять</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="656"/>
         <location filename="Windows/SettingsWindow.cpp" line="661"/>
         <source>Download &amp; Notify</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить и уведомить</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="657"/>
         <location filename="Windows/SettingsWindow.cpp" line="662"/>
         <source>Download &amp; Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить и установить</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="690"/>
@@ -3547,13 +3511,13 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="727"/>
         <source>Live channel is distributed as revisions only</source>
-        <translation type="unfinished"></translation>
+        <translation>Live канал распространяется только в виде редакций</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="736"/>
         <source>Supporter certificate required</source>
         <oldsource>Supproter certificate required</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Требуется сертификат сторонника</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="839"/>
@@ -3630,18 +3594,6 @@ No will choose: %2</source>
         <location filename="Windows/SettingsWindow.cpp" line="1380"/>
         <source>%1 (Current)</source>
         <translation>%1 (Текущая)</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>Do you want to download the version %1?</source>
-        <translation type="vanished">Вы хотите скачать версию %1?</translation>
     </message>
 </context>
 <context>
@@ -5929,10 +5881,6 @@ Please note that this values are currently user specific and saved globally for 
         <translation>Интеграция меню &quot;Пуск&quot;</translation>
     </message>
     <message>
-        <source>Integrate boxes with Host Start Menu</source>
-        <translation type="vanished">Интеграция песочниц с меню &quot;Пуск&quot; хоста</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="235"/>
         <source>Scan shell folders and offer links in run menu</source>
         <translation>Сканировать папки оболочки и предлагать ссылки в меню запуска</translation>
@@ -5940,7 +5888,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="386"/>
         <source>Integrate with Host Start Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Интеграция с меню &quot;Пуск&quot; хоста</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="611"/>
@@ -6015,22 +5963,22 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1110"/>
         <source>New full versions from the selected release channel.</source>
-        <translation type="unfinished"></translation>
+        <translation>Новые полные версии из выбранного канала выпуска.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1113"/>
         <source>Full Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Полные обновления</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1146"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
-        <translation type="unfinished"></translation>
+        <translation>Хотпатчи для установленной версии, обновления Templates.ini и переводов.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1149"/>
         <source>Version Revisions</source>
-        <translation type="unfinished"></translation>
+        <translation>Версии редакции</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1212"/>
@@ -6040,27 +5988,27 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1219"/>
         <source>The live channel provides the latest unsigned test builds.</source>
-        <translation type="unfinished"></translation>
+        <translation>Канал Live предоставляет последние неподписанные тестовые сборки.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1222"/>
         <source>Search in the Live channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Поиск в канале Live</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1229"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
-        <translation type="unfinished"></translation>
+        <translation>Канал Preview содержит последние предварительные выпуски GitHub.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1293"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
-        <translation type="unfinished"></translation>
+        <translation>Канал Stable содержит последние стабильные выпуски GitHub.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1296"/>
         <source>Search in the Stable channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Поиск в канале Stable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1309"/>
@@ -6078,14 +6026,6 @@ Please note that this values are currently user specific and saved globally for 
         <translation>Сторонники проекта Sandboxie-Plus могут получить &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;сертификат поддержки&lt;/a&gt;. Это похоже на лицензионный ключ, но для замечательных людей, использующих программное обеспечение с открытым исходным кодом. :-)</translation>
     </message>
     <message>
-        <source>Download Updates automatically</source>
-        <translation type="vanished">Загружать обновления автоматически</translation>
-    </message>
-    <message>
-        <source>Search in the Release channel</source>
-        <translation type="vanished">Поиск в канале Release</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1196"/>
         <source>In the future, don&apos;t notify about certificate expiration</source>
         <translation>В будущем не уведомлять об истечении срока действия сертификата</translation>
@@ -6099,10 +6039,6 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="1126"/>
         <source>Support Settings</source>
         <translation>Настройки поддержки</translation>
-    </message>
-    <message>
-        <source>Install updates automatically</source>
-        <translation type="vanished">Устанавливать обновления автоматически</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1156"/>

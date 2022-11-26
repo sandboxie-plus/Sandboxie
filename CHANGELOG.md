@@ -22,6 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with "index out of range" [#2470](https://github.com/sandboxie-plus/Sandboxie/pull/2470) (thanks okrc)
 - fixed issue starting SandMan after install [#2284](https://github.com/sandboxie-plus/Sandboxie/issues/2284)
 - fixed encoding issue with my_version.h [#2475](https://github.com/sandboxie-plus/Sandboxie/issues/2475)
+- fixed issue with empty group blinking sequence [#2486](https://github.com/sandboxie-plus/Sandboxie/pull/2486) (thanks okrc)
 
 
 

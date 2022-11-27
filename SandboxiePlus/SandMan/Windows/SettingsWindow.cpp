@@ -236,6 +236,14 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.cmbDPI->addItem(tr("Native"), 1);
 	ui.cmbDPI->addItem(tr("Qt"), 2);
 
+	ui.cmbUpdate->addItem(tr("Notify"), "notify");
+	ui.cmbUpdate->addItem(tr("Download & Notify"), "download");
+	ui.cmbUpdate->addItem(tr("Download & Install"), "install");
+	
+	ui.cmbRelease->addItem(tr("Notify"), "notify");
+	ui.cmbRelease->addItem(tr("Download & Notify"), "download");
+	ui.cmbRelease->addItem(tr("Download & Install"), "install");
+
 	int FontScales[] = { 75,100,125,150,175,200,225,250,275,300,350,400, 0 };
 	for (int* pFontScales = FontScales; *pFontScales != 0; pFontScales++)
 		ui.cmbFontScale->addItem(tr("%1").arg(*pFontScales), *pFontScales);
@@ -652,14 +660,8 @@ void CSettingsWindow::LoadSettings()
 
 	UpdateUpdater();
 
-	ui.cmbUpdate->addItem(tr("Notify"), "notify");
-	ui.cmbUpdate->addItem(tr("Download & Notify"), "download");
-	ui.cmbUpdate->addItem(tr("Download & Install"), "install");
 	ui.cmbUpdate->setCurrentIndex(ui.cmbUpdate->findData(theConf->GetString("Options/OnNewUpdate", "install")));
 
-	ui.cmbRelease->addItem(tr("Notify"), "notify");
-	ui.cmbRelease->addItem(tr("Download & Notify"), "download");
-	ui.cmbRelease->addItem(tr("Download & Install"), "install");
 	ui.cmbRelease->setCurrentIndex(ui.cmbRelease->findData(theConf->GetString("Options/OnNewRelease", "download")));
 
 

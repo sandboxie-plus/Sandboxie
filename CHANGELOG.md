@@ -5,6 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.6.0a / 5.61.0] - 2022-??-??
+
+#fixed
+- fixed issue with support setting drop down menu multiplying [2502#](https://github.com/sandboxie-plus/Sandboxie/pull/2502) (okrc)
+- Add translations folder to deprecated [#2500](https://github.com/sandboxie-plus/Sandboxie/pull/2500) (lufog)
+- fixed issue with boolean settings which can also be set per process [#2495](https://github.com/sandboxie-plus/Sandboxie/issues/2495)
+
+
 ## [1.6.0 / 5.61.0] - 2022-11-26
 
 ### Added

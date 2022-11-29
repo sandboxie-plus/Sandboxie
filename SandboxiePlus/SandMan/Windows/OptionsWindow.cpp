@@ -759,20 +759,23 @@ void COptionsWindow::WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, 
 	if (!pCheck->isEnabled())
 		return;
 
+	QStringList Values = m_pBox->GetTextList(Name, false);
+	foreach(const QString & StrValue, Values) {
+		if (StrValue.contains(","))
+			continue;
+		m_pBox->DelValue(Name, StrValue);
+	}
+
 	SB_STATUS Status;
 	if (pCheck->checkState() == Qt::Checked)
 	{
-		if(!OnValue.isEmpty())
-			Status = m_pBox->SetText(Name, OnValue);
-		else
-			Status = m_pBox->DelValue(Name);
+		if (!OnValue.isEmpty())
+			Status = m_pBox->InsertText(Name, OnValue);
 	}
 	else if (pCheck->checkState() == Qt::Unchecked)
 	{
 		if (!OffValue.isEmpty())
-			Status = m_pBox->SetText(Name, OffValue);
-		else
-			Status = m_pBox->DelValue(Name);
+			Status = m_pBox->InsertText(Name, OffValue);
 	}
 
 	if (!Status)

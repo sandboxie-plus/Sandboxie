@@ -1078,25 +1078,25 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		Results.append(SandBoxes.first()->RunStart("C:\\WINDOWS\\SysWOW64\\cmd.exe"));
 	else if (Action == m_pMenuPresetsShowUAC)
 	{
-		SandBoxes.first()->SetBool("DropAdminRights", false);
-		SandBoxes.first()->SetBool("FakeAdminRights", false);
+		SandBoxes.first()->SetBoolSafe("DropAdminRights", false);
+		SandBoxes.first()->SetBoolSafe("FakeAdminRights", false);
 	}
 	else if (Action == m_pMenuPresetsNoAdmin)
 	{
-		SandBoxes.first()->SetBool("DropAdminRights", true);
-		SandBoxes.first()->SetBool("FakeAdminRights", false);
+		SandBoxes.first()->SetBoolSafe("DropAdminRights", true);
+		SandBoxes.first()->SetBoolSafe("FakeAdminRights", false);
 	}
 	else if (Action == m_pMenuPresetsFakeAdmin)
 	{
-		SandBoxes.first()->SetBool("DropAdminRights", true);
-		SandBoxes.first()->SetBool("FakeAdminRights", true);
+		SandBoxes.first()->SetBoolSafe("DropAdminRights", true);
+		SandBoxes.first()->SetBoolSafe("FakeAdminRights", true);
 	}
 	else if (Action == m_pMenuPresetsINet)
 		SandBoxes.first().objectCast<CSandBoxPlus>()->SetINetBlock(m_pMenuPresetsINet->isChecked());
 	else if (Action == m_pMenuPresetsShares)
 		SandBoxes.first().objectCast<CSandBoxPlus>()->SetAllowShares(m_pMenuPresetsShares->isChecked());
 	else if (Action == m_pMenuPresetsRecovery)
-		m_pMenuPresetsRecovery->setChecked(SandBoxes.first()->SetBool("AutoRecover", m_pMenuPresetsRecovery->isChecked()));
+		m_pMenuPresetsRecovery->setChecked(SandBoxes.first()->SetBoolSafe("AutoRecover", m_pMenuPresetsRecovery->isChecked()));
 	else if (Action == m_pMenuOptions)
 		ShowOptions(SandBoxes.first());
 	else if (Action == m_pMenuBrowse)

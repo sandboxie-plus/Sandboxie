@@ -684,12 +684,12 @@ void CSandBoxPlus::SetINetBlock(bool bEnable)
 
 void CSandBoxPlus::SetAllowShares(bool bEnable)
 {
-	SetBool("BlockNetworkFiles", !bEnable);
+	SetBoolSafe("BlockNetworkFiles", !bEnable);
 }
 
 void CSandBoxPlus::SetDropRights(bool bEnable)
 {
-	SetBool("DropAdminRights", bEnable);
+	SetBoolSafe("DropAdminRights", bEnable);
 }
 
 QStringList::iterator FindInStrList(QStringList& list, const QString& str)

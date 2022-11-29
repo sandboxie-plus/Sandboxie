@@ -590,7 +590,7 @@ void CRecoveryWindow::OnCloseUntil()
 void CRecoveryWindow::OnAutoDisable()
 {
 	m_pBox.objectCast<CSandBoxPlus>()->SetSuspendRecovery();
-	m_pBox->SetBool("AutoRecover", false);
+	m_pBox->SetBoolSafe("AutoRecover", false);
 	close();
 }
 

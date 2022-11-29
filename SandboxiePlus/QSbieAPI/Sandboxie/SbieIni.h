@@ -19,6 +19,7 @@ public:
 	virtual SB_STATUS SetNum(const QString& Setting, int Value);
 	virtual SB_STATUS SetNum64(const QString& Setting, __int64 Value);
 	virtual SB_STATUS SetBool(const QString& Setting, bool Value);
+	virtual SB_STATUS SetBoolSafe(const QString& Setting, bool Value);
 
 	virtual QString GetText(const QString& Setting, const QString& Default = QString(), bool bWithGlobal = false, bool bNoExpand = true, bool withTemplates = false) const;
 	virtual int GetNum(const QString& Setting, int Default = 0, bool bWithGlobal = false, bool withTemplates = false) const;

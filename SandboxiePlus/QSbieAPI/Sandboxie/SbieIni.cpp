@@ -59,6 +59,17 @@ SB_STATUS CSbieIni::SetBool(const QString& Setting, bool Value)
 	return SetText(Setting, Value ? "y" : "n");
 }
 
+SB_STATUS CSbieIni::SetBoolSafe(const QString& Setting, bool Value)
+{
+	QStringList Values = GetTextList(Setting, false);
+	foreach(const QString & StrValue, Values) {
+		if (StrValue.contains(","))
+			continue;
+		DelValue(Setting, StrValue);
+	}
+	return InsertText(Setting, Value ? "y" : "n");
+}
+
 QString CSbieIni::GetText(const QString& Setting, const QString& Default, bool bWithGlobal, bool bNoExpand, bool withTemplates) const
 {
 	int flags = (bWithGlobal ? 0 : CONF_GET_NO_GLOBAL);
@@ -92,11 +103,15 @@ __int64 CSbieIni::GetNum64(const QString& Setting, __int64 Default, bool bWithGl
 
 bool CSbieIni::GetBool(const QString& Setting, bool Default, bool bWithGlobal, bool withTemplates) const
 {
-	QString StrValue = GetText(Setting, QString(), bWithGlobal, true, withTemplates);
-	if (StrValue.compare("y", Qt::CaseInsensitive) == 0)
-		return true;
-	if (StrValue.compare("n", Qt::CaseInsensitive) == 0)
-		return false;
+	QStringList Values = GetTextList(Setting, withTemplates, false, bWithGlobal);
+	foreach(const QString &StrValue, Values) {
+		if (StrValue.contains(","))
+			continue;
+		if (StrValue.compare("y", Qt::CaseInsensitive) == 0)
+			return true;
+		if (StrValue.compare("n", Qt::CaseInsensitive) == 0)
+			return false;
+	}
 	return Default;
 }
 

@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.6.0a / 5.61.0] - 2022-??-??
 
+#changed
+- reorganized cmd entried [#2451](https://github.com/sandboxie-plus/Sandboxie/issues/2451)
+
 #fixed
 - fixed issue with support setting drop down menu multiplying [2502#](https://github.com/sandboxie-plus/Sandboxie/pull/2502) (okrc)
 - Add translations folder to deprecated [#2500](https://github.com/sandboxie-plus/Sandboxie/pull/2500) (lufog)

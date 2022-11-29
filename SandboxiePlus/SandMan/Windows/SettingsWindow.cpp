@@ -141,13 +141,19 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	ui.tabs->setTabIcon(0, CSandMan::GetIcon("Config"));
 	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Shell"));
-	ui.tabs->setTabIcon(2, CSandMan::GetIcon("GUI"));
+	ui.tabs->setTabIcon(2, CSandMan::GetIcon("Design"));
 	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Advanced"));
 	ui.tabs->setTabIcon(4, CSandMan::GetIcon("Alarm"));
 	ui.tabs->setTabIcon(5, CSandMan::GetIcon("Lock"));
 	ui.tabs->setTabIcon(6, CSandMan::GetIcon("Compatibility"));
 	ui.tabs->setTabIcon(7, CSandMan::GetIcon("EditIni"));
 	ui.tabs->setTabIcon(8, CSandMan::GetIcon("Support"));
+
+	ui.tabsGUI->setTabIcon(0, CSandMan::GetIcon("Design"));
+	ui.tabsGUI->setTabIcon(1, CSandMan::GetIcon("Run"));
+
+	ui.tabsAdvanced->setTabIcon(0, CSandMan::GetIcon("Options"));
+	ui.tabsAdvanced->setTabIcon(1, CSandMan::GetIcon("Lock"));
 
 	int size = 16.0;
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -170,23 +176,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	AddIconToLabel(ui.lblUpdates, CSandMan::GetIcon("Update").pixmap(size,size));
 
-
 	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
-	int iOptionLayout = theConf->GetInt("Options/NewConfigLayout", 2);
-	if (iOptionLayout == 2)
-		iOptionLayout = 1; // iViewMode != 2 ? 1 : 0;
-
-	// re structure the UI a bit
-	if (iOptionLayout == 1)
-	{
-		QWidget* pWidget = new QWidget(this);
-		QGridLayout* pLayout = new QGridLayout(pWidget);
-		QTabWidget* pTabs = new QTabWidget();
-		pLayout->addWidget(pTabs, 0, 0);
-		ui.tabs->insertTab(3, pWidget, CSandMan::GetIcon("Advanced"), tr("Advanced Config"));
-		pTabs->addTab(ui.tabAdvanced, CSandMan::GetIcon("Options"), tr("Sandbox Config"));
-		pTabs->addTab(ui.tabLock, CSandMan::GetIcon("Lock"), tr("Config Protection"));
-	}
 
 	/*if (iViewMode == 0)
 	{
@@ -281,6 +271,16 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.cmbSysTray, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
 	connect(ui.cmbTrayBoxes, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
 	connect(ui.chkCompactTray, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+
+
+	connect(ui.btnAddCmd, SIGNAL(clicked(bool)), this, SLOT(OnAddCommand()));
+	QMenu* pRunBtnMenu = new QMenu(ui.btnAddCmd);
+	pRunBtnMenu->addAction(tr("Browse for Program"), this, SLOT(OnBrowsePath()));
+	ui.btnAddCmd->setPopupMode(QToolButton::MenuButtonPopup);
+	ui.btnAddCmd->setMenu(pRunBtnMenu);
+	connect(ui.btnDelCmd, SIGNAL(clicked(bool)), this, SLOT(OnDelCommand()));
+	connect(ui.treeRun, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnRunChanged()));
+
 
 	m_FeaturesChanged = false;
 	connect(ui.chkWFP, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
@@ -405,7 +405,7 @@ void CSettingsWindow::showTab(int Tab, bool bExclusive)
 	case eOptions: pWidget = ui.tabGeneral; break;
 	case eShell: pWidget = ui.tabShell; break;
 	case eGuiConfig: pWidget = ui.tabGUI; break;
-	case eAdvanced: pWidget = ui.tabAdvanced; break;
+	case eAdvanced: pWidget = ui.tabSandbox; break;
 	case eProgCtrl: pWidget = ui.tabAlerts; break;
 	case eConfigLock: pWidget = ui.tabLock; break;
 	case eSoftCompat: pWidget = ui.tabCompat; break;
@@ -456,6 +456,50 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 	}
 
 	return QDialog::eventFilter(source, event);
+}
+
+void CSettingsWindow::OnBrowsePath()
+{
+	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe *.cmd)")).replace("/", "\\");
+	if (Value.isEmpty())
+		return;
+
+	QString Name = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a menu title"), QLineEdit::Normal);
+	if (Name.isEmpty())
+		return;
+
+	AddRunItem(Name, Value);
+}
+
+void CSettingsWindow::OnAddCommand()
+{
+	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a command"), QLineEdit::Normal);
+	if (Value.isEmpty())
+		return;
+
+	QString Name = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a menu title"), QLineEdit::Normal);
+	if (Name.isEmpty())
+		return;
+
+	AddRunItem(Name, Value);
+}
+
+void CSettingsWindow::AddRunItem(const QString& Name, const QString& Command)
+{
+	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	pItem->setText(0, Name);
+	pItem->setText(1, Command);
+	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+	ui.treeRun->addTopLevelItem(pItem);
+}
+
+void CSettingsWindow::OnDelCommand()
+{
+	QTreeWidgetItem* pItem = ui.treeRun->currentItem();
+	if (!pItem)
+		return;
+
+	delete pItem;
 }
 
 Qt::CheckState CSettingsWindow__IsContextMenu()
@@ -582,6 +626,14 @@ void CSettingsWindow::LoadSettings()
 
 	if (theAPI->IsConnected())
 	{
+		ui.treeRun->clear();
+		foreach(const QString& Value, theAPI->GetGlobalSettings()->GetTextList("RunCommand", false))
+		{
+			StrPair NameCmd = Split2(Value, "|");
+			QTreeWidgetItem* pItem = new QTreeWidgetItem();
+			AddRunItem(NameCmd.first, NameCmd.second);
+		}
+
 		QString FileRootPath_Default = "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%";
 		QString KeyRootPath_Default  = "\\REGISTRY\\USER\\Sandbox_%USER%_%SANDBOX%";
 		QString IpcRootPath_Default  = "\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%";
@@ -883,6 +935,13 @@ void CSettingsWindow::SaveSettings()
 	{
 		try
 		{
+			QStringList RunCommands;
+			for (int i = 0; i < ui.treeRun->topLevelItemCount(); i++) {
+				QTreeWidgetItem* pItem = ui.treeRun->topLevelItem(i);
+				RunCommands.append(pItem->text(0) + "|" + pItem->text(1));
+			}
+			WriteTextList("RunCommand", RunCommands);
+
 			WriteText("FileRootPath", ui.fileRoot->text()); //ui.fileRoot->setText("\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%");
 			WriteAdvancedCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", "", "n");
 			WriteText("KeyRootPath", ui.regRoot->text()); //ui.regRoot->setText("\\REGISTRY\\USER\\Sandbox_%USER%_%SANDBOX%");

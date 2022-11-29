@@ -86,6 +86,10 @@ private slots:
 
 	void OnTab();
 
+	void OnBrowsePath();
+	void OnAddCommand();
+	void OnDelCommand();
+
 	void OnChangeGUI() { m_bRebuildUI = true; }
 	void OnFeaturesChanged() { m_FeaturesChanged = true; }
 
@@ -125,6 +129,8 @@ protected:
 	bool eventFilter(QObject *watched, QEvent *e);
 
 	void OnTab(QWidget* pTab);
+
+	void	AddRunItem(const QString& Name, const QString& Command);
 
 	void	AddWarnEntry(const QString& Name, int type);
 

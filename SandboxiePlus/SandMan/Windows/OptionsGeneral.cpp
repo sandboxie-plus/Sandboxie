@@ -154,7 +154,7 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.chkRawDiskNotify, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.btnAddCmd, SIGNAL(clicked(bool)), this, SLOT(OnAddCommand()));
-	QMenu* pRunBtnMenu = new QMenu(ui.btnAddFile);
+	QMenu* pRunBtnMenu = new QMenu(ui.btnAddCmd);
 	pRunBtnMenu->addAction(tr("Browse for Program"), this, SLOT(OnBrowsePath()));
 	ui.btnAddCmd->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnAddCmd->setMenu(pRunBtnMenu);

@@ -171,11 +171,10 @@ void CSbieView::CreateMenu()
 			m_pMenuRunTools->addSeparator();
 			m_pMenuRunCmd = m_pMenuRunTools->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt"), this, SLOT(OnSandBoxAction()));
 			m_pMenuRunCmdAdmin = m_pMenuRunTools->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt (as Admin)"), this, SLOT(OnSandBoxAction()));
-#ifndef _WIN64
+#ifdef _WIN64
 			if(CSbieAPI::IsWow64())
-#endif
 				m_pMenuRunCmd32 = m_pMenuRunTools->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt (32-bit)"), this, SLOT(OnSandBoxAction()));
-
+#endif
 			m_pMenuRunTools->addSeparator();
 			m_pMenuAutoRun = m_pMenuRunTools->addAction(CSandMan::GetIcon("ReloadIni"), tr("Execute Autorun Entries"), this, SLOT(OnSandBoxAction()));
 
@@ -290,7 +289,9 @@ void CSbieView::CreateOldMenu()
 		m_pMenuRunCmd = NULL;
 		m_pMenuRunTools = NULL;
 			m_pMenuRunCmdAdmin = NULL;
+#ifdef _WIN64
 			m_pMenuRunCmd32 = NULL;
+#endif
 			m_pMenuRunRegEdit = NULL;
 			m_pMenuRunAppWiz = NULL;
 			m_pMenuAutoRun = NULL;
@@ -1080,8 +1081,10 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		Results.append(SandBoxes.first()->RunStart("cmd.exe"));
 	else if (Action == m_pMenuRunCmdAdmin)
 		Results.append(SandBoxes.first()->RunStart("cmd.exe", true));
+#ifdef _WIN64
 	else if (Action == m_pMenuRunCmd32)
 		Results.append(SandBoxes.first()->RunStart("C:\\WINDOWS\\SysWOW64\\cmd.exe"));
+#endif
 	else if (Action == m_pMenuPresetsShowUAC)
 	{
 		SandBoxes.first()->SetBoolSafe("DropAdminRights", false);

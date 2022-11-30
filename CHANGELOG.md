@@ -8,16 +8,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.6.0a / 5.61.0] - 2022-??-??
 
 ### Added
-- added global option to add run menu entries to all boxes
+- added global option to introduce run menu entries to all boxes
 
 ### Changed
-- reorganized cmd entried [#2451](https://github.com/sandboxie-plus/Sandboxie/issues/2451)
+- reorganized command prompt entries [#2451](https://github.com/sandboxie-plus/Sandboxie/issues/2451)
 
 ### Fixed
-- fixed issue with support setting drop down menu multiplying [2502#](https://github.com/sandboxie-plus/Sandboxie/pull/2502) (okrc)
-- Add translations folder to deprecated [#2500](https://github.com/sandboxie-plus/Sandboxie/pull/2500) (lufog)
+- fixed issue with support setting drop-down menu multiplying [#2502](https://github.com/sandboxie-plus/Sandboxie/pull/2502) (okrc)
+- added translations folder as deprecated, to be removed upon installation [#2500](https://github.com/sandboxie-plus/Sandboxie/pull/2500) (lufog)
+- fixed issue with disk usage of hidden items not counted [#2503](https://github.com/sandboxie-plus/Sandboxie/pull/2503) (okrc)
 - fixed issue with boolean settings which can also be set per process [#2495](https://github.com/sandboxie-plus/Sandboxie/issues/2495)
-
 
 
 ## [1.6.0 / 5.61.0] - 2022-11-26

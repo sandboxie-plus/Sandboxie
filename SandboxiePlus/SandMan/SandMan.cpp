@@ -2994,9 +2994,9 @@ void CSandMan::SetTitleTheme(const HWND& hwnd)
 {
 	static const int CurrentVersion = QSettings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
 												QSettings::NativeFormat).value("CurrentBuild").toInt();
-	if (CurrentVersion < 22000) // Windows 11-
+	if (CurrentVersion < 17763) // Windows 10 1809 -
 		return;
-
+	
 	HMODULE dwmapi = GetModuleHandle(L"dwmapi.dll");
 	if (dwmapi)
 	{
@@ -3004,11 +3004,17 @@ void CSandMan::SetTitleTheme(const HWND& hwnd)
 		P_DwmSetWindowAttribute pDwmSetWindowAttribute = reinterpret_cast<P_DwmSetWindowAttribute>(GetProcAddress(dwmapi, "DwmSetWindowAttribute"));
 		if (pDwmSetWindowAttribute)
 		{
+#ifndef DWMWA_USE_IMMERSIVE_DARK_MODE_BEFORE_20H1
+#define DWMWA_USE_IMMERSIVE_DARK_MODE_BEFORE_20H1 19
+#endif
 #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 #define DWMWA_USE_IMMERSIVE_DARK_MODE 20
 #endif
-			BOOL value = m_DarkTheme;
-			pDwmSetWindowAttribute(hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, &value, sizeof(value));
+			BOOL bDark = m_DarkTheme;
+			pDwmSetWindowAttribute(hwnd,
+				CurrentVersion >= 18985 ? DWMWA_USE_IMMERSIVE_DARK_MODE : DWMWA_USE_IMMERSIVE_DARK_MODE_BEFORE_20H1,
+				&bDark,
+				sizeof(bDark));
 		}
 	}
 }

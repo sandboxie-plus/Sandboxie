@@ -69,7 +69,7 @@ COnlineUpdater::COnlineUpdater(QObject *parent) : QObject(parent)
 				bIsUpdateReady = true;
 		}
 	}
-	QString OnNewUpdate = theConf->GetString("Options/OnNewUpdate", "install");
+	QString OnNewUpdate = theConf->GetString("Options/OnNewUpdate", "ignore");
 	bool bCanApplyUpdate = OnNewUpdate == "install";
 
 	if (bIsInstallerReady && bCanRunInstaller)
@@ -332,31 +332,36 @@ bool COnlineUpdater::HandleUpdate()
 		}
 	}
 
-	QString OnNewUpdate = theConf->GetString("Options/OnNewUpdate", "install");
+	QString OnNewUpdate = theConf->GetString("Options/OnNewUpdate", "ignore");
 	bool bCanApplyUpdate = (m_CheckMode == eAuto && OnNewUpdate == "install");
-	if (bNewUpdate && (!bNewRelease || (bCanApplyUpdate && !bCanRunInstaller)))
+	if (bNewUpdate)
 	{
-		bool bIsUpdateReady = false;
-		if (theConf->GetString("Updater/UpdateVersion") == MakeVersionStr(Update))
-			bIsUpdateReady = QFile::exists(GetUpdateDir(true) + "/" UPDATE_FILE);
-
-		if (!bIsUpdateReady)
+		if (OnNewUpdate == "ignore")
+			bNewUpdate = false;
+		else if ((!bNewRelease || (bCanApplyUpdate && !bCanRunInstaller)))
 		{
-			// clear when not up to date
-			theConf->DelValue("Updater/UpdateVersion");
+			bool bIsUpdateReady = false;
+			if (theConf->GetString("Updater/UpdateVersion") == MakeVersionStr(Update))
+				bIsUpdateReady = QFile::exists(GetUpdateDir(true) + "/" UPDATE_FILE);
 
-			if ((bCanApplyUpdate || (m_CheckMode == eAuto && OnNewUpdate == "download")) || AskDownload(Update))
+			if (!bIsUpdateReady)
 			{
-				if (DownloadUpdate(Update, m_CheckMode == eManual))
+				// clear when not up to date
+				theConf->DelValue("Updater/UpdateVersion");
+
+				if ((bCanApplyUpdate || (m_CheckMode == eAuto && OnNewUpdate == "download")) || AskDownload(Update))
+				{
+					if (DownloadUpdate(Update, m_CheckMode == eManual))
+						return true;
+				}
+			}
+			else if (m_CheckMode == eManual) {
+				if (ApplyUpdate(false))
 					return true;
 			}
+			else if (bCanApplyUpdate)
+				m_CheckMode = ePendingUpdate;
 		}
-		else if (m_CheckMode == eManual) {
-			if (ApplyUpdate(false))
-				return true;
-		}
-		else if(bCanApplyUpdate)
-			m_CheckMode = ePendingUpdate;
 	}
 
 	if (bIsInstallerReady)

@@ -144,10 +144,9 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.tabs->setTabIcon(2, CSandMan::GetIcon("Design"));
 	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Advanced"));
 	ui.tabs->setTabIcon(4, CSandMan::GetIcon("Alarm"));
-	ui.tabs->setTabIcon(5, CSandMan::GetIcon("Lock"));
-	ui.tabs->setTabIcon(6, CSandMan::GetIcon("Compatibility"));
-	ui.tabs->setTabIcon(7, CSandMan::GetIcon("EditIni"));
-	ui.tabs->setTabIcon(8, CSandMan::GetIcon("Support"));
+	ui.tabs->setTabIcon(5, CSandMan::GetIcon("Compatibility"));
+	ui.tabs->setTabIcon(6, CSandMan::GetIcon("EditIni"));
+	ui.tabs->setTabIcon(7, CSandMan::GetIcon("Support"));
 
 	ui.tabsGUI->setTabIcon(0, CSandMan::GetIcon("Design"));
 	ui.tabsGUI->setTabIcon(1, CSandMan::GetIcon("Run"));
@@ -226,10 +225,12 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.cmbDPI->addItem(tr("Native"), 1);
 	ui.cmbDPI->addItem(tr("Qt"), 2);
 
+	ui.cmbUpdate->addItem(tr("Ignore"), "ignore");
 	ui.cmbUpdate->addItem(tr("Notify"), "notify");
 	ui.cmbUpdate->addItem(tr("Download & Notify"), "download");
 	ui.cmbUpdate->addItem(tr("Download & Install"), "install");
 	
+	//ui.cmbRelease->addItem(tr("Ignore"), "ignore");
 	ui.cmbRelease->addItem(tr("Notify"), "notify");
 	ui.cmbRelease->addItem(tr("Download & Notify"), "download");
 	ui.cmbRelease->addItem(tr("Download & Install"), "install");
@@ -337,13 +338,13 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.lblCurrent, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
 	connect(ui.lblStable, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
 	connect(ui.lblPreview, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
-	connect(ui.lblLive, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
+	//connect(ui.lblLive, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
 
 	connect(ui.chkAutoUpdate, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
 
 	connect(ui.radStable, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
 	connect(ui.radPreview, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
-	connect(ui.radLive, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
+	//connect(ui.radLive, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
 
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
 
@@ -708,12 +709,11 @@ void CSettingsWindow::LoadSettings()
 	QString ReleaseChannel = theConf->GetString("Options/ReleaseChannel", "stable");
 	ui.radStable->setChecked(ReleaseChannel == "stable");
 	ui.radPreview->setChecked(ReleaseChannel == "preview");
-	ui.radLive->setChecked(ReleaseChannel == "live");
+	//ui.radLive->setChecked(ReleaseChannel == "live");
 
 	UpdateUpdater();
 
-	ui.cmbUpdate->setCurrentIndex(ui.cmbUpdate->findData(theConf->GetString("Options/OnNewUpdate", "install")));
-
+	ui.cmbUpdate->setCurrentIndex(ui.cmbUpdate->findData(theConf->GetString("Options/OnNewUpdate", "ignore")));
 	ui.cmbRelease->setCurrentIndex(ui.cmbRelease->findData(theConf->GetString("Options/OnNewRelease", "download")));
 
 
@@ -763,37 +763,27 @@ void CSettingsWindow::UpdateCert()
 
 void CSettingsWindow::UpdateUpdater()
 {
+	//ui.radLive->setEnabled(false);
 	if (!ui.chkAutoUpdate->isChecked()) {
 		ui.cmbUpdate->setEnabled(false);
 		ui.cmbRelease->setEnabled(false);
 		ui.lblRevision->setText(QString());
-
-		if (ui.radLive->isChecked())
-			ui.radPreview->setChecked(true);
-		ui.radLive->setEnabled(false);
 	}
 	else {
-		ui.radLive->setEnabled(true);
-
-		if (ui.radLive->isChecked()) {
-			ui.cmbUpdate->setEnabled(true);
-			ui.cmbRelease->setEnabled(false);
-			ui.lblRevision->setText(tr("Live channel is distributed as revisions only"));
-		}
-		else if (!g_CertInfo.valid
+		if (ui.radStable->isChecked() && (!g_CertInfo.valid
 #ifdef _DEBUG
 			|| (GetKeyState(VK_CONTROL) & 0x8000) != 0
 #endif
-		) {
+			)) {
 			ui.cmbUpdate->setEnabled(false);
-			ui.cmbRelease->setEnabled(true);
+			ui.cmbUpdate->setCurrentIndex(ui.cmbUpdate->findData("ignore"));
 			ui.lblRevision->setText(tr("Supporter certificate required"));
-		}
+		} 
 		else {
 			ui.cmbUpdate->setEnabled(true);
-			ui.cmbRelease->setEnabled(true);
 			ui.lblRevision->setText(QString());
 		}
+		ui.cmbRelease->setEnabled(true);
 	}
 }
 
@@ -1074,8 +1064,8 @@ void CSettingsWindow::SaveSettings()
 		ReleaseChannel = "stable";
 	else if (ui.radPreview->isChecked())
 		ReleaseChannel = "preview";
-	else if (ui.radLive->isChecked())
-		ReleaseChannel = "live";
+	//else if (ui.radLive->isChecked())
+	//	ReleaseChannel = "live";
 	if(!ReleaseChannel.isEmpty()) theConf->SetValue("Options/ReleaseChannel", ReleaseChannel);
 
 	theConf->SetValue("Options/OnNewUpdate", ui.cmbUpdate->currentData());
@@ -1441,7 +1431,7 @@ void CSettingsWindow::OnUpdateData(const QVariantMap& Data, const QVariantMap& P
 	ui.lblCurrent->setText(tr("%1 (Current)").arg(Version));
 	ui.lblStable->setText(CSettingsWindow__MkVersion("stable", Releases));
 	ui.lblPreview->setText(CSettingsWindow__MkVersion("preview", Releases));
-	ui.lblLive->setText(CSettingsWindow__MkVersion("live", Releases));
+	//ui.lblLive->setText(CSettingsWindow__MkVersion("live", Releases));
 }
 
 void CSettingsWindow::OnUpdate(const QString& Channel)

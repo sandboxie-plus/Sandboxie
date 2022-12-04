@@ -221,6 +221,7 @@ Korean.UninstallTaskLabel2=Sandboxie-Plus를 제거하시겠습니까?
 Korean.UninstallTaskLabel3=구성 파일 및 샌드박스 유지(&K)%n구성 파일과 샌드박스를 유지하면서 Sandboxie-Plus를 다시 설치하려는 경우 이 옵션을 사용하는 것이 가장 좋습니다.
 Korean.UninstallTaskLabel4=구성 파일 제거(&C)%n샌드박스를 변경하지 않고 Sandboxie.ini 및 Sandboxie-Plus.ini 구성 파일을 제거하려면 이 옵션을 선택합니다.
 Korean.UninstallTaskLabel5=구성 파일 및 샌드박스 제거(&S)%nFileRootPath를 사용하여 사용자 지정 경로에 있는 샌드박스 폴더를 포함하여 모든 구성 파일과 샌드박스를 제거하려면 이 옵션을 선택하십시오.
+Korean.RefreshBuild=최신 Templates.ini 및 번역 다운로드
 
 ; Polish
 polish.AddSandboxedMenu=Dodaj "Uruchom w piaskownicy" do menu kontekstowego

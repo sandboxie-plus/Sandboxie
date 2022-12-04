@@ -273,13 +273,13 @@
         <location filename="OnlineUpdater.cpp" line="543"/>
         <source>failed to download updated information</source>
         <oldsource>failed to download update informations</oldsource>
-        <translation type="unfinished">업데이트 정보를 다운로드하지 못했습니다</translation>
+        <translation>업데이트 정보를 다운로드하지 못했습니다</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="544"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
-        <translation type="unfinished">업데이트 json 파일을 불러오지 못했습니다</translation>
+        <translation>업데이트 json 파일을 불러오지 못했습니다</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="545"/>
@@ -295,7 +295,7 @@
         <location filename="OnlineUpdater.cpp" line="547"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
-        <translation type="unfinished">업데이트 서명이 잘못되었습니다 !!!</translation>
+        <translation>업데이트 서명이 잘못되었습니다 !!!</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="548"/>
@@ -2054,7 +2054,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2018"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation>선택한 기능 세트는 프로젝트 후원자만 사용할 수 있습니다. 지원자 인증서 없이 이 기능 세트가 활성화된 박스에서 시작된 프로세스는 5분 후에 종료됩니다.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;프로젝트 후원자가 되어&lt;/a&gt;, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;후원 인증서&lt;/a&gt;를 받습니다</translation>
+        <translation>선택한 기능 세트는 프로젝트 후원자만 사용할 수 있습니다. 후원자 인증서 없이 이 기능 세트가 활성화된 박스에서 시작된 프로세스는 5분 후에 종료됩니다.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;프로젝트 후원자가 되어&lt;/a&gt;, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;후원 인증서&lt;/a&gt;를 받습니다</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="87"/>
@@ -3178,7 +3178,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="163"/>
         <source>More Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>추가 도구</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="220"/>
@@ -3529,7 +3529,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="228"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>무시</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="240"/>
@@ -3575,28 +3575,28 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="279"/>
         <source>Browse for Program</source>
-        <translation type="unfinished">프로그램 찾아보기</translation>
+        <translation>프로그램 찾아보기</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="464"/>
         <source>Select Program</source>
-        <translation type="unfinished">프로그램 선택</translation>
+        <translation>프로그램 선택</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="464"/>
         <source>Executables (*.exe *.cmd)</source>
-        <translation type="unfinished">실행 파일 (*.exe *.cmd)</translation>
+        <translation>실행 파일 (*.exe *.cmd)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="468"/>
         <location filename="Windows/SettingsWindow.cpp" line="481"/>
         <source>Please enter a menu title</source>
-        <translation type="unfinished">메뉴 제목을 입력하십시오</translation>
+        <translation>메뉴 제목을 입력하십시오</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="477"/>
         <source>Please enter a command</source>
-        <translation type="unfinished">명령을 입력하십시오</translation>
+        <translation>명령을 입력하십시오</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="744"/>
@@ -3616,7 +3616,7 @@ No will choose: %2</source>
         <location filename="Windows/SettingsWindow.cpp" line="780"/>
         <source>Supporter certificate required</source>
         <oldsource>Supproter certificate required</oldsource>
-        <translation type="unfinished">지원자 인증서 필요</translation>
+        <translation>후원자 인증서 필요</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="883"/>
@@ -3811,7 +3811,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="115"/>
         <source>The installed supporter certificate &lt;b&gt;has expired %1 days ago&lt;/b&gt; and &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;must be renewed&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation>설치된 지원자 인증서가 &lt;b&gt;%1일 전에 만료&lt;/b&gt; 되었으므로 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;갱신해야 합니다&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>설치된 후원자 인증서가 &lt;b&gt;%1일 전에 만료&lt;/b&gt; 되었으므로 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;갱신해야 합니다&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="117"/>
@@ -3857,7 +3857,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="141"/>
         <source>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;, to give you time to contemplate the option of &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</source>
-        <translation>유효한 후원자 인증서가 &lt;u&gt;없는&lt;/u&gt; Sandboxie는 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;프로젝트 지원&lt;/a&gt; 옵션을 고려할 시간을 주기 위해 &lt;b&gt;&lt;font color=&apos;red&apos;&gt;몇 초 동안 &gt;일시 중지&lt;/font&gt;&lt;/b&gt;되기도 합니다&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;  &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;지원자 인증서&lt;/a&gt;는 이러한 주의사항을 제거할 뿐만 아니라 지원자 인증서는 이러한 주의사항을 제거할 뿐만 아니라 향상된 보안 및 호환성을 제공하는 &lt;b&gt;독점적인 고급 기능&lt;/b&gt;을 사용할 수 있습니다.</translation>
+        <translation>유효한 후원자 인증서가 &lt;u&gt;없는&lt;/u&gt; Sandboxie는 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;프로젝트 지원&lt;/a&gt; 옵션을 고려할 시간을 주기 위해 &lt;b&gt;&lt;font color=&apos;red&apos;&gt;몇 초 동안 &gt;일시 중지&lt;/font&gt;&lt;/b&gt;되기도 합니다&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;  &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;후원자 인증서&lt;/a&gt;는 이러한 주의사항을 제거할 뿐만 아니라 후원자 인증서는 이러한 주의사항을 제거할 뿐만 아니라 향상된 보안 및 호환성을 제공하는 &lt;b&gt;독점적인 고급 기능&lt;/b&gt;을 사용할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="172"/>
@@ -5165,7 +5165,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/OptionsWindow.ui" line="1590"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
         <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
-        <translation>여기에 입력된 프로그램은 시작할 때 이 박스에서 벗어날 수 있습니다. 다른 박스에 캡처할 수 있습니다. 예를 들어 웹 브라우저를 항상 전용 박스에 열도록 합니다. 이 기능을 설치하려면 올바른 지원자 인증서를 설치해야 합니다.</translation>
+        <translation>여기에 입력된 프로그램은 시작할 때 이 박스에서 벗어날 수 있습니다. 다른 박스에 캡처할 수 있습니다. 예를 들어 웹 브라우저를 항상 전용 박스에 열도록 합니다. 이 기능을 설치하려면 올바른 후원자 인증서를 설치해야 합니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1617"/>
@@ -6134,37 +6134,37 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="449"/>
         <source>User Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자 인터페이스</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="634"/>
         <source>Run Menu</source>
-        <translation type="unfinished">실행 메뉴</translation>
+        <translation>실행 메뉴</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="652"/>
         <source>Add program</source>
-        <translation type="unfinished">프로그램 추가</translation>
+        <translation>프로그램 추가</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="659"/>
         <source>You can configure custom entries for all sandboxes run menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 샌드박스 실행 메뉴에 대한 사용자 정의 항목을 구성할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="694"/>
         <source>Remove</source>
-        <translation type="unfinished">제거</translation>
+        <translation>제거</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="710"/>
         <source>Command Line</source>
-        <translation type="unfinished">명령 줄</translation>
+        <translation>명령 줄</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="736"/>
         <source>Sandbox Config</source>
-        <translation type="unfinished">샌드박스 구성</translation>
+        <translation>샌드박스 구성</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1094"/>
@@ -6219,7 +6219,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1288"/>
         <source>Version Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>버전 업데이트</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1380"/>
@@ -6242,7 +6242,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1232"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation>이 지원자 인증서가 만료되었습니다, &lt;a href=&quot;sbie://update/cert&quot;&gt;업데이트된 인증서를 받으십시오&lt;/a&gt;.</translation>
+        <translation>이 후원자 인증서가 만료되었습니다, &lt;a href=&quot;sbie://update/cert&quot;&gt;업데이트된 인증서를 받으십시오&lt;/a&gt;.</translation>
     </message>
     <message>
         <source>The live channel provides the latest unsigned test builds.</source>
@@ -6260,7 +6260,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1383"/>
         <source>New Versions</source>
-        <translation type="unfinished"></translation>
+        <translation>새 버전</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1437"/>

@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.6.1 / 5.61.1] - 2022-??-??
+## [1.6.1 / 5.61.1] - 2022-12-04
 
 ### Added
 - added global option to introduce run menu entries to all boxes

@@ -1017,7 +1017,7 @@ Yeni Korumalı Alan Oluştur
 .
 
 3433;txt;01
-Toplama Klasörü Oluştur
+Kapsayıcı Klasörünü Ayarla
 .
 
 3434;txt;01

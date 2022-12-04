@@ -3673,7 +3673,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Views/SbieView.cpp" line="163"/>
         <source>More Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Weitere Werkzeuge</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="186"/>
@@ -3933,7 +3933,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="228"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorieren</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="230"/>
@@ -3950,28 +3950,28 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="279"/>
         <source>Browse for Program</source>
-        <translation type="unfinished">Zu Programm navigieren</translation>
+        <translation>Zu Programm navigieren</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="464"/>
         <source>Select Program</source>
-        <translation type="unfinished">Programm auswählen</translation>
+        <translation>Programm auswählen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="464"/>
         <source>Executables (*.exe *.cmd)</source>
-        <translation type="unfinished">Ausführbare Dateien (*.exe *.cmd)</translation>
+        <translation>Ausführbare Dateien (*.exe *.cmd)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="468"/>
         <location filename="Windows/SettingsWindow.cpp" line="481"/>
         <source>Please enter a menu title</source>
-        <translation type="unfinished">Bitte einen Menütitel eingeben</translation>
+        <translation>Bitte einen Menütitel eingeben</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="477"/>
         <source>Please enter a command</source>
-        <translation type="unfinished">Bitte ein Kommando eingeben</translation>
+        <translation>Bitte ein Kommando eingeben</translation>
     </message>
     <message>
         <source>Live channel is distributed as revisions only</source>
@@ -6600,7 +6600,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="449"/>
         <source>User Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzeroberfläche</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="546"/>
@@ -6704,7 +6704,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1288"/>
         <source>Version Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Versionsupdates</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1380"/>
@@ -6740,7 +6740,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1383"/>
         <source>New Versions</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Versionen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1437"/>
@@ -6789,32 +6789,32 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="634"/>
         <source>Run Menu</source>
-        <translation type="unfinished">Startmenü</translation>
+        <translation>Startmenü</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="652"/>
         <source>Add program</source>
-        <translation type="unfinished">Füge Programm hinzu</translation>
+        <translation>Füge Programm hinzu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="659"/>
         <source>You can configure custom entries for all sandboxes run menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie können benutzerdefinierte Einträge zu den Startmenüs aller Sandboxen hinzufügen.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="694"/>
         <source>Remove</source>
-        <translation type="unfinished">Entfernen</translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="710"/>
         <source>Command Line</source>
-        <translation type="unfinished">Kommandozeile</translation>
+        <translation>Kommandozeile</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="736"/>
         <source>Sandbox Config</source>
-        <translation type="unfinished">Sandboxkonfiguration</translation>
+        <translation>Sandboxkonfiguration</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="751"/>

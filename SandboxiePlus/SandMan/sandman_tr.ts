@@ -3225,7 +3225,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="163"/>
         <source>More Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Daha Fazla Araç</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="220"/>
@@ -3592,7 +3592,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="228"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Yoksay</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="240"/>
@@ -3603,28 +3603,28 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="279"/>
         <source>Browse for Program</source>
-        <translation type="unfinished">Program için Göz At</translation>
+        <translation>Program için Göz At</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="464"/>
         <source>Select Program</source>
-        <translation type="unfinished">Program Seç</translation>
+        <translation>Program Seç</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="464"/>
         <source>Executables (*.exe *.cmd)</source>
-        <translation type="unfinished">Çalıştırılabilir dosyalar (*.exe *.cmd)</translation>
+        <translation>Çalıştırılabilir dosyalar (*.exe *.cmd)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="468"/>
         <location filename="Windows/SettingsWindow.cpp" line="481"/>
         <source>Please enter a menu title</source>
-        <translation type="unfinished">Lütfen bir menü başlığı girin</translation>
+        <translation>Lütfen bir menü başlığı girin</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="477"/>
         <source>Please enter a command</source>
-        <translation type="unfinished">Lütfen bir komut girin</translation>
+        <translation>Lütfen bir komut girin</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="529"/>
@@ -5769,7 +5769,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1383"/>
         <source>New Versions</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni Sürümler</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1417"/>
@@ -6200,7 +6200,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="449"/>
         <source>User Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı Arayüzü</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="621"/>
@@ -6210,32 +6210,32 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="634"/>
         <source>Run Menu</source>
-        <translation type="unfinished">Çalıştır Menüsü</translation>
+        <translation>Çalıştır Menüsü</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="652"/>
         <source>Add program</source>
-        <translation type="unfinished">Program ekle</translation>
+        <translation>Program ekle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="659"/>
         <source>You can configure custom entries for all sandboxes run menus.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="694"/>
         <source>Remove</source>
-        <translation type="unfinished">Kaldır</translation>
+        <translation>Kaldır</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="710"/>
         <source>Command Line</source>
-        <translation type="unfinished">Komut Satırı</translation>
+        <translation>Komut Satırı</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="736"/>
         <source>Sandbox Config</source>
-        <translation type="unfinished">Korumalı Alan Yapılandırması</translation>
+        <translation>Korumalı Alan Yapılandırması</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="882"/>
@@ -6275,7 +6275,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1288"/>
         <source>Version Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürüm Güncellemeleri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1380"/>

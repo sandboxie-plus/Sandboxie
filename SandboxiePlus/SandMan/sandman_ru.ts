@@ -3067,10 +3067,6 @@ No will choose: %2</source>
         <translation>Командная строка</translation>
     </message>
     <message>
-        <source>Boxed Tools</source>
-        <translation type="vanished">Инструменты в песочнице</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="173"/>
         <source>Command Prompt (as Admin)</source>
         <translation>Командная строка (от администратора)</translation>
@@ -3115,7 +3111,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="163"/>
         <source>More Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Дополнительные инструменты</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="220"/>
@@ -3378,18 +3374,6 @@ No will choose: %2</source>
         <translation>Sandboxie Plus - Глобальные настройки</translation>
     </message>
     <message>
-        <source>Advanced Config</source>
-        <translation type="vanished">Расширенная конфигурация</translation>
-    </message>
-    <message>
-        <source>Sandbox Config</source>
-        <translation type="vanished">Конфигурация песочницы</translation>
-    </message>
-    <message>
-        <source>Config Protection</source>
-        <translation type="vanished">Защита конфигурации</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="191"/>
         <source>Auto Detection</source>
         <translation>Автоопределение</translation>
@@ -3462,7 +3446,7 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="228"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Игнорировать</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="240"/>
@@ -3507,28 +3491,28 @@ No will choose: %2</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="279"/>
         <source>Browse for Program</source>
-        <translation type="unfinished">Выбрать программу</translation>
+        <translation>Выбрать программу</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="464"/>
         <source>Select Program</source>
-        <translation type="unfinished">Выбрать программу</translation>
+        <translation>Выбрать программу</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="464"/>
         <source>Executables (*.exe *.cmd)</source>
-        <translation type="unfinished">Исполняемые файлы (*.exe *.cmd)</translation>
+        <translation>Исполняемые файлы (*.exe *.cmd)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="468"/>
         <location filename="Windows/SettingsWindow.cpp" line="481"/>
         <source>Please enter a menu title</source>
-        <translation type="unfinished">Пожалуйста, введите заголовок меню</translation>
+        <translation>Введите название меню</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="477"/>
         <source>Please enter a command</source>
-        <translation type="unfinished">Пожалуйста, введите команду</translation>
+        <translation>Введите команду</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="744"/>
@@ -3539,10 +3523,6 @@ No will choose: %2</source>
         <location filename="Windows/SettingsWindow.cpp" line="749"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Срок действия этого сертификата сторонника &lt;font color=&apos;red&apos;&gt;истечет через %1 дн.&lt;/font&gt;, пожалуйста, &lt;a href=&quot;sbie://update/cert&quot;&gt;получите обновленный сертификат&lt;/a&gt;.</translation>
-    </message>
-    <message>
-        <source>Live channel is distributed as revisions only</source>
-        <translation type="vanished">Live канал распространяется только в виде редакций</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="780"/>
@@ -5945,37 +5925,37 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="449"/>
         <source>User Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользовательский интерфейс</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="634"/>
         <source>Run Menu</source>
-        <translation type="unfinished">Меню запуска</translation>
+        <translation>Меню запуска</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="652"/>
         <source>Add program</source>
-        <translation type="unfinished">Добавить программу</translation>
+        <translation>Добавить программу</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="659"/>
         <source>You can configure custom entries for all sandboxes run menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы можете настроить пользовательские записи для всех меню запуска песочниц.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="694"/>
         <source>Remove</source>
-        <translation type="unfinished">Удалить</translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="710"/>
         <source>Command Line</source>
-        <translation type="unfinished">Командная строка</translation>
+        <translation>Командная строка</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="736"/>
         <source>Sandbox Config</source>
-        <translation type="unfinished">Конфигурация песочницы</translation>
+        <translation>Конфигурация песочницы</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1094"/>
@@ -6030,7 +6010,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1288"/>
         <source>Version Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновления версий</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1380"/>
@@ -6038,30 +6018,14 @@ Please note that this values are currently user specific and saved globally for 
         <translation>Новые полные версии из выбранного канала выпуска.</translation>
     </message>
     <message>
-        <source>Full Updates</source>
-        <translation type="vanished">Полные обновления</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1285"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
         <translation>Хотпатчи для установленной версии, обновления Templates.ini и переводов.</translation>
     </message>
     <message>
-        <source>Version Revisions</source>
-        <translation type="vanished">Версии редакции</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1232"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Срок действия этого сертификата сторонника истек, пожалуйста &lt;a href=&quot;sbie://update/cert&quot;&gt;получите обновленный сертификат&lt;/a&gt;.</translation>
-    </message>
-    <message>
-        <source>The live channel provides the latest unsigned test builds.</source>
-        <translation type="vanished">Канал Live предоставляет последние неподписанные тестовые сборки.</translation>
-    </message>
-    <message>
-        <source>Search in the Live channel</source>
-        <translation type="vanished">Поиск в канале Live</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1308"/>
@@ -6071,7 +6035,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1383"/>
         <source>New Versions</source>
-        <translation type="unfinished"></translation>
+        <translation>Новые версии</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1437"/>

@@ -61,7 +61,7 @@ public:
 	CSbieView*			GetBoxView() { return m_pBoxView; }
 	CFileView*			GetFileView() { return m_pFileView; }
 
-	bool				RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir = QString());
+	bool				RunSandboxed(const QStringList& Commands, QString BoxName = QString(), const QString& WrkDir = QString());
 
 	QIcon				GetBoxIcon(int boxType, bool inUse = false);// , bool inBusy = false);
 	QRgb				GetBoxColor(int boxType) { return m_BoxColors[boxType]; }
@@ -281,6 +281,7 @@ private:
 	QHBoxLayout*		m_pMenuLayout;
 
 	QMenu*				m_pMenuFile;
+	QAction*			m_pRunBoxed;
 	QAction*			m_pNewBox;
 	QAction*			m_pNewGroup;
 	QAction*			m_pImportBox;

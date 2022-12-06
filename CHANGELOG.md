@@ -6,6 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.6.1a / 5.61.1] - 2022-12-??
 
+### Added
+- added run boxed command to the sandbox menu
+
 ### Fixed
 - improved fix for [#2495](https://github.com/sandboxie-plus/Sandboxie/issues/2495)
 

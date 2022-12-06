@@ -455,7 +455,9 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pNewGroup = m_pMenuFile->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnSandBoxAction()));
 		m_pImportBox = m_pMenuFile->addAction(CSandMan::GetIcon("UnPackBox"), tr("Import Box"), this, SLOT(OnSandBoxAction()));
 		m_pMenuFile->addSeparator();
+		m_pRunBoxed = m_pMenuFile->addAction(CSandMan::GetIcon("Run"), tr("Run Sandboxed"), this, SLOT(OnSandBoxAction()));
 		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
+		m_pMenuFile->addSeparator();
 		m_pDisableForce = m_pMenuFile->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce()));
 		m_pDisableForce->setCheckable(true);
 	if(bAdvanced) {
@@ -1254,7 +1256,7 @@ void CSandMan::OnMessage(const QString& MsgData)
 	}
 	else if (Message.left(4) == "Run:")
 	{
-		QString BoxName = "DefaultBox";
+		QString BoxName;
 		QString CmdLine = Message.mid(4);
 
 		if (CmdLine.contains("\\start.exe", Qt::CaseInsensitive)) {
@@ -1309,8 +1311,10 @@ void CSandMan::dragEnterEvent(QDragEnterEvent* e)
 	}
 }
 
-bool CSandMan::RunSandboxed(const QStringList& Commands, const QString& BoxName, const QString& WrkDir)
+bool CSandMan::RunSandboxed(const QStringList& Commands, QString BoxName, const QString& WrkDir)
 {
+	if (BoxName.isEmpty())
+		BoxName = "DefaultBox";
 	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands, BoxName, WrkDir);
 	//pSelectBoxWindow->show();
 	return SafeExec(pSelectBoxWindow) == 1;
@@ -1324,7 +1328,7 @@ void CSandMan::dropEvent(QDropEvent* e)
 			Commands.append(url.toLocalFile().replace("/", "\\"));
 	}
 
-	RunSandboxed(Commands, "DefaultBox");
+	RunSandboxed(Commands);
 }
 
 void CSandMan::timerEvent(QTimerEvent* pEvent)
@@ -1822,6 +1826,7 @@ void CSandMan::OnStatusChanged()
 	m_bIconDisabled = false;
 	m_bIconBusy = false;
 
+	m_pRunBoxed->setEnabled(isConnected);
 	m_pNewBox->setEnabled(isConnected);
 	m_pNewGroup->setEnabled(isConnected);
 	m_pEmptyAll->setEnabled(isConnected);
@@ -2187,6 +2192,8 @@ void CSandMan::OnSandBoxAction()
 		else
 			CSandMan::CheckResults(QList<SB_STATUS>() << Status);
 	}
+	else if (pAction == m_pRunBoxed)
+		RunSandboxed(QStringList() << "run_dialog");
 }
 
 void CSandMan::OnEmptyAll()
@@ -2914,7 +2921,7 @@ void CSandMan::OpenUrl(const QUrl& url)
 		if(bCheck) theConf->SetValue("Options/OpenUrlsSandboxed", iSandboxed);
 	}
 
-	if (iSandboxed) RunSandboxed(QStringList(url.toString()), "DefaultBox");
+	if (iSandboxed) RunSandboxed(QStringList(url.toString()));
 	else ShellExecute(MainWndHandle, NULL, url.toString().toStdWString().c_str(), NULL, NULL, SW_SHOWNORMAL);
 }
 

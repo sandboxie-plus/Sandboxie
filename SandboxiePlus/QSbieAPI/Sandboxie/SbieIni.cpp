@@ -61,13 +61,20 @@ SB_STATUS CSbieIni::SetBool(const QString& Setting, bool Value)
 
 SB_STATUS CSbieIni::SetBoolSafe(const QString& Setting, bool Value)
 {
+	QString StrValue = Value ? "y" : "n";
+	bool bAdd = true;
 	QStringList Values = GetTextList(Setting, false);
-	foreach(const QString & StrValue, Values) {
-		if (StrValue.contains(","))
+	foreach(const QString & CurValue, Values) {
+		if (CurValue.contains(","))
 			continue;
-		DelValue(Setting, StrValue);
+		if (CurValue == StrValue)
+			bAdd = false;
+		else
+			DelValue(Setting, CurValue);
 	}
-	return InsertText(Setting, Value ? "y" : "n");
+	if(bAdd)
+		return InsertText(Setting, StrValue);
+	return SB_OK;
 }
 
 QString CSbieIni::GetText(const QString& Setting, const QString& Default, bool bWithGlobal, bool bNoExpand, bool withTemplates) const

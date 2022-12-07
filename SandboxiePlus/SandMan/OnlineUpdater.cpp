@@ -603,7 +603,7 @@ bool COnlineUpdater::ApplyUpdate(bool bSilent)
 	QVariantMap Update = QJsonDocument::fromJson(ReadFileAsString(GetUpdateDir(true) + "/" UPDATE_FILE).toUtf8()).toVariant().toMap();
 	EUpdateScope Scope =  ScanUpdateFiles(Update);
 	if (Scope == eNone)
-		return true; // nothign to do
+		return true; // nothing to do
 
 	if(Scope != eMeta)
 		theAPI->TerminateAll();

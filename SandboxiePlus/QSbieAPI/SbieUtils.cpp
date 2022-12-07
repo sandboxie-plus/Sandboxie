@@ -74,7 +74,7 @@ SB_RESULT(void*) CSbieUtils::Start(EComponent Component)
 
 void CSbieUtils::Start(EComponent Component, QStringList& Ops)
 {
-	// Note: Service aways starts the driver
+	// Note: Service always starts the driver
 	if ((Component & eService) != 0 && GetServiceStatus(SBIESVC) != SERVICE_RUNNING)
 		Ops.append(QString::fromWCharArray(L"kmdutil.exe|start|" SBIESVC));
 	else if ((Component & eDriver) != 0 && GetServiceStatus(SBIEDRV) != SERVICE_RUNNING)

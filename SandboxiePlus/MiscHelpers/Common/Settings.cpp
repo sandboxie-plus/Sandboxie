@@ -24,7 +24,7 @@ CSettings::CSettings(const QString& AppDir, const QString& AppName, bool bShared
 		//
 		// if shared is set a new ini is created in the shared location 
 		// and if present take precedence over an ini in a user location
-		// howeever if the only existing ini is in a user location it will be used
+		// however if the only existing ini is in a user location it will be used
 		//
 		else if(bShared && dirs.count() > 2 && (
 		  QFile::exists(dirs[1] + "/" + AppName + "/" + AppName + ".ini") ||

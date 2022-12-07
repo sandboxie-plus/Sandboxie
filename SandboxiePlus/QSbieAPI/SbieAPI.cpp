@@ -405,7 +405,7 @@ SB_STATUS CSbieAPI__ConnectPort(SSbieAPI* m)
 	if (!NT_SUCCESS(status))
 		return SB_ERR(status); // 2203
 
-	// Function associate PortHandle with thread, and sends LPC_TERMINATION_MESSAGE to specified port immediatelly after call NtTerminateThread.
+	// Function associate PortHandle with thread, and sends LPC_TERMINATION_MESSAGE to specified port immediately after call NtTerminateThread.
 	//NtRegisterThreadTerminatePort(m->PortHandle);
 
 	m->SizeofPortMsg = sizeof(PORT_MESSAGE);
@@ -485,7 +485,7 @@ SB_STATUS CSbieAPI__CallServer(SSbieAPI* m, MSG_HEADER* req, MSG_HEADER** prpl)
 	if (BuffLen == 0)
 		return SB_ERR(SB_ServiceFail, QVariantList() << QString("null reply (msg %1 len %2)").arg(req->msgid, 8, 16).arg(req->length)); // 2203
 
-	// read remining chunks
+	// read remaining chunks
 	MSG_HEADER*& rpl = *prpl;
 	rpl = (MSG_HEADER*)malloc(BuffLen);
 	Buffer = (UCHAR*)rpl;
@@ -599,7 +599,7 @@ bool CSbieAPI::GetQueue()
 	}
 
 	//if(status == STATUS_END_OF_FILE) // there are no more requests in the queue at this time
-	//	return false; // nothign more to do
+	//	return false; // nothing more to do
 
 	if (NT_SUCCESS(status))
 		return true; // we did something
@@ -722,7 +722,7 @@ SB_STATUS CSbieAPI::CallServer(void* req, void* rpl) const
 	//			So for every new connection we need a new threat, we achieve this by letting our monitor threat issue all requests
 	// 
 	//		 As of Sbie build 5.50.5 the SbieCvc properly handles reconnection attempts so this mechanism is no longer necessary
-	// 	     Howeever for the queue mechanism we need the communication to be still handled by the helper thread
+	// 	     However for the queue mechanism we need the communication to be still handled by the helper thread
 	//
 
 	while (InterlockedCompareExchange(&m->SvcLock, SVC_OP_STATE_PREP, SVC_OP_STATE_IDLE) != SVC_OP_STATE_IDLE)
@@ -1327,7 +1327,7 @@ SB_STATUS CSbieAPI::ValidateName(const QString& BoxName)
 	if (BoxName.length() > 32)
 		return SB_ERR(SB_NameLenLimit);
 
-	/* invalid file name charakters on windows
+	/* invalid file name characters on windows
 	  < (less than)
 	  > (greater than)
 	  : (colon - sometimes works, but is actually NTFS Alternate Data Streams)
@@ -1755,7 +1755,7 @@ QString CSbieAPI::GetDeviceMap()
 
 	HANDLE handle;
 	NTSTATUS status = NtOpenDirectoryObject(&handle, DIRECTORY_QUERY, &objattrs);
-	if (status == STATUS_ACCESS_DENIED) // if we are missign admin rights, lets the driver do it
+	if (status == STATUS_ACCESS_DENIED) // if we are missing admin rights, lets the driver do it
 		status = CSbieAPI__OpenDeviceMap(m, &handle);
 
 	if (!NT_SUCCESS(status)) {

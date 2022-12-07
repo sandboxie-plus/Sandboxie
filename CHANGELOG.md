@@ -4,7 +4,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.6.1a / 5.61.1] - 2022-12-??
+## [1.6.1b / 5.61.1] - 2022-12-??
+
+### Fixed
+- fixed support settign page not showing version updates proeprly
+
+
+
+## [1.6.1a / 5.61.1] - 2022-12-07
 
 ### Added
 - added run boxed command to the sandbox menu
@@ -22,7 +29,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - reorganized command prompt entries [#2451](https://github.com/sandboxie-plus/Sandboxie/issues/2451)
-- the "live" update channel is now part fo the "preview" channel for which Version Udpates can now be disabled
+- the "live" update channel is now part of the "preview" channel for which Version Updates can now be disabled
 
 ### Fixed
 - fixed issue with support setting drop-down menu multiplying [#2502](https://github.com/sandboxie-plus/Sandboxie/pull/2502) (okrc)

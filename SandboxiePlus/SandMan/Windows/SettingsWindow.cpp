@@ -1421,7 +1421,7 @@ QString CSettingsWindow__MkVersion(const QString& Name, const QVariantMap& Relea
 	QVariantMap Release = Releases[Name].toMap();
 	QString Version = Release.value("version").toString();
 	//if (Release["build"].type() != QVariant::Invalid) 
-	int iUpdate = Release["iUpdate"].toInt();
+	int iUpdate = Release["update"].toInt();
 	if(iUpdate) Version += QChar('a' + (iUpdate - 1));
 	return QString("<a href=\"%1\">%2</a>").arg(Name, Version);
 }

@@ -379,7 +379,7 @@ _FX void Dll_InitInjected(void)
   //      // instead of using a separate namespace
   //		// just replace all \ with _ and use it as a sufix rather then an actual path
   //      // similarly a its done for named pipes already
-  //      // this approche can help to reduce teh footprint when running in portable mode
+  //      // this approach can help to reduce the footprint when running in portable mode
   //      // alternatively we could create volatile entries under AppContainerNamedObjects 
   //      //
   //
@@ -453,7 +453,7 @@ _FX void Dll_InitInjected(void)
     if (ok) {
 
         //
-        // ipc must be initialized before anythign else to make delete v2 work
+        // ipc must be initialized before anything else to make delete v2 work
         //
 
         ok = Ipc_Init();
@@ -783,7 +783,7 @@ _FX ULONG_PTR Dll_Ordinal1(
     //
     // on ARM64 we hook LdrLoadDll instead, using the prototype for 
     // RtlFindActCtx is fine though as arguments 1-8 are passed in registers
-    // so if we set x4 or not does not mater in the least
+    // so if we set x4 or not does not matter in the least
     //
 #endif
 
@@ -862,7 +862,7 @@ _FX ULONG_PTR Dll_Ordinal1(
         Dll_InitInjected(); // install required hooks
 
         //
-        // notify RPCSS that a new proces was created in the current sandbox
+        // notify RPCSS that a new process was created in the current sandbox
         //
 
         if (Dll_ImageType != DLL_IMAGE_SANDBOXIE_RPCSS) {
@@ -903,7 +903,7 @@ _FX ULONG_PTR Dll_Ordinal1(
         }
 
         //
-        // explorer needs sandboxed COM show warnign and terminate when COM is not sandboxies
+        // explorer needs sandboxed COM show warning and terminate when COM is not sandboxies
         //
 
         if (Dll_ImageType == DLL_IMAGE_SHELL_EXPLORER && SbieDll_IsOpenCOM()) {

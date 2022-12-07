@@ -410,7 +410,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 
 				bool bAdded = false;
 				if (m_pTrayBoxes->topLevelItemCount() == 0)
-					bAdded = true; // triger size refresh
+					bAdded = true; // trigger size refresh
 
 				QMap<QString, QTreeWidgetItem*> OldBoxes;
 				for (int i = 0; i < m_pTrayBoxes->topLevelItemCount(); ++i)

@@ -2,7 +2,7 @@
 
 #if defined(Q_OS_WIN)
 inline size_t QtKeyToWin(size_t key) {
-    // TODO: other maping or full keys list
+    // TODO: other mapping or full keys list
 
     if (key >= 0x01000030 && key <= 0x01000047) {
         return VK_F1 + (key - Qt::Key_F1);

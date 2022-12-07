@@ -111,7 +111,7 @@ public:
 			}
 		}
 
-		// fill whats left of the line
+		// fill what's left of the line
 		/*top *= 4;
 		if (top < m_Graph.bytesPerLine()) // fill rest white
 			memset(dest + top, 0xFF, m_Graph.bytesPerLine() - top);*/

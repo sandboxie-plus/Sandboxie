@@ -162,7 +162,7 @@ _FX BOOLEAN Ipc_StartServer(const WCHAR *TruePath, BOOLEAN Async)
             if (service == _rpcss) {
 
                 //
-                // starting rpcss: go thrugh SbieSvc ProcessServer
+                // starting rpcss: go through SbieSvc ProcessServer
                 //
 
                 if (! Proc_ImpersonateSelf(TRUE))

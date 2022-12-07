@@ -158,8 +158,8 @@ qint64 CSplitFile::writeData(const char *data, qint64 len)
 	if(m_Index == -1)
 		return -1;
 
-	quint64 writen = 0;
-	while(len - writen)
+	quint64 written = 0;
+	while(len - written)
 	{
 		if(m_Index >= m_FileParts.count())
 		{
@@ -168,19 +168,19 @@ qint64 CSplitFile::writeData(const char *data, qint64 len)
 			m_FileParts.append(pFile);
 		}
 
-		quint64 uToGo = len - writen;
+		quint64 uToGo = len - written;
 		quint64 uAvail = m_PartSize - m_FileParts[m_Index]->pos();
 		if(uToGo > uAvail)
 			uToGo = uAvail;
 
-		quint64 Tmp = m_FileParts[m_Index]->write(data + writen, uToGo);
+		quint64 Tmp = m_FileParts[m_Index]->write(data + written, uToGo);
 		if(Tmp == -1)
 			return -1;
-		writen += Tmp;
+		written += Tmp;
 		m_Position += Tmp;
 
 		if(m_FileParts[m_Index]->pos() >= (qint64)m_PartSize)
 			m_Index++;
 	}
-	return writen;
+	return written;
 }

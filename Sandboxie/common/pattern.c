@@ -305,7 +305,7 @@ _FX ULONG Pattern_Level(PATTERN *pat)
 
 _FX USHORT Pattern_Wildcards(PATTERN *pat)
 {
-    if (pat->info.num_cons == 0) return 0; // empty patters dont have wildcards
+    if (pat->info.num_cons == 0) return 0; // empty patterns don't have wildcards
     return pat->info.num_cons - 1; // between every constant part there is a wildcard
 }
 
@@ -644,7 +644,7 @@ _FX int Pattern_MatchPathList(
 
         ULONG cur_level = Pattern_Level(pat);
         if (cur_level > level)
-            goto next; // no point testing patters with a to weak level
+            goto next; // no point testing patterns with a to weak level
 
         BOOLEAN cur_exact = Pattern_Exact(pat);
         if (!cur_exact && exact)
@@ -660,8 +660,8 @@ _FX int Pattern_MatchPathList(
             wildc = cur_wildc;
             if (patsrc) *patsrc = Pattern_Source(pat);
             
-            // we need to test all entries to find the best match, so we dont break here
-            // unless we found an exact match, than there cant be a batter one
+            // we need to test all entries to find the best match, so we don't break here
+            // unless we found an exact match, than there can't be a batter one
             if (exact)
                 break;
         }

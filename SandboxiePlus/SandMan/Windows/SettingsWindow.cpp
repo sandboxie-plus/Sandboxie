@@ -49,7 +49,7 @@ void FixTriStateBoxPallete(QWidget* pWidget)
 	if (QApplication::style()->objectName() == "windows") {
 
 		//
-		// the built in "windows" theme of Qt does not properly renderd PartiallyChecked
+		// the built in "windows" theme of Qt does not properly rendered PartiallyChecked
 		// checkboxes, to remedi this issue we connect to the stateChanged slot
 		// and change the pattern to improve the rendering.
 		//

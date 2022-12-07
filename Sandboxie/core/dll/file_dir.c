@@ -44,7 +44,7 @@ typedef struct _FILE_MERGE_CACHE_FILE {
 typedef struct _FILE_MERGE_FILE {
 
     HANDLE handle;
-    FILE_SNAPSHOT* shapshot;
+    FILE_SNAPSHOT* snapshot;
     FILE_ID_BOTH_DIR_INFORMATION *info;
     ULONG info_len;
     WCHAR *name;
@@ -774,10 +774,10 @@ _FX NTSTATUS File_OpenForMerge(
 					merge->files[merge->files_count].handle = NULL;
 
 					TruePathDeleted = TRUE;
-					break; // dont look any further
+					break; // don't look any further
 				}
 
-                merge->files[merge->files_count].shapshot = Cur_Snapshot;
+                merge->files[merge->files_count].snapshot = Cur_Snapshot;
 
                 //
 				// copy file passed all checks;  indicate it is ready for use
@@ -793,7 +793,7 @@ _FX NTSTATUS File_OpenForMerge(
 
             //
             // check if we have a relocation and update CopyPath for the next snapshot accordingly
-            // since we dont need opypath anyware anymore we can alter it
+            // since we don't need opypath anyware anymore we can alter it
             //
 
             if (File_Delete_v2) {
@@ -837,7 +837,7 @@ _FX NTSTATUS File_OpenForMerge(
 	// and can let the system work directly on the true file
 	//
 
-    if ((TruePathFlags & FILE_CHILDREN_DELETED_FLAG) == 0) // we ned to do full merge if children ar marked deleted
+    if ((TruePathFlags & FILE_CHILDREN_DELETED_FLAG) == 0) // we need to do full merge if children ar marked deleted
     if (merge->files_count == 0) {
 
 		status = STATUS_BAD_INITIAL_PC;
@@ -915,7 +915,7 @@ _FX NTSTATUS File_OpenForMerge(
         //
         // if rule specificity is enabled we may not have access to this true path
         // but still have access to some sub paths, in this case instead of listing the
-        // true directory we parse the rule list and construst a cached dummy directory
+        // true directory we parse the rule list and construct a cached dummy directory
         //
 
         if (use_rule_specificity && File_MergeDummy(TruePath, merge->true_ptr, &merge->file_mask) == STATUS_SUCCESS) {
@@ -1733,10 +1733,10 @@ _FX NTSTATUS File_GetMergedInformation(
                 *ptr = L'\0';
 
                 //
-                // chekc if the file is listed as deleted
+                // check if the file is listed as deleted
                 //
 
-                if (File_IsDeletedEx(TruePath2, CopyPath2, best->shapshot))
+                if (File_IsDeletedEx(TruePath2, CopyPath2, best->snapshot))
                     continue;
 
             } //else // is in copy path - nothing to do
@@ -2289,7 +2289,7 @@ _FX NTSTATUS File_NtCloseImpl(HANDLE FileHandle)
     }
 
     //
-    // preapre delete disposition if set
+    // prepare delete disposition if set
     //
 
     if (DeleteOnClose) {
@@ -3242,7 +3242,7 @@ _FX NTSTATUS File_SetReparsePoint(
         //TargetPath = Dll_Alloc((wcslen(CopyPath) + 4) * sizeof(WCHAR));
         //wcscpy(TargetPath, CopyPath);
 
-        WCHAR* OldPrintNameBuffer = PrintNameBuffer; // we dont need to change the display name
+        WCHAR* OldPrintNameBuffer = PrintNameBuffer; // we don't need to change the display name
 
         SubstituteNameLength = wcslen(CopyPath) * sizeof(WCHAR);
 

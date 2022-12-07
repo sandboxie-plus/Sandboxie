@@ -244,7 +244,7 @@ void DriverAssist::LogMessage_Multi(
     if (u.info.Type != REG_SZ || u.info.DataLength >= sizeof(u))
         return;
 
-    // go through a ',' or ';' separated list of messge ID's, return message id is not listed
+    // go through a ',' or ';' separated list of message ID's, return message id is not listed
     WCHAR *ptr = (WCHAR *)u.info.Data;
     while (*ptr) {
         if (_wtoi(ptr) == (msgid & 0xFFFF))

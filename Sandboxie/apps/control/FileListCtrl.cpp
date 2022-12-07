@@ -1248,7 +1248,7 @@ void CFileListCtrl::OnContextMenu(CWnd *pWnd, CPoint pt)
     MyEnsureVisible(index);
 
     //
-    // proces selection and display context menu
+    // process selection and display context menu
     //
 
     CMenu *pMenu = m_pContextMenu->GetSubMenu(0);

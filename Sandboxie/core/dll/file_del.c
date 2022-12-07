@@ -27,7 +27,7 @@
 
 #define FILE_PATH_FILE_NAME     L"FilePaths.dat"
 
-// path flages, saved to file
+// path flags, saved to file
 #define FILE_DELETED_FLAG       0x0001
 #define FILE_RELOCATION_FLAG    0x0002
 
@@ -564,7 +564,7 @@ _FX VOID File_RefreshPathTree()
     if (WaitForSingleObject(File_BoxRootWatcher, 0) == WAIT_OBJECT_0) {
 
         //
-        // somethign changed, reload the path tree
+        // something changed, reload the path tree
         //
 
         File_LoadPathTree();

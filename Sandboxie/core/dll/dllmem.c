@@ -327,7 +327,7 @@ ALIGNED WCHAR *Dll_GetTlsNameBuffer(THREAD_DATA *data, ULONG which, ULONG size)
 
     //
     // since we have more places where we may need a name buffer now
-    // instead of sticking to "which" and doing our best to not reuse a particualr buffer thats still needed
+    // instead of sticking to "which" and doing our best to not reuse a particular buffer that's still needed
     // we just increment a counter and take a new buffer reach time we request one
     //
 
@@ -374,7 +374,7 @@ ALIGNED WCHAR *Dll_GetTlsNameBuffer(THREAD_DATA *data, ULONG which, ULONG size)
 
     //
     // debug checks:  the name buffer is allocated at least 64 bytes
-    // more than needed.  fill these with 0xCC, andd check that later
+    // more than needed.  fill these with 0xCC, and check that later
     //
 
 #ifdef DEBUG_MEMORY
@@ -432,7 +432,7 @@ _FX void Dll_PopTlsNameBuffer(THREAD_DATA *data)
 
     //
     // debug checks:  the name buffer is allocated at least 64 bytes
-    // more than needed.  fill these with 0xCC, andd check that later
+    // more than needed.  fill these with 0xCC, and check that later
     //
 
 #ifdef DEBUG_MEMORY

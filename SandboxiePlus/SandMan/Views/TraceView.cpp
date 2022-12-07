@@ -10,7 +10,7 @@
 //class CTraceFilterProxyModel : public CSortFilterProxyModel
 //{
 //public:
-//	CTraceFilterProxyModel(QObject* parrent = 0) : CSortFilterProxyModel(parrent)
+//	CTraceFilterProxyModel(QObject* parent = 0) : CSortFilterProxyModel(parent)
 //	{
 //		m_FilterPid = 0;
 //		m_FilterTid = 0;

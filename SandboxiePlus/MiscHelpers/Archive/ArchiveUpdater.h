@@ -22,7 +22,7 @@ public:
 	STDMETHOD(GetStream)(UInt32 index, ISequentialInStream **inStream);
 	STDMETHOD(SetOperationResult)(Int32 operationResult)							{return S_OK;}
 
-	// depricated 
+	// deprecated 
 	STDMETHOD(GetVolumeSize)(UInt32 index, UInt64 *size)							{return S_FALSE;}
 	STDMETHOD(GetVolumeStream)(UInt32 index, ISequentialOutStream **volumeStream)	{return S_FALSE;}
 

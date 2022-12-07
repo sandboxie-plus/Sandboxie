@@ -268,7 +268,7 @@ SB_STATUS CSbieIni::RenameSection( const QString& NewName, bool deleteOld) // No
 	}
 
 	// if the name is the same we first delete than write, 
-	// else we first write and than delete, fro safety reasons
+	// else we first write and than delete, for safety reasons
 	if (deleteOld && SameName)
 		goto do_delete;
 

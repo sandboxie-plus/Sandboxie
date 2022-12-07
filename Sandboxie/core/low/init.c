@@ -223,7 +223,7 @@ _FX void PrepSyscalls(SBIELOW_DATA *data, void * SystemService)
 
         //
         // Windows on arm64 uses a special syscall wrapper functions
-        // when runnign in arm64ec / x64 mode hence we need to 
+        // when running in arm64ec / x64 mode hence we need to 
         // point our SystemService's NtDeviceIoControlFile to 
         // a replica of the #NtDeviceIoControlFile EC variant
         //
@@ -369,7 +369,7 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
 #ifdef _M_ARM64
 
         //
-        // On arm64 syscall wraper functions looks like this:
+        // On arm64 syscall wrapper functions looks like this:
         //  svc #0xXXX
         //  ret
         //  DCD 0
@@ -519,7 +519,7 @@ _FX void InitSyscalls(SBIELOW_DATA *data, void * SystemService)
 _FX NTSTATUS MyImageOptionsEx(PUNICODE_STRING SubKey, PCWSTR ValueName, 
     ULONG Type, PVOID Buffer, ULONG BufferSize, PULONG ReturnedLength, BOOLEAN Wow64, SBIELOW_DATA* data)
 {
-    // Note: A normal string like L"LoadCHPEBinaries" would not resultin position independant code !!!
+    // Note: A normal string like L"LoadCHPEBinaries" would not resultin position independent code !!!
     wchar_t LoadCHPEBinaries[] = { 'L','o','a','d','C','H','P','E','B','i','n','a','r','i','e','s',0 }; 
     PCWSTR ptr = ValueName;
     for (PCWSTR tmp = LoadCHPEBinaries; *ptr && *tmp && *ptr == *tmp; ptr++, tmp++);

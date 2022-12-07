@@ -124,7 +124,7 @@ void COptionsWindow::ShowTemplates()
 			continue;
 
 		if (I.key().isEmpty())
-			continue; // dont show templates without a category (these are usually deprecated templates)
+			continue; // don't show templates without a category (these are usually deprecated templates)
 
 		QString Name = I.value().first.mid(9);
 

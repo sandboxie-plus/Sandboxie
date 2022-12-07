@@ -79,9 +79,9 @@ static void File_InitSnapshots(void);
 _FX WCHAR File_Scramble_Char(WCHAR wValue, int Key, BOOLEAN scram)
 {
 	//
-	// This function allows to scramble file name charakters properly, 
-	// i.e. no invalid cahacters can result fron this operation.
-	// It does not scramble invalid charakters like: " * / : < > ? \ |
+	// This function allows to scramble file name characters properly, 
+	// i.e. no invalid characters can result from this operation.
+	// It does not scramble invalid characters like: " * / : < > ? \ |
 	// And it does not scramble ~
 	// The entropy of the scrambler is 25,5bit (i.e. 52 million values)
 	//
@@ -275,7 +275,7 @@ _FX ULONG File_GetPathFlagsEx(const WCHAR *TruePath, const WCHAR *CopyPath, WCHA
 		EnterCriticalSection(File_PathRoot_CritSec);
 
 		//
-		// check true path relocation and deleteion for the active state
+		// check true path relocation and deletion for the active state
 		//
 
 		Flags = File_GetPathFlags_internal(&File_PathRoot, TruePath, &Relocation, TRUE); // this requires a name buffer
@@ -304,7 +304,7 @@ _FX ULONG File_GetPathFlagsEx(const WCHAR *TruePath, const WCHAR *CopyPath, WCHA
 	//
 	// we need a few helper buffers here, to make it efficient we will exploit
 	// an implementation artefact of the TlsNameBuffer mechanism, namely
-	// the property that after a pop the buffers remain valid untill the next push
+	// the property that after a pop the buffers remain valid until the next push
 	// 
 	// so we can pop out of the current frame request a buffer of the required size
 	// and still read from the buffer that was filled in the previosue frame
@@ -369,7 +369,7 @@ _FX ULONG File_GetPathFlagsEx(const WCHAR *TruePath, const WCHAR *CopyPath, WCHA
 		if (File_Delete_v2) 
 		{
 			//
-			// check true path relocation and deleteion for the current snapshot
+			// check true path relocation and deletion for the current snapshot
 			//
 
 			TmplRelocation = NULL;
@@ -444,21 +444,21 @@ _FX ULONG File_IsDeletedEx(const WCHAR* TruePath, const WCHAR* CopyPath, FILE_SN
 
 _FX void File_InitSnapshots(void)
 {
-	WCHAR ShapshotsIni[MAX_PATH] = { 0 };
-	wcscpy(ShapshotsIni, Dll_BoxFilePath);
-	wcscat(ShapshotsIni, L"\\Snapshots.ini");
-	SbieDll_TranslateNtToDosPath(ShapshotsIni);
+	WCHAR SnapshotsIni[MAX_PATH] = { 0 };
+	wcscpy(SnapshotsIni, Dll_BoxFilePath);
+	wcscat(SnapshotsIni, L"\\Snapshots.ini");
+	SbieDll_TranslateNtToDosPath(SnapshotsIni);
 
-	WCHAR Shapshot[FILE_MAX_SNAPSHOT_ID] = { 0 };
-	GetPrivateProfileStringW(L"Current", L"Snapshot", L"", Shapshot, FILE_MAX_SNAPSHOT_ID, ShapshotsIni);
+	WCHAR Snapshot[FILE_MAX_SNAPSHOT_ID] = { 0 };
+	GetPrivateProfileStringW(L"Current", L"Snapshot", L"", Snapshot, FILE_MAX_SNAPSHOT_ID, SnapshotsIni);
 
-	if (*Shapshot == 0)
+	if (*Snapshot == 0)
 		return; // not using snapshots
 
 	File_Snapshot = Dll_Alloc(sizeof(FILE_SNAPSHOT));
 	memzero(File_Snapshot, sizeof(FILE_SNAPSHOT));
-	wcscpy(File_Snapshot->ID, Shapshot);
-	File_Snapshot->IDlen = wcslen(Shapshot);
+	wcscpy(File_Snapshot->ID, Snapshot);
+	File_Snapshot->IDlen = wcslen(Snapshot);
 	FILE_SNAPSHOT* Cur_Snapshot = File_Snapshot;
 	File_Snapshot_Count = 1;
 
@@ -466,8 +466,8 @@ _FX void File_InitSnapshots(void)
 	{
 		Cur_Snapshot->ScramKey = CRC32(Cur_Snapshot->ID, Cur_Snapshot->IDlen * sizeof(WCHAR));
 
-		WCHAR ShapshotId[26] = L"Snapshot_";
-		wcscat(ShapshotId, Shapshot);
+		WCHAR SnapshotId[26] = L"Snapshot_";
+		wcscat(SnapshotId, Snapshot);
 		
 		if (File_Delete_v2) 
 		{
@@ -480,19 +480,19 @@ _FX void File_InitSnapshots(void)
 			File_LoadPathTree_internal(&Cur_Snapshot->PathRoot, PathFile);
 		}
 
-		//WCHAR ShapshotName[34] = { 0 };
-		//GetPrivateProfileStringW(ShapshotId, L"Name", L"", ShapshotName, 34, ShapshotsIni);
-		//wcscpy(Cur_Snapshot->Name, ShapshotName);
+		//WCHAR SnapshotName[34] = { 0 };
+		//GetPrivateProfileStringW(SnapshotId, L"Name", L"", SnapshotName, 34, SnapshotsIni);
+		//wcscpy(Cur_Snapshot->Name, SnapshotName);
 
-		GetPrivateProfileStringW(ShapshotId, L"Parent", L"", Shapshot, 16, ShapshotsIni);
+		GetPrivateProfileStringW(SnapshotId, L"Parent", L"", Snapshot, 16, SnapshotsIni);
 
-		if (*Shapshot == 0)
+		if (*Snapshot == 0)
 			break; // no more snapshots
 
 		Cur_Snapshot->Parent = Dll_Alloc(sizeof(FILE_SNAPSHOT));
 		memzero(Cur_Snapshot->Parent, sizeof(FILE_SNAPSHOT));
-		wcscpy(Cur_Snapshot->Parent->ID, Shapshot);
-		Cur_Snapshot->Parent->IDlen = wcslen(Shapshot);
+		wcscpy(Cur_Snapshot->Parent->ID, Snapshot);
+		Cur_Snapshot->Parent->IDlen = wcslen(Snapshot);
 		Cur_Snapshot = Cur_Snapshot->Parent;
 		File_Snapshot_Count++;
 	}

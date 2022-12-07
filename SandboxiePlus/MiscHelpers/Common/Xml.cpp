@@ -256,7 +256,7 @@ struct SQVariants{
 		Map.insert("Point"		, 25);
 		Map.insert("PointF"		, 26);
 		Map.insert("RegExp"		, 27);*/
-		Map.insert("Hash"		, QVariant::Hash);	// conainter type
+		Map.insert("Hash"		, QVariant::Hash);	// container type
 
 		/*Map.insert("Font"		, 64);
 		Map.insert("Pixmap"		, 65);

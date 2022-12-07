@@ -1494,7 +1494,7 @@ SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, boo
 	
 	{
 		SB_PROGRESS Status;
-		if (Mode != eForDelete && !DeleteShapshots && pBox->HasSnapshots()) { // in auto delete mdoe always return to last snapshot
+		if (Mode != eForDelete && !DeleteShapshots && pBox->HasSnapshots()) { // in auto delete mode always return to last snapshot
 			QString Current;
 			QString Default = pBox->GetDefaultSnapshot(&Current);
 			Status = pBox->SelectSnapshot(Mode == eAuto ? Current : Default);
@@ -1997,11 +1997,11 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 
 	OnLogMessage(Message);
 
-	if ((MsgCode & 0xFFFF) == 6004) // certificat error
-		return; // dont pop that one up
+	if ((MsgCode & 0xFFFF) == 6004) // certificate error
+		return; // don't pop that one up
 
 	if ((MsgCode & 0xFFFF) == 2111) // process open denided
-		return; // dont pop that one up
+		return; // don't pop that one up
 
 	if(MsgCode != 0 && theConf->GetBool("Options/ShowNotifications", true) && !IsDisableMessages())
 		m_pPopUpWindow->AddLogMessage(Message, MsgCode, MsgData, ProcessId);

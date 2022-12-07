@@ -530,7 +530,7 @@ CString CTreePropSheet::SplitPageTreePath(CString &strRest)
         else if (nSeperatorPos>0)
         {
             // if there is an odd number of backslashes infront of the
-            // seperator, than do not interpret it as separator
+            // separator, than do not interpret it as separator
             int nBackslashCount = 0;
             for (int nPos = nSeperatorPos-1; nPos >= 0 && strRest[nPos]==_T('\\'); --nPos, ++nBackslashCount);
             if (nBackslashCount%2 == 0)
@@ -933,7 +933,7 @@ BOOL CTreePropSheet::OnInitDialog()
         width_for_checkbox_text = AlignButtonsToRight();
     }
 
-    // finally create tht tree control
+    // finally create the tree control
     DWORD dwTreeStyle = WS_TABSTOP|WS_CHILD|WS_VISIBLE
                       | TVS_SHOWSELALWAYS|TVS_TRACKSELECT|TVS_HASLINES|TVS_LINESATROOT|TVS_HASBUTTONS|TVS_SINGLEEXPAND;
     ULONG dwTreeExStyle = WS_EX_CLIENTEDGE|WS_EX_NOPARENTNOTIFY;

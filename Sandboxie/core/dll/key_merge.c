@@ -461,7 +461,7 @@ _FX NTSTATUS Key_OpenForMerge(
         //
         // if rule specificity is enabled we may not have access to this true path
         // but still have access to some sub paths, in this case instead of listing the
-        // true directory we parse the rule list and construst a cached dummy directory
+        // true directory we parse the rule list and construct a cached dummy directory
         //
 
         if (use_rule_specificity)

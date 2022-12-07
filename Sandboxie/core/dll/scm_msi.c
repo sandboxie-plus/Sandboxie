@@ -205,7 +205,7 @@ _FX HANDLE Scm_CreateWaitableTimerW(
 {
 
     //
-    // When MsiServer is not started as system (missing the admin groupe) this call fails
+    // When MsiServer is not started as system (missing the admin group) this call fails
     //
 
     lpTimerAttributes = NULL;

@@ -401,7 +401,7 @@ _FX LONG SbieApi_LogMsgEx(
 	API_LOG_MESSAGE_ARGS *args = (API_LOG_MESSAGE_ARGS *)parms;
 
 	//
-	// the msg_data can contain multiple strings separated by L'\0' charakters
+	// the msg_data can contain multiple strings separated by L'\0' characters
 	//
 
 	msgtext.Buffer = (ULONG_PTR)msg_data;

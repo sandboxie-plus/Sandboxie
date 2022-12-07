@@ -308,7 +308,7 @@ protected:
 	bool DelProgramFromGroup(const QString& Program, const QString& Group);
 	QTreeWidgetItem* FindGroupByName(const QString& Group, bool bAdd = false);
 
-	void CopyGroupToList(const QString& Groupe, QTreeWidget* pTree, bool disabled = false);
+	void CopyGroupToList(const QString& Group, QTreeWidget* pTree, bool disabled = false);
 	QTreeWidgetItem* GetAccessEntry(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path);
 	void SetAccessEntry(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path);
 	void DelAccessEntry(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path);

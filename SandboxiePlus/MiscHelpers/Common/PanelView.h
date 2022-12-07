@@ -48,7 +48,7 @@ protected slots:
 protected:
 	void						UpdateCopyMenu();
 	void						AddCopyMenu(QMenu* pMenu, bool bAddSeparator = true);
-	void						FormatAndCopy(QList<QStringList> Rows, bool Headder = true);
+	void						FormatAndCopy(QList<QStringList> Rows, bool Header = true);
 
 	QMenu*						m_pMenu;
 

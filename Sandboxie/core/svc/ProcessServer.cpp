@@ -1025,7 +1025,7 @@ BOOL ProcessServer::RunSandboxedSetDacl(
             // in Sandboxie version 5.57 instead of using the anonymous SID 
             // we can use box specific custom SIDs,
             // when comparing we skip the revision and the SubAuthorityCount
-            // also we conpare only teh domain portion of the SID as the rest 
+            // also we conpare only the domain portion of the SID as the rest 
             // will be different for each box
             //
            
@@ -1128,7 +1128,7 @@ BOOL ProcessServer::RunSandboxedStripPrivilege(HANDLE NewTokenHandle, LPCWSTR lp
 BOOL ProcessServer::RunSandboxedStripPrivileges(HANDLE NewTokenHandle)
 {
     BOOLEAN ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_TCB_NAME);           // security critical
-    if (ok) ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_CREATE_TOKEN_NAME);  // usualyl not held, but in case
+    if (ok) ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_CREATE_TOKEN_NAME);  // usually not held, but in case
     //if (ok) ok = RunSandboxedStripPrivilege(NewTokenHandle, SE_ASSIGNPRIMARYTOKEN_NAME);
     return ok;
 }

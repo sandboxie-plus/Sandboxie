@@ -255,7 +255,7 @@ bool CBoxedProcess::InitProcessInfo()
 #undef ProcessCommandLineInformation
 	}
 
-	if (m_CommandLine.isEmpty()) // fall back to teh win 7 method - requirers PROCESS_VM_READ
+	if (m_CommandLine.isEmpty()) // fall back to the win 7 method - requirers PROCESS_VM_READ
 	{
 		m_CommandLine = CBoxedProcess__GetPebString(ProcessHandle, PhpoCommandLine);
 	}
@@ -330,7 +330,7 @@ bool CBoxedProcess::IsSuspended() const
 {
 	bool isSuspended = true;
 
-	// todo: do that globaly once per sec for all boxed processes
+	// todo: do that globally once per sec for all boxed processes
 
 	// Note: If the specified process is a 64-bit process and the caller is a 32-bit process, this function fails and the last error code is ERROR_PARTIAL_COPY (299).
 	HANDLE hThreadSnap = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);

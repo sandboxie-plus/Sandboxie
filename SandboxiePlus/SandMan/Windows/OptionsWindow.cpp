@@ -380,7 +380,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	CreateGeneral();
 
-	// Groupes
+	// Groups
 	connect(ui.btnAddGroup, SIGNAL(clicked(bool)), this, SLOT(OnAddGroup()));
 	connect(ui.btnAddProg, SIGNAL(clicked(bool)), this, SLOT(OnAddProg()));
 	connect(ui.btnDelProg, SIGNAL(clicked(bool)), this, SLOT(OnDelProg()));
@@ -1151,7 +1151,7 @@ void COptionsWindow::SaveIniSection()
 void COptionsWindow::TriggerPathReload()
 {
 	//
-	// this message makes all boxes reload thair path presets
+	// this message makes all boxes reload their path presets
 	//
 
 	DWORD bsm_app = BSM_APPLICATIONS;

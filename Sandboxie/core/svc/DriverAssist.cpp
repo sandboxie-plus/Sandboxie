@@ -312,7 +312,7 @@ void DriverAssist::MsgWorkerThread(void *MyMsg)
         // we update the ini cache each time the driver reloads the ini file.
         // 
         // In newer builds the driver tells us which process issued the reload
-        // if we did it we dont need to purge the cached ini data
+        // if we did it we don't need to purge the cached ini data
         //
 
         if(data_len < sizeof(ULONG) || *(ULONG*)data_ptr != GetCurrentProcessId())
@@ -501,7 +501,7 @@ void DriverAssist::RestartHostInjectedSvcs()
     // resulting in this function getting triggered way to often, 
     // hence we implement a small workaround.
     // The first thread to hit this monitors how many 
-    // calls go in and waits untill the last one,
+    // calls go in and waits until the last one,
     // then it starts the Job.
     //
 
@@ -538,7 +538,7 @@ typedef struct _FILE_FS_PERSISTENT_VOLUME_INFORMATION {
 
 } FILE_FS_PERSISTENT_VOLUME_INFORMATION, *PFILE_FS_PERSISTENT_VOLUME_INFORMATION;
 
-// FltFsControlFile or ZwFsControlFile call # to query persistant volume info (if used in DDK)
+// FltFsControlFile or ZwFsControlFile call # to query persistent volume info (if used in DDK)
 // CAN ALSO USE WITH: DeviceIOControl (which is what we will do)
 #define FSCTL_QUERY_PERSISTENT_VOLUME_STATE CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 143, METHOD_BUFFERED, FILE_ANY_ACCESS)  // FILE_FS_PERSISTENT_VOLUME_INFORMATION
 

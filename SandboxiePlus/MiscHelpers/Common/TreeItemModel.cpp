@@ -214,7 +214,7 @@ void CTreeItemModel::Purge(STreeNode* pParent, const QModelIndex &parent, QHash<
 				pNode->Icon.clear();
 			}
 
-			if(End != -1) // remove whats to be removed at once
+			if(End != -1) // remove what's to be removed at once
 			{
 				Begin = i + 1;
 

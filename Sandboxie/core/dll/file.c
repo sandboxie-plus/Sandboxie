@@ -3130,7 +3130,7 @@ ReparseLoop:
             //
             // firefox starting with version 106 opens plugin exe's with GENERIC_WRITE
             // to mitigate this issue we strip this flag when we detect that it tries to 
-            // do that with an exe that exists outside teh sandbox
+            // do that with an exe that exists outside the sandbox
             //
 
             if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX && (DesiredAccess & GENERIC_WRITE)) {
@@ -4042,7 +4042,7 @@ _FX BOOLEAN File_CheckDeletedParent(WCHAR *CopyPath)
         }
 
 		//
-		// If we have snapshots check thair status, if we have a entry in the most recent snapshot
+		// If we have snapshots check their status, if we have a entry in the most recent snapshot
 		// than older delete markings are not relevant
 		//
 
@@ -5047,7 +5047,7 @@ _FX NTSTATUS File_NtQueryFullAttributesFileImpl(
             File_CreateBoxedPath(OriginalPath ? OriginalPath : TruePath);
         }
         else if (OriginalPath) {
-            ; // try TruePath which points by now to teh snapshot location
+            ; // try TruePath which points by now to the snapshot location
         }
         else {
 
@@ -6324,8 +6324,8 @@ _FX LONG File_RenameOpenFile(
     BOOLEAN replace_if_exists)
 {
     //
-    // in compartment mode we dont need driver assistance we can do things ourselvs
-    // this code is a port of the same routine in teh driver
+    // in compartment mode we don't need driver assistance we can do things ourselves
+    // this code is a port of the same routine in the driver
     //
 
     NTSTATUS status;
@@ -6955,7 +6955,7 @@ after_rename:
             else {
 
                 //
-                // if it does nto exist check if it was a directory, it may be a boxed directroy 
+                // if it does not exist check if it was a directory, it may be a boxed directory 
                 // which is a relocation target in which case we will need to update the relocation data
                 //
 

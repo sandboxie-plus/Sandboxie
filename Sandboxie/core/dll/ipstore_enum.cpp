@@ -245,7 +245,7 @@ IEnumPStoreTypes *IEnumPStoreTypesImpl::CreateEnumSubtype(
 
 
 //---------------------------------------------------------------------------
-// IEnumPStoreTypesImpl Defeault Constructor
+// IEnumPStoreTypesImpl Default Constructor
 //---------------------------------------------------------------------------
 
 

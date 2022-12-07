@@ -174,7 +174,7 @@ union SCertInfo {
             valid     : 1, // certificate is active
             expired   : 1, // certificate is expired but may be active
             outdated  : 1, // certificate is expired, not anymore valid for the current build
-            business  : 1, // certificate is siutable for business use
+            business  : 1, // certificate is suitable for business use
             evaluation: 1, // evaluation certificate
             reservd_1 : 3,
             reservd_2 : 8,
@@ -182,7 +182,7 @@ union SCertInfo {
 			reservd_4 : 8;
 		qint32 
 			expirers_in_sec : 30, 
-			unused_1        : 1, // skim a couple high bits to use as flags flag, 0x3fffffff -> is 34 years count down isenough
+			unused_1        : 1, // skim a couple high bits to use as flags flag, 0x3fffffff -> is 34 years count down is enough
 			about_to_expire : 1; 
     };
 };

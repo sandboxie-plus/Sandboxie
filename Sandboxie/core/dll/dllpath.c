@@ -516,7 +516,7 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
     
     if (Pattern_MatchPathListEx(path_lwr, path_len, normal_list, &level, &match_len, &exact, &wildc, NULL)) { //patsrc)) {
         mp_flags = 0;
-        // dont goto finish as open can overwrite this 
+        // don't goto finish as open can overwrite this 
     }
 
     //

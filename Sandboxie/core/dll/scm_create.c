@@ -1361,7 +1361,7 @@ _FX BOOL Scm_StartServiceCtrlDispatcherX(
     // if the service never started, report error
     //
 
-    Sbie_snwprintf(text, 130, L"StartServiceCtrlDispatcher; result: %s", Scm_Started ? L"sucess" : L"failure");
+    Sbie_snwprintf(text, 130, L"StartServiceCtrlDispatcher; result: %s", Scm_Started ? L"success" : L"failure");
     SbieApi_MonitorPutMsg(MONITOR_SCM, text);
 
     if (! Scm_Started) {

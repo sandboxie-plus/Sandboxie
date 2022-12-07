@@ -131,7 +131,7 @@ Sbie_SepFilterTokenHandler_asm PROC
 
 Sbie_CallZwServiceFunction_asm PROC
 
-    ldr  x16,[sp,#0x58]     ; preapre the sys call number
+    ldr  x16,[sp,#0x58]     ; prepare the sys call number
     ldr  x9, =Driver_KiServiceInternal
     ldr  x8, [x9]
     br   x8                 ; jump to KiServiceInternal

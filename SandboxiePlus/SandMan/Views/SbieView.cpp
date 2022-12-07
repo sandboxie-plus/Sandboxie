@@ -843,7 +843,7 @@ void CSbieView::OnGroupAction(QAction* Action)
 			{
 				QString Group = m_pSbieModel->GetID(ModelIndex).toString();
 
-				QStringList Items = m_Groups.take(Group); // remove groupe
+				QStringList Items = m_Groups.take(Group); // remove group
 		
 				// remove from parents
 				for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I) {
@@ -899,7 +899,7 @@ void CSbieView::OnGroupAction(QAction* Action)
 			}
 		}
 	}
-	else // move to groupe
+	else // move to group
 	{
 		QString Group = Action->data().toString();
 		
@@ -1391,7 +1391,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		}
 
 		QString Path = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation).replace("/", "\\");
-		//Path = QFileDialog::getExistingDirectory(this, tr("Select Directory to create Shorcut in"), Path).replace("/", "\\");
+		//Path = QFileDialog::getExistingDirectory(this, tr("Select Directory to create Shortcut in"), Path).replace("/", "\\");
 		//if (Path.isEmpty())
 		//	return;
 
@@ -1461,7 +1461,7 @@ void CSbieView::OnProcessAction(QAction* Action, const QList<CBoxedProcessPtr>& 
 			QString LinkPath = pProcess->GetFileName();
 
 			QString Path = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation).replace("/", "\\");
-			//Path = QFileDialog::getExistingDirectory(this, tr("Select Directory to create Shorcut in"), Path).replace("/", "\\");
+			//Path = QFileDialog::getExistingDirectory(this, tr("Select Directory to create Shortcut in"), Path).replace("/", "\\");
 			//if (Path.isEmpty())
 			//	return;
 

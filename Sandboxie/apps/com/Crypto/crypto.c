@@ -108,7 +108,7 @@ ALIGNED BOOL my_DuplicateHandle(
     if ((! ok) && GetLastError() == ERROR_ACCESS_DENIED) {
 
         //
-        // the client process for the CryptSvc service is ocassionally
+        // the client process for the CryptSvc service is occasionally
         // running under LocalSystem (typically during MSI installations).
         // CryptSvc tries to duplicate an event handle and fails so
         // we fake successful operation.

@@ -23,7 +23,7 @@
 ; SbieSrv.exe named Lowlevel.  The code section is copied from this resource
 ; and load directly in to memory and injected in to various targets.  Thus the
 ; code section of this dll is executed like shell code because of the manual 
-; load techinque used by SbieSrv.exe and needs to execute in various memory locations
+; load technique used by SbieSrv.exe and needs to execute in various memory locations
 ; since it is the injected code.  SbieSrv.exe will parse the PE Header of
 ; lowlevel.dll to locate the code section and copy it.  To simplify the work 
 ; needed to locate key locations with in the object code generated

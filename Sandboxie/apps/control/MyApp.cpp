@@ -250,7 +250,7 @@ BOOL CMyApp::InitInstance()
     CBoxes::GetInstance().RefreshProcesses();
 
     //
-    // setup autoplay cancelation
+    // setup autoplay cancellation
     //
 
     CAutoPlay::Install();

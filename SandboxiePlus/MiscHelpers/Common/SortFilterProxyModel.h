@@ -10,7 +10,7 @@ class MISCHELPERS_EXPORT CSortFilterProxyModel: public QSortFilterProxyModel
 	Q_OBJECT
 
 public:
-	CSortFilterProxyModel(QObject* parrent = 0) : QSortFilterProxyModel(parrent) 
+	CSortFilterProxyModel(QObject* parent = 0) : QSortFilterProxyModel(parent) 
 	{
 		m_bHighLight = false;
 		m_iColumn = 0;

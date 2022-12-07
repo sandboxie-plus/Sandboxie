@@ -490,7 +490,7 @@ union _SCertInfo {
             valid     : 1, // certificate is active
             expired   : 1, // certificate is expired but may be active
             outdated  : 1, // certificate is expired, not anymore valid for the current build
-            business  : 1, // certificate is siutable for business use
+            business  : 1, // certificate is suitable for business use
             evaluation: 1, // evaluation certificate
             reservd_1 : 3,
             reservd_2 : 8,

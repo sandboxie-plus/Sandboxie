@@ -61,7 +61,7 @@ typedef struct _VECTOR_TABLE {
   int maxEntries;
 } VECTOR_TABLE;
 
-#define VTABLE_SIZE 0x4000 //16k enough for 2048 8 byte entrys
+#define VTABLE_SIZE 0x4000 //16k enough for 2048 8 byte entries
 
 #endif _WIN64
 extern ULONG Dll_Windows;
@@ -748,7 +748,7 @@ typedef struct _DETOUR_TRAMPOLINE
     //   3 instructions to form immediate
     //   br or brl
     //
-    // A theoretical maximum for rbCode is thefore 4*4*6 + 16 = 112 (another 16 for jmp to pbRemain).
+    // A theoretical maximum for rbCode is therefore 4*4*6 + 16 = 112 (another 16 for jmp to pbRemain).
     //
     // With literals, the maximum expansion is 5, including the literals: 4*4*5 + 16 = 96.
     //
@@ -1047,7 +1047,7 @@ void* SbieDll_Hook_arm(
 
         //
         // if that fails just start at the exact offset and try again
-        // without the hot patch area which we dont use anyways
+        // without the hot patch area which we don't use anyways
         //
 
         RegionBase = &func[0];

@@ -453,7 +453,7 @@ static SOCKET WSA_WSASocketW(
         else {
 
             //
-            // dont ask again on success
+            // don't ask again on success
             //
 
             WSA_WFPisBlocking = FALSE;
@@ -751,9 +751,9 @@ _FX int WSA_AcceptEx(
     LPOVERLAPPED lpOverlapped)
 {
     //
-    // this call can operate asynchroniusly, hence we can not simply filter here the incomming connection
+    // this call can operate asynchroniusly, hence we can not simply filter here the incoming connection
     // as we have a proepr WFP filter in the driver for now this usermode filtering implementation 
-    // will not filter incomming traffic at all, normally users ate beind NATs or other firewall so 
+    // will not filter incoming traffic at all, normally users ate behind NATs or other firewall so 
     // blocking only outgoing connections should be good enough
     //
 

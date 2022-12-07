@@ -77,7 +77,7 @@ ULONG Pattern_Level(PATTERN *pat);
 USHORT Pattern_Wildcards(PATTERN *pat);
 
 //
-// Pattern_Exact:  returns true if the patter has no wildcard at the end
+// Pattern_Exact:  returns true if the pattern has no wildcard at the end
 //
 
 BOOLEAN Pattern_Exact(PATTERN *pat);

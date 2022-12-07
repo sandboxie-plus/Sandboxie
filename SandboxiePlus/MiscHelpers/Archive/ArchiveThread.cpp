@@ -132,7 +132,7 @@ void C7zWorker::OnExtractAllFiles()
 	m_Lock.Release();
 
 	SArcInfo Info = GetArcInfo(m_ArchivePath);
-	if(Info.FormatIndex == 0) // not an arcive just a split file
+	if(Info.FormatIndex == 0) // not an archive just a split file
 	{
 		if(!QDir().exists(m_WorkingPath))
 			QDir().mkpath(m_WorkingPath);

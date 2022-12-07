@@ -205,7 +205,7 @@ _FX BOOLEAN Syscall_Init_List(void)
     List_Init(&Syscall_List);
 
     //
-    // preapre the approve and disabled lists
+    // prepare the approve and disabled lists
     //
 
     LIST disabled_hooks;

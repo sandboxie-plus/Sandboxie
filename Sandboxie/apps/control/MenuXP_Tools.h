@@ -24,7 +24,7 @@
 #pragma once
 
 ///////////////////////////////////////////////////////////////////////////////
-// Usefull macros
+// Useful macros
 //
 #define KEYDOWN(Key) ((GetKeyState(Key)&0x8000)!=0)
 #define ON_WM_MOUSEOUT() \

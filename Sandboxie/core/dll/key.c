@@ -266,7 +266,7 @@ static NTSTATUS Key_NtLoadKey2(
 static NTSTATUS Key_NtLoadKey3(
     OBJECT_ATTRIBUTES *TargetObjectAttributes,
     OBJECT_ATTRIBUTES *SourceObjectAttributes, ULONG Flags,
-    PVOID LoadArguments, ULONG LoadArgumentCount, ACCESS_MASK DesiredAccess, HANDLE KeyHandle, ULONG Unkown);
+    PVOID LoadArguments, ULONG LoadArgumentCount, ACCESS_MASK DesiredAccess, HANDLE KeyHandle, ULONG Unknown);
 
 static NTSTATUS Key_NtLoadKeyEx(
     OBJECT_ATTRIBUTES *TargetObjectAttributes,
@@ -1583,7 +1583,7 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
             TruePath = OldTruePath;
         }
 
-        // if key marked as deleted dont even try opening true path
+        // if key marked as deleted don't even try opening true path
         if (KEY_PATH_DELETED(TruePathFlags) && CreateOptions == tzuk) { 
             status = STATUS_OBJECT_NAME_NOT_FOUND;
             __leave;
@@ -4455,7 +4455,7 @@ _FX NTSTATUS Key_NtRenameKey(
         goto finish;
 
     //
-    // rename the key ensuring we wil have a boxed copy
+    // rename the key ensuring we will have a boxed copy
     // try renaming if it fails with access denided try again with a new handle
     //
 
@@ -4782,7 +4782,7 @@ _FX NTSTATUS Key_NtLoadKey2(
 _FX NTSTATUS Key_NtLoadKey3(
     OBJECT_ATTRIBUTES *TargetObjectAttributes,
     OBJECT_ATTRIBUTES *SourceObjectAttributes, ULONG Flags,
-    PVOID LoadArguments, ULONG LoadArgumentCount, ACCESS_MASK DesiredAccess, HANDLE KeyHandle, ULONG Unkown)
+    PVOID LoadArguments, ULONG LoadArgumentCount, ACCESS_MASK DesiredAccess, HANDLE KeyHandle, ULONG Unknown)
 {
     NTSTATUS status;
     WCHAR* WorkPath;
@@ -4802,7 +4802,7 @@ _FX NTSTATUS Key_NtLoadKey3(
     }
 
     status = __sys_NtLoadKey3(TargetObjectAttributes, SourceObjectAttributes, Flags,
-        LoadArguments, LoadArgumentCount, DesiredAccess, KeyHandle, Unkown);
+        LoadArguments, LoadArgumentCount, DesiredAccess, KeyHandle, Unknown);
     if (status == STATUS_PRIVILEGE_NOT_HELD && !Dll_CompartmentMode)
         SbieApi_Log(2205, L"NtLoadKey3");
         //status = Key_NtLoadKeyImpl(TargetObjectAttributes, WorkPath);

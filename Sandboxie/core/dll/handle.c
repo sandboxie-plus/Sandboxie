@@ -102,7 +102,7 @@ _FX VOID Handle_SetRelocationPath(HANDLE FileHandle, WCHAR* RelocationPath)
     EnterCriticalSection(&Handle_StatusData_CritSec);
 
     HANDLE_STATE* state = map_get(&Handle_StatusData, FileHandle);
-    if (!state) { // this shoudl always be the case, as we only use Handle_SetRelocationPath when the handle is first created
+    if (!state) { // this should always be the case, as we only use Handle_SetRelocationPath when the handle is first created
         state = map_insert(&Handle_StatusData, FileHandle, NULL, sizeof(HANDLE_STATE));
     } else  if (state->RelocationPath) Dll_Free(state->RelocationPath); // should not happen but in case
 

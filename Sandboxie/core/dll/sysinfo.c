@@ -226,7 +226,7 @@ _FX void SysInfo_DiscardProcesses(SYSTEM_PROCESS_INFORMATION *buf)
 
 	WCHAR* hiddenProcesses = NULL;
 	WCHAR* hiddenProcessesPtr = NULL;
-	ULONG hiddenProcessesLen = 100 * 110; // we can hide up to 100 processes, sould be enough
+	ULONG hiddenProcessesLen = 100 * 110; // we can hide up to 100 processes, should be enough
 	WCHAR hiddenProcess[110];
 
 	for (ULONG index = 0; ; ++index) {

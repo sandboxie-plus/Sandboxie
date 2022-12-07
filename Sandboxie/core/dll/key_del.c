@@ -29,7 +29,7 @@
 
 // Keep in sync with the FILE_..._FLAG's in file_del.c
 // 
-// path flages, saved to file
+// path flags, saved to file
 #define KEY_DELETED_FLAG       0x0001
 #define KEY_RELOCATION_FLAG    0x0002
 
@@ -75,7 +75,7 @@ static ULONG Key_IsDeleted_v2(const WCHAR* TruePath);
 static ULONG Key_IsDeletedEx_v2(const WCHAR* TruePath, const WCHAR* ValueName, BOOLEAN IsValue);
 
 //
-// we re use the _internal functions of the file implementation as thay all are generic enough
+// we re use the _internal functions of the file implementation as they all are generic enough
 //
 
 VOID File_ClearPathBranche_internal(LIST* parent);
@@ -168,7 +168,7 @@ _FX VOID Key_RefreshPathTree()
     if (WaitForSingleObject(Key_BoxRootWatcher, 0) == WAIT_OBJECT_0) {
 
         //
-        // somethign changed, reload the path tree
+        // something changed, reload the path tree
         //
 
         Key_LoadPathTree();
@@ -224,7 +224,7 @@ _FX NTSTATUS Key_MarkDeletedEx_v2(const WCHAR* TruePath, const WCHAR* ValueName)
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
     WCHAR* FullPath = Dll_GetTlsNameBuffer(TlsData, TMPL_NAME_BUFFER, 
-        (wcslen(TruePath) + (ValueName ? wcslen(ValueName) : 0) + 16) * sizeof(WCHAR)); // template buffer is not used for reg reputpose it here
+        (wcslen(TruePath) + (ValueName ? wcslen(ValueName) : 0) + 16) * sizeof(WCHAR)); // template buffer is not used for reg repurpose it here
 
     wcscpy(FullPath, TruePath);
     if (ValueName) {
@@ -277,7 +277,7 @@ _FX ULONG Key_IsDeletedEx_v2(const WCHAR* TruePath, const WCHAR* ValueName, BOOL
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
     WCHAR* FullPath = Dll_GetTlsNameBuffer(TlsData, TMPL_NAME_BUFFER, 
-        (wcslen(TruePath) + (ValueName ? wcslen(ValueName) : 0) + 16) * sizeof(WCHAR)); // template buffer is not used for reg reputpose it here
+        (wcslen(TruePath) + (ValueName ? wcslen(ValueName) : 0) + 16) * sizeof(WCHAR)); // template buffer is not used for reg repurpose it here
 
     wcscpy(FullPath, TruePath);
     if (ValueName) {

@@ -1136,8 +1136,8 @@ int Program_Start(void)
         //
 
         //
-        // note: this workaround does nto work the path is still blocked 
-        // and we still get problems, hence now the deriver has an excemption for start.exe
+        // note: this workaround does not work the path is still blocked 
+        // and we still get problems, hence now the derive has an exemption for start.exe
         //
 
         //LoadLibrary(L"apphelp.dll");
@@ -1284,7 +1284,7 @@ int Program_Start(void)
         SetLastError(err);
         Show_Error(errmsg);
 
-        keep_alive = FALSE; // disable keep alive when the process cant be started in the first place
+        keep_alive = FALSE; // disable keep alive when the process can't be started in the first place
             
         return EXIT_FAILURE;
 
@@ -1802,8 +1802,8 @@ int __stdcall WinMainCRTStartup(
         rc = Program_Start();
 
         // keep the process running unless it gracefully terminates
-        if (keep_alive && rc != EXIT_SUCCESS && retry++ < 5) { // after to many initialization failures abbort
-            if (::GetTickCount() - start >= 5000) // if the process run for less than 5 seconts considder it a failure to initialize
+        if (keep_alive && rc != EXIT_SUCCESS && retry++ < 5) { // after to many initialization failures abort
+            if (::GetTickCount() - start >= 5000) // if the process run for less than 5 seconds consider it a failure to initialize
                 retry = 0; // reset failure counter on success ful start
             goto run_program;
         }

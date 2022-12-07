@@ -829,7 +829,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
 
         //
         // many 3rd party drivers are a great attack vector to gain execution in the kernel, 
-        // so we clsoe all typical endpoints except a selected few.
+        // so we close all typical endpoints except a selected few.
         //
 
         ok = Process_AddPath(proc, closed_file_paths, NULL, FALSE, File_Device, TRUE);

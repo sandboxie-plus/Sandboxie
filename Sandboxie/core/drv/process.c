@@ -1190,7 +1190,7 @@ _FX BOOLEAN Process_NotifyProcess_Create(
 #ifdef DRV_BREAKOUT
         //
         // check if this process is set up as break out program,
-        // it must't be located in a sandboxed for this to work.
+        // it mustn't be located in a sandboxed for this to work.
         //
 
         BOX* breakout_box = NULL;

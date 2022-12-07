@@ -50,14 +50,14 @@ int CArchive::Open()
 {
 	if(!theArc.IsOperational())
 	{
-		LogError("Couldnt open interface");
+		LogError("Couldn't open interface");
 		return 0; // failed
 	}
 
 	if(m_Archive)
 	{
 		LogError("archive is already open");
-		return 0; // failes
+		return 0; // fails
 	}
 
 	if(!m_pDevice && !QFile::exists(m_ArchivePath))
@@ -116,24 +116,24 @@ int CArchive::Open()
 		{
 			m_Archive->In->GetProperty(i, j, &prop);
 
-			QVariant Propertie;
+			QVariant Property;
 			switch (prop.vt)
 			{
-				case VT_BSTR:		Propertie = QString::fromStdWString(prop.bstrVal);		break;
-				case VT_UI1:		Propertie = prop.bVal;									break;
-				case VT_UI2:		Propertie = prop.uiVal;									break;
-				case VT_UI4:		Propertie = (qint32)prop.ulVal;							break;
-				case VT_UI8:		Propertie = (qint64)prop.uhVal.QuadPart;				break;
-				case VT_BOOL:		Propertie =	VARIANT_BOOLToBool(prop.boolVal);			break;
-				case VT_FILETIME:	Propertie = *reinterpret_cast<qint64*>(&prop.filetime);	break;	// ToDo
+				case VT_BSTR:		Property = QString::fromStdWString(prop.bstrVal);		break;
+				case VT_UI1:		Property = prop.bVal;									break;
+				case VT_UI2:		Property = prop.uiVal;									break;
+				case VT_UI4:		Property = (qint32)prop.ulVal;							break;
+				case VT_UI8:		Property = (qint64)prop.uhVal.QuadPart;					break;
+				case VT_BOOL:		Property =	VARIANT_BOOLToBool(prop.boolVal);			break;
+				case VT_FILETIME:	Property = *reinterpret_cast<qint64*>(&prop.filetime);	break;	// ToDo
 				default: 
 					//TRACE(L"Unhandled archive property %S (%d)", QS2CS(GetPropertyName(j)), prop.vt);
 				case VT_EMPTY:
 					continue;
 			}
 
-			File.Properties.insert(GetPropertyName(j), Propertie);
-			//TRACE(L" >> File %S: %S=%S", QS2CS(File.Properties["Path"].toString()), QS2CS(GetPropertyName(j)), QS2CS(Propertie.toString()));
+			File.Properties.insert(GetPropertyName(j), Property);
+			//TRACE(L" >> File %S: %S=%S", QS2CS(File.Properties["Path"].toString()), QS2CS(GetPropertyName(j)), QS2CS(Property.toString()));
 		}
 		m_Files.append(File);
 	}
@@ -213,7 +213,7 @@ bool CArchive::Update(QMap<int, QIODevice*> *FileList, bool bDelete, int Level)
 {
 	if(!theArc.IsOperational())
 	{
-		LogError("Couldnt open interface");
+		LogError("Couldn't open interface");
 		return false; 
 	}
 
@@ -307,11 +307,11 @@ bool CArchive::Update(QMap<int, QIODevice*> *FileList, bool bDelete, int Level)
     CMyComPtr<IArchiveUpdateCallback2> callback(new CArchiveUpdater(this, Files));
 	if(OutArchive->UpdateItems(new CArchiveIO(m_pDevice ? m_pDevice : pFile, QIODevice::WriteOnly, m_pDevice == NULL), FileCount(), callback) != S_OK)
 	{
-		LogError("Error(s) while updateing Archive");
+		LogError("Error(s) while updating Archive");
 		return false;
 	}
 
-	Close(); // close even if it wasnt open to clear the file list
+	Close(); // close even if it wasn't open to clear the file list
 	if(bUpdate)
 	{
 		if(!m_pDevice)
@@ -449,7 +449,7 @@ SArcInfo GetArcInfo(const QString &FileName)
 		ArcInfo.FileName.remove(Pos, ArcInfo.FileName.length()-Pos);
 	}
 
-	// RAR spetial case
+	// RAR special case
 	if(ArcInfo.ArchiveExt.indexOf(QRegularExpression("(rar|rev|r[0-9]{2,})", QRegularExpression::CaseInsensitiveOption)) == 0)
 	{
 		if(ArcInfo.ArchiveExt.compare("rar", Qt::CaseInsensitive) == 0 || ArcInfo.ArchiveExt.compare("rev", Qt::CaseInsensitive) == 0) // is this a new naming scheme

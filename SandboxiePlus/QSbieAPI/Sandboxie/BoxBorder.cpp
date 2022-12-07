@@ -308,8 +308,8 @@ void CBoxBorder::TimerProc()
 
 		// 
 		// in windows 10 and 11 if this is truly fullscreen the taskbar does not appear when hidden
-		// if its 1 px less on any side it works normally, so we pick bottom as thets where the taskbar usualyl is
-		// but with the taskbar to the side it woudl also work
+		// if its 1 px less on any side it works normally, so we pick bottom as that's where the taskbar usually is
+		// but with the taskbar to the side it would also work
 		//
 
 		if (rect.bottom == Monitor.rcWork.bottom) 

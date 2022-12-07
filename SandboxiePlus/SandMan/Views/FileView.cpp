@@ -267,7 +267,7 @@ void CFileView::OnFileMenu(const QPoint&)
             QString LinkName = LinkPath.mid(LinkPath.lastIndexOf("\\") + 1);
 
 			QString Path = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation).replace("/", "\\");
-			//Path = QFileDialog::getExistingDirectory(this, tr("Select Directory to create Shorcut in"), Path).replace("/", "\\");
+			//Path = QFileDialog::getExistingDirectory(this, tr("Select Directory to create Shortcut in"), Path).replace("/", "\\");
 			//if (Path.isEmpty())
 			//	return;
 

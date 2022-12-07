@@ -840,7 +840,7 @@ FunctionEnd
 
 Function CheckUpdates
 
-  StrCpy $0 "instal"
+  StrCpy $0 "install"
   StrCmp $InstallType "Install" DoCheck
   StrCpy $0 "upgrade"
 

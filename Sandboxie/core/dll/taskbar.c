@@ -592,7 +592,7 @@ _FX void Taskbar_SetWindowAppUserModelId(HWND hwnd)
     //
 
     // Note: without the right value we may end up with multiple window groups 
-    //          so don't do anythign if we dont have Taskbar_SavedAppUserModelId
+    //          so don't do anything if we don't have Taskbar_SavedAppUserModelId
     //          see also disabled Taskbar_SetProcessAppUserModelId
     //if (!Taskbar_SavedAppUserModelId)
     //    return;

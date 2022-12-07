@@ -622,7 +622,7 @@ BOOLEAN Scm_HookRegisterServiceCtrlHandler(HMODULE module)
 {
 
 #ifndef _M_ARM64
-    // $HookHack$ - Custom, not automated, Hook no longer applyes to later windows 10 builds
+    // $HookHack$ - Custom, not automated, Hook no longer applies to later windows 10 builds
 #ifdef _WIN64
     static const UCHAR PrologW[] = {
         0x45, 0x33, 0xC9,                       // xor r9d,r9d

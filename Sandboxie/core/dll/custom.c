@@ -466,7 +466,7 @@ _FX BOOLEAN EnableMsiDebugging(void)
 //---------------------------------------------------------------------------
 // DisableEdgeBoost
 //
-// Disable esge startup boost
+// Disable edge startup boost
 //---------------------------------------------------------------------------
 
 

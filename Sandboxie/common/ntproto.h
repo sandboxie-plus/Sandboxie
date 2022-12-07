@@ -547,7 +547,7 @@ typedef NTSTATUS (*P_NtLoadKey3)(
     IN  ULONG LoadArgumentCount, 
     IN  ACCESS_MASK DesiredAccess, 
     IN  HANDLE KeyHandle, 
-    IN  ULONG Unkown);
+    IN  ULONG Unknown);
 
 typedef NTSTATUS (*P_NtLoadKeyEx)(
     IN  POBJECT_ATTRIBUTES TargetKey,

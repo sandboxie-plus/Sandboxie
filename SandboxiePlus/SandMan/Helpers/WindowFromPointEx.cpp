@@ -78,8 +78,8 @@ static BOOL CALLBACK FindBestChildProc(HWND hwnd, LPARAM lParam)
 //  ourselves, and find the one that best fits under the mouse -
 //  the smallest window that fits, in fact.
 //
-//  I've tested this on alot of different apps, and it seems
-//  to work flawlessly - in fact, I havn't found a situation yet
+//  I've tested this on a lot of different apps, and it seems
+//  to work flawlessly - in fact, I haven't found a situation yet
 //  that this method doesn't work on.....we'll see!
 //
 //  Inputs:

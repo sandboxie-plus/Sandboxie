@@ -233,7 +233,7 @@ BOOL CDeleteDialog::OnInitDialog()
         pButton->ShowWindow(SW_HIDE);
 
     //
-    // hide buttons accoording to dialog mode
+    // hide buttons according to dialog mode
     //
 
     pCtl = GetDlgItem(IDCLOSE);

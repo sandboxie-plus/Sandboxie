@@ -246,7 +246,7 @@ void CBorderGuard::Refresh()
                 //
                 // window rect is same as last recorded window rect
                 // but if we track title area for border then also
-                // check the cursor is stil in the title area
+                // check the cursor is still in the title area
                 //
 
                 refresh = FALSE;

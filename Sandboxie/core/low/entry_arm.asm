@@ -339,7 +339,7 @@ LdrLoadGood
 
     ldr     x0, [x19, 0x60]                 ; [x19].InjectData.ModuleHandle
     mov     x1, #0x00                       ; FunctionName
-    mov     x2, #0x01                       ; Oridinal
+    mov     x2, #0x01                       ; Ordinal
     add     x3, x19, 0x68                   ; [x19].InjectData.SbieDllOrdinal1
     mov     x4, x19                         ; [x19].InjectData
 

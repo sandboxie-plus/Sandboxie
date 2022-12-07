@@ -117,7 +117,7 @@ SPropertyNames::SPropertyNames()
 	Map.insert(kpidPhySize, "PhySize");
 	Map.insert(kpidHeadersSize, "HeadersSize");
 	Map.insert(kpidChecksum, "Checksum");
-	Map.insert(kpidCharacts, "Characts");
+	Map.insert(kpidCharacts, "Characters");
 	Map.insert(kpidVa, "Va");
 	Map.insert(kpidId, "Id");
 	Map.insert(kpidShortName, "ShortName");

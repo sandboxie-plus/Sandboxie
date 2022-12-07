@@ -117,7 +117,7 @@
         mmw.show();
         return app.exec();
     }
-    \endcode
+    \end code
 
     Once this QtSingleApplication instance is destroyed (normally when
     the process exits or crashes), when the user next attempts to run the

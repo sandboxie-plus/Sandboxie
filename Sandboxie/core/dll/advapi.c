@@ -657,7 +657,7 @@ _FX ULONG AdvApi_GetEffectiveRightsFromAclW(
     PACL pacl, void *pTrustee, PACCESS_MASK pAccessRights)
 {
     //
-    // some programs (e.g HP printer software intaller) use
+    // some programs (e.g HP printer software installer) use
     // GetEffectiveRightsFromAcl to confirm that an object (like a
     // registry key) was created with appropriate rights, so fake
     // a return value that always shows full access

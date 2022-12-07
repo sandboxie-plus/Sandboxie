@@ -40,11 +40,11 @@ public:
 
 	STDMETHOD(Write)(const void *data, UInt32 size, UInt32 *processedSize)
 	{
-		quint64 writen = m_pFile->write((const char*)data, size);
-		if(writen == -1)
+		quint64 written = m_pFile->write((const char*)data, size);
+		if(written == -1)
 			return E_FAIL;
 		if(processedSize)
-			*processedSize = writen;
+			*processedSize = written;
 		return S_OK;
 	}
 

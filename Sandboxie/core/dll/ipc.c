@@ -559,7 +559,7 @@ _FX NTSTATUS Ipc_GetName(
         //if (Dll_AlernateIpcNaming) {
         //    
         //    //
-        //    // Since in this mode we don't call Ipc_CreateObjects we dont have a boxed namespace
+        //    // Since in this mode we don't call Ipc_CreateObjects we don't have a boxed namespace
         //    // and are using existing namespaces only with a name suffix
         //    // hence we can't use Global without system provileges, so we strip it
         //    //

@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
 	if (!g_PendingMessage.isEmpty()) {
 		if(app.sendMessage(g_PendingMessage))
 			return 0;
-		app.disableSingleApp(); // we start to do one job and exit, don't interfear with starting a regular instance
+		app.disableSingleApp(); // we start to do one job and exit, don't interfere with starting a regular instance
 	}
 	else {
 		if (app.arguments().contains("-autorun") && app.isRunning())

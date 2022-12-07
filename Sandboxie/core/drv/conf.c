@@ -799,7 +799,7 @@ _FX NTSTATUS Conf_Merge_Templates(CONF_DATA *data, ULONG session_id)
 #ifdef USE_CONF_MAP
 
         //
-        // use a keyed itterator to quickly go through all Template=Xxx settings
+        // use a keyed iterator to quickly go through all Template=Xxx settings
         //
 
         map_iter_t iter2 = map_key_iter(&sandbox->settings_map, Conf_Template);
@@ -1047,7 +1047,7 @@ _FX const WCHAR *Conf_Get_Helper(
     if (section) {
 #ifdef USE_CONF_MAP
         //
-        // use a keyed itterator to quickly go through all matching settings
+        // use a keyed iterator to quickly go through all matching settings
         //
 
         map_iter_t iter2 = map_key_iter(&section->settings_map, setting_name);

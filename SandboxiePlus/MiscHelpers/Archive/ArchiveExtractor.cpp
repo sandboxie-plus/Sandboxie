@@ -74,17 +74,17 @@ STDMETHODIMP CArchiveExtractor::SetOperationResult (Int32 operationResult)
 			break;
 		case NArchive::NExtract::NOperationResult::kUnSupportedMethod:	
 			//TRACE(L"... Error (Un Supported Method)");	
-			m_pArchive->LogError(QString("File Extraction Failes (Un Supported Method): %1").arg(m_pArchive->FileProperty(m_Index, "Path").toString()));
+			m_pArchive->LogError(QString("File Extraction Fails (Un Supported Method): %1").arg(m_pArchive->FileProperty(m_Index, "Path").toString()));
 			m_pArchive->FileProperty(m_Index, "Error", "Un Supported Method");
 			break;
 		case NArchive::NExtract::NOperationResult::kCRCError:			
 			//TRACE(L"... Error (CRC)");					
-			m_pArchive->LogError(QString("File Extraction Failes (CRC Error): %1").arg(m_pArchive->FileProperty(m_Index, "Path").toString()));
+			m_pArchive->LogError(QString("File Extraction Fails (CRC Error): %1").arg(m_pArchive->FileProperty(m_Index, "Path").toString()));
 			m_pArchive->FileProperty(m_Index, "Error", "CRC Error");
 			break;
 		case NArchive::NExtract::NOperationResult::kDataError:			
 			//TRACE(L"... Error (Data)");					
-			m_pArchive->LogError(QString("File Extraction Failes (Data Error): %1").arg(m_pArchive->FileProperty(m_Index, "Path").toString()));
+			m_pArchive->LogError(QString("File Extraction Fails (Data Error): %1").arg(m_pArchive->FileProperty(m_Index, "Path").toString()));
 			m_pArchive->FileProperty(m_Index, "Error", "Data Error");
 			break;
 		default: Q_ASSERT(0);

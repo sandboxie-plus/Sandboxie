@@ -1,6 +1,6 @@
 ## UGlobalHotkey
 
-### Decription  
+### Description  
 UGlobalHotkey is an extension for Qt framework, which implements global hotkeys functionality for Windows Linux and MacOSX platforms.
 It is written by [bakwc](https://github.com/bakwc), extracted from [Pastexen](https://github.com/bakwc/Pastexen) and turned into a shared library by me.
 

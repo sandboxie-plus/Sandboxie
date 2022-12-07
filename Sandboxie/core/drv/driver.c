@@ -705,7 +705,7 @@ _FX BOOLEAN Driver_FindMissingServices(void)
 
 
     //
-    // Retrive some unexported kernel functions which may be usefull
+    // Retrieve some unexported kernel functions which may be useful
     //
 
 #ifdef _M_ARM64
@@ -715,7 +715,7 @@ _FX BOOLEAN Driver_FindMissingServices(void)
     // but out right lacks those functions entirely.
     // So in order to work around this limitation we implement a own system service wrapper
     // we invoke Sbie_CallZwServiceFunction_asm with all the arguments we need
-    // and the service numebr as last 20th argument, it sets IP0/X16 and invokes KiServiceInternal
+    // and the service number as last 20th argument, it sets IP0/X16 and invokes KiServiceInternal
     //
 
     SYSCALL_ENTRY *entry = Syscall_GetByName("CreateToken");

@@ -9,7 +9,7 @@ class MISCHELPERS_EXPORT COneColumnModel : public QIdentityProxyModel
 {
 	Q_OBJECT
 public:
-	COneColumnModel( QObject* parrent = 0) : QIdentityProxyModel(parrent) {}
+	COneColumnModel( QObject* parent = 0) : QIdentityProxyModel(parent) {}
 
 	int	columnCount(const QModelIndex &parent = QModelIndex()) const { return 1; }
 };

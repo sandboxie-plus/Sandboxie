@@ -1085,7 +1085,7 @@ HANDLE GuiServer::GetJobObjectForAssign(const WCHAR *boxname)
                     }
 
                     //
-                    // we want to allow sandboxed processes to use jobs of thair own
+                    // we want to allow sandboxed processes to use jobs of their own
                     // with windows 8 we can have nested, a boxed process may want to use BREAKAWAY
                     // hence we no longer prevent breaking away from our job,
                     // instead we re assign the job on each initialization, like it was done for the initial one

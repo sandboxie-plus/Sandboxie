@@ -651,7 +651,7 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 	if (drv_init)
 	{
 		//
-		// Search the ntdll.dll for teh unexported syscall wrapper functions
+		// Search the ntdll.dll for the unexported syscall wrapper functions
 		//
 
 		void* HandleStubHijack = NULL;
@@ -659,7 +659,7 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 
 		if (aCode == NULL) {
 			SbieApi_Log(2303, L"syscall, wrappers not found");
-			return STATUS_SUCCESS; // we will fail process cration for ec processes later
+			return STATUS_SUCCESS; // we will fail process creation for ec processes later
 		}
 
 		void* EcExitThunkPtr = SbieDll_GetEcExitThunkPtr(HandleStubHijack);
@@ -1219,7 +1219,7 @@ _FX BOOLEAN SbieDll_InjectLow_BuildTramp(
 
 	//
 	// skip past several bytes in the code copied from the top of the
-	// LdrInitializeThunk fuction, where we will inject a jmp sequence.
+	// LdrInitializeThunk function, where we will inject a jmp sequence.
 	//
 	// a simple E9 relative JMP five byte instruction in most cases,
 	// a slightly longer seven byte version in case there is a long

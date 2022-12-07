@@ -177,12 +177,12 @@ _FX UCHAR *FindDllExport2(
 //---------------------------------------------------------------------------
 
 
-_FX NTSTATUS MyGetProcedureAddress(HMODULE ModuleHandle, PANSI_STRING FunctionName, WORD Oridinal, PVOID*FunctionAddress, INJECT_DATA *inject)
+_FX NTSTATUS MyGetProcedureAddress(HMODULE ModuleHandle, PANSI_STRING FunctionName, WORD Ordinal, PVOID*FunctionAddress, INJECT_DATA *inject)
 {
     SBIELOW_DATA* data = (SBIELOW_DATA*)*(ULONG64*)inject;
 
     typedef (*P_LdrGetProcedureAddress)(HMODULE, PANSI_STRING, WORD, PVOID*);
-    NTSTATUS status = ((P_LdrGetProcedureAddress)inject->LdrGetProcAddr)(ModuleHandle, FunctionName, Oridinal, FunctionAddress);
+    NTSTATUS status = ((P_LdrGetProcedureAddress)inject->LdrGetProcAddr)(ModuleHandle, FunctionName, Ordinal, FunctionAddress);
 
     //
     // in ARM64EC mode unwrap the FFS and return the native function
@@ -242,7 +242,7 @@ _FX void InitInject(SBIELOW_DATA *data, void *DetourCode)
     if (data->flags.is_wow64) {
 
 		//
-		// Instead of requiering the driver for this task, we can simplify it
+		// Instead of requiring the driver for this task, we can simplify it
 		// and use NtQueryVirtualMemory to find the mapped image directly.
 		// We do that in the injector, but we could also have done it here ourselves.
 		//
@@ -301,7 +301,7 @@ _FX void InitInject(SBIELOW_DATA *data, void *DetourCode)
 
     //
     // on ARM64EC we hook the native code hence we need the custom MyGetProcedureAddress
-    // to obtain the address of the native orginal 1 from our SbieDll.dll
+    // to obtain the address of the native original 1 from our SbieDll.dll
     // instead of the FFS sequence as given by NtGetProcedureAddress
     //
 
@@ -321,7 +321,7 @@ _FX void InitInject(SBIELOW_DATA *data, void *DetourCode)
 
     //
     // for ARM64EC we need native functions, FindDllExport can manage FFS's
-    // howeever this does not work for syscalls, hence we use the native function directly
+    // however this does not work for syscalls, hence we use the native function directly
     //
         inject->NtRaiseHardError = data->NativeNtRaiseHardError;
 

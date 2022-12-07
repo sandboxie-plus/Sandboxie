@@ -56,7 +56,7 @@ GetWnd() method, which
 returns a pointer to the CWnd-obect of the window, that has been
 created by the call to the Create() method. An implementation can
 provide the CWnd-object by using it as a property or by deriving
-from CWnd or a more specialiced class. This way has been choosen 
+from CWnd or a more specialised class. This way has been chosen 
 instead of deriving CPropPageFrame from CWnd, to allow derived class
 to derive from more specialized classes than CWnd 
 (i.e. CStatic, etc.). From the WM_PAINT-handler of your derived class
@@ -211,7 +211,7 @@ protected:
 	passed to DrawMsg().
 
 	This default implementation calls the CalcCaptionArea() method,
-	substracts the returned rectangle from the client area and returns
+	subtracts the returned rectangle from the client area and returns
 	the result.
 	*/
 	virtual CRect CalcMsgArea();
@@ -275,7 +275,7 @@ protected:
 // Implementation helpers
 protected:
 	/**
-	If the m_hWnd property of the CWnd-object returend by GetWnd() 
+	If the m_hWnd property of the CWnd-object returned by GetWnd() 
 	specifies a valid window, this method will invalidate the specified
 	rectangle, to schedule it for repaint, otherwise the method will
 	return without doing anything.

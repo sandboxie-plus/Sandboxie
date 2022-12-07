@@ -49,7 +49,7 @@ CSplitTreeView::CSplitTreeView(QAbstractItemModel* pModel, QWidget *parent) : QW
 
 
 	// List
-	// Note: It would be convinient to use QTreeViewEx here but qt does not scale well when there are too many columns
+	// Note: It would be convenient to use QTreeViewEx here but qt does not scale well when there are too many columns
 	//			hence we will add and remove columns at the model level directly.
 	//			This way we can get out operational CPU usage to be quite comparable with TaskInfo na other advanced task managers
 	//		 Plus there are to many columns to cram them into one simple context menu :-)

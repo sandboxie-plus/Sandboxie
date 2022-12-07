@@ -123,7 +123,7 @@ void COptionsWindow::SaveGroups()
 		QTreeWidgetItem* pItem = ui.treeGroups->topLevelItem(i);
 		QString GroupName = pItem->data(0, Qt::UserRole).toString();
 		if (GroupName.isEmpty())
-			continue; // this is a template entry, dont save
+			continue; // this is a template entry, don't save
 		QStringList Programs;
 		for (int j = 0; j < pItem->childCount(); j++)
 			Programs.append(pItem->child(j)->data(0, Qt::UserRole).toString());
@@ -265,12 +265,12 @@ void COptionsWindow::OnDelProg()
 	OnOptChanged();
 }
 
-void COptionsWindow::CopyGroupToList(const QString& Groupe, QTreeWidget* pTree, bool disabled)
+void COptionsWindow::CopyGroupToList(const QString& Group, QTreeWidget* pTree, bool disabled)
 {
 	for (int i = 0; i < ui.treeGroups->topLevelItemCount(); i++) 
 	{
 		QTreeWidgetItem* pItem = ui.treeGroups->topLevelItem(i);
-		if (pItem->data(0, Qt::UserRole).toString().compare(Groupe, Qt::CaseInsensitive) == 0)
+		if (pItem->data(0, Qt::UserRole).toString().compare(Group, Qt::CaseInsensitive) == 0)
 		{
 			for (int j = 0; j < pItem->childCount(); j++)
 			{

@@ -93,7 +93,7 @@ void CBoxMonitor::run()
 
 void CBoxMonitor::UpdateBox(const QString& Path)
 {
-	// Note: this private functin runs in the main thread
+	// Note: this private function runs in the main thread
 
 	m_Mutex.lock();
 	SBox Box = m_Boxes.value(Path);

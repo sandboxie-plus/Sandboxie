@@ -29,7 +29,7 @@ bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool
 	if (!pBoxEx) return false;
 	if (pBoxEx->m_pRecoveryWnd != NULL) {
 		pBoxEx->m_pRecoveryWnd->close();
-		// todo: resuse window?
+		// todo: reuse window?
 	}
 
 	CRecoveryWindow* pRecoveryWindow = new CRecoveryWindow(pBox, false, this);

@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added run boxed command to the sandbox menu
+- DefaultBox can now be replaced with an otehr sandbox [#2445](https://github.com/sandboxie-plus/Sandboxie/issues/2445)
 
 ### Fixed
 - improved fix for [#2495](https://github.com/sandboxie-plus/Sandboxie/issues/2495)

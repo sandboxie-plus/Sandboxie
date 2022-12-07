@@ -256,7 +256,8 @@ BOOL Validate_Box_Name(void)
             _wcsicmp(BoxName, L"current") == 0) {
 
             if (auto_select_default_box) {
-                wcscpy(BoxName, L"DefaultBox");
+                if(!NT_SUCCESS(SbieApi_QueryConfAsIs(L"GlobalSettings", L"DefaultBox", 0, BoxName, sizeof(BoxName))) || *BoxName == L'\0')
+                    wcscpy(BoxName, L"DefaultBox");
                 if (SbieApi_IsBoxEnabled(BoxName) != STATUS_SUCCESS)
                     auto_select_default_box = FALSE;
             }
@@ -1661,7 +1662,8 @@ int __stdcall WinMainCRTStartup(
     Sandboxie_Start_Title = SbieDll_FormatMessage0(MSG_3101);
     SbieDll_GetLanguage(&layout_rtl);
 
-    wcscpy(BoxName, L"DefaultBox");
+    if(!NT_SUCCESS(SbieApi_QueryConfAsIs(L"GlobalSettings", L"DefaultBox", 0, BoxName, sizeof(BoxName))) || *BoxName == L'\0')
+        wcscpy(BoxName, L"DefaultBox");
 
     Token_Elevation_Type = SbieDll_GetTokenElevationType();
 

@@ -388,7 +388,7 @@ bool CSbieUtils::CreateShortcut(CSbieAPI* pApi, QString LinkPath, const QString 
 		if (!workdir.isEmpty())
 			pShellLink->SetWorkingDirectory(workdir.toStdWString().c_str());
 		if (!LinkName.isEmpty()) {
-			QString desc = QString("%1 [%2]").arg(LinkName).arg(boxname.isEmpty() ? "DefaultBox" : boxname);
+			QString desc = QString("%1 [%2]").arg(LinkName).arg(boxname.isEmpty() ? pApi->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox") : boxname);
 			pShellLink->SetDescription(desc.toStdWString().c_str());
 		}
 

@@ -703,7 +703,7 @@ void CSandMan::OnView(QAction* pAction)
 		m_pBoxCombo->clear();
 		foreach(const CSandBoxPtr & pBox, theAPI->GetAllBoxes())
 			m_pBoxCombo->addItem(tr("Sandbox %1").arg(pBox->GetName().replace("_", "")), pBox->GetName());
-		m_pBoxCombo->setCurrentIndex(m_pBoxCombo->findData("DefaultBox"));
+		m_pBoxCombo->setCurrentIndex(m_pBoxCombo->findData(theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox")));
 	}
 }
 
@@ -1279,7 +1279,7 @@ void CSandMan::OnMessage(const QString& MsgData)
 		CSupportDialog::CheckSupport(true);
 
 		if (theConf->GetBool("Options/RunInDefaultBox", false) && (QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) == 0) {
-			theAPI->RunStart("DefaultBox", CmdLine, false, WrkDir);
+			theAPI->RunStart(theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox"), CmdLine, false, WrkDir);
 		}
 		else
 			RunSandboxed(QStringList(CmdLine), BoxName, WrkDir);
@@ -1314,7 +1314,7 @@ void CSandMan::dragEnterEvent(QDragEnterEvent* e)
 bool CSandMan::RunSandboxed(const QStringList& Commands, QString BoxName, const QString& WrkDir)
 {
 	if (BoxName.isEmpty())
-		BoxName = "DefaultBox";
+		BoxName = theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox");
 	CSelectBoxWindow* pSelectBoxWindow = new CSelectBoxWindow(Commands, BoxName, WrkDir);
 	//pSelectBoxWindow->show();
 	return SafeExec(pSelectBoxWindow) == 1;
@@ -1452,7 +1452,7 @@ void CSandMan::OnBoxSelected()
 	if (m_pBoxCombo && m_pViewStack->currentIndex() == 1) {
 		QString Name = m_pBoxCombo->currentData().toString();
 		if (Name.isEmpty())
-			Name = "DefaultBox";
+			Name = theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox");
 		pBox = theAPI->GetBoxByName(Name);
 	}
 
@@ -1790,9 +1790,10 @@ void CSandMan::OnStatusChanged()
 					theConf->DelValue("SizeCache/" + Key);
 			}
 
-			if (!AllBoxes.contains("defaultbox")) {
-				OnLogMessage(tr("Default sandbox not found; creating: %1").arg("DefaultBox"));
-				theAPI->CreateBox("DefaultBox");
+			QString DefaultBox = theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox");
+			if (!AllBoxes.contains(DefaultBox.toLower())) {
+				OnLogMessage(tr("Default sandbox not found; creating: %1").arg(DefaultBox));
+				theAPI->CreateBox(DefaultBox);
 			}
 		}
 

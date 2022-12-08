@@ -33,10 +33,12 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Check spelling errors
-        uses: codespell-project/actions-codespell@master
-        with:
-          check_filenames: false
-          skip: "./.git,./Sandboxie/msgs/Text-*-*.txt,./Sandboxie/msgs/report/Report-*.txt,./SandboxiePlus/SandMan/*.ts,./Installer/Languages.iss,./Installer/isl/*.isl,./Sandboxie/common/Detours/Makefile"
-          builtin: clear,rare,code
-          # only lowercase letters are allowed here
-          ignore_words_list: "wil,unknwn,tolen,pevent,doubleclick,parm,parms,etcp,ois,ba,ptd,modell,namesd,stdio,uint,errorstring,ontext,atend,deque,ecounter,nmake,namess,inh,daa,varient"
+        run: |
+          pip install codespell
+          wget -q https://raw.githubusercontent.com/codespell-project/codespell/master/codespell_lib/data/dictionary.txt
+          wget -q https://raw.githubusercontent.com/codespell-project/codespell/master/codespell_lib/data/dictionary_rare.txt
+          wget -q https://raw.githubusercontent.com/codespell-project/codespell/master/codespell_lib/data/dictionary_code.txt
+          # Only lowercase letters are allowed in --ignore-words-list
+          codespell --dictionary=dictionary.txt --dictionary=dictionary_rare.txt --dictionary=dictionary_code.txt \
+          --ignore-words-list="wil,unknwn,tolen,pevent,doubleclick,parm,parms,etcp,ois,ba,ptd,modell,namesd,stdio,uint,errorstring,ontext,atend,deque,ecounter,nmake,namess,inh,daa,varient" \
+          --skip="./.git,./dictionary*.txt,./Sandboxie/msgs/Text-*-*.txt,./Sandboxie/msgs/report/Report-*.txt,./SandboxiePlus/SandMan/*.ts,./Installer/Languages.iss,./Installer/isl/*.isl,./Sandboxie/common/Detours/Makefile"

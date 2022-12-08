@@ -1006,7 +1006,7 @@ inline PBYTE detour_skip_jmp(PBYTE pbCode, PVOID *ppGlobals)
     the bottom 12 bits cleared to zero, and then writes the result to a general-purpose register. This permits the
     calculation of the address at a 4KB aligned memory region. In conjunction with an ADD (immediate) instruction, or
     a Load/Store instruction with a 12-bit immediate offset, this allows for the calculation of, or access to, any address
-    within ±4GB of the current PC.
+    within +/- 4GB of the current PC.
 
 PC-rel. addressing
     This section describes the encoding of the PC-rel. addressing instruction class. The encodings in this section are

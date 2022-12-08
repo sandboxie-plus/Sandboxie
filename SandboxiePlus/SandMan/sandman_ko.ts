@@ -2201,7 +2201,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="458"/>
         <source>Run Sandboxed</source>
-        <translation type="unfinished">샌드박스에서 실행</translation>
+        <translation>샌드박스에서 실행</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="467"/>
@@ -6174,7 +6174,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="925"/>
         <source>Default sandbox:</source>
-        <translation type="unfinished"></translation>
+        <translation>기본 샌드박스:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1107"/>

@@ -1788,7 +1788,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="458"/>
         <source>Run Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>In Sandbox ausführen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="476"/>
@@ -6379,7 +6379,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="925"/>
         <source>Default sandbox:</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard Sandbox:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1017"/>

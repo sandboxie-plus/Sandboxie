@@ -375,7 +375,7 @@
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
         <translation>Yeni güncelleme bulunamadı, Sandboxie-Plus&apos;ınız güncel.
 
-Not: Güncelleme denetimi, yalnızca test edilmiş güncellemelerin sunulduğundan emin olmak için genellikle en son GitHub sürümünden eskidir.</translation>
+Not: Güncelleme kontrolü, yalnızca test edilen güncellemelerin sunulmasını sağlamak için, genellikle en son GitHub sürümünün gerisindedir.</translation>
     </message>
     <message>
         <source>Downloading new version...</source>
@@ -1583,12 +1583,12 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="443"/>
         <source>Check for Updates</source>
-        <translation>Güncellemeleri kontrol et</translation>
+        <translation>Güncellemeleri Kontrol Et</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="440"/>
         <source>Visit Support Forum</source>
-        <translation>Destek Forumu&apos;nu ziyaret et</translation>
+        <translation>Destek Forumu&apos;nu Ziyaret Et</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2832"/>
@@ -1736,7 +1736,7 @@ Tam yol: %4</translation>
         <location filename="SandMan.cpp" line="571"/>
         <location filename="SandMan.cpp" line="691"/>
         <source>Reload ini file</source>
-        <translation>Ini dosyasını yeniden yükle</translation>
+        <translation>Ini Dosyasını Yeniden Yükle</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="396"/>
@@ -1845,7 +1845,7 @@ Tam yol: %4</translation>
         <location filename="SandMan.cpp" line="459"/>
         <location filename="SandMan.cpp" line="584"/>
         <source>Terminate All Processes</source>
-        <translation>Tüm işlemleri sonlandır</translation>
+        <translation>Tüm İşlemleri Sonlandır</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2132"/>
@@ -1866,7 +1866,7 @@ Tam yol: %4</translation>
         <location filename="SandMan.cpp" line="570"/>
         <location filename="SandMan.cpp" line="690"/>
         <source>Edit ini file</source>
-        <translation>Ini dosyasını düzenle</translation>
+        <translation>Ini Dosyasını Düzenle</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="538"/>
@@ -1876,12 +1876,12 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="445"/>
         <source>About the Qt Framework</source>
-        <translation>Qt Framework hakkında</translation>
+        <translation>Qt Framework Hakkında</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="542"/>
         <source>Keep terminated</source>
-        <translation>Sonlandırılmışları tut</translation>
+        <translation>Sonlandırılmışları Tut</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2833"/>
@@ -1897,7 +1897,7 @@ Tam yol: %4</translation>
         <location filename="SandMan.cpp" line="564"/>
         <location filename="SandMan.cpp" line="682"/>
         <source>Reset all hidden messages</source>
-        <translation>Tüm gizlenmiş mesajları sıfırla</translation>
+        <translation>Tüm Gizlenmiş Mesajları Sıfırla</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="456"/>
@@ -2155,7 +2155,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="427"/>
         <source>Always on Top</source>
-        <translation>Her zaman üstte</translation>
+        <translation>Her Zaman Üstte</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1434"/>
@@ -2225,17 +2225,17 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="539"/>
         <source>Cleanup Trace Log</source>
-        <translation>Günlük İzlemelerini Temizle</translation>
+        <translation>İzleme Günlüğünü Temizle</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="967"/>
         <source>Trace Log</source>
-        <translation>Günlük İzlemeleri</translation>
+        <translation>İzleme Günlüğü</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="555"/>
         <source>Trace Logging</source>
-        <translation>Günlükleme İzlemeleri</translation>
+        <translation>İzlemeleri Günlükle</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1301"/>
@@ -2367,7 +2367,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="458"/>
         <source>Run Sandboxed</source>
-        <translation type="unfinished">Korumalı Alanda Çalıştır</translation>
+        <translation>Korumalı Alanda Çalıştır</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="476"/>
@@ -2390,7 +2390,7 @@ Hayır şunları seçer: %2</translation>
         <location filename="SandMan.cpp" line="565"/>
         <location filename="SandMan.cpp" line="683"/>
         <source>Reset all GUI options</source>
-        <translation>Tüm GKA seçeneklerini sıfırla</translation>
+        <translation>Tüm GKA Seçeneklerini Sıfırla</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="583"/>
@@ -3435,7 +3435,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SelectBoxWindow.cpp" line="180"/>
         <source>Are you sure you want to run the program outside the sandbox?</source>
-        <translation>Programı korumalı alan dışında çalıştırmak istediğinizden emin misiniz?</translation>
+        <translation>Programı korumalı alanın dışında çalıştırmak istediğinizden emin misiniz?</translation>
     </message>
     <message>
         <location filename="Windows/SelectBoxWindow.cpp" line="185"/>
@@ -3679,7 +3679,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="891"/>
         <source>Run &amp;Un-Sandboxed</source>
-        <translation>&amp;Korumalı Alandan Olmadan Çalıştır</translation>
+        <translation>&amp;Korumalı Alanın Dışında Çalıştır</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1135"/>
@@ -3689,7 +3689,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1441"/>
         <source>%1 (Current)</source>
-        <translation>%1 (Mevcut)</translation>
+        <translation>%1 (Kullanılan)</translation>
     </message>
     <message>
         <source>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</source>
@@ -4017,12 +4017,12 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/TraceView.cpp" line="247"/>
         <source>Cleanup Trace Log</source>
-        <translation>Günlük İzlemelerini Temizle</translation>
+        <translation>İzleme Günlüğünü Temizle</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="571"/>
         <source>Save trace log to file</source>
-        <translation>Günlük izlemelerini dosyaya kaydet</translation>
+        <translation>İzleme günlüğünü dosyaya kaydet</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="577"/>
@@ -4760,7 +4760,7 @@ Not: Bir korumalı alana ilişkin Zorlanmış Programlar ve Zorlanmış Klasörl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="536"/>
         <source>Allow the print spooler to print to files outside the sandbox</source>
-        <translation>Yazdırma biriktiricisinin korumalı alan dışındaki dosyalara yazdırmasına izin ver</translation>
+        <translation>Yazdırma biriktiricisinin korumalı alanın dışındaki dosyalara yazdırmasına izin ver</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="550"/>
@@ -4870,7 +4870,7 @@ Not: Bir korumalı alana ilişkin Zorlanmış Programlar ve Zorlanmış Klasörl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1106"/>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
-        <translation>Anonim bir belirteç (deneysel) yerine bir Sandboxie oturum açma kullanın</translation>
+        <translation>Anonim bir belirteç (deneysel) yerine Sandboxie oturum açmayı kullan</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1123"/>
@@ -5126,7 +5126,7 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="355"/>
         <source>Prompt user for large file migration</source>
-        <translation>Büyük dosya geçişi için kullanıcıya sor</translation>
+        <translation>Büyük dosya taşınması için kullanıcıya sor</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="489"/>
@@ -5438,7 +5438,7 @@ Bunu tüm programlara uygulamak için &apos;Hepsi için aç&apos; kullanabilir v
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2486"/>
         <source>Apply File and Key Open directives only to binaries located outside the sandbox.</source>
-        <translation>Dosya ve Anahtar Açma yönergelerini yalnızca korumalı alan dışında bulunan ikili dosyalara uygular.</translation>
+        <translation>Dosya ve Anahtar Açma yönergelerini yalnızca korumalı alanın dışında bulunan ikili dosyalara uygular.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1130"/>
@@ -5729,7 +5729,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="83"/>
         <source>Run Outside the Sandbox</source>
-        <translation>Korumalı Alan Dışında Çalıştır</translation>
+        <translation>Korumalı Alanın Dışında Çalıştır</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="51"/>
@@ -5779,7 +5779,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1430"/>
         <source>Check periodically for updates of Sandboxie-Plus</source>
-        <translation>Sandboxie-Plus güncellemelerini periyodik kontrol et</translation>
+        <translation>Sandboxie-Plus güncellemelerini düzenli aralıklarla kontrol et</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="97"/>
@@ -5839,7 +5839,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1073"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
-        <translation>Şu programlardan biri Korumalı Alan dışında başlatıldığında, Sandboxie SBIE1301 hatası verecektir.</translation>
+        <translation>Şu programlardan biri korumalı alanın dışında başlatıldığında, Sandboxie SBIE1301 hatası verecektir.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1046"/>
@@ -5849,12 +5849,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="366"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
-        <translation>Dosya gezgini bağlam menüsüne &apos;Korumalı alanda başlat&apos; seçeneği ekle</translation>
+        <translation>Dosya gezgini bağlam menüsüne &apos;Korumalı Alanda Çalıştır&apos; seçeneği ekle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1023"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>Bir program başlatılamadığında hata mesajı 1308</translation>
+        <translation>Bir program başlatılamadığında 1308 mesajı yayınlansın</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="895"/>
@@ -5874,12 +5874,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="60"/>
         <source>Show Notifications for relevant log Messages</source>
-        <translation>İlgili günlük mesajları için bildirimleri göster</translation>
+        <translation>İlgili günlük mesajları için bildirimler göster</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="147"/>
         <source>Open urls from this ui sandboxed</source>
-        <translation>Bu kullanıcı arayüzündeki linkleri korumalı alanda aç</translation>
+        <translation>Bu kullanıcı arayüzündeki bağlantıları korumalı alanda aç</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="836"/>
@@ -5914,7 +5914,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="194"/>
         <source>Show first recovery window when emptying sandboxes</source>
-        <translation>Korumalı alanları boşaltırken önce kurtarma penceresini göster</translation>
+        <translation>Korumalı alanlar boşaltılmadan önce kurtarma penceresini göster</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="816"/>
@@ -5954,13 +5954,13 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="416"/>
         <source>Always use DefaultBox</source>
-        <translation>Her zaman DefaultBox kullanın</translation>
+        <translation>Her zaman varsayılan korumalı alanı kullan</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="164"/>
         <source>Count and display the disk space occupied by each sandbox</source>
         <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
-        <translation>Her korumalı alanın kapladığı disk alanını hesaplayın ve görüntüleyin</translation>
+        <translation>Her bir korumalı alanın kapladığı disk alanı hesaplansın ve görüntülensin</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="359"/>
@@ -5981,17 +5981,17 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/SettingsWindow.ui" line="507"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
-        <translation>Alan listesinde &quot;Pizza&quot; Arka Planını Göster *</translation>
+        <translation>Alan listesinde &quot;Pizza&quot; arka planını göster *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="604"/>
         <source>Make Box Icons match the Border Color</source>
-        <translation>Alan Simgelerini Kenarlık Rengiyle Eşleştirin</translation>
+        <translation>Alan Simgelerini Kenarlık Rengiyle eşleştir</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="530"/>
         <source>Use a Page Tree in the Box Options instead of Nested Tabs *</source>
-        <translation>Alan Seçeneklerinde İç İçe Sekmeler yerine Sayfa Ağacı kullanın *</translation>
+        <translation>Alan Seçeneklerinde İç İçe Sekmeler yerine Sayfa Ağacı kullan *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="546"/>
@@ -6001,7 +6001,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="560"/>
         <source>Use large icons in box list *</source>
-        <translation>Alan listesinde büyük simgeler kullanın *</translation>
+        <translation>Alan listesinde büyük simgeler kullan *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="570"/>
@@ -6026,12 +6026,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="553"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
-        <translation>* Kısmen işaretlenmiş bir onay kutusu, davranışı görüntüleme modu tarafından belirlenecek şekilde bırakacaktır.</translation>
+        <translation>* kısmen işaretlenmiş bir onay kutusu, olması gereken davranışı görüntüleme modu tarafından belirlenecek şekilde bırakacaktır.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="157"/>
         <source>Show the Recovery Window as Always on Top</source>
-        <translation>Kurtarma Penceresini Her Zaman Üstte Olarak Göster</translation>
+        <translation>Kurtarma Penceresini Her Zaman Üstte olarak göster</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="590"/>
@@ -6041,7 +6041,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="597"/>
         <source>Alternate row background in lists</source>
-        <translation>Alternate row background in lists</translation>
+        <translation>Listelerde alternatif satır arka planı göster</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="580"/>
@@ -6061,7 +6061,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="882"/>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
-        <translation>Anonim bir belirteç (deneysel) yerine bir Sandboxie oturum açma kullanın</translation>
+        <translation>Anonim bir belirteç (deneysel) yerine Sandboxie oturum açmayı kullan</translation>
     </message>
     <message>
         <source>Program Control</source>
@@ -6151,17 +6151,17 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="777"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
-        <translation>Ağ erişimini kısıtlamak için Windows Filtreleme Platformunu kullanın</translation>
+        <translation>Ağ erişimini kısıtlamak için Windows Filtreleme Platformunu kullan</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="875"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (experimental)</source>
-        <translation>GPU hızlandırmayı etkinleştirmek için seçilen Win32k sistem çağrılarını bağlayın (deneysel)</translation>
+        <translation>GPU hızlandırmayı etkinleştirmek için seçilen Win32k sistem çağrılarını kancala (deneysel)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="70"/>
         <source>Run box operations asynchronously whenever possible (like content deletion)</source>
-        <translation>Alan işlemlerini mümkün olduğunda eşzamansız olarak çalıştırın (içerik silme gibi)</translation>
+        <translation>Alan işlemlerini mümkünse eşzamansız olarak çalıştır (içerik silme gibi)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="291"/>
@@ -6171,7 +6171,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="320"/>
         <source>Add &apos;Run Un-Sandboxed&apos; to the context menu</source>
-        <translation>Bağlam menüsüne &apos;Korumalı Alanda Çalıştır&apos;ı ekleyin</translation>
+        <translation>Bağlam menüsüne &apos;Korumalı Alanın Dışında Çalıştır&apos; seçeneği ekle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="110"/>
@@ -6195,7 +6195,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="235"/>
         <source>Scan shell folders and offer links in run menu</source>
-        <translation>Kabuk klasörlerini tarayın ve çalıştır menüsünde kısayollar sunun</translation>
+        <translation>Kabuk klasörleri taransın ve çalıştır menüsünde kısayollar sunulsun</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="386"/>
@@ -6245,12 +6245,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="918"/>
         <source>Activate Kernel Mode Object Filtering</source>
-        <translation>Kernel Modu Nesne Filtrelemeyi Etkinleştir</translation>
+        <translation>Kernel Modu Nesne Filtrelemeyi etkinleştir</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="925"/>
         <source>Default sandbox:</source>
-        <translation type="unfinished"></translation>
+        <translation>Varsayılan korumalı alan:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1017"/>

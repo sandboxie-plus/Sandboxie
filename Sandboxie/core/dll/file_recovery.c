@@ -530,7 +530,7 @@ _FX void File_DoAutoRecover_2(BOOLEAN force, ULONG ticks)
         break;
     }
 
-    if (!Dll_CompartmentMode) // NoServiceAssist // don't try that in app mode, we had a proepr token
+    if (!Dll_CompartmentMode) // NoServiceAssist // don't try that in app mode, we had a proper token
     if (status == STATUS_ACCESS_DENIED) {
 
         //

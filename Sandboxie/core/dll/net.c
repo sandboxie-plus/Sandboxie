@@ -752,7 +752,7 @@ _FX int WSA_AcceptEx(
 {
     //
     // this call can operate asynchroniusly, hence we can not simply filter here the incoming connection
-    // as we have a proepr WFP filter in the driver for now this usermode filtering implementation 
+    // as we have a proper WFP filter in the driver for now this usermode filtering implementation 
     // will not filter incoming traffic at all, normally users ate behind NATs or other firewall so 
     // blocking only outgoing connections should be good enough
     //

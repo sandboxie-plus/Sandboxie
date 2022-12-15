@@ -568,7 +568,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pMenuResetGUI->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 		this->addAction(m_pMenuResetGUI);
 		m_pMenuOptions->addSeparator();
-		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("EditIni"), tr("Edit ini file"), this, SLOT(OnEditIni()));
+		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor"), tr("Edit ini file"), this, SLOT(OnEditIni()));
 		m_pReloadIni = m_pMenuOptions->addAction(CSandMan::GetIcon("ReloadIni"), tr("Reload ini file"), this, SLOT(OnReloadIni()));
 
 	CreateHelpMenu(bAdvanced);
@@ -688,7 +688,7 @@ void CSandMan::CreateOldMenus()
 		m_pMenuOptions->addSeparator();
 		QAction* m_pConfigLock = m_pMenuOptions->addAction(CSandMan::GetIcon("Lock"), tr("Lock Configuration"), this, SLOT(OnSettingsAction()));
 		m_pConfigLock->setData(CSettingsWindow::eConfigLock);
-		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("EditIni"), tr("Edit ini file"), this, SLOT(OnEditIni()));
+		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor"), tr("Edit ini file"), this, SLOT(OnEditIni()));
 		m_pReloadIni = m_pMenuOptions->addAction(CSandMan::GetIcon("ReloadIni"), tr("Reload ini file"), this, SLOT(OnReloadIni()));
 
 	CreateHelpMenu(false);
@@ -1672,7 +1672,7 @@ void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 		if(theConf->GetBool("Options/AutoBoxOpsNotify", false))
 			OnLogMessage(tr("Auto deleting content of %1").arg(pBox->GetName()), true);
 
-		if (theConf->GetBool("Options/UseAsyncBoxOps", false))
+		if (theConf->GetBool("Options/UseAsyncBoxOps", false) || IsSilentMode())
 		{
 			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 			SB_STATUS Status = pBoxEx->DeleteContentAsync(DeleteShapshots);

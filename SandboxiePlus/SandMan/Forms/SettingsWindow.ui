@@ -54,6 +54,26 @@
         <layout class="QGridLayout" name="gridLayout_9">
          <item row="0" column="0">
           <layout class="QGridLayout" name="gridLayout_8">
+           <item row="6" column="1">
+            <widget class="QCheckBox" name="chkSilentMode">
+             <property name="toolTip">
+              <string>This option also enables asynchronous operation when needed and suspends updates.</string>
+             </property>
+             <property name="text">
+              <string>Suppress pop-up notifications when in game / presentation mode</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="1">
+            <widget class="QCheckBox" name="chkNotifyRecovery">
+             <property name="text">
+              <string>Show recoverable files as notifications</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="uiLang"/>
+           </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_19">
              <property name="text">
@@ -64,36 +84,32 @@
              </property>
             </widget>
            </item>
-           <item row="11" column="1" colspan="2">
-            <widget class="QCheckBox" name="chkShowRecovery">
-             <property name="text">
-              <string>Show first recovery window when emptying sandboxes</string>
-             </property>
-            </widget>
-           </item>
-           <item row="12" column="1">
-            <widget class="QCheckBox" name="chkRecoveryTop">
-             <property name="text">
-              <string>Show the Recovery Window as Always on Top</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
+           <item row="5" column="1">
             <widget class="QCheckBox" name="chkAsyncBoxOps">
              <property name="text">
               <string>Run box operations asynchronously whenever possible (like content deletion)</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="1" colspan="2">
-            <widget class="QCheckBox" name="chkMonitorSize">
+           <item row="11" column="1">
+            <widget class="QCheckBox" name="chkRecoveryTop">
              <property name="text">
-              <string>Count and display the disk space occupied by each sandbox</string>
+              <string>Show the Recovery Window as Always on Top</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
-            <widget class="QComboBox" name="uiLang"/>
+           <item row="12" column="1">
+            <spacer name="verticalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
            </item>
            <item row="0" column="0">
             <widget class="QLabel" name="lblGeneral">
@@ -108,19 +124,6 @@
              </property>
             </widget>
            </item>
-           <item row="9" column="0">
-            <widget class="QLabel" name="lblRecovery">
-             <property name="font">
-              <font>
-               <bold>true</bold>
-               <kerning>true</kerning>
-              </font>
-             </property>
-             <property name="text">
-              <string>Recovery Options</string>
-             </property>
-            </widget>
-           </item>
            <item row="2" column="1" colspan="2">
             <widget class="QCheckBox" name="chkSandboxUrls">
              <property name="text">
@@ -131,20 +134,7 @@
              </property>
             </widget>
            </item>
-           <item row="13" column="1">
-            <spacer name="verticalSpacer_4">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="13" column="2">
+           <item row="12" column="2">
             <spacer name="horizontalSpacer_8">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -157,24 +147,20 @@
              </property>
             </spacer>
            </item>
-           <item row="8" column="1" colspan="2">
-            <widget class="QCheckBox" name="chkNotifications">
-             <property name="text">
-              <string>Show Notifications for relevant log Messages</string>
+           <item row="8" column="0">
+            <widget class="QLabel" name="lblRecovery">
+             <property name="font">
+              <font>
+               <bold>true</bold>
+               <kerning>true</kerning>
+              </font>
              </property>
-             <property name="checked">
-              <bool>false</bool>
+             <property name="text">
+              <string>Recovery Options</string>
              </property>
             </widget>
            </item>
-           <item row="10" column="1">
-            <widget class="QCheckBox" name="chkNotifyRecovery">
-             <property name="text">
-              <string>Show recoverable files as notifications</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="1" colspan="3">
+           <item row="4" column="1" colspan="3">
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
               <widget class="QCheckBox" name="chkPanic">
@@ -188,17 +174,27 @@
              </item>
             </layout>
            </item>
-           <item row="5" column="1">
-            <widget class="QCheckBox" name="chkWatchConfig">
+           <item row="7" column="1" colspan="2">
+            <widget class="QCheckBox" name="chkNotifications">
              <property name="text">
-              <string>Watch Sandboxie.ini for changes</string>
+              <string>Show Notifications for relevant log Messages</string>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
              </property>
             </widget>
            </item>
-           <item row="7" column="1">
-            <widget class="QCheckBox" name="chkSilentMode">
+           <item row="10" column="1" colspan="2">
+            <widget class="QCheckBox" name="chkShowRecovery">
              <property name="text">
-              <string>Suppress pop-up notifications when in game / presentation mode</string>
+              <string>Show first recovery window when emptying sandboxes</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1" colspan="2">
+            <widget class="QCheckBox" name="chkMonitorSize">
+             <property name="text">
+              <string>Count and display the disk space occupied by each sandbox</string>
              </property>
             </widget>
            </item>
@@ -730,9 +726,6 @@
          <string>Advanced Config</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout_6">
-         <item row="1" column="0">
-          <layout class="QGridLayout" name="gridLayout_5"/>
-         </item>
          <item row="0" column="0">
           <widget class="QTabWidget" name="tabsAdvanced">
            <property name="currentIndex">
@@ -945,12 +938,39 @@
            </widget>
            <widget class="QWidget" name="tabLock">
             <attribute name="title">
-             <string>Config Protection</string>
+             <string>Sandboxie Config</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_21">
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_19">
-               <item row="0" column="0" colspan="2">
+               <item row="3" column="2">
+                <widget class="QPushButton" name="btnSetPassword">
+                 <property name="text">
+                  <string>Change Password</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QCheckBox" name="chkPassRequired">
+                 <property name="text">
+                  <string>Password must be entered in order to make changes</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="1">
+                <spacer name="verticalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="0" colspan="2">
                 <widget class="QLabel" name="lblProtection">
                  <property name="font">
                   <font>
@@ -964,52 +984,32 @@
                 </widget>
                </item>
                <item row="4" column="1">
-                <widget class="QCheckBox" name="chkClearPass">
-                 <property name="text">
-                  <string>Clear password when main window becomes hidden</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QCheckBox" name="chkAdminOnly">
-                 <property name="text">
-                  <string>Only Administrator user accounts can make changes</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
                 <widget class="QCheckBox" name="chkAdminOnlyFP">
                  <property name="text">
                   <string>Only Administrator user accounts can use Pause Forcing Programs command</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1">
-                <widget class="QCheckBox" name="chkPassRequired">
-                 <property name="text">
-                  <string>Password must be entered in order to make changes</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="2">
-                <widget class="QPushButton" name="btnSetPassword">
-                 <property name="text">
-                  <string>Change Password</string>
-                 </property>
-                </widget>
-               </item>
                <item row="5" column="1">
-                <spacer name="verticalSpacer_7">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                <widget class="QCheckBox" name="chkClearPass">
+                 <property name="text">
+                  <string>Clear password when main window becomes hidden</string>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QCheckBox" name="chkAdminOnly">
+                 <property name="text">
+                  <string>Only Administrator user accounts can make changes</string>
                  </property>
-                </spacer>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QCheckBox" name="chkWatchConfig">
+                 <property name="text">
+                  <string>Watch Sandboxie.ini for changes</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>

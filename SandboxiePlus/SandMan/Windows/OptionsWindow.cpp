@@ -173,7 +173,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabs->setTabIcon(9, CSandMan::GetIcon("Settings"));
 	ui.tabs->setTabIcon(10, CSandMan::GetIcon("Advanced"));
 	ui.tabs->setTabIcon(11, CSandMan::GetIcon("Template"));
-	ui.tabs->setTabIcon(12, CSandMan::GetIcon("EditIni"));
+	ui.tabs->setTabIcon(12, CSandMan::GetIcon("Editor"));
 
 	ui.tabsGeneral->setTabIcon(0, CSandMan::GetIcon("Box"));
 	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("File"));

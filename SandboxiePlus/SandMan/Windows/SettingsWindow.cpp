@@ -145,14 +145,14 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Advanced"));
 	ui.tabs->setTabIcon(4, CSandMan::GetIcon("Alarm"));
 	ui.tabs->setTabIcon(5, CSandMan::GetIcon("Compatibility"));
-	ui.tabs->setTabIcon(6, CSandMan::GetIcon("EditIni"));
+	ui.tabs->setTabIcon(6, CSandMan::GetIcon("Editor"));
 	ui.tabs->setTabIcon(7, CSandMan::GetIcon("Support"));
 
-	ui.tabsGUI->setTabIcon(0, CSandMan::GetIcon("Design"));
+	ui.tabsGUI->setTabIcon(0, CSandMan::GetIcon("GUI"));
 	ui.tabsGUI->setTabIcon(1, CSandMan::GetIcon("Run"));
 
 	ui.tabsAdvanced->setTabIcon(0, CSandMan::GetIcon("Options"));
-	ui.tabsAdvanced->setTabIcon(1, CSandMan::GetIcon("Lock"));
+	ui.tabsAdvanced->setTabIcon(1, CSandMan::GetIcon("EditIni"));
 
 	int size = 16.0;
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

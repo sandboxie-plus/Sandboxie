@@ -1327,7 +1327,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 
 		foreach(const CSandBoxPtr &pBox, SandBoxes)
 		{
-			if (theConf->GetBool("Options/UseAsyncBoxOps", false))
+			if (theConf->GetBool("Options/UseAsyncBoxOps", false) || theGUI->IsSilentMode())
 			{
 				auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 				SB_STATUS Status = pBoxEx->DeleteContentAsync(DeleteShapshots);

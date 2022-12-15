@@ -135,6 +135,7 @@
         <file>Actions/Folder.png</file>
         <file>Actions/BFance.png</file>
         <file>Actions/Shield16.png</file>
+        <file>Actions/Editor.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

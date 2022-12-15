@@ -33,6 +33,7 @@
 #include "../MiscHelpers/Common/NeonEffect.h"
 #include <QVariantAnimation>
 #include <QSessionManager>
+#include "Helpers/FullScreen.h"
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -518,7 +519,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 	}
 
 		m_pMenuView->addSeparator();
-		m_pMenuBrowse = m_pMenuView->addAction(CSandMan::GetIcon("Tree"), tr("Show File Panel"), this, SLOT(OnProcView()));
+		m_pMenuBrowse = m_pMenuView->addAction(CSandMan::GetIcon("Folder"), tr("Show File Panel"), this, SLOT(OnProcView()));
 		m_pMenuBrowse->setCheckable(true);
 		m_pMenuBrowse->setShortcut(QKeySequence("Ctrl+D"));
 		m_pMenuBrowse->setShortcutContext(Qt::WidgetWithChildrenShortcut);
@@ -1243,6 +1244,12 @@ bool CSandMan::IsFullyPortable()
 	return false;
 }
 
+bool CSandMan::IsSilentMode()
+{
+	if (!theConf->GetBool("Options/CheckSilentMode", true))
+		return false;
+	return IsFullScreenMode();
+}
 void CSandMan::OnMessage(const QString& MsgData)
 {
 	QStringList Messages = MsgData.split("\n");

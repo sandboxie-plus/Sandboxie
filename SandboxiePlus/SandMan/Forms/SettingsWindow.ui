@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -54,7 +54,110 @@
         <layout class="QGridLayout" name="gridLayout_9">
          <item row="0" column="0">
           <layout class="QGridLayout" name="gridLayout_8">
-           <item row="7" column="1" colspan="2">
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_19">
+             <property name="text">
+              <string>UI Language:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="1" colspan="2">
+            <widget class="QCheckBox" name="chkShowRecovery">
+             <property name="text">
+              <string>Show first recovery window when emptying sandboxes</string>
+             </property>
+            </widget>
+           </item>
+           <item row="12" column="1">
+            <widget class="QCheckBox" name="chkRecoveryTop">
+             <property name="text">
+              <string>Show the Recovery Window as Always on Top</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QCheckBox" name="chkAsyncBoxOps">
+             <property name="text">
+              <string>Run box operations asynchronously whenever possible (like content deletion)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1" colspan="2">
+            <widget class="QCheckBox" name="chkMonitorSize">
+             <property name="text">
+              <string>Count and display the disk space occupied by each sandbox</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="uiLang"/>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="lblGeneral">
+             <property name="font">
+              <font>
+               <bold>true</bold>
+               <kerning>true</kerning>
+              </font>
+             </property>
+             <property name="text">
+              <string>General Options</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="0">
+            <widget class="QLabel" name="lblRecovery">
+             <property name="font">
+              <font>
+               <bold>true</bold>
+               <kerning>true</kerning>
+              </font>
+             </property>
+             <property name="text">
+              <string>Recovery Options</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1" colspan="2">
+            <widget class="QCheckBox" name="chkSandboxUrls">
+             <property name="text">
+              <string>Open urls from this ui sandboxed</string>
+             </property>
+             <property name="tristate">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="13" column="1">
+            <spacer name="verticalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="13" column="2">
+            <spacer name="horizontalSpacer_8">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="8" column="1" colspan="2">
             <widget class="QCheckBox" name="chkNotifications">
              <property name="text">
               <string>Show Notifications for relevant log Messages</string>
@@ -64,10 +167,10 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="1">
-            <widget class="QCheckBox" name="chkAsyncBoxOps">
+           <item row="10" column="1">
+            <widget class="QCheckBox" name="chkNotifyRecovery">
              <property name="text">
-              <string>Run box operations asynchronously whenever possible (like content deletion)</string>
+              <string>Show recoverable files as notifications</string>
              </property>
             </widget>
            </item>
@@ -85,89 +188,6 @@
              </item>
             </layout>
            </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="lblGeneral">
-             <property name="font">
-              <font>
-               <bold>true</bold>
-               <kerning>true</kerning>
-              </font>
-             </property>
-             <property name="text">
-              <string>General Options</string>
-             </property>
-            </widget>
-           </item>
-           <item row="8" column="0">
-            <widget class="QLabel" name="lblRecovery">
-             <property name="font">
-              <font>
-               <bold>true</bold>
-               <kerning>true</kerning>
-              </font>
-             </property>
-             <property name="text">
-              <string>Recovery Options</string>
-             </property>
-            </widget>
-           </item>
-           <item row="9" column="1">
-            <widget class="QCheckBox" name="chkNotifyRecovery">
-             <property name="text">
-              <string>Show recoverable files as notifications</string>
-             </property>
-            </widget>
-           </item>
-           <item row="12" column="1">
-            <spacer name="verticalSpacer_4">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_19">
-             <property name="text">
-              <string>UI Language:</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1" colspan="2">
-            <widget class="QCheckBox" name="chkSandboxUrls">
-             <property name="text">
-              <string>Open urls from this ui sandboxed</string>
-             </property>
-             <property name="tristate">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="11" column="1">
-            <widget class="QCheckBox" name="chkRecoveryTop">
-             <property name="text">
-              <string>Show the Recovery Window as Always on Top</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1" colspan="2">
-            <widget class="QCheckBox" name="chkMonitorSize">
-             <property name="text">
-              <string>Count and display the disk space occupied by each sandbox</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QComboBox" name="uiLang"/>
-           </item>
            <item row="5" column="1">
             <widget class="QCheckBox" name="chkWatchConfig">
              <property name="text">
@@ -175,23 +195,10 @@
              </property>
             </widget>
            </item>
-           <item row="12" column="2">
-            <spacer name="horizontalSpacer_8">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="10" column="1" colspan="2">
-            <widget class="QCheckBox" name="chkShowRecovery">
+           <item row="7" column="1">
+            <widget class="QCheckBox" name="chkSilentMode">
              <property name="text">
-              <string>Show first recovery window when emptying sandboxes</string>
+              <string>Suppress pop-up notifications when in game / presentation mode</string>
              </property>
             </widget>
            </item>

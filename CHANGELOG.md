@@ -6,8 +6,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.6.1b / 5.61.1] - 2022-12-??
 
+### Added
+- added game/presentation mode [#2534](https://github.com/sandboxie-plus/Sandboxie/issues/2534)
+
 ### Fixed
 - fixed support settign page not showing version updates properly
+
 
 
 

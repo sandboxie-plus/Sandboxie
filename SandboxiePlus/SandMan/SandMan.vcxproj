@@ -207,6 +207,7 @@
     <ClCompile Include="BoxMonitor.cpp" />
     <ClCompile Include="Dialogs\MultiErrorDialog.cpp" />
     <ClCompile Include="Helpers\FindTool.cpp" />
+    <ClCompile Include="Helpers\FullScreen.cpp" />
     <ClCompile Include="Helpers\ReadDirectoryChanges.cpp" />
     <ClCompile Include="Helpers\ReadDirectoryChangesPrivate.cpp" />
     <ClCompile Include="Helpers\WinAdmin.cpp" />
@@ -338,6 +339,7 @@
     <ClInclude Include="..\version.h" />
     <QtMoc Include="BoxMonitor.h" />
     <ClInclude Include="Helpers\FindTool.h" />
+    <ClInclude Include="Helpers\FullScreen.h" />
     <ClInclude Include="Helpers\ReadDirectoryChanges.h" />
     <ClInclude Include="Helpers\ReadDirectoryChangesPrivate.h" />
     <ClInclude Include="Helpers\ThreadSafeQueue.h" />

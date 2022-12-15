@@ -56,8 +56,9 @@ public:
 	bool				IsShowHidden() { return m_pShowHidden && m_pShowHidden->isChecked(); }
 	bool				KeepTerminated() { return m_pKeepTerminated && m_pKeepTerminated->isChecked(); }
 	bool				ShowAllSessions() { return m_pShowAllSessions && m_pShowAllSessions->isChecked(); }
-	bool				IsDisableRecovery() {return m_pDisableRecovery && m_pDisableRecovery->isChecked();}
-	bool				IsDisableMessages() {return m_pDisableMessages && m_pDisableMessages->isChecked();}
+	bool				IsSilentMode();
+	bool				IsDisableRecovery() {return IsSilentMode() || m_pDisableRecovery && m_pDisableRecovery->isChecked();}
+	bool				IsDisableMessages() {return IsSilentMode() || m_pDisableMessages && m_pDisableMessages->isChecked();}
 	CSbieView*			GetBoxView() { return m_pBoxView; }
 	CFileView*			GetFileView() { return m_pFileView; }
 

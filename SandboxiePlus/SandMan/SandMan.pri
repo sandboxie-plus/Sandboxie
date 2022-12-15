@@ -17,6 +17,7 @@ HEADERS += ./stdafx.h \
     ./Views/TraceView.h \
     ./Dialogs/MultiErrorDialog.h \
     ./Helpers/FindTool.h \
+    ./Helpers/FullScreen.h \
     ./Helpers/WinAdmin.h \
     ./Helpers/ReadDirectoryChanges.h \
     ./Helpers/ReadDirectoryChangesPrivate.h \
@@ -46,6 +47,7 @@ SOURCES += ./main.cpp \
     ./Views/TraceView.cpp \
     ./Dialogs/MultiErrorDialog.cpp \
     ./Helpers/FindTool.cpp \
+    ./Helpers/FullScreen.cpp \
     ./Helpers/WinAdmin.cpp \
     ./Helpers/ReadDirectoryChanges.cpp \
     ./Helpers/ReadDirectoryChangesPrivate.cpp \

@@ -2,6 +2,7 @@
 #include "SbieModel.h"
 #include "../../MiscHelpers/Common/Common.h"
 #include "../SandMan.h"
+#include "../Helpers/WinHelper.h"
 
 CSbieModel::CSbieModel(QObject *parent)
 : CTreeItemModel(parent)
@@ -223,12 +224,17 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 		int boxColor = pBoxEx->GetColor();
 		
 		QIcon Icon;
-		QString Action = pBox->GetText("DblClickAction");
-		if (!Action.isEmpty() && Action.left(1) != "!")
+		QString BoxIcon = pBox->GetText("BoxIcon");
+		if (!BoxIcon.isEmpty())
 		{
-			if (pNode->Action != Action || (pNode->busyState || Busy) || pNode->boxDel != boxDel) {
-				Icon = m_IconProvider.icon(QFileInfo(pBoxEx->GetCommandFile(Action)));
-				pNode->Action = Action;
+			if (pNode->BoxIcon != BoxIcon || (pNode->busyState || Busy) || pNode->boxDel != boxDel) 
+			{
+				StrPair PathIndex = Split2(BoxIcon, ",");
+				if (!PathIndex.second.isEmpty() && !PathIndex.second.contains("."))
+					Icon = QIcon(QPixmap::fromImage(LoadWindowsIcon(PathIndex.first, PathIndex.second.toInt())));
+				else
+					Icon = QIcon(QPixmap(BoxIcon));
+				pNode->BoxIcon = BoxIcon;
 			}
 		}
 		else if (pNode->inUse != inUse || pNode->bOpen != bOpen || (pNode->busyState || Busy) || pNode->boxType != boxType || pNode->boxColor != boxColor || pNode->boxDel != boxDel)
@@ -243,7 +249,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 				Icon = theGUI->GetColorIcon(boxColor, inUse);
 			else
 				Icon = theGUI->GetBoxIcon(boxType, inUse);
-			pNode->Action.clear();
+			pNode->BoxIcon.clear();
 		}
 
 		if (!Icon.isNull()) 

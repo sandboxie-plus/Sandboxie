@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added game/presentation mode [#2534](https://github.com/sandboxie-plus/Sandboxie/issues/2534)
+- added option to pick a custom box icon
 
 ### Fixed
 - fixed support settign page not showing version updates properly

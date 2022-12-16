@@ -46,6 +46,8 @@ private slots:
 
 	void OnOptChanged();
 
+	void OnUseIcon(bool bUse);
+	bool OnPickIcon();
 	void OnPickColor();
 	void OnColorSlider(int value);
 
@@ -193,6 +195,7 @@ private slots:
 
 	void OnGeneralChanged();
 	void OnPSTChanged();
+	void OnActionChanged();
 	void OnSecurityMode();
 	void OnStartChanged()			{ m_StartChanged = true; OnOptChanged(); }
 	//void OnRestrictionChanged()		{ m_RestrictionChanged = true; OnOptChanged(); }
@@ -300,6 +303,8 @@ protected:
 
 	void SetBoxColor(const QColor& color);
 	void UpdateBoxColor();
+
+	QString GetActionFile();
 
 	void SetProgramItem(QString Program, QTreeWidgetItem* pItem, int Column, const QString& Sufix = QString());
 
@@ -451,6 +456,7 @@ protected:
 
 	bool m_ConfigDirty;
 	QColor m_BorderColor;
+	QString m_BoxIcon;
 
 	bool m_HoldBoxType;
 
@@ -510,6 +516,8 @@ private:
 	void WriteTextList(const QString& Setting, const QStringList& List);
 
 	Ui::OptionsWindow ui;
+	QCheckBox* m_pUseIcon;
+	QToolButton* m_pPickIcon;
 	QSlider* m_pColorSlider;
 
 	struct SDbgOpt {

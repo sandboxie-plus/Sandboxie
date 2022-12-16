@@ -77,7 +77,7 @@ protected:
 		bool		boxDel;
 		int			boxColor;
 		int			OrderNumber;
-		QString		Action;
+		QString		BoxIcon;
 
 		CBoxedProcessPtr pProcess;
 	};

@@ -180,6 +180,9 @@
     <ClCompile Include="Helpers\FullScreen.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="Helpers\WinHelper.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -207,6 +210,9 @@
       <Filter>Helpers</Filter>
     </ClInclude>
     <ClInclude Include="Helpers\FullScreen.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\WinHelper.h">
       <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>

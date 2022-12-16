@@ -212,6 +212,7 @@
     <ClCompile Include="Helpers\ReadDirectoryChangesPrivate.cpp" />
     <ClCompile Include="Helpers\WinAdmin.cpp" />
     <ClCompile Include="Helpers\WindowFromPointEx.cpp" />
+    <ClCompile Include="Helpers\WinHelper.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Models\MonitorModel.cpp" />
     <ClCompile Include="Models\TraceModel.cpp" />
@@ -345,6 +346,7 @@
     <ClInclude Include="Helpers\ThreadSafeQueue.h" />
     <ClInclude Include="Helpers\WinAdmin.h" />
     <QtMoc Include="Models\MonitorModel.h" />
+    <ClInclude Include="Helpers\WinHelper.h" />
     <ClInclude Include="resource.h" />
     <QtMoc Include="SbiePlusAPI.h" />
     <QtMoc Include="SbieProcess.h" />

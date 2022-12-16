@@ -217,12 +217,12 @@
     <message>
         <location filename="OnlineUpdater.cpp" line="94"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
-        <translation type="unfinished">您是否想检查有无 Sandboxie-Plus 新版本发布？</translation>
+        <translation>您是否想检查有无 Sandboxie-Plus 新版本发布？</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="95"/>
         <source>Don&apos;t show this message again.</source>
-        <translation type="unfinished">不再显示此消息</translation>
+        <translation>不再显示此消息</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="204"/>
@@ -243,100 +243,100 @@
     <message>
         <location filename="OnlineUpdater.cpp" line="394"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;是否下载此安装程序？&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="396"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;是否下载此更新包？&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="398"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;update page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;是否转跳到&lt;a href=&quot;%1&quot;&gt;更新页面&lt;/a&gt;？&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="406"/>
         <source>Don&apos;t show this update anymore.</source>
-        <translation type="unfinished"></translation>
+        <translation>不再显示此次更新</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="516"/>
         <source>Downloading updates...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在下载更新...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="542"/>
         <source>invalid parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>无效参数</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="543"/>
         <source>failed to download updated information</source>
         <oldsource>failed to download update informations</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>未能下载更新信息</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="544"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>加载已更新的 Json 文件失败</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="545"/>
         <source>failed to download a particular file</source>
-        <translation type="unfinished"></translation>
+        <translation>未能下载特定文件</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="546"/>
         <source>failed to scan existing installation</source>
-        <translation type="unfinished"></translation>
+        <translation>未能扫描现有的安装</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="547"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>无效的更新包签名 !!!</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="548"/>
         <source>downloaded file is corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>下载的文件已损坏</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="549"/>
         <source>internal error</source>
-        <translation type="unfinished"></translation>
+        <translation>内部错误</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="550"/>
         <source>unknown error</source>
-        <translation type="unfinished"></translation>
+        <translation>未知错误</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="574"/>
         <source>Failed to download updates from server, error %1</source>
-        <translation type="unfinished"></translation>
+        <translation>从服务器下载更新失败，错误 %1</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="593"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Sandboxie-Plus 的热更新补丁已被下载。&lt;/p&gt;&lt;p&gt;是否要应用这些更新？如果有任何程序在沙盒中运行，它们将被终止。&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="697"/>
         <source>Downloading installer...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在下载安装程序...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="739"/>
         <source>Failed to download installer from: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>从 %1 下载安装程序失败</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="765"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;一个新的 Sandboxie-Plus 安装程序已被下载到以下位置：&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;是否要开始安装？如果有任何程序正在沙盒内运行，它们将被终止。.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="830"/>
@@ -1531,22 +1531,22 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="784"/>
         <source>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus release ready&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;有一个新的 Sandboxie-Plus 版本已准备就绪&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="785"/>
         <source>Click to run installer</source>
-        <translation type="unfinished"></translation>
+        <translation>点击以运行安装程序</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="788"/>
         <source>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update ready&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;有一个新的 Sandboxie-Plus 更新已准备就绪&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="789"/>
         <source>Click to apply update</source>
-        <translation type="unfinished"></translation>
+        <translation>点击以应用更新</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1385"/>
@@ -1862,7 +1862,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="459"/>
         <source>Run Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>运行沙盒</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="477"/>
@@ -3272,7 +3272,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/SbieView.cpp" line="163"/>
         <source>More Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>更多工具</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="220"/>
@@ -3659,50 +3659,50 @@ No will choose: %2</source>
         <location filename="Windows/SettingsWindow.cpp" line="229"/>
         <location filename="Windows/SettingsWindow.cpp" line="234"/>
         <source>Notify</source>
-        <translation type="unfinished"></translation>
+        <translation>通知</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="228"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>忽略</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="230"/>
         <location filename="Windows/SettingsWindow.cpp" line="235"/>
         <source>Download &amp; Notify</source>
-        <translation type="unfinished"></translation>
+        <translation>下载并通知</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="231"/>
         <location filename="Windows/SettingsWindow.cpp" line="236"/>
         <source>Download &amp; Install</source>
-        <translation type="unfinished"></translation>
+        <translation>下载并安装</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="279"/>
         <source>Browse for Program</source>
-        <translation type="unfinished">浏览程序</translation>
+        <translation>浏览程序</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="464"/>
         <source>Select Program</source>
-        <translation type="unfinished">选择程序</translation>
+        <translation>选择程序</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="464"/>
         <source>Executables (*.exe *.cmd)</source>
-        <translation type="unfinished">可执行文件 (*.exe *.cmd)</translation>
+        <translation>可执行文件 (*.exe *.cmd)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="468"/>
         <location filename="Windows/SettingsWindow.cpp" line="481"/>
         <source>Please enter a menu title</source>
-        <translation type="unfinished">请输入一个菜单标题</translation>
+        <translation>请输入一个菜单标题</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="477"/>
         <source>Please enter a command</source>
-        <translation type="unfinished">请输入一则命令</translation>
+        <translation>请输入一则命令</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="753"/>
@@ -3718,7 +3718,7 @@ No will choose: %2</source>
         <location filename="Windows/SettingsWindow.cpp" line="789"/>
         <source>Supporter certificate required</source>
         <oldsource>Supproter certificate required</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>需要赞助者凭据</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="892"/>
@@ -5936,12 +5936,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="389"/>
         <source>Integrate with Host Start Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>与主机开始菜单整合：</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="452"/>
         <source>User Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>用户界面</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="624"/>
@@ -5951,37 +5951,37 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="637"/>
         <source>Run Menu</source>
-        <translation type="unfinished">运行菜单</translation>
+        <translation>运行菜单</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="655"/>
         <source>Add program</source>
-        <translation type="unfinished">添加程序</translation>
+        <translation>添加程序</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="662"/>
         <source>You can configure custom entries for all sandboxes run menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>你可以为所有沙盒配置自定义运行菜单条目</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="697"/>
         <source>Remove</source>
-        <translation type="unfinished">移除</translation>
+        <translation>移除</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="713"/>
         <source>Command Line</source>
-        <translation type="unfinished">命令行</translation>
+        <translation>命令行</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="736"/>
         <source>Sandbox Config</source>
-        <translation type="unfinished">沙盒配置</translation>
+        <translation>沙盒配置</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="925"/>
         <source>Default sandbox:</source>
-        <translation type="unfinished"></translation>
+        <translation>默认沙盒: </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1024"/>
@@ -6026,37 +6026,37 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1308"/>
         <source>Version Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>待更新版本：</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1400"/>
         <source>New full versions from the selected release channel.</source>
-        <translation type="unfinished"></translation>
+        <translation>来自选定发布通道的新的完整版本</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1305"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
-        <translation type="unfinished"></translation>
+        <translation>针对已安装版本的 Templates.ini 模板和翻译的热更新补丁</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1328"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
-        <translation type="unfinished"></translation>
+        <translation>预览版通道包含最新的 GitHub 预发布版本</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1403"/>
         <source>New Versions</source>
-        <translation type="unfinished"></translation>
+        <translation>新版本：</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1457"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
-        <translation type="unfinished"></translation>
+        <translation>稳定版通道包含最新的 GitHub 稳定版本</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1460"/>
         <source>Search in the Stable channel</source>
-        <translation type="unfinished"></translation>
+        <translation>稳定版通道</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1275"/>
@@ -6066,7 +6066,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1331"/>
         <source>Search in the Preview channel</source>
-        <translation>预览通道</translation>
+        <translation>预览版通道</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1288"/>
@@ -6232,7 +6232,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="941"/>
         <source>Sandboxie Config</source>
         <oldsource>Config Protection</oldsource>
-        <translation type="unfinished">保护配置</translation>
+        <translation>保护配置</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1003"/>
@@ -6390,12 +6390,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="60"/>
         <source>This option also enables asynchronous operation when needed and suspends updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>在暂缓更新或其它需要的情况使用异步操作</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="63"/>
         <source>Suppress pop-up notifications when in game / presentation mode</source>
-        <translation type="unfinished"></translation>
+        <translation>在“游戏/演示”模式下，禁止弹出通知</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1045"/>

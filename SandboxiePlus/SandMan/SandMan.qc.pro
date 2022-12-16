@@ -16,10 +16,12 @@ equals(MY_ARCH, ARM64) {
 #  message("Building x64")
   CONFIG(debug, debug|release):LIBS += -L../Bin/x64/Debug
   CONFIG(release, debug|release):LIBS += -L../Bin/x64/Release
+  QT += winextras
 } else {
 #  message("Building x86")
   CONFIG(debug, debug|release):LIBS = -L../Bin/Win32/Debug
   CONFIG(release, debug|release):LIBS = -L../Bin/Win32/Release
+  QT += winextras
 }
 
 

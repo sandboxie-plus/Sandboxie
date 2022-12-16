@@ -15,7 +15,7 @@ QImage LoadWindowsIcon(const QString& Path, quint32 Index)
 	std::wstring path = QString(Path).replace("/", "\\").toStdWString();
 	HICON icon = ExtractIconW(NULL, path.c_str(), Index);
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-	QImage Icon = QtWin::fromHICON(icon);
+	QImage Icon = QtWin::fromHICON(icon).toImage();
 #else
 	QImage Icon = QImage::fromHICON(icon);
 #endif

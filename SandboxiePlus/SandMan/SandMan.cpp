@@ -185,6 +185,10 @@ CSandMan::CSandMan(QWidget *parent)
 	m_bConnectPending = false;
 	m_bStopPending = false;
 
+
+	m_pUpdater = new COnlineUpdater(this);
+
+
 	m_pMainWidget = new QWidget(this);
 
 	m_pMenuBar = menuBar();
@@ -245,8 +249,6 @@ CSandMan::CSandMan(QWidget *parent)
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 	m_pPopUpWindow->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 	m_pProgressDialog->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
-
-	m_pUpdater = new COnlineUpdater(this);
 
 	//connect(theAPI, SIGNAL(LogMessage(const QString&, bool)), this, SLOT(OnLogMessage(const QString&, bool)));
 	connect(theAPI, SIGNAL(LogSbieMessage(quint32, const QStringList&, quint32)), this, SLOT(OnLogSbieMessage(quint32, const QStringList&, quint32)));
@@ -777,19 +779,19 @@ void CSandMan::UpdateLabel()
 	QString LabelText;
 	QString LabelTip;
 
-	if (theConf->GetBool("Updater/PendingUpdate"))
+	if (!theConf->GetString("Updater/PendingUpdate").isEmpty())
 	{
 		QString FilePath = theConf->GetString("Updater/InstallerPath");
 		if (!FilePath.isEmpty() && QFile::exists(FilePath)) {
-			LabelText = tr("<a href=\"sbie://update/installer\" style=\"color: red;\">There is a new Sandboxie-Plus release ready</a>");
+			LabelText = tr("<a href=\"sbie://update/installer\" style=\"color: red;\">There is a new Sandboxie-Plus release %1 ready</a>").arg(theConf->GetString("Updater/InstallerVersion"));
 			LabelTip = tr("Click to run installer");
 		}
 		else if (!theConf->GetString("Updater/UpdateVersion").isEmpty()){
-			LabelText = tr("<a href=\"sbie://update/apply\" style=\"color: red;\">There is a new Sandboxie-Plus update ready</a>");
+			LabelText = tr("<a href=\"sbie://update/apply\" style=\"color: red;\">There is a new Sandboxie-Plus update %1 ready</a>").arg(theConf->GetString("Updater/UpdateVersion"));
 			LabelTip = tr("Click to apply update");
 		}
 		else {
-			LabelText = tr("<a href=\"sbie://update/check\" style=\"color: red;\">There is a new build of Sandboxie-Plus available</a>");
+			LabelText = tr("<a href=\"sbie://update/check\" style=\"color: red;\">There is a new Sandboxie-Plus update v%1 available</a>").arg(theConf->GetString("Updater/PendingUpdate"));
 			LabelTip = tr("Click to download update");
 		}
 

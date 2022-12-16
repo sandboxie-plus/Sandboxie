@@ -46,6 +46,11 @@ COnlineUpdater::COnlineUpdater(QObject *parent) : QObject(parent)
 
 	m_CheckMode = eInit;
 
+	int iUpdate = 0;
+	QString UpdateStr = ParseVersionStr(theConf->GetString("Updater/PendingUpdate"), &iUpdate);
+	if (!IsVersionNewer(UpdateStr) && (UpdateStr != GetCurrentVersion() || iUpdate <= GetCurrentUpdate()))
+		theConf->SetValue("Updater/PendingUpdate", ""); // seams update has been applied
+
 	bool bIsInstallerReady = false;
 	QString FilePath = theConf->GetString("Updater/InstallerPath");
 	if (!FilePath.isEmpty() && QFile::exists(FilePath)) {
@@ -255,7 +260,6 @@ void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Pa
 	m_UpdateData = Data;
 	
 	bool PendingUpdate = HandleUpdate();
-	theConf->SetValue("Updater/PendingUpdate", PendingUpdate);
 	theGUI->UpdateLabel();
 
 	if (PendingUpdate) {
@@ -275,11 +279,14 @@ void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Pa
 
 bool COnlineUpdater::HandleUpdate()
 {
+	QString PendingUpdate;
+
 	bool bNewRelease = false;
 	QVariantMap Release = m_UpdateData["release"].toMap();
 	QString ReleaseStr = Release["version"].toString();
 	if (IsVersionNewer(ReleaseStr)) {
 		if (m_CheckMode == eManual || !m_IgnoredUpdates.contains(ReleaseStr)) {
+			PendingUpdate = ReleaseStr;
 			bNewRelease = true;
 		}
 	}
@@ -296,12 +303,16 @@ bool COnlineUpdater::HandleUpdate()
 				theConf->SetValue("Updater/CurrentUpdate", MakeVersionStr(Update)); // cache result
 			else
 			{
+				if(PendingUpdate.isEmpty())
+					PendingUpdate = UpdateStr;
 				if (m_CheckMode == eManual || !m_IgnoredUpdates.contains(UpdateStr)) {
 					bNewUpdate = true;
 				}
 			}
 		}
 	}
+
+	theConf->SetValue("Updater/PendingUpdate", PendingUpdate);
 
 	//
 	// special case: updates allowed be to installed, but releases only allowed to be download

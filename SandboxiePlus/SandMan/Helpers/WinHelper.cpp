@@ -1,7 +1,12 @@
 #include "stdafx.h"
 #include "WinHelper.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QtWin>
+#else
 #include <windows.h>
+#endif
+
 #include <Shlwapi.h>
 #include <Shlobj.h>
 
@@ -9,7 +14,11 @@ QImage LoadWindowsIcon(const QString& Path, quint32 Index)
 {
 	std::wstring path = QString(Path).replace("/", "\\").toStdWString();
 	HICON icon = ExtractIconW(NULL, path.c_str(), Index);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+	QImage Icon = QtWin::fromHICON(icon);
+#else
 	QImage Icon = QImage::fromHICON(icon);
+#endif
 	DestroyIcon(icon);
 	return Icon;
 }

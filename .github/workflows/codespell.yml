@@ -45,6 +45,7 @@ jobs:
           echo 'linve->live' >> dictionary.txt
           echo 'actuallly->actually' >> dictionary.txt
           echo 'asynchroniusly->asynchronously' >> dictionary.txt
+          echo 'seams->seems' >> dictionary.txt
           # Only lowercase letters are allowed in --ignore-words-list
           codespell --dictionary=dictionary.txt --dictionary=dictionary_rare.txt --dictionary=dictionary_code.txt \
           --ignore-words-list="wil,unknwn,tolen,pevent,doubleclick,parm,parms,etcp,ois,ba,ptd,modell,namesd,stdio,uint,errorstring,ontext,atend,deque,ecounter,nmake,namess,inh,daa,varient" \

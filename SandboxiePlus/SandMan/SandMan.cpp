@@ -1410,7 +1410,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 
 	m_pBoxView->Refresh();
 
-	if(!IsSilentMode()) // dont check for updates when in presentation/game mode
+	if(!IsSilentMode()) // do not check for updates when in presentation/game mode
 		m_pUpdater->Process();
 
 	if (!m_MissingTemplates.isEmpty())

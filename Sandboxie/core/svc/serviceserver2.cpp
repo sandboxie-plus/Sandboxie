@@ -293,7 +293,7 @@ int ServiceServer::RunServiceAsSystem(const WCHAR* svcname, const WCHAR* boxname
     if (svcname && _wcsicmp(svcname, L"MSIServer") == 0 && SbieApi_QueryConfBool(boxname, L"MsiInstallerExemptions", FALSE))
         return 2;
 
-    // legacy behavioure option
+    // legacy behaviour option
     if (SbieApi_QueryConfBool(boxname, L"RunServicesAsSystem", FALSE)) 
         return 1;
     

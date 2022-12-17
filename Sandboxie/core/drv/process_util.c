@@ -928,11 +928,11 @@ _FX ULONG Process_MatchPathEx(
     // 
     // If a rule ends with an * it is not exact and will be overruled by an exact rule
     // 
-    // Adding UseRuleSpecificity=n disables this behavioure and reverts to the old classical one
+    // Adding UseRuleSpecificity=n disables this behaviour and reverts to the old classical one
     //
 
     //
-    // set default behavioure 
+    // set default behaviour
     //
 
     level = 3; // 3 - global default - lower is better, 3 is max value
@@ -993,7 +993,7 @@ _FX ULONG Process_MatchPathEx(
     }
     
     //
-    // read path list behaves in the kernel like the default normal behavioure
+    // read path list behaves in the kernel like the default normal behaviour
     // these paths allow read only access to true path and copy locations
     //
     
@@ -1003,7 +1003,7 @@ _FX ULONG Process_MatchPathEx(
     }
     
     //
-    // normal path list restores normal behavioure when used in specific mode
+    // normal path list restores normal behaviour when used in specific mode
     // these paths allow reading the true location and write to the copy location
     //
 

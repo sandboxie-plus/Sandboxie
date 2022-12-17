@@ -343,7 +343,7 @@ DWORD64 FindDllExport_impl(P_NtReadVirtualMemory64 ReadDll, HANDLE hProcess, DWO
 			
 			DYN_RELOC_TABLE* DynamicValueRelocTable = NULL;
 
-			if (DllBase == 0 && (resolve_ec || resolve_exp)) { // only for images on disk, on linve images we take the actuallly used export directory
+			if (DllBase == 0 && (resolve_ec || resolve_exp)) { // only for images on disk, on live images we take the actually used export directory
 
 				PIMAGE_SECTION_HEADER section = IMAGE_FIRST_SECTION(nt_hdrs);
 				nt_hdrs->FileHeader.NumberOfSections;

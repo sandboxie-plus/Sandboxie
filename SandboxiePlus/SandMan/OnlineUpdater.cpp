@@ -49,7 +49,7 @@ COnlineUpdater::COnlineUpdater(QObject *parent) : QObject(parent)
 	int iUpdate = 0;
 	QString UpdateStr = ParseVersionStr(theConf->GetString("Updater/PendingUpdate"), &iUpdate);
 	if (!IsVersionNewer(UpdateStr) && (UpdateStr != GetCurrentVersion() || iUpdate <= GetCurrentUpdate()))
-		theConf->SetValue("Updater/PendingUpdate", ""); // seams update has been applied
+		theConf->SetValue("Updater/PendingUpdate", ""); // it seems update has been applied
 
 	bool bIsInstallerReady = false;
 	QString FilePath = theConf->GetString("Updater/InstallerPath");
@@ -315,7 +315,7 @@ bool COnlineUpdater::HandleUpdate()
 	theConf->SetValue("Updater/PendingUpdate", PendingUpdate);
 
 	//
-	// special case: updates allowed be to installed, but releases only allowed to be download
+	// special case: updates allowed be to installed, but releases only allowed to be downloaded
 	// solution: apply updates silently, then prompt to install new release, else prioritize installing new releases over updating the existing one
 	//
 

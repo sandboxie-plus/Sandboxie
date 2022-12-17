@@ -48,7 +48,7 @@ public:
 			}
 		}
 
-		// default behavioure
+		// default behaviour
 		return QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
 	}
 

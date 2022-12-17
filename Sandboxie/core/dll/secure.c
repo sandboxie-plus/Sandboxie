@@ -1108,7 +1108,7 @@ NTSTATUS Ldr_NtAccessCheckByType(PSECURITY_DESCRIPTOR SecurityDescriptor, PSID P
     NTSTATUS rc;
     HANDLE hTokenReal = NULL;
 
-    // todo: is that right? seams wrong 
+    // todo: is that right? It seems wrong
     if (Dll_ImageType == DLL_IMAGE_SANDBOXIE_BITS ||
         Dll_ImageType == DLL_IMAGE_SANDBOXIE_WUAU ||
         Dll_ImageType == DLL_IMAGE_WUAUCLT) {

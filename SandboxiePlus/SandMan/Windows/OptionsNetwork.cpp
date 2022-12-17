@@ -44,7 +44,7 @@ void COptionsWindow::CreateNetwork()
 void COptionsWindow::LoadINetAccess()
 {
 	m_IsEnabledWFP = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("NetworkEnableWFP", false);
-	// check if we are blockign globaly and if so adapt the behavioure accordingly
+	// check if we are blocking globally and if so adapt the behaviour accordingly
 	m_WFPisBlocking = !m_pBox->GetAPI()->GetGlobalSettings()->GetBool("AllowNetworkAccess", true); 
 	
 	ui.lblNoWfp->setVisible(!m_IsEnabledWFP); // warn user that this is only user mode
@@ -479,7 +479,7 @@ void COptionsWindow::SaveNetFwRules()
 		QString Prot = pItem->text(4);
 
 		QString Temp = GetFwRuleActionStr(Action);
-		//if (Program.contains("=") || Program.contains(";") || Program.contains(",")) // todo: make sbie parse this proeprly
+		//if (Program.contains("=") || Program.contains(";") || Program.contains(",")) // todo: make SBIE parses this properly
 		//	Program = "\'" + Program + "\'"; 
 		if (Program.isEmpty())
 			Program = "*";

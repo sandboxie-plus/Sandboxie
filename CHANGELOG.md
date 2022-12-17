@@ -4,14 +4,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.6.1b / 5.61.1] - 2022-12-??
+## [1.?.? / 5.??.?] - 202?-??-??
+
+### Added
+- added template for Tencent TIM [#2516](https://github.com/sandboxie-plus/Sandboxie/pull/2516)
+
+
+
+
+## [1.6.1b / 5.61.1] - 2022-12-16
 
 ### Added
 - added game/presentation mode [#2534](https://github.com/sandboxie-plus/Sandboxie/issues/2534)
 - added option to pick a custom box icon
 
 ### Fixed
-- fixed support settign page not showing version updates properly
+- fixed support setting page not showing version updates properly
 
 
 
@@ -20,7 +28,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added run boxed command to the sandbox menu
-- DefaultBox can now be replaced with an other sandbox [#2445](https://github.com/sandboxie-plus/Sandboxie/issues/2445)
+- DefaultBox can now be replaced with another sandbox [#2445](https://github.com/sandboxie-plus/Sandboxie/issues/2445)
 
 ### Fixed
 - improved fix for [#2495](https://github.com/sandboxie-plus/Sandboxie/issues/2495)
@@ -34,7 +42,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - reorganized command prompt entries [#2451](https://github.com/sandboxie-plus/Sandboxie/issues/2451)
-- the "live" update channel is now part of the "preview" channel for which Version Updates can now be disabled
+- the "live" update channel is now part of the "preview" channel for which version updates can now be disabled
 
 ### Fixed
 - fixed issue with support setting drop-down menu multiplying [#2502](https://github.com/sandboxie-plus/Sandboxie/pull/2502) (okrc)
@@ -257,7 +265,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option to block host processes from accessing sandboxed ones [#2132](https://github.com/sandboxie-plus/Sandboxie/issues/2132)
 -- usage: DenyHostAccess=Program.exe,y
 -- note: by default, this protection only applies for write access, that is, unsandboxed processes will still be able to obtain read-only access
--- to prevent host processes from obtaining read access, ConfidentialBox=y must also be set, which require a supporter certificate
+-- to prevent host processes from obtaining read access, ConfidentialBox=y must also be set, which requires a supporter certificate
 - added compatibility template for ReHIPS
 - added creation of all default folders in privacy box type [#2218](https://github.com/sandboxie-plus/Sandboxie/issues/2218)
 

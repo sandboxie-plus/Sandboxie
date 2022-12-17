@@ -64,28 +64,29 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 ## 📑 Helpful Contributors
 
 - DavidBerdik - Maintainer of [Sandboxie Website Archive](https://github.com/Sandboxie-Website-Archive/sandboxie-website-archive.github.io)
-- diversenok - Security analysis & PoC's
-- stephtr - CI / Certification
+- Jackenmen - Maintainer of Chocolatey packages for Sandboxie ([support](https://github.com/Jackenmen/choco-auto/issues?q=is%3Aissue+Sandboxie))
+- vedantmgoyal2009 - Maintainer of Winget Releaser for Sandboxie ([support](https://github.com/vedantmgoyal2009/winget-releaser/issues?q=is%3Aissue+Sandboxie))
+- blap - Maintainer of [SandboxToys2](https://github.com/blap/SandboxToys2) addon
+- diversenok - Security analysis & PoC's / Security fixes
 - TechLord - Team-IRA / Reversing
 - hg421 - Security analysis / Code reviews
+- mpheath - Author of Plus installer / Code fixes / Collaborator
+- offhub - Documentation additions / Collaborator
+- isaak654 - Templates / Documentation / Code fixes / Collaborator
+- okrc - Code fixes
+- stephtr - CI / Certification
 - typpos - UI suggestions / Documentation / Code reviews
-- isaak654 - Templates / Documentation / Code fixes
 - Dyras - Templates additions
 - cricri-pingouin - UI fixes
 - Valinwolf - UI / Icons
 - daveout - UI / Icons
-- mpheath - Author of Plus installer / Code fixes
 - yfdyh000 - Localization support for Plus installer
 - NewKidOnTheBlock - Changelog fixes
 - Naeemh1 - Documentation additions
 - APMichael - Templates additions
-- vedantmgoyal2009 - Workflow to automate Plus releases in Windows Package Manager
 - weihongx9315 - Windows Credentials fix
 - 1mm0rt41PC - Documentation additions
 - Luro223 - Documentation additions
-- blap - Maintainer of [SandboxToys2](https://github.com/blap/SandboxToys2)
-- okrc - Code fixes
-- offhub - Documentation additions
 
 ## 🌏 Translators
 
@@ -96,16 +97,16 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 - bastik-1001, APMichael - German
 - isaak654 - Italian
 - VenusGirl - Korean
-- [7zip](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=20) - Polish (updates via pull requests are still needed)
+- 7zip - Polish ([provided separately](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=20))
 - JNylson - Portuguese and Brazilian Portuguese
 - lufog - Russian
 - sebadamus - Spanish
 - pb1 - Swedish
-- xorcan, fmbxnary - Turkish
+- xorcan, fmbxnary, offhub - Turkish
 - SuperMaxusa, lufog - Ukrainian
 - GunGunGun - Vietnamese
 
-More volunteers are welcome here! ;)
+New translators are encouraged to look at the [Localization notes and tips](https://git.io/J9G19) before creating a pull request.
 
 ## 🤝 Support the project
 

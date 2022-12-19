@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.?.? / 5.??.?] - 202?-??-??
+## [1.6.2 / 5.61.2] - 2022-12-19
 
 ### Added
 - added template for Tencent TIM [#2516](https://github.com/sandboxie-plus/Sandboxie/pull/2516) (thanks TooYoungTooSimp)

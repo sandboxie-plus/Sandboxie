@@ -254,12 +254,12 @@
     <message>
         <location filename="OnlineUpdater.cpp" line="99"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
-        <translation type="unfinished">Voulez-vous vérifier s&apos;il existe une nouvelle version de Sandboxie-Plus ?</translation>
+        <translation>Voulez-vous vérifier s&apos;il existe une nouvelle version de Sandboxie-Plus ?</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="100"/>
         <source>Don&apos;t show this message again.</source>
-        <translation type="unfinished">Ne plus afficher ce message.</translation>
+        <translation>Ne plus afficher ce message.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="209"/>
@@ -280,100 +280,100 @@
     <message>
         <location filename="OnlineUpdater.cpp" line="405"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Voulez-vous télécharger l&apos;installeur ?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="407"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Voulez-vous télécharger les mises à jour ?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="409"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;update page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Voulez-vous aller sur la &lt;a href=&quot;%1&quot;&gt;page de mise à jour&lt;/a&gt; ?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="417"/>
         <source>Don&apos;t show this update anymore.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne plus afficher cette mise à jour.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="527"/>
         <source>Downloading updates...</source>
-        <translation type="unfinished"></translation>
+        <translation>Téléchargement des mises à jour...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="553"/>
         <source>invalid parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>paramètre invalide</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="554"/>
         <source>failed to download updated information</source>
         <oldsource>failed to download update informations</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>échec du téléchargement des informations de mise à jour</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="555"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>échec du chargement de la mise à jour du fichier json</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="556"/>
         <source>failed to download a particular file</source>
-        <translation type="unfinished"></translation>
+        <translation>échec de téléchargement d&apos;un fichier en particulier</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="557"/>
         <source>failed to scan existing installation</source>
-        <translation type="unfinished"></translation>
+        <translation>échec de l&apos;analyse de l&apos;installation existante</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="558"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>la signature mise à jour est invalide !!!</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="559"/>
         <source>downloaded file is corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>lé fichier téléchargé est corrompu</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="560"/>
         <source>internal error</source>
-        <translation type="unfinished"></translation>
+        <translation>erreur interne</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="561"/>
         <source>unknown error</source>
-        <translation type="unfinished"></translation>
+        <translation>erreur inconnue</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="585"/>
         <source>Failed to download updates from server, error %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec du téléchargement des mises à jour depuis le serveur ; erreur %1</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="604"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Des mises à jour pour Sandboxie-Plus ont été téléchargées.&lt;/p&gt;&lt;p&gt;Voules-vous appliquer ces mises à jour ? Si des programmes sont lancés dans des bacs à sable, ils seront arrêtés.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="708"/>
         <source>Downloading installer...</source>
-        <translation type="unfinished"></translation>
+        <translation>Téléchargement de l&apos;installeur...</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="750"/>
         <source>Failed to download installer from: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec du téléchargement de l&apos;installeur depuis : %1</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="776"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Un nouvel installeur pour Sandboxie-Plus a été téléchargé à l&apos;endroit suivant :&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Voulez-vous commencer l&apos;installation ? Si des programmes sont lancés dans des bacs à sable, ils seront arrêtés.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="841"/>
@@ -700,7 +700,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/OptionsAdvanced.cpp" line="44"/>
         <source>Enable special inconsistent PreferExternalManifest behaviour, as needed for some Edge fixes</source>
         <oldsource>Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes</oldsource>
-        <translation type="unfinished">Active le comportement particulier PreferExternalManifest, nécessaire pour certains correctifs marginaux.</translation>
+        <translation>Active le comportement particulier PreferExternalManifest, nécessaire pour certains correctifs pour Edge.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="45"/>
@@ -716,7 +716,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/OptionsAdvanced.cpp" line="49"/>
         <source>Make specified processes think they have admin permissions.</source>
         <oldsource>Make specified processes think thay have admin permissions.</oldsource>
-        <translation type="unfinished">Fait en sorte que les processus définis pensent qu&apos;ils ont des privilèges d&apos;Administrateur.</translation>
+        <translation>Fait en sorte que les processus définis pensent qu&apos;ils ont des privilèges d&apos;Administrateur.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="50"/>
@@ -902,7 +902,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="107"/>
         <source>Custom icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Icône personnalisée</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="174"/>
@@ -1520,7 +1520,7 @@ Chemin complet : %4</translation>
     <message>
         <location filename="SandMan.cpp" line="3172"/>
         <source>Waiting for folder: %1</source>
-        <translation>Attente du dossier : %1</translation>
+        <translation>Dossier en attente : %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3173"/>
@@ -1679,23 +1679,23 @@ Chemin complet : %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2170"/>
         <source>Select file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir un nom de fichier</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2170"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation type="unfinished"></translation>
+        <translation>Archive 7-zip (*.7z)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2183"/>
         <source>This name is already in use, please select an alternative box name</source>
         <oldsource>This Name is already in use, please select an alternative box name</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ce nom est déjà utilisé ; veuillez choisir un nom de bac alternatif</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2197"/>
         <source>Importing: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Importation : %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2250"/>
@@ -1710,27 +1710,27 @@ Chemin complet : %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2870"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Importation/Exportation non disponible ; 7z.dll n&apos;a pas pu être chargé</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2871"/>
         <source>Failed to create the box archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de création de l&apos;archive du bac</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2872"/>
         <source>Failed to open the 7z archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec d&apos;ouverture de l&apos;archive 7z</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2873"/>
         <source>Failed to unpack the box archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de décompression de l&apos;archive du bac</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2874"/>
         <source>The selected 7z file is NOT a box archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier 7z choisi n&apos;est PAS une archive de bac</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3070"/>
@@ -2047,12 +2047,12 @@ Chemin complet : %4</translation>
     <message>
         <location filename="SandMan.cpp" line="459"/>
         <source>Import Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer un bac</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="461"/>
         <source>Run Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Exécuter dans un bac à sable</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="479"/>
@@ -2099,7 +2099,7 @@ Chemin complet : %4</translation>
     <message>
         <location filename="SandMan.cpp" line="660"/>
         <source>Import Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer un bac à sable</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="662"/>
@@ -2185,17 +2185,17 @@ Chemin complet : %4</translation>
     <message>
         <location filename="SandMan.cpp" line="787"/>
         <source>Click to run installer</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquez pour lancer l&apos;installeur</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="791"/>
         <source>Click to apply update</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquez pour appliquer la mise à jour</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="794"/>
         <source>&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update v%1 available&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;Une nouvelle mise à jour de Sandboxie-Plus (v%1) est disponible&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1032"/>
@@ -2322,12 +2322,12 @@ Ce bac empêche l&apos;accès à toutes les données utilisateur, sauf si spéci
     <message>
         <location filename="SandMan.cpp" line="786"/>
         <source>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus release %1 ready&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;Une nouvelle version de Sandboxie-Plus (%1) est prête&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="790"/>
         <source>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update %1 ready&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;Une nouvelle mise à jour de Sandboxie-Plus (%1) est prête&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1427"/>
@@ -3240,7 +3240,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Views/SbieView.cpp" line="163"/>
         <source>More Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus d&apos;outils</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="186"/>
@@ -3411,7 +3411,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Views/SbieView.cpp" line="316"/>
         <source>Export Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter le bac à sable</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="375"/>
@@ -3505,7 +3505,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Views/SbieView.cpp" line="225"/>
         <source>Export Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter le bac</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="228"/>
@@ -3630,17 +3630,17 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Views/SbieView.cpp" line="1247"/>
         <source>Select file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir un nom de fichier</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1247"/>
         <source>7-zip Archive (*.7z)</source>
-        <translation type="unfinished"></translation>
+        <translation>Archive 7-zip (*.7z)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1255"/>
         <source>Exporting: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportation : %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1262"/>
@@ -3855,7 +3855,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="228"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorer</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="240"/>
@@ -3910,51 +3910,51 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/SettingsWindow.cpp" line="229"/>
         <location filename="Windows/SettingsWindow.cpp" line="234"/>
         <source>Notify</source>
-        <translation type="unfinished"></translation>
+        <translation>Avertir</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="230"/>
         <location filename="Windows/SettingsWindow.cpp" line="235"/>
         <source>Download &amp; Notify</source>
-        <translation type="unfinished"></translation>
+        <translation>Télécharger &amp; avertir</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="231"/>
         <location filename="Windows/SettingsWindow.cpp" line="236"/>
         <source>Download &amp; Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Télécharger &amp; installer</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="279"/>
         <source>Browse for Program</source>
-        <translation type="unfinished">Explorer pour un programme</translation>
+        <translation>Rechercher un programme</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="464"/>
         <source>Select Program</source>
-        <translation type="unfinished">Sélectionner le programme</translation>
+        <translation>Sélectionner le programme</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="464"/>
         <source>Executables (*.exe *.cmd)</source>
-        <translation type="unfinished">Exécutables (*.exe *.cmd)</translation>
+        <translation>Exécutables (*.exe *.cmd)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="468"/>
         <location filename="Windows/SettingsWindow.cpp" line="481"/>
         <source>Please enter a menu title</source>
-        <translation type="unfinished">Veuillez saisir un titre de menu</translation>
+        <translation>Veuillez saisir un titre de menu</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="477"/>
         <source>Please enter a command</source>
-        <translation type="unfinished">Veuillez saisir une commande</translation>
+        <translation>Veuillez saisir une commande</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="789"/>
         <source>Supporter certificate required</source>
         <oldsource>Supproter certificate required</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Un certificat d&apos;adhérent est nécessaire</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1135"/>
@@ -4953,7 +4953,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Forms/OptionsWindow.ui" line="1098"/>
         <source>Advanced Security</source>
         <oldsource>Adcanced Security</oldsource>
-        <translation type="unfinished">Sécurité avancée</translation>
+        <translation>Sécurité avancée</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1106"/>
@@ -5004,7 +5004,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Forms/OptionsWindow.ui" line="1590"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
         <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
-        <translation type="unfinished">Les programmes saisis ici seront autorisés à s&apos;évader de ce bac lors de leur démarrage, de sorte que vous puissiez les capturer dans un autre bac. Par exemple, vous pouvez faire en sorte que votre navigateur web s&apos;ouvre toujours dans un bac dédié. Cette fonctionnalité nécessite qu&apos;un certificat d&apos;adhérent valide soit installé.</translation>
+        <translation>Les programmes saisis ici seront autorisés à s&apos;évader de ce bac lors de leur démarrage, de sorte que vous puissiez les capturer dans un autre bac, par exemple pour que votre navigateur web s&apos;ouvre toujours dans un bac dédié. Cette fonctionnalité nécessite qu&apos;un certificat d&apos;adhérent valide soit installé.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1607"/>
@@ -5953,7 +5953,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
         <location filename="Forms/OptionsWindow.ui" line="3261"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
         <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
-        <translation type="unfinished">Cette commande sera exécutée avant qu&apos;un fichier ne soit récupéré et le chemin du fichier sera transmis en tant que premier argument ; si cette commande retourne autre chose que « 0 », la récupération sera bloquée.</translation>
+        <translation>Cette commande sera exécutée avant qu&apos;un fichier ne soit récupéré et le chemin du fichier sera transmis en tant que premier argument ; si cette commande retourne autre chose que « 0 », la récupération sera bloquée.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3264"/>
@@ -6581,7 +6581,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="389"/>
         <source>Integrate with Host Start Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Intégrer au menu Démarrer de l&apos;hôte</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="624"/>
@@ -6602,57 +6602,57 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
         <location filename="Forms/SettingsWindow.ui" line="941"/>
         <source>Sandboxie Config</source>
         <oldsource>Config Protection</oldsource>
-        <translation type="unfinished">Protection de la configuration</translation>
+        <translation>Configuration de Sandboxie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="60"/>
         <source>This option also enables asynchronous operation when needed and suspends updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette option active une opération asynchrone au besoin, et interrompt les mises à jour.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="63"/>
         <source>Suppress pop-up notifications when in game / presentation mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprime les avertissements surgissants en mode Jeu / Présentation</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="452"/>
         <source>User Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Interface utilisateur</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="637"/>
         <source>Run Menu</source>
-        <translation type="unfinished">Menu Exécuter</translation>
+        <translation>Menu Exécuter</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="655"/>
         <source>Add program</source>
-        <translation type="unfinished">Ajouter un programme</translation>
+        <translation>Ajouter un programme</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="662"/>
         <source>You can configure custom entries for all sandboxes run menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous pouvez configurer des entrées personnalisées pour tous les menus Exécuter dans des bacs à sable.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="697"/>
         <source>Remove</source>
-        <translation type="unfinished">Supprimer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="713"/>
         <source>Command Line</source>
-        <translation type="unfinished">Ligne de commande</translation>
+        <translation>Ligne de commande</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="736"/>
         <source>Sandbox Config</source>
-        <translation type="unfinished">Configuration des bacs à sable</translation>
+        <translation>Configuration du bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="925"/>
         <source>Default sandbox:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bac à sable par défaut :</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1114"/>
@@ -6707,17 +6707,17 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1308"/>
         <source>Version Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Mises à jour de version :</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1400"/>
         <source>New full versions from the selected release channel.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouvelles versions complètes du canal de parution choisi.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1305"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
-        <translation type="unfinished"></translation>
+        <translation>Correctifs pour la version installée, mises à jour de Templates.ini et traductions.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1252"/>
@@ -6727,22 +6727,22 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1328"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le canal des Aperçus contient les dernières pré-versions GitHub.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1403"/>
         <source>New Versions</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouvelles versions :</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1457"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le canal Stable contient les dernières parutions stables de GitHub.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1460"/>
         <source>Search in the Stable channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher dans le canal Stable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1275"/>
@@ -6752,7 +6752,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1331"/>
         <source>Search in the Preview channel</source>
-        <translation>Rechercher dans le canal des préversions</translation>
+        <translation>Rechercher dans le canal des Aperçus</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1288"/>

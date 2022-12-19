@@ -6817,7 +6817,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="60"/>
         <source>This option also enables asynchronous operation when needed and suspends updates.</source>
-        <translation>Diese Option ermöglicht, wenn erforderlich, auch einen asynchronen Betrieb und setzt Updates aus.</translation>
+        <translation>Diese Option aktiviert auch asynchrone Operationen, wenn nötig, und setzt Updates aus.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="63"/>

@@ -874,7 +874,7 @@ void CSbieView::OnGroupAction(QAction* Action)
 		if (Offset == 0)
 			return;
 
-		// todo: fix behavioure on multiple selelction
+		// todo: fix behaviour on multiple selection
 		foreach(const QString& Name, GetSelectedGroups(true)) {
 			bool bFound = false;
 			retry:

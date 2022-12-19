@@ -392,7 +392,7 @@ void COptionsWindow::AddAccessEntry(EAccessType Type, EAccessMode Mode, QString 
 	//////////////////////////////////////////////////////////
 	// File and Registry entries auto append a '*' wildcard 
 	// when they don't contain any.
-	// Prepanding '|' disables this behavioure
+	// Prepending '|' disables this behaviour
 	//
 
 	QString sPath = Path;

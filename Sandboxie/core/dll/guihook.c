@@ -219,7 +219,7 @@ _FX HHOOK Gui_SetWindowsHookExW(
     //
     // we also don't care if the target thread is in the same process.
     //
-    // in any other case, the hooker probablys expects their hook dll to
+    // in any other case, the hooker probably expects their hook dll to
     // be injected into target threads, but this will not occur.
     //
     // on Vista and later, UIPI will prevent the dll from loading into
@@ -232,9 +232,9 @@ _FX HHOOK Gui_SetWindowsHookExW(
 
     //
     // the boxed "global" hook mechanism should only be used for global hooks
-    // using it for hooks that specify a thread ID like done in sbie 5.33.6 
-    // and earlier results in a non standard conform behavioure:
-    // the hook in handled as a global one and injectted into all processes.
+    // using it for hooks that specify a thread ID like done in SBIE 5.33.6 
+    // and earlier results in a non standard conform behaviour:
+    // the hook in handled as a global one and injected into all processes.
     //
     // so we let the system handle hooks on a specified thread or once without 
     // a dll module handle always as those are not global

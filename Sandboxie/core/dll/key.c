@@ -504,7 +504,7 @@ _FX NTSTATUS Key_GetName(
             //
             // Note: some keys like L"\\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Perflib\\007"
             // do not return valid results when querying using NtQueryKey and returns a STATUS_INVALID_HANDLE
-            // using Obj_GetObjectName seams to break sbie on 1803, strangely on w7 its fine
+            // using Obj_GetObjectName seems to break SBIE on Windows 10 1803, strangely on W7 it is fine
             // hence this alternative access mode is made optional
             //
 

@@ -2013,7 +2013,7 @@ _FX BOOLEAN Sxs_PreferExternal(THREAD_DATA *TlsData)
         return FALSE;
 
     //
-    // KB5014019 breaks edge, it seams making edge start its child processes with 
+    // KB5014019 breaks Edge, it seems that making Edge to start its child processes with
     // PreferExternalManifest fixes the issue, but the main process must be loaded normally
     // hence we have ExternalManifestHack that checks the parent and not the target
     //

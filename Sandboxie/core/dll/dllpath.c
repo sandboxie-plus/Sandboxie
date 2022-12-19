@@ -471,7 +471,7 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
     BOOLEAN use_rule_specificity = (path_code == L'f' || path_code == L'k' || path_code == L'i') && (Dll_ProcessFlags & SBIE_FLAG_RULE_SPECIFICITY) != 0;
 
     //
-    // set default behavioure 
+    // set default behaviour
     //
 
     level = 3; // 3 - global default - lower is better, 3 is max value

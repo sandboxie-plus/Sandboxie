@@ -357,26 +357,26 @@ swedish.UninstallTaskLabel4=Ta bort &konfigurationsfilerna%nVälj detta alternat
 swedish.UninstallTaskLabel5=Ta bort konfigurationsfiler och &sandlådor%nVälj detta alternativ för att ta bort alla konfigurationsfiler och sandlådor, även sandlådemappen lokaliserad i anpassade sökvägar med filrotsökvägen.
 
 ; Turkish
-turkish.AddSandboxedMenu=Bağlam menüsüne "Korumalı Alanda Çalıştır"ı ekle
-turkish.AddSandboxedBrowser=Korumalı Alan altında Web tarayıcısını başlatmak için masaüstü kısayolu ekle
-turkish.SandboxieStartMenu1=Korumalı Alanda herhangi bir programı çalıştırın
-turkish.SandboxieStartMenu2=Korumalı Alanda Web Tarayıcısını çalıştır
-turkish.SandboxieStartMenu3=Korumalı Alan Başlangıç Menüsü
-turkish.SandboxedBrowser=Koruma Alanlı Web Tarayıcısı
+turkish.AddSandboxedMenu=Bağlam menüsüne "Korumalı Alanda Çalıştır" seçeneği ekle
+turkish.AddSandboxedBrowser=Sandboxie altında Web tarayıcısını başlatmak için masaüstü kısayolu ekle
+turkish.SandboxieStartMenu1=Korumalı alanda herhangi bir program çalıştır
+turkish.SandboxieStartMenu2=Korumalı alanda Web tarayıcısını çalıştır
+turkish.SandboxieStartMenu3=Sandboxie Başlangıç Menüsü
+turkish.SandboxedBrowser=Korumalı Web Tarayıcısı
 turkish.CustomPageLabel1=Kurulum Türünü Seçin
 turkish.CustomPageLabel2=Nasıl kurulacağını seçin
-turkish.CustomPageLabel3=Yükleme Modunu seçin
-turkish.CustomPageInstallMode={#MyAppName} uygulamasını bu bilgisayara kurun
-turkish.CustomPageUpgradeMode=Mevcut {#MyAppName} kurulumunu güncelleyin
-turkish.CustomPagePortableMode=Taşınabilir kullanım için tüm dosyaları bir dizine çıkarın
+turkish.CustomPageLabel3=Yükleme modunu seçin
+turkish.CustomPageInstallMode={#MyAppName} uygulamasını bu bilgisayara kur
+turkish.CustomPageUpgradeMode=Mevcut {#MyAppName} kurulumunu güncelle
+turkish.CustomPagePortableMode=Taşınabilir kullanım için tüm dosyaları bir dizine çıkar
 turkish.RequiresWin7OrLater=Sandboxie-Plus, Windows 7 veya sonraki bir sürümünü gerektirir.
 turkish.ClassicFound=Sandboxie Classic kurulumu algılandı, önce kaldırılması gerekiyor, şimdi kaldırmak istiyor musunuz?
 turkish.RunSandboxedMenu=&Korumalı Alanda Çalıştır
 turkish.UninstallTaskLabel1=Kaldırma Türünü Seçin
 turkish.UninstallTaskLabel2=Sandboxie-Plus'ı nasıl kaldırmak istersiniz?
-turkish.UninstallTaskLabel3=Yapılandırma dosyalarını ve korumalı alanları &sakla%nYapılandırma dosyalarınızı ve korumalı alanlarınızı korurken Sandboxie-Plus'ı yeniden yüklemeyi planlıyorsanız, bu en çok önerilen seçenektir.
-turkish.UninstallTaskLabel4=&Yapılandırma dosyalarını kaldır%nSandboxie.ini ve Sandboxie-Plus.ini yapılandırma dosyalarını, korumalı alanları değiştirmeden kaldırmak için bu seçeneği belirleyin.
-turkish.UninstallTaskLabel5=Yapılandırma dosyalarını ve &korumalı alanları kaldır%nFileRootPath ile özel yollarda bulunan Sandbox klasörü dahil tüm yapılandırma dosyalarını ve korumalı alanları kaldırmak için bu seçeneği belirleyin.
+turkish.UninstallTaskLabel3=Yapılandırma dosyalarını ve korumalı alanları &sakla%nYapılandırma dosyalarınızı ve korumalı alanlarınızı saklarken Sandboxie-Plus'ı yeniden yüklemeyi planlıyorsanız, bu en çok önerilen seçenektir.
+turkish.UninstallTaskLabel4=&Yapılandırma dosyalarını kaldır%nSandboxie.ini ve Sandboxie-Plus.ini yapılandırma dosyalarını, korumalı alanları değiştirmeden kaldırmak için bunu seçin.
+turkish.UninstallTaskLabel5=Yapılandırma dosyalarını ve &korumalı alanları kaldır%nFileRootPath ile özel yollarda bulunan Sandbox klasörü dahil tüm yapılandırma dosyalarını ve korumalı alanları kaldırmak için bunu seçin.
 turkish.RefreshBuild=En son Templates.ini ve çevirileri indirin
 
 ; Ukrainian

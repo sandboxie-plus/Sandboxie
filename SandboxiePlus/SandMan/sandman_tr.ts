@@ -3139,12 +3139,12 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="204"/>
         <source>Ask for UAC Elevation</source>
-        <translation>UAC Yetkilendirmesi isteyin</translation>
+        <translation>UAC Yetkilendirmesi İste</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="206"/>
         <source>Emulate Admin Rights</source>
-        <translation>Yönetici Haklarını Öykün</translation>
+        <translation>Yönetici Haklarını Taklit Et</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="164"/>
@@ -3280,7 +3280,7 @@ Hayır şunları seçer: %2</translation>
         <location filename="Views/SbieView.cpp" line="234"/>
         <location filename="Views/SbieView.cpp" line="330"/>
         <source>Move Down</source>
-        <translation>Aşağı taşı</translation>
+        <translation>Aşağı Taşı</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="276"/>
@@ -4213,7 +4213,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="96"/>
         <source>Sandbox Indicator in title:</source>
-        <translation>Başlıktaki Korumalı Alan Göstergesi:</translation>
+        <translation>Başlıktaki korumalı alan göstergesi:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3930"/>
@@ -4329,7 +4329,7 @@ Lider işlemler tanımlanırsa, diğer tüm işlemler oyalayıcı işlemler olar
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3580"/>
         <source>Restrict Resource Access monitor to administrators only</source>
-        <translation>Kaynak Erişimi izleyicisini yalnızca yöneticilerle kısıtla</translation>
+        <translation>Kaynak Erişimi İzleyicisini yalnızca yöneticilerle kısıtla</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1051"/>
@@ -4450,7 +4450,7 @@ Lider işlemler tanımlanırsa, diğer tüm işlemler oyalayıcı işlemler olar
     <message>
         <location filename="Forms/OptionsWindow.ui" line="328"/>
         <source>Box Delete options</source>
-        <translation>Alan Silme seçenekleri</translation>
+        <translation>Alan Silme Seçenekleri</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3756"/>
@@ -4501,7 +4501,7 @@ Lider işlemler tanımlanırsa, diğer tüm işlemler oyalayıcı işlemler olar
     <message>
         <location filename="Forms/OptionsWindow.ui" line="557"/>
         <source>Open System Protected Storage</source>
-        <translation>Sistem Korumalı Depolama&apos;yı aç</translation>
+        <translation>Sistem Korumalı Depolamayı aç</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="578"/>
@@ -4529,7 +4529,7 @@ Lider işlemler tanımlanırsa, diğer tüm işlemler oyalayıcı işlemler olar
     <message>
         <location filename="Forms/OptionsWindow.ui" line="872"/>
         <source>Drop rights from Administrators and Power Users groups</source>
-        <translation>Yöneticiler ve Yetkili Kullanıcılar gruplarından hakları bırak</translation>
+        <translation>Yöneticiler ve Yetkili Kullanıcılar grupları haklarını bırak</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2071"/>
@@ -4787,7 +4787,7 @@ Not: Bir korumalı alana ilişkin Zorlanmış Programlar ve Zorlanmış Klasörl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="684"/>
         <source>Add program</source>
-        <translation>Program ekle</translation>
+        <translation>Program Ekle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1199"/>
@@ -4801,7 +4801,7 @@ Not: Bir korumalı alana ilişkin Zorlanmış Programlar ve Zorlanmış Klasörl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="787"/>
         <source>Elevation restrictions</source>
-        <translation>Yetkilendirme kısıtlamaları</translation>
+        <translation>Yetkilendirme Kısıtlamaları</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="794"/>
@@ -4811,7 +4811,7 @@ Not: Bir korumalı alana ilişkin Zorlanmış Programlar ve Zorlanmış Klasörl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="634"/>
         <source>Network restrictions</source>
-        <translation>Ağ kısıtlamaları</translation>
+        <translation>Ağ Kısıtlamaları</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="808"/>
@@ -4871,7 +4871,7 @@ Not: Bir korumalı alana ilişkin Zorlanmış Programlar ve Zorlanmış Klasörl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="617"/>
         <source>Printing restrictions</source>
-        <translation>Yazdırma kısıtlamaları</translation>
+        <translation>Yazdırma Kısıtlamaları</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="945"/>
@@ -4892,22 +4892,22 @@ Not: Bir korumalı alana ilişkin Zorlanmış Programlar ve Zorlanmış Klasörl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1123"/>
         <source>Other isolation</source>
-        <translation>Diğer yalıtım</translation>
+        <translation>Diğer Yalıtım</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1147"/>
         <source>Privilege isolation</source>
-        <translation>Ayrıcalık yalıtımı</translation>
+        <translation>Ayrıcalık Yalıtımı</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1171"/>
         <source>Sandboxie token</source>
-        <translation>Sandboxie belirteci</translation>
+        <translation>Sandboxie Belirteci</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1260"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation>Özel bir Sandboxie belirteci kullanmak, birbirinden ayrı korumalı alanları daha iyi yalıtmayı sağlar ve görev yöneticilerinin kullanıcı sütununda bir işlemin hangi alana ait olduğu gösterir. Ancak bazı 3. parti güvenlik çözümleri özel belirteçlerle sorun yaşayabilir.</translation>
+        <translation>Özel bir Sandboxie belirteci kullanmak, birbirinden ayrı korumalı alanların daha iyi yalıtılmasını sağlar ve görev yöneticilerinin kullanıcı sütununda bir işlemin hangi alana ait olduğu gösterir. Ancak bazı 3. parti güvenlik çözümleri özel belirteçlerle sorun yaşayabilir.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1351"/>
@@ -5064,7 +5064,7 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3138"/>
         <source>Apply ElevateCreateProcess Workaround (legacy behaviour)</source>
-        <translation>ElevateCreateProcess Geçici Çözümünü uygula (eski davranış)</translation>
+        <translation>ElevateCreateProcess geçici çözümünü uygula (eski davranış)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3178"/>
@@ -5162,7 +5162,7 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1071"/>
         <source>Access isolation</source>
-        <translation>Erişim yalıtımı</translation>
+        <translation>Erişim Yalıtımı</translation>
     </message>
     <message>
         <source>Compatibility Templates</source>
@@ -5205,7 +5205,7 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4279"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
-        <translation>Kaybedilen korumayı telafi etmek için lütfen Güvenlik Seçenekleri &gt; Güvenlik Sıkılaştırması altındaki Yetkilendirme kısıtlamaları bölümü Hak Bırakma ayarlarına bakın.</translation>
+        <translation>Kaybedilen korumayı telafi etmek için lütfen Güvenlik Seçenekleri &gt; Güvenlik Sıkılaştırması altındaki Yetkilendirme Kısıtlamaları bölümü Hak Bırakma ayarlarına bakın.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4203"/>
@@ -5264,7 +5264,7 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="832"/>
         <source>Security enhancements</source>
-        <translation>Güvenlik geliştirmeleri</translation>
+        <translation>Güvenlik Geliştirmeleri</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="763"/>
@@ -5303,7 +5303,7 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2712"/>
         <source>Test Rules, Program:</source>
-        <translation>Test Kuralları, Program:</translation>
+        <translation>Kuralları test et, Program:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2722"/>
@@ -5381,7 +5381,7 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="211"/>
         <source>Box Type Preset:</source>
-        <translation>Alan Türü Ön Ayarı:</translation>
+        <translation>Alan türü ön ayarı:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="179"/>
@@ -5396,7 +5396,7 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="469"/>
         <source>Open Windows Credentials Store (user mode)</source>
-        <translation>Windows Kimlik Bilgileri Deposunu açın (kullanıcı modu)</translation>
+        <translation>Windows Kimlik Bilgileri Deposunu aç (kullanıcı modu)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="509"/>
@@ -5500,7 +5500,7 @@ Bunu tüm programlara uygulamak için &apos;Hepsi için aç&apos; kullanabilir v
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1034"/>
         <source>Various advanced isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
-        <translation>Çeşitli gelişmiş yalıtım özellikleri, bazı uygulamalarla uyumluluğu bozabilir. Bu korumalı alanı &lt;b&gt;Güvenlik için DEĞİL&lt;/b&gt; ancak basit uygulama taşınabilirliği için kullanıyorsanız, bu seçenekleri değiştirerek bazı güvenlikten ödün vererek uyumluluğu geri yükleyebilirsiniz.</translation>
+        <translation>Çeşitli gelişmiş yalıtım özellikleri, bazı uygulamalarla uyumluluğu bozabilir. Eğer bu korumalı alanı &lt;b&gt;Güvenlik için DEĞİL&lt;/b&gt; ancak basit bir uygulama taşınabilirliği için kullanıyorsanız, bu seçenekleri değiştirerek biraz güvenlikten ödün verip uyumluluğu arttırabilirsiniz.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1054"/>
@@ -5678,7 +5678,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="42"/>
         <source>Add Folder</source>
-        <translation>Dizin ekle</translation>
+        <translation>Dizin Ekle</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="110"/>
@@ -5791,7 +5791,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1403"/>
         <source>New Versions</source>
-        <translation>Yeni Sürümler</translation>
+        <translation>Yeni sürümler</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1437"/>
@@ -5806,7 +5806,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="500"/>
         <source>Use Dark Theme</source>
-        <translation>Koyu Temayı Kullan</translation>
+        <translation>Koyu temayı kullan</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1129"/>
@@ -5876,7 +5876,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="895"/>
         <source>Sandbox default</source>
-        <translation>Korumalı alan varsayılanı</translation>
+        <translation>Korumalı Alan Varsayılanları</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="800"/>
@@ -5901,17 +5901,17 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="836"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
-        <translation>Korumalı Alan &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;dosya sistemi kökü&lt;/a&gt;: </translation>
+        <translation>Korumalı alan &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;dosya sistemi kökü&lt;/a&gt;: </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="784"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
-        <translation>Korumalı Alan &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc kökü&lt;/a&gt;: </translation>
+        <translation>Korumalı alan &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc kökü&lt;/a&gt;: </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="849"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
-        <translation>Korumalı Alan &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;kayıt kökü&lt;/a&gt;: </translation>
+        <translation>Korumalı alan &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;kayıt kökü&lt;/a&gt;: </translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="744"/>
@@ -5951,12 +5951,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="313"/>
         <source>Systray options</source>
-        <translation>Sistem Tepsisi seçenekleri</translation>
+        <translation>Sistem Tepsisi Seçenekleri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>UI Language:</source>
-        <translation>Kullanıcı Arayüzü Dili:</translation>
+        <translation>Kullanıcı arayüzü dili:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="207"/>
@@ -5992,12 +5992,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="362"/>
         <source>Start Sandbox Manager</source>
-        <translation>Korumalı Alan Yöneticisi&apos;ni başlatın</translation>
+        <translation>Korumalı Alan Yöneticisini Başlatma</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="409"/>
         <source>Use Compact Box List</source>
-        <translation>Kompakt Alan Listesini Kullan</translation>
+        <translation>Kompakt alan listesini kullan</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="442"/>
@@ -6013,12 +6013,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="607"/>
         <source>Make Box Icons match the Border Color</source>
-        <translation>Alan Simgelerini Kenarlık Rengiyle eşleştir</translation>
+        <translation>Alan simgelerini kenarlık rengiyle eşleştir</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="533"/>
         <source>Use a Page Tree in the Box Options instead of Nested Tabs *</source>
-        <translation>Alan Seçeneklerinde İç İçe Sekmeler yerine Sayfa Ağacı kullan *</translation>
+        <translation>Alan seçeneklerinde iç içe sekmeler yerine sayfa ağacı kullan *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="549"/>
@@ -6033,7 +6033,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="573"/>
         <source>High DPI Scaling</source>
-        <translation>Yüksek DPI Ölçekleme</translation>
+        <translation>Yüksek DPI ölçekleme</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="614"/>
@@ -6043,7 +6043,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="460"/>
         <source>Font Scaling</source>
-        <translation>Yazı Tipi Ölçekleme</translation>
+        <translation>Yazı tipi ölçekleme</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="477"/>
@@ -6058,7 +6058,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="97"/>
         <source>Show the Recovery Window as Always on Top</source>
-        <translation>Kurtarma Penceresini Her Zaman Üstte olarak göster</translation>
+        <translation>Kurtarma penceresini her zaman üstte göster</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="593"/>
@@ -6073,7 +6073,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="583"/>
         <source>Use Fusion Theme</source>
-        <translation>Füzyon Temasını Kullan</translation>
+        <translation>Füzyon temasını kullan</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="726"/>
@@ -6083,7 +6083,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="770"/>
         <source>Sandboxing features</source>
-        <translation>Korumalı alan özellikleri</translation>
+        <translation>Korumalı Alan Özellikleri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="882"/>
@@ -6174,7 +6174,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="281"/>
         <source>Show Icon in Systray:</source>
-        <translation>Simgeyi Sistem Tepsisinde Göster:</translation>
+        <translation>Simgeyi sistem tepsisinde göster:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="777"/>
@@ -6184,7 +6184,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="875"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (experimental)</source>
-        <translation>GPU hızlandırmayı etkinleştirmek için seçilen Win32k sistem çağrılarını kancala (deneysel)</translation>
+        <translation>GPU hızlandırmayı etkinleştirmek için seçilen win32k sistem çağrılarını kancala (deneysel)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="90"/>
@@ -6248,7 +6248,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="655"/>
         <source>Add program</source>
-        <translation>Program ekle</translation>
+        <translation>Program Ekle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="662"/>
@@ -6273,7 +6273,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="918"/>
         <source>Activate Kernel Mode Object Filtering</source>
-        <translation>Kernel Modu Nesne Filtrelemeyi etkinleştir</translation>
+        <translation>Kernel modu nesne filtrelemeyi etkinleştir</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="925"/>
@@ -6303,7 +6303,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1194"/>
         <source>Edit ini</source>
-        <translation>Ini düzenle</translation>
+        <translation>Ini Düzenle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1220"/>
@@ -6313,7 +6313,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1308"/>
         <source>Version Updates</source>
-        <translation>Sürüm Güncellemeleri</translation>
+        <translation>Sürüm güncellemeleri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1400"/>

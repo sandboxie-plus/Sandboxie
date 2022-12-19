@@ -485,9 +485,9 @@ end;
 function GetParams(Value: string): string;
 begin
   if IsInstalled = True then begin
-    Result := 'upgrade sandboxie-plus /scope:meta /version:{#MyAppVersion}';
+    Result := 'upgrade sandboxie-plus /embedded /scope:meta /version:{#MyAppVersion}';
   end else begin
-    Result := 'install sandboxie-plus /scope:meta /version:{#MyAppVersion}';
+    Result := 'install sandboxie-plus /embedded /scope:meta /version:{#MyAppVersion}';
   end;
 end;
 

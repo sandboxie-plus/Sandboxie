@@ -584,6 +584,7 @@ void CSandMan::CreateOldMenus()
 	m_pMenuBar->clear();
 
 	m_pMenuFile = m_pMenuBar->addMenu(tr("&File"));
+		m_pRunBoxed = m_pMenuFile->addAction(CSandMan::GetIcon("Run"), tr("Run Sandboxed"), this, SLOT(OnSandBoxAction()));
 		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
 		m_pDisableForce = m_pMenuFile->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce()));
 		m_pDisableForce->setCheckable(true);
@@ -1252,6 +1253,7 @@ bool CSandMan::IsSilentMode()
 		return false;
 	return IsFullScreenMode();
 }
+
 void CSandMan::OnMessage(const QString& MsgData)
 {
 	QStringList Messages = MsgData.split("\n");

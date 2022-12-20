@@ -623,6 +623,9 @@ QString CSandBoxPlus::GetStatusStr() const
 	if (m_bDropRights && !m_bSecurityEnhanced)
 		Status.append(tr("No Admin"));
 
+	if(m_BoxDel)
+		Status.append(tr("Auto Delete"));
+
 	if (Status.isEmpty())
 		return tr("Normal");
 	return Status.join(", ");

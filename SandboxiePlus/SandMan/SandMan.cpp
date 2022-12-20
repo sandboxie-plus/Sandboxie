@@ -1807,6 +1807,15 @@ void CSandMan::OnStatusChanged()
 				OnLogMessage(tr("Default sandbox not found; creating: %1").arg(DefaultBox));
 				theAPI->CreateBox(DefaultBox);
 			}
+
+			//
+			// clean up Auto Delete boxes after reboot
+			//
+
+			foreach(const CSandBoxPtr& pBox, AllBoxes) {
+				if(pBox->GetActiveProcessCount() == 0)
+					OnBoxClosed(pBox);
+			}
 		}
 
 		if (isVisible())

@@ -15,7 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with wow64 thunking on 32 bit windows 10 systems [#2546](https://github.com/sandboxie-plus/Sandboxie/issues/2546)
 - fixed on reboot auto clean up boxes are nto cleared [#2531](https://github.com/sandboxie-plus/Sandboxie/issues/2531)
 -- Note: a clean up is now done after each reboot
-
+- fixed issue with Network Location Awareness under windows 11 [#2530](https://github.com/sandboxie-plus/Sandboxie/issues/2530)
 
 
 ## [1.6.2a / 5.61.2] - 2022-12-19

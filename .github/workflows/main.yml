@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup msbuild
-        uses: microsoft/setup-msbuild@v1.1
+        uses: microsoft/setup-msbuild@v1.3
 
     #  - name: Do Tests
     #    run: .\TestCI.cmd

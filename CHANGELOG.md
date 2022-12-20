@@ -12,7 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue with update label when "version update" is set to "ignore"
-
+- fixed issue with wow64 thunking on 32 bit windows 10 systems [#2546](https://github.com/sandboxie-plus/Sandboxie/issues/2546)
 
 
 

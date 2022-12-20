@@ -967,6 +967,9 @@ typedef NTSTATUS(*P_NtWow64CallFunction64)(
 
 _FX void Dll_Wow64DisableTurboThunks(void)
 {
+    if (!Dll_IsWow64)
+        return;
+
     //
     // Dll_FixWow64Syscall (dllhooks.c):
     // the Wow64 thunking layer for syscalls in ntdll32 has several thunks:

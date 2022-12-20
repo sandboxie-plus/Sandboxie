@@ -124,6 +124,7 @@ BEGIN
     POPUP "3451"
     BEGIN
         MENUITEM "3504",                        ID_HELP_SUPPORT
+        MENUITEM "3505",                        ID_HELP_CONTRIBUTION
         MENUITEM SEPARATOR
         MENUITEM "3452",                        ID_HELP_TOPICS
         MENUITEM "3453",                        ID_HELP_TUTORIAL

@@ -54,6 +54,7 @@
 #define ID_HELP_UPDATE                  40044
 #define ID_HELP_UPGRADE                 40046
 #define ID_HELP_MIGRATION               40047
+#define ID_HELP_CONTRIBUTION            40048
 #define ID_HELP_ABOUT                   40045
 #define ID_PROCESS_TERMINATE            40051
 #define ID_PROCESS_SETTINGS             40052

@@ -5,6 +5,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+
+## [1.6.2b / 5.61.2] - 2022-12-??
+
+### Fixed
+- fixed issue with update label when "version update" is set to "ignore"
+
+
+
+
 ## [1.6.2a / 5.61.2] - 2022-12-19
 
 ### Fixed

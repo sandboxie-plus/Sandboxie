@@ -291,6 +291,8 @@ bool COnlineUpdater::HandleUpdate()
 		}
 	}
 
+	QString OnNewUpdate = theConf->GetString("Options/OnNewUpdate", "ignore");
+
 	bool bNewUpdate = false;
 	QVariantMap Update = m_UpdateData["update"].toMap();
 	QString UpdateStr = Update["version"].toString();
@@ -301,7 +303,7 @@ bool COnlineUpdater::HandleUpdate()
 		if (bNewer || iUpdate > GetCurrentUpdate()) {
 			if (ScanUpdateFiles(Update) == eNone) // check if this update has already been applied
 				theConf->SetValue("Updater/CurrentUpdate", MakeVersionStr(Update)); // cache result
-			else
+			else if (OnNewUpdate != "ignore")
 			{
 				if(PendingUpdate.isEmpty())
 					PendingUpdate = UpdateStr;
@@ -343,13 +345,10 @@ bool COnlineUpdater::HandleUpdate()
 		}
 	}
 
-	QString OnNewUpdate = theConf->GetString("Options/OnNewUpdate", "ignore");
 	bool bCanApplyUpdate = (m_CheckMode == eAuto && OnNewUpdate == "install");
 	if (bNewUpdate)
 	{
-		if (OnNewUpdate == "ignore")
-			bNewUpdate = false;
-		else if ((!bNewRelease || (bCanApplyUpdate && !bCanRunInstaller)))
+		if ((!bNewRelease || (bCanApplyUpdate && !bCanRunInstaller)))
 		{
 			bool bIsUpdateReady = false;
 			if (theConf->GetString("Updater/UpdateVersion") == MakeVersionStr(Update))

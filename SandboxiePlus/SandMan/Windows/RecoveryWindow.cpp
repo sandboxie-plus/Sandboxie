@@ -163,6 +163,11 @@ int	CRecoveryWindow::exec()
 	return QDialog::exec();
 }
 
+bool CRecoveryWindow::IsDeleteDialog() const
+{
+	return ui.btnDeleteAll->isVisible();
+}
+
 void CRecoveryWindow::closeEvent(QCloseEvent *e)
 {
 	emit Closed();

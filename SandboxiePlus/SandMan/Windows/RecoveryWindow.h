@@ -39,6 +39,7 @@ public:
 	CRecoveryWindow(const CSandBoxPtr& pBox, bool bImmediate = false, QWidget *parent = Q_NULLPTR);
 	~CRecoveryWindow();
 
+	bool		IsDeleteDialog() const;
 	bool		IsDeleteShapshots() { return m_DeleteShapshots; }
 
 	virtual void accept() {}

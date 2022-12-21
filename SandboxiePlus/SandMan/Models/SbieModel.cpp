@@ -231,13 +231,13 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			{
 				StrPair PathIndex = Split2(BoxIcon, ",");
 				if (!PathIndex.second.isEmpty() && !PathIndex.second.contains("."))
-					Icon = QIcon(QPixmap::fromImage(LoadWindowsIcon(PathIndex.first, PathIndex.second.toInt())));
+					Icon = QIcon(LoadWindowsIcon(PathIndex.first, PathIndex.second.toInt()));
 				else
 					Icon = QIcon(QPixmap(BoxIcon));
 				pNode->BoxIcon = BoxIcon;
 			}
 		}
-		else if (pNode->inUse != inUse || pNode->bOpen != bOpen || (pNode->busyState || Busy) || pNode->boxType != boxType || pNode->boxColor != boxColor || pNode->boxDel != boxDel)
+		else if (pNode->inUse != inUse || pNode->bOpen != bOpen || (pNode->busyState || Busy) || pNode->boxType != boxType || pNode->boxColor != boxColor || pNode->boxDel != boxDel || !pNode->BoxIcon.isEmpty())
 		{
 			pNode->inUse = inUse;
 			pNode->bOpen = bOpen;

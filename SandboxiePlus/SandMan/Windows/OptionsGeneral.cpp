@@ -195,7 +195,7 @@ void COptionsWindow::LoadGeneral()
 	m_pPickIcon->setEnabled(!m_BoxIcon.isEmpty());
 	StrPair PathIndex = Split2(m_BoxIcon, ",");
 	if (!PathIndex.second.isEmpty() && !PathIndex.second.contains("."))
-		ui.btnBorderColor->setIcon(QPixmap::fromImage(LoadWindowsIcon(PathIndex.first, PathIndex.second.toInt())));
+		ui.btnBorderColor->setIcon(LoadWindowsIcon(PathIndex.first, PathIndex.second.toInt()));
 	else if (!m_BoxIcon.isEmpty())
 		ui.btnBorderColor->setIcon(QPixmap(m_BoxIcon));
 	else
@@ -410,7 +410,7 @@ void COptionsWindow::OnUseIcon(bool bUse)
 		if (m_BoxIcon.isEmpty()) {
 			QString ActionFile = GetActionFile();
 			if (!ActionFile.isEmpty()) {
-				ui.btnBorderColor->setIcon(QPixmap::fromImage(LoadWindowsIcon(ActionFile, 0)));
+				ui.btnBorderColor->setIcon(LoadWindowsIcon(ActionFile, 0));
 				m_BoxIcon = QString("%1,0").arg(ActionFile);
 			}
 		}
@@ -442,7 +442,7 @@ bool COptionsWindow::OnPickIcon()
 	if (!PickWindowsIcon(this, Path, Index))
 		return false;
 
-	ui.btnBorderColor->setIcon(QPixmap::fromImage(LoadWindowsIcon(Path, Index)));
+	ui.btnBorderColor->setIcon(LoadWindowsIcon(Path, Index));
 	m_BoxIcon = QString("%1,%2").arg(Path).arg(Index);
 
 	m_GeneralChanged = true;
@@ -498,7 +498,7 @@ QString COptionsWindow::GetActionFile()
 		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
 		if (pBoxEx) {
 			QString Path = pBoxEx->GetCommandFile(Action);
-			ui.btnBorderColor->setIcon(QPixmap::fromImage(LoadWindowsIcon(Path, 0)));
+			ui.btnBorderColor->setIcon(LoadWindowsIcon(Path, 0));
 			return Path;
 		}
 	}
@@ -512,11 +512,13 @@ void COptionsWindow::OnActionChanged()
 
 	QString ActionFile = GetActionFile();
 	if (!ActionFile.isEmpty()) {
-		ui.btnBorderColor->setIcon(QPixmap::fromImage(LoadWindowsIcon(ActionFile, 0)));
+		ui.btnBorderColor->setIcon(LoadWindowsIcon(ActionFile, 0));
+		m_pUseIcon->setChecked(true);
 		m_BoxIcon = QString("%1,0").arg(ActionFile);
 	}
 	else {
 		ui.btnBorderColor->setIcon(QPixmap());
+		m_pUseIcon->setChecked(false);
 		m_BoxIcon.clear();
 	}
 

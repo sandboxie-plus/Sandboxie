@@ -28,18 +28,25 @@ bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 	if (!pBoxEx) return false;
 	if (pBoxEx->m_pRecoveryWnd != NULL) {
+		if (pBoxEx->m_pRecoveryWnd->IsDeleteDialog())
+			return false;
 		pBoxEx->m_pRecoveryWnd->close();
-		// todo: reuse window?
 	}
 
-	CRecoveryWindow* pRecoveryWindow = new CRecoveryWindow(pBox, false, this);
-	if (pRecoveryWindow->FindFiles() == 0 && bCloseEmpty) {
-		delete pRecoveryWindow;
+	CRecoveryWindow* pRecoveryWnd = pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox, false, this);
+	if (pBoxEx->m_pRecoveryWnd->FindFiles() == 0 && bCloseEmpty) {
+		delete pBoxEx->m_pRecoveryWnd;
+		pBoxEx->m_pRecoveryWnd = NULL;
 		return true;
 	}
-	else if (pRecoveryWindow->exec() != 1)
-		return false;
-	DeleteShapshots = pRecoveryWindow->IsDeleteShapshots();
+	else {
+		connect(pBoxEx->m_pRecoveryWnd, &CRecoveryWindow::Closed, [pBoxEx]() {
+			pBoxEx->m_pRecoveryWnd = NULL;
+		});
+		if (pBoxEx->m_pRecoveryWnd->exec() != 1)
+			return false;
+	}
+	DeleteShapshots = pRecoveryWnd->IsDeleteShapshots();
 	return true;
 }
 
@@ -54,10 +61,10 @@ CRecoveryWindow* CSandMan::ShowRecovery(const CSandBoxPtr& pBox, bool bFind)
 		});
 		pBoxEx->m_pRecoveryWnd->show();
 	}
-	/*else {
+	else if(bFind) { // We don't want to force window in front on instant recovery 
 		pBoxEx->m_pRecoveryWnd->setWindowState((pBoxEx->m_pRecoveryWnd->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
-		//SetForegroundWindow((HWND)pBoxEx->m_pRecoveryWnd->winId());
-	}*/
+		SetForegroundWindow((HWND)pBoxEx->m_pRecoveryWnd->winId());
+	}
 	if(bFind)
 		pBoxEx->m_pRecoveryWnd->FindFiles();
 	return pBoxEx->m_pRecoveryWnd;

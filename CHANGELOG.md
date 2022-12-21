@@ -5,7 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.6.3 / 5.61.3] - 2022-12-21
 
+### Changed
+- improved Network Location Awareness template
 
 
 ## [1.6.2b / 5.61.2] - 2022-12-21

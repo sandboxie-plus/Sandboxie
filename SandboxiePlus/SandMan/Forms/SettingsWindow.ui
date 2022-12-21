@@ -187,7 +187,7 @@
            <item row="10" column="1" colspan="2">
             <widget class="QCheckBox" name="chkShowRecovery">
              <property name="text">
-              <string>Show first recovery window when emptying sandboxes</string>
+              <string>Show file recovery window when emptying sandboxes</string>
              </property>
             </widget>
            </item>

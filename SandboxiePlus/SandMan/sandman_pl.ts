@@ -724,7 +724,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Proszę podać ścieżkę programu</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="529"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="531"/>
         <source>Select Program</source>
         <translation>Wybierz program</translation>
     </message>
@@ -746,18 +746,18 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Program</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="529"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="531"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Programy (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="533"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="548"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="535"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="550"/>
         <source>Please enter a menu title</source>
         <translation>Proszę wpisać tytuł menu</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="544"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="546"/>
         <source>Please enter a command</source>
         <translation>Proszę wpisać polecenie</translation>
     </message>
@@ -1380,22 +1380,22 @@ Full path: %4</source>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="190"/>
+        <location filename="SandManRecovery.cpp" line="197"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation>Sandboxie-Plus - Dziennik Przywracania</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="201"/>
+        <location filename="SandManRecovery.cpp" line="208"/>
         <source>Time|Box Name|File Path</source>
         <translation>Czas|Nazwa boksu|Ścieżka do pliku</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="203"/>
+        <location filename="SandManRecovery.cpp" line="210"/>
         <source>Cleanup Recovery Log</source>
         <translation>Wyczyść Dziennik Przywracania</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="213"/>
+        <location filename="SandManRecovery.cpp" line="220"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation>Następujące pliki zostały niedawno odzyskane i przeniesione z piaskownicy.</translation>
@@ -1449,34 +1449,34 @@ Full path: %4</source>
         <translation>Opróżnij listę</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="174"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="195"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="543"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="179"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="200"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="548"/>
         <source>Select Directory</source>
         <translation>Wybierz katalog</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="239"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="244"/>
         <source>Do you really want to delete %1 selected files?</source>
         <translation>Czy naprawdę chcesz usunąć %1 wybranych plików?</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="267"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="272"/>
         <source>Close until all programs stop in this box</source>
         <translation>Zamknij, aż wszystkie programy zatrzymają się w tym boksie</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="268"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="273"/>
         <source>Close and Disable Immediate Recovery for this box</source>
         <translation>Zamknij i wyłącz Natychmiastowe Przywracanie dla tego boksu</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="288"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="293"/>
         <source>There are %1 new files available to recover.</source>
         <translation>Istnieje %1 nowych plików dostępnych do odzyskania.</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="579"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="584"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <translation>W piaskownicy znajduje się %1 plików i %2 folderów zajmujących %3 miejsca na dysku.</translation>
     </message>
@@ -2379,22 +2379,22 @@ Nie, wybierze: %2</translation>
         <translation>%1 (%2): </translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="87"/>
+        <location filename="SandManRecovery.cpp" line="94"/>
         <source>Recovering file %1 to %2</source>
         <translation>Odtwarzanie pliku %1 do %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="99"/>
+        <location filename="SandManRecovery.cpp" line="106"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>Plik o nazwie %1 już istnieje czy ma zostać zastąpiony?</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="100"/>
+        <location filename="SandManRecovery.cpp" line="107"/>
         <source>Do this for all files!</source>
         <translation>Zrób to z wszystkimi plikami!</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="127"/>
+        <location filename="SandManRecovery.cpp" line="134"/>
         <source>Failed to recover some files: 
 </source>
         <translation>Błąd przy odtworzeniu następujących plików: 
@@ -6264,8 +6264,9 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="190"/>
-        <source>Show first recovery window when emptying sandboxes</source>
-        <translation>Pokaż pierwsze okno przywracania podczas opróżniania piaskownicy</translation>
+        <source>Show file recovery window when emptying sandboxes</source>
+        <oldsource>Show first recovery window when emptying sandboxes</oldsource>
+        <translation type="unfinished">Pokaż pierwsze okno przywracania podczas opróżniania piaskownicy</translation>
     </message>
     <message>
         <source>Use Dark Theme (fully applied after a restart)</source>

@@ -849,7 +849,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>選擇顏色</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="529"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="531"/>
         <source>Select Program</source>
         <translation>選擇程式</translation>
     </message>
@@ -859,18 +859,18 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>請輸入服務識別元</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="529"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="531"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>可執行檔案 (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="533"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="548"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="535"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="550"/>
         <source>Please enter a menu title</source>
         <translation>請輸入一個選單標題</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="544"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="546"/>
         <source>Please enter a command</source>
         <translation>請輸入一則命令</translation>
     </message>
@@ -1293,22 +1293,22 @@ Full path: %4</source>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="190"/>
+        <location filename="SandManRecovery.cpp" line="197"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation>Sandboxie-Plus - 復原日誌</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="201"/>
+        <location filename="SandManRecovery.cpp" line="208"/>
         <source>Time|Box Name|File Path</source>
         <translation>時間|沙箱名稱|檔案路徑</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="203"/>
+        <location filename="SandManRecovery.cpp" line="210"/>
         <source>Cleanup Recovery Log</source>
         <translation>清理復原日誌</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="213"/>
+        <location filename="SandManRecovery.cpp" line="220"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation>以下是最近被復原並移出沙箱的檔案。</translation>
@@ -1362,34 +1362,34 @@ Full path: %4</source>
         <translation>清除資料夾清單</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="174"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="195"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="543"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="179"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="200"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="548"/>
         <source>Select Directory</source>
         <translation>選擇目錄</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="239"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="244"/>
         <source>Do you really want to delete %1 selected files?</source>
         <translation>是否刪除 %1 選取的檔案？</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="267"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="272"/>
         <source>Close until all programs stop in this box</source>
         <translation>關閉，在沙箱內全部程式停止後再顯示</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="268"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="273"/>
         <source>Close and Disable Immediate Recovery for this box</source>
         <translation>關閉並停用此沙箱的快速復原功能</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="288"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="293"/>
         <source>There are %1 new files available to recover.</source>
         <translation>有 %1 個新檔案可供復原。</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="579"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="584"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <translation>此沙箱中共有 %1 個檔案和 %2 個資料夾，占用了 %3 磁碟空間。</translation>
     </message>
@@ -2017,22 +2017,22 @@ No will choose: %2</source>
         <translation>選取的功能只對專案贊助者可用。如果沒有贊助者憑證，在啟用此功能的沙箱裡啟動的處理程序，將在 5 分鐘後自動終止。&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;成為專案贊助者&lt;/a&gt;，以取得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;贊助者憑證&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="87"/>
+        <location filename="SandManRecovery.cpp" line="94"/>
         <source>Recovering file %1 to %2</source>
         <translation>復原檔案 %1 至 %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="99"/>
+        <location filename="SandManRecovery.cpp" line="106"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>檔案 %1 已存在，您確定要覆蓋它嗎？</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="100"/>
+        <location filename="SandManRecovery.cpp" line="107"/>
         <source>Do this for all files!</source>
         <translation>為所有檔案執行此操作！</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="127"/>
+        <location filename="SandManRecovery.cpp" line="134"/>
         <source>Failed to recover some files: 
 </source>
         <translation>部分檔案復原失敗: 
@@ -5591,8 +5591,9 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="190"/>
-        <source>Show first recovery window when emptying sandboxes</source>
-        <translation>清空沙箱時先顯示復原視窗</translation>
+        <source>Show file recovery window when emptying sandboxes</source>
+        <oldsource>Show first recovery window when emptying sandboxes</oldsource>
+        <translation type="unfinished">清空沙箱時先顯示復原視窗</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="130"/>

@@ -944,7 +944,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation type="vanished">Veuillez entrer un chemin de programme</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="529"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="531"/>
         <source>Select Program</source>
         <translation>Sélectionner le programme</translation>
     </message>
@@ -966,18 +966,18 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation type="vanished">Programme</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="529"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="531"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Exécutables (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="533"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="548"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="535"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="550"/>
         <source>Please enter a menu title</source>
         <translation>Veuillez saisir un titre de menu</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="544"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="546"/>
         <source>Please enter a command</source>
         <translation>Veuillez saisir une commande</translation>
     </message>
@@ -1414,22 +1414,22 @@ Chemin complet : %4</translation>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="190"/>
+        <location filename="SandManRecovery.cpp" line="197"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation>Sandboxie-Plus - Journal de récupération</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="201"/>
+        <location filename="SandManRecovery.cpp" line="208"/>
         <source>Time|Box Name|File Path</source>
         <translation>Heure|Nom du bac|Chemin du fichier</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="203"/>
+        <location filename="SandManRecovery.cpp" line="210"/>
         <source>Cleanup Recovery Log</source>
         <translation>Purger le journal de récupération</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="213"/>
+        <location filename="SandManRecovery.cpp" line="220"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation>Les fichiers suivants ont récemment été récupérés et sortis d&apos;un bac à sable.</translation>
@@ -1483,34 +1483,34 @@ Chemin complet : %4</translation>
         <translation>Effacer la liste des dossiers</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="174"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="195"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="543"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="179"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="200"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="548"/>
         <source>Select Directory</source>
         <translation>Sélectionner le répertoire</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="239"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="244"/>
         <source>Do you really want to delete %1 selected files?</source>
         <translation>Voulez-vous vraiment supprimer le(s) %1 fichier(s) sélectionné(s) ?</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="267"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="272"/>
         <source>Close until all programs stop in this box</source>
         <translation>Fermer tant qu&apos;un programme tourne dans le bac à sable</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="268"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="273"/>
         <source>Close and Disable Immediate Recovery for this box</source>
         <translation>Fermer et désactiver la récupération immédiate pour ce bac à sable</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="288"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="293"/>
         <source>There are %1 new files available to recover.</source>
         <translation>Il y a %1 fichier(s) disponible(s) pour une récupération.</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="579"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="584"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <translation>Il y a %1 fichier(s) et %2 dossier(s) dans le bac à sable, qui occupe(nt) %3 d&apos;espace disque.</translation>
     </message>
@@ -2461,22 +2461,22 @@ Non choisira : %2</translation>
         <translation>La fonctionnalité sélectionnée n&apos;est disponible que pour les adhérents du projet. Les processus lancés dans un bac à sable avec cette fonctionnalité activée sans certificat d&apos;adhérent seront arrêtés après 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Devenez un adhérent du projet&lt;/a&gt;, et recevez un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificat d&apos;adhérent&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="87"/>
+        <location filename="SandManRecovery.cpp" line="94"/>
         <source>Recovering file %1 to %2</source>
         <translation>Récupération du fichier %1 vers %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="99"/>
+        <location filename="SandManRecovery.cpp" line="106"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>Le fichier %1 existe déjà, voulez-vous l&apos;écraser ?</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="100"/>
+        <location filename="SandManRecovery.cpp" line="107"/>
         <source>Do this for all files!</source>
         <translation>Faire ceci pour tous les fichiers !</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="127"/>
+        <location filename="SandManRecovery.cpp" line="134"/>
         <source>Failed to recover some files: 
 </source>
         <translation>Échec de la récupération de certains fichiers : 
@@ -6199,8 +6199,9 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="190"/>
-        <source>Show first recovery window when emptying sandboxes</source>
-        <translation>Afficher d&apos;abord la fenêtre de récupération lors du vidage des bacs à sable</translation>
+        <source>Show file recovery window when emptying sandboxes</source>
+        <oldsource>Show first recovery window when emptying sandboxes</oldsource>
+        <translation type="unfinished">Afficher d&apos;abord la fenêtre de récupération lors du vidage des bacs à sable</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="130"/>

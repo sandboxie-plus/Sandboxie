@@ -1812,6 +1812,8 @@ void CSandMan::OnStatusChanged()
 			// clean up Auto Delete boxes after reboot
 			//
 
+			theAPI->UpdateProcesses(false, ShowAllSessions());
+
 			foreach(const CSandBoxPtr& pBox, AllBoxes) {
 				if(pBox->GetActiveProcessCount() == 0)
 					OnBoxClosed(pBox);
@@ -1851,6 +1853,7 @@ void CSandMan::OnStatusChanged()
 	m_pRunBoxed->setEnabled(isConnected);
 	m_pNewBox->setEnabled(isConnected);
 	m_pNewGroup->setEnabled(isConnected);
+	m_pImportBox->setEnabled(isConnected);
 	m_pEmptyAll->setEnabled(isConnected);
 	m_pDisableForce->setEnabled(isConnected);
 	m_pDisableForce2->setEnabled(isConnected);

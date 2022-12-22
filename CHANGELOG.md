@@ -4,11 +4,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.6.3a / 5.61.3] - 2022-12-??
+
+### Fixed
+- fixed issue with auto delete box on sandman start [#2555](https://github.com/sandboxie-plus/Sandboxie/issues/2555)
+
 
 ## [1.6.3 / 5.61.3] - 2022-12-21
 
 ### Changed
 - improved Network Location Awareness template
+
 
 
 ## [1.6.2b / 5.61.2] - 2022-12-21

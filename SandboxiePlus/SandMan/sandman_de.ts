@@ -1611,7 +1611,7 @@ Vollst√§ndiger Pfad: %4</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="627"/>
         <source>Auto Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisches L√∂schen</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="630"/>
@@ -6678,7 +6678,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
     <message>
         <location filename="Forms/SettingsWindow.ui" line="97"/>
         <source>Show the Recovery Window as Always on Top</source>
-        <translation>Zeige das Wiederherstellungsfenster immer im Vordergrund an</translation>
+        <translation>Zeige das Dateiwiederherstellungsfenster immer im Vordergrund an</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="593"/>
@@ -6894,7 +6894,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
         <location filename="Forms/SettingsWindow.ui" line="190"/>
         <source>Show file recovery window when emptying sandboxes</source>
         <oldsource>Show first recovery window when emptying sandboxes</oldsource>
-        <translation type="unfinished">Zeige das Wiederherstellungsfenster vor dem Leeren der Sandboxen an</translation>
+        <translation>Zeige das Dateiwiederherstellungsfenster vor dem Leeren der Sandboxen an</translation>
     </message>
     <message>
         <source>Use Dark Theme (fully applied after a restart)</source>

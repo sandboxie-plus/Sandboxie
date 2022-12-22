@@ -1808,15 +1808,18 @@ void CSandMan::OnStatusChanged()
 				theAPI->CreateBox(DefaultBox);
 			}
 
-			//
-			// clean up Auto Delete boxes after reboot
-			//
+			if (theConf->GetBool("Options/CleanUpOnStart", false)) {
 
-			theAPI->UpdateProcesses(false, ShowAllSessions());
+				//
+				// clean up Auto Delete boxes after reboot
+				//
 
-			foreach(const CSandBoxPtr& pBox, AllBoxes) {
-				if(pBox->GetActiveProcessCount() == 0)
-					OnBoxClosed(pBox);
+				theAPI->UpdateProcesses(false, ShowAllSessions());
+
+				foreach(const CSandBoxPtr & pBox, AllBoxes) {
+					if (pBox->GetActiveProcessCount() == 0)
+						OnBoxClosed(pBox);
+				}
 			}
 		}
 

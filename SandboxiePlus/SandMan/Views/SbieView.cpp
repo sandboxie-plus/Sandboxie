@@ -1267,7 +1267,11 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 
 		SB_STATUS Status = SandBoxes.first()->RenameBox(Value.replace(" ", "_"));
 		if (!Status.IsError())
+		{
 			RenameItem(OldValue.replace(" ", "_"), Value.replace(" ", "_"));
+			if (theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox").compare(OldValue.replace(" ", "_"), Qt::CaseInsensitive) == 0)
+				theAPI->GetGlobalSettings()->SetText("DefaultBox", Value.replace(" ", "_"));
+		}
 		Results.append(Status);
 	}
 	else if (Action == m_pMenuRecover)

@@ -11,6 +11,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue with auto delete box on sandman start [#2555](https://github.com/sandboxie-plus/Sandboxie/issues/2555)
+- fixed issue with windows 11 contetx menu when sandman was not already running [2284](https://github.com/sandboxie-plus/Sandboxie/issues/2284)
+
 
 
 

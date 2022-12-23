@@ -844,22 +844,6 @@ HANDLE ProcessServer::RunSandboxedGetToken(
             ShouldAdjustDacl = true;
 
         }
-        /*else if (...) {
-
-            //
-            // use session token
-            //
-
-            ULONG SessionId = PipeServer::GetCallerSessionId();
-
-            ok = WTSQueryUserToken(SessionId, &OldTokenHandle);
-
-            if (! ok)
-                return NULL;
-
-            ShouldAdjustSessionId = false;
-
-        }*/
         else
         // OriginalToken BEGIN
         if (!SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
@@ -885,6 +869,40 @@ HANDLE ProcessServer::RunSandboxedGetToken(
                 return NULL;
             }
 
+        }
+    }
+    else
+    {
+        typedef LONG (WINAPI *P_GetApplicationUserModelId)(
+                HANDLE hProcess, UINT32 * applicationUserModelIdLength, PWSTR applicationUserModelId);
+
+        static P_GetApplicationUserModelId pGetApplicationUserModelId = (P_GetApplicationUserModelId)-1;
+        if ((UINT_PTR)pGetApplicationUserModelId == -1)
+            pGetApplicationUserModelId = (P_GetApplicationUserModelId)GetProcAddress(_Kernel32, "GetApplicationUserModelId");
+         
+        if (pGetApplicationUserModelId) {
+        
+            //
+            // when the calling application is a modern app we can't use it's token
+            //
+
+            UINT32 length = 0;
+            LONG rc = pGetApplicationUserModelId(CallerProcessHandle, &length, NULL);
+            if (rc != APPMODEL_ERROR_NO_APPLICATION)
+            {
+                //
+                // use session token
+                //
+
+                ULONG SessionId = PipeServer::GetCallerSessionId();
+
+                ok = WTSQueryUserToken(SessionId, &OldTokenHandle);
+
+                if (!ok)
+                    return NULL;
+
+                ShouldAdjustSessionId = false;
+            }
         }
     }
 

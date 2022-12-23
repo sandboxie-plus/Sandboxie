@@ -635,13 +635,10 @@ void CSettingsWindow::LoadSettings()
 			QTreeWidgetItem* pItem = new QTreeWidgetItem();
 			AddRunItem(NameCmd.first, NameCmd.second);
 		}
-
-		if (ui.cmbDefault->count() != theAPI->GetAllBoxes().size())
-		{
-			ui.cmbDefault->clear();
-			foreach(const CSandBoxPtr & pBox, theAPI->GetAllBoxes())
-				ui.cmbDefault->addItem(pBox->GetName().replace("_", " "), pBox->GetName());
-		}
+		
+		ui.cmbDefault->clear();
+		foreach(const CSandBoxPtr & pBox, theAPI->GetAllBoxes())
+			ui.cmbDefault->addItem(pBox->GetName().replace("_", " "), pBox->GetName());
 		int pos = ui.cmbDefault->findData(theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox"));
 		if(pos == -1)
 			pos = ui.cmbDefault->findData("DefaultBox");

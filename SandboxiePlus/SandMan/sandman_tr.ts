@@ -83,7 +83,7 @@
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="495"/>
         <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
-        <translation>Neredeyse tamamlandı, tüm seçimleri uygulamak ve sihirbazı tamamlamak için Bitir&apos;e tıklayın.</translation>
+        <translation>Neredeyse tamamlandı, tüm seçimleri uygulamak ve sihirbazı tamamlamak için Bitiş&apos;e tıklayın.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="507"/>
@@ -144,7 +144,7 @@
     <message>
         <location filename="Models/MonitorModel.cpp" line="118"/>
         <source>Count</source>
-        <translation>Say</translation>
+        <translation>Yineleme</translation>
     </message>
 </context>
 <context>
@@ -1453,7 +1453,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="3191"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
-        <translation>Klasörleri birleştirme: %1 &amp;gt;&amp;gt; %2</translation>
+        <translation>Klasörler birleştiriliyor: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3192"/>
@@ -1476,7 +1476,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="627"/>
         <source>Auto Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Oto Silme</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="630"/>
@@ -1511,7 +1511,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="604"/>
         <source>OPEN Root Access</source>
-        <translation>Kök Erişimi AÇIK</translation>
+        <translation>AÇIK Kök Erişimi</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="606"/>
@@ -1865,7 +1865,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2880"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
-        <translation>Bölümdeki konfigürasyonu güncelleme yetkiniz yok &apos;%1&apos;</translation>
+        <translation>Bölümdeki yapılandırmayı güncelleme yetkiniz yok &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2876"/>
@@ -1956,7 +1956,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="1700"/>
         <source>%1 Directory: %2</source>
-        <translation>%1 Dizin: %2</translation>
+        <translation>%1 Dizini: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1700"/>
@@ -1987,7 +1987,7 @@ Tam yol: %4</translation>
         <location filename="SandMan.cpp" line="2092"/>
         <source>The evaluation period has expired!!!</source>
         <oldsource>The evaluation periode has expired!!!</oldsource>
-        <translation>Değerlendirme süresi dolmuştur!!!</translation>
+        <translation>Değerlendirme süresi dolmuştur!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2187"/>
@@ -2029,7 +2029,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2560"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
-        <translation>Plus Kullanıcı Arayüzünde bu işlevsellik, ana korumalı alan liste görünümüne entegre edilmiştir.</translation>
+        <translation>Bu işlevsellik, Plus kullanıcı arayüzünde korumalı alan liste görünümüne entegre edilmiştir.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2561"/>
@@ -2069,7 +2069,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2857"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
-        <translation>Uyumsuz bir Sandboxie %1 bulundu. Uyumlu versiyonlar: %2</translation>
+        <translation>Uyumsuz bir Sandboxie %1 bulundu. Uyumlu sürümler: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2858"/>
@@ -2084,12 +2084,12 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2872"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
-        <translation>Bu Anlık Görüntü işlemi, işlemler alanda hala çalışırken gerçekleştirilemez.</translation>
+        <translation>Bu Anlık Görüntü işlemi, alan içinde işlemler çalışırken gerçekleştirilemez.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2878"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
-        <translation>Sonraki birden çok anlık görüntü tarafından paylaşılan bir anlık görüntü kaldırılamaz</translation>
+        <translation>Birden çok anlık görüntü tarafından paylaşılan bir anlık görüntü kaldırılamaz</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2887"/>
@@ -2124,7 +2124,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2945"/>
         <source>Remember choice for later.</source>
-        <translation>Seçimi hatırla.</translation>
+        <translation>Seçimi sonrası için hatırla.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3088"/>
@@ -2229,7 +2229,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="1807"/>
         <source>Default sandbox not found; creating: %1</source>
-        <translation>Öntanımlı korumalı alan bulunamadı; oluşturuluyor: %1</translation>
+        <translation>Varsayılan korumalı alan bulunamadı; oluşturuluyor: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="542"/>
@@ -2254,7 +2254,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2320"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
-        <translation>DİKKAT: Başka bir aracı (muhtemelen SbieCtrl.exe) bu Sandboxie oturumunu zaten yönetiyor, lütfen önce kapatın ve devralmak için yeniden bağlanın.</translation>
+        <translation>DİKKAT: Bu Sandboxie oturumunu başka bir aracı (muhtemelen SbieCtrl.exe) zaten yönetiyor, lütfen önce onu kapatın ve devralmak için yeniden bağlanın.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2884"/>
@@ -2301,7 +2301,7 @@ Tam yol: %4</translation>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
 
 Do you want to do the clean up?</source>
-        <translation>Sandboxie-Plus taşınabilir modda çalışıyordu, şimdi oluşturulan hizmetleri temizlemesi gerekiyor. Bu, yönetici ayrıcalıkları isteyecektir.
+        <translation>Sandboxie-Plus taşınabilir modda çalışıyordu, şimdi oluşturulan hizmetleri temizlemesi gerekiyor. Bunun için yönetici ayrıcalıkları isteyecektir.
 
 Temizlik yapmak ister misin?</translation>
     </message>
@@ -2318,7 +2318,7 @@ Temizlik yapmak ister misin?</translation>
     <message>
         <location filename="SandMan.cpp" line="1231"/>
         <source>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</source>
-        <translation>Bu alan yalıtım uygulamaz, yalnızca yazılım sanallaştırması için bir uygulama bölmesi olarak kullanılması amaçlanmıştır.</translation>
+        <translation>Bu alan, yalıtımı zorla uygulamaz. Yalnızca yazılım sanallaştırması için uygulama bölmesi olarak kullanımı amaçlanmıştır.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1236"/>
@@ -2327,7 +2327,7 @@ Temizlik yapmak ister misin?</translation>
 This box prevents access to all user data locations, except explicitly granted in the Resource Access options.</source>
         <translation>
 
-Bu alan, Kaynak Erişimi seçeneklerinde açıkça verilenler dışında tüm kullanıcı veri konumlarına erişimi engeller.</translation>
+Bu alan, &apos;Kaynak Erişimi&apos; seçeneklerinde açıkça izin verilenler dışında tüm kullanıcı veri konumlarına erişimi engeller.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1389"/>
@@ -2560,7 +2560,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2252"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
-        <translation>Lütfen Zorlanmış Programlar kurallarını devre dışı bırakmak için saniye cinsinden süreyi girin.</translation>
+        <translation>Lütfen Zorunlu Programlar kurallarını devre dışı bırakmak için süreyi saniye cinsinden girin.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2428"/>
@@ -2590,7 +2590,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="3136"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;Sandboxie-Plus hakkında&lt;/h3&gt;&lt;p&gt;Sürüm %1&lt;/p&gt;&lt;p&gt;Telif hakkı (c) 2020-2022, DavidXanatos&lt;/p&gt;</translation>
+        <translation>&lt;h3&gt;Sandboxie-Plus hakkında&lt;/h3&gt;&lt;p&gt;Sürüm %1&lt;/p&gt;&lt;p&gt;Telif hakkı (c) 2020-2023, DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2098"/>
@@ -2894,7 +2894,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SbieProcess.cpp" line="90"/>
         <source>Forced </source>
-        <translation>Zorlanmış </translation>
+        <translation>Zorunlu </translation>
     </message>
 </context>
 <context>
@@ -4152,7 +4152,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="77"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation>Korumalı alan, ana bilgisayar sisteminizi alan içinde çalışan işlemlerden izole eder, diğer programlarda ve bilgisayarınızdaki verilerde kalıcı değişiklikler yapmalarını engeller. Yalıtım düzeyi, güvenliğinizi ve uygulamalarla uyumluluğu etkiler, dolayısıyla seçilen Alan Türüne bağlı olarak farklı bir yalıtım düzeyi olacaktır. Sandboxie ayrıca kişisel verilerinize, kendi gözetimi altında çalışan işlemler tarafından erişilmesine karşı da koruyabilir.</translation>
+        <translation>Korumalı alan, ana bilgisayar sisteminizi alan içinde çalışan işlemlerden yalıtır ve diğer programlarda ve bilgisayarınızdaki verilerde kalıcı değişiklikler yapmalarını engeller. Yalıtım düzeyi, güvenliği ve uygulamalarla uyumluluğu etkiler, dolayısıyla seçilen &apos;Alan Türüne&apos; bağlı olarak farklı bir yalıtım düzeyi sağlayacaktır. Sandboxie ayrıca kişisel verilerinize, kendi gözetimi altında çalışan işlemler tarafından erişilmesine karşı da koruyabilir.</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="94"/>
@@ -4257,7 +4257,7 @@ Hayır şunları seçer: %2</translation>
     </message>
     <message>
         <source>Forced Programs</source>
-        <translation type="vanished">Zorlanmış Programlar</translation>
+        <translation type="vanished">Zorunlu Programlar</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2258"/>
@@ -4693,7 +4693,7 @@ Ini kullanarak günlüğe kaydetmeyi özelleştirebilirsiniz.
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
         <translation>Korumalı alanın kullanımını yalnızca bu hesaplarla sınırlamak için aşağıdaki listeye kullanıcı hesaplarını ve kullanıcı gruplarını ekleyin. Liste boşsa, korumalı alan tüm kullanıcı hesapları tarafından kullanılabilir.
 
-Not: Bir korumalı alana ilişkin Zorlanmış Programlar ve Zorlanmış Klasörler ayarları, korumalı alanı kullanamayan kullanıcı hesapları için geçerli değildir.</translation>
+Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarları, korumalı alanı kullanamayan kullanıcı hesapları için geçerli değildir.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1859"/>
@@ -4923,7 +4923,7 @@ Not: Bir korumalı alana ilişkin Zorlanmış Programlar ve Zorlanmış Klasörl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1373"/>
         <source>Force Programs</source>
-        <translation>Zorlanmış Programlar</translation>
+        <translation>Zorunlu Programlar</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1488"/>
@@ -4944,7 +4944,7 @@ Not: Bir korumalı alana ilişkin Zorlanmış Programlar ve Zorlanmış Klasörl
         <location filename="Forms/OptionsWindow.ui" line="1590"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
         <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
-        <translation>Buraya girilen programlar, başlatıldıklarında, bu kormalı alanın dışına çıkmalarına izin verilecektir. Bunları başka bir korumalı alana almak da mümkündür, örneğin web tarayıcınızın her zaman özel bir alanda açık olması gibi.</translation>
+        <translation>Buraya girilen programlar, başlatıldıklarında, bu kormalı alanın dışına çıkmalarına izin verilecektir. Bunları başka bir korumalı alana geçirmek de mümkündür, örneğin web tarayıcınızın her zaman özel bir alanda açık olması gibi.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1617"/>
@@ -5938,7 +5938,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/SettingsWindow.ui" line="190"/>
         <source>Show file recovery window when emptying sandboxes</source>
         <oldsource>Show first recovery window when emptying sandboxes</oldsource>
-        <translation type="unfinished">Korumalı alanlar boşaltılmadan önce kurtarma penceresini göster</translation>
+        <translation>Korumalı alanlar boşaltılırken kurtarma penceresini göster</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="816"/>
@@ -6295,7 +6295,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1106"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
-        <translation>Zorlanmış işlemler devre dışı bırakıldığında 1301 mesajını yayınla</translation>
+        <translation>Zorunlu işlemler devre dışı bırakıldığında 1301 mesajını yayınla</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1178"/>

@@ -38,7 +38,7 @@ jobs:
           wget -q https://raw.githubusercontent.com/codespell-project/codespell/master/codespell_lib/data/dictionary.txt
           wget -q https://raw.githubusercontent.com/codespell-project/codespell/master/codespell_lib/data/dictionary_rare.txt
           wget -q https://raw.githubusercontent.com/codespell-project/codespell/master/codespell_lib/data/dictionary_code.txt
-          # Add further typos to check continuously
+          # Add further typos for continuous checks
           echo 'behavioure->behaviour' >> dictionary.txt
           echo 'blockign->blocking' >> dictionary.txt
           echo 'ate->are' >> dictionary.txt
@@ -50,6 +50,9 @@ jobs:
           echo 'injectted->injected' >> dictionary.txt
           echo 'prepanding->prepending' >> dictionary.txt
           echo 'probablys->probably' >> dictionary.txt
+          echo 'undependant->independent' >> dictionary.txt
+          echo 'ware->were' >> dictionary.txt
+          echo 'contetx->context' >> dictionary.txt
           # Only lowercase letters are allowed in --ignore-words-list
           codespell --dictionary=dictionary.txt --dictionary=dictionary_rare.txt --dictionary=dictionary_code.txt \
           --ignore-words-list="wil,unknwn,tolen,pevent,doubleclick,parm,parms,etcp,ois,ba,ptd,modell,namesd,stdio,uint,errorstring,ontext,atend,deque,ecounter,nmake,namess,inh,daa,varient" \

@@ -7,11 +7,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.6.3a / 5.61.3] - 2022-12-??
 
 ### Added
-- added option to disable box clean up on start [#2553](https://github.com/sandboxie-plus/Sandboxie/issues/2553)
+- added option to disable sandbox clean-up on startup [#2553](https://github.com/sandboxie-plus/Sandboxie/issues/2553)
 
 ### Fixed
-- fixed issue with auto delete box on sandman start [#2555](https://github.com/sandboxie-plus/Sandboxie/issues/2555)
-- fixed issue with windows 11 contetx menu when sandman was not already running [2284](https://github.com/sandboxie-plus/Sandboxie/issues/2284)
+- fixed issue with auto delete sandbox on SandMan startup [#2555](https://github.com/sandboxie-plus/Sandboxie/issues/2555)
+- fixed issue with Windows 11 context menu when SandMan was not already running [#2284](https://github.com/sandboxie-plus/Sandboxie/issues/2284)
 
 
 
@@ -26,11 +26,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.6.2b / 5.61.2] - 2022-12-21
 
 ### Fixed
-- fixed issue with update label when "version update" is set to "ignore"
-- fixed issue with wow64 thunking on 32 bit windows 10 systems [#2546](https://github.com/sandboxie-plus/Sandboxie/issues/2546)
-- fixed on reboot auto clean up boxes are nto cleared [#2531](https://github.com/sandboxie-plus/Sandboxie/issues/2531)
--- Note: a clean up is now done after each reboot
-- fixed issue with Network Location Awareness under windows 11 [#2530](https://github.com/sandboxie-plus/Sandboxie/issues/2530)
+- fixed issue with update label when "Version Updates" drop-down menu was set to "Ignore"
+- fixed issue with WoW64 thunking on 32-bit Windows 10 systems [#2546](https://github.com/sandboxie-plus/Sandboxie/issues/2546)
+- fixed issue with auto delete option not working in sandboxes [#2531](https://github.com/sandboxie-plus/Sandboxie/issues/2531)
+-- Note: a clean-up is now done after each reboot
+- fixed issue with Network Location Awareness under Windows 11 [#2530](https://github.com/sandboxie-plus/Sandboxie/issues/2530)
 - fixed issues with recovery window [#2458](https://github.com/sandboxie-plus/Sandboxie/issues/2458)
 
 
@@ -38,7 +38,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.6.2a / 5.61.2] - 2022-12-19
 
 ### Fixed
-- Fixed crash issue in Vintage UI introduced in 1.6.1a
+- fixed crash issue in Vintage UI introduced in 1.6.1a
 
 
 

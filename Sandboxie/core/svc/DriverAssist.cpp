@@ -119,7 +119,7 @@ bool DriverAssist::InitializePortAndThreads()
     ULONG i, n;
 
     //
-    // create a security descriptor with a limited dacl
+    // create a security descriptor with a limited DACL
     // owner:system, group:system, dacl(allow;generic_all;system)
     //
 

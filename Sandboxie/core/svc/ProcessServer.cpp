@@ -883,7 +883,7 @@ HANDLE ProcessServer::RunSandboxedGetToken(
         if (pGetApplicationUserModelId) {
         
             //
-            // when the calling application is a modern app we can't use it's token
+            // when the calling application is a modern app, we can't use its token
             //
 
             UINT32 length = 0;
@@ -920,8 +920,8 @@ HANDLE ProcessServer::RunSandboxedGetToken(
     }
 
     //
-    // duplicate the token into a new primary token then adjust session
-    // then adjust session and default dacl
+    // duplicate the token into a new primary token,
+    // then adjust session and default DACL
     //
 
     ok = DuplicateTokenEx(OldTokenHandle, TOKEN_ADJUST_PRIVILEGES | TOKEN_RIGHTS, NULL,
@@ -941,7 +941,7 @@ HANDLE ProcessServer::RunSandboxedGetToken(
 
         //
         // if caller is sandboxed and asked for a system token,
-        // then we want to adjust the dacl in the new token
+        // then we want to adjust the DACL in the new token
         //
 
 		if (SbieApi_QueryConfBool(boxname, L"ExposeBoxedSystem", FALSE))

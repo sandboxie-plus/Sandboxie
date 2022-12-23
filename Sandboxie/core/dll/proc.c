@@ -529,7 +529,7 @@ _FX void SetTokenDefaultDaclToProcess(HANDLE hToken, HANDLE hProcess)
     DWORD dwTokenInfoLenReturn = 0;
     PTOKEN_DEFAULT_DACL pTokenInfo = NULL;
 
-    // Use hToken's default dacl on the process's security descriptor
+    // Use hToken's default DACL on the process's security descriptor
     if (__sys_GetTokenInformation && hToken && hProcess) {
 
         __sys_GetTokenInformation(hToken, TokenDefaultDacl, NULL, 0, &dwTokenInfoLen);

@@ -7,9 +7,9 @@
 
 /**********************************************************************************************
 * CThreadLock
-* This class allows to wait for events form a differet thread.
-* When Lock returns successfully it is guaranteed that the other thread have issued a release.
-* This works undependant of the real order Lock and Release ware called
+* This class allows to wait for events from a different thread.
+* When Lock returns successfully, it is guaranteed that the other thread has issued a release.
+* This works regardless of the real order in which Lock and Release were called.
 */
 
 class MISCHELPERS_EXPORT CThreadLock

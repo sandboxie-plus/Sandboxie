@@ -463,13 +463,13 @@ void COptionsWindow::OnPickColor()
 
 void COptionsWindow::SetBoxColor(const QColor& color)
 {
-	if (m_BorderColor == color) 
+	if (m_BorderColor == color)
 		return;
-	m_BorderColor = color;
 	QRgb qrgb = color.rgba();
 	my_rgb rgb = { (double)qRed(qrgb), (double)qGreen(qrgb), (double)qBlue(qrgb) };
 	my_hsv hsv = rgb2hsv(rgb);
-	m_pColorSlider->setValue(hsv.h);
+	m_pColorSlider->setValue((int)hsv.h);
+	m_BorderColor = color;
 	UpdateBoxColor();
 }
 

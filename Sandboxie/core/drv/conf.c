@@ -204,7 +204,7 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
     ULONG path_len;
     WCHAR *path = NULL;
     BOOLEAN path_home;
-    STREAM *stream;
+    STREAM *stream = NULL;
     POOL *pool;
 
     //
@@ -247,6 +247,7 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
             status == STATUS_OBJECT_PATH_NOT_FOUND)
         {
             Log_Msg_Session(MSG_CONF_NO_FILE, NULL, NULL, session_id);
+            status = STATUS_SUCCESS; // we need to continue and load the Templates.ini with the defaults
         } else {
             wcscpy(linenum_str, L"(none)");
             Log_Status_Ex_Session(
@@ -281,6 +282,8 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
         data.home = path_home;
         data.use_count = 0;
 
+      if (stream) {
+
         status = Stream_Read_BOM(stream, &data.encoding);
 
         linenum = 1;
@@ -288,9 +291,10 @@ _FX NTSTATUS Conf_Read(ULONG session_id)
             status = Conf_Read_Sections(stream, &data, &linenum);
         if (status == STATUS_END_OF_FILE)
             status = STATUS_SUCCESS;
+      }
     }
 
-    Stream_Close(stream);
+    if (stream) Stream_Close(stream);
 
     //
     // read (Home Path)\Templates.ini

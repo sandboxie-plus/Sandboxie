@@ -1520,7 +1520,7 @@ Full path: %4</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="627"/>
         <source>Auto Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>자동 삭제</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="630"/>
@@ -5780,7 +5780,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="190"/>
         <source>Show file recovery window when emptying sandboxes</source>
         <oldsource>Show first recovery window when emptying sandboxes</oldsource>
-        <translation type="unfinished">샌드박스를 비울 때 첫 번째 복구 창 표시</translation>
+        <translation>샌드박스를 비울 때 파일 복구 창 표시</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="130"/>

@@ -776,12 +776,12 @@ Sil komutu başarısız:  %0
 .
 
 3241;txt;01
-Sandboxie bir korumalı alan içerisinde çalışan program
-adına Yönetim hakları talep ediyor.
+Sandboxie korumalı alanda çalışan bir program
+için Yönetici yetkilendirmesi istiyor.
 .
 
 3242;txt;01
-Talebi kabul veya reddetmek için Kullanıcı Hesap
+İsteği kabul etmek veya reddetmek için Kullanıcı Hesap
 Denetimi (UAC) açılır penceresini etkinleştirin.
 .
 
@@ -801,7 +801,7 @@ gözetimsiz çalıştırır. Çalışan programın da çalıştırdığı
 programlar gözetimsiz olacaktır.
 
 Bu seçeneği ayrıca Korumalı Alanda Çalıştır komutuna tıklarken
-Ctrl ve Shift tuşlarına basarak uygulayabilisiniz.
+Ctrl ve Shift tuşlarına tıklayarak uygulayabilisiniz.
 .
 
 3253;txt;01
@@ -1217,7 +1217,11 @@ Masaüstü Kısayolu Oluştur
 .
 
 3504;txt;01
-&Sandboxie'yi Destekleyin
+&Sandboxie'yi Bağışlarla Destekleyin
+.
+
+3505;txt;01
+Nasıl Katkıda Bulunulur?
 .
 
 #----------------------------------------------------------------------------
@@ -1260,7 +1264,7 @@ Sandboxie yapılandırmayı yenilenmeyecek.
 .
 
 3515;txt;01
-Korumalı alan %2
+Korumalı Alan %2
 .
 
 3516;txt;01
@@ -1421,11 +1425,11 @@ Sandboxie Hakkında
 #----------------------------------------------------------------------------
 
 3621;txt;01
-Güncellemeleri Kontrol Et
+Güncellemeleri Denetle
 .
 
 3622;txt;01
-Yeni sürüm kontrolü için Sandboxie Web sitesine bağlanmak ister misiniz?
+Yeni sürüm denetimi için Sandboxie Web sitesine bağlanmak ister misiniz?
 .
 
 3623;txt;01
@@ -1441,7 +1445,7 @@ Sonraki &Hafta
 .
 
 3626;txt;01
-Gelecekte, bana sormadan kontrol et
+Gelecekte, bana sormadan denetle
 .
 
 3627;txt;01
@@ -1477,7 +1481,7 @@ Sandboxie %2 aşağıdaki klasöre indirildi:
 
 %3
 
-Tamam'a basıp yükleme işlemine başlayın. Eğer korumalı alanda
+Tamam'a tıklayıp yükleme işlemine başlayın. Eğer korumalı alanda
 çalışan bir program bulunursa, kapatılacaklardır.
 .
 
@@ -1578,7 +1582,7 @@ Pencere Korumalı Alanda Mı?
 .
 
 3662;txt;01
-Pencerenin korumalı alanda olup olmadığını kontrol etmek için Bulucu Aracını bir pencere üzerine sürükleyip bırakın.
+Pencerenin korumalı alanda olup olmadığını denetlemek için Bulucu Aracını bir pencere üzerine sürükleyip bırakın.
 
 ESC ile iptal edebilirsiniz.
 .
@@ -1608,7 +1612,7 @@ Hata: Geçersiz korumalı alan adı girildi. Yalnızca sayı ve harf kullanın. 
 .
 
 3668;txt;01
-Hata: Var olan bir korumalı alan adı girildi. Diğer korumalı alan tarafından kullanılmayan bir isim girin.
+Hata: Var olan bir korumalı alan adı girildi. Diğer korumalı alan tarafından kullanılmayan bir ad girin.
 .
 
 3669;txt;01
@@ -1616,7 +1620,7 @@ Varolan korumalı alandan ayarları kopyala:
 .
 
 4665;txt;01
-Hata: Aynı korumalı alan adı girildi. Bu isim gizli bir korumalı alan tarafından kullanılıyor. Korumalı alan menüsünden "Gizli Korumalı alanı Göster" komutunu kullanın.
+Hata: Aynı korumalı alan adı girildi. Bu ad gizli bir korumalı alan tarafından kullanılıyor. Korumalı alan menüsünden "Gizli Korumalı alanı Göster" komutunu kullanın.
 .
 
 #----------------------------------------------------------------------------
@@ -1640,7 +1644,7 @@ Ancak aşağıdaki düzenleme kutusunu kullanarak varsayılan konumu değiştire
 .
 
 3675;txt;01
-Not: Biriktirme klasörünü değiştirmeden önce, tüm korumalı alan içeriklerini silmeniz önerilir.
+Not: Kapsayıcı klasörünü değiştirmeden önce, tüm korumalı alan içeriklerini silmeniz önerilir.
 .
 
 3676;txt;01
@@ -1915,7 +1919,7 @@ Diğer programlar sonlandığında bu program korumalı alan içerisinde çalı�
 .
 
 3757;txt;01
-Bu öncü program sonlandırıldığında diğer programları kapat
+Bu lider program sonlandırıldığında diğer programları kapat
 .
 
 3761;txt;01
@@ -2076,7 +2080,7 @@ Hızlı Kurtarma
 .
 
 3823;txt;01
-Korumalı alan silinmeden veya Hızlı Kurtarma işlevini el ile uygulamadan önce, aşağıdaki klasörler korumalı alandaki içerik için kontrol edileceklerdir.
+Korumalı alan silinmeden veya Hızlı Kurtarma işlevini el ile uygulamadan önce, aşağıdaki klasörler korumalı alandaki içerik için denetlenecektir.
 .
 
 # 3831;txt;01
@@ -2177,7 +2181,7 @@ Program Grupları
 .
 
 3972;txt;01
-Programları gruplandırıp isim vererek daha sonra ayar kullanmada kullanabilirsiniz.
+Birkaç programı birlikte gruplandırabilir ve onlara bir grup adı verebilirsiniz. Program grupları, program adlarını kabul eden bazı ayarlarla birlikte kullanılabilir.
 .
 
 3974;txt;01
@@ -2265,7 +2269,7 @@ Diğer tüm programlar sonlandıktan sonra, aşağıdaki programlardan biri hale
 # .
 
 3892;txt;01
-Öncü Programlar
+Lider Programlar
 .
 
 3893;txt;01
@@ -2289,19 +2293,19 @@ Aşağıdaki sayı taşınabilecek dosyanın en fazla boyutuna karar verir. Bu b
 .
 
 3905;txt;01
-Taşınmayacak dosya boyutu
+Şundan daha büyük dosyalar taşınmasın:
 .
 
 3906;txt;01
-Kb'den büyük
+kilobayt
 .
 
 3907;txt;01
-Bir dosya taşımak için çok büyükse, aşağıdaki işaretlenmediği sürece SBIE2102 mesajı gösterilecek.
+Bir dosya taşımak için çok büyükse, aşağıdaki işaretlenmediği sürece, SBIE2102 mesajı gösterilecek.
 .
 
 3908;txt;01
-Taşımak için büyük olan dosyalar için mesaj gösterme
+Bir dosya taşınamayacak kadar büyük olduğunda mesaj gösterme
 .
 
 3909;txt;01
@@ -2309,9 +2313,9 @@ Dosya Taşıma ayarı, korumalı alan içerisine kopyalanacak dosyanın en büy�
 
 Bu ayar '%2' korumalı alanında şu anda %3 kilobayta ayarlandı.
 
-Tamam'a basarak limiti %4 kilobayta ayarlayın.
+Tamam'a tıklayarak limiti %4 kilobayta ayarlayın.
 
-Bu limiti ayrıca Korumalı alan Ayarları penceresinden, Dosya Taşıma ayarlarını genişleterek değiştirebilirsiniz.
+Bu limiti ayrıca Korumalı Alan Ayarları penceresinden, Dosya Taşıma ayarlarını genişleterek değiştirebilirsiniz.
 .
 
 #----------------------------------------------------------------------------
@@ -2375,7 +2379,7 @@ Bu korumalı alan içerisinde yalnızca aşağıdaki programlar başlatılabilir
 .
 
 3924;txt;01
-Bu özellik etkinleştirildiğinde, bu korumalı alana kurulan veya indirilen programlar başlatılmayacak veya çalıştırılamayacaklardır.
+Bu özellik etkinleştirildiğinde, bu korumalı alana kurulan veya indirilen programlar başlatılamayacak veya çalıştırılamayacaktır.
 .
 
 3928;txt;01
@@ -2383,11 +2387,11 @@ Tüm programlar başlatılabilir ve çalıştırılabilir
 .
 
 3930;txt;01
-Başlat/Çalıştır Kısıtlamaları '%2' korumalı alanında etkin ve programın başlatılıp çalıştırılması engelleniyor.
+Başlatma/Çalıştırma Kısıtlamaları '%2' korumalı alanında etkin ve programın başlatılıp çalıştırılması engelleniyor.
 
 Tamam'a tıklayarak '%3' programını '%2' korumalı alanında Başlat/Çalıştır Kısıtlamalarına ekleyin.
 
-Başlat/Çalıştır Kısıtlamalarını yönetmek için Korumalı alan Ayarları pencereisni açın ve Kısıtlamalar ayar grubunu genişletin.
+Başlatma/Çalıştırma Kısıtlamalarını yönetmek için Korumalı Alan Ayarları penceresini açın ve Kısıtlamalar ayar grubunu genişletin.
 .
 
 #----------------------------------------------------------------------------
@@ -2419,11 +2423,11 @@ Sandboxie, yalıtımı sağlayabilmek için denetimindeki programlardan birkaç 
 .
 
 3944;txt;01
-Ancak, eğer yönetici veya yetkili kullanıcılar grupları haklarına sahip bir kullanıcı iseniz, Sandboxie, DropMyRights aracının yaptığına benzer daha fazla güvenlik haklarını bırakabilir.
+Ancak, eğer yönetici veya yetkili kullanıcılar grupları haklarına sahip bir kullanıcı iseniz, Sandboxie, DropMyRights aracının yaptığına benzer şekilde daha fazla güvenlik hakkını bırakabilir.
 .
 
 3945;txt;01
-Yönetici ve Yetkili Kullanıcı grubunlarından hakları bırak
+Yönetici ve Yetkili Kullanıcı grupları haklarını bırak
 .
 
 3949;txt;01
@@ -2467,7 +2471,7 @@ Doğrudan Dosya Erişimi (OpenFilePath)
 .
 
 4003;txt;01
-Aşağıdaki dosya ve klasörler, herhangi bir korumalı alan etkisi olmadan bu korumalı alan içerisinde çalışan programlara erişim izni alacaklardır.
+Aşağıdaki dosya ve klasörlere, bu korumalı alanda çalışan programlar, korumalı alanın herhangi bir etkisi olmadan doğrudan erişebilir.
 .
 
 4004;txt;01
@@ -2484,7 +2488,7 @@ Tam Dosya Erişimi (OpenPipePath)
 .
 
 4013;txt;01
-Aşağıdaki dosya ve klasörler, herhangi bir korumalı alan etkisi olmadan bu korumalı alan içerisinde çalışan programlara erişim izni alacaklardır.
+Aşağıdaki dosya ve klasörlere, bu korumalı alanda çalışan programlar, korumalı alanın herhangi bir etkisi olmadan doğrudan erişebilir.
 .
 
 4014;txt;01
@@ -2492,24 +2496,24 @@ Doğrudan Erişim ayarından farklı olarak, bu ayar korumalı alan içerisine i
 .
 
 4021;txt;01
-Kaynak Erişimi::Dosya Erişimi::Yasaklanan Erişim
+Kaynak Erişimi::Dosya Erişimi::Engellenen Erişim
 .
 
 4022;txt;01
-Yasaklanan Dosya Erişimi (ClosedFilePath)
+Engellenen Dosya Erişimi (ClosedFilePath)
 .
 
 4023;txt;01
-Aşağıdaki dosya ve klasörler, bu korumalı alan içerisinde çalışan herhangi bir programa erişim izni alamayacaklar.
+Aşağıdaki dosya ve klasörlere, bu korumalı alanda çalışan programlar hiçbir şekilde erişemeyecektir.
 .
 
 4024;txt;01
-Eğer bir dosya veya klasör diğer Dosya Erişim ayarı ile eşleşir, ayrıca Yasaklanan Erişim ile de eşleşirse, Yasaklanan Erişim seçeneği öncelikli olacaktır.
+Eğer bir dosya veya klasör diğer Dosya Erişim ayarı ile eşleşir, ayrıca Engellenen Erişim ile de eşleşirse, Engellenen Erişim seçeneği öncelikli olacaktır.
 .
 
 4025;txt;01
-Windows dosya paylaşımı Yasaklı Dosya Erişim ayarını atlatmak için kullanılabilir.
-Windows dosya paylaşımına erişimi yasaklamak için kaynak ekleniyor.
+Windows dosya paylaşımı, Engellenen Dosya Erişimi ayarlarını atlatmak için kullanılabilir.
+Bu nedenle, Windows dosya paylaşım hizmetine erişimi engellemek için bir ayar eklendi.
 .
 
 4031;txt;01
@@ -2521,7 +2525,7 @@ Salt-Okunur Dosya Erişimi (ReadFilePath)
 .
 
 4033;txt;01
-Aşağıdaki dosya ve klasörler, bu korumalı alan içerisinde çalışan programlar tarafından değiştirilemeyecektir.
+Aşağıdaki dosya ve klasörlere, bu korumalı alan içerisinde çalışan programlar tarafından değiştirilemeyecektir.
 .
 
 4111;txt;01
@@ -2533,7 +2537,7 @@ Salt-Yazma Dosya Erişimi (WriteFilePath)
 .
 
 4113;txt;01
-Aşağıdaki klasörler, bu korumalı alanda çalışan programlara boş görünecektir ancak bu programlar korumalı alan içerisinde bu klasörlerde yeni dosya oluşturabilirler.
+Aşağıdaki klasörler, bu korumalı alanda çalışan programlara boş görünür ancak bu programlar korumalı alanda bu klasörler içinde yeni dosyalar oluşturabilir.
 .
 
 4041;txt;01
@@ -2553,11 +2557,11 @@ Bu işlem, korumalı alan içerisine yüklenen veya indirilen programları etkil
 .
 
 4051;txt;01
-Kaynak Erişimi::Kayıt Erişimi::Yasaklanan Erişim
+Kaynak Erişimi::Kayıt Erişimi::Engellenen Erişim
 .
 
 4052;txt;01
-Yasaklanan Kayıt Erişimi (ClosedKeyPath)
+Engellenen Kayıt Erişimi (ClosedKeyPath)
 .
 
 4053;txt;01
@@ -2565,7 +2569,7 @@ Aşağıdaki kayıt anahtarları, bu korumalı alan içerisinde çalışan progr
 .
 
 4054;txt;01
-Eğer bir kayıt anahtarı diğer Kayıt Erişimi ayarı ile eşleşir, ayrıca Yasaklanan Erişim ayarı ile de eşleşirse, Yasaklanan Erişim ayarı öncelikli olacaktır.
+Eğer bir kayıt anahtarı diğer Kayıt Erişimi ayarı ile eşleşir, ayrıca Engellenen Erişim ayarı ile de eşleşirse, Engellenen Erişim ayarı öncelikli olacaktır.
 .
 
 4061;txt;01
@@ -2577,7 +2581,7 @@ Salt-Okunur Kayıt Erişimi (ReadKeyPath)
 .
 
 4063;txt;01
-Aşağıdaki kayıt anahtarları bu korumalı alan içerisinde çalışan programlar tarafından düzenlenemeyeceklerdir.
+Aşağıdaki kayıt anahtarları bu korumalı alan içerisinde çalışan programlar tarafından düzenlenemeyecektir.
 .
 
 4121;txt;01
@@ -2589,7 +2593,7 @@ Salt-Yazma Kayıt Erişimi (WriteKeyPath)
 .
 
 4123;txt;01
-Aşağıdaki kayıt anahtarları, bu korumalı alanda çalışan programlara boş görünecektir ancak bu programlar korumalı alan içerisinde bu kayır anahtarlarında yeni veri oluşturabilirler.
+Aşağıdaki kayıt anahtarları, bu korumalı alanda çalışan programlara boş görünecektir ancak bu programlar korumalı alan içerisinde bu kayıt anahtarlarında yeni veri oluşturabilirler.
 .
 
 4071;txt;01
@@ -2609,11 +2613,11 @@ Bu ayar, korumalı alan içerisine yüklenmiş veya indirilmişler de dahil, tü
 .
 
 4081;txt;01
-Kaynak Erişimi::IPC Erişimi::Yasaklanan Erişim
+Kaynak Erişimi::IPC Erişimi::Engellenen Erişim
 .
 
 4082;txt;01
-Yasaklanan IPC Erişimi (ClosedIpcPath)
+Engellenen IPC Erişimi (ClosedIpcPath)
 .
 
 4083;txt;01
@@ -2621,7 +2625,7 @@ Aşağıdaki NT IPC nesneleri, bu korumalı alan içerisinde çalışan programl
 .
 
 4084;txt;01
-Eğer bir NT IPC nesnesi diğer IPC Erişimi ayarı ile eşleşir, ayrıca Yasaklanan Erişim ayarı ile de eşleşirse, Yasaklanan Erişim ayarı öncelikli olacaktır.
+Eğer bir NT IPC nesnesi diğer IPC Erişimi ayarı ile eşleşir, ayrıca Engellenen Erişim ayarı ile de eşleşirse, Engellenen Erişim ayarı öncelikli olacaktır.
 .
 
 4091;txt;01
@@ -2685,7 +2689,8 @@ Bu uygulama ayarı Web adresi içermemektedir.
 .
 
 4207;txt;01
-Aşağıdaki listeden seçerek diğer programlarınızın Sandboxie kullanımını ilerletin.
+Aşağıdaki listeden seçerek diğer programlarınızın Sandboxie kullanımını iyileştirin.
+
 .
 
 # 4208;txt;01
@@ -2697,7 +2702,7 @@ Klasörler
 .
 
 4210;txt;01
-Diğer uygulamalarınız tarafından kullanılan klasör konumlarını ayarla.
+Diğer uygulamalarınız tarafından kullanılan klasör konumlarını yapılandırın.
 .
 
 4211;txt;01
@@ -2705,15 +2710,15 @@ Diğer uygulamalarınız tarafından kullanılan klasör konumlarını ayarla.
 .
 
 4212;txt;01
-Varsayılan klasör:
+Varsayılan konum:
 .
 
 4213;txt;01
-İkincil klasör:
+Alternatif konum:
 .
 
 4214;txt;02
-'%2' için ikincil klasör
+'%2' için alternatif konum
 aşağıdaki dosyayı içermelidir:
 
 %3
@@ -2728,11 +2733,11 @@ Lütfen bu dosyayı içeren klasör seçin.
 .
 
 4216;txt;01
-Aşağıdaki ayar '%2' için uygulama ayarlarını içerir.
+Aşağıdaki ayar '%2' için uygulama yapılandırmasını içerir.
 .
 
 4217;txt;01
-Ayarları yazıp veya yapıştırıp, Tamam'a basarak yeni yerel uygulama ayarlarını oluşturun.
+Ayarları yazdıktan veya yapıştırdıktan sonra, yeni yerel uygulama yapılandırmasını  oluşturmak için Tamam'a tıklayın.
 .
 
 4218;txt;01
@@ -2740,12 +2745,12 @@ Yerel
 .
 
 4219;txt;01
-Yerel (resmi olmayan) uygulama ayarlarınız.
+Yerel (resmi olmayan) uygulama yapılandırmaları.
 .
 
 4220;txt;01
 Girilen kod bir veya birden fazla hata içeriyor.
-Uygulama ayarı oluşturulamadı.
+Uygulama yapılandırması oluşturulamadı.
 .
 
 4221;txt;01
@@ -2759,12 +2764,12 @@ bu ayar düzenlenemedi veya silinemedi:
 %2
 
 Korumalı alandan uygulama yapılandırmasını kaldırmak için,
-Korumalı alan Ayarları penceresindeki Uygulama sayfalarına bakınız.
+Korumalı Alan Ayarları penceresindeki Uygulamalar sayfasına bakınız.
 .
 
 4223;txt;01
-'%2' yerel uygulama ayarı artık tüm korumalı alanlardan kaldırıldı.
-Bu uygulama ayarını tamamen silmek ister misiniz?
+'%2' yerel uygulama yapılandırmasını artık tüm korumalı alanlardan kaldırıldı.
+Bu uygulama yapılandırmasını tamamen silmek ister misiniz?
 .
 
 4224;txt;01
@@ -2776,7 +2781,7 @@ Güvenlik/Gizlilik
 .
 
 4228;txt;01
-Masaüstü Programcıkları
+Masaüstü Araçları
 .
 
 4230;txt;01
@@ -2808,7 +2813,7 @@ Windows 7 görev çubuğunda zıplama listelerini güncellemelerine izin ver.
 .
 
 4295;txt;01
-Varsayılan Dosya Taşıma Ön Ayarları istisnaları
+Varsayılan Dosya Taşıma ön ayarları istisnaları
 .
 
 4296;txt;01
@@ -2856,7 +2861,7 @@ Sandboxie sisteminizde aşağıdaki yazılım uygulamalarını tespit etti.
 .
 
 4253;txt;01
-Tamam'a basıp, bu uygulamalar ile uyumluluğu arttıcı ayarları uygulayın.
+Tamam'a tıklayıp, bu uygulamalar ile uyumluluğu arttıcı ayarları uygulayın.
 .
 
 4254;txt;01
@@ -2864,7 +2869,7 @@ Bu ayarlar tüm varolan ve yeni korumalı alanlarda etkili olacaktır.
 .
 
 4255;txt;01
-İleride, yazılım uyumluluğunu kontrol etme
+İleride, yazılım uyumluluğunu denetleme
 .
 
 4256;txt;01
@@ -2905,7 +2910,7 @@ Bilinen Çakışmalar sayfasını şimdi açmak ister misiniz?
 #----------------------------------------------------------------------------
 
 4261;txt;01
-Ayarları Kilitle
+Yapılandırmayı Kilitle
 .
 
 4262;txt;01
@@ -2933,7 +2938,7 @@ Yalnızca Yönetici hesapları &Zorunlu Programları Duraklat komutunu kullanabi
 .
 
 4269;txt;01
-Lütfen yapılandırma koruma ile ilgili Sandboxie belgeleme sayfasını okuyun.
+Lütfen yapılandırma koruması ile ilgili Sandboxie belgeleme sayfasını okuyun.
 Bu sayfayı şimdi açmak ister misiniz?
 .
 
@@ -2946,7 +2951,7 @@ Sandboxie yapılandırmasını korumak üzere yeni bir şifre girin.
 .
 
 4273;txt;01
-Onaylamak için bir daha şifreyi girin.
+Onaylamak için şifreyi yeniden girin.
 .
 
 4274;txt;01
@@ -2994,11 +2999,11 @@ Erişebilirlik
 .
 
 4303;txt;01
-Aşağıdaki ayarlar, Sandboxie'i erişebilirlik yazılımları ile uyumlu çalışmasını sağlar. Lütfen Sandboxie korumasının bu ayarlar çalışır iken bazı durumlarda zorunlu olarak kapatıldığını aklınızda bulundurun.
+Aşağıdaki ayarlar, Sandboxie'nin erişilebilirlik yazılımıyla birlikte kullanılmasını sağlar. Lütfen bu ayarlar etkinken Sandboxie korumasının azalacağını unutmayın.
 .
 
 4304;txt;01
-Kayıp korumanın yerine koymak üzere, Kısıtlamalar ayar grubundaki Hak Bırakma sayfasında bakın.
+Azalan korumanın yerine koymak üzere, Kısıtlamalar ayar grubundaki Hak Bırakma sayfasında bakın.
 .
 
 4305;txt;03
@@ -3014,15 +3019,15 @@ Web Tarayıcısı
 .
 
 4322;txt;01
-Aşağıdaki dışlamalar korumalı alan içerisinde çalışan Web tarayıcılarına korumalı alan dışarısında değişiklik yapma iznini verir, böylece güvenlik ve gizlilik ile güvenilirlik arasında denge oluşturur.
+Aşağıdaki dışlamalar korumalı alan içerisinde çalışan Web tarayıcılarına korumalı alanın dışında değişiklik yapma izni verir, böylece daha fazla rahatlık için biraz güvenlik ve gizlilikten feda edilmiş olunur.
 .
 
 4323;txt;01
-%2 için korumalı alanda çalışmasını zorla
+%2 uygulamasını korumalı alanda çalışmaya zorla
 .
 
 4324;txt;02
-%2 senkronize verisine doğrudan erişme izni ver
+%2 senkronize verisine doğrudan erişime izni ver
 .
 
 4325;txt;02
@@ -3134,11 +3139,11 @@ Kullanıcı Hesapları
 .
 
 5102;txt;01
-Korumalı alan kullanımını sınırlamak üzere, aşağıdaki listeye kullanıcı adı ve gruplarını girin. Liste boş ise tüm kullanıcılar korumalı alanı kullanabilecekler.
+Korumalı alan kullanımını sınırlamak üzere, aşağıdaki listeye kullanıcı adı ve gruplarını girin. Liste boş ise tüm kullanıcılar korumalı alanı kullanabilecektir.
 .
 
 5103;txt;01
-Not: Bir korumalı alan için Zorunlu Program ve Zorunlu Klasör ayarları, korumalı alanı kullanmalarını engelleyeceğinden kullanıcı hesaplarına eklenemez.
+Not: Korumalı alan için Zorunlu Programlar ve Zorunlu Klasörler ayarları, korumalı alanı kullanamayan kullanıcı hesapları için geçerli değildir.
 .
 
 # 5105;txt;01
@@ -3147,10 +3152,10 @@ Not: Bir korumalı alan için Zorunlu Program ve Zorunlu Klasör ayarları, koru
 
 5107;txt;01
 Kullanıcı hesabınızdan artık bu korumalı alanı kullanma yetkisi kaldırıldı ve
-ana penceredeki görünümde korumalı alan kaldırılacak.
+ana penceredeki görünümden de korumalı alan kaldırılacak.
 
 Korumalı alanı görünür ve kullanılabilir yapmak için Korumalı Alan menüsündeki
-"Gizli Korumalı alanı Göster" komutunu kullanın
+"Gizli Korumalı Alanı Göster" komutunu kullanın
 .
 
 #----------------------------------------------------------------------------
@@ -3158,7 +3163,7 @@ Korumalı alanı görünür ve kullanılabilir yapmak için Korumalı Alan menü
 #----------------------------------------------------------------------------
 
 5122;txt;01
-Kullanıcı adınız aşağıdaki korumalı alanları kullanmamanız üzere bellirlendi.
+Kullanıcı hesabınız aşağıdaki korumalı alanları kullanmamanız üzere belirlendi.
 .
 
 5123;txt;01
@@ -3166,7 +3171,7 @@ Kullanıcı adınız aşağıdaki korumalı alanları kullanmamanız üzere bell
 .
 
 5124;txt;01
-'%2' kullanıcı adınızı korumalı alana eklemek ve korumalı alanın ana pencerede görüntülenmesini sağlamak için Tamam'a basın.
+'%2' kullanıcı hesabınızı korumalı alana eklemek ve korumalı alanın ana pencerede görüntülenmesini sağlamak için Tamam'a tıklayın.
 .
 
 #----------------------------------------------------------------------------
@@ -3174,7 +3179,7 @@ Kullanıcı adınız aşağıdaki korumalı alanları kullanmamanız üzere bell
 #----------------------------------------------------------------------------
 
 5142;txt;01
-Korumalı alanları gruplara ayır ve listelenme sırasını özelleştir. Aşağıdaki ağaç görünümündeki girişleri yönetmek için sağ tuş menüsünü kullanın.
+Korumalı alanları gruplara ayır ve listelenme sırasını özelleştir. Aşağıdaki ağaç görünümündeki girişleri yönetmek için sağ tık menüsünü kullanın.
 .
 
 5143;txt;01
@@ -3219,9 +3224,9 @@ Yeniden adlandı&r
 
 6001;txt;01
 Klasik Sandboxie UI (SbieCtrl.exe) oldukça sınırlı
-kaynak izleme ve olay izleme yeteneklerine sahiptir.
+kaynak ve olay izleme yeteneklerine sahiptir.
 
-Optimum sorun giderme için,
+En uygun sorun giderme için,
 mükemmel takip ve izleme yetenekleri sağlayan yeni UI,
 Sandboxie-Plus (SandMan.exe), yüklenmesi şiddetle tavsiye edilir.
 
@@ -3239,7 +3244,7 @@ Sandboxie classic'in eski kullanıcı arayüzü, ağ güvenlik duvarı işlevi i
 Çekirdek bileşenler tarafından desteklenen özelliği ini dosyasını kullanarak yapılandırabilirsiniz, kurallar aşağıdaki gibi yapılandırılmıştır:
 NetworkAccess=iexplorer.exe,İzin Ver; bağlantı noktası=80,443; Adres=192.168.0.1-192.168.100.255; Protokol=TCP
 
-Bu seçenekleri kontrol etmek için bir UI kullanmayı tercih ederseniz, lütfen tüm yeni özellikler için tam UI desteğine sahip Sandboxie-Plus'a yükseltin.
+Bu seçenekleri denetlemek için bir UI kullanmayı tercih ederseniz, lütfen tüm yeni özellikler için tam UI desteğine sahip Sandboxie-Plus'a yükseltin.
 .
 
 6004;pop;err;01
@@ -3247,7 +3252,7 @@ Bu seçenekleri kontrol etmek için bir UI kullanmayı tercih ederseniz, lütfen
 .
 
 6005;txt;01
-Not: Yönetici ayrıcalıkları olmadan yükleyiciler sanal alanda başlatılamaz. Sandboxie-Plus, birçok kurulumcunun bu ayrıcalıklar olmadan başarılı olmasını sağlayan bir seçenek sunar. Bu seçeneği, bu alan için ini bölümüne "FakeAdminRights=y" ekleyerek manuel olarak klasik derlemede de etkinleştirebilirsiniz.
+Not: Yönetici ayrıcalıkları olmadan yükleyiciler korumalı alanda başlatılamaz. Sandboxie-Plus, birçok yükleyicinin bu ayrıcalıklar olmadan başarılı olmasını sağlayan bir seçenek sunar. Bu seçeneği, bu alan için ini bölümüne "FakeAdminRights=y" elle ekleyerek klasik sürümde de etkinleştirebilirsiniz.
 .
 
 6006;txt;01
@@ -3256,7 +3261,7 @@ Sandboxie classic'in eski kullanıcı arayüzü, yalnızca birkaç kısıtlama s
 "ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" ve çok daha fazlası gibi ek seçenekler bu alanın ini bölümünde ayarlanabilir.
 Modern kullanıcı arabirimi (SandMan.exe), Başlat/Çalıştır ve İnternet erişim kısıtlamaları için daha fazla özelleştirme seçeneği sunar.
 
-Bu seçenekleri kontrol etmek için bir UI kullanmayı tercih ederseniz, lütfen tüm yeni özellikler için tam UI desteğine sahip Sandboxie-Plus'a yükseltin.
+Bu seçenekleri denetlemek için bir UI kullanmayı tercih ederseniz, lütfen tüm yeni özellikler için tam UI desteğine sahip Sandboxie-Plus'a yükseltin.
 .
 
 6007;txt;01
@@ -3358,7 +3363,7 @@ Korumalı alanı bilgisayarınız ve programınız arasındaki şeffaf kağıt o
 7863;txt;01
 Sarı Sandboxie simgesine sağ tıklayın,
 
-DefaultBox'ı seçin ve İçerikleri Sil seçin.
+DefaultBox'ı seçin ve İçerikleri Sil'i seçin.
 .
 
 7864;txt;01
@@ -3408,7 +3413,7 @@ Varsayılan kurulumu ve ayarlarını sil (kaldır)
 .
 
 8008;ins;01
-Hazır olduğunuzda Başlat tıklayın.
+Hazır olduğunuzda Başlat'a tıklayın.
 .
 
 8009;ins;01
@@ -3424,7 +3429,7 @@ Lütfen aşağıdaki bilgiye göz atın.
 .
 
 8012;ins;01
-Sandboxie sistem-seviye sürücüsünü kurup etkinleştirmek için İleri tıklayın. Bu sürücü Sandboxie uygulamasının çekirdeğini oluşturmaktadır.
+Sandboxie sistem-seviye sürücüsünü kurup etkinleştirmek için İleri'ye tıklayın. Bu sürücü Sandboxie uygulamasının çekirdeğini oluşturmaktadır.
 .
 
 8013;ins;01
@@ -3484,7 +3489,7 @@ Sandboxie kontrol panelini açar
 .
 
 8031;ins;01
-Sandboxie Kaldır.lnk
+Sandboxie'yi Kaldır.lnk
 .
 
 8032;ins;01
@@ -3519,9 +3524,9 @@ Sandboxie 64-bit sürümü 32-bit işletim sistemine kurulamaz.
 8051;ins;01
 Sandboxie Kontrol programı çalışıyor.
 
-Tamam'a basıp kapattıktan sonra kuruluma devam edin.
+Tamam'a tıklayıp kapattıktan sonra kuruluma devam edin.
 
-İptal'e basıp kurulumu iptal edin.
+İptal'e tıklayıp kurulumu iptal edin.
 .
 
 8052;ins;01
@@ -3532,7 +3537,7 @@ programın çalışmadığından emin olun.
 
 Daha sonra Tamam'a tıklayıp kurulumu yeniden deneyin.
 
-İstemezseniz kurulumu durdurmak için İptal tıklayın.
+İstemezseniz kurulumu durdurmak için İptal'e tıklayın.
 .
 
 8053;ins;01
@@ -3540,11 +3545,11 @@ Daha sonra Tamam'a tıklayıp kurulumu yeniden deneyin.
 .
 
 8054;ins;01
-Sandboxie.ini ayar dosyanızı saklamak ister misiniz?
+Sandboxie.ini yapılandırma dosyanızı saklamak ister misiniz?
 
-EVET'e basıp ayarları Sandboxie.ini dosyasında saklayın.
+EVET seçerek yapılandırmayı Sandboxie.ini dosyasında saklayın.
 
-HAYIR seçip, Sandboxie.ini dosyasını silip ayarlarınızı kaybedin.
+HAYIR seçerek Sandboxie.ini dosyasını silip yapılandırmanızı kaybedin.
 .
 
 #----------------------------------------------------------------------------
@@ -3564,7 +3569,7 @@ Başarısız işlem: %2
 Şu anda hizmet durdurulamadı.
 '%2' hizmeti meşgul.
 
-Lütfen Tamam'a basıp yeniden deneyin.
+Lütfen Tamam'a tıklayıp yeniden deneyin.
 .
 
 8103;txt;01
@@ -3581,5 +3586,5 @@ Lütfen Tamam'a basıp yeniden deneyin.
 
 8106;txt;02
 Kurulum devam etmeden önce aşağıdaki programlar kapatılmalıdır.
-Tamam'a basarak programları kapatın veya İptal tıklayarak kurulumu iptal edin.
+Tamam'a tıklayarak programları kapatın veya İptal'e tıklayarak kurulumu iptal edin.
 .

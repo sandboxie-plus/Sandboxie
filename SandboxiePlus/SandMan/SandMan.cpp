@@ -1690,10 +1690,8 @@ void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 
 void CSandMan::OnStatusChanged()
 {
-	bool isConnected = theAPI->IsConnected();
-
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
-	if (isConnected)
+	if (theAPI->IsConnected())
 	{
 		bool bPortable = IsFullyPortable();
 
@@ -1844,9 +1842,16 @@ void CSandMan::OnStatusChanged()
 		theAPI->StopMonitor();
 	}
 
-	m_pSupport->setVisible(g_Certificate.isEmpty());
-
 	this->setWindowTitle(appTitle);
+
+	UpdateState();
+}
+
+void CSandMan::UpdateState()
+{
+	bool isConnected = theAPI->IsConnected();
+
+	m_pSupport->setVisible(g_Certificate.isEmpty());
 
 	m_pTrayIcon->setIcon(GetTrayIcon(isConnected));
 	m_pTrayIcon->setToolTip(GetTrayText(isConnected));
@@ -2620,7 +2625,7 @@ void CSandMan::RebuildUI()
 
 	GetBoxView()->ReloadUserConfig();
 
-	OnStatusChanged();
+	UpdateState();
 
 	if(m_pTrayBoxes) m_pTrayBoxes->setStyle(QStyleFactory::create(m_DefaultStyle));
 }

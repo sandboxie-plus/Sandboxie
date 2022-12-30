@@ -338,6 +338,7 @@ private:
 
 	QMenu*				m_pMenuHelp;
 	QAction*			m_pSupport;
+	QAction*			m_pContribution;
 	QAction*			m_pForum;
 	QAction*			m_pManual;
 	QAction*			m_pUpdate;

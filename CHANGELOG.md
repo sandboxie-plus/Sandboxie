@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.6.3a / 5.61.3] - 2022-12-??
+## [1.6.4 / 5.61.4] - 2022-12-30
 
 ### Added
 - added option to disable sandbox clean-up on startup [#2553](https://github.com/sandboxie-plus/Sandboxie/issues/2553)

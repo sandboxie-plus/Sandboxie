@@ -1732,16 +1732,6 @@ void CSandMan::OnStatusChanged()
 				theAPI->GetGlobalSettings()->SetText("FileRootPath", BoxPath + "\\%SANDBOX%");
 		}
 
-		if (theConf->GetBool("Options/AutoRunSoftCompat", true))
-		{
-			if (m_SbieTemplates->RunCheck())
-			{
-				CSettingsWindow* pSettingsWindow = new CSettingsWindow(this);
-				connect(pSettingsWindow, SIGNAL(OptionsChanged(bool)), this, SLOT(UpdateSettings(bool)));
-				pSettingsWindow->showTab(CSettingsWindow::eSoftCompat);
-			}
-		}
-
 		if (SbiePath.compare(QApplication::applicationDirPath().replace("/", "\\"), Qt::CaseInsensitive) == 0)
 		{
 			if (theAPI->GetUserSettings()->GetText("SbieCtrl_AutoStartAgent").isEmpty())
@@ -1831,6 +1821,16 @@ void CSandMan::OnStatusChanged()
 		if (WizardLevel == 0) {
 			if (!CSetupWizard::ShowWizard()) // if user canceled mark that and not show again
 				theConf->SetValue("Options/WizardLevel", -1);
+		}
+
+		if (theConf->GetBool("Options/AutoRunSoftCompat", true))
+		{
+			if (m_SbieTemplates->RunCheck())
+			{
+				CSettingsWindow* pSettingsWindow = new CSettingsWindow(this);
+				connect(pSettingsWindow, SIGNAL(OptionsChanged(bool)), this, SLOT(UpdateSettings(bool)));
+				pSettingsWindow->showTab(CSettingsWindow::eSoftCompat);
+			}
 		}
 	}
 	else

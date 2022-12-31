@@ -4,17 +4,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.6.4 / 5.61.4] - 2022-12-30
+## [1.6.4 / 5.61.4] - 2022-XX-XX
 
 ### Added
 - added option to disable sandbox clean-up on startup [#2553](https://github.com/sandboxie-plus/Sandboxie/issues/2553)
+- added contribution guidelines in the Help menu for both Plus and Classic UIs [#2551](https://github.com/sandboxie-plus/Sandboxie/pull/2551)
 
 ### Fixed
 - fixed issue with auto delete sandbox on SandMan startup [#2555](https://github.com/sandboxie-plus/Sandboxie/issues/2555)
 - fixed issue with Windows 11 context menu when SandMan was not already running [#2284](https://github.com/sandboxie-plus/Sandboxie/issues/2284)
 - fixed issue with the display about cmbDefault [#2560](https://github.com/sandboxie-plus/Sandboxie/pull/2560) (okrc)
-- fixed issue with templates.ini loading on first start [#2574](https://github.com/sandboxie-plus/Sandboxie/issues/2574)
-- fixed cyberpunk2077 not being to load mods when sandboxed
+- fixed issue with color inaccuracy [#2570](https://github.com/sandboxie-plus/Sandboxie/pull/2570) (okrc)
+- fixed issue with Templates.ini loading on first start [#2574](https://github.com/sandboxie-plus/Sandboxie/issues/2574)
+- fixed Cyberpunk 2077 not being able to load mods when sandboxed
 - fixed performance issue in games
 
 

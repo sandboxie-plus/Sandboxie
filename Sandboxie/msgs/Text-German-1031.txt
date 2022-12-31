@@ -1068,6 +1068,10 @@ Software-Kompatibilität
 &Unterstütze Sandboxie
 .
 
+3505;txt;01
+Zu Sandboxie beitragen
+.
+
 3446;txt;01
 Konfiguration b&earbeiten
 .

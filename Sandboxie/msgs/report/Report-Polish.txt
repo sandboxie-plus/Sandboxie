@@ -119,7 +119,11 @@ Deleting: %2
 .
 
 3504;txt;01
-&Support Sandboxie
+&Support Sandboxie with Donations
+.
+
+3505;txt;01
+Contribute to Sandboxie
 .
 
 3457;txt;01

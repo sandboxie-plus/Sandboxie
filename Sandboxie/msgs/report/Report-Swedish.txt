@@ -42,6 +42,10 @@ Preparing to delete: %2
 Deleting: %2
 .
 
+3505;txt;01
+Contribute to Sandboxie
+.
+
 3468;txt;01
 Sandboxie-Plus Migration Guide
 .

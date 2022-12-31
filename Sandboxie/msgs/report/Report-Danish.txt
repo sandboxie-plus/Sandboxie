@@ -192,7 +192,11 @@ Set Layout and Groups
 .
 
 3504;txt;01
-&Support Sandboxie
+&Support Sandboxie with Donations
+.
+
+3505;txt;01
+Contribute to Sandboxie
 .
 
 3453;txt;02

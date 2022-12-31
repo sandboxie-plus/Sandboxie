@@ -2,5 +2,7 @@
 * Missing Messages in Text-Korean-1042.txt
 *==========
 
-There are no missing messages.
+3505;txt;01
+Contribute to Sandboxie
+.
 

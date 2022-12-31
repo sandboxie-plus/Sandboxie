@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.6.4 / 5.61.4] - 2022-XX-XX
+## [1.6.4 / 5.61.4] - 2022-12-31
 
 ### Added
 - added option to disable sandbox clean-up on startup [#2553](https://github.com/sandboxie-plus/Sandboxie/issues/2553)
@@ -18,8 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with Templates.ini loading on first start [#2574](https://github.com/sandboxie-plus/Sandboxie/issues/2574)
 - fixed Cyberpunk 2077 not being able to load mods when sandboxed
 - fixed performance issue in games
-
-- fixed FFS hooking issue observed in Win11ARM64 22621.819
+- fixed FFS hooking issue observed in Windows 11 ARM64 Build 22621.819
 
 
 

@@ -1793,7 +1793,7 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="443"/>
         <source>Contribute to Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>Zu Sandboxie-Plus beitragen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="460"/>
@@ -2223,7 +2223,7 @@ Nein wählt: %2</translation>
         <location filename="SandMan.cpp" line="438"/>
         <source>Support Sandboxie-Plus with Donations</source>
         <oldsource>Support Sandboxie-Plus with a Donation</oldsource>
-        <translation type="unfinished">Sandboxie-Plus mit einer Spende unterstützen</translation>
+        <translation>Sandboxie-Plus mit Spenden unterstützen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="445"/>

@@ -84,6 +84,82 @@ _FX void* Hook_GetXipTarget(void* ptr, int mode)
 
 
 //---------------------------------------------------------------------------
+// Hook_GetFFSTargetOld
+//---------------------------------------------------------------------------
+
+
+_FX void* Hook_GetFFSTargetOld(UCHAR* SourceFunc)
+{
+    //
+    // FFS Sequence: Win10 & Win11 RTM
+    // 
+    //  48 8B FF            mov         rdi,rdi  
+    //  55                  push        rbp  
+    //  48 8B EC            mov         rbp,rsp  
+    //  5D                  pop         rbp  
+    //  90                  nop  
+    //  E9 02 48 18 00      jmp         #__GSHandlerCheck_SEH_AMD64+138h (07FFB572B8190h) 
+    //
+
+    if (*(UCHAR *)SourceFunc == 0x48 && // mov         rdi,rdi  
+        *(USHORT *)((UCHAR *)SourceFunc + 1) == 0xFF8B) 
+        SourceFunc = (UCHAR *)SourceFunc + 3;
+    if (*(UCHAR *)SourceFunc == 0x55)   // push        rbp
+        SourceFunc = (UCHAR *)SourceFunc + 1;
+    if (*(UCHAR *)SourceFunc == 0x48 && // mov         rbp,rsp 
+        *(USHORT *)((UCHAR *)SourceFunc + 1) == 0xEC8B)
+        SourceFunc = (UCHAR *)SourceFunc + 3;
+    if (*(UCHAR *)SourceFunc == 0x5D)   // pop         rbp 
+        SourceFunc = (UCHAR *)SourceFunc + 1;
+    if (*(UCHAR *)SourceFunc == 0x90)   // nop
+        SourceFunc = (UCHAR *)SourceFunc + 1;
+    if (*(UCHAR *)SourceFunc == 0xE9) {  // jmp        07FFB572B8190h
+
+        LONG diff = *(LONG*)(SourceFunc + 1);
+        return (UCHAR*)SourceFunc + 5 + diff;
+    }
+
+    return NULL;
+}
+
+
+//---------------------------------------------------------------------------
+// Hook_GetFFSTargetNew
+//---------------------------------------------------------------------------
+
+
+_FX void* Hook_GetFFSTargetNew(UCHAR* SourceFunc)
+{
+    //
+    // FFS Sequence: Win11 build >= 22621.819 (or 22621.382)
+    // 
+    //  48 8B C4             mov         rax,rsp  
+    //  48 89 58 20          mov         qword ptr [rax+20h],rbx  
+    //  55                   push        rbp  
+    //  5D                   pop         rbp  
+    //  E9 E2 9E 17 00       jmp         #LdrLoadDll (07FFECCB748E0h)  
+    //
+
+    if (*(UCHAR *)SourceFunc == 0x48 && // mov         rax,rsp
+        *(USHORT *)((UCHAR *)SourceFunc + 1) == 0xC48B) 
+        SourceFunc = (UCHAR *)SourceFunc + 3;
+    if (*(ULONG *)SourceFunc == 0x20588948) // mov     qword ptr [rax+20h],rbx 
+        SourceFunc = (UCHAR *)SourceFunc + 4;
+    if (*(UCHAR *)SourceFunc == 0x55)   // push        rbp
+        SourceFunc = (UCHAR *)SourceFunc + 1;
+    if (*(UCHAR *)SourceFunc == 0x5D)   // pop         rbp 
+        SourceFunc = (UCHAR *)SourceFunc + 1;
+    if (*(UCHAR *)SourceFunc == 0xE9) {  // jmp        07FFB572B8190h
+
+        LONG diff = *(LONG*)(SourceFunc + 1);
+        return (UCHAR*)SourceFunc + 5 + diff;
+    }
+
+    return NULL;
+}
+
+
+//---------------------------------------------------------------------------
 // Hook_GetFFSTarget
 //---------------------------------------------------------------------------
 
@@ -113,36 +189,10 @@ _FX void* Hook_GetFFSTarget(UCHAR* SourceFunc)
     // return the address of the target native function
     //
 
-    //
-    // Standard FFS Sequence:
-    // 
-    //  48 8B FF            mov         rdi,rdi  
-    //  55                  push        rbp  
-    //  48 8B EC            mov         rbp,rsp  
-    //  5D                  pop         rbp  
-    //  90                  nop  
-    //  E9 02481800         jmp         #__GSHandlerCheck_SEH_AMD64+138h (07FFB572B8190h) 
-    //
-
-    if (*(UCHAR *)SourceFunc == 0x48 && // mov         rdi,rdi  
-            *(USHORT *)((UCHAR *)SourceFunc + 1) == 0xFF8B) 
-        SourceFunc = (UCHAR *)SourceFunc + 3;
-    if (*(UCHAR *)SourceFunc == 0x55)   // push        rbp
-        SourceFunc = (UCHAR *)SourceFunc + 1;
-    if (*(UCHAR *)SourceFunc == 0x48 && // mov         rbp,rsp 
-            *(USHORT *)((UCHAR *)SourceFunc + 1) == 0xEC8B)
-        SourceFunc = (UCHAR *)SourceFunc + 3;
-    if (*(UCHAR *)SourceFunc == 0x5D)   // pop         rbp 
-        SourceFunc = (UCHAR *)SourceFunc + 1;
-    if (*(UCHAR *)SourceFunc == 0x90)   // nop
-        SourceFunc = (UCHAR *)SourceFunc + 1;
-    if (*(UCHAR *)SourceFunc == 0xE9) {  // jmp         07FFB572B8190h
-        
-        LONG diff = *(LONG*)(SourceFunc + 1);
-        return (UCHAR*)SourceFunc + 5 + diff;
-    }
-
-    return NULL;
+    void* pTarget = Hook_GetFFSTargetOld(SourceFunc);
+    if (!pTarget)
+        pTarget = Hook_GetFFSTargetNew(SourceFunc);
+    return pTarget;
 }
 
 

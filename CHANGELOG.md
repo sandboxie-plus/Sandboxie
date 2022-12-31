@@ -19,6 +19,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Cyberpunk 2077 not being able to load mods when sandboxed
 - fixed performance issue in games
 
+- fixed FFS hooking issue observed in Win11ARM64 22621.819
+
 
 
 ## [1.6.3 / 5.61.3] - 2022-12-21

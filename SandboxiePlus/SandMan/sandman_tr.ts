@@ -1661,7 +1661,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2706"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
-        <translation>Düzenleyici kapanınca değişiklikler otomatik olarak uygulanacaktır.</translation>
+        <translation>Düzenleyici kapatılır kapatılmaz değişiklikler otomatik olarak uygulanacaktır.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1034"/>
@@ -1672,7 +1672,7 @@ Tam yol: %4</translation>
         <location filename="SandMan.cpp" line="438"/>
         <source>Support Sandboxie-Plus with Donations</source>
         <oldsource>Support Sandboxie-Plus with a Donation</oldsource>
-        <translation type="unfinished">Sandboxie-Plus&apos;ı Bağış ile Destekle</translation>
+        <translation>Sandboxie-Plus&apos;ı Bağışlarla Destekleyin</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2879"/>
@@ -2377,7 +2377,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="443"/>
         <source>Contribute to Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus&apos;a Katkıda Bulunun</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="462"/>
@@ -3176,7 +3176,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="168"/>
         <source>Registry Editor</source>
-        <translation>Kayıt Defteri Düzenleyici</translation>
+        <translation>Kayıt Defteri Düzenleyicisi</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="169"/>
@@ -3420,7 +3420,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="1152"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
-        <translation>UYARI: Açılan kayıt defteri düzenleyicisi korumalı alana alınmamıştır, lütfen dikkatli olun ve yalnızca önceden seçilmiş korumalı alan konumlarında değişiklik yapın.</translation>
+        <translation>UYARI: Açılan kayıt defteri düzenleyicisi korumalı alanda değildir, lütfen dikkatli olun ve yalnızca önceden seçilmiş korumalı alan konumlarında değişiklik yapın.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1153"/>
@@ -4158,7 +4158,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="77"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation>Korumalı alan, ana bilgisayar sisteminizi alan içinde çalışan işlemlerden yalıtır ve diğer programlarda ve bilgisayarınızdaki verilerde kalıcı değişiklikler yapmalarını engeller. Yalıtım düzeyi, güvenliği ve uygulamalarla uyumluluğu etkiler, dolayısıyla seçilen &apos;Alan Türüne&apos; bağlı olarak farklı bir yalıtım düzeyi sağlayacaktır. Sandboxie ayrıca kişisel verilerinize, kendi gözetimi altında çalışan işlemler tarafından erişilmesine karşı da koruyabilir.</translation>
+        <translation>Korumalı alan, ana bilgisayar sisteminizi korumalı alan içinde çalışan işlemlerden yalıtır ve diğer programlarda ve bilgisayarınızdaki verilerde kalıcı değişiklikler yapmalarını engeller. Yalıtım düzeyi, güvenliği ve uygulamalarla uyumluluğu etkiler, dolayısıyla seçilen &apos;Alan Türüne&apos; bağlı olarak farklı bir yalıtım düzeyi sağlayacaktır. Sandboxie ayrıca kişisel verilerinize, kendi gözetimi altında çalışan işlemler tarafından erişilmesine karşı da koruyabilir.</translation>
     </message>
     <message>
         <location filename="Forms/NewBoxWindow.ui" line="94"/>
@@ -4804,7 +4804,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1199"/>
         <source>Do not start sandboxed services using a system token (recommended)</source>
-        <translation>Korumalı alandaki hizmetleri bir sistem belirteci kullanarak başlatma (önerilir)</translation>
+        <translation>Korumalı alandaki hizmetleri bir sistem belirteci kullanarak başlatılmasın (önerilir)</translation>
     </message>
     <message>
         <source>Sandbox isolation</source>

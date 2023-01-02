@@ -4,6 +4,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.6.4a / 5.61.4a] - 2022-12-??
+
+### Fixed
+- fixed issue with msedge in a security enchanced box [#2571](https://github.com/sandboxie-plus/Sandboxie/issues/2571)
+- opened OpenIpcPath=\{BEC19D6F-D7B2-41A8-860C-8787BB964F2D} on ARM64 systems 
+
+
+
+
 ## [1.6.4 / 5.61.4] - 2022-12-31
 
 ### Added

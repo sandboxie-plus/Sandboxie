@@ -1806,7 +1806,7 @@ Full path: %4</source>
         <location filename="SandMan.cpp" line="438"/>
         <source>Support Sandboxie-Plus with Donations</source>
         <oldsource>Support Sandboxie-Plus with a Donation</oldsource>
-        <translation type="unfinished">기부로 Sandboxie-Plus 지원</translation>
+        <translation>Sandboxie-Plus를 기부금으로 지원</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="445"/>
@@ -2220,7 +2220,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="443"/>
         <source>Contribute to Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus에 기여</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="460"/>

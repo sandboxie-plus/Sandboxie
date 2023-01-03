@@ -137,7 +137,7 @@ SBIE1231 %3 %2 işlemi için başlatma başarısız oldu
 .
 
 1241;pop;err;01
-SBIE1241 Kayıt girişi yapılamadı: %2
+SBIE1241 Kayıt defteri kovanı bağlanamıyor: %2
 .
 
 1242;pop;err;01
@@ -373,7 +373,7 @@ SBIE2207 '%2' ayarı için geçersiz değer, varsayılan kullanılacak
 .
 
 2208;pop;wrn;01
-SBIE2208 Kayıt girdisi kaldırılamadı: %2
+SBIE2208 Kayıt defteri kovanı kaldırılamıyor: %2
 .
 
 2209;pop;wrn;01
@@ -494,7 +494,7 @@ SBIE2309 COM+/DCOM kapatılamadı: %2
 .
 
 2310;pop;err;01
-SBIE2310 İsim tamponu taşmaya ulaşıyor (%2)
+SBIE2310 Ad ara belleği taşmak üzere (%2)
 .
 
 2311;pop;err;01
@@ -1221,7 +1221,7 @@ Masaüstü Kısayolu Oluştur
 .
 
 3505;txt;01
-Nasıl Katkıda Bulunulur?
+Sandboxie'ye Katkıda Bulunun
 .
 
 #----------------------------------------------------------------------------
@@ -1236,7 +1236,7 @@ sistem bildiri alanındaki sarı Sandboxie işaretine
 .
 
 3512;txt;01
-Değişiklikleri şimdi açılan Sandboxie.ini yapılandırma
+Değişiklikleri metin düzenleyicisinde açılan Sandboxie.ini yapılandırma
 dosyasına yapın.
 
 Değiştirilmiş yapılandırma, yalnızca Yapılandırmayı
@@ -1244,7 +1244,7 @@ Yeniden Yükleme işlevi kullanıldıktan sonra etki
 edecektir.
 
 Çoğu durumda, Yapılandırmayı Yeniden Yükleme işlevi
-pencereyi kapatır kapatmaz uygulanır.
+metin düzenleyicisi penceresi kapatılır kapatılmaz uygulanır.
 
 Ayrıca Sandboxie Kontrol'üne istediğiniz zaman Yapılandırmayı
 Yeniden Yükleme talimatı verebilirsiniz.
@@ -2585,7 +2585,7 @@ Aşağıdaki kayıt anahtarları bu korumalı alan içerisinde çalışan progra
 .
 
 4121;txt;01
-Kaynak Erişimi::Kayıt Düzenleyici Erişimi::Salt-Yazma Erişimi
+Kaynak Erişimi::Kayıt Erişimi::Salt-Yazma Erişimi
 .
 
 4122;txt;01

@@ -821,14 +821,18 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
 
         if (!traced && ((proc->call_trace & TRACE_ALLOW) || ((status != STATUS_SUCCESS) && (proc->call_trace & TRACE_DENY))))
         {
-            WCHAR trace_str[128];
-            RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"%.*S, status = 0x%X", //59 chars + entry->name
-                max(strlen(entry->name), 64), entry->name,
-                status);
-            const WCHAR* strings[3] = { trace_str, trace_str + (entry->name_len + 2), NULL };
-            ULONG lengths[3] = {entry->name_len, wcslen(trace_str) - (entry->name_len + 2), 0 };
-            Session_MonitorPutEx(MONITOR_SYSCALL | (entry->approved ? MONITOR_OPEN : MONITOR_TRACE), 
-                strings, lengths, PsGetCurrentProcessId(), PsGetCurrentThreadId());
+            // Supress Sbie's own calls to DeviceIoControlFile
+            if ((strcmp(entry->name, "DeviceIoControlFile") != 0) || user_args[5] != API_SBIEDRV_CTLCODE)
+            {
+                WCHAR trace_str[128];
+                RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"%.*S, status = 0x%X", //59 chars + entry->name
+                    max(strlen(entry->name), 64), entry->name,
+                    status);
+                const WCHAR* strings[3] = { trace_str, trace_str + (entry->name_len + 2), NULL };
+                ULONG lengths[3] = { entry->name_len, wcslen(trace_str) - (entry->name_len + 2), 0 };
+                Session_MonitorPutEx(MONITOR_SYSCALL | (entry->approved ? MONITOR_OPEN : MONITOR_TRACE),
+                    strings, lengths, PsGetCurrentProcessId(), PsGetCurrentThreadId());
+            }
         }
 
 #ifdef _WIN64

@@ -140,7 +140,9 @@ _FX void *Syscall_GetMasterServiceTable(void)
             ADD add;
             add.OP = *(ULONG*)(ptr + 4);
 
-            if (IS_ADD(add) && add.Rn == 8 && add.Rd == 12) { // add  x12, x8, #0xf80
+            // Win 10 22h2: add x12, x8, #0xf80 
+            // Win 11 21h2: add  x9, x8, #0xf80
+            if (IS_ADD(add) && add.Rn == 8 && (add.Rd == 12 || add.Rd == 9)) {
             
                 LONG delta = (adrp.immHi << 2 | adrp.immLo) << 12;
                 delta += add.imm12;

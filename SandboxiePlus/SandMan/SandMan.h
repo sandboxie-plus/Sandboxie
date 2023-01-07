@@ -347,6 +347,7 @@ private:
 	QAction*			m_pAbout;
 	QAction*			m_pAboutQt;
 
+	QLabel*				m_pTraceInfo;
 	QLabel*				m_pDisabledForce;
 	QLabel*				m_pDisabledRecovery;
 	QLabel*				m_pDisabledMessages;
@@ -362,7 +363,7 @@ private:
 	int					m_iTrayPos;
 	//QMenu*				m_pBoxMenu;
 	bool				m_bIconEmpty;
-	bool				m_bIconDisabled;
+	int					m_iIconDisabled;
 	bool				m_bIconBusy;
 	int					m_iDeletingContent;
 

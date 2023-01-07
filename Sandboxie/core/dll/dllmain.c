@@ -60,6 +60,7 @@ HINSTANCE Dll_Instance = NULL;
 HMODULE Dll_Ntdll = NULL;
 HMODULE Dll_Kernel32 = NULL;
 HMODULE Dll_KernelBase = NULL;
+HMODULE Dll_Win32u = NULL;
 // $Workaround$ - 3rd party fix
 HMODULE Dll_DigitalGuardian = NULL;
 
@@ -254,19 +255,6 @@ _FX void Dll_InitInjected(void)
 	ULONG BoxKeyPathLen;
 	ULONG BoxIpcPathLen;
 
-    Dll_SbieTrace = SbieApi_QueryConfBool(NULL, L"SbieTrace", FALSE);
-
-	if (SbieApi_QueryConfBool(NULL, L"DebugTrace", FALSE)) {
-
-		Trace_Init();
-
-		OutputDebugString(L"SbieDll injected...\n");
-        for (int i = 0; i < 16; i++) {
-            if (SbieApi_data->DebugData[i] != 0)
-                DbgPrint("DebugData[%d]: %p\n", i, (UINT_PTR)SbieApi_data->DebugData[i]);
-        }
-	}
-
     //
     // confirm the process is sandboxed before going further
     //
@@ -314,6 +302,7 @@ _FX void Dll_InitInjected(void)
             __debugbreak();
     }
 
+    Trace_Init();
 
     //
     // query Sandboxie home folder

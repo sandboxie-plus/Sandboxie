@@ -28,7 +28,11 @@ public:
 	int			GetCount() const { return m_Counter; }
 
 	void		Merge(const CTraceEntryPtr& pEntry) {
+#ifdef USE_MERGE_TRACE
 		m_Counter += pEntry->GetCount(); 
+#else
+		m_Counter++;
+#endif
 		if (!m_bOpen && pEntry->IsOpen())
 			m_bOpen = true;
 		if (!m_bClosed && pEntry->IsClosed())
@@ -53,7 +57,10 @@ public:
 	CMonitorModel(QObject* parent = 0);
 	~CMonitorModel();
 
-	QList<QVariant>	Sync(const QMap<QString, CMonitorEntryPtr>& EntryMap, void* params);
+	void			SetObjTree(bool bTree)			{ m_bObjTree = bTree; }
+	bool			IsObjTree() const				{ return m_bObjTree; }
+
+	QList<QModelIndex>	Sync(const QMap<QString, CMonitorEntryPtr>& EntryMap, void* params);
 
 	int				columnCount(const QModelIndex& parent = QModelIndex()) const;
 	QVariant		headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
@@ -77,5 +84,8 @@ protected:
 		CMonitorEntryPtr	pEntry;
 	};
 
-	virtual STreeNode* MkNode(const QVariant& Id) { return new STraceNode(Id); }
+	virtual STreeNode*	MkNode(const QVariant& Id) { return new STraceNode(Id); }
+	virtual STreeNode*	MkVirtualNode(const QVariant& Id, STreeNode* pParent);
+
+	bool			m_bObjTree;
 };

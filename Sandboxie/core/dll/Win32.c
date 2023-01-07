@@ -247,6 +247,8 @@ _FX BOOLEAN Win32_HookWin32SysCalls(HMODULE win32u_base)
 
 _FX BOOLEAN Win32_Init(HMODULE hmodule)
 {
+    Dll_Win32u = hmodule;
+
 	// In Windows 10 all Win32k.sys calls are located in win32u.dll
     if (Dll_OsBuild < 10041 || (Dll_ProcessFlags & SBIE_FLAG_WIN32K_HOOKABLE) == 0 || !SbieApi_QueryConfBool(NULL, L"EnableWin32kHooks", TRUE))
         return TRUE; // just return on older builds, or not enabled

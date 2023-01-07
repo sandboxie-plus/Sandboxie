@@ -6,22 +6,41 @@
 CMonitorModel::CMonitorModel(QObject* parent)
 	:CTreeItemModel(parent)
 {
+	m_bObjTree = false;
+
 	m_Root = MkNode(QVariant());
 }
 
 CMonitorModel::~CMonitorModel()
 {
+	FreeNode(m_Root);
+	m_Root = NULL;
 }
 
-QList<QVariant>	CMonitorModel::Sync(const QMap<QString, CMonitorEntryPtr>& EntryMap, void* params)
+QList<QModelIndex>	CMonitorModel::Sync(const QMap<QString, CMonitorEntryPtr>& EntryMap, void* params)
 {
-	QList<QVariant>	Added;
+	QList<QModelIndex>	NewBranches;
 	QMap<QList<QVariant>, QList<STreeNode*> > New;
 	QHash<QVariant, STreeNode*> Old = m_Map;
 
 	foreach(const CMonitorEntryPtr pEntry, EntryMap)
 	{
-		quint64 ID = (quint64)pEntry.data();
+		QVariant ID = (quint64)pEntry.data();
+		QList<QVariant> Path;
+		QString ObjName;
+
+		if (m_bObjTree) {
+			QString Name = pEntry->GetName();
+			if (Name.left(1) != "\\")
+				continue; // skip debug messages and sys calls, only list nt object namespace
+			QStringList NtPath = Name.split("\\");
+
+			for(int i=1; i < NtPath.size() - 1; i++)
+				Path.append(NtPath.mid(0, i+1).join("\\").toLower());
+			
+			ID = NtPath.mid(0, NtPath.size()).join("\\").toLower();
+			ObjName = NtPath.last();
+		}
 
 		QModelIndex Index;
 
@@ -31,6 +50,7 @@ QList<QVariant>	CMonitorModel::Sync(const QMap<QString, CMonitorEntryPtr>& Entry
 		{
 			pNode = static_cast<STraceNode*>(MkNode(ID));
 			pNode->Values.resize(columnCount());
+			pNode->Path = Path;
 			pNode->pEntry = pEntry;
 			New[pNode->Path].append(pNode);
 		}
@@ -55,8 +75,8 @@ QList<QVariant>	CMonitorModel::Sync(const QMap<QString, CMonitorEntryPtr>& Entry
 			QVariant Value;
 			switch (section)
 			{
-			case eType:				Value = pEntry->GetTypeStr(); break;
-			case eStatus:			Value = pEntry->GetStautsStr(); break;
+			case eType:				Value = ObjName.isEmpty() ? pEntry->GetTypeStr() : ObjName; break;
+			case eStatus:			Value = ObjName.isEmpty() ? pEntry->GetStautsStr() : (pEntry->GetTypeStr() + " " + pEntry->GetStautsStr()); break;
 			case eValue:			Value = pEntry->GetName(); break;
 			case eCounter:			Value = pEntry->GetCount(); break;
 			}
@@ -91,9 +111,21 @@ QList<QVariant>	CMonitorModel::Sync(const QMap<QString, CMonitorEntryPtr>& Entry
 
 	}
 
-	CTreeItemModel::Sync(New, Old, &Added);
+	CTreeItemModel::Sync(New, Old, &NewBranches);
 
-	return Added;
+	return NewBranches;
+}
+
+CMonitorModel::STreeNode* CMonitorModel::MkVirtualNode(const QVariant& Id, STreeNode* pParent)
+{ 
+	STreeNode* pNode = CTreeItemModel::MkVirtualNode(Id, pParent);
+
+	if (!pNode->Values[0].Raw.isValid()) {
+		QStringList Paths = Id.toString().split("\\");
+		pNode->Values[0].Raw = Paths.last();
+	}
+
+	return pNode;
 }
 
 void CMonitorModel::Clear()

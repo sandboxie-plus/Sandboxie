@@ -216,6 +216,14 @@ SBIEAPI_EXPORT
     ULONG Type,
     const WCHAR *Message);
 
+SBIEAPI_EXPORT
+LONG SbieApi_MonitorPut2Ex(
+    ULONG Type,
+    ULONG NameLen,
+    const WCHAR *Name,
+    BOOLEAN bCheckObjectExists,
+    BOOLEAN bIsMessage);
+
 //SBIEAPI_EXPORT
 //LONG SbieApi_MonitorGet(
 //    ULONG *Type,

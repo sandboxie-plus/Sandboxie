@@ -50,6 +50,10 @@
 
     EXPORT Dll_JumpStubData
 
+    EXPORT InstrumentationCallbackAsm
+    IMPORT __sys_RtlCaptureContext
+    IMPORT InstrumentationCallback
+
 
 ;----------------------------------------------------------------------------
 ; ProtectCall2
@@ -377,6 +381,35 @@ Dll_JumpStubData PROC
     ret
  ENDP
 
+
+
+;----------------------------------------------------------------------------
+; InstrumentationCallbackAsm
+;----------------------------------------------------------------------------
+
+
+InstrumentationCallbackAsm PROC
+    
+    ;brk #0xF000
+    ;br x16 ; IP0
+
+    mov         x8,sp
+    str         x8, [x18, #0x2e0]           ; Win10 TEB InstrumentationCallbackPreviousSp
+    str         x16, [x18, #0x2d8]          ; Win10 TEB InstrumentationCallbackPreviousPc
+
+    sub         sp, sp, #0x390              ; Alloc stack space for CONTEXT structure
+    stp         x0, lr, [sp, #-0x10]!       ; Save original X0 and LR
+    add         x0, sp, #0x10
+    ldr         x16, =__sys_RtlCaptureContext
+    ldr         x16, [x16]
+    blr         x16                         ; Save the current register state. RtlCaptureContext does not require shadow space
+    add         x0, sp, #0x10
+    ldr         x2, [x18, #0x2d8]           ; Win10 TEB InstrumentationCallbackPreviousPc
+    ldp         x3, x1, [sp], #0x10         ; Pass the return value and the original LR to the callback
+    bl          InstrumentationCallback     ; Call main instrumentation routine
+    brk         #0xF000                     ; it should not return
+
+ ENDP
 
 ;----------------------------------------------------------------------------
 

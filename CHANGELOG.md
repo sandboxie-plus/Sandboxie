@@ -4,7 +4,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.6.4a / 5.61.4a] - 2022-12-??
+## [1.6.5 / 5.61.5] - 2022-12-??
+
+### Added 
+- added user mode sys call tracing, now sys calls can be logged also in compartment type boxes as well as all win32k syscall
+
+### Changed
+- reworked trase log model, not it can load over 10e6 entries un under 1 second
 
 ### Fixed
 - fixed issue with msedge in a security enchanced box [#2571](https://github.com/sandboxie-plus/Sandboxie/issues/2571)

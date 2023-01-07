@@ -23,6 +23,7 @@
 
 #include "SbieStatus.h"
 
+//#define USE_MERGE_TRACE
 
 class QSBIEAPI_EXPORT CTraceEntry : public QSharedData
 {
@@ -47,8 +48,8 @@ public:
 	virtual void		SetBoxPtr(void* ptr) { m_BoxPtr = ptr; }
 	virtual void*		GetBoxPtr() const { return m_BoxPtr; }
 
+#ifdef USE_MERGE_TRACE
 	virtual int			GetCount() const { return m_Counter; }
-
 	virtual bool		Equals(const QSharedDataPointer<CTraceEntry>& pOther) const {
 			return pOther->m_ProcessId == this->m_ProcessId && pOther->m_ThreadId == this->m_ThreadId
 			&& pOther->m_Name == this->m_Name
@@ -57,6 +58,7 @@ public:
 	virtual void		Merge(const QSharedDataPointer<CTraceEntry>& pOther) {
 		m_Counter++; this->m_Type.Flags |= pOther->m_Type.Flags;
 	}
+#endif
 
 	virtual bool		IsOpen() const;
 	virtual bool		IsClosed() const;
@@ -98,7 +100,9 @@ protected:
 
 	quint64 m_uid;
 
+#ifdef USE_MERGE_TRACE
 	int m_Counter;
+#endif
 };
 
 typedef QSharedDataPointer<CTraceEntry> CTraceEntryPtr;

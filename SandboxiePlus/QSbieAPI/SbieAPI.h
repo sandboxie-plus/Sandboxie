@@ -130,9 +130,9 @@ public:
 	virtual SB_STATUS		EnableMonitor(bool Enable);
 	virtual bool			IsMonitoring();
 
-	virtual void			AddTraceEntry(const CTraceEntryPtr& LogEntry, bool bCanMerge = false);
-	virtual QVector<CTraceEntryPtr> GetTrace() const;
-	virtual void			ClearTrace() { QWriteLocker Lock(&m_TraceMutex); m_TraceList.clear(); m_LastTraceEntry = 0; }
+	virtual const QVector<CTraceEntryPtr>& GetTrace();
+	virtual int				GetTraceCount() const { return m_TraceList.count(); }
+	virtual void			ClearTrace() { m_TraceList.clear(); QMutexLocker Lock(&m_TraceMutex); m_TraceCache.clear(); }
 
 	// Other
 	virtual QString			GetSbieMsgStr(quint32 code, quint32 Lang = 1033);
@@ -222,9 +222,9 @@ protected:
 	QMap<QString, CSandBoxPtr> m_SandBoxes;
 	QMap<quint32, CBoxedProcessPtr> m_BoxedProxesses;
 
-	mutable QReadWriteLock	m_TraceMutex;
+	mutable QMutex			m_TraceMutex;
+	QVector<CTraceEntryPtr>	m_TraceCache;
 	QVector<CTraceEntryPtr>	m_TraceList;
-	int						m_LastTraceEntry;
 
 	mutable QReadWriteLock	m_DriveLettersMutex;
 	struct SDrive

@@ -278,3 +278,81 @@ RpcRt_NdrClientCall2   ENDP
 
 PUBLIC C RpcRt_NdrClientCall2
 
+
+
+;----------------------------------------------------------------------------
+; InstrumentationCallback
+;----------------------------------------------------------------------------
+
+assume fs:nothing
+extern _InstrumentationCallback@8:near
+
+InstrumentationCallbackAsm@0 proc
+
+    push    esp                         ; back-up ESP, ECX, and EAX to restore them
+    push    ecx
+    push    eax
+
+    mov     eax, 1                      ; Set EAX to 1 for comparison
+    cmp     fs:1b8h, eax                ; See if the recurion flag (Win10 TEB InstrumentationCallbackDisabled) has been set
+    je      resume                      ; Jump and restore the registers if it has and resume
+
+    pop     eax
+    pop     ecx
+    pop     esp
+
+    mov     fs:1b0h, ecx                ; InstrumentationCallbackPreviousPc
+    mov     fs:1b4h, esp                ; InstrumentationCallbackPreviousSp
+    
+    pushad                              ; Push registers to stack
+    pushfd                              ; Push flags to the stack
+    cld                                 ; Clear direction flag
+    
+    push    eax                         ; Return value
+    push    ecx                         ; Return address
+    call    _InstrumentationCallback@8
+    ;add     esp, 08h                    ; Correct stack postion
+
+    popfd                               ; Restore stored flags
+    popad                               ; Restore stored registers
+
+    mov     esp, fs:1b4h                ; Restore ESP
+    mov     ecx, fs:1b0h                ; Restore ECX
+    jmp     ecx                         ; Resume execution
+
+resume:
+    pop     eax
+    pop     ecx
+    pop     esp
+
+    jmp     ecx
+
+
+if 0
+
+	;cmp eax, 0			; STATUS_SUCCESS
+	;jne ReturnToCaller
+    
+	pushad
+    
+	push eax
+	push ecx
+	call _InstrumentationCallback@8
+	
+	pop edi
+	pop esi
+	pop ebp
+	add esp, 4
+	pop ebx
+	pop edx
+	pop ecx
+	add esp, 4 ; preserve new eax
+
+;ReturnToCaller:
+	jmp ecx
+
+endif
+
+InstrumentationCallbackAsm@0 endp
+
+PUBLIC C InstrumentationCallbackAsm@0

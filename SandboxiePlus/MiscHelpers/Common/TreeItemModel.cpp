@@ -25,7 +25,7 @@ CTreeItemModel::CTreeItemModel(QObject *parent)
 
 CTreeItemModel::~CTreeItemModel()
 {
-	delete m_Root;
+	Q_ASSERT(m_Root == NULL);
 }
 
 CSimpleTreeModel::CSimpleTreeModel(QObject *parent) 
@@ -33,6 +33,12 @@ CSimpleTreeModel::CSimpleTreeModel(QObject *parent)
 {
 	m_bTree = true;
 	m_Root = MkNode(QVariant());
+}
+
+CSimpleTreeModel::~CSimpleTreeModel()
+{
+	FreeNode(m_Root);
+	m_Root = NULL;
 }
 
 QList<QVariant> CSimpleTreeModel::MakePath(const QVariantMap& Cur, const QMap<QVariant, QVariantMap>& List)
@@ -139,9 +145,10 @@ void CSimpleTreeModel::Sync(const QMap<QVariant, QVariantMap>& List)
 	CTreeItemModel::Sync(New, Old);
 }
 
-void CTreeItemModel::Sync(QMap<QList<QVariant>, QList<STreeNode*> >& New, QHash<QVariant, STreeNode*>& Old, QList<QVariant>* pAdded)
+void CTreeItemModel::Sync(QMap<QList<QVariant>, QList<STreeNode*> >& New, QHash<QVariant, STreeNode*>& Old, QList<QModelIndex>* pNewBranches)
 {
-	Purge(m_Root, QModelIndex(), Old);
+	if(!Old.isEmpty())
+		Purge(m_Root, QModelIndex(), Old);
 
 	if(!New.isEmpty())
 	{
@@ -149,7 +156,7 @@ void CTreeItemModel::Sync(QMap<QList<QVariant>, QList<STreeNode*> >& New, QHash<
 
 		//foreach(const QString& Path, New.keys())
 		for(QMap<QList<QVariant>, QList<STreeNode*> >::const_iterator I = New.begin(); I != New.end(); I++)
-			Fill(m_Root, QModelIndex(), I.key(), 0, I.value(), I.key(), pAdded);
+			Fill(m_Root, /*QModelIndex(),*/ I.key(), 0, I.value(), pNewBranches);
 
 		emit layoutChanged();
 	}
@@ -223,7 +230,7 @@ void CTreeItemModel::Purge(STreeNode* pParent, const QModelIndex &parent, QHash<
 				for(int j = End; j >= Begin; j--)
 				{
 					pNode = pParent->Children.takeAt(j);
-					delete pNode;
+					FreeNode(pNode);
 					Removed++;
 				}
 				endRemoveRows();
@@ -236,39 +243,42 @@ void CTreeItemModel::Purge(STreeNode* pParent, const QModelIndex &parent, QHash<
 
 	if(Removed > 0)
 	{
-		pParent->Aux.clear();
+		//pParent->Aux.clear();
 		for (int i = pParent->Children.count() - 1; i >= 0; i--)
 		{
 			pParent->Children[i]->Row = i;
-			pParent->Aux.insert(pParent->Children[i]->ID, i);
+			//pParent->Aux.insert(pParent->Children[i]->ID, i);
 		}
 	}
 }
 
-void CTreeItemModel::Fill(STreeNode* pParent, const QModelIndex &parent, const QList<QVariant>& Paths, int PathsIndex, const QList<STreeNode*>& New, const QList<QVariant>& Path, QList<QVariant>* pAdded)
+void CTreeItemModel::Fill(STreeNode* pParent, /*const QModelIndex &parent,*/ const QList<QVariant>& Paths, int PathsIndex, const QList<STreeNode*>& New, QList<QModelIndex>* pNewBranches)
 {
 	if(Paths.size() > PathsIndex)
 	{
 		QVariant CurPath = Paths.at(PathsIndex);
-		STreeNode* pNode;
-		int i = pParent->Aux.value(CurPath, -1);
-		if(i != -1)
-			pNode = pParent->Children[i];
-		else
+		//STreeNode* pNode;
+		//int i = pParent->Aux.value(CurPath, -1);
+		//if(i != -1)
+		//	pNode = pParent->Children[i];
+		//else
+		STreeNode* &pNode = m_Map[CurPath];
+		if(!pNode)
 		{
-			i = 0;
+			//i = 0;
 			pNode = MkVirtualNode(CurPath, pParent);
-			if (pAdded) pAdded->append(CurPath);
-			m_Map.insert(CurPath, pNode);
+
+			//if (pNewNode) pNewNode->append(createIndex(pParent->Children.size(), FIRST_COLUMN, pNode));
+			if (pNewBranches && pParent->Children.size() == 0 && pParent != m_Root) pNewBranches->append(createIndex(pParent->Row, FIRST_COLUMN, pParent));
 
 			//int Count = pParent->Children.count();
 			//beginInsertRows(parent, Count, Count);
-			pParent->Aux.insert(pNode->ID, pParent->Children.size());
+			//pParent->Aux.insert(pNode->ID, pParent->Children.size());
 			pNode->Row = pParent->Children.size();
 			pParent->Children.append(pNode);
 			//endInsertRows();
 		}
-		Fill(pNode, index(i, 0, parent), Paths, PathsIndex + 1, New, Path, pAdded);
+		Fill(pNode, /*index(i, 0, parent),*/ Paths, PathsIndex + 1, New, pNewBranches);
 	}
 	else
 	{
@@ -280,9 +290,13 @@ void CTreeItemModel::Fill(STreeNode* pParent, const QModelIndex &parent, const Q
 			m_Map.insert(pNode->ID, pNode);
 			pNode->Parent = pParent;
 
+			//if (pNewNode) pNewNode->append(createIndex(pParent->Children.size(), FIRST_COLUMN, pNode));
+			if (pNewBranches && pParent->Children.size() == 0 && pParent != m_Root) pNewBranches->append(createIndex(pParent->Row, FIRST_COLUMN, pParent));
+
 			//int Count = pParent->Children.count();
 			//beginInsertRows(parent, Count, Count);
-			pParent->Aux.insert(pNode->ID, pParent->Children.size());
+			//if(!m_LeafsOnly) // when all non virtual entries are always leafs, dont fill the aux map
+			//	pParent->Aux.insert(pNode->ID, pParent->Children.size());
 			pNode->Row = pParent->Children.size();
 			pParent->Children.append(pNode);
 			//endInsertRows();
@@ -381,14 +395,14 @@ QVariant CTreeItemModel::Data(const QModelIndex &index, int role, int section) c
 	STreeNode* pNode = static_cast<STreeNode*>(index.internalPointer());
 	ASSERT(pNode);
 
-	if (pNode->Values.size() <= section)
-		return QVariant();
-
 	return NodeData(pNode, role, section);
 }
 
 QVariant CTreeItemModel::NodeData(STreeNode* pNode, int role, int section) const
 {
+	if (pNode->Values.size() <= section)
+		return QVariant();
+
     switch(role)
 	{
 		case Qt::DisplayRole:

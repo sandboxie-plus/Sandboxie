@@ -24,7 +24,7 @@ void CSandMan::CreateTrayIcon()
 	m_pTrayIcon->setToolTip(GetTrayText());
 	connect(m_pTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(OnSysTray(QSystemTrayIcon::ActivationReason)));
 	m_bIconEmpty = true;
-	m_bIconDisabled = false;
+	m_iIconDisabled = -1;
 	m_bIconBusy = false;
 	m_iDeletingContent = 0;
 
@@ -158,7 +158,7 @@ QIcon CSandMan::GetTrayIcon(bool isConnected)
 	painter.drawPixmap(0, 0, base);
 	if(!overlay.isNull()) painter.drawPixmap(0, 0, overlay);
 
-	if (m_bIconDisabled) {
+	if (m_iIconDisabled == 1) {
 		IconFile = "IconDFP";
 		if (bClassic) IconFile += "C";
 		overlay = GetIcon(IconFile, 0).pixmap(size);

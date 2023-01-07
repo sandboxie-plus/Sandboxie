@@ -197,6 +197,9 @@
     <ClInclude Include="Archive\ArchiveFS.h">
       <Filter>Archive</Filter>
     </ClInclude>
+    <ClInclude Include="Common\PoolAllocator.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mischelpers_global.h">

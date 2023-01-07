@@ -3,58 +3,30 @@
 #include "../MiscHelpers/Common/Common.h"
 #include "../SbiePlusAPI.h"
 
+#define FIRST_COLUMN 0
 
+#define PROCESS_MARK	0x10000000
+#define THREAD_MARK		0x20000000
 
 CTraceModel::CTraceModel(QObject* parent)
-	:CTreeItemModel(parent)
+	:QAbstractItemModelEx(parent)
 {
 	m_bTree = false;
-	m_bObjTree = false;
 
-	m_Root = MkNode(QVariant());
+	m_Root = MkNode(0);
 
 	m_LastCount = 0;
 }
 
 CTraceModel::~CTraceModel()
 {
+	FreeNode(m_Root);
+	m_Root = NULL;
 }
 
-/*QList<QVariant> CTraceModel::MakePath(const CTraceEntryPtr& pEntry, const QList<CTraceEntryPtr>& EntryList)
+QList<QModelIndex> CTraceModel::Sync(const QVector<CTraceEntryPtr>& EntryList)
 {
-	quint64 ParentID = pEntry->GetParentWnd();
-	CTraceEntryPtr pParent = EntryList.value(ParentID);
-
-	QList<QVariant> Path;
-	if (!pParent.isNull() && ParentID != pEntry->GetHWnd())
-	{
-		Path = MakeWndPath(pParent, EntryList);
-		Path.append(ParentID);
-	}
-	return Path;
-}
-
-bool CTraceModel::TestPath(const QList<QVariant>& Path, const CTraceEntryPtr& pEntry, const QList<CTraceEntryPtr>& EntryList, int Index)
-{
-	quint64 ParentID = pEntry->GetParentWnd();
-	CTraceEntryPtr pParent = EntryList.value(ParentID);
-
-	if (!pParent.isNull() && ParentID != pEntry->GetHWnd())
-	{
-		if (Index >= Path.size() || Path[Path.size() - Index - 1] != ParentID)
-			return false;
-
-		return TestWndPath(Path, pParent, EntryList, Index + 1);
-	}
-
-	return Path.size() == Index;
-}*/
-
-QList<QVariant>	CTraceModel::Sync(const QVector<CTraceEntryPtr>& EntryList, int (*Filter)(const CTraceEntryPtr&, void*), void* params)
-{
-	QList<QVariant>	Added;
-	QMap<QList<QVariant>, QList<STreeNode*> > New;
-	QHash<QVariant, STreeNode*> Old = m_Map;
+	QList<QModelIndex> NewBranches;
 
 	// Note: since this is a log and we ever always only add entries we save cpu time by always skipping the already know portion of the list
 
@@ -63,229 +35,172 @@ QList<QVariant>	CTraceModel::Sync(const QVector<CTraceEntryPtr>& EntryList, int 
 	{
 		i = m_LastCount - 1;
 		if (m_LastID == EntryList.at(i)->GetUID())
-		{
 			i++;
-			Old.clear();
-		}
 		else
 			i = 0;
 	}
 
+	emit layoutAboutToBeChanged();
+
 	for (; i < EntryList.count(); i++)
 	{
-		CTraceEntryPtr pEntry = EntryList.at(i);
-
-		int iFilter = Filter(pEntry, params);
-		if (!iFilter)
-			continue;
+		const CTraceEntryPtr& pEntry = EntryList.at(i);
 
 		quint64 ID = pEntry->GetUID();
 
-		QStringList NtPath;
-		if (m_bObjTree) {
-			QString Name = pEntry->GetName();
-			if (Name.left(1) != "\\")
-				continue;
-			NtPath = Name.split("\\");
-		}
-
-		QModelIndex Index;
-
-		QHash<QVariant, STreeNode*>::iterator I = Old.find(ID);
-		STraceNode* pNode = I != Old.end() ? static_cast<STraceNode*>(I.value()) : NULL;
-		if (!pNode /*|| (m_bTree ? !TestPath(pNode->Path, pEntry, EntryList) : !pNode->Path.isEmpty())*/)
+		STreeNode* pNode = MkNode(ID);
+		pNode->pEntry = pEntry;
+		if (m_bTree)
 		{
-			pNode = static_cast<STraceNode*>(MkNode(ID));
-			pNode->Values.resize(columnCount());
-			if (m_bTree) 
-			{
-				//pNode->Path.append(QString("pid_%1").arg(pEntry->GetProcessId()));
-				//pNode->Path.append(QString("tid_%1").arg(pEntry->GetThreadId()));
-				if (pEntry->GetProcessName().isEmpty())
-					pNode->Path.append(tr("Process %1").arg(pEntry->GetProcessId()));
-				else
-					pNode->Path.append(tr("%1 (%2)").arg(pEntry->GetProcessName()).arg(pEntry->GetProcessId()));
-				pNode->Path.append(QString("Thread %1").arg(pEntry->GetThreadId()));
-				//pNode->Path = MakePath(pEntry, EntryList);
-			}
-			if (m_bObjTree) {
-				foreach(const QString & Part, NtPath) {
-					if(!Part.isEmpty())
-						pNode->Path.append(Part);
-				}
-			}
-			pNode->pEntry = pEntry;
-			New[pNode->Path].append(pNode);
-			//SetProcessName(pEntry->GetProcessName(), pEntry->GetProcessId(), pEntry->GetThreadId());
+			quint64 Path = PROCESS_MARK | pEntry->GetProcessId();
+			Path |= quint64(THREAD_MARK | pEntry->GetThreadId()) << 32;
+
+			pNode->Parent = FindParentNode(m_Root, Path, 0, &NewBranches);
 		}
 		else
-		{
-			I.value() = NULL;
-			Index = Find(m_Root, pNode);
-		}
+			pNode->Parent = m_Root;
 
-		//if(Index.isValid()) // this is to slow, be more precise
-		//	emit dataChanged(createIndex(Index.row(), 0, pNode), createIndex(Index.row(), columnCount()-1, pNode));
-
-		int Col = 0;
-		bool State = false;
-		int Changed = 0;
-
-		if (pNode->bHighLight != (iFilter == 2)) {
-			pNode->bHighLight = (iFilter == 2);
-			pNode->Color = pNode->bHighLight ? Qt::yellow : QColor();
-			Changed = -1;
-		}
-
-		for (int section = 0; section < columnCount(); section++)
-		{
-			if (!m_Columns.contains(section))
-				continue; // ignore columns which are hidden
-
-			QVariant Value;
-			switch (section)
-			{
-			//case eProcess:			Value = pEntry->GetProcessId(); break;
-			//case eTimeStamp:		Value = pEntry->GetUID(); break;
-			case eProcess:			Value = pEntry->GetUID(); break;
-			case eType:				Value = pEntry->GetTypeStr(); break;
-			case eStatus:			Value = pEntry->GetStautsStr(); break;
-			case eValue:		{			
-									QString sValue = pEntry->GetName();
-									if (!sValue.isEmpty() && !pEntry->GetMessage().isEmpty())
-										sValue += " ";
-									sValue += pEntry->GetMessage();
-									Value = sValue;
-									break;
-								}
-			}
-
-			STraceNode::SValue& ColValue = pNode->Values[section];
-
-			if (ColValue.Raw != Value)
-			{
-				if (Changed == 0)
-					Changed = 1;
-				ColValue.Raw = Value;
-
-				switch (section)
-				{
-					/*case eProcess:
-					{
-						CBoxedProcessPtr pProcess = theAPI->GetProcessById(pEntry->GetProcessId());
-						ColValue.Formatted = QString("%1 (%2, %3)").arg(pProcess.isNull() ? tr("Unknown") : pProcess->GetProcessName()).arg(pEntry->GetProcessId()).arg(pEntry->GetThreadId());
-						break;
-					}
-					case eTimeStamp:		ColValue.Formatted = pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"); break;*/
-					case eProcess:			
-						if(!m_bTree) {
-							QString Name = pEntry->GetProcessName();
-							ColValue.Formatted = QString("%1 (%2, %3) - %4").arg(Name.isEmpty() ? tr("Unknown") : Name)
-								.arg(pEntry->GetProcessId()).arg(pEntry->GetThreadId()).arg(pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"));
-						} else 
-							ColValue.Formatted = pEntry->GetTimeStamp().toString("hh:mm:ss.zzz");
-						break;
-						//case eType:			ColValue.Formatted = ; break;
-						//case eValue:			ColValue.Formatted = ; break;
-				}
-			}
-
-			if (State != (Changed != 0))
-			{
-				if (State && Index.isValid())
-					emit dataChanged(createIndex(Index.row(), Col, pNode), createIndex(Index.row(), section - 1, pNode));
-				State = (Changed != 0);
-				Col = section;
-			}
-			if (Changed == 1)
-				Changed = 0;
-		}
-		if (State && Index.isValid())
-			emit dataChanged(createIndex(Index.row(), Col, pNode), createIndex(Index.row(), columnCount() - 1, pNode));
-
+		//pNode->Row = pNode->Parent->Children.size();
+		pNode->Parent->Children.append(pNode);
 	}
+
+	emit layoutChanged();
 
 	m_LastCount = EntryList.count();
 	if(m_LastCount)
 		m_LastID = EntryList.last()->GetUID();
 
-	CTreeItemModel::Sync(New, Old, &Added);
-
-	return Added;
+	return NewBranches;
 }
 
-void CTraceModel::Clear()
+//__inline uint qHash(const CTraceModel::STracePath& var)
+//{
+//    unsigned int hash = 5381;
+//    for (quint32* ptr = var.path; ptr < var.path + var.count; ptr++)
+//        hash = ((hash << 15) + hash) ^ *ptr;
+//    return hash;
+//}
+//
+//bool operator == (const CTraceModel::STracePath& l, const CTraceModel::STracePath& r)
+//{
+//	if (l.count != r.count)
+//		return false;
+//	return memcmp(l.path, r.path, l.count) == 0;
+//}
+
+CTraceModel::STreeNode* CTraceModel::FindParentNode(STreeNode* pParent, quint64 Path, int PathsIndex, QList<QModelIndex>* pNewBranches)
+{
+	if (2 <= PathsIndex)
+		return pParent;
+	
+	quint64 CurPath = PathsIndex == 0 ? Path & 0x00000000FFFFFFFF : Path;
+	STreeNode* &pNode = m_Branches[CurPath];
+	if(!pNode)
+	{
+		pNode = MkNode(PathsIndex == 0 ? Path & 0x00000000FFFFFFFF : (Path >> 32));
+		pNode->Parent = pParent;
+		pNewBranches->append(createIndex(pParent->Children.size(), FIRST_COLUMN, pNode));
+
+		//pNode->Row = pParent->Children.size();
+		pParent->Children.append(pNode);
+	}
+	return FindParentNode(pNode, Path, PathsIndex + 1, pNewBranches);
+}
+
+void CTraceModel::Clear(bool bMem)
 {
 	m_LastCount = 0;
 	m_LastID.clear();
 
-	/*foreach(quint32 pid, m_PidMap.keys()) {
-		SProgInfo& Info = m_PidMap[pid];
-		Info.Dirty = true;
-		Info.Threads.clear();
-	}
-	m_PidMap.clear();*/
-	CTreeItemModel::Clear();
+	beginResetModel();
+
+	m_Branches.clear();
+	FreeNode(m_Root);
+
+	if (bMem)
+		m_NodeAllocator.dispose();
+
+	m_Root = MkNode(0);
+
+	endResetModel();
 }
 
-/*
-void CTraceModel::SetProcessName(const QString& Name, quint32 pid, quint32 tid)
-{
-	SProgInfo& Info = m_PidMap[pid];
-	Info.Name = Name;
-	if (!Info.Threads.contains(tid)) {
-		Info.Threads.insert(tid);
-		Info.Dirty = true;
-	}
-	if (Info.Dirty) {
-		Info.Dirty = false;
-		emit NewBranche();
-	}
-}
+PoolAllocator<sizeof(CTraceModel::STreeNode)> CTraceModel::m_NodeAllocator;
 
-QString CTraceModel::GetProcessName(quint32 pid)
-{
-	SProgInfo& Info = m_PidMap[pid];
-	return Info.Name;
-}
-
-void CTraceModel::LogThreadId(quint32 pid, quint32 tid)
-{
-	SProgInfo& Info = m_PidMap[pid];
-	if (!Info.Threads.contains(tid)) {
-		Info.Threads.insert(tid);
-		emit NewBranche();
-	}
-}
-*/
-
-CTraceModel::STreeNode* CTraceModel::MkVirtualNode(const QVariant& Id, STreeNode* pParent)
+CTraceModel::STreeNode*	CTraceModel::MkNode(quint64 Id) 
 { 
-	STreeNode* pNode = CTreeItemModel::MkVirtualNode(Id, pParent);
-
-	/*StrPair typeId = Split2(Id.toString(), "_");
-	if (typeId.first == "pid")
-	{
-		quint32 pid = typeId.second.toUInt();
-		QString Name = GetProcessName(pid);
-		pNode->Values[0].Raw = pid;
-		if(!Name.isEmpty())
-			pNode->Values[0].Formatted = tr("%1 (%2)").arg(Name).arg(pid); 
-		else
-			pNode->Values[0].Formatted = tr("Process %1").arg(pid);
-	}
-	else if (typeId.first == "tid")
-	{
-		quint32 tid = typeId.second.toUInt();
-		quint32 pid = Split2(pParent->ID.toString(), "_").second.toUInt();
-		LogThreadId(pid, tid);
-		pNode->Values[0].Raw = tid;
-		pNode->Values[0].Formatted = tr("Thread %1").arg(tid);
-	}
-	else*/
-		pNode->Values[0].Raw = pNode->Values[0].Formatted = Id;
-
+	STreeNode* pNode = (STreeNode*)m_NodeAllocator.allocate(sizeof(STreeNode));
+	new (pNode) STreeNode(Id);
 	return pNode;
+	//return new STreeNode(Id);
+}
+
+void CTraceModel::FreeNode(STreeNode* pNode) 
+{ 
+	foreach(STreeNode* pSubNode, pNode->Children)
+		FreeNode(pSubNode);
+	pNode->~STreeNode();
+	m_NodeAllocator.free(pNode);
+	//delete pNode; 
+}
+
+QVariant CTraceModel::NodeData(STreeNode* pNode, int role, int section) const
+{
+	const CTraceEntryPtr& pEntry = pNode->pEntry;
+	if(!pEntry.constData())
+	{
+		if (section != FIRST_COLUMN || (role != Qt::DisplayRole && role != Qt::EditRole))
+			return QVariant();
+
+		quint32 id = pNode->ID;
+		if (id & PROCESS_MARK) {
+			CTraceEntryPtr pProcEntry; // pick first log entry of first thread to query the process name
+			if (!pNode->Children.isEmpty()) {
+				STreeNode* pSubNode = pNode->Children.first();
+				if (!pSubNode->Children.isEmpty())
+					pProcEntry = pSubNode->Children.first()->pEntry;
+			}
+			if (pProcEntry && !pProcEntry->GetProcessName().isEmpty())
+				return tr("%1 (%2)").arg(pProcEntry->GetProcessName()).arg(pProcEntry->GetProcessId());
+			return tr("Process %1").arg(id & 0x0FFFFFFF);
+		}
+		else if (id & THREAD_MARK)
+			return tr("Thread %1").arg(id & 0x0FFFFFFF);
+		else
+			return QString::number(id, 16).rightJustified(8, '0');
+	}
+	
+	switch(role)
+	{
+		case Qt::DisplayRole:
+		case Qt::EditRole: // sort role
+		{
+			switch (section)
+			{
+			//case eProcess:		return pEntry->GetProcessId(); 
+			//case eTimeStamp:		return pEntry->GetUID();
+			case eProcess:		{
+									if(!m_bTree) {
+										QString Name = pEntry->GetProcessName();
+										return QString("%1 (%2, %3) - %4").arg(Name.isEmpty() ? tr("Unknown") : Name)
+											.arg(pEntry->GetProcessId()).arg(pEntry->GetThreadId()).arg(pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"));
+									} else 
+										return pEntry->GetTimeStamp().toString("hh:mm:ss.zzz");
+								}
+			case eType:				return pEntry->GetTypeStr();
+			case eStatus:			return pEntry->GetStautsStr();
+			case eValue:		{			
+									QString sValue = pEntry->GetName();
+									if (!sValue.isEmpty() && !pEntry->GetMessage().isEmpty())
+										sValue += " ";
+									sValue += pEntry->GetMessage();
+									return sValue;
+								}
+			}
+		}
+	}
+
+	return QVariant();
 }
 
 CTraceEntryPtr CTraceModel::GetEntry(const QModelIndex& index) const
@@ -293,10 +208,91 @@ CTraceEntryPtr CTraceModel::GetEntry(const QModelIndex& index) const
 	if (!index.isValid())
 		return CTraceEntryPtr();
 
-	STraceNode* pNode = static_cast<STraceNode*>(index.internalPointer());
+	STreeNode* pNode = static_cast<STreeNode*>(index.internalPointer());
 	ASSERT(pNode);
 
 	return pNode->pEntry;
+}
+
+QVariant CTraceModel::data(const QModelIndex &index, int role) const
+{
+    return Data(index, role, index.column());
+}
+
+QVariant CTraceModel::GetItemID(const QModelIndex& index) const
+{
+	if (!index.isValid())
+		return QVariant();
+
+	STreeNode* pNode = static_cast<STreeNode*>(index.internalPointer());
+
+	return pNode->ID;
+}
+
+QVariant CTraceModel::Data(const QModelIndex &index, int role, int section) const
+{
+	if (!index.isValid())
+		return QVariant();
+
+	STreeNode* pNode = static_cast<STreeNode*>(index.internalPointer());
+	ASSERT(pNode);
+
+	return NodeData(pNode, role, section);
+}
+
+Qt::ItemFlags CTraceModel::flags(const QModelIndex &index) const
+{
+    if (!index.isValid())
+        return Qt::NoItemFlags;
+	if(index.column() == 0)
+		return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable;
+    return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+}
+
+QModelIndex CTraceModel::index(int row, int column, const QModelIndex &parent) const
+{
+    if (!hasIndex(row, column, parent))
+        return QModelIndex();
+
+    STreeNode* pParent;
+    if (!parent.isValid())
+        pParent = m_Root;
+    else
+        pParent = static_cast<STreeNode*>(parent.internalPointer());
+
+	if(STreeNode* pNode = pParent->Children.count() > row ? pParent->Children[row] : NULL)
+        return createIndex(row, column, pNode);
+    return QModelIndex();
+}
+
+QModelIndex CTraceModel::parent(const QModelIndex &index) const
+{
+    if (!index.isValid())
+        return QModelIndex();
+
+    STreeNode* pNode = static_cast<STreeNode*>(index.internalPointer());
+	ASSERT(pNode->Parent);
+	STreeNode* pParent = pNode->Parent;
+    if (pParent == m_Root)
+        return QModelIndex();
+
+	int row = 0;
+	if(pParent->Parent)
+		row = pParent->Parent->Children.indexOf(pParent);
+    return createIndex(row, 0, pParent);
+}
+
+int CTraceModel::rowCount(const QModelIndex &parent) const
+{
+    if (parent.column() > 0)
+        return 0;
+
+	STreeNode* pNode;
+    if (!parent.isValid())
+        pNode = m_Root;
+    else
+        pNode = static_cast<STreeNode*>(parent.internalPointer());
+	return pNode->Children.count();
 }
 
 int CTraceModel::columnCount(const QModelIndex& parent) const

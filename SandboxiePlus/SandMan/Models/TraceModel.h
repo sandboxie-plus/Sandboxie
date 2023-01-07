@@ -2,8 +2,9 @@
 #include <qwidget.h>
 #include "../../QSbieAPI/SbieAPI.h"
 #include "../../MiscHelpers/Common/TreeItemModel.h"
+#include "../../MiscHelpers/Common/PoolAllocator.h"
 
-class CTraceModel : public CTreeItemModel
+class CTraceModel : public QAbstractItemModelEx
 {
 	Q_OBJECT
 
@@ -13,17 +14,23 @@ public:
 
 	void			SetTree(bool bTree)				{ m_bTree = bTree; }
 	bool			IsTree() const					{ return m_bTree; }
-	void			SetObjTree(bool bObjTree)		{ m_bObjTree = bObjTree; }
-	bool			IsObjTree() const				{ return m_bObjTree; }
-
-	QList<QVariant>	Sync(const QVector<CTraceEntryPtr>& EntryList, int (*Filter)(const CTraceEntryPtr&, void*), void* params);
+	
+	QList<QModelIndex>	Sync(const QVector<CTraceEntryPtr>& EntryList);
 
 	CTraceEntryPtr	GetEntry(const QModelIndex& index) const;
+	QVariant		GetItemID(const QModelIndex& index) const;
+	QVariant		Data(const QModelIndex &index, int role, int section) const;
 
-	int				columnCount(const QModelIndex& parent = QModelIndex()) const;
-	QVariant		headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
+	// derived functions
+    virtual QVariant		data(const QModelIndex &index, int role) const;
+    virtual Qt::ItemFlags	flags(const QModelIndex &index) const;
+    virtual QModelIndex		index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
+    virtual QModelIndex		parent(const QModelIndex &index) const;
+    virtual int				rowCount(const QModelIndex &parent = QModelIndex()) const;
+	virtual int				columnCount(const QModelIndex &parent = QModelIndex()) const;
+	virtual QVariant		headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
-	void			Clear();
+	void			Clear(bool bMem = false);
 
 	enum EColumns
 	{
@@ -35,40 +42,59 @@ public:
 		eCount
 	};
 
-	/*struct SProgInfo
-	{
-		SProgInfo() { Dirty = true; }
-		QString Name;
-		bool Dirty;
-		QSet<quint32> Threads;
-	};
-	QMap<quint32, SProgInfo>GetPids() { return m_PidMap; }
-
-signals:
-	void			NewBranche();*/
-
 protected:
-	struct STraceNode : STreeNode
+
+	//struct STracePath {
+	//	STracePath() { Q_ASSERT(0); }
+	//	STracePath(quint32* p, int c) : path(p), count(c), owner(false) {}
+	//	STracePath(const STracePath& other) 
+	//	{
+	//		count = other.count;
+	//		path = new quint32[count];
+	//		memcpy(path, other.path, count * sizeof(quint32));
+	//		owner = true;
+	//	}
+	//	~STracePath() {
+	//		if (owner) 
+	//			delete[] path;
+	//	}
+	//	STracePath& operator = (const STracePath& other) { Q_ASSERT(0); return *this; }
+	//	quint32*		path;
+	//	int				count;
+	//	bool			owner;
+	//};
+	//
+	//friend uint qHash(const STracePath& var);
+	//friend bool operator == (const STracePath& l, const STracePath& r);
+
+	struct STreeNode
 	{
-		STraceNode(const QVariant& Id) : STreeNode(Id) { bHighLight = false; }
+		STreeNode(quint64 Id) { ID = Id; }
+		//virtual ~STreeNode(){}
+
+		quint64				ID;
+
+		STreeNode*			Parent = NULL;
+		//int					Row = 0;
+		QVector<STreeNode*>	Children;
 
 		CTraceEntryPtr		pEntry;
-		bool				bHighLight;
 	};
 
+
 	bool					m_bTree;
-	bool					m_bObjTree;
 	QVariant				m_LastID;
 	int						m_LastCount;
 
-	virtual STreeNode* MkNode(const QVariant& Id) { return new STraceNode(Id); }
-	virtual STreeNode* MkVirtualNode(const QVariant& Id, STreeNode* pParent);
+	virtual QVariant		NodeData(STreeNode* pNode, int role, int section) const;
 
-	/*QList<QVariant>			MakePath(const CTraceEntryPtr& pEntry, const QList<CTraceEntryPtr>& EntryList);
-	bool					TestPath(const QList<QVariant>& Path, const CTraceEntryPtr& pEntry, const QList<CTraceEntryPtr>& EntryList, int Index = 0);*/
+	virtual STreeNode*		MkNode(quint64 Id);
+	virtual void			FreeNode(STreeNode* pNode);
 
-	/*void					SetProcessName(const QString& Name, quint32 pid, quint32 tid);
-	QString					GetProcessName(quint32 pid);
-	void					LogThreadId(quint32 pid, quint32 tid);
-	QMap<quint32, SProgInfo>m_PidMap;*/
+	STreeNode*				FindParentNode(STreeNode* pParent, quint64 Path, int PathsIndex, QList<QModelIndex>* pNewBranches);
+
+	STreeNode*				m_Root;
+	QHash<quint64, STreeNode*> m_Branches;
+
+	static PoolAllocator<sizeof(STreeNode)> m_NodeAllocator;
 };

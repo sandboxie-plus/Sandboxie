@@ -76,7 +76,9 @@ CTraceEntry::CTraceEntry(quint32 ProcessId, quint32 ThreadId, quint32 Type, cons
 	static std::atomic<quint64> uid = 0;
 	m_uid = uid.fetch_add(1);
 	
+#ifdef USE_MERGE_TRACE
 	m_Counter = 1;
+#endif
 
 	m_Message = m_Message.replace("\r", "").replace("\n", " ");
 
@@ -175,8 +177,10 @@ QString CTraceEntry::GetStautsStr() const
 	if (IsTrace())
 		Status.append("Trace ");
 
+#ifdef USE_MERGE_TRACE
 	if (m_Counter > 1)
 		Status.append(QString("(%1) ").arg(m_Counter));
+#endif
 
 	return Status;
 }

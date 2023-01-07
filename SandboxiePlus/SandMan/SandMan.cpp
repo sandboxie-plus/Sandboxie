@@ -206,9 +206,11 @@ CSandMan::CSandMan(QWidget *parent)
 	CreateUI();
 	setCentralWidget(m_pMainWidget);
 
+	m_pTraceInfo = new QLabel();
 	m_pDisabledForce = new QLabel();
 	m_pDisabledRecovery = new QLabel();
 	m_pDisabledMessages = new QLabel();
+	statusBar()->addPermanentWidget(m_pTraceInfo);
 	statusBar()->addPermanentWidget(m_pDisabledForce);
 	statusBar()->addPermanentWidget(m_pDisabledRecovery);
 	statusBar()->addPermanentWidget(m_pDisabledMessages);
@@ -1366,8 +1368,11 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		{
 			bool bIsMonitoring = theAPI->IsMonitoring();
 			m_pEnableMonitoring->setChecked(bIsMonitoring);
-			if (!bIsMonitoring) // don't disable the view as logn as there are entries shown
-				bIsMonitoring = !theAPI->GetTrace().isEmpty();
+			int iTraceCount = theAPI->GetTraceCount();
+			if (!bIsMonitoring && iTraceCount > 0)
+				bIsMonitoring = true; // don't disable the view as logn as there are entries shown
+			if (bIsMonitoring && m_pTraceView)
+				m_pTraceInfo->setText(QString::number(iTraceCount));
 			m_pTraceView->setEnabled(bIsMonitoring);
 		}
 
@@ -1386,16 +1391,16 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		if (theAPI->IsBusy() || m_iDeletingContent > 0)
 			bIconBusy = true;
 
-		if (m_bIconDisabled != bForceProcessDisabled) {
+		if (m_iIconDisabled != (bForceProcessDisabled ? 1 : 0)) {
 			QString Str1 = tr("No Force Process");
 			m_pDisabledForce->setText(m_pDisableForce->isChecked() ? Str1 : QString(Str1.length(), ' '));
 		}
 
-		if (m_bIconEmpty != (ActiveProcesses == 0)  || m_bIconBusy != bIconBusy || m_bIconDisabled != bForceProcessDisabled)
+		if (m_bIconEmpty != (ActiveProcesses == 0) || m_bIconBusy != bIconBusy || m_iIconDisabled != (bForceProcessDisabled ? 1 : 0))
 		{
 			m_bIconEmpty = (ActiveProcesses == 0);
 			m_bIconBusy = bIconBusy;
-			m_bIconDisabled = bForceProcessDisabled;
+			m_iIconDisabled = (bForceProcessDisabled ? 1 : 0);
 
 			m_pTrayIcon->setIcon(GetTrayIcon());
 			m_pTrayIcon->setToolTip(GetTrayText());
@@ -1856,7 +1861,7 @@ void CSandMan::UpdateState()
 	m_pTrayIcon->setIcon(GetTrayIcon(isConnected));
 	m_pTrayIcon->setToolTip(GetTrayText(isConnected));
 	m_bIconEmpty = true;
-	m_bIconDisabled = false;
+	m_iIconDisabled = -1;
 	m_bIconBusy = false;
 
 	m_pRunBoxed->setEnabled(isConnected);
@@ -2506,7 +2511,10 @@ void CSandMan::OnCleanUp()
 		if(m_pMessageLog) m_pMessageLog->GetTree()->clear();
 	
 	if (sender() == m_pCleanUpTrace || sender() == m_pCleanUpButton)
-		if(m_pTraceView) m_pTraceView->Clear();
+		if (m_pTraceView) { 
+			m_pTraceView->Clear(); 
+			m_pTraceInfo->clear();
+		}
 
 	if (sender() == m_pCleanUpRecovery || sender() == m_pCleanUpButton)
 		if(m_pRecoveryLog) m_pRecoveryLog->GetTree()->clear();
@@ -3009,7 +3017,7 @@ void CSandMan::SetUITheme()
 
 
 	CTreeItemModel::SetDarkMode(bDark);
-	CListItemModel::SetDarkMode(bDark);
+	//CListItemModel::SetDarkMode(bDark); // not used
 	CPopUpWindow::SetDarkMode(bDark);
 	CPanelView::SetDarkMode(bDark);
 	CFinder::SetDarkMode(bDark);

@@ -39,7 +39,6 @@ public:
 	CMonitorModel*		m_pMonitorModel;
 };
 
-
 class CTraceView : public QWidget
 {
 	Q_OBJECT
@@ -54,6 +53,7 @@ public slots:
 	void				Clear();
 
 	void				OnSetTree();
+	void				OnObjTree();
 	void				OnSetMode();
 	void				OnSetPidFilter();
 	void				OnSetTidFilter();
@@ -79,11 +79,10 @@ protected:
 	quint64					m_LastID;
 	int						m_LastCount;
 	bool					m_bUpdatePending;
+	QVector<CTraceEntryPtr> m_TraceList;
 	QMap<QString, CMonitorEntryPtr> m_MonitorMap;
 
 protected:
-	friend int CTraceView__Filter(const CTraceEntryPtr& pEntry, void* params);
-
 	bool				m_FullRefresh;
 
 	QRegularExpression	m_FilterExp;
@@ -103,6 +102,7 @@ protected:
 	QToolBar*			m_pTraceToolBar;
 	QAction*			m_pMonitorMode;
 	QAction*			m_pTraceTree;
+	QAction*			m_pObjectTree;
 	QComboBox*			m_pTracePid;
 	QComboBox*			m_pTraceTid;
 	class QCheckList*	m_pTraceType;

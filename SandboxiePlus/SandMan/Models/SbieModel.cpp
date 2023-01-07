@@ -21,6 +21,8 @@ CSbieModel::CSbieModel(QObject *parent)
 
 CSbieModel::~CSbieModel()
 {
+	FreeNode(m_Root);
+	m_Root = NULL;
 }
 
 QList<QVariant> CSbieModel::MakeProcPath(const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList)

@@ -1409,6 +1409,16 @@ _FX NTSTATUS File_NtDeviceIoControlFile(
     }
 
     //
+    // HACK HACK: when hooking NtDeviceIoControlFile the syscall instrumentation 
+    // will call SbieApi_MonitorPutMsg which will call NtDeviceIoControlFile
+    // hence we need to check if the hooking is not yet done and just return
+    // droppign the one log entry.
+    //
+
+    if (!__sys_NtDeviceIoControlFile) 
+        return STATUS_BAD_INITIAL_PC;
+
+    //
     // otherwise
     //
 

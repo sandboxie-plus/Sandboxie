@@ -134,8 +134,6 @@ CSbieAPI::CSbieAPI(QObject* parent) : QThread(parent)
 	m_bReloadPending = false;
 	m_bBoxesDirty = false;
 
-	m_LastTraceEntry = 0;
-
 	connect(&m_IniWatcher, SIGNAL(fileChanged(const QString&)), this, SLOT(OnIniChanged(const QString&)));
 	connect(this, SIGNAL(ProcessBoxed(quint32, const QString&, const QString&, quint32)), this, SLOT(OnProcessBoxed(quint32, const QString&, const QString&, quint32)));
 }
@@ -2529,38 +2527,36 @@ bool CSbieAPI::GetMonitor()
 	}
 
 	CTraceEntryPtr LogEntry = CTraceEntryPtr(new CTraceEntry(pid, tid, type, LogData));
-	AddTraceEntry(LogEntry, true);
+
+	QMutexLocker Lock(&m_TraceMutex);
+	m_TraceCache.append(LogEntry);
 
 	return true;
 }
 
-void CSbieAPI::AddTraceEntry(const CTraceEntryPtr& LogEntry, bool bCanMerge)
-{
-	QWriteLocker Lock(&m_TraceMutex);
-
-	if (bCanMerge && !m_TraceList.isEmpty() && m_TraceList.last()->Equals(LogEntry)) {
-		m_TraceList.last()->Merge(LogEntry);
-		return;
-	}
-
-	m_TraceList.append(LogEntry);
-}
-
-QVector<CTraceEntryPtr> CSbieAPI::GetTrace() const 
+const QVector<CTraceEntryPtr>& CSbieAPI::GetTrace()
 { 
-	QReadLocker Lock(&m_TraceMutex); 
+	QMutexLocker Lock(&m_TraceMutex);
 
-	if (m_TraceList.count() >= m_LastTraceEntry) {
-		for (int i = m_LastTraceEntry; i < m_TraceList.count(); i++) {
-			const CTraceEntryPtr& pEntry = m_TraceList[i];
-			if (CBoxedProcessPtr proc = m_BoxedProxesses.value(pEntry->GetProcessId())) {
-				((CTraceEntry*)pEntry.data())->SetProcessName(proc->GetProcessName());
-				((CTraceEntry*)pEntry.data())->SetBoxPtr(proc->GetBoxPtr());
-			}
+	for (int i = 0; i < m_TraceCache.count(); i++) 
+	{
+		CTraceEntryPtr& pEntry = m_TraceCache[i];
 
+#ifdef USE_MERGE_TRACE
+		if (!m_TraceList.isEmpty() && m_TraceList.last()->Equals(pEntry)) {
+			m_TraceList.last()->Merge(pEntry);
+			continue;
 		}
-		((CSbieAPI*)this)->m_LastTraceEntry = m_TraceList.count();
+#endif
+
+		if (CBoxedProcessPtr proc = m_BoxedProxesses.value(pEntry->GetProcessId())) {
+			pEntry->SetProcessName(proc->GetProcessName());
+			pEntry->SetBoxPtr(proc->GetBoxPtr());
+		}
+
+		m_TraceList.append(pEntry);
 	}
+	m_TraceCache.clear();
 
 	return m_TraceList; 
 }

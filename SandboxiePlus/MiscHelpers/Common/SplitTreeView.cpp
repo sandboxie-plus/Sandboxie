@@ -23,7 +23,7 @@ CSplitTreeView::CSplitTreeView(QAbstractItemModel* pModel, QWidget *parent) : QW
 	// Tree
 	m_pTree = new QTreeView();
 
-	m_pOneModel = new COneColumnModel();
+	m_pOneModel = new COneColumnModel(this);
 	m_pOneModel->setSourceModel(m_pModel);
 	m_pTree->setModel(m_pOneModel);
 	//m_pTree->setModel(m_pSortProxy);

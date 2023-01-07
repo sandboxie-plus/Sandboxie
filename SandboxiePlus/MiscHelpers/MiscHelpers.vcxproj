@@ -269,6 +269,7 @@
     <ClInclude Include="Common\MT\ThreadLock.h" />
     <QtMoc Include="Common\NeonEffect.h" />
     <ClInclude Include="Common\OtherFunctions.h" />
+    <ClInclude Include="Common\PoolAllocator.h" />
     <ClInclude Include="Common\qRC4.h" />
     <QtMoc Include="Common\NetworkAccessManager.h" />
     <ClInclude Include="Common\Xml.h" />

@@ -39,6 +39,8 @@
     IMPORT RpcRt_Ndr64AsyncClientCallARM64
     IMPORT Secure_HandleElevation
     IMPORT __sys_Ndr64AsyncClientCall
+
+    EXPORT InstrumentationCallbackAsm
     
 
 ;----------------------------------------------------------------------------
@@ -253,6 +255,18 @@ WeHandleElevation
 
  ENDP
  
+
+;----------------------------------------------------------------------------
+; InstrumentationCallbackAsm
+;----------------------------------------------------------------------------
+
+
+InstrumentationCallbackAsm PROC
+ 
+    brk #0xF000
+    br x16 ; IP0
+    
+ ENDP
 
 ;----------------------------------------------------------------------------
 

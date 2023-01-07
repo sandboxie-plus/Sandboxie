@@ -1532,19 +1532,7 @@ _FX LONG SbieApi_MonitorPut2(
     const WCHAR *Name,
     BOOLEAN bCheckObjectExists)
 {
-    NTSTATUS status;
-    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
-    API_MONITOR_PUT2_ARGS *args = (API_MONITOR_PUT2_ARGS *)parms;
-
-    memset(parms, 0, sizeof(parms));
-    args->func_code                 = API_MONITOR_PUT2;
-    args->log_type.val              = Type;
-    args->log_len.val64             = wcslen(Name) * sizeof(WCHAR);
-    args->log_ptr.val64             = (ULONG64)(ULONG_PTR)Name;
-    args->check_object_exists.val64 = bCheckObjectExists;
-    status = SbieApi_Ioctl(parms);
-
-    return status;
+    return SbieApi_MonitorPut2Ex(Type, wcslen(Name), Name, bCheckObjectExists, FALSE);
 }
 
 
@@ -1557,6 +1545,22 @@ _FX LONG SbieApi_MonitorPutMsg(
     ULONG Type,
     const WCHAR* Message)
 {
+    return SbieApi_MonitorPut2Ex(Type, wcslen(Message), Message, FALSE, TRUE);
+}
+
+
+//---------------------------------------------------------------------------
+// SbieApi_MonitorPut2Ex
+//---------------------------------------------------------------------------
+
+
+_FX LONG SbieApi_MonitorPut2Ex(
+    ULONG Type,
+    ULONG NameLen,
+    const WCHAR *Name,
+    BOOLEAN bCheckObjectExists,
+    BOOLEAN bIsMessage)
+{
     NTSTATUS status;
     __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
     API_MONITOR_PUT2_ARGS *args = (API_MONITOR_PUT2_ARGS *)parms;
@@ -1564,10 +1568,10 @@ _FX LONG SbieApi_MonitorPutMsg(
     memset(parms, 0, sizeof(parms));
     args->func_code                 = API_MONITOR_PUT2;
     args->log_type.val              = Type;
-    args->log_len.val64             = wcslen(Message) * sizeof(WCHAR);
-    args->log_ptr.val64             = (ULONG64)(ULONG_PTR)Message;
-    args->check_object_exists.val64 = FALSE;
-    args->is_message.val64          = TRUE;
+    args->log_len.val64             = NameLen * sizeof(WCHAR);
+    args->log_ptr.val64             = (ULONG64)(ULONG_PTR)Name;
+    args->check_object_exists.val64 = bCheckObjectExists;
+    args->is_message.val64          = bIsMessage;
     status = SbieApi_Ioctl(parms);
 
     return status;

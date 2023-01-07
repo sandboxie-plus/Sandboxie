@@ -251,6 +251,7 @@ extern HINSTANCE Dll_Instance;
 extern HMODULE Dll_Ntdll;
 extern HMODULE Dll_Kernel32;
 extern HMODULE Dll_KernelBase;
+extern HMODULE Dll_Win32u;
 // $Workaround$ - 3rd party fix
 extern HMODULE Dll_DigitalGuardian;
 

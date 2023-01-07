@@ -21,7 +21,7 @@
 #define GDI_HANDLE_BUFFER_SIZE32  34
 #define GDI_HANDLE_BUFFER_SIZE64  60
 
-#if !defined(_M_X64)
+#ifndef _WIN64
 #define GDI_HANDLE_BUFFER_SIZE      GDI_HANDLE_BUFFER_SIZE32
 #else
 #define GDI_HANDLE_BUFFER_SIZE      GDI_HANDLE_BUFFER_SIZE64
@@ -199,6 +199,15 @@ typedef struct _TEB_ACTIVE_FRAME
 	PTEB_ACTIVE_FRAME_CONTEXT Context;
 } TEB_ACTIVE_FRAME, *PTEB_ACTIVE_FRAME;
 
+typedef struct _ACTIVATION_CONTEXT_STACK
+{
+	struct _RTL_ACTIVATION_CONTEXT_STACK_FRAME* ActiveFrame;
+	LIST_ENTRY FrameListCache;
+	ULONG Flags;
+	ULONG NextCookieSequenceNumber;
+	ULONG StackId;
+} ACTIVATION_CONTEXT_STACK, * PACTIVATION_CONTEXT_STACK;
+
 typedef struct _TEB
 {
 	NT_TIB NtTib;
@@ -218,15 +227,40 @@ typedef struct _TEB
 	PVOID WOW32Reserved;
 	LCID CurrentLocale;
 	ULONG FpSoftwareStatusRegister;
-	PVOID SystemReserved1[54];
-	NTSTATUS ExceptionCode;
-	PVOID ActivationContextStackPointer;
-#if defined(_M_X64)
-	UCHAR SpareBytes[24];
+
+	PVOID ReservedForDebuggerInstrumentation[16];
+#ifdef _WIN64
+	PVOID SystemReserved1[30];
 #else
-	UCHAR SpareBytes[36];
+	PVOID SystemReserved1[26];
 #endif
+
+	CHAR PlaceholderCompatibilityMode;
+	BOOLEAN PlaceholderHydrationAlwaysExplicit;
+	CHAR PlaceholderReserved[10];
+
+	ULONG ProxiedProcessId;
+	ACTIVATION_CONTEXT_STACK ActivationStack;
+
+	UCHAR WorkingOnBehalfTicket[8];
+	NTSTATUS ExceptionCode;
+
+	PACTIVATION_CONTEXT_STACK ActivationContextStackPointer;
+	ULONG_PTR InstrumentationCallbackSp;
+	ULONG_PTR InstrumentationCallbackPreviousPc;
+	ULONG_PTR InstrumentationCallbackPreviousSp;
+#ifdef _WIN64
 	ULONG TxFsContext;
+#endif
+
+	BOOLEAN InstrumentationCallbackDisabled;
+#ifdef _WIN64
+	BOOLEAN UnalignedLoadStoreExceptions;
+#endif
+#ifndef _WIN64
+	UCHAR SpareBytes[23];
+	ULONG TxFsContext;
+#endif
 
 	GDI_TEB_BATCH GdiTebBatch;
 	CLIENT_ID RealClientId;
@@ -257,7 +291,7 @@ typedef struct _TEB
 	PVOID DbgSsReserved[2];
 
 	ULONG HardErrorMode;
-#if defined(_M_X64)
+#ifdef _WIN64
 	PVOID Instrumentation[11];
 #else
 	PVOID Instrumentation[9];
@@ -291,7 +325,7 @@ typedef struct _TEB
 	ULONG_PTR SoftPatchPtr1;
 	PVOID ThreadPoolData;
 	PVOID *TlsExpansionSlots;
-#if defined(_M_X64)
+#ifdef _WIN64
 	PVOID DeallocationBStore;
 	PVOID BStoreLimit;
 #endif
@@ -330,7 +364,11 @@ typedef struct _TEB
 			USHORT DisableUserStackWalk : 1;
 			USHORT RtlExceptionAttached : 1;
 			USHORT InitialThread : 1;
-			USHORT SpareSameTebBits : 1;
+            USHORT SessionAware : 1;
+            USHORT LoadOwner : 1;
+            USHORT LoaderWorker : 1;
+            USHORT SkipLoaderInit : 1;
+            USHORT SkipFileAPIBrokering : 1;
 		};
 	};
 
@@ -338,8 +376,14 @@ typedef struct _TEB
 	PVOID TxnScopeExitCallback;
 	PVOID TxnScopeContext;
 	ULONG LockCount;
-	ULONG SpareUlong0;
+	LONG WowTebOffset;
 	PVOID ResourceRetValue;
+	PVOID ReservedForWdf;
+	ULONGLONG ReservedForCrt;
+	GUID EffectiveContainerId;
+	ULONGLONG LastSleepCounter; // Win11
+	ULONG SpinCallCount;
+	ULONGLONG ExtendedFeatureDisableMask;
 } TEB, *PTEB;
 
 

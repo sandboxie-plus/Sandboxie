@@ -83,7 +83,7 @@ CTraceTree::CTraceTree(QWidget* parent)
 	//connect(m_pBoxTree, SIGNAL(ColumnChanged(int, bool)), this, SLOT(OnColumnsChanged()));
 
 	//m_pMainLayout->addWidget(CFinder::AddFinder(m_pTreeList, m_pSortProxy));
-	m_pMainLayout->addWidget(CFinder::AddFinder(m_pTreeList, this));
+	m_pMainLayout->addWidget(CFinder::AddFinder(m_pTreeList, this, CFinder::eHighLight));
 
 
 	QByteArray Columns = theConf->GetBlob("MainWindow/TraceLog_Columns");
@@ -258,7 +258,7 @@ CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 
 	m_pLayout->addWidget(m_pTrace);
 
-	QObject::connect(m_pTrace, SIGNAL(FilterSet(const QRegularExpression&, bool, int)), this, SLOT(SetFilter(const QRegularExpression&, bool, int)));
+	QObject::connect(m_pTrace, SIGNAL(FilterSet(const QString&, int, int)), this, SLOT(SetFilter(const QString&, int, int)));
 
 	m_pMonitor = new CMonitorList(this);
 	m_pMonitor->m_pMonitorModel->SetObjTree(m_pObjectTree->isChecked());
@@ -306,7 +306,7 @@ void CTraceView::Refresh()
 
 		quint64 start = GetCurCycle();
 		m_pTrace->m_pTraceModel->Clear();
-		qDebug() << "CTraceModel::Clear took" << (GetCurCycle() - start) / 1000000.0 << "s";
+		qDebug() << "Clear took" << (GetCurCycle() - start) / 1000000.0 << "s";
 
 		m_pMonitor->m_pMonitorModel->Clear();
 		m_FullRefresh = false;
@@ -335,8 +335,10 @@ void CTraceView::Refresh()
 	if (m_LastCount == ResourceLog.count())
 		return;
 
-	bool bHasFilter = !m_FilterExp.pattern().isEmpty();
+	//bool bHasFilter = !m_FilterExp.pattern().isEmpty();
+	bool bHasFilter = !m_FilterExp.isEmpty();
 
+	quint64 start = GetCurCycle();
 	for (; i < ResourceLog.count(); i++)
 	{
 		const CTraceEntryPtr& pEntry = ResourceLog.at(i);
@@ -379,11 +381,11 @@ void CTraceView::Refresh()
 		}
 		else
 		{
-			if (!m_bHighLight && bHasFilter) {
+			if (bHasFilter && !m_bHighLight) {
 				if (!pEntry->GetName().contains(m_FilterExp)
 					&& !pEntry->GetMessage().contains(m_FilterExp)
-					&& !pEntry->GetTypeStr().contains(m_FilterExp)
-					//&& !pEntry->GetStautsStr().contains(m_FilterExp)
+					//&& !pEntry->GetTypeStr().contains(m_FilterExp) // dont filter on non static strings !!!
+					//&& !pEntry->GetStautsStr().contains(m_FilterExp) // dont filter on non static strings !!!
 					&& !pEntry->GetProcessName().contains(m_FilterExp))
 						continue;
 			}
@@ -403,6 +405,7 @@ void CTraceView::Refresh()
 			m_TraceList.append(pEntry);
 		}
 	}
+	qDebug() << "Filtering took" << (GetCurCycle() - start) / 1000000.0 << "s";
 
 	m_LastCount = ResourceLog.count();
 	if(m_LastCount)
@@ -433,7 +436,7 @@ void CTraceView::Refresh()
 	{
 		quint64 start = GetCurCycle();
 		QList<QModelIndex> NewBranches = m_pTrace->m_pTraceModel->Sync(m_TraceList);
-		qDebug() << "CTraceModel::Sync took" << (GetCurCycle() - start) / 1000000.0 << "s";
+		qDebug() << "Sync took" << (GetCurCycle() - start) / 1000000.0 << "s";
 
 		if (m_pTrace->m_pTraceModel->IsTree())
 		{
@@ -535,10 +538,13 @@ void CTraceView::UpdateFilters()
 	}
 }
 
-void CTraceView::SetFilter(const QRegularExpression& Exp, bool bHighLight, int Col)
+void CTraceView::SetFilter(const QString& Exp, int iOptions, int Col)
 {
+	//QString ExpStr = ((iOptions & CFinder::eRegExp) == 0) ? Exp : (".*" + QRegularExpression::escape(Exp) + ".*");
+	//QRegularExpression RegExp(ExpStr, (iOptions & CFinder::eCaseSens) != 0 ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
+	//m_FilterExp = RegExp;
 	m_FilterExp = Exp;
-	m_bHighLight = bHighLight;
+	m_bHighLight = (iOptions & CFinder::eHighLight) != 0;
 	//m_FilterCol = Col;
 
 	m_FullRefresh = true;

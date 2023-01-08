@@ -19,13 +19,13 @@ public:
 	CTraceModel*		m_pTraceModel;
 
 public slots:
-	void				SetFilter(const QRegularExpression& Exp, bool bHighLight = false, int Column = -1) {
-		emit FilterSet(Exp, bHighLight, Column);
+	void				SetFilter(const QString& Exp, int iOptions = 0, int Column = -1) {
+		emit FilterSet(Exp, iOptions, Column);
 	}
 	void				SelectNext() {}
 
 signals:
-	void				FilterSet(const QRegularExpression& Exp, bool bHighLight = false, int Column = -1);
+	void				FilterSet(const QString& Exp, int iOptions = 0, int Column = -1);
 };
 
 class CMonitorList : public CPanelWidget<QTreeViewEx>
@@ -61,7 +61,7 @@ public slots:
 
 private slots:
 	void				UpdateFilters();
-	void				SetFilter(const QRegularExpression& Exp, bool bHighLight = false, int Col = -1); // -1 = any
+	void				SetFilter(const QString& Exp, int iOptions = 0, int Col = -1); // -1 = any
 
 	void				SaveToFile();
 
@@ -85,7 +85,8 @@ protected:
 protected:
 	bool				m_FullRefresh;
 
-	QRegularExpression	m_FilterExp;
+	//QRegularExpression	m_FilterExp;
+	QString				m_FilterExp;
 	bool				m_bHighLight;
 	//int					m_FilterCol;
 	quint32				m_FilterPid;

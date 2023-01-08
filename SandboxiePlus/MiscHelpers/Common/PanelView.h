@@ -113,7 +113,7 @@ public:
 	{
 		m_pFinder = new CFinder(NULL, this, false);
 		m_pMainLayout->addWidget(m_pFinder);
-		QObject::connect(m_pFinder, SIGNAL(SetFilter(const QRegularExpression&, bool, int)), this, SLOT(SetFilter(const QRegularExpression&, bool, int)));
+		QObject::connect(m_pFinder, SIGNAL(SetFilter(const QString&, int, int)), this, SLOT(SetFilter(const QString&, int, int)));
 	}
 
 	static void ApplyFilter(QTreeWidgetEx* pTree, QTreeWidgetItem* pItem, const QRegularExpression& Exp/*, bool bHighLight = false, int Col = -1*/)
@@ -136,9 +136,11 @@ public:
 	}
 
 private slots:
-	void SetFilter(const QRegularExpression& Exp, bool bHighLight = false, int Col = -1) // -1 = any
+	void SetFilter(const QString& Exp, int iFormat, int Col = -1) // -1 = any
 	{
-		ApplyFilter(m_pTreeList, Exp);
+		QString ExpStr = ((iFormat & CFinder::eRegExp) == 0) ? Exp : (".*" + QRegularExpression::escape(Exp) + ".*");
+		QRegularExpression RegExp(ExpStr, (iFormat & CFinder::eCaseSens) != 0 ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
+		ApplyFilter(m_pTreeList, RegExp);
 	}
 
 private:

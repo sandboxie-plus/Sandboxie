@@ -80,14 +80,17 @@ public:
 	}
 
 public slots:
-	void SetFilter(const QRegularExpression& Exp, bool bHighLight = false, int Col = -1) // -1 = any
+	void SetFilter(const QString& Exp, int iOptions, int Col = -1) // -1 = any
 	{
+		QString ExpStr = ((iOptions & CFinder::eRegExp) == 0) ? Exp : (".*" + QRegularExpression::escape(Exp) + ".*");
+		QRegularExpression RegExp(ExpStr, (iOptions & CFinder::eCaseSens) != 0 ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
+
 		QModelIndex idx;
 		//if (m_pView) idx = m_pView->currentIndex();
 		m_iColumn = Col;
-		m_bHighLight = bHighLight;
+		m_bHighLight = (iOptions & CFinder::eHighLight) != 0;
 		setFilterKeyColumn(Col); 
-		setFilterRegularExpression(Exp);
+		setFilterRegularExpression(RegExp);
 		//if (m_pView) m_pView->setCurrentIndex(idx);
 		if (m_bHighLight)
 			emit layoutChanged();

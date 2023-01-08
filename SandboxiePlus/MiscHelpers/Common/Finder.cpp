@@ -3,7 +3,7 @@
 
 bool CFinder::m_DarkMode = false;
 
-QWidget* CFinder::AddFinder(QWidget* pList, QObject* pFilterTarget, bool HighLightOption, CFinder** ppFinder)
+QWidget* CFinder::AddFinder(QWidget* pList, QObject* pFilterTarget, int iOptions, CFinder** ppFinder)
 {
 	QWidget* pWidget = new QWidget();
 	QVBoxLayout* pLayout = new QVBoxLayout();
@@ -11,7 +11,7 @@ QWidget* CFinder::AddFinder(QWidget* pList, QObject* pFilterTarget, bool HighLig
 	pWidget->setLayout(pLayout);
 
 	pLayout->addWidget(pList);
-	CFinder* pFinder = new CFinder(pFilterTarget, pWidget, HighLightOption);
+	CFinder* pFinder = new CFinder(pFilterTarget, pWidget, iOptions);
 	pLayout->addWidget(pFinder);
 
 	if (ppFinder)
@@ -19,7 +19,7 @@ QWidget* CFinder::AddFinder(QWidget* pList, QObject* pFilterTarget, bool HighLig
 	return pWidget;
 }
 
-CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, bool HighLightOption)
+CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 :QWidget(parent)
 {
 	m_pSearchLayout = new QHBoxLayout();
@@ -34,13 +34,23 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, bool HighLightOption)
 	QObject::connect(m_pSearch, SIGNAL(textChanged(QString)), this, SLOT(OnText()));
     QObject::connect(m_pSearch, SIGNAL(returnPressed()), this, SLOT(OnReturn()));
 
-	m_pCaseSensitive = new QCheckBox(tr("Case Sensitive"));
-	m_pSearchLayout->addWidget(m_pCaseSensitive);
-	connect(m_pCaseSensitive, SIGNAL(stateChanged(int)), this, SLOT(OnUpdate()));
+	if ((iOptions & eCaseSens) != 0)
+	{
+		m_pCaseSensitive = new QCheckBox(tr("Case Sensitive"));
+		m_pSearchLayout->addWidget(m_pCaseSensitive);
+		connect(m_pCaseSensitive, SIGNAL(stateChanged(int)), this, SLOT(OnUpdate()));
+	}
+	else
+		m_pCaseSensitive = NULL;
 
-	m_pRegExp = new QCheckBox(tr("RegExp"));
-	m_pSearchLayout->addWidget(m_pRegExp);
-	connect(m_pRegExp, SIGNAL(stateChanged(int)), this, SLOT(OnUpdate()));
+	if ((iOptions & eRegExp) != 0)
+	{
+		m_pRegExp = new QCheckBox(tr("RegExp"));
+		m_pSearchLayout->addWidget(m_pRegExp);
+		connect(m_pRegExp, SIGNAL(stateChanged(int)), this, SLOT(OnUpdate()));
+	}
+	else
+		m_pRegExp = NULL;
 
 	m_pSortProxy = qobject_cast<QSortFilterProxyModel*>(pFilterTarget);
 
@@ -53,7 +63,7 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, bool HighLightOption)
 	else
 		m_pColumn = NULL;
 
-	if (HighLightOption)
+	if ((iOptions & eHighLight) != 0)
 	{
 		m_pHighLight = new QCheckBox(tr("Highlight"));
 		//m_pHighLight->setChecked(true);
@@ -92,7 +102,7 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, bool HighLightOption)
 	}
 
 	if (pFilterTarget) {
-		QObject::connect(this, SIGNAL(SetFilter(const QRegularExpression&, bool, int)), pFilterTarget, SLOT(SetFilter(const QRegularExpression&, bool, int)));
+		QObject::connect(this, SIGNAL(SetFilter(const QString&, int, int)), pFilterTarget, SLOT(SetFilter(const QString&, int, int)));
 		QObject::connect(this, SIGNAL(SelectNext()), pFilterTarget, SLOT(SelectNext()));
 	}
 
@@ -136,22 +146,19 @@ void CFinder::Open()
 	OnUpdate();
 }
 
-QRegularExpression CFinder::GetRegExp() const
-{
-	if (!isVisible() || m_pSearch->text().isEmpty())
-		return QRegularExpression();
-	QString Exp;
-	if(m_pRegExp->isChecked())
-		Exp = m_pSearch->text();
-	else
-		Exp = ".*" + QRegularExpression::escape(m_pSearch->text()) + ".*";
-	return QRegularExpression(Exp, m_pCaseSensitive->isChecked() ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
-}
-
 void CFinder::OnUpdate()
 {
 	m_pTimer->stop();
-	emit SetFilter(GetRegExp(), GetHighLight(), GetColumn());
+	if (!isVisible() || m_pSearch->text().isEmpty())
+		SetFilter(QString(), 0, GetColumn());
+	int iOptions = 0;
+	if (GetRegExp())
+		iOptions |= eRegExp;
+	if (GetCaseSensitive())
+		iOptions |= eCaseSens;
+	if (GetHighLight())
+		iOptions |= eHighLight;
+	SetFilter(m_pSearch->text(), iOptions, GetColumn());
 }
 
 void CFinder::OnText()
@@ -169,6 +176,6 @@ void CFinder::OnReturn()
 
 void CFinder::Close()
 {
-	emit SetFilter(QRegularExpression());
+	emit SetFilter(QString());
 	hide();
 }

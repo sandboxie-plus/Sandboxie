@@ -821,7 +821,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
 
         if (!traced && ((proc->call_trace & TRACE_ALLOW) || ((status != STATUS_SUCCESS) && (proc->call_trace & TRACE_DENY))))
         {
-            // Supress Sbie's own calls to DeviceIoControlFile
+            // Suppress Sbie's own calls to DeviceIoControlFile
             if ((strcmp(entry->name, "DeviceIoControlFile") != 0) || user_args[5] != API_SBIEDRV_CTLCODE)
             {
                 WCHAR trace_str[128];

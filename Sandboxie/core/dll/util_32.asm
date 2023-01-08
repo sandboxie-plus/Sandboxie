@@ -311,7 +311,7 @@ InstrumentationCallbackAsm@0 proc
     push    eax                         ; Return value
     push    ecx                         ; Return address
     call    _InstrumentationCallback@8
-    ;add     esp, 08h                    ; Correct stack postion
+    ;add     esp, 08h                    ; Correct stack position
 
     popfd                               ; Restore stored flags
     popad                               ; Restore stored registers

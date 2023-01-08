@@ -295,7 +295,7 @@ void CTreeItemModel::Fill(STreeNode* pParent, /*const QModelIndex &parent,*/ con
 
 			//int Count = pParent->Children.count();
 			//beginInsertRows(parent, Count, Count);
-			//if(!m_LeafsOnly) // when all non virtual entries are always leafs, dont fill the aux map
+			//if(!m_LeafsOnly) // when all non virtual entries are always leafs, don't fill the aux map
 			//	pParent->Aux.insert(pNode->ID, pParent->Children.size());
 			pNode->Row = pParent->Children.size();
 			pParent->Children.append(pNode);

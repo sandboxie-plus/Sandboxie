@@ -1370,7 +1370,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 			m_pEnableMonitoring->setChecked(bIsMonitoring);
 			int iTraceCount = theAPI->GetTraceCount();
 			if (!bIsMonitoring && iTraceCount > 0)
-				bIsMonitoring = true; // don't disable the view as logn as there are entries shown
+				bIsMonitoring = true; // don't disable the view as long as there are entries shown
 			if (bIsMonitoring && m_pTraceView)
 				m_pTraceInfo->setText(QString::number(iTraceCount));
 			m_pTraceView->setEnabled(bIsMonitoring);

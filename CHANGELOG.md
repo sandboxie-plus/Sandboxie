@@ -4,18 +4,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.6.5 / 5.61.5] - 2022-12-??
+## [1.6.5 / 5.61.5] - 2023-??-??
 
 ### Added 
-- added user mode sys call tracing, now sys calls can be logged also in compartment type boxes as well as all win32k syscall
+- added user mode syscall tracing, now system calls can be logged also in compartment type boxes as well as all Win32k syscalls
 
 ### Changed
-- reworked trase log model, not it can load over 10e6 entries un under 1 second
+- reworked trace log model, now it can load over 10e6 entries in under 1 second
 
 ### Fixed
-- fixed issue with msedge in a security enchanced box [#2571](https://github.com/sandboxie-plus/Sandboxie/issues/2571)
-- opened OpenIpcPath=\{BEC19D6F-D7B2-41A8-860C-8787BB964F2D} on ARM64 systems 
-- fixed incompatybility with windows 11 21h2 ARM64 [#2431](https://github.com/sandboxie-plus/Sandboxie/issues/2431)
+- fixed issue with Microsoft Edge in a security enhanced box [#2571](https://github.com/sandboxie-plus/Sandboxie/issues/2571)
+- opened OpenIpcPath=\\{BEC19D6F-D7B2-41A8-860C-8787BB964F2D} on ARM64 systems
+- fixed incompatibility with Windows 11 21H2 ARM64 [#2431](https://github.com/sandboxie-plus/Sandboxie/issues/2431)
 
 
 

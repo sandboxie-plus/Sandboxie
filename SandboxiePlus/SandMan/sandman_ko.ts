@@ -3944,7 +3944,7 @@ No will choose: %2</source>
     <message>
         <location filename="Models/TraceModel.cpp" line="168"/>
         <source>Thread %1</source>
-        <translation type="unfinished"></translation>
+        <translation>스레드 %1</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="309"/>
@@ -3977,7 +3977,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/TraceView.cpp" line="186"/>
         <source>Show NT Object Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>NT 개체 트리 표시</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="193"/>

@@ -3946,7 +3946,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Models/TraceModel.cpp" line="168"/>
         <source>Thread %1</source>
-        <translation type="unfinished"></translation>
+        <translation>İş Parçacığı %1</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="309"/>
@@ -4016,7 +4016,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/TraceView.cpp" line="186"/>
         <source>Show NT Object Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>NT Nesne Ağacını Göster</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="218"/>

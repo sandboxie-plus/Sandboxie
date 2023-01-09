@@ -4337,7 +4337,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Views/TraceView.cpp" line="186"/>
         <source>Show NT Object Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige NT Objektbaum</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="193"/>

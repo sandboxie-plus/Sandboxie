@@ -11,11 +11,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - reworked trace log model, now it can load over 10e6 entries in under 1 second
+- removed ApiLog support is now hidden from the trace UI when the apropriate dll's are missing 
 
 ### Fixed
 - fixed issue with Microsoft Edge in a security enhanced box [#2571](https://github.com/sandboxie-plus/Sandboxie/issues/2571)
 - opened OpenIpcPath=\\{BEC19D6F-D7B2-41A8-860C-8787BB964F2D} on ARM64 systems
 - fixed incompatibility with Windows 11 21H2 ARM64 [#2431](https://github.com/sandboxie-plus/Sandboxie/issues/2431)
+
 
 
 

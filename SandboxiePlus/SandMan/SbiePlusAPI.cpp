@@ -661,12 +661,18 @@ void CSandBoxPlus::SetLogApi(bool bEnable)
 		//InsertText("OpenPipePath", "\\Device\\NamedPipe\\LogAPI");
 		InsertText("InjectDll", "\\LogAPI\\logapi32.dll");
 		InsertText("InjectDll64", "\\LogAPI\\logapi64.dll");
+#ifdef _M_ARM64
+		InsertText("InjectDllARM64", "\\LogAPI\\logapi64a.dll");
+#endif
 	}
 	else
 	{
 		//DelValue("OpenPipePath", "\\Device\\NamedPipe\\LogAPI");
 		DelValue("InjectDll", "\\LogAPI\\logapi32.dll");
 		DelValue("InjectDll64", "\\LogAPI\\logapi64.dll");
+#ifdef _M_ARM64
+		DelValue("InjectDllARM64", "\\LogAPI\\logapi64a.dll");
+#endif
 	}
 	m_bLogApiFound = bEnable;
 }

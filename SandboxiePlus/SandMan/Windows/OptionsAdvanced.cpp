@@ -149,8 +149,11 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkDbgTrace->setChecked(m_pBox->GetBool("DebugTrace", false));
 	ui.chkErrTrace->setChecked(m_pBox->GetBool("ErrorTrace", false));
 	QSharedPointer<CSandBoxPlus> pBoxPlus = m_pBox.objectCast<CSandBoxPlus>();
-	if (pBoxPlus)
+	if (pBoxPlus) {
+		QString logApiPath = theAPI->GetSbiePath() + "\\LogAPI\\logapi32.dll";
+		ui.chkApiTrace->setVisible(QFile::exists(logApiPath));
 		ui.chkApiTrace->setChecked(pBoxPlus->HasLogApi());
+	}
 
 	// triggers
 	ui.treeTriggers->clear();
@@ -283,7 +286,7 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkDbgTrace, "DebugTrace", "y");
 	WriteAdvancedCheck(ui.chkErrTrace, "ErrorTrace", "y");
 	QSharedPointer<CSandBoxPlus> pBoxPlus = m_pBox.objectCast<CSandBoxPlus>();
-	if (pBoxPlus)
+	if (pBoxPlus && ui.chkApiTrace->isVisible())
 		pBoxPlus->SetLogApi(ui.chkApiTrace->isChecked());
 
 	// triggers

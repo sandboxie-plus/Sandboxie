@@ -1234,7 +1234,11 @@ Sandboxie Control: %2 版本
 .
 
 3504;txt;01
-支持 &Sandboxie
+通过捐赠支持 &Sandboxie
+.
+
+3505;txt;01
+为 Sandboxie 做出贡献
 .
 
 3451;txt;01

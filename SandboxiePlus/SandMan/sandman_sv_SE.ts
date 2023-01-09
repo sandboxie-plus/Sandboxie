@@ -4120,9 +4120,9 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <location filename="Views/TraceView.cpp" line="210"/>
         <location filename="Views/TraceView.cpp" line="211"/>
         <location filename="Views/TraceView.cpp" line="220"/>
-        <location filename="Views/TraceView.cpp" line="453"/>
         <location filename="Views/TraceView.cpp" line="456"/>
-        <location filename="Views/TraceView.cpp" line="557"/>
+        <location filename="Views/TraceView.cpp" line="459"/>
+        <location filename="Views/TraceView.cpp" line="563"/>
         <source>[All]</source>
         <translation>[Alla]</translation>
     </message>
@@ -4177,27 +4177,27 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation>Rensa spårloggen</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="526"/>
+        <location filename="Views/TraceView.cpp" line="529"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="533"/>
+        <location filename="Views/TraceView.cpp" line="536"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="599"/>
+        <location filename="Views/TraceView.cpp" line="605"/>
         <source>Save trace log to file</source>
         <translation>Spara spårloggen till en fil</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="605"/>
+        <location filename="Views/TraceView.cpp" line="611"/>
         <source>Failed to open log file for writing</source>
         <translation>Misslyckades att öppna loggfilen för skrivande</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="625"/>
+        <location filename="Views/TraceView.cpp" line="631"/>
         <source>Unknown</source>
         <translation>Okänd</translation>
     </message>
@@ -4205,7 +4205,7 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="658"/>
+        <location filename="Views/TraceView.cpp" line="664"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation>Sandboxie-Plus - Spårövervakare</translation>
     </message>

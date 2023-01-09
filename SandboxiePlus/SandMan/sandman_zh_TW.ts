@@ -3895,9 +3895,9 @@ No will choose: %2</source>
         <location filename="Views/TraceView.cpp" line="210"/>
         <location filename="Views/TraceView.cpp" line="211"/>
         <location filename="Views/TraceView.cpp" line="220"/>
-        <location filename="Views/TraceView.cpp" line="453"/>
         <location filename="Views/TraceView.cpp" line="456"/>
-        <location filename="Views/TraceView.cpp" line="557"/>
+        <location filename="Views/TraceView.cpp" line="459"/>
+        <location filename="Views/TraceView.cpp" line="563"/>
         <source>[All]</source>
         <translation>[所有]</translation>
     </message>
@@ -3952,22 +3952,22 @@ No will choose: %2</source>
         <translation>清理追蹤日誌</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="599"/>
+        <location filename="Views/TraceView.cpp" line="605"/>
         <source>Save trace log to file</source>
         <translation>儲存追蹤日誌到檔案</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="605"/>
+        <location filename="Views/TraceView.cpp" line="611"/>
         <source>Failed to open log file for writing</source>
         <translation>無法開啟日誌檔案進行寫入</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="625"/>
+        <location filename="Views/TraceView.cpp" line="631"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="526"/>
+        <location filename="Views/TraceView.cpp" line="529"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
@@ -3977,7 +3977,7 @@ No will choose: %2</source>
         <translation>監視模式</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="533"/>
+        <location filename="Views/TraceView.cpp" line="536"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
@@ -3985,7 +3985,7 @@ No will choose: %2</source>
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="658"/>
+        <location filename="Views/TraceView.cpp" line="664"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation>Sandboxie-Plus - 追蹤監測</translation>
     </message>

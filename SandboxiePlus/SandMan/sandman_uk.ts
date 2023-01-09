@@ -4046,9 +4046,9 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Views/TraceView.cpp" line="210"/>
         <location filename="Views/TraceView.cpp" line="211"/>
         <location filename="Views/TraceView.cpp" line="220"/>
-        <location filename="Views/TraceView.cpp" line="453"/>
         <location filename="Views/TraceView.cpp" line="456"/>
-        <location filename="Views/TraceView.cpp" line="557"/>
+        <location filename="Views/TraceView.cpp" line="459"/>
+        <location filename="Views/TraceView.cpp" line="563"/>
         <source>[All]</source>
         <translation>[Всі]</translation>
     </message>
@@ -4103,22 +4103,22 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Очистити журнал відстеження</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="599"/>
+        <location filename="Views/TraceView.cpp" line="605"/>
         <source>Save trace log to file</source>
         <translation>Зберегти журнал у файл</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="605"/>
+        <location filename="Views/TraceView.cpp" line="611"/>
         <source>Failed to open log file for writing</source>
         <translation>Не вдалось відкрити файл журналу для запису</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="625"/>
+        <location filename="Views/TraceView.cpp" line="631"/>
         <source>Unknown</source>
         <translation>Невідомо</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="526"/>
+        <location filename="Views/TraceView.cpp" line="529"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
@@ -4128,7 +4128,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Режим монітора</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="533"/>
+        <location filename="Views/TraceView.cpp" line="536"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
@@ -4136,7 +4136,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="658"/>
+        <location filename="Views/TraceView.cpp" line="664"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation>Sandboxie-Plus - Монітор відстеження</translation>
     </message>

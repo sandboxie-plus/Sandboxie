@@ -4350,9 +4350,9 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <location filename="Views/TraceView.cpp" line="210"/>
         <location filename="Views/TraceView.cpp" line="211"/>
         <location filename="Views/TraceView.cpp" line="220"/>
-        <location filename="Views/TraceView.cpp" line="453"/>
         <location filename="Views/TraceView.cpp" line="456"/>
-        <location filename="Views/TraceView.cpp" line="557"/>
+        <location filename="Views/TraceView.cpp" line="459"/>
+        <location filename="Views/TraceView.cpp" line="563"/>
         <source>[All]</source>
         <translation>[Alle]</translation>
     </message>
@@ -4407,17 +4407,17 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <translation>Rückverfolgungsprotokoll aufräumen</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="599"/>
+        <location filename="Views/TraceView.cpp" line="605"/>
         <source>Save trace log to file</source>
         <translation>Rückverfolgungsprotokoll in Datei speichern</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="605"/>
+        <location filename="Views/TraceView.cpp" line="611"/>
         <source>Failed to open log file for writing</source>
         <translation>Konnte die Protokolldatei nicht zum Schreiben öffnen</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="625"/>
+        <location filename="Views/TraceView.cpp" line="631"/>
         <source>Unknown</source>
         <translation>Unbekannt</translation>
     </message>
@@ -4427,12 +4427,12 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <translation type="vanished">Filtere nur ausgewählte Boxen</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="526"/>
+        <location filename="Views/TraceView.cpp" line="529"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="533"/>
+        <location filename="Views/TraceView.cpp" line="536"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
@@ -4440,7 +4440,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="658"/>
+        <location filename="Views/TraceView.cpp" line="664"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation>Sandboxie-Plus - Rückverfolgungsmonitor</translation>
     </message>

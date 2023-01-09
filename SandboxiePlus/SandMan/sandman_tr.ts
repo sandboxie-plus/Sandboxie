@@ -3987,9 +3987,9 @@ Hayır şunları seçer: %2</translation>
         <location filename="Views/TraceView.cpp" line="210"/>
         <location filename="Views/TraceView.cpp" line="211"/>
         <location filename="Views/TraceView.cpp" line="220"/>
-        <location filename="Views/TraceView.cpp" line="453"/>
         <location filename="Views/TraceView.cpp" line="456"/>
-        <location filename="Views/TraceView.cpp" line="557"/>
+        <location filename="Views/TraceView.cpp" line="459"/>
+        <location filename="Views/TraceView.cpp" line="563"/>
         <source>[All]</source>
         <translation>[Tümü]</translation>
     </message>
@@ -3999,12 +3999,12 @@ Hayır şunları seçer: %2</translation>
         <translation>TID:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="526"/>
+        <location filename="Views/TraceView.cpp" line="529"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="533"/>
+        <location filename="Views/TraceView.cpp" line="536"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
@@ -4059,17 +4059,17 @@ Hayır şunları seçer: %2</translation>
         <translation>İzleme Günlüğünü Temizle</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="599"/>
+        <location filename="Views/TraceView.cpp" line="605"/>
         <source>Save trace log to file</source>
         <translation>İzleme günlüğünü dosyaya kaydet</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="605"/>
+        <location filename="Views/TraceView.cpp" line="611"/>
         <source>Failed to open log file for writing</source>
         <translation>Günlük dosyası yazmak için açılamadı</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="625"/>
+        <location filename="Views/TraceView.cpp" line="631"/>
         <source>Unknown</source>
         <translation>Bilinmeyen</translation>
     </message>
@@ -4082,7 +4082,7 @@ Hayır şunları seçer: %2</translation>
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="658"/>
+        <location filename="Views/TraceView.cpp" line="664"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation>Sandboxie-Plus - İzleme Monitörü</translation>
     </message>

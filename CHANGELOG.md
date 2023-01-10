@@ -8,11 +8,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.6.6 / 5.61.6] - 2023-01-?
 
 
-### fixed
-- fixed potential BSOD issue in the driver
-
-### changed
+## Changed
 - improved trace log retrival greately improving performance
+
+### Fixed
+- fixed potential BSOD issue in the driver
+- fixed crash in in trace log [#2599](https://github.com/sandboxie-plus/Sandboxie/issues/2599)
 
 
 

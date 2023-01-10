@@ -2,7 +2,5 @@
 * Missing Messages in Text-SimpChinese-2052.txt
 *==========
 
-3505;txt;01
-Contribute to Sandboxie
-.
+There are no missing messages.
 

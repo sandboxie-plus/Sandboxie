@@ -63,12 +63,16 @@ struct SSbieAPI
 
 		lastMessageNum = 0;
 		//lastRecordNum = 0;
+		traceBuffer = NULL;
+		traceBufferLen = 0;
 
 		SbieMsgDll = NULL;
 
 		SvcLock = 0;
 	}
 	~SSbieAPI() {
+		if (traceBuffer) 
+			free(traceBuffer);
 	}
 
 	NTSTATUS IoControl(ULONG64 *parms)
@@ -94,6 +98,8 @@ struct SSbieAPI
 	bool clearingBuffers;
 	ULONG lastMessageNum;
 	//ULONG lastRecordNum;
+	UCHAR* traceBuffer;
+	ULONG traceBufferLen;
 
 	HMODULE SbieMsgDll;
 
@@ -2487,6 +2493,7 @@ bool CSbieAPI::IsMonitoring()
 
 bool CSbieAPI::GetMonitor()
 {
+#if 0
 	ULONG type;
 	ULONG pid = 0;
 	ULONG tid = 0;
@@ -2532,6 +2539,65 @@ bool CSbieAPI::GetMonitor()
 	m_TraceCache.append(LogEntry);
 
 	return true;
+
+#else // bulk retrival starting with build 1.6.6
+
+	if (m->traceBuffer == NULL) {
+		m->traceBufferLen = 256 * PAGE_SIZE;
+		m->traceBuffer = (UCHAR*)malloc(m->traceBufferLen);
+	}
+
+	ULONG buffer_len = m->traceBufferLen;
+	UCHAR* buffer = m->traceBuffer;
+
+	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+    API_MONITOR_GET2_ARGS* args	= (API_MONITOR_GET2_ARGS*)parms;
+
+	memset(parms, 0, sizeof(parms));
+    args->func_code	= API_MONITOR_GET2;
+	args->buffer_ptr.val = (WCHAR*)buffer;
+	args->buffer_len.val = &buffer_len;
+
+	NTSTATUS status = m->IoControl(parms);
+	if (!NT_SUCCESS(status))
+		return false; // error or no more entries
+
+	if (m->clearingBuffers)
+		return true; 
+
+	for (UCHAR* ptr = buffer; *(ULONG*)ptr > 0; ) {
+
+		ULONG uSize = *(ULONG*)ptr;
+		ptr += sizeof(ULONG);
+
+		ULONG uType = *(ULONG*)ptr;
+		ptr += sizeof(ULONG);
+		uSize -= sizeof(ULONG);
+
+		ULONG uPid = *(ULONG*)ptr;
+		ptr += sizeof(ULONG);
+		uSize -= sizeof(ULONG);
+
+		ULONG uTid = *(ULONG*)ptr;
+		ptr += sizeof(ULONG);
+		uSize -= sizeof(ULONG);
+
+		QStringList LogData;
+		for (size_t pos = 0; pos < uSize; ) {
+			size_t len = wcslen((WCHAR*)(ptr + pos));
+			LogData.append(QString::fromWCharArray((WCHAR*)(ptr + pos), len));
+			pos += (len + 1) * sizeof(WCHAR);
+		}
+		ptr += uSize;
+
+		CTraceEntryPtr LogEntry = CTraceEntryPtr(new CTraceEntry(uPid, uTid, uType, LogData));
+
+		QMutexLocker Lock(&m_TraceMutex);
+		m_TraceCache.append(LogEntry);
+	}
+
+	return status == STATUS_MORE_ENTRIES;
+#endif
 }
 
 const QVector<CTraceEntryPtr>& CSbieAPI::GetTrace()

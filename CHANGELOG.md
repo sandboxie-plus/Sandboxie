@@ -4,6 +4,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.6.6 / 5.61.6] - 2023-01-?
+
+
+### fixed
+- fixed potential BSOD issue in the driver
+
+### changed
+- improved trace log retrival greately improving performance
+
+
+
+
 ## [1.6.5 / 5.61.5] - 2023-01-10
 
 ### Added

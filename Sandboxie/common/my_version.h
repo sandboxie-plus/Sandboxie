@@ -21,8 +21,8 @@
 #ifndef _MY_VERSION_H
 #define _MY_VERSION_H
 
-#define MY_VERSION_BINARY       5,61,5
-#define MY_VERSION_STRING       "5.61.5"
+#define MY_VERSION_BINARY       5,61,6
+#define MY_VERSION_STRING       "5.61.6"
 #define MY_ABI_VERSION          0x56000
 
 // These #defines are used by either Resource Compiler or NSIS installer
@@ -57,7 +57,6 @@
 
 #define START_EXE               L"Start.exe"
 
-// see also environment variable in session.bat
 #define SBIEDLL                 L"SbieDll"
 
 #define SBIEMSG_DLL             L"SbieMsg.dll"

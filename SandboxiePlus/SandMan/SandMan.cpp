@@ -289,6 +289,7 @@ CSandMan::~CSandMan()
 
 	killTimer(m_uTimerID);
 
+	m_pTrayIcon->show();
 	m_pTrayIcon->hide();
 
 	StoreState();

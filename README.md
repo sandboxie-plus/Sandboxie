@@ -2,6 +2,8 @@
 
 [![Plus license](https://img.shields.io/badge/Plus%20license-Custom%20-blue.svg)](./Installer/license.txt) [![Classic license](https://img.shields.io/github/license/Sandboxie-Plus/Sandboxie?label=Classic%20license&color=blue)](./LICENSE) [![GitHub Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie.svg)](https://github.com/sandboxie-plus/Sandboxie/releases/latest) [![GitHub Pre-Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie/all.svg?label=pre-release)](https://github.com/sandboxie-plus/Sandboxie/releases) [![GitHub Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/main.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions) [![GitHub Codespell Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml)
 
+Note: this is a community fork that took place after the open-source code release of Sandboxie and not the official continuation of the previous development (see the [project history](./README.md#-project-history)).
+
 Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT-based operating systems. It creates a sandbox-like isolated operating environment in which applications can be run or installed without permanently modifying local & mapped drives or the Windows registry. An isolated virtual environment allows controlled testing of untrusted programs and web surfing.<br>
 
 |  System requirements  |      Release notes     |      Security policy      |      Project maintenance   |      Contribution guidelines   |
@@ -39,7 +41,7 @@ A GitHub copy of the [Sandboxie documentation](https://sandboxie-plus.github.io/
 
 A partial archive of the [old Sandboxie forum](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums) that was previously maintained by Invincea is still available. If you need to find something specific, it is possible to use the following [search query](https://www.ecosia.org/search?method=index&q=site%3Ahttps%3A%2F%2Fsandboxie-website-archive.github.io%2Fwww.sandboxie.com%2Fold-forums%2F).
 
-## 📌 Project maintenance
+## 📌 Project history
 
 |    Project history  |      Maintainer  |
 |---------------------|------------------|
@@ -87,6 +89,7 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 - weihongx9315 - Windows Credentials fix
 - 1mm0rt41PC - Documentation additions
 - Luro223 - Documentation additions
+- lwcorp - Documentation additions
 
 ## 🌏 Translators
 

@@ -166,6 +166,19 @@ public:
 		return QFile::open(flags);
 	}
 
+	qint64 size() const override
+	{
+		qint64 Size = QFile::size();
+		if (QFileInfo(fileName()).isShortcut())
+		{
+			QFile File(fileName());
+			if (File.open(QFile::ReadOnly))
+				Size = File.size();
+			File.close();
+		}
+		return Size;
+	}
+
 protected:
 	CSbieProgressPtr m_pProgress;
 	CArchive* m_pArchive;

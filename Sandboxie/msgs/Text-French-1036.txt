@@ -198,6 +198,10 @@ SBIE1301 Le programme « %2 » a démarré hors du bac à sable
 # SBIE1304 Simulation clavier ou souris bloquée par processus « %2 »
 # .
 
+1305;pop;inf;02
+SBIE1305 Chargement de l'image du bac à sable bloquée - %2
+.
+
 1306;pop;inf;01
 SBIE1306 Le pilote de Sandboxie (SbieDrv) ne peut pas être déchargé actuellement
 .
@@ -474,6 +478,22 @@ SBIE2223 Pour augmenter la taille limite des fichiers à copier, double-cliquez 
 
 2224;pop;wrn;01
 SBIE2224 Le programme du bac à sable a planté : %2
+.
+
+2225;pop;wrn;01
+SBIE2225 Une tentative d'accès à un fichier EFS a été détectée : %2
+.
+
+2226;pop;wrn;01
+SBIE2226 Le processus n'a pas pu démarrer à cause d'une élévation manquante. Pour corriger la situation, "ApplyElevateCreateProcessFix=y" doit être ajouté au fichier ini, dans la section de ce bac à sable %2
+.
+
+2227;pop;wrn;01
+SBIE2227 '%2' se situe sur un volume ne supportant pas la convention de nommage 8.3. Il se peut que des problèmes surgissent avec d'anciennes applications ou installateurs.
+.
+
+2338;pop;err;01
+SBIE2338 Architecture non supportée rencontrée dans le processus : %2
 .
 
 #----------------------------------------------------------------------------
@@ -992,6 +1012,22 @@ Utilisateur inconnu, la configuration ne peut être enregistrée
 Une erreur est survenue en appliquant les réglages par défaut au bac à sable « %2 »
 .
 
+3315;txt;01
+Suppression du contenu du bac
+.
+
+3316;txt;01
+Annuler l'opération ?
+.
+
+3317;txt;01
+Préparation à la suppression : %2
+.
+
+3318;txt;01
+Suppression : %2
+.
+
 # 3321;txt;01
 #   -  La session de connexion est dans un bac à sable
 # .
@@ -1168,6 +1204,10 @@ Re&charger la configuration
 
 3504;txt;01
 &Soutenir Sandboxie
+.
+
+3505;txt;01
+Contribuer à Sanboxie
 .
 
 3451;txt;01
@@ -3488,6 +3528,32 @@ Si vous préférez utiliser une interface utilisateur pour contrôler ces option
 Sandboxie Plus renforce la confidentialité en passant d'un mode liste noire (accès en lecture à l'ensemble du disque sauf si une règle spécifique d’un dossier l’empêche) à un mode liste blanche (les programmes du bac à sable ne sont autorisés à lire que les emplacements génériques du système et l'accès en lecture à la plupart des données de l'utilisateur doit être explicitement accordé).
 
 L'interface utilisateur de Sandboxie Classic ne prend pas en charge ce mode de fonctionnement. Bien qu'il soit possible de le configurer à l'aide du fichier ini, il est recommandé d'utiliser l'interface moderne Sandboxie-Plus (SandMan.exe) si vous souhaitez utiliser des bacs à sable à confidentialité renforcée.
+.
+
+6010;txt;01
+Sandboxie est installé depuis plus de %2 jours.
+
+Pensez-vous que David et les contributeurs ont fait du bon boulot ?
+
+Pourquoi ne pas le leur montrer en soutenant le projet avec un certificat d'adhérent ?
+
+Sans ce certificat, Sandboxie va se mettre en pause quelques secondes afin de vous laisser le temps de songer à la possibilité de soutenir le projet.
+.
+
+6011;txt;01
+Attendre
+.
+
+6012;txt;01
+Poursuivre
+.
+
+6013;txt;01
+Quitter
+.
+
+6014;txt;01
+Obtenir un certificat
 .
 
 #----------------------------------------------------------------------------

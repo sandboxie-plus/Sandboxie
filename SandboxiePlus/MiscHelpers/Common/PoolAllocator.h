@@ -37,12 +37,10 @@ public:
         stack = top;
     }
     void dispose() {
-        if (stack) {
-            for (auto page : pages)
-                ::free(page);
-            pages.clear();
-            stack = nullptr;
-        }
+        for (auto page : pages)
+            ::free(page);
+        pages.clear();
+        stack = nullptr;
     }
 
 private:

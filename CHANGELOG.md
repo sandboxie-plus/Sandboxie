@@ -14,6 +14,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed potential BSOD issue in the driver
 - fixed crash in in trace log [#2599](https://github.com/sandboxie-plus/Sandboxie/issues/2599)
+- fixed tray issue [2600](https://github.com/sandboxie-plus/Sandboxie/pull/2600) (okrc)
+- fidex issues with shortcuts [#2601](https://github.com/sandboxie-plus/Sandboxie/pull/2601) (okrc)
 
 
 

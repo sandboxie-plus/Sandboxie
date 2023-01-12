@@ -2022,7 +2022,7 @@ Chemin complet : %4</translation>
         <location filename="SandMan.cpp" line="440"/>
         <source>Support Sandboxie-Plus with Donations</source>
         <oldsource>Support Sandboxie-Plus with a Donation</oldsource>
-        <translation type="unfinished">Soutenir Sandboxie-Plus avec un don</translation>
+        <translation>Soutenir Sandboxie-Plus avec un don</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="447"/>
@@ -2037,7 +2037,7 @@ Chemin complet : %4</translation>
     <message>
         <location filename="SandMan.cpp" line="445"/>
         <source>Contribute to Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>Contribuer à Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="449"/>
@@ -4288,7 +4288,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Views/TraceView.cpp" line="186"/>
         <source>Show NT Object Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher l&apos;arborescence des objets NT</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="193"/>
@@ -4379,7 +4379,6 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Views/TraceView.cpp" line="529"/>
         <source>%1 (%2)</source>
-        <translatorcomment>%1 ( ͡° ͜ʖ ͡°)</translatorcomment>
         <translation>%1 (%2)</translation>
     </message>
     <message>

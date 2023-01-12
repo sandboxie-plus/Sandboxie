@@ -3,15 +3,16 @@
 
 bool CFinder::m_DarkMode = false;
 
-QWidget* CFinder::AddFinder(QWidget* pList, QObject* pFilterTarget, int iOptions, CFinder** ppFinder)
+QWidget* CFinder::AddFinder(QTreeView* pTree, QObject* pFilterTarget, int iOptions, CFinder** ppFinder)
 {
 	QWidget* pWidget = new QWidget();
 	QVBoxLayout* pLayout = new QVBoxLayout();
 	pLayout->setContentsMargins(0,0,0,0);
 	pWidget->setLayout(pLayout);
 
-	pLayout->addWidget(pList);
+	pLayout->addWidget(pTree);
 	CFinder* pFinder = new CFinder(pFilterTarget, pWidget, iOptions);
+	pFinder->SetTree(pTree);
 	pLayout->addWidget(pFinder);
 
 	if (ppFinder)
@@ -52,9 +53,10 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 	else
 		m_pRegExp = NULL;
 
-	m_pSortProxy = qobject_cast<QSortFilterProxyModel*>(pFilterTarget);
+	m_pTree = NULL;
+	m_pModel = qobject_cast<QAbstractProxyModel*>(pFilterTarget);
 
-	if (m_pSortProxy) {
+	if (m_pModel) {
 		m_pColumn = new QComboBox();
 		m_pSearchLayout->addWidget(m_pColumn);
 		connect(m_pColumn, SIGNAL(currentIndexChanged(int)), this, SLOT(OnUpdate()));
@@ -66,7 +68,8 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 	if ((iOptions & eHighLight) != 0)
 	{
 		m_pHighLight = new QCheckBox(tr("Highlight"));
-		//m_pHighLight->setChecked(true);
+		if ((iOptions & eHighLightDefault) == eHighLightDefault)
+			m_pHighLight->setChecked(true);
 		m_pSearchLayout->addWidget(m_pHighLight);
 		connect(m_pHighLight, SIGNAL(stateChanged(int)), this, SLOT(OnUpdate()));
 	}
@@ -103,7 +106,7 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 
 	if (pFilterTarget) {
 		QObject::connect(this, SIGNAL(SetFilter(const QString&, int, int)), pFilterTarget, SLOT(SetFilter(const QString&, int, int)));
-		QObject::connect(this, SIGNAL(SelectNext()), pFilterTarget, SLOT(SelectNext()));
+		//QObject::connect(this, SIGNAL(SelectNext()), pFilterTarget, SLOT(SelectNext()));
 	}
 
 	m_pTimer = new QTimer(this);
@@ -116,6 +119,12 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 
 CFinder::~CFinder()
 {
+}
+
+void CFinder::SetTree(QTreeView* pTree) 
+{ 
+	m_pTree = pTree; 
+	QObject::connect(this, SIGNAL(SelectNext()), this, SLOT(OnSelectNext()));
 }
 
 bool CFinder::eventFilter(QObject* source, QEvent* event)
@@ -132,11 +141,11 @@ bool CFinder::eventFilter(QObject* source, QEvent* event)
 
 void CFinder::Open()
 {
-	if (m_pSortProxy && m_pColumn->count() == 0)
+	if (m_pModel && m_pColumn->count() == 0)
 	{
 		m_pColumn->addItem(tr("All columns"), -1);
-		for (int i = 0; i < m_pSortProxy->columnCount(); i++)
-			m_pColumn->addItem(m_pSortProxy->headerData(i, Qt::Horizontal, Qt::DisplayRole).toString(), i);
+		for (int i = 0; i < m_pModel->columnCount(); i++)
+			m_pColumn->addItem(m_pModel->headerData(i, Qt::Horizontal, Qt::DisplayRole).toString(), i);
 		m_pColumn->setVisible(true);
 	}
 
@@ -158,7 +167,12 @@ void CFinder::OnUpdate()
 		iOptions |= eCaseSens;
 	if (GetHighLight())
 		iOptions |= eHighLight;
-	SetFilter(m_pSearch->text(), iOptions, GetColumn());
+	QString Exp = m_pSearch->text();
+
+	QString ExpStr = ((iOptions & CFinder::eRegExp) == 0) ? Exp : (".*" + QRegularExpression::escape(Exp) + ".*");
+	m_RegExp = QRegularExpression(ExpStr, (iOptions & CFinder::eCaseSens) != 0 ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
+
+	SetFilter(Exp, iOptions, GetColumn());
 }
 
 void CFinder::OnText()
@@ -178,4 +192,126 @@ void CFinder::Close()
 {
 	emit SetFilter(QString());
 	hide();
+}
+
+////////////////////////////////////////////////////////////////
+//
+
+bool CFinder::MatchString(const QString& value)
+{
+	return value.contains(m_RegExp);
+}
+
+bool CFinder::MatchCell(QModelIndex idx, int column)
+{
+	QModelIndex tmp = idx.sibling(idx.row(), column);
+
+	QString str = m_pModel->data(tmp, Qt::DisplayRole).toString();
+	return MatchString(str);
+}
+
+bool CFinder::MatchRow(QModelIndex idx)
+{
+	int iColumn = GetColumn();
+	if (iColumn != -1)
+		return MatchCell(idx, iColumn);
+
+	for(int col = 0; col < m_pModel->columnCount(idx); col++) {
+		if (MatchCell(idx, col))
+			return true;
+	}
+	return false;
+}
+
+QModelIndex	CFinder::FindNext(QModelIndex idx, bool next, int depth)
+{
+	if (MatchRow(idx) && !next)
+		return idx;
+	//Q_ASSERT(depth < 100);
+
+	if (m_pModel->hasChildren(idx))
+	{
+		int numRows = m_pModel->rowCount(idx);
+		for (int count = 0; count < numRows; count++) {
+			QModelIndex tmp = FindNext(m_pModel->index(count, 0, idx), false, depth + 1);
+			if (tmp.isValid())
+				return tmp;
+		}
+	}
+
+	for(;;) 
+	{
+		QModelIndex par = m_pModel->parent(idx);
+		if (!par.isValid() && depth > 0)
+			break;
+
+		int numRows = m_pModel->rowCount(par);
+		for (int count = idx.row() + 1; count < numRows; count++) {
+			QModelIndex tmp = FindNext(m_pModel->index(count, 0, par), false, depth + 1);
+			if (tmp.isValid())
+				return tmp;
+		}
+
+		if (!par.isValid())
+			break;
+		idx = par;
+	}
+
+	return QModelIndex();
+}
+
+QModelIndex	CFinder::FindPrev(QModelIndex idx, bool next, int depth)
+{
+	if (MatchRow(idx) && !next)
+		return idx;
+	//Q_ASSERT(depth < 100);
+
+	if (m_pModel->hasChildren(idx))
+	{
+		int numRows = m_pModel->rowCount(idx);
+		for (int count = numRows-1; count >= 0; count++) {
+			QModelIndex tmp = FindNext(m_pModel->index(count, 0, idx), false, depth + 1);
+			if (tmp.isValid())
+				return tmp;
+		}
+	}
+
+	for(;;) 
+	{
+		QModelIndex par = m_pModel->parent(idx);
+		if (!par.isValid() && depth > 0)
+			break;
+
+		int numRows = m_pModel->rowCount(par);
+		for (int count = idx.row() - 1; count >= 0; count--) {
+			QModelIndex tmp = FindNext(m_pModel->index(count, 0, par), false, depth + 1);
+			if (tmp.isValid())
+				return tmp;
+		}
+
+		if (!par.isValid())
+			break;
+		idx = par;
+	}
+
+	return QModelIndex();
+}
+
+void CFinder::OnSelectNext() 
+{
+	bool next = true;
+	QModelIndex idx = m_pTree->currentIndex();
+	if (!(next = idx.isValid()))
+		idx = m_pModel->index(0, 0);
+
+	//if (QApplication::keyboardModifiers() & Qt::ControlModifier)
+	if (QApplication::keyboardModifiers() & Qt::ShiftModifier)
+		idx = FindPrev(idx, next);
+	else
+		idx = FindNext(idx, next);
+
+	if (idx.isValid())
+		m_pTree->setCurrentIndex(idx);
+	else
+		QApplication::beep();
 }

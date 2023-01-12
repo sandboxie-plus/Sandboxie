@@ -5,8 +5,8 @@
 #include "../Models/SbieModel.h"
 #include "../Models/TraceModel.h"
 #include "../Models/MonitorModel.h"
+#include "../../MiscHelpers/Common/SortFilterProxyModel.h"
 
-class CTraceFilterProxyModel;
 
 class CTraceTree : public CPanelWidget<QTreeViewEx>
 {
@@ -19,13 +19,20 @@ public:
 	CTraceModel*		m_pTraceModel;
 
 public slots:
-	void				SetFilter(const QString& Exp, int iOptions = 0, int Column = -1) {
-		emit FilterSet(Exp, iOptions, Column);
-	}
-	void				SelectNext() {}
+	void				SetFilter(const QString& Exp, int iOptions = 0, int Column = -1);
 
 signals:
-	void				FilterSet(const QString& Exp, int iOptions = 0, int Column = -1);
+	void				FilterChanged();
+
+protected:
+	friend class CTraceView;
+
+	QString				GetFilterExp() const { return m_FilterExp; }
+
+	//QRegularExpression	m_FilterExp;
+	QString				m_FilterExp;
+	bool				m_bHighLight;
+	//int					m_FilterCol;
 };
 
 class CMonitorList : public CPanelWidget<QTreeViewEx>
@@ -61,7 +68,7 @@ public slots:
 
 private slots:
 	void				UpdateFilters();
-	void				SetFilter(const QString& Exp, int iOptions = 0, int Col = -1); // -1 = any
+	void				OnFilterChanged();
 
 	void				SaveToFile();
 
@@ -85,10 +92,6 @@ protected:
 protected:
 	bool				m_FullRefresh;
 
-	//QRegularExpression	m_FilterExp;
-	QString				m_FilterExp;
-	bool				m_bHighLight;
-	//int					m_FilterCol;
 	quint32				m_FilterPid;
 	quint32				m_FilterTid;
 	QList<quint32>		m_FilterTypes;

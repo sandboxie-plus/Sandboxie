@@ -553,6 +553,8 @@ _FX void Session_MonitorPutEx(ULONG type, const WCHAR** strings, ULONG* lengths,
 
     if (session->monitor_log) {
 
+        LARGE_INTEGER timestamp = Util_GetTimestamp();
+
 		ULONG pid = (ULONG)hpid;
         ULONG tid = (ULONG)htid;
 
@@ -561,12 +563,13 @@ _FX void Session_MonitorPutEx(ULONG type, const WCHAR** strings, ULONG* lengths,
 			data_len += ((lengths ? lengths [i] : wcslen(strings[i])) + 1) * sizeof(WCHAR);
 
         
-		//[Type 4][PID 4][TID 4][Data n*2]
-		SIZE_T entry_size = 4 + 4 + 4 + data_len;
+		//[Time 8][Type 4][PID 4][TID 4][Data n*2]
+		SIZE_T entry_size = 8 + 4 + 4 + 4 + data_len;
 
 		CHAR* write_ptr = log_buffer_push_entry((LOG_BUFFER_SIZE_T)entry_size, session->monitor_log, FALSE);
 		if (write_ptr) {
             WCHAR null_char = L'\0';
+            log_buffer_push_bytes((CHAR*)&timestamp.QuadPart, 8, &write_ptr, session->monitor_log);
 			log_buffer_push_bytes((CHAR*)&type, 4, &write_ptr, session->monitor_log);
 			log_buffer_push_bytes((CHAR*)&pid, 4, &write_ptr, session->monitor_log);
             log_buffer_push_bytes((CHAR*)&tid, 4, &write_ptr, session->monitor_log);
@@ -925,6 +928,7 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS* proc, ULONG64* parms)
     API_MONITOR_GET_EX_ARGS* args = (API_MONITOR_GET_EX_ARGS*)parms;
     NTSTATUS status;
     //ULONG* seq_num;
+    LARGE_INTEGER timestamp;
     ULONG* log_type;
     ULONG* log_pid;
     ULONG* log_tid;
@@ -1007,7 +1011,9 @@ _FX NTSTATUS Session_Api_MonitorGetEx(PROCESS* proc, ULONG64* parms)
         //	__leave;
         //}
 
-        //[Type 4][PID 4][TID 4][Data n*2]
+        //[Time 8][Type 4][PID 4][TID 4][Data n*2]
+
+        log_buffer_get_bytes((CHAR*)&timestamp.QuadPart, 8, &read_ptr, session->monitor_log);
 
         log_buffer_get_bytes((CHAR*)log_type, 4, &read_ptr, session->monitor_log);
 

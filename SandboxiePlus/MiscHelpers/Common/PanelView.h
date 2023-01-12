@@ -136,10 +136,10 @@ public:
 	}
 
 private slots:
-	void SetFilter(const QString& Exp, int iFormat, int Col = -1) // -1 = any
+	void SetFilter(const QString& Exp, int iOptions, int Col = -1) // -1 = any
 	{
-		QString ExpStr = ((iFormat & CFinder::eRegExp) == 0) ? Exp : (".*" + QRegularExpression::escape(Exp) + ".*");
-		QRegularExpression RegExp(ExpStr, (iFormat & CFinder::eCaseSens) != 0 ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
+		QString ExpStr = ((iOptions & CFinder::eRegExp) == 0) ? Exp : (".*" + QRegularExpression::escape(Exp) + ".*");
+		QRegularExpression RegExp(ExpStr, (iOptions & CFinder::eCaseSens) != 0 ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
 		ApplyFilter(m_pTreeList, RegExp);
 	}
 
@@ -164,8 +164,6 @@ public:
 		m_pSortProxy->setDynamicSortFilter(true);
 
 		m_pTreeList->setModel(m_pSortProxy);
-		((CSortFilterProxyModel*)m_pSortProxy)->setView(m_pTreeList);
-		
 
 		m_pTreeList->setSelectionMode(QAbstractItemView::ExtendedSelection);
 #ifdef WIN32

@@ -2533,7 +2533,7 @@ bool CSbieAPI::GetMonitor()
 		pos += (len + 1) * sizeof(WCHAR);
 	}
 
-	CTraceEntryPtr LogEntry = CTraceEntryPtr(new CTraceEntry(pid, tid, type, LogData));
+	CTraceEntryPtr LogEntry = CTraceEntryPtr(new CTraceEntry(0, pid, tid, type, LogData));
 
 	QMutexLocker Lock(&m_TraceMutex);
 	m_TraceCache.append(LogEntry);
@@ -2570,6 +2570,10 @@ bool CSbieAPI::GetMonitor()
 		ULONG uSize = *(ULONG*)ptr;
 		ptr += sizeof(ULONG);
 
+		LONGLONG uTimestamp = *(LONGLONG*)ptr;
+		ptr += sizeof(LONGLONG);
+		uSize -= sizeof(LONGLONG);
+
 		ULONG uType = *(ULONG*)ptr;
 		ptr += sizeof(ULONG);
 		uSize -= sizeof(ULONG);
@@ -2590,7 +2594,7 @@ bool CSbieAPI::GetMonitor()
 		}
 		ptr += uSize;
 
-		CTraceEntryPtr LogEntry = CTraceEntryPtr(new CTraceEntry(uPid, uTid, uType, LogData));
+		CTraceEntryPtr LogEntry = CTraceEntryPtr(new CTraceEntry(FILETIME2ms(uTimestamp), uPid, uTid, uType, LogData));
 
 		QMutexLocker Lock(&m_TraceMutex);
 		m_TraceCache.append(LogEntry);

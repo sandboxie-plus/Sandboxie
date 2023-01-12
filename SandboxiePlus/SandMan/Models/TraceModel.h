@@ -15,6 +15,8 @@ public:
 	void			SetTree(bool bTree)				{ m_bTree = bTree; }
 	bool			IsTree() const					{ return m_bTree; }
 	
+	void			SetHighLight(const QString& Exp) { m_HighLightExp = Exp; }
+
 	QList<QModelIndex>	Sync(const QVector<CTraceEntryPtr>& EntryList);
 
 	CTraceEntryPtr	GetEntry(const QModelIndex& index) const;
@@ -95,6 +97,10 @@ protected:
 
 	STreeNode*				m_Root;
 	QHash<quint64, STreeNode*> m_Branches;
+
+	QString					m_HighLightExp;
+
+	bool					TestHighLight(STreeNode* pNode) const;
 
 	static PoolAllocator<sizeof(STreeNode)> m_NodeAllocator;
 };

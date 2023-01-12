@@ -25,7 +25,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 	//m_UserConfigChanged = false;
 
-	m_pSbieModel = new CSbieModel();
+	m_pSbieModel = new CSbieModel(this);
 	m_pSbieModel->SetTree(true);
 	m_pSbieModel->SetUseIcons(true);
 
@@ -50,7 +50,6 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 		m_pSbieModel->SetLargeIcons();
 		m_pSbieTree->setIconSize(QSize(32, 32));
 	}
-	((CSortFilterProxyModel*)m_pSortProxy)->setView(m_pSbieTree);
 
 	m_pSbieTree->setDragDropMode(QAbstractItemView::InternalMove);
 
@@ -82,7 +81,9 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	m_pMainLayout->addWidget(m_pSbieTree);
 	// 
 
-	m_pMainLayout->addWidget(new CFinder(m_pSortProxy, this));
+	CFinder* pFinder = new CFinder(m_pSortProxy, this);
+	m_pMainLayout->addWidget(pFinder);
+	pFinder->SetTree(m_pSbieTree);
 
 
 	connect(m_pSbieModel, SIGNAL(ToolTipCallback(const QVariant&, QString&)), this, SLOT(OnToolTipCallback(const QVariant&, QString&)), Qt::DirectConnection);

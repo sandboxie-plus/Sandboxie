@@ -28,13 +28,13 @@
 class QSBIEAPI_EXPORT CTraceEntry : public QSharedData
 {
 public:
-	CTraceEntry(quint32 ProcessId, quint32 ThreadId, quint32 Type, const QStringList& LogData);
+	CTraceEntry(quint64 Timestamp, quint32 ProcessId, quint32 ThreadId, quint32 Type, const QStringList& LogData);
 
 	virtual QString		GetName() const { return m_Name; }
 	virtual QString		GetMessage() const { return m_Message; }
 	virtual quint32		GetProcessId() const { return m_ProcessId; }
 	virtual quint32		GetThreadId() const { return m_ThreadId; }
-	virtual QDateTime	GetTimeStamp() const { return m_TimeStamp; }
+	virtual quint64		GetTimeStamp() const { return m_TimeStamp; }
 
 	virtual quint8		GetType() const { return m_Type.Type; }
 	static QList<quint32>AllTypes();
@@ -72,7 +72,7 @@ protected:
 	QString m_SubType;
 	quint32 m_ProcessId;
 	quint32 m_ThreadId;
-	QDateTime m_TimeStamp;
+	quint64 m_TimeStamp;
 	QString m_ProcessName;
 	void* m_BoxPtr;
 

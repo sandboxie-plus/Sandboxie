@@ -60,7 +60,7 @@ QString ErrorString(qint32 err)
 	return Error;
 }
 
-CTraceEntry::CTraceEntry(quint32 ProcessId, quint32 ThreadId, quint32 Type, const QStringList& LogData)
+CTraceEntry::CTraceEntry(quint64 Timestamp, quint32 ProcessId, quint32 ThreadId, quint32 Type, const QStringList& LogData)
 {
 	m_ProcessId = ProcessId;
 	m_ThreadId = ThreadId;
@@ -69,7 +69,7 @@ CTraceEntry::CTraceEntry(quint32 ProcessId, quint32 ThreadId, quint32 Type, cons
 	m_SubType = LogData.length() > 2 ? LogData.at(2) : QString();
 	m_Type.Flags = Type;
 
-	m_TimeStamp = QDateTime::currentDateTime(); // ms resolution
+	m_TimeStamp = Timestamp ? Timestamp : QDateTime::currentDateTime().toMSecsSinceEpoch();
 
 	m_BoxPtr = 0;
 

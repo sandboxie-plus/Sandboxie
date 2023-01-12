@@ -10,6 +10,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Changed
 - improved trace log retrival greately improving performance
+- improved list/tree finder
+- improved trace logging
 
 ### Fixed
 - fixed potential BSOD issue in the driver

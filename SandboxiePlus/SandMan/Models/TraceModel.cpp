@@ -144,6 +144,17 @@ void CTraceModel::FreeNode(STreeNode* pNode)
 	//delete pNode; 
 }
 
+bool CTraceModel::TestHighLight(STreeNode* pNode) const
+{
+	if (m_HighLightExp.isEmpty())
+		return false;
+	for (int i = 0; i < eCount; i++) {
+		if (NodeData(pNode, Qt::DisplayRole, i).toString().contains(m_HighLightExp))
+			return true;
+	}
+	return false;
+}
+
 QVariant CTraceModel::NodeData(STreeNode* pNode, int role, int section) const
 {
 	const CTraceEntryPtr& pEntry = pNode->pEntry;
@@ -183,9 +194,10 @@ QVariant CTraceModel::NodeData(STreeNode* pNode, int role, int section) const
 									if(!m_bTree) {
 										QString Name = pEntry->GetProcessName();
 										return QString("%1 (%2, %3) - %4").arg(Name.isEmpty() ? tr("Unknown") : Name)
-											.arg(pEntry->GetProcessId()).arg(pEntry->GetThreadId()).arg(pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"));
+											.arg(pEntry->GetProcessId()).arg(pEntry->GetThreadId())
+											.arg(QDateTime::fromMSecsSinceEpoch(pEntry->GetTimeStamp()).toString("hh:mm:ss.zzz"));
 									} else 
-										return pEntry->GetTimeStamp().toString("hh:mm:ss.zzz");
+										return QDateTime::fromMSecsSinceEpoch(pEntry->GetTimeStamp()).toString("hh:mm:ss.zzz");
 								}
 			case eType:				return pEntry->GetTypeStr();
 			case eStatus:			return pEntry->GetStautsStr();
@@ -197,6 +209,18 @@ QVariant CTraceModel::NodeData(STreeNode* pNode, int role, int section) const
 									return sValue;
 								}
 			}
+		}
+		case Qt::BackgroundRole:
+		{
+			if(!CTreeItemModel::GetDarkMode())
+				return TestHighLight(pNode) ? QColor(Qt::yellow) : QVariant();
+			break;
+		}
+		case Qt::ForegroundRole:
+		{
+			if(CTreeItemModel::GetDarkMode())
+				return TestHighLight(pNode) ? QColor(Qt::yellow) : QVariant();
+			break;
 		}
 	}
 

@@ -65,7 +65,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, bool bImmediate, QWidg
 
 	ui.btnDeleteAll->setVisible(false);
 
-	m_pFileModel = new CSimpleTreeModel();
+	m_pFileModel = new CSimpleTreeModel(this);
 	m_pFileModel->SetUseIcons(true);
 	m_pFileModel->AddColumn(tr("File Name"), "FileName");
 	m_pFileModel->AddColumn(tr("File Size"), "FileSize");
@@ -79,13 +79,14 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, bool bImmediate, QWidg
 	//ui.treeFiles->setItemDelegate(theGUI->GetItemDelegate());
 
 	ui.treeFiles->setModel(m_pSortProxy);
-	((CSortFilterProxyModel*)m_pSortProxy)->setView(ui.treeFiles);
 
 	ui.treeFiles->setSelectionMode(QAbstractItemView::ExtendedSelection);
 	ui.treeFiles->setSortingEnabled(true);
 	//ui.treeFiles->setUniformRowHeights(true);
 
-	ui.gridLayout->addWidget(new CFinder(m_pSortProxy, this, true), 3, 0, 1, 5);
+	CFinder* pFinder = new CFinder(m_pSortProxy, this);
+	ui.gridLayout->addWidget(pFinder, 3, 0, 1, 5);
+	pFinder->SetTree(ui.treeFiles);
 	ui.finder->deleteLater(); // remove place holder
 
 	//connect(ui.treeFiles, SIGNAL(clicked(const QModelIndex&)), this, SLOT(UpdateSnapshot(const QModelIndex&)));

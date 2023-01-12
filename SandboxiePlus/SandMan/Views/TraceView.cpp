@@ -51,6 +51,9 @@
 CTraceTree::CTraceTree(QWidget* parent) 
 	: CPanelWidget<QTreeViewEx>(parent) 
 {
+	m_bHighLight = false;
+	//m_FilterCol = -1;
+
 	m_pTreeList->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
 
 	m_pTreeList->setSelectionMode(QAbstractItemView::ExtendedSelection);
@@ -83,7 +86,8 @@ CTraceTree::CTraceTree(QWidget* parent)
 	//connect(m_pBoxTree, SIGNAL(ColumnChanged(int, bool)), this, SLOT(OnColumnsChanged()));
 
 	//m_pMainLayout->addWidget(CFinder::AddFinder(m_pTreeList, m_pSortProxy));
-	m_pMainLayout->addWidget(CFinder::AddFinder(m_pTreeList, this, CFinder::eHighLight));
+	m_pMainLayout->addWidget(CFinder::AddFinder(m_pTreeList, this, CFinder::eHighLightDefault));
+	//QObject::connect(pFinder, SIGNAL(SelectNext()), this, SLOT(SelectNext()));
 
 
 	QByteArray Columns = theConf->GetBlob("MainWindow/TraceLog_Columns");
@@ -97,6 +101,23 @@ CTraceTree::~CTraceTree()
 {
 	theConf->SetBlob("MainWindow/TraceLog_Columns", GetView()->header()->saveState());
 }
+
+void CTraceTree::SetFilter(const QString& Exp, int iOptions, int Column) 
+{
+	bool bReset = m_FilterExp != Exp || m_bHighLight != ((iOptions & CFinder::eHighLight) != 0);
+
+	//QString ExpStr = ((iOptions & CFinder::eRegExp) == 0) ? Exp : (".*" + QRegularExpression::escape(Exp) + ".*");
+	//QRegularExpression RegExp(ExpStr, (iOptions & CFinder::eCaseSens) != 0 ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
+	//m_FilterExp = RegExp;
+	m_FilterExp = Exp;
+	m_bHighLight = (iOptions & CFinder::eHighLight) != 0;
+	//m_FilterCol = Col;
+
+	if(bReset)
+		emit FilterChanged();
+}
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // CMonitorList
@@ -117,8 +138,6 @@ CMonitorList::CMonitorList(QWidget* parent)
 	m_pSortProxy->setDynamicSortFilter(true);
 
 	m_pTreeList->setModel(m_pSortProxy);
-	m_pSortProxy->setView(m_pTreeList);
-
 
 	QStyle* pStyle = QStyleFactory::create("windows");
 	m_pTreeList->setStyle(pStyle);
@@ -163,8 +182,6 @@ CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 	m_LastCount = 0;
 	m_bUpdatePending = false;
 
-	m_bHighLight = false;
-	//m_FilterCol = -1;
 	m_FilterPid = 0;
 	m_FilterTid = 0;
 	m_FilterStatus = 0;
@@ -177,7 +194,7 @@ CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 
 	m_pMonitorMode = m_pTraceToolBar->addAction(CSandMan::GetIcon("Monitor"), tr("Monitor mode"), this, SLOT(OnSetMode()));
 	m_pMonitorMode->setCheckable(true);
-	m_pMonitorMode->setChecked(theConf->GetBool("Options/UseMonitorMode"));
+	m_pMonitorMode->setChecked(theConf->GetBool("Options/UseMonitorMode", true));
 
 	m_pTraceTree = m_pTraceToolBar->addAction(CSandMan::GetIcon("Tree"), tr("Show as task tree"), this, SLOT(OnSetTree()));
 	m_pTraceTree->setCheckable(true);
@@ -258,7 +275,7 @@ CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 
 	m_pLayout->addWidget(m_pTrace);
 
-	QObject::connect(m_pTrace, SIGNAL(FilterSet(const QString&, int, int)), this, SLOT(SetFilter(const QString&, int, int)));
+	QObject::connect(m_pTrace, SIGNAL(FilterChanged()), this, SLOT(OnFilterChanged()));
 
 	m_pMonitor = new CMonitorList(this);
 	m_pMonitor->m_pMonitorModel->SetObjTree(m_pObjectTree->isChecked());
@@ -335,8 +352,8 @@ void CTraceView::Refresh()
 	if (m_LastCount == ResourceLog.count())
 		return;
 
-	//bool bHasFilter = !m_FilterExp.pattern().isEmpty();
-	bool bHasFilter = !m_FilterExp.isEmpty();
+	//bool bHasFilter = !m_pTrace->m_FilterExp.pattern().isEmpty();
+	bool bHasFilter = !m_pTrace->m_FilterExp.isEmpty();
 
 	quint64 start = GetCurCycle();
 	for (; i < ResourceLog.count(); i++)
@@ -381,12 +398,12 @@ void CTraceView::Refresh()
 		}
 		else
 		{
-			if (bHasFilter && !m_bHighLight) {
-				if (!pEntry->GetName().contains(m_FilterExp)
-					&& !pEntry->GetMessage().contains(m_FilterExp)
-					//&& !pEntry->GetTypeStr().contains(m_FilterExp) // dont filter on non static strings !!!
-					//&& !pEntry->GetStautsStr().contains(m_FilterExp) // dont filter on non static strings !!!
-					&& !pEntry->GetProcessName().contains(m_FilterExp))
+			if (bHasFilter && !m_pTrace->m_bHighLight) {
+				if (!pEntry->GetName().contains(m_pTrace->m_FilterExp)
+					&& !pEntry->GetMessage().contains(m_pTrace->m_FilterExp)
+					//&& !pEntry->GetTypeStr().contains(m_pTrace->m_FilterExp) // dont filter on non static strings !!!
+					//&& !pEntry->GetStautsStr().contains(m_pTrace->m_FilterExp) // dont filter on non static strings !!!
+					&& !pEntry->GetProcessName().contains(m_pTrace->m_FilterExp))
 						continue;
 			}
 	
@@ -434,6 +451,11 @@ void CTraceView::Refresh()
 	}
 	else
 	{
+		if (m_pTrace->m_bHighLight)
+			m_pTrace->m_pTraceModel->SetHighLight(m_pTrace->m_FilterExp);
+		else
+			m_pTrace->m_pTraceModel->SetHighLight(QString());
+
 		quint64 start = GetCurCycle();
 		QList<QModelIndex> NewBranches = m_pTrace->m_pTraceModel->Sync(m_TraceList);
 		qDebug() << "Sync took" << (GetCurCycle() - start) / 1000000.0 << "s";
@@ -538,15 +560,8 @@ void CTraceView::UpdateFilters()
 	}
 }
 
-void CTraceView::SetFilter(const QString& Exp, int iOptions, int Col)
+void CTraceView::OnFilterChanged()
 {
-	//QString ExpStr = ((iOptions & CFinder::eRegExp) == 0) ? Exp : (".*" + QRegularExpression::escape(Exp) + ".*");
-	//QRegularExpression RegExp(ExpStr, (iOptions & CFinder::eCaseSens) != 0 ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
-	//m_FilterExp = RegExp;
-	m_FilterExp = Exp;
-	m_bHighLight = (iOptions & CFinder::eHighLight) != 0;
-	//m_FilterCol = Col;
-
 	m_FullRefresh = true;
 }
 
@@ -626,7 +641,7 @@ void CTraceView::SaveToFile()
 			const CTraceEntryPtr& pEntry = ResourceLog.at(i);
 
 			QStringList Line;
-			Line.append(pEntry->GetTimeStamp().toString("hh:mm:ss.zzz"));
+			Line.append(QDateTime::fromMSecsSinceEpoch(pEntry->GetTimeStamp()).toString("hh:mm:ss.zzz"));
 			QString Name = pEntry->GetProcessName();
 			Line.append(Name.isEmpty() ? tr("Unknown") : Name);
 			Line.append(QString("%1").arg(pEntry->GetProcessId()));

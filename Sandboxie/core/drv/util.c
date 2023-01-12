@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -443,3 +443,30 @@ retry:
     return pid;
 }
 
+
+//---------------------------------------------------------------------------
+// Util_GetTime
+//---------------------------------------------------------------------------
+
+
+_FX LARGE_INTEGER Util_GetTimestamp(void)
+{
+    static LARGE_INTEGER gMonitorStartCounter;
+    static LARGE_INTEGER gPerformanceFrequency;
+    static LARGE_INTEGER gMonitorStartTime = { 0 };
+
+    if (gMonitorStartTime.QuadPart == 0) {
+        KeQuerySystemTime(&gMonitorStartTime);
+        gMonitorStartCounter = KeQueryPerformanceCounter(&gPerformanceFrequency);
+    }
+
+	LARGE_INTEGER Time;
+	LARGE_INTEGER CounterNow = KeQueryPerformanceCounter(NULL);
+	LONGLONG CounterOff = CounterNow.QuadPart - gMonitorStartCounter.QuadPart;
+
+	Time.QuadPart = gMonitorStartTime.QuadPart +
+	(10000000 * (CounterOff / gPerformanceFrequency.QuadPart)) +
+		((10000000 * (CounterOff % gPerformanceFrequency.QuadPart)) / gPerformanceFrequency.QuadPart);
+
+	return Time;
+}

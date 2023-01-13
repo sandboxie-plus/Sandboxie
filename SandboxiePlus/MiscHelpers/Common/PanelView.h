@@ -111,7 +111,7 @@ class MISCHELPERS_EXPORT CPanelWidgetEx : public CPanelWidget<QTreeWidgetEx>
 public:
 	CPanelWidgetEx(QWidget *parent = 0) : CPanelWidget<QTreeWidgetEx>(parent) 
 	{
-		m_pFinder = new CFinder(NULL, this, false);
+		m_pFinder = new CFinder(NULL, this, CFinder::eRegExp | CFinder::eCaseSens);
 		m_pMainLayout->addWidget(m_pFinder);
 		QObject::connect(m_pFinder, SIGNAL(SetFilter(const QString&, int, int)), this, SLOT(SetFilter(const QString&, int, int)));
 	}
@@ -119,8 +119,8 @@ public:
 	static void ApplyFilter(QTreeWidgetEx* pTree, QTreeWidgetItem* pItem, const QRegularExpression& Exp/*, bool bHighLight = false, int Col = -1*/)
 	{
 		for (int j = 0; j < pTree->columnCount(); j++) {
-			pItem->setForeground(j, (m_DarkMode && !Exp.isValid() && pItem->text(j).contains(Exp)) ? Qt::yellow : pTree->palette().color(QPalette::WindowText));
-			pItem->setBackground(j, (!m_DarkMode && !Exp.isValid() && pItem->text(j).contains(Exp)) ? Qt::yellow : pTree->palette().color(QPalette::Base));
+			pItem->setForeground(j, (m_DarkMode && Exp.isValid() && pItem->text(j).contains(Exp)) ? Qt::yellow : pTree->palette().color(QPalette::WindowText));
+			pItem->setBackground(j, (!m_DarkMode && Exp.isValid() && pItem->text(j).contains(Exp)) ? Qt::yellow : pTree->palette().color(QPalette::Base));
 		}
 
 		for (int i = 0; i < pItem->childCount(); i++)

@@ -338,6 +338,10 @@ SBIE2194 MSI-Installer benötigt die Aktivierung der %2 option in der ini-Datei,
 SBIE2195 Um Explorer.exe sandgeboxt auszuführen, darf der Zugriff auf die COM-Infrastruktur nicht geöffnet sein.
 .
 
+2196;pop;inf;01
+SBIE2196 Um den MSI Installer sandgeboxt auszuführen, darf der Zugriff auf die COM-Infrastruktur nicht geöffnet sein.
+.
+
 2198;pop;inf;01
 %0
 .

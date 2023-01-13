@@ -54,7 +54,7 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 		m_pRegExp = NULL;
 
 	m_pTree = NULL;
-	m_pModel = qobject_cast<QAbstractProxyModel*>(pFilterTarget);
+	m_pModel = qobject_cast<QAbstractItemModel*>(pFilterTarget);
 
 	if (m_pModel) {
 		m_pColumn = new QComboBox();
@@ -184,7 +184,7 @@ void CFinder::OnText()
 void CFinder::OnReturn()
 {
 	OnUpdate();
-	if (m_pHighLight->isChecked())
+	if (!m_pHighLight || m_pHighLight->isChecked())
 		emit SelectNext();
 }
 

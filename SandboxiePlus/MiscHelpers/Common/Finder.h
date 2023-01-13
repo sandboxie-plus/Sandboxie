@@ -69,7 +69,7 @@ private:
 	QRegularExpression	m_RegExp;
 
 	QTreeView*			m_pTree;
-	QAbstractProxyModel*m_pModel;
+	QAbstractItemModel*	m_pModel;
 
 	QTimer*				m_pTimer;
 

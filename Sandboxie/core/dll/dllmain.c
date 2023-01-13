@@ -900,6 +900,16 @@ _FX ULONG_PTR Dll_Ordinal1(
             SbieApi_Log(2195, NULL);
             ExitProcess(0);
         }
+
+        //
+        // msi installer requires COM to be sandboxed, else the installation will be done outside the sandbox
+        //
+
+        if (Dll_ImageType == DLL_IMAGE_MSI_INSTALLER && SbieDll_IsOpenCOM()) {
+
+            SbieApi_Log(2196, NULL);
+            ExitProcess(0);
+        }
     }
     else
     {

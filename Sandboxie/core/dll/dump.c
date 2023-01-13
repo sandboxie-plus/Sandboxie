@@ -173,7 +173,7 @@ ALIGNED LPTOP_LEVEL_EXCEPTION_FILTER Dump_SetUnhandledExceptionFilter(
 
 
 //---------------------------------------------------------------------------
-// Dump_SetUnhandledExceptionFilter
+// Dump_MiniDumpWriteDump
 //---------------------------------------------------------------------------
 
 

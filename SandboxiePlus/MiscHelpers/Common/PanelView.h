@@ -124,9 +124,7 @@ public:
 		}
 
 		for (int i = 0; i < pItem->childCount(); i++)
-		{
 			ApplyFilter(pTree, pItem->child(i), Exp/*, bHighLight, Col*/);
-		}
 	}
 
 	static void ApplyFilter(QTreeWidgetEx* pTree, const QRegularExpression& Exp/*, bool bHighLight = false, int Col = -1*/)

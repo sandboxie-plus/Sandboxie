@@ -43,12 +43,12 @@ A partial archive of the [old Sandboxie forum](https://sandboxie-website-archive
 
 ## 📌 Project history
 
-|    Project history  |      Maintainer  |
+|      Timeline       |    Maintainer    |
 |---------------------|------------------|
 | 2004 - 2013         | Ronen Tzur       |
 | 2013 - 2017         | Invincea Inc.    |
 | 2017 - 2020         | Sophos Group plc |
-| [Open source code](https://github.com/sandboxie/sandboxie) |    Tom Brown     |
+| [Open-source code](https://github.com/sandboxie/sandboxie) |    Tom Brown     |
 | 2020 onwards        | David Xanatos ([Roadmap](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/))    |
 
 ## 📌 Project support / sponsorship

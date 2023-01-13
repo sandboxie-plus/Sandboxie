@@ -2,73 +2,7 @@
 * Missing Messages in Text-French-1036.txt
 *==========
 
-1305;pop;inf;02
-SBIE1305 Blocked sandboxed image from being loaded - %2
-.
-
-2225;pop;wrn;01
-SBIE2225 An attempt was made to access an EFS file: %2
-.
-
-2226;pop;wrn;01
-SBIE2226 Process failed to start due to missing elevation, to resolve add "ApplyElevateCreateProcessFix=y" to the ini section for this box %2
-.
-
-2227;pop;wrn;01
-SBIE2227 '%2' is located on a volume which does not support 8.3 naming. This can cause issues with older applications and installers.
-.
-
-2338;pop;err;01
-SBIE2338 Encountered unsupported architecture in process:  %2
-.
-
 3001;txt;01
 &OK
-.
-
-3315;txt;01
-Deleting Sandbox contents
-.
-
-3316;txt;01
-Do you want to abort the operation?
-.
-
-3317;txt;01
-Preparing to delete: %2
-.
-
-3318;txt;01
-Deleting: %2
-.
-
-3505;txt;01
-Contribute to Sandboxie
-.
-
-6010;txt;01
-You have installed Sandboxie more than %2 days ago.
-
-So, you think David and the contributors are doing a great job?
-
-Why don't you show it by supporting the project and getting a Supporter Certificate?
-
-Sandboxie without a valid supporter certificate will now pause for a few seconds, to give you time to contemplate the possibility of supporting the project.
-.
-
-6011;txt;01
-Wait
-.
-
-6012;txt;01
-Continue
-.
-
-6013;txt;01
-Quit
-.
-
-6014;txt;01
-Get Certificate
 .
 

@@ -330,6 +330,10 @@ SBIE2194 MSI yükleyicisi, ini'de %2 seçeneğinin ayarlanmasını gerektirir, a
 SBIE2195 Explorer.exe'yi korumalı alanda çalıştırmak için COM altyapısına erişim Açık olmamalıdır.
 .
 
+2196;pop;inf;01
+SBIE2196 MSI yükleyicisini korumalı alanda çalıştırmak için COM altyapısına erişim Açık olmamalıdır.
+.
+
 2198;pop;inf;01
 %0
 .

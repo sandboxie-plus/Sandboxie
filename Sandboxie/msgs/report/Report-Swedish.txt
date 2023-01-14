@@ -6,6 +6,10 @@
 SBIE1305 Blocked sandboxed image from being loaded - %2
 .
 
+2196;pop;inf;01
+SBIE2196 To run the MSI Installer sandboxed, the access for COM infrastructure must not be Open.
+.
+
 2225;pop;wrn;01
 SBIE2225 An attempt was made to access an EFS file: %2
 .

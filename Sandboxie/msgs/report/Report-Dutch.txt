@@ -18,6 +18,10 @@ SBIE2112 Object is not accessible: %3, call %2
 SBIE2195 To run Explorer.exe sandboxed, the access for COM infrastructure must not be Open.
 .
 
+2196;pop;inf;01
+SBIE2196 To run the MSI Installer sandboxed, the access for COM infrastructure must not be Open.
+.
+
 2225;pop;wrn;01
 SBIE2225 An attempt was made to access an EFS file: %2
 .

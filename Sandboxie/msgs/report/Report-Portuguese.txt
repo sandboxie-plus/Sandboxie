@@ -46,6 +46,10 @@ SBIE2194 MSI installer requires %2 option to be set in the ini, what however wea
 SBIE2195 To run Explorer.exe sandboxed, the access for COM infrastructure must not be Open.
 .
 
+2196;pop;inf;01
+SBIE2196 To run the MSI Installer sandboxed, the access for COM infrastructure must not be Open.
+.
+
 2198;pop;inf;01
 %0
 .

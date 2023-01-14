@@ -6,6 +6,10 @@
 SBIE1305 Blocked sandboxed image from being loaded - %2
 .
 
+2196;pop;inf;01
+SBIE2196 To run the MSI Installer sandboxed, the access for COM infrastructure must not be Open.
+.
+
 2226;pop;wrn;01
 SBIE2226 Process failed to start due to missing elevation, to resolve add "ApplyElevateCreateProcessFix=y" to the ini section for this box %2
 .

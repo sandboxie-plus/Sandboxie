@@ -8,16 +8,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.6.6 / 5.61.6] - 2023-01-?
 
 
-## Changed
-- improved trace log retrival greately improving performance
+### Changed
+- reworked trace log retrival to greately improving performance
 - improved list/tree finder
 - improved trace logging
+- enabled drop admin rights option for compartment style boxes
+-- Note: programs started unsandboxed can not have rights dropped, but UAC prompts and elevation from within the sandboxed are blocked
 
 ### Fixed
 - fixed potential BSOD issue in the driver
 - fixed crash in in trace log [#2599](https://github.com/sandboxie-plus/Sandboxie/issues/2599)
 - fixed tray issue [2600](https://github.com/sandboxie-plus/Sandboxie/pull/2600) (okrc)
 - fidex issues with shortcuts [#2601](https://github.com/sandboxie-plus/Sandboxie/pull/2601) (okrc)
+
+
 
 
 

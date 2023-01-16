@@ -371,7 +371,7 @@ void COptionsWindow::UpdateBoxSecurity()
 	ui.chkRestrictDevices->setEnabled(!ui.chkSecurityMode->isChecked());
 
 	if (!theAPI->IsRunningAsAdmin()) {
-		ui.chkDropRights->setEnabled(!ui.chkSecurityMode->isChecked() && !ui.chkNoSecurityIsolation->isChecked() && !theAPI->IsRunningAsAdmin());
+		ui.chkDropRights->setEnabled(!ui.chkSecurityMode->isChecked() /*&& !ui.chkNoSecurityIsolation->isChecked() && !theAPI->IsRunningAsAdmin()*/);
 	}
 
 	if (ui.chkSecurityMode->isChecked()) {

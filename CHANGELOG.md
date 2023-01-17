@@ -5,21 +5,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.6.6 / 5.61.6] - 2023-01-?
+## [1.6.6 / 5.61.6] - 2023-01-16
 
 
 ### Changed
-- reworked trace log retrival to greately improving performance
+- reworked trace log retrieval for vastly improved performance
 - improved list/tree finder
 - improved trace logging
-- enabled drop admin rights option for compartment style boxes
--- Note: programs started unsandboxed can not have rights dropped, but UAC prompts and elevation from within the sandboxed are blocked
+- enabled drop admin rights option for compartment boxes
+-- Note: programs started unsandboxed can not have rights dropped, but UAC prompts and elevation attempts from within the sandbox are blocked
 
 ### Fixed
 - fixed potential BSOD issue in the driver
-- fixed crash in in trace log [#2599](https://github.com/sandboxie-plus/Sandboxie/issues/2599)
-- fixed tray issue [2600](https://github.com/sandboxie-plus/Sandboxie/pull/2600) (okrc)
-- fidex issues with shortcuts [#2601](https://github.com/sandboxie-plus/Sandboxie/pull/2601) (okrc)
+- fixed crash in the trace log [#2599](https://github.com/sandboxie-plus/Sandboxie/issues/2599)
+- fixed tray issue [#2600](https://github.com/sandboxie-plus/Sandboxie/pull/2600) (okrc)
+- fixed issues with shortcuts [#2601](https://github.com/sandboxie-plus/Sandboxie/pull/2601) (okrc)
 
 
 
@@ -29,10 +29,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.6.5 / 5.61.5] - 2023-01-10
 
 ### Added
-- added user mode syscall tracing, now system calls can be logged also in compartment type boxes as well as all Win32k syscalls
+- added user mode system call tracing, now syscalls can be logged in compartment boxes as well as all Win32k syscalls
 
 ### Changed
-- reworked trace log model, now it can load over 10e6 entries in under 1 second
+- reworked trace log model, now it can load more than a million entries in less than one second
 - ApiLog support is now hidden from the trace UI when the appropriate DLLs are missing
 
 ### Fixed
@@ -50,10 +50,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added contribution guidelines in the Help menu for both Plus and Classic UIs [#2551](https://github.com/sandboxie-plus/Sandboxie/pull/2551)
 
 ### Fixed
-- fixed issue with auto delete sandbox on SandMan startup [#2555](https://github.com/sandboxie-plus/Sandboxie/issues/2555)
+- fixed issue with auto-delete sandbox on SandMan startup [#2555](https://github.com/sandboxie-plus/Sandboxie/issues/2555)
 - fixed issue with Windows 11 context menu when SandMan was not already running [#2284](https://github.com/sandboxie-plus/Sandboxie/issues/2284)
 - fixed issue with the display about cmbDefault [#2560](https://github.com/sandboxie-plus/Sandboxie/pull/2560) (okrc)
-- fixed issue with color inaccuracy [#2570](https://github.com/sandboxie-plus/Sandboxie/pull/2570) (okrc)
+- fixed issue with colour inaccuracy [#2570](https://github.com/sandboxie-plus/Sandboxie/pull/2570) (okrc)
 - fixed issue with Templates.ini loading on first start [#2574](https://github.com/sandboxie-plus/Sandboxie/issues/2574)
 - fixed Cyberpunk 2077 not being able to load mods when sandboxed
 - fixed performance issue in games
@@ -373,7 +373,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added icons to sub tabs in the box options dialog
 - recovery and message pop-up menu options are not persisting across UI restarts any more
-- added new box color, a white box indicates that its not really a sandbox and is displayed when the user specified OpenFilePath=* or alike
+- added new box colour, a white box indicates that it's not really a sandbox and is displayed when the user specified OpenFilePath=* or alike
 
 ### Changed
 - Sandboxie no longer issues message 1301 when forced processes are temporarily disabled
@@ -996,7 +996,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - replaced "Open with" with a Sandboxie dialog to work on Windows 10 [#1138](https://github.com/sandboxie-plus/Sandboxie/issues/1138)
-- added ability to run Win32 store apps in App Compartment mode (on Windows 11 requires COM to be open)
+- added ability to run Win32 store apps in app compartment mode (requires COM to be open in Windows 11)
 -- Note: this does not mean UWP store apps, just regular Win32 apps packaged to be deployed via the store
 - added new debug options "UnstrippedToken=y" and "KeepUserGroup=y"
 - added double-click to recover files and folders in recovery window [#1466](https://github.com/sandboxie-plus/Sandboxie/issues/1466)
@@ -1066,7 +1066,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - "EnableWin32kHooks=y" is now enabled by default, as no issues were reported in 1.0.3
 -- Note: currently only the GdiDdDDI* hooks are applied, required for Chromium HW acceleration
 - cleaned up low-level hooking code
-- "RunRpcssAsSystem=y" is now auto applied for boxes in "App Compartment" mode when "RunServicesAsSystem=y" or "MsiInstallerExemptions=y" are present
+- "RunRpcssAsSystem=y" is now auto applied for boxes in app compartment mode when "RunServicesAsSystem=y" or "MsiInstallerExemptions=y" are present
 
 ### Fixed
 - fixed RPC handling in case a requested open service is not running [#1443](https://github.com/sandboxie-plus/Sandboxie/issues/1443)
@@ -1130,15 +1130,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- all locations except generic Windows system paths will need to be opened explicitly for read and/or write access
 -- using "NormalFilePath=...", "NormalKeyPath=...", "NormalIpcPath=..." allows to open locations to be readable and sandboxed
 
-- added new "App Compartment" mode of operation, it is enabled by adding "NoSecurityIsolation=y" to the box configuration
+- added new app compartment mode of operation, it is enabled by adding "NoSecurityIsolation=y" to the box config
 -- in this mode, security is traded in for compatibility, it should not be used for untrusted applications
 -- Note: in this mode, file and registry filtering are still in place, hence processes run without administrative privileges
 -- it is reasonably safe, all filtering can be disabled with "NoSecurityFiltering=y"
 
 - added experimental use of ObRegisterCallbacks to filter object creation and duplication
--- this filtering is independent from the regular SbieDrv's syscall-based filtering, hence it also applies to App Compartments
+-- this filtering is independent from the regular SbieDrv's syscall-based filtering, hence it also applies to app compartments
 -- with it enabled, an application running in a compartment will not be able to manipulate processes running outside the sandbox
--- Note: this feature improves the security of non-isolated App Compartment boxes
+-- Note: this feature improves the security of non-isolated app compartment boxes
 -- to enable this feature, set "EnableObjectFiltering=y" in the global section and reload the driver
 -- when globally activated, the filtering can be disabled for individual boxes with "DisableObjectFilter=y"
 

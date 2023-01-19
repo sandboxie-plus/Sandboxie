@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.6.7 / 5.61.7] - 2023-01-?
 
 ### Fixed
-- fixed issue with Hebrew language [#2608](https://github.com/sandboxie-plus/Sandboxie/issues/2608)
+- fixed issue with Hebrew language (Classic UI) [#2608](https://github.com/sandboxie-plus/Sandboxie/issues/2608)
 
 
 

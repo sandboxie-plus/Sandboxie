@@ -1840,7 +1840,7 @@ Full path: %4</source>
         <location filename="SandMan.cpp" line="441"/>
         <source>Support Sandboxie-Plus with Donations</source>
         <oldsource>Support Sandboxie-Plus with a Donation</oldsource>
-        <translation type="unfinished">捐赠支持 Sandboxie-Plus</translation>
+        <translation>捐赠支持 Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="448"/>
@@ -1855,7 +1855,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="446"/>
         <source>Contribute to Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>为 Sandboxie-Plus 贡献力量</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="450"/>
@@ -4041,7 +4041,7 @@ No will choose: %2</source>
     <message>
         <location filename="Models/TraceModel.cpp" line="179"/>
         <source>Thread %1</source>
-        <translation type="unfinished"></translation>
+        <translation>线程 %</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="333"/>
@@ -4079,7 +4079,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/TraceView.cpp" line="203"/>
         <source>Show NT Object Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>展示 NT 对象树</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="210"/>

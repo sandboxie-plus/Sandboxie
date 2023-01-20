@@ -4041,7 +4041,7 @@ No will choose: %2</source>
     <message>
         <location filename="Models/TraceModel.cpp" line="179"/>
         <source>Thread %1</source>
-        <translation>线程 %</translation>
+        <translation>线程 %1</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="333"/>

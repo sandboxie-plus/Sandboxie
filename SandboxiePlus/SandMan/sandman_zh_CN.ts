@@ -6373,7 +6373,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="614"/>
         <source>Don&apos;t show icons in menus *</source>
-        <translation>不在任务栏托盘菜单列表中显示图标 *</translation>
+        <translation>不在“工具栏/菜单列表”中显示图标 *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="500"/>

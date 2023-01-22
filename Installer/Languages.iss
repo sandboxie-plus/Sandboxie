@@ -270,6 +270,7 @@ brazilianportuguese.UninstallTaskLabel2=Como você gostaria de desinstalar Sandb
 brazilianportuguese.UninstallTaskLabel3=&Manter os arquivos de configuração do sandboxes%nEsta é a opção mais recomendada se você planeja reinstalar o Sandboxie-Plus enquanto mantém seus arquivos de configuração e caixas de areia.
 brazilianportuguese.UninstallTaskLabel4=&Remover arquivos de configuração%nSelecione essa opção para remover os arquivos de configuração Sandboxie.ini e Sandboxie-Plus.ini mantendo as caixas de areia inalteradas.
 brazilianportuguese.UninstallTaskLabel5=Remover arquivos de configuração e &caixas de areia%nSelecione essa opção para remover todos os arquivos de configuração e caixas de areia, incluindo a pasta Sandbox localizada em caminhos personalizados com FileRootPath.
+brazilianportuguese.RefreshBuild=Baixar mais recentes Templates.ini e traduções
 
 ; Portuguese
 portuguese.AddSandboxedMenu=Adicionar "Roda na Caixa de Areia" para o menu de contexto
@@ -292,6 +293,7 @@ portuguese.UninstallTaskLabel2=Como você gostaria de desinstalar Sandboxie-Plus
 portuguese.UninstallTaskLabel3=&Manter os ficheiro de definição do sandboxes%nEsta é a opção mais recomendada se você planeja reinstalar o Sandboxie-Plus enquanto mantém seus ficheiro de definição e caixas de areia.
 portuguese.UninstallTaskLabel4=&Remover ficheiro de definição%nSelecione essa opção para remover os ficheiro de definição Sandboxie.ini e Sandboxie-Plus.ini mantendo as caixas de areia inalteradas.
 portuguese.UninstallTaskLabel5=Remover ficheiro de definição e &caixas de areia%nSelecione essa opção para remover todos os ficheiro de definição e caixas de areia, incluindo a pasta Sandbox localizada em caminhos personalizados com FileRootPath.
+portuguese.RefreshBuild=Descarregar mais novos Templates.ini e traduções
 
 ; Russian
 russian.AddSandboxedMenu=Добавить "Запустить в песочнице" в контекстное меню

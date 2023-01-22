@@ -69,7 +69,7 @@ public:
 
 	virtual QString					Expand(const QString& Value);
 
-	virtual QList<SBoxSnapshot>		GetSnapshots(QString* pCurrent = NULL, QString* pDefault = NULL) const;
+	virtual QMap<QString, SBoxSnapshot>	GetSnapshots(QString* pCurrent = NULL, QString* pDefault = NULL) const;
 	virtual void					SetDefaultSnapshot(QString Default);
 	virtual QString					GetDefaultSnapshot(QString* pCurrent = NULL) const;
 	virtual SB_PROGRESS				TakeSnapshot(const QString& Name);

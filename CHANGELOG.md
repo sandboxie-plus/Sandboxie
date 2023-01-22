@@ -10,7 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue with Hebrew language (Classic UI) [#2608](https://github.com/sandboxie-plus/Sandboxie/issues/2608)
-
+- fixed issue with startmenu integration and snapshots
 
 
 

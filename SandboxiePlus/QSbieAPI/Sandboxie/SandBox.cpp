@@ -283,11 +283,11 @@ QString CSandBox::Expand(const QString& Value)
 	return Value2;
 }
 
-QList<SBoxSnapshot> CSandBox::GetSnapshots(QString* pCurrent, QString* pDefault) const
+QMap<QString, SBoxSnapshot> CSandBox::GetSnapshots(QString* pCurrent, QString* pDefault) const
 {
 	QSettings ini(m_FilePath + "\\Snapshots.ini", QSettings::IniFormat);
 
-	QList<SBoxSnapshot> Snapshots;
+	QMap<QString, SBoxSnapshot> Snapshots;
 
 	foreach(const QString& Snapshot, ini.childGroups())
 	{
@@ -302,7 +302,7 @@ QList<SBoxSnapshot> CSandBox::GetSnapshots(QString* pCurrent, QString* pDefault)
 		BoxSnapshot.InfoStr = ini.value(Snapshot + "/Description").toString();
 		BoxSnapshot.SnapDate = QDateTime::fromSecsSinceEpoch(ini.value(Snapshot + "/SnapshotDate").toULongLong());
 
-		Snapshots.append(BoxSnapshot);
+		Snapshots.insert(BoxSnapshot.ID, BoxSnapshot);
 	}
 
 	if(pCurrent)

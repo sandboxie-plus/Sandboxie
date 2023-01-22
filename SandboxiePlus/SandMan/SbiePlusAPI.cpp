@@ -448,6 +448,16 @@ void CSandBoxPlus::ScanStartMenu()
 	bool bAdded = false;
 	auto OldStartMenu = ListToSet(m_StartMenu.keys());
 
+	QStringList SnapshotList;
+	SnapshotList.append("");
+
+	QString CurSnapshot;
+	QMap<QString, SBoxSnapshot> Snapshots = GetSnapshots(&CurSnapshot);
+	while(!CurSnapshot.isEmpty()) {
+		SnapshotList.append(CurSnapshot);
+		CurSnapshot = Snapshots[CurSnapshot].Parent;
+	}
+
 	int csidls[] = { CSIDL_DESKTOPDIRECTORY, CSIDL_COMMON_DESKTOPDIRECTORY, CSIDL_STARTMENU, CSIDL_COMMON_STARTMENU };
 	for (int i = 0; i < ARRAYSIZE(csidls); i++)
 	{
@@ -455,36 +465,39 @@ void CSandBoxPlus::ScanStartMenu()
 		if (SHGetFolderPath(NULL, csidls[i], NULL, SHGFP_TYPE_CURRENT, path) != S_OK)
 			continue;
 
-		QString BoxPath = theAPI->GetBoxedPath(this, QString::fromWCharArray(path));
-		QStringList	Files = ListDir(BoxPath, QStringList() << "*.lnk" << "*.url" << "*.pif", i >= 2); // no subdir scan for desktop as people like to put junk there
-		foreach(QString File, Files)
+		foreach (const QString& Snapshot, SnapshotList)
 		{
-			QString Path = (i >= 2 ? "" : "Desktop/") + File;
+			QString BoxPath = theAPI->GetBoxedPath(this, QString::fromWCharArray(path), Snapshot);
+			QStringList	Files = ListDir(BoxPath, QStringList() << "*.lnk" << "*.url" << "*.pif", i >= 2); // no subdir scan for desktop as people like to put junk there
+			foreach(QString File, Files)
+			{
+				QString Path = (i >= 2 ? "" : "Desktop/") + File;
 
-			if (!OldStartMenu.remove(Path))
-				bAdded = true;
+				if (!OldStartMenu.remove(Path))
+					bAdded = true;
 
-			StrPair PathName = Split2(Path, "/", true);
-			StrPair NameExt = Split2(PathName.second, ".", true);
-			if (NameExt.second.toLower() != "lnk")
-				continue; // todo url
+				StrPair PathName = Split2(Path, "/", true);
+				StrPair NameExt = Split2(PathName.second, ".", true);
+				if (NameExt.second.toLower() != "lnk")
+					continue; // todo url
 
-			QString LinkPath = BoxPath + "\\" + File.replace("/", "\\");
-			QVariantMap Link = ResolveShortcut(LinkPath);
-			if (!Link.contains("Path"))
-				continue;
+				QString LinkPath = BoxPath + "\\" + File.replace("/", "\\");
+				QVariantMap Link = ResolveShortcut(LinkPath);
+				if (!Link.contains("Path"))
+					continue;
 
-			SLink* pLink = &m_StartMenu[Path];
-			pLink->Folder = PathName.first;
-			pLink->Name = NameExt.first;
-			pLink->Target = Link["Path"].toString();
-			pLink->Icon = Link["IconPath"].toString();
-			pLink->IconIndex = Link["IconIndex"].toInt();
+				SLink* pLink = &m_StartMenu[Path];
+				pLink->Folder = PathName.first;
+				pLink->Name = NameExt.first;
+				pLink->Target = Link["Path"].toString();
+				pLink->Icon = Link["IconPath"].toString();
+				pLink->IconIndex = Link["IconIndex"].toInt();
 
-			if (!pLink->Target.isEmpty() && !QFile::exists(pLink->Target) && !IsBoxexPath(pLink->Target))
-				pLink->Target = theAPI->GetBoxedPath(this, pLink->Target);
-			if (!pLink->Icon.isEmpty() && !QFile::exists(pLink->Icon) && !IsBoxexPath(pLink->Icon))
-				pLink->Icon = theAPI->GetBoxedPath(this, pLink->Icon);
+				if (!pLink->Target.isEmpty() && !QFile::exists(pLink->Target) && !IsBoxexPath(pLink->Target))
+					pLink->Target = theAPI->GetBoxedPath(this, pLink->Target, Snapshot);
+				if (!pLink->Icon.isEmpty() && !QFile::exists(pLink->Icon) && !IsBoxexPath(pLink->Icon))
+					pLink->Icon = theAPI->GetBoxedPath(this, pLink->Icon, Snapshot);
+			}
 		}
 	}
 

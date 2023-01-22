@@ -1950,9 +1950,12 @@ QString CSbieAPI::GetBoxedPath(const QString& BoxName, const QString& Path)
 
 //#pragma comment(lib, "mpr.lib")
 
-QString CSbieAPI::GetBoxedPath(CSandBox* pBox, const QString& Path)
+QString CSbieAPI::GetBoxedPath(CSandBox* pBox, const QString& Path, const QString& Snapshot)
 {
 	QString BoxRoot = pBox->m_FilePath;
+
+	if (!Snapshot.isEmpty())
+		BoxRoot += QString("\\snapshot-%1").arg(Snapshot);
 
     //WCHAR Buffer[4096];
     //DWORD dwBufferLength = sizeof(Buffer)/sizeof(WCHAR );

@@ -1840,7 +1840,7 @@ Full path: %4</source>
         <location filename="SandMan.cpp" line="441"/>
         <source>Support Sandboxie-Plus with Donations</source>
         <oldsource>Support Sandboxie-Plus with a Donation</oldsource>
-        <translation type="unfinished">捐赠支持 Sandboxie-Plus</translation>
+        <translation>捐赠支持 Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="448"/>
@@ -1855,7 +1855,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="446"/>
         <source>Contribute to Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>为 Sandboxie-Plus 贡献力量</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="450"/>
@@ -4041,7 +4041,7 @@ No will choose: %2</source>
     <message>
         <location filename="Models/TraceModel.cpp" line="179"/>
         <source>Thread %1</source>
-        <translation type="unfinished"></translation>
+        <translation>线程 %1</translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="333"/>
@@ -4079,7 +4079,7 @@ No will choose: %2</source>
     <message>
         <location filename="Views/TraceView.cpp" line="203"/>
         <source>Show NT Object Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>展示 NT 对象树</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="210"/>
@@ -6373,7 +6373,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="614"/>
         <source>Don&apos;t show icons in menus *</source>
-        <translation>不在任务栏托盘菜单列表中显示图标 *</translation>
+        <translation>不在“工具栏/菜单列表”中显示图标 *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="500"/>

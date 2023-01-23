@@ -1463,67 +1463,67 @@ Full path: %4</source>
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="606"/>
+        <location filename="SbiePlusAPI.cpp" line="619"/>
         <source>Disabled</source>
         <translation>사용 안 함</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="617"/>
+        <location filename="SbiePlusAPI.cpp" line="630"/>
         <source>OPEN Root Access</source>
         <translation>루트 접근 열기</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="619"/>
+        <location filename="SbiePlusAPI.cpp" line="632"/>
         <source>Application Compartment</source>
         <translation>응용 프로그램 구획</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="621"/>
+        <location filename="SbiePlusAPI.cpp" line="634"/>
         <source>NOT SECURE</source>
         <translation>안전하지 않음</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="623"/>
+        <location filename="SbiePlusAPI.cpp" line="636"/>
         <source>Reduced Isolation</source>
         <translation>격리 감소</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="625"/>
+        <location filename="SbiePlusAPI.cpp" line="638"/>
         <source>Enhanced Isolation</source>
         <translation>격리 강화</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="628"/>
+        <location filename="SbiePlusAPI.cpp" line="641"/>
         <source>Privacy Enhanced</source>
         <translation>개인 정보 강화</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="631"/>
+        <location filename="SbiePlusAPI.cpp" line="644"/>
         <source>API Log</source>
         <translation>API 로그</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="633"/>
+        <location filename="SbiePlusAPI.cpp" line="646"/>
         <source>No INet</source>
         <translation>INet 없음</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="635"/>
+        <location filename="SbiePlusAPI.cpp" line="648"/>
         <source>Net Share</source>
         <translation>Net 공유</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="637"/>
+        <location filename="SbiePlusAPI.cpp" line="650"/>
         <source>No Admin</source>
         <translation>관리자 없음</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="640"/>
+        <location filename="SbiePlusAPI.cpp" line="653"/>
         <source>Auto Delete</source>
         <translation>자동 삭제</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="643"/>
+        <location filename="SbiePlusAPI.cpp" line="656"/>
         <source>Normal</source>
         <translation>일반</translation>
     </message>

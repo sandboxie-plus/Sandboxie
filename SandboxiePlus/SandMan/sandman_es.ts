@@ -1552,7 +1552,7 @@ Ruta completa: %4</translation>
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="606"/>
+        <location filename="SbiePlusAPI.cpp" line="619"/>
         <source>Disabled</source>
         <translation>Deshabilitado</translation>
     </message>
@@ -1565,62 +1565,62 @@ Ruta completa: %4</translation>
         <translation type="vanished">NO SECURO (Configuración de depuración)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="617"/>
+        <location filename="SbiePlusAPI.cpp" line="630"/>
         <source>OPEN Root Access</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="619"/>
+        <location filename="SbiePlusAPI.cpp" line="632"/>
         <source>Application Compartment</source>
         <translation>Compartimiento de aplicación</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="621"/>
+        <location filename="SbiePlusAPI.cpp" line="634"/>
         <source>NOT SECURE</source>
         <translation>NO SEGURO</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="623"/>
+        <location filename="SbiePlusAPI.cpp" line="636"/>
         <source>Reduced Isolation</source>
         <translation>Aislamiento reducido</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="625"/>
+        <location filename="SbiePlusAPI.cpp" line="638"/>
         <source>Enhanced Isolation</source>
         <translation>Aislamiento mejorado</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="628"/>
+        <location filename="SbiePlusAPI.cpp" line="641"/>
         <source>Privacy Enhanced</source>
         <translation>Privacidad mejorada</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="631"/>
+        <location filename="SbiePlusAPI.cpp" line="644"/>
         <source>API Log</source>
         <translation>Log API</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="633"/>
+        <location filename="SbiePlusAPI.cpp" line="646"/>
         <source>No INet</source>
         <translation>No INet</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="635"/>
+        <location filename="SbiePlusAPI.cpp" line="648"/>
         <source>Net Share</source>
         <translation>Recurso Compartido de red</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="637"/>
+        <location filename="SbiePlusAPI.cpp" line="650"/>
         <source>No Admin</source>
         <translation>No Admin</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="640"/>
+        <location filename="SbiePlusAPI.cpp" line="653"/>
         <source>Auto Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="643"/>
+        <location filename="SbiePlusAPI.cpp" line="656"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>

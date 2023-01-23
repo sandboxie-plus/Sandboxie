@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -147,6 +148,8 @@ BEGIN_MESSAGE_MAP(CMyFrame, CFrameWnd)
     ON_COMMAND(ID_HELP_UPDATE,                  OnCmdHelpUpdate)
     ON_COMMAND(ID_HELP_UPGRADE,                 OnCmdHelpUpgrade)
     ON_COMMAND(ID_HELP_MIGRATION,               OnCmdHelpMigrate)
+    ON_COMMAND(ID_HELP_GET_CERT,                OnCmdHelpGetCert)
+    ON_COMMAND(ID_HELP_SET_CERT,                OnCmdHelpSetCert)
     ON_COMMAND(ID_HELP_ABOUT,                   OnCmdHelpAbout)
 
 	//ON_MESSAGE(WM_UPDATERESULT,					OnUpdateResult)
@@ -1073,6 +1076,30 @@ void CMyFrame::OnCmdHelpMigrate()
     CMyMsg text(MSG_3468);
     OpenWebView(url, text);
 }
+
+
+//---------------------------------------------------------------------------
+// OnCmdHelpGetCert
+//---------------------------------------------------------------------------
+
+
+void CMyFrame::OnCmdHelpGetCert()
+{
+    CRunBrowser x(this, L"https://sandboxie-plus.com/go.php?to=sbie-get-cert");
+}
+
+
+//---------------------------------------------------------------------------
+// OnCmdHelpSetCert
+//---------------------------------------------------------------------------
+
+void ApplyCertificate();
+
+void CMyFrame::OnCmdHelpSetCert()
+{
+    ApplyCertificate();
+}
+
 
 //---------------------------------------------------------------------------
 // OnCmdHelpAbout

@@ -8,6 +8,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.6.7 / 5.61.7] - 2023-01-?
 
+### Added
+- added option to the classic ui to apply a supporter certificate
+
+### Changed
+- time limited certificates now have 1 extra free month of validity, to improve the renewal expirience
+
 ### Fixed
 - fixed issue with Hebrew language (Classic UI) [#2608](https://github.com/sandboxie-plus/Sandboxie/issues/2608)
 - fixed issue with startmenu integration and snapshots

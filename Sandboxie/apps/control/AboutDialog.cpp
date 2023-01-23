@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -28,6 +28,8 @@
 #include "common/my_version.h"
 #include "apps/common/MyGdi.h"
 #include "apps/common/RunBrowser.h"
+#include "common/win32_ntddk.h"
+#include "core/drv/api_defs.h"
 
 
 //---------------------------------------------------------------------------
@@ -154,6 +156,14 @@ BOOL CAboutDialog::OnInitDialog()
     text.Format(L"%S\r\n%S", MY_COPYRIGHT_STRING, MY_COPYRIGHT_STRING_OLD);
     GetDlgItem(ID_ABOUT_COPYRIGHT)->SetWindowText(text);
 
+    ULONG64 CertInfo = 0;
+    SbieApi_Call(API_QUERY_DRIVER_INFO, 3, -1, (ULONG_PTR)&CertInfo, sizeof(CertInfo));
+    if (CertInfo & 1) // valid
+        GetDlgItem(ID_ABOUT_INFO)->SetWindowText(CMyMsg(MSG_7988));
+    else if (CertInfo & 2) // expired
+        GetDlgItem(ID_ABOUT_INFO)->SetWindowText(CMyMsg(MSG_7989));
+
+
     GetDlgItem(IDOK)->SetWindowText(CMyMsg(MSG_3001));
 
     return TRUE;
@@ -169,3 +179,70 @@ void CAboutDialog::OnOK()
 {
     EndDialog(0);
 }
+
+
+//---------------------------------------------------------------------------
+// ApplyCertificate
+//---------------------------------------------------------------------------
+
+
+void ApplyCertificate()
+{
+    if (CMyApp::MsgBox(NULL, MSG_7990, MB_OKCANCEL) != IDOK)
+        return;
+    
+    WCHAR CertPath[MAX_PATH];
+    GetTempPath(MAX_PATH, CertPath);
+    wcscat(CertPath, L"Sbie+Certificate.dat");
+
+    ULONG lenWritten = 0;
+    if (OpenClipboard(nullptr)) {
+        HANDLE hData = GetClipboardData(CF_UNICODETEXT);
+        if (hData != nullptr) {
+            WCHAR* pszText = static_cast<WCHAR*>(GlobalLock(hData));
+            if (pszText != nullptr) {
+                HANDLE hFile = CreateFile(CertPath, FILE_GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+                if (hFile != INVALID_HANDLE_VALUE) {
+                    ULONG utf8_len = WideCharToMultiByte(CP_UTF8, 0, pszText, wcslen(pszText), NULL, 0, NULL, NULL);
+                    char* text_utf8 = (char*)HeapAlloc(GetProcessHeap(), 0, utf8_len);
+                    if (text_utf8) {
+                        ULONG lenToWrite = WideCharToMultiByte(CP_UTF8, 0, pszText, wcslen(pszText), text_utf8, utf8_len, NULL, NULL);
+                        if (! WriteFile(hFile, (void*)text_utf8, lenToWrite, &lenWritten, NULL))
+                            lenWritten = 0;
+                        HeapFree(GetProcessHeap(), 0, text_utf8);
+                    }
+                    CloseHandle(hFile);
+                }
+                GlobalUnlock(hData);
+            }
+        }
+        CloseClipboard();
+    }
+
+    if (lenWritten == 0) {
+        CMyApp::MsgBox(NULL, MSG_7991, MB_OK | MB_ICONERROR);
+        return;
+    }
+
+    WCHAR HomePath[MAX_PATH];
+    SbieApi_GetHomePath(NULL, 0, HomePath, MAX_PATH);
+    wcscat(HomePath, L"\\Certificate.dat");
+
+    SHFILEOPSTRUCT SHFileOp;
+    memset(&SHFileOp, 0, sizeof(SHFILEOPSTRUCT));
+    SHFileOp.hwnd = NULL;
+    SHFileOp.wFunc = FO_MOVE; // FO_DELETE;
+	SHFileOp.pFrom = CertPath;
+    SHFileOp.pTo = HomePath;
+    SHFileOp.fFlags = NULL;    
+    SHFileOperation(&SHFileOp);
+
+    NTSTATUS status = SbieApi_Call(API_RELOAD_CONF, 2, -1, SBIE_CONF_FLAG_RELOAD_CERT);
+    if (!NT_SUCCESS(status)) {
+        CMyApp::MsgBox(NULL, MSG_7992, MB_OK | MB_ICONWARNING);
+        return;
+    }
+
+    CMyApp::MsgBox(NULL, MSG_7993, MB_OK | MB_ICONINFORMATION);
+}
+

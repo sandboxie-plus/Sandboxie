@@ -55,6 +55,8 @@
 #define ID_HELP_UPGRADE                 40046
 #define ID_HELP_MIGRATION               40047
 #define ID_HELP_CONTRIBUTION            40048
+#define ID_HELP_GET_CERT				40054
+#define ID_HELP_SET_CERT				40055
 #define ID_HELP_ABOUT                   40045
 #define ID_PROCESS_TERMINATE            40051
 #define ID_PROCESS_SETTINGS             40052
@@ -197,6 +199,7 @@
 #define ID_ABOUT_LOGO                   41751
 #define ID_ABOUT_VERSION                41752
 #define ID_ABOUT_COPYRIGHT              41753
+#define ID_ABOUT_INFO					41754
 #define ID_ABOUT_FRAME                  41756
 #define ID_ABOUT_TUTORIAL               41757
 #define ID_FILE_LIST                    41801

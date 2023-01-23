@@ -322,6 +322,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.lblSupport, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 	connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 	connect(ui.lblCertExp, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+	connect(ui.lblInsiderInfo, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 
 	m_CertChanged = false;
 	connect(ui.txtCertificate, SIGNAL(textChanged()), this, SLOT(CertChanged()));
@@ -745,13 +746,17 @@ void CSettingsWindow::UpdateCert()
 		QPalette palette = QApplication::palette();
 		if (theGUI->m_DarkTheme)
 			palette.setColor(QPalette::Text, Qt::black);
-		if (g_CertInfo.expired
-#ifdef _DEBUG
-			|| (GetKeyState(VK_CONTROL) & 0x8000) != 0
-#endif
-			) {
+		if (g_CertInfo.expired) {
 			palette.setColor(QPalette::Base, QColor(255, 255, 192));
-			ui.lblCertExp->setText(tr("This supporter certificate has expired, please <a href=\"sbie://update/cert\">get an updated certificate</a>."));
+			QString infoMsg = tr("This supporter certificate has expired, please <a href=\"sbie://update/cert\">get an updated certificate</a>.");
+			if (g_CertInfo.valid) {
+				if (g_CertInfo.grace_period)
+					infoMsg.append(tr("<br /><font color='red'>Plus features will be disabled in %1 days.</font>").arg(30 + g_CertInfo.expirers_in_sec / (60*60*24)));
+				else if (!g_CertInfo.outdated) // must be an expiren medium or large cert on an old build
+					infoMsg.append(tr("<br /><font color='red'>For this build Plus features remain enabled.</font>"));
+			} else
+				infoMsg.append(tr("<br />Plus features are no longer enabled."));
+			ui.lblCertExp->setText(infoMsg);
 			ui.lblCertExp->setVisible(true);
 		}
 		else {
@@ -1055,11 +1060,7 @@ void CSettingsWindow::SaveSettings()
 				palette.setColor(QPalette::Base, Qt::white);
 			else if (!bRet) 
 				palette.setColor(QPalette::Base, QColor(255, 192, 192));
-			else if (g_CertInfo.expired || g_CertInfo.outdated) {
-				palette.setColor(QPalette::Base, QColor(255, 255, 192));
-				ui.lblCertExp->setVisible(true);
-			}
-			else
+			else 
 				palette.setColor(QPalette::Base, QColor(192, 255, 192));
 
 			ui.txtCertificate->setPalette(palette);
@@ -1129,6 +1130,7 @@ bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* w
 	if (!theAPI->ReloadCert().IsError())
 	{
 		g_FeatureFlags = theAPI->GetFeatureFlags();
+		g_Certificate = Certificate;
 		theGUI->UpdateCertState();
 
 		if (g_CertInfo.expired || g_CertInfo.outdated) {
@@ -1141,7 +1143,6 @@ bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* w
 			QMessageBox::information(widget, "Sandboxie-Plus", tr("Thank you for supporting the development of Sandboxie-Plus."));
 		}
 
-		g_Certificate = Certificate;
 		return true;
 	}
 	else

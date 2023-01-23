@@ -134,6 +134,9 @@ BEGIN
         MENUITEM "3454",                        ID_HELP_UPDATE
         MENUITEM "3467",                        ID_HELP_UPGRADE
         MENUITEM SEPARATOR
+        MENUITEM "3506",                        ID_HELP_GET_CERT
+        MENUITEM "3507",                        ID_HELP_SET_CERT
+        MENUITEM SEPARATOR
         MENUITEM "3456",                        ID_HELP_ABOUT
     END
     MENUITEM "3467",                        ID_HELP_UPGRADE
@@ -253,6 +256,7 @@ BEGIN
     CONTROL         "",ID_ABOUT_LOGO,"Static",SS_BITMAP | WS_GROUP,35,15,5,5
     CTEXT           "",ID_ABOUT_VERSION,15,80,255,10
     CTEXT           "",ID_ABOUT_COPYRIGHT,15,95,255,20
+    CTEXT           "",ID_ABOUT_INFO,15,130,255,20
     DEFPUSHBUTTON   "",IDOK,115,180,55,14
 END
 

@@ -2,7 +2,5 @@
 * Missing Messages in Text-SimpChinese-2052.txt
 *==========
 
-2196;pop;inf;01
-SBIE2196 To run the MSI Installer sandboxed, the access for COM infrastructure must not be Open.
-.
+There are no missing messages.
 

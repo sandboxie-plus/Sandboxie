@@ -3370,7 +3370,6 @@ Das Zertifikat ist nicht gültig.
 Das Zertifikat ist gültig und wurde erfolgreich übernommen.
 .
 
-
 #----------------------------------------------------------------------------
 # SandboxieInstall
 #----------------------------------------------------------------------------

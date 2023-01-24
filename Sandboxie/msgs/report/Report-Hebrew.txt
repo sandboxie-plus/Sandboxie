@@ -106,6 +106,14 @@ Deleting: %2
 Contribute to Sandboxie
 .
 
+3506;txt;01
+Get Supporter Certificate
+.
+
+3507;txt;01
+Apply Supporter Certificate
+.
+
 3457;txt;01
 &Sandboxie Forum (Web)
 .
@@ -294,6 +302,30 @@ Quit
 
 6014;txt;01
 Get Certificate
+.
+
+7988;txt;01
+Your Supporter Certificate is valid, Thank You :-)
+.
+
+7989;txt;01
+The Supporter Certificate has expired :'(
+.
+
+7990;txt;01
+Please copy the entire Suppoter Certificate into the clipboard and press OK.
+.
+
+7991;txt;01
+Failed to save certificate to file.
+.
+
+7992;txt;01
+The certificate is not valid.
+.
+
+7993;txt;01
+The certificate is valid and has been successfully applied.
 .
 
 *==========

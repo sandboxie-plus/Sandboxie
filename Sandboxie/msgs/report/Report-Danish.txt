@@ -203,6 +203,14 @@ Set Layout and Groups
 Contribute to Sandboxie
 .
 
+3506;txt;01
+Get Supporter Certificate
+.
+
+3507;txt;01
+Apply Supporter Certificate
+.
+
 3453;txt;02
 Getting Started &Tutorial
 .
@@ -706,6 +714,30 @@ Ready to go!
 Thank you for taking the time to go through this tutorial.  You can visit the Sandboxie web site for more tutorials and tips.
 
 The default settings in Sandboxie provide full protection, but you may wish to review the sandbox configuration commands in the Sandbox menu in the Sandboxie Control program window.
+.
+
+7988;txt;01
+Your Supporter Certificate is valid, Thank You :-)
+.
+
+7989;txt;01
+The Supporter Certificate has expired :'(
+.
+
+7990;txt;01
+Please copy the entire Suppoter Certificate into the clipboard and press OK.
+.
+
+7991;txt;01
+Failed to save certificate to file.
+.
+
+7992;txt;01
+The certificate is not valid.
+.
+
+7993;txt;01
+The certificate is valid and has been successfully applied.
 .
 
 8014;ins;02

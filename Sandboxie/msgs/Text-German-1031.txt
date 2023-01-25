@@ -1076,6 +1076,14 @@ Software-Kompatibilität
 Zu Sandboxie beitragen
 .
 
+3506;txt;01
+Unterstützerzertifikat holen
+.
+
+3507;txt;01
+Unterstützerzertifikat verwenden
+.
+
 3446;txt;01
 Konfiguration b&earbeiten
 .
@@ -3336,6 +3344,30 @@ Alle Schritte abgeschlossen!
 Vielen Dank, dass Sie sich für diese Anleitung Zeit nahmen. Für weitere Anleitungen und Tipps besuchen Sie bitte die Sandboxie Webseite.
 
 Die Standardeinstellungen von Sandboxie bieten vollständigen Schutz. Die Sandboxeinstellungen finden Sie im Menü Sandbox des Sandboxie Control Fensters.
+.
+
+7988;txt;01
+Ihr Unterstützerzertifikat ist gültig, Vielen Dank :-)
+.
+
+7989;txt;01
+Das Unterstützerzertifikat ist abgelaufen :'(
+.
+
+7990;txt;01
+Bitte kopieren Sie das vollständige Unterstützerzertifikat in die Zwischenablage und drücken Sie OK.
+.
+
+7991;txt;01
+Konnte das Zertifikat nicht in einer Datei speichern.
+.
+
+7992;txt;01
+Das Zertifikat ist nicht gültig.
+.
+
+7993;txt;01
+Das Zertifikat ist gültig und wurde erfolgreich übernommen.
 .
 
 #----------------------------------------------------------------------------

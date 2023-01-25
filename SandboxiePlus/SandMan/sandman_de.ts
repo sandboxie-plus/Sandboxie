@@ -3936,17 +3936,17 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="753"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus-Funktionen werden in %1 Tagen deaktiviert.&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="755"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For this build Plus features remain enabled.&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Für diese Version bleiben Plus-Funktionen aktiviert.&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="757"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;Plus-Funktionen sind nicht länger aktiviert.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="763"/>

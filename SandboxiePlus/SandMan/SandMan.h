@@ -36,6 +36,7 @@ public:
 	static QString		GetVersion();
 
 	SB_PROGRESS			RecoverFiles(const QString& BoxName, const QList<QPair<QString, QString>>& FileList, int Action = 0);
+	SB_PROGRESS			CheckFiles(const QString& BoxName, const QStringList& Files);
 
 	enum EDelMode {
 		eDefault,
@@ -88,7 +89,8 @@ protected:
 	SB_STATUS			DisconnectSbie();
 	SB_RESULT(void*)	StopSbie(bool andRemove = false);
 
-	static void			RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QString& BoxName, const QList<QPair<QString, QString>>& FileList, int Action = 0);
+	static void			RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QString& BoxName, const QList<QPair<QString, QString>>& FileList, const QStringList& Checkers, int Action = 0);
+	static void			CheckFilesAsync(const CSbieProgressPtr& pProgress, const QString& BoxName, const QStringList &Files, const QStringList& Checkers);
 
 	QIcon				GetTrayIcon(bool isConnected = true);
 	QString				GetTrayText(bool isConnected = true);

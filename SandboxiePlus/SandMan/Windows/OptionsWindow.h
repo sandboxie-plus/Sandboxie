@@ -54,6 +54,13 @@ private slots:
 	void OnBoxTypChanged();
 	void UpdateBoxType();
 
+	void OnCopyItemDoubleClicked(QTreeWidgetItem* pItem, int Column);
+	void OnCopySelectionChanged() { CloseCopyEdit(); OnOptChanged(); }
+	void OnCopyChanged(QTreeWidgetItem* pItem, int Column);
+	void OnShowCopyTmpl() { LoadCopyRulesTmpl(true); }
+	void OnAddCopyRule();
+	void OnDelCopyRule();
+
 	void OnBrowsePath();
 	void OnAddCommand();
 	void OnDelCommand();
@@ -224,6 +231,13 @@ protected:
 
 	void OnTab(QWidget* pTab);
 
+	enum ECopyAction
+	{
+		eCopyAlways,
+		eDontCopy,
+		eCopyEmpty,
+	};
+
 	enum ENetWfAction
 	{
 		eAllow,
@@ -306,6 +320,11 @@ protected:
 
 	QString GetActionFile();
 
+	QString GetCopyActionStr(ECopyAction Action);
+	void ParseAndAddCopyRule(const QString& Value, ECopyAction Action, bool disabled = false, const QString& Template = QString());
+	void CloseCopyEdit(bool bSave = true);
+	void CloseCopyEdit(QTreeWidgetItem* pItem, bool bSave = true);
+
 	void SetProgramItem(QString Program, QTreeWidgetItem* pItem, int Column, const QString& Sufix = QString());
 
 	QString SelectProgram(bool bOrGroup = true);
@@ -327,6 +346,10 @@ protected:
 	void CreateGeneral();
 	void LoadGeneral();
 	void SaveGeneral();
+
+	void LoadCopyRules();
+	void LoadCopyRulesTmpl(bool bUpdate = false);
+	void SaveCopyRules();
 
 	void UpdateBoxSecurity();
 
@@ -461,6 +484,7 @@ protected:
 	bool m_HoldBoxType;
 
 	bool m_GeneralChanged;
+	bool m_CopyRulesChanged;
 	bool m_GroupsChanged;
 	bool m_ForcedChanged;
 	bool m_StopChanged;

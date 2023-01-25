@@ -281,41 +281,48 @@
             <layout class="QGridLayout" name="gridLayout_30">
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_28">
+               <item row="9" column="2" colspan="5">
+                <widget class="QCheckBox" name="chkRawDiskNotify">
+                 <property name="text">
+                  <string>Warn when an application opens a harddrive handle</string>
+                 </property>
+                </widget>
+               </item>
                <item row="6" column="1" colspan="6">
-                <widget class="QCheckBox" name="chkAutoEmpty">
+                <widget class="QCheckBox" name="chkProtectBox">
                  <property name="text">
-                  <string>Auto delete content when last sandboxed process terminates</string>
+                  <string>Protect this sandbox from deletion or emptying</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="lblMigration">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
+               <item row="8" column="1" colspan="6">
+                <widget class="QCheckBox" name="chkRawDiskRead">
                  <property name="text">
-                  <string>File Migration</string>
+                  <string>Allow elevated sandboxed applications to read the harddrive</string>
                  </property>
                 </widget>
                </item>
-               <item row="11" column="1">
-                <spacer name="verticalSpacer_2">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
+               <item row="9" column="1">
+                <widget class="QLabel" name="label_37">
+                 <property name="maximumSize">
                   <size>
                    <width>20</width>
-                   <height>40</height>
+                   <height>16777215</height>
                   </size>
                  </property>
-                </spacer>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
                </item>
-               <item row="5" column="0" colspan="3">
+               <item row="3" column="1" colspan="5">
+                <widget class="QCheckBox" name="chkUseVolumeSerialNumbers">
+                 <property name="text">
+                  <string>Use volume serial numbers for drives, like: \drive\C~1234-ABCD</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0" colspan="3">
                 <widget class="QLabel" name="lblDelete">
                  <property name="font">
                   <font>
@@ -342,31 +349,21 @@
                  </property>
                 </spacer>
                </item>
-               <item row="3" column="4">
-                <widget class="QLabel" name="lblCopyLimit">
+               <item row="0" column="2" colspan="4">
+                <widget class="QLabel" name="lblWhenEmpty">
                  <property name="text">
-                  <string>kilobytes</string>
+                  <string>The box structure can only be changed when the sandbox is empty</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkCopyPrompt">
+               <item row="10" column="1" colspan="5">
+                <widget class="QCheckBox" name="chkAllowEfs">
                  <property name="text">
-                  <string>Prompt user for large file migration</string>
+                  <string>Allow sandboxed processes to open files protected by EFS</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1" colspan="4">
-                <widget class="QCheckBox" name="chkSeparateUserFolders">
-                 <property name="text">
-                  <string>Separate user folders</string>
-                 </property>
-                 <property name="tristate">
-                  <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="0" colspan="2">
+               <item row="7" column="0" colspan="2">
                 <widget class="QLabel" name="lblRawDisk">
                  <property name="font">
                   <font>
@@ -376,65 +373,21 @@
                   </font>
                  </property>
                  <property name="text">
-                  <string>Raw Disk access</string>
+                  <string>Disk/File access</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="3">
-                <widget class="QLineEdit" name="txtCopyLimit">
-                 <property name="maximumSize">
-                  <size>
-                   <width>75</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="4" colspan="2">
-                <widget class="QCheckBox" name="chkNoCopyWarn">
+               <item row="1" column="1" colspan="2">
+                <widget class="QLabel" name="lblScheme">
                  <property name="text">
-                  <string>Issue message 2102 when a file is too large</string>
+                  <string>Virtualization scheme</string>
                  </property>
                 </widget>
                </item>
-               <item row="10" column="1">
-                <widget class="QLabel" name="label_37">
-                 <property name="maximumSize">
-                  <size>
-                   <width>20</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
+               <item row="5" column="1" colspan="6">
+                <widget class="QCheckBox" name="chkAutoEmpty">
                  <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
-               <item row="9" column="1" colspan="6">
-                <widget class="QCheckBox" name="chkRawDiskRead">
-                 <property name="text">
-                  <string>Allow elevated sandboxed applications to read the harddrive</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="10" column="2" colspan="5">
-                <widget class="QCheckBox" name="chkRawDiskNotify">
-                 <property name="text">
-                  <string>Warn when an application opens a harddrive handle</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkCopyLimit">
-                 <property name="text">
-                  <string>Copy file size limit:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="1" colspan="6">
-                <widget class="QCheckBox" name="chkProtectBox">
-                 <property name="text">
-                  <string>Protect this sandbox from deletion or emptying</string>
+                  <string>Auto delete content when last sandboxed process terminates</string>
                  </property>
                 </widget>
                </item>
@@ -449,6 +402,212 @@
                  </property>
                  <property name="text">
                   <string>Box Structure</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
+                <widget class="QComboBox" name="cmbVersion"/>
+               </item>
+               <item row="11" column="1">
+                <spacer name="verticalSpacer_2">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="1" colspan="5">
+                <widget class="QCheckBox" name="chkSeparateUserFolders">
+                 <property name="text">
+                  <string>Separate user folders</string>
+                 </property>
+                 <property name="tristate">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="tabMigration">
+            <attribute name="title">
+             <string>File Migration</string>
+            </attribute>
+            <layout class="QGridLayout" name="gridLayout_79">
+             <property name="leftMargin">
+              <number>3</number>
+             </property>
+             <property name="topMargin">
+              <number>3</number>
+             </property>
+             <property name="rightMargin">
+              <number>6</number>
+             </property>
+             <property name="bottomMargin">
+              <number>3</number>
+             </property>
+             <item row="0" column="0">
+              <layout class="QGridLayout" name="gridLayout_78">
+               <item row="2" column="1">
+                <widget class="QCheckBox" name="chkCopyLimit">
+                 <property name="text">
+                  <string>Copy file size limit:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkCopyPrompt">
+                 <property name="text">
+                  <string>Prompt user for large file migration</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="lblMigration">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>File Migration</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="11" column="0" colspan="6">
+                <widget class="QCheckBox" name="chkNoCopyMsg">
+                 <property name="toolTip">
+                  <string>2113: Content of migrated file was discarded
+2114: File was not migrated, write access to file was denied
+2115: File was not migrated, file will be opened read only</string>
+                 </property>
+                 <property name="text">
+                  <string>Issue message 2113/2114/2115 when a file is not fully migrated</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2">
+                <widget class="QLineEdit" name="txtCopyLimit">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3">
+                <widget class="QLabel" name="lblCopyLimit">
+                 <property name="text">
+                  <string>kilobytes</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="6">
+                <widget class="QPushButton" name="btnAddCopy">
+                 <property name="text">
+                  <string>Add Pattern</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="6">
+                <widget class="QPushButton" name="btnDelCopy">
+                 <property name="text">
+                  <string>Remove Pattern</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="4" colspan="2">
+                <spacer name="horizontalSpacer_17">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="8" column="6">
+                <spacer name="verticalSpacer_37">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="9" column="6">
+                <widget class="QCheckBox" name="chkShowCopyTmpl">
+                 <property name="text">
+                  <string>Show Templates</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="0" rowspan="4" colspan="6">
+                <widget class="QTreeWidget" name="treeCopy">
+                 <property name="sortingEnabled">
+                  <bool>true</bool>
+                 </property>
+                 <column>
+                  <property name="text">
+                   <string>Action</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Program</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Pattern</string>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+               <item row="0" column="0" colspan="7">
+                <widget class="QLabel" name="label_31">
+                 <property name="text">
+                  <string>Sandboxie does not allow writing to host files, unless permitted by the user. When a sandboxed application attempts to modify a file, the entire file must be copied into the sandbox, for large files this can take a significate amount of time. Sandboxie offers options for handling these cases, which can be configured on this page.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="0" colspan="6">
+                <widget class="QLabel" name="label_34">
+                 <property name="text">
+                  <string>Using wildcard patterns file specific behavior can be configured in the list below:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="3" colspan="4">
+                <widget class="QCheckBox" name="chkNoCopyWarn">
+                 <property name="text">
+                  <string>Issue message 2102 when a file is too large</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1" colspan="5">
+                <widget class="QCheckBox" name="chkDenyWrite">
+                 <property name="text">
+                  <string>When a file cannot be migrated, open it in read-only mode instead</string>
                  </property>
                 </widget>
                </item>
@@ -4375,8 +4534,6 @@ Please note that this values are currently user specific and saved globally for 
   <tabstop>treeRun</tabstop>
   <tabstop>btnAddCmd</tabstop>
   <tabstop>btnDelCmd</tabstop>
-  <tabstop>chkCopyLimit</tabstop>
-  <tabstop>chkNoCopyWarn</tabstop>
   <tabstop>chkAutoEmpty</tabstop>
   <tabstop>chkProtectBox</tabstop>
   <tabstop>treeTriggers</tabstop>

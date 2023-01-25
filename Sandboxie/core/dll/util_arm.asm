@@ -149,11 +149,10 @@ l02
 Ldr_Inject_Entry64 PROC
 
     stp         fp, lr, [sp, #-0x10]! ; push
-    add         x0, sp, 0x8 ; pRetAddr parameter
     ldr         x8, =Ldr_Inject_Entry
     blr         x8
     ldp         fp, lr, [sp], #0x10 ; pop
-    ret
+    br          x0
 
  ENDP
     

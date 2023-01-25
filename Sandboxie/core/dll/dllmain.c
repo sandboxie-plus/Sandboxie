@@ -383,6 +383,14 @@ _FX void Dll_InitInjected(void)
   //      }
   //  }
 
+
+#ifdef WITH_DEBUG
+    if (SbieApi_QueryConfBool(NULL, L"DisableSbieDll", FALSE)) {
+        Dll_InitComplete = TRUE;
+        return;
+    }
+#endif
+
     //
     // check if process SID is LocalSystem
     //

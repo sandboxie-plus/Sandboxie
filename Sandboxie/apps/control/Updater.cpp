@@ -237,13 +237,14 @@ BOOLEAN CUpdater::QueryUpdateData(UPDATER_DATA* Context)
 	JSONValue* jsonObject = NULL;
 	JSONObject jsonRoot;
 
-	Path.Format(L"/update.php?software=sandboxie&version=%S&system=windows-%d.%d.%d-%s&language=%d&auto=%s", MY_VERSION_STRING, 
+	Path.Format(L"/update.php?software=sandboxie&version=%S&system=windows-%d.%d.%d-%s&language=%d&auto=%s", 
+		MY_VERSION_STRING, m_osvi.dwMajorVersion, m_osvi.dwMinorVersion, m_osvi.dwBuildNumber,
 #ifdef _M_ARM64
-		m_osvi.dwMajorVersion, m_osvi.dwMinorVersion, m_osvi.dwBuildNumber, L"ARM64",
+		L"ARM64",
 #elif _WIN64
-		m_osvi.dwMajorVersion, m_osvi.dwMinorVersion, m_osvi.dwBuildNumber, L"x86_64",
+		L"x86_64",
 #else
-		m_osvi.dwMajorVersion, m_osvi.dwMinorVersion, m_osvi.dwBuildNumber, L"i386",
+		L"i386",
 #endif
 		SbieDll_GetLanguage(NULL), Context->Manual ? L"0" : L"1");
 

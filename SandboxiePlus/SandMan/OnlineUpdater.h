@@ -32,7 +32,7 @@ public:
 
 	void				GetUpdates(QObject* receiver, const char* member, const QVariantMap& Params = QVariantMap());
 
-	void				UpdateCert();
+	void				UpdateCert(bool bWait = false);
 
 	void				CheckForUpdates(bool bManual = false);
 

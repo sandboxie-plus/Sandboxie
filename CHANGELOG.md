@@ -4,9 +4,30 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.7.0 / 5.62.0] - 2023-01-25
 
 
-## [1.6.7 / 5.61.7] - 2023-01-?
+### Added
+- added OnFileRecovery trigger allowing to check files before recovering them [#2202](https://github.com/sandboxie-plus/Sandboxie/issues/2202)
+
+- added more box structure presets to sandbox options
+-- Note: these can only be changed when the box is empty
+
+- added new File Migration option page with additional settings
+- added SBIE2113/SBIE2114/SBIE2115 message to indicate files not being migrated due to presets
+
+### changed
+- moved SeparateUserFolders checlbox from global settings to per box options
+
+### fixed
+- resolved SbieDll.dll incompatybility with shadow stack and enabled /CETCOMPAT for SbieDll.dll [#2559](https://github.com/sandboxie-plus/Sandboxie/issues/2559)
+- added missing registry hooks to improve compatybility with newer appliations
+- fixed permission isue with registry entries in privacy mode boxes
+
+
+
+
+## [1.6.7 / 5.61.7] - 2023-01-24
 
 ### Added
 - added option to the classic ui to apply a supporter certificate

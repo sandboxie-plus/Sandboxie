@@ -161,6 +161,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabs->tabBar()->setProperty("isSidebar", true);
 
 
+	ui.tabs->setCurrentIndex(0);
 	ui.tabs->setTabIcon(0, CSandMan::GetIcon("Config"));
 	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Security"));
 	ui.tabs->setTabIcon(2, CSandMan::GetIcon("Group"));
@@ -175,26 +176,33 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabs->setTabIcon(11, CSandMan::GetIcon("Template"));
 	ui.tabs->setTabIcon(12, CSandMan::GetIcon("Editor"));
 
+	ui.tabsGeneral->setCurrentIndex(0);
 	ui.tabsGeneral->setTabIcon(0, CSandMan::GetIcon("Box"));
-	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("File"));
-	ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("NoAccess"));
-	ui.tabsGeneral->setTabIcon(3, CSandMan::GetIcon("Run"));
+	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("Folder"));
+	ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("Move"));
+	ui.tabsGeneral->setTabIcon(3, CSandMan::GetIcon("NoAccess"));
+	ui.tabsGeneral->setTabIcon(4, CSandMan::GetIcon("Run"));
 
+	ui.tabsSecurity->setCurrentIndex(0);
 	ui.tabsSecurity->setTabIcon(0, CSandMan::GetIcon("Shield7"));
 	ui.tabsSecurity->setTabIcon(1, CSandMan::GetIcon("Fence"));
 	ui.tabsSecurity->setTabIcon(2, CSandMan::GetIcon("Shield12"));
 
+	ui.tabsForce->setCurrentIndex(0);
 	ui.tabsForce->setTabIcon(0, CSandMan::GetIcon("Force"));
 	ui.tabsForce->setTabIcon(1, CSandMan::GetIcon("Breakout"));
 
+	ui.tabsStop->setCurrentIndex(0);
 	ui.tabsStop->setTabIcon(0, CSandMan::GetIcon("Fail"));
 	ui.tabsStop->setTabIcon(1, CSandMan::GetIcon("Pass"));
 		
+	ui.tabsInternet->setCurrentIndex(0);
 	ui.tabsInternet->setTabIcon(0, CSandMan::GetIcon("Program"));
 	ui.tabsInternet->setTabIcon(1, CSandMan::GetIcon("Wall"));
 	ui.tabsInternet->setTabIcon(2, CSandMan::GetIcon("DNS"));
 	ui.tabsInternet->setTabIcon(3, CSandMan::GetIcon("Proxy"));
 
+	ui.tabsAccess->setCurrentIndex(0);
 	ui.tabsAccess->setTabIcon(0, CSandMan::GetIcon("Folder"));
 	ui.tabsAccess->setTabIcon(1, CSandMan::GetIcon("RegEdit"));
 	ui.tabsAccess->setTabIcon(2, CSandMan::GetIcon("Port"));
@@ -203,9 +211,11 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	//ui.tabsAccess->setTabIcon(0, CSandMan::GetIcon("Rules"));
 	ui.tabsAccess->setTabIcon(5, CSandMan::GetIcon("Policy"));
 
+	ui.tabsRecovery->setCurrentIndex(0);
 	ui.tabsRecovery->setTabIcon(0, CSandMan::GetIcon("QuickRecovery"));
 	ui.tabsRecovery->setTabIcon(1, CSandMan::GetIcon("ImmidiateRecovery"));
 
+	ui.tabsAdvanced->setCurrentIndex(0);
 	ui.tabsAdvanced->setTabIcon(0, CSandMan::GetIcon("Compatibility"));
 	ui.tabsAdvanced->setTabIcon(1, CSandMan::GetIcon("Trigger"));
 	ui.tabsAdvanced->setTabIcon(2, CSandMan::GetIcon("Anon"));
@@ -214,6 +224,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabsAdvanced->setTabIcon(5, CSandMan::GetIcon("SetLogging"));
 	ui.tabsAdvanced->setTabIcon(6, CSandMan::GetIcon("Bug"));
 
+	ui.tabsTemplates->setCurrentIndex(0);
 	ui.tabsTemplates->setTabIcon(0, CSandMan::GetIcon("Compatibility"));
 	ui.tabsTemplates->setTabIcon(1, CSandMan::GetIcon("Explore"));
 	ui.tabsTemplates->setTabIcon(2, CSandMan::GetIcon("Accessibility"));
@@ -506,7 +517,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	UpdateCurrentTab();
 
 	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
-
+	
+	ui.treeCopy->viewport()->installEventFilter(this);
 	ui.treeINet->viewport()->installEventFilter(this);
 	ui.treeNetFw->viewport()->installEventFilter(this);
 	ui.treeFiles->viewport()->installEventFilter(this);
@@ -601,11 +613,13 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 {
 	if (event->type() == QEvent::KeyPress && ((QKeyEvent*)event)->key() == Qt::Key_Escape 
 		&& ((QKeyEvent*)event)->modifiers() == Qt::NoModifier
-		&& (source == ui.treeINet->viewport() || source == ui.treeNetFw->viewport() 
+		&& (source == ui.treeCopy->viewport()
+			|| source == ui.treeINet->viewport() || source == ui.treeNetFw->viewport() 
 			// || source == ui.treeAccess->viewport()
 			|| source == ui.treeFiles->viewport() || source == ui.treeKeys->viewport() || source == ui.treeIPC->viewport() || source == ui.treeWnd->viewport() || source == ui.treeCOM->viewport() 
 			|| (ui.treeOptions && source == ui.treeOptions->viewport())))
 	{
+		CloseCopyEdit(false);
 		CloseINetEdit(false);
 		CloseNetFwEdit(false);
 		CloseAccessEdit(false);
@@ -616,6 +630,7 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 	if (event->type() == QEvent::KeyPress && (((QKeyEvent*)event)->key() == Qt::Key_Enter || ((QKeyEvent*)event)->key() == Qt::Key_Return) 
 		&& (((QKeyEvent*)event)->modifiers() == Qt::NoModifier || ((QKeyEvent*)event)->modifiers() == Qt::KeypadModifier))
 	{
+		CloseCopyEdit(true);
 		CloseINetEdit(true);
 		CloseNetFwEdit(true);
 		CloseAccessEdit(true);
@@ -623,6 +638,21 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 		return true; // cancel event
 	}
 	
+	if (source == ui.treeCopy->viewport() && event->type() == QEvent::MouseButtonPress)
+	{
+		CloseCopyEdit();
+	}
+
+	if (source == ui.treeINet->viewport() && event->type() == QEvent::MouseButtonPress)
+	{
+		CloseINetEdit();
+	}
+
+	if (source == ui.treeNetFw->viewport() && event->type() == QEvent::MouseButtonPress)
+	{
+		CloseNetFwEdit();
+	}
+
 	if (//source == ui.treeAccess->viewport() 
 		(source == ui.treeFiles->viewport() || source == ui.treeKeys->viewport() || source == ui.treeIPC->viewport() || source == ui.treeWnd->viewport() || source == ui.treeCOM->viewport())
 		&& event->type() == QEvent::MouseButtonPress)
@@ -630,15 +660,6 @@ bool COptionsWindow::eventFilter(QObject *source, QEvent *event)
 		CloseAccessEdit();
 	}
 
-	if (source == ui.treeINet->viewport() && event->type() == QEvent::MouseButtonPress)
-	{
-		CloseINetEdit();
-	}
-	
-	if (source == ui.treeNetFw->viewport() && event->type() == QEvent::MouseButtonPress)
-	{
-		CloseNetFwEdit();
-	}
 
 	if ((ui.treeOptions && source == ui.treeOptions->viewport()) && event->type() == QEvent::MouseButtonPress)
 	{

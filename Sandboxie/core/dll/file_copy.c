@@ -51,6 +51,7 @@ static BOOLEAN File_MigrationDenyWrite = FALSE;
 
 static ULONGLONG File_CopyLimitKb = (80 * 1024);        // 80 MB
 static BOOLEAN File_CopyLimitSilent = FALSE;
+static BOOLEAN File_NotifyNoCopy = FALSE;
 
 //---------------------------------------------------------------------------
 // File_InitFileMigration
@@ -76,7 +77,34 @@ _FX BOOLEAN File_InitFileMigration(void)
 
     File_InitCopyLimit();
 
+    File_NotifyNoCopy = SbieApi_QueryConfBool(NULL, L"NotifyNoCopy", FALSE);
+
     return TRUE;
+}
+
+
+//---------------------------------------------------------------------------
+// File_MigrateFile_Message
+//---------------------------------------------------------------------------
+
+
+_FX VOID File_MigrateFile_Message(const WCHAR* TruePath, ULONGLONG file_size, int MsgID)
+{
+    const WCHAR* name = wcsrchr(TruePath, L'\\');
+    if (name)
+        ++name;
+    else
+        name = TruePath;
+
+    ULONG TruePathNameLen = wcslen(name);
+    WCHAR* text = Dll_AllocTemp(
+        (TruePathNameLen + 64) * sizeof(WCHAR));
+    Sbie_snwprintf(text, (TruePathNameLen + 64), L"%s [%s / %I64u]",
+        name, Dll_BoxName, file_size);
+
+    SbieApi_Log(MsgID, text);
+
+    Dll_Free(text);
 }
 
 
@@ -121,8 +149,21 @@ found_match:
 
     Dll_Free(path_lwr);
 
-    if (mode != NUM_COPY_MODES)
+    if (mode != NUM_COPY_MODES) {
+
+        if (File_NotifyNoCopy) {
+            if (mode == FILE_DONT_COPY) {
+                if(File_MigrationDenyWrite)
+                    File_MigrateFile_Message(TruePath, file_size, 2114);
+                else // else open read only
+                    File_MigrateFile_Message(TruePath, file_size, 2115);
+            }
+            else if (mode == FILE_COPY_EMPTY) 
+                File_MigrateFile_Message(TruePath, file_size, 2113);
+        }
+
         return mode;
+    }
 
     //
     // if tere is no configuration for this file type/path decide based on the file size
@@ -162,23 +203,7 @@ found_match:
     //
 
     else if (!File_CopyLimitSilent) 
-    {
-        const WCHAR* name = wcsrchr(TruePath, L'\\');
-        if (name)
-            ++name;
-        else
-            name = TruePath;
-
-        ULONG TruePathNameLen = wcslen(name);
-        WCHAR* text = Dll_AllocTemp(
-            (TruePathNameLen + 64) * sizeof(WCHAR));
-        Sbie_snwprintf(text, (TruePathNameLen + 64), L"%s [%s / %I64u]",
-            name, Dll_BoxName, file_size);
-
-        SbieApi_Log(2102, text);
-
-        Dll_Free(text);
-    }
+        File_MigrateFile_Message(TruePath, file_size, 2102);
 
     return FILE_DONT_COPY;
 }

@@ -156,12 +156,33 @@ void COptionsWindow::CreateGeneral()
 	//connect(ui.chkOpenSmartCard, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	//connect(ui.chkOpenBluetooth, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
+	ui.cmbVersion->addItem(tr("Version 1"));
+	ui.cmbVersion->addItem(tr("Version 2"));
+
+	bool bEmpty = ((CSandBoxPlus*)m_pBox.data())->IsEmpty();
+	ui.lblWhenEmpty->setVisible(!bEmpty);
+	ui.lblScheme->setEnabled(bEmpty);
+	ui.cmbVersion->setEnabled(bEmpty);
+	ui.chkSeparateUserFolders->setEnabled(bEmpty);
+	ui.chkUseVolumeSerialNumbers->setEnabled(bEmpty);
+
+	connect(ui.cmbVersion, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkSeparateUserFolders, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkUseVolumeSerialNumbers, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
 	connect(ui.txtCopyLimit, SIGNAL(textChanged(const QString&)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkCopyLimit, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkCopyPrompt, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkNoCopyWarn, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkDenyWrite, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkNoCopyMsg, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
+
+	connect(ui.btnAddCopy, SIGNAL(clicked(bool)), this, SLOT(OnAddCopyRule()));
+	connect(ui.btnDelCopy, SIGNAL(clicked(bool)), this, SLOT(OnDelCopyRule()));
+	connect(ui.treeCopy, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnCopyItemDoubleClicked(QTreeWidgetItem*, int)));
+	connect(ui.treeCopy, SIGNAL(itemSelectionChanged()), this, SLOT(OnCopySelectionChanged()));
+	connect(ui.treeCopy, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(OnCopyChanged(QTreeWidgetItem*, int)));
+	connect(ui.chkShowCopyTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowCopyTmpl()));
 
 	connect(ui.chkProtectBox, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkAutoEmpty, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
@@ -254,14 +275,30 @@ void COptionsWindow::LoadGeneral()
 	ui.cmbDblClick->setCurrentIndex(pos);
 	if (pos == -1) ui.cmbDblClick->setCurrentText(Action);
 
+
+	if (m_pBox->GetBool("UseFileDeleteV2", false) && m_pBox->GetBool("UseRegDeleteV2", false))
+		ui.cmbVersion->setCurrentIndex(1);
+	else if (!m_pBox->GetBool("UseFileDeleteV2", false) && !m_pBox->GetBool("UseRegDeleteV2", false))
+		ui.cmbVersion->setCurrentIndex(0);
+	else {
+		ui.cmbVersion->setEditable(true);
+		ui.cmbVersion->lineEdit()->setReadOnly(true);
+		ui.cmbVersion->setCurrentText(tr("Indeterminate"));
+	}
+
 	ReadGlobalCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", true);
+	ReadGlobalCheck(ui.chkUseVolumeSerialNumbers, "UseVolumeSerialNumbers", false);
 
 	int iLimit = m_pBox->GetNum("CopyLimitKb", 80 * 1024);
 	ui.chkCopyLimit->setChecked(iLimit != -1);
 	ui.txtCopyLimit->setText(QString::number(iLimit > 0 ? iLimit : 80 * 1024));
 	ui.chkCopyPrompt->setChecked(m_pBox->GetBool("PromptForFileMigration", true));
 	ui.chkNoCopyWarn->setChecked(!m_pBox->GetBool("CopyLimitSilent", false));
+	ui.chkDenyWrite->setChecked(m_pBox->GetBool("CopyBlockDenyWrite", false));
+	ui.chkNoCopyMsg->setChecked(m_pBox->GetBool("NotifyNoCopy", false));
 	
+	LoadCopyRules();
+
 	ui.chkProtectBox->setChecked(m_pBox->GetBool("NeverDelete", false));
 	ui.chkAutoEmpty->setChecked(m_pBox->GetBool("AutoDelete", false));
 
@@ -328,11 +365,29 @@ void COptionsWindow::SaveGeneral()
 	}
 	WriteTextList("RunCommand", RunCommands);
 
-	WriteGlobalCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", true);
+	if (ui.cmbVersion->isEnabled()) 
+	{
+		if (ui.cmbVersion->currentIndex() == 1) { // V2
+			m_pBox->SetBool("UseFileDeleteV2", true);
+			m_pBox->SetBool("UseRegDeleteV2", true);
+		}
+		else if (ui.cmbVersion->currentIndex() == 0) { // V1
+			m_pBox->DelValue("UseFileDeleteV2");
+			m_pBox->DelValue("UseRegDeleteV2");
+		}
+
+		WriteGlobalCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", true);
+		WriteGlobalCheck(ui.chkUseVolumeSerialNumbers, "UseVolumeSerialNumbers", false);
+	}
 
 	WriteText("CopyLimitKb", ui.chkCopyLimit->isChecked() ? ui.txtCopyLimit->text() : "-1");
 	WriteAdvancedCheck(ui.chkCopyPrompt, "PromptForFileMigration", "", "n");
 	WriteAdvancedCheck(ui.chkNoCopyWarn, "CopyLimitSilent", "", "y");
+	WriteAdvancedCheck(ui.chkDenyWrite, "CopyBlockDenyWrite", "y", "");
+	WriteAdvancedCheck(ui.chkNoCopyMsg, "NotifyNoCopy", "y", "");
+
+	if (m_CopyRulesChanged)
+		SaveCopyRules();
 
 	WriteAdvancedCheck(ui.chkProtectBox, "NeverDelete", "y", "");
 	WriteAdvancedCheck(ui.chkAutoEmpty, "AutoDelete", "y", "");
@@ -342,6 +397,287 @@ void COptionsWindow::SaveGeneral()
 
 	m_GeneralChanged = false;
 }
+
+// copy
+void COptionsWindow::LoadCopyRules()
+{
+	ui.treeCopy->clear();
+
+	foreach(const QString & Value, m_pBox->GetTextList("CopyAlways", m_Template))
+		ParseAndAddCopyRule(Value, eCopyAlways);
+	foreach(const QString & Value, m_pBox->GetTextList("DontCopy", m_Template))
+		ParseAndAddCopyRule(Value, eDontCopy);
+	foreach(const QString & Value, m_pBox->GetTextList("CopyEmpty", m_Template))
+		ParseAndAddCopyRule(Value, eCopyEmpty);
+
+	foreach(const QString & Value, m_pBox->GetTextList("CopyAlwaysDisabled", m_Template))
+		ParseAndAddCopyRule(Value, eCopyAlways, true);
+	foreach(const QString & Value, m_pBox->GetTextList("DontCopyDisabled", m_Template))
+		ParseAndAddCopyRule(Value, eDontCopy, true);
+	foreach(const QString & Value, m_pBox->GetTextList("CopyEmptyDisabled", m_Template))
+		ParseAndAddCopyRule(Value, eCopyEmpty, true);
+
+	LoadCopyRulesTmpl();
+
+	m_CopyRulesChanged = false;
+}
+
+void COptionsWindow::LoadCopyRulesTmpl(bool bUpdate)
+{
+	if (ui.chkShowCopyTmpl->isChecked())
+	{
+		foreach(const QString & Template, m_pBox->GetTemplates())
+		{
+			foreach(const QString & Value, m_pBox->GetTextListTmpl("CopyAlways", Template))
+				ParseAndAddCopyRule(Value, eCopyAlways, false, Template);
+			foreach(const QString & Value, m_pBox->GetTextListTmpl("DontCopy", Template))
+				ParseAndAddCopyRule(Value, eDontCopy, false, Template);
+			foreach(const QString & Value, m_pBox->GetTextListTmpl("CopyEmpty", Template))
+				ParseAndAddCopyRule(Value, eCopyEmpty, false, Template);
+		}
+	}
+	else if (bUpdate)
+	{
+		for (int i = 0; i < ui.treeCopy->topLevelItemCount(); )
+		{
+			QTreeWidgetItem* pItem = ui.treeCopy->topLevelItem(i);
+			int Type = pItem->data(0, Qt::UserRole).toInt();
+			if (Type == -1) {
+				delete pItem;
+				continue; // entry from template
+			}
+			i++;
+		}
+	}
+}
+
+QString COptionsWindow::GetCopyActionStr(ECopyAction Action)
+{
+	switch (Action)
+	{
+	case eCopyAlways:	return tr("Always copy");
+	case eDontCopy:		return tr("Don't copy");
+	case eCopyEmpty:	return tr("Copy empty");
+	}
+	return "";
+}
+
+void COptionsWindow::ParseAndAddCopyRule(const QString& Value, ECopyAction Action, bool disabled, const QString& Template)
+{
+	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+
+	pItem->setText(0, GetCopyActionStr(Action));
+	pItem->setData(0, Qt::UserRole, Template.isEmpty() ? (int)Action : -1);
+
+	QString Program;
+	QString Pattern;
+	QStringList Values = Value.split(",");
+	if (Values.size() >= 2) {
+		Program = Values[0];
+		Pattern = Values[1];
+	}
+	else 
+		Pattern = Values[0];
+
+	// todo this block is also used by access move this to an own function
+	pItem->setData(1, Qt::UserRole, Program);
+	bool bAll = Program.isEmpty();
+	if (bAll)
+		Program = tr("All Programs");
+	bool Not = Program.left(1) == "!";
+	if (Not)
+		Program.remove(0, 1);
+	if (Program.left(1) == "<")
+		Program = tr("Group: %1").arg(Program.mid(1, Program.length() - 2));
+	else if (!bAll)
+		m_Programs.insert(Program);
+	pItem->setText(1, (Not ? "NOT " : "") + Program);
+
+	pItem->setText(2, Pattern);
+
+	if (Template.isEmpty())
+		pItem->setCheckState(0, disabled ? Qt::Unchecked : Qt::Checked);
+	ui.treeCopy->addTopLevelItem(pItem);
+}
+
+void COptionsWindow::SaveCopyRules()
+{
+	QList<QString> CopyAlways;
+	QList<QString> CopyAlwaysDisabled;
+	QList<QString> DontCopy;
+	QList<QString> DontCopyDisabled;
+	QList<QString> CopyEmpty;
+	QList<QString> CopyEmptyDisabled;
+	for (int i = 0; i < ui.treeCopy->topLevelItemCount(); i++)
+	{
+		QTreeWidgetItem* pItem = ui.treeCopy->topLevelItem(i);
+		int Type = pItem->data(0, Qt::UserRole).toInt();
+		if (Type == -1)
+			continue; // entry from template
+		ECopyAction Action = (ECopyAction)pItem->data(0, Qt::UserRole).toInt();
+		QString Program = pItem->data(1, Qt::UserRole).toString();
+		QString Pattern = pItem->text(2);
+		
+		if (!Program.isEmpty())
+			Pattern.prepend(Program + ",");
+
+		if (pItem->checkState(0) == Qt::Checked) {
+			switch (Action) {
+			case eCopyAlways:	CopyAlways.append(Pattern); break;
+			case eDontCopy:		DontCopy.append(Pattern); break;
+			case eCopyEmpty:	CopyEmpty.append(Pattern); break;
+			}
+		}
+		else {
+			switch (Action) {
+			case eCopyAlways:	CopyAlwaysDisabled.append(Pattern); break;
+			case eDontCopy:		DontCopyDisabled.append(Pattern); break;
+			case eCopyEmpty:	CopyEmptyDisabled.append(Pattern); break;
+			}
+		}
+	}
+	WriteTextList("CopyAlways", CopyAlways);
+	WriteTextList("CopyAlwaysDisabled", CopyAlwaysDisabled);
+	WriteTextList("DontCopy", DontCopy);
+	WriteTextList("DontCopyDisabled", DontCopyDisabled);
+	WriteTextList("CopyEmpty", CopyEmpty);
+	WriteTextList("CopyEmptyDisabled", CopyEmptyDisabled);
+
+	m_CopyRulesChanged = false;
+}
+
+void COptionsWindow::OnCopyItemDoubleClicked(QTreeWidgetItem* pItem, int Column)
+{
+	int Action = pItem->data(0, Qt::UserRole).toInt();
+	if (Action == -1) {
+		QMessageBox::warning(this, "SandboxiePlus", tr("Template values can not be edited."));
+		return;
+	}
+
+	QComboBox* pMode = new QComboBox();
+	pMode->addItem(tr("Always copy"), (int)eCopyAlways);
+	pMode->addItem(tr("Don't copy"), (int)eDontCopy);
+	pMode->addItem(tr("Copy empty"), (int)eCopyEmpty);
+	pMode->setCurrentIndex(pMode->findData(pItem->data(0, Qt::UserRole)));
+	ui.treeCopy->setItemWidget(pItem, 0, pMode);
+
+	QString Program = pItem->data(1, Qt::UserRole).toString();
+
+	// todo: 
+	QWidget* pProgram = new QWidget();
+	pProgram->setAutoFillBackground(true);
+	QHBoxLayout* pLayout = new QHBoxLayout();
+	pLayout->setContentsMargins(0, 0, 0, 0);
+	pLayout->setSpacing(0);
+	pProgram->setLayout(pLayout);
+	QToolButton* pNot = new QToolButton(pProgram);
+	pNot->setText("!");
+	pNot->setCheckable(true);
+	if (Program.left(1) == "!") {
+		pNot->setChecked(true);
+		Program.remove(0, 1);
+	}
+	pLayout->addWidget(pNot);
+	QComboBox* pCombo = new QComboBox(pProgram);
+	pCombo->addItem(tr("All Programs"), "");
+
+	for (int i = 0; i < ui.treeGroups->topLevelItemCount(); i++) {
+		QTreeWidgetItem* pItem = ui.treeGroups->topLevelItem(i);
+		pCombo->addItem(tr("Group: %1").arg(pItem->text(0)), pItem->data(0, Qt::UserRole).toString());
+	}
+
+	foreach(const QString & Name, m_Programs)
+		pCombo->addItem(Name, Name);
+
+	pCombo->setEditable(true);
+	int Index = pCombo->findData(Program);
+	pCombo->setCurrentIndex(Index);
+	if (Index == -1)
+		pCombo->setCurrentText(Program);
+	pLayout->addWidget(pCombo);
+
+	ui.treeCopy->setItemWidget(pItem, 1, pProgram);
+
+	QLineEdit* pPattern = new QLineEdit();
+	pPattern->setText(pItem->text(2));
+	ui.treeCopy->setItemWidget(pItem, 2, pPattern);
+}
+
+void COptionsWindow::OnCopyChanged(QTreeWidgetItem* pItem, int Column)
+{
+	if (Column != 0)
+		return;
+
+	m_CopyRulesChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::CloseCopyEdit(bool bSave)
+{
+	for (int i = 0; i < ui.treeCopy->topLevelItemCount(); i++)
+	{
+		QTreeWidgetItem* pItem = ui.treeCopy->topLevelItem(i);
+		CloseCopyEdit(pItem, bSave);
+	}
+}
+
+void COptionsWindow::CloseCopyEdit(QTreeWidgetItem* pItem, bool bSave)
+{
+	QWidget* pProgram = ui.treeCopy->itemWidget(pItem, 1);
+	if (!pProgram)
+		return;
+
+	if (bSave)
+	{
+		QComboBox* pAction = (QComboBox*)ui.treeCopy->itemWidget(pItem, 0);
+
+		QHBoxLayout* pLayout = (QHBoxLayout*)pProgram->layout();
+		QToolButton* pNot = (QToolButton*)pLayout->itemAt(0)->widget();
+		QComboBox* pCombo = (QComboBox*)pLayout->itemAt(1)->widget();
+
+		QLineEdit* pPattern = (QLineEdit*)ui.treeCopy->itemWidget(pItem, 2);
+
+		QString Program = pCombo->currentText();
+		int Index = pCombo->findText(Program);
+		if (Index != -1)
+			Program = pCombo->itemData(Index, Qt::UserRole).toString();
+
+		pItem->setText(0, pAction->currentText());
+		pItem->setData(0, Qt::UserRole, pAction->currentData());
+
+		pItem->setText(1, (pNot->isChecked() ? "NOT " : "") + pCombo->currentText());
+		pItem->setData(1, Qt::UserRole, (pNot->isChecked() ? "!" : "") + Program);
+
+		pItem->setText(2, pPattern->text());
+		
+		m_CopyRulesChanged = true;
+		OnOptChanged();
+	}
+
+	for (int i = 0; i < 3; i++)
+		ui.treeCopy->setItemWidget(pItem, i, NULL);
+}
+
+void COptionsWindow::OnAddCopyRule()
+{
+	ParseAndAddCopyRule("", eCopyAlways);
+	
+	m_CopyRulesChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::OnDelCopyRule()
+{
+	QTreeWidgetItem* pItem = ui.treeCopy->currentItem();
+	if (!pItem)
+		return;
+
+	delete pItem;
+
+	m_CopyRulesChanged = true;
+	OnOptChanged();
+}
+//
 
 void COptionsWindow::OnGeneralChanged()
 {

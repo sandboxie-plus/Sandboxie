@@ -212,6 +212,9 @@ static LONG __stdcall MyCrashHandlerExceptionFilter(EXCEPTION_POINTERS* pEx)
 #endif
   bool bSuccess = false;
 
+  if (pEx->ExceptionRecord->ExceptionCode == DBG_PRINTEXCEPTION_C || pEx->ExceptionRecord->ExceptionCode == DBG_PRINTEXCEPTION_WIDE_C)
+	  return EXCEPTION_CONTINUE_SEARCH;
+
   wchar_t szMiniDumpFileName[128];
   wsprintf(szMiniDumpFileName, L"%s %s.dmp", s_szMiniDumpName, QDateTime::currentDateTime().toString("dd.MM.yyyy hh-mm-ss,zzz").replace(QRegularExpression("[:*?<>|\"\\/]"), "_").toStdWString().c_str());
   
@@ -286,6 +289,9 @@ void InitMiniDumpWriter(const wchar_t* Name, const wchar_t* Path)
   // Additional call "PreventSetUnhandledExceptionFilter"...
   // See also: "SetUnhandledExceptionFilter" and VC8 (and later)
   // http://blog.kalmbachnet.de/?postid=75
+
+  // Register Vectored Exception Handler
+  AddVectoredExceptionHandler(0, MyCrashHandlerExceptionFilter);
 }
 
 

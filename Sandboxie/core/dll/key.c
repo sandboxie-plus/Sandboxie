@@ -81,16 +81,30 @@ static NTSTATUS Key_NtOpenKey(
     ACCESS_MASK DesiredAccess,
     OBJECT_ATTRIBUTES *ObjectAttributes);
 
+static NTSTATUS Key_NtOpenKeyTransacted(
+    HANDLE *KeyHandle,
+    ACCESS_MASK DesiredAccess,
+    OBJECT_ATTRIBUTES *ObjectAttributes,
+    HANDLE TransactionHandle);
+
 static NTSTATUS Key_NtOpenKeyImpl(
     HANDLE *KeyHandle,
     ACCESS_MASK DesiredAccess,
-    OBJECT_ATTRIBUTES *ObjectAttributes);
+    OBJECT_ATTRIBUTES *ObjectAttributes,
+    HANDLE TransactionHandle);
 
 static NTSTATUS Key_NtOpenKeyEx(
     HANDLE *KeyHandle,
     ACCESS_MASK DesiredAccess,
     OBJECT_ATTRIBUTES *ObjectAttributes,
     ULONG OpenOptions);
+
+static NTSTATUS Key_NtOpenKeyTransactedEx(
+    HANDLE *KeyHandle,
+    ACCESS_MASK DesiredAccess,
+    OBJECT_ATTRIBUTES *ObjectAttributes,
+    ULONG OpenOptions,
+    HANDLE TransactionHandle);
 
 static NTSTATUS Key_NtCreateKey(
     HANDLE *KeyHandle,
@@ -101,6 +115,16 @@ static NTSTATUS Key_NtCreateKey(
     ULONG CreateOptions,
     ULONG *Disposition);
 
+static NTSTATUS Key_NtCreateKeyTransacted(
+    PHANDLE KeyHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes,
+    ULONG TitleIndex,
+    PUNICODE_STRING Class,
+    ULONG CreateOptions,
+    HANDLE TransactionHandle,
+    PULONG Disposition);
+
 static NTSTATUS Key_NtCreateKeyImpl(
     HANDLE *KeyHandle,
     ACCESS_MASK DesiredAccess,
@@ -108,7 +132,8 @@ static NTSTATUS Key_NtCreateKeyImpl(
     ULONG TitleIndex,
     UNICODE_STRING *Class,
     ULONG CreateOptions,
-    ULONG *Disposition);
+    ULONG *Disposition,
+    HANDLE TransactionHandle);
 
 static NTSTATUS Key_CreatePath(
     OBJECT_ATTRIBUTES *objattrs, PSECURITY_DESCRIPTOR *sd);
@@ -280,8 +305,11 @@ NTSTATUS File_NtCloseImpl(HANDLE FileHandle);
 
 
        P_NtOpenKey                  __sys_NtOpenKey                 = NULL;
+static P_NtOpenKeyTransacted        __sys_NtOpenKeyTransacted       = NULL;
 static P_NtOpenKeyEx                __sys_NtOpenKeyEx               = NULL;
+static P_NtOpenKeyTransactedEx      __sys_NtOpenKeyTransactedEx     = NULL;
 static P_NtCreateKey                __sys_NtCreateKey               = NULL;
+static P_NtCreateKeyTransacted      __sys_NtCreateKeyTransacted     = NULL;
 static P_NtDeleteKey                __sys_NtDeleteKey               = NULL;
 static P_NtDeleteValueKey           __sys_NtDeleteValueKey          = NULL;
 static P_NtSetValueKey              __sys_NtSetValueKey             = NULL;
@@ -428,6 +456,20 @@ _FX BOOLEAN Key_Init(void)
         SBIEDLL_HOOK(Key_, NtOpenKeyEx);
     }
 
+    void* NtOpenKeyTransacted = GetProcAddress(Dll_Ntdll, "NtOpenKeyTransacted");
+    if (NtOpenKeyTransacted) { // Windows vista
+        SBIEDLL_HOOK(Key_, NtOpenKeyTransacted);
+    }
+
+    void* NtOpenKeyTransactedEx = GetProcAddress(Dll_Ntdll, "NtOpenKeyTransactedEx");
+    if (NtOpenKeyTransactedEx) { // windows server 2008 R2
+        SBIEDLL_HOOK(Key_, NtOpenKeyTransactedEx);
+    }
+
+    void* NtCreateKeyTransacted = GetProcAddress(Dll_Ntdll, "NtCreateKeyTransacted");
+    if (NtCreateKeyTransacted) { // Windows vista
+        SBIEDLL_HOOK(Key_, NtCreateKeyTransacted);
+    }
     
     SBIEDLL_HOOK(Key_, NtSaveKey);
     
@@ -1086,7 +1128,26 @@ _FX NTSTATUS Key_NtOpenKey(
     ACCESS_MASK DesiredAccess,
     OBJECT_ATTRIBUTES *ObjectAttributes)
 {
-    NTSTATUS status =  Key_NtOpenKeyImpl(KeyHandle, DesiredAccess, ObjectAttributes);
+    NTSTATUS status =  Key_NtOpenKeyImpl(KeyHandle, DesiredAccess, ObjectAttributes, NULL);
+
+    status = StopTailCallOptimization(status);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Key_NtOpenKeyTransacted
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Key_NtOpenKeyTransacted(
+    HANDLE *KeyHandle,
+    ACCESS_MASK DesiredAccess,
+    OBJECT_ATTRIBUTES *ObjectAttributes,
+    HANDLE TransactionHandle)
+{
+    NTSTATUS status =  Key_NtOpenKeyImpl(KeyHandle, DesiredAccess, ObjectAttributes, TransactionHandle);
 
     status = StopTailCallOptimization(status);
 
@@ -1101,7 +1162,8 @@ _FX NTSTATUS Key_NtOpenKey(
 _FX NTSTATUS Key_NtOpenKeyImpl(
     HANDLE *KeyHandle,
     ACCESS_MASK DesiredAccess,
-    OBJECT_ATTRIBUTES *ObjectAttributes)
+    OBJECT_ATTRIBUTES *ObjectAttributes,
+    HANDLE TransactionHandle)
 {
     //
     // use Key_NtCreateKey here so if anybody else intercepts
@@ -1109,7 +1171,7 @@ _FX NTSTATUS Key_NtOpenKeyImpl(
     //
 
     NTSTATUS status = Key_NtCreateKeyImpl(
-        KeyHandle, DesiredAccess, ObjectAttributes, 0, NULL, tzuk, NULL);
+        KeyHandle, DesiredAccess, ObjectAttributes, 0, NULL, tzuk, NULL, TransactionHandle);
     return status;
 }
 
@@ -1134,7 +1196,36 @@ _FX NTSTATUS Key_NtOpenKeyEx(
     }*/
 
     status = Key_NtCreateKeyImpl(
-        KeyHandle, DesiredAccess, ObjectAttributes, 0, NULL, tzuk, NULL);
+        KeyHandle, DesiredAccess, ObjectAttributes, 0, NULL, tzuk, NULL, NULL);
+
+    status = StopTailCallOptimization(status);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Key_NtOpenKeyTransactedEx
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Key_NtOpenKeyTransactedEx(
+    HANDLE *KeyHandle,
+    ACCESS_MASK DesiredAccess,
+    OBJECT_ATTRIBUTES *ObjectAttributes,
+    ULONG OpenOptions,
+    HANDLE TransactionHandle)
+{
+    NTSTATUS status;
+
+    OpenOptions &= ~REG_OPTION_BACKUP_RESTORE;
+    /*if (OpenOptions) {
+        // probably REG_OPTION_OPEN_LINK
+        SbieApi_Log(2205, L"NtOpenKeyEx (%08X)", OpenOptions);
+    }*/
+
+    status = Key_NtCreateKeyImpl(
+        KeyHandle, DesiredAccess, ObjectAttributes, 0, NULL, tzuk, NULL, TransactionHandle);
 
     status = StopTailCallOptimization(status);
 
@@ -1162,7 +1253,38 @@ _FX NTSTATUS Key_NtCreateKey(
                                             TitleIndex,
                                             Class,
                                             CreateOptions,
-                                            Disposition);
+                                            Disposition,
+                                            NULL);
+
+    status = StopTailCallOptimization(status);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// Key_NtCreateKeyTransacted
+//---------------------------------------------------------------------------
+
+
+NTSTATUS Key_NtCreateKeyTransacted(
+    PHANDLE KeyHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes,
+    ULONG TitleIndex,
+    PUNICODE_STRING Class,
+    ULONG CreateOptions,
+    HANDLE TransactionHandle,
+    PULONG Disposition)
+{
+    NTSTATUS status =  Key_NtCreateKeyImpl( KeyHandle,
+                                            DesiredAccess,
+                                            ObjectAttributes,
+                                            TitleIndex,
+                                            Class,
+                                            CreateOptions,
+                                            Disposition,
+                                            TransactionHandle);
 
     status = StopTailCallOptimization(status);
 
@@ -1217,7 +1339,8 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
     ULONG TitleIndex,
     UNICODE_STRING *Class,
     ULONG CreateOptions,
-    ULONG *Disposition)
+    ULONG *Disposition,
+    HANDLE TransactionHandle)
 {
     ULONG LastError;
     THREAD_DATA *TlsData = Dll_GetTlsData(&LastError);
@@ -1246,6 +1369,9 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
     }
 #endif
 
+#define __sys_NtCreateKeyX(kh, da, oa, ti, c, co, d) (TransactionHandle ? __sys_NtCreateKeyTransacted(kh, da, oa, ti, c, co, TransactionHandle, d) : __sys_NtCreateKey(kh, da, oa, ti, c, co, d))
+#define __sys_NtOpenKeyX(kh, da, oa) (TransactionHandle ? __sys_NtOpenKeyTransacted(kh, da, oa, TransactionHandle) : __sys_NtOpenKey(kh, da, oa))
+
     //
     // if this is a recursive invocation of NtCreateKey,
     // then pass it as-is down the chain
@@ -1255,12 +1381,12 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
 
         if (CreateOptions == tzuk) {
 
-            return __sys_NtOpenKey(
+            return __sys_NtOpenKeyX(
                 KeyHandle, DesiredAccess, ObjectAttributes);
 
         } else {
 
-            return __sys_NtCreateKey(
+            return __sys_NtCreateKeyX(
                 KeyHandle, DesiredAccess, ObjectAttributes,
                 TitleIndex, Class, CreateOptions, Disposition);
         }
@@ -1338,32 +1464,32 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
         if (CreateOptions == tzuk) {
 
             if(IsAKey)
-                status = __sys_NtOpenKey(KeyHandle, DesiredAccess, ObjectAttributes);
+                status = __sys_NtOpenKeyX(KeyHandle, DesiredAccess, ObjectAttributes);
             else
-                status = __sys_NtOpenKey(KeyHandle, DesiredAccess, &objattrs);
+                status = __sys_NtOpenKeyX(KeyHandle, DesiredAccess, &objattrs);
 
             if (status == STATUS_ACCESS_DENIED &&
                     DesiredAccess == MAXIMUM_ALLOWED) {
 
-                status = __sys_NtOpenKey(
+                status = __sys_NtOpenKeyX(
                                     KeyHandle, KEY_READ_WOW64, &objattrs);
             }
 
         } else {
 
             if(IsAKey)
-                status = __sys_NtCreateKey(
+                status = __sys_NtCreateKeyX(
                     KeyHandle, DesiredAccess, ObjectAttributes,
                     TitleIndex, Class, CreateOptions, Disposition);
             else
-                status = __sys_NtCreateKey(
+                status = __sys_NtCreateKeyX(
                     KeyHandle, DesiredAccess, &objattrs,
                     TitleIndex, Class, CreateOptions, Disposition);
 
             if (status == STATUS_ACCESS_DENIED &&
                     DesiredAccess == MAXIMUM_ALLOWED) {
 
-                status = __sys_NtCreateKey(
+                status = __sys_NtCreateKeyX(
                     KeyHandle, KEY_READ_WOW64, &objattrs,
                     TitleIndex, Class, CreateOptions, Disposition);
             }
@@ -1434,14 +1560,14 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
 
     if (CreateOptions == tzuk) {
 
-        status = __sys_NtOpenKey(
+        status = __sys_NtOpenKeyX(
             KeyHandle, DesiredAccess | KEY_READ, &objattrs);
 
     } else {
 
         CreateOptions &= ~REG_OPTION_BACKUP_RESTORE;
 
-        status = __sys_NtCreateKey(
+        status = __sys_NtCreateKeyX(
             KeyHandle, DesiredAccess | KEY_READ, &objattrs,
             TitleIndex, Class, CreateOptions, Disposition);
 
@@ -1466,12 +1592,12 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
 
             if (CreateOptions == tzuk) {
 
-                status2 = __sys_NtOpenKey(
+                status2 = __sys_NtOpenKeyX(
                     KeyHandle, DesiredAccess | KEY_READ, &objattrs);
 
             } else {
 
-                status2 = __sys_NtCreateKey(
+                status2 = __sys_NtCreateKeyX(
                     KeyHandle, DesiredAccess | KEY_READ, &objattrs,
                     TitleIndex, Class, CreateOptions, Disposition);
 
@@ -1542,7 +1668,7 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
                 HANDLE handle;
 
                 RtlInitUnicodeString(&objname, TruePath);
-                status = __sys_NtOpenKey(
+                status = __sys_NtOpenKeyX(
                                     &handle, Wow64KeyReadAccess, &objattrs);
 
                 if (NT_SUCCESS(status)) {
@@ -1633,7 +1759,7 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
         // otherwise not write-only, so do normal NtOpenKey
         //
 
-        status = __sys_NtOpenKey(KeyHandle, Wow64KeyReadAccess, &objattrs);
+        status = __sys_NtOpenKeyX(KeyHandle, Wow64KeyReadAccess, &objattrs);
     }
 
     if (NT_SUCCESS(status)) {
@@ -1747,7 +1873,7 @@ SkipReadOnlyCheck:
         // as described above in more detail
         //
 
-        status = __sys_NtOpenKey(KeyHandle, DesiredAccess, &objattrs);
+        status = __sys_NtOpenKeyX(KeyHandle, DesiredAccess, &objattrs);
 
         if (NT_SUCCESS(status) && Disposition) {
 
@@ -1782,7 +1908,7 @@ SkipReadOnlyCheck:
 
         status = Key_NtCreateKeyImpl(
                     KeyHandle, DesiredAccess, ObjectAttributes,
-                    TitleIndex, Class, CreateOptions, Disposition);
+                    TitleIndex, Class, CreateOptions, Disposition, TransactionHandle);
 
         if (status == STATUS_ACCESS_DENIED && CreateOptions != tzuk) {
 
@@ -1791,7 +1917,7 @@ SkipReadOnlyCheck:
             // so try one more time using NtOpenKey
             //
 
-            status = __sys_NtOpenKey(
+            status = __sys_NtOpenKeyX(
                 KeyHandle, DesiredAccess, ObjectAttributes);
 
             if (NT_SUCCESS(status)) TrueOpened = TRUE; // is that right?
@@ -1818,6 +1944,9 @@ SkipReadOnlyCheck:
 
         Handle_SetRelocationPath(*KeyHandle, OriginalPath);
     }
+
+#undef __sys_NtCreateKeyX
+#undef __sys_NtOpenKeyX
 
     //
     // finish
@@ -2268,7 +2397,7 @@ _FX NTSTATUS Key_NtDeleteKeyTreeImpl(HANDLE KeyHandle, BOOLEAN DeleteTree)
     // open the key.  this will create a copy key, if necessary
     //
 
-    status = Key_NtOpenKeyImpl(&handle, GENERIC_WRITE | KEY_READ | DELETE, &objattrs);
+    status = Key_NtOpenKeyImpl(&handle, GENERIC_WRITE | KEY_READ | DELETE, &objattrs, NULL);
     if (! NT_SUCCESS(status))
         __leave;
 
@@ -3241,7 +3370,7 @@ _FX NTSTATUS Key_NtEnumerateKey(
 
             status = Key_NtOpenKeyImpl(&SubkeyHandle,
                                Key_GetWow64Flag(SubkeyPath, KEY_READ),
-                               &objattrs);
+                               &objattrs, NULL);
         }
     }
 
@@ -4955,7 +5084,7 @@ _FX void Key_CreateBaseKeys()
     //
  
     InitializeObjectAttributes(
-            &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+            &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, Secure_NormalSD);
 
     for (WCHAR** base_key = base_keys; *base_key; base_key++) {
 
@@ -4964,6 +5093,6 @@ _FX void Key_CreateBaseKeys()
 
         RtlInitUnicodeString(&objname, buff);
 
-        Key_CreatePath(&objattrs, NULL);
+        Key_CreatePath(&objattrs, Secure_EveryoWneSD);
     }
 }

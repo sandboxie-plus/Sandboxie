@@ -34,11 +34,12 @@ typedef long NTSTATUS;
 // Functions
 //---------------------------------------------------------------------------
 
+_FX NTSTATUS SbieApi_DebugError(SBIELOW_DATA* data, ULONG error);
 
-UCHAR *FindDllExport(void *DllBase, const UCHAR *ProcName);
+UCHAR *FindDllExport(void *DllBase, const UCHAR *ProcName, ULONG *pErr);
 
 static UCHAR *FindDllExport2(
-    void *DllBase, IMAGE_DATA_DIRECTORY *dir0, const UCHAR *ProcName);
+    void *DllBase, IMAGE_DATA_DIRECTORY *dir0, const UCHAR *ProcName, ULONG *pErr);
 
 #ifdef _M_ARM64
 void* Hook_GetFFSTarget(UCHAR* SourceFunc);
@@ -57,7 +58,7 @@ static void InitInjectWow64(SBIELOW_DATA *data);
 //---------------------------------------------------------------------------
 
 
-_FX UCHAR *FindDllExport(void *DllBase, const UCHAR *ProcName)
+_FX UCHAR *FindDllExport(void *DllBase, const UCHAR *ProcName, ULONG* pErr)
 {
     IMAGE_DOS_HEADER *dos_hdr;
     IMAGE_NT_HEADERS *nt_hdrs;
@@ -68,11 +69,15 @@ _FX UCHAR *FindDllExport(void *DllBase, const UCHAR *ProcName)
     //
 
     dos_hdr = (void *)DllBase;
-    if (dos_hdr->e_magic != 'MZ' && dos_hdr->e_magic != 'ZM')
+    if (dos_hdr->e_magic != 'MZ' && dos_hdr->e_magic != 'ZM') {
+        *pErr = 0xa;
         return NULL;
+    }
     nt_hdrs = (IMAGE_NT_HEADERS *)((UCHAR *)dos_hdr + dos_hdr->e_lfanew);
-    if (nt_hdrs->Signature != IMAGE_NT_SIGNATURE)     // 'PE\0\0'
+    if (nt_hdrs->Signature != IMAGE_NT_SIGNATURE) {     // 'PE\0\0'
+        *pErr = 0xb;
         return NULL;
+    }
 
     if (nt_hdrs->OptionalHeader.Magic == IMAGE_NT_OPTIONAL_HDR32_MAGIC) {
 
@@ -83,7 +88,7 @@ _FX UCHAR *FindDllExport(void *DllBase, const UCHAR *ProcName)
         if (opt_hdr_32->NumberOfRvaAndSizes) {
 
             IMAGE_DATA_DIRECTORY *dir0 = &opt_hdr_32->DataDirectory[0];
-            func_ptr = FindDllExport2(DllBase, dir0, ProcName);
+            func_ptr = FindDllExport2(DllBase, dir0, ProcName, pErr);
         }
     }
 
@@ -99,7 +104,7 @@ _FX UCHAR *FindDllExport(void *DllBase, const UCHAR *ProcName)
         if (opt_hdr_64->NumberOfRvaAndSizes) {
 
             IMAGE_DATA_DIRECTORY *dir0 = &opt_hdr_64->DataDirectory[0];
-            func_ptr = FindDllExport2(DllBase, dir0, ProcName);
+            func_ptr = FindDllExport2(DllBase, dir0, ProcName, pErr);
         }
     }
 
@@ -115,7 +120,7 @@ _FX UCHAR *FindDllExport(void *DllBase, const UCHAR *ProcName)
 
 
 _FX UCHAR *FindDllExport2(
-    void *DllBase, IMAGE_DATA_DIRECTORY *dir0, const UCHAR *ProcName)
+    void *DllBase, IMAGE_DATA_DIRECTORY *dir0, const UCHAR *ProcName, ULONG* pErr)
 {
     void *proc = NULL;
     ULONG i, j, n;
@@ -163,6 +168,7 @@ _FX UCHAR *FindDllExport2(
             // might have to scan LDR tables to find the target dll
             //
 
+            *pErr = 0xc;
             proc = NULL;
         }
     }
@@ -214,6 +220,7 @@ _FX void InitInject(SBIELOW_DATA *data, void *DetourCode)
     void *RegionBase;
     SIZE_T RegionSize;
     ULONG OldProtect;
+    ULONG uError = 0;
 
     //
     // now that syscalls were intercepted, we can use the top of the syscall
@@ -278,23 +285,35 @@ _FX void InitInject(SBIELOW_DATA *data, void *DetourCode)
     //
 
     LdrCode = FindDllExport(ntdll_base,
-                    (UCHAR *)extra + extra->LdrLoadDll_offset);
+                    (UCHAR *)extra + extra->LdrLoadDll_offset, &uError);
+    if (!LdrCode) {
+        SbieApi_DebugError(data, (0x01 << 4) | uError);
+        return;
+    }
 #ifdef _M_ARM64
-    if (data->flags.is_arm64ec && LdrCode)
+    if (data->flags.is_arm64ec)
         LdrCode = Hook_GetFFSTarget(LdrCode);
 #endif
-    if (! LdrCode)
+    if (!LdrCode) {
+        SbieApi_DebugError(data, 0x01d);
         return;
+    }
     inject->LdrLoadDll = (ULONG_PTR)LdrCode;
 
     LdrCode = FindDllExport(ntdll_base,
-                    (UCHAR *)extra + extra->LdrGetProcAddr_offset);
+                    (UCHAR *)extra + extra->LdrGetProcAddr_offset, &uError);
+    if (!LdrCode) {
+        SbieApi_DebugError(data, (0x02 << 4) | uError);
+        return;
+    }
 #ifdef _M_ARM64
-    if (data->flags.is_arm64ec && LdrCode)
+    if (data->flags.is_arm64ec)
         LdrCode = Hook_GetFFSTarget(LdrCode);
 #endif
-    if (! LdrCode)
+    if (!LdrCode) {
+        SbieApi_DebugError(data, 0x02d);
         return;
+    }
     inject->LdrGetProcAddr = (ULONG_PTR)LdrCode;
 
 #ifdef _M_ARM64
@@ -311,9 +330,11 @@ _FX void InitInject(SBIELOW_DATA *data, void *DetourCode)
 #ifdef _WIN64
     if (data->flags.is_wow64) {
         LdrCode = FindDllExport(ntdll_base,
-            (UCHAR*)extra + extra->NtRaiseHardError_offset);
-        if (!LdrCode)
+            (UCHAR*)extra + extra->NtRaiseHardError_offset, &uError);
+        if (!LdrCode) {
+            SbieApi_DebugError(data, (0x03 << 4) | uError);
             return;
+        }
         inject->NtRaiseHardError = (ULONG_PTR)LdrCode;
     }
     else
@@ -339,9 +360,11 @@ _FX void InitInject(SBIELOW_DATA *data, void *DetourCode)
 #endif
     {
         LdrCode = FindDllExport(ntdll_base,
-                        (UCHAR *)extra + extra->RtlFindActCtx_offset);
-        if (! LdrCode)
+                        (UCHAR *)extra + extra->RtlFindActCtx_offset, &uError);
+        if (!LdrCode) {
+            SbieApi_DebugError(data, (0x04 << 4) | uError);
             return;
+        }
     }
     inject->RtlFindActCtx = (ULONG_PTR)LdrCode;
 

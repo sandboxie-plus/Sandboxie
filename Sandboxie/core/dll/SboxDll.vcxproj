@@ -204,6 +204,7 @@
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
       <OptimizeReferences>false</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <CETCompat>true</CETCompat>
       <AdditionalOptions>/ignore:4281 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ResourceCompile>
@@ -294,6 +295,7 @@
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
       <OptimizeReferences>false</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <CETCompat>true</CETCompat>
       <AdditionalOptions>/ignore:4281 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ResourceCompile>

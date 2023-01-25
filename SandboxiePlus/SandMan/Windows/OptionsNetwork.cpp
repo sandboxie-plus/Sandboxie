@@ -347,6 +347,7 @@ void COptionsWindow::CheckINetBlock()
 void COptionsWindow::LoadNetFwRules()
 {
 	ui.treeNetFw->clear();
+
 	foreach(const QString & Value, m_pBox->GetTextList("NetworkAccess", m_Template))
 		ParseAndAddFwRule(Value);
 

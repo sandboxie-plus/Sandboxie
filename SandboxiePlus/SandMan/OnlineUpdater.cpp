@@ -937,11 +937,11 @@ bool COnlineUpdater::IsVersionNewer(const QString& VersionStr)
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // cert stuf
 
-void COnlineUpdater::UpdateCert()
+void COnlineUpdater::UpdateCert(bool bWait)
 {
 	QString UpdateKey; // for now only patreons can update the cert automatically
 	TArguments args = GetArguments(g_Certificate, L'\n', L':');
-	if(args.value("TYPE").indexOf("PATREON") == 0)
+	if(args.value("TYPE").contains("PATREON"))
 		UpdateKey = args.value("UPDATEKEY");
 	if (UpdateKey.isEmpty()) {
 		theGUI->OpenUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert");
@@ -971,6 +971,12 @@ void COnlineUpdater::UpdateCert()
 	//Request.setRawHeader("Accept-Encoding", "gzip");
 	QNetworkReply* pReply = m_RequestManager->get(Request);
 	connect(pReply, SIGNAL(finished()), this, SLOT(OnCertCheck()));
+
+	if (bWait) {
+		while (!pReply->isFinished()) {
+			QCoreApplication::processEvents(); // keep UI responsive
+		}
+	}
 }
 
 void COnlineUpdater::OnCertCheck()

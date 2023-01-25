@@ -35,7 +35,8 @@
 
 #define LDR_INJECT_SETTING_NAME             L"InjectDllARM64"
 #define LDR_HOST_INJECT_SETTING_NAME        L"HostInjectDllARM64"
-#define LDR_INJECT_NUM_SAVE_BYTES   16
+//#define LDR_INJECT_NUM_SAVE_BYTES   16
+#define LDR_INJECT_NUM_SAVE_BYTES   20
 
 
 #elif _WIN64
@@ -43,7 +44,8 @@
 
 #define LDR_INJECT_SETTING_NAME             L"InjectDll64"
 #define LDR_HOST_INJECT_SETTING_NAME        L"HostInjectDll64"
-#define LDR_INJECT_NUM_SAVE_BYTES   12
+//#define LDR_INJECT_NUM_SAVE_BYTES   12
+#define LDR_INJECT_NUM_SAVE_BYTES   19
 
 
 #else ! _WIN64
@@ -757,8 +759,9 @@ _FX void Ldr_Inject_Init(BOOLEAN bHostInject)
 #ifdef _M_ARM64
 
         ULONG* aCode = (ULONG*)entrypoint;
+        *aCode++ = 0x10000000;	// adr x0, 0 - copy pc to x0
 	    *aCode++ = 0x58000048;	// ldr x8, 8
-	    *aCode++ = 0xD63F0100;	// blr x8
+        *aCode++ = 0xD61F0100;	// br x8
         *(ULONG_PTR*)aCode = (ULONG_PTR)Ldr_Inject_Entry64;
 
         NtFlushInstructionCache(GetCurrentProcess(), entrypoint, LDR_INJECT_NUM_SAVE_BYTES);
@@ -768,8 +771,14 @@ _FX void Ldr_Inject_Init(BOOLEAN bHostInject)
         entrypoint[0] = 0x48;           // mov rax, Ldr_Inject_Entry64
         entrypoint[1] = 0xB8;
         *(ULONG_PTR *)(entrypoint + 2) = (ULONG_PTR)Ldr_Inject_Entry64;
-        entrypoint[10] = 0xFF;          // call rax
-        entrypoint[11] = 0xD0;
+
+        entrypoint[10] = 0x48;          // lea rcx, [rip - 0x11]
+        entrypoint[11] = 0x8d;
+        entrypoint[12] = 0x0d;
+        *(ULONG*)(entrypoint + 13) = -0x11;
+
+        entrypoint[17] = 0xFF;          // jmp rax
+        entrypoint[18] = 0xE0;
 
 #else ! _WIN64
 
@@ -788,7 +797,7 @@ _FX void Ldr_Inject_Init(BOOLEAN bHostInject)
 //---------------------------------------------------------------------------
 
 
-_FX void Ldr_Inject_Entry(ULONG_PTR *pRetAddr)
+_FX void* Ldr_Inject_Entry(ULONG_PTR *pPtr)
 {
     UCHAR *entrypoint;
     ULONG dummy_prot;
@@ -797,12 +806,12 @@ _FX void Ldr_Inject_Entry(ULONG_PTR *pRetAddr)
     // restore correct code sequence at the entrypoint
     //
 
-#ifdef _M_ARM64
-    entrypoint = ((UCHAR *)*pRetAddr) - (LDR_INJECT_NUM_SAVE_BYTES - sizeof(ULONG_PTR)); // after blr comes the 64bit address
+#ifdef _WIN64
+    entrypoint = (UCHAR*)pPtr;
 #else
-    entrypoint = ((UCHAR *)*pRetAddr) - LDR_INJECT_NUM_SAVE_BYTES;
+    entrypoint = ((UCHAR *)*pPtr) - LDR_INJECT_NUM_SAVE_BYTES;
+    *pPtr = (ULONG_PTR)entrypoint;
 #endif
-    *pRetAddr = (ULONG_PTR)entrypoint;
 
     // If entrypoint hook is different, need to adjust offset. Copying the original byets won't have the correct offset.
     // MS UEV also hooks exe entry.
@@ -853,4 +862,6 @@ _FX void Ldr_Inject_Entry(ULONG_PTR *pRetAddr)
     {
         Ldr_LoadInjectDlls(g_bHostInject);
     }
+
+    return entrypoint;
 }

@@ -39,6 +39,9 @@ public:
 
 	static CSbieProgressPtr RunCommand(const QString& Command, bool noGui = false);
 
+	static int				ExecCommand(const QString& Command, bool noGui = false, quint32 Timeout = -1);
+	static int				ExecCommandEx(const QString& Command, QString* pOutput, quint32 Timeout = -1);
+
 private:
 	static SB_RESULT(void*)	ElevateOps(const QStringList& Ops);
 	static SB_STATUS		ExecOps(const QStringList& Ops);

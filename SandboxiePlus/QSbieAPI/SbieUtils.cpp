@@ -242,6 +242,93 @@ CSbieProgressPtr CSbieUtils::RunCommand(const QString& Command, bool noGui)
 	return pProgress;
 }
 
+int CSbieUtils::ExecCommand(const QString& Command, bool noGui, quint32 Timeout)
+{
+	STARTUPINFOW si = { 0 };
+	si.cb = sizeof(si);
+	if (noGui) {
+		si.dwFlags = STARTF_USESTDHANDLES | STARTF_USESHOWWINDOW;
+		si.hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+		si.hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+		si.hStdError = GetStdHandle(STD_ERROR_HANDLE);
+		si.wShowWindow = SW_HIDE;
+	}
+
+	PROCESS_INFORMATION pi = { 0 };
+	if (!CreateProcessW(NULL, (LPWSTR)Command.toStdWString().c_str(), NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi))
+		return -1;
+
+	int iRet = -2;
+	if (WaitForSingleObject(pi.hProcess, (DWORD)Timeout) == WAIT_OBJECT_0)
+	{
+		DWORD dwRet;
+		if (GetExitCodeProcess(pi.hProcess, &dwRet))
+			iRet = (int)dwRet;
+	}
+
+	CloseHandle(pi.hThread);
+	CloseHandle(pi.hProcess);
+
+	return iRet;
+}
+
+int CSbieUtils::ExecCommandEx(const QString& Command, QString* pOutput, quint32 Timeout)
+{
+	HANDLE stdoutReadHandle;
+	HANDLE stdoutWriteHandle;
+	SECURITY_ATTRIBUTES saAttr;
+	// Set the bInheritHandle flag so pipe handles are inherited.
+	saAttr.nLength = sizeof(SECURITY_ATTRIBUTES);
+	saAttr.bInheritHandle = TRUE;
+	saAttr.lpSecurityDescriptor = nullptr;
+	// Create a pipe for the child process's STDOUT.
+	if (!CreatePipe(&stdoutReadHandle, &stdoutWriteHandle, &saAttr, 0))
+		return -4;
+	if (!SetHandleInformation(stdoutReadHandle, HANDLE_FLAG_INHERIT, 0))
+		return -4;
+
+	STARTUPINFOW si = { 0 };
+	si.cb = sizeof(si);
+	si.dwFlags = STARTF_USESTDHANDLES | STARTF_USESHOWWINDOW;
+	si.hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+	si.hStdOutput = stdoutWriteHandle;
+	si.hStdError = stdoutWriteHandle;
+	si.wShowWindow = SW_HIDE;
+
+	PROCESS_INFORMATION pi = { 0 };
+	if (!CreateProcessW(NULL, (LPWSTR)Command.toStdWString().c_str(), NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi))
+		return -1;
+	
+	DWORD exitCode, dataSize;
+	do
+	{
+		// Check if the process is alive.
+		GetExitCodeProcess(pi.hProcess, &exitCode);
+
+		// Check if there is anything in the pipe.
+		if (!PeekNamedPipe(stdoutReadHandle, nullptr, 0, nullptr, &dataSize, nullptr))
+			return -3;
+		if (dataSize == 0)
+			Sleep(10);
+		else {
+			// Read the data out of the pipe.
+			CHAR buffer[4096] = { 0 };
+			if (!ReadFile(stdoutReadHandle, buffer, sizeof(buffer) - 1, &dataSize, nullptr))
+				return -3;
+				
+			pOutput->append(QString(buffer));
+		}
+	} while (exitCode == STILL_ACTIVE || dataSize != 0);
+
+	CloseHandle(stdoutReadHandle);
+	CloseHandle(stdoutWriteHandle);
+
+	CloseHandle(pi.hThread);
+	CloseHandle(pi.hProcess);
+
+	return (int)exitCode;
+}
+
 //////////////////////////////////////////////////////////////////////////////
 // Shell integration
 

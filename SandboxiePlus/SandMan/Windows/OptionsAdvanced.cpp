@@ -49,8 +49,6 @@ void COptionsWindow::CreateAdvanced()
 	m_AdvOptions.insert("FakeAdminRights",				SAdvOption{eOnlySpec, QStringList() << "y" << "n", tr("Make specified processes think they have admin permissions.")});
 	m_AdvOptions.insert("WaitForDebugger",				SAdvOption{eOnlySpec, QStringList() << "y" << "n", tr("Force specified processes to wait for a debugger to attach.")});
 	m_AdvOptions.insert("BoxNameTitle",					SAdvOption{eOnlySpec, QStringList() << "y" << "n" << "-", tr("")});
-	m_AdvOptions.insert("UseFileDeleteV2",				SAdvOption{eNoSpec, QStringList() << "y" << "n", tr("")});
-	m_AdvOptions.insert("UseRegDeleteV2",				SAdvOption{eNoSpec, QStringList() << "y" << "n", tr("")});
 	m_AdvOptions.insert("FileRootPath",					SAdvOption{eNoSpec, QStringList(), tr("Sandbox file system root")});
 	m_AdvOptions.insert("KeyRootPath",					SAdvOption{eNoSpec, QStringList(), tr("Sandbox registry root")});
 	m_AdvOptions.insert("IpcRootPath",					SAdvOption{eNoSpec, QStringList(), tr("Sandbox ipc root")});

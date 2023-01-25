@@ -152,7 +152,6 @@ _FX NTSTATUS SbieApi_Ioctl(SBIELOW_DATA *data, void *parms)
 //---------------------------------------------------------------------------
 
 
-#if 1
 _FX NTSTATUS SbieApi_DebugPrint(SBIELOW_DATA *data, const WCHAR *text)
 {
     NTSTATUS status = 0;
@@ -171,13 +170,34 @@ _FX NTSTATUS SbieApi_DebugPrint(SBIELOW_DATA *data, const WCHAR *text)
     memzero(parms, sizeof(parms));
     args->func_code = API_LOG_MESSAGE;
     args->session_id.val = -1;
-    args->msgid.val = 2101;
+    args->msgid.val = 1122;
     args->msgtext.val = &msgtext;
     status = SbieApi_Ioctl(data, parms);
 
     return status;
 }
-#endif
+
+
+//---------------------------------------------------------------------------
+// SbieApi_DebugError
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS SbieApi_DebugError(SBIELOW_DATA* data, ULONG error)
+{
+    // Note: A normal string like L"text" would not resultin position independent code !!!
+    // hence we create a string array and fill it byte by byte
+
+    wchar_t text[] = { 'L','o','w','L','e','v','e','l',' ','E','r','r','o','r',':',' ','0','x',0,0,0,0,0,0,0,0,0,0};
+
+    // covert ulong to hex string and copy it into the message array
+    wchar_t* ptr = &text[18]; // point after L"...0x"
+    wchar_t table[] = { '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F' };
+    for(int i=28; i >= 0; i-=4)
+        *ptr++ = table[(error >> i) & 0xF];
+
+    return SbieApi_DebugPrint(data, text);
+}
 
 
 //---------------------------------------------------------------------------
@@ -723,6 +743,9 @@ ULONG_PTR EntrypointC(SBIELOW_DATA *data, void *DetourCode, void *SystemService)
         //
 
         // WaitForDebugger(data);
+
+        //wchar_t text[] = { 't','e','s','t',0 };
+        //SbieApi_DebugPrint(data, text);
 
         PrepSyscalls(data, SystemService);
         if (!data->flags.bHostInject && !data->flags.bNoSysHooks)

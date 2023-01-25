@@ -46,7 +46,7 @@
 //#define BREAK_PROC      "ExecSecureObjects"
 //#define BREAK_PROC      "SoftwareDirectorMsiErrorCheck"
 //#define BREAK_PROC      "InstallDriverPackages"
-#define BREAK_PROC        "MSIunzipcore"
+//#define BREAK_PROC        "MSIunzipcore"
 
 #undef  HIDE_SBIEDLL
 

@@ -92,7 +92,6 @@ bool CSetupWizard::ShowWizard()
 
     theGUI->UpdateSettings(true);
     
-
     return true;
 }
 

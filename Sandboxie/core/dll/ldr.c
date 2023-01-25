@@ -493,6 +493,16 @@ _FX BOOLEAN Ldr_Init()
         LdrCheckImmersive();
     }
 
+
+    //
+    // set PEB.ProcessParameters->LoaderThreads = 0
+    //
+
+    if (SbieApi_QueryConfBool(NULL, L"NoParallelLoading", FALSE)) {
+        RTL_USER_PROCESS_PARAMETERS* ProcessParms = Proc_GetRtlUserProcessParameters();
+        ProcessParms->LoaderThreads = 0;
+    }
+
     //
     // do some more initializations based on the executable image,
     // and inject code at the program entrypoint
@@ -783,6 +793,38 @@ _FX void Ldr_CallDllCallbacks_WithLock(void)
 
 
 //---------------------------------------------------------------------------
+// Ldr_LdrLoadDllImpl
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Ldr_LdrLoadDllImpl(
+    WCHAR* PathString,
+    ULONG* DllFlags,
+    UNICODE_STRING* ModuleName,
+    HANDLE* ModuleHandle)
+{
+    NTSTATUS status = 0;
+
+    //WCHAR text[4096];
+    //Sbie_snwprintf(text, ARRAYSIZE(text), L"%s (loading...)", (ModuleName && ModuleName->Buffer) ? ModuleName->Buffer : PathString);
+    //SbieApi_MonitorPutMsg(MONITOR_IMAGE, text);
+
+    status = __sys_LdrLoadDll(PathString, DllFlags, ModuleName, ModuleHandle);
+
+    if (!NT_SUCCESS(status)) {
+        WCHAR text[4096];
+        Sbie_snwprintf(text, ARRAYSIZE(text), L"%s (load failed 0x%08X)", (ModuleName && ModuleName->Buffer) ? ModuleName->Buffer : PathString, status);
+        SbieApi_MonitorPutMsg(MONITOR_IMAGE, text);
+    }
+
+    //Sbie_snwprintf(text, ARRAYSIZE(text), L"%s (... 0x%08X)", (ModuleName && ModuleName->Buffer) ? ModuleName->Buffer : PathString, status);
+    //SbieApi_MonitorPutMsg(MONITOR_IMAGE, text);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
 // Ldr_LdrLoadDll
 //---------------------------------------------------------------------------
 
@@ -804,7 +846,7 @@ _FX NTSTATUS Ldr_LdrLoadDll(
     status = __sys_LdrLockLoaderLock(0, &state, &LdrCookie);
     if (NT_SUCCESS(status)) {
 
-        status = __sys_LdrLoadDll(PathString, DllFlags, ModuleName, ModuleHandle);
+        status = Ldr_LdrLoadDllImpl(PathString, DllFlags, ModuleName, ModuleHandle);
 
         if (NT_SUCCESS(status)) {
             Ldr_CallDllCallbacks();
@@ -833,7 +875,7 @@ _FX NTSTATUS Ldr_Win10_LdrLoadDll(
     //
     NTSTATUS status = 0;
 
-    status = __sys_LdrLoadDll(PathString, DllFlags, ModuleName, ModuleHandle);
+    status = Ldr_LdrLoadDllImpl(PathString, DllFlags, ModuleName, ModuleHandle);
     Scm_SecHostDll_W8();
     return status;
 }

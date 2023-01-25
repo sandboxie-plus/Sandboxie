@@ -5093,6 +5093,6 @@ _FX void Key_CreateBaseKeys()
 
         RtlInitUnicodeString(&objname, buff);
 
-        Key_CreatePath(&objattrs, Secure_EveryoWneSD);
+        Key_CreatePath(&objattrs, Secure_EveryoneSD);
     }
 }

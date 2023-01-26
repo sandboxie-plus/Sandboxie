@@ -4,25 +4,25 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.7.0 / 5.62.0] - 2023-01-25
+## [1.7.0 / 5.62.0] - 2023-01-?
 
 
 ### Added
 - added OnFileRecovery trigger allowing to check files before recovering them [#2202](https://github.com/sandboxie-plus/Sandboxie/issues/2202)
 
-- added more box structure presets to sandbox options
+- added more presets to sandbox options
 -- Note: these can only be changed when the box is empty
 
-- added new File Migration option page with additional settings
-- added SBIE2113/SBIE2114/SBIE2115 message to indicate files not being migrated due to presets
+- added new file migration option page with additional settings
+- added SBIE2113/SBIE2114/SBIE2115 message to indicate when files are not migrated due to presets
 
 ### changed
-- moved SeparateUserFolders checlbox from global settings to per box options
+- moved SeparateUserFolders checkbox from global settings to per box options
 
 ### fixed
-- resolved SbieDll.dll incompatybility with shadow stack and enabled /CETCOMPAT for SbieDll.dll [#2559](https://github.com/sandboxie-plus/Sandboxie/issues/2559)
-- added missing registry hooks to improve compatybility with newer appliations
-- fixed permission isue with registry entries in privacy mode boxes
+- resolved SbieDll.dll incompatibility with shadow stack and enabled /CETCOMPAT for SbieDll.dll [#2559](https://github.com/sandboxie-plus/Sandboxie/issues/2559)
+- added missing registry hooks to improve compatibility with newer applications
+- fixed permission issue with registry entries in privacy mode boxes
 
 
 
@@ -30,14 +30,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.6.7 / 5.61.7] - 2023-01-24
 
 ### Added
-- added option to the classic ui to apply a supporter certificate
+- added option to Sandboxie Classic to apply a supporter certificate
 
 ### Changed
-- time limited certificates now have 1 extra free month of validity, to improve the renewal expirience
+- time-limited certificates now have 1 more month of validity to improve the renewal experience
 
 ### Fixed
 - fixed issue with Hebrew language (Classic UI) [#2608](https://github.com/sandboxie-plus/Sandboxie/issues/2608)
-- fixed issue with startmenu integration and snapshots
+- fixed issue with start menu integration and snapshots
 
 
 
@@ -2429,17 +2429,19 @@ Fixed issue with Windows 7
 - Processes can be now terminated with the del key, and require a confirmation
 - added sandboxed window border display to SandMan.exe
 - added notification for Sbie log messages
-- added Sandbox Presets submenu allowing to quickly change some settings
--- Enable/Disable API logging, logapi_dll's are now distributed with SbiePlus
--- And other: Drop admin rights; Block/Allow internet access; Block/Allow access to files on the network
+- added Sandbox Presets submenu to quickly change some settings
+-- Enable/Disable API logging; logapi_dlls are now distributed with SbiePlus
+-- Drop admin rights
+-- Block/Allow internet access
+-- Block/Allow access to files on the network
 - added more info to the sandbox status column
 - added path column to SbieModel
 - added info tooltips in SbieView
 
 ### Changed
 - reworked ApiLog, added PID and PID filter
-- auto config reload on in change is now delayed by 500ms to not reload multiple times on incremental changes
-- Sandbox names now replace "_" with " " for display allowing to use names that are made of separated words
+- auto config reload on change is now delayed by 500ms to prevent reloading multiple times on incremental changes
+- Sandbox names now replace "_" with " " thus enabling names that consist of separate words
 
 ### Fixed
 - added missing PreferExternalManifest initialization to portable mode

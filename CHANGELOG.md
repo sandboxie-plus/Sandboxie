@@ -9,10 +9,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added OnFileRecovery trigger allowing to check files before recovering them [#2202](https://github.com/sandboxie-plus/Sandboxie/issues/2202)
-
 - added more presets to sandbox options
 -- Note: these can only be changed when the box is empty
-
 - added new file migration option page with additional settings
 - added SBIE2113/SBIE2114/SBIE2115 message to indicate when files are not migrated due to presets
 

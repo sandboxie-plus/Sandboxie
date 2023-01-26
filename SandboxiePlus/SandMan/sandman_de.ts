@@ -642,12 +642,12 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="159"/>
         <source>Version 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Version 1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="160"/>
         <source>Version 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Version 2</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="195"/>
@@ -677,19 +677,19 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="286"/>
         <source>Indeterminate</source>
-        <translation type="unfinished"></translation>
+        <translation>unbestimmt</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="458"/>
         <location filename="Windows/OptionsGeneral.cpp" line="558"/>
         <source>Always copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Immer kopieren</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="459"/>
         <location filename="Windows/OptionsGeneral.cpp" line="559"/>
         <source>Don&apos;t copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht kopieren</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="460"/>

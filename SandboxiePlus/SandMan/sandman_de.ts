@@ -677,7 +677,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="286"/>
         <source>Indeterminate</source>
-        <translation>unbestimmt</translation>
+        <translation>Unbestimmt</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="458"/>

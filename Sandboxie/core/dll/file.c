@@ -7404,6 +7404,41 @@ _FX void SbieDll_DeviceChange(WPARAM wParam, LPARAM lParam)
     }
 }
 
+
+//---------------------------------------------------------------------------
+// SbieDll_QueryFileAttributes
+//---------------------------------------------------------------------------
+
+
+BOOL SbieDll_QueryFileAttributes(const WCHAR *NtPath, ULONG64 *size, ULONG64 *date, ULONG *attrs)
+{
+    NTSTATUS status;
+    UNICODE_STRING uni;
+    OBJECT_ATTRIBUTES objattrs;
+    FILE_NETWORK_OPEN_INFORMATION info;
+
+    uni.Buffer = (WCHAR *)NtPath;
+    uni.Length = wcslen(NtPath) * sizeof(WCHAR);
+    uni.MaximumLength = uni.Length + sizeof(WCHAR);
+
+    InitializeObjectAttributes(
+        &objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+    if(__sys_NtQueryFullAttributesFile)
+        status = __sys_NtQueryFullAttributesFile(&objattrs, &info);
+    else
+        status = NtQueryFullAttributesFile(&objattrs, &info);
+
+    if (! NT_SUCCESS(status))
+        return FALSE;
+
+    if(size) *size = info.EndOfFile.QuadPart;
+    if(date) *date = info.LastWriteTime.QuadPart;
+    if(attrs) *attrs = info.FileAttributes;
+    return TRUE;
+}
+
+
 // We don't want calls to StopTailCallOptimization to be optimized away
 #pragma optimize("", off)
 

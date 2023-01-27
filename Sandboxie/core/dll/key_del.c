@@ -58,6 +58,8 @@ static CRITICAL_SECTION *Key_PathRoot_CritSec = NULL;
 BOOLEAN Key_RegPaths_Loaded = FALSE;
 
 static HANDLE Key_BoxRootWatcher = NULL;
+static ULONG64 Key_PathsFileSize = 0;
+static ULONG64 Key_PathsFileDate = 0;
 static volatile ULONGLONG Key_PathsVersion = 0; // count reloads
 
 
@@ -86,6 +88,8 @@ ULONG File_GetPathFlags_internal(LIST* Root, const WCHAR* Path, WCHAR** pRelocat
 VOID File_SavePathNode_internal(HANDLE hPathsFile, LIST* parent, WCHAR* Path, ULONG Length, ULONG SetFlags);
 BOOLEAN File_MarkDeleted_internal(LIST* Root, const WCHAR* Path);
 VOID File_SetRelocation_internal(LIST* Root, const WCHAR* OldTruePath, const WCHAR* NewTruePath);
+
+BOOL File_GetAttributes_internal(const WCHAR *name, ULONG64 *size, ULONG64 *date, ULONG *attrs);
 
 HANDLE File_AcquireMutex(const WCHAR* MutexName);
 void File_ReleaseMutex(HANDLE hMutex);
@@ -124,9 +128,11 @@ _FX BOOLEAN Key_SavePathTree()
 
     File_SavePathTree_internal(&Key_PathRoot, KEY_PATH_FILE_NAME);
 
-    LeaveCriticalSection(Key_PathRoot_CritSec);
+    File_GetAttributes_internal(KEY_PATH_FILE_NAME, &Key_PathsFileSize, &Key_PathsFileDate, NULL);
 
     Key_PathsVersion++;
+
+    LeaveCriticalSection(Key_PathRoot_CritSec);
 
     return TRUE;
 }
@@ -167,13 +173,22 @@ _FX VOID Key_RefreshPathTree()
 
     if (WaitForSingleObject(Key_BoxRootWatcher, 0) == WAIT_OBJECT_0) {
 
-        //
-        // something changed, reload the path tree
-        //
+        ULONG64 PathsFileSize = 0;
+        ULONG64 PathsFileDate = 0;
+        if (File_GetAttributes_internal(KEY_PATH_FILE_NAME, &PathsFileSize, &PathsFileDate, NULL) 
+            && (Key_PathsFileSize != PathsFileSize || Key_PathsFileDate != PathsFileDate)) {
 
-        Key_LoadPathTree();
+            Key_PathsFileSize = PathsFileSize;
+            Key_PathsFileDate = PathsFileDate;
 
-        FindNextChangeNotification(Key_BoxRootWatcher); // rearm the watcher
+            //
+            // something changed, reload the path tree
+            //
+
+            Key_LoadPathTree();
+
+            FindNextChangeNotification(Key_BoxRootWatcher); // rearm the watcher
+        }
     }
 }
 
@@ -195,6 +210,8 @@ _FX BOOLEAN Key_InitDelete_v2()
 //#ifdef WITH_DEBUG
 //    Key_SavePathTree();
 //#endif
+    
+    File_GetAttributes_internal(KEY_PATH_FILE_NAME, &Key_PathsFileSize, &Key_PathsFileDate, NULL);
 
     WCHAR BoxFilePath[MAX_PATH] = { 0 };
     wcscpy(BoxFilePath, Dll_BoxFilePath);

@@ -67,6 +67,8 @@ static LIST File_PathRoot;
 static CRITICAL_SECTION *File_PathRoot_CritSec = NULL;
 
 static HANDLE File_BoxRootWatcher = NULL;
+static ULONG64 File_PathsFileSize = 0;
+static ULONG64 File_PathsFileDate = 0;
 
 //---------------------------------------------------------------------------
 // Functions
@@ -83,6 +85,8 @@ static ULONG File_IsDeleted_v2(const WCHAR* TruePath);
 static BOOLEAN File_HasDeleted_v2(const WCHAR* TruePath);
 static WCHAR* File_GetRelocation(const WCHAR* TruePath);
 static NTSTATUS File_SetRelocation(const WCHAR *OldTruePath, const WCHAR *NewTruePath);
+
+BOOL File_GetAttributes_internal(const WCHAR *name, ULONG64 *size, ULONG64 *date, ULONG *attrs);
 
 HANDLE File_AcquireMutex(const WCHAR* MutexName);
 void File_ReleaseMutex(HANDLE hMutex);
@@ -420,6 +424,8 @@ _FX BOOLEAN File_SavePathTree()
 
     File_SavePathTree_internal(&File_PathRoot, FILE_PATH_FILE_NAME);
 
+    File_GetAttributes_internal(FILE_PATH_FILE_NAME, &File_PathsFileSize, &File_PathsFileDate, NULL);
+
     LeaveCriticalSection(File_PathRoot_CritSec);
 
     return TRUE;
@@ -563,13 +569,22 @@ _FX VOID File_RefreshPathTree()
 
     if (WaitForSingleObject(File_BoxRootWatcher, 0) == WAIT_OBJECT_0) {
 
-        //
-        // something changed, reload the path tree
-        //
+        ULONG64 PathsFileSize = 0;
+        ULONG64 PathsFileDate = 0;
+        if (File_GetAttributes_internal(FILE_PATH_FILE_NAME, &PathsFileSize, &PathsFileDate, NULL)
+            && (File_PathsFileSize != PathsFileSize || File_PathsFileDate != PathsFileDate)) {
 
-        File_LoadPathTree();
+            File_PathsFileSize = PathsFileSize;
+            File_PathsFileDate = PathsFileDate;
 
-        FindNextChangeNotification(File_BoxRootWatcher); // rearm the watcher
+            //
+            // something changed, reload the path tree
+            //
+
+            File_LoadPathTree();
+
+            FindNextChangeNotification(File_BoxRootWatcher); // rearm the watcher
+        }
     }
 }
 
@@ -591,6 +606,8 @@ _FX BOOLEAN File_InitDelete_v2()
 //#ifdef WITH_DEBUG
 //    File_SavePathTree();
 //#endif
+
+    File_GetAttributes_internal(FILE_PATH_FILE_NAME, &File_PathsFileSize, &File_PathsFileDate, NULL);
 
     WCHAR BoxFilePath[MAX_PATH] = { 0 };
     wcscpy(BoxFilePath, Dll_BoxFilePath);
@@ -820,3 +837,18 @@ _FX WCHAR* File_GetRelocation(const WCHAR *TruePath)
     return NULL;
 }
 
+
+//---------------------------------------------------------------------------
+// File_GetAttributes_internal
+//---------------------------------------------------------------------------
+
+
+BOOL File_GetAttributes_internal(const WCHAR *name, ULONG64 *size, ULONG64 *date, ULONG *attrs)
+{
+    WCHAR PathsFile[MAX_PATH] = { 0 };
+    wcscpy(PathsFile, Dll_BoxFilePath);
+    wcscat(PathsFile, L"\\");
+    wcscat(PathsFile, name);
+
+    return SbieDll_QueryFileAttributes(PathsFile, size, date, attrs);
+}

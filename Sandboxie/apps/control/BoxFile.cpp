@@ -1154,25 +1154,6 @@ BOOL CBoxFile::GetBoxCreationTime(FILETIME *out_time)
 BOOL CBoxFile::QueryFileAttributes(
     const WCHAR *path, ULONG *attrs, ULONG64 *size)
 {
-    NTSTATUS status;
-    UNICODE_STRING uni;
-    OBJECT_ATTRIBUTES objattrs;
-    FILE_NETWORK_OPEN_INFORMATION info;
-
     CString prefixed_path = CString(L"\\??\\") + path;
-    uni.Buffer = (WCHAR *)(const WCHAR *)prefixed_path;
-    uni.Length = prefixed_path.GetLength() * sizeof(WCHAR);
-    uni.MaximumLength = uni.Length + sizeof(WCHAR);
-
-    InitializeObjectAttributes(
-        &objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
-
-    status = NtQueryFullAttributesFile(&objattrs, &info);
-
-    if (! NT_SUCCESS(status))
-        return FALSE;
-
-    *attrs = info.FileAttributes;
-    *size = info.EndOfFile.QuadPart;
-    return TRUE;
+    return SbieDll_QueryFileAttributes((const WCHAR*)prefixed_path, size, NULL, attrs);
 }

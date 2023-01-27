@@ -10,7 +10,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed BlockNetworkFiles=y not workign tigether with RestrictDevices=y [#2629](https://github.com/sandboxie-plus/Sandboxie/issues/2629)
-
+- fixed sandman crash issue introduced in 1.7.0
+- fixed trace log filter case case sensitive
+- fixed performance issues with Delete V2
 
 
 ## [1.7.0 / 5.62.0] - 2022-12-27

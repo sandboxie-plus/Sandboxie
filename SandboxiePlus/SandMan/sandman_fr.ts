@@ -912,12 +912,12 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="159"/>
         <source>Version 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Version 1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="160"/>
         <source>Version 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Version 2</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="195"/>
@@ -947,25 +947,25 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="286"/>
         <source>Indeterminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Indéterminé</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="458"/>
         <location filename="Windows/OptionsGeneral.cpp" line="558"/>
         <source>Always copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Toujours copier</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="459"/>
         <location filename="Windows/OptionsGeneral.cpp" line="559"/>
         <source>Don&apos;t copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne pas copier</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="460"/>
         <location filename="Windows/OptionsGeneral.cpp" line="560"/>
         <source>Copy empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier si vide</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="686"/>
@@ -2437,7 +2437,7 @@ Non choisira : %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2114"/>
         <source>, but it remains valid for the current build</source>
-        <translation>, mais il reste valide pour la version (build) actuelle</translation>
+        <translation>, mais il reste valide pour la version actuelle</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2116"/>
@@ -2487,7 +2487,7 @@ Non choisira : %2</translation>
     </message>
     <message>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation type="vanished">Le programme %1 lancé dans le bac à sable %2 sera terminé dans 5 minutes car le bac a été configuré pour utiliser des fonctionnalités exclusivement disponibles pour les supporters du projet.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Devenez un supporter du projet&lt;/a&gt;, et recevez un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificat d&apos;adhérent&lt;/a&gt;</translation>
+        <translation type="vanished">Le programme %1 lancé dans le bac à sable %2 sera terminé dans 5 minutes car le bac a été configuré pour utiliser des fonctionnalités exclusivement disponibles aux adhérents du projet.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Devenez un adhérent au projet&lt;/a&gt;, et recevez un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificat d&apos;adhérent&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2032"/>
@@ -2502,7 +2502,7 @@ Non choisira : %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2063"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation>La fonctionnalité sélectionnée n&apos;est disponible que pour les adhérents du projet. Les processus lancés dans un bac à sable avec cette fonctionnalité activée sans certificat d&apos;adhérent seront arrêtés après 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Devenez un adhérent du projet&lt;/a&gt;, et recevez un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificat d&apos;adhérent&lt;/a&gt;.</translation>
+        <translation>La fonctionnalité sélectionnée n&apos;est disponible qu&apos;aux adhérents au projet. Les processus lancés dans un bac à sable avec cette fonctionnalité activée sans certificat d&apos;adhérent seront arrêtés après 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Devenez un adhérent du projet&lt;/a&gt;, et recevez un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificat d&apos;adhérent&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="196"/>
@@ -2524,26 +2524,30 @@ Non choisira : %2</translation>
         <location filename="SandManRecovery.cpp" line="97"/>
         <location filename="SandManRecovery.cpp" line="154"/>
         <source>Checking file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vérification du fichier %1</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="105"/>
-        <source>The file %1 failed a security check!<byte value="xd"/>
-<byte value="xd"/>
+        <source>The file %1 failed a security check!
+
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier %1 a échoué à la vérification de sécurité !
+
+%2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="113"/>
         <source>All files passed the checks</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous les fichiers ont passé les vérifications</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="173"/>
-        <source>The file %1 failed a security check, do you want to recover it anyways?<byte value="xd"/>
-<byte value="xd"/>
+        <source>The file %1 failed a security check, do you want to recover it anyways?
+
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier %1 a échoué à un test de sécurité ; voulez-vous le récupérer quand même ?
+
+%2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="236"/>
@@ -4029,17 +4033,17 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="753"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Les fonctionnalités « Plus » seront désactivées dans %1 jour(s).&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="755"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For this build Plus features remain enabled.&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Pour cette version, les fonctionnalités « Plus » demeurent activées.&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="757"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;Les fonctionnalités « Plus » ne sont plus activées.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="794"/>
@@ -4691,7 +4695,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="390"/>
         <source>Auto delete content when last sandboxed process terminates</source>
-        <translation>Suppression automatique du contenu quand le dernier processus du bac se termine</translation>
+        <translation>Suppression automatique du contenu lorsque le dernier processus du bac se termine</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="460"/>
@@ -4736,7 +4740,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="603"/>
         <source>Issue message 2102 when a file is too large</source>
-        <translation>Générer un message 2102 lorsqu&apos;un fichier est trop volumineux</translation>
+        <translation>Émettre un message 2102 lorsqu&apos;un fichier est trop volumineux</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="467"/>
@@ -5039,7 +5043,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="723"/>
         <source>Issue message 2111 when a process access is denied</source>
-        <translation>Générer un message 2111 quand l&apos;accès à un processus est refusé</translation>
+        <translation>Émettre un message 2111 lorsque l&apos;accès à un processus est refusé</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1104"/>
@@ -5136,7 +5140,7 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1946"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>Générer un message 1308 quand un programme échoue à démarrer</translation>
+        <translation>Émettre un message 1308 lorsqu&apos;un programme échoue à démarrer</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1997"/>
@@ -5170,7 +5174,7 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2757"/>
         <source>Issue message 1307 when a program is denied internet access</source>
-        <translation>Générer un message 1307 lorsqu&apos;un programme se voit refuser l&apos;accès à Internet</translation>
+        <translation>Émettre un message 1307 lorsqu&apos;un programme se voit refuser l&apos;accès à Internet</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2771"/>
@@ -6016,69 +6020,71 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/OptionsWindow.ui" line="321"/>
         <source>Use volume serial numbers for drives, like: \drive\C~1234-ABCD</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser les numéros de série de volume pour les lecteurs, par exemple : \drive\C~1234-ABCD</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="355"/>
         <source>The box structure can only be changed when the sandbox is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>La structure de bac peut être changée uniquement lorsque le bac à sable est vide</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="362"/>
         <source>Allow sandboxed processes to open files protected by EFS</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser les processus dans un bac à ouvrir les fichiers protégés par EFS</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="376"/>
         <source>Disk/File access</source>
-        <translation type="unfinished"></translation>
+        <translation>Accès disque/fichier</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="383"/>
         <source>Virtualization scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Plan de virtualisation</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="488"/>
         <source>2113: Content of migrated file was discarded
 2114: File was not migrated, write access to file was denied
 2115: File was not migrated, file will be opened read only</source>
-        <translation type="unfinished"></translation>
+        <translation>2113 : Le contenu du fichier déplacé a été rejeté
+2114 : Le fichier n&apos;a pas été déplacé, l&apos;accès en écriture au fichier a été refusé
+2115 : Le fichier n&apos;a pas été déplacé, le fichier sera ouvert en lecture seule</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="493"/>
         <source>Issue message 2113/2114/2115 when a file is not fully migrated</source>
-        <translation type="unfinished"></translation>
+        <translation>Émettre un message 2113/2114/2115 lorsqu&apos;un fichier n&apos;a pas été totalement déplacé</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="517"/>
         <source>Add Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un motif</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="524"/>
         <source>Remove Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer le motif</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="578"/>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Motif</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="586"/>
         <source>Sandboxie does not allow writing to host files, unless permitted by the user. When a sandboxed application attempts to modify a file, the entire file must be copied into the sandbox, for large files this can take a significate amount of time. Sandboxie offers options for handling these cases, which can be configured on this page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie ne permet pas d&apos;écrire dans des fichiers hôtes, sauf si autorisé par l&apos;utilisateur. Lorsqu&apos;une application dans un bac à sable tente de modifier un fichier, le fichier entier doit être copié dans le bac ; cela peut prendre une quantité de temps significative pour les grands fichiers. Sandboxie offre des options pour gérer ces cas, et ceci peut se paramétrer sur cette page.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="596"/>
         <source>Using wildcard patterns file specific behavior can be configured in the list below:</source>
-        <translation type="unfinished"></translation>
+        <translation>En utilisant des jokers dans les motifs, un comportement spécifique à des fichiers peut être configuré dans la liste ci-dessous :</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="610"/>
         <source>When a file cannot be migrated, open it in read-only mode instead</source>
-        <translation type="unfinished"></translation>
+        <translation>Lorsqu&apos;un fichier ne peut pas être déplacé, l&apos;ouvrir en mode lecture seule à la place</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="620"/>
@@ -6432,7 +6438,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="90"/>
         <source>Run box operations asynchronously whenever possible (like content deletion)</source>
-        <translation>Lancer les opérations des bacs de manière asynchrone quand c&apos;est possible (par exemple lors de la suppression de contenu)</translation>
+        <translation>Lancer les opérations des bacs de manière asynchrone lorsque c&apos;est possible (par exemple lors de la suppression de contenu)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="170"/>
@@ -6708,7 +6714,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1096"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
-        <translation>Lorsqu&apos;un des programmes suivants est lancé en dehors de tout bac à sable, Sandboxie générera le message SBIE1301.</translation>
+        <translation>Lorsqu&apos;un des programmes suivants est lancé en dehors de tout bac à sable, Sandboxie émettra le message SBIE1301.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1106"/>
@@ -6723,7 +6729,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1046"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>Générer un message 1308 lorsqu&apos;un programme ne parvient pas à démarrer</translation>
+        <translation>Émettre un message 1308 lorsqu&apos;un programme ne parvient pas à démarrer</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="161"/>
@@ -6762,7 +6768,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1122"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
-        <translation>Générer un message 1301 lorsqu&apos;un processus forcé a été désactivé</translation>
+        <translation>Émettre un message 1301 lorsqu&apos;un processus forcé a été désactivé</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="956"/>
@@ -6962,7 +6968,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     </message>
     <message>
         <source>Supporters of the Sandboxie-Plus project receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using free software. :-)</source>
-        <translation type="vanished">Les supporters du projet Sandboxie-Plus reçoivent un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;certificat d&apos;adhérent&lt;/a&gt;. C&apos;est comme une clé de licence, mais pour des gens géniaux qui utilisent des logiciels libres :-)</translation>
+        <translation type="vanished">Les adhérents au projet Sandboxie-Plus reçoivent un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=certificate&quot;&gt;certificat d&apos;adhérent&lt;/a&gt;. C&apos;est comme une clé de licence, mais pour les personnes géniales qui utilisent des logiciels libres. :-)</translation>
     </message>
     <message>
         <source>Install updates automatically</source>

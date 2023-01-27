@@ -159,7 +159,8 @@ void COptionsWindow::CreateGeneral()
 	ui.cmbVersion->addItem(tr("Version 1"));
 	ui.cmbVersion->addItem(tr("Version 2"));
 
-	bool bEmpty = ((CSandBoxPlus*)m_pBox.data())->IsEmpty();
+	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+	bool bEmpty = pBoxEx ? pBoxEx->IsEmpty() : true;
 	ui.lblWhenEmpty->setVisible(!bEmpty);
 	ui.lblScheme->setEnabled(bEmpty);
 	ui.cmbVersion->setEnabled(bEmpty);

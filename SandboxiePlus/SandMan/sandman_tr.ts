@@ -706,7 +706,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="310"/>
         <source>Ignore UIPI</source>
-        <translation>UIPI Yoksay</translation>
+        <translation>UIPI Yok Say</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="312"/>
@@ -758,7 +758,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="327"/>
         <source>Ignore UIPI restrictions for processes.</source>
-        <translation>İşlemler için UIPI kısıtlamalarını yoksayar.</translation>
+        <translation>İşlemler için UIPI kısıtlamalarını yok sayar.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="336"/>
@@ -984,12 +984,12 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="159"/>
         <source>Version 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürüm 1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="160"/>
         <source>Version 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürüm 2</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="252"/>
@@ -1014,25 +1014,25 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="286"/>
         <source>Indeterminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Belirsiz</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="458"/>
         <location filename="Windows/OptionsGeneral.cpp" line="558"/>
         <source>Always copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Her zaman kopyala</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="459"/>
         <location filename="Windows/OptionsGeneral.cpp" line="559"/>
         <source>Don&apos;t copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopyalama</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="460"/>
         <location filename="Windows/OptionsGeneral.cpp" line="560"/>
         <source>Copy empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Boş kopyala</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="792"/>
@@ -1731,26 +1731,30 @@ Tam yol: %4</translation>
         <location filename="SandManRecovery.cpp" line="97"/>
         <location filename="SandManRecovery.cpp" line="154"/>
         <source>Checking file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 dosyası denetleniyor</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="105"/>
         <source>The file %1 failed a security check!<byte value="xd"/>
 <byte value="xd"/>
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 dosyası için güvenlik denetimi başarısız oldu!
+
+%2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="113"/>
         <source>All files passed the checks</source>
-        <translation type="unfinished"></translation>
+        <translation>Tüm dosyalar denetimi geçti</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="173"/>
         <source>The file %1 failed a security check, do you want to recover it anyways?<byte value="xd"/>
 <byte value="xd"/>
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 dosyası için güvenlik denetimi başarısız oldu, dosyayı yine de kurtarmak istiyor musunuz?
+
+%2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="236"/>
@@ -3578,17 +3582,17 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="753"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus özellikleri %1 gün içinde devre dışı bırakılacak.&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="755"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For this build Plus features remain enabled.&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Bu derleme için Plus özellikleri etkin durumda kalır.&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="757"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;Plus özellikleri artık etkin değil.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1210"/>
@@ -3705,7 +3709,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="228"/>
         <source>Ignore</source>
-        <translation>Yoksay</translation>
+        <translation>Yok say</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="240"/>
@@ -4664,7 +4668,7 @@ Bu seçenekler olay maskesini &quot;*&quot; olarak ayarlar - Tüm erişim olayla
 Ini kullanarak günlüğe kaydetmeyi özelleştirebilirsiniz.
 &quot;A&quot; - İzin verilen erişim(ler)
 &quot;D&quot; - Reddedilen erişim(ler)
-&quot;I&quot; - Yoksayılan erişim(ler)
+&quot;I&quot; - Yok sayılan erişim(ler)
 &quot;*&quot; yerine.</translation>
     </message>
     <message>
@@ -4776,7 +4780,7 @@ Ini kullanarak günlüğe kaydetmeyi özelleştirebilirsiniz.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3116"/>
         <source>Ignore Extension</source>
-        <translation>Uzantıyı Yoksay</translation>
+        <translation>Uzantıyı Yok Say</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="294"/>
@@ -4934,7 +4938,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     </message>
     <message>
         <source>Raw Disk access</source>
-        <translation type="vanished">Ham Disk erişimi</translation>
+        <translation type="vanished">Ham Disk Erişimi</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="301"/>
@@ -4969,74 +4973,76 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="740"/>
         <source>Other restrictions</source>
-        <translation>Diğer kısıtlamalar</translation>
+        <translation>Diğer Kısıtlamalar</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="321"/>
         <source>Use volume serial numbers for drives, like: \drive\C~1234-ABCD</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürücüler için birim seri numaralarını kullan, örneğin: \drive\C~1234-ABCD</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="355"/>
         <source>The box structure can only be changed when the sandbox is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Alan yapısı yalnızca korumalı alan boşken değiştirilebilir</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="362"/>
         <source>Allow sandboxed processes to open files protected by EFS</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan işlemlerinin EFS tarafından korunan dosyaları açmasına izin ver</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="376"/>
         <source>Disk/File access</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürücü/Dosya Erişimi</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="383"/>
         <source>Virtualization scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Sanallaştırma şeması</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="488"/>
         <source>2113: Content of migrated file was discarded
 2114: File was not migrated, write access to file was denied
 2115: File was not migrated, file will be opened read only</source>
-        <translation type="unfinished"></translation>
+        <translation>2113: Taşınan dosyanın içeriği atıldı
+2114: Dosya taşınamadı, dosyaya yazma erişimi reddedildi
+2115: Dosya taşınamadı, dosya salt okunur olarak açılacak</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="493"/>
         <source>Issue message 2113/2114/2115 when a file is not fully migrated</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir dosya tam olarak taşınamadığında 2113/2114/2115 mesajını yayınla</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="517"/>
         <source>Add Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Desen Ekle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="524"/>
         <source>Remove Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Deseni Kaldır</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="578"/>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Desen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="586"/>
         <source>Sandboxie does not allow writing to host files, unless permitted by the user. When a sandboxed application attempts to modify a file, the entire file must be copied into the sandbox, for large files this can take a significate amount of time. Sandboxie offers options for handling these cases, which can be configured on this page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie, kullanıcı izin vermediği sürece ana sistemdeki dosyalara yazmaya izin vermez. Korumalı alandaki bir uygulama bir dosyayı değiştirmeye çalıştığında, tüm dosyanın korumalı alana kopyalanması gerekir, büyük dosyalar için bu işlem çok uzun sürebilir. Sandboxie, bu tür durumlar için bu sayfada yapılandırılabilen seçenekler sunar.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="596"/>
         <source>Using wildcard patterns file specific behavior can be configured in the list below:</source>
-        <translation type="unfinished"></translation>
+        <translation>Özel karakter desenleri kullanılarak dosyaya özgü davranış aşağıdaki listeden yapılandırılabilir:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="610"/>
         <source>When a file cannot be migrated, open it in read-only mode instead</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir dosya taşınamadığı zaman salt okunur modda açılsın</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="776"/>

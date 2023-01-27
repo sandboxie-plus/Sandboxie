@@ -291,7 +291,7 @@ void InitMiniDumpWriter(const wchar_t* Name, const wchar_t* Path)
   // http://blog.kalmbachnet.de/?postid=75
 
   // Register Vectored Exception Handler
-  AddVectoredExceptionHandler(0, MyCrashHandlerExceptionFilter);
+  //AddVectoredExceptionHandler(0, MyCrashHandlerExceptionFilter);
 }
 
 

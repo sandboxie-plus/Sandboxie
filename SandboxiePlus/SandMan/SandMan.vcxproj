@@ -85,7 +85,7 @@
   </ImportGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <QtInstall>msvc2019_64</QtInstall>
-    <QtModules>concurrent;core;gui;network;widgets</QtModules>
+    <QtModules>core;network;gui;widgets;winextras;concurrent</QtModules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="QtSettings">
     <QtInstall>msvc2019</QtInstall>

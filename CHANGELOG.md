@@ -4,7 +4,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.7.0 / 5.62.0] - 2023-01-?
+
+
+## [1.7.1 / 5.62.1] - 2022-12-
+
+### Fixed
+- fixed BlockNetworkFiles=y not workign tigether with RestrictDevices=y [#2629](https://github.com/sandboxie-plus/Sandboxie/issues/2629)
+
+
+
+## [1.7.0 / 5.62.0] - 2022-12-27
 
 
 ### Added

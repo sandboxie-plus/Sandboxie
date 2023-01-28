@@ -183,6 +183,9 @@
     <ClCompile Include="Helpers\WinHelper.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="Wizards\NewBoxWizard.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -282,6 +285,9 @@
     </QtMoc>
     <QtMoc Include="OnlineUpdater.h">
       <Filter>SandMan</Filter>
+    </QtMoc>
+    <QtMoc Include="Wizards\NewBoxWizard.h">
+      <Filter>Wizards</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

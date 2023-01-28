@@ -12,6 +12,7 @@
 #include "../Windows/RecoveryWindow.h"
 #include "../Windows/NewBoxWindow.h"
 #include "../Views/FileView.h"
+#include "../Wizards/NewBoxWizard.h"
 
 #include "qt_windows.h"
 #include "qwindowdefs_win.h"
@@ -960,17 +961,24 @@ bool CSbieView::MoveItem(const QString& Name, const QString& To, int pos)
 
 QString CSbieView::AddNewBox()
 {
-	CNewBoxWindow NewBoxWindow(this);
-	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
-	NewBoxWindow.setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
-	if (NewBoxWindow.exec() == 1)
-	{
+	QString BoxName;
+
+	bool bVintage = theConf->GetInt("Options/ViewMode", 1) == 2;
+
+	if (bVintage) {
+		CNewBoxWindow NewBoxWindow(this);
+		if (NewBoxWindow.exec() == 1)
+			BoxName = NewBoxWindow.m_Name;
+	}
+	else
+		BoxName = CNewBoxWizard::CreateNewBox(this);
+
+	if (!BoxName.isEmpty()) {
 		theAPI->ReloadBoxes();
 		Refresh();
-		SelectBox(NewBoxWindow.m_Name);
-		return NewBoxWindow.m_Name;
+		SelectBox(BoxName);
 	}
-	return QString();
+	return BoxName;
 }
 
 QString CSbieView::AddNewGroup()

@@ -8,6 +8,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.7.1 / 5.62.1] - 2022-12-
 
+### Added
+- added option to create a new sandbox to run in from the box picker dialog
+- added sandbox creation wizard (not available in vintage view mode)
+
+
 ### Fixed
 - fixed BlockNetworkFiles=y not workign tigether with RestrictDevices=y [#2629](https://github.com/sandboxie-plus/Sandboxie/issues/2629)
 - fixed sandman crash issue introduced in 1.7.0
@@ -15,6 +20,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed performance issues with Delete V2
 - fixed issue with NtQueryDirectoryFile data alignment [#2443](https://github.com/sandboxie-plus/Sandboxie/issues/2443)
 - fixed issue with firefox 111 dev build [#2631](https://github.com/sandboxie-plus/Sandboxie/issues/2631)
+
+
 
 
 

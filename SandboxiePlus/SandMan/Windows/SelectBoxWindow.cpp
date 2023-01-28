@@ -90,6 +90,7 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 	ui.treeBoxes->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
 
 	connect(ui.radBoxed, SIGNAL(clicked(bool)), this, SLOT(OnBoxType()));
+	connect(ui.radBoxedNew, SIGNAL(clicked(bool)), this, SLOT(OnBoxType()));
 	connect(ui.radUnBoxed, SIGNAL(clicked(bool)), this, SLOT(OnBoxType()));
 
 	connect(ui.buttonBox, SIGNAL(accepted()), SLOT(OnRun()));
@@ -162,7 +163,7 @@ void CSelectBoxWindow::closeEvent(QCloseEvent *e)
 
 void CSelectBoxWindow::OnBoxType()
 {
-	ui.treeBoxes->setEnabled(!ui.radUnBoxed->isChecked());
+	ui.treeBoxes->setEnabled(ui.radBoxed->isChecked());
 }
 
 void CSelectBoxWindow::OnBoxDblClick(QTreeWidgetItem*)
@@ -180,6 +181,14 @@ void CSelectBoxWindow::OnRun()
 		if (QMessageBox("Sandboxie-Plus", tr("Are you sure you want to run the program outside the sandbox?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
 			return;
 		pItem = NULL;
+	}
+	else if (ui.radBoxedNew->isChecked())
+	{
+		BoxName = theGUI->GetBoxView()->AddNewBox();
+		if (BoxName.isEmpty()) {
+			close();
+			return;
+		}
 	}
 	else if (pItem == NULL) {
 		QMessageBox("Sandboxie-Plus", tr("Please select a sandbox."), QMessageBox::Information, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, this).exec();

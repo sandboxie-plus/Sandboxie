@@ -31,6 +31,7 @@ HEADERS += ./stdafx.h \
     ./Windows/SelectBoxWindow.h \
     ./Windows/SupportDialog.h\
     ./OnlineUpdater.h \
+    ./Wizards/NewBoxWizard.h \
     ./Wizards/SetupWizard.h
 
 SOURCES += ./main.cpp \
@@ -63,6 +64,7 @@ SOURCES += ./main.cpp \
     ./Windows/SelectBoxWindow.cpp \
     ./Windows/SupportDialog.cpp\
     ./OnlineUpdater.cpp \
+    ./Wizards/NewBoxWizard.cpp \
     ./Wizards/SetupWizard.cpp
 
 FORMS += ./Forms/NewBoxWindow.ui \

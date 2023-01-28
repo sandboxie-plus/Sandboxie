@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>500</width>
-    <height>300</height>
+    <height>328</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -34,29 +34,12 @@
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="7" column="0" colspan="5">
-      <widget class="QDialogButtonBox" name="buttonBox">
-       <property name="standardButtons">
-        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     <item row="6" column="1" colspan="2">
+      <widget class="QLineEdit" name="txtName">
+       <property name="maxLength">
+        <number>32</number>
        </property>
       </widget>
-     </item>
-     <item row="5" column="0" colspan="3">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Sandbox Name:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>Box Type Preset:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1" colspan="2">
-      <widget class="QComboBox" name="cmbBoxType"/>
      </item>
      <item row="4" column="0">
       <spacer name="verticalSpacer">
@@ -71,6 +54,37 @@
        </property>
       </spacer>
      </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Box Type Preset:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0" colspan="3">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Sandbox Name:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1" colspan="2">
+      <widget class="QComboBox" name="cmbBoxType"/>
+     </item>
+     <item row="7" column="0" colspan="5">
+      <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="0" colspan="5">
       <widget class="QLabel" name="label_2">
        <property name="text">
@@ -78,13 +92,6 @@
        </property>
        <property name="wordWrap">
         <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="1" colspan="2">
-      <widget class="QLineEdit" name="txtName">
-       <property name="maxLength">
-        <number>32</number>
        </property>
       </widget>
      </item>
@@ -98,13 +105,6 @@
        </property>
        <property name="wordWrap">
         <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string/>
        </property>
       </widget>
      </item>

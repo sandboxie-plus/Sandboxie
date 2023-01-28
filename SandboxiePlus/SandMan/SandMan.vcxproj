@@ -316,9 +316,11 @@
     <ClCompile Include="Windows\SettingsWindow.cpp" />
     <ClCompile Include="Windows\SnapshotsWindow.cpp" />
     <ClCompile Include="Windows\SupportDialog.cpp" />
+    <ClCompile Include="Wizards\NewBoxWizard.cpp" />
     <ClCompile Include="Wizards\SetupWizard.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Wizards\NewBoxWizard.h" />
     <QtMoc Include="OnlineUpdater.h" />
     <QtMoc Include="Views\FileView.h" />
     <QtMoc Include="Windows\SupportDialog.h" />

@@ -434,9 +434,9 @@ _FX BOOLEAN SbieDll_IsOpenClsid(
     // open the null clsid to open all
     //
 
-    //static const GUID CLSID_Null = {
-    //    0x00000000, 0x0000, 0x0000,
-    //                    { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } };
+    static const GUID CLSID_Null = {
+        0x00000000, 0x0000, 0x0000,
+                        { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } };
 
     if (clsctx & CLSCTX_LOCAL_SERVER) {
 
@@ -477,7 +477,7 @@ _FX BOOLEAN SbieDll_IsOpenClsid(
 
         for (index = 0; index < Com_NumOpenClsids; ++index) {
             guid = &Com_OpenClsids[index];
-            if (memcmp(guid, rclsid, sizeof(GUID)) == 0 /*|| memcmp(guid, &CLSID_Null, sizeof(GUID)) == 0*/)
+            if (memcmp(guid, rclsid, sizeof(GUID)) == 0 || memcmp(guid, &CLSID_Null, sizeof(GUID)) == 0)
                 return TRUE;
         }
     }

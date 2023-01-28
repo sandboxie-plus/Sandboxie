@@ -11,6 +11,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added option to create a new sandbox to run from the box picker dialog
 - added sandbox creation wizard (not available in Vintage View mode)
+- added ability to open all com classes [#2448](https://github.com/sandboxie-plus/Sandboxie/issues/2448)
+-- use OpenClsid={00000000-0000-0000-0000-000000000000} to open all
 
 ### Changed
 - refactored network blocking code in driver

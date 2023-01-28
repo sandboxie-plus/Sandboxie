@@ -65,10 +65,10 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 
 ## 🚀 Usefull tools for sandboxie
 
-Sandboxie's functioanlity can be encahnced with specialized tools like the following
+Sandboxie's functionality can be enhanced with specialized tools like the following
 
-  * (LogApiDll)[https://github.com/sandboxie-plus/LogApiDll] - this dll adds verbose trace output to sandboxies trace log, listing invocations of relevant windows API functions.
-  * (SbieHide)[https://github.com/VeroFess/SbieHide] - this dll hides the presence of the SbieDll.dll from the aplication.
+  * [LogApiDll](https://github.com/sandboxie-plus/LogApiDll) - this dll adds verbose trace output to sandboxies trace log, listing invocations of relevant windows API functions.
+  * [SbieHide](https://github.com/VeroFess/SbieHide) - this dll hides the presence of the SbieDll.dll from the application.
 
 ## 📑 Helpful Contributors
 

@@ -6,29 +6,29 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.7.1 / 5.62.1] - 2022-12-
+## [1.7.1 / 5.62.1] - 2023-?-?
 
 ### Added
-- added option to create a new sandbox to run in from the box picker dialog
-- added sandbox creation wizard (not available in vintage view mode)
+- added option to create a new sandbox to run from the box picker dialog
+- added sandbox creation wizard (not available in Vintage View mode)
 
 ### Changed
 - refactored network blocking code in driver
 
 ### Fixed
-- fixed BlockNetworkFiles=y not workign tigether with RestrictDevices=y [#2629](https://github.com/sandboxie-plus/Sandboxie/issues/2629)
-- fixed sandman crash issue introduced in 1.7.0
-- fixed trace log filter case case sensitive
+- fixed BlockNetworkFiles=y not working together with RestrictDevices=y [#2629](https://github.com/sandboxie-plus/Sandboxie/issues/2629)
+- fixed SandMan crash issue introduced in 1.7.0
+- fixed trace log case-sensitive filter
 - fixed performance issues with Delete V2
 - fixed issue with NtQueryDirectoryFile data alignment [#2443](https://github.com/sandboxie-plus/Sandboxie/issues/2443)
-- fixed issue with firefox 111 dev build [#2631](https://github.com/sandboxie-plus/Sandboxie/issues/2631)
+- fixed issue with Microsoft Edge 111 dev build [#2631](https://github.com/sandboxie-plus/Sandboxie/issues/2631)
 - fixed issue with mio sockets [#2617](https://github.com/sandboxie-plus/Sandboxie/issues/2617)
 - fixed issue with run menu entries created from the options/settings window [#2610](https://github.com/sandboxie-plus/Sandboxie/issues/2610)
 
 
 
 
-## [1.7.0 / 5.62.0] - 2022-12-27
+## [1.7.0 / 5.62.0] - 2023-01-27
 
 
 ### Added
@@ -589,7 +589,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added Swedish translation to the Plus UI (thanks pb1)
-- added Vintage View Mode to make SandMan UI look like SbieCtrl
+- added Vintage View mode to make SandMan UI look like SbieCtrl
 - added alternative tray menu mechanics
 - added ability to auto-generate sandbox icons based on the border colour
 

@@ -14,6 +14,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed trace log filter case case sensitive
 - fixed performance issues with Delete V2
 - fixed issue with NtQueryDirectoryFile data alignment [#2443](https://github.com/sandboxie-plus/Sandboxie/issues/2443)
+- fixed issue with firefox 111 dev build [#2631](https://github.com/sandboxie-plus/Sandboxie/issues/2631)
+
 
 
 ## [1.7.0 / 5.62.0] - 2022-12-27

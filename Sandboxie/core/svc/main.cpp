@@ -513,21 +513,21 @@ finish:
 //---------------------------------------------------------------------------
 
 
-bool CheckDropRights(const WCHAR *BoxName)
+bool CheckDropRights(const WCHAR *BoxName, const WCHAR *ExeName)
 {
     // Allow setting of DropAdminRights to supress UAC prompts / elevation from the sandboxed realm
     //if (SbieApi_QueryConfBool(BoxName, L"NoSecurityIsolation", FALSE))
     //    return false; // if we are not swapping the token we can not drop admin rights so keep this consistent
     if (SbieApi_QueryConfBool(BoxName, L"UseSecurityMode", FALSE))
         return true;
-    if (SbieApi_QueryConfBool(BoxName, L"DropAdminRights", FALSE))
+    if (SbieDll_GetSettingsForName_bool(BoxName, ExeName, L"DropAdminRights", FALSE))
         return true;
     return false;
 }
 
 
 //---------------------------------------------------------------------------
-// CheckDropRights
+// IsProcessWoW64
 //---------------------------------------------------------------------------
 
 

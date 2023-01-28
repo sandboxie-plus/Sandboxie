@@ -50,7 +50,7 @@ bool ServiceServer::CanCallerDoElevation(
     if (0 != SbieApi_QueryProcess(idProcess, boxname, exename, NULL, pSessionId))
         return false;
 
-    bool DropRights = CheckDropRights(boxname);
+    bool DropRights = CheckDropRights(boxname, exename);
 
     if (ServiceName) {
 
@@ -72,7 +72,7 @@ bool ServiceServer::CanCallerDoElevation(
             // not be started with a system token allow it to be start
             //
 
-            if (DropRights && SbieApi_QueryConfBool(boxname, L"FakeAdminRights", FALSE))
+            if (DropRights && SbieDll_GetSettingsForName_bool(boxname, exename, L"FakeAdminRights", FALSE))
                 DropRights = false;
 
             // 

@@ -275,7 +275,7 @@ MSG_HEADER *ComServer::GetClassObjectHandler(
         exc = 0;
         pMap->ProcNum = 0;
         if (req->elevate) {
-            if (CheckDropRights(slave->BoxName))
+            if (CheckDropRights(slave->BoxName, NULL))
                 exc = ERROR_ELEVATION_REQUIRED;
             else
                 pMap->ProcNum = 1;

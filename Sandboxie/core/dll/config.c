@@ -217,6 +217,14 @@ _FX WCHAR* Config_MatchImageAndGetValue(WCHAR* value, const WCHAR* ImageName, UL
         BOOLEAN inv, match;
 
         //
+        // ignore all process specific presets when no image name was provided
+        // keep searching for a global default
+        //
+
+        if (!ImageName)
+            return NULL;
+
+        //
         // exclamation marks negates the matching
         //
 

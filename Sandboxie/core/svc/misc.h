@@ -23,7 +23,7 @@
 void LogEvent(ULONG msgid, ULONG level, ULONG detail);
 void AbortServer(void);
 bool RestrictToken(void);
-bool CheckDropRights(const WCHAR *BoxName);
+bool CheckDropRights(const WCHAR *BoxName, const WCHAR *ExeName);
 
 bool IsProcessWoW64(HANDLE pid);
 bool IsHostPath(HANDLE idProcess, WCHAR* dos_path);

@@ -262,6 +262,12 @@ _FX NTSTATUS Process_Low_Api_InjectComplete(PROCESS *proc, ULONG64 *parms)
 
         if (proc) {
 
+            //
+            // the service synamically allocates a per box SID to be used,
+            // if no SID is provided thsi feature is eider disabled or failed
+            // then we fall back to using the default anonymous SID
+            //
+
             __try {
 
                 PSID pSID = (PSID)(ULONG_PTR)parms[2];
@@ -278,6 +284,13 @@ _FX NTSTATUS Process_Low_Api_InjectComplete(PROCESS *proc, ULONG64 *parms)
             } __except (EXCEPTION_EXECUTE_HANDLER) {
                 status = GetExceptionCode();
             }
+
+            //
+            // the service tells us if we should drop admin rights for this process, 
+            // howeever if security mode is enabled we always drop admin rights
+            //
+
+            proc->drop_rights = proc->use_security_mode || parms[3] != FALSE;
 
             KeSetEvent(Process_Low_Event, 0, FALSE);
             status = STATUS_SUCCESS;

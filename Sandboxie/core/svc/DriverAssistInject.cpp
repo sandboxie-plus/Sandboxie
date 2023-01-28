@@ -69,8 +69,9 @@ void DriverAssist::InjectLow(void *_msg)
 		goto finish;
 	}
 
-	WCHAR boxname[48];
-	errlvl = SbieApi_QueryProcessEx2((HANDLE)msg->process_id, 0, boxname, NULL, NULL, NULL, NULL);
+	WCHAR boxname[BOXNAME_COUNT_48];
+    WCHAR exename[99];
+	errlvl = SbieApi_QueryProcessEx2((HANDLE)msg->process_id, 96, boxname, exename, NULL, NULL, NULL);
 	if (errlvl != 0)
 		goto finish;
 
@@ -117,10 +118,12 @@ void DriverAssist::InjectLow(void *_msg)
     // notify driver that we successfully injected the lowlevel code
     //
 
+    BOOL drop_rights = SbieDll_GetSettingsForName_bool(boxname, exename, L"DropAdminRights", FALSE);
+
     if (GetSandboxieSID(boxname, SandboxieLogonSid, sizeof(SandboxieLogonSid)))
-        status = SbieApi_Call(API_INJECT_COMPLETE, 2, (ULONG_PTR)msg->process_id, SandboxieLogonSid);
+        status = SbieApi_Call(API_INJECT_COMPLETE, 3, (ULONG_PTR)msg->process_id, SandboxieLogonSid, drop_rights);
     else // if that fails or is not enabled we fall back to using the anonymous logon token
-        status = SbieApi_Call(API_INJECT_COMPLETE, 1, (ULONG_PTR)msg->process_id);
+        status = SbieApi_Call(API_INJECT_COMPLETE, 3, (ULONG_PTR)msg->process_id, NULL, drop_rights);
 
     if (status == 0)
         errlvl = 0;

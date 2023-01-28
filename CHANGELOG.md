@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added ability to open all com classes [#2448](https://github.com/sandboxie-plus/Sandboxie/issues/2448)
 -- use OpenClsid={00000000-0000-0000-0000-000000000000} to open all
 - the SandMan UI now indicates if a sandboxed process has a Elevated(Admin) or System token
+- DropAdminRights can now be configured per process [#2293](https://github.com/sandboxie-plus/Sandboxie/issues/2293)
 
 ### Changed
 - refactored network blocking code in driver
@@ -62,7 +63,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue with Hebrew language (Classic UI) [#2608](https://github.com/sandboxie-plus/Sandboxie/issues/2608)
-- fixed issue with start menu integration and snapshots
+- fixed issue with start menu integration and snapshots [#2589](https://github.com/sandboxie-plus/Sandboxie/issues/2589)
 
 
 

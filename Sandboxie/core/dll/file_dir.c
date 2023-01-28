@@ -1454,9 +1454,16 @@ _FX NTSTATUS File_MergeDummy(
                     info_ptr->FileAttributes = info.FileAttributes;
 
                     PrevEntry = &info_ptr->NextEntryOffset;
+
                     info_ptr->NextEntryOffset = sizeof(FILE_ID_BOTH_DIR_INFORMATION) + info_ptr->FileNameLength + sizeof(WCHAR) + 16; // +16 some buffer space
+
+                    ULONG tmp = (info_ptr->NextEntryOffset & 0x07);
+                    if (tmp != 0) // fix alignment when needed
+                        info_ptr->NextEntryOffset += 0x8 - tmp;
+
                     info_ptr = (FILE_ID_BOTH_DIR_INFORMATION*)
                         ((UCHAR*)info_ptr + info_ptr->NextEntryOffset);
+
                     // todo: fix-me possible info_area buffer overflow!!!!
                 }
             }
@@ -1797,6 +1804,15 @@ _FX NTSTATUS File_GetMergedInformation(
 
         name_ptr = File_CopyFixedInformation(
             ptr_info, next_entry, FileInformationClass);
+
+        // This structure must be aligned on a LONGLONG (8-byte) 
+        // boundary. If a buffer contains two or more of these 
+        // structures, the NextEntryOffset value in each entry, 
+        // except the last, falls on an 8-byte boundary.
+        
+        ULONG tmp = (*(ULONG*)next_entry & 0x07);
+        if (tmp != 0) // fix alignment when needed
+            *(ULONG*)next_entry += 0x8 - tmp;
 
         // copy as much of the filename as there is room available
         // in the caller's buffer.  note that for the second and

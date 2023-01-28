@@ -695,7 +695,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <location filename="Windows/OptionsGeneral.cpp" line="461"/>
         <location filename="Windows/OptionsGeneral.cpp" line="561"/>
         <source>Copy empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Ohne Inhalt kopieren</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="406"/>
@@ -2394,26 +2394,28 @@ Möchten Sie die Bereinigung durchführen?</translation>
         <location filename="SandManRecovery.cpp" line="97"/>
         <location filename="SandManRecovery.cpp" line="154"/>
         <source>Checking file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Prüfe Datei %1</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="105"/>
         <source>The file %1 failed a security check!<byte value="xd"/>
 <byte value="xd"/>
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Datei %1 scheiterte an einer Sicherheitsprüfung!<byte value="xd"/>
+<byte value="xd"/>%2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="113"/>
         <source>All files passed the checks</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Dateien bestanden die Überprüfungen</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="173"/>
         <source>The file %1 failed a security check, do you want to recover it anyways?<byte value="xd"/>
 <byte value="xd"/>
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Datei %1 scheiterte an einer Sicherheitsprüfung, möchten Sie diese trotzdem wiederherstellen?<byte value="xd"/>
+<byte value="xd"/>%2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="236"/>
@@ -6158,69 +6160,71 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="321"/>
         <source>Use volume serial numbers for drives, like: \drive\C~1234-ABCD</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende Volumenseriennummern für Laufwerke, wie: \drive\C~1234-ABCD</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="355"/>
         <source>The box structure can only be changed when the sandbox is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Boxstruktur kann nur geändert werden, wenn die Sandbox leer ist</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="362"/>
         <source>Allow sandboxed processes to open files protected by EFS</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube sandgeboxten Prozessen Dateien zu öffnen, die durch EFS geschützt sind</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="376"/>
         <source>Disk/File access</source>
-        <translation type="unfinished"></translation>
+        <translation>Disk/Dateizugriff</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="383"/>
         <source>Virtualization scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Virtualisierungsschema</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="488"/>
         <source>2113: Content of migrated file was discarded
 2114: File was not migrated, write access to file was denied
 2115: File was not migrated, file will be opened read only</source>
-        <translation type="unfinished"></translation>
+        <translation>2113: Inhalt der migrierten Datei wurde verworfen
+2114: Datei wurde nicht migriert, Schreibzugriff zur Datei wurde versagt
+2115: Datei wurde nicht migriert, Datei wird nur schreibgeschützt geöffnet</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="493"/>
         <source>Issue message 2113/2114/2115 when a file is not fully migrated</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebe Nachricht 2113/2114/2115 aus, wenn eine Datei nicht vollständigt migriert wurde</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="517"/>
         <source>Add Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Muster hinzufügen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="524"/>
         <source>Remove Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Muster entfernen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="578"/>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Muster</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="586"/>
         <source>Sandboxie does not allow writing to host files, unless permitted by the user. When a sandboxed application attempts to modify a file, the entire file must be copied into the sandbox, for large files this can take a significate amount of time. Sandboxie offers options for handling these cases, which can be configured on this page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie erlaubt das Schreiben zu Dateien des Hotrechners nicht, außer wenn dies durch den Nutzer genehmigt wird. Wenn ein sandgeboxtes Programm versucht eine Datei zu verändern, muss die gesamte Datei in die Sandbox kopiert werden, was bei größeren Dateien eine erhebliche Menge an Zeit dauern kann. Sandboxie bietet Optionen zur Behandlung dieser Fälle, welche auf dieser Seite konfiguriert werden können.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="596"/>
         <source>Using wildcard patterns file specific behavior can be configured in the list below:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwendete Wildcardmuster zum dateispezifischen Verhalten können in der untenstehenden Liste konfiguriert werden:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="610"/>
         <source>When a file cannot be migrated, open it in read-only mode instead</source>
-        <translation type="unfinished"></translation>
+        <translation>Falls eine Datei nicht migriert werden kann, öffne diese stattdessen im schreibgeschützten Modus</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="620"/>

@@ -873,7 +873,7 @@ void COptionsWindow::OnBrowsePath()
 	if (Name.isEmpty())
 		return;
 
-	AddRunItem(Name, Value);
+	AddRunItem(Name, "\"" + Value + "\"");
 	m_GeneralChanged = true;
 	OnOptChanged();
 }

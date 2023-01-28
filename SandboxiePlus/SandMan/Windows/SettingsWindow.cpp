@@ -469,7 +469,7 @@ void CSettingsWindow::OnBrowsePath()
 	if (Name.isEmpty())
 		return;
 
-	AddRunItem(Name, Value);
+	AddRunItem(Name, "\"" + Value + "\"");
 }
 
 void CSettingsWindow::OnAddCommand()

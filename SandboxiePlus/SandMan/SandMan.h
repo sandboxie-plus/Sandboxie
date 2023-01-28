@@ -69,7 +69,7 @@ public:
 	QRgb				GetBoxColor(int boxType) { return m_BoxColors[boxType]; }
 	QIcon				GetColorIcon(QColor boxColor, bool inUse = false/*, bool bOut = false*/);
 	QIcon				MakeIconBusy(const QIcon& Icon, int Index = 0);
-	QIcon				MakeIconRecycle(const QIcon& Icon);
+	QIcon				IconAddOverlay(const QIcon& Icon, const QString& Name, int Size = 24);
 	QString				GetBoxDescription(int boxType);
 	
 	bool				CheckCertificate(QWidget* pWidget);

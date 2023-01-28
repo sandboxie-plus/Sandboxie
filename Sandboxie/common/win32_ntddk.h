@@ -2283,8 +2283,8 @@ __declspec(dllimport) NTSTATUS RtlGetGroupSecurityDescriptor(
     PSID* Group, PBOOLEAN GroupDefaulted
 );
 
-__declspec(dllimport) BOOLEAN RtlEqualSid(PSID Sid1, PSID Sid2);
-__declspec(dllimport) PVOID RtlFreeSid(PSID Sid);
+__declspec(dllimport) BOOLEAN NTAPI RtlEqualSid(PSID Sid1, PSID Sid2);
+__declspec(dllimport) PVOID NTAPI RtlFreeSid(PSID Sid);
 
 //---------------------------------------------------------------------------
 

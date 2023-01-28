@@ -261,8 +261,8 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			else {
 				pNode->busyState = 0;
 
-				if(boxDel && !bVintage)
-					Icon = theGUI->MakeIconRecycle(Icon);
+				if (boxDel && !bVintage)
+					Icon = theGUI->IconAddOverlay(Icon, ":/Boxes/AutoDel");
 			}
 			
 			if (m_LargeIcons) // but not for boxes
@@ -383,9 +383,16 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 			//else
 			//	pNode->Icon = icons.first().pixmap;
 
-			pNode->Icon = m_IconProvider.icon(QFileInfo(pProcess->GetFileName()));
-			if (pNode->Icon.isNull() || !pNode->Icon.isValid())
-				pNode->Icon = m_ExeIcon;
+			QIcon Icon = m_IconProvider.icon(QFileInfo(pProcess->GetFileName()));
+			if (Icon.isNull())
+				Icon = m_ExeIcon;
+
+			if(pProcess->HasSystemToken())
+				Icon = theGUI->IconAddOverlay(Icon, ":/Actions/SystemShield.png", 20);
+			else if(pProcess->HasElevatedToken())
+				Icon = theGUI->IconAddOverlay(Icon, ":/Actions/AdminShield.png", 20);
+
+			pNode->Icon = Icon;
 			Changed = 1;
 		}
 

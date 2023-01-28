@@ -136,6 +136,9 @@
         <file>Actions/BFance.png</file>
         <file>Actions/Shield16.png</file>
         <file>Actions/Editor.png</file>
+        <file>Actions/USB.png</file>
+        <file>Actions/SystemShield.png</file>
+        <file>Actions/AdminShield.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

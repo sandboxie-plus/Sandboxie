@@ -1201,11 +1201,9 @@ QIcon CSandMan::MakeIconBusy(const QIcon& Icon, int Index)
 	return QIcon(result);
 }
 
-QIcon CSandMan::MakeIconRecycle(const QIcon& Icon)
+QIcon CSandMan::IconAddOverlay(const QIcon& Icon, const QString& Name, int Size)
 {
-	static QPixmap overlay;
-	if(overlay.isNull())
-		overlay = QPixmap(":/Boxes/AutoDel");
+	QPixmap overlay = QPixmap(Name).scaled(Size, Size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
 	QPixmap base = Icon.pixmap(32, 32);
 	QPixmap result(base.width(), base.height());
@@ -1213,7 +1211,7 @@ QIcon CSandMan::MakeIconRecycle(const QIcon& Icon)
 	QPainter painter(&result);
 	painter.drawPixmap(0, 0, base);
 
-	painter.drawPixmap(8, 8, overlay);
+	painter.drawPixmap(32 - Size, 32 - Size, overlay);
 	return QIcon(result);
 }
 

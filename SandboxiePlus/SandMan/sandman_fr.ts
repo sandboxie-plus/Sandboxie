@@ -621,8 +621,8 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/OptionsAccess.cpp" line="616"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="535"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="610"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="486"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="582"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="487"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="583"/>
         <location filename="Windows/OptionsNetwork.cpp" line="436"/>
         <location filename="Windows/OptionsNetwork.cpp" line="529"/>
         <location filename="Windows/OptionsNetwork.cpp" line="642"/>
@@ -634,8 +634,8 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/OptionsWindow.cpp" line="963"/>
         <location filename="Windows/OptionsAccess.cpp" line="384"/>
         <location filename="Windows/OptionsAccess.cpp" line="620"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="491"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="586"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="492"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="587"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
         <location filename="Windows/OptionsNetwork.cpp" line="441"/>
         <location filename="Windows/OptionsNetwork.cpp" line="533"/>
@@ -670,7 +670,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="595"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="586"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="553"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="554"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
         <location filename="Windows/OptionsNetwork.cpp" line="508"/>
@@ -920,60 +920,60 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation>Version 2</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="195"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="196"/>
         <source>Browse for Program</source>
         <translation>Explorer pour un programme</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="252"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="253"/>
         <source>Open Box Options</source>
         <translation>Ouvrir les options du bac</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="253"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="254"/>
         <source>Browse Content</source>
         <translation>Parcourir le contenu</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="254"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="255"/>
         <source>Start File Recovery</source>
         <translation>Lancer la récupération de fichiers</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="255"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="256"/>
         <source>Show Run Dialog</source>
         <translation>Afficher la boite de dialogue « Exécuter »</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="286"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="287"/>
         <source>Indeterminate</source>
         <translation>Indéterminé</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="458"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="558"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="459"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="559"/>
         <source>Always copy</source>
         <translation>Toujours copier</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="459"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="559"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="460"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="560"/>
         <source>Don&apos;t copy</source>
         <translation>Ne pas copier</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="460"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="560"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="461"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="561"/>
         <source>Copy empty</source>
         <translation>Copier si vide</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="686"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="687"/>
         <source>kilobytes (%1)</source>
         <translation>kilo-octets (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="792"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="793"/>
         <source>Select color</source>
         <translation>Sélectionner une couleur</translation>
     </message>
@@ -982,7 +982,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation type="vanished">Veuillez entrer un chemin de programme</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="867"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="868"/>
         <source>Select Program</source>
         <translation>Sélectionner le programme</translation>
     </message>
@@ -1004,18 +1004,18 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation type="vanished">Programme</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="867"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="868"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Exécutables (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="871"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="886"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="872"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="887"/>
         <source>Please enter a menu title</source>
         <translation>Veuillez saisir un titre de menu</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="882"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="883"/>
         <source>Please enter a command</source>
         <translation>Veuillez saisir une commande</translation>
     </message>
@@ -2528,10 +2528,13 @@ Non choisira : %2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="105"/>
-        <source>The file %1 failed a security check!
-
+        <source>The file %1 failed a security check!<byte value="xd"/>
+<byte value="xd"/>
 %2</source>
-        <translation>Le fichier %1 a échoué à la vérification de sécurité !
+        <oldsource>The file %1 failed a security check!
+
+%2</oldsource>
+        <translation type="unfinished">Le fichier %1 a échoué à la vérification de sécurité !
 
 %2</translation>
     </message>
@@ -2542,10 +2545,13 @@ Non choisira : %2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="173"/>
-        <source>The file %1 failed a security check, do you want to recover it anyways?
-
+        <source>The file %1 failed a security check, do you want to recover it anyways?<byte value="xd"/>
+<byte value="xd"/>
 %2</source>
-        <translation>Le fichier %1 a échoué à un test de sécurité ; voulez-vous le récupérer quand même ?
+        <oldsource>The file %1 failed a security check, do you want to recover it anyways?
+
+%2</oldsource>
+        <translation type="unfinished">Le fichier %1 a échoué à un test de sécurité ; voulez-vous le récupérer quand même ?
 
 %2</translation>
     </message>

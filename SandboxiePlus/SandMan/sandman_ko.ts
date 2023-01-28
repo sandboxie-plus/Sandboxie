@@ -566,8 +566,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAccess.cpp" line="616"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="535"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="610"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="486"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="582"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="487"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="583"/>
         <location filename="Windows/OptionsNetwork.cpp" line="436"/>
         <location filename="Windows/OptionsNetwork.cpp" line="529"/>
         <location filename="Windows/OptionsNetwork.cpp" line="642"/>
@@ -579,8 +579,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsWindow.cpp" line="963"/>
         <location filename="Windows/OptionsAccess.cpp" line="384"/>
         <location filename="Windows/OptionsAccess.cpp" line="620"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="491"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="586"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="492"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="587"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
         <location filename="Windows/OptionsNetwork.cpp" line="441"/>
         <location filename="Windows/OptionsNetwork.cpp" line="533"/>
@@ -615,7 +615,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="595"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="586"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="553"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="554"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
         <location filename="Windows/OptionsNetwork.cpp" line="508"/>
@@ -860,65 +860,65 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="195"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="196"/>
         <source>Browse for Program</source>
         <translation>프로그램 찾아보기</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="252"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="253"/>
         <source>Open Box Options</source>
         <translation>박스 열기 옵션</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="253"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="254"/>
         <source>Browse Content</source>
         <translation>내용 찾아보기</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="254"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="255"/>
         <source>Start File Recovery</source>
         <translation>파일 복구 시작</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="255"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="256"/>
         <source>Show Run Dialog</source>
         <translation>실행 대화 상자 표시</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="286"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="287"/>
         <source>Indeterminate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="458"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="558"/>
-        <source>Always copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="459"/>
         <location filename="Windows/OptionsGeneral.cpp" line="559"/>
-        <source>Don&apos;t copy</source>
+        <source>Always copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="460"/>
         <location filename="Windows/OptionsGeneral.cpp" line="560"/>
+        <source>Don&apos;t copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="461"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="561"/>
         <source>Copy empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="686"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="687"/>
         <source>kilobytes (%1)</source>
         <translation>킬로바이트 (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="792"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="793"/>
         <source>Select color</source>
         <translation>색상 선택</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="867"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="868"/>
         <source>Select Program</source>
         <translation>프로그램 선택</translation>
     </message>
@@ -928,18 +928,18 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>서비스 식별자를 입력하십시오</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="867"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="868"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>실행 파일 (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="871"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="886"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="872"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="887"/>
         <source>Please enter a menu title</source>
         <translation>메뉴 제목을 입력하십시오</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="882"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="883"/>
         <source>Please enter a command</source>
         <translation>명령을 입력하십시오</translation>
     </message>

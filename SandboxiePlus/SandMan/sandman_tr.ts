@@ -415,7 +415,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="595"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="586"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="553"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="554"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
         <location filename="Windows/OptionsNetwork.cpp" line="508"/>
@@ -435,8 +435,8 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Dosya için Göz At</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="871"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="886"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="872"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="887"/>
         <source>Please enter a menu title</source>
         <translation>Lütfen bir menü başlığı girin</translation>
     </message>
@@ -501,8 +501,8 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <location filename="Windows/OptionsWindow.cpp" line="963"/>
         <location filename="Windows/OptionsAccess.cpp" line="384"/>
         <location filename="Windows/OptionsAccess.cpp" line="620"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="491"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="586"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="492"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="587"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
         <location filename="Windows/OptionsNetwork.cpp" line="441"/>
         <location filename="Windows/OptionsNetwork.cpp" line="533"/>
@@ -570,17 +570,17 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Yalnızca başlık odaktayken göster</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="867"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="868"/>
         <source>Select Program</source>
         <translation>Program Seç</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="882"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="883"/>
         <source>Please enter a command</source>
         <translation>Lütfen bir komut girin</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="686"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="687"/>
         <source>kilobytes (%1)</source>
         <translation>kilobayt (%1)</translation>
     </message>
@@ -605,8 +605,8 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <location filename="Windows/OptionsAccess.cpp" line="616"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="535"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="610"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="486"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="582"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="487"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="583"/>
         <location filename="Windows/OptionsNetwork.cpp" line="436"/>
         <location filename="Windows/OptionsNetwork.cpp" line="529"/>
         <location filename="Windows/OptionsNetwork.cpp" line="642"/>
@@ -634,7 +634,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>RT arayüzleri isimleriyle belirtilmelidir.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="195"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="196"/>
         <source>Browse for Program</source>
         <translation>Program için Göz At</translation>
     </message>
@@ -992,55 +992,55 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Sürüm 2</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="252"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="253"/>
         <source>Open Box Options</source>
         <translation>Alan Seçeneklerini Aç</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="253"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="254"/>
         <source>Browse Content</source>
         <translation>İçeriğe Göz At</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="254"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="255"/>
         <source>Start File Recovery</source>
         <translation>Dosya Kurtarmayı Başlatın</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="255"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="256"/>
         <source>Show Run Dialog</source>
         <translation>Çalıştır Diyaloğunu Göster</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="286"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="287"/>
         <source>Indeterminate</source>
         <translation>Belirsiz</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="458"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="558"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="459"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="559"/>
         <source>Always copy</source>
         <translation>Her zaman kopyala</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="459"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="559"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="460"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="560"/>
         <source>Don&apos;t copy</source>
         <translation>Kopyalama</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="460"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="560"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="461"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="561"/>
         <source>Copy empty</source>
         <translation>Boş kopyala</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="792"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="793"/>
         <source>Select color</source>
         <translation>Renk seç</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="867"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="868"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Çalıştırılabilir dosyalar (*.exe *.cmd)</translation>
     </message>

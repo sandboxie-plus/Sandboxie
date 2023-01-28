@@ -642,50 +642,50 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="195"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="196"/>
         <source>Browse for Program</source>
         <translation>Buscar programa</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="252"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="253"/>
         <source>Open Box Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="253"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="254"/>
         <source>Browse Content</source>
         <translation type="unfinished">Explorar contenido</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="254"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="255"/>
         <source>Start File Recovery</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="255"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="256"/>
         <source>Show Run Dialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="286"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="287"/>
         <source>Indeterminate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="458"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="558"/>
-        <source>Always copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="459"/>
         <location filename="Windows/OptionsGeneral.cpp" line="559"/>
-        <source>Don&apos;t copy</source>
+        <source>Always copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="460"/>
         <location filename="Windows/OptionsGeneral.cpp" line="560"/>
+        <source>Don&apos;t copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="461"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="561"/>
         <source>Copy empty</source>
         <translation type="unfinished"></translation>
     </message>
@@ -742,12 +742,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="686"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="687"/>
         <source>kilobytes (%1)</source>
         <translation>kilobytes (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="792"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="793"/>
         <source>Select color</source>
         <translation>Seleccionar color</translation>
     </message>
@@ -756,7 +756,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="vanished">Por favor entre una ruta de programa</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="867"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="868"/>
         <source>Select Program</source>
         <translation></translation>
     </message>
@@ -774,18 +774,18 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="vanished">Programa</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="867"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="868"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Ejecutables (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="871"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="886"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="872"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="887"/>
         <source>Please enter a menu title</source>
         <translation>Por favor un titulo de menu</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="882"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="883"/>
         <source>Please enter a command</source>
         <translation>Por favor ingrese un comando</translation>
     </message>
@@ -794,8 +794,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsWindow.cpp" line="963"/>
         <location filename="Windows/OptionsAccess.cpp" line="384"/>
         <location filename="Windows/OptionsAccess.cpp" line="620"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="491"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="586"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="492"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="587"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
         <location filename="Windows/OptionsNetwork.cpp" line="441"/>
         <location filename="Windows/OptionsNetwork.cpp" line="533"/>
@@ -1008,8 +1008,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAccess.cpp" line="616"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="535"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="610"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="486"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="582"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="487"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="583"/>
         <location filename="Windows/OptionsNetwork.cpp" line="436"/>
         <location filename="Windows/OptionsNetwork.cpp" line="529"/>
         <location filename="Windows/OptionsNetwork.cpp" line="642"/>
@@ -1044,7 +1044,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="595"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="586"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="553"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="554"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
         <location filename="Windows/OptionsNetwork.cpp" line="508"/>

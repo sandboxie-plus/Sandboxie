@@ -617,50 +617,50 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>版本 2</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="195"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="196"/>
         <source>Browse for Program</source>
         <translation>浏览程序</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="252"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="253"/>
         <source>Open Box Options</source>
         <translation>打开沙盒选项</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="253"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="254"/>
         <source>Browse Content</source>
         <translation>浏览内容</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="254"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="255"/>
         <source>Start File Recovery</source>
         <translation>开始恢复文件</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="255"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="256"/>
         <source>Show Run Dialog</source>
         <translation>显示运行对话框</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="286"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="287"/>
         <source>Indeterminate</source>
         <translation>不确定</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="458"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="558"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="459"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="559"/>
         <source>Always copy</source>
         <translation>始终复制</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="459"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="559"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="460"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="560"/>
         <source>Don&apos;t copy</source>
         <translation>不要复制</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="460"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="560"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="461"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="561"/>
         <source>Copy empty</source>
         <translation>复制空的副本</translation>
     </message>
@@ -717,17 +717,17 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>部分变更未保存，确定要关闭这个选项窗口吗？</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="686"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="687"/>
         <source>kilobytes (%1)</source>
         <translation>KB (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="792"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="793"/>
         <source>Select color</source>
         <translation>选择颜色</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="867"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="868"/>
         <source>Select Program</source>
         <translation>选择程序</translation>
     </message>
@@ -737,18 +737,18 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>请输入一个服务标识符</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="867"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="868"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>可执行文件 (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="871"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="886"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="872"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="887"/>
         <source>Please enter a menu title</source>
         <translation>请输入一个菜单标题</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="882"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="883"/>
         <source>Please enter a command</source>
         <translation>请输入一则命令</translation>
     </message>
@@ -757,8 +757,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsWindow.cpp" line="963"/>
         <location filename="Windows/OptionsAccess.cpp" line="384"/>
         <location filename="Windows/OptionsAccess.cpp" line="620"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="491"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="586"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="492"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="587"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
         <location filename="Windows/OptionsNetwork.cpp" line="441"/>
         <location filename="Windows/OptionsNetwork.cpp" line="533"/>
@@ -959,8 +959,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAccess.cpp" line="616"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="535"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="610"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="486"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="582"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="487"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="583"/>
         <location filename="Windows/OptionsNetwork.cpp" line="436"/>
         <location filename="Windows/OptionsNetwork.cpp" line="529"/>
         <location filename="Windows/OptionsNetwork.cpp" line="642"/>
@@ -995,7 +995,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="595"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="586"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="553"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="554"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
         <location filename="Windows/OptionsNetwork.cpp" line="508"/>
@@ -2393,10 +2393,13 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="105"/>
-        <source>The file %1 failed a security check!
-
+        <source>The file %1 failed a security check!<byte value="xd"/>
+<byte value="xd"/>
 %2</source>
-        <translation>文件 %1 没有通过安全检查!
+        <oldsource>The file %1 failed a security check!
+
+%2</oldsource>
+        <translation type="unfinished">文件 %1 没有通过安全检查!
 
 %2</translation>
     </message>
@@ -2407,10 +2410,13 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="173"/>
-        <source>The file %1 failed a security check, do you want to recover it anyways?
-
+        <source>The file %1 failed a security check, do you want to recover it anyways?<byte value="xd"/>
+<byte value="xd"/>
 %2</source>
-        <translation>文件 %1 没有通过安全检查，无论如何你是否想恢复它？
+        <oldsource>The file %1 failed a security check, do you want to recover it anyways?
+
+%2</oldsource>
+        <translation type="unfinished">文件 %1 没有通过安全检查，无论如何你是否想恢复它？
 
 %2</translation>
     </message>

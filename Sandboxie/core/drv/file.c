@@ -92,11 +92,6 @@ static BOOLEAN File_InitPaths(PROCESS *proc,
     LIST *open_file_paths, LIST *closed_file_paths,
     LIST *read_file_paths, LIST *write_file_paths);
 
-static BOOLEAN File_BlockInternetAccess(PROCESS *proc);
-
-static BOOLEAN File_BlockInternetAccess2(
-    PROCESS *proc, const WCHAR *name, int modifier);
-
 static NTSTATUS File_Generic_MyParseProc(
     PROCESS *proc, PVOID ParseObject, ULONG device_type,
     PUNICODE_STRING RemainingName, MY_CONTEXT *MyContext, BOOLEAN msg1313);
@@ -149,15 +144,6 @@ static NTSTATUS File_Api_SetShortName2(
        const ULONG  File_NamedPipeLen = 17;
 
 static char *File_DesktopIniText = NULL;
-
-
-static const WCHAR *File_RawIp = L"rawip6";
-static const WCHAR *File_Http  = L"http\\";
-static const WCHAR *File_Tcp   = L"tcp6";
-static const WCHAR *File_Udp   = L"udp6";
-static const WCHAR *File_Ip    = L"ip6";
-static const WCHAR *File_Afd   = L"afd";
-static const WCHAR *File_Nsi   = L"nsi";
 
 
 //---------------------------------------------------------------------------
@@ -592,8 +578,29 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         L"\\Device\\NamedPipe\\",               // named pipe root
         L"\\Device\\MailSlot\\",                // mail slot root
         //
-        // network
+        // Windows 7 fault-tolerant heap
         //
+        L"\\Device\\NamedPipe\\ProtectedPrefix\\LocalService\\FTHPIPE",
+        //
+        // printer
+        //
+        L"\\Device\\NamedPipe\\spoolss",
+        L"\\Device\\NamedPipe\\spooler*",
+        L"%DefaultSpoolDirectory%\\*",
+        L"%DefaultSpoolDirectory2%\\*",
+        L"\\Device\\NamedPipe\\*_doPDF*",           // doPDF
+        //
+        // multimedia
+        //
+        L"\\Device\\NamedPipe\\AudioSrv",
+        //
+        // third-party software
+        //
+        L"\\Device\\NamedPipe\\Adobe LM Service*",
+        L"\\Device\\NamedPipe\\XTIERRPCPIPE",       // Novell NetIdentity
+        NULL
+    };
+    static const WCHAR* openNetPipes[] = {
         L"\\Device\\NamedPipe\\ROUTER",
         L"\\Device\\NamedPipe\\ShimViewer",
         L"\\Device\\Afd",
@@ -616,27 +623,20 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         L"\\Device\\NetBT_Tcpip_*",
         L"\\Device\\Http\\*",
         L"\\Device\\Nsi",                           // Windows 7
-        //
-        // Windows 7 fault-tolerant heap
-        //
-        L"\\Device\\NamedPipe\\ProtectedPrefix\\LocalService\\FTHPIPE",
-        //
-        // printer
-        //
-        L"\\Device\\NamedPipe\\spoolss",
-        L"\\Device\\NamedPipe\\spooler*",
-        L"%DefaultSpoolDirectory%\\*",
-        L"%DefaultSpoolDirectory2%\\*",
-        L"\\Device\\NamedPipe\\*_doPDF*",           // doPDF
-        //
-        // multimedia
-        //
-        L"\\Device\\NamedPipe\\AudioSrv",
-        //
-        // third-party software
-        //
-        L"\\Device\\NamedPipe\\Adobe LM Service*",
-        L"\\Device\\NamedPipe\\XTIERRPCPIPE",       // Novell NetIdentity
+        NULL
+    };
+    static const WCHAR* closedNetPipes[] = {
+        L"\\Device\\afd*",
+        L"\\Device\\ip",
+        L"\\Device\\ip6",
+        L"\\Device\\udp",
+        L"\\Device\\udp6",
+        L"\\Device\\tcp",
+        L"\\Device\\tcp6",
+        L"\\Device\\http\\*",
+        L"\\Device\\rawip",
+        L"\\Device\\rawip6",
+        L"\\Device\\nsi",                           // Windows 7
         NULL
     };
     static const WCHAR *strWinRMFiles[] = {
@@ -819,6 +819,39 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         return FALSE;
     }
 
+    //
+    // setup network device access
+    //
+
+    if (ok) {
+
+        BOOLEAN is_open, is_closed;
+
+        //
+        // block Internet devices if ClosedFilePath=InternetAccessDevices
+        // unless this process is exempted from the blockade
+        //
+
+        Process_MatchPath(
+            proc->pool, L"InternetAccessDevices", 21,
+            NULL, closed_file_paths,
+            &is_open, &is_closed);
+
+        if (is_closed && !proc->AllowInternetAccess) {
+            for (i = 0; closedNetPipes[i] && ok; ++i) {
+                ok = Process_AddPath(
+                    proc, closed_file_paths, NULL, TRUE, closedNetPipes[i], FALSE);
+            }
+        }
+        else {
+            for (i = 0; openNetPipes[i] && ok; ++i) {
+                ok = Process_AddPath(
+                    proc, open_file_paths, NULL, TRUE, openNetPipes[i], FALSE);
+            }
+        }
+    }
+
+
 #ifdef USE_MATCH_PATH_EX
 
     //
@@ -888,123 +921,6 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
 
 
 //---------------------------------------------------------------------------
-// File_BlockInternetAccess
-//---------------------------------------------------------------------------
-
-
-_FX BOOLEAN File_BlockInternetAccess(PROCESS *proc)
-{
-    BOOLEAN is_open, is_closed;
-    BOOLEAN ok;
-
-    //
-    // is this process exempted from the blockade
-    //
-
-	if (proc->AllowInternetAccess)
-		return TRUE;
-
-    //
-    // should we warn on access to internet resources
-    //
-
-    proc->file_warn_internet = Conf_Get_Boolean(
-        proc->box->name, L"NotifyInternetAccessDenied", 0, TRUE);
-
-    if (proc->image_sbie)
-        proc->file_warn_internet = FALSE;
-
-    //
-    // add Internet devices if ClosedFilePath=InternetAccessDevices
-    //
-
-    Process_MatchPath(
-        proc->pool, L"InternetAccessDevices", 21,
-        NULL, &proc->closed_file_paths,
-        &is_open, &is_closed);
-
-    ok = TRUE;
-
-    if (is_closed) {
-
-        //
-        // if the configuration specifies to block the pseudo Internet
-        // device, add real Internet devices.  keep in sync with the
-        // list of devices in File_Api_CheckInternetAccess
-        //
-
-        if (ok)         // \Device\RawIp6
-            ok = File_BlockInternetAccess2(proc, File_RawIp, 0);
-
-        if (ok)         // \Device\RawIp4
-            ok = File_BlockInternetAccess2(proc, File_RawIp, -1);
-
-        if (ok)         // \Device\Http\*
-            ok = File_BlockInternetAccess2(proc, File_Http, +1);
-
-        if (ok)         // \Device\Tcp6
-            ok = File_BlockInternetAccess2(proc, File_Tcp, 0);
-
-        if (ok)         // \Device\Tcp4
-            ok = File_BlockInternetAccess2(proc, File_Tcp, -1);
-
-        if (ok)         // \Device\Udp6
-            ok = File_BlockInternetAccess2(proc, File_Udp, 0);
-
-        if (ok)         // \Device\Udp4
-            ok = File_BlockInternetAccess2(proc, File_Udp, -1);
-
-        if (ok)         // \Device\Ip6
-            ok = File_BlockInternetAccess2(proc, File_Ip, 0);
-
-        if (ok)         // \Device\Ip4
-            ok = File_BlockInternetAccess2(proc, File_Ip, -1);
-
-        if (ok)         // \Device\Afd*
-            ok = File_BlockInternetAccess2(proc, File_Afd, +1);
-
-        if (ok && proc->use_rule_specificity) // \Device\Afd - need non wildcard to overrule open rule in File_InitPaths
-            ok = File_BlockInternetAccess2(proc, File_Afd, 0);
-
-        if (ok)         // \Device\Nsi
-            ok = File_BlockInternetAccess2(proc, File_Nsi, 0);
-    }
-
-    return ok;
-}
-
-
-//---------------------------------------------------------------------------
-// File_BlockInternetAccess2
-//---------------------------------------------------------------------------
-
-
-_FX BOOLEAN File_BlockInternetAccess2(
-    PROCESS *proc, const WCHAR *name, int modifier)
-{
-    WCHAR device_name[32];
-    BOOLEAN add_star;
-
-    wmemcpy(device_name,    File_Mup, 8);   // \Device\ prefix
-    wcscpy(device_name + 8, name);
-
-    if (modifier == +1)
-        add_star = TRUE;
-    else {
-        add_star = FALSE;
-
-        if (modifier == -1) {
-            WCHAR *ptr = device_name + wcslen(device_name) - 1;
-            *ptr = L'\0';
-        }
-    }
-
-    return Process_AddPath(
-        proc, &proc->closed_file_paths, NULL, TRUE, device_name, add_star);
-}
-
-
-//---------------------------------------------------------------------------
 // File_InitProcess
 //---------------------------------------------------------------------------
 
@@ -1027,17 +943,25 @@ _FX BOOLEAN File_InitProcess(PROCESS *proc)
                                         &proc->closed_file_paths,
                                         &proc->read_file_paths,
                                         &proc->write_file_paths);
-    if (ok)
-        ok = File_BlockInternetAccess(proc);
 
     if (ok)
         ok = WFP_UpdateProcess(proc);
 
-    if (ok && proc->image_path && (! proc->image_sbie)) {
+    //
+    // should we warn on access to internet resources
+    //
 
-        //
-        // make sure the image path does not match a ClosedFilePath setting
-        //
+    proc->file_warn_internet = Conf_Get_Boolean(
+        proc->box->name, L"NotifyInternetAccessDenied", 0, TRUE);
+
+    if (proc->image_sbie)
+        proc->file_warn_internet = FALSE;
+
+    //
+    // make sure the image path does not match a ClosedFilePath setting
+    //
+
+    if (ok && proc->image_path && (! proc->image_sbie)) {
 
 #ifdef USE_MATCH_PATH_EX
         ULONG mp_flags = Process_MatchPathEx(proc, proc->image_path, wcslen(proc->image_path), L'f', 
@@ -2256,6 +2180,25 @@ _FX NTSTATUS File_Api_GetName(PROCESS *proc, ULONG64 *parms)
 
 
 //---------------------------------------------------------------------------
+// File_PurgePathList
+//---------------------------------------------------------------------------
+
+
+_FX VOID File_PurgePathList(LIST* path_list)
+{
+    PATTERN *pat;
+
+    while (1) {
+        pat = List_Head(path_list);
+        if (! pat)
+            break;
+        List_Remove(path_list, pat);
+        Pattern_Free(pat);
+    }
+}
+
+
+//---------------------------------------------------------------------------
 // File_Api_RefreshPathList
 //---------------------------------------------------------------------------
 
@@ -2264,12 +2207,12 @@ _FX NTSTATUS File_Api_RefreshPathList(PROCESS *proc, ULONG64 *parms)
 {
     NTSTATUS status;
 #ifdef USE_MATCH_PATH_EX
-    LIST normal_paths,  *p_normal_paths;
+    LIST normal_paths;
 #endif
-    LIST open_paths,    *p_open_paths;
-    LIST closed_paths,  *p_closed_paths;
-    LIST read_paths,    *p_read_paths;
-    LIST write_paths,   *p_write_paths;
+    LIST open_paths;
+    LIST closed_paths;
+    LIST read_paths;
+    LIST write_paths;
     PATTERN *pat;
     BOOLEAN ok;
     KIRQL irql;
@@ -2302,87 +2245,26 @@ _FX NTSTATUS File_Api_RefreshPathList(PROCESS *proc, ULONG64 *parms)
                                 &read_paths, 
                                 &write_paths);
 
-    //
-    // select which set of path lists to delete, the currently active set
-    // in case of success, or the partially created new set on failure
-    //
-
     KeRaiseIrql(APC_LEVEL, &irql);
     ExAcquireResourceExclusiveLite(proc->file_lock, TRUE);
 
     if (ok) {
 
-#ifdef USE_MATCH_PATH_EX
-        p_normal_paths  = &proc->normal_file_paths;
-#endif
-        p_open_paths    = &proc->open_file_paths;
-        p_closed_paths  = &proc->closed_file_paths;
-        p_read_paths    = &proc->read_file_paths;
-        p_write_paths   = &proc->write_file_paths;
-
-    } else {
+        //
+        // purge the old set of path lists
+        //
 
 #ifdef USE_MATCH_PATH_EX
-        p_normal_paths  = &normal_paths;
+        File_PurgePathList(&proc->normal_file_paths);
 #endif
-        p_open_paths    = &open_paths;
-        p_closed_paths  = &closed_paths;
-        p_read_paths    = &read_paths;
-        p_write_paths   = &write_paths;
+        File_PurgePathList(&proc->open_file_paths);
+        File_PurgePathList(&proc->closed_file_paths);
+        File_PurgePathList(&proc->read_file_paths);
+        File_PurgePathList(&proc->write_file_paths);
 
-    }
-
-    //
-    // delete the selected path lists
-    //
-
-#ifdef USE_MATCH_PATH_EX
-    while (1) {
-        pat = List_Head(p_normal_paths);
-        if (! pat)
-            break;
-        List_Remove(p_normal_paths, pat);
-        Pattern_Free(pat);
-    }
-#endif
-
-    while (1) {
-        pat = List_Head(p_open_paths);
-        if (! pat)
-            break;
-        List_Remove(p_open_paths, pat);
-        Pattern_Free(pat);
-    }
-
-    while (1) {
-        pat = List_Head(p_closed_paths);
-        if (! pat)
-            break;
-        List_Remove(p_closed_paths, pat);
-        Pattern_Free(pat);
-    }
-
-    while (1) {
-        pat = List_Head(p_read_paths);
-        if (! pat)
-            break;
-        List_Remove(p_read_paths, pat);
-        Pattern_Free(pat);
-    }
-
-    while (1) {
-        pat = List_Head(p_write_paths);
-        if (! pat)
-            break;
-        List_Remove(p_write_paths, pat);
-        Pattern_Free(pat);
-    }
-
-    //
-    // restore old path lists, in case of failure
-    //
-
-    if (ok) {
+        //
+        // apply the newly created set of path lists
+        //
 
 #ifdef USE_MATCH_PATH_EX
         memcpy(&proc->normal_file_paths,  &normal_paths,    sizeof(LIST));
@@ -2391,14 +2273,26 @@ _FX NTSTATUS File_Api_RefreshPathList(PROCESS *proc, ULONG64 *parms)
         memcpy(&proc->closed_file_paths,  &closed_paths,    sizeof(LIST));
         memcpy(&proc->read_file_paths,    &read_paths,      sizeof(LIST));
         memcpy(&proc->write_file_paths,   &write_paths,     sizeof(LIST));
-	}
+
+    } else {
+
+        //
+        // on failure purge the partialy cerated new set of path lists
+        //
+
+#ifdef USE_MATCH_PATH_EX
+        File_PurgePathList(&normal_paths);
+#endif
+        File_PurgePathList(&open_paths);
+        File_PurgePathList(&closed_paths);
+        File_PurgePathList(&read_paths);
+        File_PurgePathList(&write_paths);
+    }
 
 	//
-	// now we need to re block the internet access
+	// this api call is also used to update network access permissions
+    // so we need to update the WFP configuration
 	//
-
-	if (ok)
-		ok = File_BlockInternetAccess(proc);
 
     if (ok)
         ok = WFP_UpdateProcess(proc);
@@ -2618,72 +2512,6 @@ _FX NTSTATUS File_Api_CheckInternetAccess(PROCESS *proc, ULONG64 *parms)
     wmemcpy(device_name,        File_Mup,     8);   // \Device\ prefix
     wmemcpy(device_name + 8,    user_devname, 32);
     device_name[8+32] = L'\0';
-
-    /* this check is now done in user mode
-    //
-    // convert the device name to lowercase, stop at the first backslash
-    //
-
-    ptr = device_name + 8;
-    ptr[32] = L'\0';
-    len = 0;
-    for (ptr2 = ptr; *ptr2; ++ptr2) {
-        if (*ptr2 == L'\\') {
-            *ptr2 = L'\0';
-            break;
-        }
-        if (*ptr2 >= L'A' && *ptr2 <= L'Z')
-            *ptr2 = (*ptr2 - L'A') + L'a';
-        ++len;
-    }
-
-    //
-    // check if this is an internet device
-    //
-
-    chk = FALSE;
-    if (len == 6) {
-
-        if (wmemcmp(ptr, File_RawIp, 6) == 0)
-            chk = TRUE;
-
-    } else if (len == 5) {
-
-        if (wmemcmp(ptr, File_RawIp, 5) == 0)
-            chk = TRUE;
-
-    } else if (len == 4) {
-
-        if (wmemcmp(ptr, File_Http, 4) == 0)
-            chk = TRUE;
-        if (wmemcmp(ptr, File_Tcp, 4) == 0)
-            chk = TRUE;
-        else if (wmemcmp(ptr, File_Udp, 4) == 0)
-            chk = TRUE;
-
-    } else if (len == 3) {
-
-        if (wmemcmp(ptr, File_Tcp, 3) == 0)
-            chk = TRUE;
-        else if (wmemcmp(ptr, File_Udp, 3) == 0)
-            chk = TRUE;
-        else if (wmemcmp(ptr, File_Ip, 3) == 0)
-            chk = TRUE;
-        else if (wmemcmp(ptr, File_Afd, 3) == 0)
-            chk = TRUE;
-        else if (wmemcmp(ptr, File_Nsi, 3) == 0)
-            chk = TRUE;
-
-    } else if (len == 2) {
-
-        if (wmemcmp(ptr, File_Ip, 2) == 0)
-            chk = TRUE;
-    }
-
-    if (! chk)
-        return STATUS_OBJECT_NAME_INVALID;
-    */
-
 
     //
     // if a ProcessId was specified, then locate and lock the matching

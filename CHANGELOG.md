@@ -12,6 +12,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added option to create a new sandbox to run in from the box picker dialog
 - added sandbox creation wizard (not available in vintage view mode)
 
+### Changed
+- refactored network blocking code in driver
 
 ### Fixed
 - fixed BlockNetworkFiles=y not workign tigether with RestrictDevices=y [#2629](https://github.com/sandboxie-plus/Sandboxie/issues/2629)

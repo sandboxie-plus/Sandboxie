@@ -1,6 +1,20 @@
 #include "stdafx.h"
 #include "SbieProcess.h"
 
+#include <ntstatus.h>
+#define WIN32_NO_STATUS
+typedef long NTSTATUS;
+
+#include <windows.h>
+#include "..\..\Sandboxie\common\win32_ntddk.h"
+
+#include <winnt.h>
+
+CSbieProcess::CSbieProcess(quint32 ProcessId, class CSandBox* pBox) 
+	: CBoxedProcess(ProcessId, pBox) 
+{
+	m_ProcessInfo.Flags = 0;
+}
 
 QString CSbieProcess::ImageTypeToStr(quint32 type)
 {
@@ -77,9 +91,19 @@ QString CSbieProcess::ImageTypeToStr(quint32 type)
 	}
 }
 
+
+QString	CSbieProcess::GetProcessName() const
+{
+	QString Name = CBoxedProcess::GetProcessName();
+	if (m_bIsWoW64)
+		Name += " *32";
+	return Name;
+}
+
 QString CSbieProcess::GetStatusStr() const
 {
 	QString Status;
+
 	if (m_uTerminated != 0)
 		Status = tr("Terminated");
 	//else if (m_bSuspended)
@@ -90,11 +114,13 @@ QString CSbieProcess::GetStatusStr() const
 			Status.prepend(tr("Forced "));
 	}
 
+	if (m_ProcessInfo.IsElevated)
+		Status += tr(" Elevated");
+	if (m_ProcessInfo.IsSystem)
+		Status += tr(" as System");
+
 	if(m_SessionId != theAPI->GetSessionID())
 		Status += tr(" in session %1").arg(m_SessionId);
-
-	if (m_bIsWoW64)
-		Status += " *32";
 
 	quint32 ImageType = GetImageType();
 	if (ImageType != -1) {
@@ -104,4 +130,30 @@ QString CSbieProcess::GetStatusStr() const
 	}
 
 	return Status;
+}
+
+SID SeLocalSystemSid = { SID_REVISION, 1, SECURITY_NT_AUTHORITY, { SECURITY_LOCAL_SYSTEM_RID } };
+
+void CSbieProcess::InitProcessInfoImpl(void* ProcessHandle)
+{
+	CBoxedProcess::InitProcessInfoImpl(ProcessHandle);
+
+	HANDLE TokenHandle = (HANDLE)m_pBox->Api()->QueryProcessInfo(m_ProcessId, 'ptok');
+	//if (NT_SUCCESS(NtOpenProcessToken(ProcessHandle, TOKEN_QUERY, &TokenHandle)))
+	if (TokenHandle != INVALID_HANDLE_VALUE)
+	{
+		ULONG returnLength;
+
+		TOKEN_ELEVATION_TYPE elevationType;
+		if (NT_SUCCESS(NtQueryInformationToken(TokenHandle, (TOKEN_INFORMATION_CLASS)TokenElevationType, &elevationType, sizeof(TOKEN_ELEVATION_TYPE), &returnLength))) {
+			m_ProcessInfo.IsElevated = elevationType == TokenElevationTypeFull;
+		}
+
+		BYTE tokenUserBuff[0x80] = { 0 };
+		if (NT_SUCCESS(NtQueryInformationToken(TokenHandle, TokenUser, tokenUserBuff, sizeof(tokenUserBuff), &returnLength))){
+			m_ProcessInfo.IsSystem = RtlEqualSid(((PTOKEN_USER)tokenUserBuff)->User.Sid, &SeLocalSystemSid);
+		}
+
+		CloseHandle(TokenHandle);
+	}
 }

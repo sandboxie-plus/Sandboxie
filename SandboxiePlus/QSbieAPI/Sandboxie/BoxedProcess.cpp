@@ -224,6 +224,14 @@ bool CBoxedProcess::InitProcessInfo()
 	if (ProcessHandle == INVALID_HANDLE_VALUE)
 		return false;
 
+	InitProcessInfoImpl(ProcessHandle);
+
+	NtClose(ProcessHandle);
+	return true;
+}
+
+void CBoxedProcess::InitProcessInfoImpl(void* ProcessHandle)
+{
 	PROCESS_BASIC_INFORMATION BasicInformation;
 	NTSTATUS status = NtQueryInformationProcess(ProcessHandle, ProcessBasicInformation, &BasicInformation, sizeof(PROCESS_BASIC_INFORMATION), NULL);
 	if (NT_SUCCESS(status)) {
@@ -259,10 +267,6 @@ bool CBoxedProcess::InitProcessInfo()
 	{
 		m_CommandLine = CBoxedProcess__GetPebString(ProcessHandle, PhpoCommandLine);
 	}
-
-	NtClose(ProcessHandle);
-
-	return true;
 }
 
 bool CBoxedProcess::InitProcessInfoEx()

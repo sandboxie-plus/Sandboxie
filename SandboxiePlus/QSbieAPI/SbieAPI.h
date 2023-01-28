@@ -135,6 +135,8 @@ public:
 	virtual void			ClearTrace() { m_TraceList.clear(); QMutexLocker Lock(&m_TraceMutex); m_TraceCache.clear(); }
 
 	// Other
+	virtual quint64			QueryProcessInfo(quint32 ProcessId, quint32 InfoClass = 0);
+
 	virtual QString			GetSbieMsgStr(quint32 code, quint32 Lang = 1033);
 
 	virtual SB_STATUS		RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
@@ -201,8 +203,6 @@ protected:
 	virtual bool			GetQueue();
 	virtual bool			GetLog();
 	virtual bool			GetMonitor();
-
-	virtual quint32			QueryProcessInfo(quint32 ProcessId, quint32 InfoClass = 0);
 
 	virtual SB_STATUS		TerminateAll(const QString& BoxName);
 	virtual SB_STATUS		Terminate(quint32 ProcessId);

@@ -56,6 +56,8 @@ public:
 protected:
 	friend class CSbieAPI;
 
+	virtual void			InitProcessInfoImpl(void* ProcessHandle);
+
 	quint32			m_ProcessId;
 	QString			m_BoxName;
 	quint32			m_ParendPID;

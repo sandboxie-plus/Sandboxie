@@ -408,7 +408,7 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 
         } else if (args->info_type.val == 'ptok') { // primary token
 
-			if(is_caller_sandboxed || !Session_CheckAdminAccess(TRUE))
+			if(is_caller_sandboxed)
 				status = STATUS_ACCESS_DENIED;
 			else
 			{
@@ -418,9 +418,12 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 					ObReferenceObject(PrimaryTokenObject);
 
                     //ACCESS_MASK access = (PsGetCurrentProcessId() != Api_ServiceProcessId) ? TOKEN_ALL_ACCESS : (TOKEN_QUERY | TOKEN_DUPLICATE);
+                    ACCESS_MASK access = TOKEN_QUERY | TOKEN_QUERY_SOURCE;
+                    if (Session_CheckAdminAccess(TRUE))
+                        access |= TOKEN_DUPLICATE;
 
 					HANDLE MyTokenHandle;
-					status = ObOpenObjectByPointer(PrimaryTokenObject, 0, NULL, TOKEN_QUERY | TOKEN_DUPLICATE, *SeTokenObjectType, UserMode, &MyTokenHandle);
+					status = ObOpenObjectByPointer(PrimaryTokenObject, 0, NULL, access, *SeTokenObjectType, UserMode, &MyTokenHandle);
 
 					ObDereferenceObject(PrimaryTokenObject);
 
@@ -432,7 +435,7 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 
 		} else if (args->info_type.val == 'itok' || args->info_type.val == 'ttok') { // impersonation token / test thread token
 
-			if(is_caller_sandboxed || (args->info_type.val == 'itok' && !Session_CheckAdminAccess(TRUE)))
+			if(is_caller_sandboxed)
 				status = STATUS_ACCESS_DENIED;
             else if(!proc->threads_lock)
                 status = STATUS_NOT_FOUND;
@@ -463,8 +466,12 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 
                         if (ImpersonationTokenObject)
                         {
+                            ACCESS_MASK access = TOKEN_QUERY | TOKEN_QUERY_SOURCE;
+                            if (Session_CheckAdminAccess(TRUE))
+                                access |= TOKEN_DUPLICATE;
+
                             HANDLE MyTokenHandle;
-                            status = ObOpenObjectByPointer(ImpersonationTokenObject, 0, NULL, TOKEN_QUERY | TOKEN_DUPLICATE, *SeTokenObjectType, UserMode, &MyTokenHandle);
+                            status = ObOpenObjectByPointer(ImpersonationTokenObject, 0, NULL, access, *SeTokenObjectType, UserMode, &MyTokenHandle);
 
                             ObDereferenceObject(ImpersonationTokenObject);
 

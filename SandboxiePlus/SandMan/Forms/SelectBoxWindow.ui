@@ -94,7 +94,7 @@
      <item row="3" column="0">
       <widget class="QRadioButton" name="radBoxedNew">
        <property name="text">
-        <string>Run in a new Sandboxed</string>
+        <string>Run in a new Sandbox</string>
        </property>
        <property name="checked">
         <bool>false</bool>

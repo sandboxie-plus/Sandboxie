@@ -49,11 +49,11 @@ void CFileView::SaveState()
 
 void CFileView::SetBox(const CSandBoxPtr& pBox)
 {
-    if (!m_pBox.isNull()) disconnect(m_pBox.data(), SIGNAL(AboutToBeCleaned()), this, SLOT(OnAboutToBeCleaned()));
+    if (!m_pBox.isNull()) disconnect(m_pBox.data(), SIGNAL(AboutToBeModified()), this, SLOT(OnAboutToBeModified()));
 
 	m_pBox = pBox;
 
-    if (!m_pBox.isNull()) connect(m_pBox.data(), SIGNAL(AboutToBeCleaned()), this, SLOT(OnAboutToBeCleaned()));
+    if (!m_pBox.isNull()) connect(m_pBox.data(), SIGNAL(AboutToBeModified()), this, SLOT(OnAboutToBeModified()));
 
     QString Root;
     if (!pBox.isNull() && !pBox->IsEmpty())
@@ -87,7 +87,7 @@ void CFileView::SetBox(const CSandBoxPtr& pBox)
     }
 }
 
-void CFileView::OnAboutToBeCleaned()
+void CFileView::OnAboutToBeModified()
 {
     if (sender() == m_pBox.data())
         SetBox(CSandBoxPtr());

@@ -10,6 +10,7 @@
 #include "../QSbieAPI/SbieUtils.h"
 #include "../MiscHelpers/Archive/Archive.h"
 #include <QtConcurrent>
+#include "Helpers/WinHelper.h"
 
 CSbiePlusAPI::CSbiePlusAPI(QObject* parent) : CSbieAPI(parent)
 {
@@ -380,64 +381,6 @@ void CSandBoxPlus::UpdateDetails()
 	m_BoxColor = QColor("#" + BorderCfg[0].mid(5, 2) + BorderCfg[0].mid(3, 2) + BorderCfg[0].mid(1, 2)).rgb();
 }
 
-QVariantMap ResolveShortcut(const QString& LinkPath)
-{
-	QVariantMap Link;
-
-    HRESULT hRes = E_FAIL;
-    IShellLink* psl = NULL;
-
-    // buffer that receives the null-terminated string
-    // for the drive and path
-    TCHAR szPath[MAX_PATH];
-    // structure that receives the information about the shortcut
-    WIN32_FIND_DATA wfd;
-
-    // Get a pointer to the IShellLink interface
-    hRes = CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER, IID_IShellLink, (void**)&psl);
-
-    if (SUCCEEDED(hRes))
-    {
-        // Get a pointer to the IPersistFile interface
-        IPersistFile*  ppf     = NULL;
-        psl->QueryInterface(IID_IPersistFile, (void **) &ppf);
-
-        // Open the shortcut file and initialize it from its contents
-        hRes = ppf->Load(LinkPath.toStdWString().c_str(), STGM_READ);
-        if (SUCCEEDED(hRes))
-        {
-            hRes = psl->Resolve(NULL, SLR_NO_UI | SLR_NOSEARCH | SLR_NOUPDATE);
-            if (SUCCEEDED(hRes))
-            {
-                // Get the path to the shortcut target
-                hRes = psl->GetPath(szPath, MAX_PATH, &wfd, SLGP_RAWPATH);
-                if (FAILED(hRes))
-                    return Link;
-
-				Link["Path"] = QString::fromWCharArray(szPath);
-
-				int IconIndex;
-                hRes = psl->GetIconLocation(szPath, MAX_PATH, &IconIndex);
-                if (FAILED(hRes))
-                    return Link;
-
-				Link["IconPath"] = QString::fromWCharArray(szPath);
-				Link["IconIndex"] = IconIndex;
-
-                // Get the description of the target
-                hRes = psl->GetDescription(szPath, MAX_PATH);
-                if (FAILED(hRes))
-                    return Link;
-
-                Link["Info"] = QString::fromWCharArray(szPath);
-
-            }
-        }
-    }
-
-    return Link;
-}
-
 bool CSandBoxPlus::IsBoxexPath(const QString& Path)
 {
 	return Path.left(m_FilePath.length()).compare(m_FilePath, Qt::CaseInsensitive) == 0;
@@ -445,7 +388,7 @@ bool CSandBoxPlus::IsBoxexPath(const QString& Path)
 
 void CSandBoxPlus::ScanStartMenu()
 {
-	bool bAdded = false;
+	bool bChanged = false;
 	auto OldStartMenu = ListToSet(m_StartMenu.keys());
 
 	QStringList SnapshotList;
@@ -474,7 +417,7 @@ void CSandBoxPlus::ScanStartMenu()
 				QString Path = (i >= 2 ? "" : "Desktop/") + File;
 
 				if (!OldStartMenu.remove(Path))
-					bAdded = true;
+					bChanged = true;
 
 				StrPair PathName = Split2(Path, "/", true);
 				StrPair NameExt = Split2(PathName.second, ".", true);
@@ -489,6 +432,8 @@ void CSandBoxPlus::ScanStartMenu()
 				SLink* pLink = &m_StartMenu[Path];
 				pLink->Folder = PathName.first;
 				pLink->Name = NameExt.first;
+				if(!pLink->Target.isEmpty() && pLink->Target != Link["Path"].toString())
+					bChanged = true;
 				pLink->Target = Link["Path"].toString();
 				pLink->Icon = Link["IconPath"].toString();
 				pLink->IconIndex = Link["IconIndex"].toInt();
@@ -504,7 +449,7 @@ void CSandBoxPlus::ScanStartMenu()
 	foreach(const QString &Path, OldStartMenu)
 		m_StartMenu.remove(Path);
 	
-	if (bAdded || !OldStartMenu.isEmpty())
+	if (bChanged || !OldStartMenu.isEmpty())
 		emit StartMenuChanged();
 }
 
@@ -573,26 +518,32 @@ void CSandBoxPlus::CloseBox()
 		ScanStartMenu();
 }
 
-SB_PROGRESS CSandBoxPlus::CleanBox()
+void CSandBoxPlus::ConnectEndSlot(const SB_PROGRESS& Status)
 {
-	((CSbiePlusAPI*)theAPI)->m_BoxMonitor->RemoveBox(this);
-	
-	emit AboutToBeCleaned();
-
-	SB_PROGRESS Status = CSandBox::CleanBox();
-
-	return Status;
+	CSbieProgressPtr pProgress = Status.GetValue();
+	if (!pProgress.isNull())
+		connect(pProgress.data(), SIGNAL(Finished()), this, SLOT(EndModifyingBox()));
+	else
+		EndModifyingBox();
 }
 
-SB_PROGRESS CSandBoxPlus::SelectSnapshot(const QString& ID)
+void CSandBoxPlus::BeginModifyingBox()
 {
+	//
+	// before altering the box structure or deleting it
+	// we need to ensure that sandman will not hold any open handles on the files/folders inside
+	//
+
 	((CSbiePlusAPI*)theAPI)->m_BoxMonitor->RemoveBox(this);
+	
+	emit AboutToBeModified();
+}
 
-	emit AboutToBeCleaned();
-
-	SB_PROGRESS Status = CSandBox::SelectSnapshot(ID);
-
-	return Status;
+void CSandBoxPlus::EndModifyingBox()
+{
+	UpdateSize();
+	if (theConf->GetBool("Options/ScanStartMenu", true))
+		ScanStartMenu();
 }
 
 bool CSandBoxPlus::CheckUnsecureConfig() const

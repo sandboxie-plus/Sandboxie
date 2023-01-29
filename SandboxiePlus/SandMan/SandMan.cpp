@@ -34,6 +34,7 @@
 #include <QVariantAnimation>
 #include <QSessionManager>
 #include "Helpers/FullScreen.h"
+#include "Helpers/WinHelper.h"
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -1560,7 +1561,7 @@ void CSandMan::OnBoxAdded(const CSandBoxPtr& pBox)
 	connect(pBox.data(), SIGNAL(StartMenuChanged()), this, SLOT(OnStartMenuChanged()));
 }
 
-void CSandMan::EnumBoxLinks(QMap<QString, QMap<QString,QString> > &BoxLinks, const QString& Prefix, const QString& Folder, bool bWithSubDirs)
+void CSandMan::EnumBoxLinks(QMap<QString, QMap<QString,SBoxLink> > &BoxLinks, const QString& Prefix, const QString& Folder, bool bWithSubDirs)
 {
 	QRegularExpression exp("/\\[[0-9Sa-zA-Z_]+\\] ");
 
@@ -1573,8 +1574,20 @@ void CSandMan::EnumBoxLinks(QMap<QString, QMap<QString,QString> > &BoxLinks, con
 
 		int pos = result.capturedStart() + 1;
 		int len = result.capturedLength() - 1;
-		QString BoxName = File.mid(pos + 1, len - 3).toLower();
-		BoxLinks[BoxName].insert((Prefix + "/" + QString(File).remove(pos, len)).toLower(), Folder + "/" + File);
+		QString BoxName = File.mid(pos + 1, len - 3);
+
+		SBoxLink BoxLink;
+		BoxLink.RelPath = (Prefix + "/" + QString(File).remove(pos, len));
+		BoxLink.FullPath = Folder + "/" + File;
+
+		QVariantMap Link = ResolveShortcut(BoxLink.FullPath);
+		BoxLink.Target = Link["Arguments"].toString().trimmed();
+		if (BoxLink.Target.left(4) == "/box") {
+			if(int pos = BoxLink.Target.indexOf(" ") + 1)
+				BoxLink.Target = BoxLink.Target.mid(pos).trimmed();
+		}
+
+		BoxLinks[BoxName.toLower()].insert(BoxLink.RelPath.toLower(), BoxLink);
 	}
 }
 
@@ -1600,24 +1613,33 @@ void CSandMan::DeleteShortcut(const QString& Path)
 	CleanupShortcutPath(Path);
 }
 
-void CSandMan::CleanUpStartMenu(QMap<QString, QMap<QString, QString> >& BoxLinks)
+void CSandMan::CleanUpStartMenu(QMap<QString, QMap<QString, SBoxLink> >& BoxLinks)
 {
 	for (auto I = BoxLinks.begin(); I != BoxLinks.end(); ++I) {
 		for (auto J = I->begin(); J != I->end(); ++J) {
 			//qDebug() << "Delete Shortcut" << J.value();
 			OnLogMessage(tr("Removed Shortcut: %1").arg(J.key()));
-			DeleteShortcut(J.value());
+			DeleteShortcut(J->FullPath);
 		}
 	}
 }
 
 void CSandMan::ClearStartMenu()
 {
-	QMap<QString, QMap<QString, QString> > BoxLinks;
+	QMap<QString, QMap<QString, SBoxLink> > BoxLinks;
 	EnumBoxLinks(BoxLinks, "Programs", QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation));
 	EnumBoxLinks(BoxLinks, "Desktop", QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), false);
 
 	CleanUpStartMenu(BoxLinks);
+}
+
+bool CSandMan__MatchLinkTarget(QString L, QString R)
+{
+	if (L == R)
+		return true;
+	if (L.left(1) == "\"" &&  L == "\"" + R + "\"")
+		return true;
+	return false;
 }
 
 void CSandMan::SyncStartMenu()
@@ -1628,7 +1650,7 @@ void CSandMan::SyncStartMenu()
 	if (Mode == 0)
 		return;
 
-	QMap<QString, QMap<QString, QString> > BoxLinks;
+	QMap<QString, QMap<QString, SBoxLink> > BoxLinks;
 	EnumBoxLinks(BoxLinks, "Programs", QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation));
 	EnumBoxLinks(BoxLinks, "Desktop", QStandardPaths::writableLocation(QStandardPaths::DesktopLocation), false);
 
@@ -1637,7 +1659,7 @@ void CSandMan::SyncStartMenu()
 	{
 		CSandBoxPlus* pBoxEx = (CSandBoxPlus*)pBox.data();
 
-		QMap<QString, QString>& CurLinks = BoxLinks[pBoxEx->GetName().toLower()];
+		QMap<QString, SBoxLink>& CurLinks = BoxLinks[pBoxEx->GetName().toLower()];
 
 		foreach(const CSandBoxPlus::SLink & Link, pBoxEx->GetStartMenu())
 		{
@@ -1670,10 +1692,14 @@ void CSandMan::SyncStartMenu()
 			}
 
 			QString Key = QString(Prefix + Link.Folder + "\\" + Link.Name + ".lnk").replace("\\", "/").toLower();
-			QString Path = CurLinks.take(Key);
-			if (Path.isEmpty()) {
+			SBoxLink BoxLink = CurLinks.take(Key);
+			if (BoxLink.FullPath.isEmpty() || !CSandMan__MatchLinkTarget(BoxLink.Target, Link.Target)) {
 				//qDebug() << "CreateShortcut" << Location + Link.Name;
-				OnLogMessage(tr("Added Shortcut to: %1").arg(Key));
+				if (!BoxLink.FullPath.isEmpty()) {
+					QFile::remove(BoxLink.FullPath);
+					OnLogMessage(tr("Updated Shortcut to: %1").arg(Key));
+				} else
+					OnLogMessage(tr("Added Shortcut to: %1").arg(Key));
 				QDir().mkpath(Folder);
 				CSbieUtils::CreateShortcut(theAPI, Location + Link.Name,
 						Link.Name, pBoxEx->GetName(), Link.Target, Link.Icon.isEmpty() ? Link.Target : Link.Icon, Link.IconIndex);
@@ -1729,7 +1755,6 @@ void CSandMan::OnBoxCleaned(CSandBoxPlus* pBoxEx)
 		pBoxEx->RemoveBox();
 		return;
 	}
-	pBoxEx->UpdateSize();
 }
 
 void CSandMan::OnStatusChanged()

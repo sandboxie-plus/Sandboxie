@@ -19,9 +19,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added Ctrl+F search filter to the box picker dialog, this allows quickly to find a particular box
 - added menu options to edit the templates.ini and the sansboxie-plus.ini
 
-
 ### Changed
 - refactored network blocking code in driver
+- box options now show the expanded paths where apropriate
 
 ### Fixed
 - fixed BlockNetworkFiles=y not working together with RestrictDevices=y [#2629](https://github.com/sandboxie-plus/Sandboxie/issues/2629)
@@ -32,6 +32,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with Microsoft Edge 111 dev build [#2631](https://github.com/sandboxie-plus/Sandboxie/issues/2631)
 - fixed issue with mio sockets [#2617](https://github.com/sandboxie-plus/Sandboxie/issues/2617)
 - fixed issue with run menu entries created from the options/settings window [#2610](https://github.com/sandboxie-plus/Sandboxie/issues/2610)
+- fixed issues with start menu when using snapshots [#2589](https://github.com/sandboxie-plus/Sandboxie/issues/2589)
 
 
 

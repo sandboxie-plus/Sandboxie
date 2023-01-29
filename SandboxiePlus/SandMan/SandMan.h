@@ -258,10 +258,16 @@ private:
 
 	void				UpdateState();
 
-	void				EnumBoxLinks(QMap<QString, QMap<QString, QString> >& BoxLinks, const QString& Prefix, const QString& Folder, bool bWithSubDirs = true);
+	struct SBoxLink {
+		QString RelPath; // key
+		QString FullPath;
+		QString Target;
+	};
+
+	void				EnumBoxLinks(QMap<QString, QMap<QString, SBoxLink> >& BoxLinks, const QString& Prefix, const QString& Folder, bool bWithSubDirs = true);
 	void				CleanupShortcutPath(const QString& Path);
 	void				DeleteShortcut(const QString& Path);
-	void				CleanUpStartMenu(QMap<QString, QMap<QString, QString> >& BoxLinks);
+	void				CleanUpStartMenu(QMap<QString, QMap<QString, SBoxLink> >& BoxLinks);
 
 	QWidget*			m_pMainWidget;
 	QVBoxLayout*		m_pMainLayout;

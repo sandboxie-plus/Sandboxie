@@ -13,6 +13,7 @@
 #include "../Windows/NewBoxWindow.h"
 #include "../Views/FileView.h"
 #include "../Wizards/NewBoxWizard.h"
+#include "../Helpers/WinHelper.h"
 
 #include "qt_windows.h"
 #include "qwindowdefs_win.h"
@@ -1712,7 +1713,9 @@ void CSbieView::UpdateStartMenu(CSandBoxPlus* pBoxEx)
 		QMenu* pMenu = GetMenuFolder(Link.Folder, m_pMenuRunStart);
 
 		QAction* pAction = pMenu->addAction(Link.Name, this, SLOT(OnSandBoxAction()));
-		pAction->setIcon(m_IconProvider.icon(QFileInfo(Link.Target)));
+		QIcon Icon = LoadWindowsIcon(Link.Icon, Link.IconIndex);
+		if(Icon.isNull()) Icon = m_IconProvider.icon(QFileInfo(Link.Target));
+		pAction->setIcon(Icon);
 		pAction->setData(Link.Target);
 	}
 }

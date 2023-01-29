@@ -81,8 +81,10 @@ public:
 	virtual void			OpenBox();
 	virtual void			CloseBox();
 
-	virtual SB_PROGRESS		CleanBox();
-	virtual SB_PROGRESS		SelectSnapshot(const QString& ID);
+	virtual SB_PROGRESS		CleanBox()							{ BeginModifyingBox(); SB_PROGRESS Status = CSandBox::CleanBox(); ConnectEndSlot(Status); return Status; }
+	virtual SB_PROGRESS		TakeSnapshot(const QString& Name)	{ BeginModifyingBox(); SB_PROGRESS Status = CSandBox::TakeSnapshot(Name); ConnectEndSlot(Status); return Status; }
+	virtual SB_PROGRESS		RemoveSnapshot(const QString& ID)	{ BeginModifyingBox(); SB_PROGRESS Status = CSandBox::RemoveSnapshot(ID); ConnectEndSlot(Status); return Status; }
+	virtual SB_PROGRESS		SelectSnapshot(const QString& ID)	{ BeginModifyingBox(); SB_PROGRESS Status = CSandBox::SelectSnapshot(ID); ConnectEndSlot(Status); return Status; }
 
 	virtual QString			GetStatusStr() const;
 
@@ -162,7 +164,7 @@ public:
 	QList<SLink>			GetStartMenu() const { return m_StartMenu.values(); }
 
 signals:
-	void					AboutToBeCleaned();
+	void					AboutToBeModified();
 	void					StartMenuChanged();
 
 public slots:
@@ -171,8 +173,14 @@ public slots:
 	void					OnAsyncProgress(int Progress);
 	void					OnCancelAsync();
 
+protected slots:
+	virtual	void			BeginModifyingBox();
+	virtual	void			EndModifyingBox();
+
 protected:
 	friend class CSbiePlusAPI;
+
+	virtual void			ConnectEndSlot(const SB_PROGRESS& Status);
 
 	virtual bool			CheckUnsecureConfig() const;
 	EBoxTypes				GetTypeImpl() const;

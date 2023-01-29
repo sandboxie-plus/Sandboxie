@@ -798,7 +798,7 @@ _FX NTSTATUS File_OpenForMerge(
 
             if (File_Delete_v2) {
 
-                WCHAR* Relocation;
+                WCHAR* Relocation = NULL;
 			    ULONG Flags = File_GetPathFlags_internal(&Cur_Snapshot->PathRoot, TempPath, &Relocation, TRUE);
                 if (FILE_PATH_DELETED(Flags))
                     break;

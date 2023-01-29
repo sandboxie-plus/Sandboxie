@@ -180,6 +180,13 @@ protected slots:
 protected:
 	friend class CSbiePlusAPI;
 
+	struct SFoundLink {
+		QString Snapshot;
+		QString LinkPath;
+		QString RealPath;
+		QString SubPath;
+	};
+
 	virtual void			ConnectEndSlot(const SB_PROGRESS& Status);
 
 	virtual bool			CheckUnsecureConfig() const;
@@ -193,6 +200,8 @@ protected:
 
 	static void				ExportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ExportPath, const QString& RootPath, const QString& Section);
 	static void				ImportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ImportPath, const QString& RootPath, const QString& BoxName);
+
+	bool					IsFileDeleted(const QString& RealPath, const QString& Shapshot, const QStringList& SnapshotList, const QMap<QString, QSet<QString>>& DeletedFiles);
 
 	QList<QSharedPointer<CBoxJob>> m_JobQueue;
 

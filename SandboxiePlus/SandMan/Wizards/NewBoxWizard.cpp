@@ -8,6 +8,7 @@
 #include <QButtonGroup>
 #include "../QSbieAPI/SbieUtils.h"
 #include "../Views/SbieView.h"
+#include "../MiscHelpers/Common/CheckableMessageBox.h"
 
 
 CNewBoxWizard::CNewBoxWizard(bool bAlowTemp, QWidget *parent)
@@ -117,6 +118,20 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             pBox->SetBool("FakeAdminRights", true);
         if(field("msiServer").toBool())
             pBox->SetBool("MsiInstallerExemptions", true);
+
+        if (field("boxVersion").toInt() == 1) {
+            if (theConf->GetBool("Options/WarnDeleteV2", true)) {
+                bool State = false;
+                CCheckableMessageBox::question(this, "Sandboxie-Plus",
+                    tr("The new sandbox has been created using the new Virtualization Scheme (Version 2), if you expirience any unecpected issues with this box,"
+                        " please switch to the Virtualization Scheme to Version 1 and report the issue,"
+                        " the option to change this preset can be found in the Box Options in the Box Structure groupe.")
+                    , tr("Don't show this message again."), &State, QDialogButtonBox::Ok, QDialogButtonBox::Ok, QMessageBox::Information);
+
+                if (State)
+                    theConf->SetValue("Options/WarnDeleteV2", false);
+            }
+        }
 	}
 
     return Status;

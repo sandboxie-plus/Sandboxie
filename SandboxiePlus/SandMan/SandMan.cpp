@@ -2712,27 +2712,29 @@ void CSandMan::OnResetMsgs()
 
 	if (Ret == QMessageBox::Yes)
 	{
-		theConf->SetValue("Options/PortableStop", -1);
-		theConf->SetValue("Options/PortableStart", -1);
-		theConf->SetValue("Options/PortableRootDir", -1);
+		theConf->DelValue("Options/WarnDeleteV2");
 
-		theConf->SetValue("Options/CheckForUpdates", 2);
+		theConf->DelValue("Options/PortableStop");
+		theConf->DelValue("Options/PortableStart");
+		theConf->DelValue("Options/PortableRootDir");
 
-		theConf->SetValue("Options/NoEditInfo", true);
-		theConf->SetValue("Options/NoEditWarn", true);
+		theConf->DelValue("Options/CheckForUpdates");
 
-		theConf->SetValue("Options/BoxedExplorerInfo", true);
-		theConf->SetValue("Options/ExplorerInfo", true);
+		theConf->DelValue("Options/NoEditInfo");
+		theConf->DelValue("Options/NoEditWarn");
 
-		theConf->SetValue("Options/OpenUrlsSandboxed", 2);
+		theConf->DelValue("Options/BoxedExplorerInfo");
+		theConf->DelValue("Options/ExplorerInfo");
 
-		theConf->SetValue("Options/AutoCleanupTemplates", -1);
-		theConf->SetValue("Options/WarnTerminateAll", -1);
-		theConf->SetValue("Options/WarnTerminate", -1);
+		theConf->DelValue("Options/OpenUrlsSandboxed");
 
-		theConf->SetValue("Options/InfoMkLink", -1);
+		theConf->DelValue("Options/AutoCleanupTemplates");
+		theConf->DelValue("Options/WarnTerminateAll");
+		theConf->DelValue("Options/WarnTerminate");
 
-		theConf->SetValue("Options/WarnOpenCOM", -1);
+		theConf->DelValue("Options/InfoMkLink");
+
+		theConf->DelValue("Options/WarnOpenCOM");
 	}
 
 	theAPI->GetUserSettings()->UpdateTextList("SbieCtrl_HideMessage", QStringList(), true);

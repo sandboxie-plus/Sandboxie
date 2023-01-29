@@ -1,4 +1,4 @@
-Copyright 2020 - 2022 David Xanatos (xanasoft.com)
+Copyright 2020 - 2023 David Xanatos (xanasoft.com)
 
 Sandboxie-Plus can be used under the following restrictions and obligations:
 

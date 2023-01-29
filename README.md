@@ -51,6 +51,15 @@ A partial archive of the [old Sandboxie forum](https://sandboxie-website-archive
 | [Open-source code](https://github.com/sandboxie/sandboxie) |    Tom Brown     |
 | 2020 onwards        | David Xanatos ([Roadmap](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/))    |
 
+
+## 🚀 Useful tools for Sandboxie
+
+Sandboxie's functionality can be enhanced with specialized tools like the following:
+
+  * [LogApiDll](https://github.com/sandboxie-plus/LogApiDll) - this adds verbose trace output to Sandboxie's trace log, listing invocations of relevant Windows API functions.
+  * [SbieHide](https://github.com/VeroFess/SbieHide) - this hides the presence of SbieDll.dll from the application.
+		
+		
 ## 📌 Project support / sponsorship
 
 [<img align="left" height="64" width="64" src="./.github/images/binja-love.png">](https://binary.ninja/)
@@ -62,13 +71,6 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 <br>
 <br>
 <br>
-
-## 🚀 Useful tools for Sandboxie
-
-Sandboxie's functionality can be enhanced with specialized tools like the following:
-
-  * [LogApiDll](https://github.com/sandboxie-plus/LogApiDll) - this adds verbose trace output to Sandboxie's trace log, listing invocations of relevant Windows API functions.
-  * [SbieHide](https://github.com/VeroFess/SbieHide) - this hides the presence of SbieDll.dll from the application.
 
 ## 📑 Helpful Contributors
 

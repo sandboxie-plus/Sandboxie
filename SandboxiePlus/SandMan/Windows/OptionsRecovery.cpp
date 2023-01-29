@@ -78,8 +78,11 @@ void COptionsWindow::LoadRecIgnoreListTmpl(bool bUpdate)
 void COptionsWindow::AddRecoveryEntry(const QString& Name, const QString& Template)
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
-	pItem->setText(0, Name + (Template.isEmpty() ? "" : " (" + Template + ")"));
-	pItem->setData(0, Qt::UserRole, Template.isEmpty() ? 0 : -1);
+	QString sName = Name;
+	if (CSandBox* pBox = qobject_cast<CSandBox*>(m_pBox.data()))
+		sName = theAPI->Nt2DosPath(pBox->Expand(sName));
+	pItem->setText(0, sName + (Template.isEmpty() ? "" : " (" + Template + ")"));
+	pItem->setData(0, Qt::UserRole, Template.isEmpty() ? QVariant(Name) : QVariant(-1));
 	ui.treeRecovery->addTopLevelItem(pItem);
 }
 
@@ -87,7 +90,7 @@ void COptionsWindow::AddRecIgnoreEntry(const QString& Name, const QString& Templ
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
 	pItem->setText(0, Name + (Template.isEmpty() ? "" : " (" + Template + ")"));
-	pItem->setData(0, Qt::UserRole, Template.isEmpty() ? 0 : -1);
+	pItem->setData(0, Qt::UserRole, Template.isEmpty() ? QVariant(Name) : QVariant(-1));
 	ui.treeRecIgnore->addTopLevelItem(pItem);
 }
 
@@ -100,7 +103,7 @@ void COptionsWindow::SaveRecoveryList()
 		int Type = pItem->data(0, Qt::UserRole).toInt();
 		if (Type == -1)
 			continue; // entry from template
-		RecoverFolder.append(pItem->text(0)); 
+		RecoverFolder.append(pItem->data(0, Qt::UserRole).toString()); 
 	}
 	WriteTextList("RecoverFolder", RecoverFolder);
 
@@ -113,7 +116,7 @@ void COptionsWindow::SaveRecoveryList()
 		int Type = pItem->data(0, Qt::UserRole).toInt();
 		if (Type == -1)
 			continue; // entry from template
-		AutoRecoverIgnore.append(pItem->text(0)); 
+		AutoRecoverIgnore.append(pItem->data(0, Qt::UserRole).toString()); 
 	}
 	WriteTextList("AutoRecoverIgnore", AutoRecoverIgnore);
 

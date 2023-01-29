@@ -16,6 +16,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - the SandMan UI now indicates if a sandboxed process has a Elevated(Admin) or System token
 - DropAdminRights can now be configured per process [#2293](https://github.com/sandboxie-plus/Sandboxie/issues/2293)
 - added self removing boxes [#1936](https://github.com/sandboxie-plus/Sandboxie/issues/1936)
+- added Ctrl+F search filter to the box picker dialog, this allows quickly to find a particular box
+
 
 ### Changed
 - refactored network blocking code in driver

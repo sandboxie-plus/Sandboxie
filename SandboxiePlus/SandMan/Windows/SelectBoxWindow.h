@@ -13,12 +13,16 @@ public:
 	~CSelectBoxWindow();
 
 private slots:
+	void SetFilter(const QString& Exp, int iOptions, int Column);
+
 	void OnBoxDblClick(QTreeWidgetItem*);
 	void OnBoxType();
 	void OnRun();
 
 protected:
 	void closeEvent(QCloseEvent* e);
+
+	void LoadBoxed(const QString& Filter = QString(), const QString& SelectBox = QString());
 
 	QStringList		m_Commands;
 	QString			m_WrkDir;

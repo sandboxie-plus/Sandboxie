@@ -413,6 +413,7 @@ protected:
 	QString	GetAccessModeTip(EAccessMode Mode);
 	void ParseAndAddAccessEntry(EAccessEntry EntryType, const QString& Value, bool disabled = false, const QString& Template = QString());
 	void ParseAndAddAccessEntry(EAccessType Type, EAccessMode Mode, const QString& Value, bool disabled = false, const QString& Template = QString());
+	QString ExpandPath(EAccessType Type, const QString& Path);
 	void AddAccessEntry(EAccessType Type, EAccessMode Mode, QString Program, const QString& Path, bool disabled = false, const QString& Template = QString());
 	QString MakeAccessStr(EAccessType Type, EAccessMode Mode);
 	void SaveAccessList();

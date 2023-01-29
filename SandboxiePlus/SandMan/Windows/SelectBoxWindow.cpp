@@ -4,6 +4,7 @@
 #include "../MiscHelpers/Common/Settings.h"
 #include "../SbiePlusAPI.h"
 #include "../Views/SbieView.h"
+#include "../MiscHelpers/Common/Finder.h"
 
 #if defined(Q_OS_WIN)
 #include <wtypes.h>
@@ -98,6 +99,42 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 
 	connect(ui.treeBoxes, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnBoxDblClick(QTreeWidgetItem*)));
 
+	QWidget* pWidget = new QWidget();
+	QVBoxLayout* pLayout = new QVBoxLayout(pWidget);
+	pLayout->setContentsMargins(0, 0, 0, 0);
+	pLayout->addWidget(new CFinder(this, pWidget, 0));
+	ui.treeBoxes->parentWidget()->layout()->replaceWidget(ui.treeBoxes, pWidget);
+	pLayout->insertWidget(0, ui.treeBoxes);
+	
+	LoadBoxed("", BoxName);
+
+	ui.treeBoxes->setFocus();
+
+	//ui.treeBoxes->sortByColumn(0, Qt::AscendingOrder);
+
+	//restoreGeometry(theConf->GetBlob("SelectBoxWindow/Window_Geometry"));
+}
+
+CSelectBoxWindow::~CSelectBoxWindow()
+{
+	//theConf->SetBlob("SelectBoxWindow/Window_Geometry", saveGeometry());
+}
+
+void CSelectBoxWindow::closeEvent(QCloseEvent *e)
+{
+	//emit Closed();
+	this->deleteLater();
+}
+
+void CSelectBoxWindow::SetFilter(const QString& Exp, int iOptions, int Column)
+{
+	LoadBoxed(Exp);
+}
+
+void CSelectBoxWindow::LoadBoxed(const QString& Filter, const QString& SelectBox)
+{
+	ui.treeBoxes->clear();
+
 	QList<CSandBoxPtr> Boxes = theAPI->GetAllBoxes().values(); // map is sorted by key (box name)
 	QMap<QString, QStringList> Groups = theGUI->GetBoxView()->GetGroups();
 
@@ -116,6 +153,9 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 	foreach(const CSandBoxPtr &pBox, Boxes) 
 	{
 		if (!pBox->IsEnabled() || !pBox->GetBool("ShowForRunIn", true))
+			continue;
+
+		if (!Filter.isEmpty() && !pBox->GetName().contains(Filter, Qt::CaseInsensitive))
 			continue;
 
 		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(pBox.data());
@@ -139,26 +179,11 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 		else
 			ui.treeBoxes->addTopLevelItem(pItem);
 
-		if (pBox->GetName().compare(BoxName, Qt::CaseInsensitive) == 0)
+		if (pBox->GetName().compare(SelectBox, Qt::CaseInsensitive) == 0)
 			ui.treeBoxes->setCurrentItem(pItem);
 	}
 
 	ui.treeBoxes->expandAll();
-
-	//ui.treeBoxes->sortByColumn(0, Qt::AscendingOrder);
-
-	//restoreGeometry(theConf->GetBlob("SelectBoxWindow/Window_Geometry"));
-}
-
-CSelectBoxWindow::~CSelectBoxWindow()
-{
-	//theConf->SetBlob("SelectBoxWindow/Window_Geometry", saveGeometry());
-}
-
-void CSelectBoxWindow::closeEvent(QCloseEvent *e)
-{
-	//emit Closed();
-	this->deleteLater();
 }
 
 void CSelectBoxWindow::OnBoxType()

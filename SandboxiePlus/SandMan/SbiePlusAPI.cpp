@@ -957,11 +957,11 @@ void CSandBoxPlus::OnAsyncFinished()
 		theGUI->CheckResults(QList<SB_STATUS>() << Status);
 		return;
 	}
+	else
+		pJob->Finished();
 
 	if (!m_JobQueue.isEmpty())
 		StartNextJob();
-	else
-		UpdateSize();
 }
 
 void CSandBoxPlus::OnAsyncMessage(const QString& Text)

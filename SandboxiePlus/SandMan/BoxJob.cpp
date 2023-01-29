@@ -30,6 +30,13 @@ SB_PROGRESS CCleanUpJob::Start()
 	return Status;
 }
 
+void CCleanUpJob::Finished()
+{
+	CSandBoxPlus* pBox = GetBox();
+
+	emit theAPI->BoxCleaned(pBox);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // COnDeleteJob
 //

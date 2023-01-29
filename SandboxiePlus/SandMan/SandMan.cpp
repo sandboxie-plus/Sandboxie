@@ -170,6 +170,7 @@ CSandMan::CSandMan(QWidget *parent)
 
 	connect(theAPI, SIGNAL(BoxAdded(const CSandBoxPtr&)), this, SLOT(OnBoxAdded(const CSandBoxPtr&)));
 	connect(theAPI, SIGNAL(BoxClosed(const CSandBoxPtr&)), this, SLOT(OnBoxClosed(const CSandBoxPtr&)));
+	connect(theAPI, SIGNAL(BoxCleaned(CSandBoxPlus*)), this, SLOT(OnBoxCleaned(CSandBoxPlus*)));
 
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
 
@@ -1522,7 +1523,7 @@ SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, boo
 		Ret = Status;
 		if (Status.GetStatus() == OP_ASYNC) {
 			Ret = AddAsyncOp(Status.GetValue(), true, tr("Auto Deleting %1 Content").arg(pBox->GetName()));
-			pBox.objectCast<CSandBoxPlus>()->UpdateSize();
+			OnBoxCleaned(qobject_cast<CSandBoxPlus*>(pBox.data()));
 		}
 	}
 
@@ -1671,25 +1672,41 @@ void CSandMan::OnStartMenuChanged()
 
 void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 {
-	if (!pBox->GetBool("NeverDelete", false) && pBox->GetBool("AutoDelete", false) && !pBox->IsEmpty())
+	if (!pBox->GetBool("NeverDelete", false))
 	{
-		bool DeleteShapshots = false;
-		// if this box auto deletes first show the recovry dialog with the option to abort deletion
-		if(!theGUI->OpenRecovery(pBox, DeleteShapshots, true)) // unless no files are found than continue silently
-			return;
-
-		if(theConf->GetBool("Options/AutoBoxOpsNotify", false))
-			OnLogMessage(tr("Auto deleting content of %1").arg(pBox->GetName()), true);
-
-		if (theConf->GetBool("Options/UseAsyncBoxOps", false) || IsSilentMode())
+		if (pBox->GetBool("AutoDelete", false))
 		{
-			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
-			SB_STATUS Status = pBoxEx->DeleteContentAsync(DeleteShapshots);
-			CheckResults(QList<SB_STATUS>() << Status);
+			bool DeleteShapshots = false;
+			// if this box auto deletes first show the recovry dialog with the option to abort deletion
+			if (!theGUI->OpenRecovery(pBox, DeleteShapshots, true)) // unless no files are found than continue silently
+				return;
+
+			if (theConf->GetBool("Options/AutoBoxOpsNotify", false))
+				OnLogMessage(tr("Auto deleting content of %1").arg(pBox->GetName()), true);
+
+			if (theConf->GetBool("Options/UseAsyncBoxOps", false) || IsSilentMode())
+			{
+				auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+				SB_STATUS Status = pBoxEx->DeleteContentAsync(DeleteShapshots);
+				CheckResults(QList<SB_STATUS>() << Status);
+			}
+			else
+				DeleteBoxContent(pBox, eAuto, DeleteShapshots);
 		}
-		else
-			DeleteBoxContent(pBox, eAuto, DeleteShapshots);
 	}
+}
+
+void CSandMan::OnBoxCleaned(CSandBoxPlus* pBoxEx)
+{
+	if (pBoxEx->GetBool("AutoRemove", false)) 
+	{
+		if (theConf->GetBool("Options/AutoBoxOpsNotify", false))
+			OnLogMessage(tr("Auto removing sandbox %1").arg(pBoxEx->GetName()), true);
+
+		pBoxEx->RemoveBox();
+		return;
+	}
+	pBoxEx->UpdateSize();
 }
 
 void CSandMan::OnStatusChanged()

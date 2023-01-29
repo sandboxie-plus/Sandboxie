@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- use OpenClsid={00000000-0000-0000-0000-000000000000} to open all
 - the SandMan UI now indicates if a sandboxed process has a Elevated(Admin) or System token
 - DropAdminRights can now be configured per process [#2293](https://github.com/sandboxie-plus/Sandboxie/issues/2293)
+- added self removing boxes [#1936](https://github.com/sandboxie-plus/Sandboxie/issues/1936)
 
 ### Changed
 - refactored network blocking code in driver

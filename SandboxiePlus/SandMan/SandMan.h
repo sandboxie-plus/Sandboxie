@@ -170,6 +170,7 @@ public slots:
 
 	void				OnBoxAdded(const CSandBoxPtr& pBox);
 	void				OnBoxClosed(const CSandBoxPtr& pBox);
+	void				OnBoxCleaned(CSandBoxPlus* pBoxEx);
 
 	void				OnStartMenuChanged();
 

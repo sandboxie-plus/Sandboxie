@@ -100,6 +100,7 @@ void CFileView::OnAboutToBeCleaned()
 #define MENU_RECOVER            1
 #define MENU_RECOVER_TO_ANY     2
 #define MENU_CREATE_SHORTCUT    3
+#define MENU_CHECK_FILE         4
 
 void addSeparatorToShellContextMenu(HMENU hMenu)
 {
@@ -166,6 +167,11 @@ int openShellContextMenu(const QStringList& Files, void * parentWindow, const CS
         std::wstring Str3 = CFileView::tr("Recover to Same Folder").toStdWString();
         addItemToShellContextMenu(hMenu, Str3.c_str(), MENU_RECOVER);
         
+        if (!pBox->GetTextList("OnFileRecovery", true, false, true).isEmpty()) {
+            std::wstring Str4 = CFileView::tr("Run Recovery Checks").toStdWString();
+            addItemToShellContextMenu(hMenu, Str4.c_str(), MENU_CHECK_FILE);
+        }
+
         POINT point;
         GetCursorPos(&point);
         int iCmd = TrackPopupMenuEx(hMenu, TPM_RETURNCMD, point.x, point.y, (HWND)parentWindow, NULL);
@@ -258,6 +264,13 @@ void CFileView::OnFileMenu(const QPoint&)
             if (Status.GetStatus() == OP_ASYNC)
                 theGUI->AddAsyncOp(Status.GetValue());
 
+            break;
+        }
+        case MENU_CHECK_FILE:
+        {
+            SB_PROGRESS Status = theGUI->CheckFiles(m_pBox->GetName(), Files);
+            if (Status.GetStatus() == OP_ASYNC)
+                theGUI->AddAsyncOp(Status.GetValue());
             break;
         }
         case MENU_CREATE_SHORTCUT:

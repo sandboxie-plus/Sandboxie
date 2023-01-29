@@ -38,6 +38,9 @@ private slots:
 	virtual void			OnStartFinished();
 	virtual void			SbieIniSetSection(const QString& Section, const QString& Value) { SbieIniSet(Section, "", Value); }
 
+signals:
+	void					BoxCleaned(CSandBoxPlus* pBoxEx);
+
 protected:
 	friend class CSandBoxPlus;
 

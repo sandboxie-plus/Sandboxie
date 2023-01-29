@@ -12,6 +12,7 @@ public:
 	CBoxJob(QObject* parent = NULL) : QObject(parent) { }
 
 	virtual SB_PROGRESS	Start() = 0;
+	virtual void		Finished() = 0;
 
 	CSbieProgressPtr	GetProgress()	{ return m_pProgress; }
 	QString				GetDescription(){ return m_Description; }
@@ -38,6 +39,7 @@ protected:
 	}
 
 	virtual SB_PROGRESS	Start();
+	virtual void		Finished();
 
 protected:
 	bool m_DeleteShapshots;
@@ -58,6 +60,7 @@ protected:
 	}
 
 	virtual SB_PROGRESS	Start();
+	virtual void		Finished() {}
 
 protected:
 	QString m_Command;

@@ -140,7 +140,7 @@ public:
 
 	const bool			IsWritable()												{QMutexLocker Locker(&m_Mutex); return m_pConf->isWritable();}
 
-	const void			Sync()														{QMutexLocker Locker(&m_Mutex); m_pConf->sync();}
+	const void			Sync()														{QMutexLocker Locker(&m_Mutex); m_ValueCache.clear(); m_pConf->sync();}
 
 protected:
 	QMutex				m_Mutex;

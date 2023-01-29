@@ -326,6 +326,7 @@ private:
 	QAction*			m_pCleanUpTrace;
 	QAction*			m_pCleanUpRecovery;
 	QToolButton*		m_pCleanUpButton;
+	//QToolButton*		m_pEditButton;
 	QAction*			m_pKeepTerminated;
 	QAction*			m_pShowAllSessions;
 	QAction*			m_pArrangeGroups;
@@ -335,6 +336,8 @@ private:
 	QAction*			m_pMenuResetMsgs;
 	QAction*			m_pMenuResetGUI;
 	QAction*			m_pEditIni;
+	QAction*			m_pEditIni2;
+	QAction*			m_pEditIni3;
 	QAction*			m_pReloadIni;
 	QAction*			m_pEnableMonitoring;
 
@@ -342,7 +345,7 @@ private:
 	QLabel*				m_pLabel;
 
 	QMenu*				m_pMenuHelp;
-	QAction*			m_pSupport;
+	//QAction*			m_pSupport;
 	QAction*			m_pContribution;
 	QAction*			m_pForum;
 	QAction*			m_pManual;

@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - DropAdminRights can now be configured per process [#2293](https://github.com/sandboxie-plus/Sandboxie/issues/2293)
 - added self removing boxes [#1936](https://github.com/sandboxie-plus/Sandboxie/issues/1936)
 - added Ctrl+F search filter to the box picker dialog, this allows quickly to find a particular box
+- added menu options to edit the templates.ini and the sansboxie-plus.ini
 
 
 ### Changed

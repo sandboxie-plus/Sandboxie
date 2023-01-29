@@ -439,16 +439,16 @@ void CSandMan::CreateHelpMenu(bool bAdvanced)
 {
 	m_pMenuHelp = m_pMenuBar->addMenu(tr("&Help"));
 		//m_pMenuHelp->addAction(tr("Support Sandboxie-Plus on Patreon"), this, SLOT(OnHelp()));
-		m_pSupport = m_pMenuHelp->addAction(tr("Support Sandboxie-Plus with Donations"), this, SLOT(OnHelp()));
+		//m_pSupport = m_pMenuHelp->addAction(tr("Support Sandboxie-Plus with Donations"), this, SLOT(OnHelp()));
 		//if (!bAdvanced) {
 		//	m_pMenuHelp->removeAction(m_pSupport);
 		//	m_pMenuBar->addAction(m_pSupport);
 		//}
-		m_pContribution = m_pMenuHelp->addAction(tr("Contribute to Sandboxie-Plus"), this, SLOT(OnHelp()));
+		m_pContribution = m_pMenuHelp->addAction(CSandMan::GetIcon("Support"), tr("Contribute to Sandboxie-Plus"), this, SLOT(OnHelp()));
 		m_pManual = m_pMenuHelp->addAction(tr("Online Documentation"), this, SLOT(OnHelp()));
 		m_pForum = m_pMenuHelp->addAction(tr("Visit Support Forum"), this, SLOT(OnHelp()));
 		m_pMenuHelp->addSeparator();
-		m_pUpdate = m_pMenuHelp->addAction(tr("Check for Updates"), this, SLOT(CheckForUpdates()));
+		m_pUpdate = m_pMenuHelp->addAction(CSandMan::GetIcon("Update"), tr("Check for Updates"), this, SLOT(CheckForUpdates()));
 		m_pMenuHelp->addSeparator();
 		m_pAboutQt = m_pMenuHelp->addAction(tr("About the Qt Framework"), this, SLOT(OnAbout()));
 		m_pAbout = m_pMenuHelp->addAction(CSandMan::GetIcon("IconFull", 2), tr("About Sandboxie-Plus"), this, SLOT(OnAbout()));
@@ -526,7 +526,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 	}
 
 		m_pMenuView->addSeparator();
-		m_pMenuBrowse = m_pMenuView->addAction(CSandMan::GetIcon("Folder"), tr("Show File Panel"), this, SLOT(OnProcView()));
+		m_pMenuBrowse = m_pMenuView->addAction(CSandMan::GetIcon("Explore"), tr("Show File Panel"), this, SLOT(OnProcView()));
 		m_pMenuBrowse->setCheckable(true);
 		m_pMenuBrowse->setShortcut(QKeySequence("Ctrl+D"));
 		m_pMenuBrowse->setShortcutContext(Qt::WidgetWithChildrenShortcut);
@@ -575,8 +575,13 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pMenuResetGUI->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 		this->addAction(m_pMenuResetGUI);
 		m_pMenuOptions->addSeparator();
-		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor"), tr("Edit ini file"), this, SLOT(OnEditIni()));
-		m_pReloadIni = m_pMenuOptions->addAction(CSandMan::GetIcon("ReloadIni"), tr("Reload ini file"), this, SLOT(OnReloadIni()));
+		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor"), tr("Edit Sandboxie.ini"), this, SLOT(OnEditIni()));
+		m_pEditIni->setProperty("ini", "sbie");
+		m_pEditIni2 = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor2"), tr("Edit Templates.ini"), this, SLOT(OnEditIni()));
+		m_pEditIni2->setProperty("ini", "tmpl");
+		m_pEditIni3 = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor4"), tr("Edit Sandboxie-Plus.ini"), this, SLOT(OnEditIni()));
+		m_pEditIni3->setProperty("ini", "plus");
+		m_pReloadIni = m_pMenuOptions->addAction(CSandMan::GetIcon("ReloadIni"), tr("Reload configuration"), this, SLOT(OnReloadIni()));
 
 	CreateHelpMenu(bAdvanced);
 
@@ -696,8 +701,13 @@ void CSandMan::CreateOldMenus()
 		m_pMenuOptions->addSeparator();
 		QAction* m_pConfigLock = m_pMenuOptions->addAction(CSandMan::GetIcon("Lock"), tr("Lock Configuration"), this, SLOT(OnSettingsAction()));
 		m_pConfigLock->setData(CSettingsWindow::eConfigLock);
-		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor"), tr("Edit ini file"), this, SLOT(OnEditIni()));
-		m_pReloadIni = m_pMenuOptions->addAction(CSandMan::GetIcon("ReloadIni"), tr("Reload ini file"), this, SLOT(OnReloadIni()));
+		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor"), tr("Edit Sandboxie.ini"), this, SLOT(OnEditIni()));
+		m_pEditIni->setProperty("ini", "sbie");
+		m_pEditIni2 = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor2"), tr("Edit Templates.ini"), this, SLOT(OnEditIni()));
+		m_pEditIni2->setProperty("ini", "tmpl");
+		m_pEditIni3 = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor4"), tr("Edit Sandboxie-Plus.ini"), this, SLOT(OnEditIni()));
+		m_pEditIni3->setProperty("ini", "plus");
+		m_pReloadIni = m_pMenuOptions->addAction(CSandMan::GetIcon("ReloadIni"), tr("Reload configuration"), this, SLOT(OnReloadIni()));
 
 	CreateHelpMenu(false);
 
@@ -745,7 +755,20 @@ void CSandMan::CreateToolBar()
 	m_pToolBar->addSeparator();
 	m_pToolBar->addAction(m_pMenuBrowse);
 	m_pToolBar->addSeparator();
+	
+	/*m_pEditButton = new QToolButton();
+	m_pEditButton->setIcon(m_pEditIni->icon());
+	m_pEditButton->setText(m_pEditIni->text());
+	m_pEditButton->setPopupMode(QToolButton::MenuButtonPopup);
+	QMenu* pEditBtnMenu = new QMenu(m_pEditButton);
+	pEditBtnMenu->addAction(m_pEditIni2->icon(), m_pEditIni2->text(), this, SLOT(OnEditIni2()));
+	pEditBtnMenu->addAction(m_pEditIni3->icon(), m_pEditIni3->text(), this, SLOT(OnEditIni3()));
+	m_pEditButton->setMenu(pEditBtnMenu);
+	//QObject::connect(m_pEditButton, SIGNAL(triggered(QAction*)), , SLOT());
+	QObject::connect(m_pEditButton, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
+	m_pToolBar->addWidget(m_pEditButton);*/
 	m_pToolBar->addAction(m_pEditIni);
+
 	m_pToolBar->addSeparator();
 	m_pToolBar->addAction(m_pEnableMonitoring);
 	//m_pToolBar->addSeparator();
@@ -1872,7 +1895,7 @@ void CSandMan::UpdateState()
 {
 	bool isConnected = theAPI->IsConnected();
 
-	m_pSupport->setVisible(g_Certificate.isEmpty());
+	//m_pSupport->setVisible(g_Certificate.isEmpty());
 
 	m_pTrayIcon->setIcon(GetTrayIcon(isConnected));
 	m_pTrayIcon->setToolTip(GetTrayText(isConnected));
@@ -1893,6 +1916,7 @@ void CSandMan::UpdateState()
 	//m_pKeepTerminated->setEnabled(isConnected);
 
 	m_pEditIni->setEnabled(isConnected);
+	m_pEditIni2->setEnabled(isConnected);
 	m_pReloadIni->setEnabled(isConnected);
 	if(m_pEnableMonitoring) m_pEnableMonitoring->setEnabled(isConnected);
 }
@@ -2670,6 +2694,7 @@ void CSandMan::OnResetMsgs()
 		theConf->SetValue("Options/CheckForUpdates", 2);
 
 		theConf->SetValue("Options/NoEditInfo", true);
+		theConf->SetValue("Options/NoEditWarn", true);
 
 		theConf->SetValue("Options/BoxedExplorerInfo", true);
 		theConf->SetValue("Options/ExplorerInfo", true);
@@ -2721,27 +2746,53 @@ void CSandMan::OnResetGUI()
 
 void CSandMan::OnEditIni()
 {
-	if (theConf->GetBool("Options/NoEditInfo", true))
-	{
-		bool State = false;
-		CCheckableMessageBox::question(this, "Sandboxie-Plus", 
-			theConf->GetBool("Options/WatchIni", true)
-			? tr("The changes will be applied automatically whenever the file gets saved.")
-			: tr("The changes will be applied automatically as soon as the editor is closed.")
-			, tr("Don't show this message again."), &State, QDialogButtonBox::Ok, QDialogButtonBox::Ok, QMessageBox::Information);
-
-		if (State)
-			theConf->SetValue("Options/NoEditInfo", false);
-	}
+	QString ini = ((QAction*)sender())->property("ini").toString();
 
 	std::wstring Editor = theConf->GetString("Options/Editor", "notepad.exe").toStdWString();
-	std::wstring IniPath = theAPI->GetIniPath().toStdWString();
+	std::wstring IniPath;
+
+	bool bPlus;
+	if (bPlus = (ini == "plus"))
+	{
+		IniPath = QString(theConf->GetConfigDir() + "/Sandboxie-Plus.ini").replace("/", "\\").toStdWString();
+	}
+	else if (ini == "tmpl")
+	{
+		IniPath = (theAPI->GetSbiePath() + "\\Templates.ini").toStdWString();
+
+		if (theConf->GetBool("Options/NoEditWarn", true)) {
+			bool State = false;
+			CCheckableMessageBox::question(this, "Sandboxie-Plus",
+				tr("You are about to edit the Templates.ini, thsi is generally not recommeded.\n"
+					"This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.")
+				, tr("Don't show this message again."), &State, QDialogButtonBox::Ok, QDialogButtonBox::Ok, QMessageBox::Warning);
+
+			if (State)
+				theConf->SetValue("Options/NoEditWarn", false);
+		}
+	}
+	else //if (ini == "sbie")
+	{
+		IniPath = theAPI->GetIniPath().toStdWString();
+
+		if (theConf->GetBool("Options/NoEditInfo", true)) {
+			bool State = false;
+			CCheckableMessageBox::question(this, "Sandboxie-Plus",
+				theConf->GetBool("Options/WatchIni", true)
+				? tr("The changes will be applied automatically whenever the file gets saved.")
+				: tr("The changes will be applied automatically as soon as the editor is closed.")
+				, tr("Don't show this message again."), &State, QDialogButtonBox::Ok, QDialogButtonBox::Ok, QMessageBox::Information);
+
+			if (State)
+				theConf->SetValue("Options/NoEditInfo", false);
+		}
+	}
 
 	SHELLEXECUTEINFO si = { 0 };
 	si.cbSize = sizeof(SHELLEXECUTEINFO);
 	si.fMask = SEE_MASK_NOCLOSEPROCESS;
 	si.hwnd = NULL;
-	si.lpVerb = L"runas";
+	si.lpVerb = bPlus ? NULL : L"runas"; // plus ini does nto require admin privileges
 	si.lpFile = Editor.c_str();
 	si.lpParameters = IniPath.c_str();
 	si.lpDirectory = NULL;
@@ -2751,15 +2802,18 @@ void CSandMan::OnEditIni()
 	//WaitForSingleObject(si.hProcess, INFINITE);
 	//CloseHandle(si.hProcess);
 
-	if (theConf->GetBool("Options/WatchIni", true))
+	if (!bPlus && theConf->GetBool("Options/WatchIni", true))
 		return; // if the ini is watched don't double reload
 	
 	QWinEventNotifier* processFinishedNotifier = new QWinEventNotifier(si.hProcess);
 	processFinishedNotifier->setEnabled(true);
-	connect(processFinishedNotifier, &QWinEventNotifier::activated, this, [processFinishedNotifier, this, si]() {
+	connect(processFinishedNotifier, &QWinEventNotifier::activated, this, [processFinishedNotifier, this, si, bPlus]() {
 		processFinishedNotifier->setEnabled(false);
 		processFinishedNotifier->deleteLater();
-		this->OnReloadIni();
+		if (bPlus)
+			theConf->Sync();
+		else
+			this->OnReloadIni();
 		CloseHandle(si.hProcess);
 	});
 }
@@ -3149,9 +3203,10 @@ void CSandMan::LoadLanguage(const QString& Lang, const QString& Module, int Inde
 
 void CSandMan::OnHelp()
 {
-	if (sender() == m_pSupport)
-		QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=donate"));
-	else if (sender() == m_pContribution)
+	//if (sender() == m_pSupport)
+	//	QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=donate"));
+	//else 
+	if (sender() == m_pContribution)
 		QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-contribute"));
 	else if (sender() == m_pManual)
 		QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-docs"));

@@ -139,6 +139,11 @@
         <file>Actions/USB.png</file>
         <file>Actions/SystemShield.png</file>
         <file>Actions/AdminShield.png</file>
+        <file>Actions/Files.png</file>
+        <file>Actions/Editor4.png</file>
+        <file>Actions/Editor3.png</file>
+        <file>Actions/Editor2.png</file>
+        <file>Actions/Folders.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

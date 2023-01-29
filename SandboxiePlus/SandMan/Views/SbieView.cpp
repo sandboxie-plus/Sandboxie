@@ -959,7 +959,7 @@ bool CSbieView::MoveItem(const QString& Name, const QString& To, int pos)
 	return From != To;
 }
 
-QString CSbieView::AddNewBox()
+QString CSbieView::AddNewBox(bool bAlowTemp)
 {
 	QString BoxName;
 
@@ -971,7 +971,7 @@ QString CSbieView::AddNewBox()
 			BoxName = NewBoxWindow.m_Name;
 	}
 	else
-		BoxName = CNewBoxWizard::CreateNewBox(this);
+		BoxName = CNewBoxWizard::CreateNewBox(bAlowTemp, this);
 
 	if (!BoxName.isEmpty()) {
 		theAPI->ReloadBoxes();

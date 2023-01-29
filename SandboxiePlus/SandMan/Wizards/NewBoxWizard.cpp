@@ -10,10 +10,10 @@
 #include "../Views/SbieView.h"
 
 
-CNewBoxWizard::CNewBoxWizard(QWidget *parent)
+CNewBoxWizard::CNewBoxWizard(bool bAlowTemp, QWidget *parent)
     : QWizard(parent)
 {
-    setPage(Page_Type, new CBoxTypePage);
+    setPage(Page_Type, new CBoxTypePage(bAlowTemp));
     setPage(Page_Files, new CFilesPage);
     setPage(Page_Advanced, new CAdvancedPage);
     setPage(Page_Summary, new CSummaryPage);
@@ -34,9 +34,9 @@ void CNewBoxWizard::showHelp()
 
 }
 
-QString CNewBoxWizard::CreateNewBox(QWidget* pParent)
+QString CNewBoxWizard::CreateNewBox(bool bAlowTemp, QWidget* pParent)
 {
-	CNewBoxWizard wizard(pParent);
+	CNewBoxWizard wizard(bAlowTemp, pParent);
     if (!wizard.exec())
         return QString();
 
@@ -135,7 +135,7 @@ QString CNewBoxWizard::GetDefaultLocation()
 // CBoxTypePage
 // 
 
-CBoxTypePage::CBoxTypePage(QWidget *parent)
+CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Create new Sandbox"));
@@ -200,6 +200,7 @@ CBoxTypePage::CBoxTypePage(QWidget *parent)
     QCheckBox* pTemp = new QCheckBox(tr("Remove after use"));
     pTemp->setToolTip(tr("After the last process in the box terminates, all data in the box will be deleted and the box itself will be removed."));
     layout->addWidget(pTemp, row, 0, 1, 2);
+    pTemp->setVisible(bAlowTemp);
     registerField("autoRemove", pTemp);
 
     m_pAdvanced = new QCheckBox(tr("Configure advanced options"));

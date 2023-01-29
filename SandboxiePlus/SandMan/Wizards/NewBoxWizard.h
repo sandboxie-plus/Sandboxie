@@ -17,9 +17,9 @@ class CNewBoxWizard : public QWizard
 public:
     enum { Page_Type, Page_Files, Page_Advanced, Page_Summary };
 
-    CNewBoxWizard(QWidget *parent = nullptr);
+    CNewBoxWizard(bool bAlowTemp, QWidget *parent = nullptr);
 
-    static QString CreateNewBox(QWidget* pParent = NULL);
+    static QString CreateNewBox(bool bAlowTemp, QWidget* pParent = NULL);
 
     QString GetDefaultLocation();
 
@@ -45,7 +45,7 @@ class CBoxTypePage : public QWizardPage
     Q_OBJECT
 
 public:
-    CBoxTypePage(QWidget *parent = nullptr);
+    CBoxTypePage(bool bAlowTemp, QWidget *parent = nullptr);
 
     int nextId() const override;
     bool isComplete() const override;

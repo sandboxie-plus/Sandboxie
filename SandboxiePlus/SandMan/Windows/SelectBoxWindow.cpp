@@ -184,7 +184,7 @@ void CSelectBoxWindow::OnRun()
 	}
 	else if (ui.radBoxedNew->isChecked())
 	{
-		BoxName = theGUI->GetBoxView()->AddNewBox();
+		BoxName = theGUI->GetBoxView()->AddNewBox(true);
 		if (BoxName.isEmpty()) {
 			close();
 			return;

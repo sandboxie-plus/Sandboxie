@@ -22,7 +22,7 @@ public:
 
 	//virtual void				UpdateRunMenu();
 
-	virtual QString				AddNewBox();
+	virtual QString				AddNewBox(bool bAlowTemp = false);
 	virtual QString				AddNewGroup();
 	virtual bool				TestNameAndWarn(const QString& Name);
 	virtual void				SelectBox(const QString& Name);

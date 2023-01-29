@@ -6,58 +6,58 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="387"/>
         <source>Advanced Sandbox options</source>
-        <translation type="unfinished"></translation>
+        <translation>Erweiterte Sandboxoptionen</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="388"/>
         <source>On this page advanced sandbox options can be configured.</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf dieser Seite können erweiterte Sandboxoptionen konfiguriert werden.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="393"/>
         <source>Network Access</source>
-        <translation type="unfinished"></translation>
+        <translation>Netzwerkzugriff</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="401"/>
         <source>Allow network/internet access</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube Netzwerk-/ Internetzugriff</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="402"/>
         <source>Block network/internet by denying access to Network devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Blockiere Netzwerk-/ Internetzugriff durch Ablehnung des Zugriffs auf Netzwerkgeräte</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="404"/>
         <source>Block network/internet using Windows Filtering Platform</source>
-        <translation type="unfinished"></translation>
+        <translation>Blockiere Netzwerk-/ Internetzugriff durch die Verwendung der Windows Filtering Platform</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="409"/>
         <source>Allow access to network files and fodlers</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube Zugriff auf Netzwerkdateien und Netzwerkordner</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="410"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="426"/>
         <source>This option is not recomended for Hardened boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Option ist nicht für gehärtete Boxen empfohlen</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="416"/>
         <source>Admin Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Adminoptionen</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="420"/>
         <source>Make applications think they are running elevated</source>
-        <translation type="unfinished"></translation>
+        <translation>Lasse Programme denken, sie würden mit erhöhten Rechten laufen</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="425"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube MSIServer mit einem sandgeboxten Systemtoken zu starten</translation>
     </message>
 </context>
 <context>
@@ -65,62 +65,62 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="137"/>
         <source>Create new Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Sandbox erstellen</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="144"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation type="unfinished">Eine Sandbox isoliert Ihr Hostsystem von Prozessen, die in dieser Box laufen, sie hindert diese permanente Änderungen an anderen Programmen oder Daten auf Ihrem Computer zu machen. Der Level an Isolation beeinflusst Ihre Sicherheit, ebenso wie die Kompatibilität mit Programmen, somit wird es verschiedene Stufen der Isolation geben, abhängig vom ausgewählten Boxtyp. Sandboxie kann auch Ihre persönlichen Daten vor Zugriff durch Prozesse, die unter dessen Aufsicht laufen, schützen.</translation>
+        <translation>Eine Sandbox isoliert Ihr Hostsystem von Prozessen, die in dieser Box laufen, sie hindert diese permanente Änderungen an anderen Programmen oder Daten auf Ihrem Computer zu machen. Der Level an Isolation beeinflusst Ihre Sicherheit, ebenso wie die Kompatibilität mit Programmen, somit wird es verschiedene Stufen der Isolation geben, abhängig vom ausgewählten Boxtyp. Sandboxie kann auch Ihre persönlichen Daten vor Zugriff durch Prozesse, die unter dessen Aufsicht laufen, schützen.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="153"/>
         <source>Enter box name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxnamen eingeben:</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="159"/>
         <source>New Box</source>
-        <translation type="unfinished">Neue Box</translation>
+        <translation>Neue Box</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="171"/>
         <source>Sellect box type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxtyp auswählen:</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="174"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation type="unfinished">Gehärtete Sandbox mit Datenschutz</translation>
+        <translation>Gehärtete Sandbox mit Datenschutz</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="175"/>
         <source>Security Hardened Sandbox</source>
-        <translation type="unfinished">Sicherheitsgehärtete Sandbox</translation>
+        <translation>Sicherheitsgehärtete Sandbox</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="176"/>
         <source>Sandbox with Data Protection</source>
-        <translation type="unfinished">Sandbox mit Datenschutz</translation>
+        <translation>Sandbox mit Datenschutz</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="177"/>
         <source>Standard Isolation Sandbox (Default)</source>
-        <translation type="unfinished">Standard Isolations-Sandbox (Standard)</translation>
+        <translation>Standard Isolations-Sandbox (Standard)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="179"/>
         <source>Application Compartment with Data Protection</source>
-        <translation type="unfinished">Applikationsunterteilung mit Datenschutz</translation>
+        <translation>Applikationsunterteilung mit Datenschutz</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="180"/>
         <source>Application Compartment (NO Isolation)</source>
-        <translation type="unfinished">Applikationsunterteilung (KEINE Isolation)</translation>
+        <translation>Applikationsunterteilung (KEINE Isolation)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="197"/>
         <source>Configure advanced options</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguriere erweiterte Optionen</translation>
     </message>
 </context>
 <context>
@@ -220,73 +220,74 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="263"/>
         <source>Sandbox location and behavioure</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxspeicherort und Verhalten</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="264"/>
         <source>On this page the sandbox location and its behaviorue can be customized.
 You can use %USER% to save each users sandbox to an own fodler.</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf dieser Seite können der Sandboxspeicherort und deren Verhalten angepasst werden.
+Sie können %USER% verwenden, um für jedem Benuzter die Sandbox in einen eigenen Ordner zu speichern.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="269"/>
         <source>Sandboxed Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandgeboxte Dateien</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="292"/>
         <source>Select Directory</source>
-        <translation type="unfinished">Ordner auswählen</translation>
+        <translation>Ordner auswählen</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="300"/>
         <source>Virtualization scheme</source>
-        <translation type="unfinished">Virtualisierungsschema</translation>
+        <translation>Virtualisierungsschema</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="304"/>
         <source>Version 1</source>
-        <translation type="unfinished">Version 1</translation>
+        <translation>Version 1</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="305"/>
         <source>Version 2</source>
-        <translation type="unfinished">Version 2</translation>
+        <translation>Version 2</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="311"/>
         <source>Separate user folders</source>
-        <translation type="unfinished">Trenne Benutzerordner</translation>
+        <translation>Trenne Benutzerordner</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="316"/>
         <source>Use volume serial numbers for drives</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende Volumenseriennummern für Laufwerke</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="321"/>
         <source>Auto delete content when last process terminates</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhalte automatisch löschen, wenn der letzte Prozess in der Sandbox beendet wurde</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="326"/>
         <source>Enable Immediate Recovery of files from recovery locations</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviere Sofortwiederherstellung von Dateien aus Wiederherstellungsspeicherorten</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="361"/>
         <source>The sellected box location is not a valid path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der ausgewählte Boxspeicherort ist kein gültiger Pfad.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="366"/>
         <source>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
-        <translation type="unfinished"></translation>
+        <translation>Der ausgewählte Boxspeicherort existiert und ist nicht leer, es wird empfohlen einen neuen oder leeren Ordner auszuwählen. Sind Sie sicher, dass Sie einen exitierenden Ordner verwenden möchten?</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="371"/>
         <source>The sellected box location not placed on a currently available drive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der ausgewählte Boxspeicherort befindet sich auf einen momentan nicht verfügbaren Laufwerk.</translation>
     </message>
 </context>
 <context>
@@ -440,7 +441,7 @@ You can use %USER% to save each users sandbox to an own fodler.</source>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="29"/>
         <source>New Box Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Box Assistent</translation>
     </message>
 </context>
 <context>
@@ -3434,12 +3435,12 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="SbieProcess.cpp" line="118"/>
         <source> Elevated</source>
-        <translation type="unfinished"></translation>
+        <translation> Erhöht</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="120"/>
         <source> as System</source>
-        <translation type="unfinished"></translation>
+        <translation> als System</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="123"/>
@@ -4495,57 +4496,57 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="468"/>
         <source>Create the new Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Erzeuge die neue Sandbox</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="476"/>
         <source>Almost complete, click Finish to create a new sandbox and conclude the wizard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fast geschafft, klicken Sie Fertig zum Erzeugen einer neuen Sandbox und dem Abschluss des Assistenten.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="485"/>
         <source>Save options as new defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichere Optionen als neue Standards</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="496"/>
         <source>Don&apos;t show the summary page in future (unless advanced options were set)</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Zusammenfassungsseite zukünftig nicht anzeigen (außer erweiterte Optionen wurden gesetzt)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="515"/>
         <source>
 This Sandbox will be saved to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Sandbox wird gespeichert in: %1</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="518"/>
         <source>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Box wird ihren Inhalt VERWERFEN, wenn sie geschlossen wird. Sie ist nur für temporäre Daten geeignet.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="520"/>
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prozesse in dieser Box werden nicht auf das Internet oder das lokale Netzwerk zugreifen können. Dies stellt sicher, dass alle gelesenen Daten vertraulich bleiben.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="522"/>
         <source>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatybility but reduces the security isolation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Box wird den MSIServer (*.msi Installationsservice) mit einem Systemtoken starten. Dies verbessert die Kompatibilität, reduziert aber die Sicherheitsisolation.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="524"/>
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prozesse in dieser Box werden denken, dass sie mit Adminrechten laufen, ohne dass sie diese tatsächlich haben, sodass Installer selbst in sicherheitsgehärteten Boxen genutzt werden können.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="552"/>
         <source>Failed to create new box: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte neue Sandbox nicht erzeugen: %1</translation>
     </message>
 </context>
 <context>
@@ -6736,7 +6737,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="97"/>
         <source>Run in a new Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>In einer neuen Sandbox ausführen</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="65"/>

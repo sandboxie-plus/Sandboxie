@@ -41,6 +41,15 @@ A GitHub copy of the [Sandboxie documentation](https://sandboxie-plus.github.io/
 
 A partial archive of the [old Sandboxie forum](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums) that was previously maintained by Invincea is still available. If you need to find something specific, it is possible to use the following [search query](https://www.ecosia.org/search?method=index&q=site%3Ahttps%3A%2F%2Fsandboxie-website-archive.github.io%2Fwww.sandboxie.com%2Fold-forums%2F).
 
+
+## 🚀 Useful tools for Sandboxie
+
+Sandboxie's functionality can be enhanced with specialized tools like the following:
+
+  * [LogApiDll](https://github.com/sandboxie-plus/LogApiDll) - this adds verbose trace output to Sandboxie's trace log, listing invocations of relevant Windows API functions.
+  * [SbieHide](https://github.com/VeroFess/SbieHide) - this hides the presence of SbieDll.dll from the application.
+  
+
 ## 📌 Project history
 
 |      Timeline       |    Maintainer    |
@@ -50,14 +59,6 @@ A partial archive of the [old Sandboxie forum](https://sandboxie-website-archive
 | 2017 - 2020         | Sophos Group plc |
 | [Open-source code](https://github.com/sandboxie/sandboxie) |    Tom Brown     |
 | 2020 onwards        | David Xanatos ([Roadmap](https://www.wilderssecurity.com/threads/sandboxie-roadmap.445545/))    |
-
-
-## 🚀 Useful tools for Sandboxie
-
-Sandboxie's functionality can be enhanced with specialized tools like the following:
-
-  * [LogApiDll](https://github.com/sandboxie-plus/LogApiDll) - this adds verbose trace output to Sandboxie's trace log, listing invocations of relevant Windows API functions.
-  * [SbieHide](https://github.com/VeroFess/SbieHide) - this hides the presence of SbieDll.dll from the application.
 		
 		
 ## 📌 Project support / sponsorship

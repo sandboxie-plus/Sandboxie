@@ -2023,6 +2023,11 @@ QString CSbieAPI::GetRealPath(CSandBox* pBox, const QString& Path)
 		return QString();
 
 	RealPath = Path.mid(BoxRoot.length());
+	if (RealPath.left(10).compare("\\snapshot-", Qt::CaseInsensitive) == 0) {
+		int pos = RealPath.indexOf("\\", 1);
+		if (pos != -1)
+			RealPath.remove(0, pos);
+	}
 
 	if (RealPath.left(6) == "\\share") 
 	{

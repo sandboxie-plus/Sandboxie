@@ -201,7 +201,7 @@ protected:
 	static void				ExportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ExportPath, const QString& RootPath, const QString& Section);
 	static void				ImportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ImportPath, const QString& RootPath, const QString& BoxName);
 
-	bool					IsFileDeleted(const QString& RealPath, const QString& Shapshot, const QStringList& SnapshotList, const QMap<QString, QSet<QString>>& DeletedFiles);
+	bool					IsFileDeleted(const QString& RealPath, const QString& Shapshot, const QStringList& SnapshotList, const QMap<QString, QList<QString>>& DeletedPaths);
 
 	QList<QSharedPointer<CBoxJob>> m_JobQueue;
 

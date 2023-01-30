@@ -386,17 +386,22 @@ bool CSandBoxPlus::IsBoxexPath(const QString& Path)
 	return Path.left(m_FilePath.length()).compare(m_FilePath, Qt::CaseInsensitive) == 0;
 }
 
-bool CSandBoxPlus::IsFileDeleted(const QString& RealPath, const QString& Shapshot, const QStringList& SnapshotList, const QMap<QString, QSet<QString>>& DeletedFiles)
+bool CSandBoxPlus::IsFileDeleted(const QString& RealPath, const QString& Shapshot, const QStringList& SnapshotList, const QMap<QString, QList<QString>>& DeletedPaths)
 {
 	int NextIndex = SnapshotList.indexOf(Shapshot) - 1;
 	if (NextIndex < 0) return false; // no newer snapshot
 
 	QString NewerSnapshot = SnapshotList.at(NextIndex);
 
-	if (DeletedFiles[NewerSnapshot].contains(RealPath.toLower()))
-		return true;
+	foreach(const QString &DeletedPath, DeletedPaths[NewerSnapshot]) {
+		int len = DeletedPath.length();
+		if (RealPath.length() >= len && RealPath.left(len).compare(DeletedPath, Qt::CaseInsensitive) == 0) {
+			if (RealPath.length() == len || RealPath[len] == '\\')
+				return true;
+		}
+	}
 
-	return IsFileDeleted(RealPath, NewerSnapshot, SnapshotList, DeletedFiles);
+	return IsFileDeleted(RealPath, NewerSnapshot, SnapshotList, DeletedPaths);
 }
 
 void CSandBoxPlus::ScanStartMenu()
@@ -411,7 +416,7 @@ void CSandBoxPlus::ScanStartMenu()
 		CurSnapshot = Snapshots[CurSnapshot].Parent;
 	}
 
-	QMap<QString, QSet<QString>> DeletedFiles;
+	QMap<QString, QList<QString>> DeletedPaths;
 	foreach (const QString& Snapshot, SnapshotList)
 	{
 		QString PathsFile = GetFileRoot();
@@ -425,17 +430,17 @@ void CSandBoxPlus::ScanStartMenu()
 			File.close();
 			QString Text = QString::fromWCharArray((const wchar_t*)Data.constData(), Data.size()/sizeof(wchar_t));
 
-			QSet<QString> Deleted;
+			QList<QString> Deleted;
 
 			QTextStream in(&Text);
 			while (!in.atEnd()) {
 				QStringList Line = in.readLine().split("|");
 				if (Line.length() < 2 || Line[1] != "1")
 					continue; // not a delete entry
-				Deleted.insert(theAPI->Nt2DosPath(Line[0]).toLower());
+				Deleted.append(theAPI->Nt2DosPath(Line[0]));
 			}
 
-			DeletedFiles[Snapshot] = Deleted;
+			DeletedPaths[Snapshot] = Deleted;
 		}
 	}
 
@@ -461,7 +466,7 @@ void CSandBoxPlus::ScanStartMenu()
 					continue;
 				
 				// check if the shortcut file is marked deleted
-				if (IsFileDeleted(RealPath, Snapshot, SnapshotList, DeletedFiles))
+				if (IsFileDeleted(RealPath, Snapshot, SnapshotList, DeletedPaths))
 					continue;
 
 				SFoundLink FoundLink;

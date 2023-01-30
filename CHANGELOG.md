@@ -22,11 +22,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - refactored network blocking code in driver
 - box options now show the expanded paths where apropriate
+- made new box option layout the default (can be changed back in appearance settings)
 
 ### Fixed
 - fixed BlockNetworkFiles=y not working together with RestrictDevices=y [#2629](https://github.com/sandboxie-plus/Sandboxie/issues/2629)
 - fixed SandMan crash issue introduced in 1.7.0
-- fixed trace log case-sensitive filter
+- fixed trace log filter is not case-insensitive
 - fixed performance issues with Delete V2
 - fixed issue with NtQueryDirectoryFile data alignment [#2443](https://github.com/sandboxie-plus/Sandboxie/issues/2443)
 - fixed issue with Microsoft Edge 111 dev build [#2631](https://github.com/sandboxie-plus/Sandboxie/issues/2631)

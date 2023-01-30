@@ -120,12 +120,12 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="215"/>
         <source>Remove after use</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach Verwendung löschen</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="216"/>
         <source>After the last process in the box terminates, all data in the box will be deleted and the box itself will be removed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachdem der letzte Prozess in der Box beendet wurde, werden alle Daten in der Box gelöscht und die Box selbst wird entfernt.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="221"/>
@@ -217,7 +217,7 @@
     <message>
         <location filename="Views/FileView.cpp" line="171"/>
         <source>Run Recovery Checks</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte Wiederherstellungsüberprüfungen</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="234"/>
@@ -461,12 +461,12 @@ Sie können %USER% verwenden, um für jedem Benuzter die Sandbox in einen eigene
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="126"/>
         <source>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you expirience any unecpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure groupe.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die neue Sandbox wurde mit dem neuen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualisierungsschema Version 2&lt;/a&gt; erzeugt. Falls Sie unerwartete Probleme mit dieser Box haben, wechseln Sie bitte zum Virtualisierungsschema Version 1 und berichten Sie von den Problemen. Die Option zum Ändern der Vorlage kann in den Boxoptionem, in der Gruppe Boxstruktur, gefunden werden.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="129"/>
         <source>Don&apos;t show this message again.</source>
-        <translation type="unfinished">Diese Meldung nicht mehr anzeigen.</translation>
+        <translation>Diese Meldung nicht mehr anzeigen.</translation>
     </message>
 </context>
 <context>
@@ -946,7 +946,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="285"/>
         <source>File Options</source>
-        <translation type="unfinished">Dateioptionen</translation>
+        <translation>Dateioptionen</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="296"/>
@@ -2163,25 +2163,25 @@ Vollständiger Pfad: %4</translation>
         <location filename="SandMan.cpp" line="579"/>
         <location filename="SandMan.cpp" line="705"/>
         <source>Edit Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini bearbeiten</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="581"/>
         <location filename="SandMan.cpp" line="707"/>
         <source>Edit Templates.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Templates.ini bearbeiten</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="583"/>
         <location filename="SandMan.cpp" line="709"/>
         <source>Edit Sandboxie-Plus.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus.ini bearbeiten</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="585"/>
         <location filename="SandMan.cpp" line="711"/>
         <source>Reload configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration neu laden</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="597"/>
@@ -2849,7 +2849,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="1700"/>
         <source>Updated Shortcut to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisiere Verknüpfung zu: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1702"/>
@@ -2859,7 +2859,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="1753"/>
         <source>Auto removing sandbox %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoentfernung von Sandbox %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1768"/>
@@ -3132,7 +3132,8 @@ Möchten Sie die Bereinigung durchführen?</translation>
         <location filename="SandMan.cpp" line="2793"/>
         <source>You are about to edit the Templates.ini, thsi is generally not recommeded.
 This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie sind im Begriff die Templates.ini zu bearbeiten, was grundsätzlich nicht empfohlen wird.
+		Diese Datei ist Teil von Sandboxie und alle vorgenommenen Änderungen an der Datei werden zurückgesetzt, wenn Sandboxie aktualisiert wird.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2855"/>
@@ -4589,7 +4590,7 @@ This Sandbox will be saved to: %1</source>
         <location filename="Wizards/NewBoxWizard.cpp" line="544"/>
         <source>
 This box&apos;s content will be DISCARDED when its closed, and the box will be removed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Inhalt dieser Box wird VERWORFEN, wenn diese geschlossen wird und die Box wird entfernt.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="546"/>

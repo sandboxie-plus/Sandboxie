@@ -578,10 +578,13 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pMenuOptions->addSeparator();
 		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor"), tr("Edit Sandboxie.ini"), this, SLOT(OnEditIni()));
 		m_pEditIni->setProperty("ini", "sbie");
-		m_pEditIni2 = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor2"), tr("Edit Templates.ini"), this, SLOT(OnEditIni()));
-		m_pEditIni2->setProperty("ini", "tmpl");
-		m_pEditIni3 = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor4"), tr("Edit Sandboxie-Plus.ini"), this, SLOT(OnEditIni()));
-		m_pEditIni3->setProperty("ini", "plus");
+		if (bAdvanced) {
+			m_pEditIni2 = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor2"), tr("Edit Templates.ini"), this, SLOT(OnEditIni()));
+			m_pEditIni2->setProperty("ini", "tmpl");
+			m_pEditIni3 = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor4"), tr("Edit Sandboxie-Plus.ini"), this, SLOT(OnEditIni()));
+			m_pEditIni3->setProperty("ini", "plus");
+		} else
+			m_pEditIni2 = m_pEditIni3 = NULL;
 		m_pReloadIni = m_pMenuOptions->addAction(CSandMan::GetIcon("ReloadIni"), tr("Reload configuration"), this, SLOT(OnReloadIni()));
 
 	CreateHelpMenu(bAdvanced);
@@ -704,10 +707,7 @@ void CSandMan::CreateOldMenus()
 		m_pConfigLock->setData(CSettingsWindow::eConfigLock);
 		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor"), tr("Edit Sandboxie.ini"), this, SLOT(OnEditIni()));
 		m_pEditIni->setProperty("ini", "sbie");
-		m_pEditIni2 = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor2"), tr("Edit Templates.ini"), this, SLOT(OnEditIni()));
-		m_pEditIni2->setProperty("ini", "tmpl");
-		m_pEditIni3 = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor4"), tr("Edit Sandboxie-Plus.ini"), this, SLOT(OnEditIni()));
-		m_pEditIni3->setProperty("ini", "plus");
+		m_pEditIni2 = m_pEditIni3 = NULL;
 		m_pReloadIni = m_pMenuOptions->addAction(CSandMan::GetIcon("ReloadIni"), tr("Reload configuration"), this, SLOT(OnReloadIni()));
 
 	CreateHelpMenu(false);
@@ -1941,7 +1941,7 @@ void CSandMan::UpdateState()
 	//m_pKeepTerminated->setEnabled(isConnected);
 
 	m_pEditIni->setEnabled(isConnected);
-	m_pEditIni2->setEnabled(isConnected);
+	if(m_pEditIni2) m_pEditIni2->setEnabled(isConnected);
 	m_pReloadIni->setEnabled(isConnected);
 	if(m_pEnableMonitoring) m_pEnableMonitoring->setEnabled(isConnected);
 }
@@ -3250,7 +3250,7 @@ void CSandMan::OnAbout()
 		QString AboutCaption = tr(
 			"<h3>About Sandboxie-Plus</h3>"
 			"<p>Version %1</p>"
-			"<p>Copyright (c) 2020-2022 by DavidXanatos</p>"
+			"<p>Copyright (c) 2020-2023 by DavidXanatos</p>"
 		).arg(theGUI->GetVersion());
 
 		QString CertInfo;

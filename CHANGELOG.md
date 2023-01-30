@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.7.1 / 5.62.1] - 2023-?-?
+## [1.7.1 / 5.62.1] - 2023-01-30
 
 ### Added
 - added option to create a new sandbox to run from the box picker dialog

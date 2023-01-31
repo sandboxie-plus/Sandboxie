@@ -1094,7 +1094,7 @@ void CSandMan::closeEvent(QCloseEvent *e)
 
 		if (PortableStop == 1) {
 			SB_RESULT(void*) Status = StopSbie(true);
-			// don't care for Status we quit here anyways
+			// don't care for Status we quit here anyway
 		}
 	}
 
@@ -2790,8 +2790,8 @@ void CSandMan::OnEditIni()
 		if (theConf->GetBool("Options/NoEditWarn", true)) {
 			bool State = false;
 			CCheckableMessageBox::question(this, "Sandboxie-Plus",
-				tr("You are about to edit the Templates.ini, thsi is generally not recommeded.\n"
-					"This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.")
+				tr("You are about to edit the Templates.ini, this is generally not recommended.\n"
+					"This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.")
 				, tr("Don't show this message again."), &State, QDialogButtonBox::Ok, QDialogButtonBox::Ok, QMessageBox::Warning);
 
 			if (State)

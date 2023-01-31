@@ -170,7 +170,7 @@ void CSandMan::RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QStrin
 						int retVal = 0;
 						QMetaObject::invokeMethod(theGUI, "ShowQuestion", Qt::BlockingQueuedConnection, // show this question using the GUI thread
 							Q_RETURN_ARG(int, retVal),
-							Q_ARG(QString, tr("The file %1 failed a security check, do you want to recover it anyways?\r\n\r\n%2").arg(BoxPath).arg(Output)),
+							Q_ARG(QString, tr("The file %1 failed a security check, do you want to recover it anyway?\r\n\r\n%2").arg(BoxPath).arg(Output)),
 							Q_ARG(QString, tr("Do this for all files!")),
 							Q_ARG(bool*, &forAll),
 							Q_ARG(int, QDialogButtonBox::Yes | QDialogButtonBox::No),

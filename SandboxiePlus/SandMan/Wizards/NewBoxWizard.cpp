@@ -123,9 +123,9 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             if (theConf->GetBool("Options/WarnDeleteV2", true)) {
                 bool State = false;
                 CCheckableMessageBox::question(this, "Sandboxie-Plus",
-                    tr("The new sandbox has been created using the new <a href=\"https://sandboxie-plus.com/go.php?to=sbie-delete-v2\">Virtualization Scheme Version 2</a>, if you expirience any unecpected issues with this box,"
+                    tr("The new sandbox has been created using the new <a href=\"https://sandboxie-plus.com/go.php?to=sbie-delete-v2\">Virtualization Scheme Version 2</a>, if you experience any unexpected issues with this box,"
                         " please switch to the Virtualization Scheme to Version 1 and report the issue,"
-                        " the option to change this preset can be found in the Box Options in the Box Structure groupe.")
+                        " the option to change this preset can be found in the Box Options in the Box Structure group.")
                     , tr("Don't show this message again."), &State, QDialogButtonBox::Ok, QDialogButtonBox::Ok, QMessageBox::Information);
 
                 if (State)
@@ -187,7 +187,7 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
     registerField("boxName", m_pBoxName);
 
 
-    layout->addWidget(new QLabel(tr("Sellect box type:")), row++, 0);
+    layout->addWidget(new QLabel(tr("Select box type:")), row++, 0);
 
     m_pBoxType = new QComboBox();
 	m_pBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardenedPlus), tr("Hardened Sandbox with Data Protection"), (int)CSandBoxPlus::eHardenedPlus);
@@ -284,8 +284,8 @@ bool CBoxTypePage::validatePage()
 CFilesPage::CFilesPage(QWidget *parent)
     : QWizardPage(parent)
 {
-    setTitle(tr("Sandbox location and behavioure"));
-    setSubTitle(tr("On this page the sandbox location and its behaviorue can be customized.\nYou can use %USER% to save each users sandbox to an own fodler."));
+    setTitle(tr("Sandbox location and behavior"));
+    setSubTitle(tr("On this page the sandbox location and its behavior can be customized.\nYou can use %USER% to save each users sandbox to an own folder."));
 
     int row = 0;
     QGridLayout *layout = new QGridLayout;
@@ -384,17 +384,17 @@ bool CFilesPage::validatePage()
         wizard()->setField("boxLocation", "");
     else {
         if (Location.mid(2).contains(QRegularExpression("[ <>:\"/\\|?*\\[\\]]"))){
-            QMessageBox::critical(this, "Sandboxie-Plus", tr("The sellected box location is not a valid path."));
+            QMessageBox::critical(this, "Sandboxie-Plus", tr("The selected box location is not a valid path."));
             return false;
         }
         QDir Dir(Location);
         if (Dir.exists() && !Dir.entryList(QDir::NoDotAndDotDot | QDir::AllEntries).isEmpty()) {
-            if(QMessageBox::warning(this, "Sandboxie-Plus", tr("The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. "
+            if(QMessageBox::warning(this, "Sandboxie-Plus", tr("The selected box location exists and is not empty, it is recommended to pick a new or empty folder. "
                 "Are you sure you want to use an existing folder?"), QDialogButtonBox::Yes, QDialogButtonBox::No) != QDialogButtonBox::Yes)
                 return false;
         }
         if (!QDir().exists(Location.left(3))) {
-            QMessageBox::critical(this, "Sandboxie-Plus", tr("The sellected box location not placed on a currently available drive."));
+            QMessageBox::critical(this, "Sandboxie-Plus", tr("The selected box location not placed on a currently available drive."));
             return false;
         }
         wizard()->setField("boxLocation", Location);
@@ -432,8 +432,8 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
     layout->addWidget(pNetAccess, row++, 1, 1, 3);
     registerField("blockNetwork", pNetAccess);
 
-    m_pShareAccess = new QCheckBox(tr("Allow access to network files and fodlers"));
-    m_pShareAccess->setToolTip(tr("This option is not recomended for Hardened boxes"));
+    m_pShareAccess = new QCheckBox(tr("Allow access to network files and folders"));
+    m_pShareAccess->setToolTip(tr("This option is not recommended for Hardened boxes"));
     m_pShareAccess->setChecked(theConf->GetBool("BoxDefaults/ShareAccess", false));
     layout->addWidget(m_pShareAccess, row++, 1, 1, 3);
     registerField("shareAccess", m_pShareAccess);
@@ -449,7 +449,7 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
     registerField("fakeAdmin", pFakeAdmin);
 
     m_pMSIServer = new QCheckBox(tr("Allow MSIServer to run with a sandboxed system token"));
-    m_pMSIServer->setToolTip(tr("This option is not recomended for Hardened boxes"));
+    m_pMSIServer->setToolTip(tr("This option is not recommended for Hardened boxes"));
     m_pMSIServer->setChecked(theConf->GetBool("BoxDefaults/MsiExemptions", false));
     layout->addWidget(m_pMSIServer, row++, 1, 1, 3);
     registerField("msiServer", m_pMSIServer);
@@ -541,7 +541,7 @@ void CSummaryPage::initializePage()
     m_pSummary->append(tr("\nThis Sandbox will be saved to: %1").arg(Location));
 
     if (field("autoRemove").toBool()) 
-        m_pSummary->append(tr("\nThis box's content will be DISCARDED when its closed, and the box will be removed."));
+        m_pSummary->append(tr("\nThis box's content will be DISCARDED when it's closed, and the box will be removed."));
     else if (field("autoDelete").toBool())
         m_pSummary->append(tr("\nThis box will DISCARD its content when its closed, its suitable only for temporary data."));
     if (field("blockNetwork").toInt())

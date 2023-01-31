@@ -35,14 +35,16 @@
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="435"/>
-        <source>Allow access to network files and fodlers</source>
-        <translation>Erlaube Zugriff auf Netzwerkdateien und Netzwerkordner</translation>
+        <source>Allow access to network files and folders</source>
+        <oldsource>Allow access to network files and fodlers</oldsource>
+        <translation type="unfinished">Erlaube Zugriff auf Netzwerkdateien und Netzwerkordner</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="436"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="452"/>
-        <source>This option is not recomended for Hardened boxes</source>
-        <translation>Diese Option ist nicht für gehärtete Boxen empfohlen</translation>
+        <source>This option is not recommended for Hardened boxes</source>
+        <oldsource>This option is not recomended for Hardened boxes</oldsource>
+        <translation type="unfinished">Diese Option ist nicht für gehärtete Boxen empfohlen</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="442"/>
@@ -84,8 +86,9 @@
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="190"/>
-        <source>Sellect box type:</source>
-        <translation>Boxtyp auswählen:</translation>
+        <source>Select box type:</source>
+        <oldsource>Sellect box type:</oldsource>
+        <translation type="unfinished">Boxtyp auswählen:</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="193"/>
@@ -234,14 +237,17 @@
     <name>CFilesPage</name>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="287"/>
-        <source>Sandbox location and behavioure</source>
-        <translation>Sandboxspeicherort und Verhalten</translation>
+        <source>Sandbox location and behavior</source>
+        <oldsource>Sandbox location and behavioure</oldsource>
+        <translation type="unfinished">Sandboxspeicherort und Verhalten</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="288"/>
-        <source>On this page the sandbox location and its behaviorue can be customized.
-You can use %USER% to save each users sandbox to an own fodler.</source>
-        <translation>Auf dieser Seite können der Sandboxspeicherort und deren Verhalten angepasst werden.
+        <source>On this page the sandbox location and its behavior can be customized.
+You can use %USER% to save each users sandbox to an own folder.</source>
+        <oldsource>On this page the sandbox location and its behaviorue can be customized.
+You can use %USER% to save each users sandbox to an own fodler.</oldsource>
+        <translation type="unfinished">Auf dieser Seite können der Sandboxspeicherort und deren Verhalten angepasst werden.
 Sie können %USER% verwenden, um für jedem Benuzter die Sandbox in einen eigenen Ordner zu speichern.</translation>
     </message>
     <message>
@@ -291,18 +297,21 @@ Sie können %USER% verwenden, um für jedem Benuzter die Sandbox in einen eigene
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="387"/>
-        <source>The sellected box location is not a valid path.</source>
-        <translation>Der ausgewählte Boxspeicherort ist kein gültiger Pfad.</translation>
+        <source>The selected box location is not a valid path.</source>
+        <oldsource>The sellected box location is not a valid path.</oldsource>
+        <translation type="unfinished">Der ausgewählte Boxspeicherort ist kein gültiger Pfad.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="392"/>
-        <source>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
-        <translation>Der ausgewählte Boxspeicherort existiert und ist nicht leer, es wird empfohlen einen neuen oder leeren Ordner auszuwählen. Sind Sie sicher, dass Sie einen existierenden Ordner verwenden möchten?</translation>
+        <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
+        <oldsource>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</oldsource>
+        <translation type="unfinished">Der ausgewählte Boxspeicherort existiert und ist nicht leer, es wird empfohlen einen neuen oder leeren Ordner auszuwählen. Sind Sie sicher, dass Sie einen existierenden Ordner verwenden möchten?</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="397"/>
-        <source>The sellected box location not placed on a currently available drive.</source>
-        <translation>Der ausgewählte Boxspeicherort befindet sich auf einem momentan nicht verfügbaren Laufwerk.</translation>
+        <source>The selected box location not placed on a currently available drive.</source>
+        <oldsource>The sellected box location not placed on a currently available drive.</oldsource>
+        <translation type="unfinished">Der ausgewählte Boxspeicherort befindet sich auf einem momentan nicht verfügbaren Laufwerk.</translation>
     </message>
 </context>
 <context>
@@ -460,8 +469,9 @@ Sie können %USER% verwenden, um für jedem Benuzter die Sandbox in einen eigene
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="126"/>
-        <source>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you expirience any unecpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure groupe.</source>
-        <translation>Die neue Sandbox wurde mit dem neuen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualisierungsschema Version 2&lt;/a&gt; erzeugt. Falls Sie unerwartete Probleme mit dieser Box haben, wechseln Sie bitte zum Virtualisierungsschema Version 1 und berichten Sie von den Problemen. Die Option zum Ändern der Vorlage kann in den Boxoptionem, in der Gruppe Boxstruktur, gefunden werden.</translation>
+        <source>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you experience any unexpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure group.</source>
+        <oldsource>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you expirience any unecpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure groupe.</oldsource>
+        <translation type="unfinished">Die neue Sandbox wurde mit dem neuen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualisierungsschema Version 2&lt;/a&gt; erzeugt. Falls Sie unerwartete Probleme mit dieser Box haben, wechseln Sie bitte zum Virtualisierungsschema Version 1 und berichten Sie von den Problemen. Die Option zum Ändern der Vorlage kann in den Boxoptionem, in der Gruppe Boxstruktur, gefunden werden.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="129"/>
@@ -2664,10 +2674,13 @@ Möchten Sie die Bereinigung durchführen?</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="173"/>
-        <source>The file %1 failed a security check, do you want to recover it anyways?<byte value="xd"/>
+        <source>The file %1 failed a security check, do you want to recover it anyway?<byte value="xd"/>
 <byte value="xd"/>
 %2</source>
-        <translation>Die Datei %1 scheiterte an einer Sicherheitsprüfung, möchten Sie diese trotzdem wiederherstellen?<byte value="xd"/>
+        <oldsource>The file %1 failed a security check, do you want to recover it anyways?<byte value="xd"/>
+<byte value="xd"/>
+%2</oldsource>
+        <translation type="unfinished">Die Datei %1 scheiterte an einer Sicherheitsprüfung, möchten Sie diese trotzdem wiederherstellen?<byte value="xd"/>
 <byte value="xd"/>%2</translation>
     </message>
     <message>
@@ -3129,9 +3142,11 @@ Möchten Sie die Bereinigung durchführen?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2793"/>
-        <source>You are about to edit the Templates.ini, thsi is generally not recommeded.
-This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.</source>
-        <translation>Sie sind im Begriff die Templates.ini zu bearbeiten, was grundsätzlich nicht empfohlen wird.
+        <source>You are about to edit the Templates.ini, this is generally not recommended.
+This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
+        <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
+This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.</oldsource>
+        <translation type="unfinished">Sie sind im Begriff die Templates.ini zu bearbeiten, was grundsätzlich nicht empfohlen wird.
 		Diese Datei ist Teil von Sandboxie und alle vorgenommenen Änderungen an der Datei werden zurückgesetzt, wenn Sandboxie aktualisiert wird.</translation>
     </message>
     <message>
@@ -3960,8 +3975,9 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1457"/>
-        <source>Do you want to %1 %2?</source>
-        <translation>Möchten Sie %1 %2?</translation>
+        <source>Do you want to terminate %1?</source>
+        <oldsource>Do you want to %1 %2?</oldsource>
+        <translation type="unfinished">Möchten Sie %1 %2?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1457"/>
@@ -4588,8 +4604,10 @@ This Sandbox will be saved to: %1</source>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="544"/>
         <source>
-This box&apos;s content will be DISCARDED when its closed, and the box will be removed.</source>
-        <translation>Der Inhalt dieser Box wird VERWORFEN, wenn diese geschlossen wird und die Box wird entfernt.</translation>
+This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
+        <oldsource>
+This box&apos;s content will be DISCARDED when its closed, and the box will be removed.</oldsource>
+        <translation type="unfinished">Der Inhalt dieser Box wird VERWORFEN, wenn diese geschlossen wird und die Box wird entfernt.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="546"/>

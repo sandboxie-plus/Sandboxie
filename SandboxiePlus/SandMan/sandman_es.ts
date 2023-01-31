@@ -35,13 +35,15 @@
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="435"/>
-        <source>Allow access to network files and fodlers</source>
+        <source>Allow access to network files and folders</source>
+        <oldsource>Allow access to network files and fodlers</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="436"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="452"/>
-        <source>This option is not recomended for Hardened boxes</source>
+        <source>This option is not recommended for Hardened boxes</source>
+        <oldsource>This option is not recomended for Hardened boxes</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -84,7 +86,8 @@
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="190"/>
-        <source>Sellect box type:</source>
+        <source>Select box type:</source>
+        <oldsource>Sellect box type:</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -234,13 +237,16 @@
     <name>CFilesPage</name>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="287"/>
-        <source>Sandbox location and behavioure</source>
+        <source>Sandbox location and behavior</source>
+        <oldsource>Sandbox location and behavioure</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="288"/>
-        <source>On this page the sandbox location and its behaviorue can be customized.
-You can use %USER% to save each users sandbox to an own fodler.</source>
+        <source>On this page the sandbox location and its behavior can be customized.
+You can use %USER% to save each users sandbox to an own folder.</source>
+        <oldsource>On this page the sandbox location and its behaviorue can be customized.
+You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -290,17 +296,20 @@ You can use %USER% to save each users sandbox to an own fodler.</source>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="387"/>
-        <source>The sellected box location is not a valid path.</source>
+        <source>The selected box location is not a valid path.</source>
+        <oldsource>The sellected box location is not a valid path.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="392"/>
-        <source>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
+        <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
+        <oldsource>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="397"/>
-        <source>The sellected box location not placed on a currently available drive.</source>
+        <source>The selected box location not placed on a currently available drive.</source>
+        <oldsource>The sellected box location not placed on a currently available drive.</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -455,7 +464,8 @@ You can use %USER% to save each users sandbox to an own fodler.</source>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="126"/>
-        <source>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you expirience any unecpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure groupe.</source>
+        <source>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you experience any unexpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure group.</source>
+        <oldsource>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you expirience any unecpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure groupe.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2678,8 +2688,10 @@ Esta caja previene el acceso a todas las ubicaciones de datos de usaurio, expect
     </message>
     <message>
         <location filename="SandMan.cpp" line="2793"/>
-        <source>You are about to edit the Templates.ini, thsi is generally not recommeded.
-This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.</source>
+        <source>You are about to edit the Templates.ini, this is generally not recommended.
+This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
+        <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
+This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2903,9 +2915,12 @@ NO seleccionará: %2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="173"/>
-        <source>The file %1 failed a security check, do you want to recover it anyways?<byte value="xd"/>
+        <source>The file %1 failed a security check, do you want to recover it anyway?<byte value="xd"/>
 <byte value="xd"/>
 %2</source>
+        <oldsource>The file %1 failed a security check, do you want to recover it anyways?<byte value="xd"/>
+<byte value="xd"/>
+%2</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4044,8 +4059,9 @@ NO seleccionará: %2</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1457"/>
-        <source>Do you want to %1 %2?</source>
-        <translation>Usted quiere %1 %2?</translation>
+        <source>Do you want to terminate %1?</source>
+        <oldsource>Do you want to %1 %2?</oldsource>
+        <translation type="unfinished">Usted quiere %1 %2?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1457"/>
@@ -4494,7 +4510,9 @@ This Sandbox will be saved to: %1</source>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="544"/>
         <source>
-This box&apos;s content will be DISCARDED when its closed, and the box will be removed.</source>
+This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
+        <oldsource>
+This box&apos;s content will be DISCARDED when its closed, and the box will be removed.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

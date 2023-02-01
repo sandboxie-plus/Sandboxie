@@ -968,6 +968,7 @@ QString CSbieView::AddNewBox(bool bAlowTemp)
 
 	if (bVintage) {
 		CNewBoxWindow NewBoxWindow(this);
+		connect(theGUI, SIGNAL(Closed()), &NewBoxWindow, SLOT(close()));
 		if (NewBoxWindow.exec() == 1)
 			BoxName = NewBoxWindow.m_Name;
 	}
@@ -1200,6 +1201,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		CSnapshotsWindow* pSnapshotsWindow = SnapshotWindows.value(pBox.data());
 		if (pSnapshotsWindow == NULL) {
 			pSnapshotsWindow = new CSnapshotsWindow(SandBoxes.first(), this);
+			connect(theGUI, SIGNAL(Closed()), pSnapshotsWindow, SLOT(close()));
 			SnapshotWindows.insert(pBox.data(), pSnapshotsWindow);
 			connect(pSnapshotsWindow, &CSnapshotsWindow::Closed, [this, pBox]() {
 				SnapshotWindows.remove(pBox.data());
@@ -1541,6 +1543,7 @@ void CSbieView::ShowOptions(const CSandBoxPtr& pBox)
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 	if (pBoxEx->m_pOptionsWnd == NULL) {
 		pBoxEx->m_pOptionsWnd = new COptionsWindow(pBox, pBox->GetName());
+		connect(theGUI, SIGNAL(Closed()), pBoxEx->m_pOptionsWnd, SLOT(close()));
 		connect(pBoxEx->m_pOptionsWnd, &COptionsWindow::Closed, [pBoxEx]() {
 			pBoxEx->m_pOptionsWnd = NULL;
 		});
@@ -1563,6 +1566,7 @@ void CSbieView::ShowBrowse(const CSandBoxPtr& pBox)
 	CFileBrowserWindow* pFileBrowserWindow = FileBrowserWindows.value(pBox.data());
 	if (pFileBrowserWindow == NULL) {
 		pFileBrowserWindow = new CFileBrowserWindow(pBox);
+		connect(theGUI, SIGNAL(Closed()), pFileBrowserWindow, SLOT(close()));
 		FileBrowserWindows.insert(pBox.data(), pFileBrowserWindow);
 		connect(pFileBrowserWindow, &CFileBrowserWindow::Closed, [this, pBox]() {
 			FileBrowserWindows.remove(pBox.data());

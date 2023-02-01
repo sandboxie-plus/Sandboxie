@@ -34,6 +34,7 @@ bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool
 	}
 
 	CRecoveryWindow* pRecoveryWnd = pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox, false, this);
+	connect(this, SIGNAL(Closed()), pBoxEx->m_pRecoveryWnd, SLOT(close()));
 	if (pBoxEx->m_pRecoveryWnd->FindFiles() == 0 && bCloseEmpty) {
 		delete pBoxEx->m_pRecoveryWnd;
 		pBoxEx->m_pRecoveryWnd = NULL;
@@ -56,6 +57,7 @@ CRecoveryWindow* CSandMan::ShowRecovery(const CSandBoxPtr& pBox, bool bFind)
 	if (!pBoxEx) return NULL;
 	if (pBoxEx->m_pRecoveryWnd == NULL) {
 		pBoxEx->m_pRecoveryWnd = new CRecoveryWindow(pBox, bFind == false);
+		connect(this, SIGNAL(Closed()), pBoxEx->m_pRecoveryWnd, SLOT(close()));
 		connect(pBoxEx->m_pRecoveryWnd, &CRecoveryWindow::Closed, [pBoxEx]() {
 			pBoxEx->m_pRecoveryWnd = NULL;
 		});

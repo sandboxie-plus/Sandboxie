@@ -82,6 +82,8 @@ public:
 signals:
 	void				CertUpdated();
 
+	void				Closed();
+
 protected:
 	friend class COnlineUpdater;
 	SB_RESULT(void*)	ConnectSbie();

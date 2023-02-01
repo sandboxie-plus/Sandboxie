@@ -37,14 +37,14 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="435"/>
         <source>Allow access to network files and folders</source>
         <oldsource>Allow access to network files and fodlers</oldsource>
-        <translation type="unfinished">Ağ dosyalarına ve klasörlerine erişime izin ver</translation>
+        <translation>Ağ dosyalarına ve klasörlerine erişime izin ver</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="436"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="452"/>
         <source>This option is not recommended for Hardened boxes</source>
         <oldsource>This option is not recomended for Hardened boxes</oldsource>
-        <translation type="unfinished">Güçlendirilmiş alanlar için bu seçenek önerilmez</translation>
+        <translation>Güçlendirilmiş alanlar için bu seçenek önerilmez</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="442"/>
@@ -77,6 +77,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="172"/>
         <source>Enter box name:</source>
+        <translatorcomment>&apos;Sandbox&apos; için &apos;Korumalı Alan&apos; kullanıldığından dolayı &apos;Box&apos; için de &apos;Alan&apos; kullanıldı.</translatorcomment>
         <translation>Alan adı girin:</translation>
     </message>
     <message>
@@ -88,7 +89,7 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="190"/>
         <source>Select box type:</source>
         <oldsource>Sellect box type:</oldsource>
-        <translation type="unfinished">Alan türü seçin:</translation>
+        <translation>Alan türü seçin:</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="193"/>
@@ -219,7 +220,7 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="287"/>
         <source>Sandbox location and behavior</source>
         <oldsource>Sandbox location and behavioure</oldsource>
-        <translation type="unfinished">Korumalı Alan Konumu ve Davranışı</translation>
+        <translation>Korumalı Alan Konumu ve Davranışı</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="288"/>
@@ -227,7 +228,7 @@
 You can use %USER% to save each users sandbox to an own folder.</source>
         <oldsource>On this page the sandbox location and its behaviorue can be customized.
 You can use %USER% to save each users sandbox to an own fodler.</oldsource>
-        <translation type="unfinished">Bu sayfadan korumalı alan konumu ve davranışı özelleştirilebilir.
+        <translation>Bu sayfadan korumalı alan konumu ve davranışı özelleştirilebilir.
 Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER% kullanabilirsiniz.</translation>
     </message>
     <message>
@@ -279,19 +280,19 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
         <location filename="Wizards/NewBoxWizard.cpp" line="387"/>
         <source>The selected box location is not a valid path.</source>
         <oldsource>The sellected box location is not a valid path.</oldsource>
-        <translation type="unfinished">Seçilen alan konumu geçerli bir yol değil.</translation>
+        <translation>Seçilen alan konumu geçerli bir yol değil.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="392"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
         <oldsource>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</oldsource>
-        <translation type="unfinished">Seçilen alan konumu var ve boş değil, yeni veya boş bir klasör seçmeniz önerilir. Mevcut bir klasörü kullanmak istediğinizden emin misiniz?</translation>
+        <translation>Seçilen alan konumu var ve boş değil, yeni veya boş bir klasör seçmeniz önerilir. Mevcut bir klasörü kullanmak istediğinizden emin misiniz?</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="397"/>
         <source>The selected box location not placed on a currently available drive.</source>
         <oldsource>The sellected box location not placed on a currently available drive.</oldsource>
-        <translation type="unfinished">Seçilen alan konumu şu anda kullanılabilir bir sürücüye yerleştirilmemiş.</translation>
+        <translation>Seçilen alan konumu şu anda kullanılabilir bir sürücüye yerleştirilmemiş.</translation>
     </message>
 </context>
 <context>
@@ -435,7 +436,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
         <location filename="Wizards/NewBoxWizard.cpp" line="126"/>
         <source>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you experience any unexpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure group.</source>
         <oldsource>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you expirience any unecpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure groupe.</oldsource>
-        <translation type="unfinished">Yeni korumalı alan, yeni &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Sanallaştırma Şeması Sürüm 2&lt;/a&gt; kullanılarak oluşturulmuştur. Bu alanla ilgili herhangi bir beklenmeyen sorunla karşılaşırsanız, lütfen Sanallaştırma Şeması Sürüm 1&apos;e geçip sorunu bize bildirin. Bu ön ayarı değiştirmek için Alan Seçenekleri sayfasındaki Dosya Seçenekleri grubunda bulunan Alan Yapısı bölümüne bakabilirsiniz.</translation>
+        <translation>Yeni korumalı alan, yeni &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Sanallaştırma Şeması Sürüm 2&lt;/a&gt; kullanılarak oluşturulmuştur. Bu alanla ilgili herhangi bir beklenmeyen sorunla karşılaşırsanız, lütfen Sanallaştırma Şeması Sürüm 1&apos;e geçip sorunu bize bildirin. Bu ön ayarı değiştirmek için Alan Seçenekleri sayfasındaki Dosya Seçenekleri grubunda bulunan Alan Yapısı bölümüne bakabilirsiniz.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="129"/>
@@ -2000,7 +2001,7 @@ Tam yol: %4</translation>
         <oldsource>The file %1 failed a security check, do you want to recover it anyways?<byte value="xd"/>
 <byte value="xd"/>
 %2</oldsource>
-        <translation type="unfinished">%1 dosyası için güvenlik denetimi başarısız oldu, dosyayı yine de kurtarmak istiyor musunuz?
+        <translation>%1 dosyası için güvenlik denetimi başarısız oldu, dosyayı yine de kurtarmak istiyor musunuz?
 
 %2</translation>
     </message>
@@ -2369,7 +2370,7 @@ Tam yol: %4</translation>
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
 This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.</oldsource>
-        <translation type="unfinished">Templates.ini dosyasını düzenlemek üzeresiniz, bu genellikle önerilmez. Bu dosya Sandboxie&apos;nin bir parçasıdır ve üzerinde yapılan tüm değişiklikler Sandboxie güncellendiğinde kaybolacaktır.</translation>
+        <translation>Templates.ini dosyasını düzenlemek üzeresiniz, bu genellikle önerilmez. Bu dosya Sandboxie&apos;nin bir parçasıdır ve üzerinde yapılan tüm değişiklikler Sandboxie güncellendiğinde kaybolacaktır.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2809"/>
@@ -2949,7 +2950,7 @@ Hayır şunları seçer: %2</translation>
         <location filename="SandMan.cpp" line="3250"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</source>
         <oldsource>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</oldsource>
-        <translation type="unfinished">&lt;h3&gt;Sandboxie-Plus hakkında&lt;/h3&gt;&lt;p&gt;Sürüm %1&lt;/p&gt;&lt;p&gt;Telif hakkı (c) 2020-2023, DavidXanatos&lt;/p&gt;</translation>
+        <translation>&lt;h3&gt;Sandboxie-Plus hakkında&lt;/h3&gt;&lt;p&gt;Sürüm %1&lt;/p&gt;&lt;p&gt;Telif hakkı (c) 2020-2023, DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2174"/>
@@ -3758,7 +3759,7 @@ Hayır şunları seçer: %2</translation>
         <location filename="Views/SbieView.cpp" line="1457"/>
         <source>Do you want to terminate %1?</source>
         <oldsource>Do you want to %1 %2?</oldsource>
-        <translation type="unfinished">%1 %2 istiyor musunuz?</translation>
+        <translation>%1 %2 istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1457"/>
@@ -4256,7 +4257,7 @@ Bu Korumalı Alan şuraya kaydedilecek: %1</translation>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
         <oldsource>
 This box&apos;s content will be DISCARDED when its closed, and the box will be removed.</oldsource>
-        <translation type="unfinished">
+        <translation>
 Bu alandaki son işlem sona erdikten sonra alanın içeriği ATILACAKTIR ve alan kaldırılacaktır.</translation>
     </message>
     <message>
@@ -4691,7 +4692,7 @@ Bu alandaki işlemler, aslında yönetici ayrıcalıklarına sahip olmadan, yön
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4089"/>
         <source>Debug</source>
-        <translation>Hata ayıklama</translation>
+        <translation>Hata Ayıklama</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3721"/>
@@ -4720,7 +4721,7 @@ Bu alandaki işlemler, aslında yönetici ayrıcalıklarına sahip olmadan, yön
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3955"/>
         <source>Log Debug Output to the Trace Log</source>
-        <translation>İzleme Günlüğünde Hata Ayıklamayı kaydet</translation>
+        <translation>Hata Ayıklama Çıktısını İzleme Günlüğüne Kaydet</translation>
     </message>
     <message>
         <source>Forced Programs</source>
@@ -4782,7 +4783,7 @@ Lider işlemler tanımlanırsa, diğer tüm işlemler oyalayıcı işlemler olar
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4155"/>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
-        <translation>Bu seçenekler uyumluluk sorunlarını gidermek için tasarlanmıştır, lütfen bunları üretim kullanımında kullanmayın. </translation>
+        <translation>Bu seçenekler uyumluluk sorunlarındaki hataları ayıklamaya yönelik tasarlanmıştır, lütfen bu ayarları üretim amaçlı kullanmayın. </translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4180"/>
@@ -5030,14 +5031,14 @@ You can customize the logging using the ini by specifying
 &quot;D&quot; - Denied accesses
 &quot;I&quot; - Ignore access requests
 instead of &quot;*&quot;.</source>
-        <translation>Sürücü tarafından görülen tüm erişim olaylarını kaynak erişim günlüğüne kaydet.
+        <translation>Tüm erişim olaylarını sürücü tarafından görüldüğü gibi kaynak erişim günlüğüne kaydet.
 
 Bu seçenekler olay maskesini &quot;*&quot; olarak ayarlar - Tüm erişim olayları
-Ini kullanarak günlüğe kaydetmeyi özelleştirebilirsiniz.
+Ini dosyasından &quot;*&quot; yerine aşağıdakiler belirtilerek
+günlüğe kaydetme özelleştirilebilir.
 &quot;A&quot; - İzin verilen erişim(ler)
 &quot;D&quot; - Reddedilen erişim(ler)
-&quot;I&quot; - Yok sayılan erişim(ler)
-&quot;*&quot; yerine.</translation>
+&quot;I&quot; - Yok sayılan erişim(ler).</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="221"/>
@@ -5062,7 +5063,7 @@ Ini kullanarak günlüğe kaydetmeyi özelleştirebilirsiniz.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4145"/>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
-        <translation>UYARI, bu seçenekler temel güvenlik garantilerini devre dışı bırakabilir ve korumalı alan güvenliğini bozabilir!!!</translation>
+        <translation>UYARI, bu seçenekler temel güvenlik garantilerini devre dışı bırakabilir ve korumalı alan güvenliğini bozabilir!</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4461"/>
@@ -5677,12 +5678,12 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3935"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
-        <translation>Tüm SetError&apos;ları İzleme günlüğüne kaydet (çok fazla çıktı oluşturur)</translation>
+        <translation>Tüm SetError Mesajlarını İzleme Günlüğüne Kaydet (Çok fazla çıktı oluşturur)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3982"/>
         <source>Ntdll syscall Trace (creates a lot of output)</source>
-        <translation>Ntdll syscall İzleme (çok fazla çıktı oluşturur)</translation>
+        <translation>Ntdll Syscall İzleme (Çok fazla çıktı oluşturur)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="467"/>
@@ -5774,7 +5775,7 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3996"/>
         <source>Disable Resource Access Monitor</source>
-        <translation>Kaynak Erişim İzleyicisini devre dışı bırak</translation>
+        <translation>Kaynak Erişim İzleyicisini Devre Dışı Bırak</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4024"/>

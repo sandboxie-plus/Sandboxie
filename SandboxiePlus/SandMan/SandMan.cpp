@@ -2787,11 +2787,11 @@ void CSandMan::OnEditIni()
 	bool bPlus;
 	if (bPlus = (ini == "plus"))
 	{
-		IniPath = QString(theConf->GetConfigDir() + "/Sandboxie-Plus.ini").replace("/", "\\").toStdWString();
+		IniPath = L"\"" + QString(theConf->GetConfigDir() + "/Sandboxie-Plus.ini").replace("/", "\\").toStdWString() + L"\"";
 	}
 	else if (ini == "tmpl")
 	{
-		IniPath = (theAPI->GetSbiePath() + "\\Templates.ini").toStdWString();
+		IniPath = L"\"" + (theAPI->GetSbiePath() + "\\Templates.ini").toStdWString() + L"\"";
 
 		if (theConf->GetBool("Options/NoEditWarn", true)) {
 			bool State = false;
@@ -2806,7 +2806,7 @@ void CSandMan::OnEditIni()
 	}
 	else //if (ini == "sbie")
 	{
-		IniPath = theAPI->GetIniPath().toStdWString();
+		IniPath = L"\"" + theAPI->GetIniPath().toStdWString() + L"\"";
 
 		if (theConf->GetBool("Options/NoEditInfo", true)) {
 			bool State = false;

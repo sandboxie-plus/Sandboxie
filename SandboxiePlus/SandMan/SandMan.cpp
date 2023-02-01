@@ -1366,7 +1366,7 @@ void CSandMan::dropEvent(QDropEvent* e)
 			Commands.append(url.toLocalFile().replace("/", "\\"));
 	}
 
-	RunSandboxed(Commands);
+	QTimer::singleShot(0, this, [Commands, this]() { RunSandboxed(Commands); });
 }
 
 void CSandMan::timerEvent(QTimerEvent* pEvent)

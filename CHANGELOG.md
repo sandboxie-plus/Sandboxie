@@ -5,6 +5,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.7.2 / 5.62.2] - 2023-02-??
+
+### Changed
+- reorganized box options once again, old box layout is default again
+
+### Fixed
+- fixed delete v1/v2 display now respects global presets
+- Avoid blocking the Explorer when dragging [#2660](https://github.com/sandboxie-plus/Sandboxie/pull/2660)
+- fixed issue with QtSingleApp [#2659](https://github.com/sandboxie-plus/Sandboxie/issues/2659)
+
+
+
+
 
 ## [1.7.1 / 5.62.1] - 2023-01-30
 

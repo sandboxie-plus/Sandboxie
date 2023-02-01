@@ -232,7 +232,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
 	int iOptionLayout = theConf->GetInt("Options/NewConfigLayout", 2);
 	if (iOptionLayout == 2)
-		iOptionLayout = iViewMode != 2 ? 1 : 0;
+		iOptionLayout = 0;// iViewMode != 2 ? 1 : 0;
 
 	if ((QGuiApplication::queryKeyboardModifiers() & Qt::AltModifier) != 0)
 		iOptionLayout = !iOptionLayout;
@@ -241,6 +241,34 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	pDummy->setVisible(false);
 
 	ui.tabs->removeTab(9); // remove unused variouse options tab
+
+	// merge recovery tabs
+	QWidget* pWidget3 = new QWidget();
+	pWidget3->setLayout(ui.gridLayout_10);
+	ui.gridLayout_24->addWidget(pWidget3, 1, 0);
+	QWidget* pWidget4 = new QWidget();
+	pWidget4->setLayout(ui.gridLayout_56);
+	ui.gridLayout_24->addWidget(pWidget4, 2, 0);
+	delete ui.tabsRecovery;
+	ui.gridLayout_24->setContentsMargins(0, 0, 0, 0);
+
+	// collect file options on a new fils tab
+
+	QWidget* pWidget = new QWidget();
+	QGridLayout* pLayout = new QGridLayout(pWidget);
+
+	QTabWidget* pTabWidget = new QTabWidget();
+	pLayout->addWidget(pTabWidget, 0, 0);
+	ui.tabs->insertTab(1, pWidget, tr("File Options"));
+	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Folder"));
+
+	pTabWidget->addTab(ui.tabsGeneral->widget(1), ui.tabsGeneral->tabText(1));
+	pTabWidget->setTabIcon(0, CSandMan::GetIcon("Files"));
+	pTabWidget->addTab(ui.tabsGeneral->widget(1), ui.tabsGeneral->tabText(1));
+	pTabWidget->setTabIcon(1, CSandMan::GetIcon("Move"));
+	pTabWidget->addTab(ui.tabs->widget(9), ui.tabs->tabText(9));
+	pTabWidget->setTabIcon(2, CSandMan::GetIcon("Recover"));
+	//
 
 	// re structure the UI a bit
 	if (iOptionLayout == 1)
@@ -256,41 +284,11 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		ui.gridLayout_17->setContentsMargins(0, 0, 0, 0);
 
 		// move stop and restrictions to program tab
-		ui.tabsForce->addTab(ui.tabs->widget(4), ui.tabs->tabText(4));
+		ui.tabsForce->addTab(ui.tabs->widget(5), ui.tabs->tabText(5));
 		ui.tabsForce->setTabIcon(2, CSandMan::GetIcon("Stop"));
-		ui.tabsForce->addTab(ui.tabs->widget(4), ui.tabs->tabText(4));
+		ui.tabsForce->addTab(ui.tabs->widget(5), ui.tabs->tabText(5));
 		ui.tabsForce->setTabIcon(3, CSandMan::GetIcon("Start"));
 		ui.gridLayout_19->setContentsMargins(3, 6, 3, 3);
-
-		// merge recovery tabs
-		QWidget* pWidget3 = new QWidget();
-		pWidget3->setLayout(ui.gridLayout_10);
-		ui.gridLayout_24->addWidget(pWidget3, 1, 0);
-		QWidget* pWidget4 = new QWidget();
-		pWidget4->setLayout(ui.gridLayout_56);
-		ui.gridLayout_24->addWidget(pWidget4, 2, 0);
-		delete ui.tabsRecovery;
-		ui.gridLayout_24->setContentsMargins(0, 0, 0, 0);
-
-		QWidget* pWidget = new QWidget();
-		QGridLayout* pLayout = new QGridLayout(pWidget);
-
-		// move recovery to general
-		//ui.tabsGeneral->insertTab(2, ui.tabs->widget(6), ui.tabs->tabText(6));
-		//ui.tabsGeneral->setTabIcon(2, CSandMan::GetIcon("Recover"));
-
-		// collect file options on a new fils tab
-		QTabWidget* pTabWidget = new QTabWidget();
-		pLayout->addWidget(pTabWidget, 0, 0);
-		ui.tabs->insertTab(1, pWidget, tr("File Options"));
-		ui.tabs->setTabIcon(1, CSandMan::GetIcon("Folder"));
-
-		pTabWidget->addTab(ui.tabsGeneral->widget(1), ui.tabsGeneral->tabText(1));
-		pTabWidget->setTabIcon(0, CSandMan::GetIcon("Files"));
-		pTabWidget->addTab(ui.tabsGeneral->widget(1), ui.tabsGeneral->tabText(1));
-		pTabWidget->setTabIcon(1, CSandMan::GetIcon("Move"));
-		pTabWidget->addTab(ui.tabs->widget(7), ui.tabs->tabText(7));
-		pTabWidget->setTabIcon(2, CSandMan::GetIcon("Recover"));
 
 		// move grouping to program tab
 		ui.tabsForce->insertTab(0, ui.tabGroups, tr("Grouping"));

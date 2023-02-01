@@ -182,7 +182,7 @@ void QtLocalPeer::receiveConnection()
     if (!socket)
         return;
 
-    while (socket->bytesAvailable() < (int)sizeof(quint32))
+    while (socket->bytesAvailable() < (int)sizeof(quint32) && socket->state() == QLocalSocket::ConnectedState)
         socket->waitForReadyRead();
     QDataStream ds(socket);
     QByteArray uMsg;

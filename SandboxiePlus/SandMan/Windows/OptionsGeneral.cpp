@@ -277,9 +277,11 @@ void COptionsWindow::LoadGeneral()
 	if (pos == -1) ui.cmbDblClick->setCurrentText(Action);
 
 
-	if (m_pBox->GetBool("UseFileDeleteV2", false) && m_pBox->GetBool("UseRegDeleteV2", false))
+	bool bUseFileDeleteV2Global = theAPI->GetGlobalSettings()->GetBool("UseFileDeleteV2", false);
+	bool bUseRegDeleteV2Global = theAPI->GetGlobalSettings()->GetBool("UseRegDeleteV2", false);
+	if (m_pBox->GetBool("UseFileDeleteV2", bUseFileDeleteV2Global) && m_pBox->GetBool("UseRegDeleteV2", bUseRegDeleteV2Global))
 		ui.cmbVersion->setCurrentIndex(1);
-	else if (!m_pBox->GetBool("UseFileDeleteV2", false) && !m_pBox->GetBool("UseRegDeleteV2", false))
+	else if (!m_pBox->GetBool("UseFileDeleteV2", bUseFileDeleteV2Global) && !m_pBox->GetBool("UseRegDeleteV2", bUseRegDeleteV2Global))
 		ui.cmbVersion->setCurrentIndex(0);
 	else {
 		ui.cmbVersion->setEditable(true);
@@ -287,8 +289,8 @@ void COptionsWindow::LoadGeneral()
 		ui.cmbVersion->setCurrentText(tr("Indeterminate"));
 	}
 
-	ReadGlobalCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", true);
-	ReadGlobalCheck(ui.chkUseVolumeSerialNumbers, "UseVolumeSerialNumbers", false);
+	ReadGlobalCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", theAPI->GetGlobalSettings()->GetBool("SeparateUserFolders", true));
+	ReadGlobalCheck(ui.chkUseVolumeSerialNumbers, "UseVolumeSerialNumbers", theAPI->GetGlobalSettings()->GetBool("UseVolumeSerialNumbers", false));
 
 	int iLimit = m_pBox->GetNum("CopyLimitKb", 80 * 1024);
 	ui.chkCopyLimit->setChecked(iLimit != -1);

@@ -137,7 +137,7 @@ int main(int argc, char *argv[])
 
 	CSandMan* pWnd = new CSandMan();
 
-	QObject::connect(&app, SIGNAL(messageReceived(const QString&)), pWnd, SLOT(OnMessage(const QString&)));
+	QObject::connect(&app, SIGNAL(messageReceived(const QString&)), pWnd, SLOT(OnMessage(const QString&)), Qt::QueuedConnection);
 
 	int ret =  app.exec();
 

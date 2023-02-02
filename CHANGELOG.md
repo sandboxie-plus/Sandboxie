@@ -9,6 +9,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - reorganized box options once again, old box layout is default again
+- SBIE2227 indicating volume without 8.3 name support is now disabled by defualt
+-- Note: you can use "EnableVerboseChecks=y" to re enable this check
 
 ### Fixed
 - fixed delete v1/v2 display now respects global presets

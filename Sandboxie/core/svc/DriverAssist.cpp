@@ -590,29 +590,33 @@ BOOL VolHas8dot3Support(WCHAR* path)
 void DriverAssist::MountedHive(void *_msg)
 {
     SVC_REGHIVE_MSG *msg = (SVC_REGHIVE_MSG *)_msg;
-    NTSTATUS status;
-    ULONG len = 0;
-    WCHAR *path;
 
-    status = SbieApi_QueryBoxPath(msg->boxname, NULL, NULL, NULL, &len, NULL, NULL);
-    if (status != 0) return;
+    if (SbieApi_QueryConfBool(msg->boxname, L"EnableVerboseChecks", FALSE)) {
 
-    path = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, len + 16);
-    if (! path) return;
+        NTSTATUS status;
+        ULONG len = 0;
+        WCHAR* path;
 
-    status = SbieApi_QueryBoxPath(msg->boxname, path, NULL, NULL, &len, NULL, NULL);
-    if (status == 0 && wcslen(path) > 22) {
+        status = SbieApi_QueryBoxPath(msg->boxname, NULL, NULL, NULL, &len, NULL, NULL);
+        if (status != 0) return;
 
-        if (SbieDll_TranslateNtToDosPath(path)) {
+        path = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, len + 16);
+        if (!path) return;
 
-            if (!VolHas8dot3Support(path)) {
+        status = SbieApi_QueryBoxPath(msg->boxname, path, NULL, NULL, &len, NULL, NULL);
+        if (status == 0 && wcslen(path) > 22) {
 
-                SbieApi_LogEx(msg->session_id, 2227, L"%S (%S)", msg->boxname, path);
+            if (SbieDll_TranslateNtToDosPath(path)) {
+
+                if (!VolHas8dot3Support(path)) {
+
+                    SbieApi_LogEx(msg->session_id, 2227, L"%S (%S)", msg->boxname, path);
+                }
             }
         }
-    }
 
-    HeapFree(GetProcessHeap(), 0, path);
+        HeapFree(GetProcessHeap(), 0, path);
+    }
 }
 
 

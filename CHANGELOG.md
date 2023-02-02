@@ -16,7 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed delete v1/v2 display now respects global presets
 - Avoid blocking the Explorer when dragging [#2660](https://github.com/sandboxie-plus/Sandboxie/pull/2660)
 - fixed issue with QtSingleApp [#2659](https://github.com/sandboxie-plus/Sandboxie/issues/2659)
-
+- fixed updater sometimes failing to create temp dir [#2615](https://github.com/sandboxie-plus/Sandboxie/issues/2615)
 
 
 

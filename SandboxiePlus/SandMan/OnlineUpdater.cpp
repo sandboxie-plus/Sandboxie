@@ -63,7 +63,7 @@ COnlineUpdater::COnlineUpdater(QObject *parent) : QObject(parent)
 	bool bCanRunInstaller = OnNewRelease == "install";
 
 	bool bIsUpdateReady = false;
-	QVariantMap Update = QJsonDocument::fromJson(ReadFileAsString(GetUpdateDir(true) + "/" UPDATE_FILE).toUtf8()).toVariant().toMap();
+	QVariantMap Update = QJsonDocument::fromJson(ReadFileAsString(GetUpdateDir() + "/" UPDATE_FILE).toUtf8()).toVariant().toMap();
 	if (!Update.isEmpty()) {
 		int iUpdate = 0;
 		QString UpdateStr = ParseVersionStr(theConf->GetString("Updater/UpdateVersion"), &iUpdate);
@@ -352,7 +352,7 @@ bool COnlineUpdater::HandleUpdate()
 		{
 			bool bIsUpdateReady = false;
 			if (theConf->GetString("Updater/UpdateVersion") == MakeVersionStr(Update))
-				bIsUpdateReady = QFile::exists(GetUpdateDir(true) + "/" UPDATE_FILE);
+				bIsUpdateReady = QFile::exists(GetUpdateDir() + "/" UPDATE_FILE);
 
 			if (!bIsUpdateReady)
 			{
@@ -610,7 +610,7 @@ bool COnlineUpdater::ApplyUpdate(bool bSilent)
 			return false;
 	}
 
-	QVariantMap Update = QJsonDocument::fromJson(ReadFileAsString(GetUpdateDir(true) + "/" UPDATE_FILE).toUtf8()).toVariant().toMap();
+	QVariantMap Update = QJsonDocument::fromJson(ReadFileAsString(GetUpdateDir() + "/" UPDATE_FILE).toUtf8()).toVariant().toMap();
 	EUpdateScope Scope =  ScanUpdateFiles(Update);
 	if (Scope == eNone)
 		return true; // nothing to do
@@ -725,7 +725,7 @@ void COnlineUpdater::OnInstallerDownload()
 	if (Name.isEmpty() || Name.right(4).compare(".exe", Qt::CaseInsensitive) != 0)
 		Name = "Sandboxie-Plus-Install.exe";
 
-	QString FilePath = GetUpdateDir() + "/" + Name;
+	QString FilePath = GetUpdateDir(true) + "/" + Name;
 
 	QFile File(FilePath);
 	if (File.open(QFile::WriteOnly)) {

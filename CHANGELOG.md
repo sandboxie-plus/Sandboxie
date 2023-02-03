@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - reorganized box options once again, old box layout is default again
-- SBIE2227 indicating volume without 8.3 name support is now disabled by defualt
+- SBIE2227 indicating volume without 8.3 name support is now disabled by default
 -- Note: you can use "EnableVerboseChecks=y" to re enable this check
 
 ### Fixed
@@ -17,7 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Avoid blocking the Explorer when dragging [#2660](https://github.com/sandboxie-plus/Sandboxie/pull/2660)
 - fixed issue with QtSingleApp [#2659](https://github.com/sandboxie-plus/Sandboxie/issues/2659)
 - fixed updater sometimes failing to create temp dir [#2615](https://github.com/sandboxie-plus/Sandboxie/issues/2615)
-- fixed isue with snapshot removal [2663](https://github.com/sandboxie-plus/Sandboxie/issues/2663)
+- fixed issue with snapshot removal [2663](https://github.com/sandboxie-plus/Sandboxie/issues/2663)
 
 
 
@@ -36,7 +36,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - refactored network blocking code in driver
-- box options now show the expanded paths where apropriate
+- box options now show the expanded paths where appropriate
 - made new box option layout the default (can be changed back in appearance settings)
 
 ### Fixed

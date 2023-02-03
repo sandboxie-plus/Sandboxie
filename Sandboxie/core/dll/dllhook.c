@@ -1115,7 +1115,7 @@ void* SbieDll_Hook_arm(
 #endif
 
         //
-        // write branche to jump entry
+        // write branch to jump entry
         //
 
         diff = (ULONG_PTR) & ((ULONG_PTR*)ptrVTable->offset)[ptrVTable->index];

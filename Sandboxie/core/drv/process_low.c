@@ -264,7 +264,7 @@ _FX NTSTATUS Process_Low_Api_InjectComplete(PROCESS *proc, ULONG64 *parms)
 
             //
             // the service synamically allocates a per box SID to be used,
-            // if no SID is provided thsi feature is eider disabled or failed
+            // if no SID is provided this feature is eider disabled or failed
             // then we fall back to using the default anonymous SID
             //
 
@@ -287,7 +287,7 @@ _FX NTSTATUS Process_Low_Api_InjectComplete(PROCESS *proc, ULONG64 *parms)
 
             //
             // the service tells us if we should drop admin rights for this process, 
-            // howeever if security mode is enabled we always drop admin rights
+            // however if security mode is enabled we always drop admin rights
             //
 
             proc->drop_rights = proc->use_security_mode || parms[3] != FALSE;

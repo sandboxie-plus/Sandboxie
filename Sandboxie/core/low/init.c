@@ -190,7 +190,7 @@ _FX NTSTATUS SbieApi_DebugError(SBIELOW_DATA* data, ULONG error)
 
     wchar_t text[] = { 'L','o','w','L','e','v','e','l',' ','E','r','r','o','r',':',' ','0','x',0,0,0,0,0,0,0,0,0,0};
 
-    // covert ulong to hex string and copy it into the message array
+    // convert ulong to hex string and copy it into the message array
     wchar_t* ptr = &text[18]; // point after L"...0x"
     wchar_t table[] = { '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F' };
     for(int i=28; i >= 0; i-=4)

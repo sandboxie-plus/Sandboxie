@@ -2277,7 +2277,7 @@ _FX NTSTATUS File_Api_RefreshPathList(PROCESS *proc, ULONG64 *parms)
     } else {
 
         //
-        // on failure purge the partialy cerated new set of path lists
+        // on failure purge the partially created new set of path lists
         //
 
 #ifdef USE_MATCH_PATH_EX

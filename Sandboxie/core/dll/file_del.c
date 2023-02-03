@@ -628,7 +628,7 @@ _FX BOOLEAN File_InitDelete_v2()
 
 _FX BOOLEAN File_MarkDeleted_internal(LIST* Root, const WCHAR* Path)
 {
-    // 1. remove deleted branche
+    // 1. remove deleted branch
 
     LIST* Parent = NULL;
     PATH_NODE* Node = File_FindPathBranche_internal(Root, Path, &Parent, FALSE);
@@ -722,7 +722,7 @@ _FX BOOLEAN File_HasDeleted_v2(const WCHAR* TruePath)
 
 _FX VOID File_SetRelocation_internal(LIST* Root, const WCHAR *OldTruePath, const WCHAR *NewTruePath)
 {
-    // 1. separate branche from OldTruePath
+    // 1. separate branch from OldTruePath
     
     LIST* Parent = NULL;
     PATH_NODE* Node = File_FindPathBranche_internal(Root, OldTruePath, &Parent, FALSE);
@@ -762,7 +762,7 @@ _FX VOID File_SetRelocation_internal(LIST* Root, const WCHAR *OldTruePath, const
     wcscpy(NewNode->relocation, OldTruePath);
     
 
-    // 5. reatach branche to NewTruePath
+    // 5. reatach branch to NewTruePath
 
     if (Node) {
         PATH_NODE* child = List_Head(&Node->items);

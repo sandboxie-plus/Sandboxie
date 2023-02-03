@@ -1513,7 +1513,7 @@ void CSandMan::OnBoxSelected()
 	}
 }
 
-SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, bool DeleteShapshots)
+SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, bool DeleteSnapshots)
 {
 	SB_STATUS Ret = SB_OK;
 	m_iDeletingContent++;
@@ -1541,7 +1541,7 @@ SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, boo
 	
 	{
 		SB_PROGRESS Status;
-		if (Mode != eForDelete && !DeleteShapshots && pBox->HasSnapshots()) { // in auto delete mode always return to last snapshot
+		if (Mode != eForDelete && !DeleteSnapshots && pBox->HasSnapshots()) { // in auto delete mode always return to last snapshot
 			QString Current;
 			QString Default = pBox->GetDefaultSnapshot(&Current);
 			Status = pBox->SelectSnapshot(Mode == eAuto ? Current : Default);
@@ -1730,9 +1730,9 @@ void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 	{
 		if (pBox->GetBool("AutoDelete", false))
 		{
-			bool DeleteShapshots = false;
+			bool DeleteSnapshots = false;
 			// if this box auto deletes first show the recovry dialog with the option to abort deletion
-			if (!theGUI->OpenRecovery(pBox, DeleteShapshots, true)) // unless no files are found than continue silently
+			if (!theGUI->OpenRecovery(pBox, DeleteSnapshots, true)) // unless no files are found than continue silently
 				return;
 
 			if (theConf->GetBool("Options/AutoBoxOpsNotify", false))
@@ -1741,11 +1741,11 @@ void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 			if (theConf->GetBool("Options/UseAsyncBoxOps", false) || IsSilentMode())
 			{
 				auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
-				SB_STATUS Status = pBoxEx->DeleteContentAsync(DeleteShapshots);
+				SB_STATUS Status = pBoxEx->DeleteContentAsync(DeleteSnapshots);
 				CheckResults(QList<SB_STATUS>() << Status);
 			}
 			else
-				DeleteBoxContent(pBox, eAuto, DeleteShapshots);
+				DeleteBoxContent(pBox, eAuto, DeleteSnapshots);
 		}
 	}
 }

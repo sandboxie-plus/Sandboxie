@@ -13,7 +13,7 @@ SB_PROGRESS CCleanUpJob::Start()
 	CSandBoxPlus* pBox = GetBox();
 
 	SB_PROGRESS Status;
-	if (!m_DeleteShapshots && pBox->HasSnapshots()) {
+	if (!m_DeleteSnapshots && pBox->HasSnapshots()) {
 		QString Current;
 		QString Default = pBox->GetDefaultSnapshot(&Current);
 		if (m_bOnAutoDelete) {

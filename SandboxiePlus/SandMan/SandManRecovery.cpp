@@ -23,7 +23,7 @@ void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, 
 		m_pPopUpWindow->AddFileToRecover(FilePath, BoxPath, pBox, ProcessId);
 }
 
-bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool bCloseEmpty)
+bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteSnapshots, bool bCloseEmpty)
 {
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 	if (!pBoxEx) return false;
@@ -47,7 +47,7 @@ bool CSandMan::OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool
 		if (pBoxEx->m_pRecoveryWnd->exec() != 1)
 			return false;
 	}
-	DeleteShapshots = pRecoveryWnd->IsDeleteShapshots();
+	DeleteSnapshots = pRecoveryWnd->IsDeleteSnapshots();
 	return true;
 }
 

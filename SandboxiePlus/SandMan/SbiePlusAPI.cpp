@@ -386,9 +386,9 @@ bool CSandBoxPlus::IsBoxexPath(const QString& Path)
 	return Path.left(m_FilePath.length()).compare(m_FilePath, Qt::CaseInsensitive) == 0;
 }
 
-bool CSandBoxPlus::IsFileDeleted(const QString& RealPath, const QString& Shapshot, const QStringList& SnapshotList, const QMap<QString, QList<QString>>& DeletedPaths)
+bool CSandBoxPlus::IsFileDeleted(const QString& RealPath, const QString& Snapshot, const QStringList& SnapshotList, const QMap<QString, QList<QString>>& DeletedPaths)
 {
-	int NextIndex = SnapshotList.indexOf(Shapshot) - 1;
+	int NextIndex = SnapshotList.indexOf(Snapshot) - 1;
 	if (NextIndex < 0) return false; // no newer snapshot
 
 	QString NewerSnapshot = SnapshotList.at(NextIndex);
@@ -893,7 +893,7 @@ int	CSandBoxPlus::IsLeaderProgram(const QString& ProgName)
 	return FindInStrList(Programs, ProgName) != Programs.end() ? 1 : 0; 
 }
 
-SB_STATUS CSandBoxPlus::DeleteContentAsync(bool DeleteShapshots, bool bOnAutoDelete)
+SB_STATUS CSandBoxPlus::DeleteContentAsync(bool DeleteSnapshots, bool bOnAutoDelete)
 {
 	if (GetBool("NeverDelete", false))
 		return SB_ERR(SB_DeleteProtect);
@@ -908,7 +908,7 @@ SB_STATUS CSandBoxPlus::DeleteContentAsync(bool DeleteShapshots, bool bOnAutoDel
 		AddJobToQueue(pJob);
 	}
 
-	CBoxJob* pJob = new CCleanUpJob(this, DeleteShapshots, bOnAutoDelete);
+	CBoxJob* pJob = new CCleanUpJob(this, DeleteSnapshots, bOnAutoDelete);
 	AddJobToQueue(pJob);
 
 	return SB_OK;

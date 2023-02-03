@@ -1317,7 +1317,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	}
 	else if (Action == m_pMenuCleanUp)
 	{
-		bool DeleteShapshots = false;
+		bool DeleteSnapshots = false;
 
 		if (SandBoxes.count() == 1)
 		{
@@ -1329,15 +1329,15 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			if (theConf->GetBool("Options/ShowRecovery", false))
 			{
 				// Use recovery dialog in place of the confirmation messagebox for box clean up
-				if(!theGUI->OpenRecovery(SandBoxes.first(), DeleteShapshots))
+				if(!theGUI->OpenRecovery(SandBoxes.first(), DeleteSnapshots))
 					return;
 			}
 			else if(CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Do you want to delete the content of the selected sandbox?")
-				, tr("Also delete all Snapshots"), &DeleteShapshots, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
+				, tr("Also delete all Snapshots"), &DeleteSnapshots, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
 					return;
 		}
 		else if(CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Do you really want to delete the content of all selected sandboxes?")
-			, tr("Also delete all Snapshots"), &DeleteShapshots, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
+			, tr("Also delete all Snapshots"), &DeleteSnapshots, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes) != QDialogButtonBox::Yes)
 				return;
 
 		foreach(const CSandBoxPtr &pBox, SandBoxes)
@@ -1345,13 +1345,13 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			if (theConf->GetBool("Options/UseAsyncBoxOps", false) || theGUI->IsSilentMode())
 			{
 				auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
-				SB_STATUS Status = pBoxEx->DeleteContentAsync(DeleteShapshots);
+				SB_STATUS Status = pBoxEx->DeleteContentAsync(DeleteSnapshots);
 				if (Status.IsError())
 					Results.append(Status);
 			}
 			else  
 			{
-				SB_STATUS Status = theGUI->DeleteBoxContent(pBox, CSandMan::eDefault, DeleteShapshots);
+				SB_STATUS Status = theGUI->DeleteBoxContent(pBox, CSandMan::eDefault, DeleteSnapshots);
 				if (Status.GetMsgCode() == SB_Canceled)
 					break;
 				Results.append(Status);

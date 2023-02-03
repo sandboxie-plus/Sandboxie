@@ -44,7 +44,7 @@ public:
 		eForDelete
 	};
 
-	SB_STATUS			DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, bool DeleteShapshots = true);
+	SB_STATUS			DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, bool DeleteSnapshots = true);
 
 	SB_STATUS			AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait = false, const QString& InitialMsg = QString());
 	static QString		FormatError(const SB_STATUS& Error);
@@ -154,7 +154,7 @@ public slots:
 	void				OnFileToRecover(const QString& BoxName, const QString& FilePath, const QString& BoxPath, quint32 ProcessId);
 	void				OnFileRecovered(const QString& BoxName, const QString& FilePath, const QString& BoxPath);
 
-	bool				OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteShapshots, bool bCloseEmpty = false);
+	bool				OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteSnapshots, bool bCloseEmpty = false);
 	class CRecoveryWindow*	ShowRecovery(const CSandBoxPtr& pBox, bool bFind = true);
 
 	void				UpdateSettings(bool bRebuildUI);

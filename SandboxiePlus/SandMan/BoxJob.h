@@ -32,9 +32,9 @@ class CCleanUpJob : public CBoxJob
 {
 protected:
 	friend CSandBoxPlus;
-	CCleanUpJob(CSandBoxPlus* pBox, bool DeleteShapshots = true, bool bOnAutoDelete = false) : CBoxJob((QObject*)pBox) { 
+	CCleanUpJob(CSandBoxPlus* pBox, bool DeleteSnapshots = true, bool bOnAutoDelete = false) : CBoxJob((QObject*)pBox) { 
 		m_Description = tr("Deleting Content");
-		m_DeleteShapshots = DeleteShapshots; 
+		m_DeleteSnapshots = DeleteSnapshots; 
 		m_bOnAutoDelete = bOnAutoDelete;
 	}
 
@@ -42,7 +42,7 @@ protected:
 	virtual void		Finished();
 
 protected:
-	bool m_DeleteShapshots;
+	bool m_DeleteSnapshots;
 	bool m_bOnAutoDelete;
 };
 

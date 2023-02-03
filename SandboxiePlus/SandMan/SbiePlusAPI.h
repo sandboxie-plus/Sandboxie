@@ -151,7 +151,7 @@ public:
 
 	bool					IsOpen() const { return m_bRootAccessOpen; }
 	bool					IsBusy() const { return IsSizePending() || !m_JobQueue.isEmpty(); }
-	SB_STATUS				DeleteContentAsync(bool DeleteShapshots = true, bool bOnAutoDelete = false);
+	SB_STATUS				DeleteContentAsync(bool DeleteSnapshots = true, bool bOnAutoDelete = false);
 
 	struct SLink {
 		QString Folder;
@@ -201,7 +201,7 @@ protected:
 	static void				ExportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ExportPath, const QString& RootPath, const QString& Section);
 	static void				ImportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ImportPath, const QString& RootPath, const QString& BoxName);
 
-	bool					IsFileDeleted(const QString& RealPath, const QString& Shapshot, const QStringList& SnapshotList, const QMap<QString, QList<QString>>& DeletedPaths);
+	bool					IsFileDeleted(const QString& RealPath, const QString& Snapshot, const QStringList& SnapshotList, const QMap<QString, QList<QString>>& DeletedPaths);
 
 	QList<QSharedPointer<CBoxJob>> m_JobQueue;
 

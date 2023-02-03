@@ -56,7 +56,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, bool bImmediate, QWidg
 	m_LastTargetIndex = 0;
 	m_bTargetsChanged = false;
 	m_bReloadPending = false;
-	m_DeleteShapshots = false;
+	m_DeleteSnapshots = false;
 
 	QStyle* pStyle = QStyleFactory::create("windows");
 	ui.treeFiles->setStyle(pStyle);
@@ -259,7 +259,7 @@ void CRecoveryWindow::OnDeleteAll()
 
 void CRecoveryWindow::OnDeleteEverything()
 {
-	m_DeleteShapshots = true;
+	m_DeleteSnapshots = true;
 	OnDeleteAll();
 }
 

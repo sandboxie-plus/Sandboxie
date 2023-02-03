@@ -2825,7 +2825,7 @@ void CSandMan::OnEditIni()
 	si.cbSize = sizeof(SHELLEXECUTEINFO);
 	si.fMask = SEE_MASK_NOCLOSEPROCESS;
 	si.hwnd = NULL;
-	si.lpVerb = bPlus ? NULL : L"runas"; // plus ini does nto require admin privileges
+	si.lpVerb = bPlus ? NULL : L"runas"; // plus ini does not require admin privileges
 	si.lpFile = Editor.c_str();
 	si.lpParameters = IniPath.c_str();
 	si.lpDirectory = NULL;

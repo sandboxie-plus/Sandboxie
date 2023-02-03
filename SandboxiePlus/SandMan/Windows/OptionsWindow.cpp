@@ -252,7 +252,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	delete ui.tabsRecovery;
 	ui.gridLayout_24->setContentsMargins(0, 0, 0, 0);
 
-	// collect file options on a new fils tab
+	// collect file options on a new files tab
 
 	QWidget* pWidget = new QWidget();
 	QGridLayout* pLayout = new QGridLayout(pWidget);

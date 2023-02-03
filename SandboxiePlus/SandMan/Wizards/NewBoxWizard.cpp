@@ -547,7 +547,7 @@ void CSummaryPage::initializePage()
     if (field("blockNetwork").toInt())
         m_pSummary->append(tr("\nProcesses in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential."));
     if (field("msiServer").toBool())
-        m_pSummary->append(tr("\nThis box will run the MSIServer (*.msi installer service) with a system token, this improves the compatybility but reduces the security isolation."));
+        m_pSummary->append(tr("\nThis box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation."));
     else if(field("fakeAdmin").toBool())
         m_pSummary->append(tr("\nProcesses in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box."));
 

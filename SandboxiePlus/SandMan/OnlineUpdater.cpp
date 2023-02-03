@@ -155,9 +155,9 @@ void COnlineUpdater::GetUpdates(QObject* receiver, const char* member, const QVa
 	QUrlQuery Query;
 	Query.addQueryItem("action", "update");
 	Query.addQueryItem("software", "sandboxie-plus");
-	//QString Branche = theConf->GetString("Options/ReleaseBranche");
-	//if (!Branche.isEmpty())
-	//	Query.addQueryItem("branche", Branche);
+	//QString Branch = theConf->GetString("Options/ReleaseBranch");
+	//if (!Branch.isEmpty())
+	//	Query.addQueryItem("branch", Branch);
 	//Query.addQueryItem("version", theGUI->GetVersion());
 	//Query.addQueryItem("version", QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) + "." + QString::number(VERSION_REV) + "." + QString::number(VERSION_UPD));
 	Query.addQueryItem("version", QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) + "." + QString::number(VERSION_REV));

@@ -17,7 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Avoid blocking the Explorer when dragging [#2660](https://github.com/sandboxie-plus/Sandboxie/pull/2660)
 - fixed issue with QtSingleApp [#2659](https://github.com/sandboxie-plus/Sandboxie/issues/2659)
 - fixed updater sometimes failing to create temp dir [#2615](https://github.com/sandboxie-plus/Sandboxie/issues/2615)
-
+- fixed isue with snapshot removal [2663](https://github.com/sandboxie-plus/Sandboxie/issues/2663)
 
 
 

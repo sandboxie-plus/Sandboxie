@@ -43,19 +43,16 @@ NTSTATUS NtIo_RemoveProblematicAttributes(POBJECT_ATTRIBUTES objattrs)
 		objattrs, &IoStatusBlock, NULL, 0, 0, FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
 	if (NT_SUCCESS(status))
 	{
-		union {
-			FILE_BASIC_INFORMATION info;
-			WCHAR space[128];
-		} u;
+		FILE_BASIC_INFORMATION info;
 
-		status = NtQueryInformationFile(handle, &IoStatusBlock, &u.info, sizeof(u), FileBasicInformation);
+		status = NtQueryInformationFile(handle, &IoStatusBlock, &info, sizeof(info), FileBasicInformation);
 		if (NT_SUCCESS(status))
 		{
-			u.info.FileAttributes &= ~(FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_HIDDEN | FILE_ATTRIBUTE_SYSTEM);
-			if (u.info.FileAttributes == 0 || u.info.FileAttributes == FILE_ATTRIBUTE_DIRECTORY)
-				u.info.FileAttributes |= FILE_ATTRIBUTE_NORMAL;
+			info.FileAttributes &= ~(FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_HIDDEN | FILE_ATTRIBUTE_SYSTEM);
+			if (info.FileAttributes == 0 || info.FileAttributes == FILE_ATTRIBUTE_DIRECTORY)
+				info.FileAttributes |= FILE_ATTRIBUTE_NORMAL;
 
-			status = NtSetInformationFile(handle, &IoStatusBlock, &u.info, sizeof(u), FileBasicInformation);
+			status = NtSetInformationFile(handle, &IoStatusBlock, &info, sizeof(info), FileBasicInformation);
 		}
 
 		NtClose(handle);
@@ -205,18 +202,16 @@ NTSTATUS NtIo_RenameFileOrFolder(POBJECT_ATTRIBUTES src_objattrs, POBJECT_ATTRIB
 		return status;
 
 	// do the rename and retry if needed
-	union {
-		FILE_RENAME_INFORMATION info;
-		WCHAR space[128];
-	} u;
-	u.info.ReplaceIfExists = FALSE;
-	u.info.RootDirectory = dst_handle;
-	u.info.FileNameLength = wcslen(DestName) * sizeof(WCHAR);
-	wcscpy(u.info.FileName, DestName);
+	ULONG InfoSize = sizeof(FILE_RENAME_INFORMATION) + wcslen(DestName) * sizeof(WCHAR) + 16;
+	PFILE_RENAME_INFORMATION pInfo = (PFILE_RENAME_INFORMATION)malloc(InfoSize);
+	pInfo->ReplaceIfExists = FALSE;
+	pInfo->RootDirectory = dst_handle;
+	pInfo->FileNameLength = wcslen(DestName) * sizeof(WCHAR);
+	wcscpy(pInfo->FileName, DestName);
 
 	for (int retries = 0; retries < 20; retries++)
 	{
-		status = NtSetInformationFile(src_handle, &IoStatusBlock, &u.info, sizeof(u), FileRenameInformation);
+		status = NtSetInformationFile(src_handle, &IoStatusBlock, pInfo, InfoSize, FileRenameInformation);
 		/*if (status == STATUS_ACCESS_DENIED || status == STATUS_SHARING_VIOLATION)
 		{
 			// Please terminate programs running in the sandbox before deleting its contents - 3221
@@ -226,6 +221,8 @@ NTSTATUS NtIo_RenameFileOrFolder(POBJECT_ATTRIBUTES src_objattrs, POBJECT_ATTRIB
 
 		Sleep(300);
 	}
+
+	free(pInfo);
 
 	NtClose(dst_handle);
 	NtClose(src_handle);

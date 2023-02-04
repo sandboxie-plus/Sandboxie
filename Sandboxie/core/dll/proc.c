@@ -1287,6 +1287,23 @@ _FX BOOL Proc_CreateProcessInternalW(
         }
     }
 
+    //
+    // don't let the caller specify a app container token
+    //
+
+    if (Config_GetSettingsForImageName_bool(L"DropAppContainerTokens", TRUE)) {
+        ULONG returnLength = 0;
+        BYTE appContainerBuffer[0x80];
+        if (NT_SUCCESS(NtQueryInformationToken(hToken, (TOKEN_INFORMATION_CLASS)TokenAppContainerSid, appContainerBuffer, sizeof(appContainerBuffer), &returnLength))) {
+            PTOKEN_APPCONTAINER_INFORMATION appContainerInfo = (PTOKEN_APPCONTAINER_INFORMATION)appContainerBuffer;
+            if (appContainerInfo->TokenAppContainer != NULL) {
+                hToken = NULL;
+                SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, L"Dropped AppContainer Token");
+            }
+        }
+    }
+
+
     ok = __sys_CreateProcessInternalW(
         NULL, lpApplicationName, lpCommandLine,
         lpProcessAttributes, lpThreadAttributes, bInheritHandles,

@@ -149,7 +149,7 @@ bool CTraceModel::TestHighLight(STreeNode* pNode) const
 	if (m_HighLightExp.isEmpty())
 		return false;
 	for (int i = 0; i < eCount; i++) {
-		if (NodeData(pNode, Qt::DisplayRole, i).toString().contains(m_HighLightExp))
+		if (NodeData(pNode, Qt::DisplayRole, i).toString().contains(m_HighLightExp, Qt::CaseInsensitive))
 			return true;
 	}
 	return false;

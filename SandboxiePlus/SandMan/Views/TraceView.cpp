@@ -86,8 +86,10 @@ CTraceTree::CTraceTree(QWidget* parent)
 	//connect(m_pBoxTree, SIGNAL(ColumnChanged(int, bool)), this, SLOT(OnColumnsChanged()));
 
 	//m_pMainLayout->addWidget(CFinder::AddFinder(m_pTreeList, m_pSortProxy));
-	m_pMainLayout->addWidget(CFinder::AddFinder(m_pTreeList, this, CFinder::eHighLightDefault));
+	CFinder* pFinder;
+	m_pMainLayout->addWidget(CFinder::AddFinder(m_pTreeList, m_pTraceModel, CFinder::eHighLightDefault, &pFinder));
 	//QObject::connect(pFinder, SIGNAL(SelectNext()), this, SLOT(SelectNext()));
+	QObject::connect(pFinder, SIGNAL(SetFilter(const QString&, int, int)), this, SLOT(SetFilter(const QString&, int, int)));
 
 
 	QByteArray Columns = theConf->GetBlob("MainWindow/TraceLog_Columns");

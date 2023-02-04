@@ -124,7 +124,8 @@ CFinder::~CFinder()
 void CFinder::SetTree(QTreeView* pTree) 
 { 
 	m_pTree = pTree; 
-	QObject::connect(this, SIGNAL(SelectNext()), this, SLOT(OnSelectNext()));
+	if(m_pModel)
+		QObject::connect(this, SIGNAL(SelectNext()), this, SLOT(OnSelectNext()));
 }
 
 bool CFinder::eventFilter(QObject* source, QEvent* event)

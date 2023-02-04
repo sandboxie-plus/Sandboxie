@@ -11,6 +11,7 @@ public:
 	~CFinder();
 
 	void				SetTree(QTreeView* pTree);
+	void				SetModel(QAbstractItemModel* pModel) { m_pModel = pModel; }
 
 	static void			SetDarkMode(bool bDarkMode) { m_DarkMode = bDarkMode; }
 	static bool			GetDarkMode()				{ return m_DarkMode; }

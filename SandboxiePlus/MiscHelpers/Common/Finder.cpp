@@ -124,8 +124,7 @@ CFinder::~CFinder()
 void CFinder::SetTree(QTreeView* pTree) 
 { 
 	m_pTree = pTree; 
-	if(m_pModel)
-		QObject::connect(this, SIGNAL(SelectNext()), this, SLOT(OnSelectNext()));
+	QObject::connect(this, SIGNAL(SelectNext()), this, SLOT(OnSelectNext()));
 }
 
 bool CFinder::eventFilter(QObject* source, QEvent* event)
@@ -142,7 +141,7 @@ bool CFinder::eventFilter(QObject* source, QEvent* event)
 
 void CFinder::Open()
 {
-	if (m_pModel && m_pColumn->count() == 0)
+	if (m_pColumn && m_pColumn->count() == 0)
 	{
 		m_pColumn->addItem(tr("All columns"), -1);
 		for (int i = 0; i < m_pModel->columnCount(); i++)
@@ -300,6 +299,9 @@ QModelIndex	CFinder::FindPrev(QModelIndex idx, bool next, int depth)
 
 void CFinder::OnSelectNext() 
 {
+	if (!m_pModel)
+		return;
+
 	bool next = true;
 	QModelIndex idx = m_pTree->currentIndex();
 	if (!(next = idx.isValid()))

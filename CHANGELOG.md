@@ -14,10 +14,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed delete v1/v2 display now respects global presets
-- Avoid blocking the Explorer when dragging [#2660](https://github.com/sandboxie-plus/Sandboxie/pull/2660)
+- avoid blocking the Explorer when dragging [#2660](https://github.com/sandboxie-plus/Sandboxie/pull/2660)
 - fixed issue with QtSingleApp [#2659](https://github.com/sandboxie-plus/Sandboxie/issues/2659)
 - fixed updater sometimes failing to create temp dir [#2615](https://github.com/sandboxie-plus/Sandboxie/issues/2615)
-- fixed issue with snapshot removal [2663](https://github.com/sandboxie-plus/Sandboxie/issues/2663)
+- fixed issue with snapshot removal [#2663](https://github.com/sandboxie-plus/Sandboxie/issues/2663)
+- fixed issue with symbolicl inks [#2606](https://github.com/sandboxie-plus/Sandboxie/issues/2606)
 
 
 

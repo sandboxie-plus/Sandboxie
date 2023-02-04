@@ -556,7 +556,6 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     LIST *open_file_paths, LIST *closed_file_paths,
     LIST *read_file_paths, LIST *write_file_paths)
 {
-    static const WCHAR *_PstPipe = L"\\Device\\NamedPipe\\protected_storage";
 #ifdef USE_MATCH_PATH_EX
     static const WCHAR *_NormalPath = L"NormalFilePath";
 #endif
@@ -731,6 +730,10 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
 
     if (ok && Conf_Get_Boolean(
                 proc->box->name, Driver_OpenProtectedStorage, 0, FALSE)) {
+				
+        static const WCHAR *_PstPipe = 
+            L"\\Device\\NamedPipe\\protected_storage";
+				
         ok = Process_AddPath(
                 proc, open_file_paths, NULL, TRUE, _PstPipe, FALSE);
     }
@@ -740,7 +743,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
             proc, open_file_paths, NULL, TRUE, openpipes[i], FALSE);
     }
 
-    if (proc->bAppCompartment) {
+    if (ok && proc->bAppCompartment) {
         for (i = 0; openPipesCM[i] && ok; ++i) {
             ok = Process_AddPath(
                 proc, open_file_paths, NULL, TRUE, openPipesCM[i], FALSE);
@@ -851,14 +854,13 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         }
     }
 
-
 #ifdef USE_MATCH_PATH_EX
 
     //
     // setup access restrictions to \Device\
     //
 
-    if (proc->restrict_devices) {
+    if (ok && proc->restrict_devices) {
 
         //
         // many 3rd party drivers are a great attack vector to gain execution in the kernel, 
@@ -872,10 +874,6 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
                 ok = Process_AddPath(
                     proc, normal_file_paths, NULL, FALSE, approved_devices[i], FALSE);
             }
-            if (ok && !proc->file_block_network_files) {
-                ok = Process_AddPath(
-                    proc, normal_file_paths, NULL, FALSE, File_Mup, TRUE);
-            }
         }
 
         if (ok && !proc->use_privacy_mode) { // when not in privacy mode we need to set drive paths to "normal"
@@ -885,12 +883,21 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
             }
         }
 
-        if (! ok) {
-            Log_MsgP1(MSG_INIT_PATHS, Driver_Empty, proc->pid);
-            return FALSE;
+        if (ok && !proc->file_block_network_files) {
+            ok = Process_AddPath(
+                proc, normal_file_paths, NULL, FALSE, File_Redirector, TRUE);
+            if (ok) {
+                ok = Process_AddPath(
+                    proc, normal_file_paths, NULL, FALSE, File_Mup, TRUE);
+            }
         }
     }
 #endif
+
+    if (! ok) {
+        Log_MsgP1(MSG_INIT_PATHS, Driver_Empty, proc->pid);
+        return FALSE;
+    }
 
     //
     // if this is a Sandboxie program (like SandboxieRpcSs), don't allow

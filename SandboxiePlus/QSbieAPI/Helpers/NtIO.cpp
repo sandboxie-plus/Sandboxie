@@ -82,10 +82,15 @@ NTSTATUS NtIo_RemoveJunction(POBJECT_ATTRIBUTES objattrs)
 	status = NtCreateFile(&Handle, GENERIC_WRITE | DELETE, objattrs, &Iosb, 0, 0, FILE_SHARE_READ, FILE_OPEN, FILE_FLAG_OPEN_REPARSE_POINT, 0, 0); // 0x40100080, , , , , 0x00204020
 	if (NT_SUCCESS(status))
 	{
-		REPARSE_DATA_MOUNT_POINT ReparseData = { 0 };
-		ReparseData.ReparseTag = IO_REPARSE_TAG_MOUNT_POINT;
-		ReparseData.ReparseDataLength = 0;
-		status = NtFsControlFile(Handle, NULL, NULL, NULL, &Iosb, FSCTL_DELETE_REPARSE_POINT, &ReparseData, REPARSE_GUID_DATA_BUFFER_HEADER_SIZE, NULL, 0);
+		REPARSE_DATA_MOUNT_POINT ReparseBuffer = { 0 };
+		status = NtFsControlFile(Handle, NULL, NULL, NULL, &Iosb, FSCTL_GET_REPARSE_POINT, NULL, 0, &ReparseBuffer, sizeof(ReparseBuffer));
+		if (NT_SUCCESS(status))
+		{
+			REPARSE_GUID_DATA_BUFFER ReparseData = { 0 };
+			ReparseData.ReparseTag = ReparseBuffer.ReparseTag;
+			ReparseData.ReparseDataLength = 0;
+			status = NtFsControlFile(Handle, NULL, NULL, NULL, &Iosb, FSCTL_DELETE_REPARSE_POINT, &ReparseData, REPARSE_GUID_DATA_BUFFER_HEADER_SIZE, NULL, 0);
+		}
 
 		NtClose(Handle);
 	}
@@ -145,13 +150,10 @@ NTSTATUS NtIo_DeleteFolderRecursivelyImpl(POBJECT_ATTRIBUTES objattrs, bool (*cb
 		if (FileAttributes & (FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_HIDDEN | FILE_ATTRIBUTE_SYSTEM))
 			NtIo_RemoveProblematicAttributes(&ntFoundObject.attr);
 
-		if (FileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-		{
-			if (FileAttributes & FILE_ATTRIBUTE_REPARSE_POINT)
-				status = NtIo_RemoveJunction(&ntFoundObject.attr);
-			else
-				status = NtIo_DeleteFolderRecursivelyImpl(&ntFoundObject.attr, cb, param);
-		}
+		if (FileAttributes & FILE_ATTRIBUTE_REPARSE_POINT)
+			status = NtIo_RemoveJunction(&ntFoundObject.attr);
+		else if (FileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+			status = NtIo_DeleteFolderRecursivelyImpl(&ntFoundObject.attr, cb, param);
 		
 		if (NT_SUCCESS(status))
 			status = NtDeleteFile(&ntFoundObject.attr);

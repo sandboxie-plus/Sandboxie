@@ -271,10 +271,6 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
     //
 
     ok = Process_GetPaths(proc, &proc->normal_key_paths, _NormalPath, TRUE);
-    if (! ok) {
-        Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
-        return FALSE;
-    }
 
     if (ok && proc->use_privacy_mode) {
         for (i = 0; normalpaths[i] && ok; ++i) {
@@ -312,6 +308,11 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
     for (i = 0; openkeys[i] && ok; ++i) {
         ok = Process_AddPath(
             proc, &proc->open_key_paths, NULL, TRUE, openkeys[i], FALSE);
+    }
+
+    if (! ok) {
+        Log_MsgP1(MSG_INIT_PATHS, _OpenConf, proc->pid);
+        return FALSE;
     }
 
     //
@@ -360,6 +361,7 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
                 proc, &proc->closed_key_paths, _WritePath, TRUE);
     }
 #endif
+
     if (! ok) {
         Log_MsgP1(MSG_INIT_PATHS, _WritePath, proc->pid);
         return FALSE;

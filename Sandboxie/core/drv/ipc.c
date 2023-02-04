@@ -440,6 +440,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
         L"*\\BaseNamedObjects*\\ShimCacheMutex",
         L"*\\BaseNamedObjects*\\ShimSharedMemory",
         L"*\\BaseNamedObjects*\\SHIMLIB_LOG_MUTEX",
+        L"*\\BaseNamedObjects*\\msgina: ReturnToWelcome",
         L"\\Security\\LSA_AUTHENTICATION_INITIALIZED",
         L"\\LsaAuthenticationPort",
         L"\\NlsCacheMutant",
@@ -638,7 +639,6 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
     ok = Process_GetPaths(proc, &proc->normal_ipc_paths, _NormalPath, FALSE);
 
     //if (ok && proc->use_privacy_mode) {
-    // 
     //    for (i = 0; normalpaths[i] && ok; ++i) {
     //        ok = Process_AddPath(proc, &proc->normal_ipc_paths, NULL,
     //                          TRUE, normalpaths[i], FALSE);
@@ -730,13 +730,6 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
             if (ok) ok = Process_AddPath(proc, &proc->open_ipc_paths, NULL,
                 FALSE, windows_webcache_counters_, FALSE);
         }
-    }
-
-    if (ok) {
-        static const WCHAR *_ReturnToWelcome =
-            L"*\\BaseNamedObjects*\\msgina: ReturnToWelcome";
-        ok = Process_AddPath(proc, &proc->open_ipc_paths, NULL,
-                             FALSE, _ReturnToWelcome, FALSE);
     }
 
     if (! ok) {

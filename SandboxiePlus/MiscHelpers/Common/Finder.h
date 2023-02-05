@@ -54,8 +54,8 @@ protected:
 	virtual bool		MatchString(const QString& value);
 	bool				MatchCell(QModelIndex idx, int column);
 	bool				MatchRow(QModelIndex idx);
-	QModelIndex			FindNext(QModelIndex idx, bool next = false, int depth = 0);
-	QModelIndex			FindPrev(QModelIndex idx, bool next = false, int depth = 0);
+	QModelIndex			FindRow(QModelIndex par, int start, bool reverse);
+	QModelIndex			FindRow(bool reverse);
 
 private:
 

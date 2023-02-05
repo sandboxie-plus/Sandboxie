@@ -223,75 +223,56 @@ bool CFinder::MatchRow(QModelIndex idx)
 	return false;
 }
 
-QModelIndex	CFinder::FindNext(QModelIndex idx, bool next, int depth)
+QModelIndex	CFinder::FindRow(QModelIndex par, int start, bool reverse)
 {
-	if (MatchRow(idx) && !next)
-		return idx;
-	//Q_ASSERT(depth < 100);
-
-	if (m_pModel->hasChildren(idx))
-	{
-		int numRows = m_pModel->rowCount(idx);
-		for (int count = 0; count < numRows; count++) {
-			QModelIndex tmp = FindNext(m_pModel->index(count, 0, idx), false, depth + 1);
-			if (tmp.isValid())
-				return tmp;
+	int numRows = m_pModel->rowCount(par);
+	for (int row = start; row < numRows && row >= 0; row += (reverse ? -1 : 1)) {
+		QModelIndex cur = m_pModel->index(row, 0, par);
+		if (MatchRow(cur))
+			return cur;
+		if (m_pModel->hasChildren(cur)) {
+			QModelIndex child = FindRow(cur, reverse ? m_pModel->rowCount(cur) - 1 : 0, reverse);
+			if (child.isValid())
+				return child;
 		}
-	}
-
-	for(;;) 
-	{
-		QModelIndex par = m_pModel->parent(idx);
-		if (!par.isValid() && depth > 0)
-			break;
-
-		int numRows = m_pModel->rowCount(par);
-		for (int count = idx.row() + 1; count < numRows; count++) {
-			QModelIndex tmp = FindNext(m_pModel->index(count, 0, par), false, depth + 1);
-			if (tmp.isValid())
-				return tmp;
-		}
-
-		if (!par.isValid())
-			break;
-		idx = par;
 	}
 
 	return QModelIndex();
 }
 
-QModelIndex	CFinder::FindPrev(QModelIndex idx, bool next, int depth)
+QModelIndex	CFinder::FindRow(bool reverse)
 {
-	if (MatchRow(idx) && !next)
-		return idx;
-	//Q_ASSERT(depth < 100);
+	bool next = true;
+	QModelIndex idx = m_pTree->currentIndex();
+	if (!(next = idx.isValid()))
+		idx = m_pModel->index(0, 0);
 
-	if (m_pModel->hasChildren(idx))
-	{
-		int numRows = m_pModel->rowCount(idx);
-		for (int count = numRows-1; count >= 0; count++) {
-			QModelIndex tmp = FindNext(m_pModel->index(count, 0, idx), false, depth + 1);
-			if (tmp.isValid())
-				return tmp;
-		}
+next_sibling:
+	if (idx.isValid() && m_pModel->hasChildren(idx)) {
+		QModelIndex child = FindRow(idx, reverse ? m_pModel->rowCount(idx) - 1 : 0, reverse);
+		if (child.isValid())
+			return child;
 	}
 
-	for(;;) 
-	{
-		QModelIndex par = m_pModel->parent(idx);
-		if (!par.isValid() && depth > 0)
-			break;
+	QModelIndex par = m_pModel->parent(idx);
+	if (par.isValid()) {
+		QModelIndex cur = FindRow(par, idx.row() + (next ? (reverse ? -1 : 1) : 0), reverse);
+		if (cur.isValid())
+			return cur;
+	}
 
-		int numRows = m_pModel->rowCount(par);
-		for (int count = idx.row() - 1; count >= 0; count--) {
-			QModelIndex tmp = FindNext(m_pModel->index(count, 0, par), false, depth + 1);
-			if (tmp.isValid())
-				return tmp;
+next_parent:
+	QModelIndex parent = m_pModel->parent(idx);
+	if (parent.isValid()) {
+		QModelIndex sibling = parent.siblingAtRow(parent.row() + (reverse ? -1 : 1));
+		if (sibling.isValid()) {
+			idx = sibling;
+			next = false;
+			goto next_sibling;
+		} else {
+			idx = parent;
+			goto next_parent;
 		}
-
-		if (!par.isValid())
-			break;
-		idx = par;
 	}
 
 	return QModelIndex();
@@ -302,16 +283,7 @@ void CFinder::OnSelectNext()
 	if (!m_pModel)
 		return;
 
-	bool next = true;
-	QModelIndex idx = m_pTree->currentIndex();
-	if (!(next = idx.isValid()))
-		idx = m_pModel->index(0, 0);
-
-	//if (QApplication::keyboardModifiers() & Qt::ControlModifier)
-	if (QApplication::keyboardModifiers() & Qt::ShiftModifier)
-		idx = FindPrev(idx, next);
-	else
-		idx = FindNext(idx, next);
+	QModelIndex idx = FindRow(QApplication::keyboardModifiers() & Qt::ShiftModifier);
 
 	if (idx.isValid())
 		m_pTree->setCurrentIndex(idx);

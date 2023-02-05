@@ -6,60 +6,58 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="413"/>
         <source>Advanced Sandbox options</source>
-        <translation type="unfinished"></translation>
+        <translation>Расширенные параметры песочницы</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="414"/>
         <source>On this page advanced sandbox options can be configured.</source>
-        <translation type="unfinished"></translation>
+        <translation>На этой странице можно настроить дополнительные параметры песочницы.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="419"/>
         <source>Network Access</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступ к сети</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="427"/>
         <source>Allow network/internet access</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить доступ к сети/интернету</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="428"/>
         <source>Block network/internet by denying access to Network devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Блокировать доступ к сети/интернету, запрещая доступ к сетевым устройствам</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="430"/>
         <source>Block network/internet using Windows Filtering Platform</source>
-        <translation type="unfinished"></translation>
+        <translation>Блокировка доступа к сети/интернету с помощью Windows Filtering Platform</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="435"/>
         <source>Allow access to network files and folders</source>
-        <oldsource>Allow access to network files and fodlers</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить доступ к сетевым файлам и папкам</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="436"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="452"/>
         <source>This option is not recommended for Hardened boxes</source>
-        <oldsource>This option is not recomended for Hardened boxes</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Этот параметр не рекомендуется для песочниц с усиленной изоляцией</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="442"/>
         <source>Admin Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры администратора</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="446"/>
         <source>Make applications think they are running elevated</source>
-        <translation type="unfinished"></translation>
+        <translation>Заставить приложения думать, что они работают с повышенными правами</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="451"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить запуск MSIServer с изолированным системным токеном</translation>
     </message>
 </context>
 <context>
@@ -67,73 +65,72 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="156"/>
         <source>Create new Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать новую песочницу</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="163"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation type="unfinished">Песочница изолирует вашу хост-систему от процессов, запущенных в ней, и не позволяет им вносить постоянные изменения в другие программы и данные на вашем компьютере. Уровень изоляции влияет на вашу безопасность, а также на совместимость с приложениями, поэтому от типа выбранной песочницы зависит уровень ее изоляции. Sandboxie также может защитить ваши личные данные от доступа со стороны процессов, запущенных под его контролем.</translation>
+        <translation>Песочница изолирует вашу хост-систему от процессов, запущенных в ней, и не позволяет им вносить постоянные изменения в другие программы и данные на вашем компьютере. Уровень изоляции влияет на вашу безопасность, а также на совместимость с приложениями, поэтому от типа выбранной песочницы зависит уровень ее изоляции. Sandboxie также может защитить ваши личные данные от доступа со стороны процессов, запущенных под его контролем.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="172"/>
         <source>Enter box name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите имя песочницы:</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="178"/>
         <source>New Box</source>
-        <translation type="unfinished">Новая песочница</translation>
+        <translation>Новая песочница</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="190"/>
         <source>Select box type:</source>
-        <oldsource>Sellect box type:</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Выберите тип песочницы:</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="193"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation type="unfinished">Песочница с усиленной изоляцией и защитой данных</translation>
+        <translation>Песочница с усиленной изоляцией и защитой данных</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="194"/>
         <source>Security Hardened Sandbox</source>
-        <translation type="unfinished">Песочница с усиленной изоляцией</translation>
+        <translation>Песочница с усиленной изоляцией</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="195"/>
         <source>Sandbox with Data Protection</source>
-        <translation type="unfinished">Песочница с защитой данных</translation>
+        <translation>Песочница с защитой данных</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="196"/>
         <source>Standard Isolation Sandbox (Default)</source>
-        <translation type="unfinished">Песочница со стандартной изоляцией (по умолчанию)</translation>
+        <translation>Песочница со стандартной изоляцией (по умолчанию)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="198"/>
         <source>Application Compartment with Data Protection</source>
-        <translation type="unfinished">Контейнер для приложений с защитой данных</translation>
+        <translation>Контейнер для приложений с защитой данных</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="199"/>
         <source>Application Compartment (NO Isolation)</source>
-        <translation type="unfinished">Контейнер для приложений (БЕЗ изоляции)</translation>
+        <translation>Контейнер для приложений (БЕЗ изоляции)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="215"/>
         <source>Remove after use</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить после использования</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="216"/>
         <source>After the last process in the box terminates, all data in the box will be deleted and the box itself will be removed.</source>
-        <translation type="unfinished"></translation>
+        <translation>После завершения последнего процесса в песочнице, эта песочница и все данные в ней будут удалены.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="221"/>
         <source>Configure advanced options</source>
-        <translation type="unfinished"></translation>
+        <translation>Настроить дополнительные параметры</translation>
     </message>
 </context>
 <context>
@@ -200,7 +197,7 @@
     <message>
         <location filename="Views/FileView.cpp" line="171"/>
         <source>Run Recovery Checks</source>
-        <translation type="unfinished"></translation>
+        <translation>Выполнить проверки восстановления</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="234"/>
@@ -218,79 +215,74 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="287"/>
         <source>Sandbox location and behavior</source>
-        <oldsource>Sandbox location and behavioure</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Местоположение и поведение песочницы</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="288"/>
         <source>On this page the sandbox location and its behavior can be customized.
 You can use %USER% to save each users sandbox to an own folder.</source>
-        <oldsource>On this page the sandbox location and its behaviorue can be customized.
-You can use %USER% to save each users sandbox to an own fodler.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>На этой странице можно настроить расположение песочницы и ее поведение.
+Вы можете использовать %USER%, чтобы сохранить песочницу каждого пользователя в отдельной папке.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="293"/>
         <source>Sandboxed Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлы в песочнице</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="316"/>
         <source>Select Directory</source>
-        <translation type="unfinished">Выбрать каталог</translation>
+        <translation>Выбрать каталог</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="324"/>
         <source>Virtualization scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Схема виртуализации</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="328"/>
         <source>Version 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Версия 1</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="329"/>
         <source>Version 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Версия 2</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="335"/>
         <source>Separate user folders</source>
-        <translation type="unfinished">Раздельные папки пользователей</translation>
+        <translation>Раздельные папки пользователей</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="340"/>
         <source>Use volume serial numbers for drives</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать серийные номера томов для дисков</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="345"/>
         <source>Auto delete content when last process terminates</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматическое удаление содержимого при завершении последнего процесса</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="352"/>
         <source>Enable Immediate Recovery of files from recovery locations</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить немедленное восстановление файлов из мест восстановления</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="387"/>
         <source>The selected box location is not a valid path.</source>
-        <oldsource>The sellected box location is not a valid path.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Выбранное расположение песочницы не является допустимым путем.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="392"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
-        <oldsource>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Выбранное местоположение песочницы существует и не является пустым, рекомендуется выбрать новую или пустую папку. Вы уверены, что хотите использовать существующую папку?</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="397"/>
         <source>The selected box location not placed on a currently available drive.</source>
-        <oldsource>The sellected box location not placed on a currently available drive.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Выбранное расположение песочницы не размещено на доступном в данный момент диске.</translation>
     </message>
 </context>
 <context>
@@ -428,18 +420,17 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="30"/>
         <source>New Box Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Мастер создания новой песочницы</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="126"/>
         <source>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you experience any unexpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure group.</source>
-        <oldsource>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you expirience any unecpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure groupe.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Новая песочница была создана с использованием новой &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;схемы виртуализации версии&#xa0;2&lt;/a&gt;, если у вас возникнут какие-либо непредвиденные проблемы с этой песочницей, переключитесь на схему виртуализации до версии 1 и сообщите о проблеме, возможность изменить этот пресет можно найти в параметрах песочницы в группе &quot;Структура песочницы&quot;.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="129"/>
         <source>Don&apos;t show this message again.</source>
-        <translation type="unfinished">Больше не показывать это сообщение.</translation>
+        <translation>Больше не показывать это сообщение.</translation>
     </message>
 </context>
 <context>
@@ -1054,12 +1045,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="159"/>
         <source>Version 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Версия 1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="160"/>
         <source>Version 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Версия 2</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="196"/>
@@ -1089,25 +1080,25 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="287"/>
         <source>Indeterminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Неопределено</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="459"/>
         <location filename="Windows/OptionsGeneral.cpp" line="559"/>
         <source>Always copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Всегда копировать</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="460"/>
         <location filename="Windows/OptionsGeneral.cpp" line="560"/>
         <source>Don&apos;t copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Не копировать</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="461"/>
         <location filename="Windows/OptionsGeneral.cpp" line="561"/>
         <source>Copy empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Копировать пустой</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="687"/>
@@ -1309,7 +1300,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="285"/>
         <source>File Options</source>
-        <translation type="unfinished">Параметры файла</translation>
+        <translation>Параметры файла</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="296"/>
@@ -1987,14 +1978,6 @@ Full path: %4</source>
         <translation>Сбросить все скрытые сообщения</translation>
     </message>
     <message>
-        <source>Edit ini file</source>
-        <translation type="vanished">Редактировать ini файл</translation>
-    </message>
-    <message>
-        <source>Reload ini file</source>
-        <translation type="vanished">Перезагрузить ini файл</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="564"/>
         <source>Trace Logging</source>
         <translation>Ведение журнала трассировки</translation>
@@ -2003,10 +1986,6 @@ Full path: %4</source>
         <location filename="SandMan.cpp" line="441"/>
         <source>&amp;Help</source>
         <translation>Помощь (&amp;H)</translation>
-    </message>
-    <message>
-        <source>Support Sandboxie-Plus with Donations</source>
-        <translation type="vanished">Поддержать Sandboxie-Plus пожертвованием</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="450"/>
@@ -2144,7 +2123,7 @@ This box prevents access to all user data locations, except explicitly granted i
     <message>
         <location filename="SandMan.cpp" line="1459"/>
         <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
-        <translation>Некоторые шаблоны совместимости (%1) отсутствуют, вероятно, удалены. Удалить их из всех ящиков?</translation>
+        <translation>Некоторые шаблоны совместимости (%1) отсутствуют, вероятно, удалены. Удалить их из всех песочниц?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1476"/>
@@ -2245,29 +2224,30 @@ No will choose: %2</source>
         <location filename="SandManRecovery.cpp" line="97"/>
         <location filename="SandManRecovery.cpp" line="154"/>
         <source>Checking file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверка файла %1</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="105"/>
         <source>The file %1 failed a security check!<byte value="xd"/>
 <byte value="xd"/>
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл %1 не прошел проверку безопасности!
+
+%2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="113"/>
         <source>All files passed the checks</source>
-        <translation type="unfinished"></translation>
+        <translation>Все файлы прошли проверку</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="173"/>
         <source>The file %1 failed a security check, do you want to recover it anyway?<byte value="xd"/>
 <byte value="xd"/>
 %2</source>
-        <oldsource>The file %1 failed a security check, do you want to recover it anyways?<byte value="xd"/>
-<byte value="xd"/>
-%2</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Файл %1 не прошел проверку безопасности, вы все равно хотите его восстановить?
+
+%2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="236"/>
@@ -2359,8 +2339,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="3250"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</source>
-        <oldsource>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</oldsource>
-        <translation type="unfinished">&lt;h3&gt;О Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Версия %1&lt;/p&gt;&lt;p&gt; Авторское право (c) 2020-2022 DavidXanatos&lt;/p&gt;</translation>
+        <translation>&lt;h3&gt;О Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Версия %1&lt;/p&gt;&lt;p&gt; Авторское право (c) 2020-2023 DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3258"/>
@@ -2575,23 +2554,23 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="579"/>
         <location filename="SandMan.cpp" line="708"/>
         <source>Edit Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактировать Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="582"/>
         <source>Edit Templates.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактировать Templates.ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="584"/>
         <source>Edit Sandboxie-Plus.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактировать Sandboxie-Plus.ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="588"/>
         <location filename="SandMan.cpp" line="711"/>
         <source>Reload configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Перезагрузить конфигурацию</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="646"/>
@@ -2631,7 +2610,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1700"/>
         <source>Updated Shortcut to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ярлык обновлен: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1702"/>
@@ -2641,7 +2620,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1753"/>
         <source>Auto removing sandbox %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоудаление песочницы %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1768"/>
@@ -2727,9 +2706,8 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="2793"/>
         <source>You are about to edit the Templates.ini, this is generally not recommended.
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
-        <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
-This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Вы собираетесь редактировать Templates.ini, обычно это не рекомендуется.
+Этот файл является частью Sandboxie, и все внесенные в него изменения будут отменены при следующем обновлении Sandboxie.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2855"/>
@@ -3156,12 +3134,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SbieProcess.cpp" line="118"/>
         <source> Elevated</source>
-        <translation type="unfinished"></translation>
+        <translation> Повышенный</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="120"/>
         <source> as System</source>
-        <translation type="unfinished"></translation>
+        <translation> как система</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="123"/>
@@ -3702,8 +3680,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="1457"/>
         <source>Do you want to terminate %1?</source>
-        <oldsource>Do you want to %1 %2?</oldsource>
-        <translation type="unfinished">Вы хотите %1 %2?</translation>
+        <translation>Вы хотите завершить %1?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1457"/>
@@ -3895,17 +3872,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="753"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Дополнительные функции будут отключены через %1 дн.&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="755"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For this build Plus features remain enabled.&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Для этой сборки функции Plus остаются включенными.&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="757"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;Дополнительные функции больше не включены.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="763"/>
@@ -4098,65 +4075,69 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="494"/>
         <source>Create the new Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать новую песочницу</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="502"/>
         <source>Almost complete, click Finish to create a new sandbox and conclude the wizard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Почти завершено, нажмите &quot;Готово&quot;, чтобы создать новую песочницу и завершить работу мастера.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="511"/>
         <source>Save options as new defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить параметры как новые значения по умолчанию</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="522"/>
         <source>Don&apos;t show the summary page in future (unless advanced options were set)</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показывать страницу со сводкой в будущем (если не установлены дополнительные параметры)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="541"/>
         <source>
 This Sandbox will be saved to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Эта песочница будет сохранена в: %1</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="544"/>
         <source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
-        <oldsource>
-This box&apos;s content will be DISCARDED when its closed, and the box will be removed.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>
+Содержимое этой песочницы будет ПОТЕРЯНО, когда она будет закрыта, и песочница будет удалена.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="546"/>
         <source>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Эта песочница ТЕРЯЕТ свое содержимое, при закрытии, она подходит только для временных данных.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="548"/>
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Процессы в этой песочнице не смогут получить доступ к Интернету или локальной сети, это гарантирует, что все данные, к которым осуществляется доступ, останутся конфиденциальными.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="550"/>
         <source>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatybility but reduces the security isolation.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+В этой песочнице будет запускаться MSIServer (служба установки *.msi) с системным токеном, это улучшает совместимость, но снижает изоляцию безопасности.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="552"/>
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Процессы в этой песочнице будут думать, что они запущены с правами администратора, но на самом деле не имеют их, поэтому установщики можно использовать даже в защищенной песочнице.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="580"/>
         <source>Failed to create new box: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось создать новую песочницу: %1</translation>
     </message>
 </context>
 <context>
@@ -4619,10 +4600,6 @@ Processes in this box will think they are run with administrative privileges, wi
         <translation>Защитить эту песочницу от удаления или очистки</translation>
     </message>
     <message>
-        <source>Raw Disk access</source>
-        <translation type="vanished">Прямой доступ к диску</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="440"/>
         <location filename="Forms/OptionsWindow.ui" line="481"/>
         <source>File Migration</source>
@@ -4868,69 +4845,71 @@ Processes in this box will think they are run with administrative privileges, wi
     <message>
         <location filename="Forms/OptionsWindow.ui" line="321"/>
         <source>Use volume serial numbers for drives, like: \drive\C~1234-ABCD</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать серийные номера томов для дисков, например: \drive\C~1234-ABCD</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="355"/>
         <source>The box structure can only be changed when the sandbox is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Структуру песочницы можно изменить только тогда, когда она пуста</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="362"/>
         <source>Allow sandboxed processes to open files protected by EFS</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить изолированным процессам открывать файлы, защищенные EFS</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="376"/>
         <source>Disk/File access</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступ к диску/файлу</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="383"/>
         <source>Virtualization scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Схема виртуализации</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="488"/>
         <source>2113: Content of migrated file was discarded
 2114: File was not migrated, write access to file was denied
 2115: File was not migrated, file will be opened read only</source>
-        <translation type="unfinished"></translation>
+        <translation>2113: Содержимое перенесенного файла было удалено.
+2114: Файл не был перенесен, доступ на запись в файл запрещен.
+2115: Файл не был перенесен, файл будет открыт только для чтения</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="493"/>
         <source>Issue message 2113/2114/2115 when a file is not fully migrated</source>
-        <translation type="unfinished"></translation>
+        <translation>Сообщение о проблеме 2113/2114/2115, когда файл не полностью перенесен</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="517"/>
         <source>Add Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить шаблон</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="524"/>
         <source>Remove Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить шаблон</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="578"/>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаблон</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="586"/>
         <source>Sandboxie does not allow writing to host files, unless permitted by the user. When a sandboxed application attempts to modify a file, the entire file must be copied into the sandbox, for large files this can take a significate amount of time. Sandboxie offers options for handling these cases, which can be configured on this page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie не позволяет записывать файлы хоста, если это не разрешено пользователем. Когда приложение в песочнице пытается изменить файл, весь файл должен быть скопирован в песочницу, для больших файлов это может занять значительное время. Sandboxie предлагает варианты обработки таких случаев, которые можно настроить на этой странице.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="596"/>
         <source>Using wildcard patterns file specific behavior can be configured in the list below:</source>
-        <translation type="unfinished"></translation>
+        <translation>Использование файлов с шаблонами подстановочных знаков может быть настроено в списке ниже:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="610"/>
         <source>When a file cannot be migrated, open it in read-only mode instead</source>
-        <translation type="unfinished"></translation>
+        <translation>Если файл невозможно перенести, вместо этого откройте его в режиме только для чтения</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="628"/>
@@ -4975,7 +4954,7 @@ Processes in this box will think they are run with administrative privileges, wi
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1419"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation>Использование пользовательского токена Sandboxie позволяет лучше изолировать отдельные песочницы друг от друга, а также показывает в пользовательском столбце диспетчеров задач имя ящика, к которому принадлежит процесс. Однако у некоторых сторонних решений безопасности могут быть проблемы с пользовательскими токенами.</translation>
+        <translation>Использование пользовательского токена Sandboxie позволяет лучше изолировать отдельные песочницы друг от друга, а также показывает в пользовательском столбце диспетчеров задач имя песочницы, к которой принадлежит процесс. Однако у некоторых сторонних решений безопасности могут быть проблемы с пользовательскими токенами.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1483"/>
@@ -6045,7 +6024,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="97"/>
         <source>Run in a new Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустить в новой песочнице</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="65"/>
@@ -6164,10 +6143,6 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="1012"/>
         <source>Clear password when main window becomes hidden</source>
         <translation>Очистить пароль, когда главное окно сворачивается</translation>
-    </message>
-    <message>
-        <source>Separate user folders</source>
-        <translation type="vanished">Раздельные папки пользователей</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="777"/>

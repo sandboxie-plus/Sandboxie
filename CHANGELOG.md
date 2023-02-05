@@ -19,7 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed updater sometimes failing to create temp dir [#2615](https://github.com/sandboxie-plus/Sandboxie/issues/2615)
 - fixed issue with snapshot removal [#2663](https://github.com/sandboxie-plus/Sandboxie/issues/2663)
 - fixed issue with symbolicl inks [#2606](https://github.com/sandboxie-plus/Sandboxie/issues/2606)
-- fixed issues with new appcontainer based isoaltion, appcontainer tokens are now by defualt dropped
+- fixed issues with appcontainer based isoaltion, appcontainer tokens are now by defualt dropped
 -- Note: the behavioure can be disabled with 'DropAppContainerTokens=program.exe,n'
 
 

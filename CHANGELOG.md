@@ -5,22 +5,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.7.2 / 5.62.2] - 2023-02-??
+## [1.7.2 / 5.62.2] - 2023-02-05
 
 ### Changed
-- reorganized box options once again, old box layout is default again
+- reorganized box options once more, the old box layout is default again
 - SBIE2227 indicating volume without 8.3 name support is now disabled by default
--- Note: you can use "EnableVerboseChecks=y" to re enable this check
+-- Note: you can use "EnableVerboseChecks=y" to re-enable this check
 
 ### Fixed
-- fixed delete v1/v2 display now respects global presets
+- fixed delete v1/v2 display now respecting global presets
 - avoid blocking the Explorer when dragging [#2660](https://github.com/sandboxie-plus/Sandboxie/pull/2660)
 - fixed issue with QtSingleApp [#2659](https://github.com/sandboxie-plus/Sandboxie/issues/2659)
-- fixed updater sometimes failing to create temp dir [#2615](https://github.com/sandboxie-plus/Sandboxie/issues/2615)
+- fixed updater sometimes failing to create a temporary directory [#2615](https://github.com/sandboxie-plus/Sandboxie/issues/2615)
 - fixed issue with snapshot removal [#2663](https://github.com/sandboxie-plus/Sandboxie/issues/2663)
-- fixed issue with symbolicl inks [#2606](https://github.com/sandboxie-plus/Sandboxie/issues/2606)
-- fixed issues with appcontainer based isoaltion, appcontainer tokens are now by defualt dropped
--- Note: the behavioure can be disabled with 'DropAppContainerTokens=program.exe,n'
+- fixed issue with symbolic links [#2606](https://github.com/sandboxie-plus/Sandboxie/issues/2606)
+- fixed issues with app container-based isolation, app container tokens are now dropped by default
+-- Note: this behaviour can be disabled with 'DropAppContainerTokens=program.exe,n'
 
 
 
@@ -29,29 +29,29 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added option to create a new sandbox to run from the box picker dialog
 - added sandbox creation wizard (not available in Vintage View mode)
-- added ability to open all com classes [#2448](https://github.com/sandboxie-plus/Sandboxie/issues/2448)
--- use OpenClsid={00000000-0000-0000-0000-000000000000} to open all
-- the SandMan UI now indicates if a sandboxed process has a Elevated(Admin) or System token
+- added ability to open all COM classes [#2448](https://github.com/sandboxie-plus/Sandboxie/issues/2448)
+-- Note: use OpenClsid={00000000-0000-0000-0000-000000000000} to open all
+- the SandMan UI now indicates if a sandboxed process has an elevated (admin) or system token
 - DropAdminRights can now be configured per process [#2293](https://github.com/sandboxie-plus/Sandboxie/issues/2293)
-- added self removing boxes [#1936](https://github.com/sandboxie-plus/Sandboxie/issues/1936)
-- added Ctrl+F search filter to the box picker dialog, this allows quickly to find a particular box
-- added menu options to edit the templates.ini and the sansboxie-plus.ini
+- added self-removing boxes [#1936](https://github.com/sandboxie-plus/Sandboxie/issues/1936)
+- added Ctrl+F search filter to the box picker dialog, this allows for quickly finding a particular box
+- added menu options to edit the Templates.ini and the Sandboxie-Plus.ini
 
 ### Changed
 - refactored network blocking code in driver
 - box options now show the expanded paths where appropriate
-- made new box option layout the default (can be changed back in appearance settings)
+- made new box option layout the default (can be changed in appearance settings)
 
 ### Fixed
 - fixed BlockNetworkFiles=y not working together with RestrictDevices=y [#2629](https://github.com/sandboxie-plus/Sandboxie/issues/2629)
 - fixed SandMan crash issue introduced in 1.7.0
-- fixed trace log filter is not case-insensitive
+- fixed trace log filter being case-sensitive
 - fixed performance issues with Delete V2
 - fixed issue with NtQueryDirectoryFile data alignment [#2443](https://github.com/sandboxie-plus/Sandboxie/issues/2443)
 - fixed issue with Microsoft Edge 111 dev build [#2631](https://github.com/sandboxie-plus/Sandboxie/issues/2631)
 - fixed issue with mio sockets [#2617](https://github.com/sandboxie-plus/Sandboxie/issues/2617)
 - fixed issue with run menu entries created from the options/settings window [#2610](https://github.com/sandboxie-plus/Sandboxie/issues/2610)
-- fixed issues with start menu when using snapshots [#2589](https://github.com/sandboxie-plus/Sandboxie/issues/2589)
+- fixed issues with the start menu when using snapshots [#2589](https://github.com/sandboxie-plus/Sandboxie/issues/2589)
 
 
 
@@ -1471,7 +1471,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added clear commands to log submenus [#391](https://github.com/sandboxie-plus/Sandboxie/issues/391)
 - added option to disable process termination prompt [#514](https://github.com/sandboxie-plus/Sandboxie/issues/514)
-- added "Options/InstantRecovery" setting to sandboxie-plus.ini to use the recovery window instead of the notification pop-up [#988](https://github.com/sandboxie-plus/Sandboxie/issues/988)
+- added "Options/InstantRecovery" setting to Sandboxie-Plus.ini to use the recovery window instead of the notification pop-up [#988](https://github.com/sandboxie-plus/Sandboxie/issues/988)
 - added ability to rename a non-empty sandbox [#1100](https://github.com/sandboxie-plus/Sandboxie/issues/1100)
 - added ability to remove a non-empty sandbox
 - added file browser window to SandMan UI to cover the file-view functionality of SbieCtrl [#578](https://github.com/sandboxie-plus/Sandboxie/issues/578)

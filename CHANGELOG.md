@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.7.2 / 5.62.2] - 2023-02-06
+## [1.7.2 / 5.62.2] - 2023-02-05
 
 ### Changed
 - reorganized box options once more, the old box layout is default again

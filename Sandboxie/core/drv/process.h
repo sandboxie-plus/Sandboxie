@@ -275,15 +275,23 @@ BOOLEAN Process_MatchImage(
 // is suffixed unless the value already contains a star anywhere
 
 BOOLEAN Process_GetPaths(
-    PROCESS *proc, LIST *list, const WCHAR *setting_name, BOOLEAN AddStar);
+    PROCESS *proc, LIST *list, const WCHAR *section_name, const WCHAR *setting_name, BOOLEAN AddStar);
 
 
+#ifndef USE_MATCH_PATH_EX
 // Process_GetPaths2:  similar to Process_GetPaths, but adds the path
 // only if it does not already match the second path-list
 
 BOOLEAN Process_GetPaths2(
     PROCESS *proc, LIST *list, LIST *list2,
     const WCHAR *setting_name, BOOLEAN AddStar);
+#endif
+
+
+#ifdef USE_TEMPLATE_PATHS
+BOOLEAN Process_GetTemplatePaths(
+    PROCESS *proc, LIST *list, const WCHAR *setting_name);
+#endif
 
 
 // Process_AddPath:   given a process and the name of a path-list

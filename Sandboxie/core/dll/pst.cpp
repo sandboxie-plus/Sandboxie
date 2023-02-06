@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2021-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -48,8 +49,6 @@ static void *__sys_CoTaskMemAlloc = NULL;
 
 static const char *Pst_PStoreCreateInstanceProcName = "PStoreCreateInstance";
 
-extern "C" const WCHAR *Pst_OpenProtectedStorage = L"OpenProtectedStorage";
-
 
 //---------------------------------------------------------------------------
 // PStoreCreateInstance
@@ -86,7 +85,8 @@ extern "C" _FX BOOLEAN Pst_Init(HMODULE module)
     // if OpenProtectedStorage is specified, don't hook anything
     //
 
-    if (SbieApi_QueryConfBool(NULL, Pst_OpenProtectedStorage, FALSE))
+    ULONG mp_flags = SbieDll_MatchPath(L'i', L"\\RPC Control\\protected_storage");
+    if (PATH_IS_OPEN(mp_flags))
         return TRUE;
 
     //

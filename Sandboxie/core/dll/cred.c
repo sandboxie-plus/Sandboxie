@@ -146,8 +146,6 @@ DEFINE_GUID(GUID_SANDBOXIE,
 static const WCHAR *Cred_SimpleCred = L"SimpleCred-";
 static const WCHAR *Cred_DomainCred = L"DomainCred-";
 
-extern const WCHAR *Pst_OpenProtectedStorage;
-
 
 //static BOOLEAN Cred_Trace = FALSE;
 
@@ -177,7 +175,8 @@ _FX BOOLEAN Cred_Init_AdvApi(HMODULE module)
     // don't hook anything
     //
 
-    if (SbieApi_QueryConfBool(NULL, Pst_OpenProtectedStorage, FALSE))
+    ULONG mp_flags = SbieDll_MatchPath(L'i', L"\\RPC Control\\protected_storage");
+    if (PATH_IS_OPEN(mp_flags))
         return TRUE;
 
     if (SbieApi_QueryConfBool(NULL, L"OpenCredentials", FALSE))

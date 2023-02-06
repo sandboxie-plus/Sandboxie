@@ -64,6 +64,10 @@ static BOOL Proc_SetProcessMitigationPolicy(
     _In_reads_bytes_(dwLength) PVOID lpBuffer,
     _In_ SIZE_T dwLength);
 
+static BOOL Proc_CreateAppContainerToken(
+    HANDLE TokenHandle,
+    PSECURITY_CAPABILITIES SecurityCapabilities,
+    PHANDLE OutToken);
 
 static BOOL Proc_AlternateCreateProcess(
     const WCHAR *lpApplicationName, WCHAR *lpCommandLine,
@@ -292,6 +296,12 @@ typedef BOOL (*P_SetProcessMitigationPolicy)(
     _In_reads_bytes_(dwLength) PVOID lpBuffer,
     _In_ SIZE_T dwLength);
 
+typedef BOOL(*P_CreateAppContainerToken)(
+    HANDLE TokenHandle,
+    PSECURITY_CAPABILITIES SecurityCapabilities,
+    PHANDLE OutToken);
+
+
 //---------------------------------------------------------------------------
 
 
@@ -329,6 +339,8 @@ static P_UpdateProcThreadAttribute	__sys_UpdateProcThreadAttribute = NULL;
 
 static P_SetProcessMitigationPolicy	__sys_SetProcessMitigationPolicy = NULL;
 
+static P_CreateAppContainerToken    __sys_CreateAppContainerToken   = NULL;
+
 //---------------------------------------------------------------------------
 // Variables
 //---------------------------------------------------------------------------
@@ -354,7 +366,7 @@ _FX BOOLEAN Proc_Init(void)
     ANSI_STRING ansi;
     NTSTATUS status;
 
-    if(!Dll_CompartmentMode)
+    if (!Dll_CompartmentMode)
         Dll_ElectronWorkaround = Config_GetSettingsForImageName_bool(L"UseElectronWorkaround", FALSE);
 
     //
@@ -417,7 +429,7 @@ _FX BOOLEAN Proc_Init(void)
     // SetProcessMitigationPolicy
     //
 
-    // fox for SBIE2303 Could not hook ... (33, 1655) due to mitigation policies
+    // fix for SBIE2303 Could not hook ... (33, 1655) due to mitigation policies
     if (Dll_OsBuild >= 8400)    // win8
     {
         void* SetProcessMitigationPolicy = NULL;
@@ -426,6 +438,25 @@ _FX BOOLEAN Proc_Init(void)
             Dll_KernelBase, &ansi, 0, (void**)&SetProcessMitigationPolicy);
         if (NT_SUCCESS(status))
             SBIEDLL_HOOK(Proc_, SetProcessMitigationPolicy);
+    }
+
+    //
+    // When not in Compartment mode, windows AppContainer isolation is not supported 
+    // hook the CreateAppContainerToken and return a regular token
+    // we hook CreateAppContainerToken rather then NtCreateLowBoxToken
+    // as we dont waht CreateAppContainerToken to fail when 
+    // \Sessions\*\AppContainerNamedObjects\* is not open
+    //
+
+    if (!Dll_CompartmentMode)
+    if (Dll_OsBuild >= 9600) // Windows 8.1 and later
+    {
+        void* CreateAppContainerToken = NULL;
+        RtlInitString(&ansi, "CreateAppContainerToken");
+        status = LdrGetProcedureAddress(
+            Dll_KernelBase, &ansi, 0, (void**)&CreateAppContainerToken);
+        if (NT_SUCCESS(status))
+            SBIEDLL_HOOK(Proc_, CreateAppContainerToken);
     }
 
     //
@@ -629,6 +660,36 @@ _FX BOOL Proc_SetProcessMitigationPolicy(
         return TRUE;
 
     return __sys_SetProcessMitigationPolicy(MitigationPolicy, lpBuffer, dwLength);
+}
+
+
+//---------------------------------------------------------------------------
+// Proc_CreateAppContainerToken
+//---------------------------------------------------------------------------
+
+
+_FX BOOL Proc_CreateAppContainerToken(
+    HANDLE TokenHandle,
+    PSECURITY_CAPABILITIES SecurityCapabilities,
+    PHANDLE OutToken)
+{
+#if 1
+    OBJECT_ATTRIBUTES objattrs;
+    SECURITY_QUALITY_OF_SERVICE QoS;
+
+    InitializeObjectAttributes(&objattrs, NULL, 0, NULL, NULL);
+    QoS.Length = sizeof(SECURITY_QUALITY_OF_SERVICE);
+    QoS.ImpersonationLevel = SecurityIdentification;
+    QoS.ContextTrackingMode = SECURITY_STATIC_TRACKING;
+    QoS.EffectiveOnly = FALSE;
+    objattrs.SecurityQualityOfService = &QoS;
+
+    NTSTATUS status = NtDuplicateToken(TokenHandle, MAXIMUM_ALLOWED, &objattrs, FALSE, TokenPrimary, OutToken);
+    return NT_SUCCESS(status);
+#else
+    BOOL ret = __sys_CreateAppContainerToken(TokenHandle, SecurityCapabilities, OutToken);
+    return ret;
+#endif
 }
 
 
@@ -1070,6 +1131,7 @@ _FX BOOL Proc_CreateProcessInternalW(
 
     // const wchar_t* imageName = L"DcomLaunch.exe";
     // if ((lpApplicationName && wcsstr(lpApplicationName,imageName) != NULL) || (lpCommandLine && wcsstr(lpCommandLine,imageName) != NULL)) {
+    //if(wcsstr(lpCommandLine, L"renderer")) {
     //    while (!IsDebuggerPresent())
     //        Sleep(500);
     //    __debugbreak();

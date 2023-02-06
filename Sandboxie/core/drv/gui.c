@@ -163,6 +163,7 @@ _FX BOOLEAN Gui_InitProcess(PROCESS *proc)
 {
     //static const WCHAR *_OpenClass = L"OpenWinClass";
     //static const WCHAR *_Asterisk  = L"*";
+#ifndef USE_TEMPLATE_PATHS
     static const WCHAR *openclasses[] = {
         L"Shell_TrayWnd",
         L"TrayNotifyWnd",
@@ -191,12 +192,18 @@ _FX BOOLEAN Gui_InitProcess(PROCESS *proc)
         L"MdiClass",                        // PowerPoint
         NULL
     };
+#endif
+
     ULONG i;
     BOOLEAN ok;
 
     ok = Process_GetPaths(
-            proc, &proc->open_win_classes, Gui_OpenClass_Name, FALSE);
+            proc, &proc->open_win_classes, proc->box->name, Gui_OpenClass_Name, FALSE);
 
+#ifdef USE_TEMPLATE_PATHS
+    if (ok) 
+        ok = Process_GetTemplatePaths(proc, &proc->open_win_classes, Gui_OpenClass_Name);
+#else
     if (ok) {
         for (i = 0; openclasses[i] && ok; ++i) {
             ok = Process_AddPath(proc, &proc->open_win_classes, NULL,
@@ -211,15 +218,19 @@ _FX BOOLEAN Gui_InitProcess(PROCESS *proc)
                     proc, &proc->open_win_classes, NULL,
                     TRUE, L"Sandbox:*:ConsoleWindowClass", FALSE);
             AddMSTaskSwWClass = TRUE;
-        } else if ((! proc->image_from_box) &&
+        } 
+#ifdef XP_SUPPORT
+        else if ((! proc->image_from_box) &&
                 (  _wcsicmp(proc->image_name, L"excel.exe")    == 0
                 || _wcsicmp(proc->image_name, L"powerpnt.exe") == 0))
             AddMSTaskSwWClass = TRUE;
+#endif
         if (ok && AddMSTaskSwWClass) {
             ok = Process_AddPath(proc, &proc->open_win_classes, NULL,
                                  TRUE, L"MSTaskSwWClass", FALSE);
         }
     }
+#endif
 
     /*if (ok) {
         BOOLEAN is_closed;

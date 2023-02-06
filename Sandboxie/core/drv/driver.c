@@ -101,7 +101,7 @@ const WCHAR *Driver_Sandbox = L"\\Sandbox";
 
 const WCHAR *Driver_Empty = L"";
 
-const WCHAR *Driver_OpenProtectedStorage = L"OpenProtectedStorage";
+//const WCHAR *Driver_OpenProtectedStorage = L"OpenProtectedStorage";
 
 WCHAR *Driver_RegistryPath;
 

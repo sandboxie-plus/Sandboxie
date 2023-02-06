@@ -240,12 +240,10 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
     static const WCHAR *_ClosedPath = L"ClosedKeyPath";
     static const WCHAR *_ReadPath = L"ReadKeyPath";
     static const WCHAR *_WritePath = L"WriteKeyPath";
+
+#ifndef USE_TEMPLATE_PATHS
 #ifdef USE_MATCH_PATH_EX
     static const WCHAR *normalpaths[] = {
-        //L"HKEY_LOCAL_MACHINE\\*",
-        //L"HKEY_CURRENT_USER\\software\\Microsoft\\*",
-        //L"HKEY_CURRENT_USER\\software\\WOW6432Node\\Microsoft\\*",
-        //L"\\REGISTRY\\USER\\*_Classes\\*",
         NULL
     };
     static const WCHAR *writepaths[] = {
@@ -260,6 +258,7 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
         L"\\REGISTRY\\A\\*", 
         NULL
     };
+#endif
 
     BOOLEAN ok;
 
@@ -270,14 +269,19 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
     // normal paths
     //
 
-    ok = Process_GetPaths(proc, &proc->normal_key_paths, _NormalPath, TRUE);
+    ok = Process_GetPaths(proc, &proc->normal_key_paths, proc->box->name, _NormalPath, TRUE);
 
+#ifdef USE_TEMPLATE_PATHS
+    if (ok) 
+        ok = Process_GetTemplatePaths(proc, &proc->normal_key_paths, _NormalPath);
+#else
     if (ok && proc->use_privacy_mode) {
         for (i = 0; normalpaths[i] && ok; ++i) {
             ok = Process_AddPath(proc, &proc->normal_key_paths, NULL, 
                                     TRUE, normalpaths[i], FALSE);
         }
     }
+#endif
 
     if (!ok) {
         Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
@@ -289,7 +293,7 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
     // open paths
     //
 
-    ok = Process_GetPaths(proc, &proc->open_key_paths, _OpenConf, TRUE);
+    ok = Process_GetPaths(proc, &proc->open_key_paths, proc->box->name, _OpenConf, TRUE);
     if (! ok) {
         Log_MsgP1(MSG_INIT_PATHS, _OpenConf, proc->pid);
         return FALSE;
@@ -297,21 +301,22 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
 
     if (! proc->dont_open_for_boxed || ! proc->image_from_box) {
 
-        ok = Process_GetPaths(proc, &proc->open_key_paths, _OpenPath, TRUE);
+        ok = Process_GetPaths(proc, &proc->open_key_paths, proc->box->name, _OpenPath, TRUE);
 
-        if (! ok) {
-            Log_MsgP1(MSG_INIT_PATHS, _OpenPath, proc->pid);
-            return FALSE;
-        }
     }
 
+#ifdef USE_TEMPLATE_PATHS
+    if (ok)
+        ok = Process_GetTemplatePaths(proc, &proc->open_key_paths, _OpenPath);
+#else
     for (i = 0; openkeys[i] && ok; ++i) {
         ok = Process_AddPath(
             proc, &proc->open_key_paths, NULL, TRUE, openkeys[i], FALSE);
     }
+#endif
 
     if (! ok) {
-        Log_MsgP1(MSG_INIT_PATHS, _OpenConf, proc->pid);
+        Log_MsgP1(MSG_INIT_PATHS, _OpenPath, proc->pid);
         return FALSE;
     }
 
@@ -319,7 +324,13 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
     // closed paths
     //
 
-    ok = Process_GetPaths(proc, &proc->closed_key_paths, _ClosedPath, TRUE);
+    ok = Process_GetPaths(proc, &proc->closed_key_paths, proc->box->name, _ClosedPath, TRUE);
+
+#ifdef USE_TEMPLATE_PATHS
+    if (ok)
+        ok = Process_GetTemplatePaths(proc, &proc->closed_key_paths, _ClosedPath);
+#endif
+
     if (! ok) {
         Log_MsgP1(MSG_INIT_PATHS, _ClosedPath, proc->pid);
         return FALSE;
@@ -330,10 +341,16 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
     //
 
 #ifndef USE_MATCH_PATH_EX
-    ok = Process_GetPaths(proc, &proc->open_key_paths, _ReadPath, TRUE);
+    ok = Process_GetPaths(proc, &proc->open_key_paths, proc->box->name, _ReadPath, TRUE);
     if (ok)
 #endif
-        ok = Process_GetPaths(proc, &proc->read_key_paths, _ReadPath, TRUE);
+        ok = Process_GetPaths(proc, &proc->read_key_paths, proc->box->name, _ReadPath, TRUE);
+
+#ifdef USE_TEMPLATE_PATHS
+    if (ok)
+        ok = Process_GetTemplatePaths(proc, &proc->read_key_paths, _ReadPath);
+#endif
+
     if (! ok) {
         Log_MsgP1(MSG_INIT_PATHS, _ReadPath, proc->pid);
         return FALSE;
@@ -344,21 +361,27 @@ _FX BOOLEAN Key_InitProcess(PROCESS *proc)
     //
 
 #ifdef USE_MATCH_PATH_EX
-    ok = Process_GetPaths(proc, &proc->write_key_paths, _WritePath, TRUE);
+    ok = Process_GetPaths(proc, &proc->write_key_paths, proc->box->name, _WritePath, TRUE);
 
+#ifdef USE_TEMPLATE_PATHS
+    if (ok)
+        ok = Process_GetTemplatePaths(proc, &proc->write_key_paths, _WritePath);
+#else
     if (ok && proc->use_privacy_mode) {
         for (i = 0; writepaths[i] && ok; ++i) {
             ok = Process_AddPath(proc, &proc->write_key_paths, NULL, 
                                     TRUE, writepaths[i], FALSE);
         }
     }
+#endif
+
 #else
     ok = Process_GetPaths2(
             proc, &proc->write_key_paths, &proc->closed_key_paths,
             _WritePath, TRUE);
     if (ok) {
         ok = Process_GetPaths(
-                proc, &proc->closed_key_paths, _WritePath, TRUE);
+                proc, &proc->closed_key_paths, proc->box->name, _WritePath, TRUE);
     }
 #endif
 

@@ -442,7 +442,7 @@ _FX BOOLEAN Process_GetConf_bool(PROCESS* proc, const WCHAR* setting, BOOLEAN de
 
 
 _FX BOOLEAN Process_GetPaths(
-    PROCESS *proc, LIST *list, const WCHAR *setting_name, BOOLEAN AddStar)
+    PROCESS *proc, LIST *list, const WCHAR *section_name, const WCHAR *setting_name, BOOLEAN AddStar)
 {
     ULONG index;
     const WCHAR *value;
@@ -461,7 +461,7 @@ _FX BOOLEAN Process_GetPaths(
         // get next configuration setting for this path list
         //
 
-        value = Conf_Get(proc->box->name, setting_name, index);
+        value = Conf_Get(section_name, setting_name, index);
         if (! value)
             break;
 
@@ -499,6 +499,7 @@ _FX BOOLEAN Process_GetPaths(
 //---------------------------------------------------------------------------
 
 
+#ifndef USE_MATCH_PATH_EX
 _FX BOOLEAN Process_GetPaths2(
     PROCESS *proc, LIST *list, LIST *list2,
     const WCHAR *setting_name, BOOLEAN AddStar)
@@ -554,6 +555,33 @@ _FX BOOLEAN Process_GetPaths2(
 
     return TRUE;
 }
+#endif
+
+
+//---------------------------------------------------------------------------
+// Process_GetTemplatePaths
+//---------------------------------------------------------------------------
+
+
+#ifdef USE_TEMPLATE_PATHS
+BOOLEAN Process_GetTemplatePaths(PROCESS *proc, LIST *list, const WCHAR *setting_name)
+{
+    BOOLEAN ok;
+
+    ok = Process_GetPaths(proc, list, L"TemplateDefaultPaths", setting_name, FALSE);
+
+    if (ok && proc->restrict_devices)
+        ok = Process_GetPaths(proc, list, L"TemplateSModPaths", setting_name, FALSE);
+
+    if (ok && proc->use_privacy_mode)
+        ok = Process_GetPaths(proc, list, L"TemplatePModPaths", setting_name, FALSE);
+
+    if (ok && proc->bAppCompartment)
+        ok = Process_GetPaths(proc, list, L"TemplateAppCPaths", setting_name, FALSE);
+
+    return ok;
+}
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -578,7 +606,7 @@ _FX BOOLEAN Process_AddPath(
     // if this is a file setting, also check the path for reparse points
     //
 
-    if (setting_name) {
+    if (setting_name && AddStar) {
 
         const WCHAR *setting_name_ptr = setting_name;
         if (_wcsnicmp(setting_name, Process_Normal, 6) == 0 ||
@@ -594,10 +622,11 @@ _FX BOOLEAN Process_AddPath(
 
         if (setting_name_ptr) {
 
-            if (_wcsnicmp(setting_name_ptr, L"Key", 3) == 0)
+            if (_wcsnicmp(setting_name_ptr, L"Key", 3) == 0
+                  || _wcsnicmp(setting_name_ptr, L"Conf", 4) == 0) {
                 RemoveBackslashes = TRUE;
 
-            else if (_wcsnicmp(setting_name_ptr, L"File", 4) == 0
+            } else if (_wcsnicmp(setting_name_ptr, L"File", 4) == 0
                   || _wcsnicmp(setting_name_ptr, L"Pipe", 4) == 0) {
 
                 RemoveBackslashes = TRUE;

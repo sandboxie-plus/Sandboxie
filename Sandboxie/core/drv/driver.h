@@ -71,6 +71,8 @@
 
 #define USE_MATCH_PATH_EX
 
+#define USE_TEMPLATE_PATHS
+
 #define HOOK_WIN32K
 
 //---------------------------------------------------------------------------
@@ -148,7 +150,7 @@ extern const WCHAR *Driver_Sandbox;
 
 extern const WCHAR *Driver_Empty;
 
-extern const WCHAR *Driver_OpenProtectedStorage;
+//extern const WCHAR *Driver_OpenProtectedStorage;
 
 extern PSECURITY_DESCRIPTOR Driver_PublicSd;
 extern PACL Driver_PublicAcl;

@@ -5,6 +5,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [1.7.3 / 5.62.3] - 2023-02-??
+
+### Changed
+- 'OpenProtectedStorage=y' has been replaced with a template
+- moved all built in access rules to a set of default tempaltes
+- moved WinInetCache controll to a tempalte OpenWinInetCache, 'CloseWinInetCache=y' is now obsolete
+- added hook for CreateAppContainerToken, should also improve compatybility with other apps 
+-- note: Template_Edge_Fix is no longer required
+
+### Fixed
+- added AppContainer support for Compartment type boxes
+
+
+
 ## [1.7.2 / 5.62.2] - 2023-02-05
 
 ### Changed

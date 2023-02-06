@@ -564,6 +564,8 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     static const WCHAR *_ClosedPath = L"ClosedFilePath";
     static const WCHAR *_ReadPath = L"ReadFilePath";
     static const WCHAR *_WritePath = L"WriteFilePath";
+
+#ifndef USE_TEMPLATE_PATHS
 #ifdef USE_MATCH_PATH_EX
     static const WCHAR *normalpaths[] = {
         L"%SystemRoot%\\*",
@@ -676,6 +678,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         L"\\Device\\SrpDevice", // Smart App Control
         NULL
     };
+#endif
     static const WCHAR* drive_devices[] = {
         L"\\Device\\Floppy*\\*",
         L"\\Device\\CdRom*\\*",
@@ -693,14 +696,19 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     // normal paths
     //
 
-    ok = Process_GetPaths(proc, normal_file_paths, _NormalPath, TRUE);
+    ok = Process_GetPaths(proc, normal_file_paths, proc->box->name, _NormalPath, TRUE);
 
+#ifdef USE_TEMPLATE_PATHS
+    if (ok)
+        ok = Process_GetTemplatePaths(proc, normal_file_paths, _NormalPath);
+#else
     if (ok && proc->use_privacy_mode) {
         for (i = 0; normalpaths[i] && ok; ++i) {
             ok = Process_AddPath(
                 proc, normal_file_paths, NULL, TRUE, normalpaths[i], FALSE);
         }
     }
+#endif
 
     if (! ok) {
         Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
@@ -712,7 +720,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     // open paths
     //
 
-    ok = Process_GetPaths(proc, open_file_paths, _OpenPipe, TRUE);
+    ok = Process_GetPaths(proc, open_file_paths, proc->box->name, _OpenPipe, TRUE);
     if (! ok) {
         Log_MsgP1(MSG_INIT_PATHS, _OpenPipe, proc->pid);
         return FALSE;
@@ -720,7 +728,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
 
     if (! proc->dont_open_for_boxed || ! proc->image_from_box) {
 
-        ok = Process_GetPaths(proc, open_file_paths, _OpenFile, TRUE);
+        ok = Process_GetPaths(proc, open_file_paths, proc->box->name, _OpenFile, TRUE);
 
         if (! ok) {
             Log_MsgP1(MSG_INIT_PATHS, _OpenFile, proc->pid);
@@ -728,16 +736,25 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         }
     }
 
-    if (ok && Conf_Get_Boolean(
-                proc->box->name, Driver_OpenProtectedStorage, 0, FALSE)) {
-				
-        static const WCHAR *_PstPipe = 
-            L"\\Device\\NamedPipe\\protected_storage";
-				
-        ok = Process_AddPath(
-                proc, open_file_paths, NULL, TRUE, _PstPipe, FALSE);
-    }
+    //if (ok && Conf_Get_Boolean(
+    //            proc->box->name, Driver_OpenProtectedStorage, 0, FALSE)) {
+	//			
+    //    static const WCHAR *_PstPipe = 
+    //        L"\\Device\\NamedPipe\\protected_storage";
+	//			
+    //    ok = Process_AddPath(
+    //            proc, open_file_paths, NULL, TRUE, _PstPipe, FALSE);
+    //}
 
+#ifdef USE_TEMPLATE_PATHS
+    if (ok) {
+        ok = Process_GetTemplatePaths(proc, open_file_paths, _OpenFile);
+        if (! ok) {
+            Log_MsgP1(MSG_INIT_PATHS, _OpenFile, proc->pid);
+            return FALSE;
+        }
+    }
+#else
     for (i = 0; openpipes[i] && ok; ++i) {
         ok = Process_AddPath(
             proc, open_file_paths, NULL, TRUE, openpipes[i], FALSE);
@@ -749,6 +766,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
                 proc, open_file_paths, NULL, TRUE, openPipesCM[i], FALSE);
         }
     }
+#endif
 
     if (! ok) {
         Log_MsgP1(MSG_INIT_PATHS, _OpenPipe, proc->pid);
@@ -759,7 +777,12 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     // closed paths
     //
 
-    ok = Process_GetPaths(proc, closed_file_paths, _ClosedPath, TRUE);
+    ok = Process_GetPaths(proc, closed_file_paths, proc->box->name, _ClosedPath, TRUE);
+#ifdef USE_TEMPLATE_PATHS
+    if (ok)
+        ok = Process_GetTemplatePaths(proc, closed_file_paths, _ClosedPath);
+#else
+    
     if (ok) {
         // the LanmanRedirector/Mup devices (when accessed without extra paths)
         // is a security attack, and must be closed
@@ -775,6 +798,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     for (i = 0; strWinRMFiles[i] && ok; ++i) {
         ok = Process_AddPath(proc, closed_file_paths, _ClosedPath, TRUE, strWinRMFiles[i], FALSE);
     }
+#endif
 
     if (! ok) {
         Log_MsgP1(MSG_INIT_PATHS, _ClosedPath, proc->pid);
@@ -786,10 +810,16 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     //
 
 #ifndef USE_MATCH_PATH_EX
-    ok = Process_GetPaths(proc, open_file_paths, _ReadPath, TRUE);
+    ok = Process_GetPaths(proc, open_file_paths, proc->box->name, _ReadPath, TRUE);
     if (ok)
 #endif
-        ok = Process_GetPaths(proc, read_file_paths, _ReadPath, TRUE);
+        ok = Process_GetPaths(proc, read_file_paths, proc->box->name, _ReadPath, TRUE);
+
+#ifdef USE_TEMPLATE_PATHS
+    if (ok)
+        ok = Process_GetTemplatePaths(proc, read_file_paths, _ReadPath);
+#endif
+
     if (! ok) {
         Log_MsgP1(MSG_INIT_PATHS, _ReadPath, proc->pid);
         return FALSE;
@@ -800,7 +830,12 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
     //
 
 #ifdef USE_MATCH_PATH_EX
-    ok = Process_GetPaths(proc, write_file_paths, _WritePath, TRUE);
+    ok = Process_GetPaths(proc, write_file_paths, proc->box->name, _WritePath, TRUE);
+
+#ifdef USE_TEMPLATE_PATHS
+    if (ok)
+        ok = Process_GetTemplatePaths(proc, write_file_paths, _WritePath);
+#endif
 
     if (ok && proc->use_privacy_mode) { // in privacy mode all drive paths are set to "write"
         for (i = 0; drive_devices[i] && ok; ++i) {
@@ -814,7 +849,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
             _WritePath, TRUE);
     if (ok) {
         ok = Process_GetPaths(
-                proc, closed_file_paths, _WritePath, TRUE);
+                proc, closed_file_paths, proc->box->name, _WritePath, TRUE);
     }
 #endif
     if (! ok) {
@@ -841,16 +876,32 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
             &is_open, &is_closed);
 
         if (is_closed && !proc->AllowInternetAccess) {
+#ifdef USE_TEMPLATE_PATHS
+            ok = Process_GetPaths(proc, closed_file_paths, L"TemplateNetworkPaths", _ClosedPath, FALSE);
+            if (! ok) {
+                Log_MsgP1(MSG_INIT_PATHS, _ClosedPath, proc->pid);
+                return FALSE;
+            }
+#else
             for (i = 0; closedNetPipes[i] && ok; ++i) {
                 ok = Process_AddPath(
                     proc, closed_file_paths, NULL, TRUE, closedNetPipes[i], FALSE);
             }
+#endif
         }
         else {
+#ifdef USE_TEMPLATE_PATHS
+            ok = Process_GetPaths(proc, open_file_paths, L"TemplateNetworkPaths", _OpenFile, FALSE);
+            if (! ok) {
+                Log_MsgP1(MSG_INIT_PATHS, _OpenFile, proc->pid);
+                return FALSE;
+            }
+#else
             for (i = 0; openNetPipes[i] && ok; ++i) {
                 ok = Process_AddPath(
                     proc, open_file_paths, NULL, TRUE, openNetPipes[i], FALSE);
             }
+#endif
         }
     }
 
@@ -867,6 +918,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
         // so we close all typical endpoints except a selected few.
         //
 
+#ifndef USE_TEMPLATE_PATHS
         ok = Process_AddPath(proc, closed_file_paths, NULL, FALSE, File_Device, TRUE);
 
         if (ok) {
@@ -875,6 +927,7 @@ _FX BOOLEAN File_InitPaths(PROCESS *proc,
                     proc, normal_file_paths, NULL, FALSE, approved_devices[i], FALSE);
             }
         }
+#endif
 
         if (ok && !proc->use_privacy_mode) { // when not in privacy mode we need to set drive paths to "normal"
             for (i = 0; drive_devices[i] && ok; ++i) {

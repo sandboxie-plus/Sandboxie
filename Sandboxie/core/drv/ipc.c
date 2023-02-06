@@ -422,6 +422,8 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
     static const WCHAR* _OpenPath = L"OpenIpcPath";
     static const WCHAR* _ClosedPath = L"ClosedIpcPath";
     static const WCHAR* _ReadPath = L"ReadIpcPath";
+
+#ifndef USE_TEMPLATE_PATHS
     static const WCHAR* openpaths[] = {
         L"\\Windows\\ApiPort",
         L"\\Sessions\\*\\Windows\\ApiPort",
@@ -627,6 +629,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
         L"$:explorer.exe",
         NULL
     };
+#endif
 
     ULONG i;
     BOOLEAN ok;
@@ -636,14 +639,19 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
     //
 
 #ifdef USE_MATCH_PATH_EX
-    ok = Process_GetPaths(proc, &proc->normal_ipc_paths, _NormalPath, FALSE);
+    ok = Process_GetPaths(proc, &proc->normal_ipc_paths, proc->box->name, _NormalPath, FALSE);
 
+#ifdef USE_TEMPLATE_PATHS
+    if (ok)
+        ok = Process_GetTemplatePaths(proc, &proc->normal_ipc_paths, _NormalPath);
+#else
     //if (ok && proc->use_privacy_mode) {
     //    for (i = 0; normalpaths[i] && ok; ++i) {
     //        ok = Process_AddPath(proc, &proc->normal_ipc_paths, NULL,
     //                          TRUE, normalpaths[i], FALSE);
     //    }
     //}
+#endif
 
     if (!ok) {
         Log_MsgP1(MSG_INIT_PATHS, _NormalPath, proc->pid);
@@ -655,28 +663,33 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
     // open paths
     //
 
-    ok = Process_GetPaths(proc, &proc->open_ipc_paths, _OpenPath, FALSE);
+    ok = Process_GetPaths(proc, &proc->open_ipc_paths, proc->box->name, _OpenPath, FALSE);
+	
+#ifdef USE_TEMPLATE_PATHS
+    if (ok)
+        ok = Process_GetTemplatePaths(proc, &proc->open_ipc_paths, _OpenPath);
+#else
 
     //
     // if configuration option OpenProtectedStorage applies,
     // then allow access to ProtectedStorage objects
     //
 
-    if (ok && Conf_Get_Boolean(
-                proc->box->name, Driver_OpenProtectedStorage, 0, FALSE)) {
-
-        static const WCHAR *_PstEvent =
-            L"*\\BaseNamedObjects*\\PS_SERVICE_STARTED";
-        static const WCHAR *_PstPort =
-            L"\\RPC Control\\protected_storage";
-
-        ok = Process_AddPath(
-            proc, &proc->open_ipc_paths, NULL, TRUE, _PstEvent, FALSE);
-        if (ok) {
-            ok = Process_AddPath(
-                proc, &proc->open_ipc_paths, NULL, TRUE, _PstPort, FALSE);
-        }
-    }
+    //if (ok && Conf_Get_Boolean(
+    //            proc->box->name, Driver_OpenProtectedStorage, 0, FALSE)) {
+    //
+    //    static const WCHAR *_PstEvent =
+    //        L"*\\BaseNamedObjects*\\PS_SERVICE_STARTED";
+    //    static const WCHAR *_PstPort =
+    //        L"\\RPC Control\\protected_storage";
+    //
+    //    ok = Process_AddPath(
+    //        proc, &proc->open_ipc_paths, NULL, TRUE, _PstEvent, FALSE);
+    //    if (ok) {
+    //        ok = Process_AddPath(
+    //            proc, &proc->open_ipc_paths, NULL, TRUE, _PstPort, FALSE);
+    //    }
+    //}
 
     //
     // add default/built-in open paths
@@ -720,17 +733,8 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
             ok = Process_AddPath(proc, &proc->open_ipc_paths, NULL,
                 TRUE, openpaths_windows10[i], FALSE);
         }
-
-        if (!Conf_Get_Boolean(proc->box->name, L"CloseWinInetCache", 0, FALSE)) { // this breaks IE view source, see SbieDll_IsOpenClsid
-            
-            static const WCHAR* webcache_ = L"\\RPC Control\\webcache_*";
-            static const WCHAR* windows_webcache_counters_ = L"*\\BaseNamedObjects\\windows_webcache_counters_*";
-            if (ok) ok = Process_AddPath(proc, &proc->open_ipc_paths, NULL,
-                FALSE, webcache_, FALSE);
-            if (ok) ok = Process_AddPath(proc, &proc->open_ipc_paths, NULL,
-                FALSE, windows_webcache_counters_, FALSE);
-        }
     }
+#endif
 
     if (! ok) {
         Log_MsgP1(MSG_INIT_PATHS, _OpenPath, proc->pid);
@@ -741,7 +745,13 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
     // closed paths
     //
 
-    ok = Process_GetPaths(proc, &proc->closed_ipc_paths, _ClosedPath, FALSE);
+    ok = Process_GetPaths(proc, &proc->closed_ipc_paths, proc->box->name, _ClosedPath, FALSE);
+
+#ifdef USE_TEMPLATE_PATHS
+    if (ok)
+        ok = Process_GetTemplatePaths(proc, &proc->closed_ipc_paths, _ClosedPath);
+#endif
+
     if (! ok) {
         Log_MsgP1(MSG_INIT_PATHS, _ClosedPath, proc->pid);
         return FALSE;
@@ -751,8 +761,12 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
     // read-only paths
     //
 
-    ok = Process_GetPaths(proc, &proc->read_ipc_paths, _ReadPath, FALSE);
+    ok = Process_GetPaths(proc, &proc->read_ipc_paths, proc->box->name, _ReadPath, FALSE);
 
+#ifdef USE_TEMPLATE_PATHS
+    if (ok) 
+        ok = Process_GetTemplatePaths(proc, &proc->read_ipc_paths, _ReadPath);
+#else
     if (ok) {
 
         for (i = 0; readpaths[i] && ok; ++i) {
@@ -760,6 +774,7 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
                                 TRUE, readpaths[i], FALSE);
         }
     }
+#endif
 
     if (! ok) {
         Log_MsgP1(MSG_INIT_PATHS, _ReadPath, proc->pid);

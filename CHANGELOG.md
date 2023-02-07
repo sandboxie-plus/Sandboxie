@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- note: Template_Edge_Fix is no longer required
 - replaced a few icons
 - moved teh "Support" settings page the above "Advance Options" page and remaned it to "Support & Updates"
+- when draging and droping a file on to the sandman UI to run it the currently selected box will be pre selected in the  box picker dialog
 
 ### Fixed
 - added AppContainer support for Compartment type boxes

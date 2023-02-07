@@ -1371,7 +1371,12 @@ void CSandMan::dropEvent(QDropEvent* e)
 			Commands.append(url.toLocalFile().replace("/", "\\"));
 	}
 
-	QTimer::singleShot(0, this, [Commands, this]() { RunSandboxed(Commands); });
+	QString BoxName;
+	QList<CSandBoxPtr> Boxes = m_pBoxView->GetSelectedBoxes();
+	if (Boxes.count() == 1)
+		BoxName = Boxes.first()->GetName();
+
+	QTimer::singleShot(0, this, [Commands, BoxName, this]() { RunSandboxed(Commands, BoxName); });
 }
 
 void CSandMan::timerEvent(QTimerEvent* pEvent)

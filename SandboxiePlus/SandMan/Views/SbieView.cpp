@@ -1692,15 +1692,15 @@ QList<CBoxedProcessPtr> CSbieView::GetSelectedProcesses()
 	return  List;
 }
 
-QMenu* CSbieView::GetMenuFolder(const QString& Folder, QMenu* pParent)
+QMenu* CSbieView::GetMenuFolder(const QString& Folder, QMenu* pParent, QMap<QString, QMenu*>& Folders)
 {
-	QMenu* &pMenu = m_MenuFolders[Folder];
+	QMenu* &pMenu = Folders[Folder];
 	if (!pMenu)
 	{
 		QStringList Names = Folder.split("/");
 		StrPair Tmp = Split2(Folder, "/", true);
 		if (!Tmp.second.isEmpty()) {
-			pParent = GetMenuFolder(Tmp.first, pParent);
+			pParent = GetMenuFolder(Tmp.first, pParent, Folders);
 			pMenu = pParent->addMenu(Tmp.second);
 		}
 		else
@@ -1714,7 +1714,7 @@ void CSbieView::UpdateStartMenu(CSandBoxPlus* pBoxEx)
 {
 	foreach(const CSandBoxPlus::SLink& Link, pBoxEx->GetStartMenu())
 	{
-		QMenu* pMenu = GetMenuFolder(Link.Folder, m_pMenuRunStart);
+		QMenu* pMenu = GetMenuFolder(Link.Folder, m_pMenuRunStart, m_MenuFolders);
 
 		QAction* pAction = pMenu->addAction(Link.Name, this, SLOT(OnSandBoxAction()));
 		QIcon Icon = LoadWindowsIcon(Link.Icon, Link.IconIndex);
@@ -1730,15 +1730,24 @@ void CSbieView::UpdateRunMenu(const CSandBoxPtr& pBox)
 
 	while (m_iMenuRun < m_pMenuRun->actions().count())
 		m_pMenuRun->removeAction(m_pMenuRun->actions().at(m_iMenuRun));
+	while (!m_RunFolders.isEmpty())
+		m_RunFolders.take(m_RunFolders.firstKey())->deleteLater();
 
 	QStringList RunOptions = pBox->GetTextList("RunCommand", true, false, true);
 	foreach(const QString& RunOption, RunOptions) 
 	{
 		StrPair NameCmd = Split2(RunOption, "|");
-		QAction* pAction = m_pMenuRun->addAction(NameCmd.first, this, SLOT(OnSandBoxAction()));
 
+		QMenu* pMenu;
+		StrPair FolderName = Split2(NameCmd.first, "\\", true);
+		if (FolderName.second.isEmpty()) {
+			FolderName.second = FolderName.first;
+			pMenu = m_pMenuRun;
+		} else
+			pMenu = GetMenuFolder(FolderName.first, m_pMenuRun, m_RunFolders);
+
+		QAction* pAction = pMenu->addAction(FolderName.second, this, SLOT(OnSandBoxAction()));
 		pAction->setIcon(m_IconProvider.icon(QFileInfo(pBoxEx->GetCommandFile(NameCmd.second))));
-
 		pAction->setData(NameCmd.second);
 	}
 

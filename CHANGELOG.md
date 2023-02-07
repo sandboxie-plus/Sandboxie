@@ -9,12 +9,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.7.3 / 5.62.3] - 2023-02-??
 
+### Added
+- Run menu now supports fodlers, to be used by entering fodername1\foldername2\entryname in the name column of the UI
+
 ### Changed
 - 'OpenProtectedStorage=y' has been replaced with a template
 - moved all built in access rules to a set of default tempaltes
 - moved WinInetCache controll to a tempalte OpenWinInetCache, 'CloseWinInetCache=y' is now obsolete
 - added hook for CreateAppContainerToken, should also improve compatybility with other apps 
 -- note: Template_Edge_Fix is no longer required
+- replaced a few icons
+- moved teh "Support" settings page the above "Advance Options" page and remaned it to "Support & Updates"
 
 ### Fixed
 - added AppContainer support for Compartment type boxes

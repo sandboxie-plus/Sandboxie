@@ -173,7 +173,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabs->setTabIcon(8, CSandMan::GetIcon("Recover"));
 	ui.tabs->setTabIcon(9, CSandMan::GetIcon("Settings"));
 	ui.tabs->setTabIcon(10, CSandMan::GetIcon("Advanced"));
-	ui.tabs->setTabIcon(11, CSandMan::GetIcon("Template"));
+	ui.tabs->setTabIcon(11, CSandMan::GetIcon("Compatibility"));
 	ui.tabs->setTabIcon(12, CSandMan::GetIcon("Editor"));
 
 	ui.tabsGeneral->setCurrentIndex(0);
@@ -216,7 +216,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabsRecovery->setTabIcon(1, CSandMan::GetIcon("ImmidiateRecovery"));
 
 	ui.tabsAdvanced->setCurrentIndex(0);
-	ui.tabsAdvanced->setTabIcon(0, CSandMan::GetIcon("Compatibility"));
+	ui.tabsAdvanced->setTabIcon(0, CSandMan::GetIcon("Presets"));
 	ui.tabsAdvanced->setTabIcon(1, CSandMan::GetIcon("Trigger"));
 	ui.tabsAdvanced->setTabIcon(2, CSandMan::GetIcon("Anon"));
 	ui.tabsAdvanced->setTabIcon(3, CSandMan::GetIcon("Users"));
@@ -225,7 +225,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabsAdvanced->setTabIcon(6, CSandMan::GetIcon("Bug"));
 
 	ui.tabsTemplates->setCurrentIndex(0);
-	ui.tabsTemplates->setTabIcon(0, CSandMan::GetIcon("Compatibility"));
+	ui.tabsTemplates->setTabIcon(0, CSandMan::GetIcon("Template"));
 	ui.tabsTemplates->setTabIcon(1, CSandMan::GetIcon("Explore"));
 	ui.tabsTemplates->setTabIcon(2, CSandMan::GetIcon("Accessibility"));
 
@@ -343,7 +343,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	AddIconToLabel(ui.lblCompatibility, CSandMan::GetIcon("Compatibility").pixmap(size,size));
 	//AddIconToLabel(ui.lblComRpc, CSandMan::GetIcon("Objects").pixmap(size,size));
 
-	AddIconToLabel(ui.lblPrivilege, CSandMan::GetIcon("Privilege").pixmap(size,size));
+	AddIconToLabel(ui.lblPrivilege, CSandMan::GetIcon("Token").pixmap(size,size));
 	AddIconToLabel(ui.lblFence, CSandMan::GetIcon("BFance").pixmap(size,size));
 	AddIconToLabel(ui.lblToken, CSandMan::GetIcon("Sandbox").pixmap(size,size));
 	AddIconToLabel(ui.lblIsolation, CSandMan::GetIcon("Fence").pixmap(size,size));

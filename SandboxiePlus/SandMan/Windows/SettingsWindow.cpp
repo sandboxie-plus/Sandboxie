@@ -142,11 +142,11 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.tabs->setTabIcon(0, CSandMan::GetIcon("Config"));
 	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Shell"));
 	ui.tabs->setTabIcon(2, CSandMan::GetIcon("Design"));
-	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Advanced"));
-	ui.tabs->setTabIcon(4, CSandMan::GetIcon("Alarm"));
-	ui.tabs->setTabIcon(5, CSandMan::GetIcon("Compatibility"));
-	ui.tabs->setTabIcon(6, CSandMan::GetIcon("Editor"));
-	ui.tabs->setTabIcon(7, CSandMan::GetIcon("Support"));
+	ui.tabs->setTabIcon(3, CSandMan::GetIcon("Support"));
+	ui.tabs->setTabIcon(4, CSandMan::GetIcon("Advanced"));
+	ui.tabs->setTabIcon(5, CSandMan::GetIcon("Control"));
+	ui.tabs->setTabIcon(6, CSandMan::GetIcon("Compatibility"));
+	ui.tabs->setTabIcon(7, CSandMan::GetIcon("Editor"));
 
 	ui.tabsGUI->setTabIcon(0, CSandMan::GetIcon("GUI"));
 	ui.tabsGUI->setTabIcon(1, CSandMan::GetIcon("Run"));

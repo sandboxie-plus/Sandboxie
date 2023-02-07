@@ -103,7 +103,7 @@ private:
 
 	void					ChangeExpand(const QModelIndex& index, bool bExpand);
 
-	QMenu*					GetMenuFolder(const QString& Folder, QMenu* pParent);
+	QMenu*					GetMenuFolder(const QString& Folder, QMenu* pParent, QMap<QString, QMenu*>& Folders);
 
 	QVBoxLayout*			m_pMainLayout;
 
@@ -126,6 +126,7 @@ private:
 	QAction*				m_pMenuRunMenu;
 	QMenu*					m_pMenuRunStart;
 	QMap<QString, QMenu*>	m_MenuFolders;
+	QMap<QString, QMenu*>	m_RunFolders;
 	QAction*				m_pMenuRunBrowser;
 	QAction*				m_pMenuRunMailer;
 	QMenu*					m_pMenuRunTools;

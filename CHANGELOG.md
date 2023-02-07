@@ -11,20 +11,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Run menu now supports folders, to be used by entering fodername1\foldername2\entryname in the name column of the UI
-- added an try indicator for pending updates
+- added an tray indicator for pending updates
 
 ### Changed
 - 'OpenProtectedStorage=y' has been replaced with a template
-- moved all built in access rules to a set of default tempaltes
-- moved WinInetCache controll to a tempalte OpenWinInetCache, 'CloseWinInetCache=y' is now obsolete
-- added hook for CreateAppContainerToken, should also improve compatybility with other apps 
+- moved all built in access rules to a set of default template’s
+- moved WinInetCache control to a template OpenWinInetCache, 'CloseWinInetCache=y' is now obsolete
+- added hook for CreateAppContainerToken, should also improve compatibility with other apps 
 -- note: Template_Edge_Fix is no longer required
 - replaced a few icons
-- moved teh "Support" settings page the above "Advance Options" page and remaned it to "Support & Updates"
-- when draging and droping a file on to the sandman UI to run it the currently selected box will be pre selected in the  box picker dialog
+- moved the "Support" settings page the above "Advance Options" page and renamed it to "Support & Updates"
+- when dragging and dropping a file on to the sandman UI to run it the currently selected box will be pre-selected in the  box picker dialog
 
 ### Fixed
 - added AppContainer support for Compartment type boxes
+
 
 
 

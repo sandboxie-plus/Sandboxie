@@ -49,8 +49,9 @@ jobs:
           echo 'selelction->selection' >> dictionary.txt
           echo 'injectted->injected' >> dictionary.txt
           echo 'prepanding->prepending' >> dictionary.txt
-          echo 'probablys->probably' >> dictionary.txt
+          echo 'depanding->depending' >> dictionary.txt
           echo 'undependant->independent' >> dictionary.txt
+          echo 'probablys->probably' >> dictionary.txt
           echo 'ware->were' >> dictionary.txt
           echo 'contetx->context' >> dictionary.txt
           echo 'issuw->issue' >> dictionary.txt
@@ -61,6 +62,16 @@ jobs:
           echo 'logn->long' >> dictionary.txt
           echo 'postion->position' >> dictionary.txt
           echo 'trase->trace' >> dictionary.txt
+          echo 'eider->either' >> dictionary.txt
+          echo 'isoaltion->isolation' >> dictionary.txt
+          echo 'symbolicl->symbolic' >> dictionary.txt
+          echo 're enable->re-enable' >> dictionary.txt
+          echo 'appcontainer->app container' >> dictionary.txt
+          echo 'foder->folder' >> dictionary.txt
+          echo 'fodername1->foldername1' >> dictionary.txt
+          echo 'fodler->folder' >> dictionary.txt
+          echo 'built in->built-in' >> dictionary.txt
+          echo 'tigether->together' >> dictionary.txt
           # Only lowercase letters are allowed in --ignore-words-list
           codespell --dictionary=dictionary.txt --dictionary=dictionary_rare.txt --dictionary=dictionary_code.txt \
           --ignore-words-list="wil,unknwn,tolen,pevent,doubleclick,parm,parms,etcp,ois,ba,ptd,modell,namesd,stdio,uint,errorstring,ontext,atend,deque,ecounter,nmake,namess,inh,daa,varient,lite,uis,emai,ws,slanguage" \

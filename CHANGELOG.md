@@ -10,7 +10,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.7.3 / 5.62.3] - 2023-02-??
 
 ### Added
-- Run menu now supports fodlers, to be used by entering fodername1\foldername2\entryname in the name column of the UI
+- Run menu now supports folders, to be used by entering fodername1\foldername2\entryname in the name column of the UI
+- added an try indicator for pending updates
 
 ### Changed
 - 'OpenProtectedStorage=y' has been replaced with a template

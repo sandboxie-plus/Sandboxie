@@ -144,6 +144,7 @@
         <file>Actions/Editor3.png</file>
         <file>Actions/Editor2.png</file>
         <file>Actions/Folders.png</file>
+        <file>IconSun.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

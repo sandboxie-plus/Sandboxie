@@ -124,7 +124,7 @@ void CSandMan::CreateTrayMenu()
 	m_pTrayMenu->addAction(m_pExit);
 }
 
-QIcon CSandMan::GetTrayIcon(bool isConnected)
+QIcon CSandMan::GetTrayIcon(bool isConnected, bool bSun)
 {
 	bool bClassic = (theConf->GetInt("Options/SysTrayIcon", 1) == 2);
 
@@ -154,6 +154,8 @@ QIcon CSandMan::GetTrayIcon(bool isConnected)
 		else
 			overlay = GetIcon(IconFile, 0).pixmap(size);
 	}
+	else if(bSun)
+		overlay = GetIcon("IconSun", 0).pixmap(size);
 
 	painter.drawPixmap(0, 0, base);
 	if(!overlay.isNull()) painter.drawPixmap(0, 0, overlay);

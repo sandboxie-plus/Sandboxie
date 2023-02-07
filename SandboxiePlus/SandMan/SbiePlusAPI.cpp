@@ -971,7 +971,7 @@ void CSandBoxPlus::OnAsyncFinished()
 	SB_STATUS Status = pProgress->GetStatus();
 	if (Status.IsError()) {
 		m_JobQueue.clear();
-		theGUI->CheckResults(QList<SB_STATUS>() << Status);
+		theGUI->CheckResults(QList<SB_STATUS>() << Status, true);
 		return;
 	}
 	else

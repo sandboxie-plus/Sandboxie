@@ -48,7 +48,7 @@ public:
 
 	SB_STATUS			AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait = false, const QString& InitialMsg = QString());
 	static QString		FormatError(const SB_STATUS& Error);
-	static void			CheckResults(QList<SB_STATUS> Results);
+	static void			CheckResults(QList<SB_STATUS> Results, bool bAsync = false);
 
 	static QIcon		GetIcon(const QString& Name, int iAction = 1);
 
@@ -94,7 +94,7 @@ protected:
 	static void			RecoverFilesAsync(const CSbieProgressPtr& pProgress, const QString& BoxName, const QList<QPair<QString, QString>>& FileList, const QStringList& Checkers, int Action = 0);
 	static void			CheckFilesAsync(const CSbieProgressPtr& pProgress, const QString& BoxName, const QStringList &Files, const QStringList& Checkers);
 
-	QIcon				GetTrayIcon(bool isConnected = true);
+	QIcon				GetTrayIcon(bool isConnected = true, bool bSun = false);
 	QString				GetTrayText(bool isConnected = true);
 
 	void				CheckSupport();
@@ -379,6 +379,7 @@ private:
 	bool				m_bIconEmpty;
 	int					m_iIconDisabled;
 	bool				m_bIconBusy;
+	bool				m_bIconSun;
 	int					m_iDeletingContent;
 
 	bool				m_bExit;

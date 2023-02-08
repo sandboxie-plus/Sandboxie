@@ -656,7 +656,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="605"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="586"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="554"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="558"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
         <location filename="Windows/OptionsNetwork.cpp" line="508"/>
@@ -669,15 +669,15 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation type="vanished">Oyalayıcı</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="422"/>
-        <location filename="Windows/OptionsWindow.cpp" line="435"/>
+        <location filename="Windows/OptionsWindow.cpp" line="420"/>
+        <location filename="Windows/OptionsWindow.cpp" line="433"/>
         <location filename="Windows/OptionsAccess.cpp" line="24"/>
         <source>Browse for File</source>
         <translation>Dosya için Göz At</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="872"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="887"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="876"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="891"/>
         <source>Please enter a menu title</source>
         <translation>Lütfen bir menü başlığı girin</translation>
     </message>
@@ -738,12 +738,12 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation type="vanished">Lider</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="961"/>
-        <location filename="Windows/OptionsWindow.cpp" line="979"/>
+        <location filename="Windows/OptionsWindow.cpp" line="959"/>
+        <location filename="Windows/OptionsWindow.cpp" line="977"/>
         <location filename="Windows/OptionsAccess.cpp" line="398"/>
         <location filename="Windows/OptionsAccess.cpp" line="630"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="492"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="587"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="496"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="591"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
         <location filename="Windows/OptionsNetwork.cpp" line="441"/>
         <location filename="Windows/OptionsNetwork.cpp" line="533"/>
@@ -811,17 +811,17 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Yalnızca başlık odaktayken göster</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="868"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="872"/>
         <source>Select Program</source>
         <translation>Program Seç</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="883"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="887"/>
         <source>Please enter a command</source>
         <translation>Lütfen bir komut girin</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="687"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="691"/>
         <source>kilobytes (%1)</source>
         <translation>kilobayt (%1)</translation>
     </message>
@@ -841,13 +841,13 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Pencere başlığını değiştirme</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="963"/>
+        <location filename="Windows/OptionsWindow.cpp" line="961"/>
         <location filename="Windows/OptionsAccess.cpp" line="393"/>
         <location filename="Windows/OptionsAccess.cpp" line="626"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="535"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="610"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="487"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="583"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="491"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="587"/>
         <location filename="Windows/OptionsNetwork.cpp" line="436"/>
         <location filename="Windows/OptionsNetwork.cpp" line="529"/>
         <location filename="Windows/OptionsNetwork.cpp" line="642"/>
@@ -860,7 +860,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Klasör için Göz At</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="972"/>
+        <location filename="Windows/OptionsWindow.cpp" line="970"/>
         <source>Enter program:</source>
         <translation>Program girin:</translation>
     </message>
@@ -885,47 +885,47 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Lütfen bir hizmet tanımlayıcı girin</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="285"/>
+        <location filename="Windows/OptionsWindow.cpp" line="262"/>
         <source>File Options</source>
         <translation>Dosya Seçenekleri</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="296"/>
+        <location filename="Windows/OptionsWindow.cpp" line="294"/>
         <source>Grouping</source>
         <translation>Gruplama</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="595"/>
+        <location filename="Windows/OptionsWindow.cpp" line="593"/>
         <source>Search for options</source>
         <translation>Seçeneklerde ara</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="725"/>
+        <location filename="Windows/OptionsWindow.cpp" line="723"/>
         <source>Box: %1</source>
         <translation>Alan: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="726"/>
+        <location filename="Windows/OptionsWindow.cpp" line="724"/>
         <source>Template: %1</source>
         <translation>Şablon: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="727"/>
+        <location filename="Windows/OptionsWindow.cpp" line="725"/>
         <source>Global: %1</source>
         <translation>Genel: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="728"/>
+        <location filename="Windows/OptionsWindow.cpp" line="726"/>
         <source>Default: %1</source>
         <translation>Varsayılan: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="903"/>
+        <location filename="Windows/OptionsWindow.cpp" line="901"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>Bu korumalı alan silindi, bu nedenle yapılandırma kaydedilemiyor.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="949"/>
+        <location filename="Windows/OptionsWindow.cpp" line="947"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>Bazı değişiklikler henüz kaydedilmedi, bu seçenekler penceresini gerçekten kapatmak istiyor musunuz?</translation>
     </message>
@@ -1238,55 +1238,55 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Sürüm 2</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="253"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="254"/>
         <source>Open Box Options</source>
         <translation>Alan Seçeneklerini Aç</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="254"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="255"/>
         <source>Browse Content</source>
         <translation>İçeriğe Göz At</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="255"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="256"/>
         <source>Start File Recovery</source>
         <translation>Dosya Kurtarmayı Başlatın</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="256"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="257"/>
         <source>Show Run Dialog</source>
         <translation>Çalıştır Diyaloğunu Göster</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="287"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="290"/>
         <source>Indeterminate</source>
         <translation>Belirsiz</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="459"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="559"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="463"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="563"/>
         <source>Always copy</source>
         <translation>Her zaman kopyala</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="460"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="560"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="464"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="564"/>
         <source>Don&apos;t copy</source>
         <translation>Kopyalama</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="461"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="561"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="465"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="565"/>
         <source>Copy empty</source>
         <translation>Boş kopyala</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="793"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="797"/>
         <source>Select color</source>
         <translation>Renk seç</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="868"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="872"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Çalıştırılabilir dosyalar (*.exe *.cmd)</translation>
     </message>
@@ -1621,22 +1621,22 @@ Tam yol: %4</translation>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="299"/>
+        <location filename="SandManRecovery.cpp" line="301"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation>Sandboxie-Plus - Kurtarma Günlüğü</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="310"/>
+        <location filename="SandManRecovery.cpp" line="312"/>
         <source>Time|Box Name|File Path</source>
         <translation>Zaman|Alan Adı|Dosya Yolu</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="312"/>
+        <location filename="SandManRecovery.cpp" line="314"/>
         <source>Cleanup Recovery Log</source>
         <translation>Temizleme Kurtarma Günlüğü</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="322"/>
+        <location filename="SandManRecovery.cpp" line="324"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation>Şu dosyalar yakın zamanda kurtarıldı ve bir korumalı alandan taşındı.</translation>
@@ -1725,22 +1725,22 @@ Tam yol: %4</translation>
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="3303"/>
+        <location filename="SandMan.cpp" line="3323"/>
         <source>Waiting for folder: %1</source>
         <translation>Klasör bekleniyor: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3304"/>
+        <location filename="SandMan.cpp" line="3324"/>
         <source>Deleting folder: %1</source>
         <translation>Klasör siliniyor: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3305"/>
+        <location filename="SandMan.cpp" line="3325"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>Klasörler birleştiriliyor: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3306"/>
+        <location filename="SandMan.cpp" line="3326"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>Anlık Görüntü Birleştirme Tamamlanıyor...</translation>
     </message>
@@ -1822,7 +1822,7 @@ Tam yol: %4</translation>
         <translation>Çıkış</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2367"/>
+        <location filename="SandMan.cpp" line="2381"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>Sandboxie-Plus taşınabilir modda başlatıldı ve gerekli hizmetleri oluşturması gerekiyor. Bunun için yönetici ayrıcalıkları isteyecektir.</translation>
     </message>
@@ -1843,19 +1843,19 @@ Tam yol: %4</translation>
         <translation>&amp;Görünüm</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2979"/>
+        <location filename="SandMan.cpp" line="2995"/>
         <source>Error deleting sandbox folder: %1</source>
         <translation>Korumalı alan klasörü silinirken hata: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="455"/>
-        <location filename="SandMan.cpp" line="3277"/>
+        <location filename="SandMan.cpp" line="3297"/>
         <source>About Sandboxie-Plus</source>
         <translation>Sandboxie-Plus Hakkında</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="176"/>
-        <location filename="SandMan.cpp" line="1762"/>
+        <location filename="SandMan.cpp" line="1775"/>
         <source>Sandboxie-Plus v%1</source>
         <translation>Sandboxie-Plus v%1</translation>
     </message>
@@ -1885,7 +1885,7 @@ Tam yol: %4</translation>
         <translation>Destek Forumu&apos;nu Ziyaret Et</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2970"/>
+        <location filename="SandMan.cpp" line="2986"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
         <translation>%1 korumalı alanından yapılandırma kopyalaması başarısız oldu: %2</translation>
     </message>
@@ -1899,12 +1899,12 @@ Tam yol: %4</translation>
         <translation>Basit Görünüm</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2098"/>
+        <location filename="SandMan.cpp" line="2112"/>
         <source>%1 (%2): </source>
         <translation>%1 (%2): </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2243"/>
+        <location filename="SandMan.cpp" line="2257"/>
         <source>Login Failed: %1</source>
         <translation>Giriş başarısız: %1</translation>
     </message>
@@ -1914,12 +1914,12 @@ Tam yol: %4</translation>
         <translation>Temizle</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1081"/>
-        <location filename="SandMan.cpp" line="1461"/>
-        <location filename="SandMan.cpp" line="1792"/>
-        <location filename="SandMan.cpp" line="2368"/>
-        <location filename="SandMan.cpp" line="2795"/>
-        <location filename="SandMan.cpp" line="2811"/>
+        <location filename="SandMan.cpp" line="1085"/>
+        <location filename="SandMan.cpp" line="1474"/>
+        <location filename="SandMan.cpp" line="1805"/>
+        <location filename="SandMan.cpp" line="2382"/>
+        <location filename="SandMan.cpp" line="2810"/>
+        <location filename="SandMan.cpp" line="2826"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Bu mesajı bir daha gösterme.</translation>
     </message>
@@ -1939,17 +1939,17 @@ Tam yol: %4</translation>
         <translation>Hizmeti Yükle</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2988"/>
+        <location filename="SandMan.cpp" line="3004"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
         <translation>Eski anlık görüntü dizini kaldırılamadı &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2810"/>
+        <location filename="SandMan.cpp" line="2825"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
         <translation>Düzenleyici kapatılır kapatılmaz değişiklikler otomatik olarak uygulanacaktır.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1062"/>
+        <location filename="SandMan.cpp" line="1064"/>
         <source>Do you want to close Sandboxie Manager?</source>
         <translation>Sandboxie Yöneticisi&apos;ni kapatmak istiyor musunuz?</translation>
     </message>
@@ -1959,7 +1959,7 @@ Tam yol: %4</translation>
         <translation type="vanished">Sandboxie-Plus&apos;ı Bağışlarla Destekleyin</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2984"/>
+        <location filename="SandMan.cpp" line="3000"/>
         <source>Failed to create directory for new snapshot</source>
         <translation>Yeni anlık görüntü için dizin oluşturulamadı</translation>
     </message>
@@ -1969,18 +1969,18 @@ Tam yol: %4</translation>
         <translation>Sürücüyü Durdur</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="993"/>
+        <location filename="SandMan.cpp" line="995"/>
         <source>Sbie Messages</source>
         <translation>Sbie Mesajları</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="97"/>
-        <location filename="SandManRecovery.cpp" line="154"/>
+        <location filename="SandManRecovery.cpp" line="99"/>
+        <location filename="SandManRecovery.cpp" line="156"/>
         <source>Checking file %1</source>
         <translation>%1 dosyası denetleniyor</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="105"/>
+        <location filename="SandManRecovery.cpp" line="107"/>
         <source>The file %1 failed a security check!<byte value="xd"/>
 <byte value="xd"/>
 %2</source>
@@ -1989,12 +1989,12 @@ Tam yol: %4</translation>
 %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="113"/>
+        <location filename="SandManRecovery.cpp" line="115"/>
         <source>All files passed the checks</source>
         <translation>Tüm dosyalar denetimi geçti</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="173"/>
+        <location filename="SandManRecovery.cpp" line="175"/>
         <source>The file %1 failed a security check, do you want to recover it anyway?<byte value="xd"/>
 <byte value="xd"/>
 %2</source>
@@ -2006,19 +2006,19 @@ Tam yol: %4</translation>
 %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="236"/>
+        <location filename="SandManRecovery.cpp" line="238"/>
         <source>Failed to recover some files: 
 </source>
         <translation>Bazı dosyalar kurtarılamadı: 
 </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2982"/>
+        <location filename="SandMan.cpp" line="2998"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>&apos;%1&apos; dizini, &apos;%2&apos; dizinine taşınamadı</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="196"/>
+        <location filename="SandManRecovery.cpp" line="198"/>
         <source>Recovering file %1 to %2</source>
         <translation>%1&apos;dan %2&apos;a dosya kurtarılıyor</translation>
     </message>
@@ -2028,14 +2028,14 @@ Tam yol: %4</translation>
         <translation>Çevrimiçi Belgeler</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2500"/>
-        <location filename="SandMan.cpp" line="2502"/>
-        <location filename="SandMan.cpp" line="3022"/>
+        <location filename="SandMan.cpp" line="2514"/>
+        <location filename="SandMan.cpp" line="2516"/>
+        <location filename="SandMan.cpp" line="3042"/>
         <source>Sandboxie-Plus - Error</source>
         <translation>Sandboxie-Plus - Hata</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="985"/>
+        <location filename="SandMan.cpp" line="987"/>
         <source>Time|Message</source>
         <translation>Zaman|Mesaj</translation>
     </message>
@@ -2050,12 +2050,12 @@ Tam yol: %4</translation>
         <translation>Göster/Gizle</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2981"/>
+        <location filename="SandMan.cpp" line="2997"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
         <translation>Bir korumalı alan, silinmeden önce boşaltılmalıdır.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2975"/>
+        <location filename="SandMan.cpp" line="2991"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
         <translation>Korumalı alan adı yalnızca harf, rakam ve alt çizgi içerebilir.</translation>
     </message>
@@ -2069,12 +2069,12 @@ Tam yol: %4</translation>
         <translation>&amp;Bakım</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2974"/>
+        <location filename="SandMan.cpp" line="2990"/>
         <source>The sandbox name can not be a device name.</source>
         <translation>Korumalı alan adı bir cihaz adı olamaz.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3024"/>
+        <location filename="SandMan.cpp" line="3044"/>
         <source>Operation failed for %1 item(s).</source>
         <translation>%1 öge için işlem başarısız oldu.</translation>
     </message>
@@ -2107,12 +2107,12 @@ Tam yol: %4</translation>
         <translation>Bağlan</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2225"/>
+        <location filename="SandMan.cpp" line="2239"/>
         <source>Only Administrators can change the config.</source>
         <translation>Yapılandırmayı yalnızca Yöneticiler değiştirebilir.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2986"/>
+        <location filename="SandMan.cpp" line="3002"/>
         <source>Snapshot not found</source>
         <translation>Anlık görüntü bulunamadı</translation>
     </message>
@@ -2122,7 +2122,7 @@ Tam yol: %4</translation>
         <translation>Tümünü Durdur</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2977"/>
+        <location filename="SandMan.cpp" line="2993"/>
         <source>Delete protection is enabled for the sandbox</source>
         <translation>Korumalı alan için silme koruması etkinleştirilmiş</translation>
     </message>
@@ -2132,7 +2132,7 @@ Tam yol: %4</translation>
         <translation>&amp;Gelişmiş</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2529"/>
+        <location filename="SandMan.cpp" line="2543"/>
         <source>Executing maintenance operation, please wait...</source>
         <translation>Bakım işlemi yapılıyor, lütfen bekleyin...</translation>
     </message>
@@ -2147,7 +2147,7 @@ Tam yol: %4</translation>
         <translation>Yeni Alan Oluştur</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2976"/>
+        <location filename="SandMan.cpp" line="2992"/>
         <source>Failed to terminate all processes</source>
         <translation>Tüm işlemler sonlandırılamadı</translation>
     </message>
@@ -2157,12 +2157,12 @@ Tam yol: %4</translation>
         <translation>Gelişmiş Görünüm</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2972"/>
+        <location filename="SandMan.cpp" line="2988"/>
         <source>Failed to delete sandbox %1: %2</source>
         <translation>%1: %2 Korumalı alanı silinemedi</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2096"/>
+        <location filename="SandMan.cpp" line="2110"/>
         <source>PID %1: </source>
         <translation>PID %1: </translation>
     </message>
@@ -2173,17 +2173,17 @@ Tam yol: %4</translation>
         <translation>Tüm İşlemleri Sonlandır</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2235"/>
+        <location filename="SandMan.cpp" line="2249"/>
         <source>Please enter the configuration password.</source>
         <translation>Lütfen yapılandırma parolasını girin.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2991"/>
+        <location filename="SandMan.cpp" line="3007"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
         <translation>Bölümdeki yapılandırmayı güncelleme yetkiniz yok &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2987"/>
+        <location filename="SandMan.cpp" line="3003"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
         <translation>&apos;%1&apos; ve &apos;%2&apos; anlık görüntü dizinleri birleştirilirken hata oluştu, anlık görüntü tam olarak birleştirilmedi.</translation>
     </message>
@@ -2207,12 +2207,12 @@ Tam yol: %4</translation>
         <translation>Sonlandırılmışları Tut</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2971"/>
+        <location filename="SandMan.cpp" line="2987"/>
         <source>A sandbox of the name %1 already exists</source>
         <translation>%1 adında bir korumalı alan zaten var</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2992"/>
+        <location filename="SandMan.cpp" line="3008"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
         <translation>%2: %3 bölümünde %1 yapılandırma parametresi ayarlanamadı</translation>
     </message>
@@ -2257,115 +2257,115 @@ Tam yol: %4</translation>
         <translation>Güncellemeyi indirmek için tıklayın</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1621"/>
+        <location filename="SandMan.cpp" line="1634"/>
         <source>Removed Shortcut: %1</source>
         <translation>Kaldırılan Kısayol: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1700"/>
+        <location filename="SandMan.cpp" line="1713"/>
         <source>Updated Shortcut to: %1</source>
         <translation>Kısayol şu şekilde güncellendi: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1702"/>
+        <location filename="SandMan.cpp" line="1715"/>
         <source>Added Shortcut to: %1</source>
         <translation>Eklenen Kısayol: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1753"/>
+        <location filename="SandMan.cpp" line="1766"/>
         <source>Auto removing sandbox %1</source>
         <translation>%1 korumalı alanı otomatik olarak kaldırıyor</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1768"/>
+        <location filename="SandMan.cpp" line="1781"/>
         <source>%1 Directory: %2</source>
         <translation>%1 Dizini: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1768"/>
+        <location filename="SandMan.cpp" line="1781"/>
         <source>Application</source>
         <translation>Uygulama</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1768"/>
+        <location filename="SandMan.cpp" line="1781"/>
         <source>Installation</source>
         <translation>Kurulum</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1834"/>
+        <location filename="SandMan.cpp" line="1847"/>
         <source> for Personal use</source>
         <translation> Kişisel kullanım için</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1836"/>
+        <location filename="SandMan.cpp" line="1849"/>
         <source>   -   for Non-Commercial use ONLY</source>
         <translation>   -   Ticari Olmayan kullanım için</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1905"/>
+        <location filename="SandMan.cpp" line="1918"/>
         <source>   -   NOT connected</source>
         <translation>   -   Bağlı DEĞİL</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2168"/>
+        <location filename="SandMan.cpp" line="2182"/>
         <source>The evaluation period has expired!!!</source>
         <oldsource>The evaluation periode has expired!!!</oldsource>
         <translation>Değerlendirme süresi dolmuştur!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2263"/>
+        <location filename="SandMan.cpp" line="2277"/>
         <source>Select file name</source>
         <translation>Dosya adı seçin</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2263"/>
+        <location filename="SandMan.cpp" line="2277"/>
         <source>7-zip Archive (*.7z)</source>
         <translation>7-zip Arşivi (*.7z)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2276"/>
+        <location filename="SandMan.cpp" line="2290"/>
         <source>This name is already in use, please select an alternative box name</source>
         <oldsource>This Name is already in use, please select an alternative box name</oldsource>
         <translatorcomment>Sandbox için Korumalı Alan kullanıldığından dolayı box için de alan kullandım.</translatorcomment>
         <translation>Bu ad zaten kullanılıyor, lütfen alternatif bir alan adı seçin</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2290"/>
+        <location filename="SandMan.cpp" line="2304"/>
         <source>Importing: %1</source>
         <translation>İçe aktarılıyor: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2343"/>
+        <location filename="SandMan.cpp" line="2357"/>
         <source>No Recovery</source>
         <translation>Kurtarma Yok</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2349"/>
+        <location filename="SandMan.cpp" line="2363"/>
         <source>No Messages</source>
         <translation>Mesaj Yok</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2509"/>
+        <location filename="SandMan.cpp" line="2523"/>
         <source>Maintenance operation completed</source>
         <translation>Bakım işlemi tamamlandı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2639"/>
+        <location filename="SandMan.cpp" line="2654"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
         <translation>Bu işlevsellik, Plus kullanıcı arayüzünde korumalı alan liste görünümüne entegre edilmiştir.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2640"/>
+        <location filename="SandMan.cpp" line="2655"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
         <translation>Alan/grup bağlam menüsünü kullanarak alanları ve grupları diğer gruplara taşıyabilirsiniz. Öğeleri hareket ettirmek için sürükle ve bırak özelliğini de kullanabilirsiniz. Alternatif olarak, öğeleri grupları içinde yukarı ve aşağı taşımak için ALT tuşunu basılı tutarken ok tuşlarını da kullanabilirsiniz.&lt;br /&gt;Korumalı Alan menüsünden yeni alanlar ve gruplar oluşturabilirsiniz.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2708"/>
+        <location filename="SandMan.cpp" line="2723"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
         <translation>Gizlenmiş mesaj kutuları dahil her şeyi (evet) veya yalnızca tüm günlük mesajlarını (hayır) sıfırlamak mı istiyorsunuz?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2793"/>
+        <location filename="SandMan.cpp" line="2808"/>
         <source>You are about to edit the Templates.ini, this is generally not recommended.
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
@@ -2373,123 +2373,123 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>Templates.ini dosyasını düzenlemek üzeresiniz, bu genellikle önerilmez. Bu dosya Sandboxie&apos;nin bir parçasıdır ve üzerinde yapılan tüm değişiklikler Sandboxie güncellendiğinde kaybolacaktır.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2809"/>
+        <location filename="SandMan.cpp" line="2824"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
         <translation>Dosya her kaydedildiğinde değişiklikler otomatik olarak uygulanacaktır.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2964"/>
+        <location filename="SandMan.cpp" line="2980"/>
         <source>Administrator rights are required for this operation.</source>
         <translation>Bu işlem için yönetici hakları gereklidir.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2965"/>
+        <location filename="SandMan.cpp" line="2981"/>
         <source>Failed to execute: %1</source>
         <translation>%1 çalıştırılamadı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2966"/>
+        <location filename="SandMan.cpp" line="2982"/>
         <source>Failed to connect to the driver</source>
         <translation>Sürücüye bağlanılamadı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2967"/>
+        <location filename="SandMan.cpp" line="2983"/>
         <source>Failed to communicate with Sandboxie Service: %1</source>
         <translation>Sandboxie Hizmeti ile iletişim kurulamadı: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2968"/>
+        <location filename="SandMan.cpp" line="2984"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
         <translation>Uyumsuz bir Sandboxie %1 bulundu. Uyumlu sürümler: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2969"/>
+        <location filename="SandMan.cpp" line="2985"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
         <translation>Sandboxie kurulum yolu bulunamıyor.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2973"/>
+        <location filename="SandMan.cpp" line="2989"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
         <translation>Korumalı alan adı 32 karakterden uzun olamaz.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2983"/>
+        <location filename="SandMan.cpp" line="2999"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
         <translation>Bu Anlık Görüntü işlemi, alan içinde işlemler çalışırken gerçekleştirilemez.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2989"/>
+        <location filename="SandMan.cpp" line="3005"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>Birden çok anlık görüntü tarafından paylaşılan bir anlık görüntü kaldırılamaz</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2998"/>
+        <location filename="SandMan.cpp" line="3014"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
         <translation>İçe/Dışa Aktarma kullanılamıyor, 7z.dll yüklenemedi</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2999"/>
+        <location filename="SandMan.cpp" line="3015"/>
         <source>Failed to create the box archive</source>
         <translation>Alan arşivi oluşturulamadı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3000"/>
+        <location filename="SandMan.cpp" line="3016"/>
         <source>Failed to open the 7z archive</source>
         <translation>7z arşivi açılamadı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3001"/>
+        <location filename="SandMan.cpp" line="3017"/>
         <source>Failed to unpack the box archive</source>
         <translation>Alan arşivi açılamadı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3002"/>
+        <location filename="SandMan.cpp" line="3018"/>
         <source>The selected 7z file is NOT a box archive</source>
         <translation>Seçilen 7z dosyası bir alan arşivi DEĞİLDİR</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3055"/>
+        <location filename="SandMan.cpp" line="3075"/>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
         <translation>%1 bağlantısını korumalı (evet) veya korumasız (hayır) bir Web tarayıcısında mı açmak istiyorsunuz?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3056"/>
+        <location filename="SandMan.cpp" line="3076"/>
         <source>Remember choice for later.</source>
         <translation>Seçimi sonrası için hatırla.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3199"/>
+        <location filename="SandMan.cpp" line="3219"/>
         <source>Copy Cell</source>
         <translation>Hücreyi Kopyala</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3200"/>
+        <location filename="SandMan.cpp" line="3220"/>
         <source>Copy Row</source>
         <translation>Satırı Kopyala</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3201"/>
+        <location filename="SandMan.cpp" line="3221"/>
         <source>Copy Panel</source>
         <translation>Paneli Kopyala</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2500"/>
+        <location filename="SandMan.cpp" line="2514"/>
         <source>Failed to stop all Sandboxie components</source>
         <translation>Tüm Sandboxie bileşenleri durdurulamadı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2502"/>
+        <location filename="SandMan.cpp" line="2516"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>Gerekli Sandboxie bileşenleri başlatılamadı</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="208"/>
+        <location filename="SandManRecovery.cpp" line="210"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>%1 dosyası zaten var, üzerine yazmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="174"/>
-        <location filename="SandManRecovery.cpp" line="209"/>
+        <location filename="SandManRecovery.cpp" line="176"/>
+        <location filename="SandManRecovery.cpp" line="211"/>
         <source>Do this for all files!</source>
         <translation>Bunu tüm dosyalar için yap!</translation>
     </message>
@@ -2499,22 +2499,22 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>Her Zaman Üstte</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1476"/>
+        <location filename="SandMan.cpp" line="1489"/>
         <source>Cleaned up removed templates...</source>
         <translation>Kaldırılan şablonlar temizlendi...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2993"/>
+        <location filename="SandMan.cpp" line="3009"/>
         <source>Can not create snapshot of an empty sandbox</source>
         <translation>Boş bir korumalı alanın anlık görüntüsü oluşturulamaz</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2994"/>
+        <location filename="SandMan.cpp" line="3010"/>
         <source>A sandbox with that name already exists</source>
         <translation>Bu adda bir korumalı alan zaten var</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3198"/>
+        <location filename="SandMan.cpp" line="3218"/>
         <source>Reset Columns</source>
         <translation>Sütunları Sıfırla</translation>
     </message>
@@ -2524,17 +2524,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>Gizli Alanları Göster</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1459"/>
+        <location filename="SandMan.cpp" line="1472"/>
         <source>Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?</source>
         <translation>Bazı uyumluluk şablonları (%1) eksik, büyük olasılıkla silinmiş, bunları tüm alanlardan kaldırmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2308"/>
+        <location filename="SandMan.cpp" line="2322"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
         <translation>Tüm korumalı alanlardaki tüm işlemleri sonlandırmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2309"/>
+        <location filename="SandMan.cpp" line="2323"/>
         <source>Terminate all without asking</source>
         <translation>Hepsini sormadan sonlandır</translation>
     </message>
@@ -2559,7 +2559,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>Sandboxie-Plus - Pencere Bulucu</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1865"/>
+        <location filename="SandMan.cpp" line="1878"/>
         <source>Default sandbox not found; creating: %1</source>
         <translation>Varsayılan korumalı alan bulunamadı; oluşturuluyor: %1</translation>
     </message>
@@ -2569,7 +2569,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>İzleme Günlüğünü Temizle</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1000"/>
+        <location filename="SandMan.cpp" line="1002"/>
         <source>Trace Log</source>
         <translation>İzleme Günlüğü</translation>
     </message>
@@ -2579,17 +2579,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>İzlemeleri Günlükle</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1339"/>
+        <location filename="SandMan.cpp" line="1343"/>
         <source>Unknown operation &apos;%1&apos; requested via command line</source>
         <translation>Bilinmeyen işlem &apos;%1&apos; komut satırı aracılığıyla istendi</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2396"/>
+        <location filename="SandMan.cpp" line="2410"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
         <translation>DİKKAT: Bu Sandboxie oturumunu başka bir aracı (muhtemelen SbieCtrl.exe) zaten yönetiyor, lütfen önce onu kapatın ve devralmak için yeniden bağlanın.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2995"/>
+        <location filename="SandMan.cpp" line="3011"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>Yapılandırma parolası 64 karakterden uzun olmamalıdır</translation>
     </message>
@@ -2609,17 +2609,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>Tüm Oturumları Göster</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2961"/>
+        <location filename="SandMan.cpp" line="2977"/>
         <source>Error Status: 0x%1 (%2)</source>
         <translation>Hata Durumu: 0x%1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2962"/>
+        <location filename="SandMan.cpp" line="2978"/>
         <source>Unknown</source>
         <translation>Bilinmeyen</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3004"/>
+        <location filename="SandMan.cpp" line="3020"/>
         <source>Unknown Error Status: 0x%1</source>
         <translation>Bilinmeyen Hata Durumu: 0x%1</translation>
     </message>
@@ -2629,7 +2629,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon&apos;da Sandboxie-Plus&apos;ı destekleyin&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1080"/>
+        <location filename="SandMan.cpp" line="1084"/>
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
 
 Do you want to do the clean up?</source>
@@ -2638,22 +2638,22 @@ Do you want to do the clean up?</source>
 Temizlik yapmak ister misin?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1250"/>
+        <location filename="SandMan.cpp" line="1254"/>
         <source>This box provides enhanced security isolation, it is suitable to test untrusted software.</source>
         <translation>Bu alan gelişmiş güvenlik yalıtımı sağlar, güvenilmeyen yazılımları test etmek için uygundur.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1254"/>
+        <location filename="SandMan.cpp" line="1258"/>
         <source>This box provides standard isolation, it is suitable to run your software to enhance security.</source>
         <translation>Bu alan standart yalıtım sağlar, güvenliği artırmak için yazılımınızı çalıştırmaya uygundur.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1258"/>
+        <location filename="SandMan.cpp" line="1262"/>
         <source>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</source>
         <translation>Bu alan, yalıtımı zorla uygulamaz. Yalnızca yazılım sanallaştırması için uygulama bölmesi olarak kullanımı amaçlanmıştır.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1263"/>
+        <location filename="SandMan.cpp" line="1267"/>
         <source>
 
 This box prevents access to all user data locations, except explicitly granted in the Resource Access options.</source>
@@ -2662,12 +2662,12 @@ This box prevents access to all user data locations, except explicitly granted i
 Bu alan, &apos;Kaynak Erişimi&apos; seçeneklerinde açıkça izin verilenler dışında tüm kullanıcı veri konumlarına erişimi engeller.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1419"/>
+        <location filename="SandMan.cpp" line="1429"/>
         <source>No Force Process</source>
         <translation>Zorlanmış İşlem Yok</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1789"/>
+        <location filename="SandMan.cpp" line="1802"/>
         <source>Sandboxie-Plus was started in portable mode, do you want to put the Sandbox folder into its parent directory?
 Yes will choose: %1
 No will choose: %2</source>
@@ -2676,22 +2676,22 @@ Evet şunları seçer: %1
 Hayır şunları seçer: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2127"/>
+        <location filename="SandMan.cpp" line="2141"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>Seçilen özellik seti yalnızca proje destekçileri tarafından kullanılabilir. Bu özellik setinin destekçi sertifikası olmadan etkinleştirildiği bir alanda başlatılan işlemler 5 dakika sonra sonlandırılacaktır.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get- cert&quot;&gt;Proje destekçisi olun&lt;/a&gt; ve bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; alın</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3258"/>
+        <location filename="SandMan.cpp" line="3278"/>
         <source>This copy of Sandboxie+ is certified for: %1</source>
         <translation>Sandboxie+&apos;nın bu kopyası şu kişiler için sertifikalandırılmıştır: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3260"/>
+        <location filename="SandMan.cpp" line="3280"/>
         <source>Sandboxie+ is free for personal and non-commercial use.</source>
         <translation>Sandboxie+, kişisel ve ticari olmayan kullanım için ücretsizdir.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3263"/>
+        <location filename="SandMan.cpp" line="3283"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>Sandboxie-Plus, Sandboxie&apos;nin açık kaynaklı bir devamıdır.&lt;br /&gt;Daha fazla bilgi için &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; adresini ziyaret edin.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Sürücü versiyonu: %1&lt;br /&gt;Özellikler: %2&lt;br /&gt;&lt;br /&gt;Simgeler için &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
@@ -2855,14 +2855,14 @@ Hayır şunları seçer: %2</translation>
         <translation>Güncellemeyi uygulamak için tıklayın</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1010"/>
+        <location filename="SandMan.cpp" line="1012"/>
         <source>Time|Box Name|File Path</source>
         <translation>Zaman|Alan Adı|Dosya Yolu</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="568"/>
         <location filename="SandMan.cpp" line="651"/>
-        <location filename="SandMan.cpp" line="1018"/>
+        <location filename="SandMan.cpp" line="1020"/>
         <source>Recovery Log</source>
         <translation>Kurtarma Günlüğü</translation>
     </message>
@@ -2882,93 +2882,93 @@ Hayır şunları seçer: %2</translation>
         <translation>&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;Yeni bir Sandboxie-Plus güncellemesi v%1 mevcut&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1528"/>
+        <location filename="SandMan.cpp" line="1541"/>
         <source>Executing OnBoxDelete: %1</source>
         <translation>AlandaSilme yürütülüyor: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1734"/>
+        <location filename="SandMan.cpp" line="1747"/>
         <source>Auto deleting content of %1</source>
         <translation>%1 içeriği otomatik olarak siliniyor</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1769"/>
+        <location filename="SandMan.cpp" line="1782"/>
         <source>Sandboxie-Plus Version: %1 (%2)</source>
         <translation>Sandboxie-Plus Sürümü: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1771"/>
+        <location filename="SandMan.cpp" line="1784"/>
         <source>Data Directory: %1</source>
         <translation>Veri Dizini: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2065"/>
+        <location filename="SandMan.cpp" line="2079"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
         <translation>%2 alanında başlatılan %1 programı, alan yalnızca proje destekçilerine sunulan özellikleri kullanacak şekilde yapılandırıldığından 5 dakika içinde sonlandırılacak.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2067"/>
+        <location filename="SandMan.cpp" line="2081"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
         <translation>%1 alanı, yalnızca proje destekçilerine sunulan özellikleri kullanacak şekilde yapılandırılmıştır, bu ön ayarlar yok sayılacaktır.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2068"/>
+        <location filename="SandMan.cpp" line="2082"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Proje destekçisi olun&lt;/a&gt; ve bir &lt;a href=&quot;https kazanın ://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;destekçi sertifikası&lt;/a&gt;alın</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2328"/>
+        <location filename="SandMan.cpp" line="2342"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
         <translation>Lütfen Zorunlu Programlar kurallarını devre dışı bırakmak için süreyi saniye cinsinden girin.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2504"/>
+        <location filename="SandMan.cpp" line="2518"/>
         <source>Maintenance operation failed (%1)</source>
         <translation>Bakım işlemi başarısız oldu (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2978"/>
+        <location filename="SandMan.cpp" line="2994"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
         <translation>Alan içeriği silinmeden önce tüm korumalı alan işlemleri durdurulmalıdır</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2985"/>
+        <location filename="SandMan.cpp" line="3001"/>
         <source>Failed to copy box data files</source>
         <translation>Alan veri dosyaları kopyalanamadı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2990"/>
+        <location filename="SandMan.cpp" line="3006"/>
         <source>Failed to remove old box data files</source>
         <translation>Eski alan veri dosyaları kaldırılamadı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2996"/>
+        <location filename="SandMan.cpp" line="3012"/>
         <source>The operation was canceled by the user</source>
         <translation>İşlem kullanıcı tarafından iptal edildi</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3250"/>
+        <location filename="SandMan.cpp" line="3270"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</source>
         <oldsource>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</oldsource>
         <translation>&lt;h3&gt;Sandboxie-Plus hakkında&lt;/h3&gt;&lt;p&gt;Sürüm %1&lt;/p&gt;&lt;p&gt;Telif hakkı (c) 2020-2023, DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2174"/>
+        <location filename="SandMan.cpp" line="2188"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
         <translation>Destekçi sertifikası bu derleme için geçerli değil, lütfen yenilenmiş bir sertifika alın</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2177"/>
+        <location filename="SandMan.cpp" line="2191"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <translation>Destekçi sertifikasının süresi doldu%1, lütfen yenilenmiş bir sertifika alın</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2178"/>
+        <location filename="SandMan.cpp" line="2192"/>
         <source>, but it remains valid for the current build</source>
         <translation>, ancak mevcut derleme için geçerli kalır</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2180"/>
+        <location filename="SandMan.cpp" line="2194"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
         <translation>Destekçi sertifikasının süresi %1 gün içinde dolacak, lütfen yenilenmiş bir sertifika alın</translation>
     </message>
@@ -3008,27 +3008,27 @@ Hayır şunları seçer: %2</translation>
         <translation>Web tarayıcısını açmak için tıklayın</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="176"/>
+        <location filename="SandManTray.cpp" line="178"/>
         <source> - Driver/Service NOT Running!</source>
         <translation> - Sürücü/Hizmet ÇALIŞMIYOR!</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="178"/>
+        <location filename="SandManTray.cpp" line="180"/>
         <source> - Deleting Sandbox Content</source>
         <translation> - Korumalı Alan İçeriğini Silme</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1549"/>
+        <location filename="SandMan.cpp" line="1562"/>
         <source>Auto Deleting %1 Content</source>
         <translation>%1 İçeriği Otomatik Siliniyor</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="1770"/>
+        <location filename="SandMan.cpp" line="1783"/>
         <source>Current Config: %1</source>
         <translation>Geçerli Yapılandırma: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2855"/>
+        <location filename="SandMan.cpp" line="2870"/>
         <source>Sandboxie config has been reloaded</source>
         <translation>Sandboxie yapılandırması yeniden yüklendi</translation>
     </message>
@@ -3275,8 +3275,8 @@ Hayır şunları seçer: %2</translation>
         <translation>Çalıştır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1415"/>
-        <location filename="Views/SbieView.cpp" line="1485"/>
+        <location filename="Views/SbieView.cpp" line="1417"/>
+        <location filename="Views/SbieView.cpp" line="1487"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>%1 korumalı alanına kısayol oluştur</translation>
     </message>
@@ -3330,7 +3330,7 @@ Hayır şunları seçer: %2</translation>
         <translation>Önayar</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="987"/>
+        <location filename="Views/SbieView.cpp" line="988"/>
         <source>Please enter a new group name</source>
         <translation>Lütfen yeni bir grup adı girin</translation>
     </message>
@@ -3340,7 +3340,7 @@ Hayır şunları seçer: %2</translation>
         <translation>[Yok]</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1271"/>
+        <location filename="Views/SbieView.cpp" line="1273"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>Lütfen Korumalı Alan için yeni bir ad girin.</translation>
     </message>
@@ -3469,41 +3469,41 @@ Hayır şunları seçer: %2</translation>
         <translation>Bu korumalı alana zorla</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1518"/>
+        <location filename="Views/SbieView.cpp" line="1520"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Bu alanda İnternet kısıtlamaları yok, bunları etkinleştirmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1075"/>
-        <location filename="Views/SbieView.cpp" line="1143"/>
-        <location filename="Views/SbieView.cpp" line="1382"/>
+        <location filename="Views/SbieView.cpp" line="1076"/>
+        <location filename="Views/SbieView.cpp" line="1144"/>
+        <location filename="Views/SbieView.cpp" line="1384"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Bu mesajı bir daha gösterme.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1323"/>
+        <location filename="Views/SbieView.cpp" line="1325"/>
         <source>This Sandbox is already empty.</source>
         <translation>Bu Korumalı Alan zaten boş.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1333"/>
+        <location filename="Views/SbieView.cpp" line="1335"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
         <translation>Seçili korumalı alanın içeriğini silmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1364"/>
+        <location filename="Views/SbieView.cpp" line="1366"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>Seçili alan(lar)daki tüm işlemleri sonlandırmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1600"/>
+        <location filename="Views/SbieView.cpp" line="1604"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Bu alan devre dışı, etkinleştirmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1134"/>
-        <location filename="Views/SbieView.cpp" line="1154"/>
-        <location filename="Views/SbieView.cpp" line="1558"/>
+        <location filename="Views/SbieView.cpp" line="1135"/>
+        <location filename="Views/SbieView.cpp" line="1155"/>
+        <location filename="Views/SbieView.cpp" line="1561"/>
         <source>This Sandbox is empty.</source>
         <translation>Bu Korumalı Alan boş.</translation>
     </message>
@@ -3724,55 +3724,55 @@ Hayır şunları seçer: %2</translation>
         <translation>Girişleri hareket ettir (negatif değerler yukarı, pozitif değerler aşağı hareket eder):</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1015"/>
+        <location filename="Views/SbieView.cpp" line="1016"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
         <translation>Korumalı Alan adı ve Alan Grubu adı &apos;,()&apos; sembolünü kullanamaz.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1256"/>
+        <location filename="Views/SbieView.cpp" line="1258"/>
         <source>Select file name</source>
         <translation>Dosya adı seçin</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1256"/>
+        <location filename="Views/SbieView.cpp" line="1258"/>
         <source>7-zip Archive (*.7z)</source>
         <translation>7-zip Arşivi (*.7z)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1264"/>
+        <location filename="Views/SbieView.cpp" line="1266"/>
         <source>Exporting: %1</source>
         <translation>Dışa aktarılıyor: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1365"/>
-        <location filename="Views/SbieView.cpp" line="1458"/>
+        <location filename="Views/SbieView.cpp" line="1367"/>
+        <location filename="Views/SbieView.cpp" line="1460"/>
         <source>Terminate without asking</source>
         <translation>Sormadan sonlandır</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1380"/>
+        <location filename="Views/SbieView.cpp" line="1382"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
         <translation>Sandboxie Başlat Menüsü şimdi görüntülenecektir. Menüden bir uygulama seçtikten sonra gerçek masaüstünüzde o uygulamayı Sandboxie&apos;nin gözetiminde çalıştırmak için kullanabileceğiniz yeni bir kısayol simgesi oluşturulacaktır.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1457"/>
+        <location filename="Views/SbieView.cpp" line="1459"/>
         <source>Do you want to terminate %1?</source>
         <oldsource>Do you want to %1 %2?</oldsource>
         <translation>%1&apos;(y)i sonlandırmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1457"/>
+        <location filename="Views/SbieView.cpp" line="1459"/>
         <source>the selected processes</source>
         <translation>Seçilen İşlemler</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1217"/>
+        <location filename="Views/SbieView.cpp" line="1219"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>Lütfen kopyalanan Korumalı Alan için yeni bir ad girin.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1217"/>
+        <location filename="Views/SbieView.cpp" line="1219"/>
         <source>%1 Copy</source>
         <translation>%1 Kopya</translation>
     </message>
@@ -3783,38 +3783,38 @@ Hayır şunları seçer: %2</translation>
         <translation>İşlemleri Durdur</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1161"/>
+        <location filename="Views/SbieView.cpp" line="1162"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
         <translation>UYARI: Açılan kayıt defteri düzenleyicisi korumalı alanda değildir, lütfen dikkatli olun ve yalnızca önceden seçilmiş korumalı alan konumlarında değişiklik yapın.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1162"/>
+        <location filename="Views/SbieView.cpp" line="1163"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>Bu uyarıyı gelecekte gösterme</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1292"/>
+        <location filename="Views/SbieView.cpp" line="1294"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <translation>Seçili korumalı alan(lar)ı gerçekten kaldırmak istiyor musunuz?&lt;br /&gt;&lt;br /&gt;Uyarı: Alan içeriği de silinecek!</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1334"/>
-        <location filename="Views/SbieView.cpp" line="1338"/>
+        <location filename="Views/SbieView.cpp" line="1336"/>
+        <location filename="Views/SbieView.cpp" line="1340"/>
         <source>Also delete all Snapshots</source>
         <translation>Tüm Anlık Görüntüleri de sil</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1337"/>
+        <location filename="Views/SbieView.cpp" line="1339"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
         <translation>Tüm seçili korumalı alanların içeriğini gerçekten silmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1020"/>
+        <location filename="Views/SbieView.cpp" line="1021"/>
         <source>This name is already used for a Box Group.</source>
         <translation>Bu ad zaten bir Alan Grubu için kullanılıyor.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1025"/>
+        <location filename="Views/SbieView.cpp" line="1026"/>
         <source>This name is already used for a Sandbox.</source>
         <translation>Bu ad zaten bir Korumalı Alan için kullanılıyor.</translation>
     </message>
@@ -4424,109 +4424,109 @@ Bu alandaki işlemler, aslında yönetici ayrıcalıklarına sahip olmadan, yön
 <context>
     <name>CTraceView</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="199"/>
+        <location filename="Views/TraceView.cpp" line="201"/>
         <source>Show as task tree</source>
         <translation>Görev ağacı olarak göster</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="210"/>
+        <location filename="Views/TraceView.cpp" line="212"/>
         <source>PID:</source>
         <translation>PID:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="212"/>
-        <location filename="Views/TraceView.cpp" line="219"/>
-        <location filename="Views/TraceView.cpp" line="227"/>
-        <location filename="Views/TraceView.cpp" line="228"/>
-        <location filename="Views/TraceView.cpp" line="237"/>
-        <location filename="Views/TraceView.cpp" line="478"/>
-        <location filename="Views/TraceView.cpp" line="481"/>
-        <location filename="Views/TraceView.cpp" line="578"/>
+        <location filename="Views/TraceView.cpp" line="214"/>
+        <location filename="Views/TraceView.cpp" line="221"/>
+        <location filename="Views/TraceView.cpp" line="229"/>
+        <location filename="Views/TraceView.cpp" line="230"/>
+        <location filename="Views/TraceView.cpp" line="239"/>
+        <location filename="Views/TraceView.cpp" line="480"/>
+        <location filename="Views/TraceView.cpp" line="483"/>
+        <location filename="Views/TraceView.cpp" line="580"/>
         <source>[All]</source>
         <translation>[Tümü]</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="217"/>
+        <location filename="Views/TraceView.cpp" line="219"/>
         <source>TID:</source>
         <translation>TID:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="551"/>
+        <location filename="Views/TraceView.cpp" line="553"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="558"/>
+        <location filename="Views/TraceView.cpp" line="560"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="224"/>
+        <location filename="Views/TraceView.cpp" line="226"/>
         <source>Type:</source>
         <translation>Tür:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="203"/>
+        <location filename="Views/TraceView.cpp" line="205"/>
         <source>Show NT Object Tree</source>
         <translation>NT Nesne Ağacını Göster</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="235"/>
+        <location filename="Views/TraceView.cpp" line="237"/>
         <source>Status:</source>
         <translation>Durum:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="238"/>
+        <location filename="Views/TraceView.cpp" line="240"/>
         <source>Open</source>
         <translation>Açık</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="239"/>
+        <location filename="Views/TraceView.cpp" line="241"/>
         <source>Closed</source>
         <translation>Kapalı</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="240"/>
+        <location filename="Views/TraceView.cpp" line="242"/>
         <source>Trace</source>
         <translation>İzleme</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="241"/>
+        <location filename="Views/TraceView.cpp" line="243"/>
         <source>Other</source>
         <translation>Diğer</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="249"/>
+        <location filename="Views/TraceView.cpp" line="251"/>
         <source>Show All Boxes</source>
         <translation>Tüm Alanları Göster</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="256"/>
+        <location filename="Views/TraceView.cpp" line="258"/>
         <source>Save to file</source>
         <translation>Dosyaya kaydet</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="270"/>
+        <location filename="Views/TraceView.cpp" line="272"/>
         <source>Cleanup Trace Log</source>
         <translation>İzleme Günlüğünü Temizle</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="620"/>
+        <location filename="Views/TraceView.cpp" line="622"/>
         <source>Save trace log to file</source>
         <translation>İzleme günlüğünü dosyaya kaydet</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="626"/>
+        <location filename="Views/TraceView.cpp" line="628"/>
         <source>Failed to open log file for writing</source>
         <translation>Günlük dosyası yazmak için açılamadı</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="646"/>
+        <location filename="Views/TraceView.cpp" line="648"/>
         <source>Unknown</source>
         <translation>Bilinmeyen</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="195"/>
+        <location filename="Views/TraceView.cpp" line="197"/>
         <source>Monitor mode</source>
         <translation>İzleme modu</translation>
     </message>
@@ -4534,7 +4534,7 @@ Bu alandaki işlemler, aslında yönetici ayrıcalıklarına sahip olmadan, yön
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="679"/>
+        <location filename="Views/TraceView.cpp" line="681"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation>Sandboxie-Plus - İzleme Monitörü</translation>
     </message>
@@ -6181,7 +6181,7 @@ The process match level has a higher priority than the specificity and describes
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1398"/>
+        <location filename="Views/SbieView.cpp" line="1400"/>
         <source>Drive %1</source>
         <translation>Sürücü %1</translation>
     </message>
@@ -6189,27 +6189,27 @@ The process match level has a higher priority than the specificity and describes
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="3293"/>
+        <location filename="SandMan.cpp" line="3313"/>
         <source>OK</source>
         <translation>TAMAM</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3294"/>
+        <location filename="SandMan.cpp" line="3314"/>
         <source>Apply</source>
         <translation>Uygula</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3295"/>
+        <location filename="SandMan.cpp" line="3315"/>
         <source>Cancel</source>
         <translation>İptal</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3296"/>
+        <location filename="SandMan.cpp" line="3316"/>
         <source>&amp;Yes</source>
         <translation>&amp;Evet</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3297"/>
+        <location filename="SandMan.cpp" line="3317"/>
         <source>&amp;No</source>
         <translation>&amp;Hayır</translation>
     </message>
@@ -6309,23 +6309,23 @@ The process match level has a higher priority than the specificity and describes
     <name>SettingsWindow</name>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="715"/>
-        <location filename="Forms/SettingsWindow.ui" line="1056"/>
-        <location filename="Forms/SettingsWindow.ui" line="1160"/>
+        <location filename="Forms/SettingsWindow.ui" line="1293"/>
+        <location filename="Forms/SettingsWindow.ui" line="1397"/>
         <source>Name</source>
         <translation>Ad</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1061"/>
+        <location filename="Forms/SettingsWindow.ui" line="1298"/>
         <source>Path</source>
         <translation>Yol</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="964"/>
+        <location filename="Forms/SettingsWindow.ui" line="1201"/>
         <source>Change Password</source>
         <translation>Parolayı değiştir</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1012"/>
+        <location filename="Forms/SettingsWindow.ui" line="1249"/>
         <source>Clear password when main window becomes hidden</source>
         <translation>Ana pencere gizlendiğinde parolayı temizle</translation>
     </message>
@@ -6335,17 +6335,17 @@ The process match level has a higher priority than the specificity and describes
         <translation>SandboxiePlus Ayarları</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="971"/>
+        <location filename="Forms/SettingsWindow.ui" line="1208"/>
         <source>Password must be entered in order to make changes</source>
         <translation>Değişiklik yapmak için parola girilmelidir</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1421"/>
+        <location filename="Forms/SettingsWindow.ui" line="903"/>
         <source>New Versions</source>
         <translation>Yeni sürümler</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1455"/>
+        <location filename="Forms/SettingsWindow.ui" line="937"/>
         <source>Check periodically for updates of Sandboxie-Plus</source>
         <translation>Sandboxie-Plus güncellemelerini düzenli aralıklarla denetle</translation>
     </message>
@@ -6360,57 +6360,57 @@ The process match level has a higher priority than the specificity and describes
         <translation>Koyu temayı kullan</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1145"/>
+        <location filename="Forms/SettingsWindow.ui" line="1382"/>
         <source>Enable</source>
         <translation>Etkinleştir</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1106"/>
+        <location filename="Forms/SettingsWindow.ui" line="1343"/>
         <source>Add Folder</source>
         <translation>Klasör Ekle</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1019"/>
+        <location filename="Forms/SettingsWindow.ui" line="1256"/>
         <source>Only Administrator user accounts can make changes</source>
         <translation>Yalnızca Yönetici hesapları değişiklik yapabilir</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="998"/>
+        <location filename="Forms/SettingsWindow.ui" line="1235"/>
         <source>Config protection</source>
         <translation>Yapılandırma koruması</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1089"/>
+        <location filename="Forms/SettingsWindow.ui" line="1326"/>
         <source>Add Program</source>
         <translation>Program Ekle</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1181"/>
+        <location filename="Forms/SettingsWindow.ui" line="1418"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
         <translation>Sandboxie, sisteminizde aşağıdaki yazılım uygulamalarını tespit etti. Bu uygulamalarla uyumluluğu artıracak yapılandırma ayarlarını uygulamak için Tamam&apos;ı tıklayın. Bu yapılandırma, mevcut tüm korumalı alanlarda ve tüm yeni oluşturulacaklarda etkili olacaktır.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1026"/>
+        <location filename="Forms/SettingsWindow.ui" line="1263"/>
         <source>Watch Sandboxie.ini for changes</source>
         <translation>Değişiklikler için Sandboxie.ini dosyasını izle</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1138"/>
+        <location filename="Forms/SettingsWindow.ui" line="1375"/>
         <source>In the future, don&apos;t check software compatibility</source>
         <translation>Gelecekte, yazılım uyumluluğu denetlenmesin</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1152"/>
+        <location filename="Forms/SettingsWindow.ui" line="1389"/>
         <source>Disable</source>
         <translation>Devre Dışı Bırak</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1096"/>
+        <location filename="Forms/SettingsWindow.ui" line="1333"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
         <translation>Aşağıdaki programlardan herhangi biri korumalı alanın dışında başlatıldığında, Sandboxie SBIE1301 mesajını yayınlayacaktır.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1069"/>
+        <location filename="Forms/SettingsWindow.ui" line="1306"/>
         <source>Remove Program</source>
         <translation>Programı Kaldır</translation>
     </message>
@@ -6420,12 +6420,12 @@ The process match level has a higher priority than the specificity and describes
         <translation>Dosya gezgini bağlam menüsüne &apos;Korumalı Alanda Çalıştır&apos; seçeneği ekle</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1046"/>
+        <location filename="Forms/SettingsWindow.ui" line="1283"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>Bir program başlatılamadığında 1308 mesajını yayınla</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="923"/>
+        <location filename="Forms/SettingsWindow.ui" line="1160"/>
         <source>Sandbox default</source>
         <translation>Korumalı Alan Varsayılanları</translation>
     </message>
@@ -6434,7 +6434,7 @@ The process match level has a higher priority than the specificity and describes
         <translation type="vanished">Ayrı kullanıcı klasörleri</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1113"/>
+        <location filename="Forms/SettingsWindow.ui" line="1350"/>
         <source>Prevent the listed programs from starting on this system</source>
         <translation>Listelenen programların bu sistemde başlamasını önle</translation>
     </message>
@@ -6449,22 +6449,22 @@ The process match level has a higher priority than the specificity and describes
         <translation>Bu kullanıcı arayüzündeki bağlantıları korumalı alanda aç</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="817"/>
+        <location filename="Forms/SettingsWindow.ui" line="1054"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
         <translation>Korumalı alan &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;dosya sistemi kökü&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="844"/>
+        <location filename="Forms/SettingsWindow.ui" line="1081"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
         <translation>Korumalı alan &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc kökü&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="867"/>
+        <location filename="Forms/SettingsWindow.ui" line="1104"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
         <translation>Korumalı alan &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;kayıt kökü&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="946"/>
+        <location filename="Forms/SettingsWindow.ui" line="1183"/>
         <source>Portable root folder</source>
         <translation>Taşınabilir kök klasörü</translation>
     </message>
@@ -6485,7 +6485,7 @@ The process match level has a higher priority than the specificity and describes
         <translation>Korumalı alanlar boşaltılırken kurtarma penceresini göster</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="790"/>
+        <location filename="Forms/SettingsWindow.ui" line="1027"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -6627,17 +6627,17 @@ The process match level has a higher priority than the specificity and describes
         <translation>Füzyon temasını kullan</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="733"/>
+        <location filename="Forms/SettingsWindow.ui" line="970"/>
         <source>Advanced Config</source>
         <translation>Gelişmiş Yapılandırma</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="837"/>
+        <location filename="Forms/SettingsWindow.ui" line="1074"/>
         <source>Sandboxing features</source>
         <translation>Korumalı Alan Özellikleri</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="797"/>
+        <location filename="Forms/SettingsWindow.ui" line="1034"/>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
         <translation>Anonim bir belirteç (deneysel) yerine Sandboxie oturum açmayı kullan</translation>
     </message>
@@ -6646,20 +6646,19 @@ The process match level has a higher priority than the specificity and describes
         <translation type="vanished">Program Denetimi</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="956"/>
+        <location filename="Forms/SettingsWindow.ui" line="1193"/>
         <source>Sandboxie Config</source>
         <oldsource>Config Protection</oldsource>
         <translation>Sandboxie Yapılandırması</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1130"/>
+        <location filename="Forms/SettingsWindow.ui" line="1367"/>
         <source>Compatibility</source>
         <translation>Uyumluluk</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1251"/>
         <source>Support</source>
-        <translation>Destek</translation>
+        <translation type="vanished">Destek</translation>
     </message>
     <message>
         <source>The live channel provides the latest unsigned test builds.</source>
@@ -6670,32 +6669,32 @@ The process match level has a higher priority than the specificity and describes
         <translation type="vanished">Canlı kanalda ara</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1345"/>
+        <location filename="Forms/SettingsWindow.ui" line="827"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>Ön izleme kanalı, en son GitHub ön sürümlerini içerir.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1475"/>
+        <location filename="Forms/SettingsWindow.ui" line="957"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>Kararlı kanal, en son kararlı GitHub sürümlerini içerir.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1478"/>
+        <location filename="Forms/SettingsWindow.ui" line="960"/>
         <source>Search in the Stable channel</source>
         <translation>Kararlı kanalda ara</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1292"/>
+        <location filename="Forms/SettingsWindow.ui" line="774"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
         <translation>Sandboxie&apos;yi Windows&apos;un devam eden sürümleriyle güncel ve tüm web tarayıcılarıyla uyumlu tutmak hiç bitmeyen bir çabadır. Lütfen bu çalışmayı bir bağışla desteklemeyi düşünün.&lt;br /&gt;Geliştirmeyi bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;PayPal bağışı&lt;/a&gt; ile destekleyebilirsiniz, kredi kartlarıyla da çalışır.&lt;br /&gt;Ya da bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon aboneliği&lt;/a&gt; ile sürekli destek sağlayabilirsiniz.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1348"/>
+        <location filename="Forms/SettingsWindow.ui" line="830"/>
         <source>Search in the Preview channel</source>
         <translation>Önizleme kanalında ara</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1305"/>
+        <location filename="Forms/SettingsWindow.ui" line="787"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
         <translation>Sandboxie-Plus projesinin destekçileri bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; alabilir. Bir lisans anahtarı gibi ama açık kaynaklı yazılım kullanan harika insanlar için. :-)</translation>
     </message>
@@ -6708,12 +6707,12 @@ The process match level has a higher priority than the specificity and describes
         <translation type="vanished">Güncellemeleri otomatik yükle</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1468"/>
+        <location filename="Forms/SettingsWindow.ui" line="950"/>
         <source>Enter the support certificate here</source>
         <translation>Destek sertifikasını buraya girin</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1362"/>
+        <location filename="Forms/SettingsWindow.ui" line="844"/>
         <source>Support Settings</source>
         <translation>Destek Ayarları</translation>
     </message>
@@ -6728,12 +6727,12 @@ The process match level has a higher priority than the specificity and describes
         <translation>Simgeyi sistem tepsisinde göster:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="804"/>
+        <location filename="Forms/SettingsWindow.ui" line="1041"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
         <translation>Ağ erişimini kısıtlamak için Windows Filtreleme Platformunu kullan</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="883"/>
+        <location filename="Forms/SettingsWindow.ui" line="1120"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (experimental)</source>
         <translation>GPU hızlandırmayı etkinleştirmek için seçilen win32k sistem çağrılarını kancala (Deneysel)</translation>
     </message>
@@ -6817,57 +6816,62 @@ The process match level has a higher priority than the specificity and describes
         <translation>Komut Satırı</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="743"/>
+        <location filename="Forms/SettingsWindow.ui" line="733"/>
+        <source>Support &amp;&amp; Updates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="980"/>
         <source>Sandbox Config</source>
         <translation>Korumalı Alan Yapılandırması</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="777"/>
+        <location filename="Forms/SettingsWindow.ui" line="1014"/>
         <source>Activate Kernel Mode Object Filtering</source>
         <translation>Kernel modu nesne filtrelemeyi etkinleştir</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="857"/>
+        <location filename="Forms/SettingsWindow.ui" line="1094"/>
         <source>Default sandbox:</source>
         <translation>Varsayılan korumalı alan:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1040"/>
+        <location filename="Forms/SettingsWindow.ui" line="1277"/>
         <source>Program Alerts</source>
         <translation>Program Uyarıları</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1122"/>
+        <location filename="Forms/SettingsWindow.ui" line="1359"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
         <translation>Zorunlu işlemler devre dışı bırakıldığında 1301 mesajını yayınla</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1194"/>
+        <location filename="Forms/SettingsWindow.ui" line="1431"/>
         <source>Edit ini Section</source>
         <translation>Ini Düzenleme Bölümü</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1203"/>
+        <location filename="Forms/SettingsWindow.ui" line="1440"/>
         <source>Save</source>
         <translation>Kaydet</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1210"/>
+        <location filename="Forms/SettingsWindow.ui" line="1447"/>
         <source>Edit ini</source>
         <translation>Ini Düzenle</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1236"/>
+        <location filename="Forms/SettingsWindow.ui" line="1473"/>
         <source>Cancel</source>
         <translation>İptal</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1325"/>
+        <location filename="Forms/SettingsWindow.ui" line="807"/>
         <source>Version Updates</source>
         <translation>Sürüm güncellemeleri</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1418"/>
+        <location filename="Forms/SettingsWindow.ui" line="900"/>
         <source>New full versions from the selected release channel.</source>
         <translation>Seçilen yayın kanalından yeni tam sürümler.</translation>
     </message>
@@ -6876,7 +6880,7 @@ The process match level has a higher priority than the specificity and describes
         <translation type="vanished">Tam Güncellemeler</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1322"/>
+        <location filename="Forms/SettingsWindow.ui" line="804"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
         <translation>Kurulu sürüm için hızlı yamalar, Templates.ini ve çeviri güncellemeleri.</translation>
     </message>
@@ -6885,17 +6889,17 @@ The process match level has a higher priority than the specificity and describes
         <translation type="vanished">Sürüm Düzeltmeleri</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1269"/>
+        <location filename="Forms/SettingsWindow.ui" line="751"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Bu destekçi sertifikasının süresi doldu, lütfen &lt;a href=&quot;sbie://update/cert&quot;&gt;yenilenmiş bir sertifika alın&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1448"/>
+        <location filename="Forms/SettingsWindow.ui" line="930"/>
         <source>In the future, don&apos;t notify about certificate expiration</source>
         <translation>Gelecekte, sertifika süresinin dolmasıyla ilgili bildirimde bulunma</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1005"/>
+        <location filename="Forms/SettingsWindow.ui" line="1242"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
         <translation>Yalnızca Yönetici hesapları, Programları Zorlamayı Duraklat komutunu kullanabilir</translation>
     </message>

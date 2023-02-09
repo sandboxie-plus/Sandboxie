@@ -125,3 +125,5 @@ New translators are encouraged to look at the [Localization notes and tips](http
 ## 🤝 Support the project
 
 If you find Sandboxie useful, then feel free to contribute through our [Contribution guidelines](./CONTRIBUTING.md).
+
+forked from sandboxie-plus/Sandboxie

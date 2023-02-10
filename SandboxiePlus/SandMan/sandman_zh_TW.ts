@@ -16,28 +16,28 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="419"/>
         <source>Network Access</source>
-        <translation>網絡訪問權限</translation>
+        <translation>網路訪問權限</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="427"/>
         <source>Allow network/internet access</source>
-        <translation>允許網絡訪問</translation>
+        <translation>允許網路訪問</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="428"/>
         <source>Block network/internet by denying access to Network devices</source>
-        <translation>通過阻止訪問網絡設備禁用網絡權限</translation>
+        <translation>通過阻止訪問網路設備禁用網路權限</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="430"/>
         <source>Block network/internet using Windows Filtering Platform</source>
-        <translation>通過 WFP 禁用網絡權限</translation>
+        <translation>通過 WFP 禁用網路權限</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="435"/>
         <source>Allow access to network files and folders</source>
         <oldsource>Allow access to network files and fodlers</oldsource>
-        <translation>允許訪問網絡文件與文件夾</translation>
+        <translation>允許訪問網路文件與文件夾</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="436"/>
@@ -1101,19 +1101,19 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsGeneral.cpp" line="463"/>
         <location filename="Windows/OptionsGeneral.cpp" line="563"/>
         <source>Always copy</source>
-        <translation>總是拷貝/translation>
+        <translation>總是複製/translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="464"/>
         <location filename="Windows/OptionsGeneral.cpp" line="564"/>
         <source>Don&apos;t copy</source>
-        <translation>不要拷貝</translation>
+        <translation>不要複製</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="465"/>
         <location filename="Windows/OptionsGeneral.cpp" line="565"/>
         <source>Copy empty</source>
-        <translation>拷貝空白</translation>
+        <translation>複製空白</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="691"/>

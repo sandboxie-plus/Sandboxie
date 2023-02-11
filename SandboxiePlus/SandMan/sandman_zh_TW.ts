@@ -6,60 +6,60 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="413"/>
         <source>Advanced Sandbox options</source>
-        <translation type="unfinished"></translation>
+        <translation>高級沙箱選項</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="414"/>
         <source>On this page advanced sandbox options can be configured.</source>
-        <translation type="unfinished"></translation>
+        <translation>在此頁面上可以配置高級沙箱選項。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="419"/>
         <source>Network Access</source>
-        <translation type="unfinished"></translation>
+        <translation>網路訪問權限</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="427"/>
         <source>Allow network/internet access</source>
-        <translation type="unfinished"></translation>
+        <translation>允許網路訪問</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="428"/>
         <source>Block network/internet by denying access to Network devices</source>
-        <translation type="unfinished"></translation>
+        <translation>通過阻止訪問網路設備禁用網路權限</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="430"/>
         <source>Block network/internet using Windows Filtering Platform</source>
-        <translation type="unfinished"></translation>
+        <translation>通過 WFP 禁用網路權限</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="435"/>
         <source>Allow access to network files and folders</source>
         <oldsource>Allow access to network files and fodlers</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>允許訪問網路文件與文件夾</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="436"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="452"/>
         <source>This option is not recommended for Hardened boxes</source>
         <oldsource>This option is not recomended for Hardened boxes</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>不推薦加固型沙箱啟用該選項</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="442"/>
         <source>Admin Options</source>
-        <translation type="unfinished"></translation>
+        <translation>管理員選項</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="446"/>
         <source>Make applications think they are running elevated</source>
-        <translation type="unfinished"></translation>
+        <translation>讓應用認為自身在管理員權限下執行</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="451"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation type="unfinished"></translation>
+        <translation>允許 MSIServer 在沙箱內使用系統令牌運行</translation>
     </message>
 </context>
 <context>
@@ -67,73 +67,73 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="156"/>
         <source>Create new Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>創建新的沙箱</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="163"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation type="unfinished">沙箱將您的主機系統與在沙箱內執行的處理程序隔離開來，它可以防止它們對您電腦中的其他程式和資料進行永久性的變更。根據所選的沙箱類型，會有不同的隔離程度，隔離的程度影響到您主機的安全以及沙箱內應用程式的相容性。此外沙箱還可以保護您的個人資料不被受監督下執行的處理程序的存取。</translation>
+        <translation>沙箱將您的主機系統與在沙箱內執行的處理程序隔離開來，它可以防止它們對您電腦中的其他程式和資料進行永久性的變更。根據所選的沙箱類型，會有不同的隔離程度，隔離的程度影響到您主機的安全以及沙箱內應用程式的相容性。此外沙箱還可以保護您的個人資料不被受監督下執行的處理程序的存取。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="172"/>
         <source>Enter box name:</source>
-        <translation type="unfinished"></translation>
+        <translation>輸入沙箱名字：</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="178"/>
         <source>New Box</source>
-        <translation type="unfinished">New Box</translation>
+        <translation>新建沙箱</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="190"/>
         <source>Select box type:</source>
         <oldsource>Sellect box type:</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>選擇沙箱類別：</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="193"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation type="unfinished">資料保護加固型沙箱</translation>
+        <translation>資料保護加固型沙箱</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="194"/>
         <source>Security Hardened Sandbox</source>
-        <translation type="unfinished">安全防護加固型沙箱</translation>
+        <translation>安全防護加固型沙箱</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="195"/>
         <source>Sandbox with Data Protection</source>
-        <translation type="unfinished">資料保護型沙箱</translation>
+        <translation>資料保護型沙箱</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="196"/>
         <source>Standard Isolation Sandbox (Default)</source>
-        <translation type="unfinished">標準隔離型沙箱 (預設)</translation>
+        <translation>標準隔離型沙箱 (預設)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="198"/>
         <source>Application Compartment with Data Protection</source>
-        <translation type="unfinished">資料保護型應用區間</translation>
+        <translation>資料保護型應用區間</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="199"/>
         <source>Application Compartment (NO Isolation)</source>
-        <translation type="unfinished">應用區間 (無隔離防護)</translation>
+        <translation>應用區間 (無隔離防護)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="215"/>
         <source>Remove after use</source>
-        <translation type="unfinished"></translation>
+        <translation>使用後銷毀</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="216"/>
         <source>After the last process in the box terminates, all data in the box will be deleted and the box itself will be removed.</source>
-        <translation type="unfinished"></translation>
+        <translation>最後一個沙箱進程結束時，所有數據以及沙箱將被移除。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="221"/>
         <source>Configure advanced options</source>
-        <translation type="unfinished"></translation>
+        <translation>配置高級選項</translation>
     </message>
 </context>
 <context>
@@ -200,7 +200,7 @@
     <message>
         <location filename="Views/FileView.cpp" line="171"/>
         <source>Run Recovery Checks</source>
-        <translation type="unfinished"></translation>
+        <translation>運行複原檢測</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="234"/>
@@ -219,7 +219,7 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="287"/>
         <source>Sandbox location and behavior</source>
         <oldsource>Sandbox location and behavioure</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>沙箱路徑及行為</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="288"/>
@@ -227,70 +227,70 @@
 You can use %USER% to save each users sandbox to an own folder.</source>
         <oldsource>On this page the sandbox location and its behaviorue can be customized.
 You can use %USER% to save each users sandbox to an own fodler.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>您可在此頁面配置沙箱路徑及行為。您可以使用%USER%為每個用戶在其目錄下保存沙箱。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="293"/>
         <source>Sandboxed Files</source>
-        <translation type="unfinished"></translation>
+        <translation>沙箱化文件</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="316"/>
         <source>Select Directory</source>
-        <translation type="unfinished">選擇目錄</translation>
+        <translation>選擇目錄</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="324"/>
         <source>Virtualization scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>虛擬化方案</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="328"/>
         <source>Version 1</source>
-        <translation type="unfinished"></translation>
+        <translation>版本 1</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="329"/>
         <source>Version 2</source>
-        <translation type="unfinished"></translation>
+        <translation>版本 2</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="335"/>
         <source>Separate user folders</source>
-        <translation type="unfinished">獨立使用者資料夾</translation>
+        <translation>獨立使用者資料夾</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="340"/>
         <source>Use volume serial numbers for drives</source>
-        <translation type="unfinished"></translation>
+        <translation>使用驅動器的捲序列號</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="345"/>
         <source>Auto delete content when last process terminates</source>
-        <translation type="unfinished"></translation>
+        <translation>最後進程結束時自動刪除內容</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="352"/>
         <source>Enable Immediate Recovery of files from recovery locations</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用立即恢復功能</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="387"/>
         <source>The selected box location is not a valid path.</source>
         <oldsource>The sellected box location is not a valid path.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>所選沙箱目錄非法</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="392"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
         <oldsource>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>所選沙箱目錄非空，建議使用空目錄。您確定繼續使用非空目錄嗎？</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="397"/>
         <source>The selected box location not placed on a currently available drive.</source>
         <oldsource>The sellected box location not placed on a currently available drive.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>所選沙箱目錄不在合法驅動器上。</translation>
     </message>
 </context>
 <context>
@@ -429,18 +429,18 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="30"/>
         <source>New Box Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>新建沙箱嚮導</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="126"/>
         <source>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you experience any unexpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure group.</source>
         <oldsource>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you expirience any unecpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure groupe.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>新沙箱按照新的 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;虛擬化方案 2&lt;/a&gt;創建。如果您在該沙箱的使用中發現任何問題，請切換至舊版本的虛擬化方案並反饋，該選項可以在沙盒結構菜單中找到。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="129"/>
         <source>Don&apos;t show this message again.</source>
-        <translation type="unfinished">不再顯示此訊息。</translation>
+        <translation>不再顯示此訊息。</translation>
     </message>
 </context>
 <context>
@@ -1060,12 +1060,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="159"/>
         <source>Version 1</source>
-        <translation type="unfinished"></translation>
+        <translation>版本 1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="160"/>
         <source>Version 2</source>
-        <translation type="unfinished"></translation>
+        <translation>版本 2</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="196"/>
@@ -1095,25 +1095,25 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="290"/>
         <source>Indeterminate</source>
-        <translation type="unfinished"></translation>
+        <translation>不定</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="463"/>
         <location filename="Windows/OptionsGeneral.cpp" line="563"/>
         <source>Always copy</source>
-        <translation type="unfinished"></translation>
+        <translation>總是複製/translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="464"/>
         <location filename="Windows/OptionsGeneral.cpp" line="564"/>
         <source>Don&apos;t copy</source>
-        <translation type="unfinished"></translation>
+        <translation>不要複製</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="465"/>
         <location filename="Windows/OptionsGeneral.cpp" line="565"/>
         <source>Copy empty</source>
-        <translation type="unfinished"></translation>
+        <translation>複製空白</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="691"/>
@@ -1315,7 +1315,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="262"/>
         <source>File Options</source>
-        <translation type="unfinished">檔案選項</translation>
+        <translation>檔案選項</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="294"/>
@@ -1759,7 +1759,7 @@ Full path: %4</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="670"/>
         <source>Auto Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>自動刪除</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="673"/>
@@ -2315,19 +2315,21 @@ No will choose: %2</source>
         <location filename="SandManRecovery.cpp" line="99"/>
         <location filename="SandManRecovery.cpp" line="156"/>
         <source>Checking file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>檢查檔案 %1</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="107"/>
         <source>The file %1 failed a security check!<byte value="xd"/>
 <byte value="xd"/>
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>檔案 %1 的安全檢查失敗！<byte value="xd"/>
+        <byte value="xd"/>
+        %2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="115"/>
         <source>All files passed the checks</source>
-        <translation type="unfinished"></translation>
+        <translation>所有檔案的安全檢查已通過</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="175"/>
@@ -2337,7 +2339,9 @@ No will choose: %2</source>
         <oldsource>The file %1 failed a security check, do you want to recover it anyways?<byte value="xd"/>
 <byte value="xd"/>
 %2</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>檔案 %1 的安全檢查失敗！您仍想恢復嗎？<byte value="xd"/>
+        <byte value="xd"/>
+        %2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="238"/>
@@ -2435,7 +2439,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="3270"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</source>
         <oldsource>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</oldsource>
-        <translation type="unfinished">&lt;h3&gt;關於 Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;版本 %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</translation>
+        <translation>&lt;h3&gt;關於 Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;版本 %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3278"/>
@@ -2465,7 +2469,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="448"/>
         <source>Contribute to Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>貢獻 Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="465"/>
@@ -2499,23 +2503,23 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="579"/>
         <location filename="SandMan.cpp" line="708"/>
         <source>Edit Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯 Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="582"/>
         <source>Edit Templates.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯 Templates.ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="584"/>
         <source>Edit Sandboxie-Plus.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯 Sandboxie-Plus.ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="588"/>
         <location filename="SandMan.cpp" line="711"/>
         <source>Reload configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>重載配置</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="600"/>
@@ -2613,7 +2617,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1713"/>
         <source>Updated Shortcut to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1715"/>
@@ -2623,7 +2627,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1766"/>
         <source>Auto removing sandbox %1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1782"/>
@@ -2728,7 +2732,7 @@ No will choose: %2</source>
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
 This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2870"/>
@@ -3176,12 +3180,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SbieProcess.cpp" line="118"/>
         <source> Elevated</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="120"/>
         <source> as System</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="123"/>
@@ -3725,7 +3729,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="1459"/>
         <source>Do you want to terminate %1?</source>
         <oldsource>Do you want to %1 %2?</oldsource>
-        <translation type="unfinished">您要 %1 %2 嗎？</translation>
+        <translation>您要 %1 %2 嗎？</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1459"/>
@@ -3920,17 +3924,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="753"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="755"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For this build Plus features remain enabled.&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="757"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="763"/>
@@ -4124,28 +4128,28 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="494"/>
         <source>Create the new Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="502"/>
         <source>Almost complete, click Finish to create a new sandbox and conclude the wizard.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="511"/>
         <source>Save options as new defaults</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="522"/>
         <source>Don&apos;t show the summary page in future (unless advanced options were set)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="541"/>
         <source>
 This Sandbox will be saved to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="544"/>
@@ -4153,19 +4157,19 @@ This Sandbox will be saved to: %1</source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
         <oldsource>
 This box&apos;s content will be DISCARDED when its closed, and the box will be removed.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="546"/>
         <source>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="548"/>
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="550"/>
@@ -4173,18 +4177,18 @@ Processes in this box will not be able to access the internet or the local netwo
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
         <oldsource>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatybility but reduces the security isolation.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="552"/>
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="580"/>
         <source>Failed to create new box: %1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -4291,7 +4295,7 @@ Processes in this box will think they are run with administrative privileges, wi
     <message>
         <location filename="Models/TraceModel.cpp" line="179"/>
         <source>Thread %1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Models/TraceModel.cpp" line="333"/>
@@ -4324,7 +4328,7 @@ Processes in this box will think they are run with administrative privileges, wi
     <message>
         <location filename="Views/TraceView.cpp" line="205"/>
         <source>Show NT Object Tree</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="212"/>
@@ -4993,69 +4997,69 @@ Processes in this box will think they are run with administrative privileges, wi
     <message>
         <location filename="Forms/OptionsWindow.ui" line="321"/>
         <source>Use volume serial numbers for drives, like: \drive\C~1234-ABCD</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="355"/>
         <source>The box structure can only be changed when the sandbox is empty</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="362"/>
         <source>Allow sandboxed processes to open files protected by EFS</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="376"/>
         <source>Disk/File access</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="383"/>
         <source>Virtualization scheme</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="488"/>
         <source>2113: Content of migrated file was discarded
 2114: File was not migrated, write access to file was denied
 2115: File was not migrated, file will be opened read only</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="493"/>
         <source>Issue message 2113/2114/2115 when a file is not fully migrated</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="517"/>
         <source>Add Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="524"/>
         <source>Remove Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="578"/>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="586"/>
         <source>Sandboxie does not allow writing to host files, unless permitted by the user. When a sandboxed application attempts to modify a file, the entire file must be copied into the sandbox, for large files this can take a significate amount of time. Sandboxie offers options for handling these cases, which can be configured on this page.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="596"/>
         <source>Using wildcard patterns file specific behavior can be configured in the list below:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="610"/>
         <source>When a file cannot be migrated, open it in read-only mode instead</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1104"/>
@@ -6087,7 +6091,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="97"/>
         <source>Run in a new Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="65"/>
@@ -6126,7 +6130,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="192"/>
         <source>Show file recovery window when emptying sandboxes</source>
         <oldsource>Show first recovery window when emptying sandboxes</oldsource>
-        <translation type="unfinished">清空沙箱時先顯示復原視窗</translation>
+        <translation>清空沙箱時先顯示復原視窗</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="131"/>
@@ -6541,7 +6545,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="733"/>
         <source>Support &amp;&amp; Updates</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="980"/>

@@ -703,7 +703,7 @@ _FX int Pattern_MatchPathList(
 
 _FX BOOLEAN Pattern_MatchPathListEx(WCHAR *path_lwr, ULONG path_len, LIST *list, ULONG* plevel, int* pmatch_len, ULONG* pflags, USHORT* pwildc, const WCHAR** patsrc)
 {
-    PATTERN* found;
+	const WCHAR* cur_patsrc;
     ULONG cur_level;
     ULONG cur_flags;
     USHORT cur_wildc;
@@ -713,7 +713,7 @@ _FX BOOLEAN Pattern_MatchPathListEx(WCHAR *path_lwr, ULONG path_len, LIST *list,
         cur_level = *plevel;
         cur_flags = *pflags;
         cur_wildc = *pwildc;
-        cur_len = Pattern_MatchPathList(path_lwr, path_len, list, &cur_level, &cur_flags, &cur_wildc, &found);
+        cur_len = Pattern_MatchPathList(path_lwr, path_len, list, &cur_level, &cur_flags, &cur_wildc, &cur_patsrc);
         if (cur_level <= *plevel && (
             ((*pflags & MATCH_FLAG_EXACT) == 0 && (cur_flags & MATCH_FLAG_EXACT) != 0) || // an exact match overrules any non exact match
             ((*pflags & MATCH_FLAG_AUX) != 0 && (cur_flags & MATCH_FLAG_AUX) == 0) || // a rule with a primary match overrules auxyliary matches
@@ -724,7 +724,7 @@ _FX BOOLEAN Pattern_MatchPathListEx(WCHAR *path_lwr, ULONG path_len, LIST *list,
             *pflags = cur_flags;
             *pwildc = cur_wildc;
             *pmatch_len = cur_len;
-            if (patsrc) *patsrc = Pattern_Source(found);
+            if (patsrc) *patsrc = cur_patsrc;
 
             return TRUE;
         }

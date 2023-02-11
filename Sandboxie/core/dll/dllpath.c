@@ -506,7 +506,7 @@ _FX ULONG SbieDll_MatchPath2(WCHAR path_code, const WCHAR *path, BOOLEAN bCheckO
     //
     
     if (Pattern_MatchPathListEx(path_lwr, path_len, read_list, &level, &match_len, &flags, &wildc, NULL)) { //patsrc)) {
-        mp_flags = PATH_READ_FLAG;
+        mp_flags = PATH_OPEN_FLAG; // say its open and let the driver deny the write access
         if (!use_rule_specificity) goto finish;
     }
     

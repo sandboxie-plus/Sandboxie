@@ -1682,7 +1682,7 @@ quint64 CSbieAPI::QueryProcessInfo(quint32 ProcessId, quint32 InfoClass)
 
 	NTSTATUS status = m->IoControl(parms);
 	if (!NT_SUCCESS(status))
-		return -1;
+		return NULL;
 	return ResultValue;
 }
 

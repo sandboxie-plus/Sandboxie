@@ -217,11 +217,12 @@ QString CBoxedProcess__GetPebString(HANDLE ProcessHandle, PEB_OFFSET Offset)
 
 bool CBoxedProcess::InitProcessInfo()
 {
-	HANDLE ProcessHandle;
-	ProcessHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, (DWORD)m_ProcessId);
-	if (ProcessHandle == INVALID_HANDLE_VALUE) // try with less rights
+	HANDLE ProcessHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, (DWORD)m_ProcessId);
+	if (ProcessHandle == NULL) // try with less rights
 		ProcessHandle = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, (DWORD)m_ProcessId);
-	if (ProcessHandle == INVALID_HANDLE_VALUE)
+	if (ProcessHandle == NULL) // try with even less rights
+		ProcessHandle = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, (DWORD)m_ProcessId);
+	if (ProcessHandle == NULL)
 		return false;
 
 	InitProcessInfoImpl(ProcessHandle);

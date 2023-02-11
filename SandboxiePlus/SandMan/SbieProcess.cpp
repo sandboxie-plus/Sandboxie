@@ -138,9 +138,12 @@ void CSbieProcess::InitProcessInfoImpl(void* ProcessHandle)
 {
 	CBoxedProcess::InitProcessInfoImpl(ProcessHandle);
 
-	HANDLE TokenHandle = (HANDLE)m_pBox->Api()->QueryProcessInfo(m_ProcessId, 'ptok');
-	//if (NT_SUCCESS(NtOpenProcessToken(ProcessHandle, TOKEN_QUERY, &TokenHandle)))
-	if (TokenHandle != INVALID_HANDLE_VALUE)
+	HANDLE TokenHandle = NULL;
+	if(m_pBox->GetBool("NoSecurityIsolation") || m_pBox->GetBool("OriginalToken"))
+		NtOpenProcessToken(ProcessHandle, TOKEN_QUERY, &TokenHandle);
+	else
+		TokenHandle = (HANDLE)m_pBox->Api()->QueryProcessInfo(m_ProcessId, 'ptok');
+	if (TokenHandle)
 	{
 		ULONG returnLength;
 

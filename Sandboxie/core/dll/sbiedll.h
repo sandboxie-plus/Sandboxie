@@ -189,6 +189,8 @@ SBIEDLL_EXPORT  BOOL SbieDll_StartBoxedService(
 
 SBIEDLL_EXPORT  BOOL SbieDll_CheckProcessLocalSystem(HANDLE ProcessHandle);
 
+SBIEDLL_EXPORT  VOID SbieDll_SetFakeAdmin(BOOLEAN FakeAdmin);
+
 SBIEDLL_EXPORT  HANDLE SbieDll_OpenProcess(ACCESS_MASK DesiredAccess, HANDLE idProcess);
 
 SBIEDLL_EXPORT  HRESULT SbieDll_ComCreateProxy(

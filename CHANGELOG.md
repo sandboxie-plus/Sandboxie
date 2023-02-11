@@ -18,16 +18,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - 'OpenProtectedStorage=y' has been replaced with a template
 - moved all built in access rules to a set of default template’s
 - moved WinInetCache control to a template OpenWinInetCache, 'CloseWinInetCache=y' is now obsolete
-- added hook for CreateAppContainerToken, should also improve compatibility with other apps 
+- added hook for CreateAppContainerToken, should also improve compatibility with other apps [#1926](https://github.com/sandboxie-plus/Sandboxie/issues/1926)
 -- note: Template_Edge_Fix is no longer required
 - replaced a few icons
 - moved the "Support" settings page the above "Advance Options" page and renamed it to "Support & Updates"
 - when dragging and dropping a file on to the sandman UI to run it the currently selected box will be pre-selected in the  box picker dialog
+- improved access rule handling [#2633](https://github.com/sandboxie-plus/Sandboxie/discussions/2633)
 
 ### Fixed
 - added AppContainer support for Compartment type boxes
 - FIXED SECURITY ISSUE ID-22 NtCreateSectionEx was not filtered by the driver
-
+- fixed issue starting services without a system token
 
 
 

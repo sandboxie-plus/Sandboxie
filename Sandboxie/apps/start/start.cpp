@@ -1064,6 +1064,14 @@ int Program_Start(void)
         expanded = MyHeapAlloc(8192 * sizeof(WCHAR));
         ExpandEnvironmentStrings(cmdline, expanded, 8192);
 
+        //
+        // When the service proces has a manifest which requires elevated privileges,
+        // CreateProcess will fail if we did not start with a elevated token.
+        // To fix this issue we always fake being elevated when starting a service.
+        //
+
+        SbieDll_SetFakeAdmin(TRUE);
+
 		//
 		// If the command contains a space but no ", try to fix it
 		//

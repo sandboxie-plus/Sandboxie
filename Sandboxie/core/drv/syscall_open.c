@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -21,7 +21,6 @@
 //---------------------------------------------------------------------------
 
 #include "conf.h"
-#include "obj.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -188,25 +187,27 @@ _FX NTSTATUS Syscall_CheckObject(
     OBJECT_NAME_INFORMATION *Name;
     ULONG NameLength;
     NTSTATUS status;
+    BOOLEAN Operation;
 
     status = Obj_GetNameOrFileName(
                             proc->pool, OpenedObject, &Name, &NameLength);
     if (NT_SUCCESS(status)) {
 
         //
-        // we enforce only CreateSymbolicLinkObject to use copy paths, 
-        // OpenSymbolicLinkObject can use true paths
+        // determine if this is a creation or open/duplicate operation
         //
 
-        if ((syscall_entry->name_len == 22 && memcmp(syscall_entry->name, "OpenSymbolicLinkObject", 22) == 0))
-            goto finish;
+        if (syscall_entry->name_len > 6 && memcmp(syscall_entry->name, "Create", 6) == 0)
+            Operation = OBJ_OP_CREATE;
+        else
+            Operation = OBJ_OP_OPEN; // or duplicate
 
         //
         // invoke the Ipc_Check[Type]Object handler
         //
 
         status = syscall_entry->handler2_func(
-            proc, OpenedObject, &Name->Name, HandleInfo->GrantedAccess);
+            proc, OpenedObject, &Name->Name, Operation, HandleInfo->GrantedAccess);
 
         //
         // process/thread access has its own logging routine
@@ -270,6 +271,15 @@ _FX NTSTATUS Syscall_OpenHandle(
         if ( (ClientId == NULL) || !Process_IsSameBox(proc, NULL, (ULONG_PTR)ClientId->UniqueProcess)) {
             user_args[1] = THREAD_GET_CONTEXT;
         }
+    }
+
+    //
+    // During early process initializarion stage OpenDirectoryObject is invoked with DIRECTORY_ALL_ACCESS
+    // so we strip the "write" permissions here untill the sbiedll finishes loading
+    //
+
+    if (strcmp(syscall_entry->name, "OpenDirectoryObject") == 0 && !proc->sbiedll_loaded){
+        user_args[1] &= ~(DIRECTORY_CREATE_OBJECT | DIRECTORY_CREATE_SUBDIRECTORY);
     }
 
     PUNICODE_STRING puName = NULL;
@@ -890,6 +900,8 @@ _FX SYSCALL_ENTRY *Syscall_DuplicateHandle_3(
 {
     static const WCHAR *_Port = L"Port";
     static const WCHAR *_Job = L"Job";
+    static const WCHAR *_SymLink = L"SymbolicLink";
+    static const WCHAR *_Directory = L"Directory";
     SYSCALL_ENTRY *entry;
     ULONG name_len;
     UCHAR SyscallName[32];
@@ -910,10 +922,6 @@ _FX SYSCALL_ENTRY *Syscall_DuplicateHandle_3(
 
         strcpy(SyscallName, "ConnectPort");
 
-    } else if (TypeLength == 3 && wmemcmp(TypeBuffer, _Job, 3) == 0) {
-
-        strcpy(SyscallName, "OpenJobObject");
-
     } else if (TypeLength <= 24) {
 
         memcpy(SyscallName, "Open", 4);
@@ -921,6 +929,17 @@ _FX SYSCALL_ENTRY *Syscall_DuplicateHandle_3(
             --TypeLength;
             SyscallName[TypeLength + 4] = (UCHAR)TypeBuffer[TypeLength];
         } while (TypeLength);
+
+        //
+        // Job, SymbolicLink, Directory functions have the suffix Object
+        //
+
+        if ((TypeLength == 3 && wmemcmp(TypeBuffer, _Job, 3) == 0)
+         || (TypeLength == 12 && wmemcmp(TypeBuffer, _SymLink, 12) == 0)
+         || (TypeLength == 9 && wmemcmp(TypeBuffer, _Directory, 9) == 0)){
+
+            strcat(SyscallName, "Object");
+        }
 
     } else
         return NULL;

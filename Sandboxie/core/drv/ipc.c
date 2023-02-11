@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@
 
 
 static BOOLEAN Ipc_Init_Type(
-    const WCHAR *TypeName, P_Syscall_Handler2 handler);
+    const WCHAR *TypeName, P_Syscall_Handler2 handler, ULONG createEx);
 
 static BOOLEAN Ipc_InitPaths(PROCESS *proc);
 
@@ -51,15 +51,15 @@ static BOOLEAN Ipc_IsComServer(PROCESS *proc);
 
 static NTSTATUS Ipc_CheckGenericObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
-    ACCESS_MASK GrantedAccess);
+    ULONG Operation, ACCESS_MASK GrantedAccess);
 
 static NTSTATUS Ipc_CheckPortObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
-    ACCESS_MASK GrantedAccess);
+    ULONG Operation, ACCESS_MASK GrantedAccess);
 
 static NTSTATUS Ipc_CheckJobObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
-    ACCESS_MASK GrantedAccess);
+    ULONG Operation, ACCESS_MASK GrantedAccess);
 
 static NTSTATUS Ipc_CheckObjectName(HANDLE handle, KPROCESSOR_MODE mode);
 
@@ -103,6 +103,7 @@ static const WCHAR *Ipc_Semaphore_TypeName  = L"Semaphore";
 static const WCHAR *Ipc_Section_TypeName    = L"Section";
 static const WCHAR *Ipc_JobObject_TypeName  = L"JobObject";
 static const WCHAR *Ipc_SymLink_TypeName    = L"SymbolicLinkObject";
+static const WCHAR *Ipc_Directory_TypeName  = L"DirectoryObject";
 
 static PERESOURCE Ipc_DirLock = NULL;
 
@@ -140,23 +141,22 @@ _FX BOOLEAN Ipc_Init(void)
     // set object open handlers for generic objects
     //
 
-#define Ipc_Init_Type_Generic(TypeName)                     \
-    if (! Ipc_Init_Type(TypeName, Ipc_CheckGenericObject))  \
+#define Ipc_Init_Type_Generic(TypeName, ex)                     \
+    if (! Ipc_Init_Type(TypeName, Ipc_CheckGenericObject, ex))  \
         return FALSE;
 
-    Ipc_Init_Type_Generic(Ipc_Event_TypeName);
-    Ipc_Init_Type_Generic(Ipc_EventPair_TypeName);
-    Ipc_Init_Type_Generic(Ipc_KeyedEvent_TypeName);
-    Ipc_Init_Type_Generic(Ipc_Mutant_TypeName);
-    Ipc_Init_Type_Generic(Ipc_Semaphore_TypeName);
-    Ipc_Init_Type_Generic(Ipc_Section_TypeName);
+    Ipc_Init_Type_Generic(Ipc_Event_TypeName, 0);
+    Ipc_Init_Type_Generic(Ipc_EventPair_TypeName, 0);
+    Ipc_Init_Type_Generic(Ipc_KeyedEvent_TypeName, 0);
+    Ipc_Init_Type_Generic(Ipc_Mutant_TypeName, 0);
+    Ipc_Init_Type_Generic(Ipc_Semaphore_TypeName, 0);
+    Ipc_Init_Type_Generic(Ipc_Section_TypeName, 17763); // NtCreateSectionEx introduced in windows 10 1809
+    Ipc_Init_Type_Generic(Ipc_SymLink_TypeName, 0);
+    Ipc_Init_Type_Generic(Ipc_Directory_TypeName, 9200); // NtCreateDirectoryObjectEx introduced windows 8
 
 #undef Ipc_Init_Type_Generic
 
-    if (! Ipc_Init_Type(Ipc_JobObject_TypeName, Ipc_CheckJobObject))
-        return FALSE;
-
-    if (! Ipc_Init_Type(Ipc_SymLink_TypeName, Ipc_CheckGenericObject))
+    if (! Ipc_Init_Type(Ipc_JobObject_TypeName, Ipc_CheckJobObject, 0))
         return FALSE;
 
     //
@@ -277,7 +277,7 @@ _FX BOOLEAN Ipc_Init(void)
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Ipc_Init_Type(const WCHAR *TypeName, P_Syscall_Handler2 handler)
+_FX BOOLEAN Ipc_Init_Type(const WCHAR *TypeName, P_Syscall_Handler2 handler, ULONG createEx)
 {
     WCHAR nameW[64];
     UCHAR nameA[64];
@@ -300,6 +300,14 @@ _FX BOOLEAN Ipc_Init_Type(const WCHAR *TypeName, P_Syscall_Handler2 handler)
 
     if (! Syscall_Set2(nameA, handler))
         return FALSE;
+
+    if (createEx && Driver_OsBuild >= createEx) {
+
+        strcat(nameA, "Ex");
+
+        if (! Syscall_Set2(nameA, handler))
+            return FALSE;
+    }
 
     return TRUE;
 }
@@ -856,6 +864,7 @@ _FX BOOLEAN Ipc_IsComServer(PROCESS *proc)
     if (proc->image_from_box)
         return FALSE;
 
+    // $Workaround$ - 3rd party fix
     if (_wcsicmp(proc->image_name, L"iexplore.exe") != 0 &&
         _wcsicmp(proc->image_name, L"wmplayer.exe") != 0 &&
         _wcsicmp(proc->image_name, L"winamp.exe")   != 0 &&
@@ -949,10 +958,13 @@ _FX BOOLEAN Ipc_IsRunRestricted(PROCESS *proc)
 
 _FX NTSTATUS Ipc_CheckGenericObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
-    ACCESS_MASK GrantedAccess)
+    ULONG Operation, ACCESS_MASK GrantedAccess)
 {
     NTSTATUS status;
     BOOLEAN IsBoxedPath;
+    POBJECT_TYPE ObjectType;
+
+    ObjectType = pObGetObjectType(Object);
 
     // If the client port object is unnamed, check the server port object. This happens with dynamic ports like the spooler and WPAD.
     // (and possibly others)
@@ -1044,6 +1056,42 @@ _FX NTSTATUS Ipc_CheckGenericObject(
         else if (!is_open && !is_closed)
 #endif
         {
+            
+            #define IS_OBJECT_TYPE(l,t) (ObjectType && ObjectType->Name.Length == l * sizeof(WCHAR) \
+                                    && ObjectType->Name.Buffer && _wcsnicmp(ObjectType->Name.Buffer, t, l) == 0)
+
+            if (IS_OBJECT_TYPE(12, L"SymbolicLink")) {
+
+                //
+                // we enforce only CreateSymbolicLinkObject to use copy paths, 
+                // OpenSymbolicLinkObject can use true paths if the access is read only
+                //
+
+                if(Operation == OBJ_OP_OPEN && (GrantedAccess & SYMBOLIC_LINK_SET) == 0)
+#ifdef USE_MATCH_PATH_EX
+                    mp_flags = TRUE_PATH_OPEN_FLAG;
+#else
+                    is_open = TRUE;
+#endif
+            }
+
+            else if (IS_OBJECT_TYPE(9, L"Directory")) {
+
+                //
+                // we only enforce CreateDirectoryObject/CreateDirectoryObjectEx
+                // as long as the access is read only
+                //
+
+                if(Operation == OBJ_OP_OPEN && (GrantedAccess & (DIRECTORY_CREATE_OBJECT | DIRECTORY_CREATE_SUBDIRECTORY)) == 0)
+#ifdef USE_MATCH_PATH_EX
+                    mp_flags = TRUE_PATH_OPEN_FLAG;
+#else
+                    is_open = TRUE;
+#endif
+            }
+            
+            else //if (IS_OBJECT_TYPE(9, L"ALPC Port"))
+               
             if (Ipc_Dynamic_Ports.pPortLock)
             {
                 KeEnterCriticalRegion();
@@ -1070,6 +1118,8 @@ _FX NTSTATUS Ipc_CheckGenericObject(
                 ExReleaseResourceLite(Ipc_Dynamic_Ports.pPortLock);
                 KeLeaveCriticalRegion();
             }
+
+            #undef IS_OBJECT_TYPE
         }
 
 #ifdef USE_MATCH_PATH_EX
@@ -1096,7 +1146,11 @@ _FX NTSTATUS Ipc_CheckGenericObject(
         else
             letter = 0;
 
+        // $Workaround$ - 3rd party fix
         if (letter) {
+            //
+            // sysinternals dbgview
+            //
             WCHAR *backslash = wcsrchr(Name->Buffer, L'\\');
             if (backslash) {
                 ++backslash;
@@ -1124,8 +1178,6 @@ _FX NTSTATUS Ipc_CheckGenericObject(
             //Log_Debug_Msg(mon_type, access_str, Name->Buffer);
 
             if (Session_MonitorCount) {
-	
-                POBJECT_TYPE ObjectType = pObGetObjectType(Object);
 
 		        const WCHAR* strings[4] = { Name->Buffer, access_str, ObjectType ? ObjectType->Name.Buffer : NULL, NULL };
 		        Session_MonitorPutEx(mon_type, strings, NULL, PsGetCurrentProcessId(), PsGetCurrentThreadId());
@@ -1159,14 +1211,14 @@ _FX NTSTATUS Ipc_CheckGenericObject(
 
 _FX NTSTATUS Ipc_CheckPortObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
-    ACCESS_MASK GrantedAccess)
+    ULONG Operation, ACCESS_MASK GrantedAccess)
 {
     void *PortObject = Ipc_GetServerPort(Object);
 
     if (! PortObject)
         return STATUS_SUCCESS;
 
-    return Ipc_CheckGenericObject(proc, PortObject, Name, GrantedAccess);
+    return Ipc_CheckGenericObject(proc, PortObject, Name, Operation, GrantedAccess);
 }
 
 
@@ -1177,7 +1229,7 @@ _FX NTSTATUS Ipc_CheckPortObject(
 
 _FX NTSTATUS Ipc_CheckJobObject(
     PROCESS* proc, void* Object, UNICODE_STRING* Name,
-    ACCESS_MASK GrantedAccess)
+    ULONG Operation, ACCESS_MASK GrantedAccess)
 {
     //
     // we don't mind if a program in the sandbox creates or opens a job
@@ -1195,7 +1247,7 @@ _FX NTSTATUS Ipc_CheckJobObject(
     if (! Name->Length)
         return STATUS_ACCESS_DENIED;
 
-    return Ipc_CheckGenericObject(proc, Object, Name, GrantedAccess);
+    return Ipc_CheckGenericObject(proc, Object, Name, Operation, GrantedAccess);
 }
 
 

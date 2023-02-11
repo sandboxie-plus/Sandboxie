@@ -55,7 +55,7 @@ static NTSTATUS File_QueryTeardown(
 
 static NTSTATUS File_CheckFileObject(
     PROCESS *proc, void *Object, UNICODE_STRING *NameString,
-    ACCESS_MASK GrantedAccess);
+    ULONG Operation, ACCESS_MASK GrantedAccess);
 
 
 //---------------------------------------------------------------------------
@@ -694,7 +694,7 @@ _FX NTSTATUS File_QueryTeardown(
 
 _FX NTSTATUS File_CheckFileObject(
     PROCESS *proc, void *Object, UNICODE_STRING *NameString,
-    ACCESS_MASK GrantedAccess)
+    ULONG Operation, ACCESS_MASK GrantedAccess)
 {
     NTSTATUS status;
     FILE_OBJECT *FileObject;

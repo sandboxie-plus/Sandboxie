@@ -3133,6 +3133,7 @@ ReparseLoop:
             // do that with an exe that exists outside the sandbox
             //
 
+            // $Workaround$ - 3rd party fix
             if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX && (DesiredAccess & GENERIC_WRITE)) {
                 const WCHAR *dot = wcsrchr(TruePath, L'.');
                 if (dot && _wcsicmp(dot, L".exe") == 0)

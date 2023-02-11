@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2022-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -26,6 +27,14 @@
 
 #include "driver.h"
 
+//---------------------------------------------------------------------------
+// Defines
+//---------------------------------------------------------------------------
+
+
+#define OBJ_OP_CREATE       1
+#define OBJ_OP_OPEN         2 // or duplicate
+
 
 //---------------------------------------------------------------------------
 // Structures and Types
@@ -42,7 +51,7 @@ typedef NTSTATUS (*P_Syscall_Handler1)(
 
 typedef NTSTATUS (*P_Syscall_Handler2)(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
-    ACCESS_MASK GrantedAccess);
+    ULONG Operation, ACCESS_MASK GrantedAccess);
 
 typedef BOOLEAN (*P_Syscall_Handler3_Support_Procmon_Stack)(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);

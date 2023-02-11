@@ -54,11 +54,11 @@ static NTSTATUS Thread_MyImpersonateClient(
 
 static NTSTATUS Thread_CheckProcessObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
-    ACCESS_MASK GrantedAccess);
+    ULONG Operation, ACCESS_MASK GrantedAccess);
 
 static NTSTATUS Thread_CheckThreadObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
-    ACCESS_MASK GrantedAccess);
+    ULONG Operation, ACCESS_MASK GrantedAccess);
 
 
 //---------------------------------------------------------------------------
@@ -957,7 +957,7 @@ _FX NTSTATUS Thread_StoreThreadToken(PROCESS *proc)
 
 _FX NTSTATUS Thread_CheckProcessObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
-    ACCESS_MASK GrantedAccess)
+    ULONG Operation, ACCESS_MASK GrantedAccess)
 {
     if (Obj_CallbackInstalled) return STATUS_SUCCESS; // ObCallbacks takes care of that already
     PEPROCESS ProcessObject = (PEPROCESS)Object;
@@ -972,7 +972,7 @@ _FX NTSTATUS Thread_CheckProcessObject(
 
 _FX NTSTATUS Thread_CheckThreadObject(
     PROCESS *proc, void *Object, UNICODE_STRING *Name,
-    ACCESS_MASK GrantedAccess)
+    ULONG Operation, ACCESS_MASK GrantedAccess)
 {
     if (Obj_CallbackInstalled) return STATUS_SUCCESS; // ObCallbacks takes care of that already
     PEPROCESS ProcessObject = PsGetThreadProcess(Object);

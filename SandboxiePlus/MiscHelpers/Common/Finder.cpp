@@ -254,12 +254,9 @@ next_sibling:
 			return child;
 	}
 
-	QModelIndex par = m_pModel->parent(idx);
-	if (par.isValid()) {
-		QModelIndex cur = FindRow(par, idx.row() + (next ? (reverse ? -1 : 1) : 0), reverse);
-		if (cur.isValid())
-			return cur;
-	}
+	QModelIndex cur = FindRow(m_pModel->parent(idx), idx.row() + (next ? (reverse ? -1 : 1) : 0), reverse);
+	if (cur.isValid())
+		return cur;
 
 next_parent:
 	QModelIndex parent = m_pModel->parent(idx);

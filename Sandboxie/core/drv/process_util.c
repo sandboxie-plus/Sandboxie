@@ -921,7 +921,7 @@ _FX ULONG Process_MatchPathEx(
     ULONG path_lwr_len;
     int match_len;
     ULONG level;
-    BOOLEAN exact;
+    ULONG flags;
     USHORT wildc;
     ULONG mp_flags;
 
@@ -965,7 +965,7 @@ _FX ULONG Process_MatchPathEx(
     //
 
     level = 3; // 3 - global default - lower is better, 3 is max value
-    exact = FALSE;
+    flags = 0;
     wildc = -1; // lower is better
     match_len = 0;
     if (path_code == L'n' && proc->file_block_network_files) {
@@ -1006,7 +1006,7 @@ _FX ULONG Process_MatchPathEx(
     // these paths are inaccessible for true and copy locations 
     //
 
-    if (Pattern_MatchPathListEx(path_lwr, path_len, closed_list, &level, &match_len, &exact, &wildc, patsrc)) {
+    if (Pattern_MatchPathListEx(path_lwr, path_len, closed_list, &level, &match_len, &flags, &wildc, patsrc)) {
         mp_flags = TRUE_PATH_CLOSED_FLAG | COPY_PATH_CLOSED_FLAG;
         if (!proc->use_rule_specificity) goto finish;
     }
@@ -1016,7 +1016,7 @@ _FX ULONG Process_MatchPathEx(
     // these paths allow read access to true location and read/write access to copy location
     //
     
-    if (Pattern_MatchPathListEx(path_lwr, path_len, write_list, &level, &match_len, &exact, &wildc, patsrc)) {
+    if (Pattern_MatchPathListEx(path_lwr, path_len, write_list, &level, &match_len, &flags, &wildc, patsrc)) {
         mp_flags = TRUE_PATH_CLOSED_FLAG | COPY_PATH_OPEN_FLAG;
         if (!proc->use_rule_specificity) goto finish;
     }
@@ -1026,7 +1026,7 @@ _FX ULONG Process_MatchPathEx(
     // these paths allow read only access to true path and copy locations
     //
     
-    if (Pattern_MatchPathListEx(path_lwr, path_len, read_list, &level, &match_len, &exact, &wildc, patsrc)) {
+    if (Pattern_MatchPathListEx(path_lwr, path_len, read_list, &level, &match_len, &flags, &wildc, patsrc)) {
         mp_flags = TRUE_PATH_READ_FLAG | COPY_PATH_READ_FLAG;
         if (!proc->use_rule_specificity) goto finish;
     }
@@ -1036,7 +1036,7 @@ _FX ULONG Process_MatchPathEx(
     // these paths allow reading the true location and write to the copy location
     //
 
-    if (Pattern_MatchPathListEx(path_lwr, path_len, normal_list, &level, &match_len, &exact, &wildc, patsrc)) {
+    if (Pattern_MatchPathListEx(path_lwr, path_len, normal_list, &level, &match_len, &flags, &wildc, patsrc)) {
         mp_flags = TRUE_PATH_READ_FLAG | COPY_PATH_OPEN_FLAG;
         // don't goto finish as open can overwrite this 
     }
@@ -1046,7 +1046,7 @@ _FX ULONG Process_MatchPathEx(
     // these paths allow read/write access to the true location
     //
 
-    if (Pattern_MatchPathListEx(path_lwr, path_len, open_list, &level, &match_len, &exact, &wildc, patsrc)) {
+    if (Pattern_MatchPathListEx(path_lwr, path_len, open_list, &level, &match_len, &flags, &wildc, patsrc)) {
         mp_flags = TRUE_PATH_OPEN_FLAG;
     }
     

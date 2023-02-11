@@ -232,6 +232,17 @@ typedef NTSTATUS (*P_NtCreateSection)(
     IN  ULONG SectionAttributes,
     IN  HANDLE FileHandle OPTIONAL);
 
+typedef NTSTATUS (*P_NtCreateSectionEx)(
+    OUT PHANDLE SectionHandle,
+    IN  ACCESS_MASK DesiredAccess,
+    IN  POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL,
+    IN  PLARGE_INTEGER MaximumSize OPTIONAL,
+    IN  ULONG PageAttributes,
+    IN  ULONG SectionAttributes,
+    IN  HANDLE FileHandle OPTIONAL,
+    IN OUT PMEM_EXTENDED_PARAMETER ExtendedParameters,
+    IN ULONG ExtendedParameterCount);
+
 typedef NTSTATUS (*P_NtCreateSemaphore)(
     OUT PHANDLE SemaphoreHandle,
     IN  ACCESS_MASK DesiredAccess,
@@ -526,6 +537,32 @@ typedef NTSTATUS (*P_NtQuerySymbolicLinkObject)(
     IN HANDLE SymbolicLinkHandle,
     IN OUT PUNICODE_STRING LinkTarget,
     OUT PULONG ReturnedLength);
+
+typedef NTSTATUS (*P_NtCreateDirectoryObject)(
+    PHANDLE DirectoryHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes);
+
+typedef NTSTATUS (*P_NtCreateDirectoryObjectEx)(
+    PHANDLE DirectoryHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes,
+    HANDLE ShadowDirectoryHandle,
+    ULONG Flags);
+
+typedef NTSTATUS (*P_NtOpenDirectoryObject)(
+    PHANDLE DirectoryHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes);
+
+typedef NTSTATUS (*P_NtQueryDirectoryObject)(
+    HANDLE DirectoryHandle,
+    PVOID Buffer,
+    ULONG Length,
+    BOOLEAN ReturnSingleEntry,
+    BOOLEAN RestartScan,
+    PULONG Context,
+    PULONG ReturnLength);
 
 typedef NTSTATUS (*P_NtLoadDriver)(
     IN  PUNICODE_STRING RegistryPath);

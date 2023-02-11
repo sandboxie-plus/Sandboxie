@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Run menu now supports folders, to be used by entering fodername1\foldername2\entryname in the name column of the UI
 - added an tray indicator for pending updates
+- added virtualization for CreateDirectoryObject(Ex) and OpenDirectoryObject (improves security, prevents name squating)
 
 ### Changed
 - 'OpenProtectedStorage=y' has been replaced with a template
@@ -25,6 +26,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - added AppContainer support for Compartment type boxes
+- FIXED SECURITY ISSUE ID-22 NtCreateSectionEx was not filtered by the driver
 
 
 

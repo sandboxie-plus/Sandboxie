@@ -1101,7 +1101,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsGeneral.cpp" line="463"/>
         <location filename="Windows/OptionsGeneral.cpp" line="563"/>
         <source>Always copy</source>
-        <translation>總是複製/translation>
+        <translation>總是複製</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="464"/>

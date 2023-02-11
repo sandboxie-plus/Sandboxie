@@ -303,11 +303,11 @@ SBIE2108 '%2' programı için sahte başarılı tamamlanma oluşturuluyor
 # .
 
 2111;pop;inf;01
-SBIE2111 İşleme erişilemiyor: %3, %2'yi arayın
+SBIE2111 İşleme erişilemiyor: %3, çağrı %2
 .
 
 2112;pop;inf;01
-SBIE2112 Nesneye erişilemiyor: %3, %2'yi arayın
+SBIE2112 Nesneye erişilemiyor: %3, çağrı %2
 .
 
 2191;pop;inf;01

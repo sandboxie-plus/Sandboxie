@@ -6818,7 +6818,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="733"/>
         <source>Support &amp;&amp; Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Destek &amp;&amp; Güncellemeler</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="980"/>

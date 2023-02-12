@@ -82,6 +82,7 @@ public:
 	virtual void			CloseBox();
 
 	virtual SB_PROGRESS		CleanBox()							{ BeginModifyingBox(); SB_PROGRESS Status = CSandBox::CleanBox(); ConnectEndSlot(Status); return Status; }
+	virtual SB_STATUS		RenameBox(const QString& NewName)	{ BeginModifyingBox(); SB_STATUS Status = CSandBox::RenameBox(NewName); ConnectEndSlot(Status); return Status; }
 	virtual SB_PROGRESS		TakeSnapshot(const QString& Name)	{ BeginModifyingBox(); SB_PROGRESS Status = CSandBox::TakeSnapshot(Name); ConnectEndSlot(Status); return Status; }
 	virtual SB_PROGRESS		RemoveSnapshot(const QString& ID)	{ BeginModifyingBox(); SB_PROGRESS Status = CSandBox::RemoveSnapshot(ID); ConnectEndSlot(Status); return Status; }
 	virtual SB_PROGRESS		SelectSnapshot(const QString& ID)	{ BeginModifyingBox(); SB_PROGRESS Status = CSandBox::SelectSnapshot(ID); ConnectEndSlot(Status); return Status; }

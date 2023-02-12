@@ -264,7 +264,7 @@ _FX NTSTATUS Process_Low_Api_InjectComplete(PROCESS *proc, ULONG64 *parms)
 
             //
             // the service synamically allocates a per box SID to be used,
-            // if no SID is provided this feature is eider disabled or failed
+            // if no SID is provided this feature is either disabled or failed
             // then we fall back to using the default anonymous SID
             //
 

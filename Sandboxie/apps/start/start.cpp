@@ -1065,7 +1065,7 @@ int Program_Start(void)
         ExpandEnvironmentStrings(cmdline, expanded, 8192);
 
         //
-        // When the service proces has a manifest which requires elevated privileges,
+        // When the service process has a manifest which requires elevated privileges,
         // CreateProcess will fail if we did not start with a elevated token.
         // To fix this issue we always fake being elevated when starting a service.
         //

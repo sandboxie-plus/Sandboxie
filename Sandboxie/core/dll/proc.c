@@ -444,7 +444,7 @@ _FX BOOLEAN Proc_Init(void)
     // When not in Compartment mode, windows AppContainer isolation is not supported 
     // hook the CreateAppContainerToken and return a regular token
     // we hook CreateAppContainerToken rather then NtCreateLowBoxToken
-    // as we dont waht CreateAppContainerToken to fail when 
+    // as we dont what CreateAppContainerToken to fail when 
     // \Sessions\*\AppContainerNamedObjects\* is not open
     //
 

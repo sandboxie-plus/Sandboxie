@@ -21,7 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added hook for CreateAppContainerToken, which should also improve compatibility with other apps [#1926](https://github.com/sandboxie-plus/Sandboxie/issues/1926)
 -- note: Template_Edge_Fix is no longer required
 - replaced a few icons
-- moved the "Support" page in Global Settings above the "Advanced Config" page and renamed it to "Support & Updates"
+- moved the "Support" global settings page above the "Advanced Config" page and renamed it to "Support & Updates"
 - when dragging and dropping a file on the SandMan UI to run it, the currently selected box will be pre-selected in the box picker dialog
 - improved access rule handling [#2633](https://github.com/sandboxie-plus/Sandboxie/discussions/2633)
 - SbieCtrl now uses the new update format when checking for updates

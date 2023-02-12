@@ -47,7 +47,7 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 
 	// when loading a sandbox that is not initialized, initialize it
 	int cfglvl = GetNum("ConfigLevel");
-	if (cfglvl >= 9)
+	if (cfglvl >= 10)
 		return;
 
 	if (cfglvl == 0)
@@ -106,7 +106,14 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 		}
 	}
 
-	SetNum("ConfigLevel", 9);
+	if (cfglvl < 10)
+	{
+		// starting with 5.62.3 OpenProtectedStorage is a template
+		if(GetBool("OpenProtectedStorage"))
+			InsertText("Template", "OpenProtectedStorage");
+	}
+
+	SetNum("ConfigLevel", 10);
 }
 
 CSandBox::~CSandBox()

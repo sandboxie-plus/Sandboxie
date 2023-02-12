@@ -128,6 +128,7 @@ public:
     static void SetDefaultTemplates7(CBox &box);
     static void SetDefaultTemplates8(CBox& box);
     static void SetDefaultTemplates9(CBox& box);
+    static void SetDefaultTemplates10(CBox& box);
 };
 
 

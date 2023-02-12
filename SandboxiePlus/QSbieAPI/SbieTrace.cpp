@@ -69,6 +69,11 @@ CTraceEntry::CTraceEntry(quint64 Timestamp, quint32 ProcessId, quint32 ThreadId,
 	m_SubType = LogData.length() > 2 ? LogData.at(2) : QString();
 	m_Type.Flags = Type;
 
+	if (m_Type.Type == MONITOR_SYSCALL && !m_SubType.isEmpty()) {
+		m_Message += ", name=" + m_SubType;
+		m_SubType.clear();
+	}
+
 	m_TimeStamp = Timestamp ? Timestamp : QDateTime::currentDateTime().toMSecsSinceEpoch();
 
 	m_BoxPtr = 0;
@@ -144,9 +149,11 @@ QString CTraceEntry::GetTypeStr() const
 		Type.append(" / " + m_SubType);
 
 	if (m_Type.User)
-		Type.append(" (U)");
+		Type.append(" (U)"); // user mode (sbiedll.dll)
+	//else if (m_Type.Agent)
+	//	Type.append(" (S)"); // system mode (sbiesvc.exe)
 	else
-		Type.append(" (D)");
+		Type.append(" (K)"); // kernel mode (sbiedrv.sys)
 
 	return Type;
 }

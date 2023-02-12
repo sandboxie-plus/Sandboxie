@@ -1539,6 +1539,7 @@ void CAppPage::SetDefaultTemplates7(CBox &box)
     SetDefaultTemplates8(box);
 }
 
+
 //---------------------------------------------------------------------------
 // SetDefaultTemplates8
 //---------------------------------------------------------------------------
@@ -1550,6 +1551,7 @@ void CAppPage::SetDefaultTemplates8(CBox& box)
     box.EnableTemplate(L"SkipHook", TRUE);
     SetDefaultTemplates9(box);
 }
+
 
 //---------------------------------------------------------------------------
 // SetDefaultTemplates9
@@ -1574,5 +1576,25 @@ void CAppPage::SetDefaultTemplates9(CBox& box)
         // enable those templates only for non hardened boxes
         box.EnableTemplate(L"OpenBluetooth", TRUE);
         box.EnableTemplate(L"OpenSmartCard", TRUE);
+    }
+
+    SetDefaultTemplates10(box);
+}
+
+
+//---------------------------------------------------------------------------
+// SetDefaultTemplates10
+//---------------------------------------------------------------------------
+
+
+void CAppPage::SetDefaultTemplates10(CBox& box)
+{
+    CSbieIni &ini = CSbieIni::GetInstance();
+
+    BOOL bOpenProtectedStorage = FALSE;
+    ini.GetBool(box.GetName(), L"OpenProtectedStorage", bOpenProtectedStorage, FALSE);
+    if (bOpenProtectedStorage) {
+        ini.DelText(box.GetName(), L"OpenProtectedStorage", L"y");
+        box.EnableTemplate(L"OpenProtectedStorage", TRUE);
     }
 }

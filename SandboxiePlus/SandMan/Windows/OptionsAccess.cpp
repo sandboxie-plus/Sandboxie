@@ -94,6 +94,12 @@ QTreeWidgetItem* COptionsWindow::GetAccessEntry(EAccessType Type, const QString&
 	return NULL;
 }
 
+bool COptionsWindow::IsAccessEntrySet(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path)
+{
+	QTreeWidgetItem* pItem = GetAccessEntry(Type, Program, Mode, Path);
+	return pItem && pItem->checkState(0) == Qt::Checked;
+}
+
 void COptionsWindow::SetAccessEntry(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path)
 {
 	if (GetAccessEntry(Type, Program, Mode, Path) != NULL)

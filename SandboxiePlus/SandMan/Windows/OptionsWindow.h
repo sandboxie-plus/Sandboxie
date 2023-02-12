@@ -334,6 +334,7 @@ protected:
 
 	void CopyGroupToList(const QString& Group, QTreeWidget* pTree, bool disabled = false);
 	QTreeWidgetItem* GetAccessEntry(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path);
+	bool IsAccessEntrySet(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path);
 	void SetAccessEntry(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path);
 	void DelAccessEntry(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path);
 

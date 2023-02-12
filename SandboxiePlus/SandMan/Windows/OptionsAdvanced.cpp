@@ -415,7 +415,7 @@ void COptionsWindow::OnAdvancedChanged()
 
 void COptionsWindow::CheckOpenCOM()
 {
-	bool bComIpcOpen = GetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\epmapper") != NULL || GetAccessEntry(eIPC, "", eOpen, "*") != NULL;
+	bool bComIpcOpen = IsAccessEntrySet(eIPC, "", eOpen, "\\RPC Control\\epmapper") || IsAccessEntrySet(eIPC, "", eOpen, "*");
 	if(bComIpcOpen)
 		ui.chkOpenCOM->setChecked(!m_BoxTemplates.contains("BoxedCOM"));
 	else
@@ -424,7 +424,7 @@ void COptionsWindow::CheckOpenCOM()
 
 void COptionsWindow::OnOpenCOM()
 {
-	bool bComIpcOpen = GetAccessEntry(eIPC, "", eOpen, "\\RPC Control\\epmapper") != NULL || GetAccessEntry(eIPC, "", eOpen, "*") != NULL;
+	bool bComIpcOpen = IsAccessEntrySet(eIPC, "", eOpen, "\\RPC Control\\epmapper") || IsAccessEntrySet(eIPC, "", eOpen, "*");
 	SetTemplate("OpenCOM", !bComIpcOpen && ui.chkOpenCOM->isChecked());
 	SetTemplate("BoxedCOM", bComIpcOpen && !ui.chkOpenCOM->isChecked());
 }

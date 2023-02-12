@@ -275,7 +275,7 @@ _FX NTSTATUS Syscall_OpenHandle(
 
     //
     // During early process initializarion stage OpenDirectoryObject is invoked with DIRECTORY_ALL_ACCESS
-    // so we strip the "write" permissions here untill the sbiedll finishes loading
+    // so we strip the "write" permissions here until the SbieDll finishes loading
     //
 
     if (strcmp(syscall_entry->name, "OpenDirectoryObject") == 0 && !proc->sbiedll_loaded){

@@ -192,7 +192,7 @@ NTSTATUS NtIo_RenameFileOrFolder(POBJECT_ATTRIBUTES src_objattrs, POBJECT_ATTRIB
 	if (!NT_SUCCESS(status))
 		return status;
 
-	HANDLE dst_handle = NULL; // open destination fodler
+	HANDLE dst_handle = NULL; // open destination folder
 	status = NtCreateFile(&dst_handle, FILE_GENERIC_READ, dest_objattrs, &IoStatusBlock, NULL,
 		0, // for dir? FILE_ATTRIBUTE_NORMAL
 		FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,

@@ -3231,7 +3231,7 @@ ReparseLoop:
             status = STATUS_OBJECT_PATH_NOT_FOUND;
 
             //
-            // if this is a create operation check if the parent fodler is ok and if so clear the error
+            // if this is a create operation check if the parent folder is ok and if so clear the error
             //
 
             if (CreateDisposition != FILE_OPEN && CreateDisposition != FILE_OVERWRITE) {

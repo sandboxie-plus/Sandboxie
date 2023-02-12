@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - moved the "Support" settings page the above "Advance Options" page and renamed it to "Support & Updates"
 - when dragging and dropping a file on to the sandman UI to run it the currently selected box will be pre-selected in the  box picker dialog
 - improved access rule handling [#2633](https://github.com/sandboxie-plus/Sandboxie/discussions/2633)
+- sbiectrl now uses the new update format when checking for updates
 
 ### Fixed
 - added AppContainer support for Compartment type boxes

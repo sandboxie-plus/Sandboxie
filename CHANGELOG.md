@@ -11,20 +11,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Run menu now supports folders, to be used by entering foldername1\foldername2\entryname in the name column of the UI
-- added an tray indicator for pending updates
-- added virtualization for CreateDirectoryObject(Ex) and OpenDirectoryObject (improves security, prevents name squating)
+- added a tray indicator for pending updates
+- added virtualization for CreateDirectoryObject(Ex) and OpenDirectoryObject (improves security, prevents name squatting)
 
 ### Changed
 - 'OpenProtectedStorage=y' has been replaced with a template
-- moved all built in access rules to a set of default templates
+- moved all built-in access rules to a set of default templates
 - moved WinInetCache control to a template OpenWinInetCache, 'CloseWinInetCache=y' is now obsolete
-- added hook for CreateAppContainerToken, should also improve compatibility with other apps [#1926](https://github.com/sandboxie-plus/Sandboxie/issues/1926)
+- added hook for CreateAppContainerToken, which should also improve compatibility with other apps [#1926](https://github.com/sandboxie-plus/Sandboxie/issues/1926)
 -- note: Template_Edge_Fix is no longer required
 - replaced a few icons
-- moved the "Support" settings page the above "Advance Options" page and renamed it to "Support & Updates"
-- when dragging and dropping a file on to the sandman UI to run it the currently selected box will be pre-selected in the  box picker dialog
+- moved the "Support" page in Global Settings above the "Advanced Config" page and renamed it to "Support & Updates"
+- when dragging and dropping a file on the SandMan UI to run it, the currently selected box will be pre-selected in the box picker dialog
 - improved access rule handling [#2633](https://github.com/sandboxie-plus/Sandboxie/discussions/2633)
-- sbiectrl now uses the new update format when checking for updates
+- SbieCtrl now uses the new update format when checking for updates
 
 ### Fixed
 - added AppContainer support for Compartment type boxes

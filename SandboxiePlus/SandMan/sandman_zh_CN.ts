@@ -999,8 +999,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="959"/>
         <location filename="Windows/OptionsWindow.cpp" line="977"/>
-        <location filename="Windows/OptionsAccess.cpp" line="398"/>
-        <location filename="Windows/OptionsAccess.cpp" line="630"/>
+        <location filename="Windows/OptionsAccess.cpp" line="404"/>
+        <location filename="Windows/OptionsAccess.cpp" line="636"/>
         <location filename="Windows/OptionsGeneral.cpp" line="496"/>
         <location filename="Windows/OptionsGeneral.cpp" line="591"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
@@ -1049,7 +1049,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>可执行文件 (*.exe)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="359"/>
+        <location filename="Windows/OptionsAccess.cpp" line="365"/>
         <location filename="Windows/OptionsForce.cpp" line="240"/>
         <location filename="Windows/OptionsForce.cpp" line="250"/>
         <location filename="Windows/OptionsRecovery.cpp" line="128"/>
@@ -1066,141 +1066,141 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="vanished">引导</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="306"/>
+        <location filename="Windows/OptionsAccess.cpp" line="312"/>
         <source>Closed</source>
         <translation>封禁</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="307"/>
+        <location filename="Windows/OptionsAccess.cpp" line="313"/>
         <source>Closed RT</source>
         <translation>封禁 RT</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="308"/>
+        <location filename="Windows/OptionsAccess.cpp" line="314"/>
         <source>Read Only</source>
         <translation>只读</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="302"/>
+        <location filename="Windows/OptionsAccess.cpp" line="308"/>
         <source>Normal</source>
         <translation>标准</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="303"/>
+        <location filename="Windows/OptionsAccess.cpp" line="309"/>
         <source>Open</source>
         <translation>开放</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="304"/>
+        <location filename="Windows/OptionsAccess.cpp" line="310"/>
         <source>Open for All</source>
         <translation>完全开放</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="305"/>
+        <location filename="Windows/OptionsAccess.cpp" line="311"/>
         <source>No Rename</source>
         <translation>禁止重命名</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="309"/>
+        <location filename="Windows/OptionsAccess.cpp" line="315"/>
         <source>Box Only (Write Only)</source>
         <translation>仅沙盒内 (只写)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="310"/>
+        <location filename="Windows/OptionsAccess.cpp" line="316"/>
         <source>Ignore UIPI</source>
         <translation>忽略 UIPI</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="312"/>
-        <location filename="Windows/OptionsAccess.cpp" line="329"/>
-        <location filename="Windows/OptionsAccess.cpp" line="342"/>
+        <location filename="Windows/OptionsAccess.cpp" line="318"/>
+        <location filename="Windows/OptionsAccess.cpp" line="335"/>
+        <location filename="Windows/OptionsAccess.cpp" line="348"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="319"/>
+        <location filename="Windows/OptionsAccess.cpp" line="325"/>
         <source>Regular Sandboxie behavior - allow read and also copy on write.</source>
         <translation>常规沙盒行为 - 允许读取及写时复制</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="320"/>
+        <location filename="Windows/OptionsAccess.cpp" line="326"/>
         <source>Allow write-access outside the sandbox.</source>
         <translation>允许透写到沙盒外(仅当执行写操作的程序位于沙盒外时)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="321"/>
+        <location filename="Windows/OptionsAccess.cpp" line="327"/>
         <source>Allow write-access outside the sandbox, also for applications installed inside the sandbox.</source>
         <translation>允许透写到沙盒外(无论执行写操作的程序是否位于沙盒内)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="322"/>
+        <location filename="Windows/OptionsAccess.cpp" line="328"/>
         <source>Don&apos;t rename window classes.</source>
         <translation>禁止重命名 Windows 窗口类</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="323"/>
+        <location filename="Windows/OptionsAccess.cpp" line="329"/>
         <source>Deny access to host location and prevent creation of sandboxed copies.</source>
         <translation>拒绝对主机位置的访问，防止在沙盒内创建相应的副本</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="324"/>
+        <location filename="Windows/OptionsAccess.cpp" line="330"/>
         <source>Block access to WinRT class.</source>
         <translation>阻止对 WinRT 类的访问</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="325"/>
+        <location filename="Windows/OptionsAccess.cpp" line="331"/>
         <source>Allow read-only access only.</source>
         <translation>只允许只读访问</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="326"/>
+        <location filename="Windows/OptionsAccess.cpp" line="332"/>
         <source>Hide host files, folders or registry keys from sandboxed processes.</source>
         <translation>对沙盒内的进程隐藏主机文件、目录或注册表键值</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="327"/>
+        <location filename="Windows/OptionsAccess.cpp" line="333"/>
         <source>Ignore UIPI restrictions for processes.</source>
         <translation>忽略对进程的 UIPI 限制</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="336"/>
+        <location filename="Windows/OptionsAccess.cpp" line="342"/>
         <source>File/Folder</source>
         <translation>文件/文件夹</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="337"/>
+        <location filename="Windows/OptionsAccess.cpp" line="343"/>
         <source>Registry</source>
         <translation>注册表</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="338"/>
+        <location filename="Windows/OptionsAccess.cpp" line="344"/>
         <source>IPC Path</source>
         <translation>IPC 路径</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="339"/>
+        <location filename="Windows/OptionsAccess.cpp" line="345"/>
         <source>Wnd Class</source>
         <translation>窗口类</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="340"/>
+        <location filename="Windows/OptionsAccess.cpp" line="346"/>
         <source>COM Object</source>
         <translation>COM 组件</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="347"/>
+        <location filename="Windows/OptionsAccess.cpp" line="353"/>
         <source>Select File</source>
         <translation>选择文件</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="347"/>
+        <location filename="Windows/OptionsAccess.cpp" line="353"/>
         <source>All Files (*.*)</source>
         <translation>所有文件 (*.*)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="961"/>
-        <location filename="Windows/OptionsAccess.cpp" line="393"/>
-        <location filename="Windows/OptionsAccess.cpp" line="626"/>
+        <location filename="Windows/OptionsAccess.cpp" line="399"/>
+        <location filename="Windows/OptionsAccess.cpp" line="632"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="535"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="610"/>
         <location filename="Windows/OptionsGeneral.cpp" line="491"/>
@@ -1212,32 +1212,32 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>所有程序</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="531"/>
+        <location filename="Windows/OptionsAccess.cpp" line="537"/>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
         <translation>COM 对象必须用其 GUID 来指定，例如：{00000000-0000-0000-0000-000000000000}</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="537"/>
+        <location filename="Windows/OptionsAccess.cpp" line="543"/>
         <source>RT interfaces must be specified by their name.</source>
         <translation>RT 接口必须用其名称来指定</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="551"/>
+        <location filename="Windows/OptionsAccess.cpp" line="557"/>
         <source>Opening all IPC access also opens COM access, do you still want to restrict COM to the sandbox?</source>
         <translation>开放 IPC 访问权限的同时也将开放 COM 的访问权限，你是否想继续在沙盒内限制 COM 接口的访问权限?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="552"/>
+        <location filename="Windows/OptionsAccess.cpp" line="558"/>
         <source>Don&apos;t ask in future</source>
         <translation>此后不再询问</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="561"/>
+        <location filename="Windows/OptionsAccess.cpp" line="567"/>
         <source>&apos;OpenWinClass=program.exe,#&apos; is not supported, use &apos;NoRenameWinClass=program.exe,*&apos; instead</source>
         <translation>不支持 &apos;OpenWinClass=program.exe,#&apos; 配置格式，请使用 &apos;NoRenameWinClass=program.exe,*&apos; 替换</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="605"/>
+        <location filename="Windows/OptionsAccess.cpp" line="611"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="586"/>
         <location filename="Windows/OptionsGeneral.cpp" line="558"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
@@ -1247,7 +1247,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>模板值不能被编辑</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="673"/>
+        <location filename="Windows/OptionsAccess.cpp" line="679"/>
         <source>Template values can not be removed.</source>
         <translation>模板值无法被移除</translation>
     </message>

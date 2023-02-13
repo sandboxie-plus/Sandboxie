@@ -654,7 +654,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Her zaman göster</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="605"/>
+        <location filename="Windows/OptionsAccess.cpp" line="611"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="586"/>
         <location filename="Windows/OptionsGeneral.cpp" line="558"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
@@ -682,7 +682,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Lütfen bir menü başlığı girin</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="359"/>
+        <location filename="Windows/OptionsAccess.cpp" line="365"/>
         <location filename="Windows/OptionsForce.cpp" line="240"/>
         <location filename="Windows/OptionsForce.cpp" line="250"/>
         <location filename="Windows/OptionsRecovery.cpp" line="128"/>
@@ -701,7 +701,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Lütfen bir program dosyası adı girin</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="673"/>
+        <location filename="Windows/OptionsAccess.cpp" line="679"/>
         <source>Template values can not be removed.</source>
         <translation>Şablon değerleri kaldırılamaz.</translation>
     </message>
@@ -740,8 +740,8 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="959"/>
         <location filename="Windows/OptionsWindow.cpp" line="977"/>
-        <location filename="Windows/OptionsAccess.cpp" line="398"/>
-        <location filename="Windows/OptionsAccess.cpp" line="630"/>
+        <location filename="Windows/OptionsAccess.cpp" line="404"/>
+        <location filename="Windows/OptionsAccess.cpp" line="636"/>
         <location filename="Windows/OptionsGeneral.cpp" line="496"/>
         <location filename="Windows/OptionsGeneral.cpp" line="591"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
@@ -786,7 +786,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation type="vanished">Hariç tutma</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="347"/>
+        <location filename="Windows/OptionsAccess.cpp" line="353"/>
         <source>Select File</source>
         <translation>Dosya Seç</translation>
     </message>
@@ -801,7 +801,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Lütfen önce grubu seçin.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="347"/>
+        <location filename="Windows/OptionsAccess.cpp" line="353"/>
         <source>All Files (*.*)</source>
         <translation>Tüm Dosyalar (*.*)</translation>
     </message>
@@ -842,8 +842,8 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="961"/>
-        <location filename="Windows/OptionsAccess.cpp" line="393"/>
-        <location filename="Windows/OptionsAccess.cpp" line="626"/>
+        <location filename="Windows/OptionsAccess.cpp" line="399"/>
+        <location filename="Windows/OptionsAccess.cpp" line="632"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="535"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="610"/>
         <location filename="Windows/OptionsGeneral.cpp" line="491"/>
@@ -865,12 +865,12 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Program girin:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="531"/>
+        <location filename="Windows/OptionsAccess.cpp" line="537"/>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
         <translation>COM nesneleri GUID&apos;lerine göre belirtilmelidir, bunun gibi: {00000000-0000-0000-0000-000000000000}</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="537"/>
+        <location filename="Windows/OptionsAccess.cpp" line="543"/>
         <source>RT interfaces must be specified by their name.</source>
         <translation>RT arayüzleri isimleriyle belirtilmelidir.</translation>
     </message>
@@ -930,119 +930,119 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Bazı değişiklikler henüz kaydedilmedi, bu seçenekler penceresini gerçekten kapatmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="305"/>
+        <location filename="Windows/OptionsAccess.cpp" line="311"/>
         <source>No Rename</source>
         <translation>Yeniden Adlandırma Yok</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="306"/>
+        <location filename="Windows/OptionsAccess.cpp" line="312"/>
         <source>Closed</source>
         <translation>Kapalı</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="307"/>
+        <location filename="Windows/OptionsAccess.cpp" line="313"/>
         <source>Closed RT</source>
         <translation>Kapalı RT</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="308"/>
+        <location filename="Windows/OptionsAccess.cpp" line="314"/>
         <source>Read Only</source>
         <translation>Salt Okunur</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="310"/>
+        <location filename="Windows/OptionsAccess.cpp" line="316"/>
         <source>Ignore UIPI</source>
         <translation>UIPI Yok Say</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="312"/>
-        <location filename="Windows/OptionsAccess.cpp" line="329"/>
-        <location filename="Windows/OptionsAccess.cpp" line="342"/>
+        <location filename="Windows/OptionsAccess.cpp" line="318"/>
+        <location filename="Windows/OptionsAccess.cpp" line="335"/>
+        <location filename="Windows/OptionsAccess.cpp" line="348"/>
         <source>Unknown</source>
         <translation>Bilinmeyen</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="319"/>
+        <location filename="Windows/OptionsAccess.cpp" line="325"/>
         <source>Regular Sandboxie behavior - allow read and also copy on write.</source>
         <translation>Normal Sandboxie davranışı - okumaya izin verir ve ayrıca yazma üzerine kopyalar.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="320"/>
+        <location filename="Windows/OptionsAccess.cpp" line="326"/>
         <source>Allow write-access outside the sandbox.</source>
         <translation>Korumalı alanın dışına yazma erişimine izin verir.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="321"/>
+        <location filename="Windows/OptionsAccess.cpp" line="327"/>
         <source>Allow write-access outside the sandbox, also for applications installed inside the sandbox.</source>
         <translation>Korumalı alanın içine yüklenen uygulamalar için de korumalı alanın dışına yazma erişimine izin verir.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="322"/>
+        <location filename="Windows/OptionsAccess.cpp" line="328"/>
         <source>Don&apos;t rename window classes.</source>
         <translation>Pencere sınıfları yeniden adlandırmaz.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="323"/>
+        <location filename="Windows/OptionsAccess.cpp" line="329"/>
         <source>Deny access to host location and prevent creation of sandboxed copies.</source>
         <translation>Ana bilgisayar konumuna erişimi reddeder ve korumalı alan kopyalarının oluşturulmasını önler.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="324"/>
+        <location filename="Windows/OptionsAccess.cpp" line="330"/>
         <source>Block access to WinRT class.</source>
         <translation>WinRT sınıfına erişimi engeller.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="325"/>
+        <location filename="Windows/OptionsAccess.cpp" line="331"/>
         <source>Allow read-only access only.</source>
         <translation>Yalnızca salt okunur erişime izin verir.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="326"/>
+        <location filename="Windows/OptionsAccess.cpp" line="332"/>
         <source>Hide host files, folders or registry keys from sandboxed processes.</source>
         <translation>Ana bilgisayar dosyalarını, klasörlerini veya kayıt defteri anahtarlarını korumalı alan işlemlerinden gizler.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="327"/>
+        <location filename="Windows/OptionsAccess.cpp" line="333"/>
         <source>Ignore UIPI restrictions for processes.</source>
         <translation>İşlemler için UIPI kısıtlamalarını yok sayar.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="336"/>
+        <location filename="Windows/OptionsAccess.cpp" line="342"/>
         <source>File/Folder</source>
         <translation>Dosya/Klasör</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="337"/>
+        <location filename="Windows/OptionsAccess.cpp" line="343"/>
         <source>Registry</source>
         <translation>Kayıt</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="338"/>
+        <location filename="Windows/OptionsAccess.cpp" line="344"/>
         <source>IPC Path</source>
         <translation>IPC Yolu</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="339"/>
+        <location filename="Windows/OptionsAccess.cpp" line="345"/>
         <source>Wnd Class</source>
         <translation>Wnd Sınıfı</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="340"/>
+        <location filename="Windows/OptionsAccess.cpp" line="346"/>
         <source>COM Object</source>
         <translation>COM Objesi</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="551"/>
+        <location filename="Windows/OptionsAccess.cpp" line="557"/>
         <source>Opening all IPC access also opens COM access, do you still want to restrict COM to the sandbox?</source>
         <translation>Tüm IPC erişimini açmak COM erişimini de açar, yine de COM&apos;u korumalı alanla sınırlamak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="552"/>
+        <location filename="Windows/OptionsAccess.cpp" line="558"/>
         <source>Don&apos;t ask in future</source>
         <translation>Gelecekte sorma</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="561"/>
+        <location filename="Windows/OptionsAccess.cpp" line="567"/>
         <source>&apos;OpenWinClass=program.exe,#&apos; is not supported, use &apos;NoRenameWinClass=program.exe,*&apos; instead</source>
         <translation>&apos;OpenWinClass=program.exe,#&apos; desteklenmiyor, bunun yerine &apos;NoRenameWinClass=program.exe,*&apos; kullanın</translation>
     </message>
@@ -1178,17 +1178,17 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Engelle</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="302"/>
+        <location filename="Windows/OptionsAccess.cpp" line="308"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="303"/>
+        <location filename="Windows/OptionsAccess.cpp" line="309"/>
         <source>Open</source>
         <translation>Açık</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="304"/>
+        <location filename="Windows/OptionsAccess.cpp" line="310"/>
         <source>Open for All</source>
         <translation>Hepsine Açık</translation>
     </message>
@@ -1291,7 +1291,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Çalıştırılabilir dosyalar (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="309"/>
+        <location filename="Windows/OptionsAccess.cpp" line="315"/>
         <source>Box Only (Write Only)</source>
         <translation>Yalnızca Alan (Salt Yazma)</translation>
     </message>

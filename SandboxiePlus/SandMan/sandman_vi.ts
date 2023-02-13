@@ -655,139 +655,139 @@ Ghi chú: Việc kiểm tra bản cập nhật thường nằm sau bản phát h
         <translation>Duyệt thư mục</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="306"/>
+        <location filename="Windows/OptionsAccess.cpp" line="312"/>
         <source>Closed</source>
         <translation>Đóng.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="307"/>
+        <location filename="Windows/OptionsAccess.cpp" line="313"/>
         <source>Closed RT</source>
         <translation>Đóng RT</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="308"/>
+        <location filename="Windows/OptionsAccess.cpp" line="314"/>
         <source>Read Only</source>
         <translation>Chỉ Đọc</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="302"/>
+        <location filename="Windows/OptionsAccess.cpp" line="308"/>
         <source>Normal</source>
         <translation>Bình Thường</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="303"/>
+        <location filename="Windows/OptionsAccess.cpp" line="309"/>
         <source>Open</source>
         <translation>Mở</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="304"/>
+        <location filename="Windows/OptionsAccess.cpp" line="310"/>
         <source>Open for All</source>
         <translation>Mở cho tất cả</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="305"/>
+        <location filename="Windows/OptionsAccess.cpp" line="311"/>
         <source>No Rename</source>
         <translation>Không Đổi Tên</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="309"/>
+        <location filename="Windows/OptionsAccess.cpp" line="315"/>
         <source>Box Only (Write Only)</source>
         <translation>Chỉ Sandbox (Chỉ Ghi)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="310"/>
+        <location filename="Windows/OptionsAccess.cpp" line="316"/>
         <source>Ignore UIPI</source>
         <translation type="unfinished">Bỏ qua UIPI</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="312"/>
-        <location filename="Windows/OptionsAccess.cpp" line="329"/>
-        <location filename="Windows/OptionsAccess.cpp" line="342"/>
+        <location filename="Windows/OptionsAccess.cpp" line="318"/>
+        <location filename="Windows/OptionsAccess.cpp" line="335"/>
+        <location filename="Windows/OptionsAccess.cpp" line="348"/>
         <source>Unknown</source>
         <translation>Không rõ</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="319"/>
+        <location filename="Windows/OptionsAccess.cpp" line="325"/>
         <source>Regular Sandboxie behavior - allow read and also copy on write.</source>
         <translation type="unfinished">Hành vi mặc định của Sandbox - cho phép đọc và cũng có thể sao chép khi ghi.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="320"/>
+        <location filename="Windows/OptionsAccess.cpp" line="326"/>
         <source>Allow write-access outside the sandbox.</source>
         <translation type="unfinished">Cho phép quyền ghi bên ngoài Sandbox.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="321"/>
+        <location filename="Windows/OptionsAccess.cpp" line="327"/>
         <source>Allow write-access outside the sandbox, also for applications installed inside the sandbox.</source>
         <translation type="unfinished">Cho phép quyền ghi bên ngoài hộp cát, cũng cho các ứng dụng được cài đặt bên trong Sandbox.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="322"/>
+        <location filename="Windows/OptionsAccess.cpp" line="328"/>
         <source>Don&apos;t rename window classes.</source>
         <translation type="unfinished">Không đổi tên WindowClass.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="323"/>
+        <location filename="Windows/OptionsAccess.cpp" line="329"/>
         <source>Deny access to host location and prevent creation of sandboxed copies.</source>
         <translation type="unfinished">Từ chối quyền truy cập vào vị trí máy chủ lưu trữ và ngăn tạo các bản sao Sandbox.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="324"/>
+        <location filename="Windows/OptionsAccess.cpp" line="330"/>
         <source>Block access to WinRT class.</source>
         <translation type="unfinished">Chặn quyền truy cập vào WinRT class.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="325"/>
+        <location filename="Windows/OptionsAccess.cpp" line="331"/>
         <source>Allow read-only access only.</source>
         <translation type="unfinished">Chỉ cho phép quyền truy cập chỉ đọc.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="326"/>
+        <location filename="Windows/OptionsAccess.cpp" line="332"/>
         <source>Hide host files, folders or registry keys from sandboxed processes.</source>
         <translation type="unfinished">Ẩn tệp máy chủ, thư mục hoặc khóa đăng ký khỏi các quy trình Sandbox.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="327"/>
+        <location filename="Windows/OptionsAccess.cpp" line="333"/>
         <source>Ignore UIPI restrictions for processes.</source>
         <translation type="unfinished">Bỏ qua các giới hạn UIPI cho các tiến trình.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="336"/>
+        <location filename="Windows/OptionsAccess.cpp" line="342"/>
         <source>File/Folder</source>
         <translation>Tệp/Thư Mục</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="337"/>
+        <location filename="Windows/OptionsAccess.cpp" line="343"/>
         <source>Registry</source>
         <translation>Registry</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="338"/>
+        <location filename="Windows/OptionsAccess.cpp" line="344"/>
         <source>IPC Path</source>
         <translation>IPC Path</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="339"/>
+        <location filename="Windows/OptionsAccess.cpp" line="345"/>
         <source>Wnd Class</source>
         <translation>Wnd Class</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="340"/>
+        <location filename="Windows/OptionsAccess.cpp" line="346"/>
         <source>COM Object</source>
         <translation>COM Object</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="347"/>
+        <location filename="Windows/OptionsAccess.cpp" line="353"/>
         <source>Select File</source>
         <translation>Chọn Tệp</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="347"/>
+        <location filename="Windows/OptionsAccess.cpp" line="353"/>
         <source>All Files (*.*)</source>
         <translation>Tất cả Tệp (*.*)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="359"/>
+        <location filename="Windows/OptionsAccess.cpp" line="365"/>
         <location filename="Windows/OptionsForce.cpp" line="240"/>
         <location filename="Windows/OptionsForce.cpp" line="250"/>
         <location filename="Windows/OptionsRecovery.cpp" line="128"/>
@@ -797,8 +797,8 @@ Ghi chú: Việc kiểm tra bản cập nhật thường nằm sau bản phát h
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="961"/>
-        <location filename="Windows/OptionsAccess.cpp" line="393"/>
-        <location filename="Windows/OptionsAccess.cpp" line="626"/>
+        <location filename="Windows/OptionsAccess.cpp" line="399"/>
+        <location filename="Windows/OptionsAccess.cpp" line="632"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="535"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="610"/>
         <location filename="Windows/OptionsGeneral.cpp" line="491"/>
@@ -812,8 +812,8 @@ Ghi chú: Việc kiểm tra bản cập nhật thường nằm sau bản phát h
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="959"/>
         <location filename="Windows/OptionsWindow.cpp" line="977"/>
-        <location filename="Windows/OptionsAccess.cpp" line="398"/>
-        <location filename="Windows/OptionsAccess.cpp" line="630"/>
+        <location filename="Windows/OptionsAccess.cpp" line="404"/>
+        <location filename="Windows/OptionsAccess.cpp" line="636"/>
         <location filename="Windows/OptionsGeneral.cpp" line="496"/>
         <location filename="Windows/OptionsGeneral.cpp" line="591"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
@@ -823,32 +823,32 @@ Ghi chú: Việc kiểm tra bản cập nhật thường nằm sau bản phát h
         <translation>Nhóm: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="531"/>
+        <location filename="Windows/OptionsAccess.cpp" line="537"/>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
         <translation>Các đối tượng COM phải được chỉ định bởi GUID của chúng, như: {00000000-0000-0000-0000-000000000000}</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="537"/>
+        <location filename="Windows/OptionsAccess.cpp" line="543"/>
         <source>RT interfaces must be specified by their name.</source>
         <translation>Các giao diện RT phải được chỉ định theo tên của chúng.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="551"/>
+        <location filename="Windows/OptionsAccess.cpp" line="557"/>
         <source>Opening all IPC access also opens COM access, do you still want to restrict COM to the sandbox?</source>
         <translation>Mở tất cả quyền truy cập IPC cũng mở quyền truy cập COM, bạn vẫn muốn giới hạn COM trong Sandbox?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="552"/>
+        <location filename="Windows/OptionsAccess.cpp" line="558"/>
         <source>Don&apos;t ask in future</source>
         <translation>Không hỏi trong tương lai</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="561"/>
+        <location filename="Windows/OptionsAccess.cpp" line="567"/>
         <source>&apos;OpenWinClass=program.exe,#&apos; is not supported, use &apos;NoRenameWinClass=program.exe,*&apos; instead</source>
         <translation>&apos;OpenWinClass=program.exe,#&apos; không được hỗ trợ, sử dụng &apos;NoRenameWinClass=program.exe,*&apos; để thay thế</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="605"/>
+        <location filename="Windows/OptionsAccess.cpp" line="611"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="586"/>
         <location filename="Windows/OptionsGeneral.cpp" line="558"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
@@ -858,7 +858,7 @@ Ghi chú: Việc kiểm tra bản cập nhật thường nằm sau bản phát h
         <translation>Không thể chỉnh sửa giá trị mẫu.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAccess.cpp" line="673"/>
+        <location filename="Windows/OptionsAccess.cpp" line="679"/>
         <source>Template values can not be removed.</source>
         <translation>Giá trị mẫu không thể bị xóa.</translation>
     </message>

@@ -198,6 +198,10 @@ SBIE1303 Apenas uma caixa de areia pode estar ativa de cada vez
 # SBIE1304 Foi bloqueada a entrada simulada de dados do teclado ou do mouse pelo processo '%2'
 # .
 
+1305;pop;inf;02
+SBIE1305 Bloqueou o carregamento da imagem no sandbox - %2
+.
+
 1306;pop;inf;01
 SBIE1306 O driver do Sandboxie (SbieDrv) não pode ser descarregado agora
 .
@@ -354,6 +358,14 @@ SBIE2108 Simulando o término com sucesso do programa '%2'
 # SBIE2110 Preparando dependências WinSxS para '%2'
 # .
 
+2111;pop;inf;01
+SBIE2111 O processo não está acessível: %3, chame %2
+.
+
+2112;pop;inf;01
+SBIE2112 O objeto não está acessível: %3, chame %2
+.
+
 2191;pop;inf;01
 SBIE2191 %2 não deve ser atualizado enquanto roda sob o Sandboxie.
 .
@@ -363,11 +375,19 @@ SBIE2192 Para atualizar o programa, rode-o fora da supervisão do Sandboxie.
 .
 
 2193;pop;inf;01
-SBIE2193 Lembre-se de apagar a caixa após completar a atualização.
+SBIE2193 Lembre-se de excluir a caixa após completar a atualização.
 .
 
 2194;pop;inf;01
 SBIE2194 Instalador MSI requer %2 opção a ser definida no ini, o que, no entanto, enfraquece o isolamento.
+.
+
+2195;pop;inf;01
+SBIE2195 Para executar o Explorer.exe no sandbox, o acesso à infraestrutura COM não deve ser aberto.
+.
+
+2196;pop;inf;01
+SBIE2196 Para executar o Instalador MSI no sandbox, o acesso à infraestrutura COM não deve ser Aberto.
 .
 
 2198;pop;inf;01
@@ -478,6 +498,18 @@ SBIE2223 Para aumentar o tamanho máximo de arquivo nas operações de cópia, c
 
 2224;pop;wrn;01
 SBIE2224 Programa na caixa de areia caiu: %2
+.
+
+2225;pop;wrn;01
+SBIE2225 Foi feita uma tentativa de acessar um arquivo EFS: %2
+.
+
+2226;pop;wrn;01
+SBIE2226 O processo falhou ao iniciar devido à elevação ausente, para resolver a adicione "ApplyElevateCreateProcessFix=y" para a seção ini desta caixa %2
+.
+
+2227;pop;wrn;01
+SBIE2227 '%2' está localizado em um volume que não oferece suporte à nomenclatura 8.3. Isso pode causar problemas com aplicativos e instaladores mais antigos.
 .
 
 #----------------------------------------------------------------------------
@@ -614,6 +646,10 @@ SBIE2336 Erro no servidor GUI:  %2
 SBIE2337 Falha ao iniciar o programa:  %2
 .
 
+2338;pop;err;01
+SBIE2338 Arquitetura não suportada encontrada no processo:  %2
+.
+
 # 2398;txt;01
 # SBIE2398 Serviço sofreu exceção ... no endereço ...
 # .
@@ -735,7 +771,7 @@ Digite o nome de um programa ou pasta e o Sandboxie o abrirá para você.
 .
 
 3104;txt;01
-Digite . (um ponto) para explorar sua área de trabalho com o Sandboxie.
+Digite . (ponto) para explorar sua área de trabalho com o Sandboxie.
 .
 
 3105;txt;01
@@ -744,6 +780,10 @@ Remover comando do histórico de comandos
 
 3106;txt;01
 Selecione a caixa de areia na qual o programa ou documento será iniciado.
+.
+
+3107;txt;01
+Digite o nome de um programa ou caminho para abrir o seguinte arquivo na caixa atual:
 .
 
 3111;txt;01
@@ -814,7 +854,7 @@ Não foi possível iniciar os serviços COM do Sandboxie
 .
 
 3214;txt;01
-Apagar caixa de areia %2:  %0
+Excluir caixa de areia %2:  %0
 .
 
 3215;txt;01
@@ -844,24 +884,24 @@ A caixa não será apagada.
 .
 
 3221;txt;01
-Por favor termine os programas rodando na caixa de areia antes de apagar seu conteúdo.
+Por favor termine os programas rodando na caixa de areia antes de excluir seu conteúdo.
 .
 
 3222;txt;01
-O comando apagar falhou:  %0
+O comando excluir falhou:  %0
 .
 
-3231;txt;01
-Você instalou o Sandboxie há mais de 30 dias.
-.
+# 3231;txt;01
+# Você instalou o Sandboxie há mais de 30 dias.
+# .
 
-3232;txt;01
-O uso pessoal do Sandboxie é permitido gratuitamente pelo tempo que você desejar.
-.
+# 3232;txt;01
+# O uso pessoal do Sandboxie é permitido gratuitamente pelo tempo que você desejar.
+# .
 
-3233;txt;01
-No entanto, a versão gratuita fará agora uma pausa por alguns segundos.
-.
+# 3233;txt;01
+# No entanto, a versão gratuita fará agora uma pausa por alguns segundos.
+# .
 
 3234;txt;01
 No entanto, a versão gratuita permite o uso de uma caixa de cada vez.
@@ -995,6 +1035,22 @@ Usuário desconhecido, as opções de configuração não serão salvas
 
 3314;txt;01
 Ocorreu um erro ao aplicar as configurações padrão para a caixa '%2'
+.
+
+3315;txt;01
+Excluindo o conteúdo da Caixa
+.
+
+3316;txt;01
+Deseja abortar a operação?
+.
+
+3317;txt;01
+Preparando para excluir: %2
+.
+
+3318;txt;01
+Excluindo: %2
 .
 
 # 3321;txt;01
@@ -1168,7 +1224,19 @@ Re&carregar configuração
 .
 
 3504;txt;01
-&Suporte Sandboxie
+Apoie o &Sandboxie com doações
+.
+
+3505;txt;01
+Contribua para o Sandboxie
+.
+
+3506;txt;01
+Obter Certificado de Apoiador
+.
+
+3507;txt;01
+Aplicar Certificado de Apoiador
 .
 
 3451;txt;01
@@ -1239,6 +1307,10 @@ Executar o &Windows Explorer
 Atualizar para Sandboxie-Plus
 .
 
+3468;txt;01
+Guia de Migração do Sandboxie-Plus
+.
+
 3471;txt;01
 &Terminar Programas
 .
@@ -1248,7 +1320,7 @@ Atualizar para Sandboxie-Plus
 .
 
 3473;txt;01
-&Apagar Conteúdo
+&Excluir Conteúdo
 .
 
 3474;txt;01
@@ -1296,7 +1368,7 @@ Ocultar Janela
 .
 
 # 3488;txt;01
-# Apagar caixa e efetuar logoff
+# Excluir caixa e efetuar logoff
 # .
 
 3491;txt;01
@@ -1446,7 +1518,7 @@ O programa ou documento iniciará sob a supervisão do Sandboxie.
 
 Entretanto, é recomendável manipular o conteúdo da caixa
 através de uma instância do Windows Explorer em uma caixa. Para isto, use
-este comando: Sandbox -> Executar na Caixa -> Executar o Windows Explorer.
+este comando: Caixa -> Executar na Caixa -> Executar Windows Explorer.
 .
 
 3535;txt;01
@@ -1467,7 +1539,7 @@ O indicador 'não mostrar esta mensagem' agora aplica-se a todas as dicas.
 
 3539;txt;01
 A caixa '%2' foi criada há %3 dias.
-É recomendável apagar as caixas regularmente.
+É recomendável excluir as caixas regularmente.
 
 Para configurar o apagamento automático, use o comando
 Configurações da Caixa no menu Caixa do Controle do Sandboxie.
@@ -1761,7 +1833,7 @@ No entanto, você pode usar o campo abaixo para especificar outra localização:
 .
 
 3675;txt;01
-Nota:  É recomendável apagar o conteúdo de todas as caixas antes de modificar a localização.
+Nota:  É recomendável excluir o conteúdo de todas as caixas antes de modificar a localização.
 .
 
 3676;txt;01
@@ -1856,7 +1928,7 @@ Abrir %2 na caixa %3
 #----------------------------------------------------------------------------
 
 3711;txt;01
-Apagar a Caixa de Areia|Recuperação Rápida
+Excluir a Caixa de Areia|Recuperação Rápida
 .
 
 3712;txt;01
@@ -1864,11 +1936,11 @@ Os arquivos listados abaixo podem ser recuperados da caixa. Selecione um arquivo
 .
 
 3713;txt;01
-Clique em Apagar a Caixa para terminar quaisquer processos rodando na caixa e apagar seu conteúdo.
+Clique em Excluir a Caixa para terminar quaisquer processos rodando na caixa e excluir seu conteúdo.
 .
 
 3714;txt;01
-&Apagar a Caixa
+&Excluir a Caixa
 .
 
 3715;txt;01
@@ -1936,7 +2008,7 @@ Falha na recuperação. O seguinte item não pôde ser movido para fora da caixa
 .
 
 3730;txt;01
-A caixa de areia está vazia. Não há nada a apagar.
+A caixa de areia está vazia. Não há nada a excluir.
 .
 
 3731;txt;01
@@ -2247,7 +2319,7 @@ O conteúdo desta caixa de areia pode ser automaticamente apagado quando o últi
 .
 
 3844;txt;01
-Apagar automaticamente o conteúdo desta caixa
+Excluir automaticamente o conteúdo desta caixa
 .
 
 3845;txt;01
@@ -2259,7 +2331,7 @@ Por outro lado, esta caixa pode ser protegida de apagamento, seja ele manual ou 
 .
 
 3847;txt;01
-Nunca remover esta caixa ou apagar seu conteúdo
+Nunca remover esta caixa ou excluir seu conteúdo
 .
 
 3852;txt;01
@@ -2267,7 +2339,7 @@ Comando de Apagamento
 .
 
 3853;txt;01
-O seguinte comando de sistema será usado para apagar o conteúdo da caixa, tanto para apagamento automático quanto para manual. Se deixado em branco, o comando padrão é RMDIR (remover diretório).
+O seguinte comando de sistema será usado para excluir o conteúdo da caixa, tanto para apagamento automático quanto para manual. Se deixado em branco, o comando padrão é RMDIR (remover diretório).
 .
 
 3854;txt;01
@@ -2924,7 +2996,7 @@ da Caixa de Areia.
 
 4223;txt;01
 A configuração de aplicativo local '%2' foi removida de todas as caixas.
-Deseja apagar esta configuração de aplicativo?
+Deseja excluir esta configuração de aplicativo?
 .
 
 4224;txt;01
@@ -2985,6 +3057,22 @@ Porta RPC de cartão inteligente aberta
 
 4299;txt;01
 Abra a porta do protocolo de descoberta de serviço simples (SSDP, UPnP) RPC
+.
+
+4300;txt;01
+Abrir ligações de porta RPC adicionais
+.
+
+4306;txt;01
+Ligações de portas RPC abertas para UAC
+.
+
+4307;txt;01
+Bloquear processos comuns de telemetria
+.
+
+4308;txt;01
+Filtrar acesso a \Dispositivo\
 .
 
 #----------------------------------------------------------------------------
@@ -3222,6 +3310,10 @@ Permitir acesso direto ao gerenciamento de sessões do %2
 Permitir acesso direto a %2 notas
 .
 
+4342;txt;01
+Ativar solução alternativa de compatibilidade %2
+.
+
 4356;txt;02
 Permitir Acesso Direto aos Favoritos do %2
 .
@@ -3335,7 +3427,7 @@ Inserir &Grupo
 .
 
 5148;txt;01
-&Apagar
+&Excluir
 .
 
 5151;txt;01
@@ -3402,6 +3494,21 @@ Se preferir usar uma interface para controlar essas opções, atualize para o Sa
 Se preferir usar uma interface para controlar essas opções, atualize para o Sandboxie-Plus, que tem suporte completo de interface para todos os novos recursos.
 .
 
+6011;txt;01
+Aguarde
+.
+
+6012;txt;01
+Continuar
+.
+
+6013;txt;01
+Encerrar
+.
+
+6014;txt;01
+Obter certificado
+.
 
 #----------------------------------------------------------------------------
 # Getting Started Wizard
@@ -3460,7 +3567,7 @@ Apague o conteúdo da sua caixa
 .
 
 7861;txt;01
-Você pode pensar na caixa como um pedaço de papel transparente colocado entre o programa e o seu computador. Apagar o conteúdo da caixa é como substituir um pedaço de papel usado por um limpo.
+Você pode pensar na caixa como um pedaço de papel transparente colocado entre o programa e o seu computador. Excluindo o conteúdo da caixa é como substituir um pedaço de papel usado por um limpo.
 .
 
 7862;txt;01
@@ -3470,7 +3577,7 @@ Tente agora: Apague o conteúdo da sua caixa DefaultBox. Por favor encontre o í
 7863;txt;01
 Clique com o botão direito no ícone amarelo do Sandboxie,
 
-selecione DefaultBox e clique em Apagar Conteúdo.
+selecione DefaultBox e clique em Excluir Conteúdo.
 .
 
 7864;txt;01
@@ -3599,15 +3706,15 @@ Deseja ativar a licença agora?
 Por favor visite o web site do Sandboxie no link abaixo para adquirir uma nova Chave do Produto.
 .
 
-7961;txt;01
-Apagar Informações de Licença
-.
+# 7961;txt;01
+# Apagar Informações de Licença
+# .
 
-7962;txt;01
-Tem certeza de que deseja apagar as informações de licença do Sandboxie?
-
-Você pode ativar sua licença a qualquer hora informando uma Chave do Produto.
-.
+# 7962;txt;01
+# Tem certeza de que deseja apagar as informações de licença do Sandboxie?
+#
+# Você pode ativar sua licença a qualquer hora informando uma Chave do Produto.
+# .
 
 #----------------------------------------------------------------------------
 
@@ -3705,7 +3812,7 @@ Clique em Iniciar quando estiver pronto.
 .
 
 8009;ins;01
-Antes de desinstalar, use o Controle do Sandboxie para apagar o conteúdo da caixa de areia.
+Antes de desinstalar, use o Controle do Sandboxie para excluir o conteúdo da caixa de areia.
 .
 
 8010;ins;01
@@ -3837,7 +3944,7 @@ Gostaria de manter seu arquivo de configuração Sandboxie.ini?
 
 Escolha SIM para manter suas opções de configuração no arquivo Sandboxie.ini.
 
-Escolha NÃO para apagar o arquivo Sandboxie.ini e perder suas opções de configuração.
+Escolha NÃO para excluir o arquivo Sandboxie.ini e perder suas opções de configuração.
 .
 
 #----------------------------------------------------------------------------

@@ -7,7 +7,7 @@ jobs:
     runs-on: windows-latest # action can only be run on Windows
     steps:
       - name: Publish Sandboxie-Plus
-        uses: vedantmgoyal2009/winget-releaser@v1
+        uses: vedantmgoyal2009/winget-releaser@v2
         with:
           identifier: Sandboxie.Plus
           installers-regex: "Sandboxie-Plus.*.exe$"
@@ -23,7 +23,7 @@ jobs:
           "CLASSIC_VER=$VERSION" >> $env:GITHUB_OUTPUT
         shell: pwsh
       - name: Publish Sandboxie-Classic
-        uses: vedantmgoyal2009/winget-releaser@v1
+        uses: vedantmgoyal2009/winget-releaser@v2
         with:
           version: ${{ steps.get_version.outputs.CLASSIC_VER }}
           identifier: Sandboxie.Classic

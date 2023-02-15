@@ -375,7 +375,7 @@ SBIE2114 File is too large to copy into sandbox, denying access - %2
 .
 
 2115;pop;inf;01
-SBIE2115 File is too large to copy into sandbox, opening read only - %2
+SBIE2115 File is too large to copy into sandbox, opening in read only - %2
 .
 
 # %2 = Mozilla Firefox
@@ -3900,7 +3900,7 @@ The Supporter Certificate has expired :'(
 .
 
 7990;txt;01
-Please copy the entire Suppoter Certificate into the clipboard and press OK.
+Please copy the entire Supporter Certificate into the clipboard and press OK.
 .
 
 7991;txt;01

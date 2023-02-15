@@ -3849,7 +3849,7 @@ Sandboxie 的默认设置已经提供了完整的防护，您也可以从 Sandbo
 .
 
 7990;txt;01
-请将整个 Suppoter 凭据复制到剪贴板上，然后按 OK。
+请将整个 Supporter 凭据复制到剪贴板上，然后按 OK。
 .
 
 7991;txt;01

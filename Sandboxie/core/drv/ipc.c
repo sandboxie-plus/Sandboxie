@@ -1086,8 +1086,8 @@ _FX NTSTATUS Ipc_CheckGenericObject(
                 //
                 // we only enforce CreateDirectoryObject/CreateDirectoryObjectEx
                 //
-                // it seams that named object creation always does an additional access check 
-                // regardless of what access is granted on the root handle so 
+                // it seems that named object creation always does an additional access check
+                // regardless of what access is granted on the root handle
                 //
 
                 ACCESS_MASK RestrictedAccess = DELETE | WRITE_OWNER | WRITE_DAC;

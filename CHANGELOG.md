@@ -48,7 +48,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed updater sometimes failing to create a temporary directory [#2615](https://github.com/sandboxie-plus/Sandboxie/issues/2615)
 - fixed issue with snapshot removal [#2663](https://github.com/sandboxie-plus/Sandboxie/issues/2663)
 - fixed issue with symbolic links [#2606](https://github.com/sandboxie-plus/Sandboxie/issues/2606)
-- fixed issues with app container-based isolation, app container tokens are now dropped by default
+- fixed issues with AppContainer isolation, app container tokens are now dropped by default
 -- Note: this behaviour can be disabled with 'DropAppContainerTokens=program.exe,n'
 
 

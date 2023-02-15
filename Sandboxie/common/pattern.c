@@ -716,8 +716,8 @@ _FX BOOLEAN Pattern_MatchPathListEx(WCHAR *path_lwr, ULONG path_len, LIST *list,
         cur_len = Pattern_MatchPathList(path_lwr, path_len, list, &cur_level, &cur_flags, &cur_wildc, &cur_patsrc);
         if (cur_level <= *plevel && (
             ((*pflags & MATCH_FLAG_EXACT) == 0 && (cur_flags & MATCH_FLAG_EXACT) != 0) || // an exact match overrules any non exact match
-            ((*pflags & MATCH_FLAG_AUX) != 0 && (cur_flags & MATCH_FLAG_AUX) == 0) || // a rule with a primary match overrules auxyliary matches
-            (cur_len > *pmatch_len) || // the longer the match the mroe specific teh rule, hence the highest priority it has
+            ((*pflags & MATCH_FLAG_AUX) != 0 && (cur_flags & MATCH_FLAG_AUX) == 0) || // a rule with a primary match overrules auxiliary matches
+            (cur_len > *pmatch_len) || // the longer the match, the more specific the rule and thus the higher its priority
             ((cur_len == *pmatch_len && cur_len > 0) && (cur_wildc < *pwildc)) // given the same match length, a rule with less wildcards wins
           )) {
             *plevel = cur_level;

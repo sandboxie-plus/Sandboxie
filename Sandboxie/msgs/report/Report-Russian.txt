@@ -2,5 +2,15 @@
 * Missing Messages in Text-Russian-1049.txt
 *==========
 
-There are no missing messages.
+2113;pop;inf;01
+SBIE2113 File is too large to copy into sandbox, creating empty file - %2
+.
+
+2114;pop;inf;01
+SBIE2114 File is too large to copy into sandbox, denying access - %2
+.
+
+2115;pop;inf;01
+SBIE2115 File is too large to copy into sandbox, opening in read only - %2
+.
 

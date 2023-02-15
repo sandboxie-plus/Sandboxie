@@ -6,6 +6,18 @@
 SBIE1305 Blocked sandboxed image from being loaded - %2
 .
 
+2113;pop;inf;01
+SBIE2113 File is too large to copy into sandbox, creating empty file - %2
+.
+
+2114;pop;inf;01
+SBIE2114 File is too large to copy into sandbox, denying access - %2
+.
+
+2115;pop;inf;01
+SBIE2115 File is too large to copy into sandbox, opening in read only - %2
+.
+
 2196;pop;inf;01
 SBIE2196 To run the MSI Installer sandboxed, the access for COM infrastructure must not be Open.
 .
@@ -85,7 +97,7 @@ The Supporter Certificate has expired :'(
 .
 
 7990;txt;01
-Please copy the entire Suppoter Certificate into the clipboard and press OK.
+Please copy the entire Supporter Certificate into the clipboard and press OK.
 .
 
 7991;txt;01

@@ -2,6 +2,18 @@
 * Missing Messages in Text-Turkish-1055.txt
 *==========
 
+2113;pop;inf;01
+SBIE2113 File is too large to copy into sandbox, creating empty file - %2
+.
+
+2114;pop;inf;01
+SBIE2114 File is too large to copy into sandbox, denying access - %2
+.
+
+2115;pop;inf;01
+SBIE2115 File is too large to copy into sandbox, opening in read only - %2
+.
+
 3506;txt;01
 Get Supporter Certificate
 .
@@ -19,7 +31,7 @@ The Supporter Certificate has expired :'(
 .
 
 7990;txt;01
-Please copy the entire Suppoter Certificate into the clipboard and press OK.
+Please copy the entire Supporter Certificate into the clipboard and press OK.
 .
 
 7991;txt;01

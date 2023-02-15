@@ -391,8 +391,6 @@ void COptionsWindow::SaveGeneral()
 	WriteAdvancedCheck(ui.chkDenyWrite, "CopyBlockDenyWrite", "y", "");
 	WriteAdvancedCheck(ui.chkNoCopyMsg, "NotifyNoCopy", "y", "");
 
-	if (m_CopyRulesChanged)
-		SaveCopyRules();
 
 	WriteAdvancedCheck(ui.chkProtectBox, "NeverDelete", "y", "");
 	WriteAdvancedCheck(ui.chkAutoEmpty, "AutoDelete", "y", "");
@@ -674,7 +672,7 @@ void COptionsWindow::OnAddCopyRule()
 void COptionsWindow::OnDelCopyRule()
 {
 	QTreeWidgetItem* pItem = ui.treeCopy->currentItem();
-	if (!pItem)
+	if (!pItem || pItem->data(0, Qt::UserRole).toInt() == -1)
 		return;
 
 	delete pItem;

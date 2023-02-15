@@ -847,6 +847,8 @@ void COptionsWindow::SaveConfig()
 	{
 		if (m_GeneralChanged)
 			SaveGeneral();
+		if (m_CopyRulesChanged)
+			SaveCopyRules();
 
 		if (m_GroupsChanged)
 			SaveGroups();
@@ -931,6 +933,7 @@ void COptionsWindow::ok()
 void COptionsWindow::reject()
 {
 	if (m_GeneralChanged
+	 || m_CopyRulesChanged
 	 || m_GroupsChanged
 	 || m_ForcedChanged
 	 || m_StopChanged

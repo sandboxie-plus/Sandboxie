@@ -348,6 +348,8 @@ const WCHAR *Ipc_SandboxieRpcSs      = SANDBOXIE L"RpcSs.exe";
 const WCHAR *Ipc_epmapper  = L"\\RPC Control\\epmapper";
 const WCHAR *Ipc_actkernel = L"\\RPC Control\\actkernel";
 
+BOOLEAN ipc_namespace_isoaltion;
+
 extern const WCHAR *File_BQQB;
 
 LIST Ipc_DynamicPortNames;
@@ -385,6 +387,8 @@ _FX BOOLEAN Ipc_Init(void)
     //
 
     SbieDll_MatchPath(L'i', (const WCHAR *)-1);
+
+    ipc_namespace_isoaltion = SbieApi_QueryConfBool(NULL, L"NtNamespaceIsolation", TRUE);
 
     //
     // intercept NTDLL entry points
@@ -3551,15 +3555,18 @@ _FX NTSTATUS Ipc_NtOpenSymbolicLinkObject(
     if(NT_SUCCESS(status))
         __leave;
 
-    //if (status == STATUS_OBJECT_PATH_NOT_FOUND) {
-    //
-    //    status = Ipc_CreatePath(TruePath, CopyPath);
-    //
-    //    if (NT_SUCCESS(status))
-    //        status = STATUS_OBJECT_NAME_NOT_FOUND;
-    //}
-    //
-    //__leave;
+    if (status == STATUS_OBJECT_PATH_NOT_FOUND || status == STATUS_OBJECT_NAME_NOT_FOUND) {
+    
+        ACCESS_MASK PermissibleAccess = READ_CONTROL | SYMBOLIC_LINK_QUERY;
+        if (DesiredAccess == MAXIMUM_ALLOWED)
+            DesiredAccess = PermissibleAccess;
+        else
+            DesiredAccess &= PermissibleAccess;
+
+        goto OpenTruePath;
+    }
+    
+    __leave;
 
     //
     // try the TruePath
@@ -3893,7 +3900,13 @@ _FX NTSTATUS Ipc_NtOpenDirectoryObject(
         // a sandboxed Directory will be created and the object created within it
         //
 
-        DesiredAccess &= ~(DIRECTORY_CREATE_OBJECT | DIRECTORY_CREATE_SUBDIRECTORY);
+        if (ipc_namespace_isoaltion) {
+            ACCESS_MASK PermissibleAccess = READ_CONTROL | DIRECTORY_QUERY | DIRECTORY_TRAVERSE;
+            if (DesiredAccess == MAXIMUM_ALLOWED)
+                DesiredAccess = PermissibleAccess;
+            else
+                DesiredAccess &= PermissibleAccess;
+        }
 
         goto OpenTruePath;
     }

@@ -278,8 +278,12 @@ _FX NTSTATUS Syscall_OpenHandle(
     // so we strip the "write" permissions here until the SbieDll finishes loading
     //
 
-    if (strcmp(syscall_entry->name, "OpenDirectoryObject") == 0 && !proc->sbiedll_loaded){
-        user_args[1] &= ~(DIRECTORY_CREATE_OBJECT | DIRECTORY_CREATE_SUBDIRECTORY);
+    if (strcmp(syscall_entry->name, "OpenDirectoryObject") == 0 && proc->ipc_namespace_isoaltion && !proc->sbiedll_loaded){
+        ULONG_PTR PermissibleAccess = READ_CONTROL | DIRECTORY_QUERY | DIRECTORY_TRAVERSE;
+        if (user_args[1] == MAXIMUM_ALLOWED)
+            user_args[1] = PermissibleAccess;
+        else
+            user_args[1] &= PermissibleAccess;
     }
 
     PUNICODE_STRING puName = NULL;

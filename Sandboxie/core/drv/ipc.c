@@ -789,6 +789,10 @@ _FX BOOLEAN Ipc_InitPaths(PROCESS* proc)
         return FALSE;
     }
 
+
+    proc->ipc_namespace_isoaltion = Conf_Get_Boolean(proc->box->name, L"NtNamespaceIsolation", 0, TRUE);
+
+
     //
     // other options
     //
@@ -1067,7 +1071,9 @@ _FX NTSTATUS Ipc_CheckGenericObject(
                 // OpenSymbolicLinkObject can use true paths if the access is read only
                 //
 
-                if(Operation == OBJ_OP_OPEN && (GrantedAccess & SYMBOLIC_LINK_SET) == 0)
+                ACCESS_MASK RestrictedAccess = DELETE | WRITE_OWNER | WRITE_DAC;
+                RestrictedAccess |= SYMBOLIC_LINK_SET;
+                if(Operation == OBJ_OP_OPEN && (GrantedAccess & RestrictedAccess) == 0)
 #ifdef USE_MATCH_PATH_EX
                     mp_flags = TRUE_PATH_OPEN_FLAG;
 #else
@@ -1079,10 +1085,14 @@ _FX NTSTATUS Ipc_CheckGenericObject(
 
                 //
                 // we only enforce CreateDirectoryObject/CreateDirectoryObjectEx
-                // as long as the access is read only
+                //
+                // it seams that named object creation always does an additional access check 
+                // regardless of what access is granted on the root handle so 
                 //
 
-                if(Operation == OBJ_OP_OPEN && (GrantedAccess & (DIRECTORY_CREATE_OBJECT | DIRECTORY_CREATE_SUBDIRECTORY)) == 0)
+                ACCESS_MASK RestrictedAccess = DELETE | WRITE_OWNER | WRITE_DAC;
+                //RestrictedAccess |= DIRECTORY_CREATE_OBJECT | DIRECTORY_CREATE_SUBDIRECTORY;
+                if (!proc->ipc_namespace_isoaltion || (Operation == OBJ_OP_OPEN && (GrantedAccess & RestrictedAccess) == 0))
 #ifdef USE_MATCH_PATH_EX
                     mp_flags = TRUE_PATH_OPEN_FLAG;
 #else

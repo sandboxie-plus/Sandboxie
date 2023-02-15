@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Run menu now supports folders, to be used by entering foldername1\foldername2\entryname in the name column of the UI
 - added a tray indicator for pending updates
 - added virtualization for CreateDirectoryObject(Ex) and OpenDirectoryObject (improves security, prevents name squatting)
+-- note: this can be disabled using 'NtNamespaceIsolation=n'
 
 ### Changed
 - 'OpenProtectedStorage=y' has been replaced with a template

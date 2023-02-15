@@ -197,6 +197,7 @@ struct _PROCESS {
     LIST read_ipc_paths;                // PATTERN elements
     ULONG ipc_trace;
     BOOLEAN disable_object_flt;
+    BOOLEAN ipc_namespace_isoaltion;
     BOOLEAN ipc_warn_startrun;
     BOOLEAN ipc_warn_open_proc;
     BOOLEAN ipc_block_password;

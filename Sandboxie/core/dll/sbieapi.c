@@ -1396,6 +1396,36 @@ _FX BOOLEAN SbieApi_QueryConfBool(
 
 
 //---------------------------------------------------------------------------
+// SbieApi_QueryConfBool
+//---------------------------------------------------------------------------
+
+
+_FX ULONG SbieApi_QueryConfNumber(
+    const WCHAR *section_name,      // WCHAR [66]
+    const WCHAR *setting_name,      // WCHAR [66]
+    ULONG def)
+{
+    WCHAR value[32];
+    *value = L'\0';
+    if (!NT_SUCCESS(SbieApi_QueryConfAsIs(
+                    section_name, setting_name, 0, value, sizeof(value)))
+        || *value == L'\0') // empty string
+        return def;
+    ULONG num = _wtoi(value);
+    if (num == 0) {
+        WCHAR* ptr = value;
+        //if(*ptr == L'-')
+        //    ptr++;
+        while (*ptr == L'0')
+            ptr++;
+        if(*ptr == L'\0')
+            return def;
+    }
+    return num;
+}
+
+
+//---------------------------------------------------------------------------
 // SbieApi_EnumBoxes
 //---------------------------------------------------------------------------
 

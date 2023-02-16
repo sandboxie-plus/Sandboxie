@@ -157,6 +157,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)\..\..\$(Platform)\$(Configuration)\</OutDir>
+    <CustomBuildAfterTargets>Link</CustomBuildAfterTargets>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -319,6 +320,12 @@
       <AdditionalDependencies>runtimeobject.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>Source.def</ModuleDefinitionFile>
     </Link>
+    <CustomBuildStep>
+      <Command>"$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\makeappx.exe" pack /d $(SolutionDir)\SbieShellPkg /p $(ProjectDir)\..\..\$(Platform)\$(Configuration)\SbieShellPkg.msix /nv</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(ProjectDir)\..\..\$(Platform)\$(Configuration)\SbieShellPkg.msix</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />

@@ -31,6 +31,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added AppContainer support for Compartment type boxes
 - FIXED SECURITY ISSUE ID-22 NtCreateSectionEx was not filtered by the driver
 - fixed issue starting services without a system token
+- fixed issues with new file migration settings [#2700](https://github.com/sandboxie-plus/Sandboxie/issues/2700)
+- fixed shell integration on ARM64 [#2685](https://github.com/sandboxie-plus/Sandboxie/issues/2685)
 
 
 

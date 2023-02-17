@@ -318,6 +318,18 @@ SBIE2111 Prozess ist nicht zugänglich: %3, Aufruf %2
 SBIE2112 Objekt ist nicht zugänglich: %3, Aufruf %2
 .
 
+2113;pop;inf;01
+SBIE2113 Die Datei ist zu groß, um sie in die Sandbox zu kopieren, erzeuge leere Datei - %2
+.
+
+2114;pop;inf;01
+SBIE2114 Die Datei ist zu groß, um sie in die Sandbox zu kopieren, verweigere Zugriff - %2
+.
+
+2115;pop;inf;01
+SBIE2115 Die Datei ist zu groß, um sie in die Sandbox zu kopieren, öffne Datei nur schreibgeschützt - %2
+.
+
 2191;pop;inf;01
 SBIE2191 %2 sollte nicht aktualisiert werden, wenn es mit Sandboxie ausgeführt wird.
 .

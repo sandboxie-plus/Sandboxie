@@ -1396,7 +1396,7 @@ _FX NTSTATUS Api_SetSecureParam(PROCESS* proc, ULONG64* parms)
         UNICODE_STRING KeyPath;
         RtlInitUnicodeString(&KeyPath, Api_ParamPath);
 
-        name_len = wcslen(args->param_name.val) + 1 * sizeof(WCHAR);
+        name_len = (wcslen(args->param_name.val) + 1) * sizeof(WCHAR);
         name = Mem_Alloc(Driver_Pool, name_len);
         memcpy(name, args->param_name.val, name_len);
         UNICODE_STRING ValueName;
@@ -1457,7 +1457,7 @@ _FX NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms)
         UNICODE_STRING KeyPath;
         RtlInitUnicodeString(&KeyPath, Api_ParamPath);
 
-        name_len = wcslen(args->param_name.val) + 1 * sizeof(WCHAR);
+        name_len = (wcslen(args->param_name.val) + 1) * sizeof(WCHAR);
         name = Mem_Alloc(Driver_Pool, name_len);
         memcpy(name, args->param_name.val, name_len);
         UNICODE_STRING ValueName;

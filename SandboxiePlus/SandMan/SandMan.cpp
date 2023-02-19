@@ -2057,7 +2057,7 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 {
 	if ((MsgCode & 0xFFFF) == 2198 ) // file migration progress
 	{
-		if (!IsDisableMessages())
+		if (!IsDisableMessages() && theConf->GetBool("Options/ShowMigrationProgress", true))
 			m_pPopUpWindow->ShowProgress(MsgCode, MsgData, ProcessId);
 		return;
 	}

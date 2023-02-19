@@ -1444,7 +1444,7 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 
     if (NT_SUCCESS(status)) {
 
-        status = ZwDuplicateObject(
+        status = NtDuplicateObject(
             SourceProcessHandle, SourceHandle,
             TargetProcessHandle, &DuplicatedHandle,
             DesiredAccess, HandleAttributes, Options);
@@ -1904,19 +1904,12 @@ _FX void Ipc_Unload(void)
     if (Ipc_DirLock == NULL)
         return; // Early driver initialization failed
 
-    KIRQL irql;
-    KeRaiseIrql(APC_LEVEL, &irql);
-    ExAcquireResourceExclusiveLite(Ipc_DirLock, TRUE);
-
     DIR_OBJ_HANDLE* obj_handle = List_Head(&Ipc_ObjDirs);
     while (obj_handle) {
 
         ZwClose(obj_handle->handle);
         obj_handle = List_Next(obj_handle);
     }
-
-    ExReleaseResourceLite(Ipc_DirLock);
-    KeLowerIrql(irql);
 
     Mem_FreeLockResource(&Ipc_DirLock);
 }

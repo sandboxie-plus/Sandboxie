@@ -1376,6 +1376,10 @@ _FX NTSTATUS Api_SetSecureParam(PROCESS* proc, ULONG64* parms)
     NTSTATUS status = STATUS_SUCCESS;
     API_SECURE_PARAM_ARGS *args = (API_SECURE_PARAM_ARGS *)parms;
 	HANDLE handle = NULL;
+    WCHAR* name = NULL;
+    ULONG  name_len = 0;
+    UCHAR* data = NULL;
+    ULONG  data_len = 0;
 
     if (proc) {
         status = STATUS_NOT_IMPLEMENTED;
@@ -1391,8 +1395,12 @@ _FX NTSTATUS Api_SetSecureParam(PROCESS* proc, ULONG64* parms)
 
         UNICODE_STRING KeyPath;
         RtlInitUnicodeString(&KeyPath, Api_ParamPath);
+
+        name_len = wcslen(args->param_name.val) + 1 * sizeof(WCHAR);
+        name = Mem_Alloc(Driver_Pool, name_len);
+        memcpy(name, args->param_name.val, name_len);
         UNICODE_STRING ValueName;
-        RtlInitUnicodeString(&ValueName, args->param_name.val);
+        RtlInitUnicodeString(&ValueName, name);
 
         OBJECT_ATTRIBUTES objattrs;
         InitializeObjectAttributes(&objattrs, &KeyPath, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
@@ -1400,12 +1408,21 @@ _FX NTSTATUS Api_SetSecureParam(PROCESS* proc, ULONG64* parms)
         status = ZwCreateKey(&handle, KEY_WRITE, &objattrs, 0, NULL, REG_OPTION_NON_VOLATILE, &Disp);
         if (status == STATUS_SUCCESS) {
 
-            status = ZwSetValueKey(handle, &ValueName, 0, REG_BINARY, (PVOID)args->param_data.val, args->param_size.val);
+            data_len = args->param_size.val;
+            data = Mem_Alloc(Driver_Pool, data_len);
+            memcpy(data, args->param_data.val, data_len);
+
+            status = ZwSetValueKey(handle, &ValueName, 0, REG_BINARY, (PVOID)data, data_len);
         }
 
     } __except (EXCEPTION_EXECUTE_HANDLER) {
         status = GetExceptionCode();
     }
+
+    if (name)
+        Mem_Free(name, name_len);
+    if (data)
+        Mem_Free(data, data_len);
 
     if(handle)
         ZwClose(handle);
@@ -1425,6 +1442,10 @@ _FX NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms)
     NTSTATUS status = STATUS_SUCCESS;
     API_SECURE_PARAM_ARGS *args = (API_SECURE_PARAM_ARGS *)parms;
 	HANDLE handle = NULL;
+    WCHAR* name = NULL;
+    ULONG  name_len = 0;
+    UCHAR* data = NULL;
+    ULONG  data_len = 0;
 
     if (proc) {
         status = STATUS_NOT_IMPLEMENTED;
@@ -1435,31 +1456,41 @@ _FX NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms)
 
         UNICODE_STRING KeyPath;
         RtlInitUnicodeString(&KeyPath, Api_ParamPath);
+
+        name_len = wcslen(args->param_name.val) + 1 * sizeof(WCHAR);
+        name = Mem_Alloc(Driver_Pool, name_len);
+        memcpy(name, args->param_name.val, name_len);
         UNICODE_STRING ValueName;
-        RtlInitUnicodeString(&ValueName, args->param_name.val);
+        RtlInitUnicodeString(&ValueName, name);
 
         OBJECT_ATTRIBUTES objattrs;
         InitializeObjectAttributes(&objattrs, &KeyPath, OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE, NULL, NULL);
         status = ZwOpenKey(&handle, KEY_WRITE, &objattrs);
         if (status == STATUS_SUCCESS) {
 
-            UCHAR tempBuffer[sizeof(KEY_VALUE_PARTIAL_INFORMATION) + sizeof(ULONG64)];
-            PVOID buffer = args->param_size.val > sizeof(tempBuffer) ? args->param_data.val : tempBuffer;
-            ULONG length = args->param_size.val > sizeof(tempBuffer) ? args->param_size.val : sizeof(tempBuffer);
-        	status = ZwQueryValueKey(handle, &ValueName, KeyValuePartialInformation, buffer, length, &length);
+            data_len = args->param_size.val + sizeof(KEY_VALUE_PARTIAL_INFORMATION);
+            data = Mem_Alloc(Driver_Pool, data_len);
+
+            ULONG length;
+        	status = ZwQueryValueKey(handle, &ValueName, KeyValuePartialInformation, data, data_len, &length);
 	        if (NT_SUCCESS(status))
 	        {
-		        PKEY_VALUE_PARTIAL_INFORMATION info = (PKEY_VALUE_PARTIAL_INFORMATION)buffer;
+		        PKEY_VALUE_PARTIAL_INFORMATION info = (PKEY_VALUE_PARTIAL_INFORMATION)data;
                 if (info->DataLength <= args->param_size.val)
-                    memmove(args->param_data.val, info->Data, info->DataLength);
+                    memcpy(args->param_data.val, info->Data, info->DataLength);
                 else
-                    return STATUS_BUFFER_TOO_SMALL;
+                    status = STATUS_BUFFER_TOO_SMALL;
 	        }
         }
 
     } __except (EXCEPTION_EXECUTE_HANDLER) {
         status = GetExceptionCode();
     }
+
+    if (name)
+        Mem_Free(name, name_len);
+    if (data)
+        Mem_Free(data, data_len);
 
     if(handle)
         ZwClose(handle);

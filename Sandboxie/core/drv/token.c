@@ -519,6 +519,8 @@ _FX void *Token_FilterPrimary(PROCESS *proc, void *ProcessObject)
 
     // DbgPrint("   Process Token %08X - %d <%S>\n", PrimaryToken, proc->pid, proc->image_name);
 
+    proc->drop_rights = proc->use_security_mode || Process_GetConf_bool(proc, L"DropAdminRights", FALSE);
+
     DropRights = (proc->drop_rights ? -1 : 0);
 
     // DbgPrint("   Drop rights %d - %d <%S>\n", proc->drop_rights, proc->pid, proc->image_name);

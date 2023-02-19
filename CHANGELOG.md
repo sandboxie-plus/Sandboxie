@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.7.3 / 5.62.3] - 2023-02-??
+## [1.8.0 / 5.63.0] - 2023-02-??
 
 ### Added
 - Run menu now supports folders, to be used by entering foldername1\foldername2\entryname in the name column of the UI
@@ -33,6 +33,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue starting services without a system token
 - fixed issues with new file migration settings [#2700](https://github.com/sandboxie-plus/Sandboxie/issues/2700)
 - fixed shell integration on ARM64 [#2685](https://github.com/sandboxie-plus/Sandboxie/issues/2685)
+- fixed new issues with driver verifier [#2708](https://github.com/sandboxie-plus/Sandboxie/issues/2708)
 
 
 

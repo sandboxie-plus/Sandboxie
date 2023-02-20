@@ -533,7 +533,9 @@ void CSettingsWindow__AddContextMenu(bool bAlwaysClassic)
 		QProcess Proc;
 		Proc.execute("rundll32.exe", QStringList() << "SbieShellExt.dll,RegisterPackage");
 		Proc.waitForFinished();
-		return;
+		
+		// return;
+		// Most apps add both
 	}
 
 	CSbieUtils::AddContextMenu(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",

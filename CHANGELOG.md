@@ -26,6 +26,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - when dragging and dropping a file on the SandMan UI to run it, the currently selected box will be pre-selected in the box picker dialog
 - improved access rule handling [#2633](https://github.com/sandboxie-plus/Sandboxie/discussions/2633)
 - SbieCtrl now uses the new update format when checking for updates
+- added priorization of primary matches over auylairy matches to rule specificity
 
 ### Fixed
 - added AppContainer support for Compartment type boxes
@@ -34,6 +35,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issues with new file migration settings [#2700](https://github.com/sandboxie-plus/Sandboxie/issues/2700)
 - fixed shell integration on ARM64 [#2685](https://github.com/sandboxie-plus/Sandboxie/issues/2685)
 - fixed new issues with driver verifier [#2708](https://github.com/sandboxie-plus/Sandboxie/issues/2708)
+
 
 
 

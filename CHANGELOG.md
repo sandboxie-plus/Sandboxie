@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.8.0 / 5.63.0] - 2023-02-??
+## [1.8.0 / 5.63.0] - 2023-02-27
 
 ### Added
 - Run menu now supports folders, to be used by entering foldername1\foldername2\entryname in the name column of the UI

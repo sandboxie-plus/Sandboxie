@@ -882,7 +882,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="745"/>
         <source>Please enter a service identifier</source>
-        <translation>Lütfen bir hizmet tanımlayıcı girin</translation>
+        <translation>Lütfen bir hizmet tanımlayıcısı girin</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="262"/>
@@ -1369,7 +1369,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <location filename="Windows/OptionsAdvanced.cpp" line="720"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="724"/>
         <source>Run Command</source>
-        <translation>Komut Çalıştır</translation>
+        <translation>Komutu Çalıştır</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="712"/>
@@ -1379,7 +1379,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="715"/>
         <source>On Init</source>
-        <translation>Başlatmada</translation>
+        <translation>İlk Kullanımda</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="719"/>
@@ -1548,7 +1548,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/PopUpWindow.h" line="255"/>
         <source>Recover &amp;&amp; Explore</source>
-        <translation>Kurtar &amp;&amp; Klasörde Göster</translation>
+        <translation>Kurtar &amp;&amp; Keşfet</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="256"/>
@@ -1593,7 +1593,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <location filename="Windows/PopUpWindow.cpp" line="253"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation>%4&apos;ün (%5) büyük bir %1 dosyasını korumalı alana kopyalamasına izin vermek istiyor musunuz: %2?
+        <translation>%4&apos;nin (%5) %1 büyüklüğündeki bir dosyayı korumalı alana kopyalamasına izin vermek istiyor musunuz: %2?
 Dosya adı: %3</translation>
     </message>
     <message>
@@ -1614,7 +1614,7 @@ Dosyayı yazan: %3</translation>
         <location filename="Windows/PopUpWindow.cpp" line="411"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation>%1 büyük bir dosya %2 korumalı alanına taşınıyor, %3 kaldı.
+        <translation>%1 büyüklüğündeki bir dosya %2 korumalı alanına taşınıyor, %3 kaldı.
 Tam yol: %4</translation>
     </message>
 </context>
@@ -1755,7 +1755,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="663"/>
         <source>No INet</source>
-        <translation>INet yok</translation>
+        <translation>INet Yok</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="670"/>
@@ -1790,7 +1790,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="636"/>
         <source>Disabled</source>
-        <translation>Devre dışı</translation>
+        <translation>Devre Dışı</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="647"/>
@@ -2551,7 +2551,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SbieFindWnd.cpp" line="134"/>
         <source>Drag the Finder Tool over a window to select it, then release the mouse to check if the window is sandboxed.</source>
-        <translation>Bulucu Aracını, bir pencere seçmek için onun üzerine sürükleyin, ardından pencerenin korumalı alanda olup olmadığını denetlemek için fareyi bırakın.</translation>
+        <translation>Soldaki Bulucu Aracını, farenin sol tuşuyla sürükleyip bir pencerenin üzerine bırakarak, o pencerenin korumalı alanda olup olmadığını bulabilirsiniz.</translation>
     </message>
     <message>
         <location filename="SbieFindWnd.cpp" line="204"/>
@@ -2737,7 +2737,7 @@ Hayır şunları seçer: %2</translation>
         <location filename="SandMan.cpp" line="574"/>
         <location filename="SandMan.cpp" line="701"/>
         <source>Reset all GUI options</source>
-        <translation>Tüm GKA Seçeneklerini Sıfırla</translation>
+        <translation>Tüm Arayüz Seçeneklerini Sıfırla</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="579"/>
@@ -3448,7 +3448,7 @@ Hayır şunları seçer: %2</translation>
         <location filename="Views/SbieView.cpp" line="193"/>
         <location filename="Views/SbieView.cpp" line="307"/>
         <source>Explore Content</source>
-        <translation>İçeriği Klasörde Göster</translation>
+        <translation>İçeriği Keşfet</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="191"/>
@@ -6109,7 +6109,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3529"/>
         <source>Start Service</source>
-        <translation>Hizmeti Başlat</translation>
+        <translation>Hizmet Başlat</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3504"/>
@@ -6377,7 +6377,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1235"/>
         <source>Config protection</source>
-        <translation>Yapılandırma koruması</translation>
+        <translation>Yapılandırma Koruması</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1326"/>
@@ -6953,7 +6953,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="86"/>
         <source>When deleting a snapshot content, it will be returned to this snapshot instead of none.</source>
-        <translation>Bir anlık görüntü içeriği silinirken, hiçbiri yerine bu anlık görüntüye döndürülecektir.</translation>
+        <translation>Anlık görüntüsü alınmış bir alanın içeriği silinirken, alanın içeriği varsayılan anlık görüntüye döndürülecektir.</translation>
     </message>
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="89"/>

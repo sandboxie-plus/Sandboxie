@@ -310,6 +310,18 @@ SBIE2111 İşleme erişilemiyor: %3, çağrı %2
 SBIE2112 Nesneye erişilemiyor: %3, çağrı %2
 .
 
+2113;pop;inf;01
+SBIE2113 Dosya korumalı alana kopyalanamayacak kadar büyük, boş dosya oluşturuluyor - %2
+.
+
+2114;pop;inf;01
+SBIE2114 Dosya korumalı alana kopyalanamayacak kadar büyük, dosyaya erişim engelleniyor - %2
+.
+
+2115;pop;inf;01
+SBIE2115 Dosya korumalı alana kopyalanamayacak kadar büyük, dosya salt okunur olarak açılıyor - %2
+.
+
 2191;pop;inf;01
 SBIE2191 %2, Sandboxie altında çalışırken güncellenmemelidir.
 .
@@ -1226,6 +1238,14 @@ Masaüstü Kısayolu Oluştur
 
 3505;txt;01
 Sandboxie'ye Katkıda Bulunun
+.
+
+3506;txt;01
+Destekçi Sertifikası Alın
+.
+
+3507;txt;01
+Destekçi Sertifikasını Uygula
 .
 
 #----------------------------------------------------------------------------
@@ -3383,6 +3403,30 @@ Sandboxie varsayılan ayarları tam koruma sağlar, ancak Sandboxie Kontrol prog
 #----------------------------------------------------------------------------
 # License Manager
 #----------------------------------------------------------------------------
+
+7988;txt;01
+Destekçi Sertifikanız geçerlidir, teşekkürler. :-)
+.
+
+7989;txt;01
+Destekçi Sertifikanızın süresi dolmuş. :'(
+.
+
+7990;txt;01
+Lütfen Destekçi Sertifikanızın tamamını panoya kopyalayın ve Tamam'a tıklayın.
+.
+
+7991;txt;01
+Sertifika dosyaya kaydedilemedi.
+.
+
+7992;txt;01
+Sertifika geçerli değil.
+.
+
+7993;txt;01
+Sertifika geçerli ve başarıyla uygulandı.
+.
 
 #----------------------------------------------------------------------------
 # SandboxieInstall

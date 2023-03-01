@@ -4126,8 +4126,8 @@ Processes in this box will not be able to access the internet or the local netwo
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
         <oldsource>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatybility but reduces the security isolation.</oldsource>
-        <translation type="unfinished">
-В этой песочнице будет запускаться MSIServer (служба установки *.msi) с системным токеном, это улучшает совместимость, но снижает изоляцию безопасности.</translation>
+        <translation>
+В этой песочнице будет запускаться MSIServer (служба установщика *.msi) с системным токеном, это улучшает совместимость, но снижает изоляцию безопасности.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="552"/>
@@ -6471,7 +6471,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="733"/>
         <source>Support &amp;&amp; Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Поддержка и бновления</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="980"/>
@@ -6527,10 +6527,6 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="1473"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
-    </message>
-    <message>
-        <source>Support</source>
-        <translation type="vanished">Поддержка</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="807"/>

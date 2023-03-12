@@ -152,6 +152,7 @@ _FX BOX *Process_GetForcedStartBox(
     BOX *box;
     ULONG alert;
     BOOLEAN check_force;
+    BOOLEAN is_start_exe;
     BOOLEAN force_alert;
     BOOLEAN dfp_already_added;
     BOOLEAN same_image_name;
@@ -235,7 +236,29 @@ _FX BOX *Process_GetForcedStartBox(
 
         box = Process_CheckBoxPath(&boxes, ImagePath2);
 
-        if ((! box) && CurDir)
+        //
+        // when the process is start.exe we ignore the CurDir and DocArg
+        //
+
+        is_start_exe = FALSE;
+
+        WCHAR *image_name = wcsrchr(ImagePath, L'\\');
+        if (image_name) {
+
+            ULONG len = (ULONG)(image_name - ImagePath);
+            if ((len == Driver_HomePathNt_Len) &&
+                (wcsncmp(ImagePath, Driver_HomePathNt, len) == 0)) {
+
+                //image_sbie = TRUE;
+
+                if (_wcsicmp(image_name + 1, START_EXE) == 0) {
+
+                    is_start_exe = TRUE;
+                }
+            }
+        }
+
+        if ((! box) && CurDir && !is_start_exe)
             box = Process_CheckBoxPath(&boxes, CurDir);
 
         if (!box) {
@@ -248,12 +271,12 @@ _FX BOX *Process_GetForcedStartBox(
                     &boxes, ImageName, force_alert, &alert);
             }
 
-            if ((! box) && CurDir && (! alert)) {
+            if ((! box) && CurDir && !is_start_exe && (! alert)) {
                 box = Process_CheckForceFolder(
                         &boxes, CurDir, force_alert, &alert);
             }
 
-            if ((! box) && DocArg && (! alert)) {
+            if ((! box) && DocArg && !is_start_exe && (! alert)) {
                 box = Process_CheckForceFolder(
                         &boxes, DocArg, force_alert, &alert);
             }

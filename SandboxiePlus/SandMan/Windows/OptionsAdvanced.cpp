@@ -976,6 +976,9 @@ void COptionsWindow::OnDelUser()
 {
 	foreach(QListWidgetItem* pItem, ui.lstUsers->selectedItems())
 		delete pItem;
+
+	m_AdvancedChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::CreateDebug()

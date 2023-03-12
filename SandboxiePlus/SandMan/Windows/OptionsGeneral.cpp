@@ -372,13 +372,24 @@ void COptionsWindow::SaveGeneral()
 
 	if (ui.cmbVersion->isEnabled()) 
 	{
-		if (ui.cmbVersion->currentIndex() == 1) { // V2
+		if (ui.cmbVersion->currentIndex() == 1) // V2
+		{
 			m_pBox->SetBool("UseFileDeleteV2", true);
 			m_pBox->SetBool("UseRegDeleteV2", true);
 		}
-		else if (ui.cmbVersion->currentIndex() == 0) { // V1
-			m_pBox->DelValue("UseFileDeleteV2");
-			m_pBox->DelValue("UseRegDeleteV2");
+		else if (ui.cmbVersion->currentIndex() == 0) // V1
+		{
+			bool bUseFileDeleteV2Global = theAPI->GetGlobalSettings()->GetBool("UseFileDeleteV2", false);
+			if(bUseFileDeleteV2Global)
+				m_pBox->SetBool("UseFileDeleteV2", false);
+			else
+				m_pBox->DelValue("UseFileDeleteV2");
+
+			bool bUseRegDeleteV2Global = theAPI->GetGlobalSettings()->GetBool("UseRegDeleteV2", false);
+			if(bUseRegDeleteV2Global)
+				m_pBox->SetBool("UseRegDeleteV2", false);
+			else
+				m_pBox->DelValue("UseRegDeleteV2");
 		}
 
 		WriteGlobalCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", true);

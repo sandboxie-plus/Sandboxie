@@ -54,7 +54,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="446"/>
         <source>Make applications think they are running elevated</source>
-        <translation>让应用认为自身在管理员权限下允许</translation>
+        <translation>让应用认为自身在管理员权限下运行</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="451"/>
@@ -77,7 +77,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="172"/>
         <source>Enter box name:</source>
-        <translation>输入沙盒名称:</translation>
+        <translation>输入沙盒名称：</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="178"/>
@@ -88,7 +88,7 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="190"/>
         <source>Select box type:</source>
         <oldsource>Sellect box type:</oldsource>
-        <translation>选择沙盒类型</translation>
+        <translation>选择沙盒类型：</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="193"/>
@@ -123,7 +123,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="215"/>
         <source>Remove after use</source>
-        <translation>使用后移除</translation>
+        <translation>在结束使用后，进行移除</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="216"/>
@@ -227,7 +227,8 @@
 You can use %USER% to save each users sandbox to an own folder.</source>
         <oldsource>On this page the sandbox location and its behaviorue can be customized.
 You can use %USER% to save each users sandbox to an own fodler.</oldsource>
-        <translation>本页面用于配置沙盒位置与行为. 可以用 %USER% 表示当前用户目录.</translation>
+        <translation>本页面用于配置沙盒位置与行为
+可以使用 %USER% 来将用户拥有的沙盒存储到自身的用户目录下</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="293"/>
@@ -278,19 +279,19 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="387"/>
         <source>The selected box location is not a valid path.</source>
         <oldsource>The sellected box location is not a valid path.</oldsource>
-        <translation>选中的沙盒存储路径无效</translation>
+        <translation>所选的沙盒存储路径是无效路径</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="392"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
         <oldsource>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</oldsource>
-        <translation>选中的沙盒存储路径非空, 推荐选择空文件夹或新建文件夹. 确认使用已有的文件夹吗?</translation>
+        <translation>所选的沙盒存储路径是非空目录，推荐选择空文件夹或新建文件夹。确定要使用当前选择的文件夹吗？</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="397"/>
         <source>The selected box location not placed on a currently available drive.</source>
         <oldsource>The sellected box location not placed on a currently available drive.</oldsource>
-        <translation>选中的沙盒存储路径所在的驱动器当前不可用</translation>
+        <translation>所选的沙盒存储路径所在的驱动器当前不可用</translation>
     </message>
 </context>
 <context>
@@ -341,7 +342,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="141"/>
         <source>Note: this option is persistent</source>
-        <translation>注意：此选项无法在后续的设置中修改</translation>
+        <translation>注意：此选项无法在后续的设置中重新修改</translation>
     </message>
 </context>
 <context>
@@ -435,7 +436,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="126"/>
         <source>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you experience any unexpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure group.</source>
         <oldsource>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you expirience any unecpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure groupe.</oldsource>
-        <translation>新沙盒按照新的 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;虚拟化方案 2&lt;/a&gt;创建, 如果您在该沙盒的使用中发现任何问题, 请切换至旧版本的虚拟化方案并反馈, 该选项可以在沙盒结构菜单中找到.</translation>
+        <translation>新沙盒将按照新的 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;虚拟化方案 2&lt;/a&gt;创建，如果您在使用该沙盒的时候遇到任何问题，请尝试切换至旧版本的虚拟化方案并反馈相应的问题，该选项可以在沙盒结构菜单中找到。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="129"/>
@@ -2666,8 +2667,8 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="107"/>
-        <source>The file %1 failed a security check!<byte value="xd"/>
-<byte value="xd"/>
+        <source>The file %1 failed a security check!
+
 %2</source>
         <oldsource>The file %1 failed a security check!
 
@@ -2683,11 +2684,11 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="175"/>
-        <source>The file %1 failed a security check, do you want to recover it anyway?<byte value="xd"/>
-<byte value="xd"/>
+        <source>The file %1 failed a security check, do you want to recover it anyway?
+
 %2</source>
-        <oldsource>The file %1 failed a security check, do you want to recover it anyways?<byte value="xd"/>
-<byte value="xd"/>
+        <oldsource>The file %1 failed a security check, do you want to recover it anyways?
+
 %2</oldsource>
         <translation>文件 %1 未通过安全检查，您要忽略警告并恢复吗？
 
@@ -2799,8 +2800,8 @@ No will choose: %2</source>
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
 This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.</oldsource>
-        <translation>您正准备编辑模板配置文件, 但通常不推荐这么做. 
-因为该文件是 Sandboxie 的一部分并且所有的更改会在下次更新时重置.</translation>
+        <translation>您正准备编辑模板配置文件, 但通常不推荐这么做
+因为该文件是 Sandboxie 的一部分并且所有的更改会在下次更新时被重置</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2824"/>
@@ -3889,7 +3890,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="1459"/>
         <source>Do you want to terminate %1?</source>
         <oldsource>Do you want to %1 %2?</oldsource>
-        <translation>确定要%1 %2 吗？</translation>
+        <translation>确定要终止 %1？</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1459"/>
@@ -4355,21 +4356,21 @@ This box&apos;s content will be DISCARDED when it&apos;s closed, and the box wil
         <oldsource>
 This box&apos;s content will be DISCARDED when its closed, and the box will be removed.</oldsource>
         <translation>
-该沙盒中的内容将在所有程序结束后被删除, 同时沙盒本身将被移除.</translation>
+该沙盒中的内容将在所有程序结束后被删除，同时沙盒本身将被移除</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="546"/>
         <source>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
         <translation>
-该沙盒中的内容将在所有程序结束后被删除, 仅适合临时数据.</translation>
+该沙盒中的内容将在所有程序结束后被删除，仅适合临时数据</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="548"/>
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
         <translation>
-该沙盒中所有进程无法访问网络和本地连接, 以确保所有可访问的数据不被泄露.</translation>
+该沙盒中所有进程将无法访问网络和本地连接，以确保所有可访问的数据不被泄露</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="550"/>
@@ -4378,14 +4379,14 @@ This box will run the MSIServer (*.msi installer service) with a system token, t
         <oldsource>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatybility but reduces the security isolation.</oldsource>
         <translation>
-该沙盒允许 MSIServer 在沙盒内使用系统令牌运行, 这将改善兼容性但会影响安全隔离.</translation>
+该沙盒允许 MSIServer (*.msi 安装服务) 在沙盒内使用系统令牌运行，这将改善兼容性但会影响安全隔离效果</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="552"/>
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
         <translation>
-该沙盒中所有进程将认为其运行在管理员模式下, 即使实际上并没有该权限, 这有助于在安全加固型沙盒中运行安装程序.</translation>
+该沙盒中所有进程将认为其运行在管理员模式下，即使实际上并没有该权限，这有助于在安全加固型沙盒中运行安装程序</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="580"/>

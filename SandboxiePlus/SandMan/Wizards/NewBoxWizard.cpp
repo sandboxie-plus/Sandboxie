@@ -109,9 +109,9 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
             pBox->SetBool("AutoRecover", true);
 
         if (field("blockNetwork").toInt() == 1) // old style
-            pBox->InsertText("AllowNetworkAccess", "!<InternetAccess>,n");
-        else if (field("blockNetwork").toInt() == 2) // WFP
             pBox->InsertText("ClosedFilePath", "!<InternetAccess>,InternetAccessDevices");
+        else if (field("blockNetwork").toInt() == 2) // WFP
+            pBox->InsertText("AllowNetworkAccess", "!<InternetAccess>,n");
         pBox->SetBool("BlockNetworkFiles", !field("shareAccess").toBool());
 
         if(field("fakeAdmin").toBool())

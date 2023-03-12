@@ -483,7 +483,9 @@ _FX void Ipc_CreateObjects(void)
     WCHAR *TruePath;
     WCHAR *CopyPath;
     WCHAR *backslash;
-    WCHAR *buffer;
+    WCHAR *buffer = NULL;
+    WCHAR *BNOLINKS = NULL;
+    WCHAR *buffer2 = NULL;
     HANDLE handle;
     WCHAR str[64];
     ULONG errlvl = 0;
@@ -538,19 +540,113 @@ _FX void Ipc_CreateObjects(void)
         goto finish;
     }
 
+    // todo: fix-me: peroperly reparse symbolicl inks in IPC paths instead of creating dummy for everything
+
+    buffer = Dll_Alloc((wcslen(CopyPath) + 32) * sizeof(WCHAR));
+
+    //
+    // create BNOLINKS directory and symbolic links
+    //
+
+    BNOLINKS  = Dll_Alloc((wcslen(CopyPath) + 32) * sizeof(WCHAR));
+
+    wcscpy(BNOLINKS, CopyPath);
+
+    status = STATUS_UNSUCCESSFUL;
+    backslash = wcsrchr(BNOLINKS, L'\\');
+    if (backslash) {
+        *backslash = L'\0';
+        backslash = wcsrchr(BNOLINKS, L'\\');
+        if (backslash) {
+            wcscpy(str, backslash);
+            *backslash = L'\0';
+            wcscat(BNOLINKS, L"\\BNOLINKS");
+            status = STATUS_SUCCESS;
+        }
+    }
+
+    if (NT_SUCCESS(status))
+        status = SbieApi_CreateDirOrLink(BNOLINKS, NULL);
+    
+    if (NT_SUCCESS(status)) {
+        wcscpy(buffer, BNOLINKS);
+        wcscat(buffer, str);
+        status = SbieApi_CreateDirOrLink(buffer, CopyPath);
+    }
+
+    if (! NT_SUCCESS(status)) {
+        errlvl = 77;
+        goto finish;
+    }
+
+    //
+    // create Global directory and symbolic links
+    //
+
+    buffer2 = Dll_Alloc((Dll_BoxIpcPathLen + 32) * sizeof(WCHAR));
+
+    wcscpy(buffer2, Dll_BoxIpcPath);
+    wcscat(buffer2, L"\\BaseNamedObjects");
+
+    status = SbieApi_CreateDirOrLink(buffer2, NULL);
+
+    if (! NT_SUCCESS(status)) {
+        errlvl = 88;
+        goto finish;
+    }
+
+    wcscpy(buffer, buffer2);
+    wcscat(buffer, L"\\Global");
+
+    status = SbieApi_CreateDirOrLink(buffer, buffer2);
+
+    if (! NT_SUCCESS(status)) {
+        errlvl = 51;
+        goto finish;
+    }
+
+    wcscpy(buffer, buffer2);
+    wcscat(buffer, L"\\Local");
+
+    status = SbieApi_CreateDirOrLink(buffer, buffer2);
+
+    if (! NT_SUCCESS(status)) {
+        errlvl = 52;
+        goto finish;
+    }
+
+    wcscpy(buffer, buffer2);
+    wcscat(buffer, L"\\Session");
+
+    status = SbieApi_CreateDirOrLink(buffer, BNOLINKS);
+
+    if (! NT_SUCCESS(status)) {
+        errlvl = 53;
+        goto finish;
+    }
+
+    if (NT_SUCCESS(status)) {
+        wcscpy(buffer, BNOLINKS);
+        wcscat(buffer, L"\\0");
+        status = SbieApi_CreateDirOrLink(buffer, buffer2);
+    }
+
+    if (! NT_SUCCESS(status)) {
+        errlvl = 66;
+        goto finish;
+    }
+
     //
     // create Global,Local,Session symbolic links
     //
 
-    buffer = Dll_Alloc((wcslen(CopyPath) + 32) * sizeof(WCHAR));
-
     wcscpy(buffer, CopyPath);
     wcscat(buffer, L"\\Global");
 
-    status = SbieApi_CreateDirOrLink(buffer, CopyPath);
+    status = SbieApi_CreateDirOrLink(buffer, buffer2);
 
     if (! NT_SUCCESS(status)) {
-        errlvl = 44;
+        errlvl = 41;
         goto finish;
     }
 
@@ -560,17 +656,17 @@ _FX void Ipc_CreateObjects(void)
     status = SbieApi_CreateDirOrLink(buffer, CopyPath);
 
     if (! NT_SUCCESS(status)) {
-        errlvl = 55;
+        errlvl = 42;
         goto finish;
     }
 
     wcscpy(buffer, CopyPath);
     wcscat(buffer, L"\\Session");
 
-    status = SbieApi_CreateDirOrLink(buffer, CopyPath);
+    status = SbieApi_CreateDirOrLink(buffer, BNOLINKS);
 
     if (! NT_SUCCESS(status)) {
-        errlvl = 66;
+        errlvl = 43;
         goto finish;
     }
 
@@ -579,6 +675,13 @@ _FX void Ipc_CreateObjects(void)
     //
 
 finish:
+
+    if(buffer)
+        Dll_Free(buffer);
+    if(BNOLINKS)
+        Dll_Free(BNOLINKS);
+    if(buffer2)
+        Dll_Free(buffer2);
 
     if (errlvl)
         SbieApi_Log(2308, L"[%d / %08X]", errlvl, status);

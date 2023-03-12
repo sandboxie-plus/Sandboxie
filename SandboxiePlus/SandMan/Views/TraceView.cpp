@@ -106,7 +106,7 @@ CTraceTree::~CTraceTree()
 
 void CTraceTree::SetFilter(const QString& Exp, int iOptions, int Column) 
 {
-	bool bReset = m_FilterExp != Exp || m_bHighLight != ((iOptions & CFinder::eHighLight) != 0);
+	bool bReset = m_bHighLight != ((iOptions & CFinder::eHighLight) != 0) || (!m_bHighLight && m_FilterExp != Exp);
 
 	//QString ExpStr = ((iOptions & CFinder::eRegExp) == 0) ? Exp : (".*" + QRegularExpression::escape(Exp) + ".*");
 	//QRegularExpression RegExp(ExpStr, (iOptions & CFinder::eCaseSens) != 0 ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
@@ -220,6 +220,7 @@ CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 	m_pTraceTid = new QComboBox();
 	m_pTraceTid->addItem(tr("[All]"), 0);
 	m_pTraceTid->setMinimumWidth(75);
+	m_pTraceTid->setEditable(true);
 	connect(m_pTraceTid, SIGNAL(currentIndexChanged(int)), this, SLOT(OnSetTidFilter()));
 	m_pTraceToolBar->addWidget(m_pTraceTid);
 
@@ -590,7 +591,8 @@ void CTraceView::OnSetPidFilter()
 
 void CTraceView::OnSetTidFilter()
 {
-	m_FilterTid = m_pTraceTid->currentData().toUInt();
+	//m_FilterTid = m_pTraceTid->currentData().toUInt();
+	m_FilterTid = m_pTraceTid->currentText().toUInt();
 	//m_pSortProxy->m_FilterTid = m_pTraceTid->currentData().toUInt();
 
 	//m_pSortProxy->setFilterKeyColumn(m_pSortProxy->filterKeyColumn());

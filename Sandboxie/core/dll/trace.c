@@ -289,7 +289,7 @@ VOID InstrumentationTrace(ULONG_PTR ReturnAddress, NTSTATUS ReturnStatus)
 #endif
 
 #ifdef _WIN64
-    // Note: this would also be needed in native 32 bit, but there instrumentation does not work anyhow
+    // Note: this would also be needed in native 32 bit
     extern SBIELOW_DATA* SbieApi_data;
     if (NtFunction == (ULONG_PTR)SbieApi_data->NtDeviceIoControlFile_code)
         return; // this is used by our sys call interface, the driver will log this syscall

@@ -169,7 +169,7 @@ void CFinder::OnUpdate()
 		iOptions |= eHighLight;
 	QString Exp = m_pSearch->text();
 
-	QString ExpStr = ((iOptions & CFinder::eRegExp) == 0) ? Exp : (".*" + QRegularExpression::escape(Exp) + ".*");
+	QString ExpStr = ((iOptions & CFinder::eRegExp) != 0) ? Exp : (".*" + QRegularExpression::escape(Exp).replace("\\","\\\\") + ".*");
 	m_RegExp = QRegularExpression(ExpStr, (iOptions & CFinder::eCaseSens) != 0 ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
 
 	SetFilter(Exp, iOptions, GetColumn());

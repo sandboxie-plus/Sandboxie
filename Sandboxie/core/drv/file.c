@@ -1365,6 +1365,10 @@ _FX NTSTATUS File_Generic_MyParseProc(
                 && 0 == Box_NlsStrCmp(
                     path, Driver_HomePathNt, Driver_HomePathNt_Len)) {
 
+            if(_wcsicmp(&path[Driver_HomePathNt_Len], L"\\Certificate.dat") == 0)
+                status = STATUS_ACCESS_DENIED;
+            else
+
             if (write_access)
                 status = STATUS_ACCESS_DENIED;
             else
@@ -1872,8 +1876,9 @@ _FX void File_ReplaceTokenIfFontRequest(
     // Using impersonation token in ClientToken if it is available
     // Replacing the primary token caused BSOD with Digital Guardian when dereferencing the token
     //
-
-    ObReferenceObject(proc->primary_token);
+    
+    // $Workaround$ - 3rd party fix
+    ObReferenceObject(proc->primary_token); // HACK ALERT! this causes a resource leak!!!
 
     if (!AccessState->SubjectSecurityContext.ClientToken)
     {

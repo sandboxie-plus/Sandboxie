@@ -512,11 +512,13 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
             LONG_PTR BoxNameOrModelPid;
             bool CallerInSandbox;
             WCHAR boxname[48] = { 0 };
+            WCHAR sid[96];
+            ULONG session_id;
             BOOL FilterHandles = FALSE;
 
             if (SbieApi_QueryProcessInfo((HANDLE)(ULONG_PTR)CallerPid, 0)) {
                 CallerInSandbox = true;
-                SbieApi_QueryProcess((HANDLE)(ULONG_PTR)CallerPid, boxname, NULL, NULL, NULL);
+                SbieApi_QueryProcess((HANDLE)(ULONG_PTR)CallerPid, boxname, NULL, sid, &session_id);
                 BoxNameOrModelPid = -(LONG_PTR)(LONG)CallerPid;
                 if ((req->si_flags & 0x80000000) != 0) { // bsession0 - this is only allowed for unsandboxed processes
                     lvl = 0xFF;
@@ -527,7 +529,7 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                 CallerInSandbox = false;
                 if (*req->boxname == L'-') {
                     int Pid = _wtoi(req->boxname + 1);
-                    SbieApi_QueryProcess((HANDLE)(ULONG_PTR)Pid, boxname, NULL, NULL, NULL);
+                    SbieApi_QueryProcess((HANDLE)(ULONG_PTR)Pid, boxname, NULL, sid, &session_id);
                     BoxNameOrModelPid = -Pid;
                 } else {
                     BoxNameOrModelPid = (LONG_PTR)req->boxname;
@@ -577,9 +579,11 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                             WCHAR BoxName[34];
                             int index = -1;
                             while (1) {
-                                index = SbieApi_EnumBoxes(index, BoxName);
+                                index = SbieApi_EnumBoxesEx(index, BoxName, TRUE);
                                 if (index == -1)
                                     break;
+                                if (!NT_SUCCESS(SbieApi_Call(API_IS_BOX_ENABLED, 3, (ULONG_PTR)BoxName, (ULONG_PTR)sid, (ULONG_PTR)session_id)))
+                                    continue;
 
                                 if (SbieDll_CheckStringInList(lpProgram + 1, BoxName, L"ForceProcess")
                                     || SbieDll_CheckPatternInList(lpApplicationName, (ULONG)(lpProgram - lpApplicationName), BoxName, L"ForceFolder")) {

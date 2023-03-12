@@ -565,19 +565,30 @@ _FX NTSTATUS Conf_Api_IsBoxEnabled(PROCESS *proc, ULONG64 *parms)
     NTSTATUS status;
     ULONG SessionId;
     UNICODE_STRING SidString;
+    const WCHAR* sid;
     WCHAR boxname[34];
 
     if (! Api_CopyBoxNameFromUser(boxname, (WCHAR *)args->box_name.val))
         return STATUS_INVALID_PARAMETER;
 
-    status = Process_GetSidStringAndSessionId(
+    if (args->sid_string.val != NULL) {
+        sid = args->sid_string.val;
+        SessionId = args->session_id.val;
+        SidString.Buffer = NULL;
+        status = STATUS_SUCCESS;
+    }
+    else {
+        status = Process_GetSidStringAndSessionId(
                         NtCurrentProcess(), NULL, &SidString, &SessionId);
+        sid = SidString.Buffer;
+    }
+
     if (NT_SUCCESS(status)) {
 
         status = Conf_IsValidBox(boxname);
         if (NT_SUCCESS(status)) {
 
-            if (! Conf_IsBoxEnabled(boxname, SidString.Buffer, SessionId))
+            if (! Conf_IsBoxEnabled(boxname, sid, SessionId))
                 status = STATUS_ACCOUNT_RESTRICTION;
         }
 

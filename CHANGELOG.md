@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with NT namespace virtualization [#2701](https://github.com/sandboxie-plus/Sandboxie/issues/2701)
 - fixed issue with run unsandboxed [#2710](https://github.com/sandboxie-plus/Sandboxie/issues/2710)
 - fixed issue with new box wizard [#2729](https://github.com/sandboxie-plus/Sandboxie/issues/2729)
+- fixed issue with break out processes and user restricted sandboxes [#2732](https://github.com/sandboxie-plus/Sandboxie/issues/2732)
 
 
 

@@ -6,6 +6,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.8.1 / 5.63.1] - 2023-03-12
+
+### Fixed
+- fixed issue with finder search in tracelog
+- fixed issue with NT namespace virtualization [#2701](https://github.com/sandboxie-plus/Sandboxie/issues/2701)
+
+
 
 ## [1.8.0 / 5.63.0] - 2023-02-27
 

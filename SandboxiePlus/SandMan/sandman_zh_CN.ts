@@ -767,7 +767,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>拒绝(禁止)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1000"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1003"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
@@ -887,20 +887,20 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>不确定</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="461"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="561"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="472"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="572"/>
         <source>Always copy</source>
         <translation>始终复制</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="462"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="562"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="473"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="573"/>
         <source>Don&apos;t copy</source>
         <translation>不要复制</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="463"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="563"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="474"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="574"/>
         <source>Copy empty</source>
         <translation>复制空的副本</translation>
     </message>
@@ -962,17 +962,17 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>部分变更未保存，确定要关闭这个选项窗口吗？</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="689"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="700"/>
         <source>kilobytes (%1)</source>
         <translation>KB (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="795"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="806"/>
         <source>Select color</source>
         <translation>选择颜色</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="870"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="881"/>
         <source>Select Program</source>
         <translation>选择程序</translation>
     </message>
@@ -982,18 +982,18 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>请输入一个服务标识符</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="870"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="881"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>可执行文件 (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="874"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="889"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="885"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="900"/>
         <source>Please enter a menu title</source>
         <translation>请输入一个菜单标题</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="885"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="896"/>
         <source>Please enter a command</source>
         <translation>请输入一则命令</translation>
     </message>
@@ -1002,8 +1002,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsWindow.cpp" line="980"/>
         <location filename="Windows/OptionsAccess.cpp" line="404"/>
         <location filename="Windows/OptionsAccess.cpp" line="636"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="494"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="589"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="505"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="600"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
         <location filename="Windows/OptionsNetwork.cpp" line="441"/>
         <location filename="Windows/OptionsNetwork.cpp" line="533"/>
@@ -1204,8 +1204,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAccess.cpp" line="632"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="535"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="610"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="489"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="585"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="500"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="596"/>
         <location filename="Windows/OptionsNetwork.cpp" line="436"/>
         <location filename="Windows/OptionsNetwork.cpp" line="529"/>
         <location filename="Windows/OptionsNetwork.cpp" line="642"/>
@@ -1240,7 +1240,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="611"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="586"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="556"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="567"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
         <location filename="Windows/OptionsNetwork.cpp" line="508"/>
@@ -2667,13 +2667,13 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="107"/>
-        <source>The file %1 failed a security check!
-
+        <source>The file %1 failed a security check!<byte value="xd"/>
+<byte value="xd"/>
 %2</source>
         <oldsource>The file %1 failed a security check!
 
 %2</oldsource>
-        <translation>文件 %1 未通过安全检查!
+        <translation type="unfinished">文件 %1 未通过安全检查!
 
 %2</translation>
     </message>
@@ -2684,13 +2684,13 @@ No will choose: %2</source>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="175"/>
-        <source>The file %1 failed a security check, do you want to recover it anyway?
-
+        <source>The file %1 failed a security check, do you want to recover it anyway?<byte value="xd"/>
+<byte value="xd"/>
 %2</source>
-        <oldsource>The file %1 failed a security check, do you want to recover it anyways?
+        <oldsource>The file %1 failed a security check, do you want to recover it anyway?
 
 %2</oldsource>
-        <translation>文件 %1 未通过安全检查，您要忽略警告并恢复吗？
+        <translation type="unfinished">文件 %1 未通过安全检查，您要忽略警告并恢复吗？
 
 %2</translation>
     </message>
@@ -4546,12 +4546,12 @@ Processes in this box will think they are run with administrative privileges, wi
     <message>
         <location filename="Views/TraceView.cpp" line="214"/>
         <location filename="Views/TraceView.cpp" line="221"/>
-        <location filename="Views/TraceView.cpp" line="229"/>
         <location filename="Views/TraceView.cpp" line="230"/>
-        <location filename="Views/TraceView.cpp" line="239"/>
-        <location filename="Views/TraceView.cpp" line="480"/>
-        <location filename="Views/TraceView.cpp" line="483"/>
-        <location filename="Views/TraceView.cpp" line="580"/>
+        <location filename="Views/TraceView.cpp" line="231"/>
+        <location filename="Views/TraceView.cpp" line="240"/>
+        <location filename="Views/TraceView.cpp" line="481"/>
+        <location filename="Views/TraceView.cpp" line="484"/>
+        <location filename="Views/TraceView.cpp" line="581"/>
         <source>[All]</source>
         <translation>[所有]</translation>
     </message>
@@ -4561,72 +4561,72 @@ Processes in this box will think they are run with administrative privileges, wi
         <translation>线程 TID：</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="226"/>
+        <location filename="Views/TraceView.cpp" line="227"/>
         <source>Type:</source>
         <translation>类型：</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="237"/>
+        <location filename="Views/TraceView.cpp" line="238"/>
         <source>Status:</source>
         <translation>状态：</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="240"/>
+        <location filename="Views/TraceView.cpp" line="241"/>
         <source>Open</source>
         <translation>开放</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="241"/>
+        <location filename="Views/TraceView.cpp" line="242"/>
         <source>Closed</source>
         <translation>封禁</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="242"/>
+        <location filename="Views/TraceView.cpp" line="243"/>
         <source>Trace</source>
         <translation>跟踪</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="243"/>
+        <location filename="Views/TraceView.cpp" line="244"/>
         <source>Other</source>
         <translation>其它</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="251"/>
+        <location filename="Views/TraceView.cpp" line="252"/>
         <source>Show All Boxes</source>
         <translation>显示所有沙盒</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="258"/>
+        <location filename="Views/TraceView.cpp" line="259"/>
         <source>Save to file</source>
         <translation>保存到文件</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="272"/>
+        <location filename="Views/TraceView.cpp" line="273"/>
         <source>Cleanup Trace Log</source>
         <translation>清理跟踪日志</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="622"/>
+        <location filename="Views/TraceView.cpp" line="624"/>
         <source>Save trace log to file</source>
         <translation>保存跟踪日志到文件</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="628"/>
+        <location filename="Views/TraceView.cpp" line="630"/>
         <source>Failed to open log file for writing</source>
         <translation>无法打开日志文件进行写入</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="648"/>
+        <location filename="Views/TraceView.cpp" line="650"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="553"/>
+        <location filename="Views/TraceView.cpp" line="554"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="560"/>
+        <location filename="Views/TraceView.cpp" line="561"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
@@ -4634,7 +4634,7 @@ Processes in this box will think they are run with administrative privileges, wi
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="681"/>
+        <location filename="Views/TraceView.cpp" line="683"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation>Sandboxie-Plus - 跟踪监测</translation>
     </message>

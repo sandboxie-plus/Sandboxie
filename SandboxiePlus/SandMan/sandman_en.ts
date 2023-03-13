@@ -775,8 +775,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAccess.cpp" line="632"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="535"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="610"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="489"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="585"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="500"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="596"/>
         <location filename="Windows/OptionsNetwork.cpp" line="436"/>
         <location filename="Windows/OptionsNetwork.cpp" line="529"/>
         <location filename="Windows/OptionsNetwork.cpp" line="642"/>
@@ -788,8 +788,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsWindow.cpp" line="980"/>
         <location filename="Windows/OptionsAccess.cpp" line="404"/>
         <location filename="Windows/OptionsAccess.cpp" line="636"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="494"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="589"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="505"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="600"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
         <location filename="Windows/OptionsNetwork.cpp" line="441"/>
         <location filename="Windows/OptionsNetwork.cpp" line="533"/>
@@ -824,7 +824,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="611"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="586"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="556"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="567"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
         <location filename="Windows/OptionsNetwork.cpp" line="508"/>
@@ -951,7 +951,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1000"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1003"/>
         <source>%1 (%2)</source>
         <translation></translation>
     </message>
@@ -1095,35 +1095,35 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="461"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="561"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="472"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="572"/>
         <source>Always copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="462"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="562"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="473"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="573"/>
         <source>Don&apos;t copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="463"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="563"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="474"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="574"/>
         <source>Copy empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="689"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="700"/>
         <source>kilobytes (%1)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="795"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="806"/>
         <source>Select color</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="870"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="881"/>
         <source>Select Program</source>
         <translation></translation>
     </message>
@@ -1133,18 +1133,18 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="870"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="881"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="874"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="889"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="885"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="900"/>
         <source>Please enter a menu title</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="885"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="896"/>
         <source>Please enter a command</source>
         <translation></translation>
     </message>
@@ -4295,12 +4295,12 @@ Processes in this box will think they are run with administrative privileges, wi
     <message>
         <location filename="Views/TraceView.cpp" line="214"/>
         <location filename="Views/TraceView.cpp" line="221"/>
-        <location filename="Views/TraceView.cpp" line="229"/>
         <location filename="Views/TraceView.cpp" line="230"/>
-        <location filename="Views/TraceView.cpp" line="239"/>
-        <location filename="Views/TraceView.cpp" line="480"/>
-        <location filename="Views/TraceView.cpp" line="483"/>
-        <location filename="Views/TraceView.cpp" line="580"/>
+        <location filename="Views/TraceView.cpp" line="231"/>
+        <location filename="Views/TraceView.cpp" line="240"/>
+        <location filename="Views/TraceView.cpp" line="481"/>
+        <location filename="Views/TraceView.cpp" line="484"/>
+        <location filename="Views/TraceView.cpp" line="581"/>
         <source>[All]</source>
         <translation></translation>
     </message>
@@ -4310,67 +4310,67 @@ Processes in this box will think they are run with administrative privileges, wi
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="226"/>
+        <location filename="Views/TraceView.cpp" line="227"/>
         <source>Type:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="237"/>
+        <location filename="Views/TraceView.cpp" line="238"/>
         <source>Status:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="240"/>
+        <location filename="Views/TraceView.cpp" line="241"/>
         <source>Open</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="241"/>
+        <location filename="Views/TraceView.cpp" line="242"/>
         <source>Closed</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="242"/>
+        <location filename="Views/TraceView.cpp" line="243"/>
         <source>Trace</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="243"/>
+        <location filename="Views/TraceView.cpp" line="244"/>
         <source>Other</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="251"/>
+        <location filename="Views/TraceView.cpp" line="252"/>
         <source>Show All Boxes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="258"/>
+        <location filename="Views/TraceView.cpp" line="259"/>
         <source>Save to file</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="272"/>
+        <location filename="Views/TraceView.cpp" line="273"/>
         <source>Cleanup Trace Log</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="622"/>
+        <location filename="Views/TraceView.cpp" line="624"/>
         <source>Save trace log to file</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="628"/>
+        <location filename="Views/TraceView.cpp" line="630"/>
         <source>Failed to open log file for writing</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="648"/>
+        <location filename="Views/TraceView.cpp" line="650"/>
         <source>Unknown</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="553"/>
+        <location filename="Views/TraceView.cpp" line="554"/>
         <source>%1 (%2)</source>
         <translation></translation>
     </message>
@@ -4380,7 +4380,7 @@ Processes in this box will think they are run with administrative privileges, wi
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="560"/>
+        <location filename="Views/TraceView.cpp" line="561"/>
         <source>%1</source>
         <translation></translation>
     </message>
@@ -4388,7 +4388,7 @@ Processes in this box will think they are run with administrative privileges, wi
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="681"/>
+        <location filename="Views/TraceView.cpp" line="683"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation></translation>
     </message>

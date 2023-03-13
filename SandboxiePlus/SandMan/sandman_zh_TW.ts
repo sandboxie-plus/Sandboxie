@@ -54,7 +54,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="446"/>
         <source>Make applications think they are running elevated</source>
-        <translation>讓應用程式認為它們正在提升權限執行</translation>
+        <translation>使應用程式認為其已在權限提升狀態下執行</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="451"/>
@@ -229,7 +229,7 @@ You can use %USER% to save each users sandbox to an own folder.</source>
         <oldsource>On this page the sandbox location and its behaviorue can be customized.
 You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation>在此頁面上，可以自訂沙箱位置及其行為。
-您可以使用 %USER% 將每個使用者沙箱儲存到自己的資料夾中。</translation>
+您可以使用 %USER% 將每個使用者的沙箱儲存到自己的個人資料夾中。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="293"/>
@@ -280,13 +280,13 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="387"/>
         <source>The selected box location is not a valid path.</source>
         <oldsource>The sellected box location is not a valid path.</oldsource>
-        <translation>選取的沙箱儲存路徑無效。</translation>
+        <translation>選取的沙箱儲存路徑是無效路徑。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="392"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
         <oldsource>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</oldsource>
-        <translation>選取的沙箱儲存路徑不是空的，推薦選擇空資料夾或新增資料夾。確定要使用現有的資料夾嗎？</translation>
+        <translation>選取的沙箱儲存路徑不是空的資料夾，推薦選擇空資料夾或新增資料夾。確定要使用目前選取的資料夾嗎？</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="397"/>
@@ -343,7 +343,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="141"/>
         <source>Note: this option is persistent</source>
-        <translation>注意: 此選項是固定的 (不可修改)</translation>
+        <translation>注意：此選項無法在後續的設定中重新修改</translation>
     </message>
 </context>
 <context>
@@ -436,7 +436,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="126"/>
         <source>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you experience any unexpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure group.</source>
         <oldsource>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you expirience any unecpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure groupe.</oldsource>
-        <translation>新沙箱按照新的 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;虛擬化方案 2&lt;/a&gt;建立，如果您在該沙箱的使用中發現任何問題，請切換至舊版本的虛擬化方案並反應問題給我們。該選項可以在 [沙箱選項] 中的 [檔案選項] 內找到。</translation>
+        <translation>新沙箱按照新的 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;虛擬化方案 2&lt;/a&gt;建立，如果您在使用該沙箱的時候遇到任何問題，請嘗試切換至舊版本的虛擬化方案並向我們反應相對應的問題，該選項可以在 [沙箱選項] 中的 [檔案選項] 內找到。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="129"/>
@@ -2713,7 +2713,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
 This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.</oldsource>
         <translation>您正準備編輯範本設定檔 Templates.ini，但通常不推薦這麼做。
-因為該檔案是 Sandboxie 的一部分並且所有的變更會在下一次更新時重設。</translation>
+因為該檔案是 Sandboxie 的一部分並且所有的變更會在下次更新時被重設。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2870"/>
@@ -4164,7 +4164,7 @@ This box will run the MSIServer (*.msi installer service) with a system token, t
         <oldsource>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatybility but reduces the security isolation.</oldsource>
         <translation>
-該沙箱允許 MSIServer (*.msi 安裝程式服務) 在沙箱內使用系統權杖執行，這將改善相容性但會影響安全性隔離。</translation>
+該沙箱允許 MSIServer (*.msi 安裝程式服務) 在沙箱內使用系統權杖執行，這將改善相容性但會影響安全性隔離效果。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="552"/>
@@ -4598,7 +4598,7 @@ Processes in this box will think they are run with administrative privileges, wi
     <message>
         <location filename="Forms/OptionsWindow.ui" line="953"/>
         <source>Make applications think they are running elevated (allows to run installers safely)</source>
-        <translation>使應用程式認為其已在權限提升狀態下運作 (允許安全地執行安裝程式)</translation>
+        <translation>使應用程式認為其已在權限提升狀態下執行 (允許安全地執行安裝程式)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1045"/>

@@ -8,7 +8,6 @@ class CSbieProcess : public CBoxedProcess
 public:
 	CSbieProcess(quint32 ProcessId, class CSandBox* pBox);
 
-	virtual QString	GetProcessName() const;
 	virtual QString	GetStatusStr() const;
 
 	virtual void	BlockProgram()								{ GetBox()->BlockProgram(m_ImageName); }

@@ -404,7 +404,13 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 			QVariant Value;
 			switch (section)
 			{
-			case eName:				Value = pProcess->GetProcessName(); break;
+			case eName: {				
+							QString Name = pProcess->GetProcessName(); 
+							if (pProcess->IsWoW64())
+								Name += " *32";
+							Value = Name;
+							break;
+						}
 			case eProcessId:		Value = pProcess->GetProcessId(); break;
 			case eStatus:			Value = pProcess->GetStatusStr(); break;
 			case eTitle:			Value = theAPI->GetProcessTitle(pProcess->GetProcessId()); break;

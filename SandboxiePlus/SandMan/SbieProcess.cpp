@@ -91,15 +91,6 @@ QString CSbieProcess::ImageTypeToStr(quint32 type)
 	}
 }
 
-
-QString	CSbieProcess::GetProcessName() const
-{
-	QString Name = CBoxedProcess::GetProcessName();
-	if (m_bIsWoW64)
-		Name += " *32";
-	return Name;
-}
-
 QString CSbieProcess::GetStatusStr() const
 {
 	QString Status;
@@ -138,11 +129,9 @@ void CSbieProcess::InitProcessInfoImpl(void* ProcessHandle)
 {
 	CBoxedProcess::InitProcessInfoImpl(ProcessHandle);
 
-	HANDLE TokenHandle = NULL;
-	if(m_pBox->GetBool("NoSecurityIsolation") || m_pBox->GetBool("OriginalToken"))
+	HANDLE TokenHandle = (HANDLE)m_pBox->Api()->QueryProcessInfo(m_ProcessId, 'ptok');
+	if (!TokenHandle)
 		NtOpenProcessToken(ProcessHandle, TOKEN_QUERY, &TokenHandle);
-	else
-		TokenHandle = (HANDLE)m_pBox->Api()->QueryProcessInfo(m_ProcessId, 'ptok');
 	if (TokenHandle)
 	{
 		ULONG returnLength;

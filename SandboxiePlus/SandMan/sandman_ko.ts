@@ -3044,32 +3044,32 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>비어 있음</translation>
     </message>
     <message>
-        <location filename="Models/SbieModel.cpp" line="538"/>
+        <location filename="Models/SbieModel.cpp" line="544"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
     <message>
-        <location filename="Models/SbieModel.cpp" line="539"/>
+        <location filename="Models/SbieModel.cpp" line="545"/>
         <source>Process ID</source>
         <translation>프로세스 ID</translation>
     </message>
     <message>
-        <location filename="Models/SbieModel.cpp" line="540"/>
+        <location filename="Models/SbieModel.cpp" line="546"/>
         <source>Status</source>
         <translation>상태</translation>
     </message>
     <message>
-        <location filename="Models/SbieModel.cpp" line="541"/>
+        <location filename="Models/SbieModel.cpp" line="547"/>
         <source>Title</source>
         <translation>제목</translation>
     </message>
     <message>
-        <location filename="Models/SbieModel.cpp" line="542"/>
+        <location filename="Models/SbieModel.cpp" line="548"/>
         <source>Info</source>
         <translation>정보</translation>
     </message>
     <message>
-        <location filename="Models/SbieModel.cpp" line="546"/>
+        <location filename="Models/SbieModel.cpp" line="552"/>
         <source>Path / Command Line</source>
         <translation>명령 줄</translation>
     </message>
@@ -3228,37 +3228,37 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>Thunderbird</translation>
     </message>
     <message>
-        <location filename="SbieProcess.cpp" line="108"/>
+        <location filename="SbieProcess.cpp" line="99"/>
         <source>Terminated</source>
         <translation>종료</translation>
     </message>
     <message>
-        <location filename="SbieProcess.cpp" line="114"/>
+        <location filename="SbieProcess.cpp" line="105"/>
         <source>Forced </source>
         <translation>강제 </translation>
     </message>
     <message>
-        <location filename="SbieProcess.cpp" line="112"/>
+        <location filename="SbieProcess.cpp" line="103"/>
         <source>Running</source>
         <translation>실행</translation>
     </message>
     <message>
-        <location filename="SbieProcess.cpp" line="118"/>
+        <location filename="SbieProcess.cpp" line="109"/>
         <source> Elevated</source>
         <translation> 권한 상승</translation>
     </message>
     <message>
-        <location filename="SbieProcess.cpp" line="120"/>
+        <location filename="SbieProcess.cpp" line="111"/>
         <source> as System</source>
         <translation> 시스템으로</translation>
     </message>
     <message>
-        <location filename="SbieProcess.cpp" line="123"/>
+        <location filename="SbieProcess.cpp" line="114"/>
         <source> in session %1</source>
         <translation> 세션 %1에서</translation>
     </message>
     <message>
-        <location filename="SbieProcess.cpp" line="129"/>
+        <location filename="SbieProcess.cpp" line="120"/>
         <source> (%1)</source>
         <translation> (%1)</translation>
     </message>

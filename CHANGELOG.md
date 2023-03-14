@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with new box wizard [#2729](https://github.com/sandboxie-plus/Sandboxie/issues/2729)
 - fixed issue with break out processes and user restricted sandboxes [#2732](https://github.com/sandboxie-plus/Sandboxie/issues/2732)
 - fixed a couple UI issues [#2733](https://github.com/sandboxie-plus/Sandboxie/issues/2733)
+- fixed useless help button [#2748](https://github.com/sandboxie-plus/Sandboxie/issues/2748)
 
 
 

@@ -55,6 +55,7 @@ int main(int argc, char *argv[])
 	//	QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
 	//}
 
+	QApplication::setAttribute(Qt::AA_DisableWindowContextHelpButton);
 
 	QtSingleApplication app(argc, argv);
 	app.setQuitOnLastWindowClosed(false);

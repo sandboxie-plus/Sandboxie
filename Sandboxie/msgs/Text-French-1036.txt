@@ -339,7 +339,7 @@ SBIE2104 Échec à la fermeture de cette session Windows - %2
 # .
 
 # 2106;pop;inf;01
-# SBIE2106 Veuillez activer « Exécuter en tant qu'administrateur UAC » dans Sandboxie Control, menu Fichier
+# SBIE2106 Veuillez activer « Exécuter en tant qu'administrateur avec le contrôle de compte d'utilisateur » dans Sandboxie Control, menu Fichier
 # .
 
 # 2107;pop;inf;01
@@ -371,11 +371,11 @@ SBIE2193 Assurez-vous d'avoir effacé le bac à sable après le processus de mis
 .
 
 2194;pop;inf;01
-SBIE2194 L'installateur de MSI a besoin que l'option %s soit placée dans l'ini, ce qui affaiblit cependant l'isolement.
+SBIE2194 L'installeur MSI a besoin que l'option %s soit placée dans le fichier ini, ce qui affaiblit cependant l'isolement.
 .
 
 2195;pop;inf;01
-SBIE2195 Afin de lancer Explorer.exe dans un bac à sable, l'accès à l'infrastructure COM ne doit pas être en « Autorisé ».
+SBIE2195 Afin de lancer Explorer.exe dans un bac à sable, l'accès à l'infrastructure COM ne doit pas être sur « Autorisé ».
 .
 
 2198;pop;inf;01
@@ -445,11 +445,11 @@ SBIE2213 Les identités Windows ne peuvent pas être stockées dans le bac à sa
 .
 
 2214;pop;wrn;01
-SBIE2214 Demande d'exécution service « %2 » refusée en raison de droits restreints
+SBIE2214 Demande d'exécution du service « %2 » refusée en raison de droits restreints
 .
 
 2217;pop;wrn;02
-SBIE2217 Demande d'exécution comme « Administrateur » refusée à cause de droits restreints
+SBIE2217 Demande d'exécution en tant qu'administrateur refusée à cause de droits restreints
 .
 
 2218;pop;wrn;01
@@ -461,7 +461,7 @@ SBIE2219 Une demande a été émise par le programme %2
 .
 
 2220;pop;wrn;01
-SBIE2220 Pour avoir les droits Administrateur, double-cliquez sur cette ligne du message
+SBIE2220 Pour avoir les droits d'administrateur, double-cliquez sur cette ligne du message
 .
 
 2221;pop;wrn;01
@@ -489,7 +489,7 @@ SBIE2226 Le processus n'a pas pu démarrer à cause d'une élévation manquante.
 .
 
 2227;pop;wrn;01
-SBIE2227 '%2' se situe sur un volume ne supportant pas la convention de nommage 8.3. Il se peut que des problèmes surgissent avec d'anciennes applications ou installateurs.
+SBIE2227 '%2' se situe sur un volume ne supportant pas la convention de nommage 8.3. Il se peut que des problèmes surgissent avec d'anciennes applications ou installeurs.
 .
 
 2338;pop;err;01
@@ -908,17 +908,18 @@ Veuillez fermer les programmes lancés dans le bac à sable avant d'en effacer l
 # .
 
 3241;txt;01
-Sandboxie demande des droits « Administrateur » pour le programme qui s'exécute dans le bac à sable.
+Sandboxie demande des droits d'administrateur pour
+le programme qui s'exécute dans le bac à sable.
 .
 
 3242;txt;01
 Pour refuser ou accepter la demande, activer la
-fenêtre User Account Control.
+fenêtre de contrôle de compte d'utilisateur.
 .
 
 3243;txt;01
 Remarque : le programme va continuer à s'exécuter dans Sandboxie,
-même après que des droits Administrateur aient été accordés.
+même après que des droits d'administrateur aient été accordés.
 .
 
 3251;txt;01
@@ -948,7 +949,7 @@ L'option est désactivée car des droits restreints sont activés dans ce bac à
 .
 
 3256;txt;01
-L'option est désactivée car ce programme s'exécute déjà avec les droits Administrateur
+L'option est désactivée car ce programme s'exécute déjà avec des droits d'administrateur
 .
 
 #----------------------------------------------------------------------------
@@ -1099,7 +1100,7 @@ Désactiver les programmes &forcés
 .
 
 3414;txt;01
-Exécuter en tant qu'administrateur &UAC
+Exécuter en tant qu'administrateur &avec le contrôle de compte d'utilisateur
 .
 
 3415;txt;01
@@ -1630,7 +1631,7 @@ Vous serez prévenu dès qu'il sera terminé.
 
 3632;txt;01
 Pour télécharger et installer la nouvelle version, utilisez un compte
-avec les droits Administrateur et recommencez.
+avec des droits d'administrateur et recommencez.
 .
 
 3633;txt;01
@@ -2650,7 +2651,7 @@ Sandboxie a désactivé seulement quelques droits en matière de sécurité des 
 .
 
 3944;txt;01
-Toutefois, si vous utilisez un compte Administrateur ou Utilisateur Avancé, Sandboxie peut désactiver plus de droits de sécurité, semblable à l'effet de l'utilitaire DropMyRights.
+Toutefois, si vous utilisez un compte d'administrateur ou d'utilisateur avancé, Sandboxie peut désactiver plus de droits de sécurité, semblable à l'effet de l'utilitaire DropMyRights.
 .
 
 3945;txt;01
@@ -2666,9 +2667,9 @@ Restreindre les droits des groupes Administrateur et Utilisateur Avancé
 # .
 
 3949;txt;01
-Le paramètre droits restreints est activé dans le bac à sable « %2 » et empêche l'utilisation des droits Administrateur.
+Le paramètre droits restreints est activé dans le bac à sable « %2 » et empêche l'utilisation des droits d'administrateur.
 
-Cliquez sur OK pour désactiver les droits restreints dans le bac à sable « %2 » et autoriser l'utilisation des droits Administrateur dans le bac à sable.
+Cliquez sur OK pour désactiver les droits restreints dans le bac à sable « %2 » et autoriser l'utilisation des droits d'administrateur dans le bac à sable.
 
 Vous pouvez toujours modifier les droits restreints en passant par la fenêtre de configuration du bac à sable et en parcourant le groupe des paramètres des restrictions.
 .
@@ -3088,7 +3089,7 @@ Ouvrir des ports RPC additionnels
 .
 
 4306;txt;01
-Ouvrir les ports RPC pour l'UAC
+Ouvrir les ports RPC pour le contrôle de compte d'utilisateur
 .
 
 4307;txt;01
@@ -3495,7 +3496,7 @@ Voulez-vous télécharger Sandboxie-Plus ?
 
 6002;txt;01
 Visitez <a ID="whats_new">sandboxie-plus.com</a> pour découvrir les nouvelles fonctionnalités de Sandboxie-Plus
-ou cliquez directement <a ID="upgrade">ici</a> pour télécharger le dernier installateur de Sandboxie-Plus.
+ou cliquez directement <a ID="upgrade">ici</a> pour télécharger le dernier installeur de Sandboxie-Plus.
 .
 
 6003;txt;01
@@ -3512,7 +3513,7 @@ La configuration du bac sélectionné n'est pas autorisée.
 .
 
 6005;txt;01
-Note : sans privilèges Administrateur, les installateurs ne pourront pas démarrer dans le bac à sable. Sandboxie-Plus offre une option pour que de nombreux installateurs réussissent sans ces privilèges. Vous pouvez également activer cette option manuellement dans la version classique, en ajoutant "FakeAdminRights=y" à la section ini du bac à sable.
+Note : sans privilèges d'administrateur, les installeurs ne pourront pas démarrer dans le bac à sable. Sandboxie-Plus offre une option pour que de nombreux installeurs réussissent sans ces privilèges. Vous pouvez également activer cette option manuellement dans la version classique, en ajoutant "FakeAdminRights=y" à la section ini du bac à sable.
 .
 
 6006;txt;01
@@ -3952,11 +3953,11 @@ Sandboxie ne peut être installé que sur les versions suivantes de Microsoft Wi
 
 8042;ins;01
 Sandboxie doit être installé à partir d'un compte
-ayant les droits d'Administrateur.
+ayant les droits d'administrateur.
 
-Si vous utilisez Windows Vista avec User Accounts Control (UAC)
-activé, assurez-vous de démarrer l'installation en utilisant la 
-commande Exécuter en tant qu'Administrateur.
+Si vous utilisez Windows Vista avec le contrôle de compte
+d'utilisateur activé, assurez-vous de démarrer l'installation
+en utilisant la commande « Exécuter en tant qu'administrateur ».
 .
 
 8043;ins;01

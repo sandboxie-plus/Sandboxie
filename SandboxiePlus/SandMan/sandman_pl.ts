@@ -6,60 +6,60 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="413"/>
         <source>Advanced Sandbox options</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaawansowane opcje piaskownicy</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="414"/>
         <source>On this page advanced sandbox options can be configured.</source>
-        <translation type="unfinished"></translation>
+        <translation>Na tej stronie można skonfigurować zaawansowane opcje piaskownicy.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="419"/>
         <source>Network Access</source>
-        <translation type="unfinished"></translation>
+        <translation>Dostęp do sieci</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="427"/>
         <source>Allow network/internet access</source>
-        <translation type="unfinished"></translation>
+        <translation>Zezwól na dostęp do sieci/internetu</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="428"/>
         <source>Block network/internet by denying access to Network devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Zablokuj sieć/internet, odmawiając dostępu urządzeniom sieciowym</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="430"/>
         <source>Block network/internet using Windows Filtering Platform</source>
-        <translation type="unfinished"></translation>
+        <translation>Zablokuj sieć/internet przy użyciu platformy filtrującej Windows</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="435"/>
         <source>Allow access to network files and folders</source>
         <oldsource>Allow access to network files and fodlers</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Zezwól na dostęp do plików i folderów sieciowych</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="436"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="452"/>
         <source>This option is not recommended for Hardened boxes</source>
         <oldsource>This option is not recomended for Hardened boxes</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ta opcja nie jest zalecana dla wzmocnionych boksów</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="442"/>
         <source>Admin Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcje administratora</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="446"/>
         <source>Make applications think they are running elevated</source>
-        <translation type="unfinished"></translation>
+        <translation>Spraw, by aplikacje reagowały jakby były uruchomione z podwyższonym poziomem uprawnień</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="451"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
-        <translation type="unfinished"></translation>
+        <translation>Zezwól na uruchamianie MSIServer z tokenem systemowym w trybie piaskownicy</translation>
     </message>
 </context>
 <context>
@@ -67,73 +67,73 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="156"/>
         <source>Create new Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Utwórz nową piaskownicę</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="163"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation type="unfinished">Piaskownica izoluje system hosta od procesów uruchomionych wewnątrz boksu, uniemożliwia im dokonywanie trwałych zmian w innych programach i danych w komputerze. Poziom izolacji ma wpływ na bezpieczeństwo użytkownika oraz kompatybilność z aplikacjami, dlatego też w zależności od wybranego Typu Boksu, poziom izolacji będzie różny. Sandboxie może również chronić dane osobowe użytkownika przed dostępem do nich przez procesy działające pod jego nadzorem.</translation>
+        <translation>Piaskownica izoluje system hosta od procesów uruchomionych wewnątrz boksu, uniemożliwia im dokonywanie trwałych zmian w innych programach i danych w komputerze. Poziom izolacji ma wpływ na bezpieczeństwo użytkownika oraz kompatybilność z aplikacjami, dlatego też w zależności od wybranego Typu Boksu, poziom izolacji będzie różny. Sandboxie może również chronić dane osobowe użytkownika przed dostępem do nich przez procesy działające pod jego nadzorem.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="172"/>
         <source>Enter box name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Podaj nazwę boksu:</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="178"/>
         <source>New Box</source>
-        <translation type="unfinished">Nowy boks</translation>
+        <translation>Nowy boks</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="190"/>
         <source>Select box type:</source>
         <oldsource>Sellect box type:</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz typ skrzynki:</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="193"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation type="unfinished">Wzmocniona piaskownica z ochroną danych</translation>
+        <translation>Wzmocniona piaskownica z ochroną danych</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="194"/>
         <source>Security Hardened Sandbox</source>
-        <translation type="unfinished">Wzmocniona ochrona piaskownicy</translation>
+        <translation>Wzmocniona ochrona piaskownicy</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="195"/>
         <source>Sandbox with Data Protection</source>
-        <translation type="unfinished">Piaskownica z ochroną danych</translation>
+        <translation>Piaskownica z ochroną danych</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="196"/>
         <source>Standard Isolation Sandbox (Default)</source>
-        <translation type="unfinished">Piaskownica izolowana standardowo (domyślnie)</translation>
+        <translation>Piaskownica izolowana standardowo (domyślnie)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="198"/>
         <source>Application Compartment with Data Protection</source>
-        <translation type="unfinished">Komora aplikacji z ochroną danych</translation>
+        <translation>Komora aplikacji z ochroną danych</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="199"/>
         <source>Application Compartment (NO Isolation)</source>
-        <translation type="unfinished">Komora aplikacji (bez izolacji)</translation>
+        <translation>Komora aplikacji (bez izolacji)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="215"/>
         <source>Remove after use</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuń po użyciu</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="216"/>
         <source>After the last process in the box terminates, all data in the box will be deleted and the box itself will be removed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Po zakończeniu ostatniego procesu w boksie, wszystkie dane w nim zawarte zostaną usunięte, a sam boks zostanie usunięta.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="221"/>
         <source>Configure advanced options</source>
-        <translation type="unfinished"></translation>
+        <translation>Skonfiguruj opcje zaawansowane</translation>
     </message>
 </context>
 <context>
@@ -221,7 +221,7 @@
     <message>
         <location filename="Views/FileView.cpp" line="171"/>
         <source>Run Recovery Checks</source>
-        <translation type="unfinished"></translation>
+        <translation>Uruchom testy odzyskiwania</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="234"/>
@@ -240,7 +240,7 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="287"/>
         <source>Sandbox location and behavior</source>
         <oldsource>Sandbox location and behavioure</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Lokalizacja i zachowanie piaskownicy</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="288"/>
@@ -248,70 +248,71 @@
 You can use %USER% to save each users sandbox to an own folder.</source>
         <oldsource>On this page the sandbox location and its behaviorue can be customized.
 You can use %USER% to save each users sandbox to an own fodler.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Na tej stronie można dostosować lokalizację piaskownicy i jej zachowanie.
+Możesz użyć %USER%, aby zapisać piaskownicę każdego użytkownika w jego własnym folderze.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="293"/>
         <source>Sandboxed Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Pliki w piaskownicy</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="316"/>
         <source>Select Directory</source>
-        <translation type="unfinished">Wybierz katalog</translation>
+        <translation>Wybierz katalog</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="324"/>
         <source>Virtualization scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Schemat wirtualizacji</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="328"/>
         <source>Version 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Wersja 1</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="329"/>
         <source>Version 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Wersja 2</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="335"/>
         <source>Separate user folders</source>
-        <translation type="unfinished">Oddziel foldery użytkowników</translation>
+        <translation>Oddziel foldery użytkownika</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="340"/>
         <source>Use volume serial numbers for drives</source>
-        <translation type="unfinished"></translation>
+        <translation>Użyj numerów seryjnych woluminów dla napędów</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="345"/>
         <source>Auto delete content when last process terminates</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatycznie usuwaj zawartość po zakończeniu ostatniego procesu</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="352"/>
         <source>Enable Immediate Recovery of files from recovery locations</source>
-        <translation type="unfinished"></translation>
+        <translation>Włącz natychmiastowe odzyskiwanie plików z lokalizacji odzyskiwania</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="387"/>
         <source>The selected box location is not a valid path.</source>
         <oldsource>The sellected box location is not a valid path.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Wybrana lokalizacja skrzynki nie jest prawidłową ścieżką.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="392"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
         <oldsource>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Wybrana lokalizacja skrzynki istnieje i nie jest pusta, zaleca się wybrać nowy lub pusty folder. Czy na pewno chcesz użyć istniejącego folderu?</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="397"/>
         <source>The selected box location not placed on a currently available drive.</source>
         <oldsource>The sellected box location not placed on a currently available drive.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Wybrana lokalizacja skrzynki nie została umieszczona na aktualnie dostępnym dysku.</translation>
     </message>
 </context>
 <context>
@@ -453,18 +454,18 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="30"/>
         <source>New Box Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Kreator nowej skrzynki</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="126"/>
         <source>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you experience any unexpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure group.</source>
         <oldsource>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you expirience any unecpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure groupe.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Nowa piaskownica została utworzona przy użyciu nowego &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Schemat Wirtualizacji Wersja 2&lt;/a&gt;, jeśli wystąpią jakieś nieoczekiwane problemy z tym boksem, proszę przełączyć się na Schemat Wirtualizacji Wersja 1 i zgłosić problem. Opcja zmiany tego ustawienia wstępnego znajduje się w Opcjach boksu w grupie Struktura boksu.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="129"/>
         <source>Don&apos;t show this message again.</source>
-        <translation type="unfinished">Nie pokazuj ponownie tej wiadomości.</translation>
+        <translation>Nie pokazuj ponownie tej wiadomości.</translation>
     </message>
 </context>
 <context>
@@ -792,7 +793,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation>Odmowa</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1003"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1000"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
@@ -874,12 +875,12 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="159"/>
         <source>Version 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Wersja 1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="160"/>
         <source>Version 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Wersja 2</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="196"/>
@@ -909,25 +910,25 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="290"/>
         <source>Indeterminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieokreślony</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="472"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="572"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="461"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="561"/>
         <source>Always copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Zawsze kopiuj</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="473"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="573"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="462"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="562"/>
         <source>Don&apos;t copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie kopiuj</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="474"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="574"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="463"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="563"/>
         <source>Copy empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiuj puste</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="420"/>
@@ -944,7 +945,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="262"/>
         <source>File Options</source>
-        <translation type="unfinished">Opcje plików</translation>
+        <translation>Opcje plików</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="294"/>
@@ -987,12 +988,12 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation>Niektóre ustawienia nie zostały jeszcze zapisane, czy naprawdę chcesz zamknąć ustawienia?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="700"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="689"/>
         <source>kilobytes (%1)</source>
         <translation>kilobajty (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="806"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="795"/>
         <source>Select color</source>
         <translation>Wybierz kolor</translation>
     </message>
@@ -1001,7 +1002,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Proszę podać ścieżkę programu</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="881"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="870"/>
         <source>Select Program</source>
         <translation>Wybierz program</translation>
     </message>
@@ -1023,18 +1024,18 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Program</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="881"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="870"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Programy (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="885"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="900"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="874"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="889"/>
         <source>Please enter a menu title</source>
         <translation>Proszę wpisać tytuł menu</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="896"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="885"/>
         <source>Please enter a command</source>
         <translation>Proszę wpisać polecenie</translation>
     </message>
@@ -1043,8 +1044,8 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <location filename="Windows/OptionsWindow.cpp" line="980"/>
         <location filename="Windows/OptionsAccess.cpp" line="404"/>
         <location filename="Windows/OptionsAccess.cpp" line="636"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="505"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="600"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="494"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="589"/>
         <location filename="Windows/OptionsNetwork.cpp" line="170"/>
         <location filename="Windows/OptionsNetwork.cpp" line="441"/>
         <location filename="Windows/OptionsNetwork.cpp" line="533"/>
@@ -1245,8 +1246,8 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <location filename="Windows/OptionsAccess.cpp" line="632"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="535"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="610"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="500"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="596"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="489"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="585"/>
         <location filename="Windows/OptionsNetwork.cpp" line="436"/>
         <location filename="Windows/OptionsNetwork.cpp" line="529"/>
         <location filename="Windows/OptionsNetwork.cpp" line="642"/>
@@ -1281,7 +1282,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="611"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="586"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="567"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="556"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
         <location filename="Windows/OptionsNetwork.cpp" line="508"/>
@@ -2078,7 +2079,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="448"/>
         <source>Contribute to Sandboxie-Plus</source>
-        <translation type="unfinished"></translation>
+        <translation>Wesprzyj Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="465"/>
@@ -2141,23 +2142,23 @@ Full path: %4</source>
         <location filename="SandMan.cpp" line="579"/>
         <location filename="SandMan.cpp" line="708"/>
         <source>Edit Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Edytuj Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="582"/>
         <source>Edit Templates.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Edytuj Templates.ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="584"/>
         <source>Edit Sandboxie-Plus.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Edytuj Sandboxie-Plus.ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="588"/>
         <location filename="SandMan.cpp" line="711"/>
         <source>Reload configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Przeładuj konfigurację</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="600"/>
@@ -2356,7 +2357,7 @@ Ten boks uniemożliwia dostęp do wszystkich lokalizacji danych użytkownika, z 
         <location filename="SandMan.cpp" line="3270"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</source>
         <oldsource>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</oldsource>
-        <translation type="unfinished">&lt;h3&gt;O Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Wersja %1&lt;/p&gt;&lt;p&gt;Prawo autorskie (c) 2020-2022 DavidXanatos&lt;/p&gt;</translation>
+        <translation>&lt;h3&gt;O Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Wersja %1&lt;/p&gt;&lt;p&gt;Prawo autorskie (c) 2020-2022 DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3278"/>
@@ -2527,7 +2528,7 @@ Do you want to do the clean up?</source>
     <message>
         <location filename="SandMan.cpp" line="1713"/>
         <source>Updated Shortcut to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaktualizowano skrót do: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1715"/>
@@ -2537,7 +2538,7 @@ Do you want to do the clean up?</source>
     <message>
         <location filename="SandMan.cpp" line="1766"/>
         <source>Auto removing sandbox %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatyczne usuwanie piaskownicy %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1781"/>
@@ -2715,29 +2716,33 @@ Nie, wybierze: %2</translation>
         <location filename="SandManRecovery.cpp" line="99"/>
         <location filename="SandManRecovery.cpp" line="156"/>
         <source>Checking file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprawdzanie pliku %1</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="107"/>
-        <source>The file %1 failed a security check!<byte value="xd"/>
-<byte value="xd"/>
+        <source>The file %1 failed a security check!
+
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Plik %1 nie przeszedł kontroli bezpieczeństwa!
+
+%2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="115"/>
         <source>All files passed the checks</source>
-        <translation type="unfinished"></translation>
+        <translation>Wszystkie pliki przeszły kontrolę</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="175"/>
-        <source>The file %1 failed a security check, do you want to recover it anyway?<byte value="xd"/>
-<byte value="xd"/>
+        <source>The file %1 failed a security check, do you want to recover it anyway?
+
 %2</source>
-        <oldsource>The file %1 failed a security check, do you want to recover it anyways?<byte value="xd"/>
-<byte value="xd"/>
+        <oldsource>The file %1 failed a security check, do you want to recover it anyways?
+
 %2</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Plik %1 nie przeszedł kontroli bezpieczeństwa, czy mimo to chcesz go odzyskać?
+
+%2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="238"/>
@@ -2848,7 +2853,8 @@ Nie, wybierze: %2</translation>
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
 This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Zamierzasz edytować Templates.ini, co generalnie nie jest zalecane.
+Ten plik jest częścią Sandboxie i wszystkie zmiany w nim dokonane zostaną cofnięte przy następnej aktualizacji Sandboxie.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2824"/>
@@ -3168,7 +3174,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation>Sandboxie-Plus - Narzędzie do szukania</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="123"/>
+        <location filename="main.cpp" line="120"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>Sandboxie Manager nie może być uruchomiony w trybie piaskownicy!</translation>
     </message>
@@ -3186,27 +3192,27 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation>Puste</translation>
     </message>
     <message>
-        <location filename="Models/SbieModel.cpp" line="544"/>
+        <location filename="Models/SbieModel.cpp" line="538"/>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
     <message>
-        <location filename="Models/SbieModel.cpp" line="545"/>
+        <location filename="Models/SbieModel.cpp" line="539"/>
         <source>Process ID</source>
         <translation>Identyfikator procesu</translation>
     </message>
     <message>
-        <location filename="Models/SbieModel.cpp" line="546"/>
+        <location filename="Models/SbieModel.cpp" line="540"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
     <message>
-        <location filename="Models/SbieModel.cpp" line="547"/>
+        <location filename="Models/SbieModel.cpp" line="541"/>
         <source>Title</source>
         <translation>Tytuł okna</translation>
     </message>
     <message>
-        <location filename="Models/SbieModel.cpp" line="548"/>
+        <location filename="Models/SbieModel.cpp" line="542"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
@@ -3215,7 +3221,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Czas startu</translation>
     </message>
     <message>
-        <location filename="Models/SbieModel.cpp" line="552"/>
+        <location filename="Models/SbieModel.cpp" line="546"/>
         <source>Path / Command Line</source>
         <translation>Ścieżka / wiersz poleceń</translation>
     </message>
@@ -3374,38 +3380,38 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation>Thunderbird</translation>
     </message>
     <message>
-        <location filename="SbieProcess.cpp" line="99"/>
+        <location filename="SbieProcess.cpp" line="108"/>
         <source>Terminated</source>
         <translation>Zakończony</translation>
     </message>
     <message>
-        <location filename="SbieProcess.cpp" line="105"/>
+        <location filename="SbieProcess.cpp" line="114"/>
         <source>Forced </source>
         <translation>Wymuszone </translation>
     </message>
     <message>
-        <location filename="SbieProcess.cpp" line="103"/>
+        <location filename="SbieProcess.cpp" line="112"/>
         <source>Running</source>
         <translation>Aktywny</translation>
     </message>
     <message>
-        <location filename="SbieProcess.cpp" line="109"/>
+        <location filename="SbieProcess.cpp" line="118"/>
         <source> Elevated</source>
-        <translation type="unfinished"></translation>
+        <translation> Podniesiony</translation>
     </message>
     <message>
-        <location filename="SbieProcess.cpp" line="111"/>
+        <location filename="SbieProcess.cpp" line="120"/>
         <source> as System</source>
-        <translation type="unfinished"></translation>
+        <translation> jak System</translation>
     </message>
     <message>
-        <location filename="SbieProcess.cpp" line="114"/>
+        <location filename="SbieProcess.cpp" line="123"/>
         <source> in session %1</source>
         <translatorcomment>nieznany kontekst</translatorcomment>
         <translation> w sesji %1</translation>
     </message>
     <message>
-        <location filename="SbieProcess.cpp" line="120"/>
+        <location filename="SbieProcess.cpp" line="129"/>
         <source> (%1)</source>
         <translation> (%1)</translation>
     </message>
@@ -3963,7 +3969,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <location filename="Views/SbieView.cpp" line="1459"/>
         <source>Do you want to terminate %1?</source>
         <oldsource>Do you want to %1 %2?</oldsource>
-        <translation type="unfinished">Czy chcesz %1 %2?</translation>
+        <translation>Czy chcesz zakończyć %1?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1459"/>
@@ -4180,17 +4186,17 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="753"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Funkcje Plus zostaną wyłączone za %1 dni.&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="755"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For this build Plus features remain enabled.&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;W tej wersji funkcje Plus pozostają włączone.&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="757"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;Funkcje Plus nie są już włączone.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="763"/>
@@ -4396,28 +4402,29 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="494"/>
         <source>Create the new Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Utwórz nową piaskownicę</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="502"/>
         <source>Almost complete, click Finish to create a new sandbox and conclude the wizard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prawie ukończone, kliknij Zakończ, aby utworzyć nową piaskownicę i zakończyć działanie kreatora.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="511"/>
         <source>Save options as new defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz opcje jako nowe ustawienia domyślne</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="522"/>
         <source>Don&apos;t show the summary page in future (unless advanced options were set)</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie pokazuj strony podsumowania w przyszłości (chyba że ustawiono opcje zaawansowane)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="541"/>
         <source>
 This Sandbox will be saved to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Ta piaskownica zostanie zapisana w: %1</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="544"/>
@@ -4425,19 +4432,22 @@ This Sandbox will be saved to: %1</source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
         <oldsource>
 This box&apos;s content will be DISCARDED when its closed, and the box will be removed.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>
+Zawartość tego boksu zostanie USUNIĘTA, a po jego zamknięciu, boks zostanie usunięty.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="546"/>
         <source>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Ten boks po zamknięciu wyrzuci swoją zawartość, nadaje się tylko dla danych tymczasowych.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="548"/>
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Procesy w tym boksie nie będą miały dostępu do Internetu ani sieci lokalnej, co zapewnia poufność wszystkich udostępnianych danych.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="550"/>
@@ -4445,18 +4455,20 @@ Processes in this box will not be able to access the internet or the local netwo
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
         <oldsource>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatybility but reduces the security isolation.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>
+Ten boks uruchomi MSIServer (usługę instalatora *.msi) z tokenem systemowym, poprawia to kompatybilność, ale zmniejsza izolację bezpieczeństwa.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="552"/>
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Procesy w tym boksie reagowały tak jakby były uruchamiane z uprawnieniami administracyjnymi, choć w rzeczywistości ich nie mają, stąd instalatory mogą być używane nawet w zabezpieczonych boksach.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="580"/>
         <source>Failed to create new box: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie udało się utworzyć nowego boksu: %1</translation>
     </message>
 </context>
 <context>
@@ -4596,7 +4608,7 @@ Processes in this box will think they are run with administrative privileges, wi
     <message>
         <location filename="Views/TraceView.cpp" line="205"/>
         <source>Show NT Object Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż drzewo obiektów NT</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="212"/>
@@ -4606,12 +4618,12 @@ Processes in this box will think they are run with administrative privileges, wi
     <message>
         <location filename="Views/TraceView.cpp" line="214"/>
         <location filename="Views/TraceView.cpp" line="221"/>
+        <location filename="Views/TraceView.cpp" line="229"/>
         <location filename="Views/TraceView.cpp" line="230"/>
-        <location filename="Views/TraceView.cpp" line="231"/>
-        <location filename="Views/TraceView.cpp" line="240"/>
-        <location filename="Views/TraceView.cpp" line="481"/>
-        <location filename="Views/TraceView.cpp" line="484"/>
-        <location filename="Views/TraceView.cpp" line="581"/>
+        <location filename="Views/TraceView.cpp" line="239"/>
+        <location filename="Views/TraceView.cpp" line="480"/>
+        <location filename="Views/TraceView.cpp" line="483"/>
+        <location filename="Views/TraceView.cpp" line="580"/>
         <source>[All]</source>
         <translation>[Wszystko]</translation>
     </message>
@@ -4621,67 +4633,67 @@ Processes in this box will think they are run with administrative privileges, wi
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="227"/>
+        <location filename="Views/TraceView.cpp" line="226"/>
         <source>Type:</source>
         <translation>Typ:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="238"/>
+        <location filename="Views/TraceView.cpp" line="237"/>
         <source>Status:</source>
         <translation>Status:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="241"/>
+        <location filename="Views/TraceView.cpp" line="240"/>
         <source>Open</source>
         <translation>Otwórz</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="242"/>
+        <location filename="Views/TraceView.cpp" line="241"/>
         <source>Closed</source>
         <translation>Zamknięte</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="243"/>
+        <location filename="Views/TraceView.cpp" line="242"/>
         <source>Trace</source>
         <translation>Śledzenie</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="244"/>
+        <location filename="Views/TraceView.cpp" line="243"/>
         <source>Other</source>
         <translation>Inne</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="252"/>
+        <location filename="Views/TraceView.cpp" line="251"/>
         <source>Show All Boxes</source>
         <translation>Pokaż wszystkie boksy</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="259"/>
+        <location filename="Views/TraceView.cpp" line="258"/>
         <source>Save to file</source>
         <translation>Zapisz do pliku</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="273"/>
+        <location filename="Views/TraceView.cpp" line="272"/>
         <source>Cleanup Trace Log</source>
         <translation>Wyczyść dziennik śledzenia</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="624"/>
+        <location filename="Views/TraceView.cpp" line="622"/>
         <source>Save trace log to file</source>
         <translation>Zapisz dziennik śledzenia do pliku</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="630"/>
+        <location filename="Views/TraceView.cpp" line="628"/>
         <source>Failed to open log file for writing</source>
         <translation>Błąd przy otwarciu pliku dziennika do zapisu</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="650"/>
+        <location filename="Views/TraceView.cpp" line="648"/>
         <source>Unknown</source>
         <translation>Nieznane</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="554"/>
+        <location filename="Views/TraceView.cpp" line="553"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
@@ -4691,7 +4703,7 @@ Processes in this box will think they are run with administrative privileges, wi
         <translation>Tryb monitora</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="561"/>
+        <location filename="Views/TraceView.cpp" line="560"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
@@ -4699,7 +4711,7 @@ Processes in this box will think they are run with administrative privileges, wi
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="683"/>
+        <location filename="Views/TraceView.cpp" line="681"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation>Sandboxie-Plus - Monitor śledzenia</translation>
     </message>
@@ -4719,7 +4731,7 @@ Processes in this box will think they are run with administrative privileges, wi
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="305"/>
         <source>&amp;Advanced UI for experts</source>
-        <translation>Za%awansowany interfejs użytkownika dla ekspertów</translation>
+        <translation>Za&amp;awansowany interfejs użytkownika dla ekspertów</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="310"/>
@@ -4729,7 +4741,7 @@ Processes in this box will think they are run with administrative privileges, wi
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="315"/>
         <source>&amp;Vintage SbieCtrl.exe UI</source>
-        <translation>Klasyczny interfejs SbieCtrl.exe</translation>
+        <translation>Klasyczn&amp;y interfejs SbieCtrl.exe</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="340"/>
@@ -5943,69 +5955,71 @@ Aby określić proces, użyj jako ścieżki &apos;$:program.exe&apos;.</translat
     <message>
         <location filename="Forms/OptionsWindow.ui" line="321"/>
         <source>Use volume serial numbers for drives, like: \drive\C~1234-ABCD</source>
-        <translation type="unfinished"></translation>
+        <translation>Użyj numerów seryjnych woluminów dla dysków, tak jak: \drive\C~1234-ABCD</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="355"/>
         <source>The box structure can only be changed when the sandbox is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Struktura skrzynki może być zmieniona tylko wtedy, gdy piaskownica jest pusta</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="362"/>
         <source>Allow sandboxed processes to open files protected by EFS</source>
-        <translation type="unfinished"></translation>
+        <translation>Zezwalaj procesom w piaskownicy na otwieranie plików chronionych przez EFS</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="376"/>
         <source>Disk/File access</source>
-        <translation type="unfinished"></translation>
+        <translation>Dostęp do dysków/plików</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="383"/>
         <source>Virtualization scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Schemat wirtualizacji</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="488"/>
         <source>2113: Content of migrated file was discarded
 2114: File was not migrated, write access to file was denied
 2115: File was not migrated, file will be opened read only</source>
-        <translation type="unfinished"></translation>
+        <translation>2113: Zawartość migrowanego pliku została odrzucona
+2114: Plik nie został zmigrowany, odmówiono zapisu do pliku
+2115: Plik nie został zmigrowany, plik zostanie otwarty tylko do odczytu</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="493"/>
         <source>Issue message 2113/2114/2115 when a file is not fully migrated</source>
-        <translation type="unfinished"></translation>
+        <translation>Komunikat 2113/2114/2115, gdy plik nie jest w pełni zmigrowany</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="517"/>
         <source>Add Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj wzór</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="524"/>
         <source>Remove Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuń wzór</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="578"/>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Wzór</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="586"/>
         <source>Sandboxie does not allow writing to host files, unless permitted by the user. When a sandboxed application attempts to modify a file, the entire file must be copied into the sandbox, for large files this can take a significate amount of time. Sandboxie offers options for handling these cases, which can be configured on this page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie nie zezwala na zapisywanie do plików hosta, chyba że użytkownik wyrazi na to zgodę. Gdy aplikacja w trybie piaskownicy próbuje zmodyfikować plik, cały plik musi zostać skopiowany do piaskownicy. W przypadku dużych plików może to zająć znaczną ilość czasu. Sandboxie oferuje opcje obsługi tych przypadków, które można skonfigurować na tej stronie.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="596"/>
         <source>Using wildcard patterns file specific behavior can be configured in the list below:</source>
-        <translation type="unfinished"></translation>
+        <translation>Używając wzorców wieloznacznych można skonfigurować zachowanie specyficzne dla plików z poniższej listy:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="610"/>
         <source>When a file cannot be migrated, open it in read-only mode instead</source>
-        <translation type="unfinished"></translation>
+        <translation>Gdy plik nie może być zmigrowany, otwórz go w trybie tylko do odczytu</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2948"/>
@@ -6490,7 +6504,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="97"/>
         <source>Run in a new Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Uruchom w nowej piaskownicy</translation>
     </message>
     <message>
         <location filename="Forms/SelectBoxWindow.ui" line="65"/>
@@ -6664,7 +6678,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="733"/>
         <source>Support &amp;&amp; Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Wsparcie i aktualizacje</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="980"/>

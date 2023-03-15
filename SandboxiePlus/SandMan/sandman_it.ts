@@ -3014,7 +3014,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>Sandboxie Plus - Controllo finestre</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="120"/>
+        <location filename="main.cpp" line="123"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>Sandboxie Manager non può essere avviato nell&apos;area virtuale!</translation>
     </message>

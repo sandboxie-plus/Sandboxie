@@ -1839,7 +1839,7 @@ Full sökväg: %4</translation>
 <context>
     <name>CSandMan</name>
     <message>
-        <location filename="main.cpp" line="120"/>
+        <location filename="main.cpp" line="123"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>Sandboxies hanterare kan inte köras sandlådad!</translation>
     </message>

@@ -2942,7 +2942,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>Sandboxie-Plus - 視窗尋找工具</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="120"/>
+        <location filename="main.cpp" line="123"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>Sandboxie 管理器不能在沙箱中執行！</translation>
     </message>

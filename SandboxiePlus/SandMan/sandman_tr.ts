@@ -2594,7 +2594,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>Yapılandırma parolası 64 karakterden uzun olmamalıdır</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="120"/>
+        <location filename="main.cpp" line="123"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>Sandboxie Yöneticisi korumalı alanda çalıştırılamaz!</translation>
     </message>

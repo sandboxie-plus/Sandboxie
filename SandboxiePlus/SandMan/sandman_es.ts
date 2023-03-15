@@ -3224,7 +3224,7 @@ NO seleccionará: %2</translation>
         <translation>Sandboxie-Plus - Buscador de Ventanas</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="120"/>
+        <location filename="main.cpp" line="123"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>El Administrador de la Sandbox no puede ser ejecutado en una sandbox!</translation>
     </message>

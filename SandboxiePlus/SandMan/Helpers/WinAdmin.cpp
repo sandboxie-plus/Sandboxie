@@ -110,6 +110,8 @@ bool IsAdminUser(bool OnlyFull)
 
 #define AUTO_RUN_KEY_NAME APP_NAME L"_AutoRun"
 
+constexpr size_t MAX_PATH_EX = 32767; // Long file path max length, in character's
+
 bool IsAutorunEnabled()
 {
 	bool result = false;
@@ -117,8 +119,8 @@ bool IsAutorunEnabled()
 	HKEY hkey = nullptr;
 	if (RegOpenKeyEx (HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_ALL_ACCESS, &hkey) == ERROR_SUCCESS)
 	{
-		WCHAR buffer[MAX_PATH] = {0};
-		DWORD size = _countof (buffer);
+		WCHAR buffer[MAX_PATH_EX] {0};
+		DWORD size = sizeof (buffer);
 
 		if (RegQueryValueEx (hkey, AUTO_RUN_KEY_NAME, nullptr, nullptr, (LPBYTE)buffer, &size) == ERROR_SUCCESS)
 		{
@@ -140,7 +142,7 @@ bool AutorunEnable (bool is_enable)
 	{
 		if (is_enable)
 		{
-			wchar_t szPath[MAX_PATH];
+			wchar_t szPath[MAX_PATH_EX] {0};
 			if (GetModuleFileName(NULL, szPath, ARRAYSIZE(szPath)))
 			{
 				std::wstring path = L"\"" + std::wstring(szPath) + L"\" -autorun";

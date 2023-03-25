@@ -108,10 +108,16 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         if(field("autoRecover").toBool())
             pBox->SetBool("AutoRecover", true);
 
-        if (field("blockNetwork").toInt() == 1) // old style
+        if (field("blockNetwork").toInt() == 1) { // device based
+            //pBox->InsertText("AllowNetworkAccess", "<BlockNetAccess>,n");
             pBox->InsertText("ClosedFilePath", "!<InternetAccess>,InternetAccessDevices");
-        else if (field("blockNetwork").toInt() == 2) // WFP
+            //pBox->InsertText("ClosedFilePath", "<BlockNetDevices>,InternetAccessDevices");
+        }
+        else if (field("blockNetwork").toInt() == 2) { // using WFP
             pBox->InsertText("AllowNetworkAccess", "!<InternetAccess>,n");
+            //pBox->InsertText("AllowNetworkAccess", "<BlockNetAccess>,n");
+            //pBox->InsertText("ClosedFilePath", "<BlockNetDevices>,InternetAccessDevices");
+        }
         pBox->SetBool("BlockNetworkFiles", !field("shareAccess").toBool());
 
         if(field("fakeAdmin").toBool())

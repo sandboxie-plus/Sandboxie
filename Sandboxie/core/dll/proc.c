@@ -448,7 +448,8 @@ _FX BOOLEAN Proc_Init(void)
     // \Sessions\*\AppContainerNamedObjects\* is not open
     //
 
-    if (!Dll_CompartmentMode)
+    //if (!Dll_CompartmentMode)
+    if(Config_GetSettingsForImageName_bool(L"FakeAppContainerToken", TRUE))
     if (Dll_OsBuild >= 9600) // Windows 8.1 and later
     {
         void* CreateAppContainerToken = NULL;
@@ -674,6 +675,55 @@ _FX BOOL Proc_CreateAppContainerToken(
     PHANDLE OutToken)
 {
 #if 1
+    BOOL ret = FALSE;
+
+    //
+    // App containers pose problems even in app compartment mode, 
+    // eg. msedge.exe fails to load SbieDll.dll during initialization
+    // hence we return a restricted token instead.
+    //
+
+    /*SID_IDENTIFIER_AUTHORITY NtAuthority = {SECURITY_NT_AUTHORITY};
+    SID_AND_ATTRIBUTES Sids[3];
+
+    typedef BOOL (WINAPI *P_AllocateAndInitializeSid)(
+        _In_ PSID_IDENTIFIER_AUTHORITY pIdentifierAuthority,
+        _In_ BYTE nSubAuthorityCount,
+        _In_ DWORD nSubAuthority0,
+        _In_ DWORD nSubAuthority1,
+        _In_ DWORD nSubAuthority2,
+        _In_ DWORD nSubAuthority3,
+        _In_ DWORD nSubAuthority4,
+        _In_ DWORD nSubAuthority5,
+        _In_ DWORD nSubAuthority6,
+        _In_ DWORD nSubAuthority7,
+        _Outptr_ PSID* pSid
+        );
+    HMODULE advapi_dll = LoadLibrary(L"advapi32.dll");
+    P_AllocateAndInitializeSid __sys_AllocateAndInitializeSid = (P_AllocateAndInitializeSid)GetProcAddress(advapi_dll, "AllocateAndInitializeSid");
+    __sys_AllocateAndInitializeSid(&NtAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0, &dropSids[0].Sid)
+    */
+
+    HANDLE hTokenReal;
+    if (NT_SUCCESS(NtOpenProcessToken(NtCurrentProcess(), MAXIMUM_ALLOWED, &hTokenReal))) {
+
+        if (!__sys_CreateRestrictedToken) {
+            *OutToken = hTokenReal;
+            return TRUE;
+        }
+
+        ULONG returnLength = 0;
+        BYTE Buffer[0x400]; // we need less than 0x200 in pracis
+        if (NT_SUCCESS(NtQueryInformationToken(hTokenReal, TokenGroups, Buffer, sizeof(Buffer), &returnLength))) {
+            PTOKEN_GROUPS Groups = (PTOKEN_GROUPS)Buffer;
+           
+            ret = __sys_CreateRestrictedToken(hTokenReal, DISABLE_MAX_PRIVILEGE, Groups->GroupCount, Groups->Groups, 0, NULL, 0, NULL, OutToken);
+        }
+        NtClose(hTokenReal);
+    }
+
+    return ret;
+#elif 0
     OBJECT_ATTRIBUTES objattrs;
     SECURITY_QUALITY_OF_SERVICE QoS;
 
@@ -1258,6 +1308,21 @@ _FX BOOL Proc_CreateProcessInternalW(
     }
 #endif
 
+    //
+    // don't let the caller specify a app container token
+    //
+
+    if (Config_GetSettingsForImageName_bool(L"DropAppContainerToken", Dll_CompartmentMode ? FALSE : TRUE)) {
+        ULONG returnLength = 0;
+        BYTE appContainerBuffer[0x80];
+        if (NT_SUCCESS(NtQueryInformationToken(hToken, (TOKEN_INFORMATION_CLASS)TokenAppContainerSid, appContainerBuffer, sizeof(appContainerBuffer), &returnLength))) {
+            PTOKEN_APPCONTAINER_INFORMATION appContainerInfo = (PTOKEN_APPCONTAINER_INFORMATION)appContainerBuffer;
+            if (appContainerInfo->TokenAppContainer != NULL) {
+                hToken = NULL;
+                SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, L"Dropped AppContainer Token");
+            }
+        }
+    }
 
     //
     // in compartment mode we don't mess around just create the process
@@ -1345,22 +1410,6 @@ _FX BOOL Proc_CreateProcessInternalW(
                 SaveOwnerThread = sd->Owner;
                 if (SaveOwnerThread)
                     sd->Owner = NULL;
-            }
-        }
-    }
-
-    //
-    // don't let the caller specify a app container token
-    //
-
-    if (Config_GetSettingsForImageName_bool(L"DropAppContainerTokens", TRUE)) {
-        ULONG returnLength = 0;
-        BYTE appContainerBuffer[0x80];
-        if (NT_SUCCESS(NtQueryInformationToken(hToken, (TOKEN_INFORMATION_CLASS)TokenAppContainerSid, appContainerBuffer, sizeof(appContainerBuffer), &returnLength))) {
-            PTOKEN_APPCONTAINER_INFORMATION appContainerInfo = (PTOKEN_APPCONTAINER_INFORMATION)appContainerBuffer;
-            if (appContainerInfo->TokenAppContainer != NULL) {
-                hToken = NULL;
-                SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, L"Dropped AppContainer Token");
             }
         }
     }

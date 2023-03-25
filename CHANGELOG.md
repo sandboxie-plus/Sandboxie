@@ -14,9 +14,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - renamed 'DropAppContainerTokens=program.exe,n' to 'DropAppContainerToken=program.exe,n'
+- 'DropAppContainerToken=program.exe,y' can now be used in App Compartment boxes is howeever not recomended security whise
 
 ### Fixed
 - issue with global ini section editing
+- fixed issue with *UseRegDeleteV2=y' [#2756](https://github.com/sandboxie-plus/Sandboxie/issues/2756)
 
 
 

@@ -371,8 +371,11 @@ _FX NTSTATUS Key_OpenForMerge(
             *out_CopyHandle, KeyBasicInformation,
             &info, sizeof(KEY_BASIC_INFORMATION), &len);
 
-        if (NT_SUCCESS(status) || status == STATUS_BUFFER_OVERFLOW) {
-            // if (!Key_Delete_v2 &&
+        if(status == STATUS_BUFFER_OVERFLOW)
+            status = STATUS_SUCCESS;
+
+        if (!Key_Delete_v2)
+        if (NT_SUCCESS(status)) {
             if (IS_DELETE_MARK(&info.LastWriteTime))
                 status = STATUS_KEY_DELETED;
             else

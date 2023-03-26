@@ -117,8 +117,8 @@ bool IsAutorunEnabled()
 	HKEY hkey = nullptr;
 	if (ERROR_SUCCESS == RegOpenKeyEx (HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_ALL_ACCESS, &hkey))
 	{
-		// First, determine the required buffer size, including NUL terminator (in bytes). RegGetValue() alway's adds
-		// an extra NULL terminator to size, even if one already exists, in case the stored value doesn't have one.
+		// First, determine the required buffer size, including NUL terminator (in bytes). RegGetValue() always adds
+		// an extra NUL terminator to size, even if one already exists, in case the stored value doesn't have one.
 		DWORD size {0};
 		if (ERROR_SUCCESS == RegGetValue(hkey, nullptr, AUTO_RUN_KEY_NAME, RRF_RT_REG_SZ, nullptr, nullptr, &size))
 		{

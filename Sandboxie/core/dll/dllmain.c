@@ -291,16 +291,7 @@ _FX void Dll_InitInjected(void)
     // break for the debugger, as soon as we have Dll_ImageName
     //
 
-    if (SbieDll_CheckStringInList(Dll_ImageName, NULL, L"WaitForDebugger")) {
-    //if (SbieDll_GetSettingsForName_bool(NULL, Dll_ImageName, L"WaitForDebugger", FALSE)) {
-    //if (SbieApi_QueryConfBool(NULL, L"WaitForDebuggerAll", FALSE)) {
-        while (!IsDebuggerPresent()) {
-            OutputDebugString(L"Waiting for Debugger\n");
-            Sleep(500);
-        } 
-        if(!SbieApi_QueryConfBool(NULL, L"WaitForDebuggerSilent", TRUE))
-            __debugbreak();
-    }
+    Debug_Wait();
 
     Trace_Init();
 

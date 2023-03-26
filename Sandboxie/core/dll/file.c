@@ -341,8 +341,6 @@ static BOOLEAN File_DriveAddSN = FALSE;
 BOOLEAN File_Delete_v2 = FALSE;
 static BOOLEAN File_NoReparse = FALSE;
 
-static BOOLEAN File_Windows2000 = FALSE;
-
 static WCHAR *File_AltBoxPath = NULL;
 static ULONG File_AltBoxPathLen = 0;
 

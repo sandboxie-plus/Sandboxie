@@ -527,16 +527,6 @@ _FX NTSTATUS File_Merge(
 			merge->files[0].no_file_ids = TRUE;
         }
 
-        if (File_Windows2000) {
-            //
-            // Windows 2000 SP 4 seems to include support for info class
-            // FileIdBothDirectoryInformation, although according to
-            // documentation it is only supported on Windows XP and later
-            //
-			for(ULONG i = 0; i < 2 + File_Snapshot_Count; i++)
-				merge->files[i].no_file_ids = TRUE;
-        }
-
         List_Insert_After(&File_DirHandles, NULL, merge);
         Handle_RegisterCloseHandler(merge->handle, File_NtCloseDir);
     }

@@ -408,6 +408,7 @@ _FX BOOLEAN File_InitDrives(ULONG DriveMask)
     ULONG file_drive_len;
     ULONG drive;
     ULONG path_len;
+    ULONG drive_count;
     WCHAR *path;
     WCHAR error_str[16];
     BOOLEAN CallInitLinks;
@@ -456,6 +457,8 @@ _FX BOOLEAN File_InitDrives(ULONG DriveMask)
 
     InitializeObjectAttributes(
         &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+    drive_count = 0;
 
     for (drive = 0; drive < 26; ++drive) {
 
@@ -517,7 +520,7 @@ _FX BOOLEAN File_InitDrives(ULONG DriveMask)
         status = NtOpenSymbolicLinkObject(
             &handle, SYMBOLIC_LINK_QUERY, &objattrs);
 
-        if (status == STATUS_ACCESS_DENIED) {
+        if (!NT_SUCCESS(status)) {
 
             //
             // if the object is a valid symbolic link but we don't have
@@ -528,11 +531,12 @@ _FX BOOLEAN File_InitDrives(ULONG DriveMask)
             WCHAR *path2 = Dll_AllocTemp(1024 * sizeof(WCHAR));
             wcscpy(path2, path);
 
-            status = SbieApi_QuerySymbolicLink(path2, 1024 * sizeof(WCHAR));
-            if (NT_SUCCESS(status)) {
+            NTSTATUS status2 = SbieApi_QuerySymbolicLink(path2, 1024 * sizeof(WCHAR));
+            if (NT_SUCCESS(status2)) {
 
                 Dll_Free(path);
                 path = path2;
+                status = status2;
 
                 objname.Length = (USHORT)(wcslen(path) * sizeof(WCHAR));
                 objname.MaximumLength = objname.Length + sizeof(WCHAR);
@@ -544,7 +548,6 @@ _FX BOOLEAN File_InitDrives(ULONG DriveMask)
             } else {
 
                 Dll_Free(path2);
-                status = STATUS_ACCESS_DENIED;
             }
         }
 
@@ -648,6 +651,7 @@ _FX BOOLEAN File_InitDrives(ULONG DriveMask)
                 }
 
                 File_Drives[drive] = file_drive;
+                drive_count++;
 
                 SbieApi_MonitorPut(MONITOR_DRIVE, path);
             }
@@ -667,6 +671,11 @@ _FX BOOLEAN File_InitDrives(ULONG DriveMask)
             Sbie_snwprintf(error_str, 16, L"%c [%08X]", L'A' + drive, status);
             SbieApi_Log(2307, error_str);
         }
+    }
+
+    if (drive_count == 0) {
+        Sbie_snwprintf(error_str, 16, L"No Drives Found");
+        SbieApi_Log(2307, error_str);
     }
 
     //
@@ -708,16 +717,6 @@ _FX void File_InitLinks(THREAD_DATA *TlsData)
     MOUNTMGR_VOLUME_PATHS *Output2;
     ULONG index1;
     WCHAR save_char;
-
-    //
-    // IOCTL_MOUNTMGR_QUERY_DOS_VOLUME_PATHS is only available on Windows XP
-    // (and later) where GetVolumePathNamesForVolumeName is also available
-    //
-
-    if (! GetProcAddress(Dll_Kernel32, "GetVolumePathNamesForVolumeNameW")) {
-        File_Windows2000 = TRUE;
-        return;
-    }
 
     //
     // open mount point manager device

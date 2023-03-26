@@ -40,6 +40,8 @@
 //#define  BREAK_IMAGE_1      L"java.exe" // L"jp2launcher.exe"
 #define  BREAK_IMAGE_1      L"TestTarget.exe" 
 
+void Debug_Wait();
+
 int Debug_Init(void);
 
 #endif  WITH_DEBUG

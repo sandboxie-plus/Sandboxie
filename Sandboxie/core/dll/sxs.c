@@ -1654,8 +1654,7 @@ _FX BOOLEAN Sxs_InitKernel32(void)
         // if the sandbox setting DisableBoxedWinSxS=y
         //
 
-        if (Dll_ImageType == DLL_IMAGE_SANDBOXIE_RPCSS ||
-
+        if (Dll_ImageType == DLL_IMAGE_SANDBOXIE_RPCSS || Dll_AppContainerToken ||
                 Config_GetSettingsForImageName_bool(L"DisableBoxedWinSxS", FALSE)) {
 
             Sxs_UseAltCreateActCtx = TRUE;

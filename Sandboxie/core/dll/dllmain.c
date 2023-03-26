@@ -99,6 +99,7 @@ BOOLEAN Dll_IsXtAjit = FALSE;
 BOOLEAN Dll_IsSystemSid = FALSE;
 BOOLEAN Dll_InitComplete = FALSE;
 BOOLEAN Dll_RestrictedToken = FALSE;
+BOOLEAN Dll_AppContainerToken = FALSE;
 BOOLEAN Dll_ChromeSandbox = FALSE;
 BOOLEAN Dll_FirstProcessInBox = FALSE;
 BOOLEAN Dll_CompartmentMode = FALSE;
@@ -748,6 +749,8 @@ _FX void Dll_SelectImageType(void)
             Dll_ChromeSandbox = TRUE;
         }
     }
+
+    Dll_AppContainerToken = Secure_IsAppContainerToken(NULL);
 
     Dll_SkipHook(NULL);
 }

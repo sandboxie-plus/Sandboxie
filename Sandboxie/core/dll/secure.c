@@ -1424,7 +1424,7 @@ _FX NTSTATUS Secure_RtlQueryElevationFlags(ULONG *Flags)
 
 
 //---------------------------------------------------------------------------
-// Secure_IsRestrictedToken
+// Secure_RtlCheckTokenMembershipEx
 //---------------------------------------------------------------------------
 
 NTSTATUS Secure_RtlCheckTokenMembershipEx(
@@ -1516,6 +1516,39 @@ _FX BOOLEAN Secure_IsRestrictedToken(BOOLEAN CheckThreadToken)
     }
 
     return return_value;
+}
+
+
+//---------------------------------------------------------------------------
+// Secure_IsRestrictedToken
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN Secure_IsAppContainerToken(HANDLE hToken)
+{
+    BOOLEAN ret = FALSE;
+    BOOL bClose = FALSE;
+
+    if (Dll_OsBuild >= 9600) { // Windows 8.1 and later
+
+        if (hToken == NULL) {
+            if (!NT_SUCCESS(NtOpenProcessToken(NtCurrentProcess(), TOKEN_QUERY, &hToken)))
+                return ret;
+            bClose = TRUE;
+        }
+
+        ULONG returnLength = 0;
+        BYTE appContainerBuffer[0x80];
+        if (NT_SUCCESS(NtQueryInformationToken(hToken, (TOKEN_INFORMATION_CLASS)TokenAppContainerSid, appContainerBuffer, sizeof(appContainerBuffer), &returnLength))) {
+            PTOKEN_APPCONTAINER_INFORMATION appContainerInfo = (PTOKEN_APPCONTAINER_INFORMATION)appContainerBuffer;
+            ret = appContainerInfo->TokenAppContainer != NULL;
+        }
+
+        if (bClose)
+            NtClose(hToken);
+    }
+
+    return ret;
 }
 
 

@@ -82,10 +82,8 @@ _FX BOOLEAN SbieDll_IsWow64(void)
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN SbieDll_ConnectPort(BOOLEAN Silent)
+_FX NTSTATUS SbieDll_ConnectPort()
 {
-    static BOOLEAN ErrorReported = FALSE;
-
     THREAD_DATA *data = Dll_GetTlsData(NULL);
     if (! data->PortHandle) {
 
@@ -104,14 +102,8 @@ _FX BOOLEAN SbieDll_ConnectPort(BOOLEAN Silent)
             &data->PortHandle, &PortName, &QoS,
             NULL, NULL, &data->MaxDataLen, NULL, NULL);
 
-        if (! NT_SUCCESS(status)) {
-            if (! ErrorReported) {
-                if (! Silent)
-                    SbieApi_Log(2203, L"connect %08X", status);
-                ErrorReported = TRUE;
-            }
-            return FALSE;
-        }
+        if (! NT_SUCCESS(status)) 
+            return status;
 
         NtRegisterThreadTerminatePort(data->PortHandle);
 
@@ -141,7 +133,7 @@ _FX BOOLEAN SbieDll_ConnectPort(BOOLEAN Silent)
         data->MaxDataLen -= data->SizeofPortMsg;
     }
 
-    return TRUE;
+    return STATUS_SUCCESS;
 }
 
 
@@ -194,8 +186,12 @@ _FX MSG_HEADER *SbieDll_CallServer(MSG_HEADER *req)
         BOOLEAN Silent = (req->msgid == MSGID_SBIE_INI_GET_VERSION ||
                           req->msgid == MSGID_SBIE_INI_GET_USER ||
                           req->msgid == MSGID_PROCESS_CHECK_INIT_COMPLETE);
-        if (! SbieDll_ConnectPort(Silent))
+        status = SbieDll_ConnectPort();
+        if (!NT_SUCCESS(status)) {
+            if (!Dll_AppContainerToken && !Silent) // todo: fix me make service available for appcontainer processes
+                SbieApi_Log(2203, L"connect %08X (msg_id 0x%04X)", status, req->msgid);
             return NULL;
+        }
     }
 
     //

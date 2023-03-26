@@ -4,60 +4,60 @@
 <context>
     <name>CAdvancedPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="413"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="419"/>
         <source>Advanced Sandbox options</source>
         <translation>고급 샌드박스 옵션</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="414"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="420"/>
         <source>On this page advanced sandbox options can be configured.</source>
         <translation>이 페이지에서 고급 샌드박스 옵션을 구성할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="419"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="425"/>
         <source>Network Access</source>
         <translation>네트워크 액세스</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="427"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="433"/>
         <source>Allow network/internet access</source>
         <translation>네트워크/인터넷 액세스 허용</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="428"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="434"/>
         <source>Block network/internet by denying access to Network devices</source>
         <translation>네트워크 장치에 대한 액세스를 거부하여 네트워크/인터넷 차단</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="430"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="436"/>
         <source>Block network/internet using Windows Filtering Platform</source>
         <translation>Windows 필터링 플랫폼을 사용하여 네트워크/인터넷 차단</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="435"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="441"/>
         <source>Allow access to network files and folders</source>
         <oldsource>Allow access to network files and fodlers</oldsource>
         <translation>네트워크 파일 및 폴더에 대한 액세스 허용</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="436"/>
-        <location filename="Wizards/NewBoxWizard.cpp" line="452"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="442"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="458"/>
         <source>This option is not recommended for Hardened boxes</source>
         <oldsource>This option is not recomended for Hardened boxes</oldsource>
         <translation>강화 상자에는 이 옵션을 사용하지 않는 것이 좋습니다</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="442"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="448"/>
         <source>Admin Options</source>
         <translation>관리자 옵션</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="446"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="452"/>
         <source>Make applications think they are running elevated</source>
         <translation>응용 프로그램이 권한 상승으로 실행되고 있다고 생각하게 합니다</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="451"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="457"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
         <translation>MSI 서버가 샌드박스 시스템 토큰으로 실행되도록 허용</translation>
     </message>
@@ -65,73 +65,73 @@
 <context>
     <name>CBoxTypePage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="156"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="162"/>
         <source>Create new Sandbox</source>
         <translation>새 샌드박스 만들기</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="163"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="169"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
         <translation>샌드박스는 사용자의 호스트 시스템을 박스 내에서 실행 중인 프로세스에서 분리하여 사용자의 컴퓨터에 있는 다른 프로그램 및 데이터를 영구적으로 변경하지 못하도록 합니다. 격리 수준은 응용프로그램과의 호환성뿐만 아니라 보안에도 영향을 미치므로 선택한 박스 유형에 따라 격리 수준이 달라집니다. Sandboxie는 또한 Sandboxie의 감독 하에 실행되는 프로세스에 의해 개인 데이터가 액세스되는 것을 방지할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="172"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="178"/>
         <source>Enter box name:</source>
         <translation>박스 이름 입력:</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="178"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="184"/>
         <source>New Box</source>
         <translation>새 박스</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="190"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="196"/>
         <source>Select box type:</source>
         <oldsource>Sellect box type:</oldsource>
         <translation>박스 유형 선택:</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="193"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="199"/>
         <source>Hardened Sandbox with Data Protection</source>
         <translation>데이터 보호 기능을 갖춘 강화된 샌드박스</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="194"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="200"/>
         <source>Security Hardened Sandbox</source>
         <translation>보안 강화된 샌드박스</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="195"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="201"/>
         <source>Sandbox with Data Protection</source>
         <translation>데이터 보호 기능이 있는 샌드박스</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="196"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="202"/>
         <source>Standard Isolation Sandbox (Default)</source>
         <translation>표준 분리 샌드박스 (기본값)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="198"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="204"/>
         <source>Application Compartment with Data Protection</source>
         <translation>데이터 보호 기능이 있는 응용 프로그램 구획</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="199"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="205"/>
         <source>Application Compartment (NO Isolation)</source>
         <translation>응용 프로그램 구획 (격리 없음)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="215"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="221"/>
         <source>Remove after use</source>
         <translation>사용 후 제거</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="216"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="222"/>
         <source>After the last process in the box terminates, all data in the box will be deleted and the box itself will be removed.</source>
         <translation>박스의 마지막 프로세스가 종료되면 박스의 모든 데이터가 삭제되고 박스 자체가 제거됩니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="221"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="227"/>
         <source>Configure advanced options</source>
         <translation>고급 옵션 구성</translation>
     </message>
@@ -216,13 +216,13 @@
 <context>
     <name>CFilesPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="287"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="293"/>
         <source>Sandbox location and behavior</source>
         <oldsource>Sandbox location and behavioure</oldsource>
         <translation>샌드박스 위치 및 동작</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="288"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="294"/>
         <source>On this page the sandbox location and its behavior can be customized.
 You can use %USER% to save each users sandbox to an own folder.</source>
         <oldsource>On this page the sandbox location and its behaviorue can be customized.
@@ -231,64 +231,64 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 %USER%를 사용하여 각 사용자 샌드박스를 자신의 폴더에 저장할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="293"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="299"/>
         <source>Sandboxed Files</source>
         <translation>샌드박스 파일</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="316"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="322"/>
         <source>Select Directory</source>
         <translation>디렉터리 선택</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="324"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="330"/>
         <source>Virtualization scheme</source>
         <translation>가상화 구성표</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="328"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="334"/>
         <source>Version 1</source>
         <translation>버전 1</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="329"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="335"/>
         <source>Version 2</source>
         <translation>버전 2</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="335"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="341"/>
         <source>Separate user folders</source>
         <translation>개별 사용자 폴더</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="340"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="346"/>
         <source>Use volume serial numbers for drives</source>
         <translation>드라이브에 볼륨 일련 번호 사용</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="345"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="351"/>
         <source>Auto delete content when last process terminates</source>
         <translation>마지막 프로세스가 종료될 때 내용 자동 삭제</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="352"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="358"/>
         <source>Enable Immediate Recovery of files from recovery locations</source>
         <translation>복구 위치에서 파일 즉시 복구 사용</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="387"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="393"/>
         <source>The selected box location is not a valid path.</source>
         <oldsource>The sellected box location is not a valid path.</oldsource>
         <translation>선택한 박스 위치가 올바른 경로가 아닙니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="392"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="398"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
         <oldsource>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</oldsource>
         <translation>선택한 박스 위치가 존재하며 비어 있지 않습니다. 새 폴더나 빈 폴더를 선택하는 것이 좋습니다. 기존 폴더를 사용하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="397"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="403"/>
         <source>The selected box location not placed on a currently available drive.</source>
         <oldsource>The sellected box location not placed on a currently available drive.</oldsource>
         <translation>선택한 박스 위치가 현재 사용 가능한 드라이브에 없습니다.</translation>
@@ -432,13 +432,13 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation>새 박스 마법사</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="126"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="132"/>
         <source>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you experience any unexpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure group.</source>
         <oldsource>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you expirience any unecpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure groupe.</oldsource>
         <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;새 가상화 구성표 버전 2&lt;/a&gt;를 사용하여 새 샌드박스가 생성되었습니다. 이 박스에서 예기치 않은 문제가 발생하면 가상화 구성표를 버전 1로 전환하고 문제를 보고하십시오. 이 사전 설정을 변경하는 옵션은 박스 구조 그룹의 박스 옵션에서 찾을 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="129"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="135"/>
         <source>Don&apos;t show this message again.</source>
         <translation>이 메시지를 다시 표시하지 않습니다.</translation>
     </message>
@@ -4223,34 +4223,34 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 <context>
     <name>CSummaryPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="494"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="500"/>
         <source>Create the new Sandbox</source>
         <translation>새 샌드박스 만들기</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="502"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="508"/>
         <source>Almost complete, click Finish to create a new sandbox and conclude the wizard.</source>
         <translation>거의 완료되었습니다. 마침을 클릭하여 새 샌드박스를 만들고 마법사를 종료합니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="511"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="517"/>
         <source>Save options as new defaults</source>
         <translation>옵션을 새 기본값으로 저장</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="522"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="528"/>
         <source>Don&apos;t show the summary page in future (unless advanced options were set)</source>
         <translation>나중에 요약 페이지 표시 안 함 (고급 옵션이 설정되지 않은 경우)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="541"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="547"/>
         <source>
 This Sandbox will be saved to: %1</source>
         <translation>
 이 샌드박스는 다음 위치에 저장됩니다: %1</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="544"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="550"/>
         <source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
         <oldsource>
@@ -4259,21 +4259,21 @@ This box&apos;s content will be DISCARDED when its closed, and the box will be r
 이 박스의 내용물은 닫히면 폐기되고 박스는 제거됩니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="546"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="552"/>
         <source>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
         <translation>
 이 박스는 닫히면 내용을 삭제하고 임시 데이터에만 적합합니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="548"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="554"/>
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
         <translation>
 이 박스의 프로세스는 인터넷 또는 로컬 네트워크에 액세스할 수 없으므로 액세스된 모든 데이터가 기밀로 유지됩니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="550"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="556"/>
         <source>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
         <oldsource>
@@ -4282,14 +4282,14 @@ This box will run the MSIServer (*.msi installer service) with a system token, t
 이 박스는 시스템 토큰으로 MSI 서버 (*.msi 설치 관리자 서비스)를 실행합니다. 이렇게 하면 호환성은 향상되지만 보안 분리는 줄어듭니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="552"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="558"/>
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
         <translation>
 이 박스의 프로세스는 관리자 권한 없이 실행되므로 보안 강화 박스에서도 설치 프로그램을 사용할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="580"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="586"/>
         <source>Failed to create new box: %1</source>
         <translation>새 상자를 만들지 못했습니다: %1</translation>
     </message>

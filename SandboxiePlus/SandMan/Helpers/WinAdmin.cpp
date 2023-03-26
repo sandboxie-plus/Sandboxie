@@ -115,14 +115,20 @@ bool IsAutorunEnabled()
 	bool result = false;
 
 	HKEY hkey = nullptr;
-	if (RegOpenKeyEx (HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_ALL_ACCESS, &hkey) == ERROR_SUCCESS)
+	if (ERROR_SUCCESS == RegOpenKeyEx (HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_ALL_ACCESS, &hkey))
 	{
-		WCHAR buffer[MAX_PATH] = {0};
-		DWORD size = _countof (buffer);
-
-		if (RegQueryValueEx (hkey, AUTO_RUN_KEY_NAME, nullptr, nullptr, (LPBYTE)buffer, &size) == ERROR_SUCCESS)
+		// First, determine the required buffer size, including NUL terminator (in bytes). RegGetValue() always adds
+		// an extra NUL terminator to size, even if one already exists, in case the stored value doesn't have one.
+		DWORD size {0};
+		if (ERROR_SUCCESS == RegGetValue(hkey, nullptr, AUTO_RUN_KEY_NAME, RRF_RT_REG_SZ, nullptr, nullptr, &size))
 		{
-			result = true; // todo: check path
+			// Then, allocate the buffer (in WCHARs) and retrieve the auto-run value. If successful, the size
+			// variable will be set to the actual size, without the extra NUL terminator.
+			auto buffer = std::make_unique< WCHAR[] >(size / sizeof(WCHAR));
+			if (ERROR_SUCCESS == RegGetValue(hkey, nullptr, AUTO_RUN_KEY_NAME, RRF_RT_REG_SZ, nullptr, reinterpret_cast<LPBYTE>(buffer.get()), &size))
+			{
+				result = true; // todo: check path
+			}
 		}
 
 		RegCloseKey (hkey);
@@ -136,21 +142,22 @@ bool AutorunEnable (bool is_enable)
 	bool result = false;
 
 	HKEY hkey = nullptr;
-	if (RegOpenKeyEx (HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_ALL_ACCESS, &hkey) == ERROR_SUCCESS)
+	if (ERROR_SUCCESS == RegOpenKeyEx (HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_ALL_ACCESS, &hkey))
 	{
 		if (is_enable)
 		{
-			wchar_t szPath[MAX_PATH];
-			if (GetModuleFileName(NULL, szPath, ARRAYSIZE(szPath)))
+			constexpr size_t MAX_PATH_EX = 32767; // Long file path max length, in characters
+			auto szPath = std::make_unique< WCHAR[] >(MAX_PATH_EX);
+			if (GetModuleFileName(NULL, szPath.get(), MAX_PATH_EX))
 			{
-				std::wstring path = L"\"" + std::wstring(szPath) + L"\" -autorun";
+				const std::wstring path = L"\"" + std::wstring(szPath.get()) + L"\" -autorun";
 
-				result = (RegSetValueEx(hkey, AUTO_RUN_KEY_NAME, 0, REG_SZ, (LPBYTE)path.c_str(), DWORD((path.length() + 1) * sizeof(WCHAR))) == ERROR_SUCCESS);
+				result = (ERROR_SUCCESS == RegSetValueEx(hkey, AUTO_RUN_KEY_NAME, 0, REG_SZ, reinterpret_cast<const BYTE*>(path.c_str()), static_cast<DWORD>((path.length() + 1) * sizeof(WCHAR))));
 			}
 		}
 		else
 		{
-			result = (RegDeleteValue (hkey, AUTO_RUN_KEY_NAME) == ERROR_SUCCESS);
+			result = (ERROR_SUCCESS == RegDeleteValue (hkey, AUTO_RUN_KEY_NAME));
 		}
 
 		RegCloseKey (hkey);

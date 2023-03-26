@@ -110,19 +110,18 @@ bool IsAdminUser(bool OnlyFull)
 
 #define AUTO_RUN_KEY_NAME APP_NAME L"_AutoRun"
 
-constexpr size_t MAX_PATH_EX = 32767; // Long file path max length, in character's
+constexpr size_t MAX_PATH_EX = 32767; // Long file path max length, in characters
 
 bool IsAutorunEnabled()
 {
 	bool result = false;
 
 	HKEY hkey = nullptr;
-	if (RegOpenKeyEx (HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_ALL_ACCESS, &hkey) == ERROR_SUCCESS)
+	if (ERROR_SUCCESS == RegOpenKeyEx (HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_ALL_ACCESS, &hkey))
 	{
-		WCHAR buffer[MAX_PATH_EX] {0};
-		DWORD size = sizeof (buffer);
-
-		if (RegQueryValueEx (hkey, AUTO_RUN_KEY_NAME, nullptr, nullptr, (LPBYTE)buffer, &size) == ERROR_SUCCESS)
+		auto buffer = std::make_unique< WCHAR[] >(MAX_PATH_EX);
+		DWORD size = MAX_PATH_EX * 2;;
+		if (ERROR_SUCCESS == RegQueryValueEx (hkey, AUTO_RUN_KEY_NAME, nullptr, nullptr, reinterpret_cast<LPBYTE>(buffer.get()), &size))
 		{
 			result = true; // todo: check path
 		}
@@ -138,21 +137,20 @@ bool AutorunEnable (bool is_enable)
 	bool result = false;
 
 	HKEY hkey = nullptr;
-	if (RegOpenKeyEx (HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_ALL_ACCESS, &hkey) == ERROR_SUCCESS)
+	if (ERROR_SUCCESS == RegOpenKeyEx (HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_ALL_ACCESS, &hkey))
 	{
 		if (is_enable)
 		{
-			wchar_t szPath[MAX_PATH_EX] {0};
-			if (GetModuleFileName(NULL, szPath, ARRAYSIZE(szPath)))
+			auto szPath = std::make_unique< WCHAR[] >(MAX_PATH_EX);
+			if (GetModuleFileName(NULL, szPath.get(), MAX_PATH_EX))
 			{
-				std::wstring path = L"\"" + std::wstring(szPath) + L"\" -autorun";
-
-				result = (RegSetValueEx(hkey, AUTO_RUN_KEY_NAME, 0, REG_SZ, (LPBYTE)path.c_str(), DWORD((path.length() + 1) * sizeof(WCHAR))) == ERROR_SUCCESS);
+				const std::wstring path = L"\"" + std::wstring(szPath.get()) + L"\" -autorun";
+				result = (ERROR_SUCCESS == RegSetValueEx(hkey, AUTO_RUN_KEY_NAME, 0, REG_SZ, reinterpret_cast<const BYTE*>(path.c_str()), static_cast<DWORD>((path.length() + 1) * sizeof(WCHAR))));
 			}
 		}
 		else
 		{
-			result = (RegDeleteValue (hkey, AUTO_RUN_KEY_NAME) == ERROR_SUCCESS);
+			result = (ERROR_SUCCESS == RegDeleteValue (hkey, AUTO_RUN_KEY_NAME));
 		}
 
 		RegCloseKey (hkey);

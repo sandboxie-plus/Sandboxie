@@ -625,6 +625,8 @@ void Secure_InitSecurityDescriptors(void);
 
 BOOLEAN Secure_IsRestrictedToken(BOOLEAN CheckThreadToken);
 
+BOOLEAN Secure_IsAppContainerToken(HANDLE hToken);
+
 BOOLEAN Secure_IsLocalSystemToken(BOOLEAN CheckThreadToken);
 
 BOOL Proc_ImpersonateSelf(BOOLEAN Enable);

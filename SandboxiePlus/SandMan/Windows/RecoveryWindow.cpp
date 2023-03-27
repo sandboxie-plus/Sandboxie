@@ -242,7 +242,10 @@ void CRecoveryWindow::OnDelete()
 {
 	QMap<QString, SRecItem> FileMap = GetFiles();
 
-	if (QMessageBox("Sandboxie-Plus", tr("Do you really want to delete %1 selected files?").arg(FileMap.count()), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
+	if (FileMap.isEmpty())
+		return;
+
+	if (QMessageBox::Yes != QMessageBox("Sandboxie-Plus", tr("Do you really want to delete %1 selected files?").arg(FileMap.count()), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec())
 		return;
 
 	foreach(const QString & FilePath, FileMap.keys())

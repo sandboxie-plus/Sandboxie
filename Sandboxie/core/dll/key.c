@@ -1628,7 +1628,7 @@ _FX NTSTATUS Key_NtCreateKeyImpl(
         BOOLEAN KeyDeleted = FALSE;
 
         if (Key_Delete_v2)
-            KeyDeleted = Key_IsDeleted_v2(TruePath) ? TRUE : FALSE;
+            KeyDeleted = CopyPathCreated; // Key_IsDeleted_v2(TruePath) ? TRUE : FALSE;
         else if (Key_CheckDeletedKey(*KeyHandle)) {
 
             KeyDeleted = TRUE;

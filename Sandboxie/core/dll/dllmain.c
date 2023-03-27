@@ -316,6 +316,14 @@ _FX void Dll_InitInjected(void)
 
     Dll_CompartmentMode = (Dll_ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0;
 
+    //
+    // check for restricted token types
+    //
+
+    Dll_RestrictedToken = Secure_IsRestrictedToken(FALSE);
+
+    Dll_AppContainerToken = Secure_IsAppContainerToken(NULL);
+
     Dll_SelectImageType();
 
     //
@@ -738,19 +746,16 @@ _FX void Dll_SelectImageType(void)
     // programs running as embedded previewers within Outlook
     //
 
-    Dll_RestrictedToken = Secure_IsRestrictedToken(FALSE);
-
-    if (Dll_RestrictedToken) {
+    if (Dll_RestrictedToken || Dll_AppContainerToken) {
 
         if (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME ||
+            Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX ||
             Dll_ImageType == DLL_IMAGE_ACROBAT_READER ||
             Dll_ImageType == DLL_IMAGE_FLASH_PLAYER_SANDBOX) {
 
             Dll_ChromeSandbox = TRUE;
         }
     }
-
-    Dll_AppContainerToken = Secure_IsAppContainerToken(NULL);
 
     Dll_SkipHook(NULL);
 }

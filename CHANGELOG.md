@@ -9,20 +9,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.8.2 / 5.63.2] - 2023-03-27
 
 ### Added
-- reworked CreateAppContainerToken hook to return a restricted token instead to fix [#2762](https://github.com/sandboxie-plus/Sandboxie/issues/2762)
+- reworked CreateAppContainerToken hook to return a restricted token for the issue [#2762](https://github.com/sandboxie-plus/Sandboxie/issues/2762)
 -- Note: this behaviour can be disabled with 'FakeAppContainerToken=program.exe,n'
-- enabled app container compatybility in app compartment mode
--- Note: this should improve msedge compatibility
+- enabled app container compatibility in App Compartment mode
+-- Note: this should improve Microsoft Edge compatibility
 
 ### Changed
 - renamed 'DropAppContainerTokens=program.exe,n' to 'DropAppContainerToken=program.exe,n'
-- 'DropAppContainerToken=program.exe,y' can now be used in App Compartment boxes is howeever not recomended security wise
+- 'DropAppContainerToken=program.exe,y' can now be used in App Compartment boxes, however it is not recommended security-wise
 
 ### Fixed
-- issue with global ini section editing
-- fixed issue with *UseRegDeleteV2=y' [#2756](https://github.com/sandboxie-plus/Sandboxie/issues/2756)
-- Auto-run path now supports any length
-- Recovery Window: Delete confirmation dialog no longer shown when no file/folder selected
+- issue with global settings ini section editing
+- fixed issue with 'UseRegDeleteV2=y' [#2756](https://github.com/sandboxie-plus/Sandboxie/issues/2756)
+- Autorun path now supports any length [#2769](https://github.com/sandboxie-plus/Sandboxie/pull/2769)
+- Recovery Window: Delete confirmation dialog no longer shown when no file/folder selected [#2771](https://github.com/sandboxie-plus/Sandboxie/pull/2771)
+- WeChat crash issue [#2772](https://github.com/sandboxie-plus/Sandboxie/pull/2772)
 
 
 
@@ -32,12 +33,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added certificate protection [#2722](https://github.com/sandboxie-plus/Sandboxie/issues/2722)
 
 ### Fixed
-- fixed issue with finder search in tracelog
+- fixed issue with finder search in trace log
 - fixed issue with NT namespace virtualization [#2701](https://github.com/sandboxie-plus/Sandboxie/issues/2701)
-- fixed issue with run unsandboxed [#2710](https://github.com/sandboxie-plus/Sandboxie/issues/2710)
+- fixed issue with "run unsandboxed" [#2710](https://github.com/sandboxie-plus/Sandboxie/issues/2710)
 - fixed issue with new box wizard [#2729](https://github.com/sandboxie-plus/Sandboxie/issues/2729)
-- fixed issue with break out processes and user restricted sandboxes [#2732](https://github.com/sandboxie-plus/Sandboxie/issues/2732)
-- fixed a couple UI issues [#2733](https://github.com/sandboxie-plus/Sandboxie/issues/2733)
+- fixed issue with breakout processes and user-restricted sandboxes [#2732](https://github.com/sandboxie-plus/Sandboxie/issues/2732)
+- fixed a couple of UI issues [#2733](https://github.com/sandboxie-plus/Sandboxie/issues/2733)
 - fixed useless help button [#2748](https://github.com/sandboxie-plus/Sandboxie/issues/2748)
 
 
@@ -61,7 +62,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - when dragging and dropping a file on the SandMan UI to run it, the currently selected box will be pre-selected in the box picker dialog
 - improved access rule handling [#2633](https://github.com/sandboxie-plus/Sandboxie/discussions/2633)
 - SbieCtrl now uses the new update format when checking for updates
-- added priorization of primary matches over auylairy matches to rule specificity
+- added prioritization of primary matches over auxiliary matches to rule specificity
 
 ### Fixed
 - added AppContainer support for Compartment type boxes

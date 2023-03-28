@@ -1756,32 +1756,32 @@ Localização completo: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="180"/>
         <location filename="Windows/RecoveryWindow.cpp" line="201"/>
-        <location filename="Windows/RecoveryWindow.cpp" line="549"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="552"/>
         <source>Select Directory</source>
         <translation>Seleccionar Pasta</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="245"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="248"/>
         <source>Do you really want to delete %1 selected files?</source>
         <translation>Você realmente deseja apagar %1 ficheiros selecionados?</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="273"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="276"/>
         <source>Close until all programs stop in this box</source>
         <translation>Feche até que todos os programas parem nesta caixa</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="274"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="277"/>
         <source>Close and Disable Immediate Recovery for this box</source>
         <translation>Fechar e Desactivar a Recuperação Imediata para esta caixa</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="294"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="297"/>
         <source>There are %1 new files available to recover.</source>
         <translation>Existem %1 novos ficheiros disponíveis para recuperar.</translation>
     </message>
     <message>
-        <location filename="Windows/RecoveryWindow.cpp" line="585"/>
+        <location filename="Windows/RecoveryWindow.cpp" line="588"/>
         <source>There are %1 files and %2 folders in the sandbox, occupying %3 of disk space.</source>
         <translation>Existem %1 ficheiros e %2 pastas na caixa de areia, ocupando %3 de espaço em disco.</translation>
     </message>

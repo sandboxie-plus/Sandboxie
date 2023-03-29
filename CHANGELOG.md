@@ -21,8 +21,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - issue with global settings ini section editing
 - fixed issue with 'UseRegDeleteV2=y' [#2756](https://github.com/sandboxie-plus/Sandboxie/issues/2756)
-- autorun path now supports any length [#2769](https://github.com/sandboxie-plus/Sandboxie/pull/2769)
-- recovery window: delete confirmation dialog is no longer shown when no file/folder is selected [#2771](https://github.com/sandboxie-plus/Sandboxie/pull/2771)
+- autorun path now supports any length [#2769](https://github.com/sandboxie-plus/Sandboxie/pull/2769) (thanks Sapour)
+- recovery window: delete confirmation dialog is no longer shown when no file/folder is selected [#2771](https://github.com/sandboxie-plus/Sandboxie/pull/2771) (thanks Sapour)
 - fixed WeChat crash issue [#2772](https://github.com/sandboxie-plus/Sandboxie/pull/2772)
 
 

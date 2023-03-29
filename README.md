@@ -87,6 +87,7 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 - offhub - Documentation additions / Collaborator
 - isaak654 - Templates / Documentation / Code fixes / Collaborator
 - okrc - Code fixes
+- Sapour - Code fixes
 - stephtr - CI / Certification
 - typpos - UI suggestions / Documentation / Code reviews
 - Dyras - Templates additions

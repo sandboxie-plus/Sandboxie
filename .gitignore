@@ -8,6 +8,7 @@ SbieRelease
 MsgSbieDebug
 MsgSbieRelease
 Sandboxie/msgs/Text-English-1033.txt
+*.mc
 
 # User-specific files
 *.rsuser
@@ -366,4 +367,3 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-*.mc

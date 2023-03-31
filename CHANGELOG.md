@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- Note: this behaviour can be disabled with 'FakeAppContainerToken=program.exe,n'
 - enabled app container compatibility in App Compartment mode
 -- Note: this should improve Microsoft Edge compatibility
+- added web browser compatybility tempalte wizard [#2761](https://github.com/sandboxie-plus/Sandboxie/issues/2761)
 
 ### Changed
 - renamed 'DropAppContainerTokens=program.exe,n' to 'DropAppContainerToken=program.exe,n'

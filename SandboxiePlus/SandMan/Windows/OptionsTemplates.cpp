@@ -211,6 +211,13 @@ void COptionsWindow::OnAddTemplates()
 	LoadTemplates();
 }
 
+void COptionsWindow::OnTemplateWizard()
+{
+	CTemplateWizard::ETemplateType Type = (CTemplateWizard::ETemplateType)((QAction*)sender())->data().toInt();
+	if (CSandBox* pBox = qobject_cast<CSandBox*>(m_pBox.data()))
+		CTemplateWizard::CreateNewTemplate(pBox, Type, this);
+}
+
 void COptionsWindow::OnDelTemplates()
 {
 	QTreeWidgetItem* pItem = ui.treeTemplates->currentItem();
@@ -283,7 +290,7 @@ void COptionsWindow::ShowFolders()
 
 		CPathEdit* pEdit = new CPathEdit(true);
 		pEdit->SetWindowsPaths();
-		pEdit->SetDefault(pTemplateSettings->GetText(Folder));
+		pEdit->SetDefault(pTemplateSettings->GetText(Folder, "", false, true, true));
 		pEdit->SetText(pTemplateSettings->GetText(Folder + "." + UserName));
 		connect(pEdit, SIGNAL(textChanged(const QString&)), this, SLOT(OnFolderChanged()));
 		ui.treeFolders->setItemWidget(pItem, 1, pEdit);

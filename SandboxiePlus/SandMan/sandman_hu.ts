@@ -291,7 +291,7 @@ A %USER% segítségével minden felhasználót saját mappába menthet.</transla
         <location filename="Wizards/NewBoxWizard.cpp" line="403"/>
         <source>The selected box location not placed on a currently available drive.</source>
         <oldsource>The sellected box location not placed on a currently available drive.</oldsource>
-        <translation>A kiválasztott homokozó nem található a jelenleg elérhető meghajtón.</translation>		
+        <translation>A kiválasztott homokozó nem található a jelenleg elérhető meghajtón.</translation>
     </message>
 </context>
 <context>
@@ -724,7 +724,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="333"/>
         <source>Ignore UIPI restrictions for processes.</source>
-         <translation>Hagyja figyelmen kívül a folyamatokra vonatkozó UIPI-korlátozásokat.</translation>
+        <translation>Hagyja figyelmen kívül a folyamatokra vonatkozó UIPI-korlátozásokat.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="342"/>
@@ -850,7 +850,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="42"/>
         <source>Always use ElevateCreateProcess fix, as sometimes applied by the Program Compatibility Assistant.</source>
-        <translation>Mindig használja az "ElevateCreateProcess" javítást, ahogyan azt néha a programkompatibilitási asszisztens is alkalmazza.</translation>
+        <translation>Mindig használja az &quot;ElevateCreateProcess&quot; javítást, ahogyan azt néha a programkompatibilitási asszisztens is alkalmazza.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="44"/>
@@ -861,7 +861,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="45"/>
         <source>Set RpcMgmtSetComTimeout usage for specific processes</source>
-        <translation>Állítsa be az "RpcMgmtSetComTimeout" használatát bizonyos folyamatokhoz</translation>
+        <translation>Állítsa be az &quot;RpcMgmtSetComTimeout&quot; használatát bizonyos folyamatokhoz</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="46"/>
@@ -2706,7 +2706,7 @@ Nem választás: %2</translation>
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
 This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.</oldsource>
-        <translation>A "Templates.ini" fájl szerkesztésére készül, ez általában nem ajánlott.
+        <translation>A &quot;Templates.ini&quot; fájl szerkesztésére készül, ez általában nem ajánlott.
 Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza lesz állítva a Sandboxie következő frissítésekor.</translation>
     </message>
     <message>
@@ -5528,7 +5528,7 @@ A folyamategyezési szint magasabb prioritású, mint a specifikusság, és leí
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3290"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
-        <translation>Alapértelmezés szerint tiltsa le az "RpcMgmtSetComTimeout" használatát (ez megoldhatja a kompatibilitási problémákat)</translation>
+        <translation>Alapértelmezés szerint tiltsa le az &quot;RpcMgmtSetComTimeout&quot; használatát (ez megoldhatja a kompatibilitási problémákat)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1213"/>
@@ -5637,7 +5637,7 @@ A folyamategyezési szint magasabb prioritású, mint a specifikusság, és leí
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3297"/>
         <source>Apply ElevateCreateProcess Workaround (legacy behaviour)</source>
-        <translation>Az "ElevateCreateProcess" megoldás alkalmazása (örökölt viselkedés)</translation>
+        <translation>Az &quot;ElevateCreateProcess&quot; megoldás alkalmazása (örökölt viselkedés)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3337"/>

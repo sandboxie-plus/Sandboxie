@@ -6,27 +6,36 @@
 ///////////////////////////////////////////////////
 // CPathEdit
 
-CPathEdit::CPathEdit(bool bDirs, QWidget *parent)
+CPathEdit::CPathEdit(bool bDirs, bool bCombo, QWidget *parent)
  : CTxtEdit(parent) 
 {
 	m_bDirs = bDirs;
 
 	QHBoxLayout* pLayout = new QHBoxLayout(this);
 	pLayout->setContentsMargins(0,0,0,0);
-	m_pEdit = new QLineEdit(this);
+	if (bCombo) {
+		m_pCombo = new QComboBox();
+		m_pCombo->setEditable(true);
+		m_pEdit = m_pCombo->lineEdit();
+		pLayout->addWidget(m_pCombo);
+	}
+	else {
+		m_pEdit = new QLineEdit(this);
+		pLayout->addWidget(m_pEdit);
+	}
 	connect(m_pEdit, SIGNAL(textChanged(const QString &)), this, SIGNAL(textChanged(const QString &)));
-	pLayout->addWidget(m_pEdit);
 	QPushButton* pButton = new QPushButton("...");
 	pButton->setMaximumWidth(25);
 	connect(pButton, SIGNAL(clicked(bool)), this, SLOT(Browse()));
 	pLayout->addWidget(pButton);
+	m_Filter = tr("Any File (*.*)");
 }
 
 void CPathEdit::Browse()
 {
 	QString FilePath = m_bDirs
 		? QFileDialog::getExistingDirectory(this, tr("Select Directory"))
-		: QFileDialog::getOpenFileName(0, tr("Browse"), "", QString("Any File (*.*)"));
+		: QFileDialog::getOpenFileName(0, tr("Browse"), "", m_Filter);
 	if (FilePath.isEmpty())
 		return;
 	if (m_bWinPath)

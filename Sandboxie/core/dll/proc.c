@@ -366,8 +366,7 @@ _FX BOOLEAN Proc_Init(void)
     ANSI_STRING ansi;
     NTSTATUS status;
 
-    if (!Dll_CompartmentMode)
-        Dll_ElectronWorkaround = Config_GetSettingsForImageName_bool(L"UseElectronWorkaround", FALSE);
+    Dll_ElectronWorkaround = Config_GetSettingsForImageName_bool(L"UseElectronWorkaround", FALSE);
 
     //
     // abort if we should not hook any process creation functions
@@ -843,67 +842,70 @@ _FX BOOL Proc_CreateProcessInternalW(
         return ok;
     }
 
-    //
-    // Electron based applications which work like Chrome seem to fail with HW acceleration, even when 
-    // they get the same treatment as Chrome and Chromium derivatives.
-    // Hack: by adding a parameter to the gpu renderer process, we can fix the issue.
-    //
-
-    // $Workaround$ - 3rd party fix
-    if ((Dll_ImageType == DLL_IMAGE_UNSPECIFIED/* || Dll_ImageType == DLL_IMAGE_ELECTRON*/) && Dll_ElectronWorkaround)
+    // OriginalToken BEGIN
+    if (!Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"OriginalToken", FALSE))
+    // OriginalToken END
     {
-        if(lpApplicationName && lpCommandLine)
+        // $Workaround$ - 3rd party fix
+        
+        //
+        // Electron based applications which work like Chrome seem to fail with HW acceleration, even when 
+        // they get the same treatment as Chrome and Chromium derivatives.
+        // Hack: by adding a parameter to the gpu renderer process, we can fix the issue.
+        //
+
+        // $Workaround$ - 3rd party fix
+        if ((Dll_ImageType == DLL_IMAGE_UNSPECIFIED/* || Dll_ImageType == DLL_IMAGE_ELECTRON*/) && Dll_ElectronWorkaround)
         {
-            WCHAR* backslash = wcsrchr(lpApplicationName, L'\\');
-            if ((backslash && _wcsicmp(backslash + 1, Dll_ImageName) == 0)
-                && wcsstr(lpCommandLine, L" --type=gpu-process")
-                && !wcsstr(lpCommandLine, L" --use-gl=swiftshader-webgl")) {
+            if (lpApplicationName && lpCommandLine)
+            {
+                WCHAR* backslash = wcsrchr(lpApplicationName, L'\\');
+                if ((backslash && _wcsicmp(backslash + 1, Dll_ImageName) == 0)
+                    && wcsstr(lpCommandLine, L" --type=gpu-process")
+                    && !wcsstr(lpCommandLine, L" --use-gl=swiftshader-webgl")) {
 
-                lpAlteredCommandLine = Dll_Alloc((wcslen(lpCommandLine) + 32 + 1) * sizeof(WCHAR));
+                    lpAlteredCommandLine = Dll_Alloc((wcslen(lpCommandLine) + 32 + 1) * sizeof(WCHAR));
 
-                wcscpy(lpAlteredCommandLine, lpCommandLine);
-                wcscat(lpAlteredCommandLine, L" --use-gl=swiftshader-webgl");
+                    wcscpy(lpAlteredCommandLine, lpCommandLine);
+                    wcscat(lpAlteredCommandLine, L" --use-gl=swiftshader-webgl");
 
-                lpCommandLine = lpAlteredCommandLine;
+                    lpCommandLine = lpAlteredCommandLine;
+                }
             }
         }
+
+        if (Config_GetSettingsForImageName_bool(L"DeprecatedTokenHacks", FALSE)) // with drop container token, etc this should be obsolete
+        {
+            //
+            // hack:  recent versions of Flash Player use the Chrome sandbox
+            // architecture which conflicts with our restricted process model
+            //
+
+            if (Dll_ImageType == DLL_IMAGE_FLASH_PLAYER_SANDBOX ||
+                Dll_ImageType == DLL_IMAGE_ACROBAT_READER ||
+                Dll_ImageType == DLL_IMAGE_PLUGIN_CONTAINER)
+                hToken = NULL;
+
+            //
+            // MSEdge Compatibility hack
+            // workers of type cdm can't open SbieSvc's ALPC port
+            //
+
+            if (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME && lpCommandLine
+                && wcsstr(lpCommandLine, L"--service-sandbox-type"))
+                hToken = NULL;
+        }
+
+        //
+        // Compatibility hack for Firefox 106.x, processes with the "-sandboxingKind" flag
+        // fail to load dll's and thair token has the users groupe disabled
+        //
+
+        if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX && lpCommandLine
+            // && wcsstr(lpCommandLine, L"-contentproc")
+            && wcsstr(lpCommandLine, L"-sandboxingKind"))
+            hToken = NULL;
     }
-
-  if(Config_GetSettingsForImageName_bool(L"DeprecatedTokenHacks", FALSE)) // with drop container token, etc this should be obsolete
-  {
-    //
-    // hack:  recent versions of Flash Player use the Chrome sandbox
-    // architecture which conflicts with our restricted process model
-    //
-
-    // $Workaround$ - 3rd party fix
-    if (Dll_ImageType == DLL_IMAGE_FLASH_PLAYER_SANDBOX ||
-        Dll_ImageType == DLL_IMAGE_ACROBAT_READER ||
-        Dll_ImageType == DLL_IMAGE_PLUGIN_CONTAINER)
-        hToken = NULL;
-
-    //
-    // Compatibility hack for Firefox 106.x
-    //
-
-    // $Workaround$ - 3rd party fix
-    if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX && lpCommandLine 
-     // && wcsstr(lpCommandLine, L"-contentproc")
-        && wcsstr(lpCommandLine, L"-sandboxingKind")
-      )
-        hToken = NULL;
-
-    //
-    // Microsoft Edge Compatibility hack
-    // workers of type cdm can't open SbieSvc's ALPC port
-    //
-
-    // $Workaround$ - 3rd party fix
-    if(Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME && lpCommandLine
-        && wcsstr(lpCommandLine, L"--service-sandbox-type")
-      )
-        hToken = NULL;
-  }
 
     //
     // use a copy path for the current directory

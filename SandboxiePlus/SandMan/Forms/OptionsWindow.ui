@@ -3301,7 +3301,7 @@ The process match level has a higher priority than the specificity and describes
                <item row="4" column="1">
                 <widget class="QCheckBox" name="chkUseSbieDeskHack">
                  <property name="text">
-                  <string>Use sandbocie desktop object workaround for all processes</string>
+                  <string>Use desktop object workaround for all processes</string>
                  </property>
                 </widget>
                </item>

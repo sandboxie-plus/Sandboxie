@@ -141,62 +141,62 @@
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="844"/>
         <source>Create Web Browser Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstelle Webbrowser Vorlage</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="845"/>
         <source>Configure web browser template options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Webbrowservorlagenoptionen konfigurieren.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="855"/>
         <source>Force the Web Browser to run in this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Erzwinge die Ausführung des Webbrowsers in dieser Sandbox</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="859"/>
         <source>Allow direct access to the entire Web Browser profile folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube direkten Zugriff auf den gesamten Webbrowserprofilordner</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="863"/>
         <source>Allow direct access to Web Browser&apos;s phishing database</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube direkten Zugriff auf die Phishingdatenbank des Webbrowsers</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="867"/>
         <source>Allow direct access to Web Browser&apos;s session management</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube direkten Zugriff auf die Sitzungskontrolle des Webbrowsers</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="871"/>
         <source>Allow direct access to Web Browser&apos;s sync data</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube direkten Zugriff auf die zu synchronisierenden Daten des Webbrowsers</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="875"/>
         <source>Allow direct access to Web Browser&apos;s preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube direkten Zugriff auf die Eintellungen des Webbrowsers</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="879"/>
         <source>Allow direct access to Web Browser&apos;s passwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube direkten Zugriff auf die Passwörter des Webbrowsers</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="883"/>
         <source>Allow direct access to Web Browser&apos;s cookies</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube direkten Zugriff auf die Cookies des Webbrowsers</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="887"/>
         <source>Allow direct access to Web Browser&apos;s bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube direkten Zugriff auf die Lesezeichen des Webbrowsers</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="891"/>
         <source>Allow direct access to Web Browser&apos;s bookmark and history database</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube direkten Zugriff auf die Lesezeichen- und Verlaufsdatenbank des Webbrowsers</translation>
     </message>
 </context>
 <context>
@@ -204,69 +204,71 @@
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="517"/>
         <source>Create Web Browser Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstelle Webbrowser Vorlage</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="518"/>
         <source>Configure your Web Browsers profile directories.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurieren Sie Ihre Webbrowserprofilordner.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="526"/>
         <source>User profile(s) directory:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nutzerprofilordner:</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="528"/>
         <source>Show also imperfect matches</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige auch ungenaue Übereinstimmungen</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="534"/>
         <source>Browser Executable (*.exe)</source>
-        <translation type="unfinished"></translation>
+        <translation>Browserprogamm (*.exe)</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="551"/>
         <source>Continue without browser profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Ohne Browserprofil fortfahren</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="712"/>
         <source>Configure your Gecko based Browsers profile directories.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurieren Sie Ihre Webbrowserprofilordner des auf Gecko basierenden Browsers.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="716"/>
         <source>Configure your Chromium based Browsers profile directories.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurieren Sie Ihre Webbrowserprofilordner des auf Chromium basierenden Browsers.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="796"/>
         <source>No suitable fodlers have been found.
 Note: you need to run the browser unsandboxed for them to get created.
 Please browse to the correct user profile directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es wurdne keine geeigneten Ordner gefunden.
+Notiz: Sie müssen den Browser außerhalb einer Sandbox starten, damit diese erstellt werden.
+Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="801"/>
         <source>Please choose the correct user profile directory, if it is not listed you may need to brose to it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte wählen Sie den korrekten Nutzerprofilordner. Falls er nicht aufgeführt wird, können Sie zu ihm navigieren.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="807"/>
         <source>Please ensure the sellected directory is correct, the wizard is not confident in all the presented options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte stellen Sie sicher, dass der ausgewählte Ordner korrekt ist, der Assistent ist sich nicht bei allen Optionen sicher.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="810"/>
         <source>Please ensure the sellected directory is correct.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte stellen Sie sicher, dass der ausgewählte Ordner korrekt ist.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="815"/>
         <source>This path does not look like a valid profile directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Pfad sieht nicht nach einem gültigen Profilordner aus.</translation>
     </message>
 </context>
 <context>
@@ -274,47 +276,47 @@ Please browse to the correct user profile directory.</source>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="324"/>
         <source>Create Web Browser Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstelle Webbrowser Vorlage</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="325"/>
         <source>Select your Web Browsers main executable, this will allow sandboxie to identify the browser.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie das Hauptprogramm Ihres Webbrowsers, was Sandboxie ermöglicht Ihren Browser zu identifizieren.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="335"/>
         <source>Enter browser name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Browsernamen eingeben:</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="346"/>
         <source>Mein executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</source>
-        <translation type="unfinished"></translation>
+        <translation>Hauptprogramm (z.B. firefox.exe, chrome.exe, msedge.exe, etc...):</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="350"/>
         <source>Browser Executable (*.exe)</source>
-        <translation type="unfinished"></translation>
+        <translation>Browserprogamm (*.exe)</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="451"/>
         <source>The browser appears to be Gecko based, like Mozilla Firefox and its derivatives.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Browser scheint auf Gecko zu basieren, wie Mozilla Firefox und dessen Ableger.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="454"/>
         <source>The browser appears to be Chromum based, like Microsoft Edge or Google Chrome and its derivatives.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Browser scheint auf Chromium zu basieren, wie Microsoft Edge oder Google Chrome und dessen Ableger.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="457"/>
         <source>Browser could not be recognized, template cannot be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Browser konnte nicht erkannt werden, Vorlage konnte nicht erstellt werden.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="504"/>
         <source>This browser name is already in use, please chooe an other one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Browsername wird bereits verwendet, bitte wählen Sie einen anderen Namen.</translation>
     </message>
 </context>
 <context>
@@ -518,48 +520,54 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="936"/>
         <source>Create Web Browser Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstelle Webbrowser Vorlage</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="944"/>
         <source>Almost complete, click Finish to create a new  Web Browser Template and conclude the wizard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fast geschafft, klicken Sie Fertig zum Erstellen einer neuen Webbrowservorlage und de Assistenten abzuschließen.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="962"/>
         <source>Browser name: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Browsername: %1
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="966"/>
         <source>Browser Type: Gecko (Mozilla firefox)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Browsertyp: Gecko (Mozilla Firefox)
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="967"/>
         <source>Browser Type: Chromium (Google Chrome)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Browsertyp: Chromium (Google Chrome)
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="969"/>
         <source>
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="970"/>
         <source>Browser executable path: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Browserprogammpfad: %1
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="980"/>
         <source>Browser profile path: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Browserprofilpfad: %1
+</translation>
     </message>
 </context>
 <context>
@@ -1196,7 +1204,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="499"/>
         <source>Add %1 Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge Vorlage %1 hinzu</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="599"/>
@@ -4834,7 +4842,8 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <location filename="Wizards/NewBoxWizard.cpp" line="547"/>
         <source>
 This Sandbox will be saved to: %1</source>
-        <translation>Diese Sandbox wird gespeichert in: %1</translation>
+        <translation>
+Diese Sandbox wird gespeichert in: %1</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="550"/>
@@ -4842,19 +4851,22 @@ This Sandbox will be saved to: %1</source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
         <oldsource>
 This box&apos;s content will be DISCARDED when its closed, and the box will be removed.</oldsource>
-        <translation>Der Inhalt dieser Box wird VERWORFEN, wenn diese geschlossen wird, und die Box wird entfernt.</translation>
+        <translation>
+Der Inhalt dieser Box wird VERWORFEN, wenn diese geschlossen wird, und die Box wird entfernt.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="552"/>
         <source>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
-        <translation>Diese Box wird ihren Inhalt VERWERFEN, wenn sie geschlossen wird. Sie ist nur für temporäre Daten geeignet.</translation>
+        <translation>
+Diese Box wird ihren Inhalt VERWERFEN, wenn sie geschlossen wird. Sie ist nur für temporäre Daten geeignet.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="554"/>
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
-        <translation>Prozesse in dieser Box werden nicht auf das Internet oder das lokale Netzwerk zugreifen können. Dies stellt sicher, dass alle gelesenen Daten vertraulich bleiben.</translation>
+        <translation>
+Prozesse in dieser Box werden nicht auf das Internet oder das lokale Netzwerk zugreifen können. Dies stellt sicher, dass alle gelesenen Daten vertraulich bleiben.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="556"/>
@@ -4862,13 +4874,15 @@ Processes in this box will not be able to access the internet or the local netwo
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
         <oldsource>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatybility but reduces the security isolation.</oldsource>
-        <translation>Diese Box wird den MSIServer (*.msi Installationsservice) mit einem Systemtoken starten. Dies verbessert die Kompatibilität, reduziert aber die Sicherheitsisolation.</translation>
+        <translation>
+Diese Box wird den MSIServer (*.msi Installationsservice) mit einem Systemtoken starten. Dies verbessert die Kompatibilität, reduziert aber die Sicherheitsisolation.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="558"/>
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
-        <translation>Prozesse in dieser Box werden denken, dass sie mit Adminrechten laufen, ohne dass sie diese tatsächlich haben, sodass Installer selbst in sicherheitsgehärteten Boxen genutzt werden können.</translation>
+        <translation>
+Prozesse in dieser Box werden denken, dass sie mit Adminrechten laufen, ohne dass sie diese tatsächlich haben, sodass Installer selbst in sicherheitsgehärteten Boxen genutzt werden können.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="586"/>
@@ -4965,17 +4979,17 @@ Processes in this box will think they are run with administrative privileges, wi
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="257"/>
         <source>Create new Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Vorlage erstellen</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="266"/>
         <source>Select template type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorlagentyp wählen:</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="270"/>
         <source>%1 template</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Vorlage</translation>
     </message>
 </context>
 <context>
@@ -4983,71 +4997,72 @@ Processes in this box will think they are run with administrative privileges, wi
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="37"/>
         <source>Compatybility Template Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompatibilitätsvorlagen Assistent</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="48"/>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigene</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="49"/>
         <source>Web Browser</source>
-        <translation type="unfinished">Webbrowser</translation>
+        <translation>Webbrowser</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="82"/>
         <source>Force %1 to run in this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Erzwinge die Ausführung von %1 in dieser Sandbox</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="100"/>
         <source>Allow direct access to the entire %1 profile folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube direkten Zugriff auf den gesamten %1 Profilordner</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="113"/>
         <location filename="Wizards/TemplateWizard.cpp" line="168"/>
         <source>Allow direct access to %1 phishing database</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube direkten Zugriff auf die %1 Phishingdatenbank</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="127"/>
         <source>Allow direct access to %1 session management</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube direkten Zugriff auf die %1 Sitzungskontrolle</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="136"/>
         <location filename="Wizards/TemplateWizard.cpp" line="199"/>
         <source>Allow direct access to %1 passwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube direkten Zugriff auf die %1 Passwörter</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="146"/>
         <location filename="Wizards/TemplateWizard.cpp" line="208"/>
         <source>Allow direct access to %1 cookies</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube direkten Zugriff auf die %1 Cookies</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="155"/>
         <location filename="Wizards/TemplateWizard.cpp" line="227"/>
         <source>Allow direct access to %1 bookmark and history database</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube direkten Zugriff auf die %1 Lesezeichen- und Verlaufsdatenbank des Webbrowsers</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="180"/>
         <source>Allow direct access to %1 sync data</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Different structure on purpose</translatorcomment>
+        <translation>Erlaube direkten Zugriff auf die zu synchronisierenden Daten von %1</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="190"/>
         <source>Allow direct access to %1 preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube direkten Zugriff auf die %1 Eintellungen</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="217"/>
         <source>Allow direct access to %1 bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube direkten Zugriff auf die %1 Lesezeichen</translation>
     </message>
 </context>
 <context>

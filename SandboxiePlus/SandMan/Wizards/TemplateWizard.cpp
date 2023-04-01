@@ -34,7 +34,7 @@ CTemplateWizard::CTemplateWizard(ETemplateType Type, QWidget *parent)
 
     connect(this, &QWizard::helpRequested, this, &CTemplateWizard::showHelp);
 
-    setWindowTitle(tr("Compatybility Template Wizard"));
+    setWindowTitle(tr("Compatibility Template Wizard"));
 }
 
 void CTemplateWizard::showHelp()
@@ -423,10 +423,9 @@ CBrowserTypePage::EBrowserType CBrowserTypePage::DetectBrowserType(const QString
 
     // check for Chromium based
     QList<STestFile> ChromiumFiles = QList<STestFile>() 
-        << STestFile{ "mojo_core.dll", 30 } 
-        << STestFile{ "chrome.dll", 30 } << STestFile{ NameExt.first + ".dll", 30 } // some releases rename this dll
-        << STestFile{ "chrome_elf.dll", 30 } << STestFile{ NameExt.first + "_elf.dll", 30 } // some releases rename and that dll
-        << STestFile{ "v8_context_snapshot.bin", 10 };
+        << STestFile{ "chrome.dll", 40 } << STestFile{ NameExt.first + ".dll", 40 } // some releases rename this dll
+        << STestFile{ "chrome_elf.dll", 40 } << STestFile{ NameExt.first + "_elf.dll", 40 } // some releases rename and that dll
+        << STestFile{ "v8_context_snapshot.bin", 20 };
     QDir Dir(PathName.first);
     auto Dirs = Dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
     for (int i = -1; i < Dirs.size(); i++) {
@@ -451,7 +450,7 @@ void CBrowserTypePage::OnPathChanged()
         m_pInfoLabel->setText(tr("The browser appears to be Gecko based, like Mozilla Firefox and its derivatives.")); 
         break;
     case Browser_Chromium: 
-        m_pInfoLabel->setText(tr("The browser appears to be Chromum based, like Microsoft Edge or Google Chrome and its derivatives.")); 
+        m_pInfoLabel->setText(tr("The browser appears to be Chromim based, like Microsoft Edge or Google Chrome and its derivatives.")); 
         break;
     default:
         m_pInfoLabel->setText(tr("Browser could not be recognized, template cannot be created.")); 
@@ -799,16 +798,16 @@ void CBrowserPathsPage::OnProfileChange()
                 "Please browse to the correct user profile directory."));
         else
             m_pInfoLabel->setText(tr(
-                "Please choose the correct user profile directory, if it is not listed you may need to brose to it."));
+                "Please choose the correct user profile directory, if it is not listed you may need to browse to it."));
     }
     else if (TestProfilePath(CurPath))
     {
         if (m_pProfileFilter->isVisible() && m_pProfileFilter->isCheckable())
             m_pInfoLabel->setText(tr(
-                "Please ensure the sellected directory is correct, the wizard is not confident in all the presented options."));
+                "Please ensure the selected directory is correct, the wizard is not confident in all the presented options."));
         else
             m_pInfoLabel->setText(tr(
-                "Please ensure the sellected directory is correct."));
+                "Please ensure the selected directory is correct."));
     }
     else
     {

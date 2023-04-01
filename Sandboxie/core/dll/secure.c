@@ -1260,8 +1260,8 @@ _FX NTSTATUS Secure_NtDuplicateToken(
     _Out_ PHANDLE NewTokenHandle)
 {
     //
-    // on windows 11 MSIServer fails to duplicte its impersonation token when using it
-    // so we drop the impersonation, do the duplication and re impersonate
+    // on Windows 11, MSIServer fails to duplicate its impersonation token when using it
+    // so we drop the impersonation, do the duplication and re-impersonate
     //
 
     HANDLE hToken = NULL;

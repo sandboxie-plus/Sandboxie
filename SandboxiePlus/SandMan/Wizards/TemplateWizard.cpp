@@ -169,8 +169,8 @@ void CTemplateWizard::CreateNewTemplate(CSandBox* pBox, ETemplateType Type, QWid
                         pTemplate->SetText("Tmpl.Class", "Local");
                         pTemplate->AppendText("OpenFilePath", BrowserBinary + "," + ProfilePath + "\\Safe Browsing*");
                         pTemplate->AppendText("OpenFilePath", BrowserBinary + "," + ProfilePath + "\\CertificateRevocation");
-                        pTemplate->AppendText("OpenFilePath", BrowserBinary + "," + ProfilePath + "\\SmartScreen"); // msedge
-                        pTemplate->AppendText("OpenFilePath", BrowserBinary + "," + ProfilePath + "\\Ad Blocking"); // msedge
+                        pTemplate->AppendText("OpenFilePath", BrowserBinary + "," + ProfilePath + "\\SmartScreen"); // Microsoft Edge
+                        pTemplate->AppendText("OpenFilePath", BrowserBinary + "," + ProfilePath + "\\Ad Blocking"); // Microsoft Edge
 
                         if (wizard.field("phishingDb").toBool() && pBox)
                             pBox->AppendText("Template", pTemplate->GetName().mid(9));
@@ -322,7 +322,7 @@ CBrowserTypePage::CBrowserTypePage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Create Web Browser Template"));
-    setSubTitle(tr("Select your Web Browsers main executable, this will allow sandboxie to identify the browser."));
+    setSubTitle(tr("Select your Web Browsers main executable, this will allow Sandboxie to identify the browser."));
 
     m_BrowserType = Browser_Other;
 
@@ -343,11 +343,11 @@ CBrowserTypePage::CBrowserTypePage(QWidget *parent)
 
     m_NameState = 0;
 
-    layout->addWidget(new QLabel(tr("Mein executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):")), row++, 0);
+    layout->addWidget(new QLabel(tr("Main executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):")), row++, 0);
 
  	CPathEdit* pImagePath = new CPathEdit(false, true);
 	pImagePath->SetWindowsPaths();
-    pImagePath->SetFilter(tr("Browser Executable (*.exe)"));
+    pImagePath->SetFilter(tr("Browser executable (*.exe)"));
 	//pImagePath->SetDefault();
 	//pImagePath->SetText();
 
@@ -450,7 +450,7 @@ void CBrowserTypePage::OnPathChanged()
         m_pInfoLabel->setText(tr("The browser appears to be Gecko based, like Mozilla Firefox and its derivatives.")); 
         break;
     case Browser_Chromium: 
-        m_pInfoLabel->setText(tr("The browser appears to be Chromim based, like Microsoft Edge or Google Chrome and its derivatives.")); 
+        m_pInfoLabel->setText(tr("The browser appears to be Chromium based, like Microsoft Edge or Google Chrome and its derivatives.")); 
         break;
     default:
         m_pInfoLabel->setText(tr("Browser could not be recognized, template cannot be created.")); 

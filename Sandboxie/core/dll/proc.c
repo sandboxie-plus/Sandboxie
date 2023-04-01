@@ -894,7 +894,7 @@ _FX BOOL Proc_CreateProcessInternalW(
         hToken = NULL;
 
     //
-    // MSEdge Compatibility hack
+    // Microsoft Edge Compatibility hack
     // workers of type cdm can't open SbieSvc's ALPC port
     //
 

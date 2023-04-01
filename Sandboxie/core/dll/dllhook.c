@@ -1188,7 +1188,7 @@ _FX void *SbieDll_Hook(
     // 
     // Note: this mechanism is only available during initialization as
     // at the end of Dll_Ordinal1 we dispose of the syscall/inject data area
-    // there fore any Nt function hooks must be set up from the get go
+    // therefore any Nt function hooks must be set up from the get go
     //
 
     extern ULONG* SbieApi_SyscallPtr;

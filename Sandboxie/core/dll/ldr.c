@@ -215,7 +215,7 @@ static DLL Ldr_Dlls[] = {
     // Workarounds:
     { L"setupapi.dll",          Setup_Init_SetupApi,            0}, // VerifyCatalogFile
     { L"zipfldr.dll",           SH32_Init_ZipFldr,              0},
-    { L"uxtheme.dll",           SH32_Init_UxTheme,              0}, // explorere.exe, SetWindowThemeAttribute
+    { L"uxtheme.dll",           SH32_Init_UxTheme,              0}, // explorer.exe, SetWindowThemeAttribute
     { L"hnetcfg.dll",           HNet_Init,                      0}, // firewall workaround
     { L"winnsi.dll",            NsiRpc_Init,                    0}, // WININET workaround
     { L"advpack.dll",           Proc_Init_AdvPack,              0}, // fix for IE
@@ -1035,8 +1035,8 @@ BOOL Ldr_CheckChromeDll(const WCHAR* dll_path)
         return TRUE;
 
     //
-    // Some chromium based browsers like msedge or vivaldi rename the dll
-    // from chrome_elf.dll to msedge_elf.dll 
+    // Some Chromium based browsers like Microsoft Edge or Vivaldi rename the dll
+    // from chrome_elf.dll to msedge_elf.dll
     //
 
     SIZE_T dll_len = wcslen(dll_path);
@@ -1050,8 +1050,8 @@ BOOL Ldr_CheckChromeDll(const WCHAR* dll_path)
 _FX void Ldr_DetectImageType(const CHAR *ImageName)
 {
     //
-    // Electron apps can have arbitrary names, but need to be threated like the crome browser
-    // hence we try to detect them by the DLL names thay load during runtime
+    // Electron apps can have arbitrary names, but need to be treated like the Chrome browser
+    // hence we try to detect them by the DLL names they load during runtime
     //
 
     if (Ldr_DynamicImageDetection && Dll_ImageType == DLL_IMAGE_UNSPECIFIED) // && !Dll_EntryComplete

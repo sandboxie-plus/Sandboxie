@@ -540,7 +540,7 @@ _FX void Ipc_CreateObjects(void)
         goto finish;
     }
 
-    // todo: fix-me: peroperly reparse symbolicl inks in IPC paths instead of creating dummy for everything
+    // todo: fix-me: properly reparse symbolic links in IPC paths instead of creating dummy for everything
 
     buffer = Dll_Alloc((wcslen(CopyPath) + 32) * sizeof(WCHAR));
 

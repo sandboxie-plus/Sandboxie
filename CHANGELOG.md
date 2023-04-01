@@ -13,18 +13,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- Note: this behaviour can be disabled with 'FakeAppContainerToken=program.exe,n'
 - enabled app container compatibility in App Compartment mode
 -- Note: this should improve Microsoft Edge compatibility
-- added web browser compatybility tempalte wizard [#2761](https://github.com/sandboxie-plus/Sandboxie/issues/2761)
-- added a mechanism to dynamically detect chromium and firefox based browsers
+- added web browser compatibility template wizard [#2761](https://github.com/sandboxie-plus/Sandboxie/issues/2761)
+- added a mechanism to dynamically detect Chromium and Firefox based browsers
 -- Note: the new mechanism can be disabled using 'DynamicImageDetection=program.exe,n'
 
 ### Changed
 - renamed 'DropAppContainerTokens=program.exe,n' to 'DropAppContainerToken=program.exe,n'
 - 'DropAppContainerToken=program.exe,y' can now be used in App Compartment boxes, however it is not recommended security-wise
-- the desktop security workaround used for Chrome, Firefox and Acrobat is now enabled by defualt, you cn disable it with "UseSbieDeskHack=n"
--- Note: this shoudl allow electron apps to run without 'SpecialImages=chrome,program.exe'
-- disabled old token hacks, as with the new App Container Token handling these seam no longer be required
--- Note: in case of issues with msedge, chrome, firefox or acrobat, they can be re enabled using 'DeprecatedTokenHacks=y'
-- updated innosetup to version 6.2.2 which also comes with a new installer icon
+- the desktop security workaround used for Chrome, Firefox and Acrobat is now enabled by default, you cn disable it with "UseSbieDeskHack=n"
+-- Note: this should allow electron apps to run without 'SpecialImages=chrome,program.exe'
+- disabled old token hacks, as with the new App Container token these seem to be no longer required
+-- Note: in case of issues with Microsoft Edge, Chrome, Firefox or Acrobat, they can be re-enabled using 'DeprecatedTokenHacks=y'
+- updated Inno Setup to version 6.2.2 which also comes with a new installer icon
 
 ### Fixed
 - issue with global settings ini section editing

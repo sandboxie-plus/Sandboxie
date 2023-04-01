@@ -593,7 +593,7 @@ _FX HANDLE Gui_CreateWindowStationW (void *lpwinsta, DWORD dwFlags, ACCESS_MASK 
         return myHandle;
 
     extern HANDLE Sandboxie_WinSta;
-    if(Sandboxie_WinSta && ((Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || Config_GetSettingsForImageName_bool(L"UseSbieWndStation", TRUE)))
+    if(Sandboxie_WinSta && (Config_GetSettingsForImageName_bool(L"UseSbieWndStation", TRUE) || (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX)))
         return Sandboxie_WinSta;
 
     SbieApi_Log(2205, L"CreateWindowStation");
@@ -615,7 +615,7 @@ _FX HANDLE Gui_CreateWindowStationA (void *lpwinsta, DWORD dwFlags, ACCESS_MASK 
         return myHandle;
     
     extern HANDLE Sandboxie_WinSta;
-    if(Sandboxie_WinSta && ((Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || Config_GetSettingsForImageName_bool(L"UseSbieWndStation", TRUE)))
+    if(Sandboxie_WinSta && (Config_GetSettingsForImageName_bool(L"UseSbieWndStation", TRUE) || (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX)))
         return Sandboxie_WinSta;
 
     SbieApi_Log(2205, L"CreateWindowStation");
@@ -637,7 +637,8 @@ _FX HDESK Gui_CreateDesktopW(
     if (rc)
         return rc;
 
-    if ((Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER) || Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", FALSE))
+    if (Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", TRUE)
+        || (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER))
     {
         //Call the system CreateDesktopW without a security context. 
         //This works in tandem with the Ntmarta_GetSecurityInfo hook (see in advapi.c).
@@ -647,8 +648,7 @@ _FX HDESK Gui_CreateDesktopW(
         //the sandboxie restricted token by dropping the security context.  This won't
         //work without the GetSecurityInfo hook.
         rc = __sys_CreateDesktopW(lpszDesktop, NULL, NULL, dwFlags, dwDesiredAccess, NULL);
-        //if (rc)
-            return rc;
+        return rc;
     }
 
     SbieApi_Log(2205, L"CreateDesktop");
@@ -671,11 +671,11 @@ _FX HDESK Gui_CreateDesktopA(
     if (rc)
         return rc;
 
-    if ((Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER) || Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", FALSE))
+    if (Config_GetSettingsForImageName_bool(L"UseSbieDeskHack", TRUE)
+        || (Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME) || (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX) || (Dll_ImageType == DLL_IMAGE_ACROBAT_READER))
     {
         rc = __sys_CreateDesktopA(lpszDesktop, NULL, NULL, dwFlags, dwDesiredAccess, NULL);
-        //if (rc)
-            return rc;
+        return rc;
     }
 
     SbieApi_Log(2205, L"CreateDesktop");

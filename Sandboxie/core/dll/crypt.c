@@ -408,8 +408,9 @@ _FX BOOLEAN Crypt_Init(HMODULE module)
     CertGetCertificateChain =
                         GetProcAddress(module, "CertGetCertificateChain");
 
+    // $Workaround$ - 3rd party fix
     if ((! CryptProtectData) && (Dll_OsBuild >= 8400)
-            && (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX)
+            //&& (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX)
             && GetModuleHandle(L"UMEngx86.dll")) {
         // on Windows 8 with Norton 360, and with the Norton toolbar
         // activated in Firefox, the GetProcAddress calls above fail,

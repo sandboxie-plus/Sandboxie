@@ -467,7 +467,9 @@ _FX BOOL File_GetVolumeInformationW(
     // this hook, and automatically return TRUE in this special case.
     //
 
-    if (lpVolumeNameBuffer == NULL && nVolumeNameSize == 0 &&
+    // $Workaround$ - 3rd party fix
+    if (Dll_ChromeSandbox &&
+        lpVolumeNameBuffer == NULL && nVolumeNameSize == 0 &&
         lpVolumeSerialNumber == NULL && lpMaximumComponentLength == NULL &&
         lpFileSystemFlags == NULL &&
         lpFileSystemNameBuffer == NULL && nFileSystemNameSize == 0) {
@@ -475,13 +477,12 @@ _FX BOOL File_GetVolumeInformationW(
         SetLastError(ERROR_SUCCESS);
         return TRUE;
 
-    } else {
-
-        return __sys_GetVolumeInformationW(
-            lpRootPathName, lpVolumeNameBuffer, nVolumeNameSize,
-            lpVolumeSerialNumber, lpMaximumComponentLength,
-            lpFileSystemFlags, lpFileSystemNameBuffer, nFileSystemNameSize);
     }
+
+    return __sys_GetVolumeInformationW(
+        lpRootPathName, lpVolumeNameBuffer, nVolumeNameSize,
+        lpVolumeSerialNumber, lpMaximumComponentLength,
+        lpFileSystemFlags, lpFileSystemNameBuffer, nFileSystemNameSize);
 }
 
 
@@ -521,7 +522,8 @@ BOOL File_WriteProcessMemory(
     // this function is only hooked when Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX
     //
 
-    if (lpBaseAddress && lpBaseAddress == GetProcAddress(Dll_Ntdll, "NtSetInformationThread"))
+    if ((Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX || Dll_ImageType == DLL_IMAGE_MOZILLA_THUNDERBIRD) &&
+        lpBaseAddress && lpBaseAddress == GetProcAddress(Dll_Ntdll, "NtSetInformationThread"))
     //if (RpcRt_TestCallingModule((ULONG_PTR)lpBaseAddress, (ULONG_PTR)Dll_Ntdll))
     {
         if (lpNumberOfBytesWritten)

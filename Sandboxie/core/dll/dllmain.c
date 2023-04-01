@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2022 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -98,6 +98,7 @@ BOOLEAN Dll_IsXtAjit = FALSE;
 #endif
 BOOLEAN Dll_IsSystemSid = FALSE;
 BOOLEAN Dll_InitComplete = FALSE;
+BOOLEAN Dll_EntryComplete = FALSE;
 BOOLEAN Dll_RestrictedToken = FALSE;
 BOOLEAN Dll_AppContainerToken = FALSE;
 BOOLEAN Dll_ChromeSandbox = FALSE;
@@ -596,6 +597,11 @@ _FX void Dll_InitExeEntry(void)
     //
     // once we return here the process images entrypoint will be called
     //
+
+#ifdef WITH_DEBUG
+    DbgTrace("Dll_InitExeEntry completed");
+#endif
+    Dll_EntryComplete = TRUE;
 }
 
 
@@ -855,7 +861,7 @@ _FX ULONG_PTR Dll_Ordinal1(
         //
         HANDLE heventProcessStart = 0;
 
-        Dll_InitInjected(); // install required hooks
+        Dll_InitInjected(); // install required hooks (Dll_InitInjected -> Ldr_Init -> Ldr_Inject_Init(FALSE))
 
         //
         // notify RPCSS that a new process was created in the current sandbox
@@ -920,7 +926,7 @@ _FX ULONG_PTR Dll_Ordinal1(
     }
     else
     {
-        Ldr_Inject_Init(bHostInject);
+        Ldr_Inject_Init(TRUE);
     }
 	
     //

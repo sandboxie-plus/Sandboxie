@@ -14,10 +14,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - enabled app container compatibility in App Compartment mode
 -- Note: this should improve Microsoft Edge compatibility
 - added web browser compatybility tempalte wizard [#2761](https://github.com/sandboxie-plus/Sandboxie/issues/2761)
+- added a mechanism to dynamically detect chromium and firefox based browsers
+-- Note: the new mechanism can be disabled using 'DynamicImageDetection=program.exe,n'
 
 ### Changed
 - renamed 'DropAppContainerTokens=program.exe,n' to 'DropAppContainerToken=program.exe,n'
 - 'DropAppContainerToken=program.exe,y' can now be used in App Compartment boxes, however it is not recommended security-wise
+- the desktop security workaround used for Chrome, Firefox and Acrobat is now enabled by defualt, you cn disable it with "UseSbieDeskHack=n"
+-- Note: this shoudl allow electron apps to run without 'SpecialImages=chrome,program.exe'
+- disabled old token hacks, as with the new App Container Token handling these seam no longer be required
+-- Note: in case of issues with msedge, chrome, firefox or acrobat, they can be re enabled using 'DeprecatedTokenHacks=y'
 
 ### Fixed
 - issue with global settings ini section editing
@@ -25,6 +31,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - autorun path now supports any length [#2769](https://github.com/sandboxie-plus/Sandboxie/pull/2769) (thanks Sapour)
 - recovery window: delete confirmation dialog is no longer shown when no file/folder is selected [#2771](https://github.com/sandboxie-plus/Sandboxie/pull/2771) (thanks Sapour)
 - fixed WeChat crash issue [#2772](https://github.com/sandboxie-plus/Sandboxie/pull/2772)
+
+### Removed
+- removed obsolete workaround for maxthon.exe browser version 4
 
 
 

@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2021-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -39,7 +40,6 @@
 
 typedef struct tagDLL {
     const WCHAR *nameW;
-    const char  *nameA;
     BOOLEAN(*init_func)(HMODULE);
     int state;
 } DLL;
@@ -179,69 +179,69 @@ static P_Ldr_CallOneDllCallback __my_Ldr_CallOneDllCallback = NULL;
 //---------------------------------------------------------------------------
 
 static DLL Ldr_Dlls[] = {
-    { L"advapi32.dll",          "advapi32.dll",         AdvApi_Init,                    0},
-    { L"crypt32.dll",           "crypt32.dll",          Crypt_Init,                     0},
-    { L"ole32.dll",             "ole32.dll",            Ole_Init,                       0}, // COM, OLE
-    { L"combase.dll",           "combase.dll",          Com_Init_ComBase,               0}, // COM
-    { L"rpcrt4.dll",            "rpcrt4.dll",           RpcRt_Init,                     0}, // RPC, epmapper
-    { L"sechost.dll",           "sechost.dll",          Scm_SecHostDll,                 0}, // SCM
-    { L"shell32.dll",           "shell32.dll",          SH32_Init,                      0},
-    { L"shcore.dll",            "shcore.dll",           Taskbar_SHCore_Init,            0}, // win 8, [Get/Set]CurrentProcessExplicitAppUserModelID
-    { L"wtsapi32.dll",          "wtsapi32.dll",         Terminal_Init_WtsApi,           0},
-    { L"winsta.dll",            "winsta.dll",           Terminal_Init_WinSta,           0},
-    { L"MsCorEE.dll",           "MsCorEE.dll",          MsCorEE_Init,                   0}, // .net framework
-    { L"win32u.dll",            "win32u.dll",           Win32_Init,                     0},
-    { L"user32.dll",            "user32.dll",           Gui_Init,                       0},
-    { L"imm32.dll",             "imm32.dll",            Gui_Init_IMM32,                 0},
-    { L"gdi32.dll",             "gdi32.dll",            Gdi_Init,                       0},
-    { L"gdi32full.dll",         "gdi32full.dll",        Gdi_Full_Init,                  0},
-    { L"d3d9.dll",              "d3d9.dll",             Gui_Init_D3D9,                  0},
-    { L"sxs.dll",               "sxs.dll",              Sxs_Init,                       0}, // add message to SxsInstallW
-    { L"ws2_32.dll",            "ws2_32.dll",           WSA_Init,                       0}, // network restrictions
-    { L"iphlpapi.dll",          "iphlpapi.dll",         IpHlp_Init,                     0}, // ping support
-    { L"msi.dll",               "msi.dll",              Scm_MsiDll,                     0}, // msi installer
-    { L"secur32.dll",           "secur32.dll",          Lsa_Init_Secur32,               0}, // xp, vista - LsaRegisterLogonProcess
-    { L"sspicli.dll",           "sspicli.dll",          Lsa_Init_SspiCli,               0}, // win 7 - LsaRegisterLogonProcess
-    { L"netapi32.dll",          "netapi32.dll",         NetApi_Init,                    0}, // xp, vista - NetUseAdd
-    { L"wkscli.dll",            "wkscli.dll",           NetApi_Init_WksCli,             0}, // win 7 - NetUseAdd
-    { L"pstorec.dll",           "pstorec.dll",          Pst_Init,                       0}, // Protected Storage
-    { L"winspool.drv",          "winspool.drv",         Gdi_Init_Spool,                 0}, // print spooler workaround for 32 bit
+    { L"advapi32.dll",          AdvApi_Init,                    0},
+    { L"crypt32.dll",           Crypt_Init,                     0},
+    { L"ole32.dll",             Ole_Init,                       0}, // COM, OLE
+    { L"combase.dll",           Com_Init_ComBase,               0}, // COM
+    { L"rpcrt4.dll",            RpcRt_Init,                     0}, // RPC, epmapper
+    { L"sechost.dll",           Scm_SecHostDll,                 0}, // SCM
+    { L"shell32.dll",           SH32_Init,                      0},
+    { L"shcore.dll",            Taskbar_SHCore_Init,            0}, // win 8, [Get/Set]CurrentProcessExplicitAppUserModelID
+    { L"wtsapi32.dll",          Terminal_Init_WtsApi,           0},
+    { L"winsta.dll",            Terminal_Init_WinSta,           0},
+    { L"MsCorEE.dll",           MsCorEE_Init,                   0}, // .net framework
+    { L"win32u.dll",            Win32_Init,                     0},
+    { L"user32.dll",            Gui_Init,                       0},
+    { L"imm32.dll",             Gui_Init_IMM32,                 0},
+    { L"gdi32.dll",             Gdi_Init,                       0},
+    { L"gdi32full.dll",         Gdi_Full_Init,                  0},
+    { L"d3d9.dll",              Gui_Init_D3D9,                  0},
+    { L"sxs.dll",               Sxs_Init,                       0}, // add message to SxsInstallW
+    { L"ws2_32.dll",            WSA_Init,                       0}, // network restrictions
+    { L"iphlpapi.dll",          IpHlp_Init,                     0}, // ping support
+    { L"msi.dll",               Scm_MsiDll,                     0}, // msi installer
+    { L"secur32.dll",           Lsa_Init_Secur32,               0}, // xp, vista - LsaRegisterLogonProcess
+    { L"sspicli.dll",           Lsa_Init_SspiCli,               0}, // win 7 - LsaRegisterLogonProcess
+    { L"netapi32.dll",          NetApi_Init,                    0}, // xp, vista - NetUseAdd
+    { L"wkscli.dll",            NetApi_Init_WksCli,             0}, // win 7 - NetUseAdd
+    { L"pstorec.dll",           Pst_Init,                       0}, // Protected Storage
+    { L"winspool.drv",          Gdi_Init_Spool,                 0}, // print spooler workaround for 32 bit
     // Disabled functionality:
-    { L"userenv.dll",           "userenv.dll",          UserEnv_Init,                   0}, // disable some GPO stuff
-    { L"sfc_os.dll",            "sfc_os.dll",           Sfc_Init,                       0}, // disable SFC
-    { L"Pdh.dll",               "Pdh.dll",              Pdh_Init,                       0}, // disable Performance Counters
-    { L"wevtapi.dll",           "wevtapi.dll",          EvtApi_Init,                    0}, // disable EvtIntAssertConfig
-    { L"cfgmgr32.dll",          "cfgmgr32.dll",         Setup_Init_CfgMgr32,            0}, // CM_Add_Driver_PackageW
+    { L"userenv.dll",           UserEnv_Init,                   0}, // disable some GPO stuff
+    { L"sfc_os.dll",            Sfc_Init,                       0}, // disable SFC
+    { L"Pdh.dll",               Pdh_Init,                       0}, // disable Performance Counters
+    { L"wevtapi.dll",           EvtApi_Init,                    0}, // disable EvtIntAssertConfig
+    { L"cfgmgr32.dll",          Setup_Init_CfgMgr32,            0}, // CM_Add_Driver_PackageW
     // Workarounds:
-    { L"setupapi.dll",          "setupapi.dll",         Setup_Init_SetupApi,            0}, // VerifyCatalogFile
-    { L"zipfldr.dll",           "zipfldr.dll",          SH32_Init_ZipFldr,              0},
-    { L"uxtheme.dll",           "uxtheme.dll",          SH32_Init_UxTheme,              0}, // explorere.exe, SetWindowThemeAttribute
-    { L"hnetcfg.dll",           "hnetcfg.dll",          HNet_Init,                      0}, // firewall workaround
-    { L"winnsi.dll",            "winnsi.dll",           NsiRpc_Init,                    0}, // WININET workaround
-    { L"advpack.dll",           "advpack.dll",          Proc_Init_AdvPack,              0}, // fix for IE
-    { L"dwrite.dll",            "dwrite.dll",           Scm_DWriteDll,                  0}, // hack for IE 9, make sure FontCache is running
-    { L"ComDlg32.dll",          "ComDlg32.dll",         ComDlg32_Init,                  0}, // fix for opera.exe
-    { L"ntmarta.dll",           "ntmarta.dll",          Ntmarta_Init,                   0}, // workaround for chrome and acrobat reader
+    { L"setupapi.dll",          Setup_Init_SetupApi,            0}, // VerifyCatalogFile
+    { L"zipfldr.dll",           SH32_Init_ZipFldr,              0},
+    { L"uxtheme.dll",           SH32_Init_UxTheme,              0}, // explorere.exe, SetWindowThemeAttribute
+    { L"hnetcfg.dll",           HNet_Init,                      0}, // firewall workaround
+    { L"winnsi.dll",            NsiRpc_Init,                    0}, // WININET workaround
+    { L"advpack.dll",           Proc_Init_AdvPack,              0}, // fix for IE
+    { L"dwrite.dll",            Scm_DWriteDll,                  0}, // hack for IE 9, make sure FontCache is running
+    { L"ComDlg32.dll",          ComDlg32_Init,                  0}, // fix for opera.exe
+    { L"ntmarta.dll",           Ntmarta_Init,                   0}, // workaround for chrome and acrobat reader
     // Non Windows DLLs:
-    { L"osppc.dll",             "osppc.dll",            Scm_OsppcDll,                   0}, // ensure osppsvc is running
-    { L"mso.dll",               "mso.dll",              File_MsoDll,                    0}, // hack for File_IsRecoverable
-    { L"agcore.dll",            "agcore.dll",           Custom_SilverlightAgCore,       0}, // msft silverlight - deprecated
+    { L"osppc.dll",             Scm_OsppcDll,                   0}, // ensure osppsvc is running
+    { L"mso.dll",               File_MsoDll,                    0}, // hack for File_IsRecoverable
+    { L"agcore.dll",            Custom_SilverlightAgCore,       0}, // msft silverlight - deprecated
 
     // $Workaround$ - 3rd party fix
 #ifndef _M_ARM64
     // Non Microsoft DLLs:
-    { L"acscmonitor.dll",       "acscmonitor.dll",      Acscmonitor_Init,               0},
-    { L"IDMIECC.dll",           "IDMIECC.dll",          Custom_InternetDownloadManager, 0},
-    { L"snxhk.dll",             "snxhk.dll",            Custom_Avast_SnxHk,             0},
-    { L"snxhk64.dll",           "snxhk64.dll",          Custom_Avast_SnxHk,             0},
-    { L"sysfer.dll",            "sysfer.dll",           Custom_SYSFER_DLL,              0},
+    { L"acscmonitor.dll",       Acscmonitor_Init,               0},
+    { L"IDMIECC.dll",           Custom_InternetDownloadManager, 0},
+    { L"snxhk.dll",             Custom_Avast_SnxHk,             0},
+    { L"snxhk64.dll",           Custom_Avast_SnxHk,             0},
+    { L"sysfer.dll",            Custom_SYSFER_DLL,              0},
 #endif
 #ifdef _WIN64
-    { L"dgapi64.dll",           "dgapi64.dll",          DigitalGuardian_Init,           0},
+    { L"dgapi64.dll",           DigitalGuardian_Init,           0},
 #else
-    { L"dgapi.dll",             "dgapi.dll",            DigitalGuardian_Init,           0},
+    { L"dgapi.dll",             DigitalGuardian_Init,           0},
 #endif _WIN64
-    { NULL,                     NULL ,                  NULL,                           0}
+    { NULL,                     NULL,                           0}
 };
 
 static ULONG_PTR *Ldr_Callbacks = 0;
@@ -250,6 +250,8 @@ static CRITICAL_SECTION Ldr_LoadedModules_CritSec;
 static void *Ldr_LoadedModules = NULL;
 static void *LdrLoaderCookie = NULL;
 static volatile BOOLEAN Ldr_LdrLoadDll_Invoked = FALSE;
+
+static BOOLEAN Ldr_DynamicImageDetection = FALSE;
 
 //---------------------------------------------------------------------------
 
@@ -430,6 +432,8 @@ _FX BOOLEAN Ldr_Init()
     //
     // hook entrypoints
     //
+
+    Ldr_DynamicImageDetection = Config_GetSettingsForImageName_bool(L"DynamicImageDetection", TRUE);
 
     if (Dll_OsBuild >= 9600) { // Windows 8.1 and later
         NTSTATUS rc = 0;
@@ -1016,34 +1020,80 @@ _FX ULONG_PTR Ldr_NtApphelpCacheControl(
 
 
 //---------------------------------------------------------------------------
+// Ldr_DetectImageType
+//---------------------------------------------------------------------------
+
+BOOL Ldr_CheckFirefoxDll(const WCHAR* dll_path)
+{
+    //_wcsicmp(dll_path, L"xul.dll") == 0;
+    return _wcsicmp(dll_path, L"mozglue.dll") == 0;
+}
+
+BOOL Ldr_CheckChromeDll(const WCHAR* dll_path)
+{
+    if (_wcsicmp(dll_path, L"chrome_elf.dll") == 0)
+        return TRUE;
+
+    //
+    // Some chromium based browsers like msedge or vivaldi rename the dll
+    // from chrome_elf.dll to msedge_elf.dll 
+    //
+
+    SIZE_T dll_len = wcslen(dll_path);
+    SIZE_T exe_len = wcslen(Dll_ImageName);
+    if ((dll_len - 8) == (exe_len - 4))
+        return _wcsnicmp(Dll_ImageName, dll_path, exe_len - 4) == 0;
+
+    return FALSE;
+}
+
+_FX void Ldr_DetectImageType(const CHAR *ImageName)
+{
+    //
+    // Electron apps can have arbitrary names, but need to be threated like the crome browser
+    // hence we try to detect them by the DLL names thay load during runtime
+    //
+
+    if (Ldr_DynamicImageDetection && Dll_ImageType == DLL_IMAGE_UNSPECIFIED) // && !Dll_EntryComplete
+    {
+        if (Ldr_CheckFirefoxDll(ImageName)) {
+            Dll_ImageType = DLL_IMAGE_MOZILLA_FIREFOX;
+        }
+        else if (Ldr_CheckChromeDll(ImageName)) {
+            Dll_ImageType = DLL_IMAGE_GOOGLE_CHROME;
+        }
+
+        if (Dll_ImageType != DLL_IMAGE_UNSPECIFIED) {
+
+            WCHAR msg[128];
+            Sbie_snwprintf(msg, 128, L"Detected web browser image");
+            SbieApi_MonitorPutMsg(MONITOR_IMAGE | MONITOR_TRACE, msg);
+
+            SbieApi_QueryProcessInfoEx(0, 'spit', Dll_ImageType);
+
+            if (Dll_RestrictedToken || Dll_AppContainerToken) {
+
+                Dll_ChromeSandbox = TRUE;
+            }
+        }
+    }
+}
+
+
+//---------------------------------------------------------------------------
 // Ldr_MyDllCallbacks (A,W,New)
 //---------------------------------------------------------------------------
 
 
-_FX void Ldr_MyDllCallbackA(const CHAR *ImageName, HMODULE ImageBase, BOOL LoadState)
+_FX void Ldr_MyDllCallbackA(const CHAR *ImageName, HMODULE ImageBase, BOOL LoadState) // Windows Vista, 7, 8.0
 {
-    //
-    // invoke our sub-modules as necessary
-    //
+    WCHAR ImageNameW[128];
+    Sbie_snwprintf(ImageNameW, ARRAYSIZE(ImageNameW), L"%S", ImageName);
 
-    DLL *dll = Ldr_Dlls;
-    while (dll->nameA) {
-        if (_stricmp(ImageName, dll->nameA) == 0 && (dll->state & 2) == 0) {
-            if (LoadState) {
-                BOOLEAN ok = dll->init_func(ImageBase);
-                if (!ok)
-                    SbieApi_Log(2318, dll->nameW);
-            }
-            else {
-                SbieDll_UnHookModule(ImageBase);
-            }
-            break;
-        }
-        ++dll;
-    }
+    Ldr_MyDllCallbackW(ImageNameW, ImageBase, LoadState);
 }
 
-_FX void Ldr_MyDllCallbackW(const WCHAR *ImageName, HMODULE ImageBase, BOOL LoadState)
+_FX void Ldr_MyDllCallbackW(const WCHAR *ImageName, HMODULE ImageBase, BOOL LoadState) // Windows XP
 {
     //
     // invoke our sub-modules as necessary
@@ -1064,16 +1114,19 @@ _FX void Ldr_MyDllCallbackW(const WCHAR *ImageName, HMODULE ImageBase, BOOL Load
 
         ++dll;
     }
+
+    if (LoadState)
+        Ldr_DetectImageType(ImageName);
 }
 
 
-_FX void Ldr_MyDllCallbackNew(const WCHAR *ImageName, HMODULE ImageBase, BOOL LoadState)
+_FX void Ldr_MyDllCallbackNew(const WCHAR *ImageName, HMODULE ImageBase, BOOL LoadState) // Windows 8.1 and later
 {
     //
     // invoke our sub-modules as necessary
     //
-    DLL *dll = Ldr_Dlls;
 
+    DLL *dll = Ldr_Dlls;
     while (dll->nameW) {
         BOOLEAN ok;
         if (_wcsicmp(ImageName, dll->nameW) == 0 && (dll->state & 2) == 0) {
@@ -1099,6 +1152,9 @@ _FX void Ldr_MyDllCallbackNew(const WCHAR *ImageName, HMODULE ImageBase, BOOL Lo
         }
         ++dll;
     }
+
+    if (LoadState)
+        Ldr_DetectImageType(ImageName);
 }
 
 //---------------------------------------------------------------------------

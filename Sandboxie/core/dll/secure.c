@@ -418,9 +418,7 @@ _FX BOOLEAN Secure_Init(void)
     SBIEDLL_HOOK(Ldr_, NtQueryInformationToken);
     
     if (Dll_OsBuild >= 9600) { // Windows 8.1 and later
-        if (DLL_IMAGE_GOOGLE_CHROME == Dll_ImageType) {
-            SBIEDLL_HOOK(Ldr_, NtOpenThreadToken);
-        }
+        SBIEDLL_HOOK(Ldr_, NtOpenThreadToken);
     }
 
     //
@@ -1187,7 +1185,7 @@ BOOL Ldr_NtOpenThreadToken(HANDLE ThreadHandle, DWORD DesiredAccess, BOOL OpenAs
     BOOL rc;
 
     rc = __sys_NtOpenThreadToken(ThreadHandle, DesiredAccess, OpenAsSelf, TokenHandle);
-    if (rc == STATUS_ACCESS_DENIED && OpenAsSelf) {
+    if (DLL_IMAGE_GOOGLE_CHROME == Dll_ImageType && rc == STATUS_ACCESS_DENIED && OpenAsSelf) {
         rc = __sys_NtOpenThreadToken(ThreadHandle, DesiredAccess, 0, TokenHandle);
     }
     return rc;

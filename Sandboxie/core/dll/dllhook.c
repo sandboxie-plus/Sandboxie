@@ -1185,6 +1185,10 @@ _FX void *SbieDll_Hook(
     // get the target address of the EC function and hook it instead
     // this way we can intercept also internal function calls within a dll
     // like CreateProcessInternalW when called from CreateProcessW
+    // 
+    // Note: this mechanism is only available during initialization as
+    // at the end of Dll_Ordinal1 we dispose of the syscall/inject data area
+    // there fore any Nt function hooks must be set up from the get go
     //
 
     extern ULONG* SbieApi_SyscallPtr;
@@ -1209,8 +1213,8 @@ _FX void *SbieDll_Hook(
     else
 
     // 
-    // if module is -1 than we comes from the api redirection in Scm_SecHostDll
-    // as there we hook with other x64 code we use the regular x86 hook routime
+    // if module is -1 than we come from the api redirection in Scm_SecHostDll
+    // as there we hook with other x64 code we use the regular x86 hook routine
     //
 
     if (module != (HMODULE)-1) {

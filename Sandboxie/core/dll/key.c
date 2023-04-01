@@ -3567,6 +3567,7 @@ _FX NTSTATUS Key_NtQueryValueKey(
                 __leave;
         }
 
+        // $Workaround$ - 3rd party fix
         if (Dll_ImageType == DLL_IMAGE_ACROBAT_READER ||
             Dll_ImageType == DLL_IMAGE_PLUGIN_CONTAINER ||
             Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME ||
@@ -3795,7 +3796,7 @@ _FX NTSTATUS Key_NtQueryValueKeyFakeForInternetExplorer(
 // Key_NtQueryValueKeyFakeForAcrobatReader
 //---------------------------------------------------------------------------
 
-
+// $Workaround$ - 3rd party fix
 _FX NTSTATUS Key_NtQueryValueKeyFakeForAcrobatReader(
     const WCHAR *TruePath,
     const WCHAR *ValueNameBuf,

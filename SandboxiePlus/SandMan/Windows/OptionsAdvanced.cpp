@@ -14,6 +14,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkElevateCreateProcessFix, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkNoWindowRename, SIGNAL(clicked(bool)), this, SLOT(OnNoWindowRename()));
 	connect(ui.chkNestedJobs, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkUseSbieDeskHack, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkUseSbieWndStation, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.chkAddToJob, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
@@ -44,8 +45,8 @@ void COptionsWindow::CreateAdvanced()
 	m_AdvOptions.insert("ExternalManifestHack",			SAdvOption{eSpec, QStringList() << "y" << "n", tr("Enable special inconsistent PreferExternalManifest behaviour, as needed for some Edge fixes")});
 	m_AdvOptions.insert("RpcMgmtSetComTimeout",			SAdvOption{eSpec, QStringList() << "n" << "y", tr("Set RpcMgmtSetComTimeout usage for specific processes")});
 	m_AdvOptions.insert("CopyBlockDenyWrite",			SAdvOption{eSpec, QStringList() << "y" << "n", tr("Makes a write open call to a file that won't be copied fail instead of turning it read-only.")});
-	m_AdvOptions.insert("UseSbieDeskHack",				SAdvOption{eSpec, QStringList() << "y" << "n", tr("")});
-	m_AdvOptions.insert("UseSbieWndStation",			SAdvOption{eSpec, QStringList() << "n" << "y", tr("")});
+	m_AdvOptions.insert("UseSbieDeskHack",				SAdvOption{eOnlySpec, QStringList() << "n" << "y", tr("")});
+	m_AdvOptions.insert("UseSbieWndStation",			SAdvOption{eOnlySpec, QStringList() << "n" << "y", tr("")});
 	m_AdvOptions.insert("FakeAdminRights",				SAdvOption{eOnlySpec, QStringList() << "y" << "n", tr("Make specified processes think they have admin permissions.")});
 	m_AdvOptions.insert("WaitForDebugger",				SAdvOption{eOnlySpec, QStringList() << "y" << "n", tr("Force specified processes to wait for a debugger to attach.")});
 	m_AdvOptions.insert("BoxNameTitle",					SAdvOption{eOnlySpec, QStringList() << "y" << "n" << "-", tr("")});
@@ -110,6 +111,7 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkElevateCreateProcessFix->setChecked(m_pBox->GetBool("ApplyElevateCreateProcessFix", false));
 
 	ui.chkNestedJobs->setChecked(m_pBox->GetBool("AllowBoxedJobs", false));
+	ui.chkUseSbieDeskHack->setChecked(m_pBox->GetBool("UseSbieDeskHack", true));
 	ui.chkUseSbieWndStation->setChecked(m_pBox->GetBool("UseSbieWndStation", true));
 
 	ui.chkAddToJob->setChecked(!m_pBox->GetBool("NoAddProcessToJob", false));
@@ -247,6 +249,7 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkPreferExternalManifest, "PreferExternalManifest", "y", "");
 	WriteAdvancedCheck(ui.chkElevateCreateProcessFix, "ApplyElevateCreateProcessFix", "y", "");
 
+	WriteAdvancedCheck(ui.chkUseSbieDeskHack, "UseSbieDeskHack", "", "n");
 	WriteAdvancedCheck(ui.chkUseSbieWndStation, "UseSbieWndStation", "", "n");
 
 	WriteAdvancedCheck(ui.chkAddToJob, "NoAddProcessToJob", "", "y");

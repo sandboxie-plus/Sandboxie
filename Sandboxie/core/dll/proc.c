@@ -869,6 +869,8 @@ _FX BOOL Proc_CreateProcessInternalW(
         }
     }
 
+  if(Config_GetSettingsForImageName_bool(L"DeprecatedTokenHacks", FALSE)) // with drop container token, etc this should be obsolete
+  {
     //
     // hack:  recent versions of Flash Player use the Chrome sandbox
     // architecture which conflicts with our restricted process model
@@ -901,7 +903,7 @@ _FX BOOL Proc_CreateProcessInternalW(
         && wcsstr(lpCommandLine, L"--service-sandbox-type")
       )
         hToken = NULL;
-
+  }
 
     //
     // use a copy path for the current directory

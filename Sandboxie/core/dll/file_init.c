@@ -252,24 +252,15 @@ _FX BOOLEAN File_Init(void)
     // support for Google Chrome flash plugin process
     //
 
-    if (Dll_ChromeSandbox) {
+    void *GetVolumeInformationW =
+        GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32,
+            "GetVolumeInformationW");
+    SBIEDLL_HOOK(File_,GetVolumeInformationW);
 
-        void *GetVolumeInformationW =
-            GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32,
-                "GetVolumeInformationW");
-
-        SBIEDLL_HOOK(File_,GetVolumeInformationW);
-    }
-
-
-    if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX || Dll_ImageType == DLL_IMAGE_MOZILLA_THUNDERBIRD)
-    {
-        void *WriteProcessMemory =
-            GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32,
-                "WriteProcessMemory");
-
-        SBIEDLL_HOOK(File_, WriteProcessMemory);
-    }
+    void *WriteProcessMemory =
+        GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32,
+            "WriteProcessMemory");
+    SBIEDLL_HOOK(File_, WriteProcessMemory);
 
     return TRUE;
 }

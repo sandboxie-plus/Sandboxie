@@ -289,6 +289,7 @@ extern BOOLEAN Dll_IsXtAjit;
 #endif
 extern BOOLEAN Dll_IsSystemSid;
 extern BOOLEAN Dll_InitComplete;
+extern BOOLEAN Dll_EntryComplete;
 extern BOOLEAN Dll_RestrictedToken;
 extern BOOLEAN Dll_AppContainerToken;
 extern BOOLEAN Dll_ChromeSandbox;

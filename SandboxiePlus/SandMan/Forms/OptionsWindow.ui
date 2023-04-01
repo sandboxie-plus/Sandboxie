@@ -3223,6 +3223,40 @@ The process match level has a higher priority than the specificity and describes
             <layout class="QGridLayout" name="gridLayout_63">
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_62">
+               <item row="7" column="1">
+                <spacer name="horizontalSpacer_12">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="1">
+                <widget class="QCheckBox" name="chkElevateCreateProcessFix">
+                 <property name="text">
+                  <string>Apply ElevateCreateProcess Workaround (legacy behaviour)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QCheckBox" name="chkPreferExternalManifest">
+                 <property name="text">
+                  <string>Force usage of custom dummy Manifest files (legacy behaviour)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="QCheckBox" name="chkUseSbieWndStation">
+                 <property name="text">
+                  <string>Emulate sandboxed window station for all processes</string>
+                 </property>
+                </widget>
+               </item>
                <item row="0" column="0">
                 <widget class="QLabel" name="lblCompatibility">
                  <property name="font">
@@ -3244,14 +3278,7 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QCheckBox" name="chkPreferExternalManifest">
-                 <property name="text">
-                  <string>Force usage of custom dummy Manifest files (legacy behaviour)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="0">
+               <item row="7" column="0">
                 <spacer name="verticalSpacer_28">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -3264,37 +3291,17 @@ The process match level has a higher priority than the specificity and describes
                  </property>
                 </spacer>
                </item>
-               <item row="4" column="1">
-                <widget class="QCheckBox" name="chkUseSbieWndStation">
-                 <property name="text">
-                  <string>Emulate sandboxed window station for all processes</string>
-                 </property>
-                </widget>
-               </item>
                <item row="6" column="1">
-                <spacer name="horizontalSpacer_12">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="5" column="1">
                 <widget class="QCheckBox" name="chkComTimeout">
                  <property name="text">
                   <string>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1">
-                <widget class="QCheckBox" name="chkElevateCreateProcessFix">
+               <item row="4" column="1">
+                <widget class="QCheckBox" name="chkUseSbieDeskHack">
                  <property name="text">
-                  <string>Apply ElevateCreateProcess Workaround (legacy behaviour)</string>
+                  <string>Use sandbocie desktop object workaround for all processes</string>
                  </property>
                 </widget>
                </item>

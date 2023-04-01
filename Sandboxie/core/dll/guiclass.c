@@ -192,22 +192,6 @@ _FX BOOLEAN Gui_InitClass(HMODULE module)
     }
 
     //
-    // maxthon 4 locks up during startup if OpenWinClass=#
-    // (i.e. Gui_RenameClasses==FALSE), but we can work around this
-    // by forcing Gui_RenameClasses=TRUE in maxthon child processes
-    //
-
-    // $Workaround$ - 3rd party fix
-    if ((! Gui_OpenAllWinClasses) && (! Gui_RenameClasses)
-                    && Dll_ImageType == DLL_IMAGE_GOOGLE_CHROME
-                    && _wcsicmp(Dll_ImageName, L"maxthon.exe") == 0) {
-
-        const WCHAR *cmd = GetCommandLine();
-        if (wcsstr(cmd, L"-Run"))
-            Gui_RenameClasses = TRUE;
-    }
-
-    //
     // hook functions
     //
 

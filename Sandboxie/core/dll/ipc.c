@@ -1076,7 +1076,8 @@ _FX BOOLEAN Ipc_GetName_AdjustSplWow64Path(WCHAR *TruePath, BOOLEAN adj)
 
 _FX NTSTATUS Ipc_GetName2(
     OBJECT_ATTRIBUTES *ObjectAttributes,
-    WCHAR **OutTruePath, WCHAR **OutCopyPath)
+    WCHAR **OutTruePath, WCHAR **OutCopyPath,
+    const WCHAR* NtName)
 {
     NTSTATUS status;
     HANDLE RootDirectory;
@@ -1095,6 +1096,13 @@ _FX NTSTATUS Ipc_GetName2(
 
     status = Ipc_GetName(
         RootDirectory, ObjectName, OutTruePath, OutCopyPath, NULL);
+
+    if (NT_SUCCESS(status)) 
+    {
+        WCHAR msg[1024];
+        Sbie_snwprintf(msg, 1024, L"%s: %s", NtName, *OutTruePath);
+        SbieApi_MonitorPutMsg(MONITOR_IPC | MONITOR_TRACE, msg);
+    }
 
     return status;
 }
@@ -1260,7 +1268,7 @@ _FX NTSTATUS Ipc_NtCreatePort(
     // get the full paths for the true and copy objects
     //
 
-    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath);
+    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"CreatePort");
     if (! NT_SUCCESS(status))
         __leave;
 
@@ -1635,7 +1643,7 @@ _FX NTSTATUS Ipc_NtAlpcCreatePort(
     // get the full paths for the true and copy objects
     //
 
-    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath);
+    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"AlpcCreatePort");
     if (! NT_SUCCESS(status))
         __leave;
 
@@ -2446,7 +2454,7 @@ _FX NTSTATUS Ipc_NtCreateEvent(
     // get the full paths for the true and copy objects
     //
 
-    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath);
+        status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"CreateEvent");
     if (! NT_SUCCESS(status))
         __leave;
 
@@ -2552,7 +2560,7 @@ _FX NTSTATUS Ipc_NtOpenEvent(
     // get the full paths for the true and copy objects
     //
 
-    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath);
+        status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"OpenEvent");
     if (! NT_SUCCESS(status))
         __leave;
 
@@ -2673,7 +2681,7 @@ _FX NTSTATUS Ipc_NtCreateMutant(
     // get the full paths for the true and copy objects
     //
 
-    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath);
+    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"CreateMutant");
     if (! NT_SUCCESS(status))
         __leave;
 
@@ -2779,7 +2787,7 @@ _FX NTSTATUS Ipc_NtOpenMutant(
     // get the full paths for the true and copy objects
     //
 
-    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath);
+    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"OpenMutant");
     if (! NT_SUCCESS(status))
         __leave;
 
@@ -2901,7 +2909,7 @@ _FX NTSTATUS Ipc_NtCreateSemaphore(
     // get the full paths for the true and copy objects
     //
 
-    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath);
+        status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"CreateSemaphore");
     if (! NT_SUCCESS(status))
         __leave;
 
@@ -3007,7 +3015,7 @@ _FX NTSTATUS Ipc_NtOpenSemaphore(
     // get the full paths for the true and copy objects
     //
 
-    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath);
+    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"OpenSemaphore");
     if (! NT_SUCCESS(status))
         __leave;
 
@@ -3141,7 +3149,7 @@ _FX NTSTATUS Ipc_NtCreateSection(
     // get the full paths for the true and copy objects
     //
 
-    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath);
+    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"CreateSection");
     if (! NT_SUCCESS(status))
         __leave;
 
@@ -3280,7 +3288,7 @@ _FX NTSTATUS Ipc_NtCreateSectionEx(
     // get the full paths for the true and copy objects
     //
 
-    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath);
+    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"CreateSectionEx");
     if (! NT_SUCCESS(status))
         __leave;
 
@@ -3386,7 +3394,7 @@ _FX NTSTATUS Ipc_NtOpenSection(
     // get the full paths for the true and copy objects
     //
 
-    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath);
+    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"OpenSection");
     if (! NT_SUCCESS(status))
         __leave;
 
@@ -3511,7 +3519,7 @@ _FX NTSTATUS Ipc_NtCreateSymbolicLinkObject(
     // get the full paths for the true and copy objects
     //
 
-    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath);
+    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"CreateSymbolicLinkObject");
     if (! NT_SUCCESS(status))
         __leave;
 
@@ -3617,7 +3625,7 @@ _FX NTSTATUS Ipc_NtOpenSymbolicLinkObject(
     // get the full paths for the true and copy objects
     //
 
-    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath);
+    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"OpenSymbolicLinkObject");
     if (! NT_SUCCESS(status))
         __leave;
 
@@ -3742,7 +3750,7 @@ _FX NTSTATUS Ipc_NtCreateDirectoryObject(
     // get the full paths for the true and copy objects
     //
 
-    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath);
+    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"CreateDirectoryObject");
     if (! NT_SUCCESS(status))
         __leave;
 
@@ -3858,7 +3866,7 @@ _FX NTSTATUS Ipc_NtCreateDirectoryObjectEx(
     // get the full paths for the true and copy objects
     //
 
-    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath);
+    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"CreateDirectoryObjectEx");
     if (! NT_SUCCESS(status))
         __leave;
 
@@ -3960,7 +3968,7 @@ _FX NTSTATUS Ipc_NtOpenDirectoryObject(
     // get the full paths for the true and copy objects
     //
 
-    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath);
+    status = Ipc_GetName2(ObjectAttributes, &TruePath, &CopyPath, L"OpenDirectoryObject");
     if (! NT_SUCCESS(status))
         __leave;
 
@@ -3995,7 +4003,7 @@ _FX NTSTATUS Ipc_NtOpenDirectoryObject(
 
     status = __sys_NtOpenDirectoryObject(DirectoryHandle, DesiredAccess, &objattrs);
 
-    if (status == STATUS_OBJECT_PATH_NOT_FOUND || status == STATUS_OBJECT_NAME_NOT_FOUND) {
+    if (status == STATUS_OBJECT_PATH_NOT_FOUND || status == STATUS_OBJECT_NAME_NOT_FOUND || status == STATUS_OBJECT_NAME_INVALID) {
 
         //
         // if the directory does not exist in the sandbox try opening the original one

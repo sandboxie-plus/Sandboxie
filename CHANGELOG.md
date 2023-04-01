@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.8.2 / 5.63.2] - 2023-03-27
+## [1.8.2 / 5.63.2] - 2023-04-01
 
 ### Added
 - reworked CreateAppContainerToken hook to return a restricted token for the issue [#2762](https://github.com/sandboxie-plus/Sandboxie/issues/2762)
@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- Note: this shoudl allow electron apps to run without 'SpecialImages=chrome,program.exe'
 - disabled old token hacks, as with the new App Container Token handling these seam no longer be required
 -- Note: in case of issues with msedge, chrome, firefox or acrobat, they can be re enabled using 'DeprecatedTokenHacks=y'
+- updated innosetup to version 6.2.2 which also comes with a new installer icon
 
 ### Fixed
 - issue with global settings ini section editing

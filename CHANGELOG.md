@@ -6,6 +6,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+
+## [1.8.2b / 5.63.2] - 2023-04-??
+
+### Fixed
+- fixed issue with the new SBIE2307 being trigegred on media removal
+
+
+
 ## [1.8.2 / 5.63.2] - 2023-04-01
 
 ### Added

@@ -54,7 +54,7 @@ static NTSTATUS Ipc_GetName(
 
 static NTSTATUS Ipc_GetName2(
     OBJECT_ATTRIBUTES *ObjectAttributes,
-    WCHAR **OutTruePath, WCHAR **OutCopyPath);
+    WCHAR **OutTruePath, WCHAR **OutCopyPath, const WCHAR* NtName);
 
 static NTSTATUS Ipc_CreatePath(WCHAR *TruePath, WCHAR *CopyPath);
 

@@ -253,17 +253,17 @@ Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="800"/>
         <source>Please choose the correct user profile directory, if it is not listed you may need to browse to it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte wählen Sie den korrekten Nutzerprofilordner. Falls er nicht aufgeführt wird, können Sie zu ihm navigieren.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="806"/>
         <source>Please ensure the selected directory is correct, the wizard is not confident in all the presented options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte stellen Sie sicher, dass der ausgewählte Ordner korrekt ist, der Assistent ist sich nicht bei allen Optionen sicher.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="809"/>
         <source>Please ensure the selected directory is correct.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte stellen Sie sicher, dass der ausgewählte Ordner korrekt ist.</translation>
     </message>
     <message>
         <source>Please choose the correct user profile directory, if it is not listed you may need to brose to it.</source>
@@ -294,7 +294,7 @@ Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
         <location filename="Wizards/TemplateWizard.cpp" line="325"/>
         <source>Select your Web Browsers main executable, this will allow Sandboxie to identify the browser.</source>
         <oldsource>Select your Web Browsers main executable, this will allow sandboxie to identify the browser.</oldsource>
-        <translation type="unfinished">Wählen Sie das Hauptprogramm Ihres Webbrowsers, was Sandboxie ermöglicht Ihren Browser zu identifizieren.</translation>
+        <translation>Wählen Sie das Hauptprogramm Ihres Webbrowsers, dies wird Sandboxie ermöglichen Ihren Browser zu identifizieren.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="335"/>
@@ -305,13 +305,13 @@ Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
         <location filename="Wizards/TemplateWizard.cpp" line="346"/>
         <source>Main executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</source>
         <oldsource>Mein executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</oldsource>
-        <translation type="unfinished">Hauptprogramm (z.B. firefox.exe, chrome.exe, msedge.exe, etc...):</translation>
+        <translation>Hauptprogramm (z.B. firefox.exe, chrome.exe, msedge.exe, etc...):</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="350"/>
         <source>Browser executable (*.exe)</source>
         <oldsource>Browser Executable (*.exe)</oldsource>
-        <translation type="unfinished">Browserprogamm (*.exe)</translation>
+        <translation>Browserprogamm (*.exe)</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="450"/>
@@ -321,7 +321,7 @@ Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="453"/>
         <source>The browser appears to be Chromium based, like Microsoft Edge or Google Chrome and its derivatives.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Browser scheint auf Chromium zu basieren, wie Microsoft Edge oder Google Chrome und dessen Ableger.</translation>
     </message>
     <message>
         <source>The browser appears to be Chromum based, like Microsoft Edge or Google Chrome and its derivatives.</source>
@@ -1223,7 +1223,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="499"/>
         <source>Add %1 Template</source>
-        <translation>Füge Vorlage %1 hinzu</translation>
+        <translation>Füge %1 Vorlage hinzu</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="599"/>
@@ -5017,7 +5017,7 @@ Prozesse in dieser Box werden denken, dass sie mit Adminrechten laufen, ohne das
         <location filename="Wizards/TemplateWizard.cpp" line="37"/>
         <source>Compatibility Template Wizard</source>
         <oldsource>Compatybility Template Wizard</oldsource>
-        <translation type="unfinished">Kompatibilitätsvorlagen Assistent</translation>
+        <translation>Kompatibilitätsvorlagen Assistent</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="48"/>
@@ -6964,7 +6964,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3304"/>
         <source>Use desktop object workaround for all processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Wende den Workaround für Desktopobjekt auf alle Prozesse an</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3344"/>

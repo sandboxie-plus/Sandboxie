@@ -874,18 +874,18 @@ _FX BOOL Proc_CreateProcessInternalW(
             }
         }
 
+        //
+        // hack:  recent versions of Flash Player use the Chrome sandbox
+        // architecture which conflicts with our restricted process model
+        //
+
+        if (Dll_ImageType == DLL_IMAGE_FLASH_PLAYER_SANDBOX ||
+            Dll_ImageType == DLL_IMAGE_ACROBAT_READER ||
+            Dll_ImageType == DLL_IMAGE_PLUGIN_CONTAINER)
+            hToken = NULL;
+
         if (Config_GetSettingsForImageName_bool(L"DeprecatedTokenHacks", FALSE)) // with drop container token, etc this should be obsolete
         {
-            //
-            // hack:  recent versions of Flash Player use the Chrome sandbox
-            // architecture which conflicts with our restricted process model
-            //
-
-            if (Dll_ImageType == DLL_IMAGE_FLASH_PLAYER_SANDBOX ||
-                Dll_ImageType == DLL_IMAGE_ACROBAT_READER ||
-                Dll_ImageType == DLL_IMAGE_PLUGIN_CONTAINER)
-                hToken = NULL;
-
             //
             // MSEdge Compatibility hack
             // workers of type cdm can't open SbieSvc's ALPC port

@@ -221,6 +221,7 @@ begin
     'dutch': Result := 'nl';
     'french': Result := 'fr';
     'german': Result := 'de';
+    'hungarian': Result := 'hu';
     'italian': Result := 'it';
     'korean': Result := 'ko';
     'polish': Result := 'pl';
@@ -354,7 +355,7 @@ begin
   // Shutdown service, driver and processes as ready to install.
   if ((CurPageID = wpReady) and (not IsPortable())) then
   begin
-    
+
     // Stop processes.
     Exec(ExpandConstant('{sys}\taskkill.exe'), '/IM Sandman.exe /IM SbieCtrl.exe /IM Start.exe /F', '', SW_HIDE, ewWaitUntilTerminated, ExecRet);
 
@@ -464,7 +465,7 @@ end;
 //begin
 //
 //  // after the installation
-//  if (CurStep <> ssPostInstall) then  
+//  if (CurStep <> ssPostInstall) then
 //    exit;
 //
 //  if WizardIsTaskSelected('RefreshBuild') then

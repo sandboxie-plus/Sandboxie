@@ -13,6 +13,7 @@ Name: "ChineseTraditional"; MessagesFile: "isl\ChineseTraditional.isl"
 Name: "dutch"; MessagesFile: "compiler:Languages\Dutch.isl"
 Name: "french"; MessagesFile: "compiler:Languages\French.isl"
 Name: "german"; MessagesFile: "compiler:Languages\German.isl"
+Name: "hungarian"; MessagesFile: "compiler:Languages\Hungarian.isl"
 Name: "Italian"; MessagesFile: "compiler:Languages\Italian.isl"
 Name: "Korean"; MessagesFile: "isl\Korean.isl"
 Name: "polish"; MessagesFile: "compiler:Languages\Polish.isl"
@@ -180,6 +181,29 @@ german.UninstallTaskLabel5=Entferne die Konfiguration und alle &Sandboxen%nWähl
 ; Fix issue #1333 with a space inserted before %1
 german.AutoStartProgram=Starte automatisch %1
 german.RefreshBuild=Neueste Templates.ini und Übersetzungen herunterladen
+
+; Hungarian
+hungarian.AddSandboxedMenu=Add "Run Sandboxed" to context menu (le kell fordítani)
+hungarian.AddSandboxedBrowser=Asztali parancsikon hozzáadása a böngésző indításához Sandboxie alól
+hungarian.SandboxieStartMenu1=Bármilyen program futtatása izolált módban
+hungarian.SandboxieStartMenu2=Webböngésző futtatása izolált módban
+hungarian.SandboxieStartMenu3=Sandboxie start menü
+hungarian.SandboxedBrowser=Izolált böngésző
+hungarian.CustomPageLabel1=Select Installation Type (le kell fordítani)
+hungarian.CustomPageLabel2=How should be installed (le kell fordítani)
+hungarian.CustomPageLabel3=Choose the installation mode (le kell fordítani)
+hungarian.CustomPageInstallMode=Install {#MyAppName} on this computer (le kell fordítani)
+hungarian.CustomPageUpgradeMode=Update existing {#MyAppName} installation (le kell fordítani)
+hungarian.CustomPagePortableMode=Extract all files to a directory for portable use (le kell fordítani)
+hungarian.RequiresWin7OrLater=Sandboxie-Plus requires Windows 7 or later. (le kell fordítani)
+hungarian.ClassicFound=Sandboxie Classic installation detected, it must be uninstalled first, do you want to uninstall it now? (le kell fordítani)
+hungarian.RunSandboxedMenu=Run &Sandboxed (le kell fordítani)
+hungarian.UninstallTaskLabel1=Select Uninstall Type (le kell fordítani)
+hungarian.UninstallTaskLabel2=How would you like to uninstall Sandboxie-Plus? (le kell fordítani)
+hungarian.UninstallTaskLabel3=&Keep configuration files and sandboxes%nThis is the most recommended option if you plan to reinstall Sandboxie-Plus while keeping your configuration files and sandboxes. (le kell fordítani)
+hungarian.UninstallTaskLabel4=Remove &configuration files%nSelect this option to remove the Sandboxie.ini and Sandboxie-Plus.ini configuration files while keeping the sandboxes unchanged. (le kell fordítani)
+hungarian.UninstallTaskLabel5=Remove configuration files and &sandboxes%nSelect this option to remove all configuration files and sandboxes, including the Sandbox folder located in custom paths with FileRootPath. (le kell fordítani)
+hungarian.RefreshBuild=Download latest Templates.ini and translations (le kell fordítani)
 
 ; Italian
 Italian.AddSandboxedMenu=Aggiungi l'opzione "Avvia nell'area virtuale" al menu contestuale

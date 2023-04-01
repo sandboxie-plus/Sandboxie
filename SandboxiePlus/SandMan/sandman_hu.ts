@@ -137,6 +137,187 @@
     </message>
 </context>
 <context>
+    <name>CBrowserOptionsPage</name>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="844"/>
+        <source>Create Web Browser Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="845"/>
+        <source>Configure web browser template options.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="855"/>
+        <source>Force the Web Browser to run in this sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="859"/>
+        <source>Allow direct access to the entire Web Browser profile folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="863"/>
+        <source>Allow direct access to Web Browser&apos;s phishing database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="867"/>
+        <source>Allow direct access to Web Browser&apos;s session management</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="871"/>
+        <source>Allow direct access to Web Browser&apos;s sync data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="875"/>
+        <source>Allow direct access to Web Browser&apos;s preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="879"/>
+        <source>Allow direct access to Web Browser&apos;s passwords</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="883"/>
+        <source>Allow direct access to Web Browser&apos;s cookies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="887"/>
+        <source>Allow direct access to Web Browser&apos;s bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="891"/>
+        <source>Allow direct access to Web Browser&apos;s bookmark and history database</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CBrowserPathsPage</name>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="517"/>
+        <source>Create Web Browser Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="518"/>
+        <source>Configure your Web Browsers profile directories.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="526"/>
+        <source>User profile(s) directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="528"/>
+        <source>Show also imperfect matches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="534"/>
+        <source>Browser Executable (*.exe)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="551"/>
+        <source>Continue without browser profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="712"/>
+        <source>Configure your Gecko based Browsers profile directories.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="716"/>
+        <source>Configure your Chromium based Browsers profile directories.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="796"/>
+        <source>No suitable fodlers have been found.
+Note: you need to run the browser unsandboxed for them to get created.
+Please browse to the correct user profile directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="801"/>
+        <source>Please choose the correct user profile directory, if it is not listed you may need to brose to it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="807"/>
+        <source>Please ensure the sellected directory is correct, the wizard is not confident in all the presented options.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="810"/>
+        <source>Please ensure the sellected directory is correct.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="815"/>
+        <source>This path does not look like a valid profile directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CBrowserTypePage</name>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="324"/>
+        <source>Create Web Browser Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="325"/>
+        <source>Select your Web Browsers main executable, this will allow sandboxie to identify the browser.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="335"/>
+        <source>Enter browser name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="346"/>
+        <source>Mein executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="350"/>
+        <source>Browser Executable (*.exe)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="451"/>
+        <source>The browser appears to be Gecko based, like Mozilla Firefox and its derivatives.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="454"/>
+        <source>The browser appears to be Chromum based, like Microsoft Edge or Google Chrome and its derivatives.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="457"/>
+        <source>Browser could not be recognized, template cannot be created.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="504"/>
+        <source>This browser name is already in use, please chooe an other one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CCertificatePage</name>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="193"/>
@@ -310,6 +491,55 @@ A %USER% segítségével minden felhasználót saját mappába menthet.</transla
         <location filename="Wizards/SetupWizard.cpp" line="506"/>
         <source>Keep Sandboxie-Plus up to date.</source>
         <translation>Tartsa naprakészen a Sandboxie-Plus-t.</translation>
+    </message>
+</context>
+<context>
+    <name>CFinishTemplatePage</name>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="936"/>
+        <source>Create Web Browser Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="944"/>
+        <source>Almost complete, click Finish to create a new  Web Browser Template and conclude the wizard.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="962"/>
+        <source>Browser name: %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="966"/>
+        <source>Browser Type: Gecko (Mozilla firefox)
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="967"/>
+        <source>Browser Type: Chromium (Google Chrome)
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="969"/>
+        <source>
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="970"/>
+        <source>Browser executable path: %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="980"/>
+        <source>Browser profile path: %1
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -618,8 +848,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 <context>
     <name>COptionsWindow</name>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="420"/>
-        <location filename="Windows/OptionsWindow.cpp" line="433"/>
+        <location filename="Windows/OptionsWindow.cpp" line="421"/>
+        <location filename="Windows/OptionsWindow.cpp" line="434"/>
         <location filename="Windows/OptionsAccess.cpp" line="24"/>
         <source>Browse for File</source>
         <translation>Fájl keresése</translation>
@@ -771,7 +1001,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Mappa kiválasztása</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="964"/>
+        <location filename="Windows/OptionsWindow.cpp" line="970"/>
         <location filename="Windows/OptionsAccess.cpp" line="399"/>
         <location filename="Windows/OptionsAccess.cpp" line="632"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="535"/>
@@ -785,8 +1015,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Minden program</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="962"/>
-        <location filename="Windows/OptionsWindow.cpp" line="980"/>
+        <location filename="Windows/OptionsWindow.cpp" line="968"/>
+        <location filename="Windows/OptionsWindow.cpp" line="986"/>
         <location filename="Windows/OptionsAccess.cpp" line="404"/>
         <location filename="Windows/OptionsAccess.cpp" line="636"/>
         <location filename="Windows/OptionsGeneral.cpp" line="505"/>
@@ -1296,67 +1526,72 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Hiba: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="219"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="226"/>
         <source>Only local templates can be removed!</source>
         <translation>Csak helyi sablonokat lehet eltávolítani!</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="223"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="230"/>
         <source>Do you really want to delete the selected local template?</source>
         <translation>Biztos benne, hogy törli a kiválasztott helyi sablont?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="157"/>
+        <location filename="Windows/OptionsWindow.cpp" line="158"/>
         <source>Sandboxie Plus - &apos;%1&apos; Options</source>
         <translation>Sandboxie-Plus - &apos;%1&apos; opciók</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="262"/>
+        <location filename="Windows/OptionsWindow.cpp" line="263"/>
         <source>File Options</source>
         <translation>Fájlok beállításai</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="294"/>
+        <location filename="Windows/OptionsWindow.cpp" line="295"/>
         <source>Grouping</source>
         <translation>Csoportosítás</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="593"/>
+        <location filename="Windows/OptionsWindow.cpp" line="499"/>
+        <source>Add %1 Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsWindow.cpp" line="599"/>
         <source>Search for options</source>
         <translation>Opciók keresése</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="723"/>
+        <location filename="Windows/OptionsWindow.cpp" line="729"/>
         <source>Box: %1</source>
         <translation>Homokozó: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="724"/>
+        <location filename="Windows/OptionsWindow.cpp" line="730"/>
         <source>Template: %1</source>
         <translation>Sablon: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="725"/>
+        <location filename="Windows/OptionsWindow.cpp" line="731"/>
         <source>Global: %1</source>
         <translation>Globál: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="726"/>
+        <location filename="Windows/OptionsWindow.cpp" line="732"/>
         <source>Default: %1</source>
         <translation>Alapértelmezett: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="903"/>
+        <location filename="Windows/OptionsWindow.cpp" line="909"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>Ezt a homokozót törölték, ezért a konfigurációt nem lehet menteni.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="950"/>
+        <location filename="Windows/OptionsWindow.cpp" line="956"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>Néhány változtatás még nincs elmentetve. Valóban bezárja ezt az opcióablakot?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="973"/>
+        <location filename="Windows/OptionsWindow.cpp" line="979"/>
         <source>Enter program:</source>
         <translation>Program megadása:</translation>
     </message>
@@ -4247,6 +4482,96 @@ Processes in this box will think they are run with administrative privileges, wi
     </message>
 </context>
 <context>
+    <name>CTemplateTypePage</name>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="257"/>
+        <source>Create new Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="266"/>
+        <source>Select template type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="270"/>
+        <source>%1 template</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CTemplateWizard</name>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="37"/>
+        <source>Compatybility Template Wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="48"/>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="49"/>
+        <source>Web Browser</source>
+        <translation type="unfinished">WEB böngésző</translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="82"/>
+        <source>Force %1 to run in this sandbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="100"/>
+        <source>Allow direct access to the entire %1 profile folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="113"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="168"/>
+        <source>Allow direct access to %1 phishing database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="127"/>
+        <source>Allow direct access to %1 session management</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="136"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="199"/>
+        <source>Allow direct access to %1 passwords</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="146"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="208"/>
+        <source>Allow direct access to %1 cookies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="155"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="227"/>
+        <source>Allow direct access to %1 bookmark and history database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="180"/>
+        <source>Allow direct access to %1 sync data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="190"/>
+        <source>Allow direct access to %1 preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/TemplateWizard.cpp" line="217"/>
+        <source>Allow direct access to %1 bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CTraceModel</name>
     <message>
         <location filename="Models/TraceModel.cpp" line="196"/>
@@ -4719,8 +5044,8 @@ Processes in this box will think they are run with administrative privileges, wi
         <location filename="Forms/OptionsWindow.ui" line="2809"/>
         <location filename="Forms/OptionsWindow.ui" line="3031"/>
         <location filename="Forms/OptionsWindow.ui" line="3147"/>
-        <location filename="Forms/OptionsWindow.ui" line="4269"/>
-        <location filename="Forms/OptionsWindow.ui" line="4326"/>
+        <location filename="Forms/OptionsWindow.ui" line="4274"/>
+        <location filename="Forms/OptionsWindow.ui" line="4350"/>
         <source>Name</source>
         <translation>Név</translation>
     </message>
@@ -4756,7 +5081,7 @@ Processes in this box will think they are run with administrative privileges, wi
         <location filename="Forms/OptionsWindow.ui" line="3644"/>
         <location filename="Forms/OptionsWindow.ui" line="3769"/>
         <location filename="Forms/OptionsWindow.ui" line="3828"/>
-        <location filename="Forms/OptionsWindow.ui" line="4240"/>
+        <location filename="Forms/OptionsWindow.ui" line="4294"/>
         <source>Remove</source>
         <translation>Eltávolítás</translation>
     </message>
@@ -5814,7 +6139,7 @@ A naplózást az ini használatával testreszabhatja, ha megadja:
         <translation>Kulcskövetés</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4438"/>
+        <location filename="Forms/OptionsWindow.ui" line="4462"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
         <translation>Az elveszett védelem kompenzálásához tekintse meg a &apos;Drop Rights&apos; beállítási oldalát a &apos;Korlátozások beállításai&apos; csoportban.</translation>
     </message>
@@ -5845,37 +6170,37 @@ A naplózást az ini használatával testreszabhatja, ha megadja:
         <translation>Program sablonok</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4200"/>
+        <location filename="Forms/OptionsWindow.ui" line="4255"/>
         <source>Filter Categories</source>
         <translation>Szűrő kategóriák</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4213"/>
+        <location filename="Forms/OptionsWindow.ui" line="4226"/>
         <source>Text Filter</source>
         <translation>Szöveg szűrő</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4220"/>
+        <location filename="Forms/OptionsWindow.ui" line="4248"/>
         <source>Add Template</source>
         <translation>Sablon hozzáadása</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4227"/>
+        <location filename="Forms/OptionsWindow.ui" line="4203"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
         <translation>Ez a lista nagy mennyiségű homokozó kompatibilitást javító sablont tartalmaz</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4264"/>
+        <location filename="Forms/OptionsWindow.ui" line="4269"/>
         <source>Category</source>
         <translation>Kategória</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4280"/>
+        <location filename="Forms/OptionsWindow.ui" line="4304"/>
         <source>Template Folders</source>
         <translation>Sablon mappák</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4300"/>
+        <location filename="Forms/OptionsWindow.ui" line="4324"/>
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
@@ -5885,7 +6210,7 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3856"/>
-        <location filename="Forms/OptionsWindow.ui" line="4331"/>
+        <location filename="Forms/OptionsWindow.ui" line="4355"/>
         <source>Value</source>
         <translation>Érték</translation>
     </message>
@@ -5895,37 +6220,37 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
         <translation>Sablonok</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4342"/>
+        <location filename="Forms/OptionsWindow.ui" line="4366"/>
         <source>Accessibility</source>
         <translation>Hozzáférhetőség</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4362"/>
+        <location filename="Forms/OptionsWindow.ui" line="4386"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
         <translation>Képernyőolvasók: JAWS, NVDA, Window-Eyes, System Acces</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4402"/>
+        <location filename="Forms/OptionsWindow.ui" line="4426"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
         <translation>A következő beállítások lehetővé teszik a Sandboxie használatát akadálymentes szoftverrel kombinálva. Felhívjuk figyelmét, hogy a Sandboxie bizonyos mértékű védelme szükségszerűen elvész, amikor ezek a beállítások érvénybe lépnek.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4455"/>
+        <location filename="Forms/OptionsWindow.ui" line="4479"/>
         <source>Edit ini Section</source>
         <translation>Konfiguráció szerkesztése</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4461"/>
+        <location filename="Forms/OptionsWindow.ui" line="4485"/>
         <source>Edit ini</source>
         <translation>INI szerkesztése</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4474"/>
+        <location filename="Forms/OptionsWindow.ui" line="4498"/>
         <source>Cancel</source>
         <translation>Mégse</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4497"/>
+        <location filename="Forms/OptionsWindow.ui" line="4521"/>
         <source>Save</source>
         <translation>Mentés</translation>
     </message>
@@ -5941,7 +6266,7 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
 <context>
     <name>ProgramsDelegate</name>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="47"/>
+        <location filename="Windows/OptionsWindow.cpp" line="48"/>
         <source>Group: %1</source>
         <translation>Csoport: %1</translation>
     </message>

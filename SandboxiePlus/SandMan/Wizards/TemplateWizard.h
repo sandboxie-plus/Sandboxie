@@ -31,7 +31,7 @@ public:
     CTemplateWizard(ETemplateType Type, QWidget *parent = nullptr);
 
 	static QString GetTemplateLabel(ETemplateType Type);
-    static void CreateNewTemplate(CSandBox* pBox, ETemplateType Type, QWidget* pParent = NULL);
+    static bool CreateNewTemplate(CSandBox* pBox, ETemplateType Type, QWidget* pParent = NULL);
 
 private slots:
     void showHelp();

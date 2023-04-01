@@ -51,11 +51,11 @@ QString CTemplateWizard::GetTemplateLabel(ETemplateType Type)
 	}
 }
 
-void CTemplateWizard::CreateNewTemplate(CSandBox* pBox, ETemplateType Type, QWidget* pParent)
+bool CTemplateWizard::CreateNewTemplate(CSandBox* pBox, ETemplateType Type, QWidget* pParent)
 {
 	CTemplateWizard wizard(Type, pParent);
     if (!wizard.exec())
-        return;
+        return false;
 	
     if (Type == TmplCustom)
         Type = (ETemplateType)wizard.field("tmplType").toInt();
@@ -245,6 +245,7 @@ void CTemplateWizard::CreateNewTemplate(CSandBox* pBox, ETemplateType Type, QWid
         }
     }
 
+    return true;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

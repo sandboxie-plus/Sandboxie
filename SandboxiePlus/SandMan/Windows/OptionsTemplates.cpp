@@ -214,8 +214,11 @@ void COptionsWindow::OnAddTemplates()
 void COptionsWindow::OnTemplateWizard()
 {
 	CTemplateWizard::ETemplateType Type = (CTemplateWizard::ETemplateType)((QAction*)sender())->data().toInt();
-	if (CSandBox* pBox = qobject_cast<CSandBox*>(m_pBox.data()))
-		CTemplateWizard::CreateNewTemplate(pBox, Type, this);
+	if (CSandBox* pBox = qobject_cast<CSandBox*>(m_pBox.data())) {
+		if (CTemplateWizard::CreateNewTemplate(pBox, Type, this)) {
+			LoadTemplates();
+		}
+	}
 }
 
 void COptionsWindow::OnDelTemplates()

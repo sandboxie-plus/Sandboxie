@@ -501,7 +501,7 @@ bool CBrowserTypePage::validatePage()
     QString Section = field("templateName").toString().replace(" ", "_");
     QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_Local_" + Section + "_Force", theAPI));
     if (!pTemplate->GetText("ForceProcess").isEmpty()) {
-        QMessageBox::critical(this, "Sandboxie-Plus", tr("This browser name is already in use, please chooe an other one."));
+        QMessageBox::critical(this, "Sandboxie-Plus", tr("This browser name is already in use, please choose an other one."));
         return false;
     }
     return true;
@@ -515,7 +515,7 @@ CBrowserPathsPage::CBrowserPathsPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Create Web Browser Template"));
-    setSubTitle(tr("Configure your Web Browsers profile directories."));
+    setSubTitle(tr("Configure your Web Browser's profile directories."));
 
     int row = 0;
     QGridLayout *layout = new QGridLayout;
@@ -794,7 +794,7 @@ void CBrowserPathsPage::OnProfileChange()
     {
         if(m_FoundFolders.isEmpty())
             m_pInfoLabel->setText(tr(
-                "No suitable fodlers have been found.\n"
+                "No suitable folders have been found.\n"
                 "Note: you need to run the browser unsandboxed for them to get created.\n"
                 "Please browse to the correct user profile directory."));
         else
@@ -963,7 +963,7 @@ void CFinishTemplatePage::initializePage()
 
     CBrowserTypePage* pPage = (CBrowserTypePage*)wizard()->page(CTemplateWizard::Page_BrowserType);
     switch (pPage->m_BrowserType) {
-    case CBrowserTypePage::Browser_Gecko: Info += tr("Browser Type: Gecko (Mozilla firefox)\n"); break;
+    case CBrowserTypePage::Browser_Gecko: Info += tr("Browser Type: Gecko (Mozilla Firefox)\n"); break;
     case CBrowserTypePage::Browser_Chromium: Info += tr("Browser Type: Chromium (Google Chrome)\n"); break;
     }
     Info += tr("\n");

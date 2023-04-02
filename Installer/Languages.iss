@@ -183,27 +183,27 @@ german.AutoStartProgram=Starte automatisch %1
 german.RefreshBuild=Neueste Templates.ini und Übersetzungen herunterladen
 
 ; Hungarian
-hungarian.AddSandboxedMenu=Add "Run Sandboxed" to context menu (le kell fordítani)
-hungarian.AddSandboxedBrowser=Asztali parancsikon hozzáadása a böngésző indításához Sandboxie alól
+hungarian.AddSandboxedMenu=Az "Izolált módú futtatás" hozzáadása a helyi menühöz
+hungarian.AddSandboxedBrowser=Asztali parancsikon hozzáadása a böngésző izolált módú indításához
 hungarian.SandboxieStartMenu1=Bármilyen program futtatása izolált módban
 hungarian.SandboxieStartMenu2=Webböngésző futtatása izolált módban
 hungarian.SandboxieStartMenu3=Sandboxie start menü
 hungarian.SandboxedBrowser=Izolált böngésző
-hungarian.CustomPageLabel1=Select Installation Type (le kell fordítani)
-hungarian.CustomPageLabel2=How should be installed (le kell fordítani)
-hungarian.CustomPageLabel3=Choose the installation mode (le kell fordítani)
-hungarian.CustomPageInstallMode=Install {#MyAppName} on this computer (le kell fordítani)
-hungarian.CustomPageUpgradeMode=Update existing {#MyAppName} installation (le kell fordítani)
-hungarian.CustomPagePortableMode=Extract all files to a directory for portable use (le kell fordítani)
-hungarian.RequiresWin7OrLater=Sandboxie-Plus requires Windows 7 or later. (le kell fordítani)
-hungarian.ClassicFound=Sandboxie Classic installation detected, it must be uninstalled first, do you want to uninstall it now? (le kell fordítani)
-hungarian.RunSandboxedMenu=Run &Sandboxed (le kell fordítani)
-hungarian.UninstallTaskLabel1=Select Uninstall Type (le kell fordítani)
-hungarian.UninstallTaskLabel2=How would you like to uninstall Sandboxie-Plus? (le kell fordítani)
-hungarian.UninstallTaskLabel3=&Keep configuration files and sandboxes%nThis is the most recommended option if you plan to reinstall Sandboxie-Plus while keeping your configuration files and sandboxes. (le kell fordítani)
-hungarian.UninstallTaskLabel4=Remove &configuration files%nSelect this option to remove the Sandboxie.ini and Sandboxie-Plus.ini configuration files while keeping the sandboxes unchanged. (le kell fordítani)
-hungarian.UninstallTaskLabel5=Remove configuration files and &sandboxes%nSelect this option to remove all configuration files and sandboxes, including the Sandbox folder located in custom paths with FileRootPath. (le kell fordítani)
-hungarian.RefreshBuild=Download latest Templates.ini and translations (le kell fordítani)
+hungarian.CustomPageLabel1=Válassza ki a telepítés típusát
+hungarian.CustomPageLabel2=Hogyan kell telepíteni?
+hungarian.CustomPageLabel3=Válassza ki a telepítési módot
+hungarian.CustomPageInstallMode=Telepítse a {#MyAppName} alkalmazást erre a számítógépre
+hungarian.CustomPageUpgradeMode=Frissítse a meglévő {#MyAppName} telepítést
+hungarian.CustomPagePortableMode=Csomagolja ki az összes fájlt egy könyvtárba hordozható használatra
+hungarian.RequiresWin7OrLater=Sandboxie-Plus alkalmazáshoz Windows 7 vagy újabb rendszer szükséges.
+hungarian.ClassicFound=A Sandboxie Classic telepítése észlelve, melyet először el kell távolítani. Eltávolítja most?
+hungarian.RunSandboxedMenu=Futtatás izolált módban
+hungarian.UninstallTaskLabel1=Válassza ki az eltávolítás típusát
+hungarian.UninstallTaskLabel2=Hogyan távolítja el a Sandboxie-Plus-t?
+hungarian.UninstallTaskLabel3=A konfigurációs fájlok és homokozók megtartása%nEz a leginkább ajánlott lehetőség, ha a Sandboxie-Plus újratelepítését tervezi, miközben megtartja konfigurációs fájljait és homokozóit.
+hungarian.UninstallTaskLabel4=A konfigurációs fájlok eltávolítása%nVálassza ezt a lehetőséget a Sandboxie.ini és a Sandboxie-Plus.ini konfigurációs fájlok eltávolításához, miközben a homokozók változatlanok maradnak.
+hungarian.UninstallTaskLabel5=A konfigurációs fájlok és homokozók eltávolítása%nVálassza ezt a lehetőséget az összes konfigurációs fájl és homokozó eltávolításához, beleértve a Sandbox mappát is, amely a FileRootPath egyéni elérési útjain található.
+hungarian.RefreshBuild=Töltse le a legújabb Templates.ini-t és a fordításokat
 
 ; Italian
 Italian.AddSandboxedMenu=Aggiungi l'opzione "Avvia nell'area virtuale" al menu contestuale

@@ -206,6 +206,7 @@ _FX BOOLEAN File_Init(void)
     SBIEDLL_HOOK(File_,NtWriteFile);
     SBIEDLL_HOOK(File_,NtFsControlFile);
 
+    if (!Dll_CompartmentMode) // else ping does not work
     if (File_IsBlockedNetParam(NULL)) {
         SBIEDLL_HOOK(File_,NtDeviceIoControlFile);
     }

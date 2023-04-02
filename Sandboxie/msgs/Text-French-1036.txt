@@ -3287,23 +3287,23 @@ Forcer %2 à s'exécuter dans ce bac à sable
 .
 
 4324;txt;02
-Autoriser l'accès direct de %2 à la synchronisation des données.
+Autoriser l'accès direct à la synchronisation des données de %2
 .
 
 4325;txt;02
-Autoriser l'accès direct aux %2 flux
+Autoriser l'accès direct aux flux de %2
 .
 
 4326;txt;02
-Autoriser l'accès direct aux favoris d'%2
+Autoriser l'accès direct aux favoris de %2
 .
 
 4327;txt;01
-Ajout les favoris d'Internet Explorer à la récupération immédiate des dossiers
+Ajout des favoris d'Internet Explorer à la récupération immédiate des dossiers
 .
 
 4328;txt;01
-Autoriser l'accès direct aux %2 cookies
+Autoriser l'accès direct aux cookies de %2
 .
 
 4329;txt;01
@@ -3315,23 +3315,23 @@ Sauvegarde en dehors du bac à sable : Informations sur les comptes Hotmail et M
 .
 
 4331;txt;01
-Autoriser l'accès direct aux %2 mots de passes
+Autoriser l'accès direct aux mots de passe de %2
 .
 
 4336;txt;02
-Autoriser l'accès direct aux %2 signets et à la base de données historique
+Autoriser l'accès direct aux marque-pages et à la base de données de l'historique de %2
 .
 
 4337;txt;02
-Autoriser l'accès direct à la %2 base de données d'hameçonnage 
+Autoriser l'accès direct à la base de données d'hameçonnage de %2
 .
 
 4338;txt;02
-Autoriser l'accès direct au %2 dossier du profil
+Autoriser l'accès direct au dossier de profil de %2
 .
 
 4339;txt;02
-Permet un accès direct aux %2 préférences
+Autoriser l'accès direct aux paramètres de %2
 .
 
 4340;txt;01
@@ -3347,7 +3347,7 @@ Activer %2 correctif(s) pour Windows
 .
 
 4356;txt;02
-Autoriser l'accès direct aux signets d'%2
+Autoriser l'accès direct aux marque-pages de %2
 .
 
 4357;txt;02

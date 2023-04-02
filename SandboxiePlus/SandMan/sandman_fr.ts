@@ -141,62 +141,62 @@
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="843"/>
         <source>Create Web Browser Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Création d&apos;un modèle pour navigateur web</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="844"/>
         <source>Configure web browser template options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Configure les options du modèle de navigateur web.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="854"/>
         <source>Force the Web Browser to run in this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Forcer le navigateur web à s&apos;exécuter dans ce bac à sable</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="858"/>
         <source>Allow direct access to the entire Web Browser profile folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès direct au dossier entier des profils du navigateur web</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="862"/>
         <source>Allow direct access to Web Browser&apos;s phishing database</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès direct à la base de données d&apos;hameçonnage du navigateur web</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="866"/>
         <source>Allow direct access to Web Browser&apos;s session management</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès direct à la gestion des sessions du navigateur web</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="870"/>
         <source>Allow direct access to Web Browser&apos;s sync data</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès direct aux données de synchronisation du navigateur web</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="874"/>
         <source>Allow direct access to Web Browser&apos;s preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès direct aux paramètres du navigateur web</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="878"/>
         <source>Allow direct access to Web Browser&apos;s passwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès direct aux mots de passe du navigateur web</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="882"/>
         <source>Allow direct access to Web Browser&apos;s cookies</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès direct aux cookies du navigateur web</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="886"/>
         <source>Allow direct access to Web Browser&apos;s bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès direct aux marque-pages du navigateur web</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="890"/>
         <source>Allow direct access to Web Browser&apos;s bookmark and history database</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès direct à la base de données de l&apos;historique et des marque-pages du navigateur web</translation>
     </message>
 </context>
 <context>
@@ -204,69 +204,71 @@
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="516"/>
         <source>Create Web Browser Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Création d&apos;un modèle pour navigateur web</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="517"/>
         <source>Configure your Web Browsers profile directories.</source>
-        <translation type="unfinished"></translation>
+        <translation>Configure le répertoire des profils de votre navigateur web.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="525"/>
         <source>User profile(s) directory:</source>
-        <translation type="unfinished"></translation>
+        <translation>Répertoire des profils d&apos;utilisateurs :</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="527"/>
         <source>Show also imperfect matches</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher également les correspondances imparfaites</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="533"/>
         <source>Browser Executable (*.exe)</source>
-        <translation type="unfinished"></translation>
+        <translation>Exécutable du navigateur (*.exe)</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="550"/>
         <source>Continue without browser profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuer sans profil de navigateur</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="711"/>
         <source>Configure your Gecko based Browsers profile directories.</source>
-        <translation type="unfinished"></translation>
+        <translation>Configure le répertoire des profils de votre navigateur fondé sur Gecko.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="715"/>
         <source>Configure your Chromium based Browsers profile directories.</source>
-        <translation type="unfinished"></translation>
+        <translation>Configure le répertoire des profils de votre navigateur fondé sur Chromium.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="795"/>
         <source>No suitable fodlers have been found.
 Note: you need to run the browser unsandboxed for them to get created.
 Please browse to the correct user profile directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun dossier approprié n&apos;a été trouvé.
+Remarque : vous devez exécuter le navigateur en dehors d&apos;un bac à sable pour qu&apos;il puisse être créé.
+Veuillez naviguer vers la répertoire correct des profils d&apos;utilisateurs.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="800"/>
         <source>Please choose the correct user profile directory, if it is not listed you may need to browse to it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez choisir le répertoire correct des profils d&apos;utilisateur ; s&apos;il n&apos;est pas répertorié vous devrez peut-être naviguer vers lui.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="806"/>
         <source>Please ensure the selected directory is correct, the wizard is not confident in all the presented options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez vous assurer que le répertoire choisi est correct ; l&apos;assistant n&apos;est pas confiant dans toutes les options présentées.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="809"/>
         <source>Please ensure the selected directory is correct.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez vous assurer que le répertoire choisi est correct.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="814"/>
         <source>This path does not look like a valid profile directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce chemin n&apos;a pas l&apos;air d&apos;être un répertoire de profil valide.</translation>
     </message>
 </context>
 <context>
@@ -274,50 +276,50 @@ Please browse to the correct user profile directory.</source>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="324"/>
         <source>Create Web Browser Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Création d&apos;un modèle pour navigateur web</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="325"/>
         <source>Select your Web Browsers main executable, this will allow Sandboxie to identify the browser.</source>
         <oldsource>Select your Web Browsers main executable, this will allow sandboxie to identify the browser.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Choix de l&apos;exécutable principal de votre navigateur web ; ceci permettra à Sandboxie d&apos;identifier le navigateur.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="335"/>
         <source>Enter browser name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Saisir le nom du navigateur :</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="346"/>
         <source>Main executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</source>
         <oldsource>Mein executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Exécutable principal (par exemple « firefox.exe », « chrome.exe », « msedge.exe », etc...) :</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="350"/>
         <source>Browser executable (*.exe)</source>
         <oldsource>Browser Executable (*.exe)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Exécutable du navigateur (*.exe)</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="450"/>
         <source>The browser appears to be Gecko based, like Mozilla Firefox and its derivatives.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le navigateur a l&apos;air d&apos;être fondé sur Gecko, comme Mozilla Firefox et ses dérivés.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="453"/>
         <source>The browser appears to be Chromium based, like Microsoft Edge or Google Chrome and its derivatives.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le navigateur a l&apos;air d&apos;être fondé sur Chromium, comme Microsoft Edge ou Google Chrome et ses dérivés.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="456"/>
         <source>Browser could not be recognized, template cannot be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le navigateur n&apos;a pas été reconnu ; le modèle ne peut pas être créé.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="503"/>
         <source>This browser name is already in use, please chooe an other one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce nom de navigateur est déjà utilisé, veuillez en choisir un autre.</translation>
     </message>
 </context>
 <context>
@@ -340,7 +342,7 @@ Please browse to the correct user profile directory.</source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="244"/>
         <source>To use &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in a business setting, an appropriate &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt; for business use is required. If you do not yet have the required certificate(s), you can get those from the &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com web shop&lt;/a&gt;.</source>
-        <translation>Pour utiliser &lt;b&gt;Sandboxie-Plus&lt;/b&gt; dans un établissement commercial, un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;certificat d&apos;adhérent&lt;/a&gt; approprié pour une utilisation commerciale est requis. Si vous n&apos;avez pas encore le(s) certificat(s) requis, vous pouvez les obtenir depuis la &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;boutique web xanasoft.com&lt;/a&gt;.</translation>
+        <translation>Pour utiliser &lt;b&gt;Sandboxie-Plus&lt;/b&gt; dans un établissement commercial, un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;certificat d&apos;adhérent&lt;/a&gt; approprié pour une utilisation commerciale est requis. Si vous n&apos;avez pas encore le ou les certificats requis, vous pouvez les obtenir depuis la &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;boutique web xanasoft.com&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="258"/>
@@ -521,48 +523,54 @@ Vous pouvez utiliser « %USER% » pour enregistrer le bac de chaque utilisateur 
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="935"/>
         <source>Create Web Browser Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Création d&apos;un modèle pour navigateur web</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="943"/>
         <source>Almost complete, click Finish to create a new  Web Browser Template and conclude the wizard.</source>
-        <translation type="unfinished"></translation>
+        <translation>C&apos;est presque fini. Appuyez sur « Terminer » pour créer un nouveau modèle pour navigateur web et conclure l&apos;assistant.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="961"/>
         <source>Browser name: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nom du navigateur : %1
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="965"/>
         <source>Browser Type: Gecko (Mozilla firefox)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Genre de navigateur : Gecko (Mozilla Firefox)
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="966"/>
         <source>Browser Type: Chromium (Google Chrome)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Genre de navigateur : Chromium (Google Chrome)
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="968"/>
         <source>
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="969"/>
         <source>Browser executable path: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin vers l&apos;exécutable du navigateur : %1
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="979"/>
         <source>Browser profile path: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin vers les profils du navigateur : %1
+</translation>
     </message>
 </context>
 <context>
@@ -1678,7 +1686,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="499"/>
         <source>Add %1 Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un modèle pour : %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="599"/>
@@ -2013,7 +2021,7 @@ Chemin complet : %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="248"/>
         <source>Do you really want to delete %1 selected files?</source>
-        <translation>Voulez-vous vraiment supprimer le(s) %1 fichier(s) sélectionné(s) ?</translation>
+        <translation>Voulez-vous vraiment supprimer le ou les %1 fichiers sélectionnés ?</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="276"/>
@@ -2028,7 +2036,7 @@ Chemin complet : %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="297"/>
         <source>There are %1 new files available to recover.</source>
-        <translation>Il y a %1 fichier(s) disponible(s) pour une récupération.</translation>
+        <translation>Nouveaux fichiers disponibles pour une récupération : %1</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="588"/>
@@ -3662,7 +3670,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="SbieProcess.cpp" line="80"/>
         <source>Chromium Based</source>
-        <translation>Basé sur chromium</translation>
+        <translation>Fondé sur Chromium</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="81"/>
@@ -4075,7 +4083,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Views/SbieView.cpp" line="838"/>
         <source>Do you really want to remove the selected group(s)?</source>
-        <translation>Voulez-vous vraiment supprimer le(s) groupe(s) sélectionné(s) ?</translation>
+        <translation>Voulez-vous vraiment supprimer le ou les groupes sélectionnés ?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="149"/>
@@ -4267,7 +4275,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Views/SbieView.cpp" line="1294"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
-        <translation>Voulez-vous vraiment supprimer le(s) bac(s) à sable sélectionné(s) ? &lt;br /&gt;&lt;br /&gt;Attention : Le contenu de ce(s) bac(s) sera aussi supprimé !</translation>
+        <translation>Voulez-vous vraiment supprimer le ou les bacs à sable sélectionnés ? &lt;br /&gt;&lt;br /&gt;Attention : Le contenu de ces bacs sera aussi supprimé !</translation>
     </message>
     <message>
         <source>Deleting %1 content</source>
@@ -4301,7 +4309,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Views/SbieView.cpp" line="1366"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
-        <translation>Voulez-vous arrêter tous les processus dans le(s) bac(s) à sable sélectionné(s) ?</translation>
+        <translation>Voulez-vous arrêter tous les processus dans le ou les bacs à sable sélectionnés ?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1367"/>
@@ -4776,7 +4784,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="508"/>
         <source>Almost complete, click Finish to create a new sandbox and conclude the wizard.</source>
-        <translation>C&apos;est bientôt fini. Appuyez sur « Terminer » pour créer un nouveau bac et conclure l&apos;assistant.</translation>
+        <translation>C&apos;est presque fini. Appuyez sur « Terminer » pour créer un nouveau bac et conclure l&apos;assistant.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="517"/>
@@ -4929,17 +4937,17 @@ Les processus de ce bac penseront qu&apos;ils sont lancés avec des privilèges 
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="257"/>
         <source>Create new Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un nouveau modèle</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="266"/>
         <source>Select template type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir le genre de modèle :</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="270"/>
         <source>%1 template</source>
-        <translation type="unfinished"></translation>
+        <translation>Modèle pour %1</translation>
     </message>
 </context>
 <context>
@@ -4948,71 +4956,71 @@ Les processus de ce bac penseront qu&apos;ils sont lancés avec des privilèges 
         <location filename="Wizards/TemplateWizard.cpp" line="37"/>
         <source>Compatibility Template Wizard</source>
         <oldsource>Compatybility Template Wizard</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Assistant de compatibilité de modèle</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="48"/>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Personnalisé</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="49"/>
         <source>Web Browser</source>
-        <translation type="unfinished">Navigateur web</translation>
+        <translation>Navigateur web</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="82"/>
         <source>Force %1 to run in this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Forcer %1 à s&apos;exécuter dans ce bac à sable</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="100"/>
         <source>Allow direct access to the entire %1 profile folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès direct au dossier entier des profils de %1</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="113"/>
         <location filename="Wizards/TemplateWizard.cpp" line="168"/>
         <source>Allow direct access to %1 phishing database</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès direct à la base de données d&apos;hameçonnage de %1</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="127"/>
         <source>Allow direct access to %1 session management</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès direct à la gestion de sessions de %1</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="136"/>
         <location filename="Wizards/TemplateWizard.cpp" line="199"/>
         <source>Allow direct access to %1 passwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès direct aux mots de passe de %1</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="146"/>
         <location filename="Wizards/TemplateWizard.cpp" line="208"/>
         <source>Allow direct access to %1 cookies</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès direct aux cookies de %1</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="155"/>
         <location filename="Wizards/TemplateWizard.cpp" line="227"/>
         <source>Allow direct access to %1 bookmark and history database</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès direct à la base de données de l&apos;historique et des marque-pages de %1</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="180"/>
         <source>Allow direct access to %1 sync data</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès direct aux données de synchronisation de %1</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="190"/>
         <source>Allow direct access to %1 preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès direct aux paramètres de %1</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="217"/>
         <source>Allow direct access to %1 bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser l&apos;accès direct aux marque-pages de %1</translation>
     </message>
 </context>
 <context>
@@ -5233,7 +5241,7 @@ Les processus de ce bac penseront qu&apos;ils sont lancés avec des privilèges 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="458"/>
         <source>Using WFP allows Sandboxie to reliably enforce IP/Port based rules for network access. Unlike system level application firewalls, Sandboxie can use different rules in each box for the same application. If you already have a good and reliable application firewall and do not need per box rules, you can leave this option unchecked. Without WFP enabled, Sandboxie will still be able to reliably and entirely block processes from accessing the network. However, this can cause the process to crash, as the driver blocks the required network device endpoints. Even with WFP disabled, Sandboxie offers to set IP/Port based rules, however these will be applied in user mode only and not be enforced by the driver. Hence, without WFP enabled, an intentionally malicious process could bypass those rules, but not the entire network block.</source>
-        <translation>L&apos;utilisation de WFP permet à Sandboxie d&apos;appliquer de manière fiable les règles basées sur l&apos;IP/le port pour l&apos;accès au réseau. Contrairement aux pare-feux logiciels au niveau du système, Sandboxie peut utiliser différentes règles dans chaque bac pour la même application. Si vous avez déjà un bon pare-feu logiciel fiable et que vous n&apos;avez pas besoin de règles par bac, vous pouvez laisser cette option désactivée. Sans WFP activé, Sandboxie pourra toujours empêcher de manière fiable et totale les processus d&apos;accéder au réseau. Cependant, cela peut provoquer le plantage du processus, car le pilote bloque les points de terminaison du périphérique réseau requis. Même avec WFP désactivé, Sandboxie propose de définir des règles basées sur l&apos;IP/le port, cependant celles-ci seront appliquées en mode utilisateur uniquement et ne seront pas imposées par le pilote. Par conséquent, sans WFP activé, un processus intentionnellement malveillant pourrait contourner ces règles, mais pas l&apos;ensemble du bloc réseau.</translation>
+        <translation>L&apos;utilisation de WFP permet à Sandboxie d&apos;appliquer de manière fiable les règles fondées sur l&apos;IP/le port pour l&apos;accès au réseau. Contrairement aux pare-feux logiciels au niveau du système, Sandboxie peut utiliser différentes règles dans chaque bac pour la même application. Si vous avez déjà un bon pare-feu logiciel fiable et que vous n&apos;avez pas besoin de règles par bac, vous pouvez laisser cette option désactivée. Sans WFP activé, Sandboxie pourra toujours empêcher de manière fiable et totale les processus d&apos;accéder au réseau. Cependant, cela peut provoquer le plantage du processus, car le pilote bloque les points de terminaison du périphérique réseau requis. Même avec WFP désactivé, Sandboxie propose de définir des règles fondées sur l&apos;IP/le port, cependant celles-ci seront appliquées en mode utilisateur uniquement et ne seront pas imposées par le pilote. Par conséquent, sans WFP activé, un processus intentionnellement malveillant pourrait contourner ces règles, mais pas l&apos;ensemble du bloc réseau.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="467"/>
@@ -6816,7 +6824,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3304"/>
         <source>Use desktop object workaround for all processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser la solution de contournement d&apos;objet de bureau pour tous les processus</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3344"/>

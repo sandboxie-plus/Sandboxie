@@ -18,7 +18,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed issue with the new SBIE2307 message being triggered on media removal
 - excluded some old token hacks (for Firefox) from being disabled
-- fixed long-standing ping issue with compartment type boxes [#1608](https://github.com/sandboxie-plus/Sandboxie/issues/1608)
+
+### Not fixed yet
+- long-standing ping issue with compartment type boxes [#1608](https://github.com/sandboxie-plus/Sandboxie/issues/1608)
+
 
 
 ## [1.8.2 / 5.63.2] - 2023-04-01

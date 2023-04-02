@@ -139,62 +139,62 @@
 <context>
     <name>CBrowserOptionsPage</name>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="843"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="844"/>
         <source>Create Web Browser Template</source>
         <translation>Erstelle Webbrowser Vorlage</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="844"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="845"/>
         <source>Configure web browser template options.</source>
         <translation>Webbrowservorlagenoptionen konfigurieren.</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="854"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="855"/>
         <source>Force the Web Browser to run in this sandbox</source>
         <translation>Erzwinge die Ausführung des Webbrowsers in dieser Sandbox</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="858"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="859"/>
         <source>Allow direct access to the entire Web Browser profile folder</source>
         <translation>Erlaube direkten Zugriff auf den gesamten Webbrowserprofilordner</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="862"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="863"/>
         <source>Allow direct access to Web Browser&apos;s phishing database</source>
         <translation>Erlaube direkten Zugriff auf die Phishingdatenbank des Webbrowsers</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="866"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="867"/>
         <source>Allow direct access to Web Browser&apos;s session management</source>
         <translation>Erlaube direkten Zugriff auf die Sitzungskontrolle des Webbrowsers</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="870"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="871"/>
         <source>Allow direct access to Web Browser&apos;s sync data</source>
         <translation>Erlaube direkten Zugriff auf die zu synchronisierenden Daten des Webbrowsers</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="874"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="875"/>
         <source>Allow direct access to Web Browser&apos;s preferences</source>
         <translation>Erlaube direkten Zugriff auf die Eintellungen des Webbrowsers</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="878"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="879"/>
         <source>Allow direct access to Web Browser&apos;s passwords</source>
         <translation>Erlaube direkten Zugriff auf die Passwörter des Webbrowsers</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="882"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="883"/>
         <source>Allow direct access to Web Browser&apos;s cookies</source>
         <translation>Erlaube direkten Zugriff auf die Cookies des Webbrowsers</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="886"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="887"/>
         <source>Allow direct access to Web Browser&apos;s bookmarks</source>
         <translation>Erlaube direkten Zugriff auf die Lesezeichen des Webbrowsers</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="890"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="891"/>
         <source>Allow direct access to Web Browser&apos;s bookmark and history database</source>
         <translation>Erlaube direkten Zugriff auf die Lesezeichen- und Verlaufsdatenbank des Webbrowsers</translation>
     </message>
@@ -202,47 +202,47 @@
 <context>
     <name>CBrowserPathsPage</name>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="516"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="517"/>
         <source>Create Web Browser Template</source>
         <translation>Erstelle Webbrowser Vorlage</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="517"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="518"/>
         <source>Configure your Web Browsers profile directories.</source>
         <translation>Konfigurieren Sie Ihre Webbrowserprofilordner.</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="525"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="526"/>
         <source>User profile(s) directory:</source>
         <translation>Nutzerprofilordner:</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="527"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="528"/>
         <source>Show also imperfect matches</source>
         <translation>Zeige auch ungenaue Übereinstimmungen</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="533"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="534"/>
         <source>Browser Executable (*.exe)</source>
         <translation>Browserprogamm (*.exe)</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="550"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="551"/>
         <source>Continue without browser profile</source>
         <translation>Ohne Browserprofil fortfahren</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="711"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="712"/>
         <source>Configure your Gecko based Browsers profile directories.</source>
         <translation>Konfigurieren Sie Ihre Webbrowserprofilordner des auf Gecko basierenden Browsers.</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="715"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="716"/>
         <source>Configure your Chromium based Browsers profile directories.</source>
         <translation>Konfigurieren Sie Ihre Webbrowserprofilordner des auf Chromium basierenden Browsers.</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="795"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="796"/>
         <source>No suitable fodlers have been found.
 Note: you need to run the browser unsandboxed for them to get created.
 Please browse to the correct user profile directory.</source>
@@ -251,17 +251,17 @@ Notiz: Sie müssen den Browser außerhalb einer Sandbox starten, damit diese ers
 Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="800"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="801"/>
         <source>Please choose the correct user profile directory, if it is not listed you may need to browse to it.</source>
         <translation>Bitte wählen Sie den korrekten Nutzerprofilordner. Falls er nicht aufgeführt wird, können Sie zu ihm navigieren.</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="806"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="807"/>
         <source>Please ensure the selected directory is correct, the wizard is not confident in all the presented options.</source>
         <translation>Bitte stellen Sie sicher, dass der ausgewählte Ordner korrekt ist, der Assistent ist sich nicht bei allen Optionen sicher.</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="809"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="810"/>
         <source>Please ensure the selected directory is correct.</source>
         <translation>Bitte stellen Sie sicher, dass der ausgewählte Ordner korrekt ist.</translation>
     </message>
@@ -278,7 +278,7 @@ Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
         <translation type="vanished">Bitte stellen Sie sicher, dass der ausgewählte Ordner korrekt ist.</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="814"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="815"/>
         <source>This path does not look like a valid profile directory.</source>
         <translation>Dieser Pfad sieht nicht nach einem gültigen Profilordner aus.</translation>
     </message>
@@ -286,40 +286,40 @@ Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
 <context>
     <name>CBrowserTypePage</name>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="324"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="325"/>
         <source>Create Web Browser Template</source>
         <translation>Erstelle Webbrowser Vorlage</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="325"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="326"/>
         <source>Select your Web Browsers main executable, this will allow Sandboxie to identify the browser.</source>
         <oldsource>Select your Web Browsers main executable, this will allow sandboxie to identify the browser.</oldsource>
         <translation>Wählen Sie das Hauptprogramm Ihres Webbrowsers, dies wird Sandboxie ermöglichen Ihren Browser zu identifizieren.</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="335"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="336"/>
         <source>Enter browser name:</source>
         <translation>Browsernamen eingeben:</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="346"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="347"/>
         <source>Main executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</source>
         <oldsource>Mein executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</oldsource>
         <translation>Hauptprogramm (z.B. firefox.exe, chrome.exe, msedge.exe, etc...):</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="350"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="351"/>
         <source>Browser executable (*.exe)</source>
         <oldsource>Browser Executable (*.exe)</oldsource>
         <translation>Browserprogamm (*.exe)</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="450"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="451"/>
         <source>The browser appears to be Gecko based, like Mozilla Firefox and its derivatives.</source>
         <translation>Der Browser scheint auf Gecko zu basieren, wie Mozilla Firefox und dessen Ableger.</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="453"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="454"/>
         <source>The browser appears to be Chromium based, like Microsoft Edge or Google Chrome and its derivatives.</source>
         <translation>Der Browser scheint auf Chromium zu basieren, wie Microsoft Edge oder Google Chrome und dessen Ableger.</translation>
     </message>
@@ -328,12 +328,12 @@ Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
         <translation type="vanished">Der Browser scheint auf Chromium zu basieren, wie Microsoft Edge oder Google Chrome und dessen Ableger.</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="456"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="457"/>
         <source>Browser could not be recognized, template cannot be created.</source>
         <translation>Der Browser konnte nicht erkannt werden, Vorlage konnte nicht erstellt werden.</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="503"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="504"/>
         <source>This browser name is already in use, please chooe an other one.</source>
         <translation>Dieser Browsername wird bereits verwendet, bitte wählen Sie einen anderen Namen.</translation>
     </message>
@@ -537,52 +537,52 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
 <context>
     <name>CFinishTemplatePage</name>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="935"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="936"/>
         <source>Create Web Browser Template</source>
         <translation>Erstelle Webbrowser Vorlage</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="943"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="944"/>
         <source>Almost complete, click Finish to create a new  Web Browser Template and conclude the wizard.</source>
         <translation>Fast geschafft, klicken Sie Fertig zum Erstellen einer neuen Webbrowservorlage und de Assistenten abzuschließen.</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="961"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="962"/>
         <source>Browser name: %1
 </source>
         <translation>Browsername: %1
 </translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="965"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="966"/>
         <source>Browser Type: Gecko (Mozilla firefox)
 </source>
         <translation>Browsertyp: Gecko (Mozilla Firefox)
 </translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="966"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="967"/>
         <source>Browser Type: Chromium (Google Chrome)
 </source>
         <translation>Browsertyp: Chromium (Google Chrome)
 </translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="968"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="969"/>
         <source>
 </source>
         <translation>
 </translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="969"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="970"/>
         <source>Browser executable path: %1
 </source>
         <translation>Browserprogammpfad: %1
 </translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="979"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="980"/>
         <source>Browser profile path: %1
 </source>
         <translation>Browserprofilpfad: %1
@@ -1674,12 +1674,12 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <translation>Fehler: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="226"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="229"/>
         <source>Only local templates can be removed!</source>
         <translation>Nur lokale Vorlagen können entfernt werden!</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsTemplates.cpp" line="230"/>
+        <location filename="Windows/OptionsTemplates.cpp" line="233"/>
         <source>Do you really want to delete the selected local template?</source>
         <translation>Möchten Sie wirklich die ausgewählten lokalen Vorlagen löschen?</translation>
     </message>
@@ -4996,17 +4996,17 @@ Prozesse in dieser Box werden denken, dass sie mit Adminrechten laufen, ohne das
 <context>
     <name>CTemplateTypePage</name>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="257"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="258"/>
         <source>Create new Template</source>
         <translation>Neue Vorlage erstellen</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="266"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="267"/>
         <source>Select template type:</source>
         <translation>Vorlagentyp wählen:</translation>
     </message>
     <message>
-        <location filename="Wizards/TemplateWizard.cpp" line="270"/>
+        <location filename="Wizards/TemplateWizard.cpp" line="271"/>
         <source>%1 template</source>
         <translation>%1 Vorlage</translation>
     </message>

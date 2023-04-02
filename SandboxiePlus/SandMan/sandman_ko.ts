@@ -6456,7 +6456,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4373"/>
         <source>Accessibility</source>
-        <translation>액세스성</translation>
+        <translation>접근성</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4469"/>

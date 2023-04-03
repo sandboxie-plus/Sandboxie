@@ -176,7 +176,7 @@
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="875"/>
         <source>Allow direct access to Web Browser&apos;s preferences</source>
-        <translation>Erlaube direkten Zugriff auf die Eintellungen des Webbrowsers</translation>
+        <translation>Erlaube direkten Zugriff auf die Einstellungen des Webbrowsers</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="879"/>
@@ -210,7 +210,7 @@
         <location filename="Wizards/TemplateWizard.cpp" line="518"/>
         <source>Configure your Web Browser&apos;s profile directories.</source>
         <oldsource>Configure your Web Browsers profile directories.</oldsource>
-        <translation type="unfinished">Konfigurieren Sie Ihre Webbrowserprofilordner.</translation>
+        <translation>Konfigurieren Sie Ihre Webbrowserprofilordner.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="526"/>
@@ -225,7 +225,7 @@
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="534"/>
         <source>Browser Executable (*.exe)</source>
-        <translation>Browserprogamm (*.exe)</translation>
+        <translation>Browserprogramm (*.exe)</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="551"/>
@@ -250,7 +250,7 @@ Please browse to the correct user profile directory.</source>
         <oldsource>No suitable fodlers have been found.
 Note: you need to run the browser unsandboxed for them to get created.
 Please browse to the correct user profile directory.</oldsource>
-        <translation type="unfinished">Es wurdne keine geeigneten Ordner gefunden.
+        <translation>Es wurden keine geeigneten Ordner gefunden.
 Notiz: Sie müssen den Browser außerhalb einer Sandbox starten, damit diese erstellt werden.
 Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
     </message>
@@ -315,7 +315,7 @@ Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
         <location filename="Wizards/TemplateWizard.cpp" line="351"/>
         <source>Browser executable (*.exe)</source>
         <oldsource>Browser Executable (*.exe)</oldsource>
-        <translation>Browserprogamm (*.exe)</translation>
+        <translation>Browserprogramm (*.exe)</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="451"/>
@@ -340,7 +340,7 @@ Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
         <location filename="Wizards/TemplateWizard.cpp" line="504"/>
         <source>This browser name is already in use, please choose an other one.</source>
         <oldsource>This browser name is already in use, please chooe an other one.</oldsource>
-        <translation type="unfinished">Dieser Browsername wird bereits verwendet, bitte wählen Sie einen anderen Namen.</translation>
+        <translation>Dieser Browsername wird bereits verwendet, bitte wählen Sie einen anderen Namen.</translation>
     </message>
 </context>
 <context>
@@ -549,7 +549,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="944"/>
         <source>Almost complete, click Finish to create a new  Web Browser Template and conclude the wizard.</source>
-        <translation>Fast geschafft, klicken Sie Fertig zum Erstellen einer neuen Webbrowservorlage und de Assistenten abzuschließen.</translation>
+        <translation>Fast geschafft, klicken Sie Fertig zum Erstellen einer neuen Webbrowservorlage und den Assistenten abzuschließen.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="962"/>
@@ -564,7 +564,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
 </source>
         <oldsource>Browser Type: Gecko (Mozilla firefox)
 </oldsource>
-        <translation type="unfinished">Browsertyp: Gecko (Mozilla Firefox)
+        <translation>Browsertyp: Gecko (Mozilla Firefox)
 </translation>
     </message>
     <message>
@@ -585,7 +585,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
         <location filename="Wizards/TemplateWizard.cpp" line="970"/>
         <source>Browser executable path: %1
 </source>
-        <translation>Browserprogammpfad: %1
+        <translation>Browserprogrammpfad: %1
 </translation>
     </message>
     <message>
@@ -5084,7 +5084,7 @@ Prozesse in dieser Box werden denken, dass sie mit Adminrechten laufen, ohne das
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="190"/>
         <source>Allow direct access to %1 preferences</source>
-        <translation>Erlaube direkten Zugriff auf die %1 Eintellungen</translation>
+        <translation>Erlaube direkten Zugriff auf die %1 Einstellungen</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="217"/>

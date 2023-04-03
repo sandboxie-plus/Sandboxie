@@ -175,7 +175,7 @@ SBIE1308 Program kısıtlamalardan dolayı başlatılamıyor - %2
 .
 
 1309;pop;inf;01
-SBIE1309 Hesap şifresi değiştirme girişimi başarısız
+SBIE1309 Hesap parolası değiştirme girişimi başarısız
 .
 
 1312;pop;inf;01
@@ -409,7 +409,7 @@ SBIE2212 '%2' e-posta okuyucusu korumalı alan ile çalışmak için ayarlanmam�
 .
 
 2213;pop;wrn;01
-SBIE2213 Windows Şifreleri korumalı alan içerisinde saklanamaz
+SBIE2213 Windows Parolaları korumalı alan içerisinde saklanamaz
 .
 
 2214;pop;wrn;01
@@ -1405,9 +1405,9 @@ Korumalı Alan menüsünden Korumalı Alan Ayarlarını kullanabilirsiniz.
 .
 
 3540;txt;01
-Sandboxie.ini yapılandırma dosyası, şifreli olduğundan düzenlenemedi.
+Sandboxie.ini yapılandırma dosyası, parola korumalı olduğundan düzenlenemedi.
 Dosyayı düzenleyebilmek için, Yapılandırmayı Kilitle komutunu kullanıp
-şifre korumayı kaldırın.
+parola korumayı kaldırın.
 .
 
 3541;txt;01
@@ -2946,15 +2946,15 @@ Yalnızca &Yönetici kullanıcı hesapları değişiklik yapabilir
 .
 
 4264;txt;01
-&Değişiklik yapabilmek için şifre gerekli
+&Değişiklik yapabilmek için parola gerekli
 .
 
 4265;txt;01
-&Sandboxie Kontrol penceresi gizlendiğinde şifreyi unut
+&Sandboxie Kontrol penceresi gizlendiğinde parolayı unut
 .
 
 4266;txt;01
-&Şifreyi Değiştir
+&Parolayı Değiştir
 .
 
 4267;txt;01
@@ -2967,19 +2967,19 @@ Bu sayfayı şimdi açmak ister misiniz?
 .
 
 4271;txt;01
-Sandboxie yapılandırmayı şifre ile korunuyor. Lütfen şifreyi girin.
+Sandboxie yapılandırması parola ile korunuyor. Lütfen parolayı girin.
 .
 
 4272;txt;01
-Sandboxie yapılandırmasını korumak üzere yeni bir şifre girin.
+Sandboxie yapılandırmasını korumak üzere yeni bir parola girin.
 .
 
 4273;txt;01
-Onaylamak için şifreyi yeniden girin.
+Onaylamak için parolayı yeniden girin.
 .
 
 4274;txt;01
-Yanlış şifre girildi. Yeniden denemek ister misiniz?
+Yanlış parola girildi. Yeniden denemek ister misiniz?
 .
 
 #----------------------------------------------------------------------------
@@ -3051,23 +3051,23 @@ Aşağıdaki dışlamalar korumalı alan içerisinde çalışan Web tarayıcıla
 .
 
 4324;txt;02
-%2 senkronize verisine doğrudan erişime izni ver
+%2 eşitleme verisine doğrudan erişime izin ver
 .
 
 4325;txt;02
-%2 beslemesinin doğrudan erişime izin ver
+%2 özet akışlarına doğrudan erişime izin ver
 .
 
 4326;txt;02
-%2 Sık Kullanılanlarına doğrudan erişim izni ver
+%2 yer imlerine doğrudan erişime izin ver
 .
 
 4327;txt;01
-Internet Explorer sık kullanılanlarını Hızlı Kurtar klasörüne ekle
+Internet Explorer yer imlerini Hızlı Kurtar klasörüne ekle
 .
 
 4328;txt;01
-%2 çerezlerine doğrudan erişimi izin ver
+%2 tanımlama bilgilerine doğrudan erişime izin ver
 .
 
 4329;txt;01
@@ -3079,7 +3079,7 @@ Korumalı alanın dışına kaydet: Hotmail ve Messenger hesap bilgisi
 .
 
 4331;txt;01
-%2 şifrelerine doğrudan erişime izin ver
+%2 parolalarına doğrudan erişime izin ver
 .
 
 4336;txt;02
@@ -3111,7 +3111,7 @@ Windows için %2 düzeltmesini etkinleştir
 .
 
 4356;txt;02
-%2 Yer İmlerine doğrudan erişim izni ver
+%2 Yer İmlerine doğrudan erişime izin ver
 .
 
 4357;txt;02

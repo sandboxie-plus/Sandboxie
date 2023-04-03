@@ -208,8 +208,9 @@
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="518"/>
-        <source>Configure your Web Browsers profile directories.</source>
-        <translation>Konfigurieren Sie Ihre Webbrowserprofilordner.</translation>
+        <source>Configure your Web Browser&apos;s profile directories.</source>
+        <oldsource>Configure your Web Browsers profile directories.</oldsource>
+        <translation type="unfinished">Konfigurieren Sie Ihre Webbrowserprofilordner.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="526"/>
@@ -243,10 +244,13 @@
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="796"/>
-        <source>No suitable fodlers have been found.
+        <source>No suitable folders have been found.
 Note: you need to run the browser unsandboxed for them to get created.
 Please browse to the correct user profile directory.</source>
-        <translation>Es wurdne keine geeigneten Ordner gefunden.
+        <oldsource>No suitable fodlers have been found.
+Note: you need to run the browser unsandboxed for them to get created.
+Please browse to the correct user profile directory.</oldsource>
+        <translation type="unfinished">Es wurdne keine geeigneten Ordner gefunden.
 Notiz: Sie müssen den Browser außerhalb einer Sandbox starten, damit diese erstellt werden.
 Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
     </message>
@@ -334,8 +338,9 @@ Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="504"/>
-        <source>This browser name is already in use, please chooe an other one.</source>
-        <translation>Dieser Browsername wird bereits verwendet, bitte wählen Sie einen anderen Namen.</translation>
+        <source>This browser name is already in use, please choose an other one.</source>
+        <oldsource>This browser name is already in use, please chooe an other one.</oldsource>
+        <translation type="unfinished">Dieser Browsername wird bereits verwendet, bitte wählen Sie einen anderen Namen.</translation>
     </message>
 </context>
 <context>
@@ -555,9 +560,11 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="966"/>
-        <source>Browser Type: Gecko (Mozilla firefox)
+        <source>Browser Type: Gecko (Mozilla Firefox)
 </source>
-        <translation>Browsertyp: Gecko (Mozilla Firefox)
+        <oldsource>Browser Type: Gecko (Mozilla firefox)
+</oldsource>
+        <translation type="unfinished">Browsertyp: Gecko (Mozilla Firefox)
 </translation>
     </message>
     <message>

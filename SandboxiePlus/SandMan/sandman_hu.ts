@@ -208,7 +208,8 @@
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="518"/>
-        <source>Configure your Web Browsers profile directories.</source>
+        <source>Configure your Web Browser&apos;s profile directories.</source>
+        <oldsource>Configure your Web Browsers profile directories.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -243,9 +244,12 @@
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="796"/>
-        <source>No suitable fodlers have been found.
+        <source>No suitable folders have been found.
 Note: you need to run the browser unsandboxed for them to get created.
 Please browse to the correct user profile directory.</source>
+        <oldsource>No suitable fodlers have been found.
+Note: you need to run the browser unsandboxed for them to get created.
+Please browse to the correct user profile directory.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -316,7 +320,8 @@ Please browse to the correct user profile directory.</source>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="504"/>
-        <source>This browser name is already in use, please chooe an other one.</source>
+        <source>This browser name is already in use, please choose an other one.</source>
+        <oldsource>This browser name is already in use, please chooe an other one.</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -516,8 +521,10 @@ A %USER% segítségével minden felhasználót saját mappába menthet.</transla
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="966"/>
-        <source>Browser Type: Gecko (Mozilla firefox)
+        <source>Browser Type: Gecko (Mozilla Firefox)
 </source>
+        <oldsource>Browser Type: Gecko (Mozilla firefox)
+</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

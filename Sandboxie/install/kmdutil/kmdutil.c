@@ -26,6 +26,7 @@
 #include <stdlib.h>
 #include "common/defines.h"
 #include "common/my_version.h"
+#include "core/dll/sbieapi.h"
 
 extern void Kmd_ScanDll(BOOLEAN silent);
 
@@ -41,7 +42,8 @@ typedef enum _COMMAND {
     CMD_START,
     CMD_STOP,
     CMD_SCANDLL,
-    CMD_SCANDLL_SILENT
+    CMD_SCANDLL_SILENT,
+    CMD_MESSAGE
 } COMMAND;
 
 typedef enum _OPTIONS {
@@ -217,6 +219,10 @@ BOOL Parse_Command_Line(
     } else if (_wcsicmp(args[1], L"stop") == 0) {
         *Command = CMD_STOP;
         num_args_needed = 1;
+
+    } else if (_wcsicmp(args[1], L"message") == 0) {
+        *Command = CMD_MESSAGE;
+        num_args_needed = 2;
 
     } else {
         *Command = CMD_ERROR;
@@ -697,6 +703,23 @@ BOOL Kmd_Stop_Service(
 }
 
 //---------------------------------------------------------------------------
+// Kmd_Show_Message
+//---------------------------------------------------------------------------
+
+BOOL Kmd_Show_Message(
+    const wchar_t *message,
+    const wchar_t *text)
+{
+    if (_wcsnicmp(message, L"SBIE", 4) == 0)
+        message += 4;
+    ULONG id = _wtoi(message);
+    if (id == 0)
+        return FALSE;
+    SbieApi_LogMsgEx(-1, id, text, wcslen(text)* sizeof(WCHAR));
+    return TRUE;
+}
+
+//---------------------------------------------------------------------------
 // WinMain
 //---------------------------------------------------------------------------
 
@@ -764,6 +787,9 @@ int __stdcall WinMain(
 
     if (Command == CMD_STOP)
         ok = Kmd_Stop_Service(Driver_Name);
+
+    if (Command == CMD_MESSAGE)
+        ok = Kmd_Show_Message(Driver_Name, Driver_Path);
 
     if (! ok)
         return EXIT_FAILURE;

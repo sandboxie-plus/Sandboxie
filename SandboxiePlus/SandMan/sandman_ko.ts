@@ -208,7 +208,7 @@
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="518"/>
-        <source>Configure your Web Browsers profile directories.</source>
+        <source>Configure your Web Browser&apos;s profile directories.</source>
         <translation>웹 브라우저 프로필 디렉터리를 구성합니다.</translation>
     </message>
     <message>
@@ -243,7 +243,7 @@
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="796"/>
-        <source>No suitable fodlers have been found.
+        <source>No suitable folders have been found.
 Note: you need to run the browser unsandboxed for them to get created.
 Please browse to the correct user profile directory.</source>
         <translation>적합한 사료를 찾을 수 없습니다.
@@ -318,7 +318,7 @@ Please browse to the correct user profile directory.</source>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="504"/>
-        <source>This browser name is already in use, please chooe an other one.</source>
+        <source>This browser name is already in use, please choose an other one.</source>
         <translation>이 브라우저 이름은 이미 사용 중입니다. 다른 브라우저 이름을 선택하십시오.</translation>
     </message>
 </context>
@@ -518,9 +518,9 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="966"/>
-        <source>Browser Type: Gecko (Mozilla firefox)
+        <source>Browser Type: Gecko (Mozilla Firefox)
 </source>
-        <translation>브라우저 유형: Gecko (Mozilla firefox)</translation>
+        <translation>브라우저 유형: Gecko (Mozilla Firefox)</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="967"/>

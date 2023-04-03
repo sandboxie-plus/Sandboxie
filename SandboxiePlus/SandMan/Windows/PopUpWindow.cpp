@@ -206,7 +206,7 @@ void CPopUpWindow::OnHideMessage()
 
 	m_HiddenMessages.insert(pEntry->GetMsgId(), pEntry->GetMsgData(1));
 	if (theAPI->GetUserSettings() != NULL)
-		theAPI->GetUserSettings()->AppendText("SbieCtrl_HideMessage", QString("%1, %2").arg(pEntry->GetMsgId()).arg(pEntry->GetMsgData(1)));
+		theAPI->GetUserSettings()->AppendText("SbieCtrl_HideMessage", QString("%1,%2").arg(pEntry->GetMsgId()).arg(pEntry->GetMsgData(1)));
 
 	for (int i = 0; i < ui.table->rowCount(); i++)
 	{

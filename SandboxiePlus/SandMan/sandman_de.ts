@@ -2930,11 +2930,11 @@ Möchten Sie die Bereinigung durchführen?</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="107"/>
-        <source>The file %1 failed a security check!<byte value="xd"/>
-<byte value="xd"/>
+        <source>The file %1 failed a security check!
+
 %2</source>
-        <translation>Die Datei %1 scheiterte an einer Sicherheitsprüfung!<byte value="xd"/>
-<byte value="xd"/>%2</translation>
+        <translation>Die Datei %1 scheiterte an einer Sicherheitsprüfung!
+%2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="115"/>
@@ -2943,14 +2943,14 @@ Möchten Sie die Bereinigung durchführen?</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="175"/>
-        <source>The file %1 failed a security check, do you want to recover it anyway?<byte value="xd"/>
-<byte value="xd"/>
+        <source>The file %1 failed a security check, do you want to recover it anyway?
+
 %2</source>
-        <oldsource>The file %1 failed a security check, do you want to recover it anyways?<byte value="xd"/>
-<byte value="xd"/>
+        <oldsource>The file %1 failed a security check, do you want to recover it anyways?
+
 %2</oldsource>
-        <translation>Die Datei %1 scheiterte an einer Sicherheitsprüfung, möchten Sie diese trotzdem wiederherstellen?<byte value="xd"/>
-<byte value="xd"/>%2</translation>
+        <translation>Die Datei %1 scheiterte an einer Sicherheitsprüfung, möchten Sie diese trotzdem wiederherstellen?
+%2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="238"/>

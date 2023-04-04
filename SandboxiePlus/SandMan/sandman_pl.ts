@@ -2965,8 +2965,8 @@ Nie, wybierze: %2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="107"/>
-        <source>The file %1 failed a security check!<byte value="xd"/>
-<byte value="xd"/>
+        <source>The file %1 failed a security check!
+
 %2</source>
         <oldsource>The file %1 failed a security check!
 
@@ -2982,8 +2982,8 @@ Nie, wybierze: %2</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="175"/>
-        <source>The file %1 failed a security check, do you want to recover it anyway?<byte value="xd"/>
-<byte value="xd"/>
+        <source>The file %1 failed a security check, do you want to recover it anyway?
+
 %2</source>
         <oldsource>The file %1 failed a security check, do you want to recover it anyway?
 

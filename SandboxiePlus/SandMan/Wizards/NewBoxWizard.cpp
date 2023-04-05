@@ -400,7 +400,7 @@ bool CFilesPage::validatePage()
                 return false;
         }
         if (!QDir().exists(Location.left(3))) {
-            QMessageBox::critical(this, "Sandboxie-Plus", tr("The selected box location not placed on a currently available drive."));
+            QMessageBox::critical(this, "Sandboxie-Plus", tr("The selected box location is not placed on a currently available drive."));
             return false;
         }
         wizard()->setField("boxLocation", Location);

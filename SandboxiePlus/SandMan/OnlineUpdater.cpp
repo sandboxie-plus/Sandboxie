@@ -177,7 +177,7 @@ void COnlineUpdater::GetUpdates(QObject* receiver, const char* member, const QVa
 		Query.addQueryItem("channel", ReleaseChannel);
 	}
 
-	if(Params.contains("manual")) Query.addQueryItem("auto", Params["manual"].toBool() ? "0" : "1");
+	Query.addQueryItem("auto", Params["manual"].toBool() ? "0" : "1");
 
 	//QString Test = Query.toString();
 

@@ -10,6 +10,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+
+## [1.8.3 / 5.63.3] - 2023-04-05
+
+### Fixed
+- fixed issue with WFP support and driver verifier
+
+
+
 ## [1.8.2a / 5.63.2] - 2023-04-02
 
 ### Changed

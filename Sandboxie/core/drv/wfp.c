@@ -273,11 +273,15 @@ _FX BOOLEAN WFP_Load(void)
 
 	if (FwpmBfeStateGet() == FWPM_SERVICE_RUNNING) {
 
+		KeEnterCriticalRegion();
+
 		ExAcquireResourceSharedLite(WFP_InitLock, TRUE);
 
 		WFP_Install_Callbacks();
 
 		ExReleaseResourceLite(WFP_InitLock);
+
+		KeLeaveCriticalRegion();
 	}
 	else
 		DbgPrint("Sbie WFP is not ready\r\n");
@@ -303,11 +307,15 @@ _FX void WFP_Unload(void)
 
 	if (WFP_InitLock) {
 
+		KeEnterCriticalRegion();
+
 		ExAcquireResourceSharedLite(WFP_InitLock, TRUE);
 
 		WFP_Uninstall_Callbacks();
 
 		ExReleaseResourceLite(WFP_InitLock);
+
+		KeLeaveCriticalRegion();
 
 		Mem_FreeLockResource(&WFP_InitLock);
 		WFP_InitLock = NULL;
@@ -345,6 +353,8 @@ _FX void WFP_Unload(void)
 
 _FX void WFP_state_changed(_Inout_ void* context, _In_ FWPM_SERVICE_STATE newState)
 {
+	KeEnterCriticalRegion();
+
 	ExAcquireResourceSharedLite(WFP_InitLock, TRUE);
 
 	if (newState == FWPM_SERVICE_STOP_PENDING)
@@ -353,6 +363,8 @@ _FX void WFP_state_changed(_Inout_ void* context, _In_ FWPM_SERVICE_STATE newSta
 		WFP_Install_Callbacks();
 
 	ExReleaseResourceLite(WFP_InitLock);
+
+	KeLeaveCriticalRegion();
 }
 
 

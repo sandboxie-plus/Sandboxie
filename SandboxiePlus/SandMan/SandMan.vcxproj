@@ -318,8 +318,10 @@
     <ClCompile Include="Windows\SupportDialog.cpp" />
     <ClCompile Include="Wizards\NewBoxWizard.cpp" />
     <ClCompile Include="Wizards\SetupWizard.cpp" />
+    <ClCompile Include="Wizards\TemplateWizard.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Wizards\TemplateWizard.h" />
     <QtMoc Include="Wizards\NewBoxWizard.h" />
     <QtMoc Include="OnlineUpdater.h" />
     <QtMoc Include="Views\FileView.h" />

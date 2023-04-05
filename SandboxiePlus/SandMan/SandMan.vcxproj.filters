@@ -183,8 +183,11 @@
     <ClCompile Include="Helpers\WinHelper.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="Wizards\TemplateWizard.cpp">
+      <Filter>Wizards</Filter>
+    </ClCompile>
     <ClCompile Include="Wizards\NewBoxWizard.cpp">
-      <Filter>Helpers</Filter>
+      <Filter>Wizards</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -287,6 +290,9 @@
       <Filter>SandMan</Filter>
     </QtMoc>
     <QtMoc Include="Wizards\NewBoxWizard.h">
+      <Filter>Wizards</Filter>
+    </QtMoc>
+    <QtMoc Include="Wizards\TemplateWizard.h">
       <Filter>Wizards</Filter>
     </QtMoc>
   </ItemGroup>

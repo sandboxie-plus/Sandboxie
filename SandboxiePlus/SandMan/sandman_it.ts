@@ -7010,7 +7010,7 @@ in modo diverso a seconda dell&apos;interfaccia di visualizzazione.</translation
     <message>
         <location filename="Forms/SettingsWindow.ui" line="804"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
-        <translation>Correzioni per la versione installata, aggiornamenti al file Templates.ini e ai file delle traduzioni.</translation>
+        <translation>Correzioni per la versione installata, aggiornamenti ai file Templates.ini e translations.7z.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="930"/>

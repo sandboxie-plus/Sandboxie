@@ -2468,7 +2468,7 @@ To specify a process use '$:program.exe' as path.</string>
                <item row="0" column="0">
                 <widget class="QLabel" name="label_27">
                  <property name="text">
-                  <string>Configure which processes can access Desktop objects like Windows and alike.</string>
+                  <string>Configure which processes can access desktop objects like windows and alike.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>

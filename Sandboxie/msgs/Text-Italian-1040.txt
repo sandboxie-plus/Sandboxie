@@ -198,6 +198,10 @@ SBIE1301 Il programma '%2' non è stato avviato nell'area virtuale
 # SBIE1304 Simulazione di input di tastiera o mouse da parte del processo '%2' bloccata
 # .
 
+1305;pop;inf;02
+SBIE1305 Impossibile caricare l'immagine nell'area virtuale - %2
+.
+
 1306;pop;inf;01
 SBIE1306 Impossibile scaricare il driver di Sandboxie (SbieDrv) in questo momento
 .
@@ -362,6 +366,18 @@ SBIE2111 Impossibile accedere al processo: %3, chiamata %2
 SBIE2112 Impossibile accedere all'oggetto: %3, chiamata %2
 .
 
+2113;pop;inf;01
+SBIE2113 Il file è troppo grande per essere copiato nell'area virtuale, è stato creato un file vuoto - %2
+.
+
+2114;pop;inf;01
+SBIE2114 Il file è troppo grande per essere copiato nell'area virtuale, accesso negato - %2
+.
+
+2115;pop;inf;01
+SBIE2115 Il file è troppo grande per essere copiato nell'area virtuale, aprire in sola lettura - %2
+.
+
 2191;pop;inf;01
 SBIE2191 Non è possibile aggiornare %2 mentre è in esecuzione nell'area virtuale.
 .
@@ -380,6 +396,10 @@ SBIE2194 Windows Installer ha richiesto l'impostazione dell'opzione %2 nel file 
 
 2195;pop;inf;01
 SBIE2195 Per eseguire explorer.exe nell'area virtuale, occorre disattivare l'accesso all'infrastruttura COM.
+.
+
+2196;pop;inf;01
+SBIE2196 Per eseguire l'installer MSI nell'area virtuale, occorre disattivare l'accesso all'infrastruttura COM.
 .
 
 2198;pop;inf;01
@@ -494,6 +514,14 @@ SBIE2224 Si è verificato un errore durante l'esecuzione nell'area virtuale del 
 
 2225;pop;wrn;01
 SBIE2225 Si è verificato un tentativo di accesso a un file EFS: %2
+.
+
+2226;pop;wrn;01
+SBIE2226 Il processo non è riuscito ad avviarsi a causa di un'elevazione mancante, aggiungere "ApplyElevateCreateProcessFix=y" alla sezione ini dell'area virtuale %2
+.
+
+2227;pop;wrn;01
+SBIE2227 '%2' si trova su un volume che non supporta la denominazione 8.3. Questo può causare problemi con le applicazioni e i programmi di installazione meno recenti.
 .
 
 #----------------------------------------------------------------------------
@@ -632,6 +660,10 @@ SBIE2336 Errore nel server GUI:  %2
 
 2337;pop;err;01
 SBIE2337 Avvio del programma fallito:  %2
+.
+
+2338;pop;err;01
+SBIE2338 È stata riscontrata un'architettura non supportata nel processo:  %2
 .
 
 # 2398;txt;01
@@ -1379,6 +1411,14 @@ Crea collegamento sul desktop
 
 3505;txt;01
 Come contribuire al progetto
+.
+
+3506;txt;01
+Ottieni certificato di supporto
+.
+
+3507;txt;01
+Applica certificato di supporto
 .
 
 #----------------------------------------------------------------------------
@@ -3745,6 +3785,30 @@ Le impostazioni predefinite di Sandboxie garantiscono una protezione completa; �
 # 7987;txt;01
 # Il codice Product Key è stato annullato perché l'ordine è stato rimborsato.
 # .
+
+7988;txt;01
+Il certificato di supporto è valido, grazie :-)
+.
+
+7989;txt;01
+Il certificato di supporto è scaduto :'(
+.
+
+7990;txt;01
+Copiare per intero il certificato di supporto e premere OK.
+.
+
+7991;txt;01
+Impossibile salvare il certificato su file.
+.
+
+7992;txt;01
+Il certificato non è valido.
+.
+
+7993;txt;01
+Il certificato è valido ed è stato applicato con successo.
+.
 
 #----------------------------------------------------------------------------
 # SandboxieInstall

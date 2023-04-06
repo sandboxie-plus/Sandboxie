@@ -470,8 +470,9 @@ You can use %USER% to save each users sandbox to an own folder.</source>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="403"/>
-        <source>The selected box location not placed on a currently available drive.</source>
-        <translation>Выбранное расположение песочницы не размещено на доступном в данный момент диске.</translation>
+        <source>The selected box location is not placed on a currently available drive.</source>
+        <oldsource>The selected box location not placed on a currently available drive.</oldsource>
+        <translation type="unfinished">Выбранное расположение песочницы не размещено на доступном в данный момент диске.</translation>
     </message>
 </context>
 <context>
@@ -5471,8 +5472,9 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2471"/>
-        <source>Configure which processes can access Desktop objects like Windows and alike.</source>
-        <translation>Настройте, какие процессы могут получить доступ к объектам рабочего стола, таким как Windows и т.п.</translation>
+        <source>Configure which processes can access desktop objects like windows and alike.</source>
+        <oldsource>Configure which processes can access Desktop objects like Windows and alike.</oldsource>
+        <translation type="unfinished">Настройте, какие процессы могут получить доступ к объектам рабочего стола, таким как Windows и т.п.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2484"/>

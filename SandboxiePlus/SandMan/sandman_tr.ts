@@ -481,9 +481,9 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="403"/>
-        <source>The selected box location not placed on a currently available drive.</source>
-        <oldsource>The sellected box location not placed on a currently available drive.</oldsource>
-        <translation>Seçilen alan konumu şu anda kullanılabilir bir sürücüye yerleştirilmemiş.</translation>
+        <source>The selected box location is not placed on a currently available drive.</source>
+        <oldsource>The selected box location not placed on a currently available drive.</oldsource>
+        <translation type="unfinished">Seçilen alan konumu şu anda kullanılabilir bir sürücüye yerleştirilmemiş.</translation>
     </message>
 </context>
 <context>
@@ -5897,8 +5897,9 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2471"/>
-        <source>Configure which processes can access Desktop objects like Windows and alike.</source>
-        <translation>Hangi işlemlerin pencereler ve benzeri masaüstü nesnelerine erişebileceğini yapılandırın.</translation>
+        <source>Configure which processes can access desktop objects like windows and alike.</source>
+        <oldsource>Configure which processes can access Desktop objects like Windows and alike.</oldsource>
+        <translation type="unfinished">Hangi işlemlerin pencereler ve benzeri masaüstü nesnelerine erişebileceğini yapılandırın.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2484"/>

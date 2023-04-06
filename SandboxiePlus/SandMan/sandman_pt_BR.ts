@@ -498,9 +498,9 @@ Você pode usar %USER% para salvar a caixa de proteção de cada usuário em uma
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="403"/>
-        <source>The selected box location not placed on a currently available drive.</source>
-        <oldsource>The sellected box location not placed on a currently available drive.</oldsource>
-        <translation>O local da caixa selecionada não foi colocado em uma unidade disponível no momento.</translation>
+        <source>The selected box location is not placed on a currently available drive.</source>
+        <oldsource>The selected box location not placed on a currently available drive.</oldsource>
+        <translation type="unfinished">O local da caixa selecionada não foi colocado em uma unidade disponível no momento.</translation>
     </message>
 </context>
 <context>
@@ -6022,7 +6022,8 @@ Para especificar um processo, use &apos;$:program.exe&apos; como caminho.</trans
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2471"/>
-        <source>Configure which processes can access Desktop objects like Windows and alike.</source>
+        <source>Configure which processes can access desktop objects like windows and alike.</source>
+        <oldsource>Configure which processes can access Desktop objects like Windows and alike.</oldsource>
         <translation type="unfinished">Configurar quais processos podem acessar objetos da Área de Trabalho, como Windows e similares.</translation>
     </message>
     <message>

@@ -477,8 +477,8 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="403"/>
-        <source>The selected box location not placed on a currently available drive.</source>
-        <oldsource>The sellected box location not placed on a currently available drive.</oldsource>
+        <source>The selected box location is not placed on a currently available drive.</source>
+        <oldsource>The selected box location not placed on a currently available drive.</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5711,7 +5711,8 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2471"/>
-        <source>Configure which processes can access Desktop objects like Windows and alike.</source>
+        <source>Configure which processes can access desktop objects like windows and alike.</source>
+        <oldsource>Configure which processes can access Desktop objects like Windows and alike.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

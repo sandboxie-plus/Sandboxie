@@ -32,6 +32,7 @@ LicenseFile=.\license.txt
 UsedUserAreasWarning=no
 VersionInfoCopyright=Copyright (C) 2020-2022 by David Xanatos (xanasoft.com)
 VersionInfoVersion={#MyAppVersion}
+SetupIconFile=SandManInstall.ico
 
 ; Handled in code section as always want DirPage for portable mode.
 DisableDirPage=no

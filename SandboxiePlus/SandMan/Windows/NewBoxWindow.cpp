@@ -28,7 +28,7 @@ CNewBoxWindow::CNewBoxWindow(QWidget *parent)
 	QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
 
 	for (int i=0;; i++) {
-		QString NewName = tr("New Box");
+		QString NewName = "New Box";
 		if (i > 0) NewName.append(" " + QString::number(i));
 		if (Boxes.contains(NewName.toLower().replace(" ", "_")))
 			continue;

@@ -208,9 +208,8 @@
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="518"/>
-        <source>Configure your Web Browser&apos;s profile directories.</source>
-        <oldsource>Configure your Web Browsers profile directories.</oldsource>
-        <translation type="unfinished">Konfigurera din webläsares profilkataloger.</translation>
+        <source>Configure your Web Browsers profile directories.</source>
+        <translation>Konfigurera din webläsares profilkataloger.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="526"/>
@@ -244,13 +243,10 @@
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="796"/>
-        <source>No suitable folders have been found.
+        <source>No suitable fodlers have been found.
 Note: you need to run the browser unsandboxed for them to get created.
 Please browse to the correct user profile directory.</source>
-        <oldsource>No suitable fodlers have been found.
-Note: you need to run the browser unsandboxed for them to get created.
-Please browse to the correct user profile directory.</oldsource>
-        <translation type="unfinished">Inga lämpliga mappar hittades.
+        <translation>Inga lämpliga mappar hittades.
 Notera:du behöver köra webläsaren osandlådad för att de ska bli skapade.
 Vänligen gå till korrekt användarprofilskatalog.</translation>
     </message>
@@ -322,9 +318,8 @@ Vänligen gå till korrekt användarprofilskatalog.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="504"/>
-        <source>This browser name is already in use, please choose an other one.</source>
-        <oldsource>This browser name is already in use, please chooe an other one.</oldsource>
-        <translation type="unfinished">Detta webläsarnamn används redan, vänligen välj ett annat.</translation>
+        <source>This browser name is already in use, please chooe an other one.</source>
+        <translation>Detta webläsarnamn används redan, vänligen välj ett annat.</translation>
     </message>
 </context>
 <context>
@@ -500,9 +495,9 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="403"/>
-        <source>The selected box location is not placed on a currently available drive.</source>
-        <oldsource>The selected box location not placed on a currently available drive.</oldsource>
-        <translation type="unfinished">Den valda lådplatsen är inte placerad på en f.n tillgänglig enhet.</translation>
+        <source>The selected box location not placed on a currently available drive.</source>
+        <oldsource>The sellected box location not placed on a currently available drive.</oldsource>
+        <translation>Den valda lådplatsen är inte placerad på en f.n tillgänglig enhet.</translation>
     </message>
 </context>
 <context>
@@ -544,11 +539,9 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="966"/>
-        <source>Browser Type: Gecko (Mozilla Firefox)
+        <source>Browser Type: Gecko (Mozilla firefox)
 </source>
-        <oldsource>Browser Type: Gecko (Mozilla firefox)
-</oldsource>
-        <translation type="unfinished">Webläsartyp: Gecko (Mozilla Firefox)
+        <translation>Webläsartyp: Gecko (Mozilla Firefox)
 </translation>
     </message>
     <message>
@@ -2977,7 +2970,7 @@ Nej väljer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="816"/>
         <source>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus release %1 ready&lt;/a&gt;</source>
-        <translation>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;Det finns en ny Sandboxie-Plus utgivning %1 färdig&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;Det finns en ny Sandboxie-Plus utgivning %1 redo&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="448"/>
@@ -3009,7 +3002,7 @@ Nej väljer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="820"/>
         <source>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update %1 ready&lt;/a&gt;</source>
-        <translation>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;Det finns en ny Sandboxie-Plus uppdatering %1 färdig&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;Det finns en ny Sandboxie-Plus uppdatering %1 redo&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="821"/>
@@ -3809,7 +3802,7 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
     <message>
         <location filename="Views/SbieView.cpp" line="204"/>
         <source>Sandbox Presets</source>
-        <translation>Sandlådeförval</translation>
+        <translation>Förval av sandlåda</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="206"/>
@@ -5147,7 +5140,7 @@ Processer i denna låda kommer tro att de körs med adminprivilegier, utan att f
     <message>
         <location filename="Forms/OptionsWindow.ui" line="172"/>
         <source>Show this box in the &apos;run in box&apos; selection prompt</source>
-        <translation>Visa denna låda i &apos;kör i låda&apos; valmeddelandet</translation>
+        <translation>Visa denna låda i valmeddelandet Kör i låda&apos;</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="179"/>
@@ -5157,7 +5150,7 @@ Processer i denna låda kommer tro att de körs med adminprivilegier, utan att f
     <message>
         <location filename="Forms/OptionsWindow.ui" line="211"/>
         <source>Box Type Preset:</source>
-        <translation>Lådtypsförval:</translation>
+        <translation>Förval av lådtyp:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="221"/>
@@ -5342,7 +5335,7 @@ Processer i denna låda kommer tro att de körs med adminprivilegier, utan att f
     <message>
         <location filename="Forms/OptionsWindow.ui" line="668"/>
         <source>Prevent change to network and firewall parameters (user mode)</source>
-        <translation>Förhindra ändring av nätverks och brandväggsparametrar (användarläge)</translation>
+        <translation>Förhindra ändring av nätverks- och brandväggsparametrar (användarläge)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="675"/>
@@ -5911,9 +5904,8 @@ För att specificera en process, använd &apos;$:program.exe&apos; som sökväg.
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2471"/>
-        <source>Configure which processes can access desktop objects like windows and alike.</source>
-        <oldsource>Configure which processes can access Desktop objects like Windows and alike.</oldsource>
-        <translation type="unfinished">Konfigurera vilka processer som kan tillgå Skrivbordsobjekt likt Windows och liknande.</translation>
+        <source>Configure which processes can access Desktop objects like Windows and alike.</source>
+        <translation>Konfigurera vilka processer som kan tillgå Skrivbordsobjekt likt Windows och liknande.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2484"/>
@@ -7321,7 +7313,7 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="63"/>
         <source>Suppress pop-up notifications when in game / presentation mode</source>
-        <translation>Stävja popup-meddelanden vid spel- / presentationsläge</translation>
+        <translation>Kväv popup-meddelanden vid spel- / presentationsläge</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1367"/>

@@ -1444,12 +1444,30 @@ _FX NTSTATUS Ipc_Api_DuplicateObject(PROCESS *proc, ULONG64 *parms)
 
     if (NT_SUCCESS(status)) {
 
-        status = NtDuplicateObject(
-            SourceProcessHandle, SourceHandle,
-            TargetProcessHandle, &DuplicatedHandle,
-            DesiredAccess, HandleAttributes, Options);
+        HANDLE SourceProcessKernelHandle = (HANDLE)-1;
+        HANDLE TargetProcessKernelHandle = (HANDLE)-1;
 
-        *TargetHandle = DuplicatedHandle;
+        if (!IS_ARG_CURRENT_PROCESS(SourceProcessHandle)) 
+            status = Thread_GetKernelHandleForUserHandle(&SourceProcessKernelHandle, SourceProcessHandle);
+        if (NT_SUCCESS(status)) {
+
+            if (!IS_ARG_CURRENT_PROCESS(TargetProcessHandle))
+                status = Thread_GetKernelHandleForUserHandle(&TargetProcessKernelHandle, TargetProcessHandle);
+            if (NT_SUCCESS(status)) {
+
+                status = ZwDuplicateObject(
+                    SourceProcessKernelHandle, SourceHandle,
+                    TargetProcessKernelHandle, &DuplicatedHandle,
+                    DesiredAccess, HandleAttributes, Options);
+
+                *TargetHandle = DuplicatedHandle;
+            }
+        }
+
+        if (SourceProcessKernelHandle && !IS_ARG_CURRENT_PROCESS(SourceProcessKernelHandle))
+            ZwClose(SourceProcessKernelHandle);
+        if (TargetProcessKernelHandle && !IS_ARG_CURRENT_PROCESS(TargetProcessKernelHandle))
+            ZwClose(TargetProcessKernelHandle);
     }
 
     //

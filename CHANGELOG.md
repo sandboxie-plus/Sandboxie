@@ -22,6 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed compatybility issue with MSEdge 112.x
 - fixed updter issue [#2790](https://github.com/sandboxie-plus/Sandboxie/issues/2790)
 - fixed new box wizard issue [#2792](https://github.com/sandboxie-plus/Sandboxie/issues/2792)
+- fixed issue with firefox/thunderbird [#2799](https://github.com/sandboxie-plus/Sandboxie/issues/2799)
 
 
 

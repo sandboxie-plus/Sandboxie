@@ -145,6 +145,8 @@
         <file>Actions/Editor2.png</file>
         <file>Actions/Folders.png</file>
         <file>IconSun.png</file>
+        <file>Actions/Restricted.png</file>
+        <file>Actions/AppContainer.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

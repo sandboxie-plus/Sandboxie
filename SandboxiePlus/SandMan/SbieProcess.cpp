@@ -110,7 +110,7 @@ QString CSbieProcess::GetStatusStr() const
 	if (m_ProcessInfo.IsSystem)
 		Status += tr(" as System");
 
-	if(m_SessionId != theAPI->GetSessionID())
+	if(m_SessionId != theAPI->GetSessionID() && m_SessionId != -1)
 		Status += tr(" in session %1").arg(m_SessionId);
 
 	quint32 ImageType = GetImageType();
@@ -145,6 +145,17 @@ void CSbieProcess::InitProcessInfoImpl(void* ProcessHandle)
 		if (NT_SUCCESS(NtQueryInformationToken(TokenHandle, TokenUser, tokenUserBuff, sizeof(tokenUserBuff), &returnLength))){
 			m_ProcessInfo.IsSystem = RtlEqualSid(((PTOKEN_USER)tokenUserBuff)->User.Sid, &SeLocalSystemSid);
 		}
+
+		ULONG restricted;
+		if (NT_SUCCESS(NtQueryInformationToken(TokenHandle, (TOKEN_INFORMATION_CLASS)TokenIsRestricted, &restricted, sizeof(ULONG), &returnLength))) {
+			m_ProcessInfo.IsRestricted = !!restricted;
+		}
+		
+        BYTE appContainerBuffer[0x80];
+        if (NT_SUCCESS(NtQueryInformationToken(TokenHandle, (TOKEN_INFORMATION_CLASS)TokenAppContainerSid, appContainerBuffer, sizeof(appContainerBuffer), &returnLength))) {
+            PTOKEN_APPCONTAINER_INFORMATION appContainerInfo = (PTOKEN_APPCONTAINER_INFORMATION)appContainerBuffer;
+			m_ProcessInfo.IsAppContainer = appContainerInfo->TokenAppContainer != NULL;
+        }
 
 		CloseHandle(TokenHandle);
 	}

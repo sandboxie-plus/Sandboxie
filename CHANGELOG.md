@@ -16,10 +16,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added installer icon
+- added token type indicator to process list
 
 ### Fixed
 - fixed compatybility issue with MSEdge 112.x
-
+- fixed updter issue [#2790](https://github.com/sandboxie-plus/Sandboxie/issues/2790)
 
 
 

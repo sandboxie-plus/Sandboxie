@@ -29,6 +29,8 @@ public:
 
 	virtual bool	HasElevatedToken()							{ return m_ProcessInfo.IsElevated; }
 	virtual bool	HasSystemToken()							{ return m_ProcessInfo.IsSystem; }
+	virtual bool	HasRestrictedToken()						{ return m_ProcessInfo.IsRestricted; }
+	virtual bool	HasAppContainerToken()						{ return m_ProcessInfo.IsAppContainer; }
 
 protected:
 
@@ -45,7 +47,9 @@ protected:
 			quint32
 				IsElevated : 1,
 				IsSystem : 1,
-				Spare : 30;
+				IsRestricted : 1,
+				IsAppContainer : 1,
+				Spare : 28;
 		};
 	}						m_ProcessInfo;
 };

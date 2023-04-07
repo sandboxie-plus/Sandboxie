@@ -675,32 +675,61 @@ _FX BOOL Proc_CreateAppContainerToken(
 {
     BOOL ret = FALSE;
 
-    //SID_IDENTIFIER_AUTHORITY NtAuthority = {SECURITY_NT_AUTHORITY};
-    //SID_AND_ATTRIBUTES Sids[3];
-    //typedef BOOL (WINAPI *P_AllocateAndInitializeSid)(_In_ PSID_IDENTIFIER_AUTHORITY pIdentifierAuthority,
-    //    _In_ BYTE nSubAuthorityCount, _In_ DWORD nSubAuthority0, _In_ DWORD nSubAuthority1, _In_ DWORD nSubAuthority2, _In_ DWORD nSubAuthority3, 
-    //    _In_ DWORD nSubAuthority4, _In_ DWORD nSubAuthority5, _In_ DWORD nSubAuthority6, _In_ DWORD nSubAuthority7, _Outptr_ PSID* pSid );
     //
-    //HMODULE advapi_dll = LoadLibrary(L"advapi32.dll");
-    //P_AllocateAndInitializeSid __sys_AllocateAndInitializeSid = (P_AllocateAndInitializeSid)GetProcAddress(advapi_dll, "AllocateAndInitializeSid");
-    //__sys_AllocateAndInitializeSid(&NtAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0, &dropSids[0].Sid)
+    // Starting with MSEdge 112.x the use of a restricted token as a stand in for a appcontainer token 
+    // does no longer work, hence when we detect MSEdge we use a copy of our regular token instead.
+    //
 
-    HANDLE hTokenReal;
-    if (NT_SUCCESS(NtOpenProcessToken(NtCurrentProcess(), MAXIMUM_ALLOWED, &hTokenReal))) {
+    static int isEdge = -1;
+    if (isEdge == -1) {
+        isEdge = _wcsicmp(Dll_ImageName, L"msedge.exe") == 0;
+    }
 
-        if (!__sys_CreateRestrictedToken) {
-            *OutToken = hTokenReal;
-            return TRUE;
+
+    if (Config_GetSettingsForImageName_bool(L"UnRestrictAppContainerToken", isEdge ? TRUE : FALSE)) {
+
+        OBJECT_ATTRIBUTES objattrs;
+        SECURITY_QUALITY_OF_SERVICE QoS;
+
+        InitializeObjectAttributes(&objattrs, NULL, 0, NULL, NULL);
+        QoS.Length = sizeof(SECURITY_QUALITY_OF_SERVICE);
+        QoS.ImpersonationLevel = SecurityIdentification;
+        QoS.ContextTrackingMode = SECURITY_STATIC_TRACKING;
+        QoS.EffectiveOnly = FALSE;
+        objattrs.SecurityQualityOfService = &QoS;
+
+        NTSTATUS status = NtDuplicateToken(TokenHandle, MAXIMUM_ALLOWED, &objattrs, FALSE, TokenPrimary, OutToken);
+        ret = NT_SUCCESS(status);
+    }
+    else {
+
+        //SID_IDENTIFIER_AUTHORITY NtAuthority = {SECURITY_NT_AUTHORITY};
+        //SID_AND_ATTRIBUTES Sids[3];
+        //typedef BOOL (WINAPI *P_AllocateAndInitializeSid)(_In_ PSID_IDENTIFIER_AUTHORITY pIdentifierAuthority,
+        //    _In_ BYTE nSubAuthorityCount, _In_ DWORD nSubAuthority0, _In_ DWORD nSubAuthority1, _In_ DWORD nSubAuthority2, _In_ DWORD nSubAuthority3, 
+        //    _In_ DWORD nSubAuthority4, _In_ DWORD nSubAuthority5, _In_ DWORD nSubAuthority6, _In_ DWORD nSubAuthority7, _Outptr_ PSID* pSid );
+        //
+        //HMODULE advapi_dll = LoadLibrary(L"advapi32.dll");
+        //P_AllocateAndInitializeSid __sys_AllocateAndInitializeSid = (P_AllocateAndInitializeSid)GetProcAddress(advapi_dll, "AllocateAndInitializeSid");
+        //__sys_AllocateAndInitializeSid(&NtAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0, &dropSids[0].Sid)
+
+        HANDLE hTokenReal;
+        if (NT_SUCCESS(NtOpenProcessToken(NtCurrentProcess(), MAXIMUM_ALLOWED, &hTokenReal))) {
+
+            if (!__sys_CreateRestrictedToken) {
+                *OutToken = hTokenReal;
+                return TRUE;
+            }
+
+            ULONG returnLength = 0;
+            BYTE Buffer[0x400]; // we need less than 0x200 in pracis
+            if (NT_SUCCESS(NtQueryInformationToken(hTokenReal, TokenGroups, Buffer, sizeof(Buffer), &returnLength))) {
+                PTOKEN_GROUPS Groups = (PTOKEN_GROUPS)Buffer;
+
+                ret = __sys_CreateRestrictedToken(hTokenReal, DISABLE_MAX_PRIVILEGE, Groups->GroupCount, Groups->Groups, 0, NULL, 0, NULL, OutToken);
+            }
+            NtClose(hTokenReal);
         }
-
-        ULONG returnLength = 0;
-        BYTE Buffer[0x400]; // we need less than 0x200 in pracis
-        if (NT_SUCCESS(NtQueryInformationToken(hTokenReal, TokenGroups, Buffer, sizeof(Buffer), &returnLength))) {
-            PTOKEN_GROUPS Groups = (PTOKEN_GROUPS)Buffer;
-           
-            ret = __sys_CreateRestrictedToken(hTokenReal, DISABLE_MAX_PRIVILEGE, Groups->GroupCount, Groups->Groups, 0, NULL, 0, NULL, OutToken);
-        }
-        NtClose(hTokenReal);
     }
 
     return ret;

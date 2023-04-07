@@ -12,6 +12,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.8.4 / 5.63.4] - 2023-04-07
+
+### Added
+- added installer icon
+
+### Fixed
+- fixed compatybility issue with MSEdge 112.x
+
+
+
 
 ## [1.8.3 / 5.63.3] - 2023-04-05
 

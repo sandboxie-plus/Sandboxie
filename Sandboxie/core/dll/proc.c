@@ -927,7 +927,7 @@ _FX BOOL Proc_CreateProcessInternalW(
 
         //
         // Compatibility hack for Firefox 106.x, processes with the "-sandboxingKind" flag
-        // fail to load dll's and thair token has the users groupe disabled
+        // fail to load DLLs and their token has the users group disabled
         //
 
         if (Dll_ImageType == DLL_IMAGE_MOZILLA_FIREFOX && lpCommandLine

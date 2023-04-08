@@ -15,14 +15,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.8.4 / 5.63.4] - 2023-04-07
 
 ### Added
-- added installer icon
+- added installer icon [#2795](https://github.com/sandboxie-plus/Sandboxie/issues/2795)
 - added token type indicator to process list
 
 ### Fixed
-- fixed compatybility issue with MSEdge 112.x
-- fixed updter issue [#2790](https://github.com/sandboxie-plus/Sandboxie/issues/2790)
-- fixed new box wizard issue [#2792](https://github.com/sandboxie-plus/Sandboxie/issues/2792)
-- fixed issue with firefox/thunderbird [#2799](https://github.com/sandboxie-plus/Sandboxie/issues/2799)
+- fixed compatibility issue with Microsoft Edge 112.x
+- fixed updater issue [#2790](https://github.com/sandboxie-plus/Sandboxie/issues/2790)
+- fixed new box wizard boxname issue by making the boxname static [#2792](https://github.com/sandboxie-plus/Sandboxie/issues/2792)
+- fixed issue with Firefox/Thunderbird [#2799](https://github.com/sandboxie-plus/Sandboxie/issues/2799)
 
 
 

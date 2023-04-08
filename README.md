@@ -105,18 +105,19 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 
 ## 🌏 Translators
 
-- yuhao2348732, nkh0472, yfdyh000, gexgd0419, Zerorigin, UnnamedOrange, 4rt3mi5 - Simplified Chinese
-- TragicLifeHu, Hulen - Traditional Chinese
+- yuhao2348732, 0x391F, nkh0472, yfdyh000, gexgd0419, Zerorigin, UnnamedOrange, DevSplash, Becods, okrc, 4rt3mi5, sepcnt - Simplified Chinese
+- TragicLifeHu, Hulen, xiongsp - Traditional Chinese
 - RockyTDR - Dutch
-- clexanis, Mmoi-Fr - French
+- clexanis, Mmoi-Fr, hippalectryon-0, Monsieur Pissou - French (provided by email)
 - bastik-1001, APMichael - German
+- timinoun - Hungarian (provided by email)
 - isaak654 - Italian
 - VenusGirl - Korean
 - 7zip - Polish ([provided separately](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=20))
 - JNylson - Portuguese and Brazilian Portuguese
 - lufog - Russian
 - sebadamus - Spanish
-- pb1 - Swedish
+- pb1 - Swedish (provided by email)
 - xorcan, fmbxnary, offhub - Turkish
 - SuperMaxusa, lufog - Ukrainian
 - GunGunGun - Vietnamese

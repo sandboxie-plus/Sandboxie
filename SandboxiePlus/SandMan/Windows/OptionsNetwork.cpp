@@ -60,10 +60,33 @@ void COptionsWindow::LoadINetAccess()
 void COptionsWindow::SaveINetAccess()
 {
 	int Mode = ui.cmbBlockINet->currentData().toInt();
-	if (Mode == 1)				m_pBox->InsertText("AllowNetworkAccess", "!<InternetAccess>,n");
-	else						m_pBox->DelValue("AllowNetworkAccess", "!<InternetAccess>,n");
-	if (Mode != 0)				m_pBox->DelValue("AllowNetworkAccess", "y");
-	else if (m_WFPisBlocking)	m_pBox->InsertText("AllowNetworkAccess", "y");
+	if (Mode == 1) {
+		if (!FindEntryInSettingList("AllowNetworkAccess", "!<InternetAccess>,n"))
+			m_pBox->InsertText("AllowNetworkAccess", "!<InternetAccess>,n");
+	}
+	else
+		m_pBox->DelValue("AllowNetworkAccess", "!<InternetAccess>,n");
+
+	if (Mode == 0) {
+		if (m_WFPisBlocking && !FindEntryInSettingList("AllowNetworkAccess", "y"))
+			m_pBox->InsertText("AllowNetworkAccess", "y");
+	}
+	else
+		m_pBox->DelValue("AllowNetworkAccess", "y");
+
+	QTreeWidgetItem* pBlockedNet = FindGroupByName("<BlockNetAccess>");
+	if (pBlockedNet && pBlockedNet->childCount() > 0) {
+		if (m_IsEnabledWFP && !FindEntryInSettingList("AllowNetworkAccess", "<BlockNetAccess>,n"))
+			m_pBox->InsertText("AllowNetworkAccess", "<BlockNetAccess>,n");
+	}
+	else
+		m_pBox->DelValue("AllowNetworkAccess", "<BlockNetAccess>,n");
+
+	QTreeWidgetItem* pBlockedDev = FindGroupByName("<BlockNetDevices>");
+	if (pBlockedDev && pBlockedDev->childCount() > 0)
+		SetAccessEntry(eFile, "<BlockNetDevices>", eClosed, "InternetAccessDevices");
+	else
+		DelAccessEntry(eFile, "<BlockNetDevices>", eClosed, "InternetAccessDevices");
 
 	WriteAdvancedCheck(ui.chkINetBlockPrompt, "PromptForInternetAccess", "y", "");
 	WriteAdvancedCheck(ui.chkINetBlockMsg, "NotifyInternetAccessDenied", "", "n");
@@ -98,7 +121,7 @@ QString COptionsWindow::INetModeToGroup(int Mode)
 
 void COptionsWindow::LoadBlockINet()
 {
-	if (GetAccessEntry(eFile, "!<InternetAccess>", eClosed, "InternetAccessDevices") != NULL)
+	if (IsAccessEntrySet(eFile, "!<InternetAccess>", eClosed, "InternetAccessDevices"))
 		ui.cmbBlockINet->setCurrentIndex(ui.cmbBlockINet->findData(2));
 	else if (m_IsEnabledWFP && (FindEntryInSettingList("AllowNetworkAccess", "!<InternetAccess>,n") 
 		|| (m_WFPisBlocking && !FindEntryInSettingList("AllowNetworkAccess", "y"))))
@@ -334,14 +357,6 @@ bool COptionsWindow::FindEntryInSettingList(const QString& Name, const QString& 
 			return true;
 	}
 	return false;
-}
-
-void COptionsWindow::CheckINetBlock()
-{
-	SetAccessEntry(eFile, "<BlockNetDevices>", eClosed, "InternetAccessDevices");
-
-	if (m_IsEnabledWFP && !FindEntryInSettingList("AllowNetworkAccess", "<BlockNetAccess>,n"))
-		m_pBox->InsertText("AllowNetworkAccess", "<BlockNetAccess>,n");
 }
 
 void COptionsWindow::LoadNetFwRules()

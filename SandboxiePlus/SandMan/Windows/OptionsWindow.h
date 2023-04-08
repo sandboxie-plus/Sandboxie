@@ -387,7 +387,6 @@ protected:
 	QString	GetINetModeStr(int Mode);
 	void CloseINetEdit(bool bSave = true);
 	void CloseINetEdit(QTreeWidgetItem* pItem, bool bSave = true);
-	void CheckINetBlock();
 	bool FindEntryInSettingList(const QString& Name, const QString& Value);
 	void LoadINetAccess();
 	void SaveINetAccess();

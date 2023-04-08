@@ -1057,8 +1057,6 @@ void COptionsWindow::UpdateCurrentTab()
 	}
 	else if (m_pCurrentTab == ui.tabInternet || m_pCurrentTab == ui.tabINet)
 	{
-		CheckINetBlock();
-
 		LoadBlockINet();
 	}
 	else if (m_pCurrentTab == ui.tabCOM) {

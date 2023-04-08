@@ -122,7 +122,7 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 - SuperMaxusa, lufog - Ukrainian
 - GunGunGun - Vietnamese
 
-All translators are encouraged to look at the [Localization notes and tips](https://git.io/J9G19) before sending a new translation.
+All translators are encouraged to look at the [Localization notes and tips](https://git.io/J9G19) before sending a translation.
 
 ## 🤝 Support the project
 

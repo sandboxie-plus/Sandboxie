@@ -11,6 +11,8 @@ bool CPopUpWindow__DarkMode = false;
 
 CPopUpWindow::CPopUpWindow(QWidget* parent) : QMainWindow(parent)
 {
+	m_HideAllMessages = false;
+
 	Qt::WindowFlags flags = windowFlags();
 	flags |= Qt::CustomizeWindowHint;
 	//flags &= ~Qt::WindowContextHelpButtonHint;
@@ -185,7 +187,15 @@ void CPopUpWindow::ReloadHiddenMessages()
 	QStringList HiddenMessages = theAPI->GetUserSettings()->GetTextList("SbieCtrl_HideMessage", true);
 	foreach(const QString& HiddenMessage, HiddenMessages)
 	{
+		if (HiddenMessage == "*") {
+			m_HideAllMessages = true;
+			m_HiddenMessages.clear();
+			break;
+		}
+
 		StrPair CodeDetail = Split2(HiddenMessage, ",");
+		if (CodeDetail.first.left(4) == "SBIE" || CodeDetail.first.left(4) == "SBOX")
+			CodeDetail.first = CodeDetail.first.mid(4);
 		m_HiddenMessages.insert(CodeDetail.first.toInt(), CodeDetail.second);
 	}
 }
@@ -221,9 +231,16 @@ void CPopUpWindow::OnHideMessage()
 
 bool CPopUpWindow::IsMessageHidden(quint32 MsgCode, const QStringList& MsgData)
 {
+	if (m_HideAllMessages)
+		return true;
+
 	foreach(const QString& Details, m_HiddenMessages.values(MsgCode & 0xFFFF))
 	{
-		if(Details.isEmpty() || (MsgData.size() >= 2 && Details.compare(MsgData[1]) == 0))
+		if(Details.isEmpty())
+			return true;
+
+		QRegularExpression exp("^" + QRegularExpression::escape(Details).replace("\\*",".*").replace("\\?","."));
+		if(MsgData.size() >= 2 && exp.match(MsgData[1]).hasMatch())
 			return true;
 	}
 	return false;

@@ -77,8 +77,11 @@ public:
 			});
 
 			connect(pBox, qOverload<int>(&QComboBox::currentIndexChanged), [pBox](int index){
-				if (index != -1)
-					pBox->setProperty("value", pBox->itemData(index));
+				if (index != -1) {
+					QString Program = pBox->itemData(index).toString();
+					pBox->setProperty("value", Program);
+					pBox->lineEdit()->setReadOnly(Program.left(1) == "<");
+				}
 			});
 
 			return pBox;
@@ -96,6 +99,7 @@ public:
 			QString Program = pItem->data(index.column(), Qt::UserRole).toString();
 
 			pBox->setProperty("value", Program);
+			pBox->lineEdit()->setReadOnly(Program.left(1) == "<");
 
 			int Index = pBox->findData(Program);
 			pBox->setCurrentIndex(Index);
@@ -107,10 +111,11 @@ public:
 	}
 
 	virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const {
+		QTreeWidgetItem* pItem = ((QTreeWidgetHacker*)m_pTree)->itemFromIndex(index);
 
 		QComboBox* pBox = qobject_cast<QComboBox*>(editor);
 		if (pBox) {
-			QTreeWidgetItem* pItem = ((QTreeWidgetHacker*)m_pTree)->itemFromIndex(index);
+			
 			QString Value = pBox->property("value").toString();
 			pItem->setText(index.column(), pBox->currentText());
 			//QString Text = pBox->currentText();
@@ -120,12 +125,18 @@ public:
 
 		QLineEdit* pEdit = qobject_cast<QLineEdit*>(editor);
 		if (pEdit) {
-			QTreeWidgetItem* pItem = ((QTreeWidgetHacker*)m_pTree)->itemFromIndex(index);
 			pItem->setText(index.column(), pEdit->text());
 			QString Value = pEdit->text();
 			if (m_Group) Value = "<" + Value + ">";
 			pItem->setData(index.column(), Qt::UserRole, Value);
 		}
+	}
+
+	QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
+	{
+		QSize size = QStyledItemDelegate::sizeHint(option, index);
+		if(size.height() < 20) size.setHeight(20); // ensure enough room for teh combo box
+		return size;
 	}
 
 protected:

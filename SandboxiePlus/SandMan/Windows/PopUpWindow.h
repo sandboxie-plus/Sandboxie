@@ -456,6 +456,7 @@ protected:
 	virtual void		SendPromptResult(CPopUpPrompt* pEntry, int retval);
 
 	QMultiMap<quint32, QString> m_HiddenMessages;
+	bool				m_HideAllMessages;
 
 private:
 	bool				m_ResetPosition;

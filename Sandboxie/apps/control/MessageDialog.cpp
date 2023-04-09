@@ -149,6 +149,8 @@ void CMessageDialog::ReloadConf()
 
     while (m_hidden.GetSize()) {
         entry = (HideEntry *)m_hidden.GetAt(0);
+        if(entry->pattern)
+            Pattern_Free(entry->pattern);
         delete entry;
         m_hidden.RemoveAt(0);
     }
@@ -185,6 +187,8 @@ void CMessageDialog::ReloadConf()
             //entry->detail = head.Mid(pos + 1);
             entry->pattern = Pattern_Create(NULL, head.Mid(pos + 1), TRUE, 0);
         }
+        else
+            entry->pattern = NULL;
 
         if (entry->code)
             m_hidden.Add(entry);
@@ -234,7 +238,7 @@ BOOL CMessageDialog::IsHiddenMessage(
             //             (entry->detail.CompareNoCase(detail_1) == 0);
             CString Detail_1 = detail_1;
             Detail_1.MakeLower();
-            BOOL match = Pattern_Match(entry->pattern, Detail_1, Detail_1.GetLength());
+            BOOL match = !entry->pattern || Pattern_Match(entry->pattern, Detail_1, Detail_1.GetLength());
             if (match)
                 return TRUE;
         }

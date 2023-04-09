@@ -1109,9 +1109,9 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/OptionsAdvanced.cpp" line="613"/>
         <location filename="Windows/OptionsGeneral.cpp" line="500"/>
         <location filename="Windows/OptionsGeneral.cpp" line="596"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="436"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="529"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="642"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="451"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="544"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="657"/>
         <source>All Programs</source>
         <translation>Tous les programmes</translation>
     </message>
@@ -1122,9 +1122,9 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/OptionsAccess.cpp" line="636"/>
         <location filename="Windows/OptionsGeneral.cpp" line="505"/>
         <location filename="Windows/OptionsGeneral.cpp" line="600"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="170"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="441"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="533"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="193"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="456"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="548"/>
         <source>Group: %1</source>
         <translation>Groupe : %1</translation>
     </message>
@@ -1159,7 +1159,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/OptionsGeneral.cpp" line="567"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="508"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="523"/>
         <source>Template values can not be edited.</source>
         <translation>Les valeurs des modèles ne peuvent pas être modifiées.</translation>
     </message>
@@ -1517,25 +1517,25 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="37"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="563"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="578"/>
         <source>Any</source>
         <translation>Tous</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="38"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="564"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="579"/>
         <source>TCP</source>
         <translation>TCP</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="39"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="565"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="580"/>
         <source>UDP</source>
         <translation>UDP</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="40"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="566"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="581"/>
         <source>ICMP</source>
         <translation>ICMP</translation>
     </message>
@@ -1556,23 +1556,23 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="901"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="148"/>
-        <location filename="Windows/OptionsNetwork.cpp" line="549"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="171"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="564"/>
         <source>Allow</source>
         <translation>Autoriser</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="149"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="172"/>
         <source>Block (WFP)</source>
         <translation>Bloquer (WFP)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="150"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="173"/>
         <source>Block (NDev)</source>
         <translation>Bloquer (NDev)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsNetwork.cpp" line="550"/>
+        <location filename="Windows/OptionsNetwork.cpp" line="565"/>
         <source>Block</source>
         <translation>Bloquer</translation>
     </message>

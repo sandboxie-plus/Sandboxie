@@ -147,7 +147,7 @@ QString CNewBoxWizard::GetDefaultLocation()
 {
     QString DefaultPath = theAPI->GetGlobalSettings()->GetText("FileRootPath", "\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%", false, false);
     // HACK HACK: globally %SANDBOX% evaluates to GlobalSettings
-    DefaultPath.replace("\\GlobalSettings", "\\" + field("boxName").toString()); 
+    DefaultPath.replace("\\GlobalSettings", "\\" + field("boxName").toString().replace(" ", "_"));
     return theAPI->Nt2DosPath(DefaultPath);
 }
 

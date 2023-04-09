@@ -569,9 +569,9 @@ Function ConfirmRequirements
     !insertmacro Reg_ReadString "" ${HKEY_LOCAL_MACHINE} "'Software\Microsoft\Windows NT\CurrentVersion'" "CurrentVersion"
     Pop $0
     StrCmp $0 "" SystemCheck_Fail
-    ;StrCmp $0 "5.1" SystemCheck_Done_XP_2003
-    ;StrCmp $0 "5.2" SystemCheck_Done_XP_2003
-    StrCmp $0 "6.0" SystemCheck_Done
+    ;StrCmp $0 "5.1" SystemCheck_Done_XP_2003_Vista
+    ;StrCmp $0 "5.2" SystemCheck_Done_XP_2003_Vista
+    ;StrCmp $0 "6.0" SystemCheck_Done_XP_2003_Vista
     StrCmp $0 "6.1" SystemCheck_Done
     StrCmp $0 "6.2" SystemCheck_Done
     StrCmp $0 "6.3" SystemCheck_Done
@@ -583,16 +583,16 @@ SystemCheck_Fail:
     StrCmp $InstallType "Remove" SystemCheck_Force_Remove
 
     MessageBox MB_OK|MB_ICONSTOP "$(MSG_8041)$\n\
-	Windows Vista, Windows 7, Windows 8, Windows 10."
+	Windows 7, Windows 8, Windows 10."
     StrCmp $InstallType "Upgrade" SystemCheck_Force_Remove
     Quit
 
-;SystemCheck_Done_XP_2003:
+;SystemCheck_Done_XP_2003_Vista:
 
 !if "${_BUILDARCH}" == "x64"
 
     MessageBox MB_OK|MB_ICONSTOP "$(MSG_8041)$\n\
-	(64-bit)   Windows Vista (Service Pack 1), Windows 7, Windows 8, Windows 10."
+	(64-bit)   Windows 7, Windows 8, Windows 10."
     StrCmp $InstallType "Upgrade" SystemCheck_Force_Remove
     Quit
 

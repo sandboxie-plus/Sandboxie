@@ -12,6 +12,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.8.5 / 5.63.5] - 2023-04-??
+
+### Fixed
+- fixed issue with group renaming in the sandman UI [#2804](https://github.com/sandboxie-plus/Sandboxie/issues/2804)
+
+
 ## [1.8.4 / 5.63.4] - 2023-04-07
 
 ### Added
@@ -185,6 +191,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -- Note: these can only be changed when the box is empty
 - added new file migration option page with additional settings
 - added SBIE2113/SBIE2114/SBIE2115 message to indicate when files are not migrated due to presets
+- added 'NoParallelLoading=y' to disable parallel loading of dlls to debug loader issues
 
 ### changed
 - moved SeparateUserFolders checkbox from global settings to per box options

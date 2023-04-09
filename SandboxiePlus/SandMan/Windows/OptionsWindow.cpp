@@ -33,12 +33,19 @@ public:
 
 class ProgramsDelegate : public QStyledItemDelegate {
 public:
-	ProgramsDelegate(COptionsWindow* pOptions, QTreeWidget* pTree, int Column, QObject* parent = 0) : QStyledItemDelegate(parent) { m_pOptions = pOptions; m_pTree = pTree; m_Column = Column; }
+	ProgramsDelegate(COptionsWindow* pOptions, QTreeWidget* pTree, int Column, QObject* parent = 0) : QStyledItemDelegate(parent) {
+		m_pOptions = pOptions; 
+		m_pTree = pTree; 
+		m_Column = (m_Group = (Column == -2)) ? -1 : Column;
+	}
 
 	virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const {
 		QTreeWidgetItem* pItem = ((QTreeWidgetHacker*)m_pTree)->itemFromIndex(index);
 		if (!pItem->data(index.column(), Qt::UserRole).isValid())
 			return NULL;
+
+		if(m_Group && !pItem->parent()) // for groups use simple edit
+			return QStyledItemDelegate::createEditor(parent, option, index);
 
 		if (m_Column == -1 || pItem->data(m_Column, Qt::UserRole).toInt() == COptionsWindow::eProcess) {
 			QComboBox* pBox = new QComboBox(parent);
@@ -115,7 +122,9 @@ public:
 		if (pEdit) {
 			QTreeWidgetItem* pItem = ((QTreeWidgetHacker*)m_pTree)->itemFromIndex(index);
 			pItem->setText(index.column(), pEdit->text());
-			pItem->setData(index.column(), Qt::UserRole, pEdit->text());
+			QString Value = pEdit->text();
+			if (m_Group) Value = "<" + Value + ">";
+			pItem->setData(index.column(), Qt::UserRole, Value);
 		}
 	}
 
@@ -123,7 +132,9 @@ protected:
 	COptionsWindow* m_pOptions;
 	QTreeWidget* m_pTree;
 	int m_Column;
+	bool m_Group;
 };
+
 
 //////////////////////////////////////////////////////////////////////////
 // COptionsWindow
@@ -411,7 +422,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.btnAddProg, SIGNAL(clicked(bool)), this, SLOT(OnAddProg()));
 	connect(ui.btnDelProg, SIGNAL(clicked(bool)), this, SLOT(OnDelProg()));
 	connect(ui.chkShowGroupTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowGroupTmpl()));
-	ui.treeGroups->setItemDelegateForColumn(0, new ProgramsDelegate(this, ui.treeGroups, -1, this));
+	ui.treeGroups->setItemDelegateForColumn(0, new ProgramsDelegate(this, ui.treeGroups, -2, this));
 	connect(ui.treeGroups, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnGroupsChanged(QTreeWidgetItem *, int)));
 	//
 

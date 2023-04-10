@@ -15,7 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.8.5 / 5.63.5] - 2023-04-??
 
 ### Fixed
-- fixed issue with group renaming in the sandman UI [#2804](https://github.com/sandboxie-plus/Sandboxie/issues/2804)
+- fixed issue with group renaming in the SandMan UI [#2804](https://github.com/sandboxie-plus/Sandboxie/issues/2804)
 
 
 ## [1.8.4 / 5.63.4] - 2023-04-07
@@ -27,7 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed compatibility issue with Microsoft Edge 112.x
 - fixed updater issue [#2790](https://github.com/sandboxie-plus/Sandboxie/issues/2790)
-- fixed new box wizard boxname issue by making the boxname static [#2792](https://github.com/sandboxie-plus/Sandboxie/issues/2792)
+- fixed box naming issue in the new box wizard by making the box name static [#2792](https://github.com/sandboxie-plus/Sandboxie/issues/2792)
 - fixed issue with Firefox/Thunderbird [#2799](https://github.com/sandboxie-plus/Sandboxie/issues/2799)
 
 
@@ -42,7 +42,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.8.2a / 5.63.2] - 2023-04-02
 
 ### Changed
-- disabled token based workarounds when in compartment mode
+- disabled token-based workarounds when in compartment mode
 
 ### Fixed
 - fixed issue with the new SBIE2307 message being triggered on media removal
@@ -65,21 +65,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - renamed 'DropAppContainerTokens=program.exe,n' to 'DropAppContainerToken=program.exe,n'
 - 'DropAppContainerToken=program.exe,y' can now be used in App Compartment boxes, however it is not recommended security-wise
-- the desktop security workaround used for Chrome, Firefox and Acrobat is now enabled by default, you cn disable it with "UseSbieDeskHack=n"
+- the desktop security workaround used for Chrome, Firefox and Acrobat is now enabled by default, you can disable it with "UseSbieDeskHack=n"
 -- Note: this should allow electron apps to run without 'SpecialImages=chrome,program.exe'
-- disabled old token hacks, as with the new App Container token these seem to be no longer required
+- disabled old token hacks, as these seem to be no longer required with the new App Container token
 -- Note: in case of issues with Microsoft Edge, Chrome, Firefox or Acrobat, they can be re-enabled using 'DeprecatedTokenHacks=y'
 - updated Inno Setup to version 6.2.2 which also comes with a new installer icon
 
 ### Fixed
-- issue with global settings ini section editing
+- fixed issue with Global Settings ini section editing
 - fixed issue with 'UseRegDeleteV2=y' [#2756](https://github.com/sandboxie-plus/Sandboxie/issues/2756)
 - autorun path now supports any length [#2769](https://github.com/sandboxie-plus/Sandboxie/pull/2769) (thanks Sapour)
 - recovery window: delete confirmation dialog is no longer shown when no file/folder is selected [#2771](https://github.com/sandboxie-plus/Sandboxie/pull/2771) (thanks Sapour)
 - fixed WeChat crash issue [#2772](https://github.com/sandboxie-plus/Sandboxie/pull/2772)
 
 ### Removed
-- removed obsolete workaround for maxthon.exe browser version 4
+- removed obsolete workaround for Maxthon 4
 
 
 
@@ -110,7 +110,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - 'OpenProtectedStorage=y' has been replaced with a template
 - moved all built-in access rules to a set of default templates
-- moved WinInetCache control to a template OpenWinInetCache, 'CloseWinInetCache=y' is now obsolete
+- moved WinInetCache control to a template OpenWinInetCache; 'CloseWinInetCache=y' is now obsolete
 - added hook for CreateAppContainerToken, which should also improve compatibility with other apps [#1926](https://github.com/sandboxie-plus/Sandboxie/issues/1926)
 -- note: Template_Edge_Fix is no longer required
 - replaced a few icons

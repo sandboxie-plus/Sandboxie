@@ -881,8 +881,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 <context>
     <name>COptionsWindow</name>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="421"/>
-        <location filename="Windows/OptionsWindow.cpp" line="434"/>
+        <location filename="Windows/OptionsWindow.cpp" line="443"/>
+        <location filename="Windows/OptionsWindow.cpp" line="456"/>
         <location filename="Windows/OptionsAccess.cpp" line="24"/>
         <source>Browse for File</source>
         <translation>파일 찾아보기</translation>
@@ -1034,7 +1034,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>디렉터리 선택</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="970"/>
+        <location filename="Windows/OptionsWindow.cpp" line="992"/>
         <location filename="Windows/OptionsAccess.cpp" line="399"/>
         <location filename="Windows/OptionsAccess.cpp" line="632"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="538"/>
@@ -1048,8 +1048,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>모든 프로그램</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="968"/>
-        <location filename="Windows/OptionsWindow.cpp" line="986"/>
+        <location filename="Windows/OptionsWindow.cpp" line="990"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1008"/>
         <location filename="Windows/OptionsAccess.cpp" line="404"/>
         <location filename="Windows/OptionsAccess.cpp" line="636"/>
         <location filename="Windows/OptionsGeneral.cpp" line="505"/>
@@ -1577,62 +1577,62 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>선택한 로컬 템플릿을 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="158"/>
+        <location filename="Windows/OptionsWindow.cpp" line="180"/>
         <source>Sandboxie Plus - &apos;%1&apos; Options</source>
         <translation>Sandboxie Plus - &apos;%1&apos; 옵션</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="263"/>
+        <location filename="Windows/OptionsWindow.cpp" line="285"/>
         <source>File Options</source>
         <translation>파일 옵션</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="295"/>
+        <location filename="Windows/OptionsWindow.cpp" line="317"/>
         <source>Grouping</source>
         <translation>그룹</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="499"/>
+        <location filename="Windows/OptionsWindow.cpp" line="521"/>
         <source>Add %1 Template</source>
         <translation>%1 템플릿 추가</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="599"/>
+        <location filename="Windows/OptionsWindow.cpp" line="621"/>
         <source>Search for options</source>
         <translation>옵션 검색</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="729"/>
+        <location filename="Windows/OptionsWindow.cpp" line="751"/>
         <source>Box: %1</source>
         <translation>박스: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="730"/>
+        <location filename="Windows/OptionsWindow.cpp" line="752"/>
         <source>Template: %1</source>
         <translation>템플릿: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="731"/>
+        <location filename="Windows/OptionsWindow.cpp" line="753"/>
         <source>Global: %1</source>
         <translation>전역: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="732"/>
+        <location filename="Windows/OptionsWindow.cpp" line="754"/>
         <source>Default: %1</source>
         <translation>기본값: %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="909"/>
+        <location filename="Windows/OptionsWindow.cpp" line="931"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>이 샌드박스가 삭제되어 구성을 저장할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="956"/>
+        <location filename="Windows/OptionsWindow.cpp" line="978"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>일부 변경 사항이 아직 저장되지 않았습니다. 이 옵션 창을 닫으시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="979"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1001"/>
         <source>Enter program:</source>
         <translation>프로그램 입력:</translation>
     </message>
@@ -1800,54 +1800,54 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 <context>
     <name>CPopUpWindow</name>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="23"/>
+        <location filename="Windows/PopUpWindow.cpp" line="25"/>
         <source>Sandboxie-Plus Notifications</source>
         <translation>Sandboxie-Plus 알림</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="160"/>
+        <location filename="Windows/PopUpWindow.cpp" line="162"/>
         <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
         <translation>%1 (%2) 동안 인쇄 스풀러가 샌드박스 외부에 쓰도록 허용하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="253"/>
+        <location filename="Windows/PopUpWindow.cpp" line="270"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
         <translation>%4 (%5)가 %1 대용량 파일을 샌드박스: %2에 복사하도록 허용하시겠습니까?
 파일 이름: %3</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="259"/>
+        <location filename="Windows/PopUpWindow.cpp" line="276"/>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
         <translation>%1 (%2)의 인터넷 액세스를 허용하시겠습니까?
 전체 경로: %3</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="318"/>
+        <location filename="Windows/PopUpWindow.cpp" line="335"/>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
         <translation>%1은 %2에서 빠르게 복구할 수 있습니다.
 파일 작성자: %3</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="320"/>
+        <location filename="Windows/PopUpWindow.cpp" line="337"/>
         <source>an UNKNOWN process.</source>
         <translation>알 수 없는 프로세스.</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="320"/>
+        <location filename="Windows/PopUpWindow.cpp" line="337"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="404"/>
-        <location filename="Windows/PopUpWindow.cpp" line="405"/>
+        <location filename="Windows/PopUpWindow.cpp" line="421"/>
+        <location filename="Windows/PopUpWindow.cpp" line="422"/>
         <source>UNKNOWN</source>
         <translation>알 수 없음</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="411"/>
+        <location filename="Windows/PopUpWindow.cpp" line="428"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
         <translation>큰 파일 %1을 샌드박스 %2로 마이그레이션하는 중, %3 남았습니다.
@@ -6514,7 +6514,7 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>ProgramsDelegate</name>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="48"/>
+        <location filename="Windows/OptionsWindow.cpp" line="55"/>
         <source>Group: %1</source>
         <translation>그룹: %1</translation>
     </message>

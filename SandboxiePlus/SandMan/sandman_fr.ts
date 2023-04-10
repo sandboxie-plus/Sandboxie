@@ -932,8 +932,8 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
 <context>
     <name>COptionsWindow</name>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="421"/>
-        <location filename="Windows/OptionsWindow.cpp" line="434"/>
+        <location filename="Windows/OptionsWindow.cpp" line="443"/>
+        <location filename="Windows/OptionsWindow.cpp" line="456"/>
         <location filename="Windows/OptionsAccess.cpp" line="24"/>
         <source>Browse for File</source>
         <translatorcomment>Bouton pour ajouter un accès.</translatorcomment>
@@ -1102,7 +1102,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation>Sélectionner le répertoire</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="970"/>
+        <location filename="Windows/OptionsWindow.cpp" line="992"/>
         <location filename="Windows/OptionsAccess.cpp" line="399"/>
         <location filename="Windows/OptionsAccess.cpp" line="632"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="538"/>
@@ -1116,8 +1116,8 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation>Tous les programmes</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="968"/>
-        <location filename="Windows/OptionsWindow.cpp" line="986"/>
+        <location filename="Windows/OptionsWindow.cpp" line="990"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1008"/>
         <location filename="Windows/OptionsAccess.cpp" line="404"/>
         <location filename="Windows/OptionsAccess.cpp" line="636"/>
         <location filename="Windows/OptionsGeneral.cpp" line="505"/>
@@ -1674,63 +1674,63 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation>Voulez-vous vraiment supprimer le modèle local sélectionné ?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="158"/>
+        <location filename="Windows/OptionsWindow.cpp" line="180"/>
         <source>Sandboxie Plus - &apos;%1&apos; Options</source>
         <translation>Sandboxie Plus - Paramètres de « %1 »</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="263"/>
+        <location filename="Windows/OptionsWindow.cpp" line="285"/>
         <source>File Options</source>
         <translation>Options des fichiers</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="295"/>
+        <location filename="Windows/OptionsWindow.cpp" line="317"/>
         <source>Grouping</source>
         <translation>Groupement</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="499"/>
+        <location filename="Windows/OptionsWindow.cpp" line="521"/>
         <source>Add %1 Template</source>
         <translation>Ajouter un modèle pour : %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="599"/>
+        <location filename="Windows/OptionsWindow.cpp" line="621"/>
         <source>Search for options</source>
         <oldsource>Search for Options</oldsource>
         <translation>Rechercher dans les options</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="729"/>
+        <location filename="Windows/OptionsWindow.cpp" line="751"/>
         <source>Box: %1</source>
         <translation>Bac : %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="730"/>
+        <location filename="Windows/OptionsWindow.cpp" line="752"/>
         <source>Template: %1</source>
         <translation>Modèle : %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="731"/>
+        <location filename="Windows/OptionsWindow.cpp" line="753"/>
         <source>Global: %1</source>
         <translation>Global : %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="732"/>
+        <location filename="Windows/OptionsWindow.cpp" line="754"/>
         <source>Default: %1</source>
         <translation>Par défaut : %1</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="909"/>
+        <location filename="Windows/OptionsWindow.cpp" line="931"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
         <translation>Ce bac à sable a été supprimé par conséquent la configuration ne peut pas être sauvegardée.</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="956"/>
+        <location filename="Windows/OptionsWindow.cpp" line="978"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
         <translation>Certains changements n&apos;ont pas encore été enregistrés, voulez-vous vraiment fermer cette fenêtre d&apos;options ?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="979"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1001"/>
         <source>Enter program:</source>
         <translation>Saisir le programme :</translation>
     </message>
@@ -1891,54 +1891,54 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
 <context>
     <name>CPopUpWindow</name>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="23"/>
+        <location filename="Windows/PopUpWindow.cpp" line="25"/>
         <source>Sandboxie-Plus Notifications</source>
         <translation>Sandboxie-Plus - Notifications</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="160"/>
+        <location filename="Windows/PopUpWindow.cpp" line="162"/>
         <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
         <translation>Souhaitez-vous autoriser le spouleur d&apos;impression à écrire en dehors du bac à sable pour %1 (%2) ?</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="253"/>
+        <location filename="Windows/PopUpWindow.cpp" line="270"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
         <translation>Souhaitez-vous autoriser %4 (%5) à copier un fichier volumineux %1 dans le bac à sable : %2 ?
 Nom du fichier : %3</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="259"/>
+        <location filename="Windows/PopUpWindow.cpp" line="276"/>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
         <translation>Souhaitez-vous autoriser %1 (%2) à accéder à Internet ?
 Chemin complet : %3</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="318"/>
+        <location filename="Windows/PopUpWindow.cpp" line="335"/>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
         <translation>%1 est éligible pour une récupération rapide à partir de %2.
 Le fichier a été écrit par : %3</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="320"/>
+        <location filename="Windows/PopUpWindow.cpp" line="337"/>
         <source>an UNKNOWN process.</source>
         <translation>un processus INCONNU.</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="320"/>
+        <location filename="Windows/PopUpWindow.cpp" line="337"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="404"/>
-        <location filename="Windows/PopUpWindow.cpp" line="405"/>
+        <location filename="Windows/PopUpWindow.cpp" line="421"/>
+        <location filename="Windows/PopUpWindow.cpp" line="422"/>
         <source>UNKNOWN</source>
         <translation>INCONNU</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="411"/>
+        <location filename="Windows/PopUpWindow.cpp" line="428"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
         <translation>Migration d&apos;un fichier volumineux %1 dans le bac à sable %2, %3 restant.
@@ -6936,7 +6936,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
 <context>
     <name>ProgramsDelegate</name>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="48"/>
+        <location filename="Windows/OptionsWindow.cpp" line="55"/>
         <source>Group: %1</source>
         <translation>Groupe : %1</translation>
     </message>

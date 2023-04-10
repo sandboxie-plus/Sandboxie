@@ -575,24 +575,26 @@ Function ConfirmRequirements
     StrCmp $0 "6.1" SystemCheck_Done
     StrCmp $0 "6.2" SystemCheck_Done
     StrCmp $0 "6.3" SystemCheck_Done
-    StrCmp $0 "6.4" SystemCheck_Done
+    StrCmp $0 "10.0" SystemCheck_Done
     Goto SystemCheck_Fail
 
 SystemCheck_Fail:
 
     StrCmp $InstallType "Remove" SystemCheck_Force_Remove
 
-    MessageBox MB_OK|MB_ICONSTOP "$(MSG_8041)$\n\
-	Windows 7, Windows 8, Windows 10."
-    StrCmp $InstallType "Upgrade" SystemCheck_Force_Remove
-    Quit
-
 ;SystemCheck_Done_XP_2003_Vista:
 
 !if "${_BUILDARCH}" == "x64"
 
     MessageBox MB_OK|MB_ICONSTOP "$(MSG_8041)$\n\
-	(64-bit)   Windows 7, Windows 8, Windows 10."
+	(64-bit)   Windows 7, Windows 8, Windows 10, Windows 11."
+    StrCmp $InstallType "Upgrade" SystemCheck_Force_Remove
+    Quit
+
+!else
+
+    MessageBox MB_OK|MB_ICONSTOP "$(MSG_8041)$\n\
+	(32-bit)   Windows 7, Windows 8, Windows 10."
     StrCmp $InstallType "Upgrade" SystemCheck_Force_Remove
     Quit
 

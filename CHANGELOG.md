@@ -72,7 +72,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - updated Inno Setup to version 6.2.2 which also comes with a new installer icon
 
 ### Fixed
-- fixed issue with global Settings.ini section editing
+- fixed issue with Global Settings ini section editing
 - fixed issue with 'UseRegDeleteV2=y' [#2756](https://github.com/sandboxie-plus/Sandboxie/issues/2756)
 - autorun path now supports any length [#2769](https://github.com/sandboxie-plus/Sandboxie/pull/2769) (thanks Sapour)
 - recovery window: delete confirmation dialog is no longer shown when no file/folder is selected [#2771](https://github.com/sandboxie-plus/Sandboxie/pull/2771) (thanks Sapour)

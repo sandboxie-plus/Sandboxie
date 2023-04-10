@@ -135,7 +135,7 @@ public:
 	QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 	{
 		QSize size = QStyledItemDelegate::sizeHint(option, index);
-		if(size.height() < 20) size.setHeight(20); // ensure enough room for teh combo box
+		if(size.height() < 20) size.setHeight(20); // ensure enough room for the combo box
 		return size;
 	}
 

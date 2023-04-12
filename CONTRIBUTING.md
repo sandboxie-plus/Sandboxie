@@ -38,12 +38,14 @@ However, please do not report security vulnerabilities in public GitHub comments
 You may also want to follow the following topics:
 
 - [The least strict sandboxing rules](https://github.com/sandboxie-plus/Sandboxie/issues/1515#issuecomment-1006408988)
-- [The use of the Sandboxie Trace log features](https://github.com/sandboxie-plus/Sandboxie/issues/1208#issuecomment-1200170825)
-- [The use of Procmon traces to track file and registry access](https://github.com/sandboxie-plus/Sandboxie/issues/1679#issuecomment-1065760921)
+- [How to perform trace logs in Sandboxie Plus](https://github.com/sandboxie-plus/Sandboxie/issues/1208#issuecomment-1200170825)
+- [How to enable the Debug tab in Sandboxie Plus](https://github.com/sandboxie-plus/Sandboxie/issues/2134#issuecomment-1215466315)
+- [Useful tools for Sandboxie](https://github.com/sandboxie-plus/Sandboxie#-useful-tools-for-sandboxie)
+- [Procmon traces to track file and registry access](https://github.com/sandboxie-plus/Sandboxie/issues/1679#issuecomment-1065760921)
 - [Reporting issues to third-party vendors in case of evident conflicts](https://github.com/sandboxie-plus/Sandboxie/issues/2025#issuecomment-1200110235)
 - Check out the new introduced features in the [CHANGELOG.md](./CHANGELOG.md) file <br> (a good way to highlight them is a simple search of the `=` sign in your browser)
 - Check out whether the problem has already been reported:
-<br> - in the [Issues](https://github.com/sandboxie-plus/Sandboxie/issues) section of this repository (including the [labels](https://github.com/sandboxie-plus/Sandboxie/labels))
+<br> - in the [Issues](https://github.com/sandboxie-plus/Sandboxie/issues) section of this repository (grouped into [labels](https://github.com/sandboxie-plus/Sandboxie/labels) for easier searching)
 <br> - in the [Discussions](https://github.com/sandboxie-plus/Sandboxie/discussions) section of this repository
 <br> - in the [Issues](https://github.com/sandboxie-plus/sandboxie-docs/issues) section of the Sandboxie-docs repository
 <br> - in the [cached copy](https://www.ecosia.org/search?method=index&q=site%3Ahttps%3A%2F%2Fsandboxie-website-archive.github.io%2Fwww.sandboxie.com%2Fold-forums%2F) of the old Sandboxie forum

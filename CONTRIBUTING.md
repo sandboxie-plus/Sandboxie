@@ -39,6 +39,7 @@ You may also want to follow the following topics:
 
 - [The least strict sandboxing rules](https://github.com/sandboxie-plus/Sandboxie/issues/1515#issuecomment-1006408988)
 - [How to perform trace logs in Sandboxie Plus](https://github.com/sandboxie-plus/Sandboxie/issues/1208#issuecomment-1200170825)
+- [How to save Sandboxie messages as a log file](https://sandboxie-plus.github.io/sandboxie-docs/Content/MessagesFromSandboxie.html#log-messages-to-a-file)
 - [How to enable the Debug tab in Sandboxie Plus](https://github.com/sandboxie-plus/Sandboxie/issues/2134#issuecomment-1215466315)
 - [Useful tools for Sandboxie](https://github.com/sandboxie-plus/Sandboxie#-useful-tools-for-sandboxie)
 - [Procmon traces to track file and registry access](https://github.com/sandboxie-plus/Sandboxie/issues/1679#issuecomment-1065760921)

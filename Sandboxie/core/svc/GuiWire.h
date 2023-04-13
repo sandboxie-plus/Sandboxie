@@ -765,7 +765,7 @@ typedef struct tagGUI_WND_HOOK_REGISTER_RPL GUI_WND_HOOK_REGISTER_RPL;
 struct tagGUI_KILL_JOB_REQ
 {
     ULONG msgid;
-    WCHAR boxname[34];
+    WCHAR boxname[BOXNAME_COUNT];
 };
 
 typedef struct tagGUI_KILL_JOB_REQ GUI_KILL_JOB_REQ;

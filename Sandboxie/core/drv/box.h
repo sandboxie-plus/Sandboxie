@@ -32,9 +32,6 @@
 //---------------------------------------------------------------------------
 
 
-#define BOXNAME_MAXLEN  32
-
-
 //---------------------------------------------------------------------------
 // Structures and Types
 //---------------------------------------------------------------------------
@@ -48,7 +45,7 @@ struct _BOX {
     // a sandbox is identified by three components:
     // 1.  the name of this box
 
-    WCHAR name[BOXNAME_MAXLEN + 1];
+    WCHAR name[BOXNAME_COUNT];
     ULONG name_len;                     // in bytes, including NULL
 
     // 2.  the user account that started this sandbox

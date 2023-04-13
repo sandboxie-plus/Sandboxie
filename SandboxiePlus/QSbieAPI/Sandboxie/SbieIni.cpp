@@ -156,7 +156,7 @@ SB_STATUS CSbieIni::UpdateTextList(const QString &Setting, const QStringList& Li
 		DelValue(Setting, Value);
 	// add new or changed settings
 	foreach(const QString& Value, NewSettings)
-		InsertText(Setting, Value);
+		AppendText(Setting, Value);
 	return SB_OK;
 }
 

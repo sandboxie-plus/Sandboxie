@@ -165,7 +165,7 @@ void CSbieView::CreateMenu()
 			m_pMenuRunStart = NULL;
 		//m_pMenuRunTools->addSeparator();
 		m_pMenuAutoRun = m_pMenuRun->addAction(CSandMan::GetIcon("ReloadIni"), tr("Execute Autorun Entries"), this, SLOT(OnSandBoxAction()));
-		m_pMenuRunTools = m_pMenuRun->addMenu(CSandMan::GetIcon("Maintenance"), tr("More Tools"));
+		m_pMenuRunTools = m_pMenuRun->addMenu(CSandMan::GetIcon("Maintenance"), tr("Standard Applications"));
 			m_pMenuRunBrowser = m_pMenuRunTools->addAction(CSandMan::GetIcon("Internet"), tr("Default Web Browser"), this, SLOT(OnSandBoxAction()));
 			m_pMenuRunMailer = m_pMenuRunTools->addAction(CSandMan::GetIcon("Email"), tr("Default eMail Client"), this, SLOT(OnSandBoxAction()));
 
@@ -176,10 +176,10 @@ void CSbieView::CreateMenu()
 			m_pMenuRunTools->addSeparator();
 			m_pMenuRunCmd = m_pMenuRunTools->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt"), this, SLOT(OnSandBoxAction()));
 			m_pMenuRunCmdAdmin = m_pMenuRunTools->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt (as Admin)"), this, SLOT(OnSandBoxAction()));
-#ifdef _WIN64
+#ifndef _WIN64
 			if(CSbieAPI::IsWow64())
-				m_pMenuRunCmd32 = m_pMenuRunTools->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt (32-bit)"), this, SLOT(OnSandBoxAction()));
 #endif
+				m_pMenuRunCmd32 = m_pMenuRunTools->addAction(CSandMan::GetIcon("Cmd"), tr("Command Prompt (32-bit)"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRun->addSeparator();
 		m_iMenuRun = m_pMenuRun->actions().count();
 	m_pMenuEmptyBox = m_pMenuBox->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Programs"), this, SLOT(OnSandBoxAction()));
@@ -1738,16 +1738,25 @@ void CSbieView::UpdateRunMenu(const CSandBoxPtr& pBox)
 	{
 		StrPair NameCmd = Split2(RunOption, "|");
 
+		StrPair NameIcon = Split2(NameCmd.first, ",");
+
 		QMenu* pMenu;
-		StrPair FolderName = Split2(NameCmd.first, "\\", true);
+		StrPair FolderName = Split2(NameIcon.first, "\\", true);
 		if (FolderName.second.isEmpty()) {
 			FolderName.second = FolderName.first;
 			pMenu = m_pMenuRun;
 		} else
-			pMenu = GetMenuFolder(FolderName.first, m_pMenuRun, m_RunFolders);
+			pMenu = GetMenuFolder(FolderName.first.replace("\\", "/"), m_pMenuRun, m_RunFolders);
+
+		StrPair IconIndex = Split2(NameIcon.second, ",", true);
 
 		QAction* pAction = pMenu->addAction(FolderName.second, this, SLOT(OnSandBoxAction()));
-		pAction->setIcon(m_IconProvider.icon(QFileInfo(pBoxEx->GetCommandFile(NameCmd.second))));
+		if (IconIndex.first.isEmpty())
+			pAction->setIcon(m_IconProvider.icon(QFileInfo(pBoxEx->GetCommandFile(NameCmd.second))));
+		else if(IconIndex.second.isEmpty())
+			pAction->setIcon(LoadWindowsIcon(pBoxEx->GetCommandFile(NameCmd.second), IconIndex.first.toInt()));
+		else
+			pAction->setIcon(LoadWindowsIcon(IconIndex.first, IconIndex.second.toInt()));
 		pAction->setData(NameCmd.second);
 	}
 

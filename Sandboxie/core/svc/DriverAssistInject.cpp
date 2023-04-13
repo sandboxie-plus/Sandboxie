@@ -69,7 +69,7 @@ void DriverAssist::InjectLow(void *_msg)
 		goto finish;
 	}
 
-	WCHAR boxname[48];
+	WCHAR boxname[BOXNAME_COUNT];
     WCHAR exename[99];
 	errlvl = SbieApi_QueryProcessEx2((HANDLE)msg->process_id, 96, boxname, exename, NULL, NULL, NULL);
 	if (errlvl != 0)

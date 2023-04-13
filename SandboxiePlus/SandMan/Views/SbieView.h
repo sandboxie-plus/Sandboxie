@@ -136,9 +136,7 @@ private:
 	QAction*				m_pMenuAutoRun;
 	QAction*				m_pMenuRunCmd;
 	QAction*				m_pMenuRunCmdAdmin;
-#ifdef _WIN64
 	QAction*				m_pMenuRunCmd32;
-#endif
 	QAction*				m_pMenuMkLink;
 	QMenu*					m_pMenuPresets;
 	QActionGroup*			m_pMenuPresetsAdmin;

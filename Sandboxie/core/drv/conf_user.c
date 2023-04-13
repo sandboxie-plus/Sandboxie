@@ -566,7 +566,7 @@ _FX NTSTATUS Conf_Api_IsBoxEnabled(PROCESS *proc, ULONG64 *parms)
     ULONG SessionId;
     UNICODE_STRING SidString;
     const WCHAR* sid;
-    WCHAR boxname[34];
+    WCHAR boxname[BOXNAME_COUNT];
 
     if (! Api_CopyBoxNameFromUser(boxname, (WCHAR *)args->box_name.val))
         return STATUS_INVALID_PARAMETER;

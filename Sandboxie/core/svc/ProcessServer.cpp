@@ -135,9 +135,9 @@ MSG_HEADER *ProcessServer::KillOneHandler(
     HANDLE CallerProcessId, MSG_HEADER *msg)
 {
     ULONG TargetSessionId;
-    WCHAR TargetBoxName[48];
+    WCHAR TargetBoxName[BOXNAME_COUNT];
     ULONG CallerSessionId;
-    WCHAR CallerBoxName[48];
+    WCHAR CallerBoxName[BOXNAME_COUNT];
     NTSTATUS status;
 
     //
@@ -206,9 +206,9 @@ MSG_HEADER *ProcessServer::KillAllHandler(
     HANDLE CallerProcessId, MSG_HEADER *msg)
 {
     ULONG TargetSessionId;
-    WCHAR TargetBoxName[48];
+    WCHAR TargetBoxName[BOXNAME_COUNT];
     ULONG CallerSessionId;
-    WCHAR CallerBoxName[48];
+    WCHAR CallerBoxName[BOXNAME_COUNT];
     BOOLEAN TerminateJob;
     NTSTATUS status;
 
@@ -511,7 +511,7 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
 
             LONG_PTR BoxNameOrModelPid;
             bool CallerInSandbox;
-            WCHAR boxname[48] = { 0 };
+            WCHAR boxname[BOXNAME_COUNT] = { 0 };
             WCHAR sid[96];
             ULONG session_id;
             BOOL FilterHandles = FALSE;
@@ -576,7 +576,7 @@ MSG_HEADER *ProcessServer::RunSandboxedHandler(MSG_HEADER *msg)
                             // check if it should end up in another box
                             //
 
-                            WCHAR BoxName[34];
+                            WCHAR BoxName[BOXNAME_COUNT];
                             int index = -1;
                             while (1) {
                                 index = SbieApi_EnumBoxesEx(index, BoxName, TRUE);
@@ -1340,7 +1340,7 @@ WCHAR *ProcessServer::RunSandboxedComServer(ULONG CallerProcessId)
     if ((CallerProcessFlags & (_FlagsOn | _FlagsOff)) != _FlagsOn)
         return NULL;
 
-    WCHAR CallerBoxName[48];
+    WCHAR CallerBoxName[BOXNAME_COUNT];
     if (0 != SbieApi_QueryProcess(
                             CallerPid, CallerBoxName, NULL, NULL, NULL))
         return NULL;

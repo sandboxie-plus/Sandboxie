@@ -759,7 +759,8 @@ _FX BOOLEAN Gui_PostThreadMessage_Check(ULONG idThread, UINT uMsg)
     //
 
     HANDLE ThreadHandle;
-    WCHAR name[48];
+    WCHAR boxname[BOXNAME_COUNT];
+    WCHAR temp[48];
     NTSTATUS status;
     ULONG ProcessId;
     ULONG session_id;
@@ -779,12 +780,12 @@ _FX BOOLEAN Gui_PostThreadMessage_Check(ULONG idThread, UINT uMsg)
         return TRUE;
 
     status = SbieApi_QueryProcess((HANDLE)(ULONG_PTR)ProcessId,
-                                  name, NULL, NULL, &session_id);
+                                  boxname, NULL, NULL, &session_id);
     if (! NT_SUCCESS(status))
         goto fail;
     if (session_id != Dll_SessionId)
         goto fail;
-    if (_wcsicmp(name, Dll_BoxName) != 0)
+    if (_wcsicmp(boxname, Dll_BoxName) != 0)
         goto fail;
 
     return TRUE;
@@ -796,8 +797,8 @@ _FX BOOLEAN Gui_PostThreadMessage_Check(ULONG idThread, UINT uMsg)
 fail:
 
     if (Dll_OsBuild >= 8400 &&
-            __sys_GetClipboardFormatNameW((ATOM)uMsg, name, 40) &&
-            _wcsicmp(name, L"MSUIM.Msg.LangBarModal") == 0) {
+            __sys_GetClipboardFormatNameW((ATOM)uMsg, temp, 40) &&
+            _wcsicmp(temp, L"MSUIM.Msg.LangBarModal") == 0) {
 
         //
         // on Windows 8, winkey+space pops up an input language dialog box,
@@ -809,8 +810,8 @@ fail:
         return TRUE;
     }
 
-    Sbie_snwprintf(name, 48, L"$:TID=%08X:MSG=%08X", idThread, uMsg);
-    SbieApi_MonitorPut2(MONITOR_WINCLASS | MONITOR_DENY, name, FALSE);
+    Sbie_snwprintf(temp, 48, L"$:TID=%08X:MSG=%08X", idThread, uMsg);
+    SbieApi_MonitorPut2(MONITOR_WINCLASS | MONITOR_DENY, temp, FALSE);
 
     return FALSE;
 }

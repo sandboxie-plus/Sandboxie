@@ -554,7 +554,7 @@ typedef struct GUI_JOB {
 
     LIST_ELEM list_elem;
     HANDLE handle;
-    WCHAR boxname[64];
+    WCHAR boxname[BOXNAME_COUNT];
 
 } GUI_JOB;
 
@@ -1141,7 +1141,7 @@ HANDLE GuiServer::GetJobObjectForGrant(ULONG pid)
 {
     HANDLE hJobObject = NULL;
 
-    WCHAR BoxName[48];
+    WCHAR BoxName[BOXNAME_COUNT];
     ULONG SessionId;
     ULONG status = SbieApi_QueryProcess(
                     (HANDLE)(ULONG_PTR)pid, BoxName, NULL, NULL, &SessionId);
@@ -1360,7 +1360,7 @@ ULONG GuiServer::InitProcessSlave(SlaveArgs *args)
     ULONG errlvl;
     ULONG status;
     ULONG session_id;
-    WCHAR boxname[64];
+    WCHAR boxname[BOXNAME_COUNT];
 
     //
     // validate the request
@@ -1585,8 +1585,8 @@ ULONG GuiServer::CreateConsoleSlave(SlaveArgs *args)
     if (! hProcess)
         return STATUS_INVALID_CID;
 
-    WCHAR boxname[48];
-    WCHAR image_name[128];
+    WCHAR boxname[BOXNAME_COUNT];
+    WCHAR image_name[99];
     WCHAR *cmdline = NULL;
     HANDLE hToken1 = NULL;
     HANDLE hToken2 = NULL;
@@ -2158,7 +2158,7 @@ ULONG GuiServer::EnumWindowsFilterSlave(ULONG pid, void *rpl_buf)
     if (! rpl->num_hwnds)
         return 0;
 
-    WCHAR boxname[48];
+    WCHAR boxname[BOXNAME_COUNT];
     ULONG status = SbieApi_QueryProcess((HANDLE)(ULONG_PTR)pid,
                                         boxname, NULL, NULL, NULL);
     if (status != 0)
@@ -2498,8 +2498,8 @@ ULONG GuiServer::GetClipboardDataSlave(SlaveArgs *args)
     rpl->result = 0;
 
     // fail if the calling process should not have clipboard access
-    WCHAR boxname[48] = { 0 };
-    WCHAR exename[128] = { 0 };
+    WCHAR boxname[BOXNAME_COUNT] = { 0 };
+    WCHAR exename[99] = { 0 };
     SbieApi_QueryProcess((HANDLE)args->pid, boxname, exename, NULL, NULL);
     if (!SbieApi_QueryConfBool(boxname, L"OpenClipboard", TRUE))
     {
@@ -3166,7 +3166,7 @@ ULONG GuiServer::SplWow64Slave(SlaveArgs *args)
 
     static ULONG   _SplWow64Pid = 0;
     static ULONG64 _SplWow64CreateTime = 0;
-    static WCHAR   _SplWow64BoxName[48];
+    static WCHAR   _SplWow64BoxName[BOXNAME_COUNT];
 
     if (args->req_len != sizeof(GUI_SPLWOW64_REQ))
         return STATUS_INFO_LENGTH_MISMATCH;
@@ -3175,7 +3175,7 @@ ULONG GuiServer::SplWow64Slave(SlaveArgs *args)
 
     ULONG status;
     ULONG64 create_time;
-    WCHAR boxname[48];
+    WCHAR boxname[BOXNAME_COUNT];
 
     //
     // scenario 1:  req->set == TRUE
@@ -3194,7 +3194,7 @@ ULONG GuiServer::SplWow64Slave(SlaveArgs *args)
         _SplWow64Pid = args->pid;
         _SplWow64CreateTime = create_time;
         memcpy(_SplWow64BoxName, boxname, sizeof(_SplWow64BoxName));
-        boxname[47] = L'\0';
+        boxname[BOXNAME_COUNT - 1] = L'\0';
 
         return STATUS_SUCCESS;
     }
@@ -3769,14 +3769,14 @@ bool GuiServer::CheckSameProcessBoxes(
     if (*out_pid == in_pid)
         return true;
 
-    WCHAR boxname2[48];
+    WCHAR boxname2[BOXNAME_COUNT];
     ULONG status = SbieApi_QueryProcess((HANDLE)(ULONG_PTR)*out_pid,
                                         boxname2, NULL, NULL, NULL);
     if (! NT_SUCCESS(status))
         return false;
 
     if (! boxname) {
-        WCHAR boxname1[48];
+        WCHAR boxname1[BOXNAME_COUNT];
         status = SbieApi_QueryProcess((HANDLE)(ULONG_PTR)in_pid,
                                       boxname1, NULL, NULL, NULL);
         if (! NT_SUCCESS(status))

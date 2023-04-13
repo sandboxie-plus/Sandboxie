@@ -141,7 +141,7 @@ CSbieAPI::CSbieAPI(QObject* parent) : QThread(parent)
 	m_bBoxesDirty = false;
 
 	connect(&m_IniWatcher, SIGNAL(fileChanged(const QString&)), this, SLOT(OnIniChanged(const QString&)));
-	connect(this, SIGNAL(ProcessBoxed(quint32, const QString&, const QString&, quint32)), this, SLOT(OnProcessBoxed(quint32, const QString&, const QString&, quint32)));
+	connect(this, SIGNAL(ProcessBoxed(quint32, const QString&, const QString&, quint32, const QString&)), this, SLOT(OnProcessBoxed(quint32, const QString&, const QString&, quint32, const QString&)));
 }
 
 CSbieAPI::~CSbieAPI()
@@ -1326,9 +1326,20 @@ QString CSbieAPI::SbieIniGet(const QString& Section, const QString& Setting, qui
 	return QString::fromWCharArray(out_buffer);
 }
 
+QString CSbieAPI::SbieIniGet2(const QString& Section, const QString& Setting, quint32 Index, bool bWithGlobal, bool bNoExpand, bool withTemplates)
+{
+	int flags = (bWithGlobal ? 0 : CONF_GET_NO_GLOBAL);
+	if (!withTemplates)
+		flags |= CONF_GET_NO_TEMPLS;
+	if (bNoExpand)
+		flags |= CONF_GET_NO_EXPAND;
+
+	return SbieIniGet(Section, Setting, Index | flags);
+}
+
 SB_STATUS CSbieAPI::ValidateName(const QString& BoxName)
 {
-	if (BoxName.length() > 32)
+	if (BoxName.length() > (BOXNAME_COUNT - 2))
 		return SB_ERR(SB_NameLenLimit);
 
 	/* invalid file name characters on windows
@@ -1383,7 +1394,7 @@ SB_STATUS CSbieAPI::CreateBox(const QString& BoxName, bool bReLoad)
 
 SB_STATUS CSbieAPI__GetProcessPIDs(SSbieAPI* m, const QString& BoxName, bool bAllSessions, ULONG* pids, ULONG* count)
 {
-	WCHAR box_name[34];
+	WCHAR box_name[BOXNAME_COUNT];
 	BoxName.toWCharArray(box_name); // fix-me: potential overflow
 	box_name[BoxName.size()] = L'\0';
 	BOOLEAN all_sessions = bAllSessions ? TRUE : false;
@@ -1619,7 +1630,7 @@ SB_STATUS CSbieAPI::UpdateBoxPaths(const CSandBoxPtr& pSandBox)
 
 SB_STATUS CSbieAPI::UpdateProcessInfo(const CBoxedProcessPtr& pProcess)
 {
-	WCHAR box_name[34] = { 0 };
+	WCHAR box_name[BOXNAME_COUNT] = { 0 };
 	WCHAR image_name[MAX_PATH];
 	//WCHAR sid[96];
 	ULONG session_id;
@@ -2366,7 +2377,7 @@ bool CSbieAPI::GetLog()
 
 	if ((MsgCode & 0xFFFF) == 1399) // Process Start Notification
 	{
-		emit ProcessBoxed(ProcessId, Nt2DosPath(MsgData[1]), MsgData[2], MsgData.length() < 4 ? 0 : MsgData[3].toUInt());
+		emit ProcessBoxed(ProcessId, Nt2DosPath(MsgData[1]), MsgData[2], MsgData.length() < 4 ? 0 : MsgData[3].toUInt(), MsgData.length() < 5 ? QString() : MsgData[4]);
 		return true;
 	}
 	
@@ -2390,7 +2401,7 @@ bool CSbieAPI::GetLog()
 	return true;
 }
 
-CBoxedProcessPtr CSbieAPI::OnProcessBoxed(quint32 ProcessId, const QString& Path, const QString& Box, quint32 ParentId)
+CBoxedProcessPtr CSbieAPI::OnProcessBoxed(quint32 ProcessId, const QString& Path, const QString& Box, quint32 ParentId, const QString& CmdLine)
 {
 	CBoxedProcessPtr pProcess = m_BoxedProxesses.value(ProcessId);
 	if (!pProcess)
@@ -2420,6 +2431,8 @@ CBoxedProcessPtr CSbieAPI::OnProcessBoxed(quint32 ProcessId, const QString& Path
 		pProcess->m_ParendPID = ParentId;
 	if (pProcess->m_ImagePath.isEmpty())
 		pProcess->m_ImagePath = Path;
+	if (pProcess->m_CommandLine.isEmpty() && !CmdLine.isEmpty())
+		pProcess->m_CommandLine = CmdLine;
 
 	return pProcess;
 }

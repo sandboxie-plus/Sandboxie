@@ -24,9 +24,9 @@
 
 #include "common/win32_ntddk.h"
 #include "core/dll/sbiedll.h"
+#include "common/defines.h"
 #include "core/svc/SbieIniWire.h"
 #include "common/my_version.h"
-#include "common/defines.h"
 #include "msgs/msgs.h"
 
 
@@ -76,7 +76,7 @@ extern "C" {
 //---------------------------------------------------------------------------
 
 
-WCHAR BoxName[34];
+WCHAR BoxName[BOXNAME_COUNT];
 
 PWSTR ChildCmdLine = NULL;
 BOOL run_mail_agent = FALSE;
@@ -491,7 +491,7 @@ BOOL Parse_Command_Line(void)
                 }
             }
 
-            if (tmp == cmd || (cmd - tmp > 32)) {
+            if (tmp == cmd || (cmd - tmp > (BOXNAME_COUNT - 2))) {
 
                 if (run_silent)
                     ExitProcess(ERROR_UNKNOWN_PROPERTY);

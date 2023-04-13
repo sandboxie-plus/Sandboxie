@@ -183,10 +183,10 @@
     <ClCompile Include="Helpers\WinHelper.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="Wizards\TemplateWizard.cpp">
+    <ClCompile Include="Wizards\NewBoxWizard.cpp">
       <Filter>Wizards</Filter>
     </ClCompile>
-    <ClCompile Include="Wizards\NewBoxWizard.cpp">
+    <ClCompile Include="Wizards\TemplateWizard.cpp">
       <Filter>Wizards</Filter>
     </ClCompile>
   </ItemGroup>

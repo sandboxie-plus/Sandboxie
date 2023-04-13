@@ -564,7 +564,7 @@ _FX LONG SbieApi_QueryProcessEx2(
 
     if (out_box_name_wchar34) {
         BoxName.Length = 0;
-        BoxName.MaximumLength = (USHORT)(sizeof(WCHAR) * 34);
+        BoxName.MaximumLength = (USHORT)(sizeof(WCHAR) * BOXNAME_COUNT);
         BoxName.Buffer = (ULONG64)(ULONG_PTR)out_box_name_wchar34;
         args->box_name.val64 = (ULONG64)(ULONG_PTR)&BoxName;
     }
@@ -1452,7 +1452,7 @@ _FX LONG SbieApi_EnumBoxesEx(
     while (1) {
         ++index;
         rc = SbieApi_QueryConf(NULL, NULL, index | CONF_GET_NO_TEMPLS | CONF_GET_NO_EXPAND,
-                               box_name, sizeof(WCHAR) * 34);
+                               box_name, sizeof(WCHAR) * BOXNAME_COUNT);
         if (rc == STATUS_BUFFER_TOO_SMALL)
             continue;
         if (! box_name[0])

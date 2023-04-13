@@ -63,6 +63,8 @@ private slots:
 
 	void OnBrowsePath();
 	void OnAddCommand();
+	void OnCommandUp();
+	void OnCommandDown();
 	void OnDelCommand();
 	void OnRunChanged() { m_GeneralChanged = true;  OnOptChanged(); }
 
@@ -219,19 +221,19 @@ private slots:
 	void SetIniEdit(bool bEnable);
 	void OnEditIni();
 	void OnSaveIni();
+	void OnIniChanged();
 	void OnCancelEdit();
 
 	void OnSetTree();
 
 protected:
-	friend struct SFirewallRule;
-
 	void closeEvent(QCloseEvent *e);
 
 	bool eventFilter(QObject *watched, QEvent *e);
 
 	void OnTab(QWidget* pTab);
 
+public:
 	enum ECopyAction
 	{
 		eCopyAlways,
@@ -305,7 +307,8 @@ protected:
 		eClosedRT,
 		eReadOnly,
 		eBoxOnly,
-		eIgnoreUIPI
+		eIgnoreUIPI,
+		eMaxAccessMode
 	};
 
 	enum ETriggerAction {
@@ -316,6 +319,7 @@ protected:
 		eDeleteCmd
 	};
 
+protected:
 	void SetBoxColor(const QColor& color);
 	void UpdateBoxColor();
 
@@ -326,7 +330,7 @@ protected:
 	void CloseCopyEdit(bool bSave = true);
 	void CloseCopyEdit(QTreeWidgetItem* pItem, bool bSave = true);
 
-	void SetProgramItem(QString Program, QTreeWidgetItem* pItem, int Column, const QString& Sufix = QString());
+	void SetProgramItem(QString Program, QTreeWidgetItem* pItem, int Column, const QString& Sufix = QString(), bool bList = true);
 
 	QString SelectProgram(bool bOrGroup = true);
 	void AddProgramToGroup(const QString& Program, const QString& Group);
@@ -343,7 +347,7 @@ protected:
 	void SaveConfig();
 	void UpdateCurrentTab();
 
-	void AddRunItem(const QString& Name, const QString& Command);
+	void AddRunItem(const QString& Name, const QString& Icon, const QString& Command);
 
 	void CreateGeneral();
 	void LoadGeneral();

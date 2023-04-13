@@ -82,34 +82,52 @@ public slots:
 	void showTab(int Tab, bool bExclusive = false);
 
 private slots:
-	void OnChange();
-
 	void OnTab();
+
+	void OnAddMessage();
+	void OnDelMessage();
+	void OnMessageChanged() { m_MessagesChanged = true; OnOptChanged(); }
+
+	void OnRootChanged();
 
 	void OnBrowsePath();
 	void OnAddCommand();
+	void OnCommandUp();
+	void OnCommandDown();
 	void OnDelCommand();
+	void OnRunChanged() { m_RunChanged = true; OnOptChanged(); }
 
-	void OnChangeGUI() { m_bRebuildUI = true; }
-	void OnFeaturesChanged() { m_FeaturesChanged = true; }
+	void OnOptChanged();
+
+	void OnChangeGUI() { m_bRebuildUI = true; OnOptChanged(); }
+	void OnFeaturesChanged() { m_FeaturesChanged = true; OnOptChanged(); }
+	void OnGeneralChanged() { m_GeneralChanged = true; OnOptChanged(); }
 
 	void OnBrowse();
 
+	void OnProtectionChange();
 	void OnSetPassword();
 
-	void OnWarnChanged() { m_WarnProgsChanged = true; }
+	void OnWarnChanged() { m_WarnProgsChanged = true; OnOptChanged(); }
 	void OnAddWarnProg();
 	void OnAddWarnFolder();
 	void OnDelWarnProg();
 
+	void OnCompatChanged() { m_CompatChanged = true; OnOptChanged(); }
 	void OnTemplateClicked(QTreeWidgetItem* pItem, int Column);
 	void OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column);
 	void OnAddCompat();
 	void OnDelCompat();
 
+	void OnFilterTemplates()		{ LoadTemplates(); }
+	void OnAddTemplates();
+	void OnTemplateWizard();
+	void OnDelTemplates();
+
 	void SetIniEdit(bool bEnable);
 	void OnEditIni();
 	void OnSaveIni();
+	void OnIniChanged();
 	void OnCancelEdit();
 
 
@@ -130,21 +148,30 @@ protected:
 
 	void OnTab(QWidget* pTab);
 
-	void	AddRunItem(const QString& Name, const QString& Command);
+	void	AddMessageItem(const QString& ID, const QString& Text = QString());
+
+	void	AddRunItem(const QString& Name, const QString& Icon, const QString& Command);
 
 	void	AddWarnEntry(const QString& Name, int type);
 
 	void	LoadSettings();
 	void	SaveSettings();
 
+	void	LoadTemplates();
+
 	void	LoadIniSection();
 	void	SaveIniSection();
 
 	bool	m_bRebuildUI;
+	bool	m_HoldChange;
 	int 	m_CompatLoaded;
 	QString m_NewPassword;
+	bool	m_MessagesChanged;
 	bool	m_WarnProgsChanged;
 	bool	m_CompatChanged;
+	bool	m_RunChanged;
+	bool	m_ProtectionChanged;
+	bool	m_GeneralChanged;
 	bool	m_FeaturesChanged;
 	bool	m_CertChanged;
 	QVariantMap m_UpdateData;
@@ -180,7 +207,8 @@ union SCertInfo {
             reservd_1 : 2,
             reservd_2 : 8,
             reservd_3 : 8,
-			reservd_4 : 8;
+			reservd_4 : 7,
+			insider   : 1;
 		qint32 
 			expirers_in_sec : 30, 
 			unused_1        : 1, // skim a couple high bits to use as flags flag, 0x3fffffff -> is 34 years count down is enough

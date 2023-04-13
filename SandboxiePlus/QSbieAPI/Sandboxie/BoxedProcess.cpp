@@ -43,7 +43,7 @@ CBoxedProcess::CBoxedProcess(quint32 ProcessId, class CSandBox* pBox)
 	m_ProcessId = ProcessId;
 
 	m_ParendPID = 0;
-	m_SessionId = 0;
+	m_SessionId = -1;
 
 	m_ProcessFlags = 0;
 	m_ImageType = -1;
@@ -248,7 +248,7 @@ void CBoxedProcess::InitProcessInfoImpl(void* ProcessHandle)
 	IsWow64Process(ProcessHandle, &isTargetWow64Process);
 	m_bIsWoW64 = isTargetWow64Process;
 
-	if (1) // windows 8.1 and later // todo add os version check
+	if (m_CommandLine.isEmpty()) // windows 8.1 and later
 	{
 #define ProcessCommandLineInformation ((PROCESSINFOCLASS)60)
 		ULONG returnLength = 0;
@@ -272,10 +272,9 @@ void CBoxedProcess::InitProcessInfoImpl(void* ProcessHandle)
 
 bool CBoxedProcess::InitProcessInfoEx()
 {
-	if (m_ProcessFlags == 0 && m_pBox) {
+	if (m_ProcessFlags == 0 && m_pBox)
 		m_ProcessFlags = m_pBox->Api()->QueryProcessInfo(m_ProcessId);
 		m_ImageType = m_pBox->Api()->QueryProcessInfo(m_ProcessId, 'gpit');
-	}
 
 	return true;
 }

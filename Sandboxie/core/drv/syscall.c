@@ -803,13 +803,24 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
                 //    entry->name,
                 //    status, hConnection);
             }
+            else if (strcmp(entry->name, "OpenDirectoryObject") == 0)
+            {
+                POBJECT_ATTRIBUTES  pObjectAttributes = (POBJECT_ATTRIBUTES)user_args[2];
+                if (pObjectAttributes)
+                    puStr = (UNICODE_STRING*)pObjectAttributes->ObjectName;
+            }
 
-            if (hConnection)
+            if (puStr || hConnection)
             {
                 WCHAR trace_str[128];
-                RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"%.*S, status = 0x%X, handle = %X; ", //59 chars + entry->name
-                    max(strlen(entry->name), 64), entry->name,
-                    status, hConnection);
+                if (hConnection) {
+                    RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"%.*S, status = 0x%X, handle = %X; ", //59 chars + entry->name
+                        max(strlen(entry->name), 64), entry->name, status, hConnection);
+                }
+                else {
+                    RtlStringCbPrintfW(trace_str, sizeof(trace_str), L"%.*S, status = 0x%X; ", //59 chars + entry->name
+                        max(strlen(entry->name), 64), entry->name, status);
+                }
                 const WCHAR* strings[4] = { trace_str, trace_str + (entry->name_len + 2), puStr ? puStr->Buffer : NULL, NULL };
                 ULONG lengths[4] = {entry->name_len, wcslen(trace_str) - (entry->name_len + 4), puStr ? puStr->Length / 2 : 0, 0 };
                 Session_MonitorPutEx(MONITOR_SYSCALL | (entry->approved ? MONITOR_OPEN : MONITOR_TRACE), 

@@ -143,7 +143,7 @@ void CSbieProcess::InitProcessInfoImpl(void* ProcessHandle)
 
 		BYTE tokenUserBuff[0x80] = { 0 };
 		if (NT_SUCCESS(NtQueryInformationToken(TokenHandle, TokenUser, tokenUserBuff, sizeof(tokenUserBuff), &returnLength))){
-			m_ProcessInfo.IsSystem = RtlEqualSid(((PTOKEN_USER)tokenUserBuff)->User.Sid, &SeLocalSystemSid);
+			m_ProcessInfo.IsSystem = EqualSid(((PTOKEN_USER)tokenUserBuff)->User.Sid, &SeLocalSystemSid);
 		}
 
 		ULONG restricted;

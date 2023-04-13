@@ -55,7 +55,7 @@ _FX BOOLEAN Box_IsValidName(const WCHAR *name)
 {
     int i;
 
-    for (i = 0; i < BOXNAME_MAXLEN; ++i) {
+    for (i = 0; i < (BOXNAME_COUNT - 2); ++i) {
         if (! name[i])
             break;
         if (name[i] >= L'0' && name[i] <= L'9')

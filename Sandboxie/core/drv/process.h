@@ -141,6 +141,7 @@ struct _PROCESS {
 
     BOOLEAN always_close_for_boxed;
     BOOLEAN dont_open_for_boxed;
+    BOOLEAN protect_host_images;
     BOOLEAN use_security_mode;
     BOOLEAN is_locked_down;
 #ifdef USE_MATCH_PATH_EX
@@ -406,6 +407,18 @@ NTSTATUS Process_GetSidStringAndSessionId(
     UNICODE_STRING *SidString, ULONG *SessionId);
 
 
+// Get a string from a processes PEB
+
+void Process_GetStringFromPeb(
+    PEPROCESS ProcessObject, ULONG StringOffset, ULONG StringMaxLenInChars,
+    WCHAR **OutBuffer, ULONG *OutLength);
+
+// Get a processes command line
+
+void Process_GetCommandLine(
+    HANDLE ProcessId,
+    WCHAR **OutBuffer, ULONG *OutLength);
+
 // Get a box for a forced sandboxed process
 
 BOX *Process_GetForcedStartBox(
@@ -464,6 +477,10 @@ BOOLEAN Process_CancelProcess(PROCESS *proc);
 // Terminate a process using a helper thread
 
 BOOLEAN Process_ScheduleKill(PROCESS *proc, LONG delay_ms);
+
+// Check if a process is part of the sandboxie installation
+
+VOID Process_IsSbieImage(const WCHAR *image_path, BOOLEAN *image_sbie, BOOLEAN *is_start_exe);
 
 // Check if process is running within a
 // Program Compatibility Assistant (PCA) job

@@ -48,7 +48,7 @@ void Adjust_Window_Height(HWND hwnd);
 
 static HICON hProgramIcon;
 
-static WCHAR boxname[64];
+static WCHAR boxname[BOXNAME_COUNT + 30];
 
 static BOOL initialized = FALSE;
 
@@ -146,7 +146,7 @@ void TrackToolTip(HWND hwnd, int first_time)
     static WCHAR *boxtext = NULL;
 
     LRESULT index, lResult;
-    WCHAR boxname[64];
+    WCHAR boxname[BOXNAME_COUNT + 30];
     TOOLINFO ti;
     RECT rect;
     POINT pt;
@@ -589,9 +589,9 @@ INT_PTR BoxDialogProc(
                 if (boxdlg_run_outside_sandbox && CanDisableForce()) {
 
                     WCHAR *text = SbieDll_FormatMessage0(MSG_3251);
-                    for (x = 0; x < 40; ++x)
+                    for (x = 0; x < BOXNAME_COUNT + 6; ++x)
                         boxname[x] = 8212;      // separator line
-                    boxname[40] = 0;
+                    boxname[BOXNAME_COUNT + 6] = 0;
                     SendDlgItemMessage(hwnd,
                         IDBOXLIST, LB_INSERTSTRING, -1, (LPARAM)boxname);
                     dfp_index = (int)SendDlgItemMessage(hwnd,

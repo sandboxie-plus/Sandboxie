@@ -90,10 +90,6 @@ PEPROCESS Process_OpenAndQuery(
 static NTSTATUS Process_TranslateDosToNt(
     const WCHAR *in_path, WCHAR **out_path, ULONG *out_len);
 
-static void Process_GetStringFromPeb(
-    PEPROCESS ProcessObject, ULONG StringOffset, ULONG StringMaxLenInChars,
-    WCHAR **OutBuffer, ULONG *OutLength);
-
 static void Process_GetCurDir(
     PEPROCESS ProcessObject, WCHAR **pCurDir, ULONG *pCurDirLen);
 
@@ -240,23 +236,7 @@ _FX BOX *Process_GetForcedStartBox(
         // when the process is start.exe we ignore the CurDir and DocArg
         //
 
-        is_start_exe = FALSE;
-
-        WCHAR *image_name = wcsrchr(ImagePath, L'\\');
-        if (image_name) {
-
-            ULONG len = (ULONG)(image_name - ImagePath);
-            if ((len == Driver_HomePathNt_Len) &&
-                (wcsncmp(ImagePath, Driver_HomePathNt, len) == 0)) {
-
-                //image_sbie = TRUE;
-
-                if (_wcsicmp(image_name + 1, START_EXE) == 0) {
-
-                    is_start_exe = TRUE;
-                }
-            }
-        }
+        Process_IsSbieImage(ImagePath, NULL, &is_start_exe);
 
         if ((! box) && CurDir && !is_start_exe)
             box = Process_CheckBoxPath(&boxes, CurDir);
@@ -709,6 +689,35 @@ _FX void Process_GetDocArg(
 
 
 //---------------------------------------------------------------------------
+// Process_GetCommandLine
+//---------------------------------------------------------------------------
+
+
+_FX void Process_GetCommandLine(
+    HANDLE ProcessId,
+    WCHAR** OutBuffer, ULONG* OutLength)
+{
+    const ULONG CmdLin_offset =
+#ifdef _WIN64
+                                0x70;   // 64-bit
+#else
+                                0x40;   // 32-bit
+#endif
+
+    PEPROCESS ProcessObject;
+    NTSTATUS status =
+        PsLookupProcessByProcessId(ProcessId, &ProcessObject);
+    if (NT_SUCCESS(status)) {
+
+        Process_GetStringFromPeb(
+                ProcessObject, CmdLin_offset, 600, OutBuffer, OutLength);
+
+        ObDereferenceObject(ProcessObject);
+    }
+}
+
+
+//---------------------------------------------------------------------------
 // Process_IsDcomLaunchParent
 //---------------------------------------------------------------------------
 
@@ -726,28 +735,19 @@ _FX BOOLEAN Process_IsDcomLaunchParent(HANDLE ParentId)
 
     if (! DcomLaunchPid) {
 
-        PEPROCESS ProcessObject;
-        NTSTATUS status =
-            PsLookupProcessByProcessId(ParentId, &ProcessObject);
-        if (NT_SUCCESS(status)) {
+        WCHAR *Buffer;
+        ULONG Length;
+        Process_GetCommandLine(ParentId, &Buffer, &Length);
+        if (Buffer && Length) {
 
-            WCHAR *Buffer;
-            ULONG Length;
-            Process_GetStringFromPeb(
-                    ProcessObject, CmdLin_offset, 600, &Buffer, &Length);
-            if (Buffer && Length) {
+            ULONG len = wcslen(Buffer);
+            if (len > 10 &&
+                    _wcsicmp(Buffer + len - 10, L"DcomLaunch") == 0) {
 
-                ULONG len = wcslen(Buffer);
-                if (len > 10 &&
-                        _wcsicmp(Buffer + len - 10, L"DcomLaunch") == 0) {
-
-                    DcomLaunchPid = ParentId;
-                }
-
-                Mem_Free(Buffer, Length);
+                DcomLaunchPid = ParentId;
             }
 
-            ObDereferenceObject(ProcessObject);
+            Mem_Free(Buffer, Length);
         }
     }
 

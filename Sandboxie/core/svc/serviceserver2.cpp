@@ -44,7 +44,7 @@
 bool ServiceServer::CanCallerDoElevation(
         HANDLE idProcess, const WCHAR *ServiceName, ULONG *pSessionId)
 {
-    WCHAR boxname[48];
+    WCHAR boxname[BOXNAME_COUNT];
     WCHAR exename[99];
 
     if (0 != SbieApi_QueryProcess(idProcess, boxname, exename, NULL, pSessionId))
@@ -108,8 +108,8 @@ bool ServiceServer::CanCallerDoElevation(
 
 bool ServiceServer::CanAccessSCM(HANDLE idProcess)
 {
-	WCHAR boxname[48] = { 0 };
-	WCHAR exename[128] = { 0 };
+	WCHAR boxname[BOXNAME_COUNT] = { 0 };
+	WCHAR exename[99] = { 0 };
 	SbieApi_QueryProcess(idProcess, boxname, exename, NULL, NULL); // if this fail we take the global config if present
 	if (SbieApi_QueryConfBool(boxname, L"UnrestrictedSCM", FALSE))
 		return true;
@@ -177,7 +177,7 @@ void ServiceServer::ReportError2218(HANDLE idProcess, ULONG errlvl)
 {
     ULONG LastError = GetLastError();
 
-    WCHAR boxname[48];
+    WCHAR boxname[BOXNAME_COUNT];
     WCHAR imagename[99];
     ULONG session_id;
 
@@ -327,7 +327,7 @@ ULONG ServiceServer::RunHandler2(
     BOOL  ok = TRUE;
     BOOL  asSys;
 
-    WCHAR boxname[48] = { 0 };
+    WCHAR boxname[BOXNAME_COUNT] = { 0 };
 
     SbieApi_QueryProcess(idProcess, boxname, NULL, NULL, NULL);
 
@@ -702,7 +702,7 @@ void ServiceServer::RunUacSlave2(ULONG_PTR *ThreadArgs)
 
     HANDLE idProcess = (HANDLE)ThreadArgs[0];
 
-    WCHAR BoxName[48];
+    WCHAR BoxName[BOXNAME_COUNT];
     if (0 != SbieApi_QueryProcess(idProcess, BoxName, NULL, NULL, NULL))
         return;
 
@@ -1158,7 +1158,7 @@ void ServiceServer::RunUacSlave3(
 
     if (ok) {
 
-        WCHAR BoxName[48];
+        WCHAR BoxName[BOXNAME_COUNT];
         SbieApi_QueryProcess((HANDLE)(ULONG_PTR)GetCurrentProcessId(),
                              BoxName, NULL, NULL, NULL);
         if (BoxName[0]){

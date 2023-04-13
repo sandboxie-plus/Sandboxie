@@ -551,7 +551,7 @@ _FX void BuildMenu(HMENU hMenu, MENU_DIR *menu, WCHAR *fullpath)
     static WCHAR title[128];
     static WCHAR *_explore = NULL;
     static WCHAR *_cancel = NULL;
-    WCHAR boxname[64];
+    WCHAR boxname[BOXNAME_COUNT];
     MENUINFO menuinfo;
     MENUITEMINFO mii;
     BOOLEAN separator;

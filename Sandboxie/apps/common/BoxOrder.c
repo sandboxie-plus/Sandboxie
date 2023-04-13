@@ -23,8 +23,8 @@
 #include <windows.h>
 #include "BoxOrder.h"
 #include "core/dll/sbiedll.h"
-#include "core/svc/SbieIniWire.h"
 #include "common/defines.h"
+#include "core/svc/SbieIniWire.h"
 
 
 //---------------------------------------------------------------------------
@@ -318,7 +318,7 @@ _FX int BoxOrder_ReadFindBox(BOX_ORDER_ENTRY *entry, const WCHAR *name)
 
 _FX void BoxOrder_ReadMissing(BOX_ORDER_ENTRY *parent)
 {
-    WCHAR work_name[34], *all_names, *name;
+    WCHAR work_name[BOXNAME_COUNT], *all_names, *name;
     int box_count, box_index, name_index, small_index, alloc_len;
 
     box_count = 0;
@@ -334,13 +334,13 @@ _FX void BoxOrder_ReadMissing(BOX_ORDER_ENTRY *parent)
     if (! box_count)
         return;
 
-    alloc_len = box_count * (34 * sizeof(WCHAR));
+    alloc_len = box_count * (BOXNAME_COUNT * sizeof(WCHAR));
     all_names = HeapAlloc(GetProcessHeap(), 0, alloc_len);
 
     name_index = 0;
     box_index = -1;
     while (name_index < box_count) {
-        name = &all_names[name_index * 34];
+        name = &all_names[name_index * BOXNAME_COUNT];
         box_index = SbieApi_EnumBoxesEx(
                         box_index, name, TRUE);
         if (box_index == -1)
@@ -352,13 +352,13 @@ _FX void BoxOrder_ReadMissing(BOX_ORDER_ENTRY *parent)
     while (1) {
         small_index = -1;
         for (name_index = 0; name_index < box_count; ++name_index) {
-            name = &all_names[name_index * 34];
+            name = &all_names[name_index * BOXNAME_COUNT];
             if (! *name)
                 continue;
             if (small_index == -1)
                 small_index = name_index;
             else {
-                const WCHAR *small_name = &all_names[small_index * 34];
+                const WCHAR *small_name = &all_names[small_index * BOXNAME_COUNT];
                 if (_wcsicmp(small_name, name) > 0)
                     small_index = name_index;
             }
@@ -366,7 +366,7 @@ _FX void BoxOrder_ReadMissing(BOX_ORDER_ENTRY *parent)
 
         if (small_index == -1)
             break;
-        name = &all_names[small_index * 34];
+        name = &all_names[small_index * BOXNAME_COUNT];
         if (! BoxOrder_ReadFindBox(parent, name)) {
 
             BOX_ORDER_ENTRY *new_entry = BoxOrder_Alloc(name);

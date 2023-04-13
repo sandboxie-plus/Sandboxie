@@ -98,6 +98,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.btnDelHostProcess, SIGNAL(clicked(bool)), this, SLOT(OnDelHostProcess()));
 	connect(ui.chkShowHostProcTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowHostProcTmpl()));
 	connect(ui.chkConfidential, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged())); // todo norify premium feaure
+	connect(ui.chkHostProtect, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.btnAddUser, SIGNAL(clicked(bool)), this, SLOT(OnAddUser()));
 	connect(ui.btnDelUser, SIGNAL(clicked(bool)), this, SLOT(OnDelUser()));
@@ -132,6 +133,8 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkOpenSamEndpoint->setChecked(m_pBox->GetBool("OpenSamEndpoint", false));
 	ui.chkOpenLsaEndpoint->setChecked(m_pBox->GetBool("OpenLsaEndpoint", false));
 
+	ui.chkHostProtect->setChecked(m_pBox->GetBool("ProtectHostImages", false));
+	ui.chkHostProtectMsg->setChecked(m_pBox->GetBool("NotifyImageLoadDenied", true));
 	ReadGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
 
 	LoadOptionList();
@@ -270,6 +273,8 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkOpenSamEndpoint, "OpenSamEndpoint", "y", "");
 	WriteAdvancedCheck(ui.chkOpenLsaEndpoint, "OpenLsaEndpoint", "y", "");
 
+	WriteAdvancedCheck(ui.chkHostProtect, "ProtectHostImages", "y", "");
+	WriteAdvancedCheck(ui.chkHostProtectMsg, "NotifyImageLoadDenied", "", "n");
 	WriteGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
 
 	SaveOptionList();

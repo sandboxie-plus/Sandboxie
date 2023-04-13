@@ -261,8 +261,8 @@ _FX void Dll_InitInjected(void)
     // confirm the process is sandboxed before going further
     //
 
-    Dll_BoxNameSpace        = Dll_Alloc( 64 * sizeof(WCHAR));
-    memzero(Dll_BoxNameSpace,            64 * sizeof(WCHAR));
+    Dll_BoxNameSpace        = Dll_Alloc(BOXNAME_COUNT * sizeof(WCHAR));
+    memzero(Dll_BoxNameSpace,           BOXNAME_COUNT * sizeof(WCHAR));
 
     Dll_ImageNameSpace      = Dll_Alloc(256 * sizeof(WCHAR));
     memzero(Dll_ImageNameSpace,         256 * sizeof(WCHAR));

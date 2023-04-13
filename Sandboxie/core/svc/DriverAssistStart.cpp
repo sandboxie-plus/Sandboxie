@@ -264,11 +264,11 @@ driver_started:
         // at system boot and run them on service start
         //
 
-        WCHAR boxname[64];
+        WCHAR boxname[BOXNAME_COUNT];
         for (ULONG i = 0; ; ++i) {
 
             rc = SbieApi_QueryConfAsIs(
-                NULL, L"StartSystemBox", i, boxname, sizeof(WCHAR) * 64);
+                NULL, L"StartSystemBox", i, boxname, (BOXNAME_COUNT - 2) * sizeof(WCHAR));
             if (rc != 0)
                 break;
 

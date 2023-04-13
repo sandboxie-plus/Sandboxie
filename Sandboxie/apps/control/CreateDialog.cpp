@@ -149,7 +149,7 @@ void CCreateDialog::OnOK()
 
     int i = 0;
     int len = name.GetLength();
-    if (len <= 32) {
+    if (len <= (BOXNAME_COUNT - 2)) {
         for (; i < len; ++i) {
             if (name[i] >= L'0' && name[i] <= L'9')
                 continue;

@@ -416,7 +416,7 @@ _FX void Env_DoRefresh_3(void)
 
 _FX void Env_Refresh(const WCHAR *BoxName)
 {
-    WCHAR BoxNameSpace[34];
+    WCHAR BoxNameSpace[BOXNAME_COUNT];
 
     if (BoxName[0] == L'-') {
 

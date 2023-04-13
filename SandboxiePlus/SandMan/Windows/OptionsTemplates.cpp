@@ -17,26 +17,23 @@ void COptionsWindow::LoadTemplates()
 	QStringList Templates;
 	for (int index = 0; ; index++)
 	{
-		QString Value = m_pBox->GetAPI()->SbieIniGet("", "", index);
+		QString Value = m_pBox->GetAPI()->SbieIniGet2("", "", index, false, true, true);
 		if (Value.isNull())
 			break;
 		Templates.append(Value);
 	}
 
-	for (QStringList::iterator I = Templates.begin(); I != Templates.end();)
+	foreach(const QString& Name, Templates)
 	{
-		if (I->left(9).compare("Template_", Qt::CaseInsensitive) != 0 || *I == "Template_KnownConflicts") {
-			I = Templates.erase(I);
+		if (Name.left(9).compare("Template_", Qt::CaseInsensitive) != 0)
 			continue;
-		}
 	
-		QString Name = *I++;
-		QString Category = m_pBox->GetAPI()->SbieIniGet(Name, "Tmpl.Class", 0x40000000L); // CONF_GET_NO_GLOBAL);
-		QString Title = m_pBox->GetAPI()->SbieIniGet(Name, "Tmpl.Title", 0x40000000L); // CONF_GET_NO_GLOBAL);
-		QString Hide = m_pBox->GetAPI()->SbieIniGet(Name, "Tmpl.Hide", 0x40000000L); // CONF_GET_NO_GLOBAL);
+		QString Category = m_pBox->GetAPI()->SbieIniGet2(Name, "Tmpl.Class", 0, false, true, true);
+		QString Title = m_pBox->GetAPI()->SbieIniGet2(Name, "Tmpl.Title", 0, false, true, true);
+		QString Hide = m_pBox->GetAPI()->SbieIniGet2(Name, "Tmpl.Hide", 0, false, true, true);
 		if (Hide == "y" || Hide == "Y")
 			continue;
-		if (Name == "Template_ScreenReader")
+		if (Name == "Template_ScreenReader" || Name == "Template_KnownConflicts")
 			continue;
 
 		if (Title.left(1) == "#")
@@ -182,8 +179,7 @@ void COptionsWindow::OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column)
 	OptionsWindow.move(ParentPos.x() + 30, ParentPos.y() + 10);
 	OptionsWindow.exec();
 
-	if (pItem->data(0, Qt::UserRole).toString() == "Local")
-		LoadTemplates();
+	// todo update name if it changed
 }
 
 void COptionsWindow::OnAddTemplates()
@@ -223,18 +219,19 @@ void COptionsWindow::OnTemplateWizard()
 
 void COptionsWindow::OnDelTemplates()
 {
-	QTreeWidgetItem* pItem = ui.treeTemplates->currentItem();
-	if (!pItem || pItem->data(0, Qt::UserRole).toString() != "Local")
+	if (QMessageBox("Sandboxie-Plus", tr("Do you really want to delete the selected local template(s)?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
+		return;
+
+	foreach(QTreeWidgetItem * pItem, ui.treeTemplates->selectedItems())
 	{
-		QMessageBox::critical(this, "Sandboxie-Plus", tr("Only local templates can be removed!"));
-		return;
+		if (!pItem || pItem->data(0, Qt::UserRole).toString() != "Local") {
+			QMessageBox::critical(this, "Sandboxie-Plus", tr("Only local templates can be removed!"));
+			break;
+		}
+
+		// delete section
+		m_pBox->GetAPI()->SbieIniSet(pItem->data(1, Qt::UserRole).toString(), "*", "");
 	}
-
-	if (QMessageBox("Sandboxie-Plus", tr("Do you really want to delete the selected local template?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
-		return;
-
-	// delete section
-	m_pBox->GetAPI()->SbieIniSet(pItem->data(1, Qt::UserRole).toString(), "*", "");
 
 	LoadTemplates();
 }

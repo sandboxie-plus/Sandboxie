@@ -109,8 +109,10 @@ CSandBox::CSandBox(const QString& BoxName, class CSbieAPI* pAPI) : CSbieIni(BoxN
 	if (cfglvl < 10)
 	{
 		// starting with 5.62.3 OpenProtectedStorage is a template
-		if(GetBool("OpenProtectedStorage"))
+		if (GetBool("OpenProtectedStorage")) {
+			DelValue("OpenProtectedStorage");
 			InsertText("Template", "OpenProtectedStorage");
+		}
 	}
 
 	SetNum("ConfigLevel", 10);

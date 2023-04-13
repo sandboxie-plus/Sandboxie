@@ -263,9 +263,9 @@ void DriverAssist::LogMessage_Multi(
     ptr = ptr2;
     while (ptr > text && *ptr != L'[')
         --ptr;
-    if ((ptr == text) || (ptr2 - ptr <= 1) || (ptr2 - ptr > 34))
+    if ((ptr == text) || (ptr2 - ptr <= 1) || (ptr2 - ptr > BOXNAME_COUNT))
         return;
-    WCHAR boxname[40];
+    WCHAR boxname[BOXNAME_COUNT];
     wmemcpy(boxname, ptr + 1, ptr2 - ptr - 1);
     boxname[ptr2 - ptr - 1] = L'\0';
 

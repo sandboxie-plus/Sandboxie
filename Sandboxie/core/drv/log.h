@@ -37,7 +37,6 @@
 #define MSG_DRIVER_ENTRY_FAILED                             MSG_1103
 //#define MSG_NO_MEMORY_FOR_INIT                              MSG_1104
 #define MSG_DRIVER_FIND_HOME_PATH                           MSG_1106
-#define MSG_LICENSE_READ_REGISTRY                           MSG_1109
 #define MSG_OBJ_HOOK_ANY_PROC                               MSG_1110
 #define MSG_DLL_LOAD                                        MSG_1111
 #define MSG_DLL_GET_PROC                                    MSG_1112
@@ -55,7 +54,6 @@
 #define MSG_GUI_INIT_FAILED                                 MSG_1153
 
 //#define MSG_NO_MEMORY                                       MSG_1201
-#define MSG_LICENSE_WRITE_REGISTRY                          MSG_1202
 #define MSG_INIT_PATHS                                      MSG_1203
 #define MSG_BOX_CREATE                                      MSG_1204
 //#define MSG_PROCESS_CREATE                                  MSG_1211
@@ -75,7 +73,6 @@
 #define MSG_INTERNET_ACCESS_DENIED                          MSG_1307
 #define MSG_STARTRUN_ACCESS_DENIED                          MSG_1308
 #define MSG_PASSWORD_CHANGE_DENIED                          MSG_1309
-//#define MSG_LICENSE_DEACTIVATED                             MSG_1310
 //#define MSG_GUI_WALLPAPER                                   MSG_1311
 #define MSG_BLOCKED_16_BIT                                  MSG_1312
 #define MSG_BLOCKED_DIRECT_DISK_ACCESS                      MSG_1313

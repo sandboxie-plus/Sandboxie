@@ -1160,13 +1160,13 @@ _FX NTSTATUS Api_SetServicePort(PROCESS *proc, ULONG64 *parms)
 _FX BOOLEAN Api_CopyBoxNameFromUser(
     WCHAR *boxname34, const WCHAR *user_boxname)
 {
-    wmemzero(boxname34, 34);
+    wmemzero(boxname34, BOXNAME_COUNT);
     if (user_boxname) {
         ProbeForRead((WCHAR *)user_boxname,
-                     sizeof(WCHAR) * 32,
+                     sizeof(WCHAR) * (BOXNAME_COUNT - 2),
                      sizeof(UCHAR));
         if (user_boxname[0])
-            wcsncpy(boxname34, user_boxname, 32);
+            wcsncpy(boxname34, user_boxname, (BOXNAME_COUNT - 2));
     }
     if (boxname34[0] && Box_IsValidName(boxname34))
         return TRUE;

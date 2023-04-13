@@ -541,7 +541,7 @@ NOINLINE void DeleteFiles(void)
     //if(!g_Silent) 
     //    StartStatusDialog();
     
-    WCHAR boxname[48];
+    WCHAR boxname[BOXNAME_COUNT];
     int index = -1;
     while (1) {
         index = SbieApi_EnumBoxes(index, boxname);
@@ -1156,7 +1156,7 @@ int Delete_All_Sandboxes()
     std::set<std::wstring> dirs_to_remove;
 
     int index = -1;
-    WCHAR BoxName[34];
+    WCHAR BoxName[BOXNAME_COUNT];
     while (1) {
         index = SbieApi_EnumBoxes(index, BoxName);
         if (index == -1)

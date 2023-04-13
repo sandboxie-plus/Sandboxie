@@ -67,7 +67,7 @@ MSG_HEADER *EpMapperServer::EpmapperGetPortNameHandler(MSG_HEADER *msg)
         return SHORT_REPLY(E_INVALIDARG);
 
     HANDLE idProcess = (HANDLE)(ULONG_PTR)PipeServer::GetCallerProcessId();
-    WCHAR boxname[48];
+    WCHAR boxname[BOXNAME_COUNT];
     if (!NT_SUCCESS(SbieApi_QueryProcess(idProcess, boxname, NULL, NULL, NULL)))
         return SHORT_REPLY(E_FAIL);
 

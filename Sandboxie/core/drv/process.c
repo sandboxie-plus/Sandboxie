@@ -74,6 +74,8 @@ static void Process_NotifyImage(
     const UNICODE_STRING *FullImageName,
     HANDLE ProcessId, IMAGE_INFO *ImageInfo);
 
+static NTSTATUS Process_CreateUserProcess(
+    PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);
 
 //---------------------------------------------------------------------------
 
@@ -189,6 +191,14 @@ _FX BOOLEAN Process_Init(void)
         Log_Status(MSG_PROCESS_NOTIFY, 0x22, status);
         return FALSE;
     }
+
+    //
+    // set syscalls handlers that are applicable in Vista and later
+    // Note: NtCreateProcess/NtCreateProcessEx seam not to be used
+    //
+
+    if (! Syscall_Set1("CreateUserProcess", Process_CreateUserProcess))
+        return FALSE;
 
     //
     // set API functions
@@ -659,31 +669,20 @@ _FX PROCESS *Process_Create(
 
     if (image_path) {
 
+        Process_IsSbieImage(image_path, &proc->image_sbie, &proc->is_start_exe);
+
         UNICODE_STRING image_uni;
+        RtlInitUnicodeString(&image_uni, image_path);
+        if (Box_IsBoxedPath(proc->box, file, &image_uni)) {
+
+            proc->image_from_box = TRUE;
+        }
+
         WCHAR *image_name = wcsrchr(image_path, L'\\');
         if (image_name) {
-
-            ULONG len = (ULONG)(image_name - image_path);
-            if ((len == Driver_HomePathNt_Len) &&
-                    (wcsncmp(image_path, Driver_HomePathNt, len) == 0)) {
-
-                proc->image_sbie = TRUE;
-
-                if (_wcsicmp(image_name + 1, START_EXE) == 0) {
-
-                    proc->is_start_exe = TRUE;
-                }
-            }
-
-            RtlInitUnicodeString(&image_uni, image_path);
-            if (Box_IsBoxedPath(proc->box, file, &image_uni)) {
-
-                proc->image_from_box = TRUE;
-            }
-
             ++image_name;
 
-            len = wcslen(image_name);
+            ULONG len = wcslen(image_name);
             if (len) {
 
                 proc->image_name_len = (len + 1) * sizeof(WCHAR);
@@ -731,6 +730,14 @@ _FX PROCESS *Process_Create(
     proc->dont_open_for_boxed = !proc->bAppCompartment && Conf_Get_Boolean(proc->box->name, L"DontOpenForBoxed", 0, TRUE); 
 
     //
+    // Sandboxie atempts to protect per process rules by allowing them only for host binaries
+    // this however has an obvious weakness, as those processes can still load boxed DLL's
+    // with this option we can prevent that
+    //
+
+    proc->protect_host_images = !proc->bAppCompartment && Conf_Get_Boolean(proc->box->name, L"ProtectHostImages", 0, FALSE); 
+
+    //
     // privacy mode requirers Rule Specificity
     //
 
@@ -767,6 +774,8 @@ _FX PROCESS *Process_Create(
 #endif
         if (proc->bAppCompartment)
             exclusive_setting = L"NoSecurityIsolation";
+        else if (proc->protect_host_images)
+            exclusive_setting = L"ProtectHostImages";
         else if (proc->confidential_box)
             exclusive_setting = L"ConfidentialBox";
 
@@ -1050,6 +1059,7 @@ _FX BOOLEAN Process_NotifyProcess_Create(
     const WCHAR *ImagePath;
     BOOLEAN parent_was_start_exe = FALSE;
     BOOLEAN parent_had_rights_dropped = FALSE;
+    BOOLEAN parent_was_image_from_box = FALSE;
     BOOLEAN process_is_forced = FALSE;
     BOOLEAN add_process_to_job = FALSE;
 	BOOLEAN create_terminated = FALSE;
@@ -1159,6 +1169,9 @@ _FX BOOLEAN Process_NotifyProcess_Create(
 
                     if (parent_proc->rights_dropped)
                         parent_had_rights_dropped = TRUE;
+
+                    if (parent_proc->image_from_box)
+                        parent_was_image_from_box = TRUE;
 
                 } else
                     create_terminated = TRUE;
@@ -1315,6 +1328,16 @@ _FX BOOLEAN Process_NotifyProcess_Create(
 		
             create_terminated = TRUE;
 		}
+        else if (!new_proc->image_from_box && new_proc->protect_host_images && parent_was_image_from_box) {
+
+            create_terminated = TRUE;
+
+            Process_SetTerminated(new_proc, 14);
+            new_proc = NULL;
+
+            ExReleaseResourceLite(Process_ListLock);
+            KeLowerIrql(irql);
+        }
         Box_Free(box);
 
         if (new_proc) {
@@ -1339,8 +1362,20 @@ _FX BOOLEAN Process_NotifyProcess_Create(
 
 				WCHAR sParentId[12];
                 _ultow_s((ULONG)ParentId, sParentId, 12, 10);
-                const WCHAR* strings[4] = { new_proc->image_path, new_proc->box->name, sParentId, NULL };
+
+                WCHAR *Buffer;
+                ULONG Length;
+                Process_GetCommandLine(ParentId, &Buffer, &Length);
+
+                const WCHAR* strings[5] = { new_proc->image_path, new_proc->box->name, sParentId, Buffer, NULL };
                 Api_AddMessage(MSG_1399, strings, NULL, new_proc->box->session_id, (ULONG)ProcessId);
+
+                if (Buffer && Length)
+                    Mem_Free(Buffer, Length);
+
+                //
+                //
+                //
 
                 if (! add_process_to_job)
                     new_proc->parent_was_sandboxed = TRUE;
@@ -1636,7 +1671,12 @@ _FX void Process_NotifyImage(
 }
 
 
-void Process_SetTerminated(PROCESS *proc, ULONG reason)
+//---------------------------------------------------------------------------
+// Process_SetTerminated
+//---------------------------------------------------------------------------
+
+
+_FX void Process_SetTerminated(PROCESS *proc, ULONG reason)
 {
     //
     // This function marks a process for termination, this causes File_PreOperation 
@@ -1652,3 +1692,37 @@ void Process_SetTerminated(PROCESS *proc, ULONG reason)
         proc->reason = reason;
     }
 }
+
+
+//---------------------------------------------------------------------------
+// Process_CreateUserProcess
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Process_CreateUserProcess(
+    PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args)
+{
+    THREAD* thrd = NULL;
+    KIRQL irql;
+
+    if (proc->protect_host_images) 
+    {
+        KeRaiseIrql(APC_LEVEL, &irql);
+        ExAcquireResourceExclusiveLite(proc->threads_lock, TRUE);
+		
+		thrd = Thread_GetOrCreate(proc, NULL, TRUE);
+        if (thrd)
+            thrd->create_process_in_progress = TRUE;
+
+        ExReleaseResourceLite(proc->threads_lock);
+        KeLowerIrql(irql);	
+    }
+
+    NTSTATUS status = Syscall_Invoke(syscall_entry, user_args);
+
+    if (thrd)
+        thrd->create_process_in_progress = FALSE;
+
+    return status;
+}
+

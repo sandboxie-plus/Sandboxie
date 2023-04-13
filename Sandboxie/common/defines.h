@@ -51,6 +51,8 @@
 #define PAGE_SIZE 4096
 #endif
 
+#define BOXNAME_COUNT				(32 + 2)
+
 #define DYNAMIC_PORT_NAME_CHARS     96  // number of wchars in an Epmapper dynamic endpoint port name
 #define DYNAMIC_PORT_ID_CHARS       81
 

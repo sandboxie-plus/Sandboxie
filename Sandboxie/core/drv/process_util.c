@@ -28,6 +28,7 @@
 #include "api.h"
 #include "obj.h"
 #include "common/pattern.h"
+#include "common/my_version.h"
 
 
 //---------------------------------------------------------------------------
@@ -84,6 +85,18 @@ _FX BOOLEAN Process_IsSameBox(
         ok = TRUE;
 
     } else if (proc2 && (! proc2->terminated) && (! proc2->untouchable)) {
+
+        //
+        // when host image protection is enabled, sandboxed processes 
+        // are protected form being written to by other sandboxed processes even from the same box
+        // 
+        // Note: this restriction will prevent images located in the sandbox from
+        // starting not images located on the host
+        //
+
+        if (!proc2->image_from_box && proc2->protect_host_images && proc->image_from_box)
+            ok = FALSE;
+        else
 
         //
         // write access is only permitted within the same sandbox
@@ -1360,6 +1373,34 @@ _FX BOOLEAN Process_CancelProcess(PROCESS *proc)
     msg.reason = proc->reason;
 
     return Api_SendServiceMessage(SVC_CANCEL_PROCESS, sizeof(msg), &msg);
+}
+
+
+//---------------------------------------------------------------------------
+// Process_IsSbieImage
+//---------------------------------------------------------------------------
+
+
+_FX VOID Process_IsSbieImage(const WCHAR* image_path, BOOLEAN *image_sbie, BOOLEAN *is_start_exe)
+{
+    if(image_sbie) *image_sbie = FALSE;
+    if(is_start_exe) *is_start_exe = FALSE;
+
+    WCHAR *image_name = wcsrchr(image_path, L'\\');
+    if (image_name) {
+
+        ULONG len = (ULONG)(image_name - image_path);
+        if ((len == Driver_HomePathNt_Len) &&
+                (wcsncmp(image_path, Driver_HomePathNt, len) == 0)) {
+
+            if(image_sbie) *image_sbie = TRUE;
+
+            if (_wcsicmp(image_name + 1, START_EXE) == 0) {
+
+                if(is_start_exe) *is_start_exe = TRUE;
+            }
+        }
+    }
 }
 
 

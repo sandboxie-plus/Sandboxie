@@ -102,7 +102,9 @@ static const FLT_OPERATION_REGISTRATION File_Callbacks[] = {
     FILE_CALLBACK(IRP_MJ_SET_QUOTA)
     FILE_CALLBACK(IRP_MJ_PNP)
 
+    */
     FILE_CALLBACK(IRP_MJ_ACQUIRE_FOR_SECTION_SYNCHRONIZATION)
+    /*
     FILE_CALLBACK(IRP_MJ_RELEASE_FOR_SECTION_SYNCHRONIZATION)
     FILE_CALLBACK(IRP_MJ_ACQUIRE_FOR_MOD_WRITE)
     FILE_CALLBACK(IRP_MJ_RELEASE_FOR_MOD_WRITE)
@@ -178,7 +180,7 @@ static const FLT_REGISTRATION File_Registration = {
 //---------------------------------------------------------------------------
 
 
-static PFLT_FILTER File_FilterCookie = NULL;
+PFLT_FILTER File_FilterCookie = NULL;
 extern UCHAR Sbie_Token_SourceName[5];
 
 
@@ -285,11 +287,14 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
     //
 
     status = STATUS_SUCCESS;
+    
+    Iopb = Data->Iopb;
+
+    if (FLT_IS_FS_FILTER_OPERATION(Data) && Data->RequestorMode == UserMode && Iopb->MajorFunction == IRP_MJ_ACQUIRE_FOR_SECTION_SYNCHRONIZATION)
+        goto check;
 
     if (! FLT_IS_IRP_OPERATION(Data))
         goto finish;
-
-    Iopb = Data->Iopb;
 
     if (Data->RequestorMode == KernelMode) {
 
@@ -431,6 +436,8 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
         }   // if (nbuf)
     }
 
+check:
+
     proc = Process_Find(NULL, NULL);
     if (proc == PROCESS_TERMINATED) {
         status = STATUS_PROCESS_IS_TERMINATING;
@@ -479,6 +486,39 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
             status = File_RenameOperation(proc, Iopb);
         }
 
+    }
+    else if (Iopb->MajorFunction == IRP_MJ_ACQUIRE_FOR_SECTION_SYNCHRONIZATION) {
+
+        if (!proc->image_from_box && proc->protect_host_images) {
+
+            //
+            // If host image protection is enabled, check if we are in process of creating a new process
+            // in which case allow boxed images to be mapped by NtCreateUserProcess
+            //
+
+            THREAD *thrd = Thread_GetByThreadId(proc, NULL);
+
+            if ((Data->Iopb->Parameters.AcquireForSectionSynchronization.PageProtection & PAGE_EXECUTE) && !(thrd && thrd->create_process_in_progress)) {
+
+                OBJECT_NAME_INFORMATION *Name;
+                ULONG NameLength;
+
+                status = Obj_GetParseName(proc->pool, Data->Iopb->TargetFileObject->DeviceObject, &Data->Iopb->TargetFileObject->FileName, &Name, &NameLength);
+                if (NT_SUCCESS(status)) {
+
+                    if (Box_IsBoxedPath(proc->box, file, &Name->Name))  {
+
+                        if(Conf_Get_Boolean(NULL, L"NotifyImageLoadDenied", 0, TRUE))
+				            Log_Msg_Process(MSG_1305, Name->Name.Buffer + (proc->box->file_path_len/sizeof(WCHAR) - 1), NULL, proc->box->session_id, proc->pid);
+
+                        Log_Debug_Msg(MONITOR_IMAGE | MONITOR_DENY, NULL, Name->Name.Buffer);
+                        status = STATUS_ACCESS_DENIED;
+                    }
+
+                    Mem_Free(Name, NameLength);
+                }
+            }
+        }
     }
     else {
         // We have a problem that has started appearing in Win 10 1903. Sometimes a file rename will end up in the file pre-create callback (i.e. this code)

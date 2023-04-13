@@ -11,6 +11,7 @@
 #include "../OnlineUpdater.h"
 #include "../MiscHelpers/Archive/ArchiveFS.h"
 #include <QJsonDocument>
+#include "../Wizards/TemplateWizard.h"
 
 
 #include <windows.h>
@@ -129,8 +130,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	this->setWindowTitle(tr("Sandboxie Plus - Global Settings"));
 
 	if (theConf->GetBool("Options/AltRowColors", false)) {
-		ui.treeWarnProgs->setAlternatingRowColors(true);
-		ui.treeCompat->setAlternatingRowColors(true);
+		foreach(QTreeWidget* pTree, this->findChildren<QTreeWidget*>()) 
+			pTree->setAlternatingRowColors(true);
 	}
 
 	FixTriStateBoxPallete(this);
@@ -139,6 +140,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));
 	ui.tabs->tabBar()->setProperty("isSidebar", true);
 
+	ui.tabs->setCurrentIndex(0);
 	ui.tabs->setTabIcon(0, CSandMan::GetIcon("Config"));
 	ui.tabs->setTabIcon(1, CSandMan::GetIcon("Shell"));
 	ui.tabs->setTabIcon(2, CSandMan::GetIcon("Design"));
@@ -148,11 +150,29 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.tabs->setTabIcon(6, CSandMan::GetIcon("Compatibility"));
 	ui.tabs->setTabIcon(7, CSandMan::GetIcon("Editor"));
 
-	ui.tabsGUI->setTabIcon(0, CSandMan::GetIcon("GUI"));
-	ui.tabsGUI->setTabIcon(1, CSandMan::GetIcon("Run"));
+	ui.tabsGeneral->setCurrentIndex(0);
+	ui.tabsGeneral->setTabIcon(0, CSandMan::GetIcon("Presets"));
+	ui.tabsGeneral->setTabIcon(1, CSandMan::GetIcon("Notification"));
 
+	ui.tabsShell->setCurrentIndex(0);
+	ui.tabsShell->setTabIcon(0, CSandMan::GetIcon("Windows"));
+	ui.tabsShell->setTabIcon(1, CSandMan::GetIcon("Run"));
+
+	ui.tabsGUI->setCurrentIndex(0);
+	ui.tabsGUI->setTabIcon(0, CSandMan::GetIcon("Interface"));
+	ui.tabsGUI->setTabIcon(1, CSandMan::GetIcon("Monitor"));
+
+	ui.tabsAdvanced->setCurrentIndex(0);
 	ui.tabsAdvanced->setTabIcon(0, CSandMan::GetIcon("Options"));
 	ui.tabsAdvanced->setTabIcon(1, CSandMan::GetIcon("EditIni"));
+
+	ui.tabsControl->setCurrentIndex(0);
+	ui.tabsControl->setTabIcon(0, CSandMan::GetIcon("Alarm"));
+	//ui.tabsControl->setTabIcon(1, CSandMan::GetIcon("USB"));
+
+	ui.tabsTemplates->setCurrentIndex(0);
+	ui.tabsTemplates->setTabIcon(0, CSandMan::GetIcon("Program"));
+	ui.tabsTemplates->setTabIcon(1, CSandMan::GetIcon("Template"));
 
 	int size = 16.0;
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -160,6 +180,9 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 #endif
 	AddIconToLabel(ui.lblGeneral, CSandMan::GetIcon("Options").pixmap(size,size));
 	AddIconToLabel(ui.lblRecovery, CSandMan::GetIcon("Recover").pixmap(size,size));
+	AddIconToLabel(ui.lblNotify, CSandMan::GetIcon("Notification").pixmap(size,size));
+	AddIconToLabel(ui.lblMessages, CSandMan::GetIcon("Email").pixmap(size,size));
+	//AddIconToLabel(ui.lblMessages, CSandMan::GetIcon("Filter").pixmap(size,size));
 
 	AddIconToLabel(ui.lblStartUp, CSandMan::GetIcon("Start").pixmap(size,size));
 	AddIconToLabel(ui.lblRunBoxed, CSandMan::GetIcon("Run").pixmap(size,size));
@@ -167,6 +190,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	AddIconToLabel(ui.lblSysTray, CSandMan::GetIcon("Maintenance").pixmap(size,size));
 
 	AddIconToLabel(ui.lblInterface, CSandMan::GetIcon("GUI").pixmap(size,size));
+
+	AddIconToLabel(ui.lblDisplay, CSandMan::GetIcon("Advanced").pixmap(size,size));
 
 	AddIconToLabel(ui.lblBoxRoot, CSandMan::GetIcon("Sandbox").pixmap(size,size));
 	AddIconToLabel(ui.lblBoxFeatures, CSandMan::GetIcon("Miscellaneous").pixmap(size,size));
@@ -247,10 +272,56 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		ui.chkShellMenu = SecretCheckBox;
 	}
 
+	m_HoldChange = false;
+
 	LoadSettings();
 
+
+	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
+
+	connect(theGUI, SIGNAL(DrivesChanged()), this, SLOT(UpdateDrives()));
+
+	// General Config
 	connect(ui.uiLang, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
 
+	connect(ui.chkSandboxUrls, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkMonitorSize, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkPanic, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.keyPanic, SIGNAL(keySequenceChanged(const QKeySequence &)), this, SLOT(OnOptChanged()));
+	connect(ui.chkAsyncBoxOps, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+
+	connect(ui.chkSilentMode, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkCopyProgress, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkNoMessages, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+
+	connect(ui.btnAddMessage, SIGNAL(clicked(bool)), this, SLOT(OnAddMessage()));
+	connect(ui.btnDelMessage, SIGNAL(clicked(bool)), this, SLOT(OnDelMessage()));
+	connect(ui.treeMessages, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnMessageChanged()));
+	m_MessagesChanged = false;
+
+	connect(ui.chkNotifyRecovery, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkShowRecovery, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkRecoveryTop, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	//
+
+	// Shell Integration
+	connect(ui.chkAutoStart, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkSvcStart, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
+	
+	connect(ui.chkShellMenu, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkAlwaysDefault, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkShellMenu2, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	
+	connect(ui.chkScanMenu, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.cmbIntegrateMenu, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
+	
+	connect(ui.cmbSysTray, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbTrayBoxes, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkCompactTray, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkBoxOpsNotify, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	//
+
+	// Interface Config
 	connect(ui.cmbDPI, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkDarkTheme, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkFusionTheme, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
@@ -258,45 +329,55 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkBackground, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkLargeIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkNoIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
-	//connect(ui.chkOptTree, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
-	//connect(ui.chkNewLayout, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkOptTree, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkNewLayout, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkColorIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.cmbFontScale, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.cmbFontScale, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnChangeGUI()));
-
-
 	m_bRebuildUI = false;
+	//
 
-	connect(ui.chkScanMenu, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
-
-	connect(ui.cmbSysTray, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
-	connect(ui.cmbTrayBoxes, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChange()));
-	connect(ui.chkCompactTray, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
-
-
+	// Run tab
 	connect(ui.btnAddCmd, SIGNAL(clicked(bool)), this, SLOT(OnAddCommand()));
 	QMenu* pRunBtnMenu = new QMenu(ui.btnAddCmd);
 	pRunBtnMenu->addAction(tr("Browse for Program"), this, SLOT(OnBrowsePath()));
 	ui.btnAddCmd->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnAddCmd->setMenu(pRunBtnMenu);
+	connect(ui.btnCmdUp, SIGNAL(clicked(bool)), this, SLOT(OnCommandUp()));
+	connect(ui.btnCmdDown, SIGNAL(clicked(bool)), this, SLOT(OnCommandDown()));
 	connect(ui.btnDelCmd, SIGNAL(clicked(bool)), this, SLOT(OnDelCommand()));
 	connect(ui.treeRun, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnRunChanged()));
+	m_RunChanged = false;
+	//
 
+	// Advanced Config
+	connect(ui.cmbDefault, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkAutoRoot, SIGNAL(stateChanged(int)), this, SLOT(OnRootChanged())); // not sbie ini
+	connect(ui.fileRoot, SIGNAL(textChanged(const QString&)), this, SLOT(OnGeneralChanged()));
+	connect(ui.regRoot, SIGNAL(textChanged(const QString&)), this, SLOT(OnGeneralChanged()));
+	connect(ui.ipcRoot, SIGNAL(textChanged(const QString&)), this, SLOT(OnGeneralChanged()));
 
-	m_FeaturesChanged = false;
 	connect(ui.chkWFP, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
 	connect(ui.chkObjCb, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
-	//connect(ui.chkWin32k, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
-
 	if (CurrentVersion.value("CurrentBuild").toInt() < 14393) // Windows 10 RS1 and later
 		ui.chkWin32k->setEnabled(false);
+	//connect(ui.chkWin32k, SIGNAL(stateChanged(int)), this, SLOT(OnFeaturesChanged()));
+	m_FeaturesChanged = false;
+	connect(ui.chkWin32k, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
+	connect(ui.chkSbieLogon, SIGNAL(stateChanged(int)), this, SLOT(OnGeneralChanged()));
+	m_GeneralChanged = false;
 
-	
-	m_WarnProgsChanged = false;
+	connect(ui.chkWatchConfig, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged())); // not sbie ini
 
-	connect(ui.chkPassRequired, SIGNAL(stateChanged(int)), this, SLOT(OnChange()));
+	connect(ui.chkAdminOnly, SIGNAL(stateChanged(int)), this, SLOT(OnProtectionChange()));
+	connect(ui.chkPassRequired, SIGNAL(stateChanged(int)), this, SLOT(OnProtectionChange()));
 	connect(ui.btnSetPassword, SIGNAL(clicked(bool)), this, SLOT(OnSetPassword()));
-
+	connect(ui.chkAdminOnlyFP, SIGNAL(stateChanged(int)), this, SLOT(OnProtectionChange()));
+	connect(ui.chkClearPass, SIGNAL(stateChanged(int)), this, SLOT(OnProtectionChange()));
+	m_ProtectionChanged = false;
+	//
+	
+	// Program Control
 	connect(ui.chkStartBlock, SIGNAL(stateChanged(int)), this, SLOT(OnWarnChanged()));
 
 	connect(ui.chkStartBlockMsg, SIGNAL(stateChanged(int)), this, SLOT(OnWarnChanged()));
@@ -306,10 +387,10 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.btnDelWarnProg, SIGNAL(clicked(bool)), this, SLOT(OnDelWarnProg()));
 
 	connect(ui.btnBrowse, SIGNAL(clicked(bool)), this, SLOT(OnBrowse()));
+	m_WarnProgsChanged = false;
+	//
 
-	connect(ui.chkAutoRoot, SIGNAL(stateChanged(int)), this, SLOT(OnChange()));
-
-
+	// Templates
 	connect(ui.btnAddCompat, SIGNAL(clicked(bool)), this, SLOT(OnAddCompat()));
 	connect(ui.btnDelCompat, SIGNAL(clicked(bool)), this, SLOT(OnDelCompat()));
 	m_CompatLoaded = 0;
@@ -319,9 +400,24 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.treeCompat, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateClicked(QTreeWidgetItem*, int)));
 	connect(ui.treeCompat, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateDoubleClicked(QTreeWidgetItem*, int)));
 
+	connect(ui.txtTemplates, SIGNAL(textChanged(const QString&)), this, SLOT(OnFilterTemplates()));
+	//connect(ui.treeTemplates, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateClicked(QTreeWidgetItem*, int)));
+	connect(ui.treeTemplates, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(OnTemplateClicked(QTreeWidgetItem*, int)));
+	connect(ui.treeTemplates, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnTemplateDoubleClicked(QTreeWidgetItem*, int)));
+	connect(ui.btnAddTemplate, SIGNAL(clicked(bool)), this, SLOT(OnAddTemplates()));
+	QMenu* pTmplBtnMenu = new QMenu(ui.btnAddTemplate);
+	for(int i = 1; i < CTemplateWizard::TmplMax; i++)
+		pTmplBtnMenu->addAction(tr("Add %1 Template").arg(CTemplateWizard::GetTemplateLabel((CTemplateWizard::ETemplateType)i)), this, SLOT(OnTemplateWizard()))->setData(i);
+	ui.btnAddTemplate->setPopupMode(QToolButton::MenuButtonPopup);
+	ui.btnAddTemplate->setMenu(pTmplBtnMenu);
+	connect(ui.btnDelTemplate, SIGNAL(clicked(bool)), this, SLOT(OnDelTemplates()));
+	//
+
+	// Support
 	connect(ui.lblSupport, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 	connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 	connect(ui.lblCertExp, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+	connect(ui.lblInsiderInfo, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 
 	m_CertChanged = false;
 	connect(ui.txtCertificate, SIGNAL(textChanged()), this, SLOT(CertChanged()));
@@ -338,21 +434,29 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.lblCurrent, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
 	connect(ui.lblStable, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
 	connect(ui.lblPreview, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
-	//connect(ui.lblLive, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
+	connect(ui.lblInsider, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
+	//connect(ui.lblInsiderInfo, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
 
 	connect(ui.chkAutoUpdate, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
 
 	connect(ui.radStable, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
 	connect(ui.radPreview, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
-	//connect(ui.radLive, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
+	connect(ui.radInsider, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
+
+	connect(ui.cmbUpdate, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbRelease, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+
+	connect(ui.chkNoCheck, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	//
 
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
 
-	// edit
+	// Ini Edit
 	connect(ui.btnEditIni, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
 	connect(ui.btnSaveIni, SIGNAL(clicked(bool)), this, SLOT(OnSaveIni()));
 	connect(ui.btnCancelEdit, SIGNAL(clicked(bool)), this, SLOT(OnCancelEdit()));
-	//connect(ui.txtIniSection, SIGNAL(textChanged()), this, SLOT(OnOptChanged()));
+	connect(ui.txtIniSection, SIGNAL(textChanged()), this, SLOT(OnIniChanged()));
+	//
 
 	connect(ui.buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked(bool)), this, SLOT(ok()));
 	connect(ui.buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(apply()));
@@ -361,6 +465,12 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	this->installEventFilter(this); // prevent enter from closing the dialog
 
 	restoreGeometry(theConf->GetBlob("SettingsWindow/Window_Geometry"));
+
+	foreach(QTreeWidget * pTree, this->findChildren<QTreeWidget*>()) {
+		QByteArray Columns = theConf->GetBlob("SettingsWindow/" + pTree->objectName() + "_Columns");
+		if (!Columns.isEmpty()) 
+			pTree->header()->restoreState(Columns);
+	}
 
 	int iOptionTree = theConf->GetInt("Options/OptionTree", 2);
 	if (iOptionTree == 2)
@@ -396,6 +506,9 @@ void CSettingsWindow::OnSetTree()
 CSettingsWindow::~CSettingsWindow()
 {
 	theConf->SetBlob("SettingsWindow/Window_Geometry",saveGeometry());
+
+	foreach(QTreeWidget * pTree, this->findChildren<QTreeWidget*>()) 
+		theConf->SetBlob("SettingsWindow/" + pTree->objectName() + "_Columns", pTree->header()->saveState());
 }
 
 void CSettingsWindow::showTab(int Tab, bool bExclusive)
@@ -404,18 +517,36 @@ void CSettingsWindow::showTab(int Tab, bool bExclusive)
 	switch (Tab)
 	{
 	case eOptions: pWidget = ui.tabGeneral; break;
-	case eShell: pWidget = ui.tabShell; break;
+	case eShell: pWidget = ui.tabWindows; break;
 	case eGuiConfig: pWidget = ui.tabGUI; break;
 	case eAdvanced: pWidget = ui.tabSandbox; break;
-	case eProgCtrl: pWidget = ui.tabAlerts; break;
+	case eProgCtrl: pWidget = ui.tabAlert; break;
 	case eConfigLock: pWidget = ui.tabLock; break;
-	case eSoftCompat: pWidget = ui.tabCompat; break;
+	case eSoftCompat: pWidget = ui.tabAppCompat; break;
 	case eEditIni: pWidget = ui.tabEdit; break;
 	case eSupport: pWidget = ui.tabSupport; break;
 	}
 
-	if (ui.tabs)
-		ui.tabs->setCurrentWidget(pWidget);
+	if (ui.tabs) {
+		
+		for (int i = 0; i < ui.tabs->count(); i++) {
+			QGridLayout* pGrid = qobject_cast<QGridLayout*>(ui.tabs->widget(i)->layout());
+			QTabWidget* pSubTabs = pGrid ? qobject_cast<QTabWidget*>(pGrid->itemAt(0)->widget()) : NULL;
+			if (!pSubTabs) {
+				if(ui.tabs->widget(i) == pWidget)
+					ui.tabs->setCurrentIndex(i);
+			}
+			else {
+				for (int j = 0; j < pSubTabs->count(); j++) {
+					if (pSubTabs->widget(j) == pWidget) {
+						ui.tabs->setCurrentIndex(i);
+						pSubTabs->setCurrentIndex(j);
+					}
+				}
+			}
+		}
+		
+	}
 	else
 		m_pStack->setCurrentWidget(pWidget);
 
@@ -459,6 +590,38 @@ bool CSettingsWindow::eventFilter(QObject *source, QEvent *event)
 	return QDialog::eventFilter(source, event);
 }
 
+void CSettingsWindow::OnAddMessage()
+{
+	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter message"), QLineEdit::Normal);
+	if (Value.isEmpty())
+		return;
+
+	StrPair IdText = Split2(Value, ",");
+
+	AddMessageItem(IdText.first, IdText.second);
+
+	OnMessageChanged();
+}
+
+void CSettingsWindow::AddMessageItem(const QString& ID, const QString& Text)
+{
+	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	pItem->setText(0, ID);
+	pItem->setText(1, Text);
+	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+	ui.treeMessages->addTopLevelItem(pItem);
+}
+
+void CSettingsWindow::OnDelMessage()
+{
+	QTreeWidgetItem* pItem = ui.treeMessages->currentItem();
+	if (!pItem)
+		return;
+
+	delete pItem;
+	OnMessageChanged();
+}
+
 void CSettingsWindow::OnBrowsePath()
 {
 	QString Value = QFileDialog::getOpenFileName(this, tr("Select Program"), "", tr("Executables (*.exe *.cmd)")).replace("/", "\\");
@@ -469,7 +632,7 @@ void CSettingsWindow::OnBrowsePath()
 	if (Name.isEmpty())
 		return;
 
-	AddRunItem(Name, "\"" + Value + "\"");
+	AddRunItem(Name, "", "\"" + Value + "\"");
 }
 
 void CSettingsWindow::OnAddCommand()
@@ -482,16 +645,40 @@ void CSettingsWindow::OnAddCommand()
 	if (Name.isEmpty())
 		return;
 
-	AddRunItem(Name, Value);
+	AddRunItem(Name, "", Value);
+	OnRunChanged();
 }
 
-void CSettingsWindow::AddRunItem(const QString& Name, const QString& Command)
+void CSettingsWindow::AddRunItem(const QString& Name, const QString& Icon, const QString& Command)
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
 	pItem->setText(0, Name);
-	pItem->setText(1, Command);
+	pItem->setText(1, Icon);
+	pItem->setText(2, Command);
 	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
 	ui.treeRun->addTopLevelItem(pItem);
+}
+
+void CSettingsWindow::OnCommandUp()
+{
+	int index = ui.treeRun->indexOfTopLevelItem(ui.treeRun->currentItem());
+	if (index > 0) {
+		QTreeWidgetItem* pItem = ui.treeRun->takeTopLevelItem(index);
+		ui.treeRun->insertTopLevelItem(index - 1, pItem);
+		ui.treeRun->setCurrentItem(pItem);
+		OnRunChanged();
+	}
+}
+
+void CSettingsWindow::OnCommandDown()
+{
+	int index = ui.treeRun->indexOfTopLevelItem(ui.treeRun->currentItem());
+	if (index < ui.treeRun->topLevelItemCount()-1) {
+		QTreeWidgetItem* pItem = ui.treeRun->takeTopLevelItem(index);
+		ui.treeRun->insertTopLevelItem(index + 1, pItem);
+		ui.treeRun->setCurrentItem(pItem);
+		OnRunChanged();
+	}
 }
 
 void CSettingsWindow::OnDelCommand()
@@ -501,6 +688,7 @@ void CSettingsWindow::OnDelCommand()
 		return;
 
 	delete pItem;
+	OnRunChanged();
 }
 
 Qt::CheckState CSettingsWindow__IsContextMenu()
@@ -601,7 +789,8 @@ void CSettingsWindow::LoadSettings()
 	ui.cmbFontScale->setCurrentText(QString::number(theConf->GetInt("Options/FontScaling", 100)));
 
 	ui.chkSilentMode->setChecked(theConf->GetBool("Options/CheckSilentMode", true));
-	ui.chkNotifications->setChecked(theConf->GetBool("Options/ShowNotifications", true));
+	ui.chkCopyProgress->setChecked(theConf->GetBool("Options/ShowMigrationProgress", true));
+	ui.chkNoMessages->setChecked(!theConf->GetBool("Options/ShowNotifications", true));
 
 	ui.chkSandboxUrls->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/OpenUrlsSandboxed", 2)));
 
@@ -628,13 +817,22 @@ void CSettingsWindow::LoadSettings()
 
 	if (theAPI->IsConnected())
 	{
+		ui.treeMessages->clear();
+		foreach(const QString & Value, theAPI->GetUserSettings()->GetTextList("SbieCtrl_HideMessage", false))
+		{
+			StrPair NameIcon = Split2(Value, ",");
+			AddMessageItem(NameIcon.first, NameIcon.second);
+		}
+		m_MessagesChanged = false;
+
 		ui.treeRun->clear();
 		foreach(const QString& Value, theAPI->GetGlobalSettings()->GetTextList("RunCommand", false))
 		{
 			StrPair NameCmd = Split2(Value, "|");
-			QTreeWidgetItem* pItem = new QTreeWidgetItem();
-			AddRunItem(NameCmd.first, NameCmd.second);
+			StrPair NameIcon = Split2(NameCmd.first, ",");
+			AddRunItem(NameIcon.first, NameIcon.second, NameCmd.second);
 		}
+		m_RunChanged = false;
 		
 		ui.cmbDefault->clear();
 		foreach(const CSandBoxPtr & pBox, theAPI->GetAllBoxes())
@@ -663,12 +861,16 @@ void CSettingsWindow::LoadSettings()
 		ui.chkPassRequired->setChecked(!theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty());
 		ui.chkAdminOnlyFP->setChecked(theAPI->GetGlobalSettings()->GetBool("ForceDisableAdminOnly", false));
 		ui.chkClearPass->setChecked(theAPI->GetGlobalSettings()->GetBool("ForgetPassword", false));
+		m_HoldChange = true;
+		OnProtectionChange();
+		m_HoldChange = false;
+
+		m_GeneralChanged = false;
 
 		ui.chkStartBlock->setChecked(theAPI->GetGlobalSettings()->GetBool("StartRunAlertDenied", false));
 		ui.chkStartBlockMsg->setChecked(theAPI->GetGlobalSettings()->GetBool("AlertStartRunAccessDenied", true));
 		ui.chkNotForcedMsg->setChecked(theAPI->GetGlobalSettings()->GetBool("NotifyForceProcessDisabled", false));
-		
-		
+
 		ui.treeWarnProgs->clear();
 
 		foreach(const QString& Value, theAPI->GetGlobalSettings()->GetTextList("AlertProcess", false))
@@ -676,6 +878,8 @@ void CSettingsWindow::LoadSettings()
 		
 		foreach(const QString& Value, theAPI->GetGlobalSettings()->GetTextList("AlertFolder", false))
 			AddWarnEntry(Value, 2);
+
+		m_WarnProgsChanged = false;
 	}
 	
 	if(!theAPI->IsConnected() || (theAPI->GetGlobalSettings()->GetBool("EditAdminOnly", false) && !IsAdminUser()))
@@ -701,12 +905,19 @@ void CSettingsWindow::LoadSettings()
 		ui.treeCompat->setEnabled(false);
 		ui.btnAddCompat->setEnabled(false);
 		ui.btnDelCompat->setEnabled(false);
+		ui.treeTemplates->setEnabled(false);
+		ui.btnAddTemplate->setEnabled(false);
+		ui.btnDelTemplate->setEnabled(false);
 		ui.btnEditIni->setEnabled(false);
 	}
 
 
-	if (theGUI->IsFullyPortable())
+	if (theGUI->IsFullyPortable()) {
 		ui.chkAutoRoot->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/PortableRootDir", 2)));
+		m_HoldChange = true;
+		OnRootChanged();
+		m_HoldChange = false;
+	}
 	else
 		ui.chkAutoRoot->setVisible(false);
 
@@ -719,9 +930,11 @@ void CSettingsWindow::LoadSettings()
 	QString ReleaseChannel = theConf->GetString("Options/ReleaseChannel", "stable");
 	ui.radStable->setChecked(ReleaseChannel == "stable");
 	ui.radPreview->setChecked(ReleaseChannel == "preview");
-	//ui.radLive->setChecked(ReleaseChannel == "live");
+	ui.radInsider->setChecked(ReleaseChannel == "insider");
 
+	m_HoldChange = true;
 	UpdateUpdater();
+	m_HoldChange = false;
 
 	ui.cmbUpdate->setCurrentIndex(ui.cmbUpdate->findData(theConf->GetString("Options/OnNewUpdate", "ignore")));
 	ui.cmbRelease->setCurrentIndex(ui.cmbRelease->findData(theConf->GetString("Options/OnNewRelease", "download")));
@@ -730,8 +943,6 @@ void CSettingsWindow::LoadSettings()
 	ui.chkNoCheck->setChecked(theConf->GetBool("Options/NoSupportCheck", false));
 	if(ui.chkNoCheck->isCheckable() && !g_CertInfo.expired)
 		ui.chkNoCheck->setVisible(false); // hide if not relevant
-
-	OnChange();
 }
 
 void CSettingsWindow::UpdateCert()
@@ -773,6 +984,8 @@ void CSettingsWindow::UpdateCert()
 		}
 		ui.txtCertificate->setPalette(palette);
 	}
+
+	ui.radInsider->setEnabled(g_CertInfo.insider);
 }
 
 void CSettingsWindow::UpdateUpdater()
@@ -799,6 +1012,8 @@ void CSettingsWindow::UpdateUpdater()
 		}
 		ui.cmbRelease->setEnabled(true);
 	}
+
+	OnOptChanged();
 }
 
 void CSettingsWindow::WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& OnValue, const QString& OffValue)
@@ -903,7 +1118,8 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/RunInDefaultBox", ui.chkAlwaysDefault->isChecked());
 
 	theConf->SetValue("Options/CheckSilentMode", ui.chkSilentMode->isChecked());
-	theConf->SetValue("Options/ShowNotifications", ui.chkNotifications->isChecked());
+	theConf->SetValue("Options/ShowMigrationProgress", ui.chkCopyProgress->isChecked());
+	theConf->SetValue("Options/ShowNotifications", !ui.chkNoMessages->isChecked());
 
 	theConf->SetValue("Options/OpenUrlsSandboxed", CSettingsWindow__Chk2Int(ui.chkSandboxUrls->checkState()));
 
@@ -929,61 +1145,97 @@ void CSettingsWindow::SaveSettings()
 			theGUI->SyncStartMenu();
 	}
 
-
 	theConf->SetValue("Options/SysTrayIcon", ui.cmbSysTray->currentIndex());
 	theConf->SetValue("Options/SysTrayFilter", ui.cmbTrayBoxes->currentIndex());
 	theConf->SetValue("Options/CompactTray", ui.chkCompactTray->isChecked());
 	theConf->SetValue("Options/AutoBoxOpsNotify", ui.chkBoxOpsNotify->isChecked());
 
-
 	if (theAPI->IsConnected())
 	{
 		try
 		{
-			QStringList RunCommands;
-			for (int i = 0; i < ui.treeRun->topLevelItemCount(); i++) {
-				QTreeWidgetItem* pItem = ui.treeRun->topLevelItem(i);
-				RunCommands.append(pItem->text(0) + "|" + pItem->text(1));
-			}
-			WriteTextList("RunCommand", RunCommands);
-
-			WriteText("DefaultBox", ui.cmbDefault->currentData().toString());
-
-			WriteText("FileRootPath", ui.fileRoot->text()); //ui.fileRoot->setText("\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%");
-			//WriteAdvancedCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", "", "n");
-			WriteText("KeyRootPath", ui.regRoot->text()); //ui.regRoot->setText("\\REGISTRY\\USER\\Sandbox_%USER%_%SANDBOX%");
-			WriteText("IpcRootPath", ui.ipcRoot->text()); //ui.ipcRoot->setText("\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%");
-
-			WriteAdvancedCheck(ui.chkWFP, "NetworkEnableWFP", "y", "");
-			WriteAdvancedCheck(ui.chkObjCb, "EnableObjectFiltering", "", "n");
-			WriteAdvancedCheck(ui.chkWin32k, "EnableWin32kHooks", "", "n");
-			WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", "y", "");
-
-			if (m_FeaturesChanged) {
-				m_FeaturesChanged = false;
-				theAPI->ReloadConfig(true);
-			}
-
-			WriteAdvancedCheck(ui.chkAdminOnly, "EditAdminOnly", "y", "");
-
-			bool isPassSet = !theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty();
-			if (ui.chkPassRequired->isChecked())
+			if (m_MessagesChanged)
 			{
-				if (!isPassSet && m_NewPassword.isEmpty())
-					OnSetPassword(); // request password entry if it wasn't entered already
-				if (!m_NewPassword.isEmpty()) {
-					theAPI->LockConfig(m_NewPassword); // set new/changed password
-					m_NewPassword.clear();
+				m_MessagesChanged = false;
+				
+				QStringList HiddenMessages;
+				for (int i = 0; i < ui.treeMessages->topLevelItemCount(); i++) {
+					QTreeWidgetItem* pItem = ui.treeMessages->topLevelItem(i);
+					if (!pItem->text(1).isEmpty())
+						HiddenMessages.append(pItem->text(0) + "," + pItem->text(1));
+					else
+						HiddenMessages.append(pItem->text(0));
+				}
+				theAPI->GetUserSettings()->UpdateTextList("SbieCtrl_HideMessage", HiddenMessages, false);
+			}
+
+			if (m_RunChanged) 
+			{
+				m_RunChanged = false;
+
+				QStringList RunCommands;
+				for (int i = 0; i < ui.treeRun->topLevelItemCount(); i++) {
+					QTreeWidgetItem* pItem = ui.treeRun->topLevelItem(i);
+					if (pItem->text(1).isEmpty())
+						RunCommands.prepend(pItem->text(0) + "|" + pItem->text(2));
+					else
+						RunCommands.prepend(pItem->text(0) + "," + pItem->text(1) + "|" + pItem->text(2));
+				}
+				//WriteTextList("RunCommand", RunCommands);
+				theAPI->GetGlobalSettings()->DelValue("RunCommand");
+				foreach(const QString & Value, RunCommands)
+					theAPI->GetGlobalSettings()->InsertText("RunCommand", Value);
+			}
+
+			if (m_GeneralChanged)
+			{
+				m_GeneralChanged = false;
+
+				WriteText("DefaultBox", ui.cmbDefault->currentData().toString());
+
+				WriteText("FileRootPath", ui.fileRoot->text()); //ui.fileRoot->setText("\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%");
+				//WriteAdvancedCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", "", "n");
+				WriteText("KeyRootPath", ui.regRoot->text()); //ui.regRoot->setText("\\REGISTRY\\USER\\Sandbox_%USER%_%SANDBOX%");
+				WriteText("IpcRootPath", ui.ipcRoot->text()); //ui.ipcRoot->setText("\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%");
+
+				WriteAdvancedCheck(ui.chkWFP, "NetworkEnableWFP", "y", "");
+				WriteAdvancedCheck(ui.chkObjCb, "EnableObjectFiltering", "", "n");
+				WriteAdvancedCheck(ui.chkWin32k, "EnableWin32kHooks", "", "n");
+				WriteAdvancedCheck(ui.chkSbieLogon, "SandboxieLogon", "y", "");
+
+				if (m_FeaturesChanged) {
+					m_FeaturesChanged = false;
+					theAPI->ReloadConfig(true);
 				}
 			}
-			else if (isPassSet)
-				theAPI->LockConfig(QString()); // clear password
 
-			WriteAdvancedCheck(ui.chkAdminOnlyFP, "ForceDisableAdminOnly", "y", "");
-			WriteAdvancedCheck(ui.chkClearPass, "ForgetPassword", "y", "");
+			if (m_ProtectionChanged)
+			{
+				m_ProtectionChanged = false;
+
+				WriteAdvancedCheck(ui.chkAdminOnly, "EditAdminOnly", "y", "");
+
+				bool isPassSet = !theAPI->GetGlobalSettings()->GetText("EditPassword", "").isEmpty();
+				if (ui.chkPassRequired->isChecked())
+				{
+					if (!isPassSet && m_NewPassword.isEmpty())
+						OnSetPassword(); // request password entry if it wasn't entered already
+					if (!m_NewPassword.isEmpty()) {
+						theAPI->LockConfig(m_NewPassword); // set new/changed password
+						m_NewPassword.clear();
+					}
+				}
+				else if (isPassSet)
+					theAPI->LockConfig(QString()); // clear password
+
+				WriteAdvancedCheck(ui.chkAdminOnlyFP, "ForceDisableAdminOnly", "y", "");
+				WriteAdvancedCheck(ui.chkClearPass, "ForgetPassword", "y", "");
+			}
 
 			if (m_WarnProgsChanged)
 			{
+				m_WarnProgsChanged = false;
+
 				WriteAdvancedCheck(ui.chkStartBlock, "StartRunAlertDenied", "y", "");
 				WriteAdvancedCheck(ui.chkStartBlockMsg, "AlertStartRunAccessDenied", "", "n");
 				WriteAdvancedCheck(ui.chkNotForcedMsg, "NotifyForceProcessDisabled", "y", "");
@@ -1003,19 +1255,21 @@ void CSettingsWindow::SaveSettings()
 
 				WriteTextList("AlertProcess", AlertProcess);
 				WriteTextList("AlertFolder", AlertFolder);
-				m_WarnProgsChanged = false;
 			}
 
 			if (m_CompatChanged)
 			{
+				m_CompatChanged = false;
+
 				QStringList Used;
 				QStringList Rejected;
 				for (int i = 0; i < ui.treeCompat->topLevelItemCount(); i++) {
 					QTreeWidgetItem* pItem = ui.treeCompat->topLevelItem(i);
+					QString Template = pItem->data(0, Qt::UserRole).toString().mid(9);
 					if (pItem->checkState(0) == Qt::Unchecked)
-						Rejected.append(pItem->data(0, Qt::UserRole).toString());
+						Rejected.append(Template);
 					else
-						Used.append(pItem->data(0, Qt::UserRole).toString());
+						Used.append(Template);
 				}
 
 				// retain local templates
@@ -1027,7 +1281,6 @@ void CSettingsWindow::SaveSettings()
 
 				WriteTextList("Template", Used);
 				WriteTextList("TemplateReject", Rejected);
-				m_CompatChanged = false;
 			}
 		}
 		catch (SB_STATUS Status)
@@ -1077,8 +1330,8 @@ void CSettingsWindow::SaveSettings()
 		ReleaseChannel = "stable";
 	else if (ui.radPreview->isChecked())
 		ReleaseChannel = "preview";
-	//else if (ui.radLive->isChecked())
-	//	ReleaseChannel = "live";
+	else if (ui.radInsider->isChecked())
+		ReleaseChannel = "insider";
 	if(!ReleaseChannel.isEmpty()) theConf->SetValue("Options/ReleaseChannel", ReleaseChannel);
 
 	theConf->SetValue("Options/OnNewUpdate", ui.cmbUpdate->currentData());
@@ -1175,6 +1428,13 @@ void CSettingsWindow::reject()
 	this->close();
 }
 
+void CSettingsWindow::OnOptChanged()
+{
+	if (m_HoldChange)
+		return;
+	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
+}
+
 void CSettingsWindow::OnBrowse()
 {
 	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");
@@ -1184,12 +1444,11 @@ void CSettingsWindow::OnBrowse()
 	ui.fileRoot->setText(Value + "\\%SANDBOX%");
 }
 
-void CSettingsWindow::OnChange()
+void CSettingsWindow::OnRootChanged()
 {
 	if (ui.chkAutoRoot->isVisible())
 		ui.fileRoot->setEnabled(ui.chkAutoRoot->checkState() != Qt::Checked);
-
-	ui.btnSetPassword->setEnabled(ui.chkPassRequired->isChecked());
+	OnOptChanged();
 }
 
 void CSettingsWindow::OnTab()
@@ -1213,7 +1472,7 @@ void CSettingsWindow::OnTab(QWidget* pTab)
 	else if (pTab == ui.tabEdit)
 	{
 		LoadIniSection();
-		ui.txtIniSection->setReadOnly(true);
+		//ui.txtIniSection->setReadOnly(true);
 	}
 	else if (pTab == ui.tabCompat && m_CompatLoaded != 1 && theAPI->IsConnected())
 	{
@@ -1221,6 +1480,8 @@ void CSettingsWindow::OnTab(QWidget* pTab)
 			theGUI->GetCompat()->RunCheck();
 
 		ui.treeCompat->clear();
+
+		bool bNew = false;
 
 		QMap<QString, int> Templates = theGUI->GetCompat()->GetTemplates();
 		for (QMap<QString, int>::iterator I = Templates.begin(); I != Templates.end(); ++I)
@@ -1242,19 +1503,31 @@ void CSettingsWindow::OnTab(QWidget* pTab)
 
 			QTreeWidgetItem* pItem = new QTreeWidgetItem();
 			pItem->setText(0, Title);
-			pItem->setData(0, Qt::UserRole, I.key());
+			pItem->setData(0, Qt::UserRole, "Template_" + I.key());
 			if((I.value() & CSbieTemplates::eDisabled) != 0)
 				pItem->setCheckState(0, Qt::Unchecked);
 			else if((I.value() & CSbieTemplates::eEnabled) != 0)
 				pItem->setCheckState(0, Qt::Checked);
-			else
+			else {
 				pItem->setCheckState(0, Qt::PartiallyChecked);
+				bNew = true;
+			}
 			ui.treeCompat->addTopLevelItem(pItem);
 		}
 
 		m_CompatLoaded = 1;
-		m_CompatChanged = true;
+		if(bNew)
+			OnCompatChanged();
+
+		LoadTemplates();
 	}
+}
+
+void CSettingsWindow::OnProtectionChange()
+{
+	ui.btnSetPassword->setEnabled(ui.chkPassRequired->isChecked());
+	m_ProtectionChanged = true;
+	OnOptChanged();
 }
 
 void CSettingsWindow::OnSetPassword()
@@ -1274,6 +1547,8 @@ retry:
 	}
 
 	m_NewPassword = Value1;
+	m_ProtectionChanged = true;
+	OnOptChanged();
 }
 
 void CSettingsWindow::AddWarnEntry(const QString& Name, int type)
@@ -1293,7 +1568,7 @@ void CSettingsWindow::OnAddWarnProg()
 	if (Value.isEmpty())
 		return;
 	AddWarnEntry(Value, 1);
-	m_WarnProgsChanged = true;
+	OnWarnChanged();
 }
 
 void CSettingsWindow::OnAddWarnFolder()
@@ -1302,7 +1577,7 @@ void CSettingsWindow::OnAddWarnFolder()
 	if (Value.isEmpty())
 		return;
 	AddWarnEntry(Value, 2);
-	m_WarnProgsChanged = true;
+	OnWarnChanged();
 }
 
 void CSettingsWindow::OnDelWarnProg()
@@ -1312,21 +1587,15 @@ void CSettingsWindow::OnDelWarnProg()
 		return;
 
 	delete pItem;
-	m_WarnProgsChanged = true;
+	OnWarnChanged();
 }
 
 void CSettingsWindow::OnTemplateClicked(QTreeWidgetItem* pItem, int Column)
 {
-	// todo: check if really changed
-	m_CompatChanged = true;
-}
-
-void CSettingsWindow::OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column)
-{
-	QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_" + pItem->data(0, Qt::UserRole).toString(), theAPI));
-
-	COptionsWindow OptionsWindow(pTemplate, pItem->text(1));
-	OptionsWindow.exec();
+	if (sender() == ui.treeCompat) {
+		// todo: check if really changed
+		OnCompatChanged();
+	}
 }
 
 void CSettingsWindow::OnAddCompat()
@@ -1336,7 +1605,7 @@ void CSettingsWindow::OnAddCompat()
 		return;
 
 	pItem->setCheckState(0, Qt::Checked);
-	m_CompatChanged = true;
+	OnCompatChanged();
 }
 
 void CSettingsWindow::OnDelCompat()
@@ -1346,10 +1615,109 @@ void CSettingsWindow::OnDelCompat()
 		return;
 
 	pItem->setCheckState(0, Qt::Unchecked);
-	m_CompatChanged = true;
+	OnCompatChanged();
 }
 
+void CSettingsWindow::OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column)
+{
+	QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni(pItem->data(0, Qt::UserRole).toString(), theAPI));
 
+	COptionsWindow OptionsWindow(pTemplate, pItem->text(0));
+	QPoint ParentPos = mapToGlobal(rect().topLeft());
+	OptionsWindow.move(ParentPos.x() + 30, ParentPos.y() + 10);
+	OptionsWindow.exec();
+
+	// todo update name if it changed
+}
+
+void CSettingsWindow::OnAddTemplates()
+{
+	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter the template identifier"), QLineEdit::Normal);
+	if (Value.isEmpty())
+		return;
+
+	QString Name = QString(Value).replace(" ", "_");
+
+	SB_STATUS Status = theAPI->ValidateName(Name);
+	if (Status.IsError()) {
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("Error: %1").arg(CSandMan::FormatError(Status)));
+		return;
+	}
+
+	QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_Local_" + Name, theAPI));
+
+	pTemplate->SetText("Tmpl.Title", Value);
+	pTemplate->SetText("Tmpl.Class", "Local");
+
+	COptionsWindow OptionsWindow(pTemplate, Value);
+	OptionsWindow.exec();
+
+	LoadTemplates();
+}
+
+void CSettingsWindow::OnTemplateWizard()
+{
+	CTemplateWizard::ETemplateType Type = (CTemplateWizard::ETemplateType)((QAction*)sender())->data().toInt();
+	if (CTemplateWizard::CreateNewTemplate(NULL, Type, this)) {
+		LoadTemplates();
+	}
+}
+
+void CSettingsWindow::OnDelTemplates()
+{
+	if (QMessageBox("Sandboxie-Plus", tr("Do you really want to delete the selected local template(s)?"), QMessageBox::Question, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
+		return;
+
+	foreach(QTreeWidgetItem * pItem, ui.treeTemplates->selectedItems())
+	{
+		QString Section = pItem->data(0, Qt::UserRole).toString();
+		
+		delete pItem;
+
+		// delete section
+		theAPI->SbieIniSet(Section, "*", "");
+	}
+}
+
+void CSettingsWindow::LoadTemplates()
+{
+	QStringList Templates;
+	for (int index = 0; ; index++)
+	{
+		QString Value = theAPI->SbieIniGet2("", "", index);
+		if (Value.isNull())
+			break;
+		Templates.append(Value);
+	}
+
+	ui.treeTemplates->clear();
+
+	QString TextFilter = ui.txtTemplates->text();
+
+	foreach(const QString& Name, Templates)
+	{
+		if (Name.left(9).compare("Template_", Qt::CaseInsensitive) != 0)
+			continue;
+
+		if (Name.indexOf(TextFilter, 0, Qt::CaseInsensitive) == -1)
+			continue;
+
+		QString Title = theAPI->SbieIniGet2(Name, "Tmpl.Title");
+		if (Title.left(1) == "#")
+		{
+			int End = Title.mid(1).indexOf(",");
+			if (End == -1) End = Title.length() - 1;
+			int MsgNum = Title.mid(1, End).toInt();
+			Title = theAPI->GetSbieMsgStr(MsgNum, theGUI->m_LanguageId).arg(Title.mid(End + 2)).arg("");
+		}
+		if (Title.isEmpty()) Title = Name;
+
+		QTreeWidgetItem* pItem = new QTreeWidgetItem();
+		pItem->setData(0, Qt::UserRole, Name);
+		pItem->setText(0, Title);
+		ui.treeTemplates->addTopLevelItem(pItem);
+	}
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Raw section ini Editor
@@ -1361,7 +1729,7 @@ void CSettingsWindow::SetIniEdit(bool bEnable)
 		m_pTree->setEnabled(!bEnable);
 	}
 	else {
-		for (int i = 0; i < ui.tabs->count() - 2; i++) {
+		for (int i = 4; i < ui.tabs->count() - 1; i++) {
 			bool Enabled = ui.tabs->widget(i)->isEnabled();
 			ui.tabs->setTabEnabled(i, !bEnable && Enabled);
 			ui.tabs->widget(i)->setEnabled(Enabled);
@@ -1369,7 +1737,7 @@ void CSettingsWindow::SetIniEdit(bool bEnable)
 	}
 	ui.btnSaveIni->setEnabled(bEnable);
 	ui.btnCancelEdit->setEnabled(bEnable);
-	ui.txtIniSection->setReadOnly(!bEnable);
+	//ui.txtIniSection->setReadOnly(!bEnable);
 	ui.btnEditIni->setEnabled(!bEnable);
 }
 
@@ -1385,9 +1753,19 @@ void CSettingsWindow::OnSaveIni()
 	LoadSettings();
 }
 
+void CSettingsWindow::OnIniChanged()
+{
+	if (m_HoldChange)
+		return;
+	if(ui.btnEditIni->isEnabled())
+		SetIniEdit(true);
+	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
+}
+
 void CSettingsWindow::OnCancelEdit()
 {
 	SetIniEdit(false);
+	LoadIniSection();
 }
 
 void CSettingsWindow::LoadIniSection()
@@ -1397,7 +1775,9 @@ void CSettingsWindow::LoadIniSection()
 	if(theAPI->IsConnected())
 		Section = theAPI->SbieIniGetEx("GlobalSettings", "");
 
+	m_HoldChange = true;
 	ui.txtIniSection->setPlainText(Section);
+	m_HoldChange = false;
 }
 
 void CSettingsWindow::SaveIniSection()
@@ -1444,7 +1824,8 @@ void CSettingsWindow::OnUpdateData(const QVariantMap& Data, const QVariantMap& P
 	ui.lblCurrent->setText(tr("%1 (Current)").arg(Version));
 	ui.lblStable->setText(CSettingsWindow__MkVersion("stable", Releases));
 	ui.lblPreview->setText(CSettingsWindow__MkVersion("preview", Releases));
-	//ui.lblLive->setText(CSettingsWindow__MkVersion("live", Releases));
+	if(ui.radInsider->isEnabled())
+		ui.lblInsider->setText(CSettingsWindow__MkVersion("insider", Releases));
 }
 
 void CSettingsWindow::OnUpdate(const QString& Channel)
@@ -1484,11 +1865,12 @@ void CSettingsWindow::OnUpdate(const QString& Channel)
 // Support
 //
 
-void CSettingsWindow::CertChanged() 
+void CSettingsWindow::CertChanged()
 { 
 	m_CertChanged = true; 
 	QPalette palette = QApplication::palette();
 	ui.txtCertificate->setPalette(palette);
+	OnOptChanged();
 }
 
 void CSettingsWindow::LoadCertificate(QString CertPath)

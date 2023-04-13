@@ -81,7 +81,7 @@ void COptionsWindow::CreateGeneral()
 	if (g_Certificate.isEmpty()) {
 		QWidget* ExWidgets[] = { ui.chkSecurityMode, ui.chkLockDown, ui.chkRestrictDevices,
 			ui.chkPrivacy, ui.chkUseSpecificity,
-			ui.chkNoSecurityIsolation, ui.chkNoSecurityFiltering, ui.chkConfidential, NULL };
+			ui.chkNoSecurityIsolation, ui.chkNoSecurityFiltering, ui.chkConfidential, ui.chkHostProtect, NULL };
 		for (QWidget** ExWidget = ExWidgets; *ExWidget != NULL; ExWidget++)
 			COptionsWindow__AddCertIcon(*ExWidget);
 	}
@@ -196,6 +196,8 @@ void COptionsWindow::CreateGeneral()
 	pRunBtnMenu->addAction(tr("Browse for Program"), this, SLOT(OnBrowsePath()));
 	ui.btnAddCmd->setPopupMode(QToolButton::MenuButtonPopup);
 	ui.btnAddCmd->setMenu(pRunBtnMenu);
+	connect(ui.btnCmdUp, SIGNAL(clicked(bool)), this, SLOT(OnCommandUp()));
+	connect(ui.btnCmdDown, SIGNAL(clicked(bool)), this, SLOT(OnCommandDown()));
 	connect(ui.btnDelCmd, SIGNAL(clicked(bool)), this, SLOT(OnDelCommand()));
 	connect(ui.treeRun, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnRunChanged()));
 }
@@ -261,9 +263,9 @@ void COptionsWindow::LoadGeneral()
 	foreach(const QString& Value, m_pBox->GetTextList("RunCommand", m_Template))
 	{
 		StrPair NameCmd = Split2(Value, "|");
+		StrPair NameIcon = Split2(NameCmd.first, ",");
 		QTreeWidgetItem* pItem = new QTreeWidgetItem();
-		AddRunItem(NameCmd.first, NameCmd.second);
-		ui.cmbDblClick->addItem(NameCmd.second, "");
+		AddRunItem(NameIcon.first, NameIcon.second, NameCmd.second);
 	}
 
 	QString Action = m_pBox->GetText("DblClickAction");
@@ -366,9 +368,17 @@ void COptionsWindow::SaveGeneral()
 	QStringList RunCommands;
 	for (int i = 0; i < ui.treeRun->topLevelItemCount(); i++) {
 		QTreeWidgetItem* pItem = ui.treeRun->topLevelItem(i);
-		RunCommands.append(pItem->text(0) + "|" + pItem->text(1));
+		if(pItem->text(1).isEmpty())
+			RunCommands.prepend(pItem->text(0) + "|" + pItem->text(2));
+		else
+			RunCommands.prepend(pItem->text(0) + "," + pItem->text(1) + "|" + pItem->text(2));
+
 	}
-	WriteTextList("RunCommand", RunCommands);
+	//WriteTextList("RunCommand", RunCommands);
+	m_pBox->DelValue("RunCommand");
+	foreach(const QString& Value, RunCommands)
+		m_pBox->InsertText("RunCommand", Value);
+
 
 	if (ui.cmbVersion->isEnabled()) 
 	{
@@ -886,7 +896,7 @@ void COptionsWindow::OnBrowsePath()
 	if (Name.isEmpty())
 		return;
 
-	AddRunItem(Name, "\"" + Value + "\"");
+	AddRunItem(Name, "", "\"" + Value + "\"");
 	m_GeneralChanged = true;
 	OnOptChanged();
 }
@@ -901,18 +911,40 @@ void COptionsWindow::OnAddCommand()
 	if (Name.isEmpty())
 		return;
 
-	AddRunItem(Name, Value);
-	m_GeneralChanged = true;
-	OnOptChanged();
+	AddRunItem(Name, "", Value);
+	OnRunChanged();
 }
 
-void COptionsWindow::AddRunItem(const QString& Name, const QString& Command)
+void COptionsWindow::AddRunItem(const QString& Name, const QString& Icon, const QString& Command)
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
 	pItem->setText(0, Name);
-	pItem->setText(1, Command);
+	pItem->setText(1, Icon);
+	pItem->setText(2, Command);
 	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
 	ui.treeRun->addTopLevelItem(pItem);
+}
+
+void COptionsWindow::OnCommandUp()
+{
+	int index = ui.treeRun->indexOfTopLevelItem(ui.treeRun->currentItem());
+	if (index > 0) {
+		QTreeWidgetItem* pItem = ui.treeRun->takeTopLevelItem(index);
+		ui.treeRun->insertTopLevelItem(index - 1, pItem);
+		ui.treeRun->setCurrentItem(pItem);
+		OnRunChanged();
+	}
+}
+
+void COptionsWindow::OnCommandDown()
+{
+	int index = ui.treeRun->indexOfTopLevelItem(ui.treeRun->currentItem());
+	if (index < ui.treeRun->topLevelItemCount()-1) {
+		QTreeWidgetItem* pItem = ui.treeRun->takeTopLevelItem(index);
+		ui.treeRun->insertTopLevelItem(index + 1, pItem);
+		ui.treeRun->setCurrentItem(pItem);
+		OnRunChanged();
+	}
 }
 
 void COptionsWindow::OnDelCommand()
@@ -922,8 +954,7 @@ void COptionsWindow::OnDelCommand()
 		return;
 
 	delete pItem;
-	m_GeneralChanged = true;
-	OnOptChanged();
+	OnRunChanged();
 }
 
 void COptionsWindow::UpdateBoxType()

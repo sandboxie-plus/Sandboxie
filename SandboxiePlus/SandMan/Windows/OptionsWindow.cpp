@@ -163,6 +163,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	QSharedPointer<CSandBoxPlus> pBoxPlus = m_pBox.objectCast<CSandBoxPlus>();
 	if (!pBoxPlus.isNull())
 		m_Programs = pBoxPlus->GetRecentPrograms();
+	m_Programs.insert("program.exe");
 
 	Qt::WindowFlags flags = windowFlags();
 	flags |= Qt::CustomizeWindowHint;
@@ -209,7 +210,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabsSecurity->setCurrentIndex(0);
 	ui.tabsSecurity->setTabIcon(0, CSandMan::GetIcon("Shield7"));
 	ui.tabsSecurity->setTabIcon(1, CSandMan::GetIcon("Fence"));
-	ui.tabsSecurity->setTabIcon(2, CSandMan::GetIcon("Shield12"));
+	ui.tabsSecurity->setTabIcon(2, CSandMan::GetIcon("Shield2"));
+	ui.tabsSecurity->setTabIcon(3, CSandMan::GetIcon("Shield12"));
 
 	ui.tabsForce->setCurrentIndex(0);
 	ui.tabsForce->setTabIcon(0, CSandMan::GetIcon("Force"));
@@ -371,6 +373,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	AddIconToLabel(ui.lblToken, CSandMan::GetIcon("Sandbox").pixmap(size,size));
 	AddIconToLabel(ui.lblIsolation, CSandMan::GetIcon("Fence").pixmap(size,size));
 	AddIconToLabel(ui.lblAccess, CSandMan::GetIcon("NoAccess").pixmap(size,size));
+	AddIconToLabel(ui.lblProtection, CSandMan::GetIcon("EFence").pixmap(size,size));
 	AddIconToLabel(ui.lblMonitor, CSandMan::GetIcon("Monitor").pixmap(size,size));
 	AddIconToLabel(ui.lblTracing, CSandMan::GetIcon("SetLogging").pixmap(size,size));
 
@@ -531,7 +534,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.btnEditIni, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
 	connect(ui.btnSaveIni, SIGNAL(clicked(bool)), this, SLOT(OnSaveIni()));
 	connect(ui.btnCancelEdit, SIGNAL(clicked(bool)), this, SLOT(OnCancelEdit()));
-	connect(ui.txtIniSection, SIGNAL(textChanged()), this, SLOT(OnOptChanged()));
+	connect(ui.txtIniSection, SIGNAL(textChanged()), this, SLOT(OnIniChanged()));
 
 	//
 
@@ -983,14 +986,14 @@ void COptionsWindow::reject()
 	this->close();
 }
 
-void COptionsWindow::SetProgramItem(QString Program, QTreeWidgetItem* pItem, int Column, const QString& Sufix)
+void COptionsWindow::SetProgramItem(QString Program, QTreeWidgetItem* pItem, int Column, const QString& Sufix, bool bList)
 {
 	pItem->setData(Column, Qt::UserRole, Program);
 	if (Program.left(1) == "<")
 		Program = tr("Group: %1").arg(Program.mid(1, Program.length() - 2));
 	else if (Program.isEmpty() || Program == "*")
 		Program = tr("All Programs");
-	else
+	else if(bList)
 		m_Programs.insert(Program);
 	pItem->setText(Column, Program + Sufix);
 }
@@ -1033,7 +1036,7 @@ void COptionsWindow::OnTab(QWidget* pTab)
 	if (pTab == ui.tabEdit)
 	{
 		LoadIniSection();
-		ui.txtIniSection->setReadOnly(true);
+		//ui.txtIniSection->setReadOnly(true);
 	}
 	else 
 	{
@@ -1117,7 +1120,7 @@ void COptionsWindow::SetIniEdit(bool bEnable)
 	}
 	ui.btnSaveIni->setEnabled(bEnable);
 	ui.btnCancelEdit->setEnabled(bEnable);
-	ui.txtIniSection->setReadOnly(!bEnable);
+	//ui.txtIniSection->setReadOnly(!bEnable);
 	ui.btnEditIni->setEnabled(!bEnable);
 }
 
@@ -1132,9 +1135,19 @@ void COptionsWindow::OnSaveIni()
 	SetIniEdit(false);
 }
 
+void COptionsWindow::OnIniChanged()
+{
+	if (m_HoldChange)
+		return;
+	if(ui.btnEditIni->isEnabled())
+		SetIniEdit(true);
+	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
+}
+
 void COptionsWindow::OnCancelEdit()
 {
 	SetIniEdit(false);
+	LoadIniSection();
 }
 
 void COptionsWindow::LoadIniSection()

@@ -26,6 +26,7 @@ typedef long NTSTATUS;
 #include "global.h"
 #include "core/dll/sbiedll.h"
 #include "common/win32_ntddk.h"
+#include "common/defines.h"
 
 
 //---------------------------------------------------------------------------
@@ -46,7 +47,7 @@ void DoListSections(void)
 
     while (1) {
 
-        WCHAR section_name[34];
+        WCHAR section_name[BOXNAME_COUNT];
         index = SbieApi_EnumBoxesEx(
                     index, section_name, TRUE);
         if (index == -1)

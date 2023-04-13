@@ -105,7 +105,7 @@ struct tagSBIE_INI_GET_USER_RPL
 {
     MSG_HEADER h;       // status is STATUS_SUCCESS or STATUS_UNSUCCESSFUL
     BOOLEAN admin;
-    WCHAR section[34];
+    WCHAR section[BOXNAME_COUNT];
     ULONG name_len;
     WCHAR name[1];
 };

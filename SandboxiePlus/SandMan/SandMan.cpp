@@ -678,7 +678,6 @@ void CSandMan::CreateOldMenus()
 		m_pSetContainer->setData(CSettingsWindow::eAdvanced);
 
 		m_pArrangeGroups = m_pSandbox->addAction(tr("Set Layout and Groups"), this, SLOT(OnSettingsAction()));
-		m_pArrangeGroups->setCheckable(true);
 
 		m_pShowHidden = m_pSandbox->addAction(tr("Reveal Hidden Boxes"));
 		m_pShowHidden->setCheckable(true);

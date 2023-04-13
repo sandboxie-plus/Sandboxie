@@ -123,16 +123,21 @@ void addItemToShellContextMenu(HMENU hMenu, const wchar_t *name, int ID)
     InsertMenuItem(hMenu, 0, TRUE, &menu_item_info);
 }
 
-int openShellContextMenu(const QStringList& Files, void * parentWindow, const CSandBoxPtr& pBox)
+int openShellContextMenu(const QStringList& Files, void* parentWindow, const CSandBoxPtr& pBox)
 {
+    CComPtr<IShellFolder> pDesktop;
+    if (!SUCCEEDED(SHGetDesktopFolder(&pDesktop)))
+        return 0;
+
     std::list<CComHeapPtr<ITEMIDLIST_ABSOLUTE>> items;
     items.resize(Files.count());
     auto IT = items.begin();
     foreach(QString File, Files) {
-        CComPtr<IShellItem> item;
-        SHCreateItemFromParsingName(File.toStdWString().c_str(), NULL, IID_PPV_ARGS(&item));
-        CComQIPtr<IPersistIDList> idl(item);
-        idl->GetIDList(&*IT++);
+        //CComPtr<IShellItem> item;
+        //SHCreateItemFromParsingName(File.toStdWString().c_str(), NULL, IID_PPV_ARGS(&item));
+        //CComQIPtr<IPersistIDList> idl(item);
+        //idl->GetIDList(&*IT++);
+        pDesktop->ParseDisplayName((HWND)parentWindow, NULL, (wchar_t*)File.toStdWString().c_str(), NULL, &*IT++, NULL);
     }
 
     std::vector<LPCITEMIDLIST> list;
@@ -140,19 +145,33 @@ int openShellContextMenu(const QStringList& Files, void * parentWindow, const CS
     LPCITEMIDLIST* listPtr = &list.front();
     for (auto I = items.begin(); I != items.end(); I++)
         *listPtr++ = *I;
-    CComPtr<IShellItemArray> array;
-    SHCreateShellItemArrayFromIDLists(list.size(), &list.front(), &array);
 
-    
-    CComPtr<IContextMenu> menu;
-    array->BindToHandler(NULL, BHID_SFUIObject, IID_PPV_ARGS(&menu));
-    if (!menu) 
+    CComPtr<IContextMenu> pContextMenu;
+    //CComPtr<IShellItemArray> array;
+    //SHCreateShellItemArrayFromIDLists(list.size(), (LPCITEMIDLIST*)&list.front(), &array);
+    //array->BindToHandler(NULL, BHID_SFUIObject, IID_PPV_ARGS(&pContextMenu)); // note: this fails when the files have different parent folders
+    //if (!pContextMenu) // note: with the below approche proeprties and delete does not work, so a custom handler would be needed
+    //    pDesktop->GetUIObjectOf((HWND)parentWindow, list.size(), (LPCITEMIDLIST*)&list.front(), IID_IContextMenu, NULL, (void**)&pContextMenu); 
+    {
+        DEFCONTEXTMENU details = { 0 };
+        details.hwnd = (HWND)parentWindow;
+        //details.pcmcb = pContextMenuCB;
+        //details.pidlFolder = NULL;
+        details.psf = pDesktop;
+        details.cidl = list.size();
+        details.apidl = reinterpret_cast<PCUITEMID_CHILD_ARRAY>(&list.front());
+        //details.punkAssociationInfo = NULL;
+        //details.cKeys = 0;
+        //details.aKeys = NULL;
+        SHCreateDefaultContextMenu(&details, IID_IContextMenu, reinterpret_cast<LPVOID*>(&pContextMenu));
+    }
+    if (!SUCCEEDED(!pContextMenu))
         return 0;
 
     HMENU hMenu = CreatePopupMenu();
     if (!hMenu)
         return 0;
-    if (SUCCEEDED(menu->QueryContextMenu(hMenu, 0, 1, 0x7FFF, CMF_NORMAL)))
+    if (SUCCEEDED(pContextMenu->QueryContextMenu(hMenu, 0, 1, 0x7FFF, CMF_NORMAL)))
     {
         addSeparatorToShellContextMenu(hMenu);
 
@@ -189,7 +208,7 @@ int openShellContextMenu(const QStringList& Files, void * parentWindow, const CS
             info.lpVerb = MAKEINTRESOURCEA(iCmd - 1);
             info.lpVerbW = MAKEINTRESOURCEW(iCmd - 1);
             info.nShow = SW_SHOWNORMAL;
-            menu->InvokeCommand((LPCMINVOKECOMMANDINFO)&info);
+            pContextMenu->InvokeCommand((LPCMINVOKECOMMANDINFO)&info);
         }
     }
     DestroyMenu(hMenu);

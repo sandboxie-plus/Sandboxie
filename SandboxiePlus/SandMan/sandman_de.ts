@@ -7099,7 +7099,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation>Der Insiderkanal bietet frühen Zugriff auf neue Funktionen und Bugfixes, die irgendwann allgemein veröffentlicht werden sollen,als auch alle relevanten Verbesserungen des Stabilkanals. 
-Anders, als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fehlherhaften, oder experimentellen Änderungen, welche möglicherweise einer breiten Verwendung entgegenstehen.</translation>
+Anders, als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fehlerhaften, oder experimentellen Änderungen, welche möglicherweise einer breiten Verwendung entgegenstehen.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1311"/>

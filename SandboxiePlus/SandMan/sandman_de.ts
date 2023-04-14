@@ -6929,7 +6929,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="361"/>
         <source>Sandboxie may be issue &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</source>
-        <translation>Sandboxie gibt &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE Nachrichten&lt;/a&gt; in das Nachrichtenprotokol aus und zeigt diese als Popups. Einige Nachrichten sind informativ und benachrichtigen über gewöhnliche, oder in manchen Fällen spezielle, Ereignisse die stattgefunden haben.Andere Nachrichten deuten einen Fehlerzustand an.&lt;br /&gt;Sie können ausgewählte SBIE Nachrichten verbergen, sodass diese nicht aufpoppen. Verwenden Sie hierzu die unten stehende Liste:</translation>
+        <translation>Sandboxie gibt &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE Nachrichten&lt;/a&gt; in das Nachrichtenprotokol aus und zeigt diese als Popups. Einige Nachrichten sind informativ und benachrichtigen über gewöhnliche, oder in manchen Fällen spezielle, Ereignisse die stattgefunden haben. Andere Nachrichten deuten einen Fehlerzustand an.&lt;br /&gt;Sie können ausgewählte SBIE Nachrichten verbergen, sodass diese nicht aufpoppen. Verwenden Sie hierzu die unten stehende Liste:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="391"/>

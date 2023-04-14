@@ -150,7 +150,7 @@ int openShellContextMenu(const QStringList& Files, void* parentWindow, const CSa
     //CComPtr<IShellItemArray> array;
     //SHCreateShellItemArrayFromIDLists(list.size(), (LPCITEMIDLIST*)&list.front(), &array);
     //array->BindToHandler(NULL, BHID_SFUIObject, IID_PPV_ARGS(&pContextMenu)); // note: this fails when the files have different parent folders
-    //if (!pContextMenu) // note: with the below approche proeprties and delete does not work, so a custom handler would be needed
+    //if (!pContextMenu) // note: with the below approch properties and delete does not work, so a custom handler would be needed
     //    pDesktop->GetUIObjectOf((HWND)parentWindow, list.size(), (LPCITEMIDLIST*)&list.front(), IID_IContextMenu, NULL, (void**)&pContextMenu); 
     {
         DEFCONTEXTMENU details = { 0 };

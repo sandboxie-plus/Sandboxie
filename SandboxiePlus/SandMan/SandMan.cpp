@@ -2168,12 +2168,12 @@ void CSandMan::UpdateCertState()
 			if (theConf->GetBool("Debug/CertFakeAboutToExpire", false))
 				g_CertInfo.expirers_in_sec = 3 * 24 * 3600;
 
-			// simulate certificate having expired but bing in the grace periode
+			// simulate certificate having expired but being in the grace periode
 			if (theConf->GetBool("Debug/CertFakeGracePeriode", false))
 				g_CertInfo.grace_period = 1;
 
 			// simulate a subscription type certificate having expired 
-			if (theConf->GetBool("Debug/CertFakeExpired", false)) {
+			if (theConf->GetBool("Debug/CertFakeOld", false)) {
 				g_CertInfo.valid = 0;
 				g_CertInfo.expired = 1;
 			}

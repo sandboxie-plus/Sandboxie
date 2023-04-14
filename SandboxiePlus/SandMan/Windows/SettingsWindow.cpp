@@ -997,11 +997,7 @@ void CSettingsWindow::UpdateUpdater()
 		ui.lblRevision->setText(QString());
 	}
 	else {
-		if (ui.radStable->isChecked() && (!g_CertInfo.valid
-#ifdef _DEBUG
-			|| (GetKeyState(VK_CONTROL) & 0x8000) != 0
-#endif
-			)) {
+		if (ui.radStable->isChecked() && (!g_CertInfo.valid)) {
 			ui.cmbUpdate->setEnabled(false);
 			ui.cmbUpdate->setCurrentIndex(ui.cmbUpdate->findData("ignore"));
 			ui.lblRevision->setText(tr("Supporter certificate required"));

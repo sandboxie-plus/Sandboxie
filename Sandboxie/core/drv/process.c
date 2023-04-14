@@ -730,7 +730,7 @@ _FX PROCESS *Process_Create(
     proc->dont_open_for_boxed = !proc->bAppCompartment && Conf_Get_Boolean(proc->box->name, L"DontOpenForBoxed", 0, TRUE); 
 
     //
-    // Sandboxie atempts to protect per process rules by allowing them only for host binaries
+    // Sandboxie attempts to protect per process rules by allowing them only for host binaries
     // this however has an obvious weakness, as those processes can still load boxed DLL's
     // with this option we can prevent that
     //

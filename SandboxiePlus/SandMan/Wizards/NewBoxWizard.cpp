@@ -572,7 +572,7 @@ void CSummaryPage::initializePage()
     else if(field("fakeAdmin").toBool())
         m_pSummary->append(tr("\nProcesses in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box."));
     else if(field("boxToken").toBool())
-        m_pSummary->append(tr("\nProcesses in this box will be running with a custom process token indicating the sandbox thay belong to."));
+        m_pSummary->append(tr("\nProcesses in this box will be running with a custom process token indicating the sandbox they belong to."));
 
     m_pSetDefault->setVisible(((CNewBoxWizard*)wizard())->m_bAdvanced);
 }

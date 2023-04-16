@@ -4,78 +4,93 @@
 <context>
     <name>CAdvancedPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="419"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="423"/>
         <source>Advanced Sandbox options</source>
         <translation>Opzioni avanzate dell&apos;area virtuale</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="420"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="424"/>
         <source>On this page advanced sandbox options can be configured.</source>
         <translation>In questa sezione, è possibile configurare le opzioni avanzate per l&apos;area virtuale.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="425"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="429"/>
         <source>Network Access</source>
         <translation>Accesso di rete</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="433"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="437"/>
         <source>Allow network/internet access</source>
         <translation>Consenti accesso di rete/internet</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="434"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="438"/>
         <source>Block network/internet by denying access to Network devices</source>
         <translation>Blocca rete/internet negando l&apos;accesso ai dispositivi di rete</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="436"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="440"/>
         <source>Block network/internet using Windows Filtering Platform</source>
         <translation>Blocca rete/internet usando la piattaforma di filtraggio di Windows</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="441"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="445"/>
         <source>Allow access to network files and folders</source>
         <oldsource>Allow access to network files and fodlers</oldsource>
         <translation>Consenti accesso ai file e alle cartelle di rete</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="442"/>
-        <location filename="Wizards/NewBoxWizard.cpp" line="458"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="446"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="462"/>
         <source>This option is not recommended for Hardened boxes</source>
         <oldsource>This option is not recomended for Hardened boxes</oldsource>
         <translation>Questa opzione non è raccomandata per le aree virtuali ristrette</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="448"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="452"/>
         <source>Admin Options</source>
         <translation>Opzioni amministrative</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="452"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="456"/>
         <source>Make applications think they are running elevated</source>
         <translation>Fai credere alle applicazioni di avviarsi con privilegi elevati</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="457"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="461"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
         <translation>Consenti l&apos;avvio di Windows Installer con un token di sistema nell&apos;area virtuale</translation>
+    </message>
+    <message>
+        <location filename="Wizards/NewBoxWizard.cpp" line="467"/>
+        <source>Box Options</source>
+        <translation type="unfinished">Opzioni area virtuale</translation>
+    </message>
+    <message>
+        <location filename="Wizards/NewBoxWizard.cpp" line="471"/>
+        <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
+        <translation type="unfinished">Usa autenticazione di Sandboxie invece di un token anonimo (sperimentale)</translation>
+    </message>
+    <message>
+        <location filename="Wizards/NewBoxWizard.cpp" line="472"/>
+        <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
+        <translation type="unfinished">L&apos;uso di un token di Sandboxie personalizzato consente di isolare meglio le singole aree virtuali e di mostrare nella colonna utente del task manager il nome dell&apos;area virtuale a cui appartiene un processo. Alcune soluzioni di sicurezza di terze parti potrebbero tuttavia avere problemi con i token personalizzati.</translation>
     </message>
 </context>
 <context>
     <name>CBoxTypePage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="162"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="165"/>
         <source>Create new Sandbox</source>
         <translation>Crea nuova area virtuale</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="169"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="172"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
         <translation>Un&apos;area virtuale isola il sistema dai processi avviati nell&apos;area virtuale, impedendogli di effettuare modifiche permanenti ad altri programmi e ai dati presenti nel computer. Il livello di isolamento impatta la tua sicurezza tanto quanto la compatibilità con le applicazioni, quindi ci sarà un livello diverso di isolamento in funzione del tipo di area virtuale selezionata. Sandboxie può anche proteggere i dati personali dall&apos;accesso di processi avviati sotto la sua supervisione.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="178"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="181"/>
         <source>Enter box name:</source>
         <translation>Immetti il nome dell&apos;area virtuale:</translation>
     </message>
@@ -84,53 +99,53 @@
         <translation type="vanished">Nuova area virtuale</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="196"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="199"/>
         <source>Select box type:</source>
         <oldsource>Sellect box type:</oldsource>
         <translation>Seleziona tipo di area virtuale:</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="199"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="202"/>
         <source>Hardened Sandbox with Data Protection</source>
         <translation>Area virtuale ristretta con protezione dati</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="200"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="203"/>
         <source>Security Hardened Sandbox</source>
         <translation>Area virtuale ristretta</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="201"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="204"/>
         <source>Sandbox with Data Protection</source>
         <translation>Area virtuale con protezione dati</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="202"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="205"/>
         <source>Standard Isolation Sandbox (Default)</source>
         <translation>Area virtuale con isolamento standard (Default)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="204"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="207"/>
         <source>Application Compartment with Data Protection</source>
         <translation>Compartimento applicazioni con protezione dati</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="205"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="208"/>
         <source>Application Compartment (NO Isolation)</source>
         <translation>Compartimento applicazioni (nessun isolamento)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="221"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="224"/>
         <source>Remove after use</source>
         <translation>Rimuovi dopo l&apos;uso</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="222"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="225"/>
         <source>After the last process in the box terminates, all data in the box will be deleted and the box itself will be removed.</source>
         <translation>Una volta terminato l&apos;ultimo processo nell&apos;area virtuale, tutti i dati presenti verranno eliminati e l&apos;area virtuale stessa verrà rimossa.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="227"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="230"/>
         <source>Configure advanced options</source>
         <translation>Configura opzioni avanzate</translation>
     </message>
@@ -406,13 +421,13 @@ Si prega di consultare la directory del profilo utente corretta.</translation>
 <context>
     <name>CFilesPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="293"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="297"/>
         <source>Sandbox location and behavior</source>
         <oldsource>Sandbox location and behavioure</oldsource>
         <translation>Percorso e comportamento dell&apos;area virtuale</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="294"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="298"/>
         <source>On this page the sandbox location and its behavior can be customized.
 You can use %USER% to save each users sandbox to an own folder.</source>
         <oldsource>On this page the sandbox location and its behaviorue can be customized.
@@ -421,64 +436,64 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 È possibile inserire %USER% per memorizzare ogni utente dell&apos;area virtuale su una propria cartella.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="299"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="303"/>
         <source>Sandboxed Files</source>
         <translation>File dell&apos;area virtuale</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="322"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="326"/>
         <source>Select Directory</source>
         <translation>Seleziona directory</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="330"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="334"/>
         <source>Virtualization scheme</source>
         <translation>Schema di virtualizzazione</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="334"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="338"/>
         <source>Version 1</source>
         <translation>Versione 1</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="335"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="339"/>
         <source>Version 2</source>
         <translation>Versione 2</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="341"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="345"/>
         <source>Separate user folders</source>
         <translation>Separa cartelle utente</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="346"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="350"/>
         <source>Use volume serial numbers for drives</source>
         <translation>Utilizzare i numeri di serie dei volumi per le unità</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="351"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="355"/>
         <source>Auto delete content when last process terminates</source>
         <translation>Elimina automaticamente il contenuto dell&apos;area virtuale una volta terminato l&apos;ultimo processo</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="358"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="362"/>
         <source>Enable Immediate Recovery of files from recovery locations</source>
         <translation>Attiva recupero immediato dei file dai percorsi di recupero</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="393"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="397"/>
         <source>The selected box location is not a valid path.</source>
         <oldsource>The sellected box location is not a valid path.</oldsource>
         <translation>La posizione dell&apos;area virtuale selezionata non è un percorso valido.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="398"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="402"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
         <oldsource>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</oldsource>
         <translation>La posizione dell&apos;area virtuale selezionata esiste e non è vuota, si consiglia di scegliere una nuova cartella oppure una vuota. Si desidera utilizzare una cartella esistente?</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="403"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="407"/>
         <source>The selected box location is not placed on a currently available drive.</source>
         <oldsource>The selected box location not placed on a currently available drive.</oldsource>
         <translation>La posizione dell&apos;area virtuale selezionata non si trova su un&apos;unità attualmente disponibile.</translation>
@@ -678,13 +693,13 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation>Creazione guidata dell&apos;area virtuale</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="132"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="135"/>
         <source>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you experience any unexpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure group.</source>
         <oldsource>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you expirience any unecpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure groupe.</oldsource>
         <translation>L&apos;area virtuale è stata creata usando il nuovo &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;schema di virtualizzazione versione 2&lt;/a&gt;. Se si verificano problemi imprevisti, passare allo schema di virtualizzazione versione 1 e segnalare il problema. L&apos;opzione per modificare questa impostazione si trova su Opzioni area virtuale -&gt; Opzioni File nel gruppo Struttura area virtuale.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="135"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="138"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Non mostrare più questo messaggio.</translation>
     </message>
@@ -4402,34 +4417,34 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
 <context>
     <name>CSummaryPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="500"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="515"/>
         <source>Create the new Sandbox</source>
         <translation>Crea nuova area virtuale</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="508"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="523"/>
         <source>Almost complete, click Finish to create a new sandbox and conclude the wizard.</source>
         <translation>Hai quasi finito, fare clic su Fine per creare una nuova area virtuale e concludere la procedura guidata.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="517"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="532"/>
         <source>Save options as new defaults</source>
         <translation>Salva le opzioni come default</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="528"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="543"/>
         <source>Don&apos;t show the summary page in future (unless advanced options were set)</source>
         <translation>Non mostrare la pagina di riepilogo in futuro (a meno che non siano state definite opzioni avanzate)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="547"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="562"/>
         <source>
 This Sandbox will be saved to: %1</source>
         <translation>
 Questa area virtuale verrà salvata in: %1</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="550"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="565"/>
         <source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
         <oldsource>
@@ -4438,21 +4453,21 @@ This box&apos;s content will be DISCARDED when its closed, and the box will be r
 Il contenuto di questa area virtuale verrà SCARTATO alla chiusura e l&apos;area virtuale sarà rimossa.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="552"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="567"/>
         <source>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
         <translation>
 Quest&apos;area virtuale SCARTERÀ il suo contenuto non appena viene chiusa, è adatta solo per dati temporanei.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="554"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="569"/>
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
         <translation>
 I processi in questa area virtuale non potranno accedere a Internet o alla rete locale, in modo da garantire la riservatezza di tutti i dati consultati.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="556"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="571"/>
         <source>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
         <oldsource>
@@ -4461,14 +4476,20 @@ This box will run the MSIServer (*.msi installer service) with a system token, t
 Quest&apos;area virtuale eseguirà Windows Installer (servizio di installazione *.msi) con un token di sistema, questo migliora la compatibilità ma riduce l&apos;isolamento di sicurezza.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="558"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="573"/>
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
         <translation>
 I processi in questa area virtuale penseranno di essere eseguiti con privilegi amministrativi, senza averli realmente, quindi gli installer possono essere usati anche in un&apos;area virtuale ristretta.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="586"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="575"/>
+        <source>
+Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/NewBoxWizard.cpp" line="606"/>
         <source>Failed to create new box: %1</source>
         <translation>Impossibile creare la nuova area virtuale: %1</translation>
     </message>

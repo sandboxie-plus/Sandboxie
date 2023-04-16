@@ -417,7 +417,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.lblSupport, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 	connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 	connect(ui.lblCertExp, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
-	connect(ui.lblInsiderInfo, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+	//connect(ui.lblInsiderInfo, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 
 	m_CertChanged = false;
 	connect(ui.txtCertificate, SIGNAL(textChanged()), this, SLOT(CertChanged()));
@@ -434,14 +434,14 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.lblCurrent, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
 	connect(ui.lblStable, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
 	connect(ui.lblPreview, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
-	connect(ui.lblInsider, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
+	//connect(ui.lblInsider, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
 	//connect(ui.lblInsiderInfo, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
 
 	connect(ui.chkAutoUpdate, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
 
 	connect(ui.radStable, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
 	connect(ui.radPreview, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
-	connect(ui.radInsider, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
+	//connect(ui.radInsider, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
 
 	connect(ui.cmbUpdate, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.cmbRelease, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
@@ -930,7 +930,7 @@ void CSettingsWindow::LoadSettings()
 	QString ReleaseChannel = theConf->GetString("Options/ReleaseChannel", "stable");
 	ui.radStable->setChecked(ReleaseChannel == "stable");
 	ui.radPreview->setChecked(ReleaseChannel == "preview");
-	ui.radInsider->setChecked(ReleaseChannel == "insider");
+	//ui.radInsider->setChecked(ReleaseChannel == "insider");
 
 	m_HoldChange = true;
 	UpdateUpdater();
@@ -985,7 +985,7 @@ void CSettingsWindow::UpdateCert()
 		ui.txtCertificate->setPalette(palette);
 	}
 
-	ui.radInsider->setEnabled(g_CertInfo.insider);
+	//ui.radInsider->setEnabled(g_CertInfo.insider);
 }
 
 void CSettingsWindow::UpdateUpdater()
@@ -1326,8 +1326,8 @@ void CSettingsWindow::SaveSettings()
 		ReleaseChannel = "stable";
 	else if (ui.radPreview->isChecked())
 		ReleaseChannel = "preview";
-	else if (ui.radInsider->isChecked())
-		ReleaseChannel = "insider";
+	//else if (ui.radInsider->isChecked())
+	//	ReleaseChannel = "insider";
 	if(!ReleaseChannel.isEmpty()) theConf->SetValue("Options/ReleaseChannel", ReleaseChannel);
 
 	theConf->SetValue("Options/OnNewUpdate", ui.cmbUpdate->currentData());
@@ -1820,8 +1820,8 @@ void CSettingsWindow::OnUpdateData(const QVariantMap& Data, const QVariantMap& P
 	ui.lblCurrent->setText(tr("%1 (Current)").arg(Version));
 	ui.lblStable->setText(CSettingsWindow__MkVersion("stable", Releases));
 	ui.lblPreview->setText(CSettingsWindow__MkVersion("preview", Releases));
-	if(ui.radInsider->isEnabled())
-		ui.lblInsider->setText(CSettingsWindow__MkVersion("insider", Releases));
+	//if(ui.radInsider->isEnabled())
+	//	ui.lblInsider->setText(CSettingsWindow__MkVersion("insider", Releases));
 }
 
 void CSettingsWindow::OnUpdate(const QString& Channel)

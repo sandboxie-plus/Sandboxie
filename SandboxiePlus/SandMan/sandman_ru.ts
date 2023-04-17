@@ -62,17 +62,17 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="467"/>
         <source>Box Options</source>
-        <translation type="unfinished">Опции песочницы</translation>
+        <translation>Опции песочницы</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="471"/>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
-        <translation type="unfinished">Использовать логин Sandboxie вместо анонимного токена (экспериментально)</translation>
+        <translation>Использовать логин Sandboxie вместо анонимного токена (экспериментально)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="472"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation type="unfinished">Использование пользовательского токена Sandboxie позволяет лучше изолировать отдельные песочницы друг от друга, а также показывает в пользовательском столбце диспетчеров задач имя песочницы, к которой принадлежит процесс. Однако у некоторых сторонних решений безопасности могут быть проблемы с пользовательскими токенами.</translation>
+        <translation>Использование пользовательского токена Sandboxie позволяет лучше изолировать отдельные песочницы друг от друга, а также показывает в пользовательском столбце диспетчеров задач имя песочницы, к которой принадлежит процесс. Однако у некоторых сторонних решений безопасности могут быть проблемы с пользовательскими токенами.</translation>
     </message>
 </context>
 <context>
@@ -91,10 +91,6 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="181"/>
         <source>Enter box name:</source>
         <translation>Введите имя песочницы:</translation>
-    </message>
-    <message>
-        <source>New Box</source>
-        <translation type="vanished">Новая песочница</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="199"/>
@@ -152,62 +148,62 @@
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="844"/>
         <source>Create Web Browser Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать шаблон веб-браузера</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="845"/>
         <source>Configure web browser template options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Настроить параметры шаблона веб-браузера.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="855"/>
         <source>Force the Web Browser to run in this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Заставить веб-браузер работать в этой песочнице</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="859"/>
         <source>Allow direct access to the entire Web Browser profile folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить прямой доступ ко всей папке профиля веб-браузера</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="863"/>
         <source>Allow direct access to Web Browser&apos;s phishing database</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить прямой доступ к фишинговой базе данных веб-браузера</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="867"/>
         <source>Allow direct access to Web Browser&apos;s session management</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить прямой доступ к управлению сеансом веб-браузера</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="871"/>
         <source>Allow direct access to Web Browser&apos;s sync data</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить прямой доступ к данным синхронизации веб-браузера</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="875"/>
         <source>Allow direct access to Web Browser&apos;s preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить прямой доступ к настройкам веб-браузера</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="879"/>
         <source>Allow direct access to Web Browser&apos;s passwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить прямой доступ к паролям веб-браузера</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="883"/>
         <source>Allow direct access to Web Browser&apos;s cookies</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить прямой доступ к файлам cookie веб-браузера</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="887"/>
         <source>Allow direct access to Web Browser&apos;s bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить прямой доступ к закладкам веб-браузера</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="891"/>
         <source>Allow direct access to Web Browser&apos;s bookmark and history database</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить прямой доступ к базе данных закладок и истории веб-браузера</translation>
     </message>
 </context>
 <context>
@@ -215,73 +211,71 @@
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="517"/>
         <source>Create Web Browser Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать шаблон веб-браузера</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="518"/>
         <source>Configure your Web Browser&apos;s profile directories.</source>
-        <oldsource>Configure your Web Browsers profile directories.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Настроить каталоги профиля вашего веб-браузера.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="526"/>
         <source>User profile(s) directory:</source>
-        <translation type="unfinished"></translation>
+        <translation>Каталог профилей пользователей:</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="528"/>
         <source>Show also imperfect matches</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать также неполные совпадения</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="534"/>
         <source>Browser Executable (*.exe)</source>
-        <translation type="unfinished"></translation>
+        <translation>Исполняемый файл браузера (*.exe)</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="551"/>
         <source>Continue without browser profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Продолжить без профиля браузера</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="712"/>
         <source>Configure your Gecko based Browsers profile directories.</source>
-        <translation type="unfinished"></translation>
+        <translation>Настроить каталоги профилей браузеров на основе Gecko.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="716"/>
         <source>Configure your Chromium based Browsers profile directories.</source>
-        <translation type="unfinished"></translation>
+        <translation>Настроить каталоги профилей браузеров на основе Chromium.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="796"/>
         <source>No suitable folders have been found.
 Note: you need to run the browser unsandboxed for them to get created.
 Please browse to the correct user profile directory.</source>
-        <oldsource>No suitable fodlers have been found.
-Note: you need to run the browser unsandboxed for them to get created.
-Please browse to the correct user profile directory.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Подходящие папки не найдены.
+Примечание: вам нужно запустить браузер без песочницы, чтобы они были созданы.
+Пожалуйста, перейдите в правильный каталог профиля пользователя.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="801"/>
         <source>Please choose the correct user profile directory, if it is not listed you may need to browse to it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, выберите правильный каталог профиля пользователя, если его нет в списке, вам может потребоваться перейти к нему.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="807"/>
         <source>Please ensure the selected directory is correct, the wizard is not confident in all the presented options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, убедитесь, что выбранный каталог правильный, мастер настройки не уверен во всех представленных параметрах.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="810"/>
         <source>Please ensure the selected directory is correct.</source>
-        <translation type="unfinished"></translation>
+        <translation>Убедитесь, что выбран правильный каталог.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="815"/>
         <source>This path does not look like a valid profile directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот путь не похож на допустимый каталог профиля.</translation>
     </message>
 </context>
 <context>
@@ -289,51 +283,47 @@ Please browse to the correct user profile directory.</oldsource>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="325"/>
         <source>Create Web Browser Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать шаблон веб-браузера</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="326"/>
         <source>Select your Web Browsers main executable, this will allow Sandboxie to identify the browser.</source>
-        <oldsource>Select your Web Browsers main executable, this will allow sandboxie to identify the browser.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Выберите основной исполняемый файл веб-браузера, это позволит Sandboxie идентифицировать браузер.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="336"/>
         <source>Enter browser name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите имя браузера:</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="347"/>
         <source>Main executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</source>
-        <oldsource>Mein executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Основной исполняемый файл (например, firefox.exe, chrome.exe, msedge.exe и т.&#xa0;д.):</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="351"/>
         <source>Browser executable (*.exe)</source>
-        <oldsource>Browser Executable (*.exe)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Исполняемый файл браузера (*.exe)</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="451"/>
         <source>The browser appears to be Gecko based, like Mozilla Firefox and its derivatives.</source>
-        <translation type="unfinished"></translation>
+        <translation>Браузер, похоже, основан на Gecko, например Mozilla Firefox и его производные.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="454"/>
         <source>The browser appears to be Chromium based, like Microsoft Edge or Google Chrome and its derivatives.</source>
-        <translation type="unfinished"></translation>
+        <translation>Браузер, похоже, основан на Chromium, например Microsoft Edge или Google Chrome и его производных.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="457"/>
         <source>Browser could not be recognized, template cannot be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Браузер не может быть распознан, шаблон не может быть создан.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="504"/>
         <source>This browser name is already in use, please choose an other one.</source>
-        <oldsource>This browser name is already in use, please chooe an other one.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Это имя браузера уже используется, выберите другое.</translation>
     </message>
 </context>
 <context>
@@ -485,8 +475,7 @@ You can use %USER% to save each users sandbox to an own folder.</source>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="407"/>
         <source>The selected box location is not placed on a currently available drive.</source>
-        <oldsource>The selected box location not placed on a currently available drive.</oldsource>
-        <translation type="unfinished">Выбранное расположение песочницы не размещено на доступном в данный момент диске.</translation>
+        <translation>Выбранное расположение песочницы не размещено на доступном в данный момент диске.</translation>
     </message>
 </context>
 <context>
@@ -512,50 +501,54 @@ You can use %USER% to save each users sandbox to an own folder.</source>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="936"/>
         <source>Create Web Browser Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать шаблон веб-браузера</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="944"/>
         <source>Almost complete, click Finish to create a new  Web Browser Template and conclude the wizard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Почти завершено, нажмите &quot;Готово&quot;, чтобы создать новый шаблон веб-браузера и завершить работу мастера.</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="962"/>
         <source>Browser name: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Имя браузера: %1
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="966"/>
         <source>Browser Type: Gecko (Mozilla Firefox)
 </source>
-        <oldsource>Browser Type: Gecko (Mozilla firefox)
-</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Тип браузера: Gecko (Mozilla Firefox)
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="967"/>
         <source>Browser Type: Chromium (Google Chrome)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Тип браузера: Chromium (Google Chrome)
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="969"/>
         <source>
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="970"/>
         <source>Browser executable path: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Путь к исполняемому файлу браузера: %1
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="980"/>
         <source>Browser profile path: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Путь к профилю браузера: %1
+</translation>
     </message>
 </context>
 <context>
@@ -633,10 +626,6 @@ You can use %USER% to save each users sandbox to an own folder.</source>
         <location filename="Windows/NewBoxWindow.cpp" line="23"/>
         <source>Sandboxie-Plus - Create New Box</source>
         <translation>Sandboxie-Plus - Создать новую песочницу</translation>
-    </message>
-    <message>
-        <source>New Box</source>
-        <translation type="vanished">Новая песочница</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="39"/>
@@ -1539,16 +1528,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="222"/>
         <source>Do you really want to delete the selected local template(s)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы действительно хотите удалить выбранные локальные шаблоны?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="228"/>
         <source>Only local templates can be removed!</source>
         <translation>Только локальные шаблоны могут быть удалены!</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete the selected local template?</source>
-        <translation type="vanished">Вы действительно хотите удалить выбранный локальный шаблон?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="181"/>
@@ -1568,7 +1553,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="524"/>
         <source>Add %1 Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить шаблон %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="624"/>
@@ -3542,7 +3527,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="168"/>
         <source>Standard Applications</source>
-        <translation type="unfinished"></translation>
+        <translation>Стандартные приложения</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="188"/>
@@ -3725,10 +3710,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="285"/>
         <source>(Host) Start Menu</source>
         <translation>(Хост) Меню &quot;Пуск&quot;</translation>
-    </message>
-    <message>
-        <source>More Tools</source>
-        <translation type="vanished">Дополнительные инструменты</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="222"/>
@@ -4113,12 +4094,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="410"/>
         <source>Add %1 Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить шаблон %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="595"/>
         <source>Please enter message</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, введите сообщение</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="627"/>
@@ -4245,17 +4226,17 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1631"/>
         <source>Please enter the template identifier</source>
-        <translation type="unfinished">Пожалуйста, введите идентификатор шаблона</translation>
+        <translation>Пожалуйста, введите идентификатор шаблона</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1639"/>
         <source>Error: %1</source>
-        <translation type="unfinished">Ошибка: %1</translation>
+        <translation>Ошибка: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1664"/>
         <source>Do you really want to delete the selected local template(s)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы действительно хотите удалить выбранные локальные шаблоны?</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1820"/>
@@ -4416,8 +4397,6 @@ Processes in this box will not be able to access the internet or the local netwo
         <location filename="Wizards/NewBoxWizard.cpp" line="571"/>
         <source>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
-        <oldsource>
-This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatybility but reduces the security isolation.</oldsource>
         <translation>
 В этой песочнице будет запускаться MSIServer (служба установщика *.msi) с системным токеном, это улучшает совместимость, но снижает изоляцию безопасности.</translation>
     </message>
@@ -4432,7 +4411,8 @@ Processes in this box will think they are run with administrative privileges, wi
         <location filename="Wizards/NewBoxWizard.cpp" line="575"/>
         <source>
 Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Процессы в этой песочнице будут запущены с пользовательским токеном процесса, указывающим, к какой песочнице они принадлежат.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="606"/>
@@ -4528,17 +4508,17 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="258"/>
         <source>Create new Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать новый шаблон</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="267"/>
         <source>Select template type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите тип шаблона:</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="271"/>
         <source>%1 template</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 шаблон</translation>
     </message>
 </context>
 <context>
@@ -4546,72 +4526,71 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="37"/>
         <source>Compatibility Template Wizard</source>
-        <oldsource>Compatybility Template Wizard</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Мастер шаблонов совместимости</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="48"/>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользовательский</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="49"/>
         <source>Web Browser</source>
-        <translation type="unfinished">Веб-браузер</translation>
+        <translation>Веб-браузер</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="82"/>
         <source>Force %1 to run in this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Заставить %1 работать в этой песочнице</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="100"/>
         <source>Allow direct access to the entire %1 profile folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить прямой доступ ко всей папке профиля %1</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="113"/>
         <location filename="Wizards/TemplateWizard.cpp" line="168"/>
         <source>Allow direct access to %1 phishing database</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить прямой доступ к фишинговой базе данных %1</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="127"/>
         <source>Allow direct access to %1 session management</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить прямой доступ к управлению сеансом %1</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="136"/>
         <location filename="Wizards/TemplateWizard.cpp" line="199"/>
         <source>Allow direct access to %1 passwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить прямой доступ к паролям %1</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="146"/>
         <location filename="Wizards/TemplateWizard.cpp" line="208"/>
         <source>Allow direct access to %1 cookies</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить прямой доступ к %1 файлам cookie</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="155"/>
         <location filename="Wizards/TemplateWizard.cpp" line="227"/>
         <source>Allow direct access to %1 bookmark and history database</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить прямой доступ к %1 базе данных закладок и истории</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="180"/>
         <source>Allow direct access to %1 sync data</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить прямой доступ к данным синхронизации %1</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="190"/>
         <source>Allow direct access to %1 preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить прямой доступ к настройкам %1</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="217"/>
         <source>Allow direct access to %1 bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить прямой доступ к закладкам %1</translation>
     </message>
 </context>
 <context>
@@ -5244,10 +5223,6 @@ Processes in this box will be running with a custom process token indicating the
         <translation>Структуру песочницы можно изменить только тогда, когда она пуста</translation>
     </message>
     <message>
-        <source>Allow sandboxed processes to open files protected by EFS</source>
-        <translation type="vanished">Разрешить изолированным процессам открывать файлы, защищенные EFS</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="352"/>
         <source>Disk/File access</source>
         <translation>Доступ к диску/файлу</translation>
@@ -5314,17 +5289,17 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Forms/OptionsWindow.ui" line="874"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Иконка</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="899"/>
         <source>Move Up</source>
-        <translation type="unfinished">Сдвинуть вверх</translation>
+        <translation>Сдвинуть вверх</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="918"/>
         <source>Move Down</source>
-        <translation type="unfinished">Сдвинуть вниз</translation>
+        <translation>Сдвинуть вниз</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1153"/>
@@ -5334,34 +5309,35 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1174"/>
         <source>Various isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Различные функции изоляции могут нарушить совместимость с некоторыми приложениями. Если вы используете эту песочницу &lt;b&gt;НЕ для безопасности&lt;/b&gt;, а для переносимости приложений, изменив эти параметры, вы можете восстановить совместимость, пожертвовав некоторой безопасностью.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1272"/>
         <source>Access Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Изоляция доступа</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1299"/>
         <location filename="Forms/OptionsWindow.ui" line="1357"/>
         <source>Image Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Защита изображения</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1307"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
-        <translation type="unfinished"></translation>
+        <translation>Выдать сообщение 1305, когда программа пытается загрузить изолированную dll</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1340"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Запретить программам в песочнице, установленным на хосте, загружать библиотеки dll из песочницы</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1383"/>
         <source>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>Правила доступа к ресурсам Sandboxie часто дискриминируют двоичные файлы программ, расположенные внутри песочницы. OpenFilePath и OpenKeyPath работают только для двоичных файлов приложений, изначально расположенных на хосте. Чтобы определить правило без этого ограничения, необходимо использовать OpenPipePath или OpenConfPath. Аналогично, все директивы Closed(File|Key|Ipc)Path, которые определены отрицанием, например. ‘ClosedFilePath=! iexplore.exe,C:Users*’ всегда будет закрыт для двоичных файлов, находящихся внутри песочницы. Обе политики ограничения можно отключить на странице &quot;Политики доступа&quot;.
+Это делается для того, чтобы мошеннические процессы внутри песочницы не создавали переименованные копии самих себя и не получали доступ к защищенным ресурсам. Другой вектор эксплойта — внедрение библиотеки в авторизованный процесс, чтобы получить доступ ко всему, к чему ему разрешен доступ. С помощью Host Image Protection это можно предотвратить, заблокировав приложения (установленные на хосте), работающие внутри песочницы, от загрузки библиотек из самой песочницы.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1404"/>
@@ -5571,8 +5547,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2618"/>
         <source>Configure which processes can access desktop objects like windows and alike.</source>
-        <oldsource>Configure which processes can access Desktop objects like Windows and alike.</oldsource>
-        <translation type="unfinished">Настройте, какие процессы могут получить доступ к объектам рабочего стола, таким как Windows и т.п.</translation>
+        <translation>Настройте, какие процессы могут получить доступ к объектам рабочего стола, таким как окна и т.п.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2631"/>
@@ -5894,10 +5869,6 @@ The process match level has a higher priority than the specificity and describes
         <translation>Отключить изоляцию безопасности (экспериментально)</translation>
     </message>
     <message>
-        <source>Various advanced isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
-        <translation type="vanished">Различные расширенные функции изоляции могут нарушить совместимость с некоторыми приложениями. Если вы используете эту песочницу &lt;b&gt;НЕ для безопасности&lt;/b&gt; но для простой переносимости приложений, изменив эти параметры, вы можете восстановить совместимость, пожертвовав некоторой безопасностью.</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="1204"/>
         <source>Open access to Windows Security Account Manager</source>
         <translation>Открытый доступ к диспетчеру учетных записей безопасности Windows</translation>
@@ -5931,10 +5902,6 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/OptionsWindow.ui" line="1286"/>
         <source>The below options can be used safely when you don&apos;t grant admin rights.</source>
         <translation>Приведенные ниже параметры можно безопасно использовать, если вы не предоставляете прав администратора.</translation>
-    </message>
-    <message>
-        <source>Access isolation</source>
-        <translation type="vanished">Изоляция доступа</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3711"/>
@@ -6087,7 +6054,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3451"/>
         <source>Use desktop object workaround for all processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать обходной путь для объектов рабочего стола для всех процессов</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3616"/>
@@ -6542,10 +6509,6 @@ Please note that this values are currently user specific and saved globally for 
         <translation>Запуск пользовательского интерфейса при запуске изолированного процесса</translation>
     </message>
     <message>
-        <source>Show Notifications for relevant log Messages</source>
-        <translation type="vanished">Показать уведомления для соответствующих сообщений журнала</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="613"/>
         <source>Start UI with Windows</source>
         <translation>Запуск пользовательского интерфейса с Windows</translation>
@@ -6613,87 +6576,87 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="94"/>
         <source>SandMan Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры SandMan</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="208"/>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Уведомления</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="240"/>
         <source>Add Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить запись</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="247"/>
         <source>Show file migration progress when copying large files into a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать прогресс переноса файлов при копировании больших файлов в песочницу</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="255"/>
         <source>Message ID</source>
-        <translation type="unfinished"></translation>
+        <translation>ID сообщения</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="260"/>
         <source>Message Text (optional)</source>
-        <translation type="unfinished"></translation>
+        <translation>Текст сообщения (необязательно)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="275"/>
         <source>SBIE Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Сообщения SBIE</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="301"/>
         <source>Delete Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить запись</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="308"/>
         <source>Don&apos;t show the popup message log for all SBIE messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показывать журнал всплывающих сообщений для всех сообщений SBIE</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="325"/>
         <source>Notification Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры уведомлений</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="361"/>
         <source>Sandboxie may be issue &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie может выдавать &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;сообщения SBIE&lt;/a&gt; в журнал сообщений и отображать их как всплывающие окна. Некоторые сообщения носят информационный характер и уведомляют об общих или, в некоторых случаях, особых событиях, которые произошли, другие сообщения указывают на состояние ошибки.&lt;br /&gt;Вы можете скрыть выбранные сообщения SBIE от всплывающих окон, используя приведенный ниже список:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="391"/>
         <source>Windows Shell</source>
-        <translation type="unfinished"></translation>
+        <translation>Оболочка Windows</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="657"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Иконка</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="714"/>
         <source>Move Up</source>
-        <translation type="unfinished">Сдвинуть вверх</translation>
+        <translation>Сдвинуть вверх</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="733"/>
         <source>Move Down</source>
-        <translation type="unfinished">Сдвинуть вниз</translation>
+        <translation>Сдвинуть вниз</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="939"/>
         <source>Display Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры отображения</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1063"/>
         <source>Graphic Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры графики</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1371"/>
@@ -6708,7 +6671,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1540"/>
         <source>Sandboxie.ini Presets</source>
-        <translation type="unfinished"></translation>
+        <translation>Пресеты Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1548"/>
@@ -6733,12 +6696,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1728"/>
         <source>App Templates</source>
-        <translation type="unfinished">Шаблоны приложений</translation>
+        <translation>Шаблоны приложений</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1738"/>
         <source>App Compatibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Совместимость приложений</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1589"/>
@@ -6956,7 +6919,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1624"/>
         <source>Program Control</source>
-        <translation type="unfinished">Контроль программ</translation>
+        <translation>Контроль программ</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1634"/>
@@ -7020,17 +6983,9 @@ Please note that this values are currently user specific and saved globally for 
         <translation>Поддержка и бновления</translation>
     </message>
     <message>
-        <source>Sandbox Config</source>
-        <translation type="vanished">Конфигурация песочницы</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1398"/>
         <source>Default sandbox:</source>
         <translation>Песочница по умолчанию:</translation>
-    </message>
-    <message>
-        <source>Compatibility</source>
-        <translation type="vanished">Совместимость</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1758"/>
@@ -7055,22 +7010,22 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1814"/>
         <source>Local Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Локальные шаблоны</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1865"/>
         <source>Add Template</source>
-        <translation type="unfinished">Добавить шаблон</translation>
+        <translation>Добавить шаблон</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1885"/>
         <source>Text Filter</source>
-        <translation type="unfinished">Текстовый фильтр</translation>
+        <translation>Текстовый фильтр</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1907"/>
         <source>This list contains user created custom templates for sandbox options</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот список содержит созданные пользователем настраиваемые шаблоны для параметров песочницы</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1924"/>

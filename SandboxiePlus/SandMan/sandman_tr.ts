@@ -5622,7 +5622,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="925"/>
         <source>You can configure custom entries for the sandbox run menu.</source>
-        <translation>Korumalı alan çalıştırma menüsü için özel girişleri yapılandırabilirsiniz.</translation>
+        <translation>Korumalı alanın çalıştırma menüsünde görünecek özel girişleri yapılandırabilirsiniz.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2085"/>
@@ -7079,7 +7079,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="208"/>
         <source>Notifications</source>
-        <translation>Bİldirimler</translation>
+        <translation>Bildirimler</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="240"/>
@@ -7159,7 +7159,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1063"/>
         <source>Graphic Options</source>
-        <translation>Grafik Seçenekeleri</translation>
+        <translation>Grafik Seçenekleri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1317"/>
@@ -7343,7 +7343,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="740"/>
         <source>You can configure custom entries for all sandboxes run menus.</source>
-        <translation></translation>
+        <translation>Tüm korumalı alanların çalıştırma menüsünde görünecek özel girişleri yapılandırabilirsiniz.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="762"/>

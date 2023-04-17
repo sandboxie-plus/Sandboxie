@@ -99,6 +99,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkShowHostProcTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowHostProcTmpl()));
 	connect(ui.chkConfidential, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged())); // todo norify premium feaure
 	connect(ui.chkHostProtect, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkHostProtectMsg, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.btnAddUser, SIGNAL(clicked(bool)), this, SLOT(OnAddUser()));
 	connect(ui.btnDelUser, SIGNAL(clicked(bool)), this, SLOT(OnDelUser()));

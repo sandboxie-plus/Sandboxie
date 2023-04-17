@@ -64,17 +64,17 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="467"/>
         <source>Box Options</source>
-        <translation type="unfinished">Alan Seçenekleri</translation>
+        <translation>Alan Seçenekleri</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="471"/>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
-        <translation type="unfinished">Anonim bir belirteç (deneysel) yerine Sandboxie oturum açmayı kullan</translation>
+        <translation>Anonim bir belirteç (deneysel) yerine Sandboxie oturum açmayı kullan</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="472"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation type="unfinished">Özel bir Sandboxie belirteci kullanmak, birbirinden ayrı korumalı alanların daha iyi yalıtılmasını sağlar ve görev yöneticilerinin kullanıcı sütununda bir işlemin hangi alana ait olduğu gösterir. Ancak bazı 3. parti güvenlik çözümleri özel belirteçlerle sorun yaşayabilir.</translation>
+        <translation>Özel bir Sandboxie belirteci kullanmak, birbirinden ayrı korumalı alanların daha iyi yalıtılmasını sağlar ve görev yöneticilerinin kullanıcı sütununda bir işlemin hangi alana ait olduğu gösterir. Ancak bazı 3. parti güvenlik çözümleri özel belirteçlerle sorun yaşayabilir.</translation>
     </message>
 </context>
 <context>
@@ -791,7 +791,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="OnlineUpdater.cpp" line="564"/>
         <source>failed to scan existing installation</source>
-        <translation>mevcut yükleme taranamadı</translation>
+        <translation>mevcut kurulum taranamadı</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="565"/>
@@ -1375,7 +1375,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="222"/>
         <source>Do you really want to delete the selected local template(s)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Seçili yerel şablonları gerçekten silmek istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="228"/>
@@ -2137,7 +2137,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="410"/>
         <source>Install Driver</source>
-        <translation>Sürücüyü Kur</translation>
+        <translation>Sürücüyü Yükle</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="413"/>
@@ -2379,7 +2379,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2265"/>
         <source>Only Administrators can change the config.</source>
-        <translation>Yapılandırmayı yalnızca Yöneticiler değiştirebilir.</translation>
+        <translation>Yalnızca Yöneticiler yapılandırmayı değiştirebilir.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3028"/>
@@ -4054,7 +4054,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="168"/>
         <source>Standard Applications</source>
-        <translation type="unfinished"></translation>
+        <translation>Standart Uygulamalar</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1162"/>
@@ -4296,12 +4296,12 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="410"/>
         <source>Add %1 Template</source>
-        <translation type="unfinished">%1 Şablonu Ekle</translation>
+        <translation>%1 Şablonu Ekle</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="595"/>
         <source>Please enter message</source>
-        <translation type="unfinished"></translation>
+        <translation>Lütfen mesaj giriniz</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="627"/>
@@ -4382,17 +4382,17 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1631"/>
         <source>Please enter the template identifier</source>
-        <translation type="unfinished">Lütfen şablon tanımlayıcısını girin</translation>
+        <translation>Lütfen şablon tanımlayıcısını girin</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1639"/>
         <source>Error: %1</source>
-        <translation type="unfinished">Hata: %1</translation>
+        <translation>Hata: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1664"/>
         <source>Do you really want to delete the selected local template(s)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Seçili yerel şablonları gerçekten silmek istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1820"/>
@@ -4590,8 +4590,9 @@ Bu alandaki işlemler, aslında yönetici ayrıcalıklarına sahip olmadan, yön
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="575"/>
         <source>
-Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</source>
-        <translation type="unfinished"></translation>
+Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
+        <translation>
+Bu alandaki işlemler, ait oldukları korumalı alanı belirten özel bir işlem belirteci ile çalışacaktır.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="606"/>
@@ -5621,7 +5622,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="925"/>
         <source>You can configure custom entries for the sandbox run menu.</source>
-        <translation>Korumalı alan çalıştırma menüsü için özel girişleri yapılandırabilirsiniz.</translation>
+        <translation>Korumalı alanın çalıştırma menüsünde görünecek özel girişleri yapılandırabilirsiniz.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2085"/>
@@ -5817,17 +5818,17 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="874"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Simge</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="899"/>
         <source>Move Up</source>
-        <translation type="unfinished">Yukarı Taşı</translation>
+        <translation>Yukarı Taşı</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="918"/>
         <source>Move Down</source>
-        <translation type="unfinished">Aşağı Taşı</translation>
+        <translation>Aşağı Taşı</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1153"/>
@@ -5837,34 +5838,36 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1174"/>
         <source>Various isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Çeşitli yalıtım özellikleri, bazı uygulamalarla uyumluluğu bozabilir. Bu korumalı alanı &lt;b&gt;Güvenlik için DEĞİL&lt;/b&gt; ancak uygulama taşınabilirliği için kullanıyorsanız, bu seçenekleri değiştirip biraz da güvenlikten ödün vererek uyumluluğu arttırabilirsiniz.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1272"/>
         <source>Access Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Erişim Yalıtımı</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1299"/>
         <location filename="Forms/OptionsWindow.ui" line="1357"/>
         <source>Image Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Görüntü Koruması</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1307"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir program korumalı alan içindeki bir dll dosyasını yüklemeye çalıştığında 1305 mesajını yayınla</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1340"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Ana bilgisayarda kurulu korumalı alanda çalışan programların korumalı alandan dll dosyaları yüklemesini önle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1383"/>
         <source>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie&apos;nin kaynak erişim kuralları, genellikle korumalı alan içinde bulunan program ikili dosyalarına göre ayrım yapar. OpenFilePath ve OpenKeyPath yalnızca ana bilgisayarda yerel olarak bulunan uygulama ikili dosyaları için çalışır. 
+Bu kısıtlama olmaksızın bir kural tanımlamak için OpenPipePath veya OpenConfPath kullanılmalıdır. Aynı şekilde, olumsuzlama ile tanımlanan tüm Closed(File|Key|Ipc)Path yönergeleri, örn. &apos;ClosedFilePath=! iexplore.exe,C:Users*&apos;, korumalı alan içinde bulunan ikili dosyalar için her zaman kapalı olacaktır. Her iki kısıtlama ilkesi de &quot;Erişim İlkeleri&quot; sayfasından devre dışı bırakılabilir.
+Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırılmış bir kopyasını oluşturmasını ve korunan kaynaklara erişmesini önlemek için yapılır. Başka bir istismar vektörü de bir kütüphanenin yetkili bir işleme yerleşerek ona izin verilen her şeye erişim hakkı elde etmesidir. Ana Bilgisayar Görüntü Koruması kullanılarak, bir korumalı alan içinde çalışan uygulamaların (ana bilgisayarda yüklü) yalnızca korumalı alanda bulunan kütüphanleri yüklemesi engellenerek bu durum önlenebilir.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1404"/>
@@ -7071,77 +7074,77 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="94"/>
         <source>SandMan Options</source>
-        <translation type="unfinished"></translation>
+        <translation>SandMan Seçenekleri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="208"/>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildirimler</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="240"/>
         <source>Add Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Giriş Ekle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="247"/>
         <source>Show file migration progress when copying large files into a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Büyük dosyaları bir korumalı alana kopyalarken dosya taşıma ilerlemesini göster</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="255"/>
         <source>Message ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Mesaj NO</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="260"/>
         <source>Message Text (optional)</source>
-        <translation type="unfinished"></translation>
+        <translation>Mesaj Metni (isteğe bağlı)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="275"/>
         <source>SBIE Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>SBIE Mesajları</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="301"/>
         <source>Delete Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Girişi Sil</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="308"/>
         <source>Don&apos;t show the popup message log for all SBIE messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Tüm SBIE mesajları için açılan mesaj günlüğünü gösterme</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="325"/>
         <source>Notification Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildirim Seçenekleri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="361"/>
         <source>Sandboxie may be issue &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie, Mesaj Günlüğüne &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE Mesajları&lt;/a&gt; yayınlayabilir ve bunları Açılır Pencereler olarak gösterebilir. Bazı mesajlar bilgilendirme amaçlıdır ve meydana gelen genel amaçlı veya bazı durumlara özel olayları bildirir, diğer mesajlar ise hata durumunlarını belirtir.&lt;br /&gt;Aşağıdaki listeyi kullanarak seçili SBIE mesajlarının açılmasını engelleyebilirsiniz:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="391"/>
         <source>Windows Shell</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Kabuğu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="657"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Simge</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="714"/>
         <source>Move Up</source>
-        <translation type="unfinished">Yukarı Taşı</translation>
+        <translation>Yukarı Taşı</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="733"/>
         <source>Move Down</source>
-        <translation type="unfinished">Aşağı Taşı</translation>
+        <translation>Aşağı Taşı</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="831"/>
@@ -7151,12 +7154,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="939"/>
         <source>Display Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Görüntüleme Seçenekleri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1063"/>
         <source>Graphic Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafik Seçenekleri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1317"/>
@@ -7176,7 +7179,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1540"/>
         <source>Sandboxie.ini Presets</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini Ön Ayarları</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1624"/>
@@ -7340,7 +7343,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="740"/>
         <source>You can configure custom entries for all sandboxes run menus.</source>
-        <translation></translation>
+        <translation>Tüm korumalı alanların çalıştırma menüsünde görünecek özel girişleri yapılandırabilirsiniz.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="762"/>
@@ -7385,32 +7388,32 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1728"/>
         <source>App Templates</source>
-        <translation type="unfinished">Uygulama Şablonları</translation>
+        <translation>Uygulama Şablonları</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1738"/>
         <source>App Compatibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Uygulama Uyumluluğu</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1814"/>
         <source>Local Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Yerel Şablonlar</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1865"/>
         <source>Add Template</source>
-        <translation type="unfinished">Şablon Ekle</translation>
+        <translation>Şablon Ekle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1885"/>
         <source>Text Filter</source>
-        <translation type="unfinished">Metin Filtresi</translation>
+        <translation>Metin Filtresi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1907"/>
         <source>This list contains user created custom templates for sandbox options</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu liste, korumalı alan seçenekleri için kullanıcı tarafından oluşturulan özel şablonları içerir</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1924"/>
@@ -7468,7 +7471,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1589"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
-        <translation>Yalnızca Yönetici hesapları, Programları Zorlamayı Duraklat komutunu kullanabilir</translation>
+        <translation>Yalnızca Yönetici hesapları Programları Zorlamayı Duraklat komutunu kullanabilir</translation>
     </message>
     <message>
         <source>Download Updates automatically</source>

@@ -12,13 +12,28 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.8.5 / 5.63.5] - 2023-04-??
+## [1.8.5 / 5.63.5] - 2023-04-17
+
+### Added
+- added local template editorto the global settings window
+- added hidden message list
+- added option to prevent processes located outside teh sandbox from loading boxed dll's
+-- to enable it use "ProtectHostImages=y"
+- add option to block box inter programs but not box extern once
+- added SbieLogon option to the new box wizard [#2823](https://github.com/sandboxie-plus/Sandboxie/issues/2823)
+- added a few UI debug options [#2816](https://github.com/sandboxie-plus/Sandboxie/issues/2816)
+
+### Changed
+- run menu entries now can have custom icons
+- the init edit page will automatically switch to edit when the user chages somethign
+- improved change handling in the global settings window
+- reorganized global options
 
 ### Fixed
-- fixed issue with group renaming in the SandMan UI [#2804](https://github.com/sandboxie-plus/Sandboxie/issues/2804)
+- fixed issue with group renaming in the sandman UI [#2804](https://github.com/sandboxie-plus/Sandboxie/issues/2804)
 
 
-## [1.8.4 / 5.63.4] - 2023-04-07
+
 
 ### Added
 - added installer icon [#2795](https://github.com/sandboxie-plus/Sandboxie/issues/2795)

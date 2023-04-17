@@ -34,6 +34,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.8.4 / 5.63.4] - 2023-04-07
 
 ### Added
 - added installer icon [#2795](https://github.com/sandboxie-plus/Sandboxie/issues/2795)

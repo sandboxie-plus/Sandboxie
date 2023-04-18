@@ -4530,7 +4530,9 @@ Processes in this box will think they are run with administrative privileges, wi
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="575"/>
         <source>
-Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</source>
+Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
+        <oldsource>
+Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -17,7 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added local template editorto the global settings window
 - added hidden message list
-- added option to prevent processes located outside teh sandbox from loading boxed dll's
+- added option to prevent processes located outside the sandbox from loading boxed dll's
 -- to enable it use "ProtectHostImages=y"
 - add option to block box inter programs but not box extern once
 - added SbieLogon option to the new box wizard [#2823](https://github.com/sandboxie-plus/Sandboxie/issues/2823)
@@ -25,7 +25,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - run menu entries now can have custom icons
-- the init edit page will automatically switch to edit when the user chages somethign
+- the init edit page will automatically switch to edit when the user changes something
 - improved change handling in the global settings window
 - reorganized global options
 

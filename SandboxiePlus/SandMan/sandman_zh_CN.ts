@@ -6725,7 +6725,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1885"/>
         <source>Text Filter</source>
-        <translation>文本筛选</translation>
+        <translation>筛选文本</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1907"/>

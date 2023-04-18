@@ -162,7 +162,7 @@
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="855"/>
         <source>Force the Web Browser to run in this sandbox</source>
-        <translation>强制网络浏览器运行在此沙盒内</translation>
+        <translation>强制网络浏览器在此沙盒中运行</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="859"/>

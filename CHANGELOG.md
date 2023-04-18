@@ -19,7 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added hidden message list
 - added option to prevent processes located outside the sandbox from loading boxed DLLs
 -- to enable it, use "ProtectHostImages=y"
-- add option to block box inter programs but not box extern once (garbled sentence ???)
+- added option to block box intern programs but not box external ones
 - added SbieLogon option to the new box wizard [#2823](https://github.com/sandboxie-plus/Sandboxie/issues/2823)
 - added a few UI debug options [#2816](https://github.com/sandboxie-plus/Sandboxie/issues/2816)
 

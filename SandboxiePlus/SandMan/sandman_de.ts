@@ -488,7 +488,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="494"/>
         <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
-        <translation>Fast erledigt, "Abschließen" klicken, um alle ausgewählten Optionen anzuwenden und den Assistenten abzuschließen.</translation>
+        <translation>Fast erledigt, &quot;Abschließen&quot; klicken, um alle ausgewählten Optionen anzuwenden und den Assistenten abzuschließen.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="506"/>
@@ -4423,7 +4423,9 @@ Prozesse in dieser Box werden denken, dass sie mit Adminrechten laufen, ohne das
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="575"/>
         <source>
-Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</source>
+Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
+        <oldsource>
+Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -4762,7 +4762,9 @@ Procesy w tym boksie reagowały tak jakby były uruchamiane z uprawnieniami admi
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="575"/>
         <source>
-Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</source>
+Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
+        <oldsource>
+Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

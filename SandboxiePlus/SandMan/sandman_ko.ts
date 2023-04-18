@@ -4577,8 +4577,10 @@ Processes in this box will think they are run with administrative privileges, wi
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="575"/>
         <source>
-Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</source>
-        <translation>
+Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
+        <oldsource>
+Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
+        <translation type="unfinished">
 이 박스의 프로세스는 자신이 속한 샌드박스를 나타내는 사용자 지정 프로세스 토큰으로 실행됩니다.</translation>
     </message>
     <message>

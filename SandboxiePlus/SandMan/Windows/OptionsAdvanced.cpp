@@ -97,7 +97,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.btnAddHostProcess, SIGNAL(clicked(bool)), this, SLOT(OnAddHostProcess()));
 	connect(ui.btnDelHostProcess, SIGNAL(clicked(bool)), this, SLOT(OnDelHostProcess()));
 	connect(ui.chkShowHostProcTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowHostProcTmpl()));
-	connect(ui.chkConfidential, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged())); // todo norify premium feaure
+	connect(ui.chkConfidential, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged())); // todo notify premium feature
 	connect(ui.chkHostProtect, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkHostProtectMsg, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 

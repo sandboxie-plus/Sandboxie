@@ -82,7 +82,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - renamed 'DropAppContainerTokens=program.exe,n' to 'DropAppContainerToken=program.exe,n'
 - 'DropAppContainerToken=program.exe,y' can now be used in App Compartment boxes, however it is not recommended security-wise
 - the desktop security workaround used for Chrome, Firefox and Acrobat is now enabled by default, you can disable it with "UseSbieDeskHack=n"
--- Note: this should allow electron apps to run without 'SpecialImages=chrome,program.exe'
+-- Note: this should allow Electron apps to run without 'SpecialImage=chrome,program.exe'
 - disabled old token hacks, as these seem to be no longer required with the new App Container token
 -- Note: in case of issues with Microsoft Edge, Chrome, Firefox or Acrobat, they can be re-enabled using 'DeprecatedTokenHacks=y'
 - updated Inno Setup to version 6.2.2 which also comes with a new installer icon
@@ -730,7 +730,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with RemoveSidName when terminating SbieSvc
 - fixed issue with the new hooking mechanism
 - fixed BSOD issue with Win32k hooks introduced in 1.2.0 [#2035](https://github.com/sandboxie-plus/Sandboxie/issues/2035)
-- fixed issue with element11 and electron workaround [#2023](https://github.com/sandboxie-plus/Sandboxie/issues/2023)
+- fixed issue with Element 1.11 and Electron workaround [#2023](https://github.com/sandboxie-plus/Sandboxie/issues/2023)
 
 
 

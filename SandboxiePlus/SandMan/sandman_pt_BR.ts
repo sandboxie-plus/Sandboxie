@@ -1097,8 +1097,8 @@ Nota: A verificação de atualização geralmente está por trás da versão mai
         <location filename="Windows/OptionsWindow.cpp" line="995"/>
         <location filename="Windows/OptionsAccess.cpp" line="399"/>
         <location filename="Windows/OptionsAccess.cpp" line="632"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="543"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="618"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="544"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="619"/>
         <location filename="Windows/OptionsGeneral.cpp" line="510"/>
         <location filename="Windows/OptionsGeneral.cpp" line="606"/>
         <location filename="Windows/OptionsNetwork.cpp" line="451"/>
@@ -1147,7 +1147,7 @@ Nota: A verificação de atualização geralmente está por trás da versão mai
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="611"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="594"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="595"/>
         <location filename="Windows/OptionsGeneral.cpp" line="577"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
@@ -1222,64 +1222,64 @@ Nota: A verificação de atualização geralmente está por trás da versão mai
         <translation>Raiz do ipc do Sandbox</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="564"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="565"/>
         <source>Add special option:</source>
         <translation>Adicionar opção especial:</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="715"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="719"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="716"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="720"/>
         <source>On Start</source>
         <translation>Ao iniciar</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="716"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="724"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="728"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="732"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="717"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="725"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="729"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="733"/>
         <source>Run Command</source>
         <translation>Executar comando</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="720"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="721"/>
         <source>Start Service</source>
         <translation>Iniciar Serviço</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="723"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="724"/>
         <source>On Init</source>
         <translation>Ao Iniciar</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="727"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="728"/>
         <source>On File Recovery</source>
         <translation>Na recuperação de arquivos</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="731"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="732"/>
         <source>On Delete Content</source>
         <translation>Ao excluir conteúdo</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="742"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="764"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="775"/>
-        <location filename="Windows/OptionsAdvanced.cpp" line="786"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="743"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="765"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="776"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="787"/>
         <source>Please enter the command line to be executed</source>
         <translation>Digite a linha de comando a ser executada</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="824"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="825"/>
         <source>Please enter a program file name</source>
         <translation>Insira o nome do programa</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="906"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="907"/>
         <source>Deny</source>
         <translation>Negar</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="1011"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="1012"/>
         <source>%1 (%2)</source>
         <translatorcomment>Same as in source</translatorcomment>
         <translation>%1 (%2)</translation>
@@ -1468,7 +1468,7 @@ Nota: A verificação de atualização geralmente está por trás da versão mai
         <translation type="vanished">Executáveis (*.exe *.cmd);;Todos os arquivos (*.*)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="753"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="754"/>
         <source>Please enter a service identifier</source>
         <translation>Por favor, insira um identificador do serviço</translation>
     </message>
@@ -1546,7 +1546,7 @@ Nota: A verificação de atualização geralmente está por trás da versão mai
         <translation>Bloquear, negando acesso a Dispositivos de rede</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsAdvanced.cpp" line="906"/>
+        <location filename="Windows/OptionsAdvanced.cpp" line="907"/>
         <location filename="Windows/OptionsNetwork.cpp" line="171"/>
         <location filename="Windows/OptionsNetwork.cpp" line="564"/>
         <source>Allow</source>

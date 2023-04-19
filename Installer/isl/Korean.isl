@@ -1,4 +1,4 @@
-; *** Inno Setup version 6.1.0+ Korean messages ***
+﻿; *** Inno Setup version 6.1.0+ Korean messages ***
 
 ; ▒ Translator: VenusGirl (venusgirl@outlook.com)
 ;

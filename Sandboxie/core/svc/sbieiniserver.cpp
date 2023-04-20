@@ -1174,8 +1174,10 @@ ULONG SbieIniServer::AddSetting(MSG_HEADER* msg, bool insert)
     {
         if (_wcsicmp(I->Name.c_str(), req->setting) == 0) {
             // !insert -> append -> find last entry
-            if(!insert || pos == pSection->Entries.end())
+            if (!insert || pos == pSection->Entries.end()) {
                 pos = I;
+                if (!insert) pos++;
+            }
             if (_wcsicmp(I->Value.c_str(), req->value) == 0) {
                 // this value is already present, so let's abort right here
                 return STATUS_SUCCESS;

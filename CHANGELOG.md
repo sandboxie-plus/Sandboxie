@@ -17,8 +17,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.9.1 / 5.64.1] - 2022-20-04
 
 ### Fixed
-- fixed memory curruption issue with Normal[File/Key]Path [#2588](https://github.com/sandboxie-plus/Sandboxie/issues/2588)
-- fixed issue with snapshow manager window DPI scalling [#782](https://github.com/sandboxie-plus/Sandboxie/issues/782)
+- fixed system check in Classic installer [#2812](https://github.com/sandboxie-plus/Sandboxie/pull/2812)
+- fixed encoding issue with Korean translation [#2833](https://github.com/sandboxie-plus/Sandboxie/issues/2833)
+- fixed memory corruption issue with Normal[File/Key]Path [#2588](https://github.com/sandboxie-plus/Sandboxie/issues/2588)
+- fixed DPI scaling in the snapshot manager window [#782](https://github.com/sandboxie-plus/Sandboxie/issues/782)
 
 
 

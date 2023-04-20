@@ -34,6 +34,9 @@ public:
 	virtual SB_STATUS InsertText(const QString& Setting, const QString& Value);
 	virtual SB_STATUS AppendText(const QString& Setting, const QString& Value);
 
+	virtual void SetTextMap(const QString& Setting, const QMap<QString, QStringList> Map);
+	virtual QMap<QString, QStringList> GetTextMap(const QString& Setting);
+
 	virtual SB_STATUS DelValue(const QString& Setting, const QString& Value = QString());
 
 	virtual QList<QPair<QString, QString>> GetIniSection(qint32* pStatus = NULL, bool withTemplates = false) const;

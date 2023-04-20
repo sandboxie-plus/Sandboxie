@@ -18,6 +18,7 @@
 #include "stdafx.h"
 #include "SbieIni.h"
 #include "../SbieAPI.h"
+#include "../SbieDefs.h"
 
 #include <ntstatus.h>
 #define WIN32_NO_STATUS
@@ -204,6 +205,38 @@ SB_STATUS CSbieIni::AppendText(const QString& Setting, const QString& Value)
 SB_STATUS CSbieIni::DelValue(const QString& Setting, const QString& Value)
 {
 	return m_pAPI->SbieIniSet(m_Name, Setting, Value, CSbieAPI::eIniDelete, m_RefreshOnChange);
+}
+
+void CSbieIni::SetTextMap(const QString& Setting, const QMap<QString, QStringList> Map)
+{
+	QStringList Mapping;
+	foreach(const QString& Group, Map.keys())
+	{
+		QString CurrentLine;
+		foreach(const QString & Name, Map[Group]) {
+			if (Setting.length() + 1 + Group.length() + 1 + CurrentLine.length() + 1 + Name.length() >= CONF_LINE_LEN) { // limit line length
+				Mapping.append(Group + ":" + CurrentLine);
+				CurrentLine.clear();
+			}
+			if (!CurrentLine.isEmpty()) CurrentLine.append(",");
+			CurrentLine.append(Name);
+		}
+		if(!CurrentLine.isEmpty())
+			Mapping.append(Group + ":" + CurrentLine);
+	}
+	DelValue(Setting);
+	foreach(const QString & Value, Mapping)
+		AppendText(Setting, Value);
+}
+
+QMap<QString, QStringList> CSbieIni::GetTextMap(const QString& Setting)
+{
+	QMap<QString, QStringList> Map;
+	foreach(const QString &CurrentLine, GetTextList(Setting, false)) {
+		int pos = CurrentLine.lastIndexOf(":");
+		Map[pos == -1 ? "" : CurrentLine.left(pos)].append(CurrentLine.mid(pos+1).split(","));
+	}
+	return Map;
 }
 
 QList<QPair<QString, QString>> CSbieIni::GetIniSection(qint32* pStatus, bool withTemplates) const

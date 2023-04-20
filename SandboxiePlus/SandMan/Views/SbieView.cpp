@@ -25,7 +25,8 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	m_pMainLayout->setContentsMargins(0,0,0,0);
 	this->setLayout(m_pMainLayout);
 
-	//m_UserConfigChanged = false;
+	m_UserConfigChanged = false;
+	m_HoldExpand = false;
 
 	m_pSbieModel = new CSbieModel(this);
 	m_pSbieModel->SetTree(true);
@@ -454,8 +455,11 @@ void CSbieView::Refresh()
 
 				QModelIndex ModelIndex = m_pSbieModel->FindIndex(ID);
 
-				if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess)
+				if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess) {
+					m_HoldExpand = true;
 					m_pSbieTree->expand(m_pSortProxy->mapFromSource(ModelIndex));
+					m_HoldExpand = false;
+				}
 				else 
 				{
 					QString Name;
@@ -464,8 +468,11 @@ void CSbieView::Refresh()
 					else if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eBox)
 						Name = m_pSbieModel->GetSandBox(ModelIndex)->GetName();
 
-					if (!m_Collapsed.contains(Name))
+					if (!m_Collapsed.contains(Name)) {
+						m_HoldExpand = true;
 						m_pSbieTree->expand(m_pSortProxy->mapFromSource(ModelIndex));
+						m_HoldExpand = false;
+					}
 				}
 			}
 		});
@@ -921,7 +928,7 @@ void CSbieView::OnGroupAction(QAction* Action)
 		Refresh();
 	}
 
-	//m_UserConfigChanged = true;
+	m_UserConfigChanged = true;
 	UpdateMoveMenu();
 
 	SaveUserConfig();
@@ -1001,7 +1008,7 @@ QString CSbieView::AddNewGroup()
 	m_Groups[Parent].append(Name);
 
 	
-	//m_UserConfigChanged = true;
+	m_UserConfigChanged = true;
 	UpdateMoveMenu();
 
 	SaveUserConfig();
@@ -1435,7 +1442,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 
 	CSandMan::CheckResults(Results);
 
-	//m_UserConfigChanged = true;
+	m_UserConfigChanged = true;
 	SaveUserConfig();
 }
 
@@ -1826,6 +1833,9 @@ void CSbieView::ShowOptions(const QString& Name)
 
 void CSbieView::ChangeExpand(const QModelIndex& index, bool bExpand)
 {
+	if (m_HoldExpand)
+		return;
+
 	QModelIndex ModelIndex = m_pSortProxy->mapToSource(index);
 
 	if (m_pSbieModel->GetType(ModelIndex) == CSbieModel::eProcess)
@@ -1842,27 +1852,34 @@ void CSbieView::ChangeExpand(const QModelIndex& index, bool bExpand)
 	else
 		m_Collapsed.insert(Name);
 
-	//m_UserConfigChanged = true;
+	m_UserConfigChanged = true;
 
 	SaveUserConfig();
 }
 
 void CSbieView::ReloadUserConfig()
 {
-	m_Groups.clear();
+	if (!theAPI->IsConnected())
+		return;
 
-	QString Grouping = theConf->GetString("UIConfig/BoxDisplayOrder");
-	if(Grouping.isEmpty())
-		Grouping = theAPI->GetUserSettings()->GetText("BoxDisplayOrder");
-	CSbieView__ParseGroup(Grouping, m_Groups);
+	m_Groups = theAPI->GetUserSettings()->GetTextMap("BoxGrouping");
+	if (m_Groups.isEmpty()) { // try legacy entries
+		QString Grouping = theConf->GetString("UIConfig/BoxDisplayOrder");
+		if (Grouping.isEmpty())
+			Grouping = theAPI->GetUserSettings()->GetText("BoxDisplayOrder");
+		CSbieView__ParseGroup(Grouping, m_Groups);
+	}
 
 	UpdateMoveMenu();
 
-	QString Collapsed = theConf->GetString("UIConfig/BoxCollapsedView");
-	if (Collapsed.isEmpty())
-		Collapsed = theAPI->GetUserSettings()->GetText("BoxCollapsedView");
-	
-	m_Collapsed = ListToSet(SplitStr(Collapsed, ","));
+	QMap<QString, QStringList> Collapsed = theAPI->GetUserSettings()->GetTextMap("CollapsedBoxes");
+	m_Collapsed = ListToSet(Collapsed[""]);
+	if (m_Collapsed.isEmpty()) { // try legacy entries
+		QString Collapsed = theConf->GetString("UIConfig/BoxCollapsedView");
+		if (Collapsed.isEmpty())
+			Collapsed = theAPI->GetUserSettings()->GetText("BoxCollapsedView");
+		m_Collapsed = ListToSet(SplitStr(Collapsed, ","));
+	}
 
 	ClearUserUIConfig();
 }
@@ -1895,27 +1912,31 @@ void CSbieView::ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes)
 
 void CSbieView::SaveUserConfig()
 {
-	//if (!m_UserConfigChanged)
-	//	return;
-	//m_UserConfigChanged = false;
+	if (!m_UserConfigChanged)
+		return;
+	m_UserConfigChanged = false;
 
-	if (!m_Groups.isEmpty()) {
+	if (!theAPI->IsConnected())
+		return;
 
-		auto Groups = m_Groups;
-		// clean up non existing entries
-		for (auto I = Groups.begin(); I != Groups.end(); ++I) {
-			foreach(const QString &Name, I.value()) {
-				if (theAPI->GetBoxByName(Name).isNull() && !Groups.contains(Name))
-					I->removeAll(Name);
-			}
+	theAPI->GetUserSettings()->SetRefreshOnChange(false);
+
+	auto Groups = m_Groups;
+	// clean up non existing entries
+	for (auto I = Groups.begin(); I != Groups.end(); ++I) {
+		foreach(const QString &Name, I.value()) {
+			if (theAPI->GetBoxByName(Name).isNull() && !Groups.contains(Name))
+				I->removeAll(Name);
 		}
-
-		QString Grouping = CSbieView__SerializeGroup(Groups);
-		theConf->SetValue("UIConfig/BoxDisplayOrder", Grouping);
 	}
+	theAPI->GetUserSettings()->SetTextMap("BoxGrouping", Groups);
 
-	QString Collapsed = SetToList(m_Collapsed).join(",");
-	theConf->SetValue("UIConfig/BoxCollapsedView", Collapsed);
+	QMap<QString, QStringList> Collapsed;
+	Collapsed.insert("", SetToList(m_Collapsed));
+	theAPI->GetUserSettings()->SetTextMap("CollapsedBoxes", Collapsed);
+
+	theAPI->GetUserSettings()->SetRefreshOnChange(true);
+	theAPI->CommitIniChanges();
 }
 
 void CSbieView::OnMoveItem(const QString& Name, const QString& To, int row)
@@ -1933,7 +1954,7 @@ void CSbieView::OnMoveItem(const QString& Name, const QString& To, int row)
 		Refresh();
 	}
 
-	//m_UserConfigChanged = true;
+	m_UserConfigChanged = true;
 	UpdateMoveMenu();
 
 	SaveUserConfig();

@@ -757,7 +757,7 @@ _FX NTSTATUS Key_MergeCacheDummys(KEY_MERGE *merge, const WCHAR *TruePath)
 
                 wmemcpy(FakePath, TruePath, TruePathLen);
                 FakePath[TruePathLen++] = L'\\';
-                FakePath[TruePathLen++] = L'\0';
+                FakePath[TruePathLen] = L'\0';
                 end = &FakePath[TruePathLen];
                 wmemcpy(end, ptr, name_len);
                 end[name_len] = L'\0';

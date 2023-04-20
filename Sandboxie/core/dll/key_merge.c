@@ -755,10 +755,11 @@ _FX NTSTATUS Key_MergeCacheDummys(KEY_MERGE *merge, const WCHAR *TruePath)
 
                 WCHAR* FakePath = Dll_AllocTemp(TruePathLen * sizeof(WCHAR) + 1 + name_len * sizeof(WCHAR) + 10);
 
-                wmemcpy(FakePath, TruePath, TruePathLen * sizeof(WCHAR));
-                wcscat(FakePath, L"\\");
-                end = wcschr(FakePath, L'\0');
-                wmemcpy(end, ptr, name_len * sizeof(WCHAR));
+                wmemcpy(FakePath, TruePath, TruePathLen);
+                FakePath[TruePathLen++] = L'\\';
+                FakePath[TruePathLen++] = L'\0';
+                end = &FakePath[TruePathLen];
+                wmemcpy(end, ptr, name_len);
                 end[name_len] = L'\0';
 
                 HANDLE KeyHandle;

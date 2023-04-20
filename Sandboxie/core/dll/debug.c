@@ -185,7 +185,7 @@ _FX int Debug_Init(void)
     NtRaiseHardError = (P_NtRaiseHardError)
         GetProcAddress(Dll_Ntdll, "NtRaiseHardError");
 
-    SBIEDLL_HOOK(Debug_,NtRaiseHardError);
+    //SBIEDLL_HOOK(Debug_,NtRaiseHardError);
 
 
     RtlSetLastWin32Error = (P_RtlSetLastWin32Error)

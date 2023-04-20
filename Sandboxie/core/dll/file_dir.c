@@ -908,10 +908,13 @@ _FX NTSTATUS File_OpenForMerge(
         // true directory we parse the rule list and construct a cached dummy directory
         //
 
-        if (use_rule_specificity && File_MergeDummy(TruePath, merge->true_ptr, &merge->file_mask) == STATUS_SUCCESS) {
+        if (use_rule_specificity) {
 
-            merge->true_ptr->handle = NULL;
-            status = STATUS_SUCCESS;
+            if (File_MergeDummy(TruePath, merge->true_ptr, &merge->file_mask) == STATUS_SUCCESS) {
+
+                merge->true_ptr->handle = NULL;
+                status = STATUS_SUCCESS;
+            }
         }
     }
 
@@ -1415,10 +1418,11 @@ _FX NTSTATUS File_MergeDummy(
 
                 WCHAR* FakePath = Dll_AllocTemp(TruePathLen * sizeof(WCHAR) + 1 + name_len * sizeof(WCHAR) + 10);
 
-                wmemcpy(FakePath, TruePath, TruePathLen * sizeof(WCHAR));
-                wcscat(FakePath, L"\\");
-                end = wcschr(FakePath, L'\0');
-                wmemcpy(end, ptr, name_len * sizeof(WCHAR));
+                wmemcpy(FakePath, TruePath, TruePathLen);
+                FakePath[TruePathLen++] = L'\\';
+                FakePath[TruePathLen++] = L'\0';
+                end = &FakePath[TruePathLen];
+                wmemcpy(end, ptr, name_len);
                 end[name_len] = L'\0';
 
                 FILE_NETWORK_OPEN_INFORMATION info;
@@ -1436,12 +1440,24 @@ _FX NTSTATUS File_MergeDummy(
                     memcpy(info_ptr->FileName, ptr, info_ptr->FileNameLength);
                     info_ptr->FileName[info_ptr->FileNameLength] = L'\0';
 
+                    info_ptr->CreationTime = info.CreationTime;
                     info_ptr->LastAccessTime = info.LastAccessTime;
                     info_ptr->LastWriteTime = info.LastWriteTime;
                     info_ptr->ChangeTime = info.ChangeTime;
                     info_ptr->AllocationSize = info.AllocationSize;
                     info_ptr->EndOfFile = info.EndOfFile;
                     info_ptr->FileAttributes = info.FileAttributes;
+
+                    
+    //ULONG           NextEntryOffset;
+    //ULONG           FileIndex;
+    //ULONG           EaInformationLength;
+    //CCHAR           ShortNameLength;
+    //WCHAR           ShortName[12];
+    //LARGE_INTEGER   FileId;
+                    
+
+                    info_ptr->FileId.QuadPart = -1;
 
                     PrevEntry = &info_ptr->NextEntryOffset;
 
@@ -1705,6 +1721,12 @@ _FX NTSTATUS File_GetMergedInformation(
             *(ULONG *)prev_entry = 0;   // reset NextEntryOffset
             break;
         }
+
+        //if (ptr_info->FileId.QuadPart == -1) {
+        //    WCHAR msg[1024];
+        //    Sbie_snwprintf(msg, 1024, L"File_MergeDummy simulate %s", ptr_info->FileName);
+        //    SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, msg);
+        //}
 
         if (File_Delete_v2) {
 

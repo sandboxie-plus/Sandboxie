@@ -515,8 +515,12 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="407"/>
         <source>The selected box location is not placed on a currently available drive.</source>
-        <oldsource>The selected box location not placed on a currently available drive.</oldsource>
-        <translation type="unfinished">Den valda lådplatsen är inte placerad på en f.n tillgänglig enhet.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The selected box location not placed on a currently available drive.</source>
+        <oldsource>The sellected box location not placed on a currently available drive.</oldsource>
+        <translation type="vanished">Den valda lådplatsen är inte placerad på en f.n tillgänglig enhet.</translation>
     </message>
 </context>
 <context>
@@ -4715,8 +4719,6 @@ Processer i denna låda kommer tro att de körs med adminprivilegier, utan att f
         <location filename="Wizards/NewBoxWizard.cpp" line="575"/>
         <source>
 Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
-        <oldsource>
-Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6010,10 +6012,8 @@ För att specificera en process, använd &apos;$:program.exe&apos; som sökväg.
         <translation>Wnd class</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2618"/>
-        <source>Configure which processes can access desktop objects like windows and alike.</source>
-        <oldsource>Configure which processes can access Desktop objects like Windows and alike.</oldsource>
-        <translation type="unfinished">Konfigurera vilka processer som kan tillgå Skrivbordsobjekt likt Windows och liknande.</translation>
+        <source>Configure which processes can access Desktop objects like Windows and alike.</source>
+        <translation type="vanished">Konfigurera vilka processer som kan tillgå Skrivbordsobjekt likt Windows och liknande.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2631"/>
@@ -6714,6 +6714,11 @@ istället för &quot;*&quot;.</translation>
         <location filename="Forms/OptionsWindow.ui" line="4543"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
         <translation>Skärmläsare: JAWS, NVDA, Window-Eyes, Systemtillgång</translation>
+    </message>
+    <message>
+        <location filename="Forms/OptionsWindow.ui" line="2618"/>
+        <source>Configure which processes can access desktop objects like windows and alike.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3154"/>

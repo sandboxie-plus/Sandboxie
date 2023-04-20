@@ -12,6 +12,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [1.9.1 / 5.64.1] - 2022-20-04
+
+### Fixed
+- fixed memory curruption issue with Normal[File/Key]Path [#2588](https://github.com/sandboxie-plus/Sandboxie/issues/2588)
+- fixed issue with snapshow manager window DPI scalling [#782](https://github.com/sandboxie-plus/Sandboxie/issues/782)
+
+
+
 ## [1.9.0 / 5.64.0] - 2023-04-17
 
 ### Added

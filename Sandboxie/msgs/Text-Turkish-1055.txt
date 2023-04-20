@@ -271,7 +271,7 @@ SBIE2101 %2
 .
 
 2102;pop;inf;01
-SBIE2102 Dosya korumalı alana kopyalanamayacak kadar büyük - %2
+SBIE2102 Dosya, korumalı alana kopyalanamayacak kadar büyük - %2
 .
 
 2103;pop;inf;01
@@ -311,15 +311,15 @@ SBIE2112 Nesneye erişilemiyor: %3, çağrı %2
 .
 
 2113;pop;inf;01
-SBIE2113 Dosya korumalı alana kopyalanamayacak kadar büyük, boş dosya oluşturuluyor - %2
+SBIE2113 Dosya, korumalı alana kopyalanamayacak kadar büyük, boş dosya oluşturuluyor - %2
 .
 
 2114;pop;inf;01
-SBIE2114 Dosya korumalı alana kopyalanamayacak kadar büyük, dosyaya erişim engelleniyor - %2
+SBIE2114 Dosya, korumalı alana kopyalanamayacak kadar büyük, dosyaya erişim engelleniyor - %2
 .
 
 2115;pop;inf;01
-SBIE2115 Dosya korumalı alana kopyalanamayacak kadar büyük, dosya salt okunur olarak açılıyor - %2
+SBIE2115 Dosya, korumalı alana kopyalanamayacak kadar büyük, dosya salt okunur olarak açılıyor - %2
 .
 
 2191;pop;inf;01
@@ -1488,7 +1488,7 @@ Sandboxie %2 sürümü indirilebilir.
 .
 
 3631;txt;01
-Şimdi indirmek ister misiniz?
+Şimdi indirmek istiyor musunuz?
 
 Not: İndirme yaklaşık bir dakika sürer.
 İndirme tamamlandığında bilgilendirileceksiniz.
@@ -1777,7 +1777,7 @@ Korumalı alan işlemlerini sonlandırmak ve içeriklerini silmek için İçerik
 .
 
 3715;txt;01
-Anında Kurtar
+Anında Kurtarma
 .
 
 3716;txt;02
@@ -1793,7 +1793,7 @@ Aşağıdaki dosyalar anında kurtarma için uygundur ve korumalı alan dışın
 .
 
 3719;txt;01
-&Tüm korumalı alandaki programlar durana kadar bir daha sorma
+Bu korumalı alandaki &tüm programlar sona erene kadar anında kurtarma için tekrar sorma
 .
 
 3720;txt;01
@@ -2117,11 +2117,11 @@ Anında Kurtarma, dosyalar oluşturulur oluşturulmaz kurtarma işlevini otomati
 .
 
 3833;txt;01
-Anında Kurtar'ı Etkinleştir
+Anında Kurtarma'yı Etkinleştir
 .
 
 3834;txt;01
-Aşağıdaki dosya türleri (veya dosya uzantıları) ve klasörler, Anında Kurtar'dan dışlanacaktır.
+Aşağıdaki dosya türleri (veya dosya uzantıları) ve klasörler, Anında Kurtarma'dan dışlanacaktır.
 .
 
 3835;txt;01
@@ -2129,11 +2129,11 @@ Dosya Türünü Girin
 .
 
 3836;txt;01
-Anında Kurtar'dan dışlamak istediğiniz bir klasör seçin.
+Anında Kurtarma'dan dışlamak istediğiniz bir klasör seçin.
 .
 
 3837;txt;01
-Anında Kurtar'a dahil olmayacak bir dosya türü (veya uzantısı) girin
+Anında Kurtarma'ya dahil olmayacak bir dosya türü (veya uzantısı) girin
 .
 
 #----------------------------------------------------------------------------
@@ -2794,7 +2794,7 @@ Korumalı Alan Ayarları penceresindeki Uygulamalar sayfasına bakınız.
 
 4223;txt;01
 '%2' yerel uygulama yapılandırmasını artık tüm korumalı alanlardan kaldırıldı.
-Bu uygulama yapılandırmasını tamamen silmek ister misiniz?
+Bu uygulama yapılandırmasını tamamen silmek istiyor musunuz?
 .
 
 4224;txt;01
@@ -2822,7 +2822,7 @@ Alfabetik sıralı tüm uygulama yapılandırmaları. Bu liste yerel (resmi olma
 .
 
 4291;txt;01
-Anında Kurtar için varsayılan dışlamalar
+Anında Kurtarma için varsayılan dışlamalar
 .
 
 4292;txt;01
@@ -2923,7 +2923,7 @@ Bu uygulamalar Sandboxie'nin düzgün çalışmasını etkileyebilir.
 Lütfen daha fazla bilgi ve çözüm için Sandboxie web sitesindeki
 Bilinen Çakışmalar sayfasına göz atın.
 
-Bilinen Çakışmalar sayfasını şimdi açmak ister misiniz?
+Bilinen Çakışmalar sayfasını şimdi açmak istiyor musunuz?
 .
 
 4452;txt;01
@@ -2964,7 +2964,7 @@ Yalnızca Yönetici hesapları Program &Zorlamayı Duraklat komutunu kullanabili
 
 4269;txt;01
 Lütfen yapılandırma koruması ile ilgili Sandboxie belgeleme sayfasını okuyun.
-Bu sayfayı şimdi açmak ister misiniz?
+Bu sayfayı şimdi açmak istiyor musunuz?
 .
 
 4271;txt;01
@@ -3594,7 +3594,7 @@ Daha sonra Tamam'a tıklayıp kurulumu yeniden deneyin.
 .
 
 8054;ins;01
-Sandboxie.ini yapılandırma dosyanızı saklamak ister misiniz?
+Sandboxie.ini yapılandırma dosyanızı saklamak istiyor musunuz?
 
 EVET seçerek yapılandırmayı Sandboxie.ini dosyasında saklayın.
 

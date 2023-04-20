@@ -367,7 +367,7 @@ Lütfen doğru kullanıcı profili dizinine göz atın.</translation>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="258"/>
         <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
-        <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt;, yalnızca &lt;u&gt;proje destekçilerine&lt;/u&gt; ek özellikler ve alan türleri sağlar. Gelişmiş Gizlilik alanları gibi alanlar, &lt;b&gt;&lt;font color=&apos;red&apos;&gt;kullanıcı verilerini korumalı alandaki programların yetkisiz erişimine karşı korur.&lt;/font&gt;&lt;/b&gt; Henüz bir destekçi değilseniz, Sandboxie&apos;nin daha da gelişmesini sağlamak için ve bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; almak için lütfen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;projeyi desteklemeyi&lt;/a&gt; düşünün.</translation>
+        <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt;, yalnızca &lt;u&gt;proje destekçilerine&lt;/u&gt; ek özellikler ve alan türleri sunar. Gizliliği geliştirilmiş alanlarda, &lt;b&gt;&lt;font color=&apos;red&apos;&gt;kullanıcı verileriniz korumalı alanda çalışan programların yetkisiz erişimlerine karşı daha iyi korunur.&lt;/font&gt;&lt;/b&gt; Henüz bir destekçimiz değilseniz, Sandboxie&apos;nin daha iyi geliştirilmesine katkıda bulunmak için bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; alarak lütfen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;projeyi desteklemeyi&lt;/a&gt; düşünün.</translation>
     </message>
 </context>
 <context>
@@ -718,7 +718,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="OnlineUpdater.cpp" line="99"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
-        <translation>Sandboxie-Plus&apos;ın yeni sürümünü denetlemek ister misiniz?</translation>
+        <translation>Sandboxie-Plus&apos;ın yeni sürümünü denetlemek istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="100"/>
@@ -842,7 +842,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="OnlineUpdater.cpp" line="848"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Bilgi sayfasına &lt;a href=&quot;%1&quot;&gt;gitmek ister misiniz&lt;/a&gt;?&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Bilgi sayfasına &lt;a href=&quot;%1&quot;&gt;gitmek istiyor musunuz&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="856"/>
@@ -860,11 +860,11 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     </message>
     <message>
         <source>&lt;p&gt;Do you want to download the latest version?&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;En son sürümü indirmek ister misiniz?&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;En son sürümü indirmek istiyor musunuz?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;İndirme sayfasına &lt;a href=&quot;%1&quot;&gt;gitmek ister misiniz&lt;/a&gt;?&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;İndirme sayfasına &lt;a href=&quot;%1&quot;&gt;gitmek istiyor musunuz&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Don&apos;t show this message anymore.</source>
@@ -1300,7 +1300,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="557"/>
         <source>Opening all IPC access also opens COM access, do you still want to restrict COM to the sandbox?</source>
-        <translation>Tüm IPC erişimini açmak COM erişimini de açar, yine de COM&apos;u korumalı alanla sınırlamak istiyor musunuz?</translation>
+        <translation>Tüm IPC erişimini açmak COM erişimini de açar, COM&apos;u yine de korumalı alanla sınırlandırmak istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="558"/>
@@ -1694,7 +1694,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/PopUpWindow.h" line="56"/>
         <source>Remove this message from the list</source>
-        <translation>Bu mesajı listeden kaldır</translation>
+        <translation>Bu mesajı listeden kaldırır</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="55"/>
@@ -1735,12 +1735,12 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/PopUpWindow.h" line="176"/>
         <source>Requesting process terminated</source>
-        <translation>Talep işlemi sonlandırıldı</translation>
+        <translation>İstek süreci sonlandırıldı</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="100"/>
         <source>Remember for this process</source>
-        <translation>Bu işlemi hatırla</translation>
+        <translation>Bu işlem için hatırla</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="120"/>
@@ -1768,37 +1768,37 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/PopUpWindow.h" line="271"/>
         <source>Disable quick recovery until the box restarts</source>
-        <translation>Korumalı alan yeniden başlayana kadar hızlı kurtarmayı devre dışı bırak</translation>
+        <translation>Korumalı alan yeniden başlatılana kadar hızlı kurtarmayı devre dışı bırak</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="251"/>
         <source>Recover</source>
-        <translation>Kurtarma</translation>
+        <translation>Kurtar</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="252"/>
         <source>Recover the file to original location</source>
-        <translation>Dosyayı gerçek konumuna kurtar</translation>
+        <translation>Dosyayı gerçek konumuna kurtarır</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="266"/>
         <source>Dismiss</source>
-        <translation>Yok Say</translation>
+        <translation>Reddet</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="267"/>
         <source>Don&apos;t recover this file right now</source>
-        <translation>Bu dosyayı şimdi geri yükle</translation>
+        <translation>Bu dosya şimdilik kurtarılmaz</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="258"/>
         <source>Open file recovery for this box</source>
-        <translation>Bu korumalı alan için dosya kurtarmayı etkinleştir</translation>
+        <translation>Bu korumalı alan için dosya kurtarma penceresini aç</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="270"/>
         <source>Dismiss all from this box</source>
-        <translation>Bu korumalı alandakileri yok say</translation>
+        <translation>Bu korumalı alandan gelen bildirimleri kaldır</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="237"/>
@@ -1863,28 +1863,28 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <location filename="Windows/PopUpWindow.cpp" line="270"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation>%4&apos;nin (%5) %1 büyüklüğündeki bir dosyayı korumalı alana kopyalamasına izin vermek istiyor musunuz: %2?
+        <translation>%4&apos;nin (%5) %1 boyutundaki dosyayı korumalı alana kopyalanmasına izin vermek istiyor musunuz: %2?
 Dosya adı: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="276"/>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation>%1&apos;in (%2) internete erişimine izin vermek istiyor musunuz?
+        <translation>%1&apos;nin (%2) internete erişmesine izin vermek istiyor musunuz?
 Tam yol: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="335"/>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
-        <translation>%1, %2&apos;den hızlı kurtarma için uygun.
+        <translation>%1 dosyası %2 içinden hızlı kurtarılmaya uygundur.
 Dosyayı yazan: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="428"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation>%1 büyüklüğündeki bir dosya %2 korumalı alanına taşınıyor, %3 kaldı.
+        <translation>%1 boyutundaki dosya %2 korumalı alanına taşınıyor, %3 kaldı.
 Tam yol: %4</translation>
     </message>
 </context>
@@ -2161,7 +2161,7 @@ Tam yol: %4</translation>
     </message>
     <message>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
-        <translation type="vanished">Sandboxie-Plus&apos;ın yeni sürümünü denetlemek ister misiniz?</translation>
+        <translation type="vanished">Sandboxie-Plus&apos;ın yeni sürümünü denetlemek istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="429"/>
@@ -2761,7 +2761,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="SandManRecovery.cpp" line="176"/>
         <location filename="SandManRecovery.cpp" line="211"/>
         <source>Do this for all files!</source>
-        <translation>Bunu tüm dosyalar için yap!</translation>
+        <translation>Bunu tüm dosyalara uygula!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="435"/>
@@ -3897,7 +3897,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="222"/>
         <source>Immediate Recovery</source>
-        <translation>Acil Kurtarma</translation>
+        <translation>Anında Kurtarma</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="225"/>
@@ -4080,7 +4080,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="1339"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
-        <translation>Tüm seçili korumalı alanların içeriğini gerçekten silmek istiyor musunuz?</translation>
+        <translation>Seçili tüm korumalı alanların içeriğini gerçekten silmek istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1021"/>
@@ -4989,7 +4989,7 @@ Bu alandaki işlemler, ait oldukları korumalı alanı belirten özel bir işlem
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="458"/>
         <source>Using WFP allows Sandboxie to reliably enforce IP/Port based rules for network access. Unlike system level application firewalls, Sandboxie can use different rules in each box for the same application. If you already have a good and reliable application firewall and do not need per box rules, you can leave this option unchecked. Without WFP enabled, Sandboxie will still be able to reliably and entirely block processes from accessing the network. However, this can cause the process to crash, as the driver blocks the required network device endpoints. Even with WFP disabled, Sandboxie offers to set IP/Port based rules, however these will be applied in user mode only and not be enforced by the driver. Hence, without WFP enabled, an intentionally malicious process could bypass those rules, but not the entire network block.</source>
-        <translation>WFP&apos;yi kullanmak, Sandboxie&apos;nin ağ erişimi için IP/Port tabanlı kuralları güvenilir bir şekilde uygulamasını sağlar. Sistem düzeyinde uygulama güvenlik duvarlarından farklı olarak, Sandboxie aynı uygulama için her alanda farklı kurallar kullanabilir. Zaten iyi ve güvenilir bir uygulama güvenlik duvarınız varsa ve alan başına kurallara ihtiyacınız yoksa, bu seçeneği işaretlemeden bırakabilirsiniz. WFP etkinleştirilmeden Sandboxie yine de güvenilir olur ve işlemlerin ağa erişmesini tamamen engelleyebilir. Ancak, sürücü gerekli ağ aygıtı uç noktalarını engellediği için bu, işlemin çökmesine neden olabilir. WFP devre dışı bırakıldığında bile, Sandboxie IP/Port tabanlı kurallar belirlemeyi teklif eder, ancak bunlar yalnızca kullanıcı modunda uygulanır ve sürücü tarafından uygulanmaz. Bu nedenle, WFP etkin olmadan, kasıtlı olarak kötü niyetli bir işlem bu kuralları atlayabilir, ancak tüm ağ bloğunu atlayamaz.</translation>
+        <translation>WFP&apos;nin kullanılması, Sandboxie&apos;nin ağ erişimi için IP/Port tabanlı kuralları güvenilir bir şekilde uygulamasına olanak sağlar. Sistem düzeyinde çalışan uygulama güvenlik duvarlarının aksine, Sandboxie aynı uygulama için her alanda farklı kurallar kullanabilir. Halihazırda iyi ve güvenilir bir uygulama güvenlik duvarınız varsa ve alan başına kurallara ihtiyacınız yoksa, bu seçeneği işaretlemeden bırakabilirsiniz. WFP etkinleştirilmeden bile Sandboxie, işlemlerin ağa erişmesini güvenilir bir şekilde ve tamamen engelleyebilir. Ancak, Sandboxie sürücüsü gerekli ağ aygıtı uç noktalarını engellediğinden bu durum bazı işlemlerin çökmesine neden olabilir. Sandboxie, WFP devre dışı bırakılmış olsa bile IP/Port tabanlı kurallar belirlemeyi sağlar, ancak bunlar yalnızca kullanıcı modunda uygulanacak ve sürücü tarafından uygulanmaya zorlanmayacaktır. Bu nedenle, WFP etkinleştirilmezse kötü amaçlı bir işlem bu kuralları atlatabilir ancak tüm ağ engellemesini atlatamaz.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="467"/>
@@ -5854,7 +5854,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1307"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
-        <translation>Bir program korumalı alan içindeki bir dll dosyasını yüklemeye çalıştığında 1305 mesajını yayınla</translation>
+        <translation>Bir program korumalı alandan bir dll dosyası yüklemeye çalıştığında 1305 mesajını yayınla</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1340"/>
@@ -5867,7 +5867,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
         <translation>Sandboxie&apos;nin kaynak erişim kuralları, genellikle korumalı alan içinde bulunan program ikili dosyalarına göre ayrım yapar. OpenFilePath ve OpenKeyPath yalnızca ana bilgisayarda yerel olarak bulunan uygulama ikili dosyaları için çalışır. 
 Bu kısıtlama olmaksızın bir kural tanımlamak için OpenPipePath veya OpenConfPath kullanılmalıdır. Aynı şekilde, olumsuzlama ile tanımlanan tüm Closed(File|Key|Ipc)Path yönergeleri, örn. &apos;ClosedFilePath=! iexplore.exe,C:Users*&apos;, korumalı alan içinde bulunan ikili dosyalar için her zaman kapalı olacaktır. Her iki kısıtlama ilkesi de &quot;Erişim İlkeleri&quot; sayfasından devre dışı bırakılabilir.
-Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırılmış bir kopyasını oluşturmasını ve korunan kaynaklara erişmesini önlemek için yapılır. Başka bir istismar vektörü de bir kütüphanenin yetkili bir işleme yerleşerek ona izin verilen her şeye erişim hakkı elde etmesidir. Ana Bilgisayar Görüntü Koruması kullanılarak, bir korumalı alan içinde çalışan uygulamaların (ana bilgisayarda yüklü) yalnızca korumalı alanda bulunan kütüphanleri yüklemesi engellenerek bu durum önlenebilir.</translation>
+Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırılmış bir kopyasını oluşturmasını ve korunan kaynaklara erişmesini önlemek için yapılır. Başka bir istismar vektörü de bir kütüphanenin yetkili bir işleme yerleşerek ona izin verilen her şeye erişim hakkı elde etmesidir. Ana Bilgisayar Görüntü Koruması kullanılarak, bir korumalı alanda çalışan uygulamaların (ana bilgisayarda yüklü) korumalı alanda bulunan kütüphanleri yüklemesi engellenerek bu durum önlenebilir.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1404"/>
@@ -6046,7 +6046,7 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3233"/>
         <source>Immediate Recovery</source>
-        <translation>Acil Kurtarma</translation>
+        <translation>Anında Kurtarma</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3330"/>
@@ -6838,7 +6838,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1801"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
-        <translation>Sandboxie, sisteminizde aşağıdaki yazılım uygulamalarını tespit etti. Bu uygulamalarla uyumluluğu artıracak yapılandırma ayarlarını uygulamak için Tamam&apos;ı tıklayın. Bu yapılandırma, mevcut tüm korumalı alanlarda ve tüm yeni oluşturulacaklarda etkili olacaktır.</translation>
+        <translation>Sandboxie, sisteminizde aşağıdaki yazılım uygulamalarını belirledi. Bu uygulamalarla uyumluluğu artıracak yapılandırma ayarlarını uygulamak için Tamam&apos;a tıklayın. Bu yapılandırmalar mevcut tüm korumalı alanlarda ve tüm yeni oluşturulacak alanlarda etkili olacaktır.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1610"/>

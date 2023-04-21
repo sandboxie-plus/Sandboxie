@@ -36,14 +36,12 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="445"/>
         <source>Allow access to network files and folders</source>
-        <oldsource>Allow access to network files and fodlers</oldsource>
         <translation>Consenti accesso ai file e alle cartelle di rete</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="446"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="462"/>
         <source>This option is not recommended for Hardened boxes</source>
-        <oldsource>This option is not recomended for Hardened boxes</oldsource>
         <translation>Questa opzione non è raccomandata per le aree virtuali ristrette</translation>
     </message>
     <message>
@@ -64,17 +62,17 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="467"/>
         <source>Box Options</source>
-        <translation type="unfinished">Opzioni area virtuale</translation>
+        <translation>Opzioni area virtuale</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="471"/>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
-        <translation type="unfinished">Usa autenticazione di Sandboxie invece di un token anonimo (sperimentale)</translation>
+        <translation>Usa autenticazione di Sandboxie invece di un token anonimo (sperimentale)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="472"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation type="unfinished">L&apos;uso di un token di Sandboxie personalizzato consente di isolare meglio le singole aree virtuali e di mostrare nella colonna utente del task manager il nome dell&apos;area virtuale a cui appartiene un processo. Alcune soluzioni di sicurezza di terze parti potrebbero tuttavia avere problemi con i token personalizzati.</translation>
+        <translation>L&apos;uso di un token di Sandboxie personalizzato consente di isolare meglio le singole aree virtuali e di mostrare nella colonna utente del task manager il nome dell&apos;area virtuale a cui appartiene un processo. Alcune soluzioni di sicurezza di terze parti potrebbero tuttavia avere problemi con i token personalizzati.</translation>
     </message>
 </context>
 <context>
@@ -95,13 +93,8 @@
         <translation>Immetti il nome dell&apos;area virtuale:</translation>
     </message>
     <message>
-        <source>New Box</source>
-        <translation type="vanished">Nuova area virtuale</translation>
-    </message>
-    <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="199"/>
         <source>Select box type:</source>
-        <oldsource>Sellect box type:</oldsource>
         <translation>Seleziona tipo di area virtuale:</translation>
     </message>
     <message>
@@ -223,7 +216,6 @@
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="518"/>
         <source>Configure your Web Browser&apos;s profile directories.</source>
-        <oldsource>Configure your Web Browsers profile directories.</oldsource>
         <translation>Configura le directory dei profili del browser Web.</translation>
     </message>
     <message>
@@ -261,9 +253,6 @@
         <source>No suitable folders have been found.
 Note: you need to run the browser unsandboxed for them to get created.
 Please browse to the correct user profile directory.</source>
-        <oldsource>No suitable fodlers have been found.
-Note: you need to run the browser unsandboxed for them to get created.
-Please browse to the correct user profile directory.</oldsource>
         <translation>Non sono state trovate cartelle appropriate.
 Nota: è necessario eseguire il browser all&apos;esterno dell&apos;area virtuale affinchè vengano create.
 Si prega di consultare la directory del profilo utente corretta.</translation>
@@ -299,7 +288,6 @@ Si prega di consultare la directory del profilo utente corretta.</translation>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="326"/>
         <source>Select your Web Browsers main executable, this will allow Sandboxie to identify the browser.</source>
-        <oldsource>Select your Web Browsers main executable, this will allow sandboxie to identify the browser.</oldsource>
         <translation>Selezionare l&apos;eseguibile principale del vostro browser Web, in modo da consentire a Sandboxie di identificare il browser.</translation>
     </message>
     <message>
@@ -310,13 +298,11 @@ Si prega di consultare la directory del profilo utente corretta.</translation>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="347"/>
         <source>Main executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</source>
-        <oldsource>Mein executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</oldsource>
         <translation>Eseguibile principale (es. firefox.exe, chrome.exe, msedge.exe, ecc...):</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="351"/>
         <source>Browser executable (*.exe)</source>
-        <oldsource>Browser Executable (*.exe)</oldsource>
         <translation>Eseguibile del browser (*.exe)</translation>
     </message>
     <message>
@@ -337,7 +323,6 @@ Si prega di consultare la directory del profilo utente corretta.</translation>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="504"/>
         <source>This browser name is already in use, please choose an other one.</source>
-        <oldsource>This browser name is already in use, please chooe an other one.</oldsource>
         <translation>Il nome di questo browser è già in uso, si prega di sceglierne un altro.</translation>
     </message>
 </context>
@@ -423,15 +408,12 @@ Si prega di consultare la directory del profilo utente corretta.</translation>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="297"/>
         <source>Sandbox location and behavior</source>
-        <oldsource>Sandbox location and behavioure</oldsource>
         <translation>Percorso e comportamento dell&apos;area virtuale</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="298"/>
         <source>On this page the sandbox location and its behavior can be customized.
 You can use %USER% to save each users sandbox to an own folder.</source>
-        <oldsource>On this page the sandbox location and its behaviorue can be customized.
-You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation>In questa sezione, il percorso dell&apos;area virtuale e il suo comportamento possono essere personalizzati.
 È possibile inserire %USER% per memorizzare ogni utente dell&apos;area virtuale su una propria cartella.</translation>
     </message>
@@ -483,19 +465,16 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="397"/>
         <source>The selected box location is not a valid path.</source>
-        <oldsource>The sellected box location is not a valid path.</oldsource>
         <translation>La posizione dell&apos;area virtuale selezionata non è un percorso valido.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="402"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
-        <oldsource>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</oldsource>
         <translation>La posizione dell&apos;area virtuale selezionata esiste e non è vuota, si consiglia di scegliere una nuova cartella oppure una vuota. Si desidera utilizzare una cartella esistente?</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="407"/>
         <source>The selected box location is not placed on a currently available drive.</source>
-        <oldsource>The selected box location not placed on a currently available drive.</oldsource>
         <translation>La posizione dell&apos;area virtuale selezionata non si trova su un&apos;unità attualmente disponibile.</translation>
     </message>
 </context>
@@ -540,8 +519,6 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/TemplateWizard.cpp" line="966"/>
         <source>Browser Type: Gecko (Mozilla Firefox)
 </source>
-        <oldsource>Browser Type: Gecko (Mozilla firefox)
-</oldsource>
         <translation>Tipo di browser: Gecko (Mozilla Firefox)
 </translation>
     </message>
@@ -651,10 +628,6 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation>Sandboxie Plus - Crea nuova area virtuale</translation>
     </message>
     <message>
-        <source>New Box</source>
-        <translation type="vanished">Nuova area virtuale</translation>
-    </message>
-    <message>
         <location filename="Windows/NewBoxWindow.cpp" line="39"/>
         <source>Hardened Sandbox with Data Protection</source>
         <translation>Area virtuale ristretta con protezione dati</translation>
@@ -695,7 +668,6 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="135"/>
         <source>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you experience any unexpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure group.</source>
-        <oldsource>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you expirience any unecpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure groupe.</oldsource>
         <translation>L&apos;area virtuale è stata creata usando il nuovo &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;schema di virtualizzazione versione 2&lt;/a&gt;. Se si verificano problemi imprevisti, passare allo schema di virtualizzazione versione 1 e segnalare il problema. L&apos;opzione per modificare questa impostazione si trova su Opzioni area virtuale -&gt; Opzioni File nel gruppo Struttura area virtuale.</translation>
     </message>
     <message>
@@ -773,13 +745,11 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="561"/>
         <source>failed to download updated information</source>
-        <oldsource>failed to download update informations</oldsource>
         <translation>impossibile scaricare informazioni aggiornate</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="562"/>
         <source>failed to load updated json file</source>
-        <oldsource>failed to load update json file</oldsource>
         <translation>impossibile caricare il file json aggiornato</translation>
     </message>
     <message>
@@ -795,7 +765,6 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="565"/>
         <source>updated signature is invalid !!!</source>
-        <oldsource>update signature is invalid !!!</oldsource>
         <translation>la firma aggiornata non è valida !!!</translation>
     </message>
     <message>
@@ -903,7 +872,6 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="45"/>
         <source>Enable special inconsistent PreferExternalManifest behaviour, as needed for some Edge fixes</source>
-        <oldsource>Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes</oldsource>
         <translation>Abilitare il comportamento speciale PreferExternalManifest, precedentemente utile per alcuni problemi con Microsoft Edge</translation>
     </message>
     <message>
@@ -919,7 +887,6 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="50"/>
         <source>Make specified processes think they have admin permissions.</source>
-        <oldsource>Make specified processes think thay have admin permissions.</oldsource>
         <translation>Fai credere ai processi selezionati di avere i permessi di amministrazione.</translation>
     </message>
     <message>
@@ -1560,16 +1527,12 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="222"/>
         <source>Do you really want to delete the selected local template(s)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminare i modelli locali selezionati?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="228"/>
         <source>Only local templates can be removed!</source>
         <translation>Solo i modelli locali possono essere rimossi!</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete the selected local template?</source>
-        <translation type="vanished">Eliminare il modello locale selezionato?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="37"/>
@@ -1862,7 +1825,6 @@ Percorso completo: %4</translation>
     <message>
         <location filename="SandManRecovery.cpp" line="324"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
-        <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation>I seguenti file sono stati recuperati di recente e spostati all&apos;esterno dell&apos;area virtuale.</translation>
     </message>
 </context>
@@ -2125,7 +2087,6 @@ Percorso completo: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="476"/>
         <source>Disable Message Popup</source>
-        <oldsource>Disable Message PopUp</oldsource>
         <translation>Sospendi messaggi popup</translation>
     </message>
     <message>
@@ -2356,7 +2317,6 @@ Percorso completo: %4</translation>
         <location filename="SandMan.cpp" line="485"/>
         <location filename="SandMan.cpp" line="612"/>
         <source>Is Window Sandboxed?</source>
-        <oldsource>Is Window Sandboxed</oldsource>
         <translatorcomment>Come da traduzione italiana di Sandboxie Classic</translatorcomment>
         <translation>Strumento di controllo finestre</translation>
     </message>
@@ -2616,7 +2576,6 @@ Effettuare la pulizia?</translation>
     <message>
         <location filename="SandMan.cpp" line="2208"/>
         <source>The evaluation period has expired!!!</source>
-        <oldsource>The evaluation periode has expired!!!</oldsource>
         <translation>Il periodo di valutazione è scaduto!</translation>
     </message>
     <message>
@@ -2653,7 +2612,6 @@ Effettuare la pulizia?</translation>
     <message>
         <location filename="SandMan.cpp" line="3296"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</source>
-        <oldsource>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</oldsource>
         <translation>&lt;h3&gt;Informazioni su Sandboxie Plus&lt;/h3&gt;&lt;p&gt;Versione %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
@@ -2665,7 +2623,6 @@ Effettuare la pulizia?</translation>
         <location filename="SandMan.cpp" line="574"/>
         <location filename="SandMan.cpp" line="700"/>
         <source>Reset all GUI options</source>
-        <oldsource>Reset all GUI elements</oldsource>
         <translation>Ripristina layout delle finestre</translation>
     </message>
     <message>
@@ -2841,9 +2798,6 @@ Scegliere No per selezionare: %2</translation>
         <source>The file %1 failed a security check, do you want to recover it anyway?
 
 %2</source>
-        <oldsource>The file %1 failed a security check, do you want to recover it anyways?
-
-%2</oldsource>
         <translation>Il file %1 non ha superato un controllo di sicurezza, si desidera comunque recuperarlo?
 
 %2</translation>
@@ -2883,7 +2837,6 @@ Scegliere No per selezionare: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2316"/>
         <source>This name is already in use, please select an alternative box name</source>
-        <oldsource>This Name is already in use, please select an alternative box name</oldsource>
         <translation>Questo nome è già in uso, si prega di selezionare un nome alternativo per l&apos;area virtuale</translation>
     </message>
     <message>
@@ -2955,8 +2908,6 @@ Scegliere No per selezionare: %2</translation>
         <location filename="SandMan.cpp" line="2834"/>
         <source>You are about to edit the Templates.ini, this is generally not recommended.
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
-        <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
-This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.</oldsource>
         <translation>Si sta per modificare il file Templates.ini, operazione generalmente sconsigliata.
 Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno annullate al prossimo aggiornamento di Sandboxie.</translation>
     </message>
@@ -3595,10 +3546,6 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
         <translation>Menu Start (Host)</translation>
     </message>
     <message>
-        <source>More Tools</source>
-        <translation type="vanished">Altri strumenti</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="189"/>
         <source>Browse Files</source>
         <translation>Esplora file</translation>
@@ -3836,7 +3783,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Views/SbieView.cpp" line="169"/>
         <source>Standard Applications</source>
-        <translation type="unfinished"></translation>
+        <translation>Applicazioni standard</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="195"/>
@@ -3902,7 +3849,6 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Views/SbieView.cpp" line="1169"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
-        <oldsource>WARNING: The opened registry editor is not sand boxed, please be careful and only do changes to the pre-selected sandbox locations.</oldsource>
         <translation>ATTENZIONE: L&apos;Editor del Registro di sistema verrà aperto fuori dall&apos;area virtuale, si prega di effettuare modifiche solo nei percorsi delle aree virtuali.</translation>
     </message>
     <message>
@@ -3980,7 +3926,6 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Views/SbieView.cpp" line="1389"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
-        <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
         <translation>Ora verrà visualizzato il menu Start di Sandboxie. Selezionare un programma dal menu per creare un collegamento sul desktop reale che consenta l&apos;avvio di tale programma sotto la supervisione di Sandboxie.</translation>
     </message>
     <message>
@@ -3992,7 +3937,6 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Views/SbieView.cpp" line="1466"/>
         <source>Do you want to terminate %1?</source>
-        <oldsource>Do you want to %1 %2?</oldsource>
         <translation>Si desidera terminare %1?</translation>
     </message>
     <message>
@@ -4034,7 +3978,6 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="130"/>
         <source>Sandboxie Plus - Global Settings</source>
-        <oldsource>Sandboxie Plus - Settings</oldsource>
         <translation>Sandboxie Plus - Impostazioni globali</translation>
     </message>
     <message>
@@ -4065,7 +4008,6 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="241"/>
         <source>Don&apos;t show any icon</source>
-        <oldsource>Don&apos;t integrate links</oldsource>
         <translation>Disattiva icona</translation>
     </message>
     <message>
@@ -4116,7 +4058,6 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="265"/>
         <source>%1</source>
-        <oldsource>%1 %</oldsource>
         <translation>%1</translation>
     </message>
     <message>
@@ -4163,12 +4104,12 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="410"/>
         <source>Add %1 Template</source>
-        <translation type="unfinished">Aggiungi modello %1</translation>
+        <translation>Aggiungi modello %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="595"/>
         <source>Please enter message</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Inserire il messaggio SBIE</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="627"/>
@@ -4219,7 +4160,6 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1003"/>
         <source>Supporter certificate required</source>
-        <oldsource>Supproter certificate required</oldsource>
         <translation>È necessario un certificato di supporto</translation>
     </message>
     <message>
@@ -4297,17 +4237,17 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1631"/>
         <source>Please enter the template identifier</source>
-        <translation type="unfinished">Inserire l&apos;identificativo del modello</translation>
+        <translation>Inserire l&apos;identificativo del modello</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1639"/>
         <source>Error: %1</source>
-        <translation type="unfinished">Errore: %1</translation>
+        <translation>Errore: %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1664"/>
         <source>Do you really want to delete the selected local template(s)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminare i modelli locali selezionati?</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1820"/>
@@ -4447,8 +4387,6 @@ Questa area virtuale verrà salvata in: %1</translation>
         <location filename="Wizards/NewBoxWizard.cpp" line="565"/>
         <source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
-        <oldsource>
-This box&apos;s content will be DISCARDED when its closed, and the box will be removed.</oldsource>
         <translation>
 Il contenuto di questa area virtuale verrà SCARTATO alla chiusura e l&apos;area virtuale sarà rimossa.</translation>
     </message>
@@ -4470,8 +4408,6 @@ I processi in questa area virtuale non potranno accedere a Internet o alla rete 
         <location filename="Wizards/NewBoxWizard.cpp" line="571"/>
         <source>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
-        <oldsource>
-This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatybility but reduces the security isolation.</oldsource>
         <translation>
 Quest&apos;area virtuale eseguirà Windows Installer (servizio di installazione *.msi) con un token di sistema, questo migliora la compatibilità ma riduce l&apos;isolamento di sicurezza.</translation>
     </message>
@@ -4486,9 +4422,8 @@ I processi in questa area virtuale penseranno di essere eseguiti con privilegi a
         <location filename="Wizards/NewBoxWizard.cpp" line="575"/>
         <source>
 Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
-        <oldsource>
-Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>
+I processi in questa area virtuale verranno eseguiti con un token di processo personalizzato che indica l&apos;area virtuale a cui appartengono.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="606"/>
@@ -4521,7 +4456,6 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Windows/SupportDialog.cpp" line="128"/>
         <source>The installed supporter certificate is &lt;b&gt;expired&lt;/b&gt; and &lt;u&gt;should be renewed&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</source>
-        <oldsource>The installed supporter certificate is &lt;b&gt;expired&lt;/b&gt; and &lt;u&gt;should to be renewed&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</oldsource>
         <translation>Il certificato di supporto in uso è &lt;b&gt;scaduto&lt;/b&gt; e &lt;u&gt;deve essere rinnovato&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
@@ -4603,7 +4537,6 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="37"/>
         <source>Compatibility Template Wizard</source>
-        <oldsource>Compatybility Template Wizard</oldsource>
         <translation>Creazione guidata di modelli di compatibilità</translation>
     </message>
     <message>
@@ -5540,10 +5473,6 @@ Processes in this box will be running with a custom process token indicating the
         <translation>La struttura dell&apos;area virtuale può essere modificata solo quando questa è vuota</translation>
     </message>
     <message>
-        <source>Allow sandboxed processes to open files protected by EFS</source>
-        <translation type="vanished">Consenti ai processi nell&apos;area virtuale di aprire i file protetti da EFS</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="352"/>
         <source>Disk/File access</source>
         <translation>Accesso al disco/file</translation>
@@ -5600,17 +5529,17 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Forms/OptionsWindow.ui" line="874"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Icona</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="899"/>
         <source>Move Up</source>
-        <translation type="unfinished">Sposta in alto</translation>
+        <translation>Sposta in alto</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="918"/>
         <source>Move Down</source>
-        <translation type="unfinished">Sposta in basso</translation>
+        <translation>Sposta in basso</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="953"/>
@@ -5630,39 +5559,39 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1174"/>
         <source>Various isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diverse funzioni di isolamento possono interrompere la compatibilità con alcune applicazioni. Nel caso in cui si preferisce &lt;b&gt;NON&lt;/b&gt; utilizzare quest&apos;area virtuale &lt;b&gt;in modo sicuro&lt;/b&gt; a favore della portabilità delle applicazioni, è possibile ripristinare la compatibilità abbassando le misure di sicurezza.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1272"/>
         <source>Access Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Isolamento degli accessi</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1299"/>
         <location filename="Forms/OptionsWindow.ui" line="1357"/>
         <source>Image Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Protezione immagine</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1307"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra messaggio 1305 quando un programma tenta di caricare un file DLL nell&apos;area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1340"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Impedisci ai programmi installati fuori dall&apos;area virtuale di caricare i file DLL presenti nell&apos;area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1383"/>
         <source>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Le regole di accesso alle risorse di Sandboxie spesso discriminano i programmi eseguibili all&apos;interno dell&apos;area virtuale. OpenFilePath e OpenKeyPath funzionano solo per gli eseguibili delle applicazioni situati sull&apos;host in modo nativo. Per definire una regola senza questa restrizione, è necessario utilizzare OpenPipePath o OpenConfPath. Allo stesso modo, tutte le regole Closed(File|Key|Ipc)Path che sono definite per negazione, ad esempio ‘ClosedFilePath=!iexplore.exe,C:\Users*’ saranno sempre chiuse per gli eseguibili situati all&apos;interno dell&apos;area virtuale. Entrambi i criteri di restrizione possono essere disattivati dalla pagina “Criteri di accesso”.
+In questo modo si impedisce che i processi dannosi all&apos;interno dell&apos;area virtuale creino una copia rinominata di se stessi e accedano alle risorse protette. Un altro vettore di exploit è l&apos;iniezione di una libreria DLL in un processo autorizzato per ottenere l&apos;accesso a tutto ciò a cui è consentito accedere. Utilizzando la protezione dell&apos;immagine host, questo può essere evitato impedendo alle applicazioni (installate sull&apos;host) in esecuzione nell&apos;area virtuale di caricare le librerie DLL dalla stessa area virtuale.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1404"/>
         <source>Advanced Security</source>
-        <oldsource>Adcanced Security</oldsource>
         <translation>Sicurezza avanzata</translation>
     </message>
     <message>
@@ -5718,7 +5647,6 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1896"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
-        <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
         <translation>I programmi inseriti qui potranno uscire da questa area virtuale al momento del loro avvio. È anche possibile forzarli in un&apos;altra area virtuale, ad esempio per avere il browser Web sempre aperto in una area virtuale dedicata.</translation>
     </message>
     <message>
@@ -5878,7 +5806,6 @@ Per specificare un processo, utilizza &apos;$:program.exe&apos; come percorso.</
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3424"/>
         <source>Allow use of nested job objects (works on Windows 8 and later)</source>
-        <oldsource>Allow use of nested job objects (experimental, works on Windows 8 and later)</oldsource>
         <translation>Consenti l&apos;uso dei processi nidificati (per Windows 8 e versioni successive)</translation>
     </message>
     <message>
@@ -5970,10 +5897,6 @@ Il livello di corrispondenza del processo ha una priorità più alta della speci
         <translation>Disattiva isolamento di sicurezza (sperimentale)</translation>
     </message>
     <message>
-        <source>Various advanced isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
-        <translation type="vanished">Diverse funzioni di isolamento possono interrompere la compatibilità con alcune applicazioni. Se &lt;b&gt;NON&lt;/b&gt; utilizzi quest&apos;area virtuale &lt;b&gt;per ragioni di sicurezza&lt;/b&gt;, è possibile ripristinare la compatibilità abbassando le misure di sicurezza.</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="1255"/>
         <source>Security Isolation &amp; Filtering</source>
         <translation>Isolamento e filtraggio</translation>
@@ -5992,10 +5915,6 @@ Il livello di corrispondenza del processo ha una priorità più alta della speci
         <location filename="Forms/OptionsWindow.ui" line="1286"/>
         <source>The below options can be used safely when you don&apos;t grant admin rights.</source>
         <translation>Le opzioni sottostanti possono essere usate senza rischi quando non si concedono privilegi amministrativi.</translation>
-    </message>
-    <message>
-        <source>Access isolation</source>
-        <translation type="vanished">Accesso al sistema</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3711"/>
@@ -6070,7 +5989,6 @@ Nota: le impostazioni dei programmi e delle cartelle forzate nell&apos;area virt
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4049"/>
         <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
-        <oldsource>API call trace (requirers logapi to be installed in the sbie dir)</oldsource>
         <translation>Traccia chiamata API (richiede l&apos;installazione di LogAPI nella cartella di Sandboxie Plus)</translation>
     </message>
     <message>
@@ -6335,7 +6253,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3574"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
-        <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
         <translation>Questo comando verrà eseguito prima del recupero di un file e il percorso del file passato come primo argomento. Se questo comando restituisce qualcosa di diverso da 0, il recupero viene bloccato</translation>
     </message>
     <message>
@@ -6372,7 +6289,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3989"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
-        <oldsource>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</oldsource>
         <translation>Qui è possibile configurare opzioni avanzate per processo al fine di migliorare la compatibilità e/o personalizzare il comportamento dell&apos;area virtuale.</translation>
     </message>
     <message>
@@ -6567,10 +6483,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <translation>Opzioni generali</translation>
     </message>
     <message>
-        <source>Show Notifications for relevant log Messages</source>
-        <translation type="vanished">Mostra notifiche per messaggi di log rilevanti</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="479"/>
         <source>Systray options</source>
         <translation>Opzioni area di notifica</translation>
@@ -6579,10 +6491,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <location filename="Forms/SettingsWindow.ui" line="195"/>
         <source>Open urls from this ui sandboxed</source>
         <translation>Apri gli URL di questo programma nell&apos;area virtuale</translation>
-    </message>
-    <message>
-        <source>Compatibility</source>
-        <translation type="vanished">Compatibilità</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1141"/>
@@ -6657,7 +6565,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Show file recovery window when emptying sandboxes</source>
-        <oldsource>Show first recovery window when emptying sandboxes</oldsource>
         <translation>Mostra finestra di recupero file prima di svuotare le aree virtuali</translation>
     </message>
     <message>
@@ -6678,13 +6585,12 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="73"/>
         <source>Count and display the disk space occupied by each sandbox</source>
-        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
         <translation>Calcola e mostra lo spazio su disco occupato da ogni area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="94"/>
         <source>SandMan Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opzioni SandMan</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="144"/>
@@ -6694,52 +6600,52 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="208"/>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Notifiche</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="240"/>
         <source>Add Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi voce</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="247"/>
         <source>Show file migration progress when copying large files into a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mostra l&apos;avanzamento della migrazione dei file quando si copiano file di grandi dimensioni in un&apos;area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="255"/>
         <source>Message ID</source>
-        <translation type="unfinished"></translation>
+        <translation>ID messaggio</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="260"/>
         <source>Message Text (optional)</source>
-        <translation type="unfinished"></translation>
+        <translation>Testo messaggio (opzionale)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="275"/>
         <source>SBIE Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Messaggi di Sandboxie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="301"/>
         <source>Delete Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina voce</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="308"/>
         <source>Don&apos;t show the popup message log for all SBIE messages</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nascondi le notifiche popup per tutti i messaggi di Sandboxie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="325"/>
         <source>Notification Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opzioni di notifica</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="361"/>
         <source>Sandboxie may be issue &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sandboxie potrebbe generare i &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;Messaggi SBIE&lt;/a&gt; nel log dei messaggi e mostrarli come popup. Alcuni messaggi sono informativi e notificano un evento comune, o in alcuni casi speciale, che si è verificato, mentre altri indicano una condizione di errore.&lt;br /&gt;Tramite l&apos;elenco in basso, è possibile nascondere i messaggi SBIE da non mostrare come popup:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="381"/>
@@ -6749,7 +6655,7 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="391"/>
         <source>Windows Shell</source>
-        <translation type="unfinished"></translation>
+        <translation>Shell di Windows</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="500"/>
@@ -6764,28 +6670,27 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="657"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Icona</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="714"/>
         <source>Move Up</source>
-        <translation type="unfinished">Sposta in alto</translation>
+        <translation>Sposta in alto</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="733"/>
         <source>Move Down</source>
-        <translation type="unfinished">Sposta in basso</translation>
+        <translation>Sposta in basso</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="882"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
-        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
         <translation>Mostra lo sfondo &quot;Pizza&quot; nell&apos;elenco delle aree virtuali *</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="939"/>
         <source>Display Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opzioni di visualizzazione</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1036"/>
@@ -6810,7 +6715,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1327"/>
         <source>Sandboxie Config</source>
-        <oldsource>Config Protection</oldsource>
         <translation>Configurazione Sandboxie</translation>
     </message>
     <message>
@@ -6821,7 +6725,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1589"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
-        <oldsource>Only Administrator user accounts can use Disable Forced Programs command</oldsource>
         <translation>Solo gli account Amministratore possono utilizzare la funzione «Sospendi programmi forzati»</translation>
     </message>
     <message>
@@ -6907,7 +6810,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="399"/>
         <source>Show boxes in tray list:</source>
-        <oldsource>Show only sandboxes with running processes in the tray list</oldsource>
         <translation>Mostra nell&apos;icona di notifica:</translation>
     </message>
     <message>
@@ -6923,7 +6825,7 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1063"/>
         <source>Graphic Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opzioni grafiche</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1441"/>
@@ -7127,10 +7029,6 @@ in modo diverso a seconda dell&apos;interfaccia di visualizzazione.</translation
         <translation>Supporto e aggiornamenti</translation>
     </message>
     <message>
-        <source>Sandbox Config</source>
-        <translation type="vanished">Configurazione area virtuale</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1398"/>
         <source>Default sandbox:</source>
         <translation>Area virtuale predefinita:</translation>
@@ -7138,12 +7036,12 @@ in modo diverso a seconda dell&apos;interfaccia di visualizzazione.</translation
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1540"/>
         <source>Sandboxie.ini Presets</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1624"/>
         <source>Program Control</source>
-        <translation type="unfinished">Controllo programmi</translation>
+        <translation>Controllo programmi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1690"/>
@@ -7153,12 +7051,12 @@ in modo diverso a seconda dell&apos;interfaccia di visualizzazione.</translation
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1728"/>
         <source>App Templates</source>
-        <translation type="unfinished">Compatibilità applicazioni</translation>
+        <translation>Compatibilità modelli</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1738"/>
         <source>App Compatibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Compatibilità applicazioni</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1758"/>
@@ -7183,22 +7081,22 @@ in modo diverso a seconda dell&apos;interfaccia di visualizzazione.</translation
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1814"/>
         <source>Local Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Modelli locali</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1865"/>
         <source>Add Template</source>
-        <translation type="unfinished">Aggiungi modello</translation>
+        <translation>Aggiungi modello</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1885"/>
         <source>Text Filter</source>
-        <translation type="unfinished">Cerca</translation>
+        <translation>Cerca</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1907"/>
         <source>This list contains user created custom templates for sandbox options</source>
-        <translation type="unfinished"></translation>
+        <translation>Questo elenco contiene i modelli personalizzati creati dall&apos;utente per le opzioni dell&apos;area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1924"/>
@@ -7271,7 +7169,6 @@ in modo diverso a seconda dell&apos;interfaccia di visualizzazione.</translation
     <message>
         <location filename="Forms/SnapshotsWindow.ui" line="104"/>
         <source>Default snapshot</source>
-        <oldsource>Default shapsnot</oldsource>
         <translation>Istantanea predefinita</translation>
     </message>
     <message>

@@ -14,7 +14,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.9.1 / 5.64.1] - 2022-20-04
+## [1.9.1 / 5.64.1] - 2023-
+
+### Changed
+- reworked configuration storage for box grouping
 
 ### Fixed
 - fixed system check in Classic installer [#2812](https://github.com/sandboxie-plus/Sandboxie/pull/2812)
@@ -22,8 +25,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed memory corruption issue with Normal[File/Key]Path [#2588](https://github.com/sandboxie-plus/Sandboxie/issues/2588)
 - fixed DPI scaling in the snapshot manager window [#782](https://github.com/sandboxie-plus/Sandboxie/issues/782)
 
-### Changed
-- reworked box grouping config storeage
 
 
 ## [1.9.0 / 5.64.0] - 2023-04-17

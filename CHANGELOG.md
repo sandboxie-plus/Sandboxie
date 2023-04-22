@@ -27,6 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with arm64 DialogProc hook [#2838](https://github.com/sandboxie-plus/Sandboxie/issues/2838)
 - fixed Qt6 compatybility issue with 7z FS implementation [#2681](https://github.com/sandboxie-plus/Sandboxie/issues/2681)
 - fixed issue with tls support using Qt6 [#2682](https://github.com/sandboxie-plus/Sandboxie/issues/2682)
+- added template preset for spotify [#2673](https://github.com/sandboxie-plus/Sandboxie/issues/2673)
 
 
 

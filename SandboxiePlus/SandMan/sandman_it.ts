@@ -6119,7 +6119,7 @@ instead of &quot;*&quot;.</source>
         <translation>Registra tutti gli eventi di accesso visti dal driver nel log di accesso.
 
 Queste opzioni impostano la maschera degli eventi a &quot;*&quot; - tutti gli eventi di accesso
-È possibile personalizzare la registrazione specificando nel file ini:
+È possibile personalizzare la registrazione specificando nel file Sandboxie.ini:
 &quot;A&quot; - Accessi consentiti
 &quot;D&quot; - Accessi negati
 &quot;I&quot;  - Ignora richieste di accesso al posto di &quot;*&quot;.</translation>
@@ -6163,7 +6163,7 @@ Queste opzioni impostano la maschera degli eventi a &quot;*&quot; - tutti gli ev
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4324"/>
         <source>App Templates</source>
-        <translation>Compatibilità applicazioni</translation>
+        <translation>Modelli applicazioni</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4409"/>
@@ -6309,12 +6309,13 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4636"/>
         <source>Edit ini Section</source>
-        <translation>Modifica configurazione</translation>
+        <translation type="unfinished">Modifica configurazione
+area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4642"/>
         <source>Edit ini</source>
-        <translation>Modifica file ini</translation>
+        <translation type="unfinished">Modifica Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4655"/>
@@ -6480,7 +6481,7 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="55"/>
         <source>General Config</source>
-        <translation>Opzioni generali</translation>
+        <translation>Configurazione generale</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="479"/>
@@ -6755,7 +6756,7 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1317"/>
         <source>Advanced Config</source>
-        <translation>Opzioni avanzate</translation>
+        <translation>Configurazione avanzata</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1351"/>
@@ -7036,7 +7037,7 @@ in modo diverso a seconda dell&apos;interfaccia di visualizzazione.</translation
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1540"/>
         <source>Sandboxie.ini Presets</source>
-        <translation>Impostazioni Sandboxie.ini</translation>
+        <translation>Opzioni Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1624"/>
@@ -7051,7 +7052,7 @@ in modo diverso a seconda dell&apos;interfaccia di visualizzazione.</translation
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1728"/>
         <source>App Templates</source>
-        <translation>Compatibilità modelli</translation>
+        <translation>Modelli applicazioni</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1738"/>
@@ -7101,7 +7102,8 @@ in modo diverso a seconda dell&apos;interfaccia di visualizzazione.</translation
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1924"/>
         <source>Edit ini Section</source>
-        <translation>Modifica configurazione</translation>
+        <translation type="unfinished">Modifica configurazione
+globale</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1933"/>
@@ -7111,7 +7113,7 @@ in modo diverso a seconda dell&apos;interfaccia di visualizzazione.</translation
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1940"/>
         <source>Edit ini</source>
-        <translation>Modifica file ini</translation>
+        <translation type="unfinished">Modifica Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1966"/>

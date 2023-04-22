@@ -63,6 +63,10 @@ copy %qtPath%\plugins\platforms\qwindows.dll %instPath%\platforms\
 mkdir %instPath%\styles
 copy %qtPath%\plugins\styles\qwindowsvistastyle.dll %instPath%\styles\
 
+IF %archPath% == ARM64 (
+mkdir %instPath%\tls
+copy %qtPath%\plugins\tls\qopensslbackend.dll %instPath%\tls\
+)
 
 ECHO Copying OpenSSL libraries
 IF %archPath% == Win32 (

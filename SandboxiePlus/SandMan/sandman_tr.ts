@@ -36,14 +36,12 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="445"/>
         <source>Allow access to network files and folders</source>
-        <oldsource>Allow access to network files and fodlers</oldsource>
         <translation>Ağ dosyalarına ve klasörlerine erişime izin ver</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="446"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="462"/>
         <source>This option is not recommended for Hardened boxes</source>
-        <oldsource>This option is not recomended for Hardened boxes</oldsource>
         <translation>Güçlendirilmiş alanlar için bu seçenek önerilmez</translation>
     </message>
     <message>
@@ -96,13 +94,8 @@
         <translation>Alan adı girin:</translation>
     </message>
     <message>
-        <source>New Box</source>
-        <translation type="vanished">Yeni Alan</translation>
-    </message>
-    <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="199"/>
         <source>Select box type:</source>
-        <oldsource>Sellect box type:</oldsource>
         <translation>Alan türü seçin:</translation>
     </message>
     <message>
@@ -224,7 +217,6 @@
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="518"/>
         <source>Configure your Web Browser&apos;s profile directories.</source>
-        <oldsource>Configure your Web Browsers profile directories.</oldsource>
         <translation>Web Tarayıcılarınızın profil dizinlerini yapılandırın.</translation>
     </message>
     <message>
@@ -262,9 +254,6 @@
         <source>No suitable folders have been found.
 Note: you need to run the browser unsandboxed for them to get created.
 Please browse to the correct user profile directory.</source>
-        <oldsource>No suitable fodlers have been found.
-Note: you need to run the browser unsandboxed for them to get created.
-Please browse to the correct user profile directory.</oldsource>
         <translation>Uygun klasör bulunamadı.
 Not: Oluşturulmaları için tarayıcıyı korumalı alanda dışında çalıştırmanız gerekir.
 Lütfen doğru kullanıcı profili dizinine göz atın.</translation>
@@ -300,7 +289,6 @@ Lütfen doğru kullanıcı profili dizinine göz atın.</translation>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="326"/>
         <source>Select your Web Browsers main executable, this will allow Sandboxie to identify the browser.</source>
-        <oldsource>Select your Web Browsers main executable, this will allow sandboxie to identify the browser.</oldsource>
         <translation>Web Tarayıcınızın ana yürütülebilir dosyasını seçin, bu, Sandboxie&apos;nin tarayıcıyı tanımlamasını sağlayacaktır.</translation>
     </message>
     <message>
@@ -311,13 +299,11 @@ Lütfen doğru kullanıcı profili dizinine göz atın.</translation>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="347"/>
         <source>Main executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</source>
-        <oldsource>Mein executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</oldsource>
         <translation>Ana yürütülebilir dosya (ör. firefox.exe, chrome.exe, msedge.exe, vb...):</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="351"/>
         <source>Browser executable (*.exe)</source>
-        <oldsource>Browser Executable (*.exe)</oldsource>
         <translation>Yürütülebilir tarayıcı dosyası (*.exe)</translation>
     </message>
     <message>
@@ -338,7 +324,6 @@ Lütfen doğru kullanıcı profili dizinine göz atın.</translation>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="504"/>
         <source>This browser name is already in use, please choose an other one.</source>
-        <oldsource>This browser name is already in use, please chooe an other one.</oldsource>
         <translation>Bu tarayıcı adı zaten kullanımda, lütfen başka bir ad seçin.</translation>
     </message>
 </context>
@@ -424,15 +409,12 @@ Lütfen doğru kullanıcı profili dizinine göz atın.</translation>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="297"/>
         <source>Sandbox location and behavior</source>
-        <oldsource>Sandbox location and behavioure</oldsource>
         <translation>Korumalı Alan Konumu ve Davranışı</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="298"/>
         <source>On this page the sandbox location and its behavior can be customized.
 You can use %USER% to save each users sandbox to an own folder.</source>
-        <oldsource>On this page the sandbox location and its behaviorue can be customized.
-You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation>Bu sayfadan korumalı alan konumu ve davranışı özelleştirilebilir.
 Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER% kullanabilirsiniz.</translation>
     </message>
@@ -484,19 +466,16 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="397"/>
         <source>The selected box location is not a valid path.</source>
-        <oldsource>The sellected box location is not a valid path.</oldsource>
         <translation>Seçili alan konumu geçerli bir yol değil.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="402"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
-        <oldsource>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</oldsource>
         <translation>Seçili alan konumu var ve boş değil, yeni veya boş bir klasör seçmeniz önerilir. Var olan klasörü kullanmak istediğinizden emin misiniz?</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="407"/>
         <source>The selected box location is not placed on a currently available drive.</source>
-        <oldsource>The selected box location not placed on a currently available drive.</oldsource>
         <translation>Seçili alan konumu şu anda kullanılabilir bir sürücüde bulunmuyor.</translation>
     </message>
 </context>
@@ -541,8 +520,6 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
         <location filename="Wizards/TemplateWizard.cpp" line="966"/>
         <source>Browser Type: Gecko (Mozilla Firefox)
 </source>
-        <oldsource>Browser Type: Gecko (Mozilla firefox)
-</oldsource>
         <translation>Tarayıcı türü: Gecko (Mozilla Firefox)
 </translation>
     </message>
@@ -647,10 +624,6 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
 <context>
     <name>CNewBoxWindow</name>
     <message>
-        <source>New Box</source>
-        <translation type="vanished">Yeni Alan</translation>
-    </message>
-    <message>
         <location filename="Windows/NewBoxWindow.cpp" line="23"/>
         <source>Sandboxie-Plus - Create New Box</source>
         <translation>Sandboxie-Plus - Yeni Alan Oluştur</translation>
@@ -696,7 +669,6 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="135"/>
         <source>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you experience any unexpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure group.</source>
-        <oldsource>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you expirience any unecpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure groupe.</oldsource>
         <translation>Yeni korumalı alan, yeni &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Sanallaştırma Şeması Sürüm 2&lt;/a&gt; kullanılarak oluşturulmuştur. Bu alanla ilgili herhangi bir beklenmeyen sorunla karşılaşırsanız, lütfen Sanallaştırma Şeması Sürüm 1&apos;e geçip sorunu bize bildirin. Bu ön ayarı değiştirmek için Alan Seçenekleri sayfasındaki Dosya Seçenekleri grubunda bulunan Alan Yapısı bölümüne bakabilirsiniz.</translation>
     </message>
     <message>
@@ -774,13 +746,11 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="OnlineUpdater.cpp" line="561"/>
         <source>failed to download updated information</source>
-        <oldsource>failed to download update informations</oldsource>
         <translation>güncelleme bilgisi indirilemedi</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="562"/>
         <source>failed to load updated json file</source>
-        <oldsource>failed to load update json file</oldsource>
         <translation>güncel json dosyası yüklenemedi</translation>
     </message>
     <message>
@@ -796,7 +766,6 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="OnlineUpdater.cpp" line="565"/>
         <source>updated signature is invalid !!!</source>
-        <oldsource>update signature is invalid !!!</oldsource>
         <translation>güncelleme imzası geçersiz!</translation>
     </message>
     <message>
@@ -850,25 +819,9 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
         <translation>Bu duyuruyu gelecekte gösterme.</translation>
     </message>
     <message>
-        <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;New version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;Sandboxie-Plus&apos;ın yeni bir sürümü var.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Yeni sürüm:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
-    </message>
-    <message>
         <location filename="OnlineUpdater.cpp" line="398"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;New version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;Sandboxie-Plus&apos;ın yeni bir sürümü mevcut.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;Yeni sürüm:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Do you want to download the latest version?&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;En son sürümü indirmek istiyor musunuz?&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;İndirme sayfasına &lt;a href=&quot;%1&quot;&gt;gitmek istiyor musunuz&lt;/a&gt;?&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>Don&apos;t show this message anymore.</source>
-        <translation type="vanished">Artık bu mesajı gösterme.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="274"/>
@@ -878,18 +831,6 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Yeni güncelleme bulunamadı, Sandboxie-Plus&apos;ınız güncel.
 
 Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını sağlamak için, genellikle en son GitHub sürümünün gerisindedir.</translation>
-    </message>
-    <message>
-        <source>Downloading new version...</source>
-        <translation type="vanished">Yeni sürüm indiriliyor...</translation>
-    </message>
-    <message>
-        <source>Failed to download update from: %1</source>
-        <translation type="vanished">%1&apos;den güncelleme indirilemedi</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;A Sandboxie-Plus update has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;Aşağıdaki konuma bir Sandboxie-Plus güncellemesi indirildi:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Yüklemeye Başlamak istiyor musunuz? Korumalı alanda çalışan program varsa sonlandırılır.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="964"/>
@@ -923,11 +864,6 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <location filename="Windows/OptionsNetwork.cpp" line="523"/>
         <source>Template values can not be edited.</source>
         <translation>Şablon değerleri düzenlenemez.</translation>
-    </message>
-    <message>
-        <source>Lingerer</source>
-        <translatorcomment>çevirinin oyalayıcı olduğuna emin değilim. orijinali Lingerer</translatorcomment>
-        <translation type="vanished">Oyalayıcı</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="446"/>
@@ -995,10 +931,6 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Sandboxie Plus - &apos;%1&apos; Ayarlar</translation>
     </message>
     <message>
-        <source>Leader</source>
-        <translation type="vanished">Lider</translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsWindow.cpp" line="993"/>
         <location filename="Windows/OptionsWindow.cpp" line="1011"/>
         <location filename="Windows/OptionsAccess.cpp" line="404"/>
@@ -1041,10 +973,6 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <location filename="Windows/OptionsRecovery.cpp" line="150"/>
         <source>Please enter a file extension to be excluded</source>
         <translation>Lütfen hariç tutulacak bir dosya uzantısı girin</translation>
-    </message>
-    <message>
-        <source>Exclusion</source>
-        <translation type="vanished">Hariç tutma</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="353"/>
@@ -1383,10 +1311,6 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Yalnızca yerel şablonlar kaldırılabilir!</translation>
     </message>
     <message>
-        <source>Do you really want to delete the selected local template?</source>
-        <translation type="vanished">Seçili yerel şablonu gerçekten silmek istiyor musunuz?</translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsNetwork.cpp" line="37"/>
         <location filename="Windows/OptionsNetwork.cpp" line="578"/>
         <source>Any</source>
@@ -1583,7 +1507,6 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="45"/>
         <source>Enable special inconsistent PreferExternalManifest behaviour, as needed for some Edge fixes</source>
-        <oldsource>Enable special inconsistent PreferExternalManifest behavioure, as neede for some edge fixes</oldsource>
         <translation>Bazı Edge düzeltmeleri için gerektiği gibi özel tutarsız PreferExternalManifest davranışını etkinleştirir</translation>
     </message>
     <message>
@@ -1599,7 +1522,6 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="50"/>
         <source>Make specified processes think they have admin permissions.</source>
-        <oldsource>Make specified processes think thay have admin permissions.</oldsource>
         <translation>Belirtilen işlemlerin yönetici izinlerine sahip olduklarını düşünmelerini sağlar.</translation>
     </message>
     <message>
@@ -1667,10 +1589,6 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <translation>Reddet</translation>
     </message>
     <message>
-        <source>On Delete</source>
-        <translation type="vanished">Silmede</translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="743"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="765"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="776"/>
@@ -1712,12 +1630,12 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/PopUpWindow.h" line="359"/>
         <source>Remove this progress indicator from the list</source>
-        <translation>Bu ilerleme göstergesini listeden kaldır</translation>
+        <translation>Bu ilerleme göstergesini listeden kaldırır</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="358"/>
         <source>Dismiss</source>
-        <translation>Yok Say</translation>
+        <translation>Kaldır</translation>
     </message>
 </context>
 <context>
@@ -1908,7 +1826,6 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandManRecovery.cpp" line="324"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
-        <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation>Şu dosyalar yakın zamanda kurtarıldı ve bir korumalı alandan taşındı.</translation>
     </message>
 </context>
@@ -1984,7 +1901,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="112"/>
         <source>Delete everything, including all snapshots</source>
-        <translation>Tüm anlık görüntüler dahil her şeyi silin</translation>
+        <translation>Tüm anlık görüntüler dahil her şeyi sil</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="277"/>
@@ -2160,10 +2077,6 @@ Tam yol: %4</translation>
         <translation>%1 korumalı alanından yapılandırma kopyalaması başarısız oldu: %2</translation>
     </message>
     <message>
-        <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
-        <translation type="vanished">Sandboxie-Plus&apos;ın yeni sürümünü denetlemek istiyor musunuz?</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="429"/>
         <source>Simple View</source>
         <translation>Basit Görünüm</translation>
@@ -2224,11 +2137,6 @@ Tam yol: %4</translation>
         <translation>Sandboxie Yöneticisi&apos;ni kapatmak istiyor musunuz?</translation>
     </message>
     <message>
-        <source>Support Sandboxie-Plus with Donations</source>
-        <oldsource>Support Sandboxie-Plus with a Donation</oldsource>
-        <translation type="vanished">Sandboxie-Plus&apos;ı Bağışlarla Destekleyin</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="3026"/>
         <source>Failed to create directory for new snapshot</source>
         <translation>Yeni anlık görüntü için dizin oluşturulamadı</translation>
@@ -2268,9 +2176,6 @@ Tam yol: %4</translation>
         <source>The file %1 failed a security check, do you want to recover it anyway?
 
 %2</source>
-        <oldsource>The file %1 failed a security check, do you want to recover it anyways?
-
-%2</oldsource>
         <translation>%1 dosyası için güvenlik denetimi başarısız oldu, dosyayı yine de kurtarmak istiyor musunuz?
 
 %2</translation>
@@ -2328,10 +2233,6 @@ Tam yol: %4</translation>
         <location filename="SandMan.cpp" line="3017"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
         <translation>Korumalı alan adı yalnızca harf, rakam ve alt çizgi içerebilir.</translation>
-    </message>
-    <message>
-        <source>Reload ini file</source>
-        <translation type="vanished">Ini Dosyasını Yeniden Yükle</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="404"/>
@@ -2458,10 +2359,6 @@ Tam yol: %4</translation>
         <translation>&apos;%1&apos; ve &apos;%2&apos; anlık görüntü dizinleri birleştirilirken hata oluştu, anlık görüntü tam olarak birleştirilmedi.</translation>
     </message>
     <message>
-        <source>Edit ini file</source>
-        <translation type="vanished">Ini Dosyasını Düzenle</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="547"/>
         <source>Cleanup Message Log</source>
         <translation>Mesaj Günlüğünü Temizle</translation>
@@ -2505,21 +2402,12 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="476"/>
         <source>Disable Message Popup</source>
-        <oldsource>Disable Message PopUp</oldsource>
         <translation>Açılır Mesaj Penceresini Devre Dışı Bırak</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="675"/>
         <source>Import Sandbox</source>
         <translation>Korumalı Alanı İçe Aktar</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;There is a new build of Sandboxie-Plus ready&lt;/a&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;Yeni bir Sandboxie-Plus sürümü hazır&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;There is a new build of Sandboxie-Plus available&lt;/a&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;sbie://update/check&quot; style=&quot;color: red;&quot;&gt;Yeni bir Sandboxie-Plus sürümü mevcut&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="824"/>
@@ -2579,7 +2467,6 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2208"/>
         <source>The evaluation period has expired!!!</source>
-        <oldsource>The evaluation periode has expired!!!</oldsource>
         <translation>Değerlendirme süresi dolmuştur!</translation>
     </message>
     <message>
@@ -2595,7 +2482,6 @@ Tam yol: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="2316"/>
         <source>This name is already in use, please select an alternative box name</source>
-        <oldsource>This Name is already in use, please select an alternative box name</oldsource>
         <translatorcomment>Sandbox için Korumalı Alan kullanıldığından dolayı box için de alan kullandım.</translatorcomment>
         <translation>Bu ad zaten kullanılıyor, lütfen alternatif bir alan adı seçin</translation>
     </message>
@@ -2638,8 +2524,6 @@ Tam yol: %4</translation>
         <location filename="SandMan.cpp" line="2834"/>
         <source>You are about to edit the Templates.ini, this is generally not recommended.
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
-        <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
-This file is part of Sandboxie and all changed done to it will be reverted next time Sandboxie is updated.</oldsource>
         <translation>Templates.ini dosyasını düzenlemek üzeresiniz, bu genellikle önerilmez. Bu dosya Sandboxie&apos;nin bir parçasıdır ve üzerinde yapılan tüm değişiklikler Sandboxie güncellendiğinde kaybolacaktır.</translation>
     </message>
     <message>
@@ -2990,7 +2874,6 @@ Hayır şunları seçer: %2</translation>
         <location filename="SandMan.cpp" line="485"/>
         <location filename="SandMan.cpp" line="612"/>
         <source>Is Window Sandboxed?</source>
-        <oldsource>Is Window Sandboxed</oldsource>
         <translation>Pencere Korumalı Alanda Mı?</translation>
     </message>
     <message>
@@ -3107,17 +2990,9 @@ Hayır şunları seçer: %2</translation>
         <translation>Korumalı Alan %1</translation>
     </message>
     <message>
-        <source>&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus release ready&lt;/a&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;sbie://update/installer&quot; style=&quot;color: red;&quot;&gt;Yeni bir Sandboxie-Plus sürümü hazır&lt;/a&gt;</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="816"/>
         <source>Click to run installer</source>
         <translation>Yükleyiciyi çalıştırmak için tıklayın</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;There is a new Sandboxie-Plus update ready&lt;/a&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;sbie://update/apply&quot; style=&quot;color: red;&quot;&gt;Yeni bir Sandboxie-Plus güncellemesi hazır&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="820"/>
@@ -3219,37 +3094,36 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="3248"/>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Harfe Duyarlı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3249"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>Düzİfa</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3250"/>
         <source>Highlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Vurgula</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3251"/>
         <source>Close</source>
-        <translation type="unfinished">Kapat</translation>
+        <translation>Kapat</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3252"/>
         <source>&amp;Find ...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Bul ...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3253"/>
         <source>All columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Tüm Sütunlar</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3302"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</source>
-        <oldsource>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</oldsource>
         <translation>&lt;h3&gt;Sandboxie-Plus hakkında&lt;/h3&gt;&lt;p&gt;Sürüm %1&lt;/p&gt;&lt;p&gt;Telif hakkı (c) 2020-2023, DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
@@ -3293,14 +3167,6 @@ Hayır şunları seçer: %2</translation>
         <location filename="SandMan.cpp" line="538"/>
         <source>Refresh View</source>
         <translation>Görünümü Yenile</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;There is a new build of Sandboxie-Plus available&lt;/a&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;sbie://update/package&quot; style=&quot;color: red;&quot;&gt;Yeni bir Sandboxie-Plus derlemesi mevcut&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>Click to install update</source>
-        <translation type="vanished">Güncellemeyi yüklemek için tıklayın</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="833"/>
@@ -3442,7 +3308,6 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SbieProcess.cpp" line="73"/>
         <source>KMPlayer</source>
-        <oldsource>KM Player</oldsource>
         <translation>KMPlayer</translation>
     </message>
     <message>
@@ -3864,10 +3729,6 @@ Hayır şunları seçer: %2</translation>
         <translation>Komut İstemi</translation>
     </message>
     <message>
-        <source>Boxed Tools</source>
-        <translation type="vanished">Alan Araçları</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="179"/>
         <source>Command Prompt (as Admin)</source>
         <translation>Komut İstemi (Yönetici olarak)</translation>
@@ -3921,10 +3782,6 @@ Hayır şunları seçer: %2</translation>
         <translation>(Ana Bilgisayar) Başlat Menüsü</translation>
     </message>
     <message>
-        <source>More Tools</source>
-        <translation type="vanished">Daha Fazla Araç</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="223"/>
         <source>Immediate Recovery</source>
         <translation>Anında Kurtarma</translation>
@@ -3938,7 +3795,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="227"/>
         <source>Duplicate Box Config</source>
-        <translation>Alan Yapılandırmasını Yinele</translation>
+        <translation>Alan Yapılandırmasını Çoğalt</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="228"/>
@@ -4000,7 +3857,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="318"/>
         <source>Duplicate Sandbox Config</source>
-        <translation>Korumalı Alan Yapılandırmasını Yinele</translation>
+        <translation>Korumalı Alan Yapılandırmasını Çoğalt</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="319"/>
@@ -4051,13 +3908,11 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="1389"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
-        <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
         <translation>Sandboxie Başlat Menüsü şimdi görüntülenecektir. Menüden bir uygulama seçtikten sonra gerçek masaüstünüzde o uygulamayı Sandboxie&apos;nin gözetiminde çalıştırmak için kullanabileceğiniz yeni bir kısayol simgesi oluşturulacaktır.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1466"/>
         <source>Do you want to terminate %1?</source>
-        <oldsource>Do you want to %1 %2?</oldsource>
         <translation>%1&apos;(y)i sonlandırmak istiyor musunuz?</translation>
     </message>
     <message>
@@ -4172,7 +4027,6 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="130"/>
         <source>Sandboxie Plus - Global Settings</source>
-        <oldsource>Sandboxie Plus - Settings</oldsource>
         <translation>Sandboxie Plus - Genel Ayarlar</translation>
     </message>
     <message>
@@ -4251,18 +4105,6 @@ Hayır şunları seçer: %2</translation>
         <translation>Çeviri yok</translation>
     </message>
     <message>
-        <source>Advanced Config</source>
-        <translation type="vanished">Gelişmiş Yapılandırma</translation>
-    </message>
-    <message>
-        <source>Sandbox Config</source>
-        <translation type="vanished">Korumalı Alan Yapılandırması</translation>
-    </message>
-    <message>
-        <source>Config Protection</source>
-        <translation type="vanished">Yapılandırma Koruması</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="237"/>
         <source>Don&apos;t integrate links</source>
         <translation>Kısayolları entegre etme</translation>
@@ -4310,12 +4152,11 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="253"/>
         <source>Ignore</source>
-        <translation>Yok say</translation>
+        <translation>Yok Say</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="265"/>
         <source>%1</source>
-        <oldsource>%1 %</oldsource>
         <translation>%1</translation>
     </message>
     <message>
@@ -4390,13 +4231,8 @@ Hayır şunları seçer: %2</translation>
         <translation>Bu destekçi sertifikası &lt;font color=&apos;red&apos;&gt;%1 gün içinde sona erecek&lt;/font&gt;, lütfen &lt;a href=&quot;sbie://update/cert&quot;&gt;yenilenmiş bir sertifika alın&lt;/a&gt;.</translation>
     </message>
     <message>
-        <source>Live channel is distributed as revisions only</source>
-        <translation type="vanished">Canlı kanal yalnızca düzeltmeler olarak dağıtılır</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="1003"/>
         <source>Supporter certificate required</source>
-        <oldsource>Supproter certificate required</oldsource>
         <translation>Destekçi sertifikası gereklidir</translation>
     </message>
     <message>
@@ -4428,18 +4264,6 @@ Hayır şunları seçer: %2</translation>
         <location filename="Windows/SettingsWindow.cpp" line="1820"/>
         <source>%1 (Current)</source>
         <translation>%1 (Kullanılan)</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;0&quot;&gt;%1&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;1&quot;&gt;%1&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>Do you want to download the version %1?</source>
-        <translation type="vanished">%1 sürümünü indirmek istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="749"/>
@@ -4584,8 +4408,6 @@ Bu Korumalı Alan şuraya kaydedilecek: %1</translation>
         <location filename="Wizards/NewBoxWizard.cpp" line="565"/>
         <source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
-        <oldsource>
-This box&apos;s content will be DISCARDED when its closed, and the box will be removed.</oldsource>
         <translation>
 Bu alandaki son işlem sona erdikten sonra alanın içeriği ATILACAKTIR ve alan kaldırılacaktır.</translation>
     </message>
@@ -4655,7 +4477,6 @@ Bu alandaki işlemler, ait oldukları korumalı alanı belirten özel bir işlem
     <message>
         <location filename="Windows/SupportDialog.cpp" line="128"/>
         <source>The installed supporter certificate is &lt;b&gt;expired&lt;/b&gt; and &lt;u&gt;should be renewed&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</source>
-        <oldsource>The installed supporter certificate is &lt;b&gt;expired&lt;/b&gt; and &lt;u&gt;should to be renewed&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</oldsource>
         <translation>Yüklenen destekçi sertifikasının &lt;b&gt;süresi dolmuş&lt;/b&gt; ve &lt;u&gt;yenilenmesi gerekiyor&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
@@ -4737,7 +4558,6 @@ Bu alandaki işlemler, ait oldukları korumalı alanı belirten özel bir işlem
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="37"/>
         <source>Compatibility Template Wizard</source>
-        <oldsource>Compatybility Template Wizard</oldsource>
         <translation>Uyumluluk Şablonu Sihirbazı</translation>
     </message>
     <message>
@@ -5142,17 +4962,9 @@ Bu alandaki işlemler, ait oldukları korumalı alanı belirten özel bir işlem
         <translation>Korumalı alandaki programlar tarafından oluşturulan pencere sınıfı adları değiştirilmesin</translation>
     </message>
     <message>
-        <source>Internet Restrictions</source>
-        <translation type="vanished">İnternet Kısıtlamaları</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="4109"/>
         <source>Log Debug Output to the Trace Log</source>
         <translation>Hata Ayıklama Çıktısını İzleme Günlüğüne Kaydet</translation>
-    </message>
-    <message>
-        <source>Forced Programs</source>
-        <translation type="vanished">Zorunlu Programlar</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2564"/>
@@ -5178,14 +4990,6 @@ Bu alandaki işlemler, ait oldukları korumalı alanı belirten özel bir işlem
         <location filename="Forms/OptionsWindow.ui" line="503"/>
         <source>kilobytes</source>
         <translation>kilobayt</translation>
-    </message>
-    <message>
-        <source>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.
-
-If leader processes are defined, all others are treated as lingering processes.</source>
-        <translation type="vanished">Kalan programlar, diğer tüm işlemler sonlandırıldıktan sonra hala çalışıyorsa otomatik olarak sonlandırılacaktır.
-
-Lider işlemler tanımlanırsa, diğer tüm işlemler oyalayıcı işlemler olarak değerlendirilir.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2158"/>
@@ -5416,10 +5220,6 @@ Lider işlemler tanımlanırsa, diğer tüm işlemler oyalayıcı işlemler olar
         <translation>Sistemi korumalı alandaki işlemlerden koru</translation>
     </message>
     <message>
-        <source>Add Leader Program</source>
-        <translation type="vanished">Lider Program Ekle</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="32"/>
         <source>SandboxiePlus Options</source>
         <translation>SandboxiePlus Ayarları</translation>
@@ -5552,10 +5352,6 @@ günlüğe kaydetme özelleştirilebilir.
         <translation>Korumalı alan işlemlerini iş nesnelerine ekle (Önerilir)</translation>
     </message>
     <message>
-        <source>Remove Program</source>
-        <translation type="vanished">Programı Kaldır</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="3253"/>
         <source>You can exclude folders and file types (or file extensions) from Immediate Recovery.</source>
         <translation>Klasörleri ve dosya türlerini (veya dosya uzantılarını) Anında Kurtarma&apos;nın dışında bırakabilirsiniz.</translation>
@@ -5569,10 +5365,6 @@ günlüğe kaydetme özelleştirilebilir.
         <location filename="Forms/OptionsWindow.ui" line="4324"/>
         <source>App Templates</source>
         <translation>Uygulama Şablonları</translation>
-    </message>
-    <message>
-        <source>Remove User</source>
-        <translation type="vanished">Kullanıcıyı Kaldır</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3263"/>
@@ -5602,11 +5394,6 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
         <location filename="Forms/OptionsWindow.ui" line="4357"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
         <translation>Bu liste, korumalı alan uyumluluğunu geliştiren çok sayıda şablonlar içerir</translation>
-    </message>
-    <message>
-        <source>Add Lingering Program</source>
-        <translatorcomment>oyalayıcı diye çevirdim.</translatorcomment>
-        <translation type="vanished">Oyalayıcı Program Ekle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1583"/>
@@ -5700,10 +5487,6 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
         <translation>Korumalı alandaki hizmetleri bir sistem belirteci kullanarak başlatılmasın (Önerilir)</translation>
     </message>
     <message>
-        <source>Sandbox isolation</source>
-        <translation type="vanished">Korumalı alan yalıtımı</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="995"/>
         <source>Elevation restrictions</source>
         <translation>Yetkilendirme Kısıtlamaları</translation>
@@ -5732,10 +5515,6 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
         <location filename="Forms/OptionsWindow.ui" line="359"/>
         <source>Separate user folders</source>
         <translation>Ayrı kullanıcı klasörleri</translation>
-    </message>
-    <message>
-        <source>Raw Disk access</source>
-        <translation type="vanished">Ham Disk Erişimi</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="301"/>
@@ -5781,10 +5560,6 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
         <location filename="Forms/OptionsWindow.ui" line="382"/>
         <source>The box structure can only be changed when the sandbox is empty</source>
         <translation>Alan yapısı yalnızca korumalı alan boşken değiştirilebilir</translation>
-    </message>
-    <message>
-        <source>Allow sandboxed processes to open files protected by EFS</source>
-        <translation type="vanished">Korumalı alan işlemlerinin EFS tarafından korunan dosyaları açmasına izin ver</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="352"/>
@@ -5902,7 +5677,6 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1404"/>
         <source>Advanced Security</source>
-        <oldsource>Adcanced Security</oldsource>
         <translation>Gelişmiş Güvenlik</translation>
     </message>
     <message>
@@ -5958,7 +5732,6 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1896"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
-        <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
         <translation>Buraya girilen programlar, başlatıldıklarında, bu kormalı alanın dışına çıkmalarına izin verilecektir. Bunları başka bir korumalı alana geçirmek de mümkündür, örneğin web tarayıcınızın her zaman özel bir alanda açık olması gibi.</translation>
     </message>
     <message>
@@ -6030,7 +5803,6 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2618"/>
         <source>Configure which processes can access desktop objects like windows and alike.</source>
-        <oldsource>Configure which processes can access Desktop objects like Windows and alike.</oldsource>
         <translation>Hangi işlemlerin pencereler ve benzeri masaüstü nesnelerine erişebileceğini yapılandırın.</translation>
     </message>
     <message>
@@ -6106,7 +5878,6 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3574"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
-        <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
         <translation>Bu komut, bir dosya kurtarılmadan önce çalıştırılacak ve dosya yolu ilk bağımsız değişken olarak aktarılacaktır. Bu komut 0&apos;dan başka bir değer döndürürse, kurtarma işlemi engellenecektir</translation>
     </message>
     <message>
@@ -6143,7 +5914,6 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3989"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
-        <oldsource>Here you can configure advanced per process options to improve compatibility and/or customize sand boxing behavior.</oldsource>
         <translation>Burada, uyumluluğu artırmak veya korumalı alan davranışını özelleştirmek için işlem başına gelişmiş seçenekleri yapılandırabilirsiniz.</translation>
     </message>
     <message>
@@ -6154,7 +5924,6 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4049"/>
         <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
-        <oldsource>API call trace (requirers logapi to be installed in the sbie dir)</oldsource>
         <translation>API çağrı izleme (sbie dizinine logAPI yüklenmesini gerektirir)</translation>
     </message>
     <message>
@@ -6183,25 +5952,9 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
         <translation>Tüm işlemler için korumalı alan pencere istasyonunu taklit et</translation>
     </message>
     <message>
-        <source>Isolation</source>
-        <translation type="vanished">Yalıtım</translation>
-    </message>
-    <message>
-        <source>Access isolation</source>
-        <translation type="vanished">Erişim Yalıtımı</translation>
-    </message>
-    <message>
-        <source>Compatibility Templates</source>
-        <translation type="vanished">Uyumluluk Şablonları</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="4402"/>
         <source>Add Template</source>
         <translation>Şablon Ekle</translation>
-    </message>
-    <message>
-        <source>Remove Template</source>
-        <translation type="vanished">Şablonu Kaldır</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4461"/>
@@ -6284,10 +6037,6 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
         <translation>Not: Msi Yükleyici İstisnaları gerekli olmamalıdır, ancak güvendiğiniz bir msi paketini kurarken sorunlarla karşılaşırsanız, bu seçenek kurulumun başarıyla tamamlanmasına yardımcı olabilir. Yönetici haklarını bırakmayı devre dışı hale getirmeyi de deneyebilirsiniz.</translation>
     </message>
     <message>
-        <source>Security</source>
-        <translation type="vanished">Güvenlik</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="1040"/>
         <source>Security enhancements</source>
         <translation>Güvenlik Geliştirmeleri</translation>
@@ -6306,10 +6055,6 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
         <location filename="Forms/OptionsWindow.ui" line="978"/>
         <source>Enable all security enhancements (make security hardened box)</source>
         <translation>Tüm güvenlik geliştirmelerini etkinleştir (Güvenliği güçlendirilmiş alan yapar)</translation>
-    </message>
-    <message>
-        <source>Access Restrictions</source>
-        <translation type="vanished">Erişim kısıtlamaları</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1630"/>
@@ -6431,26 +6176,6 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
         <translation>Ağ ve güvenlik duvarı parametrelerinde değişikliği engelle (Kullanıcı modu)</translation>
     </message>
     <message>
-        <source>Network Firewall Rules</source>
-        <translation type="vanished">Ağ Güvenlik Duvarı Kuralları</translation>
-    </message>
-    <message>
-        <source>Resource Access Rules</source>
-        <translation type="vanished">Kaynak Erişim Kuralları</translation>
-    </message>
-    <message>
-        <source>Configure which processes can access what resources. Double click on an entry to edit it.
-&apos;Open&apos; File and Key access only applies to program binaries located outside the sandbox.
-You can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behaviour in the Policies tab.</source>
-        <translation type="vanished">Hangi işlemlerin hangi kaynaklara erişebileceğini yapılandırın. Düzenlemek için bir girdiye çift tıklayın.
-&apos;Açık&apos; Dosya ve Anahtar erişimi, yalnızca korumalı alanın dışında bulunan program ikilileri için geçerlidir.
-Bunu tüm programlara uygulamak için &apos;Hepsine Açık&apos; kullanabilir veya İlkeler sekmesinde bu davranışı değiştirebilirsiniz.</translation>
-    </message>
-    <message>
-        <source>Resource Access Policies</source>
-        <translation type="vanished">Kaynak Erişim İlkeleri</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="2785"/>
         <source>Prioritize rules based on their Specificity and Process Match Level</source>
         <translation>Özgüllüklerine ve İşlem Eşleştirme Düzeylerine göre kurallara öncelik ver</translation>
@@ -6476,10 +6201,6 @@ Bunu tüm programlara uygulamak için &apos;Hepsine Açık&apos; kullanabilir ve
         <translation>Kural İlkeleri</translation>
     </message>
     <message>
-        <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandboxed.</source>
-        <translation type="vanished">Closed...=!&lt;program&gt;,... kurallarını korumalı alanda bulunan tüm ikili dosyalara uygular.</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="2792"/>
         <source>Apply File and Key Open directives only to binaries located outside the sandbox.</source>
         <translation>Dosya ve Anahtar Açma yönergelerini yalnızca korumalı alanın dışında bulunan ikili dosyalara uygula.</translation>
@@ -6493,10 +6214,6 @@ Bunu tüm programlara uygulamak için &apos;Hepsine Açık&apos; kullanabilir ve
         <location filename="Forms/OptionsWindow.ui" line="1525"/>
         <source>Allow only privileged processes to access the Service Control Manager</source>
         <translation>Yalnızca ayrıcalıklı işlemlerin Hizmet Kontrol Yöneticisine erişmesine izin ver</translation>
-    </message>
-    <message>
-        <source>Open access to COM infrastructure (not recommended)</source>
-        <translation type="vanished">COM altyapısına açık erişim (önerilmez)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1498"/>
@@ -6523,10 +6240,6 @@ Bunu tüm programlara uygulamak için &apos;Hepsine Açık&apos; kullanabilir ve
         <location filename="Forms/OptionsWindow.ui" line="1197"/>
         <source>Disable Security Isolation (experimental)</source>
         <translation>Güvenlik Yalıtımını devre dışı bırak (Deneysel)</translation>
-    </message>
-    <message>
-        <source>Various advanced isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
-        <translation type="vanished">Çeşitli gelişmiş yalıtım özellikleri, bazı uygulamalarla uyumluluğu bozabilir. Eğer bu korumalı alanı &lt;b&gt;Güvenlik için DEĞİL&lt;/b&gt; ancak basit bir uygulama taşınabilirliği için kullanıyorsanız, bu seçenekleri değiştirerek biraz güvenlikten ödün verip uyumluluğu arttırabilirsiniz.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1255"/>
@@ -6559,10 +6272,6 @@ Bunu tüm programlara uygulamak için &apos;Hepsine Açık&apos; kullanabilir ve
 The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</source>
         <translation>Kural özgüllüğü, belirli bir kuralın belirli bir yolla ne kadar iyi eşleştiğinin bir ölçüsüdür. Basitçe söylemek gerekirse, özgüllük son eşleşen özel karakter olmayan alt dize dahil yolun başından sonuna kadar olan karakterlerin uzunluğudur. Yalnızca &quot;*.tmp&quot; gibi dosya türleriyle eşleşen bir kural, her zaman tüm dosya yolu ile eşleşeceği için en yüksek özgüllüğe sahip olacaktır.
 İşlem eşleştirme düzeyi, özgüllükten daha yüksek bir önceliğe sahiptir ve bir kuralın belirli bir işleme nasıl uygulanacağını tanımlar. İşlem adına veya grubuna göre uygulanan kurallar en güçlü eşleştirme düzeyine sahiptir. Ardından olumsuzlama ile eşleştirme gelir, yani belirtilen işlem dışındaki tüm işlemlere uygulanan kurallara aittir; en düşük eşleştirme düzeyleri ise genel eşleştirmelere, yani herhangi bir işleme uygulanan kurallara aittir.</translation>
-    </message>
-    <message>
-        <source>COM/RPC</source>
-        <translation type="vanished">COM/RPC</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3444"/>
@@ -6606,10 +6315,6 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/OptionsWindow.ui" line="3690"/>
         <source>These commands are run UNBOXED just before the box content is deleted</source>
         <translation>Bu komutlar, alan içeriği silinmeden hemen önce ALAN DIŞINDAN çalıştırılır</translation>
-    </message>
-    <message>
-        <source>On Box Delete</source>
-        <translation type="vanished">Alan Silmede</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3616"/>
@@ -6739,7 +6444,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="68"/>
         <source>Recover target:</source>
-        <translation>Hedefi kurtar:</translation>
+        <translation>Hedefe kurtar:</translation>
     </message>
     <message>
         <location filename="Forms/RecoveryWindow.ui" line="61"/>
@@ -6911,17 +6616,9 @@ The process match level has a higher priority than the specificity and describes
         <translation>Korumalı Alan Varsayılanları</translation>
     </message>
     <message>
-        <source>Separate user folders</source>
-        <translation type="vanished">Ayrı kullanıcı klasörleri</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1697"/>
         <source>Prevent the listed programs from starting on this system</source>
         <translation>Listelenen programların bu sistemde başlamasını önle</translation>
-    </message>
-    <message>
-        <source>Show Notifications for relevant log Messages</source>
-        <translation type="vanished">İlgili günlük mesajları için bildirimler göster</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="195"/>
@@ -6961,7 +6658,6 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="80"/>
         <source>Show file recovery window when emptying sandboxes</source>
-        <oldsource>Show first recovery window when emptying sandboxes</oldsource>
         <translation>Korumalı alanlar boşaltılırken kurtarma penceresini göster</translation>
     </message>
     <message>
@@ -7007,7 +6703,6 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="73"/>
         <source>Count and display the disk space occupied by each sandbox</source>
-        <oldsource>Count and display the disk space ocupied by each sandbox</oldsource>
         <translation>Her bir korumalı alanın kapladığı disk alanını hesapla ve görüntüle</translation>
     </message>
     <message>
@@ -7038,7 +6733,6 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="882"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
-        <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
         <translation>Alan listesinde &quot;Pizza&quot; arka planını göster *</translation>
     </message>
     <message>
@@ -7219,24 +6913,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1327"/>
         <source>Sandboxie Config</source>
-        <oldsource>Config Protection</oldsource>
         <translation>Sandboxie Yapılandırması</translation>
-    </message>
-    <message>
-        <source>Compatibility</source>
-        <translation type="vanished">Uyumluluk</translation>
-    </message>
-    <message>
-        <source>Support</source>
-        <translation type="vanished">Destek</translation>
-    </message>
-    <message>
-        <source>The live channel provides the latest unsigned test builds.</source>
-        <translation type="vanished">Canlı kanal, en son imzasız test derlemelerini sağlar.</translation>
-    </message>
-    <message>
-        <source>Search in the Live channel</source>
-        <translation type="vanished">Canlı kanalda ara</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1178"/>
@@ -7267,14 +6944,6 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/SettingsWindow.ui" line="1208"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
         <translation>Sandboxie-Plus projesinin destekçileri bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; alabilir. Bir lisans anahtarı gibi ama açık kaynaklı yazılım kullanan harika insanlar için. :-)</translation>
-    </message>
-    <message>
-        <source>Search in the Release channel</source>
-        <translation type="vanished">Sürüm kanalında ara</translation>
-    </message>
-    <message>
-        <source>Install updates automatically</source>
-        <translation type="vanished">Güncellemeleri otomatik yükle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1164"/>
@@ -7337,10 +7006,6 @@ The process match level has a higher priority than the specificity and describes
         <translation>Başlat Menüsü Entegrasyonu</translation>
     </message>
     <message>
-        <source>Integrate boxes with Host Start Menu</source>
-        <translation type="vanished">Alanları Ana Bilgisayar Başlat Menüsü ile entegre edin</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="507"/>
         <source>Scan shell folders and offer links in run menu</source>
         <translation>Kabuk klasörlerini tara ve çalıştır menüsünde kısayollar sun</translation>
@@ -7390,10 +7055,6 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/SettingsWindow.ui" line="1077"/>
         <source>Support &amp;&amp; Updates</source>
         <translation>Destek &amp;&amp; Güncellemeler</translation>
-    </message>
-    <message>
-        <source>Sandbox Config</source>
-        <translation type="vanished">Korumalı Alan Yapılandırması</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1351"/>
@@ -7476,17 +7137,9 @@ The process match level has a higher priority than the specificity and describes
         <translation>Seçili yayın kanalından yeni tam sürümler.</translation>
     </message>
     <message>
-        <source>Full Updates</source>
-        <translation type="vanished">Tam Güncellemeler</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1124"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
         <translation>Kurulu sürüm için hızlı yamalar, Templates.ini ve çeviri güncellemeleri.</translation>
-    </message>
-    <message>
-        <source>Version Revisions</source>
-        <translation type="vanished">Sürüm Düzeltmeleri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1141"/>
@@ -7502,10 +7155,6 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/SettingsWindow.ui" line="1589"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
         <translation>Yalnızca Yönetici hesapları Programları Zorlamayı Duraklat komutunu kullanabilir</translation>
-    </message>
-    <message>
-        <source>Download Updates automatically</source>
-        <translation type="vanished">Güncellemeleri otomatik olarak indir</translation>
     </message>
 </context>
 <context>

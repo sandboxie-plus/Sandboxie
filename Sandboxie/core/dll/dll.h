@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -436,7 +436,7 @@ BOOLEAN Dll_SkipHook(const WCHAR *HookName);
 
 void *Dll_JumpStub(void *OldCode, void *NewCode, ULONG_PTR StubArg);
 
-#if !defined(_M_ARM64) && !defined(_M_ARM64EC)
+#if !defined(_M_ARM64EC)
 ULONG_PTR *Dll_JumpStubData(void);
 #endif
 

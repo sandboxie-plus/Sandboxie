@@ -14,7 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.9.1 / 5.64.1] - 2023-
+## [1.9.1 / 5.64.1] - 2023-04-??
 
 ### Changed
 - reworked configuration storage for box grouping
@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed encoding issue with Korean translation [#2833](https://github.com/sandboxie-plus/Sandboxie/issues/2833)
 - fixed memory corruption issue with Normal[File/Key]Path [#2588](https://github.com/sandboxie-plus/Sandboxie/issues/2588)
 - fixed DPI scaling in the snapshot manager window [#782](https://github.com/sandboxie-plus/Sandboxie/issues/782)
+- fixed issue with arm64 DialogProc hook
 
 
 

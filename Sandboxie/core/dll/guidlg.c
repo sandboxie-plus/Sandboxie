@@ -448,7 +448,7 @@ _FX DLGPROC Gui_MyDialogProc1(DLGPROC OrigDlgProc, UINT fAnsiFlag)
 _FX LRESULT Gui_MyDialogProc2(
     HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-#if !defined(_M_ARM64) && !defined(_M_ARM64EC)
+#if !defined(_M_ARM64EC)
     ULONG_PTR *StubData = Dll_JumpStubData();
 #else
     ULONG_PTR *StubData = (ULONG_PTR *)lParam;

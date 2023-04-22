@@ -28,7 +28,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Qt6 compatybility issue with 7z FS implementation [#2681](https://github.com/sandboxie-plus/Sandboxie/issues/2681)
 - fixed issue with tls support using Qt6 [#2682](https://github.com/sandboxie-plus/Sandboxie/issues/2682)
 - added template preset for spotify [#2673](https://github.com/sandboxie-plus/Sandboxie/issues/2673)
-
+- added missing localisation to finder [#2845](https://github.com/sandboxie-plus/Sandboxie/issues/2845)
 
 
 ## [1.9.0 / 5.64.0] - 2023-04-17

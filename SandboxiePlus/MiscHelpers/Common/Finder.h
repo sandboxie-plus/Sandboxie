@@ -28,6 +28,13 @@ public:
 		eHighLightDefault = eHighLight | 0x08,
 	};
 
+	static QString m_CaseInsensitive;
+	static QString m_RegExpStr;
+	static QString m_Highlight;
+	static QString m_CloseStr;
+	static QString m_FindStr;
+	static QString m_AllColumns;
+
 signals:
 	void				SetFilter(const QString& Exp, int iOptions = 0, int Column = -1);
 	void				SelectNext();

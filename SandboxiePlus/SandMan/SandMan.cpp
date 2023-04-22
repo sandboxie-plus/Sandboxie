@@ -3245,6 +3245,12 @@ void CSandMan::LoadLanguage()
 	CPanelView::m_CopyCell = tr("Copy Cell");
 	CPanelView::m_CopyRow = tr("Copy Row");
 	CPanelView::m_CopyPanel = tr("Copy Panel");
+	CFinder::m_CaseInsensitive = tr("Case Sensitive");
+	CFinder::m_RegExpStr = tr("RegExp");
+	CFinder::m_Highlight = tr("Highlight");
+	CFinder::m_CloseStr = tr("Close");
+	CFinder::m_FindStr = tr("&Find ...");
+	CFinder::m_AllColumns = tr("All columns");
 }
 
 void CSandMan::LoadLanguage(const QString& Lang, const QString& Module, int Index)

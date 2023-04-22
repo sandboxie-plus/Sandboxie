@@ -3,6 +3,13 @@
 
 bool CFinder::m_DarkMode = false;
 
+QString CFinder::m_CaseInsensitive = "Case Sensitive";
+QString CFinder::m_RegExpStr = "RegExp";
+QString CFinder::m_Highlight = "Highlight";
+QString CFinder::m_CloseStr = "Close";
+QString CFinder::m_FindStr = "&Find ...";
+QString CFinder::m_AllColumns = "All columns";
+
 QWidget* CFinder::AddFinder(QTreeView* pTree, QObject* pFilterTarget, int iOptions, CFinder** ppFinder)
 {
 	QWidget* pWidget = new QWidget();
@@ -37,7 +44,7 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 
 	if ((iOptions & eCaseSens) != 0)
 	{
-		m_pCaseSensitive = new QCheckBox(tr("Case Sensitive"));
+		m_pCaseSensitive = new QCheckBox(m_CaseInsensitive);
 		m_pSearchLayout->addWidget(m_pCaseSensitive);
 		connect(m_pCaseSensitive, SIGNAL(stateChanged(int)), this, SLOT(OnUpdate()));
 	}
@@ -46,7 +53,7 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 
 	if ((iOptions & eRegExp) != 0)
 	{
-		m_pRegExp = new QCheckBox(tr("RegExp"));
+		m_pRegExp = new QCheckBox(m_RegExpStr);
 		m_pSearchLayout->addWidget(m_pRegExp);
 		connect(m_pRegExp, SIGNAL(stateChanged(int)), this, SLOT(OnUpdate()));
 	}
@@ -67,7 +74,7 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 
 	if ((iOptions & eHighLight) != 0)
 	{
-		m_pHighLight = new QCheckBox(tr("Highlight"));
+		m_pHighLight = new QCheckBox(m_Highlight);
 		if ((iOptions & eHighLightDefault) == eHighLightDefault)
 			m_pHighLight->setChecked(true);
 		m_pSearchLayout->addWidget(m_pHighLight);
@@ -79,7 +86,7 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 	QToolButton* pClose = new QToolButton(this);
     pClose->setIcon(QIcon(":/close.png"));
     pClose->setAutoRaise(true);
-    pClose->setText(tr("Close"));
+    pClose->setText(m_CloseStr);
     m_pSearchLayout->addWidget(pClose);
 	QObject::connect(pClose, SIGNAL(clicked()), this, SLOT(Close()));
 
@@ -97,7 +104,7 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 
 	if (parent)
 	{
-		QAction* pFind = new QAction(tr("&Find ..."), parent);
+		QAction* pFind = new QAction(m_FindStr, parent);
 		pFind->setShortcut(QKeySequence::Find);
 		pFind->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 		parent->addAction(pFind);
@@ -143,7 +150,7 @@ void CFinder::Open()
 {
 	if (m_pColumn && m_pColumn->count() == 0)
 	{
-		m_pColumn->addItem(tr("All columns"), -1);
+		m_pColumn->addItem(m_AllColumns, -1);
 		for (int i = 0; i < m_pModel->columnCount(); i++)
 			m_pColumn->addItem(m_pModel->headerData(i, Qt::Horizontal, Qt::DisplayRole).toString(), i);
 		m_pColumn->setVisible(true);

@@ -3119,32 +3119,32 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="SandMan.cpp" line="3248"/>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Maiuscole/minuscole</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3249"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>Espressione regolare</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3250"/>
         <source>Highlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Evidenzia</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3251"/>
         <source>Close</source>
-        <translation type="unfinished">Chiudi</translation>
+        <translation>Chiudi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3252"/>
         <source>&amp;Find ...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Trova ...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3253"/>
         <source>All columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Tutte le colonne</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3310"/>

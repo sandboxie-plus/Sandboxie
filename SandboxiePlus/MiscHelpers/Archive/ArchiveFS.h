@@ -17,7 +17,11 @@ protected:
 public:
     virtual ~C7zFileEngine();
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     virtual bool open(QIODevice::OpenMode openMode);
+#else
+    virtual bool open(QIODevice::OpenMode openMode, std::optional<QFile::Permissions> permissions);
+#endif
     virtual bool close();
     virtual bool flush();
     virtual qint64 size() const;

@@ -25,6 +25,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed memory corruption issue with Normal[File/Key]Path [#2588](https://github.com/sandboxie-plus/Sandboxie/issues/2588)
 - fixed DPI scaling in the snapshot manager window [#782](https://github.com/sandboxie-plus/Sandboxie/issues/782)
 - fixed issue with arm64 DialogProc hook [#2838](https://github.com/sandboxie-plus/Sandboxie/issues/2838)
+- fixed Qt6 compatybility issue with 7z FS implementation [#2681](https://github.com/sandboxie-plus/Sandboxie/issues/2681)
 
 
 

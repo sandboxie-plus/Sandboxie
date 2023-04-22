@@ -59,7 +59,11 @@ C7zFileEngine::~C7zFileEngine()
     //qDebug() << "g_7zFileEngineCount" << g_7zFileEngineCount;
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 bool C7zFileEngine::open(QIODevice::OpenMode openMode)
+#else
+bool C7zFileEngine::open(QIODevice::OpenMode openMode, std::optional<QFile::Permissions> permissions)
+#endif
 {
     close();
 

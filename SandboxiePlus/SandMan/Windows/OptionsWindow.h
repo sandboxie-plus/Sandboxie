@@ -81,7 +81,7 @@ private slots:
 	void OnForceDir();
 	void OnDelForce();
 	void OnShowForceTmpl()			{ LoadForcedTmpl(true); }
-	void OnForcedChanged(QTreeWidgetItem* pItem, int Index);
+	void OnForcedChanged();
 
 	void OnBreakoutProg();
 	void OnBreakoutBrowse();

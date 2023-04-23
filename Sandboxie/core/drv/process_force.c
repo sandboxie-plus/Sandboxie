@@ -1045,6 +1045,9 @@ _FX void Process_CreateForceData(
         if (! Conf_IsBoxEnabled(section, SidString, SessionId))
             continue;
 
+        if (Conf_Get_Boolean(section, L"DisableForceRules", 0, FALSE))
+            continue;
+
         //
         // create FORCE_BOX
         //

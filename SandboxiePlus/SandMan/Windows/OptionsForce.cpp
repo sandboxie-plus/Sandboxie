@@ -25,6 +25,7 @@ void COptionsWindow::LoadForced()
 	foreach(const QString& Value, m_pBox->GetTextList("ForceFolderDisabled", m_Template))
 		AddForcedEntry(Value, (int)ePath, true);
 
+	ui.chkDisableForced->setChecked(m_pBox->GetBool("DisableForceRules", false));
 
 	ui.treeBreakout->clear();
 
@@ -158,6 +159,7 @@ void COptionsWindow::SaveForced()
 	WriteTextList("ForceFolder", ForceFolder);
 	WriteTextList("ForceFolderDisabled", ForceFolderDisabled);
 
+	WriteAdvancedCheck(ui.chkDisableForced, "DisableForceRules", "y", "");
 
 
 	QStringList BreakoutProcess;
@@ -269,7 +271,7 @@ void COptionsWindow::OnDelBreakout()
 	OnOptChanged();
 }
 
-void COptionsWindow::OnForcedChanged(QTreeWidgetItem* pItem, int Index) 
+void COptionsWindow::OnForcedChanged() 
 {
 	//QString Test = pItem->data(1, Qt::UserRole).toString();
 	//qDebug() << Test;

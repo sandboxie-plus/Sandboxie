@@ -1693,6 +1693,16 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
              </property>
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_35">
+               <item row="0" column="0" colspan="2">
+                <widget class="QLabel" name="label">
+                 <property name="text">
+                  <string>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
                <item row="4" column="1">
                 <spacer name="verticalSpacer_5">
                  <property name="orientation">
@@ -1706,11 +1716,47 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                  </property>
                 </spacer>
                </item>
+               <item row="3" column="1">
+                <widget class="QToolButton" name="btnForceDir">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>23</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Force Folder</string>
+                 </property>
+                </widget>
+               </item>
                <item row="5" column="1">
                 <widget class="QCheckBox" name="chkShowForceTmpl">
                  <property name="text">
                   <string>Show Templates</string>
                  </property>
+                </widget>
+               </item>
+               <item row="2" column="0" rowspan="5">
+                <widget class="QTreeWidget" name="treeForced">
+                 <property name="sortingEnabled">
+                  <bool>true</bool>
+                 </property>
+                 <column>
+                  <property name="text">
+                   <string>Type</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Name</string>
+                  </property>
+                 </column>
                 </widget>
                </item>
                <item row="2" column="1">
@@ -1739,49 +1785,10 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0" rowspan="5">
-                <widget class="QTreeWidget" name="treeForced">
-                 <property name="sortingEnabled">
-                  <bool>true</bool>
-                 </property>
-                 <column>
-                  <property name="text">
-                   <string>Type</string>
-                  </property>
-                 </column>
-                 <column>
-                  <property name="text">
-                   <string>Name</string>
-                  </property>
-                 </column>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <widget class="QToolButton" name="btnForceDir">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>23</height>
-                  </size>
-                 </property>
+               <item row="7" column="0">
+                <widget class="QCheckBox" name="chkDisableForced">
                  <property name="text">
-                  <string>Force Folder</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0" colspan="2">
-                <widget class="QLabel" name="label">
-                 <property name="text">
-                  <string>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</string>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
+                  <string>Disable forced Process and Folder for this sandbox</string>
                  </property>
                 </widget>
                </item>

@@ -4,17 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
-
-
-
-
-
-
-
-
-
-## [1.9.1 / 5.64.1] - 2023-04-??
+## [1.9.1 / 5.64.1] - 2023-04-23
 
 ### Added
 - added option to disable all force rules of a given sandbox [#2797](https://github.com/sandboxie-plus/Sandboxie/issues/2797)

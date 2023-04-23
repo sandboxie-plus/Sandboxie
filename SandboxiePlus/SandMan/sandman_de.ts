@@ -2477,7 +2477,7 @@ Nein wählt: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="3248"/>
         <source>Case Sensitive</source>
-        <translation>Groß-/Kleinschreibung</translation>
+        <translation>Groß-/Kleinschreibung beachten</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3249"/>

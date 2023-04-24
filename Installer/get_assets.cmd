@@ -32,6 +32,11 @@ copy %~dp0..\sandboxie\install\SandboxieVS.nsi %~dp0\Assets\Classic\install\
 copy %~dp0..\sandboxie\install\Warning.ini %~dp0\Assets\Classic\install\
 mkdir %~dp0\Assets\Classic\msgs
 mkdir %~dp0\Assets\Classic\msgs\SbieRelease
+
+dir copy %~dp0..\sandboxie\
+dir copy %~dp0..\sandboxie\msgs\
+dir copy %~dp0..\sandboxie\msgs\SbieRelease\
+
 copy %~dp0..\sandboxie\msgs\SbieRelease\NsisText_Albanian.txt %~dp0..\sandboxie\msgs\SbieRelease\
 copy %~dp0..\sandboxie\msgs\SbieRelease\NsisText_Arabic.txt %~dp0..\sandboxie\msgs\SbieRelease\
 copy %~dp0..\sandboxie\msgs\SbieRelease\NsisText_Bulgarian.txt %~dp0..\sandboxie\msgs\SbieRelease\

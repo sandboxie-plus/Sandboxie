@@ -5,11 +5,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.9.2 / 5.64.2] - 2023-04-??
+## [1.9.2 / 5.64.2] - 2023-04-24
 
 ### Added
 - added box presets menu option to toggle 'DisableForceRules=y' (thanks offhub) [#2851](https://github.com/sandboxie-plus/Sandboxie/pull/2851)
 
+### Fixed
+- fixed issue with msg1305
 
 
 

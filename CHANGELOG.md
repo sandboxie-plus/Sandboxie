@@ -5,11 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.9.2 / 5.64.2] - 2023-04-??
+## [1.9.2 / 5.64.2] - 2023-04-24
 
 ### Added
 - added box presets menu option to toggle 'DisableForceRules=y' (thanks offhub) [#2851](https://github.com/sandboxie-plus/Sandboxie/pull/2851)
 
+### Fixed
+- fixed issue with SBIE1305 message
+- fixed encoding issue with Korean translation [#2833](https://github.com/sandboxie-plus/Sandboxie/issues/2833)
 
 
 
@@ -23,7 +26,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed system check in Classic installer [#2812](https://github.com/sandboxie-plus/Sandboxie/pull/2812)
-- fixed encoding issue with Korean translation [#2833](https://github.com/sandboxie-plus/Sandboxie/issues/2833)
 - fixed memory corruption issue with Normal[File/Key]Path [#2588](https://github.com/sandboxie-plus/Sandboxie/issues/2588)
 - fixed DPI scaling in the snapshot manager window [#782](https://github.com/sandboxie-plus/Sandboxie/issues/782)
 - fixed issue with arm64 DialogProc hook [#2838](https://github.com/sandboxie-plus/Sandboxie/issues/2838)

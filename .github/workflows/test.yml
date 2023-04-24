@@ -1,0 +1,32 @@
+name: TEST
+
+on:
+  workflow_dispatch:
+
+
+
+jobs:
+  Build:
+    runs-on: windows-2019
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup msbuild
+        uses: microsoft/setup-msbuild@v1.3
+
+      - name: Build Sandboxie x86
+        run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
+
+      - name: Collect installer assets
+        run: Installer\get_assets.cmd
+
+      - name: Upload installer assets
+        uses: actions/upload-artifact@v3
+        with:
+          name: Assets
+          path: |
+            Installer/Assets/*
+          retention-days: 60

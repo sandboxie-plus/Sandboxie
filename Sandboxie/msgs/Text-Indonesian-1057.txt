@@ -3675,6 +3675,10 @@ Pilih YA untuk menyimpan penataan konfigurasi dalam berkas Sandboxie.ini.
 Pilih TIDAK untuk menghapus berkas Sandboxie.ini dan memunahkan penataan konfigurasi Anda.
 .
 
+8055;ins;01
+Ada pembaruan online dari Templates.ini dan/atau terjemahan untuk versi sandboxie ini, apakah Anda ingin menginstalnya?
+.
+
 #----------------------------------------------------------------------------
 # KmdUtil
 #----------------------------------------------------------------------------

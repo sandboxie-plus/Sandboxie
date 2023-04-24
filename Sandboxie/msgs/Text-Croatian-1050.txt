@@ -3688,6 +3688,10 @@ Odaberite DA za spremanje konfiguracijskih postavki u Sandboxie.ini datoteku.
 Odaberite NE za brisanje Sandboxie.ini datoteke i gubitak vaših konfiguracijskih postavki.
 .
 
+8055;ins;01
+Dostupno je mrežno ažuriranje Templates.ini i/ili prijevoda za ovu verziju sandboxiea, želite li ga instalirati?
+.
+
 #----------------------------------------------------------------------------
 # KmdUtil
 #----------------------------------------------------------------------------

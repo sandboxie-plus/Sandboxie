@@ -4088,6 +4088,10 @@ Select YES to keep configuration settings in the Sandboxie.ini file.
 Select NO to delete the Sandboxie.ini file and lose your configuration settings.
 .
 
+8055;ins;01
+There is an online update of the Templates.ini and/or the translations for this version of sandboxie available, do you want to install it?
+.
+
 #----------------------------------------------------------------------------
 # KmdUtil
 #----------------------------------------------------------------------------

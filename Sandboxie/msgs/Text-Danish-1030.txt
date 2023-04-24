@@ -3203,6 +3203,10 @@ Vælg Ja for at beholde din konfiguration opsætning i Sandboxie.ini filen.
 Vælg Nej for at slette Sandboxie.ini filen. Du mister derved din konfiguration opsætning.
 .
 
+8055;ins;01
+Der er en online opdatering af Templates.ini og/eller oversættelserne til denne version af sandboxie tilgængelig, vil du installere den?
+.
+
 #----------------------------------------------------------------------------
 # KmdUtil
 #----------------------------------------------------------------------------

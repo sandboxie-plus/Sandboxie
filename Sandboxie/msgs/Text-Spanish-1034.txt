@@ -3787,6 +3787,10 @@ Seleccione Sí para conservar los valores de configuración en el archivo Sandbo
 Seleccione No para borrar el archivo Sandboxie.ini y perder sus valores de configuración.
 .
 
+8055;ins;01
+Hay disponible una actualización en línea de Templates.ini y/o las traducciones para esta versión de sandboxie, ¿quieres instalarla?
+.
+
 #----------------------------------------------------------------------------
 # KmdUtil
 #----------------------------------------------------------------------------

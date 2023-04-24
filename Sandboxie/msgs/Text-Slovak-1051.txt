@@ -3644,6 +3644,10 @@ Vyberte ÁNO na ponechanie konfiguračných nastavení v Sandboxie.ini súbore.
 Vyberte NIE na zmazanie súboru Sandboxie.ini a stratu Vaších konfiguračných nastavení.
 .
 
+8055;ins;01
+K dispozícii je online aktualizácia Templates.ini a/alebo prekladov pre túto verziu sandboxie, chcete si ju nainštalovať?
+.
+
 #----------------------------------------------------------------------------
 # KmdUtil
 #----------------------------------------------------------------------------

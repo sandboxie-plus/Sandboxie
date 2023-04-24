@@ -3627,6 +3627,10 @@ Wybierz TAK, aby zachować ustawienia w pliku konfiguracyjnym Sandboxie.ini.
 Wybierz NIE, aby usunąć plik Sandboxie.ini wraz z ustawieniami konfiguracji.
 .
 
+8055;ins;01
+Jest dostępna aktualizacja online pliku Templates.ini i/lub tłumaczeń dla tej wersji sandboxie, czy chcesz ją zainstalować?
+.
+
 #----------------------------------------------------------------------------
 # KmdUtil
 #----------------------------------------------------------------------------

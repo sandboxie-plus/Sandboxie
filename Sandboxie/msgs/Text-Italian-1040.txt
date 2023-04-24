@@ -3978,6 +3978,10 @@ Fare clic su Sì per conservare le impostazioni salvate nel file Sandboxie.ini.
 Fare clic su No per eliminare il file Sandboxie.ini e le impostazioni salvate.
 .
 
+8055;ins;01
+È disponibile un aggiornamento online di Templates.ini e/o delle traduzioni per questa versione di sandboxie, vuoi installarlo?
+.
+
 #----------------------------------------------------------------------------
 # KmdUtil
 #----------------------------------------------------------------------------

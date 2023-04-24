@@ -3695,6 +3695,10 @@ Válassza az Igen opciót a Sandboxie.ini fájlban lévő konfigurációs beáll
 Válassza a NEM opciót a Sandboxie.ini fájl törléséhez és a konfigurációs beállítások elvesztéséhez.
 .
 
+8055;ins;01
+Elérhető a Templates.ini online frissítése és/vagy a sandboxie ezen verziójához tartozó fordítások. Szeretné telepíteni?
+.
+
 #----------------------------------------------------------------------------
 # KmdUtil
 #----------------------------------------------------------------------------

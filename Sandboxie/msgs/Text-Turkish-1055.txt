@@ -3601,6 +3601,10 @@ EVET seçerek yapılandırmayı Sandboxie.ini dosyasında saklayın.
 HAYIR seçerek Sandboxie.ini dosyasını silip yapılandırmanızı kaybedin.
 .
 
+8055;ins;01
+Templates.ini'nin çevrimiçi güncellemesi ve/veya sandboxie'nin bu sürümünün çevirileri mevcut, yüklemek istiyor musunuz?
+.
+
 #----------------------------------------------------------------------------
 # KmdUtil
 #----------------------------------------------------------------------------

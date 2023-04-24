@@ -3963,6 +3963,10 @@ Klicka på Ja, för att behålla konfigurationsinställningarna i din Sandboxie.
 Klicka på Nej, för att radera din Sandboxie.ini-fil samt dina konfigurationsinställningar.
 .
 
+8055;ins;01
+Det finns en onlineuppdatering av Templates.ini och/eller översättningarna för denna version av sandboxie, vill du installera den?
+.
+
 #----------------------------------------------------------------------------
 # KmdUtil
 #----------------------------------------------------------------------------

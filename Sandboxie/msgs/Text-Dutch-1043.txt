@@ -3954,6 +3954,10 @@ Selecteer ja om configuratie-instellingen in het Sandboxie.ini-bestand te houden
 Selecteer nee om het Sandboxie.ini-bestand te verwijderen en uw configuratie-instellingen kwijt te raken.
 .
 
+8055;ins;01
+Er is een online update van de Templates.ini en/of de vertalingen voor deze versie van sandboxie beschikbaar, wil je deze installeren?
+.
+
 #----------------------------------------------------------------------------
 # KmdUtil
 #----------------------------------------------------------------------------

@@ -3553,6 +3553,10 @@ JA wählen, um die Sandboxie.ini Datei mit den Einstellungen zu behalten.
 NEIN wählen, um die Sandboxie.ini Datei mit den Einstellungen zu löschen.
 .
 
+8055;ins;01
+Es ist ein Online-Update der Templates.ini und/oder der Übersetzungen für diese Version von Sandboxie verfügbar, möchten Sie es installieren?
+.
+
 #----------------------------------------------------------------------------
 # KmdUtil
 #----------------------------------------------------------------------------

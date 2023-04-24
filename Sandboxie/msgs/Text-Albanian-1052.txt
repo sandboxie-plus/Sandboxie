@@ -3452,6 +3452,10 @@ Seleksiononi PO për të mbajtur parametrat e konfiguracionit në skedën Sandbo
 Seleksiononi JO për të fshirë skedën Sandboxie.ini duke humbur parametrat e konfiguracionit tuaj.
 .
 
+8055;ins;01
+Ekziston një përditësim në internet i Templates.ini dhe/ose përkthimet për këtë version të sandboxie, a dëshironi ta instaloni?
+.
+
 #----------------------------------------------------------------------------
 # KmdUtil
 #----------------------------------------------------------------------------

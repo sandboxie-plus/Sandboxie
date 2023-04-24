@@ -3617,6 +3617,10 @@ Valitse KYLLÄ pitääksesi Sandboxie.ini asetustiedoston asetukset.
 Valitse EI poistaaksesi Sandboxie.ini asetustiedoston ja sen asetukset.
 .
 
+8055;ins;01
+Templates.inistä ja/tai tämän sandboxien version käännöksistä on saatavilla online-päivitys. Haluatko asentaa sen?
+.
+
 #----------------------------------------------------------------------------
 # KmdUtil
 #----------------------------------------------------------------------------

@@ -3722,6 +3722,10 @@ SBIE9234 خطاى استارت آپ سرويس %2
 روى خير براى حذف فايل Sandboxie.ini و حذف تنظيمات پيکربندى کليک کنيد
 .
 
+8055;ins;01
+There is an online update of the Templates.ini and/or the translations for this version of sandboxie available, do you want to install it?
+.
+
 #----------------------------------------------------------------------------
 # KmdUtil
 #----------------------------------------------------------------------------

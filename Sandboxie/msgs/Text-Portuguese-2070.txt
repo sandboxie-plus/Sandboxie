@@ -3697,6 +3697,10 @@ Selecione Sim para manter as definições de configuração no ficheiro Sandboxi
 Selecione NÃO para eliminar o ficheiro Sandboxie.ini e perder as suas definições de configuração.
 .
 
+8055;ins;01
+Existe uma atualização online do Templates.ini e/ou das traduções para esta versão do sandboxie disponível, você deseja instalá-lo?
+.
+
 #----------------------------------------------------------------------------
 # KmdUtil
 #----------------------------------------------------------------------------

@@ -3999,6 +3999,10 @@ Sélectionner « oui » pour garder les paramètres de configuration dans le fic
 Sélectionner « non » pour effacer le fichier Sandboxie.ini et perdre vos paramètres de configuration.
 .
 
+8055;ins;01
+Une mise à jour en ligne de Templates.ini et/ou des traductions pour cette version de sandboxie est disponible, voulez-vous l'installer ?
+.
+
 #----------------------------------------------------------------------------
 # KmdUtil
 #----------------------------------------------------------------------------

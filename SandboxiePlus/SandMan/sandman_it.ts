@@ -3588,7 +3588,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Views/SbieView.cpp" line="225"/>
         <source>Disable Force Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Disattiva regole di forzatura</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="228"/>
@@ -5615,7 +5615,7 @@ I processi in questa area virtuale verranno eseguiti con un token di processo pe
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1340"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation type="unfinished">Impedisci ai programmi installati fuori dall&apos;area virtuale di caricare i file DLL presenti nell&apos;area virtuale</translation>
+        <translation type="unfinished">Impedisci ai programmi in esecuzione nell&apos;area virtuale (installati sul sistema host) di caricare file DLL</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1383"/>
@@ -5667,7 +5667,7 @@ In questo modo si impedisce che i processi dannosi all&apos;interno dell&apos;ar
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1791"/>
         <source>Disable forced Process and Folder for this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Disattiva la forzatura di processi e cartelle per quest&apos;area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1801"/>
@@ -6651,7 +6651,7 @@ area virtuale</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="247"/>
         <source>Show file migration progress when copying large files into a sandbox</source>
-        <translation type="unfinished">Mostra l&apos;avanzamento della migrazione dei file quando si copiano file di grandi dimensioni in un&apos;area virtuale</translation>
+        <translation>Mostra l&apos;avanzamento della migrazione dei file quando si copiano file di grandi dimensioni in un&apos;area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="255"/>

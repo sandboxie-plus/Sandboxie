@@ -80,9 +80,10 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 - Jackenmen - Maintainer of Chocolatey packages for Sandboxie ([support](https://github.com/Jackenmen/choco-auto/issues?q=is%3Aissue+Sandboxie))
 - vedantmgoyal2009 - Maintainer of Winget Releaser for Sandboxie ([support](https://github.com/vedantmgoyal2009/winget-releaser/issues?q=is%3Aissue+Sandboxie))
 - blap - Maintainer of [SandboxToys2](https://github.com/blap/SandboxToys2) addon
-- diversenok - Security analysis & PoC's / Security fixes
+- diversenok - Security analysis & PoCs / Security fixes
 - TechLord - Team-IRA / Reversing
-- hg421 - Security analysis / Code reviews
+- hg421 - Security analysis & PoCs / Code reviews
+- hx1997 - Security analysis & PoC
 - mpheath - Author of Plus installer / Code fixes / Collaborator
 - offhub - Documentation additions / Collaborator
 - isaak654 - Templates / Documentation / Code fixes / Collaborator

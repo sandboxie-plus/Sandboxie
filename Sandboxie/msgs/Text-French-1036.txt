@@ -3875,7 +3875,7 @@ Veuillez relire les informations ci-dessous.
 .
 
 8012;ins;01
-Cliquez sur suivant pour installer et activer le pilote Sandboxie au niveau Système. Ce pilote est le cœur de l'application Sandboxie.
+Cliquez sur suivant pour installer et activer le pilote Sandboxie au niveau Système. Ce pilote est le noyau de l'application Sandboxie.
 .
 
 8013;ins;01

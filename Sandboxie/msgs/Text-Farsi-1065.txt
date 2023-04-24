@@ -3723,7 +3723,7 @@ SBIE9234 خطاى استارت آپ سرويس %2
 .
 
 8055;ins;01
-Templates.ini و/یا ترجمه‌های این نسخه از sandboxie موجود است، آیا می‌خواهید آن را نصب کنید؟
+There is an online update of the Templates.ini and/or the translations for this version of sandboxie available, do you want to install it?
 .
 
 #----------------------------------------------------------------------------

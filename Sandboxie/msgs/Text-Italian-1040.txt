@@ -3979,7 +3979,7 @@ Fare clic su No per eliminare il file Sandboxie.ini e le impostazioni salvate.
 .
 
 8055;ins;01
-È disponibile un aggiornamento online di Templates.ini e/o delle traduzioni per questa versione di sandboxie, vuoi installarlo?
+È disponibile un aggiornamento online di Templates.ini e/o delle traduzioni per questa versione di Sandboxie, si desidera installarlo?
 .
 
 #----------------------------------------------------------------------------

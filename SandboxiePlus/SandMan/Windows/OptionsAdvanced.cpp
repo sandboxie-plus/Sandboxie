@@ -98,7 +98,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.btnDelHostProcess, SIGNAL(clicked(bool)), this, SLOT(OnDelHostProcess()));
 	connect(ui.chkShowHostProcTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowHostProcTmpl()));
 	connect(ui.chkConfidential, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged())); // todo notify premium feature
-	connect(ui.chkHostProtect, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+	connect(ui.chkHostProtect, SIGNAL(clicked(bool)), this, SLOT(OnHostProtectChanged()));
 	connect(ui.chkHostProtectMsg, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.btnAddUser, SIGNAL(clicked(bool)), this, SLOT(OnAddUser()));
@@ -135,7 +135,9 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkOpenLsaEndpoint->setChecked(m_pBox->GetBool("OpenLsaEndpoint", false));
 
 	ui.chkHostProtect->setChecked(m_pBox->GetBool("ProtectHostImages", false));
+	ui.chkHostProtectMsg->setEnabled(ui.chkHostProtect->isChecked());
 	ui.chkHostProtectMsg->setChecked(m_pBox->GetBool("NotifyImageLoadDenied", true));
+
 	ReadGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
 
 	LoadOptionList();
@@ -444,6 +446,12 @@ void COptionsWindow::OnNoWindowRename()
 		SetAccessEntry(eWnd, "", eOpen, "#");
 	else
 		DelAccessEntry(eWnd, "", eOpen, "#");
+}
+
+void COptionsWindow::OnHostProtectChanged()
+{
+	ui.chkHostProtectMsg->setEnabled(ui.chkHostProtect->isChecked());
+	OnAdvancedChanged();
 }
 
 // options

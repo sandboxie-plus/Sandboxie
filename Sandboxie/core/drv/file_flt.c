@@ -508,7 +508,7 @@ check:
 
                     if (Box_IsBoxedPath(proc->box, file, &Name->Name))  {
 
-                        if(Conf_Get_Boolean(NULL, L"NotifyImageLoadDenied", 0, TRUE))
+                        if(Conf_Get_Boolean(proc->box->name, L"NotifyImageLoadDenied", 0, TRUE))
 				            Log_Msg_Process(MSG_1305, Name->Name.Buffer + (proc->box->file_path_len/sizeof(WCHAR) - 1), NULL, proc->box->session_id, proc->pid);
 
                         Log_Debug_Msg(MONITOR_IMAGE | MONITOR_DENY, NULL, Name->Name.Buffer);

@@ -103,6 +103,8 @@ private slots:
 	//void OnShowStartTmpl() 			{ LoadStartTmpl(true); }
 	void OnStartChanged(QTreeWidgetItem* pItem, int Index);
 
+	void OnHostProtectChanged();
+
 	// net
 	void OnINetItemDoubleClicked(QTreeWidgetItem* pItem, int Column);
 	void OnINetSelectionChanged()	{ CloseINetEdit(); OnOptChanged();}

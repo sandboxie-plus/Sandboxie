@@ -157,6 +157,17 @@ jobs:
       - name: Merging Builds
         run: Installer\merge_builds.cmd
 
+      - name: Collect installer assets
+        run: Installer\get_assets.cmd
+
+      - name: Upload installer assets
+        uses: actions/upload-artifact@v3
+        with:
+          name: Assets
+          path: |
+            Installer/Assets/*
+          retention-days: 60
+
       - name: Upload Sandboxie x64
         uses: actions/upload-artifact@v3
         with:

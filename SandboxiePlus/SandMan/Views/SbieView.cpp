@@ -222,6 +222,8 @@ void CSbieView::CreateMenu()
 		m_pMenuPresets->addSeparator();
 		m_pMenuPresetsRecovery = m_pMenuPresets->addAction(tr("Immediate Recovery"), this, SLOT(OnSandBoxAction()));
 		m_pMenuPresetsRecovery->setCheckable(true);
+		m_pMenuPresetsForce = m_pMenuPresets->addAction(tr("Disable Force Rules"), this, SLOT(OnSandBoxAction()));
+		m_pMenuPresetsForce->setCheckable(true);
 	
 	m_pMenuTools = m_pMenuBox->addMenu(CSandMan::GetIcon("Maintenance"), tr("Sandbox Tools"));
 		m_pMenuDuplicate = m_pMenuTools->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Box Config"), this, SLOT(OnSandBoxAction()));
@@ -352,6 +354,7 @@ void CSbieView::CreateOldMenu()
 		m_pMenuPresetsShares = NULL;
 
 		m_pMenuPresetsRecovery = NULL;
+		m_pMenuPresetsForce = NULL;
 		
 
 	// Process Menu
@@ -570,6 +573,7 @@ bool CSbieView::UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBox
 		m_pMenuPresetsINet->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->IsINetBlocked());
 		m_pMenuPresetsShares->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->HasSharesAccess());
 		m_pMenuPresetsRecovery->setChecked(pBox && pBox->GetBool("AutoRecover", false));
+		m_pMenuPresetsForce->setChecked(pBox && pBox->GetBool("DisableForceRules", false));
 	}
 
 	m_pMenuBrowse->setEnabled(iSandBoxeCount == 1);
@@ -1123,6 +1127,8 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		SandBoxes.first().objectCast<CSandBoxPlus>()->SetAllowShares(m_pMenuPresetsShares->isChecked());
 	else if (Action == m_pMenuPresetsRecovery)
 		m_pMenuPresetsRecovery->setChecked(SandBoxes.first()->SetBoolSafe("AutoRecover", m_pMenuPresetsRecovery->isChecked()));
+	else if (Action == m_pMenuPresetsForce)
+		m_pMenuPresetsForce->setChecked(SandBoxes.first()->SetBoolSafe("DisableForceRules", m_pMenuPresetsForce->isChecked()));
 	else if (Action == m_pMenuOptions)
 		ShowOptions(SandBoxes.first());
 	else if (Action == m_pMenuBrowse)

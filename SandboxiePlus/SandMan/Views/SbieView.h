@@ -147,6 +147,7 @@ private:
 	QAction*				m_pMenuPresetsINet;
 	QAction*				m_pMenuPresetsShares;
 	QAction*				m_pMenuPresetsRecovery;
+	QAction*				m_pMenuPresetsForce;
 	QAction*				m_pMenuOptions;
 	QAction*				m_pMenuSnapshots;
 	QAction*				m_pMenuEmptyBox;

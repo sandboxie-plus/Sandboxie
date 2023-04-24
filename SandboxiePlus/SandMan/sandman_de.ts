@@ -1539,10 +1539,6 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <translation>Nur lokale Vorlagen können entfernt werden!</translation>
     </message>
     <message>
-        <source>Do you really want to delete the selected local template?</source>
-        <translation type="vanished">Möchten Sie wirklich die ausgewählten lokalen Vorlagen löschen?</translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsNetwork.cpp" line="37"/>
         <location filename="Windows/OptionsNetwork.cpp" line="578"/>
         <source>Any</source>
@@ -3635,7 +3631,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="225"/>
         <source>Disable Force Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktiviere Erzwingungsregeln</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="232"/>
@@ -3919,10 +3915,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="849"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation>Möchten Sie wirklich die ausgewählte(n) Gruppe(n) entfernen?</translation>
-    </message>
-    <message>
-        <source>More Tools</source>
-        <translation type="vanished">Weitere Werkzeuge</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="189"/>
@@ -5470,10 +5462,6 @@ Prozesse in dieser Box werden mit einem eigenen Prozesstoken laufen, die anzeige
         <translation>Öffne Zugriff auf Windows Security Account Manager</translation>
     </message>
     <message>
-        <source>Access isolation</source>
-        <translation type="vanished">Zugriffsisolation</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="3718"/>
         <source>Hide Processes</source>
         <translation>Verstecke Prozesse</translation>
@@ -5783,7 +5771,7 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1791"/>
         <source>Disable forced Process and Folder for this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktiviere erzwungene Prozesse und Ordner für diese Sandbox</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1801"/>
@@ -6541,10 +6529,6 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <translation>Hotkey zur Beendigung aller Prozesse in Sandboxen:</translation>
     </message>
     <message>
-        <source>Show Notifications for relevant log Messages</source>
-        <translation type="vanished">Zeige Benachrichtigungen für relevante Protokollmitteilungen</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="479"/>
         <source>Systray options</source>
         <translation>Systemtray-Optionen</translation>
@@ -6608,10 +6592,6 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <location filename="Forms/SettingsWindow.ui" line="1690"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
         <translation>Gebe Meldung 1301 aus, wenn erzwungene Prozesse deaktiviert wurden</translation>
-    </message>
-    <message>
-        <source>Compatibility</source>
-        <translation type="vanished">Kompatibilität</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1924"/>
@@ -7063,10 +7043,6 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <location filename="Forms/SettingsWindow.ui" line="1077"/>
         <source>Support &amp;&amp; Updates</source>
         <translation>Unterstützung &amp;&amp; Updates</translation>
-    </message>
-    <message>
-        <source>Sandbox Config</source>
-        <translation type="vanished">Sandboxkonfiguration</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1468"/>

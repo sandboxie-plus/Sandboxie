@@ -240,6 +240,7 @@ std::wstring GetJSONStringSafe(const JSONObject& root, const std::wstring& key, 
 // QueryUpdateData
 //---------------------------------------------------------------------------
 
+extern "C" int LCIDToLocaleName(LCID Locale, LPWSTR lpName, int cchName, DWORD dwFlags);
 
 BOOLEAN CUpdater::QueryUpdateData(UPDATER_DATA* Context)
 {
@@ -253,7 +254,11 @@ BOOLEAN CUpdater::QueryUpdateData(UPDATER_DATA* Context)
 	JSONObject release;
 	JSONObject installer;
 
-	Path.Format(L"/update.php?action=update&software=sandboxie&channel=stable&version=%S&system=windows-%d.%d.%d-%s&language=%d&auto=%s", 
+	wchar_t StrLang[16];
+	LCIDToLocaleName(SbieDll_GetLanguage(NULL), StrLang, ARRAYSIZE(StrLang), 0);
+	if (StrLang[2] == L'-') StrLang[2] = '_';
+
+	Path.Format(L"/update.php?action=update&software=sandboxie&channel=stable&version=%S&system=windows-%d.%d.%d-%s&language=%s&auto=%s", 
 		MY_VERSION_STRING, m_osvi.dwMajorVersion, m_osvi.dwMinorVersion, m_osvi.dwBuildNumber,
 #ifdef _M_ARM64
 		L"ARM64",
@@ -262,7 +267,7 @@ BOOLEAN CUpdater::QueryUpdateData(UPDATER_DATA* Context)
 #else
 		L"i386",
 #endif
-		SbieDll_GetLanguage(NULL), Context->Manual ? L"0" : L"1");
+		StrLang, Context->Manual ? L"0" : L"1");
 
 	CString update_key;
 	CSbieIni::GetInstance().GetText(_GlobalSettings, L"UpdateKey", update_key);

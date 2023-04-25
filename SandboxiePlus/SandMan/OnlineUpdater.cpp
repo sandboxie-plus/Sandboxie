@@ -162,7 +162,7 @@ void COnlineUpdater::GetUpdates(QObject* receiver, const char* member, const QVa
 	//Query.addQueryItem("version", QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) + "." + QString::number(VERSION_REV) + "." + QString::number(VERSION_UPD));
 	Query.addQueryItem("version", QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) + "." + QString::number(VERSION_REV));
 	Query.addQueryItem("system", "windows-" + QSysInfo::kernelVersion() + "-" + QSysInfo::currentCpuArchitecture());
-	Query.addQueryItem("language", QString::number(theGUI->m_LanguageId));
+	Query.addQueryItem("language", QLocale::system().name());
 
 	QString UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("UPDATEKEY");
 	if (UpdateKey.isEmpty())

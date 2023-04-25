@@ -758,6 +758,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 			params << L"&system=windows-" << g_osvi.dwMajorVersion << L"." << g_osvi.dwMinorVersion << L"." << g_osvi.dwBuildNumber << "-" << arch;
 
+			wchar_t StrLang[16];
+			LCIDToLocaleName(GetUserDefaultLCID(), StrLang, ARRAYSIZE(StrLang), 0);
+			if (StrLang[2] == L'-') StrLang[2] = '_';
+
+			params << L"&language=" << StrLang;
+
 			std::wstring update_key = GetArgument(arguments, L"update_key");
 			if (!update_key.empty()) params << L"&update_key=" + update_key;
 

@@ -946,7 +946,7 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="740"/>
         <source>On Delete Content</source>
-        <translation>Alla rimozione del&lt;br /&gt;contenuto</translation>
+        <translation>Alla rimozione del contenuto</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="751"/>
@@ -3803,7 +3803,8 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Views/SbieView.cpp" line="168"/>
         <source>Execute Autorun Entries</source>
-        <translation>Esegui i comandi in Esecuzione automatica</translation>
+        <translatorcomment>https://github.com/sandboxie-plus/Sandboxie/blob/e68e650ecb1c9d0794c524d2b2080c735557fd9e/Sandboxie/apps/start/start.cpp#L1521-L1548</translatorcomment>
+        <translation>Esegui le voci di Esecuzione Automatica</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="316"/>
@@ -6349,13 +6350,14 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4643"/>
         <source>Edit ini Section</source>
-        <translation type="unfinished">Modifica configurazione
+        <translatorcomment>Qui ho forzato di proposito un ritorno a capo</translatorcomment>
+        <translation>Modifica configurazione
 area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4649"/>
         <source>Edit ini</source>
-        <translation type="unfinished">Modifica Sandboxie.ini</translation>
+        <translation>Modifica Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4662"/>
@@ -7142,7 +7144,8 @@ in modo diverso a seconda dell&apos;interfaccia di visualizzazione.</translation
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1924"/>
         <source>Edit ini Section</source>
-        <translation type="unfinished">Modifica configurazione
+        <translatorcomment>Qui ho forzato di proposito un ritorno a capo</translatorcomment>
+        <translation>Modifica configurazione
 globale</translation>
     </message>
     <message>
@@ -7153,7 +7156,7 @@ globale</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1940"/>
         <source>Edit ini</source>
-        <translation type="unfinished">Modifica Sandboxie.ini</translation>
+        <translation>Modifica Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1966"/>

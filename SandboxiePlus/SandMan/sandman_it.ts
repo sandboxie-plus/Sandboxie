@@ -3804,7 +3804,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
         <location filename="Views/SbieView.cpp" line="168"/>
         <source>Execute Autorun Entries</source>
         <translatorcomment>https://github.com/sandboxie-plus/Sandboxie/blob/e68e650ecb1c9d0794c524d2b2080c735557fd9e/Sandboxie/apps/start/start.cpp#L1521-L1548</translatorcomment>
-        <translation>Esegui le voci di Esecuzione Automatica</translation>
+        <translation>Esegui voci di Esecuzione Automatica</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="316"/>

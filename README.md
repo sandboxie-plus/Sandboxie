@@ -74,6 +74,10 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 <br>
 <br>
 
+## 🤝 Support the project
+
+If you find Sandboxie useful, then feel free to contribute through our [Contribution guidelines](./CONTRIBUTING.md).
+
 ## 📑 Helpful Contributors
 
 - DavidBerdik - Maintainer of [Sandboxie Website Archive](https://github.com/Sandboxie-Website-Archive/sandboxie-website-archive.github.io)
@@ -124,7 +128,3 @@ Binary Ninja is a multi-platform interactive disassembler, decompiler, and binar
 - GunGunGun - Vietnamese
 
 All translators are encouraged to look at the [Localization notes and tips](https://git.io/J9G19) before sending a translation.
-
-## 🤝 Support the project
-
-If you find Sandboxie useful, then feel free to contribute through our [Contribution guidelines](./CONTRIBUTING.md).

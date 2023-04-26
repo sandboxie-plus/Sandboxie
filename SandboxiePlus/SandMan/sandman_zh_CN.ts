@@ -2690,32 +2690,32 @@ This box prevents access to all user data locations, except explicitly granted i
     <message>
         <location filename="SandMan.cpp" line="3248"/>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>区分大小写</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3249"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>正则表达式</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3250"/>
         <source>Highlight</source>
-        <translation type="unfinished"></translation>
+        <translation>高亮显示</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3251"/>
         <source>Close</source>
-        <translation type="unfinished">关闭</translation>
+        <translation>关闭</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3252"/>
         <source>&amp;Find ...</source>
-        <translation type="unfinished"></translation>
+        <translation>查找(&amp;F)...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3253"/>
         <source>All columns</source>
-        <translation type="unfinished"></translation>
+        <translation>所有列</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3302"/>
@@ -3797,7 +3797,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="225"/>
         <source>Disable Force Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>禁用“强制规则”</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="230"/>
@@ -5746,7 +5746,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1791"/>
         <source>Disable forced Process and Folder for this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>禁用此沙盒的“强制进程/目录 规则”</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1801"/>

@@ -33,11 +33,11 @@ Sandboxie Plus has a modern Qt-based UI, which supports all new features that ha
   * Ability to import/export sandboxes to and from 7z files
   * Integration of sandboxes into the Windows Start menu
   * A browser compatibility wizard to create templates for unsupported browsers
-  * A "Vintage View" which replicates the graphical appearance of Sandboxie Control
+  * A Vintage View mode to reproduce the graphical appearance of Sandboxie Control
 
 More features can be spotted by finding the sign `=` through the shortcut key Ctrl+F in the [CHANGELOG.md](./CHANGELOG.md) file.
 
-Sandboxie Classic has the old no longer developed MFC-based UI, hence it lacks native interface support for Plus features. Although some of the missing features can be configured manually in the Sandboxie.ini configuration file or through [custom scripts](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums/viewforum1a2d1a2d.html?f=22), this edition of Sandboxie is not recommended for first-time users.
+Sandboxie Classic has the old no longer developed MFC-based UI, hence it lacks native interface support for Plus features. Although some of the missing features can be configured manually in the Sandboxie.ini configuration file or even replaced with [custom scripts](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums/viewforum1a2d1a2d.html?f=22), the Classic edition is not recommended for users who want to explore the latest security options.
 
 ## 📚 Documentation
 

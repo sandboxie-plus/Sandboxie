@@ -546,7 +546,8 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/TemplateWizard.cpp" line="969"/>
         <source>
 </source>
-        <translation></translation>
+        <translation>
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="970"/>
@@ -2759,32 +2760,32 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="3248"/>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>대소문자 구분</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3249"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>정규식</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3250"/>
         <source>Highlight</source>
-        <translation type="unfinished"></translation>
+        <translation>강조</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3251"/>
         <source>Close</source>
-        <translation type="unfinished">닫기</translation>
+        <translation>닫기</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3252"/>
         <source>&amp;Find ...</source>
-        <translation type="unfinished"></translation>
+        <translation>찾기(&amp;F)...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3253"/>
         <source>All columns</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 열</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3302"/>
@@ -3877,7 +3878,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="225"/>
         <source>Disable Force Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>강제 규칙 사용 안 함</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="230"/>
@@ -4615,7 +4616,7 @@ Processes in this box will think they are run with administrative privileges, wi
 Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
         <oldsource>
 Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
-        <translation type="unfinished">
+        <translation>
 이 박스의 프로세스는 자신이 속한 샌드박스를 나타내는 사용자 지정 프로세스 토큰으로 실행됩니다.</translation>
     </message>
     <message>
@@ -6186,7 +6187,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1791"/>
         <source>Disable forced Process and Folder for this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>이 샌드박스에 대해 강제 프로세스 및 폴더 사용 안 함</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1801"/>

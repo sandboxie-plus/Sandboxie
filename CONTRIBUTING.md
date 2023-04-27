@@ -49,5 +49,5 @@ You may also want to follow the following topics:
 <br> - in the [Issues](https://github.com/sandboxie-plus/Sandboxie/issues) section of this repository (grouped into [labels](https://github.com/sandboxie-plus/Sandboxie/labels) for easier searching)
 <br> - in the [Discussions](https://github.com/sandboxie-plus/Sandboxie/discussions) section of this repository
 <br> - in the [Issues](https://github.com/sandboxie-plus/sandboxie-docs/issues) section of the Sandboxie-docs repository
-<br> - in the [cached copy](https://www.ecosia.org/search?method=index&q=site%3Ahttps%3A%2F%2Fsandboxie-website-archive.github.io%2Fwww.sandboxie.com%2Fold-forums%2F) of the old Sandboxie forum
+<br> - in the cached copy of the old Sandboxie forum: `site:https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums/`
 <br> - in the other [support channels](https://github.com/sandboxie-plus/Sandboxie/discussions/1768)

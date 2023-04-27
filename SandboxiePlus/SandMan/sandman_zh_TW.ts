@@ -64,17 +64,17 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="467"/>
         <source>Box Options</source>
-        <translation type="unfinished">沙箱選項</translation>
+        <translation>沙箱選項</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="471"/>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
-        <translation type="unfinished">使用 Sandboxie 限權使用者，而不是匿名權杖 (實驗性)</translation>
+        <translation>使用 Sandboxie 限權使用者，而不是匿名權杖 (實驗性)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="472"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation type="unfinished">使用自訂沙箱權杖可以更好地將各個沙箱相互隔離，同時可以實現在工作管理員的使用者欄位中顯示處理程序所屬的沙箱。但是，某些第三方安全解決方案可能會與自訂權杖產生相容性問題。</translation>
+        <translation>使用自訂沙箱權杖可以更好地將各個沙箱相互隔離，同時可以實現在工作管理員的使用者欄位中顯示處理程序所屬的沙箱。但是，某些第三方安全解決方案可能會與自訂權杖產生相容性問題。</translation>
     </message>
 </context>
 <context>
@@ -93,11 +93,6 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="181"/>
         <source>Enter box name:</source>
         <translation>輸入沙箱名稱：</translation>
-    </message>
-    <message>
-        <source>New Box</source>
-        <translatorcomment>沙箱名稱只能包含字母、數字和下劃線，不應對此處的文字進行翻譯！</translatorcomment>
-        <translation type="vanished">New Box</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="199"/>
@@ -156,62 +151,62 @@
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="844"/>
         <source>Create Web Browser Template</source>
-        <translation type="unfinished"></translation>
+        <translation>建立網路瀏覽器範本</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="845"/>
         <source>Configure web browser template options.</source>
-        <translation type="unfinished"></translation>
+        <translation>設定網路瀏覽器範本選項</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="855"/>
         <source>Force the Web Browser to run in this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>強制網路瀏覽器在此沙箱中執行</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="859"/>
         <source>Allow direct access to the entire Web Browser profile folder</source>
-        <translation type="unfinished"></translation>
+        <translation>允許直接存取整個網路瀏覽器的設定檔資料夾</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="863"/>
         <source>Allow direct access to Web Browser&apos;s phishing database</source>
-        <translation type="unfinished"></translation>
+        <translation>允許直接存取網路瀏覽器的反網路釣魚資料庫</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="867"/>
         <source>Allow direct access to Web Browser&apos;s session management</source>
-        <translation type="unfinished"></translation>
+        <translation>允許直接存取網路瀏覽器的會話管理</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="871"/>
         <source>Allow direct access to Web Browser&apos;s sync data</source>
-        <translation type="unfinished"></translation>
+        <translation>允許直接存取網路瀏覽器的同步資料</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="875"/>
         <source>Allow direct access to Web Browser&apos;s preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>允許直接存取網路瀏覽器的偏好設定</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="879"/>
         <source>Allow direct access to Web Browser&apos;s passwords</source>
-        <translation type="unfinished"></translation>
+        <translation>允許直接存取網路瀏覽器儲存的密碼</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="883"/>
         <source>Allow direct access to Web Browser&apos;s cookies</source>
-        <translation type="unfinished"></translation>
+        <translation>允許直接存取網路瀏覽器儲存的 Cookies</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="887"/>
         <source>Allow direct access to Web Browser&apos;s bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>允許直接存取網路瀏覽器的書籤</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="891"/>
         <source>Allow direct access to Web Browser&apos;s bookmark and history database</source>
-        <translation type="unfinished"></translation>
+        <translation>允許直接存取網路瀏覽器的書籤和歷史瀏覽資料</translation>
     </message>
 </context>
 <context>
@@ -219,43 +214,43 @@
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="517"/>
         <source>Create Web Browser Template</source>
-        <translation type="unfinished"></translation>
+        <translation>建立網路瀏覽器範本</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="518"/>
         <source>Configure your Web Browser&apos;s profile directories.</source>
         <oldsource>Configure your Web Browsers profile directories.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>設定網路瀏覽器的使用者資料設定檔目錄</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="526"/>
         <source>User profile(s) directory:</source>
-        <translation type="unfinished"></translation>
+        <translation>使用者設定檔目錄：</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="528"/>
         <source>Show also imperfect matches</source>
-        <translation type="unfinished"></translation>
+        <translation>即使未完美相符也顯示出來</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="534"/>
         <source>Browser Executable (*.exe)</source>
-        <translation type="unfinished"></translation>
+        <translation>瀏覽可執行檔案 (*.exe)</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="551"/>
         <source>Continue without browser profile</source>
-        <translation type="unfinished"></translation>
+        <translation>在沒有瀏覽器設定檔的情況下繼續後續步驟</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="712"/>
         <source>Configure your Gecko based Browsers profile directories.</source>
-        <translation type="unfinished"></translation>
+        <translation>設定基於 Gecko 核心的瀏覽器設定檔目錄。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="716"/>
         <source>Configure your Chromium based Browsers profile directories.</source>
-        <translation type="unfinished"></translation>
+        <translation>設定基於 Chromium 核心的瀏覽器設定檔目錄。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="796"/>
@@ -265,27 +260,29 @@ Please browse to the correct user profile directory.</source>
         <oldsource>No suitable fodlers have been found.
 Note: you need to run the browser unsandboxed for them to get created.
 Please browse to the correct user profile directory.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>沒有發現合適的目錄。
+注意：您需要在不使用沙箱的情況下執行一次瀏覽器，以便使它們被正確建立。
+請瀏覽並選擇正確的使用者設定檔目錄。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="801"/>
         <source>Please choose the correct user profile directory, if it is not listed you may need to browse to it.</source>
-        <translation type="unfinished"></translation>
+        <translation>請選擇正確的使用者設定檔目錄 (如未列出，您可能需要手動瀏覽並選擇)</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="807"/>
         <source>Please ensure the selected directory is correct, the wizard is not confident in all the presented options.</source>
-        <translation type="unfinished"></translation>
+        <translation>請確保所選的目錄都是正確的，精靈無法幫您確認所選選項是否設定正確。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="810"/>
         <source>Please ensure the selected directory is correct.</source>
-        <translation type="unfinished"></translation>
+        <translation>請確保所選的目錄正確無誤。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="815"/>
         <source>This path does not look like a valid profile directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>此路徑不是有效的設定檔目錄。</translation>
     </message>
 </context>
 <context>
@@ -293,51 +290,51 @@ Please browse to the correct user profile directory.</oldsource>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="325"/>
         <source>Create Web Browser Template</source>
-        <translation type="unfinished"></translation>
+        <translation>建立網路瀏覽器範本</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="326"/>
         <source>Select your Web Browsers main executable, this will allow Sandboxie to identify the browser.</source>
         <oldsource>Select your Web Browsers main executable, this will allow sandboxie to identify the browser.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>選擇網路瀏覽器的主程式，以便使 Sandboxie 嘗試辨識瀏覽器類別。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="336"/>
         <source>Enter browser name:</source>
-        <translation type="unfinished"></translation>
+        <translation>輸入瀏覽器名稱：</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="347"/>
         <source>Main executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</source>
         <oldsource>Mein executable (eg. firefox.exe, chrome.exe, msedge.exe, etc...):</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>主程式執行檔 (例如 firefox.exe, chrome.exe, msedge.exe, 等等...):</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="351"/>
         <source>Browser executable (*.exe)</source>
         <oldsource>Browser Executable (*.exe)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>瀏覽可執行檔案 (*.exe)</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="451"/>
         <source>The browser appears to be Gecko based, like Mozilla Firefox and its derivatives.</source>
-        <translation type="unfinished"></translation>
+        <translation>該瀏覽器似乎是基於 Gecko 核心的，例如 Mozilla Firefox 及其衍生發行版。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="454"/>
         <source>The browser appears to be Chromium based, like Microsoft Edge or Google Chrome and its derivatives.</source>
-        <translation type="unfinished"></translation>
+        <translation>該瀏覽器似乎是基於 Chromium 核心的，例如 Microsoft Edge 或 Google Chrome 及其衍生發行版。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="457"/>
         <source>Browser could not be recognized, template cannot be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法辨識瀏覽器類型，範本將無法被建立。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="504"/>
         <source>This browser name is already in use, please choose an other one.</source>
         <oldsource>This browser name is already in use, please chooe an other one.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>該瀏覽器名稱已被使用，請選擇其他名稱。</translation>
     </message>
 </context>
 <context>
@@ -495,7 +492,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="407"/>
         <source>The selected box location is not placed on a currently available drive.</source>
         <oldsource>The selected box location not placed on a currently available drive.</oldsource>
-        <translation type="unfinished">選取的沙箱儲存路徑所在的磁碟機目前不可用。</translation>
+        <translation>所選的沙箱儲存路徑所在的磁碟機目前不可用。</translation>
     </message>
 </context>
 <context>
@@ -521,18 +518,19 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="936"/>
         <source>Create Web Browser Template</source>
-        <translation type="unfinished"></translation>
+        <translation>建立網路瀏覽器範本</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="944"/>
         <source>Almost complete, click Finish to create a new  Web Browser Template and conclude the wizard.</source>
-        <translation type="unfinished"></translation>
+        <translation>差不多設定好了，按下「完成」按鈕，建立一個新的網路瀏覽器範本，並結束精靈。</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="962"/>
         <source>Browser name: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>瀏覽器名稱：%1
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="966"/>
@@ -540,31 +538,36 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 </source>
         <oldsource>Browser Type: Gecko (Mozilla firefox)
 </oldsource>
-        <translation type="unfinished"></translation>
+        <translation>瀏覽器類型：Gecko (Mozilla Firefox)
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="967"/>
         <source>Browser Type: Chromium (Google Chrome)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>瀏覽器類型：Chromium (Google Chrome)
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="969"/>
         <source>
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="970"/>
         <source>Browser executable path: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>瀏覽器可執行檔路徑：%1
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="980"/>
         <source>Browser profile path: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>瀏覽器設定檔路徑：%1
+</translation>
     </message>
 </context>
 <context>
@@ -642,10 +645,6 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Windows/NewBoxWindow.cpp" line="23"/>
         <source>Sandboxie-Plus - Create New Box</source>
         <translation>Sandboxie-Plus - 建立新沙箱</translation>
-    </message>
-    <message>
-        <source>New Box</source>
-        <translation type="vanished">New Box</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="39"/>
@@ -1524,7 +1523,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="102"/>
         <source>Web Browser</source>
-        <translation>網頁瀏覽器</translation>
+        <translation>網路瀏覽器</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="103"/>
@@ -1544,26 +1543,22 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="187"/>
         <source>Please enter the template identifier</source>
-        <translation>請輸入範本識別項</translation>
+        <translation>請輸入範本識別碼</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="195"/>
         <source>Error: %1</source>
-        <translation>錯誤: %1</translation>
+        <translation>錯誤：%1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="222"/>
         <source>Do you really want to delete the selected local template(s)?</source>
-        <translation type="unfinished"></translation>
+        <translation>您真的想刪除選取的本地範本嗎？</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="228"/>
         <source>Only local templates can be removed!</source>
         <translation>僅可刪除本地範本！</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete the selected local template?</source>
-        <translation type="vanished">確定要刪除所選的本地範本嗎？</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="181"/>
@@ -1583,7 +1578,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="525"/>
         <source>Add %1 Template</source>
-        <translation type="unfinished"></translation>
+        <translation>加入 %1 範本</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="625"/>
@@ -2066,7 +2061,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="994"/>
         <source>Sbie Messages</source>
-        <translation>沙箱訊息</translation>
+        <translation>SBIE 訊息</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1001"/>
@@ -2688,32 +2683,32 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="3248"/>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>區分大小寫</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3249"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>RegExp</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3250"/>
         <source>Highlight</source>
-        <translation type="unfinished"></translation>
+        <translation>醒目提示</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3251"/>
         <source>Close</source>
-        <translation type="unfinished">關閉</translation>
+        <translation>關閉</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3252"/>
         <source>&amp;Find ...</source>
-        <translation type="unfinished"></translation>
+        <translation>尋找(&amp;F)...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3253"/>
         <source>All columns</source>
-        <translation type="unfinished"></translation>
+        <translation>所有欄</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3302"/>
@@ -3598,7 +3593,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="169"/>
         <source>Standard Applications</source>
-        <translation type="unfinished"></translation>
+        <translation>標準應用程式</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="189"/>
@@ -3783,10 +3778,6 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>開始選單 (主機)</translation>
     </message>
     <message>
-        <source>More Tools</source>
-        <translation type="vanished">更多工具</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="223"/>
         <source>Immediate Recovery</source>
         <translation>即時復原</translation>
@@ -3794,7 +3785,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="225"/>
         <source>Disable Force Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>停用強制規則</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="230"/>
@@ -3805,13 +3796,13 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Views/SbieView.cpp" line="234"/>
         <location filename="Views/SbieView.cpp" line="330"/>
         <source>Move Up</source>
-        <translation>往上移</translation>
+        <translation>向上移</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="239"/>
         <location filename="Views/SbieView.cpp" line="335"/>
         <source>Move Down</source>
-        <translation>往下移</translation>
+        <translation>向下移</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="281"/>
@@ -4181,12 +4172,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="410"/>
         <source>Add %1 Template</source>
-        <translation type="unfinished"></translation>
+        <translation>加入 %1 範本</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="595"/>
         <source>Please enter message</source>
-        <translation type="unfinished"></translation>
+        <translation>請輸入訊息</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="627"/>
@@ -4314,17 +4305,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1631"/>
         <source>Please enter the template identifier</source>
-        <translation type="unfinished">請輸入範本識別項</translation>
+        <translation>請輸入範本識別碼</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1639"/>
         <source>Error: %1</source>
-        <translation type="unfinished">錯誤: %1</translation>
+        <translation>錯誤：%1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1664"/>
         <source>Do you really want to delete the selected local template(s)?</source>
-        <translation type="unfinished"></translation>
+        <translation>您真的想刪除選取的本地範本嗎？</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1820"/>
@@ -4505,7 +4496,8 @@ Processes in this box will think they are run with administrative privileges, wi
 Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
         <oldsource>
 Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>
+在此沙箱內的處理程序將以自訂處理程序權杖執行，以表明它們屬於哪個沙箱。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="606"/>
@@ -4602,17 +4594,17 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="258"/>
         <source>Create new Template</source>
-        <translation type="unfinished"></translation>
+        <translation>建立新的範本</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="267"/>
         <source>Select template type:</source>
-        <translation type="unfinished"></translation>
+        <translation>選擇範本類型：</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="271"/>
         <source>%1 template</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 範本</translation>
     </message>
 </context>
 <context>
@@ -4621,71 +4613,71 @@ Processes in this box will be running with a custom process token indicating the
         <location filename="Wizards/TemplateWizard.cpp" line="37"/>
         <source>Compatibility Template Wizard</source>
         <oldsource>Compatybility Template Wizard</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>相容性範本精靈</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="48"/>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>自訂</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="49"/>
         <source>Web Browser</source>
-        <translation type="unfinished">網頁瀏覽器</translation>
+        <translation>網路瀏覽器</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="82"/>
         <source>Force %1 to run in this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>強制 %1 在此沙箱內執行</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="100"/>
         <source>Allow direct access to the entire %1 profile folder</source>
-        <translation type="unfinished"></translation>
+        <translation>允許直接存取整個 %1 的設定檔資料夾</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="113"/>
         <location filename="Wizards/TemplateWizard.cpp" line="168"/>
         <source>Allow direct access to %1 phishing database</source>
-        <translation type="unfinished"></translation>
+        <translation>允許直接存取 %1 的反網路釣魚資料庫</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="127"/>
         <source>Allow direct access to %1 session management</source>
-        <translation type="unfinished"></translation>
+        <translation>允許直接存取 %1 的會話管理</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="136"/>
         <location filename="Wizards/TemplateWizard.cpp" line="199"/>
         <source>Allow direct access to %1 passwords</source>
-        <translation type="unfinished"></translation>
+        <translation>允許直接存取 %1 儲存的密碼</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="146"/>
         <location filename="Wizards/TemplateWizard.cpp" line="208"/>
         <source>Allow direct access to %1 cookies</source>
-        <translation type="unfinished"></translation>
+        <translation>允許直接存取 %1 儲存的 Cookies</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="155"/>
         <location filename="Wizards/TemplateWizard.cpp" line="227"/>
         <source>Allow direct access to %1 bookmark and history database</source>
-        <translation type="unfinished"></translation>
+        <translation>允許直接存取 %1 的書籤和歷史瀏覽資料</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="180"/>
         <source>Allow direct access to %1 sync data</source>
-        <translation type="unfinished"></translation>
+        <translation>允許直接存取 %1 的同步資料</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="190"/>
         <source>Allow direct access to %1 preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>允許直接存取 %1 的偏好設定</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="217"/>
         <source>Allow direct access to %1 bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>允許直接存取 %1 的書籤</translation>
     </message>
 </context>
 <context>
@@ -5414,10 +5406,6 @@ Processes in this box will be running with a custom process token indicating the
         <translation>只有在沙箱為空時，才能變更沙箱結構</translation>
     </message>
     <message>
-        <source>Allow sandboxed processes to open files protected by EFS</source>
-        <translation type="vanished">允許沙箱內的處理程序開啟受 EFS 保護的檔案</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="352"/>
         <source>Disk/File access</source>
         <translation>「磁碟/檔案」存取權限</translation>
@@ -5474,17 +5462,17 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Forms/OptionsWindow.ui" line="874"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>圖示</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="899"/>
         <source>Move Up</source>
-        <translation type="unfinished">往上移</translation>
+        <translation>向上移</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="918"/>
         <source>Move Down</source>
-        <translation type="unfinished">往下移</translation>
+        <translation>向下移</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1153"/>
@@ -5494,34 +5482,34 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1174"/>
         <source>Various isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
-        <translation type="unfinished"></translation>
+        <translation>注意：各種隔離功能會破壞與某些應用程式的相容性&lt;br /&gt;如果使用此沙箱&lt;b&gt;不是為了安全性&lt;/b&gt;，而是為了應用程式的可移植性，可以透過變更這些選項，以便透過犧牲部分安全性來復原相容性。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1272"/>
         <source>Access Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>存取隔離</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1299"/>
         <location filename="Forms/OptionsWindow.ui" line="1357"/>
         <source>Image Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>映像保護</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1307"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
-        <translation type="unfinished"></translation>
+        <translation>當一個程式試圖載入一個沙箱內部的動態連結程式庫(DLL)檔案時，提示問題代碼 1305</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1340"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>防止安裝在宿主上的沙箱程式從沙箱內部載入動態連結程式庫(DLL)檔案</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1383"/>
         <source>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie 的資源存取規則通常對位於沙箱內的二進位程式具有歧視性一般情況下，OpenFilePath 和 OpenKeyPath 只對宿主機上的原生程式(安裝在宿主上的)有效為了定義沒有此類限制的規則，則必須使用 OpenPipePath 和 OpenConfPath同樣的，透過否定來定義所有的 Closed(File|Key|Ipc)Path 指令例如：&apos;ClosedFilePath=! iexplore.exe,C:Users*&apos;將限制沙箱內的程式存取相應資源這兩種限制原則都可以透過「存取原則」頁面來停用這樣做是為了防止沙箱內的流氓處理程序建立自己的重新命名副本並存取受保護的資源另一個漏洞載體是將一個動態連結程式庫注入到一個被授權處理程序中，以取得對被授權處理程序所允許存取的一切資源的存取權使用主機映像保護，可以透過阻止在沙箱內執行的應用程式(安裝在宿主上的)載入來自沙箱的動態連結程式庫來防止此類現象。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1404"/>
@@ -5562,7 +5550,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1791"/>
         <source>Disable forced Process and Folder for this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>停用此沙箱的「強制處理程序/資料夾」規則</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1801"/>
@@ -5656,8 +5644,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2625"/>
         <source>Configure which processes can access desktop objects like windows and alike.</source>
-        <oldsource>Configure which processes can access Desktop objects like Windows and alike.</oldsource>
-        <translation type="unfinished">設定哪些處理程序可以存取桌面物件，如視窗或其它類似物件等等。</translation>
+        <translation>設定哪些處理程序可以存取桌面物件，如 Windows 或其它類似物件。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2638"/>
@@ -5808,14 +5795,6 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <location filename="Forms/OptionsWindow.ui" line="716"/>
         <source>Issue message 2111 when a process access is denied</source>
         <translation>處理程序被拒絕存取非沙箱處理程序記憶體時發出問題代碼 2111</translation>
-    </message>
-    <message>
-        <source>Various advanced isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for simple application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
-        <translation type="vanished">各種進階隔離功能可能會影響部分應用程式的相容性。如果您使用沙箱，&lt;b&gt;不以安全為目的&lt;b&gt;，而只是為了應用程式的可移植性，您可以透過改變這些選項，犧牲一些安全性來復原相容性。</translation>
-    </message>
-    <message>
-        <source>Access isolation</source>
-        <translation type="vanished">存取隔離</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1477"/>
@@ -6143,7 +6122,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3458"/>
         <source>Use desktop object workaround for all processes</source>
-        <translation type="unfinished"></translation>
+        <translation>對所有處理程序應用桌面物件解決方案</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3498"/>
@@ -6350,7 +6329,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4331"/>
         <source>App Templates</source>
-        <translation>應用程式範本</translation>
+        <translation>軟體範本</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4416"/>
@@ -6360,7 +6339,7 @@ instead of &quot;*&quot;.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4387"/>
         <source>Text Filter</source>
-        <translation>文字過濾</translation>
+        <translation>篩選文字</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4409"/>
@@ -6635,10 +6614,6 @@ Please note that this values are currently user specific and saved globally for 
         <translation>當有沙箱化處理程序啟動時啟動介面</translation>
     </message>
     <message>
-        <source>Show Notifications for relevant log Messages</source>
-        <translation type="vanished">顯示相關日誌訊息的通知</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="613"/>
         <source>Start UI with Windows</source>
         <translation>系統啟動時啟動介面</translation>
@@ -6726,87 +6701,87 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="94"/>
         <source>SandMan Options</source>
-        <translation type="unfinished"></translation>
+        <translation>SandMan 選項</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="208"/>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>通知</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="240"/>
         <source>Add Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>加入項目</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="247"/>
         <source>Show file migration progress when copying large files into a sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>將大檔案複製到沙箱內部時顯示檔案遷移進度</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="255"/>
         <source>Message ID</source>
-        <translation type="unfinished"></translation>
+        <translation>訊息 ID</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="260"/>
         <source>Message Text (optional)</source>
-        <translation type="unfinished"></translation>
+        <translation>訊息文字 (可選)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="275"/>
         <source>SBIE Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>SBIE 訊息</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="301"/>
         <source>Delete Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除項目</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="308"/>
         <source>Don&apos;t show the popup message log for all SBIE messages</source>
-        <translation type="unfinished"></translation>
+        <translation>不顯示「SBIE 訊息」的所有彈出式資訊記錄</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="325"/>
         <source>Notification Options</source>
-        <translation type="unfinished"></translation>
+        <translation>通知選項</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="361"/>
         <source>Sandboxie may be issue &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie 可能會將 &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE 訊息&lt;/a&gt;記錄到資訊日誌中，並以彈出視窗的形式通知&lt;br /&gt;有些訊息僅僅是資訊性的，通知一個普通的或某些特殊的事件發生，其它訊息表明一個錯誤狀況&lt;br /&gt;您可以使用此列表來隱藏所設定的「SBIE 訊息」，使其不被彈出：</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="391"/>
         <source>Windows Shell</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows 殼層</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="657"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>圖示</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="714"/>
         <source>Move Up</source>
-        <translation type="unfinished">往上移</translation>
+        <translation>向上移</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="733"/>
         <source>Move Down</source>
-        <translation type="unfinished">往下移</translation>
+        <translation>向下移</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="939"/>
         <source>Display Options</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示選項</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1063"/>
         <source>Graphic Options</source>
-        <translation type="unfinished"></translation>
+        <translation>圖形選項</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1371"/>
@@ -6821,7 +6796,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1540"/>
         <source>Sandboxie.ini Presets</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini 預設選項</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1548"/>
@@ -6846,12 +6821,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1728"/>
         <source>App Templates</source>
-        <translation type="unfinished">應用程式範本</translation>
+        <translation>軟體範本</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1738"/>
         <source>App Compatibility</source>
-        <translation type="unfinished"></translation>
+        <translation>軟體相容性</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1589"/>
@@ -7052,7 +7027,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1624"/>
         <source>Program Control</source>
-        <translation type="unfinished">應用程式控制</translation>
+        <translation>應用程式控制</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1634"/>
@@ -7117,17 +7092,9 @@ Please note that this values are currently user specific and saved globally for 
         <translation>支持 &amp;&amp; 更新</translation>
     </message>
     <message>
-        <source>Sandbox Config</source>
-        <translation type="vanished">沙箱設定</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1398"/>
         <source>Default sandbox:</source>
         <translation>預設沙箱：</translation>
-    </message>
-    <message>
-        <source>Compatibility</source>
-        <translation type="vanished">相容性</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1758"/>
@@ -7152,22 +7119,22 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1814"/>
         <source>Local Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>本地範本</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1865"/>
         <source>Add Template</source>
-        <translation type="unfinished">加入範本</translation>
+        <translation>加入範本</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1885"/>
         <source>Text Filter</source>
-        <translation type="unfinished">文字過濾</translation>
+        <translation>篩選文字</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1907"/>
         <source>This list contains user created custom templates for sandbox options</source>
-        <translation type="unfinished"></translation>
+        <translation>該列表包含使用者為沙箱選項建立的自訂範本</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1924"/>

@@ -19,7 +19,7 @@ Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT
 Sandboxie is available in two flavors, Plus and Classic. They both share the same core components, this means they have the same level of security and compatibility.
 What's different is the availability of features in the user interface.
 
-Sandboxie Plus has a modern Qt based UI, which supports all new features that have been added since the project went open source:
+Sandboxie Plus has a modern Qt-based UI, which supports all new features that have been added since the project went open source:
 
   * Snapshot Manager - takes a copy of any box in order to be restored when needed
   * Maintenance mode - allows to uninstall/install/start/stop Sandboxie driver and service when needed
@@ -27,9 +27,9 @@ Sandboxie Plus has a modern Qt based UI, which supports all new features that ha
   * Additional UI options to block access for Windows components like printer spooler and clipboard
   * More customization options for Start/Run and Internet access restrictions
   * Global hotkey to terminate all boxed processes
-  * A new firewall per sandbox which supports Windows Filtering Platform (WFP)
+  * A network firewall per sandbox which supports Windows Filtering Platform (WFP)
   * The list of sandboxes can be searched with the shortcut key Ctrl+F
-  * A new search function for Global Settings and Sandbox Options
+  * A search function for Global Settings and Sandbox Options
   * Ability to import/export sandboxes to and from 7z files
   * Integration of sandboxes into the Windows Start menu
   * A browser compatibility wizard to create templates for unsupported browsers
@@ -37,7 +37,7 @@ Sandboxie Plus has a modern Qt based UI, which supports all new features that ha
 
 More features can be spotted by finding the sign `=` through the shortcut key Ctrl+F in the [CHANGELOG.md](./CHANGELOG.md) file.
 
-Sandboxie Classic has the old no longer developed MFC based UI, hence it lacks native interface support for Plus features. Although some of the missing features can be configured manually in the Sandboxie.ini configuration file or through [custom scripts](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums/viewforum1a2d1a2d.html?f=22), this edition of Sandboxie is not recommended for first-time users.
+Sandboxie Classic has the old no longer developed MFC-based UI, hence it lacks native interface support for Plus features. Although some of the missing features can be configured manually in the Sandboxie.ini configuration file or through [custom scripts](https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums/viewforum1a2d1a2d.html?f=22), this edition of Sandboxie is not recommended for first-time users.
 
 ## 📚 Documentation
 
@@ -52,9 +52,9 @@ A partial archive of the [old Sandboxie forum](https://sandboxie-website-archive
 
 Sandboxie's functionality can be enhanced with specialized tools like the following:
 
-  * [LogApiDll](https://github.com/sandboxie-plus/LogApiDll) - adds a verbose output to Sandboxie's trace log, listing invocations of relevant Windows API functions.
-  * [SbieHide](https://github.com/VeroFess/SbieHide) - attempts to hide the presence of SbieDll.dll from the application being sandboxed.
-  * [SandboxToys2](https://github.com/blap/SandboxToys2) - allows to monitor files and registry changes in a sandbox.
+  * [LogApiDll](https://github.com/sandboxie-plus/LogApiDll) - adds a verbose output to Sandboxie's trace log, listing invocations of relevant Windows API functions
+  * [SbieHide](https://github.com/VeroFess/SbieHide) - attempts to hide the presence of SbieDll.dll from the application being sandboxed
+  * [SandboxToys2](https://github.com/blap/SandboxToys2) - allows to monitor files and registry changes in a sandbox
 
 
 ## 📌 Project history

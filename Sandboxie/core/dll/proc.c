@@ -1016,34 +1016,34 @@ _FX BOOL Proc_CreateProcessInternalW(
         // the system may have quoted the first part of the command line,
         // store this final command line
         //
-
-        if (TlsData->proc_command_line)
-            Dll_Free(TlsData->proc_command_line);
-
-        ULONG len = 0;
-        WCHAR* buf = NULL;
-
-        if (lpApplicationName) {
-            len = wcslen(lpApplicationName) + 2;        // +1 for space, +1 for NULL
-        }
-
-        if (lpCommandLine) {
-            len += wcslen(lpCommandLine) + 1;           // +1 for NULL
-        }
-
-        buf = Dll_Alloc(len * sizeof(WCHAR));
-        memset(buf, 0, len * sizeof(WCHAR));
-
-        if (lpApplicationName) {
-            wcscpy(buf, lpApplicationName);
-            wcscat(buf, L" ");
-        }
-
-        if (lpCommandLine) {
-            wcscat(buf, lpCommandLine);
-        }
-
-        TlsData->proc_command_line = buf;
+        //
+        //if (TlsData->proc_command_line)
+        //    Dll_Free(TlsData->proc_command_line);
+        //
+        //ULONG len = 0;
+        //WCHAR* buf = NULL;
+        //
+        //if (lpApplicationName) {
+        //    len = wcslen(lpApplicationName) + 2;        // +1 for space, +1 for NULL
+        //}
+        //
+        //if (lpCommandLine) {
+        //    len += wcslen(lpCommandLine) + 1;           // +1 for NULL
+        //}
+        //
+        //buf = Dll_Alloc(len * sizeof(WCHAR));
+        //memset(buf, 0, len * sizeof(WCHAR));
+        //
+        //if (lpApplicationName) {
+        //    wcscpy(buf, lpApplicationName);
+        //    wcscat(buf, L" ");
+        //}
+        //
+        //if (lpCommandLine) {
+        //    wcscat(buf, lpCommandLine);
+        //}
+        //
+        //TlsData->proc_command_line = buf;
 
     }
     else { // xp, 7, 8 and 10 before RS5
@@ -1574,6 +1574,12 @@ finish:
 
         if (Config_GetSettingsForImageName_bool(L"ApplyElevateCreateProcessFix", FALSE))
         {
+            if (Dll_OsBuild >= 17677) { // 10 RS5 and later
+
+                if (TlsData->proc_image_is_copy && TlsData->proc_command_line)
+                    lpCommandLine = TlsData->proc_command_line;
+            }
+
             BOOL cancelled = FALSE;
             if (SH32_DoRunAs(lpCommandLine ? lpCommandLine : lpApplicationName, lpCurrentDirectory,
                 lpProcessInformation, &cancelled)) {
@@ -2214,7 +2220,7 @@ _FX NTSTATUS Proc_NtCreateUserProcess(
     _In_opt_ POBJECT_ATTRIBUTES ThreadObjectAttributes,
     _In_ ULONG ProcessFlags, // PROCESS_CREATE_FLAGS_*
     _In_ ULONG ThreadFlags, // THREAD_CREATE_FLAGS_*
-    _In_opt_ PVOID ProcessParameters, // PRTL_USER_PROCESS_PARAMETERS
+    _In_opt_ PRTL_USER_PROCESS_PARAMETERS ProcessParameters,
     _Inout_ PPS_CREATE_INFO CreateInfo,
     _In_ PPS_ATTRIBUTE_LIST AttributeList)
 {
@@ -2259,6 +2265,11 @@ _FX NTSTATUS Proc_NtCreateUserProcess(
             if (NT_SUCCESS(status)) {
 
                 Proc_StoreImagePath(TlsData, FileHandle);
+
+                if (TlsData->proc_image_path && ProcessParameters && ProcessParameters->CommandLine.Buffer) {
+
+                    Proc_FixBatchCommandLine(TlsData, ProcessParameters->CommandLine.Buffer, TlsData->proc_image_path);
+                }
 
                 NtClose(FileHandle);
             }

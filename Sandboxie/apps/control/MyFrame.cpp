@@ -1005,7 +1005,7 @@ void CMyFrame::OnCmdHelpSupport()
 
 void CMyFrame::OnCmdHelpContribution()
 {
-	CRunBrowser x(this, L"https://sandboxie-plus.com/go.php?to=sbie-contribute");
+	CRunBrowser x(this, L"https://sandboxie-plus.com/go.php?to=sbie-contribution");
 }
 
 //---------------------------------------------------------------------------

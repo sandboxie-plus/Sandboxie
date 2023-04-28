@@ -2,13 +2,14 @@
 
 [![Plus license](https://img.shields.io/badge/Plus%20license-Custom%20-blue.svg)](./Installer/license.txt) [![Classic license](https://img.shields.io/github/license/Sandboxie-Plus/Sandboxie?label=Classic%20license&color=blue)](./LICENSE) [![GitHub Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie.svg)](https://github.com/sandboxie-plus/Sandboxie/releases/latest) [![GitHub Pre-Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie/all.svg?label=pre-release)](https://github.com/sandboxie-plus/Sandboxie/releases) [![GitHub Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/main.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions) [![GitHub Codespell Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml)
 
-Note: This is a community fork that took place after the open-source code release of Sandboxie and not the official continuation of the previous development (see the [project history](./README.md#-project-history)).
+| Note: This is a community fork that took place after the release of the Sandboxie source code and not the official continuation of the previous development (see the [project history](./README.md#-project-history)). |
+|      :---       |
 
 Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT-based operating systems. It creates a sandbox-like isolated operating environment in which applications can be run or installed without permanently modifying local & mapped drives or the Windows registry. An isolated virtual environment allows controlled testing of untrusted programs and web surfing.<br>
 
-|  System requirements  |      Release notes     |      Security policy      |      Project maintenance   |      Contribution guidelines   |
-|         :---:         |          :---:         |          :---:            |      :---:     |          :---:                 |
-| Windows 7 or higher, 32-bit or 64-bit. |  [CHANGELOG.md](./CHANGELOG.md)  |   [SECURITY.md](./SECURITY.md)  |   David Xanatos  |   [CONTRIBUTING.md](./CONTRIBUTING.md)  |
+|  System requirements  |      Release notes     |      Security policy      |      Contribution guidelines   |
+|         :---:         |          :---:         |          :---:            |          :---:                 |
+| Windows 7 or higher, 32-bit or 64-bit. |  [CHANGELOG.md](./CHANGELOG.md)  |   [SECURITY.md](./SECURITY.md)  |  [CONTRIBUTING.md](./CONTRIBUTING.md)  |
 
 ## ⏬ Download
 
@@ -33,7 +34,7 @@ Sandboxie Plus has a modern Qt-based UI, which supports all new features that ha
   * Ability to import/export sandboxes to and from 7z files
   * Integration of sandboxes into the Windows Start menu
   * A browser compatibility wizard to create templates for unsupported browsers
-  * A Vintage View mode to reproduce the graphical appearance of Sandboxie Control
+  * Vintage View mode to reproduce the graphical appearance of Sandboxie Control
 
 More features can be spotted by finding the sign `=` through the shortcut key Ctrl+F in the [CHANGELOG.md](./CHANGELOG.md) file.
 
@@ -60,7 +61,7 @@ Sandboxie's functionality can be enhanced with specialized tools like the follow
 ## 📌 Project history
 
 |      Timeline       |    Maintainer    |
-|---------------------|------------------|
+|        :---         |       :---       |
 | 2004 - 2013         | Ronen Tzur       |
 | 2013 - 2017         | Invincea Inc.    |
 | 2017 - 2020         | Sophos Group plc |

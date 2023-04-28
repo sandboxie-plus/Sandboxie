@@ -17,9 +17,11 @@ Patreon certificates are valid for as long as the subscription is active and unl
 4. Donate with cryptocurrencies <br>
 In order to arrange custom payments with cryptocurrencies, please get in touch by [email](https://xanasoft.com/contact/).
 
+In case of issues with your refund request, please get in touch by [email](https://xanasoft.com/contact/) with the full name and order ID.
+
 ## Non-monetary contributions
 
-Contributor certificates do not expire and are available to all people who open meaningful [pull requests](https://docs.github.com/articles/creating-a-pull-request) or provide continued support to the [Sandboxie-docs](https://github.com/sandboxie-plus/sandboxie-docs) / [Sandboxie](https://github.com/sandboxie-plus/Sandboxie) repositories.
+Contributor certificates do not expire (regardless of how many PCs you own) and are available to all people who open meaningful [pull requests](https://docs.github.com/articles/creating-a-pull-request) or provide continued support to the [Sandboxie-docs](https://github.com/sandboxie-plus/sandboxie-docs) / [Sandboxie](https://github.com/sandboxie-plus/Sandboxie) repositories.
 
 For example:
 

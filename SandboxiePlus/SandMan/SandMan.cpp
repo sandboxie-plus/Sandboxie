@@ -3286,7 +3286,7 @@ void CSandMan::OnHelp()
 	//	QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=donate"));
 	//else 
 	if (sender() == m_pContribution)
-		QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-contribute"));
+		QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-contribution"));
 	else if (sender() == m_pManual)
 		QDesktopServices::openUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-docs"));
 	else if (sender() == m_pForum)

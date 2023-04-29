@@ -54,6 +54,7 @@ Name: "RefreshBuild"; Description: "{cm:RefreshBuild}"; MinVersion: 0.0,5.0; Che
 Source: ".\Release\{#MyAppSrc}\*"; DestDir: "{app}"; MinVersion: 0.0,5.0; Flags: recursesubdirs ignoreversion; Excludes: "*.pdb"
 ; include the driver pdb
 Source: ".\Release\{#MyAppSrc}\SbieDrv.pdb"; DestDir: "{app}"; MinVersion: 0.0,5.0; Flags: ignoreversion
+Source: ".\Release\{#MyAppSrc}\SbieDll.pdb"; DestDir: "{app}"; MinVersion: 0.0,5.0; Flags: ignoreversion
 
 ; Only if portable.
 Source: ".\Sandboxie.ini"; DestDir: "{app}"; Flags: ignoreversion onlyifdoesntexist; Check: IsPortable

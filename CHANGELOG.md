@@ -5,6 +5,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.9.3 / 5.64.3] - 2023-04-??
+
+### Added
+- added setting to disable overlay icons
+
+### Fixed
+- fixed issue with command lines [#2858](https://github.com/sandboxie-plus/Sandboxie/issues/2858)
+
+
+
+
 ## [1.9.2 / 5.64.2] - 2023-04-24
 
 ### Added

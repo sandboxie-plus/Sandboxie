@@ -790,7 +790,7 @@
          <item row="1" column="0">
           <widget class="QTabWidget" name="tabsGUI">
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="tabUI">
             <attribute name="title">
@@ -799,20 +799,34 @@
             <layout class="QGridLayout" name="gridLayout_11">
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_15">
-               <item row="9" column="3">
-                <spacer name="horizontalSpacer_11">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+               <item row="1" column="3">
+                <widget class="QCheckBox" name="chkFusionTheme">
+                 <property name="text">
+                  <string>Use Fusion Theme</string>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
+                 <property name="tristate">
+                  <bool>true</bool>
                  </property>
-                </spacer>
+                </widget>
                </item>
-               <item row="9" column="1">
+               <item row="4" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkLargeIcons">
+                 <property name="text">
+                  <string>Use large icons in box list *</string>
+                 </property>
+                 <property name="tristate">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="11" column="1" colspan="3">
+                <widget class="QLabel" name="label_11">
+                 <property name="text">
+                  <string>* a partially checked checkbox will leave the behavior to be determined by the view mode.</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="1">
                 <spacer name="verticalSpacer_8">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -825,10 +839,43 @@
                  </property>
                 </spacer>
                </item>
-               <item row="1" column="3">
-                <widget class="QCheckBox" name="chkFusionTheme">
+               <item row="7" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkNewLayout">
                  <property name="text">
-                  <string>Use Fusion Theme</string>
+                  <string>Use new config dialog layout *</string>
+                 </property>
+                 <property name="tristate">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkBackground">
+                 <property name="text">
+                  <string>Show &quot;Pizza&quot; Background in box list *</string>
+                 </property>
+                 <property name="tristate">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="3">
+                <spacer name="horizontalSpacer_11">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="5" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkNoIcons">
+                 <property name="text">
+                  <string>Don't show icons in menus *</string>
                  </property>
                  <property name="tristate">
                   <bool>true</bool>
@@ -849,16 +896,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="7" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkNewLayout">
-                 <property name="text">
-                  <string>Use new config dialog layout *</string>
-                 </property>
-                 <property name="tristate">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
                <item row="6" column="1" colspan="3">
                 <widget class="QCheckBox" name="chkOptTree">
                  <property name="text">
@@ -876,26 +913,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkBackground">
-                 <property name="text">
-                  <string>Show &quot;Pizza&quot; Background in box list *</string>
-                 </property>
-                 <property name="tristate">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkLargeIcons">
-                 <property name="text">
-                  <string>Use large icons in box list *</string>
-                 </property>
-                 <property name="tristate">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
                <item row="1" column="1" colspan="2">
                 <widget class="QCheckBox" name="chkDarkTheme">
                  <property name="text">
@@ -906,13 +923,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="10" column="1" colspan="3">
-                <widget class="QLabel" name="label_11">
-                 <property name="text">
-                  <string>* a partially checked checkbox will leave the behavior to be determined by the view mode.</string>
-                 </property>
-                </widget>
-               </item>
                <item row="2" column="1" colspan="2">
                 <widget class="QCheckBox" name="chkAltRows">
                  <property name="text">
@@ -920,13 +930,10 @@
                  </property>
                 </widget>
                </item>
-               <item row="5" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkNoIcons">
+               <item row="9" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkOverlayIcons">
                  <property name="text">
-                  <string>Don't show icons in menus *</string>
-                 </property>
-                 <property name="tristate">
-                  <bool>true</bool>
+                  <string>Show overlay icons for boxes and processes</string>
                  </property>
                 </widget>
                </item>

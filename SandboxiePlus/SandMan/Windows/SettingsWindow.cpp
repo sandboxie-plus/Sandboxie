@@ -332,6 +332,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkOptTree, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkNewLayout, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkColorIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkOverlayIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+
 	connect(ui.cmbFontScale, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.cmbFontScale, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnChangeGUI()));
 	m_bRebuildUI = false;
@@ -784,6 +786,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkOptTree->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/OptionTree", 2)));
 	ui.chkNewLayout->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/NewConfigLayout", 2)));
 	ui.chkColorIcons->setChecked(theConf->GetBool("Options/ColorBoxIcons", false));
+	ui.chkOverlayIcons->setChecked(theConf->GetBool("Options/UseOverlayIcons", true));
 
 	//ui.cmbFontScale->setCurrentIndex(ui.cmbFontScale->findData(theConf->GetInt("Options/FontScaling", 100)));
 	ui.cmbFontScale->setCurrentText(QString::number(theConf->GetInt("Options/FontScaling", 100)));
@@ -1073,6 +1076,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/OptionTree", CSettingsWindow__Chk2Int(ui.chkOptTree->checkState()));
 	theConf->SetValue("Options/NewConfigLayout", CSettingsWindow__Chk2Int(ui.chkNewLayout->checkState()));
 	theConf->SetValue("Options/ColorBoxIcons", ui.chkColorIcons->isChecked());
+	theConf->SetValue("Options/UseOverlayIcons", ui.chkOverlayIcons->isChecked());
 
 	int Scaling = ui.cmbFontScale->currentText().toInt();
 	if (Scaling < 75)

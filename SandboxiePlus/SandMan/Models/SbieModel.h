@@ -67,7 +67,7 @@ protected:
 
 	struct SSandBoxNode: STreeNode
 	{
-		SSandBoxNode(const QVariant& Id) : STreeNode(Id) { inUse = false; bOpen = false; busyState = 0; boxType = -1; boxDel = false; boxColor = 0; OrderNumber = 0; }
+		SSandBoxNode(const QVariant& Id) : STreeNode(Id) { inUse = false; bOpen = false; busyState = 0; boxType = -1; boxDel = false; boxNoForce = false; boxColor = 0; OrderNumber = 0; }
 
 		CSandBoxPtr	pBox;
 		bool		inUse;
@@ -75,6 +75,7 @@ protected:
 		int			busyState;
 		int			boxType;
 		bool		boxDel;
+		bool		boxNoForce;
 		int			boxColor;
 		int			OrderNumber;
 		QString		BoxIcon;

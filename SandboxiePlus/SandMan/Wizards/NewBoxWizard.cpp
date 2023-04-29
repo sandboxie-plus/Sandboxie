@@ -128,6 +128,9 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         if(field("boxToken").toBool())
             pBox->SetBool("SandboxieLogon", true);
 
+        if(field("imagesProtection").toBool())
+            pBox->SetBool("ProtectHostImages", true);
+
         if (field("boxVersion").toInt() == 1) {
             if (theConf->GetBool("Options/WarnDeleteV2", true)) {
                 bool State = false;
@@ -468,11 +471,18 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
     pBoxLabel->setFont(fnt);
     layout->addWidget(pBoxLabel, row++, 0);
 
-    QCheckBox* pBoxToken = new QCheckBox(tr("Use a Sandboxie login instead of an anonymous token (experimental)"));
+    QCheckBox* pBoxToken = new QCheckBox(tr("Use a Sandboxie login instead of an anonymous token"));
     pBoxToken->setToolTip(tr("Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens."));
     pBoxToken->setChecked(theConf->GetBool("BoxDefaults/BoxToken", false));
     layout->addWidget(pBoxToken, row++, 1, 1, 3);
     registerField("boxToken", pBoxToken);
+
+    QCheckBox* pImageProtection = new QCheckBox(tr("Prevent sandboxes programs installed on host from loading dll's from the sandbox"));
+    pImageProtection->setToolTip(tr("This feature may reduce compatybility as it also prevents box located processes from writing to host located once and even starting them."));
+    pImageProtection->setChecked(theConf->GetBool("BoxDefaults/ImagesProtection", false));
+    pImageProtection->setEnabled(g_CertInfo.valid);
+    layout->addWidget(pImageProtection, row++, 1, 1, 3);
+    registerField("imagesProtection", pImageProtection);
 
     setLayout(layout);
 
@@ -571,8 +581,9 @@ void CSummaryPage::initializePage()
         m_pSummary->append(tr("\nThis box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation."));
     else if(field("fakeAdmin").toBool())
         m_pSummary->append(tr("\nProcesses in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box."));
-    else if(field("boxToken").toBool())
-        m_pSummary->append(tr("\nProcesses in this box will be running with a custom process token indicating the sandbox they belong to."));
+    if(field("boxToken").toBool())
+        m_pSummary->append(tr("\nProcesses in this box will be running with a custom process token indicating the sandbox thay belong to."));
+
 
     m_pSetDefault->setVisible(((CNewBoxWizard*)wizard())->m_bAdvanced);
 }
@@ -596,6 +607,7 @@ bool CSummaryPage::validatePage()
         theConf->SetValue("BoxDefaults/MsiExemptions", field("msiServer").toBool());
 
         theConf->SetValue("BoxDefaults/BoxToken", field("boxToken").toBool());
+        theConf->SetValue("BoxDefaults/ImagesProtection", field("imagesProtection").toBool());
     }
 
     theConf->SetValue("Options/InstantBoxWizard", m_pSetInstant->isChecked());

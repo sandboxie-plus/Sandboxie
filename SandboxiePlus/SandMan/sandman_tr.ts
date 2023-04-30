@@ -67,21 +67,17 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="474"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished"></translation>
+        <translation>Anonim kullanıcı yerine Sandboxie oturum açma belirteci kullan</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="480"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation type="unfinished">Ana bilgisayarda kurulu korumalı alanda çalışan programların korumalı alandan dll dosyaları yüklemesini önle</translation>
+        <translation>Ana bilgisayarda kurulu korumalı alanda çalışan programların korumalı alandan dll dosyaları yüklemesini önle</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="481"/>
-        <source>This feature may reduce compatybility as it also prevents box located processes from writing to host located once and even starting them.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
-        <translation type="vanished">Anonim bir belirteç (deneysel) yerine Sandboxie oturum açmayı kullan</translation>
+        <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
+        <translation>Bu özellik, alanda konumlu işlemlerin ana bilgisayarda konumlu olanlara yazmasını ve hatta onları başlatmasını da engellediği için uyumluluğu azaltabilir.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="475"/>
@@ -4459,19 +4455,11 @@ Processes in this box will think they are run with administrative privileges, wi
 Bu alandaki işlemler, aslında yönetici ayrıcalıklarına sahip olmadan, yönetici ayrıcalıklarıyla çalıştırıldıklarını düşünecektir. Böylece yükleyiciler güvenliği güçlendirilmiş bir alanda bile kullanılabilir.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="575"/>
-        <source>
-This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
-        <oldsource>
-Processes in this box will be running with a custom process token indicating the sandbox they belong to.</oldsource>
-        <translation type="unfinished">
-Bu alandaki işlemler, ait oldukları korumalı alanı belirten özel bir işlem belirteci ile çalışacaktır.</translation>
-    </message>
-    <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="585"/>
         <source>
-Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</source>
-        <translation type="unfinished"></translation>
+Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
+        <translation>
+Bu alandaki işlemler, ait oldukları korumalı alanı belirten özel bir işlem belirteci ile çalışacaktır.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="618"/>
@@ -6910,7 +6898,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="936"/>
         <source>Show overlay icons for boxes and processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Alanlar ve işlemler için simge bindirmelerini göster</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="946"/>

@@ -76,8 +76,9 @@
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="481"/>
-        <source>This feature may reduce compatybility as it also prevents box located processes from writing to host located once and even starting them.</source>
-        <translation>Diese Funktion könnte die Kompatibilität einschränken, da sie Prozesse, die sich in der Sandbox befinden, daran hindert solche des Hosts zu schreiben und diese sogar zu starten.</translation>
+        <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
+        <oldsource>This feature may reduce compatybility as it also prevents box located processes from writing to host located once and even starting them.</oldsource>
+        <translation type="unfinished">Diese Funktion könnte die Kompatibilität einschränken, da sie Prozesse, die sich in der Sandbox befinden, daran hindert solche des Hosts zu schreiben und diese sogar zu starten.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="475"/>
@@ -4458,19 +4459,12 @@ Processes in this box will think they are run with administrative privileges, wi
 Prozesse in dieser Box werden denken, dass sie mit Adminrechten laufen, ohne dass sie diese tatsächlich haben, sodass Installer selbst in sicherheitsgehärteten Boxen genutzt werden können.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="575"/>
-        <source>
-This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
-        <oldsource>
-Processes in this box will be running with a custom process token indicating the sandbox they belong to.</oldsource>
-        <translation>
-Der Inhalt dieser Box wird VERWORFEN, wenn diese geschlossen wird, und die Box wird entfernt.</translation>
-    </message>
-    <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="585"/>
         <source>
-Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</source>
-        <translation>
+Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
+        <oldsource>
+Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
+        <translation type="unfinished">
 Prozesse in dieser Box werden mit einem eigenen Prozesstoken laufen, die anzeigen zu welcher Sandbox sie gehören.</translation>
     </message>
     <message>

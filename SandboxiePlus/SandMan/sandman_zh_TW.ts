@@ -78,7 +78,8 @@
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="481"/>
-        <source>This feature may reduce compatybility as it also prevents box located processes from writing to host located once and even starting them.</source>
+        <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
+        <oldsource>This feature may reduce compatybility as it also prevents box located processes from writing to host located once and even starting them.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4505,18 +4506,11 @@ Processes in this box will think they are run with administrative privileges, wi
 該沙箱中所有處理程序將認為它們執行在系統管理員模式下，即使實際上並沒有該權限，這有助於在安全防護加固型沙箱中執行安裝程式。</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="575"/>
-        <source>
-This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
-        <oldsource>
-Processes in this box will be running with a custom process token indicating the sandbox they belong to.</oldsource>
-        <translation type="unfinished">
-在此沙箱內的處理程序將以自訂處理程序權杖執行，以表明它們屬於哪個沙箱。</translation>
-    </message>
-    <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="585"/>
         <source>
-Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</source>
+Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
+        <oldsource>
+Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

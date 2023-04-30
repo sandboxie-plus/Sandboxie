@@ -478,7 +478,7 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
     registerField("boxToken", pBoxToken);
 
     QCheckBox* pImageProtection = new QCheckBox(tr("Prevent sandboxes programs installed on host from loading dll's from the sandbox"));
-    pImageProtection->setToolTip(tr("This feature may reduce compatybility as it also prevents box located processes from writing to host located once and even starting them."));
+    pImageProtection->setToolTip(tr("This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them."));
     pImageProtection->setChecked(theConf->GetBool("BoxDefaults/ImagesProtection", false));
     pImageProtection->setEnabled(g_CertInfo.valid);
     layout->addWidget(pImageProtection, row++, 1, 1, 3);
@@ -582,7 +582,7 @@ void CSummaryPage::initializePage()
     else if(field("fakeAdmin").toBool())
         m_pSummary->append(tr("\nProcesses in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box."));
     if(field("boxToken").toBool())
-        m_pSummary->append(tr("\nProcesses in this box will be running with a custom process token indicating the sandbox thay belong to."));
+        m_pSummary->append(tr("\nProcesses in this box will be running with a custom process token indicating the sandbox they belong to."));
 
 
     m_pSetDefault->setVisible(((CNewBoxWizard*)wizard())->m_bAdvanced);

@@ -67,21 +67,17 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="474"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende einen Sandboxie-Login anstelle eines anonymen Token</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="480"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation type="unfinished">Hindere sandgeboxte Programme, die auf dem Hostsystem installiert sind, daran DLLs aus dieser Sandbox zu laden</translation>
+        <translation>Hindere sandgeboxte Programme, die auf dem Hostsystem installiert sind, daran DLLs aus der Sandbox zu laden</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="481"/>
         <source>This feature may reduce compatybility as it also prevents box located processes from writing to host located once and even starting them.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
-        <translation type="vanished">Verwende einen Sandboxie-Login anstelle eines anonymen Token (experimentell)</translation>
+        <translation>Diese Funktion könnte die Kompatibilität einschränken, da sie Prozesse, die sich in der Sandbox befinden, daran hindert solche des Hosts zu schreiben und diese sogar zu starten.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="475"/>
@@ -4467,14 +4463,15 @@ Prozesse in dieser Box werden denken, dass sie mit Adminrechten laufen, ohne das
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
         <oldsource>
 Processes in this box will be running with a custom process token indicating the sandbox they belong to.</oldsource>
-        <translation type="unfinished">
-Prozesse in dieser Box werden mit einem eigenen Prozesstoken laufen, die anzeigen zu welcher Sandbox sie gehören.</translation>
+        <translation>
+Der Inhalt dieser Box wird VERWORFEN, wenn diese geschlossen wird, und die Box wird entfernt.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="585"/>
         <source>
 Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Prozesse in dieser Box werden mit einem eigenen Prozesstoken laufen, die anzeigen zu welcher Sandbox sie gehören.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="618"/>
@@ -7039,7 +7036,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="936"/>
         <source>Show overlay icons for boxes and processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Overlayicons für Boxen und Prozesse</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1821"/>

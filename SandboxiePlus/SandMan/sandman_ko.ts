@@ -69,17 +69,17 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="474"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished"></translation>
+        <translation>익명 토큰 대신 샌드박스 로그인 사용</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="480"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation type="unfinished">호스트에 설치된 샌드박스 프로그램이 샌드박스에서 dll을 로드하지 못하도록 방지</translation>
+        <translation>호스트에 설치된 샌드박스 프로그램이 샌드박스에서 dll을 로드하지 못하도록 방지</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="481"/>
         <source>This feature may reduce compatybility as it also prevents box located processes from writing to host located once and even starting them.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 기능은 박스에 위치한 프로세스가 한 번 위치한 호스트에 기록되고 심지어 시작되는 것을 방지하기 때문에 호환성을 줄일 수 있습니다.</translation>
     </message>
     <message>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
@@ -4625,19 +4625,11 @@ Processes in this box will think they are run with administrative privileges, wi
 이 박스의 프로세스는 관리자 권한 없이 실행되므로 보안 강화 박스에서도 설치 프로그램을 사용할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="575"/>
-        <source>
-This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
-        <oldsource>
-Processes in this box will be running with a custom process token indicating the sandbox they belong to.</oldsource>
-        <translation type="unfinished">
-이 박스의 프로세스는 자신이 속한 샌드박스를 나타내는 사용자 지정 프로세스 토큰으로 실행됩니다.</translation>
-    </message>
-    <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="585"/>
         <source>
 Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+이 박스의 프로세스는 자신이 속한 샌드박스를 나타내는 사용자 지정 프로세스 토큰으로 실행됩니다.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="618"/>
@@ -7034,7 +7026,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="936"/>
         <source>Show overlay icons for boxes and processes</source>
-        <translation type="unfinished"></translation>
+        <translation>박스 및 프로세스에 대한 오버레이 아이콘 표시</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="946"/>

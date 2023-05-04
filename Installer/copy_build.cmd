@@ -171,9 +171,9 @@ copy /y %~dp0..\Sandboxie\install\Manifest0.txt %instPath%\
 copy /y %~dp0..\Sandboxie\install\Manifest1.txt %instPath%\
 copy /y %~dp0..\Sandboxie\install\Manifest2.txt %instPath%\
 
-ECHO Copying Sandboxie Live Updater
+ECHO Copying Sandboxie Tools
 
-copy /y %~dp0..\SandboxieLive\%archPath%\Release\UpdUtil.exe %instPath%\
+copy /y %~dp0..\SandboxieTools\%archPath%\Release\UpdUtil.exe %instPath%\
 
 
 

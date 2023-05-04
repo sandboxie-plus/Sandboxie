@@ -131,17 +131,17 @@ jobs:
         run: SandboxiePlus\qmake_plus.cmd Win32
 
     #
-    # Compile Sandboxie Live Updater
+    # Compile Sandboxie Tools
     #
 
-      - name: Build Sandboxie-Live x86
-        run: msbuild /t:build SandboxieLive\SandboxieLive.sln /p:Configuration="Release" /p:Platform=x86 -maxcpucount:8
+      - name: Build Sandboxie-Tools x86
+        run: msbuild /t:build SandboxieTools\SandboxieTools.sln /p:Configuration="Release" /p:Platform=x86 -maxcpucount:8
 
-      - name: Build Sandboxie-Live x64
-        run: msbuild /t:build SandboxieLive\SandboxieLive.sln /p:Configuration="Release" /p:Platform=x64 -maxcpucount:8
+      - name: Build Sandboxie-Tools x64
+        run: msbuild /t:build SandboxieTools\SandboxieTools.sln /p:Configuration="Release" /p:Platform=x64 -maxcpucount:8
 
-      - name: Build Sandboxie-Live ARM64
-        run: msbuild /t:build SandboxieLive\SandboxieLive.sln /p:Configuration="Release" /p:Platform=ARM64 -maxcpucount:8
+      - name: Build Sandboxie-Tools ARM64
+        run: msbuild /t:build SandboxieTools\SandboxieTools.sln /p:Configuration="Release" /p:Platform=ARM64 -maxcpucount:8
         
 
     #

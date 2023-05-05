@@ -9,7 +9,7 @@
 #include <QJsonObject>
 #include "../MiscHelpers/Common/CheckableMessageBox.h"
 #include <QMessageBox>
-#include "../../SandboxieLive/UpdUtil/UpdUtil.h"
+#include "../../SandboxieTools/UpdUtil/UpdUtil.h"
 #include <QCryptographicHash>
 #include "Helpers/WinAdmin.h"
 #include <windows.h>

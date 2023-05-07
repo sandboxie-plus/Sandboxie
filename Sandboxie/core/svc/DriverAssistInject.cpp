@@ -150,8 +150,10 @@ finish:
 
     if (hProcess) {
 
-        if (errlvl)
-            TerminateProcess(hProcess, 1);
+        if (errlvl) {
+            SbieApi_Call(API_INJECT_COMPLETE, 3, (ULONG_PTR)msg->process_id, NULL, errlvl);
+            //TerminateProcess(hProcess, 1);
+        }
 
         CloseHandle(hProcess);
     }

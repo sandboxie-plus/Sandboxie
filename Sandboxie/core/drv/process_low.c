@@ -99,7 +99,7 @@ _FX BOOLEAN Process_Low_Inject(
     SVC_PROCESS_MSG msg;
     ULONG_PTR is_wow64 = 0;
     NTSTATUS status = STATUS_SUCCESS;
-    BOOLEAN sbielow_loaded = FALSE;
+    BOOLEAN done = FALSE;
     KIRQL irql;
 
     //
@@ -179,7 +179,7 @@ _FX BOOLEAN Process_Low_Inject(
 
             if (proc && proc->create_time == create_time) {
 
-                sbielow_loaded = proc->sbielow_loaded;
+                done = proc->sbielow_loaded || proc->terminated;
 
                 if (! is_wow64)
                     proc->ntdll32_base = -1;
@@ -188,7 +188,7 @@ _FX BOOLEAN Process_Low_Inject(
             ExReleaseResourceLite(Process_ListLock);
             KeLowerIrql(irql);
 
-            if (sbielow_loaded)
+            if (done)
                 break;
 
             time.QuadPart = -(SECONDS(1) / 4); // 250ms*40 = 10s
@@ -197,7 +197,7 @@ _FX BOOLEAN Process_Low_Inject(
             ++retries;
         }
 
-        if (! sbielow_loaded)           // if no response from SbieSvc
+        if (! done)           // if no response from SbieSvc
             status = STATUS_TIMEOUT;
     }
 
@@ -254,13 +254,13 @@ _FX NTSTATUS Process_Low_Api_InjectComplete(PROCESS *proc, ULONG64 *parms)
         KIRQL irql;
         PROCESS *proc = Process_Find(ProcessId, &irql);
 
-        if (proc)
-            proc->sbielow_loaded = TRUE;
-
-        ExReleaseResourceLite(Process_ListLock);
-        KeLowerIrql(irql);
-
         if (proc) {
+
+            ULONG error = (ULONG)parms[3];
+            if (error) 
+                Process_SetTerminated(proc, 3);
+            else
+                proc->sbielow_loaded = TRUE;
 
             //
             // the service dynamically allocates a per box SID to be used,
@@ -284,6 +284,12 @@ _FX NTSTATUS Process_Low_Api_InjectComplete(PROCESS *proc, ULONG64 *parms)
             } __except (EXCEPTION_EXECUTE_HANDLER) {
                 status = GetExceptionCode();
             }
+        }
+
+        ExReleaseResourceLite(Process_ListLock);
+        KeLowerIrql(irql);
+
+        if (proc) {
 
             KeSetEvent(Process_Low_Event, 0, FALSE);
             status = STATUS_SUCCESS;

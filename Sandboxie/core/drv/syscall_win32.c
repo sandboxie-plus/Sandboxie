@@ -363,7 +363,9 @@ _FX BOOLEAN Syscall_Init_List32(void)
         entry->ntos_func = ntos_addr;
         entry->handler1_func = NULL;
         entry->handler2_func = NULL;
+#ifdef _M_AMD64
         entry->handler3_func_support_procmon = NULL;
+#endif
         entry->approved = (Syscall_HookMapMatch(name, name_len, &approved_syscalls) != 0);
         entry->name_len = (USHORT)name_len;
         memcpy(entry->name, name, name_len);
@@ -470,7 +472,7 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
     SYSCALL_ENTRY *entry;
     ULONG syscall_index;
     NTSTATUS status;
-#ifdef _WIN64
+#ifdef _M_AMD64
     volatile ULONG_PTR ret = 0;
     volatile ULONG_PTR UserStack = 0;
 
@@ -537,7 +539,10 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
         const ULONG args_len = entry->param_count * sizeof(ULONG_PTR);
 #ifdef _WIN64
         ProbeForRead(user_args, args_len, sizeof(ULONG_PTR));
-
+#else ! _WIN64
+        ProbeForRead(user_args, args_len, sizeof(UCHAR));
+#endif _WIN64
+#ifdef _M_AMD64
         // default - support procmon stack if handler3_func_support_procmon is null.
         if (!entry->handler3_func_support_procmon
             || entry->handler3_func_support_procmon(proc, entry, user_args)
@@ -547,15 +552,10 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
 
                 pTrapFrame = (PKTRAP_FRAME) *(ULONG_PTR*)((UCHAR*)pThread + g_TrapFrameOffset);
                 if (pTrapFrame) {
-#ifdef _M_ARM64
-                    ret = pTrapFrame->Pc;
-                    UserStack = pTrapFrame->Sp;
-#else
                     ret = pTrapFrame->Rip;
                     UserStack = pTrapFrame->Rsp;
                     pTrapFrame->Rsp = pTrapFrame->Rbp; //*pRbp;
                     pTrapFrame->Rip = pTrapFrame->Rbx; //*pRbx;
-#endif
                 }
             }
             else
@@ -567,10 +567,7 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
         {
             pTrapFrame = NULL;
         }
-
-#else ! _WIN64
-        ProbeForRead(user_args, args_len, sizeof(UCHAR));
-#endif _WIN64
+#endif
 
         if (entry->handler1_func) {
 
@@ -607,16 +604,11 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
                 strings, lengths, PsGetCurrentProcessId(), PsGetCurrentThreadId());
         }
 
-#ifdef _WIN64
+#ifdef _M_AMD64
         if (g_TrapFrameOffset) {
             if (pTrapFrame) {
-#ifdef _M_ARM64
-                pTrapFrame->Pc = ret;
-                pTrapFrame->Sp = UserStack;
-#else
                 pTrapFrame->Rip = ret;
                 pTrapFrame->Rsp = UserStack;
-#endif
             }
         }
 #endif

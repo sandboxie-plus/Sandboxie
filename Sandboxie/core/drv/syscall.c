@@ -68,8 +68,10 @@ static NTSTATUS Syscall_DeviceIoControlFile(
 static NTSTATUS Syscall_DuplicateHandle(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);
 
+#ifdef _M_AMD64
 static BOOLEAN Syscall_QuerySystemInfo_SupportProcmonStack(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args);
+#endif
 
 
 //---------------------------------------------------------------------------
@@ -169,8 +171,10 @@ _FX BOOLEAN Syscall_Init(void)
     if (!Syscall_Set1("DeviceIoControlFile", Syscall_DeviceIoControlFile))
         return FALSE;
 
+#ifdef _M_AMD64
     if (!Syscall_Set3("QuerySystemInformation", Syscall_QuerySystemInfo_SupportProcmonStack))
         return FALSE;
+#endif
 
     //
     // set API handlers
@@ -338,7 +342,9 @@ _FX BOOLEAN Syscall_Init_List(void)
         entry->ntos_func = ntos_addr;
         entry->handler1_func = NULL;
         entry->handler2_func = NULL;
+#ifdef _M_AMD64
         entry->handler3_func_support_procmon = NULL;
+#endif
         entry->approved = (Syscall_HookMapMatch(name, name_len, &approved_syscalls) != 0);
         entry->name_len = (USHORT)name_len;
         memcpy(entry->name, name, name_len);
@@ -526,7 +532,7 @@ _FX BOOLEAN Syscall_Set1(const UCHAR *name, P_Syscall_Handler1 handler_func)
 // Syscall_Set3
 //---------------------------------------------------------------------------
 
-
+#ifdef _M_AMD64
 _FX BOOLEAN Syscall_Set3(const UCHAR *name, P_Syscall_Handler3_Support_Procmon_Stack handler_func)
 {
     SYSCALL_ENTRY *entry = Syscall_GetByName(name);
@@ -535,7 +541,7 @@ _FX BOOLEAN Syscall_Set3(const UCHAR *name, P_Syscall_Handler3_Support_Procmon_S
     entry->handler3_func_support_procmon = handler_func;
     return TRUE;
 }
-
+#endif
 
 //---------------------------------------------------------------------------
 // Syscall_ErrorForAsciiName
@@ -598,7 +604,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
     SYSCALL_ENTRY *entry;
     ULONG syscall_index;
     NTSTATUS status;
-#ifdef _WIN64
+#ifdef _M_AMD64
     volatile ULONG_PTR ret = 0;
     volatile ULONG_PTR UserStack = 0;
 
@@ -690,7 +696,10 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
         const ULONG args_len = entry->param_count * sizeof(ULONG_PTR);
 #ifdef _WIN64
         ProbeForRead(user_args, args_len, sizeof(ULONG_PTR));
-
+#else ! _WIN64
+        ProbeForRead(user_args, args_len, sizeof(UCHAR));
+#endif _WIN64
+#ifdef _M_AMD64
         // default - support procmon stack if handler3_func_support_procmon is null.
         if (!entry->handler3_func_support_procmon
             || entry->handler3_func_support_procmon(proc, entry, user_args)
@@ -700,17 +709,10 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
 
                 pTrapFrame = (PKTRAP_FRAME) *(ULONG_PTR*)((UCHAR*)pThread + g_TrapFrameOffset);
                 if (pTrapFrame) {
-#ifdef _M_ARM64
-                    //ret = pTrapFrame->Pc;
-                    //UserStack = pTrapFrame->Sp;
-                    //pTrapFrame->Sp = pTrapFrame->Fp;
-                    //pTrapFrame->Pc = pTrapFrame->X27;
-#else
                     ret = pTrapFrame->Rip;
                     UserStack = pTrapFrame->Rsp;
                     pTrapFrame->Rsp = pTrapFrame->Rbp; //*pRbp;
                     pTrapFrame->Rip = pTrapFrame->Rbx; //*pRbx;
-#endif
                 }
             }
             else
@@ -722,11 +724,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
         {
             pTrapFrame = NULL;
         }
-
-#else ! _WIN64
-        ProbeForRead(user_args, args_len, sizeof(UCHAR));
-#endif _WIN64
-
+#endif
         
         //if (proc->ipc_trace & (TRACE_ALLOW | TRACE_DENY))
         //{
@@ -846,16 +844,11 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
             }
         }
 
-#ifdef _WIN64
+#ifdef _M_AMD64
         if (g_TrapFrameOffset) {
             if (pTrapFrame) {
-#ifdef _M_ARM64
-                //pTrapFrame->Pc = ret;
-                //pTrapFrame->Sp = UserStack;
-#else
                 pTrapFrame->Rip = ret;
                 pTrapFrame->Rsp = UserStack;
-#endif
             }
         }
 #endif
@@ -1040,7 +1033,7 @@ _FX void Syscall_Update_Lockdown()
 // Syscall_QuerySystemInfo_SupportProcmonStack
 //---------------------------------------------------------------------------
 
-
+#ifdef _M_AMD64
 _FX BOOLEAN Syscall_QuerySystemInfo_SupportProcmonStack(
     PROCESS *proc, SYSCALL_ENTRY *syscall_entry, ULONG_PTR *user_args)
 {
@@ -1066,7 +1059,7 @@ _FX BOOLEAN Syscall_QuerySystemInfo_SupportProcmonStack(
 
     return bRet;
 }
-
+#endif
 
 //---------------------------------------------------------------------------
 // 32-bit and 64-bit code

@@ -2135,8 +2135,13 @@ bool SbieIniServer::GetIniPath(WCHAR **IniPath,
             *IsUTF8 = TRUE;
     }
 
-    LONG rc = SbieApi_QueryConfAsIs(NULL, L"IniLocation", 0, path, 8);
-    if (rc == 0 && *path == L'H') {
+    LONG rc = SbieApi_QueryConfAsIs(NULL, L"IniLocation", 0, path, 260 * sizeof(WCHAR));
+    if (rc == 0 && *path == L'\\') {
+
+        if (wcsnicmp(path, L"\\??\\", 4) == 0)
+            wmemmove(path, path + 4, wcslen(path)+1 - 4);
+    }
+    else if (rc == 0 && *path == L'H') {
 
         //
         // Sandboxie.ini was last read from Sandboxie home directory

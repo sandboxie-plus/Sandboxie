@@ -279,7 +279,7 @@ void CFileView::OnFileMenu(const QPoint&)
                 }
             }
 
-            SB_PROGRESS Status = theGUI->RecoverFiles(m_pBox->GetName(), FileList, 0);
+            SB_PROGRESS Status = theGUI->RecoverFiles(m_pBox->GetName(), FileList, theGUI, 0);
             if (Status.GetStatus() == OP_ASYNC)
                 theGUI->AddAsyncOp(Status.GetValue());
 

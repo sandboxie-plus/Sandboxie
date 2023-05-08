@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.9.3 / 5.64.3] - 2023-04-??
+## [1.9.3 / 5.64.3] - 2023-05-08
 
 ### Added
 - added setting to disable overlay icons
@@ -19,7 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue with command lines [#2858](https://github.com/sandboxie-plus/Sandboxie/issues/2858)
-
+- fixed issue with always on top recovery windoe [#2885](https://github.com/sandboxie-plus/Sandboxie/issues/2885)
 
 
 

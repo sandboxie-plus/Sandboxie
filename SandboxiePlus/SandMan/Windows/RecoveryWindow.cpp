@@ -575,7 +575,7 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse, QString RecoveryFolder)
 	}
 
 
-	SB_PROGRESS Status = theGUI->RecoverFiles(m_pBox->GetName(), FileList);
+	SB_PROGRESS Status = theGUI->RecoverFiles(m_pBox->GetName(), FileList, this);
 	if (Status.GetStatus() == OP_ASYNC)
 	{
 		connect(Status.GetValue().data(), SIGNAL(Finished()), this, SLOT(FindFiles()));

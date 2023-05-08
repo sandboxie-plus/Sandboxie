@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - improved hadling of dll injection failure
+- updated polish translation (thanks 7zip)
 
 ### Fixed
 - fixed issue with command lines [#2858](https://github.com/sandboxie-plus/Sandboxie/issues/2858)

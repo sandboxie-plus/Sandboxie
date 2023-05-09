@@ -67,22 +67,18 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="474"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать логин Sandboxie вместо анонимного токена</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="480"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation type="unfinished">Запретить программам в песочнице, установленным на хосте, загружать библиотеки dll из песочницы</translation>
+        <translation>Запретить программам в песочнице, установленным на хосте, загружать dll из песочницы</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="481"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
         <oldsource>This feature may reduce compatybility as it also prevents box located processes from writing to host located once and even starting them.</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
-        <translation type="vanished">Использовать логин Sandboxie вместо анонимного токена (экспериментально)</translation>
+        <translation>Эта функция может снизить совместимость, поскольку она также не позволяет процессам, расположенным в песочнице, записывать данные в процессы, расположенные на хосте, и даже запускать их.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="475"/>
@@ -2602,32 +2598,32 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="3248"/>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Чувствительный к регистру</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3249"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>Регулярное выражение</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3250"/>
         <source>Highlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Подсветить</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3251"/>
         <source>Close</source>
-        <translation type="unfinished">Закрыть</translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3252"/>
         <source>&amp;Find ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Найти (&amp;) ...</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3253"/>
         <source>All columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Все столбцы</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3302"/>
@@ -3764,7 +3760,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="225"/>
         <source>Disable Force Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключить принудительные правила</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="230"/>
@@ -4463,7 +4459,8 @@ Processes in this box will think they are run with administrative privileges, wi
 Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
         <oldsource>
 Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>
+Процессы в этой песочнице будут запускаться с пользовательским токеном процесса, указывающим на песочницу, к которой они принадлежат.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="618"/>
@@ -5443,7 +5440,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1791"/>
         <source>Disable forced Process and Folder for this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключить принудительный процесс и папку для этой песочницы</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1801"/>
@@ -6707,7 +6704,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="936"/>
         <source>Show overlay icons for boxes and processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать оверлей иконки для песочниц и процессов</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="946"/>

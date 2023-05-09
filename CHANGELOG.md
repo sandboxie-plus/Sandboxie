@@ -11,7 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added global setting to disable overlay icons
 - added ability to specify Sandboxie.ini location in registry
   - open "HKLM\SYSTEM\CurrentControlSet\Services\SbieDrv" and set "IniPath" [#2837](https://github.com/sandboxie-plus/Sandboxie/issues/2837)
-  - use a string for the path, like "\??\C:\my_path\my_sandboxie.ini"
+  - use a REG_SZ string for the path, like "\??\C:\my_path\my_sandboxie.ini"
 
 ### Changed
 - improved handling of DLL injection failure

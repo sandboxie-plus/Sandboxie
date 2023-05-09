@@ -1824,22 +1824,22 @@ Vollständiger Pfad: %4</translation>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="301"/>
+        <location filename="SandManRecovery.cpp" line="306"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation>Sandboxie-Plus - Wiederherstellungsprotokoll</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="312"/>
+        <location filename="SandManRecovery.cpp" line="317"/>
         <source>Time|Box Name|File Path</source>
         <translation>Zeit|Boxname|Dateipfad</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="314"/>
+        <location filename="SandManRecovery.cpp" line="319"/>
         <source>Cleanup Recovery Log</source>
         <translation>Wiederherstellungsprotokoll aufräumen</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="324"/>
+        <location filename="SandManRecovery.cpp" line="329"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <translation>Die folgenden Dateien wurden kürzlich wiederhergestellt und aus einer Sandbox verschoben.</translation>
     </message>
@@ -2698,19 +2698,19 @@ Möchten Sie die Bereinigung durchführen?</translation>
         <translation>   -   NICHT verbunden</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="210"/>
+        <location filename="SandManRecovery.cpp" line="214"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>Die Datei %1 existiert bereits, möchten Sie diese überschreiben?</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="176"/>
-        <location filename="SandManRecovery.cpp" line="211"/>
+        <location filename="SandManRecovery.cpp" line="179"/>
+        <location filename="SandManRecovery.cpp" line="215"/>
         <source>Do this for all files!</source>
         <translation>Tue dies für alle Dateien!</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="99"/>
-        <location filename="SandManRecovery.cpp" line="156"/>
+        <location filename="SandManRecovery.cpp" line="159"/>
         <source>Checking file %1</source>
         <translation>Prüfe Datei %1</translation>
     </message>
@@ -2728,7 +2728,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
         <translation>Alle Dateien bestanden die Überprüfungen</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="175"/>
+        <location filename="SandManRecovery.cpp" line="178"/>
         <source>The file %1 failed a security check, do you want to recover it anyway?
 
 %2</source>
@@ -2736,7 +2736,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
 %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="238"/>
+        <location filename="SandManRecovery.cpp" line="243"/>
         <source>Failed to recover some files: 
 </source>
         <translation>Konnte nicht alle Dateien wiederherstellen: 
@@ -3031,7 +3031,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
         <translation>%1 (%2): </translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="198"/>
+        <location filename="SandManRecovery.cpp" line="202"/>
         <source>Recovering file %1 to %2</source>
         <translation>Stelle Datei %1 zu %2 wieder her</translation>
     </message>

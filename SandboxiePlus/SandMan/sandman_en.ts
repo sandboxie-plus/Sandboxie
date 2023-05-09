@@ -1829,22 +1829,22 @@ Full path: %4</source>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="301"/>
+        <location filename="SandManRecovery.cpp" line="306"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="312"/>
+        <location filename="SandManRecovery.cpp" line="317"/>
         <source>Time|Box Name|File Path</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="314"/>
+        <location filename="SandManRecovery.cpp" line="319"/>
         <source>Cleanup Recovery Log</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="324"/>
+        <location filename="SandManRecovery.cpp" line="329"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation></translation>
@@ -2531,24 +2531,24 @@ No will choose: %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="198"/>
+        <location filename="SandManRecovery.cpp" line="202"/>
         <source>Recovering file %1 to %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="210"/>
+        <location filename="SandManRecovery.cpp" line="214"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="176"/>
-        <location filename="SandManRecovery.cpp" line="211"/>
+        <location filename="SandManRecovery.cpp" line="179"/>
+        <location filename="SandManRecovery.cpp" line="215"/>
         <source>Do this for all files!</source>
         <translation></translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="99"/>
-        <location filename="SandManRecovery.cpp" line="156"/>
+        <location filename="SandManRecovery.cpp" line="159"/>
         <source>Checking file %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2565,7 +2565,7 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="175"/>
+        <location filename="SandManRecovery.cpp" line="178"/>
         <source>The file %1 failed a security check, do you want to recover it anyway?
 
 %2</source>
@@ -2575,7 +2575,7 @@ No will choose: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="238"/>
+        <location filename="SandManRecovery.cpp" line="243"/>
         <source>Failed to recover some files: 
 </source>
         <translation></translation>

@@ -1959,22 +1959,22 @@ Caminho completo: %4</translation>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="301"/>
+        <location filename="SandManRecovery.cpp" line="306"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation>Sandboxie-Plus - Log de Recuperação</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="312"/>
+        <location filename="SandManRecovery.cpp" line="317"/>
         <source>Time|Box Name|File Path</source>
         <translation>Horário|Nome da Caixa|Caminho do Arquivo</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="314"/>
+        <location filename="SandManRecovery.cpp" line="319"/>
         <source>Cleanup Recovery Log</source>
         <translation>Limpar Log de Recuperação</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="324"/>
+        <location filename="SandManRecovery.cpp" line="329"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation>Os seguintes arquivos foram recuperados recentemente e movidos para fora do sandbox.</translation>
@@ -3144,24 +3144,24 @@ Não vou escolher: %2</translation>
         <translation>%1 (%2): </translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="198"/>
+        <location filename="SandManRecovery.cpp" line="202"/>
         <source>Recovering file %1 to %2</source>
         <translation>Recuperando arquivo %1 para %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="210"/>
+        <location filename="SandManRecovery.cpp" line="214"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>O arquivo %1 já existe, deseja sobrescrevê-lo?</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="176"/>
-        <location filename="SandManRecovery.cpp" line="211"/>
+        <location filename="SandManRecovery.cpp" line="179"/>
+        <location filename="SandManRecovery.cpp" line="215"/>
         <source>Do this for all files!</source>
         <translation>Fazer isso para todos os arquivos!</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="99"/>
-        <location filename="SandManRecovery.cpp" line="156"/>
+        <location filename="SandManRecovery.cpp" line="159"/>
         <source>Checking file %1</source>
         <translation>Verificando arquivo %1</translation>
     </message>
@@ -3180,7 +3180,7 @@ Não vou escolher: %2</translation>
         <translation>Todos os arquivos passaram nas verificações</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="175"/>
+        <location filename="SandManRecovery.cpp" line="178"/>
         <source>The file %1 failed a security check, do you want to recover it anyway?
 
 %2</source>
@@ -3192,7 +3192,7 @@ Não vou escolher: %2</translation>
 %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="238"/>
+        <location filename="SandManRecovery.cpp" line="243"/>
         <source>Failed to recover some files: 
 </source>
         <translation>Falha ao recuperar alguns arquivos: 

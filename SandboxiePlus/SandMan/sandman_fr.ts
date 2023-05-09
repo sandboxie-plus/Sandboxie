@@ -1982,22 +1982,22 @@ Chemin complet : %4</translation>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="301"/>
+        <location filename="SandManRecovery.cpp" line="306"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation>Sandboxie-Plus - Journal de récupération</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="312"/>
+        <location filename="SandManRecovery.cpp" line="317"/>
         <source>Time|Box Name|File Path</source>
         <translation>Heure|Nom du bac|Chemin du fichier</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="314"/>
+        <location filename="SandManRecovery.cpp" line="319"/>
         <source>Cleanup Recovery Log</source>
         <translation>Purger le journal de récupération</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="324"/>
+        <location filename="SandManRecovery.cpp" line="329"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation>Les fichiers suivants ont récemment été récupérés et sortis d&apos;un bac à sable.</translation>
@@ -3102,24 +3102,24 @@ No will choose: %2</source>
         <translation>La fonctionnalité sélectionnée n&apos;est disponible qu&apos;aux adhérents au projet. Les processus lancés dans un bac à sable avec cette fonctionnalité activée sans certificat d&apos;adhérent seront arrêtés après 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Devenez un adhérent du projet&lt;/a&gt;, et recevez un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificat d&apos;adhérent&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="198"/>
+        <location filename="SandManRecovery.cpp" line="202"/>
         <source>Recovering file %1 to %2</source>
         <translation>Récupération du fichier %1 vers %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="210"/>
+        <location filename="SandManRecovery.cpp" line="214"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>Le fichier %1 existe déjà, voulez-vous l&apos;écraser ?</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="176"/>
-        <location filename="SandManRecovery.cpp" line="211"/>
+        <location filename="SandManRecovery.cpp" line="179"/>
+        <location filename="SandManRecovery.cpp" line="215"/>
         <source>Do this for all files!</source>
         <translation>Faire ceci pour tous les fichiers !</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="99"/>
-        <location filename="SandManRecovery.cpp" line="156"/>
+        <location filename="SandManRecovery.cpp" line="159"/>
         <source>Checking file %1</source>
         <translation>Vérification du fichier %1</translation>
     </message>
@@ -3141,7 +3141,7 @@ No will choose: %2</source>
         <translation>Tous les fichiers ont passé les vérifications</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="175"/>
+        <location filename="SandManRecovery.cpp" line="178"/>
         <source>The file %1 failed a security check, do you want to recover it anyway?
 
 %2</source>
@@ -3153,7 +3153,7 @@ No will choose: %2</source>
 %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="238"/>
+        <location filename="SandManRecovery.cpp" line="243"/>
         <source>Failed to recover some files: 
 </source>
         <translation>Échec de la récupération de certains fichiers : 

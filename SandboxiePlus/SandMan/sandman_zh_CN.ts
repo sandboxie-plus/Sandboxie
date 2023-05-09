@@ -1849,22 +1849,22 @@ Full path: %4</source>
 <context>
     <name>CRecoveryLogWnd</name>
     <message>
-        <location filename="SandManRecovery.cpp" line="301"/>
+        <location filename="SandManRecovery.cpp" line="306"/>
         <source>Sandboxie-Plus - Recovery Log</source>
         <translation>Sandboxie-Plus - 恢复日志</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="312"/>
+        <location filename="SandManRecovery.cpp" line="317"/>
         <source>Time|Box Name|File Path</source>
         <translation>时间|沙盒名称|文件路径</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="314"/>
+        <location filename="SandManRecovery.cpp" line="319"/>
         <source>Cleanup Recovery Log</source>
         <translation>清理恢复日志</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="324"/>
+        <location filename="SandManRecovery.cpp" line="329"/>
         <source>The following files were recently recovered and moved out of a sandbox.</source>
         <oldsource>the following files were recently recovered and moved out of a sandbox.</oldsource>
         <translation>以下是最近被恢复并移出沙盒的文件</translation>
@@ -2830,24 +2830,24 @@ No will choose: %2</source>
         <translation>%1 (%2): </translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="198"/>
+        <location filename="SandManRecovery.cpp" line="202"/>
         <source>Recovering file %1 to %2</source>
         <translation>恢复文件 %1 到 %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="210"/>
+        <location filename="SandManRecovery.cpp" line="214"/>
         <source>The file %1 already exists, do you want to overwrite it?</source>
         <translation>文件 %1 已存在，要覆盖它吗？</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="176"/>
-        <location filename="SandManRecovery.cpp" line="211"/>
+        <location filename="SandManRecovery.cpp" line="179"/>
+        <location filename="SandManRecovery.cpp" line="215"/>
         <source>Do this for all files!</source>
         <translation>对所有文件都执行此操作！</translation>
     </message>
     <message>
         <location filename="SandManRecovery.cpp" line="99"/>
-        <location filename="SandManRecovery.cpp" line="156"/>
+        <location filename="SandManRecovery.cpp" line="159"/>
         <source>Checking file %1</source>
         <translation>正在检查文件 %1</translation>
     </message>
@@ -2869,7 +2869,7 @@ No will choose: %2</source>
         <translation>所有文件都通过了检查</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="175"/>
+        <location filename="SandManRecovery.cpp" line="178"/>
         <source>The file %1 failed a security check, do you want to recover it anyway?
 
 %2</source>
@@ -2881,7 +2881,7 @@ No will choose: %2</source>
 %2</translation>
     </message>
     <message>
-        <location filename="SandManRecovery.cpp" line="238"/>
+        <location filename="SandManRecovery.cpp" line="243"/>
         <source>Failed to recover some files: 
 </source>
         <translation>部分文件恢复失败: 

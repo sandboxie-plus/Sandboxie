@@ -5707,7 +5707,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
 同样的，通过否定来定义所有的 Closed(File|Key|Ipc)Path 指令
 例如：&apos;ClosedFilePath=! iexplore.exe,C:Users*&apos;将限制沙盒内的程序访问相应资源
 
-这两种限制策略都可以通过“访问策略”页面来禁用
+这两种限制策略都可以通过“权限策略”页面来禁用
 
 这样做是为了防止沙盒内的流氓进程创建自己的重命名副本并访问受保护的资源
 

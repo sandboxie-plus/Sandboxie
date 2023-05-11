@@ -35,7 +35,7 @@ If you are willing to become a new contributor or collaborator, please get in to
 ## How to help with Sandboxie issues?
 
 We encourage the developers and community to conduct research, report issues, and suggest improvements on this code base.
-However, please do not report security vulnerabilities in public GitHub comments. This repository has a [SECURITY.md](./SECURITY.md) file with instructions on responsibly reporting security vulnerabilities.
+However, please do not report security vulnerabilities in public comments. A [SECURITY.md](./SECURITY.md) file is available with instructions on responsibly reporting security vulnerabilities.
 
 You may also want to follow the following topics:
 

@@ -888,27 +888,39 @@ void CSbieView::OnGroupAction(QAction* Action)
 			return;
 
 		// todo: fix behaviour on multiple selection
-		foreach(const QString& Name, GetSelectedGroups(true)) {
-			bool bFound = false;
-			retry:
-			for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I) {
-				int pos = I->indexOf(Name);
+		QMap<QString, QVector<int>> GroupPositions;
+		bool bOutBounded = false;
+		auto FindPosition = [this, Offset, &bOutBounded, &GroupPositions](const QString& Name) -> bool {
+			foreach(const QString& Group, m_Groups.keys()) {
+				int pos = m_Groups[Group].indexOf(Name);
 				if (pos != -1) {
-					if ((Offset < 0 && pos > Offset + 1) || (Offset > 0 && pos < I->count() - Offset)) {
-						QString Temp = I.value()[pos + Offset];
-						I.value()[pos + Offset] = I.value()[pos];
-						I.value()[pos] = Temp;
-					}
-					else // out of bounds
-						QApplication::beep();
-					bFound = true;
-					break;
+					if (pos + Offset >= 0 && pos + Offset < m_Groups[Group].count())
+						GroupPositions[Group].append(pos);
+					else
+						bOutBounded = true;
+					return true;
 				}
 			}
-			if (!bFound) {
-				bFound = true;
+			return false;
+		};
+		foreach(const QString& Name, GetSelectedGroups(true)) {
+			if (!FindPosition(Name)) {
 				m_Groups[""].prepend(Name);
-				goto retry;
+				FindPosition(Name);
+			}
+			if (bOutBounded)
+				break;
+		}
+		if (bOutBounded)
+			QApplication::beep();
+		else {
+			foreach(const QString& Group, GroupPositions.keys()) {
+				std::sort(GroupPositions[Group].begin(), GroupPositions[Group].end(), [Offset](const int& a, const int& b) {
+					return Offset > 0 && a > b || Offset < 0 && a < b;
+					});
+				foreach(const int ItemIndex, GroupPositions[Group]) {
+					m_Groups[Group].swapItemsAt(ItemIndex + Offset, ItemIndex);
+				}
 			}
 		}
 	}

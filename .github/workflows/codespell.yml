@@ -4,6 +4,7 @@ name: Spell check
 
 # Controls when the workflow will run
 on:
+  workflow_call:
   schedule:
     # Trigger Codespell at a scheduled time
     # * is a special character in YAML so you have to quote this string

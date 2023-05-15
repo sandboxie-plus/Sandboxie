@@ -5,6 +5,30 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+
+
+
+
+
+## [1.9.4 / 5.64.4] - 2023-04-??
+
+### Added
+- added more documentation links to the plus UI
+- added tray menu option to dismiss a pending update notification
+
+### Changed
+- improved compatybility template for Data Protection mode (thanks Mr.X)
+
+### Fixed
+- fixed Qt6 issues in ARM64 build
+- fixed delete V2 bug when using box mounts without a drive letter
+- fixed icon overlay issue with high DPI scaling
+
+
+
+
 ## [1.9.3 / 5.64.3] - 2023-05-08
 
 ### Added

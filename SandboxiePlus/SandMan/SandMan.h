@@ -305,6 +305,7 @@ private:
 	QAction*			m_pDisableForce2;
 	QAction*			m_pDisableRecovery;
 	QAction*			m_pDisableMessages;
+	QAction*			m_pDismissUpdate;
 	QMenu*				m_pMaintenance;
 	QAction*			m_pConnect;
 	QAction*			m_pDisconnect;

@@ -534,15 +534,10 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 
 void CSandMan::OnBoxMenu(const QPoint & point)
 {
-	QPoint pos = ((QWidget*)m_pTrayBoxes->parent())->mapFromParent(point);
-	QTreeWidgetItem* pItem = m_pTrayBoxes->itemAt(pos);
+	QTreeWidgetItem* pItem = m_pTrayBoxes->currentItem();
 	if (!pItem)
 		return;
-	m_pTrayBoxes->setCurrentItem(pItem);
-
 	CTrayBoxesItemDelegate::m_Hold = true;
 	m_pBoxView->PopUpMenu(pItem->data(0, Qt::UserRole).toString());
 	CTrayBoxesItemDelegate::m_Hold = false;
-
-	//m_pBoxMenu->popup(QCursor::pos());	
 }

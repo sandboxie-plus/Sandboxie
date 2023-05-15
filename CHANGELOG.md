@@ -19,13 +19,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added tray menu option to dismiss a pending update notification
 
 ### Changed
-- improved compatybility template for Data Protection mode (thanks Mr.X)
+- improved compatybility template for Data Protection mode (thanks offhub)
 
 ### Fixed
 - fixed Qt6 issues in ARM64 build
 - fixed delete V2 bug when using box mounts without a drive letter
 - fixed icon overlay issue with high DPI scaling
-
+- fix behaviour on multiple selection (thanks okrc)
 
 
 

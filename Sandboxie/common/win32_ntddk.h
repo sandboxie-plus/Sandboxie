@@ -2132,6 +2132,17 @@ __declspec(dllimport) NTSTATUS __stdcall NtMapViewOfSection(
     IN  ULONG AllocationType,
     IN  ULONG Protect);
 
+__declspec(dllimport) NTSTATUS __stdcall NtNotifyChangeDirectoryFile(
+    IN  HANDLE FileHandle,
+    IN  HANDLE Event OPTIONAL,
+    IN  PIO_APC_ROUTINE ApcRoutine OPTIONAL,
+    IN  PVOID ApcContext OPTIONAL,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    OUT PVOID Buffer,
+    IN  ULONG BufferSize,
+    IN  ULONG CompletionFilter,
+    IN  BOOLEAN WatchTree);
+
 __declspec(dllimport) NTSTATUS __stdcall NtUnmapViewOfSection(
     IN  HANDLE ProcessHandle,
     IN  PVOID BaseAddress);

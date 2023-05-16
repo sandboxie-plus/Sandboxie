@@ -2477,7 +2477,7 @@ Do you want to do the clean up?</source>
         <location filename="SandMan.cpp" line="1253"/>
         <source>This box provides &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;enhanced security isolation&lt;/a&gt;, it is suitable to test untrusted software.</source>
         <oldsource>This box provides enhanced security isolation, it is suitable to test untrusted software.</oldsource>
-        <translation type="unfinished">이 박스는 향상된 보안 격리 기능을 제공하며 신뢰할 수 없는 소프트웨어를 테스트하는 데 적합합니다.</translation>
+        <translation>이 박스는 향상된 보안 격리 기능을 제공하며 신뢰할 수 없는 소프트웨어를 테스트하는 데 적합합니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1257"/>
@@ -2488,7 +2488,7 @@ Do you want to do the clean up?</source>
         <location filename="SandMan.cpp" line="1261"/>
         <source>This box does not enforce isolation, it is intended to be used as an &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;application compartment&lt;/a&gt; for software virtualization only.</source>
         <oldsource>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</oldsource>
-        <translation type="unfinished">이 박스는 분리를 강제하지 않으며 소프트웨어 가상화 전용 응용프로그램 구획으로 사용됩니다.</translation>
+        <translation>이 박스는 분리를 강제하지 않으며 소프트웨어 가상화 전용 &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;응용프로그램 구획&lt;/a&gt;으로 사용됩니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1266"/>
@@ -2498,9 +2498,9 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <oldsource>
 
 This box prevents access to all user data locations, except explicitly granted in the Resource Access options.</oldsource>
-        <translation type="unfinished">
+        <translation>
 
-이 박스는 리소스 액세스 옵션에 명시적으로 부여된 경우를 제외하고 모든 사용자 데이터 위치에 대한 액세스를 금지합니다.</translation>
+이 박스는 리소스 액세스 옵션에 명시적으로 부여된 경우를 제외하고 &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;모든 사용자 데이터 위치에 대한 액세스&lt;/a&gt;를 금지합니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1342"/>

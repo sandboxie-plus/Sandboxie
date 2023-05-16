@@ -497,8 +497,8 @@ void CSbieView::Refresh()
 			}
 		}
 
-		QString Grouping = CSbieView__SerializeGroup(m_Groups);
-		theConf->SetValue("UIConfig/BoxDisplayOrder", Grouping);
+		m_UserConfigChanged = true;
+		SaveUserConfig();
 	}
 }
 

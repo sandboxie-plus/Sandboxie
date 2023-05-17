@@ -2804,8 +2804,7 @@ Temizlik yapmak ister misin?</translation>
     <message>
         <location filename="SandMan.cpp" line="1253"/>
         <source>This box provides &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;enhanced security isolation&lt;/a&gt;, it is suitable to test untrusted software.</source>
-        <oldsource>This box provides enhanced security isolation, it is suitable to test untrusted software.</oldsource>
-        <translation type="unfinished">Bu alan gelişmiş güvenlik yalıtımı sağlar, güvenilmeyen yazılımları test etmek için uygundur.</translation>
+        <translation>Bu alan &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;gelişmiş güvenlik yalıtımı&lt;/a&gt; sağlar, güvenilmeyen yazılımları test etmek için uygundur.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1257"/>
@@ -2815,20 +2814,16 @@ Temizlik yapmak ister misin?</translation>
     <message>
         <location filename="SandMan.cpp" line="1261"/>
         <source>This box does not enforce isolation, it is intended to be used as an &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;application compartment&lt;/a&gt; for software virtualization only.</source>
-        <oldsource>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</oldsource>
-        <translation type="unfinished">Bu alan, yalıtımı zorla uygulamaz. Yalnızca yazılım sanallaştırması için uygulama bölmesi olarak kullanımı amaçlanmıştır.</translation>
+        <translation>Bu alan, yalıtımı zorla uygulamaz. Yalnızca yazılım sanallaştırması için &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;uygulama bölmesi&lt;/a&gt; olarak kullanımı amaçlanmıştır.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1266"/>
         <source>
 
 This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to all user data&lt;/a&gt; locations, except explicitly granted in the Resource Access options.</source>
-        <oldsource>
+        <translation>
 
-This box prevents access to all user data locations, except explicitly granted in the Resource Access options.</oldsource>
-        <translation type="unfinished">
-
-Bu alan, &apos;Kaynak Erişimi&apos; seçeneklerinde açıkça izin verilenler dışında tüm kullanıcı veri konumlarına erişimi engeller.</translation>
+Bu alan, &apos;Kaynak Erişimi&apos; seçeneklerinde açıkça izin verilenler dışında &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;tüm kullanıcı veri konumlarına erişimi engeller&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1428"/>

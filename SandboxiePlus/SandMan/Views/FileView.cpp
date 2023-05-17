@@ -56,7 +56,7 @@ void CFileView::SetBox(const CSandBoxPtr& pBox)
     if (!m_pBox.isNull()) connect(m_pBox.data(), SIGNAL(AboutToBeModified()), this, SLOT(OnAboutToBeModified()));
 
     QString Root;
-    if (!pBox.isNull() && !pBox->IsEmpty())
+    if (!pBox.isNull() && QFile::exists(pBox->GetFileRoot()))
         Root = pBox->GetFileRoot();
     //if (Root.isEmpty()) {
     //    //Root = theAPI->GetSbiePath();
@@ -66,7 +66,7 @@ void CFileView::SetBox(const CSandBoxPtr& pBox)
     //    m_pTreeView->setEnabled(true);
 
     if (m_pFileModel) {
-        m_pFileModel->deleteLater();
+        delete m_pFileModel;
         m_pFileModel = NULL;
     }
     if (!Root.isEmpty()) {

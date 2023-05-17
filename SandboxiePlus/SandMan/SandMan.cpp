@@ -1430,16 +1430,18 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 		}
 
 		bool bUpdatePending = !theConf->GetString("Updater/PendingUpdate").isEmpty();
-		if (bUpdatePending) {
-			if (m_pDismissUpdate->isChecked())
-				bUpdatePending = false;
-			else if (!m_pDismissUpdate->isVisible())
-				m_pDismissUpdate->setVisible(true);
+		if (m_pDismissUpdate) {
+			if (bUpdatePending) {
+				if (m_pDismissUpdate->isChecked())
+					bUpdatePending = false;
+				else if (!m_pDismissUpdate->isVisible())
+					m_pDismissUpdate->setVisible(true);
+			}
+			else if (m_pDismissUpdate->isChecked())
+				m_pDismissUpdate->setChecked(false);
+			if (!bUpdatePending && m_pDismissUpdate->isVisible())
+				m_pDismissUpdate->setVisible(false);
 		}
-		else if (m_pDismissUpdate->isChecked())
-			m_pDismissUpdate->setChecked(false);
-		if(!bUpdatePending && m_pDismissUpdate->isVisible())
-			m_pDismissUpdate->setVisible(false);
 
 		if (m_bIconEmpty != (ActiveProcesses == 0) || m_bIconBusy != bIconBusy || m_iIconDisabled != (bForceProcessDisabled ? 1 : 0) || bUpdatePending || m_bIconSun)
 		{

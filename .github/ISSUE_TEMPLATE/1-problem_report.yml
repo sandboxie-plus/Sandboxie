@@ -15,7 +15,7 @@ body:
       description: |
         It is highly recommended to write the exact steps to reproduce the behavior.
 
-        You can also add screenshots and provide links to help explain it.
+        Please feel free to attach screenshots, screen recordings and links to help explain it.
       placeholder: |
         Describe as accurately as possible what you saw and did!
         1. Go to '....'
@@ -38,9 +38,9 @@ body:
       label: Affected program
       description: |
         If applicable, in which sandboxed program did you see the problem?
-        
+
         If not, you can type something like "Not relevant".
-      placeholder: e.g. Firefox 108.0.1 64-bit, ....
+      placeholder: e.g. Firefox 113.0.1 64-bit, ....
     validations:
       required: true
   - type: input
@@ -49,7 +49,7 @@ body:
       label: Download link
       description: |
         If you had a compatibility issue, it is highly recommended to include a download link to the incompatible software.
-        
+
         If not, you can type something like "Not relevant" or "Not available".
       placeholder: https://
     validations:
@@ -87,11 +87,15 @@ body:
     attributes:
       label: "In which Windows account you have this problem?"
       description: "Note: Built-in user accounts like Guest or Administrator are disabled by default in Windows because they pose a security risk."
+      multiple: true
       options:
-        - "A local or Microsoft account without special changes."
-        - "User account with secure desktop turned off for UAC prompts."
-        - "User account with UAC protection completely turned off."
-        - "User account with UAC protection set to Always notify."
+        - "A local account (Standard user)."
+        - "A local account (Administrator)."
+        - "A Microsoft account (Standard user)."
+        - "A Microsoft account (Administrator)."
+        - "An account with secure desktop turned off for UAC prompts."
+        - "An account with UAC protection completely turned off."
+        - "An account with UAC protection set to Always notify."
         - "I use the built-in Administrator account."
         - "I use the built-in Administrator with Admin Approval Mode turned on."
         - "I reproduced it under a Guest account."
@@ -110,7 +114,7 @@ body:
     id: sandboxie-version
     attributes:
       label: What version of Sandboxie are you running?
-      placeholder: e.g. Sandboxie Plus 1.6.3 64-bit
+      placeholder: e.g. Sandboxie Plus 1.9.3 64-bit
     validations:
       required: true
   - type: dropdown
@@ -119,8 +123,9 @@ body:
       label: Is it a new installation of Sandboxie?
       options:
         - "I recently did a new clean installation."
-        - "I just updated Sandboxie from a previous version (to be specified)."
-        - "I recently upgraded it from an older version than v1.5.3 / 5.60.3."
+        - "I just updated Sandboxie from a previous version (I don't remember which one)."
+        - "I just updated Sandboxie from a previous version (explicitly mentioned in this issue)."
+        - "I recently upgraded it from an older version than 1.5.3 / 5.60.3."
         - "I have been using the same version for some time."
     validations:
       required: true
@@ -129,7 +134,7 @@ body:
     attributes:
       label: Is it a regression?
       description: If applicable, specify in which Sandboxie version this problem was introduced the first time (including any pre-release version).
-      placeholder: e.g. Since 5.61.0 64-bit
+      placeholder: e.g. Since 5.62.1 64-bit
   - type: dropdown
     id: box-types
     attributes:
@@ -142,6 +147,7 @@ body:
         - "In a sandbox with data protection (blue sandbox icon)."
         - "In an Application Compartment sandbox with data protection (cyan sandbox icon)."
         - "In an Application Compartment sandbox with no isolation (green sandbox icon)."
+        - "In an encrypted sandbox (black sandbox icon)."
         - "All sandbox types (I tried them all)."
         - "I only reproduced it with Sandboxie Classic."
         - "Not relevant to my request."
@@ -178,7 +184,7 @@ body:
       label: Crash dump
       description: |
         If applicable, provide a direct link containing the .dmp file(s) for your crash issue!
-        
+
         List of crash dump locations:
         - C:\\Users\\%Username%\\AppData\\Local\\CrashDumps
         - C:\\Windows\\Minidump
@@ -186,7 +192,7 @@ body:
         - C:\\Sandbox\\%USER%\\%SANDBOX% (only if you previously set EnableMiniDump=y in the sandbox section of your Sandboxie.ini file)
         - C:\\Windows\\MEMORY.DMP (known as %SystemRoot%\\MEMORY.DMP)
         See also: [Generate a kernel or complete crash dump](https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/generate-a-kernel-or-complete-crash-dump)
-        
+
         Tip: You can upload the .dmp file(s) on a file storage service, then share the resulting link below.
       placeholder: https://
   - type: input

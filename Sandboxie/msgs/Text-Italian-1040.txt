@@ -246,6 +246,14 @@ SBIE1314 Richiesta di modifica delle impostazioni di rete/del firewall da parte 
 SBIE1316 Richiesta di creazione dell'evento del dispositivo nell'area virtuale bloccata
 .
 
+1317;pop;inf;02
+SBIE1317 È stato impedito a '%2' di accedere alla directory principale '%3' nell'area virtuale
+.
+
+1318;pop;inf;02
+SBIE1318 È stato impedito a '%2' di accedere al processo '%3' nell'area virtuale
+.
+
 1319;pop;inf;01
 SBIE1319 Spooler di stampa su file bloccato, %2 %3
 .

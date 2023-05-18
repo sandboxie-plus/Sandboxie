@@ -102,6 +102,9 @@ void CSandMan::CreateTrayMenu()
 	m_pDisableForce2->setCheckable(true);
 	if(m_pDisableRecovery) m_pTrayMenu->addAction(m_pDisableRecovery);
 	if(m_pDisableMessages) m_pTrayMenu->addAction(m_pDisableMessages);
+	m_pDismissUpdate = m_pTrayMenu->addAction(tr("Dismiss Update Notification"), this, SLOT(OnDismissUpdate()));
+	m_pDismissUpdate->setCheckable(true);
+	m_pDismissUpdate->setVisible(false);
 	m_pTrayMenu->addSeparator();
 
 	/*QWidgetAction* pBoxWidget = new QWidgetAction(m_pTrayMenu);

@@ -173,7 +173,7 @@ _FX BOOLEAN Process_Low_Inject(
         LARGE_INTEGER time;
         ULONG retries = 0;
 
-        while ((retries < 40) && (! Driver_Unloading)) {
+        while ((retries < 40 * 3) && (! Driver_Unloading)) {
 
             proc = Process_Find(process_id, &irql);
 

@@ -27,6 +27,23 @@
 
 
 //---------------------------------------------------------------------------
+// Structures and Types
+//---------------------------------------------------------------------------
+
+
+typedef struct _PROTECTED_ROOT {
+
+    LIST_ELEM list_elem;
+    
+    ULONG reg_root_len;
+    WCHAR reg_root[MAX_REG_ROOT_LEN];
+    ULONG file_root_len;
+    WCHAR file_root[1];
+
+} PROTECTED_ROOT;
+
+
+//---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
 
@@ -184,6 +201,10 @@ PFLT_FILTER File_FilterCookie = NULL;
 extern UCHAR Sbie_Token_SourceName[5];
 
 
+static LIST File_ProtectedRoots;
+static PERESOURCE File_ProtectedRootsLock;
+
+
 //---------------------------------------------------------------------------
 // File_Init_Filter
 //---------------------------------------------------------------------------
@@ -193,6 +214,10 @@ _FX BOOLEAN File_Init_Filter(void)
 {
     static const WCHAR *_MiniFilter = L"MiniFilter";
     NTSTATUS status;
+
+    List_Init(&File_ProtectedRoots);
+    if (! Mem_GetLockResource(&File_ProtectedRootsLock, TRUE))
+        return FALSE;
 
     //
     // register as a minifilter driver
@@ -239,6 +264,13 @@ _FX BOOLEAN File_Init_Filter(void)
         return FALSE;
 
     //
+    // set API functions
+    //
+
+    Api_SetFunction(API_PROTECT_ROOT,           File_Api_ProtectRoot);
+    Api_SetFunction(API_UNPROTECT_ROOT,         File_Api_UnprotectRoot);
+
+    //
     // successful initialization
     //
 
@@ -253,6 +285,11 @@ _FX BOOLEAN File_Init_Filter(void)
 
 _FX void File_Unload_Filter(void)
 {
+    if (File_ProtectedRootsLock) {
+        Mem_FreeLockResource(&File_ProtectedRootsLock);
+        File_ProtectedRootsLock = NULL;
+    }
+
     if (File_FilterCookie) {
         FltUnregisterFilter(File_FilterCookie);
         File_FilterCookie = NULL;
@@ -330,10 +367,6 @@ _FX FLT_PREOP_CALLBACK_STATUS File_PreOperation(
                Iopb->MajorFunction != IRP_MJ_CREATE_NAMED_PIPE &&
                Iopb->MajorFunction != IRP_MJ_CREATE_MAILSLOT)
         goto finish;
-
-    //
-    // check if the caller is sandboxed before proceeding
-    //
 
     if (Data->Thread != PsGetCurrentThread())
         goto finish;
@@ -443,6 +476,83 @@ check:
         status = STATUS_PROCESS_IS_TERMINATING;
         goto finish;
     }
+
+    //
+    // check if there are any protected root folders and restict the access to
+    //
+
+    if (Iopb->MajorFunction == IRP_MJ_CREATE /*&& File_ProtectedRoots.count != 0*/) {
+
+        OBJECT_NAME_INFORMATION *Name;
+        ULONG NameLength;
+
+        status = Obj_GetParseName(Driver_Pool, Data->Iopb->TargetFileObject->DeviceObject, &Data->Iopb->TargetFileObject->FileName, &Name, &NameLength);
+        if (NT_SUCCESS(status)) {
+
+            //DbgPrint("IRP_MJ_CREATE: %S\n", Name->Name.Buffer);
+
+            KIRQL irql;
+            KeRaiseIrql(APC_LEVEL, &irql);
+            ExAcquireResourceExclusiveLite(File_ProtectedRootsLock, TRUE);
+
+            PROTECTED_ROOT *root = List_Head(&File_ProtectedRoots);
+            while (root) {
+
+                if (Name->Name.Length / sizeof(WCHAR) >= root->file_root_len
+                    && (Name->Name.Buffer[root->file_root_len] == L'\0' || Name->Name.Buffer[root->file_root_len] == L'\\')
+                    && _wcsnicmp(Name->Name.Buffer, root->file_root, root->file_root_len) == 0
+                    ) {
+
+                    status = STATUS_ACCESS_DENIED;
+
+                    if (proc && !proc->bHostInject) {
+                        if (proc->box->key_path_len / sizeof(WCHAR) == root->reg_root_len + 1 &&
+                            _wcsnicmp(proc->box->key_path, root->reg_root, root->reg_root_len) == 0) {
+                            status = STATUS_SUCCESS; // its the allowed box
+                        }
+                    }
+                    else {
+                        if (PsGetCurrentProcessId() == Api_ServiceProcessId)
+                            status = STATUS_SUCCESS; // always allow the service
+                        else if(Session_GetLeadSession(PsGetCurrentProcessId()) != 0)
+                            status = STATUS_SUCCESS; // allow the session leader
+                    }
+
+                    break;
+                }
+
+                root = List_Next(root);
+            }
+
+            ExReleaseResourceLite(File_ProtectedRootsLock);
+            KeLowerIrql(irql);
+
+            if (!NT_SUCCESS(status)) {
+
+                if (Conf_Get_Boolean(NULL, L"NotifyBoxProtected", 0, TRUE)) {
+
+                    void *nbuf = 0;
+                    ULONG nlen = 0;
+                    WCHAR *nptr = 0;
+                    Process_GetProcessName(Driver_Pool, (ULONG_PTR)PsGetCurrentProcessId(), &nbuf, &nlen, &nptr);
+
+                    Log_Msg_Process(MSG_1317, nptr, Name->Name.Buffer, -1, PsGetCurrentProcessId());
+
+                    if (nbuf) Mem_Free(nbuf, nlen);
+                }
+            }
+
+            Mem_Free(Name, NameLength);
+
+            if (!NT_SUCCESS(status))
+                goto finish;
+        }
+    }
+
+    //
+    // check if the caller is sandboxed before proceeding
+    //
+
     if (!proc || proc->bHostInject || proc->disable_file_flt)
         goto finish;
 
@@ -829,4 +939,116 @@ _FX NTSTATUS File_CheckFileObject(
     return File_Generic_MyParseProc(
                 proc, FileObject, FileObject->DeviceObject->DeviceType,
                 &FileName, &MyContext, FALSE);
+}
+
+
+//---------------------------------------------------------------------------
+// File_Api_ProtectRoot
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS File_Api_ProtectRoot(PROCESS *proc, ULONG64 *parms)
+{
+    WCHAR* reg_root;
+    WCHAR* file_root;
+    KIRQL irql;
+
+    if (proc)
+        return STATUS_NOT_IMPLEMENTED;
+
+    //
+    // we expect to be called only by SbieSvc, or the session leader
+    //
+
+    if (PsGetCurrentProcessId() != Api_ServiceProcessId) {
+        //if (Session_GetLeadSession(PsGetCurrentProcessId()) != 0)
+        return STATUS_ACCESS_DENIED;
+    }
+
+    reg_root = (WCHAR *)parms[1];
+    file_root = (WCHAR *)parms[2];
+
+    ULONG path_len = wcslen(file_root);
+    ULONG len = sizeof(PROTECTED_ROOT) + path_len * sizeof(WCHAR);
+    PROTECTED_ROOT *root = Mem_Alloc(Driver_Pool, len);
+    if (root) {
+        
+        root->file_root_len = path_len;
+        wmemcpy(root->file_root, file_root, path_len);
+        root->file_root[path_len] = L'\0';
+        
+        path_len = wcslen(reg_root);
+        root->reg_root_len = path_len;
+        wmemcpy(root->reg_root, reg_root, path_len);
+        root->reg_root[path_len] = L'\0';
+
+        KeRaiseIrql(APC_LEVEL, &irql);
+        ExAcquireResourceExclusiveLite(File_ProtectedRootsLock, TRUE);
+        
+        List_Insert_After(&File_ProtectedRoots, NULL, root);
+        
+        ExReleaseResourceLite(File_ProtectedRootsLock);
+        KeLowerIrql(irql);
+    }
+
+    return STATUS_SUCCESS;
+}
+
+
+//---------------------------------------------------------------------------
+// File_Api_UnprotectRoot
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS File_Api_UnprotectRoot(PROCESS* proc, ULONG64* parms)
+{
+    NTSTATUS status;
+    KIRQL irql;
+    ULONG len;
+    WCHAR reg_root[MAX_REG_ROOT_LEN];
+    ULONG reg_root_len;
+
+    if (proc)
+        return STATUS_NOT_IMPLEMENTED;
+
+    //
+    // we expect to be called only by SbieSvc, or the session leader
+    //
+
+    if (PsGetCurrentProcessId() != Api_ServiceProcessId) {
+        //if (Session_GetLeadSession(PsGetCurrentProcessId()) != 0)
+        return STATUS_ACCESS_DENIED;
+    }
+
+    reg_root_len = wcslen((WCHAR *)parms[1]);
+    wmemcpy(reg_root, (WCHAR *)parms[1], reg_root_len);
+    reg_root[reg_root_len] = L'\0';
+
+    status = STATUS_OBJECT_NAME_NOT_FOUND;
+
+    KeRaiseIrql(APC_LEVEL, &irql);
+    ExAcquireResourceExclusiveLite(File_ProtectedRootsLock, TRUE);
+
+    PROTECTED_ROOT *root = List_Head(&File_ProtectedRoots);
+    while (root) {
+
+        PROTECTED_ROOT *next_root = List_Next(root);
+
+        if (root->reg_root_len = reg_root_len && _wcsicmp(root->reg_root, reg_root) == 0) {
+
+            List_Remove(&File_ProtectedRoots, root);
+
+            len = sizeof(PROTECTED_ROOT) + root->file_root_len * sizeof(WCHAR);
+            Mem_Free(root, len);
+
+            status = STATUS_SUCCESS; // dont break in case a root was added more then once
+        }
+
+        root = next_root;
+    }
+
+    ExReleaseResourceLite(File_ProtectedRootsLock);
+    KeLowerIrql(irql);
+
+    return status;
 }

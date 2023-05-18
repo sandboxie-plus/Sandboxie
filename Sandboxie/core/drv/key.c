@@ -1107,7 +1107,7 @@ _FX NTSTATUS Key_Api_GetUnmountHive(PROCESS *proc, ULONG64 *parms)
     if (proc || (PsGetCurrentProcessId() != Api_ServiceProcessId))
         return STATUS_NOT_IMPLEMENTED;
 
-    ProbeForWrite(args->path.val, sizeof(WCHAR) * 256, sizeof(WCHAR));
+    ProbeForWrite(args->path.val, sizeof(WCHAR) * MAX_REG_ROOT_LEN, sizeof(WCHAR));
 
     //
     // scan through the key hives and find an unused one
@@ -1143,7 +1143,7 @@ unmount_loop:
                 goto unmount_loop;
             }
 
-            wcscpy(args->path.val, mount->root_key);
+            wcscpy(args->path.val, mount->root_key); // todo: ensure that root_key_len cant be greater the MAX_REG_ROOT_LEN
 
             mount->unmount_pending = FALSE;
 

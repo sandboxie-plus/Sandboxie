@@ -77,6 +77,7 @@
 
 #define API_MAX_PIDS                512
 
+#define MAX_REG_ROOT_LEN            256
 
 //---------------------------------------------------------------------------
 // Driver API Codes
@@ -158,6 +159,8 @@ enum {
     API_SET_SECURE_PARAM,
     API_GET_SECURE_PARAM,
     API_MONITOR_GET2,
+    API_PROTECT_ROOT,
+    API_UNPROTECT_ROOT,
 
     API_LAST
 };

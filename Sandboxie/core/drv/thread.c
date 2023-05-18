@@ -1209,9 +1209,16 @@ _FX ACCESS_MASK Thread_CheckObject_CommonEx(
                         }
 
                         if (protect_process) {
-                            WCHAR msg_str[256];
-                            RtlStringCbPrintfW(msg_str, sizeof(msg_str), L"Protect boxed processes %s (%d) from %s (%d) requesting 0x%08X", proc2->image_name, (ULONG)pid, nptr, (ULONG)cur_pid, DesiredAccess);
-                            Session_MonitorPut(MONITOR_IMAGE | MONITOR_TRACE, msg_str, pid);
+
+                            if (Conf_Get_Boolean(NULL, L"NotifyBoxProtected", 0, TRUE)) {
+
+                                //WCHAR msg_str[256];
+                                //RtlStringCbPrintfW(msg_str, sizeof(msg_str), L"Protect boxed processes %s (%d) from %s (%d) requesting 0x%08X", proc2->image_name, (ULONG)pid, nptr, (ULONG)cur_pid, DesiredAccess);
+                                //Session_MonitorPut(MONITOR_IMAGE | MONITOR_TRACE, msg_str, pid);
+
+                                Log_Msg_Process(MSG_1318, nptr, proc2->image_name, -1, PsGetCurrentProcessId());
+
+                            }
                         }
                     }
                 }

@@ -61,6 +61,10 @@ NTSTATUS File_Api_CheckInternetAccess(PROCESS *proc, ULONG64 *parms);
 
 NTSTATUS File_Api_GetBlockedDll(PROCESS *proc, ULONG64 *parms);
 
+NTSTATUS File_Api_ProtectRoot(PROCESS *proc, ULONG64 *parms);
+
+NTSTATUS File_Api_UnprotectRoot(PROCESS *proc, ULONG64 *parms);
+
 
 //---------------------------------------------------------------------------
 

@@ -6,6 +6,14 @@
 SBIE1305 Blocked sandboxed image from being loaded - %2
 .
 
+1317;pop;inf;02
+SBIE1317 Blocked '%2' from trying to access sandbox file root '%3'
+.
+
+1318;pop;inf;02
+SBIE1318 Blocked '%2' from trying to access sandboxed process '%3'
+.
+
 2113;pop;inf;01
 SBIE2113 File is too large to copy into sandbox, creating empty file - %2
 .

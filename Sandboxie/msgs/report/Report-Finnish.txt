@@ -18,6 +18,14 @@ SBIE1305 Blocked sandboxed image from being loaded - %2
 SBIE1316 Blocked request to generate device event in the sandbox
 .
 
+1317;pop;inf;02
+SBIE1317 Blocked '%2' from trying to access sandbox file root '%3'
+.
+
+1318;pop;inf;02
+SBIE1318 Blocked '%2' from trying to access sandboxed process '%3'
+.
+
 1319;pop;inf;01
 SBIE1319 Blocked spooler print to file, %2 %3
 .

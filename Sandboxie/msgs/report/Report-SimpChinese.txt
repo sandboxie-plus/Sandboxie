@@ -2,5 +2,11 @@
 * Missing Messages in Text-SimpChinese-2052.txt
 *==========
 
-There are no missing messages.
+1317;pop;inf;02
+SBIE1317 Blocked '%2' from trying to access sandbox file root '%3'
+.
+
+1318;pop;inf;02
+SBIE1318 Blocked '%2' from trying to access sandboxed process '%3'
+.
 

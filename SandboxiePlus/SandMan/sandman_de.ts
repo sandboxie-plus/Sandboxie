@@ -2648,12 +2648,17 @@ Do you want to do the clean up?</source>
 Möchten Sie die Bereinigung durchführen?</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="178"/>
+        <location filename="SandManTray.cpp" line="105"/>
+        <source>Dismiss Update Notification</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandManTray.cpp" line="181"/>
         <source> - Driver/Service NOT Running!</source>
         <translation> - Treiber/Dienst läuft NICHT!</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="180"/>
+        <location filename="SandManTray.cpp" line="183"/>
         <source> - Deleting Sandbox Content</source>
         <translation> - Lösche Sandboxinhalt</translation>
     </message>

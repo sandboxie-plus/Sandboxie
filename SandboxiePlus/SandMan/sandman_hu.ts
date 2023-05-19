@@ -2446,12 +2446,17 @@ This box prevents access to all user data locations, except explicitly granted i
         <translation>Ismeretlen &apos;%1&apos; művelet parancssoron keresztül</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="178"/>
+        <location filename="SandManTray.cpp" line="105"/>
+        <source>Dismiss Update Notification</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandManTray.cpp" line="181"/>
         <source> - Driver/Service NOT Running!</source>
         <translation>Illesztőprogram/szolgáltatás NEM fut!</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="180"/>
+        <location filename="SandManTray.cpp" line="183"/>
         <source> - Deleting Sandbox Content</source>
         <translation>Sandox tartalom törlése</translation>
     </message>

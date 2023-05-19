@@ -2479,12 +2479,17 @@ Sandbox này ngăn quyền truy cập vào tất cả các vị trí dữ liệu
         <translation>Hoạt động không xác định &apos;%1&apos; đã được yêu cầu qua dòng lệnh</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="178"/>
+        <location filename="SandManTray.cpp" line="105"/>
+        <source>Dismiss Update Notification</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandManTray.cpp" line="181"/>
         <source> - Driver/Service NOT Running!</source>
         <translation> - Trình điều khiển / Dịch vụ KHÔNG chạy!</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="180"/>
+        <location filename="SandManTray.cpp" line="183"/>
         <source> - Deleting Sandbox Content</source>
         <translation> - Xóa nội dung hộp cát</translation>
     </message>

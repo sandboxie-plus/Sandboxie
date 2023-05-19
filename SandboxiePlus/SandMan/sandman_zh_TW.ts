@@ -2450,12 +2450,17 @@ This box prevents access to all user data locations, except explicitly granted i
         <translation>透過命令列請求的未知操作 &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="178"/>
+        <location filename="SandManTray.cpp" line="105"/>
+        <source>Dismiss Update Notification</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandManTray.cpp" line="181"/>
         <source> - Driver/Service NOT Running!</source>
         <translation> - 驅動程序/服務尚未執行！</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="180"/>
+        <location filename="SandManTray.cpp" line="183"/>
         <source> - Deleting Sandbox Content</source>
         <translation> - 刪除沙箱內容</translation>
     </message>

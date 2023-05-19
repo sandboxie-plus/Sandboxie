@@ -2965,12 +2965,17 @@ Você quer fazer a limpeza?</translation>
         <translation>Não mostrar essa mensagem novamente.</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="178"/>
+        <location filename="SandManTray.cpp" line="105"/>
+        <source>Dismiss Update Notification</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandManTray.cpp" line="181"/>
         <source> - Driver/Service NOT Running!</source>
         <translation> - Driver/Serviço NÃO está em Execução!</translation>
     </message>
     <message>
-        <location filename="SandManTray.cpp" line="180"/>
+        <location filename="SandManTray.cpp" line="183"/>
         <source> - Deleting Sandbox Content</source>
         <translation> - Excluindo o conteúdo da caixa de areia</translation>
     </message>

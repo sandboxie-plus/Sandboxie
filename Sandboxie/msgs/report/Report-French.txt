@@ -2,6 +2,14 @@
 * Missing Messages in Text-French-1036.txt
 *==========
 
+1317;pop;inf;02
+SBIE1317 Blocked '%2' from trying to access sandbox file root '%3'
+.
+
+1318;pop;inf;02
+SBIE1318 Blocked '%2' from trying to access sandboxed process '%3'
+.
+
 2113;pop;inf;01
 SBIE2113 File is too large to copy into sandbox, creating empty file - %2
 .

@@ -27,6 +27,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed icon overlay issue with high DPI scaling
 - fixed behaviour on multiple selection (thanks okrc) [#2903](https://github.com/sandboxie-plus/Sandboxie/pull/2903)
 - fixed issue with default box grouping (thanks okrc) [#2910](https://github.com/sandboxie-plus/Sandboxie/pull/2910)
+- fixed The checkbox for the Open System Protected Storage setting appears to be unchecked [#2866](https://github.com/sandboxie-plus/Sandboxie/issues/2866)
+- fixed Firewall Rules - Colors make testing difficult in dark mode [#2900](https://github.com/sandboxie-plus/Sandboxie/issues/2900)
 
 
 
@@ -36,7 +38,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added global setting to disable overlay icons
 - added ability to specify Sandboxie.ini location in registry
   - open "HKLM\SYSTEM\CurrentControlSet\Services\SbieDrv" and set "IniPath" [#2837](https://github.com/sandboxie-plus/Sandboxie/issues/2837)
-  - use a REG_SZ string for the path, like "\\??\C:\my_path\my_sandboxie.ini"
+  - use a REG_SZ string for the path, like "\??\C:\my_path\my_sandboxie.ini"
 
 ### Changed
 - improved handling of DLL injection failure

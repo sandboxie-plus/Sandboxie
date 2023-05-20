@@ -779,6 +779,8 @@ void COptionsWindow::LoadConfig()
 
 	m_HoldChange = true;
 
+	LoadTemplates();
+
 	LoadGeneral();
 
 	LoadGroups();
@@ -798,8 +800,6 @@ void COptionsWindow::LoadConfig()
 
 	LoadAdvanced();
 	LoadDebug();
-
-	LoadTemplates();
 	
 	UpdateBoxType();
 

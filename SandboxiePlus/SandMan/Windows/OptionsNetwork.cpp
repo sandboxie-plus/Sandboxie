@@ -680,27 +680,29 @@ void COptionsWindow::OnDelNetFwRule()
 
 void COptionsWindow__SetRowColor(QTreeWidgetItem* pItem, bool bMatch, bool bConflict = false, bool bBlock = false, bool bActive = false)
 {
+	#define setColor(i, b) theGUI->m_DarkTheme ? pItem->setForeground(i, b) : pItem->setBackground(i, b)
+
 	for (int i = 0; i < pItem->columnCount(); i++)
 	{
 		if (!bMatch)
 		{
-			pItem->setBackground(i, Qt::white); // todo dark mode
+			setColor(i, Qt::white);
 		}
 		else if(bConflict)
-			pItem->setBackground(i, QColor(255, 255, 0)); // yellow
+			setColor(i, QColor(255, 255, 0)); // yellow
 		else if (!bBlock)
 		{
 			if (bActive)
-				pItem->setBackground(i, QColor(128, 255, 128)); // dark green
+				setColor(i, QColor(128, 255, 128)); // dark green
 			else
-				pItem->setBackground(i, QColor(224, 240, 224)); // light green
+				setColor(i, QColor(224, 240, 224)); // light green
 		}
 		else
 		{
 			if (bActive)
-				pItem->setBackground(i, QColor(255, 128, 128)); // dark red
+				setColor(i, QColor(255, 128, 128)); // dark red
 			else
-				pItem->setBackground(i, QColor(240, 224, 224)); // light red
+				setColor(i, QColor(240, 224, 224)); // light red
 		}
 	}
 }

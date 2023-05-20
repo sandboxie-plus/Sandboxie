@@ -27,6 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed icon overlay issue with high DPI scaling
 - fixed behaviour on multiple selection (thanks okrc) [#2903](https://github.com/sandboxie-plus/Sandboxie/pull/2903)
 - fixed issue with default box grouping (thanks okrc) [#2910](https://github.com/sandboxie-plus/Sandboxie/pull/2910)
+- fixed issue with sandbox renaming [#2912](https://github.com/sandboxie-plus/Sandboxie/issues/2912)
 - fixed The checkbox for the Open System Protected Storage setting appears to be unchecked [#2866](https://github.com/sandboxie-plus/Sandboxie/issues/2866)
 - fixed Firewall Rules - Colors make testing difficult in dark mode [#2900](https://github.com/sandboxie-plus/Sandboxie/issues/2900)
 - fixed RecoverFolder shows GUID instead of folder name [#2918](https://github.com/sandboxie-plus/Sandboxie/issues/2918)

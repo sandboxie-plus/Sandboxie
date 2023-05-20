@@ -198,6 +198,14 @@ SBIE1314 Änderung der Netzwerk/Firewall-Einstellungen durch Prozess '%2' verhin
 SBIE1316 Anfrage zur Erzeugung eines Geräteevents in der Sandbox verhindert
 .
 
+1317;pop;inf;02
+SBIE1317 '%2' daran gehindert auf die Sandbox Dateisystemquelle '%3' zuzugreifen
+.
+
+1318;pop;inf;02
+SBIE1318 '%2' daran gehindert auf den sandgeboxten Prozess '%3' zuzugreifen
+.
+
 1319;pop;inf;01
 SBIE1319 Druckerwarteschlangendruck zu Datei, %2 %3 verhindert
 .

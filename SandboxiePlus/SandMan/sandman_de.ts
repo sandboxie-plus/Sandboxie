@@ -2650,7 +2650,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandManTray.cpp" line="105"/>
         <source>Dismiss Update Notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignoriere Updatebenachrichtigung</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="181"/>

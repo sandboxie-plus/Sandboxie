@@ -29,6 +29,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with default box grouping (thanks okrc) [#2910](https://github.com/sandboxie-plus/Sandboxie/pull/2910)
 - fixed The checkbox for the Open System Protected Storage setting appears to be unchecked [#2866](https://github.com/sandboxie-plus/Sandboxie/issues/2866)
 - fixed Firewall Rules - Colors make testing difficult in dark mode [#2900](https://github.com/sandboxie-plus/Sandboxie/issues/2900)
+- fixed RecoverFolder shows GUID instead of folder name [#2918](https://github.com/sandboxie-plus/Sandboxie/issues/2918)
 
 
 

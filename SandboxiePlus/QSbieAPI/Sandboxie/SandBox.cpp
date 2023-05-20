@@ -269,7 +269,7 @@ QString CSandBox::Expand(const QString& Value)
 {
 	QString Value2 = Value;
 
-	QRegularExpression rx("%([a-zA-Z0-9 ]+)%");
+	QRegularExpression rx("%([\\{\\}\\-a-zA-Z0-9 ]+)%");
 	for (int pos = 0; ; ) {
 		auto result = rx.match(Value, pos);
 		if (!result.hasMatch())

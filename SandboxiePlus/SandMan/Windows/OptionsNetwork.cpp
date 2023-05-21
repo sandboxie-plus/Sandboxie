@@ -151,6 +151,7 @@ void COptionsWindow::LoadBlockINet()
 
 			QTreeWidgetItem* pItem = new QTreeWidgetItem();
 			pItem->setCheckState(0, (Mode & 0x10) != 0 ? Qt::Unchecked : Qt::Checked);
+			Mode &= ~0x10;
 			
 			SetProgramItem(Value, pItem, 0);
 	
@@ -237,6 +238,9 @@ void COptionsWindow::OnINetChanged(QTreeWidgetItem* pItem, int Column)
 			AddProgramToGroup(Program, INetModeToGroup(Mode));
 		}
 	}
+
+	m_INetBlockChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::CloseINetEdit(bool bSave)
@@ -270,6 +274,10 @@ void COptionsWindow::CloseINetEdit(QTreeWidgetItem* pItem, bool bSave)
 
 
 		QString NewProgram = pCombo->currentText();
+		if (NewProgram.isEmpty()) {
+			QMessageBox::warning(this, "SandboxiePlus", tr("A non empty program name is required."));
+			return;
+		}
 		int NewMode = pMode->currentData().toInt();
 		if (pItem->checkState(0) == Qt::Unchecked)
 			NewMode |= 0x10;
@@ -280,6 +288,9 @@ void COptionsWindow::CloseINetEdit(QTreeWidgetItem* pItem, bool bSave)
 	
 		pItem->setText(1, GetINetModeStr(NewMode));
 		pItem->setData(1, Qt::UserRole, NewMode);
+
+		m_INetBlockChanged = true;
+		OnOptChanged();
 	}
 
 	ui.treeINet->setItemWidget(pItem, 0, NULL);
@@ -326,8 +337,8 @@ void COptionsWindow::OnAddINetProg()
 
 	AddProgramToGroup(Value, INetModeToGroup(Mode));
 
-	//m_INetBlockChanged = true;
-	//OnOptChanged();
+	m_INetBlockChanged = true;
+	OnOptChanged();
 }
 
 void COptionsWindow::OnDelINetProg()
@@ -344,8 +355,8 @@ void COptionsWindow::OnDelINetProg()
 
 	delete pItem;
 
-	//m_INetBlockChanged = true;
-	//OnOptChanged();
+	m_INetBlockChanged = true;
+	OnOptChanged();
 }
 
 bool COptionsWindow::FindEntryInSettingList(const QString& Name, const QString& Value)

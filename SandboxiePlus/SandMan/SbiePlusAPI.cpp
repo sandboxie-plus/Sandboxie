@@ -123,6 +123,7 @@ CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSand
 {
 	m_bLogApiFound = false;
 	m_bINetBlocked = false;
+	m_bINetExceptions = false;
 	m_bSharesAllowed = false;
 	m_bDropRights = false;
 	
@@ -337,13 +338,23 @@ void CSandBoxPlus::UpdateDetails()
 			break;
 		}
 	}
-	foreach(const QString& Entry, GetTextList("AllowNetworkAccess", false)) {
-		if (Entry == "!<InternetAccess>,n") {
-			m_bINetBlocked = true;
-			break;
+	if (theGUI->IsWFPEnabled()) {
+		foreach(const QString & Entry, GetTextList("AllowNetworkAccess", false)) {
+			if (Entry == "!<InternetAccess>,n") {
+				m_bINetBlocked = true;
+				break;
+			}
 		}
 	}
-
+	if (m_bINetBlocked) {
+		foreach(const QString& Entry, GetTextList("ProcessGroup", true)) {
+			StrPair NameList = Split2(Entry, ",");
+			if (NameList.first == "<InternetAccess>" && !NameList.second.isEmpty()) {
+				m_bINetExceptions = true;
+				break;
+			}
+		}
+	}
 
 	m_bSharesAllowed = GetBool("BlockNetworkFiles", true) == false;
 
@@ -661,8 +672,12 @@ QString CSandBoxPlus::GetStatusStr() const
 
 	if (m_bLogApiFound)
 		Status.append(tr("API Log"));
-	if (m_bINetBlocked)
-		Status.append(tr("No INet"));
+	if (m_bINetBlocked) {
+		if(m_bINetExceptions)
+			Status.append(tr("No INet (with Exceptions)"));
+		else
+			Status.append(tr("No INet"));
+	}
 	if (m_bSharesAllowed)
 		Status.append(tr("Net Share"));
 	if (m_bDropRights && !m_bSecurityEnhanced)
@@ -724,14 +739,23 @@ void CSandBoxPlus::SetLogApi(bool bEnable)
 
 void CSandBoxPlus::SetINetBlock(bool bEnable)
 {
-	if (bEnable)
-		InsertText("ClosedFilePath", "!<InternetAccess>,InternetAccessDevices");
+	if (bEnable) {
+		if(theGUI->IsWFPEnabled())
+			InsertText("AllowNetworkAccess", "!<InternetAccess>,n");
+		else
+			InsertText("ClosedFilePath", "!<InternetAccess>,InternetAccessDevices");
+	}
 	else
 	{
 		foreach(const QString& Entry, GetTextList("ClosedFilePath", false))
 		{
 			if (Entry.contains("InternetAccessDevices"))
 				DelValue("ClosedFilePath", Entry);
+		}
+		foreach(const QString& Entry, GetTextList("AllowNetworkAccess", false))
+		{
+			if (Entry.contains("!<InternetAccess>,n"))
+				DelValue("AllowNetworkAccess", Entry);
 		}
 	}
 }

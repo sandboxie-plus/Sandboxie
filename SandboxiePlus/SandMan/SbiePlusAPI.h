@@ -209,6 +209,7 @@ protected:
 
 	bool					m_bLogApiFound;
 	bool					m_bINetBlocked;
+	bool					m_bINetExceptions;
 	bool					m_bSharesAllowed;
 	bool					m_bDropRights;
 

@@ -43,15 +43,14 @@ void COptionsWindow::CreateNetwork()
 
 void COptionsWindow::LoadINetAccess()
 {
-	m_IsEnabledWFP = m_pBox->GetAPI()->GetGlobalSettings()->GetBool("NetworkEnableWFP", false);
 	// check if we are blocking globally and if so adapt the behaviour accordingly
 	m_WFPisBlocking = !m_pBox->GetAPI()->GetGlobalSettings()->GetBool("AllowNetworkAccess", true); 
 	
-	ui.lblNoWfp->setVisible(!m_IsEnabledWFP); // warn user that this is only user mode
+	ui.lblNoWfp->setVisible(!theGUI->IsWFPEnabled()); // warn user that this is only user mode
 
 	ui.cmbBlockINet->clear();
 	ui.cmbBlockINet->addItem(tr("Allow access"), 0);
-	if (m_IsEnabledWFP) ui.cmbBlockINet->addItem(tr("Block using Windows Filtering Platform"), 1);
+	if (theGUI->IsWFPEnabled()) ui.cmbBlockINet->addItem(tr("Block using Windows Filtering Platform"), 1);
 	ui.cmbBlockINet->addItem(tr("Block by denying access to Network devices"), 2);
 
 	m_INetBlockChanged = false;
@@ -76,7 +75,7 @@ void COptionsWindow::SaveINetAccess()
 
 	QTreeWidgetItem* pBlockedNet = FindGroupByName("<BlockNetAccess>");
 	if (pBlockedNet && pBlockedNet->childCount() > 0) {
-		if (m_IsEnabledWFP && !FindEntryInSettingList("AllowNetworkAccess", "<BlockNetAccess>,n"))
+		if (theGUI->IsWFPEnabled() && !FindEntryInSettingList("AllowNetworkAccess", "<BlockNetAccess>,n"))
 			m_pBox->InsertText("AllowNetworkAccess", "<BlockNetAccess>,n");
 	}
 	else
@@ -123,7 +122,7 @@ void COptionsWindow::LoadBlockINet()
 {
 	if (IsAccessEntrySet(eFile, "!<InternetAccess>", eClosed, "InternetAccessDevices"))
 		ui.cmbBlockINet->setCurrentIndex(ui.cmbBlockINet->findData(2));
-	else if (m_IsEnabledWFP && (FindEntryInSettingList("AllowNetworkAccess", "!<InternetAccess>,n") 
+	else if (theGUI->IsWFPEnabled() && (FindEntryInSettingList("AllowNetworkAccess", "!<InternetAccess>,n") 
 		|| (m_WFPisBlocking && !FindEntryInSettingList("AllowNetworkAccess", "y"))))
 		ui.cmbBlockINet->setCurrentIndex(ui.cmbBlockINet->findData(1));
 	else
@@ -156,7 +155,7 @@ void COptionsWindow::LoadBlockINet()
 			SetProgramItem(Value, pItem, 0);
 	
 			pItem->setData(1, Qt::UserRole, Mode);
-			if (!m_IsEnabledWFP && Mode == 1) Mode = -1; // this mode is not available
+			if (!theGUI->IsWFPEnabled() && Mode == 1) Mode = -1; // this mode is not available
 			pItem->setText(1, GetINetModeStr(Mode));
 
 			ui.treeINet->addTopLevelItem(pItem);
@@ -208,7 +207,7 @@ void COptionsWindow::OnINetItemDoubleClicked(QTreeWidgetItem* pItem, int Column)
 
 	QComboBox* pMode = new QComboBox();
 	for (int i = 0; i < 3; i++) {
-		if (!m_IsEnabledWFP && i == 1) continue; // this mode is not available
+		if (!theGUI->IsWFPEnabled() && i == 1) continue; // this mode is not available
 		pMode->addItem(GetINetModeStr(i), i);
 	}
 	pMode->setCurrentIndex(pMode->findData(pItem->data(1, Qt::UserRole)));

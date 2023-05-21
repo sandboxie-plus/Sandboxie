@@ -439,7 +439,7 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
     QComboBox* pNetAccess = new QComboBox();
     pNetAccess->addItem(tr("Allow network/internet access"));
 	pNetAccess->addItem(tr("Block network/internet by denying access to Network devices"));
-	if (theAPI->GetGlobalSettings()->GetBool("NetworkEnableWFP", false)) 
+	if (theGUI->IsWFPEnabled()) 
         pNetAccess->addItem(tr("Block network/internet using Windows Filtering Platform"));
     pNetAccess->setCurrentIndex(theConf->GetInt("BoxDefaults/BlockNetwork", 0));
     layout->addWidget(pNetAccess, row++, 1, 1, 3);

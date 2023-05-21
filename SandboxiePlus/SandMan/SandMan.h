@@ -35,6 +35,8 @@ public:
 
 	static QString		GetVersion();
 
+	bool				IsWFPEnabled() const { return (g_FeatureFlags & CSbieAPI::eSbieFeatureWFP) != 0; }
+
 	SB_PROGRESS			RecoverFiles(const QString& BoxName, const QList<QPair<QString, QString>>& FileList, QWidget* pParent, int Action = 0);
 	SB_PROGRESS			CheckFiles(const QString& BoxName, const QStringList& Files);
 

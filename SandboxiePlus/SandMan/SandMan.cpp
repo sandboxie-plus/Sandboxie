@@ -1263,7 +1263,7 @@ QString CSandMan::GetBoxDescription(int boxType)
 	}
 	
 	if(boxType == CSandBoxPlus::eHardenedPlus || boxType == CSandBoxPlus::eDefaultPlus || boxType == CSandBoxPlus::eAppBoxPlus)
-		Info.append(tr("\n\nThis box <a href=\"sbie://docs/privacy-mode\">prevents access to all user data</a> locations, except explicitly granted in the Resource Access options."));
+		Info.append(tr("<br /><br />This box <a href=\"sbie://docs/privacy-mode\">prevents access to all user data</a> locations, except explicitly granted in the Resource Access options."));
 
 	return Info;
 }
@@ -2913,6 +2913,8 @@ void CSandMan::OnIniReloaded()
 
 	m_pBoxView->ReloadUserConfig();
 	m_pPopUpWindow->ReloadHiddenMessages();
+
+	g_FeatureFlags = theAPI->GetFeatureFlags();
 }
 
 void CSandMan::OnMonitoring()

@@ -506,7 +506,6 @@ protected:
 	bool m_RecoveryChanged;
 	bool m_AdvancedChanged;
 
-	bool m_IsEnabledWFP;
 	bool m_WFPisBlocking;
 
 	bool m_Template;

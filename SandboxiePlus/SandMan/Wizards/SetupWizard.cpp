@@ -81,8 +81,10 @@ bool CSetupWizard::ShowWizard()
     if (wizard.field("useBrowserIcon").toBool())
         CSettingsWindow__AddBrowserIcon();
 
-    if (wizard.field("useWFP").toBool())
+    if (wizard.field("useWFP").toBool()) {
         theAPI->GetGlobalSettings()->SetBool("NetworkEnableWFP", true);
+        theAPI->ReloadConfig(true);
+    }
 
     if (wizard.field("isUpdate").toBool()) {
         theConf->SetValue("Options/CheckForUpdates", 1);

@@ -13,7 +13,8 @@ CFileView::CFileView(QWidget *parent)
 	m_pMainLayout->setContentsMargins(0,0,0,0);
 	this->setLayout(m_pMainLayout);
 
-    m_pTreeView = new QTreeView();
+    m_pTreeView = new QTreeViewEx();
+    m_pTreeView->setColumnFixed(0, true);
     m_pTreeView->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
     m_pMainLayout->addWidget(m_pTreeView, 0, 0);
 

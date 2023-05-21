@@ -32,7 +32,7 @@ protected:
 
 private:
 	QGridLayout*		m_pMainLayout;
-	QTreeView*			m_pTreeView;
+	QTreeViewEx*		m_pTreeView;
 	QFileSystemModel*	m_pFileModel;
 };
 

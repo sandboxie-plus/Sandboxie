@@ -31,6 +31,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed The checkbox for the Open System Protected Storage setting appears to be unchecked [#2866](https://github.com/sandboxie-plus/Sandboxie/issues/2866)
 - fixed Firewall Rules - Colors make testing difficult in dark mode [#2900](https://github.com/sandboxie-plus/Sandboxie/issues/2900)
 - fixed RecoverFolder shows GUID instead of folder name [#2918](https://github.com/sandboxie-plus/Sandboxie/issues/2918)
+- fixed System tray icon hourglass overlay gets stuck when operation is stopped [#2869](https://github.com/sandboxie-plus/Sandboxie/issues/2869)
+
 
 
 

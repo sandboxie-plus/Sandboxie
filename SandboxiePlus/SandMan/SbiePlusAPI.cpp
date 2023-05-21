@@ -946,6 +946,7 @@ next:
 		m_JobQueue.removeFirst();
 		theAPI->m_JobCount--;
 		if (Status.IsError()) {
+			theAPI->m_JobCount -= m_JobQueue.count();
 			m_JobQueue.clear();
 			theGUI->CheckResults(QList<SB_STATUS>() << Status);
 			return;
@@ -966,12 +967,14 @@ void CSandBoxPlus::OnAsyncFinished()
 	theAPI->m_JobCount--;
 	CSbieProgressPtr pProgress = pJob->GetProgress();
 	if (pProgress->IsCanceled()) {
+		theAPI->m_JobCount -= m_JobQueue.count();
 		m_JobQueue.clear();
 		return;
 	}
 
 	SB_STATUS Status = pProgress->GetStatus();
 	if (Status.IsError()) {
+		theAPI->m_JobCount -= m_JobQueue.count();
 		m_JobQueue.clear();
 		theGUI->CheckResults(QList<SB_STATUS>() << Status, true);
 		return;

@@ -241,13 +241,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkCopyProgress">
-                 <property name="text">
-                  <string>Show file migration progress when copying large files into a sandbox</string>
-                 </property>
-                </widget>
-               </item>
                <item row="8" column="0" rowspan="3" colspan="3">
                 <widget class="QTreeWidget" name="treeMessages">
                  <column>
@@ -276,13 +269,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="4" column="1">
-                <widget class="QCheckBox" name="chkNotifyRecovery">
-                 <property name="text">
-                  <string>Show recoverable files as notifications</string>
-                 </property>
-                </widget>
-               </item>
                <item row="10" column="3">
                 <widget class="QToolButton" name="btnDelMessage">
                  <property name="sizePolicy">
@@ -299,16 +285,6 @@
                  </property>
                  <property name="text">
                   <string>Delete Entry</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkNoMessages">
-                 <property name="text">
-                  <string>Don't show the popup message log for all SBIE messages</string>
-                 </property>
-                 <property name="checked">
-                  <bool>false</bool>
                  </property>
                 </widget>
                </item>
@@ -339,16 +315,6 @@
                  </property>
                 </spacer>
                </item>
-               <item row="2" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkSilentMode">
-                 <property name="toolTip">
-                  <string>This option also enables asynchronous operation when needed and suspends updates.</string>
-                 </property>
-                 <property name="text">
-                  <string>Suppress pop-up notifications when in game / presentation mode</string>
-                 </property>
-                </widget>
-               </item>
                <item row="7" column="0" colspan="4">
                 <widget class="QLabel" name="label_12">
                  <property name="baseSize">
@@ -367,6 +333,53 @@
                   <bool>true</bool>
                  </property>
                 </widget>
+               </item>
+               <item row="5" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkNoMessages">
+                 <property name="text">
+                  <string>Disable SBIE messages popups (SBIE will still be logged to the log tab)</string>
+                 </property>
+                 <property name="checked">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkNotifyRecovery">
+                 <property name="text">
+                  <string>Show recoverable files as notifications</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkCopyProgress">
+                 <property name="text">
+                  <string>Show file migration progress when copying large files into a sandbox</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkSilentMode">
+                 <property name="toolTip">
+                  <string>This option also enables asynchronous operation when needed and suspends updates.</string>
+                 </property>
+                 <property name="text">
+                  <string>Suppress pop-up notifications when in game / presentation mode</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <spacer name="horizontalSpacer_13">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </item>

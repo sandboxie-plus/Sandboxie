@@ -1030,6 +1030,17 @@ void CSandBoxPlus::OnCancelAsync()
 	pProgress->Cancel();
 }
 
+QString CSandBoxPlus::MakeBoxCommand(const QString& FileName)
+{
+	QString BoxFileName = FileName;
+	//if (BoxFileName.indexOf(m_FilePath, Qt::CaseInsensitive) == 0) {
+	//	BoxFileName.remove(0, m_FilePath.length());
+	//	if (BoxFileName.at(0) != '\\')
+	//		BoxFileName.prepend('\\');
+	//}
+	return BoxFileName.replace(m_FilePath, "%BoxRoot%", Qt::CaseInsensitive);
+}
+
 QString CSandBoxPlus::GetCommandFile(const QString& Command)
 {
 	QString Path = Command;
@@ -1041,9 +1052,17 @@ QString CSandBoxPlus::GetCommandFile(const QString& Command)
 		int End = Path.indexOf(" ");
 		if (End != -1) Path.truncate(End);
 	}
+	//if (Path.left(1) == "\\")
+	//	Path.prepend(m_FilePath);
+	return Path.replace("%BoxRoot%", m_FilePath, Qt::CaseInsensitive);
+}
 
-	if (Path.left(1) == "\\")
-		Path.prepend(m_FilePath);
-
-	return Path;
+QString CSandBoxPlus::GetFullCommand(const QString& Command)
+{
+	QString FullCmd = Command;
+	//if(FullCmd.left(1) == "\\")
+	//	FullCmd.prepend(m_FilePath);
+	//else if(FullCmd.left(2) == "\"\\")
+	//	FullCmd.insert(1, m_FilePath);
+	return FullCmd.replace("%BoxRoot%", m_FilePath, Qt::CaseInsensitive);
 }

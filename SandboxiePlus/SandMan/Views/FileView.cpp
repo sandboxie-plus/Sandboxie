@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "FileView.h"
 #include "SandMan.h"
+#include "../MiscHelpers/Common/Common.h"
 #include "../MiscHelpers/Common/Settings.h"
 #include "../MiscHelpers/Common/TreeItemModel.h"
 #include "../MiscHelpers/Common/OtherFunctions.h"
@@ -105,6 +106,7 @@ void CFileView::OnAboutToBeModified()
 #define MENU_RECOVER_TO_ANY     2
 #define MENU_CREATE_SHORTCUT    3
 #define MENU_CHECK_FILE         4
+#define MENU_PIN_FILE           5
 
 void addSeparatorToShellContextMenu(HMENU hMenu)
 {
@@ -116,18 +118,22 @@ void addSeparatorToShellContextMenu(HMENU hMenu)
     InsertMenuItem(hMenu, 0, TRUE, &menu_item_info);
 }
 
-void addItemToShellContextMenu(HMENU hMenu, const wchar_t *name, int ID)
+void addItemToShellContextMenu(HMENU hMenu, const wchar_t *name, int ID, bool bChecked = false)
 {
     MENUITEMINFO menu_item_info;
     memset(&menu_item_info, 0, sizeof(MENUITEMINFO));
     menu_item_info.cbSize = sizeof(MENUITEMINFO);
     menu_item_info.fMask = MIIM_ID | MIIM_STRING | MIIM_DATA;
+    if (bChecked) {
+        menu_item_info.fMask |= MIIM_STATE;
+        menu_item_info.fState |= MFS_CHECKED;
+    }
     menu_item_info.wID = 0xF000 + ID;
     menu_item_info.dwTypeData = (wchar_t*)name;
     InsertMenuItem(hMenu, 0, TRUE, &menu_item_info);
 }
 
-int openShellContextMenu(const QStringList& Files, void* parentWindow, const CSandBoxPtr& pBox)
+int openShellContextMenu(const QStringList& Files, void* parentWindow, const CSandBoxPtr& pBox, QString* pPin = NULL)
 {
     CComPtr<IShellFolder> pDesktop;
     if (!SUCCEEDED(SHGetDesktopFolder(&pDesktop)))
@@ -195,6 +201,27 @@ int openShellContextMenu(const QStringList& Files, void* parentWindow, const CSa
             addItemToShellContextMenu(hMenu, Str4.c_str(), MENU_CHECK_FILE);
         }
 
+        if (pPin && Files.count() == 1) 
+        {
+            auto pBoxPlus = pBox.objectCast<CSandBoxPlus>();
+            QStringList RunOptions = pBox->GetTextList("RunCommand", true);
+
+            QString FoundPin;
+            QString FileName = Files.first();
+            foreach(const QString & RunOption, RunOptions) {
+		        QString CmdFile = pBoxPlus->GetCommandFile(Split2(RunOption, "|").second);
+		        if(CmdFile.compare(FileName, Qt::CaseInsensitive) == 0) {
+                    FoundPin = RunOption;
+                    break;
+                }
+            }
+
+            *pPin = FoundPin;
+
+            std::wstring Str5 = CFileView::tr("Pin to Box Run Menu").toStdWString();
+            addItemToShellContextMenu(hMenu, Str5.c_str(), MENU_PIN_FILE, !FoundPin.isEmpty());
+        }
+
         POINT point;
         GetCursorPos(&point);
         int iCmd = TrackPopupMenuEx(hMenu, TPM_RETURNCMD, point.x, point.y, (HWND)parentWindow, NULL);
@@ -246,7 +273,8 @@ void CFileView::OnFileMenu(const QPoint&)
     if (Files.isEmpty())
         return;
 
-    int iCmd = openShellContextMenu(Files, (void*)this->winId(), m_pBox);
+    QString FoundPin;
+    int iCmd = openShellContextMenu(Files, (void*)this->winId(), m_pBox, &FoundPin);
     if (iCmd == 0)
         return;
 
@@ -294,6 +322,15 @@ void CFileView::OnFileMenu(const QPoint&)
             SB_PROGRESS Status = theGUI->CheckFiles(m_pBox->GetName(), Files);
             if (Status.GetStatus() == OP_ASYNC)
                 theGUI->AddAsyncOp(Status.GetValue());
+            break;
+        }
+        case MENU_PIN_FILE:
+        {
+            auto pBoxPlus = m_pBox.objectCast<CSandBoxPlus>();
+            if (FoundPin.isEmpty())
+				pBoxPlus->InsertText("RunCommand", Split2(Files.first(), "\\", true).second + "|\"" + pBoxPlus->MakeBoxCommand(Files.first()) + "\"");
+            else
+				pBoxPlus->DelValue("RunCommand", FoundPin);
             break;
         }
         case MENU_CREATE_SHORTCUT:

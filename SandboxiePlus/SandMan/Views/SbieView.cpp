@@ -600,20 +600,10 @@ void CSbieView::UpdateProcMenu(const CBoxedProcessPtr& pProcess, int iProcessCou
 	QString FoundPin;
 	QString FileName = pProcess->GetFileName();
 	foreach(const QString& RunOption, RunOptions) {
-		QString Cmd = Split2(RunOption, "|").second;
-		int pos = Cmd.indexOf(FileName);
-		if (pos == 0 || pos == 1) { // 1 for "
+		QString CmdFile = pBoxPlus->GetCommandFile(Split2(RunOption, "|").second);
+		if(CmdFile.compare(FileName, Qt::CaseInsensitive) == 0) {
 			FoundPin = RunOption;
 			break;
-		}
-	}
-	if (FoundPin.isEmpty() && FileName.indexOf(pBoxPlus->GetFileRoot(), Qt::CaseInsensitive) == 0) {
-		FileName.remove(0, pBoxPlus->GetFileRoot().length());
-		foreach(const QString& RunOption, RunOptions) {
-			if (Split2(RunOption, "|").second.indexOf(FileName) == 0) {
-				FoundPin = RunOption;
-				break;
-			}
 		}
 	}
 
@@ -1451,11 +1441,9 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		QString Command = Action->data().toString();
 		if (Command.isEmpty())
 			Results.append(SandBoxes.first()->RunStart("start_menu"));
-		else
-		{
-			if (Command.left(1) == "\\" && !SandBoxes.isEmpty())
-				Command.prepend(SandBoxes.first()->GetFileRoot());
-			Results.append(SandBoxes.first()->RunStart(Command));
+		else {
+			auto pBoxEx = SandBoxes.first().objectCast<CSandBoxPlus>();
+			Results.append(SandBoxes.first()->RunStart(pBoxEx->GetFullCommand(Command)));
 		}
 	}
 
@@ -1519,18 +1507,8 @@ void CSbieView::OnProcessAction(QAction* Action, const QList<CBoxedProcessPtr>& 
 		else if (Action == m_pMenuPinToRun)
 		{
 			CSandBoxPlus* pBoxPlus = pProcess.objectCast<CSbieProcess>()->GetBox();
-
 			if (m_pMenuPinToRun->isChecked())
-			{
-				QString FileName = pProcess->GetFileName();
-				if (FileName.indexOf(pBoxPlus->GetFileRoot(), Qt::CaseInsensitive) == 0) {
-					FileName.remove(0, pBoxPlus->GetFileRoot().length());
-					if (FileName.at(0) != '\\')
-						FileName.prepend('\\');
-				}
-
-				pBoxPlus->InsertText("RunCommand", pProcess->GetProcessName() + "|\"" + pProcess->GetFileName().replace(pBoxPlus->GetFileRoot(), "%BoxRoot%", Qt::CaseInsensitive) +"\"");
-			}
+				pBoxPlus->InsertText("RunCommand", pProcess->GetProcessName() + "|\"" + pBoxPlus->MakeBoxCommand(pProcess->GetFileName()) + "\"");
 			else if(!m_pMenuPinToRun->data().toString().isEmpty())
 				pBoxPlus->DelValue("RunCommand", m_pMenuPinToRun->data().toString());
 		}
@@ -1774,10 +1752,7 @@ void CSbieView::UpdateRunMenu(const CSandBoxPtr& pBox)
 		} else
 			pMenu = GetMenuFolder(FolderName.first.replace("\\", "/"), m_pMenuRun, m_RunFolders);
 
-		NameCmd.second.replace("%BoxRoot%", pBoxEx->GetFileRoot(), Qt::CaseInsensitive);
-
 		StrPair IconIndex = Split2(NameIcon.second, ",", true);
-		IconIndex.first.replace("%BoxRoot%", pBoxEx->GetFileRoot(), Qt::CaseInsensitive);
 
 		QAction* pAction = pMenu->addAction(FolderName.second, this, SLOT(OnSandBoxAction()));
 		if (IconIndex.first.isEmpty())
@@ -1785,7 +1760,7 @@ void CSbieView::UpdateRunMenu(const CSandBoxPtr& pBox)
 		else if(IconIndex.second.isEmpty())
 			pAction->setIcon(LoadWindowsIcon(pBoxEx->GetCommandFile(NameCmd.second), IconIndex.first.toInt()));
 		else
-			pAction->setIcon(LoadWindowsIcon(IconIndex.first, IconIndex.second.toInt()));
+			pAction->setIcon(LoadWindowsIcon(pBoxEx->GetCommandFile(IconIndex.first), IconIndex.second.toInt()));
 		pAction->setData(NameCmd.second);
 	}
 

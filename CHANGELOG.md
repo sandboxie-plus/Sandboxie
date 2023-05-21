@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added more documentation links to the Plus UI
 - added tray menu option to dismiss a pending update notification
+- added Pin/Favourite files to Tray [#2913](https://github.com/sandboxie-plus/Sandboxie/issues/2913)
 
 ### Changed
 - improved compatibility template for Privacy Enhanced box types (thanks offhub) [#2899](https://github.com/sandboxie-plus/Sandboxie/pull/2899)

@@ -125,7 +125,9 @@ public:
 	virtual bool			IsRecoverySuspended() const			{ return m_SuspendRecovery; }
 	virtual void			SetSuspendRecovery(bool bSet = true) { m_SuspendRecovery = bSet; }
 
+	virtual QString			MakeBoxCommand(const QString& FileName);
 	virtual QString			GetCommandFile(const QString& Command);
+	virtual QString			GetFullCommand(const QString& Command);
 
 	const QSet<QString>&	GetRecentPrograms()					{ return m_RecentPrograms; }
 

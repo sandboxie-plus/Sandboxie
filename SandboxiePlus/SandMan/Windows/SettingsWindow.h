@@ -100,7 +100,7 @@ private slots:
 	void OnOptChanged();
 
 	void OnChangeGUI() { m_bRebuildUI = true; OnOptChanged(); }
-	void OnFeaturesChanged() { m_FeaturesChanged = true; OnOptChanged(); }
+	void OnFeaturesChanged() { m_FeaturesChanged = true; OnGeneralChanged(); }
 	void OnGeneralChanged() { m_GeneralChanged = true; OnOptChanged(); }
 
 	void OnBrowse();

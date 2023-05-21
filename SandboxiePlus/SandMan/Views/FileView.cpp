@@ -31,10 +31,6 @@ CFileView::CFileView(QWidget *parent)
 	m_pTreeView->setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(m_pTreeView, SIGNAL(customContextMenuRequested( const QPoint& )), this, SLOT(OnFileMenu(const QPoint &)));
 	connect(m_pTreeView, SIGNAL(doubleClicked(const QModelIndex &)), this, SLOT(OnFileDblClick(const QModelIndex &)));
-
-    QByteArray Columns = theConf->GetBlob("MainWindow/FileTree_Columns");
-	if (!Columns.isEmpty())
-		m_pTreeView->header()->restoreState(Columns);
 }
 
 CFileView::~CFileView()
@@ -44,7 +40,8 @@ CFileView::~CFileView()
 
 void CFileView::SaveState()
 {
-    theConf->SetBlob("MainWindow/FileTree_Columns", m_pTreeView->header()->saveState());
+    if(m_pFileModel)
+        theConf->SetBlob("MainWindow/FileTree_Columns", m_pTreeView->header()->saveState());
 }
 
 void CFileView::SetBox(const CSandBoxPtr& pBox)
@@ -66,12 +63,18 @@ void CFileView::SetBox(const CSandBoxPtr& pBox)
     //    m_pTreeView->setEnabled(true);
 
     if (m_pFileModel) {
+        SaveState();
+
         delete m_pFileModel;
         m_pFileModel = NULL;
     }
     if (!Root.isEmpty()) {
         m_pFileModel = new QFileSystemModel(this);
         m_pFileModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs | QDir::Files | QDir::Hidden | QDir::System);
+
+        QByteArray Columns = theConf->GetBlob("MainWindow/FileTree_Columns");
+	    if (!Columns.isEmpty())
+		    m_pTreeView->header()->restoreState(Columns);
     }
     m_pTreeView->setModel(m_pFileModel);
 

@@ -389,7 +389,7 @@ Please browse to the correct user profile directory.</oldsource>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="359"/>
+        <location filename="Views/FileView.cpp" line="398"/>
         <source>%1 - Files</source>
         <translation>%1 - fájlok</translation>
     </message>
@@ -397,32 +397,37 @@ Please browse to the correct user profile directory.</oldsource>
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="182"/>
+        <location filename="Views/FileView.cpp" line="188"/>
         <source>Create Shortcut</source>
         <translation>Parancsikon létrehozása</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="188"/>
+        <location filename="Views/FileView.cpp" line="210"/>
+        <source>Pin to Box Run Menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Views/FileView.cpp" line="217"/>
         <source>Recover to Any Folder</source>
         <translation>Visszaállítás mappába</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="190"/>
+        <location filename="Views/FileView.cpp" line="219"/>
         <source>Recover to Same Folder</source>
         <translation>Visszaállítás ugyanabba a mappába</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="194"/>
+        <location filename="Views/FileView.cpp" line="223"/>
         <source>Run Recovery Checks</source>
         <translation>Helyreállítási ellenőrzések futtatása</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="257"/>
+        <location filename="Views/FileView.cpp" line="287"/>
         <source>Select Directory</source>
         <translation>Könyvtár kiválasztása</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="314"/>
+        <location filename="Views/FileView.cpp" line="353"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Parancsikon létrehozása %1 sandboxhoz</translation>
     </message>
@@ -3728,17 +3733,17 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
         <translation>Beállítások:</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="741"/>
+        <location filename="Views/SbieView.cpp" line="731"/>
         <source>[None]</source>
         <translation>[Nincs]</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1012"/>
+        <location filename="Views/SbieView.cpp" line="1002"/>
         <source>Please enter a new group name</source>
         <translation>Az új csoport nevének megadása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="850"/>
+        <location filename="Views/SbieView.cpp" line="840"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation>Biztos benne, hogy eltávolítja a kiválasztott csoporto(ka)t?</translation>
     </message>
@@ -3898,157 +3903,157 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
         <translation>Csoport áthelyezése</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="840"/>
+        <location filename="Views/SbieView.cpp" line="830"/>
         <source>Please enter a new name for the Group.</source>
         <translation>A csoport új nevének megadása.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="887"/>
+        <location filename="Views/SbieView.cpp" line="877"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation>Bejegyzések mozgatása (a negatív értékek felfelé, a pozitív értékek lefelé):</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="935"/>
+        <location filename="Views/SbieView.cpp" line="925"/>
         <source>A group can not be its own parent.</source>
         <translation>Egy csoport nem lehet saját szülője.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1040"/>
+        <location filename="Views/SbieView.cpp" line="1030"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
         <translation>A Sandbox és a homokózó neve nem használhatja a &apos;,()&apos; szimbólumot.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1045"/>
+        <location filename="Views/SbieView.cpp" line="1035"/>
         <source>This name is already used for a Box Group.</source>
         <translation>Ezt a nevet már egy homokozó csoport használja.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1050"/>
+        <location filename="Views/SbieView.cpp" line="1040"/>
         <source>This name is already used for a Sandbox.</source>
         <translation>Ezt a nevet már egy homokozó használja.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1100"/>
-        <location filename="Views/SbieView.cpp" line="1170"/>
-        <location filename="Views/SbieView.cpp" line="1410"/>
+        <location filename="Views/SbieView.cpp" line="1090"/>
+        <location filename="Views/SbieView.cpp" line="1160"/>
+        <location filename="Views/SbieView.cpp" line="1400"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Ne jelenjen meg többet ez az üzenet.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1161"/>
-        <location filename="Views/SbieView.cpp" line="1181"/>
-        <location filename="Views/SbieView.cpp" line="1587"/>
+        <location filename="Views/SbieView.cpp" line="1151"/>
+        <location filename="Views/SbieView.cpp" line="1171"/>
+        <location filename="Views/SbieView.cpp" line="1565"/>
         <source>This Sandbox is empty.</source>
         <translation>Ez a homokozó üres.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1188"/>
+        <location filename="Views/SbieView.cpp" line="1178"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
         <translation>FIGYELEM: a megnyitott rendszerleíróadatbázis-szerkesztő nincs a homokozóban. Legyen óvatos, és csak az előre kiválasztott homokozó helyeken végezzen változtatásokat.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1189"/>
+        <location filename="Views/SbieView.cpp" line="1179"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>A jövöben ne jelenjen meg többet ez a figyelmeztetés</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1245"/>
+        <location filename="Views/SbieView.cpp" line="1235"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>A duplikált homokzó nevének megadésa.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1245"/>
+        <location filename="Views/SbieView.cpp" line="1235"/>
         <source>%1 Copy</source>
         <translation>%1 másolása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1284"/>
+        <location filename="Views/SbieView.cpp" line="1274"/>
         <source>Select file name</source>
         <translation>Fájlnév kiválasztása</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1284"/>
+        <location filename="Views/SbieView.cpp" line="1274"/>
         <source>7-zip Archive (*.7z)</source>
         <translation>7-zip archívum (*.7z)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1292"/>
+        <location filename="Views/SbieView.cpp" line="1282"/>
         <source>Exporting: %1</source>
         <translation>Exportálás: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1299"/>
+        <location filename="Views/SbieView.cpp" line="1289"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>A homokozó új nevének megadása.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1320"/>
+        <location filename="Views/SbieView.cpp" line="1310"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
         <translation>Biztos benne, hogy eltávolítja a kiválasztott homokozó(ka)t?&lt;br /&gt;&lt;br /&gt;Figyelem: a homokozó tartalma is törlődik!</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1351"/>
+        <location filename="Views/SbieView.cpp" line="1341"/>
         <source>This Sandbox is already empty.</source>
         <translation>Ez a homokozó már üres.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1361"/>
+        <location filename="Views/SbieView.cpp" line="1351"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
         <translation>Törli a kijelölt homokozó tartalmát?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1362"/>
-        <location filename="Views/SbieView.cpp" line="1366"/>
+        <location filename="Views/SbieView.cpp" line="1352"/>
+        <location filename="Views/SbieView.cpp" line="1356"/>
         <source>Also delete all Snapshots</source>
         <translation>Az összes pillatfelvétel törlése</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1365"/>
+        <location filename="Views/SbieView.cpp" line="1355"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
         <translation>Az összes kiválasztott homokozó tartalmás is törli?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1392"/>
+        <location filename="Views/SbieView.cpp" line="1382"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>Leállít minden folyamatot a kiválasztott homokozó(k)ban?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1393"/>
-        <location filename="Views/SbieView.cpp" line="1486"/>
+        <location filename="Views/SbieView.cpp" line="1383"/>
+        <location filename="Views/SbieView.cpp" line="1474"/>
         <source>Terminate without asking</source>
         <translation>Fejezze kérés nélkül</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1408"/>
+        <location filename="Views/SbieView.cpp" line="1398"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
         <translation>Megjelenik a Sandboxie Start menü. Válasszon ki egy alkalmazást a menüből, és a Sandboxie létrehoz egy új parancsikont a valódi asztalon, amellyel meghívhatja a kiválasztott alkalmazást a Sandboxie felügyelete alatt.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1443"/>
-        <location filename="Views/SbieView.cpp" line="1513"/>
+        <location filename="Views/SbieView.cpp" line="1433"/>
+        <location filename="Views/SbieView.cpp" line="1501"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Parancsikon létrehozása %1 homokozóhoz</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1485"/>
+        <location filename="Views/SbieView.cpp" line="1473"/>
         <source>Do you want to terminate %1?</source>
         <oldsource>Do you want to %1 %2?</oldsource>
         <translation>Leállítja a következőt: %1?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1485"/>
+        <location filename="Views/SbieView.cpp" line="1473"/>
         <source>the selected processes</source>
         <translation>A kiválasztott folyamatot&quot;&gt;</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1546"/>
+        <location filename="Views/SbieView.cpp" line="1524"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Ebben a homokozóban nincsenek internetkorlátozások. Engedélyezi a korlátozást?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1630"/>
+        <location filename="Views/SbieView.cpp" line="1608"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Ez a homokozó le van tiltva. Bekapcsolja?</translation>
     </message>
@@ -6468,7 +6473,7 @@ Felhívjuk figyelmét, hogy ezek az értékek jelenleg felhasználóspecifikusak
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1426"/>
+        <location filename="Views/SbieView.cpp" line="1416"/>
         <source>Drive %1</source>
         <translation>Lemez %1</translation>
     </message>

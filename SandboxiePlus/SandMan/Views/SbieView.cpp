@@ -1528,7 +1528,7 @@ void CSbieView::OnProcessAction(QAction* Action, const QList<CBoxedProcessPtr>& 
 						FileName.prepend('\\');
 				}
 
-				pBoxPlus->InsertText("RunCommand", pProcess->GetProcessName() + "|\"" + pProcess->GetFileName()+"\"");
+				pBoxPlus->InsertText("RunCommand", pProcess->GetProcessName() + "|\"" + pProcess->GetFileName().replace(pBoxPlus->GetFileRoot(), "%BoxRoot%", Qt::CaseInsensitive) +"\"");
 			}
 			else if(!m_pMenuPinToRun->data().toString().isEmpty())
 				pBoxPlus->DelValue("RunCommand", m_pMenuPinToRun->data().toString());
@@ -1773,7 +1773,10 @@ void CSbieView::UpdateRunMenu(const CSandBoxPtr& pBox)
 		} else
 			pMenu = GetMenuFolder(FolderName.first.replace("\\", "/"), m_pMenuRun, m_RunFolders);
 
+		NameCmd.second.replace("%BoxRoot%", pBoxEx->GetFileRoot(), Qt::CaseInsensitive);
+
 		StrPair IconIndex = Split2(NameIcon.second, ",", true);
+		IconIndex.first.replace("%BoxRoot%", pBoxEx->GetFileRoot(), Qt::CaseInsensitive);
 
 		QAction* pAction = pMenu->addAction(FolderName.second, this, SLOT(OnSandBoxAction()));
 		if (IconIndex.first.isEmpty())

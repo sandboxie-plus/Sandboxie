@@ -896,7 +896,8 @@ void COptionsWindow::OnBrowsePath()
 	if (Name.isEmpty())
 		return;
 
-	AddRunItem(Name, "", "\"" + Value + "\"");
+	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+	AddRunItem(Name, "", "\"" + (pBoxEx ? Value.replace(pBoxEx->GetFileRoot(), "%BoxRoot%", Qt::CaseInsensitive) : Value) + "\"");
 	m_GeneralChanged = true;
 	OnOptChanged();
 }

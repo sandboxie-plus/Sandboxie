@@ -138,7 +138,7 @@ bool CSupportDialog::ShowDialog(bool NoGo, int Wait)
 			Message += tr("Please continue <a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">supporting the project</a> "
 				"by renewing your <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a> and continue using the <b>enhanced functionality</b> in new builds.");
 		else
-			Message += tr("Sandboxie <u>without</u> a valid supporter certificate will sometimes <b><font color='red'>pause for a few seconds</font></b>, to give you time to contemplate the option of <a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">supporting the project</a>.<br /><br />"
+			Message += tr("Sandboxie <u>without</u> a valid supporter certificate will sometimes <b><font color='red'>pause for a few seconds</font></b>. This pause allows you to consider <a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">purchasing a supporter certificate</a> or <a href=\"https://sandboxie-plus.com/go.php?to=sbie-contribute\">earning one by contributing</a> to the project. <br /><br />"
 				"A <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a> not just removes this reminder, but also enables <b>exclusive enhanced functionality</b> providing better security and compatibility.");
 	}
 

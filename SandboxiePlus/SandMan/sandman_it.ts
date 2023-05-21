@@ -21,17 +21,17 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="440"/>
         <source>Allow network/internet access</source>
-        <translation>Consenti accesso di rete/internet</translation>
+        <translation>Consenti accesso di rete/Internet</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="441"/>
         <source>Block network/internet by denying access to Network devices</source>
-        <translation>Blocca rete/internet negando l&apos;accesso ai dispositivi di rete</translation>
+        <translation>Blocca rete/Internet negando l&apos;accesso ai dispositivi di rete</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="443"/>
         <source>Block network/internet using Windows Filtering Platform</source>
-        <translation>Blocca rete/internet usando la piattaforma di filtraggio di Windows</translation>
+        <translation>Blocca rete/Internet usando la piattaforma di filtraggio di Windows</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="448"/>
@@ -395,7 +395,7 @@ Si prega di consultare la directory del profilo utente corretta.</translation>
     <message>
         <location filename="Views/FileView.cpp" line="210"/>
         <source>Pin to Box Run Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi al menu Avvia dell&apos;area virtuale</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="217"/>
@@ -1796,7 +1796,7 @@ Nome del file: %3</translation>
         <location filename="Windows/PopUpWindow.cpp" line="276"/>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation>Consentire l&apos;accesso a internet per %1 (%2)?
+        <translation>Consentire l&apos;accesso a Internet per %1 (%2)?
 Percorso completo: %3</translation>
     </message>
     <message>
@@ -2001,12 +2001,12 @@ Percorso completo: %4</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="677"/>
         <source>No INet (with Exceptions)</source>
-        <translation>No INet (con eccezioni)</translation>
+        <translation>No Internet (con eccezioni)</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="679"/>
         <source>No INet</source>
-        <translation>No INet</translation>
+        <translation>No Internet</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="682"/>
@@ -3200,7 +3200,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="SandMan.cpp" line="3338"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
-        <translation>Sandboxie Plus è la continuazione open source di Sandboxie.&lt;br /&gt;Visita &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; per informazioni.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Versione driver: %1&lt;br /&gt;Funzioni attive: %2&lt;br /&gt;&lt;br /&gt;Icone by &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Traduzione italiana a cura di &lt;a href=&quot;https://www.eng2ita.net&quot;&gt;eng2ita.net&lt;/a&gt;&lt;br /&gt;</translation>
+        <translation>Sandboxie Plus è la continuazione open source di Sandboxie.&lt;br /&gt;Visita &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; per informazioni.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Versione driver: %1&lt;br /&gt;Funzioni attive: %2&lt;br /&gt;&lt;br /&gt;Icone by &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Traduzione italiana a cura di &lt;a href=&quot;https://eng2ita.altervista.org&quot;&gt;Eng2ita&lt;/a&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2226"/>
@@ -3598,7 +3598,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Views/SbieView.cpp" line="218"/>
         <source>Block Internet Access</source>
-        <translation>Blocca accesso a internet</translation>
+        <translation>Blocca accesso a Internet</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="220"/>
@@ -3689,7 +3689,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Views/SbieView.cpp" line="260"/>
         <source>Allow internet access</source>
-        <translation>Consenti accesso a internet</translation>
+        <translation>Consenti accesso a Internet</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="262"/>
@@ -5329,12 +5329,12 @@ I processi in questa area virtuale verranno eseguiti con un token di processo pe
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2911"/>
         <source>Issue message 1307 when a program is denied internet access</source>
-        <translation>Mostra messaggio 1307 quando è negato l&apos;accesso a internet</translation>
+        <translation>Mostra messaggio 1307 quando è negato l&apos;accesso a Internet</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2939"/>
         <source>Note: Programs installed to this sandbox won&apos;t be able to access the internet at all.</source>
-        <translation>Nota: i programmi installati nell&apos;area virtuale non potranno accedere a internet.</translation>
+        <translation>Nota: i programmi installati nell&apos;area virtuale non potranno accedere a Internet.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2925"/>
@@ -5503,7 +5503,7 @@ I processi in questa area virtuale verranno eseguiti con un token di processo pe
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2978"/>
         <source>Set network/internet access for unlisted processes:</source>
-        <translation>Imposta accesso di rete/internet per i processi non presenti in elenco:</translation>
+        <translation>Imposta accesso di rete/Internet per i processi non presenti in elenco:</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3025"/>
@@ -7102,7 +7102,7 @@ in modo diverso a seconda dell&apos;interfaccia di visualizzazione.</translation
     <message>
         <location filename="Forms/SettingsWindow.ui" line="753"/>
         <source>You can configure custom entries for all sandboxes run menus.</source>
-        <translation>È possibile configurare voci personalizzate per tutti i menu Avvia nelle aree virtuali.</translation>
+        <translation>È possibile configurare voci personalizzate per tutti i menu Avvia delle aree virtuali.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="775"/>
@@ -7119,7 +7119,7 @@ in modo diverso a seconda dell&apos;interfaccia di visualizzazione.</translation
         <location filename="Forms/SettingsWindow.ui" line="340"/>
         <source>Disable SBIE messages popups (they will still be logged to the Messages tab)</source>
         <oldsource>Disable SBIE messages popups (SBIE will still be logged to the log tab)</oldsource>
-        <translation>Disattiva le notifiche popup per tutti i messaggi di Sandboxie</translation>
+        <translation>Disattiva le notifiche popup dei messaggi di Sandboxie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1097"/>

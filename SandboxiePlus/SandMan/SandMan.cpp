@@ -3128,6 +3128,11 @@ void CSandMan::OpenUrl(const QUrl& url)
 	else ShellExecute(MainWndHandle, NULL, url.toString().toStdWString().c_str(), NULL, NULL, SW_SHOWNORMAL);
 }
 
+bool CSandMan::IsWFPEnabled() const 
+{ 
+	return (g_FeatureFlags & CSbieAPI::eSbieFeatureWFP) != 0; 
+}
+
 QString CSandMan::GetVersion()
 {
 	QString Version = QString::number(VERSION_MJR) + "." + QString::number(VERSION_MIN) //.rightJustified(2, '0')

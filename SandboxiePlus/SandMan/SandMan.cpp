@@ -2443,15 +2443,19 @@ SB_RESULT(void*) CSandMan::ConnectSbie()
 SB_STATUS CSandMan::ConnectSbieImpl()
 {
 	SB_STATUS Status = theAPI->Connect(g_PendingMessage.isEmpty(), theConf->GetBool("Options/UseInteractiveQueue", true));
-
-	if (Status.GetStatus() == 0xC0000038L /*STATUS_DEVICE_ALREADY_ATTACHED*/) {
-		OnLogMessage(tr("CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over."));
-		return SB_OK;
-	}
-
+	
 	if (!g_PendingMessage.isEmpty()) {
 		OnMessage(g_PendingMessage);
 		PostQuitMessage(0);
+	}
+
+	if (Status.GetStatus() == 0xC0000038L /*STATUS_DEVICE_ALREADY_ATTACHED*/) {
+		OnLogMessage(tr("CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over."));
+		Status = SB_OK;
+	}
+	else if (Status.GetStatus() == 0xC000A000L /*STATUS_INVALID_SIGNATURE*/) {
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("<b>ERROR:</b> The Sandboxie-Plus Manager (SandMan.exe) does not have a valid signature (SandMan.exe.sig). Please download a trusted release from the <a href=\"https://sandboxie-plus.com/go.php?to=sbie-get\">official Download page</a>."));
+		Status = SB_OK;
 	}
 
 	return Status;

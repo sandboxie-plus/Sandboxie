@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - improved compatibility template for Privacy Enhanced box types (thanks offhub) [#2899](https://github.com/sandboxie-plus/Sandboxie/pull/2899)
+- improved signature error message [#2931](https://github.com/sandboxie-plus/Sandboxie/issues/2931)
 
 ### Fixed
 - fixed Qt6 issues in ARM64 build

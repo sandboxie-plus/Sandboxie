@@ -186,8 +186,31 @@ int openShellContextMenu(const QStringList& Files, void* parentWindow, const CSa
         addSeparatorToShellContextMenu(hMenu);
 
         std::wstring Str1 = CFileView::tr("Create Shortcut").toStdWString();
-        if (Files.count() == 1) {
+        if (Files.count() == 1) 
+        {
             addItemToShellContextMenu(hMenu, Str1.c_str(), MENU_CREATE_SHORTCUT);
+
+            if (pPin)  
+            {
+                auto pBoxPlus = pBox.objectCast<CSandBoxPlus>();
+                QStringList RunOptions = pBox->GetTextList("RunCommand", true);
+
+                QString FoundPin;
+                QString FileName = Files.first();
+                foreach(const QString & RunOption, RunOptions) {
+		            QString CmdFile = pBoxPlus->GetCommandFile(Split2(RunOption, "|").second);
+		            if(CmdFile.compare(FileName, Qt::CaseInsensitive) == 0) {
+                        FoundPin = RunOption;
+                        break;
+                    }
+                }
+
+                *pPin = FoundPin;
+
+                std::wstring Str5 = CFileView::tr("Pin to Box Run Menu").toStdWString();
+                addItemToShellContextMenu(hMenu, Str5.c_str(), MENU_PIN_FILE, !FoundPin.isEmpty());
+            }
+
             addSeparatorToShellContextMenu(hMenu);
         }
 
@@ -199,27 +222,6 @@ int openShellContextMenu(const QStringList& Files, void* parentWindow, const CSa
         if (!pBox->GetTextList("OnFileRecovery", true, false, true).isEmpty()) {
             std::wstring Str4 = CFileView::tr("Run Recovery Checks").toStdWString();
             addItemToShellContextMenu(hMenu, Str4.c_str(), MENU_CHECK_FILE);
-        }
-
-        if (pPin && Files.count() == 1) 
-        {
-            auto pBoxPlus = pBox.objectCast<CSandBoxPlus>();
-            QStringList RunOptions = pBox->GetTextList("RunCommand", true);
-
-            QString FoundPin;
-            QString FileName = Files.first();
-            foreach(const QString & RunOption, RunOptions) {
-		        QString CmdFile = pBoxPlus->GetCommandFile(Split2(RunOption, "|").second);
-		        if(CmdFile.compare(FileName, Qt::CaseInsensitive) == 0) {
-                    FoundPin = RunOption;
-                    break;
-                }
-            }
-
-            *pPin = FoundPin;
-
-            std::wstring Str5 = CFileView::tr("Pin to Box Run Menu").toStdWString();
-            addItemToShellContextMenu(hMenu, Str5.c_str(), MENU_PIN_FILE, !FoundPin.isEmpty());
         }
 
         POINT point;

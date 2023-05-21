@@ -337,7 +337,7 @@
                <item row="5" column="1" colspan="3">
                 <widget class="QCheckBox" name="chkNoMessages">
                  <property name="text">
-                  <string>Disable SBIE messages popups (SBIE will still be logged to the log tab)</string>
+                  <string>Disable SBIE messages popups (they will still be logged to the Messages tab)</string>
                  </property>
                  <property name="checked">
                   <bool>false</bool>

@@ -38,6 +38,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed File Panel doesn't allow to adjust columns size in a permanent way [#2930](https://github.com/sandboxie-plus/Sandboxie/issues/2930)
 - fixed Renaming a box with sandboxed run entries can break those entries. [#2921](https://github.com/sandboxie-plus/Sandboxie/issues/2921)
 - fixed WFP not enabled after Setup Wizard [#2915](https://github.com/sandboxie-plus/Sandboxie/issues/2915)
+- fixed Name column in the sandbox view should never be hidden [#2933](https://github.com/sandboxie-plus/Sandboxie/issues/2933)
+
 
 
 

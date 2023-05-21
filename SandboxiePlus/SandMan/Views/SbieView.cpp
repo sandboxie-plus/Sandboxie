@@ -39,6 +39,7 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 
 	// SbieTree
 	m_pSbieTree = new QTreeViewEx();
+	m_pSbieTree->setColumnFixed(0, true);
 	m_pSbieTree->setAlternatingRowColors(theConf->GetBool("Options/AltRowColors", false));
 	m_pSbieTree->setExpandsOnDoubleClick(false);
 	//m_pSbieTree->setItemDelegate(theGUI->GetItemDelegate());

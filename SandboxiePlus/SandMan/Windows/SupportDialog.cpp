@@ -112,11 +112,11 @@ bool CSupportDialog::ShowDialog(bool NoGo, int Wait)
 		if (g_CertInfo.expired) {
 			Days = -g_CertInfo.expirers_in_sec / (24 * 3600);
 
-			Message += tr("The installed supporter certificate <b>has expired %1 days ago</b> and <a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">must be renewed</a>.<br /><br />").arg(Days);
+			Message += tr("The installed supporter certificate <b>has expired %1 days ago</b> and <a href=\"https://sandboxie-plus.com/go.php?to=sbie-renew-cert\">must be renewed</a>.<br /><br />").arg(Days);
 		} else
 			Message = tr("<b>You have installed Sandboxie-Plus more than %1 days ago.</b><br /><br />").arg(Days);
 
-		Message += tr("<u>Commercial use of Sandboxie past the evaluation period</u>, requires a valid <a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">support certificate</a>.").arg(Days);
+		Message += tr("<u>Commercial use of Sandboxie past the evaluation period</u>, requires a valid <a href=\"https://sandboxie-plus.com/go.php?to=sbie-obtain-cert\">support certificate</a>.").arg(Days);
 	}
 	else
 	{
@@ -135,10 +135,10 @@ bool CSupportDialog::ShowDialog(bool NoGo, int Wait)
 			Message += tr("Personal use of Sandboxie is free of charge on x86/x64, although some functionality is only available to project supporters.<br /><br />");
 
 		if (g_CertInfo.expired)
-			Message += tr("Please continue <a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">supporting the project</a> "
+			Message += tr("Please continue <a href=\"https://sandboxie-plus.com/go.php?to=sbie-renew-cert\">supporting the project</a> "
 				"by renewing your <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a> and continue using the <b>enhanced functionality</b> in new builds.");
 		else
-			Message += tr("Sandboxie <u>without</u> a valid supporter certificate will sometimes <b><font color='red'>pause for a few seconds</font></b>. This pause allows you to consider <a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">purchasing a supporter certificate</a> or <a href=\"https://sandboxie-plus.com/go.php?to=sbie-contribute\">earning one by contributing</a> to the project. <br /><br />"
+			Message += tr("Sandboxie <u>without</u> a valid supporter certificate will sometimes <b><font color='red'>pause for a few seconds</font></b>. This pause allows you to consider <a href=\"https://sandboxie-plus.com/go.php?to=sbie-obtain-cert\">purchasing a supporter certificate</a> or <a href=\"https://sandboxie-plus.com/go.php?to=sbie-contribute\">earning one by contributing</a> to the project. <br /><br />"
 				"A <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a> not just removes this reminder, but also enables <b>exclusive enhanced functionality</b> providing better security and compatibility.");
 	}
 

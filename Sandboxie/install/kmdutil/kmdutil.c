@@ -391,11 +391,24 @@ BOOL Kmd_Install_Service(
 
     DWORD ServiceType;
     DWORD StartType;
+    WCHAR* Path = NULL;
 
     if (Options & OPT_KERNEL_TYPE)
         ServiceType = SERVICE_KERNEL_DRIVER;
-    else
+    else {
         ServiceType = SERVICE_WIN32_OWN_PROCESS;
+
+        // quote path
+        if (*Service_Path != L'\"') {
+            ULONG len = wcslen(Service_Path);
+            Path = malloc((len + 3) * sizeof(WCHAR));
+            Path[0] = L'\"';
+            wcscpy(&Path[1], Service_Path);
+            Path[len + 1] = L'\"';
+            Path[len + 2] = 0;
+            Service_Path = Path;
+        }
+    }
 
     if (Options & OPT_SYSTEM_START)
         StartType = SERVICE_SYSTEM_START;
@@ -422,6 +435,8 @@ BOOL Kmd_Install_Service(
         NULL,                       // no dependencies
         NULL,                       // LocalSystem account
         NULL);
+
+    if (Path) free(Path);
 
     if (! service) {
         if (GetLastError() != ERROR_SERVICE_EXISTS) {

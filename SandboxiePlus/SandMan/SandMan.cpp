@@ -731,15 +731,14 @@ void CSandMan::CreateToolBar()
 	m_pToolBar = new QToolBar();
 	m_pMainLayout->insertWidget(0, m_pToolBar);
 
-	m_pToolBar->addAction(m_pMenuSettings);
+
+	m_pToolBar->addAction(m_pNewBox);
+	m_pToolBar->addAction(m_pNewGroup);
+	m_pToolBar->addAction(m_pImportBox);
 	m_pToolBar->addSeparator();
 
-	//m_pToolBar->addAction(m_pMenuNew);
-	//m_pToolBar->addAction(m_pMenuEmptyAll);
-	//m_pToolBar->addSeparator();
+	m_pToolBar->addAction(m_pEmptyAll);
 	m_pToolBar->addAction(m_pKeepTerminated);
-	//m_pToolBar->addSeparator();
-	//m_pToolBar->addAction(m_pCleanUp);
 
 	m_pCleanUpButton = new QToolButton();
 	m_pCleanUpButton->setIcon(CSandMan::GetIcon("Clean"));
@@ -747,32 +746,22 @@ void CSandMan::CreateToolBar()
 	m_pCleanUpButton->setText(tr("Cleanup"));
 	m_pCleanUpButton->setPopupMode(QToolButton::MenuButtonPopup);
 	m_pCleanUpButton->setMenu(m_pCleanUpMenu);
-	//QObject::connect(m_pCleanUpButton, SIGNAL(triggered(QAction*)), , SLOT());
 	QObject::connect(m_pCleanUpButton, SIGNAL(clicked(bool)), this, SLOT(OnCleanUp()));
 	m_pToolBar->addWidget(m_pCleanUpButton);
-
-	
 	m_pToolBar->addSeparator();
+
+
 	m_pToolBar->addAction(m_pMenuBrowse);
+	m_pToolBar->addAction(m_pRefreshAll);
 	m_pToolBar->addSeparator();
-	
-	/*m_pEditButton = new QToolButton();
-	m_pEditButton->setIcon(m_pEditIni->icon());
-	m_pEditButton->setText(m_pEditIni->text());
-	m_pEditButton->setPopupMode(QToolButton::MenuButtonPopup);
-	QMenu* pEditBtnMenu = new QMenu(m_pEditButton);
-	pEditBtnMenu->addAction(m_pEditIni2->icon(), m_pEditIni2->text(), this, SLOT(OnEditIni2()));
-	pEditBtnMenu->addAction(m_pEditIni3->icon(), m_pEditIni3->text(), this, SLOT(OnEditIni3()));
-	m_pEditButton->setMenu(pEditBtnMenu);
-	//QObject::connect(m_pEditButton, SIGNAL(triggered(QAction*)), , SLOT());
-	QObject::connect(m_pEditButton, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
-	m_pToolBar->addWidget(m_pEditButton);*/
-	m_pToolBar->addAction(m_pEditIni);
 
+	m_pToolBar->addAction(m_pMenuSettings);
+	m_pToolBar->addAction(m_pEditIni);
 	m_pToolBar->addSeparator();
+
 	m_pToolBar->addAction(m_pEnableMonitoring);
-	//m_pToolBar->addSeparator();
-	
+	m_pToolBar->addSeparator();
+
 	// Label
 
 	QWidget* pSpacer = new QWidget();

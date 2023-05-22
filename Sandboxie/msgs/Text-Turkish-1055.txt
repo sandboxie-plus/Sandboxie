@@ -194,6 +194,14 @@ SBIE1314 '%2' tarafından yapılan ağ/güvenlik duvarı ayarı değiştirme ist
 SBIE1316 Korumalı alanda cihaz olayı oluşturma isteği engellendi
 .
 
+1317;pop;inf;02
+SBIE1317 '%2'nin '%3' korumalı alan dosya köküne erişmeye çalışması engellendi
+.
+
+1318;pop;inf;02
+SBIE1318 '%2'nin korumalı alan '%3' işlemine erişmeye çalışması engellendi
+.
+
 1319;pop;inf;01
 SBIE1319 Dosyaya yazdırmak için engellenmiş yazdırma biriktiricisi, %2 %3
 .

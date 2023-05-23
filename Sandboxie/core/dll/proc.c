@@ -857,7 +857,7 @@ _FX BOOL Proc_CreateProcessInternalW(
     BOOL ok;
     BOOL resume_thread = FALSE;
     WCHAR* lpAlteredCommandLine = NULL;
-    
+
     Proc_LastCreatedProcessHandle = NULL;
     LPCWSTR pSrcCommandLine = lpApplicationName;
 
@@ -1318,15 +1318,13 @@ _FX BOOL Proc_CreateProcessInternalW(
         }
     }
 
-	
-    // Handle some command line issues 
-    // need add Config "RecoverAppNameProcess=appname" ,for example "RecoverAppNameProcess=excel.exe"
-    // changed by lmdd 
-    if (pSrcCommandLine == NULL && lpApplicationName)
-    {
-	const WCHAR* lpProgram = wcsrchr(lpApplicationName, L'\\');
-	if (lpProgram &&SbieDll_CheckStringInList(lpProgram + 1, NULL, L"RecoverAppNameProcess"))
-	lpApplicationName = NULL;
+    // Handle some command line issues
+    // need to add Config "RecoverAppNameProcess=appname", for example "RecoverAppNameProcess=excel.exe"
+    // changed by lmdd
+    if (pSrcCommandLine == NULL && lpApplicationName) {
+        const WCHAR* lpProgram = wcsrchr(lpApplicationName, L'\\');
+        if (lpProgram && SbieDll_CheckStringInList(lpProgram + 1, NULL, L"RecoverAppNameProcess"))
+            lpApplicationName = NULL;
     }
 
     //

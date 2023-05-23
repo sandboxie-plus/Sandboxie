@@ -857,8 +857,9 @@ _FX BOOL Proc_CreateProcessInternalW(
     BOOL ok;
     BOOL resume_thread = FALSE;
     WCHAR* lpAlteredCommandLine = NULL;
-
+    
     Proc_LastCreatedProcessHandle = NULL;
+    LPCWSTR pSrcCommandLine = lpApplicationName;
 
     //
     // check if we block the process or launch it some other way
@@ -1315,6 +1316,17 @@ _FX BOOL Proc_CreateProcessInternalW(
             hToken = NULL;
             SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, L"Dropped AppContainer Token");
         }
+    }
+
+	
+    // Handle some command line issues 
+    // need add Config "RecoverAppNameProcess=appname" ,for example "RecoverAppNameProcess=excel.exe"
+    // changed by lmdd 
+    if (pSrcCommandLine == NULL && lpApplicationName)
+    {
+	const WCHAR* lpProgram = wcsrchr(lpApplicationName, L'\\');
+	if (lpProgram &&SbieDll_CheckStringInList(lpProgram + 1, NULL, L"RecoverAppNameProcess"))
+	lpApplicationName = NULL;
     }
 
     //

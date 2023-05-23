@@ -1463,10 +1463,10 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	{
 		QString Command = Action->data().toString();
 		if (Command.isEmpty())
-			Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), "start_menu"));
+			Results.append(SandBoxes.first()->RunStart("start_menu"));
 		else {
 			auto pBoxEx = SandBoxes.first().objectCast<CSandBoxPlus>();
-			Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), pBoxEx->GetFullCommand(Command)));
+			Results.append(SandBoxes.first()->RunStart(pBoxEx->GetFullCommand(Command)));
 		}
 	}
 

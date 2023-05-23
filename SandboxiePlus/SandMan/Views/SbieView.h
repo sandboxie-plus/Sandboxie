@@ -5,6 +5,35 @@
 #include "../Models/SbieModel.h"
 #include <QFileIconProvider>
 
+class CMenuEx : public QMenu
+{
+	Q_OBJECT
+public:
+	explicit CMenuEx(QWidget* parent = nullptr) : QMenu(parent) { m_MouseDown = false; }
+    explicit CMenuEx(const QString &title, QWidget *parent = nullptr) : QMenu(title, parent) { m_MouseDown = false; }
+
+	//void keyPressEvent(QKeyEvent *) override;
+    //void mouseMoveEvent(QMouseEvent *) override;
+	void mousePressEvent(QMouseEvent* e) override {
+		if (e->button() == Qt::RightButton) {
+			m_MouseDown = true;
+			return;
+		}
+		QMenu::mousePressEvent(e);
+	}
+	void mouseReleaseEvent(QMouseEvent* e) override {
+		if (e->button() == Qt::RightButton && m_MouseDown) {
+			m_MouseDown = false;
+			emit customContextMenuRequested(e->pos());
+			return;
+		}
+		QMenu::mouseReleaseEvent(e);
+	}
+
+private:
+	bool m_MouseDown;
+};
+
 class CSbieView : public CPanelView
 {
 	Q_OBJECT
@@ -23,6 +52,7 @@ public:
 	//virtual void				UpdateRunMenu();
 
 	virtual QString				AddNewBox(bool bAlowTemp = false);
+	virtual QString				ImportSandbox();
 	virtual QString				AddNewGroup();
 	virtual bool				TestNameAndWarn(const QString& Name);
 	virtual void				SelectBox(const QString& Name);
@@ -53,6 +83,9 @@ private slots:
 	void						OnDoubleClicked(const QModelIndex& index);
 	void						OnClicked(const QModelIndex& index);
 	void						ProcessSelection(const QItemSelection& selected, const QItemSelection& deselected);
+
+	void						OnMenuContextMenu(const QPoint& point);
+	void						OnMenuContextAction();
 
 	void						OnGroupAction();
 	void						OnGroupAction(QAction* pAction);
@@ -106,6 +139,8 @@ private:
 
 	QMenu*					GetMenuFolder(const QString& Folder, QMenu* pParent, QMap<QString, QMenu*>& Folders);
 
+	bool					CreateShortcut(const QString& LinkPath, const QString& BoxName, const QString& IconPath = QString(), int IconIndex = 0, const QString& WorkDir = QString());
+
 	QVBoxLayout*			m_pMainLayout;
 
 	QTreeViewEx*			m_pSbieTree;
@@ -118,6 +153,7 @@ private:
 	QMenu*					m_pMenuTray;
 
 	QAction*				m_pNewBox;
+	QAction*				m_pImportBox;
 	QAction*				m_pAddGroupe;
 	QAction*				m_pRenGroupe;
 	QAction*				m_pDelGroupe;
@@ -183,6 +219,10 @@ private:
 	QAction*				m_pRemove;
 
 	int						m_iMenuRun;
+
+	QMenu*					m_pCtxMenu;
+	QAction*				m_pCtxPinToRun;
+	QAction*				m_pCtxMkLink;
 
 	QFileIconProvider		m_IconProvider;
 

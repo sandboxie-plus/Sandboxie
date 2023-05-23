@@ -2311,43 +2311,7 @@ void CSandMan::OnSandBoxAction()
 	else if (pAction == m_pNewGroup)
 		GetBoxView()->AddNewGroup();
 	else if (pAction == m_pImportBox)
-	{
-		QString Value = QFileDialog::getOpenFileName(this, tr("Select file name"), "", tr("7-zip Archive (*.7z)"));
-		if (Value.isEmpty())
-			return;
-
-		StrPair PathName = Split2(Value, "/", true);
-		StrPair NameEx = Split2(PathName.second, ".", true);
-		QString Name = NameEx.first;
-
-		CSandBoxPtr pBox;
-		for (;;) {
-			pBox = theAPI->GetBoxByName(Name);
-			if (pBox.isNull())
-				break;
-			Name = QInputDialog::getText(this, "Sandboxie-Plus", tr("This name is already in use, please select an alternative box name"), QLineEdit::Normal, Name);
-			if (Name.isEmpty())
-				return;
-		}
-
-		SB_PROGRESS Status = theAPI->CreateBox(Name);
-		if (!Status.IsError()) {
-			pBox = theAPI->GetBoxByName(Name);
-			if (pBox) {
-				auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
-				Status = pBoxEx->ImportBox(Value);
-			}
-		}
-		if (Status.GetStatus() == OP_ASYNC) {
-			Status = theGUI->AddAsyncOp(Status.GetValue(), true, tr("Importing: %1").arg(Value));
-			if (Status.IsError()) {
-				theGUI->DeleteBoxContent(pBox, CSandMan::eForDelete);
-				pBox->RemoveBox();
-			}
-		}
-		else
-			CSandMan::CheckResults(QList<SB_STATUS>() << Status);
-	}
+		GetBoxView()->ImportSandbox();
 	else if (pAction == m_pRunBoxed)
 		RunSandboxed(QStringList() << "run_dialog");
 }

@@ -97,6 +97,11 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	else
 		CreateMenu();
 
+	m_pCtxMenu = new QMenu();
+	m_pCtxPinToRun = m_pCtxMenu->addAction(tr("Pin to Run Menu"), this, SLOT(OnMenuContextAction()));
+	m_pCtxPinToRun->setCheckable(true);
+	m_pCtxMkLink = m_pCtxMenu->addAction(CSandMan::GetIcon("MkLink"), tr("Create Shortcut"), this, SLOT(OnMenuContextAction()));
+
 	m_pRemove = new QAction(this);
 	m_pRemove->setShortcut(QKeySequence::Delete);
 	m_pRemove->setShortcutContext(Qt::WidgetWithChildrenShortcut);
@@ -149,6 +154,7 @@ void CSbieView::CreateMenu()
 {
 	m_pNewBox = m_pMenu->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnGroupAction()));
 	m_pAddGroupe = m_pMenu->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnGroupAction()));
+	m_pImportBox = m_pMenu->addAction(CSandMan::GetIcon("UnPackBox"), tr("Import Box"), this, SLOT(OnGroupAction()));
 	
 
 	m_pMenuBox = new QMenu();
@@ -273,6 +279,7 @@ void CSbieView::CreateOldMenu()
 {
 	m_pNewBox = m_pMenu->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnGroupAction()));
 	m_pAddGroupe = m_pMenu->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnGroupAction()));
+	m_pImportBox = m_pMenu->addAction(CSandMan::GetIcon("UnPackBox"), tr("Import Box"), this, SLOT(OnGroupAction()));
 	
 
 	m_pMenuBox = new QMenu();
@@ -377,6 +384,7 @@ void CSbieView::CreateGroupMenu()
 	m_pMenuGroup = new QMenu();
 	m_pMenuGroup->addAction(m_pNewBox);
 	m_pMenuGroup->addAction(m_pAddGroupe);
+	m_pMenuGroup->addAction(m_pImportBox);
 	m_pMenuGroup->addSeparator();
 	m_pRenGroupe = m_pMenuGroup->addAction(CSandMan::GetIcon("Rename"), tr("Rename Group"), this, SLOT(OnGroupAction()));
 	m_pMenuGroup->addAction(CSandMan::GetIcon("Group"), tr("Move Group"))->setMenu(m_pMenuMoveTo);
@@ -454,7 +462,7 @@ void CSbieView::Refresh()
 
 	if (m_pSbieModel->IsTree())
 	{
-		QTimer::singleShot(100, this, [this, Added]() {
+		QTimer::singleShot(10, this, [this, Added]() {
 			foreach(const QVariant ID, Added) {
 
 				QModelIndex ModelIndex = m_pSbieModel->FindIndex(ID);
@@ -805,11 +813,11 @@ void CSbieView::OnGroupAction()
 
 void CSbieView::OnGroupAction(QAction* Action)
 {
-	if (Action == m_pNewBox || Action == m_pAddGroupe)
+	if (Action == m_pNewBox || Action == m_pAddGroupe || Action == m_pImportBox)
 	{
 		QStringList List = GetSelectedGroups();
 
-		QString Name = Action == m_pNewBox ? AddNewBox() : AddNewGroup();
+		QString Name = Action == m_pNewBox ? AddNewBox() : (Action == m_pImportBox ? ImportSandbox() : AddNewGroup());
 		if (Name.isEmpty())
 			return;
 
@@ -995,6 +1003,47 @@ QString CSbieView::AddNewBox(bool bAlowTemp)
 		SelectBox(BoxName);
 	}
 	return BoxName;
+}
+
+QString CSbieView::ImportSandbox()
+{
+	QString Value = QFileDialog::getOpenFileName(this, tr("Select file name"), "", tr("7-zip Archive (*.7z)"));
+	if (Value.isEmpty())
+		return "";
+
+	StrPair PathName = Split2(Value, "/", true);
+	StrPair NameEx = Split2(PathName.second, ".", true);
+	QString Name = NameEx.first;
+
+	CSandBoxPtr pBox;
+	for (;;) {
+		pBox = theAPI->GetBoxByName(Name);
+		if (pBox.isNull())
+			break;
+		Name = QInputDialog::getText(this, "Sandboxie-Plus", tr("This name is already in use, please select an alternative box name"), QLineEdit::Normal, Name);
+		if (Name.isEmpty())
+			return "";
+	}
+
+	SB_PROGRESS Status = theAPI->CreateBox(Name);
+	if (!Status.IsError()) {
+		pBox = theAPI->GetBoxByName(Name);
+		if (pBox) {
+			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+			Status = pBoxEx->ImportBox(Value);
+		}
+	}
+	if (Status.GetStatus() == OP_ASYNC) {
+		Status = theGUI->AddAsyncOp(Status.GetValue(), true, tr("Importing: %1").arg(Value));
+		if (Status.IsError()) {
+			theGUI->DeleteBoxContent(pBox, CSandMan::eForDelete);
+			pBox->RemoveBox();
+		}
+	}
+	else
+		CSandMan::CheckResults(QList<SB_STATUS>() << Status);
+
+	return Name;
 }
 
 QString CSbieView::AddNewGroup()
@@ -1408,42 +1457,16 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		if (!CSbieUtils::GetStartMenuShortcut(theAPI, BoxName, LinkPath, IconPath, IconIndex, WorkDir))
 			return;
 		
-		QString LinkName;
-		int pos = LinkPath.lastIndexOf(L'\\');
-		if (pos == -1)
-			return;
-		if (pos == 2 && LinkPath.length() == 3)
-			LinkName = QObject::tr("Drive %1").arg(LinkPath.left(1));
-		else {
-			LinkName = LinkPath.mid(pos + 1);
-			pos = LinkName.indexOf(QRegularExpression("[" + QRegularExpression::escape("\":;,*?.") + "]"));
-			if (pos != -1)
-				LinkName = LinkName.left(pos);
-		}
-
-		QString Path = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation).replace("/", "\\");
-		//Path = QFileDialog::getExistingDirectory(this, tr("Select Directory to create Shortcut in"), Path).replace("/", "\\");
-		//if (Path.isEmpty())
-		//	return;
-
-		if (Path.right(1) != "\\")
-			Path.append("\\");
-		Path += "[" + BoxName + "] " + LinkName;
-
-		Path = QFileDialog::getSaveFileName(this, tr("Create Shortcut to sandbox %1").arg(BoxName), Path, QString("Shortcut files (*.lnk)")).replace("/", "\\");
-		if (Path.isEmpty())
-			return;
-
-		CSbieUtils::CreateShortcut(theAPI, Path, LinkName, BoxName, LinkPath, IconPath, IconIndex, WorkDir);
+		CreateShortcut(LinkPath, BoxName, IconPath, IconIndex, WorkDir);
 	}
 	else // custom run menu command
 	{
 		QString Command = Action->data().toString();
 		if (Command.isEmpty())
-			Results.append(SandBoxes.first()->RunStart("start_menu"));
+			Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), "start_menu"));
 		else {
 			auto pBoxEx = SandBoxes.first().objectCast<CSandBoxPlus>();
-			Results.append(SandBoxes.first()->RunStart(pBoxEx->GetFullCommand(Command)));
+			Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), pBoxEx->GetFullCommand(Command)));
 		}
 	}
 
@@ -1451,6 +1474,37 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 
 	m_UserConfigChanged = true;
 	SaveUserConfig();
+}
+
+bool CSbieView::CreateShortcut(const QString& LinkPath, const QString& BoxName, const QString &IconPath, int IconIndex, const QString &WorkDir)
+{
+	QString LinkName;
+	int pos = LinkPath.lastIndexOf(L'\\');
+	if (pos == -1)
+		return false;
+	if (pos == 2 && LinkPath.length() == 3)
+		LinkName = QObject::tr("Drive %1").arg(LinkPath.left(1));
+	else {
+		LinkName = LinkPath.mid(pos + 1);
+		pos = LinkName.indexOf(QRegularExpression("[" + QRegularExpression::escape("\":;,*?.") + "]"));
+		if (pos != -1)
+			LinkName = LinkName.left(pos);
+	}
+
+	QString Path = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation).replace("/", "\\");
+	//Path = QFileDialog::getExistingDirectory(this, tr("Select Directory to create Shortcut in"), Path).replace("/", "\\");
+	//if (Path.isEmpty())
+	//	return;
+
+	if (Path.right(1) != "\\")
+		Path.append("\\");
+	Path += "[" + BoxName + "] " + LinkName;
+
+	Path = QFileDialog::getSaveFileName(this, tr("Create Shortcut to sandbox %1").arg(BoxName), Path, QString("Shortcut files (*.lnk)")).replace("/", "\\");
+	if (Path.isEmpty())
+		return false;
+
+	return CSbieUtils::CreateShortcut(theAPI, Path, LinkName, BoxName, LinkPath, IconPath, IconIndex, WorkDir);
 }
 
 void CSbieView::OnProcessAction()
@@ -1701,17 +1755,79 @@ QMenu* CSbieView::GetMenuFolder(const QString& Folder, QMenu* pParent, QMap<QStr
 	QMenu* &pMenu = Folders[Folder];
 	if (!pMenu)
 	{
+		QString Title;
 		QStringList Names = Folder.split("/");
 		StrPair Tmp = Split2(Folder, "/", true);
 		if (!Tmp.second.isEmpty()) {
 			pParent = GetMenuFolder(Tmp.first, pParent, Folders);
-			pMenu = pParent->addMenu(Tmp.second);
+			Title = Tmp.second;
 		}
 		else
-			pMenu = pParent->addMenu(Tmp.first);
+			Title = Tmp.first;
+
+		pMenu = new CMenuEx(Title, pParent);
 		pMenu->setIcon(m_IconProvider.icon(QFileIconProvider::Folder));
+	    pParent->addAction(pMenu->menuAction());
+
+		connect(pMenu, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(OnMenuContextMenu(const QPoint&)));
 	}
 	return pMenu;
+}
+
+void CSbieView::OnMenuContextMenu(const QPoint& point)
+{
+	QMenu* pMenu = (QMenu*)sender();
+	QAction* pAction = pMenu->actionAt(point);
+	if (!pAction) return;
+	QString LinkTarget = pAction->data().toString();
+	if (!LinkTarget.isEmpty()) {
+
+		auto pBoxPlus = m_CurSandBoxes.first().objectCast<CSandBoxPlus>();
+		QStringList RunOptions = pBoxPlus->GetTextList("RunCommand", true);
+
+		QString FoundPin;
+		QString FileName = LinkTarget;
+		foreach(const QString& RunOption, RunOptions) {
+			QString CmdFile = pBoxPlus->GetCommandFile(Split2(RunOption, "|").second);
+			if(CmdFile.compare(FileName, Qt::CaseInsensitive) == 0) {
+				FoundPin = RunOption;
+				break;
+			}
+		}
+
+		m_pCtxPinToRun->setChecked(!FoundPin.isEmpty());
+		if (FoundPin.isEmpty()) 
+			m_pCtxPinToRun->setData(pAction->text() + "|\"" + pBoxPlus->MakeBoxCommand(LinkTarget) + "\"");
+		else
+			m_pCtxPinToRun->setData(FoundPin);
+		m_pCtxMkLink->setData(LinkTarget);
+		m_pCtxMenu->exec(QCursor::pos());
+	}
+}
+
+void CSbieView::OnMenuContextAction()
+{
+	QAction* pAction = (QAction*)sender();
+
+	auto pBoxPlus = m_CurSandBoxes.first().objectCast<CSandBoxPlus>();
+
+	if (pAction == m_pCtxPinToRun)
+	{
+		QString Link = m_pCtxPinToRun->data().toString();
+		if (!Link.isEmpty()) {
+			if (m_pCtxPinToRun->isChecked())
+				pBoxPlus->InsertText("RunCommand", Link);
+			else
+				pBoxPlus->DelValue("RunCommand", Link);
+		}
+	}
+	else if (pAction == m_pCtxMkLink)
+	{
+		QString LinkTarget = m_pCtxMkLink->data().toString();
+		QString BoxName = pBoxPlus->GetName();
+
+		CreateShortcut(LinkTarget, BoxName);
+	}
 }
 
 void CSbieView::UpdateStartMenu(CSandBoxPlus* pBoxEx)

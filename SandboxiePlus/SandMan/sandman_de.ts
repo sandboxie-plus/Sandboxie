@@ -2440,9 +2440,6 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="1266"/>
         <source>&lt;br /&gt;&lt;br /&gt;This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to all user data&lt;/a&gt; locations, except explicitly granted in the Resource Access options.</source>
-        <oldsource>
-
-This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to all user data&lt;/a&gt; locations, except explicitly granted in the Resource Access options.</oldsource>
         <translation>&lt;br /&gt;&lt;br /&gt;Diese Box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;verhindert Zugriff auf alle Nutzerdatenspeicherorte&lt;/a&gt;, ausgenommen explizit gewährte Zugriffe in den Ressourcenzugriffsoptionen.</translation>
     </message>
     <message>
@@ -4499,7 +4496,6 @@ Prozesse in dieser Box werden mit einem eigenen Prozesstoken laufen, die anzeige
     <message>
         <location filename="Windows/SupportDialog.cpp" line="115"/>
         <source>The installed supporter certificate &lt;b&gt;has expired %1 days ago&lt;/b&gt; and &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;must be renewed&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</source>
-        <oldsource>The installed supporter certificate &lt;b&gt;has expired %1 days ago&lt;/b&gt; and &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;must be renewed&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</oldsource>
         <translation>Das installierte Unterstützerzertifikat ist seit &lt;b&gt;%1 Tagen abgelaufen&lt;/b&gt; und &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;muss erneuert werden&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
@@ -4510,7 +4506,6 @@ Prozesse in dieser Box werden mit einem eigenen Prozesstoken laufen, die anzeige
     <message>
         <location filename="Windows/SupportDialog.cpp" line="119"/>
         <source>&lt;u&gt;Commercial use of Sandboxie past the evaluation period&lt;/u&gt;, requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;support certificate&lt;/a&gt;.</source>
-        <oldsource>&lt;u&gt;Commercial use of Sandboxie past the evaluation period&lt;/u&gt;, requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt;.</oldsource>
         <translation>&lt;u&gt;Kommerzielle Nutzung von Sandboxie nach der Evaluationsphase&lt;/u&gt;, erfordert ein gültiges &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;Unterstützerzertifikat&lt;/a&gt;.</translation>
     </message>
     <message>
@@ -4541,13 +4536,11 @@ Prozesse in dieser Box werden mit einem eigenen Prozesstoken laufen, die anzeige
     <message>
         <location filename="Windows/SupportDialog.cpp" line="138"/>
         <source>Please continue &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;supporting the project&lt;/a&gt; by renewing your &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; and continue using the &lt;b&gt;enhanced functionality&lt;/b&gt; in new builds.</source>
-        <oldsource>Please continue &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; by renewing your &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; and continue using the &lt;b&gt;enhanced functionality&lt;/b&gt; in new builds.</oldsource>
         <translation>Bitte behalten Sie &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;die Unterstützung des Projektes bei&lt;/a&gt; durch die Erneuerung Ihres &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;Unterstützerzertifikates&lt;/a&gt; und setzen Sie die Verwendung &lt;b&gt;erweiterter Funktionalität&lt;/b&gt; in neuen Versionen fort.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="141"/>
         <source>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;. This pause allows you to consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt; or &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;earning one by contributing&lt;/a&gt; to the project. &lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</source>
-        <oldsource>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;, to give you time to contemplate the option of &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</oldsource>
         <translation>Sandboxie &lt;u&gt;ohne&lt;/u&gt; ein gültiges Unterstützerzertifikat wird manchmal &lt;b&gt;&lt;font color=&apos;red&apos;&gt;für ein paar Sekunden pausieren&lt;/font&gt;&lt;/b&gt;, um Ihnen Zeit zu geben die Option zu erwägen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;ein Unterstützerzertifikat zu erwerben&lt;/a&gt; oder &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;sich eines zu verdienen durch die Beteiligung&lt;/a&gt; am Projekt. &lt;br /&gt;&lt;br /&gt;Ein &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;Unterstützerzertifikat&lt;/a&gt; entfernt nicht nur diese Erinnerung, sondern aktiviert auch &lt;b&gt;exklusive verbesserte Funktionalität&lt;/b&gt;, welche bessere Sicherheit und Kompatibilität bieten.</translation>
     </message>
     <message>
@@ -7011,7 +7004,6 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="340"/>
         <source>Disable SBIE messages popups (they will still be logged to the Messages tab)</source>
-        <oldsource>Disable SBIE messages popups (SBIE will still be logged to the log tab)</oldsource>
         <translation>Deaktiviere SBIE Nachrichten Popups (sie werden weiterhin im Nachrichtenreiter erfasst)</translation>
     </message>
     <message>

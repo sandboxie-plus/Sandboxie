@@ -1012,6 +1012,9 @@ _FX BOOL Proc_CreateProcessInternalW(
 
         TlsData->proc_create_process_capture_image = FALSE;
 
+        if (TlsData->proc_command_line)
+            lpCommandLine = TlsData->proc_command_line;
+
         //
         // the system may have quoted the first part of the command line,
         // store this final command line

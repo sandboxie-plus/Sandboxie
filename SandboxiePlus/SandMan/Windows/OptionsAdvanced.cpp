@@ -509,6 +509,8 @@ void COptionsWindow::SaveOptionList()
 {
 	CloseOptionEdit(true);
 
+	if (!ui.treeOptions) return;
+
 	QMap<QString, QList<QString>> OptionMap;
 
 	// cache unlisted set eOnlySpec global presets

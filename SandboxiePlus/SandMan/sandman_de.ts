@@ -3694,7 +3694,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="157"/>
         <location filename="Views/SbieView.cpp" line="282"/>
         <source>Import Box</source>
-        <translation type="unfinished">Box importieren</translation>
+        <translation>Box importieren</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="262"/>
@@ -3794,12 +3794,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="1023"/>
         <source>This name is already in use, please select an alternative box name</source>
-        <translation type="unfinished">Dieser Name wird bereits verwendet, bitte wählen Sie einen anderen Boxnamen</translation>
+        <translation>Dieser Name wird bereits verwendet, bitte wählen Sie einen anderen Boxnamen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1037"/>
         <source>Importing: %1</source>
-        <translation type="unfinished">Importiere: %1</translation>
+        <translation>Importiere: %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1079"/>

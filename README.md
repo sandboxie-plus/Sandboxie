@@ -100,6 +100,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - isaak654 - Templates / Documentation / Code fixes / Collaborator
 - okrc - Code fixes
 - Sapour - Code fixes
+- lmou523 - Code fixes
 - stephtr - CI / Certification
 - typpos - UI suggestions / Documentation / Code reviews
 - Dyras - Templates additions

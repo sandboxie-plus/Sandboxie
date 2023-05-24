@@ -45,6 +45,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Unquoted service path [#537](https://github.com/sandboxie-plus/Sandboxie/issues/537)
 - fixed Running the Insert chart in Word in the sandbox fails [#2863](https://github.com/sandboxie-plus/Sandboxie/issues/2863)
 - fixed An error occurred in the switch sandbox type preset configuration [#2941](https://github.com/sandboxie-plus/Sandboxie/issues/2941)
+- fixed Unable to open excel (thanks lmou523) [#2890](https://github.com/sandboxie-plus/Sandboxie/issues/2890)
 
 
 

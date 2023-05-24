@@ -355,8 +355,18 @@ _FX BOOLEAN Gui_DDE_COPYDATA_Received(
     Sbie_snwprintf(prop_name, 64, SBIE L"_DDE_%08p", (void*)hWnd);
     hClientWnd = Gui_GetPropCommon((HWND)wParam, prop_name, TRUE, 0);
     if (TlsData->gui_dde_client_hwnd != (HWND)-1) {
-        if ((! hClientWnd) || (hClientWnd != TlsData->gui_dde_client_hwnd))
-            return FALSE;
+#ifdef _WIN64
+		if ((!hClientWnd) || (hClientWnd != TlsData->gui_dde_client_hwnd))
+			return FALSE;
+#else
+		// When I double click an.xlsx file, my excel will run here, but Gui_GetPropCommon will return empty.
+		// This is a problem for Office 32-bit, so I uncheck the hClientWnd double check for 32-bit programs
+		// lmdd change
+		if (hClientWnd == 0)
+			hClientWnd = TlsData->gui_dde_client_hwnd;
+		else if (hClientWnd != TlsData->gui_dde_client_hwnd)
+			return FALSE;
+#endif
     }
 
     //

@@ -4,15 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
-
-
-
-
-
-
-
-## [1.9.4 / 5.64.4] - 2023-05-??
+## [1.9.4 / 5.64.4] - 2023-05-24
 
 ### Added
 - added more documentation links to the Plus UI

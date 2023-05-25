@@ -253,7 +253,7 @@ private slots:
 	{
 		QAbstractItemModel* pModel = model();
 
-		if(m_Columns.isEmpty())
+		if(m_pMenu->actions().isEmpty())
 		{
 			for(int i=0; i < pModel->columnCount(); i++)
 			{

@@ -76,7 +76,7 @@ public slots:
 private slots:
 	void OnMenuRequested(const QPoint &point)
 	{
-		if(m_Columns.isEmpty())
+		if(m_pMenu->actions().isEmpty())
 		{
 			QTreeWidgetItem* pHeader = headerItem();
 			for(int i=0; i < columnCount(); i++)

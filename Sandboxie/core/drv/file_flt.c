@@ -481,7 +481,7 @@ check:
     // check if there are any protected root folders and restict the access to
     //
 
-    if (Iopb->MajorFunction == IRP_MJ_CREATE /*&& File_ProtectedRoots.count != 0*/) {
+    if (Iopb->MajorFunction == IRP_MJ_CREATE && File_ProtectedRoots.count != 0) {
 
         OBJECT_NAME_INFORMATION *Name;
         ULONG NameLength;

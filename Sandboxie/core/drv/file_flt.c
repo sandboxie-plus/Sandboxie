@@ -511,12 +511,6 @@ check:
                             status = STATUS_SUCCESS; // its the allowed box
                         }
                     }
-                    else {
-                        if (PsGetCurrentProcessId() == Api_ServiceProcessId)
-                            status = STATUS_SUCCESS; // always allow the service
-                        else if(Session_GetLeadSession(PsGetCurrentProcessId()) != 0)
-                            status = STATUS_SUCCESS; // allow the session leader
-                    }
 
                     break;
                 }
@@ -529,7 +523,13 @@ check:
 
             if (!NT_SUCCESS(status)) {
 
-                if (Conf_Get_Boolean(NULL, L"NotifyBoxProtected", 0, TRUE)) {
+                if (PsGetCurrentProcessId() == Api_ServiceProcessId)
+                    status = STATUS_SUCCESS; // always allow the service
+                else if(Session_GetLeadSession(PsGetCurrentProcessId()) != 0)
+                    status = STATUS_SUCCESS; // allow the session leader    
+                else
+
+                if (Conf_Get_Boolean(NULL, L"NotifyBoxProtected", 0, FALSE)) {
 
                     void *nbuf = 0;
                     ULONG nlen = 0;

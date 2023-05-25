@@ -4000,7 +4000,7 @@ Sélectionner « non » pour effacer le fichier Sandboxie.ini et perdre vos para
 .
 
 8055;ins;01
-Une mise à jour en ligne de Templates.ini et/ou des traductions pour cette version de sandboxie est disponible, voulez-vous l'installer ?
+Une mise à jour en ligne de Templates.ini et/ou des traductions pour cette version de Sandboxie est disponible. Voulez-vous l'installer ?
 .
 
 #----------------------------------------------------------------------------

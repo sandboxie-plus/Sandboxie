@@ -136,11 +136,11 @@ dutch.UninstallTaskLabel5=Configuratiebestanden en sandboxen verwijderen%nSelect
 
 ; French
 french.AddSandboxedMenu=Ajouter « Exécuter dans un bac à sable » au menu contextuel
-french.AddSandboxedBrowser=Ajouter un raccourci sur le bureau pour Exécuter le navigateur Internet dans Sandboxie
+french.AddSandboxedBrowser=Ajouter un raccourci sur le bureau pour exécuter le navigateur web dans Sandboxie
 french.SandboxieStartMenu1=Exécuter un programme dans un bac à sable
-french.SandboxieStartMenu2=Exécuter le navigateur Internet dans un bac à sable
-french.SandboxieStartMenu3=Exécuter dans le menu Démarrer
-french.SandboxedBrowser=Lien navigateur Internet dans un bac à sable
+french.SandboxieStartMenu2=Exécuter le navigateur web dans un bac à sable
+french.SandboxieStartMenu3=Menu Démarrer de Sandboxie
+french.SandboxedBrowser=Navigateur web dans un bac à sable
 french.CustomPageLabel1=Sélectionner le type d'installation
 french.CustomPageLabel2=Comment doit-on l'installer ?
 french.CustomPageLabel3=Choisir le mode d'installation

@@ -77,7 +77,6 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="481"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
-        <oldsource>This feature may reduce compatybility as it also prevents box located processes from writing to host located once and even starting them.</oldsource>
         <translation>Эта функция может снизить совместимость, поскольку она также не позволяет процессам, расположенным в песочнице, записывать данные в процессы, расположенные на хосте, и даже запускать их.</translation>
     </message>
     <message>
@@ -391,7 +390,7 @@ Please browse to the correct user profile directory.</source>
     <message>
         <location filename="Views/FileView.cpp" line="210"/>
         <source>Pin to Box Run Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрепить в меню &quot;Запустить&quot; песочницы</translation>
     </message>
     <message>
         <location filename="Views/FileView.cpp" line="217"/>
@@ -1464,7 +1463,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="278"/>
         <source>A non empty program name is required.</source>
-        <translation type="unfinished"></translation>
+        <translation>Требуется непустое имя программы.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsNetwork.cpp" line="575"/>
@@ -1997,7 +1996,7 @@ Full path: %4</source>
     <message>
         <location filename="SbiePlusAPI.cpp" line="677"/>
         <source>No INet (with Exceptions)</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет INet (с исключениями)</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="679"/>
@@ -2351,8 +2350,7 @@ Do you want to do the clean up?</source>
     <message>
         <location filename="SandMan.cpp" line="1253"/>
         <source>This box provides &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;enhanced security isolation&lt;/a&gt;, it is suitable to test untrusted software.</source>
-        <oldsource>This box provides enhanced security isolation, it is suitable to test untrusted software.</oldsource>
-        <translation type="unfinished">Эта песочница обеспечивает усиленную изоляцию безопасности, она подходит для тестирования ненадежного программного обеспечения.</translation>
+        <translation>Эта песочница обеспечивает &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;улучшенную изоляцию безопасности&lt;/a&gt; и подходит для тестирования ненадежного программного обеспечения.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1257"/>
@@ -2362,18 +2360,12 @@ Do you want to do the clean up?</source>
     <message>
         <location filename="SandMan.cpp" line="1261"/>
         <source>This box does not enforce isolation, it is intended to be used as an &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;application compartment&lt;/a&gt; for software virtualization only.</source>
-        <oldsource>This box does not enforce isolation, it is intended to be used as an application compartment for software virtualization only.</oldsource>
-        <translation type="unfinished">Эта песочница не обеспечивает изоляцию, она предназначена для использования в качестве контейнера для приложений только для виртуализации программного обеспечения.</translation>
+        <translation>Эта песочница не обеспечивает изоляцию, она предназначена для использования в качестве &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;контейнера приложений&lt;/a&gt; только для программной виртуализации.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1266"/>
         <source>&lt;br /&gt;&lt;br /&gt;This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to all user data&lt;/a&gt; locations, except explicitly granted in the Resource Access options.</source>
-        <oldsource>
-
-This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to all user data&lt;/a&gt; locations, except explicitly granted in the Resource Access options.</oldsource>
-        <translation type="unfinished">
-
-Эта песочница ограничивает доступ ко всем путям пользовательских данных, кроме явно предоставленных в параметрах доступа к ресурсам.</translation>
+        <translation>&lt;br /&gt;&lt;br /&gt;Эта песочница &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;запрещает доступ ко всем данным пользователя&lt;/a&gt;, кроме тех, которые явно разрешены в параметрах доступа к ресурсам.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1342"/>
@@ -2449,7 +2441,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandManTray.cpp" line="105"/>
         <source>Dismiss Update Notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Отклонить уведомление об обновлении</translation>
     </message>
     <message>
         <location filename="SandManTray.cpp" line="181"/>
@@ -2965,22 +2957,6 @@ No will choose: %2</source>
         <translation>Период оценки истек!!!</translation>
     </message>
     <message>
-        <source>Select file name</source>
-        <translation type="vanished">Выберите имя файла</translation>
-    </message>
-    <message>
-        <source>7-zip Archive (*.7z)</source>
-        <translation type="vanished">7-zip архив (*.7z)</translation>
-    </message>
-    <message>
-        <source>This name is already in use, please select an alternative box name</source>
-        <translation type="vanished">Это имя уже используется, выберите другое имя контейнера</translation>
-    </message>
-    <message>
-        <source>Importing: %1</source>
-        <translation type="vanished">Импорт: %1</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="2359"/>
         <source>No Recovery</source>
         <translation>Нет файлов для восстановления</translation>
@@ -2993,7 +2969,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2421"/>
         <source>&lt;b&gt;ERROR:&lt;/b&gt; The Sandboxie-Plus Manager (SandMan.exe) does not have a valid signature (SandMan.exe.sig). Please download a trusted release from the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;official Download page&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;ОШИБКА:&lt;/b&gt; Sandboxie-Plus Manager (SandMan.exe) не имеет действительной подписи (SandMan.exe.sig). Загрузите надежную версию с &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;официальной страницы загрузки&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2524"/>
@@ -3776,7 +3752,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="157"/>
         <location filename="Views/SbieView.cpp" line="282"/>
         <source>Import Box</source>
-        <translation type="unfinished">Импорт контейнера</translation>
+        <translation>Импорт песочницы</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="169"/>
@@ -3889,12 +3865,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="1023"/>
         <source>This name is already in use, please select an alternative box name</source>
-        <translation type="unfinished">Это имя уже используется, выберите другое имя контейнера</translation>
+        <translation>Это имя уже используется, выберите другое имя песочницы</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1037"/>
         <source>Importing: %1</source>
-        <translation type="unfinished">Импорт: %1</translation>
+        <translation>Импорт: %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1079"/>
@@ -4501,8 +4477,6 @@ Processes in this box will think they are run with administrative privileges, wi
         <location filename="Wizards/NewBoxWizard.cpp" line="585"/>
         <source>
 Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
-        <oldsource>
-Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
         <translation>
 Процессы в этой песочнице будут запускаться с пользовательским токеном процесса, указывающим на песочницу, к которой они принадлежат.</translation>
     </message>
@@ -4517,8 +4491,7 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Windows/SupportDialog.cpp" line="115"/>
         <source>The installed supporter certificate &lt;b&gt;has expired %1 days ago&lt;/b&gt; and &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;must be renewed&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</source>
-        <oldsource>The installed supporter certificate &lt;b&gt;has expired %1 days ago&lt;/b&gt; and &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;must be renewed&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</oldsource>
-        <translation type="unfinished">Срок действия установленного сертификата поддержки &lt;b&gt;истек %1 дн. назад&lt;/b&gt; и его &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;необходимо обновить&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>Срок действия установленного сертификата поддержки &lt;b&gt;истек %1&#xa0;дн. назад&lt;/b&gt; и его &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;необходимо обновить&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="117"/>
@@ -4528,8 +4501,7 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Windows/SupportDialog.cpp" line="119"/>
         <source>&lt;u&gt;Commercial use of Sandboxie past the evaluation period&lt;/u&gt;, requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;support certificate&lt;/a&gt;.</source>
-        <oldsource>&lt;u&gt;Commercial use of Sandboxie past the evaluation period&lt;/u&gt;, requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt;.</oldsource>
-        <translation type="unfinished">&lt;u&gt;Для коммерческого использования Sandboxie по истечении ознакомительного периода&lt;/u&gt;, требуется действующий &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;сертификат поддержки&lt;/a&gt;.</translation>
+        <translation>&lt;u&gt;Для коммерческого использования Sandboxie по истечении ознакомительного периода&lt;/u&gt;, требуется действующий &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;сертификат поддержки&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="126"/>
@@ -4559,14 +4531,12 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Windows/SupportDialog.cpp" line="138"/>
         <source>Please continue &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;supporting the project&lt;/a&gt; by renewing your &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; and continue using the &lt;b&gt;enhanced functionality&lt;/b&gt; in new builds.</source>
-        <oldsource>Please continue &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; by renewing your &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; and continue using the &lt;b&gt;enhanced functionality&lt;/b&gt; in new builds.</oldsource>
-        <translation type="unfinished">Пожалуйста, продолжайте &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;поддерживать проект&lt;/a&gt;, обновив свой &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат поддержки&lt;/a&gt; и продолжать использовать &lt;b&gt;расширенные функции&lt;/b&gt; в новых сборках.</translation>
+        <translation>Пожалуйста, продолжайте &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;поддерживать проект&lt;/a&gt;, обновив свой &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат поддержки&lt;/a&gt; и продолжать использовать &lt;b&gt;расширенные функции&lt;/b&gt; в новых сборках.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="141"/>
         <source>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;. This pause allows you to consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt; or &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;earning one by contributing&lt;/a&gt; to the project. &lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</source>
-        <oldsource>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;, to give you time to contemplate the option of &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</oldsource>
-        <translation type="unfinished">Sandboxie &lt;u&gt;без&lt;/u&gt; действительного сертификата поддержки иногда &lt;b&gt;&lt;font color=&apos;red&apos;&gt;приостанавливается на несколько секунд&lt;/font&gt;&lt;/b&gt;, чтобы дать вам время обдумать вариант &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;поддержки проекта&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат поддержки&lt;/a&gt; не только удаляет это напоминание, но и включает &lt;b&gt;исключительные расширенные функции&lt;/b&gt;, обеспечивающие лучшую безопасность и совместимость .</translation>
+        <translation>Sandboxie &lt;u&gt;без&lt;/u&gt; действительного сертификата поддержки иногда &lt;b&gt;&lt;font color=&apos;red&apos;&gt;приостанавливается на несколько секунд&lt;/font&gt;&lt;/b&gt;. Эта пауза позволяет рассмотреть возможность &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;приобретения сертификата поддержки&lt;/a&gt; или &lt;a href=&quot;https: //sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;заработать один, внося свой вклад&lt;/a&gt; в проект. &lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат поддержки&lt;/a&gt; не только удаляет это напоминание, но и включает &lt;b&gt;эксклюзивную расширенную функциональность&lt;/b&gt;, обеспечивающую лучшую безопасность и совместимость.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="172"/>
@@ -6715,10 +6685,6 @@ Please note that this values are currently user specific and saved globally for 
         <translation>Удалить запись</translation>
     </message>
     <message>
-        <source>Don&apos;t show the popup message log for all SBIE messages</source>
-        <translation type="vanished">Не показывать журнал всплывающих сообщений для всех сообщений SBIE</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="301"/>
         <source>Notification Options</source>
         <translation>Параметры уведомлений</translation>
@@ -6731,8 +6697,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="340"/>
         <source>Disable SBIE messages popups (they will still be logged to the Messages tab)</source>
-        <oldsource>Disable SBIE messages popups (SBIE will still be logged to the log tab)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Отключить всплывающие окна сообщений SBIE (они по-прежнему будут регистрироваться на вкладке &quot;Сообщения&quot;)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="404"/>
@@ -6772,12 +6737,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1228"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Сторонники проекта Sandboxie-Plus могут получить &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат поддержки&lt;/a&gt;. Это похоже на лицензионный ключ, но для замечательных людей, использующих программное обеспечение с открытым исходным кодом. :-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1321"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. You can support the development by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;directly contributing to the project&lt;/a&gt;, showing your support by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt;, becoming a patron by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;subscribing on Patreon&lt;/a&gt;, or through a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;.&lt;br /&gt;Your support plays a vital role in the advancement and maintenance of Sandboxie.</source>
-        <translation type="unfinished"></translation>
+        <translation>Поддержание Sandboxie в актуальном состоянии со скользящими выпусками Windows и совместимости со всеми веб-браузерами - это бесконечная работа. Вы можете поддержать разработку, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;внеся непосредственный вклад в проект&lt;/a&gt; и проявив свою поддержку &lt;a href= &quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;купив сертификат поддержки&lt;/a&gt;, стать покровителем &lt;a href=&quot;https://sandboxie-plus. com/go.php?to=patreon&quot;&gt;подписавшись на Patreon&lt;/a&gt; или через &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;пожертвование PayPal&lt;/ a&gt;.&lt;br /&gt;Ваша поддержка играет жизненно важную роль в развитии и обслуживании Sandboxie.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1391"/>
@@ -7209,17 +7174,9 @@ Please note that this values are currently user specific and saved globally for 
         <translation>Поиск в канале Stable</translation>
     </message>
     <message>
-        <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation type="vanished">Поддержание Sandboxie в актуальном состоянии с помощью скользящих выпусков Windows и совместимости со всеми веб-браузерами — это бесконечная работа. Пожалуйста, поддержите эту работу пожертвованием.&lt;br /&gt;Вы можете поддержать разработку с помощью &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;пожертвования PayPal&lt;/a&gt;, работая также с кредитными картами.&lt;br /&gt;Или вы можете оказывать постоянную поддержку с &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;подпиской на Patreon&lt;/a &gt;.</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1201"/>
         <source>Search in the Preview channel</source>
         <translation>Поиск в канале Preview</translation>
-    </message>
-    <message>
-        <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation type="vanished">Сторонники проекта Sandboxie-Plus могут получить &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;сертификат поддержки&lt;/a&gt;. Это похоже на лицензионный ключ, но для замечательных людей, использующих программное обеспечение с открытым исходным кодом. :-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1171"/>

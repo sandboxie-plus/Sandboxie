@@ -623,7 +623,3 @@ void SafeShow(QWidget* pWidget) {
 	pWidget->setProperty("windowOpacity", 1.0);
 }
 
-int SafeExec(QDialog* pDialog){
-	SafeShow(pDialog);
-	return pDialog->exec();
-}

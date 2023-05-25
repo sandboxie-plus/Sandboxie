@@ -115,7 +115,6 @@ MISCHELPERS_EXPORT bool InitConsole(bool bCreateIfNeeded = true);
 #endif
 
 MISCHELPERS_EXPORT void SafeShow(QWidget* pWidget);
-MISCHELPERS_EXPORT int SafeExec(QDialog* pDialog);
 
 template <typename T>
 QSet<T> ListToSet(const QList<T>& qList) { return QSet<QString>(qList.begin(), qList.end()); }

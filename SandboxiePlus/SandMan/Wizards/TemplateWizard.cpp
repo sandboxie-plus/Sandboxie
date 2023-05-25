@@ -54,7 +54,7 @@ QString CTemplateWizard::GetTemplateLabel(ETemplateType Type)
 bool CTemplateWizard::CreateNewTemplate(CSandBox* pBox, ETemplateType Type, QWidget* pParent)
 {
 	CTemplateWizard wizard(Type, pParent);
-    if (!wizard.exec())
+    if (!theGUI->SafeExec(&wizard))
         return false;
 	
     if (Type == TmplCustom)

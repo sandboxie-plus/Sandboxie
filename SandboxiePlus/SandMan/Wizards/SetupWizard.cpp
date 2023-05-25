@@ -54,7 +54,7 @@ void CSetupWizard::showHelp()
 bool CSetupWizard::ShowWizard()
 {
     CSetupWizard wizard;
-    if (!wizard.exec())
+    if (!theGUI->SafeExec(&wizard))
         return false;
     
     //bool useBusiness = wizard.field("useBusiness").toBool();

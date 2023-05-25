@@ -38,7 +38,7 @@ void CNewBoxWizard::showHelp()
 QString CNewBoxWizard::CreateNewBox(bool bAlowTemp, QWidget* pParent)
 {
 	CNewBoxWizard wizard(bAlowTemp, pParent);
-    if (!wizard.exec())
+    if (!theGUI->SafeExec(&wizard))
         return QString();
 
     QString BoxName = wizard.field("boxName").toString();

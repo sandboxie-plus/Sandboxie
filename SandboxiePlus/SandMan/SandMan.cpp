@@ -1284,6 +1284,18 @@ bool CSandMan::IsSilentMode()
 	return IsFullScreenMode();
 }
 
+QWidget* g_GUIParent = NULL;
+
+int CSandMan::SafeExec(QDialog* pDialog)
+{
+	QWidget* pPrevParent = g_GUIParent;
+	g_GUIParent = pDialog;
+	SafeShow(pDialog);
+	int ret = pDialog->exec();
+	g_GUIParent = pPrevParent;
+	return ret;
+}
+
 void CSandMan::OnMessage(const QString& MsgData)
 {
 	QStringList Messages = MsgData.split("\n");

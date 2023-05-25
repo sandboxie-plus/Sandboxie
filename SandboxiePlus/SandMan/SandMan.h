@@ -22,6 +22,13 @@ class CBoxBorder;
 class CSbieTemplates;
 class CTraceView;
 
+struct ToolBarAction {
+	// Identifier of action stored in ini. Null for separator.	
+	QString scriptName;
+
+	// Not owned. Null for special cases.
+	QAction* action;
+};
 
 class CSandMan : public QMainWindow
 {
@@ -250,7 +257,7 @@ private:
 	void				CreateMaintenanceMenu();
 	void				CreateViewBaseMenu();
 	void				CreateHelpMenu(bool bAdvanced);
-	void				CreateToolBar();
+	void				CreateToolBar(bool bRebuild);
 	void				CreateLabel();
 	void				CreateView(int iViewMode);
 	void				CreateTrayIcon();
@@ -274,6 +281,19 @@ private:
 	void				CleanupShortcutPath(const QString& Path);
 	void				DeleteShortcut(const QString& Path);
 	void				CleanUpStartMenu(QMap<QString, QMap<QString, SBoxLink> >& BoxLinks);
+
+	QSet<QString>		GetToolBarItemsConfig();
+	void				SetToolBarItemsConfig(const QSet<QString>& items);
+	QList<ToolBarAction> GetAvailableToolBarActions();
+	void                CreateToolBarConfigMenu(const QList<ToolBarAction>& actions, const QSet<QString>& currentSet);
+	void				OnToolBarMenuItemClicked(const QString& scriptName);
+	void				OnResetToolBarMenuConfig();
+
+	const				QString ToolBarConfigKey = "UIConfig/ToolBarItems";
+
+	// per 1.9.3 menu. no whitespace!
+	const				QString DefaultToolBarItems = "Settings,KeepTerminated,CleanUpMenu,BrowseFiles,EditIni,EnableMonitor";
+
 
 	QWidget*			m_pMainWidget;
 	QVBoxLayout*		m_pMainLayout;

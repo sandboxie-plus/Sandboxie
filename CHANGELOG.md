@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed sbie:// links are not working [#2959](https://github.com/sandboxie-plus/Sandboxie/issues/2959)
 - fixed Sbie Messages, Trace Log, Recovery Log tabs should never hide some columns [#2940](https://github.com/sandboxie-plus/Sandboxie/issues/2940)
+- fixed registerdevicenotificationw DBT_DEVTYP_DEVICEINTERFACE [#2129](https://github.com/sandboxie-plus/Sandboxie/discussions/2129) [#1975](https://github.com/sandboxie-plus/Sandboxie/issues/1975)
 
 
 

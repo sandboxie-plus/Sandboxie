@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -556,8 +556,8 @@ import_fail:
     if (ok)
         ok = Gui_InitDlgTmpl(module);
 
-    if (ok)
-        ok = Gui_Init3(module);
+    if (ok && SbieApi_QueryConfBool(NULL, L"BlockRegisterDeviceNotification", FALSE))
+        ok = Gui_Init3(module); // todo remove later
 
     if (Gui_UseProxyService) {
 

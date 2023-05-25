@@ -481,7 +481,7 @@ check:
     // check if there are any protected root folders and restict the access to
     //
 
-    if (Iopb->MajorFunction == IRP_MJ_CREATE && File_ProtectedRoots.count != 0) {
+    if (Iopb->MajorFunction == IRP_MJ_CREATE && File_ProtectedRoots.count != 0 && Data->Iopb->TargetFileObject) {
 
         OBJECT_NAME_INFORMATION *Name;
         ULONG NameLength;
@@ -599,7 +599,7 @@ check:
     }
     else if (Iopb->MajorFunction == IRP_MJ_ACQUIRE_FOR_SECTION_SYNCHRONIZATION) {
 
-        if (!proc->image_from_box && proc->protect_host_images) {
+        if (!proc->image_from_box && proc->protect_host_images && Data->Iopb->TargetFileObject) {
 
             //
             // If host image protection is enabled, check if we are in process of creating a new process

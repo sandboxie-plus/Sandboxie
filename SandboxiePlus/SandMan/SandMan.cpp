@@ -2071,8 +2071,27 @@ void CSandMan::AddLogMessage(const QString& Message)
 	if (!m_pMessageLog)
 		return;
 
+	int last = m_pMessageLog->GetTree()->topLevelItemCount();
+	if (last > 0) {
+		QTreeWidgetItem* pItem = m_pMessageLog->GetTree()->topLevelItem(last-1);
+		if (pItem->data(1, Qt::UserRole).toString() == Message) {
+			int Count = pItem->data(0, Qt::UserRole).toInt();
+			if (Count == 0)
+				Count = 1;
+			Count++;
+			pItem->setData(0, Qt::UserRole, Count);
+			QLabel* pLabel = (QLabel*)m_pMessageLog->GetTree()->itemWidget(pItem, 1);
+			if(pLabel)
+				pLabel->setText(Message + tr(" (%1)").arg(Count));
+			else
+				pItem->setText(1, Message + tr(" (%1)").arg(Count));
+			return;
+		}
+	}
+
 	QTreeWidgetItem* pItem = new QTreeWidgetItem(); // Time|Message
 	pItem->setText(0, QDateTime::currentDateTime().toString("hh:mm:ss.zzz"));
+	pItem->setData(1, Qt::UserRole, Message);
 	m_pMessageLog->GetTree()->addTopLevelItem(pItem);
 	if (Message.contains("</a>")) {
 		QLabel* pLabel = new QLabel(Message);

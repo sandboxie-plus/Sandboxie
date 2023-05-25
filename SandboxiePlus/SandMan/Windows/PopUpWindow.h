@@ -33,13 +33,15 @@ class CPopUpMessage : public CPopUpEntry
 public:
 	CPopUpMessage(const QString& Message, quint32 MsgCode, const QStringList& MsgData, QWidget* parent = 0) : CPopUpEntry(Message, parent)
 	{
+		m_Message = Message;
 		m_MsgCode = MsgCode;
 		m_MsgData = MsgData;
+		m_Count = 1;
 
-		QLabel* pLabel = new QLabel(Message);
-		pLabel->setToolTip(Message);
-		pLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Maximum);
-		m_pMainLayout->addWidget(pLabel, 0, 0);
+		m_pLabel = new QLabel(Message);
+		m_pLabel->setToolTip(Message);
+		m_pLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Maximum);
+		m_pMainLayout->addWidget(m_pLabel, 0, 0);
 
 		if (MsgCode != 0)
 		{
@@ -69,6 +71,9 @@ public:
 	QStringList			GetMsgData() { return m_MsgData; }
 	QString				GetMsgData(int Index) { return m_MsgData.size() <= Index ? QString() : m_MsgData[Index]; }
 
+	QString				GetMsgString() { return m_Message; }
+	void				Repeat() { m_Count++; m_pLabel->setText(m_Message + tr(" (%1)").arg(m_Count)); }
+
 signals:
 	void				Dismiss();
 	void				Hide();
@@ -77,8 +82,11 @@ private slots:
 	void				OnHelp() { QDesktopServices::openUrl(QUrl(QString("https://sandboxie-plus.com/go.php?to=sbie-sbie%1/").arg(GetMsgId()))); }
 
 protected:
+	QString				m_Message;
 	quint32				m_MsgCode;
 	QStringList			m_MsgData;
+	QLabel*				m_pLabel;
+	int					m_Count;
 };
 
 class CPopUpPrompt : public CPopUpEntry

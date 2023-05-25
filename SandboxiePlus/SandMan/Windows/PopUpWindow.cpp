@@ -148,6 +148,15 @@ void CPopUpWindow::AddLogMessage(const QString& Message, quint32 MsgCode, const 
 	if (IsMessageHidden(MsgCode, MsgData))
 		return;
 
+	int RowCounter = ui.table->rowCount();
+	if (RowCounter > 0) {
+		CPopUpMessage* pEntry = qobject_cast<CPopUpMessage*>(ui.table->cellWidget(RowCounter-1, 0));
+		if (pEntry && pEntry->GetMsgString() == Message) {
+			pEntry->Repeat();
+			return;
+		}
+	}
+
 	CPopUpMessage* pEntry = new CPopUpMessage(Message, MsgCode, MsgData, this);
 	QObject::connect(pEntry, SIGNAL(Dismiss()), this, SLOT(OnDismissMessage()));
 	QObject::connect(pEntry, SIGNAL(Hide()), this, SLOT(OnHideMessage()));

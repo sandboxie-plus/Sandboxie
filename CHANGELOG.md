@@ -9,10 +9,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added Turn SBIE message IDs into clickable links [#2953](https://github.com/sandboxie-plus/Sandboxie/issues/2953)
+- added Limiting the number of same log messages [#2856](https://github.com/sandboxie-plus/Sandboxie/issues/2856)
+
 
 ### Fixed
 - fixed sbie:// links are not working [#2959](https://github.com/sandboxie-plus/Sandboxie/issues/2959)
 - fixed Sbie Messages, Trace Log, Recovery Log tabs should never hide some columns [#2940](https://github.com/sandboxie-plus/Sandboxie/issues/2940)
+
 
 
 

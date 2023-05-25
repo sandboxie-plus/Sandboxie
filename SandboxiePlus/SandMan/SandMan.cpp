@@ -2073,8 +2073,16 @@ void CSandMan::AddLogMessage(const QString& Message)
 
 	QTreeWidgetItem* pItem = new QTreeWidgetItem(); // Time|Message
 	pItem->setText(0, QDateTime::currentDateTime().toString("hh:mm:ss.zzz"));
-	pItem->setText(1, Message);
 	m_pMessageLog->GetTree()->addTopLevelItem(pItem);
+	if (Message.contains("</a>")) {
+		QLabel* pLabel = new QLabel(Message);
+		pLabel->setContentsMargins(3, 0, 0, 0);
+		connect(pLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+		m_pMessageLog->GetTree()->setItemWidget(pItem, 1, pLabel);
+	}
+	else
+		pItem->setText(1, Message);
+		
 
 	m_pMessageLog->GetView()->verticalScrollBar()->setValue(m_pMessageLog->GetView()->verticalScrollBar()->maximum());
 }
@@ -2124,7 +2132,14 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 		// return;
 	}
 
-	QString Message = MsgCode != 0 ? theAPI->GetSbieMsgStr(MsgCode, m_LanguageId) : (MsgData.size() > 0 ? MsgData[0] : QString());
+	QString Message;
+	if (MsgCode != 0) {
+		Message = theAPI->GetSbieMsgStr(MsgCode, m_LanguageId);
+		Message.insert(8, "</a>");
+		Message.prepend("<a href=\"https://sandboxie-plus.com/go.php?to=sbie-sbie" + QString::number(MsgCode & 0xFFFF) + "\">");
+	}
+	else if(MsgData.size() > 0)
+		Message = MsgData[0];
 
 	for (int i = 1; i < MsgData.size(); i++)
 		Message = Message.arg(MsgData[i]);

@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.9.5 / 5.64.5] - 2023-05-??
 
+### Added
+- added Turn SBIE message IDs into clickable links [#2953](https://github.com/sandboxie-plus/Sandboxie/issues/2953)
+
 ### Fixed
 - fixed sbie:// links are not working [#2959](https://github.com/sandboxie-plus/Sandboxie/issues/2959)
 - fixed Sbie Messages, Trace Log, Recovery Log tabs should never hide some columns [#2940](https://github.com/sandboxie-plus/Sandboxie/issues/2940)

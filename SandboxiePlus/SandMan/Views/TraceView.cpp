@@ -81,6 +81,10 @@ CTraceTree::CTraceTree(QWidget* parent)
 	m_pTreeList->setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(m_pTreeList, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(OnMenu(const QPoint&)));
 
+	m_pTreeList->setColumnFixed(0, true);
+	m_pTreeList->setColumnFixed(1, true);
+	m_pTreeList->setColumnFixed(2, true);
+	m_pTreeList->setColumnFixed(3, true);
 	m_pTreeList->setColumnReset(1);
 	//connect(m_pTreeList, SIGNAL(ResetColumns()), m_pTreeList, SLOT(OnResetColumns()));
 	//connect(m_pBoxTree, SIGNAL(ColumnChanged(int, bool)), this, SLOT(OnColumnsChanged()));
@@ -151,6 +155,10 @@ CMonitorList::CMonitorList(QWidget* parent)
 	m_pTreeList->setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(m_pTreeList, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(OnMenu(const QPoint&)));
 
+	m_pTreeList->setColumnFixed(0, true);
+	m_pTreeList->setColumnFixed(1, true);
+	m_pTreeList->setColumnFixed(2, true);
+	m_pTreeList->setColumnFixed(3, true);
 	m_pTreeList->setColumnReset(1);
 	//connect(m_pTreeList, SIGNAL(ResetColumns()), m_pTreeList, SLOT(OnResetColumns()));
 	//connect(m_pBoxTree, SIGNAL(ColumnChanged(int, bool)), this, SLOT(OnColumnsChanged()));

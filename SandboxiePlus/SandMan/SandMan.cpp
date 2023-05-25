@@ -984,6 +984,7 @@ void CSandMan::CreateView(int iViewMode)
 		
 		//m_pMessageLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
 		((QTreeWidgetEx*)m_pMessageLog->GetView())->setHeaderLabels(tr("Time|Message").split("|"));
+		((QTreeWidgetEx*)m_pMessageLog->GetView())->setColumnFixed(1, true);
 
 		m_pMessageLog->GetMenu()->insertAction(m_pMessageLog->GetMenu()->actions()[0], m_pCleanUpMsgLog);
 		m_pMessageLog->GetMenu()->insertSeparator(m_pMessageLog->GetMenu()->actions()[0]);
@@ -1009,6 +1010,8 @@ void CSandMan::CreateView(int iViewMode)
 
 		//m_pRecoveryLog->GetView()->setItemDelegate(theGUI->GetItemDelegate());
 		((QTreeWidgetEx*)m_pRecoveryLog->GetView())->setHeaderLabels(tr("Time|Box Name|File Path").split("|"));
+		((QTreeWidgetEx*)m_pRecoveryLog->GetView())->setColumnFixed(1, true);
+		((QTreeWidgetEx*)m_pRecoveryLog->GetView())->setColumnFixed(2, true);
 
 		m_pRecoveryLog->GetMenu()->insertAction(m_pRecoveryLog->GetMenu()->actions()[0], m_pCleanUpRecovery);
 		m_pRecoveryLog->GetMenu()->insertSeparator(m_pRecoveryLog->GetMenu()->actions()[0]);

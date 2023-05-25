@@ -45,6 +45,19 @@ public:
 		m_ColumnReset = iMode;
 	}
 
+	void setColumnFixed(int column, bool fixed) 
+	{
+		if (fixed)
+			m_FixedColumns.insert(column);
+		else
+			m_FixedColumns.remove(column);
+	}
+
+	bool isColumnFixed(int column) const
+	{
+		return m_FixedColumns.contains(column);
+	}
+
     QSize sizeHint() const {return m_AutoFitMax ? MySize() : QTreeWidget::sizeHint(); };
     QSize minimumSizeHint() const { return m_AutoFitMax ? MySize() : QTreeWidget::sizeHint(); };
 
@@ -68,7 +81,10 @@ private slots:
 			QTreeWidgetItem* pHeader = headerItem();
 			for(int i=0; i < columnCount(); i++)
 			{
-				QAction* pAction = new QAction(pHeader->text(i), m_pMenu);
+				QString Label = pHeader->text(i);
+				if(Label.isEmpty() || m_FixedColumns.contains(i))
+					continue;
+				QAction* pAction = new QAction(Label, m_pMenu);
 				pAction->setCheckable(true);
 				connect(pAction, SIGNAL(triggered()), this, SLOT(OnMenu()));
 				m_pMenu->addAction(pAction);
@@ -149,5 +165,6 @@ protected:
 	QMenu*				m_pMenu;
 	QMap<QAction*, int>	m_Columns;
 	int					m_AutoFitMax;
+	QSet<int>			m_FixedColumns;
 	int					m_ColumnReset;
 };

@@ -4,6 +4,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.9.5 / 5.64.5] - 2023-05-??
+
+### Fixed
+- fixed sbie:// links are not working [#2959](https://github.com/sandboxie-plus/Sandboxie/issues/2959)
+
+
+
 ## [1.9.4 / 5.64.4] - 2023-05-24
 
 ### Added

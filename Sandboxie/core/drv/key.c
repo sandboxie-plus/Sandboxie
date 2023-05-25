@@ -712,6 +712,9 @@ mount_loop:
         mount = List_Next(mount);
     }
 
+    if (!failed && proc->box->key_path_len >= MAX_REG_ROOT_LEN)
+        failed = TRUE;
+
     //
     // if we haven't failed, but also couldn't find a mount, then
     // initialize a new mount point, with a zero reference count.
@@ -1143,7 +1146,7 @@ unmount_loop:
                 goto unmount_loop;
             }
 
-            wcscpy(args->path.val, mount->root_key); // todo: ensure that root_key_len cant be greater the MAX_REG_ROOT_LEN
+            wcscpy(args->path.val, mount->root_key);
 
             mount->unmount_pending = FALSE;
 

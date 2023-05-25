@@ -285,14 +285,14 @@ _FX BOOLEAN File_Init_Filter(void)
 
 _FX void File_Unload_Filter(void)
 {
-    if (File_ProtectedRootsLock) {
-        Mem_FreeLockResource(&File_ProtectedRootsLock);
-        File_ProtectedRootsLock = NULL;
-    }
-
     if (File_FilterCookie) {
         FltUnregisterFilter(File_FilterCookie);
         File_FilterCookie = NULL;
+    }
+
+    if (File_ProtectedRootsLock) {
+        Mem_FreeLockResource(&File_ProtectedRootsLock);
+        File_ProtectedRootsLock = NULL;
     }
 }
 

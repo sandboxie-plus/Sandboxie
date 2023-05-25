@@ -158,7 +158,6 @@ CMonitorList::CMonitorList(QWidget* parent)
 	m_pTreeList->setColumnFixed(0, true);
 	m_pTreeList->setColumnFixed(1, true);
 	m_pTreeList->setColumnFixed(2, true);
-	m_pTreeList->setColumnFixed(3, true);
 	m_pTreeList->setColumnReset(1);
 	//connect(m_pTreeList, SIGNAL(ResetColumns()), m_pTreeList, SLOT(OnResetColumns()));
 	//connect(m_pBoxTree, SIGNAL(ColumnChanged(int, bool)), this, SLOT(OnColumnsChanged()));

@@ -1467,8 +1467,7 @@ _FX NTSTATUS Thread_SetInformationThread_ChangeNotifyToken(PROCESS *proc)
         //
 
         FilteredTokenObject = Token_Restrict(
-                CurrentToken, DISABLE_MAX_PRIVILEGE, NULL,
-                proc);
+                CurrentToken, DISABLE_MAX_PRIVILEGE, proc);
 
         ObDereferenceObject(CurrentToken);
 

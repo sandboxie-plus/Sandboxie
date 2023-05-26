@@ -1810,7 +1810,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/PopUpWindow.h" line="75"/>
         <source> (%1)</source>
-        <translation type="unfinished"> (%1)</translation>
+        <translation> (%1)</translation>
     </message>
 </context>
 <context>
@@ -2424,7 +2424,6 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
     <message>
         <location filename="SandMan.cpp" line="404"/>
         <source>&amp;Maintenance</source>
-        <translatorcomment>Est-ce vraiment utile de traduire cela ?</translatorcomment>
         <translation>&amp;Maintenance</translation>
     </message>
     <message>
@@ -2445,7 +2444,6 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
     <message>
         <location filename="SandMan.cpp" line="409"/>
         <source>&amp;Advanced</source>
-        <translatorcomment>Est-ce vraiment utile de traduire cela ?</translatorcomment>
         <translation>&amp;Avancé</translation>
     </message>
     <message>
@@ -2614,7 +2612,6 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
     <message>
         <location filename="SandMan.cpp" line="441"/>
         <source>&amp;Help</source>
-        <translatorcomment>Est-ce vraiment utile de traduire cela ?</translatorcomment>
         <translation>&amp;Aide</translation>
     </message>
     <message>
@@ -2788,7 +2785,7 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
         <location filename="SandMan.cpp" line="2085"/>
         <location filename="SandMan.cpp" line="2087"/>
         <source> (%1)</source>
-        <translation type="unfinished"> (%1)</translation>
+        <translation> (%1)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2470"/>
@@ -3925,12 +3922,12 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <source>Terminal (as Admin)</source>
         <translatorcomment>Traduction utilisée par Windows</translatorcomment>
-        <translation type="vanished">Invite de commandes (Admin)</translation>
+        <translation type="vanished">Invite de commandes (en tant qu&apos;administrateur)</translation>
     </message>
     <message>
         <source>Terminal (32-bit)</source>
         <translatorcomment>Traduction utilisée par Windows</translatorcomment>
-        <translation type="vanished">Invite de commandes (32-bit)</translation>
+        <translation type="vanished">Invite de commandes (32 bits)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="193"/>
@@ -5775,7 +5772,7 @@ Les processus dans ce bac seront lancés avec un jeton de processus personnalis�
     </message>
     <message>
         <source>Here you can specify programs and/or services that are to be started automatically in the sandbox when it is activated</source>
-        <translatorcomment>En Français, le ou n&apos;est pas exclusif.</translatorcomment>
+        <translatorcomment>En Français, le « ou » n&apos;est pas exclusif.</translatorcomment>
         <translation type="vanished">Ici, vous pouvez spécifier les programmes ou les services qui doivent être lancés automatiquement dans le bac à sable lorsqu&apos;il est activé</translation>
     </message>
     <message>
@@ -6139,7 +6136,7 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1896"/>
         <source>Breakout Folder</source>
-        <translatorcomment>Normlalement « Dossier d&apos;évasion »</translatorcomment>
+        <translatorcomment>Normalement « Dossier d&apos;évasion »</translatorcomment>
         <translation>Ajouter un dossier</translation>
     </message>
     <message>

@@ -447,6 +447,7 @@
     <QtMoc Include="BoxMonitor.h" />
     <ClInclude Include="Helpers\FindTool.h" />
     <ClInclude Include="Helpers\FullScreen.h" />
+    <ClInclude Include="Helpers\KeepSubMenusVisibleStyle.h" />
     <ClInclude Include="Helpers\ReadDirectoryChanges.h" />
     <ClInclude Include="Helpers\ReadDirectoryChangesPrivate.h" />
     <ClInclude Include="Helpers\ThreadSafeQueue.h" />

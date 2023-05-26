@@ -764,33 +764,33 @@ QList<ToolBarAction> CSandMan::GetAvailableToolBarActions()
 		ToolBarAction{"NewBox", m_pNewBox},
 		ToolBarAction{"NewGroup", m_pNewGroup},
 		ToolBarAction{"ImportBox", m_pImportBox},
-		ToolBarAction{NULL, NULL},           // separator
-		ToolBarAction{"CleanUpMenu", NULL},  // special case
+		ToolBarAction{nullptr, nullptr},        // separator
+		ToolBarAction{"CleanUpMenu", nullptr},  // special case
 		ToolBarAction{"Settings", m_pMenuSettings},
 		ToolBarAction{"EditIni", m_pEditIni},
 		ToolBarAction{"EditTemplates", m_pEditIni2},
 		ToolBarAction{"EditPlusIni", m_pEditIni3},
 		ToolBarAction{"ReloadIni", m_pReloadIni},
 		ToolBarAction{"Refresh", m_pRefreshAll},
-		ToolBarAction{NULL, NULL},
+		ToolBarAction{nullptr, nullptr},
 		ToolBarAction{"RunBoxed", m_pRunBoxed},
 		ToolBarAction{"IsBoxed", m_pWndFinder},
 		ToolBarAction{"TerminateAll", m_pEmptyAll},
 		ToolBarAction{"KeepTerminated", m_pKeepTerminated},
 		ToolBarAction{"BrowseFiles", m_pMenuBrowse},
 		ToolBarAction{"EnableMonitor", m_pEnableMonitoring},
-		ToolBarAction{NULL, NULL},
+		ToolBarAction{nullptr, nullptr},
 		ToolBarAction{"Connect", m_pConnect},
 		ToolBarAction{"Disconnect", m_pDisconnect},
 		ToolBarAction{"StopAll", m_pStopAll},
 		ToolBarAction{"SetupWizard", m_pSetupWizard},
 		ToolBarAction{"UninstallAll", m_pUninstallAll},
-		ToolBarAction{NULL, NULL},
+		ToolBarAction{nullptr, nullptr},
 		ToolBarAction{"CheckForUpdates", m_pUpdate},
 		ToolBarAction{"About", m_pAbout},
-		ToolBarAction{NULL, NULL},
+		ToolBarAction{nullptr, nullptr},
 		ToolBarAction{"Exit", m_pExit},
-		ToolBarAction{NULL, NULL},
+		ToolBarAction{nullptr, nullptr},
 		ToolBarAction{"Contribute", m_pContribution}
 	};
 }
@@ -819,7 +819,7 @@ void CSandMan::CreateToolBarConfigMenu(const QList<ToolBarAction>& actions, cons
 
 	for (auto sa : actions)
 	{
-		if (sa.scriptName == NULL) {
+		if (sa.scriptName == nullptr) {
 			m_pToolBarContextMenu->addSeparator();
 			continue;
 		}
@@ -871,7 +871,7 @@ void CSandMan::CreateToolBar(bool rebuild)
 
 	for (auto sa : scriptableActions)
 	{
-		if (sa.scriptName == NULL) {
+		if (sa.scriptName == nullptr) {
 			needsSeparator = true;
 			continue;
 		}

@@ -1459,11 +1459,12 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	else // custom run menu command
 	{
 		QString Command = Action->data().toString();
+		QString WorkingDir = Action->property("WorkingDir").toString();
 		if (Command.isEmpty())
-			Results.append(SandBoxes.first()->RunStart("start_menu"));
+			Results.append(SandBoxes.first()->RunStart("start_menu", false, WorkingDir));
 		else {
 			auto pBoxEx = SandBoxes.first().objectCast<CSandBoxPlus>();
-			Results.append(SandBoxes.first()->RunStart(pBoxEx->GetFullCommand(Command)));
+			Results.append(SandBoxes.first()->RunStart(pBoxEx->GetFullCommand(Command), false, WorkingDir));
 		}
 	}
 
@@ -1838,6 +1839,7 @@ void CSbieView::UpdateStartMenu(CSandBoxPlus* pBoxEx)
 		if(Icon.isNull()) Icon = m_IconProvider.icon(QFileInfo(Link.Target));
 		pAction->setIcon(Icon);
 		pAction->setData(Link.Target);
+		pAction->setProperty("WorkingDir", Link.WorkDir);
 	}
 }
 

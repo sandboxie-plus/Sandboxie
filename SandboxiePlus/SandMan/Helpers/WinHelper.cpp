@@ -50,6 +50,10 @@ QVariantMap ResolveShortcut(const QString& LinkPath)
                     return Link;
 				Link["Arguments"] = QString::fromWCharArray(szPath);
 
+                hRes = psl->GetWorkingDirectory(szPath, ARRAYSIZE(szPath));
+                if (!FAILED(hRes))
+				    Link["WorkingDir"] = QString::fromWCharArray(szPath);
+
 				int IconIndex;
                 hRes = psl->GetIconLocation(szPath, ARRAYSIZE(szPath), &IconIndex);
                 if (FAILED(hRes))

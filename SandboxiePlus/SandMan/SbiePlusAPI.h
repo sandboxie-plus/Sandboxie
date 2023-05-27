@@ -163,6 +163,7 @@ public:
 		QString Target;
 		QString Icon;
 		int IconIndex;
+		QString WorkDir;
 	};
 
 	QList<SLink>			GetStartMenu() const { return m_StartMenu.values(); }

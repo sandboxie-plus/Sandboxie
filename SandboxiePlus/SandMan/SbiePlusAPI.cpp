@@ -518,9 +518,12 @@ void CSandBoxPlus::ScanStartMenu()
 		pLink->Target = Link["Path"].toString();
 		pLink->Icon = Link["IconPath"].toString();
 		pLink->IconIndex = Link["IconIndex"].toInt();
+		pLink->WorkDir = Link["WorkingDir"].toString();
 
 		if (!pLink->Target.isEmpty() && !QFile::exists(pLink->Target) && !IsBoxexPath(pLink->Target))
 			pLink->Target = theAPI->GetBoxedPath(this, pLink->Target, FoundLink.Snapshot);
+		if (!pLink->WorkDir.isEmpty() && !QFile::exists(pLink->WorkDir) && !IsBoxexPath(pLink->WorkDir))
+			pLink->WorkDir = theAPI->GetBoxedPath(this, pLink->WorkDir, FoundLink.Snapshot);
 		if (!pLink->Icon.isEmpty() && !QFile::exists(pLink->Icon) && !IsBoxexPath(pLink->Icon))
 			pLink->Icon = theAPI->GetBoxedPath(this, pLink->Icon, FoundLink.Snapshot);
 	}

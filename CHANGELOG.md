@@ -6,12 +6,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.9.6 / 5.64.6] - 2023-05-??
 
-### Changed
-- Don't close submenus on mouse-leave [#2963](https://github.com/sandboxie-plus/Sandboxie/issues/2963)
+### Added
+- added full stack trace to all trace messages
 
 ### Fixed
 - fixed an issue with token manipulation in the SbieDrv driver
-
+- fixed "Reset all GUI options" does not reset all GUI sections as expected [#2967](https://github.com/sandboxie-plus/Sandboxie/issues/2967)
 
 
 

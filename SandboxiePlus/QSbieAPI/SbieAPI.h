@@ -1,6 +1,6 @@
 /*
  * 
- * Copyright (c) 2020, David Xanatos
+ * Copyright (c) 2020-2023, David Xanatos
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -260,11 +260,39 @@ protected:
 	QString					m_PublicDir;
 	QString					m_UserDir;
 
+public:
+	
+	struct SScopedVoid {
+		~SScopedVoid()					{ if (ptr) free(ptr); }
+
+		inline void Assign(void* p)		{Q_ASSERT(!ptr); ptr = p;}
+
+	protected:
+		SScopedVoid(void* p) : ptr(p)	{}
+		void* ptr;
+	};
+
+	template <typename T>
+	struct SScoped : public SScopedVoid {
+		SScoped(void* p = NULL) : SScopedVoid(p) {}
+
+		inline T* Detache()				{T* p = ptr; ptr = NULL; return p;}
+		inline T* Value()				{return (T*)ptr;}
+		inline T* operator->() const	{return (T*)ptr;}
+		inline T& operator*() const     {return *((T*)ptr);}
+		inline operator T*() const		{return (T*)ptr;}
+
+	private:
+		SScoped(const SScoped& other)	{} // copying is explicitly forbidden
+		SScoped<T>& operator=(T* p)	{return *this;}
+		SScoped<T>& operator=(const SScoped<T>& other)	{return *this;}
+	};
+
 private:
 	mutable QMutex			m_ThreadMutex;
 	mutable QWaitCondition	m_ThreadWait;
 
-	SB_STATUS CallServer(void* req, void* rpl) const;
+	SB_STATUS CallServer(void* req, SScopedVoid* prpl) const;
 	SB_STATUS SbieIniSet(void *RequestBuf, void *pPasswordWithinRequestBuf, const QString& SectionName, const QString& SettingName);
 	struct SSbieAPI* m;
 };

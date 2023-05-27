@@ -150,6 +150,7 @@
         <file>Actions/Windows.png</file>
         <file>Actions/Interface.png</file>
         <file>Actions/Notification.png</file>
+        <file>Actions/Stack.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

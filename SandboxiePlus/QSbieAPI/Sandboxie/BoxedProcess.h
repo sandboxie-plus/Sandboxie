@@ -53,6 +53,12 @@ public:
 	virtual QString			GetBoxName() const { return m_BoxName; }
 	virtual class CSandBox* GetBoxPtr() const { return m_pBox; }
 
+	virtual void			ResolveSymbols(const QVector<quint64>& Addresses);
+	virtual QString			GetSymbol(quint64 Address) { return m_Symbols.value(Address).Name; }
+
+public slots:
+	virtual void			OnSymbol(quint64 Address, const QString& Name) { m_Symbols[Address].Name = Name; }
+
 protected:
 	friend class CSbieAPI;
 
@@ -73,6 +79,12 @@ protected:
 	bool			m_bIsWoW64;
 
 	class CSandBox*	m_pBox;
+
+	struct SSymbol {
+		QString Name;
+	};
+
+	QHash<quint64, SSymbol> m_Symbols;
 
 //private:
 //	struct SBoxedProcess* m;

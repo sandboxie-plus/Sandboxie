@@ -14,18 +14,6 @@ CSettings* theConf = NULL;
 
 QString g_PendingMessage;
 
-class CCustomStyle : public QProxyStyle {
-public:
-	CCustomStyle(QStyle* style = 0) : QProxyStyle(style) {}
-
-	int styleHint(StyleHint stylehint, const QStyleOption* opt = nullptr,
-		const QWidget* widget = nullptr, QStyleHintReturn* returnData = nullptr) const
-	{
-		if (stylehint == SH_Menu_SubMenuSloppyCloseTimeout) 
-			return -1;
-		return QProxyStyle::styleHint(stylehint, opt, widget, returnData);
-	}
-};
 int main(int argc, char *argv[])
 {
 	srand(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
@@ -73,9 +61,6 @@ int main(int argc, char *argv[])
 
 	QtSingleApplication app(argc, argv);
 	app.setQuitOnLastWindowClosed(false);
-
-	CCustomStyle* style = new CCustomStyle(app.style());
-	app.setStyle(style);
 
 	//InitConsole(false);
 

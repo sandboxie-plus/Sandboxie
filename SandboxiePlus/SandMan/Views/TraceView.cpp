@@ -49,8 +49,28 @@
 // CTraceTree
 
 CTraceTree::CTraceTree(QWidget* parent) 
-	: CPanelWidget<QTreeViewEx>(parent) 
+	: CPanelView(parent) 
 {
+	m_pMainLayout = new QVBoxLayout();
+	m_pMainLayout->setContentsMargins(0,0,0,0);
+	this->setLayout(m_pMainLayout);
+
+	m_pSplitter = new QSplitter();
+	m_pSplitter->setOrientation(Qt::Horizontal);
+	m_pMainLayout->addWidget(m_pSplitter);
+
+	m_pTreeList = new QTreeViewEx();
+	m_pTreeList->setColumnFixed(0, true);
+	m_pTreeList->setColumnFixed(1, true);
+	m_pTreeList->setColumnFixed(2, true);
+	m_pTreeList->setColumnFixed(3, true);
+	m_pTreeList->setContextMenuPolicy(Qt::CustomContextMenu);
+	connect(m_pTreeList, SIGNAL(customContextMenuRequested( const QPoint& )), this, SLOT(OnMenu(const QPoint &)));
+	//m_pSplitter->addWidget(m_pTreeList);
+	m_pTreeList->setMinimumHeight(50);
+	AddPanelItemsToMenu();
+
+
 	m_bHighLight = false;
 	//m_FilterCol = -1;
 
@@ -81,19 +101,26 @@ CTraceTree::CTraceTree(QWidget* parent)
 	m_pTreeList->setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(m_pTreeList, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(OnMenu(const QPoint&)));
 
-	m_pTreeList->setColumnFixed(0, true);
-	m_pTreeList->setColumnFixed(1, true);
-	m_pTreeList->setColumnFixed(2, true);
-	m_pTreeList->setColumnFixed(3, true);
 	m_pTreeList->setColumnReset(1);
 	//connect(m_pTreeList, SIGNAL(ResetColumns()), m_pTreeList, SLOT(OnResetColumns()));
 	//connect(m_pBoxTree, SIGNAL(ColumnChanged(int, bool)), this, SLOT(OnColumnsChanged()));
 
 	//m_pMainLayout->addWidget(CFinder::AddFinder(m_pTreeList, m_pSortProxy));
+	/*CFinder* pFinder = new CFinder(this, this, CFinder::eHighLightDefault);
+	pFinder->SetTree(m_pTreeList);
+	m_pMainLayout->addWidget(pFinder);*/
+
 	CFinder* pFinder;
-	m_pMainLayout->addWidget(CFinder::AddFinder(m_pTreeList, this, CFinder::eHighLightDefault, &pFinder));
+	//m_pMainLayout->addWidget(CFinder::AddFinder(m_pTreeList, this, CFinder::eHighLightDefault, &pFinder));
+	m_pSplitter->addWidget(CFinder::AddFinder(m_pTreeList, this, CFinder::eHighLightDefault, &pFinder));
 	pFinder->SetModel(m_pTraceModel);
 	//QObject::connect(pFinder, SIGNAL(SelectNext()), this, SLOT(SelectNext()));
+
+
+	m_pStackView = new CStackView();
+	m_pSplitter->addWidget(m_pStackView);
+
+	connect(m_pTreeList->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), SLOT(ItemSelection(QItemSelection, QItemSelection)));
 
 
 	QByteArray Columns = theConf->GetBlob("MainWindow/TraceLog_Columns");
@@ -101,11 +128,21 @@ CTraceTree::CTraceTree(QWidget* parent)
 		((QTreeViewEx*)GetView())->restoreState(Columns);
 	else
 		((QTreeViewEx*)GetView())->OnResetColumns();
+
+	QByteArray Split = theConf->GetBlob("MainWindow/TraceSplitter");
+	if(!Split.isEmpty())
+		m_pSplitter->restoreState(Split);
+	//else { // by default colapse the details pannel
+	//	auto Sizes = m_pSplitter->sizes();
+	//	Sizes[1] = 0;
+	//	m_pSplitter->setSizes(Sizes);
+	//}
 }
 
 CTraceTree::~CTraceTree() 
 {
 	theConf->SetBlob("MainWindow/TraceLog_Columns", GetView()->header()->saveState());
+	theConf->SetBlob("MainWindow/TraceSplitter", m_pSplitter->saveState());
 }
 
 void CTraceTree::SetFilter(const QString& Exp, int iOptions, int Column) 
@@ -121,6 +158,20 @@ void CTraceTree::SetFilter(const QString& Exp, int iOptions, int Column)
 
 	if(bReset)
 		emit FilterChanged();
+}
+
+void CTraceTree::ItemSelection(const QItemSelection& selected, const QItemSelection& deselected)
+{
+	QItemSelectionModel* selectionModel = m_pTreeList->selectionModel();
+	QItemSelection selection = selectionModel->selection();
+
+	if (selection.indexes().isEmpty()) 
+		return;
+
+	CTraceEntryPtr pEntry = m_pTraceModel->GetEntry(selection.indexes().first());
+	CBoxedProcessPtr pProcess = theAPI->GetProcessById(pEntry->GetProcessId());
+	if(!pProcess.isNull())
+		m_pStackView->ShowStack(pEntry->GetStack(), pProcess);
 }
 
 
@@ -183,8 +234,6 @@ CMonitorList::~CMonitorList()
 
 CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 {
-	//m_pTreeList->setItemDelegate(theGUI->GetItemDelegate());
-
 	m_FullRefresh = true;
 
 	m_LastID = 0;
@@ -258,8 +307,10 @@ CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 	else {
 		m_pAllBoxes = m_pTraceToolBar->addAction(CSandMan::GetIcon("All"), tr("Show All Boxes"), this, SLOT(OnSetFilter()));
 		m_pAllBoxes->setCheckable(true);
-		m_pAllBoxes->setChecked(theConf->GetBool("Options/UseLogTree"));
 	}
+
+	m_pShowStack = m_pTraceToolBar->addAction(CSandMan::GetIcon("Stack"), tr("Show Stack Trace"), this, SLOT(OnShowStack()));
+	m_pShowStack->setCheckable(true);
 
 	m_pTraceToolBar->addSeparator();
 
@@ -310,6 +361,19 @@ void CTraceView::timerEvent(QTimerEvent* pEvent)
 		return;
 
 	Refresh();
+}
+
+void CTraceView::SetEnabled(bool bSet)
+{
+	setEnabled(bSet);
+	m_pShowStack->setChecked(theAPI->GetGlobalSettings()->GetBool("MonitorStackTrace", false));
+	m_pTrace->m_pStackView->setVisible(m_pShowStack->isChecked());
+}
+
+void CTraceView::OnShowStack()
+{
+	theAPI->GetGlobalSettings()->SetBool("MonitorStackTrace", m_pShowStack->isChecked());
+	m_pTrace->m_pStackView->setVisible(m_pShowStack->isChecked());
 }
 
 void CTraceView::Refresh()
@@ -451,7 +515,7 @@ void CTraceView::Refresh()
 
 		if (m_pMonitor->m_pMonitorModel->IsObjTree())
 		{
-			QTimer::singleShot(100, this, [this, NewBranches]() {
+			QTimer::singleShot(10, this, [this, NewBranches]() {
 				CSortFilterProxyModel* pSortProxy = m_pMonitor->m_pSortProxy;
 				foreach(const QModelIndex& Index, NewBranches) {
 					m_pMonitor->GetTree()->expand(pSortProxy->mapFromSource(Index));
@@ -472,7 +536,7 @@ void CTraceView::Refresh()
 
 		if (m_pTrace->m_pTraceModel->IsTree())
 		{
-			QTimer::singleShot(100, this, [this, NewBranches]() {
+			QTimer::singleShot(10, this, [this, NewBranches]() {
 				quint64 start = GetCurCycle();
 				foreach(const QModelIndex& Index, NewBranches)
 					m_pTrace->GetTree()->expand(Index);
@@ -527,6 +591,7 @@ void CTraceView::OnSetMode()
 	m_pTraceTree->setEnabled(!m_pMonitorMode->isChecked());
 	m_pObjectTree->setEnabled(m_pMonitorMode->isChecked());
 	m_pTraceStatus->setEnabled(!m_pMonitorMode->isChecked());
+	m_pShowStack->setEnabled(!m_pMonitorMode->isChecked());
 
 	m_FullRefresh = true;
 	Refresh();

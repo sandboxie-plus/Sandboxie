@@ -279,7 +279,7 @@ QList<QPair<QString, QString>> CSbieIni::GetIniSection(qint32* pStatus, bool wit
 	return Settings;
 }
 
-SB_STATUS CSbieIni::RenameSection( const QString& NewName, bool deleteOld) // Note: deleteOld is used when duplicating a box
+SB_STATUS CSbieIni::RenameSection(const QString& NewName, bool deleteOld) // Note: deleteOld is used when duplicating a box
 {
 	qint32 status = STATUS_SUCCESS;
 
@@ -329,6 +329,8 @@ do_delete:
 
 	if (m_RefreshOnChange)
 		m_pAPI->CommitIniChanges();
+
+	m_Name = NewName;
 
 	return SB_OK;
 }

@@ -470,3 +470,32 @@ _FX LARGE_INTEGER Util_GetTimestamp(void)
 
 	return Time;
 }
+
+
+//---------------------------------------------------------------------------
+// Util_CaptureStack
+//---------------------------------------------------------------------------
+
+
+ULONG Util_CaptureStack(_Out_ PVOID* Frames, _In_ ULONG Count)
+{
+    ULONG frames;
+
+    NT_ASSERT(KeGetCurrentIrql() <= DISPATCH_LEVEL);
+
+    frames = RtlWalkFrameChain(Frames, Count, 0);
+
+    if (KeGetCurrentIrql() < DISPATCH_LEVEL)
+    {
+        if (frames >= Count)
+        {
+            return frames;
+        }
+
+        frames += RtlWalkFrameChain(&Frames[frames],
+                                    (Count - frames),
+                                    RTL_WALK_USER_MODE_STACK);
+    }
+
+    return frames;
+}

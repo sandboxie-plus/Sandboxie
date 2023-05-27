@@ -6,9 +6,10 @@
 #include "../Models/TraceModel.h"
 #include "../Models/MonitorModel.h"
 #include "../../MiscHelpers/Common/SortFilterProxyModel.h"
+#include "StackView.h"
 
 
-class CTraceTree : public CPanelWidget<QTreeViewEx>
+class CTraceTree : public CPanelView
 {
 	Q_OBJECT
 public:
@@ -16,10 +17,18 @@ public:
 	CTraceTree(QWidget* parent = 0);
 	~CTraceTree();
 
+	virtual QMenu*				GetMenu()	{ return m_pMenu; }
+
+	virtual QTreeViewEx*		GetTree()	{ return m_pTreeList; }
+	virtual QTreeView*			GetView()	{ return m_pTreeList; }
+	virtual QAbstractItemModel* GetModel()	{ return m_pTreeList->model(); }
+
 	CTraceModel*		m_pTraceModel;
 
 public slots:
 	void				SetFilter(const QString& Exp, int iOptions = 0, int Column = -1);
+
+	void				ItemSelection(const QItemSelection& selected, const QItemSelection& deselected);
 
 signals:
 	void				FilterChanged();
@@ -28,6 +37,11 @@ protected:
 	friend class CTraceView;
 
 	QString				GetFilterExp() const { return m_FilterExp; }
+
+	QVBoxLayout*		m_pMainLayout;
+	QSplitter*			m_pSplitter;
+	QTreeViewEx*		m_pTreeList;
+	CStackView*			m_pStackView;
 
 	//QRegularExpression	m_FilterExp;
 	QString				m_FilterExp;
@@ -55,6 +69,8 @@ public:
 
 	void				AddAction(QAction* pAction);
 
+	void				SetEnabled(bool bSet);
+
 public slots:
 	void				Refresh();
 	void				Clear();
@@ -65,6 +81,7 @@ public slots:
 	void				OnSetPidFilter();
 	void				OnSetTidFilter();
 	void				OnSetFilter();
+	void				OnShowStack();
 
 private slots:
 	void				UpdateFilters();
@@ -112,6 +129,7 @@ protected:
 	class QCheckList*	m_pTraceType;
 	QComboBox*			m_pTraceStatus;
 	QAction*			m_pAllBoxes;
+	QAction*			m_pShowStack;
 	QAction*			m_pSaveToFile;
 
 	QWidget*			m_pView;

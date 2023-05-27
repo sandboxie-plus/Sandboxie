@@ -19,6 +19,7 @@
 #include "BoxedProcess.h"
 #include "SandBox.h"
 #include "../SbieAPI.h"
+#include "../Helpers/DbgHelper.h"
 
 #include <ntstatus.h>
 #define WIN32_NO_STATUS
@@ -274,7 +275,7 @@ bool CBoxedProcess::InitProcessInfoEx()
 {
 	if (m_ProcessFlags == 0 && m_pBox)
 		m_ProcessFlags = m_pBox->Api()->QueryProcessInfo(m_ProcessId);
-		m_ImageType = m_pBox->Api()->QueryProcessInfo(m_ProcessId, 'gpit');
+	m_ImageType = m_pBox->Api()->QueryProcessInfo(m_ProcessId, 'gpit');
 
 	return true;
 }
@@ -371,3 +372,16 @@ bool CBoxedProcess::IsSuspended() const
 	return isSuspended;
 }
 */
+
+void CBoxedProcess::ResolveSymbols(const QVector<quint64>& Addresses)
+{
+	foreach(quint64 Address, Addresses) 
+	{
+		if (!m_Symbols.contains(Address)) {
+			SSymbol Symbol;
+			//Symbol.Name = CSymbolProvider::Instance()->Resolve(m_ProcessId, Address);
+			m_Symbols[Address] = Symbol;
+			CSymbolProvider::ResolveAsync(m_ProcessId, Address, this, SLOT(OnSymbol(quint64, const QString&)));
+		}
+	}
+}

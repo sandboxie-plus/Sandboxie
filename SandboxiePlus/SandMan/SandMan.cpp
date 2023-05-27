@@ -35,6 +35,7 @@
 #include <QSessionManager>
 #include "Helpers/FullScreen.h"
 #include "Helpers/WinHelper.h"
+#include "../QSbieAPI/Helpers/DbgHelper.h"
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -1421,7 +1422,7 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 				bIsMonitoring = true; // don't disable the view as long as there are entries shown
 			if (bIsMonitoring && m_pTraceView)
 				m_pTraceInfo->setText(QString::number(iTraceCount));
-			m_pTraceView->setEnabled(bIsMonitoring);
+			m_pTraceView->SetEnabled(bIsMonitoring);
 		}
 
 		QMap<quint32, CBoxedProcessPtr> Processes = theAPI->GetAllProcesses();
@@ -2813,27 +2814,25 @@ void CSandMan::OnResetMsgs()
 
 void CSandMan::OnResetGUI()
 {
-	theConf->DelValue("ErrorWindow/Window_Geometry");
-	theConf->DelValue("MainWindow/Window_Geometry");
-	theConf->DelValue("MainWindow/Window_State");
-	theConf->DelValue("MainWindow/BoxTree_Columns");
-	theConf->DelValue("MainWindow/LogList_Columns");
-	theConf->DelValue("MainWindow/Log_Splitter");
-	theConf->DelValue("MainWindow/Panel_Splitter");
-	theConf->DelValue("MainWindow/BoxTree_Columns");
-	theConf->DelValue("MainWindow/TraceLog_Columns");
-	theConf->DelValue("FileBrowserWindow/Window_Geometry");
-	theConf->DelValue("MainWindow/FileTree_Columns");
-	theConf->DelValue("NewBoxWindow/Window_Geometry");
-	theConf->DelValue("PopUpWindow/Window_Geometry");
-	theConf->DelValue("RecoveryWindow/Window_Geometry");
-	theConf->DelValue("RecoveryWindow/TreeView_Columns");
-	theConf->DelValue("SelectBoxWindow/Window_Geometry");
-	theConf->DelValue("SettingsWindow/Window_Geometry");
-	theConf->DelValue("SnapshotsWindow/Window_Geometry");
-	QStringList Options = theConf->ListKeys("OptionsWindow");
-	foreach(const QString& Option, Options)
+	foreach(const QString& Option, theConf->ListKeys("RecoveryWindow"))
+		theConf->DelValue("RecoveryWindow/" + Option);
+
+	foreach(const QString& Option, theConf->ListKeys("MainWindow"))
+		theConf->DelValue("MainWindow/" + Option);
+
+	foreach(const QString& Option, theConf->ListKeys("SettingsWindow"))
+		theConf->DelValue("SettingsWindow/" + Option);
+
+	foreach(const QString& Option, theConf->ListKeys("OptionsWindow"))
 		theConf->DelValue("OptionsWindow/" + Option);
+
+	theConf->DelValue("ErrorWindow/Window_Geometry");
+	theConf->DelValue("PopUpWindow/Window_Geometry");
+	theConf->DelValue("TraceWindow/Window_Geometry");
+	theConf->DelValue("SelectBoxWindow/Window_Geometry");
+	theConf->DelValue("SnapshotsWindow/Window_Geometry");
+	theConf->DelValue("FileBrowserWindow/Window_Geometry");
+	theConf->DelValue("RecoveryLogWindow/Window_Geometry");
 
 //	theConf->SetValue("Options/DPIScaling", 1);
 	theConf->SetValue("Options/FontScaling", 100);
@@ -2928,6 +2927,15 @@ void CSandMan::OnIniReloaded()
 	m_pPopUpWindow->ReloadHiddenMessages();
 
 	g_FeatureFlags = theAPI->GetFeatureFlags();
+
+	if (theAPI->GetGlobalSettings()->GetBool("MonitorStackTrace", false)) {
+		QString SymPath = theConf->GetString("Options/Debug");
+		if (SymPath.isEmpty()){
+			SymPath = "SRV*C:\\Symbols*https://msdl.microsoft.com/download/symbols";
+			theConf->SetValue("Options/Debug", SymPath);
+		}
+		CSymbolProvider::Instance()->SetSymPath(SymPath);
+	}
 }
 
 void CSandMan::OnMonitoring()
@@ -2939,7 +2947,10 @@ void CSandMan::OnMonitoring()
 		if(m_pEnableMonitoring->isChecked() && !m_pToolBar->isVisible())
 			m_pLogTabs->show();
 
-		//m_pTraceView->setEnabled(m_pEnableMonitoring->isChecked());
+		if(m_pEnableMonitoring->isChecked())
+			m_pKeepTerminated->setChecked(true);
+		else
+			m_pKeepTerminated->setChecked(theConf->GetBool("Options/KeepTerminated"));
 	}
 	else
 	{

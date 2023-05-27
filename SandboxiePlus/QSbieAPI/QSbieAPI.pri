@@ -16,7 +16,8 @@ HEADERS += ./qsbieapi_global.h \
     ./Sandboxie/SbieIni.h \
     ./Sandboxie/BoxBorder.h \
     ./Sandboxie/SbieTemplates.h \
-    ./Helpers/NtIO.h
+    ./Helpers/NtIO.h \
+    ./Helpers/DbgHelper.h
     
 SOURCES += ./stdafx.cpp \
     ./SbieAPI.cpp \
@@ -27,4 +28,5 @@ SOURCES += ./stdafx.cpp \
     ./Sandboxie/SandBox.cpp \
     ./Sandboxie/SbieIni.cpp \
     ./Sandboxie/SbieTemplates.cpp \
-    ./Helpers/NtIO.cpp
+    ./Helpers/NtIO.cpp \
+    ./Helpers/DbgHelper.cpp

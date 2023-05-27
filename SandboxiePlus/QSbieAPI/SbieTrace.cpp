@@ -60,7 +60,7 @@ QString ErrorString(qint32 err)
 	return Error;
 }
 
-CTraceEntry::CTraceEntry(quint64 Timestamp, quint32 ProcessId, quint32 ThreadId, quint32 Type, const QStringList& LogData)
+CTraceEntry::CTraceEntry(quint64 Timestamp, quint32 ProcessId, quint32 ThreadId, quint32 Type, const QStringList& LogData, const QVector<quint64>& Stack)
 {
 	m_ProcessId = ProcessId;
 	m_ThreadId = ThreadId;
@@ -68,6 +68,7 @@ CTraceEntry::CTraceEntry(quint64 Timestamp, quint32 ProcessId, quint32 ThreadId,
 	m_Message = LogData.length() > 1 ? LogData.at(1) : QString();
 	m_SubType = LogData.length() > 2 ? LogData.at(2) : QString();
 	m_Type.Flags = Type;
+	m_Stack = Stack;
 
 	if (m_Type.Type == MONITOR_SYSCALL && !m_SubType.isEmpty()) {
 		m_Message += ", name=" + m_SubType;

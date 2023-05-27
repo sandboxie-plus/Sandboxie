@@ -61,6 +61,8 @@ void COptionsWindow::CreateGeneral()
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBoxPlus), tr("Application Compartment with Data Protection"), (int)CSandBoxPlus::eAppBoxPlus);
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBox), tr("Application Compartment (NO Isolation)"), (int)CSandBoxPlus::eAppBox);
 
+	connect(ui.lblBoxInfo, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+
 	ui.lblSupportCert->setVisible(false);
 	if (!g_CertInfo.valid)
 	{

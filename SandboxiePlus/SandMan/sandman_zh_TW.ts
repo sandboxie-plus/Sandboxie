@@ -3279,7 +3279,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>Sandboxie-Plus - 視窗尋找工具</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="123"/>
+        <location filename="main.cpp" line="138"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>Sandboxie 管理器不能在沙箱中執行！</translation>
     </message>
@@ -6822,8 +6822,9 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="327"/>
-        <source>Sandboxie may be issue &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</source>
-        <translation>Sandboxie 可能會將 &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE 訊息&lt;/a&gt;記錄到資訊日誌中，並以彈出視窗的形式通知&lt;br /&gt;有些訊息僅僅是資訊性的，通知一個普通的或某些特殊的事件發生，其它訊息表明一個錯誤狀況&lt;br /&gt;您可以使用此列表來隱藏所設定的「SBIE 訊息」，使其不被彈出：</translation>
+        <source>Sandboxie may be issue &lt;a href=&quot;sbie://docs/sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</source>
+        <oldsource>Sandboxie may be issue &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</oldsource>
+        <translation type="unfinished">Sandboxie 可能會將 &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE 訊息&lt;/a&gt;記錄到資訊日誌中，並以彈出視窗的形式通知&lt;br /&gt;有些訊息僅僅是資訊性的，通知一個普通的或某些特殊的事件發生，其它訊息表明一個錯誤狀況&lt;br /&gt;您可以使用此列表來隱藏所設定的「SBIE 訊息」，使其不被彈出：</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="340"/>

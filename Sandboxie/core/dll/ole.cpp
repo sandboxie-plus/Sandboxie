@@ -130,7 +130,7 @@ extern "C" _FX BOOLEAN Ole_Init(HMODULE module)
         RegisterDragDrop = GetProcAddress(module, "RegisterDragDrop");
         RevokeDragDrop   = GetProcAddress(module, "RevokeDragDrop");
 
-        if (Gui_RenameClasses) {
+        if (Gui_RenameClasses && Config_GetSettingsForImageName_bool(L"UseDragDropHack", TRUE)) {
 
             //
             // don't hook drag and drop if using OpenWinClass=*

@@ -134,13 +134,13 @@ void CSandBox::SetBoxPaths(const QString& FilePath, const QString& RegPath, cons
 	m_IpcPath = IpcPath;
 }
 
-SB_STATUS CSandBox::RunStart(const QString& Command, bool Elevated)
+SB_STATUS CSandBox::RunStart(const QString& Command, bool Elevated, const QString& WorkingDir)
 {
 #ifdef _DEBUG
 	if ((QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0)
 		return RunSandboxed(Command);
 #endif
-	return m_pAPI->RunStart(m_Name, Command, Elevated);
+	return m_pAPI->RunStart(m_Name, Command, Elevated, WorkingDir);
 }
 
 SB_STATUS CSandBox::RunSandboxed(const QString& Command)

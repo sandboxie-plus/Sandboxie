@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed an issue with token manipulation in the SbieDrv driver
 - fixed "Reset all GUI options" does not reset all GUI sections as expected [#2967](https://github.com/sandboxie-plus/Sandboxie/issues/2967)
+- fixed sbie:// links below the Box Type presets [#2959](https://github.com/sandboxie-plus/Sandboxie/issues/2959#issuecomment-1565264161)
 
 
 
@@ -23,9 +24,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ### Fixed
-- fixed sbie:// links are not working [#2959](https://github.com/sandboxie-plus/Sandboxie/issues/2959)
+- fixed sbie:// links not working properly [#2959](https://github.com/sandboxie-plus/Sandboxie/issues/2959)
 - fixed Sbie Messages, Trace Log, Recovery Log tabs should never hide some columns [#2940](https://github.com/sandboxie-plus/Sandboxie/issues/2940)
-- fixed registerdevicenotificationw DBT_DEVTYP_DEVICEINTERFACE [#2129](https://github.com/sandboxie-plus/Sandboxie/discussions/2129) [#1975](https://github.com/sandboxie-plus/Sandboxie/issues/1975)
+- fixed the RegisterDeviceNotificationW function DBT_DEVTYP_DEVICEINTERFACE [#2129](https://github.com/sandboxie-plus/Sandboxie/discussions/2129) [#1975](https://github.com/sandboxie-plus/Sandboxie/issues/1975)
 - fixed a BSOD issue likely introduced in 1.9.4 (reported by 7starsseeker) [#2958](https://github.com/sandboxie-plus/Sandboxie/issues/2958)
 
 
@@ -56,15 +57,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed RecoverFolder shows GUID instead of folder name [#2918](https://github.com/sandboxie-plus/Sandboxie/issues/2918)
 - fixed System tray icon hourglass overlay gets stuck when operation is stopped [#2869](https://github.com/sandboxie-plus/Sandboxie/issues/2869)
 - fixed File Panel doesn't allow to adjust columns size in a permanent way [#2930](https://github.com/sandboxie-plus/Sandboxie/issues/2930)
-- fixed Renaming a box with sandboxed run entries can break those entries. [#2921](https://github.com/sandboxie-plus/Sandboxie/issues/2921)
+- fixed Renaming a box with sandboxed run entries can break those entries [#2921](https://github.com/sandboxie-plus/Sandboxie/issues/2921)
 - fixed WFP not enabled after Setup Wizard and other issues [#2915](https://github.com/sandboxie-plus/Sandboxie/issues/2915)
 - fixed Name column in the sandbox view should never be hidden [#2933](https://github.com/sandboxie-plus/Sandboxie/issues/2933)
 - fixed File Panel does not share the right-click options provided in the sandbox view columns [#2934](https://github.com/sandboxie-plus/Sandboxie/issues/2934)
 - fixed Checkboxes issue of NetworkEnableWFP and EnableObjectFiltering settings [#2935](https://github.com/sandboxie-plus/Sandboxie/issues/2935)
 - fixed Unquoted service path [#537](https://github.com/sandboxie-plus/Sandboxie/issues/537)
-- fixed Running the Insert chart in Word in the sandbox fails [#2863](https://github.com/sandboxie-plus/Sandboxie/issues/2863)
+- fixed Running the Insert chart in Microsoft Word in the sandbox fails [#2863](https://github.com/sandboxie-plus/Sandboxie/issues/2863)
 - fixed An error occurred in the switch sandbox type preset configuration [#2941](https://github.com/sandboxie-plus/Sandboxie/issues/2941)
-- fixed Unable to open excel (thanks lmou523) [#2890](https://github.com/sandboxie-plus/Sandboxie/issues/2890)
+- fixed Unable to open Microsoft Excel (thanks lmou523) [#2890](https://github.com/sandboxie-plus/Sandboxie/issues/2890)
 
 
 

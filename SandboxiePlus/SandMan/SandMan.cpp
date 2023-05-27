@@ -35,6 +35,7 @@
 #include <QSessionManager>
 #include "Helpers/FullScreen.h"
 #include "Helpers/WinHelper.h"
+#include "Helpers/KeepSubMenusVisibleStyle.h"
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -350,10 +351,18 @@ void CSandMan::CreateUI()
 
 	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
 
+	// ==== hack ====
+	auto oldStyle = qApp->style();
+	auto kvs = new KeepSubMenusVisibleStyle(oldStyle);
+	qApp->setStyle(kvs);
+	kvs->setParent(this);
+
 	if(iViewMode == 2)
 		CreateOldMenus();
 	else
 		CreateMenus(iViewMode == 1);
+
+	qApp->setStyle(oldStyle);
 
 	m_pMainLayout = new QVBoxLayout(m_pMainWidget);
 	m_pMainLayout->setContentsMargins(2,2,2,2);

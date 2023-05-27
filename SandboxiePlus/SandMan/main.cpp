@@ -9,7 +9,6 @@
 #include <windows.h>
 #include "./Windows/SettingsWindow.h"
 #include "./Wizards/SetupWizard.h"
-#include "./Helpers/KeepSubMenusVisibleStyle.h"
 
 CSettings* theConf = NULL;
 
@@ -62,7 +61,6 @@ int main(int argc, char *argv[])
 
 	QtSingleApplication app(argc, argv);
 	app.setQuitOnLastWindowClosed(false);
-	app.setStyle(new KeepSubMenusVisibleStyle(app.style()));
 
 	//InitConsole(false);
 

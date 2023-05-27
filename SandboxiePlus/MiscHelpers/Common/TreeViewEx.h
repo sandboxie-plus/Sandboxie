@@ -83,20 +83,20 @@ public:
 
 	bool IsColumnEnabled(int column)
 	{
-		return m_Columns.contains(column);
+		return !m_ColumnsOff.contains(column);
 	}
 
 	void SetColumnEnabled(int column, bool set)
 	{
 		if (!set)
-			m_Columns.remove(column);
+			m_ColumnsOff.insert(column);
 		else
-			m_Columns.insert(column);
+			m_ColumnsOff.remove(column);
 	}
 
 protected:
 
-	QSet<int>				m_Columns;
+	QSet<int>				m_ColumnsOff;
 };
 
 class MISCHELPERS_EXPORT QTreeViewEx: public QTreeView

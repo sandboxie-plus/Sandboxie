@@ -126,8 +126,6 @@ CTraceTree::CTraceTree(QWidget* parent)
 	QByteArray Columns = theConf->GetBlob("MainWindow/TraceLog_Columns");
 	if (!Columns.isEmpty())
 		((QTreeViewEx*)GetView())->restoreState(Columns);
-	else
-		((QTreeViewEx*)GetView())->OnResetColumns();
 
 	QByteArray Split = theConf->GetBlob("MainWindow/TraceSplitter");
 	if(!Split.isEmpty())
@@ -219,8 +217,6 @@ CMonitorList::CMonitorList(QWidget* parent)
 	QByteArray Columns = theConf->GetBlob("MainWindow/Monitor_Columns");
 	if (!Columns.isEmpty())
 		((QTreeViewEx*)GetView())->restoreState(Columns);
-	else
-		((QTreeViewEx*)GetView())->OnResetColumns();
 }
 
 CMonitorList::~CMonitorList() 

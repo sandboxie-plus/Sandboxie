@@ -113,7 +113,7 @@ void CSimpleTreeModel::Sync(const QMap<QVariant, QVariantMap>& List)
 		QVariantMap Values = Cur["Values"].toMap();
 		for(int section = FIRST_COLUMN; section < columnCount(); section++)
 		{
-			if (!m_Columns.contains(section))
+			if (!IsColumnEnabled(section))
 				continue; // ignore columns which are hidden
 
 			QVariant Value = Cur[m_ColumnKeys.at(section).second];

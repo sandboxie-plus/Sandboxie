@@ -112,15 +112,12 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	CreateTrayMenu();
 
 	QByteArray Columns = theConf->GetBlob("MainWindow/BoxTree_Columns");
-	if (Columns.isEmpty())
-	{
-		m_pSbieTree->OnResetColumns();
+	if (Columns.isEmpty()) {
 		m_pSbieTree->setColumnWidth(0, 300);
 		m_pSbieTree->setColumnWidth(1, 70);
 		m_pSbieTree->setColumnWidth(2, 70);
 		m_pSbieTree->setColumnWidth(3, 70);
-	}
-	else
+	} else
 		m_pSbieTree->restoreState(Columns);
 	if (theConf->GetBool("MainWindow/BoxTree_UseOrder", false) || iViewMode == 2)
 		SetCustomOrder();

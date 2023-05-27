@@ -69,7 +69,7 @@ QList<QModelIndex>	CMonitorModel::Sync(const QMap<QString, CMonitorEntryPtr>& En
 
 		for (int section = 0; section < columnCount(); section++)
 		{
-			if (!m_Columns.contains(section))
+			if (!IsColumnEnabled(section))
 				continue; // ignore columns which are hidden
 
 			QVariant Value;

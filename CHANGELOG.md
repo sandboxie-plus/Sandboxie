@@ -13,7 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed an issue with token manipulation in the SbieDrv driver
 - fixed "Reset all GUI options" does not reset all GUI sections as expected [#2967](https://github.com/sandboxie-plus/Sandboxie/issues/2967)
 - fixed sbie:// links below the Box Type presets [#2959](https://github.com/sandboxie-plus/Sandboxie/issues/2959#issuecomment-1565264161)
-
+- fixed "Reset all GUI options" makes all sandbox names disappear [#2972](https://github.com/sandboxie-plus/Sandboxie/issues/2972)
 
 
 ## [1.9.5 / 5.64.5] - 2023-05-26

@@ -73,7 +73,7 @@ void CSymbolProvider::run()
 
 	while (m_bRunning)
 	{
-		quint64 OldTime = GetTickCount64() - 3000; // cleanup everythign older than 3 sec
+		quint64 OldTime = GetTickCount64() - 3000; // cleanup everything older than 3 sec
 		if (LastCleanUp < OldTime) 
         {
 			QMutexLocker Lock(&m_SymLock);
@@ -128,7 +128,7 @@ QString CSymbolProvider::Resolve(quint64 pid, quint64 Address)
                 break;
         }
 
-        static QAtomicInt FakeHandle = 1; // real handles are divisable b 4
+        static QAtomicInt FakeHandle = 1; // real handles are divisible by 4
         if (Worker.handle == (quint64)INVALID_HANDLE_VALUE)
             Worker.handle = FakeHandle.fetchAndAddAcquire(4);
 

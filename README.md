@@ -7,6 +7,8 @@
 
 Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT-based operating systems. It creates a sandbox-like isolated operating environment in which applications can be run or installed without permanently modifying local & mapped drives or the Windows registry. An isolated virtual environment allows controlled testing of untrusted programs and web surfing.<br>
 
+Sandboxie allows you to create virtually unlimited sandboxes to isolate programs from the host and each other, while also allowing you to run as many programs simultaneously in a single box as you wish.
+
 |  System requirements  |      Release notes     |      Security policy      |      Contribution guidelines   |
 |         :---:         |          :---:         |          :---:            |          :---:                 |
 | Windows 7 or higher, 32-bit or 64-bit. |  [CHANGELOG.md](./CHANGELOG.md)  |   [SECURITY.md](./SECURITY.md)  |  [CONTRIBUTING.md](./CONTRIBUTING.md)  |

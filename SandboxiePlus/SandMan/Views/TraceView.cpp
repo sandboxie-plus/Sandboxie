@@ -130,7 +130,7 @@ CTraceTree::CTraceTree(QWidget* parent)
 	QByteArray Split = theConf->GetBlob("MainWindow/TraceSplitter");
 	if(!Split.isEmpty())
 		m_pSplitter->restoreState(Split);
-	//else { // by default colapse the details pannel
+	//else { // by default colapse the details panel
 	//	auto Sizes = m_pSplitter->sizes();
 	//	Sizes[1] = 0;
 	//	m_pSplitter->setSizes(Sizes);

@@ -26,7 +26,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added Turn SBIE message IDs into clickable links [#2953](https://github.com/sandboxie-plus/Sandboxie/issues/2953)
 - added Limiting the number of same log messages [#2856](https://github.com/sandboxie-plus/Sandboxie/issues/2856)
 
-
 ### Fixed
 - fixed sbie:// links not working properly [#2959](https://github.com/sandboxie-plus/Sandboxie/issues/2959)
 - fixed Sbie Messages, Trace Log, Recovery Log tabs should never hide some columns [#2940](https://github.com/sandboxie-plus/Sandboxie/issues/2940)
@@ -612,7 +611,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added new miscellaneous tab in the advanced options tab allowing to configure specific processes and other advanced options
 - added "SeparateUserFolders=y" and "SandboxieLogon=y" to the sandbox options dialog
 - added icons to the section labels on the option pages
-
 
 ### Changed
 - prepared for Qt 6.3.1
@@ -1453,22 +1451,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added Privacy enhanced mode, sandboxes with "UsePrivacyMode=y" will not allow read access to locations containing user data
   - all locations except generic Windows system paths will need to be opened explicitly for read and/or write access
   - using "NormalFilePath=...", "NormalKeyPath=...", "NormalIpcPath=..." allows to open locations to be readable and sandboxed
-
 - added new app compartment mode of operation, it is enabled by adding "NoSecurityIsolation=y" to the box config
   - in this mode, security is traded in for compatibility, it should not be used for untrusted applications
   - Note: in this mode, file and registry filtering are still in place, hence processes run without administrative privileges
   - it is reasonably safe, all filtering can be disabled with "NoSecurityFiltering=y"
-
 - added experimental use of ObRegisterCallbacks to filter object creation and duplication
   - this filtering is independent from the regular SbieDrv's syscall-based filtering, hence it also applies to app compartments
   - with it enabled, an application running in a compartment will not be able to manipulate processes running outside the sandbox
   - Note: this feature improves the security of non-isolated app compartment boxes
   - to enable this feature, set "EnableObjectFiltering=y" in the global section and reload the driver
   - when globally activated, the filtering can be disabled for individual boxes with "DisableObjectFilter=y"
-
 - added "DontOpenForBoxed=n", this option disables the discrimination of boxed processes for open file and open key directives
   - this behaviour does not really improve security anyway, but may be annoying, also app compartments always disable this
-
 - added setting to entirely open access to the COM infrastructure
 
 ### Changed
@@ -2602,7 +2596,7 @@ Fixed issue with Windows 7
 - moved function hooking mechanism from SbieDrv to SbieDll
 - introduced a new driverless method to resolve wow64 ntdll base address
 
-### removed
+### Removed
 - removed support for Windows Vista x64
 
 
@@ -2811,7 +2805,6 @@ Fixed issue with Windows 7
 - created a new Qt based UI names SandMan (Sandboxie Manager)
 - Resource Monitor now shows the PID
 - added basic API call log using updated BSA LogApiDll
-
 
 ### Changed
 - reworked Resource Monitor to work with multiple event consumers

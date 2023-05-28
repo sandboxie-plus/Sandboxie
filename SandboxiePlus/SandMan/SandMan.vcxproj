@@ -329,6 +329,7 @@
     </ClCompile>
     <ClCompile Include="Views\FileView.cpp" />
     <ClCompile Include="Views\SbieView.cpp" />
+    <ClCompile Include="Views\StackView.cpp" />
     <ClCompile Include="Views\TraceView.cpp" />
     <ClCompile Include="Windows\NewBoxWindow.cpp" />
     <ClCompile Include="Windows\OptionsAccess.cpp">
@@ -423,6 +424,7 @@
     <ClCompile Include="Wizards\TemplateWizard.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Views\StackView.h" />
     <QtMoc Include="Wizards\TemplateWizard.h" />
     <QtMoc Include="Wizards\NewBoxWizard.h" />
     <QtMoc Include="OnlineUpdater.h" />

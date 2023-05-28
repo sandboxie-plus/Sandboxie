@@ -189,6 +189,9 @@
     <ClCompile Include="Wizards\TemplateWizard.cpp">
       <Filter>Wizards</Filter>
     </ClCompile>
+    <ClCompile Include="Views\StackView.cpp">
+      <Filter>Views</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -294,6 +297,9 @@
     </QtMoc>
     <QtMoc Include="Wizards\TemplateWizard.h">
       <Filter>Wizards</Filter>
+    </QtMoc>
+    <QtMoc Include="Views\StackView.h">
+      <Filter>Views</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

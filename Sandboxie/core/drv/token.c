@@ -1152,13 +1152,13 @@ _FX void *Token_RestrictHelper1(
 		// Note: Sandboxie originally called here SeFilterToken already,
 		// this duplicated NewTokenObject and discarded it.
 		//
-		// Howeever the blunt method used in the code below to replace the
-		// token SID can create a dependancy on proc->SandboxieLogonSid
+		// However the blunt method used in the code below to replace the
+		// token SID can create a dependency on proc->SandboxieLogonSid
 		// formally AnonymousLogonSid which can cause issues and BSOD's
 		// It also has required a mitigation in Token_ResetPrimary, restoring
 		// the SID pointer so that the token object can be safely destroyed.
 		//
-		// Therefor the invokation of SeFilterToken has been moved after
+		// Therefore the invocation of SeFilterToken has been moved after
 		// the SID manipulation, this way the modified TempNewTokenObject
 		// will be quickly and safely disposed of. So we continue from there 
 		// on out with a proper unhacked token object.

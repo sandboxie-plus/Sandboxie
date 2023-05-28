@@ -197,6 +197,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Helpers\DbgHelper.cpp" />
     <ClCompile Include="Helpers\NtIO.cpp" />
     <ClCompile Include="Sandboxie\BoxBorder.cpp" />
     <ClCompile Include="Sandboxie\BoxedProcess.cpp" />
@@ -216,6 +217,7 @@
   <ItemGroup>
     <QtMoc Include="SbieAPI.h" />
     <ClInclude Include="..\..\Sandboxie\common\win32_ntddk.h" />
+    <QtMoc Include="Helpers\DbgHelper.h" />
     <ClInclude Include="Helpers\NtIO.h" />
     <ClInclude Include="qsbieapi_global.h" />
     <QtMoc Include="Sandboxie\BoxedProcess.h" />

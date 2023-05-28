@@ -60,6 +60,9 @@
     <ClCompile Include="SbieTrace.cpp">
       <Filter>SbieAPI</Filter>
     </ClCompile>
+    <ClCompile Include="Helpers\DbgHelper.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -110,6 +113,9 @@
     </QtMoc>
     <QtMoc Include="Sandboxie\SbieTemplates.h">
       <Filter>Sandboxie</Filter>
+    </QtMoc>
+    <QtMoc Include="Helpers\DbgHelper.h">
+      <Filter>Helpers</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

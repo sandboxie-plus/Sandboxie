@@ -548,19 +548,22 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/TemplateWizard.cpp" line="962"/>
         <source>Browser name: %1
 </source>
-        <translation>브라우저 이름: %1</translation>
+        <translation>브라우저 이름: %1
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="966"/>
         <source>Browser Type: Gecko (Mozilla Firefox)
 </source>
-        <translation>브라우저 유형: Gecko (Mozilla Firefox)</translation>
+        <translation>브라우저 유형: Gecko (Mozilla Firefox)
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="967"/>
         <source>Browser Type: Chromium (Google Chrome)
 </source>
-        <translation>브라우저 유형: Chromium (Google Chrome)</translation>
+        <translation>브라우저 유형: Chromium (Google Chrome)
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="969"/>
@@ -573,13 +576,15 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/TemplateWizard.cpp" line="970"/>
         <source>Browser executable path: %1
 </source>
-        <translation>브라우저 실행 파일 경로: %1</translation>
+        <translation>브라우저 실행 파일 경로: %1
+</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="980"/>
         <source>Browser profile path: %1
 </source>
-        <translation>브라우저 프로필 경로: %1</translation>
+        <translation>브라우저 프로필 경로: %1
+</translation>
     </message>
 </context>
 <context>
@@ -1720,7 +1725,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/PopUpWindow.h" line="75"/>
         <source> (%1)</source>
-        <translation type="unfinished"> (%1)</translation>
+        <translation> (%1)</translation>
     </message>
 </context>
 <context>
@@ -3046,7 +3051,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="2086"/>
         <location filename="SandMan.cpp" line="2088"/>
         <source> (%1)</source>
-        <translation type="unfinished"> (%1)</translation>
+        <translation> (%1)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2133"/>
@@ -4615,7 +4620,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/StackView.cpp" line="17"/>
         <source>#|Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>#|기호</translation>
     </message>
 </context>
 <context>
@@ -4995,7 +5000,7 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Views/TraceView.cpp" line="308"/>
         <source>Show Stack Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>스택 추적 표시</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="313"/>
@@ -7074,7 +7079,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="327"/>
         <source>Sandboxie may be issue &lt;a href=&quot;sbie://docs/sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</source>
         <oldsource>Sandboxie may be issue &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</oldsource>
-        <translation type="unfinished">샌드박스는 메시지 로그에 문제 &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt;가 발생하여 팝업으로 표시될 수 있습니다. 일부 메시지는 정보를 제공하며 일반적으로 발생한 이벤트 또는 경우에 따라 특별한 이벤트를 알려주고 다른 메시지는 오류 상태를 나타냅니다.&lt;br /&gt;아래 목록을 사용하여 선택한 SBIE 메시지가 팝업되지 않도록 숨길 수 있습니다:</translation>
+        <translation>Sandboxie는 메시지 로그에 문제 &lt;a href=&quot;sbie://docs/sbiemessages&quot;&gt;SBIE 메시지&lt;/a&gt;가 발생하여 팝업으로 표시될 수 있습니다. 일부 메시지는 정보를 제공하며 일반적으로 발생한 이벤트 또는 경우에 따라 특별한 이벤트를 알려주고 다른 메시지는 오류 상태를 나타냅니다.&lt;br /&gt;아래 목록을 사용하여 선택한 SBIE 메시지가 팝업되지 않도록 숨길 수 있습니다:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="340"/>

@@ -4430,7 +4430,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/StackView.cpp" line="17"/>
         <source>#|Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>#|Symbol</translation>
     </message>
 </context>
 <context>
@@ -4804,7 +4804,7 @@ Prozesse in dieser Box werden mit einem eigenen Prozesstoken laufen, die anzeige
     <message>
         <location filename="Views/TraceView.cpp" line="308"/>
         <source>Show Stack Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Rückverfolgung</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="313"/>

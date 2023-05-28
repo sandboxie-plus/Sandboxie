@@ -15,8 +15,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed sbie:// links below the Box Type presets [#2959](https://github.com/sandboxie-plus/Sandboxie/issues/2959#issuecomment-1565264161)
 - fixed "Reset all GUI options" makes all sandbox names disappear [#2972](https://github.com/sandboxie-plus/Sandboxie/issues/2972)
 - fixed A game can't be launched properly from "Run from Start Menu" [#2969](https://github.com/sandboxie-plus/Sandboxie/issues/2969)
-
-
+- fixed drag and drop issue with Microsoft Excel data grid [9455e96](https://github.com/sandboxie-plus/Sandboxie/commit/9455e96a699cbc665f791e191f2a13bb40783ab0)
+  - additional feedback for other drag and drop scenarios can be provided in [#856](https://github.com/sandboxie-plus/Sandboxie/issues/856)
 
 
 ## [1.9.5 / 5.64.5] - 2023-05-26

@@ -1041,7 +1041,7 @@ _FX NTSTATUS File_Api_UnprotectRoot(PROCESS* proc, ULONG64* parms)
             len = sizeof(PROTECTED_ROOT) + root->file_root_len * sizeof(WCHAR);
             Mem_Free(root, len);
 
-            status = STATUS_SUCCESS; // dont break in case a root was added more then once
+            status = STATUS_SUCCESS; // don't break in case a root was added more than once
         }
 
         root = next_root;

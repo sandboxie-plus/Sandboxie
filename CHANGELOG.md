@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - additional feedback for other drag and drop scenarios can be provided in [#856](https://github.com/sandboxie-plus/Sandboxie/issues/856)
 
 
+
 ## [1.9.5 / 5.64.5] - 2023-05-26
 
 ### Added
@@ -31,7 +32,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Sbie Messages, Trace Log, Recovery Log tabs should never hide some columns [#2940](https://github.com/sandboxie-plus/Sandboxie/issues/2940)
 - fixed the RegisterDeviceNotificationW function DBT_DEVTYP_DEVICEINTERFACE [#2129](https://github.com/sandboxie-plus/Sandboxie/discussions/2129) [#1975](https://github.com/sandboxie-plus/Sandboxie/issues/1975)
 - fixed a BSOD issue likely introduced in 1.9.4 (reported by 7starsseeker) [#2958](https://github.com/sandboxie-plus/Sandboxie/issues/2958)
-
 
 
 
@@ -72,8 +72,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
-
 ## [1.9.3 / 5.64.3] - 2023-05-08
 
 ### Added
@@ -89,7 +87,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed issue with command lines [#2858](https://github.com/sandboxie-plus/Sandboxie/issues/2858)
 - fixed issue with always on top in the recovery window [#2885](https://github.com/sandboxie-plus/Sandboxie/issues/2885)
-
 
 
 
@@ -121,6 +118,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with TLS support using Qt6 [#2682](https://github.com/sandboxie-plus/Sandboxie/issues/2682)
 - added template preset for Spotify [#2673](https://github.com/sandboxie-plus/Sandboxie/issues/2673)
 - added missing localisation to finder [#2845](https://github.com/sandboxie-plus/Sandboxie/issues/2845)
+
 
 
 ## [1.9.0 / 5.64.0] - 2023-04-17
@@ -257,7 +255,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
 ## [1.7.2 / 5.62.2] - 2023-02-05
 
 ### Changed
@@ -308,7 +305,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
 ## [1.7.0 / 5.62.0] - 2023-01-27
 
 
@@ -327,7 +323,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - resolved SbieDll.dll incompatibility with shadow stack and enabled /CETCOMPAT for SbieDll.dll [#2559](https://github.com/sandboxie-plus/Sandboxie/issues/2559)
 - added missing registry hooks to improve compatibility with newer applications
 - fixed permission issue with registry entries in privacy mode boxes
-
 
 
 
@@ -363,9 +358,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
-
-
 ## [1.6.5 / 5.61.5] - 2023-01-10
 
 ### Added
@@ -379,7 +371,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with Microsoft Edge in a security enhanced box [#2571](https://github.com/sandboxie-plus/Sandboxie/issues/2571)
 - opened OpenIpcPath=\\{BEC19D6F-D7B2-41A8-860C-8787BB964F2D} on ARM64 systems
 - fixed incompatibility with Windows 11 21H2 ARM64 [#2431](https://github.com/sandboxie-plus/Sandboxie/issues/2431)
-
 
 
 
@@ -427,7 +418,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
 ## [1.6.2 / 5.61.2] - 2022-12-19
 
 ### Added
@@ -443,7 +433,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed support setting page not showing version updates properly
-
 
 
 
@@ -497,7 +486,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
 ## [1.5.3 / 5.60.3] - 2022-11-08
 
 ### Added
@@ -518,8 +506,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed BSOD issue when driver initialization fails (introduced in 1.5.1) [#2431](https://github.com/sandboxie-plus/Sandboxie/issues/2431)
 - fixed fake paths being listed even if true paths do not exist [#2403](https://github.com/sandboxie-plus/Sandboxie/issues/2403)
 - fixed issue with Firefox 106.x requesting write access to plugin executables [#2391](https://github.com/sandboxie-plus/Sandboxie/issues/2391) [#2411](https://github.com/sandboxie-plus/Sandboxie/issues/2411)
-
-
 
 
 
@@ -577,7 +563,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - reworked API compatibility check
 - breakout process is now available for all users
-
 
 
 
@@ -801,7 +786,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - the access view list now adds the trailing "*" to file and key paths the same way the driver does [2039](https://github.com/sandboxie-plus/Sandboxie/issues/2039)
 - setup of shell integration is now done by SandMan, not the installer
 - uninstaller can now remove the sandbox folders [#1235](https://github.com/sandboxie-plus/Sandboxie/pull/1235)
-
 
 
 
@@ -1605,10 +1589,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - removed the ability to sort the trace log as it took too much CPU
 
 
+
 ## [0.9.7e / 5.52.5] - 2021-10-09
 
 ### Changed
 - reworked the settings handling once again, now the driver maintains the order when enumerating, but for good performance there is a Hash Map held in parallel for quick exact lookups
+
 
 
 ## [0.9.7d / 5.52.4] - 2021-10-06
@@ -1617,10 +1603,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed yet another ini issue with the SbieCtrl
 
 
+
 ## [0.9.7c / 5.52.3] - 2021-10-05
 
 ### Fixed
 - fixed yet another handling bug with SbieApi_EnumBoxesEx
+
 
 
 ## [0.9.7b / 5.52.2] - 2021-10-04

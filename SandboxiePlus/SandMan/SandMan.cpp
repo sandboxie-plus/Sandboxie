@@ -2841,17 +2841,15 @@ void CSandMan::OnEditIni()
 {
 	QString ini = ((QAction*)sender())->property("ini").toString();
 
-	std::wstring Editor = theConf->GetString("Options/Editor", "notepad.exe").toStdWString();
-	std::wstring IniPath;
-
+	QString IniPath;
 	bool bPlus;
 	if (bPlus = (ini == "plus"))
 	{
-		IniPath = L"\"" + QString(theConf->GetConfigDir() + "/Sandboxie-Plus.ini").replace("/", "\\").toStdWString() + L"\"";
+		IniPath = QString(theConf->GetConfigDir() + "/Sandboxie-Plus.ini").replace("/", "\\");
 	}
 	else if (ini == "tmpl")
 	{
-		IniPath = L"\"" + (theAPI->GetSbiePath() + "\\Templates.ini").toStdWString() + L"\"";
+		IniPath = theAPI->GetSbiePath() + "\\Templates.ini";
 
 		if (theConf->GetBool("Options/NoEditWarn", true)) {
 			bool State = false;
@@ -2866,7 +2864,7 @@ void CSandMan::OnEditIni()
 	}
 	else //if (ini == "sbie")
 	{
-		IniPath = L"\"" + theAPI->GetIniPath().toStdWString() + L"\"";
+		IniPath = theAPI->GetIniPath();
 
 		if (theConf->GetBool("Options/NoEditInfo", true)) {
 			bool State = false;
@@ -2881,13 +2879,26 @@ void CSandMan::OnEditIni()
 		}
 	}
 
+	bool bIsWritable = bPlus;
+	if (!bIsWritable) {
+		QFile File(IniPath);
+		if (File.open(QFile::ReadWrite)) {
+			bIsWritable = true;
+			File.close();
+		}
+		// todo: warn user about file not being protected
+	}
+
+	std::wstring Editor = theConf->GetString("Options/Editor", "notepad.exe").toStdWString();
+	std::wstring iniPath = L"\"" + IniPath.toStdWString() + L"\"";
+
 	SHELLEXECUTEINFO si = { 0 };
 	si.cbSize = sizeof(SHELLEXECUTEINFO);
 	si.fMask = SEE_MASK_NOCLOSEPROCESS;
 	si.hwnd = NULL;
-	si.lpVerb = bPlus ? NULL : L"runas"; // plus ini does not require admin privileges
+	si.lpVerb = bIsWritable ? NULL : L"runas"; // plus ini does not require admin privileges
 	si.lpFile = Editor.c_str();
-	si.lpParameters = IniPath.c_str();
+	si.lpParameters = iniPath.c_str();
 	si.lpDirectory = NULL;
 	si.nShow = SW_SHOW;
 	si.hInstApp = NULL;

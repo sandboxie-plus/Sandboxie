@@ -44,8 +44,8 @@
 
 #define LDR_INJECT_SETTING_NAME             L"InjectDll64"
 #define LDR_HOST_INJECT_SETTING_NAME        L"HostInjectDll64"
-//#define LDR_INJECT_NUM_SAVE_BYTES   12
-#define LDR_INJECT_NUM_SAVE_BYTES   19
+#define LDR_INJECT_NUM_SAVE_BYTES   12
+//#define LDR_INJECT_NUM_SAVE_BYTES   19
 
 
 #else ! _WIN64
@@ -772,13 +772,21 @@ _FX void Ldr_Inject_Init(BOOLEAN bHostInject)
         entrypoint[1] = 0xB8;
         *(ULONG_PTR *)(entrypoint + 2) = (ULONG_PTR)Ldr_Inject_Entry64;
 
-        entrypoint[10] = 0x48;          // lea rcx, [rip - 0x11]
-        entrypoint[11] = 0x8d;
-        entrypoint[12] = 0x0d;
-        *(ULONG*)(entrypoint + 13) = -0x11;
+//        entrypoint[10] = 0xFF;          // call rax
+//        entrypoint[11] = 0xD0;
 
-        entrypoint[17] = 0xFF;          // jmp rax
-        entrypoint[18] = 0xE0;
+        // using 19 bytes breaks Antidote11
+
+        //entrypoint[10] = 0x48;          // lea rcx, [rip - 0x11]
+        //entrypoint[11] = 0x8d;
+        //entrypoint[12] = 0x0d;
+        //*(ULONG*)(entrypoint + 13) = -0x11;
+        //
+        //entrypoint[17] = 0xFF;          // jmp rax
+        //entrypoint[18] = 0xE0;
+
+        entrypoint[10] = 0xFF;          // jmp rax
+        entrypoint[11] = 0xE0;
 
 #else ! _WIN64
 
@@ -797,6 +805,7 @@ _FX void Ldr_Inject_Init(BOOLEAN bHostInject)
 //---------------------------------------------------------------------------
 
 
+//_FX void Ldr_Inject_Entry(ULONG_PTR *pRetAddr)
 _FX void* Ldr_Inject_Entry(ULONG_PTR *pPtr)
 {
     UCHAR *entrypoint;
@@ -806,9 +815,18 @@ _FX void* Ldr_Inject_Entry(ULONG_PTR *pPtr)
     // restore correct code sequence at the entrypoint
     //
 
-#ifdef _WIN64
+//#ifdef _M_ARM64
+//    entrypoint = ((UCHAR *)*pRetAddr) - (LDR_INJECT_NUM_SAVE_BYTES - sizeof(ULONG_PTR)); // after blr comes the 64bit address
+//#else
+//    entrypoint = ((UCHAR *)*pRetAddr) - LDR_INJECT_NUM_SAVE_BYTES;
+//#endif
+//    *pRetAddr = (ULONG_PTR)entrypoint;
+#ifdef _M_ARM64
     entrypoint = (UCHAR*)pPtr;
-#else
+#elif _WIN64
+    // entrypoint = (UCHAR*)pPtr;
+    entrypoint = (UCHAR*)g_entrypoint;
+#else // x86
     entrypoint = ((UCHAR *)*pPtr) - LDR_INJECT_NUM_SAVE_BYTES;
     *pPtr = (ULONG_PTR)entrypoint;
 #endif

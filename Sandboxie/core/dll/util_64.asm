@@ -139,6 +139,16 @@ EXTERN Ldr_Inject_Entry           : PROC
 
 Ldr_Inject_Entry64      PROC
 
+;    ;
+;    ; Normally we would start with sub rsp,8+(4*8) but in this case
+;    ; we know the caller has not aligned the stack correctly
+;    ;
+;
+;    sub rsp,8+8+(4*8)
+;    lea rcx,[rsp+8+8+(4*8)]     ; setup pRetAddr parameter
+;    call Ldr_Inject_Entry
+;    add rsp,8+8+(4*8)
+
     sub rsp,8+(4*8)
     call Ldr_Inject_Entry
     mov rdx, rax
@@ -157,6 +167,8 @@ Ldr_Inject_Entry64      PROC
     cld
     rep stosq
     
+;    ret
+
     jmp rdx
     
 Ldr_Inject_Entry64      ENDP

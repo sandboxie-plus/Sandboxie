@@ -1075,9 +1075,6 @@ void CSandMan::closeEvent(QCloseEvent *e)
 
 	emit Closed();
 
-	//if(theAPI->IsConnected())
-	//	m_pBoxView->SaveUserConfig();
-
 	if (IsFullyPortable() && theAPI->IsConnected())
 	{
 		int PortableStop = theConf->GetInt("Options/PortableStop", -1);

@@ -25,7 +25,6 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	m_pMainLayout->setContentsMargins(0,0,0,0);
 	this->setLayout(m_pMainLayout);
 
-	m_UserConfigChanged = false;
 	m_HoldExpand = false;
 
 	m_pSbieModel = new CSbieModel(this);
@@ -495,16 +494,19 @@ void CSbieView::Refresh()
 	}
 
 	if (!Added.isEmpty()) {
+		bool bChanged = false;
 		foreach(const QVariant& ID, Added) {
 			if (ID.type() == QVariant::String) {
 				QString id = ID.toString();
-				if (id.left(1) != "!")
+				if (id.left(1) != "!") {
+					bChanged = true;
 					m_Groups[""].append(id);
+				}
 			}
 		}
 
-		m_UserConfigChanged = true;
-		SaveUserConfig();
+		if(bChanged)
+			SaveBoxGrouping();
 	}
 }
 
@@ -940,10 +942,9 @@ void CSbieView::OnGroupAction(QAction* Action)
 		Refresh();
 	}
 
-	m_UserConfigChanged = true;
 	UpdateMoveMenu();
 
-	SaveUserConfig();
+	SaveBoxGrouping();
 }
 
 void CSbieView::SetCustomOrder()
@@ -1060,11 +1061,9 @@ QString CSbieView::AddNewGroup()
 
 	m_Groups[Parent].append(Name);
 
-	
-	m_UserConfigChanged = true;
 	UpdateMoveMenu();
 
-	SaveUserConfig();
+	SaveBoxGrouping();
 
 	return Name;
 }
@@ -1356,11 +1355,13 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		if (QMessageBox("Sandboxie-Plus", tr("Do you really want to remove the selected sandbox(es)?<br /><br />Warning: The box content will also be deleted!"), QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Default | QMessageBox::Escape, QMessageBox::NoButton, this).exec() != QMessageBox::Yes)
 			return;
 
+		bool bChanged = false;
 		foreach(const CSandBoxPtr& pBox, SandBoxes)
 		{
 			SB_STATUS Status = theGUI->DeleteBoxContent(pBox, CSandMan::eForDelete);
 			if (Status.GetMsgCode() == SB_Canceled)
 				break;
+			
 			QString Name = pBox->GetName();
 			if (!Status.IsError())
 				Status = pBox->RemoveBox();
@@ -1371,11 +1372,16 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 				m_Collapsed.remove(Name);
 				for (auto I = m_Groups.begin(); I != m_Groups.end(); ++I)
 				{
-					if (I.value().removeOne(Name))
+					if (I.value().removeOne(Name)) {
+						bChanged = true;
 						break;
+					}
 				}
 			}
 		}
+
+		if(bChanged)
+			SaveBoxGrouping();
 	}
 	else if (Action == m_pMenuCleanUp)
 	{
@@ -1469,9 +1475,6 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	}
 
 	CSandMan::CheckResults(Results);
-
-	m_UserConfigChanged = true;
-	SaveUserConfig();
 }
 
 bool CSbieView::CreateShortcut(const QString& LinkPath, const QString& BoxName, const QString &IconPath, int IconIndex, const QString &WorkDir)
@@ -1964,9 +1967,12 @@ void CSbieView::ChangeExpand(const QModelIndex& index, bool bExpand)
 	else
 		m_Collapsed.insert(Name);
 
-	m_UserConfigChanged = true;
+	//QMap<QString, QStringList> Collapsed;
+	//Collapsed.insert("", SetToList(m_Collapsed));
+	//theAPI->GetUserSettings()->SetTextMap("CollapsedBoxes", Collapsed);
 
-	SaveUserConfig();
+	QString Collapsed = SetToList(m_Collapsed).join(",");
+	theConf->SetValue("UIConfig/BoxCollapsedView", Collapsed);
 }
 
 void CSbieView::ReloadUserConfig()
@@ -1984,14 +1990,14 @@ void CSbieView::ReloadUserConfig()
 
 	UpdateMoveMenu();
 
-	QMap<QString, QStringList> Collapsed = theAPI->GetUserSettings()->GetTextMap("CollapsedBoxes");
-	m_Collapsed = ListToSet(Collapsed[""]);
-	if (m_Collapsed.isEmpty()) { // try legacy entries
+	//QMap<QString, QStringList> Collapsed = theAPI->GetUserSettings()->GetTextMap("CollapsedBoxes");
+	//m_Collapsed = ListToSet(Collapsed[""]);
+	//if (m_Collapsed.isEmpty()) { // try legacy entries
 		QString Collapsed = theConf->GetString("UIConfig/BoxCollapsedView");
-		if (Collapsed.isEmpty())
-			Collapsed = theAPI->GetUserSettings()->GetText("BoxCollapsedView");
+		//if (Collapsed.isEmpty())
+		//	Collapsed = theAPI->GetUserSettings()->GetText("BoxCollapsedView");
 		m_Collapsed = ListToSet(SplitStr(Collapsed, ","));
-	}
+	//}
 
 	ClearUserUIConfig();
 }
@@ -2022,12 +2028,8 @@ void CSbieView::ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes)
 	m_Collapsed = Temp;
 }
 
-void CSbieView::SaveUserConfig()
+void CSbieView::SaveBoxGrouping()
 {
-	if (!m_UserConfigChanged)
-		return;
-	m_UserConfigChanged = false;
-
 	if (!theAPI->IsConnected())
 		return;
 
@@ -2042,10 +2044,6 @@ void CSbieView::SaveUserConfig()
 		}
 	}
 	theAPI->GetUserSettings()->SetTextMap("BoxGrouping", Groups);
-
-	QMap<QString, QStringList> Collapsed;
-	Collapsed.insert("", SetToList(m_Collapsed));
-	theAPI->GetUserSettings()->SetTextMap("CollapsedBoxes", Collapsed);
 
 	theAPI->GetUserSettings()->SetRefreshOnChange(true);
 	theAPI->CommitIniChanges();
@@ -2066,10 +2064,9 @@ void CSbieView::OnMoveItem(const QString& Name, const QString& To, int row)
 		Refresh();
 	}
 
-	m_UserConfigChanged = true;
 	UpdateMoveMenu();
 
-	SaveUserConfig();
+	SaveBoxGrouping();
 }
 
 void CSbieView::OnRemoveItem() 

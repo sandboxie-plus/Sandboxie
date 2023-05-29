@@ -73,7 +73,7 @@ public slots:
 	void						Refresh();
 	void						ReloadUserConfig();
 	void						ClearUserUIConfig(const QMap<QString, CSandBoxPtr> AllBoxes = QMap<QString, CSandBoxPtr>());
-	void						SaveUserConfig();
+	void						SaveBoxGrouping();
 
 private slots:
 	void						OnToolTipCallback(const QVariant& ID, QString& ToolTip);
@@ -112,7 +112,6 @@ protected:
 
 	QMap<QString, QStringList>	m_Groups;
 	QSet<QString>				m_Collapsed;
-	bool						m_UserConfigChanged;
 	bool						m_HoldExpand;
 
 private:

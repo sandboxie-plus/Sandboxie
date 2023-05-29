@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - additional feedback for other drag and drop scenarios can be provided in [#856](https://github.com/sandboxie-plus/Sandboxie/issues/856)
 - fixed  Regression: DLL loading problem (Entry Point Not Found) [#2980](https://github.com/sandboxie-plus/Sandboxie/issues/2980)
 - fixed [1.9.4/5] Sandboxie does not mark deleted files or registry keys while virtualization scheme v2 is active [#2984](https://github.com/sandboxie-plus/Sandboxie/issues/2984)
+- fixed SandMan: Timestamp of the Sandboxie.ini [#2985](https://github.com/sandboxie-plus/Sandboxie/issues/2985)
 
 
 ## [1.9.5 / 5.64.5] - 2023-05-26

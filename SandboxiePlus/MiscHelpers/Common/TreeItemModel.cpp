@@ -349,7 +349,8 @@ void CTreeItemModel::RemoveIndex(const QModelIndex &index)
         return;
 
 	STreeNode* pNode = static_cast<STreeNode*>(index.internalPointer());
-	ASSERT(pNode);
+	if (!m_Nodes.contains(pNode))
+		return;
 
 	QHash<QVariant, STreeNode*> Old;
 	Old[pNode->ID] = pNode;
@@ -367,7 +368,8 @@ bool CTreeItemModel::setData(const QModelIndex &index, const QVariant &value, in
 	if(index.column() == FIRST_COLUMN && role == Qt::CheckStateRole)
 	{
 		STreeNode* pNode = static_cast<STreeNode*>(index.internalPointer());
-		ASSERT(pNode);
+		if (!m_Nodes.contains(pNode))
+			return false;
 		emit CheckChanged(pNode->ID, value.toInt() != Qt::Unchecked);
 		return true;
 	}
@@ -380,7 +382,8 @@ QVariant CTreeItemModel::GetItemID(const QModelIndex& index) const
 		return QVariant();
 
 	STreeNode* pNode = static_cast<STreeNode*>(index.internalPointer());
-
+	if (!m_Nodes.contains(pNode))
+		return QVariant();
 	return pNode->ID;
 }
 
@@ -393,7 +396,8 @@ QVariant CTreeItemModel::Data(const QModelIndex &index, int role, int section) c
 	//    return QSize(64,16); // for fixing height
 
 	STreeNode* pNode = static_cast<STreeNode*>(index.internalPointer());
-	ASSERT(pNode);
+	if (!m_Nodes.contains(pNode))
+		return QVariant();
 
 	return NodeData(pNode, role, section);
 }
@@ -496,8 +500,11 @@ QModelIndex CTreeItemModel::index(int row, int column, const QModelIndex &parent
     STreeNode* pParent;
     if (!parent.isValid())
         pParent = m_Root;
-    else
-        pParent = static_cast<STreeNode*>(parent.internalPointer());
+	else {
+		pParent = static_cast<STreeNode*>(parent.internalPointer());
+		if (!m_Nodes.contains(pParent))
+			return QModelIndex();
+	}
 
 	if(STreeNode* pNode = pParent->Children.count() > row ? pParent->Children[row] : NULL)
         return createIndex(row, column, pNode);
@@ -510,6 +517,8 @@ QModelIndex CTreeItemModel::parent(const QModelIndex &index) const
         return QModelIndex();
 
     STreeNode* pNode = static_cast<STreeNode*>(index.internalPointer());
+	if (!m_Nodes.contains(pNode))
+		return QModelIndex();
 	ASSERT(pNode->Parent);
 	STreeNode* pParent = pNode->Parent;
     if (pParent == m_Root)
@@ -529,8 +538,11 @@ int CTreeItemModel::rowCount(const QModelIndex &parent) const
 	STreeNode* pNode;
     if (!parent.isValid())
         pNode = m_Root;
-    else
-        pNode = static_cast<STreeNode*>(parent.internalPointer());
+	else {
+		pNode = static_cast<STreeNode*>(parent.internalPointer());
+		if (!m_Nodes.contains(pNode))
+			return 0;
+	}
 	return pNode->Children.count();
 }
 

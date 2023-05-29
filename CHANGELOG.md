@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed  Regression: DLL loading problem (Entry Point Not Found) [#2980](https://github.com/sandboxie-plus/Sandboxie/issues/2980)
 - fixed [1.9.4/5] Sandboxie does not mark deleted files or registry keys while virtualization scheme v2 is active [#2984](https://github.com/sandboxie-plus/Sandboxie/issues/2984)
 - fixed SandMan: Timestamp of the Sandboxie.ini [#2985](https://github.com/sandboxie-plus/Sandboxie/issues/2985)
+- fixed [Plus UI] Crash after pressing the button "Show NT Object Tree" several times [#2943](https://github.com/sandboxie-plus/Sandboxie/issues/2943)
 
 
 

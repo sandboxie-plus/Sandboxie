@@ -67,7 +67,7 @@ protected:
 
 	struct SSandBoxNode: STreeNode
 	{
-		SSandBoxNode(const QVariant& Id) : STreeNode(Id) { inUse = false; bOpen = false; busyState = 0; boxType = -1; boxDel = false; boxNoForce = false; boxColor = 0; OrderNumber = 0; }
+		SSandBoxNode(CTreeItemModel* pModel, const QVariant& Id) : STreeNode(pModel, Id) { inUse = false; bOpen = false; busyState = 0; boxType = -1; boxDel = false; boxNoForce = false; boxColor = 0; OrderNumber = 0; }
 
 		CSandBoxPtr	pBox;
 		bool		inUse;
@@ -85,7 +85,7 @@ protected:
 
 	virtual QVariant		NodeData(STreeNode* pNode, int role, int section) const;
 
-	virtual STreeNode*		MkNode(const QVariant& Id) { return new SSandBoxNode(Id); }
+	virtual STreeNode*		MkNode(const QVariant& Id) { return new SSandBoxNode(this, Id); }
 
 	QList<QVariant>			MakeProcPath(const QString& BoxName, const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList);
 	void					MakeProcPath(const CBoxedProcessPtr& pProcess, const QMap<quint32, CBoxedProcessPtr>& ProcessList, QList<QVariant>& Path);

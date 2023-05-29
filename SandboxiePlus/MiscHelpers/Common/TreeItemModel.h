@@ -49,7 +49,7 @@ signals:
 protected:
 	struct STreeNode
 	{
-		STreeNode(const QVariant& Id) {
+		STreeNode(CTreeItemModel* pModel, const QVariant& Id) {
 			ID = Id;
 			Parent = NULL;
 			Row = 0;
@@ -59,8 +59,13 @@ protected:
 
 			IsBold = false;
 			IsGray = false;
+
+			Model = pModel;
+			Model->m_Nodes.insert(this);
 		}
-		virtual ~STreeNode(){}
+		virtual ~STreeNode(){
+			Model->m_Nodes.remove(this);
+		}
 
 		QVariant			ID;
 
@@ -83,6 +88,7 @@ protected:
 			QVariant Formatted;
 		};
 		QVector<SValue>		Values;
+		CTreeItemModel*		Model;
 	};
 
 	virtual QVariant	NodeData(STreeNode* pNode, int role, int section) const;
@@ -105,6 +111,7 @@ protected:
 
 	STreeNode*							m_Root;
 	QHash<QVariant, STreeNode*>			m_Map;
+	QSet<STreeNode*>					m_Nodes;
 	bool								m_bUseIcons;
 
 	static bool							m_DarkMode;
@@ -129,7 +136,7 @@ public:
     virtual QVariant		headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
 protected:
-	virtual STreeNode*		MkNode(const QVariant& Id) { return new STreeNode(Id); }
+	virtual STreeNode*		MkNode(const QVariant& Id) { return new STreeNode(this, Id); }
 	virtual void			FreeNode(STreeNode* pNode) { delete pNode; }
 
 	QList<QVariant>			MakePath(const QVariantMap& Cur, const QMap<QVariant, QVariantMap>& List);

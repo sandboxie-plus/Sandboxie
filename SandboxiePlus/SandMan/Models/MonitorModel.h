@@ -79,12 +79,12 @@ public:
 protected:
 	struct STraceNode : STreeNode
 	{
-		STraceNode(const QVariant& Id) : STreeNode(Id) { }
+		STraceNode(CTreeItemModel* pModel, const QVariant& Id) : STreeNode(pModel, Id) { }
 
 		CMonitorEntryPtr	pEntry;
 	};
 
-	virtual STreeNode*	MkNode(const QVariant& Id) { return new STraceNode(Id); }
+	virtual STreeNode*	MkNode(const QVariant& Id) { return new STraceNode(this, Id); }
 	virtual STreeNode*	MkVirtualNode(const QVariant& Id, STreeNode* pParent);
 
 	bool			m_bObjTree;

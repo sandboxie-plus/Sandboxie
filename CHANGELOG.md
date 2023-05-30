@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.9.6 / 5.64.6] - 2023-05-??
+## [1.9.6 / 5.64.6] - 2023-05-30
 
 ### Added
 - added full stack trace to all trace messages

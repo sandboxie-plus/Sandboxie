@@ -40,7 +40,7 @@ body:
         If applicable, in which sandboxed program did you see the problem?
 
         If not, you can type something like "Not relevant".
-      placeholder: e.g. Firefox 113.0.1 64-bit, ....
+      placeholder: e.g. Firefox 113.0.2 64-bit, ....
     validations:
       required: true
   - type: input
@@ -114,7 +114,7 @@ body:
     id: sandboxie-version
     attributes:
       label: What version of Sandboxie are you running?
-      placeholder: e.g. Sandboxie Plus 1.9.3 64-bit
+      placeholder: e.g. Sandboxie Plus 1.9.6 64-bit
     validations:
       required: true
   - type: dropdown
@@ -124,7 +124,7 @@ body:
       options:
         - "I recently did a new clean installation."
         - "I just updated Sandboxie from a previous version (I don't remember which one)."
-        - "I just updated Sandboxie from a previous version (explicitly mentioned in this issue)."
+        - "I just updated Sandboxie from a previous version (I remember which one it is)."
         - "I recently upgraded it from an older version than 1.5.3 / 5.60.3."
         - "I have been using the same version for some time."
     validations:
@@ -191,7 +191,7 @@ body:
         - C:\\Sandbox\\%User%\\DefaultBox\\user\\current\\AppData\\Local\\CrashDumps
         - C:\\Sandbox\\%USER%\\%SANDBOX% (only if you previously set EnableMiniDump=y in the sandbox section of your Sandboxie.ini file)
         - C:\\Windows\\MEMORY.DMP (known as %SystemRoot%\\MEMORY.DMP)
-        See also: [Generate a kernel or complete crash dump](https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/generate-a-kernel-or-complete-crash-dump)
+        See also: [Generate a kernel or complete crash dump](https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/generate-a-kernel-or-complete-crash-dump) | [Driver Verifier - tracking down a misbehaving driver](https://answers.microsoft.com/en-us/windows/forum/windows_10-update/driver-verifier-tracking-down-a-mis-behaving/f5cb4faf-556b-4b6d-95b3-c48669e4c983)
 
         Tip: You can upload the .dmp file(s) on a file storage service, then share the resulting link below.
       placeholder: https://

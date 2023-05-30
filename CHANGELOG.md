@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added full stack trace to all trace messages
-- added Add option to launch the default notepad editor as non-admin [#2987](https://github.com/sandboxie-plus/Sandboxie/issues/2987)
+- added option to launch the default notepad editor as non-admin [#2987](https://github.com/sandboxie-plus/Sandboxie/issues/2987)
 
 ### Fixed
 - fixed an issue with token manipulation in the SbieDrv driver
@@ -82,7 +82,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added global setting to disable overlay icons
 - added ability to specify Sandboxie.ini location in registry
   - open "HKLM\SYSTEM\CurrentControlSet\Services\SbieDrv" and set "IniPath" [#2837](https://github.com/sandboxie-plus/Sandboxie/issues/2837)
-  - use a REG_SZ string for the path, like "\??\C:\my_path\my_sandboxie.ini"
+  - use a REG_SZ string for the path, like "\\??\C:\my_path\my_sandboxie.ini"
 
 ### Changed
 - improved handling of DLL injection failure

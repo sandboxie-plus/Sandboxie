@@ -18,10 +18,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed A game can't be launched properly from "Run from Start Menu" [#2969](https://github.com/sandboxie-plus/Sandboxie/issues/2969)
 - fixed drag and drop issue with Microsoft Excel data grid [9455e96](https://github.com/sandboxie-plus/Sandboxie/commit/9455e96a699cbc665f791e191f2a13bb40783ab0)
   - additional feedback for other drag and drop scenarios can be provided in [#856](https://github.com/sandboxie-plus/Sandboxie/issues/856)
-- fixed  Regression: DLL loading problem (Entry Point Not Found) [#2980](https://github.com/sandboxie-plus/Sandboxie/issues/2980)
-- fixed [1.9.4/5] Sandboxie does not mark deleted files or registry keys while virtualization scheme v2 is active [#2984](https://github.com/sandboxie-plus/Sandboxie/issues/2984)
+- fixed regression: DLL loading problem (Entry Point Not Found) [#2980](https://github.com/sandboxie-plus/Sandboxie/issues/2980)
+- fixed Sandboxie does not mark deleted files or registry keys while virtualization scheme v2 is active (1.9.4/1.9.5) [#2984](https://github.com/sandboxie-plus/Sandboxie/issues/2984)
 - fixed SandMan: Timestamp of the Sandboxie.ini [#2985](https://github.com/sandboxie-plus/Sandboxie/issues/2985)
-- fixed [Plus UI] Crash after pressing the button "Show NT Object Tree" several times [#2943](https://github.com/sandboxie-plus/Sandboxie/issues/2943)
+- fixed crash after pressing the button "Show NT Object Tree" several times (Plus UI) [#2943](https://github.com/sandboxie-plus/Sandboxie/issues/2943)
 
 
 
@@ -320,10 +320,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added SBIE2113/SBIE2114/SBIE2115 message to indicate when files are not migrated due to presets
 - added 'NoParallelLoading=y' to disable parallel loading of dlls to debug loader issues
 
-### changed
+### Changed
 - moved SeparateUserFolders checkbox from global settings to per box options
 
-### fixed
+### Fixed
 - resolved SbieDll.dll incompatibility with shadow stack and enabled /CETCOMPAT for SbieDll.dll [#2559](https://github.com/sandboxie-plus/Sandboxie/issues/2559)
 - added missing registry hooks to improve compatibility with newer applications
 - fixed permission issue with registry entries in privacy mode boxes
@@ -555,7 +555,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Note: ARM32 on ARM64 is not implemented and will terminate with message SBIE2338
   - Note: when Sandboxie is running, it disables the use of CHPE binaries for x86 processes globally - as required for the forced process functionality. This can be disabled by adding the global option "DisableCHPE=n" to the Sandboxie.ini, which will terminate x86 processes started outside the sandbox with message SBIE2338, instead of being forced
 
-### fixed
+### Changed
+- reworked API compatibility check
+- breakout process is now available for all users
+
+### Fixed
 - fixed issue with Win32 hooks in x86 applications
 - avoid window overlap when editing templates [#2339](https://github.com/sandboxie-plus/Sandboxie/pull/2339) (thanks okrc)
 - fixed incorrect write of OpenWinClass UI setting [#2347](https://github.com/sandboxie-plus/Sandboxie/pull/2347) (thanks okrc)
@@ -563,10 +567,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Edge WebView2 compatibility issue [#2350](https://github.com/sandboxie-plus/Sandboxie/issues/2350)
 - added provisional workaround for Firefox 106 content process sandbox issue
 - fixed bug with renaming sandboxes [#2358](https://github.com/sandboxie-plus/Sandboxie/pull/2358) (thanks okrc)
-
-### Changed
-- reworked API compatibility check
-- breakout process is now available for all users
 
 
 
@@ -2142,7 +2142,6 @@ Fixed issue with Windows 7
   - this option is recommended to be used in combination with "DropAdminRights=y" to improve security
   - with "FakeAdminRights=y" and "DropAdminRights=y" installers should still work
 - added RPC support for SSDP API (the Simple Service Discovery Protocol), you can enable it with "OpenUPnP=y"
-
 
 ### Changed
 - SbieCrypto no longer triggers message 1313

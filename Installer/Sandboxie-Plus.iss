@@ -108,6 +108,9 @@ Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\SbieSvc"; ValueName: "Pre
 ; Set language for Sbie service.
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\SbieSvc"; ValueType: dword; ValueName: "Language"; ValueData: "{code:SystemLanguage}"; Check: not IsPortable
 
+; Set IniPath for Sbie driver.
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\SbieDrv"; ValueType: string; ValueName: "IniPath"; ValueData: "{code:GetIniPath}"; Check: IsUpgrade and IsIniPathSet
+
 
 [Run]
 ; Install the Sbie driver.
@@ -142,7 +145,8 @@ var
   CustomPage: TInputOptionWizardPage;
   IsInstalled: Boolean;
   Portable: Boolean;
-
+  IniPathExist: Boolean;
+  IniPath: String;
 
 function IsPortable(): Boolean;
 begin
@@ -457,7 +461,39 @@ begin
       end;
   end;
 
+  begin
+  
+    // Return the path to use for the value of IniPath.
+    if RegQueryStringValue(HKLM, 'SYSTEM\CurrentControlSet\Services\SbieDrv', 'IniPath', IniPath) then
+    begin
+      if Copy(IniPath, 1, 4) = '\??\' then
+      begin
+        IniPathExist := True;
+      end;
+    end;
+  end;
+
   Result := True;
+end;
+
+function IsIniPathSet(): Boolean;
+begin
+
+  // Return True or False for the value of Check.
+  if (IniPathExist) then
+  begin
+      Result := True;
+  end;
+end;
+
+function GetIniPath(Dummy: String): String;
+begin
+
+  // Return the path to use for the value of IniPath.
+  if (IniPathExist) then
+  begin
+      Result := IniPath;
+  end;
 end;
 
 //procedure CurStepChanged(CurStep: TSetupStep);

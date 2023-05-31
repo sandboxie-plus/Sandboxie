@@ -2094,8 +2094,14 @@ void CSandMan::AddLogMessage(const QString& Message)
 	if (Message.contains("</a>")) {
 		QLabel* pLabel = new QLabel(Message);
 		pLabel->setContentsMargins(3, 0, 0, 0);
+		pLabel->setAutoFillBackground(true);
 		connect(pLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 		m_pMessageLog->GetTree()->setItemWidget(pItem, 1, pLabel);
+
+		QRegularExpression tagExp("<[^>]*>");
+		QString TextMessage = Message;
+		TextMessage.remove(tagExp);
+		pItem->setText(1, TextMessage);
 	}
 	else
 		pItem->setText(1, Message);

@@ -4,6 +4,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.9.7 / 5.64.7] - 2023-05-??
+
+### Fixed
+- fixed SandMan: Empty lines when using "Copy Panel" [#2995](https://github.com/sandboxie-plus/Sandboxie/issues/2995)
+
+
+
 ## [1.9.6 / 5.64.6] - 2023-05-30
 
 ### Added

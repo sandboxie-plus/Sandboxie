@@ -1646,7 +1646,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/PopUpWindow.h" line="75"/>
         <source> (%1)</source>
-        <translation type="unfinished"> (%1)</translation>
+        <translation> (%1)</translation>
     </message>
 </context>
 <context>
@@ -2960,7 +2960,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="2083"/>
         <location filename="SandMan.cpp" line="2085"/>
         <source> (%1)</source>
-        <translation type="unfinished"> (%1)</translation>
+        <translation> (%1)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2267"/>
@@ -4425,7 +4425,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/StackView.cpp" line="17"/>
         <source>#|Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>#|Символ</translation>
     </message>
 </context>
 <context>
@@ -4793,7 +4793,7 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Views/TraceView.cpp" line="308"/>
         <source>Show Stack Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать трассировку стека</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="313"/>
@@ -6717,7 +6717,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="327"/>
         <source>Sandboxie may be issue &lt;a href=&quot;sbie://docs/sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</source>
         <oldsource>Sandboxie may be issue &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</oldsource>
-        <translation type="unfinished">Sandboxie может выдавать &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;сообщения SBIE&lt;/a&gt; в журнал сообщений и отображать их как всплывающие окна. Некоторые сообщения носят информационный характер и уведомляют об общих или, в некоторых случаях, особых событиях, которые произошли, другие сообщения указывают на состояние ошибки.&lt;br /&gt;Вы можете скрыть выбранные сообщения SBIE от всплывающих окон, используя приведенный ниже список:</translation>
+        <translation>Sandboxie может выдавать &lt;a href= &quot;sbie://docs/sbiemessages&quot;&gt;сообщения SBIE&lt;/a&gt; в журнал сообщений и отображать их как всплывающие окна. Некоторые сообщения носят информационный характер и уведомляют об общих или, в некоторых случаях, особых событиях, которые произошли, другие сообщения указывают на состояние ошибки.&lt;br /&gt;Вы можете скрыть выбранные сообщения SBIE от всплывающих окон, используя приведенный ниже список:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="340"/>

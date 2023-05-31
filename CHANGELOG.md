@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added full stack trace to all trace messages
+  - activating the Trace Log tab also turns on the Keep Terminated feature by default [#2988](https://github.com/sandboxie-plus/Sandboxie/issues/2988#issuecomment-1567787776)
 - added option to launch the default notepad editor as non-admin [#2987](https://github.com/sandboxie-plus/Sandboxie/issues/2987)
 
 ### Fixed

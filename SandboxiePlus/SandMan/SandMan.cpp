@@ -349,6 +349,11 @@ void CSandMan::CreateUI()
 {
 	SetUITheme();
 
+	// Clear old ToolBar references.
+	m_pNewBoxButton = nullptr;
+	m_pCleanUpButton = nullptr;
+	m_pEditIniButton = nullptr;	
+	
 	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
 
 	if(iViewMode == 2)
@@ -361,7 +366,7 @@ void CSandMan::CreateUI()
 	m_pMainLayout->setSpacing(0);
 
 	if(iViewMode == 1)
-		CreateToolBar();
+		CreateToolBar(false);
 	else {
 		m_pSeparator = NULL;
 		CreateLabel();
@@ -727,54 +732,235 @@ void CSandMan::OnView(QAction* pAction)
 	}
 }
 
-void CSandMan::CreateToolBar()
+void CSandMan::SetToolBarItemsConfig(const QSet<QString>& items)
 {
+	QStringList list;
+	for (auto item : items) list.append(item);
+	theConf->SetValue(ToolBarConfigKey, list);
+}
+
+QSet<QString> CSandMan::GetToolBarItemsConfig()
+{
+	auto list = theConf->GetStringList(ToolBarConfigKey, DefaultToolBarItems);
+
+	QSet<QString> validSet;
+
+	for (auto item : GetAvailableToolBarActions()) {		
+		if (!item.scriptName.isEmpty()) validSet.insert(item.scriptName);
+	}
+
+	// remove invalid and obsolete items
+	QSet<QString> items;
+	for (auto item : list) {
+		auto trimmed = item.trimmed();
+		if (validSet.contains(trimmed))
+			items.insert(trimmed);
+		else
+			// m_pMessageLog exists, but UI does not
+			// AddLogMessage(tr("Invalid toolbar item in sandboxie-plus.ini: %1").arg(item));
+			;
+	}
+
+	return items;
+}
+
+QList<ToolBarAction> CSandMan::GetAvailableToolBarActions()
+{
+	// Assumes Advanced-Mode and (menu-)actions have been created.
+	// Return items in toolbar display order
+
+	return QList<ToolBarAction> {
+			ToolBarAction{ "NewBoxMenu", nullptr, tr("New-Box Menu") },  //tr: Name of button in toolbar for showing actions new box, new group, import},
+			ToolBarAction{ "NewBox", m_pNewBox },
+			ToolBarAction{ "NewGroup", m_pNewGroup },
+			ToolBarAction{ "ImportBox", m_pImportBox },
+			ToolBarAction{ "", nullptr },        // separator
+			ToolBarAction{ "CleanUpMenu", nullptr, tr("Cleanup") }, //tr: Name of button in toolbar for cleanup-all action
+			ToolBarAction{ "Settings", m_pMenuSettings },
+			ToolBarAction{ "EditIniMenu", nullptr, tr("Edit-ini Menu") },  //tr: Name of button in toolbar for showing edit-ini files actions},
+			ToolBarAction{ "EditIni", m_pEditIni },
+			ToolBarAction{ "EditTemplates", m_pEditIni2 },
+			ToolBarAction{ "EditPlusIni", m_pEditIni3 },
+			ToolBarAction{ "ReloadIni", m_pReloadIni },
+			ToolBarAction{ "Refresh", m_pRefreshAll },
+			ToolBarAction{ "", nullptr },
+			ToolBarAction{ "RunBoxed", m_pRunBoxed },
+			ToolBarAction{ "IsBoxed", m_pWndFinder },
+			ToolBarAction{ "TerminateAll", m_pEmptyAll },
+			ToolBarAction{ "KeepTerminated", m_pKeepTerminated },
+			ToolBarAction{ "BrowseFiles", m_pMenuBrowse },
+			ToolBarAction{ "EnableMonitor", m_pEnableMonitoring },
+			//TODO These need icons
+			//ToolBarAction{ "", nullptr },
+			//ToolBarAction{ "DisableForce", m_pDisableForce},
+			//ToolBarAction{ "DisableRecovery", m_pDisableRecovery },
+			//ToolBarAction{ "DisableMessages", m_pDisableMessages },
+			ToolBarAction{ "", nullptr },
+			ToolBarAction{ "Connect", m_pConnect },
+			ToolBarAction{ "Disconnect", m_pDisconnect },
+			ToolBarAction{ "StopAll", m_pStopAll },
+			// ToolBarAction{"SetupWizard", m_pSetupWizard},
+			// ToolBarAction{"UninstallAll", m_pUninstallAll}, // removed because not always valid in menu system
+			ToolBarAction{ "", nullptr },
+			ToolBarAction{ "CheckForUpdates", m_pUpdate },
+			ToolBarAction{ "About", m_pAbout },
+			ToolBarAction{ "", nullptr },
+			ToolBarAction{ "Exit", m_pExit },
+			ToolBarAction{ "", nullptr },
+			ToolBarAction{ "Contribute", m_pContribution }
+	};
+}
+
+void CSandMan::OnResetToolBarMenuConfig()
+{
+	theConf->SetValue(ToolBarConfigKey, DefaultToolBarItems);
+	CreateToolBar(true);
+}
+
+void CSandMan::OnToolBarMenuItemClicked(const QString& scriptName)
+{
+	// Toggles content of config. Ignores menu item state. Menu is immediately rebuilt with toolbar update.
+	auto items = GetToolBarItemsConfig();
+	if (!items.remove(scriptName)) items.insert(scriptName);
+	SetToolBarItemsConfig(items);
+	CreateToolBar(true);
+}
+
+void CSandMan::CreateToolBarConfigMenu(const QList<ToolBarAction>& actions, const QSet<QString>& currentItems)
+{
+	auto m_pToolBarContextMenu = new QMenu(tr("Toolbar Items"), m_pToolBar);
+
+	m_pToolBarContextMenu->addAction(tr("Reset Toolbar"), this, &CSandMan::OnResetToolBarMenuConfig);
+	m_pToolBarContextMenu->addSeparator();
+
+	for (auto sa : actions)
+	{
+		if (sa.scriptName == nullptr) {
+			m_pToolBarContextMenu->addSeparator();
+			continue;
+		}
+
+		QString text = sa.scriptName;
+		if (!sa.nameOverride.isEmpty())
+			text = sa.nameOverride;
+		else if (sa.action)
+			text = sa.action->text();  // tr: already localised
+		else
+			qDebug() << "ERROR: Missing display name for " << sa.scriptName;
+
+		auto scriptName = sa.scriptName;
+		auto menuAction = m_pToolBarContextMenu->addAction(text, this, [scriptName, this]() {
+			OnToolBarMenuItemClicked(scriptName);
+			}
+		);
+		menuAction->setCheckable(true);
+		menuAction->setChecked(currentItems.contains(sa.scriptName));
+	}
+
+	m_pToolBar->setContextMenuPolicy(Qt::CustomContextMenu);	
+	QObject::connect(m_pToolBar, &QToolBar::customContextMenuRequested, this,
+		[m_pToolBarContextMenu, this](const QPoint& p) {
+			m_pToolBarContextMenu->exec(mapToGlobal(p));
+		}
+	);
+}
+
+void CSandMan::CreateToolBar(bool rebuild)
+{
+	// Assumes UI is in Advanced-Mode and menus have been built.
+	
+	auto pOldToolBar = m_pToolBar;
 	m_pToolBar = new QToolBar();
 	m_pMainLayout->insertWidget(0, m_pToolBar);
+	if (rebuild) {
+		m_pLabel->deleteLater(); // should really be owned by m_pToolBar, not m_pMainWidget
+		m_pMainLayout->removeWidget(pOldToolBar);
+		pOldToolBar->deleteLater();
+		m_pNewBoxButton = nullptr;  // deleted by pOldToolBar
+		m_pEditIniButton = nullptr;
+		m_pCleanUpButton = nullptr;
+	}
 
-	m_pToolBar->addAction(m_pMenuSettings);
-	m_pToolBar->addSeparator();
+	auto items = GetToolBarItemsConfig();
+	auto scriptableActions = GetAvailableToolBarActions();
+	CreateToolBarConfigMenu(scriptableActions, items);
 
-	//m_pToolBar->addAction(m_pMenuNew);
-	//m_pToolBar->addAction(m_pMenuEmptyAll);
-	//m_pToolBar->addSeparator();
-	m_pToolBar->addAction(m_pKeepTerminated);
-	//m_pToolBar->addSeparator();
-	//m_pToolBar->addAction(m_pCleanUp);
+	// Prevent leading, trailing, or consecutive separators
+	bool needsSeparator = false; // true if we need to add a separator before the next action
+	bool latestIsAction = false; // true if the most recent toolbar item is not a separator
 
-	m_pCleanUpButton = new QToolButton();
-	m_pCleanUpButton->setIcon(CSandMan::GetIcon("Clean"));
-	m_pCleanUpButton->setToolTip(tr("Cleanup"));
-	m_pCleanUpButton->setText(tr("Cleanup"));
-	m_pCleanUpButton->setPopupMode(QToolButton::MenuButtonPopup);
-	m_pCleanUpButton->setMenu(m_pCleanUpMenu);
-	//QObject::connect(m_pCleanUpButton, SIGNAL(triggered(QAction*)), , SLOT());
-	QObject::connect(m_pCleanUpButton, SIGNAL(clicked(bool)), this, SLOT(OnCleanUp()));
-	m_pToolBar->addWidget(m_pCleanUpButton);
+	for (auto sa : scriptableActions)
+	{
+		if (sa.scriptName.isEmpty()) {
+			// only trigger if we just added an action
+			if (latestIsAction) needsSeparator = true;
+			continue;
+		}
 
-	
-	m_pToolBar->addSeparator();
-	m_pToolBar->addAction(m_pMenuBrowse);
-	m_pToolBar->addSeparator();
-	
-	/*m_pEditButton = new QToolButton();
-	m_pEditButton->setIcon(m_pEditIni->icon());
-	m_pEditButton->setText(m_pEditIni->text());
-	m_pEditButton->setPopupMode(QToolButton::MenuButtonPopup);
-	QMenu* pEditBtnMenu = new QMenu(m_pEditButton);
-	pEditBtnMenu->addAction(m_pEditIni2->icon(), m_pEditIni2->text(), this, SLOT(OnEditIni2()));
-	pEditBtnMenu->addAction(m_pEditIni3->icon(), m_pEditIni3->text(), this, SLOT(OnEditIni3()));
-	m_pEditButton->setMenu(pEditBtnMenu);
-	//QObject::connect(m_pEditButton, SIGNAL(triggered(QAction*)), , SLOT());
-	QObject::connect(m_pEditButton, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
-	m_pToolBar->addWidget(m_pEditButton);*/
-	m_pToolBar->addAction(m_pEditIni);
+		if (!items.contains(sa.scriptName)) continue;
 
-	m_pToolBar->addSeparator();
-	m_pToolBar->addAction(m_pEnableMonitoring);
-	//m_pToolBar->addSeparator();
-	
-	// Label
+		if (needsSeparator) {
+			m_pToolBar->addSeparator();
+			needsSeparator = false;
+		}
+
+		latestIsAction = true;
+
+		if (sa.action)
+		{
+			m_pToolBar->addAction(sa.action);
+		}
+		else if (sa.scriptName == "CleanUpMenu")
+		{
+			auto but = new QToolButton();
+			but->setIcon(CSandMan::GetIcon("Clean"));
+			but->setToolTip(tr("Cleanup"));
+			but->setText(tr("Cleanup"));
+			but->setPopupMode(QToolButton::MenuButtonPopup);
+			but->setMenu(m_pCleanUpMenu);		
+			QObject::connect(but, SIGNAL(clicked(bool)), this, SLOT(OnCleanUp()));
+			m_pCleanUpButton = but;
+			m_pToolBar->addWidget(but);
+		}
+		else if (sa.scriptName == "NewBoxMenu")
+		{
+			auto but = new QToolButton();
+			but->setIcon(CSandMan::GetIcon("NewBox"));
+			but->setToolTip(tr("Create New Box"));
+			but->setText(tr("Create New Box"));
+			but->setPopupMode(QToolButton::MenuButtonPopup);
+			auto menu = new QMenu(but);
+			menu->addAction(m_pNewBox);
+			menu->addAction(m_pNewGroup);
+			menu->addAction(m_pImportBox);
+			but->setMenu(menu);
+			QObject::connect(but, &QToolButton::clicked, this, [this]() {GetBoxView()->AddNewBox();});
+			m_pNewBoxButton = but;
+			m_pToolBar->addWidget(but);
+		}
+		else if (sa.scriptName == "EditIniMenu")
+		{
+			auto but = new QToolButton();
+			but->setIcon(CSandMan::GetIcon("Editor"));
+			but->setToolTip(tr("Edit Sandboxie.ini"));
+			but->setText(tr("Edit Sandboxie.ini"));
+			but->setPopupMode(QToolButton::MenuButtonPopup);
+			auto menu = new QMenu(but);
+			menu->addAction(m_pEditIni);
+			menu->addAction(m_pEditIni2);
+			menu->addAction(m_pEditIni3);
+			but->setMenu(menu);
+			QObject::connect(but, &QToolButton::clicked, this, [this]() {OnEditIni();});
+			m_pEditIniButton = but;
+			m_pToolBar->addWidget(but);
+		}
+		else
+		{
+			qDebug() << "ERROR: You forgot to handle ToolBarAction scriptName " << sa.scriptName;
+		}
+	}
+
+	// Contribute-Label
 
 	QWidget* pSpacer = new QWidget();
 	pSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -783,7 +969,6 @@ void CSandMan::CreateToolBar()
 	//m_pToolBar->addAction(m_pMenuElevate);
 
 	m_pSeparator = m_pToolBar->addSeparator();
-	
 	CreateLabel();
 	m_pToolBar->addWidget(m_pLabel);
 	UpdateLabel();
@@ -1982,6 +2167,10 @@ void CSandMan::UpdateState()
 	if(m_pEditIni2) m_pEditIni2->setEnabled(isConnected);
 	m_pReloadIni->setEnabled(isConnected);
 	if(m_pEnableMonitoring) m_pEnableMonitoring->setEnabled(isConnected);
+
+	if (m_pNewBoxButton) m_pNewBoxButton->setEnabled(isConnected);
+	if (m_pEditIniButton) m_pEditIniButton->setEnabled(isConnected);
+	if (m_pCleanUpButton) m_pCleanUpButton->setEnabled(isConnected);
 }
 
 void CSandMan::OnMenuHover(QAction* action)

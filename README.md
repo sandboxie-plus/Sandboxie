@@ -98,13 +98,14 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - hg421 - Security analysis & PoCs / Code reviews
 - hx1997 - Security analysis & PoC
 - mpheath - Author of Plus installer / Code fixes / Collaborator
-- offhub - Documentation additions / Collaborator
+- offhub - Documentation additions / Code fixes / Collaborator
 - isaak654 - Templates / Documentation / Code fixes / Collaborator
+- typpos - UI additions / Documentation / Code fixes
 - okrc - Code fixes
 - Sapour - Code fixes
 - lmou523 - Code fixes
+- weihongx9315 - Code fix
 - stephtr - CI / Certification
-- typpos - UI suggestions / Documentation / Code reviews
 - Dyras - Templates additions
 - cricri-pingouin - UI fixes
 - Valinwolf - UI / Icons
@@ -113,7 +114,6 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - NewKidOnTheBlock - Changelog fixes
 - Naeemh1 - Documentation additions
 - APMichael - Templates additions
-- weihongx9315 - Windows Credentials fix
 - 1mm0rt41PC - Documentation additions
 - Luro223 - Documentation additions
 - lwcorp - Documentation additions

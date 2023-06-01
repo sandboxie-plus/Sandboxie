@@ -23,11 +23,14 @@ class CSbieTemplates;
 class CTraceView;
 
 struct ToolBarAction {
-	// Identifier of action stored in ini. Null for separator.	
-	QString scriptName;
+	// Identifier of action stored in ini. Empty for separator.	
+	QString scriptName = "";
 
 	// Not owned. Null for special cases.
 	QAction* action;
+
+	// Display name override for display in toolbar config menu. Empty if no override.
+	QString nameOverride = "";
 };
 
 class CSandMan : public QMainWindow
@@ -289,11 +292,12 @@ private:
 	void				OnToolBarMenuItemClicked(const QString& scriptName);
 	void				OnResetToolBarMenuConfig();
 
-	const				QString ToolBarConfigKey = "UIConfig/ToolBarItems";
+	const QString       ToolBarConfigKey = "UIConfig/ToolBarItems";
 
 	// per 1.9.3 menu. no whitespace!
-	const				QString DefaultToolBarItems = "Settings,KeepTerminated,CleanUpMenu,BrowseFiles,EditIni,EnableMonitor";
-
+	const QStringList	DefaultToolBarItems = QString(
+						  "Settings,KeepTerminated,CleanUpMenu,BrowseFiles,EditIni,EnableMonitor"
+						).split(',');
 
 	QWidget*			m_pMainWidget;
 	QVBoxLayout*		m_pMainLayout;
@@ -359,6 +363,8 @@ private:
 	QAction*			m_pCleanUpTrace;
 	QAction*			m_pCleanUpRecovery;
 	QToolButton*		m_pCleanUpButton;
+	QToolButton*		m_pNewBoxButton = nullptr;
+	QToolButton*		m_pEditIniButton = nullptr;
 	//QToolButton*		m_pEditButton;
 	QAction*			m_pKeepTerminated;
 	QAction*			m_pShowAllSessions;

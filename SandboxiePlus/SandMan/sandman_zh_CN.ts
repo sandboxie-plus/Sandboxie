@@ -4531,7 +4531,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/StackView.cpp" line="17"/>
         <source>#|Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">#|符号</translation>
     </message>
 </context>
 <context>

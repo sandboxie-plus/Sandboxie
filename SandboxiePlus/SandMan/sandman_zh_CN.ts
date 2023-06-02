@@ -4609,8 +4609,7 @@ Processes in this box will be running with a custom process token indicating the
         <oldsource>
 Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
         <translation>
-该沙箱中的进程将会以沙箱专属的自定义进程凭据运行
-        </translation>
+该沙箱中的进程将会以沙箱专属的自定义进程凭据运行</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="620"/>
@@ -5809,8 +5808,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
 这样做是为了防止沙盒内的流氓进程创建自己的重命名副本并访问受保护的资源
 
 另一个漏洞载体是将一个动态链接库注入到一个被授权进程中，以获得对被授权进程所允许访问的一切资源的访问权
-使用主机映像保护，可以通过阻止在沙箱内运行的应用程序（安装在宿主上的）加载来自沙盒的动态链接库来防止此类现象
-</translation>
+使用主机映像保护，可以通过阻止在沙箱内运行的应用程序（安装在宿主上的）加载来自沙盒的动态链接库来防止此类现象</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1404"/>
@@ -6939,7 +6937,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1418"/>
         <source>Default sandbox:</source>
-        <translation>默认沙盒: </translation>
+        <translation>默认沙盒:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1654"/>

@@ -120,7 +120,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="206"/>
         <source>Security Hardened Sandbox</source>
-        <translation>安全防護加固型沙箱</translation>
+        <translation>安全性防護加固型沙箱</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="207"/>
@@ -375,7 +375,7 @@ Please browse to the correct user profile directory.</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="260"/>
         <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
-        <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; 僅為&lt;u&gt;專案贊助者&lt;/u&gt;提供額外的特性和沙箱類型。例如「隱私增強」類型的沙箱，可對來自沙箱化程式非法存取使用者資料的行為&lt;b&gt;&lt;font color=&apos;red&apos;&gt;提供額外的使用者資料保護&lt;/font&gt;&lt;/b&gt;。如果您還不是贊助者，請考慮 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;贊助支援此專案&lt;/a&gt;來確保 Sandboxie 的開發工作，並以此取得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;贊助者憑證&lt;/a&gt;。</translation>
+        <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; 僅為&lt;u&gt;專案贊助者&lt;/u&gt;提供額外的功能和沙箱類型。例如「隱私增強」類型的沙箱，可對來自沙箱化程式非法存取使用者資料的行為&lt;b&gt;&lt;font color=&apos;red&apos;&gt;提供額外的使用者資料保護&lt;/font&gt;&lt;/b&gt;。如果您還不是贊助者，請考慮 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;贊助支援此專案&lt;/a&gt;來確保 Sandboxie 的開發工作，並以此取得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;贊助者憑證&lt;/a&gt;。</translation>
     </message>
 </context>
 <context>
@@ -672,7 +672,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="40"/>
         <source>Security Hardened Sandbox</source>
-        <translation>安全防護加固型沙箱</translation>
+        <translation>安全性防護加固型沙箱</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="41"/>
@@ -1302,7 +1302,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="57"/>
         <source>Security Hardened Sandbox</source>
-        <translation>安全防護加固型沙箱</translation>
+        <translation>安全性防護加固型沙箱</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="58"/>
@@ -1527,7 +1527,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="98"/>
         <source>Security/Privacy</source>
-        <translation>安全和隱私</translation>
+        <translation>安全性/隱私</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="99"/>
@@ -1855,7 +1855,7 @@ The file was written by: %3</source>
         <location filename="Windows/PopUpWindow.cpp" line="437"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation>遷移一個大檔案 %1 到沙箱 %2，剩餘 %3。
+        <translation>遷移一個大型檔案 %1 到沙箱 %2，剩餘 %3。
 完整路徑: %4</translation>
     </message>
 </context>
@@ -1950,7 +1950,7 @@ Full path: %4</source>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="277"/>
         <source>Close and Disable Immediate Recovery for this box</source>
-        <translation>關閉並停用此沙箱的快速復原功能</translation>
+        <translation>關閉並停用此沙箱的快速復原</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="297"/>
@@ -2441,12 +2441,12 @@ Do you want to do the clean up?</source>
         <location filename="SandMan.cpp" line="1439"/>
         <source>This box provides &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;enhanced security isolation&lt;/a&gt;, it is suitable to test untrusted software.</source>
         <oldsource>This box provides enhanced security isolation, it is suitable to test untrusted software.</oldsource>
-        <translation>此類沙箱提供了&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;強化安全隔離&lt;/a&gt;，它適用於測試不受信任的軟體。</translation>
+        <translation>此類沙箱提供了&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;強化安全性隔離&lt;/a&gt;，它適用於測試不受信任的軟體。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1443"/>
         <source>This box provides standard isolation, it is suitable to run your software to enhance security.</source>
-        <translation>此類沙箱提供了標準的隔離，它適用於以安全的方式來執行您的軟體。</translation>
+        <translation>此類沙箱提供了標準的隔離，它適用於以增強的安全性來執行您的軟體。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1447"/>
@@ -2610,7 +2610,7 @@ No will choose: %2</source>
         <source>The file %1 failed a security check!
 
 %2</source>
-        <translation>檔案 %1 未通過安全檢查！
+        <translation>檔案 %1 未通過安全性檢查！
 
 %2</translation>
     </message>
@@ -2627,7 +2627,7 @@ No will choose: %2</source>
         <oldsource>The file %1 failed a security check, do you want to recover it anyways?
 
 %2</oldsource>
-        <translation>檔案 %1 未通過安全檢查，您要忽略警告並復原嗎？
+        <translation>檔案 %1 未通過安全性檢查，您要忽略警告並復原嗎？
 
 %2</translation>
     </message>
@@ -2787,7 +2787,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="454"/>
         <source>Contribute to Sandboxie-Plus</source>
-        <translation>為 Sandboxie 提出貢獻</translation>
+        <translation>為 Sandboxie 做出貢獻</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="471"/>
@@ -3624,12 +3624,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="211"/>
         <source>Drop Admin Rights</source>
-        <translation>解除管理員權限</translation>
+        <translation>廢棄管理員許可</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="212"/>
         <source>Emulate Admin Rights</source>
-        <translation>模擬管理員權限</translation>
+        <translation>模擬管理員許可</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="220"/>
@@ -4571,7 +4571,7 @@ This box will run the MSIServer (*.msi installer service) with a system token, t
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
         <translation>
-該沙箱中所有處理程序將認為它們執行在系統管理員模式下，即使實際上並沒有該權限，這有助於在安全防護加固型沙箱中執行安裝程式。</translation>
+該沙箱中所有處理程序將認為它們執行在系統管理員模式下，即使實際上並沒有該權限，這有助於在安全性防護加固型沙箱中執行安裝程式。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="587"/>
@@ -5864,7 +5864,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="978"/>
         <source>Enable all security enhancements (make security hardened box)</source>
-        <translation>啟用所有安全增強功能 (安全防護加固型沙箱選項)</translation>
+        <translation>啟用所有安全性強化 (安全性防護加固型沙箱選項)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1023"/>
@@ -5985,7 +5985,7 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <location filename="Forms/OptionsWindow.ui" line="1491"/>
         <location filename="Forms/OptionsWindow.ui" line="1539"/>
         <source>(Security Critical)</source>
-        <translation>(安全關鍵)</translation>
+        <translation>(安全性關鍵)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1460"/>
@@ -6073,17 +6073,17 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1197"/>
         <source>Disable Security Isolation (experimental)</source>
-        <translation>停用安全隔離 (實驗性)</translation>
+        <translation>停用安全性隔離 (實驗性)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1204"/>
         <source>Open access to Windows Security Account Manager</source>
-        <translation>開放 Windows 安全帳戶管理員 (SAM) 的存取權限</translation>
+        <translation>開放 Windows 安全性帳戶管理員 (SAM) 的存取權限</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1238"/>
         <source>Open access to Windows Local Security Authority</source>
-        <translation>開放 Windows 本地安全認證 (LSA) 的存取權限</translation>
+        <translation>開放 Windows 本地安全性認證 (LSA) 的存取權限</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="668"/>
@@ -6103,7 +6103,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1211"/>
         <source>Disable Security Filtering (not recommended)</source>
-        <translation>停用安全篩選功能 (不推薦)</translation>
+        <translation>停用安全性篩選 (不推薦)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1218"/>
@@ -6469,7 +6469,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4530"/>
         <source>Accessibility</source>
-        <translation>無障礙功能</translation>
+        <translation>協助工具</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4550"/>

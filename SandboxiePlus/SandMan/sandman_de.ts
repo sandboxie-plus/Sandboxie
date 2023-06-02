@@ -2419,22 +2419,22 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="SandMan.cpp" line="773"/>
         <source>New-Box Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Box Menü</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="780"/>
         <source>Edit-ini Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Ini bearbeiten Menü</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="831"/>
         <source>Toolbar Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbolleistenelemente</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="833"/>
         <source>Reset Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbolleiste zurücksetzen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1001"/>

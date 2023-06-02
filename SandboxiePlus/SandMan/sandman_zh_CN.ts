@@ -2511,7 +2511,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="773"/>
         <source>New-Box Menu</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">新建沙盒菜单</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="778"/>
@@ -2523,17 +2523,17 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="780"/>
         <source>Edit-ini Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑配置菜单</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="831"/>
         <source>Toolbar Items</source>
-        <translation type="unfinished"></translation>
+        <translation>工具栏项目</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="833"/>
         <source>Reset Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>重置工具栏</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1018"/>
@@ -3003,7 +3003,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2663"/>
         <source>&lt;b&gt;ERROR:&lt;/b&gt; The Sandboxie-Plus Manager (SandMan.exe) does not have a valid signature (SandMan.exe.sig). Please download a trusted release from the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;official Download page&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;错误：&lt;/b&gt;Sandboxie Plus管理器（SandMan.exe）没有有效的签名（SandMan.exe.sig）。请从&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;官方下载&lt;/a&gt;。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2771"/>
@@ -4531,7 +4531,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/StackView.cpp" line="17"/>
         <source>#|Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">#|符号</translation>
     </message>
 </context>
 <context>
@@ -4609,8 +4609,7 @@ Processes in this box will be running with a custom process token indicating the
         <oldsource>
 Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
         <translation>
-该沙箱中的进程将会以沙箱专属的自定义进程凭据运行
-        </translation>
+该沙箱中的进程将会以沙箱专属的自定义进程凭据运行</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="620"/>
@@ -4917,7 +4916,7 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Views/TraceView.cpp" line="308"/>
         <source>Show Stack Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>显示堆栈跟踪</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="313"/>
@@ -5809,8 +5808,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
 这样做是为了防止沙盒内的流氓进程创建自己的重命名副本并访问受保护的资源
 
 另一个漏洞载体是将一个动态链接库注入到一个被授权进程中，以获得对被授权进程所允许访问的一切资源的访问权
-使用主机映像保护，可以通过阻止在沙箱内运行的应用程序（安装在宿主上的）加载来自沙盒的动态链接库来防止此类现象
-</translation>
+使用主机映像保护，可以通过阻止在沙箱内运行的应用程序（安装在宿主上的）加载来自沙盒的动态链接库来防止此类现象</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1404"/>
@@ -6877,12 +6875,12 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1228"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Plus项目的支持者可以收到&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;支持者证书&lt;/a&gt;。这与许可证密钥类似，但适用于使用开源软件的优秀用户。:-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1321"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. You can support the development by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;directly contributing to the project&lt;/a&gt;, showing your support by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt;, becoming a patron by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;subscribing on Patreon&lt;/a&gt;, or through a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;.&lt;br /&gt;Your support plays a vital role in the advancement and maintenance of Sandboxie.</source>
-        <translation type="unfinished"></translation>
+        <translation>让Sandboxie跟上Windows的滚动发布并与所有网络浏览器兼容是一项永无止境的努力。您可以通过以下方式进行支持：&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;直接为项目贡献&lt;/a&gt;，通过&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;购买支持者证书&lt;/a&gt;，通过&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;在Patreon上订阅&lt;/a&gt;，或通过&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal捐赠&lt;/a&gt;。&lt;br/&gt;您的支持对Sandboxie的发展和维护起着至关重要的作用。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1834"/>
@@ -6939,7 +6937,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1418"/>
         <source>Default sandbox:</source>
-        <translation>默认沙盒: </translation>
+        <translation>默认沙盒:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1654"/>

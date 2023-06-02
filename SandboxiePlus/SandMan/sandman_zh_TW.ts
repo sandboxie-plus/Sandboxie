@@ -957,7 +957,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="325"/>
         <source>Regular Sandboxie behavior - allow read and also copy on write.</source>
-        <translation>一般沙箱行為 - 允許讀取及寫入時複製。</translation>
+        <translation>普通 Sandboxie 行為 - 允許讀取及寫入時複製。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="326"/>
@@ -2384,7 +2384,7 @@ Full path: %4</source>
     <message>
         <location filename="SandMan.cpp" line="1018"/>
         <source>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Support Sandboxie-Plus on Patreon&lt;/a&gt;</source>
-        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;在 Patreon 上支持 Sandboxie-Plus&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;在 Patreon 上支援 Sandboxie-Plus&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1019"/>
@@ -3060,7 +3060,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="3127"/>
         <source>Sandboxie config has been reloaded</source>
-        <translation>已重新載入沙箱組態檔</translation>
+        <translation>已重新載入 Sandboxie 組態</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3252"/>
@@ -4451,7 +4451,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="432"/>
         <source>Add desktop shortcut for starting Web browser under Sandboxie</source>
-        <translation>加入沙箱化的網頁瀏覽器捷徑到桌面</translation>
+        <translation>加入在 Sandboxie 中開啟網頁瀏覽器的捷徑到桌面</translation>
     </message>
 </context>
 <context>
@@ -5359,7 +5359,7 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1121"/>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation>安全性提示: 在沙箱監管下執行的程式，若具有提升的管理員或系統權限權杖，將有更多機會繞過沙箱的隔離，並修改沙箱外部的系統。</translation>
+        <translation>安全性提示: 在 Sandboxie 監管下執行的程式，若具有提升的管理員或系統權限權杖，將有更多機會繞過隔離，並修改沙箱外部的系統。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1047"/>
@@ -5622,7 +5622,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1566"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation>使用自訂沙箱權杖可以更好地將各個沙箱相互隔離，同時可以實現在工作管理員的使用者欄位中顯示處理程序所屬的沙箱。但是，某些第三方安全性解決方案可能會與自訂權杖產生相容性問題。</translation>
+        <translation>使用自訂 Sandboxie 權杖可以更好地將各個沙箱相互隔離，同時可以實現在工作管理員的使用者欄位中顯示處理程序所屬的沙箱。但是，某些第三方安全性解決方案可能會與自訂權杖產生相容性問題。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1657"/>
@@ -7145,7 +7145,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="1347"/>
         <source>Sandboxie Config</source>
         <oldsource>Config Protection</oldsource>
-        <translation>沙箱設定</translation>
+        <translation>Sandboxie 組態</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="364"/>
@@ -7216,7 +7216,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1821"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
-        <translation>沙箱偵測到您的系統中安裝了以下軟體。按下 [確定] 套用設定，將改進與這些軟體的相容性。這些設定作用於所有沙箱，包括現存的和未來新增的沙箱。</translation>
+        <translation>Sandboxie 偵測到您的系統中安裝了以下軟體。按下 [確定] 套用設定，將改進與這些軟體的相容性。這些設定作用於所有沙箱，包括現存的和未來新增的沙箱。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1834"/>

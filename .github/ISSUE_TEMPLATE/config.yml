@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
-  - name: 
-    url: 
-    about: 
+  - name: Sandboxie documentation (sandboxie-plus/sandboxie-docs)
+    url: https://github.com/sandboxie-plus/sandboxie-docs
+    about: GitHub documentation for people interested in Sandboxie.
+  - name: LogApiDll (sandboxie-plus/LogApiDll)
+    url: https://github.com/sandboxie-plus/LogApiDll
+    about: API logging library that adds a verbose output to Sandboxie's trace log.

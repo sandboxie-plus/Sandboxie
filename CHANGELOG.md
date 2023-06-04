@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed SandMan: Empty lines when using "Copy Panel" [#2995](https://github.com/sandboxie-plus/Sandboxie/issues/2995)
+- fixed timestamp on crash dumps
 - fixed Plus installer does not honor IniPath value when updating the current installed version (thanks offhub) [#2994](https://github.com/sandboxie-plus/Sandboxie/issues/2994)
 
 

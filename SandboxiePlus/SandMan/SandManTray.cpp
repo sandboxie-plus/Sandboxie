@@ -98,8 +98,7 @@ void CSandMan::CreateTrayMenu()
 
 	m_pTrayMenu->addSeparator();
 	m_pTrayMenu->addAction(m_pEmptyAll);
-	m_pDisableForce2 = m_pTrayMenu->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce2()));
-	m_pDisableForce2->setCheckable(true);
+	m_pTrayMenu->addAction(m_pDisableForce2);
 	if(m_pDisableRecovery) m_pTrayMenu->addAction(m_pDisableRecovery);
 	if(m_pDisableMessages) m_pTrayMenu->addAction(m_pDisableMessages);
 	m_pDismissUpdate = m_pTrayMenu->addAction(tr("Dismiss Update Notification"), this, SLOT(OnDismissUpdate()));

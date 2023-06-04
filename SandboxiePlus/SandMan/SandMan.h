@@ -363,8 +363,8 @@ private:
 	QAction*			m_pCleanUpTrace;
 	QAction*			m_pCleanUpRecovery;
 	QToolButton*		m_pCleanUpButton;
-	QToolButton*		m_pNewBoxButton = nullptr;
-	QToolButton*		m_pEditIniButton = nullptr;
+	QToolButton*		m_pNewBoxButton;
+	QToolButton*		m_pEditIniButton;
 	//QToolButton*		m_pEditButton;
 	QAction*			m_pKeepTerminated;
 	QAction*			m_pShowAllSessions;

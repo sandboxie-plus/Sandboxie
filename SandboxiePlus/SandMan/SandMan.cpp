@@ -473,8 +473,11 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pRunBoxed = m_pMenuFile->addAction(CSandMan::GetIcon("Run"), tr("Run Sandboxed"), this, SLOT(OnSandBoxAction()));
 		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
 		m_pMenuFile->addSeparator();
-		m_pDisableForce = m_pMenuFile->addAction(GetIcon("PauseForce"), tr("Pause Forcing Programs"), this, SLOT(OnDisableForce()));
+		m_pDisableForce = m_pMenuFile->addAction(CSandMan::GetIcon("PauseForce"), tr("Pause Forcing Programs"), this, SLOT(OnDisableForce()));
 		m_pDisableForce->setCheckable(true);
+		m_pDisableForce2 = new QAction(CSandMan::GetIcon("PauseForce"), tr("Pause Forcing Programs"));
+		m_pDisableForce2->setCheckable(true);
+		connect(m_pDisableForce2, SIGNAL(triggered()), this, SLOT(OnDisableForce2()));
 	if(bAdvanced) {
 		m_pDisableRecovery = m_pMenuFile->addAction(GetIcon("DisableRecovery"), tr("Disable File Recovery"), this, SLOT(OnDisablePopUp()));
 		m_pDisableRecovery->setCheckable(true);
@@ -606,8 +609,11 @@ void CSandMan::CreateOldMenus()
 	m_pMenuFile = m_pMenuBar->addMenu(tr("&File"));
 		m_pRunBoxed = m_pMenuFile->addAction(CSandMan::GetIcon("Run"), tr("Run Sandboxed"), this, SLOT(OnSandBoxAction()));
 		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
-		m_pDisableForce = m_pMenuFile->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce()));
+		m_pDisableForce = m_pMenuFile->addAction(CSandMan::GetIcon("PauseForce"), tr("Pause Forcing Programs"), this, SLOT(OnDisableForce()));
 		m_pDisableForce->setCheckable(true);
+		m_pDisableForce2 = new QAction(CSandMan::GetIcon("PauseForce"), tr("Pause Forcing Programs"));
+		m_pDisableForce2->setCheckable(true);
+		connect(m_pDisableForce2, SIGNAL(triggered()), this, SLOT(OnDisableForce2()));
 		//m_pDisableRecovery = m_pMenuFile->addAction(tr("Disable File Recovery"));
 		//m_pDisableRecovery->setCheckable(true);
 		m_pDisableRecovery = NULL;
@@ -775,37 +781,41 @@ QList<ToolBarAction> CSandMan::GetAvailableToolBarActions()
 			ToolBarAction{ "NewGroup", m_pNewGroup },
 			ToolBarAction{ "ImportBox", m_pImportBox },
 			ToolBarAction{ "", nullptr },        // separator
+			ToolBarAction{ "RunBoxed", m_pRunBoxed },
+			ToolBarAction{ "IsBoxed", m_pWndFinder },
+			ToolBarAction{ "TerminateAll", m_pEmptyAll },
+			ToolBarAction{ "", nullptr },        // separator
 			ToolBarAction{ "CleanUpMenu", nullptr, tr("Cleanup") }, //tr: Name of button in toolbar for cleanup-all action
+			ToolBarAction{ "KeepTerminated", m_pKeepTerminated },
+			ToolBarAction{ "Refresh", m_pRefreshAll },
+			ToolBarAction{ "", nullptr },        // separator
+			ToolBarAction{ "BrowseFiles", m_pMenuBrowse },
+			ToolBarAction{ "", nullptr },        // separator
 			ToolBarAction{ "Settings", m_pMenuSettings },
+			ToolBarAction{ "", nullptr },        // separator
 			ToolBarAction{ "EditIniMenu", nullptr, tr("Edit-ini Menu") },  //tr: Name of button in toolbar for showing edit-ini files actions},
 			ToolBarAction{ "EditIni", m_pEditIni },
 			ToolBarAction{ "EditTemplates", m_pEditIni2 },
 			ToolBarAction{ "EditPlusIni", m_pEditIni3 },
 			ToolBarAction{ "ReloadIni", m_pReloadIni },
-			ToolBarAction{ "Refresh", m_pRefreshAll },
-			ToolBarAction{ "", nullptr },
-			ToolBarAction{ "RunBoxed", m_pRunBoxed },
-			ToolBarAction{ "IsBoxed", m_pWndFinder },
-			ToolBarAction{ "TerminateAll", m_pEmptyAll },
-			ToolBarAction{ "KeepTerminated", m_pKeepTerminated },
-			ToolBarAction{ "BrowseFiles", m_pMenuBrowse },
+			ToolBarAction{ "", nullptr },        // separator
 			ToolBarAction{ "EnableMonitor", m_pEnableMonitoring },
-			ToolBarAction{ "", nullptr },
-			ToolBarAction{ "DisableForce", m_pDisableForce},
+			ToolBarAction{ "", nullptr },        // separator
+			ToolBarAction{ "DisableForce", m_pDisableForce2},
 			ToolBarAction{ "DisableRecovery", m_pDisableRecovery },
 			ToolBarAction{ "DisableMessages", m_pDisableMessages },
-			ToolBarAction{ "", nullptr },
+			ToolBarAction{ "", nullptr },        // separator
 			ToolBarAction{ "Connect", m_pConnect },
 			ToolBarAction{ "Disconnect", m_pDisconnect },
 			ToolBarAction{ "StopAll", m_pStopAll },
 			// ToolBarAction{"SetupWizard", m_pSetupWizard},
 			// ToolBarAction{"UninstallAll", m_pUninstallAll}, // removed because not always valid in menu system
-			ToolBarAction{ "", nullptr },
+			ToolBarAction{ "", nullptr },        // separator
 			ToolBarAction{ "CheckForUpdates", m_pUpdate },
 			ToolBarAction{ "About", m_pAbout },
-			ToolBarAction{ "", nullptr },
+			ToolBarAction{ "", nullptr },        // separator
 			ToolBarAction{ "Exit", m_pExit },
-			ToolBarAction{ "", nullptr },
+			ToolBarAction{ "", nullptr },        // separator
 			ToolBarAction{ "Contribute", m_pContribution }
 	};
 }

@@ -9,12 +9,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added configurable toolbar items (thanks typpos) [#2961](https://github.com/sandboxie-plus/Sandboxie/pull/2961)
+- added new icons for Plus UI (thanks typpos) [#3010](https://github.com/sandboxie-plus/Sandboxie/pull/3010)
 
 ### Changed
 - minor update to the BlockSoftwareUpdaters template (thanks APMichael) [#2991](https://github.com/sandboxie-plus/Sandboxie/pull/2991)
 
 ### Fixed
-- fixed SandMan: Empty lines when using "Copy Panel" [#2995](https://github.com/sandboxie-plus/Sandboxie/issues/2995)
+- fixed empty lines when using "Copy Panel" in Plus UI [#2995](https://github.com/sandboxie-plus/Sandboxie/issues/2995)
 - fixed timestamp on crash dumps
 - fixed Plus installer does not honor IniPath value when updating the current installed version (thanks offhub) [#2994](https://github.com/sandboxie-plus/Sandboxie/issues/2994)
 

@@ -473,24 +473,6 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pRunBoxed = m_pMenuFile->addAction(CSandMan::GetIcon("Run"), tr("Run Sandboxed"), this, SLOT(OnSandBoxAction()));
 		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
 		m_pMenuFile->addSeparator();
-		m_pDisableForce = m_pMenuFile->addAction(CSandMan::GetIcon("PauseForce"), tr("Pause Forcing Programs"), this, SLOT(OnDisableForce()));
-		m_pDisableForce->setCheckable(true);
-		m_pDisableForce2 = new QAction(CSandMan::GetIcon("PauseForce"), tr("Pause Forcing Programs"));
-		m_pDisableForce2->setCheckable(true);
-		connect(m_pDisableForce2, SIGNAL(triggered()), this, SLOT(OnDisableForce2()));
-	if(bAdvanced) {
-		m_pDisableRecovery = m_pMenuFile->addAction(GetIcon("DisableRecovery"), tr("Disable File Recovery"), this, SLOT(OnDisablePopUp()));
-		m_pDisableRecovery->setCheckable(true);
-		m_pDisableRecovery->setChecked(theConf->GetBool("UIConfig/DisabledRecovery", false));
-		m_pDisableMessages = m_pMenuFile->addAction(GetIcon("DisableMessagePopup"), tr("Disable Message Popup"), this, SLOT(OnDisablePopUp()));
-		m_pDisableMessages->setCheckable(true);
-		m_pDisableMessages->setChecked(theConf->GetBool("UIConfig/DisableMessages", false));
-	}
-	else {
-		m_pDisableRecovery = NULL;
-		m_pDisableMessages = NULL;
-	}
-		m_pMenuFile->addSeparator();
 		m_pWndFinder = m_pMenuFile->addAction(CSandMan::GetIcon("finder"), tr("Is Window Sandboxed?"), this, SLOT(OnWndFinder()));
 
 	if(bAdvanced || theGUI->IsFullyPortable())
@@ -579,11 +561,26 @@ void CSandMan::CreateMenus(bool bAdvanced)
 
 	m_pMenuOptions = m_pMenuBar->addMenu(tr("&Options"));
 		m_pMenuSettings = m_pMenuOptions->addAction(CSandMan::GetIcon("Settings"), tr("Global Settings"), this, SLOT(OnSettings()));
-		m_pMenuResetMsgs = m_pMenuOptions->addAction(tr("Reset all hidden messages"), this, SLOT(OnResetMsgs()));
-		m_pMenuResetGUI = m_pMenuOptions->addAction(tr("Reset all GUI options"), this, SLOT(OnResetGUI()));
-		m_pMenuResetGUI->setShortcut(QKeySequence("Ctrl+Shift+R"));
-		m_pMenuResetGUI->setShortcutContext(Qt::WidgetWithChildrenShortcut);
-		this->addAction(m_pMenuResetGUI);
+
+		m_pMenuOptions->addSeparator();
+		m_pDisableForce = m_pMenuOptions->addAction(CSandMan::GetIcon("PauseForce"), tr("Pause Forcing Programs"), this, SLOT(OnDisableForce()));
+		m_pDisableForce->setCheckable(true);
+		m_pDisableForce2 = new QAction(CSandMan::GetIcon("PauseForce"), tr("Pause Forcing Programs"));
+		m_pDisableForce2->setCheckable(true);
+		connect(m_pDisableForce2, SIGNAL(triggered()), this, SLOT(OnDisableForce2()));
+	if(bAdvanced) {
+		m_pDisableRecovery = m_pMenuOptions->addAction(GetIcon("DisableRecovery"), tr("Disable File Recovery"), this, SLOT(OnDisablePopUp()));
+		m_pDisableRecovery->setCheckable(true);
+		m_pDisableRecovery->setChecked(theConf->GetBool("UIConfig/DisabledRecovery", false));
+		m_pDisableMessages = m_pMenuOptions->addAction(GetIcon("DisableMessagePopup"), tr("Disable Message Popup"), this, SLOT(OnDisablePopUp()));
+		m_pDisableMessages->setCheckable(true);
+		m_pDisableMessages->setChecked(theConf->GetBool("UIConfig/DisableMessages", false));
+	}
+	else {
+		m_pDisableRecovery = NULL;
+		m_pDisableMessages = NULL;
+	}
+
 		m_pMenuOptions->addSeparator();
 		m_pEditIni = m_pMenuOptions->addAction(CSandMan::GetIcon("Editor"), tr("Edit Sandboxie.ini"), this, SLOT(OnEditIni()));
 		m_pEditIni->setProperty("ini", "sbie");
@@ -595,6 +592,13 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		} else
 			m_pEditIni2 = m_pEditIni3 = NULL;
 		m_pReloadIni = m_pMenuOptions->addAction(CSandMan::GetIcon("ReloadIni"), tr("Reload configuration"), this, SLOT(OnReloadIni()));
+
+		m_pMenuOptions->addSeparator();
+		m_pMenuResetMsgs = m_pMenuOptions->addAction(tr("Reset all hidden messages"), this, SLOT(OnResetMsgs()));
+		m_pMenuResetGUI = m_pMenuOptions->addAction(tr("Reset all GUI options"), this, SLOT(OnResetGUI()));
+		m_pMenuResetGUI->setShortcut(QKeySequence("Ctrl+Shift+R"));
+		m_pMenuResetGUI->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+		this->addAction(m_pMenuResetGUI);
 
 	CreateHelpMenu(bAdvanced);
 

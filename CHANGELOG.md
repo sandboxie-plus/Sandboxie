@@ -16,9 +16,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed empty lines when using "Copy Panel" in Plus UI [#2995](https://github.com/sandboxie-plus/Sandboxie/issues/2995)
-- fixed timestamp on crash dumps
 - fixed Plus installer does not honor IniPath value when updating the current installed version (thanks offhub) [#2994](https://github.com/sandboxie-plus/Sandboxie/issues/2994)
-
+- fixed timestamp on crash dumps
 
 
 ## [1.9.6 / 5.64.6] - 2023-05-30

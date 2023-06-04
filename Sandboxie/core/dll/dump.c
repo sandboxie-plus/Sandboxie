@@ -115,7 +115,7 @@ static LONG __stdcall Dump_CrashHandlerExceptionFilter(EXCEPTION_POINTERS* pEx)
     HANDLE hFile;
 
     wchar_t szMiniDumpFileName[128];
-    Sbie_snwprintf(szMiniDumpFileName, 128, L"%s.%lld.dmp", Dll_ImageName, GetCurCycle);
+    Sbie_snwprintf(szMiniDumpFileName, 128, L"%s.%lld.dmp", Dll_ImageName, GetCurCycle());
 
     wchar_t szMiniDumpFilePath[MAX_PATH] = { 0 };
     Sbie_snwprintf(szMiniDumpFilePath, MAX_PATH, L"%s\\%s", Dll_BoxFilePath, szMiniDumpFileName);

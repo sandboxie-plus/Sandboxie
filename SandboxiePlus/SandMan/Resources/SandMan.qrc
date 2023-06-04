@@ -151,6 +151,9 @@
         <file>Actions/Interface.png</file>
         <file>Actions/Notification.png</file>
         <file>Actions/Stack.png</file>
+        <file>Actions/PauseForce.png</file>
+        <file>Actions/DisableMessagePopup.png</file>
+        <file>Actions/DisableRecovery.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

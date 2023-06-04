@@ -473,13 +473,13 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pRunBoxed = m_pMenuFile->addAction(CSandMan::GetIcon("Run"), tr("Run Sandboxed"), this, SLOT(OnSandBoxAction()));
 		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
 		m_pMenuFile->addSeparator();
-		m_pDisableForce = m_pMenuFile->addAction(tr("Pause Forcing Programs"), this, SLOT(OnDisableForce()));
+		m_pDisableForce = m_pMenuFile->addAction(GetIcon("PauseForce"), tr("Pause Forcing Programs"), this, SLOT(OnDisableForce()));
 		m_pDisableForce->setCheckable(true);
 	if(bAdvanced) {
-		m_pDisableRecovery = m_pMenuFile->addAction(tr("Disable File Recovery"), this, SLOT(OnDisablePopUp()));
+		m_pDisableRecovery = m_pMenuFile->addAction(GetIcon("DisableRecovery"), tr("Disable File Recovery"), this, SLOT(OnDisablePopUp()));
 		m_pDisableRecovery->setCheckable(true);
 		m_pDisableRecovery->setChecked(theConf->GetBool("UIConfig/DisabledRecovery", false));
-		m_pDisableMessages = m_pMenuFile->addAction(tr("Disable Message Popup"), this, SLOT(OnDisablePopUp()));
+		m_pDisableMessages = m_pMenuFile->addAction(GetIcon("DisableMessagePopup"), tr("Disable Message Popup"), this, SLOT(OnDisablePopUp()));
 		m_pDisableMessages->setCheckable(true);
 		m_pDisableMessages->setChecked(theConf->GetBool("UIConfig/DisableMessages", false));
 	}
@@ -790,11 +790,10 @@ QList<ToolBarAction> CSandMan::GetAvailableToolBarActions()
 			ToolBarAction{ "KeepTerminated", m_pKeepTerminated },
 			ToolBarAction{ "BrowseFiles", m_pMenuBrowse },
 			ToolBarAction{ "EnableMonitor", m_pEnableMonitoring },
-			//TODO These need icons
-			//ToolBarAction{ "", nullptr },
-			//ToolBarAction{ "DisableForce", m_pDisableForce},
-			//ToolBarAction{ "DisableRecovery", m_pDisableRecovery },
-			//ToolBarAction{ "DisableMessages", m_pDisableMessages },
+			ToolBarAction{ "", nullptr },
+			ToolBarAction{ "DisableForce", m_pDisableForce},
+			ToolBarAction{ "DisableRecovery", m_pDisableRecovery },
+			ToolBarAction{ "DisableMessages", m_pDisableMessages },
 			ToolBarAction{ "", nullptr },
 			ToolBarAction{ "Connect", m_pConnect },
 			ToolBarAction{ "Disconnect", m_pDisconnect },

@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed empty lines when using "Copy Panel" in Plus UI [#2995](https://github.com/sandboxie-plus/Sandboxie/issues/2995)
 - fixed Plus installer does not honor IniPath value when updating the current installed version (thanks offhub) [#2994](https://github.com/sandboxie-plus/Sandboxie/issues/2994)
 - fixed timestamp on crash dumps
+- fixed Firefox 114 crashes in security enhanced box, when start restrictions are enabled [#3019](https://github.com/sandboxie-plus/Sandboxie/issues/3019)
 
 
 ## [1.9.6 / 5.64.6] - 2023-05-30

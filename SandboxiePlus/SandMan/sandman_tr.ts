@@ -1632,7 +1632,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/PopUpWindow.h" line="75"/>
         <source> (%1)</source>
-        <translation type="unfinished"> (%1)</translation>
+        <translation> (%1)</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="58"/>
@@ -3024,22 +3024,22 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="783"/>
         <source>New-Box Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni Alan Menüsü</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="800"/>
         <source>Edit-ini Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Ini Düzenleme Menüsü</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="844"/>
         <source>Toolbar Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Araç Çubuğu Öğeleri</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="846"/>
         <source>Reset Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Araç Çubuğunu Sıfırla</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1015"/>
@@ -3102,7 +3102,7 @@ Hayır şunları seçer: %2</translation>
         <location filename="SandMan.cpp" line="2285"/>
         <location filename="SandMan.cpp" line="2287"/>
         <source> (%1)</source>
-        <translation type="unfinished"> (%1)</translation>
+        <translation> (%1)</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2338"/>
@@ -4469,7 +4469,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/StackView.cpp" line="17"/>
         <source>#|Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>#|Sembol</translation>
     </message>
 </context>
 <context>
@@ -4847,7 +4847,7 @@ Bu alandaki işlemler, ait oldukları korumalı alanı belirten özel bir işlem
     <message>
         <location filename="Views/TraceView.cpp" line="308"/>
         <source>Show Stack Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Yığın İzlemeyi Göster</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="313"/>

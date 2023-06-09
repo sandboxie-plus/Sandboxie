@@ -29,6 +29,7 @@ Sandboxie Plus has a modern Qt-based UI, which supports all new features that ha
   * Portable mode - you can run the installer and choose to extract all files to a directory
   * Additional UI options to block access for Windows components like printer spooler and clipboard
   * More customization options for Start/Run and Internet access restrictions
+  * Privacy mode sandboxes that protect user data from illegitimate access
   * Global hotkey to terminate all boxed processes
   * A network firewall per sandbox which supports Windows Filtering Platform (WFP)
   * The list of sandboxes can be searched with the shortcut key Ctrl+F

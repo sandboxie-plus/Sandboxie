@@ -175,6 +175,8 @@
         <file>Actions/AntiVir.png</file>
         <file>Actions/SourceCode.png</file>
         <file>Actions/Qube.png</file>
+        <file>Actions/Font.png</file>
+        <file>Actions/ResetFont.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

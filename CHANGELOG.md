@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.9.7 / 5.64.7] - 2023-06-??
+## [1.9.7 / 5.64.7] - 2023-06-09
 
 ### Added
 - added configurable toolbar items (thanks typpos) [#2961](https://github.com/sandboxie-plus/Sandboxie/pull/2961)

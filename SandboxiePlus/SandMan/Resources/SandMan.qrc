@@ -154,6 +154,8 @@
         <file>Actions/PauseForce.png</file>
         <file>Actions/DisableMessagePopup.png</file>
         <file>Actions/DisableRecovery.png</file>
+        <file>Actions/Font.png</file>
+        <file>Actions/ResetFont.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

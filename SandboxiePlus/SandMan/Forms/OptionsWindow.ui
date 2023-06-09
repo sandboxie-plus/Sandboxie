@@ -4643,6 +4643,26 @@ Please note that this values are currently user specific and saved globally for 
          <string>Edit ini Section</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="4">
+          <spacer name="horizontalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>10</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="2">
+          <widget class="QPushButton" name="btnSelectIniEditFont">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="0">
           <widget class="QPushButton" name="btnEditIni">
            <property name="text">
@@ -4653,7 +4673,7 @@ Please note that this values are currently user specific and saved globally for 
            </property>
           </widget>
          </item>
-         <item row="0" column="3">
+         <item row="0" column="6">
           <widget class="QPushButton" name="btnCancelEdit">
            <property name="enabled">
             <bool>false</bool>
@@ -4663,20 +4683,7 @@ Please note that this values are currently user specific and saved globally for 
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
-          <spacer name="horizontalSpacer_7">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="0" column="2">
+         <item row="0" column="5">
           <widget class="QPushButton" name="btnSaveIni">
            <property name="enabled">
             <bool>false</bool>
@@ -4686,10 +4693,33 @@ Please note that this values are currently user specific and saved globally for 
            </property>
           </widget>
          </item>
-         <item row="1" column="0" colspan="4">
+         <item row="1" column="0" colspan="7">
           <widget class="QPlainTextEdit" name="txtIniSection">
            <property name="lineWrapMode">
             <enum>QPlainTextEdit::NoWrap</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <spacer name="horizontalSpacer_18">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Minimum</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="3">
+          <widget class="QPushButton" name="btnResetIniEditFont">
+           <property name="text">
+            <string/>
            </property>
           </widget>
          </item>

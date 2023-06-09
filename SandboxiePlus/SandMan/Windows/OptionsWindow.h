@@ -228,6 +228,9 @@ private slots:
 
 	void OnSetTree();
 
+	void OnSelectIniEditFont();
+	void OnResetIniEditFont();
+
 protected:
 	void closeEvent(QCloseEvent *e);
 
@@ -480,6 +483,8 @@ protected:
 
 	void LoadIniSection();
 	void SaveIniSection();
+
+	void ApplyIniEditFont();
 
 	QString GetCategoryName(const QString& Category);
 

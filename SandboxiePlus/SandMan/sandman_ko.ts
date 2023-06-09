@@ -2611,22 +2611,22 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandMan.cpp" line="783"/>
         <source>New-Box Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>새 박스 메뉴</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="800"/>
         <source>Edit-ini Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>ini 메뉴 편집</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="844"/>
         <source>Toolbar Items</source>
-        <translation type="unfinished"></translation>
+        <translation>도구 모음 항목</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="846"/>
         <source>Reset Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>도구 모음 재설정</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1014"/>

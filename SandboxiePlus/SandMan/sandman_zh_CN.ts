@@ -79,7 +79,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="483"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
-        <oldsource>该功能可能对兼容性造成影响，因为这将阻止沙箱中的进程写入到宿主甚至是启动。</oldsource>
+        <oldsource>该功能可能对兼容性造成影响，因为它阻止了沙箱内的进程向主机进程写入数据，以及启动它们。</oldsource>
         <translation></translation>
     </message>
     <message>
@@ -89,8 +89,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="477"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation>使用自定义沙盒令牌可以更好地将各个沙盒相互隔离，同时可以实现在任务管理器的用户栏中显示进程所属的沙盒
-但是，某些第三方安全解决方案可能会与自定义令牌产生兼容性问题</translation>
+        <translation>使用自定义沙盒令牌可以更好地将各个沙盒相互隔离，同时可以实现在任务管理器的用户栏中显示进程所属的沙盒。但是，某些第三方安全解决方案可能会与自定义令牌产生兼容性问题</translation>
     </message>
 </context>
 <context>
@@ -103,7 +102,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="175"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation>沙盒将主机系统与在盒内运行的进程隔离开来，可以防止它们对计算机中的其它程序和数据进行永久性的改变，根据所选的沙盒类型，会有不同的隔离程度，隔离的程度影响到主机的安全性以及盒内应用程序的兼容性，此外沙盒还可以保护你的个人数据不被受监督下运行的进程的访问</translation>
+        <translation>沙盒将主机系统与在盒内运行的进程隔离开来，可以防止它们对计算机中的其它程序和数据进行永久性的更改。隔离级别会影响您的安全性以及与应用程序的兼容性，因此根据所选的沙盒类型会有不同的隔离级别。此外沙盒还可以保护你的个人数据不被受限制下运行的进程的访问</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="184"/>
@@ -119,7 +118,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="205"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation>数据保护加固型沙盒</translation>
+        <translation>带数据保护的加固型沙盒</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="206"/>
@@ -129,17 +128,17 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="207"/>
         <source>Sandbox with Data Protection</source>
-        <translation>数据保护型沙盒</translation>
+        <translation>带数据保护的沙盒</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="208"/>
         <source>Standard Isolation Sandbox (Default)</source>
-        <translation>标准隔离型沙盒(默认)</translation>
+        <translation>标准隔离沙盒(默认)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="210"/>
         <source>Application Compartment with Data Protection</source>
-        <translation>数据保护型应用隔间</translation>
+        <translation>带数据保护的应用隔间</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="211"/>
@@ -149,12 +148,12 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="229"/>
         <source>Remove after use</source>
-        <translation>在结束使用后，进行移除</translation>
+        <translation>在使用结束后删除</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="230"/>
         <source>After the last process in the box terminates, all data in the box will be deleted and the box itself will be removed.</source>
-        <translation>在沙盒中所有进程结束后，沙盒中所有数据及沙盒本身将会销毁</translation>
+        <translation>在沙盒中所有进程结束后，沙盒中所有数据及沙盒本身将会被删除</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="235"/>
@@ -246,7 +245,7 @@
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="528"/>
         <source>Show also imperfect matches</source>
-        <translation>即使未完美匹配也展示出来</translation>
+        <translation>显示不完全匹配</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="534"/>
@@ -339,7 +338,7 @@ Please browse to the correct user profile directory.</oldsource>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="454"/>
         <source>The browser appears to be Chromium based, like Microsoft Edge or Google Chrome and its derivatives.</source>
-        <translation>该浏览器似乎是基于 Chromium 核心的，例如 Microsoft Edg e或 Google Chrome 及其衍生发行版</translation>
+        <translation>该浏览器似乎是基于 Chromium 核心的，例如 Microsoft Edge 或 Google Chrome 及其衍生发行版</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="457"/>
@@ -501,13 +500,13 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="402"/>
         <source>The selected box location is not a valid path.</source>
         <oldsource>The sellected box location is not a valid path.</oldsource>
-        <translation>所选的沙盒存储路径是无效路径</translation>
+        <translation>所选的沙盒存储路径无效</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="407"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
         <oldsource>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</oldsource>
-        <translation>所选的沙盒存储路径是非空目录，推荐选择空文件夹或新建文件夹。确定要使用当前选择的文件夹吗？</translation>
+        <translation>所选的沙盒存储路径不是空的，推荐选择空文件夹或新建文件夹。确定要使用当前选择的文件夹吗？</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="412"/>
@@ -670,7 +669,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="39"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation>数据保护加固型沙盒</translation>
+        <translation>带数据保护的加固型沙盒</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="40"/>
@@ -680,17 +679,17 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="41"/>
         <source>Sandbox with Data Protection</source>
-        <translation>数据保护型沙盒</translation>
+        <translation>带数据保护的沙盒</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="42"/>
         <source>Standard Isolation Sandbox (Default)</source>
-        <translation>标准隔离型沙盒(默认)</translation>
+        <translation>标准隔离沙盒(默认)</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="44"/>
         <source>Application Compartment with Data Protection</source>
-        <translation>数据保护型应用隔间</translation>
+        <translation>带数据保护的应用隔间</translation>
     </message>
     <message>
         <location filename="Windows/NewBoxWindow.cpp" line="45"/>
@@ -730,7 +729,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="99"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
-        <translation>您是否想检查有无 Sandboxie-Plus 新版本发布？</translation>
+        <translation>您是否想检查 Sandboxie-Plus 的新版本？</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="100"/>
@@ -793,7 +792,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="OnlineUpdater.cpp" line="562"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
-        <translation>加载已更新的 Json 文件失败</translation>
+        <translation>加载更新 Json 文件失败</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="563"/>
@@ -809,7 +808,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="OnlineUpdater.cpp" line="565"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
-        <translation>无效的更新包签名 !!!</translation>
+        <translation>更新包签名无效 !!!</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="566"/>
@@ -1055,7 +1054,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="56"/>
         <source>Hardened Sandbox with Data Protection</source>
-        <translation>数据保护加固型沙盒</translation>
+        <translation>带数据保护的加固型沙盒</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="57"/>
@@ -1065,17 +1064,17 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="58"/>
         <source>Sandbox with Data Protection</source>
-        <translation>数据保护型沙盒</translation>
+        <translation>带数据保护的沙盒</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="59"/>
         <source>Standard Isolation Sandbox (Default)</source>
-        <translation>标准隔离型沙盒(默认)</translation>
+        <translation>标准隔离沙盒(默认)</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="61"/>
         <source>Application Compartment with Data Protection</source>
-        <translation>数据保护型应用隔间</translation>
+        <translation>带数据保护的应用隔间</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="62"/>
@@ -5238,7 +5237,7 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1121"/>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
-        <translation>安全提示：在沙盒监管下运行的程序，若具有提升的管理员或系统权限令牌，将有更多机会绕过沙盒的隔离，并修改沙盒外部的系统</translation>
+        <translation>安全提示：在沙盒监管下运行的程序，若具有管理员或系统权限令牌，将有更多机会绕过沙盒的隔离，并修改沙盒外部的系统</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1047"/>
@@ -6538,7 +6537,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4590"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
-        <translation>以下设置允许 Sandboxie 与辅助功能软件结合，请注意当这些设置生效时，会失去 Sandboxie 的部分保护措施</translation>
+        <translation>以下设置允许 Sandboxie 与辅助功能软件结合，请注意当这些设置生效时，会使 Sandboxie 的部分保护措施失效</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4643"/>

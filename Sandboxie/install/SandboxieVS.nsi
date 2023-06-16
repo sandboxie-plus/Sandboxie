@@ -849,10 +849,10 @@ Function CheckUpdates
 DoCheck:
   DetailPrint "Running UpdUtil ..."
   SetDetailsPrint listonly
-  
+
   ExecWait '"$INSTDIR\UpdUtil.exe" $0 sandboxie /step:scan /scope:meta /version:${VERSION}' $1
 	;MessageBox MB_OK "UpdUtil: $0"
-	
+
   IntCmp $1 0 is0 lessthan0 morethan0
   is0:
     ;DetailPrint "no update"
@@ -863,12 +863,12 @@ DoCheck:
   morethan0:
     DetailPrint "$$0 > 5"
     Goto Update
-    
+
 Update:
   MessageBox MB_YESNO|MB_ICONQUESTION "$(MSG_8055)" IDNO NoUpdate
-  
+
   ExecWait '"$INSTDIR\UpdUtil.exe" $0 sandboxie /step:apply /scope:meta'
-    
+
 NoUpdate:
   SetDetailsPrint both
 FunctionEnd
@@ -1183,7 +1183,7 @@ Function DeleteProgramFiles
 
     Delete "$INSTDIR\KmdUtil.exe"
     Delete "$INSTDIR\UpdUtil.exe"
-    
+
     Delete "$INSTDIR\SboxHostDll.dll"
 
     Delete "$INSTDIR\boxHostDll.dll"
@@ -1247,13 +1247,22 @@ Function DeleteProgramFiles
     StrCmp $DeleteSandboxieIni "N" SkipDeleteSandboxieIni
     Delete "$INSTDIR\${SANDBOXIE_INI}"
     Delete "$WINDIR\${SANDBOXIE_INI}"
+
 SkipDeleteSandboxieIni:
 
 ;
 ; Delete installation folder
 ;
 
+    ClearErrors
     RMDir "$INSTDIR"
+
+    IfErrors 0 SkipDeleteDir
+    Sleep 1000
+    RMDir "$INSTDIR"
+
+SkipDeleteDir:
+    ClearErrors
 
 FunctionEnd
 

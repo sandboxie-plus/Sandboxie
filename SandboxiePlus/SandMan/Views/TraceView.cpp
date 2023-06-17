@@ -167,6 +167,8 @@ void CTraceTree::ItemSelection(const QItemSelection& selected, const QItemSelect
 		return;
 
 	CTraceEntryPtr pEntry = m_pTraceModel->GetEntry(selection.indexes().first());
+	if (pEntry.data() == NULL)
+		return;
 	CBoxedProcessPtr pProcess = theAPI->GetProcessById(pEntry->GetProcessId());
 	if(!pProcess.isNull())
 		m_pStackView->ShowStack(pEntry->GetStack(), pProcess);

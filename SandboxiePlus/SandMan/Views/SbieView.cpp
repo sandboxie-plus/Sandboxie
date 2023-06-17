@@ -157,7 +157,12 @@ void CSbieView::CreateMenu()
 	m_pStopAsync = m_pMenuBox->addAction(CSandMan::GetIcon("Stop"), tr("Stop Operations"), this, SLOT(OnSandBoxAction()));
 	//m_pMenuBox->addSeparator();
 
-	m_pMenuRun = m_pMenuBox->addMenu(CSandMan::GetIcon("Start"), tr("Run"));
+	//m_pMenuRun = m_pMenuBox->addMenu(CSandMan::GetIcon("Start"), tr("Run"));
+	m_pMenuRun = new CMenuEx(tr("Run"), m_pMenuBox);
+	m_pMenuRun->setIcon(CSandMan::GetIcon("Start"));
+	m_pMenuBox->addAction(m_pMenuRun->menuAction());
+	connect(m_pMenuRun, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(OnMenuContextMenu(const QPoint&)));
+
 		m_pMenuRunAny = m_pMenuRun->addAction(CSandMan::GetIcon("Run"), tr("Run Program"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunMenu = m_pMenuRun->addAction(CSandMan::GetIcon("StartMenu"), tr("Run from Start Menu"), this, SLOT(OnSandBoxAction()));
 		if (theConf->GetBool("Options/ScanStartMenu", true)) {
@@ -282,7 +287,12 @@ void CSbieView::CreateOldMenu()
 	m_pStopAsync = m_pMenuBox->addAction(CSandMan::GetIcon("Stop"), tr("Stop Operations"), this, SLOT(OnSandBoxAction()));
 	//m_pMenuBox->addSeparator();
 
-	m_pMenuRun = m_pMenuBox->addMenu(CSandMan::GetIcon("Start"), tr("Run Sandboxed"));
+	//m_pMenuRun = m_pMenuBox->addMenu(CSandMan::GetIcon("Start"), tr("Run Sandboxed"));
+	m_pMenuRun = new CMenuEx(tr("Run"), m_pMenuBox);
+	m_pMenuRun->setIcon(CSandMan::GetIcon("Start"));
+	m_pMenuBox->addAction(m_pMenuRun->menuAction());
+	connect(m_pMenuRun, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(OnMenuContextMenu(const QPoint&)));
+
 		m_pMenuRunBrowser = m_pMenuRun->addAction(CSandMan::GetIcon("Internet"), tr("Run Web Browser"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunMailer = m_pMenuRun->addAction(CSandMan::GetIcon("Email"), tr("Run eMail Reader"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRunAny = m_pMenuRun->addAction(CSandMan::GetIcon("Run"), tr("Run Any Program"), this, SLOT(OnSandBoxAction()));
@@ -1787,7 +1797,7 @@ void CSbieView::OnMenuContextMenu(const QPoint& point)
 		QStringList RunOptions = pBoxPlus->GetTextList("RunCommand", true);
 
 		QString FoundPin;
-		QString FileName = LinkTarget;
+		QString FileName = pBoxPlus->GetCommandFile(LinkTarget);
 		foreach(const QString& RunOption, RunOptions) {
 			QString CmdFile = pBoxPlus->GetCommandFile(Split2(RunOption, "|").second);
 			if(CmdFile.compare(FileName, Qt::CaseInsensitive) == 0) {

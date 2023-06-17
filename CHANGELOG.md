@@ -5,6 +5,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [1.9.8 / 5.64.8] - 2023-06-??
+
+### Fixed
+- FixDirLinkErr (thanks lmou523) [#3038](https://github.com/sandboxie-plus/Sandboxie/pull/3038)
+
+
+
 ## [1.9.7 / 5.64.7] - 2023-06-09
 
 ### Added

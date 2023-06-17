@@ -10,7 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.9.8 / 5.64.8] - 2023-06-??
 
 ### Changed
-- improved uninstall process in the Sandboxie Classic installer [#3044](https://github.com/sandboxie-plus/Sandboxie/pull/3044)
+- improved uninstall process in the Sandboxie Classic installer (thanks sredna) [#3044](https://github.com/sandboxie-plus/Sandboxie/pull/3044)
 
 ### Fixed
 - fixed a link error when the path was created with a symbolic link (thanks lmou523) [#3038](https://github.com/sandboxie-plus/Sandboxie/pull/3038)

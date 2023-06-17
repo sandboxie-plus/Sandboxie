@@ -844,7 +844,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
         <translation>Keine neuen Updates gefunden, Ihr Sandboxie-Plus ist aktuell.
 
-Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentlichungen, um sicherzustellen, dass nur geteste Updates angeboten werden.</translation>
+Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentlichungen, um sicherzustellen, dass nur getestete Updates angeboten werden.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="964"/>

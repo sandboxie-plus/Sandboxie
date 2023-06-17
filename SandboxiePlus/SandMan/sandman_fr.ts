@@ -2782,7 +2782,7 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
     <message>
         <location filename="SandMan.cpp" line="783"/>
         <source>New-Box Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu de nouveau bac</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="792"/>
@@ -2794,17 +2794,17 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
     <message>
         <location filename="SandMan.cpp" line="800"/>
         <source>Edit-ini Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu d&apos;édition .ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="844"/>
         <source>Toolbar Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Éléments de barre d&apos;outils</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="846"/>
         <source>Reset Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialiser la barre d&apos;outils</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2285"/>

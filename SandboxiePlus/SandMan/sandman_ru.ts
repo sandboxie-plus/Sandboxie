@@ -2910,22 +2910,22 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="783"/>
         <source>New-Box Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Меню новой песочницы</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="800"/>
         <source>Edit-ini Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Меню редактирования ini</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="844"/>
         <source>Toolbar Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Элементы панели инструментов</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="846"/>
         <source>Reset Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить панель инструментов</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1023"/>
@@ -6742,7 +6742,6 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="327"/>
         <source>Sandboxie may be issue &lt;a href=&quot;sbie://docs/sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</source>
-        <oldsource>Sandboxie may be issue &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</oldsource>
         <translation>Sandboxie может выдавать &lt;a href= &quot;sbie://docs/sbiemessages&quot;&gt;сообщения SBIE&lt;/a&gt; в журнал сообщений и отображать их как всплывающие окна. Некоторые сообщения носят информационный характер и уведомляют об общих или, в некоторых случаях, особых событиях, которые произошли, другие сообщения указывают на состояние ошибки.&lt;br /&gt;Вы можете скрыть выбранные сообщения SBIE от всплывающих окон, используя приведенный ниже список:</translation>
     </message>
     <message>

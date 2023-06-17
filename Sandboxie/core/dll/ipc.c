@@ -643,7 +643,7 @@ _FX void Ipc_CreateObjects(void)
     wcscpy(buffer, CopyPath);
     wcscat(buffer, L"\\Global");
 
-    status = SbieApi_CreateDirOrLink(buffer, buffer2);
+    status = SbieApi_CreateDirOrLink(buffer, CopyPath);
 
     if (! NT_SUCCESS(status)) {
         errlvl = 41;

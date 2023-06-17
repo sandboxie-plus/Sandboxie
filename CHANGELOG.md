@@ -9,10 +9,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.9.8 / 5.64.8] - 2023-06-??
 
+### Changed
+- improved uninstall process in the Sandboxie Classic installer [#3044](https://github.com/sandboxie-plus/Sandboxie/pull/3044)
+
 ### Fixed
-- FixDirLinkErr (thanks lmou523) [#3038](https://github.com/sandboxie-plus/Sandboxie/pull/3038)
-- Recovery window focus issue after file overwrite dialog [#3048}(https://github.com/sandboxie-plus/Sandboxie/issues/3048)
-- Sandboxie Plus crashes with exception code c0000005 [#3024](https://github.com/sandboxie-plus/Sandboxie/issues/3024)
+- fixed a link error when the path was created with a symbolic link (thanks lmou523) [#3038](https://github.com/sandboxie-plus/Sandboxie/pull/3038)
+- fixed recovery window focus after file overwrite dialog [#3048](https://github.com/sandboxie-plus/Sandboxie/issues/3048)
+- fixed Sandboxie Plus crash with exception code c0000005 [#3024](https://github.com/sandboxie-plus/Sandboxie/issues/3024)
 
 
 

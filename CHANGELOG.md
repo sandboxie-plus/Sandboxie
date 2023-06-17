@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - FixDirLinkErr (thanks lmou523) [#3038](https://github.com/sandboxie-plus/Sandboxie/pull/3038)
+- Recovery window focus issue after file overwrite dialog [#3048}(https://github.com/sandboxie-plus/Sandboxie/issues/3048)
 
 
 

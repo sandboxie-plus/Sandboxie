@@ -2506,11 +2506,7 @@ void CSandMan::OnQueuedRequest(quint32 ClientPid, quint32 ClientTid, quint32 Req
 
 int CSandMan::ShowQuestion(const QString& question, const QString& checkBoxText, bool* checkBoxSetting, int buttons, int defaultButton, int type, QWidget* pParent)
 {
-	int ret =  CCheckableMessageBox::question(pParent, "Sandboxie-Plus", question, checkBoxText, checkBoxSetting, (QDialogButtonBox::StandardButtons)buttons, (QDialogButtonBox::StandardButton)defaultButton, (QMessageBox::Icon)type);
-	QTimer::singleShot(10, [this]() {
-		this->raise();
-	});
-	return ret;
+	return CCheckableMessageBox::question(pParent, "Sandboxie-Plus", question, checkBoxText, checkBoxSetting, (QDialogButtonBox::StandardButtons)buttons, (QDialogButtonBox::StandardButton)defaultButton, (QMessageBox::Icon)type);
 }
 
 void CSandMan::ShowMessage(const QString& message, int type)

@@ -1262,7 +1262,6 @@ SkipDeleteSandboxieIni:
     RMDir "$INSTDIR"
 
 SkipDeleteDir:
-    ClearErrors
 
 FunctionEnd
 

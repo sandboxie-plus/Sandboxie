@@ -1994,22 +1994,22 @@ Full path: %4</source>
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="3618"/>
+        <location filename="SandMan.cpp" line="3614"/>
         <source>Waiting for folder: %1</source>
         <translation>Đang đợi thư mục: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3619"/>
+        <location filename="SandMan.cpp" line="3615"/>
         <source>Deleting folder: %1</source>
         <translation>Xóa thư mục: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3620"/>
+        <location filename="SandMan.cpp" line="3616"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>Hợp nhất các thư mục: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3621"/>
+        <location filename="SandMan.cpp" line="3617"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>Kết thúc Hợp nhất Bản Ghi chụp nhanh...</translation>
     </message>
@@ -2096,22 +2096,22 @@ Full path: %4</source>
         <translation>Sandboxie-Plus v%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3507"/>
+        <location filename="SandMan.cpp" line="3503"/>
         <source>Reset Columns</source>
         <translation>Đặt lại cột</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3508"/>
+        <location filename="SandMan.cpp" line="3504"/>
         <source>Copy Cell</source>
         <translation>Sao chép ô</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3509"/>
+        <location filename="SandMan.cpp" line="3505"/>
         <source>Copy Row</source>
         <translation>Sao chép hàng</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3510"/>
+        <location filename="SandMan.cpp" line="3506"/>
         <source>Copy Panel</source>
         <translation>Sao chép bảng điều khiển</translation>
     </message>
@@ -2387,7 +2387,7 @@ Full path: %4</source>
     </message>
     <message>
         <location filename="SandMan.cpp" line="461"/>
-        <location filename="SandMan.cpp" line="3592"/>
+        <location filename="SandMan.cpp" line="3588"/>
         <source>About Sandboxie-Plus</source>
         <translation>Về Sandboxie-Plus</translation>
     </message>
@@ -2462,9 +2462,9 @@ Bạn có muốn dọn dẹp không?</translation>
         <location filename="SandMan.cpp" line="1283"/>
         <location filename="SandMan.cpp" line="1696"/>
         <location filename="SandMan.cpp" line="2027"/>
-        <location filename="SandMan.cpp" line="2639"/>
-        <location filename="SandMan.cpp" line="3067"/>
-        <location filename="SandMan.cpp" line="3083"/>
+        <location filename="SandMan.cpp" line="2635"/>
+        <location filename="SandMan.cpp" line="3063"/>
+        <location filename="SandMan.cpp" line="3079"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Không hiển thị lại thông báo này.</translation>
     </message>
@@ -2551,19 +2551,19 @@ Sandbox này ngăn quyền truy cập vào tất cả các vị trí dữ liệu
         <translation>Cấu hình hiện tại: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2775"/>
-        <location filename="SandMan.cpp" line="2777"/>
-        <location filename="SandMan.cpp" line="3326"/>
+        <location filename="SandMan.cpp" line="2771"/>
+        <location filename="SandMan.cpp" line="2773"/>
+        <location filename="SandMan.cpp" line="3322"/>
         <source>Sandboxie-Plus - Error</source>
         <translation>Sandboxie-Plus - Lỗi</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2775"/>
+        <location filename="SandMan.cpp" line="2771"/>
         <source>Failed to stop all Sandboxie components</source>
         <translation>Không dừng được tất cả các thành phần Sandboxie</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2777"/>
+        <location filename="SandMan.cpp" line="2773"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>Không thể khởi động các thành phần Sandboxie bắt buộc</translation>
     </message>
@@ -2707,143 +2707,143 @@ Không sẽ chọn: %2</translation>
 </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2532"/>
+        <location filename="SandMan.cpp" line="2528"/>
         <source>Only Administrators can change the config.</source>
         <translation>Chỉ Quản trị viên mới có thể thay đổi cấu hình.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2542"/>
+        <location filename="SandMan.cpp" line="2538"/>
         <source>Please enter the configuration password.</source>
         <translation>Vui lòng nhập mật khẩu cấu hình.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2550"/>
+        <location filename="SandMan.cpp" line="2546"/>
         <source>Login Failed: %1</source>
         <translation>Đăng nhập thất bại: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2579"/>
+        <location filename="SandMan.cpp" line="2575"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
         <translation>Bạn có muốn chấm dứt tất cả các quy trình trong tất cả các hộp cát không?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2580"/>
+        <location filename="SandMan.cpp" line="2576"/>
         <source>Terminate all without asking</source>
         <translation>Chấm dứt tất cả mà không cần hỏi</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2638"/>
+        <location filename="SandMan.cpp" line="2634"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>Sandboxie-Plus đã được khởi động ở chế độ Portable và nó cần tạo ra các dịch vụ cần thiết. Điều này sẽ nhắc nhở các đặc quyền quản trị.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2672"/>
+        <location filename="SandMan.cpp" line="2668"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
         <translation>THẬN TRỌNG: Một tác nhân khác (có thể là SbieCtrl.exe) đã quản lý phiên Sandboxie này, vui lòng đóng nó trước và kết nối lại để tiếp quản.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2804"/>
+        <location filename="SandMan.cpp" line="2800"/>
         <source>Executing maintenance operation, please wait...</source>
         <translation>Đang thực hiện hoạt động bảo trì, vui lòng đợi...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2984"/>
+        <location filename="SandMan.cpp" line="2980"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
         <translation>Bạn cũng muốn đặt lại các hộp thông báo ẩn (có), hay chỉ tất cả các thông báo nhật ký (không)?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3081"/>
+        <location filename="SandMan.cpp" line="3077"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
         <translation>Các thay đổi sẽ được áp dụng tự động bất cứ khi nào tệp được lưu.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3082"/>
+        <location filename="SandMan.cpp" line="3078"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
         <translation>Các thay đổi sẽ được áp dụng tự động ngay khi đóng trình chỉnh sửa.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3261"/>
+        <location filename="SandMan.cpp" line="3257"/>
         <source>Error Status: 0x%1 (%2)</source>
         <translation>Tình trạng lỗi: 0x%1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3262"/>
+        <location filename="SandMan.cpp" line="3258"/>
         <source>Unknown</source>
         <translation>Không xác định</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3281"/>
+        <location filename="SandMan.cpp" line="3277"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
         <translation>Sandbox phải được làm trống trước khi có thể bị xóa.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3285"/>
+        <location filename="SandMan.cpp" line="3281"/>
         <source>Failed to copy box data files</source>
         <translation>Không sao chép được tệp dữ liệu từ Sandbox</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3290"/>
+        <location filename="SandMan.cpp" line="3286"/>
         <source>Failed to remove old box data files</source>
         <translation>Không xóa được các tệp dữ liệu Sandbox cũ</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3304"/>
+        <location filename="SandMan.cpp" line="3300"/>
         <source>Unknown Error Status: 0x%1</source>
         <translation>Trạng thái lỗi không xác định: 0x%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3511"/>
+        <location filename="SandMan.cpp" line="3507"/>
         <source>Case Sensitive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3512"/>
+        <location filename="SandMan.cpp" line="3508"/>
         <source>RegExp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3513"/>
+        <location filename="SandMan.cpp" line="3509"/>
         <source>Highlight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3514"/>
+        <location filename="SandMan.cpp" line="3510"/>
         <source>Close</source>
         <translation type="unfinished">Đóng</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3515"/>
+        <location filename="SandMan.cpp" line="3511"/>
         <source>&amp;Find ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3516"/>
+        <location filename="SandMan.cpp" line="3512"/>
         <source>All columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3565"/>
+        <location filename="SandMan.cpp" line="3561"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</source>
         <oldsource>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</oldsource>
         <translation type="unfinished">&lt;h3&gt;Về Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Phiên bản %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3573"/>
+        <location filename="SandMan.cpp" line="3569"/>
         <source>This copy of Sandboxie+ is certified for: %1</source>
         <translation>Bản sao Sandboxie + này được chứng nhận cho: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3575"/>
+        <location filename="SandMan.cpp" line="3571"/>
         <source>Sandboxie+ is free for personal and non-commercial use.</source>
         <translation>Sandboxie + miễn phí cho mục đích sử dụng cá nhân và phi thương mại.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3578"/>
+        <location filename="SandMan.cpp" line="3574"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>Sandboxie-Plus là phần tiếp theo mã nguồn mở của Sandboxie.&lt;br /&gt;Ghé thăm &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; để biết thêm thông tin.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Phiên bản trình điều khiển: %1&lt;br /&gt;Đặc trưng: %2&lt;br /&gt;&lt;br /&gt;Biểu tượng từ &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3264"/>
+        <location filename="SandMan.cpp" line="3260"/>
         <source>Administrator rights are required for this operation.</source>
         <translation>Quyền quản trị viên được yêu cầu cho hoạt động này.</translation>
     </message>
@@ -3065,47 +3065,47 @@ Không sẽ chọn: %2</translation>
         <translation>Thời hạn đánh giá đã hết!!!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2599"/>
+        <location filename="SandMan.cpp" line="2595"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
         <translation>Vui lòng nhập thời lượng, tính bằng giây, để tắt các quy tắc Chương trình bắt buộc.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2614"/>
+        <location filename="SandMan.cpp" line="2610"/>
         <source>No Recovery</source>
         <translation>Không có phục hồi</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2620"/>
+        <location filename="SandMan.cpp" line="2616"/>
         <source>No Messages</source>
         <translation>Không có tin nhắn</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2676"/>
+        <location filename="SandMan.cpp" line="2672"/>
         <source>&lt;b&gt;ERROR:&lt;/b&gt; The Sandboxie-Plus Manager (SandMan.exe) does not have a valid signature (SandMan.exe.sig). Please download a trusted release from the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;official Download page&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2779"/>
+        <location filename="SandMan.cpp" line="2775"/>
         <source>Maintenance operation failed (%1)</source>
         <translation>Hoạt động bảo trì không thành công (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2784"/>
+        <location filename="SandMan.cpp" line="2780"/>
         <source>Maintenance operation completed</source>
         <translation>Hoạt động bảo trì đã hoàn thành</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2915"/>
+        <location filename="SandMan.cpp" line="2911"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
         <translation>Trong giao diện người dùng Plus, chức năng này đã được tích hợp vào chế độ xem danh sách Sandbox chính. </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2916"/>
+        <location filename="SandMan.cpp" line="2912"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
         <translation>Sử dụng menu ngữ cảnh Sandbox/nhóm, bạn có thể di chuyển các Sandbox và nhóm sang các nhóm khác. Bạn cũng có thể sử dụng kéo và thả để di chuyển các mục xung quanh. Ngoài ra, bạn cũng có thể sử dụng các phím mũi tên trong khi giữ ALT để di chuyển các mục lên và xuống trong nhóm của chúng.&lt;br /&gt;Bạn có thể tạo các Sandbox và nhóm mới từ menu Sandbox.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3065"/>
+        <location filename="SandMan.cpp" line="3061"/>
         <source>You are about to edit the Templates.ini, this is generally not recommended.
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
@@ -3113,187 +3113,187 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3140"/>
+        <location filename="SandMan.cpp" line="3136"/>
         <source>Sandboxie config has been reloaded</source>
         <translation>Cấu hình Sandboxie đã được tải lại</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3265"/>
+        <location filename="SandMan.cpp" line="3261"/>
         <source>Failed to execute: %1</source>
         <translation>Không thực hiện được: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3266"/>
+        <location filename="SandMan.cpp" line="3262"/>
         <source>Failed to connect to the driver</source>
         <translation>Không kết nối được với trình điều khiển</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3267"/>
+        <location filename="SandMan.cpp" line="3263"/>
         <source>Failed to communicate with Sandboxie Service: %1</source>
         <translation>Không kết nối được với Dịch vụ Sandboxie: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3268"/>
+        <location filename="SandMan.cpp" line="3264"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
         <translation>Không tương thích Sandboxie %1 đã được tìm thấy. Các phiên bản tương thích: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3269"/>
+        <location filename="SandMan.cpp" line="3265"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
         <translation>Không thể tìm thấy đường dẫn cài đặt Sandboxie.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3270"/>
+        <location filename="SandMan.cpp" line="3266"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
         <translation>Không sao chép được cấu hình từ Sandbox %1: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3271"/>
+        <location filename="SandMan.cpp" line="3267"/>
         <source>A sandbox of the name %1 already exists</source>
         <translation>Sandbox tên %1 đã tồn tại</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3272"/>
+        <location filename="SandMan.cpp" line="3268"/>
         <source>Failed to delete sandbox %1: %2</source>
         <translation>Không xóa được Sandbox %1: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3273"/>
+        <location filename="SandMan.cpp" line="3269"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
         <translation>Tên Sandbox không được dài hơn 32 ký tự.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3274"/>
+        <location filename="SandMan.cpp" line="3270"/>
         <source>The sandbox name can not be a device name.</source>
         <translation>Tên Sandbox không được là tên thiết bị.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3275"/>
+        <location filename="SandMan.cpp" line="3271"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
         <translation>Tên Sandbox chỉ có thể chứa các chữ cái, chữ số và dấu gạch dưới được hiển thị dưới dạng dấu cách. </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3276"/>
+        <location filename="SandMan.cpp" line="3272"/>
         <source>Failed to terminate all processes</source>
         <translation>Không thể chấm dứt tất cả các tiến trình</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3277"/>
+        <location filename="SandMan.cpp" line="3273"/>
         <source>Delete protection is enabled for the sandbox</source>
         <translation>Xóa bảo vệ được bật cho Sandbox</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3278"/>
+        <location filename="SandMan.cpp" line="3274"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
         <translation>Tất cả các quá trình Sandbox phải được dừng lại trước khi có thể xóa nội dung Sandbox</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3279"/>
+        <location filename="SandMan.cpp" line="3275"/>
         <source>Error deleting sandbox folder: %1</source>
         <translation>Lỗi khi xóa thư mục Sandbox: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3282"/>
+        <location filename="SandMan.cpp" line="3278"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>Không di chuyển được thư mục &apos;%1&apos; to &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3283"/>
+        <location filename="SandMan.cpp" line="3279"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
         <translation>Không thể thực hiện thao tác Bản ghi nhanh này trong khi các quy trình vẫn đang chạy trong Sandbox.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3284"/>
+        <location filename="SandMan.cpp" line="3280"/>
         <source>Failed to create directory for new snapshot</source>
         <translation>Không tạo được thư mục cho Bản ghi nhanh mới</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3286"/>
+        <location filename="SandMan.cpp" line="3282"/>
         <source>Snapshot not found</source>
         <translation>Bản ghi nhanh không tìm thấy</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3287"/>
+        <location filename="SandMan.cpp" line="3283"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
         <translation>Lỗi khi hợp nhất các thư mục bản ghi nhanh &apos;%1&apos; với &apos;%2&apos;, bản ghi nhanh chưa được hợp nhất hoàn toàn.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3288"/>
+        <location filename="SandMan.cpp" line="3284"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
         <translation>Không xóa được thư mục bản ghi nhanh cũ &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3289"/>
+        <location filename="SandMan.cpp" line="3285"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>Không thể xóa bản ghi nhanh được nhiều bản ghi nhanh sau này chia sẻ</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3291"/>
+        <location filename="SandMan.cpp" line="3287"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
         <translation>Bạn không được phép cập nhật cấu hình trong phần &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3292"/>
+        <location filename="SandMan.cpp" line="3288"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
         <translation>Không đặt được cài đặt cấu hình %1 trong phần %2: %3</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3293"/>
+        <location filename="SandMan.cpp" line="3289"/>
         <source>Can not create snapshot of an empty sandbox</source>
         <translation>Không thể tạo ảnh chụp nhanh của một Sandbox trống</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3294"/>
+        <location filename="SandMan.cpp" line="3290"/>
         <source>A sandbox with that name already exists</source>
         <translation>Một Sandbox có tên đó đã tồn tại</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3295"/>
+        <location filename="SandMan.cpp" line="3291"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>Mật khẩu cấu hình không được dài hơn 64 ký tự</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3296"/>
+        <location filename="SandMan.cpp" line="3292"/>
         <source>The operation was canceled by the user</source>
         <translation>Thao tác đã bị người dùng hủy bỏ</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3298"/>
+        <location filename="SandMan.cpp" line="3294"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3299"/>
+        <location filename="SandMan.cpp" line="3295"/>
         <source>Failed to create the box archive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3300"/>
+        <location filename="SandMan.cpp" line="3296"/>
         <source>Failed to open the 7z archive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3301"/>
+        <location filename="SandMan.cpp" line="3297"/>
         <source>Failed to unpack the box archive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3302"/>
+        <location filename="SandMan.cpp" line="3298"/>
         <source>The selected 7z file is NOT a box archive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3328"/>
+        <location filename="SandMan.cpp" line="3324"/>
         <source>Operation failed for %1 item(s).</source>
         <translation>Thao tác không thành công cho %1 mục.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3359"/>
+        <location filename="SandMan.cpp" line="3355"/>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
         <translation>Bạn muốn mở %1 trong trình duyệt Web có Sandbox (có) hay không có Sandbox (không)?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3360"/>
+        <location filename="SandMan.cpp" line="3356"/>
         <source>Remember choice for later.</source>
         <translation>Hãy nhớ lựa chọn cho sau này.</translation>
     </message>
@@ -3580,270 +3580,271 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <name>CSbieView</name>
     <message>
         <location filename="Views/SbieView.cpp" line="151"/>
-        <location filename="Views/SbieView.cpp" line="276"/>
+        <location filename="Views/SbieView.cpp" line="281"/>
         <source>Create New Box</source>
         <translation>Tạo Sandbox mới</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="387"/>
+        <location filename="Views/SbieView.cpp" line="397"/>
         <source>Remove Group</source>
         <translation>Xóa nhóm</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="160"/>
+        <location filename="Views/SbieView.cpp" line="161"/>
+        <location filename="Views/SbieView.cpp" line="291"/>
         <source>Run</source>
         <translation>Chạy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="161"/>
+        <location filename="Views/SbieView.cpp" line="166"/>
         <source>Run Program</source>
         <translation>Chạy chương trình</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="162"/>
+        <location filename="Views/SbieView.cpp" line="167"/>
         <source>Run from Start Menu</source>
         <translation>Chạy từ Start Menu</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="173"/>
+        <location filename="Views/SbieView.cpp" line="178"/>
         <source>Default Web Browser</source>
         <translation>Trình duyệt web mặc định</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="174"/>
+        <location filename="Views/SbieView.cpp" line="179"/>
         <source>Default eMail Client</source>
         <translation>Ứng dụng eMail mặc định</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="176"/>
+        <location filename="Views/SbieView.cpp" line="181"/>
         <source>Windows Explorer</source>
         <translation>Windows Explorer</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="177"/>
+        <location filename="Views/SbieView.cpp" line="182"/>
         <source>Registry Editor</source>
         <translation>Registry Editor</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="178"/>
+        <location filename="Views/SbieView.cpp" line="183"/>
         <source>Programs and Features</source>
         <translation>Programs and Features</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="189"/>
+        <location filename="Views/SbieView.cpp" line="194"/>
         <source>Terminate All Programs</source>
         <translation>Chấm dứt tất cả các chương trình</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="102"/>
-        <location filename="Views/SbieView.cpp" line="195"/>
-        <location filename="Views/SbieView.cpp" line="254"/>
-        <location filename="Views/SbieView.cpp" line="329"/>
-        <location filename="Views/SbieView.cpp" line="368"/>
+        <location filename="Views/SbieView.cpp" line="200"/>
+        <location filename="Views/SbieView.cpp" line="259"/>
+        <location filename="Views/SbieView.cpp" line="339"/>
+        <location filename="Views/SbieView.cpp" line="378"/>
         <source>Create Shortcut</source>
         <translation>Tạo Shortcut</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="197"/>
-        <location filename="Views/SbieView.cpp" line="314"/>
+        <location filename="Views/SbieView.cpp" line="202"/>
+        <location filename="Views/SbieView.cpp" line="324"/>
         <source>Explore Content</source>
         <translation>Khám phá nội dung</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="199"/>
-        <location filename="Views/SbieView.cpp" line="321"/>
+        <location filename="Views/SbieView.cpp" line="204"/>
+        <location filename="Views/SbieView.cpp" line="331"/>
         <source>Snapshots Manager</source>
         <translation>Trình quản lý bản ghi nhanh</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="200"/>
+        <location filename="Views/SbieView.cpp" line="205"/>
         <source>Recover Files</source>
         <translation>Khôi phục tập tin</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="201"/>
-        <location filename="Views/SbieView.cpp" line="313"/>
+        <location filename="Views/SbieView.cpp" line="206"/>
+        <location filename="Views/SbieView.cpp" line="323"/>
         <source>Delete Content</source>
         <translation>Xóa nội dung</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="208"/>
+        <location filename="Views/SbieView.cpp" line="213"/>
         <source>Sandbox Presets</source>
         <translation>Cài đặt trước Sandbox</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="210"/>
+        <location filename="Views/SbieView.cpp" line="215"/>
         <source>Ask for UAC Elevation</source>
         <translation>Yêu cầu quyền UAC</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="211"/>
+        <location filename="Views/SbieView.cpp" line="216"/>
         <source>Drop Admin Rights</source>
         <translation>Bỏ quyền quản trị viên</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="212"/>
+        <location filename="Views/SbieView.cpp" line="217"/>
         <source>Emulate Admin Rights</source>
         <translation>Giả lập quyền quản trị</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="220"/>
+        <location filename="Views/SbieView.cpp" line="225"/>
         <source>Block Internet Access</source>
         <translation>Chặn truy cập Internet</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="222"/>
+        <location filename="Views/SbieView.cpp" line="227"/>
         <source>Allow Network Shares</source>
         <translation>Cho phép Chia sẻ Mạng</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="203"/>
+        <location filename="Views/SbieView.cpp" line="208"/>
         <source>Sandbox Options</source>
         <translation>Tùy chọn Sandbox</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="172"/>
+        <location filename="Views/SbieView.cpp" line="177"/>
         <source>Standard Applications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="192"/>
+        <location filename="Views/SbieView.cpp" line="197"/>
         <source>Browse Files</source>
         <translation>Duyệt qua tệp</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="231"/>
-        <location filename="Views/SbieView.cpp" line="319"/>
+        <location filename="Views/SbieView.cpp" line="236"/>
+        <location filename="Views/SbieView.cpp" line="329"/>
         <source>Sandbox Tools</source>
         <translation>Công cụ Sandbox</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="232"/>
+        <location filename="Views/SbieView.cpp" line="237"/>
         <source>Duplicate Box Config</source>
         <translation>Cấu hình Sandbox trùng lặp</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="235"/>
-        <location filename="Views/SbieView.cpp" line="332"/>
+        <location filename="Views/SbieView.cpp" line="240"/>
+        <location filename="Views/SbieView.cpp" line="342"/>
         <source>Rename Sandbox</source>
         <translation>Đổi tên Sandbox</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="236"/>
-        <location filename="Views/SbieView.cpp" line="333"/>
+        <location filename="Views/SbieView.cpp" line="241"/>
+        <location filename="Views/SbieView.cpp" line="343"/>
         <source>Move Sandbox</source>
         <translation>Di chuyển Sandbox</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="247"/>
-        <location filename="Views/SbieView.cpp" line="344"/>
+        <location filename="Views/SbieView.cpp" line="252"/>
+        <location filename="Views/SbieView.cpp" line="354"/>
         <source>Remove Sandbox</source>
         <translation>Xoá Sandbox</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="252"/>
-        <location filename="Views/SbieView.cpp" line="366"/>
+        <location filename="Views/SbieView.cpp" line="257"/>
+        <location filename="Views/SbieView.cpp" line="376"/>
         <source>Terminate</source>
         <translation>Chấm dứt</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="255"/>
+        <location filename="Views/SbieView.cpp" line="260"/>
         <source>Preset</source>
         <translation>Đặt trước</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="100"/>
-        <location filename="Views/SbieView.cpp" line="256"/>
+        <location filename="Views/SbieView.cpp" line="261"/>
         <source>Pin to Run Menu</source>
         <translation>Ghim vào menu Chạy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="258"/>
+        <location filename="Views/SbieView.cpp" line="263"/>
         <source>Block and Terminate</source>
         <translation>Chặn và chấm dứt</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="262"/>
+        <location filename="Views/SbieView.cpp" line="267"/>
         <source>Allow internet access</source>
         <translation>Cho phép truy cập internet</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="264"/>
+        <location filename="Views/SbieView.cpp" line="269"/>
         <source>Force into this sandbox</source>
         <translation>Buộc vào Sandbox này</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="266"/>
+        <location filename="Views/SbieView.cpp" line="271"/>
         <source>Set Linger Process</source>
         <translation>Đặt quy trình kéo dài</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="268"/>
+        <location filename="Views/SbieView.cpp" line="273"/>
         <source>Set Leader Process</source>
         <translation>Đặt quy trình lãnh đạo</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="526"/>
+        <location filename="Views/SbieView.cpp" line="536"/>
         <source>    File root: %1
 </source>
         <translation>    Tập tin gốc: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="527"/>
+        <location filename="Views/SbieView.cpp" line="537"/>
         <source>    Registry root: %1
 </source>
         <translation>    Registry gốc: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="528"/>
+        <location filename="Views/SbieView.cpp" line="538"/>
         <source>    IPC root: %1
 </source>
         <translation>    IPC gốc: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="530"/>
+        <location filename="Views/SbieView.cpp" line="540"/>
         <source>Options:
     </source>
         <translation>Tùy chọn:
     </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="738"/>
+        <location filename="Views/SbieView.cpp" line="748"/>
         <source>[None]</source>
         <translation>[None]</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1049"/>
+        <location filename="Views/SbieView.cpp" line="1059"/>
         <source>Please enter a new group name</source>
         <translation>Vui lòng nhập tên nhóm mới</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="847"/>
+        <location filename="Views/SbieView.cpp" line="857"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation>Bạn có thực sự muốn xóa nhóm đã chọn không(s)?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="152"/>
-        <location filename="Views/SbieView.cpp" line="277"/>
+        <location filename="Views/SbieView.cpp" line="282"/>
         <source>Create Box Group</source>
         <translation>Tạo ra nhóm Sandbox</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="385"/>
+        <location filename="Views/SbieView.cpp" line="395"/>
         <source>Rename Group</source>
         <translation>Đổi tên nhóm</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="157"/>
-        <location filename="Views/SbieView.cpp" line="282"/>
+        <location filename="Views/SbieView.cpp" line="287"/>
         <source>Stop Operations</source>
         <translation>Ngừng hoạt động</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="181"/>
+        <location filename="Views/SbieView.cpp" line="186"/>
         <source>Command Prompt</source>
         <translation>Command Prompt</translation>
     </message>
@@ -3852,304 +3853,303 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">Công cụ Sandbox</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="182"/>
+        <location filename="Views/SbieView.cpp" line="187"/>
         <source>Command Prompt (as Admin)</source>
         <translation>Command Prompt (với tư cách là quản trị viên)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="186"/>
+        <location filename="Views/SbieView.cpp" line="191"/>
         <source>Command Prompt (32-bit)</source>
         <translation>Command Prompt (32-bit)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="171"/>
+        <location filename="Views/SbieView.cpp" line="176"/>
         <source>Execute Autorun Entries</source>
         <translation>Thực thi các mục nhập tự động chạy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="320"/>
+        <location filename="Views/SbieView.cpp" line="330"/>
         <source>Browse Content</source>
         <translation>Duyệt nội dung</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="191"/>
+        <location filename="Views/SbieView.cpp" line="196"/>
         <source>Box Content</source>
         <translation>Nội dung Sandbox</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="198"/>
+        <location filename="Views/SbieView.cpp" line="203"/>
         <source>Open Registry</source>
         <translation>Mở Registry</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="194"/>
-        <location filename="Views/SbieView.cpp" line="328"/>
+        <location filename="Views/SbieView.cpp" line="199"/>
+        <location filename="Views/SbieView.cpp" line="338"/>
         <source>Refresh Info</source>
         <translation>Làm mới thông tin</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="153"/>
-        <location filename="Views/SbieView.cpp" line="278"/>
+        <location filename="Views/SbieView.cpp" line="283"/>
         <source>Import Box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="165"/>
-        <location filename="Views/SbieView.cpp" line="292"/>
+        <location filename="Views/SbieView.cpp" line="170"/>
+        <location filename="Views/SbieView.cpp" line="302"/>
         <source>(Host) Start Menu</source>
         <translation type="unfinished">(Host) Start Menu</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="226"/>
+        <location filename="Views/SbieView.cpp" line="231"/>
         <source>Immediate Recovery</source>
         <translation>Phục hồi ngay lập tức</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="228"/>
+        <location filename="Views/SbieView.cpp" line="233"/>
         <source>Disable Force Rules</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="233"/>
+        <location filename="Views/SbieView.cpp" line="238"/>
         <source>Export Box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="237"/>
-        <location filename="Views/SbieView.cpp" line="334"/>
+        <location filename="Views/SbieView.cpp" line="242"/>
+        <location filename="Views/SbieView.cpp" line="344"/>
         <source>Move Up</source>
         <translation>Đi lên</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="242"/>
-        <location filename="Views/SbieView.cpp" line="339"/>
+        <location filename="Views/SbieView.cpp" line="247"/>
+        <location filename="Views/SbieView.cpp" line="349"/>
         <source>Move Down</source>
         <translation>Đi xuống</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="285"/>
         <source>Run Sandboxed</source>
-        <translation>Chạy trong Sandbox</translation>
+        <translation type="vanished">Chạy trong Sandbox</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="286"/>
+        <location filename="Views/SbieView.cpp" line="296"/>
         <source>Run Web Browser</source>
         <translation>Chạy trình duyệt web</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="287"/>
+        <location filename="Views/SbieView.cpp" line="297"/>
         <source>Run eMail Reader</source>
         <translation>Chạy eMail Reader</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="288"/>
+        <location filename="Views/SbieView.cpp" line="298"/>
         <source>Run Any Program</source>
         <translation>Chạy bất kỳ chương trình nào</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="289"/>
+        <location filename="Views/SbieView.cpp" line="299"/>
         <source>Run From Start Menu</source>
         <translation>Chạy từ Start Menu</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="297"/>
+        <location filename="Views/SbieView.cpp" line="307"/>
         <source>Run Windows Explorer</source>
         <translation>Chạy Windows Explorer</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="311"/>
+        <location filename="Views/SbieView.cpp" line="321"/>
         <source>Terminate Programs</source>
         <translation>Chấm dứt chương trình</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="312"/>
+        <location filename="Views/SbieView.cpp" line="322"/>
         <source>Quick Recover</source>
         <translation>Phục hồi nhanh chóng</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="317"/>
+        <location filename="Views/SbieView.cpp" line="327"/>
         <source>Sandbox Settings</source>
         <translation>Cài đặt Sandbox</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="324"/>
+        <location filename="Views/SbieView.cpp" line="334"/>
         <source>Duplicate Sandbox Config</source>
         <translation>Cấu hình Sandboxtrùng lặp</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="325"/>
+        <location filename="Views/SbieView.cpp" line="335"/>
         <source>Export Sandbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="386"/>
+        <location filename="Views/SbieView.cpp" line="396"/>
         <source>Move Group</source>
         <translation>Di chuyển nhóm</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="837"/>
+        <location filename="Views/SbieView.cpp" line="847"/>
         <source>Please enter a new name for the Group.</source>
         <translation>Vui lòng nhập tên mới cho Nhóm.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="884"/>
+        <location filename="Views/SbieView.cpp" line="894"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translation>Di chuyển các mục nhập theo (giá trị âm tăng lên, giá trị dương di chuyển xuống):</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="932"/>
+        <location filename="Views/SbieView.cpp" line="942"/>
         <source>A group can not be its own parent.</source>
         <translation>Một nhóm không thể là nhóm mẹ của chính nhóm đó.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1021"/>
+        <location filename="Views/SbieView.cpp" line="1031"/>
         <source>This name is already in use, please select an alternative box name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1035"/>
+        <location filename="Views/SbieView.cpp" line="1045"/>
         <source>Importing: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1075"/>
+        <location filename="Views/SbieView.cpp" line="1085"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
         <translation>Tên Sandbox và tên nhóm Sandbox không thể sử dụng ký tự &apos;,()&apos;.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1080"/>
+        <location filename="Views/SbieView.cpp" line="1090"/>
         <source>This name is already used for a Box Group.</source>
         <translation>Tên này đã được sử dụng cho một nhóm Sandbox.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1085"/>
+        <location filename="Views/SbieView.cpp" line="1095"/>
         <source>This name is already used for a Sandbox.</source>
         <translation>Tên này đã được sử dụng cho một Sandbox.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1135"/>
-        <location filename="Views/SbieView.cpp" line="1205"/>
-        <location filename="Views/SbieView.cpp" line="1452"/>
+        <location filename="Views/SbieView.cpp" line="1145"/>
+        <location filename="Views/SbieView.cpp" line="1215"/>
+        <location filename="Views/SbieView.cpp" line="1462"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Không hiển thị lại thông báo này.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1196"/>
-        <location filename="Views/SbieView.cpp" line="1216"/>
-        <location filename="Views/SbieView.cpp" line="1620"/>
+        <location filename="Views/SbieView.cpp" line="1206"/>
+        <location filename="Views/SbieView.cpp" line="1226"/>
+        <location filename="Views/SbieView.cpp" line="1630"/>
         <source>This Sandbox is empty.</source>
         <translation>Sandbox này trống.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1223"/>
+        <location filename="Views/SbieView.cpp" line="1233"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
         <translation>CẢNH BÁO: Trình chỉnh sửa sổ đăng ký đã mở không có Sandbox, hãy cẩn thận và chỉ thực hiện các thay đổi đối với các vị trí Sandbox đã chọn trước.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1224"/>
+        <location filename="Views/SbieView.cpp" line="1234"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>Không hiển thị cảnh báo này trong tương lai</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1280"/>
+        <location filename="Views/SbieView.cpp" line="1290"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>Vui lòng nhập tên mới cho tên  trùng lặp.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1280"/>
+        <location filename="Views/SbieView.cpp" line="1290"/>
         <source>%1 Copy</source>
         <translation>%1 Sao chép</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1008"/>
-        <location filename="Views/SbieView.cpp" line="1319"/>
+        <location filename="Views/SbieView.cpp" line="1018"/>
+        <location filename="Views/SbieView.cpp" line="1329"/>
         <source>Select file name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1008"/>
-        <location filename="Views/SbieView.cpp" line="1319"/>
+        <location filename="Views/SbieView.cpp" line="1018"/>
+        <location filename="Views/SbieView.cpp" line="1329"/>
         <source>7-zip Archive (*.7z)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1327"/>
+        <location filename="Views/SbieView.cpp" line="1337"/>
         <source>Exporting: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1334"/>
+        <location filename="Views/SbieView.cpp" line="1344"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>Vui lòng nhập tên mới cho Sandbox.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1355"/>
+        <location filename="Views/SbieView.cpp" line="1365"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
         <translation>Bạn có thực sự muốn xóa những Sandbox đã chọn không?&lt;br /&gt;&lt;br /&gt;Cảnh báo: Nội dung Sandbox cũng sẽ bị xóa! </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1393"/>
+        <location filename="Views/SbieView.cpp" line="1403"/>
         <source>This Sandbox is already empty.</source>
         <translation>Sandbox này đã trống rỗng.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1403"/>
+        <location filename="Views/SbieView.cpp" line="1413"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
         <translation>Bạn có muốn xóa nội dung của Sandbox đã chọn không?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1404"/>
-        <location filename="Views/SbieView.cpp" line="1408"/>
+        <location filename="Views/SbieView.cpp" line="1414"/>
+        <location filename="Views/SbieView.cpp" line="1418"/>
         <source>Also delete all Snapshots</source>
         <translation>Đồng thời xóa tất cả bản ghi nhanh</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1407"/>
+        <location filename="Views/SbieView.cpp" line="1417"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
         <translation>Bạn có thực sự muốn xóa nội dung của tất cả các Sandbox đã chọn không?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1434"/>
+        <location filename="Views/SbieView.cpp" line="1444"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>Bạn có muốn chấm dứt tất cả các quy trình trong những Sandbox đã chọn không?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1435"/>
-        <location filename="Views/SbieView.cpp" line="1529"/>
+        <location filename="Views/SbieView.cpp" line="1445"/>
+        <location filename="Views/SbieView.cpp" line="1539"/>
         <source>Terminate without asking</source>
         <translation>Chấm dứt mà không cần hỏi</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1450"/>
+        <location filename="Views/SbieView.cpp" line="1460"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
         <translation>Start Menu của Sandboxie bây giờ sẽ được hiển thị. Chọn một ứng dụng từ menu và Sandboxie sẽ tạo một biểu tượng lối tắt mới trên màn hình thực của bạn, bạn có thể sử dụng biểu tượng này để gọi ứng dụng đã chọn dưới sự giám sát của Sandboxie.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1504"/>
-        <location filename="Views/SbieView.cpp" line="1556"/>
+        <location filename="Views/SbieView.cpp" line="1514"/>
+        <location filename="Views/SbieView.cpp" line="1566"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Tạo lối tắt đến sandbox %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1528"/>
+        <location filename="Views/SbieView.cpp" line="1538"/>
         <source>Do you want to terminate %1?</source>
         <oldsource>Do you want to %1 %2?</oldsource>
         <translation type="unfinished">Bạn có muốn tới %1 %2?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1528"/>
+        <location filename="Views/SbieView.cpp" line="1538"/>
         <source>the selected processes</source>
         <translation>các quy trình đã chọn</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1579"/>
+        <location filename="Views/SbieView.cpp" line="1589"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Sandbox không có giới hạn Internet, bạn có muốn bật chúng không?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1663"/>
+        <location filename="Views/SbieView.cpp" line="1673"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Sandbox này bị vô hiệu hóa, bạn có muốn bật nó không?</translation>
     </message>
@@ -4888,114 +4888,114 @@ Processes in this box will be running with a custom process token indicating the
 <context>
     <name>CTraceView</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="253"/>
+        <location filename="Views/TraceView.cpp" line="255"/>
         <source>Show as task tree</source>
         <translation>Hiển thị dưới dạng cây công việc</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="257"/>
+        <location filename="Views/TraceView.cpp" line="259"/>
         <source>Show NT Object Tree</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="264"/>
+        <location filename="Views/TraceView.cpp" line="266"/>
         <source>PID:</source>
         <translation>PID:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="266"/>
-        <location filename="Views/TraceView.cpp" line="273"/>
-        <location filename="Views/TraceView.cpp" line="282"/>
-        <location filename="Views/TraceView.cpp" line="283"/>
-        <location filename="Views/TraceView.cpp" line="292"/>
-        <location filename="Views/TraceView.cpp" line="548"/>
-        <location filename="Views/TraceView.cpp" line="551"/>
-        <location filename="Views/TraceView.cpp" line="649"/>
+        <location filename="Views/TraceView.cpp" line="268"/>
+        <location filename="Views/TraceView.cpp" line="275"/>
+        <location filename="Views/TraceView.cpp" line="284"/>
+        <location filename="Views/TraceView.cpp" line="285"/>
+        <location filename="Views/TraceView.cpp" line="294"/>
+        <location filename="Views/TraceView.cpp" line="550"/>
+        <location filename="Views/TraceView.cpp" line="553"/>
+        <location filename="Views/TraceView.cpp" line="651"/>
         <source>[All]</source>
         <translation>[All]</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="271"/>
+        <location filename="Views/TraceView.cpp" line="273"/>
         <source>TID:</source>
         <translation>TID:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="279"/>
+        <location filename="Views/TraceView.cpp" line="281"/>
         <source>Type:</source>
         <translation>Loại:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="290"/>
+        <location filename="Views/TraceView.cpp" line="292"/>
         <source>Status:</source>
         <translation>Trạng thái:</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="293"/>
+        <location filename="Views/TraceView.cpp" line="295"/>
         <source>Open</source>
         <translation>Mở</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="294"/>
+        <location filename="Views/TraceView.cpp" line="296"/>
         <source>Closed</source>
         <translation>Đã đóng cửa</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="295"/>
+        <location filename="Views/TraceView.cpp" line="297"/>
         <source>Trace</source>
         <translation>Dấu vết</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="296"/>
+        <location filename="Views/TraceView.cpp" line="298"/>
         <source>Other</source>
         <translation>Khác</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="304"/>
+        <location filename="Views/TraceView.cpp" line="306"/>
         <source>Show All Boxes</source>
         <translation>Hiển thị tất cả Sandbox</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="308"/>
+        <location filename="Views/TraceView.cpp" line="310"/>
         <source>Show Stack Trace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="313"/>
+        <location filename="Views/TraceView.cpp" line="315"/>
         <source>Save to file</source>
         <translation>Lưu vào tệp</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="327"/>
+        <location filename="Views/TraceView.cpp" line="329"/>
         <source>Cleanup Trace Log</source>
         <translation>Dọn dẹp nhật ký theo dõi</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="692"/>
+        <location filename="Views/TraceView.cpp" line="694"/>
         <source>Save trace log to file</source>
         <translation>Lưu nhật ký theo dõi vào tệp</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="698"/>
+        <location filename="Views/TraceView.cpp" line="700"/>
         <source>Failed to open log file for writing</source>
         <translation>Không mở được tệp nhật ký để ghi</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="718"/>
+        <location filename="Views/TraceView.cpp" line="720"/>
         <source>Unknown</source>
         <translation>Không xác định</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="622"/>
+        <location filename="Views/TraceView.cpp" line="624"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="249"/>
+        <location filename="Views/TraceView.cpp" line="251"/>
         <source>Monitor mode</source>
         <translation>Chế độ giám sát</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="629"/>
+        <location filename="Views/TraceView.cpp" line="631"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
@@ -5003,7 +5003,7 @@ Processes in this box will be running with a custom process token indicating the
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="751"/>
+        <location filename="Views/TraceView.cpp" line="753"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation>Sandboxie-Plus - Màn hình theo dõi</translation>
     </message>
@@ -6606,7 +6606,7 @@ Xin lưu ý rằng các giá trị này hiện là dành riêng cho người dù
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1487"/>
+        <location filename="Views/SbieView.cpp" line="1497"/>
         <source>Drive %1</source>
         <translation>Ổ đĩa %1</translation>
     </message>
@@ -6614,27 +6614,27 @@ Xin lưu ý rằng các giá trị này hiện là dành riêng cho người dù
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="3608"/>
+        <location filename="SandMan.cpp" line="3604"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3609"/>
+        <location filename="SandMan.cpp" line="3605"/>
         <source>Apply</source>
         <translation>Áp dụng</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3610"/>
+        <location filename="SandMan.cpp" line="3606"/>
         <source>Cancel</source>
         <translation>Hủy bỏ</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3611"/>
+        <location filename="SandMan.cpp" line="3607"/>
         <source>&amp;Yes</source>
         <translation>&amp;Có</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3612"/>
+        <location filename="SandMan.cpp" line="3608"/>
         <source>&amp;No</source>
         <translation>&amp;Không</translation>
     </message>

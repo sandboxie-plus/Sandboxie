@@ -119,6 +119,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - 1mm0rt41PC - Documentation additions
 - Luro223 - Documentation additions
 - lwcorp - Documentation additions
+- wilders-soccerfan - Documentation additions
 
 ## 🌏 Translators
 

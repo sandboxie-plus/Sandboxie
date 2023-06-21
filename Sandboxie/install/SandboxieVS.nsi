@@ -1255,6 +1255,7 @@ SkipDeleteSandboxieIni:
 ;
 
     ClearErrors
+    SetOutPath "$TEMP" ; make sure $InstDir is not the current directory
     RMDir "$INSTDIR"
 
     IfErrors 0 SkipDeleteDir

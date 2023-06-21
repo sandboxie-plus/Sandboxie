@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.9.8 / 5.64.8] - 2023-06-??
+## [1.9.8 / 5.64.8] - 2023-06-21
 
 ### Changed
 - improved uninstall process in the Sandboxie Classic installer (thanks sredna) [#3044](https://github.com/sandboxie-plus/Sandboxie/pull/3044)

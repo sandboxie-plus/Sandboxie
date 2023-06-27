@@ -6937,7 +6937,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1418"/>
         <source>Default sandbox:</source>
-        <translation>默认沙盒:</translation>
+        <translation>默认沙盒：</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1654"/>

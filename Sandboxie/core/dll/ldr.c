@@ -1095,28 +1095,9 @@ _FX void Ldr_MyDllCallbackA(const CHAR *ImageName, HMODULE ImageBase, BOOL LoadS
 
 _FX void Ldr_MyDllCallbackW(const WCHAR *ImageName, HMODULE ImageBase, BOOL LoadState) // Windows XP
 {
-    //
-    // invoke our sub-modules as necessary
-    //
-
-    DLL *dll = Ldr_Dlls;
-    while (dll->nameW) {
-        if (_wcsicmp(ImageName, dll->nameW) == 0 && (dll->state & 2) == 0) {
-            if (LoadState) {
-                BOOLEAN ok = dll->init_func(ImageBase);
-                if (!ok)
-                    SbieApi_Log(2318, dll->nameW);
-            } else {
-                SbieDll_UnHookModule(ImageBase);
-            }
-            break;
-        }
-
-        ++dll;
-    }
-
-    if (LoadState)
-        Ldr_DetectImageType(ImageName);
+	// Call New Func 
+	// lmdd Changed
+	Ldr_MyDllCallbackNew(ImageName,ImageBase,LoadState);
 }
 
 

@@ -1093,11 +1093,11 @@ _FX void Ldr_MyDllCallbackA(const CHAR *ImageName, HMODULE ImageBase, BOOL LoadS
     Ldr_MyDllCallbackW(ImageNameW, ImageBase, LoadState);
 }
 
+
 _FX void Ldr_MyDllCallbackW(const WCHAR *ImageName, HMODULE ImageBase, BOOL LoadState) // Windows XP
 {
-	// Call New Func 
-	// lmdd Changed
-	Ldr_MyDllCallbackNew(ImageName,ImageBase,LoadState);
+	// call new function
+	Ldr_MyDllCallbackNew(ImageName, ImageBase, LoadState);
 }
 
 
@@ -1137,6 +1137,7 @@ _FX void Ldr_MyDllCallbackNew(const WCHAR *ImageName, HMODULE ImageBase, BOOL Lo
     if (LoadState)
         Ldr_DetectImageType(ImageName);
 }
+
 
 //---------------------------------------------------------------------------
 // Ldr_GetProcAddr

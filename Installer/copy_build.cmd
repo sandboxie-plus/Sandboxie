@@ -111,6 +111,8 @@ copy /y %qtPath%\translations\qtxmlpatterns_*.qm %instPath%\translations\
 "C:\Program Files\7-Zip\7z.exe" a %instPath%\translations.7z %instPath%\translations\*
 rmdir /S /Q %instPath%\translations\
 
+"C:\Program Files\7-Zip\7z.exe" a %instPath%\troubleshooting.7z %~dp0..\SandboxiePlus\SandMan\Troubleshooting\*
+
 ECHO Copying Sandboxie
 
 copy /y %sbiePath%\SbieSvc.exe %instPath%\

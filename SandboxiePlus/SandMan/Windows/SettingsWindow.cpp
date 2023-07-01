@@ -375,7 +375,6 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.lblUpdateAddons, &QLabel::linkActivated, this, [=]() {
 		theGUI->GetAddonManager()->UpdateAddons();
 	});
-	}
 
 	//
 

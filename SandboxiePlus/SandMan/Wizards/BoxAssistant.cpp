@@ -79,8 +79,14 @@ CBoxAssistant::CBoxAssistant(QWidget *parent)
     C7zFileEngineHandler IssueFS("issue");
     LoadIssues(GetIssueDir(IssueFS, &m_IssueDate));
     if (m_IssueDate.isValid()) {
-        if (theConf->GetInt("Options/CheckForIssues", 2) == 1)
-            theGUI->m_pUpdater->GetUpdates(this, SLOT(OnUpdateData(const QVariantMap&, const QVariantMap&)));
+        if (theConf->GetInt("Options/CheckForIssues", 2) == 1) {
+
+            QVariantMap Data = theGUI->m_pUpdater->GetUpdateData();
+            if (!Data.isEmpty() && Data.contains("issues") && theGUI->m_pUpdater->GetLastUpdateTime() > QDateTime::currentDateTime().addDays(-1)) 
+                OnUpdateData(Data, QVariantMap());
+            else
+                theGUI->m_pUpdater->GetUpdates(this, SLOT(OnUpdateData(const QVariantMap&, const QVariantMap&)));
+        }
     }
 }
 

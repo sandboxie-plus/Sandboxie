@@ -282,6 +282,7 @@ void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Pa
 		bNothing = false;
 
 	m_UpdateData = Data;
+	m_LastUpdate = QDateTime::currentDateTime();
 	
 	bool PendingUpdate = HandleUpdate();
 	theGUI->UpdateLabel();

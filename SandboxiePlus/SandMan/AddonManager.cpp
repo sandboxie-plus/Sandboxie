@@ -20,6 +20,22 @@ CAddonManager::CAddonManager(QObject* parent)
 	
 }
 
+void CAddonManager::UpdateAddonsWhenNotCached()
+{
+	QVariantMap Data = theGUI->m_pUpdater->GetUpdateData();
+	if (!Data.isEmpty() && Data.contains("addons") && theGUI->m_pUpdater->GetLastUpdateTime() > QDateTime::currentDateTime().addDays(-1)) {
+		OnUpdateData(Data, QVariantMap());
+		return;
+	}
+	else if (!m_Addons.isEmpty()) {
+		QFileInfo info(theConf->GetConfigDir() + "/addons.json");
+		if (info.birthTime() > QDateTime::currentDateTime().addDays(-1))
+			return;
+	}
+
+	UpdateAddons();
+}
+
 void CAddonManager::UpdateAddons()
 {
 	theGUI->m_pUpdater->GetUpdates(this, SLOT(OnUpdateData(const QVariantMap&, const QVariantMap&)));
@@ -33,6 +49,7 @@ void CAddonManager::OnUpdateData(const QVariantMap& Data, const QVariantMap& Par
     QVariantMap Addons = Data["addons"].toMap();
 
 	QJsonDocument doc(QJsonValue::fromVariant(Addons).toObject());			
+	QFile::remove(theConf->GetConfigDir() + "/addons.json");
 	WriteStringToFile(theConf->GetConfigDir() + "/addons.json", doc.toJson());
 
 	LoadAddons();

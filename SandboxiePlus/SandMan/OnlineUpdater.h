@@ -34,6 +34,9 @@ public:
 	void				GetUpdates(QObject* receiver, const char* member, const QVariantMap& Params = QVariantMap());
 	void				DownloadFile(const QString& Url, QObject* receiver, const char* member, const QVariantMap& Params = QVariantMap());
 
+	QVariantMap			GetUpdateData() { return m_UpdateData; }
+	QDateTime			GetLastUpdateTime() { return m_LastUpdate; }
+
 	void				UpdateCert(bool bWait = false);
 
 	void				CheckForUpdates(bool bManual = false);
@@ -104,5 +107,6 @@ protected:
 		ePendingInstall
 	}					m_CheckMode;
 	QVariantMap			m_UpdateData;
+	QDateTime			m_LastUpdate;
 	QProcess*			m_pUpdaterUtil;
 };

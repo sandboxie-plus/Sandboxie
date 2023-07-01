@@ -29,6 +29,7 @@ public:
 
 	bool LoadAddons();
 
+	void UpdateAddonsWhenNotCached();
 	void UpdateAddons();
 
 	QList<CAddonPtr> GetAddons();

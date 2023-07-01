@@ -372,13 +372,9 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.btnInstallAddon, SIGNAL(clicked(bool)), this, SLOT(OnInstallAddon()));
 	connect(ui.btnRemoveAddon, SIGNAL(clicked(bool)), this, SLOT(OnRemoveAddon()));
 
-	if (theConf->GetInt("Options/CheckForAddons", 2) == 1) {
-		ui.lblUpdateAddons->setVisible(false);
+	connect(ui.lblUpdateAddons, &QLabel::linkActivated, this, [=]() {
 		theGUI->GetAddonManager()->UpdateAddons();
-	} else {
-		connect(ui.lblUpdateAddons, &QLabel::linkActivated, this, [=]() {
-			theGUI->GetAddonManager()->UpdateAddons();
-		});
+	});
 	}
 
 	//
@@ -1560,6 +1556,13 @@ void CSettingsWindow::OnTab(QWidget* pTab)
 				GetUpdates();
 			else
 				ui.lblCurrent->setText(tr("<a href=\"check\">Check Now</a>"));
+		}
+	}
+	else if (pTab == ui.tabAddons)
+	{
+		if (theConf->GetInt("Options/CheckForAddons", 2) == 1) {
+			ui.lblUpdateAddons->setVisible(false);
+			theGUI->GetAddonManager()->UpdateAddonsWhenNotCached();
 		}
 	}
 	else if (pTab == ui.tabEdit)

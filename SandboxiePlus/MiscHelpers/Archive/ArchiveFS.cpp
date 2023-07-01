@@ -198,8 +198,10 @@ QDateTime C7zFileEngine::fileTime(FileTime time) const
 
 void C7zFileEngine::setFileName(const QString& file)
 {
-    int pos = file.indexOf(":") + 2;
+    int pos = file.indexOf(":") + 1;
     _filename = file.mid(pos);
+    while (_filename.left(1) == "\\" || _filename.left(1) == "/")
+        _filename.remove(0, 1);
 
     if (_filename.isEmpty()) { // root
         _flags = ExistsFlag | DirectoryType | ReadOwnerPerm | ReadUserPerm | ReadGroupPerm | ReadOtherPerm;
@@ -268,20 +270,34 @@ bool C7zFileEngine::supportsExtension(Extension extension) const
 // C7zFileEngineHandler
 // 
 
-C7zFileEngineHandler::C7zFileEngineHandler(const QString& ArchivePath, const QString& Scheme, QObject* parent)
+C7zFileEngineHandler::C7zFileEngineHandler(const QString& Scheme, QObject* parent)
     : QObject(parent), m_pArchive(NULL)
 {
-    CArchive* pArchive = new CArchive(ArchivePath);
-    if (pArchive->Open() > 0)
-        m_pArchive = pArchive;
-    else
-        delete pArchive;
     m_Scheme = Scheme + ":";
 }
 
 C7zFileEngineHandler::~C7zFileEngineHandler()
 {
+    Close();
+}
+
+bool C7zFileEngineHandler::Open(const QString& ArchivePath)
+{
+    Close();
+
+    CArchive* pArchive = new CArchive(ArchivePath);
+    if (pArchive->Open() <= 0) {
+        delete pArchive;
+        return false;
+    }
+    m_pArchive = pArchive;
+    return true;
+}
+
+void C7zFileEngineHandler::Close()
+{
     delete m_pArchive;
+    m_pArchive = NULL;
 }
 
 QAbstractFileEngine* C7zFileEngineHandler::create(const QString& filename) const

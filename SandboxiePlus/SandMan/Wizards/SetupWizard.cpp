@@ -8,16 +8,19 @@
 #include <QButtonGroup>
 #include "../QSbieAPI/SbieUtils.h"
 
-QString emailRegExp = QStringLiteral(".+@.+");
-
-CSetupWizard::CSetupWizard(QWidget *parent)
+CSetupWizard::CSetupWizard(int iOldLevel, QWidget *parent)
     : QWizard(parent)
 {
-    setPage(Page_Intro, new CIntroPage);
-    setPage(Page_Certificate, new CCertificatePage);
-    setPage(Page_UI, new CUIPage);
-    setPage(Page_Shell, new CShellPage);
-    setPage(Page_WFP, new CWFPPage);
+    if (iOldLevel < SETUP_LVL_1) {
+        setPage(Page_Intro, new CIntroPage);
+        setPage(Page_Certificate, new CCertificatePage);
+        setPage(Page_UI, new CUIPage);
+        setPage(Page_Shell, new CShellPage);
+        //setPage(Page_WFP, new CWFPPage);
+    }
+    if (iOldLevel < SETUP_LVL_2) {
+        setPage(Page_Update, new CSBUpdate);
+    }
     setPage(Page_Finish, new CFinishPage);
 
     setWizardStyle(ModernStyle);
@@ -51,46 +54,83 @@ void CSetupWizard::showHelp()
     lastHelpMessage = message;
 }
 
-bool CSetupWizard::ShowWizard()
+bool CSetupWizard::ShowWizard(int iOldLevel)
 {
-    CSetupWizard wizard;
+    CSetupWizard wizard(iOldLevel, theGUI);
     if (!theGUI->SafeExec(&wizard))
         return false;
     
-    //bool useBusiness = wizard.field("useBusiness").toBool();
-    //QString Certificate = wizard.field("useCertificate").toString();
-    //bool isEvaluate = wizard.field("isEvaluate").toBool();
+    if (iOldLevel < SETUP_LVL_1) {
+        //bool useBusiness = wizard.field("useBusiness").toBool();
+        //QString Certificate = wizard.field("useCertificate").toString();
+        //bool isEvaluate = wizard.field("isEvaluate").toBool();
 
-    if (wizard.field("useAdvanced").toBool())
-        theConf->SetValue("Options/ViewMode", 1);
-    else if (wizard.field("useSimple").toBool())
-        theConf->SetValue("Options/ViewMode", 0);
-    else if (wizard.field("useClassic").toBool())
-        theConf->SetValue("Options/ViewMode", 2);
-    
-    if (wizard.field("useBrightMode").toInt())
-        theConf->SetValue("Options/UseDarkTheme", 0);
-    else if (wizard.field("useDarkMode").toInt())
-        theConf->SetValue("Options/UseDarkTheme", 1);
+        if (wizard.field("useAdvanced").toBool())
+            theConf->SetValue("Options/ViewMode", 1);
+        else if (wizard.field("useSimple").toBool())
+            theConf->SetValue("Options/ViewMode", 0);
+        else if (wizard.field("useClassic").toBool())
+            theConf->SetValue("Options/ViewMode", 2);
 
-    AutorunEnable(wizard.field("isAutoStart").toBool());
-    
-    if (wizard.field("useContecxtMenu").toBool())
-        CSettingsWindow__AddContextMenu();
+        if (wizard.field("useBrightMode").toInt())
+            theConf->SetValue("Options/UseDarkTheme", 0);
+        else if (wizard.field("useDarkMode").toInt())
+            theConf->SetValue("Options/UseDarkTheme", 1);
 
-    if (wizard.field("useBrowserIcon").toBool())
-        CSettingsWindow__AddBrowserIcon();
+        AutorunEnable(wizard.field("isAutoStart").toBool());
 
-    if (wizard.field("useWFP").toBool()) {
-        theAPI->GetGlobalSettings()->SetBool("NetworkEnableWFP", true);
-        theAPI->ReloadConfig(true);
+        if (wizard.field("useContecxtMenu").toBool())
+            CSettingsWindow::AddContextMenu();
+
+        if (wizard.field("useBrowserIcon").toBool())
+            CSettingsWindow::AddBrowserIcon();
+
+        //if (wizard.field("useWFP").toBool()) {
+        //    theAPI->GetGlobalSettings()->SetBool("NetworkEnableWFP", true);
+        //    theAPI->ReloadConfig(true);
+        //}
     }
 
-    if (wizard.field("isUpdate").toBool()) {
-        theConf->SetValue("Options/CheckForUpdates", 1);
+    if (iOldLevel < SETUP_LVL_2) {
+
+        if (wizard.field("updateAll").toBool())
+        {
+            theConf->SetValue("Options/CheckForUpdates", 1);
+            theConf->SetValue("Options/OnNewUpdate", "install");
+            //theConf->SetValue("Options/CheckForTemplates", 1);
+            theConf->SetValue("Options/CheckForIssues", 1);
+            theConf->SetValue("Options/CheckForAddons", 1);
+        }
+        else
+        {
+            if(wizard.field("updateApp").toBool())
+                theConf->SetValue("Options/CheckForUpdates", 1);
+            if(wizard.field("applyHotfixes").toBool())
+                theConf->SetValue("Options/OnNewUpdate", "install");
+            //if(wizard.field("updateCompat").toBool())
+            //    theConf->SetValue("Options/CheckForTemplates", 1);
+            if(wizard.field("updateIssues").toBool())
+                theConf->SetValue("Options/CheckForIssues", 1);
+            if(wizard.field("updateAddons").toBool())
+                theConf->SetValue("Options/CheckForAddons", 1);
+        }
+
+        if (wizard.field("updateAll").toBool() || wizard.field("updateApp").toBool()) {
+            QString ReleaseChannel;
+            if (wizard.field("channelStable").toBool())
+                ReleaseChannel = "stable";
+            else if (wizard.field("channelPreview").toBool())
+                ReleaseChannel = "preview";
+            else if (wizard.field("channelInsider").toBool())
+                ReleaseChannel = "insider";
+            if (!ReleaseChannel.isEmpty()) theConf->SetValue("Options/ReleaseChannel", ReleaseChannel);
+        }
     }
 
-    theConf->SetValue("Options/WizardLevel", 1);
+    //if (wizard.field("isUpdate").toBool())
+    //    theConf->SetValue("Options/CheckForUpdates", 1);
+
+    theConf->SetValue("Options/WizardLevel", SETUP_LVL_CURRENT);
 
     theGUI->UpdateSettings(true);
     
@@ -101,7 +141,7 @@ void CSetupWizard::ShellUninstall()
 {
     AutorunEnable(false);
 
-	CSettingsWindow__RemoveContextMenu();
+	CSettingsWindow::RemoveContextMenu();
 	CSbieUtils::RemoveContextMenu2();
 
     // todo: delete desktop browser shortcut and start menu integration
@@ -439,7 +479,8 @@ CShellPage::CShellPage(QWidget *parent)
 
 int CShellPage::nextId() const
 {
-    return CSetupWizard::Page_WFP;
+    //return CSetupWizard::Page_WFP;
+    return CSetupWizard::Page_Update;
     //return CSetupWizard::Page_Finish;
 }
 
@@ -447,7 +488,7 @@ int CShellPage::nextId() const
 // CWFPPage
 // 
 
-CWFPPage::CWFPPage(QWidget *parent)
+/*CWFPPage::CWFPPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Configure <b>Sandboxie-Plus</b> network filtering"));
@@ -477,6 +518,147 @@ CWFPPage::CWFPPage(QWidget *parent)
 int CWFPPage::nextId() const
 {
     return CSetupWizard::Page_Finish;
+}*/
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// CSBUpdate
+// 
+
+CSBUpdate::CSBUpdate(QWidget *parent)
+    : QWizardPage(parent)
+{
+    setTitle(tr("Configure <b>Sandboxie-Plus</b> updater"));
+    setSubTitle(tr("Like with any other security product it's important to keep your Sandboxie-Plus up to date."));
+
+    QGridLayout *layout = new QGridLayout;
+    layout->setSpacing(3);
+
+    int row = 0;
+    int rows = 4;
+
+    m_pUpdate = new QCheckBox(tr("Regularly Check for all udpates to Sandboxie-Plus and optional components"));
+    m_pUpdate->setToolTip(tr("Let sandboxie regularly check for latest updates."));
+    layout->addWidget(m_pUpdate, row++, 0, 1, rows);
+    connect(m_pUpdate, &QCheckBox::toggled, this, &CSBUpdate::UpdateOptions);
+    registerField("updateAll", m_pUpdate);
+
+    QWidget* pSpacer = new QWidget();
+    pSpacer->setMinimumHeight(16);
+    pSpacer->setMaximumWidth(16);
+    layout->addWidget(pSpacer, row+5, 0, 1, 1);
+
+    m_pVersion = new QCheckBox(tr("Check for new Sandboxie-Plus versions:"));
+    m_pVersion->setToolTip(tr("Check for new Sandboxie-Plus builds."));
+    layout->addWidget(m_pVersion, row++, 1, 1, rows-2);
+    //layout->addWidget(new QComboBox(), row-1, 3, 1, 1);
+    connect(m_pVersion, &QCheckBox::toggled, this, &CSBUpdate::UpdateOptions);
+    registerField("updateApp", m_pVersion);
+
+    m_pChanelInfo = new QLabel(tr("Sellect in which update channel to look for new Sandboxie-Plus builds:"));
+    m_pChanelInfo->setMinimumHeight(20);
+    layout->addWidget(m_pChanelInfo, row++, 1, 1, rows-1);
+
+    pSpacer = new QWidget();
+    pSpacer->setMinimumHeight(16);
+    pSpacer->setMaximumWidth(16);
+    layout->addWidget(pSpacer, row, 1, 1, 1);
+
+    m_pStable = new QRadioButton(tr("In the Stable Channel"));
+    m_pStable->setToolTip(tr("The stable channel contains the latest stable GitHub releases."));
+    layout->addWidget(m_pStable, row++, 2, 1, rows-2);
+    registerField("channelStable", m_pStable);
+
+    m_pPreview = new QRadioButton(tr("In the Preview Channel - with newest experimental changes"));
+    m_pPreview->setToolTip(tr("The preview channel contains the latest GitHub pre-releases."));
+    layout->addWidget(m_pPreview, row++, 2, 1, rows-2);
+    registerField("channelPreview", m_pPreview);
+
+    m_pInsider = new QRadioButton(tr("In the Insider Channel - exclusive features"));
+    m_pInsider->setToolTip(tr("The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, "
+        "as well as all relevant improvements from the stable channel. \nUnlike the preview channel, it does not include untested, potentially breaking, "
+        "or experimental changes that may not be ready for wider use."));
+    layout->addWidget(m_pInsider, row, 2, 1, 1);
+    registerField("channelInsider", m_pInsider);
+    QLabel* pInsiderInfo = new QLabel(tr("More about the <a href=\"https://sandboxie-plus.com/go.php?to=sbie-insider\">Insider Channel</a>"));
+    connect(pInsiderInfo, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+    layout->addWidget(pInsiderInfo, row++, 3, 1, 1);
+
+    //m_pTemplates = new QCheckBox(tr("Keep Compatybility Templates up to date"));
+    //m_pTemplates->setToolTip(tr("Check for latest compatybility tempaltes."));
+    //layout->addWidget(m_pTemplates, row++, 1, 1, rows-1);
+    //registerField("updateCompat", m_pTemplates);
+
+    m_pHotfixes = new QCheckBox(tr("Keep Compatybility Templates up to date and apply hotfixes"));
+    m_pHotfixes->setToolTip(tr("Check for latest compatybility tempaltes and hotfixes."));
+    layout->addWidget(m_pHotfixes, row++, 1, 1, rows-1);
+    registerField("applyHotfixes", m_pHotfixes);
+
+    m_pIssues = new QCheckBox(tr("Get the latest Scripts for the Troubleshooting Wizard"));
+    m_pIssues->setToolTip(tr("Check for latest troubleshooting scripts for the troubleshooting wizars."));
+    layout->addWidget(m_pIssues, row++, 1, 1, rows-1);
+    registerField("updateIssues", m_pIssues);
+
+    m_pAddons = new QCheckBox(tr("Keep the list of optional Addon components up to date"));
+    m_pAddons->setToolTip(tr("Check for latest avaialble addons."));
+    layout->addWidget(m_pAddons, row++, 1, 1, rows-1);
+    registerField("updateAddons", m_pAddons);
+
+    m_pUpdateInfo = new QLabel();
+    m_pUpdateInfo->setWordWrap(true);
+    //m_pUpdateInfo->setText(tr("Sandboxie-Plus applies many application restrictions which may occasionally lead to compatibility issues, necessitating mitigation efforts. "
+    //    "Compatibility may be broken by new Windows updates and changes within sandboxed applications themselves. "
+    //    "To ensure smooth operation, it is highly recommended to regularly check for Sandboxie-Plus updates, apply the latest compatibility templates, and keep troubleshooting scripts up-to-date."));
+    m_pUpdateInfo->setText(tr("Sandboxie-Plus applies strict application restrictions, which can lead to compatibility issues. "
+        "Stay updated with Sandboxie-Plus, including compatibility templates and troubleshooting, to ensure smooth operation amid Windows updates and application changes."));
+    layout->addWidget(m_pUpdateInfo, row++, 0, 1, rows);
+
+    layout->addItem(new QSpacerItem(10, 10, QSizePolicy::Fixed, QSizePolicy::Expanding), row++, 0);
+
+    m_pBottomLabel = new QLabel(tr("Access to the latest compatibility templates and the online troubleshooting database requires a valid <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>."));
+    connect(m_pBottomLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+    m_pBottomLabel->setWordWrap(true);
+    layout->addWidget(m_pBottomLabel, row++, 0, 1, rows);
+
+    setLayout(layout);
+}
+
+void CSBUpdate::initializePage()
+{
+    m_pUpdate->setChecked(true);
+    m_pStable->setChecked(true);
+
+    m_pBottomLabel->setVisible(!g_CertInfo.valid || g_CertInfo.expired);
+
+    UpdateOptions();
+}
+
+void CSBUpdate::UpdateOptions()
+{
+    m_pVersion->setVisible(!m_pUpdate->isChecked());
+    //m_pTemplates->setVisible(!m_pUpdate->isChecked());
+    m_pHotfixes->setVisible(!m_pUpdate->isChecked());
+    m_pIssues->setVisible(!m_pUpdate->isChecked());
+    m_pAddons->setVisible(!m_pUpdate->isChecked());
+    m_pChanelInfo->setVisible(m_pUpdate->isChecked());
+    m_pUpdateInfo->setVisible(m_pUpdate->isChecked());
+
+    if (m_pUpdate->isChecked()) {
+        m_pVersion->setChecked(true);
+        //m_pTemplates->setChecked(true);
+        m_pIssues->setChecked(true);
+        m_pAddons->setChecked(true);
+    }
+
+    m_pStable->setEnabled(m_pVersion->isChecked());
+    m_pPreview->setEnabled(m_pVersion->isChecked());
+    m_pInsider->setEnabled(g_CertInfo.insider && m_pVersion->isChecked());
+
+    m_pHotfixes->setEnabled(m_pVersion->isChecked());
+}
+
+int CSBUpdate::nextId() const
+{
+    return CSetupWizard::Page_Finish;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -496,19 +678,19 @@ CFinishPage::CFinishPage(QWidget *parent)
     m_pLabel->setText(tr("Almost complete, click Finish to apply all selected options and conclude the wizard."));
     layout->addWidget(m_pLabel);
 
-    QWidget* pSpacer = new QWidget();
-    pSpacer->setMinimumHeight(16);
-    layout->addWidget(pSpacer);
+    //QWidget* pSpacer = new QWidget();
+    //pSpacer->setMinimumHeight(16);
+    //layout->addWidget(pSpacer);
     
     //QLabel* pLabel = new QLabel;
     //pLabel->setWordWrap(true);
     //pLabel->setText(tr("Like with any other security product it's important to keep your Sandboxie-Plus up to date."));
     //layout->addWidget(pLabel);
 
-    m_pUpdate = new QCheckBox(tr("Keep Sandboxie-Plus up to date."));
-    m_pUpdate->setChecked(true);
-    layout->addWidget(m_pUpdate);
-    registerField("isUpdate", m_pUpdate);
+    //m_pUpdate = new QCheckBox(tr("Keep Sandboxie-Plus up to date."));
+    //m_pUpdate->setChecked(true);
+    //layout->addWidget(m_pUpdate);
+    //registerField("isUpdate", m_pUpdate);
 
     setLayout(layout);
 }

@@ -1,4 +1,31 @@
-#include "../framework.h"
+/* 
+ * Copyright (c) 2020-2023, David Xanatos
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
+// Windows Header Files
+#include <windows.h>
+// C RunTime Header Files
+#include <stdlib.h>
+#include <malloc.h>
+#include <memory.h>
+#include <tchar.h>
+#include <winternl.h>
+
+#include "helpers.h"
 #include "dirent.h"
 
 OSVERSIONINFOW g_osvi;
@@ -59,4 +86,25 @@ std::wstring hexStr(unsigned char* data, int len)
 		s[2 * i + 1] = hexmap[data[i] & 0x0F];
 	}
 	return s;
+}
+
+bool FileExists(const wchar_t* path)
+{
+	if (GetFileAttributes(path) == INVALID_FILE_ATTRIBUTES && GetLastError() == ERROR_FILE_NOT_FOUND)
+		return false;
+	return true;
+}
+
+void DbgPrint(const wchar_t* format, ...)
+{
+    va_list va_args;
+    va_start(va_args, format);
+    
+    wchar_t tmp1[510];
+
+    _vsnwprintf(tmp1, sizeof(tmp1), format, va_args);
+
+    OutputDebugStringW(tmp1);
+
+    va_end(va_args);
 }

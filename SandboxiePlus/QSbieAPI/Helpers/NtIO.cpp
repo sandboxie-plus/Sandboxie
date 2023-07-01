@@ -170,8 +170,10 @@ NTSTATUS NtIo_DeleteFolderRecursively(POBJECT_ATTRIBUTES objattrs, bool (*cb)(co
 
 	NTSTATUS status = NtIo_DeleteFolderRecursivelyImpl(objattrs, cb, param);
 
-	if (NT_SUCCESS(status))
+	if (NT_SUCCESS(status)) {
+		NtIo_RemoveJunction(objattrs);
 		status = NtDeleteFile(objattrs);
+	}
 
 	return status;
 }

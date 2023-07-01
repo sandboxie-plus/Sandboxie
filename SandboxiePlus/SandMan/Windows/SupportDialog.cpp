@@ -4,6 +4,7 @@
 #include "../MiscHelpers/Common/Common.h"
 #include "SettingsWindow.h"
 #include <Windows.h>
+#include "OnlineUpdater.h"
 
 bool CSupportDialog::m_ReminderShown = false;
 
@@ -32,13 +33,34 @@ bool CSupportDialog::IsBusinessUse()
 
 bool CSupportDialog::CheckSupport(bool bOnRun)
 {
+	bool NoGo = false;
+
+#ifdef INSIDER_BUILD
+	if (g_CertInfo.valid) {
+		if (!g_CertInfo.insider) {
+			TArguments args = GetArguments(g_Certificate, L'\n', L':');
+			if (args.value("TYPE").contains("PATREON")) {
+				if (QMessageBox::question(NULL, "Sandboxie-Plus", tr("This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.\r\n"
+					"If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate."), QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok) {
+					theGUI->m_pUpdater->UpdateCert(true);
+					if (g_CertInfo.insider)
+						return false;
+				}
+			}
+			else
+				QMessageBox::warning(NULL, "Sandboxie-Plus", tr("This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR."));
+		}
+		else
+			return false;
+	}
+
+	NoGo = true;
+#else
 	if (g_CertInfo.valid)
 		return false;
 
 	QDateTime InstallDate = GetSbieInstallationDate();
 	bool bOnARM64 = (g_FeatureFlags & CSbieAPI::eSbieFeatureARM64) != 0;
-
-	bool NoGo = false;
 
 	QDateTime CurretnDate = QDateTime::currentDateTimeUtc();
 	int Days = InstallDate.daysTo(CurretnDate);
@@ -92,6 +114,7 @@ bool CSupportDialog::CheckSupport(bool bOnRun)
 			return false;
 	}
 	m_ReminderShown = true;
+#endif
 
 	if (!ShowDialog(NoGo))
 		PostQuitMessage(0);
@@ -107,6 +130,13 @@ bool CSupportDialog::ShowDialog(bool NoGo, int Wait)
 
 	QString Message;
 
+#ifdef INSIDER_BUILD
+	if (!g_CertInfo.insider)
+	{
+		Message += tr("This is a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-insider\">exclusive Insider build</a> of Sandboxie-Plus it is only available to <a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Patreon Supporters</a> on higher tiers as well as to project contributors and owners of a HUGE supporter certificate.");
+	}
+	else
+#endif
 	if (IsBusinessUse()) 
 	{
 		if (g_CertInfo.expired) {
@@ -272,7 +302,22 @@ void CSupportDialog::OnButton()
 		CSettingsWindow* pSettingsWindow = new CSettingsWindow(this);
 		pSettingsWindow->showTab(CSettingsWindow::eSupport, true);
 		connect(pSettingsWindow, &CSettingsWindow::Closed, [this]() {
-			if(g_CertInfo.valid)
+#ifdef INSIDER_BUILD
+			if (g_CertInfo.valid && !g_CertInfo.insider) {
+				TArguments args = GetArguments(g_Certificate, L'\n', L':');
+				if (args.value("TYPE").contains("PATREON")) {
+					theGUI->m_pUpdater->UpdateCert(true);
+					if (g_CertInfo.insider) {
+						accept();
+						return;
+					}
+				}
+
+				QMessageBox::warning(this, "Sandboxie-Plus", tr("This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR."));
+				return;
+			}
+#endif
+			if (g_CertInfo.valid)
 				accept();
 		});
 	}

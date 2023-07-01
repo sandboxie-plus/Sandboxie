@@ -919,7 +919,7 @@ void COptionsWindow::SaveConfig()
 	}
 	catch (SB_STATUS Status)
 	{
-		theGUI->CheckResults(QList<SB_STATUS>() << Status);
+		theGUI->CheckResults(QList<SB_STATUS>() << Status, this);
 	}
 
 	m_pBox->SetRefreshOnChange(true);

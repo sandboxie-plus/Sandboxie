@@ -28,6 +28,8 @@ CNewBoxWizard::CNewBoxWizard(bool bAlowTemp, QWidget *parent)
     connect(this, &QWizard::helpRequested, this, &CNewBoxWizard::showHelp);
 
     setWindowTitle(tr("New Box Wizard"));
+
+    setMinimumWidth(600);
 }
 
 void CNewBoxWizard::showHelp()
@@ -120,8 +122,10 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
         }
         pBox->SetBool("BlockNetworkFiles", !field("shareAccess").toBool());
 
-        if(field("fakeAdmin").toBool())
+        if (field("fakeAdmin").toBool()) {
+            pBox->SetBool("DropAdminRights", true);
             pBox->SetBool("FakeAdminRights", true);
+        }
         if(field("msiServer").toBool())
             pBox->SetBool("MsiInstallerExemptions", true);
 
@@ -617,7 +621,8 @@ bool CSummaryPage::validatePage()
 
     SB_STATUS Status = ((CNewBoxWizard*)wizard())->TryToCreateBox();
     if (Status.IsError()) {
-        QMessageBox::critical(this, "Sandboxie-Plus", tr("Failed to create new box: %1").arg(theGUI->FormatError(Status)));
+        if(Status.GetMsgCode() != SB_Canceled)
+            QMessageBox::critical(this, "Sandboxie-Plus", tr("Failed to create new box: %1").arg(theGUI->FormatError(Status)));
         return false;
     }
     return true;

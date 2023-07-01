@@ -31,15 +31,17 @@ typedef long NTSTATUS;
 
 #include <winnt.h>
 
-//struct SBoxedProcess
-//{
-//};
+struct SBoxedProcess
+{
+	HANDLE Handle;
+};
 
 CBoxedProcess::CBoxedProcess(quint32 ProcessId, class CSandBox* pBox)
 {
 	m_pBox = pBox;
 
-	//m = new SBoxedProcess;
+	m = new SBoxedProcess;
+	m->Handle = NULL;
 
 	m_ProcessId = ProcessId;
 
@@ -48,6 +50,7 @@ CBoxedProcess::CBoxedProcess(quint32 ProcessId, class CSandBox* pBox)
 
 	m_ProcessFlags = 0;
 	m_ImageType = -1;
+	m_ReturnCode = STATUS_PENDING;
 
 	m_uTerminated = 0;
 	//m_bSuspended = IsSuspended();
@@ -57,7 +60,9 @@ CBoxedProcess::CBoxedProcess(quint32 ProcessId, class CSandBox* pBox)
 
 CBoxedProcess::~CBoxedProcess()
 {
-	//delete m;
+	if (m->Handle)
+		NtClose(m->Handle);
+	delete m;
 }
 
 
@@ -225,10 +230,10 @@ bool CBoxedProcess::InitProcessInfo()
 		ProcessHandle = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, (DWORD)m_ProcessId);
 	if (ProcessHandle == NULL)
 		return false;
+	m->Handle = ProcessHandle;
 
 	InitProcessInfoImpl(ProcessHandle);
 
-	NtClose(ProcessHandle);
 	return true;
 }
 
@@ -300,6 +305,11 @@ SB_STATUS CBoxedProcess::Terminate()
 void CBoxedProcess::SetTerminated()
 {
 	m_uTerminated = ::GetTickCount64();
+
+	DWORD ExitCode = 0;
+	if (m->Handle)
+		GetExitCodeProcess(m->Handle, &ExitCode);
+	m_ReturnCode = ExitCode;
 }
 
 bool CBoxedProcess::IsTerminated(quint64 forMs) const 

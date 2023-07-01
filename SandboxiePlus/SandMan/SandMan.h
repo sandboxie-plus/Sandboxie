@@ -21,6 +21,7 @@ class CFileView;
 class CBoxBorder;
 class CSbieTemplates;
 class CTraceView;
+class CAddonManager;
 
 struct ToolBarAction {
 	// Identifier of action stored in ini. Empty for separator.	
@@ -42,32 +43,37 @@ public:
 	virtual ~CSandMan();
 
 	CSbieTemplates*		GetCompat() { return m_SbieTemplates; }
+	void				CheckCompat(QObject* receiver, const char* member);
+	CAddonManager*		GetAddonManager() { return m_AddonManager; }
 
 	static QString		GetVersion();
 
 	bool				IsWFPEnabled() const;
 
 	SB_PROGRESS			RecoverFiles(const QString& BoxName, const QList<QPair<QString, QString>>& FileList, QWidget* pParent, int Action = 0);
+	static QStringList	GetFileCheckers(const CSandBoxPtr& pBox);
 	SB_PROGRESS			CheckFiles(const QString& BoxName, const QStringList& Files);
 
 	enum EDelMode {
-		eDefault,
+		eCleanUp,
 		eAuto,
 		eForDelete
 	};
 
 	SB_STATUS			DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, bool DeleteSnapshots = true);
 
-	SB_STATUS			AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait = false, const QString& InitialMsg = QString());
+	void				UpdateProcesses();
+
+	SB_STATUS			AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait = false, const QString& InitialMsg = QString(), QWidget* pParent = NULL);
 	static QString		FormatError(const SB_STATUS& Error);
-	static void			CheckResults(QList<SB_STATUS> Results, bool bAsync = false);
+	void				CheckResults(QList<SB_STATUS> Results, QWidget* pParent, bool bAsync = false);
 
 	static QIcon		GetIcon(const QString& Name, int iAction = 1);
 
 	bool				IsFullyPortable();
 
 	bool				IsShowHidden() { return m_pShowHidden && m_pShowHidden->isChecked(); }
-	bool				KeepTerminated() { return m_pKeepTerminated && m_pKeepTerminated->isChecked(); }
+	bool				KeepTerminated();
 	bool				ShowAllSessions() { return m_pShowAllSessions && m_pShowAllSessions->isChecked(); }
 	bool				IsSilentMode();
 	bool				IsDisableRecovery() {return IsSilentMode() || m_pDisableRecovery && m_pDisableRecovery->isChecked();}
@@ -78,6 +84,7 @@ public:
 	int					SafeExec(QDialog* pDialog);
 
 	bool				RunSandboxed(const QStringList& Commands, QString BoxName = QString(), const QString& WrkDir = QString());
+	SB_RESULT(quint32)	RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
 
 	QIcon				GetBoxIcon(int boxType, bool inUse = false);// , bool inBusy = false);
 	QRgb				GetBoxColor(int boxType) { return m_BoxColors[boxType]; }
@@ -92,6 +99,8 @@ public:
 	void				UpdateTitleTheme(const HWND& hwnd);
 
 	void				UpdateCertState();
+
+	void				SaveMessageLog(QIODevice* pFile);
 
 signals:
 	void				CertUpdated();
@@ -124,8 +133,9 @@ protected:
 	bool				m_bStopPending;
 	CBoxBorder*			m_pBoxBorder;
 	CSbieTemplates*		m_SbieTemplates;
+	CAddonManager*		m_AddonManager;
 	
-	QMap<CSbieProgress*, CSbieProgressPtr> m_pAsyncProgress;
+	QMap<CSbieProgress*, QPair<CSbieProgressPtr, QPointer<QWidget>>> m_pAsyncProgress;
 
 	QStringList			m_MissingTemplates;
 
@@ -171,6 +181,8 @@ public slots:
 	bool				OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteSnapshots, bool bCloseEmpty = false);
 	class CRecoveryWindow*	ShowRecovery(const CSandBoxPtr& pBox, bool bFind = true);
 
+	void				OpenCompat();
+
 	void				UpdateSettings(bool bRebuildUI);
 	void				RebuildUI();
 	void				OnIniReloaded();
@@ -214,6 +226,7 @@ private slots:
 	void				OnSettingsAction();
 	void				OnEmptyAll();
 	void				OnWndFinder();
+	void				OnBoxAssistant();
 	void				OnDisableForce();
 	void				OnDisableForce2();
 	void				OnDisablePopUp();
@@ -233,6 +246,8 @@ private slots:
 	void				OnEditIni();
 	void				OnReloadIni();
 	void				OnMonitoring();
+
+	void				OnSymbolStatus(const QString& Message);
 
 	void				CheckForUpdates(bool bManual = true);
 
@@ -380,6 +395,9 @@ private:
 	QAction*			m_pReloadIni;
 	QAction*			m_pEnableMonitoring;
 
+	//QMenu*				m_pMenuTools;
+	QAction*			m_pBoxAssistant;
+
 	QAction*			m_pSeparator;
 	QLabel*				m_pLabel;
 
@@ -434,6 +452,7 @@ private:
 public:
 	class COnlineUpdater*m_pUpdater;
 
+	QString				m_Language;
 	quint32				m_LanguageId;
 	bool				m_DarkTheme;
 	bool				m_FusionTheme;

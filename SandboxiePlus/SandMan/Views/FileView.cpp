@@ -219,7 +219,7 @@ int openShellContextMenu(const QStringList& Files, void* parentWindow, const CSa
         std::wstring Str3 = CFileView::tr("Recover to Same Folder").toStdWString();
         addItemToShellContextMenu(hMenu, Str3.c_str(), MENU_RECOVER);
         
-        if (!pBox->GetTextList("OnFileRecovery", true, false, true).isEmpty()) {
+        if (!CSandMan::GetFileCheckers(pBox).isEmpty()) {
             std::wstring Str4 = CFileView::tr("Run Recovery Checks").toStdWString();
             addItemToShellContextMenu(hMenu, Str4.c_str(), MENU_CHECK_FILE);
         }
@@ -354,7 +354,8 @@ void CFileView::OnFileMenu(const QPoint&)
 			if (Path.isEmpty())
 				return;
 
-			CSbieUtils::CreateShortcut(theAPI, Path, LinkName, BoxName, LinkPath, LinkPath);
+            QString StartExe = theAPI->GetSbiePath() + "\\SandMan.exe";
+			CSbieUtils::CreateShortcut(StartExe, Path, LinkName, BoxName, LinkPath, LinkPath);
 
             break;
         }

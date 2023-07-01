@@ -9,16 +9,20 @@ class QLineEdit;
 class QRadioButton;
 QT_END_NAMESPACE
 
+#define SETUP_LVL_1 1
+#define SETUP_LVL_2 2
+#define SETUP_LVL_CURRENT SETUP_LVL_2
+
 class CSetupWizard : public QWizard
 {
     Q_OBJECT
 
 public:
-    enum { Page_Intro, Page_Certificate, Page_UI, Page_Shell, Page_WFP, Page_Finish };
+    enum { Page_Intro, Page_Certificate, Page_UI, Page_Shell, Page_Update, Page_Finish };
 
-    CSetupWizard(QWidget *parent = nullptr);
+    CSetupWizard(int iOldLevel = 0, QWidget *parent = nullptr);
 
-    static bool ShowWizard();
+    static bool ShowWizard(int iOldLevel = 0);
 
     static void ShellUninstall();
 
@@ -117,7 +121,7 @@ private:
 // CWFPPage
 // 
 
-class CWFPPage : public QWizardPage
+/*class CWFPPage : public QWizardPage
 {
     Q_OBJECT
 
@@ -128,6 +132,39 @@ public:
 
 private:
     QCheckBox *m_pUseWFP;
+};*/
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// CSBUpdate
+// 
+
+class CSBUpdate : public QWizardPage
+{
+    Q_OBJECT
+
+public:
+    CSBUpdate(QWidget *parent = nullptr);
+    
+    void initializePage() override;
+
+    int nextId() const override;
+
+private slots:
+    void UpdateOptions();
+
+private:
+    QCheckBox* m_pUpdate;
+    QCheckBox* m_pVersion;
+    QLabel* m_pChanelInfo;
+    QRadioButton* m_pStable;
+    QRadioButton* m_pPreview;
+    QRadioButton* m_pInsider;
+    QCheckBox* m_pHotfixes;
+    //QCheckBox* m_pTemplates;
+    QCheckBox* m_pIssues;
+    QCheckBox* m_pAddons;
+    QLabel* m_pUpdateInfo;
+    QLabel* m_pBottomLabel;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -147,6 +184,6 @@ public:
 
 private:
     QLabel *m_pLabel;
-    QCheckBox *m_pUpdate;
+    //QCheckBox *m_pUpdate;
 };
 

@@ -336,7 +336,7 @@ CBrowserTypePage::CBrowserTypePage(QWidget *parent)
     layout->addWidget(new QLabel(tr("Enter browser name:")), row++, 0);
     
     m_pName = new QLineEdit();
-    m_pName->setMaxLength(32);
+    m_pName->setMaxLength(32); // BOXNAME_COUNT
     m_pName->setMaximumWidth(150);
     layout->addWidget(m_pName, row++, 0, 1, 1);
     connect(m_pName, SIGNAL(textChanged(const QString&)), this, SLOT(OnNameChanged()));

@@ -3,18 +3,8 @@
  * 
  * Based on the processhacker's CustomSignTool, Copyright 2016 wj32
  *
- * This program is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
+ * This program is free software under the MIT license.
  *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details.
- *
- *   You should have received a copy of the GNU General Public License
- *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <ntstatus.h>
@@ -381,11 +371,35 @@ CleanupExit:
 }
 
 
-NTSTATUS VerifyFileSignature(const wchar_t* FilePath)
+NTSTATUS VerifyFileSignatureImpl(const wchar_t* FilePath, PVOID Signature, ULONG SignatureSize)
 {
     NTSTATUS status;
     ULONG hashSize;
     PVOID hash = NULL;
+
+    // Hash the file.
+
+    if (!NT_SUCCESS(status = MyHashFile(FilePath, &hash, &hashSize)))
+        goto CleanupExit;
+
+    // Verify the hash.
+
+    if (!NT_SUCCESS(status = VerifyHashSignature((PUCHAR)hash, hashSize, (PUCHAR)Signature, SignatureSize)))
+    {
+        goto CleanupExit;
+    }
+
+CleanupExit:
+    if (hash)
+        free(hash);
+
+    return status;
+}
+
+
+NTSTATUS VerifyFileSignature(const wchar_t* FilePath)
+{
+    NTSTATUS status;
     ULONG signatureSize;
     PVOID signature = NULL;
     WCHAR* signatureFileName = NULL;
@@ -405,23 +419,13 @@ NTSTATUS VerifyFileSignature(const wchar_t* FilePath)
     if (!NT_SUCCESS(status = MyReadFile(signatureFileName, KPH_SIGNATURE_MAX_SIZE, &signature, &signatureSize)))
         goto CleanupExit;
 
-    // Hash the file.
+    // Verify the signature.
 
-    if (!NT_SUCCESS(status = MyHashFile(FilePath, &hash, &hashSize)))
-        goto CleanupExit;
-
-    // Verify the hash.
-
-    if (!NT_SUCCESS(status = VerifyHashSignature((PUCHAR)hash, hashSize, (PUCHAR)signature, signatureSize)))
-    {
-        goto CleanupExit;
-    }
+    status = VerifyFileSignatureImpl(FilePath, signature, signatureSize);
 
 CleanupExit:
     if (signature)
         free(signature);
-    if (hash)
-        free(hash);
     if (signatureFileName)
         free(signatureFileName);
 

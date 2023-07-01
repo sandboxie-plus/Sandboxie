@@ -24,7 +24,12 @@ public:
 		SWorker() : last(-1), handle(0) {}
 		quint64 last;
 		quint64 handle;
+		CSymbolProvider* pProvider;
+		QString LastMessage;
 	};
+
+signals:
+	void				StatusChanged(const QString& Message);
 
 protected:
 	//void				timerEvent(QTimerEvent* pEvent);

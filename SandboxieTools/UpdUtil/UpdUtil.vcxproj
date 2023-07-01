@@ -211,23 +211,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Common\dirent.h" />
-    <ClInclude Include="Common\helpers.h" />
-    <ClInclude Include="Common\json\JSON.h" />
-    <ClInclude Include="Common\json\JSONValue.h" />
-    <ClInclude Include="Common\WebUtils.h" />
+    <ClInclude Include="..\Common\dirent.h" />
+    <ClInclude Include="..\Common\helpers.h" />
+    <ClInclude Include="..\Common\json\JSON.h" />
+    <ClInclude Include="..\Common\json\JSONValue.h" />
+    <ClInclude Include="..\Common\WebUtils.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="UpdUtil.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Common\base64.c" />
-    <ClCompile Include="Common\helpers.cpp" />
-    <ClCompile Include="Common\json\JSON.cpp" />
-    <ClCompile Include="Common\json\JSONValue.cpp" />
-    <ClCompile Include="Common\verify.c" />
-    <ClCompile Include="Common\WebUtils.cpp" />
+    <ClCompile Include="..\Common\base64.c" />
+    <ClCompile Include="..\Common\helpers.cpp" />
+    <ClCompile Include="..\Common\json\JSON.cpp" />
+    <ClCompile Include="..\Common\json\JSONValue.cpp" />
+    <ClCompile Include="..\Common\verify.c" />
+    <ClCompile Include="..\Common\WebUtils.cpp" />
     <ClCompile Include="UpdUtilWnd.cpp" />
     <ClCompile Include="UpdUtil.cpp" />
   </ItemGroup>

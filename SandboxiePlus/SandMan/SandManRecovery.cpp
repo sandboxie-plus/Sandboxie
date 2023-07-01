@@ -72,17 +72,27 @@ CRecoveryWindow* CSandMan::ShowRecovery(const CSandBoxPtr& pBox, bool bFind)
 	return pBoxEx->m_pRecoveryWnd;
 }
 
-SB_PROGRESS CSandMan::CheckFiles(const QString& BoxName, const QStringList& Files)
+QStringList CSandMan::GetFileCheckers(const CSandBoxPtr& pBox)
 {
-	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
 	QStringList Checkers;
+
+	if (theGUI->GetAddonManager()->HasAddon("FileChecker"))
+		Checkers.append(pBox->Expand("powershell -exec bypass -nop -File \"%SbieHome%\\bin\\CheckFile.ps1\" -bin"));
+	
 	if (!pBox.isNull()) {
 		foreach(const QString & Value, pBox->GetTextList("OnFileRecovery", true, false, true)) {
 			Checkers.append(pBox->Expand(Value));
 		}
 	}
-	QtConcurrent::run(CSandMan::CheckFilesAsync, pProgress, BoxName, Files, Checkers);
+
+	return Checkers;
+}
+
+SB_PROGRESS CSandMan::CheckFiles(const QString& BoxName, const QStringList& Files)
+{
+	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
+	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
+	QtConcurrent::run(CSandMan::CheckFilesAsync, pProgress, BoxName, Files, GetFileCheckers(pBox));
 	return SB_PROGRESS(OP_ASYNC, pProgress);
 }
 
@@ -124,13 +134,7 @@ SB_PROGRESS CSandMan::RecoverFiles(const QString& BoxName, const QList<QPair<QSt
 {
 	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
 	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
-	QStringList Checkers;
-	if (!pBox.isNull()) {
-		foreach(const QString & Value, pBox->GetTextList("OnFileRecovery", true, false, true)) {
-			Checkers.append(pBox->Expand(Value));
-		}
-	}
-	QtConcurrent::run(CSandMan::RecoverFilesAsync, qMakePair(pProgress, pParent), BoxName, FileList, Checkers, Action);
+	QtConcurrent::run(CSandMan::RecoverFilesAsync, qMakePair(pProgress, pParent), BoxName, FileList, GetFileCheckers(pBox), Action);
 	return SB_PROGRESS(OP_ASYNC, pProgress);
 }
 

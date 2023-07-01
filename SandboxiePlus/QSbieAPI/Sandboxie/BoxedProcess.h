@@ -40,6 +40,7 @@ public:
 	virtual QDateTime		GetTimeStamp() const { return m_StartTime; }
 	virtual quint32			GetProcessFlags() const { return m_ProcessFlags; }
 	virtual quint32			GetImageType() const { return m_ImageType; }
+	virtual quint32			GetReturnCode() const { return m_ReturnCode; }
 
 	virtual SB_STATUS		Terminate();
 	virtual bool			IsTerminated(quint64 forMs = 0) const;
@@ -74,6 +75,7 @@ protected:
 	QString			m_CommandLine;
 	quint32			m_SessionId;
 	QDateTime		m_StartTime;
+	quint32			m_ReturnCode;
 	quint64			m_uTerminated;
 	//bool			m_bSuspended;
 	bool			m_bIsWoW64;
@@ -86,8 +88,8 @@ protected:
 
 	QHash<quint64, SSymbol> m_Symbols;
 
-//private:
-//	struct SBoxedProcess* m;
+private:
+	struct SBoxedProcess* m;
 };
 
 typedef QSharedPointer<CBoxedProcess> CBoxedProcessPtr;

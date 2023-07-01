@@ -1,14 +1,28 @@
-// UpdUtil.cpp : Defines the entry point for the application.
-//
+/*
+ * Copyright 2022-2023 David Xanatos, xanasoft.com
+ *
+ * This program is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
 #include "framework.h"
 #include <shellapi.h>
 #include <io.h>
 #include <fcntl.h>
 #include <iostream>
-#include "common/helpers.h"
-#include "common/WebUtils.h"
-#include "common/json/JSON.h"
+#include "../Common/helpers.h"
+#include "../Common/WebUtils.h"
+#include "../Common/json/JSON.h"
 #include "UpdUtil.h"
 
 
@@ -588,6 +602,8 @@ void PrintUsage()
 	std::wcout << L"" << std::endl;
 }
 
+
+
 bool HasFlag(const std::vector<std::wstring>& arguments, std::wstring name)
 {
 	return std::find(arguments.begin(), arguments.end(), L"/" + name) != arguments.end();
@@ -596,19 +612,12 @@ bool HasFlag(const std::vector<std::wstring>& arguments, std::wstring name)
 std::wstring GetArgument(const std::vector<std::wstring>& arguments, std::wstring name) 
 {
 	std::wstring prefix = L"/" + name + L":";
-	for (int i = 0; i < arguments.size(); i++) {
+	for (size_t i = 0; i < arguments.size(); i++) {
 		if (_wcsicmp(arguments[i].substr(0, prefix.length()).c_str(), prefix.c_str()) == 0) {
 			return arguments[i].substr(prefix.length());
 		}
 	}
 	return L"";
-}
-
-bool FileExists(const wchar_t* path)
-{
-	if (GetFileAttributes(path) == INVALID_FILE_ATTRIBUTES && GetLastError() == ERROR_FILE_NOT_FOUND)
-		return false;
-	return true;
 }
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,

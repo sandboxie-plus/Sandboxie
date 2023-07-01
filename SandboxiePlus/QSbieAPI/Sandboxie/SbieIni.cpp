@@ -104,7 +104,7 @@ __int64 CSbieIni::GetNum64(const QString& Setting, __int64 Default, bool bWithGl
 {
 	QString StrValue = GetText(Setting, QString(), bWithGlobal, true, withTemplates);
 	bool ok;
-	__int64 Value = StrValue.toULongLong(&ok);
+	__int64 Value = StrValue.toLongLong(&ok);
 	if (!ok) return Default;
 	return Value;
 }

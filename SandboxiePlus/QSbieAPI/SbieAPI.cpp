@@ -133,8 +133,8 @@ CSbieAPI::CSbieAPI(QObject* parent) : QThread(parent)
 {
 	m = new SSbieAPI();
 
-	m_pGlobalSection = new CSbieIni("GlobalSettings", this, this);
-	m_pUserSection = new CSbieIni("UserSettings", this, this); // dummy
+	m_pGlobalSection = QSharedPointer<CSbieIni>(new CSbieIni("GlobalSettings", this));
+	m_pUserSection = QSharedPointer<CSbieIni>(new CSbieIni("UserSettings", this)); // dummy
 
 	m_IniReLoad = false;
 	m_bReloadPending = false;
@@ -324,7 +324,7 @@ SB_STATUS CSbieAPI::Connect(bool takeOver, bool withQueue)
 	if (m_UserName.isEmpty()) {
 		QString UserSection = GetUserSection(&m_UserName);
 		if(!UserSection.isEmpty())
-			m_pUserSection = new CSbieIni(UserSection, this, this);
+			m_pUserSection = QSharedPointer<CSbieIni>(new CSbieIni(UserSection, this));
 	}
 
 	if (m_UserDir.isEmpty()) {
@@ -745,20 +745,6 @@ SB_STATUS CSbieAPI::CallServer(void* req, SScopedVoid* prpl) const
 	return Status;
 }
 
-/*void CSbieAPI::OnMonitorEntry(quint32 ProcessId, quint32 Type, const QString& Value)
-{
-	QMap<quint32, CBoxedProcessPtr>::iterator I = m_BoxedProxesses.find(ProcessId);
-	if (I == m_BoxedProxesses.end())
-	{
-		UpdateProcesses(true);
-		I = m_BoxedProxesses.find(ProcessId);
-	}
-	if (I == m_BoxedProxesses.end())
-		return;
-
-	I.value()->AddResourceEntry(Type, Value);
-}*/
-
 QString CSbieAPI::GetVersion()
 {
 	WCHAR out_version[16];
@@ -1033,7 +1019,7 @@ QString CSbieAPI::GetUserSection(QString* pUserName, bool* pIsAdmin) const
 	return UserSection;
 }
 
-SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, bool Elevated, const QString& WorkingDir, QProcess* pProcess)
+SB_RESULT(quint32) CSbieAPI::RunStart(const QString& BoxName, const QString& Command, bool Elevated, const QString& WorkingDir, QProcess* pProcess)
 {
 	if (m_SbiePath.isEmpty())
 		return SB_ERR(SB_PathFail);
@@ -1106,7 +1092,7 @@ SB_STATUS CSbieAPI::RunStart(const QString& BoxName, const QString& Command, boo
 
 	if(pid == 0)
 		return SB_ERR();
-	return SB_OK;
+	return CSbieResult<quint32>((quint32)pid);
 }
 
 QString CSbieAPI::GetStartPath() const
@@ -1144,7 +1130,7 @@ SB_STATUS CSbieAPI::ReloadBoxes(bool bForceUpdate)
 			m_SandBoxes.insert(BoxName.toLower(), pBox);
 			emit BoxAdded(pBox);
 		}
-		UpdateBoxPaths(pBox);
+		UpdateBoxPaths(pBox.data());
 
 		pBox->m_IsEnabled = bIsEnabled;
 
@@ -1346,6 +1332,18 @@ SB_STATUS CSbieAPI::ValidateName(const QString& BoxName)
 	return SB_OK;
 }
 
+QString CSbieAPI::MkNewName(QString Name)
+{
+	Name.replace(QRegularExpression("[<>:\"/\\\\|?*\\[\\]]"), "-").replace(" ", "_");
+	for (int i=0;; i++) {
+		QString NewName = Name;
+		if (i > 0) NewName.append("_" + QString::number(i));
+		if (m_SandBoxes.contains(NewName.toLower()))
+			continue;
+		return NewName;
+	}
+}
+
 SB_STATUS CSbieAPI::CreateBox(const QString& BoxName, bool bReLoad)
 {
 	SB_STATUS Status = ValidateName(BoxName);
@@ -1390,7 +1388,7 @@ SB_STATUS CSbieAPI__GetProcessPIDs(SSbieAPI* m, const QString& BoxName, bool bAl
 	return SB_OK;
 }
 
-SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, bool bAllSessions)
+SB_STATUS CSbieAPI::UpdateProcesses(int iKeep, bool bAllSessions)
 {
 	ULONG count = 0;
 	SB_STATUS Status = CSbieAPI__GetProcessPIDs(m, "", bAllSessions, NULL, &count); // query count
@@ -1427,6 +1425,7 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, bool bAllSessions)
 			if (pBox->m_ActiveProcessCount == 0) {
 				pBox->m_ActiveProcessCount = 1;
 				pBox->OpenBox();
+				m_bBoxesDirty = true;
 				emit BoxOpened(pBox);
 			}
 
@@ -1447,7 +1446,7 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, bool bAllSessions)
 			pProcess->SetTerminated();
 			pProcess->m_pBox->m_ActiveProcessDirty = true;
 		}
-		else if (!bKeep && pProcess->IsTerminated(1500)) { // keep for at least 1.5 seconds
+		else if (iKeep != -1 && pProcess->IsTerminated(iKeep)) {
 			pProcess->m_pBox->m_ProcessList.remove(pProcess->m_ProcessId);
 			m_BoxedProxesses.remove(pProcess->m_ProcessId);
 		}
@@ -1467,6 +1466,7 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, bool bAllSessions)
 			pBox->m_ActiveProcessCount = ActiveProcessCount;
 			if (WasBoxClosed) {
 				pBox->CloseBox();
+				m_bBoxesDirty = true;
 				emit BoxClosed(pBox);
 			}
 		}
@@ -1475,69 +1475,6 @@ SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, bool bAllSessions)
 	delete[] boxed_pids;
 	return SB_OK;
 }
-
-/*SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep)
-{
-	foreach(const CSandBoxPtr& pBox, m_SandBoxes)
-		UpdateProcesses(bKeep, pBox);
-	return SB_OK;
-}
-
-SB_STATUS CSbieAPI::UpdateProcesses(bool bKeep, const CSandBoxPtr& pBox)
-{
-	ULONG count = 0;
-	SB_STATUS Status = CSbieAPI__GetProcessPIDs(m, pBox->GetName(), NULL, &count); // query the count
-	if (Status.IsError())
-		return Status;
-
-	count += 128; // add some extra space
-	ULONG* boxed_pids = new ULONG[count]; 
-
-	Status = CSbieAPI__GetProcessPIDs(m, pBox->GetName(), boxed_pids, &count); // query the count
-	if (Status.IsError())
-		goto finish;
-
-	QMap<quint32, CBoxedProcessPtr>	OldProcessList = pBox->m_ProcessList;
-
-	for (int i=0; i < count; i++)
-	{
-		quint32 ProcessId = boxed_pids[i];
-
-		CBoxedProcessPtr pProcess = OldProcessList.take(ProcessId);
-		if (!pProcess)
-		{
-			pProcess = CBoxedProcessPtr(NewBoxedProcess(ProcessId, pBox.data()));
-			pBox->m_ProcessList.insert(ProcessId, pProcess);
-			m_BoxedProxesses.insert(ProcessId, pProcess);
-
-			UpdateProcessInfo(pProcess);
-			pProcess->InitProcessInfo();
-		}
-
-		pProcess->InitProcessInfoEx();
-	}
-
-	foreach(const CBoxedProcessPtr& pProcess, OldProcessList) 
-	{
-		if (!pProcess->IsTerminated())
-			pProcess->SetTerminated();
-		else if (!bKeep && pProcess->IsTerminated(1500)) { // keep for at least 1.5 seconds
-			pBox->m_ProcessList.remove(pProcess->m_ProcessId);
-			m_BoxedProxesses.remove(pProcess->m_ProcessId);
-		}
-	}
-
-	bool WasBoxClosed = pBox->m_ActiveProcessCount > 0 && count == 0;
-	pBox->m_ActiveProcessCount = count;
-	if (WasBoxClosed) {
-		pBox->CloseBox();
-		emit BoxClosed(pBox->GetName());
-	}
-
-finish:
-	delete[] boxed_pids;
-	return Status;
-}*/
 
 bool CSbieAPI::HasProcesses(const QString& BoxName)
 {
@@ -1576,7 +1513,7 @@ SB_STATUS CSbieAPI__QueryBoxPath(SSbieAPI* m, const WCHAR *box_name, WCHAR *out_
 	return SB_OK;
 }
 
-SB_STATUS CSbieAPI::UpdateBoxPaths(const CSandBoxPtr& pSandBox)
+SB_STATUS CSbieAPI::UpdateBoxPaths(CSandBox* pSandBox)
 {
 	std::wstring boxName = pSandBox->GetName().toStdWString();
 
@@ -2380,6 +2317,7 @@ CBoxedProcessPtr CSbieAPI::OnProcessBoxed(quint32 ProcessId, const QString& Path
 		if (pBox->m_ActiveProcessCount == 0) {
 			pBox->m_ActiveProcessCount = 1;
 			pBox->OpenBox();
+			m_bBoxesDirty = true;
 			emit BoxOpened(pBox);
 		}
 

@@ -30,7 +30,7 @@ public:
 
 	virtual void			StopMonitor();
 
-	virtual SB_STATUS		RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
+	virtual SB_RESULT(quint32) RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
 
 	virtual bool			IsStarting(qint64 pid) const { return m_PendingStarts.contains(pid); }
 
@@ -46,6 +46,8 @@ protected:
 
 	virtual CSandBox*		NewSandBox(const QString& BoxName, class CSbieAPI* pAPI);
 	virtual CBoxedProcess*	NewBoxedProcess(quint32 ProcessId, class CSandBox* pBox);
+
+	virtual SB_STATUS		UpdateBoxPaths(CSandBox* pSandBox) { return CSbieAPI::UpdateBoxPaths(pSandBox); }
 
 	virtual CBoxedProcessPtr OnProcessBoxed(quint32 ProcessId, const QString& Path, const QString& Box, quint32 ParentId, const QString& CmdLine);
 
@@ -82,10 +84,13 @@ public:
 	virtual void			CloseBox();
 
 	virtual SB_PROGRESS		CleanBox()							{ BeginModifyingBox(); SB_PROGRESS Status = CSandBox::CleanBox(); ConnectEndSlot(Status); return Status; }
-	virtual SB_STATUS		RenameBox(const QString& NewName)	{ BeginModifyingBox(); SB_STATUS Status = CSandBox::RenameBox(NewName); ConnectEndSlot(Status); return Status; }
+	virtual SB_STATUS		RenameBox(const QString& NewName);
+	virtual SB_STATUS		RemoveBox();
 	virtual SB_PROGRESS		TakeSnapshot(const QString& Name)	{ BeginModifyingBox(); SB_PROGRESS Status = CSandBox::TakeSnapshot(Name); ConnectEndSlot(Status); return Status; }
 	virtual SB_PROGRESS		RemoveSnapshot(const QString& ID)	{ BeginModifyingBox(); SB_PROGRESS Status = CSandBox::RemoveSnapshot(ID); ConnectEndSlot(Status); return Status; }
 	virtual SB_PROGRESS		SelectSnapshot(const QString& ID)	{ BeginModifyingBox(); SB_PROGRESS Status = CSandBox::SelectSnapshot(ID); ConnectEndSlot(Status); return Status; }
+
+	virtual bool			IsEmpty() const;
 
 	virtual QString			GetStatusStr() const;
 
@@ -115,7 +120,7 @@ public:
 
 	virtual bool			IsEmptyCached() const { return m_IsEmpty; }
 
-	virtual void			UpdateSize();
+	virtual void			UpdateSize(bool bReset = true);
 	virtual quint64			GetSize() const						{ if(m_TotalSize == -1) return 0; return m_TotalSize; }
 	virtual void			SetSize(quint64 Size);				//{ m_TotalSize = Size; }
 	virtual bool			IsSizePending() const;
@@ -153,8 +158,7 @@ public:
 	class COptionsWindow*	m_pOptionsWnd;
 	class CRecoveryWindow*	m_pRecoveryWnd;
 
-	bool					IsOpen() const { return m_bRootAccessOpen; }
-	bool					IsBusy() const { return IsSizePending() || !m_JobQueue.isEmpty(); }
+	bool					IsBoxBusy() const { return IsSizePending() || !m_JobQueue.isEmpty(); }
 	SB_STATUS				DeleteContentAsync(bool DeleteSnapshots = true, bool bOnAutoDelete = false);
 
 	struct SLink {

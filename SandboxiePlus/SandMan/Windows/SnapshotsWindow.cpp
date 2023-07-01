@@ -242,9 +242,9 @@ void CSnapshotsWindow::HandleResult(SB_PROGRESS Status)
 	if (Status.GetStatus() == OP_ASYNC)
 	{
 		connect(Status.GetValue().data(), SIGNAL(Finished()), this, SLOT(UpdateSnapshots()));
-		theGUI->AddAsyncOp(Status.GetValue());
+		theGUI->AddAsyncOp(Status.GetValue(), false, tr("Performing Snapshot operation..."), this);
 	}
 	else if (Status.IsError())
-		CSandMan::CheckResults(QList<SB_STATUS>() << Status);
+		theGUI->CheckResults(QList<SB_STATUS>() << Status, this);
 	UpdateSnapshots();
 }

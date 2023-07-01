@@ -29,9 +29,11 @@ enum ESbieMsgCodes
 	SB_DeleteProtect,
 	SB_DeleteNotEmpty,
 	SB_DeleteError,
+	SB_RemNotStopped,
 	//SB_RemNotEmpty,
 	SB_DelNotEmpty,
 	SB_FailedMoveDir,
+	SB_FailedMoveImage,
 	SB_SnapMkDirFail,
 	SB_SnapCopyDatFail,
 	SB_SnapNotFound,
@@ -46,6 +48,10 @@ enum ESbieMsgCodes
 	SB_NameExists,
 	SB_PasswordBad,
 	SB_Canceled,
+	SB_DeleteNoMount,
+
+	SB_OtherError,
+
 	SB_LastError
 };
 

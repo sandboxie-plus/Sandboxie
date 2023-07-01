@@ -65,6 +65,8 @@ public:
 
 	QMap<QString, QStringList>	GetGroups() { return m_Groups; }
 
+	static bool					CreateShortcut(const QString& LinkPath, const QString& BoxName, const QString& IconPath = QString(), int IconIndex = 0, const QString& WorkDir = QString());
+
 signals:
 	void						BoxSelected();
 
@@ -137,8 +139,6 @@ private:
 	void					ChangeExpand(const QModelIndex& index, bool bExpand);
 
 	QMenu*					GetMenuFolder(const QString& Folder, QMenu* pParent, QMap<QString, QMenu*>& Folders);
-
-	bool					CreateShortcut(const QString& LinkPath, const QString& BoxName, const QString& IconPath = QString(), int IconIndex = 0, const QString& WorkDir = QString());
 
 	QVBoxLayout*			m_pMainLayout;
 

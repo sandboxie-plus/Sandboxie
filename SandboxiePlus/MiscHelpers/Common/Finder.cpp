@@ -36,8 +36,8 @@ CFinder::CFinder(QObject* pFilterTarget, QWidget *parent, int iOptions)
 	m_pSearchLayout->setAlignment(Qt::AlignLeft);
 
 	m_pSearch = new QLineEdit();
-	m_pSearch->setMinimumWidth(150);
-	m_pSearch->setMaximumWidth(350);
+	m_pSearch->setMinimumWidth(200);
+	//m_pSearch->setMaximumWidth(400);
 	m_pSearchLayout->addWidget(m_pSearch);
 	QObject::connect(m_pSearch, SIGNAL(textChanged(QString)), this, SLOT(OnText()));
     QObject::connect(m_pSearch, SIGNAL(returnPressed()), this, SLOT(OnReturn()));

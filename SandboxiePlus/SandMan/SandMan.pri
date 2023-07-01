@@ -23,7 +23,6 @@ HEADERS += ./stdafx.h \
     ./Helpers/WinHelper.h \
     ./Helpers/ReadDirectoryChanges.h \
     ./Helpers/ReadDirectoryChangesPrivate.h \
-    ./Windows/NewBoxWindow.h \
     ./Windows/RecoveryWindow.h \
     ./Windows/PopUpWindow.h \
     ./Windows/SnapshotsWindow.h \
@@ -34,7 +33,18 @@ HEADERS += ./stdafx.h \
     ./OnlineUpdater.h \
     ./Wizards/NewBoxWizard.h \
     ./Wizards/TemplateWizard.h \
-    ./Wizards/SetupWizard.h
+    ./Wizards/SetupWizard.h \
+    ./Wizards/BoxAssistant.h \
+    ./Windows/BoxImageWindow.h \
+    ./Engine/BoxEngine.h \
+    ./Engine/BoxObject.h \
+    ./Engine/IniObject.h \
+    ./Engine/SbieObject.h \
+    ./Engine/SysObject.h \
+    ./Engine/V4ScriptDebuggerApi.h \
+    ./Engine/JSEngineExt.h \
+    ./Engine/WizardObject.h \
+    ./AddonManager.h
 
 SOURCES += ./main.cpp \
     ./stdafx.cpp \
@@ -58,7 +68,6 @@ SOURCES += ./main.cpp \
     ./Helpers/ReadDirectoryChanges.cpp \
     ./Helpers/ReadDirectoryChangesPrivate.cpp \
     ./Helpers/WindowFromPointEx.cpp \
-    ./Windows/NewBoxWindow.cpp \
     ./Windows/OptionsWindow.cpp \
     ./Windows/PopUpWindow.cpp \
     ./Windows/RecoveryWindow.cpp \
@@ -69,15 +78,23 @@ SOURCES += ./main.cpp \
     ./OnlineUpdater.cpp \
     ./Wizards/NewBoxWizard.cpp \
     ./Wizards/TemplateWizard.cpp \
-    ./Wizards/SetupWizard.cpp
+    ./Wizards/SetupWizard.cpp \
+    ./Wizards/BoxAssistant.cpp \
+    ./Windows/BoxImageWindow.cpp \
+    ./Engine/BoxEngine.cpp \
+    ./Engine/BoxObject.cpp \
+    ./Engine/IniObject.cpp \
+    ./Engine/SbieObject.cpp \
+    ./Engine/JSEngineExt.cpp \
+    ./Engine/SysObject.cpp \
+    ./AddonManager.cpp
 
-FORMS += ./Forms/NewBoxWindow.ui \
+FORMS += ./Forms/SelectBoxWindow.ui \
     ./Forms/OptionsWindow.ui \
     ./Forms/PopUpWindow.ui \
     ./Forms/RecoveryWindow.ui \
     ./Forms/SettingsWindow.ui \
-    ./Forms/SnapshotsWindow.ui \
-    ./Forms/SelectBoxWindow.ui
+    ./Forms/SnapshotsWindow.ui
 
 TRANSLATIONS += sandman_de.ts \
     sandman_en.ts \

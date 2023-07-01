@@ -179,7 +179,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 
 	foreach (const CSandBoxPtr& pBox, BoxList)
 	{
-		if (!ShowHidden && !pBox->IsEnabled())
+		if (!ShowHidden && (!pBox->IsEnabled() /*|| pBox->GetBool("IsShadow")*/))
 			continue;
 
 		QVariant ID = pBox->GetName();
@@ -220,8 +220,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 		QMap<quint32, CBoxedProcessPtr> ProcessList = pBox->GetProcessList();
 
 		bool inUse = Sync(pBox, pNode->Path, ProcessList, New, Old, Added);
-		bool bOpen = pBoxEx->IsOpen();
-		bool Busy = pBoxEx->IsBusy();
+		bool Busy = pBoxEx->IsBoxBusy();
 		int boxType = pBoxEx->GetType();
 		bool boxDel = pBoxEx->IsAutoDelete();
 		bool boxNoForce = pBoxEx->IsForceDisabled();
@@ -241,10 +240,16 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 				pNode->BoxIcon = BoxIcon;
 			}
 		}
-		else if (pNode->inUse != inUse || pNode->bOpen != bOpen || (pNode->busyState || Busy) || pNode->boxType != boxType || pNode->boxColor != boxColor || pNode->boxDel != boxDel || pNode->boxNoForce != boxNoForce || !pNode->BoxIcon.isEmpty())
+		else if (pNode->inUse != inUse || 
+			(pNode->busyState || Busy) || 
+			pNode->boxType != boxType || 
+			pNode->boxColor != boxColor || 
+			pNode->boxDel != boxDel || 
+			pNode->boxNoForce != boxNoForce || 
+			!pNode->BoxIcon.isEmpty()
+			)
 		{
 			pNode->inUse = inUse;
-			pNode->bOpen = bOpen;
 			pNode->boxType = boxType;
 			pNode->boxColor = boxColor;
 			pNode->boxDel = boxDel;
@@ -398,13 +403,13 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 
 			if (OverlayIcons) {
 				if (pProcess->HasSystemToken())
-					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/SystemShield.png", 20);
+					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/SystemShield.png");
 				else if (pProcess->HasElevatedToken())
-					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/AdminShield.png", 20);
+					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/AdminShield.png");
 				else if (pProcess->HasAppContainerToken())
-					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/AppContainer.png", 20); // AppContainer is also Restricted
+					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/AppContainer.png"); // AppContainer is also Restricted
 				else if (pProcess->HasRestrictedToken())
-					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/Restricted.png", 20);
+					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/Restricted.png");
 			}
 
 			pNode->Icon = Icon;

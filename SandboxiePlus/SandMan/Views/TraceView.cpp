@@ -1,11 +1,13 @@
 #include "stdafx.h"
 #include "TraceView.h"
 #include "..\SandMan.h"
+#include "..\AddonManager.h"
 #include "../QSbieAPI/SbieAPI.h"
 #include "..\Models\TraceModel.h"
 #include "..\..\MiscHelpers\Common\Common.h"
 #include "..\..\MiscHelpers\Common\CheckList.h"
 #include "SbieView.h"
+#include <QtConcurrent>
 
 //class CTraceFilterProxyModel : public CSortFilterProxyModel
 //{
@@ -370,6 +372,8 @@ void CTraceView::SetEnabled(bool bSet)
 
 void CTraceView::OnShowStack()
 {
+	if (!theGUI->GetAddonManager()->HasAddon("DbgHelp"))
+        theGUI->GetAddonManager()->TryInstallAddon("DbgHelp", this, tr("To use the stack traces feature the DbgHelp.dll and SymSrv.dll are required, do you want to download and install them?"));
 	theAPI->GetGlobalSettings()->SetBool("MonitorStackTrace", m_pShowStack->isChecked());
 	m_pTrace->m_pStackView->setVisible(m_pShowStack->isChecked());
 }
@@ -709,27 +713,62 @@ void CTraceView::SaveToFile()
 	}
 	else
 	{
-		const QVector<CTraceEntryPtr> &ResourceLog = theAPI->GetTrace();
-		for (int i = 0; i < ResourceLog.count(); i++)
-		{
-			const CTraceEntryPtr& pEntry = ResourceLog.at(i);
-
-			QStringList Line;
-			Line.append(QDateTime::fromMSecsSinceEpoch(pEntry->GetTimeStamp()).toString("hh:mm:ss.zzz"));
-			QString Name = pEntry->GetProcessName();
-			Line.append(Name.isEmpty() ? tr("Unknown") : Name);
-			Line.append(QString("%1").arg(pEntry->GetProcessId()));
-			Line.append(QString("%1").arg(pEntry->GetThreadId()));
-			Line.append(pEntry->GetTypeStr());
-			Line.append(pEntry->GetStautsStr());
-			Line.append(pEntry->GetName());
-			Line.append(pEntry->GetMessage());
-
-			File.write(Line.join("\t").toLatin1() + "\n");
-		}
+		SaveToFile(&File);
 	}
 
 	File.close();
+}
+
+void CTraceView::SaveToFileAsync(const CSbieProgressPtr& pProgress, QVector<CTraceEntryPtr> ResourceLog, QIODevice* pFile)
+{
+	pProgress->ShowMessage(tr("Saving TraceLog..."));
+
+	QByteArray Unknown = "Unknown";
+
+	quint64 LastTimeStamp = 0;
+	QByteArray LastTimeStampStr;
+	for (int i = 0; i < ResourceLog.count() && !pProgress->IsCanceled(); i++)
+	{
+		if (i % 10000 == 0)
+			pProgress->SetProgress(100 * i / ResourceLog.count());
+
+		const CTraceEntryPtr& pEntry = ResourceLog.at(i);
+
+		if (LastTimeStamp != pEntry->GetTimeStamp()) {
+			LastTimeStamp = pEntry->GetTimeStamp();
+			LastTimeStampStr = QDateTime::fromMSecsSinceEpoch(pEntry->GetTimeStamp()).toString("hh:mm:ss.zzz").toUtf8();
+		}
+
+		pFile->write(LastTimeStampStr);
+		pFile->write("\t");
+		QString Name = pEntry->GetProcessName();
+		pFile->write(Name.isEmpty() ? Unknown : Name.toUtf8());
+		pFile->write("\t");
+		pFile->write(QByteArray::number(pEntry->GetProcessId()));
+		pFile->write("\t");
+		pFile->write(QByteArray::number(pEntry->GetThreadId()));
+		pFile->write("\t");
+		pFile->write(pEntry->GetTypeStr().toUtf8());
+		pFile->write("\t");
+		pFile->write(pEntry->GetStautsStr().toUtf8());
+		pFile->write("\t");
+		pFile->write(pEntry->GetName().toUtf8());
+		pFile->write("\t");
+		pFile->write(pEntry->GetMessage().toUtf8());
+		pFile->write("\n");
+	}
+
+	pProgress->Finish(SB_OK);
+}
+
+bool CTraceView::SaveToFile(QIODevice* pFile)
+{
+	pFile->write("Timestamp\tProcess\tPID\tTID\tType\tStatus\tName\tMessage\n"); // don't translate log
+	QVector<CTraceEntryPtr> ResourceLog = theAPI->GetTrace();
+	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
+	QtConcurrent::run(CTraceView::SaveToFileAsync, pProgress, ResourceLog, pFile);
+	theGUI->AddAsyncOp(pProgress, true);
+	return !pProgress->IsCanceled();
 }
 
 

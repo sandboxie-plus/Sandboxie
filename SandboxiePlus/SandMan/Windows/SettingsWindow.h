@@ -55,6 +55,11 @@ public:
 	virtual void accept() {}
 	virtual void reject();
 
+	static Qt::CheckState IsContextMenu();
+	static void AddContextMenu(bool bAlwaysClassic = false);
+	static void RemoveContextMenu();
+	static bool AddBrowserIcon();
+
 	static bool ApplyCertificate(const QByteArray &Certificate, QWidget* widget);
 
 	static void LoadCertificate(QString CertPath = QString());
@@ -83,6 +88,7 @@ public slots:
 
 private slots:
 	void OnTab();
+	void OnCompat();
 
 	void OnAddMessage();
 	void OnDelMessage();
@@ -102,6 +108,10 @@ private slots:
 	void OnChangeGUI() { m_bRebuildUI = true; OnOptChanged(); }
 	void OnFeaturesChanged() { m_FeaturesChanged = true; OnGeneralChanged(); }
 	void OnGeneralChanged() { m_GeneralChanged = true; OnOptChanged(); }
+
+	void OnLoadAddon();
+	void OnInstallAddon();
+	void OnRemoveAddon();
 
 	void OnBrowse();
 
@@ -184,10 +194,6 @@ private:
 
 	Ui::SettingsWindow ui;
 };
-
-void CSettingsWindow__AddContextMenu(bool bAlwaysClassic = false);
-void CSettingsWindow__RemoveContextMenu();
-void CSettingsWindow__AddBrowserIcon();
 
 void WindowsMoveFile(const QString& from, const QString& to);
 

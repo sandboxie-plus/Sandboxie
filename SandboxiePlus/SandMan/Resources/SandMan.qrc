@@ -150,10 +150,31 @@
         <file>Actions/Windows.png</file>
         <file>Actions/Interface.png</file>
         <file>Actions/Notification.png</file>
+        <file>Actions/Network2.png</file>
+        <file>Actions/NetworkMgr.png</file>
+        <file>Actions/EthSocket.png</file>
+        <file>Actions/EthSocket2.png</file>
+        <file>Actions/NetCard.png</file>
+        <file>Actions/EthCable.png</file>
+        <file>Actions/EthPlug.png</file>
+        <file>Actions/Network3.png</file>
+        <file>Actions/LockOpen.png</file>
+        <file>Actions/LockClosed.png</file>
+        <file>Actions/RamDisk.png</file>
+        <file>Actions/BoxConfig.png</file>
+        <file>Actions/FirstAid.png</file>
+        <file>Actions/Forum.png</file>
+        <file>Actions/Help.png</file>
         <file>Actions/Stack.png</file>
+        <file>Actions/Warning.png</file>
         <file>Actions/PauseForce.png</file>
         <file>Actions/DisableMessagePopup.png</file>
         <file>Actions/DisableRecovery.png</file>
+        <file>Actions/Plugin.png</file>
+        <file>Actions/Plugins.png</file>
+        <file>Actions/AntiVir.png</file>
+        <file>Actions/SourceCode.png</file>
+        <file>Actions/Qube.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Empty3">Boxes/sandbox-b-empty.png</file>

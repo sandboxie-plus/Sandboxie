@@ -134,13 +134,13 @@ void CSandBox::SetBoxPaths(const QString& FilePath, const QString& RegPath, cons
 	m_IpcPath = IpcPath;
 }
 
-SB_STATUS CSandBox::RunStart(const QString& Command, bool Elevated, const QString& WorkingDir)
+SB_STATUS CSandBox::RunStart(const QString& Command, bool Elevated)
 {
 #ifdef _DEBUG
 	if ((QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0)
 		return RunSandboxed(Command);
 #endif
-	return m_pAPI->RunStart(m_Name, Command, Elevated, WorkingDir);
+	return m_pAPI->RunStart(m_Name, Command, Elevated);
 }
 
 SB_STATUS CSandBox::RunSandboxed(const QString& Command)
@@ -230,6 +230,9 @@ SB_STATUS CSandBox__MoveFolder(const QString& SourcePath, const QString& ParentF
 
 SB_STATUS CSandBox::RenameBox(const QString& NewName)
 {
+	if (GetActiveProcessCount() > 0)
+		return SB_ERR(SB_RemNotStopped);
+
 	if (NewName.compare(m_Name, Qt::CaseInsensitive) == 0)
 		return SB_OK;
 
@@ -244,9 +247,11 @@ SB_STATUS CSandBox::RenameBox(const QString& NewName)
 		QString Name = FilePath.takeLast();
 		if (Name.compare(m_Name, Qt::CaseInsensitive) == 0) 
 		{
-			Status = CSandBox__MoveFolder(m_FilePath, FilePath.join("\\"), NewName);
-			if (Status.IsError())
-				return Status;
+			//Status = CSandBox__MoveFolder(m_FilePath, FilePath.join("\\"), NewName);
+			//if (Status.IsError())
+			//	return Status;
+			if(!QDir().rename(m_FilePath, FilePath.join("\\") + "\\" + NewName))
+				return SB_ERR(SB_FailedMoveDir, QVariantList() << m_FilePath << (FilePath.join("\\") + "\\" + NewName), 0xC0000001 /*STATUS_UNSUCCESSFUL*/);
 
 			QString FileRootPath = GetText("FileRootPath");
 			if (!FileRootPath.isEmpty())

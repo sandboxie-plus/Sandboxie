@@ -567,7 +567,7 @@ void CGroupPage::cleanupPage()
 {
     ((CBoxAssistant*)wizard())->PopIssue();
 
-    QPointer w = wizard();
+    QPointer<QWizard> w = wizard();
     QTimer::singleShot(10, [w]() {
         if (w && ((CBoxAssistant*)w.data())->m_NextCounter > 0)
             ((CBoxAssistant*)w.data())->removePage(CBoxAssistant::Page_Next + ((CBoxAssistant*)w.data())->m_NextCounter--);
@@ -700,7 +700,7 @@ void CListPage::cleanupPage()
 {
     ((CBoxAssistant*)wizard())->PopIssue();
 
-    QPointer w = wizard();
+    QPointer<QWizard> w = wizard();
     QTimer::singleShot(10, [w]() {
         if (w && ((CBoxAssistant*)w.data())->m_NextCounter > 0)
             ((CBoxAssistant*)w.data())->removePage(CBoxAssistant::Page_Next + ((CBoxAssistant*)w.data())->m_NextCounter--);

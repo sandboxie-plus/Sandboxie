@@ -7,7 +7,7 @@
 #include <QUrlQuery>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include "QSbieAPI/Sandboxie/SbieTemplates.h"
+#include "../QSbieAPI/Sandboxie/SbieTemplates.h"
 #include <QtConcurrent>
 #include "../MiscHelpers/Archive/Archive.h"
 

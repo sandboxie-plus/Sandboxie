@@ -35,7 +35,6 @@ HEADERS += ./stdafx.h \
     ./Wizards/TemplateWizard.h \
     ./Wizards/SetupWizard.h \
     ./Wizards/BoxAssistant.h \
-    ./Windows/BoxImageWindow.h \
     ./Engine/BoxEngine.h \
     ./Engine/BoxObject.h \
     ./Engine/IniObject.h \
@@ -47,6 +46,7 @@ HEADERS += ./stdafx.h \
     ./AddonManager.h
 
 SOURCES += ./main.cpp \
+    ../../SandboxieTools/Common/verify.c \
     ./stdafx.cpp \
     ./SandMan.cpp \
     ./SbiePlusAPI.cpp \
@@ -80,7 +80,6 @@ SOURCES += ./main.cpp \
     ./Wizards/TemplateWizard.cpp \
     ./Wizards/SetupWizard.cpp \
     ./Wizards/BoxAssistant.cpp \
-    ./Windows/BoxImageWindow.cpp \
     ./Engine/BoxEngine.cpp \
     ./Engine/BoxObject.cpp \
     ./Engine/IniObject.cpp \

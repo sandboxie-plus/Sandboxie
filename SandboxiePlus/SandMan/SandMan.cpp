@@ -2181,7 +2181,7 @@ void CSandMan::OnStatusChanged()
 		if (isVisible())
 			CheckSupport();
 
-		int WizardLevel = abs(theConf->GetBool("Options/WizardLevel", 0));
+		int WizardLevel = abs(theConf->GetInt("Options/WizardLevel", 0));
 		if (WizardLevel < (theConf->GetInt("Options/CheckForUpdates", 2) != 1 ? SETUP_LVL_2 : SETUP_LVL_1)) {
 			if (!CSetupWizard::ShowWizard(WizardLevel)) { // if user canceled mark that and not show again, untill there is somethign new
 				if(QMessageBox::question(NULL, "Sandboxie-Plus", tr("Do you want the setup wizard to be omited?"), QMessageBox::Yes, QMessageBox::No | QMessageBox::Default) == QMessageBox::Yes)

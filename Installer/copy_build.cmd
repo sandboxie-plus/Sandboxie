@@ -46,11 +46,13 @@ REM IF %archPath% == Win32 (
 	copy %qtPath%\bin\Qt5Network.dll %instPath%\
 	copy %qtPath%\bin\Qt5Widgets.dll %instPath%\
 	copy %qtPath%\bin\Qt5WinExtras.dll %instPath%\
+	copy %qtPath%\bin\Qt5Qml.dll %instPath%\
 ) ELSE (
 	copy %qtPath%\bin\Qt6Core.dll %instPath%\
 	copy %qtPath%\bin\Qt6Gui.dll %instPath%\
 	copy %qtPath%\bin\Qt6Network.dll %instPath%\
 	copy %qtPath%\bin\Qt6Widgets.dll %instPath%\
+	copy %qtPath%\bin\Qt6Qml.dll %instPath%\
 )
 
 

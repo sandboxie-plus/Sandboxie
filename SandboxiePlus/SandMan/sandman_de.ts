@@ -36,7 +36,7 @@
     <message>
         <location filename="AddonManager.cpp" line="172"/>
         <source>Download signature is not valid!</source>
-        <translation>Downloadsignatur it nicht gültig!</translation>
+        <translation>Downloadsignatur ist nicht gültig!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="177"/>

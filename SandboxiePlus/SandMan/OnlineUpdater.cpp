@@ -15,8 +15,6 @@
 #include <windows.h>
 #include <QRandomGenerator>
 
-#define UPDATE_INTERVAL (7 * 24 * 60 * 60)
-
 #ifdef _DEBUG
 
 // mess with a dummy installation when debugging

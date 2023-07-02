@@ -5,6 +5,8 @@
 
 #include "SbiePlusAPI.h"
 
+#define UPDATE_INTERVAL (7 * 24 * 60 * 60)
+
 class CGetUpdatesJob : public QObject
 {
 	Q_OBJECT

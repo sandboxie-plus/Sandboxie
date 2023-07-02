@@ -15,6 +15,8 @@
 #include <windows.h>
 #include <QRandomGenerator>
 
+#define UPDATE_INTERVAL (7 * 24 * 60 * 60)
+
 #ifdef _DEBUG
 
 // mess with a dummy installation when debugging
@@ -90,8 +92,8 @@ void COnlineUpdater::Process()
 	if (iCheckUpdates != 0)
 	{
 		time_t NextUpdateCheck = theConf->GetUInt64("Options/NextCheckForUpdates", 0);
-		if (NextUpdateCheck == 0)
-			theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addDays(3).toSecsSinceEpoch());
+		if (NextUpdateCheck == 0) // no check made yet
+			theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addDays(7).toSecsSinceEpoch());
 		else if(QDateTime::currentDateTime().toSecsSinceEpoch() >= NextUpdateCheck)
 		{
 			if (iCheckUpdates == 2)
@@ -104,11 +106,12 @@ void COnlineUpdater::Process()
 					theConf->SetValue("Options/CheckForUpdates", iCheckUpdates);
 			}
 
-			if (iCheckUpdates == 0)
+			if (iCheckUpdates == 0) // no clicked on prompt
 				theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addDays(7).toSecsSinceEpoch());
 			else
 			{
-				theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addDays(1).toSecsSinceEpoch());
+				// schedule next check in 12 h in case this one fails
+				theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addSecs(12 * 60 * 60).toSecsSinceEpoch());
 				
 				CheckForUpdates(false);
 			}
@@ -198,6 +201,11 @@ void COnlineUpdater::GetUpdates(QObject* receiver, const char* member, const QVa
 	}
 
 	Query.addQueryItem("auto", Params["manual"].toBool() ? "0" : "1");
+
+	if (!Params["manual"].toBool()) {
+		int UpdateInterval = theConf->GetInt("Options/UpdateInterval", UPDATE_INTERVAL); // in seconds
+		Query.addQueryItem("interval", QString::number(UpdateInterval));
+	}
 
 #ifdef _DEBUG
 	QString Test = Query.toString();
@@ -291,14 +299,13 @@ void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Pa
 		bNothing = false;
 	}
 
-	if (bNothing)  {
-
-		//theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addDays(7).toSecsSinceEpoch());
-
-		if (m_CheckMode == eManual) {
-			QMessageBox::information(theGUI, "Sandboxie-Plus", tr("No new updates found, your Sandboxie-Plus is up-to-date.\n"
-				"\nNote: The update check is often behind the latest GitHub release to ensure that only tested updates are offered."));
-		}
+	if (m_CheckMode != eManual) {
+		int UpdateInterval = theConf->GetInt("Options/UpdateInterval", UPDATE_INTERVAL); // in seconds
+		theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addSecs(UpdateInterval).toSecsSinceEpoch());
+	}
+	else if (bNothing)  {
+		QMessageBox::information(theGUI, "Sandboxie-Plus", tr("No new updates found, your Sandboxie-Plus is up-to-date.\n"
+			"\nNote: The update check is often behind the latest GitHub release to ensure that only tested updates are offered."));
 	}
 }
 

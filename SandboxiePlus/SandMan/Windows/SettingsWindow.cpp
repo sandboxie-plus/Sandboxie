@@ -261,6 +261,11 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.cmbDPI->addItem(tr("Native"), 1);
 	ui.cmbDPI->addItem(tr("Qt"), 2);
 
+	ui.cmbInterval->addItem(tr("Every Day"), 1 * 24 * 60 * 60);
+	ui.cmbInterval->addItem(tr("Every Week"), 7 * 24 * 60 * 60);
+	ui.cmbInterval->addItem(tr("Every 2 Weeks"), 14 * 24 * 60 * 60);
+	ui.cmbInterval->addItem(tr("Every 30 days"), 30 * 24 * 60 * 60);
+
 	ui.cmbUpdate->addItem(tr("Ignore"), "ignore");
 	ui.cmbUpdate->addItem(tr("Notify"), "notify");
 	ui.cmbUpdate->addItem(tr("Download & Notify"), "download");
@@ -470,6 +475,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	//connect(ui.lblInsiderInfo, SIGNAL(linkActivated(const QString&)), this, SLOT(OnUpdate(const QString&)));
 
 	connect(ui.chkAutoUpdate, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
+
+	connect(ui.cmbInterval, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 
 	connect(ui.radStable, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
 	connect(ui.radPreview, SIGNAL(toggled(bool)), this, SLOT(UpdateUpdater()));
@@ -971,6 +978,13 @@ void CSettingsWindow::LoadSettings()
 
 	ui.chkAutoUpdate->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/CheckForUpdates", 2)));
 
+	int UpdateInterval = theConf->GetInt("Options/UpdateInterval", UPDATE_INTERVAL);
+	int pos = ui.cmbInterval->findData(UpdateInterval);
+	if (pos == -1)
+		ui.cmbInterval->setCurrentText(QString::number(UpdateInterval));
+	else
+		ui.cmbInterval->setCurrentIndex(pos);
+
 	QString ReleaseChannel = theConf->GetString("Options/ReleaseChannel", "stable");
 	ui.radStable->setChecked(ReleaseChannel == "stable");
 	ui.radPreview->setChecked(ReleaseChannel == "preview");
@@ -1367,6 +1381,13 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/NoSupportCheck", ui.chkNoCheck->isChecked());
 
 	theConf->SetValue("Options/CheckForUpdates", CSettingsWindow__Chk2Int(ui.chkAutoUpdate->checkState()));
+
+	int UpdateInterval = ui.cmbInterval->currentData().toInt();
+	if (!UpdateInterval)
+		UpdateInterval = ui.cmbInterval->currentText().toInt();
+	if (!UpdateInterval)
+		UpdateInterval = UPDATE_INTERVAL;
+	theConf->SetValue("Options/UpdateInterval", UpdateInterval);
 
 	QString ReleaseChannel;
 	if (ui.radStable->isChecked())

@@ -19,7 +19,7 @@
 class CSbieView;
 class CFileView;
 class CBoxBorder;
-class CSbieTemplates;
+class CSbieTemplatesEx;
 class CTraceView;
 class CAddonManager;
 
@@ -42,7 +42,7 @@ public:
 	CSandMan(QWidget *parent = Q_NULLPTR);
 	virtual ~CSandMan();
 
-	CSbieTemplates*		GetCompat() { return m_SbieTemplates; }
+	CSbieTemplatesEx*	GetCompat() { return m_SbieTemplates; }
 	void				CheckCompat(QObject* receiver, const char* member);
 	CAddonManager*		GetAddonManager() { return m_AddonManager; }
 
@@ -132,7 +132,7 @@ protected:
 	bool				m_bConnectPending;
 	bool				m_bStopPending;
 	CBoxBorder*			m_pBoxBorder;
-	CSbieTemplates*		m_SbieTemplates;
+	CSbieTemplatesEx*	m_SbieTemplates;
 	CAddonManager*		m_AddonManager;
 	
 	QMap<CSbieProgress*, QPair<CSbieProgressPtr, QPointer<QWidget>>> m_pAsyncProgress;

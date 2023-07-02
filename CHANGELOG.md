@@ -25,6 +25,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - setup wizard has now a dedicated update configuration page
 - split the support page into Sandboxie Support and Sandboxie Updater tabs
+- when the troubleshooting.7z is available the script engine is use to match comaptybility templates
+  - this allows a better granularity in template selection, the script AppCompatibility.js is used
 
 ### Fixed
 - fixed uninstall issue in the Sandboxie Classic installer [d1863ff](https://github.com/sandboxie-plus/Sandboxie/commit/d1863ffadfe105c695de71c9e841c2fd568116fe)

@@ -34,13 +34,15 @@ public:
     // OS
     static QVariantMap GetOSVersion();
     Q_INVOKABLE QJSValue version();
-    Q_INVOKABLE QJSValue enumUpdates(); // this can take quite a while
 
     // 
+    Q_INVOKABLE void resetData();
+
     Q_INVOKABLE QJSValue enumClasses();
     Q_INVOKABLE QJSValue enumServices();
     Q_INVOKABLE QJSValue enumProducts();
     Q_INVOKABLE QJSValue enumObjects();
+    Q_INVOKABLE QJSValue enumUpdates(); // this can take quite a while
 
     Q_INVOKABLE QJSValue expandPath(const QString& path);
     Q_INVOKABLE QJSValue checkFile(const QString& value);
@@ -49,9 +51,10 @@ public:
     Q_INVOKABLE QJSValue checkServices(const QString& value);
     Q_INVOKABLE QJSValue checkProducts(const QString& value);
     Q_INVOKABLE QJSValue checkObjects(const QString& value);
-
+    Q_INVOKABLE QJSValue checkUpdates(const QString& value);
 
 
 protected:
+
     CBoxEngine* m_pEngine;
 };

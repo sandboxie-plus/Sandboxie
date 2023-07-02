@@ -1,5 +1,5 @@
 /*
-*	group: system
+*  group: system
 * name: Check for known conflicts
 * description: Box Engine test script ...
 *
@@ -20,20 +20,31 @@ function checkTemplate(name)
 {
   let template = sbie.getTemplate(name);
 
-  let title = template.getIniValue('Tmpl.Title');
+  //let title = template.getIniValue('Tmpl.Title');
+  
+  let scanScript = template.getIniValue('Tmpl.ScanScript');
+  if(scanScript){
+    let ret = false;
+    try{
+      ret = eval('(()=>{' + scanScript + '})()');
+    } catch (error) {
+      sbie.logMessage("error:" + error);
+    }
+    return ret;
+  }
   
   let scan = template.getIniValue('Tmpl.Scan');
-	let scanIpc = (scan.indexOf('i') != -1);
-	let scanWin = (scan.indexOf('w') != -1);
-	let scanSvc = (scan.indexOf('s') != -1);
-	if (!(scanIpc || scanWin || scanSvc))
-		return false;
-		
-	let settings = template.getIniSection();
-	
-	let keys = Object.keys(settings);
-	for(let i=0; i < keys.length; i++)
-	{
+  let scanIpc = (scan.indexOf('i') != -1);
+  let scanWin = (scan.indexOf('w') != -1);
+  let scanSvc = (scan.indexOf('s') != -1);
+  if (!(scanIpc || scanWin || scanSvc))
+    return false;
+    
+  let settings = template.getIniSection();
+  
+  let keys = Object.keys(settings);
+  for(let i=0; i < keys.length; i++)
+  {
     let setting = keys[i];
     
     for(let j = 0; j < settings[setting].length; j++)
@@ -83,10 +94,15 @@ function checkTemplate(name)
         if (system.checkFile(system.expandPath(value)))
           return true;
       }
+      //else if (scanUpd && setting == "Tmpl.ScanUpd")
+      //{
+      //  if (system.checkUpdates(value))
+      //    return true;
+      //}
     }
-		
-	}
-		
+    
+  }
+    
   return false;
 }
 

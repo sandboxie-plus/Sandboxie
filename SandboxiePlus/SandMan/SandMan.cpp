@@ -190,7 +190,7 @@ CSandMan::CSandMan(QWidget *parent)
 
 	m_pBoxBorder = new CBoxBorder(theAPI, this);
 
-	m_SbieTemplates = new CSbieTemplates(theAPI, this);
+	m_SbieTemplates = new CSbieTemplatesEx(theAPI, this);
 
 
 

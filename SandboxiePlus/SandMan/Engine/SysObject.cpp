@@ -18,8 +18,6 @@ typedef long NTSTATUS;
 #define MAX_VALUE_NAME 16383
 #define MAX_VALUE_DATA 1024000
 
-#include <comdef.h>
-#include <wuapi.h>
 
 JSysObject::JSysObject(CBoxEngine* pEngine) 
  : m_pEngine(pEngine) 
@@ -495,121 +493,15 @@ QJSValue JSysObject::version()
 
 QJSValue JSysObject::enumUpdates()
 {
-    QVariantMap out;
-
-    IUpdateSession *updateSession = NULL;
-    IUpdateSearcher *updateSearcher = NULL;
-    ISearchResult *searchResult = NULL;
-    IUpdateCollection *updates = NULL;
-    HRESULT res;
-    int ret = 1;
-
-    res = CoInitializeEx(NULL, 0);
-    if (FAILED(res)) {
-        out["error"] = "Failed to initialize COM";
-        goto cleanup;
-    }
-
-    res = CoCreateInstance(CLSID_UpdateSession, NULL, CLSCTX_INPROC_SERVER, IID_IUpdateSession, (LPVOID *)&updateSession);
-    if (FAILED(res)) {
-        out["error"] = "Failed to create update session";
-        goto cleanup;
-    }
-
-    res = updateSession->CreateUpdateSearcher(&updateSearcher);
-    if (FAILED(res)) {
-        out["error"] = "Failed to create update searcher";
-        goto cleanup;
-    }
-
-    res = updateSearcher->put_IncludePotentiallySupersededUpdates(VARIANT_TRUE);
-    if (FAILED(res)) {
-        out["error"] = "Failed to set search options";
-        goto cleanup;
-    }
-
-    {BSTR criteria = SysAllocString(L"IsInstalled=1"); // or IsHidden=1
-    res = updateSearcher->Search(criteria, &searchResult);
-    SysFreeString(criteria);}
-    if (FAILED(res)) {
-        out["error"] = "Failed to search for updates";
-        goto cleanup;
-    }
-
-    res = searchResult->get_Updates(&updates);
-    if (FAILED(res)) {
-        out["error"] = "Failed to retrieve update list from search result";
-        goto cleanup;
-    }
-
-    LONG updateCount;
-    res = updates->get_Count(&updateCount);
-    if (FAILED(res)) {
-        out["error"] = "Failed to get update count";
-        goto cleanup;
-    }
-
-    {QVariantList list;
-    for (LONG i = 0L; i < updateCount; ++i)
-    {
-        QVariantMap entry;
-
-        IUpdate* update = NULL;
-        res = updates->get_Item(i, &update);
-        if (FAILED(res))
-            entry["error"] = "Failed to get update item";
-        else
-        {
-            IStringCollection* updateKBIDs = NULL;
-            res = update->get_KBArticleIDs(&updateKBIDs);
-            if (SUCCEEDED(res)) {
-                LONG kbIDCount;
-                res = updateKBIDs->get_Count(&kbIDCount);
-                if (SUCCEEDED(res)) {
-                    QVariantList kb;
-                    for (LONG j = 0L; j < kbIDCount; ++j) {
-                        BSTR kbID;
-                        res = updateKBIDs->get_Item(j, &kbID);
-                        if (FAILED(res))
-                            continue;
-                        kb.append("KB" + QString::fromWCharArray(kbID));
-                        SysFreeString(kbID);
-                    }
-                    entry["kb"] = kb;
-                }
-                updateKBIDs->Release();
-            }
-
-            BSTR updateTitle;
-            res = update->get_Title(&updateTitle);
-            if (FAILED(res))
-                entry["error"] = "Failed to get update title";
-            else {
-                entry["title"] = QString::fromWCharArray(updateTitle);
-                SysFreeString(updateTitle);
-            }
-
-            update->Release();
-        }
-        list.append(entry);
-    }
-    out["list"] = list;}
-
-    cleanup:
-    if (updates != NULL) updates->Release();
-    if (searchResult != NULL) searchResult->Release();
-    if (updateSearcher != NULL) updateSearcher->Release();
-    if (updateSession != NULL) updateSession->Release();
-
-    CoUninitialize();
-
-    return m_pEngine->m_pEngine->toScriptValue(out);
+    return m_pEngine->m_pEngine->toScriptValue(theGUI->GetCompat()->GetUpdates());
 }
 
 
 // 
-
-// todo: add sync to usage of GetCompat()
+void JSysObject::resetData()
+{
+    theGUI->GetCompat()->Reset();
+}
 
 QJSValue JSysObject::enumClasses()
 {
@@ -666,3 +558,9 @@ QJSValue JSysObject::checkObjects(const QString& value)
 {
     return theGUI->GetCompat()->CheckObjects(value);
 }
+
+QJSValue JSysObject::checkUpdates(const QString& value)
+{
+    return theGUI->GetCompat()->CheckUpdates(value);
+}
+

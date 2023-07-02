@@ -221,7 +221,7 @@
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="102"/>
         <source>To debug troubleshooting scripts you need the V4 Script Debugger addon, do you want to download and install it?</source>
-        <translation>Um  Problembehebungsskripte zu debuggen benötigen Sie die V4 Script Debugger Erweiterung. Möchten Sie diese runterladen und installieren?</translation>
+        <translation>Um Problembehebungsskripte zu debuggen benötigen Sie die V4 Script Debugger Erweiterung. Möchten Sie diese runterladen und installieren?</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="106"/>

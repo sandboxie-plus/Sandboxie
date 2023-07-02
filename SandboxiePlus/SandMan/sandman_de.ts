@@ -574,7 +574,7 @@ Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process.If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
 
 You can click Finish to close this wizard.</source>
-        <translation>Danke für die Verwendung des Problembehebungsassistenten für Sandboxie-Plus. Wir bitten um Entschuldigung für alle Unannehmlichkeiten die Ihnen während des Prozesses erlebt haben. Falls Sie weitere Fragen haben oder weitere Unterstützung benötigen, zögern Sie bitte nicht sich mit uns in Verbindung zu setzen..Wir sind hier um Ihnen zu helfen. Vielen Dank für Ihr Verständnis und Ihre Mitwirkung. 
+        <translation>Danke für die Verwendung des Problembehebungsassistenten für Sandboxie-Plus. Wir bitten um Entschuldigung für alle Unannehmlichkeiten die Sie während des Prozesses erlebt haben. Falls Sie weitere Fragen haben oder weitere Unterstützung benötigen, zögern Sie bitte nicht sich mit uns in Verbindung zu setzen..Wir sind hier um Ihnen zu helfen. Vielen Dank für Ihr Verständnis und Ihre Mitwirkung. 
 
 Klicken Sie auf Abschließen um den Assistenten zu schließen.</translation>
     </message>

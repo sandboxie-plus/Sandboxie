@@ -236,12 +236,12 @@
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="189"/>
         <source>Fatal error, failed to load troubleshooting instructions!</source>
-        <translation>Fataler Fehler, konnte  Problembehebungsinstruktionen nicht laden!</translation>
+        <translation>Fataler Fehler, konnte Problembehebungsinstruktionen nicht laden!</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="258"/>
         <source>Error, troubleshooting instructions duplicated %1 (%2 &lt;-&gt; %3)!</source>
-        <translation>Fehler,  Problembehebungsinstruktionen sind doppelt %1 (%2 &lt;-&gt; %3)!</translation>
+        <translation>Fehler, Problembehebungsinstruktionen sind doppelt %1 (%2 &lt;-&gt; %3)!</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="336"/>

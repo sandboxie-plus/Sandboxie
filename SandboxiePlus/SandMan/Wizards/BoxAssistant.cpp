@@ -333,7 +333,7 @@ bool CBoxAssistant::StartEngine()
                 m_pDebugger->show();
             }
             else {
-                QMessageBox::critical(this, "Sandboxie-Plus", tr("V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debuger could not be opened."));
+                QMessageBox::critical(this, "Sandboxie-Plus", tr("V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debugger could not be opened."));
             }
         }
 
@@ -991,7 +991,7 @@ CSubmitPage::CSubmitPage(QWidget *parent)
 
     m_pAttachLog = new QCheckBox(tr("Attach Logs"));
     m_pAttachLog->setTristate(true);
-    m_pAttachLog->setToolTip(tr("Select partially checked state to sends only message log but no trace log.\nBefore sending you can review the logs in the main window."));
+    m_pAttachLog->setToolTip(tr("Selecting partially checked state sends only the message log, but not the trace log.\nBefore sending, you can review the logs in the main window."));
     pLayout->addWidget(m_pAttachLog, row, 1);
 
     m_pAttachDmp = new QCheckBox(tr("Attach Crash Dumps"));
@@ -1202,7 +1202,7 @@ bool CSubmitPage::validatePage()
             return;
         }
 
-        QMessageBox::information(this, "Sandboxie-Plus", tr("Your issue report have been successfully submitted, thank you."));
+        QMessageBox::information(this, "Sandboxie-Plus", tr("Your issue report has been successfully submitted, thank you."));
         wizard()->close();
     });
 

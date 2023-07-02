@@ -1052,11 +1052,13 @@ void CSettingsWindow::UpdateUpdater()
 {
 	//ui.radLive->setEnabled(false);
 	if (!ui.chkAutoUpdate->isChecked()) {
+		ui.cmbInterval->setEnabled(false);
 		ui.cmbUpdate->setEnabled(false);
 		ui.cmbRelease->setEnabled(false);
 		ui.lblRevision->setText(QString());
 	}
 	else {
+		ui.cmbInterval->setEnabled(true);
 		if (ui.radStable->isChecked() && (!g_CertInfo.valid || g_CertInfo.expired)) {
 			ui.cmbUpdate->setEnabled(false);
 			ui.cmbUpdate->setCurrentIndex(ui.cmbUpdate->findData("ignore"));

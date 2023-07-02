@@ -536,7 +536,7 @@ CSBUpdate::CSBUpdate(QWidget *parent)
     int row = 0;
     int rows = 4;
 
-    m_pUpdate = new QCheckBox(tr("Regularly Check for all udpates to Sandboxie-Plus and optional components"));
+    m_pUpdate = new QCheckBox(tr("Regularly Check for all updates to Sandboxie-Plus and optional components"));
     m_pUpdate->setToolTip(tr("Let sandboxie regularly check for latest updates."));
     layout->addWidget(m_pUpdate, row++, 0, 1, rows);
     connect(m_pUpdate, &QCheckBox::toggled, this, &CSBUpdate::UpdateOptions);
@@ -583,23 +583,23 @@ CSBUpdate::CSBUpdate(QWidget *parent)
     connect(pInsiderInfo, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
     layout->addWidget(pInsiderInfo, row++, 3, 1, 1);
 
-    //m_pTemplates = new QCheckBox(tr("Keep Compatybility Templates up to date"));
-    //m_pTemplates->setToolTip(tr("Check for latest compatybility tempaltes."));
+    //m_pTemplates = new QCheckBox(tr("Keep Compatibility Templates up to date"));
+    //m_pTemplates->setToolTip(tr("Check for latest compatibility templates."));
     //layout->addWidget(m_pTemplates, row++, 1, 1, rows-1);
     //registerField("updateCompat", m_pTemplates);
 
-    m_pHotfixes = new QCheckBox(tr("Keep Compatybility Templates up to date and apply hotfixes"));
-    m_pHotfixes->setToolTip(tr("Check for latest compatybility tempaltes and hotfixes."));
+    m_pHotfixes = new QCheckBox(tr("Keep Compatibility Templates up to date and apply hotfixes"));
+    m_pHotfixes->setToolTip(tr("Check for latest compatibility templates and hotfixes."));
     layout->addWidget(m_pHotfixes, row++, 1, 1, rows-1);
     registerField("applyHotfixes", m_pHotfixes);
 
     m_pIssues = new QCheckBox(tr("Get the latest Scripts for the Troubleshooting Wizard"));
-    m_pIssues->setToolTip(tr("Check for latest troubleshooting scripts for the troubleshooting wizars."));
+    m_pIssues->setToolTip(tr("Check for latest troubleshooting scripts for the troubleshooting wizard."));
     layout->addWidget(m_pIssues, row++, 1, 1, rows-1);
     registerField("updateIssues", m_pIssues);
 
     m_pAddons = new QCheckBox(tr("Keep the list of optional Addon components up to date"));
-    m_pAddons->setToolTip(tr("Check for latest avaialble addons."));
+    m_pAddons->setToolTip(tr("Check for latest available addons."));
     layout->addWidget(m_pAddons, row++, 1, 1, rows-1);
     registerField("updateAddons", m_pAddons);
 

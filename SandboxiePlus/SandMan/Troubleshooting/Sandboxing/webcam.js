@@ -7,7 +7,7 @@
 *
 */
 
-let message = tr('To enable webcam support on windows 11 the isolation level must be reduced. \n'+
+let message = tr('To enable webcam support on Windows 11 the isolation level must be reduced. \n'+
 'If you want to proceed please press NEXT and select a sandbox to modify. \n');
 
 if(!sbie.isCertValid())
@@ -19,7 +19,7 @@ let form = [
   {type: 'box', id: 'box'}
 ];
 
-let data = wizard.showForm(form, tr('Sellect which box to turn into a reduced isoaltion app compartment box.'));
+let data = wizard.showForm(form, tr('Select which box to turn into a reduced isolation app compartment box.'));
 
 let box = sbie.getBox(data['box']);
 

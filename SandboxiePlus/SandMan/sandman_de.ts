@@ -4963,7 +4963,7 @@ Vor dem Absenden können Sie die Protokolle im Hauptfenster überprüfen.</trans
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1011"/>
         <source>We apologize for the inconvenience you are currently facing with Sandboxie-Plus. </source>
-        <translation>Wie bitten für die Unannehmlichkeiten, die Sie gereade mit Sandboxie-Plus haben, um Entschuldigung. </translation>
+        <translation>Wie bitten für die Unannehmlichkeiten, die Sie gerade mit Sandboxie-Plus haben, um Entschuldigung. </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1018"/>

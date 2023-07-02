@@ -16,7 +16,7 @@
     <message>
         <location filename="AddonManager.cpp" line="142"/>
         <source>Addon not found, please try updating the addon list in the global settings!</source>
-        <translation>Erweiterung nicht gefunden, bitte versuchen Sie die Erweiterungsliste in den globelen Einstellungen zu aktualisieren!</translation>
+        <translation>Erweiterung nicht gefunden, bitte versuchen Sie die Erweiterungsliste in den globalen Einstellungen zu aktualisieren!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="144"/>

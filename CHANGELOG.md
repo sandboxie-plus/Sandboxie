@@ -13,18 +13,24 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added scriptable troubleshooting wizard [#1875](https://github.com/sandboxie-plus/Sandboxie/issues/1875)
-- added addon manager which helps to install additional and 3rd party components, available addons:
-  - [ImDisk Toolkit](https://sourceforge.net/projects/imdisk-toolkit/) - used to create Ram Disks and otehr virtuald rives
+- added addon manager which helps to install additional and third-party components, available addons:
+  - [ImDisk Toolkit](https://sourceforge.net/projects/imdisk-toolkit/) - used to create RAM Disks and other virtual drives
   - [V4 Script Debugger](https://github.com/DavidXanatos/NeoScriptTools) - used to debug troubleshooting scripts
-  - [Microsoft debug helper dll's](https://learn.microsoft.com/en-us/windows/win32/debug/debug-help-library) - used for the stack trace feature introduced in 1.9.6
-  - [signcheck.exe](https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck) - alowing to scan files on vitus total before recovering them
-  - [SbieHide.dll](https://github.com/VeroFess/SbieHide) - a 3rd party dll to hide the sbiedll.dll
-  - [LoagAPI.dll](https://bsa.isoftware.nl/) - a api loggin library used for buster sandbox analyzer
-- added option to set the update interval available presets 1, 7, 14 and 30 days
+  - [Microsoft Debug Help Library](https://learn.microsoft.com/en-us/windows/win32/debug/debug-help-library) - used for the stack trace feature introduced in 1.9.6
+  - [signcheck.exe](https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck) - allowing to scan files on VirusTotal before recovering them
+  - [SbieHide.dll](https://github.com/VeroFess/SbieHide) - a third-party DLL to hide SbieDll.dll
+  - [LogAPI.dll](https://bsa.isoftware.nl/) - an API logging library used for Buster Sandbox Analyzer
+- added option to set the update interval: 1, 7, 14 and 30 days
 
 ### Changed
-- setup wizard has now a dedicated update config page
-- split the support page into cert and update tabs
+- setup wizard has now a dedicated update configuration page
+- split the support page into Sandboxie Support and Sandboxie Updater tabs
+
+### Fixed
+- fixed uninstall issue in the Sandboxie Classic installer [d1863ff](https://github.com/sandboxie-plus/Sandboxie/commit/d1863ffadfe105c695de71c9e841c2fd568116fe)
+
+### Removed
+- reduced duplicate code (thanks lmou523) [#3067](https://github.com/sandboxie-plus/Sandboxie/pull/3067)
 
 
 

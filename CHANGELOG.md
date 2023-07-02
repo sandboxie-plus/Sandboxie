@@ -7,6 +7,27 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [1.10.0 / 5.65.0] - 2023-06-??
+
+### Added
+- added scriptable troubleshooting wizard [#1875](https://github.com/sandboxie-plus/Sandboxie/issues/1875)
+- added addon manager which helps to install additional and 3rd party components, available addons:
+ - [ImDisk Toolkit](https://sourceforge.net/projects/imdisk-toolkit/) - used to create Ram Disks and otehr virtuald rives
+ - [V4 Script Debugger](https://github.com/DavidXanatos/NeoScriptTools) - used to debug troubleshooting scripts
+ - [Microsoft debug helper dll's](https://learn.microsoft.com/en-us/windows/win32/debug/debug-help-library) - used for the stack trace feature introduced in 1.9.6
+ - [signcheck.exe](https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck) - alowing to scan files on vitus total before recovering them
+ - [SbieHide.dll](https://github.com/VeroFess/SbieHide) - a 3rd party dll to hide the sbiedll.dll
+ - [LoagAPI.dll](https://bsa.isoftware.nl/) - a api loggin library used for buster sandbox analyzer
+- added option to set the update interval available presets 1, 7, 14 and 30 days
+
+### Changed
+- setup wizard has now a dedicated update config page
+- split the support page into cert and update tabs
+
+
+
 ## [1.9.8 / 5.64.8] - 2023-06-21
 
 ### Changed

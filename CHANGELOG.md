@@ -17,10 +17,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - [ImDisk Toolkit](https://sourceforge.net/projects/imdisk-toolkit/) - used to create RAM Disks and other virtual drives
   - [V4 Script Debugger](https://github.com/DavidXanatos/NeoScriptTools) - used to debug troubleshooting scripts
   - [Microsoft Debug Help Library](https://learn.microsoft.com/en-us/windows/win32/debug/debug-help-library) - used for the stack trace feature introduced in 1.9.6
-  - [signcheck.exe](https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck) - allowing to scan files on VirusTotal before recovering them
+  - [signcheck.exe](https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck) - used to scan files on VirusTotal before recovering them
   - [SbieHide.dll](https://github.com/VeroFess/SbieHide) - a third-party DLL to hide SbieDll.dll
   - [LogAPI.dll](https://bsa.isoftware.nl/) - an API logging library used for Buster Sandbox Analyzer
-- added option to set the update interval: 1, 7, 14 and 30 days
+- added option to set the update interval to 1, 7, 14 and 30 days
 
 ### Changed
 - setup wizard has now a dedicated update configuration page

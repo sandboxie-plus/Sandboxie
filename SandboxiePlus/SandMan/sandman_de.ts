@@ -66,7 +66,7 @@
     <message>
         <location filename="AddonManager.cpp" line="277"/>
         <source>Addon Instalation Failed!</source>
-        <translation>Erweiterungsinstallation fehlgeschalgen!</translation>
+        <translation>Erweiterungsinstallation fehlgeschlagen!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="285"/>
@@ -96,7 +96,7 @@
     <message>
         <location filename="AddonManager.cpp" line="376"/>
         <source>Addon Removal Failed!</source>
-        <translation>Erweiterungsentfernung fehlgeschalgen!</translation>
+        <translation>Erweiterungsentfernung fehlgeschlagen!</translation>
     </message>
 </context>
 <context>
@@ -198,7 +198,7 @@
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="452"/>
         <source>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerfull. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retriev the latest troubleshooting instructions.</source>
-        <translation>Mit einem gültigen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;Unterstützerzertifikat&lt;/a&gt; wäre der Assitent  noch wirkungsvoller. Er könnte auf die &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;Onlinelösungsdatenbank&lt;/a&gt; zugreifen, um die neusten Problembehebungsinstruktionen zu erhalten.</translation>
+        <translation>Mit einem gültigen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;Unterstützerzertifikat&lt;/a&gt; wäre der Assistent noch wirkungsvoller. Er könnte auf die &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;Onlinelösungsdatenbank&lt;/a&gt; zugreifen, um die neusten Problembehebungsinstruktionen zu erhalten.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="490"/>
@@ -226,7 +226,7 @@
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="106"/>
         <source>Debugger Enabled</source>
-        <translation>Debugger aktviert</translation>
+        <translation>Debugger aktiviert</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="170"/>
@@ -574,7 +574,7 @@ Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process.If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
 
 You can click Finish to close this wizard.</source>
-        <translation>Danke für die Verwendung des Problembehebungsassistenten für Sandboxie-Plus. Wir bitten um Entschuldigung für alle Unannehmlichkeiten die Sie während des Prozesses erlebt haben. Falls Sie weitere Fragen haben oder weitere Unterstützung benötigen, zögern Sie bitte nicht sich mit uns in Verbindung zu setzen..Wir sind hier um Ihnen zu helfen. Vielen Dank für Ihr Verständnis und Ihre Mitwirkung. 
+        <translation>Danke für die Verwendung des Problembehebungsassistenten für Sandboxie-Plus. Wir bitten um Entschuldigung für alle Unannehmlichkeiten die Sie während des Prozesses erlebt haben. Falls Sie weitere Fragen haben oder weitere Unterstützung benötigen, zögern Sie bitte nicht sich mit uns in Verbindung zu setzen. Wir sind hier um Ihnen zu helfen. Vielen Dank für Ihr Verständnis und Ihre Mitwirkung. 
 
 Klicken Sie auf Abschließen um den Assistenten zu schließen.</translation>
     </message>
@@ -2193,12 +2193,12 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="778"/>
         <source>This troubleshooting procedure could not be initialized. You can click on next to submit an issue report.</source>
-        <translation>Die Problembehebungsprozedur konnte nicht gestartet werden. Sie können auf weiter klicken um ein Problembericht zu übermitteln.</translation>
+        <translation>Die Problembehebungsprozedur konnte nicht gestartet werden. Sie können auf Weiter klicken um ein Problembericht zu übermitteln.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="888"/>
         <source>Somethign failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</source>
-        <translation>Etwas schlug innerhalb der Problembehebungsprozedur fehl und es kann nicht vorgefahren werden. Sie können auf weiter klicken um ein Problembericht zu übermitteln.</translation>
+        <translation>Etwas schlug innerhalb der Problembehebungsprozedur fehl und diese kann nicht fortgesetzt werden. Sie können auf Weiter klicken um ein Problembericht zu übermitteln.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="889"/>
@@ -2317,12 +2317,12 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="611"/>
         <source>Sandboxie-Plus applies strict application restrictions, which can lead to compatibility issues. Stay updated with Sandboxie-Plus, including compatibility templates and troubleshooting, to ensure smooth operation amid Windows updates and application changes.</source>
-        <translation>Sandboxie-Plus wendet stikte Applikationseinschränkungen an, welche zu Kompatibilitätsproblemen führen können. Bleiben Sie mit Sandboxie-Plus aktuell, inklusive der Kompatibilitätsvorlagen und der Problembehebungen, um einen reibungslosen Betrieb auch bei Windowsupdates und Programmänderungen sicher zu stellen.</translation>
+        <translation>Sandboxie-Plus wendet strikte Applikationseinschränkungen an, welche zu Kompatibilitätsproblemen führen können. Bleiben Sie mit Sandboxie-Plus aktuell, inklusive der Kompatibilitätsvorlagen und der Problembehebungen, um einen reibungslosen Betrieb auch bei Windowsupdates und Programmänderungen sicher zu stellen.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="617"/>
         <source>Access to the latest compatibility templates and the online troubleshooting database requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
-        <translation>Zugriff auf die neusten Kompatibilitätsvorlagen und die Onlineproblemlösungsdatenbank erfordert ein gültiges  &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;Unterstützerzertifikat&lt;/a&gt;.</translation>
+        <translation>Zugriff auf die neusten Kompatibilitätsvorlagen und die Onlineproblemlösungsdatenbank erfordert ein gültiges &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;Unterstützerzertifikat&lt;/a&gt;.</translation>
     </message>
 </context>
 <context>
@@ -4984,7 +4984,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="989"/>
         <source>Sandboxing compatybility is relyent on the configuration hence attaching the sandboxie.ini helps a lot with finding the issue.</source>
-        <translation>Die Kompatibilität von Sandboxen ist abhänging von der Konfiguration, daher ist das Anhängen der sandboxie.ini sehr hilfreich beim Finden der Problemursache.</translation>
+        <translation>Die Kompatibilität von Sandboxen ist abhängig von der Konfiguration, daher ist das Anhängen der sandboxie.ini sehr hilfreich beim Finden der Problemursache.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="992"/>
@@ -4995,7 +4995,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Wizards/BoxAssistant.cpp" line="994"/>
         <source>Select partially checked state to sends only message log but no trace log.
 Before sending you can review the logs in the main window.</source>
-        <translation>Wählen Sie nur teilweise angehakte Zustände um nur die Nachricht, aber kein Rückverfolgungsprotokoll zu senden.
+        <translation>Wählen Sie den teilweise angehakten Zustand, um nur das Nachrichtenprotokoll, aber kein Rückverfolgungsprotokoll zu senden.
 Vor dem Absenden können Sie die Protokolle im Hauptfenster überprüfen.</translation>
     </message>
     <message>
@@ -5006,7 +5006,7 @@ Vor dem Absenden können Sie die Protokolle im Hauptfenster überprüfen.</trans
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="998"/>
         <source>An applicatin crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</source>
-        <translation>Eine Applikation ist während der Problembehebungsprozedur abgestürtzt. Das Anhängen eines Crashdumps kann bei der Fehlersuche hilfreich sein.</translation>
+        <translation>Eine Applikation ist während der Problembehebungsprozedur abgestürzt. Das Anhängen eines Crashdumps kann bei der Fehlersuche hilfreich sein.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1002"/>
@@ -5031,7 +5031,7 @@ Vor dem Absenden können Sie die Protokolle im Hauptfenster überprüfen.</trans
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1025"/>
         <source>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described. </source>
-        <translation>Bedauerlicherweise gibt es keine automatisierte Problembehandlungsprozedur für das von Ihnen beschriebene Problem. </translation>
+        <translation>Bedauerlicherweise gibt es keine automatisierte Problembehebungsprozedur für das von Ihnen beschriebene Problem. </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1030"/>
@@ -5058,7 +5058,7 @@ Vor dem Absenden können Sie die Protokolle im Hauptfenster überprüfen.</trans
         <source>Failed to submit issue report, error %1
 Try submitting without the log attached.</source>
         <translation>Konnte Problembericht nicht übermitteln, Fehler %1
-Versuchen Sie die Übermittlung ohne die angehangenen Protokolle.</translation>
+Versuchen Sie die Übermittlung ohne die angehängten Protokolle.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1205"/>
@@ -5149,14 +5149,14 @@ Prozesse in dieser Box werden mit einem eigenen Prozesstoken laufen, die anzeige
         <location filename="Windows/SupportDialog.cpp" line="43"/>
         <source>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.<byte value="xd"/>
 If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate.</source>
-        <translation>Diese Insiderversion benötigt einen speziellen Typ von Zertifikat GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.
-Wenn Sie bereits ein großes Patreonunterstützerzertifikat haben, kann Sandboxie Online nach einem Update für Ihr Zertifikt suchen.</translation>
+        <translation>Diese Insiderversion benötigt ein spezielles Zertifikat vom Typ GREAT_PATREON, PERSONAL-HUGE oder CONTRIBUTOR.
+Wenn Sie bereits ein großes Patreonunterstützerzertifikat haben, kann Sandboxie Online nach einem Update für Ihr Zertifikat suchen.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="51"/>
         <location filename="Windows/SupportDialog.cpp" line="316"/>
         <source>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.</source>
-        <translation>Diese Insiderversion benötigt einen speziellen Typ von Zertifikat GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.</translation>
+        <translation>Diese Insiderversion benötigt ein spezielles Zertifikat vom Typ GREAT_PATREON, PERSONAL-HUGE oder CONTRIBUTOR.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="136"/>
@@ -5470,7 +5470,7 @@ Wenn Sie bereits ein großes Patreonunterstützerzertifikat haben, kann Sandboxi
     <message>
         <location filename="Views/TraceView.cpp" line="376"/>
         <source>To use the stack traces feature the DbgHelp.dll and SymSrv.dll are required, do you want to download and install them?</source>
-        <translation>Um die Stacktracefunktion zu verwenden sind  DbgHelp.dll und SymSrv.dll notwendig. Möchten Sie diese runterladen und installieren?</translation>
+        <translation>Um die Stacktracefunktion zu verwenden sind DbgHelp.dll und SymSrv.dll notwendig. Möchten Sie diese runterladen und installieren?</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="698"/>

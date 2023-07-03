@@ -481,6 +481,8 @@ protected:
 	void LoadIniSection();
 	void SaveIniSection();
 
+	void ApplyIniEditFont();
+
 	QString GetCategoryName(const QString& Category);
 
 	bool m_HoldChange;

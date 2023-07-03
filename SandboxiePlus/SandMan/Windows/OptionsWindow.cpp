@@ -532,6 +532,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
 
 	// edit
+	ApplyIniEditFont();
+
 	connect(ui.btnEditIni, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
 	connect(ui.btnSaveIni, SIGNAL(clicked(bool)), this, SLOT(OnSaveIni()));
 	connect(ui.btnCancelEdit, SIGNAL(clicked(bool)), this, SLOT(OnCancelEdit()));
@@ -623,6 +625,14 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		this->addAction(pSetTree);
 	}
 	m_pSearch->setPlaceholderText(tr("Search for options"));
+}
+
+void COptionsWindow::ApplyIniEditFont()
+{
+	QFont font; // defaults to application font
+	auto fontName = theConf->GetString("UIConfig/IniFont", "").trimmed();
+	if (!fontName.isEmpty()) bool dummy = font.fromString(fontName); // ignore fromString() fail
+	ui.txtIniSection->setFont(font);
 }
 
 void COptionsWindow::OnSetTree()

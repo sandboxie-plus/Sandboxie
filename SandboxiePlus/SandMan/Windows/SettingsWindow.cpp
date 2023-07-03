@@ -13,6 +13,7 @@
 #include <QJsonDocument>
 #include "../Wizards/TemplateWizard.h"
 #include "../AddonManager.h"
+#include <qfontdialog.h>
 
 
 #include <windows.h>
@@ -493,6 +494,15 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
 
 	// Ini Edit
+
+	ui.btnSelectIniFont->setIcon(CSandMan::GetIcon("Font"));
+	ui.btnSelectIniFont->setToolTip(tr("Select font"));
+	ui.btnResetIniFont->setIcon(CSandMan::GetIcon("ResetFont"));
+	ui.btnResetIniFont->setToolTip(tr("Reset font"));
+	ApplyIniEditFont();
+
+	connect(ui.btnSelectIniFont, SIGNAL(clicked(bool)), this, SLOT(OnSelectIniEditFont()));
+	connect(ui.btnResetIniFont, SIGNAL(clicked(bool)), this, SLOT(OnResetIniEditFont()));
 	connect(ui.btnEditIni, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
 	connect(ui.btnSaveIni, SIGNAL(clicked(bool)), this, SLOT(OnSaveIni()));
 	connect(ui.btnCancelEdit, SIGNAL(clicked(bool)), this, SLOT(OnCancelEdit()));
@@ -536,6 +546,30 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		this->addAction(pSetTree);
 	}
 	m_pSearch->setPlaceholderText(tr("Search for settings"));
+}
+
+void CSettingsWindow::ApplyIniEditFont()
+{
+	QFont font; // defaults to application font
+	auto fontName = theConf->GetString("UIConfig/IniFont", "").trimmed();	
+	if (!fontName.isEmpty()) bool dummy = font.fromString(fontName); // ignore fromString() fail
+	ui.txtIniSection->setFont(font);
+	ui.lblIniEditFont->setText(tr("%0, %1 pt").arg(font.family()).arg(font.pointSizeF())); // tr: example: "Calibri, 9.5 pt"
+}
+
+void CSettingsWindow::OnSelectIniEditFont()
+{
+	bool ok;
+	auto newFont = QFontDialog::getFont(&ok, ui.txtIniSection->font(), this);
+	if (!ok) return;
+	theConf->SetValue("UIConfig/IniFont", newFont.toString());
+	ApplyIniEditFont();
+}
+
+void CSettingsWindow::OnResetIniEditFont()
+{
+	theConf->DelValue("UIConfig/IniFont");
+	ApplyIniEditFont();
 }
 
 void CSettingsWindow::OnSetTree()

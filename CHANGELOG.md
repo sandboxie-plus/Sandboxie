@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed uninstall issue in the Sandboxie Classic installer [d1863ff](https://github.com/sandboxie-plus/Sandboxie/commit/d1863ffadfe105c695de71c9e841c2fd568116fe)
+- added workaround for Chrome not starting on Windows 11 with KB5027231 [#3040](https://github.com/sandboxie-plus/Sandboxie/issues/3040)
 
 ### Removed
 - reduced duplicate code (thanks lmou523) [#3067](https://github.com/sandboxie-plus/Sandboxie/pull/3067)

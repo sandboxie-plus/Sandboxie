@@ -813,7 +813,7 @@ long DisplayHTMLStr(HWND hwnd, LPCTSTR string)
 
 	// We want to get the base address (ie, a pointer) to the IWebBrowser2 object embedded within the browser
 	// object, so we can call some of the functions in the former's table.
-	if (!browserObject->lpVtbl->QueryInterface(browserObject, &IID_IWebBrowser2, (void**)&webBrowser2))
+	if (SUCCEEDED(browserObject->lpVtbl->QueryInterface(browserObject, &IID_IWebBrowser2, (void**)&webBrowser2)))
 	{
 		// Ok, now the pointer to our IWebBrowser2 object is in 'webBrowser2', and so its VTable is
 		// webBrowser2->lpVtbl.
@@ -833,11 +833,11 @@ long DisplayHTMLStr(HWND hwnd, LPCTSTR string)
 
 		// Call the IWebBrowser2 object's get_Document so we can get its DISPATCH object. I don't know why you
 		// don't get the DISPATCH object via the browser object's QueryInterface(), but you don't.
-		if (!webBrowser2->lpVtbl->get_Document(webBrowser2, &lpDispatch))
+		if (SUCCEEDED(webBrowser2->lpVtbl->get_Document(webBrowser2, &lpDispatch)))
 		{
 			// We want to get a pointer to the IHTMLDocument2 object embedded within the DISPATCH
 			// object, so we can call some of the functions in the former's table.
-			if (!lpDispatch->lpVtbl->QueryInterface(lpDispatch, &IID_IHTMLDocument2, (void**)&htmlDoc2))
+			if (SUCCEEDED(lpDispatch->lpVtbl->QueryInterface(lpDispatch, &IID_IHTMLDocument2, (void**)&htmlDoc2)))
 			{
 				// Ok, now the pointer to our IHTMLDocument2 object is in 'htmlDoc2', and so its VTable is
 				// htmlDoc2->lpVtbl.
@@ -846,7 +846,7 @@ long DisplayHTMLStr(HWND hwnd, LPCTSTR string)
 				// array of "VARIENT" structs. So let's create all that.
 				if ((sfArray = SafeArrayCreate(VT_VARIANT, 1, (SAFEARRAYBOUND *)&ArrayBound)))
 				{
-					if (!SafeArrayAccessData(sfArray, (void**)&pVar))
+					if (SUCCEEDED(SafeArrayAccessData(sfArray, (void**)&pVar)))
 					{
 						pVar->vt = VT_BSTR;
 #ifndef UNICODE
@@ -933,7 +933,7 @@ long DisplayHTMLPage(HWND hwnd, LPTSTR webPageName)
 
 	// We want to get the base address (ie, a pointer) to the IWebBrowser2 object embedded within the browser
 	// object, so we can call some of the functions in the former's table.
-	if (!browserObject->lpVtbl->QueryInterface(browserObject, &IID_IWebBrowser2, (void**)&webBrowser2))
+	if (SUCCEEDED(browserObject->lpVtbl->QueryInterface(browserObject, &IID_IWebBrowser2, (void**)&webBrowser2)))
 	{
 		// Ok, now the pointer to our IWebBrowser2 object is in 'webBrowser2', and so its VTable is
 		// webBrowser2->lpVtbl.
@@ -1093,7 +1093,7 @@ long EmbedBrowserObject(HWND hwnd)
 	// _IOleClientSiteEx struct starts with an embedded IOleClientSite. So the browser won't care, and we want
 	// this extended struct passed to our IOleClientSite functions.
 
-	if (!OleCreate(&CLSID_WebBrowser, &IID_IOleObject, OLERENDER_DRAW, 0, (IOleClientSite *)_iOleClientSiteEx, &MyIStorage, (void**)&browserObject))
+	if (SUCCEEDED(OleCreate(&CLSID_WebBrowser, &IID_IOleObject, OLERENDER_DRAW, 0, (IOleClientSite *)_iOleClientSiteEx, &MyIStorage, (void**)&browserObject)))
 	{
 		// Ok, we now have the pointer to the browser object in 'browserObject'. Let's save this in the
 		// memory block we allocated above, and then save the pointer to that whole thing in our window's
@@ -1133,11 +1133,11 @@ long EmbedBrowserObject(HWND hwnd)
 		GetClientRect(hwnd, &rect);
 
 		// Let browser object know that it is embedded in an OLE container.
-		if (!OleSetContainedObject((struct IUnknown *)browserObject, TRUE) &&
+		if (SUCCEEDED(OleSetContainedObject((struct IUnknown *)browserObject, TRUE)) &&
 
 			// Set the display area of our browser control the same as our window's size
 			// and actually put the browser object into our window.
-			!browserObject->lpVtbl->DoVerb(browserObject, OLEIVERB_SHOW, NULL, (IOleClientSite *)_iOleClientSiteEx, -1, hwnd, &rect) &&
+			SUCCEEDED(browserObject->lpVtbl->DoVerb(browserObject, OLEIVERB_SHOW, NULL, (IOleClientSite *)_iOleClientSiteEx, -1, hwnd, &rect)) &&
 
 			// Ok, now things may seem to get even trickier, One of those function pointers in the browser's VTable is
 			// to the QueryInterface() function. What does this function do? It lets us grab the base address of any
@@ -1148,7 +1148,7 @@ long EmbedBrowserObject(HWND hwnd)
 			// object, so we can call some of the functions in the former's table. For example, one IWebBrowser2 function
 			// we intend to call below will be Navigate2(). So we call the browser object's QueryInterface to get our
 			// pointer to the IWebBrowser2 object.
-			!browserObject->lpVtbl->QueryInterface(browserObject, &IID_IWebBrowser2, (void**)&webBrowser2))
+			SUCCEEDED(browserObject->lpVtbl->QueryInterface(browserObject, &IID_IWebBrowser2, (void**)&webBrowser2)))
 		{
 			// Ok, now the pointer to our IWebBrowser2 object is in 'webBrowser2', and so its VTable is
 			// webBrowser2->lpVtbl.
@@ -1226,7 +1226,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		IOleObject *browserObject = *((IOleObject **)GetWindowLongPtr(hwnd, GWL_USERDATA));
 
 		IOleWindow *oleWindow;
-		if (!browserObject->lpVtbl->QueryInterface(browserObject, &IID_IOleWindow, (void**)&oleWindow))
+		if (SUCCEEDED(browserObject->lpVtbl->QueryInterface(browserObject, &IID_IOleWindow, (void**)&oleWindow)))
 		{
 			HWND hwndBrowser = NULL;
 			oleWindow->lpVtbl->GetWindow(oleWindow, &hwndBrowser);

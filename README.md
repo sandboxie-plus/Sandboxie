@@ -107,8 +107,9 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - lmou523 - Code fixes
 - sredna - Code fixes for Classic installer
 - weihongx9315 - Code fix
-- yfdyh000 - Localization support for Plus installer
+- jorgectf - CodeQL workflow
 - stephtr - CI / Certification
+- yfdyh000 - Localization support for Plus installer
 - Dyras - Templates additions
 - cricri-pingouin - UI fixes
 - Valinwolf - UI / Icons

@@ -175,7 +175,7 @@ int openShellContextMenu(const QStringList& Files, void* parentWindow, const CSa
         //details.aKeys = NULL;
         SHCreateDefaultContextMenu(&details, IID_IContextMenu, reinterpret_cast<LPVOID*>(&pContextMenu));
     }
-    if (!SUCCEEDED(!pContextMenu))
+    if (!pContextMenu)
         return 0;
 
     HMENU hMenu = CreatePopupMenu();

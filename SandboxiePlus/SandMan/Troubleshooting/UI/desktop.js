@@ -1,8 +1,8 @@
 /*
 *	group: ui
 *	class: ui
-* name: Browser shortcut is mitting from the desktop
-* description: This procedure will add a browser shortcut to thr desktop
+* name: Browser shortcut is missing from the desktop
+* description: This procedure will add a browser shortcut to the desktop
 *
 */
 

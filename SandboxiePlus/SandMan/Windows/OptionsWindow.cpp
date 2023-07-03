@@ -8,7 +8,7 @@
 #include "../MiscHelpers/Common/SettingsWidgets.h"
 #include "Helpers/WinAdmin.h"
 #include "../Wizards/TemplateWizard.h"
-#include <qfontdialog.h>
+
 
 class NoEditDelegate : public QStyledItemDelegate {
 public:
@@ -532,13 +532,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
 
 	// edit
-	ui.btnSelectIniEditFont->setIcon(CSandMan::GetIcon("Font"));
-	ui.btnResetIniEditFont->setIcon(CSandMan::GetIcon("ResetFont"));
-	ui.btnResetIniEditFont->setToolTip(tr("Reset font"));
 	ApplyIniEditFont();
 
-	connect(ui.btnSelectIniEditFont, SIGNAL(clicked(bool)), this, SLOT(OnSelectIniEditFont()));
-	connect(ui.btnResetIniEditFont, SIGNAL(clicked(bool)), this, SLOT(OnResetIniEditFont()));
 	connect(ui.btnEditIni, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
 	connect(ui.btnSaveIni, SIGNAL(clicked(bool)), this, SLOT(OnSaveIni()));
 	connect(ui.btnCancelEdit, SIGNAL(clicked(bool)), this, SLOT(OnCancelEdit()));
@@ -638,22 +633,6 @@ void COptionsWindow::ApplyIniEditFont()
 	auto fontName = theConf->GetString("UIConfig/IniFont", "").trimmed();
 	if (!fontName.isEmpty()) bool dummy = font.fromString(fontName); // ignore fromString() fail
 	ui.txtIniSection->setFont(font);
-	ui.btnSelectIniEditFont->setToolTip(tr("Select font (%1)").arg(font.family())); //tr: %1 = name of current font
-}
-
-void COptionsWindow::OnSelectIniEditFont()
-{
-	bool ok;
-	auto newFont = QFontDialog::getFont(&ok, ui.txtIniSection->font(), this);
-	if (!ok) return;
-	theConf->SetValue("UIConfig/IniFont", newFont.toString());
-	ApplyIniEditFont();
-}
-
-void COptionsWindow::OnResetIniEditFont()
-{
-	theConf->DelValue("UIConfig/IniFont");
-	ApplyIniEditFont();
 }
 
 void COptionsWindow::OnSetTree()

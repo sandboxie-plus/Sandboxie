@@ -494,14 +494,15 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
 
 	// Ini Edit
-	
-	ui.btnSelectIniEditFont->setIcon(CSandMan::GetIcon("Font"));
-	ui.btnResetIniEditFont->setIcon(CSandMan::GetIcon("ResetFont"));
-	ui.btnResetIniEditFont->setToolTip(tr("Reset font"));
+
+	ui.btnSelectIniFont->setIcon(CSandMan::GetIcon("Font"));
+	ui.btnSelectIniFont->setToolTip(tr("Select font"));
+	ui.btnResetIniFont->setIcon(CSandMan::GetIcon("ResetFont"));
+	ui.btnResetIniFont->setToolTip(tr("Reset font"));
 	ApplyIniEditFont();
 
-	connect(ui.btnSelectIniEditFont, SIGNAL(clicked(bool)), this, SLOT(OnSelectIniEditFont()));
-	connect(ui.btnResetIniEditFont, SIGNAL(clicked(bool)), this, SLOT(OnResetIniEditFont()));
+	connect(ui.btnSelectIniFont, SIGNAL(clicked(bool)), this, SLOT(OnSelectIniEditFont()));
+	connect(ui.btnResetIniFont, SIGNAL(clicked(bool)), this, SLOT(OnResetIniEditFont()));
 	connect(ui.btnEditIni, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
 	connect(ui.btnSaveIni, SIGNAL(clicked(bool)), this, SLOT(OnSaveIni()));
 	connect(ui.btnCancelEdit, SIGNAL(clicked(bool)), this, SLOT(OnCancelEdit()));
@@ -553,7 +554,7 @@ void CSettingsWindow::ApplyIniEditFont()
 	auto fontName = theConf->GetString("UIConfig/IniFont", "").trimmed();	
 	if (!fontName.isEmpty()) bool dummy = font.fromString(fontName); // ignore fromString() fail
 	ui.txtIniSection->setFont(font);
-	ui.btnSelectIniEditFont->setToolTip(tr("Select font (%1)").arg(font.family())); //tr: %1 = name of current font
+	ui.lblIniEditFont->setText(tr("%0, %1 pt").arg(font.family()).arg(font.pointSizeF())); // tr: example: "Calibri, 9.5 pt"
 }
 
 void CSettingsWindow::OnSelectIniEditFont()

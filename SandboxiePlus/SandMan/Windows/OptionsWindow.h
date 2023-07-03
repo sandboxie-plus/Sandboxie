@@ -228,9 +228,6 @@ private slots:
 
 	void OnSetTree();
 
-	void OnSelectIniEditFont();
-	void OnResetIniEditFont();
-
 protected:
 	void closeEvent(QCloseEvent *e);
 

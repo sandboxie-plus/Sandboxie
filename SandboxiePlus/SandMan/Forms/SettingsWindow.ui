@@ -48,7 +48,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>4</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -85,6 +85,7 @@
                 <widget class="QLabel" name="lblGeneral">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -127,6 +128,7 @@
                 <widget class="QLabel" name="lblRecovery">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -257,6 +259,7 @@
                 <widget class="QLabel" name="lblMessages">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -289,6 +292,7 @@
                 <widget class="QLabel" name="lblNotify">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -422,6 +426,7 @@
                 <widget class="QLabel" name="lblStartMenu">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -478,6 +483,7 @@
                 <widget class="QLabel" name="lblSysTray">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -498,6 +504,7 @@
                 <widget class="QLabel" name="lblRunBoxed">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -561,6 +568,7 @@
                 <widget class="QLabel" name="lblStartUp">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -834,6 +842,7 @@
                  </property>
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -948,43 +957,17 @@
             <layout class="QGridLayout" name="gridLayout_32">
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_31">
-               <item row="1" column="2">
-                <widget class="QComboBox" name="cmbDPI"/>
-               </item>
-               <item row="1" column="1">
-                <widget class="QLabel" name="label_23">
+               <item row="3" column="1">
+                <widget class="QLabel" name="label_6">
                  <property name="text">
-                  <string>High DPI Scaling</string>
+                  <string>Ini Editor Font</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1">
-                <widget class="QLabel" name="label_24">
-                 <property name="text">
-                  <string>Font Scaling</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <spacer name="horizontalSpacer_17">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="3" column="3">
+               <item row="4" column="4">
                 <spacer name="horizontalSpacer_19">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -997,7 +980,111 @@
                  </property>
                 </spacer>
                </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_24">
+                 <property name="text">
+                  <string>Font Scaling</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_23">
+                 <property name="text">
+                  <string>High DPI Scaling</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <spacer name="horizontalSpacer_17">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="lblDisplay">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Graphic Options</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2">
+                <widget class="QComboBox" name="cmbFontScale">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="2">
+                <spacer name="horizontalSpacer_18">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
                <item row="3" column="4">
+                <layout class="QHBoxLayout" name="horizontalLayout_4">
+                 <item>
+                  <widget class="QPushButton" name="btnSelectIniFont">
+                   <property name="toolTip">
+                    <string>Select font</string>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btnResetIniFont">
+                   <property name="toolTip">
+                    <string>Reset font</string>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+               <item row="4" column="6">
                 <spacer name="horizontalSpacer_20">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -1010,28 +1097,14 @@
                  </property>
                 </spacer>
                </item>
-               <item row="1" column="3">
-                <widget class="QLabel" name="label">
-                 <property name="text">
-                  <string>(Restart required)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="2">
-                <widget class="QComboBox" name="cmbFontScale">
-                 <property name="editable">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="3">
+               <item row="2" column="4">
                 <widget class="QLabel" name="label_13">
                  <property name="text">
                   <string>%</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1">
+               <item row="4" column="1">
                 <spacer name="verticalSpacer_10">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -1044,31 +1117,22 @@
                  </property>
                 </spacer>
                </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="lblDisplay">
-                 <property name="font">
-                  <font>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
+               <item row="1" column="2">
+                <widget class="QComboBox" name="cmbDPI"/>
+               </item>
+               <item row="1" column="4">
+                <widget class="QLabel" name="label">
                  <property name="text">
-                  <string>Graphic Options</string>
+                  <string>(Restart required)</string>
                  </property>
                 </widget>
                </item>
                <item row="3" column="2">
-                <spacer name="horizontalSpacer_18">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                <widget class="QLabel" name="lblIniEditFont">
+                 <property name="text">
+                  <string>#</string>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
+                </widget>
                </item>
               </layout>
              </item>
@@ -1086,7 +1150,7 @@
          <item row="0" column="0">
           <widget class="QTabWidget" name="tabsAddons">
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="tabAddonList">
             <attribute name="title">
@@ -1226,6 +1290,7 @@
                 <widget class="QLabel" name="lblCertExp">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1351,6 +1416,7 @@
                 <widget class="QLabel" name="lblUpdates">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1582,6 +1648,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                 <widget class="QLabel" name="lblBoxRoot">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1694,6 +1761,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                 <widget class="QLabel" name="lblBoxFeatures">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1785,6 +1853,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                 <widget class="QLabel" name="lblProtection">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -2135,7 +2204,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
          <string>Edit ini Section</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout_16">
-         <item row="0" column="5">
+         <item row="0" column="2">
           <widget class="QPushButton" name="btnSaveIni">
            <property name="enabled">
             <bool>false</bool>
@@ -2145,31 +2214,14 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
            </property>
           </widget>
          </item>
-         <item row="0" column="3">
-          <widget class="QPushButton" name="btnResetIniEditFont">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QPushButton" name="btnSelectIniEditFont">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="1">
-          <spacer name="horizontalSpacer_15">
+          <spacer name="horizontalSpacer_7">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Minimum</enum>
-           </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>10</width>
+             <width>40</width>
              <height>20</height>
             </size>
            </property>
@@ -2185,20 +2237,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
            </property>
           </widget>
          </item>
-         <item row="0" column="4">
-          <spacer name="horizontalSpacer_7">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="0" column="6">
+         <item row="0" column="3">
           <widget class="QPushButton" name="btnCancelEdit">
            <property name="enabled">
             <bool>false</bool>
@@ -2208,7 +2247,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
            </property>
           </widget>
          </item>
-         <item row="1" column="0" colspan="7">
+         <item row="1" column="0" colspan="4">
           <widget class="QPlainTextEdit" name="txtIniSection">
            <property name="lineWrapMode">
             <enum>QPlainTextEdit::NoWrap</enum>

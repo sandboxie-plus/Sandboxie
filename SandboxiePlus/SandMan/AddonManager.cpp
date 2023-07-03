@@ -231,7 +231,7 @@ void CAddonManager::InstallAddonAsync(const QString& FilePath, CAddonPtr pAddon)
 					CloseHandle(pi.hThread);
 				}
 				else
-					Status = SB_ERR(SB_OtherError, QVariantList() << tr("Failes to start installer (%1)!").arg(GetLastError()));
+					Status = SB_ERR(SB_OtherError, QVariantList() << tr("Failed to start installer (%1)!").arg(GetLastError()));
 
 				LocalFree(modifiedEnvironment);
 			}
@@ -265,7 +265,7 @@ void CAddonManager::InstallAddonAsync(const QString& FilePath, CAddonPtr pAddon)
 			QDir(FileDir).removeRecursively();
 		}
 		else
-			Status = SB_ERR(SB_OtherError, QVariantList() << tr("Failes to unpack addon!"));
+			Status = SB_ERR(SB_OtherError, QVariantList() << tr("Failed to unpack addon!"));
 		Archive.Close();
 	}
 
@@ -337,7 +337,7 @@ void CAddonManager::RemoveAddonAsync(CAddonPtr pAddon)
 			CloseHandle(pi.hThread);
 		}
 		else
-			Status = SB_ERR(SB_OtherError, QVariantList() << tr("Failes to start uninstaller!"));
+			Status = SB_ERR(SB_OtherError, QVariantList() << tr("Failed to start uninstaller!"));
 	}
 	else
 	{

@@ -2188,7 +2188,7 @@ void CSandMan::OnStatusChanged()
 		int WizardLevel = abs(theConf->GetInt("Options/WizardLevel", 0));
 		if (WizardLevel < (theConf->GetInt("Options/CheckForUpdates", 2) != 1 ? SETUP_LVL_2 : SETUP_LVL_1)) {
 			if (!CSetupWizard::ShowWizard(WizardLevel)) { // if user canceled mark that and not show again, untill there is somethign new
-				if(QMessageBox::question(NULL, "Sandboxie-Plus", tr("Do you want the setup wizard to be omited?"), QMessageBox::Yes, QMessageBox::No | QMessageBox::Default) == QMessageBox::Yes)
+				if(QMessageBox::question(NULL, "Sandboxie-Plus", tr("Do you want the setup wizard to be omitted?"), QMessageBox::Yes, QMessageBox::No | QMessageBox::Default) == QMessageBox::Yes)
 					theConf->SetValue("Options/WizardLevel", -SETUP_LVL_CURRENT);
 			}
 		}
@@ -3404,7 +3404,7 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_NameExists:		Message = tr("A sandbox with that name already exists"); break;
 	case SB_PasswordBad:	Message = tr("The config password must not be longer than 64 characters"); break;
 	case SB_Canceled:		Message = tr("The operation was canceled by the user"); break;
-	case SB_DeleteNoMount:	Message = tr("The content of an un mounted sandbox can not be deleted"); break;
+	case SB_DeleteNoMount:	Message = tr("The content of an unmounted sandbox can not be deleted"); break;
 
 	case SB_OtherError:		Message = tr("%1"); break;
 

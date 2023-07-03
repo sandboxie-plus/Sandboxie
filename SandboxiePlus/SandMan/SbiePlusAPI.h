@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../QSbieAPI/SbieAPI.h"
+#include "../QSbieAPI/Sandboxie/SbieTemplates.h"
 #include "BoxJob.h"
 
 enum ESbieExMsgCodes
@@ -240,4 +241,27 @@ protected:
 	bool					m_BoxDel;
 	bool					m_NoForce;
 	QRgb					m_BoxColor;
+};
+
+///////////////////////////////////////////////////////////////////////////////
+// CSbieTemplatesEx
+//
+
+class CSbieTemplatesEx : public CSbieTemplates
+{
+	Q_OBJECT
+public:
+	CSbieTemplatesEx(class CSbieAPI* pAPI, QObject* paretn = 0) 
+		:CSbieTemplates(pAPI, paretn) {}
+
+	virtual void Reset();
+
+	QList<QVariantMap> GetUpdates();
+
+	bool CheckUpdates(const QString& Value);
+
+protected:
+	void    CollectUpdates();
+
+	QList<QVariantMap> m_Updates;
 };

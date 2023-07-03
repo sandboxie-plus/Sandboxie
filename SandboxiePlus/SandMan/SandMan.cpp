@@ -190,7 +190,7 @@ CSandMan::CSandMan(QWidget *parent)
 
 	m_pBoxBorder = new CBoxBorder(theAPI, this);
 
-	m_SbieTemplates = new CSbieTemplates(theAPI, this);
+	m_SbieTemplates = new CSbieTemplatesEx(theAPI, this);
 
 
 
@@ -2057,7 +2057,11 @@ void CSandMan::OnStatusChanged()
 	QString appTitle = tr("Sandboxie-Plus v%1").arg(GetVersion());
 #endif
 	
-	if (theAPI->IsConnected())
+	bool bConnected = theAPI->IsConnected();
+	m_pConnect->setEnabled(!bConnected);
+	m_pDisconnect->setEnabled(bConnected);
+
+	if (bConnected)
 	{
 		bool bPortable = IsFullyPortable();
 
@@ -2293,11 +2297,7 @@ void CSandMan::OnMenuHover(QAction* action)
 
 	if (m_pMenuBar->actions().at(0) == action && m_pMaintenance)
 	{
-		bool bConnected = theAPI->IsConnected();
-		m_pConnect->setEnabled(!bConnected);
-		m_pDisconnect->setEnabled(bConnected);
-
-		m_pMaintenanceItems->setEnabled(!bConnected);
+		m_pMaintenanceItems->setEnabled(!theAPI->IsConnected());
 
 		bool DrvInstalled = CSbieUtils::IsInstalled(CSbieUtils::eDriver);
 		bool DrvLoaded = CSbieUtils::IsRunning(CSbieUtils::eDriver);

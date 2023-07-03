@@ -25,13 +25,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - setup wizard has now a dedicated update configuration page
 - split the support page into Sandboxie Support and Sandboxie Updater tabs
+- when the troubleshooting.7z file is available, the script engine will be used to match compatibility templates
+  - this allows a better granularity in template selection by using the AppCompatibility.js script
 
 ### Fixed
 - fixed uninstall issue in the Sandboxie Classic installer [d1863ff](https://github.com/sandboxie-plus/Sandboxie/commit/d1863ffadfe105c695de71c9e841c2fd568116fe)
 - added workaround for Chrome not starting on Windows 11 with KB5027231 [#3040](https://github.com/sandboxie-plus/Sandboxie/issues/3040)
 
 ### Removed
-- reduced duplicate code (thanks lmou523) [#3067](https://github.com/sandboxie-plus/Sandboxie/pull/3067)
+- cleaned up duplicate code (thanks lmou523) [#3067](https://github.com/sandboxie-plus/Sandboxie/pull/3067)
 
 
 

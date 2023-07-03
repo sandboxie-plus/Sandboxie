@@ -42,7 +42,7 @@ CJSEngineExt* CJSEngineExt::getEngineByHandle(void* handle)
 
 static QV4::ReturnedValue printCall(const QV4::FunctionObject* b, const QV4::Value* v, const QV4::Value* argv, int argc);
 static QV4::ReturnedValue debuggerCall(const QV4::FunctionObject* b, const QV4::Value* v, const QV4::Value* argv, int argc);
-static QV4::ReturnedValue evalCall(const QV4::FunctionObject* b, const QV4::Value* v, const QV4::Value* argv, int argc);
+//static QV4::ReturnedValue evalCall(const QV4::FunctionObject* b, const QV4::Value* v, const QV4::Value* argv, int argc);
 
 CJSEngineExt::CJSEngineExt(QObject* parent) 
     : QJSEngine(parent)
@@ -54,7 +54,7 @@ CJSEngineExt::CJSEngineExt(QObject* parent)
     // provide ability to invoke the debugger
     scope.engine->globalObject->defineDefaultProperty(QStringLiteral("_debugger"), debuggerCall);
     // overwrite the eval function with our own copy which traces the scripts
-    scope.engine->globalObject->defineDefaultProperty(QStringLiteral("eval"), evalCall);
+    //scope.engine->globalObject->defineDefaultProperty(QStringLiteral("eval"), evalCall);
 
     QMutexLocker locker(&g_engineMutex);
     g_engineMap.insert(handle(), this);
@@ -112,9 +112,9 @@ QV4::ReturnedValue debuggerCall(const QV4::FunctionObject* b, const QV4::Value* 
     return QV4::Encode::undefined();
 }
 
-QV4::ReturnedValue evalCall(const QV4::FunctionObject* b, const QV4::Value* v, const QV4::Value* argv, int argc)
-{
-    // not implemented
-
-    return QV4::Encode::undefined();
-}
+//QV4::ReturnedValue evalCall(const QV4::FunctionObject* b, const QV4::Value* v, const QV4::Value* argv, int argc)
+//{
+//    // not implemented
+//
+//    return QV4::Encode::undefined();
+//}

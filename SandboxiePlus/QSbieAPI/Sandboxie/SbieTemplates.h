@@ -11,9 +11,9 @@ class QSBIEAPI_EXPORT CSbieTemplates : public QObject
 public:
 	CSbieTemplates(class CSbieAPI* pAPI, QObject* paretn = 0);
 
-	void RunCheck();
-	void SetCheckResult(const QStringList& Result);
-	bool GetCheckState();
+	virtual void RunCheck();
+	virtual void SetCheckResult(const QStringList& Result);
+	virtual bool GetCheckState();
 
 	enum EStates
 	{
@@ -24,7 +24,7 @@ public:
 		eConfigured = eEnabled | eDisabled
 	};
 
-	void Reset();
+	virtual void Reset();
 
 	QStringList GetObjects();
 	QStringList GetClasses();

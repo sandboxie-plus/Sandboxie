@@ -737,11 +737,11 @@ _FX BOOL Proc_CreateAppContainerToken(
 
 
 //---------------------------------------------------------------------------
-// Proc_FindArgumentEnd
+// SbieDll_FindArgumentEnd
 //---------------------------------------------------------------------------
 
 
-_FX const WCHAR* Proc_FindArgumentEnd(const WCHAR* arguments)
+_FX const WCHAR* SbieDll_FindArgumentEnd(const WCHAR* arguments)
 {
     //
     // when suplying: "aaaa \"bb cc\"ddd\"e\\"f\" gg hh \\"ii \"jjjj kkkk"
@@ -1206,7 +1206,7 @@ _FX BOOL Proc_CreateProcessInternalW(
                 
                 const WCHAR* lpArguments = NULL;
                 if (lpCommandLine)
-                    lpArguments = Proc_FindArgumentEnd(lpCommandLine);
+                    lpArguments = SbieDll_FindArgumentEnd(lpCommandLine);
 
                 WCHAR *mybuf = Dll_Alloc((wcslen(lpApplicationName) + 2 + (lpArguments ? wcslen(lpArguments) + 8192 : 0) + 1) * sizeof(WCHAR));
                 if (mybuf) {
@@ -1232,7 +1232,7 @@ _FX BOOL Proc_CreateProcessInternalW(
                         WCHAR* temp = Dll_Alloc(sizeof(WCHAR) * 8192);
 
                         for (const WCHAR* ptr = lpArguments; *ptr != L'\0';) {
-                            WCHAR* end = (WCHAR*)Proc_FindArgumentEnd(ptr);
+                            WCHAR* end = (WCHAR*)SbieDll_FindArgumentEnd(ptr);
                             ULONG len = (ULONG)(end - ptr);
                             if (len > 0) {
                                 WCHAR savechar = *end;
@@ -2391,7 +2391,7 @@ _FX BOOLEAN SbieDll_RunFromHome(
 
     len = MAX_PATH * 2 + wcslen(pgmName);
     if (pgmArgs)
-        len += wcslen(pgmArgs);
+        len += 1 + wcslen(pgmArgs);
     path = Dll_AllocTemp(len * sizeof(WCHAR));
 
     ptr = wcsrchr(pgmName, L'.');

@@ -21,12 +21,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - [SbieHide.dll](https://github.com/VeroFess/SbieHide) - a third-party DLL to hide SbieDll.dll
   - [LogAPI.dll](https://bsa.isoftware.nl/) - an API logging library used for Buster Sandbox Analyzer
 - added option to set the update interval to 1, 7, 14 and 30 days
+- added whants new dialog to sbiectrl.exe shown after instalation prising the new features of the plus ui
 
 ### Changed
 - setup wizard has now a dedicated update configuration page
 - split the support page into Sandboxie Support and Sandboxie Updater tabs
 - when the troubleshooting.7z file is available, the script engine will be used to match compatibility templates
   - this allows a better granularity in template selection by using the AppCompatibility.js script
+- improved session agent startup to be mroe flexible
+- improved SBIEMSG help handling 
 
 ### Fixed
 - fixed uninstall issue in the Sandboxie Classic installer [d1863ff](https://github.com/sandboxie-plus/Sandboxie/commit/d1863ffadfe105c695de71c9e841c2fd568116fe)

@@ -65,8 +65,8 @@ public:
     static CString GetTopicUrl(const CString &topic);
 
     static void OpenHelp(CWnd *pParentWnd, const CString &topic);
-    static void OpenForum(CWnd *pParentWnd);
 
+    static CString EscapeForURL(const CString& value);
 };
 
 

@@ -54,6 +54,7 @@
 #define ID_HELP_UPDATE                  40044
 #define ID_HELP_UPGRADE                 40046
 #define ID_HELP_MIGRATION               40047
+#define ID_HELP_WHATSNEW				40049
 #define ID_HELP_CONTRIBUTION            40048
 #define ID_HELP_GET_CERT				40054
 #define ID_HELP_SET_CERT				40055

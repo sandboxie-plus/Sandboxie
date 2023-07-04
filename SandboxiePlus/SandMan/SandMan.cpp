@@ -2102,8 +2102,9 @@ void CSandMan::OnStatusChanged()
 
 		if (SbiePath.compare(QApplication::applicationDirPath().replace("/", "\\"), Qt::CaseInsensitive) == 0)
 		{
-			if (theAPI->GetUserSettings()->GetText("SbieCtrl_AutoStartAgent").isEmpty())
-				theAPI->GetUserSettings()->SetText("SbieCtrl_AutoStartAgent", "SandMan.exe");
+			QString AgentCmd = theAPI->GetUserSettings()->GetText("SbieCtrl_AutoStartAgent");
+			if (AgentCmd.isEmpty() || AgentCmd == "SandMan.exe")
+				theAPI->GetUserSettings()->SetText("SbieCtrl_AutoStartAgent", "SandMan.exe -autorun");
 
 			QString cmd = CSbieUtils::GetContextMenuStartCmd();
 			if (!cmd.isEmpty() && !cmd.contains("SandMan.exe", Qt::CaseInsensitive))

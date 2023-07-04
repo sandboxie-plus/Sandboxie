@@ -233,6 +233,8 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_GetBorderColor(const WCHAR* box_name, COLORREF* 
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_IsReservedFileName(const WCHAR* name);
 
+SBIEDLL_EXPORT  const WCHAR* SbieDll_FindArgumentEnd(const WCHAR* arguments);
+
 SBIEDLL_EXPORT  void DbgPrint(const char* format, ...);
 SBIEDLL_EXPORT  void DbgTrace(const char* format, ...);
 

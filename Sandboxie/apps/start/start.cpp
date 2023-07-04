@@ -433,6 +433,10 @@ BOOL Parse_Command_Line(void)
             if (_wcsnicmp(cmd, L"open_agent:", 11) == 0) {
                 cmd += 11;
                 tmp = Eat_String(cmd);
+                if (*cmd == L'\"') {
+                    cmd++;
+                    tmp--;
+                }
                 ULONG len = ULONG(tmp - cmd) * sizeof(WCHAR);
                 memcpy((WCHAR*)&buffer[req.length], cmd, len);
                 req.length += len;

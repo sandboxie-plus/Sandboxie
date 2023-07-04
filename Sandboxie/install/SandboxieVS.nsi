@@ -1092,6 +1092,8 @@ WriteLoop:
 
     File /oname=${SBIEINI_EXE} "${BIN_ROOT}\SbieIni.exe"
 
+    File "whatsnew.html"
+
     ;File "${BIN_ROOT}\License.exe"
 
     File "LICENSE.TXT"
@@ -1209,6 +1211,8 @@ Function DeleteProgramFiles
 
     Delete "$INSTDIR\${SBIEINI_EXE}"
     Delete "$INSTDIR\${SBIEINI_EXE}.sig" ; leftover
+
+    Delete "$INSTDIR\whatsnew.html"
 
     Delete "$INSTDIR\LICENSE.EXE"
 
@@ -1680,7 +1684,8 @@ Function .onGUIEnd
 
     StrCmp $LaunchControl "Y" 0 Done
 
-    ExecWait '"$INSTDIR\${START_EXE}" run_sbie_ctrl' $0
+;    ExecWait '"$INSTDIR\${START_EXE}" run_sbie_ctrl' $0
+    ExecWait '"$INSTDIR\${START_EXE}" open_agent:"${SBIECTRL_EXE} /open /sync /postsetup"' $0
 
 Done:
 

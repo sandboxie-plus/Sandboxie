@@ -83,12 +83,15 @@ BOOL CMyApp::InitInstance()
 
     BOOL ForceVisible = FALSE;
     BOOL ForceSync    = FALSE;
+    BOOL PostSetup    = FALSE;
     WCHAR *CommandLine = GetCommandLine();
     if (CommandLine) {
         if (wcsstr(CommandLine, L"/open"))
             ForceVisible = TRUE;
         if (wcsstr(CommandLine, L"/sync"))
             ForceSync    = TRUE;
+        if (wcsstr(CommandLine, L"/postsetup"))
+            PostSetup    = TRUE;
         if (wcsstr(CommandLine, L"/uninstall")) {
             CShellDialog::Sync(TRUE);
             return TRUE;
@@ -259,7 +262,7 @@ BOOL CMyApp::InitInstance()
     // create main window
     //
 
-    m_pMainWnd = new CMyFrame(ForceVisible, ForceSync);
+    m_pMainWnd = new CMyFrame(ForceVisible, ForceSync, PostSetup);
     m_pMainWnd->UpdateWindow();
 
     return TRUE;

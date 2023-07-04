@@ -930,7 +930,7 @@ bool CRunPage::validatePage()
 
     // disable back button on the current page
     wizard()->button(QWizard::BackButton)->setEnabled(false);
-    // disable next button, OnStateChanged wi re enable it
+    // disable next button, OnStateChanged will re-enable it
     wizard()->button(QWizard::NextButton)->setEnabled(false);
 
     if (pEngine->HasQuery()) {

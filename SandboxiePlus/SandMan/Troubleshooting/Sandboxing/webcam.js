@@ -7,11 +7,11 @@
 *
 */
 
-let message = tr('To enable webcam support on Windows 11 the isolation level must be reduced. \n'+
-'If you want to proceed please press NEXT and select a sandbox to modify. \n');
+let message = tr('To enable webcam support on Windows 11, the isolation level must be reduced. \n'+
+'If you want to proceed, please press NEXT and select a sandbox to modify. \n');
 
 if(!sbie.isCertValid())
-  message += tr('\nPlease note that this required presets work only with a valid supporter certificate!');
+  message += tr('\nPlease note that this required preset works only with a valid supporter certificate!');
 
 wizard.showStatus(message, true);
 

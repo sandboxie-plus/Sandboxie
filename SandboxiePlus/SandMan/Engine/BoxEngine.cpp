@@ -122,12 +122,12 @@ bool CBoxEngine::RunScript(const QString& Script, const QString& Name)
     //      !!! CAUTION Multi Threading !!!
     // 
     // Note: The engine runs in its own thread but the rest of SandMan 
-    // is mostly single threaded, also QSbieAPI is not hread safe so 
+    // is mostly single threaded, also QSbieAPI is not thread safe, so 
     // access to it must be synchronized. We solve this by executing 
     // all calls to theGUI and/or theAPI in the main thread through
     // the use of QT's slot system, we wrap all calls from the engine
     // in blocking QMetaObject::invokeMethod calls targeting to objects
-    // which belong the main thread hence thay need to be created in 
+    // which belong to the main thread, hence they need to be created in 
     // the main thread and passed to the caller from there.
     //
     //
@@ -276,7 +276,7 @@ bool CWizardEngine::ApplyShadowChanges()
             continue;
 
         if (I->pOriginal.isNull()) {
-            // This is a new box or tamplete not a copy, just clear shadow flag
+            // This is a new box or template, not a copy, just clear shadow flag
             I->pShadow->DelValue("IsShadow", "y");
             I->iApplyChanges = 2;
             continue;
@@ -305,7 +305,7 @@ bool CWizardEngine::ApplyShadowChanges()
             if (N.first == "FileRootPath" || N.first == "IsShadow")
                 continue; // skip
             if(N.first == "Template" && IsNoAppliedShadow("Template_" + N.second))
-                continue; // don't copy not applied shadow templates
+                continue; // don't copy non-applied shadow templates
             I->pOriginal->AppendText(N.first, N.second);
         }
     }

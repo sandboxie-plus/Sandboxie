@@ -274,7 +274,7 @@ void CAddonManager::InstallAddonAsync(const QString& FilePath, CAddonPtr pAddon)
 	if (!Status.IsError()) {
 		pAddon->Installed = CheckAddon(pAddon);
 		if (!pAddon->Installed)
-			Status = SB_ERR(SB_OtherError, QVariantList() << tr("Addon Instalation Failed!"));
+			Status = SB_ERR(SB_OtherError, QVariantList() << tr("Addon Installation Failed!"));
 	}
 	pAddon->pProgress->Finish(Status);
 	pAddon->pProgress.create();

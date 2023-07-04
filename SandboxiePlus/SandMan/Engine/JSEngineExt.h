@@ -65,7 +65,7 @@ protected:
     QMap<QString, qint64> m_ScriptIDs;
 
 private:
-    QJSValue evaluate(const QString& program, const QString& fileName = QString(), int lineNumber = 1) { return QJSValue(); } // dont use this, use evaluateScript instead
+    QJSValue evaluate(const QString& program, const QString& fileName = QString(), int lineNumber = 1) { return QJSValue(); } // don't use this, use evaluateScript instead
 };
 
 #endif

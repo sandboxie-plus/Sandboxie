@@ -554,7 +554,7 @@ CSBUpdate::CSBUpdate(QWidget *parent)
     connect(m_pVersion, &QCheckBox::toggled, this, &CSBUpdate::UpdateOptions);
     registerField("updateApp", m_pVersion);
 
-    m_pChanelInfo = new QLabel(tr("Sellect in which update channel to look for new Sandboxie-Plus builds:"));
+    m_pChanelInfo = new QLabel(tr("Select in which update channel to look for new Sandboxie-Plus builds:"));
     m_pChanelInfo->setMinimumHeight(20);
     layout->addWidget(m_pChanelInfo, row++, 1, 1, rows-1);
 

@@ -449,8 +449,8 @@ void CBeginPage::initializePage()
     m_pLayout->addItem(new QSpacerItem(10, 10, QSizePolicy::Fixed, QSizePolicy::Expanding), row++, 0);
 
     if (!g_CertInfo.valid || g_CertInfo.expired) {
-        QLabel* pBottomLabel = new QLabel(tr("With a valid <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a> the wizard would be even more powerfull. "
-            "It could access the <a href=\"https://sandboxie-plus.com/go.php?to=sbie-issue-db\">online solution database</a> to retriev the latest troubleshooting instructions."));
+        QLabel* pBottomLabel = new QLabel(tr("With a valid <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a> the wizard would be even more powerful. "
+            "It could access the <a href=\"https://sandboxie-plus.com/go.php?to=sbie-issue-db\">online solution database</a> to retrieve the latest troubleshooting instructions."));
         connect(pBottomLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
         pBottomLabel->setWordWrap(true);
         m_pLayout->addWidget(pBottomLabel, row++, 0, 1, 3);
@@ -626,7 +626,7 @@ CListPage::CListPage(QWidget *parent)
     int row = 0;
     m_pLayout = new QGridLayout;
     m_pLayout->setSpacing(2);
-    //QLabel* pTopLabel = new QLabel(tr("Please select an isue from the list"));
+    //QLabel* pTopLabel = new QLabel(tr("Please select an issue from the list"));
     //pTopLabel->setWordWrap(true);
     //m_pLayout->addWidget(pTopLabel, row++, 0, 1, 2);
     
@@ -928,7 +928,7 @@ bool CRunPage::validatePage()
         return true;
     }
 
-    // dissable back button on the current page
+    // disable back button on the current page
     wizard()->button(QWizard::BackButton)->setEnabled(false);
     // disable next button, OnStateChanged wi re enable it
     wizard()->button(QWizard::NextButton)->setEnabled(false);

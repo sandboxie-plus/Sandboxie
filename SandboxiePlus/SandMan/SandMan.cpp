@@ -1795,7 +1795,7 @@ SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, boo
 	if (Mode != eForDelete) {
 		
 		//
-		// shedule async OnBoxDelete triggers and clean up
+		// schedule async OnBoxDelete triggers and clean up
 		//
 
 		if (theConf->GetBool("Options/UseAsyncBoxOps", false) || theGUI->IsSilentMode())
@@ -1825,7 +1825,7 @@ SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, boo
 	
 	{
 		//
-		// delete content synchroniusly
+		// delete content synchronously
 		//
 
 		SB_PROGRESS Status;
@@ -2188,7 +2188,7 @@ void CSandMan::OnStatusChanged()
 
 		int WizardLevel = abs(theConf->GetInt("Options/WizardLevel", 0));
 		if (WizardLevel < (theConf->GetInt("Options/CheckForUpdates", 2) != 1 ? SETUP_LVL_2 : SETUP_LVL_1)) {
-			if (!CSetupWizard::ShowWizard(WizardLevel)) { // if user canceled mark that and not show again, untill there is somethign new
+			if (!CSetupWizard::ShowWizard(WizardLevel)) { // if user canceled, mark that and do not show again, until there is something new
 				if(QMessageBox::question(NULL, "Sandboxie-Plus", tr("Do you want the setup wizard to be omitted?"), QMessageBox::Yes, QMessageBox::No | QMessageBox::Default) == QMessageBox::Yes)
 					theConf->SetValue("Options/WizardLevel", -SETUP_LVL_CURRENT);
 			}
@@ -2222,7 +2222,7 @@ void CSandMan::CheckCompat(QObject* receiver, const char* member)
 	QFile File(CBoxAssistant::GetIssueDir(IssueFS) + "AppCompatibility.js");
 	if (File.open(QFile::ReadOnly)) {
 		CBoxEngine* pEngine = new CBoxEngine(this);
-		pEngine->RunScript(File.readAll(), "AppCompatibility.js"); // note: script runs asynchroniusly
+		pEngine->RunScript(File.readAll(), "AppCompatibility.js"); // note: script runs asynchronously
 		QPointer<QObject> pObj = receiver; // QPointer tracks lifetime of receiver
 		connect(pEngine, &CBoxEngine::finished, this, [pEngine, this, timer, pObj, member]() {
 

@@ -2147,7 +2147,7 @@ void CMyFrame::OnTimer(UINT_PTR nIDEvent)
         }*/
 
         //
-        // show whats new
+        // show what's new
         //
 
         if (m_ShowWhatsNew && (! inModalState)) {

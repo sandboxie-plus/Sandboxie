@@ -46,6 +46,7 @@ jobs:
           echo 'linve->live' >> dictionary.txt
           echo 'actuallly->actually' >> dictionary.txt
           echo 'asynchroniusly->asynchronously' >> dictionary.txt
+          echo 'synchroniusly->synchronously' >> dictionary.txt
           echo 'seams->seems' >> dictionary.txt
           echo 'selelction->selection' >> dictionary.txt
           echo 'injectted->injected' >> dictionary.txt
@@ -83,7 +84,10 @@ jobs:
           echo 'mein->main' >> dictionary.txt
           echo 'trigegred->triggered' >> dictionary.txt
           echo 'windoe->window' >> dictionary.txt
+          echo 'hread->thread' >> dictionary.txt
+          echo 'tamplete->template' >> dictionary.txt
+          echo 'prising->praising' >> dictionary.txt
           # Only lowercase letters are allowed in --ignore-words-list
           codespell --dictionary=dictionary.txt --dictionary=dictionary_rare.txt --dictionary=dictionary_code.txt \
-          --ignore-words-list="wil,unknwn,tolen,pevent,doubleclick,parm,parms,etcp,ois,ba,ptd,modell,namesd,stdio,uint,errorstring,ontext,atend,deque,ecounter,nmake,namess,inh,daa,varient,lite,uis,emai,ws,slanguage" \
+          --ignore-words-list="wil,unknwn,tolen,pevent,doubleclick,parm,parms,etcp,ois,ba,ptd,modell,namesd,stdio,uint,errorstring,ontext,atend,deque,ecounter,nmake,namess,inh,daa,varient,lite,uis,emai,ws,slanguage,woh,tne" \
           --skip="./.git,./.github/workflows/codespell.yml,./dictionary*.txt,./Sandboxie/msgs/Text-*-*.txt,./Sandboxie/msgs/report/Report-*.txt,./SandboxiePlus/SandMan/*.ts,./Installer/Languages.iss,./Installer/isl/*.isl,./Sandboxie/common/Detours/Makefile,./Sandboxie/common/Detours/disasm.cpp,./Sandboxie/install/build.bat"

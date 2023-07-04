@@ -52,7 +52,7 @@
         <location filename="AddonManager.cpp" line="234"/>
         <source>Failed to start installer (%1)!</source>
         <oldsource>Failes to start installer (%1)!</oldsource>
-        <translation type="unfinished">執行安裝程式失敗 (%1)！</translation>
+        <translation>執行安裝程式失敗 (%1)！</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="240"/>
@@ -63,7 +63,7 @@
         <location filename="AddonManager.cpp" line="268"/>
         <source>Failed to unpack addon!</source>
         <oldsource>Failes to unpack addon!</oldsource>
-        <translation type="unfinished">解壓縮附加元件失敗！</translation>
+        <translation>解壓縮附加元件失敗！</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="277"/>
@@ -94,7 +94,7 @@
         <location filename="AddonManager.cpp" line="340"/>
         <source>Failed to start uninstaller!</source>
         <oldsource>Failes to start uninstaller!</oldsource>
-        <translation type="unfinished">開啟解除安裝程式失敗！</translation>
+        <translation>開啟解除安裝程式失敗！</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="376"/>
@@ -239,7 +239,7 @@
         <location filename="Wizards/BoxAssistant.cpp" line="170"/>
         <source>Downloaded troubleshooting instructions are corrupted!</source>
         <oldsource>Downloaded troubleshooting instructions are currupted!</oldsource>
-        <translation type="unfinished">下載的疑難排解指示已損毀！</translation>
+        <translation>下載的疑難排解指示已損毀！</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="189"/>
@@ -255,13 +255,13 @@
         <location filename="Wizards/BoxAssistant.cpp" line="336"/>
         <source>V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debugger could not be opened.</source>
         <oldsource>V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debuger could not be opened.</oldsource>
-        <translation type="unfinished">V4腳本偵錯工具後端 (V4ScriptDebuggerBackend) 無法被初始化，可能 V4ScriptDebugger.dll 和/或其依存套件有缺失，腳本偵錯工具無法開啟。</translation>
+        <translation>V4腳本偵錯工具後端 (V4ScriptDebuggerBackend) 無法被初始化，可能 V4ScriptDebugger.dll 和/或其依存套件有缺失，腳本偵錯工具無法開啟。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="386"/>
         <source>A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an inconsistent state.</source>
         <oldsource>A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an incosistent state.</oldsource>
-        <translation type="unfinished">一個疑難排解流程正在進行中，取消精靈將會出現中斷，這可能使沙箱處於不完善狀態。</translation>
+        <translation>一個疑難排解流程正在進行中，取消精靈將會中斷流程，這可能使沙箱處於不完善狀態。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="387"/>
@@ -2229,7 +2229,7 @@ Full path: %4</source>
         <location filename="Wizards/BoxAssistant.cpp" line="888"/>
         <source>Something failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</source>
         <oldsource>Somethign failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</oldsource>
-        <translation type="unfinished">某些內部錯誤發生，導致此疑難排解流程無法繼續進行。你可以點按「下一個」以提交問題回報。</translation>
+        <translation>某些內部錯誤發生，導致此疑難排解流程無法繼續進行。你可以點按「下一個」以提交問題回報。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="889"/>
@@ -2257,7 +2257,7 @@ Error: </source>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Regularly Check for all updates to Sandboxie-Plus and optional components</source>
         <oldsource>Regularly Check for all udpates to Sandboxie-Plus and optional components</oldsource>
-        <translation type="unfinished">經常檢查全部 Sandboxie-Plus 和可選組件的更新</translation>
+        <translation>經常檢查全部 Sandboxie-Plus 和可選組件的更新</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="540"/>
@@ -2320,13 +2320,13 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Wizards/SetupWizard.cpp" line="591"/>
         <source>Keep Compatibility Templates up to date and apply hotfixes</source>
         <oldsource>Keep Compatybility Templates up to date and apply hotfixes</oldsource>
-        <translation type="unfinished">保持相容性範本為最新並套用緊急修補程式</translation>
+        <translation>保持相容性範本為最新並套用緊急修補</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="592"/>
         <source>Check for latest compatibility templates and hotfixes.</source>
         <oldsource>Check for latest compatybility tempaltes and hotfixes.</oldsource>
-        <translation type="unfinished">檢查最新的相容性範本和緊急修補程式。</translation>
+        <translation>檢查最新的相容性範本和緊急修補。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="596"/>
@@ -2337,7 +2337,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Wizards/SetupWizard.cpp" line="597"/>
         <source>Check for latest troubleshooting scripts for the troubleshooting wizard.</source>
         <oldsource>Check for latest troubleshooting scripts for the troubleshooting wizars.</oldsource>
-        <translation type="unfinished">為疑難排解精靈檢查最新的疑難排解腳本。</translation>
+        <translation>為疑難排解精靈檢查最新的疑難排解腳本。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="601"/>
@@ -2348,7 +2348,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Wizards/SetupWizard.cpp" line="602"/>
         <source>Check for latest available addons.</source>
         <oldsource>Check for latest avaialble addons.</oldsource>
-        <translation type="unfinished">檢查最新的可用附加元件。</translation>
+        <translation>檢查最新的可用附加元件。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="611"/>
@@ -2919,7 +2919,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandMan.cpp" line="2191"/>
         <source>Do you want the setup wizard to be omitted?</source>
-        <translation type="unfinished"></translation>
+        <translation>是否略過設定精靈？</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2877"/>
@@ -3635,7 +3635,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="SandMan.cpp" line="3407"/>
         <source>The content of an unmounted sandbox can not be deleted</source>
         <oldsource>The content of an un mounted sandbox can not be deleted</oldsource>
-        <translation type="unfinished">未被裝載的沙箱之內容不可被刪除</translation>
+        <translation>未被裝載的沙箱之內容不可被刪除</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3409"/>
@@ -4760,17 +4760,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="499"/>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation>選取字型</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="501"/>
         <source>Reset font</source>
-        <translation type="unfinished"></translation>
+        <translation>重設字型</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="557"/>
         <source>%0, %1 pt</source>
-        <translation type="unfinished"></translation>
+        <translation>%0, %1 pt</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="673"/>
@@ -5064,7 +5064,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Wizards/BoxAssistant.cpp" line="989"/>
         <source>Sandboxing compatibility is reliant on the configuration hence attaching the Sandboxie.ini file helps a lot with finding the issue.</source>
         <oldsource>Sandboxing compatybility is relyent on the configuration hence attaching the sandboxie.ini helps a lot with finding the issue.</oldsource>
-        <translation type="unfinished">沙箱相容性依賴於組態，因此附加 sandboxie.ini 將有效幫助找出問題。</translation>
+        <translation>沙箱相容性依賴於組態，因此附加 sandboxie.ini 將非常有助於找出問題。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="992"/>
@@ -5077,7 +5077,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 Before sending, you can review the logs in the main window.</source>
         <oldsource>Select partially checked state to sends only message log but no trace log.
 Before sending you can review the logs in the main window.</oldsource>
-        <translation type="unfinished">選擇部分核取狀態以僅發送訊息日誌，而無追蹤日誌。
+        <translation>以部分核取狀態選中以僅發送訊息日誌，而無追蹤日誌。
 在發送前您可以在主視窗中檢查日誌。</translation>
     </message>
     <message>
@@ -5089,8 +5089,7 @@ Before sending you can review the logs in the main window.</oldsource>
         <location filename="Wizards/BoxAssistant.cpp" line="998"/>
         <source>An application crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</source>
         <oldsource>An applicatin crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</oldsource>
-        <translatorcomment>一個應用程式在疑難排解流程中崩潰，附加損毀傾印檔案有助於除錯。</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translation>一個應用程式在疑難排解流程中崩潰，附加損毀傾印檔案將有助於除錯。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1002"/>
@@ -5148,7 +5147,7 @@ Try submitting without the log attached.</source>
         <location filename="Wizards/BoxAssistant.cpp" line="1205"/>
         <source>Your issue report has been successfully submitted, thank you.</source>
         <oldsource>Your issue report have been successfully submitted, thank you.</oldsource>
-        <translation type="unfinished">您的問題回報已成功提交，非常感謝。</translation>
+        <translation>您的問題回報已成功提交，非常感謝。</translation>
     </message>
 </context>
 <context>
@@ -7543,7 +7542,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="963"/>
         <source>Ini Editor Font</source>
-        <translation type="unfinished"></translation>
+        <translation>INI 編輯器字型</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1026"/>
@@ -7553,17 +7552,17 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1055"/>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation>選取字型</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1065"/>
         <source>Reset font</source>
-        <translation type="unfinished"></translation>
+        <translation>重設字型</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1133"/>
         <source>#</source>
-        <translation type="unfinished"></translation>
+        <translation>#</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1147"/>
@@ -7839,12 +7838,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="327"/>
         <source>Sandboxie may be issue &lt;a href=&quot;sbie://docs/sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie 也許會在訊息日誌中提示 &lt;a href=&quot;sbie://docs/sbiemessages&quot;&gt;SBIE 訊息&lt;/a&gt;並將其展示為跳出視窗。某些訊息是資訊型的，提示普通的 (某些情況下是特殊的) 事件的發生，其它訊息則標示了錯誤狀況。&lt;br /&gt;你可以隱藏選定的 SBIE 訊息以阻止其跳出，要如此操作請使用下方清單:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="340"/>
         <source>Disable SBIE messages popups (they will still be logged to the Messages tab)</source>
-        <translation type="unfinished"></translation>
+        <translation>禁用 SBIE 訊息跳出視窗 (仍將被記錄到訊息頁籤)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="435"/>

@@ -734,7 +734,7 @@ _FX BOOL Scm_DeleteService(SC_HANDLE hService)
 {
     NTSTATUS status;
     WCHAR *ServiceName;
-    WCHAR *names, *name;
+    WCHAR *names, *name,*validname,*nextname;
     ULONG len;
     HANDLE hkey, hkey2;
     UNICODE_STRING uni;
@@ -787,14 +787,18 @@ _FX BOOL Scm_DeleteService(SC_HANDLE hService)
     hMutex = Scm_AcquireMutex();
 
     len = 0;
-    names = name = Scm_GetBoxedServices();
+    validname = names = name = Scm_GetBoxedServices();
     while (*name) {
-        if (_wcsicmp(name, ServiceName) == 0)
-            *name = L'*';
-        len += wcslen(name) + 1;
-        name += wcslen(name) + 1;
+		nextname = name + wcslen(name) + 1;
+		if (_wcsicmp(name, ServiceName) != 0)
+		{
+			wcscpy(validname, name);
+			len += wcslen(validname) + 1;
+			validname += wcslen(validname) + 1;
+		}
+        name = nextname;
     }
-
+    names[len] = 0;
     ++len;
     RtlInitUnicodeString(&uni, L"SandboxedServices");
     status = NtSetValueKey(

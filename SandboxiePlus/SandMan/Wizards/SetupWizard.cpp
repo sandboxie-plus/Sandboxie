@@ -528,7 +528,7 @@ CSBUpdate::CSBUpdate(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Configure <b>Sandboxie-Plus</b> updater"));
-    setSubTitle(tr("Like with any other security product it's important to keep your Sandboxie-Plus up to date."));
+    setSubTitle(tr("Like with any other security product, it's important to keep your Sandboxie-Plus up to date."));
 
     QGridLayout *layout = new QGridLayout;
     layout->setSpacing(3);
@@ -536,8 +536,8 @@ CSBUpdate::CSBUpdate(QWidget *parent)
     int row = 0;
     int rows = 4;
 
-    m_pUpdate = new QCheckBox(tr("Regularly Check for all updates to Sandboxie-Plus and optional components"));
-    m_pUpdate->setToolTip(tr("Let sandboxie regularly check for latest updates."));
+    m_pUpdate = new QCheckBox(tr("Regularly check for all updates to Sandboxie-Plus and optional components"));
+    m_pUpdate->setToolTip(tr("Let Sandboxie regularly check for latest updates."));
     layout->addWidget(m_pUpdate, row++, 0, 1, rows);
     connect(m_pUpdate, &QCheckBox::toggled, this, &CSBUpdate::UpdateOptions);
     registerField("updateAll", m_pUpdate);

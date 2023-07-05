@@ -70,6 +70,10 @@ Get Supporter Certificate
 Apply Supporter Certificate
 .
 
+3469;txt;01
+What's new in Sandboxie-Plus
+.
+
 6010;txt;01
 You have installed Sandboxie more than %2 days ago.
 

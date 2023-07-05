@@ -38,6 +38,10 @@ Get Supporter Certificate
 Apply Supporter Certificate
 .
 
+3469;txt;01
+What's new in Sandboxie-Plus
+.
+
 7988;txt;01
 Your Supporter Certificate is valid, Thank You :-)
 .

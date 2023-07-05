@@ -30,6 +30,10 @@ SBIE2115 File is too large to copy into sandbox, opening in read only - %2
 SBIE2325 Debug:  %2
 .
 
+3469;txt;01
+What's new in Sandboxie-Plus
+.
+
 6004;pop;err;01
 The configuration %3 of box %2 requires a supporter certificate. Processes in this box will be terminated after 5 minutes. For prolonged use, please consider supporting this project.
 .

@@ -178,6 +178,10 @@ Upgrade to Sandboxie-Plus
 Sandboxie-Plus Migration Guide
 .
 
+3469;txt;01
+What's new in Sandboxie-Plus
+.
+
 3484;txt;01
 Resource Access
 .

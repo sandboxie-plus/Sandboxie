@@ -6,101 +6,97 @@
     <message>
         <location filename="AddonManager.cpp" line="126"/>
         <source>Do you want to download and install %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 eklentisini indirmek ve kurmak istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="132"/>
         <source>Installing: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Yükleniyor: %1</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="142"/>
         <source>Addon not found, please try updating the addon list in the global settings!</source>
-        <translation type="unfinished"></translation>
+        <translation>Eklenti bulunamadı, lütfen genel ayarlardan eklenti listesini güncellemeyi deneyin!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="144"/>
         <source>Addon already installed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Eklenti zaten yüklü!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="149"/>
         <source>Addon has no download url, addon may not be available for your platform.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eklentinin indirme url&apos;si yok, eklenti platformunuz için mevcut olmayabilir.</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="159"/>
         <source>Downloading Addon %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Eklentisi İndiriliyor</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="172"/>
         <source>Download signature is not valid!</source>
-        <translation type="unfinished"></translation>
+        <translation>İndirme imzası geçerli değil!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="177"/>
         <source>Installing Addon %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Eklentisi Yükleniyor</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="197"/>
         <source>Running Installer for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 için Yükleyici Çalıştırılıyor</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="234"/>
         <source>Failed to start installer (%1)!</source>
-        <oldsource>Failes to start installer (%1)!</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Yükleyici başlatılamadı (%1)!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="240"/>
         <source>Copying Files for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 için Dosyalar Kopyalanıyor</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="268"/>
         <source>Failed to unpack addon!</source>
-        <oldsource>Failes to unpack addon!</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Eklenti paketi açılamadı!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="277"/>
-        <source>Addon Installation Failed!</source>
-        <oldsource>Addon Instalation Failed!</oldsource>
-        <translation type="unfinished"></translation>
+        <source>Addon Instalation Failed!</source>
+        <translation>Eklenti Kurulumu Başarısız!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="285"/>
         <source>Do you want to remove %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 eklentisini kaldırmak istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="291"/>
         <source>Removing: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaldırılıyor: %1</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="301"/>
         <source>Addon not found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Eklenti bulunamadı!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="329"/>
         <source>Running Uninstaller for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 için Kaldırıcı çalıştırılıyor</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="340"/>
         <source>Failed to start uninstaller!</source>
-        <oldsource>Failes to start uninstaller!</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Kaldırıcı başlatılamadı!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="376"/>
         <source>Addon Removal Failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Eklenti Kaldırma Başarısız!</translation>
     </message>
 </context>
 <context>
@@ -192,23 +188,22 @@
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="404"/>
         <source>Troubleshooting Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun Giderme Sihirbazı</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="409"/>
         <source>Welcome to the Troubleshooting Wizard for Sandboxie-Plus. This interactive assistant is designed to help you in resolving sandboxing issues.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus için Sorun Giderme Sihirbazına hoş geldiniz. Bu etkileşimli asistan, korumalı alan sorunlarını çözmenize yardımcı olmak için tasarlanmıştır.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="452"/>
         <source>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerful. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retrieve the latest troubleshooting instructions.</source>
-        <oldsource>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerfull. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retriev the latest troubleshooting instructions.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Geçerli bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; ile sihirbaz daha da güçlü olacaktır. En son sorun giderme talimatlarını almak için &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;çevrimiçi çözümler veritabanına&lt;/a&gt; erişebilirsiniz.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="490"/>
         <source>Another issue</source>
-        <translation type="unfinished"></translation>
+        <translation>Başka bir sorun</translation>
     </message>
 </context>
 <context>
@@ -216,55 +211,52 @@
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="51"/>
         <source>Troubleshooting Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun Giderme Sihirbazı</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="57"/>
         <source>Toggle Debugger</source>
-        <translation type="unfinished"></translation>
+        <translation>Hata Ayıklayıcıyı Aç/Kapa</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="102"/>
         <source>To debug troubleshooting scripts you need the V4 Script Debugger addon, do you want to download and install it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun giderme betiklerinde hata ayıklamak için V4 Script Debugger eklentisine ihtiyacınız var, onu indirip yüklemek istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="106"/>
         <source>Debugger Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Hata Ayıklayıcı Etkin</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="170"/>
         <source>Downloaded troubleshooting instructions are corrupted!</source>
-        <oldsource>Downloaded troubleshooting instructions are currupted!</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>İndirilen sorun giderme talimatları bozuk!</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="189"/>
         <source>Fatal error, failed to load troubleshooting instructions!</source>
-        <translation type="unfinished"></translation>
+        <translation>Önemli hata, sorun giderme talimatları yüklenemedi!</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="258"/>
         <source>Error, troubleshooting instructions duplicated %1 (%2 &lt;-&gt; %3)!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hata, sorun giderme talimatları yinelendi %1 (%2 &lt;-&gt; %3)!</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="336"/>
         <source>V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debugger could not be opened.</source>
-        <oldsource>V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debuger could not be opened.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>V4ScriptDebuggerBackend başlatılamadı, muhtemelen V4ScriptDebugger.dll ve/veya bağımlılıkları eksik, betik hata ayıklayıcı açılamadı.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="386"/>
         <source>A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an inconsistent state.</source>
-        <oldsource>A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an incosistent state.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Bir sorun giderme işlemi devam ediyor, eğer sihirbaz iptal edilirse bu işlem de tamamlanmadan bırakılacaktır. Bu durum, korumalı alanın tutarsız bir durumda kalmasına neden olabilir.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="387"/>
         <source>Don&apos;t ask in future</source>
-        <translation type="unfinished">Gelecekte sorma</translation>
+        <translation>Gelecekte sorma</translation>
     </message>
 </context>
 <context>
@@ -272,7 +264,7 @@
     <message>
         <location filename="Engine/BoxEngine.cpp" line="153"/>
         <source>Uncaught exception at line %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 satırında yakalanmamış özel durum: %2</translation>
     </message>
 </context>
 <context>
@@ -280,7 +272,7 @@
     <message>
         <location filename="Windows/SelectBoxWindow.cpp" line="23"/>
         <source>Sandbox</source>
-        <translation type="unfinished">Korumalı Alan</translation>
+        <translation>Korumalı Alan</translation>
     </message>
 </context>
 <context>
@@ -576,14 +568,16 @@ Lütfen doğru kullanıcı profili dizinine göz atın.</translation>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1224"/>
         <source>Troubleshooting Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun Giderme Tamamlandı</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1231"/>
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process.If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
 
 You can click Finish to close this wizard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus Sorun Giderme Sihirbazını kullandığınız için teşekkür ederiz. Bu süreçte yaşamış olabileceğiniz her türlü rahatsızlıktan dolayı özür dileriz, ancak başka sorularınız varsa veya herhangi bir yardıma ihtiyacınız olursa, lütfen bizimle iletişime geçmekten çekinmeyin. Yardım etmek için buradayız. İşbirliğiniz ve anlayışınız için teşekkür ederiz.
+
+Bu sihirbazı kapatmak için Son&apos;a tıklayabilirsiniz.</translation>
     </message>
 </context>
 <context>
@@ -719,10 +713,6 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
         <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
         <translation>Neredeyse tamamlandı, tüm seçimleri uygulamak ve sihirbazı tamamlamak için Bitir&apos;e tıklayın.</translation>
     </message>
-    <message>
-        <source>Keep Sandboxie-Plus up to date.</source>
-        <translation type="vanished">Sandboxie-Plus&apos;ı güncel tut.</translation>
-    </message>
 </context>
 <context>
     <name>CFinishTemplatePage</name>
@@ -784,17 +774,17 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="503"/>
         <source>Select issue from group</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruptan sorunu seçin</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="509"/>
         <source>Please specify the exact issue:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lütfen sorunu tam olarak belirtin:</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="562"/>
         <source>Another issue</source>
-        <translation type="unfinished"></translation>
+        <translation>Başka bir sorun</translation>
     </message>
 </context>
 <context>
@@ -835,17 +825,17 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="623"/>
         <source>Select issue from full list</source>
-        <translation type="unfinished"></translation>
+        <translation>Tam listeden sorunu seçin</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="634"/>
         <source>Search filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Arama filtresi</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="690"/>
         <source>None of the above</source>
-        <translation type="unfinished"></translation>
+        <translation>Yukarıdakilerin hiçbiri</translation>
     </message>
 </context>
 <context>
@@ -882,37 +872,6 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
         <location filename="Dialogs/MultiErrorDialog.cpp" line="10"/>
         <source>Sandboxie-Plus - Error</source>
         <translation>Sandboxie-Plus - Hata</translation>
-    </message>
-</context>
-<context>
-    <name>CNewBoxWindow</name>
-    <message>
-        <source>Sandboxie-Plus - Create New Box</source>
-        <translation type="vanished">Sandboxie-Plus - Yeni Alan Oluştur</translation>
-    </message>
-    <message>
-        <source>Hardened Sandbox with Data Protection</source>
-        <translation type="vanished">Veri Korumalı Güçlendirilmiş Alan</translation>
-    </message>
-    <message>
-        <source>Security Hardened Sandbox</source>
-        <translation type="vanished">Güvenliği Güçlendirilmiş Alan</translation>
-    </message>
-    <message>
-        <source>Sandbox with Data Protection</source>
-        <translation type="vanished">Veri Korumalı Alan</translation>
-    </message>
-    <message>
-        <source>Standard Isolation Sandbox (Default)</source>
-        <translation type="vanished">Standart Yalıtımlı Korumalı Alan (Varsayılan)</translation>
-    </message>
-    <message>
-        <source>Application Compartment with Data Protection</source>
-        <translation type="vanished">Veri Korumalı Uygulama Bölmesi</translation>
-    </message>
-    <message>
-        <source>Application Compartment (NO Isolation)</source>
-        <translation type="vanished">Uygulama Bölmesi (Yalıtım YOK)</translation>
     </message>
 </context>
 <context>
@@ -1052,16 +1011,12 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="OnlineUpdater.cpp" line="772"/>
         <source>Failed to download file from: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Şu kaynaktan dosya indirilemedi: %1</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="806"/>
         <source>Downloading installer...</source>
         <translation>Yükleyici indiriliyor...</translation>
-    </message>
-    <message>
-        <source>Failed to download installer from: %1</source>
-        <translation type="vanished">Şuradan yükleyici indirilemedi: %1</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="845"/>
@@ -2131,7 +2086,7 @@ Tam yol: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="582"/>
         <source>Recovering File(s)...</source>
-        <translation type="unfinished"></translation>
+        <translation>Dosya(lar) Kurtarılıyor...</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="588"/>
@@ -2189,25 +2144,26 @@ Tam yol: %4</translation>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="756"/>
         <source>Troubleshooting ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun giderme ...</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="778"/>
         <source>This troubleshooting procedure could not be initialized. You can click on next to submit an issue report.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu sorunu giderme işlemi başlatılamadı. Bir sorun raporu göndermek için ileri&apos;ye tıklayabilirsiniz.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="888"/>
         <source>Something failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</source>
-        <oldsource>Somethign failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Dahili olarak bir sorun oluştu ve bu sorun giderme işlemi devam edemiyor. Bir sorun raporu göndermek için İleri&apos;ye tıklayabilirsiniz.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="889"/>
         <source>
 
 Error: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Hata: </translation>
     </message>
 </context>
 <context>
@@ -2215,119 +2171,114 @@ Error: </source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="530"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; updater</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; güncelleyiciyi yapılandırın</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="531"/>
         <source>Like with any other security product it&apos;s important to keep your Sandboxie-Plus up to date.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer tüm güvenlik ürünlerinde olduğu gibi, Sandboxie-Plus&apos;ınızı güncel tutmanız önemlidir.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Regularly Check for all updates to Sandboxie-Plus and optional components</source>
-        <oldsource>Regularly Check for all udpates to Sandboxie-Plus and optional components</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus ve isteğe bağlı bileşenlere yönelik tüm güncellemeleri düzenli olarak kontrol edin</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="540"/>
         <source>Let sandboxie regularly check for latest updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie&apos;nin en son güncellemeleri düzenli olarak kontrol etmesine izin verin.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="550"/>
         <source>Check for new Sandboxie-Plus versions:</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni Sandboxie-Plus sürümlerini kontrol edin:</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="551"/>
         <source>Check for new Sandboxie-Plus builds.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni Sandboxie-Plus yapılarını kontrol edin.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="557"/>
         <source>Select in which update channel to look for new Sandboxie-Plus builds:</source>
-        <oldsource>Sellect in which update channel to look for new Sandboxie-Plus builds:</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Yeni Sandboxie-Plus yapıları için hangi güncelleme kanalında arama yapacağınızı seçin:</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="566"/>
         <source>In the Stable Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Kararlı Kanalda</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="567"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
-        <translation type="unfinished">Kararlı kanal, en son kararlı GitHub sürümlerini içerir.</translation>
+        <translation>Kararlı kanal, en son kararlı GitHub sürümlerini içerir.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="571"/>
         <source>In the Preview Channel - with newest experimental changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ön izleme Kanalında - en yeni deneysel değişikliklerle</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="572"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
-        <translation type="unfinished">Ön izleme kanalı, en son GitHub ön sürümlerini içerir.</translation>
+        <translation>Ön izleme kanalı, en son GitHub ön sürümlerini içerir.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="576"/>
         <source>In the Insider Channel - exclusive features</source>
-        <translation type="unfinished"></translation>
+        <translation>Insider Kanalında - ayrıcalıklı özellikler</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="577"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Insider Kanalı, sonunda herkese açılacak yeni özelliklere ve hata düzeltmelerine erken erişim sağlar ve ayrıca Kararlı Kanal&apos;daki ilgili tüm iyileştirmeleri de bulundurur.
+Ön izleme kanalından farklı olarak, daha geniş kullanıma hazır olmayan denenmemiş, potansiyel olarak bozuk veya deneysel değişiklikler içermez.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="582"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Kanalı&lt;/a&gt; hakkında daha fazla bilgi</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="591"/>
         <source>Keep Compatibility Templates up to date and apply hotfixes</source>
-        <oldsource>Keep Compatybility Templates up to date and apply hotfixes</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Uyumluluk Şablonlarını güncel tutun ve düzeltmeleri uygulayın</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="592"/>
         <source>Check for latest compatibility templates and hotfixes.</source>
-        <oldsource>Check for latest compatybility tempaltes and hotfixes.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>En son uyumluluk şablonlarını ve düzeltmeleri kontrol edin.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="596"/>
         <source>Get the latest Scripts for the Troubleshooting Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun Giderme Sihirbazı için en son Betik Dosyalarını edinin</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="597"/>
         <source>Check for latest troubleshooting scripts for the troubleshooting wizard.</source>
-        <oldsource>Check for latest troubleshooting scripts for the troubleshooting wizars.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Sorun giderme sihirbazı için en son sorun giderme betik dosyalarını kontrol edin.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="601"/>
         <source>Keep the list of optional Addon components up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>İsteğe bağlı Eklenti bileşenlerinin listesini güncel tutun</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="602"/>
         <source>Check for latest available addons.</source>
-        <oldsource>Check for latest avaialble addons.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Mevcut en son eklentileri kontrol edin.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="611"/>
         <source>Sandboxie-Plus applies strict application restrictions, which can lead to compatibility issues. Stay updated with Sandboxie-Plus, including compatibility templates and troubleshooting, to ensure smooth operation amid Windows updates and application changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus, uyumluluk sorunlarına yol açabilecek katı uygulama kısıtlamaları uygular. Windows güncellemeleri ve uygulama değişiklikleri sırasında sorunsuz çalışmayı sağlamak için uyumluluk şablonları ve sorun giderme de dahil olmak üzere Sandboxie-Plus ile güncel kalın.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="617"/>
         <source>Access to the latest compatibility templates and the online troubleshooting database requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>En son uyumluluk şablonlarına ve çevrimiçi sorun giderme veritabanına erişim geçerli bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; gerektirir.</translation>
     </message>
 </context>
 <context>
@@ -2891,7 +2842,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="2192"/>
         <source>Do you want the setup wizard to be omitted?</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurulum sihirbazının çıkarılmasını istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2202"/>
@@ -2902,23 +2853,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="2582"/>
         <source>The evaluation period has expired!!!</source>
         <translation>Değerlendirme süresi dolmuştur!</translation>
-    </message>
-    <message>
-        <source>Select file name</source>
-        <translation type="vanished">Dosya adı seçin</translation>
-    </message>
-    <message>
-        <source>7-zip Archive (*.7z)</source>
-        <translation type="vanished">7-zip Arşivi (*.7z)</translation>
-    </message>
-    <message>
-        <source>This name is already in use, please select an alternative box name</source>
-        <translatorcomment>Sandbox için Korumalı Alan kullanıldığından dolayı box için de alan kullandım.</translatorcomment>
-        <translation type="vanished">Bu ad zaten kullanılıyor, lütfen alternatif bir alan adı seçin</translation>
-    </message>
-    <message>
-        <source>Importing: %1</source>
-        <translation type="vanished">İçe aktarılıyor: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2717"/>
@@ -3004,12 +2938,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="SandMan.cpp" line="3389"/>
         <source>A all processes in a sandbox must be stopped before it can be renamed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bir korumalı alandaki tüm işlemlerin, yeniden adlandırılabilmesi için durdurulması gerekir.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3393"/>
         <source>Failed to move box image &apos;%1&apos; to &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; kutu görüntüsü &apos;%2&apos; konumuna taşınamadı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3394"/>
@@ -3024,13 +2958,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="SandMan.cpp" line="3408"/>
         <source>The content of an unmounted sandbox can not be deleted</source>
-        <oldsource>The content of an un mounted sandbox can not be deleted</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Bağlanmamış bir korumalı alanın içeriği silinemez</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3410"/>
         <source>%1</source>
-        <translation type="unfinished">%1</translation>
+        <translation>%1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3412"/>
@@ -3356,12 +3289,12 @@ Hayır şunları seçer: %2</translation>
         <location filename="SandMan.cpp" line="182"/>
         <location filename="SandMan.cpp" line="2055"/>
         <source>Sandboxie-Plus Insider [%1]</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus Insider [%1]</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="468"/>
         <source>Troubleshooting Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun Giderme Sihirbazı</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="602"/>
@@ -3744,7 +3677,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Engine/SbieObject.cpp" line="189"/>
         <source>Run &amp;Un-Sandboxed</source>
-        <translation type="unfinished">&amp;Korumalı Alanın Dışında Çalıştır</translation>
+        <translation>Korumalı Alanın &amp;Dışında Çalıştır</translation>
     </message>
 </context>
 <context>
@@ -3942,37 +3875,37 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1132"/>
         <source>Failed to initialize COM</source>
-        <translation type="unfinished"></translation>
+        <translation>COM başlatılamadı</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1138"/>
         <source>Failed to create update session</source>
-        <translation type="unfinished"></translation>
+        <translation>Güncelleme oturumu oluşturulamadı</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1144"/>
         <source>Failed to create update searcher</source>
-        <translation type="unfinished"></translation>
+        <translation>Güncelleme arayıcısı oluşturulamadı</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1150"/>
         <source>Failed to set search options</source>
-        <translation type="unfinished"></translation>
+        <translation>Arama seçenekleri ayarlanamadı</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1158"/>
         <source>Failed to search for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Güncellemeler aranamadı</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1164"/>
         <source>Failed to retrieve update list from search result</source>
-        <translation type="unfinished"></translation>
+        <translation>Arama sonucundan güncelleme listesi alınamadı</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1171"/>
         <source>Failed to get update count</source>
-        <translation type="unfinished"></translation>
+        <translation>Güncelleme sayısı alınamadı</translation>
     </message>
 </context>
 <context>
@@ -4373,10 +4306,6 @@ Hayır şunları seçer: %2</translation>
         <translation>Aşağı Taşı</translation>
     </message>
     <message>
-        <source>Run Sandboxed</source>
-        <translation type="vanished">Korumalı Alanda Çalıştır</translation>
-    </message>
-    <message>
         <location filename="Views/SbieView.cpp" line="296"/>
         <source>Run eMail Reader</source>
         <translation>E-posta Okuyucuyu Çalıştır</translation>
@@ -4721,22 +4650,22 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="265"/>
         <source>Every Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Her Gün</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="266"/>
         <source>Every Week</source>
-        <translation type="unfinished"></translation>
+        <translation>Her Hafta</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="267"/>
         <source>Every 2 Weeks</source>
-        <translation type="unfinished"></translation>
+        <translation>Her 2 Haftada Bir</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="268"/>
         <source>Every 30 days</source>
-        <translation type="unfinished"></translation>
+        <translation>Her 30 Günde Bir</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="270"/>
@@ -4761,17 +4690,17 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="499"/>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazı tipini seç</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="501"/>
         <source>Reset font</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazı tipini sıfırla</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="557"/>
         <source>%0, %1 pt</source>
-        <translation type="unfinished"></translation>
+        <translation>%0, %1 pt</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="673"/>
@@ -4852,12 +4781,12 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1550"/>
         <source>Installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurulu</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1576"/>
         <source>This Addon is mandatory and can not be removed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu Eklenti zorunludur ve kaldırılamaz.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1790"/>
@@ -4972,7 +4901,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="245"/>
         <source>Performing Snapshot operation...</source>
-        <translation type="unfinished"></translation>
+        <translation>Anlık Görüntü alma işlemi gerçekleştiriliyor...</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="24"/>
@@ -5008,104 +4937,100 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="973"/>
         <source>Submit Issue Report</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun Raporu Gönder</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="984"/>
         <source>Detailed issue description</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayrıntılı sorun açıklaması</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="988"/>
         <source>Attach Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini&apos;yi ekleyin</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="989"/>
         <source>Sandboxing compatibility is reliant on the configuration hence attaching the Sandboxie.ini file helps a lot with finding the issue.</source>
-        <oldsource>Sandboxing compatybility is relyent on the configuration hence attaching the sandboxie.ini helps a lot with finding the issue.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie uyumluluğu yapılandırmaya bağlıdır, bu nedenle Sandboxie.ini&apos;yi eklemek sorunu bulmada çok yardımcı olur.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="992"/>
         <source>Attach Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>Günlükleri Ekle</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="994"/>
         <source>Selecting partially checked state sends only the message log, but not the trace log.
 Before sending, you can review the logs in the main window.</source>
-        <oldsource>Select partially checked state to sends only message log but no trace log.
-Before sending you can review the logs in the main window.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>İzleme günlüğü olmadan yalnızca mesaj günlüğü göndermek için işaret kutusunu kısmen işaretli duruma getirebilirsiniz. Göndermeden önce ana pencereden gönderilecek günlükleri inceleyebilirsiniz.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="997"/>
         <source>Attach Crash Dumps</source>
-        <translation type="unfinished"></translation>
+        <translation>Çökme Dökümlerini Ekle</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="998"/>
         <source>An application crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</source>
-        <oldsource>An applicatin crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Sorun giderme işlemi sırasında bir uygulama çöktü, bir çökme dökümü eklemek hata ayıklamaya yardımcı olabilir.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1002"/>
         <source>Email address</source>
-        <translation type="unfinished"></translation>
+        <translation>E-posta adresi</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1003"/>
         <source>You have the option to provide an email address to receive a notification once a solution for your issue has been identified.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorununuz için bir çözüm belirlendiğinde bildirim almak için bir e-posta adresi sağlama seçeneğiniz vardır.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1011"/>
         <source>We apologize for the inconvenience you are currently facing with Sandboxie-Plus. </source>
-        <translation type="unfinished"></translation>
+        <translation>Şu anda Sandboxie Plus ile yaşadığınız rahatsızlıktan dolayı özür dileriz. </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1018"/>
         <source>Unfortunately, the automated troubleshooting procedure failed. </source>
-        <translation type="unfinished"></translation>
+        <translation>Ne yazık ki, otomatik sorun giderme işlemi başarısız oldu. </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1025"/>
         <source>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described. </source>
-        <translation type="unfinished"></translation>
+        <translation>Maalesef, tanımladığınız belirli sorun için otomatik bir sorun giderme işlemi bulunmamaktadır. </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1030"/>
         <source>If you wish to submit an issue report, please review the report below and click &apos;Finish&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun raporu göndermek istiyorsanız, lütfen aşağıdaki raporu inceleyin ve &apos;Bitir&apos;e tıklayın.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1129"/>
         <source>Compressing Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>Günlükler Sıkıştırılıyor</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1161"/>
         <source>Compressing Dumps</source>
-        <translation type="unfinished"></translation>
+        <translation>Çökme Dosyaları Sıkıştırılıyor</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1190"/>
         <source>Submitting issue report...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun raporu gönderiliyor...</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1201"/>
         <source>Failed to submit issue report, error %1
 Try submitting without the log attached.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun raporu gönderilemedi, hata %1
+Günlük eklemeden göndermeyi deneyin.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1205"/>
         <source>Your issue report has been successfully submitted, thank you.</source>
-        <oldsource>Your issue report have been successfully submitted, thank you.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Sorun raporunuz başarıyla gönderildi, teşekkür ederiz.</translation>
     </message>
 </context>
 <context>
@@ -5191,18 +5116,18 @@ Bu alandaki işlemler, ait oldukları korumalı alanı belirten özel bir işlem
         <location filename="Windows/SupportDialog.cpp" line="43"/>
         <source>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.<byte value="xd"/>
 If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu Insider derlemesi, GREAT_PATREON, PERSONAL-HUGE veya CONTRIBUTOR türünde özel bir sertifika gerektirir. Halihazırda büyük bir Patreaon destekçisiyseniz, Sandboxie sertifikanızın güncellenmesi için çevrimiçi olarak kontrol edebilir.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="51"/>
         <location filename="Windows/SupportDialog.cpp" line="316"/>
         <source>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu Insider derlemesi, GREAT_PATREON, PERSONAL-HUGE veya CONTRIBUTOR türünde özel bir sertifika gerektirir.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="136"/>
         <source>This is a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;exclusive Insider build&lt;/a&gt; of Sandboxie-Plus it is only available to &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon Supporters&lt;/a&gt; on higher tiers as well as to project contributors and owners of a HUGE supporter certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu, Sandboxie-Plus&apos;ın &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;özel bir Insider derlemesidir&lt;/a&gt; ve yalnızca daha yüksek seviyelerdeki &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon Destekçileri&lt;/a&gt; ile projeye katkıda bulunanlar ve BÜYÜK bir destekçi sertifikası sahipleri tarafından kullanılabilir.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="145"/>
@@ -5515,7 +5440,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Views/TraceView.cpp" line="376"/>
         <source>To use the stack traces feature the DbgHelp.dll and SymSrv.dll are required, do you want to download and install them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Yığın izleme özelliğini kullanmak için DbgHelp.dll ve SymSrv.dll gereklidir, bunları indirip yüklemek ister misiniz?</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="698"/>
@@ -5530,11 +5455,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Views/TraceView.cpp" line="724"/>
         <source>Saving TraceLog...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown</source>
-        <translation type="vanished">Bilinmeyen</translation>
+        <translation>TraceLog kaydediliyor...</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="253"/>
@@ -5589,53 +5510,11 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
 </context>
 <context>
-    <name>CWFPPage</name>
-    <message>
-        <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; network filtering</source>
-        <translation type="vanished">&lt;b&gt;Sandboxie-Plus&lt;/b&gt; ağ filtrelemesini yapılandırın</translation>
-    </message>
-    <message>
-        <source>Sandboxie can use the Windows Filtering Platform (WFP) to restrict network access.</source>
-        <translation type="vanished">Sandboxie, ağ erişimini kısıtlamak için Windows Filtreleme Platformunu (WFP) kullanabilir.</translation>
-    </message>
-    <message>
-        <source>Using WFP allows Sandboxie to reliably enforce IP/Port based rules for network access. Unlike system level application firewalls, Sandboxie can use different rules in each box for the same application. If you already have a good and reliable application firewall and do not need per box rules, you can leave this option unchecked. Without WFP enabled, Sandboxie will still be able to reliably and entirely block processes from accessing the network. However, this can cause the process to crash, as the driver blocks the required network device endpoints. Even with WFP disabled, Sandboxie offers to set IP/Port based rules, however these will be applied in user mode only and not be enforced by the driver. Hence, without WFP enabled, an intentionally malicious process could bypass those rules, but not the entire network block.</source>
-        <translation type="vanished">WFP&apos;nin kullanılması, Sandboxie&apos;nin ağ erişimi için IP/Port tabanlı kuralları güvenilir bir şekilde uygulamasına olanak sağlar. Sistem düzeyinde çalışan uygulama güvenlik duvarlarının aksine, Sandboxie aynı uygulama için her alanda farklı kurallar kullanabilir. Halihazırda iyi ve güvenilir bir uygulama güvenlik duvarınız varsa ve alan başına kurallara ihtiyacınız yoksa, bu seçeneği işaretlemeden bırakabilirsiniz. WFP etkinleştirilmeden bile Sandboxie, işlemlerin ağa erişmesini güvenilir bir şekilde ve tamamen engelleyebilir. Ancak, Sandboxie sürücüsü gerekli ağ aygıtı uç noktalarını engellediğinden bu durum bazı işlemlerin çökmesine neden olabilir. Sandboxie, WFP devre dışı bırakılmış olsa bile IP/Port tabanlı kurallar belirlemeyi sağlar, ancak bunlar yalnızca kullanıcı modunda uygulanacak ve sürücü tarafından uygulanmaya zorlanmayacaktır. Bu nedenle, WFP etkinleştirilmezse kötü amaçlı bir işlem bu kuralları atlatabilir ancak tüm ağ engellemesini atlatamaz.</translation>
-    </message>
-    <message>
-        <source>Enable Windows Filtering Platform (WFP) support</source>
-        <translation type="vanished">Windows Filtreleme Platformu (WFP) desteğini etkinleştir</translation>
-    </message>
-</context>
-<context>
     <name>CWizardEngine</name>
     <message>
         <location filename="Engine/BoxEngine.cpp" line="337"/>
         <source>_Shadow</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>NewBoxWindow</name>
-    <message>
-        <source>SandboxiePlus new box</source>
-        <translation type="vanished">SandboxiePlus yeni alan</translation>
-    </message>
-    <message>
-        <source>Sandbox Name:</source>
-        <translation type="vanished">Korumalı Alan Adı:</translation>
-    </message>
-    <message>
-        <source>Box Type Preset:</source>
-        <translation type="vanished">Alan Türü Ön Ayarı:</translation>
-    </message>
-    <message>
-        <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation type="vanished">Korumalı alan, ana bilgisayar sisteminizi korumalı alan içinde çalışan işlemlerden yalıtır ve diğer programlarda ve bilgisayarınızdaki verilerde kalıcı değişiklikler yapmalarını engeller. Yalıtım düzeyi, güvenliği ve uygulamalarla uyumluluğu etkiler, dolayısıyla seçili &apos;Alan Türüne&apos; bağlı olarak farklı bir yalıtım düzeyi sağlayacaktır. Sandboxie ayrıca kişisel verilerinize, kendi gözetimi altında çalışan işlemler tarafından erişilmesine karşı da koruyabilir.</translation>
-    </message>
-    <message>
-        <source>Box info</source>
-        <translation type="vanished">Alan bilgisi</translation>
+        <translation>_Shadow</translation>
     </message>
 </context>
 <context>
@@ -7300,10 +7179,6 @@ The process match level has a higher priority than the specificity and describes
         <translation>Yeni sürümler</translation>
     </message>
     <message>
-        <source>Check periodically for updates of Sandboxie-Plus</source>
-        <translation type="vanished">Sandboxie-Plus güncellemelerini düzenli aralıklarla denetle</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="65"/>
         <source>General Options</source>
         <translation>Genel Ayarlar</translation>
@@ -7604,18 +7479,9 @@ The process match level has a higher priority than the specificity and describes
         <translation>Girişi Sil</translation>
     </message>
     <message>
-        <source>Don&apos;t show the popup message log for all SBIE messages</source>
-        <translation type="vanished">Tüm SBIE mesajları için açılan mesaj günlüğünü gösterme</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="301"/>
         <source>Notification Options</source>
         <translation>Bildirim Seçenekleri</translation>
-    </message>
-    <message>
-        <source>Sandboxie may be issue &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases, special event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</source>
-        <oldsource>Sandboxie may be issue &lt;a href=&quot;sbie://docs/sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</oldsource>
-        <translation type="obsolete">Sandboxie, Mesaj Günlüğüne &lt;a href=&quot;sbie://docs/ sbiemessages&quot;&gt;SBIE Mesajları&lt;/a&gt; yayınlayabilir ve bunları Açılır Pencereler olarak gösterebilir. Bazı mesajlar bilgilendirme amaçlıdır ve meydana gelen genel amaçlı veya bazı durumlara özel olayları bildirir, diğer mesajlar ise hata durumunlarını belirtir.&lt;br /&gt;Aşağıdaki listeyi kullanarak seçili SBIE mesajlarının açılmasını engelleyebilirsiniz:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="404"/>
@@ -7668,10 +7534,6 @@ The process match level has a higher priority than the specificity and describes
         <translation>Korumalı Alan Özellikleri</translation>
     </message>
     <message>
-        <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
-        <translation type="vanished">Anonim bir belirteç (deneysel) yerine Sandboxie oturum açmayı kullan</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1820"/>
         <source>Sandboxie.ini Presets</source>
         <translation>Sandboxie.ini Ön Ayarları</translation>
@@ -7702,26 +7564,14 @@ The process match level has a higher priority than the specificity and describes
         <translation>Kararlı kanalda ara</translation>
     </message>
     <message>
-        <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. Please consider supporting this work with a donation.&lt;br /&gt;You can support the development with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;PayPal donation&lt;/a&gt;, working also with credit cards.&lt;br /&gt;Or you can provide continuous support with a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon subscription&lt;/a&gt;.</source>
-        <translation type="vanished">Sandboxie&apos;yi Windows&apos;un devam eden sürümleriyle güncel ve tüm web tarayıcılarıyla uyumlu tutmak hiç bitmeyen bir çabadır. Lütfen bu çalışmayı bir bağışla desteklemeyi düşünün.&lt;br /&gt;Geliştirmeyi bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;PayPal bağışı&lt;/a&gt; ile destekleyebilirsiniz, kredi kartlarıyla da çalışır.&lt;br /&gt;Ya da bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon aboneliği&lt;/a&gt; ile sürekli destek sağlayabilirsiniz.</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1459"/>
         <source>Search in the Preview channel</source>
         <translation>Önizleme kanalında ara</translation>
     </message>
     <message>
-        <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation type="vanished">Sandboxie-Plus projesinin destekçileri bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; alabilir. Bir lisans anahtarı gibi ama açık kaynaklı yazılım kullanan harika insanlar için. :-)</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1370"/>
         <source>Enter the support certificate here</source>
         <translation>Destek sertifikasını buraya girin</translation>
-    </message>
-    <message>
-        <source>Support Settings</source>
-        <translation type="vanished">Destek Ayarları</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="367"/>
@@ -7821,11 +7671,6 @@ The process match level has a higher priority than the specificity and describes
         <translation>Komut Satırı</translation>
     </message>
     <message>
-        <source>Disable SBIE messages popups (SBIE will still be logged to the log tab)</source>
-        <oldsource>Disable SBIE messages popups (they will still be logged to the Messages tab)</oldsource>
-        <translation type="obsolete">SBIE mesajları için açılır pencereleri devre dışı bırak (bunlar yine de Mesajlar sekmesine kaydedilecektir)</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1238"/>
         <source>Support &amp;&amp; Updates</source>
         <translation>Destek &amp;&amp; Güncellemeler</translation>
@@ -7853,123 +7698,124 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="327"/>
         <source>Sandboxie may be issue &lt;a href=&quot;sbie://docs/sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie, Mesaj Günlüğüne &lt;a href=&quot;sbie://docs/sbiemessages&quot;&gt;SBIE Mesajları&lt;/a&gt; yayınlayabilir ve bunları Açılır Pencereler olarak gösterebilir. Bazı mesajlar bilgilendirme amaçlıdır ve meydana gelen genel amaçlı veya bazı durumlara özel olayları bildirir, diğer mesajlar ise hata durumunlarını belirtir.&lt;br /&gt;Aşağıdaki listeyi kullanarak seçili SBIE mesajlarının açılmasını engelleyebilirsiniz:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="340"/>
         <source>Disable SBIE messages popups (they will still be logged to the Messages tab)</source>
-        <translation type="unfinished"></translation>
+        <translation>SBIE mesajları için açılır pencereleri devre dışı bırak (bunlar yine de Mesajlar sekmesine kaydedilecektir)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="963"/>
         <source>Ini Editor Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Ini Düzenleyici Yazı Tipi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1055"/>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazı tipini seç</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1065"/>
         <source>Reset font</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazı tipini sıfırla</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1133"/>
         <source>#</source>
-        <translation type="unfinished"></translation>
+        <translation>#</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1147"/>
         <source>Addons Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Eklenti Yöneticisi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1157"/>
         <source>Optional Addons</source>
-        <translation type="unfinished"></translation>
+        <translation>İsteğe Bağlı Eklentiler</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1165"/>
         <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of addons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus çok sayıda seçenek sunar ve çok çeşitli uzantıları destekler. Bu sayfadan eklentilerin, uzantıların ve diğer üçüncü taraf bileşenlerin entegrasyonunu yapılandırabilirsiniz. İsteğe bağlı bileşenler web&apos;den indirilebilir ve bazı kurulumlar yönetici ayrıcalıkları gerektirebilir.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1201"/>
         <source>Status</source>
-        <translation type="unfinished">Durum</translation>
+        <translation>Durum</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1206"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Açıklama</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1214"/>
         <source>&lt;a href=&quot;sbie://addons&quot;&gt;update addon list now&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://addons&quot;&gt;eklenti listesini şimdi güncelle&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1224"/>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Yükle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1248"/>
         <source>Sandboxie Support</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Desteği</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1380"/>
         <source>Sandboxie Updater</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Güncelleyici</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1411"/>
         <source>Keep addon list up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>Eklenti listesini güncel tutun</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1425"/>
         <source>Update Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayarları güncelle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1466"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Insider Kanalı, sonunda herkese açılacak yeni özelliklere ve hata düzeltmelerine erken erişim sağlar ve ayrıca Kararlı Kanal&apos;daki ilgili tüm iyileştirmeleri de bulundurur.
+Ön izleme kanalından farklı olarak, daha geniş kullanıma hazır olmayan denenmemiş, potansiyel olarak bozuk veya deneysel değişiklikler içermez.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1470"/>
         <source>Search in the Insider channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Insider kanalında ara</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1517"/>
         <source>Check periodically for new Sandboxie-Plus versions</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus güncellemelerini düzenli aralıklarla denetle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1527"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Kanalı&lt;/a&gt; hakkında daha fazla bilgi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1547"/>
         <source>Keep Troubleshooting scripts up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun giderme betik dosyalarını güncel tutun</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1583"/>
         <source>Update Check Interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Güncelleme Denetleme Aralığı</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1784"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished">Anonim kullanıcı yerine Sandboxie oturum açma belirteci kullan</translation>
+        <translation>Anonim kullanıcı yerine Sandboxie oturum açma belirteci kullan</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1914"/>

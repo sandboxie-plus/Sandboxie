@@ -1160,6 +1160,10 @@ Sandboxie-Plus'a Yükseltin
 Sandboxie-Plus Taşıma Kılavuzu
 .
 
+3469;txt;01
+Sandboxie-Plus'taki Yenilikler
+.
+
 3471;txt;01
 Programları &Kapat
 .

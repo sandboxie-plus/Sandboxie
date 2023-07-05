@@ -3386,7 +3386,7 @@ QString CSandMan::FormatError(const SB_STATUS& Error)
 	case SB_DeleteProtect:	Message = tr("Delete protection is enabled for the sandbox"); break;
 	case SB_DeleteNotEmpty:	Message = tr("All sandbox processes must be stopped before the box content can be deleted"); break;
 	case SB_DeleteError:	Message = tr("Error deleting sandbox folder: %1"); break;
-	case SB_RemNotStopped:	Message = tr("A all processes in a sandbox must be stopped before it can be renamed."); break;
+	case SB_RemNotStopped:	Message = tr("All processes in a sandbox must be stopped before it can be renamed."); break;
 	//case SB_RemNotEmpty:	Message = tr("A sandbox must be emptied before it can be renamed."); break;
 	case SB_DelNotEmpty:	Message = tr("A sandbox must be emptied before it can be deleted."); break;
 	case SB_FailedMoveDir:	Message = tr("Failed to move directory '%1' to '%2'"); break;

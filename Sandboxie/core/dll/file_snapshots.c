@@ -36,7 +36,7 @@ typedef struct _FILE_SNAPSHOT {
 	WCHAR					ID[FILE_MAX_SNAPSHOT_ID];
 	ULONG					IDlen;
 	ULONG					ScramKey;
-	//WCHAR					Name[34];
+	//WCHAR					Name[BOXNAME_COUNT];
 	struct _FILE_SNAPSHOT*	Parent;
 	LIST					PathRoot;
 } FILE_SNAPSHOT, *PFILE_SNAPSHOT;
@@ -480,8 +480,8 @@ _FX void File_InitSnapshots(void)
 			File_LoadPathTree_internal(&Cur_Snapshot->PathRoot, PathFile);
 		}
 
-		//WCHAR SnapshotName[34] = { 0 };
-		//GetPrivateProfileStringW(SnapshotId, L"Name", L"", SnapshotName, 34, SnapshotsIni);
+		//WCHAR SnapshotName[BOXNAME_COUNT] = { 0 };
+		//GetPrivateProfileStringW(SnapshotId, L"Name", L"", SnapshotName, BOXNAME_COUNT, SnapshotsIni);
 		//wcscpy(Cur_Snapshot->Name, SnapshotName);
 
 		GetPrivateProfileStringW(SnapshotId, L"Parent", L"", Snapshot, 16, SnapshotsIni);

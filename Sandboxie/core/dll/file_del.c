@@ -412,7 +412,7 @@ _FX VOID File_SavePathTree_internal(LIST* Root, const WCHAR* name)
 
     HANDLE hPathsFile;
     IO_STATUS_BLOCK IoStatusBlock;
-    if (!NT_SUCCESS(NtCreateFile(&hPathsFile, GENERIC_WRITE | SYNCHRONIZE , &objattrs, &IoStatusBlock, NULL, 0, FILE_SHARE_READ, FILE_OVERWRITE_IF, FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE, NULL, 0)))
+    if (!NT_SUCCESS(NtCreateFile(&hPathsFile, GENERIC_WRITE | SYNCHRONIZE, &objattrs, &IoStatusBlock, NULL, 0, FILE_SHARE_READ, FILE_OVERWRITE_IF, FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE, NULL, 0)))
         return;
     
     WCHAR* Path = (WCHAR *)Dll_Alloc((0x7FFF + 1)*sizeof(WCHAR)); // max nt path

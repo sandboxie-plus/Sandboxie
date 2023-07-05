@@ -711,7 +711,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
                 if (pTrapFrame) {
                     ret = pTrapFrame->Rip;
                     UserStack = pTrapFrame->Rsp;
-                    pTrapFrame->Rsp = pTrapFrame->Rbp; //*pRbp;
+                    pTrapFrame->Rsp = pTrapFrame->Rdi; //*pRbp;
                     pTrapFrame->Rip = pTrapFrame->Rbx; //*pRbx;
                 }
             }

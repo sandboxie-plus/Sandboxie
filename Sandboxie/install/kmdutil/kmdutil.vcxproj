@@ -183,6 +183,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="fixdacls.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|ARM64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|ARM64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">NotUsing</PrecompiledHeader>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">Sync</ExceptionHandling>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='SbieDebug|Win32'">Sync</ExceptionHandling>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='SbieRelease|ARM64'">Sync</ExceptionHandling>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='SbieDebug|ARM64'">Sync</ExceptionHandling>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">Sync</ExceptionHandling>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">Sync</ExceptionHandling>
+    </ClCompile>
     <ClCompile Include="KmdUtil.c" />
     <ClCompile Include="sbiedrv.c" />
     <ClCompile Include="scandll.c" />

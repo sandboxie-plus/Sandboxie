@@ -148,11 +148,11 @@ _FX NTSTATUS SbieApi_Ioctl(SBIELOW_DATA *data, void *parms)
 
 
 //---------------------------------------------------------------------------
-// SbieApi_DebugPrint
+// SbieApi_LogMsg
 //---------------------------------------------------------------------------
 
 
-_FX NTSTATUS SbieApi_DebugPrint(SBIELOW_DATA *data, const WCHAR *text)
+_FX NTSTATUS SbieApi_LogMsg(ULONG64 pNtDeviceIoControlFile, ULONG64 api_device_handle, ULONG code, const WCHAR *text)
 {
     NTSTATUS status = 0;
     __declspec(align(8)) UNICODE_STRING64 msgtext;
@@ -170,9 +170,18 @@ _FX NTSTATUS SbieApi_DebugPrint(SBIELOW_DATA *data, const WCHAR *text)
     memzero(parms, sizeof(parms));
     args->func_code = API_LOG_MESSAGE;
     args->session_id.val = -1;
-    args->msgid.val = 1122;
+    args->msgid.val = code;
     args->msgtext.val = &msgtext;
-    status = SbieApi_Ioctl(data, parms);
+    //status = SbieApi_Ioctl(data, parms);
+
+    IO_STATUS_BLOCK MyIoStatusBlock;
+#ifdef _WIN64
+    ULONG MyIoStatusBlock32[2];
+    *(ULONG_PTR *)&MyIoStatusBlock = (ULONG_PTR)MyIoStatusBlock32;
+#endif _WIN64
+    return ((P_NtDeviceIoControlFile)pNtDeviceIoControlFile)(
+        (HANDLE)api_device_handle, NULL, NULL, NULL, &MyIoStatusBlock,
+        API_SBIEDRV_CTLCODE, parms, sizeof(ULONG64) * 8, NULL, 0);
 
     return status;
 }
@@ -196,7 +205,7 @@ _FX NTSTATUS SbieApi_DebugError(SBIELOW_DATA* data, ULONG error)
     for(int i=28; i >= 0; i-=4)
         *ptr++ = table[(error >> i) & 0xF];
 
-    return SbieApi_DebugPrint(data, text);
+    return SbieApi_LogMsg(data->NtDeviceIoControlFile, data->api_device_handle, 2180, text);
 }
 
 
@@ -223,7 +232,40 @@ _FX void WaitForDebugger(SBIELOW_DATA *data)
 
     __debugbreak();
 }
+
 #endif
+
+
+//---------------------------------------------------------------------------
+// WriteMemorySafe
+//---------------------------------------------------------------------------
+
+
+_FX void WriteMemorySafe(SBIELOW_DATA* data, void *Address, SIZE_T Size, void *Data)
+{
+    void *RegionBase = Address;
+    SIZE_T RegionSize = Size;
+    ULONG OldProtect;
+
+    SBIELOW_CALL(NtProtectVirtualMemory)(
+        NtCurrentProcess(), &RegionBase, &RegionSize,
+        PAGE_EXECUTE_READWRITE, &OldProtect);
+
+    // memcopy is not available, lets do our own
+    switch (Size) {
+    case 1: *(UCHAR*)Address = *(UCHAR*)Data;       break;
+    case 2: *(USHORT*)Address = *(USHORT*)Data;     break;
+    case 4: *(ULONG*)Address = *(ULONG*)Data;       break;
+    case 8: *(ULONG64*)Address = *(ULONG64*)Data;   break;
+    default:
+        for (SIZE_T i = 0; i < Size; i++)
+            ((UCHAR*)Address)[i] = ((UCHAR*)Data)[i];
+    }
+
+    SBIELOW_CALL(NtProtectVirtualMemory)(
+        NtCurrentProcess(), &RegionBase, &RegionSize,
+        OldProtect, &OldProtect);
+}
 
 
 //---------------------------------------------------------------------------
@@ -233,11 +275,6 @@ _FX void WaitForDebugger(SBIELOW_DATA *data)
 
 _FX void PrepSyscalls(SBIELOW_DATA *data, void * SystemService)
 {
-    UCHAR *SystemServiceAsm;
-    void *RegionBase;
-    SIZE_T RegionSize;
-    ULONG OldProtect;
-
 #ifdef _M_ARM64
     if (data->flags.is_arm64ec) {
 
@@ -248,7 +285,8 @@ _FX void PrepSyscalls(SBIELOW_DATA *data, void * SystemService)
         // a replica of the #NtDeviceIoControlFile EC variant
         //
 
-        data->NtDeviceIoControlFile = (ULONG64)&NtDeviceIoControlFileEC;
+        ULONG64 pNtDeviceIoControlFileEC = (ULONG64)&NtDeviceIoControlFileEC;
+        WriteMemorySafe(data, &data->NtDeviceIoControlFile, sizeof(ULONG64), &pNtDeviceIoControlFileEC);
 
 
         // 
@@ -260,9 +298,9 @@ _FX void PrepSyscalls(SBIELOW_DATA *data, void * SystemService)
         // we can just copy the ULONG strait out of the native function
         //
 
-        DeviceIoControlSvc = *(ULONG*)&data->NtDeviceIoControlFile_code[0];
+        WriteMemorySafe(data, &DeviceIoControlSvc, sizeof(ULONG), &data->NtDeviceIoControlFile_code[0]);
 
-        
+
         //
         // get the EcExitThunkPtr which points to
         // __os_arm64x_dispatch_call_no_redirect
@@ -275,11 +313,15 @@ _FX void PrepSyscalls(SBIELOW_DATA *data, void * SystemService)
 
         ULONG* syscall_ec_data = (ULONG*)data->syscall_data;
 
-        EcExitThunkPtr = *(ULONG64*)((UINT_PTR)syscall_ec_data + syscall_ec_data[1] - 8);
+        UINT_PTR pEcExitThunkPtr = *(UINT_PTR*)((UINT_PTR)syscall_ec_data + syscall_ec_data[1] - 8);
+        WriteMemorySafe(data, &EcExitThunkPtr, sizeof(UINT_PTR), &pEcExitThunkPtr);
     }
     else
 #endif
-        data->NtDeviceIoControlFile = (ULONG64)&data->NtDeviceIoControlFile_code[0];
+    {
+        ULONG64 pNtDeviceIoControlFile = (ULONG64)&data->NtDeviceIoControlFile_code[0];
+        WriteMemorySafe(data, &data->NtDeviceIoControlFile, sizeof(ULONG64), &pNtDeviceIoControlFile);
+    }
 
     const LONG OFFSET_ULONG_PTR =
 #ifdef _M_ARM64
@@ -295,21 +337,14 @@ _FX void PrepSyscalls(SBIELOW_DATA *data, void * SystemService)
     // to include the data area pointer
     //
 
-    SystemServiceAsm = (UCHAR *)SystemService;
-    RegionBase = (void *)(SystemServiceAsm + OFFSET_ULONG_PTR);
-    RegionSize = sizeof(ULONG_PTR);
+    WriteMemorySafe(data, ((UCHAR *)SystemService) + OFFSET_ULONG_PTR, sizeof(ULONG_PTR), &data);
 
-    SBIELOW_CALL(NtProtectVirtualMemory)(
-        NtCurrentProcess(), &RegionBase, &RegionSize,
-        PAGE_EXECUTE_READWRITE, &OldProtect);
+    //
+    // store the SystemService address in pSystemService
+    //
 
-    *(ULONG_PTR *)(SystemServiceAsm + OFFSET_ULONG_PTR) = (ULONG_PTR)data;
-
-    SBIELOW_CALL(NtProtectVirtualMemory)(
-        NtCurrentProcess(), &RegionBase, &RegionSize,
-        OldProtect, &OldProtect);
-
-    data->pSystemService = (ULONG64)SystemServiceAsm;
+    ULONG64 SystemServicePtr = (ULONG64)SystemService;
+    WriteMemorySafe(data, &data->pSystemService, sizeof(ULONG64), &SystemServicePtr);
 }
 
 
@@ -597,33 +632,29 @@ _FX void DisableCHPE(SBIELOW_DATA* data)
     if (!RtlImageOptionsEx)
         return;
 
-    //
-    // backup bytes for trampoline
-    //
-
-    ULONG DetourSize = 28;
-    memcpy(data->RtlImageOptionsEx_tramp, RtlImageOptionsEx, DetourSize); 
-
-    //
-    // make target writable & create detour
-    //
-
     void *RegionBase;
     SIZE_T RegionSize;
     ULONG OldProtect;
+    ULONG* aCode;
 
-    RegionBase = (void*)RtlImageOptionsEx;
-    RegionSize = DetourSize; // 16;
+    //
+    // backup target & create simple trampoline
+    //
+
+    RegionBase = (void*)data->RtlImageOptionsEx_tramp;
+    RegionSize = sizeof(data->RtlImageOptionsEx_tramp);
     SBIELOW_CALL(NtProtectVirtualMemory)(
         NtCurrentProcess(), &RegionBase, &RegionSize,
         PAGE_EXECUTE_READWRITE, &OldProtect);
 
-	ULONG* aCode = (ULONG*)RtlImageOptionsEx;
-    aCode[0] = 0x580000a7;	// ldr x7, 20 - data
-	aCode[1] = 0x58000048;	// ldr x8, 8 - MyImageOptionsEx
-	aCode[2] = 0xD61F0100;	// br x8
-	*(DWORD64*)&aCode[3] = (DWORD64)MyImageOptionsEx; 
-    *(DWORD64*)&aCode[5] = (DWORD64)data;
+    ULONG DetourSize = 28;
+    memcpy(data->RtlImageOptionsEx_tramp, RtlImageOptionsEx, DetourSize); 
+
+    aCode = (ULONG*)(data->RtlImageOptionsEx_tramp + DetourSize); // 28
+	aCode[0] = 0x58000048;	// ldr x8, 8 - Rest of RtlImageOptionsEx
+	aCode[1] = 0xD61F0100;	// br x8
+	*(DWORD64*)&aCode[2] = (DWORD64)RtlImageOptionsEx + DetourSize; 
+    // 44
 
     SBIELOW_CALL(NtProtectVirtualMemory)(
         NtCurrentProcess(), &RegionBase, &RegionSize,
@@ -633,13 +664,29 @@ _FX void DisableCHPE(SBIELOW_DATA* data)
         NtCurrentProcess(), RegionBase, (ULONG)RegionSize);
 
     //
-    // create simple trampoline
+    // make target writable & create detour
     //
 
-    aCode = (ULONG*)(data->RtlImageOptionsEx_tramp + DetourSize);
-	aCode[0] = 0x58000048;	// ldr x8, 8 - Rest of RtlImageOptionsEx
-	aCode[1] = 0xD61F0100;	// br x8
-	*(DWORD64*)&aCode[2] = (DWORD64)RtlImageOptionsEx + DetourSize; 
+    RegionBase = (void*)RtlImageOptionsEx;
+    RegionSize = DetourSize;
+    SBIELOW_CALL(NtProtectVirtualMemory)(
+        NtCurrentProcess(), &RegionBase, &RegionSize,
+        PAGE_EXECUTE_READWRITE, &OldProtect);
+
+	aCode = (ULONG*)RtlImageOptionsEx;
+    aCode[0] = 0x580000a7;	// ldr x7, 20 - data
+	aCode[1] = 0x58000048;	// ldr x8, 8 - MyImageOptionsEx
+	aCode[2] = 0xD61F0100;	// br x8
+	*(DWORD64*)&aCode[3] = (DWORD64)MyImageOptionsEx; 
+    *(DWORD64*)&aCode[5] = (DWORD64)data;
+    //28
+
+    SBIELOW_CALL(NtProtectVirtualMemory)(
+        NtCurrentProcess(), &RegionBase, &RegionSize,
+        OldProtect, &OldProtect);
+
+    SBIELOW_CALL(NtFlushInstructionCache)(
+        NtCurrentProcess(), RegionBase, (ULONG)RegionSize);
 }
 #endif
 
@@ -745,7 +792,7 @@ ULONG_PTR EntrypointC(SBIELOW_DATA *data, void *DetourCode, void *SystemService)
         // WaitForDebugger(data);
 
         //wchar_t text[] = { 't','e','s','t',0 };
-        //SbieApi_DebugPrint(data, text);
+        //SbieApi_LogMsg(data->NtDeviceIoControlFile, data->api_device_handle, 1122, text);
 
         PrepSyscalls(data, SystemService);
         if (!data->flags.bHostInject && !data->flags.bNoSysHooks)

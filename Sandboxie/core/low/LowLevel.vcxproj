@@ -159,11 +159,6 @@
   <ItemGroup>
     <ClCompile Include="init.c" />
     <ClCompile Include="inject.c" />
-    <ClCompile Include="lowlevel_code.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|ARM64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">true</ExcludedFromBuild>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lowdata.h" />

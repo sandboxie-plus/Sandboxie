@@ -105,10 +105,6 @@ _FX int Trace_Init(void)
 
 
         OutputDebugString(L"SbieDll injected...\n");
-        for (int i = 0; i < 16; i++) {
-            if (SbieApi_data->DebugData[i] != 0)
-                DbgPrint("DebugData[%d]: %p\n", i, (UINT_PTR)SbieApi_data->DebugData[i]);
-        }
     }
 
     //

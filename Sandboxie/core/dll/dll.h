@@ -281,10 +281,10 @@ extern ULONG64 Dll_ProcessFlags;
 #ifndef _WIN64
 extern BOOLEAN Dll_IsWow64;
 #endif
-#ifdef _M_X64
+#ifdef _M_ARM64EC
 extern BOOLEAN Dll_IsArm64ec;
 #endif
-#ifndef _M_ARM64
+#ifndef _WIN64
 extern BOOLEAN Dll_IsXtAjit;
 #endif
 extern BOOLEAN Dll_IsSystemSid;

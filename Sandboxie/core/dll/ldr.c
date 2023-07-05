@@ -282,22 +282,15 @@ void CALLBACK Ldr_LdrDllNotification(ULONG NotificationReason, PLDR_DLL_NOTIFICA
 {
     ULONG_PTR LdrCookie = 0;
     NTSTATUS status = 0;
-    WCHAR text[4096];
 
     if (NotificationReason == 1) {
         status = __sys_LdrLockLoaderLock(0, NULL, &LdrCookie);
         Ldr_MyDllCallbackNew(NotificationData->Loaded.BaseDllName->Buffer, (HMODULE)NotificationData->Loaded.DllBase, TRUE);
         __sys_LdrUnlockLoaderLock(0, LdrCookie);
-
-        Sbie_snwprintf(text, ARRAYSIZE(text), L"%s (loaded)", NotificationData->Loaded.BaseDllName->Buffer);
     }
     else if (NotificationReason == 2) {
         Ldr_MyDllCallbackNew(NotificationData->Unloaded.BaseDllName->Buffer,  (HMODULE)NotificationData->Loaded.DllBase, FALSE);
-
-        Sbie_snwprintf(text, ARRAYSIZE(text), L"%s (unloaded)", NotificationData->Loaded.BaseDllName->Buffer);
     }
-
-    SbieApi_MonitorPutMsg(MONITOR_IMAGE, text);
 }
 
 //---------------------------------------------------------------------------
@@ -1090,19 +1083,25 @@ _FX void Ldr_MyDllCallbackA(const CHAR *ImageName, HMODULE ImageBase, BOOL LoadS
     WCHAR ImageNameW[128];
     Sbie_snwprintf(ImageNameW, ARRAYSIZE(ImageNameW), L"%S", ImageName);
 
-    Ldr_MyDllCallbackW(ImageNameW, ImageBase, LoadState);
+    Ldr_MyDllCallbackNew(ImageNameW, ImageBase, LoadState);
 }
 
 
 _FX void Ldr_MyDllCallbackW(const WCHAR *ImageName, HMODULE ImageBase, BOOL LoadState) // Windows XP
 {
-	// call new function
-	Ldr_MyDllCallbackNew(ImageName, ImageBase, LoadState);
+    Ldr_MyDllCallbackNew(ImageName, ImageBase, LoadState);
 }
 
 
 _FX void Ldr_MyDllCallbackNew(const WCHAR *ImageName, HMODULE ImageBase, BOOL LoadState) // Windows 8.1 and later
 {
+    WCHAR text[4096];
+    if(LoadState)
+        Sbie_snwprintf(text, ARRAYSIZE(text), L"%s (loaded)", ImageName);
+    else
+        Sbie_snwprintf(text, ARRAYSIZE(text), L"%s (unloaded)", ImageName);
+    SbieApi_MonitorPutMsg(MONITOR_IMAGE, text);
+
     //
     // invoke our sub-modules as necessary
     //
@@ -1187,12 +1186,12 @@ _FX void *Ldr_GetProcAddrOld(const WCHAR *DllName, const WCHAR *ProcNameW)
 _FX void *Ldr_GetProcAddrNew(const WCHAR *DllName, const WCHAR *ProcNameW, char * ProcNameA)
 {
     NTSTATUS status;
-    void *proc;
+    void *proc = NULL;
     //  char buffer[768];
     //  sprintf(buffer,"GetProcAddrNew: DllName = %S, ProcW = %S, ProcA = %s\n",DllName,ProcNameW,ProcNameA);
     //  OutputDebugStringA(buffer);
 
-    if (Dll_OsBuild < 9600) {
+    if (Dll_OsBuild < 9600) { // Windows 8.0 or earlier
         proc = Ldr_GetProcAddr_2(DllName, ProcNameW);
         if (!proc) {
             ULONG_PTR LdrCookie;
@@ -1223,7 +1222,7 @@ _FX void *Ldr_GetProcAddrNew(const WCHAR *DllName, const WCHAR *ProcNameW, char 
             }
         }
     }
-    else {
+    else { // Windows 8.1 and later
         HMODULE DllBase;
         DllBase = GetModuleHandle(DllName);
         if (!DllBase) {

@@ -1,5 +1,5 @@
 ;------------------------------------------------------------------------
-; Copyright 2022 David Xanatos, xanasoft.com
+; Copyright 2022-2023 David Xanatos, xanasoft.com
 ;
 ; This program is free software: you can redistribute it and/or modify
 ;   it under the terms of the GNU General Public License as published by
@@ -18,6 +18,8 @@
 	AREA |.text|, CODE, READONLY
 
     IMPORT  EntrypointC
+
+    IMPORT  DetourFunc
 
     ;EXPORT  ServiceDataPtr
     EXPORT  SystemServiceARM64
@@ -251,7 +253,7 @@ DeviceIoControlSvc
 
 
 ;----------------------------------------------------------------------------
-; RtlFindActivationContextSectionString detour code
+; detour code loading SbieDll.dll
 ;----------------------------------------------------------------------------
 
 
@@ -272,103 +274,26 @@ DetourCodeARM64 PROC
 
     ldr     x19, InjectDataPtr              ; x19 -> inject data area
 
-    ;
-    ; reatore RtlFindActCtx, copy 16 bytes	
-    ;
-
-    add     x8, x19, #0x20                  ; [x19].InjectData.RtlFindActCtx
-    ldr     x9, [x8]
-    ldp     w10, w11, [x19, #0x2C]          ; [x19].InjectData.RtlFindActCtx_Bytes
-    stp     w10, w11, [x9, #0x00]
-    ldp     w10, w11, [x19, #0x34]          ; [x19].InjectData.RtlFindActCtx_Bytes + 8
-    stp     w10, w11, [x9, #0x08]
-
-    ldr     x0, =0xFFFFFFFFFFFFFFFF         ; ProcessHandle
-    mov     x1, x9                          ; BaseAddress
-    mov     x2, #0x10                       ; NumberOfBytesToFlush
-
-    ;ldr     x8, [x19, 0x70]                 ; [x19].InjectData.NtFlushInstructionCache
-    ldr     x9, [x19]                       ; [x19].InjectData.SBIELOW_DATA
-    add     x8, x9, 0xA0                    ; SBIELOW_DATA.NtFlushInstructionCache_code
-    blr     x8
-
 	;
-	; call LdrLoadDll for kernel32
+	; call DetourFunc
 	;
 
-    mov     x20, #0x10                      ; retry count
+    mov     x0, x19                         ; [x19].InjectData
+    bl      DetourFunc
 
-LdrLoadRetry
-    mov     x0, #0x00                       ; PathToFile
-    mov     x1, #0x00                       ; Flags
-    add     x2, x19, 0x40                   ; [x19].InjectData.KernelDll_Unicode
-    add     x3, x19, 0x60                   ; [x19].InjectData.ModuleHandle
-
-    ldr     x8, [x19, 0x08]                 ; [x19].InjectData.LdrLoadDll
-    blr     x8
-
-    cmp	    x0, #0x00
-    beq     LdrLoadGood
-    sub     x20, x20, #0x01
-    cmp     x20, #0x00
-    bne     LdrLoadRetry
-    b       RtlFindActivationContextSectionStringError
-
-LdrLoadGood
-	;
-	; call LdrLoadDll for sbiedll
-	;
-
-    mov     x0, #0x00                       ; PathToFile
-    mov     x1, #0x00                       ; Flags
-    add     x2, x19, 0x50                   ; [x19].InjectData.SbieDll_Unicode
-    add     x3, x19, 0x60                   ; [x19].InjectData.ModuleHandle
-
-    ldr     x8, [x19, 0x08]                 ; [x19].InjectData.LdrLoadDll
-    blr     x8
-    cmp	    x0, #0x00
-    bne	    RtlFindActivationContextSectionStringError
+;    cmp	    x0, #0x00
+;    bne	    DetourError
 
 	;
-	; call the custom MyGetProcedureAddress implemented in c
-    ; which calls LdrGetProcedureAddress for sbiedll ordinal 1,
-	; this forces ntdll to initialize sbiedll and returns the address to call
-    ; 
-    ; in ARM64EC mode it returns the native function address instead of the FFS sequence
+	; resume execution or original function
 	;
 
-    ldr     x0, [x19, 0x60]                 ; [x19].InjectData.ModuleHandle
-    mov     x1, #0x00                       ; FunctionName
-    mov     x2, #0x01                       ; Ordinal
-    add     x3, x19, 0x68                   ; [x19].InjectData.SbieDllOrdinal1
-    mov     x4, x19                         ; [x19].InjectData
-
-    ;ldr     x8, [x19, 0x10]                 ; [x19].InjectData.LdrGetProcAddr
-    ldr     x8, [x19, 0x70]                 ; [x19].InjectData.MyGetProcAddr
-    blr     x8
-    cmp	    x0, #0x00
-    bne	    RtlFindActivationContextSectionStringError
-
-	;
-	; pass control to ordinal 1, which will free the inject
-	; data area, and pass control to the original function
-	; RtlFindActivationContextSectionString
-	;
-	; note that we need to pass the address of the inject
-	; data area to ordinal 1, which we do by overwriting the
-	; first argument.  the original argument is saved in
-	; the inject data area
-	;
-
-    ldr     x8, [sp, #0x00]
-    str     x8, [x19, 0x08]                 ; [x19].InjectData.LdrLoadDll
-    mov     x0, x19
-    ldr     x1, [sp, #0x08]
+    ldp     x0, x1, [sp, #0x00]
     ldp     x2, x3, [sp, #0x10]
     ldp     x4, x5, [sp, #0x20]
     ldp     x6, x7, [sp, #0x30]
 
-    ldr     x8, [x19, 0x68]                 ; [x19].InjectData.SbieDllOrdinal1
+    ldr     x8, [x19, 0x08]                 ; [x19].InjectData.RtlFindActCtx
 
     add     sp, sp, #0x40
     ldp     x19, x20, [sp], #0x10
@@ -376,33 +301,169 @@ LdrLoadGood
 
     br      x8
 
-RtlFindActivationContextSectionStringError
-
-    str     x0, [sp, #0x38]                 ; save ntstatus
-
-    add     x8, x19, 0x50                   ; [x19].InjectData.SbieDll_Unicode
-    str	    x8, [x19, 0x08]                 ; [x19].InjectData.LdrLoadDll
-
-    add     x5, x19, 0x10                   ; out_response - [x19].InjectData.LdrGetProcAddr
-    mov	    x4, #0x01                       ; response_buttons - ERROR_OK
-    mov	    x3, x8                          ; list_of_pointers_to_parameters
-    mov	    x2, #0x01                       ; mask_of_strings_in_list
-    mov	    x1, #0x01                       ; number_of_parameters_in_list
-    ldr	    x0, =0xD0000142                 ; ntstatus_message_code - (STATUS_DLL_INIT_FAILED or FORCE_ERROR_MESSAGE_BOX)
-
-    ldr     x8, [x19, 0x18]                 ; [x19].InjectData.LdrGetProcAddr
-    blr     x8
-
-    ldr     x0, [sp, #0x38]                 ; restore ntstatus
-
-    add     sp, sp, #0x40
-    ldp     x19, x20, [sp], #0x10
-    ldp     fp, lr, [sp], #0x10
-
-    ret
+;DetourError
+;
+;    add     sp, sp, #0x40
+;    ldp     x19, x20, [sp], #0x10
+;    ldp     fp, lr, [sp], #0x10
+;
+;    ret
 
  ENDP
 
+
+;;----------------------------------------------------------------------------
+;; RtlFindActivationContextSectionString detour code
+;;----------------------------------------------------------------------------
+;
+;
+;InjectDataPtr
+;    DCQ 0
+;DetourCodeARM64 PROC
+;    
+;    ;brk     #0xF000
+;    
+;    stp     fp, lr, [sp, #-0x10]!  
+;    stp     x19, x20, [sp, #-0x10]! 
+;    sub     sp, sp, #0x40
+;
+;    stp     x0, x1, [sp, #0x00]
+;    stp     x2, x3, [sp, #0x10]
+;    stp     x4, x5, [sp, #0x20]
+;    stp     x6, x7, [sp, #0x30]
+;
+;    ldr     x19, InjectDataPtr              ; x19 -> inject data area
+;
+;    ;
+;    ; reatore RtlFindActCtx, copy 16 bytes	
+;    ;
+;
+;    add     x8, x19, #0x20                  ; [x19].InjectData.RtlFindActCtx
+;    ldr     x9, [x8]
+;    ldp     w10, w11, [x19, #0x2C]          ; [x19].InjectData.RtlFindActCtx_Bytes
+;    stp     w10, w11, [x9, #0x00]
+;    ldp     w10, w11, [x19, #0x34]          ; [x19].InjectData.RtlFindActCtx_Bytes + 8
+;    stp     w10, w11, [x9, #0x08]
+;
+;    ldr     x0, =0xFFFFFFFFFFFFFFFF         ; ProcessHandle
+;    mov     x1, x9                          ; BaseAddress
+;    mov     x2, #0x10                       ; NumberOfBytesToFlush
+;
+;    ;ldr     x8, [x19, 0x70]                 ; [x19].InjectData.NtFlushInstructionCache
+;    ldr     x9, [x19]                       ; [x19].InjectData.SBIELOW_DATA
+;    add     x8, x9, 0xA0                    ; SBIELOW_DATA.NtFlushInstructionCache_code
+;    blr     x8
+;
+;	;
+;	; call LdrLoadDll for kernel32
+;	;
+;
+;    mov     x20, #0x10                      ; retry count
+;
+;LdrLoadRetry
+;    mov     x0, #0x00                       ; PathToFile
+;    mov     x1, #0x00                       ; Flags
+;    add     x2, x19, 0x40                   ; [x19].InjectData.KernelDll_Unicode
+;    add     x3, x19, 0x60                   ; [x19].InjectData.ModuleHandle
+;
+;    ldr     x8, [x19, 0x08]                 ; [x19].InjectData.LdrLoadDll
+;    blr     x8
+;
+;    cmp	    x0, #0x00
+;    beq     LdrLoadGood
+;    sub     x20, x20, #0x01
+;    cmp     x20, #0x00
+;    bne     LdrLoadRetry
+;    b       RtlFindActivationContextSectionStringError
+;
+;LdrLoadGood
+;	;
+;	; call LdrLoadDll for sbiedll
+;	;
+;
+;    mov     x0, #0x00                       ; PathToFile
+;    mov     x1, #0x00                       ; Flags
+;    add     x2, x19, 0x50                   ; [x19].InjectData.SbieDll_Unicode
+;    add     x3, x19, 0x60                   ; [x19].InjectData.ModuleHandle
+;
+;    ldr     x8, [x19, 0x08]                 ; [x19].InjectData.LdrLoadDll
+;    blr     x8
+;    cmp	    x0, #0x00
+;    bne	    RtlFindActivationContextSectionStringError
+;
+;	;
+;	; call the custom MyGetProcedureAddress implemented in c
+;    ; which calls LdrGetProcedureAddress for sbiedll ordinal 1,
+;	; this forces ntdll to initialize sbiedll and returns the address to call
+;    ; 
+;    ; in ARM64EC mode it returns the native function address instead of the FFS sequence
+;	;
+;
+;    ldr     x0, [x19, 0x60]                 ; [x19].InjectData.ModuleHandle
+;    mov     x1, #0x00                       ; FunctionName
+;    mov     x2, #0x01                       ; Ordinal
+;    add     x3, x19, 0x68                   ; [x19].InjectData.SbieDllOrdinal1
+;    mov     x4, x19                         ; [x19].InjectData
+;
+;    ;ldr     x8, [x19, 0x10]                 ; [x19].InjectData.LdrGetProcAddr
+;    ldr     x8, [x19, 0x70]                 ; [x19].InjectData.MyGetProcAddr
+;    blr     x8
+;    cmp	    x0, #0x00
+;    bne	    RtlFindActivationContextSectionStringError
+;
+;	;
+;	; pass control to ordinal 1, which will free the inject
+;	; data area, and pass control to the original function
+;	; RtlFindActivationContextSectionString
+;	;
+;	; note that we need to pass the address of the inject
+;	; data area to ordinal 1, which we do by overwriting the
+;	; first argument.  the original argument is saved in
+;	; the inject data area
+;	;
+;
+;    ldr     x8, [sp, #0x00]
+;    str     x8, [x19, 0x08]                 ; [x19].InjectData.LdrLoadDll
+;    mov     x0, x19
+;    ldr     x1, [sp, #0x08]
+;    ldp     x2, x3, [sp, #0x10]
+;    ldp     x4, x5, [sp, #0x20]
+;    ldp     x6, x7, [sp, #0x30]
+;
+;    ldr     x8, [x19, 0x68]                 ; [x19].InjectData.SbieDllOrdinal1
+;
+;    add     sp, sp, #0x40
+;    ldp     x19, x20, [sp], #0x10
+;    ldp     fp, lr, [sp], #0x10
+;
+;    br      x8
+;
+;RtlFindActivationContextSectionStringError
+;
+;    str     x0, [sp, #0x38]                 ; save ntstatus
+;
+;    add     x8, x19, 0x50                   ; [x19].InjectData.SbieDll_Unicode
+;    str	    x8, [x19, 0x08]                 ; [x19].InjectData.LdrLoadDll
+;
+;    add     x5, x19, 0x10                   ; out_response - [x19].InjectData.LdrGetProcAddr
+;    mov	    x4, #0x01                       ; response_buttons - ERROR_OK
+;    mov	    x3, x8                          ; list_of_pointers_to_parameters
+;    mov	    x2, #0x01                       ; mask_of_strings_in_list
+;    mov	    x1, #0x01                       ; number_of_parameters_in_list
+;    ldr	    x0, =0xD0000142                 ; ntstatus_message_code - (STATUS_DLL_INIT_FAILED or FORCE_ERROR_MESSAGE_BOX)
+;
+;    ldr     x8, [x19, 0x18]                 ; [x19].InjectData.LdrGetProcAddr
+;    blr     x8
+;
+;    ldr     x0, [sp, #0x38]                 ; restore ntstatus
+;
+;    add     sp, sp, #0x40
+;    ldp     x19, x20, [sp], #0x10
+;    ldp     fp, lr, [sp], #0x10
+;
+;    ret
+;
+; ENDP
 
  
 ;----------------------------------------------------------------------------
@@ -433,6 +494,7 @@ SbieLowData
 
     DCQ Start                   ; entry point for the detour
     DCQ SbieLowData             ; data location
+    DCQ DetourCodeARM64         ; detour code location
 
 
 ;----------------------------------------------------------------------------

@@ -667,7 +667,7 @@ _FX ULONG64 SbieApi_QueryProcessInfoEx(
 
 
 _FX LONG SbieApi_QueryBoxPath(
-    const WCHAR *box_name,              // WCHAR [34]
+    const WCHAR *box_name,              // WCHAR [BOXNAME_COUNT]
     WCHAR *out_file_path,
     WCHAR *out_key_path,
     WCHAR *out_ipc_path,
@@ -828,7 +828,7 @@ _FX LONG SbieApi_QueryPathList(
 
 
 _FX LONG SbieApi_EnumProcessEx(
-    const WCHAR *box_name,          // WCHAR [34]
+    const WCHAR *box_name,          // WCHAR [BOXNAME_COUNT]
     BOOLEAN all_sessions,
     ULONG which_session,            // -1 for current session
     ULONG *boxed_pids,              // ULONG [512]
@@ -1432,7 +1432,7 @@ _FX ULONG SbieApi_QueryConfNumber(
 
 _FX LONG SbieApi_EnumBoxes(
     LONG index,                     // initialize to -1
-    WCHAR *box_name)                // WCHAR [34]
+    WCHAR *box_name)                // WCHAR [BOXNAME_COUNT]
 {
     return SbieApi_EnumBoxesEx(index, box_name, FALSE);
 }
@@ -1445,7 +1445,7 @@ _FX LONG SbieApi_EnumBoxes(
 
 _FX LONG SbieApi_EnumBoxesEx(
     LONG index,                     // initialize to -1
-    WCHAR *box_name,                // WCHAR [34]
+    WCHAR *box_name,                // WCHAR [BOXNAME_COUNT]
     BOOLEAN return_all_sections)
 {
     LONG rc;
@@ -1738,7 +1738,7 @@ _FX LONG SbieApi_SessionLeader(HANDLE TokenHandle, HANDLE *ProcessId)
 
 
 _FX LONG SbieApi_IsBoxEnabled(
-    const WCHAR *box_name)          // WCHAR [34]
+    const WCHAR *box_name)          // WCHAR [BOXNAME_COUNT]
 {
     NTSTATUS status;
     __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];

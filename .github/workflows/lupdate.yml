@@ -62,10 +62,10 @@ jobs:
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v1.3
 
-      - name: Build Sandboxie 64 bit
-        # This is needed to compile Parse.vcxproj
+      - name: Build Sandboxie x86
+        # This step is needed to compile Parse.vcxproj
         run: |
-          msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
+          msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
           cd Sandboxie/msgs/SbieRelease
           copy Parse.exe ../
 

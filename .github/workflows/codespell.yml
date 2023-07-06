@@ -107,4 +107,4 @@ jobs:
       - name: Install CSpell
         run: npm install -g cspell@latest
       - name: Check spelling
-        run: npx cspell trace --config .github/cspell/cspell.json --only-found "sandboxie"
+        run: npx cspell --config .github/cspell/cspell.json --unique --show-suggestions "**/CHANGELOG.md"

@@ -3,7 +3,7 @@
 	"caseSensitive": true,
 
     // Enable your dictionary by adding it to the list of `dictionaries`
-    "dictionaries": ["custom-words", "cpp", "git", "win32"],
+    "dictionaries": ["custom-words"],
 
     // Tell CSpell about your dictionary
     "dictionaryDefinitions": [

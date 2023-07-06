@@ -5120,8 +5120,10 @@ Bu alandaki işlemler, ait oldukları korumalı alanı belirten özel bir işlem
     <message>
         <location filename="Windows/SupportDialog.cpp" line="43"/>
         <source>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.
-If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate.</source>
-        <translation>Bu Insider derlemesi, GREAT_PATREON, PERSONAL-HUGE veya CONTRIBUTOR türünde özel bir sertifika gerektirir. Halihazırda büyük bir Patreaon destekçisiyseniz, Sandboxie sertifikanızın güncellenmesi için çevrimiçi olarak kontrol edebilir.</translation>
+If you are a Great Supporter on Patreon already, Sandboxie can check online for an update of your certificate.</source>
+        <oldsource>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.
+If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate.</oldsource>
+        <translation type="unfinished">Bu Insider derlemesi, GREAT_PATREON, PERSONAL-HUGE veya CONTRIBUTOR türünde özel bir sertifika gerektirir. Halihazırda büyük bir Patreaon destekçisiyseniz, Sandboxie sertifikanızın güncellenmesi için çevrimiçi olarak kontrol edebilir.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="51"/>

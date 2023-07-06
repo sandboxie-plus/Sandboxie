@@ -2271,7 +2271,14 @@ _FX NTSTATUS Proc_NtCreateUserProcess(
 
                 if (TlsData->proc_image_path && ProcessParameters && ProcessParameters->CommandLine.Buffer) {
 
-                    Proc_FixBatchCommandLine(TlsData, ProcessParameters->CommandLine.Buffer, TlsData->proc_image_path);
+                    //Proc_FixBatchCommandLine(TlsData, ProcessParameters->CommandLine.Buffer, TlsData->proc_image_path);
+
+                    WCHAR *cmd = Dll_Alloc(ProcessParameters->CommandLine.Length + sizeof(WCHAR));
+                    wcscpy(cmd, ProcessParameters->CommandLine.Buffer);
+
+                    if (TlsData->proc_command_line)
+                        Dll_Free(TlsData->proc_command_line);
+                    TlsData->proc_command_line = cmd;
                 }
 
                 NtClose(FileHandle);

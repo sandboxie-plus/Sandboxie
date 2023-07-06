@@ -598,7 +598,9 @@ Please browse to the correct user profile directory.</oldsource>
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process.If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
 
 You can click Finish to close this wizard.</source>
-        <translation type="unfinished"></translation>
+        <translation>感谢您使用 Sandboxie Plus 的故障排除向导。对于在此过程中给您带来的不便，我们深表歉意。如果您有任何其他问题或需要进一步帮助，请随时联系。我们是来帮忙的。感谢您的理解与合作。
+
+您可以单击“完成”关闭此向导。</translation>
     </message>
 </context>
 <context>
@@ -2313,7 +2315,7 @@ Error: </source>
         <location filename="Wizards/SetupWizard.cpp" line="577"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
-        <translation>内部通道提供了对最终将向公众发布的新功能和错误修复的早期访问，以及稳定频道的所有相关改进。
+        <translation>内部通道提供了对最终将向公众发布的新功能和错误修复的早期访问，以及稳定通道的所有相关改进。
 与预览通道不同，它不包括未经测试的、潜在的破坏性的或可能无法广泛使用的实验性更改。</translation>
     </message>
     <message>
@@ -4003,37 +4005,37 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SbiePlusAPI.cpp" line="1132"/>
         <source>Failed to initialize COM</source>
-        <translation type="unfinished"></translation>
+        <translation>无法初始化COM</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1138"/>
         <source>Failed to create update session</source>
-        <translation type="unfinished"></translation>
+        <translation>无法创建更新会话</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1144"/>
         <source>Failed to create update searcher</source>
-        <translation type="unfinished"></translation>
+        <translation>无法创建更新搜索器</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1150"/>
         <source>Failed to set search options</source>
-        <translation type="unfinished"></translation>
+        <translation>无法设置搜索选项</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1158"/>
         <source>Failed to search for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索更新失败</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1164"/>
         <source>Failed to retrieve update list from search result</source>
-        <translation type="unfinished"></translation>
+        <translation>无法从搜索结果中检索更新列表</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1171"/>
         <source>Failed to get update count</source>
-        <translation type="unfinished"></translation>
+        <translation>无法获取更新计数</translation>
     </message>
 </context>
 <context>
@@ -4746,22 +4748,22 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="265"/>
         <source>Every Day</source>
-        <translation type="unfinished"></translation>
+        <translation>每天</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="266"/>
         <source>Every Week</source>
-        <translation type="unfinished"></translation>
+        <translation>每周</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="267"/>
         <source>Every 2 Weeks</source>
-        <translation type="unfinished"></translation>
+        <translation>每2周</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="268"/>
         <source>Every 30 days</source>
-        <translation type="unfinished"></translation>
+        <translation>每30天</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="272"/>
@@ -4788,17 +4790,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="499"/>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation>选择字体</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="501"/>
         <source>Reset font</source>
-        <translation type="unfinished"></translation>
+        <translation>重置字体</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="557"/>
         <source>%0, %1 pt</source>
-        <translation type="unfinished"></translation>
+        <translation>%0, %1 磅</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="673"/>
@@ -4890,12 +4892,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1550"/>
         <source>Installed</source>
-        <translation type="unfinished"></translation>
+        <translation>已安装</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1576"/>
         <source>This Addon is mandatory and can not be removed.</source>
-        <translation type="unfinished"></translation>
+        <translation>此加载项是必需的，无法删除。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1585"/>
@@ -5060,7 +5062,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="245"/>
         <source>Performing Snapshot operation...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在执行快照操作……</translation>
     </message>
 </context>
 <context>
@@ -5076,28 +5078,28 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="973"/>
         <source>Submit Issue Report</source>
-        <translation type="unfinished"></translation>
+        <translation>提交问题报告</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="984"/>
         <source>Detailed issue description</source>
-        <translation type="unfinished"></translation>
+        <translation>详细问题描述</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="988"/>
         <source>Attach Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>附加 Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="989"/>
         <source>Sandboxing compatibility is reliant on the configuration hence attaching the Sandboxie.ini file helps a lot with finding the issue.</source>
         <oldsource>Sandboxing compatybility is relyent on the configuration hence attaching the sandboxie.ini helps a lot with finding the issue.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>沙盒的兼容性取决于配置，因此附加 Sandboxe.ini 文件有助于发现问题。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="992"/>
         <source>Attach Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>附加日志</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="994"/>
@@ -5105,75 +5107,77 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 Before sending, you can review the logs in the main window.</source>
         <oldsource>Select partially checked state to sends only message log but no trace log.
 Before sending you can review the logs in the main window.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>选择部分检查状态将只发送消息日志，而不发送跟踪日志。
+发送之前，您可以在主窗口中查看日志。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="997"/>
         <source>Attach Crash Dumps</source>
-        <translation type="unfinished"></translation>
+        <translation>附加崩溃转储</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="998"/>
         <source>An application crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</source>
         <oldsource>An applicatin crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>应用程序在故障排除程序中崩溃，附加崩溃转储可以帮助调试。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1002"/>
         <source>Email address</source>
-        <translation type="unfinished"></translation>
+        <translation>电子邮件地址</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1003"/>
         <source>You have the option to provide an email address to receive a notification once a solution for your issue has been identified.</source>
-        <translation type="unfinished"></translation>
+        <translation>您可以选择提供电子邮件地址，以在确定了问题的解决方案后收到通知。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1011"/>
         <source>We apologize for the inconvenience you are currently facing with Sandboxie-Plus. </source>
-        <translation type="unfinished"></translation>
+        <translation>对于 Sandboxie Plus 给您带来的不便，我们深表歉意。 </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1018"/>
         <source>Unfortunately, the automated troubleshooting procedure failed. </source>
-        <translation type="unfinished"></translation>
+        <translation>很遗憾，自动故障排除程序失败了。 </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1025"/>
         <source>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described. </source>
-        <translation type="unfinished"></translation>
+        <translation>遗憾的是，对于您所描述的特定问题，没有可用的自动故障排除程序。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1030"/>
         <source>If you wish to submit an issue report, please review the report below and click &apos;Finish&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>如果您希望提交问题报告，请查看下面的报告并单击“完成”。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1129"/>
         <source>Compressing Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>正在压缩日志</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1161"/>
         <source>Compressing Dumps</source>
-        <translation type="unfinished"></translation>
+        <translation>正在压缩转储</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1190"/>
         <source>Submitting issue report...</source>
-        <translation type="unfinished"></translation>
+        <translation>提交问题报告……</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1201"/>
         <source>Failed to submit issue report, error %1
 Try submitting without the log attached.</source>
-        <translation type="unfinished"></translation>
+        <translation>提交问题报告失败，错误%1
+请尝试在不附加日志的情况下提交。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1205"/>
         <source>Your issue report has been successfully submitted, thank you.</source>
         <oldsource>Your issue report have been successfully submitted, thank you.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>您的问题报告已成功提交，谢谢。</translation>
     </message>
 </context>
 <context>
@@ -5263,15 +5267,16 @@ Processes in this box will be running with a custom process token indicating the
     <name>CSupportDialog</name>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="43"/>
-        <source>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.<byte value="xd"/>
+        <source>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.
 If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>此 Insider 内部版本需要 GREAT_PATREON 、 PERSONAL-HUGE 或 CONTRIBUTOR 类型的特殊证书。
+如果你已经在 Patreaon 是 Great Supporter 支持者，Sandboxie可以在线检测你的证书更新。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="51"/>
         <location filename="Windows/SupportDialog.cpp" line="316"/>
         <source>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.</source>
-        <translation type="unfinished"></translation>
+        <translation>此 Insider 内部版本需要 GREAT_PATREON 、 PERSONAL-HUGE 或 CONTRIBUTOR 类型的特殊证书。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="136"/>
@@ -5590,7 +5595,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Views/TraceView.cpp" line="376"/>
         <source>To use the stack traces feature the DbgHelp.dll and SymSrv.dll are required, do you want to download and install them?</source>
-        <translation type="unfinished"></translation>
+        <translation>要使用堆栈跟踪功能，需要DbgHelp.dll和SymSrv.dll，是否要下载并安装它们？</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="698"/>
@@ -5605,7 +5610,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Views/TraceView.cpp" line="724"/>
         <source>Saving TraceLog...</source>
-        <translation type="unfinished"></translation>
+        <translation>保存跟踪日志……</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -7602,27 +7607,27 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="340"/>
         <source>Disable SBIE messages popups (they will still be logged to the Messages tab)</source>
-        <translation type="unfinished"></translation>
+        <translation>禁用SBIE消息弹出窗口（它们仍将记录到“消息”选项卡中）</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="963"/>
         <source>Ini Editor Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Ini编辑器字体</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1055"/>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation>选择字体</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1065"/>
         <source>Reset font</source>
-        <translation type="unfinished"></translation>
+        <translation>重置字体</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1133"/>
         <source>#</source>
-        <translation type="unfinished"></translation>
+        <translation>#</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1238"/>
@@ -8048,93 +8053,94 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1147"/>
         <source>Addons Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>加载项管理器</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1157"/>
         <source>Optional Addons</source>
-        <translation type="unfinished"></translation>
+        <translation>可选加载项</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1165"/>
         <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of addons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Plus提供了许多选项，并支持广泛的扩展。在这个页面上，您可以配置插件、插件和其他第三方组件。可选组件可以从网络下载，安装某些扩展可能需要管理员权限。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1201"/>
         <source>Status</source>
-        <translation type="unfinished">状态</translation>
+        <translation>状态</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1206"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>说明</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1214"/>
         <source>&lt;a href=&quot;sbie://addons&quot;&gt;update addon list now&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://addons&quot;&gt;立即更新加载项列表&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1224"/>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>安装</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1248"/>
         <source>Sandboxie Support</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie 支持</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1380"/>
         <source>Sandboxie Updater</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie 更新器</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1411"/>
         <source>Keep addon list up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>使加载项列表保持最新</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1425"/>
         <source>Update Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>更新设置</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1466"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
-        <translation type="unfinished"></translation>
+        <translation>内部通道提供了对最终将向公众发布的新功能和错误修复的早期访问，以及稳定通道的所有相关改进。
+与预览通道不同，它不包括未经测试的、潜在的破坏性的或可能无法广泛使用的实验性更改。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1470"/>
         <source>Search in the Insider channel</source>
-        <translation type="unfinished"></translation>
+        <translation>在内部通道中搜索</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1517"/>
         <source>Check periodically for new Sandboxie-Plus versions</source>
-        <translation type="unfinished"></translation>
+        <translation>定期检查新的 Sandboxie Plus 版本</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1527"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>查看有关&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;内部通道&lt;/a&gt;的更多信息</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1547"/>
         <source>Keep Troubleshooting scripts up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>使故障排除脚本保持最新</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1583"/>
         <source>Update Check Interval</source>
-        <translation type="unfinished"></translation>
+        <translation>检查更新间隔</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1784"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished">使用 Sandboxie 限权用户替代匿名令牌</translation>
+        <translation>使用 Sandboxie 限权用户替代匿名令牌</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1820"/>

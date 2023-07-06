@@ -52,7 +52,7 @@
         <location filename="AddonManager.cpp" line="234"/>
         <source>Failed to start installer (%1)!</source>
         <oldsource>Failes to start installer (%1)!</oldsource>
-        <translation type="unfinished">설치 프로그램(%1)을(를) 시작하지 못했습니다!</translation>
+        <translation>설치 프로그램(%1)을(를) 시작하지 못했습니다!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="240"/>
@@ -63,13 +63,13 @@
         <location filename="AddonManager.cpp" line="268"/>
         <source>Failed to unpack addon!</source>
         <oldsource>Failes to unpack addon!</oldsource>
-        <translation type="unfinished">추가 기능의 압축을 풀지 못했습니다!</translation>
+        <translation>추가 기능의 압축을 풀지 못했습니다!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="277"/>
         <source>Addon Installation Failed!</source>
         <oldsource>Addon Instalation Failed!</oldsource>
-        <translation type="unfinished">추가 기능 설치 실패!</translation>
+        <translation>추가 기능 설치 실패!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="285"/>
@@ -95,7 +95,7 @@
         <location filename="AddonManager.cpp" line="340"/>
         <source>Failed to start uninstaller!</source>
         <oldsource>Failes to start uninstaller!</oldsource>
-        <translation type="unfinished">제거 프로그램을 시작하지 못했습니다!</translation>
+        <translation>제거 프로그램을 시작하지 못했습니다!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="376"/>
@@ -210,7 +210,7 @@
         <location filename="Wizards/BoxAssistant.cpp" line="452"/>
         <source>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerful. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retrieve the latest troubleshooting instructions.</source>
         <oldsource>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerfull. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retriev the latest troubleshooting instructions.</oldsource>
-        <translation type="unfinished">유효한 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;지원자 인증서&lt;/a&gt;를 사용하면 마법사의 성능이 더욱 향상됩니다. &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;온라인 솔루션 데이터베이스&lt;/a&gt;에 액세스하여 최신 문제 해결 지침을 검색할 수 있습니다.</translation>
+        <translation>유효한 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;지원자 인증서&lt;/a&gt;를 사용하면 마법사의 성능이 더욱 향상됩니다. &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;온라인 솔루션 데이터베이스&lt;/a&gt;에 액세스하여 최신 문제 해결 지침을 검색할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="490"/>
@@ -244,7 +244,7 @@
         <location filename="Wizards/BoxAssistant.cpp" line="170"/>
         <source>Downloaded troubleshooting instructions are corrupted!</source>
         <oldsource>Downloaded troubleshooting instructions are currupted!</oldsource>
-        <translation type="unfinished">다운로드한 문제 해결 지침이 손상되었습니다!</translation>
+        <translation>다운로드한 문제 해결 지침이 손상되었습니다!</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="189"/>
@@ -260,13 +260,13 @@
         <location filename="Wizards/BoxAssistant.cpp" line="336"/>
         <source>V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debugger could not be opened.</source>
         <oldsource>V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debuger could not be opened.</oldsource>
-        <translation type="unfinished">V4ScriptDebuggerBackend를 인스턴스화할 수 없습니다. V4ScriptDebugger.dll 및 해당 종속성이 누락되어 스크립트 디버거를 열 수 없습니다.</translation>
+        <translation>V4ScriptDebuggerBackend를 인스턴스화할 수 없습니다. V4ScriptDebugger.dll 및 해당 종속성이 누락되어 스크립트 디버거를 열 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="386"/>
         <source>A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an inconsistent state.</source>
         <oldsource>A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an incosistent state.</oldsource>
-        <translation type="unfinished">문제 해결 절차가 진행 중입니다. 마법사를 취소하면 해당 마법사가 중단되고 샌드박스가 일관되지 않은 상태가 될 수 있습니다.</translation>
+        <translation>문제 해결 절차가 진행 중입니다. 마법사를 취소하면 해당 마법사가 중단되고 샌드박스가 일관되지 않은 상태가 될 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="387"/>
@@ -2281,7 +2281,7 @@ Full path: %4</source>
         <location filename="Wizards/BoxAssistant.cpp" line="888"/>
         <source>Something failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</source>
         <oldsource>Somethign failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</oldsource>
-        <translation type="unfinished">내부적으로 일부 오류가 발생했습니다. 이 문제 해결 절차를 계속할 수 없습니다. 다음을 클릭하여 이슈 보고서를 제출할 수 있습니다.</translation>
+        <translation>내부적으로 일부 오류가 발생했습니다. 이 문제 해결 절차를 계속할 수 없습니다. 다음을 클릭하여 이슈 보고서를 제출할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="889"/>
@@ -2304,19 +2304,19 @@ Error: </source>
         <location filename="Wizards/SetupWizard.cpp" line="531"/>
         <source>Like with any other security product, it&apos;s important to keep your Sandboxie-Plus up to date.</source>
         <oldsource>Like with any other security product it&apos;s important to keep your Sandboxie-Plus up to date.</oldsource>
-        <translation type="unfinished">다른 보안 제품과 마찬가지로 Sandboxie-Plus를 최신 상태로 유지하는 것이 중요합니다.</translation>
+        <translation>다른 보안 제품과 마찬가지로 Sandboxie-Plus를 최신 상태로 유지하는 것이 중요합니다.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Regularly check for all updates to Sandboxie-Plus and optional components</source>
         <oldsource>Regularly Check for all updates to Sandboxie-Plus and optional components</oldsource>
-        <translation type="unfinished">Sandboxie-Plus 및 선택적 구성 요소에 대한 모든 업데이트를 정기적으로 확인합니다</translation>
+        <translation>Sandboxie-Plus 및 선택적 구성 요소에 대한 모든 업데이트를 정기적으로 확인합니다</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="540"/>
         <source>Let Sandboxie regularly check for latest updates.</source>
         <oldsource>Let sandboxie regularly check for latest updates.</oldsource>
-        <translation type="unfinished">sandboxie가 정기적으로 최신 업데이트를 확인하도록 합니다.</translation>
+        <translation>sandboxie가 정기적으로 최신 업데이트를 확인하도록 합니다.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="550"/>
@@ -2332,7 +2332,7 @@ Error: </source>
         <location filename="Wizards/SetupWizard.cpp" line="557"/>
         <source>Select in which update channel to look for new Sandboxie-Plus builds:</source>
         <oldsource>Sellect in which update channel to look for new Sandboxie-Plus builds:</oldsource>
-        <translation type="unfinished">새 Sandboxie-Plus 빌드를 찾을 업데이트 채널 선택:</translation>
+        <translation>새 Sandboxie-Plus 빌드를 찾을 업데이트 채널 선택:</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="566"/>
@@ -2375,13 +2375,13 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Wizards/SetupWizard.cpp" line="591"/>
         <source>Keep Compatibility Templates up to date and apply hotfixes</source>
         <oldsource>Keep Compatybility Templates up to date and apply hotfixes</oldsource>
-        <translation type="unfinished">호환성 템플릿을 최신 상태로 유지하고 핫픽스 적용</translation>
+        <translation>호환성 템플릿을 최신 상태로 유지하고 핫픽스 적용</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="592"/>
         <source>Check for latest compatibility templates and hotfixes.</source>
         <oldsource>Check for latest compatybility tempaltes and hotfixes.</oldsource>
-        <translation type="unfinished">최신 호환성 템플릿 및 핫픽스를 확인합니다.</translation>
+        <translation>최신 호환성 템플릿 및 핫픽스를 확인합니다.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="596"/>
@@ -2392,7 +2392,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Wizards/SetupWizard.cpp" line="597"/>
         <source>Check for latest troubleshooting scripts for the troubleshooting wizard.</source>
         <oldsource>Check for latest troubleshooting scripts for the troubleshooting wizars.</oldsource>
-        <translation type="unfinished">문제 해결 마법사의 최신 문제 해결 스크립트를 확인합니다.</translation>
+        <translation>문제 해결 마법사의 최신 문제 해결 스크립트를 확인합니다.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="601"/>
@@ -2403,7 +2403,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Wizards/SetupWizard.cpp" line="602"/>
         <source>Check for latest available addons.</source>
         <oldsource>Check for latest avaialble addons.</oldsource>
-        <translation type="unfinished">사용 가능한 최신 추가 기능을 확인합니다.</translation>
+        <translation>사용 가능한 최신 추가 기능을 확인합니다.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="611"/>
@@ -3494,7 +3494,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2192"/>
         <source>Do you want the setup wizard to be omitted?</source>
-        <translation type="unfinished"></translation>
+        <translation>설치 마법사를 생략하시겠습니까?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2385"/>
@@ -3673,7 +3673,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="SandMan.cpp" line="3389"/>
         <source>All processes in a sandbox must be stopped before it can be renamed.</source>
         <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
-        <translation type="unfinished">샌드박스의 모든 프로세스를 중지해야 이름을 바꿀 수 있습니다.</translation>
+        <translation>샌드박스의 모든 프로세스를 중지해야 이름을 바꿀 수 있습니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3392"/>
@@ -3749,7 +3749,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="SandMan.cpp" line="3408"/>
         <source>The content of an unmounted sandbox can not be deleted</source>
         <oldsource>The content of an un mounted sandbox can not be deleted</oldsource>
-        <translation type="unfinished">마운트 해제된 샌드박스의 내용을 삭제할 수 없습니다</translation>
+        <translation>마운트 해제된 샌드박스의 내용을 삭제할 수 없습니다</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3410"/>
@@ -4852,12 +4852,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="499"/>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation>글꼴 선택</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="501"/>
         <source>Reset font</source>
-        <translation type="unfinished"></translation>
+        <translation>글꼴 재설정</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="548"/>
@@ -4867,7 +4867,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="557"/>
         <source>%0, %1 pt</source>
-        <translation type="unfinished"></translation>
+        <translation>%0, %1 pt</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="673"/>
@@ -5214,7 +5214,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="Wizards/BoxAssistant.cpp" line="989"/>
         <source>Sandboxing compatibility is reliant on the configuration hence attaching the Sandboxie.ini file helps a lot with finding the issue.</source>
         <oldsource>Sandboxing compatybility is relyent on the configuration hence attaching the sandboxie.ini helps a lot with finding the issue.</oldsource>
-        <translation type="unfinished">샌드박스 호환성은 구성에 따라 달라지므로 sandboxie.ini를 첨부하면 문제를 찾는 데 많은 도움이 됩니다.</translation>
+        <translation>샌드박스 호환성은 구성에 따라 달라지므로 sandboxie.ini를 첨부하면 문제를 찾는 데 많은 도움이 됩니다.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="992"/>
@@ -5227,7 +5227,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 Before sending, you can review the logs in the main window.</source>
         <oldsource>Select partially checked state to sends only message log but no trace log.
 Before sending you can review the logs in the main window.</oldsource>
-        <translation type="unfinished">메시지 로그만 보내고 추적 로그는 보내지 않으려면 부분적으로 확인된 상태를 선택합니다.
+        <translation>메시지 로그만 보내고 추적 로그는 보내지 않으려면 부분적으로 확인된 상태를 선택합니다.
 보내기 전에 기본 창에서 로그를 검토할 수 있습니다.</translation>
     </message>
     <message>
@@ -5239,7 +5239,7 @@ Before sending you can review the logs in the main window.</oldsource>
         <location filename="Wizards/BoxAssistant.cpp" line="998"/>
         <source>An application crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</source>
         <oldsource>An applicatin crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</oldsource>
-        <translation type="unfinished">문제 해결 절차 중에 응용 프로그램이 충돌한 경우 충돌 덤프를 첨부하면 디버깅에 도움이 될 수 있습니다.</translation>
+        <translation>문제 해결 절차 중에 응용 프로그램이 충돌한 경우 충돌 덤프를 첨부하면 디버깅에 도움이 될 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1002"/>
@@ -5254,17 +5254,17 @@ Before sending you can review the logs in the main window.</oldsource>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1011"/>
         <source>We apologize for the inconvenience you are currently facing with Sandboxie-Plus. </source>
-        <translation>현재 Sandboxie-Plus로 인해 불편을 끼쳐드린 점 사과드립니다.</translation>
+        <translation>현재 Sandboxie-Plus로 인해 불편을 끼쳐드린 점 사과드립니다. </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1018"/>
         <source>Unfortunately, the automated troubleshooting procedure failed. </source>
-        <translation>안타깝게도 자동화된 문제 해결 절차가 실패했습니다.</translation>
+        <translation>안타깝게도 자동화된 문제 해결 절차가 실패했습니다. </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1025"/>
         <source>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described. </source>
-        <translation>유감스럽게도 귀하가 설명한 특정 문제에 대해 사용할 수 있는 자동화된 문제 해결 절차가 없습니다.</translation>
+        <translation>유감스럽게도 귀하가 설명한 특정 문제에 대해 사용할 수 있는 자동화된 문제 해결 절차가 없습니다. </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1030"/>
@@ -5297,7 +5297,7 @@ Try submitting without the log attached.</source>
         <location filename="Wizards/BoxAssistant.cpp" line="1205"/>
         <source>Your issue report has been successfully submitted, thank you.</source>
         <oldsource>Your issue report have been successfully submitted, thank you.</oldsource>
-        <translation type="unfinished">문제 보고서가 성공적으로 제출되었습니다. 감사합니다.</translation>
+        <translation>문제 보고서가 성공적으로 제출되었습니다. 감사합니다.</translation>
     </message>
 </context>
 <context>
@@ -5388,10 +5388,8 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Windows/SupportDialog.cpp" line="43"/>
         <source>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.
-If you are a Great Supporter on Patreon already, Sandboxie can check online for an update of your certificate.</source>
-        <oldsource>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.
-If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate.</oldsource>
-        <translation type="unfinished">이 내부지 빌드에는 GREAT_PATREON, Personal-HUGER 또는 CONFIUTIOR 유형의 특수 인증서가 필요합니다.
+If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate.</source>
+        <translation>이 내부지 빌드에는 GREAT_PATREON, Personal-HUGER 또는 CONFIUTIOR 유형의 특수 인증서가 필요합니다.
 만약 당신이 이미 훌륭한 애국 지지자라면, sandboxie는 당신의 인증서의 업데이트를 온라인으로 확인할 수 있습니다.</translation>
     </message>
     <message>
@@ -7665,12 +7663,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="327"/>
         <source>Sandboxie may be issue &lt;a href=&quot;sbie://docs/sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie는 메시지 로그에 &lt;a href=&quot;sbie://docs/sbiemessages&quot;&gt;SBIE 메시지&lt;/a&gt;를 발행하여 팝업으로 표시할 수 있습니다. 일부 메시지는 정보를 제공하며 일반적으로 발생한 이벤트 또는 경우에 따라 특별한 이벤트를 알려주고 다른 메시지는 오류 상태를 나타냅니다.&lt;br/&gt;아래 목록을 사용하여 선택한 SBIE 메시지가 팝업되지 않도록 숨길 수 있습니다:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="340"/>
         <source>Disable SBIE messages popups (they will still be logged to the Messages tab)</source>
-        <translation type="unfinished"></translation>
+        <translation>SBIE 메시지 팝업 사용 안 함 (메시지 탭에 계속 기록됨)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="412"/>
@@ -7833,7 +7831,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="963"/>
         <source>Ini Editor Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Ini 편집기 글꼴</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1026"/>
@@ -7843,17 +7841,17 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1055"/>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation>글꼴 선택</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1065"/>
         <source>Reset font</source>
-        <translation type="unfinished"></translation>
+        <translation>글꼴 재설정</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1133"/>
         <source>#</source>
-        <translation type="unfinished"></translation>
+        <translation>#</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1147"/>

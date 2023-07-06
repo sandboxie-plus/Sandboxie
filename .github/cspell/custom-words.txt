@@ -1,0 +1,12 @@
+!sandboxie
+!sandboxies
+!sandboxies's
+Sandboxie
+fixdacls
+Sbie
+signcheck
+scriptable
+DACL
+SBIE
+SBIEMSG
+procmon

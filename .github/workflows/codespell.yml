@@ -92,3 +92,62 @@ jobs:
           codespell --dictionary=dictionary.txt --dictionary=dictionary_rare.txt --dictionary=dictionary_code.txt \
           --ignore-words-list="wil,unknwn,tolen,pevent,doubleclick,parm,parms,etcp,ois,ba,ptd,modell,namesd,stdio,uint,errorstring,ontext,atend,deque,ecounter,nmake,namess,inh,daa,varient,lite,uis,emai,ws,slanguage,woh,tne" \
           --skip="./.git,./.github/workflows/codespell.yml,./dictionary*.txt,./Sandboxie/msgs/Text-*-*.txt,./Sandboxie/msgs/report/Report-*.txt,./SandboxiePlus/SandMan/*.ts,./Installer/Languages.iss,./Installer/isl/*.isl,./Sandboxie/common/Detours/Makefile,./Sandboxie/common/Detours/disasm.cpp,./Sandboxie/install/build.bat"
+
+  cspell: # run the cspell action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: streetsidesoftware/cspell-action@v2
+        with:
+          # Github token used to fetch the list of changed files in the commit.
+          # Default: ${{ github.token }}
+          github_token: '${{ github.token }}'
+
+          # Define glob patterns to filter the files to be checked. Use a new line between patterns to define multiple patterns.
+          # The default is to check ALL files that were changed in in the pull_request or push.
+          # Note: `ignorePaths` defined in cspell.json still apply.
+          # Example:
+          # files: |
+          #   **/*.{ts,js}
+          #   !dist/**/*.{ts,js}
+          #   # Hidden directories need an explicit .* to be included
+          #   .*/**/*.yml
+          #
+          # To not check hidden files, use:
+          # files: "**"
+          #
+          # Default: ALL files
+          files: |
+            **/*.md
+            !**/README.md
+            !README.md
+
+          # Check files and directories starting with `.`.
+          # - "true" - glob searches will match against `.dot` files.
+          # - "false" - `.dot` files will NOT be checked.
+          # - "explicit" - glob patterns can match explicit `.dot` patterns.
+          check_dot_files: explicit
+
+          # The point in the directory tree to start spell checking.
+          # Default: .
+          root: '.'
+
+          # Notification level to use with inline reporting of spelling errors.
+          # Allowed values are: warning, error, none
+          # Default: warning
+          inline: error
+
+          # Determines if the action should be failed if any spelling issues are found.
+          # Allowed values are: true, false
+          # Default: true
+          strict: true
+
+          # Limit the files checked to the ones in the pull request or push.
+          incremental_files_only: true
+
+          # Path to `cspell.json`
+          config: '.github/cspell/cspell.json'
+
+          # Log progress and other information during the action execution.
+          # Default: false
+          verbose: false

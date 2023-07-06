@@ -117,6 +117,9 @@ protected:
 	static void			RecoverFilesAsync(QPair<const CSbieProgressPtr&,QWidget*> pParam, const QString& BoxName, const QList<QPair<QString, QString>>& FileList, const QStringList& Checkers, int Action = 0);
 	static void			CheckFilesAsync(const CSbieProgressPtr& pProgress, const QString& BoxName, const QStringList &Files, const QStringList& Checkers);
 
+	QString				FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId, bool bNoLink = false);
+	void				AddLogMessage(const QDateTime& TimeStamp, const QString& Message);
+
 	QIcon				GetTrayIcon(bool isConnected = true, bool bSun = false);
 	QString				GetTrayText(bool isConnected = true);
 
@@ -162,6 +165,16 @@ protected:
 	//QMap<int, SBoxIcon> m_BoxIcons;
 
 	class UGlobalHotkeys* m_pHotkeyManager;
+
+	bool				m_ImDiskReady;
+
+	struct SSbieMsg {
+		QDateTime TimeStamp;
+		quint32 MsgCode;
+		QStringList MsgData; 
+		quint32 ProcessId;
+	};
+	QVector<SSbieMsg>	m_MessageLog;
 
 public slots:
 	void				OnBoxSelected();

@@ -126,6 +126,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 	bool bVintage = theConf->GetInt("Options/ViewMode", 1) == 2;
 	if (bVintage)
 		bPlus = false;
+	bool bHideCore = theConf->GetBool("Options/HideSbieProcesses", false);
 
 	foreach(const QString& Group, Groups.keys())
 	{
@@ -218,6 +219,15 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 		}
 
 		QMap<quint32, CBoxedProcessPtr> ProcessList = pBox->GetProcessList();
+
+		if (bHideCore) {
+			for (auto I = ProcessList.begin(); I != ProcessList.end();) {
+				if (I.value()->GetFileName().indexOf(theAPI->GetSbiePath() + "\\Sandboxie", Qt::CaseInsensitive) == 0)
+					I = ProcessList.erase(I);
+				else 
+					++I;
+			}
+		}
 
 		bool inUse = Sync(pBox, pNode->Path, ProcessList, New, Old, Added);
 		bool Busy = pBoxEx->IsBoxBusy();

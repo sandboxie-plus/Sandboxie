@@ -25,6 +25,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added `What's new in Sandboxie-Plus` dialog in SbieCtrl.exe to praise the new features of the Plus UI
   - Note: this is shown after the installation of Sandboxie Classic
 - added "fixdacls" command to KmdUtil.exe, it repairs broken DACL entries on the Sandboxie folder to fix issues where SbieDll.dll fails to load
+- added option to hide sandboxies's own processes [#3054](https://github.com/sandboxie-plus/Sandboxie/issues/3054)
+- added Cache Sandboxie messages within the Plus UI [#2920](https://github.com/sandboxie-plus/Sandboxie/issues/2920)
 
 ### Changed
 - setup wizard has now a dedicated update configuration page

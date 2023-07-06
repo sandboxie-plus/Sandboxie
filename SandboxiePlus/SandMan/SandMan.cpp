@@ -2371,6 +2371,11 @@ void CSandMan::AddLogMessage(const QString& Message)
 	if (!m_pMessageLog)
 		return;
 
+	AddLogMessage(QDateTime::currentDateTime(), Message);
+}
+
+void CSandMan::AddLogMessage(const QDateTime& TimeStamp, const QString& Message)
+{
 	int last = m_pMessageLog->GetTree()->topLevelItemCount();
 	if (last > 0) {
 		QTreeWidgetItem* pItem = m_pMessageLog->GetTree()->topLevelItem(last-1);
@@ -2390,7 +2395,7 @@ void CSandMan::AddLogMessage(const QString& Message)
 	}
 
 	QTreeWidgetItem* pItem = new QTreeWidgetItem(); // Time|Message
-	pItem->setText(0, QDateTime::currentDateTime().toString("hh:mm:ss.zzz"));
+	pItem->setText(0, TimeStamp.toString("hh:mm:ss.zzz"));
 	pItem->setData(1, Qt::UserRole, Message);
 	m_pMessageLog->GetTree()->addTopLevelItem(pItem);
 	if (Message.contains("</a>")) {
@@ -2410,6 +2415,34 @@ void CSandMan::AddLogMessage(const QString& Message)
 		
 
 	m_pMessageLog->GetView()->verticalScrollBar()->setValue(m_pMessageLog->GetView()->verticalScrollBar()->maximum());
+}
+
+QString CSandMan::FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId, bool bNoLink)
+{
+	QString Message;
+	if (MsgCode != 0) {
+		Message = theAPI->GetSbieMsgStr(MsgCode, m_LanguageId);
+		if (!bNoLink) {
+			Message.insert(8, "</a>");
+			Message.prepend("<a href=\"https://sandboxie-plus.com/go.php?to=sbie-sbie" + QString::number(MsgCode & 0xFFFF) + "\">");
+		}
+	}
+	else if(MsgData.size() > 0)
+		Message = MsgData[0];
+
+	for (int i = 1; i < MsgData.size(); i++)
+		Message = Message.arg(MsgData[i]);
+
+	if (ProcessId != 4) // if it's not from the driver, add the pid
+	{
+		CBoxedProcessPtr pProcess = theAPI->GetProcessById(ProcessId);
+		if(pProcess.isNull())
+			Message.prepend(tr("PID %1: ").arg(ProcessId));
+		else
+			Message.prepend(tr("%1 (%2): ").arg(pProcess->GetProcessName()).arg(ProcessId));
+	}
+
+	return Message;
 }
 
 void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId)
@@ -2457,27 +2490,9 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 		// return;
 	}
 
-	QString Message;
-	if (MsgCode != 0) {
-		Message = theAPI->GetSbieMsgStr(MsgCode, m_LanguageId);
-		Message.insert(8, "</a>");
-		Message.prepend("<a href=\"https://sandboxie-plus.com/go.php?to=sbie-sbie" + QString::number(MsgCode & 0xFFFF) + "\">");
-	}
-	else if(MsgData.size() > 0)
-		Message = MsgData[0];
+	m_MessageLog.append(SSbieMsg{ QDateTime::currentDateTime(), MsgCode, MsgData, ProcessId });
 
-	for (int i = 1; i < MsgData.size(); i++)
-		Message = Message.arg(MsgData[i]);
-
-	if (ProcessId != 4) // if it's not from the driver, add the pid
-	{
-		CBoxedProcessPtr pProcess = theAPI->GetProcessById(ProcessId);
-		if(pProcess.isNull())
-			Message.prepend(tr("PID %1: ").arg(ProcessId));
-		else
-			Message.prepend(tr("%1 (%2): ").arg(pProcess->GetProcessName()).arg(ProcessId));
-	}
-
+	QString Message = FormatSbieMessage(MsgCode, MsgData, ProcessId);
 	OnLogMessage(Message);
 
 	if ((MsgCode & 0xFFFF) == 6004) // certificate error
@@ -2492,9 +2507,8 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 
 void CSandMan::SaveMessageLog(QIODevice* pFile)
 {
-	QList<QStringList> Rows = m_pMessageLog->DumpPanel();
-	foreach(const QStringList& Row, Rows)
-		pFile->write(Row.join("\t").toLatin1() + "\n");
+	foreach(const SSbieMsg& Msg, m_MessageLog)
+		pFile->write((Msg.TimeStamp.toString("hh:mm:ss.zzz")  + "\t" + FormatSbieMessage(Msg.MsgCode, Msg.MsgData, Msg.ProcessId)).toLatin1() + "\n");
 }
 
 bool CSandMan::CheckCertificate(QWidget* pWidget) 
@@ -2950,8 +2964,10 @@ void CSandMan::OnRefresh()
 
 void CSandMan::OnCleanUp()
 {
-	if (sender() == m_pCleanUpMsgLog || sender() == m_pCleanUpButton)
-		if(m_pMessageLog) m_pMessageLog->GetTree()->clear();
+	if (sender() == m_pCleanUpMsgLog || sender() == m_pCleanUpButton) {
+		m_MessageLog.clear();
+		if (m_pMessageLog) m_pMessageLog->GetTree()->clear();
+	}
 	
 	if (sender() == m_pCleanUpTrace || sender() == m_pCleanUpButton)
 		if (m_pTraceView) { 

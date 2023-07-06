@@ -812,16 +812,6 @@
             <layout class="QGridLayout" name="gridLayout_11">
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_15">
-               <item row="3" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkBackground">
-                 <property name="text">
-                  <string>Show &quot;Pizza&quot; Background in box list *</string>
-                 </property>
-                 <property name="tristate">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
                <item row="6" column="1" colspan="3">
                 <widget class="QCheckBox" name="chkOptTree">
                  <property name="text">
@@ -842,7 +832,6 @@
                  </property>
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -852,10 +841,34 @@
                  </property>
                 </widget>
                </item>
+               <item row="8" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkColorIcons">
+                 <property name="text">
+                  <string>Make Box Icons match the Border Color</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkOverlayIcons">
+                 <property name="text">
+                  <string>Show overlay icons for boxes and processes</string>
+                 </property>
+                </widget>
+               </item>
                <item row="1" column="3">
                 <widget class="QCheckBox" name="chkFusionTheme">
                  <property name="text">
                   <string>Use Fusion Theme</string>
+                 </property>
+                 <property name="tristate">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkLargeIcons">
+                 <property name="text">
+                  <string>Use large icons in box list *</string>
                  </property>
                  <property name="tristate">
                   <bool>true</bool>
@@ -872,20 +885,20 @@
                  </property>
                 </widget>
                </item>
-               <item row="9" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkOverlayIcons">
+               <item row="12" column="0" colspan="4">
+                <widget class="QLabel" name="label_11">
                  <property name="text">
-                  <string>Show overlay icons for boxes and processes</string>
+                  <string>* a partially checked checkbox will leave the behavior to be determined by the view mode.</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkLargeIcons">
+               <item row="2" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkAltRows">
                  <property name="text">
-                  <string>Use large icons in box list *</string>
-                 </property>
-                 <property name="tristate">
-                  <bool>true</bool>
+                  <string>Alternate row background in lists</string>
                  </property>
                 </widget>
                </item>
@@ -909,21 +922,17 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkAltRows">
+               <item row="3" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkBackground">
                  <property name="text">
-                  <string>Alternate row background in lists</string>
+                  <string>Show &quot;Pizza&quot; Background in box list *</string>
+                 </property>
+                 <property name="tristate">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
-               <item row="8" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkColorIcons">
-                 <property name="text">
-                  <string>Make Box Icons match the Border Color</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="10" column="1">
+               <item row="11" column="1">
                 <spacer name="verticalSpacer_8">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -936,13 +945,10 @@
                  </property>
                 </spacer>
                </item>
-               <item row="11" column="0" colspan="4">
-                <widget class="QLabel" name="label_11">
+               <item row="10" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkHideCore">
                  <property name="text">
-                  <string>* a partially checked checkbox will leave the behavior to be determined by the view mode.</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  <string>Hide sandboxie's own processes from the task list</string>
                  </property>
                 </widget>
                </item>

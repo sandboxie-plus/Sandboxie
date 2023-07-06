@@ -41,7 +41,7 @@ bool CSupportDialog::CheckSupport(bool bOnRun)
 			TArguments args = GetArguments(g_Certificate, L'\n', L':');
 			if (args.value("TYPE").contains("PATREON")) {
 				if (QMessageBox::question(NULL, "Sandboxie-Plus", tr("This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.\n"
-					"If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate."), QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok) {
+					"If you are a Great Supporter on Patreon already, Sandboxie can check online for an update of your certificate."), QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok) {
 					theGUI->m_pUpdater->UpdateCert(true);
 					if (g_CertInfo.insider)
 						return false;

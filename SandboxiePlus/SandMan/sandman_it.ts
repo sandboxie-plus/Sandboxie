@@ -5214,7 +5214,7 @@ I processi in questa area virtuale verranno eseguiti con un token di processo pe
     <name>CSupportDialog</name>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="43"/>
-        <source>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.<byte value="xd"/>
+        <source>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.
 If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate.</source>
         <translation type="unfinished"></translation>
     </message>

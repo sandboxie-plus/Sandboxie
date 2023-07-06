@@ -5243,7 +5243,7 @@ Processes in this box will be running with a custom process token indicating the
     <name>CSupportDialog</name>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="43"/>
-        <source>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.<byte value="xd"/>
+        <source>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.
 If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate.</source>
         <translation>此測試人員組建需要類型為 GREAT_PATREON, PERSONAL-HUGE 或 CONTRIBUTOR 的特殊憑證。
 如果您已成為高階的 patreaon 贊助者，Sandboxie 可以線上檢查你的憑證之更新。</translation>

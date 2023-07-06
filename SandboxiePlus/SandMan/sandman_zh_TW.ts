@@ -2252,19 +2252,21 @@ Error: </source>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="531"/>
-        <source>Like with any other security product it&apos;s important to keep your Sandboxie-Plus up to date.</source>
-        <translation>如同其他任何安全性產品，保持 Sandboxie-Plus 為最新非常重要。</translation>
+        <source>Like with any other security product, it&apos;s important to keep your Sandboxie-Plus up to date.</source>
+        <oldsource>Like with any other security product it&apos;s important to keep your Sandboxie-Plus up to date.</oldsource>
+        <translation type="unfinished">如同其他任何安全性產品，保持 Sandboxie-Plus 為最新非常重要。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
-        <source>Regularly Check for all updates to Sandboxie-Plus and optional components</source>
-        <oldsource>Regularly Check for all udpates to Sandboxie-Plus and optional components</oldsource>
-        <translation>經常檢查全部 Sandboxie-Plus 和可選組件的更新</translation>
+        <source>Regularly check for all updates to Sandboxie-Plus and optional components</source>
+        <oldsource>Regularly Check for all updates to Sandboxie-Plus and optional components</oldsource>
+        <translation type="unfinished">經常檢查全部 Sandboxie-Plus 和可選組件的更新</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="540"/>
-        <source>Let sandboxie regularly check for latest updates.</source>
-        <translation>讓 Sandboxie 經常檢查最新更新。</translation>
+        <source>Let Sandboxie regularly check for latest updates.</source>
+        <oldsource>Let sandboxie regularly check for latest updates.</oldsource>
+        <translation type="unfinished">讓 Sandboxie 經常檢查最新更新。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="550"/>
@@ -3561,8 +3563,9 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     </message>
     <message>
         <location filename="SandMan.cpp" line="3389"/>
-        <source>A all processes in a sandbox must be stopped before it can be renamed.</source>
-        <translation>在重新命名沙箱前，所有處理程序都應被停止。</translation>
+        <source>All processes in a sandbox must be stopped before it can be renamed.</source>
+        <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
+        <translation type="unfinished">在重新命名沙箱前，所有處理程序都應被停止。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3392"/>

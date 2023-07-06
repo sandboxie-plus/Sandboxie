@@ -65,8 +65,9 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="277"/>
-        <source>Addon Instalation Failed!</source>
-        <translation>Eklenti Kurulumu Başarısız!</translation>
+        <source>Addon Installation Failed!</source>
+        <oldsource>Addon Instalation Failed!</oldsource>
+        <translation type="unfinished">Eklenti Kurulumu Başarısız!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="285"/>
@@ -2175,18 +2176,21 @@ Hata: </translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="531"/>
-        <source>Like with any other security product it&apos;s important to keep your Sandboxie-Plus up to date.</source>
-        <translation>Diğer tüm güvenlik ürünlerinde olduğu gibi, Sandboxie-Plus&apos;ınızı güncel tutmanız önemlidir.</translation>
+        <source>Like with any other security product, it&apos;s important to keep your Sandboxie-Plus up to date.</source>
+        <oldsource>Like with any other security product it&apos;s important to keep your Sandboxie-Plus up to date.</oldsource>
+        <translation type="unfinished">Diğer tüm güvenlik ürünlerinde olduğu gibi, Sandboxie-Plus&apos;ınızı güncel tutmanız önemlidir.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
-        <source>Regularly Check for all updates to Sandboxie-Plus and optional components</source>
-        <translation>Sandboxie-Plus ve isteğe bağlı bileşenlere yönelik tüm güncellemeleri düzenli olarak kontrol edin</translation>
+        <source>Regularly check for all updates to Sandboxie-Plus and optional components</source>
+        <oldsource>Regularly Check for all updates to Sandboxie-Plus and optional components</oldsource>
+        <translation type="unfinished">Sandboxie-Plus ve isteğe bağlı bileşenlere yönelik tüm güncellemeleri düzenli olarak kontrol edin</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="540"/>
-        <source>Let sandboxie regularly check for latest updates.</source>
-        <translation>Sandboxie&apos;nin en son güncellemeleri düzenli olarak kontrol etmesine izin verin.</translation>
+        <source>Let Sandboxie regularly check for latest updates.</source>
+        <oldsource>Let sandboxie regularly check for latest updates.</oldsource>
+        <translation type="unfinished">Sandboxie&apos;nin en son güncellemeleri düzenli olarak kontrol etmesine izin verin.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="550"/>
@@ -2937,8 +2941,9 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     </message>
     <message>
         <location filename="SandMan.cpp" line="3389"/>
-        <source>A all processes in a sandbox must be stopped before it can be renamed.</source>
-        <translation>Bir korumalı alandaki tüm işlemlerin, yeniden adlandırılabilmesi için durdurulması gerekir.</translation>
+        <source>All processes in a sandbox must be stopped before it can be renamed.</source>
+        <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
+        <translation type="unfinished">Bir korumalı alandaki tüm işlemlerin, yeniden adlandırılabilmesi için durdurulması gerekir.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3393"/>

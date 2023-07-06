@@ -2228,19 +2228,21 @@ Fehler: </translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="531"/>
-        <source>Like with any other security product it&apos;s important to keep your Sandboxie-Plus up to date.</source>
-        <translation>Wie mit jedem anderen Sicherheitsprodukt, ist es wichtig Ihr Sandboxie-Plus aktuell zu halten.</translation>
+        <source>Like with any other security product, it&apos;s important to keep your Sandboxie-Plus up to date.</source>
+        <oldsource>Like with any other security product it&apos;s important to keep your Sandboxie-Plus up to date.</oldsource>
+        <translation type="unfinished">Wie mit jedem anderen Sicherheitsprodukt, ist es wichtig Ihr Sandboxie-Plus aktuell zu halten.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
-        <source>Regularly Check for all updates to Sandboxie-Plus and optional components</source>
-        <oldsource>Regularly Check for all udpates to Sandboxie-Plus and optional components</oldsource>
+        <source>Regularly check for all updates to Sandboxie-Plus and optional components</source>
+        <oldsource>Regularly Check for all updates to Sandboxie-Plus and optional components</oldsource>
         <translation type="unfinished">Regelmäßig auf Updates für Sandboxie-Plus und optionale Komponenten prüfen</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="540"/>
-        <source>Let sandboxie regularly check for latest updates.</source>
-        <translation>Lasse Sandboxie regelmäßig nach neusten Updates suchen.</translation>
+        <source>Let Sandboxie regularly check for latest updates.</source>
+        <oldsource>Let sandboxie regularly check for latest updates.</oldsource>
+        <translation type="unfinished">Lasse Sandboxie regelmäßig nach neusten Updates suchen.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="550"/>
@@ -2935,8 +2937,9 @@ Nein wählt: %2</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3389"/>
-        <source>A all processes in a sandbox must be stopped before it can be renamed.</source>
-        <translation>Alle Prozesse in einer Sandbox müssen beendet werden, bevor diese umbenannt werden kann.</translation>
+        <source>All processes in a sandbox must be stopped before it can be renamed.</source>
+        <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
+        <translation type="unfinished">Alle Prozesse in einer Sandbox müssen beendet werden, bevor diese umbenannt werden kann.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3393"/>

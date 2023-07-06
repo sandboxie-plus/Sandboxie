@@ -107,4 +107,4 @@ jobs:
       - name: Install CSpell
         run: npm install -g cspell@latest
       - name: Check spelling
-        run: npx cspell --no-progress --no-issues --config .github/cspell/cspell.json "**/*.md"
+        run: npx cspell --no-progress --config .github/cspell/cspell.json "**/*.md"

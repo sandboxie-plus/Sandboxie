@@ -25,9 +25,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added `What's new in Sandboxie-Plus` dialog in SbieCtrl.exe to praise the new features of the Plus UI
   - Note: this is shown after the installation of Sandboxie Classic
 - added "fixdacls" command to KmdUtil.exe, it repairs broken DACL entries on the Sandboxie folder to fix issues where SbieDll.dll fails to load
-- added option to hide sandboxies's own processes [#3054](https://github.com/sandboxie-plus/Sandboxie/issues/3054)
-- added Cache Sandboxie messages within the Plus UI [#2920](https://github.com/sandboxie-plus/Sandboxie/issues/2920)
-- added button to invoke troubleshooting wizard directly from the sbie message popup
+- added option to hide Sandboxie's own processes [#3054](https://github.com/sandboxie-plus/Sandboxie/issues/3054)
+- added functionality to cache Sandboxie messages within the Plus UI [#2920](https://github.com/sandboxie-plus/Sandboxie/issues/2920)
+- added button to invoke troubleshooting wizard directly from the SBIE message popup
 
 ### Changed
 - setup wizard has now a dedicated update configuration page
@@ -36,7 +36,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - when the troubleshooting.7z file is available, the script engine will be used to match compatibility templates
   - this allows a better granularity in template selection by using the AppCompatibility.js script
 - reworked low level code injection mechanism to improve flexibility and debugging
-  - the main injection detour code is now written in C instead of Assembler and can properly report SbieDll.dll load errors as SBIE2181
+  - the main injection detour code is now written in C instead of Assembler and can properly report SbieDll.dll loading errors as SBIE2181
 - improved session agent startup to be more flexible
 - improved SBIEMSG help handling, the link now contains message details allowing to point to a more exact document (if available)
 
@@ -44,11 +44,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed uninstall issue in the Sandboxie Classic installer [d1863ff](https://github.com/sandboxie-plus/Sandboxie/commit/d1863ffadfe105c695de71c9e841c2fd568116fe)
 - added workaround for Chrome not starting on Windows 11 with KB5027231 [#3040](https://github.com/sandboxie-plus/Sandboxie/issues/3040)
 - improved compatibility with procmon/stack traces for debug builds
-- fixed issue with non standard command lines
+- fixed issue with non-standard command lines
 
 ### Removed
 - cleaned up duplicate code (thanks lmou523) [#3067](https://github.com/sandboxie-plus/Sandboxie/pull/3067)
-
 
 
 

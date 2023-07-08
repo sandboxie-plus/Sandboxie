@@ -130,7 +130,11 @@ QV4::ReturnedValue evalCall(const QV4::FunctionObject* b, const QV4::Value* v, c
     QMutexLocker locker(&g_engineMutex);
     QJSValue ret = g_engineMap.value(v4)->evaluateScript(scode->toQStringNoThrow(), "eval code");
     if (ret.isError()) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+		v4->throwError(ret.toString());
+#else
         v4->throwError(QJSValuePrivate::asReturnedValue(&ret));
+#endif
         return QV4::Encode::undefined();
     } else {
         QV4::ScopedValue rv(scope, scope.engine->fromVariant(ret.toVariant()));

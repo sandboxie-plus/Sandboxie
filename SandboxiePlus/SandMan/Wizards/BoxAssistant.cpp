@@ -78,7 +78,7 @@ void CBoxAssistant::TryFix(quint32 MsgCode, const QStringList& MsgData, const QS
         m_Params["sbieMsg"] = theGUI->FormatSbieMessage(MsgCode, MsgData, ProcessName);
         m_Params["docLink"] = theGUI->MakeSbieMsgLink(MsgCode, MsgData, ProcessName);
         m_Params["msgCode"] = MsgCode & 0xFFFF;
-        m_Params["msgData"] = MsgData.mid(1);
+        m_Params["msgData"] = QStringList(MsgData.mid(1));
         m_Params["processName"] = (!ProcessName.isEmpty() && ProcessName.left(4) != "PID:") ? ProcessName : QString();
         m_Params["boxName"] = BoxName;
         setStartId(Page_Run);

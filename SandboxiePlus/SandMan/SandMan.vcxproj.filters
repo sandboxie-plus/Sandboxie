@@ -219,6 +219,9 @@
     <ClCompile Include="..\..\SandboxieTools\Common\verify.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\ScriptManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -354,6 +357,9 @@
     </QtMoc>
     <QtMoc Include="AddonManager.h">
       <Filter>SandMan</Filter>
+    </QtMoc>
+    <QtMoc Include="Engine\ScriptManager.h">
+      <Filter>Engine</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

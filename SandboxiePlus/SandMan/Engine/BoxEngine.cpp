@@ -98,7 +98,11 @@ QV4::ReturnedValue method_invoke(const QV4::FunctionObject *b, const QV4::Value 
     if (!Script.isEmpty()) {
         QJSValue ret = pJSEngine->evaluateScript(Script, Name + ".js");
         if (ret.isError()) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+			pJSEngine->throwError(ret.toString());
+#else
             pJSEngine->throwError(ret);
+#endif
             return QV4::Encode::undefined();
         } else {
             QV4::ScopedValue rv(scope, scope.engine->fromVariant(ret.toVariant()));

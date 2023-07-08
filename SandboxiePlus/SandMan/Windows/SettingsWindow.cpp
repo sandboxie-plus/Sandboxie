@@ -591,32 +591,18 @@ CSettingsWindow::~CSettingsWindow()
 		theConf->SetBlob("SettingsWindow/" + pTree->objectName() + "_Columns", pTree->header()->saveState());
 }
 
-void CSettingsWindow::showTab(int Tab, bool bExclusive)
+void CSettingsWindow::showTab(const QString& Name, bool bExclusive)
 {
-	QWidget* pWidget = NULL;
-	switch (Tab)
-	{
-	case eOptions: pWidget = ui.tabGeneral; break;
-	case eShell: pWidget = ui.tabWindows; break;
-	case eGuiConfig: pWidget = ui.tabGUI; break;
-	case eAdvanced: pWidget = ui.tabSandbox; break;
-	case eProgCtrl: pWidget = ui.tabAlert; break;
-	case eConfigLock: pWidget = ui.tabLock; break;
-	case eSoftCompat: pWidget = ui.tabAppCompat; break;
-	case eEditIni: pWidget = ui.tabEdit; break;
-	case eSupport: pWidget = ui.tabSupport; break;
-	}
+	QWidget* pWidget = this->findChild<QWidget*>("tab" + Name);
 
 	if (ui.tabs) {
 		
 		for (int i = 0; i < ui.tabs->count(); i++) {
 			QGridLayout* pGrid = qobject_cast<QGridLayout*>(ui.tabs->widget(i)->layout());
 			QTabWidget* pSubTabs = pGrid ? qobject_cast<QTabWidget*>(pGrid->itemAt(0)->widget()) : NULL;
-			if (!pSubTabs) {
-				if(ui.tabs->widget(i) == pWidget)
-					ui.tabs->setCurrentIndex(i);
-			}
-			else {
+			if(ui.tabs->widget(i) == pWidget)
+				ui.tabs->setCurrentIndex(i);
+			else if(pSubTabs) {
 				for (int j = 0; j < pSubTabs->count(); j++) {
 					if (pSubTabs->widget(j) == pWidget) {
 						ui.tabs->setCurrentIndex(i);

@@ -300,7 +300,7 @@ void CSupportDialog::OnButton()
 
 	if (Action == 3) {
 		CSettingsWindow* pSettingsWindow = new CSettingsWindow(this);
-		pSettingsWindow->showTab(CSettingsWindow::eSupport, true);
+		pSettingsWindow->showTab("Support", true);
 		connect(pSettingsWindow, &CSettingsWindow::Closed, [this]() {
 #ifdef INSIDER_BUILD
 			if (g_CertInfo.valid && !g_CertInfo.insider) {

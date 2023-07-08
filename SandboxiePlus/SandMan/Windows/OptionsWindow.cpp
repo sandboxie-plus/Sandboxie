@@ -997,6 +997,32 @@ void COptionsWindow::reject()
 	this->close();
 }
 
+void COptionsWindow::showTab(const QString& Name)
+{
+	QWidget* pWidget = this->findChild<QWidget*>("tab" + Name);
+
+	if (ui.tabs) {
+		for (int i = 0; i < ui.tabs->count(); i++) {
+			QGridLayout* pGrid = qobject_cast<QGridLayout*>(ui.tabs->widget(i)->layout());
+			QTabWidget* pSubTabs = pGrid ? qobject_cast<QTabWidget*>(pGrid->itemAt(0)->widget()) : NULL;
+			if(ui.tabs->widget(i) == pWidget)
+				ui.tabs->setCurrentIndex(i);
+			else if(pSubTabs) {
+				for (int j = 0; j < pSubTabs->count(); j++) {
+					if (pSubTabs->widget(j) == pWidget) {
+						ui.tabs->setCurrentIndex(i);
+						pSubTabs->setCurrentIndex(j);
+					}
+				}
+			}
+		}
+	} 
+	else
+		m_pStack->setCurrentWidget(pWidget);
+
+	SafeShow(this);
+}
+
 void COptionsWindow::SetProgramItem(QString Program, QTreeWidgetItem* pItem, int Column, const QString& Sufix, bool bList)
 {
 	pItem->setData(Column, Qt::UserRole, Program);

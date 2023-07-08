@@ -1,7 +1,7 @@
 /*
-*  group: system
-* name: Check for known conflicts
-* description: Box Engine test script ...
+* group: system
+* name: App compatybility checker
+* description: This script check which app compatybility templates needs to be enabled
 *
 */
 

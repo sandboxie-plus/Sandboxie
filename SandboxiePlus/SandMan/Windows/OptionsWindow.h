@@ -40,6 +40,8 @@ public slots:
 	void ok();
 	void apply();
 
+	void showTab(const QString& Name);
+
 private slots:
 
 	//void OnWithTemplates();

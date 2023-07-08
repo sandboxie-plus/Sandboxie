@@ -6,7 +6,8 @@ class CSbieObject : public QObject
 {
     Q_OBJECT
 public:
-    CSbieObject(QObject* parent) : QObject(parent) {}
+    CSbieObject(QObject* parent);
+    ~CSbieObject();
 
 public slots:
     CBoxObject*     GetBox(const QString& Name);
@@ -31,6 +32,8 @@ public slots:
     void            ShellRemove();
 
     void            LogMessage(const QVariant& Message, bool bNotify);
+protected:
+    bool            m_TraceStarted;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////

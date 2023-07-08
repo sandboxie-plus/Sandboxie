@@ -27,6 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added "fixdacls" command to KmdUtil.exe, it repairs broken DACL entries on the Sandboxie folder to fix issues where SbieDll.dll fails to load
 - added option to hide sandboxies's own processes [#3054](https://github.com/sandboxie-plus/Sandboxie/issues/3054)
 - added Cache Sandboxie messages within the Plus UI [#2920](https://github.com/sandboxie-plus/Sandboxie/issues/2920)
+- added button to invoke troubleshooting wizard directly from the sbie message popup
 
 ### Changed
 - setup wizard has now a dedicated update configuration page
@@ -37,7 +38,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - reworked low level code injection mechanism to improve flexibility and debugging
   - the main injection detour code is now written in C instead of Assembler and can properly report SbieDll.dll load errors as SBIE2181
 - improved session agent startup to be more flexible
-- improved SBIEMSG help handling
+- improved SBIEMSG help handling, the link now contains message details allowing to point to a more exact document (if available)
 
 ### Fixed
 - fixed uninstall issue in the Sandboxie Classic installer [d1863ff](https://github.com/sandboxie-plus/Sandboxie/commit/d1863ffadfe105c695de71c9e841c2fd568116fe)

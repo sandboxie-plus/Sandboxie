@@ -21,3 +21,5 @@ let obj = wizard.showForm(form, tr('Select which shell options should be reinsta
 sbie.shellRemove();
 sbie.shellInstall(obj);
 
+// todo query user if mitigation was successfull
+wizard.setResult(true);

@@ -443,15 +443,108 @@ QJSValue JSysObject::removeRegValue(const QString& Key, const QString& Name)
 
 
 // SYS
-QJSValue JSysObject::execute(const QString& Path, const QStringList& Arguments, const QVariantMap& Options)
+QJSValue JSysObject::execute(const QString& Path, const QVariant& Arguments, const QVariantMap& Options)
 {
-    QProcess Process;
-    if (Options.contains("workingDirectory")) Process.setWorkingDirectory(Options.value("workingDirectory").toString());
-    Process.start(Path, Arguments);
-    while (Process.state() != QProcess::NotRunning && m_pEngine->TestRunning()) {
-        QCoreApplication::processEvents();
+    QVariantMap out;
+
+    std::wstring dir = Options["workingDirectory"].toString().toStdWString();
+	std::wstring path = Path.toStdWString();
+    std::wstring params = Arguments.toString().toStdWString();
+    if (params.empty()) {
+        QStringList Args = Arguments.toStringList();
+        if(!Args.isEmpty())
+            params = ("\"" + Args.join("\" \"") + "\"").toStdWString();
     }
-    return Process.exitCode();
+    int nShow = Options["hide"].toBool() ? SW_HIDE : SW_SHOWNORMAL;
+
+    HANDLE hProcess = NULL;
+    HANDLE stdoutReadHandle = NULL;
+    HANDLE stdoutWriteHandle = NULL;
+
+    if (Options["elevate"].toBool())
+    {
+        SHELLEXECUTEINFO shex;
+        memset(&shex, 0, sizeof(SHELLEXECUTEINFO));
+        shex.cbSize = sizeof(SHELLEXECUTEINFO);
+        shex.fMask = SEE_MASK_NOCLOSEPROCESS;
+        if(nShow == SW_HIDE) 
+            shex.fMask |= SEE_MASK_FLAG_NO_UI;
+        shex.hwnd = NULL;
+        shex.lpFile = path.c_str();
+        shex.lpParameters = params.c_str();
+        shex.lpDirectory = dir.empty() ? NULL : dir.c_str();
+        shex.nShow = nShow;
+        shex.lpVerb = L"runas";
+
+        if (ShellExecuteEx(&shex)) {
+            hProcess = shex.hProcess;
+        }
+    }
+    else
+    {
+	    SECURITY_ATTRIBUTES saAttr;
+	    // Set the bInheritHandle flag so pipe handles are inherited.
+	    saAttr.nLength = sizeof(SECURITY_ATTRIBUTES);
+	    saAttr.bInheritHandle = TRUE;
+	    saAttr.lpSecurityDescriptor = nullptr;
+	    // Create a pipe for the child process's STDOUT.
+        if (!CreatePipe(&stdoutReadHandle, &stdoutWriteHandle, &saAttr, 0))
+            return QJSValue::UndefinedValue; // should not happen
+        SetHandleInformation(stdoutReadHandle, HANDLE_FLAG_INHERIT, 0);
+
+        std::wstring command = L"\"" + path + L"\" " + params;
+
+	    STARTUPINFOW si = { 0 };
+	    si.cb = sizeof(si);
+	    si.dwFlags = STARTF_USESTDHANDLES | STARTF_USESHOWWINDOW;
+	    si.hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+	    si.hStdOutput = stdoutWriteHandle;
+	    si.hStdError = stdoutWriteHandle;
+	    si.wShowWindow = nShow;
+
+	    PROCESS_INFORMATION pi = { 0 };
+        if (CreateProcessW(NULL, (LPWSTR)command.c_str(), NULL, NULL, TRUE, 0, NULL, dir.empty() ? NULL : dir.c_str(), &si, &pi)) {
+            CloseHandle(pi.hThread);
+            hProcess = pi.hProcess;
+        }
+    }
+
+    if (hProcess) 
+    {
+        QString Output;
+        DWORD exitCode;
+        for (;;)
+        {
+            // Check if the process is alive.
+            GetExitCodeProcess(hProcess, &exitCode);
+            if (exitCode != STILL_ACTIVE)
+                break;
+            // keep UI responsive
+            QCoreApplication::processEvents();
+
+            // Check if there is anything in the pipe, if there is a pipe.
+            DWORD dataSize;
+            if (stdoutReadHandle && PeekNamedPipe(stdoutReadHandle, nullptr, 0, nullptr, &dataSize, nullptr) && dataSize > 0)
+            {
+                // Read the data out of the pipe.
+                CHAR buffer[4096] = { 0 };
+                if (ReadFile(stdoutReadHandle, buffer, sizeof(buffer) - 1, &dataSize, nullptr))
+                    Output.append(QByteArray(buffer, dataSize));
+            }
+        }
+
+        CloseHandle(hProcess);
+
+        out["exitCode"] = (quint32)exitCode;
+        if (!Output.isEmpty()) out["output"] = Output;
+    } 
+    else
+        out["error"] = (quint32)GetLastError();
+
+    if(stdoutReadHandle) CloseHandle(stdoutReadHandle);
+	if(stdoutWriteHandle) CloseHandle(stdoutWriteHandle);
+
+    return m_pEngine->m_pEngine->toScriptValue(out);
 }
 
 QJSValue JSysObject::expand(const QString& name)
@@ -491,6 +584,11 @@ QJSValue JSysObject::version()
     return m_pEngine->m_pEngine->toScriptValue(GetOSVersion());
 }
 
+QJSValue JSysObject::language()
+{
+    return theGUI->m_Language;
+}
+
 QJSValue JSysObject::enumUpdates()
 {
     return m_pEngine->m_pEngine->toScriptValue(theGUI->GetCompat()->GetUpdates());
@@ -526,7 +624,11 @@ QJSValue JSysObject::enumObjects()
 
 QJSValue JSysObject::expandPath(const QString& path)
 {
-    return theGUI->GetCompat()->ExpandPath(path);
+    QString Path = path;
+	Path.replace("%SbieHome%", theAPI->GetSbiePath(), Qt::CaseInsensitive);
+	Path.replace("%PlusData%", theConf->GetConfigDir(), Qt::CaseInsensitive);
+
+    return theGUI->GetCompat()->ExpandPath(Path);
 }
 
 QJSValue JSysObject::checkFile(const QString& value)

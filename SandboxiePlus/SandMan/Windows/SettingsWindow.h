@@ -64,18 +64,6 @@ public:
 
 	static void LoadCertificate(QString CertPath = QString());
 
-	enum ETabs {
-		eOptions = 0,
-		eShell,
-		eGuiConfig,
-		eAdvanced,
-		eProgCtrl,
-		eConfigLock,
-		eSoftCompat,
-		eEditIni,
-		eSupport
-	};
-
 signals:
 	void OptionsChanged(bool bRebuildUI = false);
 	void Closed();
@@ -84,7 +72,7 @@ public slots:
 	void ok();
 	void apply();
 
-	void showTab(int Tab, bool bExclusive = false);
+	void showTab(const QString& Name, bool bExclusive = false);
 
 private slots:
 	void OnTab();

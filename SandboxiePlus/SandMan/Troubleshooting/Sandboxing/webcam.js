@@ -1,7 +1,7 @@
 /*
 *	group: sandboxing
 *	class: sandboxing
-* _os_builds: 22000-99000
+* os_builds: 22000-99000
 * name: Webcam or Sound does not work when sandboxed
 * description: Description Text...
 *
@@ -21,9 +21,27 @@ let form = [
 
 let data = wizard.showForm(form, tr('Select which box to turn into a reduced isolation app compartment box.'));
 
-let box = sbie.getBox(data['box']);
+let boxName = data['box'];
+let box = sbie.getBox(boxName);
 
 box.setIniValue('NoSecurityIsolation', 'y');
 box.appendIniValue('Template', 'OpenCOM');
 box.setIniValue('DropAdminRights', 'y');
 box.applyChanges();
+
+{
+  sbie.setupTrace();
+  
+  let form = [
+      { id: 'yes', name: tr('Yes'), type: 'radio' },
+      { id: 'no', name: tr('No'), type: 'radio' },
+  ];
+  let ret = wizard.showForm(form, tr('The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.', boxName));
+  if (ret['yes'] == true) {
+      wizard.setResult(true);
+  }
+  if (ret['no'] == true) {
+      wizard.setResult(false, 'Webcam mitigation not successfull');
+      // todo roll back changes
+  }
+}

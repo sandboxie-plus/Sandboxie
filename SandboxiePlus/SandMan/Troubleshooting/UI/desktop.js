@@ -64,3 +64,4 @@ else if(data1['browser'] == -1){
   let path = knownBrowsers[data1['browser']].path;
   box.makeShortcut(path, {location: 'desktop'});
 }
+wizard.setResult(true);

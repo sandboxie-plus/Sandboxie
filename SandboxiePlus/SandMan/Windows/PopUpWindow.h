@@ -4,6 +4,7 @@
 #include "ui_PopUpWindow.h"
 #include "../SbiePlusAPI.h"
 #include "../SbieProcess.h"
+#include "../SandMan.h"
 
 class CPopUpEntry: public QWidget
 {
@@ -31,27 +32,40 @@ class CPopUpMessage : public CPopUpEntry
 {
 	Q_OBJECT
 public:
-	CPopUpMessage(const QString& Message, quint32 MsgCode, const QStringList& MsgData, QWidget* parent = 0) : CPopUpEntry(Message, parent)
+	CPopUpMessage(const QString& Message, const QString& Link, quint32 MsgCode, const QStringList& MsgData, const QString& ProcessName, const QString& BoxName, QWidget* parent = 0) : CPopUpEntry(Message, parent)
 	{
 		m_Message = Message;
 		m_MsgCode = MsgCode;
 		m_MsgData = MsgData;
+		m_ProcessName = ProcessName;
+		m_BoxName = BoxName;
 		m_Count = 1;
 
 		m_pLabel = new QLabel(Message);
 		m_pLabel->setToolTip(Message);
 		m_pLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Maximum);
+		connect(m_pLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 		m_pMainLayout->addWidget(m_pLabel, 0, 0);
 
 		if (MsgCode != 0)
 		{
 			QToolButton* pHelp = new QToolButton();
 			pHelp->setText(tr("?"));
-			pHelp->setToolTip(tr("Visit %1 for a detailed explanation.").arg(QString("https://sandboxie-plus.com/go.php?to=sbie-sbie%1/").arg(GetMsgId())));
+			pHelp->setToolTip(tr("Visit %1 for a detailed explanation.").arg(Link));
 			pHelp->setMaximumWidth(16);
+			pHelp->setProperty("url", Link);
 			QObject::connect(pHelp, SIGNAL(clicked(bool)), this, SLOT(OnHelp()));
 			m_pMainLayout->addWidget(pHelp, 0, 1);
 
+			QToolButton* pFix = new QToolButton();
+			QFont fnt = pFix->font();
+			fnt.setBold(true);
+			//fnt.setWeight(QFont::DemiBold);
+			pFix->setFont(fnt);
+			pFix->setText(tr("Troubleshooting"));
+			pFix->setToolTip(tr("Start troubleshooting wizard"));
+			QObject::connect(pFix, SIGNAL(clicked(bool)), this, SLOT(OnTryFix()));
+			m_pMainLayout->addWidget(pFix, 0, 2);
 
 			QToolButton* pDismiss = new QToolButton();
 			pDismiss->setText(tr("Dismiss"));
@@ -62,7 +76,7 @@ public:
 			pDismiss->setMenu(pMenu);
 			//QObject::connect(pDismiss, SIGNAL(triggered(QAction*)), , SLOT());
 			QObject::connect(pDismiss, SIGNAL(clicked(bool)), this, SIGNAL(Dismiss()));
-			m_pMainLayout->addWidget(pDismiss, 0, 2);
+			m_pMainLayout->addWidget(pDismiss, 0, 3);
 		}
 	}
 
@@ -79,12 +93,18 @@ signals:
 	void				Hide();
 
 private slots:
-	void				OnHelp() { QDesktopServices::openUrl(QUrl(QString("https://sandboxie-plus.com/go.php?to=sbie-sbie%1/").arg(GetMsgId()))); }
+	void				OnHelp() { QDesktopServices::openUrl(QUrl(sender()->property("url").toString())); }
+	void				OnTryFix() 
+	{
+		theGUI->TryFix(m_MsgCode, m_MsgData, m_ProcessName, m_BoxName);
+	}
 
 protected:
 	QString				m_Message;
 	quint32				m_MsgCode;
 	QStringList			m_MsgData;
+	QString				m_ProcessName;
+	QString				m_BoxName;
 	QLabel*				m_pLabel;
 	int					m_Count;
 };
@@ -425,7 +445,7 @@ public:
 	CPopUpWindow(QWidget* parent = 0);
 	~CPopUpWindow();
 
-	virtual void		AddLogMessage(const QString& Message, quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId);
+	virtual void		AddLogMessage(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId);
 	virtual void		AddUserPrompt(quint32 RequestId, const QVariantMap& Data, quint32 ProcessId);
 	virtual void		AddFileToRecover(const QString& FilePath, QString BoxPath, const CSandBoxPtr& pBox, quint32 ProcessId);
 	virtual void		ShowProgress(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId);

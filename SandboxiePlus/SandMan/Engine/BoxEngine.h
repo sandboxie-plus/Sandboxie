@@ -12,7 +12,7 @@ public:
 	CBoxEngine(QObject* parent = NULL);
 	~CBoxEngine();
 
-	bool				RunScript(const QString& Script, const QString& Name);
+	bool				RunScript(const QString& Script, const QString& Name, const QVariantMap& Params = QVariantMap());
 
 	enum EState {
 		eUnknown,
@@ -36,6 +36,7 @@ public:
 
 	bool				HasFailed() const { return m_State == eFailed; }
 	bool				HasError() const { return m_State == eError; }
+	bool				WasSuccessfull() const { return m_State == eSuccess; }
 
 	bool				IsReady() const { return m_State == eReady; }
 	bool				HasQuery() const { return m_State == eQuery; }
@@ -43,10 +44,12 @@ public:
 	bool				SetResult(const QVariantMap& Result);
 	QVariant			GetResult() const { return m_Result; }
 
-	void				AppendLog(const QString& Line);
+	Q_INVOKABLE void	AppendLog(const QString& Line);
 	//QString				GetLog() const { QMutexLocker Locker(&m_Mutex); return m_Log; }
 
 	static int			GetInstanceCount() { return m_InstanceCount; }
+
+	CJSEngineExt*		GetEngine() { return m_pEngine; }
 
 	QObject*			GetDebuggerBackend();
 
@@ -79,6 +82,7 @@ protected:
 	QObject*			m_pDebuggerBackend;
 	QString				m_Script;
 	QString				m_Name;
+	QVariantMap			m_Params;
 	QVariant			m_Result;
 
 	mutable QMutex		m_Mutex;
@@ -110,6 +114,10 @@ public:
 	void		AddShadow(const QSharedPointer<CSbieIni>& pIni);
 	void		SetApplyShadow(const QString& OriginalName, bool bApply = true);
 	bool		IsNoAppliedShadow(const QString& OriginalName);
+
+
+	Q_INVOKABLE void OpenSettings(const QString& page);
+	Q_INVOKABLE void OpenOptions(const QString& box, const QString& page);
 
 protected:
 	friend class JWizardObject;

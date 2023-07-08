@@ -948,7 +948,7 @@
                <item row="10" column="1" colspan="3">
                 <widget class="QCheckBox" name="chkHideCore">
                  <property name="text">
-                  <string>Hide sandboxie's own processes from the task list</string>
+                  <string>Hide Sandboxie's own processes from the task list</string>
                  </property>
                 </widget>
                </item>

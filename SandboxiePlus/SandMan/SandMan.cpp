@@ -2227,22 +2227,24 @@ void CSandMan::CheckCompat(QObject* receiver, const char* member)
 	QElapsedTimer* timer = new QElapsedTimer();
 	timer->start();
 
-	QString Script = theGUI->GetScripts()->GetScript("AppCompatibility");
-	if (!Script.isEmpty()) {
-		CBoxEngine* pEngine = new CBoxEngine(this);
-		pEngine->RunScript(Script, "AppCompatibility.js"); // note: script runs asynchronously
-		QPointer<QObject> pObj = receiver; // QPointer tracks lifetime of receiver
-		connect(pEngine, &CBoxEngine::finished, this, [pEngine, this, timer, pObj, member]() {
+	if (theConf->GetBool("Options/SmartAppCompatibility", true)) {
+		QString Script = theGUI->GetScripts()->GetScript("AppCompatibility");
+		if (!Script.isEmpty()) {
+			CBoxEngine* pEngine = new CBoxEngine(this);
+			pEngine->RunScript(Script, "AppCompatibility.js"); // note: script runs asynchronously
+			QPointer<QObject> pObj = receiver; // QPointer tracks lifetime of receiver
+			connect(pEngine, &CBoxEngine::finished, this, [pEngine, this, timer, pObj, member]() {
 
-			m_SbieTemplates->SetCheckResult(pEngine->GetResult().toStringList());
+				m_SbieTemplates->SetCheckResult(pEngine->GetResult().toStringList());
 
-			qDebug() << "Compatibility Check took" << timer->elapsed() << "ms";
-			delete timer;
-			pEngine->deleteLater(); // script done
-			
-			if(pObj) QMetaObject::invokeMethod(pObj, member);
-		});
-		return;
+				qDebug() << "Compatibility Check took" << timer->elapsed() << "ms";
+				delete timer;
+				pEngine->deleteLater(); // script done
+
+				if (pObj) QMetaObject::invokeMethod(pObj, member);
+			});
+			return;
+		}
 	}
 	
 	m_SbieTemplates->RunCheck();

@@ -39,6 +39,7 @@ struct SBoxedProcess
 CBoxedProcess::CBoxedProcess(quint32 ProcessId, class CSandBox* pBox)
 {
 	m_pBox = pBox;
+	if (pBox) m_BoxName = pBox->GetName();
 
 	m = new SBoxedProcess;
 	m->Handle = NULL;

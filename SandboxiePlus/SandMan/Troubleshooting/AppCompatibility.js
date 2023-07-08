@@ -1,7 +1,7 @@
 /*
 * group: system
-* name: App compatybility checker
-* description: This script check which app compatybility templates needs to be enabled
+* name: App compatibility checker
+* description: This script check which app compatibility templates need to be enabled
 *
 */
 

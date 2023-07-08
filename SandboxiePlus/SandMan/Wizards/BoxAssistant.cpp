@@ -156,7 +156,7 @@ bool CBoxAssistant::StartEngine()
                 m_pDebugger->show();
             }
             else {
-                QMessageBox::critical(this, "Sandboxie-Plus", tr("V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debuger could not be opened."));
+                QMessageBox::critical(this, "Sandboxie-Plus", tr("V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debugger could not be opened."));
             }
         }
 
@@ -206,7 +206,7 @@ void CBoxAssistant::reject()
     if (m_pEngine && currentId() != Page_Submit) {
         if (theConf->GetInt("Options/WarnWizardOnClose", -1) == -1) {
             bool State = false;
-            if (CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an incosistent state.")
+            if (CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an inconsistent state.")
                 , tr("Don't ask in future"), &State, QDialogButtonBox::Ok | QDialogButtonBox::Cancel, QDialogButtonBox::Cancel) == QDialogButtonBox::Cancel)
                 return;
             if (State)
@@ -272,8 +272,8 @@ void CBeginPage::initializePage()
     m_pLayout->addItem(new QSpacerItem(10, 10, QSizePolicy::Fixed, QSizePolicy::Expanding), row++, 0);
 
     if (!g_CertInfo.valid || g_CertInfo.expired) {
-        QLabel* pBottomLabel = new QLabel(tr("With a valid <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a> the wizard would be even more powerfull. "
-            "It could access the <a href=\"https://sandboxie-plus.com/go.php?to=sbie-issue-db\">online solution database</a> to retriev the latest troubleshooting instructions."));
+        QLabel* pBottomLabel = new QLabel(tr("With a valid <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a> the wizard would be even more powerful. "
+            "It could access the <a href=\"https://sandboxie-plus.com/go.php?to=sbie-issue-db\">online solution database</a> to retrieve the latest troubleshooting instructions."));
         connect(pBottomLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
         pBottomLabel->setWordWrap(true);
         m_pLayout->addWidget(pBottomLabel, row++, 0, 1, 3);
@@ -711,7 +711,7 @@ void CRunPage::OnStateChanged(int state, const QString& Text)
         break;
     }
     case CBoxEngine::eError:
-        m_pTopLabel->setText(tr("Somethign failed internally this troubleshooting procedure can not continue. "
+        m_pTopLabel->setText(tr("Something failed internally this troubleshooting procedure can not continue. "
             "You can click on next to submit an issue report.") + (pEngine ? tr("\n\nError: ") + Text : ""));
     case CBoxEngine::eCanceled:
         break;
@@ -812,16 +812,16 @@ CSubmitPage::CSubmitPage(QWidget *parent)
     pLayout->addWidget(m_pReport, row++, 0, 1, 3);
 
     m_pAttachIni = new QCheckBox(tr("Attach Sandboxie.ini"));
-    m_pAttachIni->setToolTip(tr("Sandboxing compatybility is relyent on the configuration hence attaching the sandboxie.ini helps a lot with finding the issue."));
+    m_pAttachIni->setToolTip(tr("Sandboxing compatibility is reliant on the configuration, hence attaching the Sandboxie.ini file helps a lot with finding the issue."));
     pLayout->addWidget(m_pAttachIni, row, 0);
 
     m_pAttachLog = new QCheckBox(tr("Attach Logs"));
     m_pAttachLog->setTristate(true);
-    m_pAttachLog->setToolTip(tr("Select partially checked state to sends only message log but no trace log.\nBefore sending you can review the logs in the main window."));
+    m_pAttachLog->setToolTip(tr("Selecting partially checked state sends only the message log, but not the trace log.\nBefore sending, you can review the logs in the main window."));
     pLayout->addWidget(m_pAttachLog, row, 1);
 
     m_pAttachDmp = new QCheckBox(tr("Attach Crash Dumps"));
-    m_pAttachDmp->setToolTip(tr("An applicatin crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging."));
+    m_pAttachDmp->setToolTip(tr("An application crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging."));
     pLayout->addWidget(m_pAttachDmp, row, 2);
 
     m_pMail = new QLineEdit();
@@ -1027,7 +1027,7 @@ bool CSubmitPage::validatePage()
             return;
         }
 
-        QMessageBox::information(this, "Sandboxie-Plus", tr("Your issue report have been successfully submitted, thank you."));
+        QMessageBox::information(this, "Sandboxie-Plus", tr("Your issue report has been successfully submitted, thank you."));
         wizard()->close();
     });
 

@@ -203,12 +203,12 @@ _FX UCHAR *FindDllExport2(
 ULONG_PTR DetourFunc(INJECT_DATA *inject) 
 {
     //
-    // Note: this function is invoked from the detour code hence when running in WoW64
-    // the used instance of this function will be from the 32 bit version
+    // Note: this function is invoked from the detour code, hence when running in WoW64,
+    // the used instance of this function will be from the 32 bit version,
     // in which case we are unable to use SBIELOW_CALL and need to have a
-    // pointer to the apropriate 32 bit function
+    // pointer to the appropriate 32 bit function
     // 
-    // Further more on ARM64 the SBIELOW_DATA will be allocated past the 4 GB boundry 
+    // Furthermore, on ARM64 the SBIELOW_DATA will be allocated past the 4 GB boundary 
     // hence in 32 bit mode we can not access it, only INJECT_DATA is available
     //
 
@@ -282,7 +282,7 @@ ULONG_PTR DetourFunc(INJECT_DATA *inject)
         status = ((P_LdrGetProcedureAddress)inject->LdrGetProcAddr)(ModuleHandle, NULL, 1, (ULONG_PTR*)&SbieDllOrdinal1);
 #ifdef _M_ARM64
         //
-        // on ARM64EC we hook the native code hence we need to obtain the address of the native erdinal 1 from our SbieDll.dll
+        // on ARM64EC we hook the native code, hence we need to obtain the address of the native ordinal 1 from our SbieDll.dll
         // instead of the FFS sequence as given by NtGetProcedureAddress when in ARM64EC mode
         //
 
@@ -304,7 +304,7 @@ ULONG_PTR DetourFunc(INJECT_DATA *inject)
     }
 
     //
-    // or report error if one occured instead
+    // or report error if one occurred instead
     //
 
     else {
@@ -383,12 +383,12 @@ _FX void InitInject(SBIELOW_DATA *data, void *DetourCode)
         //ntdll_base = (void *)(ULONG_PTR)ntdll32_base;
 
         //
-        // (prior to Windows 8, the base address of ntdll32 is recorded
+        // (Prior to Windows 8, the base address of ntdll32 is recorded
         // in offset 0x036C of the KUSER_SHARED_DATA structure, which always
-        // has a fixed base address of 0x7FFE0000.  this is not available
+        // has a fixed base address of 0x7FFE0000. This is not available
         // in Windows 8, so we have to rely on the driver to track this
         // base address via Process_NotifyImage in core/drv/process.c.
-        // so we might as well use this approach for all 64-bit Windows.)
+        // So we might as well use this approach for all 64-bit Windows.)
         //
         //ULONG ntdll32_base = *(ULONG *)(0x7FFE0000 + 0x036C);
         //ntdll_base = (void *)(ULONG_PTR)ntdll32_base;
@@ -453,7 +453,7 @@ _FX void InitInject(SBIELOW_DATA *data, void *DetourCode)
 #endif
     {
         //
-        // for ARM64EC we need native functions, FindDllExport can manage FFS's
+        // for ARM64EC we need native functions, FindDllExport can manage FFS
         // however this does not work for syscalls, hence we use the native function directly
         //
 
@@ -500,7 +500,7 @@ _FX void InitInject(SBIELOW_DATA *data, void *DetourCode)
 #endif
 
     //
-    // sellect the right version of SbieDll.dll 
+    // select the right version of SbieDll.dll
     //
 
 #ifdef _M_ARM64

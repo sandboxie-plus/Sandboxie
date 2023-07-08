@@ -44,7 +44,7 @@ if(res === false) {
       
     sbie.setupTrace();
 
-    wizard.showStatus(tr('Now please runn your application again to trigger the Sbie message.<br /><br />') + 
+    wizard.showStatus(tr('Now please run your application again to trigger the Sbie message.<br /><br />') + 
                       tr('Press NEXT when you are done collecting logs.'), true);
   }
 

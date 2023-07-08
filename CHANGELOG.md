@@ -45,7 +45,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added workaround for Chrome not starting on Windows 11 with KB5027231 [#3040](https://github.com/sandboxie-plus/Sandboxie/issues/3040)
 - improved compatibility with procmon/stack traces for debug builds
 - fixed issue with non-standard command lines
-- fixed online updater not checking every 7 days but dayly
+- fixed online updater not checking every 7 days, but daily
 
 ### Removed
 - cleaned up duplicate code (thanks lmou523) [#3067](https://github.com/sandboxie-plus/Sandboxie/pull/3067)

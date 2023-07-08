@@ -957,7 +957,7 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 	if (lowdata.flags.is_wow64) {
 
 		//
-		// when this is a 32 bit process runing under WoW we need to inject also some 32 bit code
+		// when this is a 32 bit process running under WoW64, we need to inject also some 32 bit code
 		//
 
 		remote_addr32 = SbieDll_InjectLow_CopyCode(hProcess, m_sbielow32_len, m_sbielow32_len, m_sbielow32_ptr

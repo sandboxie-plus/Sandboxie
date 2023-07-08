@@ -237,7 +237,7 @@ void CScriptManager::OnDownload(const QString& Path, const QVariantMap& Params)
 	QString IssueDir;
     C7zFileEngineHandler IssueFS("issue");
     if (!IssueFS.Open(FinalPath)) {
-        QMessageBox::critical(theGUI, "Sandboxie-Plus", tr("Downloaded troubleshooting instructions are currupted!"));
+        QMessageBox::critical(theGUI, "Sandboxie-Plus", tr("Downloaded troubleshooting instructions are corrupted!"));
         QFile::remove(Path);
         return;
     }

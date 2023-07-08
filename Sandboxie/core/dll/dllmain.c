@@ -856,7 +856,7 @@ _FX VOID Dll_Ordinal1(INJECT_DATA * inject)
         }
 
         //
-        // explorer needs sandboxed COM show warning and terminate when COM is not sandboxies
+        // explorer needs sandboxed COM to show a warning and terminate when COM is not sandboxed
         //
 
         if (Dll_ImageType == DLL_IMAGE_SHELL_EXPLORER && SbieDll_IsOpenCOM()) {

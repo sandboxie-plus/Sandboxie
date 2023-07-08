@@ -8,11 +8,11 @@
 
 function openOptions(message, box, page)
 {
-  message += '\n\n' + tr('Do you want to open the box option dialog to change this preset.');
+  message += '\n\n' + tr('Do you want to open the box option dialog to change this preset?');
   
   let form = [
     { id: 'yes', name: tr('Yes'), type: 'radio' },
-    { id: 'no', name: tr('No, its fine as it is'), type: 'radio' },
+    { id: 'no', name: tr('No, it is fine as it is'), type: 'radio' },
     { id: 'bug', name: tr('No, but I want to report a bug'), type: 'radio' },
   ];
 

@@ -207,10 +207,7 @@ union SCertInfo {
             reservd_3 : 8,
 			reservd_4 : 7,
 			insider   : 1;
-		qint32 
-			expirers_in_sec : 30, 
-			unused_1        : 1, // skim a couple high bits to use as flags flag, 0x3fffffff -> is 34 years count down is enough
-			about_to_expire : 1; 
+		qint32 expirers_in_sec; 
     };
 };
 extern SCertInfo g_CertInfo;

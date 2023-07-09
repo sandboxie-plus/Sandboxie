@@ -2337,7 +2337,7 @@ void CSandMan::CheckSupport()
 		return;
 
 	static bool ReminderShown = false;
-	if (!ReminderShown && (g_CertInfo.expired || g_CertInfo.about_to_expire) && !theConf->GetBool("Options/NoSupportCheck", false)) 
+	if (!ReminderShown && (g_CertInfo.expired || (g_CertInfo.expirers_in_sec > 0 && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30))) && !theConf->GetBool("Options/NoSupportCheck", false)) 
 	{
 		ReminderShown = true;
 		CSettingsWindow* pSettingsWindow = new CSettingsWindow(this);
@@ -2629,14 +2629,13 @@ void CSandMan::UpdateCertState()
 	}
 	else
 	{
-		g_CertInfo.about_to_expire = g_CertInfo.expirers_in_sec > 0 && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30);
 		if (g_CertInfo.outdated)
 			OnLogMessage(tr("The supporter certificate is not valid for this build, please get an updated certificate"));
 		// outdated always implicates it is no longer valid
 		else if (g_CertInfo.expired) // may be still valid for the current and older builds
 			OnLogMessage(tr("The supporter certificate has expired%1, please get an updated certificate")
 				.arg(!g_CertInfo.outdated ? tr(", but it remains valid for the current build") : ""));
-		else if (g_CertInfo.about_to_expire)
+		else if (g_CertInfo.expirers_in_sec > 0 && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30))
 			OnLogMessage(tr("The supporter certificate will expire in %1 days, please get an updated certificate").arg(g_CertInfo.expirers_in_sec / (60 * 60 * 24)));
 	}
 

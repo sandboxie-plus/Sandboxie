@@ -2306,22 +2306,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="3814"/>
+        <location filename="SandMan.cpp" line="3813"/>
         <source>Waiting for folder: %1</source>
         <translation>Klasör bekleniyor: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3815"/>
+        <location filename="SandMan.cpp" line="3814"/>
         <source>Deleting folder: %1</source>
         <translation>Klasör siliniyor: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3816"/>
+        <location filename="SandMan.cpp" line="3815"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>Klasörler birleştiriliyor: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3817"/>
+        <location filename="SandMan.cpp" line="3816"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>Anlık Görüntü Birleştirme Tamamlanıyor...</translation>
     </message>
@@ -2408,7 +2408,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Çıkış</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2787"/>
+        <location filename="SandMan.cpp" line="2786"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>Sandboxie-Plus taşınabilir modda başlatıldı ve gerekli hizmetleri oluşturması gerekiyor. Bunun için yönetici ayrıcalıkları isteyecektir.</translation>
     </message>
@@ -2429,13 +2429,13 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>&amp;Görünüm</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3436"/>
+        <location filename="SandMan.cpp" line="3435"/>
         <source>Error deleting sandbox folder: %1</source>
         <translation>Korumalı alan klasörü silinirken hata: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="478"/>
-        <location filename="SandMan.cpp" line="3788"/>
+        <location filename="SandMan.cpp" line="3787"/>
         <source>About Sandboxie-Plus</source>
         <translation>Sandboxie-Plus Hakkında</translation>
     </message>
@@ -2471,7 +2471,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Destek Forumu&apos;nu Ziyaret Et</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3427"/>
+        <location filename="SandMan.cpp" line="3426"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
         <translation>%1 korumalı alanından yapılandırma kopyalaması başarısız oldu: %2</translation>
     </message>
@@ -2485,7 +2485,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">%1 (%2): </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2699"/>
+        <location filename="SandMan.cpp" line="2698"/>
         <source>Login Failed: %1</source>
         <translation>Giriş başarısız: %1</translation>
     </message>
@@ -2498,9 +2498,9 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="1306"/>
         <location filename="SandMan.cpp" line="1742"/>
         <location filename="SandMan.cpp" line="2102"/>
-        <location filename="SandMan.cpp" line="2788"/>
-        <location filename="SandMan.cpp" line="3218"/>
-        <location filename="SandMan.cpp" line="3234"/>
+        <location filename="SandMan.cpp" line="2787"/>
+        <location filename="SandMan.cpp" line="3217"/>
+        <location filename="SandMan.cpp" line="3233"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Bu mesajı bir daha gösterme.</translation>
     </message>
@@ -2520,12 +2520,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Hizmeti Yükle</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3447"/>
+        <location filename="SandMan.cpp" line="3446"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
         <translation>Eski anlık görüntü dizini kaldırılamadı &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3233"/>
+        <location filename="SandMan.cpp" line="3232"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
         <translation>Düzenleyici kapatılır kapatılmaz değişiklikler otomatik olarak uygulanacaktır.</translation>
     </message>
@@ -2535,7 +2535,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Sandboxie Yöneticisi&apos;ni kapatmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3443"/>
+        <location filename="SandMan.cpp" line="3442"/>
         <source>Failed to create directory for new snapshot</source>
         <translation>Yeni anlık görüntü için dizin oluşturulamadı</translation>
     </message>
@@ -2586,7 +2586,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3440"/>
+        <location filename="SandMan.cpp" line="3439"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>&apos;%1&apos; dizini, &apos;%2&apos; dizinine taşınamadı</translation>
     </message>
@@ -2601,9 +2601,9 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Çevrimiçi Belgeler</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2924"/>
-        <location filename="SandMan.cpp" line="2926"/>
-        <location filename="SandMan.cpp" line="3488"/>
+        <location filename="SandMan.cpp" line="2923"/>
+        <location filename="SandMan.cpp" line="2925"/>
+        <location filename="SandMan.cpp" line="3487"/>
         <source>Sandboxie-Plus - Error</source>
         <translation>Sandboxie-Plus - Hata</translation>
     </message>
@@ -2623,12 +2623,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Göster/Gizle</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3439"/>
+        <location filename="SandMan.cpp" line="3438"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
         <translation>Bir korumalı alan, silinmeden önce boşaltılmalıdır.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3432"/>
+        <location filename="SandMan.cpp" line="3431"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
         <translation>Korumalı alan adı yalnızca harf, rakam ve alt çizgi içerebilir.</translation>
     </message>
@@ -2638,12 +2638,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>&amp;Bakım</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3431"/>
+        <location filename="SandMan.cpp" line="3430"/>
         <source>The sandbox name can not be a device name.</source>
         <translation>Korumalı alan adı bir cihaz adı olamaz.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3490"/>
+        <location filename="SandMan.cpp" line="3489"/>
         <source>Operation failed for %1 item(s).</source>
         <translation>%1 öge için işlem başarısız oldu.</translation>
     </message>
@@ -2677,12 +2677,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Bağlan</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2681"/>
+        <location filename="SandMan.cpp" line="2680"/>
         <source>Only Administrators can change the config.</source>
         <translation>Yalnızca Yöneticiler yapılandırmayı değiştirebilir.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3445"/>
+        <location filename="SandMan.cpp" line="3444"/>
         <source>Snapshot not found</source>
         <translation>Anlık görüntü bulunamadı</translation>
     </message>
@@ -2692,7 +2692,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Tümünü Durdur</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3434"/>
+        <location filename="SandMan.cpp" line="3433"/>
         <source>Delete protection is enabled for the sandbox</source>
         <translation>Korumalı alan için silme koruması etkinleştirilmiş</translation>
     </message>
@@ -2702,7 +2702,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>&amp;Gelişmiş</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2953"/>
+        <location filename="SandMan.cpp" line="2952"/>
         <source>Executing maintenance operation, please wait...</source>
         <translation>Bakım işlemi yapılıyor, lütfen bekleyin...</translation>
     </message>
@@ -2719,7 +2719,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Yeni Alan Oluştur</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3433"/>
+        <location filename="SandMan.cpp" line="3432"/>
         <source>Failed to terminate all processes</source>
         <translation>Tüm işlemler sonlandırılamadı</translation>
     </message>
@@ -2729,7 +2729,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Gelişmiş Görünüm</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3429"/>
+        <location filename="SandMan.cpp" line="3428"/>
         <source>Failed to delete sandbox %1: %2</source>
         <translation>%1: %2 Korumalı alanı silinemedi</translation>
     </message>
@@ -2744,17 +2744,17 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Tüm İşlemleri Sonlandır</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2691"/>
+        <location filename="SandMan.cpp" line="2690"/>
         <source>Please enter the configuration password.</source>
         <translation>Lütfen yapılandırma parolasını girin.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3450"/>
+        <location filename="SandMan.cpp" line="3449"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
         <translation>Bölümdeki yapılandırmayı güncelleme yetkiniz yok &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3446"/>
+        <location filename="SandMan.cpp" line="3445"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
         <translation>&apos;%1&apos; ve &apos;%2&apos; anlık görüntü dizinleri birleştirilirken hata oluştu, anlık görüntü tam olarak birleştirilmedi.</translation>
     </message>
@@ -2774,12 +2774,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Sonlandırılmışları Tut</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3428"/>
+        <location filename="SandMan.cpp" line="3427"/>
         <source>A sandbox of the name %1 already exists</source>
         <translation>%1 adında bir korumalı alan zaten var</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3451"/>
+        <location filename="SandMan.cpp" line="3450"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
         <translation>%2: %3 bölümünde %1 yapılandırma parametresi ayarlanamadı</translation>
     </message>
@@ -2875,174 +2875,174 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Değerlendirme süresi dolmuştur!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2763"/>
+        <location filename="SandMan.cpp" line="2762"/>
         <source>No Recovery</source>
         <translation>Kurtarma Yok</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2769"/>
+        <location filename="SandMan.cpp" line="2768"/>
         <source>No Messages</source>
         <translation>Mesaj Yok</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2825"/>
+        <location filename="SandMan.cpp" line="2824"/>
         <source>&lt;b&gt;ERROR:&lt;/b&gt; The Sandboxie-Plus Manager (SandMan.exe) does not have a valid signature (SandMan.exe.sig). Please download a trusted release from the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;official Download page&lt;/a&gt;.</source>
         <translation>&lt;b&gt;HATA:&lt;/b&gt; Sandboxie-Plus Yöneticisinin (SandMan.exe) geçerli bir imzaya sahip değil (SandMan.exe.sig). Lütfen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;resmi İndirme sayfasından&lt;/a&gt; güvenilir bir sürüm indirin.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2933"/>
+        <location filename="SandMan.cpp" line="2932"/>
         <source>Maintenance operation completed</source>
         <translation>Bakım işlemi tamamlandı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3066"/>
+        <location filename="SandMan.cpp" line="3065"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
         <translation>Bu işlevsellik, Plus kullanıcı arayüzünde korumalı alan liste görünümüne entegre edilmiştir.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3067"/>
+        <location filename="SandMan.cpp" line="3066"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
         <translation>Alan/grup bağlam menüsünü kullanarak alanları ve grupları diğer gruplara taşıyabilirsiniz. Öğeleri hareket ettirmek için sürükle ve bırak özelliğini de kullanabilirsiniz. Alternatif olarak, öğeleri grupları içinde yukarı ve aşağı taşımak için ALT tuşunu basılı tutarken ok tuşlarını da kullanabilirsiniz.&lt;br /&gt;Korumalı Alan menüsünden yeni alanlar ve gruplar oluşturabilirsiniz.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3135"/>
+        <location filename="SandMan.cpp" line="3134"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
         <translation>Gizlenmiş mesaj kutuları dahil her şeyi (evet) veya yalnızca tüm günlük mesajlarını (hayır) sıfırlamak mı istiyorsunuz?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3216"/>
+        <location filename="SandMan.cpp" line="3215"/>
         <source>You are about to edit the Templates.ini, this is generally not recommended.
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <translation>Templates.ini dosyasını düzenlemek üzeresiniz, bu genellikle önerilmez. Bu dosya Sandboxie&apos;nin bir parçasıdır ve üzerinde yapılan tüm değişiklikler Sandboxie güncellendiğinde kaybolacaktır.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3232"/>
+        <location filename="SandMan.cpp" line="3231"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
         <translation>Dosya her kaydedildiğinde değişiklikler otomatik olarak uygulanacaktır.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3421"/>
+        <location filename="SandMan.cpp" line="3420"/>
         <source>Administrator rights are required for this operation.</source>
         <translation>Bu işlem için yönetici hakları gereklidir.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3422"/>
+        <location filename="SandMan.cpp" line="3421"/>
         <source>Failed to execute: %1</source>
         <translation>%1 çalıştırılamadı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3423"/>
+        <location filename="SandMan.cpp" line="3422"/>
         <source>Failed to connect to the driver</source>
         <translation>Sürücüye bağlanılamadı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3424"/>
+        <location filename="SandMan.cpp" line="3423"/>
         <source>Failed to communicate with Sandboxie Service: %1</source>
         <translation>Sandboxie Hizmeti ile iletişim kurulamadı: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3425"/>
+        <location filename="SandMan.cpp" line="3424"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
         <translation>Uyumsuz bir Sandboxie %1 bulundu. Uyumlu sürümler: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3426"/>
+        <location filename="SandMan.cpp" line="3425"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
         <translation>Sandboxie kurulum yolu bulunamıyor.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3430"/>
+        <location filename="SandMan.cpp" line="3429"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
         <translation>Korumalı alan adı 32 karakterden uzun olamaz.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3437"/>
+        <location filename="SandMan.cpp" line="3436"/>
         <source>All processes in a sandbox must be stopped before it can be renamed.</source>
         <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
         <translation type="unfinished">Bir korumalı alandaki tüm işlemlerin, yeniden adlandırılabilmesi için durdurulması gerekir.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3441"/>
+        <location filename="SandMan.cpp" line="3440"/>
         <source>Failed to move box image &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>&apos;%1&apos; kutu görüntüsü &apos;%2&apos; konumuna taşınamadı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3442"/>
+        <location filename="SandMan.cpp" line="3441"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
         <translation>Bu Anlık Görüntü işlemi, alan içinde işlemler çalışırken gerçekleştirilemez.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3448"/>
+        <location filename="SandMan.cpp" line="3447"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>Birden çok anlık görüntü tarafından paylaşılan bir anlık görüntü kaldırılamaz</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3456"/>
+        <location filename="SandMan.cpp" line="3455"/>
         <source>The content of an unmounted sandbox can not be deleted</source>
         <translation>Bağlanmamış bir korumalı alanın içeriği silinemez</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3458"/>
+        <location filename="SandMan.cpp" line="3457"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3460"/>
+        <location filename="SandMan.cpp" line="3459"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
         <translation>İçe/Dışa Aktarma kullanılamıyor, 7z.dll yüklenemedi</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3461"/>
+        <location filename="SandMan.cpp" line="3460"/>
         <source>Failed to create the box archive</source>
         <translation>Alan arşivi oluşturulamadı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3462"/>
+        <location filename="SandMan.cpp" line="3461"/>
         <source>Failed to open the 7z archive</source>
         <translation>7z arşivi açılamadı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3463"/>
+        <location filename="SandMan.cpp" line="3462"/>
         <source>Failed to unpack the box archive</source>
         <translation>Alan arşivi açılamadı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3464"/>
+        <location filename="SandMan.cpp" line="3463"/>
         <source>The selected 7z file is NOT a box archive</source>
         <translation>Seçili 7z dosyası bir alan arşivi DEĞİLDİR</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3552"/>
+        <location filename="SandMan.cpp" line="3551"/>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
         <translation>%1 bağlantısını korumalı (evet) veya korumasız (hayır) bir Web tarayıcısında mı açmak istiyorsunuz?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3553"/>
+        <location filename="SandMan.cpp" line="3552"/>
         <source>Remember choice for later.</source>
         <translation>Seçimi sonrası için hatırla.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3705"/>
+        <location filename="SandMan.cpp" line="3704"/>
         <source>Copy Cell</source>
         <translation>Hücreyi Kopyala</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3706"/>
+        <location filename="SandMan.cpp" line="3705"/>
         <source>Copy Row</source>
         <translation>Satırı Kopyala</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3707"/>
+        <location filename="SandMan.cpp" line="3706"/>
         <source>Copy Panel</source>
         <translation>Paneli Kopyala</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2924"/>
+        <location filename="SandMan.cpp" line="2923"/>
         <source>Failed to stop all Sandboxie components</source>
         <translation>Tüm Sandboxie bileşenleri durdurulamadı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2926"/>
+        <location filename="SandMan.cpp" line="2925"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>Gerekli Sandboxie bileşenleri başlatılamadı</translation>
     </message>
@@ -3068,17 +3068,17 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Kaldırılan şablonlar temizlendi...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3452"/>
+        <location filename="SandMan.cpp" line="3451"/>
         <source>Can not create snapshot of an empty sandbox</source>
         <translation>Boş bir korumalı alanın anlık görüntüsü oluşturulamaz</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3453"/>
+        <location filename="SandMan.cpp" line="3452"/>
         <source>A sandbox with that name already exists</source>
         <translation>Bu adda bir korumalı alan zaten var</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3704"/>
+        <location filename="SandMan.cpp" line="3703"/>
         <source>Reset Columns</source>
         <translation>Sütunları Sıfırla</translation>
     </message>
@@ -3093,12 +3093,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Bazı uyumluluk şablonları (%1) eksik, büyük olasılıkla silinmiş, bunları tüm alanlardan kaldırmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2728"/>
+        <location filename="SandMan.cpp" line="2727"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
         <translation>Tüm korumalı alanlardaki tüm işlemleri sonlandırmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2729"/>
+        <location filename="SandMan.cpp" line="2728"/>
         <source>Terminate all without asking</source>
         <translation>Hepsini sormadan sonlandır</translation>
     </message>
@@ -3148,12 +3148,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Bilinmeyen işlem &apos;%1&apos; komut satırı aracılığıyla istendi</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2821"/>
+        <location filename="SandMan.cpp" line="2820"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
         <translation>DİKKAT: Bu Sandboxie oturumunu başka bir aracı (muhtemelen SbieCtrl.exe) zaten yönetiyor, lütfen önce onu kapatın ve devralmak için yeniden bağlanın.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3454"/>
+        <location filename="SandMan.cpp" line="3453"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>Yapılandırma parolası 64 karakterden uzun olmamalıdır</translation>
     </message>
@@ -3173,17 +3173,17 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Tüm Oturumları Göster</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3418"/>
+        <location filename="SandMan.cpp" line="3417"/>
         <source>Error Status: 0x%1 (%2)</source>
         <translation>Hata Durumu: 0x%1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3419"/>
+        <location filename="SandMan.cpp" line="3418"/>
         <source>Unknown</source>
         <translation>Bilinmeyen</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3466"/>
+        <location filename="SandMan.cpp" line="3465"/>
         <source>Unknown Error Status: 0x%1</source>
         <translation>Bilinmeyen Hata Durumu: 0x%1</translation>
     </message>
@@ -3241,17 +3241,17 @@ Hayır şunları seçer: %2</translation>
         <translation>Seçili özellik seti yalnızca proje destekçileri tarafından kullanılabilir. Bu özellik setinin destekçi sertifikası olmadan etkinleştirildiği bir alanda başlatılan işlemler 5 dakika sonra sonlandırılacaktır.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get- cert&quot;&gt;Proje destekçisi olun&lt;/a&gt; ve bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; alın</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3769"/>
+        <location filename="SandMan.cpp" line="3768"/>
         <source>This copy of Sandboxie+ is certified for: %1</source>
         <translation>Sandboxie+&apos;nın bu kopyası şu kişiler için sertifikalandırılmıştır: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3771"/>
+        <location filename="SandMan.cpp" line="3770"/>
         <source>Sandboxie+ is free for personal and non-commercial use.</source>
         <translation>Sandboxie+, kişisel ve ticari olmayan kullanım için ücretsizdir.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3774"/>
+        <location filename="SandMan.cpp" line="3773"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>Sandboxie-Plus, Sandboxie&apos;nin açık kaynaklı bir devamıdır.&lt;br /&gt;Daha fazla bilgi için &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; adresini ziyaret edin.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Sürücü versiyonu: %1&lt;br /&gt;Özellikler: %2&lt;br /&gt;&lt;br /&gt;Simgeler için &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
@@ -3507,87 +3507,87 @@ Hayır şunları seçer: %2</translation>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Proje destekçisi olun&lt;/a&gt; ve bir &lt;a href=&quot;https kazanın ://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;destekçi sertifikası&lt;/a&gt;alın</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2748"/>
+        <location filename="SandMan.cpp" line="2747"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
         <translation>Lütfen Zorunlu Programlar kurallarını devre dışı bırakmak için süreyi saniye cinsinden girin.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2928"/>
+        <location filename="SandMan.cpp" line="2927"/>
         <source>Maintenance operation failed (%1)</source>
         <translation>Bakım işlemi başarısız oldu (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3435"/>
+        <location filename="SandMan.cpp" line="3434"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
         <translation>Alan içeriği silinmeden önce tüm korumalı alan işlemleri durdurulmalıdır</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3444"/>
+        <location filename="SandMan.cpp" line="3443"/>
         <source>Failed to copy box data files</source>
         <translation>Alan veri dosyaları kopyalanamadı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3449"/>
+        <location filename="SandMan.cpp" line="3448"/>
         <source>Failed to remove old box data files</source>
         <translation>Eski alan veri dosyaları kaldırılamadı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3455"/>
+        <location filename="SandMan.cpp" line="3454"/>
         <source>The operation was canceled by the user</source>
         <translation>İşlem kullanıcı tarafından iptal edildi</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3708"/>
+        <location filename="SandMan.cpp" line="3707"/>
         <source>Case Sensitive</source>
         <translation>Harfe Duyarlı</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3709"/>
+        <location filename="SandMan.cpp" line="3708"/>
         <source>RegExp</source>
         <translation>Düzİfa</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3710"/>
+        <location filename="SandMan.cpp" line="3709"/>
         <source>Highlight</source>
         <translation>Vurgula</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3711"/>
+        <location filename="SandMan.cpp" line="3710"/>
         <source>Close</source>
         <translation>Kapat</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3712"/>
+        <location filename="SandMan.cpp" line="3711"/>
         <source>&amp;Find ...</source>
         <translation>&amp;Bul ...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3713"/>
+        <location filename="SandMan.cpp" line="3712"/>
         <source>All columns</source>
         <translation>Tüm Sütunlar</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3761"/>
+        <location filename="SandMan.cpp" line="3760"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Sandboxie-Plus hakkında&lt;/h3&gt;&lt;p&gt;Sürüm %1&lt;/p&gt;&lt;p&gt;Telif hakkı (c) 2020-2023, DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2634"/>
+        <location filename="SandMan.cpp" line="2633"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
         <translation>Destekçi sertifikası bu derleme için geçerli değil, lütfen yenilenmiş bir sertifika alın</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2637"/>
+        <location filename="SandMan.cpp" line="2636"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <translation>Destekçi sertifikasının süresi doldu%1, lütfen yenilenmiş bir sertifika alın</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2638"/>
+        <location filename="SandMan.cpp" line="2637"/>
         <source>, but it remains valid for the current build</source>
         <translation>, ancak mevcut derleme için geçerli kalır</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2640"/>
+        <location filename="SandMan.cpp" line="2639"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
         <translation>Destekçi sertifikasının süresi %1 gün içinde dolacak, lütfen yenilenmiş bir sertifika alın</translation>
     </message>
@@ -3645,7 +3645,7 @@ Hayır şunları seçer: %2</translation>
         <translation>Geçerli Yapılandırma: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3291"/>
+        <location filename="SandMan.cpp" line="3290"/>
         <source>Sandboxie config has been reloaded</source>
         <translation>Sandboxie yapılandırması yeniden yüklendi</translation>
     </message>
@@ -4536,28 +4536,28 @@ Hayır şunları seçer: %2</translation>
 <context>
     <name>CSettingsWindow</name>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1682"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1684"/>
         <source>Please enter the new configuration password.</source>
         <translation>Lütfen yeni yapılandırma parolasını girin.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1576"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1722"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1578"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1724"/>
         <source>Select Directory</source>
         <translation>Dizin Seç</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1713"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1715"/>
         <source>Please enter a program file name</source>
         <translation>Lütfen bir program dosyası adı girin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1703"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1705"/>
         <source>Folder</source>
         <translation>Klasör</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1703"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1705"/>
         <source>Process</source>
         <translation>İşlem</translation>
     </message>
@@ -4577,9 +4577,8 @@ Hayır şunları seçer: %2</translation>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus özellikleri %1 gün içinde devre dışı bırakılacak.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1050"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For this build Plus features remain enabled.&lt;/font&gt;</source>
-        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Bu derleme için Plus özellikleri etkin durumda kalır.&lt;/font&gt;</translation>
+        <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Bu derleme için Plus özellikleri etkin durumda kalır.&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1052"/>
@@ -4587,17 +4586,32 @@ Hayır şunları seçer: %2</translation>
         <translation>&lt;br /&gt;Plus özellikleri artık etkin değil.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1605"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1483"/>
+        <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1485"/>
+        <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1487"/>
+        <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1607"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Şimdi Denetle&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1686"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1688"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Lütfen yeni yapılandırma parolasını tekrar girin.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1691"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1693"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Parolalar eşleşmedi, lütfen tekrar deneyin.</translation>
     </message>
@@ -4607,12 +4621,12 @@ Hayır şunları seçer: %2</translation>
         <translation>Otomatik Algıla</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1488"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1490"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Sandboxie-Plus&apos;ın gelişimini desteklediğiniz için teşekkür ederiz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1495"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1497"/>
         <source>This support certificate is not valid.</source>
         <translation>Bu destek sertifikası geçerli değil.</translation>
     </message>
@@ -4632,9 +4646,8 @@ Hayır şunları seçer: %2</translation>
         <translation>Classic simgesini göster</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1483"/>
         <source>This certificate is unfortunately expired.</source>
-        <translation>Bu sertifikanın ne yazık ki süresi dolmuş.</translation>
+        <translation type="vanished">Bu sertifikanın ne yazık ki süresi dolmuş.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="230"/>
@@ -4798,6 +4811,11 @@ Hayır şunları seçer: %2</translation>
         <translation>Bu destekçi sertifikasının süresi doldu, lütfen &lt;a href=&quot;sbie://update/cert&quot;&gt;yenilenmiş bir sertifika alın&lt;/a&gt;.</translation>
     </message>
     <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1050"/>
+        <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Windows/SettingsWindow.cpp" line="1058"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Bu destekçi sertifikası &lt;font color=&apos;red&apos;&gt;%1 gün içinde sona erecek&lt;/font&gt;, lütfen &lt;a href=&quot;sbie://update/cert&quot;&gt;yenilenmiş bir sertifika alın&lt;/a&gt;.</translation>
@@ -4813,37 +4831,36 @@ Hayır şunları seçer: %2</translation>
         <translation>&amp;Korumalı Alanın Dışında Çalıştır</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1485"/>
         <source>This certificate is unfortunately outdated.</source>
-        <translation>Bu sertifika maalesef güncel değil.</translation>
+        <translation type="vanished">Bu sertifika maalesef güncel değil.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1541"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1543"/>
         <source>Installed</source>
         <translation>Kurulu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1567"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1569"/>
         <source>This Addon is mandatory and can not be removed.</source>
         <translation>Bu Eklenti zorunludur ve kaldırılamaz.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1781"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1783"/>
         <source>Please enter the template identifier</source>
         <translation>Lütfen şablon tanımlayıcısını girin</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1789"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1791"/>
         <source>Error: %1</source>
         <translation>Hata: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1814"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1816"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>Seçili yerel şablonları gerçekten silmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1970"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1972"/>
         <source>%1 (Current)</source>
         <translation>%1 (Kullanılan)</translation>
     </message>
@@ -7066,27 +7083,27 @@ The process match level has a higher priority than the specificity and describes
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="3804"/>
+        <location filename="SandMan.cpp" line="3803"/>
         <source>OK</source>
         <translation>TAMAM</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3805"/>
+        <location filename="SandMan.cpp" line="3804"/>
         <source>Apply</source>
         <translation>Uygula</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3806"/>
+        <location filename="SandMan.cpp" line="3805"/>
         <source>Cancel</source>
         <translation>İptal</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3807"/>
+        <location filename="SandMan.cpp" line="3806"/>
         <source>&amp;Yes</source>
         <translation>&amp;Evet</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3808"/>
+        <location filename="SandMan.cpp" line="3807"/>
         <source>&amp;No</source>
         <translation>&amp;Hayır</translation>
     </message>

@@ -2389,22 +2389,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="3814"/>
+        <location filename="SandMan.cpp" line="3813"/>
         <source>Waiting for folder: %1</source>
         <translation>正在等待文件夹: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3815"/>
+        <location filename="SandMan.cpp" line="3814"/>
         <source>Deleting folder: %1</source>
         <translation>正在删除文件夹: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3816"/>
+        <location filename="SandMan.cpp" line="3815"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>正在合并文件夹: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3817"/>
+        <location filename="SandMan.cpp" line="3816"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>正在完成快照合并...</translation>
     </message>
@@ -2511,22 +2511,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>没有必沙程序</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3704"/>
+        <location filename="SandMan.cpp" line="3703"/>
         <source>Reset Columns</source>
         <translation>重置列</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3705"/>
+        <location filename="SandMan.cpp" line="3704"/>
         <source>Copy Cell</source>
         <translation>复制此格</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3706"/>
+        <location filename="SandMan.cpp" line="3705"/>
         <source>Copy Row</source>
         <translation>复制此行</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3707"/>
+        <location filename="SandMan.cpp" line="3706"/>
         <source>Copy Panel</source>
         <translation>复制此表</translation>
     </message>
@@ -2808,7 +2808,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     </message>
     <message>
         <location filename="SandMan.cpp" line="478"/>
-        <location filename="SandMan.cpp" line="3788"/>
+        <location filename="SandMan.cpp" line="3787"/>
         <source>About Sandboxie-Plus</source>
         <translation>关于 Sandboxie-Plus</translation>
     </message>
@@ -3011,9 +3011,9 @@ Do you want to do the clean up?</source>
         <location filename="SandMan.cpp" line="1306"/>
         <location filename="SandMan.cpp" line="1742"/>
         <location filename="SandMan.cpp" line="2102"/>
-        <location filename="SandMan.cpp" line="2788"/>
-        <location filename="SandMan.cpp" line="3218"/>
-        <location filename="SandMan.cpp" line="3234"/>
+        <location filename="SandMan.cpp" line="2787"/>
+        <location filename="SandMan.cpp" line="3217"/>
+        <location filename="SandMan.cpp" line="3233"/>
         <source>Don&apos;t show this message again.</source>
         <translation>不再显示此消息</translation>
     </message>
@@ -3113,44 +3113,44 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation>安装</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2924"/>
-        <location filename="SandMan.cpp" line="2926"/>
-        <location filename="SandMan.cpp" line="3488"/>
+        <location filename="SandMan.cpp" line="2923"/>
+        <location filename="SandMan.cpp" line="2925"/>
+        <location filename="SandMan.cpp" line="3487"/>
         <source>Sandboxie-Plus - Error</source>
         <translation>Sandboxie-Plus - 错误</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2924"/>
+        <location filename="SandMan.cpp" line="2923"/>
         <source>Failed to stop all Sandboxie components</source>
         <translation>停止全部的 Sandboxie 组件失败</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2926"/>
+        <location filename="SandMan.cpp" line="2925"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>启动所需的 Sandboxie 组件失败</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3291"/>
+        <location filename="SandMan.cpp" line="3290"/>
         <source>Sandboxie config has been reloaded</source>
         <translation>已重载沙盒配置文件</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2634"/>
+        <location filename="SandMan.cpp" line="2633"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
         <translation>此赞助者凭据对该版本沙盒无效，请获取可用的新凭据</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2637"/>
+        <location filename="SandMan.cpp" line="2636"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <translation>此赞助者凭据已过期%1，请获取可用的新凭据</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2638"/>
+        <location filename="SandMan.cpp" line="2637"/>
         <source>, but it remains valid for the current build</source>
         <translation>，但它对当前构建的沙盒版本仍然有效</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2640"/>
+        <location filename="SandMan.cpp" line="2639"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
         <translation>此赞助者凭据将在 %1 天后过期，请获取可用的新凭据</translation>
     </message>
@@ -3165,78 +3165,78 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation>是否要省略安装向导？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3418"/>
+        <location filename="SandMan.cpp" line="3417"/>
         <source>Error Status: 0x%1 (%2)</source>
         <translation>错误状态: 0x%1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3419"/>
+        <location filename="SandMan.cpp" line="3418"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3449"/>
+        <location filename="SandMan.cpp" line="3448"/>
         <source>Failed to remove old box data files</source>
         <translation>无法删除旧沙盒中的数据文件</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3455"/>
+        <location filename="SandMan.cpp" line="3454"/>
         <source>The operation was canceled by the user</source>
         <translation>该操作已被用户取消</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3466"/>
+        <location filename="SandMan.cpp" line="3465"/>
         <source>Unknown Error Status: 0x%1</source>
         <translation>未知错误状态: 0x%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3708"/>
+        <location filename="SandMan.cpp" line="3707"/>
         <source>Case Sensitive</source>
         <translation>区分大小写</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3709"/>
+        <location filename="SandMan.cpp" line="3708"/>
         <source>RegExp</source>
         <translation>正则表达式</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3710"/>
+        <location filename="SandMan.cpp" line="3709"/>
         <source>Highlight</source>
         <translation>高亮显示</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3711"/>
+        <location filename="SandMan.cpp" line="3710"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3712"/>
+        <location filename="SandMan.cpp" line="3711"/>
         <source>&amp;Find ...</source>
         <translation>查找(&amp;F)...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3713"/>
+        <location filename="SandMan.cpp" line="3712"/>
         <source>All columns</source>
         <translation>所有列</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3761"/>
+        <location filename="SandMan.cpp" line="3760"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</source>
         <oldsource>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</oldsource>
         <translation>&lt;h3&gt;关于 Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;版本 %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3769"/>
+        <location filename="SandMan.cpp" line="3768"/>
         <source>This copy of Sandboxie+ is certified for: %1</source>
         <translation>此 Sandboxie+ 副本已授权给: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3771"/>
+        <location filename="SandMan.cpp" line="3770"/>
         <source>Sandboxie+ is free for personal and non-commercial use.</source>
         <translation>Sandboxie+ 可免费用于个人和非商业用途</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3774"/>
+        <location filename="SandMan.cpp" line="3773"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>Sandboxie-Plus 是知名程序 Sandboxie 自开源以来的一个延续&lt;br /&gt;访问 &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; 来了解更多信息&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;驱动版本: %1&lt;br /&gt;特性: %2&lt;br /&gt;&lt;br /&gt;图标来源: &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
@@ -3374,17 +3374,17 @@ No will choose: %2</source>
 </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2681"/>
+        <location filename="SandMan.cpp" line="2680"/>
         <source>Only Administrators can change the config.</source>
         <translation>仅管理员可更改该配置</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2691"/>
+        <location filename="SandMan.cpp" line="2690"/>
         <source>Please enter the configuration password.</source>
         <translation>请输入配置保护密码</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2699"/>
+        <location filename="SandMan.cpp" line="2698"/>
         <source>Login Failed: %1</source>
         <translation>登录失败：%1</translation>
     </message>
@@ -3406,69 +3406,69 @@ No will choose: %2</source>
         <translation type="vanished">正在导入：%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2728"/>
+        <location filename="SandMan.cpp" line="2727"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
         <translation>确定要终止所有沙盒中的所有进程吗？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2729"/>
+        <location filename="SandMan.cpp" line="2728"/>
         <source>Terminate all without asking</source>
         <translation>终止所有且不再询问</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2763"/>
+        <location filename="SandMan.cpp" line="2762"/>
         <source>No Recovery</source>
         <translation>没有恢复文件</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2769"/>
+        <location filename="SandMan.cpp" line="2768"/>
         <source>No Messages</source>
         <translation>没有消息</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2787"/>
+        <location filename="SandMan.cpp" line="2786"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>Sandboxie-Plus 正以便携模式启动，需要创建所需的服务，这将会寻求管理员权限</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2821"/>
+        <location filename="SandMan.cpp" line="2820"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
         <translation>警告：另一代理程序 (可能是 SbieCtrl.exe) 已接管当前 Sandboxie 会话，请将其关闭，然后尝试重新连接以接管控制</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2825"/>
+        <location filename="SandMan.cpp" line="2824"/>
         <source>&lt;b&gt;ERROR:&lt;/b&gt; The Sandboxie-Plus Manager (SandMan.exe) does not have a valid signature (SandMan.exe.sig). Please download a trusted release from the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;official Download page&lt;/a&gt;.</source>
         <translation>&lt;b&gt;错误：&lt;/b&gt;Sandboxie Plus管理器（SandMan.exe）没有有效的签名（SandMan.exe.sig）。请从&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;官方下载&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2933"/>
+        <location filename="SandMan.cpp" line="2932"/>
         <source>Maintenance operation completed</source>
         <translation>维护作业完成</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2953"/>
+        <location filename="SandMan.cpp" line="2952"/>
         <source>Executing maintenance operation, please wait...</source>
         <translation>正在执行操作维护，请稍候...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3066"/>
+        <location filename="SandMan.cpp" line="3065"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
         <translation>在 Plus 视图，此功能已被整合到主沙盒列表中</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3067"/>
+        <location filename="SandMan.cpp" line="3066"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
         <translation>使用“沙盒/组”右键菜单，你可以将沙盒在沙盒组之间移动
 同时，你也可以通过 Alt + 方向键或鼠标拖动来整理列表
 另外，你可以通过右键菜单来新建“沙盒/组”</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3135"/>
+        <location filename="SandMan.cpp" line="3134"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
         <translation>请确认是否要重置已隐藏的消息框(选“是”)，或者仅重置所有日志消息(选“否”)？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3216"/>
+        <location filename="SandMan.cpp" line="3215"/>
         <source>You are about to edit the Templates.ini, this is generally not recommended.
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
@@ -3477,123 +3477,123 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 因为该文件是 Sandboxie 的一部分并且所有的更改会在下次更新时被重置</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3232"/>
+        <location filename="SandMan.cpp" line="3231"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
         <translation>每次该文件被保存时，更改将自动应用</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3233"/>
+        <location filename="SandMan.cpp" line="3232"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
         <translation>编辑器被关闭后，更改将很快自动应用</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3421"/>
+        <location filename="SandMan.cpp" line="3420"/>
         <source>Administrator rights are required for this operation.</source>
         <translation>此操作需要管理员权限</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3422"/>
+        <location filename="SandMan.cpp" line="3421"/>
         <source>Failed to execute: %1</source>
         <translation>执行失败：%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3423"/>
+        <location filename="SandMan.cpp" line="3422"/>
         <source>Failed to connect to the driver</source>
         <translation>连接驱动程序失败</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3424"/>
+        <location filename="SandMan.cpp" line="3423"/>
         <source>Failed to communicate with Sandboxie Service: %1</source>
         <translation>无法与 Sandboxie 服务通信：%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3425"/>
+        <location filename="SandMan.cpp" line="3424"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
         <translation>发现不兼容的 Sandboxie %1，其它兼容的版本：%2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3426"/>
+        <location filename="SandMan.cpp" line="3425"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
         <translation>无法找到 Sandboxie 的安装路径</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3427"/>
+        <location filename="SandMan.cpp" line="3426"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
         <translation>复制沙盒配置 %1: %2 失败</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3428"/>
+        <location filename="SandMan.cpp" line="3427"/>
         <source>A sandbox of the name %1 already exists</source>
         <translation>名为 %1 的沙盒已存在</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3429"/>
+        <location filename="SandMan.cpp" line="3428"/>
         <source>Failed to delete sandbox %1: %2</source>
         <translation>删除沙盒 %1: %2 失败</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3430"/>
+        <location filename="SandMan.cpp" line="3429"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
         <translation>沙盒名称不能超过 32 个字符</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3431"/>
+        <location filename="SandMan.cpp" line="3430"/>
         <source>The sandbox name can not be a device name.</source>
         <translation>沙盒名称不能为设备名称</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3432"/>
+        <location filename="SandMan.cpp" line="3431"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
         <translation>沙盒名称只能包含字母、数字和下划线(显示为空格)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3433"/>
+        <location filename="SandMan.cpp" line="3432"/>
         <source>Failed to terminate all processes</source>
         <translation>终止所有进程失败</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3434"/>
+        <location filename="SandMan.cpp" line="3433"/>
         <source>Delete protection is enabled for the sandbox</source>
         <translation>该沙盒已启用删除保护</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3435"/>
+        <location filename="SandMan.cpp" line="3434"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
         <translation>在删除沙盒内容之前，必须先停止沙盒内的所有进程</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3436"/>
+        <location filename="SandMan.cpp" line="3435"/>
         <source>Error deleting sandbox folder: %1</source>
         <translation>删除沙盒文件夹出错：%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3437"/>
+        <location filename="SandMan.cpp" line="3436"/>
         <source>All processes in a sandbox must be stopped before it can be renamed.</source>
         <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
         <translation>必须先停止沙盒中的所有进程，然后才能对其进行重命名。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3439"/>
+        <location filename="SandMan.cpp" line="3438"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
         <translation>沙盒被删除前必须清空</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3440"/>
+        <location filename="SandMan.cpp" line="3439"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>移动目录 &apos;%1&apos; 到 &apos;%2&apos; 失败</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3441"/>
+        <location filename="SandMan.cpp" line="3440"/>
         <source>Failed to move box image &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>无法将沙盒镜像“%1”移动到“%2”</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3442"/>
+        <location filename="SandMan.cpp" line="3441"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
         <translation>因有进程正在沙盒中运行，此快照操作无法完成</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3443"/>
+        <location filename="SandMan.cpp" line="3442"/>
         <source>Failed to create directory for new snapshot</source>
         <translation>创建新快照的目录失败</translation>
     </message>
@@ -3635,113 +3635,113 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>已超过评估期限！！！</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2748"/>
+        <location filename="SandMan.cpp" line="2747"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
         <translation>请输入「停用必沙程序规则」的持续时间 (单位: 秒)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2928"/>
+        <location filename="SandMan.cpp" line="2927"/>
         <source>Maintenance operation failed (%1)</source>
         <translation>维护作业执行失败 (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3444"/>
+        <location filename="SandMan.cpp" line="3443"/>
         <source>Failed to copy box data files</source>
         <translation>复制沙盒数据文件失败</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3445"/>
+        <location filename="SandMan.cpp" line="3444"/>
         <source>Snapshot not found</source>
         <translation>没有找到快照</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3446"/>
+        <location filename="SandMan.cpp" line="3445"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
         <translation>合并快照目录 &apos;%1&apos; 和 &apos;%2&apos; 出错，快照没有被完全合并</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3447"/>
+        <location filename="SandMan.cpp" line="3446"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
         <translation>移除旧快照的目录 &apos;%1&apos; 失败</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3448"/>
+        <location filename="SandMan.cpp" line="3447"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>无法移除被多个后续快照所共享的快照</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3450"/>
+        <location filename="SandMan.cpp" line="3449"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
         <translation>您未被授权在 &apos;%1&apos; 更新配置</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3451"/>
+        <location filename="SandMan.cpp" line="3450"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
         <translation>在 %2: %3 中设定配置设置 %1 失败</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3452"/>
+        <location filename="SandMan.cpp" line="3451"/>
         <source>Can not create snapshot of an empty sandbox</source>
         <translation>无法为空的沙盒创建快照</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3453"/>
+        <location filename="SandMan.cpp" line="3452"/>
         <source>A sandbox with that name already exists</source>
         <translation>已存在同名沙盒</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3454"/>
+        <location filename="SandMan.cpp" line="3453"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>配置保护密码长度不能超过 64 个字符</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3456"/>
+        <location filename="SandMan.cpp" line="3455"/>
         <source>The content of an unmounted sandbox can not be deleted</source>
         <oldsource>The content of an un mounted sandbox can not be deleted</oldsource>
         <translation>无法删除已卸载的沙盒的内容</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3458"/>
+        <location filename="SandMan.cpp" line="3457"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3460"/>
+        <location filename="SandMan.cpp" line="3459"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
         <translation>导入/导出不可用，无法加载 7z.dll</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3461"/>
+        <location filename="SandMan.cpp" line="3460"/>
         <source>Failed to create the box archive</source>
         <translation>无法创建沙盒存档</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3462"/>
+        <location filename="SandMan.cpp" line="3461"/>
         <source>Failed to open the 7z archive</source>
         <translation>无法打开7z存档</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3463"/>
+        <location filename="SandMan.cpp" line="3462"/>
         <source>Failed to unpack the box archive</source>
         <translation>无法解压沙盒存档</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3464"/>
+        <location filename="SandMan.cpp" line="3463"/>
         <source>The selected 7z file is NOT a box archive</source>
         <translation>所选的 7z 文件不是沙盒存档</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3490"/>
+        <location filename="SandMan.cpp" line="3489"/>
         <source>Operation failed for %1 item(s).</source>
         <translation>%1 项操作失败</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3552"/>
+        <location filename="SandMan.cpp" line="3551"/>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
         <translation>是否在沙盒中的浏览器打开链接 %1 ？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3553"/>
+        <location filename="SandMan.cpp" line="3552"/>
         <source>Remember choice for later.</source>
         <translation>记住选择供之后使用</translation>
     </message>
@@ -4874,8 +4874,27 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1050"/>
+        <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1483"/>
+        <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1485"/>
+        <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1487"/>
+        <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For this build Plus features remain enabled.&lt;/font&gt;</source>
-        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;在此版本中，Plus 附加的高级功能仍是可用的&lt;/font&gt;</translation>
+        <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;在此版本中，Plus 附加的高级功能仍是可用的&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1052"/>
@@ -4904,93 +4923,91 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>这看起来不像是一份凭据。请输入完整的凭据，而不仅仅是其中的一部分</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1483"/>
         <source>This certificate is unfortunately expired.</source>
-        <translation>非常抱歉，此凭据已过期</translation>
+        <translation type="vanished">非常抱歉，此凭据已过期</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1485"/>
         <source>This certificate is unfortunately outdated.</source>
-        <translation>非常抱歉，此凭据已过时</translation>
+        <translation type="vanished">非常抱歉，此凭据已过时</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1488"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1490"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>感谢您对 Sandboxie-Plus 开发工作的支持</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1495"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1497"/>
         <source>This support certificate is not valid.</source>
         <translation>此赞助者凭据无效</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1541"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1543"/>
         <source>Installed</source>
         <translation>已安装</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1567"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1569"/>
         <source>This Addon is mandatory and can not be removed.</source>
         <translation>此加载项是必需的，无法删除。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1576"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1722"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1578"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1724"/>
         <source>Select Directory</source>
         <translation>选择目录</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1605"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1607"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;立即检查&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1682"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1684"/>
         <source>Please enter the new configuration password.</source>
         <translation>请输入新的配置保护密码</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1686"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1688"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>请再次输入新的配置保护密码</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1691"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1693"/>
         <source>Passwords did not match, please retry.</source>
         <translation>输入的密码不一致，请重新输入</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1703"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1705"/>
         <source>Process</source>
         <translation>进程</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1703"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1705"/>
         <source>Folder</source>
         <translation>文件夹</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1713"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1715"/>
         <source>Please enter a program file name</source>
         <translation>请输入一个程序文件名</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1781"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1783"/>
         <source>Please enter the template identifier</source>
         <translation>请输入模板标识符</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1789"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1791"/>
         <source>Error: %1</source>
         <translation>错误：%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1814"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1816"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>你真的想删除选定的本地模板吗？</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1970"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1972"/>
         <source>%1 (Current)</source>
         <translation>%1 (当前)</translation>
     </message>
@@ -7299,27 +7316,27 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="3804"/>
+        <location filename="SandMan.cpp" line="3803"/>
         <source>OK</source>
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3805"/>
+        <location filename="SandMan.cpp" line="3804"/>
         <source>Apply</source>
         <translation>应用</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3806"/>
+        <location filename="SandMan.cpp" line="3805"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3807"/>
+        <location filename="SandMan.cpp" line="3806"/>
         <source>&amp;Yes</source>
         <translation>是(&amp;Y)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3808"/>
+        <location filename="SandMan.cpp" line="3807"/>
         <source>&amp;No</source>
         <translation>否(&amp;N)</translation>
     </message>

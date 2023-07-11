@@ -185,7 +185,7 @@ CIntroPage::CIntroPage(QWidget *parent)
 
     uchar BusinessUse = 2;
     if (!g_Certificate.isEmpty())
-        BusinessUse = g_CertInfo.business ? 1 : 0;
+        BusinessUse = CERT_IS_TYPE(g_CertInfo, eCertBusiness) ? 1 : 0;
     else {
         uchar UsageFlags = 0;
         if (theAPI->GetSecureParam("UsageFlags", &UsageFlags, sizeof(UsageFlags)))
@@ -256,7 +256,7 @@ CCertificatePage::CCertificatePage(QWidget *parent)
     registerField("useCertificate", m_pCertificate, "plainText");
     
     m_pEvaluate = new QCheckBox(tr("Start evaluation without a certificate for a limited period of time."));
-    if (g_CertInfo.evaluation) {
+    if (CERT_IS_TYPE(g_CertInfo, eCertEvaluation)) {
         m_pEvaluate->setEnabled(false);
         m_pEvaluate->setChecked(true);
     }
@@ -627,7 +627,7 @@ void CSBUpdate::initializePage()
     m_pUpdate->setChecked(true);
     m_pStable->setChecked(true);
 
-    m_pBottomLabel->setVisible(!g_CertInfo.valid || g_CertInfo.expired);
+    m_pBottomLabel->setVisible(!g_CertInfo.active || g_CertInfo.expired);
 
     UpdateOptions();
 }
@@ -651,7 +651,7 @@ void CSBUpdate::UpdateOptions()
 
     m_pStable->setEnabled(m_pVersion->isChecked());
     m_pPreview->setEnabled(m_pVersion->isChecked());
-    m_pInsider->setEnabled(g_CertInfo.insider && m_pVersion->isChecked());
+    m_pInsider->setEnabled(CERT_IS_INSIDER(g_CertInfo) && m_pVersion->isChecked());
 
     m_pHotfixes->setEnabled(m_pVersion->isChecked());
 }

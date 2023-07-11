@@ -39,6 +39,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - the main injection detour code is now written in C instead of Assembler and can properly report SbieDll.dll loading errors as SBIE2181
 - improved session agent startup to be more flexible
 - improved SBIEMSG help handling, the link now contains message details allowing to point to a more exact document (if available)
+- updated certificate validation code
 
 ### Fixed
 - fixed uninstall issue in the Sandboxie Classic installer [d1863ff](https://github.com/sandboxie-plus/Sandboxie/commit/d1863ffadfe105c695de71c9e841c2fd568116fe)

@@ -271,7 +271,7 @@ void CBeginPage::initializePage()
 
     m_pLayout->addItem(new QSpacerItem(10, 10, QSizePolicy::Fixed, QSizePolicy::Expanding), row++, 0);
 
-    if (!g_CertInfo.valid || g_CertInfo.expired) {
+    if (!g_CertInfo.active || g_CertInfo.expired) {
         QLabel* pBottomLabel = new QLabel(tr("With a valid <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a> the wizard would be even more powerful. "
             "It could access the <a href=\"https://sandboxie-plus.com/go.php?to=sbie-issue-db\">online solution database</a> to retrieve the latest troubleshooting instructions."));
         connect(pBottomLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));

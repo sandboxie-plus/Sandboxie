@@ -386,6 +386,14 @@ SBIE2114 파일이 너무 커서 샌드박스에 복사할 수 없으므로 액�
 SBIE2115 파일이 너무 커서 샌드박스에 복사할 수 없으므로 읽기 전용으로 열림니다 - %2
 .
 
+2180;pop;inf;01
+SBIE2180 LowLevel.dll 오류 %2
+.
+
+2181;pop;inf;01
+SBIE2181 LowLevel.dll 우회가 SbieDll.dll을 대상 프로세스로 로드하지 못했습니다.
+.
+
 # %2 = Mozilla Firefox
 2191;pop;inf;01
 SBIE2191 %2은(는) Sandboxie에서 실행되는 동안에는 업데이트하면 안됩니다.
@@ -1349,6 +1357,10 @@ Sandboxie-Plus로 업그레이드
 
 3468;txt;01
 Sandboxie-Plus 마이그레이션 안내
+.
+
+3469;txt;01
+Sandboxie-Plus의 새로운 기능
 .
 
 3471;txt;01

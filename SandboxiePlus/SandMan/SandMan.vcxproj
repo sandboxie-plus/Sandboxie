@@ -127,7 +127,7 @@
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <QtInstall>msvc2019_64</QtInstall>
-    <QtModules>core;gui;network;qml;widgets;concurrent;widgets-private;qml-private</QtModules>
+    <QtModules>core;network;gui;widgets;qml;winextras;concurrent;widgets-private;qml-private</QtModules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="QtSettings">
     <QtInstall>msvc2019_64</QtInstall>

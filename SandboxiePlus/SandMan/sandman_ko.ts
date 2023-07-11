@@ -594,7 +594,9 @@ Please browse to the correct user profile directory.</source>
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
 
 You can click Finish to close this wizard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus용 문제 해결 마법사를 사용해 주셔서 감사합니다. 이 과정에서 불편을 끼쳐드린 점 사과드립니다. 추가 질문이 있거나 추가 지원이 필요한 경우 주저하지 말고 연락하십시오. 우리는 도우러 왔습니다. 당신의 이해와 협조에 감사드립니다.
+
+마침을 클릭하여 이 마법사를 닫을 수 있습니다.</translation>
     </message>
     <message>
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process.If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
@@ -1960,12 +1962,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/PopUpWindow.h" line="65"/>
         <source>Troubleshooting</source>
-        <translation type="unfinished"></translation>
+        <translation>문제 해결</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="66"/>
         <source>Start troubleshooting wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>문제 해결 마법사 시작</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="71"/>
@@ -2122,7 +2124,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="162"/>
         <source>PID %1</source>
-        <translation type="unfinished"></translation>
+        <translation>PID %1</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="187"/>
@@ -4725,17 +4727,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Engine/ScriptManager.cpp" line="85"/>
         <source>Fatal error, failed to load troubleshooting instructions!</source>
-        <translation type="unfinished">치명적인 오류입니다. 문제 해결 지침을 로드하지 못했습니다!</translation>
+        <translation>치명적인 오류입니다. 문제 해결 지침을 로드하지 못했습니다!</translation>
     </message>
     <message>
         <location filename="Engine/ScriptManager.cpp" line="158"/>
         <source>Error, troubleshooting instructions duplicated %1 (%2 &lt;-&gt; %3)!</source>
-        <translation type="unfinished">오류, 문제 해결 지침이 %1 (%2 &lt;-&gt; %3) 중복되었습니다!</translation>
+        <translation>오류, 문제 해결 지침이 %1 (%2 &lt;-&gt; %3) 중복되었습니다!</translation>
     </message>
     <message>
         <location filename="Engine/ScriptManager.cpp" line="240"/>
         <source>Downloaded troubleshooting instructions are corrupted!</source>
-        <translation type="unfinished">다운로드한 문제 해결 지침이 손상되었습니다!</translation>
+        <translation>다운로드한 문제 해결 지침이 손상되었습니다!</translation>
     </message>
 </context>
 <context>
@@ -4918,22 +4920,22 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1050"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;현재 빌드 Plus 기능은 활성화된 상태로 유지&lt;/font&gt;되지만 호환성 업데이트 및 문제 해결 데이터베이스를 포함한 샌드박스 라이브 서비스에 더 이상 액세스할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1483"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 인증서는 현재 빌드에 유효하지 않습니다. 새 인증서를 가져오거나 이전 빌드로 다운그레이드해야 합니다.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1485"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 인증서는 만료되었지만 현재 설치된 버전 및 기능에 대해서는 사용 가능한 상태로 유지됩니다. 그러나 호환성 업데이트 및 온라인 문제 해결 데이터베이스를 포함한  Sandboxie-Live 서비스에 더 이상 액세스할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1487"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 인증서는 만료되었습니다. 새 인증서를 받아야 합니다.</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
@@ -5269,7 +5271,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="815"/>
         <source>Sandboxing compatibility is reliant on the configuration, hence attaching the Sandboxie.ini file helps a lot with finding the issue.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스 호환성은 구성에 따라 다르므로 Sandboxie.ini 파일을 첨부하면 문제를 찾는 데 많은 도움이 됩니다.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="818"/>
@@ -5446,7 +5448,7 @@ Processes in this box will be running with a custom process token indicating the
 If you are a Great Supporter on Patreon already, Sandboxie can check online for an update of your certificate.</source>
         <oldsource>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.
 If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate.</oldsource>
-        <translation type="unfinished">이 내부지 빌드에는 GREAT_PATREON, Personal-HUGER 또는 CONFIUTIOR 유형의 특수 인증서가 필요합니다.
+        <translation>이 내부지 빌드에는 GREAT_PATREON, Personal-HUGER 또는 CONFIUTIOR 유형의 특수 인증서가 필요합니다.
 만약 당신이 이미 훌륭한 애국 지지자라면, sandboxie는 당신의 인증서의 업데이트를 온라인으로 확인할 수 있습니다.</translation>
     </message>
     <message>
@@ -7884,7 +7886,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="951"/>
         <source>Hide Sandboxie&apos;s own processes from the task list</source>
         <oldsource>Hide sandboxie&apos;s own processes from the task list</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>작업 목록에서 Sandboxie 자체 프로세스 숨기기</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="961"/>

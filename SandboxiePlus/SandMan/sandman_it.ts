@@ -2301,7 +2301,6 @@ A differenza del canale di anteprima, non contiene cambiamenti non testati, pote
         <location filename="Wizards/SetupWizard.cpp" line="591"/>
         <source>Keep Compatibility Templates up to date and apply hotfixes</source>
         <oldsource>Keep Compatybility Templates up to date and apply hotfixes</oldsource>
-        <translatorcomment>hotfix non ha una traduzione?</translatorcomment>
         <translation>Mantieni modelli di compatibilità aggiornati e applica hotfix</translation>
     </message>
     <message>
@@ -4584,12 +4583,12 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Engine/ScriptManager.cpp" line="158"/>
         <source>Error, troubleshooting instructions duplicated %1 (%2 &lt;-&gt; %3)!</source>
-        <translation type="unfinished">Errore, istruzioni per la risoluzione dei problemi duplicate %1 (%2 &lt;-&gt; %3)!</translation>
+        <translation type="unfinished">Errore, istruzioni duplicate per la risoluzione dei problemi %1 (%2 &lt;-&gt; %3)!</translation>
     </message>
     <message>
         <location filename="Engine/ScriptManager.cpp" line="240"/>
         <source>Downloaded troubleshooting instructions are corrupted!</source>
-        <translation>Le istruzioni per la risoluzione dei problemi scaricate sono corrotte!</translation>
+        <translation>Le istruzioni scaricate per la risoluzione dei problemi sono corrotte!</translation>
     </message>
 </context>
 <context>

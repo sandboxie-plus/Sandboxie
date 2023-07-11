@@ -1,11 +1,17 @@
 ## Sandboxie Build Instructions
 
 Please note: there is another [ReadMe.md](./install/ReadMe.md) file in the [\install](./install/) folder that explains how to create the Sandboxie installers.
-
-1) Sandboxie builds under MS Visual Studio 2019.
-2) Install the Windows Driver Kit (WDK) for Windows 10, version 2004:
+Sandboxie builds under MS Visual Studio 2019.
+1) Acquire [Visual Studio 2019](https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2019-and-other-products)
+2) In the Visual Studio Installer, under the Workloads tab, tick "Desktop development with C++"
+	- This will also install the Windows 10 SDK (10.0.19041) and MFC for latest v142 by default
+3) If you need to compile for other platforms, make sure to check the corresponding items in the side panel
+	- MSVC v142 - VS 2019 C++ {architecture} build tools (Latest)
+	- MFC for latest v142 build tools {architecture}
+4) Install the Windows Driver Kit (WDK) for Windows 10, version 2004 (10.0.19041):
 	https://go.microsoft.com/fwlink/?linkid=2128854
-3) The VS Solution File, Sandbox.sln, is in the source code root. Open this SLN in Visual Studio.
+5) The VS Solution File, Sandbox.sln, is in the source code root. Open this SLN in Visual Studio.
+6) Note that to compile for x64 it's necessary to first compile ´Solution/core/LowLevel
 
 ### Source Projects (in alphabetical order)
 

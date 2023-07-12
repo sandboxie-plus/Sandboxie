@@ -43,7 +43,6 @@ jobs:
 
     - name: 'Cleanup build folder'
       run: |
-        shell: pwsh
         rm ${{ github.workspace }}\* -r -Force
 
     - name: Checkout repository

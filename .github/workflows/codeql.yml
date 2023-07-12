@@ -40,7 +40,7 @@ jobs:
 
     - name: 'Cleanup build folder'
       run: |
-        rmdir /s /q ${{ github.workspace }}\*
+        rmdir /s/q ${{ github.workspace }}\*
 
     - name: Checkout repository
       uses: actions/checkout@v3

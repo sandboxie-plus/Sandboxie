@@ -24,10 +24,10 @@ jobs:
     # Compile Sandboxie Core
     #
 
-      - name: Build Sandboxie x86
+      - name: Build Sandboxie x86 (dll's & svc)
         run: msbuild /t:build Sandboxie\SandboxDll.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
 
-      - name: Build Sandboxie x64
+      - name: Build Sandboxie x64 (all)
         run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
         
     #
@@ -122,13 +122,13 @@ jobs:
     # Compile Sandboxie Core
     #
 
-      - name: Build Sandboxie x86
+      - name: Build Sandboxie x86 (dll's & svc)
         run: msbuild /t:build Sandboxie\SandboxDll.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
 
-      - name: Build Sandboxie ARM64
+      - name: Build Sandboxie ARM64 (all)
         run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=ARM64 -maxcpucount:8
 
-      - name: Build Sandboxie ARM64EC
+      - name: Build Sandboxie ARM64EC (dll)
         run: msbuild /t:build Sandboxie\SandboxDll.sln /p:Configuration="SbieRelease" /p:Platform=ARM64EC -maxcpucount:8
 
     #
@@ -212,7 +212,7 @@ jobs:
     # Compile Sandboxie Core
     #
 
-      - name: Build Sandboxie x86
+      - name: Build Sandboxie x86 (all)
         run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
 
     #

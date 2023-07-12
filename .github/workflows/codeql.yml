@@ -38,6 +38,14 @@ jobs:
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
     steps:
+
+    - name: 'Cleanup build folder'
+      run: |
+        ls -la ./
+        rm -rf ./* || true
+        rm -rf ./.??* || true
+        ls -la ./
+
     - name: Checkout repository
       uses: actions/checkout@v3
 

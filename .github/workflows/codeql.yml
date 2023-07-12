@@ -1,6 +1,7 @@
 name: "CodeQL"
 
 on:
+  workflow_dispatch:
   push:
     branches: [ 'master' ]
     paths:
@@ -38,6 +39,10 @@ jobs:
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
     steps:
+    - name: Cleanup build folder
+      run: |
+        rm -r -Force ${{ github.workspace }}\*
+
     - name: Checkout repository
       uses: actions/checkout@v3
 

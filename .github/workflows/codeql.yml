@@ -38,10 +38,10 @@ jobs:
 
     - name: 'Cleanup build folder'
       run: |
-        ls -la ./
+        ls -al ./
         rm -rf ./* || true
         rm -rf ./.??* || true
-        ls -la ./
+        ls -al ./
 
     - name: Checkout repository
       uses: actions/checkout@v3

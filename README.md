@@ -136,7 +136,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - JNylson - Portuguese and Brazilian Portuguese
 - lufog - Russian
 - sebadamus - Spanish
-- pb1 - Swedish (provided by email)
+- 1FF - Swedish (provided by email)
 - xorcan, fmbxnary, offhub - Turkish
 - SuperMaxusa, lufog - Ukrainian
 - GunGunGun - Vietnamese

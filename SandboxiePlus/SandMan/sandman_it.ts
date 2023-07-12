@@ -3976,8 +3976,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="SbiePlusAPI.cpp" line="1144"/>
         <source>Failed to create update searcher</source>
-        <translatorcomment>??</translatorcomment>
-        <translation type="unfinished">Impossibile creare il cercatore di aggiornamenti</translation>
+        <translation>Impossibile creare l'interfaccia di ricerca</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1150"/>

@@ -30,6 +30,7 @@
 #include "session.h"
 #include "common/my_version.h"
 #include "log_buff.h"
+#include "verify.h"
 
 
 //---------------------------------------------------------------------------
@@ -1325,7 +1326,7 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
                 FeatureFlags |= SBIE_FEATURE_FLAG_WIN32K_HOOK;
 #endif
 
-            if (Driver_Certified) {
+            if (CERT_IS_LEVEL(Verify_CertInfo, eCertStandard)) {
 
                 FeatureFlags |= SBIE_FEATURE_FLAG_CERTIFIED;
 
@@ -1342,14 +1343,13 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
         }
         else if (args->info_class.val == -1) {
 
-            extern ULONGLONG Verify_CertInfo;
             if (args->info_len.val >= sizeof(ULONGLONG)) {
                 ULONGLONG* data = args->info_data.val;
-                *data = Verify_CertInfo;
+                *data = Verify_CertInfo.State;
             }
             else if (args->info_len.val == sizeof(ULONG)) {
                 ULONG* data = args->info_data.val;
-                *data = (ULONG)(Verify_CertInfo & 0xFFFFFFFF); // drop optional data
+                *data = (ULONG)(Verify_CertInfo.State & 0xFFFFFFFF); // drop optional data
             }
             else
                 status = STATUS_BUFFER_TOO_SMALL;

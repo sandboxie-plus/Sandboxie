@@ -74,8 +74,6 @@ enum ECertType {
 
     eCertEvaluation     = 0b11100
 };
-
-#define CERT_IS_TYPE(cert,t)        ((cert.type & 0b11100) == t)
         
 enum ECertLevel {
     eCertNoLevel        = 0b000,
@@ -84,5 +82,9 @@ enum ECertLevel {
     eCertMaxLevel       = 0b111,
 };
 
+#define CERT_IS_TYPE(cert,t)        ((cert.type & 0b11100) == t)
 #define CERT_IS_SUBSCRIPTION(cert)  (CERT_IS_TYPE(cert, eCertBusiness) || CERT_IS_TYPE(cert, eCertSubscription) || cert.type == eCertEntryPatreon || CERT_IS_TYPE(cert, eCertEvaluation))
 #define CERT_IS_INSIDER(cert)		(CERT_IS_TYPE(cert, eCertEternal) || cert.type == eCertGreatPatreon)
+#define CERT_IS_LEVEL(cert,l)       (Verify_CertInfo.active && cert.level >= l)
+
+extern SCertInfo Verify_CertInfo;

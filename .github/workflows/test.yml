@@ -160,7 +160,6 @@ jobs:
       - name: Build SbieShell ARM64
         run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=ARM64
 
-
     #
     # Compile Sandboxie Tools
     #
@@ -168,7 +167,6 @@ jobs:
       - name: Build Sandboxie-Tools ARM64
         run: msbuild /t:build SandboxieTools\SandboxieTools.sln /p:Configuration="Release" /p:Platform=ARM64 -maxcpucount:8
         
-
     #
     # Merge everything together
     #
@@ -238,7 +236,6 @@ jobs:
     # Compile Sandboxie Plus
     #
 
-
       - name: Build Sandboxie-Plus x86
         run: SandboxiePlus\qmake_plus.cmd Win32
 
@@ -249,7 +246,6 @@ jobs:
       - name: Build Sandboxie-Tools x86
         run: msbuild /t:build SandboxieTools\SandboxieTools.sln /p:Configuration="Release" /p:Platform=x86 -maxcpucount:8
         
-
     #
     # Merge everything together
     #

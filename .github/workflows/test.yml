@@ -195,7 +195,7 @@ jobs:
 
 
 
-  Build_32-bit:
+  Build_x86:
     runs-on: windows-2019
     timeout-minutes: 45
 

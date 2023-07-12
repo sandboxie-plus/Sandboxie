@@ -24,6 +24,9 @@ jobs:
     # Compile Sandboxie Core
     #
 
+      - name: Build Sandboxie x86
+        run: msbuild /t:build Sandboxie\SandboxDll.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
+
       - name: Build Sandboxie x64
         run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
         
@@ -31,16 +34,16 @@ jobs:
     # Prepare Qt Framework
     #
 
-      - name: Install Qt6 x64
-        uses: jurplel/install-qt-action@v3
-        with:
-      #    version: '6.2.4'
-          version: '6.3.1'
-      #    dir: ..
-      #    arch:  ${{ matrix.qt-target }}
-          arch:  'win64_msvc2019_64'
-      #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
-          cache: true
+#      - name: Install Qt6 x64
+#        uses: jurplel/install-qt-action@v3
+#        with:
+#      #    version: '6.2.4'
+#          version: '6.3.1'
+#      #    dir: ..
+#      #    arch:  ${{ matrix.qt-target }}
+#          arch:  'win64_msvc2019_64'
+#      #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
+#          cache: true
 
       - name: Install Qt5 x64
         uses: jurplel/install-qt-action@v3
@@ -78,8 +81,8 @@ jobs:
     # Merge everything together
     #
 
-      - name: Add Windows 7 compatible Qt6 DLLs
-        run: Installer\fix_qt6_win7.cmd
+#      - name: Add Windows 7 compatible Qt6 DLLs
+#        run: Installer\fix_qt6_win7.cmd
 
       - name: Merging Builds
         run: Installer\merge_builds.cmd
@@ -119,11 +122,14 @@ jobs:
     # Compile Sandboxie Core
     #
 
+      - name: Build Sandboxie x86
+        run: msbuild /t:build Sandboxie\SandboxDll.sln /p:Configuration="SbieRelease" /p:Platform=Win32 -maxcpucount:8
+
       - name: Build Sandboxie ARM64
         run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=ARM64 -maxcpucount:8
 
       - name: Build Sandboxie ARM64EC
-        run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=ARM64EC -maxcpucount:8
+        run: msbuild /t:build Sandboxie\SandboxDll.sln /p:Configuration="SbieRelease" /p:Platform=ARM64EC -maxcpucount:8
 
     #
     # Prepare Qt Framework

@@ -210,7 +210,7 @@
         <location filename="Wizards/BoxAssistant.cpp" line="275"/>
         <source>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerful. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retrieve the latest troubleshooting instructions.</source>
         <oldsource>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerfull. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retriev the latest troubleshooting instructions.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>通过一张有效的 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;支持者证书&lt;/a&gt; 向导程序能变得更加强大。 其将能够访问 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;在线解决方案数据库&lt;/a&gt; 来获取最新的故障排除指导。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="313"/>
@@ -595,7 +595,9 @@ Please browse to the correct user profile directory.</oldsource>
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
 
 You can click Finish to close this wizard.</source>
-        <translation type="unfinished"></translation>
+        <translation>感谢您使用 Sandboxie Plus 的故障排除向导。对于在此过程中给您带来的不便，我们深表歉意。如果您有任何其他问题或需要进一步帮助，请随时联系。我们是来帮忙的。感谢您的理解与合作。
+
+您可以单击“完成”关闭此向导。</translation>
     </message>
     <message>
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process.If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
@@ -1912,12 +1914,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/PopUpWindow.h" line="65"/>
         <source>Troubleshooting</source>
-        <translation type="unfinished"></translation>
+        <translation>故障排除</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="66"/>
         <source>Start troubleshooting wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>启动故障排除向导</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="71"/>
@@ -2074,7 +2076,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="162"/>
         <source>PID %1</source>
-        <translation type="unfinished"></translation>
+        <translation>进程 PID %1</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="187"/>
@@ -4635,17 +4637,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Engine/ScriptManager.cpp" line="85"/>
         <source>Fatal error, failed to load troubleshooting instructions!</source>
-        <translation type="unfinished">致命错误，无法加载故障排除说明！</translation>
+        <translation>致命错误，无法加载故障排除指导！</translation>
     </message>
     <message>
         <location filename="Engine/ScriptManager.cpp" line="158"/>
         <source>Error, troubleshooting instructions duplicated %1 (%2 &lt;-&gt; %3)!</source>
-        <translation type="unfinished">错误，故障排除说明重复%1 (%2 &lt;-&gt; %3)!</translation>
+        <translation>错误，故障排除指导重复%1 (%2 &lt;-&gt; %3)!</translation>
     </message>
     <message>
         <location filename="Engine/ScriptManager.cpp" line="240"/>
         <source>Downloaded troubleshooting instructions are corrupted!</source>
-        <translation type="unfinished">下载的故障排除说明已损坏！</translation>
+        <translation>下载的故障排除指导已损坏！</translation>
     </message>
 </context>
 <context>
@@ -5122,7 +5124,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/StackView.cpp" line="17"/>
         <source>#|Symbol</source>
-        <translation type="unfinished">#|符号</translation>
+        <translation>#|符号</translation>
     </message>
 </context>
 <context>
@@ -5150,7 +5152,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="815"/>
         <source>Sandboxing compatibility is reliant on the configuration, hence attaching the Sandboxie.ini file helps a lot with finding the issue.</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒的兼容性取决于配置，因此附加 Sandboxe.ini 文件有助于发现问题。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="818"/>
@@ -5327,8 +5329,8 @@ Processes in this box will be running with a custom process token indicating the
 If you are a Great Supporter on Patreon already, Sandboxie can check online for an update of your certificate.</source>
         <oldsource>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.
 If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate.</oldsource>
-        <translation type="unfinished">此 Insider 内部版本需要 GREAT_PATREON 、 PERSONAL-HUGE 或 CONTRIBUTOR 类型的特殊证书。
-如果你已经在 Patreaon 是 Great Supporter 支持者，Sandboxie可以在线检测你的证书更新。</translation>
+        <translation>此 Insider 内部版本需要 GREAT_PATREON 、 PERSONAL-HUGE 或 CONTRIBUTOR 类型的特殊证书。
+如果你已经在 Patreaon 是 Great Supporter 类型的支持者，Sandboxie可以在线检测你的证书更新。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="51"/>
@@ -5339,7 +5341,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/SupportDialog.cpp" line="136"/>
         <source>This is a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;exclusive Insider build&lt;/a&gt; of Sandboxie-Plus it is only available to &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon Supporters&lt;/a&gt; on higher tiers as well as to project contributors and owners of a HUGE supporter certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>这是一份 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider独占版本构建&lt;/a&gt; 的Sandboxie Plus。其仅对于等级更高的（如项目贡献者，HUGE supporter证书拥有者）的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon 支持者&lt;/a&gt; 可用。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="145"/>
@@ -7660,7 +7662,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="327"/>
         <source>Sandboxie may be issue &lt;a href=&quot;sbie://docs/sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie 可能会将 &lt;a href= &quot;sbie://docs/ sbiemessages&quot;&gt;SBIE 消息&lt;/a&gt;记录到信息日志中，并以弹出窗口的形式通知&lt;br /&gt;有些消息仅仅是信息性的，通知一个普通的或某些特殊的事件发生，其它消息表明一个错误状况&lt;br /&gt;你可以使用此列表来隐藏所设定的“SBIE 消息”，使其不被弹出：</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="340"/>
@@ -8112,7 +8114,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <location filename="Forms/SettingsWindow.ui" line="951"/>
         <source>Hide Sandboxie&apos;s own processes from the task list</source>
         <oldsource>Hide sandboxie&apos;s own processes from the task list</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>从任务列表中隐藏Sandboxie自身进程</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1153"/>

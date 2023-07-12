@@ -16,7 +16,7 @@ on:
 
 jobs:
   analyze:
-    name: Analyze
+    name: Analyze ${{ matrix.configuration }}-${{ matrix.platform }}
     runs-on: windows-2019
     timeout-minutes: 45
 
@@ -28,7 +28,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        name: ${{ matrix.platform }}-${{ matrix.configuration }}
         include:
            - platform: Win32
              configuration: SbieRelease

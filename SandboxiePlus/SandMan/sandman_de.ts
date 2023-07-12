@@ -1165,8 +1165,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="19"/>
         <source>This option requires an active supporter certificate</source>
-        <oldsource>This option requires a valid supporter certificate</oldsource>
-        <translation type="unfinished">Diese Option benötigt ein gültiges Unterstützerzertifikat</translation>
+        <translation>Diese Option benötigt ein aktives Unterstützerzertifikat</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="22"/>

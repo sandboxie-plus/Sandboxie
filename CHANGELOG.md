@@ -5,11 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
-
-
-
-## [1.10.0 / 5.65.0] - 2023-07-??
+## [1.10.0 / 5.65.0] - 2023-07-12
 
 ### Added
 - added box scripting engine to make SandMan more flexible

@@ -38,10 +38,7 @@ jobs:
 
     - name: 'Cleanup build folder'
       run: |
-        ls -al ./
-        rm -rf ./* || true
-        rm -rf ./.??* || true
-        ls -al ./
+        rm -Recurse ${{github.workspace}}\*
 
     - name: Checkout repository
       uses: actions/checkout@v3

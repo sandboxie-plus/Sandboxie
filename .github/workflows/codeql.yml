@@ -28,9 +28,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        platform2: [ Win32, x64 ]
         include:
-           - platform: Win32
-             configuration: SbieRelease
            - platform: x64
              configuration: SbieRelease
         language: [ 'cpp' ]
@@ -82,7 +81,7 @@ jobs:
         # queries: security-extended,security-and-quality
 
     - name: Build Sandboxie
-      run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }}
+      run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=${{ matrix.platform2 }}
 
     - name: Build Sandboxie-Plus x64
       run: SandboxiePlus\qmake_plus.cmd ${{ matrix.platform }}

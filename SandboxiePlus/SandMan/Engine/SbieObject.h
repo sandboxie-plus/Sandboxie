@@ -156,7 +156,7 @@ public:
         QMetaObject::invokeMethod(m_pObject, "LogMessage", Qt::BlockingQueuedConnection, Q_ARG(const QVariant&, Message), Q_ARG(bool, bNotify));
     }
 
-    Q_INVOKABLE bool isCertValid();
+    Q_INVOKABLE bool testFeature(const QString& name);
     
 protected:
     CBoxEngine* m_pEngine;

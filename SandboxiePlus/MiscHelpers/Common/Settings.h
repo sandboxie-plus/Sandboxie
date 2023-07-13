@@ -97,7 +97,7 @@ public:
 		virtual bool IsBlob() const {return true;}
 	};
 
-	CSettings(const QString& AppDir, const QString& AppName, bool bShared = false, QMap<QString, SSetting> DefaultValues = QMap<QString, SSetting>(), QObject* qObject = NULL);
+	CSettings(const QString& AppDir, const QString& AppName, QMap<QString, SSetting> DefaultValues = QMap<QString, SSetting>(), QObject* qObject = NULL);
 	virtual ~CSettings();
 
 	void				DelValue(const QString& key);

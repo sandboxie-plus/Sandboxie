@@ -124,6 +124,4 @@ ULONG Util_CaptureStack(_Out_ PVOID* Frames, _In_ ULONG Count);
 //---------------------------------------------------------------------------
 
 
-extern BOOLEAN Driver_Certified;
-
 #endif // _MY_UTIL_H

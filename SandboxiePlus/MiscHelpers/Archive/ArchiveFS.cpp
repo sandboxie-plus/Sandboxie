@@ -164,7 +164,7 @@ QAbstractFileEngine::Iterator *C7zFileEngine::beginEntryList(QDir::Filters filte
     for (int i = 0; i < _pArchive->FileCount(); i++) {
         QString Path = _pArchive->FileProperty(i, "Path").toString();
         if (!_filename.isEmpty()) {
-            if (!Path.startsWith(_filename))
+            if (!Path.startsWith(QString(_filename).replace("/", "\\")))
                 continue;
             Path = Path.mid(_filename.length() + 1);
         }

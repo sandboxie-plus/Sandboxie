@@ -221,7 +221,7 @@ void CSbieObject::LogMessage(const QVariant& Message, bool bNotify)
 		theGUI->OnLogMessage(Message.toString(), bNotify);
 }
 
-bool JSbieObject::isCertValid()
+bool JSbieObject::testFeature(const QString& name)
 {
-	return g_CertInfo.valid;
+	return theAPI->GetFeatureStr().contains(name, Qt::CaseInsensitive);
 }

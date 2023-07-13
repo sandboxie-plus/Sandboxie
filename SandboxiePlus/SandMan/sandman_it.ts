@@ -202,7 +202,7 @@
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="232"/>
         <source>Welcome to the Troubleshooting Wizard for Sandboxie-Plus. This interactive assistant is designed to help you in resolving sandboxing issues.</source>
-        <translation>Benvenuto nella procedura di risoluzione problemi guidata per Sandboxie Plus. Questo assistente interattivo è progettato per aiutarti a risolvere problemi con l&apos;isolamento.</translation>
+        <translation>Benvenuto nella procedura guidata di risoluzione problemi per Sandboxie Plus. Questo assistente interattivo è progettato per aiutarti a risolvere problemi con l&apos;isolamento.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="275"/>
@@ -221,7 +221,7 @@
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="28"/>
         <source>Troubleshooting Wizard</source>
-        <translation>Risoluzione problemi guidata</translation>
+        <translation>Risoluzione guidata problemi</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="34"/>
@@ -572,7 +572,7 @@ Si prega di consultare la directory del profilo utente corretta.</translation>
 
 You can click Finish to close this wizard.</source>
         <translatorcomment>&quot;Chiudere questa procedura guidata&quot; non sono sicuro suoni bene</translatorcomment>
-        <translation>Grazie per aver utilizzato la procedura di risoluzione problemi guidata per Sandboxie Plus. Ci scusiamo per eventuali problemi riscontrati durante il processo. Se si hanno ulteriori domande o si necessita di ulteriore assistenza, non esitare a contattarci. Siamo qui per aiutare. Grazie per la comprensione e la cooperazione.
+        <translation>Grazie per aver utilizzato la procedura di risoluzione problemi per Sandboxie Plus. Ci scusiamo per eventuali problemi riscontrati durante il processo. Se si hanno ulteriori domande o si necessita di ulteriore assistenza, non esitare a contattarci. Siamo qui per aiutare. Grazie per la comprensione e la cooperazione.
 
 Clicca su Fine per chiudere questa finestra.</translation>
     </message>
@@ -2272,7 +2272,7 @@ Errore: </translation>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="571"/>
         <source>In the Preview Channel - with newest experimental changes</source>
-        <translation>Nel canale di anteprima - contiene le notivà sperimentali più recenti</translation>
+        <translation>Nel canale di anteprima - contiene le novità sperimentali più recenti</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="572"/>
@@ -2318,7 +2318,7 @@ A differenza del canale di anteprima, non contiene cambiamenti non testati, pote
         <location filename="Wizards/SetupWizard.cpp" line="597"/>
         <source>Check for latest troubleshooting scripts for the troubleshooting wizard.</source>
         <oldsource>Check for latest troubleshooting scripts for the troubleshooting wizars.</oldsource>
-        <translation>Verifica la presenza di script per la procedura di risoluzione problemi guidata più recenti.</translation>
+        <translation>Verifica la presenza di script più recenti per la procedura di risoluzione problemi.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="601"/>
@@ -2736,7 +2736,7 @@ A differenza del canale di anteprima, non contiene cambiamenti non testati, pote
     <message>
         <location filename="SandMan.cpp" line="471"/>
         <source>Troubleshooting Wizard</source>
-        <translation>Risoluzione problemi guidata</translation>
+        <translation>Risoluzione guidata problemi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="475"/>
@@ -2901,7 +2901,7 @@ A differenza del canale di anteprima, non contiene cambiamenti non testati, pote
     <message>
         <location filename="SandMan.cpp" line="862"/>
         <source>Toolbar Items</source>
-        <translation>Oggetti barra degli strumenti</translation>
+        <translation>Elementi barra degli strumenti</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="864"/>
@@ -3502,7 +3502,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
         <location filename="SandMan.cpp" line="3436"/>
         <source>All processes in a sandbox must be stopped before it can be renamed.</source>
         <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
-        <translation>Tutti i processi dell&apos;area virtuale devono essere interrotti prima che possa essere rinominata</translation>
+        <translation>Tutti i processi dell&apos;area virtuale devono essere interrotti prima che possa essere rinominata.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3438"/>
@@ -3517,7 +3517,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="SandMan.cpp" line="3440"/>
         <source>Failed to move box image &apos;%1&apos; to &apos;%2&apos;</source>
-        <translation>Impossibile muovere l&apos;immagine dell&apos;area virtuale &apos;%1&apos; in &apos;%2&apos;</translation>
+        <translation>Impossibile spostare l&apos;immagine dell&apos;area virtuale &apos;%1&apos; in &apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3441"/>
@@ -5140,7 +5140,7 @@ Prima di inviare, è possibile visualizzare i log nella schermata principale.</t
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="855"/>
         <source>If you wish to submit an issue report, please review the report below and click &apos;Finish&apos;.</source>
-        <translation>Se si desidera inviare una segnalazione del problema, controllare il riassunto sottostante e cliccare &quot;Fine&quot;.</translation>
+        <translation>Se si desidera inviare una segnalazione del problema, controllare il riassunto sottostante e cliccare su &quot;Fine&quot;.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="954"/>

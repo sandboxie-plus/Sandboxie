@@ -29,7 +29,7 @@ jobs:
 
       - name: Build Sandboxie x64 (all)
         run: msbuild /t:build Sandboxie\Sandbox.sln /p:Configuration="SbieRelease" /p:Platform=x64 -maxcpucount:8
-        
+
     #
     # Prepare Qt Framework
     #
@@ -91,6 +91,7 @@ jobs:
         run: Installer\get_assets.cmd
 
       - name: Upload installer assets
+        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
         uses: actions/upload-artifact@v3
         with:
           name: Assets
@@ -99,13 +100,14 @@ jobs:
           retention-days: 60
 
       - name: Upload Sandboxie x64
+        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
         uses: actions/upload-artifact@v3
         with:
           name: Sandboxie_x64
           path: |
             Installer/SbiePlus_x64/*
           retention-days: 60
-      
+
 
   Build_ARM64:
     runs-on: windows-2019
@@ -166,7 +168,7 @@ jobs:
 
       - name: Build Sandboxie-Tools ARM64
         run: msbuild /t:build SandboxieTools\SandboxieTools.sln /p:Configuration="Release" /p:Platform=ARM64 -maxcpucount:8
-        
+
     #
     # Merge everything together
     #
@@ -175,13 +177,13 @@ jobs:
         run: Installer\merge_builds.cmd
 
       - name: Upload Sandboxie ARM64
+        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
         uses: actions/upload-artifact@v3
         with:
           name: Sandboxie_ARM64
           path: |
             Installer/SbiePlus_a64/*
           retention-days: 60
-
 
 
   Build_x86:
@@ -234,7 +236,7 @@ jobs:
 
       - name: Build Sandboxie-Tools x86
         run: msbuild /t:build SandboxieTools\SandboxieTools.sln /p:Configuration="Release" /p:Platform=x86 -maxcpucount:8
-        
+
     #
     # Merge everything together
     #
@@ -246,6 +248,7 @@ jobs:
         run: Installer\merge_builds.cmd
 
       - name: Upload Sandboxie x86
+        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
         uses: actions/upload-artifact@v3
         with:
           name: Sandboxie_x86

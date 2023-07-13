@@ -5199,11 +5199,6 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation>Tack för att du stöder utvecklingen av Sandboxie-Plus.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1497"/>
-        <source>This support certificate is not valid.</source>
-        <translation>Detta supportcertifikat är inte giltigt.</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="1543"/>
         <source>Installed</source>
         <translation>Installlerad</translation>

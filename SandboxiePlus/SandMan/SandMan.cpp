@@ -2139,9 +2139,9 @@ void CSandMan::OnStatusChanged()
 
 		uchar UsageFlags = 0;
 		if (theAPI->GetSecureParam("UsageFlags", &UsageFlags, sizeof(UsageFlags))) {
-			if (!g_CertInfo.business) {
+			if (!CERT_IS_TYPE(g_CertInfo, eCertBusiness)) {
 				if ((UsageFlags & (2 | 1)) != 0) {
-					if(g_CertInfo.valid)
+					if(g_CertInfo.active)
 						appTitle.append(tr(" for Personal use"));
 					else
 						appTitle.append(tr("   -   for Non-Commercial use ONLY"));
@@ -2545,7 +2545,7 @@ void CSandMan::SaveMessageLog(QIODevice* pFile)
 
 bool CSandMan::CheckCertificate(QWidget* pWidget) 
 {
-	if (g_CertInfo.valid)
+	if (g_CertInfo.active)
 		return true;
 
 	//if ((g_FeatureFlags & CSbieAPI::eSbieFeatureCert) == 0) {
@@ -2572,13 +2572,8 @@ bool CSandMan::CheckCertificate(QWidget* pWidget)
 void CSandMan::UpdateCertState()
 {
 	g_CertInfo.State = theAPI->GetCertState();
-	if (g_CertInfo.valid)
+	if (g_CertInfo.active)
 	{
-		auto Args = GetArguments(g_Certificate, L'\n', L':');
-		QString Type = Args.value("TYPE").toUpper();
-		if (Type.contains("CONTRIBUTOR") || Type.contains("GREAT_PATREON") || Type.contains("HUGE"))
-			g_CertInfo.insider = true;
-
 		// behave as if there would be no certificate at all
 		if (theConf->GetBool("Debug/IgnoreCertificate", false))
 			g_CertInfo.State = 0;
@@ -2594,7 +2589,7 @@ void CSandMan::UpdateCertState()
 
 			// simulate a subscription type certificate having expired 
 			if (theConf->GetBool("Debug/CertFakeOld", false)) {
-				g_CertInfo.valid = 0;
+				g_CertInfo.active = 0;
 				g_CertInfo.expired = 1;
 			}
 
@@ -2607,22 +2602,22 @@ void CSandMan::UpdateCertState()
 			// simulate a perpetual use certificate being outside the update window
 			// and having been applied to a version built after the update window has ended
 			if (theConf->GetBool("Debug/CertFakeOutdated", false)) {
-				g_CertInfo.valid = 0;
+				g_CertInfo.active = 0;
 				g_CertInfo.expired = 1;
 				g_CertInfo.outdated = 1;
 			}
 
 			// simulate this being a business certificate - only contributors and other insiders
-			if (g_CertInfo.insider && theConf->GetBool("Debug/CertFakeBusiness", false))
-				g_CertInfo.business = 1;
+			if (CERT_IS_INSIDER(g_CertInfo) && theConf->GetBool("Debug/CertFakeBusiness", false))
+				g_CertInfo.type = eCertBusiness;
 
 			// simulate this being a evaluation certificate
 			if (theConf->GetBool("Debug/CertFakeEvaluation", false))
-				g_CertInfo.evaluation = 1;
+				g_CertInfo.type = eCertBusiness;
 		}
 	}
 
-	if (g_CertInfo.evaluation)
+	if (CERT_IS_TYPE(g_CertInfo, eCertEvaluation))
 	{
 		if (g_CertInfo.expired)
 			OnLogMessage(tr("The evaluation period has expired!!!"));

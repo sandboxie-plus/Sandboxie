@@ -15,8 +15,8 @@ public:
 	CCertBadge(QWidget* parent = NULL): QLabel(parent) 
 	{
 		setPixmap(QPixmap(":/Actions/Cert.png").scaled(16, 16, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-		if (!g_CertInfo.valid) {
-			setToolTip(COptionsWindow::tr("This option requires a valid supporter certificate"));
+		if (!g_CertInfo.active) {
+			setToolTip(COptionsWindow::tr("This option requires an active supporter certificate"));
 			setCursor(Qt::PointingHandCursor);
 		} else {
 			setToolTip(COptionsWindow::tr("Supporter exclusive option"));
@@ -26,7 +26,7 @@ public:
 protected:
 	void mousePressEvent(QMouseEvent* event)
 	{
-		if(!g_CertInfo.valid)
+		if(!g_CertInfo.active)
 			theGUI->OpenUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert"));
 	}
 };
@@ -38,6 +38,7 @@ void COptionsWindow__AddCertIcon(QWidget* pOriginalWidget)
 	pLayout->setContentsMargins(0, 0, 0, 0);
 	pLayout->setSpacing(0);
 	pLayout->addWidget(new CCertBadge());
+	pLayout->setAlignment(Qt::AlignLeft);
 	pOriginalWidget->parentWidget()->layout()->replaceWidget(pOriginalWidget, pWidget);
 	pLayout->insertWidget(0, pOriginalWidget);
 }
@@ -64,7 +65,7 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.lblBoxInfo, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 
 	ui.lblSupportCert->setVisible(false);
-	if (!g_CertInfo.valid)
+	if (!g_CertInfo.active)
 	{
 		ui.lblSupportCert->setVisible(true);
 		connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));

@@ -1025,8 +1025,8 @@ void CSettingsWindow::LoadSettings()
 	ui.chkUpdateAddons->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/CheckForAddons", 2)));
 	ui.chkUpdateIssues->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/CheckForIssues", 2)));
 
-	//ui.chkUpdateTemplates->setEnabled(g_CertInfo.valid && !g_CertInfo.expired);
-	ui.chkUpdateIssues->setEnabled(g_CertInfo.valid && !g_CertInfo.expired);
+	//ui.chkUpdateTemplates->setEnabled(g_CertInfo.active && !g_CertInfo.expired);
+	ui.chkUpdateIssues->setEnabled(g_CertInfo.active && !g_CertInfo.expired);
 }
 
 void CSettingsWindow::UpdateCert()
@@ -1043,7 +1043,7 @@ void CSettingsWindow::UpdateCert()
 		if (g_CertInfo.expired) {
 			palette.setColor(QPalette::Base, QColor(255, 255, 192));
 			QString infoMsg = tr("This supporter certificate has expired, please <a href=\"sbie://update/cert\">get an updated certificate</a>.");
-			if (g_CertInfo.valid) {
+			if (g_CertInfo.active) {
 				if (g_CertInfo.grace_period)
 					infoMsg.append(tr("<br /><font color='red'>Plus features will be disabled in %1 days.</font>").arg((g_CertInfo.expirers_in_sec + 30*60*60*24) / (60*60*24)));
 				else if (!g_CertInfo.outdated) // must be an expiren medium or large cert on an old build
@@ -1069,7 +1069,7 @@ void CSettingsWindow::UpdateCert()
 		ui.txtCertificate->setPalette(palette);
 	}
 
-	ui.radInsider->setEnabled(g_CertInfo.insider);
+	ui.radInsider->setEnabled(CERT_IS_INSIDER(g_CertInfo));
 }
 
 void CSettingsWindow::UpdateUpdater()
@@ -1083,7 +1083,7 @@ void CSettingsWindow::UpdateUpdater()
 	}
 	else {
 		ui.cmbInterval->setEnabled(true);
-		if (ui.radStable->isChecked() && (!g_CertInfo.valid || g_CertInfo.expired)) {
+		if (ui.radStable->isChecked() && (!g_CertInfo.active || g_CertInfo.expired)) {
 			ui.cmbUpdate->setEnabled(false);
 			ui.cmbUpdate->setCurrentIndex(ui.cmbUpdate->findData("ignore"));
 			ui.lblRevision->setText(tr("Supporter certificate required"));
@@ -1481,7 +1481,7 @@ bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* w
 		if (g_CertInfo.expired || g_CertInfo.outdated) {
 			if(g_CertInfo.outdated)
 				QMessageBox::information(widget, "Sandboxie-Plus", tr("This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build."));
-			else if(g_CertInfo.valid && !g_CertInfo.grace_period)
+			else if(g_CertInfo.active && !g_CertInfo.grace_period)
 				QMessageBox::information(widget, "Sandboxie-Plus", tr("Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database."));
 			else
 				QMessageBox::information(widget, "Sandboxie-Plus", tr("This certificate has unfortunately expired, you need to get a new certificate."));

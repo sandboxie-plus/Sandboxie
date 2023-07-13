@@ -38,6 +38,7 @@
 #include "thread.h"
 #include "wfp.h"
 #include "common/my_version.h"
+#include "verify.h"
 
 
 //---------------------------------------------------------------------------
@@ -755,7 +756,7 @@ _FX PROCESS *Process_Create(
     // check certificate
     //
 
-    if (!Driver_Certified && !proc->image_sbie) {
+    if (!CERT_IS_LEVEL(Verify_CertInfo, eCertStandard) && !proc->image_sbie) {
 
         const WCHAR* exclusive_setting = NULL;
         if (proc->use_security_mode)
@@ -1209,7 +1210,7 @@ _FX BOOLEAN Process_NotifyProcess_Create(
         BOX* breakout_box = NULL;
 
         if (box && Process_IsBreakoutProcess(box, ImagePath)) {
-            if(!Driver_Certified)
+            if(!CERT_IS_LEVEL(Verify_CertInfo, eCertStandard))
                 Log_Msg_Process(MSG_6004, box->name, L"BreakoutProcess", box->session_id, CallerId);
             else {
                 UNICODE_STRING image_uni;

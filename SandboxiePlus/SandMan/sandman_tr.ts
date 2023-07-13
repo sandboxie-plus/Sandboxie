@@ -67,7 +67,7 @@
         <location filename="AddonManager.cpp" line="277"/>
         <source>Addon Installation Failed!</source>
         <oldsource>Addon Instalation Failed!</oldsource>
-        <translation type="unfinished">Eklenti Kurulumu Başarısız!</translation>
+        <translation>Eklenti Kurulumu Başarısız!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="285"/>
@@ -228,18 +228,6 @@
         <location filename="Wizards/BoxAssistant.cpp" line="104"/>
         <source>Debugger Enabled</source>
         <translation>Hata Ayıklayıcı Etkin</translation>
-    </message>
-    <message>
-        <source>Downloaded troubleshooting instructions are corrupted!</source>
-        <translation type="vanished">İndirilen sorun giderme talimatları bozuk!</translation>
-    </message>
-    <message>
-        <source>Fatal error, failed to load troubleshooting instructions!</source>
-        <translation type="vanished">Önemli hata, sorun giderme talimatları yüklenemedi!</translation>
-    </message>
-    <message>
-        <source>Error, troubleshooting instructions duplicated %1 (%2 &lt;-&gt; %3)!</source>
-        <translation type="vanished">Hata, sorun giderme talimatları yinelendi %1 (%2 &lt;-&gt; %3)!</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="159"/>
@@ -573,13 +561,7 @@ Lütfen doğru kullanıcı profili dizinine göz atın.</translation>
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
 
 You can click Finish to close this wizard.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process.If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
-
-You can click Finish to close this wizard.</source>
-        <translation type="vanished">Sandboxie-Plus Sorun Giderme Sihirbazını kullandığınız için teşekkür ederiz. Bu süreçte yaşamış olabileceğiniz her türlü rahatsızlıktan dolayı özür dileriz, ancak başka sorularınız varsa veya herhangi bir yardıma ihtiyacınız olursa, lütfen bizimle iletişime geçmekten çekinmeyin. Yardım etmek için buradayız. İşbirliğiniz ve anlayışınız için teşekkür ederiz.
+        <translation>Sandboxie-Plus Sorun Giderme Sihirbazını kullandığınız için teşekkür ederiz. Bu süreçte yaşamış olabileceğiniz her türlü rahatsızlıktan dolayı özür dileriz, ancak başka sorularınız varsa veya herhangi bir yardıma ihtiyacınız olursa, lütfen bizimle iletişime geçmekten çekinmeyin. Yardım etmek için buradayız. İşbirliğiniz ve anlayışınız için teşekkür ederiz.
 
 Bu sihirbazı kapatmak için Son&apos;a tıklayabilirsiniz.</translation>
     </message>
@@ -1237,7 +1219,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
         <location filename="Windows/OptionsGeneral.cpp" line="19"/>
         <source>This option requires an active supporter certificate</source>
         <oldsource>This option requires a valid supporter certificate</oldsource>
-        <translation type="unfinished">Bu seçenek geçerli bir destekçi sertifikası gerektirir</translation>
+        <translation>Bu seçenek geçerli bir destekçi sertifikası gerektirir</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="22"/>
@@ -1832,12 +1814,12 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/PopUpWindow.h" line="65"/>
         <source>Troubleshooting</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun Giderme</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="66"/>
         <source>Start troubleshooting wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorun giderme sihirbazını başlat</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="75"/>
@@ -2020,7 +2002,7 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="162"/>
         <source>PID %1</source>
-        <translation type="unfinished"></translation>
+        <translation>PID %1</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="295"/>
@@ -2197,19 +2179,19 @@ Hata: </translation>
         <location filename="Wizards/SetupWizard.cpp" line="531"/>
         <source>Like with any other security product, it&apos;s important to keep your Sandboxie-Plus up to date.</source>
         <oldsource>Like with any other security product it&apos;s important to keep your Sandboxie-Plus up to date.</oldsource>
-        <translation type="unfinished">Diğer tüm güvenlik ürünlerinde olduğu gibi, Sandboxie-Plus&apos;ınızı güncel tutmanız önemlidir.</translation>
+        <translation>Diğer tüm güvenlik ürünlerinde olduğu gibi, Sandboxie-Plus&apos;ınızı güncel tutmanız önemlidir.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Regularly check for all updates to Sandboxie-Plus and optional components</source>
         <oldsource>Regularly Check for all updates to Sandboxie-Plus and optional components</oldsource>
-        <translation type="unfinished">Sandboxie-Plus ve isteğe bağlı bileşenlere yönelik tüm güncellemeleri düzenli olarak kontrol edin</translation>
+        <translation>Sandboxie-Plus ve isteğe bağlı bileşenlere yönelik tüm güncellemeleri düzenli olarak kontrol edin</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="540"/>
         <source>Let Sandboxie regularly check for latest updates.</source>
         <oldsource>Let sandboxie regularly check for latest updates.</oldsource>
-        <translation type="unfinished">Sandboxie&apos;nin en son güncellemeleri düzenli olarak kontrol etmesine izin verin.</translation>
+        <translation>Sandboxie&apos;nin en son güncellemeleri düzenli olarak kontrol etmesine izin verin.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="550"/>
@@ -2482,10 +2464,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Basit Görünüm</translation>
     </message>
     <message>
-        <source>%1 (%2): </source>
-        <translation type="vanished">%1 (%2): </translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="2693"/>
         <source>Login Failed: %1</source>
         <translation>Giriş başarısız: %1</translation>
@@ -2735,10 +2713,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>%1: %2 Korumalı alanı silinemedi</translation>
     </message>
     <message>
-        <source>PID %1: </source>
-        <translation type="vanished">PID %1: </translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="491"/>
         <location filename="SandMan.cpp" line="632"/>
         <source>Terminate All Processes</source>
@@ -2960,7 +2934,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="SandMan.cpp" line="3431"/>
         <source>All processes in a sandbox must be stopped before it can be renamed.</source>
         <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
-        <translation type="unfinished">Bir korumalı alandaki tüm işlemlerin, yeniden adlandırılabilmesi için durdurulması gerekir.</translation>
+        <translation>Bir korumalı alanın yeniden adlandırılabilmesi için oradaki tüm işlemlerin durdurulması gerekir.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3435"/>
@@ -4503,17 +4477,17 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Engine/ScriptManager.cpp" line="85"/>
         <source>Fatal error, failed to load troubleshooting instructions!</source>
-        <translation type="unfinished">Önemli hata, sorun giderme talimatları yüklenemedi!</translation>
+        <translation>Önemli hata, sorun giderme talimatları yüklenemedi!</translation>
     </message>
     <message>
         <location filename="Engine/ScriptManager.cpp" line="158"/>
         <source>Error, troubleshooting instructions duplicated %1 (%2 &lt;-&gt; %3)!</source>
-        <translation type="unfinished">Hata, sorun giderme talimatları yinelendi %1 (%2 &lt;-&gt; %3)!</translation>
+        <translation>Hata, sorun giderme talimatları yinelendi %1 (%2 &lt;-&gt; %3)!</translation>
     </message>
     <message>
         <location filename="Engine/ScriptManager.cpp" line="240"/>
         <source>Downloaded troubleshooting instructions are corrupted!</source>
-        <translation type="unfinished">İndirilen sorun giderme talimatları bozuk!</translation>
+        <translation>İndirilen sorun giderme talimatları bozuk!</translation>
     </message>
 </context>
 <context>
@@ -4578,10 +4552,6 @@ Hayır şunları seçer: %2</translation>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus özellikleri %1 gün içinde devre dışı bırakılacak.&lt;/font&gt;</translation>
     </message>
     <message>
-        <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For this build Plus features remain enabled.&lt;/font&gt;</source>
-        <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Bu derleme için Plus özellikleri etkin durumda kalır.&lt;/font&gt;</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="1052"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Plus özellikleri artık etkin değil.</translation>
@@ -4589,17 +4559,17 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1483"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu sertifika ne yazık ki mevcut derleme için geçerli değil, yeni bir sertifika almanız veya önceki bir derlemeye geçmeniz gerekiyor.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1485"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu sertifikanın süresi dolmuş olsa da, şu anda yüklü olan sürüm için Plus özellikleri etkin durumda kalır. Ancak, bundan sonraki sürümlerde uyumluluk güncellemeleri ve çevrimiçi sorun giderme veritabanı da dahil olmak üzere Sandboxie-Live hizmetlerine erişiminiz olmayacak.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1487"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu sertifikanın süresi ne yazık ki dolmuş, yeni bir sertifika almanız gerekiyor.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1607"/>
@@ -4645,10 +4615,6 @@ Hayır şunları seçer: %2</translation>
         <location filename="Windows/SettingsWindow.cpp" line="255"/>
         <source>Show Classic icon</source>
         <translation>Classic simgesini göster</translation>
-    </message>
-    <message>
-        <source>This certificate is unfortunately expired.</source>
-        <translation type="vanished">Bu sertifikanın ne yazık ki süresi dolmuş.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="230"/>
@@ -4814,7 +4780,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1050"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Şu anda yüklü olan sürüm için Plus özellikleri etkin durumdadır&lt;/font&gt;. Ancak, bundan sonraki sürümlerde uyumluluk güncellemeleri ve çevrimiçi sorun giderme veritabanı da dahil olmak üzere Sandboxie-Live hizmetlerine erişiminiz olmayacak.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1058"/>
@@ -4830,10 +4796,6 @@ Hayır şunları seçer: %2</translation>
         <location filename="Windows/SettingsWindow.cpp" line="1196"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>&amp;Korumalı Alanın Dışında Çalıştır</translation>
-    </message>
-    <message>
-        <source>This certificate is unfortunately outdated.</source>
-        <translation type="vanished">Bu sertifika maalesef güncel değil.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1543"/>
@@ -5007,13 +4969,9 @@ Hayır şunları seçer: %2</translation>
         <translation>Sandboxie.ini&apos;yi ekleyin</translation>
     </message>
     <message>
-        <source>Sandboxing compatibility is reliant on the configuration hence attaching the Sandboxie.ini file helps a lot with finding the issue.</source>
-        <translation type="vanished">Sandboxie uyumluluğu yapılandırmaya bağlıdır, bu nedenle Sandboxie.ini&apos;yi eklemek sorunu bulmada çok yardımcı olur.</translation>
-    </message>
-    <message>
         <location filename="Wizards/BoxAssistant.cpp" line="815"/>
         <source>Sandboxing compatibility is reliant on the configuration, hence attaching the Sandboxie.ini file helps a lot with finding the issue.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie uyumluluğu yapılandırmaya bağlıdır, bu nedenle Sandboxie.ini&apos;yi eklemek sorunu bulmada çok yardımcı olur.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="818"/>
@@ -5179,7 +5137,8 @@ Bu alandaki işlemler, ait oldukları korumalı alanı belirten özel bir işlem
 If you are a Great Supporter on Patreon already, Sandboxie can check online for an update of your certificate.</source>
         <oldsource>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.
 If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate.</oldsource>
-        <translation type="unfinished">Bu Insider derlemesi, GREAT_PATREON, PERSONAL-HUGE veya CONTRIBUTOR türünde özel bir sertifika gerektirir. Halihazırda büyük bir Patreaon destekçisiyseniz, Sandboxie sertifikanızın güncellenmesi için çevrimiçi olarak kontrol edebilir.</translation>
+        <translation>Bu Insider derlemesi, GREAT_PATREON, PERSONAL-HUGE veya CONTRIBUTOR türünde özel bir sertifika gerektirir.
+ Halihazırda Great Patreaon destekçisiyseniz, Sandboxie sertifikanızın güncelliği çevrimiçi olarak denetlenebilir.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="51"/>
@@ -7772,7 +7731,7 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/SettingsWindow.ui" line="951"/>
         <source>Hide Sandboxie&apos;s own processes from the task list</source>
         <oldsource>Hide sandboxie&apos;s own processes from the task list</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie&apos;nin kendi işlemlerini görev listesinden gizle</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="969"/>
@@ -7822,7 +7781,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1220"/>
         <source>&lt;a href=&quot;sbie://addons&quot;&gt;update addon list now&lt;/a&gt;</source>
-        <translation>&lt;a href=&quot;sbie://addons&quot;&gt;eklenti listesini şimdi güncelle&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;sbie://addons&quot;&gt;Eklenti listesini şimdi güncelle&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1230"/>

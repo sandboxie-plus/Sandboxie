@@ -2,12 +2,12 @@ name: "CodeQL"
 
 on:
   workflow_dispatch:
-  #push:
-  #  branches: [ 'master' ]
-  #  paths:
-  #    - '**.c'
-  #    - '**.cpp'
-  #    - '**.h'
+  push:
+    branches: [ 'master' ]
+    paths:
+      - '**.c'
+      - '**.cpp'
+      - '**.h'
   pull_request:
     types:
       - opened
@@ -23,6 +23,7 @@ on:
 jobs:
   analyze:
     name: Analyze
+    if: github.event_name == 'pull_request'
     runs-on: windows-2019
     timeout-minutes: 45
 

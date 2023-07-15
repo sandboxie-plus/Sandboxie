@@ -23,7 +23,7 @@ on:
 jobs:
   analyze:
     name: Analyze
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
     runs-on: windows-2019
     timeout-minutes: 45
 

@@ -5,17 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
-
-
-## [1.10.1 / 5.65.1] - 2023-07-??
-
-### Fixed
-- fixed "Disable Security Isolation" causes a game to stop playing audio [#2893](https://github.com/sandboxie-plus/Sandboxie/issues/2893)
-
-
-
-## [1.10.0 / 5.65.0] - 2023-07-??
+## [1.10.0 / 5.65.0] - 2023-07-12
 
 ### Added
 - added box scripting engine to make SandMan more flexible

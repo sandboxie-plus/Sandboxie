@@ -9,6 +9,8 @@ on:
       - '**.cpp'
       - '**.h'
   pull_request:
+    types:
+      - opened
     # The branches below must be a subset of the branches above.
     branches: [ 'master' ]
     paths:
@@ -21,6 +23,7 @@ on:
 jobs:
   analyze:
     name: Analyze
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
     runs-on: windows-2019
     timeout-minutes: 45
 

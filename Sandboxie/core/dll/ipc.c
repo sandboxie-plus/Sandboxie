@@ -1384,6 +1384,13 @@ _FX NTSTATUS Ipc_NtConnectPort(
     if (PATH_IS_OPEN(mp_flags)) goto OpenTruePath;
 
     //
+    // check if we are in app mode in which case proxying is not needed
+    //
+
+    if (Dll_CompartmentMode) // NoServiceAssist
+        goto OpenTruePath;
+
+    //
     // check for proxy LPC port
     //
 
@@ -1394,8 +1401,6 @@ _FX NTSTATUS Ipc_NtConnectPort(
 
     if (status != STATUS_BAD_INITIAL_PC)
         __leave;
-    if (status == STATUS_BAD_INITIAL_STACK)
-        goto OpenTruePath;
 
     //
     // if trying to connect to a COM port, start our COM servers first
@@ -1512,6 +1517,13 @@ _FX NTSTATUS Ipc_NtSecureConnectPort(
     if (PATH_IS_OPEN(mp_flags)) goto OpenTruePath;
 
     //
+    // check if we are in app mode in which case proxying is not needed
+    //
+
+    if (Dll_CompartmentMode) // NoServiceAssist
+        goto OpenTruePath;
+
+    //
     // check for proxy LPC port
     //
 
@@ -1522,8 +1534,6 @@ _FX NTSTATUS Ipc_NtSecureConnectPort(
 
     if (status != STATUS_BAD_INITIAL_PC)
         __leave;
-    if (status == STATUS_BAD_INITIAL_STACK)
-        goto OpenTruePath;
 
     //
     // if trying to connect to a COM port, start our COM servers first
@@ -1764,6 +1774,13 @@ _FX NTSTATUS Ipc_NtAlpcConnectPort(
         goto OpenTruePath;
 
     //
+    // check if we are in app mode in which case proxying is not needed
+    //
+
+    if (Dll_CompartmentMode) // NoServiceAssist
+        goto OpenTruePath;
+
+    //
     // check for proxy LPC port
     //
 
@@ -1774,8 +1791,6 @@ _FX NTSTATUS Ipc_NtAlpcConnectPort(
 
     if (status != STATUS_BAD_INITIAL_PC)
         __leave;
-    if (status == STATUS_BAD_INITIAL_STACK)
-        goto OpenTruePath;
 
     //
     // if trying to connect to a COM port, start our COM servers first
@@ -1940,6 +1955,13 @@ _FX NTSTATUS Ipc_NtAlpcConnectPortEx(
         goto OpenTruePath;
 
     //
+    // check if we are in app mode in which case proxying is not needed
+    //
+
+    if (Dll_CompartmentMode) // NoServiceAssist
+        goto OpenTruePath;
+
+    //
     // check for proxy LPC port
     //
 
@@ -1950,8 +1972,6 @@ _FX NTSTATUS Ipc_NtAlpcConnectPortEx(
 
     if (status != STATUS_BAD_INITIAL_PC)
         __leave;
-    if (status == STATUS_BAD_INITIAL_STACK)
-        goto OpenTruePath;
 
     //
     // if trying to connect to a COM port, start our COM servers first
@@ -4223,13 +4243,6 @@ _FX NTSTATUS Ipc_ConnectProxyPort(
     if (_wcsicmp(TruePath, L"\\RPC Control\\ntsvcs") != 0 &&
         _wcsicmp(TruePath, L"\\RPC Control\\plugplay") != 0)
         return STATUS_BAD_INITIAL_PC;
-
-    //
-    // check if we are in app mode in which case proxying is not needed, but we must indicate to open true path
-    //
-
-    if (Dll_CompartmentMode) // NoServiceAssist
-        return STATUS_BAD_INITIAL_STACK;
 
     status = STATUS_SUCCESS;
 

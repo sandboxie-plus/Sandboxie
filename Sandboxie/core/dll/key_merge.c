@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2021-2022 David Xanatos, xanasoft.com
+ * Copyright 2021-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -206,7 +206,7 @@ _FX NTSTATUS Key_Merge(
         // if we got here, we need to discard the stale entry
         //
 
-        Handle_UnRegisterCloseHandler(merge->handle, Key_NtClose);
+        Handle_UnRegisterHandler(merge->handle, Key_NtClose, NULL);
         List_Remove(&Key_Handles, merge);
         Key_MergeFree(merge, TRUE);
 
@@ -234,7 +234,7 @@ _FX NTSTATUS Key_Merge(
         memcpy(merge->name, TruePath, TruePath_len + sizeof(WCHAR));
 
         List_Insert_Before(&Key_Handles, NULL, merge);
-        Handle_RegisterCloseHandler(merge->handle, Key_NtClose);
+        Handle_RegisterHandler(merge->handle, Key_NtClose, NULL, FALSE);
     }
 
     //
@@ -1557,7 +1557,7 @@ _FX void Key_DiscardMergeByPath(const WCHAR *TruePath, BOOLEAN Recurse)
                 }
             }
 
-            Handle_UnRegisterCloseHandler(merge->handle, Key_NtClose);
+            Handle_UnRegisterHandler(merge->handle, Key_NtClose, NULL);
             List_Remove(&Key_Handles, merge);
             Key_MergeFree(merge, TRUE);
         }
@@ -1605,7 +1605,7 @@ _FX void Key_DiscardMergeByHandle(
 //---------------------------------------------------------------------------
 
 
-_FX void Key_NtClose(HANDLE KeyHandle)
+_FX void Key_NtClose(HANDLE KeyHandle, void* CloseParams)
 {
     KEY_MERGE *merge;
 

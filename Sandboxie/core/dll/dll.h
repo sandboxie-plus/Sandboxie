@@ -506,7 +506,7 @@ BOOLEAN File_IsBlockedNetParam(const WCHAR *BoxName);
 
 void File_GetSetDeviceMap(WCHAR *DeviceMap96);
 
-void File_NotifyRecover(HANDLE FileHandle);
+void File_NotifyRecover(HANDLE FileHandle, void* CloseParams);
 
 //---------------------------------------------------------------------------
 // Functions (key)
@@ -520,7 +520,7 @@ NTSTATUS Key_MarkDeletedAndClose(HANDLE KeyHandle);
 
 void Key_DiscardMergeByPath(const WCHAR *TruePath, BOOLEAN Recurse);
 
-void Key_NtClose(HANDLE KeyHandle);
+void Key_NtClose(HANDLE KeyHandle, void* CloseParams);
 
 HANDLE Key_GetTrueHandle(HANDLE KeyHandle, BOOLEAN *pIsOpenPath);
 

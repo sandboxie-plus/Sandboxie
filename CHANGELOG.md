@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed "Disable Security Isolation" causes a game to stop playing audio [#2893](https://github.com/sandboxie-plus/Sandboxie/issues/2893)
+- fixed NtQueryDirectoryObject not implemented [#2734](https://github.com/sandboxie-plus/Sandboxie/issues/2734)
+
+### Changed
+- reworked Nt Object Handle handling
 
 
 

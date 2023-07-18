@@ -171,7 +171,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="486"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation>Ana bilgisayarda kurulu korumalı alanda çalışan programların korumalı alandan dll dosyaları yüklemesini önle</translation>
+        <translation>Sistemde kurulu korumalı alan programlarına korumalı alandan DLL yüklemesini önle</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="487"/>
@@ -2185,28 +2185,28 @@ Hata: </translation>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Regularly check for all updates to Sandboxie-Plus and optional components</source>
         <oldsource>Regularly Check for all updates to Sandboxie-Plus and optional components</oldsource>
-        <translation>Sandboxie-Plus ve isteğe bağlı bileşenlere yönelik tüm güncellemeleri düzenli olarak kontrol edin</translation>
+        <translation>Sandboxie-Plus ve isteğe bağlı bileşenlere yönelik tüm güncellemeleri düzenli olarak denetle</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="540"/>
         <source>Let Sandboxie regularly check for latest updates.</source>
         <oldsource>Let sandboxie regularly check for latest updates.</oldsource>
-        <translation>Sandboxie&apos;nin en son güncellemeleri düzenli olarak kontrol etmesine izin verin.</translation>
+        <translation>Sandboxie&apos;nin en son güncellemeleri düzenli olarak denetlemesine izin verir.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="550"/>
         <source>Check for new Sandboxie-Plus versions:</source>
-        <translation>Yeni Sandboxie-Plus sürümlerini kontrol edin:</translation>
+        <translation>Yeni Sandboxie-Plus sürümlerini denetle:</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="551"/>
         <source>Check for new Sandboxie-Plus builds.</source>
-        <translation>Yeni Sandboxie-Plus yapılarını kontrol edin.</translation>
+        <translation>Yeni Sandboxie-Plus derlemelerini denetler.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="557"/>
         <source>Select in which update channel to look for new Sandboxie-Plus builds:</source>
-        <translation>Yeni Sandboxie-Plus yapıları için hangi güncelleme kanalında arama yapacağınızı seçin:</translation>
+        <translation>Yeni Sandboxie-Plus derlemeleri için arama yapılacak kanalı seçin:</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="566"/>
@@ -2216,17 +2216,17 @@ Hata: </translation>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="567"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
-        <translation>Kararlı kanal, en son kararlı GitHub sürümlerini içerir.</translation>
+        <translation>Kararlı kanal, en son yayınlanan kararlı GitHub sürümlerini içerir.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="571"/>
         <source>In the Preview Channel - with newest experimental changes</source>
-        <translation>Ön izleme Kanalında - en yeni deneysel değişikliklerle</translation>
+        <translation>Ön İzleme Kanalında - en yeni deneysel değişikliklerle</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="572"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
-        <translation>Ön izleme kanalı, en son GitHub ön sürümlerini içerir.</translation>
+        <translation>Ön izleme kanalı, en son yayınlanan GitHub ön sürümlerini içerir.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="576"/>
@@ -2237,8 +2237,8 @@ Hata: </translation>
         <location filename="Wizards/SetupWizard.cpp" line="577"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
-        <translation>Insider Kanalı, sonunda herkese açılacak yeni özelliklere ve hata düzeltmelerine erken erişim sağlar ve ayrıca Kararlı Kanal&apos;daki ilgili tüm iyileştirmeleri de bulundurur.
-Ön izleme kanalından farklı olarak, daha geniş kullanıma hazır olmayan denenmemiş, potansiyel olarak bozuk veya deneysel değişiklikler içermez.</translation>
+        <translation>Insider kanalı, herkese açılacak yeni özelliklere ve hata düzeltmelerine erken erişim sağlar ve ayrıca kararlı kanaldaki ilgili tüm iyileştirmeleri de bulundurur.
+Ön izleme kanalından farklı olarak, genel kullanıma hazır olmayan denenmemiş, potansiyel olarak bozuk veya deneysel değişiklikleri içermez.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="582"/>
@@ -2248,32 +2248,32 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="591"/>
         <source>Keep Compatibility Templates up to date and apply hotfixes</source>
-        <translation>Uyumluluk Şablonlarını güncel tutun ve düzeltmeleri uygulayın</translation>
+        <translation>Uyumluluk Şablonlarını güncel tut ve düzeltmeleri uygula</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="592"/>
         <source>Check for latest compatibility templates and hotfixes.</source>
-        <translation>En son uyumluluk şablonlarını ve düzeltmeleri kontrol edin.</translation>
+        <translation>En son uyumluluk şablonlarını ve düzeltmelerini denetler.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="596"/>
         <source>Get the latest Scripts for the Troubleshooting Wizard</source>
-        <translation>Sorun Giderme Sihirbazı için en son Betik Dosyalarını edinin</translation>
+        <translation>Sorun Giderme Sihirbazı için en son Betik Dosyalarını indir</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="597"/>
         <source>Check for latest troubleshooting scripts for the troubleshooting wizard.</source>
-        <translation>Sorun giderme sihirbazı için en son sorun giderme betik dosyalarını kontrol edin.</translation>
+        <translation>Sorun giderme sihirbazı için en son sorun giderme betik dosyalarını denetler.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="601"/>
         <source>Keep the list of optional Addon components up to date</source>
-        <translation>İsteğe bağlı Eklenti bileşenlerinin listesini güncel tutun</translation>
+        <translation>İsteğe bağlı Eklenti bileşenlerinin listesini güncel tut</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="602"/>
         <source>Check for latest available addons.</source>
-        <translation>Mevcut en son eklentileri kontrol edin.</translation>
+        <translation>Mevcut en son eklentileri denetler.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="611"/>
@@ -3213,7 +3213,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2560"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation>Seçili özellik seti yalnızca proje destekçileri tarafından kullanılabilir. Bu özellik setinin destekçi sertifikası olmadan etkinleştirildiği bir alanda başlatılan işlemler 5 dakika sonra sonlandırılacaktır.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get- cert&quot;&gt;Proje destekçisi olun&lt;/a&gt; ve bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; alın</translation>
+        <translation>Seçili özellik seti yalnızca proje destekçileri tarafından kullanılabilir. Bu özellik setinin destekçi sertifikası olmadan etkinleştirildiği bir alanda başlatılan işlemler 5 dakika sonra sonlandırılacaktır.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Proje destekçisi olun&lt;/a&gt; ve bir &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;destekçi sertifikası&lt;/a&gt; alın</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3763"/>
@@ -4966,7 +4966,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="814"/>
         <source>Attach Sandboxie.ini</source>
-        <translation>Sandboxie.ini&apos;yi ekleyin</translation>
+        <translation>Sandboxie.ini&apos;yi Ekle</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="815"/>
@@ -6328,7 +6328,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1340"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation>Ana bilgisayarda kurulu korumalı alanda çalışan programların korumalı alandan dll dosyaları yüklemesini önle</translation>
+        <translation>Sistemde kurulu korumalı alan programlarına korumalı alandan DLL yüklemesini önle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1383"/>
@@ -7573,12 +7573,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1462"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
-        <translation>Ön izleme kanalı, en son GitHub ön sürümlerini içerir.</translation>
+        <translation>Ön izleme kanalı, en son yayınlanan GitHub ön sürümlerini içerir.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1560"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
-        <translation>Kararlı kanal, en son kararlı GitHub sürümlerini içerir.</translation>
+        <translation>Kararlı kanal, en son yayınlanan kararlı GitHub sürümlerini içerir.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1563"/>
@@ -7588,7 +7588,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1465"/>
         <source>Search in the Preview channel</source>
-        <translation>Önizleme kanalında ara</translation>
+        <translation>Ön izleme kanalında ara</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1376"/>
@@ -7801,7 +7801,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1417"/>
         <source>Keep addon list up to date</source>
-        <translation>Eklenti listesini güncel tutun</translation>
+        <translation>Eklenti listesini güncel tut</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1431"/>
@@ -7812,8 +7812,8 @@ The process match level has a higher priority than the specificity and describes
         <location filename="Forms/SettingsWindow.ui" line="1472"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
-        <translation>Insider Kanalı, sonunda herkese açılacak yeni özelliklere ve hata düzeltmelerine erken erişim sağlar ve ayrıca Kararlı Kanal&apos;daki ilgili tüm iyileştirmeleri de bulundurur.
-Ön izleme kanalından farklı olarak, daha geniş kullanıma hazır olmayan denenmemiş, potansiyel olarak bozuk veya deneysel değişiklikler içermez.</translation>
+        <translation>Insider kanalı, herkese açılacak yeni özelliklere ve hata düzeltmelerine erken erişim sağlar ve ayrıca kararlı kanaldaki ilgili tüm iyileştirmeleri de bulundurur.
+Ön izleme kanalından farklı olarak, genel kullanıma hazır olmayan denenmemiş, potansiyel olarak bozuk veya deneysel değişiklikleri içermez.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1476"/>
@@ -7833,7 +7833,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1553"/>
         <source>Keep Troubleshooting scripts up to date</source>
-        <translation>Sorun giderme betik dosyalarını güncel tutun</translation>
+        <translation>Sorun giderme betik dosyalarını güncel tut</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1589"/>
@@ -7913,7 +7913,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1513"/>
         <source>New full versions from the selected release channel.</source>
-        <translation>Seçili yayın kanalından yeni tam sürümler.</translation>
+        <translation>Seçili yayın kanalındaki yeni tam sürümler.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1452"/>

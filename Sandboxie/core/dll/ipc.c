@@ -1417,13 +1417,6 @@ _FX NTSTATUS Ipc_NtConnectPort(
     if (PATH_IS_OPEN(mp_flags)) goto OpenTruePath;
 
     //
-    // check if we are in app mode in which case proxying is not needed
-    //
-
-    if (Dll_CompartmentMode) // NoServiceAssist
-        goto OpenTruePath;
-
-    //
     // check for proxy LPC port
     //
 
@@ -1432,6 +1425,8 @@ _FX NTSTATUS Ipc_NtConnectPort(
         ConnectionInfo, ConnectionInfoLength, MaximumMessageLength,
         ClientSharedMemory, NULL, ServerSharedMemory);
 
+    if (status == STATUS_BAD_INITIAL_STACK)
+        goto OpenTruePath;
     if (status != STATUS_BAD_INITIAL_PC)
         __leave;
 
@@ -1550,13 +1545,6 @@ _FX NTSTATUS Ipc_NtSecureConnectPort(
     if (PATH_IS_OPEN(mp_flags)) goto OpenTruePath;
 
     //
-    // check if we are in app mode in which case proxying is not needed
-    //
-
-    if (Dll_CompartmentMode) // NoServiceAssist
-        goto OpenTruePath;
-
-    //
     // check for proxy LPC port
     //
 
@@ -1565,6 +1553,8 @@ _FX NTSTATUS Ipc_NtSecureConnectPort(
         ConnectionInfo, ConnectionInfoLength, MaximumMessageLength,
         ClientSharedMemory, ServerSid, ServerSharedMemory);
 
+    if (status == STATUS_BAD_INITIAL_STACK)
+        goto OpenTruePath;
     if (status != STATUS_BAD_INITIAL_PC)
         __leave;
 
@@ -1807,13 +1797,6 @@ _FX NTSTATUS Ipc_NtAlpcConnectPort(
         goto OpenTruePath;
 
     //
-    // check if we are in app mode in which case proxying is not needed
-    //
-
-    if (Dll_CompartmentMode) // NoServiceAssist
-        goto OpenTruePath;
-
-    //
     // check for proxy LPC port
     //
 
@@ -1822,6 +1805,8 @@ _FX NTSTATUS Ipc_NtAlpcConnectPort(
         ConnectionInfo, ConnectionInfoLength, AlpcConnectInfo,
         NULL, ServerSid, NULL);
 
+    if (status == STATUS_BAD_INITIAL_STACK)
+        goto OpenTruePath;
     if (status != STATUS_BAD_INITIAL_PC)
         __leave;
 
@@ -1988,13 +1973,6 @@ _FX NTSTATUS Ipc_NtAlpcConnectPortEx(
         goto OpenTruePath;
 
     //
-    // check if we are in app mode in which case proxying is not needed
-    //
-
-    if (Dll_CompartmentMode) // NoServiceAssist
-        goto OpenTruePath;
-
-    //
     // check for proxy LPC port
     //
 
@@ -2002,7 +1980,9 @@ _FX NTSTATUS Ipc_NtAlpcConnectPortEx(
         PortHandle, TruePath, ConnectionFlags,
         ConnectionInfo, ConnectionInfoLength, AlpcConnectInfo,
         NULL, ServerSd, NULL);
-
+    
+    if (status == STATUS_BAD_INITIAL_STACK)
+        goto OpenTruePath;
     if (status != STATUS_BAD_INITIAL_PC)
         __leave;
 
@@ -4547,6 +4527,13 @@ _FX NTSTATUS Ipc_ConnectProxyPort(
     if (_wcsicmp(TruePath, L"\\RPC Control\\ntsvcs") != 0 &&
         _wcsicmp(TruePath, L"\\RPC Control\\plugplay") != 0)
         return STATUS_BAD_INITIAL_PC;
+
+    //
+    // check if we are in app mode in which case proxying is not needed, but we must indicate to open true path
+    //
+
+    if (Dll_CompartmentMode) // NoServiceAssist
+        return STATUS_BAD_INITIAL_STACK;
 
     status = STATUS_SUCCESS;
 

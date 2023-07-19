@@ -275,6 +275,11 @@ void CBoxedProcess::InitProcessInfoImpl(void* ProcessHandle)
 	{
 		m_CommandLine = CBoxedProcess__GetPebString(ProcessHandle, PhpoCommandLine);
 	}
+
+	if (m_WorkingDir.isEmpty())
+	{
+		m_WorkingDir = CBoxedProcess__GetPebString(ProcessHandle, PhpoCurrentDirectory);
+	}
 }
 
 bool CBoxedProcess::InitProcessInfoEx()

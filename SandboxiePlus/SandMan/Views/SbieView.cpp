@@ -628,7 +628,7 @@ void CSbieView::UpdateProcMenu(const CBoxedProcessPtr& pProcess, int iProcessCou
 	if (m_pMenuPreset) {
 		m_pMenuPinToRun->setChecked(!FoundPin.isEmpty());
 		m_pMenuPinToRun->setData(FoundPin);
-		//m_pMenuPinToRun->setProperty("WorkingDir", pProcess-> // todo
+		m_pMenuPinToRun->setProperty("WorkingDir", pProcess->GetWorkingDir());
 
 		m_pMenuAllowInternet->setChecked(pProcess.objectCast<CSbieProcess>()->HasInternetAccess());
 
@@ -1470,7 +1470,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), "start_menu", false, WorkingDir));
 		else {
 			auto pBoxEx = SandBoxes.first().objectCast<CSandBoxPlus>();
-			Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), pBoxEx->GetFullCommand(Command), false, WorkingDir));
+			Results.append(theGUI->RunStart(SandBoxes.first()->GetName(), pBoxEx->GetFullCommand(Command), false, pBoxEx->GetFullCommand(WorkingDir)));
 		}
 	}
 

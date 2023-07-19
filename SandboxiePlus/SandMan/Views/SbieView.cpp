@@ -13,6 +13,7 @@
 #include "../Views/FileView.h"
 #include "../Wizards/NewBoxWizard.h"
 #include "../Helpers/WinHelper.h"
+#include "../Windows/SettingsWindow.h"
 
 #include "qt_windows.h"
 #include "qwindowdefs_win.h"
@@ -616,7 +617,8 @@ void CSbieView::UpdateProcMenu(const CBoxedProcessPtr& pProcess, int iProcessCou
 	QString FoundPin;
 	QString FileName = pProcess->GetFileName();
 	foreach(const QString& RunOption, RunOptions) {
-		QString CmdFile = pBoxPlus->GetCommandFile(Split2(RunOption, "|").second);
+		QVariantMap Entry = GetRunEntry(RunOption);
+		QString CmdFile = pBoxPlus->GetCommandFile(Entry["Command"].toString());
 		if(CmdFile.compare(FileName, Qt::CaseInsensitive) == 0) {
 			FoundPin = RunOption;
 			break;
@@ -626,6 +628,7 @@ void CSbieView::UpdateProcMenu(const CBoxedProcessPtr& pProcess, int iProcessCou
 	if (m_pMenuPreset) {
 		m_pMenuPinToRun->setChecked(!FoundPin.isEmpty());
 		m_pMenuPinToRun->setData(FoundPin);
+		//m_pMenuPinToRun->setProperty("WorkingDir", pProcess-> // todo
 
 		m_pMenuAllowInternet->setChecked(pProcess.objectCast<CSbieProcess>()->HasInternetAccess());
 
@@ -1788,7 +1791,8 @@ void CSbieView::OnMenuContextMenu(const QPoint& point)
 		QString FoundPin;
 		QString FileName = pBoxPlus->GetCommandFile(LinkTarget);
 		foreach(const QString& RunOption, RunOptions) {
-			QString CmdFile = pBoxPlus->GetCommandFile(Split2(RunOption, "|").second);
+			QVariantMap Entry = GetRunEntry(RunOption);
+			QString CmdFile = pBoxPlus->GetCommandFile(Entry["Command"].toString());
 			if(CmdFile.compare(FileName, Qt::CaseInsensitive) == 0) {
 				FoundPin = RunOption;
 				break;
@@ -1796,8 +1800,14 @@ void CSbieView::OnMenuContextMenu(const QPoint& point)
 		}
 
 		m_pCtxPinToRun->setChecked(!FoundPin.isEmpty());
-		if (FoundPin.isEmpty()) 
-			m_pCtxPinToRun->setData(pAction->text() + "|\"" + pBoxPlus->MakeBoxCommand(LinkTarget) + "\"");
+		if (FoundPin.isEmpty()) {
+			QVariantMap Entry;
+			Entry["Name"] = pAction->text();
+			Entry["Icon"] = pAction->property("Icon").toString() + "," + pAction->property("IconIndex").toString();
+			Entry["WorkingDir"] = pBoxPlus->MakeBoxCommand(pAction->property("WorkingDir").toString());
+			Entry["Command"] = "\"" + pBoxPlus->MakeBoxCommand(LinkTarget) + "\"";
+			m_pCtxPinToRun->setData(MakeRunEntry(Entry));
+		}
 		else
 			m_pCtxPinToRun->setData(FoundPin);
 		m_pCtxMkLink->setData(LinkTarget);
@@ -1841,6 +1851,8 @@ void CSbieView::UpdateStartMenu(CSandBoxPlus* pBoxEx)
 		if(Icon.isNull()) Icon = m_IconProvider.icon(QFileInfo(Link.Target));
 		pAction->setIcon(Icon);
 		pAction->setData(Link.Target);
+		pAction->setProperty("Icon", Link.Icon);
+		pAction->setProperty("IconIndex", Link.IconIndex);
 		pAction->setProperty("WorkingDir", Link.WorkDir);
 	}
 }
@@ -1857,28 +1869,27 @@ void CSbieView::UpdateRunMenu(const CSandBoxPtr& pBox)
 	QStringList RunOptions = pBox->GetTextList("RunCommand", true, false, true);
 	foreach(const QString& RunOption, RunOptions) 
 	{
-		StrPair NameCmd = Split2(RunOption, "|");
-
-		StrPair NameIcon = Split2(NameCmd.first, ",");
+		QVariantMap Entry = GetRunEntry(RunOption);
 
 		QMenu* pMenu;
-		StrPair FolderName = Split2(NameIcon.first, "\\", true);
+		StrPair FolderName = Split2(Entry["Name"].toString(), "\\", true);
 		if (FolderName.second.isEmpty()) {
 			FolderName.second = FolderName.first;
 			pMenu = m_pMenuRun;
 		} else
 			pMenu = GetMenuFolder(FolderName.first.replace("\\", "/"), m_pMenuRun, m_RunFolders);
 
-		StrPair IconIndex = Split2(NameIcon.second, ",", true);
+		StrPair IconIndex = Split2(Entry["Icon"].toString(), ",", true);
 
 		QAction* pAction = pMenu->addAction(FolderName.second, this, SLOT(OnSandBoxAction()));
 		if (IconIndex.first.isEmpty())
-			pAction->setIcon(m_IconProvider.icon(QFileInfo(pBoxEx->GetCommandFile(NameCmd.second))));
+			pAction->setIcon(m_IconProvider.icon(QFileInfo(pBoxEx->GetCommandFile(Entry["Command"].toString()))));
 		else if(IconIndex.second.isEmpty())
-			pAction->setIcon(LoadWindowsIcon(pBoxEx->GetCommandFile(NameCmd.second), IconIndex.first.toInt()));
+			pAction->setIcon(LoadWindowsIcon(pBoxEx->GetCommandFile(Entry["Command"].toString()), IconIndex.first.toInt()));
 		else
 			pAction->setIcon(LoadWindowsIcon(pBoxEx->GetCommandFile(IconIndex.first), IconIndex.second.toInt()));
-		pAction->setData(NameCmd.second);
+		pAction->setData(Entry["Command"].toString());
+		pAction->setProperty("WorkingDir", Entry["WorkingDir"]);
 	}
 
 	if (!m_pMenuRunStart)

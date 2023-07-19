@@ -518,6 +518,7 @@ _FX void Ipc_CreateObjects(void)
     WCHAR *backslash;
     WCHAR *buffer = NULL;
     WCHAR *BNOLINKS = NULL;
+    WCHAR *GLOBAL = NULL;
     WCHAR *buffer2 = NULL;
     HANDLE handle;
     WCHAR str[64];
@@ -631,6 +632,10 @@ _FX void Ipc_CreateObjects(void)
     wcscpy(buffer, buffer2);
     wcscat(buffer, L"\\Global");
 
+    GLOBAL  = Dll_Alloc((wcslen(buffer) + 32) * sizeof(WCHAR));
+
+    wcscpy(GLOBAL, buffer);
+
     status = SbieApi_CreateDirOrLink(buffer, buffer2);
 
     if (! NT_SUCCESS(status)) {
@@ -676,7 +681,7 @@ _FX void Ipc_CreateObjects(void)
     wcscpy(buffer, CopyPath);
     wcscat(buffer, L"\\Global");
 
-    status = SbieApi_CreateDirOrLink(buffer, CopyPath);
+    status = SbieApi_CreateDirOrLink(buffer, GLOBAL);
 
     if (! NT_SUCCESS(status)) {
         errlvl = 41;
@@ -713,6 +718,8 @@ finish:
         Dll_Free(buffer);
     if(BNOLINKS)
         Dll_Free(BNOLINKS);
+    if(GLOBAL)
+        Dll_Free(GLOBAL);
     if(buffer2)
         Dll_Free(buffer2);
 

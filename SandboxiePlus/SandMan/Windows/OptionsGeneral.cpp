@@ -264,12 +264,7 @@ void COptionsWindow::LoadGeneral()
 
 	ui.treeRun->clear();
 	foreach(const QString& Value, m_pBox->GetTextList("RunCommand", m_Template))
-	{
-		StrPair NameCmd = Split2(Value, "|");
-		StrPair NameIcon = Split2(NameCmd.first, ",");
-		QTreeWidgetItem* pItem = new QTreeWidgetItem();
-		AddRunItem(NameIcon.first, NameIcon.second, NameCmd.second);
-	}
+		AddRunItem(ui.treeRun, GetRunEntry(Value));
 
 	QString Action = m_pBox->GetText("DblClickAction");
 	int pos = -1;
@@ -369,14 +364,9 @@ void COptionsWindow::SaveGeneral()
 
 
 	QStringList RunCommands;
-	for (int i = 0; i < ui.treeRun->topLevelItemCount(); i++) {
-		QTreeWidgetItem* pItem = ui.treeRun->topLevelItem(i);
-		if(pItem->text(1).isEmpty())
-			RunCommands.prepend(pItem->text(0) + "|" + pItem->text(2));
-		else
-			RunCommands.prepend(pItem->text(0) + "," + pItem->text(1) + "|" + pItem->text(2));
+	for (int i = 0; i < ui.treeRun->topLevelItemCount(); i++)
+		RunCommands.prepend(MakeRunEntry(ui.treeRun->topLevelItem(i)));
 
-	}
 	//WriteTextList("RunCommand", RunCommands);
 	m_pBox->DelValue("RunCommand");
 	foreach(const QString& Value, RunCommands)
@@ -900,7 +890,12 @@ void COptionsWindow::OnBrowsePath()
 		return;
 
 	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
-	AddRunItem(Name, "", "\"" + (pBoxEx ? pBoxEx->MakeBoxCommand(Value) : Value) + "\"");
+	
+	QVariantMap Entry;
+	Entry["Name"] = Name;
+	Entry["Command"] = "\"" + (pBoxEx ? pBoxEx->MakeBoxCommand(Value) : Value) + "\"";
+	AddRunItem(ui.treeRun, Entry);
+
 	m_GeneralChanged = true;
 	OnOptChanged();
 }
@@ -915,18 +910,12 @@ void COptionsWindow::OnAddCommand()
 	if (Name.isEmpty())
 		return;
 
-	AddRunItem(Name, "", Value);
-	OnRunChanged();
-}
+	QVariantMap Entry;
+	Entry["Name"] = Name;
+	Entry["Command"] = Value;
+	AddRunItem(ui.treeRun, Entry);
 
-void COptionsWindow::AddRunItem(const QString& Name, const QString& Icon, const QString& Command)
-{
-	QTreeWidgetItem* pItem = new QTreeWidgetItem();
-	pItem->setText(0, Name);
-	pItem->setText(1, Icon);
-	pItem->setText(2, Command);
-	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
-	ui.treeRun->addTopLevelItem(pItem);
+	OnRunChanged();
 }
 
 void COptionsWindow::OnCommandUp()

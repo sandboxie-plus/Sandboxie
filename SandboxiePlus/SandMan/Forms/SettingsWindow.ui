@@ -667,11 +667,6 @@
                </column>
                <column>
                 <property name="text">
-                 <string>Icon</string>
-                </property>
-               </column>
-               <column>
-                <property name="text">
                  <string>Command Line</string>
                 </property>
                </column>

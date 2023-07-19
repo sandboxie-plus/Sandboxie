@@ -14,6 +14,8 @@
 #include "../Wizards/TemplateWizard.h"
 #include "../AddonManager.h"
 #include <qfontdialog.h>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 
 #include <windows.h>
@@ -698,7 +700,10 @@ void CSettingsWindow::OnBrowsePath()
 	if (Name.isEmpty())
 		return;
 
-	AddRunItem(Name, "", "\"" + Value + "\"");
+	QVariantMap Entry;
+	Entry["Name"] = Name;
+	Entry["Command"] = "\"" + Value + "\"";
+	AddRunItem(ui.treeRun, Entry);
 }
 
 void CSettingsWindow::OnAddCommand()
@@ -711,18 +716,12 @@ void CSettingsWindow::OnAddCommand()
 	if (Name.isEmpty())
 		return;
 
-	AddRunItem(Name, "", Value);
-	OnRunChanged();
-}
+	QVariantMap Entry;
+	Entry["Name"] = Name;
+	Entry["Command"] = Value;
+	AddRunItem(ui.treeRun, Entry);
 
-void CSettingsWindow::AddRunItem(const QString& Name, const QString& Icon, const QString& Command)
-{
-	QTreeWidgetItem* pItem = new QTreeWidgetItem();
-	pItem->setText(0, Name);
-	pItem->setText(1, Icon);
-	pItem->setText(2, Command);
-	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
-	ui.treeRun->addTopLevelItem(pItem);
+	OnRunChanged();
 }
 
 void CSettingsWindow::OnCommandUp()
@@ -899,11 +898,7 @@ void CSettingsWindow::LoadSettings()
 
 		ui.treeRun->clear();
 		foreach(const QString& Value, theAPI->GetGlobalSettings()->GetTextList("RunCommand", false))
-		{
-			StrPair NameCmd = Split2(Value, "|");
-			StrPair NameIcon = Split2(NameCmd.first, ",");
-			AddRunItem(NameIcon.first, NameIcon.second, NameCmd.second);
-		}
+			AddRunItem(ui.treeRun, GetRunEntry(Value));
 		m_RunChanged = false;
 		
 		ui.cmbDefault->clear();
@@ -1258,13 +1253,9 @@ void CSettingsWindow::SaveSettings()
 				m_RunChanged = false;
 
 				QStringList RunCommands;
-				for (int i = 0; i < ui.treeRun->topLevelItemCount(); i++) {
-					QTreeWidgetItem* pItem = ui.treeRun->topLevelItem(i);
-					if (pItem->text(1).isEmpty())
-						RunCommands.prepend(pItem->text(0) + "|" + pItem->text(2));
-					else
-						RunCommands.prepend(pItem->text(0) + "," + pItem->text(1) + "|" + pItem->text(2));
-				}
+				for (int i = 0; i < ui.treeRun->topLevelItemCount(); i++) 
+					RunCommands.prepend(MakeRunEntry(ui.treeRun->topLevelItem(i)));
+
 				//WriteTextList("RunCommand", RunCommands);
 				theAPI->GetGlobalSettings()->DelValue("RunCommand");
 				foreach(const QString & Value, RunCommands)
@@ -1934,6 +1925,57 @@ void CSettingsWindow::SaveIniSection()
 		theAPI->SbieIniSet("GlobalSettings", "", ui.txtIniSection->toPlainText());
 
 	LoadIniSection();
+}
+
+QVariantMap GetRunEntry(const QString& sEntry)
+{
+	QVariantMap Entry;
+
+	if (sEntry.left(1) == "{")
+	{
+		Entry = QJsonDocument::fromJson(sEntry.toUtf8()).toVariant().toMap();
+	}
+	else
+	{
+		StrPair NameCmd = Split2(sEntry, "|");
+		StrPair NameIcon = Split2(NameCmd.first, ",");
+
+		Entry["Name"] = NameIcon.first;
+		Entry["Icon"] = NameIcon.second;
+		Entry["Command"] = NameCmd.second;
+	}
+
+	return Entry;
+}
+
+void AddRunItem(QTreeWidget* treeRun, const QVariantMap& Entry)
+{
+	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	pItem->setText(0, Entry["Name"].toString());
+	pItem->setData(0, Qt::UserRole, Entry);
+	pItem->setText(1, Entry["Command"].toString());
+	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+	treeRun->addTopLevelItem(pItem);
+}
+
+QString MakeRunEntry(QTreeWidgetItem* pItem)
+{
+	QVariantMap Entry = pItem->data(0, Qt::UserRole).toMap();
+	Entry["Name"] = pItem->text(0);
+	Entry["Command"] = pItem->text(1);
+	return MakeRunEntry(Entry);
+}
+
+QString MakeRunEntry(const QVariantMap& Entry)
+{
+	if (!Entry["WorkingDir"].toString().isEmpty() || !Entry["Icon"].toString().isEmpty()) {
+		QJsonDocument doc(QJsonValue::fromVariant(Entry).toObject());
+		QString sEntry = QString::fromUtf8(doc.toJson(QJsonDocument::Compact));
+		return sEntry;
+	} 
+	//if(!Entry["Icon"].toString().isEmpty())
+	//	return Entry["Name"].toString() + "," + Entry["Icon"].toString() + "|" + Entry["Command"].toString();
+	return Entry["Name"].toString() + "|" + Entry["Command"].toString();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

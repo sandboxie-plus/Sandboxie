@@ -351,8 +351,6 @@ protected:
 	void SaveConfig();
 	void UpdateCurrentTab();
 
-	void AddRunItem(const QString& Name, const QString& Icon, const QString& Command);
-
 	void CreateGeneral();
 	void LoadGeneral();
 	void SaveGeneral();

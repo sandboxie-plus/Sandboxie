@@ -789,7 +789,7 @@ _FX NTSTATUS KphValidateCertificate()
         else if(!expiration_date.QuadPart) 
             expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval(0, 0, 1); // default 1 year, unless set differently already
 
-        // check if this is a subscription type sertificate
+        // check if this is a subscription type certificate
         BOOLEAN isSubscription = CERT_IS_SUBSCRIPTION(Verify_CertInfo);
 
         if (expiration_date.QuadPart != -1) 

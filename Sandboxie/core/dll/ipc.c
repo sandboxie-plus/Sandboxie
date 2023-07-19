@@ -23,6 +23,7 @@
 
 #include "dll.h"
 #include "obj.h"
+#include "handle.h"
 #include <stdio.h>
 #include "common/my_version.h"
 #include "core/svc/namedpipewire.h"
@@ -37,6 +38,32 @@
     (ObjectAttributes                                           \
         ? ObjectAttributes->Attributes | OBJ_CASE_INSENSITIVE   \
         : 0)
+
+
+//---------------------------------------------------------------------------
+// Structures and Types
+//---------------------------------------------------------------------------
+
+
+typedef struct _IPC_MERGE {
+
+    LIST_ELEM list_elem;
+
+    HANDLE handle;
+
+    LIST objects;
+
+} IPC_MERGE;
+
+
+typedef struct _IPC_MERGE_ENTRY
+{
+    LIST_ELEM list_elem;
+
+    UNICODE_STRING Name;
+    UNICODE_STRING TypeName;
+
+} IPC_MERGE_ENTRY;
 
 
 //---------------------------------------------------------------------------
@@ -356,6 +383,8 @@ LIST Ipc_DynamicPortNames;
 
 BOOLEAN RpcRt_IsDynamicPortOpen(const WCHAR* wszPortName);
 
+static LIST Ipc_Handles;
+static CRITICAL_SECTION Ipc_Handles_CritSec;
 
 //---------------------------------------------------------------------------
 // IPC (other modules)
@@ -373,6 +402,10 @@ BOOLEAN RpcRt_IsDynamicPortOpen(const WCHAR* wszPortName);
 _FX BOOLEAN Ipc_Init(void)
 {
     HMODULE module = Dll_Ntdll;
+
+    InitializeCriticalSection(&Ipc_Handles_CritSec);
+
+    List_Init(&Ipc_Handles);
 
     void *NtAlpcCreatePort;
     void *NtAlpcConnectPort;
@@ -744,7 +777,7 @@ _FX NTSTATUS Ipc_GetName(
         name = Dll_GetTlsNameBuffer(
                         TlsData, TRUE_NAME_BUFFER, length + objname_len);
 
-        if ((! objname_len) || (! *objname_buf)) {
+        /*if ((! objname_len) || (! *objname_buf)) {
 
             //
             // an object handle was specified, but the object name is an
@@ -760,7 +793,7 @@ _FX NTSTATUS Ipc_GetName(
 
                 return STATUS_SUCCESS;
             }
-        }
+        }*/
 
         if (objname_len && *objname_buf == L'\\') {
 
@@ -1392,10 +1425,10 @@ _FX NTSTATUS Ipc_NtConnectPort(
         ConnectionInfo, ConnectionInfoLength, MaximumMessageLength,
         ClientSharedMemory, NULL, ServerSharedMemory);
 
-    if (status != STATUS_BAD_INITIAL_PC)
-        __leave;
     if (status == STATUS_BAD_INITIAL_STACK)
         goto OpenTruePath;
+    if (status != STATUS_BAD_INITIAL_PC)
+        __leave;
 
     //
     // if trying to connect to a COM port, start our COM servers first
@@ -1520,10 +1553,10 @@ _FX NTSTATUS Ipc_NtSecureConnectPort(
         ConnectionInfo, ConnectionInfoLength, MaximumMessageLength,
         ClientSharedMemory, ServerSid, ServerSharedMemory);
 
-    if (status != STATUS_BAD_INITIAL_PC)
-        __leave;
     if (status == STATUS_BAD_INITIAL_STACK)
         goto OpenTruePath;
+    if (status != STATUS_BAD_INITIAL_PC)
+        __leave;
 
     //
     // if trying to connect to a COM port, start our COM servers first
@@ -1772,10 +1805,10 @@ _FX NTSTATUS Ipc_NtAlpcConnectPort(
         ConnectionInfo, ConnectionInfoLength, AlpcConnectInfo,
         NULL, ServerSid, NULL);
 
-    if (status != STATUS_BAD_INITIAL_PC)
-        __leave;
     if (status == STATUS_BAD_INITIAL_STACK)
         goto OpenTruePath;
+    if (status != STATUS_BAD_INITIAL_PC)
+        __leave;
 
     //
     // if trying to connect to a COM port, start our COM servers first
@@ -1947,11 +1980,11 @@ _FX NTSTATUS Ipc_NtAlpcConnectPortEx(
         PortHandle, TruePath, ConnectionFlags,
         ConnectionInfo, ConnectionInfoLength, AlpcConnectInfo,
         NULL, ServerSd, NULL);
-
-    if (status != STATUS_BAD_INITIAL_PC)
-        __leave;
+    
     if (status == STATUS_BAD_INITIAL_STACK)
         goto OpenTruePath;
+    if (status != STATUS_BAD_INITIAL_PC)
+        __leave;
 
     //
     // if trying to connect to a COM port, start our COM servers first
@@ -4052,6 +4085,152 @@ OpenTruePath:
 
 
 //---------------------------------------------------------------------------
+// Ipc_MergeFree
+//---------------------------------------------------------------------------
+
+
+_FX void Ipc_MergeFree(IPC_MERGE *merge)
+{
+    while (1) {
+        IPC_MERGE_ENTRY *entry = List_Head(&merge->objects);
+        if (! entry)
+            break;
+        List_Remove(&merge->objects, entry);
+        Dll_Free(entry);
+    }
+
+    Dll_Free(merge);
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_NtClose
+//---------------------------------------------------------------------------
+
+
+_FX void Ipc_NtClose(HANDLE IpcHandle, void* CloseParams)
+{
+    IPC_MERGE *merge;
+
+    EnterCriticalSection(&Ipc_Handles_CritSec);
+
+    merge = List_Head(&Ipc_Handles);
+    while (merge) {
+        if (merge->handle == IpcHandle) {
+
+            Handle_UnRegisterHandler(merge->handle, Ipc_NtClose, NULL);
+            List_Remove(&Ipc_Handles, merge);
+            Ipc_MergeFree(merge);
+
+            break;
+        }
+        merge = List_Next(merge);
+    }
+
+    LeaveCriticalSection(&Ipc_Handles_CritSec);
+}
+
+
+//---------------------------------------------------------------------------
+// Ipc_MergeDirectoryObject
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS Ipc_MergeDirectoryObject(IPC_MERGE *merge, WCHAR* path, BOOLEAN join)
+{
+    NTSTATUS status;
+    HANDLE directoryHandle;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING objname;
+
+    RtlInitUnicodeString(&objname, path);
+
+    InitializeObjectAttributes(
+        &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+    status = __sys_NtOpenDirectoryObject(&directoryHandle, DIRECTORY_QUERY, &objattrs);
+    if (!NT_SUCCESS(status))
+        return status;
+
+    ULONG bufferSize = 4096;
+    PVOID buffer = Dll_Alloc(bufferSize);
+    BOOLEAN firstTime = TRUE;
+    ULONG indexCounter = 0;
+    ULONG returnLength;
+
+    while (1)
+    {
+        status = __sys_NtQueryDirectoryObject(directoryHandle, buffer, bufferSize, FALSE, firstTime, &indexCounter, &returnLength);
+        firstTime = FALSE;
+
+        if (status == STATUS_NO_MORE_ENTRIES)
+            break; // done
+        if (!NT_SUCCESS(status))
+            break; // error
+
+        for (POBJECT_DIRECTORY_INFORMATION directoryInfo = buffer; directoryInfo->Name.Length != 0; directoryInfo++)
+        {
+            ULONG len = sizeof(IPC_MERGE_ENTRY) + (directoryInfo->Name.MaximumLength + directoryInfo->TypeName.MaximumLength) * sizeof(WCHAR);
+
+            //
+            // when we are joining we remove the older entries when a duplicate is encountered
+            //
+
+            if (join) {
+
+                IPC_MERGE_ENTRY* entry = List_Head(&merge->objects);
+                while (entry) {
+
+                    if (entry->Name.Length == directoryInfo->Name.Length && memcmp(entry->Name.Buffer, directoryInfo->Name.Buffer, entry->Name.Length) == 0)
+                        break;
+
+                    entry = List_Next(entry);
+                }
+
+                if (entry) {
+
+                    if (entry->TypeName.Length == directoryInfo->TypeName.Length && memcmp(entry->TypeName.Buffer, directoryInfo->TypeName.Buffer, entry->TypeName.Length) == 0)
+                        continue; // identical entry, nothign to do
+
+                    // same name but different type, remove old entry
+                    List_Remove(&merge->objects, entry);
+                    Dll_Free(entry);
+                }
+            }
+
+            //
+            // add new entry
+            //
+
+            IPC_MERGE_ENTRY* entry = Dll_Alloc(len);
+            WCHAR* ptr = entry + 1;
+
+            entry->Name.Length = directoryInfo->Name.Length;
+            entry->Name.MaximumLength = directoryInfo->Name.MaximumLength;
+            entry->Name.Buffer = ptr;
+            memcpy(ptr, directoryInfo->Name.Buffer, directoryInfo->Name.MaximumLength);
+            ptr += directoryInfo->Name.MaximumLength / sizeof(WCHAR);
+
+            entry->TypeName.Length = directoryInfo->TypeName.Length;
+            entry->TypeName.MaximumLength = directoryInfo->TypeName.MaximumLength;
+            entry->TypeName.Buffer = ptr;
+            memcpy(ptr, directoryInfo->TypeName.Buffer, directoryInfo->TypeName.MaximumLength);
+            //ptr += directoryInfo->TypeName.MaximumLength / sizeof(WCHAR);
+
+            List_Insert_After(&merge->objects, NULL, entry);
+        }
+    }
+
+    Dll_Free(buffer);
+
+    extern P_NtClose __sys_NtClose;
+    __sys_NtClose(directoryHandle);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
 // Ipc_NtQueryDirectoryObject
 //---------------------------------------------------------------------------
 
@@ -4065,8 +4244,133 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
     PULONG Context,
     PULONG ReturnLength)
 {
-    SbieApi_Log(2205, L"NtQueryDirectoryObject");
-    return __sys_NtQueryDirectoryObject(DirectoryHandle, Buffer, Length, ReturnSingleEntry, RestartScan, Context, ReturnLength);
+    IPC_MERGE *merge;
+
+    EnterCriticalSection(&Ipc_Handles_CritSec);
+
+    merge = List_Head(&Ipc_Handles);
+    while (merge) {
+
+        IPC_MERGE *next = List_Next(merge);
+
+        if (merge->handle == DirectoryHandle)
+            break;
+
+        merge = next;
+    }
+
+    if (RestartScan && merge != NULL) {
+
+        Handle_UnRegisterHandler(merge->handle, Ipc_NtClose, NULL);
+        List_Remove(&Ipc_Handles, merge);
+        Ipc_MergeFree(merge);
+
+        merge = NULL;
+    }
+
+    if (! merge) {
+
+        merge = Dll_Alloc(sizeof(IPC_MERGE));
+        memzero(merge, sizeof(IPC_MERGE));
+
+        merge->handle = DirectoryHandle;
+
+        List_Insert_Before(&Ipc_Handles, NULL, merge);
+        Handle_RegisterHandler(merge->handle, Ipc_NtClose, NULL, FALSE);
+
+        WCHAR *TruePath;
+        WCHAR *CopyPath;
+        NTSTATUS status = Ipc_GetName(DirectoryHandle, NULL, &TruePath, &CopyPath, NULL);
+
+        if (!NT_SUCCESS(status))
+            return status;
+
+        Ipc_MergeDirectoryObject(merge, TruePath, FALSE);
+
+        ULONG len = wcslen(CopyPath); // fix root copy path, remove tailing '\\'
+        if (CopyPath[len - 1] == L'\\') CopyPath[len - 1] = 0;
+
+        Ipc_MergeDirectoryObject(merge, CopyPath, TRUE);
+    }
+
+    //
+    // goto index, for better performacne we could cache indexes
+    //
+
+    IPC_MERGE_ENTRY* entry = List_Head(&merge->objects);
+
+    ULONG indexCounter = 0;
+    if (Context) {
+        for (; entry && indexCounter < *Context; indexCounter++)
+            entry = List_Next(entry);
+    }
+    if (!entry)
+        return STATUS_NO_MORE_ENTRIES;
+
+    //
+    // count the buffer space
+    //
+
+    ULONG CountToGo = 0;
+    ULONG TotalLength = sizeof(OBJECT_DIRECTORY_INFORMATION);
+    for (IPC_MERGE_ENTRY* cur = entry; cur; cur = List_Next(cur)) {
+
+        ULONG len = sizeof(OBJECT_DIRECTORY_INFORMATION) + (cur->Name.MaximumLength + cur->TypeName.MaximumLength) * sizeof(WCHAR);
+
+        if (TotalLength + len > Length)
+            break; // not enough space for this entry
+
+        CountToGo++;
+        TotalLength += len;
+
+        if (ReturnSingleEntry)
+            break;
+    }
+
+    //
+    // fill output buffer
+    //
+
+    POBJECT_DIRECTORY_INFORMATION directoryInfo = Buffer;
+    WCHAR* ptr = directoryInfo + CountToGo + 1;
+
+    ULONG EndIndex = indexCounter + CountToGo;
+    for (; entry && indexCounter < EndIndex; indexCounter++) {
+
+        directoryInfo->Name.Length = entry->Name.Length;
+        directoryInfo->Name.MaximumLength = entry->Name.MaximumLength;
+        directoryInfo->Name.Buffer = ptr;
+        memcpy(ptr, entry->Name.Buffer, entry->Name.MaximumLength);
+        ptr += directoryInfo->Name.MaximumLength / sizeof(WCHAR);
+
+        directoryInfo->TypeName.Length = entry->TypeName.Length;
+        directoryInfo->TypeName.MaximumLength = entry->TypeName.MaximumLength;
+        directoryInfo->TypeName.Buffer = ptr;
+        memcpy(ptr, entry->TypeName.Buffer, entry->TypeName.MaximumLength);
+        ptr += directoryInfo->TypeName.MaximumLength / sizeof(WCHAR);
+
+        directoryInfo++;
+
+        entry = List_Next(entry);
+    }
+
+    //
+    // terminate listing with an empty entry
+    //
+
+    directoryInfo->Name.Length = directoryInfo->TypeName.Length = 0;
+    directoryInfo->Name.MaximumLength = directoryInfo->TypeName.MaximumLength = 0;
+    directoryInfo->Name.Buffer = directoryInfo->TypeName.Buffer = NULL;
+
+    //
+    // set return values
+    //
+
+    if (ReturnLength) *ReturnLength = TotalLength;
+    if (Context) *Context = indexCounter;
+    if (indexCounter < (ULONG)merge->objects.count)
+        return STATUS_MORE_ENTRIES;
+    return STATUS_SUCCESS;
 }
 
 

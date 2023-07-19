@@ -857,7 +857,7 @@ bool COnlineUpdater::RunInstaller(bool bSilent)
 
 	theAPI->TerminateAll();
 
-	if (RunInstaller2(FilePath, bSilent)) {
+	if (RunInstaller2(FilePath, true)) {
 		if (bSilent)
 			theConf->DelValue("Updater/InstallerVersion");
 		QApplication::quit();

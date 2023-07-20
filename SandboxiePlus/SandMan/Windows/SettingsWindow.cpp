@@ -207,6 +207,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	AddIconToLabel(ui.lblInterface, CSandMan::GetIcon("GUI").pixmap(size,size));
 
 	AddIconToLabel(ui.lblDisplay, CSandMan::GetIcon("Advanced").pixmap(size,size));
+	AddIconToLabel(ui.lblIni, CSandMan::GetIcon("EditIni").pixmap(size,size));
 
 	AddIconToLabel(ui.lblBoxRoot, CSandMan::GetIcon("Sandbox").pixmap(size,size));
 	AddIconToLabel(ui.lblBoxFeatures, CSandMan::GetIcon("Miscellaneous").pixmap(size,size));
@@ -293,6 +294,11 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	m_HoldChange = false;
 
+	CPathEdit* pEditor = new CPathEdit();
+	ui.txtEditor->parentWidget()->layout()->replaceWidget(ui.txtEditor, pEditor);
+	ui.txtEditor->deleteLater();
+	ui.txtEditor = pEditor->GetEdit();
+
 	LoadSettings();
 
 
@@ -357,6 +363,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	connect(ui.cmbFontScale, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.cmbFontScale, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnChangeGUI()));
+
+	connect(ui.txtEditor, SIGNAL(textChanged(const QString&)), this, SLOT(OnOptChanged()));
 	m_bRebuildUI = false;
 	//
 
@@ -858,6 +866,8 @@ void CSettingsWindow::LoadSettings()
 	//ui.cmbFontScale->setCurrentIndex(ui.cmbFontScale->findData(theConf->GetInt("Options/FontScaling", 100)));
 	ui.cmbFontScale->setCurrentText(QString::number(theConf->GetInt("Options/FontScaling", 100)));
 
+	ui.txtEditor->setText(theConf->GetString("Options/Editor", "notepad.exe"));
+
 	ui.chkSilentMode->setChecked(theConf->GetBool("Options/CheckSilentMode", true));
 	ui.chkCopyProgress->setChecked(theConf->GetBool("Options/ShowMigrationProgress", true));
 	ui.chkNoMessages->setChecked(!theConf->GetBool("Options/ShowNotifications", true));
@@ -1163,6 +1173,8 @@ void CSettingsWindow::SaveSettings()
 	else if (Scaling > 500)
 		Scaling = 500;
 	theConf->SetValue("Options/FontScaling", Scaling);
+
+	theConf->SetValue("Options/Editor", ui.txtEditor->text());
 
 	AutorunEnable(ui.chkAutoStart->isChecked());
 

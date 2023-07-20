@@ -9,6 +9,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.10.1 / 5.65.1] - 2023-07-??
 
+### Added
+- added UI option to change ini editor [#3116](https://github.com/sandboxie-plus/Sandboxie/issues/3116)
+
 ### Changed
 - reworked Nt Object Handle handling
 
@@ -16,8 +19,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed "Disable Security Isolation" causes a game to stop playing audio [#2893](https://github.com/sandboxie-plus/Sandboxie/issues/2893)
 - fixed NtQueryDirectoryObject not implemented [#2734](https://github.com/sandboxie-plus/Sandboxie/issues/2734)
 - fixed issue with working directory for run menu entries
-- fixed CreateMutex, GetLastError error ( Ipc_GetName ) [#3112](https://github.com/sandboxie-plus/Sandboxie/issues/3112)
-
+- fixed inpoper global symlink in sandboxed namespace [#3112](https://github.com/sandboxie-plus/Sandboxie/issues/3112)
+- fixed 'Addon already installed!' error when clicking 'Show Stack Trace' [#3114](https://github.com/sandboxie-plus/Sandboxie/issues/3114)
 
 
 

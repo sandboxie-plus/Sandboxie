@@ -547,6 +547,8 @@ private:
 	void WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& OnValue, const QString& OffValue);
 	void WriteText(const QString& Name, const QString& Value);
 	void WriteTextList(const QString& Setting, const QStringList& List);
+	void WriteTextSafe(const QString& Name, const QString& Value);
+	QString ReadTextSafe(const QString& Name, const QString& Default);
 
 	Ui::OptionsWindow ui;
 	QCheckBox* m_pUseIcon;

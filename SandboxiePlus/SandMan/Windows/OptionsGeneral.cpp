@@ -207,7 +207,7 @@ void COptionsWindow::CreateGeneral()
 
 void COptionsWindow::LoadGeneral()
 {
-	QString BoxNameTitle = m_pBox->GetText("BoxNameTitle", "n", false, true, false);
+	QString BoxNameTitle = ReadTextSafe("BoxNameTitle", "n");
 	ui.cmbBoxIndicator->setCurrentIndex(ui.cmbBoxIndicator->findData(BoxNameTitle.toLower()));
 
 	QStringList BorderCfg = m_pBox->GetText("BorderColor").split(",");
@@ -316,7 +316,11 @@ void COptionsWindow::LoadGeneral()
 
 void COptionsWindow::SaveGeneral()
 {
-	WriteText("BoxNameTitle", ui.cmbBoxIndicator->currentData().toString());
+	QString BoxNameTitle = ui.cmbBoxIndicator->currentData().toString();
+	if (BoxNameTitle == "n")
+		WriteTextSafe("BoxNameTitle", "");
+	else
+		WriteTextSafe("BoxNameTitle", BoxNameTitle);
 
 	QStringList BorderCfg;
 	BorderCfg.append(QString("#%1%2%3").arg(m_BorderColor.blue(), 2, 16, QChar('0')).arg(m_BorderColor.green(), 2, 16, QChar('0')).arg(m_BorderColor.red(), 2, 16, QChar('0')));
@@ -399,7 +403,12 @@ void COptionsWindow::SaveGeneral()
 		WriteGlobalCheck(ui.chkUseVolumeSerialNumbers, "UseVolumeSerialNumbers", false);
 	}
 
-	WriteText("CopyLimitKb", ui.chkCopyLimit->isChecked() ? ui.txtCopyLimit->text() : "-1");
+	int iLimit = ui.chkCopyLimit->isChecked() ? ui.txtCopyLimit->text().toInt() : -1;
+	if(iLimit != 80 * 1024)
+		WriteText("CopyLimitKb", QString::number(iLimit));
+	else
+		m_pBox->DelValue("CopyLimitKb");
+
 	WriteAdvancedCheck(ui.chkCopyPrompt, "PromptForFileMigration", "", "n");
 	WriteAdvancedCheck(ui.chkNoCopyWarn, "CopyLimitSilent", "", "y");
 	WriteAdvancedCheck(ui.chkDenyWrite, "CopyBlockDenyWrite", "y", "");

@@ -21,7 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with working directory for run menu entries
 - fixed inpoper global symlink in sandboxed namespace [#3112](https://github.com/sandboxie-plus/Sandboxie/issues/3112)
 - fixed 'Addon already installed!' error when clicking 'Show Stack Trace' [#3114](https://github.com/sandboxie-plus/Sandboxie/issues/3114)
-
+- fixed existing BoxNameTitle=process.exe,- removed when toggling other options [#3106](https://github.com/sandboxie-plus/Sandboxie/issues/3106)
 
 
 

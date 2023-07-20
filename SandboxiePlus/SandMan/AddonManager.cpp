@@ -100,7 +100,7 @@ CAddonPtr CAddonManager::GetAddon(const QString& Id)
 
 bool CAddonManager::HasAddon(const QString& Id)
 {
-	CAddonPtr pAddon = GetAddon("FileChecker");
+	CAddonPtr pAddon = GetAddon(Id);
 	return pAddon && pAddon->Installed;
 }
 

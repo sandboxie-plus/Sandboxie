@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added UI option to change ini editor [#3116](https://github.com/sandboxie-plus/Sandboxie/issues/3116)
+- added Separate protection against box removal and content deletion [#3104] (https://github.com/sandboxie-plus/Sandboxie/issues/3104)
 
 ### Changed
 - reworked Nt Object Handle handling

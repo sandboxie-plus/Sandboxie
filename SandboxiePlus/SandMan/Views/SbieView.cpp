@@ -1354,17 +1354,20 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		bool bChanged = false;
 		foreach(const CSandBoxPtr& pBox, SandBoxes)
 		{
+			SB_STATUS Status = SB_OK;
+
 			if (!pBox->GetBool("IsShadow")) {
-				SB_STATUS Status = theGUI->DeleteBoxContent(pBox, CSandMan::eForDelete);
+				Status = theGUI->DeleteBoxContent(pBox, CSandMan::eForDelete);
 				if (Status.GetMsgCode() == SB_Canceled)
 					break;
-				if (Status.IsError())
-					continue;
 			}
 			
+			if (pBox->GetBool("NeverRemove", false))
+				Status = SB_ERR(SB_DeleteProtect);
+
 			QString Name = pBox->GetName();
-			SB_STATUS Status = pBox->RemoveBox();
-			Results.append(Status);
+			if (!Status.IsError())
+				Status = pBox->RemoveBox();
 
 			if (!Status.IsError()) {
 				theConf->DelValue("SizeCache/" + Name);
@@ -1377,6 +1380,8 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 					}
 				}
 			}
+
+			Results.append(Status);
 		}
 
 		if(bChanged)

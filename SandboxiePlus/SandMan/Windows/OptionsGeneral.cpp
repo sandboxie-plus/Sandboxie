@@ -303,7 +303,12 @@ void COptionsWindow::LoadGeneral()
 	
 	LoadCopyRules();
 
-	ui.chkProtectBox->setChecked(m_pBox->GetBool("NeverDelete", false));
+	if (m_pBox->GetBool("NeverDelete", false))
+		ui.chkProtectBox->setCheckState(Qt::Checked);
+	else if (m_pBox->GetBool("NeverRemove", false))
+		ui.chkProtectBox->setCheckState(Qt::PartiallyChecked);
+	else
+		ui.chkProtectBox->setCheckState(Qt::Unchecked);
 	ui.chkAutoEmpty->setChecked(m_pBox->GetBool("AutoDelete", false));
 
 	ui.chkRawDiskRead->setChecked(m_pBox->GetBool("AllowRawDiskRead", false));
@@ -414,8 +419,18 @@ void COptionsWindow::SaveGeneral()
 	WriteAdvancedCheck(ui.chkDenyWrite, "CopyBlockDenyWrite", "y", "");
 	WriteAdvancedCheck(ui.chkNoCopyMsg, "NotifyNoCopy", "y", "");
 
-
-	WriteAdvancedCheck(ui.chkProtectBox, "NeverDelete", "y", "");
+	if (ui.chkProtectBox->checkState() == Qt::Checked) {
+		m_pBox->SetText("NeverDelete", "y");
+		m_pBox->SetText("NeverRemove", "y");
+	}
+	else if (ui.chkProtectBox->checkState() == Qt::PartiallyChecked) {
+		m_pBox->DelValue("NeverDelete");
+		m_pBox->SetText("NeverRemove", "y");
+	}
+	else {
+		m_pBox->DelValue("NeverDelete");
+		m_pBox->DelValue("NeverRemove");
+	}
 	WriteAdvancedCheck(ui.chkAutoEmpty, "AutoDelete", "y", "");
 
 	WriteAdvancedCheck(ui.chkRawDiskRead, "AllowRawDiskRead", "y", "");

@@ -592,7 +592,7 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CFileBrowserWindow</name>
     <message>
-        <location filename="Views/FileView.cpp" line="399"/>
+        <location filename="Views/FileView.cpp" line="401"/>
         <source>%1 - Files</source>
         <translatorcomment>Plików / Pliki</translatorcomment>
         <translation>%1 - Plików</translation>
@@ -621,37 +621,37 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CFileView</name>
     <message>
-        <location filename="Views/FileView.cpp" line="188"/>
+        <location filename="Views/FileView.cpp" line="189"/>
         <source>Create Shortcut</source>
         <translation>Utwórz skrót</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="210"/>
+        <location filename="Views/FileView.cpp" line="212"/>
         <source>Pin to Box Run Menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="217"/>
+        <location filename="Views/FileView.cpp" line="219"/>
         <source>Recover to Any Folder</source>
         <translation>Przywróć do dowolnego folderu</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="219"/>
+        <location filename="Views/FileView.cpp" line="221"/>
         <source>Recover to Same Folder</source>
         <translation>Przywróć do tego samego folderu</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="223"/>
+        <location filename="Views/FileView.cpp" line="225"/>
         <source>Run Recovery Checks</source>
         <translation>Uruchom testy odzyskiwania</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="287"/>
+        <location filename="Views/FileView.cpp" line="289"/>
         <source>Select Directory</source>
         <translation>Wybierz katalog</translation>
     </message>
     <message>
-        <location filename="Views/FileView.cpp" line="353"/>
+        <location filename="Views/FileView.cpp" line="355"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Utwórz skrót do piaskownicy %1</translation>
     </message>
@@ -1419,25 +1419,25 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation>Pokaż okno dialogowe</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="295"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="290"/>
         <source>Indeterminate</source>
         <translation>Nieokreślony</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="485"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="585"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="475"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="575"/>
         <source>Always copy</source>
         <translation>Zawsze kopiuj</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="486"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="586"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="476"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="576"/>
         <source>Don&apos;t copy</source>
         <translation>Nie kopiuj</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="487"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="587"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="477"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="577"/>
         <source>Copy empty</source>
         <translation>Kopiuj puste</translation>
     </message>
@@ -1504,12 +1504,12 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation>Niektóre ustawienia nie zostały jeszcze zapisane, czy naprawdę chcesz zamknąć ustawienia?</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="713"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="703"/>
         <source>kilobytes (%1)</source>
         <translation>kilobajty (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="819"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="809"/>
         <source>Select color</source>
         <translation>Wybierz kolor</translation>
     </message>
@@ -1518,7 +1518,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Proszę podać ścieżkę programu</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="894"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="884"/>
         <source>Select Program</source>
         <translation>Wybierz program</translation>
     </message>
@@ -1540,18 +1540,18 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Program</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="894"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="884"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Programy (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="898"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="914"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="888"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="909"/>
         <source>Please enter a menu title</source>
         <translation>Proszę wpisać tytuł menu</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="910"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="905"/>
         <source>Please enter a command</source>
         <translation>Proszę wpisać polecenie</translation>
     </message>
@@ -1560,8 +1560,8 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <location filename="Windows/OptionsWindow.cpp" line="1048"/>
         <location filename="Windows/OptionsAccess.cpp" line="404"/>
         <location filename="Windows/OptionsAccess.cpp" line="636"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="518"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="613"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="508"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="603"/>
         <location filename="Windows/OptionsNetwork.cpp" line="193"/>
         <location filename="Windows/OptionsNetwork.cpp" line="466"/>
         <location filename="Windows/OptionsNetwork.cpp" line="558"/>
@@ -1762,8 +1762,8 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <location filename="Windows/OptionsAccess.cpp" line="632"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="554"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="629"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="513"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="609"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="503"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="599"/>
         <location filename="Windows/OptionsNetwork.cpp" line="461"/>
         <location filename="Windows/OptionsNetwork.cpp" line="554"/>
         <location filename="Windows/OptionsNetwork.cpp" line="667"/>
@@ -1798,7 +1798,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="611"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="605"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="580"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="570"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
         <location filename="Windows/OptionsNetwork.cpp" line="533"/>
@@ -4279,137 +4279,137 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
 <context>
     <name>CSbieView</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="150"/>
-        <location filename="Views/SbieView.cpp" line="280"/>
+        <location filename="Views/SbieView.cpp" line="151"/>
+        <location filename="Views/SbieView.cpp" line="281"/>
         <source>Create New Box</source>
         <translation>Utwórz nowy boks</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="396"/>
+        <location filename="Views/SbieView.cpp" line="397"/>
         <source>Remove Group</source>
         <translation>Usuń grupę</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="160"/>
-        <location filename="Views/SbieView.cpp" line="290"/>
+        <location filename="Views/SbieView.cpp" line="161"/>
+        <location filename="Views/SbieView.cpp" line="291"/>
         <source>Run</source>
         <translation>Uruchom</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="165"/>
+        <location filename="Views/SbieView.cpp" line="166"/>
         <source>Run Program</source>
         <translation>Uruchom program</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="166"/>
+        <location filename="Views/SbieView.cpp" line="167"/>
         <source>Run from Start Menu</source>
         <translation>Uruchom program z menu startowego</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="176"/>
+        <location filename="Views/SbieView.cpp" line="177"/>
         <source>Standard Applications</source>
         <translation>Aplikacje standardowe</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="193"/>
+        <location filename="Views/SbieView.cpp" line="194"/>
         <source>Terminate All Programs</source>
         <translation>Zakończ wszystkie programy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="101"/>
-        <location filename="Views/SbieView.cpp" line="199"/>
-        <location filename="Views/SbieView.cpp" line="258"/>
-        <location filename="Views/SbieView.cpp" line="338"/>
-        <location filename="Views/SbieView.cpp" line="377"/>
+        <location filename="Views/SbieView.cpp" line="102"/>
+        <location filename="Views/SbieView.cpp" line="200"/>
+        <location filename="Views/SbieView.cpp" line="259"/>
+        <location filename="Views/SbieView.cpp" line="339"/>
+        <location filename="Views/SbieView.cpp" line="378"/>
         <source>Create Shortcut</source>
         <translation>Utwórz skrót</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="201"/>
-        <location filename="Views/SbieView.cpp" line="323"/>
+        <location filename="Views/SbieView.cpp" line="202"/>
+        <location filename="Views/SbieView.cpp" line="324"/>
         <source>Explore Content</source>
         <translation>Eksploruj zawartość</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="203"/>
-        <location filename="Views/SbieView.cpp" line="330"/>
+        <location filename="Views/SbieView.cpp" line="204"/>
+        <location filename="Views/SbieView.cpp" line="331"/>
         <source>Snapshots Manager</source>
         <translation>Menedżer migawek</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="204"/>
+        <location filename="Views/SbieView.cpp" line="205"/>
         <source>Recover Files</source>
         <translation>Przywróć pliki</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="205"/>
-        <location filename="Views/SbieView.cpp" line="322"/>
+        <location filename="Views/SbieView.cpp" line="206"/>
+        <location filename="Views/SbieView.cpp" line="323"/>
         <source>Delete Content</source>
         <translation>Skasuj zawartość</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="212"/>
+        <location filename="Views/SbieView.cpp" line="213"/>
         <source>Sandbox Presets</source>
         <translation>Ustawienia wstępne piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="224"/>
+        <location filename="Views/SbieView.cpp" line="225"/>
         <source>Block Internet Access</source>
         <translation>Zablokuj dostęp do Internetu</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="226"/>
+        <location filename="Views/SbieView.cpp" line="227"/>
         <source>Allow Network Shares</source>
         <translation>Zezwól dostęp do dysków sieciowych</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="215"/>
+        <location filename="Views/SbieView.cpp" line="216"/>
         <source>Drop Admin Rights</source>
         <translation>Porzuć uprawnienia administratora</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="177"/>
+        <location filename="Views/SbieView.cpp" line="178"/>
         <source>Default Web Browser</source>
         <translation>Domyślna przeglądarka WWW</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="178"/>
+        <location filename="Views/SbieView.cpp" line="179"/>
         <source>Default eMail Client</source>
         <translation>Domyślny klient eMail</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="180"/>
+        <location filename="Views/SbieView.cpp" line="181"/>
         <source>Windows Explorer</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="181"/>
+        <location filename="Views/SbieView.cpp" line="182"/>
         <source>Registry Editor</source>
         <translation>Edytor rejestru</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="182"/>
+        <location filename="Views/SbieView.cpp" line="183"/>
         <source>Programs and Features</source>
         <translation>Programy i funkcje</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="214"/>
+        <location filename="Views/SbieView.cpp" line="215"/>
         <source>Ask for UAC Elevation</source>
         <translation>Pytaj o podniesienie poziomu kontroli konta użytkownika</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="216"/>
+        <location filename="Views/SbieView.cpp" line="217"/>
         <source>Emulate Admin Rights</source>
         <translation>Emuluj prawa administratora</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="207"/>
+        <location filename="Views/SbieView.cpp" line="208"/>
         <source>Sandbox Options</source>
         <translation>Ustawienia piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="169"/>
-        <location filename="Views/SbieView.cpp" line="301"/>
+        <location filename="Views/SbieView.cpp" line="170"/>
+        <location filename="Views/SbieView.cpp" line="302"/>
         <source>(Host) Start Menu</source>
         <translation>(Host) Menu Start</translation>
     </message>
@@ -4418,105 +4418,105 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Więcej narzędzi</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="196"/>
+        <location filename="Views/SbieView.cpp" line="197"/>
         <source>Browse Files</source>
         <translation>Przeglądaj pliki</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="198"/>
-        <location filename="Views/SbieView.cpp" line="337"/>
+        <location filename="Views/SbieView.cpp" line="199"/>
+        <location filename="Views/SbieView.cpp" line="338"/>
         <source>Refresh Info</source>
         <translation>Odśwież Info</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="230"/>
+        <location filename="Views/SbieView.cpp" line="231"/>
         <source>Immediate Recovery</source>
         <translation>Natychmiastowe Przywracanie</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="232"/>
+        <location filename="Views/SbieView.cpp" line="233"/>
         <source>Disable Force Rules</source>
         <translation>Wyłącz wymuszone reguły</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="235"/>
-        <location filename="Views/SbieView.cpp" line="328"/>
+        <location filename="Views/SbieView.cpp" line="236"/>
+        <location filename="Views/SbieView.cpp" line="329"/>
         <source>Sandbox Tools</source>
         <translation>Narzędzia piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="236"/>
+        <location filename="Views/SbieView.cpp" line="237"/>
         <source>Duplicate Box Config</source>
         <translation>Powiel konfigurację skrzynki</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="237"/>
+        <location filename="Views/SbieView.cpp" line="238"/>
         <source>Export Box</source>
         <translation>Export Boksu</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="239"/>
-        <location filename="Views/SbieView.cpp" line="341"/>
+        <location filename="Views/SbieView.cpp" line="240"/>
+        <location filename="Views/SbieView.cpp" line="342"/>
         <source>Rename Sandbox</source>
         <translation>Zmień nazwę piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="240"/>
-        <location filename="Views/SbieView.cpp" line="342"/>
+        <location filename="Views/SbieView.cpp" line="241"/>
+        <location filename="Views/SbieView.cpp" line="343"/>
         <source>Move Sandbox</source>
         <translation>Przenieś piaskownicę</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="251"/>
-        <location filename="Views/SbieView.cpp" line="353"/>
+        <location filename="Views/SbieView.cpp" line="252"/>
+        <location filename="Views/SbieView.cpp" line="354"/>
         <source>Remove Sandbox</source>
         <translation>Usuń piaskownicę</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="256"/>
-        <location filename="Views/SbieView.cpp" line="375"/>
+        <location filename="Views/SbieView.cpp" line="257"/>
+        <location filename="Views/SbieView.cpp" line="376"/>
         <source>Terminate</source>
         <translation>Zakończyć</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="259"/>
+        <location filename="Views/SbieView.cpp" line="260"/>
         <source>Preset</source>
         <translation>Ustawienia wstępne</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="99"/>
-        <location filename="Views/SbieView.cpp" line="260"/>
+        <location filename="Views/SbieView.cpp" line="100"/>
+        <location filename="Views/SbieView.cpp" line="261"/>
         <source>Pin to Run Menu</source>
         <translation>Przypnij do Menu &apos;Wykonaj&apos;</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="152"/>
-        <location filename="Views/SbieView.cpp" line="282"/>
+        <location filename="Views/SbieView.cpp" line="153"/>
+        <location filename="Views/SbieView.cpp" line="283"/>
         <source>Import Box</source>
         <translation type="unfinished">Import Boksu</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="262"/>
+        <location filename="Views/SbieView.cpp" line="263"/>
         <source>Block and Terminate</source>
         <translation>Zakończ i zablokuj</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="266"/>
+        <location filename="Views/SbieView.cpp" line="267"/>
         <source>Allow internet access</source>
         <translation>Zezwól na dostęp do Internetu</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="268"/>
+        <location filename="Views/SbieView.cpp" line="269"/>
         <source>Force into this sandbox</source>
         <translation>Wymuś wykonanie w tej piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="270"/>
+        <location filename="Views/SbieView.cpp" line="271"/>
         <source>Set Linger Process</source>
         <translation>Ustaw zawieszony program</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="272"/>
+        <location filename="Views/SbieView.cpp" line="273"/>
         <source>Set Leader Process</source>
         <translation>Ustaw proces wiodący</translation>
     </message>
@@ -4525,132 +4525,132 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Uruchom w piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="295"/>
+        <location filename="Views/SbieView.cpp" line="296"/>
         <source>Run Web Browser</source>
         <translation>Uruchom przeglądarkę WWW</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="296"/>
+        <location filename="Views/SbieView.cpp" line="297"/>
         <source>Run eMail Reader</source>
         <translation>Uruchom czytnik eMail</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="297"/>
+        <location filename="Views/SbieView.cpp" line="298"/>
         <source>Run Any Program</source>
         <translation>Uruchom dowolny program</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="298"/>
+        <location filename="Views/SbieView.cpp" line="299"/>
         <source>Run From Start Menu</source>
         <translation>Uruchom z menu Start</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="306"/>
+        <location filename="Views/SbieView.cpp" line="307"/>
         <source>Run Windows Explorer</source>
         <translation>Uruchom Eksploratora Windows</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="320"/>
+        <location filename="Views/SbieView.cpp" line="321"/>
         <source>Terminate Programs</source>
         <translation>Zakończ programy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="321"/>
+        <location filename="Views/SbieView.cpp" line="322"/>
         <source>Quick Recover</source>
         <translation>Szybkie odzyskiwanie</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="326"/>
+        <location filename="Views/SbieView.cpp" line="327"/>
         <source>Sandbox Settings</source>
         <translation>Ustawienia piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="333"/>
+        <location filename="Views/SbieView.cpp" line="334"/>
         <source>Duplicate Sandbox Config</source>
         <translation>Powiel konfigurację piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="334"/>
+        <location filename="Views/SbieView.cpp" line="335"/>
         <source>Export Sandbox</source>
         <translation>Eksport Piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="395"/>
+        <location filename="Views/SbieView.cpp" line="396"/>
         <source>Move Group</source>
         <translation>Przenieś grupę</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="535"/>
+        <location filename="Views/SbieView.cpp" line="536"/>
         <source>    File root: %1
 </source>
         <translation>    File root: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="536"/>
+        <location filename="Views/SbieView.cpp" line="537"/>
         <source>    Registry root: %1
 </source>
         <translation>    Registry root: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="537"/>
+        <location filename="Views/SbieView.cpp" line="538"/>
         <source>    IPC root: %1
 </source>
         <translation>    IPC root: %1
 </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="539"/>
+        <location filename="Views/SbieView.cpp" line="540"/>
         <source>Options:
     </source>
         <translation>Opcje:
     </translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="743"/>
+        <location filename="Views/SbieView.cpp" line="746"/>
         <source>[None]</source>
         <translation>[żadne]</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1015"/>
+        <location filename="Views/SbieView.cpp" line="1018"/>
         <source>This name is already in use, please select an alternative box name</source>
         <translation type="unfinished">Ta nazwa jest już używana, proszę wybrać alternatywną nazwę boksu</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1029"/>
+        <location filename="Views/SbieView.cpp" line="1032"/>
         <source>Importing: %1</source>
         <translation type="unfinished">Importowanie: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1043"/>
+        <location filename="Views/SbieView.cpp" line="1046"/>
         <source>Please enter a new group name</source>
         <translation>Proszę wpisać nazwę nowej grupy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="852"/>
+        <location filename="Views/SbieView.cpp" line="855"/>
         <source>Do you really want to remove the selected group(s)?</source>
         <translation>Czy naprawdę chcesz skasować wybrane grupy?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="151"/>
-        <location filename="Views/SbieView.cpp" line="281"/>
+        <location filename="Views/SbieView.cpp" line="152"/>
+        <location filename="Views/SbieView.cpp" line="282"/>
         <source>Create Box Group</source>
         <translation>Utwórz grupę boksów</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="394"/>
+        <location filename="Views/SbieView.cpp" line="395"/>
         <source>Rename Group</source>
         <translation>Zmień nazwę grupy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="156"/>
-        <location filename="Views/SbieView.cpp" line="286"/>
+        <location filename="Views/SbieView.cpp" line="157"/>
+        <location filename="Views/SbieView.cpp" line="287"/>
         <source>Stop Operations</source>
         <translation>Zatrzymaj operacje</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="185"/>
+        <location filename="Views/SbieView.cpp" line="186"/>
         <source>Command Prompt</source>
         <translation>Wiersz polecenia</translation>
     </message>
@@ -4660,33 +4660,33 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Narzędzia w piaskownicach</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="186"/>
+        <location filename="Views/SbieView.cpp" line="187"/>
         <source>Command Prompt (as Admin)</source>
         <translation>Wiersz polecenia (jako Admin)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="190"/>
+        <location filename="Views/SbieView.cpp" line="191"/>
         <source>Command Prompt (32-bit)</source>
         <translation>Wiersz polecenia (32-bit)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="175"/>
+        <location filename="Views/SbieView.cpp" line="176"/>
         <source>Execute Autorun Entries</source>
         <translatorcomment>nieznany kontekst</translatorcomment>
         <translation>Wykonaj wpisy z autorun</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="329"/>
+        <location filename="Views/SbieView.cpp" line="330"/>
         <source>Browse Content</source>
         <translation>Przeglądaj zawartość</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="195"/>
+        <location filename="Views/SbieView.cpp" line="196"/>
         <source>Box Content</source>
         <translation>Przegląd piaskownicy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="202"/>
+        <location filename="Views/SbieView.cpp" line="203"/>
         <source>Open Registry</source>
         <translation>Otwórz rejestr</translation>
     </message>
@@ -4699,19 +4699,19 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Przenieś boks/grupę</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="241"/>
-        <location filename="Views/SbieView.cpp" line="343"/>
+        <location filename="Views/SbieView.cpp" line="242"/>
+        <location filename="Views/SbieView.cpp" line="344"/>
         <source>Move Up</source>
         <translation>Przesuń w górę</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="246"/>
-        <location filename="Views/SbieView.cpp" line="348"/>
+        <location filename="Views/SbieView.cpp" line="247"/>
+        <location filename="Views/SbieView.cpp" line="349"/>
         <source>Move Down</source>
         <translation>Przesuń w dół</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="842"/>
+        <location filename="Views/SbieView.cpp" line="845"/>
         <source>Please enter a new name for the Group.</source>
         <translation>Proszę wpisać nową nazwę grupy.</translation>
     </message>
@@ -4720,89 +4720,89 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Ta nazwa grupy jest już używana.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="889"/>
+        <location filename="Views/SbieView.cpp" line="892"/>
         <source>Move entries by (negative values move up, positive values move down):</source>
         <translatorcomment>nieznany kontekst</translatorcomment>
         <translation>Przenieś wpisy o (wartości ujemne w górę, wartości dodatnie w dół):</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="937"/>
+        <location filename="Views/SbieView.cpp" line="940"/>
         <source>A group can not be its own parent.</source>
         <translation>Grupa nie może być swoim własnym rodzicem.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1069"/>
+        <location filename="Views/SbieView.cpp" line="1072"/>
         <source>The Sandbox name and Box Group name cannot use the &apos;,()&apos; symbol.</source>
         <translation>W nazwie Sandbox i Grupie Boksów nie można używać znaku &apos;,()&apos;.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1074"/>
+        <location filename="Views/SbieView.cpp" line="1077"/>
         <source>This name is already used for a Box Group.</source>
         <translation>Ta nazwa jest już używana dla Grupy Boks.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1079"/>
+        <location filename="Views/SbieView.cpp" line="1082"/>
         <source>This name is already used for a Sandbox.</source>
         <translation>Ta nazwa jest już używana dla Piaskownicy.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1129"/>
-        <location filename="Views/SbieView.cpp" line="1199"/>
-        <location filename="Views/SbieView.cpp" line="1449"/>
+        <location filename="Views/SbieView.cpp" line="1132"/>
+        <location filename="Views/SbieView.cpp" line="1202"/>
+        <location filename="Views/SbieView.cpp" line="1452"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Nie pokazuj ponownie tej wiadomości.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1190"/>
-        <location filename="Views/SbieView.cpp" line="1210"/>
-        <location filename="Views/SbieView.cpp" line="1619"/>
+        <location filename="Views/SbieView.cpp" line="1193"/>
+        <location filename="Views/SbieView.cpp" line="1213"/>
+        <location filename="Views/SbieView.cpp" line="1622"/>
         <source>This Sandbox is empty.</source>
         <translation>Ta piaskownice jest pusta.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1217"/>
+        <location filename="Views/SbieView.cpp" line="1220"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
         <translation>OSTRZEŻENIE: Edytor rejestru otwierany jest poza piaskownicą, dlatego należy zachować ostrożność i wprowadzać zmiany tylko w wybranych wcześniej lokalizacjach piaskownicy.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1218"/>
+        <location filename="Views/SbieView.cpp" line="1221"/>
         <source>Don&apos;t show this warning in future</source>
         <translation>Nie pokazuj tego ostrzeżenia w przyszłości</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1274"/>
+        <location filename="Views/SbieView.cpp" line="1277"/>
         <source>Please enter a new name for the duplicated Sandbox.</source>
         <translation>Proszę wpisać nową nazwę duplikatu piaskownicy.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1274"/>
+        <location filename="Views/SbieView.cpp" line="1277"/>
         <source>%1 Copy</source>
         <translation>%1 kopia</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1002"/>
-        <location filename="Views/SbieView.cpp" line="1312"/>
+        <location filename="Views/SbieView.cpp" line="1005"/>
+        <location filename="Views/SbieView.cpp" line="1315"/>
         <source>Select file name</source>
         <translation>Wybierz nazwę pliku</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1002"/>
-        <location filename="Views/SbieView.cpp" line="1312"/>
+        <location filename="Views/SbieView.cpp" line="1005"/>
+        <location filename="Views/SbieView.cpp" line="1315"/>
         <source>7-zip Archive (*.7z)</source>
         <translation>Archiwum 7-zip (*.7z)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1320"/>
+        <location filename="Views/SbieView.cpp" line="1323"/>
         <source>Exporting: %1</source>
         <translation>Eksportowanie: %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1327"/>
+        <location filename="Views/SbieView.cpp" line="1330"/>
         <source>Please enter a new name for the Sandbox.</source>
         <translation>Proszę wpisać nową nazwę dla piaskownicy.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1348"/>
+        <location filename="Views/SbieView.cpp" line="1351"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <translation>Czy na pewno chcesz skasować wybraną(-e) piaskownicę(-e)?&lt;br /&gt;&lt;br /&gt;Ostrzeżenie: Zawartość boksu również zostanie usunięta!</translation>
     </message>
@@ -4811,68 +4811,68 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Usuwanie %1 zawartości</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1389"/>
+        <location filename="Views/SbieView.cpp" line="1392"/>
         <source>This Sandbox is already empty.</source>
         <translation>Ta piaskownica jest już pusta.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1401"/>
-        <location filename="Views/SbieView.cpp" line="1406"/>
+        <location filename="Views/SbieView.cpp" line="1404"/>
+        <location filename="Views/SbieView.cpp" line="1409"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
         <translation>Czy chcesz skasować zawartość wybranej piaskownicy?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1402"/>
-        <location filename="Views/SbieView.cpp" line="1415"/>
+        <location filename="Views/SbieView.cpp" line="1405"/>
+        <location filename="Views/SbieView.cpp" line="1418"/>
         <source>Also delete all Snapshots</source>
         <translation>Skasuj również wszystkie migawki</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1414"/>
+        <location filename="Views/SbieView.cpp" line="1417"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
         <translation>Czy na pewno chcesz skasować zawartość wszystkich wybranych piaskownic?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1431"/>
+        <location filename="Views/SbieView.cpp" line="1434"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
         <translation>Czy chcesz zakończyć wszystkie procesy w wybranych piaskowniach?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1432"/>
-        <location filename="Views/SbieView.cpp" line="1527"/>
+        <location filename="Views/SbieView.cpp" line="1435"/>
+        <location filename="Views/SbieView.cpp" line="1530"/>
         <source>Terminate without asking</source>
         <translation>Zakończ bez pytania</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1447"/>
+        <location filename="Views/SbieView.cpp" line="1450"/>
         <source>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a new shortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</source>
         <oldsource>The Sandboxie Start Menu will now be displayed. Select an application from the menu, and Sandboxie will create a newshortcut icon on your real desktop, which you can use to invoke the selected application under the supervision of Sandboxie.</oldsource>
         <translation>Pojawi się teraz Menu Startowe Sandboxie. Wybierz aplikację z menu, a Sandboxie utworzy na pulpicie ikonę nowego skrótu, za pomocą której będziesz mógł wywołać wybraną aplikację pod nadzorem Sandboxie.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1501"/>
-        <location filename="Views/SbieView.cpp" line="1554"/>
+        <location filename="Views/SbieView.cpp" line="1504"/>
+        <location filename="Views/SbieView.cpp" line="1557"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Utwórz skrót do piaskownicy %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1526"/>
+        <location filename="Views/SbieView.cpp" line="1529"/>
         <source>Do you want to terminate %1?</source>
         <oldsource>Do you want to %1 %2?</oldsource>
         <translation>Czy chcesz zakończyć %1?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1526"/>
+        <location filename="Views/SbieView.cpp" line="1529"/>
         <source>the selected processes</source>
         <translation>wybrane procesy</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1578"/>
+        <location filename="Views/SbieView.cpp" line="1581"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Ten boks nie ma aktualnie ograniczonego dostępu do Internetu, czy chcesz go włączyć?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1662"/>
+        <location filename="Views/SbieView.cpp" line="1665"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Ta piaskownica jest wyłączona, czy chcesz ją teraz włączyć?</translation>
     </message>
@@ -4916,7 +4916,7 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
 <context>
     <name>CSettingsWindow</name>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="134"/>
+        <location filename="Windows/SettingsWindow.cpp" line="136"/>
         <source>Sandboxie Plus - Global Settings</source>
         <oldsource>Sandboxie Plus - Settings</oldsource>
         <translation>Sandboxie-Plus - Ustawienia</translation>
@@ -4934,57 +4934,57 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Ochrona konfiguracji</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="229"/>
+        <location filename="Windows/SettingsWindow.cpp" line="231"/>
         <source>Auto Detection</source>
         <translation>Wykryj automatycznie</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="230"/>
+        <location filename="Windows/SettingsWindow.cpp" line="232"/>
         <source>No Translation</source>
         <translation>Brak tłumaczenia</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="249"/>
+        <location filename="Windows/SettingsWindow.cpp" line="251"/>
         <source>Don&apos;t integrate links</source>
         <translation>Nie integruj linków</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="250"/>
+        <location filename="Windows/SettingsWindow.cpp" line="252"/>
         <source>As sub group</source>
         <translation>Jako podgrupa</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="251"/>
+        <location filename="Windows/SettingsWindow.cpp" line="253"/>
         <source>Fully integrate</source>
         <translation>Pełna integracja</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="253"/>
+        <location filename="Windows/SettingsWindow.cpp" line="255"/>
         <source>Don&apos;t show any icon</source>
         <translation>Nie pokazuj żadnej ikony</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="254"/>
+        <location filename="Windows/SettingsWindow.cpp" line="256"/>
         <source>Show Plus icon</source>
         <translation>Pokaż ikonę Plus</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="255"/>
+        <location filename="Windows/SettingsWindow.cpp" line="257"/>
         <source>Show Classic icon</source>
         <translation>Pokaż ikonę klasyczną</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="257"/>
+        <location filename="Windows/SettingsWindow.cpp" line="259"/>
         <source>All Boxes</source>
         <translation>Wszystkie boksy</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="258"/>
+        <location filename="Windows/SettingsWindow.cpp" line="260"/>
         <source>Active + Pinned</source>
         <translation>Aktywne + Przypięte</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="259"/>
+        <location filename="Windows/SettingsWindow.cpp" line="261"/>
         <source>Pinned Only</source>
         <translation>Tylko przypięte</translation>
     </message>
@@ -5001,164 +5001,164 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Zamknij</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="261"/>
+        <location filename="Windows/SettingsWindow.cpp" line="263"/>
         <source>None</source>
         <translation>Żaden</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="262"/>
+        <location filename="Windows/SettingsWindow.cpp" line="264"/>
         <source>Native</source>
         <translation>Natywny</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="263"/>
+        <location filename="Windows/SettingsWindow.cpp" line="265"/>
         <source>Qt</source>
         <translation>Qt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="282"/>
+        <location filename="Windows/SettingsWindow.cpp" line="284"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="550"/>
+        <location filename="Windows/SettingsWindow.cpp" line="552"/>
         <source>Search for settings</source>
         <translation>Szukaj ustawień</translation>
     </message>
     <message>
+        <location filename="Windows/SettingsWindow.cpp" line="782"/>
         <location filename="Windows/SettingsWindow.cpp" line="783"/>
-        <location filename="Windows/SettingsWindow.cpp" line="784"/>
-        <location filename="Windows/SettingsWindow.cpp" line="794"/>
+        <location filename="Windows/SettingsWindow.cpp" line="793"/>
         <source>Run &amp;Sandboxed</source>
         <translation>Uruchom w pia&amp;skownicy</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="815"/>
+        <location filename="Windows/SettingsWindow.cpp" line="814"/>
         <source>Sandboxed Web Browser</source>
         <translation>Przeglądarka WWW w trybie piaskownicy</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="271"/>
-        <location filename="Windows/SettingsWindow.cpp" line="276"/>
+        <location filename="Windows/SettingsWindow.cpp" line="273"/>
+        <location filename="Windows/SettingsWindow.cpp" line="278"/>
         <source>Notify</source>
         <translation>Powiadom</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="270"/>
+        <location filename="Windows/SettingsWindow.cpp" line="272"/>
         <source>Ignore</source>
         <translation>Ignoruj</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="265"/>
+        <location filename="Windows/SettingsWindow.cpp" line="267"/>
         <source>Every Day</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="266"/>
+        <location filename="Windows/SettingsWindow.cpp" line="268"/>
         <source>Every Week</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="267"/>
+        <location filename="Windows/SettingsWindow.cpp" line="269"/>
         <source>Every 2 Weeks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="268"/>
+        <location filename="Windows/SettingsWindow.cpp" line="270"/>
         <source>Every 30 days</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="272"/>
-        <location filename="Windows/SettingsWindow.cpp" line="277"/>
+        <location filename="Windows/SettingsWindow.cpp" line="274"/>
+        <location filename="Windows/SettingsWindow.cpp" line="279"/>
         <source>Download &amp; Notify</source>
         <translation>Pobierz i powiadom</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="273"/>
-        <location filename="Windows/SettingsWindow.cpp" line="278"/>
+        <location filename="Windows/SettingsWindow.cpp" line="275"/>
+        <location filename="Windows/SettingsWindow.cpp" line="280"/>
         <source>Download &amp; Install</source>
         <translation>Pobierz i zainstaluj</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="364"/>
+        <location filename="Windows/SettingsWindow.cpp" line="366"/>
         <source>Browse for Program</source>
         <translation>Przeglądaj w poszukiwaniu programu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="446"/>
+        <location filename="Windows/SettingsWindow.cpp" line="448"/>
         <source>Add %1 Template</source>
         <translation>Dodaj %1 szablon</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="501"/>
+        <location filename="Windows/SettingsWindow.cpp" line="503"/>
         <source>Select font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="503"/>
+        <location filename="Windows/SettingsWindow.cpp" line="505"/>
         <source>Reset font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="559"/>
+        <location filename="Windows/SettingsWindow.cpp" line="561"/>
         <source>%0, %1 pt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="661"/>
+        <location filename="Windows/SettingsWindow.cpp" line="663"/>
         <source>Please enter message</source>
         <translation>Proszę wpisać wiadomość</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="693"/>
+        <location filename="Windows/SettingsWindow.cpp" line="695"/>
         <source>Select Program</source>
         <translation>Wybierz program</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="693"/>
+        <location filename="Windows/SettingsWindow.cpp" line="695"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Programy (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="697"/>
-        <location filename="Windows/SettingsWindow.cpp" line="710"/>
+        <location filename="Windows/SettingsWindow.cpp" line="699"/>
+        <location filename="Windows/SettingsWindow.cpp" line="715"/>
         <source>Please enter a menu title</source>
         <translation>Proszę wpisać tytuł menu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="706"/>
+        <location filename="Windows/SettingsWindow.cpp" line="711"/>
         <source>Please enter a command</source>
         <translation>Proszę wpisać polecenie</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1045"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1040"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Wygasł ten certyfikat wsparcia, proszę &lt;a href=&quot;sbie://update/cert&quot;&gt;uzyskać zaktualizowany certyfikat&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1048"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1043"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Funkcje Plus zostaną wyłączone za %1 dni.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1050"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1045"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1483"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1474"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1485"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1476"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1487"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1478"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5167,28 +5167,28 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;W tej wersji funkcje Plus pozostają włączone.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1052"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1047"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Funkcje Plus nie są już włączone.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1058"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1053"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Ten certyfikat wsparcia wygaśnie &lt;font color=&apos;red&apos;&gt;za %1 dni&lt;/font&gt;, proszę &lt;a href=&quot;sbie://update/cert&quot;&gt;uzyskać zaktualizowany certyfikat&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1089"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1084"/>
         <source>Supporter certificate required</source>
         <oldsource>Supproter certificate required</oldsource>
         <translation>Wymagany certyfikat sponsora</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1196"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1191"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>Ur&amp;uchom bez piaskownicy</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1464"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1455"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>To nie wygląda jak certyfikat. Proszę wpisać cały certyfikat, a nie tylko jego fragment.</translation>
     </message>
@@ -5201,83 +5201,83 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
         <translation type="vanished">Ten certyfikat jest niestety nieaktualny.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1490"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1481"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Dziękujemy za wsparcie rozwoju Sandboxie-Plus.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1497"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1488"/>
         <source>This support certificate is not valid.</source>
         <translation>Ten certyfikat pomocy technicznej jest nieważny.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1543"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1534"/>
         <source>Installed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1569"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1560"/>
         <source>This Addon is mandatory and can not be removed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1578"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1724"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1569"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1715"/>
         <source>Select Directory</source>
         <translation>Wybierz katalog</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1607"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1598"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Sprawdź teraz&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1684"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1675"/>
         <source>Please enter the new configuration password.</source>
         <translation>Proszę wpisać nowe hasło konfiguracyjne.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1688"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1679"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Wprowadź ponownie nowe hasło konfiguracyjne.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1693"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1684"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Hasła nie zgadzają się, spróbuj ponownie.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1705"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1696"/>
         <source>Process</source>
         <translation>Proces</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1705"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1696"/>
         <source>Folder</source>
         <translation>Folder</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1715"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1706"/>
         <source>Please enter a program file name</source>
         <translation>Proszę wpisać nazwę pliku programu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1783"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1774"/>
         <source>Please enter the template identifier</source>
         <translation>Proszę wpisać identyfikator szablonu</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1791"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1782"/>
         <source>Error: %1</source>
         <translation>Błąd: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1816"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1807"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>Czy naprawdę chcesz usunąć wybrany lokalny szablon(-y)?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1972"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2014"/>
         <source>%1 (Current)</source>
         <translation>%1 (aktualne)</translation>
     </message>
@@ -6099,7 +6099,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>Zablokuj dostęp do dysków sieciowych, chyba że specjalnie dopuszczone.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1080"/>
+        <location filename="Forms/OptionsWindow.ui" line="1075"/>
         <source>Drop rights from Administrators and Power Users groups</source>
         <translation>Porzuć prawa z grup Administratorzy i Użytkownicy Zaawansowani</translation>
     </message>
@@ -6122,8 +6122,8 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Forms/OptionsWindow.ui" line="730"/>
         <location filename="Forms/OptionsWindow.ui" line="766"/>
         <location filename="Forms/OptionsWindow.ui" line="783"/>
-        <location filename="Forms/OptionsWindow.ui" line="992"/>
-        <location filename="Forms/OptionsWindow.ui" line="1037"/>
+        <location filename="Forms/OptionsWindow.ui" line="987"/>
+        <location filename="Forms/OptionsWindow.ui" line="1032"/>
         <source>Protect the system from sandboxed processes</source>
         <translation>Chroń system przed programami w piaskownicy</translation>
     </message>
@@ -6143,28 +6143,28 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>Uruchom Menu &apos;Wykonaj&apos;</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="925"/>
+        <location filename="Forms/OptionsWindow.ui" line="920"/>
         <source>You can configure custom entries for the sandbox run menu.</source>
         <translation>Możesz skonfigurować własne wpisy do menu ‘wykonaj’.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="869"/>
-        <location filename="Forms/OptionsWindow.ui" line="1615"/>
-        <location filename="Forms/OptionsWindow.ui" line="1757"/>
-        <location filename="Forms/OptionsWindow.ui" line="1843"/>
-        <location filename="Forms/OptionsWindow.ui" line="1988"/>
-        <location filename="Forms/OptionsWindow.ui" line="2033"/>
-        <location filename="Forms/OptionsWindow.ui" line="2111"/>
-        <location filename="Forms/OptionsWindow.ui" line="2963"/>
-        <location filename="Forms/OptionsWindow.ui" line="3185"/>
-        <location filename="Forms/OptionsWindow.ui" line="3301"/>
-        <location filename="Forms/OptionsWindow.ui" line="4438"/>
-        <location filename="Forms/OptionsWindow.ui" line="4514"/>
+        <location filename="Forms/OptionsWindow.ui" line="1610"/>
+        <location filename="Forms/OptionsWindow.ui" line="1752"/>
+        <location filename="Forms/OptionsWindow.ui" line="1838"/>
+        <location filename="Forms/OptionsWindow.ui" line="1983"/>
+        <location filename="Forms/OptionsWindow.ui" line="2028"/>
+        <location filename="Forms/OptionsWindow.ui" line="2106"/>
+        <location filename="Forms/OptionsWindow.ui" line="2958"/>
+        <location filename="Forms/OptionsWindow.ui" line="3180"/>
+        <location filename="Forms/OptionsWindow.ui" line="3296"/>
+        <location filename="Forms/OptionsWindow.ui" line="4433"/>
+        <location filename="Forms/OptionsWindow.ui" line="4509"/>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="879"/>
+        <location filename="Forms/OptionsWindow.ui" line="874"/>
         <source>Command Line</source>
         <translation>Wiersz poleceń</translation>
     </message>
@@ -6175,27 +6175,27 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="826"/>
-        <location filename="Forms/OptionsWindow.ui" line="1640"/>
-        <location filename="Forms/OptionsWindow.ui" line="1784"/>
-        <location filename="Forms/OptionsWindow.ui" line="1851"/>
-        <location filename="Forms/OptionsWindow.ui" line="1963"/>
-        <location filename="Forms/OptionsWindow.ui" line="2061"/>
-        <location filename="Forms/OptionsWindow.ui" line="2139"/>
-        <location filename="Forms/OptionsWindow.ui" line="2231"/>
-        <location filename="Forms/OptionsWindow.ui" line="2365"/>
-        <location filename="Forms/OptionsWindow.ui" line="2464"/>
-        <location filename="Forms/OptionsWindow.ui" line="2545"/>
-        <location filename="Forms/OptionsWindow.ui" line="2658"/>
-        <location filename="Forms/OptionsWindow.ui" line="2932"/>
-        <location filename="Forms/OptionsWindow.ui" line="3074"/>
-        <location filename="Forms/OptionsWindow.ui" line="3223"/>
-        <location filename="Forms/OptionsWindow.ui" line="3309"/>
-        <location filename="Forms/OptionsWindow.ui" line="3603"/>
-        <location filename="Forms/OptionsWindow.ui" line="3736"/>
-        <location filename="Forms/OptionsWindow.ui" line="3805"/>
-        <location filename="Forms/OptionsWindow.ui" line="3930"/>
-        <location filename="Forms/OptionsWindow.ui" line="3989"/>
-        <location filename="Forms/OptionsWindow.ui" line="4458"/>
+        <location filename="Forms/OptionsWindow.ui" line="1635"/>
+        <location filename="Forms/OptionsWindow.ui" line="1779"/>
+        <location filename="Forms/OptionsWindow.ui" line="1846"/>
+        <location filename="Forms/OptionsWindow.ui" line="1958"/>
+        <location filename="Forms/OptionsWindow.ui" line="2056"/>
+        <location filename="Forms/OptionsWindow.ui" line="2134"/>
+        <location filename="Forms/OptionsWindow.ui" line="2226"/>
+        <location filename="Forms/OptionsWindow.ui" line="2360"/>
+        <location filename="Forms/OptionsWindow.ui" line="2459"/>
+        <location filename="Forms/OptionsWindow.ui" line="2540"/>
+        <location filename="Forms/OptionsWindow.ui" line="2653"/>
+        <location filename="Forms/OptionsWindow.ui" line="2927"/>
+        <location filename="Forms/OptionsWindow.ui" line="3069"/>
+        <location filename="Forms/OptionsWindow.ui" line="3218"/>
+        <location filename="Forms/OptionsWindow.ui" line="3304"/>
+        <location filename="Forms/OptionsWindow.ui" line="3598"/>
+        <location filename="Forms/OptionsWindow.ui" line="3731"/>
+        <location filename="Forms/OptionsWindow.ui" line="3800"/>
+        <location filename="Forms/OptionsWindow.ui" line="3925"/>
+        <location filename="Forms/OptionsWindow.ui" line="3984"/>
+        <location filename="Forms/OptionsWindow.ui" line="4453"/>
         <source>Remove</source>
         <translation>Usuń</translation>
     </message>
@@ -6241,12 +6241,12 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>Opcje kasowania piaskownicy</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="995"/>
+        <location filename="Forms/OptionsWindow.ui" line="990"/>
         <source>Elevation restrictions</source>
         <translation>Ograniczenie poziomów uprawnień</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1002"/>
+        <location filename="Forms/OptionsWindow.ui" line="997"/>
         <source>Make applications think they are running elevated (allows to run installers safely)</source>
         <translation>Spraw, by aplikacje uznały, że działają z podwyższonym poziomem uprawnień (umożliwia bezpieczne uruchamianie instalatorów)</translation>
     </message>
@@ -6256,7 +6256,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>Ograniczenia sieciowe</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1016"/>
+        <location filename="Forms/OptionsWindow.ui" line="1011"/>
         <source>(Recommended)</source>
         <translation>(Zalecane)</translation>
     </message>
@@ -6285,7 +6285,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>Ograniczenia drukowania</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1094"/>
+        <location filename="Forms/OptionsWindow.ui" line="1089"/>
         <source>CAUTION: When running under the built in administrator, processes can not drop administrative privileges.</source>
         <translation>UWAGA: Podczas pracy z wbudowanym administratorem procesy nie mogą usuwać uprawnień administracyjnych.</translation>
     </message>
@@ -6303,13 +6303,13 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation type="vanished">Tutaj możesz określić programy i / lub usługi, które mają być automatycznie uruchamiane w piaskownicy po jej aktywacji</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1752"/>
-        <location filename="Forms/OptionsWindow.ui" line="1838"/>
-        <location filename="Forms/OptionsWindow.ui" line="2242"/>
-        <location filename="Forms/OptionsWindow.ui" line="2342"/>
-        <location filename="Forms/OptionsWindow.ui" line="2475"/>
-        <location filename="Forms/OptionsWindow.ui" line="2595"/>
-        <location filename="Forms/OptionsWindow.ui" line="2669"/>
+        <location filename="Forms/OptionsWindow.ui" line="1747"/>
+        <location filename="Forms/OptionsWindow.ui" line="1833"/>
+        <location filename="Forms/OptionsWindow.ui" line="2237"/>
+        <location filename="Forms/OptionsWindow.ui" line="2337"/>
+        <location filename="Forms/OptionsWindow.ui" line="2470"/>
+        <location filename="Forms/OptionsWindow.ui" line="2590"/>
+        <location filename="Forms/OptionsWindow.ui" line="2664"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
@@ -6318,21 +6318,21 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation type="vanished">Dodaj usługę</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1583"/>
+        <location filename="Forms/OptionsWindow.ui" line="1578"/>
         <source>Program Groups</source>
         <translation>Grupy programów</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1591"/>
+        <location filename="Forms/OptionsWindow.ui" line="1586"/>
         <source>Add Group</source>
         <translation>Dodaj grupę</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1623"/>
-        <location filename="Forms/OptionsWindow.ui" line="1977"/>
-        <location filename="Forms/OptionsWindow.ui" line="2054"/>
-        <location filename="Forms/OptionsWindow.ui" line="2132"/>
-        <location filename="Forms/OptionsWindow.ui" line="2918"/>
+        <location filename="Forms/OptionsWindow.ui" line="1618"/>
+        <location filename="Forms/OptionsWindow.ui" line="1972"/>
+        <location filename="Forms/OptionsWindow.ui" line="2049"/>
+        <location filename="Forms/OptionsWindow.ui" line="2127"/>
+        <location filename="Forms/OptionsWindow.ui" line="2913"/>
         <source>Add Program</source>
         <translation>Dodaj Program</translation>
     </message>
@@ -6341,42 +6341,42 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation type="vanished">Programy wymuszone</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1734"/>
+        <location filename="Forms/OptionsWindow.ui" line="1729"/>
         <source>Force Folder</source>
         <translation>Wymuś folder</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2257"/>
-        <location filename="Forms/OptionsWindow.ui" line="2357"/>
-        <location filename="Forms/OptionsWindow.ui" line="2490"/>
+        <location filename="Forms/OptionsWindow.ui" line="2252"/>
+        <location filename="Forms/OptionsWindow.ui" line="2352"/>
+        <location filename="Forms/OptionsWindow.ui" line="2485"/>
         <source>Path</source>
         <translation>Ścieżka</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1777"/>
+        <location filename="Forms/OptionsWindow.ui" line="1772"/>
         <source>Force Program</source>
         <translation>Wymuś program</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="550"/>
-        <location filename="Forms/OptionsWindow.ui" line="1647"/>
-        <location filename="Forms/OptionsWindow.ui" line="1741"/>
-        <location filename="Forms/OptionsWindow.ui" line="1877"/>
-        <location filename="Forms/OptionsWindow.ui" line="1970"/>
-        <location filename="Forms/OptionsWindow.ui" line="2068"/>
-        <location filename="Forms/OptionsWindow.ui" line="2184"/>
-        <location filename="Forms/OptionsWindow.ui" line="2224"/>
-        <location filename="Forms/OptionsWindow.ui" line="2331"/>
-        <location filename="Forms/OptionsWindow.ui" line="2457"/>
-        <location filename="Forms/OptionsWindow.ui" line="2552"/>
-        <location filename="Forms/OptionsWindow.ui" line="2692"/>
-        <location filename="Forms/OptionsWindow.ui" line="3120"/>
-        <location filename="Forms/OptionsWindow.ui" line="3216"/>
-        <location filename="Forms/OptionsWindow.ui" line="3323"/>
-        <location filename="Forms/OptionsWindow.ui" line="3562"/>
-        <location filename="Forms/OptionsWindow.ui" line="3753"/>
-        <location filename="Forms/OptionsWindow.ui" line="3760"/>
-        <location filename="Forms/OptionsWindow.ui" line="4025"/>
+        <location filename="Forms/OptionsWindow.ui" line="1642"/>
+        <location filename="Forms/OptionsWindow.ui" line="1736"/>
+        <location filename="Forms/OptionsWindow.ui" line="1872"/>
+        <location filename="Forms/OptionsWindow.ui" line="1965"/>
+        <location filename="Forms/OptionsWindow.ui" line="2063"/>
+        <location filename="Forms/OptionsWindow.ui" line="2179"/>
+        <location filename="Forms/OptionsWindow.ui" line="2219"/>
+        <location filename="Forms/OptionsWindow.ui" line="2326"/>
+        <location filename="Forms/OptionsWindow.ui" line="2452"/>
+        <location filename="Forms/OptionsWindow.ui" line="2547"/>
+        <location filename="Forms/OptionsWindow.ui" line="2687"/>
+        <location filename="Forms/OptionsWindow.ui" line="3115"/>
+        <location filename="Forms/OptionsWindow.ui" line="3211"/>
+        <location filename="Forms/OptionsWindow.ui" line="3318"/>
+        <location filename="Forms/OptionsWindow.ui" line="3557"/>
+        <location filename="Forms/OptionsWindow.ui" line="3748"/>
+        <location filename="Forms/OptionsWindow.ui" line="3755"/>
+        <location filename="Forms/OptionsWindow.ui" line="4020"/>
         <source>Show Templates</source>
         <translation>Pokaż szablony</translation>
     </message>
@@ -6386,17 +6386,17 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>Pokaż ten boks w monicie wyboru &apos;uruchom w boksie&apos;</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1121"/>
+        <location filename="Forms/OptionsWindow.ui" line="1116"/>
         <source>Security note: Elevated applications running under the supervision of Sandboxie, with an admin or system token, have more opportunities to bypass isolation and modify the system outside the sandbox.</source>
         <translation>Uwaga dotycząca bezpieczeństwa: aplikacje z podwyższonym poziomem uprawnień, działające pod nadzorem Sandboxie, z tokenem administratora, mają więcej możliwości obejścia izolacji i zmodyfikowania systemu poza piaskownicą.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1047"/>
+        <location filename="Forms/OptionsWindow.ui" line="1042"/>
         <source>Allow MSIServer to run with a sandboxed system token and apply other exceptions if required</source>
         <translation>Zezwalaj MSIServer na działanie z tokenem systemu w trybie piaskownicy i w razie potrzeby stosuj inne wyjątki</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1104"/>
+        <location filename="Forms/OptionsWindow.ui" line="1099"/>
         <source>Note: Msi Installer Exemptions should not be required, but if you encounter issues installing a msi package which you trust, this option may help the installation complete successfully. You can also try disabling drop admin rights.</source>
         <translation>Uwaga: Zwolnienia Instalatora Msi nie powinny być wymagane, ale jeśli napotkasz problemy z instalacją pakietu msi, któremu ufasz, ta opcja może pomóc w pomyślnym zakończeniu instalacji. Możesz również spróbować wyłączyć porzucenie praw administratora.</translation>
     </message>
@@ -6443,17 +6443,17 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation type="vanished">Program/Usługa</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1630"/>
+        <location filename="Forms/OptionsWindow.ui" line="1625"/>
         <source>You can group programs together and give them a group name.  Program groups can be used with some of the settings instead of program names. Groups defined for the box overwrite groups defined in templates.</source>
         <translation>Możesz pogrupować programy i nadać im nazwę grupy. Grupy programów mogą być używane z niektórymi ustawieniami zamiast nazw programów. Grupy zdefiniowane dla boksu zastępują grupy zdefiniowane w szablonach.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1699"/>
+        <location filename="Forms/OptionsWindow.ui" line="1694"/>
         <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
         <translation>Programy wprowadzone tutaj lub programy uruchomione z wprowadzonych lokalizacji zostaną automatycznie umieszczone w tej piaskownicy, chyba że zostaną wyraźnie uruchomione w innej piaskownicy.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1920"/>
+        <location filename="Forms/OptionsWindow.ui" line="1915"/>
         <source>Stop Behaviour</source>
         <translation>Zatrzymaj Zachowywania</translation>
     </message>
@@ -6478,32 +6478,32 @@ If leader processes are defined, all others are treated as lingering processes.<
 Jeśli zdefiniowane są procesy wiodące, wszystkie inne są traktowane jako procesy oczekujące.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2092"/>
+        <location filename="Forms/OptionsWindow.ui" line="2087"/>
         <source>Start Restrictions</source>
         <translation>Ograniczenia wykonania</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2100"/>
+        <location filename="Forms/OptionsWindow.ui" line="2095"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>Pokaż wiadomość 1308, gdy program nie może uruchomić się</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2151"/>
+        <location filename="Forms/OptionsWindow.ui" line="2146"/>
         <source>Allow only selected programs to start in this sandbox. *</source>
         <translation>Pozwól tylko wybranym programom uruchamiać się w tej piaskownicy.*</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2158"/>
+        <location filename="Forms/OptionsWindow.ui" line="2153"/>
         <source>Prevent selected programs from starting in this sandbox.</source>
         <translation>Zapobiegaj uruchamianiu wybranych programów w tej piaskownicy.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2165"/>
+        <location filename="Forms/OptionsWindow.ui" line="2160"/>
         <source>Allow all programs to start in this sandbox.</source>
         <translation>Pozwól wszystkim programom uruchamiać się w tej piaskownicy.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2172"/>
+        <location filename="Forms/OptionsWindow.ui" line="2167"/>
         <source>* Note: Programs installed to this sandbox won&apos;t be able to start at all.</source>
         <translation>* Uwaga: programy zainstalowane w tej piaskownicy w ogóle nie będą mogły się uruchomić.</translation>
     </message>
@@ -6512,134 +6512,134 @@ Jeśli zdefiniowane są procesy wiodące, wszystkie inne są traktowane jako pro
         <translation type="vanished">Ograniczenia internetowe</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2891"/>
+        <location filename="Forms/OptionsWindow.ui" line="2886"/>
         <source>Process Restrictions</source>
         <translation>Ograniczenia procesu</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2911"/>
+        <location filename="Forms/OptionsWindow.ui" line="2906"/>
         <source>Issue message 1307 when a program is denied internet access</source>
         <translation>Pokaż wiadomość 1307, gdy programowi odmówiono dostępu do Internetu</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2939"/>
+        <location filename="Forms/OptionsWindow.ui" line="2934"/>
         <source>Note: Programs installed to this sandbox won&apos;t be able to access the internet at all.</source>
         <translation>* Programy zainstalowane w piaskownicy nie będą mogły używać Internetu.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2925"/>
+        <location filename="Forms/OptionsWindow.ui" line="2920"/>
         <source>Prompt user whether to allow an exemption from the blockade.</source>
         <translation>Zapytaj użytkownika o pozwolenie dostępu do Internetu.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2194"/>
+        <location filename="Forms/OptionsWindow.ui" line="2189"/>
         <source>Resource Access</source>
         <translation>Dostęp do zasobów</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="566"/>
+        <location filename="Forms/OptionsWindow.ui" line="2242"/>
+        <location filename="Forms/OptionsWindow.ui" line="2342"/>
+        <location filename="Forms/OptionsWindow.ui" line="2475"/>
+        <location filename="Forms/OptionsWindow.ui" line="2595"/>
+        <location filename="Forms/OptionsWindow.ui" line="2669"/>
+        <location filename="Forms/OptionsWindow.ui" line="3087"/>
+        <location filename="Forms/OptionsWindow.ui" line="4007"/>
+        <source>Program</source>
+        <translation>Program</translation>
+    </message>
+    <message>
         <location filename="Forms/OptionsWindow.ui" line="2247"/>
         <location filename="Forms/OptionsWindow.ui" line="2347"/>
         <location filename="Forms/OptionsWindow.ui" line="2480"/>
         <location filename="Forms/OptionsWindow.ui" line="2600"/>
         <location filename="Forms/OptionsWindow.ui" line="2674"/>
-        <location filename="Forms/OptionsWindow.ui" line="3092"/>
-        <location filename="Forms/OptionsWindow.ui" line="4012"/>
-        <source>Program</source>
-        <translation>Program</translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="2252"/>
-        <location filename="Forms/OptionsWindow.ui" line="2352"/>
-        <location filename="Forms/OptionsWindow.ui" line="2485"/>
-        <location filename="Forms/OptionsWindow.ui" line="2605"/>
-        <location filename="Forms/OptionsWindow.ui" line="2679"/>
-        <location filename="Forms/OptionsWindow.ui" line="2968"/>
+        <location filename="Forms/OptionsWindow.ui" line="2963"/>
         <source>Access</source>
         <translation>Dostęp</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2384"/>
+        <location filename="Forms/OptionsWindow.ui" line="2379"/>
         <source>Add Reg Key</source>
         <translation>Dodaj klucz rejestru</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2277"/>
+        <location filename="Forms/OptionsWindow.ui" line="2272"/>
         <source>Add File/Folder</source>
         <translation>Dodaj plik/folder</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2571"/>
+        <location filename="Forms/OptionsWindow.ui" line="2566"/>
         <source>Add Wnd Class</source>
         <translation>Dodaj klasę okna</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2711"/>
+        <location filename="Forms/OptionsWindow.ui" line="2706"/>
         <source>Add COM Object</source>
         <translation>Dodaj objekt COM</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2450"/>
+        <location filename="Forms/OptionsWindow.ui" line="2445"/>
         <source>Add IPC Path</source>
         <translation>Dodaj ścieżkę IPC</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3151"/>
+        <location filename="Forms/OptionsWindow.ui" line="3146"/>
         <source>File Recovery</source>
         <translation>Przywracanie plików</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3230"/>
+        <location filename="Forms/OptionsWindow.ui" line="3225"/>
         <source>Add Folder</source>
         <translation>Dodaj folder</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3270"/>
+        <location filename="Forms/OptionsWindow.ui" line="3265"/>
         <source>Ignore Extension</source>
         <translation>Ignoruj rozszerzenie pliku</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3316"/>
+        <location filename="Forms/OptionsWindow.ui" line="3311"/>
         <source>Ignore Folder</source>
         <translation>Ignoruj folder</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3277"/>
+        <location filename="Forms/OptionsWindow.ui" line="3272"/>
         <source>Enable Immediate Recovery prompt to be able to recover files as soon as they are created.</source>
         <translation>Włącz monit Natychmiastowego Przywracania, aby móc odzyskać pliki zaraz po ich utworzeniu.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3260"/>
+        <location filename="Forms/OptionsWindow.ui" line="3255"/>
         <source>You can exclude folders and file types (or file extensions) from Immediate Recovery.</source>
         <translation>Możesz wykluczyć foldery i typy plików (lub rozszerzenia plików) z Natychmiastowego Odzyskiwania.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3193"/>
+        <location filename="Forms/OptionsWindow.ui" line="3188"/>
         <source>When the Quick Recovery function is invoked, the following folders will be checked for sandboxed content. </source>
         <translation>Po wywołaniu funkcji szybkiego odzyskiwania następujące foldery zostaną sprawdzone pod kątem zawartości w piaskownicy. </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3358"/>
+        <location filename="Forms/OptionsWindow.ui" line="3353"/>
         <source>Advanced Options</source>
         <translation>Opcje zaawansowane</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3950"/>
+        <location filename="Forms/OptionsWindow.ui" line="3945"/>
         <source>Miscellaneous</source>
         <translation>Różne</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1525"/>
+        <location filename="Forms/OptionsWindow.ui" line="1520"/>
         <source>Allow only privileged processes to access the Service Control Manager</source>
         <translation>Ogranicz dostęp do emulowanego menedżera kontroli usług do procesów uprzywilejowanych</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1252"/>
-        <location filename="Forms/OptionsWindow.ui" line="1269"/>
-        <location filename="Forms/OptionsWindow.ui" line="1354"/>
-        <location filename="Forms/OptionsWindow.ui" line="1426"/>
-        <location filename="Forms/OptionsWindow.ui" line="1450"/>
-        <location filename="Forms/OptionsWindow.ui" line="1474"/>
+        <location filename="Forms/OptionsWindow.ui" line="1247"/>
+        <location filename="Forms/OptionsWindow.ui" line="1264"/>
+        <location filename="Forms/OptionsWindow.ui" line="1349"/>
+        <location filename="Forms/OptionsWindow.ui" line="1421"/>
+        <location filename="Forms/OptionsWindow.ui" line="1445"/>
+        <location filename="Forms/OptionsWindow.ui" line="1469"/>
         <source>Protect the sandbox integrity itself</source>
         <translation>Chroń integralność piaskownicy</translation>
     </message>
@@ -6648,12 +6648,12 @@ Jeśli zdefiniowane są procesy wiodące, wszystkie inne są traktowane jako pro
         <translation type="vanished">Izolacja piaskownicy</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2618"/>
+        <location filename="Forms/OptionsWindow.ui" line="2613"/>
         <source>Don&apos;t alter window class names created by sandboxed programs</source>
         <translation>Nie zmieniaj nazw klas okien w piaskownicy</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1505"/>
+        <location filename="Forms/OptionsWindow.ui" line="1500"/>
         <source>Do not start sandboxed services using a system token (recommended)</source>
         <translation>Nie uruchamiaj usług piaskownicy przy użyciu tokena systemowego (zalecane)</translation>
     </message>
@@ -6668,18 +6668,18 @@ Jeśli zdefiniowane są procesy wiodące, wszystkie inne są traktowane jako pro
         <translation>Zablokuj dostęp do odczytu schowka</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1559"/>
+        <location filename="Forms/OptionsWindow.ui" line="1554"/>
         <source>Add sandboxed processes to job objects (recommended)</source>
         <translation>Dodaj procesy w piaskownicy do obiektów zadań (zalecane)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3403"/>
+        <location filename="Forms/OptionsWindow.ui" line="3398"/>
         <source>Force usage of custom dummy Manifest files (legacy behaviour)</source>
         <translation>Wymuś użycie niestandardowych fałszywych plików manifestu (zachowanie starszego typu)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3375"/>
-        <location filename="Forms/OptionsWindow.ui" line="3424"/>
+        <location filename="Forms/OptionsWindow.ui" line="3370"/>
+        <location filename="Forms/OptionsWindow.ui" line="3419"/>
         <source>Compatibility</source>
         <translation>Zgodność</translation>
     </message>
@@ -6696,38 +6696,38 @@ Jeśli zdefiniowane są procesy wiodące, wszystkie inne są traktowane jako pro
         <translation type="vanished">Tutaj można określić listę poleceń do wykonania przy inicjalizacji pustej piaskownicy.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3718"/>
+        <location filename="Forms/OptionsWindow.ui" line="3713"/>
         <source>Hide Processes</source>
         <translation>Ukryj procesy</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3767"/>
-        <location filename="Forms/OptionsWindow.ui" line="3825"/>
+        <location filename="Forms/OptionsWindow.ui" line="3762"/>
+        <location filename="Forms/OptionsWindow.ui" line="3820"/>
         <source>Add Process</source>
         <translation>Dodaj proces</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3743"/>
+        <location filename="Forms/OptionsWindow.ui" line="3738"/>
         <source>Hide host processes from processes running in the sandbox.</source>
         <translation>Ukryj procesy hosta piaskownicy przed procesami działającymi w piaskownicy.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3774"/>
+        <location filename="Forms/OptionsWindow.ui" line="3769"/>
         <source>Don&apos;t allow sandboxed processes to see processes running in other boxes</source>
         <translation>Nie zezwalaj procesom w trybie piaskownicy widzieć procesów działających w innych boksach</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3882"/>
+        <location filename="Forms/OptionsWindow.ui" line="3877"/>
         <source>Users</source>
         <translation>Użytkownicy</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3900"/>
+        <location filename="Forms/OptionsWindow.ui" line="3895"/>
         <source>Restrict Resource Access monitor to administrators only</source>
         <translation>Ogranicz dostęp do monitora dostępu do zasobów tylko dla administratorów</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3907"/>
+        <location filename="Forms/OptionsWindow.ui" line="3902"/>
         <source>Add User</source>
         <translation>Dodaj użytkownika</translation>
     </message>
@@ -6736,7 +6736,7 @@ Jeśli zdefiniowane są procesy wiodące, wszystkie inne są traktowane jako pro
         <translation type="vanished">Usuń użytkownika</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3937"/>
+        <location filename="Forms/OptionsWindow.ui" line="3932"/>
         <source>Add user accounts and user groups to the list below to limit use of the sandbox to only those accounts.  If the list is empty, the sandbox can be used by all user accounts.
 
 Note:  Forced Programs and Force Folders settings for a sandbox do not apply to user accounts which cannot use the sandbox.</source>
@@ -6745,47 +6745,47 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
 Uwaga:  ustawienia Wymuszonych Programów i Wymuszania Folderów dla piaskownicy nie mają zastosowania do kont użytkowników, które nie mogą korzystać z piaskownicy.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4048"/>
+        <location filename="Forms/OptionsWindow.ui" line="4043"/>
         <source>Tracing</source>
         <translation>Śledzenie</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4171"/>
+        <location filename="Forms/OptionsWindow.ui" line="4166"/>
         <source>GUI Trace</source>
         <translation>Śledzenie GUI</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4164"/>
+        <location filename="Forms/OptionsWindow.ui" line="4159"/>
         <source>IPC Trace</source>
         <translation>Śledzenie IPC</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4076"/>
+        <location filename="Forms/OptionsWindow.ui" line="4071"/>
         <source>Pipe Trace</source>
         <translation>Śledzenie pipe</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4212"/>
+        <location filename="Forms/OptionsWindow.ui" line="4207"/>
         <source>Access Tracing</source>
         <translation>Śledzenie dostępów</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4116"/>
+        <location filename="Forms/OptionsWindow.ui" line="4111"/>
         <source>Log Debug Output to the Trace Log</source>
         <translation>Rejestruj dane wyjściowe debugowania w dzienniku śledzenia</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4150"/>
+        <location filename="Forms/OptionsWindow.ui" line="4145"/>
         <source>File Trace</source>
         <translation>Śledzenie plikow</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4226"/>
+        <location filename="Forms/OptionsWindow.ui" line="4221"/>
         <source>Key Trace</source>
         <translation>Śledzenie kluczy</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4123"/>
+        <location filename="Forms/OptionsWindow.ui" line="4118"/>
         <source>Log all access events as seen by the driver to the resource access log.
 
 This options set the event mask to &quot;*&quot; - All access events
@@ -6804,12 +6804,12 @@ Możesz dostosować rejestrowanie za pomocą ini, określając
 zamiast &quot;*&quot;.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4219"/>
+        <location filename="Forms/OptionsWindow.ui" line="4214"/>
         <source>COM Class Trace</source>
         <translation>Śledzenie klas COM</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3410"/>
+        <location filename="Forms/OptionsWindow.ui" line="3405"/>
         <source>Emulate sandboxed window station for all processes</source>
         <translation>Emuluj piaskownicę dla wszystkich procesów</translation>
     </message>
@@ -6822,59 +6822,59 @@ zamiast &quot;*&quot;.</translation>
         <translation type="vanished">Izolacja dostępu</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3396"/>
+        <location filename="Forms/OptionsWindow.ui" line="3391"/>
         <source>Apply ElevateCreateProcess Workaround (legacy behaviour)</source>
         <translation>Zastosuj obejście ElevateCreateProcess (starsze zachowanie)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3458"/>
+        <location filename="Forms/OptionsWindow.ui" line="3453"/>
         <source>Use desktop object workaround for all processes</source>
         <translation>Użyj obejścia dla obiektów pulpitu dla wszystkich procesów</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3498"/>
+        <location filename="Forms/OptionsWindow.ui" line="3493"/>
         <source>This command will be run before the box content will be deleted</source>
         <translation>To polecenie zostanie uruchomione zanim zawartość boksu zostanie usunięta</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3552"/>
+        <location filename="Forms/OptionsWindow.ui" line="3547"/>
         <source>On File Recovery</source>
         <translation>O odzyskiwaniu plików</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3581"/>
+        <location filename="Forms/OptionsWindow.ui" line="3576"/>
         <source>This command will be run before a file is being recovered and the file path will be passed as the first argument. If this command returns anything other than 0, the recovery will be blocked</source>
         <oldsource>This command will be run before a file is being recoverd and the file path will be passed as the first argument, if this command return something other than 0 the recovery will be blocked</oldsource>
         <translation>To polecenie zostanie uruchomione przed odzyskaniem pliku i ścieżka do pliku zostanie przekazana jako pierwszy argument, jeśli to polecenie zwrócić coś innego niż 0 odzyskanie zostanie zablokowane</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3584"/>
+        <location filename="Forms/OptionsWindow.ui" line="3579"/>
         <source>Run File Checker</source>
         <translation>Uruchom sprawdzanie plików</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3700"/>
+        <location filename="Forms/OptionsWindow.ui" line="3695"/>
         <source>On Delete Content</source>
         <translation>Uruchom, Usuń zawartość</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3781"/>
+        <location filename="Forms/OptionsWindow.ui" line="3776"/>
         <source>Protect processes in this box from being accessed by specified unsandboxed host processes.</source>
         <translation>Chroni procesy w tym boksie przed dostępem określonych procesów hosta spoza piaskownicy.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3792"/>
-        <location filename="Forms/OptionsWindow.ui" line="3856"/>
+        <location filename="Forms/OptionsWindow.ui" line="3787"/>
+        <location filename="Forms/OptionsWindow.ui" line="3851"/>
         <source>Process</source>
         <translation>Proces</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3832"/>
+        <location filename="Forms/OptionsWindow.ui" line="3827"/>
         <source>Block also read access to processes in this sandbox</source>
         <translation>Zablokuj również dostęp do odczytu procesów w tej piaskownicy</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3982"/>
+        <location filename="Forms/OptionsWindow.ui" line="3977"/>
         <source>Add Option</source>
         <translation>Dodaj opcję</translation>
     </message>
@@ -6883,23 +6883,23 @@ zamiast &quot;*&quot;.</translation>
         <translation type="vanished">Tutaj możesz skonfigurować zaawansowane opcje dla każdego procesu, aby poprawić kompatybilność i/lub dostosować zachowanie piaskownicy.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4007"/>
+        <location filename="Forms/OptionsWindow.ui" line="4002"/>
         <source>Option</source>
         <translation>Opcja</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4056"/>
+        <location filename="Forms/OptionsWindow.ui" line="4051"/>
         <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
         <oldsource>API call trace (requirers logapi to be installed in the sbie dir)</oldsource>
         <translation>Śledzenie wywołań API (wymaga zainstalowania logapi w katalogu sbie)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4096"/>
+        <location filename="Forms/OptionsWindow.ui" line="4091"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
         <translation>Rejestruj wszystkie błędy SetError do dziennika śledzenia (tworzy dużo danych wyjściowych)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4143"/>
+        <location filename="Forms/OptionsWindow.ui" line="4138"/>
         <source>Ntdll syscall Trace (creates a lot of output)</source>
         <translation>Śledzenie Ntdll syscall (tworzy dużo danych wyjściowych)</translation>
     </message>
@@ -6909,22 +6909,22 @@ zamiast &quot;*&quot;.</translation>
         <translation type="obsolete">Rejestrowanie żądań DNS</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4250"/>
+        <location filename="Forms/OptionsWindow.ui" line="4245"/>
         <source>Debug</source>
         <translation>Debug</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4306"/>
+        <location filename="Forms/OptionsWindow.ui" line="4301"/>
         <source>WARNING, these options can disable core security guarantees and break sandbox security!!!</source>
         <translation>UWAGA, te opcje mogą wyłączyć podstawowe gwarancje bezpieczeństwa i złamać zabezpieczenia sandboxa!</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4316"/>
+        <location filename="Forms/OptionsWindow.ui" line="4311"/>
         <source>These options are intended for debugging compatibility issues, please do not use them in production use. </source>
         <translation>Te opcje są przeznaczone do debugowania problemów z kompatybilnością, proszę nie używać ich w zastosowaniach produkcyjnych. </translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4331"/>
+        <location filename="Forms/OptionsWindow.ui" line="4326"/>
         <source>App Templates</source>
         <translation>Dodaj szablony</translation>
     </message>
@@ -6933,17 +6933,17 @@ zamiast &quot;*&quot;.</translation>
         <translation type="vanished">Szablony zgodności</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4416"/>
+        <location filename="Forms/OptionsWindow.ui" line="4411"/>
         <source>Filter Categories</source>
         <translation>Filtruj kategorie</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4387"/>
+        <location filename="Forms/OptionsWindow.ui" line="4382"/>
         <source>Text Filter</source>
         <translation>Filtruj text</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4409"/>
+        <location filename="Forms/OptionsWindow.ui" line="4404"/>
         <source>Add Template</source>
         <translation>Dodaj szablon</translation>
     </message>
@@ -6952,42 +6952,42 @@ zamiast &quot;*&quot;.</translation>
         <translation type="vanished">Usuń szablon</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4433"/>
+        <location filename="Forms/OptionsWindow.ui" line="4428"/>
         <source>Category</source>
         <translation>Kategoria</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4364"/>
+        <location filename="Forms/OptionsWindow.ui" line="4359"/>
         <source>This list contains a large amount of sandbox compatibility enhancing templates</source>
         <translation>Ta lista zawiera dużą ilość szablonów poprawiających kompatybilność z piaskownicą</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2978"/>
+        <location filename="Forms/OptionsWindow.ui" line="2973"/>
         <source>Set network/internet access for unlisted processes:</source>
         <translation>Ustawienie dostępu do sieci/internetu dla procesów niewymienionych na liście:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3025"/>
+        <location filename="Forms/OptionsWindow.ui" line="3020"/>
         <source>Test Rules, Program:</source>
         <translation>Zasady testowania, program:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3035"/>
+        <location filename="Forms/OptionsWindow.ui" line="3030"/>
         <source>Port:</source>
         <translation>Port:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3045"/>
+        <location filename="Forms/OptionsWindow.ui" line="3040"/>
         <source>IP:</source>
         <translation>IP:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3055"/>
+        <location filename="Forms/OptionsWindow.ui" line="3050"/>
         <source>Protocol:</source>
         <translation>Protokół:</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3065"/>
+        <location filename="Forms/OptionsWindow.ui" line="3060"/>
         <source>X</source>
         <translation>X</translation>
     </message>
@@ -7007,12 +7007,12 @@ zamiast &quot;*&quot;.</translation>
         <translation>Struktura boksu</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="953"/>
+        <location filename="Forms/OptionsWindow.ui" line="948"/>
         <source>Security Options</source>
         <translation>Opcje zabezpieczeń</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="963"/>
+        <location filename="Forms/OptionsWindow.ui" line="958"/>
         <source>Security Hardening</source>
         <translation>Utwardzanie zabezpieczeń</translation>
     </message>
@@ -7021,227 +7021,227 @@ zamiast &quot;*&quot;.</translation>
         <translation type="vanished">Różne ograniczenia</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1153"/>
+        <location filename="Forms/OptionsWindow.ui" line="1148"/>
         <source>Security Isolation</source>
         <translation>Izolacja bezpieczeństwa</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1174"/>
+        <location filename="Forms/OptionsWindow.ui" line="1169"/>
         <source>Various isolation features can break compatibility with some applications. If you are using this sandbox &lt;b&gt;NOT for Security&lt;/b&gt; but for application portability, by changing these options you can restore compatibility by sacrificing some security.</source>
         <translation>Różne funkcje izolacji mogą zakłócać kompatybilność z niektórymi aplikacjami. Jeśli używasz tej piaskownicy &lt;b&gt;NIE dla bezpieczeństwa&lt;/b&gt;, ale dla przenośności aplikacji, zmieniając te opcje, możesz przywrócić kompatybilność, poświęcając część bezpieczeństwa.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1272"/>
+        <location filename="Forms/OptionsWindow.ui" line="1267"/>
         <source>Access Isolation</source>
         <translation>Izolacja dostępu</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1299"/>
-        <location filename="Forms/OptionsWindow.ui" line="1357"/>
+        <location filename="Forms/OptionsWindow.ui" line="1294"/>
+        <location filename="Forms/OptionsWindow.ui" line="1352"/>
         <source>Image Protection</source>
         <translation>Ochrona obrazu</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1307"/>
+        <location filename="Forms/OptionsWindow.ui" line="1302"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
         <translation>Problem z komunikatem 1305, gdy program próbuje załadować bibliotekę DLL w trybie piaskownicy</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1340"/>
+        <location filename="Forms/OptionsWindow.ui" line="1335"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
         <translation>Zapobiegaj ładowaniu dll&apos;ów z piaskownicy przez programy zainstalowane na hoście</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1383"/>
+        <location filename="Forms/OptionsWindow.ui" line="1378"/>
         <source>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
         <translation>Zasady dostępu do zasobów Sandboxa często dyskryminują binarki programów znajdujących się wewnątrz piaskownicy. OpenFilePath i OpenKeyPath działają tylko dla binarek aplikacji znajdujących się natywnie na hoście. Aby zdefiniować regułę bez tego ograniczenia, należy użyć OpenPipePath lub OpenConfPath. Podobnie, wszystkie dyrektywy Closed(File|Key|Ipc)Path, które są zdefiniowane przez negację np. &apos;ClosedFilePath=! iexplore.exe,C:Users*&apos; będą zawsze zamknięte dla binariów znajdujących się wewnątrz sandboxa. Obie polityki ograniczeń mogą być wyłączone na stronie &quot;Zasady dostępu&quot;.
 Ma to zapobiec tworzeniu przez nieuczciwe procesy wewnątrz piaskownicy kopii o zmienionej nazwie i uzyskiwaniu dostępu do chronionych zasobów. Innym wektorem exploitów jest wstrzyknięcie biblioteki do autoryzowanego procesu w celu uzyskania dostępu do wszystkiego, do czego ma dostęp. Dzięki Host Image Protection można temu zapobiec, blokując aplikacjom (zainstalowanym na hoście) działającym wewnątrz piaskownicy możliwość ładowania bibliotek z samej piaskownicy.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1404"/>
+        <location filename="Forms/OptionsWindow.ui" line="1399"/>
         <source>Advanced Security</source>
         <oldsource>Adcanced Security</oldsource>
         <translation>Ochrona zaawansowana</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1412"/>
+        <location filename="Forms/OptionsWindow.ui" line="1407"/>
         <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
         <translation>Użyj loginu Sandboxie zamiast anonimowego tokena (eksperymentalne)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1429"/>
+        <location filename="Forms/OptionsWindow.ui" line="1424"/>
         <source>Other isolation</source>
         <translation>Inna izolacja</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1453"/>
+        <location filename="Forms/OptionsWindow.ui" line="1448"/>
         <source>Privilege isolation</source>
         <translation>Izolacja przywilejów</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1477"/>
+        <location filename="Forms/OptionsWindow.ui" line="1472"/>
         <source>Sandboxie token</source>
         <translation>Token piaskownicy</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1566"/>
+        <location filename="Forms/OptionsWindow.ui" line="1561"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
         <translation>Użycie niestandardowego tokena sandboxie pozwala na lepsze odizolowanie poszczególnych sandboxów od siebie, a także pokazuje w kolumnie użytkownika w menedżerach zadań nazwę sandboxa, do którego należy dany proces. Niektóre rozwiązania bezpieczeństwa firm trzecich mogą jednak mieć problemy z niestandardowymi tokenami.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1657"/>
+        <location filename="Forms/OptionsWindow.ui" line="1652"/>
         <source>Program Control</source>
         <translation>Kontrola programu</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1679"/>
+        <location filename="Forms/OptionsWindow.ui" line="1674"/>
         <source>Force Programs</source>
         <translation>Wymuś programy</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1791"/>
+        <location filename="Forms/OptionsWindow.ui" line="1786"/>
         <source>Disable forced Process and Folder for this sandbox</source>
         <translation>Wyłącz wymuszanie procesów i folderów dla tej piaskownicy</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1801"/>
+        <location filename="Forms/OptionsWindow.ui" line="1796"/>
         <source>Breakout Programs</source>
         <translation>Programy przerywane</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1870"/>
+        <location filename="Forms/OptionsWindow.ui" line="1865"/>
         <source>Breakout Program</source>
         <translation>Program wyrwany</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1896"/>
+        <location filename="Forms/OptionsWindow.ui" line="1891"/>
         <source>Breakout Folder</source>
         <translation>Folder wyrwany</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1903"/>
+        <location filename="Forms/OptionsWindow.ui" line="1898"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
         <oldsource>Programs entered here will be allowed to break out of this box when thay start, you can capture them into an other box. For example to have your web browser always open in a dedicated box. This feature requires a valid supporter certificate to be installed.</oldsource>
         <translation>Programy wpisane tutaj będą mogły wyrwać się z tego boksu po uruchomieniu, możesz je przechwycić do innego boksu. Na przykład, aby przeglądarka internetowa była zawsze otwarta w dedykowanym boksie. Ta funkcja wymaga zainstalowania ważnego certyfikatu wsparcia.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1930"/>
+        <location filename="Forms/OptionsWindow.ui" line="1925"/>
         <source>Lingering Programs</source>
         <translation>Długotrwałe programy</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1996"/>
+        <location filename="Forms/OptionsWindow.ui" line="1991"/>
         <source>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.</source>
         <translation>Długotrwałe programy zostaną automatycznie zakończone, jeśli nadal działają po zakończeniu wszystkich innych procesów.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2009"/>
+        <location filename="Forms/OptionsWindow.ui" line="2004"/>
         <source>Leader Programs</source>
         <translation>Programy wiodące</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2075"/>
+        <location filename="Forms/OptionsWindow.ui" line="2070"/>
         <source>If leader processes are defined, all others are treated as lingering processes.</source>
         <translation>Jeśli zdefiniowane są procesy wiodące, wszystkie inne są traktowane jako procesy długotrwałe.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2204"/>
+        <location filename="Forms/OptionsWindow.ui" line="2199"/>
         <source>Files</source>
         <translation>Pliki</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2297"/>
+        <location filename="Forms/OptionsWindow.ui" line="2292"/>
         <source>Configure which processes can access Files, Folders and Pipes. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <translation>Skonfiguruj, które procesy mogą uzyskiwać dostęp do plików, folderów i potoków.
 Dostęp „Otwarty” dotyczy tylko plików binarnych programu znajdujących się poza piaskownicą, możesz zamiast tego użyć „Otwórz dla wszystkich”, aby zastosować go do wszystkich programów, lub zmienić to zachowanie na karcie Zasady.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2311"/>
+        <location filename="Forms/OptionsWindow.ui" line="2306"/>
         <source>Registry</source>
         <translation>Rejestr Systemu</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2404"/>
+        <location filename="Forms/OptionsWindow.ui" line="2399"/>
         <source>Configure which processes can access the Registry. 
 &apos;Open&apos; access only applies to program binaries located outside the sandbox, you can use &apos;Open for All&apos; instead to make it apply to all programs, or change this behavior in the Policies tab.</source>
         <translation>Skonfiguruj, które procesy mogą uzyskiwać dostęp do Rejestru.
 Dostęp „Otwarty” dotyczy tylko plików binarnych programu znajdujących się poza piaskownicą, możesz zamiast tego użyć „Otwórz dla wszystkich”, aby zastosować go do wszystkich programów, lub zmienić to zachowanie na karcie Zasady.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2418"/>
+        <location filename="Forms/OptionsWindow.ui" line="2413"/>
         <source>IPC</source>
         <translation>IPC</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2511"/>
+        <location filename="Forms/OptionsWindow.ui" line="2506"/>
         <source>Configure which processes can access NT IPC objects like ALPC ports and other processes memory and context.
 To specify a process use &apos;$:program.exe&apos; as path.</source>
         <translation>Skonfiguruj, które procesy mogą uzyskiwać dostęp do obiektów NT IPC, takich jak porty ALPC oraz pamięć i kontekst innych procesów.
 Aby określić proces, użyj jako ścieżki &apos;$:program.exe&apos;.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2525"/>
+        <location filename="Forms/OptionsWindow.ui" line="2520"/>
         <source>Wnd</source>
         <translation>Wnd</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2610"/>
+        <location filename="Forms/OptionsWindow.ui" line="2605"/>
         <source>Wnd Class</source>
         <translation>Klasa Okna</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2625"/>
+        <location filename="Forms/OptionsWindow.ui" line="2620"/>
         <source>Configure which processes can access desktop objects like windows and alike.</source>
         <oldsource>Configure which processes can access Desktop objects like Windows and alike.</oldsource>
         <translation>Skonfiguruj, które procesy mogą uzyskiwać dostęp do obiektów pulpitu, takich jak Windows i tym podobne.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2638"/>
+        <location filename="Forms/OptionsWindow.ui" line="2633"/>
         <source>COM</source>
         <translation>COM</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2684"/>
+        <location filename="Forms/OptionsWindow.ui" line="2679"/>
         <source>Class Id</source>
         <translation>Klasa Id</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2731"/>
+        <location filename="Forms/OptionsWindow.ui" line="2726"/>
         <source>Configure which processes can access COM objects.</source>
         <translation>Skonfiguruj, które procesy mogą uzyskiwać dostęp do obiektów COM.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2743"/>
+        <location filename="Forms/OptionsWindow.ui" line="2738"/>
         <source>Don&apos;t use virtualized COM, Open access to hosts COM infrastructure (not recommended)</source>
         <translation>Nie używaj zwirtualizowanego COM, Otwórz dostęp do infrastruktury COM hostów (niezalecane)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2751"/>
+        <location filename="Forms/OptionsWindow.ui" line="2746"/>
         <source>Access Policies</source>
         <translation>Polityka dostępu</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2785"/>
+        <location filename="Forms/OptionsWindow.ui" line="2780"/>
         <source>Apply Close...=!&lt;program&gt;,... rules also to all binaries located in the sandbox.</source>
         <translation>Zastosuj reguły Zamknij...=!&lt;program&gt;,... również do wszystkich binariów znajdujących się w piaskownicy.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2881"/>
+        <location filename="Forms/OptionsWindow.ui" line="2876"/>
         <source>Network Options</source>
         <translation>Opcje sieciowe</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3081"/>
+        <location filename="Forms/OptionsWindow.ui" line="3076"/>
         <source>Add Rule</source>
         <translation>Dodaj regułę</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="561"/>
-        <location filename="Forms/OptionsWindow.ui" line="3097"/>
-        <location filename="Forms/OptionsWindow.ui" line="3536"/>
-        <location filename="Forms/OptionsWindow.ui" line="3861"/>
+        <location filename="Forms/OptionsWindow.ui" line="3092"/>
+        <location filename="Forms/OptionsWindow.ui" line="3531"/>
+        <location filename="Forms/OptionsWindow.ui" line="3856"/>
         <source>Action</source>
         <translation>Akcja</translation>
     </message>
@@ -7314,73 +7314,72 @@ Aby określić proces, użyj jako ścieżki &apos;$:program.exe&apos;.</translat
         <translation>Gdy plik nie może być zmigrowany, otwórz go w trybie tylko do odczytu</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="874"/>
         <source>Icon</source>
-        <translation>Ikona</translation>
+        <translation type="vanished">Ikona</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="899"/>
+        <location filename="Forms/OptionsWindow.ui" line="894"/>
         <source>Move Up</source>
         <translation>Przesuń w górę</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="918"/>
+        <location filename="Forms/OptionsWindow.ui" line="913"/>
         <source>Move Down</source>
         <translation>Przesuń w dół</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3102"/>
+        <location filename="Forms/OptionsWindow.ui" line="3097"/>
         <source>Port</source>
         <translation>Port</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3107"/>
+        <location filename="Forms/OptionsWindow.ui" line="3102"/>
         <source>IP</source>
         <translation>IP</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3112"/>
+        <location filename="Forms/OptionsWindow.ui" line="3107"/>
         <source>Protocol</source>
         <translation>Protokół</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3134"/>
+        <location filename="Forms/OptionsWindow.ui" line="3129"/>
         <source>CAUTION: Windows Filtering Platform is not enabled with the driver, therefore these rules will be applied only in user mode and can not be enforced!!! This means that malicious applications may bypass them.</source>
         <translation>UWAGA: Platforma filtrowania Windows nie jest włączona w sterowniku, dlatego te reguły będą stosowane tylko w trybie użytkownika i nie mogą być egzekwowane! Oznacza to, że złośliwe aplikacje mogą je ominąć.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3161"/>
+        <location filename="Forms/OptionsWindow.ui" line="3156"/>
         <source>Quick Recovery</source>
         <translation>Szybkie odzyskiwanie</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3240"/>
+        <location filename="Forms/OptionsWindow.ui" line="3235"/>
         <source>Immediate Recovery</source>
         <translation>Natychmiastowe Przywracanie</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3337"/>
+        <location filename="Forms/OptionsWindow.ui" line="3332"/>
         <source>Various Options</source>
         <translation>Różne opcje</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3431"/>
+        <location filename="Forms/OptionsWindow.ui" line="3426"/>
         <source>Allow use of nested job objects (works on Windows 8 and later)</source>
         <oldsource>Allow use of nested job objects (experimental, works on Windows 8 and later)</oldsource>
         <translation>Zezwalaj na używanie zagnieżdżonych obiektów zadań (eksperymentalne, działa od Windows 8 i w następnych)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1279"/>
+        <location filename="Forms/OptionsWindow.ui" line="1274"/>
         <source>Allow sandboxed programs to manage Hardware/Devices</source>
         <translation>Zezwalaj programom z piaskownicy na zarządzanie sprzętem/urządzeniami</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1204"/>
+        <location filename="Forms/OptionsWindow.ui" line="1199"/>
         <source>Open access to Windows Security Account Manager</source>
         <translation>Otwórz dostęp do Menedżera kont zabezpieczeń systemu Windows</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1238"/>
+        <location filename="Forms/OptionsWindow.ui" line="1233"/>
         <source>Open access to Windows Local Security Authority</source>
         <translation>Otwórz dostęp do usługi podsystemu urzędu zabezpieczeń lokalnych</translation>
     </message>
@@ -7403,34 +7402,34 @@ You can use &apos;Open for All&apos; instead to make it apply to all programs, o
         <translation type="vanished">Zasady dostępu do zasobów</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2833"/>
+        <location filename="Forms/OptionsWindow.ui" line="2828"/>
         <source>The rule specificity is a measure to how well a given rule matches a particular path, simply put the specificity is the length of characters from the begin of the path up to and including the last matching non-wildcard substring. A rule which matches only file types like &quot;*.tmp&quot; would have the highest specificity as it would always match the entire file path.
 The process match level has a higher priority than the specificity and describes how a rule applies to a given process. Rules applying by process name or group have the strongest match level, followed by the match by negation (i.e. rules applying to all processes but the given one), while the lowest match levels have global matches, i.e. rules that apply to any process.</source>
         <translation>Specyfika reguły jest miarą tego, jak dobrze dana reguła pasuje do konkretnej ścieżki. Prościej: specyfika jest długością znaków od początku ścieżki do ostatniego pasującego niezawierającego znaków wielkościowych podłańcucha. Reguła, która dopasowuje tylko typy plików takie jak &quot;*.tmp&quot; będzie miała najwyższą specyfikę, ponieważ zawsze dopasuje całą ścieżkę do pliku.
 Poziom dopasowania do procesu ma wyższy priorytet niż specyfika i opisuje sposób zastosowania reguły do danego procesu. Reguły stosujące się do nazwy procesu lub grupy procesów mają najsilniejszy poziom dopasowania, następnie dopasowanie przez negację (tj. reguły stosujące się do wszystkich procesów oprócz danego), podczas gdy najniższe poziomy dopasowania mają dopasowania globalne, tj. reguły stosujące się do każdego procesu.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2792"/>
+        <location filename="Forms/OptionsWindow.ui" line="2787"/>
         <source>Prioritize rules based on their Specificity and Process Match Level</source>
         <translation>Nadaj priorytet regułom w oparciu o ich specyfikę i poziom dopasowania procesu</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2844"/>
+        <location filename="Forms/OptionsWindow.ui" line="2839"/>
         <source>Privacy Mode, block file and registry access to all locations except the generic system ones</source>
         <translation>Tryb prywatności, blokuje dostęp do plików i rejestru we wszystkich lokalizacjach z wyjątkiem ogólnych systemowych</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2826"/>
+        <location filename="Forms/OptionsWindow.ui" line="2821"/>
         <source>Access Mode</source>
         <translation>Tryb dostępu</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2864"/>
+        <location filename="Forms/OptionsWindow.ui" line="2859"/>
         <source>When the Privacy Mode is enabled, sandboxed processes will be only able to read C:\Windows\*, C:\Program Files\*, and parts of the HKLM registry, all other locations will need explicit access to be readable and/or writable. In this mode, Rule Specificity is always enabled.</source>
         <translation>Po włączeniu trybu prywatności, procesy w trybie piaskownicy będą mogły odczytywać tylko C:\Windows\*, C:\Program Files\* i części rejestru HKLM, a wszystkie inne lokalizacje będą wymagały jawnego dostępu do odczytu i/lub zapisu. W tym trybie Specyfika reguły jest zawsze włączona.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2778"/>
+        <location filename="Forms/OptionsWindow.ui" line="2773"/>
         <source>Rule Policies</source>
         <translation>Reguły zasad</translation>
     </message>
@@ -7439,12 +7438,12 @@ Poziom dopasowania do procesu ma wyższy priorytet niż specyfika i opisuje spos
         <translation type="vanished">Zastosuj reguły Close...=!&lt;program&gt;,... również do wszystkich plików binarnych znajdujących się w piaskownicy.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2799"/>
+        <location filename="Forms/OptionsWindow.ui" line="2794"/>
         <source>Apply File and Key Open directives only to binaries located outside the sandbox.</source>
         <translation>Zastosuj dyrektywy otwarcia pliku i klucza tylko do plików binarnych znajdujących się poza piaskownicą.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1436"/>
+        <location filename="Forms/OptionsWindow.ui" line="1431"/>
         <source>Start the sandboxed RpcSs as a SYSTEM process (not recommended)</source>
         <translation>Uruchom proces RpcS w piaskownicy jako proces SYSTEMOWY (niezalecane)</translation>
     </message>
@@ -7453,18 +7452,18 @@ Poziom dopasowania do procesu ma wyższy priorytet niż specyfika i opisuje spos
         <translation type="vanished">Otwarty dostęp do infrastruktury COM (niezalecane)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1498"/>
+        <location filename="Forms/OptionsWindow.ui" line="1493"/>
         <source>Drop critical privileges from processes running with a SYSTEM token</source>
         <translation>Odrzuć krytyczne uprawnienia z procesów uruchomionych z tokenem SYSTEM</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1491"/>
-        <location filename="Forms/OptionsWindow.ui" line="1539"/>
+        <location filename="Forms/OptionsWindow.ui" line="1486"/>
+        <location filename="Forms/OptionsWindow.ui" line="1534"/>
         <source>(Security Critical)</source>
         <translation>(Kluczowe dla bezpieczeństwa)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1460"/>
+        <location filename="Forms/OptionsWindow.ui" line="1455"/>
         <source>Protect sandboxed SYSTEM processes from unprivileged processes</source>
         <translation>Chroń SYSTEMOWE procesy w trybie piaskownicy przed nieuprzywilejowanymi procesami</translation>
     </message>
@@ -7474,22 +7473,22 @@ Poziom dopasowania do procesu ma wyższy priorytet niż specyfika i opisuje spos
         <translation>Zawsze pokazuj tę piaskownicę na liście paska zadań (Przypięta)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1040"/>
+        <location filename="Forms/OptionsWindow.ui" line="1035"/>
         <source>Security enhancements</source>
         <translation>Zwiększenie bezpieczeństwa</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="971"/>
+        <location filename="Forms/OptionsWindow.ui" line="966"/>
         <source>Use the original token only for approved NT system calls</source>
         <translation>Używaj oryginalnego tokena tylko dla zatwierdzonych wywołań systemowych NT</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1023"/>
+        <location filename="Forms/OptionsWindow.ui" line="1018"/>
         <source>Restrict driver/device access to only approved ones</source>
         <translation>Ogranicz dostęp sterownika/urządzenia tylko do zatwierdzonych</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="978"/>
+        <location filename="Forms/OptionsWindow.ui" line="973"/>
         <source>Enable all security enhancements (make security hardened box)</source>
         <translation>Włącz wszystkie ulepszenia zabezpieczeń (utwórz wzmocniony boks bezpieczeństwa)</translation>
     </message>
@@ -7508,17 +7507,17 @@ Poziom dopasowania do procesu ma wyższy priorytet niż specyfika i opisuje spos
         <translation type="vanished">COM/RPC</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3451"/>
+        <location filename="Forms/OptionsWindow.ui" line="3446"/>
         <source>Disable the use of RpcMgmtSetComTimeout by default (this may resolve compatibility issues)</source>
         <translation>Wyłączenie domyślnego użycia RpcMgmtSetComTimeout (może rozwiązać problemy z kompatybilnością)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1228"/>
+        <location filename="Forms/OptionsWindow.ui" line="1223"/>
         <source>Security Isolation through the usage of a heavily restricted process token is Sandboxie&apos;s primary means of enforcing sandbox restrictions, when this is disabled the box is operated in the application compartment mode, i.e. it’s no longer providing reliable security, just simple application compartmentalization.</source>
         <translation>Izolacja bezpieczeństwa poprzez użycie silnie ograniczonego tokena procesu jest podstawowym sposobem Sandboxie wymuszania ograniczeń piaskownicy, gdy Izolacja jest wyłączona to boks działa w trybie komory aplikacji, tj. nie zapewnia już niezawodnego bezpieczeństwa, tylko prosty podział aplikacji na komory.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1197"/>
+        <location filename="Forms/OptionsWindow.ui" line="1192"/>
         <source>Disable Security Isolation (experimental)</source>
         <translation>Wyłącz izolację bezpieczeństwa (eksperymentalnie)</translation>
     </message>
@@ -7527,60 +7526,60 @@ Poziom dopasowania do procesu ma wyższy priorytet niż specyfika i opisuje spos
         <translation type="vanished">Różne zaawansowane funkcje izolacji mogą zakłócić zgodność z niektórymi aplikacjami. Jeśli używasz tej piaskownicy &lt;b&gt;NIE dla bezpieczeństwa&lt;/b&gt;, ale dla prostej przenośności aplikacji, zmieniając te opcje, możesz przywrócić zgodność, poświęcając część bezpieczeństwa.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1255"/>
+        <location filename="Forms/OptionsWindow.ui" line="1250"/>
         <source>Security Isolation &amp; Filtering</source>
         <translation>Izolacja i filtrowanie bezpieczeństwa</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1211"/>
+        <location filename="Forms/OptionsWindow.ui" line="1206"/>
         <source>Disable Security Filtering (not recommended)</source>
         <translation>Wyłącz filtrowanie zabezpieczeń (niezalecane)</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1218"/>
+        <location filename="Forms/OptionsWindow.ui" line="1213"/>
         <source>Security Filtering used by Sandboxie to enforce filesystem and registry access restrictions, as well as to restrict process access.</source>
         <translation>Filtrowanie bezpieczeństwa używane przez Sandboxie do wymuszania ograniczeń dostępu do systemu plików i rejestru, a także do ograniczania dostępu do procesów.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="1286"/>
+        <location filename="Forms/OptionsWindow.ui" line="1281"/>
         <source>The below options can be used safely when you don&apos;t grant admin rights.</source>
         <translation>Poniższe opcje mogą być bezpiecznie użyte, gdy nie nadano uprawnień administratora.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3468"/>
+        <location filename="Forms/OptionsWindow.ui" line="3463"/>
         <source>Triggers</source>
         <translation>Wyzwalacze</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3531"/>
+        <location filename="Forms/OptionsWindow.ui" line="3526"/>
         <source>Event</source>
         <translation>Zdarzenie</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3501"/>
-        <location filename="Forms/OptionsWindow.ui" line="3520"/>
-        <location filename="Forms/OptionsWindow.ui" line="3658"/>
+        <location filename="Forms/OptionsWindow.ui" line="3496"/>
+        <location filename="Forms/OptionsWindow.ui" line="3515"/>
+        <location filename="Forms/OptionsWindow.ui" line="3653"/>
         <source>Run Command</source>
         <translation>Uruchom polecenie</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3690"/>
+        <location filename="Forms/OptionsWindow.ui" line="3685"/>
         <source>Start Service</source>
         <translation>Uruchom usługę</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3665"/>
+        <location filename="Forms/OptionsWindow.ui" line="3660"/>
         <source>These events are executed each time a box is started</source>
         <translation>Zdarzenia te wykonywane są za każdym razem, gdy uruchamiany jest boks</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3668"/>
+        <location filename="Forms/OptionsWindow.ui" line="3663"/>
         <source>On Box Start</source>
         <translation>Włącz w start boksu</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3549"/>
-        <location filename="Forms/OptionsWindow.ui" line="3697"/>
+        <location filename="Forms/OptionsWindow.ui" line="3544"/>
+        <location filename="Forms/OptionsWindow.ui" line="3692"/>
         <source>These commands are run UNBOXED just before the box content is deleted</source>
         <translation>Te polecenia uruchamiane są tuż przed usunięciem zawartości boksu</translation>
     </message>
@@ -7589,43 +7588,43 @@ Poziom dopasowania do procesu ma wyższy priorytet niż specyfika i opisuje spos
         <translation type="vanished">Przy usuwaniu boksu</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3623"/>
+        <location filename="Forms/OptionsWindow.ui" line="3618"/>
         <source>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</source>
         <translation>Polecenia te wykonywane są tylko wtedy, gdy boks jest inicjalizowany. Aby je ponownie uruchomić, należy usunąć zawartość boksu.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3626"/>
+        <location filename="Forms/OptionsWindow.ui" line="3621"/>
         <source>On Box Init</source>
         <translation>Włącz w Init boksu</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3636"/>
+        <location filename="Forms/OptionsWindow.ui" line="3631"/>
         <source>Here you can specify actions to be executed automatically on various box events.</source>
         <translation>W tym miejscu można określić akcje, które mają być wykonywane automatycznie w przypadku różnych zdarzeń w boksie.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4157"/>
+        <location filename="Forms/OptionsWindow.ui" line="4152"/>
         <source>Disable Resource Access Monitor</source>
         <translation>Wyłącz monitor dostępu do zasobów</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4185"/>
+        <location filename="Forms/OptionsWindow.ui" line="4180"/>
         <source>Resource Access Monitor</source>
         <translation>Monitor dostępu do zasobów</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="2993"/>
-        <location filename="Forms/OptionsWindow.ui" line="4233"/>
+        <location filename="Forms/OptionsWindow.ui" line="2988"/>
+        <location filename="Forms/OptionsWindow.ui" line="4228"/>
         <source>Network Firewall</source>
         <translation>Zapora sieciowa</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4468"/>
+        <location filename="Forms/OptionsWindow.ui" line="4463"/>
         <source>Template Folders</source>
         <translation>Foldery szablonów</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4488"/>
+        <location filename="Forms/OptionsWindow.ui" line="4483"/>
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
@@ -7634,58 +7633,58 @@ Please note that this values are currently user specific and saved globally for 
 Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i zapisywane globalnie dla wszystkich boksów.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4017"/>
-        <location filename="Forms/OptionsWindow.ui" line="4519"/>
+        <location filename="Forms/OptionsWindow.ui" line="4012"/>
+        <location filename="Forms/OptionsWindow.ui" line="4514"/>
         <source>Value</source>
         <translation>Wartość</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4530"/>
+        <location filename="Forms/OptionsWindow.ui" line="4525"/>
         <source>Accessibility</source>
         <translation>Dostępność</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4626"/>
+        <location filename="Forms/OptionsWindow.ui" line="4621"/>
         <source>To compensate for the lost protection, please consult the Drop Rights settings page in the Restrictions settings group.</source>
         <translation>Aby zrekompensować utratę ochrony, zapoznaj się ze stroną ustawień Usuwania Uprawnień w grupie ustawień Ograniczenia.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4550"/>
+        <location filename="Forms/OptionsWindow.ui" line="4545"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
         <translation>Czytniki ekranu: JAWS, NVDA, Window-Eyes, System Access</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="3996"/>
+        <location filename="Forms/OptionsWindow.ui" line="3991"/>
         <source>Here you can configure advanced per process options to improve compatibility and/or customize sandboxing behavior.</source>
         <translation>Tutaj można skonfigurować zaawansowane opcje dla poszczególnych procesów, aby poprawić zgodność i/lub dostosować zachowanie piaskownicy.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4341"/>
+        <location filename="Forms/OptionsWindow.ui" line="4336"/>
         <source>Templates</source>
         <translation>Szablony</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4590"/>
+        <location filename="Forms/OptionsWindow.ui" line="4585"/>
         <source>The following settings enable the use of Sandboxie in combination with accessibility software.  Please note that some measure of Sandboxie protection is necessarily lost when these settings are in effect.</source>
         <translation>Poniższe ustawienia umożliwiają korzystanie z usługi Sandboxie w połączeniu z oprogramowaniem zapewniającym dostępność.  Należy pamiętać, że niektóre środki ochrony Sandboxie są z konieczności tracone, gdy te ustawienia są aktywne.</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4643"/>
+        <location filename="Forms/OptionsWindow.ui" line="4638"/>
         <source>Edit ini Section</source>
         <translation>Edytuj sekcję ini</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4649"/>
+        <location filename="Forms/OptionsWindow.ui" line="4644"/>
         <source>Edit ini</source>
         <translation>Edytuj ini</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4662"/>
+        <location filename="Forms/OptionsWindow.ui" line="4657"/>
         <source>Cancel</source>
         <translation>Anuluj</translation>
     </message>
     <message>
-        <location filename="Forms/OptionsWindow.ui" line="4685"/>
+        <location filename="Forms/OptionsWindow.ui" line="4680"/>
         <source>Save</source>
         <translation>Zapisz</translation>
     </message>
@@ -7709,7 +7708,7 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Views/SbieView.cpp" line="1484"/>
+        <location filename="Views/SbieView.cpp" line="1487"/>
         <source>Drive %1</source>
         <translation>Dysk %1</translation>
     </message>
@@ -7897,12 +7896,12 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
         <translation>Pokaż powiadomienia w pasku, gdy uruchamiane są automatyczne operacje boksu</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1723"/>
+        <location filename="Forms/SettingsWindow.ui" line="1718"/>
         <source>Activate Kernel Mode Object Filtering</source>
         <translation>Włącz filtrowanie obiektów w trybie jądra</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1783"/>
+        <location filename="Forms/SettingsWindow.ui" line="1778"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (experimental)</source>
         <translation>Przechwytuj wybrane wywołania systemowe Win32k, aby włączyć przyspieszenie GPU (eksperymentalne)</translation>
     </message>
@@ -7931,63 +7930,63 @@ Należy pamiętać, że te wartości są obecnie specyficzne dla użytkownika i 
         <translation>Zintegruj z menu startowym hosta</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="908"/>
+        <location filename="Forms/SettingsWindow.ui" line="903"/>
         <source>Use new config dialog layout *</source>
         <translation>Użyj nowego układu okna dialogowego konfiguracji *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1386"/>
+        <location filename="Forms/SettingsWindow.ui" line="1381"/>
         <source>Sandboxie Updater</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1417"/>
+        <location filename="Forms/SettingsWindow.ui" line="1412"/>
         <source>Keep addon list up to date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1472"/>
+        <location filename="Forms/SettingsWindow.ui" line="1467"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1476"/>
+        <location filename="Forms/SettingsWindow.ui" line="1471"/>
         <source>Search in the Insider channel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1523"/>
+        <location filename="Forms/SettingsWindow.ui" line="1518"/>
         <source>Check periodically for new Sandboxie-Plus versions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1533"/>
+        <location filename="Forms/SettingsWindow.ui" line="1528"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1553"/>
+        <location filename="Forms/SettingsWindow.ui" line="1548"/>
         <source>Keep Troubleshooting scripts up to date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1790"/>
+        <location filename="Forms/SettingsWindow.ui" line="1785"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation type="unfinished">Użyj loginu Sandboxie zamiast anonimowego tokena</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1920"/>
+        <location filename="Forms/SettingsWindow.ui" line="1915"/>
         <source>Program Alerts</source>
         <translation>Alerty programu</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1976"/>
+        <location filename="Forms/SettingsWindow.ui" line="1971"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
         <translation>Komunikat 1301 po wyłączeniu wymuszania procesów</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1889"/>
+        <location filename="Forms/SettingsWindow.ui" line="1884"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
         <translation>Tylko konta użytkowników typu Administrator mogą używać polecenia Wstrzymaj Wymuszanie Programów</translation>
     </message>
@@ -8002,7 +8001,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Pomiń wyskakujące powiadomienia w trybie gry / prezentacji</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="810"/>
+        <location filename="Forms/SettingsWindow.ui" line="805"/>
         <source>User Interface</source>
         <translation>Interfejs użytkownika</translation>
     </message>
@@ -8012,29 +8011,29 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Uruchom Menu &apos;Wykonaj&apos;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="695"/>
+        <location filename="Forms/SettingsWindow.ui" line="690"/>
         <source>Add program</source>
         <translation>Dodaj program</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="753"/>
+        <location filename="Forms/SettingsWindow.ui" line="748"/>
         <source>You can configure custom entries for all sandboxes run menus.</source>
         <translation>Można skonfigurować niestandardowe wpisy dla wszystkich menu uruchamiania piaskownic.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="775"/>
-        <location filename="Forms/SettingsWindow.ui" line="1181"/>
-        <location filename="Forms/SettingsWindow.ui" line="2132"/>
+        <location filename="Forms/SettingsWindow.ui" line="770"/>
+        <location filename="Forms/SettingsWindow.ui" line="1176"/>
+        <location filename="Forms/SettingsWindow.ui" line="2127"/>
         <source>Remove</source>
         <translation>Usuń</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="675"/>
+        <location filename="Forms/SettingsWindow.ui" line="670"/>
         <source>Command Line</source>
         <translation>Wiersz poleceń</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1244"/>
+        <location filename="Forms/SettingsWindow.ui" line="1239"/>
         <source>Support &amp;&amp; Updates</source>
         <translation>Wsparcie i aktualizacje</translation>
     </message>
@@ -8043,7 +8042,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Konfiguracja piaskownicy</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1693"/>
+        <location filename="Forms/SettingsWindow.ui" line="1688"/>
         <source>Default sandbox:</source>
         <translation>Domyślna piaskownica:</translation>
     </message>
@@ -8052,22 +8051,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Zgodność</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2210"/>
+        <location filename="Forms/SettingsWindow.ui" line="2205"/>
         <source>Edit ini Section</source>
         <translation>Edytuj sekcję ini</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2219"/>
+        <location filename="Forms/SettingsWindow.ui" line="2214"/>
         <source>Save</source>
         <translation>Zapisz</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2239"/>
+        <location filename="Forms/SettingsWindow.ui" line="2234"/>
         <source>Edit ini</source>
         <translation>Edytuj ini</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2252"/>
+        <location filename="Forms/SettingsWindow.ui" line="2247"/>
         <source>Cancel</source>
         <translation>Anuluj</translation>
     </message>
@@ -8076,32 +8075,32 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Wsparcie</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1455"/>
+        <location filename="Forms/SettingsWindow.ui" line="1450"/>
         <source>Version Updates</source>
         <translation>Aktualizacje wersji</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1513"/>
+        <location filename="Forms/SettingsWindow.ui" line="1508"/>
         <source>New full versions from the selected release channel.</source>
         <translation>Nowe pełne wersje z wybranego kanału dystrybucji.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1452"/>
+        <location filename="Forms/SettingsWindow.ui" line="1447"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
         <translation>Świeże poprawki dla zainstalowanej wersji, aktualizacji Templates.ini i tłumaczeń.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1462"/>
+        <location filename="Forms/SettingsWindow.ui" line="1457"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>Kanał podglądu zawiera najnowsze wersje przed finalne z GitHub.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1560"/>
+        <location filename="Forms/SettingsWindow.ui" line="1555"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>Kanał stabilny zawiera najnowsze stabilne wersje z GitHub.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1563"/>
+        <location filename="Forms/SettingsWindow.ui" line="1558"/>
         <source>Search in the Stable channel</source>
         <translation>Szukaj w kanale stabilnym</translation>
     </message>
@@ -8110,7 +8109,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Utrzymywanie Sandboxie na bieżąco z nowymi wersjami systemu Windows i kompatybilność ze wszystkimi przeglądarkami internetowymi to niekończące się przedsięwzięcie. Rozważ wsparcie tej pracy darowizną.&lt;br /&gt;Możesz wesprzeć rozwój za pomocą &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;darowizny PayPal&lt;/a&gt;, działa również z kartami kredytowymi.&lt;br /&gt;Lub możesz zapewnić ciągłe wsparcie dzięki &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;subskrypcji Patreon&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1465"/>
+        <location filename="Forms/SettingsWindow.ui" line="1460"/>
         <source>Search in the Preview channel</source>
         <translation>Szukaj w kanale podglądu</translation>
     </message>
@@ -8127,7 +8126,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Automatycznie instaluj aktualizacje</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1305"/>
+        <location filename="Forms/SettingsWindow.ui" line="1300"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Wygasł ten certyfikat wsparcia, proszę &lt;a href=&quot;sbie://update/cert&quot;&gt;uzyskać zaktualizowany certyfikat&lt;/a&gt;.</translation>
     </message>
@@ -8173,22 +8172,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Użyj ciemnego motywu (zadziała w pełni po restarcie SB+)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1868"/>
+        <location filename="Forms/SettingsWindow.ui" line="1863"/>
         <source>Config protection</source>
         <translation>Ochrona konfiguracji</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1680"/>
+        <location filename="Forms/SettingsWindow.ui" line="1675"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
         <translation>Piaskownica &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1730"/>
+        <location filename="Forms/SettingsWindow.ui" line="1725"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
         <translation>Piaskownica &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1896"/>
+        <location filename="Forms/SettingsWindow.ui" line="1891"/>
         <source>Clear password when main window becomes hidden</source>
         <translation>Wyczyść hasło, gdy zostanie ukryte okno główne</translation>
     </message>
@@ -8197,7 +8196,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Tylko konta użytkowników typu Administrator mogą używać polecenia Wstrzymaj Programy Wymuszone</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1710"/>
+        <location filename="Forms/SettingsWindow.ui" line="1705"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
         <translation>Piaskownica &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </translation>
     </message>
@@ -8247,12 +8246,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Uruchom Menedżera piaskownicy</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1603"/>
+        <location filename="Forms/SettingsWindow.ui" line="1598"/>
         <source>Advanced Config</source>
         <translation>Konfiguracja zaawansowana</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1703"/>
+        <location filename="Forms/SettingsWindow.ui" line="1698"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
         <translation>Użyj platformy filtrowania systemu Windows, aby ograniczyć dostęp do sieci</translation>
     </message>
@@ -8265,7 +8264,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Oddziel foldery użytkowników</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1776"/>
+        <location filename="Forms/SettingsWindow.ui" line="1771"/>
         <source>Sandboxing features</source>
         <translation>Funkcje piaskownicy</translation>
     </message>
@@ -8274,28 +8273,28 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Osoby wspierające projekt Sandboxie-Plus otrzymują &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certyfikat wsparcia&lt;/a&gt;. To jest jak klucz licencyjny, ale dla wspaniałych ludzi używających oprogramowania open source :-)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1910"/>
+        <location filename="Forms/SettingsWindow.ui" line="1905"/>
         <source>Program Control</source>
         <translation>Kontrola programu</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1613"/>
+        <location filename="Forms/SettingsWindow.ui" line="1608"/>
         <source>Sandboxie Config</source>
         <oldsource>Config Protection</oldsource>
         <translation>Ochrona konfiguracji</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1875"/>
+        <location filename="Forms/SettingsWindow.ui" line="1870"/>
         <source>Only Administrator user accounts can make changes</source>
         <translation>Tylko administratorzy mogą zmieniać ustawienia</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1841"/>
+        <location filename="Forms/SettingsWindow.ui" line="1836"/>
         <source>Password must be entered in order to make changes</source>
         <translation>Wymagaj podania hasła, aby zmienić ustawienia</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1834"/>
+        <location filename="Forms/SettingsWindow.ui" line="1829"/>
         <source>Change Password</source>
         <translation>Zmień hasło</translation>
     </message>
@@ -8304,7 +8303,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Utrzymywanie Sandboxie na bieżąco z nowymi wersjami systemu Windows i kompatybilność ze wszystkimi przeglądarkami internetowymi to niekończące się przedsięwzięcie. Rozważ wsparcie tej pracy darowizną.&lt;br /&gt;Możesz wesprzeć rozwój za pomocą &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;darowizny PayPal&lt;/a&gt;, działa również z kartami kredytowymi.&lt;br /&gt;Lub możesz zapewnić ciągłe wsparcie dzięki &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;subskrypcji Patreon&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1376"/>
+        <location filename="Forms/SettingsWindow.ui" line="1371"/>
         <source>Enter the support certificate here</source>
         <translation>Wpisz tutaj certyfikat wsparcia</translation>
     </message>
@@ -8313,22 +8312,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Ustawienia wsparcia</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1673"/>
+        <location filename="Forms/SettingsWindow.ui" line="1668"/>
         <source>Portable root folder</source>
         <translation>Przenośny folder główny</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1646"/>
+        <location filename="Forms/SettingsWindow.ui" line="1641"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1663"/>
+        <location filename="Forms/SettingsWindow.ui" line="1658"/>
         <source>Sandbox default</source>
         <translation>Ścieżki piaskownicy</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1882"/>
+        <location filename="Forms/SettingsWindow.ui" line="1877"/>
         <source>Watch Sandboxie.ini for changes</source>
         <translation>Obserwuj modyfikacje Sandboxie.ini</translation>
     </message>
@@ -8338,63 +8337,63 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Użyj kompaktowej listy boksów</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="800"/>
+        <location filename="Forms/SettingsWindow.ui" line="795"/>
         <source>Interface Config</source>
         <translation>Konfiguracja interfejsu</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="928"/>
+        <location filename="Forms/SettingsWindow.ui" line="923"/>
         <source>Show &quot;Pizza&quot; Background in box list *</source>
         <oldsource>Show &quot;Pizza&quot; Background in box list*</oldsource>
         <translation>Pokaż tło &quot;Pizza&quot; na liście boksów *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1132"/>
+        <location filename="Forms/SettingsWindow.ui" line="1127"/>
         <source>(Restart required)</source>
         <translation>(Wymagany restart)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="891"/>
+        <location filename="Forms/SettingsWindow.ui" line="886"/>
         <source>* a partially checked checkbox will leave the behavior to be determined by the view mode.</source>
         <translation>* częściowo zaznaczone pole wyboru spowoduje, że zachowanie zostanie określone przez tryb widoku.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="847"/>
+        <location filename="Forms/SettingsWindow.ui" line="842"/>
         <source>Make Box Icons match the Border Color</source>
         <translation>Dopasuj ikony boksu do koloru obramowania</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="818"/>
+        <location filename="Forms/SettingsWindow.ui" line="813"/>
         <source>Use a Page Tree in the Box Options instead of Nested Tabs *</source>
         <translation>Użyj drzewa stron w opcjach boksu zamiast zagnieżdżonych kart *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="840"/>
+        <location filename="Forms/SettingsWindow.ui" line="835"/>
         <source>Interface Options</source>
         <translation>Opcje interfejsu</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="871"/>
+        <location filename="Forms/SettingsWindow.ui" line="866"/>
         <source>Use large icons in box list *</source>
         <translation>Użyj dużych ikon na liście boksów *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1002"/>
+        <location filename="Forms/SettingsWindow.ui" line="997"/>
         <source>High DPI Scaling</source>
         <translation>Skalowanie wysokiego DPI</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="881"/>
+        <location filename="Forms/SettingsWindow.ui" line="876"/>
         <source>Don&apos;t show icons in menus *</source>
         <translation>Nie pokazuj ikon w menu *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="918"/>
+        <location filename="Forms/SettingsWindow.ui" line="913"/>
         <source>Use Dark Theme</source>
         <translation>Użyj ciemny motyw</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="992"/>
+        <location filename="Forms/SettingsWindow.ui" line="987"/>
         <source>Font Scaling</source>
         <translation>Skalowanie czcionki</translation>
     </message>
@@ -8404,17 +8403,17 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Pokaż okno odzyskiwania jako Zawsze na wierzchu</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1109"/>
+        <location filename="Forms/SettingsWindow.ui" line="1104"/>
         <source>%</source>
         <translation>%</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="901"/>
+        <location filename="Forms/SettingsWindow.ui" line="896"/>
         <source>Alternate row background in lists</source>
         <translation>Alternatywne tło wierszy na listach</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="861"/>
+        <location filename="Forms/SettingsWindow.ui" line="856"/>
         <source>Use Fusion Theme</source>
         <translation>Użyj motywu Fusion</translation>
     </message>
@@ -8424,40 +8423,40 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="665"/>
-        <location filename="Forms/SettingsWindow.ui" line="1202"/>
-        <location filename="Forms/SettingsWindow.ui" line="1942"/>
-        <location filename="Forms/SettingsWindow.ui" line="2052"/>
-        <location filename="Forms/SettingsWindow.ui" line="2185"/>
+        <location filename="Forms/SettingsWindow.ui" line="1197"/>
+        <location filename="Forms/SettingsWindow.ui" line="1937"/>
+        <location filename="Forms/SettingsWindow.ui" line="2047"/>
+        <location filename="Forms/SettingsWindow.ui" line="2180"/>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1947"/>
+        <location filename="Forms/SettingsWindow.ui" line="1942"/>
         <source>Path</source>
         <translation>Ścieżka</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1969"/>
+        <location filename="Forms/SettingsWindow.ui" line="1964"/>
         <source>Remove Program</source>
         <translation>Usuń program</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1955"/>
+        <location filename="Forms/SettingsWindow.ui" line="1950"/>
         <source>Add Program</source>
         <translation>Dodaj Program</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1990"/>
+        <location filename="Forms/SettingsWindow.ui" line="1985"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
         <translation>Gdy jakikolwiek z następujących programów jest uruchomiony poza piaskownicą, Sandboxie wyświetli wiadomość SBIE1301.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2000"/>
+        <location filename="Forms/SettingsWindow.ui" line="1995"/>
         <source>Add Folder</source>
         <translation>Dodaj folder</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1983"/>
+        <location filename="Forms/SettingsWindow.ui" line="1978"/>
         <source>Prevent the listed programs from starting on this system</source>
         <translation>Zapobiegaj uruchamianiu wymienionych programów w tym systemie</translation>
     </message>
@@ -8521,188 +8520,187 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Powłoka Windows</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="670"/>
         <source>Icon</source>
-        <translation>Ikona</translation>
+        <translation type="vanished">Ikona</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="727"/>
+        <location filename="Forms/SettingsWindow.ui" line="722"/>
         <source>Move Up</source>
         <translation>Przesuń w górę</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="746"/>
+        <location filename="Forms/SettingsWindow.ui" line="741"/>
         <source>Move Down</source>
         <translation>Przesuń w dół</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="854"/>
+        <location filename="Forms/SettingsWindow.ui" line="849"/>
         <source>Show overlay icons for boxes and processes</source>
         <translation>Pokaż ikony nakładek dla boksów i procesów</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="951"/>
+        <location filename="Forms/SettingsWindow.ui" line="946"/>
         <source>Hide Sandboxie&apos;s own processes from the task list</source>
         <oldsource>Hide sandboxie&apos;s own processes from the task list</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="961"/>
+        <location filename="Forms/SettingsWindow.ui" line="956"/>
         <source>Display Options</source>
         <translation>Opcje wyświetlania</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="969"/>
+        <location filename="Forms/SettingsWindow.ui" line="964"/>
         <source>Ini Editor Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1032"/>
+        <location filename="Forms/SettingsWindow.ui" line="1027"/>
         <source>Graphic Options</source>
         <translation>Opcje graficzne</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1061"/>
+        <location filename="Forms/SettingsWindow.ui" line="1056"/>
         <source>Select font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1071"/>
+        <location filename="Forms/SettingsWindow.ui" line="1066"/>
         <source>Reset font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1139"/>
+        <location filename="Forms/SettingsWindow.ui" line="1134"/>
         <source>#</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1153"/>
+        <location filename="Forms/SettingsWindow.ui" line="1148"/>
         <source>Addons Manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1163"/>
+        <location filename="Forms/SettingsWindow.ui" line="1158"/>
         <source>Optional Addons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1171"/>
+        <location filename="Forms/SettingsWindow.ui" line="1166"/>
         <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of addons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1207"/>
+        <location filename="Forms/SettingsWindow.ui" line="1202"/>
         <source>Status</source>
         <translation type="unfinished">Status</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1212"/>
+        <location filename="Forms/SettingsWindow.ui" line="1207"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1220"/>
+        <location filename="Forms/SettingsWindow.ui" line="1215"/>
         <source>&lt;a href=&quot;sbie://addons&quot;&gt;update addon list now&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1230"/>
+        <location filename="Forms/SettingsWindow.ui" line="1225"/>
         <source>Install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1254"/>
+        <location filename="Forms/SettingsWindow.ui" line="1249"/>
         <source>Sandboxie Support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1341"/>
+        <location filename="Forms/SettingsWindow.ui" line="1336"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1357"/>
+        <location filename="Forms/SettingsWindow.ui" line="1352"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. You can support the development by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;directly contributing to the project&lt;/a&gt;, showing your support by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt;, becoming a patron by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;subscribing on Patreon&lt;/a&gt;, or through a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;.&lt;br /&gt;Your support plays a vital role in the advancement and maintenance of Sandboxie.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1431"/>
+        <location filename="Forms/SettingsWindow.ui" line="1426"/>
         <source>Update Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1589"/>
+        <location filename="Forms/SettingsWindow.ui" line="1584"/>
         <source>Update Check Interval</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1826"/>
+        <location filename="Forms/SettingsWindow.ui" line="1821"/>
         <source>Sandboxie.ini Presets</source>
         <translation>Wstępne ustawienia Sandboxie.in</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1962"/>
+        <location filename="Forms/SettingsWindow.ui" line="1957"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>Pokaż wiadomość 1308, gdy program nie może uruchomić się</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2014"/>
+        <location filename="Forms/SettingsWindow.ui" line="2009"/>
         <source>App Templates</source>
         <translation>Dodaj szablony</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2024"/>
+        <location filename="Forms/SettingsWindow.ui" line="2019"/>
         <source>App Compatibility</source>
         <translation>Kompatybilność aplikacji</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2044"/>
+        <location filename="Forms/SettingsWindow.ui" line="2039"/>
         <source>In the future, don&apos;t check software compatibility</source>
         <translation>W przyszłości nie sprawdzaj szablonów kompatybilności</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2060"/>
+        <location filename="Forms/SettingsWindow.ui" line="2055"/>
         <source>Enable</source>
         <translation>Włączyć</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2080"/>
+        <location filename="Forms/SettingsWindow.ui" line="2075"/>
         <source>Disable</source>
         <translation>Wyłącz</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2087"/>
+        <location filename="Forms/SettingsWindow.ui" line="2082"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
         <translation>Sandboxie wykrył następujące aplikacje w twoim systemie. Kliknij OK, aby zastosować ustawienia konfiguracji, co poprawi zgodność z tymi aplikacjami. Te ustawienia konfiguracji będą obowiązywać we wszystkich istniejących piaskownicach i wszystkich nowych piaskownicach.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2100"/>
+        <location filename="Forms/SettingsWindow.ui" line="2095"/>
         <source>Local Templates</source>
         <translation>Szablony lokalne</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2151"/>
+        <location filename="Forms/SettingsWindow.ui" line="2146"/>
         <source>Add Template</source>
         <translation>Dodaj szablon</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2171"/>
+        <location filename="Forms/SettingsWindow.ui" line="2166"/>
         <source>Text Filter</source>
         <translation>Filtruj text</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2193"/>
+        <location filename="Forms/SettingsWindow.ui" line="2188"/>
         <source>This list contains user created custom templates for sandbox options</source>
         <translation>Ta lista zawiera utworzone przez użytkownika własne szablony opcji piaskownicy</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1516"/>
+        <location filename="Forms/SettingsWindow.ui" line="1511"/>
         <source>New Versions</source>
         <translation>Nowe wersje</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1278"/>
+        <location filename="Forms/SettingsWindow.ui" line="1273"/>
         <source>In the future, don&apos;t notify about certificate expiration</source>
         <translation>W przyszłości nie powiadamiaj o wygaśnięciu certyfikatu</translation>
     </message>

@@ -146,7 +146,7 @@
         <location filename="Wizards/NewBoxWizard.cpp" line="471"/>
         <source>This option is not recommended for Hardened boxes</source>
         <oldsource>This option is not recomended for Hardened boxes</oldsource>
-        <translation>강화 상자에는 이 옵션을 사용하지 않는 것이 좋습니다</translation>
+        <translation>강화 박스에는 이 옵션을 사용하지 않는 것이 좋습니다</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="461"/>
@@ -191,7 +191,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="481"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation>사용자 지정 샌드박스 토큰을 사용하면 개별 샌드박스를 서로 더 잘 격리할 수 있으며, 프로세스가 속한 상자의 이름을 작업 관리자의 사용자 열에 표시합니다. 그러나 일부 타사 보안 솔루션은 사용자 지정 토큰에 문제가 있을 수 있습니다.</translation>
+        <translation>사용자 지정 샌드박스 토큰을 사용하면 개별 샌드박스를 서로 더 잘 격리할 수 있으며, 프로세스가 속한 박스의 이름을 작업 관리자의 사용자 열에 표시합니다. 그러나 일부 타사 보안 솔루션은 사용자 지정 토큰에 문제가 있을 수 있습니다.</translation>
     </message>
 </context>
 <context>
@@ -1544,7 +1544,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsGeneral.cpp" line="19"/>
         <source>This option requires an active supporter certificate</source>
         <oldsource>This option requires a valid supporter certificate</oldsource>
-        <translation type="unfinished">이 옵션을 사용하려면 유효한 후원자 인증서가 필요합니다</translation>
+        <translation>이 옵션을 사용하려면 유효한 후원자 인증서가 필요합니다</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="22"/>
@@ -5438,7 +5438,7 @@ Processes in this box will be running with a custom process token indicating the
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="625"/>
         <source>Failed to create new box: %1</source>
-        <translation>새 상자를 만들지 못했습니다: %1</translation>
+        <translation>새 박스를 만들지 못했습니다: %1</translation>
     </message>
 </context>
 <context>
@@ -5938,7 +5938,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="388"/>
         <source>The box structure can only be changed when the sandbox is empty</source>
-        <translation>상자 구조는 샌드박스가 비어 있는 경우에만 변경할 수 있습니다</translation>
+        <translation>박스 구조는 샌드박스가 비어 있는 경우에만 변경할 수 있습니다</translation>
     </message>
     <message>
         <source>Allow sandboxed processes to open files protected by EFS</source>
@@ -5957,7 +5957,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/OptionsWindow.ui" line="294"/>
         <source>Partially checked means prevent box removal but not content deletion.</source>
-        <translation type="unfinished"></translation>
+        <translation>부분적으로 선택하면 박스는 제거되지만 내용은 삭제되지 않습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="487"/>
@@ -7897,7 +7897,7 @@ Please note that this values are currently user specific and saved globally for 
         <location filename="Forms/SettingsWindow.ui" line="956"/>
         <source>Interface Options</source>
         <oldsource>Display Options</oldsource>
-        <translation type="unfinished">디스플레이 옵션</translation>
+        <translation>인터페이스 옵션</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1096"/>
@@ -7922,7 +7922,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1069"/>
         <source>Ini Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Ini 옵션</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1119"/>
@@ -7932,7 +7932,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1156"/>
         <source>External Ini Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>외부 Ini 편집기</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1173"/>
@@ -8142,12 +8142,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SettingsWindow.ui" line="813"/>
         <source>Use a Page Tree in the Box Options instead of Nested Tabs *</source>
         <translation>박스 옵션에서 중첩 탭 대신 페이지 트리 사용 *</translation>
-    </message>
-    <message>
-        <location filename="Forms/SettingsWindow.ui" line="835"/>
-        <location filename="Forms/SettingsWindow.ui" line="956"/>
-        <source>Interface Options</source>
-        <translation>인터페이스 옵션</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="866"/>

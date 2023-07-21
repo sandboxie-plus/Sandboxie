@@ -6864,7 +6864,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
     <message>
         <location filename="Forms/OptionsWindow.ui" line="294"/>
         <source>Partially checked means prevent box removal but not content deletion.</source>
-        <translation type="unfinished"></translation>
+        <translation>Teilweise angehakt bedeutet, dass die Box vor dem Entfernen gesch√ºtzt wird, aber nicht deren Inhalt vor dem L√∂schen.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="337"/>
@@ -7792,8 +7792,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
         <location filename="Forms/SettingsWindow.ui" line="835"/>
         <location filename="Forms/SettingsWindow.ui" line="956"/>
         <source>Interface Options</source>
-        <oldsource>Display Options</oldsource>
-        <translation type="unfinished">Anzeigeoptionen</translation>
+        <translation>Oberfl√§chenoptionen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1033"/>
@@ -7803,12 +7802,12 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1069"/>
         <source>Ini Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Ini-Optionen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1156"/>
         <source>External Ini Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Externer Ini-Editor</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1173"/>

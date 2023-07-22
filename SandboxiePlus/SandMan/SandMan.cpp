@@ -1797,6 +1797,7 @@ SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, boo
 		Ret = pBox->TerminateAll();
 		if (Ret.IsError())
 			return Ret;
+		UpdateProcesses();
 	}
 
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();

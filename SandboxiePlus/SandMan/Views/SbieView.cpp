@@ -1357,13 +1357,14 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 			SB_STATUS Status = SB_OK;
 
 			if (!pBox->GetBool("IsShadow")) {
-				Status = theGUI->DeleteBoxContent(pBox, CSandMan::eForDelete);
-				if (Status.GetMsgCode() == SB_Canceled)
-					break;
+				if (pBox->GetBool("NeverRemove", false))
+					Status = SB_ERR(SB_DeleteProtect);
+				else {
+					Status = theGUI->DeleteBoxContent(pBox, CSandMan::eForDelete);
+					if (Status.GetMsgCode() == SB_Canceled)
+						break;
+				}
 			}
-			
-			if (pBox->GetBool("NeverRemove", false))
-				Status = SB_ERR(SB_DeleteProtect);
 
 			QString Name = pBox->GetName();
 			if (!Status.IsError())

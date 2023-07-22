@@ -7857,12 +7857,6 @@ Xin lưu ý rằng các giá trị này hiện là dành riêng cho người dù
         <translation>Sử dụng Cây Trang trong Tùy chọn Sandbox thay vì Các Tab lồng nhau *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="835"/>
-        <location filename="Forms/SettingsWindow.ui" line="956"/>
-        <source>Interface Options</source>
-        <translation>Tùy chọn giao diện</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="866"/>
         <source>Use large icons in box list *</source>
         <translation>Sử dụng các biểu tượng lớn trong danh sách hộp *</translation>

@@ -8551,13 +8551,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="835"/>
-        <location filename="Forms/SettingsWindow.ui" line="956"/>
-        <source>Interface Options</source>
-        <oldsource>Display Options</oldsource>
-        <translation type="unfinished">Opcje wyświetlania</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1096"/>
         <source>Ini Editor Font</source>
         <translation type="unfinished"></translation>

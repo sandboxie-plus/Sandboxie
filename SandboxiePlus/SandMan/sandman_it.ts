@@ -7849,12 +7849,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Usa una struttura ad albero nelle opzioni dell&apos;area virtuale invece di schede annidate *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="835"/>
-        <location filename="Forms/SettingsWindow.ui" line="956"/>
-        <source>Interface Options</source>
-        <translation>Opzioni di interfaccia</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="866"/>
         <source>Use large icons in box list *</source>
         <translation>Usa icone grandi nell&apos;elenco delle aree virtuali *</translation>

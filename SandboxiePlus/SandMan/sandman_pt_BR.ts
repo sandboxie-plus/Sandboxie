@@ -8579,13 +8579,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Mostrar ícones de sobreposição para caixas e processos</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="835"/>
-        <location filename="Forms/SettingsWindow.ui" line="956"/>
-        <source>Interface Options</source>
-        <oldsource>Display Options</oldsource>
-        <translation type="unfinished">Opções de Exibição</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1033"/>
         <source>Graphic Options</source>
         <translation>Opções Gráficas</translation>

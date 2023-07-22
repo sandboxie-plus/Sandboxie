@@ -7540,13 +7540,6 @@ The process match level has a higher priority than the specificity and describes
         <translation>Alanlar ve işlemler için simge bindirmelerini göster</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="835"/>
-        <location filename="Forms/SettingsWindow.ui" line="956"/>
-        <source>Interface Options</source>
-        <oldsource>Display Options</oldsource>
-        <translation type="unfinished">Görüntüleme Seçenekleri</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1033"/>
         <source>Graphic Options</source>
         <translation>Grafik Seçenekleri</translation>

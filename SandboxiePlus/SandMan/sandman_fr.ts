@@ -8286,13 +8286,6 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
         <translation>Afficher les superpositions d&apos;icônes pour les bacs et les processus</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="835"/>
-        <location filename="Forms/SettingsWindow.ui" line="956"/>
-        <source>Interface Options</source>
-        <oldsource>Display Options</oldsource>
-        <translation type="unfinished">Options d&apos;affichage</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="967"/>
         <source>Font Scaling</source>
         <translation>Mise à l&apos;échelle des polices :</translation>

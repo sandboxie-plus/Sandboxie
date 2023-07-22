@@ -8003,12 +8003,6 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <translation>在沙盒选项中使用页面树，而不是嵌套标签 *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="835"/>
-        <location filename="Forms/SettingsWindow.ui" line="956"/>
-        <source>Interface Options</source>
-        <translation>界面选项</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="866"/>
         <source>Use large icons in box list *</source>
         <translation>在沙盒列表中使用大图标 *</translation>

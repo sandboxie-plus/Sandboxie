@@ -7789,12 +7789,6 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f√
         <translation>Deaktiviere SBIE Nachrichten Popups (sie werden weiterhin im Nachrichtenreiter erfasst)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="835"/>
-        <location filename="Forms/SettingsWindow.ui" line="956"/>
-        <source>Interface Options</source>
-        <translation>Oberfl√§chenoptionen</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1033"/>
         <source>Graphic Options</source>
         <translation>Grafikoptionen</translation>

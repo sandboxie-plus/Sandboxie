@@ -1809,7 +1809,7 @@ void CSbieView::OnMenuContextMenu(const QPoint& point)
 		if (FoundPin.isEmpty()) {
 			QVariantMap Entry;
 			Entry["Name"] = pAction->text();
-			Entry["Icon"] = pAction->property("Icon").toString() + "," + pAction->property("IconIndex").toString();
+			Entry["Icon"] = pBoxPlus->MakeBoxCommand(pAction->property("Icon").toString()) + "," + pAction->property("IconIndex").toString();
 			Entry["WorkingDir"] = pBoxPlus->MakeBoxCommand(pAction->property("WorkingDir").toString());
 			Entry["Command"] = "\"" + pBoxPlus->MakeBoxCommand(LinkTarget) + "\"";
 			m_pCtxPinToRun->setData(MakeRunEntry(Entry));

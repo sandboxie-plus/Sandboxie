@@ -189,6 +189,10 @@ static NTSTATUS File_MigrateFile(
     const WCHAR *TruePath, const WCHAR *CopyPath,
     BOOLEAN IsWritePath, BOOLEAN WithContents);
 
+static NTSTATUS File_MigrateJunction(
+    const WCHAR *TruePath, const WCHAR *CopyPath,
+    BOOLEAN IsWritePath);
+
 static NTSTATUS File_CopyShortName(
     const WCHAR *TruePath, const WCHAR *CopyPath);
 
@@ -3382,7 +3386,12 @@ ReparseLoop:
         // write access, or else it would have been handled earlier already)
         //
 
-        if (CreateDisposition == FILE_OPEN ||
+        if (FileType & TYPE_REPARSE_POINT) {
+
+            status = File_MigrateJunction(
+                            TruePath, CopyPath, IsWritePath);
+
+        } else if (CreateDisposition == FILE_OPEN ||
             CreateDisposition == FILE_OPEN_IF ||
             TruePathColon) {
 

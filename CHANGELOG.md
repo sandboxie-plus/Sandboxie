@@ -30,6 +30,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Remove Sandbox only deletes the contents of the sandbox when an application is running in the sandbox [#3118](https://github.com/sandboxie-plus/Sandboxie/issues/3118)
 - fixed crash issue with not peroeprly termianted script engine [#3120](https://github.com/sandboxie-plus/Sandboxie/issues/3120)
 - fixed ImDisk under Sandboxie supervision causes SBIE2337 and sometimes BSoD [#1092)(https://github.com/sandboxie-plus/Sandboxie/issues/1092)
+- fixed Snapshots don't merge duplicate directory junctions [#3016](https://github.com/sandboxie-plus/Sandboxie/issues/3016)
 
 
 

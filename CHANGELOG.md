@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - reworked Nt Object Handle handling
+- "OpenClipboard=n" now is also implemented in user mode, making it work for green boxes
 
 ### Fixed
 - fixed "Disable Security Isolation" causes a game to stop playing audio [#2893](https://github.com/sandboxie-plus/Sandboxie/issues/2893)
@@ -23,6 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed inpoper global symlink in sandboxed namespace [#3112](https://github.com/sandboxie-plus/Sandboxie/issues/3112)
 - fixed 'Addon already installed!' error when clicking 'Show Stack Trace' [#3114](https://github.com/sandboxie-plus/Sandboxie/issues/3114)
 - fixed existing BoxNameTitle=process.exe,- removed when toggling other options [#3106](https://github.com/sandboxie-plus/Sandboxie/issues/3106)
+- fixed asynchroniusly assigned PCA job not being properly detected [#1919](https://github.com/sandboxie-plus/Sandboxie/issues/1919)
 
 
 

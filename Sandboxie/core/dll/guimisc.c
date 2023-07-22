@@ -789,6 +789,9 @@ _FX HANDLE Gui_GetClipboardData(UINT uFormat)
     // clipboard data
     //
 
+    if (!SbieApi_QueryConfBool(NULL, L"OpenClipboard", TRUE))
+        return NULL;
+
     hGlobalRet = __sys_GetClipboardData(uFormat);
     if (hGlobalRet)
         return hGlobalRet;
@@ -1057,6 +1060,9 @@ _FX void Gui_GetClipboardData_MF(void *buf, ULONG sz, ULONG fmt)
     // make a secondary call to SbieSvc to get the data bytes so that we can
     // create a local HMETAFILE handle
     //
+
+    if (!SbieApi_QueryConfBool(NULL, L"OpenClipboard", TRUE))
+        return;
 
     if ((fmt != CF_METAFILEPICT) || (sz != sizeof(METAFILEPICT))) {
         SbieApi_Log(2205, L"Clipboard MetaFile (fmt %04X sz %d)", fmt, sz);

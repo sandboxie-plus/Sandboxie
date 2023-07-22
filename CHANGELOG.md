@@ -27,6 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed asynchroniusly assigned PCA job not being properly detected [#1919](https://github.com/sandboxie-plus/Sandboxie/issues/1919)
 - fixed incompatybility with first windows 10 release [#3117](https://github.com/sandboxie-plus/Sandboxie/issues/3117)
 - fixed Remove Sandbox only deletes the contents of the sandbox when an application is running in the sandbox [#3118](https://github.com/sandboxie-plus/Sandboxie/issues/3118)
+- fixed crash issue with not peroeprly termianted script engine [#3120](https://github.com/sandboxie-plus/Sandboxie/issues/3120)
 
 
 

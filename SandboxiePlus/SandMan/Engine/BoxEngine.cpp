@@ -22,11 +22,11 @@
 #include <private/qv4script_p.h>
 #include <private/qv4qobjectwrapper_p.h>
 
-int CBoxEngine::m_InstanceCount = 0;
+QSet<CBoxEngine*> CBoxEngine::m_Instances;
 
 CBoxEngine::CBoxEngine(QObject* parent) : QThread(parent)
 {
-    m_InstanceCount++;
+    m_Instances.insert(this);
 
     m_State = eUnknown;
     m_pEngine = NULL;
@@ -38,6 +38,13 @@ CBoxEngine::CBoxEngine(QObject* parent) : QThread(parent)
 
 CBoxEngine::~CBoxEngine()
 {
+    m_Instances.remove(this);
+
+    Stop();
+}
+
+void CBoxEngine::Stop()
+{
     m_Mutex.lock();
     if (m_State == eQuery || m_State == eReady)
         Continue(true, eCanceled);
@@ -48,11 +55,16 @@ CBoxEngine::~CBoxEngine()
     }
 
     if (!wait(30 * 1000)) {
-        qDebug() << "Failed to terminate Box Engine";
-        return;
+        qDebug() << "Failed to stop Box Engine";
+        terminate();
+        m_State = eCanceled;
     }
+}
 
-    m_InstanceCount--;
+void CBoxEngine::StopAll()
+{
+    foreach(CBoxEngine* pEngine, m_Instances)
+        pEngine->Stop();
 }
 
 QV4::ReturnedValue method_translate(const QV4::FunctionObject *b, const QV4::Value *v, const QV4::Value *argv, int argc)
@@ -288,9 +300,13 @@ QObject* CBoxEngine::GetDebuggerBackend()
 // CWizardEngine
 // 
 
+int CWizardEngine::m_InstanceCount = 0;
+
 CWizardEngine::CWizardEngine(QObject* parent) 
  : CBoxEngine(parent) 
 {
+    
+    m_InstanceCount++;
 }
 
 CWizardEngine::~CWizardEngine()
@@ -305,6 +321,8 @@ CWizardEngine::~CWizardEngine()
         }
     }
     theAPI->ReloadBoxes(true);
+
+    m_InstanceCount--;
 }
 
 bool CWizardEngine::ApplyShadowChanges()
@@ -376,7 +394,7 @@ QSharedPointer<CSbieIni> CWizardEngine::MakeShadow(const QSharedPointer<CSbieIni
     SBoxShadow& pShadow = m_Shadows[pIni->GetName().toLower()];
     if (!pShadow.pShadow) {
         QString ShadowName = pIni->GetName();
-        QString Suffix = tr("_Shadow");
+        QString Suffix = "_Shadow"; // do not translate must be a valid sandbox name suffix
         ShadowName.truncate(32 - (Suffix.length() + 3)); // BOXNAME_COUNT
         ShadowName = theAPI->MkNewName(ShadowName.append(Suffix));
 

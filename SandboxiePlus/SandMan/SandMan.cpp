@@ -258,6 +258,7 @@ CSandMan::CSandMan(QWidget *parent)
 	LoadState();
 
 	m_pProgressDialog = new CProgressDialog("");
+	m_pProgressDialog->setWindowTitle("Sandboxie-Plus");
 	m_pProgressDialog->setWindowModality(Qt::ApplicationModal);
 	connect(m_pProgressDialog, SIGNAL(Cancel()), this, SLOT(OnCancelAsync()));
 	m_pProgressModal = false;
@@ -312,6 +313,8 @@ CSandMan::~CSandMan()
 	m_pTrayIcon->hide();
 
 	StoreState();
+
+	CBoxEngine::StopAll();
 
 	theAPI = NULL;
 
@@ -1501,7 +1504,7 @@ bool CSandMan::IsFullyPortable()
 
 bool CSandMan::KeepTerminated()
 { 
-	if (CBoxEngine::GetInstanceCount() > 0)
+	if (CWizardEngine::GetInstanceCount() > 0)
 		return true;
 	return m_pKeepTerminated && m_pKeepTerminated->isChecked();
 }

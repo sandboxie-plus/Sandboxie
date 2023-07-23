@@ -3095,12 +3095,12 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="1855"/>
         <source>Auto Deleting %1 Content</source>
-        <translation>Auto-lösche %1 Inhalt</translation>
+        <translation>Automatisches Löschen des %1 Inhalts</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2046"/>
         <source>Auto deleting content of %1</source>
-        <translation>Auto-lösche Inhalt von %1</translation>
+        <translation>Automatisches Löschen des Inhalts von %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2922"/>
@@ -3325,7 +3325,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="2058"/>
         <source>Auto removing sandbox %1</source>
-        <translation>Autoentfernung von Sandbox %1</translation>
+        <translation>Automatisches Entfernen von Sandbox %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2082"/>
@@ -4343,7 +4343,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="176"/>
         <source>Execute Autorun Entries</source>
-        <translation>Autostarteinträge ausführen</translation>
+        <translation>Autostart-Einträge ausführen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="231"/>
@@ -4516,7 +4516,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="232"/>
         <source>Auto Detection</source>
-        <translation>Autoerkennung</translation>
+        <translation>Automatische Erkennung</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="233"/>
@@ -5450,7 +5450,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Views/TraceView.cpp" line="330"/>
         <source>Auto Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatischer Bildlauf</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="335"/>
@@ -5532,13 +5532,6 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
         <location filename="Wizards/SetupWizard.cpp" line="386"/>
         <source>Use Dark Mode</source>
         <translation>Nutze dunklen Modus</translation>
-    </message>
-</context>
-<context>
-    <name>CWizardEngine</name>
-    <message>
-        <source>_Shadow</source>
-        <translation type="vanished">_Schatten</translation>
     </message>
 </context>
 <context>
@@ -6326,10 +6319,6 @@ an Stelle von &quot;*&quot;.</translation>
         <location filename="Forms/OptionsWindow.ui" line="402"/>
         <source>Box Structure</source>
         <translation>Boxstruktur</translation>
-    </message>
-    <message>
-        <source>Icon</source>
-        <translation type="vanished">Icon</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="900"/>
@@ -7601,10 +7590,6 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <location filename="Forms/SettingsWindow.ui" line="643"/>
         <source>Run Menu</source>
         <translation>Startmenü</translation>
-    </message>
-    <message>
-        <source>Icon</source>
-        <translation type="vanished">Icon</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="690"/>

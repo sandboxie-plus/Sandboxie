@@ -1,8 +1,8 @@
 /*
 *	group: ui
 *	class: ui
-* name: Browser shortcut is mitting from the desktop
-* description: This procedure will add a browser shortcut to thr desktop
+* name: Browser shortcut is missing from the desktop
+* description: This procedure will add a browser shortcut to the desktop
 *
 */
 
@@ -45,7 +45,7 @@ let form1 = [
   {type: 'box', id: 'box', name: tr('Select Sandbox')}
 ];
 
-let data1 = wizard.showForm(form1, tr('Sellect which  browser you want to create a shortcut for and in what box'));
+let data1 = wizard.showForm(form1, tr('Select which browser you want to create a shortcut for and in what box'));
 
 let box = sbie.getBox(data1['box']);
 
@@ -64,3 +64,4 @@ else if(data1['browser'] == -1){
   let path = knownBrowsers[data1['browser']].path;
   box.makeShortcut(path, {location: 'desktop'});
 }
+wizard.setResult(true);

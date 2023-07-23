@@ -137,7 +137,7 @@ void CSnapshotsWindow::UpdateSnapshot(const QModelIndex& Index)
 	QVariant ID = m_pSnapshotModel->GetItemID(Index);
 
 	OnSaveInfo();
-	m_SellectedID = ID;
+	m_SelectedID = ID;
 
 	QVariantMap BoxSnapshot = m_SnapshotMap[ID];
 
@@ -164,7 +164,7 @@ void CSnapshotsWindow::OnSaveInfo()
 		return;
 	m_SaveInfoPending = 0;
 
-	m_pBox->SetSnapshotInfo(m_SellectedID.toString(), ui.txtName->text(), ui.txtInfo->toPlainText());
+	m_pBox->SetSnapshotInfo(m_SelectedID.toString(), ui.txtName->text(), ui.txtInfo->toPlainText());
 	UpdateSnapshots();
 }
 

@@ -48,9 +48,10 @@ extern __declspec(dllexport) int __CRTDECL Sbie_snprintf(char *_Buffer, size_t C
 #define TRUE_NAME_BUFFER        0
 #define COPY_NAME_BUFFER        1
 #define TMPL_NAME_BUFFER        2
-#define MISC_NAME_BUFFER        3 // 4, 5, 6, 7
-#define NAME_BUFFER_COUNT       8
-#define NAME_BUFFER_DEPTH       16 // 12
+#define NORM_NAME_BUFFER        3
+#define MISC_NAME_BUFFER        4 // 5 - 11
+#define NAME_BUFFER_COUNT       12
+#define NAME_BUFFER_DEPTH       16
 
 
 #ifdef _WIN64
@@ -281,10 +282,10 @@ extern ULONG64 Dll_ProcessFlags;
 #ifndef _WIN64
 extern BOOLEAN Dll_IsWow64;
 #endif
-#ifdef _M_X64
+#ifdef _M_ARM64EC
 extern BOOLEAN Dll_IsArm64ec;
 #endif
-#ifndef _M_ARM64
+#ifndef _WIN64
 extern BOOLEAN Dll_IsXtAjit;
 #endif
 extern BOOLEAN Dll_IsSystemSid;
@@ -506,7 +507,7 @@ BOOLEAN File_IsBlockedNetParam(const WCHAR *BoxName);
 
 void File_GetSetDeviceMap(WCHAR *DeviceMap96);
 
-void File_NotifyRecover(HANDLE FileHandle);
+void File_NotifyRecover(HANDLE FileHandle, void* CloseParams);
 
 //---------------------------------------------------------------------------
 // Functions (key)
@@ -520,7 +521,7 @@ NTSTATUS Key_MarkDeletedAndClose(HANDLE KeyHandle);
 
 void Key_DiscardMergeByPath(const WCHAR *TruePath, BOOLEAN Recurse);
 
-void Key_NtClose(HANDLE KeyHandle);
+void Key_NtClose(HANDLE KeyHandle, void* CloseParams);
 
 HANDLE Key_GetTrueHandle(HANDLE KeyHandle, BOOLEAN *pIsOpenPath);
 

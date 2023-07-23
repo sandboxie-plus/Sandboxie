@@ -293,6 +293,7 @@
     <ClCompile Include="Engine\IniObject.cpp" />
     <ClCompile Include="Engine\JSEngineExt.cpp" />
     <ClCompile Include="Engine\SbieObject.cpp" />
+    <ClCompile Include="Engine\ScriptManager.cpp" />
     <ClCompile Include="Engine\SysObject.cpp" />
     <ClCompile Include="Helpers\FindTool.cpp" />
     <ClCompile Include="Helpers\FullScreen.cpp" />
@@ -469,6 +470,7 @@
     <QtMoc Include="Engine\SysObject.h" />
     <QtMoc Include="Engine\WizardObject.h" />
     <QtMoc Include="Engine\JSEngineExt.h" />
+    <QtMoc Include="Engine\ScriptManager.h" />
     <ClInclude Include="Engine\V4ScriptDebuggerApi.h" />
     <ClInclude Include="Helpers\FindTool.h" />
     <ClInclude Include="Helpers\FullScreen.h" />

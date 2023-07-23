@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2022 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -48,6 +48,7 @@
 typedef struct _MY_TARGETS {
 	unsigned long long entry;
 	unsigned long long data;
+	unsigned long long detour;
 } MY_TARGETS;
 
 #ifdef _M_ARM64
@@ -85,7 +86,7 @@ typedef PVOID (*P_VirtualAlloc2)(
 SBIEDLL_EXPORT  HANDLE SbieDll_InjectLow_SendHandle(HANDLE hProcess);
 
 void *SbieDll_InjectLow_CopyCode(
-	HANDLE hProcess, SIZE_T lowLevel_size, UCHAR *code, ULONG code_len
+	HANDLE hProcess, SIZE_T total_size, SIZE_T lowLevel_size, const void* lowLevel_ptr
 #ifdef _M_ARM64
 	, BOOLEAN use_arm64ec
 #endif
@@ -129,11 +130,16 @@ ULONG Hook_GetSysCallFunc(ULONG* aCode, void** pHandleStubHijack);
 
 
 void *m_sbielow_ptr = NULL;
+ULONG m_sbielow_len = 0;
 //adding two offsets variables to replace the "head" and "tail" dependency
 ULONG m_sbielow_start_offset = 0;
 ULONG m_sbielow_data_offset = 0;
 
-ULONG m_sbielow_len = 0;
+#ifdef _WIN64
+void *m_sbielow32_ptr = NULL;
+ULONG m_sbielow32_len = 0;
+ULONG m_sbielow32_detour_offset = 0;
+#endif
 
 ULONG *m_syscall_data = NULL;
 
@@ -149,19 +155,19 @@ P_VirtualAlloc2 __sys_VirtualAlloc2 = NULL;
 
 #endif
 
-#include "core/low/lowlevel_code.c"
 
 //---------------------------------------------------------------------------
-// InjectLow_InitHelper
+// SbieDll_InjectLow_LoadLow
 //---------------------------------------------------------------------------
 
 
-_FX ULONG SbieDll_InjectLow_InitHelper()
+_FX ULONG SbieDll_InjectLow_LoadLow(BOOLEAN arch_64bit, void **sbielow_ptr, ULONG *sbielow_len, ULONG *start_offset, ULONG* data_offset, ULONG* detour_offset)
 {
     //
     // lock the SbieLow resource (embedded within the SbieSvc executable,
     // see lowlevel.rc) and find the offset to executable code, and length
     //
+
     IMAGE_DOS_HEADER *dos_hdr = 0;
     IMAGE_NT_HEADERS *nt_hdrs = 0;
     IMAGE_SECTION_HEADER *section = 0;
@@ -171,8 +177,8 @@ _FX ULONG SbieDll_InjectLow_InitHelper()
 
 	ULONG errlvl = 0x11;
 
-    HRSRC hrsrc = FindResource(Dll_Instance, L"LOWLEVEL", RT_RCDATA);
-    if (! hrsrc)
+	HRSRC hrsrc = FindResource(Dll_Instance, arch_64bit ? L"LOWLEVEL64" : L"LOWLEVEL32", RT_RCDATA);
+	if (! hrsrc)
         return errlvl;
 
     ULONG binsize = SizeofResource(Dll_Instance, hrsrc);
@@ -193,44 +199,33 @@ _FX ULONG SbieDll_InjectLow_InitHelper()
     if (dos_hdr->e_magic == 'MZ' || dos_hdr->e_magic == 'ZM') {
         nt_hdrs = (IMAGE_NT_HEADERS *)((UCHAR *)dos_hdr + dos_hdr->e_lfanew);
 
-        if (nt_hdrs->Signature == IMAGE_NT_SIGNATURE) {   // 'PE\0\0'
-#ifndef _WIN64
-            if (nt_hdrs->OptionalHeader.Magic == IMAGE_NT_OPTIONAL_HDR32_MAGIC) {
-                IMAGE_NT_HEADERS32 *nt_hdrs_32 = (IMAGE_NT_HEADERS32 *)nt_hdrs;
-                IMAGE_OPTIONAL_HEADER32 *opt_hdr_32 = &nt_hdrs_32->OptionalHeader;
-                data_dirs = &opt_hdr_32->DataDirectory[0];
-                imageBase = opt_hdr_32->ImageBase;
-            }
-#else
-            if (nt_hdrs->OptionalHeader.Magic == IMAGE_NT_OPTIONAL_HDR64_MAGIC) {
-                IMAGE_NT_HEADERS64 *nt_hdrs_64 = (IMAGE_NT_HEADERS64 *)nt_hdrs;
-                IMAGE_OPTIONAL_HEADER64 *opt_hdr_64 = &nt_hdrs_64->OptionalHeader;
-                data_dirs = &opt_hdr_64->DataDirectory[0];
-                imageBase = (ULONG_PTR)opt_hdr_64->ImageBase;
-            }
-#endif
-            else {
-
-				return errlvl;
-            }
-        }
-        else {
-
+		if (nt_hdrs->Signature != IMAGE_NT_SIGNATURE)   // 'PE\0\0'
 			return errlvl;
+		if (nt_hdrs->OptionalHeader.Magic != (arch_64bit ? IMAGE_NT_OPTIONAL_HDR64_MAGIC : IMAGE_NT_OPTIONAL_HDR32_MAGIC)) 
+			return errlvl;
+
+        if (!arch_64bit) {
+            IMAGE_NT_HEADERS32 *nt_hdrs_32 = (IMAGE_NT_HEADERS32 *)nt_hdrs;
+            IMAGE_OPTIONAL_HEADER32 *opt_hdr_32 = &nt_hdrs_32->OptionalHeader;
+            data_dirs = &opt_hdr_32->DataDirectory[0];
+            imageBase = opt_hdr_32->ImageBase;
+        }
+		else {
+            IMAGE_NT_HEADERS64 *nt_hdrs_64 = (IMAGE_NT_HEADERS64 *)nt_hdrs;
+            IMAGE_OPTIONAL_HEADER64 *opt_hdr_64 = &nt_hdrs_64->OptionalHeader;
+            data_dirs = &opt_hdr_64->DataDirectory[0];
+            imageBase = (ULONG_PTR)opt_hdr_64->ImageBase;
         }
     }
 
-	ULONG zzzzz;
-
+	ULONG zzzzz = 1;
 #ifdef _M_ARM64
-	zzzzz = 4;
-#else
-    if (imageBase != 0) {
-		return errlvl;
-    }
-
-	zzzzz = 1;
+	if (arch_64bit) 
+		zzzzz = 4; // ARM64 only
+	else
 #endif
+	if (imageBase != 0) // x64 or x86
+		return errlvl;
 
     section = IMAGE_FIRST_SECTION(nt_hdrs);
     if (nt_hdrs->FileHeader.NumberOfSections < 2) return errlvl;
@@ -241,13 +236,32 @@ _FX ULONG SbieDll_InjectLow_InitHelper()
 
 
     targets = (MY_TARGETS *)& bindata[section[zzzzz].PointerToRawData];
-    m_sbielow_start_offset = (ULONG)(targets->entry - imageBase - section[0].VirtualAddress);
-    m_sbielow_data_offset = (ULONG)(targets->data - imageBase - section[0].VirtualAddress);
+    if(start_offset) *start_offset = (ULONG)(targets->entry - imageBase - section[0].VirtualAddress);
+    if(data_offset) *data_offset = (ULONG)(targets->data - imageBase - section[0].VirtualAddress);
+	if(detour_offset) *detour_offset = (ULONG)(targets->detour - imageBase - section[0].VirtualAddress);
 
-    m_sbielow_ptr = bindata + section[0].PointerToRawData; //Old version: head;
-    m_sbielow_len = section[0].SizeOfRawData; //Old version: (ULONG)(ULONG_PTR)(tail - head);
+    *sbielow_ptr = bindata + section[0].PointerToRawData; //Old version: head;
+    *sbielow_len = section[0].SizeOfRawData; //Old version: (ULONG)(ULONG_PTR)(tail - head);
 
-    if ((!m_sbielow_start_offset) || (!m_sbielow_data_offset))
+	return 0;
+}
+
+
+//---------------------------------------------------------------------------
+// InjectLow_InitHelper
+//---------------------------------------------------------------------------
+
+
+_FX ULONG SbieDll_InjectLow_InitHelper()
+{
+#ifdef _WIN64
+	ULONG errlvl = SbieDll_InjectLow_LoadLow(TRUE, &m_sbielow_ptr, &m_sbielow_len, &m_sbielow_start_offset, &m_sbielow_data_offset, NULL);
+	if(!errlvl)
+		errlvl = SbieDll_InjectLow_LoadLow(FALSE, &m_sbielow32_ptr, &m_sbielow32_len, NULL, NULL, &m_sbielow32_detour_offset);
+#else
+	ULONG errlvl = SbieDll_InjectLow_LoadLow(FALSE, &m_sbielow_ptr, &m_sbielow_len, &m_sbielow_start_offset, &m_sbielow_data_offset, NULL);
+#endif
+	if (errlvl)
 		return errlvl;
 
     //
@@ -403,6 +417,10 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 	// Get the SbieDll Location
 	//
 
+	/*if (1) {
+		GetSystemDirectory(sbie_home, 512);
+	}
+	else */
 	if (drv_init)
 	{
 		status = SbieApi_GetHomePath(NULL, 0, sbie_home, 512);
@@ -532,6 +550,15 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 	ptr += 28 / sizeof(WCHAR);
 
 	//
+	// write an ASCII string for NtProtectVirtualMemory
+	//
+
+	strcpy((char *)ptr, "NtProtectVirtualMemory");
+
+	extra->NtProtectVirtualMemory_offset = ULONG_DIFF(ptr, extra);
+	ptr += 28 / sizeof(WCHAR);
+
+	//
 	// write an ASCII string for NtRaiseHardError
 	//
 
@@ -539,6 +566,15 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 
 	extra->NtRaiseHardError_offset = ULONG_DIFF(ptr, extra);
 	ptr += 20 / sizeof(WCHAR);
+
+	//
+	// write an ASCII string for NtDeviceIoControlFile
+	//
+
+	strcpy((char *)ptr, "NtDeviceIoControlFile");
+
+	extra->NtDeviceIoControlFile_offset = ULONG_DIFF(ptr, extra);
+	ptr += 28 / sizeof(WCHAR);
 
 	//
 	// write an ASCII string for RtlFindActivationContextSectionString
@@ -614,15 +650,6 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 	//
 
 	extra->InjectData_offset = ULONG_DIFF(ptr, extra);
-
-#ifdef _WIN64
-
-	//
-	// Copy the required non shell code into INJECT_DATA.DetourCode_*
-	//
-
-	memcpy((UCHAR*)ptr + FIELD_OFFSET(INJECT_DATA, DetourCode_x86), SbieDll_ShellCode_x86, sizeof(SbieDll_ShellCode_x86));
-#endif
 
 	//
 	// adjust size of syscall buffer to include path strings
@@ -852,6 +879,7 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 #endif
 
 	lowdata.RealNtDeviceIoControlFile = (ULONG64)GetProcAddress((HMODULE)lowdata.ntdll_base, "NtDeviceIoControlFile");
+	lowdata.NativeNtProtectVirtualMemory = (ULONG64)GetProcAddress((HMODULE)lowdata.ntdll_base, "NtProtectVirtualMemory");
 	lowdata.NativeNtRaiseHardError = (ULONG64)GetProcAddress((HMODULE)lowdata.ntdll_base, "NtRaiseHardError");
 
 	//
@@ -885,15 +913,75 @@ _FX ULONG SbieDll_InjectLow(HANDLE hProcess, ULONG init_flags, BOOLEAN dup_drv_h
 #endif
 		lowLevel_size = m_sbielow_len;
 		
-	void *remote_addr = SbieDll_InjectLow_CopyCode(hProcess, lowLevel_size, lowdata.LdrInitializeThunk_tramp, sizeof(lowdata.LdrInitializeThunk_tramp)
+	void *remote_addr = SbieDll_InjectLow_CopyCode(hProcess, lowLevel_size, m_sbielow_len, m_sbielow_ptr
 #ifdef _M_ARM64
 		, (BOOLEAN)lowdata.flags.is_arm64ec
 #endif
 	);
+
+	if (remote_addr) {
+
+		void* pLdrInitializeThunk = (void*)m_LdrInitializeThunk;
+#ifdef _M_ARM64
+		if (lowdata.flags.is_arm64ec) 
+			pLdrInitializeThunk = (void*)m_LdrInitializeThunkEC;
+#endif
+
+		//
+		// copy code at LdrInitializeThunk from new process
+		//
+
+		SIZE_T len1 = sizeof(lowdata.LdrInitializeThunk_tramp);
+		SIZE_T len2 = 0;
+		/*
+		sprintf(buffer,"CopyCode: copy ldr size %d\n",code_len);
+		OutputDebugStringA(buffer);
+		*/
+		BOOL vm_ok = ReadProcessMemory(
+			hProcess, pLdrInitializeThunk, lowdata.LdrInitializeThunk_tramp,
+			len1, &len2);
+
+		if (!vm_ok || len1 != len2) {
+
+			remote_addr = NULL;
+		}
+	}
+
 	if (!remote_addr) {
 		errlvl = 0x33;
 		goto finish;
 	}
+
+#ifdef _WIN64 
+	void *remote_addr32 = NULL;
+	if (lowdata.flags.is_wow64) {
+
+		//
+		// when this is a 32 bit process running under WoW64, we need to inject also some 32 bit code
+		//
+
+		remote_addr32 = SbieDll_InjectLow_CopyCode(hProcess, m_sbielow32_len, m_sbielow32_len, m_sbielow32_ptr
+#ifdef _M_ARM64
+			, FALSE
+#endif
+		);
+
+		if (remote_addr32) {
+
+			ULONG protect;
+			BOOL vm_ok = VirtualProtectEx(hProcess, remote_addr32, m_sbielow32_len,
+				PAGE_EXECUTE_READ, &protect);
+			if (vm_ok) {
+				lowdata.ptr_32bit_detour = (ULONG64)((UCHAR*)remote_addr32 + m_sbielow32_detour_offset);
+			}
+		}
+
+		if (!lowdata.ptr_32bit_detour) {
+			errlvl = 0x88;
+			goto finish;
+		}
+	}
+#endif
 
 #ifndef _M_ARM64
 #ifdef _WIN64
@@ -1041,8 +1129,8 @@ _FX void* InjectLow_AllocMemory(HANDLE hProcess, SIZE_T size, BOOLEAN executable
 	void *remote_addr = NULL;
 
 #ifdef _M_ARM64
-	if (use_arm64ec && executable) 
-	{
+	if (use_arm64ec && executable) {
+
 		MEM_EXTENDED_PARAMETER Parameter = { 0 };
 		Parameter.Type = MemExtendedParameterAttributeFlags;
 		Parameter.ULong64 = MEM_EXTENDED_PARAMETER_EC_CODE;
@@ -1051,8 +1139,9 @@ _FX void* InjectLow_AllocMemory(HANDLE hProcess, SIZE_T size, BOOLEAN executable
 
 			remote_addr = __sys_VirtualAlloc2(hProcess, (void*)base_addr, region_size, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE, &Parameter, 1);
 		}
+
+		return remote_addr;
 	} 
-	else 
 #endif
 
 	//
@@ -1127,20 +1216,13 @@ _FX HANDLE SbieDll_InjectLow_SendHandle(HANDLE hProcess)
 //---------------------------------------------------------------------------
 
 
-_FX void *SbieDll_InjectLow_CopyCode(HANDLE hProcess, SIZE_T lowLevel_size, UCHAR *code, ULONG code_len
+_FX void *SbieDll_InjectLow_CopyCode(HANDLE hProcess, SIZE_T total_size, SIZE_T lowLevel_size, const void* lowLevel_ptr
 #ifdef _M_ARM64
 	, BOOLEAN use_arm64ec
 #endif
 ) {
-	void* remote_addr;
-	void* pLdrInitializeThunk = (void*)m_LdrInitializeThunk;
 
-#ifdef _M_ARM64
-	if (use_arm64ec) 
-		pLdrInitializeThunk = (void*)m_LdrInitializeThunkEC;
-#endif
-
-	remote_addr = InjectLow_AllocMemory(hProcess, lowLevel_size, TRUE
+	void* remote_addr = InjectLow_AllocMemory(hProcess, total_size, TRUE
 #ifdef _M_ARM64
 		, use_arm64ec
 #endif
@@ -1152,32 +1234,15 @@ _FX void *SbieDll_InjectLow_CopyCode(HANDLE hProcess, SIZE_T lowLevel_size, UCHA
 		// copy SbieLow into the allocated region in the new process
 		//
 
-		SIZE_T len1 = m_sbielow_len;
+		SIZE_T len1 = lowLevel_size;
 		SIZE_T len2 = 0;
 		BOOL vm_ok = WriteProcessMemory(
-			hProcess, remote_addr, m_sbielow_ptr,
+			hProcess, remote_addr, lowLevel_ptr,
 			len1, &len2);
 
 		if (vm_ok && len1 == len2) {
 
-			//
-			// copy code at LdrInitializeThunk from new process
-			//
-
-			len1 = code_len;
-			len2 = 0;
-			/*
-			sprintf(buffer,"CopyCode: copy ldr size %d\n",code_len);
-			OutputDebugStringA(buffer);
-			*/
-			vm_ok = ReadProcessMemory(
-				hProcess, pLdrInitializeThunk, code,
-				len1, &len2);
-
-			if (vm_ok && len1 == len2) {
-
-				return remote_addr;
-			}
+			return remote_addr;
 		}
 	}
 
@@ -1356,10 +1421,8 @@ _FX void *SbieDll_InjectLow_CopySyscalls(HANDLE hProcess, BOOLEAN is_wow64
 		data = m_syscall_data;
 	SIZE_T region_size = *data;
 
-	remote_addr = InjectLow_AllocMemory(hProcess, region_size
-		, is_wow64 // we copy the detour code into this area, hence executable = TRUE
+	remote_addr = InjectLow_AllocMemory(hProcess, region_size , FALSE
 #ifdef _M_ARM64
-		//|| use_arm64ec
 		, FALSE
 #endif
 	);
@@ -1406,10 +1469,7 @@ _FX BOOLEAN SbieDll_InjectLow_CopyData(
 
 		ULONG protect;
 		vm_ok = VirtualProtectEx(hProcess, remote_addr, m_sbielow_len,
-			// we want to be able to pass data from the low level dll we do this here
-			// we set PAGE_EXECUTE_READ in SbieDll.dll Dll_Ordinal1
-			PAGE_EXECUTE_READWRITE, &protect);
-			//PAGE_EXECUTE_READ, &protect);
+			PAGE_EXECUTE_READ, &protect);
 		if (vm_ok) {
 			return TRUE;
 		}

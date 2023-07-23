@@ -12,9 +12,8 @@
 #include "../QSbieAPI/SbieUtils.h"
 #include "../Engine/BoxEngine.h"
 #include "../Engine/SysObject.h"
-#include "OnlineUpdater.h"
+#include "../Engine/ScriptManager.h"
 #include "../MiscHelpers/Archive/Archive.h"
-#include "../MiscHelpers/Archive/ArchiveFS.h"
 #include <QJsonDocument>
 #include <QJsonObject>
 #include "../MiscHelpers/Common/CheckableMessageBox.h"
@@ -22,28 +21,6 @@
 #include "../Views/TraceView.h"
 #include "../AddonManager.h"
 
-
-QList<StrPair> ReadCommentHeader(const QString& Header)
-{
-	QList<StrPair> HeaderFields;
-	QStringList HeaderLines = Header.split("\n");
-	foreach(QString Line, HeaderLines)
-	{
-		Line = Line.trimmed();
-		if(Line.left(1) == "*")
-		{
-			Line.remove(0,1);
-			Line = Line.trimmed();
-		}
-		
-		StrPair Field = Split2(Line, ":");
-		if(Field.first.isEmpty() || Field.first.contains(" "))
-			continue;
-
-		HeaderFields.append(Field);
-	}
-	return HeaderFields;
-}
 
 CBoxAssistant::CBoxAssistant(QWidget *parent)
     : QWizard(parent)
@@ -71,27 +48,48 @@ CBoxAssistant::CBoxAssistant(QWidget *parent)
     setWizardStyle(ModernStyle);
     setPixmap(QWizard::LogoPixmap, QPixmap(":/SandMan.png").scaled(64, 64, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
-    
-    //
-    // Load Issues, when the user has an own troubleshooting folder, don't load the 7z or online
-    //
-
-    C7zFileEngineHandler IssueFS("issue");
-    LoadIssues(GetIssueDir(IssueFS, &m_IssueDate));
-    if (m_IssueDate.isValid()) {
-        if (theConf->GetInt("Options/CheckForIssues", 2) == 1) {
-
-            QVariantMap Data = theGUI->m_pUpdater->GetUpdateData();
-            if (!Data.isEmpty() && Data.contains("issues") && theGUI->m_pUpdater->GetLastUpdateTime() > QDateTime::currentDateTime().addDays(-1)) 
-                OnUpdateData(Data, QVariantMap());
-            else
-                theGUI->m_pUpdater->GetUpdates(this, SLOT(OnUpdateData(const QVariantMap&, const QVariantMap&)));
-        }
-    }
+    theGUI->GetScripts()->LoadIssues();
+    connect(theGUI->GetScripts(), SIGNAL(IssuesUpdated), this, SLOT(IssuesUpdated()));
 }
 
 CBoxAssistant::~CBoxAssistant()
 {
+}
+
+void CBoxAssistant::TryFix(quint32 MsgCode, const QStringList& MsgData, const QString& ProcessName, const QString& BoxName)
+{
+    QString Msg = QString("SBIE%1").arg(MsgCode & 0xFFFF);
+    QMap<QString, QList<QVariantMap>> GroupedIssues = theGUI->GetScripts()->GetIssues();
+    QVariantMap Issue;
+    for (auto I = GroupedIssues.begin(); I != GroupedIssues.end(); ++I) {
+        for(auto J = I->begin(); J != I->end(); ++J) {
+            // Find message specific handler
+            if (J->value("id").toString().compare(Msg, Qt::CaseInsensitive) == 0) {
+                Issue = *J;
+                break;
+            }
+            // fallback to generig message handler
+            else if (Issue.isEmpty() && J->value("id").toString().compare("SBIEMSG", Qt::CaseInsensitive) == 0)
+                Issue = *J;
+        }
+    }
+    if (!Issue.isEmpty()) {
+        PushIssue(Issue);
+        m_Params["sbieMsg"] = theGUI->FormatSbieMessage(MsgCode, MsgData, ProcessName);
+        m_Params["docLink"] = theGUI->MakeSbieMsgLink(MsgCode, MsgData, ProcessName);
+        m_Params["msgCode"] = MsgCode & 0xFFFF;
+        m_Params["msgData"] = QStringList(MsgData.mid(1));
+        m_Params["processName"] = (!ProcessName.isEmpty() && ProcessName.left(4) != "PID:") ? ProcessName : QString();
+        m_Params["boxName"] = BoxName;
+        setStartId(Page_Run);
+    }
+}
+
+void CBoxAssistant::OnIssuesUpdated()
+{
+    CBeginPage* pBegin = qobject_cast<CBeginPage*>(currentPage());
+    if (pBegin)
+        pBegin->initializePage();
 }
 
 void CBoxAssistant::OnToggleDebugger()
@@ -108,184 +106,16 @@ void CBoxAssistant::OnToggleDebugger()
         setWindowTitle(title.mid(0, title.indexOf(" - ")));
 }
 
-QString CBoxAssistant::GetIssueDir(C7zFileEngineHandler& IssueFS, QDateTime* pDate)
-{
-    QString IssueDir = theConf->GetConfigDir() + "/troubleshooting/";
-    if (!QFile::exists(IssueDir)) {
-
-        QFileInfo Installed(QApplication::applicationDirPath() + "/troubleshooting.7z");
-        QFileInfo Latest(theConf->GetConfigDir() + "/troubleshooting.7z");
-        quint64 latest = Latest.lastModified().toSecsSinceEpoch();
-        quint64 installed = Installed.lastModified().toSecsSinceEpoch();
-        if (latest >= installed && IssueFS.Open(theConf->GetConfigDir() + "/troubleshooting.7z")) {
-            IssueDir = IssueFS.Prefix() + "/";
-            if(pDate) *pDate = Latest.lastModified();
-        }
-        else if (IssueFS.Open(QApplication::applicationDirPath() + "/troubleshooting.7z")) {
-            IssueDir = IssueFS.Prefix() + "/";
-            if(pDate) *pDate = Installed.lastModified();
-        }
-    }
-    return IssueDir;
-}
-
-void CBoxAssistant::OnUpdateData(const QVariantMap& Data, const QVariantMap& Params)
-{
-    if (Data.isEmpty() || Data["error"].toBool())
-        return;
-
-    QVariantMap Issues = Data["issues"].toMap();
-
-    quint64 Date = Issues["date"].toULongLong();
-    if (Date >= m_IssueDate.toSecsSinceEpoch()) {
-
-        QString Download = Issues["download"].toString();
-
-        QVariantMap Params;
-        Params["path"] = theConf->GetConfigDir() + "/troubleshooting.tmp";
-        Params["setDate"] = QDateTime::fromSecsSinceEpoch(Date);
-        Params["signature"] = Issues["signature"];
-        theGUI->m_pUpdater->DownloadFile(Download, this, SLOT(OnDownload(const QString&, const QVariantMap&)), Params);
-    }
-}
-
-extern "C" long VerifyFileSignatureImpl(const wchar_t* FilePath, void* Signature, unsigned long SignatureSize);
-
-void CBoxAssistant::OnDownload(const QString& Path, const QVariantMap& Params)
-{
-	QByteArray Signature = QByteArray::fromBase64(Params["signature"].toByteArray());
-	
-	if (VerifyFileSignatureImpl(QString(Path).replace("/","\\").toStdWString().c_str(), Signature.data(), Signature.size()) < 0) { // !NT_SUCCESS
-        QFile::remove(Path);
-		return;
-	}
-    QString FinalPath = theConf->GetConfigDir() + "/troubleshooting.7z";
-    QFile::remove(FinalPath);
-    QFile::rename(Path, FinalPath);
-
-
-	QString IssueDir;
-    C7zFileEngineHandler IssueFS("issue");
-    if (!IssueFS.Open(FinalPath)) {
-        QMessageBox::critical(this, "Sandboxie-Plus", tr("Downloaded troubleshooting instructions are currupted!"));
-        QFile::remove(Path);
-        return;
-    }
-    
-    LoadIssues(IssueFS.Prefix() + "/");
-
-    CBeginPage* pBegin = qobject_cast<CBeginPage*>(currentPage());
-    if (pBegin)
-        pBegin->initializePage();
-}
-
-void CBoxAssistant::LoadIssues(const QString& IssueDir)
-{
-    QVariantMap Issues = QJsonDocument::fromJson(ReadFileAsString(IssueDir + "layout.json").toUtf8()).toVariant().toMap();
-
-    QVariantList Entries = Issues.value("entries").toList();
-
-    if (Entries.isEmpty()) {
-        QMessageBox::critical(this, "Sandboxie-Plus", tr("Fatal error, failed to load troubleshooting instructions!"));
-        return;
-    }
-
-    m_GroupedIssues.clear();
-
-    quint32 OsBuild = JSysObject::GetOSVersion()["build"].toUInt();
-
-    //QDir Dir(IssueDir);
-    //foreach(const QFileInfo & Info, Dir.entryInfoList(QStringList() << "*.js", QDir::Files)) {
-    foreach(const QString & FileName, ListDir(IssueDir, QStringList() << "*.js")) {
-        QFileInfo Info(IssueDir + FileName);
-        QString Script = ReadFileAsString(Info.filePath());
-
-	    int HeaderBegin = Script.indexOf("/*");
-	    int HeaderEnd = Script.indexOf("*/");
-	    if(HeaderBegin == -1 || HeaderEnd == -1)
-		    continue; // Header is mandatory
-        if(HeaderBegin != 0) {
-            qDebug() << "Bad Header of" << Info.fileName();
-            continue;
-	    }
-
-        QVariantMap Issue;
-        Issue["id"] = Info.fileName().left(Info.fileName().length() - 3);
-        Issue["type"] = "issue";
-	    foreach(const StrPair& KeyValue, ReadCommentHeader(Script.mid(HeaderBegin + 2, HeaderEnd - (HeaderBegin + 2))))
-            Issue[KeyValue.first] = KeyValue.second;
-        Issue["script"] = Script;
-
-        bool NotApplicable = false;
-        if (Issue.contains("versions")) {
-            NotApplicable = true;
-            foreach(const QString & V, SplitStr(Issue["versions"].toString(), ",")) {
-                StrPair VV = Split2(V, "-");
-                if ((VV.second.isEmpty() && COnlineUpdater::VersionToInt(VV.first) == COnlineUpdater::CurrentVersion()) || // exact version match
-                    (!VV.second.isEmpty() && (COnlineUpdater::VersionToInt(VV.first) <= COnlineUpdater::CurrentVersion() && COnlineUpdater::VersionToInt(VV.second) >= COnlineUpdater::CurrentVersion()))) { // inside version range
-                    NotApplicable = false;
-                    break;
-                }
-            }
-        }
-        if (!NotApplicable && Issue.contains("os_builds")) {
-            NotApplicable = true;
-            foreach(const QString & V, SplitStr(Issue["os_builds"].toString(), ",")) {
-                StrPair VV = Split2(V, "-");
-                if ((VV.second.isEmpty() && VV.first.toUInt() == OsBuild) || // exact version match
-                    (!VV.second.isEmpty() && (VV.first.toUInt() <= OsBuild && VV.second.toUInt() >= OsBuild))) { // inside version range
-                    NotApplicable = false;
-                    break;
-                }
-            }
-        }
-        if (NotApplicable)
-            continue;
-
-        Entries.append(Issue);
-    }
-
-    foreach(const QVariant & vIssue, Entries) {
-        QVariantMap Issue = vIssue.toMap();
-        QList<QVariantMap>& Group = m_GroupedIssues[Issue["group"].toString()];
-        // Note: This way we can define order in the layout json and have the issue scripts loaded at the right place
-        QString ID = Issue["id"].toString();
-        auto I = std::find_if(Group.begin(), Group.end(), [ID](const QVariantMap& cur)->int { return cur["id"] == ID; });
-        if (I == Group.end())
-            Group.append(Issue);
-        else {
-            if (I->contains("script")) {
-                QMessageBox::warning(this, "Sandboxie-Plus", tr("Error, troubleshooting instructions duplicated %1 (%2 <-> %3)!")
-                    .arg(ID).arg(I->value("id").toString()).arg(Issue.value("id").toString()));
-            }
-            for(auto J = Issue.begin(); J != Issue.end(); ++J)
-                I->insert(J.key(), J.value());
-        }
-    }
-
-    //
-    // Load Translations
-    //
-
-    QString Translation = ReadFileAsString(IssueDir + "lang_" + theGUI->m_Language + ".json");
-    if (Translation.isEmpty()) {
-        QString LangAux = theGUI->m_Language; // Short version as fallback
-	    LangAux.truncate(LangAux.lastIndexOf('_'));
-        Translation = ReadFileAsString(IssueDir + "lang_" + LangAux + ".json");
-    }
-
-    if(!Translation.isEmpty())
-        m_Translation = QJsonDocument::fromJson(Translation.toUtf8()).toVariant().toMap();
-}
-
 QList<QVariantMap> CBoxAssistant::GetIssues(const QVariantMap& Root) const 
 { 
+    QMap<QString, QList<QVariantMap>> GroupedIssues = theGUI->GetScripts()->GetIssues();
+
     if (Root.contains("id"))
-        return m_GroupedIssues.value(Root["id"].toString()); 
+        return GroupedIssues.value(Root["id"].toString()); 
 
     QString Class = Root["class"].toString();
     QList<QVariantMap> AllIssues;
-    for (auto I = m_GroupedIssues.begin(); I != m_GroupedIssues.end(); ++I) {
+    for (auto I = GroupedIssues.begin(); I != GroupedIssues.end(); ++I) {
         for(auto J = I->begin(); J != I->end(); ++J) {
             if (J->value("type") == "issue" 
                 && (Class.isEmpty() || J->value("class").toString().compare(Class, Qt::CaseInsensitive) == 0))
@@ -293,13 +123,6 @@ QList<QVariantMap> CBoxAssistant::GetIssues(const QVariantMap& Root) const
         }
     }
     return AllIssues;
-}
-
-void CBoxAssistant::ShowAssistant()
-{
-    CBoxAssistant* pWizard = new CBoxAssistant(theGUI);
-    pWizard->setAttribute(Qt::WA_DeleteOnClose);
-    SafeShow(pWizard);
 }
 
 bool CBoxAssistant::StartEngine()
@@ -333,11 +156,11 @@ bool CBoxAssistant::StartEngine()
                 m_pDebugger->show();
             }
             else {
-                QMessageBox::critical(this, "Sandboxie-Plus", tr("V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debuger could not be opened."));
+                QMessageBox::critical(this, "Sandboxie-Plus", tr("V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debugger could not be opened."));
             }
         }
 
-        return m_pEngine->RunScript(Script, Name);
+        return m_pEngine->RunScript(Script, Name, m_Params);
     }
     return true;
 }
@@ -383,7 +206,7 @@ void CBoxAssistant::reject()
     if (m_pEngine && currentId() != Page_Submit) {
         if (theConf->GetInt("Options/WarnWizardOnClose", -1) == -1) {
             bool State = false;
-            if (CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an incosistent state.")
+            if (CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an inconsistent state.")
                 , tr("Don't ask in future"), &State, QDialogButtonBox::Ok | QDialogButtonBox::Cancel, QDialogButtonBox::Cancel) == QDialogButtonBox::Cancel)
                 return;
             if (State)
@@ -426,7 +249,7 @@ void CBeginPage::initializePage()
     int row = 2;
 
     auto AddIssue = [&](QVariantMap Issue) {
-        QPushButton* pIssue = new QPushButton(((CBoxAssistant*)wizard())->Tr(Issue["name"].toString()));
+        QPushButton* pIssue = new QPushButton(theGUI->GetScripts()->Tr(Issue["name"].toString()));
         pIssue->setProperty("issue", Issue);
         connect(pIssue, SIGNAL(pressed()), this, SLOT(OnCategory()));
         pIssue->setIcon(CSandMan::GetIcon(Issue["icon"].toString()));
@@ -448,9 +271,9 @@ void CBeginPage::initializePage()
 
     m_pLayout->addItem(new QSpacerItem(10, 10, QSizePolicy::Fixed, QSizePolicy::Expanding), row++, 0);
 
-    if (!g_CertInfo.valid || g_CertInfo.expired) {
-        QLabel* pBottomLabel = new QLabel(tr("With a valid <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a> the wizard would be even more powerfull. "
-            "It could access the <a href=\"https://sandboxie-plus.com/go.php?to=sbie-issue-db\">online solution database</a> to retriev the latest troubleshooting instructions."));
+    if (!g_CertInfo.active || g_CertInfo.expired) {
+        QLabel* pBottomLabel = new QLabel(tr("With a valid <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a> the wizard would be even more powerful. "
+            "It could access the <a href=\"https://sandboxie-plus.com/go.php?to=sbie-issue-db\">online solution database</a> to retrieve the latest troubleshooting instructions."));
         connect(pBottomLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
         pBottomLabel->setWordWrap(true);
         m_pLayout->addWidget(pBottomLabel, row++, 0, 1, 3);
@@ -528,15 +351,15 @@ void CGroupPage::initializePage()
 
     QVariantMap Group = ((CBoxAssistant*)wizard())->CurrentIssue();
 
-    m_pTopLabel->setText(((CBoxAssistant*)wizard())->Tr(Group["description"].toString()));
+    m_pTopLabel->setText(theGUI->GetScripts()->Tr(Group["description"].toString()));
    
     //QLabel* pCommon = new QLabel(tr("Common Issues:"));
     //m_pLayout->addWidget(pCommon, row++, 0);
     //m_pWidgets.append(pCommon);
 
     auto AddIssue = [&](QVariantMap Issue) {
-        QRadioButton* pIssue = new QRadioButton(((CBoxAssistant*)wizard())->Tr(Issue["name"].toString()));
-        pIssue->setToolTip(((CBoxAssistant*)wizard())->Tr(Issue["description"].toString()));
+        QRadioButton* pIssue = new QRadioButton(theGUI->GetScripts()->Tr(Issue["name"].toString()));
+        pIssue->setToolTip(theGUI->GetScripts()->Tr(Issue["description"].toString()));
         pIssue->setProperty("issue", Issue);
         m_pGroup->addButton(pIssue);
         m_pLayout->addWidget(pIssue, row++, 1);
@@ -626,7 +449,7 @@ CListPage::CListPage(QWidget *parent)
     int row = 0;
     m_pLayout = new QGridLayout;
     m_pLayout->setSpacing(2);
-    //QLabel* pTopLabel = new QLabel(tr("Please select an isue from the list"));
+    //QLabel* pTopLabel = new QLabel(tr("Please select an issue from the list"));
     //pTopLabel->setWordWrap(true);
     //m_pLayout->addWidget(pTopLabel, row++, 0, 1, 2);
     
@@ -664,8 +487,8 @@ void CListPage::LoadIssues()
 
     auto AddIssue = [&](QVariantMap Issue) {
         QListWidgetItem* pItem = new QListWidgetItem();
-        pItem->setText(((CBoxAssistant*)wizard())->Tr(Issue["name"].toString()));
-        pItem->setToolTip(((CBoxAssistant*)wizard())->Tr(Issue["description"].toString()));
+        pItem->setText(theGUI->GetScripts()->Tr(Issue["name"].toString()));
+        pItem->setToolTip(theGUI->GetScripts()->Tr(Issue["description"].toString()));
         pItem->setData(Qt::UserRole, Issue);
         if (iAny != 1 && Issue["bold"].toBool()) {
             QFont font = pItem->font();
@@ -679,8 +502,8 @@ void CListPage::LoadIssues()
 
     foreach(auto Issue, ((CBoxAssistant*)wizard())->GetIssues(List)) {
         if (Filter.isEmpty()
-          || ((CBoxAssistant*)wizard())->Tr(Issue["name"].toString()).contains(Filter, Qt::CaseInsensitive)
-          || ((CBoxAssistant*)wizard())->Tr(Issue["description"].toString()).contains(Filter, Qt::CaseInsensitive))
+          || theGUI->GetScripts()->Tr(Issue["name"].toString()).contains(Filter, Qt::CaseInsensitive)
+          || theGUI->GetScripts()->Tr(Issue["description"].toString()).contains(Filter, Qt::CaseInsensitive))
             AddIssue(Issue);
     }
 
@@ -693,7 +516,7 @@ void CListPage::LoadIssues()
         AddIssue(Issue);
     }
     else
-        setTitle(((CBoxAssistant*)wizard())->Tr(List["name"].toString()));
+        setTitle(theGUI->GetScripts()->Tr(List["name"].toString()));
 }
 
 void CListPage::initializePage()
@@ -758,6 +581,7 @@ CRunPage::CRunPage(QWidget *parent)
 
     m_pLayout = new QGridLayout;
     m_pTopLabel = new QLabel();
+    connect(m_pTopLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
     m_pTopLabel->setWordWrap(true);
     m_pLayout->addWidget(m_pTopLabel, 0, 0, 1, 2);
     m_pForm = NULL;
@@ -768,8 +592,8 @@ CRunPage::CRunPage(QWidget *parent)
 void CRunPage::initializePage()
 {
     QVariantMap Issue = ((CBoxAssistant*)wizard())->CurrentIssue();
-    setTitle(((CBoxAssistant*)wizard())->Tr(Issue["name"].toString()));
-    setSubTitle(((CBoxAssistant*)wizard())->Tr(Issue["description"].toString()));
+    setTitle(theGUI->GetScripts()->Tr(Issue["name"].toString()));
+    setSubTitle(theGUI->GetScripts()->Tr(Issue["description"].toString()));
 
     if(((CBoxAssistant*)wizard())->StartEngine()) {
         CWizardEngine* pEngine = ((CBoxAssistant*)wizard())->GetEngine();
@@ -822,7 +646,8 @@ void CRunPage::OnStateChanged(int state, const QString& Text)
             foreach(const QVariant& vEntry, Form) {
                 QVariantMap Entry = vEntry.toMap();
                 QString type = Entry["type"].toString();
-                QString name = ((CBoxAssistant*)wizard())->Tr(Entry["name"].toString());
+                QString name = theGUI->GetScripts()->Tr(Entry["name"].toString());
+                QString hint = theGUI->GetScripts()->Tr(Entry["hint"].toString());
                 QVariant value = Entry["value"].toString();
                 QWidget* pWidget;
                 if (type.compare("label", Qt::CaseInsensitive) == 0) {
@@ -839,6 +664,7 @@ void CRunPage::OnStateChanged(int state, const QString& Text)
                     QLineEdit* pEdit = new QLineEdit();
                     pWidget = pEdit;
                     pEdit->setText(value.toString());
+                    pEdit->setPlaceholderText(hint);
                     pForm->addRow(name, pEdit);
                 } 
                 else if (type.compare("check", Qt::CaseInsensitive) == 0) {
@@ -870,13 +696,13 @@ void CRunPage::OnStateChanged(int state, const QString& Text)
                     foreach(const QVariant & vItem, Entry["items"].toList()) {
                         if (vItem.type() == QVariant::Map) {
                             QVariantMap Item = vItem.toMap();
-                            pCombo->addItem(((CBoxAssistant*)wizard())->Tr(Item["name"].toString()), Item["value"]);
+                            pCombo->addItem(theGUI->GetScripts()->Tr(Item["name"].toString()), Item["value"]);
                         } else
                             pCombo->addItem(vItem.toString());
                     }
                     pForm->addRow(name, pCombo);
                 }
-                pWidget->setToolTip(((CBoxAssistant*)wizard())->Tr(Entry["description"].toString()));
+                pWidget->setToolTip(theGUI->GetScripts()->Tr(Entry["description"].toString()));
                 if (Entry["disabled"].toBool()) pWidget->setDisabled(true);
                 QString id = Entry["id"].toString();
                 if (!id.isEmpty()) m_pWidgets.insert(id, pWidget);
@@ -885,7 +711,7 @@ void CRunPage::OnStateChanged(int state, const QString& Text)
         break;
     }
     case CBoxEngine::eError:
-        m_pTopLabel->setText(tr("Somethign failed internally this troubleshooting procedure can not continue. "
+        m_pTopLabel->setText(tr("Something failed internally this troubleshooting procedure can not continue. "
             "You can click on next to submit an issue report.") + (pEngine ? tr("\n\nError: ") + Text : ""));
     case CBoxEngine::eCanceled:
         break;
@@ -913,7 +739,7 @@ bool CRunPage::isComplete() const
 int CRunPage::nextId() const
 {
     CWizardEngine* pEngine = ((CBoxAssistant*)wizard())->GetEngine();
-    if(!pEngine || pEngine->HasFailed() || pEngine->HasError())
+    if(!pEngine || !pEngine->WasSuccessfull())
         return CBoxAssistant::Page_Submit;
     return CBoxAssistant::Page_Complete;
 }
@@ -928,9 +754,9 @@ bool CRunPage::validatePage()
         return true;
     }
 
-    // dissable back button on the current page
+    // disable back button on the current page
     wizard()->button(QWizard::BackButton)->setEnabled(false);
-    // disable next button, OnStateChanged wi re enable it
+    // disable next button, OnStateChanged will re-enable it
     wizard()->button(QWizard::NextButton)->setEnabled(false);
 
     if (pEngine->HasQuery()) {
@@ -986,16 +812,16 @@ CSubmitPage::CSubmitPage(QWidget *parent)
     pLayout->addWidget(m_pReport, row++, 0, 1, 3);
 
     m_pAttachIni = new QCheckBox(tr("Attach Sandboxie.ini"));
-    m_pAttachIni->setToolTip(tr("Sandboxing compatybility is relyent on the configuration hence attaching the sandboxie.ini helps a lot with finding the issue."));
+    m_pAttachIni->setToolTip(tr("Sandboxing compatibility is reliant on the configuration, hence attaching the Sandboxie.ini file helps a lot with finding the issue."));
     pLayout->addWidget(m_pAttachIni, row, 0);
 
     m_pAttachLog = new QCheckBox(tr("Attach Logs"));
     m_pAttachLog->setTristate(true);
-    m_pAttachLog->setToolTip(tr("Select partially checked state to sends only message log but no trace log.\nBefore sending you can review the logs in the main window."));
+    m_pAttachLog->setToolTip(tr("Selecting partially checked state sends only the message log, but not the trace log.\nBefore sending, you can review the logs in the main window."));
     pLayout->addWidget(m_pAttachLog, row, 1);
 
     m_pAttachDmp = new QCheckBox(tr("Attach Crash Dumps"));
-    m_pAttachDmp->setToolTip(tr("An applicatin crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging."));
+    m_pAttachDmp->setToolTip(tr("An application crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging."));
     pLayout->addWidget(m_pAttachDmp, row, 2);
 
     m_pMail = new QLineEdit();
@@ -1014,12 +840,11 @@ void CSubmitPage::initializePage()
 
     CWizardEngine* pEngine = ((CBoxAssistant*)wizard())->GetEngine();
     if (pEngine) {
-        if (pEngine->HasFailed() || pEngine->HasError()) {
+        if (pEngine->HasFailed() || pEngine->HasError())
             Info += tr("Unfortunately, the automated troubleshooting procedure failed. ");
 
-            QVariantMap Issue = ((CBoxAssistant*)wizard())->CurrentIssue();
-            Report = QString("Troubleshooting procedure '%1' failed").arg(Issue["id"].toString());
-        }
+        QVariantMap Issue = ((CBoxAssistant*)wizard())->CurrentIssue();
+        Report = QString("Troubleshooting procedure '%1'").arg(Issue["id"].toString());
     }
     else {
         Info += tr("Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described. ");
@@ -1202,7 +1027,7 @@ bool CSubmitPage::validatePage()
             return;
         }
 
-        QMessageBox::information(this, "Sandboxie-Plus", tr("Your issue report have been successfully submitted, thank you."));
+        QMessageBox::information(this, "Sandboxie-Plus", tr("Your issue report has been successfully submitted, thank you."));
         wizard()->close();
     });
 
@@ -1228,7 +1053,7 @@ CCompletePage::CCompletePage(QWidget *parent)
 
     m_pLabel = new QLabel;
     m_pLabel->setWordWrap(true);
-    m_pLabel->setText(tr("Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process." 
+    m_pLabel->setText(tr("Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. " 
         "If you have any additional questions or need further assistance, please don't hesitate to reach out. We're here to help. "
         "Thank you for your understanding and cooperation. \n\nYou can click Finish to close this wizard."));
     pLayout->addWidget(m_pLabel);

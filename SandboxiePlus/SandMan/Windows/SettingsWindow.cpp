@@ -13,6 +13,9 @@
 #include <QJsonDocument>
 #include "../Wizards/TemplateWizard.h"
 #include "../AddonManager.h"
+#include <qfontdialog.h>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 
 #include <windows.h>
@@ -204,6 +207,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	AddIconToLabel(ui.lblInterface, CSandMan::GetIcon("GUI").pixmap(size,size));
 
 	AddIconToLabel(ui.lblDisplay, CSandMan::GetIcon("Advanced").pixmap(size,size));
+	AddIconToLabel(ui.lblIni, CSandMan::GetIcon("EditIni").pixmap(size,size));
 
 	AddIconToLabel(ui.lblBoxRoot, CSandMan::GetIcon("Sandbox").pixmap(size,size));
 	AddIconToLabel(ui.lblBoxFeatures, CSandMan::GetIcon("Miscellaneous").pixmap(size,size));
@@ -290,6 +294,11 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	m_HoldChange = false;
 
+	CPathEdit* pEditor = new CPathEdit();
+	ui.txtEditor->parentWidget()->layout()->replaceWidget(ui.txtEditor, pEditor);
+	ui.txtEditor->deleteLater();
+	ui.txtEditor = pEditor->GetEdit();
+
 	LoadSettings();
 
 
@@ -349,9 +358,13 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkNewLayout, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkColorIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.chkOverlayIcons, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkHideCore, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+
 
 	connect(ui.cmbFontScale, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.cmbFontScale, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnChangeGUI()));
+
+	connect(ui.txtEditor, SIGNAL(textChanged(const QString&)), this, SLOT(OnOptChanged()));
 	m_bRebuildUI = false;
 	//
 
@@ -493,6 +506,15 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
 
 	// Ini Edit
+
+	ui.btnSelectIniFont->setIcon(CSandMan::GetIcon("Font"));
+	ui.btnSelectIniFont->setToolTip(tr("Select font"));
+	ui.btnResetIniFont->setIcon(CSandMan::GetIcon("ResetFont"));
+	ui.btnResetIniFont->setToolTip(tr("Reset font"));
+	ApplyIniEditFont();
+
+	connect(ui.btnSelectIniFont, SIGNAL(clicked(bool)), this, SLOT(OnSelectIniEditFont()));
+	connect(ui.btnResetIniFont, SIGNAL(clicked(bool)), this, SLOT(OnResetIniEditFont()));
 	connect(ui.btnEditIni, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
 	connect(ui.btnSaveIni, SIGNAL(clicked(bool)), this, SLOT(OnSaveIni()));
 	connect(ui.btnCancelEdit, SIGNAL(clicked(bool)), this, SLOT(OnCancelEdit()));
@@ -538,6 +560,30 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	m_pSearch->setPlaceholderText(tr("Search for settings"));
 }
 
+void CSettingsWindow::ApplyIniEditFont()
+{
+	QFont font; // defaults to application font
+	auto fontName = theConf->GetString("UIConfig/IniFont", "").trimmed();	
+	if (!fontName.isEmpty()) bool dummy = font.fromString(fontName); // ignore fromString() fail
+	ui.txtIniSection->setFont(font);
+	ui.lblIniEditFont->setText(tr("%0, %1 pt").arg(font.family()).arg(font.pointSizeF())); // tr: example: "Calibri, 9.5 pt"
+}
+
+void CSettingsWindow::OnSelectIniEditFont()
+{
+	bool ok;
+	auto newFont = QFontDialog::getFont(&ok, ui.txtIniSection->font(), this);
+	if (!ok) return;
+	theConf->SetValue("UIConfig/IniFont", newFont.toString());
+	ApplyIniEditFont();
+}
+
+void CSettingsWindow::OnResetIniEditFont()
+{
+	theConf->DelValue("UIConfig/IniFont");
+	ApplyIniEditFont();
+}
+
 void CSettingsWindow::OnSetTree()
 {
 	if (!ui.tabs) return;
@@ -555,32 +601,18 @@ CSettingsWindow::~CSettingsWindow()
 		theConf->SetBlob("SettingsWindow/" + pTree->objectName() + "_Columns", pTree->header()->saveState());
 }
 
-void CSettingsWindow::showTab(int Tab, bool bExclusive)
+void CSettingsWindow::showTab(const QString& Name, bool bExclusive)
 {
-	QWidget* pWidget = NULL;
-	switch (Tab)
-	{
-	case eOptions: pWidget = ui.tabGeneral; break;
-	case eShell: pWidget = ui.tabWindows; break;
-	case eGuiConfig: pWidget = ui.tabGUI; break;
-	case eAdvanced: pWidget = ui.tabSandbox; break;
-	case eProgCtrl: pWidget = ui.tabAlert; break;
-	case eConfigLock: pWidget = ui.tabLock; break;
-	case eSoftCompat: pWidget = ui.tabAppCompat; break;
-	case eEditIni: pWidget = ui.tabEdit; break;
-	case eSupport: pWidget = ui.tabSupport; break;
-	}
+	QWidget* pWidget = this->findChild<QWidget*>("tab" + Name);
 
 	if (ui.tabs) {
 		
 		for (int i = 0; i < ui.tabs->count(); i++) {
 			QGridLayout* pGrid = qobject_cast<QGridLayout*>(ui.tabs->widget(i)->layout());
 			QTabWidget* pSubTabs = pGrid ? qobject_cast<QTabWidget*>(pGrid->itemAt(0)->widget()) : NULL;
-			if (!pSubTabs) {
-				if(ui.tabs->widget(i) == pWidget)
-					ui.tabs->setCurrentIndex(i);
-			}
-			else {
+			if(ui.tabs->widget(i) == pWidget)
+				ui.tabs->setCurrentIndex(i);
+			else if(pSubTabs) {
 				for (int j = 0; j < pSubTabs->count(); j++) {
 					if (pSubTabs->widget(j) == pWidget) {
 						ui.tabs->setCurrentIndex(i);
@@ -676,7 +708,10 @@ void CSettingsWindow::OnBrowsePath()
 	if (Name.isEmpty())
 		return;
 
-	AddRunItem(Name, "", "\"" + Value + "\"");
+	QVariantMap Entry;
+	Entry["Name"] = Name;
+	Entry["Command"] = "\"" + Value + "\"";
+	AddRunItem(ui.treeRun, Entry);
 }
 
 void CSettingsWindow::OnAddCommand()
@@ -689,18 +724,12 @@ void CSettingsWindow::OnAddCommand()
 	if (Name.isEmpty())
 		return;
 
-	AddRunItem(Name, "", Value);
-	OnRunChanged();
-}
+	QVariantMap Entry;
+	Entry["Name"] = Name;
+	Entry["Command"] = Value;
+	AddRunItem(ui.treeRun, Entry);
 
-void CSettingsWindow::AddRunItem(const QString& Name, const QString& Icon, const QString& Command)
-{
-	QTreeWidgetItem* pItem = new QTreeWidgetItem();
-	pItem->setText(0, Name);
-	pItem->setText(1, Icon);
-	pItem->setText(2, Command);
-	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
-	ui.treeRun->addTopLevelItem(pItem);
+	OnRunChanged();
 }
 
 void CSettingsWindow::OnCommandUp()
@@ -831,9 +860,13 @@ void CSettingsWindow::LoadSettings()
 	ui.chkNewLayout->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/NewConfigLayout", 2)));
 	ui.chkColorIcons->setChecked(theConf->GetBool("Options/ColorBoxIcons", false));
 	ui.chkOverlayIcons->setChecked(theConf->GetBool("Options/UseOverlayIcons", true));
+	ui.chkHideCore->setChecked(theConf->GetBool("Options/HideSbieProcesses", false));
+
 
 	//ui.cmbFontScale->setCurrentIndex(ui.cmbFontScale->findData(theConf->GetInt("Options/FontScaling", 100)));
 	ui.cmbFontScale->setCurrentText(QString::number(theConf->GetInt("Options/FontScaling", 100)));
+
+	ui.txtEditor->setText(theConf->GetString("Options/Editor", "notepad.exe"));
 
 	ui.chkSilentMode->setChecked(theConf->GetBool("Options/CheckSilentMode", true));
 	ui.chkCopyProgress->setChecked(theConf->GetBool("Options/ShowMigrationProgress", true));
@@ -875,11 +908,7 @@ void CSettingsWindow::LoadSettings()
 
 		ui.treeRun->clear();
 		foreach(const QString& Value, theAPI->GetGlobalSettings()->GetTextList("RunCommand", false))
-		{
-			StrPair NameCmd = Split2(Value, "|");
-			StrPair NameIcon = Split2(NameCmd.first, ",");
-			AddRunItem(NameIcon.first, NameIcon.second, NameCmd.second);
-		}
+			AddRunItem(ui.treeRun, GetRunEntry(Value));
 		m_RunChanged = false;
 		
 		ui.cmbDefault->clear();
@@ -1001,8 +1030,8 @@ void CSettingsWindow::LoadSettings()
 	ui.chkUpdateAddons->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/CheckForAddons", 2)));
 	ui.chkUpdateIssues->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/CheckForIssues", 2)));
 
-	//ui.chkUpdateTemplates->setEnabled(g_CertInfo.valid && !g_CertInfo.expired);
-	ui.chkUpdateIssues->setEnabled(g_CertInfo.valid && !g_CertInfo.expired);
+	//ui.chkUpdateTemplates->setEnabled(g_CertInfo.active && !g_CertInfo.expired);
+	ui.chkUpdateIssues->setEnabled(g_CertInfo.active && !g_CertInfo.expired);
 }
 
 void CSettingsWindow::UpdateCert()
@@ -1019,18 +1048,18 @@ void CSettingsWindow::UpdateCert()
 		if (g_CertInfo.expired) {
 			palette.setColor(QPalette::Base, QColor(255, 255, 192));
 			QString infoMsg = tr("This supporter certificate has expired, please <a href=\"sbie://update/cert\">get an updated certificate</a>.");
-			if (g_CertInfo.valid) {
+			if (g_CertInfo.active) {
 				if (g_CertInfo.grace_period)
-					infoMsg.append(tr("<br /><font color='red'>Plus features will be disabled in %1 days.</font>").arg(30 + g_CertInfo.expirers_in_sec / (60*60*24)));
+					infoMsg.append(tr("<br /><font color='red'>Plus features will be disabled in %1 days.</font>").arg((g_CertInfo.expirers_in_sec + 30*60*60*24) / (60*60*24)));
 				else if (!g_CertInfo.outdated) // must be an expiren medium or large cert on an old build
-					infoMsg.append(tr("<br /><font color='red'>For this build Plus features remain enabled.</font>"));
+					infoMsg.append(tr("<br /><font color='red'>For the current build Plus features remain enabled</font>, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database."));
 			} else
 				infoMsg.append(tr("<br />Plus features are no longer enabled."));
 			ui.lblCertExp->setText(infoMsg);
 			ui.lblCertExp->setVisible(true);
 		}
 		else {
-			if (g_CertInfo.about_to_expire) {
+			if (g_CertInfo.expirers_in_sec > 0 && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30)) {
 				ui.lblCertExp->setText(tr("This supporter certificate will <font color='red'>expire in %1 days</font>, please <a href=\"sbie://update/cert\">get an updated certificate</a>.").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
 				ui.lblCertExp->setVisible(true);
 			}
@@ -1045,7 +1074,7 @@ void CSettingsWindow::UpdateCert()
 		ui.txtCertificate->setPalette(palette);
 	}
 
-	ui.radInsider->setEnabled(g_CertInfo.insider);
+	ui.radInsider->setEnabled(CERT_IS_INSIDER(g_CertInfo));
 }
 
 void CSettingsWindow::UpdateUpdater()
@@ -1059,7 +1088,7 @@ void CSettingsWindow::UpdateUpdater()
 	}
 	else {
 		ui.cmbInterval->setEnabled(true);
-		if (ui.radStable->isChecked() && (!g_CertInfo.valid || g_CertInfo.expired)) {
+		if (ui.radStable->isChecked() && (!g_CertInfo.active || g_CertInfo.expired)) {
 			ui.cmbUpdate->setEnabled(false);
 			ui.cmbUpdate->setCurrentIndex(ui.cmbUpdate->findData("ignore"));
 			ui.lblRevision->setText(tr("Supporter certificate required"));
@@ -1136,6 +1165,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/NewConfigLayout", CSettingsWindow__Chk2Int(ui.chkNewLayout->checkState()));
 	theConf->SetValue("Options/ColorBoxIcons", ui.chkColorIcons->isChecked());
 	theConf->SetValue("Options/UseOverlayIcons", ui.chkOverlayIcons->isChecked());
+	theConf->SetValue("Options/HideSbieProcesses", ui.chkHideCore->isChecked());
 
 	int Scaling = ui.cmbFontScale->currentText().toInt();
 	if (Scaling < 75)
@@ -1143,6 +1173,8 @@ void CSettingsWindow::SaveSettings()
 	else if (Scaling > 500)
 		Scaling = 500;
 	theConf->SetValue("Options/FontScaling", Scaling);
+
+	theConf->SetValue("Options/Editor", ui.txtEditor->text());
 
 	AutorunEnable(ui.chkAutoStart->isChecked());
 
@@ -1233,13 +1265,9 @@ void CSettingsWindow::SaveSettings()
 				m_RunChanged = false;
 
 				QStringList RunCommands;
-				for (int i = 0; i < ui.treeRun->topLevelItemCount(); i++) {
-					QTreeWidgetItem* pItem = ui.treeRun->topLevelItem(i);
-					if (pItem->text(1).isEmpty())
-						RunCommands.prepend(pItem->text(0) + "|" + pItem->text(2));
-					else
-						RunCommands.prepend(pItem->text(0) + "," + pItem->text(1) + "|" + pItem->text(2));
-				}
+				for (int i = 0; i < ui.treeRun->topLevelItemCount(); i++) 
+					RunCommands.prepend(MakeRunEntry(ui.treeRun->topLevelItem(i)));
+
 				//WriteTextList("RunCommand", RunCommands);
 				theAPI->GetGlobalSettings()->DelValue("RunCommand");
 				foreach(const QString & Value, RunCommands)
@@ -1454,10 +1482,12 @@ bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* w
 		theGUI->UpdateCertState();
 
 		if (g_CertInfo.expired || g_CertInfo.outdated) {
-			if(g_CertInfo.expired)
-				QMessageBox::information(widget, "Sandboxie-Plus", tr("This certificate is unfortunately expired."));
+			if(g_CertInfo.outdated)
+				QMessageBox::information(widget, "Sandboxie-Plus", tr("This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build."));
+			else if(g_CertInfo.active && !g_CertInfo.grace_period)
+				QMessageBox::information(widget, "Sandboxie-Plus", tr("Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database."));
 			else
-				QMessageBox::information(widget, "Sandboxie-Plus", tr("This certificate is unfortunately outdated."));
+				QMessageBox::information(widget, "Sandboxie-Plus", tr("This certificate has unfortunately expired, you need to get a new certificate."));
 		}
 		else {
 			QMessageBox::information(widget, "Sandboxie-Plus", tr("Thank you for supporting the development of Sandboxie-Plus."));
@@ -1909,6 +1939,57 @@ void CSettingsWindow::SaveIniSection()
 	LoadIniSection();
 }
 
+QVariantMap GetRunEntry(const QString& sEntry)
+{
+	QVariantMap Entry;
+
+	if (sEntry.left(1) == "{")
+	{
+		Entry = QJsonDocument::fromJson(sEntry.toUtf8()).toVariant().toMap();
+	}
+	else
+	{
+		StrPair NameCmd = Split2(sEntry, "|");
+		StrPair NameIcon = Split2(NameCmd.first, ",");
+
+		Entry["Name"] = NameIcon.first;
+		Entry["Icon"] = NameIcon.second;
+		Entry["Command"] = NameCmd.second;
+	}
+
+	return Entry;
+}
+
+void AddRunItem(QTreeWidget* treeRun, const QVariantMap& Entry)
+{
+	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	pItem->setText(0, Entry["Name"].toString());
+	pItem->setData(0, Qt::UserRole, Entry);
+	pItem->setText(1, Entry["Command"].toString());
+	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+	treeRun->addTopLevelItem(pItem);
+}
+
+QString MakeRunEntry(QTreeWidgetItem* pItem)
+{
+	QVariantMap Entry = pItem->data(0, Qt::UserRole).toMap();
+	Entry["Name"] = pItem->text(0);
+	Entry["Command"] = pItem->text(1);
+	return MakeRunEntry(Entry);
+}
+
+QString MakeRunEntry(const QVariantMap& Entry)
+{
+	if (!Entry["WorkingDir"].toString().isEmpty() || !Entry["Icon"].toString().isEmpty()) {
+		QJsonDocument doc(QJsonValue::fromVariant(Entry).toObject());
+		QString sEntry = QString::fromUtf8(doc.toJson(QJsonDocument::Compact));
+		return sEntry;
+	} 
+	//if(!Entry["Icon"].toString().isEmpty())
+	//	return Entry["Name"].toString() + "," + Entry["Icon"].toString() + "|" + Entry["Command"].toString();
+	return Entry["Name"].toString() + "|" + Entry["Command"].toString();
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Update
 //
@@ -1996,13 +2077,6 @@ void CSettingsWindow::CertChanged()
 
 void CSettingsWindow::LoadCertificate(QString CertPath)
 {
-#ifdef _DEBUG
-	if (GetKeyState(VK_CONTROL) & 0x8000) {
-		g_Certificate.clear();
-		return;
-	}
-#endif
-
 	if (theAPI && theAPI->IsConnected())
 		CertPath = theAPI->GetSbiePath() + "\\Certificate.dat";
 		

@@ -8,16 +8,25 @@
 #include "SysObject.h"
 #include "WizardObject.h"
 
+#include "ScriptManager.h"
+
+#include "../MiscHelpers/Common/Common.h"
+
+#include "../SandMan.h"
+#include "../Views/SbieView.h"
+#include "../Windows/OptionsWindow.h"
+#include "../Windows/SettingsWindow.h"
 #include "../Wizards/BoxAssistant.h"
 
 #include <private/qv4engine_p.h>
 #include <private/qv4script_p.h>
+#include <private/qv4qobjectwrapper_p.h>
 
-int CBoxEngine::m_InstanceCount = 0;
+QSet<CBoxEngine*> CBoxEngine::m_Instances;
 
 CBoxEngine::CBoxEngine(QObject* parent) : QThread(parent)
 {
-    m_InstanceCount++;
+    m_Instances.insert(this);
 
     m_State = eUnknown;
     m_pEngine = NULL;
@@ -29,6 +38,13 @@ CBoxEngine::CBoxEngine(QObject* parent) : QThread(parent)
 
 CBoxEngine::~CBoxEngine()
 {
+    m_Instances.remove(this);
+
+    Stop();
+}
+
+void CBoxEngine::Stop()
+{
     m_Mutex.lock();
     if (m_State == eQuery || m_State == eReady)
         Continue(true, eCanceled);
@@ -39,11 +55,16 @@ CBoxEngine::~CBoxEngine()
     }
 
     if (!wait(30 * 1000)) {
-        qDebug() << "Failed to terminate Box Engine";
-        return;
+        qDebug() << "Failed to stop Box Engine";
+        terminate();
+        m_State = eCanceled;
     }
+}
 
-    m_InstanceCount--;
+void CBoxEngine::StopAll()
+{
+    foreach(CBoxEngine* pEngine, m_Instances)
+        pEngine->Stop();
 }
 
 QV4::ReturnedValue method_translate(const QV4::FunctionObject *b, const QV4::Value *v, const QV4::Value *argv, int argc)
@@ -56,27 +77,11 @@ QV4::ReturnedValue method_translate(const QV4::FunctionObject *b, const QV4::Val
 
     QString Result;
     for (int i = 0; i < argc; i++) {
-        if (i == 0) Result = (Wizard ? Wizard->Tr(argv[i].toQStringNoThrow()) : argv[i].toQStringNoThrow());
+        if (i == 0) Result = theGUI->GetScripts()->Tr(argv[i].toQStringNoThrow());
         else Result = Result.arg(argv[i].toQStringNoThrow());
     }
 
     return QV4::Encode(scope.engine->newString(Result));
-}
-
-QV4::ReturnedValue method_print(const QV4::FunctionObject *b, const QV4::Value *v, const QV4::Value *argv, int argc)
-{
-    QV4::Scope scope(b);
-    QV4::ExecutionEngine *v4 = scope.engine;
-
-    QString Result;
-    for (int i = 0; i < argc; i++) {
-        if (i > 0) Result.append(" ");
-        Result.append(argv[i].toQStringNoThrow());
-    }
-    CBoxEngine* pEngine = qobject_cast<CBoxEngine*>(CJSEngineExt::getEngineByHandle(v4)->thread());
-    pEngine->AppendLog(Result);
-
-    return QV4::Encode::undefined();
 }
 
 QV4::ReturnedValue method_wcmp(const QV4::FunctionObject *b, const QV4::Value *v, const QV4::Value *argv, int argc)
@@ -90,24 +95,62 @@ QV4::ReturnedValue method_wcmp(const QV4::FunctionObject *b, const QV4::Value *v
     return QV4::Encode(CSbieUtils::WildCompare(argv[0].toQStringNoThrow(), argv[1].toQStringNoThrow()));
 }
 
+QV4::ReturnedValue method_invoke(const QV4::FunctionObject *b, const QV4::Value *v, const QV4::Value *argv, int argc)
+{
+    QV4::Scope scope(b);
+    QV4::ExecutionEngine *v4 = b->engine();
+
+    QString Name = argv[0].toQStringNoThrow();
+
+    CBoxEngine* pEngine = qobject_cast<CBoxEngine*>(CJSEngineExt::getEngineByHandle(v4)->thread());
+    CJSEngineExt* pJSEngine = pEngine->GetEngine();
+
+    QString Script;
+    QMetaObject::invokeMethod(theGUI->GetScripts(), "GetScript", Qt::BlockingQueuedConnection, Q_RETURN_ARG(QString, Script), Q_ARG(QString, Name));
+    if (!Script.isEmpty()) {
+        QJSValue ret = pJSEngine->evaluateScript(Script, Name + ".js");
+        if (ret.isError()) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+			pJSEngine->throwError(ret.toString());
+#else
+            pJSEngine->throwError(ret);
+#endif
+            return QV4::Encode::undefined();
+        } else {
+            QV4::ScopedValue rv(scope, scope.engine->fromVariant(ret.toVariant()));
+            QV4::Scoped<QV4::QObjectWrapper> qobjectWrapper(scope, rv);
+            if (!!qobjectWrapper) {
+                if (QObject *object = qobjectWrapper->object())
+                    QQmlData::get(object, true)->setImplicitDestructible();
+            }
+            return rv->asReturnedValue();
+        }
+    }
+
+    return QV4::Encode(false);
+}
+
 void CBoxEngine::init()
 {
+    connect(m_pEngine, SIGNAL(printTrace(const QString&)), this, SLOT(AppendLog(const QString&)));
+
     QV4::Scope scope(m_pEngine->handle());
     scope.engine->globalObject->defineDefaultProperty(QStringLiteral("tr"), method_translate);
-    scope.engine->globalObject->defineDefaultProperty(QStringLiteral("print"), method_print);
     scope.engine->globalObject->defineDefaultProperty(QStringLiteral("wildCompare"), method_wcmp);
+    scope.engine->globalObject->defineDefaultProperty(QStringLiteral("invoke"), method_invoke);
 
     m_pEngine->globalObject().setProperty("system", m_pEngine->newQObject(new JSysObject(this)));
     m_pEngine->globalObject().setProperty("sbie", m_pEngine->newQObject(new JSbieObject(new CSbieObject(this), this)));
 }
 
-bool CBoxEngine::RunScript(const QString& Script, const QString& Name)
+bool CBoxEngine::RunScript(const QString& Script, const QString& Name, const QVariantMap& Params)
 {
     if (isRunning())
         return false;
 
     m_Script = Script;
     m_Name = Name;
+    m_Params = Params;
     m_State = eRunning;
 
     if(!m_pEngine) m_pEngine = new CJSEngineExt(); // the engine lives in its own thread
@@ -122,12 +165,12 @@ bool CBoxEngine::RunScript(const QString& Script, const QString& Name)
     //      !!! CAUTION Multi Threading !!!
     // 
     // Note: The engine runs in its own thread but the rest of SandMan 
-    // is mostly single threaded, also QSbieAPI is not hread safe so 
+    // is mostly single threaded, also QSbieAPI is not thread safe, so 
     // access to it must be synchronized. We solve this by executing 
     // all calls to theGUI and/or theAPI in the main thread through
     // the use of QT's slot system, we wrap all calls from the engine
     // in blocking QMetaObject::invokeMethod calls targeting to objects
-    // which belong the main thread hence thay need to be created in 
+    // which belong to the main thread, hence they need to be created in 
     // the main thread and passed to the caller from there.
     //
     //
@@ -143,6 +186,9 @@ void CBoxEngine::run()
     //QElapsedTimer timer;
     //timer.start();
     
+    for (auto I = m_Params.begin(); I != m_Params.end(); ++I)
+        m_pEngine->globalObject().setProperty(I.key(), m_pEngine->toScriptValue(*I));
+
     //auto ret = m_pEngine->evaluateScript("(()=>{" + m_Script + "})()", m_Name);
     auto ret = m_pEngine->evaluateScript(m_Script, m_Name);
 
@@ -215,7 +261,11 @@ bool CBoxEngine::WaitLocked() {
 
     // WARNING: call this function only from the engine thread itself !!!
 
-    m_Wait.wait(&m_Mutex);
+    if (m_pDebuggerBackend) {
+        while (!m_Wait.wait(&m_Mutex, 10))
+            QCoreApplication::processEvents(); // for CV4DebugAgent::runJob()
+    } else
+        m_Wait.wait(&m_Mutex);
 
     emit StateChanged(m_State);
 
@@ -250,9 +300,13 @@ QObject* CBoxEngine::GetDebuggerBackend()
 // CWizardEngine
 // 
 
+int CWizardEngine::m_InstanceCount = 0;
+
 CWizardEngine::CWizardEngine(QObject* parent) 
  : CBoxEngine(parent) 
 {
+    
+    m_InstanceCount++;
 }
 
 CWizardEngine::~CWizardEngine()
@@ -267,6 +321,8 @@ CWizardEngine::~CWizardEngine()
         }
     }
     theAPI->ReloadBoxes(true);
+
+    m_InstanceCount--;
 }
 
 bool CWizardEngine::ApplyShadowChanges()
@@ -276,7 +332,7 @@ bool CWizardEngine::ApplyShadowChanges()
             continue;
 
         if (I->pOriginal.isNull()) {
-            // This is a new box or tamplete not a copy, just clear shadow flag
+            // This is a new box or template, not a copy, just clear shadow flag
             I->pShadow->DelValue("IsShadow", "y");
             I->iApplyChanges = 2;
             continue;
@@ -305,7 +361,7 @@ bool CWizardEngine::ApplyShadowChanges()
             if (N.first == "FileRootPath" || N.first == "IsShadow")
                 continue; // skip
             if(N.first == "Template" && IsNoAppliedShadow("Template_" + N.second))
-                continue; // don't copy not applied shadow templates
+                continue; // don't copy non-applied shadow templates
             I->pOriginal->AppendText(N.first, N.second);
         }
     }
@@ -324,8 +380,12 @@ void CWizardEngine::init()
 
 void CWizardEngine::SetState(EState state, const QString& Text)
 {
-    if (state == eError)
-        m_Report["Error"] = Text;
+    if (!Text.isEmpty()) {
+        if (state == eError)
+            m_Report["Error"] = Text;
+        else if (state == eFailed)
+            m_Report["Failure"] = Text;
+    }
     CBoxEngine::SetState(state, Text);
 }
 
@@ -334,7 +394,7 @@ QSharedPointer<CSbieIni> CWizardEngine::MakeShadow(const QSharedPointer<CSbieIni
     SBoxShadow& pShadow = m_Shadows[pIni->GetName().toLower()];
     if (!pShadow.pShadow) {
         QString ShadowName = pIni->GetName();
-        QString Suffix = tr("_Shadow");
+        QString Suffix = "_Shadow"; // do not translate must be a valid sandbox name suffix
         ShadowName.truncate(32 - (Suffix.length() + 3)); // BOXNAME_COUNT
         ShadowName = theAPI->MkNewName(ShadowName.append(Suffix));
 
@@ -383,4 +443,34 @@ bool CWizardEngine::IsNoAppliedShadow(const QString& OriginalName)
     if (I != m_Shadows.end())
         return I->iApplyChanges == 0;
     return false;
+}
+
+void CWizardEngine::OpenSettings(const QString& page)
+{
+    SetState(eReady);
+
+    CSettingsWindow* pSettingsWnd = new CSettingsWindow();
+	connect(pSettingsWnd, &CSettingsWindow::Closed, this, [=]() {
+		Continue(false);
+	});
+    //theGUI->SafeExec(pSettingsWnd);
+    pSettingsWnd->showTab(page);
+}
+
+void CWizardEngine::OpenOptions(const QString& box, const QString& page)
+{
+    SetState(eReady);
+
+    CSandBoxPtr pBox = theAPI->GetBoxByName(box);
+    if (pBox.isNull()) {
+        Continue(false);
+        return;
+    }
+    
+    COptionsWindow* pOptionsWnd = new COptionsWindow(pBox, pBox->GetName());
+	connect(pOptionsWnd, &COptionsWindow::Closed, this, [=]() {
+		Continue(false);
+	});
+    //theGUI->SafeExec(pOptionsWnd);
+    pOptionsWnd->showTab(page);
 }

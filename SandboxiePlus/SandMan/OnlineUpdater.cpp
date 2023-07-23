@@ -171,8 +171,8 @@ void COnlineUpdater::GetUpdates(QObject* receiver, const char* member, const QVa
 	Query.addQueryItem("language", QLocale::system().name());
 
 	QString UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("UPDATEKEY");
-	if (UpdateKey.isEmpty())
-		UpdateKey = theAPI->GetGlobalSettings()->GetText("UpdateKey"); // theConf->GetString("Options/UpdateKey");
+	//if (UpdateKey.isEmpty())
+	//	UpdateKey = theAPI->GetGlobalSettings()->GetText("UpdateKey"); // theConf->GetString("Options/UpdateKey");
 	//if (UpdateKey.isEmpty())
 	//	UpdateKey = "00000000000000000000000000000000";
 	if (!UpdateKey.isEmpty())
@@ -857,7 +857,7 @@ bool COnlineUpdater::RunInstaller(bool bSilent)
 
 	theAPI->TerminateAll();
 
-	if (RunInstaller2(FilePath, bSilent)) {
+	if (RunInstaller2(FilePath, true)) {
 		if (bSilent)
 			theConf->DelValue("Updater/InstallerVersion");
 		QApplication::quit();
@@ -1029,11 +1029,8 @@ bool COnlineUpdater::IsVersionNewer(const QString& VersionStr)
 
 void COnlineUpdater::UpdateCert(bool bWait)
 {
-	QString UpdateKey; // for now only patreons can update the cert automatically
-	TArguments args = GetArguments(g_Certificate, L'\n', L':');
-	if(args.value("TYPE").contains("PATREON"))
-		UpdateKey = args.value("UPDATEKEY");
-	if (UpdateKey.isEmpty()) {
+	// for now only patreons can update the cert automatically
+	if (!CERT_IS_TYPE(g_CertInfo, eCertPatreon)) {
 		theGUI->OpenUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert");
 		return;
 	}
@@ -1048,6 +1045,7 @@ void COnlineUpdater::UpdateCert(bool bWait)
 	if (m_RequestManager == NULL) 
 		m_RequestManager = new CNetworkAccessManager(30 * 1000, this);
 
+	QString UpdateKey = GetArguments(g_Certificate, L'\n', L':').value("UPDATEKEY");
 
 	QUrlQuery Query;
 	Query.addQueryItem("UpdateKey", UpdateKey);

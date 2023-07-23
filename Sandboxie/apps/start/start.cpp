@@ -433,6 +433,10 @@ BOOL Parse_Command_Line(void)
             if (_wcsnicmp(cmd, L"open_agent:", 11) == 0) {
                 cmd += 11;
                 tmp = Eat_String(cmd);
+                if (*cmd == L'\"') {
+                    cmd++;
+                    tmp--;
+                }
                 ULONG len = ULONG(tmp - cmd) * sizeof(WCHAR);
                 memcpy((WCHAR*)&buffer[req.length], cmd, len);
                 req.length += len;
@@ -1220,8 +1224,8 @@ int Program_Start(void)
             WCHAR *parms = Eat_String(cmdline);
             if (parms && *parms) {
 
-                WCHAR *cmd2 = MyHeapAlloc(cmdline_len * sizeof(WCHAR));
-                WCHAR *arg2 = MyHeapAlloc(cmdline_len * sizeof(WCHAR));
+                WCHAR *cmd2 = MyHeapAlloc((cmdline_len + 1) * sizeof(WCHAR));
+                WCHAR *arg2 = MyHeapAlloc((cmdline_len + 1) * sizeof(WCHAR));
 
                 wcsncpy(cmd2, cmdline, parms - cmdline);
                 cmd2[parms - cmdline] = L'\0';

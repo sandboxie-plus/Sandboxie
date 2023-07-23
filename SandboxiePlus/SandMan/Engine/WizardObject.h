@@ -45,12 +45,32 @@ public:
         QMutexLocker Locker(&m_pEngine->m_Mutex);
         if (!m_pEngine->TestRunning()) return;
 
-        if(bSuccess) m_pEngine->SetState(CBoxEngine::eSuccess, Text);
+        if(bSuccess) m_pEngine->SetState(CBoxEngine::eSuccess);
         else m_pEngine->SetState(CBoxEngine::eFailed, Text);
     }
 
     Q_INVOKABLE void reportAdd(const QString& name, const QString& value) {
         m_pEngine->m_Report[name] = value;
+    }
+
+    Q_INVOKABLE void openSettings(const QString& page) {
+
+        QMutexLocker Locker(&m_pEngine->m_Mutex);
+        if (!m_pEngine->TestRunning()) return;
+
+        QMetaObject::invokeMethod(m_pEngine, "OpenSettings", Qt::QueuedConnection, Q_ARG(QString, page));
+
+        m_pEngine->WaitLocked();
+    }
+
+    Q_INVOKABLE void openOptions(const QString& box, const QString& page) {
+
+        QMutexLocker Locker(&m_pEngine->m_Mutex);
+        if (!m_pEngine->TestRunning()) return;
+
+        QMetaObject::invokeMethod(m_pEngine, "OpenOptions", Qt::QueuedConnection, Q_ARG(QString, box), Q_ARG(QString, page));
+
+        m_pEngine->WaitLocked();
     }
 
 protected:

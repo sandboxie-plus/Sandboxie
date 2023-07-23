@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 #include <QAbstractEventDispatcher>
+#include <QSettings>
 
 #include <ntstatus.h>
 #define WIN32_NO_STATUS
@@ -73,7 +74,7 @@ void CSymbolProvider::run()
 
 	while (m_bRunning)
 	{
-		quint64 OldTime = GetTickCount64() - 3000; // cleanup everythign older than 3 sec
+		quint64 OldTime = GetTickCount64() - 3000; // cleanup everything older than 3 sec
 		if (LastCleanUp < OldTime) 
         {
 			QMutexLocker Lock(&m_SymLock);
@@ -132,7 +133,7 @@ QString CSymbolProvider::Resolve(quint64 pid, quint64 Address)
                 break;
         }
 
-        static QAtomicInt FakeHandle = 1; // real handles are divisable b 4
+        static QAtomicInt FakeHandle = 1; // real handles are divisible by 4
         if (Worker.handle == (quint64)INVALID_HANDLE_VALUE)
             Worker.handle = FakeHandle.fetchAndAddAcquire(4);
 
@@ -164,7 +165,7 @@ QString CSymbolProvider::Resolve(quint64 pid, quint64 Address)
     }
     else
     {
-        // Then this happens probably symsrv.dll is missing
+        // Then this happens, probably symsrv.dll is missing
 
         IMAGEHLP_MODULEW64 ModuleInfo;
         ModuleInfo.SizeOfStruct = sizeof(ModuleInfo);
@@ -348,6 +349,28 @@ CSymbolProvider* CSymbolProvider::Instance()
 
     if (MyBeginInitOnce(InitOnce))
     {
+/*#ifdef _WIN64
+        QSettings settings("HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows Kits\\Installed Roots", QSettings::NativeFormat);
+#else
+        QSettings settings("HKEY_LOCAL_MACHINE\\Software\\Wow6432Node\\Microsoft\\Windows Kits\\Installed Roots", QSettings::NativeFormat);
+#endif
+        QString KitsRoot = settings.value("KitsRoot10").toString(); // Windows 10 SDK
+        if(KitsRoot.isEmpty())
+            KitsRoot = settings.value("KitsRoot81").toString(); // Windows 8.1 SDK
+        if(KitsRoot.isEmpty())
+            KitsRoot = settings.value("KitsRoot").toString(); // Windows 8 SDK
+#if defined(_M_AMD64)
+        KitsRoot.append("\\Debuggers\\x64\\");
+#elif defined(_M_ARM64)
+        KitsRoot.append("\\Debuggers\\arm64\\");
+#else
+        KitsRoot.append("\\Debuggers\\x86\\");
+#endif
+
+        HMODULE DbgCoreMod = LoadLibrary((KitsRoot + "dbgcore.dll").toStdWString().c_str());
+        HMODULE DbgHelpMod = LoadLibrary((KitsRoot + "dbghelp.dll").toStdWString().c_str());
+        HMODULE SymSrvMod  = LoadLibrary((KitsRoot + "symsrv.dll").toStdWString().c_str());*/
+
         HMODULE DbgHelpMod = LoadLibrary(L"dbghelp.dll");
 
         __sys_SymFromAddr = (P_SymFromAddr)GetProcAddress(DbgHelpMod, "SymFromAddr");

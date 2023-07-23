@@ -150,12 +150,22 @@ void CRunBrowser::OpenHelp(CWnd *pParentWnd, const CString &topic)
     CRunBrowser x(pParentWnd, GetTopicUrl(topic));
 }
 
+
 //---------------------------------------------------------------------------
-// OpenForum
+// EscapeForURL
 //---------------------------------------------------------------------------
 
 
-void CRunBrowser::OpenForum(CWnd *pParentWnd)
+CString CRunBrowser::EscapeForURL(const CString& value)
 {
-    CRunBrowser x(pParentWnd, L"https://sandboxie-plus.com/go.php?to=sbie-forum");
+    CString escapedValue;
+    DWORD bufferSize = (DWORD)(value.GetLength() * 3 + 1);
+    LPWSTR escapedBuffer = new WCHAR[bufferSize];
+
+    HRESULT hr = UrlEscapeW(value, escapedBuffer, &bufferSize, URL_ESCAPE_PERCENT | URL_ESCAPE_SEGMENT_ONLY);
+    if (hr == S_OK)
+        escapedValue = CString(escapedBuffer, bufferSize);
+
+    delete[] escapedBuffer;
+    return escapedValue;
 }

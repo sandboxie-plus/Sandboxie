@@ -8,7 +8,7 @@
 
 let form = [
     { id: 'path', name: tr('Enter Installer Path'), type: 'file' },
-    { id: 'box', name: tr('Sellect a sandbox to instll into'), type: 'box' },
+    { id: 'box', name: tr('Select a sandbox to install into'), type: 'box' },
 ];
 let ret = wizard.showForm(form);
 

@@ -8,7 +8,6 @@
 #include "../MiscHelpers/Common/ProgressDialog.h"
 #include "../MiscHelpers/Common/NetworkAccessManager.h"
 #include <QTranslator>
-#include "Windows/PopUpWindow.h"
 
 #include "../version.h"
 
@@ -16,11 +15,13 @@
 //#include "../QSbieAPI/SbieAPI.h"
 #include "SbiePlusAPI.h"
 
+class CPopUpWindow;
 class CSbieView;
 class CFileView;
 class CBoxBorder;
 class CSbieTemplatesEx;
 class CTraceView;
+class CScriptManager;
 class CAddonManager;
 
 struct ToolBarAction {
@@ -44,6 +45,7 @@ public:
 
 	CSbieTemplatesEx*	GetCompat() { return m_SbieTemplates; }
 	void				CheckCompat(QObject* receiver, const char* member);
+	CScriptManager*		GetScripts() { return m_SbieScripts; }
 	CAddonManager*		GetAddonManager() { return m_AddonManager; }
 
 	static QString		GetVersion();
@@ -81,6 +83,9 @@ public:
 	CSbieView*			GetBoxView() { return m_pBoxView; }
 	CFileView*			GetFileView() { return m_pFileView; }
 
+	QString				FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData, QString ProcessName, QString* pLink = NULL);
+	QString				MakeSbieMsgLink(quint32 MsgCode, const QStringList& MsgData, QString ProcessName);
+
 	int					SafeExec(QDialog* pDialog);
 
 	bool				RunSandboxed(const QStringList& Commands, QString BoxName = QString(), const QString& WrkDir = QString());
@@ -117,6 +122,8 @@ protected:
 	static void			RecoverFilesAsync(QPair<const CSbieProgressPtr&,QWidget*> pParam, const QString& BoxName, const QList<QPair<QString, QString>>& FileList, const QStringList& Checkers, int Action = 0);
 	static void			CheckFilesAsync(const CSbieProgressPtr& pProgress, const QString& BoxName, const QStringList &Files, const QStringList& Checkers);
 
+	void				AddLogMessage(const QDateTime& TimeStamp, const QString& Message, const QString& Link = QString());
+
 	QIcon				GetTrayIcon(bool isConnected = true, bool bSun = false);
 	QString				GetTrayText(bool isConnected = true);
 
@@ -133,6 +140,7 @@ protected:
 	bool				m_bStopPending;
 	CBoxBorder*			m_pBoxBorder;
 	CSbieTemplatesEx*	m_SbieTemplates;
+	CScriptManager*		m_SbieScripts;
 	CAddonManager*		m_AddonManager;
 	
 	QMap<CSbieProgress*, QPair<CSbieProgressPtr, QPointer<QWidget>>> m_pAsyncProgress;
@@ -163,6 +171,16 @@ protected:
 
 	class UGlobalHotkeys* m_pHotkeyManager;
 
+	bool				m_ImDiskReady;
+
+	struct SSbieMsg {
+		QDateTime TimeStamp;
+		quint32 MsgCode;
+		QStringList MsgData; 
+		QString ProcessName;
+	};
+	QVector<SSbieMsg>	m_MessageLog;
+
 public slots:
 	void				OnBoxSelected();
 
@@ -180,6 +198,8 @@ public slots:
 
 	bool				OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteSnapshots, bool bCloseEmpty = false);
 	class CRecoveryWindow*	ShowRecovery(const CSandBoxPtr& pBox, bool bFind = true);
+
+	void				TryFix(quint32 MsgCode, const QStringList& MsgData, const QString& ProcessName, const QString& BoxName);
 
 	void				OpenCompat();
 

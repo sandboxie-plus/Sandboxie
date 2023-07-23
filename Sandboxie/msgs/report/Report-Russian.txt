@@ -2,5 +2,15 @@
 * Missing Messages in Text-Russian-1049.txt
 *==========
 
-There are no missing messages.
+2180;pop;inf;01
+SBIE2180 LowLevel.dll error %2
+.
+
+2181;pop;inf;01
+SBIE2181 LowLevel.dll detour failed to load SbieDll.dll into target process.
+.
+
+3469;txt;01
+What's new in Sandboxie-Plus
+.
 

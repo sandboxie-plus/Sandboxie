@@ -39,6 +39,7 @@ struct SBoxedProcess
 CBoxedProcess::CBoxedProcess(quint32 ProcessId, class CSandBox* pBox)
 {
 	m_pBox = pBox;
+	if (pBox) m_BoxName = pBox->GetName();
 
 	m = new SBoxedProcess;
 	m->Handle = NULL;
@@ -273,6 +274,11 @@ void CBoxedProcess::InitProcessInfoImpl(void* ProcessHandle)
 	if (m_CommandLine.isEmpty()) // fall back to the win 7 method - requirers PROCESS_VM_READ
 	{
 		m_CommandLine = CBoxedProcess__GetPebString(ProcessHandle, PhpoCommandLine);
+	}
+
+	if (m_WorkingDir.isEmpty())
+	{
+		m_WorkingDir = CBoxedProcess__GetPebString(ProcessHandle, PhpoCurrentDirectory);
 	}
 }
 

@@ -36,7 +36,7 @@ typedef struct _FILE_SNAPSHOT {
 	WCHAR					ID[FILE_MAX_SNAPSHOT_ID];
 	ULONG					IDlen;
 	ULONG					ScramKey;
-	//WCHAR					Name[34];
+	//WCHAR					Name[BOXNAME_COUNT];
 	struct _FILE_SNAPSHOT*	Parent;
 	LIST					PathRoot;
 } FILE_SNAPSHOT, *PFILE_SNAPSHOT;
@@ -278,7 +278,7 @@ _FX ULONG File_GetPathFlagsEx(const WCHAR *TruePath, const WCHAR *CopyPath, WCHA
 		// check true path relocation and deletion for the active state
 		//
 
-		Flags = File_GetPathFlags_internal(&File_PathRoot, TruePath, &Relocation, TRUE); // this requires a name buffer
+		Flags = File_GetPathFlags_internal(&File_PathRoot, File_NormalizePath(TruePath, NORM_NAME_BUFFER), &Relocation, TRUE); // this requires a name buffer
 		if (FILE_PATH_DELETED(Flags))
 			goto finish;
 	}
@@ -373,7 +373,7 @@ _FX ULONG File_GetPathFlagsEx(const WCHAR *TruePath, const WCHAR *CopyPath, WCHA
 			//
 
 			TmplRelocation = NULL;
-			Flags = File_GetPathFlags_internal(&Cur_Snapshot->PathRoot, TruePath, &TmplRelocation, TRUE);
+			Flags = File_GetPathFlags_internal(&Cur_Snapshot->PathRoot, File_NormalizePath(TruePath, NORM_NAME_BUFFER), &TmplRelocation, TRUE);
 			if(TmplRelocation)
 				Relocation = TmplRelocation;
 			if (FILE_PATH_DELETED(Flags))
@@ -477,11 +477,11 @@ _FX void File_InitSnapshots(void)
 			wcscat(PathFile, L"\\");
 			wcscat(PathFile, FILE_PATH_FILE_NAME);
 
-			File_LoadPathTree_internal(&Cur_Snapshot->PathRoot, PathFile);
+			File_LoadPathTree_internal(&Cur_Snapshot->PathRoot, PathFile, File_TranslateDosToNtPath);
 		}
 
-		//WCHAR SnapshotName[34] = { 0 };
-		//GetPrivateProfileStringW(SnapshotId, L"Name", L"", SnapshotName, 34, SnapshotsIni);
+		//WCHAR SnapshotName[BOXNAME_COUNT] = { 0 };
+		//GetPrivateProfileStringW(SnapshotId, L"Name", L"", SnapshotName, BOXNAME_COUNT, SnapshotsIni);
 		//wcscpy(Cur_Snapshot->Name, SnapshotName);
 
 		GetPrivateProfileStringW(SnapshotId, L"Parent", L"", Snapshot, 16, SnapshotsIni);

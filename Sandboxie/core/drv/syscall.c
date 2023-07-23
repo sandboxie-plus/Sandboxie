@@ -147,7 +147,7 @@ _FX BOOLEAN Syscall_Init(void)
         return FALSE;
 
 #ifdef HOOK_WIN32K
-    if (Driver_OsBuild >= 10041 && Conf_Get_Boolean(NULL, L"EnableWin32kHooks", 0, TRUE)) {
+    if (Driver_OsBuild >= 14393 && Conf_Get_Boolean(NULL, L"EnableWin32kHooks", 0, TRUE)) {
 
         if (!Syscall_Init_List32())
             return FALSE;
@@ -711,7 +711,7 @@ _FX NTSTATUS Syscall_Api_Invoke(PROCESS *proc, ULONG64 *parms)
                 if (pTrapFrame) {
                     ret = pTrapFrame->Rip;
                     UserStack = pTrapFrame->Rsp;
-                    pTrapFrame->Rsp = pTrapFrame->Rbp; //*pRbp;
+                    pTrapFrame->Rsp = pTrapFrame->Rdi; //*pRbp;
                     pTrapFrame->Rip = pTrapFrame->Rbx; //*pRbx;
                 }
             }

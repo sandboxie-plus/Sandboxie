@@ -78,6 +78,14 @@ SBIE2114 File is too large to copy into sandbox, denying access - %2
 SBIE2115 File is too large to copy into sandbox, opening in read only - %2
 .
 
+2180;pop;inf;01
+SBIE2180 LowLevel.dll error %2
+.
+
+2181;pop;inf;01
+SBIE2181 LowLevel.dll detour failed to load SbieDll.dll into target process.
+.
+
 2194;pop;inf;01
 SBIE2194 MSI installer requires %2 option to be set in the ini, what however weakens the isolation.
 .
@@ -253,6 +261,10 @@ Upgrade to Sandboxie-Plus
 
 3468;txt;01
 Sandboxie-Plus Migration Guide
+.
+
+3469;txt;01
+What's new in Sandboxie-Plus
 .
 
 3484;txt;01

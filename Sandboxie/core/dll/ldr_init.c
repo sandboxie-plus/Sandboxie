@@ -22,6 +22,7 @@
 
 
 #include "dll.h"
+#include "core/low/lowdata.h"
 #include <stdio.h>
 
 
@@ -880,6 +881,22 @@ _FX void* Ldr_Inject_Entry(ULONG_PTR *pPtr)
     {
         Ldr_LoadInjectDlls(g_bHostInject);
     }
+    
+	
+    //
+    // free the syscall/inject data area which is no longer needed
+    //
+
+#ifdef _M_ARM64EC
+    extern ULONG* SbieApi_SyscallPtr;
+    SbieApi_SyscallPtr = NULL;
+#endif
+    extern SBIELOW_DATA* SbieApi_data;
+    VirtualFree((void*)SbieApi_data->syscall_data, 0, MEM_RELEASE);
+
+    //
+    // return original entry point address to jump to
+    //
 
     return entrypoint;
 }

@@ -12,7 +12,6 @@ HEADERS += ./MiscHelpers.h \
     ./Common/FlexError.h \
     ./Common/FlowLayout.h \
     ./Common/HistoryGraph.h \
-    ./Common/qRC4.h \
     ./Common/Xml.h \
     ./Common/CheckableMessageBox.h \
     ./Common/ComboInputDialog.h \
@@ -62,7 +61,6 @@ SOURCES += ./MiscHelpers.cpp \
     ./Common/ListItemModel.cpp \
     ./Common/MultiLineInputDialog.cpp \
     ./Common/PanelView.cpp \
-    ./Common/qRC4.cpp \
     ./Common/NetworkAccessManager.cpp \
     ./Common/Settings.cpp \
     ./Common/SettingsWidgets.cpp \

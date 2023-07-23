@@ -40,6 +40,8 @@ public slots:
 	void ok();
 	void apply();
 
+	void showTab(const QString& Name);
+
 private slots:
 
 	//void OnWithTemplates();
@@ -349,8 +351,6 @@ protected:
 	void SaveConfig();
 	void UpdateCurrentTab();
 
-	void AddRunItem(const QString& Name, const QString& Icon, const QString& Command);
-
 	void CreateGeneral();
 	void LoadGeneral();
 	void SaveGeneral();
@@ -481,6 +481,8 @@ protected:
 	void LoadIniSection();
 	void SaveIniSection();
 
+	void ApplyIniEditFont();
+
 	QString GetCategoryName(const QString& Category);
 
 	bool m_HoldChange;
@@ -545,6 +547,8 @@ private:
 	void WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& OnValue, const QString& OffValue);
 	void WriteText(const QString& Name, const QString& Value);
 	void WriteTextList(const QString& Setting, const QStringList& List);
+	void WriteTextSafe(const QString& Name, const QString& Value);
+	QString ReadTextSafe(const QString& Name, const QString& Default);
 
 	Ui::OptionsWindow ui;
 	QCheckBox* m_pUseIcon;

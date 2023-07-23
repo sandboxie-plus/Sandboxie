@@ -1208,7 +1208,7 @@ Re&charger la configuration
 .
 
 3505;txt;01
-Contribuer à Sanboxie
+Contribuer à Sandboxie
 .
 
 3451;txt;01

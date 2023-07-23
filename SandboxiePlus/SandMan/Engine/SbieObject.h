@@ -6,7 +6,8 @@ class CSbieObject : public QObject
 {
     Q_OBJECT
 public:
-    CSbieObject(QObject* parent) : QObject(parent) {}
+    CSbieObject(QObject* parent);
+    ~CSbieObject();
 
 public slots:
     CBoxObject*     GetBox(const QString& Name);
@@ -31,6 +32,8 @@ public slots:
     void            ShellRemove();
 
     void            LogMessage(const QVariant& Message, bool bNotify);
+protected:
+    bool            m_TraceStarted;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -153,7 +156,7 @@ public:
         QMetaObject::invokeMethod(m_pObject, "LogMessage", Qt::BlockingQueuedConnection, Q_ARG(const QVariant&, Message), Q_ARG(bool, bNotify));
     }
 
-    Q_INVOKABLE bool isCertValid();
+    Q_INVOKABLE bool testFeature(const QString& name);
     
 protected:
     CBoxEngine* m_pEngine;

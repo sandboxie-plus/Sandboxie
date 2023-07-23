@@ -386,6 +386,14 @@ SBIE2114 File is too large to copy into sandbox, denying access - %2
 SBIE2115 File is too large to copy into sandbox, opening in read only - %2
 .
 
+2180;pop;inf;01
+SBIE2180 LowLevel.dll error %2
+.
+
+2181;pop;inf;01
+SBIE2181 LowLevel.dll detour failed to load SbieDll.dll into target process.
+.
+
 # %2 = Mozilla Firefox
 2191;pop;inf;01
 SBIE2191 %2 should not be updated while running under Sandboxie.
@@ -1349,6 +1357,10 @@ Upgrade to Sandboxie-Plus
 
 3468;txt;01
 Sandboxie-Plus Migration Guide
+.
+
+3469;txt;01
+What's new in Sandboxie-Plus
 .
 
 3471;txt;01
@@ -4097,7 +4109,7 @@ Select NO to delete the Sandboxie.ini file and lose your configuration settings.
 .
 
 8055;ins;01
-There is an online update of the Templates.ini and/or the translations for this version of sandboxie available, do you want to install it?
+There is an online update of the Templates.ini and/or the translations for this version of Sandboxie available, do you want to install it?
 .
 
 #----------------------------------------------------------------------------

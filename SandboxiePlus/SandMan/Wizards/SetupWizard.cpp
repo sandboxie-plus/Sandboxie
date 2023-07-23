@@ -185,7 +185,7 @@ CIntroPage::CIntroPage(QWidget *parent)
 
     uchar BusinessUse = 2;
     if (!g_Certificate.isEmpty())
-        BusinessUse = g_CertInfo.business ? 1 : 0;
+        BusinessUse = CERT_IS_TYPE(g_CertInfo, eCertBusiness) ? 1 : 0;
     else {
         uchar UsageFlags = 0;
         if (theAPI->GetSecureParam("UsageFlags", &UsageFlags, sizeof(UsageFlags)))
@@ -256,7 +256,7 @@ CCertificatePage::CCertificatePage(QWidget *parent)
     registerField("useCertificate", m_pCertificate, "plainText");
     
     m_pEvaluate = new QCheckBox(tr("Start evaluation without a certificate for a limited period of time."));
-    if (g_CertInfo.evaluation) {
+    if (CERT_IS_TYPE(g_CertInfo, eCertEvaluation)) {
         m_pEvaluate->setEnabled(false);
         m_pEvaluate->setChecked(true);
     }
@@ -528,7 +528,7 @@ CSBUpdate::CSBUpdate(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Configure <b>Sandboxie-Plus</b> updater"));
-    setSubTitle(tr("Like with any other security product it's important to keep your Sandboxie-Plus up to date."));
+    setSubTitle(tr("Like with any other security product, it's important to keep your Sandboxie-Plus up to date."));
 
     QGridLayout *layout = new QGridLayout;
     layout->setSpacing(3);
@@ -536,8 +536,8 @@ CSBUpdate::CSBUpdate(QWidget *parent)
     int row = 0;
     int rows = 4;
 
-    m_pUpdate = new QCheckBox(tr("Regularly Check for all udpates to Sandboxie-Plus and optional components"));
-    m_pUpdate->setToolTip(tr("Let sandboxie regularly check for latest updates."));
+    m_pUpdate = new QCheckBox(tr("Regularly check for all updates to Sandboxie-Plus and optional components"));
+    m_pUpdate->setToolTip(tr("Let Sandboxie regularly check for latest updates."));
     layout->addWidget(m_pUpdate, row++, 0, 1, rows);
     connect(m_pUpdate, &QCheckBox::toggled, this, &CSBUpdate::UpdateOptions);
     registerField("updateAll", m_pUpdate);
@@ -554,7 +554,7 @@ CSBUpdate::CSBUpdate(QWidget *parent)
     connect(m_pVersion, &QCheckBox::toggled, this, &CSBUpdate::UpdateOptions);
     registerField("updateApp", m_pVersion);
 
-    m_pChanelInfo = new QLabel(tr("Sellect in which update channel to look for new Sandboxie-Plus builds:"));
+    m_pChanelInfo = new QLabel(tr("Select in which update channel to look for new Sandboxie-Plus builds:"));
     m_pChanelInfo->setMinimumHeight(20);
     layout->addWidget(m_pChanelInfo, row++, 1, 1, rows-1);
 
@@ -583,23 +583,23 @@ CSBUpdate::CSBUpdate(QWidget *parent)
     connect(pInsiderInfo, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
     layout->addWidget(pInsiderInfo, row++, 3, 1, 1);
 
-    //m_pTemplates = new QCheckBox(tr("Keep Compatybility Templates up to date"));
-    //m_pTemplates->setToolTip(tr("Check for latest compatybility tempaltes."));
+    //m_pTemplates = new QCheckBox(tr("Keep Compatibility Templates up to date"));
+    //m_pTemplates->setToolTip(tr("Check for latest compatibility templates."));
     //layout->addWidget(m_pTemplates, row++, 1, 1, rows-1);
     //registerField("updateCompat", m_pTemplates);
 
-    m_pHotfixes = new QCheckBox(tr("Keep Compatybility Templates up to date and apply hotfixes"));
-    m_pHotfixes->setToolTip(tr("Check for latest compatybility tempaltes and hotfixes."));
+    m_pHotfixes = new QCheckBox(tr("Keep Compatibility Templates up to date and apply hotfixes"));
+    m_pHotfixes->setToolTip(tr("Check for latest compatibility templates and hotfixes."));
     layout->addWidget(m_pHotfixes, row++, 1, 1, rows-1);
     registerField("applyHotfixes", m_pHotfixes);
 
     m_pIssues = new QCheckBox(tr("Get the latest Scripts for the Troubleshooting Wizard"));
-    m_pIssues->setToolTip(tr("Check for latest troubleshooting scripts for the troubleshooting wizars."));
+    m_pIssues->setToolTip(tr("Check for latest troubleshooting scripts for the troubleshooting wizard."));
     layout->addWidget(m_pIssues, row++, 1, 1, rows-1);
     registerField("updateIssues", m_pIssues);
 
     m_pAddons = new QCheckBox(tr("Keep the list of optional Addon components up to date"));
-    m_pAddons->setToolTip(tr("Check for latest avaialble addons."));
+    m_pAddons->setToolTip(tr("Check for latest available addons."));
     layout->addWidget(m_pAddons, row++, 1, 1, rows-1);
     registerField("updateAddons", m_pAddons);
 
@@ -627,7 +627,7 @@ void CSBUpdate::initializePage()
     m_pUpdate->setChecked(true);
     m_pStable->setChecked(true);
 
-    m_pBottomLabel->setVisible(!g_CertInfo.valid || g_CertInfo.expired);
+    m_pBottomLabel->setVisible(!g_CertInfo.active || g_CertInfo.expired);
 
     UpdateOptions();
 }
@@ -651,7 +651,7 @@ void CSBUpdate::UpdateOptions()
 
     m_pStable->setEnabled(m_pVersion->isChecked());
     m_pPreview->setEnabled(m_pVersion->isChecked());
-    m_pInsider->setEnabled(g_CertInfo.insider && m_pVersion->isChecked());
+    m_pInsider->setEnabled(CERT_IS_INSIDER(g_CertInfo) && m_pVersion->isChecked());
 
     m_pHotfixes->setEnabled(m_pVersion->isChecked());
 }

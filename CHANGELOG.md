@@ -7,11 +7,44 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
-
-## [1.10.0 / 5.65.0] - 2023-07-??
+## [1.10.1 / 5.65.1] - 2023-07-??
 
 ### Added
+- added UI option to change ini editor [#3116](https://github.com/sandboxie-plus/Sandboxie/issues/3116)
+- added Separate protection against box removal and content deletion [#3104] (https://github.com/sandboxie-plus/Sandboxie/issues/3104)
+- added Add "auto scroll" in sbie messages, resource monitor, api call log context menu [#393](https://github.com/sandboxie-plus/Sandboxie/issues/393)
+
+### Changed
+- reworked Nt Object Handle handling
+- "OpenClipboard=n" now is also implemented in user mode, making it work for green boxes
+- changed Delete V2 scheme to use drive letters in FilePaths.dat (remains backwards compatible with using NT Paths) [#3053](https://github.com/sandboxie-plus/Sandboxie/issues/3053)
+
+### Fixed
+- fixed "Disable Security Isolation" causes a game to stop playing audio [#2893](https://github.com/sandboxie-plus/Sandboxie/issues/2893)
+- fixed NtQueryDirectoryObject not implemented [#2734](https://github.com/sandboxie-plus/Sandboxie/issues/2734)
+- fixed issue with working directory for run menu entries
+- fixed inpoper global symlink in sandboxed namespace [#3112](https://github.com/sandboxie-plus/Sandboxie/issues/3112)
+- fixed 'Addon already installed!' error when clicking 'Show Stack Trace' [#3114](https://github.com/sandboxie-plus/Sandboxie/issues/3114)
+- fixed existing BoxNameTitle=process.exe,- removed when toggling other options [#3106](https://github.com/sandboxie-plus/Sandboxie/issues/3106)
+- fixed asynchroniusly assigned PCA job not being properly detected [#1919](https://github.com/sandboxie-plus/Sandboxie/issues/1919)
+- fixed incompatybility with first windows 10 release [#3117](https://github.com/sandboxie-plus/Sandboxie/issues/3117)
+- fixed Remove Sandbox only deletes the contents of the sandbox when an application is running in the sandbox [#3118](https://github.com/sandboxie-plus/Sandboxie/issues/3118)
+- fixed crash issue with not peroeprly termianted script engine [#3120](https://github.com/sandboxie-plus/Sandboxie/issues/3120)
+- fixed ImDisk under Sandboxie supervision causes SBIE2337 and sometimes BSoD [#1092)(https://github.com/sandboxie-plus/Sandboxie/issues/1092)
+- fixed Snapshots don't merge duplicate directory junctions [#3016](https://github.com/sandboxie-plus/Sandboxie/issues/3016)
+- fixed Snapshot related issue when using Delete V2 rename functionality
+- fixed issue with Delete V2 when using network shares
+- fixed issue when using "UseVolumeSerialNumbers=y" with accessing drive roots
+- fixed Remove-Snapshot resurrects deleted files when using Delete V2 [#3015](https://github.com/sandboxie-plus/Sandboxie/issues/3015)
+
+
+
+
+
+## [1.10.0 / 5.65.0] - 2023-07-12
+
+### Added
+- added box scripting engine to make SandMan more flexible
 - added scriptable troubleshooting wizard [#1875](https://github.com/sandboxie-plus/Sandboxie/issues/1875)
 - added addon manager which helps to install additional and third-party components, available addons:
   - [ImDisk Toolkit](https://sourceforge.net/projects/imdisk-toolkit/) - used to create RAM Disks and other virtual drives
@@ -21,15 +54,31 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - [SbieHide.dll](https://github.com/VeroFess/SbieHide) - a third-party DLL to hide SbieDll.dll
   - [LogAPI.dll](https://bsa.isoftware.nl/) - an API logging library used for Buster Sandbox Analyzer
 - added option to set the update interval to 1, 7, 14 and 30 days
+- added `What's new in Sandboxie-Plus` dialog in SbieCtrl.exe to praise the new features of the Plus UI
+  - Note: this is shown after the installation of Sandboxie Classic
+- added "fixdacls" command to KmdUtil.exe, it repairs broken DACL entries on the Sandboxie folder to fix issues where SbieDll.dll fails to load
+- added option to hide Sandboxie's own processes [#3054](https://github.com/sandboxie-plus/Sandboxie/issues/3054)
+- added functionality to cache Sandboxie messages within the Plus UI [#2920](https://github.com/sandboxie-plus/Sandboxie/issues/2920)
+- added button to invoke troubleshooting wizard directly from the SBIE message popup
 
 ### Changed
 - setup wizard has now a dedicated update configuration page
+  - this page will be shown once for all users who do not have updates enabled
 - split the support page into Sandboxie Support and Sandboxie Updater tabs
 - when the troubleshooting.7z file is available, the script engine will be used to match compatibility templates
   - this allows a better granularity in template selection by using the AppCompatibility.js script
+- reworked low level code injection mechanism to improve flexibility and debugging
+  - the main injection detour code is now written in C instead of Assembler and can properly report SbieDll.dll loading errors as SBIE2181
+- improved session agent startup to be more flexible
+- improved SBIEMSG help handling, the link now contains message details allowing to point to a more exact document (if available)
+- updated certificate validation code
 
 ### Fixed
 - fixed uninstall issue in the Sandboxie Classic installer [d1863ff](https://github.com/sandboxie-plus/Sandboxie/commit/d1863ffadfe105c695de71c9e841c2fd568116fe)
+- added workaround for Chrome not starting on Windows 11 with KB5027231 [#3040](https://github.com/sandboxie-plus/Sandboxie/issues/3040)
+- improved compatibility with procmon/stack traces for debug builds
+- fixed issue with non-standard command lines
+- fixed online updater not checking every 7 days, but daily
 
 ### Removed
 - cleaned up duplicate code (thanks lmou523) [#3067](https://github.com/sandboxie-plus/Sandboxie/pull/3067)

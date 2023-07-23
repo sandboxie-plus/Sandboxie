@@ -3476,7 +3476,7 @@ Wilt u Sandboxie-Plus nu downloaden?
 .
 
 6002;txt;01
-Bezoek <a ID="whats_new">sandboxie-plus.com</a> voor meer informatie over de nieuwe functies van Sanboxie-Plus,
+Bezoek <a ID="whats_new">sandboxie-plus.com</a> voor meer informatie over de nieuwe functies van Sandboxie-Plus,
 of klik <a ID="upgrade">hier</a> om de laatste versie van het Sandboxie-Plus-installatiebestand te downloaden.
 .
 

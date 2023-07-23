@@ -471,7 +471,7 @@ SB_PROGRESS CSandBox::RemoveSnapshot(const QString& ID)
 
 	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
 	if (ChildIDs.count() == 1 || IsCurrent)
-		QtConcurrent::run(CSandBox::MergeSnapshotAsync, pProgress, m_FilePath, ID, IsCurrent ? QString() : ChildIDs.first());
+		QtConcurrent::run(CSandBox::MergeSnapshotAsync, pProgress, m_FilePath, ID, IsCurrent ? QString() : ChildIDs.first(), qMakePair(m_Name, m_pAPI));
 	else
 		QtConcurrent::run(CSandBox::DeleteSnapshotAsync, pProgress, m_FilePath, ID);
 	return SB_PROGRESS(OP_ASYNC, pProgress);
@@ -549,7 +549,11 @@ SB_STATUS CSandBox__CleanupSnapshot(const QString& Folder)
 	return SB_OK;
 }
 
-void CSandBox::MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QString& BoxPath, const QString& TargetID, const QString& SourceID)
+// path flags, saved to file
+#define FILE_DELETED_FLAG       0x0001
+#define FILE_RELOCATION_FLAG    0x0002
+
+void CSandBox::MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QString& BoxPath, const QString& TargetID, const QString& SourceID, const QPair<const QString, class CSbieAPI*>& params)
 {
 	//
 	// Targe is to be removed;
@@ -563,8 +567,82 @@ void CSandBox::MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QStri
 	QString SourceFolder = IsCurrent ? BoxPath : (BoxPath + "\\snapshot-" + SourceID);
 	QString TargetFolder = BoxPath + "\\snapshot-" + TargetID;
 
+	auto GetBoxedPath = [BoxPath, params](const QString& Path, const QString& TargetFolder) {
+		QString SubPath = params.second->GetBoxedPath(params.first, Path).mid(BoxPath.length());
+		return TargetFolder + SubPath;
+	};
+
 	SB_STATUS Status = SB_OK;
-	
+
+	// apply source FilePaths.dat on the targetfolder
+	if (QFile::exists(SourceFolder + "\\FilePaths.dat")) 
+	{
+		QFile datSource(SourceFolder + "\\FilePaths.dat");
+		if (datSource.open(QFile::ReadOnly)) 
+		{
+			QStringList datData = QString::fromWCharArray((wchar_t*)datSource.readAll().data(), datSource.size() / sizeof(wchar_t)).split("\n");
+
+			// process relocations
+			foreach (const QString& Line, datData) {
+				QStringList Data = Line.trimmed().split("|");
+
+				QString Path = Data[0];
+				if (Path.isEmpty()) continue;
+				Path = GetBoxedPath(Path, TargetFolder);
+				int Flags = Data.size() >= 2 ? Data[1].toInt() : 0;
+
+				if (Flags & FILE_RELOCATION_FLAG)
+				{
+					QString Relocation = Data.size() >= 3 ? GetBoxedPath(Data[2], TargetFolder) : QString();
+					
+					SNtObject ntSrc(L"\\??\\" + Relocation.toStdWString());
+
+					if (NtIo_FileExists(&ntSrc.attr)) {
+
+						SNtObject ntOld(L"\\??\\" + Path.toStdWString());
+
+						NTSTATUS status = NtIo_DeleteFolderRecursively(&ntOld.attr, [](const WCHAR* info, void* param) {
+							CSbieProgress* pProgress = (CSbieProgress*)param;
+							pProgress->ShowMessage(CSandBox::tr("Deleting folder: %1").arg(QString::fromWCharArray(info)));
+							return !pProgress->IsCanceled();
+						}, pProgress.data());
+
+						if (NT_SUCCESS(status))
+						{
+							QStringList PathX = Path.split("\\");
+							QString Name = PathX.takeLast();
+							SNtObject ntDest(L"\\??\\" + PathX.join("\\").toStdWString());
+
+							status = NtIo_RenameFolder(&ntSrc.attr, &ntDest.attr, Name.toStdWString().c_str());
+						}
+					}
+				}
+			}
+
+			// process deletions
+			foreach (const QString& Line, datData) {
+				QStringList Data = Line.trimmed().split("|");
+
+				QString Path = Data[0];
+				if (Path.isEmpty()) continue;
+				Path = GetBoxedPath(Path, TargetFolder);
+				int Flags = Data.size() >= 2 ? Data[1].toInt() : 0;
+
+				if (Flags & FILE_DELETED_FLAG)
+				{
+					SNtObject ntPath(L"\\??\\" + Path.toStdWString());
+
+					NTSTATUS status = NtIo_DeleteFile(ntPath, [](const WCHAR* info, void* param) {
+						CSbieProgress* pProgress = (CSbieProgress*)param;
+						pProgress->ShowMessage(CSandBox::tr("Deleting: %1").arg(QString::fromWCharArray(info)));
+						return !pProgress->IsCanceled(); 
+					}, pProgress.data());
+				}
+			}
+		}
+	}
+
+	// merge source folders to the target snapshot
 	foreach(const QString& BoxSubFolder, CSandBox__BoxSubFolders) 
 	{
 		Status = CSandBox__MergeFolders(pProgress, TargetFolder + "\\" + BoxSubFolder, SourceFolder + "\\" + BoxSubFolder);
@@ -576,6 +654,32 @@ void CSandBox::MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QStri
 
 	if(!Status.IsError())
 	{
+		// merge DeleteV2 file entries
+		if (QFile::exists(SourceFolder + "\\FilePaths.dat")) {
+			QFile datSource(SourceFolder + "\\FilePaths.dat");
+			if (datSource.open(QFile::ReadOnly)) {
+				QFile datTarget(TargetFolder + "\\FilePaths.dat");
+				if (datTarget.open(QFile::ReadWrite)) {
+					// merge with target
+					datTarget.seek(datTarget.size());
+					datTarget.write(datSource.readAll());
+					// remove source
+					datSource.close();
+					datSource.remove();
+				}
+			}
+		}
+
+		// copy other data files from source to target
+		foreach(const SBoxDataFile& BoxDataFile, CSandBox__BoxDataFiles)
+		{
+			if (!QFile::exists(SourceFolder + "\\" + BoxDataFile.Name))
+				continue;
+
+			QFile::remove(TargetFolder + "\\" + BoxDataFile.Name);
+			QFile::rename(SourceFolder + "\\" + BoxDataFile.Name, TargetFolder + "\\" + BoxDataFile.Name);
+		}
+
 		if (IsCurrent)
 		{
 			// move all folders out of the snapshot to root
@@ -584,6 +688,12 @@ void CSandBox::MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QStri
 				Status = CSandBox__MoveFolder(TargetFolder + "\\" + BoxSubFolder, SourceFolder, BoxSubFolder);
 				if (Status.IsError())
 					break;
+			}
+
+			// move all data files out of the snapshot to root
+			foreach(const SBoxDataFile& BoxDataFile, CSandBox__BoxDataFiles)
+			{
+				QFile::rename(TargetFolder + "\\" + BoxDataFile.Name, SourceFolder + "\\" + BoxDataFile.Name);
 			}
 
 			// delete snapshot rest
@@ -595,7 +705,7 @@ void CSandBox::MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QStri
 			// delete rest of source snpshot
 			Status = CSandBox__CleanupSnapshot(SourceFolder);
 
-			// rename target snapshot o source snapshot
+			// rename target snapshot to source snapshot
 			if (!Status.IsError())
 				Status = CSandBox__MoveFolder(TargetFolder, BoxPath, "snapshot-" + SourceID);
 		}

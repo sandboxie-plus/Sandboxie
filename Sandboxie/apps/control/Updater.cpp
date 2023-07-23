@@ -31,7 +31,9 @@
 #include "common/my_version.h"
 #include "common/json/JSON.h"
 #include "common/win32_ntddk.h"
+#include "core/drv/api_defs.h"
 
+#define UPDATE_INTERVAL (7 * 24 * 60 * 60)
 
 //---------------------------------------------------------------------------
 // Variables
@@ -269,10 +271,59 @@ BOOLEAN CUpdater::QueryUpdateData(UPDATER_DATA* Context)
 #endif
 		StrLang, Context->Manual ? L"0" : L"1");
 
+	if (!Context->Manual)
+		Path.AppendFormat(L"&interval=%d", UPDATE_INTERVAL);
+
 	CString update_key;
-	CSbieIni::GetInstance().GetText(_GlobalSettings, L"UpdateKey", update_key);
+	//CSbieIni::GetInstance().GetText(_GlobalSettings, L"UpdateKey", update_key);
+
+    WCHAR CertPath[MAX_PATH];
+    SbieApi_GetHomePath(NULL, 0, CertPath, MAX_PATH);
+    wcscat(CertPath, L"\\Certificate.dat");
+	HANDLE hFile = CreateFile(CertPath, FILE_GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	if (hFile != INVALID_HANDLE_VALUE) {
+		char CertData[0x1000];
+		DWORD bytesRead = 0;
+		if (ReadFile(hFile, CertData, sizeof(CertData), &bytesRead, NULL)) {
+			CertData[bytesRead] = 0;
+
+			CString sCertData = CString(CertData);
+			int pos = sCertData.Find(L"UPDATEKEY:");
+			if (pos != -1) {
+				pos += 10;
+				int end = sCertData.Find(L"\n", pos);
+				if (end == -1) end = sCertData.GetLength();
+				update_key = sCertData.Mid(pos, end - pos).Trim();
+			}
+		}
+		CloseHandle(hFile);
+	}
+
 	if (!update_key.IsEmpty())
-		Path += L"&update_key=" + update_key;
+		update_key += "-";
+
+    QWORD RandID = 0;
+    SbieApi_Call(API_GET_SECURE_PARAM, 3, L"RandID", (ULONG_PTR)&RandID, sizeof(RandID));
+    if (RandID == 0) {
+		srand(GetTickCount());
+        RandID = QWORD(rand() & 0xFFFF) | (QWORD(rand() & 0xFFFF) << 16) | (QWORD(rand() & 0xFFFF) << 32) | (QWORD(rand() & 0xFFFF) << 48);
+        SbieApi_Call(API_SET_SECURE_PARAM, 3, L"RandID", (ULONG_PTR)&RandID, sizeof(RandID));
+    }
+
+	CString Section;
+    CString UserName;
+    BOOL    IsAdmin;
+	CSbieIni::GetInstance().GetUser(Section, UserName, IsAdmin);
+	DWORD Hash = wcstoul(Section.Mid(13), NULL, 16);
+
+	QWORD HashID = RandID ^ (QWORD((Hash & 0xFFFF) ^ ((Hash >> 16) & 0xFFFF)) << 48); // fold the hash in half and xor it with the first 16 bit of RandID
+
+	wchar_t sHash[17];
+	wsprintf(sHash, L"%08X%08X", DWORD(HashID >> 32), DWORD(HashID));
+
+	update_key += sHash;
+
+	Path += L"&update_key=" + update_key;
 
 	if (!DownloadUpdateData(L"sandboxie-plus.com", Path, &jsonString, NULL)) {
 		Context->ErrorCode = GetLastError();
@@ -507,7 +558,7 @@ ULONG CUpdater::UpdaterServiceThread(void *lpParameter)
 			__int64 NextUpdateCheck;
 			CUserSettings::GetInstance().GetNum64(_NextUpdateCheck, NextUpdateCheck, 0);
 			if (NextUpdateCheck != -1)
-				CUserSettings::GetInstance().SetNum64(_NextUpdateCheck, time(NULL) + 7 * 24 * 60 * 60);
+				CUserSettings::GetInstance().SetNum64(_NextUpdateCheck, time(NULL) + UPDATE_INTERVAL);
 
 			if (pContext->Manual)
 				CMyApp::MsgBox(NULL, MSG_3629, MB_OK);

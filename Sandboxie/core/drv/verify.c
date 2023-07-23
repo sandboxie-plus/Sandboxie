@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 wj32
- * Copyright (C) 2021 David Xanatos, xanasoft.com
+ * Copyright (C) 2021-2023 David Xanatos, xanasoft.com
  *
  * Process Hacker is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -481,27 +481,11 @@ _FX LONGLONG KphGetDateInterval(CSHORT days, CSHORT months, CSHORT years)
     return ((LONGLONG)days + (LONGLONG)months * 30ll + (LONGLONG)years * 365ll) * 24ll * 3600ll * 10000000ll; // 100ns steps -> 1sec
 }
 
-#define SOFTWARE_NAME L"Sandboxie-Plus"
+#include "verify.h"
 
-union _SCertInfo {
-    ULONGLONG	State;
-    struct {
-        ULONG
-            valid     : 1,      // certificate is active
-            expired   : 1,      // certificate is expired but may be active
-            outdated  : 1,      // certificate is expired, not anymore valid for the current build
-            business  : 1,      // certificate is suitable for business use
-            evaluation: 1,      // evaluation certificate
-            grace_period: 1,    // the certificate is expired and or outdated but we keep it valid for 1 extra month to allof wor a seamless renewal
-            reservd_1 : 2,
-            reservd_2 : 8,
-            reservd_3 : 8,
-            reservd_4 : 8;
-        ULONG expirers_in_sec;
-    };
-} Verify_CertInfo = {0};
+SCertInfo Verify_CertInfo = { 0 };
 
-_FX NTSTATUS KphValidateCertificate(void)
+_FX NTSTATUS KphValidateCertificate()
 {
     BOOLEAN CertDbg = FALSE;
 
@@ -689,7 +673,7 @@ _FX NTSTATUS KphValidateCertificate(void)
 
     if (NT_SUCCESS(status)) {
 
-        Verify_CertInfo.valid = 1;
+        Verify_CertInfo.active = 1;
 
         if(CertDbg) DbgPrint("Sbie Cert type: %S-%S\n", type, level);
 
@@ -722,89 +706,115 @@ _FX NTSTATUS KphValidateCertificate(void)
             level = NULL;
         }
 
-        // Checks if the certificate is within its validity period, otherwise it has no effect except for UI notification
-#define TEST_CERT_DATE(days, months, years) \
-            if ((cert_date.QuadPart + KphGetDateInterval(days, months, years)) < LocalTime.QuadPart){ \
-                Verify_CertInfo.expired = 1; \
-            } \
-            Verify_CertInfo.expirers_in_sec = (ULONG)(((cert_date.QuadPart + KphGetDateInterval(days, months, years)) - LocalTime.QuadPart) / 10000000ll); // 100ns steps -> 1sec
+        LARGE_INTEGER expiration_date = { 0 };
 
-        // certs with a validity >= 3 months get 1 extra month of functionality
-#define TEST_GRACE_PERIODE(days, months, years) \
-                if (months >= 3 || years > 0){ \
-                    if ((cert_date.QuadPart + KphGetDateInterval(days, months + 1, years)) >= LocalTime.QuadPart) \
-                        Verify_CertInfo.grace_period = 1; \
-                } \
-
-        // Check if the certificate is valid for the current build, failing this locks features out
-#define TEST_VALIDITY(days, months, years) \
-            TEST_CERT_DATE(days, months, years) \
-            if ((cert_date.QuadPart + KphGetDateInterval(days, months, years)) < BuildDate.QuadPart){ \
-                Verify_CertInfo.outdated = 1; \
-                TEST_GRACE_PERIODE(days, months, years) \
-                if(!Verify_CertInfo.grace_period){ \
-                    Verify_CertInfo.valid = 0; \
-                    status = STATUS_ACCOUNT_EXPIRED; \
-                } \
-            }
-
-        // Check if the certificate is expired, failing this locks features out
-#define TEST_EXPIRATION(days, months, years) \
-            TEST_CERT_DATE(days, months, years) \
-            if(Verify_CertInfo.expired == 1) { \
-                TEST_GRACE_PERIODE(days, months, years) \
-                if(!Verify_CertInfo.grace_period){ \
-                    Verify_CertInfo.valid = 0; \
-                    status = STATUS_ACCOUNT_EXPIRED; \
-                } \
-            }
-
-
-        if (type && _wcsicmp(type, L"CONTRIBUTOR") == 0) {
-            // forever - nothing to check here
+        if (!type) // type is mandatory 
+            ;
+        else if (_wcsicmp(type, L"CONTRIBUTOR") == 0) {
+            Verify_CertInfo.type = eCertContributor;
+            Verify_CertInfo.level = eCertMaxLevel;
+        } else if (_wcsicmp(type, L"ETERNAL") == 0) {
+            Verify_CertInfo.type = eCertEternal;
+            Verify_CertInfo.level = eCertMaxLevel;
+        } else if (_wcsicmp(type, L"BUSINESS") == 0)
+            Verify_CertInfo.type = eCertBusiness;
+        else if (_wcsicmp(type, L"EVALUATION") == 0 || _wcsicmp(type, L"TEST") == 0)
+            Verify_CertInfo.type = eCertEvaluation;
+        else if (_wcsicmp(type, L"SUBSCRIPTION") == 0)
+            Verify_CertInfo.type = eCertSubscription;
+        else if (_wcsicmp(type, L"FAMILY") == 0)
+            Verify_CertInfo.type = eCertFamily;
+        // patreon >>>
+        else if (wcsstr(type, L"PATREON") != NULL) // TYPE: [CLASS]_PATREON-[LEVEL]
+        {    
+            if(_wcsnicmp(type, L"GREAT", 5) == 0)
+                Verify_CertInfo.type = eCertGreatPatreon;
+            else if (_wcsnicmp(type, L"ENTRY", 5) == 0) { // new patreons get only 3 montgs for start
+                Verify_CertInfo.type = eCertEntryPatreon;
+                expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval(0, 3, 0);
+            } else
+                Verify_CertInfo.type = eCertPatreon;
+            
         }
-        else if (type && _wcsicmp(type, L"BUSINESS") == 0) {
-            Verify_CertInfo.business = 1;
-            if (level) { // in months
-                TEST_EXPIRATION(0, (CSHORT)_wtoi(level), 0);
-            }
-            else { // 1 year default
-                TEST_EXPIRATION(0, 0, 1);
-            }
+        // <<< patreon 
+        else //if (_wcsicmp(type, L"PERSONAL") == 0 || _wcsicmp(type, L"SUPPORTER") == 0)
+        {
+            Verify_CertInfo.type = eCertPersonal;
         }
-        else if (type && _wcsicmp(type, L"EVALUATION") == 0) {
-            Verify_CertInfo.evaluation = 1;
-            // evaluation
-            if (level) { // in days
-                TEST_EXPIRATION((CSHORT)_wtoi(level), 0, 0);
-            }
-            else { // 5 days default
-                TEST_EXPIRATION(5, 0, 0);
-            }
+
+        if(CertDbg)     DbgPrint("Sbie Cert type: %X\n", Verify_CertInfo.type);
+
+        if (CERT_IS_TYPE(Verify_CertInfo, eCertEvaluation))
+        {
+            expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval((CSHORT)(level ? _wtoi(level) : 7), 0, 0); // x days, default 7
+            Verify_CertInfo.level = eCertAdvanced;
         }
-        else /*if (!type || _wcsicmp(type, L"PERSONAL") == 0 || _wcsicmp(type, L"PATREON") == 0 || _wcsicmp(type, L"SUPPORTER") == 0) */ {
-            // persistent
+        else if (level && _wcsicmp(type, L"STANDARD") == 0) 
+            Verify_CertInfo.level = eCertStandard;
+        else if (level && _wcsicmp(type, L"ADVANCED") == 0) 
+            Verify_CertInfo.level = eCertAdvanced;
+        // scheme 1.1 >>>
+        else if (CERT_IS_TYPE(Verify_CertInfo, eCertPersonal) || CERT_IS_TYPE(Verify_CertInfo, eCertPatreon))
+        {
             if (level && _wcsicmp(level, L"HUGE") == 0) {
-                // 
-            } 
-            else if (level && _wcsicmp(level, L"LARGE") == 0 && cert_date.QuadPart < KphGetDate(1,04,2022)) { // valid for all builds released with 2 years
-                TEST_CERT_DATE(0, 0, 2); // no real expiration just ui reminder - old certs
+                Verify_CertInfo.type = eCertEternal;
+                Verify_CertInfo.level = eCertMaxLevel;
             }
-            else if (level && _wcsicmp(level, L"LARGE") == 0) { // valid for all builds released with 2 years
-                TEST_VALIDITY(0, 0, 2);
+            else if (level && _wcsicmp(level, L"LARGE") == 0) { // 2 years - personal
+                Verify_CertInfo.level = eCertAdvanced;
+                expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval(0, 0, 2); // 2 years
             }
-            else if (level && _wcsicmp(level, L"MEDIUM") == 0) { // valid for all builds released with 1 year 
-                TEST_VALIDITY(0, 0, 1);
+            else if (level && _wcsicmp(level, L"MEDIUM") == 0) { // 1 year - personal
+                Verify_CertInfo.level = eCertStandard;
             }
-            // subscriptions
-            else if (level && _wcsicmp(level, L"TEST") == 0) { // test certificate 5 days only
-                TEST_EXPIRATION(5, 0, 0);
+            else if (level && _wcsicmp(level, L"ENTRY") == 0) { // PATREON-ENTRY new patreons get only 3 montgs for start
+                Verify_CertInfo.level = eCertStandard;
+                if(CERT_IS_TYPE(Verify_CertInfo, eCertPatreon))
+                    Verify_CertInfo.type = eCertEntryPatreon;
+                expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval(0, 3, 0);
             }
-            else if (level && _wcsicmp(level, L"ENTRY") == 0) { // patreon entry level, first 3 months, later longer
-                TEST_EXPIRATION(0, 3, 0);
+            else if (level && _wcsicmp(level, L"SMALL") == 0) { // 1 year - subscription
+                Verify_CertInfo.level = eCertStandard;
+                Verify_CertInfo.type = eCertSubscription;
             }
-            else /*if (!level || _wcsicmp(level, L"SMALL") == 0)*/ { // valid for 1 year
-                TEST_EXPIRATION(0, 0, 1);
+            else
+                Verify_CertInfo.level = eCertStandard;
+        }
+        // <<< scheme 1.1
+        
+        if(CertDbg)     DbgPrint("Sbie Cert level: %X\n", Verify_CertInfo.level);
+
+        if (CERT_IS_TYPE(Verify_CertInfo, eCertEternal))
+            expiration_date.QuadPart = -1; // at the end of time (never)
+        else if(!expiration_date.QuadPart) 
+            expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval(0, 0, 1); // default 1 year, unless set differently already
+
+        // check if this is a subscription type certificate
+        BOOLEAN isSubscription = CERT_IS_SUBSCRIPTION(Verify_CertInfo);
+
+        if (expiration_date.QuadPart != -1) 
+        {
+            // check if this certificate is expired
+            if (expiration_date.QuadPart < LocalTime.QuadPart)
+                Verify_CertInfo.expired = 1;
+            Verify_CertInfo.expirers_in_sec = (ULONG)((expiration_date.QuadPart - LocalTime.QuadPart) / 10000000ll); // 100ns steps -> 1sec
+
+            // check if a non subscription type certificate is valid for the current build
+            if (!isSubscription && expiration_date.QuadPart < BuildDate.QuadPart)
+                Verify_CertInfo.outdated = 1;
+        }
+
+        // check if the certificate is valid
+        if (isSubscription ? Verify_CertInfo.expired : Verify_CertInfo.outdated) 
+        {
+            if (!CERT_IS_TYPE(Verify_CertInfo, eCertEvaluation)) { // non eval certs get 1 month extra
+                if (expiration_date.QuadPart + KphGetDateInterval(0, 1, 0) >= LocalTime.QuadPart)
+                    Verify_CertInfo.grace_period = 1;
+            }
+
+            if (!Verify_CertInfo.grace_period) {
+                Verify_CertInfo.active = 0;
+                status = STATUS_ACCOUNT_EXPIRED;
             }
         }
     }

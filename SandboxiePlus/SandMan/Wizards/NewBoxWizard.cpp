@@ -486,7 +486,7 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
     QCheckBox* pImageProtection = new QCheckBox(tr("Prevent sandboxes programs installed on host from loading dll's from the sandbox"));
     pImageProtection->setToolTip(tr("This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them."));
     pImageProtection->setChecked(theConf->GetBool("BoxDefaults/ImagesProtection", false));
-    pImageProtection->setEnabled(g_CertInfo.valid);
+    pImageProtection->setEnabled(g_CertInfo.active);
     layout->addWidget(pImageProtection, row++, 1, 1, 3);
     registerField("imagesProtection", pImageProtection);
 

@@ -5,6 +5,18 @@
 #include "../Windows/SettingsWindow.h"
 #include "../QSbieAPI/SbieUtils.h"
 
+CSbieObject::CSbieObject(QObject* parent) 
+	: QObject(parent) 
+{ 
+	m_TraceStarted = false; 
+}
+
+CSbieObject::~CSbieObject()
+{
+	if(m_TraceStarted)
+		theAPI->EnableMonitor(false);
+}
+
 QJSValue JSbieObject::getVersion() 
 {
     return CSandMan::GetVersion();
@@ -128,6 +140,9 @@ CIniObject* CSbieObject::GetConf()
 
 bool CSbieObject::SetupTrace(const QVariantMap& Options)
 {
+	if (theAPI->IsMonitoring())
+		return SB_OK; // already started
+	m_TraceStarted = true;
 	SB_STATUS Status = theAPI->EnableMonitor(true);
 	return !Status.IsError();
 }
@@ -206,7 +221,7 @@ void CSbieObject::LogMessage(const QVariant& Message, bool bNotify)
 		theGUI->OnLogMessage(Message.toString(), bNotify);
 }
 
-bool JSbieObject::isCertValid()
+bool JSbieObject::testFeature(const QString& name)
 {
-	return g_CertInfo.valid;
+	return theAPI->GetFeatureStr().contains(name, Qt::CaseInsensitive);
 }

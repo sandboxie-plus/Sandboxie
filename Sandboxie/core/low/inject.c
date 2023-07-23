@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2022 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  */
 
 //---------------------------------------------------------------------------
-// Functions
+// inject
 //---------------------------------------------------------------------------
 
 #include <ntstatus.h>
@@ -28,12 +28,13 @@ typedef long NTSTATUS;
 #include "common/win32_ntddk.h"
 #include "common/defines.h"
 #include "lowdata.h"
-
+#include "core/drv/api_defs.h"
 
 //---------------------------------------------------------------------------
 // Functions
 //---------------------------------------------------------------------------
 
+_FX NTSTATUS SbieApi_LogMsg(ULONG64 pNtDeviceIoControlFile, ULONG64 api_device_handle, ULONG code, const WCHAR* text);
 _FX NTSTATUS SbieApi_DebugError(SBIELOW_DATA* data, ULONG error);
 
 UCHAR *FindDllExport(void *DllBase, const UCHAR *ProcName, ULONG *pErr);
@@ -45,10 +46,27 @@ static UCHAR *FindDllExport2(
 void* Hook_GetFFSTarget(UCHAR* SourceFunc);
 #endif
 
-static void InitInjectWow64(SBIELOW_DATA *data);
+//static void InitInjectWow64(SBIELOW_DATA *data);
 
 //---------------------------------------------------------------------------
 
+typedef NTSTATUS(*P_LdrLoadDll)(
+    WCHAR *PathString, ULONG *DllFlags,
+    UNICODE_STRING *ModuleName, HANDLE *ModuleHandle);
+
+typedef NTSTATUS (*P_LdrGetProcedureAddress)(
+    HANDLE ModuleHandle, ANSI_STRING *ProcName, ULONG ProcNum,
+    ULONG_PTR *Address);
+
+typedef NTSTATUS (*P_NtProtectVirtualMemory)(
+    HANDLE ProcessHandle, PVOID *BaseAddress,
+    PSIZE_T RegionSize, ULONG NewProtect, PULONG OldProtect);
+
+typedef NTSTATUS (*P_NtRaiseHardError)(
+    NTSTATUS ErrorStatus, ULONG NumberOfParameters, ULONG UnicodeBitMask,
+    ULONG_PTR *Parameters, ULONG ErrorOption, ULONG *ErrorReturn);
+
+//---------------------------------------------------------------------------
 
 #define SBIELOW_CALL(x) ((P_##x)&data->x##_code)
 
@@ -176,34 +194,135 @@ _FX UCHAR *FindDllExport2(
     return proc;
 }
 
-#ifdef _M_ARM64
 
 //---------------------------------------------------------------------------
-// MyGetProcedureAddress
+// DetourFunc
 //---------------------------------------------------------------------------
 
 
-_FX NTSTATUS MyGetProcedureAddress(HMODULE ModuleHandle, PANSI_STRING FunctionName, WORD Ordinal, PVOID*FunctionAddress, INJECT_DATA *inject)
+ULONG_PTR DetourFunc(INJECT_DATA *inject) 
 {
-    SBIELOW_DATA* data = (SBIELOW_DATA*)*(ULONG64*)inject;
+    //
+    // Note: this function is invoked from the detour code, hence when running in WoW64,
+    // the used instance of this function will be from the 32 bit version,
+    // in which case we are unable to use SBIELOW_CALL and need to have a
+    // pointer to the appropriate 32 bit function
+    // 
+    // Furthermore, on ARM64 the SBIELOW_DATA will be allocated past the 4 GB boundary 
+    // hence in 32 bit mode we can not access it, only INJECT_DATA is available
+    //
 
-    typedef (*P_LdrGetProcedureAddress)(HMODULE, PANSI_STRING, WORD, PVOID*);
-    NTSTATUS status = ((P_LdrGetProcedureAddress)inject->LdrGetProcAddr)(ModuleHandle, FunctionName, Ordinal, FunctionAddress);
+    NTSTATUS status;
+    UNICODE_STRING* pDllPath;
+    HANDLE ModuleHandle;
+    typedef VOID(*P_Dll_Ordinal1)(INJECT_DATA* inject);
+    P_Dll_Ordinal1 SbieDllOrdinal1;
+    void *RegionBase;
+    SIZE_T RegionSize;
+    ULONG OldProtect;
+
+#ifdef _WIN64
+    SBIELOW_DATA* data = (SBIELOW_DATA*)inject->sbielow_data;
+#endif
 
     //
-    // in ARM64EC mode unwrap the FFS and return the native function
+    // restore original function
     //
 
-    if (data->flags.is_arm64ec && status >= 0) {
-        *FunctionAddress = Hook_GetFFSTarget(*FunctionAddress);
-        if (!*FunctionAddress)
-            return STATUS_ENTRYPOINT_NOT_FOUND;
+    RegionBase = (void*)inject->RtlFindActCtx;
+#ifdef _WIN64
+#ifdef _M_ARM64
+    RegionSize = 16;
+    memcpy((void*)inject->RtlFindActCtx, inject->RtlFindActCtx_Bytes, 16);
+
+    SBIELOW_CALL(NtFlushInstructionCache)(
+        NtCurrentProcess(), (void*)inject->RtlFindActCtx, 16);
+#else
+    RegionSize = 12;
+    memcpy((void*)inject->RtlFindActCtx, inject->RtlFindActCtx_Bytes, 12);
+#endif
+
+    SBIELOW_CALL(NtProtectVirtualMemory)(
+        NtCurrentProcess(), &RegionBase, &RegionSize,
+        inject->RtlFindActCtx_Protect, &OldProtect);
+#else
+    RegionSize = 5;
+    memcpy((void*)inject->RtlFindActCtx, inject->RtlFindActCtx_Bytes, 5);
+
+    ((P_NtProtectVirtualMemory)inject->NtProtectVirtualMemory)(
+        NtCurrentProcess(), &RegionBase, &RegionSize,
+        inject->RtlFindActCtx_Protect, &OldProtect);
+#endif
+
+    //
+    // load kernel32.dll
+    //
+
+    pDllPath = (UNICODE_STRING*)&inject->KernelDll;
+
+    status = ((P_LdrLoadDll)inject->LdrLoadDll)(NULL, 0, pDllPath, &ModuleHandle);
+    
+    //
+    // load sbiedll.dll
+    //
+
+    if (status == 0) {
+
+        pDllPath = (UNICODE_STRING*)&inject->SbieDll;
+
+        status = ((P_LdrLoadDll)inject->LdrLoadDll)(NULL, 0, pDllPath, &ModuleHandle);
+    }
+
+    //
+    // get ordinal 1 from sbiedll
+    //
+
+    if (status == 0) {
+
+        status = ((P_LdrGetProcedureAddress)inject->LdrGetProcAddr)(ModuleHandle, NULL, 1, (ULONG_PTR*)&SbieDllOrdinal1);
+#ifdef _M_ARM64
+        //
+        // on ARM64EC we hook the native code, hence we need to obtain the address of the native ordinal 1 from our SbieDll.dll
+        // instead of the FFS sequence as given by NtGetProcedureAddress when in ARM64EC mode
+        //
+
+        if (data->flags.is_arm64ec && status >= 0) {
+            SbieDllOrdinal1 = (P_Dll_Ordinal1)Hook_GetFFSTarget((UCHAR*)SbieDllOrdinal1);
+            //if (!SbieDllOrdinal1)
+            //    status = STATUS_ENTRYPOINT_NOT_FOUND;
+        }
+#endif
+    }
+
+    //
+    // call ordinal 1 of sbiedll.dll
+    //
+
+    if (status == 0) {
+
+        SbieDllOrdinal1(inject);
+    }
+
+    //
+    // or report error if one occurred instead
+    //
+
+    else {
+
+        wchar_t text[] = { 0 };
+        SbieApi_LogMsg(inject->NtDeviceIoControlFile, inject->api_device_handle, 2181, text);
+
+        status = 0xC0000142; // = STATUS_DLL_INIT_FAILED
+        ULONG_PTR Parameters[1] = { (ULONG_PTR)pDllPath };
+        ULONG ErrorReturn;
+        ((P_NtRaiseHardError)inject->NtRaiseHardError)(
+            status | 0x10000000, // | FORCE_ERROR_MESSAGE_BOX
+            1, 1, Parameters, 1, &ErrorReturn);
     }
 
     return status;
 }
 
-#endif
 
 //---------------------------------------------------------------------------
 // InitInject
@@ -216,7 +335,7 @@ _FX void InitInject(SBIELOW_DATA *data, void *DetourCode)
     SYSCALL_DATA* syscall_data;
     INJECT_DATA *inject;
     SBIELOW_EXTRA_DATA *extra;
-    UCHAR *LdrCode, *MyHookCode;
+    UCHAR *HookTarget, *HookCode;
     void *RegionBase;
     SIZE_T RegionSize;
     ULONG OldProtect;
@@ -264,12 +383,12 @@ _FX void InitInject(SBIELOW_DATA *data, void *DetourCode)
         //ntdll_base = (void *)(ULONG_PTR)ntdll32_base;
 
         //
-        // (prior to Windows 8, the base address of ntdll32 is recorded
+        // (Prior to Windows 8, the base address of ntdll32 is recorded
         // in offset 0x036C of the KUSER_SHARED_DATA structure, which always
-        // has a fixed base address of 0x7FFE0000.  this is not available
+        // has a fixed base address of 0x7FFE0000. This is not available
         // in Windows 8, so we have to rely on the driver to track this
         // base address via Process_NotifyImage in core/drv/process.c.
-        // so we might as well use this approach for all 64-bit Windows.)
+        // So we might as well use this approach for all 64-bit Windows.)
         //
         //ULONG ntdll32_base = *(ULONG *)(0x7FFE0000 + 0x036C);
         //ntdll_base = (void *)(ULONG_PTR)ntdll32_base;
@@ -284,67 +403,65 @@ _FX void InitInject(SBIELOW_DATA *data, void *DetourCode)
     // and RtlFindActivationContextSectionString
     //
 
-    LdrCode = FindDllExport(ntdll_base,
-                    (UCHAR *)extra + extra->LdrLoadDll_offset, &uError);
-    if (!LdrCode) {
+    inject->LdrLoadDll = (ULONG_PTR)FindDllExport(ntdll_base,
+                            (UCHAR *)extra + extra->LdrLoadDll_offset, &uError);
+#ifdef _M_ARM64
+    if (inject->LdrLoadDll && data->flags.is_arm64ec)
+        inject->LdrLoadDll = (ULONG_PTR)Hook_GetFFSTarget((UCHAR*)inject->LdrLoadDll);
+#endif
+    if (!inject->LdrLoadDll) {
         SbieApi_DebugError(data, (0x01 << 4) | uError);
         return;
     }
-#ifdef _M_ARM64
-    if (data->flags.is_arm64ec)
-        LdrCode = Hook_GetFFSTarget(LdrCode);
-#endif
-    if (!LdrCode) {
-        SbieApi_DebugError(data, 0x01d);
-        return;
-    }
-    inject->LdrLoadDll = (ULONG_PTR)LdrCode;
 
-    LdrCode = FindDllExport(ntdll_base,
-                    (UCHAR *)extra + extra->LdrGetProcAddr_offset, &uError);
-    if (!LdrCode) {
+    inject->LdrGetProcAddr = (ULONG_PTR)FindDllExport(ntdll_base,
+                                (UCHAR *)extra + extra->LdrGetProcAddr_offset, &uError);
+#ifdef _M_ARM64
+    if (inject->LdrGetProcAddr && data->flags.is_arm64ec)
+        inject->LdrGetProcAddr = (ULONG_PTR)Hook_GetFFSTarget((UCHAR*)inject->LdrGetProcAddr);
+#endif
+    if (!inject->LdrGetProcAddr) {
         SbieApi_DebugError(data, (0x02 << 4) | uError);
         return;
     }
-#ifdef _M_ARM64
-    if (data->flags.is_arm64ec)
-        LdrCode = Hook_GetFFSTarget(LdrCode);
-#endif
-    if (!LdrCode) {
-        SbieApi_DebugError(data, 0x02d);
-        return;
-    }
-    inject->LdrGetProcAddr = (ULONG_PTR)LdrCode;
-
-#ifdef _M_ARM64
-
-    //
-    // on ARM64EC we hook the native code hence we need the custom MyGetProcedureAddress
-    // to obtain the address of the native original 1 from our SbieDll.dll
-    // instead of the FFS sequence as given by NtGetProcedureAddress
-    //
-
-    inject->MyGetProcAddr = (ULONG_PTR)MyGetProcedureAddress;
-#endif
 
 #ifdef _WIN64
     if (data->flags.is_wow64) {
-        LdrCode = FindDllExport(ntdll_base,
-            (UCHAR*)extra + extra->NtRaiseHardError_offset, &uError);
-        if (!LdrCode) {
+
+        inject->NtProtectVirtualMemory = (ULONG_PTR)FindDllExport(ntdll_base,
+                                                (UCHAR*)extra + extra->NtProtectVirtualMemory_offset, &uError);
+        if (!inject->NtProtectVirtualMemory) {
             SbieApi_DebugError(data, (0x03 << 4) | uError);
             return;
         }
-        inject->NtRaiseHardError = (ULONG_PTR)LdrCode;
+
+        inject->NtRaiseHardError = (ULONG_PTR)FindDllExport(ntdll_base,
+                                                (UCHAR*)extra + extra->NtRaiseHardError_offset, &uError);
+        if (!inject->NtRaiseHardError) {
+            SbieApi_DebugError(data, (0x04 << 4) | uError);
+            return;
+        }
+
+        inject->NtDeviceIoControlFile = (ULONG_PTR)FindDllExport(ntdll_base,
+                                                (UCHAR*)extra + extra->NtDeviceIoControlFile_offset, &uError);
+        if (!inject->NtDeviceIoControlFile) {
+            SbieApi_DebugError(data, (0x05 << 4) | uError);
+            return;
+        }
     }
     else
 #endif
+    {
+        //
+        // for ARM64EC we need native functions, FindDllExport can manage FFS
+        // however this does not work for syscalls, hence we use the native function directly
+        //
 
-    //
-    // for ARM64EC we need native functions, FindDllExport can manage FFS's
-    // however this does not work for syscalls, hence we use the native function directly
-    //
+        inject->NtProtectVirtualMemory = data->NativeNtProtectVirtualMemory;
         inject->NtRaiseHardError = data->NativeNtRaiseHardError;
+        inject->NtDeviceIoControlFile = data->NtDeviceIoControlFile;
+    }
+    inject->api_device_handle = data->api_device_handle;
 
 #ifdef _M_ARM64
 
@@ -355,226 +472,168 @@ _FX void InitInject(SBIELOW_DATA *data, void *DetourCode)
     //
 
     if (!data->flags.is_wow64)
-        LdrCode = (UCHAR*)inject->LdrLoadDll;
+        HookTarget = (UCHAR*)inject->LdrLoadDll;
     else
 #endif
     {
-        LdrCode = FindDllExport(ntdll_base,
+        HookTarget = FindDllExport(ntdll_base,
                         (UCHAR *)extra + extra->RtlFindActCtx_offset, &uError);
-        if (!LdrCode) {
-            SbieApi_DebugError(data, (0x04 << 4) | uError);
+        if (!HookTarget) {
+            SbieApi_DebugError(data, (0x05 << 4) | uError);
             return;
         }
     }
-    inject->RtlFindActCtx = (ULONG_PTR)LdrCode;
+    inject->RtlFindActCtx = (ULONG_PTR)HookTarget;
 
 
     //
     // prepare unicode strings
     //
 
-    inject->KernelDll_Length = (USHORT)extra->KernelDll_length;
-    inject->KernelDll_MaxLen = inject->KernelDll_Length + sizeof(WCHAR);
-    inject->KerneDll_Buf32   =
+    inject->KernelDll.Length = (USHORT)extra->KernelDll_length;
+    inject->KernelDll.MaxLen = inject->KernelDll.Length + sizeof(WCHAR);
+    inject->KernelDll.Buf32   =
                     (ULONG)((ULONG_PTR)extra + extra->KernelDll_offset);
-    inject->KerneDll_Buf64   =
-                  (ULONG64)((ULONG_PTR)extra + extra->KernelDll_offset);
-
-
 #ifdef _WIN64
-    if (data->flags.is_wow64) {
+    inject->KernelDll.Buf64   =
+                  (ULONG64)((ULONG_PTR)extra + extra->KernelDll_offset);
+#endif
 
-        InitInjectWow64(data);
-        return;
-    }
-#endif _WIN64
+    //
+    // select the right version of SbieDll.dll
+    //
 
 #ifdef _M_ARM64
     if (data->flags.is_arm64ec) {
 
-        inject->SbieDll_Length = (SHORT)extra->Arm64ecSbieDll_length;
-        inject->SbieDll_MaxLen = inject->SbieDll_Length + sizeof(WCHAR);
-        inject->SbieDll_Buf64 =
+        inject->SbieDll.Length = (SHORT)extra->Arm64ecSbieDll_length;
+        inject->SbieDll.MaxLen = inject->SbieDll.Length + sizeof(WCHAR);
+        inject->SbieDll.Buf64 =
             (ULONG64)((ULONG_PTR)extra + extra->Arm64ecSbieDll_offset);
     }
     else
 #endif
+#ifdef _WIN64
+    if (data->flags.is_wow64) 
     {
-        inject->SbieDll_Length = (SHORT)extra->NativeSbieDll_length;
-        inject->SbieDll_MaxLen = inject->SbieDll_Length + sizeof(WCHAR);
-        inject->SbieDll_Buf32  =
-            (ULONG)((ULONG_PTR)extra + extra->NativeSbieDll_offset);
-        inject->SbieDll_Buf64 =
+        inject->SbieDll.Length = (SHORT)extra->Wow64SbieDll_length;
+        inject->SbieDll.MaxLen = inject->SbieDll.Length + sizeof(WCHAR);
+        inject->SbieDll.Buf32  =
+                        (ULONG)((ULONG_PTR)extra + extra->Wow64SbieDll_offset);
+    }
+    else
+#endif
+    {
+        inject->SbieDll.Length = (SHORT)extra->NativeSbieDll_length;
+        inject->SbieDll.MaxLen = inject->SbieDll.Length + sizeof(WCHAR);
+#ifdef _WIN64
+        inject->SbieDll.Buf64 =
             (ULONG64)((ULONG_PTR)extra + extra->NativeSbieDll_offset);
+#else
+        inject->SbieDll.Buf32  =
+            (ULONG)((ULONG_PTR)extra + extra->NativeSbieDll_offset);
+#endif
     }
 
 
     //
-    // select version of RtlFindActivationContextSectionString detour code:
-    // because both the 32-bit and 64-bit versions of this SbieLow code must
-    // handle 32-bit programs, both versions include the 32-bit detour code.
-    // (see entry.asm)
+    // modify our detour code in entry.asm to include a hard coded pointer to the inject data area.
     //
-
-
-    //
-    // modify our RtlFindActivationContextSectionString detour code in
-    // entry.asm to include a hard coded pointer to the inject data area.
     
+#ifdef _WIN64
+    if (!data->flags.is_wow64) {
+
 #ifdef _M_ARM64
 
-    MyHookCode = (UCHAR *) DetourCode;
-    RegionBase = (void *)(MyHookCode -  8);
-    RegionSize = sizeof(ULONG_PTR);
-    SBIELOW_CALL(NtProtectVirtualMemory)(
-        NtCurrentProcess(), &RegionBase, &RegionSize,
-        PAGE_EXECUTE_READWRITE, &OldProtect);
+        HookCode = (UCHAR*)DetourCode;
+        RegionBase = (void*)(HookCode - 8);
+        RegionSize = sizeof(ULONG_PTR);
+        SBIELOW_CALL(NtProtectVirtualMemory)(
+            NtCurrentProcess(), &RegionBase, &RegionSize,
+            PAGE_EXECUTE_READWRITE, &OldProtect);
 
-    *(ULONG_PTR *)(MyHookCode - 8) = (ULONG_PTR)inject;
+        *(ULONG_PTR*)(HookCode - 8) = (ULONG_PTR)inject;
 
-    SBIELOW_CALL(NtProtectVirtualMemory)(
-        NtCurrentProcess(), &RegionBase, &RegionSize,
-        OldProtect, &OldProtect);
+        SBIELOW_CALL(NtProtectVirtualMemory)(
+            NtCurrentProcess(), &RegionBase, &RegionSize,
+            OldProtect, &OldProtect);
 
-    RegionBase = (void *)&LdrCode[0]; // RtlFindActCtx
-    RegionSize = 16;
-    SBIELOW_CALL(NtProtectVirtualMemory)(
-        NtCurrentProcess(), &RegionBase, &RegionSize,
-        PAGE_EXECUTE_READWRITE, &inject->RtlFindActCtx_Protect);
-    memcpy(&inject->RtlFindActCtx_Bytes, LdrCode, 16);
+        RegionBase = (void*)&HookTarget[0]; // RtlFindActCtx
+        RegionSize = 16;
+        SBIELOW_CALL(NtProtectVirtualMemory)(
+            NtCurrentProcess(), &RegionBase, &RegionSize,
+            PAGE_EXECUTE_READWRITE, &inject->RtlFindActCtx_Protect);
+        memcpy(inject->RtlFindActCtx_Bytes, HookTarget, 16);
 
-	ULONG* aCode = (ULONG*)LdrCode;
-	*aCode++ = 0x58000048;	// ldr x8, 8
-	*aCode++ = 0xD61F0100;	// br x8
-	*(DWORD64*)aCode = (DWORD64)MyHookCode;
+        ULONG* aCode = (ULONG*)HookTarget;
+        *aCode++ = 0x58000048;	// ldr x8, 8
+        *aCode++ = 0xD61F0100;	// br x8
+        *(DWORD64*)aCode = (DWORD64)HookCode;
 
-    SBIELOW_CALL(NtFlushInstructionCache)(
-        NtCurrentProcess(), RegionBase, (ULONG)RegionSize);
-
-#elif _WIN64
-
-    MyHookCode = (UCHAR *) DetourCode;
-    RegionBase = (void *)(MyHookCode -  8);
-    RegionSize = sizeof(ULONG_PTR);
-    SBIELOW_CALL(NtProtectVirtualMemory)(
-        NtCurrentProcess(), &RegionBase, &RegionSize,
-        PAGE_EXECUTE_READWRITE, &OldProtect);
-
-    *(ULONG_PTR *)(MyHookCode - 8) = (ULONG_PTR)inject;
-
-    SBIELOW_CALL(NtProtectVirtualMemory)(
-        NtCurrentProcess(), &RegionBase, &RegionSize,
-        OldProtect, &OldProtect);
-
-    RegionBase = (void *)&LdrCode[0]; // RtlFindActCtx
-    RegionSize = 12;
-    SBIELOW_CALL(NtProtectVirtualMemory)(
-        NtCurrentProcess(), &RegionBase, &RegionSize,
-        PAGE_EXECUTE_READWRITE, &inject->RtlFindActCtx_Protect);
-    memcpy(&inject->RtlFindActCtx_Bytes, LdrCode, 12);
-
-    LdrCode[0] = 0x48;
-    LdrCode[1] = 0xb8;
-    *(ULONG_PTR *)&LdrCode[2] = (ULONG_PTR)MyHookCode;
-    LdrCode[10] = 0xff;
-    LdrCode[11] = 0xe0;
+        SBIELOW_CALL(NtFlushInstructionCache)(
+            NtCurrentProcess(), RegionBase, (ULONG)RegionSize);
 
 #else
 
-    MyHookCode = (UCHAR *)DetourCode;
-    RegionBase = (void *)(MyHookCode + 1);
-    RegionSize = sizeof(ULONG_PTR);
+        HookCode = (UCHAR*)DetourCode;
+        RegionBase = (void*)(HookCode - 8);
+        RegionSize = sizeof(ULONG_PTR);
+        SBIELOW_CALL(NtProtectVirtualMemory)(
+            NtCurrentProcess(), &RegionBase, &RegionSize,
+            PAGE_EXECUTE_READWRITE, &OldProtect);
 
-    SBIELOW_CALL(NtProtectVirtualMemory)(
-        NtCurrentProcess(), &RegionBase, &RegionSize,
-        PAGE_EXECUTE_READWRITE, &OldProtect);
+        *(ULONG_PTR*)(HookCode - 8) = (ULONG_PTR)inject;
 
-    *(ULONG *)(MyHookCode + 1) = (ULONG)(ULONG_PTR)inject;
+        SBIELOW_CALL(NtProtectVirtualMemory)(
+            NtCurrentProcess(), &RegionBase, &RegionSize,
+            OldProtect, &OldProtect);
 
-    SBIELOW_CALL(NtProtectVirtualMemory)(
-        NtCurrentProcess(), &RegionBase, &RegionSize,
-        OldProtect, &OldProtect);
+        RegionBase = (void*)&HookTarget[0]; // RtlFindActCtx
+        RegionSize = 12;
+        SBIELOW_CALL(NtProtectVirtualMemory)(
+            NtCurrentProcess(), &RegionBase, &RegionSize,
+            PAGE_EXECUTE_READWRITE, &inject->RtlFindActCtx_Protect);
+        memcpy(inject->RtlFindActCtx_Bytes, HookTarget, 12);
 
-    RegionBase = (void *)LdrCode; // RtlFindActCtx
-    RegionSize = 5;
-
-    SBIELOW_CALL(NtProtectVirtualMemory)(
-        NtCurrentProcess(), &RegionBase, &RegionSize,
-        PAGE_EXECUTE_READWRITE, &inject->RtlFindActCtx_Protect);
-
-    memcpy(&inject->RtlFindActCtx_Bytes, LdrCode, 5);
-
-    LdrCode[0] = 0xE9;
-    *(ULONG *)&LdrCode[1] = (ULONG)(MyHookCode - (LdrCode + 5));
+        HookTarget[0] = 0x48;
+        HookTarget[1] = 0xb8;
+        *(ULONG_PTR*)&HookTarget[2] = (ULONG_PTR)HookCode;
+        HookTarget[10] = 0xff;
+        HookTarget[11] = 0xe0;
 
 #endif
+
+    }
+    else
+    {
+        HookCode = (UCHAR*)data->ptr_32bit_detour;
+#else
+    {
+        HookCode = (UCHAR*)DetourCode;
+#endif
+        RegionBase = (void*)(HookCode + 1);
+        RegionSize = sizeof(ULONG_PTR);
+
+        SBIELOW_CALL(NtProtectVirtualMemory)(
+            NtCurrentProcess(), &RegionBase, &RegionSize,
+            PAGE_EXECUTE_READWRITE, &OldProtect);
+
+        *(ULONG*)(HookCode + 1) = (ULONG)(ULONG_PTR)inject;
+
+        SBIELOW_CALL(NtProtectVirtualMemory)(
+            NtCurrentProcess(), &RegionBase, &RegionSize,
+            OldProtect, &OldProtect);
+
+        RegionBase = (void*)HookTarget; // RtlFindActCtx
+        RegionSize = 5;
+
+        SBIELOW_CALL(NtProtectVirtualMemory)(
+            NtCurrentProcess(), &RegionBase, &RegionSize,
+            PAGE_EXECUTE_READWRITE, &inject->RtlFindActCtx_Protect);
+
+        memcpy(inject->RtlFindActCtx_Bytes, HookTarget, 5);
+
+        HookTarget[0] = 0xE9;
+        *(ULONG*)&HookTarget[1] = (ULONG)(HookCode - (HookTarget + 5));
+    }
 }
-
-
-//---------------------------------------------------------------------------
-// InitInjectWow64
-//---------------------------------------------------------------------------
-
-
-#ifdef _WIN64
-_FX void InitInjectWow64(SBIELOW_DATA *data)
-{
-    SYSCALL_DATA* syscall_data;
-    INJECT_DATA *inject;
-    SBIELOW_EXTRA_DATA *extra;
-    UCHAR *LdrCode, *MyCode;
-    void *RegionBase;
-    SIZE_T RegionSize;
-
-    //
-    // find inject and extra data areas, same as in InitInject()
-    //
-
-    syscall_data = (SYSCALL_DATA *)data->syscall_data;
-
-    extra = (SBIELOW_EXTRA_DATA *) (data->syscall_data + syscall_data->extra_data_offset);
-
-    inject = (INJECT_DATA *) ((UCHAR *)extra + extra->InjectData_offset);
-
-    //
-    // prepare unicode strings
-    //
-
-    inject->SbieDll_Length = (SHORT)extra->Wow64SbieDll_length;
-    inject->SbieDll_MaxLen = inject->SbieDll_Length + sizeof(WCHAR);
-    inject->SbieDll_Buf32  =
-                    (ULONG)((ULONG_PTR)extra + extra->Wow64SbieDll_offset);
-
-    //
-    // the service fills INJECT_DATA.DetourCode_x86 with the right non native code
-    //
-
-    MyCode = inject->DetourCode_x86;
-
-    //
-    // modify our copied detour code to include a hard coded pointer to
-    // the inject data area (which is the syscall data area)
-    //
-
-    *(ULONG *)(MyCode + 1) = (ULONG)(ULONG_PTR)inject;
-
-    //
-    // hook the top of RtlFindActivationContextSectionString
-    // to jump to our copied detour
-    //
-
-    LdrCode = (UCHAR *)inject->RtlFindActCtx;
-
-    RegionBase = (void *)LdrCode;
-    RegionSize = 5;
-
-    SBIELOW_CALL(NtProtectVirtualMemory)(
-        NtCurrentProcess(), &RegionBase, &RegionSize,
-        PAGE_EXECUTE_READWRITE, &inject->RtlFindActCtx_Protect);
-
-    memcpy(&inject->RtlFindActCtx_Bytes, LdrCode, 5);
-
-    LdrCode[0] = 0xE9;
-    *(ULONG *)&LdrCode[1] = (ULONG)(MyCode - (LdrCode + 5));
-}
-#endif _WIN64

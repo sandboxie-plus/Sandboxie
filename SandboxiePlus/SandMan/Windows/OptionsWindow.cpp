@@ -532,6 +532,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	connect(ui.tabs, SIGNAL(currentChanged(int)), this, SLOT(OnTab()));
 
 	// edit
+	ApplyIniEditFont();
+
 	connect(ui.btnEditIni, SIGNAL(clicked(bool)), this, SLOT(OnEditIni()));
 	connect(ui.btnSaveIni, SIGNAL(clicked(bool)), this, SLOT(OnSaveIni()));
 	connect(ui.btnCancelEdit, SIGNAL(clicked(bool)), this, SLOT(OnCancelEdit()));
@@ -623,6 +625,14 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 		this->addAction(pSetTree);
 	}
 	m_pSearch->setPlaceholderText(tr("Search for options"));
+}
+
+void COptionsWindow::ApplyIniEditFont()
+{
+	QFont font; // defaults to application font
+	auto fontName = theConf->GetString("UIConfig/IniFont", "").trimmed();
+	if (!fontName.isEmpty()) bool dummy = font.fromString(fontName); // ignore fromString() fail
+	ui.txtIniSection->setFont(font);
 }
 
 void COptionsWindow::OnSetTree()
@@ -869,6 +879,34 @@ void COptionsWindow::WriteTextList(const QString& Setting, const QStringList& Li
 		throw Status;
 }
 
+void COptionsWindow::WriteTextSafe(const QString& Name, const QString& Value)
+{
+	QStringList List = m_pBox->GetTextList(Name, false);
+
+	// clear all non per process (name=program.exe,value) entries 
+	for (int i = 0; i < List.count(); i++) {
+		if (!List[i].contains(","))
+			List.removeAt(i--);
+	}
+
+	// Prepand the global entry
+	if (!Value.isEmpty()) List.append(Value);
+
+	WriteTextList(Name, List);
+}
+
+QString COptionsWindow::ReadTextSafe(const QString& Name, const QString& Default)
+{
+	QStringList List = m_pBox->GetTextList(Name, false);
+
+	for (int i = 0; i < List.count(); i++) {
+		if (!List[i].contains(","))
+			return List[i];
+	}
+
+	return Default;
+}
+
 void COptionsWindow::SaveConfig()
 {
 	bool UpdatePaths = false;
@@ -985,6 +1023,32 @@ void COptionsWindow::reject()
 	}
 
 	this->close();
+}
+
+void COptionsWindow::showTab(const QString& Name)
+{
+	QWidget* pWidget = this->findChild<QWidget*>("tab" + Name);
+
+	if (ui.tabs) {
+		for (int i = 0; i < ui.tabs->count(); i++) {
+			QGridLayout* pGrid = qobject_cast<QGridLayout*>(ui.tabs->widget(i)->layout());
+			QTabWidget* pSubTabs = pGrid ? qobject_cast<QTabWidget*>(pGrid->itemAt(0)->widget()) : NULL;
+			if(ui.tabs->widget(i) == pWidget)
+				ui.tabs->setCurrentIndex(i);
+			else if(pSubTabs) {
+				for (int j = 0; j < pSubTabs->count(); j++) {
+					if (pSubTabs->widget(j) == pWidget) {
+						ui.tabs->setCurrentIndex(i);
+						pSubTabs->setCurrentIndex(j);
+					}
+				}
+			}
+		}
+	} 
+	else
+		m_pStack->setCurrentWidget(pWidget);
+
+	SafeShow(this);
 }
 
 void COptionsWindow::SetProgramItem(QString Program, QTreeWidgetItem* pItem, int Column, const QString& Sufix, bool bList)

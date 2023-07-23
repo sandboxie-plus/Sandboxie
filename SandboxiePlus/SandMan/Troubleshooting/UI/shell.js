@@ -16,8 +16,10 @@ if(sys_version.major >= 11) {
   form.push({type: 'check', id: 'legacy', name: tr('Install legacy shell extensions')});
 }
 
-let obj = wizard.showForm(form, tr('Sellect which shell options should be reinstalled'));
+let obj = wizard.showForm(form, tr('Select which shell options should be reinstalled'));
 
 sbie.shellRemove();
 sbie.shellInstall(obj);
 
+// todo query user if mitigation was successful
+wizard.setResult(true);

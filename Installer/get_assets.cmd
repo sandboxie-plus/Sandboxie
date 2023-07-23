@@ -30,6 +30,7 @@ copy %~dp0..\sandboxie\install\ParseVersion.bat %~dp0\Assets\Classic\install\
 copy %~dp0..\sandboxie\install\Registry.nsh %~dp0\Assets\Classic\install\
 copy %~dp0..\sandboxie\install\SandboxieVS.nsi %~dp0\Assets\Classic\install\
 copy %~dp0..\sandboxie\install\Warning.ini %~dp0\Assets\Classic\install\
+copy %~dp0..\sandboxie\install\whatsnew.html %~dp0\Assets\Classic\install\
 mkdir %~dp0\Assets\Classic\msgs
 mkdir %~dp0\Assets\Classic\msgs\SbieRelease
 copy %~dp0..\sandboxie\msgs\SbieRelease\NsisText_Albanian.txt %~dp0\Assets\Classic\msgs\SbieRelease\

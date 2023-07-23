@@ -24,7 +24,7 @@ QDateTime GetSbieInstallationDate()
 
 bool CSupportDialog::IsBusinessUse()
 {
-	if (g_CertInfo.business)
+	if (CERT_IS_TYPE(g_CertInfo, eCertBusiness))
 		return true;
     uchar UsageFlags = 0;
 	theAPI->GetSecureParam("UsageFlags", &UsageFlags, sizeof(UsageFlags));
@@ -36,14 +36,14 @@ bool CSupportDialog::CheckSupport(bool bOnRun)
 	bool NoGo = false;
 
 #ifdef INSIDER_BUILD
-	if (g_CertInfo.valid) {
-		if (!g_CertInfo.insider) {
+	if (g_CertInfo.active) {
+		if (!CERT_IS_INSIDER(g_CertInfo)) {
 			TArguments args = GetArguments(g_Certificate, L'\n', L':');
 			if (args.value("TYPE").contains("PATREON")) {
-				if (QMessageBox::question(NULL, "Sandboxie-Plus", tr("This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.\r\n"
-					"If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate."), QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok) {
+				if (QMessageBox::question(NULL, "Sandboxie-Plus", tr("This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.\n"
+					"If you are a Great Supporter on Patreon already, Sandboxie can check online for an update of your certificate."), QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok) {
 					theGUI->m_pUpdater->UpdateCert(true);
-					if (g_CertInfo.insider)
+					if (CERT_IS_INSIDER(g_CertInfo))
 						return false;
 				}
 			}
@@ -56,7 +56,7 @@ bool CSupportDialog::CheckSupport(bool bOnRun)
 
 	NoGo = true;
 #else
-	if (g_CertInfo.valid)
+	if (g_CertInfo.active)
 		return false;
 
 	QDateTime InstallDate = GetSbieInstallationDate();
@@ -131,7 +131,7 @@ bool CSupportDialog::ShowDialog(bool NoGo, int Wait)
 	QString Message;
 
 #ifdef INSIDER_BUILD
-	if (!g_CertInfo.insider)
+	if (!CERT_IS_INSIDER(g_CertInfo))
 	{
 		Message += tr("This is a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-insider\">exclusive Insider build</a> of Sandboxie-Plus it is only available to <a href=\"https://sandboxie-plus.com/go.php?to=patreon\">Patreon Supporters</a> on higher tiers as well as to project contributors and owners of a HUGE supporter certificate.");
 	}
@@ -300,14 +300,14 @@ void CSupportDialog::OnButton()
 
 	if (Action == 3) {
 		CSettingsWindow* pSettingsWindow = new CSettingsWindow(this);
-		pSettingsWindow->showTab(CSettingsWindow::eSupport, true);
+		pSettingsWindow->showTab("Support", true);
 		connect(pSettingsWindow, &CSettingsWindow::Closed, [this]() {
 #ifdef INSIDER_BUILD
-			if (g_CertInfo.valid && !g_CertInfo.insider) {
+			if (g_CertInfo.active && !CERT_IS_INSIDER(g_CertInfo)) {
 				TArguments args = GetArguments(g_Certificate, L'\n', L':');
 				if (args.value("TYPE").contains("PATREON")) {
 					theGUI->m_pUpdater->UpdateCert(true);
-					if (g_CertInfo.insider) {
+					if (CERT_IS_INSIDER(g_CertInfo)) {
 						accept();
 						return;
 					}
@@ -317,7 +317,7 @@ void CSupportDialog::OnButton()
 				return;
 			}
 #endif
-			if (g_CertInfo.valid)
+			if (g_CertInfo.active)
 				accept();
 		});
 	}

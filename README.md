@@ -59,6 +59,7 @@ Sandboxie's functionality can be enhanced with specialized tools like the follow
   * [LogApiDll](https://github.com/sandboxie-plus/LogApiDll) - adds a verbose output to Sandboxie's trace log, listing invocations of relevant Windows API functions
   * [SbieHide](https://github.com/VeroFess/SbieHide) - attempts to hide the presence of SbieDll.dll from the application being sandboxed
   * [SandboxToys2](https://github.com/blap/SandboxToys2) - allows to monitor files and registry changes in a sandbox
+  * [Sbiextra](https://github.com/sandboxie-plus/sbiextra) - adds additional user mode restrictions to sandboxed processes
 
 
 ## 📌 Project history
@@ -107,8 +108,9 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - lmou523 - Code fixes
 - sredna - Code fixes for Classic installer
 - weihongx9315 - Code fix
-- yfdyh000 - Localization support for Plus installer
+- jorgectf - CodeQL workflow
 - stephtr - CI / Certification
+- yfdyh000 - Localization support for Plus installer
 - Dyras - Templates additions
 - cricri-pingouin - UI fixes
 - Valinwolf - UI / Icons
@@ -135,7 +137,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - JNylson - Portuguese and Brazilian Portuguese
 - lufog - Russian
 - sebadamus - Spanish
-- pb1 - Swedish (provided by email)
+- 1FF - Swedish (provided by email)
 - xorcan, fmbxnary, offhub - Turkish
 - SuperMaxusa, lufog - Ukrainian
 - GunGunGun - Vietnamese

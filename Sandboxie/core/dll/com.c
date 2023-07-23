@@ -1197,12 +1197,12 @@ _FX HRESULT Com_CoUnmarshalInterface_Common(
 
     if (rpl) {
         hr = rpl->h.status;
-        if (hr)
+        if (hr != S_OK)
             Com_Free(rpl);
     } else
         hr = RPC_S_SERVER_UNAVAILABLE;
 
-    if (hr) {
+    if (hr != S_OK) {
         Com_Trace(TraceType, NULL, riid, 0, hr);
         if (hr == RPC_S_SERVER_UNAVAILABLE) {
             IStream_Seek(pStream, *seekpos, STREAM_SEEK_SET, &posu);
@@ -1278,11 +1278,11 @@ static HRESULT Com_CoMarshalInterface(
 
         if (rpl) {
             hr = rpl->h.status;
-            if (hr)
+            if (hr != S_OK)
                 Com_Free(rpl);
         } else
             hr = RPC_S_SERVER_UNAVAILABLE;
-        if (hr) {
+        if (hr != S_OK) {
             Com_Trace(TraceType, NULL, riid, 0, hr);
             Com_RpcRaiseException(hr);
             return E_ABORT;
@@ -2106,7 +2106,7 @@ _FX void Com_IUnknown_Add_Ref_Release(COM_IUNKNOWN *This, UCHAR op)
         Com_Free(rpl);
     } else
         hr = RPC_S_SERVER_UNAVAILABLE;
-    if (hr)
+    if (hr != S_OK)
         Com_RpcRaiseException(hr);
 }
 
@@ -2244,12 +2244,12 @@ _FX HRESULT Com_IClassFactory_CreateInstance(
 
     if (rpl) {
         hr = rpl->h.status;
-        if (hr)
+        if (hr != S_OK)
             Com_Free(rpl);
     } else
         hr = RPC_S_SERVER_UNAVAILABLE;
 
-    if (hr) {
+    if (hr != S_OK) {
         Com_Trace(TraceType, &This->Guid, riid, 0, hr);
         Com_RpcRaiseException(hr);
         return E_ABORT;
@@ -2313,7 +2313,7 @@ _FX HRESULT Com_IClassFactory_New(
 
     if (rpl) {
         hr = rpl->h.status;
-        if (hr) {
+        if (hr != S_OK) {
             Com_Free(rpl);
             if (hr == ERROR_ELEVATION_REQUIRED && StringGUID) {
                 SbieApi_Log(2214, StringGUID);
@@ -2323,7 +2323,7 @@ _FX HRESULT Com_IClassFactory_New(
         }
     } else
         hr = RPC_S_SERVER_UNAVAILABLE;
-    if (hr) {
+    if (hr != S_OK) {
         Com_RpcRaiseException(hr);
         return E_ABORT;
     }
@@ -2417,11 +2417,11 @@ _FX HRESULT Com_OuterIUnknown_QueryInterface(
 
     if (rpl) {
         hr = rpl->h.status;
-        if (hr)
+        if (hr != S_OK)
             Com_Free(rpl);
     } else
         hr = RPC_S_SERVER_UNAVAILABLE;
-    if (hr) {
+    if (hr != S_OK) {
         Com_Trace(TraceType, &This->Guid, riid, 0, hr);
 #ifndef REGHIVE_ALWAYS_MOUNT_NEVER_UNMOUNT // if not sbox build
         Com_RpcRaiseException(hr);
@@ -2588,13 +2588,13 @@ _FX HRESULT Com_IRpcChannelBuffer_SendReceive(
 
     if (rpl) {
         hr = rpl->h.status;
-        if (hr)
+        if (hr != S_OK)
             Com_Free(rpl);
     } else
         hr = RPC_S_SERVER_UNAVAILABLE;
     if (pStatus)
         *pStatus = hr;
-    if (hr) {
+    if (hr != S_OK) {
         Com_Trace(TraceType, NULL, &This->Guid, ProcNum, hr);
         return E_ABORT;
     }
@@ -2731,11 +2731,11 @@ _FX HRESULT Com_IMarshal_MarshalInterface(
 
     if (rpl) {
         hr = rpl->h.status;
-        if (hr)
+        if (hr != S_OK)
             Com_Free(rpl);
     } else
         hr = RPC_S_SERVER_UNAVAILABLE;
-    if (hr) {
+    if (hr != S_OK) {
         Com_Trace(TraceType, NULL, &This->Guid, 0, hr);
         Com_RpcRaiseException(hr);
         return E_ABORT;
@@ -2873,11 +2873,11 @@ _FX HRESULT Com_IClientSecurity_QueryBlanket(
 
     if (rpl) {
         hr = rpl->h.status;
-        if (hr)
+        if (hr != S_OK)
             Com_Free(rpl);
     } else
         hr = RPC_S_SERVER_UNAVAILABLE;
-    if (hr) {
+    if (hr != S_OK) {
         Com_Trace(TraceType, NULL, &This->Guid, 0, hr);
         Com_RpcRaiseException(hr);
         return E_ABORT;
@@ -2958,11 +2958,11 @@ _FX HRESULT Com_IClientSecurity_SetBlanket(
 
     if (rpl) {
         hr = rpl->h.status;
-        if (hr)
+        if (hr != S_OK)
             Com_Free(rpl);
     } else
         hr = RPC_S_SERVER_UNAVAILABLE;
-    if (hr) {
+    if (hr != S_OK) {
         Com_Trace(TraceType, NULL, &This->Guid, 0, hr);
         Com_RpcRaiseException(hr);
         return E_ABORT;
@@ -2996,11 +2996,11 @@ _FX HRESULT Com_IClientSecurity_CopyProxy(
 
     if (rpl) {
         hr = rpl->h.status;
-        if (hr)
+        if (hr != S_OK)
             Com_Free(rpl);
     } else
         hr = RPC_S_SERVER_UNAVAILABLE;
-    if (hr) {
+    if (hr != S_OK) {
         Com_Trace(TraceType, NULL, &This->Guid, 0, hr);
         Com_RpcRaiseException(hr);
         return E_ABORT;

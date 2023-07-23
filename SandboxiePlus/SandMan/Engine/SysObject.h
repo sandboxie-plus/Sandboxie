@@ -28,12 +28,13 @@ public:
     Q_INVOKABLE QJSValue removeRegValue(const QString& Key, const QString& Name);
    
     // SYS
-    Q_INVOKABLE QJSValue execute(const QString& Path, const QStringList& Arguments, const QVariantMap& Options = QVariantMap());
+    Q_INVOKABLE QJSValue execute(const QString& Path, const QVariant& Arguments, const QVariantMap& Options = QVariantMap());
     Q_INVOKABLE QJSValue expand(const QString& name);
 
     // OS
     static QVariantMap GetOSVersion();
     Q_INVOKABLE QJSValue version();
+    Q_INVOKABLE QJSValue language();
 
     // 
     Q_INVOKABLE void resetData();

@@ -12,7 +12,9 @@ public:
 	CBoxEngine(QObject* parent = NULL);
 	~CBoxEngine();
 
-	bool				RunScript(const QString& Script, const QString& Name);
+	bool				RunScript(const QString& Script, const QString& Name, const QVariantMap& Params = QVariantMap());
+
+	static void			StopAll();
 
 	enum EState {
 		eUnknown,
@@ -36,6 +38,7 @@ public:
 
 	bool				HasFailed() const { return m_State == eFailed; }
 	bool				HasError() const { return m_State == eError; }
+	bool				WasSuccessfull() const { return m_State == eSuccess; }
 
 	bool				IsReady() const { return m_State == eReady; }
 	bool				HasQuery() const { return m_State == eQuery; }
@@ -43,10 +46,10 @@ public:
 	bool				SetResult(const QVariantMap& Result);
 	QVariant			GetResult() const { return m_Result; }
 
-	void				AppendLog(const QString& Line);
+	Q_INVOKABLE void	AppendLog(const QString& Line);
 	//QString				GetLog() const { QMutexLocker Locker(&m_Mutex); return m_Log; }
 
-	static int			GetInstanceCount() { return m_InstanceCount; }
+	CJSEngineExt*		GetEngine() { return m_pEngine; }
 
 	QObject*			GetDebuggerBackend();
 
@@ -68,6 +71,7 @@ protected:
 
 	virtual void		init();
 	virtual void		run();
+	virtual void		Stop();
 	//virtual bool		Wait();
 	virtual bool		Continue(bool bLocked, EState State = eRunning);
 
@@ -79,6 +83,7 @@ protected:
 	QObject*			m_pDebuggerBackend;
 	QString				m_Script;
 	QString				m_Name;
+	QVariantMap			m_Params;
 	QVariant			m_Result;
 
 	mutable QMutex		m_Mutex;
@@ -88,7 +93,7 @@ protected:
 
 	//QString				m_Log;
 
-	static int			m_InstanceCount;
+	static QSet<CBoxEngine*> m_Instances;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -111,6 +116,11 @@ public:
 	void		SetApplyShadow(const QString& OriginalName, bool bApply = true);
 	bool		IsNoAppliedShadow(const QString& OriginalName);
 
+	static int	GetInstanceCount() { return m_InstanceCount; }
+
+	Q_INVOKABLE void OpenSettings(const QString& page);
+	Q_INVOKABLE void OpenOptions(const QString& box, const QString& page);
+
 protected:
 	friend class JWizardObject;
 
@@ -128,5 +138,7 @@ protected:
 	};
 
 	QMap<QString, SBoxShadow> m_Shadows;
+
+	static int			m_InstanceCount;
 };
 

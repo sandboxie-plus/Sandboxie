@@ -125,19 +125,13 @@ public:
     CBoxAssistant(QWidget *parent = nullptr);
     ~CBoxAssistant();
 
-    static void ShowAssistant();
+    void TryFix(quint32 MsgCode, const QStringList& MsgData, const QString& ProcessName, const QString& BoxName);
 
     virtual void accept();
     virtual void reject();
 
-    QString Tr(const QString& Text) { return m_Translation.value(Text, Text).toString(); }
-
-    static QString GetIssueDir(class C7zFileEngineHandler& IssueFS, QDateTime* pDate = NULL);
-
 private slots:
-
-    void OnUpdateData(const QVariantMap& Data, const QVariantMap& Params);
-    void OnDownload(const QString& Path, const QVariantMap& Params);
+    void OnIssuesUpdated();
 
 	void OnToggleDebugger();
 
@@ -150,8 +144,6 @@ protected:
     friend class CRunPage;
     friend class CSubmitPage;
     friend class CCompletePage;
-
-    void LoadIssues(const QString& IssueDir);
 
     QList<QVariantMap> GetIssues(const QVariantMap& Root) const;
 
@@ -175,16 +167,12 @@ protected:
     QList<SUsedBox> m_UsedBoxes;
 
 private:
-    QMap<QString,QList<QVariantMap>> m_GroupedIssues;
-
     QList<QVariantMap> m_IssueStack;
-    QDateTime m_IssueDate;
 
     CWizardEngine* m_pEngine;
+    QVariantMap m_Params;
     bool m_bUseDebugger;
     QMainWindow* m_pDebugger;
-
-    QVariantMap m_Translation;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////

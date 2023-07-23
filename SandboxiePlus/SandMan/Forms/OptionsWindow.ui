@@ -290,8 +290,14 @@
                </item>
                <item row="6" column="1" colspan="5">
                 <widget class="QCheckBox" name="chkProtectBox">
+                 <property name="toolTip">
+                  <string>Partially checked means prevent box removal but not content deletion.</string>
+                 </property>
                  <property name="text">
                   <string>Protect this sandbox from deletion or emptying</string>
+                 </property>
+                 <property name="tristate">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -867,11 +873,6 @@
                <column>
                 <property name="text">
                  <string>Name</string>
-                </property>
-               </column>
-               <column>
-                <property name="text">
-                 <string>Icon</string>
                 </property>
                </column>
                <column>

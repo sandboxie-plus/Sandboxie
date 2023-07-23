@@ -36,6 +36,7 @@ HEADERS += ./stdafx.h \
     ./Wizards/SetupWizard.h \
     ./Wizards/BoxAssistant.h \
     ./Engine/BoxEngine.h \
+    ./Engine/ScriptManager.h \
     ./Engine/BoxObject.h \
     ./Engine/IniObject.h \
     ./Engine/SbieObject.h \
@@ -81,6 +82,7 @@ SOURCES += ./main.cpp \
     ./Wizards/SetupWizard.cpp \
     ./Wizards/BoxAssistant.cpp \
     ./Engine/BoxEngine.cpp \
+    ./Engine/ScriptManager.cpp \
     ./Engine/BoxObject.cpp \
     ./Engine/IniObject.cpp \
     ./Engine/SbieObject.cpp \

@@ -4,7 +4,6 @@
 #include "../QSbieAPI/SbieAPI.h"
 #include "../QtSingleApp/src/qtsingleapplication.h"
 #include "../QSbieAPI/SbieUtils.h"
-//#include "../MiscHelpers/Common/qRC4.h"
 #include "../MiscHelpers/Common/Common.h"
 #include <windows.h>
 #include "./Windows/SettingsWindow.h"
@@ -23,17 +22,15 @@ int main(int argc, char *argv[])
 	*wcsrchr(szPath, L'\\') = L'\0';
 	QString AppDir = QString::fromWCharArray(szPath);
 
-	if (QFile::exists(AppDir + "\\Certificate.dat")) {
+	if (QFile::exists(AppDir + "\\Certificate.dat"))
 		CSettingsWindow::LoadCertificate(AppDir + "\\Certificate.dat");
-		g_CertInfo.business = GetArguments(g_Certificate, L'\n', L':').value("TYPE").toUpper().contains("BUSINESS");
-	}
 
 	// use AppFolder/PlusData when present, else fallback to AppFolder
 	QString ConfDir = AppDir + "\\PlusData";
 	if(!QFile::exists(ConfDir))
 		ConfDir = AppDir;
 	// use a shared setting location when used in a business environment for easier administration
-	theConf = new CSettings(ConfDir, "Sandboxie-Plus", g_CertInfo.business);
+	theConf = new CSettings(ConfDir, "Sandboxie-Plus");
 
 #ifndef _DEBUG
 	InitMiniDumpWriter(QString("SandMan-v%1").arg(CSandMan::GetVersion()).toStdWString().c_str() , QString(theConf->GetConfigDir()).replace("/", "\\").toStdWString().c_str());

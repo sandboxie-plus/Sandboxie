@@ -5765,7 +5765,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Views/TraceView.cpp" line="330"/>
         <source>Auto Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>자동 스크롤</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="335"/>

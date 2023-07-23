@@ -471,7 +471,7 @@ SB_PROGRESS CSandBox::RemoveSnapshot(const QString& ID)
 
 	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
 	if (ChildIDs.count() == 1 || IsCurrent)
-		QtConcurrent::run(CSandBox::MergeSnapshotAsync, pProgress, m_FilePath, ID, IsCurrent ? QString() : ChildIDs.first(), m_Name, m_pAPI);
+		QtConcurrent::run(CSandBox::MergeSnapshotAsync, pProgress, m_FilePath, ID, IsCurrent ? QString() : ChildIDs.first(), qMakePair(m_Name, m_pAPI));
 	else
 		QtConcurrent::run(CSandBox::DeleteSnapshotAsync, pProgress, m_FilePath, ID);
 	return SB_PROGRESS(OP_ASYNC, pProgress);
@@ -553,7 +553,7 @@ SB_STATUS CSandBox__CleanupSnapshot(const QString& Folder)
 #define FILE_DELETED_FLAG       0x0001
 #define FILE_RELOCATION_FLAG    0x0002
 
-void CSandBox::MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QString& BoxPath, const QString& TargetID, const QString& SourceID, const QString& BoxName, class CSbieAPI* pAPI)
+void CSandBox::MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QString& BoxPath, const QString& TargetID, const QString& SourceID, const QPair<const QString, class CSbieAPI*>& params)
 {
 	//
 	// Targe is to be removed;
@@ -567,8 +567,8 @@ void CSandBox::MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QStri
 	QString SourceFolder = IsCurrent ? BoxPath : (BoxPath + "\\snapshot-" + SourceID);
 	QString TargetFolder = BoxPath + "\\snapshot-" + TargetID;
 
-	auto GetBoxedPath = [BoxPath, BoxName, pAPI](const QString& Path, const QString& TargetFolder) {
-		QString SubPath = pAPI->GetBoxedPath(BoxName, Path).mid(BoxPath.length());
+	auto GetBoxedPath = [BoxPath, params](const QString& Path, const QString& TargetFolder) {
+		QString SubPath = params.second->GetBoxedPath(params.first, Path).mid(BoxPath.length());
 		return TargetFolder + SubPath;
 	};
 

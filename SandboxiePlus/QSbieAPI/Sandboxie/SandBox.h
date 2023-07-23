@@ -86,7 +86,7 @@ protected:
 	static void						CleanBoxAsync(const CSbieProgressPtr& pProgress, const QStringList& BoxFolders);
 
 	static void						DeleteSnapshotAsync(const CSbieProgressPtr& pProgress, const QString& BoxPath, const QString& ID);
-	static void						MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QString& BoxPath, const QString& TargetID, const QString& SourceID, const QString& BoxName, class CSbieAPI* pAPI);
+	static void						MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QString& BoxPath, const QString& TargetID, const QString& SourceID, const QPair<const QString, class CSbieAPI*>& params);
 
 	QString							m_FilePath;
 	QString							m_RegPath;

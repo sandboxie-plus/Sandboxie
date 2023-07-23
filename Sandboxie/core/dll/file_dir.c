@@ -617,8 +617,21 @@ _FX NTSTATUS File_OpenForMerge(
         if (FILE_PATH_DELETED(TruePathFlags))
             TruePathDeleted = TRUE;
         else if (OldTruePath) {
+
             OriginalPath = TruePath;
-            TruePath = OldTruePath;
+
+            if (File_Snapshot != NULL) {
+
+                //
+                // note: File_ResolveTruePath returns a buffer from the TMPL_NAME_BUFFER slot, 
+                // which is reused byFile_MakeSnapshotPath, so we need to make non reusable copy
+                // 
+
+        	    TruePath = Dll_GetTlsNameBuffer(TlsData, MISC_NAME_BUFFER, (wcslen(OldTruePath) + 1) * sizeof(WCHAR));
+                wcscpy(TruePath, OldTruePath);
+            }
+            else
+                TruePath = OldTruePath;
         }
     }
     else {
@@ -1535,7 +1548,7 @@ _FX NTSTATUS File_MergeDummy(
         }
 
         if (cmp != 0) { // skip duplicates
-        
+
             if (ins_point)
                 List_Insert_Before(cache_list, ins_point, cache_file);
             else

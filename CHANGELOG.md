@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - reworked Nt Object Handle handling
 - "OpenClipboard=n" now is also implemented in user mode, making it work for green boxes
+- changed Delete V2 scheme to use drive letters in FilePaths.dat (remains backwards compatible with using NT Paths) [#3053](https://github.com/sandboxie-plus/Sandboxie/issues/3053)
 
 ### Fixed
 - fixed "Disable Security Isolation" causes a game to stop playing audio [#2893](https://github.com/sandboxie-plus/Sandboxie/issues/2893)
@@ -31,6 +32,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed crash issue with not peroeprly termianted script engine [#3120](https://github.com/sandboxie-plus/Sandboxie/issues/3120)
 - fixed ImDisk under Sandboxie supervision causes SBIE2337 and sometimes BSoD [#1092)(https://github.com/sandboxie-plus/Sandboxie/issues/1092)
 - fixed Snapshots don't merge duplicate directory junctions [#3016](https://github.com/sandboxie-plus/Sandboxie/issues/3016)
+- fixed Snapshot related issue when using Delete V2 rename functionality
+- fixed issue with Delete V2 when using network shares
+- fixed issue when using "UseVolumeSerialNumbers=y" with accessing drive roots
+- fixed Remove-Snapshot resurrects deleted files when using Delete V2 [#3015](https://github.com/sandboxie-plus/Sandboxie/issues/3015)
+
+
 
 
 

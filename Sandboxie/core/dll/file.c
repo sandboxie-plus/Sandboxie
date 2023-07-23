@@ -873,8 +873,8 @@ check_sandbox_prefix:
         // skip any suffix after the drive letter
         if (File_DriveAddSN) {
             WCHAR* ptr = wcschr(*OutTruePath + _DriveLen + 1, L'\\');
-            if (ptr)
-                len = (ULONG)(ptr - *OutTruePath);
+            if (!ptr) ptr = wcschr(*OutTruePath + _DriveLen + 1, L'\0');
+            len = (ULONG)(ptr - *OutTruePath);
         }
 
         File_GetName_FixTruePrefix(TlsData,
@@ -1259,8 +1259,8 @@ check_sandbox_prefix:
             *name = drive_letter;
             ++name;
 
-            if (File_DriveAddSN && *drive->sn)
-            {
+            if (File_DriveAddSN && *drive->sn) {
+
                 *name = L'~';
                 ++name;
                 wcscpy(name, drive->sn);
@@ -2538,7 +2538,8 @@ _FX NTSTATUS File_NtCreateFileImpl(
     // SbieDrv has removed privileges
     //
 
-    CreateOptions &= ~FILE_OPEN_FOR_BACKUP_INTENT;
+    if (!Dll_CompartmentMode)
+        CreateOptions &= ~FILE_OPEN_FOR_BACKUP_INTENT;
 
     //
     // get the full paths for the true and copy files.
@@ -2916,8 +2917,7 @@ ReparseLoop:
         }
 
     }
-    else if (status == STATUS_OBJECT_NAME_NOT_FOUND ||
-        status == STATUS_OBJECT_PATH_NOT_FOUND) {
+    else if (status == STATUS_OBJECT_NAME_NOT_FOUND || status == STATUS_OBJECT_PATH_NOT_FOUND) {
 
         //
         // the CopyPath file does not exist, but its parent path may exist
@@ -2969,7 +2969,7 @@ ReparseLoop:
                 // When using Rule specificity we need to create some dummy directories 
                 //
 
-                File_CreateBoxedPath(TruePath);
+                File_CreateBoxedPath(OriginalPath ? OriginalPath : TruePath);
             }
             else if (OriginalPath) {
 

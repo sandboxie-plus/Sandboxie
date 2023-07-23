@@ -100,7 +100,7 @@ NTSTATUS NtIo_RemoveJunction(POBJECT_ATTRIBUTES objattrs)
 
 NTSTATUS NtIo_DeleteFolderRecursivelyImpl(POBJECT_ATTRIBUTES objattrs, bool (*cb)(const WCHAR* info, void* param), void* param);
 
-NTSTATUS NtIo_DeleteFileImpl(ULONG FileAttributes, OBJECT_ATTRIBUTES* attr, bool (*cb)(const WCHAR* info, void* param), void* param)
+NTSTATUS NtIo_DeleteFile(ULONG FileAttributes, OBJECT_ATTRIBUTES* attr, bool (*cb)(const WCHAR* info, void* param), void* param)
 {
 	NTSTATUS status;
 
@@ -115,15 +115,18 @@ NTSTATUS NtIo_DeleteFileImpl(ULONG FileAttributes, OBJECT_ATTRIBUTES* attr, bool
 	if (NT_SUCCESS(status))
 		status = NtDeleteFile(attr);
 
+	if (status == STATUS_OBJECT_NAME_NOT_FOUND || status == STATUS_OBJECT_PATH_NOT_FOUND)
+		status = STATUS_SUCCESS; // we wanted it gone and its not here, success
+
 	return status;
 }
 
-NTSTATUS NtIo_DeleteFileImpl(SNtObject& ntObject, bool (*cb)(const WCHAR* info, void* param), void* param)
+NTSTATUS NtIo_DeleteFile(SNtObject& ntObject, bool (*cb)(const WCHAR* info, void* param), void* param)
 {
 	FILE_BASIC_INFORMATION info = { 0 };
 	NtQueryAttributesFile(&ntObject.attr, &info);
 
-	return NtIo_DeleteFileImpl(info.FileAttributes, &ntObject.attr, cb, param);
+	return NtIo_DeleteFile(info.FileAttributes, &ntObject.attr, cb, param);
 }
 
 NTSTATUS NtIo_DeleteFolderRecursivelyImpl(POBJECT_ATTRIBUTES objattrs, bool (*cb)(const WCHAR* info, void* param), void* param)
@@ -175,7 +178,7 @@ NTSTATUS NtIo_DeleteFolderRecursivelyImpl(POBJECT_ATTRIBUTES objattrs, bool (*cb
 
 		SNtObject ntFoundObject(FileName, Handle);
 
-		status = NtIo_DeleteFileImpl(FileAttributes, &ntFoundObject.attr, cb, param);
+		status = NtIo_DeleteFile(FileAttributes, &ntFoundObject.attr, cb, param);
 	}
 
 	NtClose(Handle);
@@ -193,6 +196,9 @@ NTSTATUS NtIo_DeleteFolderRecursively(POBJECT_ATTRIBUTES objattrs, bool (*cb)(co
 		NtIo_RemoveJunction(objattrs);
 		status = NtDeleteFile(objattrs);
 	}
+
+	if (status == STATUS_OBJECT_NAME_NOT_FOUND || status == STATUS_OBJECT_PATH_NOT_FOUND)
+		status = STATUS_SUCCESS; // we wanted it gone and its not here, success
 
 	return status;
 }
@@ -346,7 +352,7 @@ NTSTATUS NtIo_MergeFolder(POBJECT_ATTRIBUTES src_objattrs, POBJECT_ATTRIBUTES de
 
 		if (FileAttributes & FILE_ATTRIBUTE_REPARSE_POINT) {
 			if (TargetExists)
-				status = NtIo_DeleteFileImpl(ntDestObject, cb, param);
+				status = NtIo_DeleteFile(ntDestObject, cb, param);
 			if (NT_SUCCESS(status))
 				status = NtIo_RenameJunction(&ntSrcObject.attr, dest_objattrs, FileName.c_str());
 		} 
@@ -360,7 +366,7 @@ NTSTATUS NtIo_MergeFolder(POBJECT_ATTRIBUTES src_objattrs, POBJECT_ATTRIBUTES de
 		else
 		{
 			if (TargetExists)
-				status = NtIo_DeleteFileImpl(ntDestObject, cb, param);
+				status = NtIo_DeleteFile(ntDestObject, cb, param);
 			if (NT_SUCCESS(status))
 				status = NtIo_RenameFile(&ntSrcObject.attr, dest_objattrs, FileName.c_str());
 		}

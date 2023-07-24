@@ -5457,7 +5457,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Views/TraceView.cpp" line="330"/>
         <source>Auto Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Otomatik Kaydırma</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="335"/>
@@ -5534,13 +5534,6 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Wizards/SetupWizard.cpp" line="386"/>
         <source>Use Dark Mode</source>
         <translation>Koyu Modu Kullan</translation>
-    </message>
-</context>
-<context>
-    <name>CWizardEngine</name>
-    <message>
-        <source>_Shadow</source>
-        <translation type="vanished">_Shadow</translation>
     </message>
 </context>
 <context>
@@ -6237,7 +6230,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="294"/>
         <source>Partially checked means prevent box removal but not content deletion.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kısmen işaretli kutu, korumalı alanın kaldırılmasını önler ancak içeriğin silinmesini engellemez anlamına gelir.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="337"/>
@@ -6292,10 +6285,6 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
         <location filename="Forms/OptionsWindow.ui" line="775"/>
         <source>Printing restrictions</source>
         <translation>Yazdırma Kısıtlamaları</translation>
-    </message>
-    <message>
-        <source>Icon</source>
-        <translation type="vanished">Simge</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="900"/>
@@ -7520,10 +7509,6 @@ The process match level has a higher priority than the specificity and describes
         <translation>Windows Kabuğu</translation>
     </message>
     <message>
-        <source>Icon</source>
-        <translation type="vanished">Simge</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="722"/>
         <source>Move Up</source>
         <translation>Yukarı Taşı</translation>
@@ -7754,7 +7739,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1069"/>
         <source>Ini Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Ini Seçenekleri</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1119"/>
@@ -7764,7 +7749,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1156"/>
         <source>External Ini Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Harici Ini Düzenleyici</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1173"/>

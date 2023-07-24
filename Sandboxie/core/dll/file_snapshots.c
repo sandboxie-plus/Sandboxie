@@ -279,11 +279,9 @@ _FX ULONG File_GetPathFlagsEx(const WCHAR *TruePath, const WCHAR *CopyPath, WCHA
 		//
 
 		Flags = File_GetPathFlags_internal(&File_PathRoot, File_NormalizePath(TruePath, NORM_NAME_BUFFER), &Relocation, TRUE); // this requires a name buffer
-		if (FILE_PATH_DELETED(Flags))
-			goto finish;
 	}
 
-	if (!File_Snapshot) 
+	if (!File_Snapshot || FILE_PATH_DELETED(Flags)) 
 	{
 		if (pRelocation) *pRelocation = Relocation; // return a MISC_NAME_BUFFER buffer valid at the current name buffer depth
 

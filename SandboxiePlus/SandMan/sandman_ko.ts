@@ -8299,7 +8299,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SettingsWindow.ui" line="1633"/>
         <source>Sandboxie Config</source>
         <oldsource>Config Protection</oldsource>
-        <translation>Sandboxie Config 구성</translation>
+        <translation>Sandboxie 구성</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="350"/>

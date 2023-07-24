@@ -534,19 +534,29 @@ SB_STATUS CSandBox__MergeFolders(const CSbieProgressPtr& pProgress, const QStrin
 
 SB_STATUS CSandBox__CleanupSnapshot(const QString& Folder)
 {
+	// remove files which may be in the snapshot
 	foreach(const SBoxDataFile& BoxDataFile, CSandBox__BoxDataFiles) 
-	{
-		SNtObject ntHiveFile(L"\\??\\" + (Folder + "\\" + BoxDataFile.Name).toStdWString());
-		SB_STATUS status = NtDeleteFile(&ntHiveFile.attr);
-		if (NT_SUCCESS(status)) {
-			SNtObject ntSnapshotFile(L"\\??\\" + Folder.toStdWString());
-			status = NtDeleteFile(&ntSnapshotFile.attr);
-		}
-		if(BoxDataFile.Required)
-			if (!NT_SUCCESS(status))
-				return SB_ERR(SB_SnapRmDirFail, QVariantList() << Folder, status);
-	}
+		QFile::remove(Folder + "\\" + BoxDataFile.Name);
+
+	// delete snapshot folder, at this stage it should be empty
+	// when its not empty delete will fail
+	SNtObject ntSnapshotFile(L"\\??\\" + Folder.toStdWString());
+	NTSTATUS status = NtDeleteFile(&ntSnapshotFile.attr);
+	if (!NT_SUCCESS(status))
+		return SB_ERR(SB_SnapRmDirFail, QVariantList() << Folder, status);
 	return SB_OK;
+}
+
+void CSandBox__MoveDataFilesSafe(const QString& SourceFolder, const QString& TargetFolder)
+{
+	foreach(const SBoxDataFile& BoxDataFile, CSandBox__BoxDataFiles)
+	{
+		if (!QFile::exists(SourceFolder + "\\" + BoxDataFile.Name))
+			continue;
+
+		QFile::remove(TargetFolder + "\\" + BoxDataFile.Name);
+		QFile::rename(SourceFolder + "\\" + BoxDataFile.Name, TargetFolder + "\\" + BoxDataFile.Name);
+	}
 }
 
 // path flags, saved to file
@@ -580,7 +590,9 @@ void CSandBox::MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QStri
 		QFile datSource(SourceFolder + "\\FilePaths.dat");
 		if (datSource.open(QFile::ReadOnly)) 
 		{
-			QStringList datData = QString::fromWCharArray((wchar_t*)datSource.readAll().data(), datSource.size() / sizeof(wchar_t)).split("\n");
+			QByteArray datBin = datSource.readAll();
+
+			QStringList datData = QString::fromWCharArray((wchar_t*)datBin.data(), datBin.size() / sizeof(wchar_t)).split("\n");
 
 			// process relocations
 			foreach (const QString& Line, datData) {
@@ -639,6 +651,19 @@ void CSandBox::MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QStri
 					}, pProgress.data());
 				}
 			}
+
+			// merge DeleteV2 file entries to the Target FilePaths.dat
+			QFile datTarget(TargetFolder + "\\FilePaths.dat");
+			if (datTarget.open(QFile::ReadWrite)) {
+				// merge with target
+				datTarget.seek(datTarget.size());
+				datTarget.write(datBin);
+				datTarget.close();
+			}
+
+			// remove source FilePaths.dat
+			datSource.close();
+			datSource.remove();
 		}
 	}
 
@@ -654,31 +679,8 @@ void CSandBox::MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QStri
 
 	if(!Status.IsError())
 	{
-		// merge DeleteV2 file entries
-		if (QFile::exists(SourceFolder + "\\FilePaths.dat")) {
-			QFile datSource(SourceFolder + "\\FilePaths.dat");
-			if (datSource.open(QFile::ReadOnly)) {
-				QFile datTarget(TargetFolder + "\\FilePaths.dat");
-				if (datTarget.open(QFile::ReadWrite)) {
-					// merge with target
-					datTarget.seek(datTarget.size());
-					datTarget.write(datSource.readAll());
-					// remove source
-					datSource.close();
-					datSource.remove();
-				}
-			}
-		}
-
 		// copy other data files from source to target
-		foreach(const SBoxDataFile& BoxDataFile, CSandBox__BoxDataFiles)
-		{
-			if (!QFile::exists(SourceFolder + "\\" + BoxDataFile.Name))
-				continue;
-
-			QFile::remove(TargetFolder + "\\" + BoxDataFile.Name);
-			QFile::rename(SourceFolder + "\\" + BoxDataFile.Name, TargetFolder + "\\" + BoxDataFile.Name);
-		}
+		CSandBox__MoveDataFilesSafe(SourceFolder, TargetFolder);
 
 		if (IsCurrent)
 		{
@@ -691,11 +693,8 @@ void CSandBox::MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QStri
 			}
 
 			// move all data files out of the snapshot to root
-			foreach(const SBoxDataFile& BoxDataFile, CSandBox__BoxDataFiles)
-			{
-				QFile::rename(TargetFolder + "\\" + BoxDataFile.Name, SourceFolder + "\\" + BoxDataFile.Name);
-			}
-
+			CSandBox__MoveDataFilesSafe(TargetFolder, SourceFolder);
+			
 			// delete snapshot rest
 			if (!Status.IsError())
 				Status = CSandBox__CleanupSnapshot(TargetFolder);
@@ -741,13 +740,7 @@ SB_PROGRESS CSandBox::SelectSnapshot(const QString& ID)
 
 	foreach(const SBoxDataFile& BoxDataFile, CSandBox__BoxDataFiles)
 	{
-		if (!QFile::exists(m_FilePath + "\\" + BoxDataFile.Name))
-			continue;
-
-		if (!QFile::remove(m_FilePath + "\\" + BoxDataFile.Name)) {
-			if (BoxDataFile.Required)
-				return SB_ERR(SB_SnapDelDatFail);
-		}
+		QFile::remove(m_FilePath + "\\" + BoxDataFile.Name);
 
 		if (ID.isEmpty() || BoxDataFile.Recursive)
 			continue; // this one is incremental, don't restore it

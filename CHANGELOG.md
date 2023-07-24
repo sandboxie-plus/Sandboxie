@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - reworked Nt Object Handle handling
 - "OpenClipboard=n" now is also implemented in user mode, making it work for green boxes
 - changed Delete V2 scheme to use drive letters in FilePaths.dat (remains backwards compatible with using NT Paths) [#3053](https://github.com/sandboxie-plus/Sandboxie/issues/3053)
+- improved robustness of snapshot merging [#3017](https://github.com/sandboxie-plus/Sandboxie/issues/3017)
 
 ### Fixed
 - fixed "Disable Security Isolation" causes a game to stop playing audio [#2893](https://github.com/sandboxie-plus/Sandboxie/issues/2893)

@@ -166,6 +166,7 @@ public:
 		QString Folder;
 		QString Name;
 		QString Target;
+		QString Arguments;
 		QString Icon;
 		int IconIndex;
 		QString WorkDir;

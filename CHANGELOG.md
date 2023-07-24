@@ -4,6 +4,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.10.2 / 5.65.2] - 2023-07-24
+
+### Changed
+- "OpenClipboard=n" now also denyes write to clipboard [#1367](https://github.com/sandboxie-plus/Sandboxie/issues/1367)
+
+### Fixed
+- fixed issue with cross renaming of directories
+- fixed issue with auto scroll not working
+- fixed issue with link argumetn handling [#2969](https://github.com/sandboxie-plus/Sandboxie/issues/2969)
+
 
 
 

@@ -70,6 +70,8 @@ static BOOL Gui_OpenClipboard(HWND hwnd);
 
 static BOOL Gui_CloseClipboard(void);
 
+static HANDLE Gui_SetClipboardData(UINT uFormat, HANDLE hMem);
+
 static HANDLE Gui_GetClipboardData(UINT uFormat);
 
 static void Gui_GetClipboardData_BMP(void *buf, ULONG fmt);
@@ -77,6 +79,8 @@ static void Gui_GetClipboardData_BMP(void *buf, ULONG fmt);
 static void Gui_GetClipboardData_MF(void *buf, ULONG sz, ULONG fmt);
 
 static void Gui_GetClipboardData_EnhMF(void *buf, ULONG sz, ULONG fmt);
+
+static BOOL Gui_EmptyClipboard();
 
 static LONG Gui_ChangeDisplaySettingsExA(
     void *lpszDeviceName, void *lpDevMode, HWND hwnd,
@@ -192,7 +196,9 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
 
     SBIEDLL_HOOK_GUI(OpenClipboard);
     SBIEDLL_HOOK_GUI(CloseClipboard);
+    SBIEDLL_HOOK_GUI(SetClipboardData);
     SBIEDLL_HOOK_GUI(GetClipboardData);
+    SBIEDLL_HOOK_GUI(EmptyClipboard);
 
     //
     // Chinese instant messenger QQ.exe (aka TM.exe) uses OpenInputDesktop,
@@ -204,7 +210,7 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
     // to check if the desktop is locked, and other programs might as well
     //
 
-    if (1) {
+    if (!Dll_CompartmentMode) {
 
         typedef HDESK (*P_OpenInputDesktop)(
             DWORD dwFlags, BOOL fInherit, ACCESS_MASK dwDesiredAccess);
@@ -759,6 +765,34 @@ _FX BOOL Gui_CloseClipboard(void)
 
     SetLastError(err);
     return ok;
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_SetClipboardData
+//---------------------------------------------------------------------------
+
+
+_FX HANDLE Gui_SetClipboardData(UINT uFormat, HANDLE hMem)
+{
+    if (!SbieApi_QueryConfBool(NULL, L"OpenClipboard", TRUE))
+        return NULL;
+
+    return __sys_SetClipboardData(uFormat, hMem);
+}
+
+
+//---------------------------------------------------------------------------
+// Gui_EmptyClipboard
+//---------------------------------------------------------------------------
+
+
+_FX BOOL Gui_EmptyClipboard()
+{
+    if (!SbieApi_QueryConfBool(NULL, L"OpenClipboard", TRUE))
+        return NULL;
+
+    return __sys_EmptyClipboard();
 }
 
 

@@ -614,7 +614,7 @@ _FX NTSTATUS File_OpenForMerge(
         //
 
         WCHAR* OldTruePath = File_ResolveTruePath(TruePath, NULL, &TruePathFlags);
-        if (FILE_PATH_DELETED(TruePathFlags))
+        if (FILE_PATH_DELETED(TruePathFlags) && !FILE_PATH_RELOCATED(TruePathFlags))
             TruePathDeleted = TRUE;
         else if (OldTruePath) {
 

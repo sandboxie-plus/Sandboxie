@@ -728,7 +728,7 @@ void COptionsWindow::OnGeneralChanged()
 	ui.chkCopyPrompt->setEnabled(ui.chkCopyLimit->isChecked());
 	ui.chkNoCopyWarn->setEnabled(ui.chkCopyLimit->isChecked() && !ui.chkCopyPrompt->isChecked());
 
-	ui.chkAutoEmpty->setEnabled(!ui.chkProtectBox->isChecked());
+	ui.chkAutoEmpty->setEnabled(ui.chkProtectBox->checkState() != Qt::Checked);
 
 	ui.chkOpenSpooler->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityIsolation->isChecked());
 	ui.chkPrintToFile->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityFiltering->isChecked());

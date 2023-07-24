@@ -516,6 +516,7 @@ void CSandBoxPlus::ScanStartMenu()
 		if(!pLink->Target.isEmpty() && pLink->Target != Link["Path"].toString())
 			bChanged = true;
 		pLink->Target = Link["Path"].toString();
+		pLink->Arguments = Link["Arguments"].toString();
 		pLink->Icon = Link["IconPath"].toString();
 		pLink->IconIndex = Link["IconIndex"].toInt();
 		pLink->WorkDir = Link["WorkingDir"].toString();

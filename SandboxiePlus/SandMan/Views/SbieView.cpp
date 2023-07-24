@@ -1856,7 +1856,14 @@ void CSbieView::UpdateStartMenu(CSandBoxPlus* pBoxEx)
 		QIcon Icon = LoadWindowsIcon(Link.Icon, Link.IconIndex);
 		if(Icon.isNull()) Icon = m_IconProvider.icon(QFileInfo(Link.Target));
 		pAction->setIcon(Icon);
-		pAction->setData(Link.Target);
+		QString Command;
+		if(Link.Target.contains(" "))
+			Command = "\"" + Link.Target + "\"";
+		else
+			Command = Link.Target;
+		if(!Link.Arguments.isEmpty())
+			Command += " " + Link.Arguments;
+		pAction->setData(Command);
 		pAction->setProperty("Icon", Link.Icon);
 		pAction->setProperty("IconIndex", Link.IconIndex);
 		pAction->setProperty("WorkingDir", Link.WorkDir);

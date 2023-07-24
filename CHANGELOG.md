@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.10.1 / 5.65.1] - 2023-07-??
+## [1.10.1 / 5.65.1] - 2023-07-24
 
 ### Added
 - added UI option to change ini editor [#3116](https://github.com/sandboxie-plus/Sandboxie/issues/3116)

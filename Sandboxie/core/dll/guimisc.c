@@ -790,7 +790,7 @@ _FX HANDLE Gui_SetClipboardData(UINT uFormat, HANDLE hMem)
 _FX BOOL Gui_EmptyClipboard()
 {
     if (!SbieApi_QueryConfBool(NULL, L"OpenClipboard", TRUE))
-        return NULL;
+        return FALSE;
 
     return __sys_EmptyClipboard();
 }

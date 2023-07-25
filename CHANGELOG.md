@@ -7,13 +7,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.10.2 / 5.65.2] - 2023-07-24
 
 ### Changed
-- "OpenClipboard=n" now also denyes write to clipboard [#1367](https://github.com/sandboxie-plus/Sandboxie/issues/1367)
+- "OpenClipboard=n" now also denies write to clipboard [#1367](https://github.com/sandboxie-plus/Sandboxie/issues/1367)
 
 ### Fixed
 - fixed issue with cross renaming of directories
 - fixed issue with auto scroll not working [#393](https://github.com/sandboxie-plus/Sandboxie/issues/393)
-- fixed ui issue with new box removal protection [#3104](https://github.com/sandboxie-plus/Sandboxie/issues/3104)
-- fixed issue with link argumetn handling [#2969](https://github.com/sandboxie-plus/Sandboxie/issues/2969)
+- fixed UI issue with new box removal protection [#3104](https://github.com/sandboxie-plus/Sandboxie/issues/3104)
+- fixed issue with link argument handling [#2969](https://github.com/sandboxie-plus/Sandboxie/issues/2969)
 - fixed IPC issue introduced in 1.10.1 [#3132](https://github.com/sandboxie-plus/Sandboxie/issues/3132) [#3134](https://github.com/sandboxie-plus/Sandboxie/issues/3134)
 
 
@@ -23,32 +23,32 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added UI option to change ini editor [#3116](https://github.com/sandboxie-plus/Sandboxie/issues/3116)
-- added Separate protection against box removal and content deletion [#3104] (https://github.com/sandboxie-plus/Sandboxie/issues/3104)
-- added Add "auto scroll" in sbie messages, resource monitor, api call log context menu [#393](https://github.com/sandboxie-plus/Sandboxie/issues/393)
+- added separate protection against box removal and content deletion [#3104](https://github.com/sandboxie-plus/Sandboxie/issues/3104)
+- added "auto scroll" in Sbie messages, resource monitor, API call log context menu [#393](https://github.com/sandboxie-plus/Sandboxie/issues/393)
 
 ### Changed
-- reworked Nt Object Handle handling
+- reworked NT Object Handle handling
 - "OpenClipboard=n" now is also implemented in user mode, making it work for green boxes
-- changed Delete V2 scheme to use drive letters in FilePaths.dat (remains backwards compatible with using NT Paths) [#3053](https://github.com/sandboxie-plus/Sandboxie/issues/3053)
+- changed Delete V2 scheme to use drive letters in FilePaths.dat (remains backward compatible with using NT paths) [#3053](https://github.com/sandboxie-plus/Sandboxie/issues/3053)
 - improved robustness of snapshot merging [#3017](https://github.com/sandboxie-plus/Sandboxie/issues/3017)
 
 ### Fixed
 - fixed "Disable Security Isolation" causes a game to stop playing audio [#2893](https://github.com/sandboxie-plus/Sandboxie/issues/2893)
 - fixed NtQueryDirectoryObject not implemented [#2734](https://github.com/sandboxie-plus/Sandboxie/issues/2734)
 - fixed issue with working directory for run menu entries
-- fixed inpoper global symlink in sandboxed namespace [#3112](https://github.com/sandboxie-plus/Sandboxie/issues/3112)
+- fixed improper global symlink in sandboxed namespace [#3112](https://github.com/sandboxie-plus/Sandboxie/issues/3112)
 - fixed 'Addon already installed!' error when clicking 'Show Stack Trace' [#3114](https://github.com/sandboxie-plus/Sandboxie/issues/3114)
 - fixed existing BoxNameTitle=process.exe,- removed when toggling other options [#3106](https://github.com/sandboxie-plus/Sandboxie/issues/3106)
-- fixed asynchroniusly assigned PCA job not being properly detected [#1919](https://github.com/sandboxie-plus/Sandboxie/issues/1919)
-- fixed incompatybility with first windows 10 release [#3117](https://github.com/sandboxie-plus/Sandboxie/issues/3117)
-- fixed Remove Sandbox only deletes the contents of the sandbox when an application is running in the sandbox [#3118](https://github.com/sandboxie-plus/Sandboxie/issues/3118)
-- fixed crash issue with not peroeprly termianted script engine [#3120](https://github.com/sandboxie-plus/Sandboxie/issues/3120)
-- fixed ImDisk under Sandboxie supervision causes SBIE2337 and sometimes BSoD [#1092)(https://github.com/sandboxie-plus/Sandboxie/issues/1092)
-- fixed Snapshots don't merge duplicate directory junctions [#3016](https://github.com/sandboxie-plus/Sandboxie/issues/3016)
-- fixed Snapshot related issue when using Delete V2 rename functionality
+- fixed asynchronously assigned PCA job not being properly detected [#1919](https://github.com/sandboxie-plus/Sandboxie/issues/1919)
+- fixed incompatibility with first windows 10 release [#3117](https://github.com/sandboxie-plus/Sandboxie/issues/3117)
+- fixed remove sandbox only deletes the contents of the sandbox when an application is running in the sandbox [#3118](https://github.com/sandboxie-plus/Sandboxie/issues/3118)
+- fixed crash issue with not properly terminated script engine [#3120](https://github.com/sandboxie-plus/Sandboxie/issues/3120)
+- fixed ImDisk under Sandboxie supervision causes SBIE2337 and sometimes BSOD [#1092](https://github.com/sandboxie-plus/Sandboxie/issues/1092)
+- fixed snapshots don't merge duplicate directory junctions [#3016](https://github.com/sandboxie-plus/Sandboxie/issues/3016)
+- fixed snapshot related issue when using Delete V2 rename functionality
 - fixed issue with Delete V2 when using network shares
 - fixed issue when using "UseVolumeSerialNumbers=y" with accessing drive roots
-- fixed Remove-Snapshot resurrects deleted files when using Delete V2 [#3015](https://github.com/sandboxie-plus/Sandboxie/issues/3015)
+- fixed remove snapshot resurrects deleted files when using Delete V2 [#3015](https://github.com/sandboxie-plus/Sandboxie/issues/3015)
 
 
 

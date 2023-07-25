@@ -40,7 +40,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed 'Addon already installed!' error when clicking 'Show Stack Trace' [#3114](https://github.com/sandboxie-plus/Sandboxie/issues/3114)
 - fixed existing BoxNameTitle=process.exe,- removed when toggling other options [#3106](https://github.com/sandboxie-plus/Sandboxie/issues/3106)
 - fixed asynchronously assigned PCA job not being properly detected [#1919](https://github.com/sandboxie-plus/Sandboxie/issues/1919)
-- fixed incompatibility with first windows 10 release [#3117](https://github.com/sandboxie-plus/Sandboxie/issues/3117)
+- fixed incompatibility with first Windows 10 release [#3117](https://github.com/sandboxie-plus/Sandboxie/issues/3117)
 - fixed remove sandbox only deletes the contents of the sandbox when an application is running in the sandbox [#3118](https://github.com/sandboxie-plus/Sandboxie/issues/3118)
 - fixed crash issue with not properly terminated script engine [#3120](https://github.com/sandboxie-plus/Sandboxie/issues/3120)
 - fixed ImDisk under Sandboxie supervision causes SBIE2337 and sometimes BSOD [#1092](https://github.com/sandboxie-plus/Sandboxie/issues/1092)

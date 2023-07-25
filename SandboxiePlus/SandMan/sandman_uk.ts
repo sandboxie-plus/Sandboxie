@@ -2435,72 +2435,72 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="681"/>
+        <location filename="SbiePlusAPI.cpp" line="682"/>
         <source>Disabled</source>
         <translation>Вимкнений</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="692"/>
+        <location filename="SbiePlusAPI.cpp" line="693"/>
         <source>OPEN Root Access</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="694"/>
+        <location filename="SbiePlusAPI.cpp" line="695"/>
         <source>Application Compartment</source>
         <translation>Пісочниця для додатків</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="696"/>
+        <location filename="SbiePlusAPI.cpp" line="697"/>
         <source>NOT SECURE</source>
         <translation>НЕ ЗАХИЩЕНО</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="698"/>
+        <location filename="SbiePlusAPI.cpp" line="699"/>
         <source>Reduced Isolation</source>
         <translation>Знижена ізоляція</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="700"/>
+        <location filename="SbiePlusAPI.cpp" line="701"/>
         <source>Enhanced Isolation</source>
         <translation>Посилена ізоляція</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="703"/>
+        <location filename="SbiePlusAPI.cpp" line="704"/>
         <source>Privacy Enhanced</source>
         <translation>Посилена конфіденційність</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="706"/>
+        <location filename="SbiePlusAPI.cpp" line="707"/>
         <source>API Log</source>
         <translation>Журнал API</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="709"/>
+        <location filename="SbiePlusAPI.cpp" line="710"/>
         <source>No INet (with Exceptions)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="711"/>
+        <location filename="SbiePlusAPI.cpp" line="712"/>
         <source>No INet</source>
         <translation>Без доступу до Інтернет</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="714"/>
+        <location filename="SbiePlusAPI.cpp" line="715"/>
         <source>Net Share</source>
         <translation>Локальна мережа</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="716"/>
+        <location filename="SbiePlusAPI.cpp" line="717"/>
         <source>No Admin</source>
         <translation>Без прав адміністратора</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="719"/>
+        <location filename="SbiePlusAPI.cpp" line="720"/>
         <source>Auto Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="722"/>
+        <location filename="SbiePlusAPI.cpp" line="723"/>
         <source>Normal</source>
         <translation>Нормальний</translation>
     </message>
@@ -4116,37 +4116,37 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 <context>
     <name>CSbieTemplatesEx</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1132"/>
+        <location filename="SbiePlusAPI.cpp" line="1133"/>
         <source>Failed to initialize COM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1138"/>
+        <location filename="SbiePlusAPI.cpp" line="1139"/>
         <source>Failed to create update session</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1144"/>
+        <location filename="SbiePlusAPI.cpp" line="1145"/>
         <source>Failed to create update searcher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1150"/>
+        <location filename="SbiePlusAPI.cpp" line="1151"/>
         <source>Failed to set search options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1158"/>
+        <location filename="SbiePlusAPI.cpp" line="1159"/>
         <source>Failed to search for updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1164"/>
+        <location filename="SbiePlusAPI.cpp" line="1165"/>
         <source>Failed to retrieve update list from search result</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1171"/>
+        <location filename="SbiePlusAPI.cpp" line="1172"/>
         <source>Failed to get update count</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5682,9 +5682,9 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Views/TraceView.cpp" line="286"/>
         <location filename="Views/TraceView.cpp" line="287"/>
         <location filename="Views/TraceView.cpp" line="296"/>
-        <location filename="Views/TraceView.cpp" line="562"/>
-        <location filename="Views/TraceView.cpp" line="565"/>
-        <location filename="Views/TraceView.cpp" line="663"/>
+        <location filename="Views/TraceView.cpp" line="563"/>
+        <location filename="Views/TraceView.cpp" line="566"/>
+        <location filename="Views/TraceView.cpp" line="664"/>
         <source>[All]</source>
         <translation>[Всі]</translation>
     </message>
@@ -5744,27 +5744,27 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="335"/>
+        <location filename="Views/TraceView.cpp" line="336"/>
         <source>Cleanup Trace Log</source>
         <translation>Очистити журнал відстеження</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="381"/>
+        <location filename="Views/TraceView.cpp" line="382"/>
         <source>To use the stack traces feature the DbgHelp.dll and SymSrv.dll are required, do you want to download and install them?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="706"/>
+        <location filename="Views/TraceView.cpp" line="707"/>
         <source>Save trace log to file</source>
         <translation>Зберегти журнал у файл</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="712"/>
+        <location filename="Views/TraceView.cpp" line="713"/>
         <source>Failed to open log file for writing</source>
         <translation>Не вдалось відкрити файл журналу для запису</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="732"/>
+        <location filename="Views/TraceView.cpp" line="733"/>
         <source>Saving TraceLog...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5773,7 +5773,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation type="vanished">Невідомо</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="636"/>
+        <location filename="Views/TraceView.cpp" line="637"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
@@ -5783,7 +5783,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>Режим монітора</translation>
     </message>
     <message>
-        <location filename="Views/TraceView.cpp" line="643"/>
+        <location filename="Views/TraceView.cpp" line="644"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
@@ -5791,7 +5791,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
 <context>
     <name>CTraceWindow</name>
     <message>
-        <location filename="Views/TraceView.cpp" line="800"/>
+        <location filename="Views/TraceView.cpp" line="801"/>
         <source>Sandboxie-Plus - Trace Monitor</source>
         <translation>Sandboxie-Plus - Монітор відстеження</translation>
     </message>

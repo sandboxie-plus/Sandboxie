@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with cross renaming of directories
 - fixed issue with auto scroll not working
 - fixed issue with link argumetn handling [#2969](https://github.com/sandboxie-plus/Sandboxie/issues/2969)
+- fixed IPC issue introduced in 1.10.1 [#3132](https://github.com/sandboxie-plus/Sandboxie/issues/3132) [#3134](https://github.com/sandboxie-plus/Sandboxie/issues/3134)
 
 
 

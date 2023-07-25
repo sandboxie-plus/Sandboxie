@@ -750,7 +750,7 @@ _FX NTSTATUS Ipc_GetName(
     if (OutIsBoxedPath)
         *OutIsBoxedPath = FALSE;
 
-    if (ObjectName) {
+    if (ObjectName && ObjectName != (UNICODE_STRING*)-1) {
         objname_len = ObjectName->Length & ~1;
         objname_buf = ObjectName->Buffer;
 
@@ -784,7 +784,7 @@ _FX NTSTATUS Ipc_GetName(
         name = Dll_GetTlsNameBuffer(
                         TlsData, TRUE_NAME_BUFFER, length + objname_len);
 
-        /*if ((! objname_len) || (! *objname_buf)) {
+      if (((! objname_len) || (! *objname_buf)) && ObjectName != (UNICODE_STRING*)-1) {
 
             //
             // an object handle was specified, but the object name is an
@@ -800,7 +800,7 @@ _FX NTSTATUS Ipc_GetName(
 
                 return STATUS_SUCCESS;
             }
-        }*/
+        }
 
         if (objname_len && *objname_buf == L'\\') {
 
@@ -4287,7 +4287,7 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
 
         WCHAR *TruePath;
         WCHAR *CopyPath;
-        NTSTATUS status = Ipc_GetName(DirectoryHandle, NULL, &TruePath, &CopyPath, NULL);
+        NTSTATUS status = Ipc_GetName(DirectoryHandle, (UNICODE_STRING*)-1, &TruePath, &CopyPath, NULL);
 
         if (!NT_SUCCESS(status))
             return status;

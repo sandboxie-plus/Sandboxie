@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.10.2 / 5.65.2] - 2023-07-24
+## [1.10.2 / 5.65.2] - 2023-07-??
 
 ### Changed
 - "OpenClipboard=n" now also denies write to clipboard [#1367](https://github.com/sandboxie-plus/Sandboxie/issues/1367)

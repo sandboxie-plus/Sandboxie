@@ -1809,7 +1809,7 @@ void CSbieView::OnMenuContextMenu(const QPoint& point)
 		if (FoundPin.isEmpty()) {
 			QVariantMap Entry;
 			Entry["Name"] = pAction->text();
-			Entry["Icon"] = pBoxPlus->MakeBoxCommand(pAction->property("Icon").toString()) + "," + pAction->property("IconIndex").toString();
+			Entry["Icon"] = pAction->property("Icon").toString().replace(pBoxPlus->GetFileRoot(), "%BoxRoot%", Qt::CaseInsensitive) + "," + pAction->property("IconIndex").toString();
 			Entry["WorkingDir"] = pBoxPlus->MakeBoxCommand(pAction->property("WorkingDir").toString());
 			Entry["Command"] = "\"" + pBoxPlus->MakeBoxCommand(LinkTarget) + "\"";
 			m_pCtxPinToRun->setData(MakeRunEntry(Entry));
@@ -1900,7 +1900,7 @@ void CSbieView::UpdateRunMenu(const CSandBoxPtr& pBox)
 		else if(IconIndex.second.isEmpty())
 			pAction->setIcon(LoadWindowsIcon(pBoxEx->GetCommandFile(Entry["Command"].toString()), IconIndex.first.toInt()));
 		else
-			pAction->setIcon(LoadWindowsIcon(pBoxEx->GetCommandFile(IconIndex.first), IconIndex.second.toInt()));
+			pAction->setIcon(LoadWindowsIcon(IconIndex.first.replace("%BoxRoot%", pBoxEx->GetFileRoot(), Qt::CaseInsensitive), IconIndex.second.toInt()));
 		pAction->setData(Entry["Command"].toString());
 		pAction->setProperty("WorkingDir", Entry["WorkingDir"]);
 	}

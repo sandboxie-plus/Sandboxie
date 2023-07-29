@@ -7,6 +7,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.10.2 / 5.65.2] - 2023-07-??
 
 ### Changed
+- changed format of the addon data [#3135](https://github.com/sandboxie-plus/Sandboxie/issues/3135)
+  - all users coming from versions 1.10.0 and 1.10.1 will need to reinstall the components in the addon manager
 - "OpenClipboard=n" now also denies write to clipboard [#1367](https://github.com/sandboxie-plus/Sandboxie/issues/1367)
 
 ### Fixed
@@ -15,7 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed UI issue with new box removal protection [#3104](https://github.com/sandboxie-plus/Sandboxie/issues/3104)
 - fixed issue with link argument handling [#2969](https://github.com/sandboxie-plus/Sandboxie/issues/2969)
 - fixed IPC issue introduced in 1.10.1 [#3132](https://github.com/sandboxie-plus/Sandboxie/issues/3132) [#3134](https://github.com/sandboxie-plus/Sandboxie/issues/3134)
-- fixed issue with pined run entry icons
+- fixed issue with pinned run entry icons
 
 
 

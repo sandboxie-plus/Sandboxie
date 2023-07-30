@@ -22,7 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with link argument handling [#2969](https://github.com/sandboxie-plus/Sandboxie/issues/2969)
 - fixed IPC issue introduced in 1.10.1 [#3132](https://github.com/sandboxie-plus/Sandboxie/issues/3132) [#3134](https://github.com/sandboxie-plus/Sandboxie/issues/3134)
 - fixed issue with pinned run entry icons
-
+- fixed UGlobalHotkey lib not being compatible with Qt6
 
 
 

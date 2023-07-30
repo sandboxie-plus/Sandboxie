@@ -1536,15 +1536,21 @@ void CSettingsWindow::OnOptChanged()
 void CSettingsWindow::OnLoadAddon()
 {
 	ui.treeAddons->clear();
-	foreach(const CAddonPtr pAddon, theGUI->GetAddonManager()->GetAddons()) {
+	foreach(const CAddonInfoPtr pAddon, theGUI->GetAddonManager()->GetAddons()) {
 
 		QTreeWidgetItem* pItem = new QTreeWidgetItem;
 		pItem->setText(0, pAddon->GetLocalizedEntry("name"));
 		if(!pAddon->Data["mandatory"].toBool())
 			pItem->setData(0, Qt::UserRole, pAddon->Id);
 		pItem->setIcon(0, pAddon->Data.contains("icon") ? CSandMan::GetIcon(pAddon->Data["icon"].toString()) : CSandMan::GetIcon("Addon"));
-		pItem->setText(1, pAddon->Installed ? tr("Installed") : "");
-		pItem->setText(2, pAddon->GetLocalizedEntry("description"));
+		if (pAddon->Installed) {
+			if(!pAddon->UpdateVersion.isEmpty())
+				pItem->setText(1, tr("Update Available"));
+			else
+				pItem->setText(1, tr("Installed"));
+		}
+		pItem->setText(2, pAddon->Data["version"].toString());
+		pItem->setText(3, pAddon->GetLocalizedEntry("description"));
 
 		ui.treeAddons->addTopLevelItem(pItem);
 	}

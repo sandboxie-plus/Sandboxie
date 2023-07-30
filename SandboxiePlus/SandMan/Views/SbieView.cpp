@@ -272,8 +272,8 @@ void CSbieView::CreateMenu()
 		m_pMenuMarkLinger->setCheckable(true);
 		m_pMenuMarkLeader = m_pMenuPreset->addAction(tr("Set Leader Process"), this, SLOT(OnProcessAction()));
 		m_pMenuMarkLeader->setCheckable(true);
-	//m_pMenuSuspend = m_pMenuProcess->addAction(tr("Suspend"), this, SLOT(OnProcessAction()));
-	//m_pMenuResume = m_pMenuProcess->addAction(tr("Resume"), this, SLOT(OnProcessAction()));
+	m_pMenuSuspend = m_pMenuProcess->addAction(tr("Suspend"), this, SLOT(OnProcessAction()));
+	m_pMenuResume = m_pMenuProcess->addAction(tr("Resume"), this, SLOT(OnProcessAction()));
 }
 
 void CSbieView::CreateOldMenu()
@@ -607,7 +607,7 @@ bool CSbieView::UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBox
 	return bBoxBusy == false;
 }
 
-void CSbieView::UpdateProcMenu(const CBoxedProcessPtr& pProcess, int iProcessCount)
+void CSbieView::UpdateProcMenu(const CBoxedProcessPtr& pProcess, int iProcessCount, int iSuspendedCount)
 {
 	m_pMenuLinkTo->setEnabled(iProcessCount == 1);
 
@@ -640,8 +640,8 @@ void CSbieView::UpdateProcMenu(const CBoxedProcessPtr& pProcess, int iProcessCou
 		m_pMenuMarkLeader->setChecked(pProcess.objectCast<CSbieProcess>()->IsLeaderProgram());
 	}
 
-	//m_pMenuSuspend->setEnabled(iProcessCount > iSuspendedCount);
-	//m_pMenuResume->setEnabled(iSuspendedCount > 0);
+	m_pMenuSuspend->setEnabled(iProcessCount > iSuspendedCount);
+	m_pMenuResume->setEnabled(iSuspendedCount > 0);
 }
 
 bool CSbieView::UpdateMenu()
@@ -655,7 +655,7 @@ bool CSbieView::UpdateMenu()
 	int iProcessCount = 0;
 	int iSandBoxeCount = 0;
 	int iGroupe = 0;
-	//int iSuspendedCount = 0;
+	int iSuspendedCount = 0;
 	QModelIndexList Rows = m_pSbieTree->selectedRows();
 	foreach(const QModelIndex& Index, Rows)
 	{
@@ -666,8 +666,8 @@ bool CSbieView::UpdateMenu()
 		{
 			m_CurProcesses.append(pProcess);
 			iProcessCount++;
-			//if (pProcess->IsSuspended())
-			//	iSuspendedCount++;
+			if (pProcess->IsSuspended())
+				iSuspendedCount++;
 		}
 		else
 		{
@@ -699,7 +699,7 @@ bool CSbieView::UpdateMenu()
 	m_pDelGroupe->setVisible(iGroupe > 0 && iSandBoxeCount == 0 && iProcessCount == 0);
 
 	if (!pProcess.isNull())
-		UpdateProcMenu(pProcess, iProcessCount);
+		UpdateProcMenu(pProcess, iProcessCount, iSuspendedCount);
 
 	return UpdateMenu(bAdvanced, pBox, iSandBoxeCount, bBoxBusy);
 }
@@ -1596,10 +1596,10 @@ void CSbieView::OnProcessAction(QAction* Action, const QList<CBoxedProcessPtr>& 
 			pProcess.objectCast<CSbieProcess>()->SetLingeringProgram(m_pMenuMarkLinger->isChecked());
 		else if (Action == m_pMenuMarkLeader)
 			pProcess.objectCast<CSbieProcess>()->SetLeaderProgram(m_pMenuMarkLeader->isChecked());
-		/*else if (Action == m_pMenuSuspend)
+		else if (Action == m_pMenuSuspend)
 			Results.append(pProcess->SetSuspend(true));
 		else if (Action == m_pMenuResume)
-			Results.append(pProcess->SetSuspend(false));*/
+			Results.append(pProcess->SetSuspend(false));
 	}
 
 	theGUI->CheckResults(Results, this);

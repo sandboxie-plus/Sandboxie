@@ -876,7 +876,7 @@ std::wstring JSONValue::StringifyString(const std::wstring &str)
 	{
 		wchar_t chr = *iter;
 
-		if (chr == L'"' || chr == L'\\' || chr == L'/')
+		if (chr == L'"' || chr == L'\\' /*|| chr == L'/'*/)
 		{
 			str_out += L'\\';
 			str_out += chr;

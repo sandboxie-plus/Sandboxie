@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.10.2 / 5.65.2] - 2023-07-??
 
+
+### Added
+- re-added option to suspend sandboxed processes [#3126](https://github.com/sandboxie-plus/Sandboxie/issues/3126)
+
 ### Changed
 - changed format of the addon data [#3135](https://github.com/sandboxie-plus/Sandboxie/issues/3135)
   - all users coming from versions 1.10.0 and 1.10.1 will need to reinstall the components in the addon manager

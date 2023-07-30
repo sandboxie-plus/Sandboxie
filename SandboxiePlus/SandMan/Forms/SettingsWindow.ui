@@ -1229,6 +1229,11 @@
                  </column>
                  <column>
                   <property name="text">
+                   <string>Version</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
                    <string>Description</string>
                   </property>
                  </column>

@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>10</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -3369,7 +3369,7 @@ The process match level has a higher priority than the specificity and describes
             </font>
            </property>
            <property name="currentIndex">
-            <number>0</number>
+            <number>5</number>
            </property>
            <widget class="QWidget" name="tabCompat">
             <attribute name="title">
@@ -4051,14 +4051,35 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
             <layout class="QGridLayout" name="gridLayout_34">
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_32">
-               <item row="13" column="1" colspan="4">
-                <widget class="QCheckBox" name="chkApiTrace">
+               <item row="10" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkNetFwTrace">
                  <property name="text">
-                  <string>API call trace (requires LogAPI to be installed in the Sbie directory)</string>
+                  <string>Network Firewall</string>
                  </property>
                 </widget>
                </item>
-               <item row="14" column="4">
+               <item row="1" column="1" colspan="4">
+                <widget class="QCheckBox" name="chkDisableMonitor">
+                 <property name="text">
+                  <string>Disable Resource Access Monitor</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0" colspan="2">
+                <widget class="QLabel" name="lblMonitor">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Resource Access Monitor</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="13" column="4">
                 <spacer name="horizontalSpacer">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -4071,6 +4092,33 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
                  </property>
                 </spacer>
                </item>
+               <item row="4" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkFileTrace">
+                 <property name="text">
+                  <string>File Trace</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1" colspan="4">
+                <widget class="QCheckBox" name="chkCallTrace">
+                 <property name="text">
+                  <string>Ntdll syscall Trace (creates a lot of output)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_38">
+                 <property name="maximumSize">
+                  <size>
+                   <width>20</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
                <item row="5" column="1" colspan="2">
                 <widget class="QCheckBox" name="chkPipeTrace">
                  <property name="text">
@@ -4078,27 +4126,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
                  </property>
                 </widget>
                </item>
-               <item row="14" column="0">
-                <spacer name="verticalSpacer_19">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="12" column="2" colspan="3">
-                <widget class="QCheckBox" name="chkErrTrace">
-                 <property name="text">
-                  <string>Log all SetError's to Trace log (creates a lot of output)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="14" column="5">
+               <item row="13" column="5">
                 <spacer name="horizontalSpacer_3">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -4138,65 +4166,37 @@ instead of &quot;*&quot;.</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1" colspan="4">
-                <widget class="QCheckBox" name="chkCallTrace">
+               <item row="6" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkKeyTrace">
                  <property name="text">
-                  <string>Ntdll syscall Trace (creates a lot of output)</string>
+                  <string>Key Trace</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkFileTrace">
+               <item row="9" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkComTrace">
                  <property name="text">
-                  <string>File Trace</string>
+                  <string>COM Class Trace</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1" colspan="4">
-                <widget class="QCheckBox" name="chkDisableMonitor">
-                 <property name="text">
-                  <string>Disable Resource Access Monitor</string>
+               <item row="13" column="0">
+                <spacer name="verticalSpacer_19">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
                  </property>
-                </widget>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
                <item row="7" column="1" colspan="2">
                 <widget class="QCheckBox" name="chkIpcTrace">
                  <property name="text">
                   <string>IPC Trace</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkGuiTrace">
-                 <property name="text">
-                  <string>GUI Trace</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0" colspan="2">
-                <widget class="QLabel" name="lblMonitor">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Resource Access Monitor</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QLabel" name="label_38">
-                 <property name="maximumSize">
-                  <size>
-                   <width>20</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string/>
                  </property>
                 </widget>
                </item>
@@ -4214,24 +4214,17 @@ instead of &quot;*&quot;.</string>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkComTrace">
+               <item row="12" column="2" colspan="3">
+                <widget class="QCheckBox" name="chkErrTrace">
                  <property name="text">
-                  <string>COM Class Trace</string>
+                  <string>Log all SetError's to Trace log (creates a lot of output)</string>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkKeyTrace">
+               <item row="8" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkGuiTrace">
                  <property name="text">
-                  <string>Key Trace</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="10" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkNetFwTrace">
-                 <property name="text">
-                  <string>Network Firewall</string>
+                  <string>GUI Trace</string>
                  </property>
                 </widget>
                </item>

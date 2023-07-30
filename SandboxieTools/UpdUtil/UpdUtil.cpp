@@ -817,7 +817,7 @@ std::shared_ptr<TAddonMap> ReadAddons(const JSONObject& jsonObject, const std::w
 
 			std::shared_ptr<SAddon> pAddon = ReadAddon(addon, core_arch, agent_arch, framework);
 
-			(*pAddons)[pAddon->Id] = pAddon;
+			(*pAddons)[MkLower(pAddon->Id)] = pAddon;
 		}
 	}
 
@@ -1470,7 +1470,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 			for (auto I = add_addons.begin(); I != add_addons.end(); ++I)
 			{
-				auto F = pAddons->find(*I);
+				auto F = pAddons->find(MkLower(*I));
 				if (F != pAddons->end()) {
 					std::wcout << L"Downloading addon " << *I << std::endl;
 					ret = DownloadAddon(F->second, step, temp_dir, base_dir);
@@ -1482,7 +1482,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 				if (ret >= 0 && (step.empty() || step == L"apply"))
 				{
-					std::wcout << L"Installing addon " << *I << std::endl;
+					std::shared_ptr<SAddon> pAddon = LoadAddon(base_dir, *I);
+					if (pAddon && !pAddon->InstallPath.empty()) {
+						std::wcout << L"Updating addon " << *I << std::endl;
+						RemoveAddon(pAddon, base_dir);
+					} else
+						std::wcout << L"Installing addon " << *I << std::endl;
 					ret = InstallAddon(F->second, temp_dir, base_dir);
 
 					// register addon

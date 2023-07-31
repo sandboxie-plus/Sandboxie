@@ -51,7 +51,7 @@
     <message>
         <location filename="AddonManager.cpp" line="254"/>
         <source>Updater failed to to perform plugin operation, error: %1</source>
-        <translation type>Updater konnte Pluginvorgang nicht durchführen, Fehler: %1</translation>
+        <translation>Updater konnte Pluginvorgang nicht durchführen, Fehler: %1</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="174"/>

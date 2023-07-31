@@ -21,77 +21,37 @@
     <message>
         <location filename="AddonManager.cpp" line="234"/>
         <source>Addon Not Found</source>
-        <translation type="unfinished"></translation>
+        <translation>Erweiterung nicht gefunden</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="235"/>
         <source>Addon is not available for this paltform</source>
-        <translation type="unfinished"></translation>
+        <translation>Erweiterung ist nicht für diese Plattform verfügbar</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="236"/>
         <source>Missing instalation instructions</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlende Installationsanweisungen</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="237"/>
         <source>Executing addon setup failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausführung des Erweiterungssetups fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="238"/>
         <source>Failed to delete a file during addon removal</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte eine Datei bei der Entfernung der Erweiterung nicht löschen</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="252"/>
         <source>Updater failed to to perform plugin operation</source>
-        <translation type="unfinished"></translation>
+        <translation>Updater konnte Pluginvorgang nicht durchführen</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="254"/>
         <source>Updater failed to to perform plugin operation, error: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Addon already installed!</source>
-        <translation type="vanished">Erweiterung bereits installiert!</translation>
-    </message>
-    <message>
-        <source>Addon has no download url, addon may not be available for your platform.</source>
-        <translation type="vanished">Erweiterung hat keine Download-URL, die Erweiterung ist möglicherweise nicht für Ihre Plattform verfügbar.</translation>
-    </message>
-    <message>
-        <source>Downloading Addon %1</source>
-        <translation type="vanished">Lade Erweiterung %1 runter</translation>
-    </message>
-    <message>
-        <source>Download signature is not valid!</source>
-        <translation type="vanished">Downloadsignatur ist nicht gültig!</translation>
-    </message>
-    <message>
-        <source>Installing Addon %1</source>
-        <translation type="vanished">Installiere Erweiterung: %1</translation>
-    </message>
-    <message>
-        <source>Running Installer for %1</source>
-        <translation type="vanished">Starte Installer für %1</translation>
-    </message>
-    <message>
-        <source>Failed to start installer (%1)!</source>
-        <translation type="vanished">Fehler beim Starten des Installers (%1)!</translation>
-    </message>
-    <message>
-        <source>Copying Files for %1</source>
-        <translation type="vanished">Kopiere Dateien für %1</translation>
-    </message>
-    <message>
-        <source>Failed to unpack addon!</source>
-        <translation type="vanished">Fehler beim Entpacken der Erweiterung!</translation>
-    </message>
-    <message>
-        <source>Addon Installation Failed!</source>
-        <translation type="vanished">Erweiterungsinstallation fehlgeschlagen!</translation>
+        <translation>Updater konnte Pluginvorgang nicht durchführen, Fehler: %1</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="174"/>
@@ -107,18 +67,6 @@
         <location filename="AddonManager.cpp" line="214"/>
         <source>Addon not found!</source>
         <translation>Erweiterung nicht gefunden!</translation>
-    </message>
-    <message>
-        <source>Running Uninstaller for %1</source>
-        <translation type="vanished">Starte Uninstaller für %1</translation>
-    </message>
-    <message>
-        <source>Failed to start uninstaller!</source>
-        <translation type="vanished">Fehler beim Starten des Uninstallers!</translation>
-    </message>
-    <message>
-        <source>Addon Removal Failed!</source>
-        <translation type="vanished">Erweiterungsentfernung fehlgeschlagen!</translation>
     </message>
 </context>
 <context>
@@ -2369,10 +2317,6 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         <translation>Verbesserte Privatsphäre</translation>
     </message>
     <message>
-        <source>API Log</source>
-        <translation type="vanished">API Protokoll</translation>
-    </message>
-    <message>
         <location filename="SbiePlusAPI.cpp" line="697"/>
         <source>No INet (with Exceptions)</source>
         <translation>Kein Internet (mit Ausnahmen)</translation>
@@ -4186,12 +4130,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="275"/>
         <source>Suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterbrechen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="276"/>
         <source>Resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Fortsetzen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="297"/>
@@ -4799,7 +4743,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1548"/>
         <source>Update Available</source>
-        <translation type="unfinished"></translation>
+        <translation>Update verfügbar</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1550"/>
@@ -6196,10 +6140,6 @@ Notiz: Erzwungene Programme und Ordner für eine Sandbox finden keine Anwendung 
         <location filename="Forms/OptionsWindow.ui" line="4049"/>
         <source>Tracing</source>
         <translation>Rückverfolgung</translation>
-    </message>
-    <message>
-        <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
-        <translation type="vanished">API Aufrufsrückverfolgung (erfordert, dass LogAPI in den Sbie Ordner installiert wird)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4220"/>
@@ -7850,7 +7790,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1232"/>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Version</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1237"/>

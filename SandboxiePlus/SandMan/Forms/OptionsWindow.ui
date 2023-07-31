@@ -1295,21 +1295,14 @@
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="tabImage">
+           <widget class="QWidget" name="tabDlls">
             <attribute name="title">
-             <string>Image Protection</string>
+             <string>Dlls &amp;&amp; Extensions</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_77">
-             <item row="0" column="0">
+             <item row="1" column="0">
               <layout class="QGridLayout" name="gridLayout_49">
-               <item row="3" column="2">
-                <widget class="QCheckBox" name="chkHostProtectMsg">
-                 <property name="text">
-                  <string>Issue message 1305 when a program tries to load a sandboxed dll</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
+               <item row="6" column="1">
                 <spacer name="verticalSpacer_36">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -1322,31 +1315,10 @@
                  </property>
                 </spacer>
                </item>
-               <item row="4" column="2">
-                <spacer name="horizontalSpacer_16">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="2" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkHostProtect">
-                 <property name="text">
-                  <string>Prevent sandboxes programs installed on host from loading dll's from the sandbox</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0" colspan="2">
+               <item row="3" column="0" colspan="2">
                 <widget class="QLabel" name="lblProtection">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1359,35 +1331,85 @@
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1">
-                <widget class="QLabel" name="label_47">
-                 <property name="minimumSize">
-                  <size>
-                   <width>20</width>
-                   <height>0</height>
-                  </size>
+               <item row="1" column="0" colspan="3">
+                <widget class="QTreeWidget" name="treeInjectDll">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
                  </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>20</width>
-                   <height>16777215</height>
-                  </size>
+                 <column>
+                  <property name="text">
+                   <string>Name</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Description</string>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+               <item row="4" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkHostProtect">
+                 <property name="toolTip">
+                  <string>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
+This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</string>
                  </property>
                  <property name="text">
-                  <string/>
+                  <string>Prevent sandboxes programs installed on host from loading dll's from the sandbox</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="2">
+                <widget class="QCheckBox" name="chkHostProtectMsg">
+                 <property name="text">
+                  <string>Issue message 1305 when a program tries to load a sandboxed dll</string>
                  </property>
                 </widget>
                </item>
                <item row="0" column="0" colspan="3">
-                <widget class="QLabel" name="label_52">
+                <widget class="QLabel" name="label_36">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="text">
-                  <string>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
-This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</string>
+                  <string>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the addon manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
                  </property>
                 </widget>
+               </item>
+               <item row="2" column="2">
+                <spacer name="horizontalSpacer_16">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="3">
+                <spacer name="verticalSpacer_39">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </item>

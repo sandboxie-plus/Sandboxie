@@ -24,6 +24,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with pinned run entry icons
 - fixed UGlobalHotkey lib not being compatible with Qt6
 
+### Removed
+- removed hardcoded support for LogApiDll
+  - use addon manager and dll injection settings
+
 
 
 ## [1.10.1 / 5.65.1] - 2023-07-24

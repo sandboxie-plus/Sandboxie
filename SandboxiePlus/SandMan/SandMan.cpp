@@ -3236,6 +3236,11 @@ void CSandMan::OnEditIni()
 		}
 	}
 
+	EditIni(IniPath, bPlus);
+}
+
+void CSandMan::EditIni(const QString& IniPath, bool bPlus)
+{
 	bool bIsWritable = bPlus;
 	if (!bIsWritable) {
 		QFile File(IniPath);

@@ -105,6 +105,9 @@ private slots:
 	//void OnShowStartTmpl() 			{ LoadStartTmpl(true); }
 	void OnStartChanged(QTreeWidgetItem* pItem, int Index);
 
+	void OnToggleInjectDll(QTreeWidgetItem* pItem, int Column);
+	void OnDblClickInjedtDll(QTreeWidgetItem* pItem, int Column);
+
 	void OnHostProtectChanged();
 
 	// net

@@ -489,6 +489,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pNewBox = m_pMenuFile->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnSandBoxAction()));
 		m_pNewGroup = m_pMenuFile->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnSandBoxAction()));
 		m_pImportBox = m_pMenuFile->addAction(CSandMan::GetIcon("UnPackBox"), tr("Import Box"), this, SLOT(OnSandBoxAction()));
+		m_pImportBox->setEnabled(CArchive::IsInit());
 		m_pMenuFile->addSeparator();
 		m_pRunBoxed = m_pMenuFile->addAction(CSandMan::GetIcon("Run"), tr("Run Sandboxed"), this, SLOT(OnSandBoxAction()));
 		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
@@ -709,6 +710,7 @@ void CSandMan::CreateOldMenus()
 		m_pNewBox = m_pSandbox->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Sandbox"), this, SLOT(OnSandBoxAction()));
 		m_pNewGroup = m_pSandbox->addAction(CSandMan::GetIcon("Group"), tr("Create New Group"), this, SLOT(OnSandBoxAction()));
 		m_pImportBox = m_pSandbox->addAction(CSandMan::GetIcon("UnPackBox"), tr("Import Sandbox"), this, SLOT(OnSandBoxAction()));
+		m_pImportBox->setEnabled(CArchive::IsInit());
 
 		QAction* m_pSetContainer = m_pSandbox->addAction(CSandMan::GetIcon("Advanced"), tr("Set Container Folder"), this, SLOT(OnSettingsAction()));
 		m_pSetContainer->setData("Sandbox");

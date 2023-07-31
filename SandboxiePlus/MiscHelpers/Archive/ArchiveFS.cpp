@@ -286,7 +286,7 @@ bool C7zFileEngineHandler::Open(const QString& ArchivePath)
     Close();
 
     CArchive* pArchive = new CArchive(ArchivePath);
-    if (pArchive->Open() <= 0) {
+    if (pArchive->Open() != ERR_7Z_OK) {
         delete pArchive;
         return false;
     }

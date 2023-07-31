@@ -13,6 +13,7 @@
 #include "../Views/FileView.h"
 #include "../Wizards/NewBoxWizard.h"
 #include "../Helpers/WinHelper.h"
+#include "../MiscHelpers/Archive/Archive.h"
 #include "../Windows/SettingsWindow.h"
 
 #include "qt_windows.h"
@@ -151,7 +152,8 @@ void CSbieView::CreateMenu()
 	m_pNewBox = m_pMenu->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnGroupAction()));
 	m_pAddGroupe = m_pMenu->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnGroupAction()));
 	m_pImportBox = m_pMenu->addAction(CSandMan::GetIcon("UnPackBox"), tr("Import Box"), this, SLOT(OnGroupAction()));
-	
+	m_pImportBox->setEnabled(CArchive::IsInit());
+
 
 	m_pMenuBox = new QMenu();
 	m_pStopAsync = m_pMenuBox->addAction(CSandMan::GetIcon("Stop"), tr("Stop Operations"), this, SLOT(OnSandBoxAction()));
@@ -236,6 +238,7 @@ void CSbieView::CreateMenu()
 	m_pMenuTools = m_pMenuBox->addMenu(CSandMan::GetIcon("Maintenance"), tr("Sandbox Tools"));
 		m_pMenuDuplicate = m_pMenuTools->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Box Config"), this, SLOT(OnSandBoxAction()));
 		m_pMenuExport = m_pMenuTools->addAction(CSandMan::GetIcon("PackBox"), tr("Export Box"), this, SLOT(OnSandBoxAction()));
+		m_pMenuExport->setEnabled(CArchive::IsInit());
 
 	m_pMenuRename = m_pMenuBox->addAction(CSandMan::GetIcon("Rename"), tr("Rename Sandbox"), this, SLOT(OnSandBoxAction()));
 	m_pMenuMoveTo = m_pMenuBox->addMenu(CSandMan::GetIcon("Group"), tr("Move Sandbox"));
@@ -333,6 +336,7 @@ void CSbieView::CreateOldMenu()
 		m_pMenuTools->addSeparator();
 		m_pMenuDuplicate = m_pMenuTools->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Sandbox Config"), this, SLOT(OnSandBoxAction()));
 		m_pMenuExport = m_pMenuTools->addAction(CSandMan::GetIcon("PackBox"), tr("Export Sandbox"), this, SLOT(OnSandBoxAction()));
+		m_pMenuExport->setEnabled(CArchive::IsInit());
 
 		m_pMenuTools->addSeparator();
 		m_pMenuRefresh = m_pMenuTools->addAction(CSandMan::GetIcon("Refresh"), tr("Refresh Info"), this, SLOT(OnSandBoxAction()));

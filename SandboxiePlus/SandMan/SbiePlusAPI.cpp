@@ -227,7 +227,7 @@ void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 	}
 
 	SB_STATUS Status = SB_OK;
-	if (!Archive.Update(&Files, true, theConf->GetInt("Options/ExportCompression", 5)))  // 0, 1 - 9
+	if (!Archive.Update(&Files, true, theConf->GetInt("Options/ExportCompression", 3)))  // 0, 1 - 9
 		Status = SB_ERR((ESbieMsgCodes)SBX_7zCreateFailed);
 	
 	//if(!Status.IsError() && !pProgress->IsCanceled())
@@ -262,7 +262,7 @@ void CSandBoxPlus::ImportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 {
 	CArchive Archive(ImportPath);
 
-	if (Archive.Open() != 1) {
+	if (Archive.Open() != ERR_7Z_OK) {
 		pProgress->Finish(SB_ERR((ESbieMsgCodes)SBX_7zOpenFailed));
 		return;
 	}

@@ -26,12 +26,12 @@
     <message>
         <location filename="AddonManager.cpp" line="235"/>
         <source>Addon is not available for this paltform</source>
-        <translation>Erweiterung ist nicht für diese Platformm verfügbar</translation>
+        <translation>Erweiterung ist nicht für diese Plattform verfügbar</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="236"/>
         <source>Missing instalation instructions</source>
-        <translation>Fehlende Installationsanleitungen</translation>
+        <translation>Fehlende Installationsanweisungen</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="237"/>

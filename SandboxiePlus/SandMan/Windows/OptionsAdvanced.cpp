@@ -142,7 +142,7 @@ void COptionsWindow::LoadAdvanced()
 	QStringList InjectDll = m_pBox->GetTextList("InjectDll", false);
 	QStringList InjectDll64 = m_pBox->GetTextList("InjectDll64", false);
 #ifdef _M_ARM64
-	QStringList InjectDllARM64 = m_pBox->GetTextList("InjectDllARM64");
+	QStringList InjectDllARM64 = m_pBox->GetTextList("InjectDllARM64", false);
 #endif
 	foreach(const CAddonInfoPtr pAddon, theGUI->GetAddonManager()->GetAddons()) {
 		if (!pAddon->Installed)
@@ -328,7 +328,7 @@ void COptionsWindow::SaveAdvanced()
 	QStringList InjectDll = m_pBox->GetTextList("InjectDll", false);
 	QStringList InjectDll64 = m_pBox->GetTextList("InjectDll64", false);
 #ifdef _M_ARM64
-	QStringList InjectDllARM64 = m_pBox->GetTextList("InjectDllARM64");
+	QStringList InjectDllARM64 = m_pBox->GetTextList("InjectDllARM64", false);
 #endif
 	for (int i = 0; i < ui.treeInjectDll->topLevelItemCount(); i++) {
 		QTreeWidgetItem* pItem = ui.treeInjectDll->topLevelItem(i);

@@ -1815,7 +1815,7 @@ void CSbieView::OnMenuContextMenu(const QPoint& point)
 			Entry["Name"] = pAction->text();
 			Entry["Icon"] = pAction->property("Icon").toString().replace(pBoxPlus->GetFileRoot(), "%BoxRoot%", Qt::CaseInsensitive) + "," + pAction->property("IconIndex").toString();
 			Entry["WorkingDir"] = pBoxPlus->MakeBoxCommand(pAction->property("WorkingDir").toString());
-			Entry["Command"] = "\"" + pBoxPlus->MakeBoxCommand(LinkTarget) + "\"";
+			Entry["Command"] = pBoxPlus->MakeBoxCommand(LinkTarget);
 			m_pCtxPinToRun->setData(MakeRunEntry(Entry));
 		}
 		else

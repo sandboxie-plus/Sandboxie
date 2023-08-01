@@ -249,9 +249,9 @@ void CAddonManager::RunUpdaterAsync(CAddonPtr pAddon, const QStringList& Params)
 #endif
 
 	if(Status.IsError())
-		pAddon->pProgress->Finish(SB_ERR(SB_OtherError, QVariantList() << tr("Updater failed to to perform plugin operation")));
+		pAddon->pProgress->Finish(SB_ERR(SB_OtherError, QVariantList() << tr("Updater failed to perform plugin operation")));
 	else if(Status.GetValue() < 0)
-		pAddon->pProgress->Finish(SB_ERR(SB_OtherError, QVariantList() << tr("Updater failed to to perform plugin operation, error: %1").arg(GetUpdErrorStr2(Status.GetValue()))));
+		pAddon->pProgress->Finish(SB_ERR(SB_OtherError, QVariantList() << tr("Updater failed to perform plugin operation, error: %1").arg(GetUpdErrorStr2(Status.GetValue()))));
 	else
 		pAddon->pProgress->Finish(SB_OK);
 	pAddon->pProgress.clear();
@@ -294,7 +294,7 @@ QString CAddonManager::GetFramework()
 QVariant CAddon::GetSpecificEntry(const QString& Name, QString* pName)
 {
 	//
-	// First we check the qt cpecific entry for our version of qt and platform
+	// First we check the Qt specific entry for our version of Qt and platform
 	//
 
 	QString qt = CAddonManager::GetFramework();
@@ -318,7 +318,7 @@ QVariant CAddon::GetSpecificEntry(const QString& Name, QString* pName)
 	}
 
 	//
-	// last we try the unsoecific entry
+	// last we try the unspecific entry
 	//
 	
 	if (Data.contains(Name)) {

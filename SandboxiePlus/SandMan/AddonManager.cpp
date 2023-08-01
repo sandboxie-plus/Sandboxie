@@ -232,8 +232,8 @@ QString GetUpdErrorStr2(int exitCode)
 	switch (exitCode)
 	{
 	case ERROR_NO_ADDON: return CAddonManager::tr("Addon Not Found");
-	case ERROR_NO_ADDON2: return CAddonManager::tr("Addon is not available for this paltform");
-	case ERROR_BAD_ADDON: return CAddonManager::tr("Missing instalation instructions");
+	case ERROR_NO_ADDON2: return CAddonManager::tr("Addon is not available for this platform");
+	case ERROR_BAD_ADDON: return CAddonManager::tr("Missing installation instructions");
 	case ERROR_BAD_ADDON2: return CAddonManager::tr("Executing addon setup failed");
 	case ERROR_DELETE: return CAddonManager::tr("Failed to delete a file during addon removal");
 	default: return GetUpdErrorStr(exitCode);

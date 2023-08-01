@@ -859,7 +859,7 @@ int DownloadAddon(std::shared_ptr<SAddon> pAddon, const std::wstring& step, cons
 	int ret = 0;
 
 	if (!pAddon || pAddon->Map.empty()) {
-		std::wcout << L"Addon is not available for this paltform" << std::endl;
+		std::wcout << L"Addon is not available for this platform" << std::endl;
 		return ERROR_NO_ADDON2;
 	}
 
@@ -924,7 +924,7 @@ int InstallAddon(std::shared_ptr<SAddon> pAddon, const std::wstring& temp_dir, c
 		if (ret >= 0 && !pAddon->UninstallKey.empty()) {
 			std::wstring cmd = ReadRegistryStringValue(pAddon->UninstallKey, L"UninstallString");
 			if (cmd.empty()) // when the expected uninstall key is not present,
-				ret = ERROR_BAD_ADDON2; // it means the instalation failed
+				ret = ERROR_BAD_ADDON2; // it means the installation failed
 		}
 
 		return ret;
@@ -984,7 +984,7 @@ int RemoveAddon(std::shared_ptr<SAddon> pAddon, const std::wstring& base_dir)
 		if (ret >= 0) {
 			std::wstring cmd = ReadRegistryStringValue(pAddon->UninstallKey, L"UninstallString");
 			if (!cmd.empty()) // when the expected uninstall key is still present,
-				ret = ERROR_BAD_ADDON2; // it means the uninstalation failed
+				ret = ERROR_BAD_ADDON2; // it means the uninstallation failed
 		}
 
 		return ret;
@@ -1391,7 +1391,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 
 		//
-		// load addons apropriate for the current instalation
+		// load addons apropriate for the current installation
 		//
 
 		std::shared_ptr<TAddonMap> pAddons;

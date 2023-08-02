@@ -171,7 +171,7 @@ ULONG GetSysArch()
 
     free(buffer);
 
-	return Arch2Str(architecture)
+	return architecture;
 }
 
 std::wstring ReadRegistryStringValue(std::wstring key, const std::wstring& valueName) 

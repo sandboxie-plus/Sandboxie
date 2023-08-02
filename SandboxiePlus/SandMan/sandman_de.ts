@@ -25,13 +25,15 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="235"/>
-        <source>Addon is not available for this paltform</source>
-        <translation>Erweiterung ist nicht für diese Plattform verfügbar</translation>
+        <source>Addon is not available for this platform</source>
+        <oldsource>Addon is not available for this paltform</oldsource>
+        <translation type="unfinished">Erweiterung ist nicht für diese Plattform verfügbar</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="236"/>
-        <source>Missing instalation instructions</source>
-        <translation>Fehlende Installationsanweisungen</translation>
+        <source>Missing installation instructions</source>
+        <oldsource>Missing instalation instructions</oldsource>
+        <translation type="unfinished">Fehlende Installationsanweisungen</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="237"/>
@@ -45,13 +47,15 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="252"/>
-        <source>Updater failed to to perform plugin operation</source>
-        <translation>Updater konnte Pluginvorgang nicht durchführen</translation>
+        <source>Updater failed to perform plugin operation</source>
+        <oldsource>Updater failed to to perform plugin operation</oldsource>
+        <translation type="unfinished">Updater konnte Pluginvorgang nicht durchführen</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="254"/>
-        <source>Updater failed to to perform plugin operation, error: %1</source>
-        <translation>Updater konnte Pluginvorgang nicht durchführen, Fehler: %1</translation>
+        <source>Updater failed to perform plugin operation, error: %1</source>
+        <oldsource>Updater failed to to perform plugin operation, error: %1</oldsource>
+        <translation type="unfinished">Updater konnte Pluginvorgang nicht durchführen, Fehler: %1</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="174"/>

@@ -25,13 +25,15 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="235"/>
-        <source>Addon is not available for this paltform</source>
-        <translation>Le module est indisponible pour cette plateforme</translation>
+        <source>Addon is not available for this platform</source>
+        <oldsource>Addon is not available for this paltform</oldsource>
+        <translation type="unfinished">Le module est indisponible pour cette plateforme</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="236"/>
-        <source>Missing instalation instructions</source>
-        <translation>Instructions d&apos;installation manquantes</translation>
+        <source>Missing installation instructions</source>
+        <oldsource>Missing instalation instructions</oldsource>
+        <translation type="unfinished">Instructions d&apos;installation manquantes</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="237"/>
@@ -45,13 +47,15 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="252"/>
-        <source>Updater failed to to perform plugin operation</source>
-        <translation>Échec du programme de mise à jour à effectuer une opération de module</translation>
+        <source>Updater failed to perform plugin operation</source>
+        <oldsource>Updater failed to to perform plugin operation</oldsource>
+        <translation type="unfinished">Échec du programme de mise à jour à effectuer une opération de module</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="254"/>
-        <source>Updater failed to to perform plugin operation, error: %1</source>
-        <translation>Échec du programme de mise à jour à effectuer une opération de module ; erreur : %1</translation>
+        <source>Updater failed to perform plugin operation, error: %1</source>
+        <oldsource>Updater failed to to perform plugin operation, error: %1</oldsource>
+        <translation type="unfinished">Échec du programme de mise à jour à effectuer une opération de module ; erreur : %1</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="174"/>
@@ -7732,7 +7736,7 @@ Veuillez noter que ces valeurs sont actuellement spécifiques à l&apos;utilisat
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1349"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Description</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1357"/>

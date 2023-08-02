@@ -25,12 +25,14 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="235"/>
-        <source>Addon is not available for this paltform</source>
+        <source>Addon is not available for this platform</source>
+        <oldsource>Addon is not available for this paltform</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="236"/>
-        <source>Missing instalation instructions</source>
+        <source>Missing installation instructions</source>
+        <oldsource>Missing instalation instructions</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -45,12 +47,14 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="252"/>
-        <source>Updater failed to to perform plugin operation</source>
+        <source>Updater failed to perform plugin operation</source>
+        <oldsource>Updater failed to to perform plugin operation</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="254"/>
-        <source>Updater failed to to perform plugin operation, error: %1</source>
+        <source>Updater failed to perform plugin operation, error: %1</source>
+        <oldsource>Updater failed to to perform plugin operation, error: %1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

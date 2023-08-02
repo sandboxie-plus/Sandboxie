@@ -19,6 +19,7 @@
 #include <shellapi.h>
 #include <io.h>
 #include <fcntl.h>
+#include <aclapi.h>
 #include <iostream>
 #include "../Common/helpers.h"
 #include "../Common/WebUtils.h"
@@ -105,6 +106,73 @@ struct SAddon : SFiles
 
 typedef std::map<std::wstring, std::shared_ptr<SAddon>> TAddonMap;
 
+std::wstring Arch2Str(ULONG architecture)
+{
+	switch (architecture)
+	{
+	case IMAGE_FILE_MACHINE_ARM64:	return L"a64";
+	case PROCESSOR_ARCHITECTURE_AMD64:	return L"x64";
+	case PROCESSOR_ARCHITECTURE_INTEL:	return L"x86";
+	default: return L"";
+	}
+}
+
+extern "C"
+{
+NTSYSCALLAPI NTSTATUS NTAPI NtQuerySystemInformationEx(
+    _In_ SYSTEM_INFORMATION_CLASS SystemInformationClass,
+    _In_reads_bytes_(InputBufferLength) PVOID InputBuffer,
+    _In_ ULONG InputBufferLength,
+    _Out_writes_bytes_opt_(SystemInformationLength) PVOID SystemInformation,
+    _In_ ULONG SystemInformationLength,
+    _Out_opt_ PULONG ReturnLength
+    );
+}
+
+ULONG GetSysArch()
+{
+    USHORT architecture = 0;
+    NTSTATUS status;
+	HANDLE ProcessHandle = GetCurrentProcess();
+	ULONG bufferLength;
+	SYSTEM_SUPPORTED_PROCESSOR_ARCHITECTURES_INFORMATION* buffer;
+    ULONG returnLength;
+
+	bufferLength = sizeof(SYSTEM_SUPPORTED_PROCESSOR_ARCHITECTURES_INFORMATION[5]);
+	buffer = (SYSTEM_SUPPORTED_PROCESSOR_ARCHITECTURES_INFORMATION*)malloc(bufferLength);
+
+	const ULONG SystemSupportedProcessorArchitectures = 181;
+    status = NtQuerySystemInformationEx((SYSTEM_INFORMATION_CLASS)SystemSupportedProcessorArchitectures, &ProcessHandle, sizeof(ProcessHandle), buffer, bufferLength, &returnLength);
+
+    if (NT_SUCCESS(status))
+    {
+        for (ULONG i = 0; i < returnLength / sizeof(SYSTEM_SUPPORTED_PROCESSOR_ARCHITECTURES_INFORMATION); i++)
+        {
+            if (buffer[i].Native)
+            {
+                architecture = (USHORT)buffer[i].Machine;
+                break;
+            }
+        }
+    }
+    else // windows 7 fallback
+    {
+        SYSTEM_INFO SystemInfo = {0};
+        GetNativeSystemInfo(&SystemInfo);
+        switch (SystemInfo.wProcessorArchitecture)
+        {
+        case PROCESSOR_ARCHITECTURE_AMD64:  architecture = IMAGE_FILE_MACHINE_AMD64; break;
+		//case PROCESSOR_ARCHITECTURE_ARM:    architecture = ; break;
+        case PROCESSOR_ARCHITECTURE_ARM64:  architecture = IMAGE_FILE_MACHINE_ARM64; break;
+        //case PROCESSOR_ARCHITECTURE_IA64:   architecture = IMAGE_FILE_MACHINE_IA64; break; // itanium
+        case PROCESSOR_ARCHITECTURE_INTEL:  architecture = IMAGE_FILE_MACHINE_I386; break;
+        }
+    }
+
+    free(buffer);
+
+	return Arch2Str(architecture)
+}
 
 std::wstring ReadRegistryStringValue(std::wstring key, const std::wstring& valueName) 
 {
@@ -133,9 +201,9 @@ std::wstring ReadRegistryStringValue(std::wstring key, const std::wstring& value
 	return L"";
 }
 
-std::wstring GetBinaryArch(const std::wstring& file)
+ULONG GetBinaryArch(const std::wstring& file)
 {
-	std::wstring arch;
+	ULONG arch = 0;
 
     HANDLE hFile = CreateFile(file.c_str(), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (hFile == INVALID_HANDLE_VALUE)
@@ -157,12 +225,7 @@ std::wstring GetBinaryArch(const std::wstring& file)
     if (ntHeader.Signature != IMAGE_NT_SIGNATURE)
         goto finish;
     
-	switch (ntHeader.FileHeader.Machine)
-	{
-	case IMAGE_FILE_MACHINE_I386:	arch = L"x86"; break;
-	case IMAGE_FILE_MACHINE_AMD64:	arch = L"x64"; break;
-	case IMAGE_FILE_MACHINE_ARM64:	arch = L"a64"; break;
-	}
+	arch = ntHeader.FileHeader.Machine;
     
 finish:
     if(hFile != INVALID_HANDLE_VALUE) CloseHandle(hFile);
@@ -643,9 +706,15 @@ int ApplyUpdate(std::wstring base_dir, std::wstring temp_dir, std::shared_ptr<SF
 		if (!path_name.first.empty())
 			CreateDirectoryTree(base_dir, path_name.first);
 
-		if(MoveFileExW(src.c_str(), dest.c_str(), MOVEFILE_REPLACE_EXISTING | MOVEFILE_COPY_ALLOWED))
+		if (MoveFileExW(src.c_str(), dest.c_str(), MOVEFILE_REPLACE_EXISTING | MOVEFILE_COPY_ALLOWED)) {
+
+			// inherit parent folder permissions
+			ACL g_null_acl = { 0 };
+			InitializeAcl(&g_null_acl, sizeof(g_null_acl), ACL_REVISION);
+			DWORD error = SetNamedSecurityInfoW((wchar_t*)dest.c_str(), SE_FILE_OBJECT, DACL_SECURITY_INFORMATION | UNPROTECTED_DACL_SECURITY_INFORMATION, NULL, NULL, (PACL)&g_null_acl, NULL);
+
 			std::wcout << L" done" << std::endl;
-		else
+		} else
 			std::wcout << L" FAILED" << std::endl;
 	}
 
@@ -1141,21 +1210,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	std::wstring arch = GetArgument(arguments, L"arch");
 	if (!arch.empty()) {
 		// normalize architecture
-		if (arch == L"x64")
-			arch = L"x86_64";
-		else if (arch == L"x86")
-			arch = L"i386";
-		else if (arch == L"ARM64" || arch == L"A64" || arch == L"a64")
-			arch = L"arm64";
-	}
-	else
-#ifdef _M_ARM64
-		arch = L"ARM64";
-#elif _WIN64
-		arch = L"x86_64";
-#else
-		arch = L"i386";
-#endif
+		if (arch == L"x86_64")
+			arch = L"x64";
+		else if (arch == L"i386")
+			arch = L"x86";
+		else if (arch == L"ARM64" || arch == L"A64" || arch == L"arm64")
+			arch = L"a64";
+	} else
+		arch = Arch2Str(GetSysArch());
 
 	if (arguments.size() >= 2 && arguments[0] == L"download") // download file to disk
 	{
@@ -1397,21 +1459,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		std::shared_ptr<TAddonMap> pAddons;
 		if (jsonAddons) 
 		{
-			std::wstring core_arch = GetBinaryArch(base_dir + L"\\sbiesvc.exe");
-			if (core_arch.empty()) {
-				// convert to new format
-				if (arch == L"x86_64")
-					core_arch = L"x64";
-				else if (arch == L"i386")
-					core_arch = L"x86";
-				else if (arch == L"arm64")
-					core_arch = L"a64";
-			}
+			std::wstring core_arch = Arch2Str(GetBinaryArch(base_dir + L"\\sbiesvc.exe"));
 
 			std::wstring agent_arch = GetArgument(arguments, L"agent_arch");
 			if (agent_arch.empty()) {
-				agent_arch = GetBinaryArch(base_dir + L"\\SandMan.exe");
-				if (agent_arch.empty()) agent_arch = GetBinaryArch(base_dir + L"\\SbieCtrl.exe");
+				agent_arch = Arch2Str(GetBinaryArch(base_dir + L"\\SandMan.exe"));
+				if (agent_arch.empty()) agent_arch = Arch2Str(GetBinaryArch(base_dir + L"\\SbieCtrl.exe"));
 			}
 
 			std::wstring framework = GetArgument(arguments, L"framework");

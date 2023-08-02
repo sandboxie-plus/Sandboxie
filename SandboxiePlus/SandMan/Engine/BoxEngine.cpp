@@ -45,6 +45,9 @@ CBoxEngine::~CBoxEngine()
 
 void CBoxEngine::Stop()
 {
+    if (!isRunning())
+        return;
+
     m_Mutex.lock();
     if (m_State == eQuery || m_State == eReady)
         Continue(true, eCanceled);

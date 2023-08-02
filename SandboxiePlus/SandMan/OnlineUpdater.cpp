@@ -676,7 +676,7 @@ bool COnlineUpdater::ApplyUpdate(bool bSilent)
 	if (Scope == eFull)
 		Params.append("/open:sandman.exe");
 
-	SB_RESULT(int) status = RunUpdater(Params, bSilent, Scope != eFull);
+	SB_RESULT(int) status = RunUpdater(Params, true, Scope != eFull);
 	if (!status.IsError()) {
 		if(bSilent)
 			theConf->DelValue("Updater/UpdateVersion");

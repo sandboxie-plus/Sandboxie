@@ -6366,7 +6366,7 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1381"/>
         <source>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the addon manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</source>
-        <translation>Die Funktionalität von Sandboxie kann durch optionale Dlls verbessert werden, die beim Start durch die SbieDll.dll in jeden sandgeboxten Prozesses geladen werden. Der Erweiterungsmanager in den globalen Einstellungen bietet ein paar nützliche Erweiterungen, die, nachdem diese installiert wurden, hier für die aktuelle Box aktviert werden können.</translation>
+        <translation>Die Funktionalität von Sandboxie kann durch optionale Dlls verbessert werden, die beim Start durch die SbieDll.dll in jeden sandgeboxten Prozesses geladen werden. Der Erweiterungsmanager in den globalen Einstellungen bietet ein paar nützliche Erweiterungen, die, nachdem diese installiert wurden, hier für die aktuelle Box aktiviert werden können.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1427"/>

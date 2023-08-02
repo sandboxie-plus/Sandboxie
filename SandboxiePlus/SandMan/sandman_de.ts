@@ -26,14 +26,12 @@
     <message>
         <location filename="AddonManager.cpp" line="235"/>
         <source>Addon is not available for this platform</source>
-        <oldsource>Addon is not available for this paltform</oldsource>
-        <translation type="unfinished">Erweiterung ist nicht für diese Plattform verfügbar</translation>
+        <translation>Erweiterung ist nicht für diese Plattform verfügbar</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="236"/>
         <source>Missing installation instructions</source>
-        <oldsource>Missing instalation instructions</oldsource>
-        <translation type="unfinished">Fehlende Installationsanweisungen</translation>
+        <translation>Fehlende Installationsanweisungen</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="237"/>
@@ -48,14 +46,12 @@
     <message>
         <location filename="AddonManager.cpp" line="252"/>
         <source>Updater failed to perform plugin operation</source>
-        <oldsource>Updater failed to to perform plugin operation</oldsource>
-        <translation type="unfinished">Updater konnte Pluginvorgang nicht durchführen</translation>
+        <translation>Updater konnte Pluginvorgang nicht durchführen</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="254"/>
         <source>Updater failed to perform plugin operation, error: %1</source>
-        <oldsource>Updater failed to to perform plugin operation, error: %1</oldsource>
-        <translation type="unfinished">Updater konnte Pluginvorgang nicht durchführen, Fehler: %1</translation>
+        <translation>Updater konnte Pluginvorgang nicht durchführen, Fehler: %1</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="174"/>
@@ -6353,12 +6349,12 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1300"/>
         <source>Dlls &amp;&amp; Extensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Dlls &amp;&amp; Erweiterungen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1349"/>
         <source>Description</source>
-        <translation type="unfinished">Beschreibung</translation>
+        <translation>Beschreibung</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1357"/>
@@ -6370,7 +6366,7 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1381"/>
         <source>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the addon manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Funktionalität von Sandboxie kann durch optionale Dlls verbessert werden, die beim Start durch die SbieDll.dll in jeden sandgeboxten Prozesses geladen werden. Der Erweiterungsmanager in den globalen Einstellungen bietet ein paar nützliche Erweiterungen, die, nachdem diese installiert wurden, hier für die aktuelle Box aktviert werden können.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1427"/>

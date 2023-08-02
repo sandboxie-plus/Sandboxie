@@ -1846,7 +1846,7 @@ void CSbieView::OnMenuContextAction()
 		QString LinkTarget = m_pCtxMkLink->data().toString();
 		QString BoxName = pBoxPlus->GetName();
 
-		CreateShortcut(LinkTarget, BoxName);
+		CreateShortcut(pBoxPlus->GetFullCommand(LinkTarget), BoxName);
 	}
 }
 

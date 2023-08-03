@@ -4,18 +4,19 @@ Please note: there is another [ReadMe.md](./install/ReadMe.md) file in the [\ins
  
 Sandboxie builds under MS Visual Studio 2019.  
 1) Acquire [Visual Studio 2019](https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2019-and-other-products)
-2) In the Visual Studio Installer, tick "Desktop development with C++"
-	- This will install all needed components to build, including the Windows 10 SDK 10.0.19041
-3) If you need to build for other platforms, install the corresponding components
-	- MSVC v142 - VS 2019 C++ {architecture} build tools (Latest)
-	- MFC for latest v142 build tools {architecture}
-4) Install the Windows Driver Kit (WDK) for Windows 10, version 2004 (10.0.19041):
+2) In the Visual Studio Installer, tick _Desktop development with C++_
+	- This includes the Windows 10 SDK 10.0.19041
+3) The _MFC for latest v142 build tools {architecture}_ is also needed. Select it from the side panel or from the individual components tab 
+4) If you need to build for other platforms, install the corresponding components
+	- _MSVC v142 - VS 2019 C++ {architecture} build tools (Latest)_
+	- _MFC for latest v142 build tools {architecture}_
+5) Install the Windows Driver Kit (WDK) for Windows 10, version 2004 (10.0.19041):
 	https://go.microsoft.com/fwlink/?linkid=2128854
-5) The VS Solution File, Sandbox.sln, is in the source code root. Open this SLN in Visual Studio.
-6) If the WDK Extension doesn't install automatically, install it (can be found in <Windows Kits directory>\10\Vsix\VS2019)
-7) If you have a more recent Windows SDK version installed, retarget the solution to 10.0.19041
+6) The VS Solution File, Sandbox.sln, is in the source code root. Open this SLN in Visual Studio.
+7) If the WDK Extension doesn't install automatically, install it (can be found in <Windows Kits directory>\10\Vsix\VS2019)
+8) If you have a more recent Windows SDK version installed, retarget the solution to 10.0.19041
 	- This is for example necessary if VS2022 is also installed with the default desktop C++ components
-8) To compile for x64, it's necessary to first compile `Solution/core/LowLevel` for Win32
+9) To compile for x64, it's necessary to first compile `Solution/core/LowLevel` for Win32 (x86)
 
 ### Source Projects (in alphabetical order)
 

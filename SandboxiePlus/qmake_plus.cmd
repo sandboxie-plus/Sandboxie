@@ -1,4 +1,4 @@
-@echo off
+REM @echo off
 REM echo Current dir: %cd /d%
 REM echo folder: %~dp0
 REM echo arch: %1
@@ -7,6 +7,14 @@ set ORIGINAL_FOLDER=%cd%
 set WIN32_QT_VER=5.15.2
 set x64_QT_VER=5.15.2
 set ARM64_QT_VER=6.3.2
+
+IF "%3" == "" (
+  set parallelism=8
+) ELSE (
+  set parallelism=%3
+)
+set parallelism=-j %parallelism%
+
 
 IF "%2" == "" (
   set qt_root_dir=%~dp0..\..\Qt
@@ -85,7 +93,7 @@ mkdir %~dp0\Build_UGlobalHotkey_%build_arch%
 cd /d %~dp0\Build_UGlobalHotkey_%build_arch%
 
 %qt_path%\bin\qmake.exe %~dp0\UGlobalHotkey\uglobalhotkey.qc.pro %qt_params%
-%qt_root_dir%\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
+%qt_root_dir%\Tools\QtCreator\bin\jom.exe -f Makefile.Release %parallelism%
 IF %ERRORLEVEL% NEQ 0 goto :error
 if NOT EXIST %~dp0\bin\%build_arch%\Release\UGlobalHotkey.dll goto :error
 
@@ -95,7 +103,7 @@ mkdir %~dp0\Build_qtsingleapp_%build_arch%
 cd /d %~dp0\Build_qtsingleapp_%build_arch%
 
 %qt_path%\bin\qmake.exe %~dp0\QtSingleApp\qtsingleapp\qtsingleapp\qtsingleapp.qc.pro %qt_params%
-%qt_root_dir%\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
+%qt_root_dir%\Tools\QtCreator\bin\jom.exe -f Makefile.Release %parallelism%
 IF %ERRORLEVEL% NEQ 0 goto :error
 if NOT EXIST %~dp0\bin\%build_arch%\Release\qtsingleapp.dll goto :error
 
@@ -105,7 +113,7 @@ mkdir %~dp0\Build_MiscHelpers_%build_arch%
 cd /d %~dp0\Build_MiscHelpers_%build_arch%
 
 %qt_path%\bin\qmake.exe %~dp0\MiscHelpers\MiscHelpers.qc.pro %qt_params%
-%qt_root_dir%\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
+%qt_root_dir%\Tools\QtCreator\bin\jom.exe -f Makefile.Release %parallelism%
 IF %ERRORLEVEL% NEQ 0 goto :error
 if NOT EXIST %~dp0\bin\%build_arch%\Release\MiscHelpers.dll goto :error
 
@@ -115,7 +123,7 @@ mkdir %~dp0\Build_QSbieAPI_%build_arch%
 cd /d %~dp0\Build_QSbieAPI_%build_arch%
 
 %qt_path%\bin\qmake.exe %~dp0\QSbieAPI\QSbieAPI.qc.pro %qt_params%
-%qt_root_dir%\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
+%qt_root_dir%\Tools\QtCreator\bin\jom.exe -f Makefile.Release %parallelism%
 IF %ERRORLEVEL% NEQ 0 goto :error
 if NOT EXIST %~dp0\bin\%build_arch%\Release\QSbieAPI.dll goto :error
 
@@ -125,7 +133,7 @@ mkdir %~dp0\Build_SandMan_%build_arch%
 cd /d %~dp0\Build_SandMan_%build_arch%
 
 %qt_path%\bin\qmake.exe %~dp0\SandMan\SandMan.qc.pro %qt_params%
-%qt_root_dir%\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
+%qt_root_dir%\Tools\QtCreator\bin\jom.exe -f Makefile.Release %parallelism%
 IF %ERRORLEVEL% NEQ 0 goto :error
 if NOT EXIST %~dp0\bin\%build_arch%\Release\SandMan.exe goto :error
 
@@ -140,8 +148,11 @@ rem dir .\bin\%build_arch%\Release
 exit /b 0
 
 :print_usage
-echo Usage: qmake_plus.cmd ^<architecture^>
+echo Usage: qmake_plus.cmd ^<architecture^> ^[Qt root directory^] ^[Threads to use (jom -j value)^]
 echo Architecture can be Win32 / x64 / ARM64
+echo Qt root directory defaults to ..\..\Qt
+echo Threads to use defaults to 8
+echo Example: qmake_plus.cmd x64 D:\Qt 12
 exit /b 0
 
 :error

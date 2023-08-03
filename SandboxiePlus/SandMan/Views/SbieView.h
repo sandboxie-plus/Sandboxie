@@ -65,7 +65,7 @@ public:
 
 	QMap<QString, QStringList>	GetGroups() { return m_Groups; }
 
-	static bool					CreateShortcut(const QString& LinkPath, const QString& BoxName, const QString& IconPath = QString(), int IconIndex = 0, const QString& WorkDir = QString());
+	static bool					CreateShortcutEx(const QString& LinkPath, const QString& BoxName, QString LinkName = QString(), const QString& IconPath = QString(), int IconIndex = 0, const QString& WorkDir = QString());
 
 signals:
 	void						BoxSelected();

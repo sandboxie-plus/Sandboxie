@@ -1,6 +1,12 @@
 @echo off
 
-if exist %~dp0..\..\Qt\Tools\QtCreator\bin\jom.exe (
+IF "%1" == "" (
+  set qt_root_dir=%~dp0..\..\Qt
+) ELSE (
+  set qt_root_dir=%1
+)
+
+if exist %qt_root_dir%\Tools\QtCreator\bin\jom.exe (
     echo jom already installed, nothing to do
     goto done
 )
@@ -18,8 +24,8 @@ if %ERRORLEVEL% == 1 (
     exit /b 2
 )
 
-curl -LsSO --output-dir %~dp0..\..\ https://download.qt.io/official_releases/jom/jom.zip
-7z x -aoa -o%~dp0..\..\Qt\Tools\QtCreator\bin\ %~dp0..\..\jom.zip
+curl -LsSO --output-dir %qt_root_dir%\ https://download.qt.io/official_releases/jom/jom.zip
+7z x -aoa -o%qt_root_dir%\Tools\QtCreator\bin\ %qt_root_dir%\jom.zip
 
 :done
 

@@ -51,25 +51,26 @@ int CArchive::Open()
 	if(!theArc.IsOperational())
 	{
 		LogError("Couldn't open interface");
-		return 0; // failed
+		return ERR_7Z_NO_INTERFACE;
 	}
 
 	if(m_Archive)
 	{
 		LogError("archive is already open");
-		return 0; // fails
+		return ERR_7Z_ALREADY_OPEN;
 	}
 
 	if(!m_pDevice && !QFile::exists(m_ArchivePath))
 	{
 		LogError("archive does not exist");
-		return 0; // failed
+		return ERR_7Z_FILE_NOT_EXIST;
 	}
 
 	SArcInfo Info = GetArcInfo(m_ArchivePath);
-	if(Info.FormatIndex == 0)
-		return -1; // unsupported format
+	if (Info.FormatIndex == 0)
+		return ERR_7Z_UNSUPPORTED_FORMAT;
 
+	bool bNeedPassword = false;
 	for (int i = 0; i <= theArc.GetFormatCount(); i++)
 	{	
 		CMyComPtr<IInArchive> InArchive;
@@ -87,8 +88,8 @@ int CArchive::Open()
 			InArchive->Close();
 			if(Ret == S_FALSE)
 				continue; // not supported
-			if(Ret == E_ABORT)
-				LogError(QString("Password required for archive"));
+			if (Ret == E_ABORT)
+				bNeedPassword = true;
 			break; // error
 		}
 
@@ -97,10 +98,15 @@ int CArchive::Open()
 		break;
 	}
 
+	if (bNeedPassword) {
+		LogError(QString("Password required for archive"));
+		return ERR_7Z_PASSWORD_REQUIRED;
+	}
+
 	if(m_Archive == NULL)
 	{
 		LogError("Failed to open archive");
-		return 0; // failed
+		return ERR_7Z_OPEN_FAILED;
 	}
 
 	// list archive content
@@ -138,7 +144,7 @@ int CArchive::Open()
 		m_Files.append(File);
 	}
 
-	return 1; // success
+	return ERR_7Z_OK; // success
 }
 
 bool CArchive::Extract(QString Path)
@@ -250,6 +256,7 @@ bool CArchive::Update(QMap<int, QIODevice*> *FileList, bool bDelete, int Level)
 		{
 			L"s",
 			L"x",
+			//L"mt",
 			L"he"
 		};
 		const int kNumProps = sizeof(names) / sizeof(names[0]);
@@ -257,6 +264,7 @@ bool CArchive::Update(QMap<int, QIODevice*> *FileList, bool bDelete, int Level)
 		{
 			false,			// solid mode OFF
 			(UInt32)Level,	// compression level = 9 - ultra
+			//(UInt32)8,		// set number of CPU threads
 			true			// file name encryption (7z only)
 		};
 
@@ -319,7 +327,7 @@ bool CArchive::Update(QMap<int, QIODevice*> *FileList, bool bDelete, int Level)
 			QFile::remove(m_ArchivePath);
 			QFile::rename(m_ArchivePath + ".tmp", m_ArchivePath);
 		}
-		return Open();
+		return Open() == ERR_7Z_OK;
 	}
 	return true;
 }
@@ -429,6 +437,11 @@ void CArchive::FileProperty(int ArcIndex, QString Name, QVariant Value)
 		m_Files[Index].Properties.insert(Name, Value);
 		//m_Files[Index].NewInfo = true;
 	}
+}
+
+void CArchive::LogError(const QString& Error) 
+{ 
+	qDebug() << Error; 
 }
 
 #endif

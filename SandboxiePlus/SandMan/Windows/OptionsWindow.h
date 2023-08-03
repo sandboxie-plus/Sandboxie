@@ -105,6 +105,9 @@ private slots:
 	//void OnShowStartTmpl() 			{ LoadStartTmpl(true); }
 	void OnStartChanged(QTreeWidgetItem* pItem, int Index);
 
+	void OnToggleInjectDll(QTreeWidgetItem* pItem, int Column);
+	void OnDblClickInjedtDll(QTreeWidgetItem* pItem, int Column);
+
 	void OnHostProtectChanged();
 
 	// net
@@ -351,8 +354,6 @@ protected:
 	void SaveConfig();
 	void UpdateCurrentTab();
 
-	void AddRunItem(const QString& Name, const QString& Icon, const QString& Command);
-
 	void CreateGeneral();
 	void LoadGeneral();
 	void SaveGeneral();
@@ -549,6 +550,8 @@ private:
 	void WriteAdvancedCheck(QCheckBox* pCheck, const QString& Name, const QString& OnValue, const QString& OffValue);
 	void WriteText(const QString& Name, const QString& Value);
 	void WriteTextList(const QString& Setting, const QStringList& List);
+	void WriteTextSafe(const QString& Name, const QString& Value);
+	QString ReadTextSafe(const QString& Name, const QString& Default);
 
 	Ui::OptionsWindow ui;
 	QCheckBox* m_pUseIcon;

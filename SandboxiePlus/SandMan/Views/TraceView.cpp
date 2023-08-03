@@ -327,11 +327,15 @@ CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 	m_pTrace = new CTraceTree(this);
 	m_pTrace->m_pTraceModel->SetTree(m_pTraceTree->isChecked());
 
+	m_pTrace->m_pAutoScroll = new QAction(tr("Auto Scroll"));
+	m_pTrace->m_pAutoScroll->setCheckable(true);
+	m_pTrace->m_pAutoScroll->setChecked(theConf->GetBool("Options/TraceAutoScroll"));
+	m_pTrace->GetMenu()->insertAction(m_pTrace->GetMenu()->actions()[0], m_pTrace->m_pAutoScroll);
+
 	if (bStandAlone) {
 		QAction* pAction = new QAction(tr("Cleanup Trace Log"));
 		connect(pAction, SIGNAL(triggered()), this, SLOT(Clear()));
-		m_pTrace->GetMenu()->insertAction(m_pTrace->GetMenu()->actions()[0], pAction);
-		m_pTrace->GetMenu()->insertSeparator(m_pTrace->GetMenu()->actions()[0]);
+		m_pTrace->GetMenu()->insertAction(m_pTrace->GetMenu()->actions()[1], pAction);
 	}
 
 	m_pLayout->addWidget(m_pTrace);
@@ -352,6 +356,8 @@ CTraceView::CTraceView(bool bStandAlone, QWidget* parent) : QWidget(parent)
 
 CTraceView::~CTraceView()
 {
+	theConf->SetValue("Options/TraceAutoScroll", m_pTrace->m_pAutoScroll->isChecked());
+
 	killTimer(m_uTimerID);
 }
 
@@ -372,7 +378,7 @@ void CTraceView::SetEnabled(bool bSet)
 
 void CTraceView::OnShowStack()
 {
-	if (!theGUI->GetAddonManager()->HasAddon("DbgHelp"))
+	if (!theGUI->GetAddonManager()->GetAddon("DbgHelp", CAddonManager::eInstalled).isNull())
         theGUI->GetAddonManager()->TryInstallAddon("DbgHelp", this, tr("To use the stack traces feature the DbgHelp.dll and SymSrv.dll are required, do you want to download and install them?"));
 	theAPI->GetGlobalSettings()->SetBool("MonitorStackTrace", m_pShowStack->isChecked());
 	m_pTrace->m_pStackView->setVisible(m_pShowStack->isChecked());
@@ -545,6 +551,9 @@ void CTraceView::Refresh()
 				qDebug() << "Expand took" << (GetCurCycle() - start) / 1000000.0 << "s";
 			});
 		}
+
+		if(m_pTrace->m_pAutoScroll->isChecked())
+			m_pTrace->m_pTreeList->scrollToBottom();
 	}
 }
 

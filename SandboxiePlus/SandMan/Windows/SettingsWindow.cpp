@@ -14,6 +14,8 @@
 #include "../Wizards/TemplateWizard.h"
 #include "../AddonManager.h"
 #include <qfontdialog.h>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 
 #include <windows.h>
@@ -205,6 +207,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	AddIconToLabel(ui.lblInterface, CSandMan::GetIcon("GUI").pixmap(size,size));
 
 	AddIconToLabel(ui.lblDisplay, CSandMan::GetIcon("Advanced").pixmap(size,size));
+	AddIconToLabel(ui.lblIni, CSandMan::GetIcon("EditIni").pixmap(size,size));
 
 	AddIconToLabel(ui.lblBoxRoot, CSandMan::GetIcon("Sandbox").pixmap(size,size));
 	AddIconToLabel(ui.lblBoxFeatures, CSandMan::GetIcon("Miscellaneous").pixmap(size,size));
@@ -291,6 +294,11 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	m_HoldChange = false;
 
+	CPathEdit* pEditor = new CPathEdit();
+	ui.txtEditor->parentWidget()->layout()->replaceWidget(ui.txtEditor, pEditor);
+	ui.txtEditor->deleteLater();
+	ui.txtEditor = pEditor->GetEdit();
+
 	LoadSettings();
 
 
@@ -355,6 +363,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	connect(ui.cmbFontScale, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
 	connect(ui.cmbFontScale, SIGNAL(currentTextChanged(const QString&)), this, SLOT(OnChangeGUI()));
+
+	connect(ui.txtEditor, SIGNAL(textChanged(const QString&)), this, SLOT(OnOptChanged()));
 	m_bRebuildUI = false;
 	//
 
@@ -698,7 +708,10 @@ void CSettingsWindow::OnBrowsePath()
 	if (Name.isEmpty())
 		return;
 
-	AddRunItem(Name, "", "\"" + Value + "\"");
+	QVariantMap Entry;
+	Entry["Name"] = Name;
+	Entry["Command"] = "\"" + Value + "\"";
+	AddRunItem(ui.treeRun, Entry);
 }
 
 void CSettingsWindow::OnAddCommand()
@@ -711,18 +724,12 @@ void CSettingsWindow::OnAddCommand()
 	if (Name.isEmpty())
 		return;
 
-	AddRunItem(Name, "", Value);
-	OnRunChanged();
-}
+	QVariantMap Entry;
+	Entry["Name"] = Name;
+	Entry["Command"] = Value;
+	AddRunItem(ui.treeRun, Entry);
 
-void CSettingsWindow::AddRunItem(const QString& Name, const QString& Icon, const QString& Command)
-{
-	QTreeWidgetItem* pItem = new QTreeWidgetItem();
-	pItem->setText(0, Name);
-	pItem->setText(1, Icon);
-	pItem->setText(2, Command);
-	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
-	ui.treeRun->addTopLevelItem(pItem);
+	OnRunChanged();
 }
 
 void CSettingsWindow::OnCommandUp()
@@ -859,6 +866,8 @@ void CSettingsWindow::LoadSettings()
 	//ui.cmbFontScale->setCurrentIndex(ui.cmbFontScale->findData(theConf->GetInt("Options/FontScaling", 100)));
 	ui.cmbFontScale->setCurrentText(QString::number(theConf->GetInt("Options/FontScaling", 100)));
 
+	ui.txtEditor->setText(theConf->GetString("Options/Editor", "notepad.exe"));
+
 	ui.chkSilentMode->setChecked(theConf->GetBool("Options/CheckSilentMode", true));
 	ui.chkCopyProgress->setChecked(theConf->GetBool("Options/ShowMigrationProgress", true));
 	ui.chkNoMessages->setChecked(!theConf->GetBool("Options/ShowNotifications", true));
@@ -899,11 +908,7 @@ void CSettingsWindow::LoadSettings()
 
 		ui.treeRun->clear();
 		foreach(const QString& Value, theAPI->GetGlobalSettings()->GetTextList("RunCommand", false))
-		{
-			StrPair NameCmd = Split2(Value, "|");
-			StrPair NameIcon = Split2(NameCmd.first, ",");
-			AddRunItem(NameIcon.first, NameIcon.second, NameCmd.second);
-		}
+			AddRunItem(ui.treeRun, GetRunEntry(Value));
 		m_RunChanged = false;
 		
 		ui.cmbDefault->clear();
@@ -1169,6 +1174,8 @@ void CSettingsWindow::SaveSettings()
 		Scaling = 500;
 	theConf->SetValue("Options/FontScaling", Scaling);
 
+	theConf->SetValue("Options/Editor", ui.txtEditor->text());
+
 	AutorunEnable(ui.chkAutoStart->isChecked());
 
 	if (theAPI->IsConnected()) {
@@ -1258,13 +1265,9 @@ void CSettingsWindow::SaveSettings()
 				m_RunChanged = false;
 
 				QStringList RunCommands;
-				for (int i = 0; i < ui.treeRun->topLevelItemCount(); i++) {
-					QTreeWidgetItem* pItem = ui.treeRun->topLevelItem(i);
-					if (pItem->text(1).isEmpty())
-						RunCommands.prepend(pItem->text(0) + "|" + pItem->text(2));
-					else
-						RunCommands.prepend(pItem->text(0) + "," + pItem->text(1) + "|" + pItem->text(2));
-				}
+				for (int i = 0; i < ui.treeRun->topLevelItemCount(); i++) 
+					RunCommands.prepend(MakeRunEntry(ui.treeRun->topLevelItem(i)));
+
 				//WriteTextList("RunCommand", RunCommands);
 				theAPI->GetGlobalSettings()->DelValue("RunCommand");
 				foreach(const QString & Value, RunCommands)
@@ -1533,15 +1536,21 @@ void CSettingsWindow::OnOptChanged()
 void CSettingsWindow::OnLoadAddon()
 {
 	ui.treeAddons->clear();
-	foreach(const CAddonPtr pAddon, theGUI->GetAddonManager()->GetAddons()) {
+	foreach(const CAddonInfoPtr pAddon, theGUI->GetAddonManager()->GetAddons()) {
 
 		QTreeWidgetItem* pItem = new QTreeWidgetItem;
 		pItem->setText(0, pAddon->GetLocalizedEntry("name"));
 		if(!pAddon->Data["mandatory"].toBool())
 			pItem->setData(0, Qt::UserRole, pAddon->Id);
 		pItem->setIcon(0, pAddon->Data.contains("icon") ? CSandMan::GetIcon(pAddon->Data["icon"].toString()) : CSandMan::GetIcon("Addon"));
-		pItem->setText(1, pAddon->Installed ? tr("Installed") : "");
-		pItem->setText(2, pAddon->GetLocalizedEntry("description"));
+		if (pAddon->Installed) {
+			if(!pAddon->UpdateVersion.isEmpty())
+				pItem->setText(1, tr("Update Available"));
+			else
+				pItem->setText(1, tr("Installed"));
+		}
+		pItem->setText(2, pAddon->Data["version"].toString());
+		pItem->setText(3, pAddon->GetLocalizedEntry("description"));
 
 		ui.treeAddons->addTopLevelItem(pItem);
 	}
@@ -1934,6 +1943,57 @@ void CSettingsWindow::SaveIniSection()
 		theAPI->SbieIniSet("GlobalSettings", "", ui.txtIniSection->toPlainText());
 
 	LoadIniSection();
+}
+
+QVariantMap GetRunEntry(const QString& sEntry)
+{
+	QVariantMap Entry;
+
+	if (sEntry.left(1) == "{")
+	{
+		Entry = QJsonDocument::fromJson(sEntry.toUtf8()).toVariant().toMap();
+	}
+	else
+	{
+		StrPair NameCmd = Split2(sEntry, "|");
+		StrPair NameIcon = Split2(NameCmd.first, ",");
+
+		Entry["Name"] = NameIcon.first;
+		Entry["Icon"] = NameIcon.second;
+		Entry["Command"] = NameCmd.second;
+	}
+
+	return Entry;
+}
+
+void AddRunItem(QTreeWidget* treeRun, const QVariantMap& Entry)
+{
+	QTreeWidgetItem* pItem = new QTreeWidgetItem();
+	pItem->setText(0, Entry["Name"].toString());
+	pItem->setData(0, Qt::UserRole, Entry);
+	pItem->setText(1, Entry["Command"].toString());
+	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+	treeRun->addTopLevelItem(pItem);
+}
+
+QString MakeRunEntry(QTreeWidgetItem* pItem)
+{
+	QVariantMap Entry = pItem->data(0, Qt::UserRole).toMap();
+	Entry["Name"] = pItem->text(0);
+	Entry["Command"] = pItem->text(1);
+	return MakeRunEntry(Entry);
+}
+
+QString MakeRunEntry(const QVariantMap& Entry)
+{
+	if (!Entry["WorkingDir"].toString().isEmpty() || !Entry["Icon"].toString().isEmpty()) {
+		QJsonDocument doc(QJsonValue::fromVariant(Entry).toObject());
+		QString sEntry = QString::fromUtf8(doc.toJson(QJsonDocument::Compact));
+		return sEntry;
+	} 
+	//if(!Entry["Icon"].toString().isEmpty())
+	//	return Entry["Name"].toString() + "," + Entry["Icon"].toString() + "|" + Entry["Command"].toString();
+	return Entry["Name"].toString() + "|" + Entry["Command"].toString();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

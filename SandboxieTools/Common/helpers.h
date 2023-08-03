@@ -38,6 +38,8 @@ extern std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> g_str_conv;
 bool ListDir(std::wstring Path, std::vector<std::wstring>& Entries);
 std::wstring hexStr(unsigned char* data, int len);
 
+std::wstring MkLower(std::wstring Str);
+std::wstring MkUpper(std::wstring Str);
 
 template <typename T>
 T Trimmx(const T& String, const T& Blank)

@@ -414,7 +414,9 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     GUI_IMPORT___(GetClipboardSequenceNumber);
     GUI_IMPORT_AW(GetClipboardFormatName);
     GUI_IMPORT_AW(RegisterClipboardFormat);
+    GUI_IMPORT___(SetClipboardData);
     GUI_IMPORT___(GetClipboardData);
+    GUI_IMPORT___(EmptyClipboard);
 
     GUI_IMPORT___(GetRawInputDeviceInfoA);
     GUI_IMPORT___(GetRawInputDeviceInfoW);

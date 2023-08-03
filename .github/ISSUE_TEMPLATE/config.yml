@@ -6,3 +6,6 @@ contact_links:
   - name: LogApiDll (sandboxie-plus/LogApiDll)
     url: https://github.com/sandboxie-plus/LogApiDll
     about: API logging library that adds a verbose output to Sandboxie's trace log.
+  - name: Sbiextra (sandboxie-plus/sbiextra)
+    url: https://github.com/sandboxie-plus/sbiextra
+    about: A DLL that adds additional user mode restrictions to sandboxed processes.

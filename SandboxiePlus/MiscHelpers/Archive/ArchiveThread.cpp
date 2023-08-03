@@ -91,7 +91,7 @@ C7zWorker::C7zWorker(const QString &ArchivePath, const QString &WorkingPath, con
 
 	if(QFile::exists(ArchivePath))
 	{
-		if(!Open())
+		if(Open() != ERR_7Z_OK)
 			m_Errors.append("Open Failed");
 	}
 }

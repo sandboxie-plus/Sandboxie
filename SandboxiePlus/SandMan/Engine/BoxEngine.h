@@ -14,6 +14,8 @@ public:
 
 	bool				RunScript(const QString& Script, const QString& Name, const QVariantMap& Params = QVariantMap());
 
+	static void			StopAll();
+
 	enum EState {
 		eUnknown,
 
@@ -47,8 +49,6 @@ public:
 	Q_INVOKABLE void	AppendLog(const QString& Line);
 	//QString				GetLog() const { QMutexLocker Locker(&m_Mutex); return m_Log; }
 
-	static int			GetInstanceCount() { return m_InstanceCount; }
-
 	CJSEngineExt*		GetEngine() { return m_pEngine; }
 
 	QObject*			GetDebuggerBackend();
@@ -71,6 +71,7 @@ protected:
 
 	virtual void		init();
 	virtual void		run();
+	virtual void		Stop();
 	//virtual bool		Wait();
 	virtual bool		Continue(bool bLocked, EState State = eRunning);
 
@@ -92,7 +93,7 @@ protected:
 
 	//QString				m_Log;
 
-	static int			m_InstanceCount;
+	static QSet<CBoxEngine*> m_Instances;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -115,6 +116,7 @@ public:
 	void		SetApplyShadow(const QString& OriginalName, bool bApply = true);
 	bool		IsNoAppliedShadow(const QString& OriginalName);
 
+	static int	GetInstanceCount() { return m_InstanceCount; }
 
 	Q_INVOKABLE void OpenSettings(const QString& page);
 	Q_INVOKABLE void OpenOptions(const QString& box, const QString& page);
@@ -136,5 +138,7 @@ protected:
 	};
 
 	QMap<QString, SBoxShadow> m_Shadows;
+
+	static int			m_InstanceCount;
 };
 

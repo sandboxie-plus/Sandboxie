@@ -207,7 +207,7 @@ void COptionsWindow::CreateGeneral()
 
 void COptionsWindow::LoadGeneral()
 {
-	QString BoxNameTitle = m_pBox->GetText("BoxNameTitle", "n", false, true, false);
+	QString BoxNameTitle = ReadTextSafe("BoxNameTitle", "n");
 	ui.cmbBoxIndicator->setCurrentIndex(ui.cmbBoxIndicator->findData(BoxNameTitle.toLower()));
 
 	QStringList BorderCfg = m_pBox->GetText("BorderColor").split(",");
@@ -264,12 +264,7 @@ void COptionsWindow::LoadGeneral()
 
 	ui.treeRun->clear();
 	foreach(const QString& Value, m_pBox->GetTextList("RunCommand", m_Template))
-	{
-		StrPair NameCmd = Split2(Value, "|");
-		StrPair NameIcon = Split2(NameCmd.first, ",");
-		QTreeWidgetItem* pItem = new QTreeWidgetItem();
-		AddRunItem(NameIcon.first, NameIcon.second, NameCmd.second);
-	}
+		AddRunItem(ui.treeRun, GetRunEntry(Value));
 
 	QString Action = m_pBox->GetText("DblClickAction");
 	int pos = -1;
@@ -308,7 +303,12 @@ void COptionsWindow::LoadGeneral()
 	
 	LoadCopyRules();
 
-	ui.chkProtectBox->setChecked(m_pBox->GetBool("NeverDelete", false));
+	if (m_pBox->GetBool("NeverDelete", false))
+		ui.chkProtectBox->setCheckState(Qt::Checked);
+	else if (m_pBox->GetBool("NeverRemove", false))
+		ui.chkProtectBox->setCheckState(Qt::PartiallyChecked);
+	else
+		ui.chkProtectBox->setCheckState(Qt::Unchecked);
 	ui.chkAutoEmpty->setChecked(m_pBox->GetBool("AutoDelete", false));
 
 	ui.chkRawDiskRead->setChecked(m_pBox->GetBool("AllowRawDiskRead", false));
@@ -321,7 +321,11 @@ void COptionsWindow::LoadGeneral()
 
 void COptionsWindow::SaveGeneral()
 {
-	WriteText("BoxNameTitle", ui.cmbBoxIndicator->currentData().toString());
+	QString BoxNameTitle = ui.cmbBoxIndicator->currentData().toString();
+	if (BoxNameTitle == "n")
+		WriteTextSafe("BoxNameTitle", "");
+	else
+		WriteTextSafe("BoxNameTitle", BoxNameTitle);
 
 	QStringList BorderCfg;
 	BorderCfg.append(QString("#%1%2%3").arg(m_BorderColor.blue(), 2, 16, QChar('0')).arg(m_BorderColor.green(), 2, 16, QChar('0')).arg(m_BorderColor.red(), 2, 16, QChar('0')));
@@ -369,14 +373,9 @@ void COptionsWindow::SaveGeneral()
 
 
 	QStringList RunCommands;
-	for (int i = 0; i < ui.treeRun->topLevelItemCount(); i++) {
-		QTreeWidgetItem* pItem = ui.treeRun->topLevelItem(i);
-		if(pItem->text(1).isEmpty())
-			RunCommands.prepend(pItem->text(0) + "|" + pItem->text(2));
-		else
-			RunCommands.prepend(pItem->text(0) + "," + pItem->text(1) + "|" + pItem->text(2));
+	for (int i = 0; i < ui.treeRun->topLevelItemCount(); i++)
+		RunCommands.prepend(MakeRunEntry(ui.treeRun->topLevelItem(i)));
 
-	}
 	//WriteTextList("RunCommand", RunCommands);
 	m_pBox->DelValue("RunCommand");
 	foreach(const QString& Value, RunCommands)
@@ -409,14 +408,29 @@ void COptionsWindow::SaveGeneral()
 		WriteGlobalCheck(ui.chkUseVolumeSerialNumbers, "UseVolumeSerialNumbers", false);
 	}
 
-	WriteText("CopyLimitKb", ui.chkCopyLimit->isChecked() ? ui.txtCopyLimit->text() : "-1");
+	int iLimit = ui.chkCopyLimit->isChecked() ? ui.txtCopyLimit->text().toInt() : -1;
+	if(iLimit != 80 * 1024)
+		WriteText("CopyLimitKb", QString::number(iLimit));
+	else
+		m_pBox->DelValue("CopyLimitKb");
+
 	WriteAdvancedCheck(ui.chkCopyPrompt, "PromptForFileMigration", "", "n");
 	WriteAdvancedCheck(ui.chkNoCopyWarn, "CopyLimitSilent", "", "y");
 	WriteAdvancedCheck(ui.chkDenyWrite, "CopyBlockDenyWrite", "y", "");
 	WriteAdvancedCheck(ui.chkNoCopyMsg, "NotifyNoCopy", "y", "");
 
-
-	WriteAdvancedCheck(ui.chkProtectBox, "NeverDelete", "y", "");
+	if (ui.chkProtectBox->checkState() == Qt::Checked) {
+		m_pBox->SetText("NeverDelete", "y");
+		m_pBox->SetText("NeverRemove", "y");
+	}
+	else if (ui.chkProtectBox->checkState() == Qt::PartiallyChecked) {
+		m_pBox->DelValue("NeverDelete");
+		m_pBox->SetText("NeverRemove", "y");
+	}
+	else {
+		m_pBox->DelValue("NeverDelete");
+		m_pBox->DelValue("NeverRemove");
+	}
 	WriteAdvancedCheck(ui.chkAutoEmpty, "AutoDelete", "y", "");
 
 	WriteAdvancedCheck(ui.chkRawDiskRead, "AllowRawDiskRead", "y", "");
@@ -714,7 +728,7 @@ void COptionsWindow::OnGeneralChanged()
 	ui.chkCopyPrompt->setEnabled(ui.chkCopyLimit->isChecked());
 	ui.chkNoCopyWarn->setEnabled(ui.chkCopyLimit->isChecked() && !ui.chkCopyPrompt->isChecked());
 
-	ui.chkAutoEmpty->setEnabled(!ui.chkProtectBox->isChecked());
+	ui.chkAutoEmpty->setEnabled(ui.chkProtectBox->checkState() != Qt::Checked);
 
 	ui.chkOpenSpooler->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityIsolation->isChecked());
 	ui.chkPrintToFile->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityFiltering->isChecked());
@@ -900,7 +914,12 @@ void COptionsWindow::OnBrowsePath()
 		return;
 
 	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
-	AddRunItem(Name, "", "\"" + (pBoxEx ? pBoxEx->MakeBoxCommand(Value) : Value) + "\"");
+	
+	QVariantMap Entry;
+	Entry["Name"] = Name;
+	Entry["Command"] = "\"" + (pBoxEx ? pBoxEx->MakeBoxCommand(Value) : Value) + "\"";
+	AddRunItem(ui.treeRun, Entry);
+
 	m_GeneralChanged = true;
 	OnOptChanged();
 }
@@ -915,18 +934,12 @@ void COptionsWindow::OnAddCommand()
 	if (Name.isEmpty())
 		return;
 
-	AddRunItem(Name, "", Value);
-	OnRunChanged();
-}
+	QVariantMap Entry;
+	Entry["Name"] = Name;
+	Entry["Command"] = Value;
+	AddRunItem(ui.treeRun, Entry);
 
-void COptionsWindow::AddRunItem(const QString& Name, const QString& Icon, const QString& Command)
-{
-	QTreeWidgetItem* pItem = new QTreeWidgetItem();
-	pItem->setText(0, Name);
-	pItem->setText(1, Icon);
-	pItem->setText(2, Command);
-	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
-	ui.treeRun->addTopLevelItem(pItem);
+	OnRunChanged();
 }
 
 void COptionsWindow::OnCommandUp()

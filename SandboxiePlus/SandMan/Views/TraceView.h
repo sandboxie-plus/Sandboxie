@@ -43,6 +43,7 @@ protected:
 	QTreeViewEx*		m_pTreeList;
 	CStackView*			m_pStackView;
 
+	QAction*			m_pAutoScroll;
 	//QRegularExpression	m_FilterExp;
 	QString				m_FilterExp;
 	bool				m_bHighLight;

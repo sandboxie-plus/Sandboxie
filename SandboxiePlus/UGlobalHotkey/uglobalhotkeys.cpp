@@ -154,8 +154,7 @@ void UGlobalHotkeys::onHotkeyPressed(size_t id) {
 #endif
 
 #if defined(Q_OS_WIN)
-bool UGlobalHotkeys::winEvent(MSG * message, long * result) {
-    Q_UNUSED(result);
+bool UGlobalHotkeys::winEvent(MSG * message) {
     if (message->message == WM_HOTKEY) {
         size_t id = message->wParam;
         Q_ASSERT(Registered.find(id) != Registered.end() && "Unregistered hotkey");
@@ -164,11 +163,17 @@ bool UGlobalHotkeys::winEvent(MSG * message, long * result) {
     return false;
 }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+bool UGlobalHotkeys::nativeEvent(const QByteArray &eventType,
+                                       void *message, qintptr *result)
+#else
 bool UGlobalHotkeys::nativeEvent(const QByteArray &eventType,
                                        void *message, long *result)
+#endif
 {
     Q_UNUSED(eventType);
-    return winEvent((MSG*)message, result);
+    Q_UNUSED(result);
+    return winEvent((MSG*)message);
 }
 
 #elif defined(Q_OS_LINUX)

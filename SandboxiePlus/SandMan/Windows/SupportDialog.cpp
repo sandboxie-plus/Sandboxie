@@ -144,7 +144,7 @@ bool CSupportDialog::ShowDialog(bool NoGo, int Wait)
 	{
 		Message = tr("The installed supporter certificate allows for <b>%1 seats</b> to be active.<br /><br />").arg(g_CertAmount);
 
-		Message += tr("<b>There seams to be howeever %1 Sandboxie-Plus instances on your network, <font color='red'>you need to obtain additional <a href=\"https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&tip=more\">support certificates</a></font>.</b><br /><br />").arg(CountSeats());
+		Message += tr("<b>There seems to be however %1 Sandboxie-Plus instances on your network, <font color='red'>you need to obtain additional <a href=\"https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&tip=more\">support certificates</a></font>.</b><br /><br />").arg(CountSeats());
 	}
 	else if (IsBusinessUse()) 
 	{

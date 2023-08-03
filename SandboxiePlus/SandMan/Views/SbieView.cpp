@@ -1879,7 +1879,7 @@ void CSbieView::UpdateStartMenu(CSandBoxPlus* pBoxEx)
 		if(!Link.Arguments.isEmpty())
 			Command += " " + Link.Arguments;
 		pAction->setData(Command);
-		pAction->setProperty("Icon", Link.Icon);
+		pAction->setProperty("Icon", Link.Icon.isEmpty() ? pBoxEx->GetCommandFile(Command) : Link.Icon);
 		pAction->setProperty("IconIndex", Link.IconIndex);
 		pAction->setProperty("WorkingDir", Link.WorkDir);
 	}

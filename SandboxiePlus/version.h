@@ -3,7 +3,7 @@
 #define VERSION_MJR		1
 #define VERSION_MIN 	10
 #define VERSION_REV 	2
-#define VERSION_UPD 	5
+#define VERSION_UPD 	6
 
 #ifndef STR
 #define STR2(X) #X

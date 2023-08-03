@@ -1820,7 +1820,12 @@ void CSbieView::OnMenuContextMenu(const QPoint& point)
 		}
 		else
 			m_pCtxPinToRun->setData(FoundPin);
-		m_pCtxMkLink->setData(LinkTarget);
+
+		m_pCtxMkLink->setData(pBoxPlus->GetFullCommand(LinkTarget));
+		m_pCtxMkLink->setProperty("Icon", pBoxPlus->GetFullCommand(pAction->property("Icon").toString()));
+		m_pCtxMkLink->setProperty("IconIndex", pAction->property("IconIndex"));
+		m_pCtxMkLink->setProperty("WorkingDir", pBoxPlus->GetFullCommand(pAction->property("WorkingDir").toString()));
+
 		m_pCtxMenu->exec(QCursor::pos());
 	}
 }
@@ -1844,9 +1849,12 @@ void CSbieView::OnMenuContextAction()
 	else if (pAction == m_pCtxMkLink)
 	{
 		QString LinkTarget = m_pCtxMkLink->data().toString();
+		QString Icon = m_pCtxMkLink->property("Icon").toString();
+		int IconIndex = m_pCtxMkLink->property("IconIndex").toInt();
+		QString WorkingDir = m_pCtxMkLink->property("WorkingDir").toString();
 		QString BoxName = pBoxPlus->GetName();
 
-		CreateShortcut(pBoxPlus->GetFullCommand(LinkTarget), BoxName);
+		CreateShortcut(LinkTarget, BoxName, Icon, IconIndex, WorkingDir);
 	}
 }
 

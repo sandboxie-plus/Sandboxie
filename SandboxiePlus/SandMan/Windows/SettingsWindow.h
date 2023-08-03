@@ -151,8 +151,6 @@ protected:
 
 	void	AddMessageItem(const QString& ID, const QString& Text = QString());
 
-	void	AddRunItem(const QString& Name, const QString& Icon, const QString& Command);
-
 	void	AddWarnEntry(const QString& Name, int type);
 
 	void	LoadSettings();
@@ -186,6 +184,11 @@ private:
 
 	Ui::SettingsWindow ui;
 };
+
+QVariantMap GetRunEntry(const QString& sEntry);
+void AddRunItem(QTreeWidget* treeRun, const QVariantMap& Entry);
+QString MakeRunEntry(QTreeWidgetItem* pItem);
+QString MakeRunEntry(const QVariantMap& Entry);
 
 void WindowsMoveFile(const QString& from, const QString& to);
 

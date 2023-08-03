@@ -279,7 +279,6 @@ NTSTATUS MyHashBuffer(
     )
 {
     NTSTATUS status;
-    IO_STATUS_BLOCK iosb;
     MY_HASH_OBJ hashObj;
 
     if (!NT_SUCCESS(status = MyInitHash(&hashObj)))

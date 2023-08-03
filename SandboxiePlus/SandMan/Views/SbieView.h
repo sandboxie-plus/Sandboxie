@@ -124,7 +124,7 @@ private:
 	void					CreateTrayMenu();
 
 	bool					UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBoxeCount = 1, bool bBoxBusy = false);
-	void					UpdateProcMenu(const CBoxedProcessPtr &pProcess = CBoxedProcessPtr(), int iProcessCount = 0);
+	void					UpdateProcMenu(const CBoxedProcessPtr &pProcess = CBoxedProcessPtr(), int iProcessCount = 0, int iSuspendedCount = 0);
 	bool					UpdateMenu();
 	void					UpdateMoveMenu();
 	void					RenameGroup(const QString OldName, const QString NewName);
@@ -212,8 +212,8 @@ private:
 	QAction*				m_pMenuMarkLinger;
 	QAction*				m_pMenuMarkLeader;
 	QAction*				m_pMenuPinToRun;
-	//QAction*				m_pMenuSuspend;
-	//QAction*				m_pMenuResume;
+	QAction*				m_pMenuSuspend;
+	QAction*				m_pMenuResume;
 
 	QAction*				m_pRemove;
 

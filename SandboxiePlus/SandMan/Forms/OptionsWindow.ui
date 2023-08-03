@@ -45,7 +45,7 @@
         <enum>QTabWidget::North</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>10</number>
        </property>
        <widget class="QWidget" name="tabGeneral">
         <attribute name="title">
@@ -290,8 +290,14 @@
                </item>
                <item row="6" column="1" colspan="5">
                 <widget class="QCheckBox" name="chkProtectBox">
+                 <property name="toolTip">
+                  <string>Partially checked means prevent box removal but not content deletion.</string>
+                 </property>
                  <property name="text">
                   <string>Protect this sandbox from deletion or emptying</string>
+                 </property>
+                 <property name="tristate">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -871,11 +877,6 @@
                </column>
                <column>
                 <property name="text">
-                 <string>Icon</string>
-                </property>
-               </column>
-               <column>
-                <property name="text">
                  <string>Command Line</string>
                 </property>
                </column>
@@ -1294,21 +1295,14 @@
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="tabImage">
+           <widget class="QWidget" name="tabDlls">
             <attribute name="title">
-             <string>Image Protection</string>
+             <string>Dlls &amp;&amp; Extensions</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_77">
-             <item row="0" column="0">
+             <item row="1" column="0">
               <layout class="QGridLayout" name="gridLayout_49">
-               <item row="3" column="2">
-                <widget class="QCheckBox" name="chkHostProtectMsg">
-                 <property name="text">
-                  <string>Issue message 1305 when a program tries to load a sandboxed dll</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
+               <item row="6" column="1">
                 <spacer name="verticalSpacer_36">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -1321,31 +1315,10 @@
                  </property>
                 </spacer>
                </item>
-               <item row="4" column="2">
-                <spacer name="horizontalSpacer_16">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="2" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkHostProtect">
-                 <property name="text">
-                  <string>Prevent sandboxes programs installed on host from loading dll's from the sandbox</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0" colspan="2">
+               <item row="3" column="0" colspan="2">
                 <widget class="QLabel" name="lblProtection">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                    <kerning>true</kerning>
                   </font>
@@ -1358,35 +1331,85 @@
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1">
-                <widget class="QLabel" name="label_47">
-                 <property name="minimumSize">
-                  <size>
-                   <width>20</width>
-                   <height>0</height>
-                  </size>
+               <item row="1" column="0" colspan="3">
+                <widget class="QTreeWidget" name="treeInjectDll">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
                  </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>20</width>
-                   <height>16777215</height>
-                  </size>
+                 <column>
+                  <property name="text">
+                   <string>Name</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Description</string>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+               <item row="4" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkHostProtect">
+                 <property name="toolTip">
+                  <string>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
+This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</string>
                  </property>
                  <property name="text">
-                  <string/>
+                  <string>Prevent sandboxes programs installed on host from loading dll's from the sandbox</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="2">
+                <widget class="QCheckBox" name="chkHostProtectMsg">
+                 <property name="text">
+                  <string>Issue message 1305 when a program tries to load a sandboxed dll</string>
                  </property>
                 </widget>
                </item>
                <item row="0" column="0" colspan="3">
-                <widget class="QLabel" name="label_52">
+                <widget class="QLabel" name="label_36">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="text">
-                  <string>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
-This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</string>
+                  <string>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the addon manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
                  </property>
                 </widget>
+               </item>
+               <item row="2" column="2">
+                <spacer name="horizontalSpacer_16">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="3">
+                <spacer name="verticalSpacer_39">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </item>
@@ -3368,7 +3391,7 @@ The process match level has a higher priority than the specificity and describes
             </font>
            </property>
            <property name="currentIndex">
-            <number>0</number>
+            <number>5</number>
            </property>
            <widget class="QWidget" name="tabCompat">
             <attribute name="title">
@@ -4050,14 +4073,35 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
             <layout class="QGridLayout" name="gridLayout_34">
              <item row="0" column="0">
               <layout class="QGridLayout" name="gridLayout_32">
-               <item row="13" column="1" colspan="4">
-                <widget class="QCheckBox" name="chkApiTrace">
+               <item row="10" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkNetFwTrace">
                  <property name="text">
-                  <string>API call trace (requires LogAPI to be installed in the Sbie directory)</string>
+                  <string>Network Firewall</string>
                  </property>
                 </widget>
                </item>
-               <item row="14" column="4">
+               <item row="1" column="1" colspan="4">
+                <widget class="QCheckBox" name="chkDisableMonitor">
+                 <property name="text">
+                  <string>Disable Resource Access Monitor</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0" colspan="2">
+                <widget class="QLabel" name="lblMonitor">
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Resource Access Monitor</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="13" column="4">
                 <spacer name="horizontalSpacer">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -4070,6 +4114,33 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
                  </property>
                 </spacer>
                </item>
+               <item row="4" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkFileTrace">
+                 <property name="text">
+                  <string>File Trace</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1" colspan="4">
+                <widget class="QCheckBox" name="chkCallTrace">
+                 <property name="text">
+                  <string>Ntdll syscall Trace (creates a lot of output)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_38">
+                 <property name="maximumSize">
+                  <size>
+                   <width>20</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
                <item row="5" column="1" colspan="2">
                 <widget class="QCheckBox" name="chkPipeTrace">
                  <property name="text">
@@ -4077,27 +4148,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
                  </property>
                 </widget>
                </item>
-               <item row="14" column="0">
-                <spacer name="verticalSpacer_19">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="12" column="2" colspan="3">
-                <widget class="QCheckBox" name="chkErrTrace">
-                 <property name="text">
-                  <string>Log all SetError's to Trace log (creates a lot of output)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="14" column="5">
+               <item row="13" column="5">
                 <spacer name="horizontalSpacer_3">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -4137,65 +4188,37 @@ instead of &quot;*&quot;.</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1" colspan="4">
-                <widget class="QCheckBox" name="chkCallTrace">
+               <item row="6" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkKeyTrace">
                  <property name="text">
-                  <string>Ntdll syscall Trace (creates a lot of output)</string>
+                  <string>Key Trace</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkFileTrace">
+               <item row="9" column="1" colspan="3">
+                <widget class="QCheckBox" name="chkComTrace">
                  <property name="text">
-                  <string>File Trace</string>
+                  <string>COM Class Trace</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1" colspan="4">
-                <widget class="QCheckBox" name="chkDisableMonitor">
-                 <property name="text">
-                  <string>Disable Resource Access Monitor</string>
+               <item row="13" column="0">
+                <spacer name="verticalSpacer_19">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
                  </property>
-                </widget>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
                <item row="7" column="1" colspan="2">
                 <widget class="QCheckBox" name="chkIpcTrace">
                  <property name="text">
                   <string>IPC Trace</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkGuiTrace">
-                 <property name="text">
-                  <string>GUI Trace</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0" colspan="2">
-                <widget class="QLabel" name="lblMonitor">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                   <kerning>true</kerning>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Resource Access Monitor</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QLabel" name="label_38">
-                 <property name="maximumSize">
-                  <size>
-                   <width>20</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string/>
                  </property>
                 </widget>
                </item>
@@ -4213,24 +4236,17 @@ instead of &quot;*&quot;.</string>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkComTrace">
+               <item row="12" column="2" colspan="3">
+                <widget class="QCheckBox" name="chkErrTrace">
                  <property name="text">
-                  <string>COM Class Trace</string>
+                  <string>Log all SetError's to Trace log (creates a lot of output)</string>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="1" colspan="2">
-                <widget class="QCheckBox" name="chkKeyTrace">
+               <item row="8" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkGuiTrace">
                  <property name="text">
-                  <string>Key Trace</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="10" column="1" colspan="3">
-                <widget class="QCheckBox" name="chkNetFwTrace">
-                 <property name="text">
-                  <string>Network Firewall</string>
+                  <string>GUI Trace</string>
                  </property>
                 </widget>
                </item>

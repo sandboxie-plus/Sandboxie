@@ -676,7 +676,8 @@ bool COnlineUpdater::ApplyUpdate(bool bSilent)
 	if (Scope == eFull)
 		Params.append("/open:sandman.exe");
 
-	if (RunUpdater(Params, bSilent, Scope != eFull)) {
+	SB_RESULT(int) status = RunUpdater(Params, true, Scope != eFull);
+	if (!status.IsError()) {
 		if(bSilent)
 			theConf->DelValue("Updater/UpdateVersion");
 		if (Scope == eMeta)
@@ -690,15 +691,15 @@ bool COnlineUpdater::ApplyUpdate(bool bSilent)
 	return false;
 }
 
-bool COnlineUpdater::RunUpdater(const QStringList& Params, bool bSilent, bool Wait)
+SB_RESULT(int) COnlineUpdater::RunUpdater(const QStringList& Params, bool bSilent, bool Wait)
 {
 	if (bSilent) {
 		SB_RESULT(int) Result = theAPI->RunUpdateUtility(Params, 2, Wait);
 		if (!Result.IsError())
-			return true;
+			return Result;
 		// else fallback to ShellExecuteEx
 		if (theConf->GetBool("Options/UpdateNoFallback", false))
-			return false;
+			return Result;
 	}
 
 	std::wstring wFile = QString(QApplication::applicationDirPath() + "/UpdUtil.exe").replace("/", "\\").toStdWString();
@@ -708,7 +709,10 @@ bool COnlineUpdater::RunUpdater(const QStringList& Params, bool bSilent, bool Wa
 		wParams += L"\"" + Param.toStdWString() + L"\"";
 	}
 
-	return RunElevated(wFile, wParams, Wait ? INFINITE : 0) == 0;
+	int ExitCode = RunElevated(wFile, wParams, Wait ? INFINITE : 0);
+	if (ExitCode == STATUS_PENDING && !Wait)
+		ExitCode = 0;
+	return CSbieResult<int>(ExitCode);
 }
 
 void COnlineUpdater::DownloadFile(const QString& Url, QObject* receiver, const char* member, const QVariantMap& Params)

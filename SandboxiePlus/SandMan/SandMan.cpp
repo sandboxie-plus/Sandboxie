@@ -258,6 +258,7 @@ CSandMan::CSandMan(QWidget *parent)
 	LoadState();
 
 	m_pProgressDialog = new CProgressDialog("");
+	m_pProgressDialog->setWindowTitle("Sandboxie-Plus");
 	m_pProgressDialog->setWindowModality(Qt::ApplicationModal);
 	connect(m_pProgressDialog, SIGNAL(Cancel()), this, SLOT(OnCancelAsync()));
 	m_pProgressModal = false;
@@ -312,6 +313,8 @@ CSandMan::~CSandMan()
 	m_pTrayIcon->hide();
 
 	StoreState();
+
+	CBoxEngine::StopAll();
 
 	theAPI = NULL;
 
@@ -486,6 +489,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pNewBox = m_pMenuFile->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnSandBoxAction()));
 		m_pNewGroup = m_pMenuFile->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnSandBoxAction()));
 		m_pImportBox = m_pMenuFile->addAction(CSandMan::GetIcon("UnPackBox"), tr("Import Box"), this, SLOT(OnSandBoxAction()));
+		m_pImportBox->setEnabled(CArchive::IsInit());
 		m_pMenuFile->addSeparator();
 		m_pRunBoxed = m_pMenuFile->addAction(CSandMan::GetIcon("Run"), tr("Run Sandboxed"), this, SLOT(OnSandBoxAction()));
 		m_pEmptyAll = m_pMenuFile->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate All Processes"), this, SLOT(OnEmptyAll()));
@@ -706,6 +710,7 @@ void CSandMan::CreateOldMenus()
 		m_pNewBox = m_pSandbox->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Sandbox"), this, SLOT(OnSandBoxAction()));
 		m_pNewGroup = m_pSandbox->addAction(CSandMan::GetIcon("Group"), tr("Create New Group"), this, SLOT(OnSandBoxAction()));
 		m_pImportBox = m_pSandbox->addAction(CSandMan::GetIcon("UnPackBox"), tr("Import Sandbox"), this, SLOT(OnSandBoxAction()));
+		m_pImportBox->setEnabled(CArchive::IsInit());
 
 		QAction* m_pSetContainer = m_pSandbox->addAction(CSandMan::GetIcon("Advanced"), tr("Set Container Folder"), this, SLOT(OnSettingsAction()));
 		m_pSetContainer->setData("Sandbox");
@@ -1501,7 +1506,7 @@ bool CSandMan::IsFullyPortable()
 
 bool CSandMan::KeepTerminated()
 { 
-	if (CBoxEngine::GetInstanceCount() > 0)
+	if (CWizardEngine::GetInstanceCount() > 0)
 		return true;
 	return m_pKeepTerminated && m_pKeepTerminated->isChecked();
 }
@@ -1797,6 +1802,7 @@ SB_STATUS CSandMan::DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, boo
 		Ret = pBox->TerminateAll();
 		if (Ret.IsError())
 			return Ret;
+		UpdateProcesses();
 	}
 
 	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
@@ -2203,7 +2209,7 @@ void CSandMan::OnStatusChanged()
 			}
 		}
 
-		if (theConf->GetBool("Options/AutoRunSoftCompat", true))
+		if (theConf->GetBool("Options/AutoRunSoftCompat", true) && g_PendingMessage.isEmpty())
 			CheckCompat(this, "OpenCompat");
 	}
 	else
@@ -2569,6 +2575,8 @@ bool CSandMan::CheckCertificate(QWidget* pWidget)
 	return false;
 }
 
+void InitCertSlot();
+
 void CSandMan::UpdateCertState()
 {
 	g_CertInfo.State = theAPI->GetCertState();
@@ -2616,6 +2624,9 @@ void CSandMan::UpdateCertState()
 				g_CertInfo.type = eCertBusiness;
 		}
 	}
+
+	if (CERT_IS_TYPE(g_CertInfo, eCertBusiness))
+		InitCertSlot();
 
 	if (CERT_IS_TYPE(g_CertInfo, eCertEvaluation))
 	{
@@ -3232,6 +3243,11 @@ void CSandMan::OnEditIni()
 		}
 	}
 
+	EditIni(IniPath, bPlus);
+}
+
+void CSandMan::EditIni(const QString& IniPath, bool bPlus)
+{
 	bool bIsWritable = bPlus;
 	if (!bIsWritable) {
 		QFile File(IniPath);
@@ -3813,3 +3829,153 @@ QT_TRANSLATE_NOOP("CSandBox", "Finishing Snapshot Merge..."),
 
 
 #include "SbieFindWnd.cpp"
+
+std::wstring g_SlotName;
+HANDLE g_MailThread = NULL;
+bool g_MailRun = false;
+wchar_t g_MyName[MAX_COMPUTERNAME_LENGTH + 1];
+ULONGLONG g_LastSlotScan = 0;
+std::map<std::wstring, ULONGLONG> g_CertUsers;
+std::mutex g_CertUsersLock;
+int g_CertAmount = 0;
+
+void SlotSend(const std::wstring& message)
+{
+	std::wstring strSlotName = L"\\\\*\\mailslot\\" + g_SlotName;
+    HANDLE hSlot = CreateFile(strSlotName.c_str(), 
+        GENERIC_WRITE, 
+        FILE_SHARE_READ,
+        (LPSECURITY_ATTRIBUTES) NULL, 
+        OPEN_EXISTING, 
+        FILE_ATTRIBUTE_NORMAL, 
+        (HANDLE) NULL); 
+    if (hSlot == INVALID_HANDLE_VALUE) 
+    { 
+		//GetLastError();
+		return;
+    } 
+
+    DWORD cbWritten; 
+	WriteFile(hSlot, message.c_str(), (DWORD)(message.size() + 1) * sizeof(wchar_t), &cbWritten, NULL);
+
+	CloseHandle(hSlot);
+}
+
+void CleanUpSeats()
+{
+	std::lock_guard<std::mutex> lock(g_CertUsersLock);
+
+	for (auto I = g_CertUsers.begin(); I != g_CertUsers.end();) {
+		if (I->second + 10 * 1000 < g_LastSlotScan)
+			I = g_CertUsers.erase(I);
+		else
+			++I;
+	}
+}
+
+void ScanForSeats()
+{
+	if (g_LastSlotScan + 5 * 1000 < GetTickCount64())
+		SlotSend(L"?");
+}
+
+int CountSeats()
+{
+	std::lock_guard<std::mutex> lock(g_CertUsersLock);
+	return g_CertUsers.size();
+}
+
+DWORD WINAPI MailThreadFunc(LPVOID lpParam)
+{
+	std::wstring strSlotName = L"\\\\.\\mailslot\\" + g_SlotName;
+	HANDLE hSlot = CreateMailslot(strSlotName.c_str(), 
+        0,                             // no maximum message size 
+        MAILSLOT_WAIT_FOREVER,         // no time-out for operations 
+        (LPSECURITY_ATTRIBUTES) NULL); // default security
+    if (hSlot == INVALID_HANDLE_VALUE)  { 
+        //GetLastError()
+        return FALSE; 
+    } 
+
+	ScanForSeats();
+
+	int EvalCounter = 0;
+
+	while (g_MailRun)
+	{
+		DWORD cbMessage;
+		DWORD dwMessageCount;
+		if(!GetMailslotInfo(hSlot, // mailslot handle 
+			(LPDWORD)NULL,         // no maximum message size 
+			&cbMessage,            // size of next message 
+			&dwMessageCount,       // number of messages 
+			(LPDWORD)NULL))        // no read time-out 
+		{
+			//GetLastError();
+			continue;
+		}
+
+		if (cbMessage == MAILSLOT_NO_MESSAGE)
+		{
+			if (EvalCounter && --EvalCounter == 0) {
+				if (CountSeats() > g_CertAmount) {
+					QTimer::singleShot(0, theGUI, []() {
+						if(!CSupportDialog::ShowDialog())
+							PostQuitMessage(0);
+					});
+				}
+			}
+
+			//printf("Waiting for a message...\n");
+			Sleep(100);
+			continue;
+		}
+
+		DWORD cbRead;
+		wchar_t* lpszBuffer = (wchar_t*)GlobalAlloc(GPTR, (cbMessage + 1) * sizeof(wchar_t));
+		if (ReadFile(hSlot, lpszBuffer, cbMessage, &cbRead, NULL))
+		{
+			lpszBuffer[cbRead/sizeof(wchar_t)] = L'\0';
+			if (_wcsicmp(lpszBuffer, L"?") == 0)
+			{
+				if (g_LastSlotScan + 10 * 1000 < GetTickCount64()) {
+					CleanUpSeats();
+					g_LastSlotScan = GetTickCount64();
+					if(g_CertAmount)
+						EvalCounter = 30; // 3 sec
+				}
+
+				SlotSend(g_MyName);
+			}
+			else
+			{
+				std::lock_guard<std::mutex> lock(g_CertUsersLock);
+				g_CertUsers[lpszBuffer] = GetTickCount64();
+			}
+		}
+		GlobalFree((HGLOBAL)lpszBuffer);
+	}
+
+	return TRUE;
+}
+
+void InitCertSlot()
+{
+	DWORD dwSize = ARRSIZE(g_MyName);
+	GetComputerNameW(g_MyName, &dwSize);
+
+	if (g_MailRun) {
+		g_MailRun = false;
+		if (WaitForSingleObject(g_MailThread, 10 * 1000) != WAIT_OBJECT_0)
+			TerminateThread(g_MailThread, -2);
+		g_MailThread = NULL;
+	}
+
+	auto CertData = GetArguments(g_Certificate, L'\n', L':');
+	QString UpdateKey = CertData.value("UPDATEKEY");
+	g_SlotName = L"sbie-plus_" + UpdateKey.toStdWString();
+	g_CertAmount = CertData.value("AMOUNT").toInt();
+
+	g_MailRun = true;
+	g_MailThread = CreateThread(NULL, 0, MailThreadFunc, NULL, 0, NULL);
+}

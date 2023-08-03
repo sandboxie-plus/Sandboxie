@@ -518,6 +518,7 @@ _FX void Ipc_CreateObjects(void)
     WCHAR *backslash;
     WCHAR *buffer = NULL;
     WCHAR *BNOLINKS = NULL;
+    WCHAR *GLOBAL = NULL;
     WCHAR *buffer2 = NULL;
     HANDLE handle;
     WCHAR str[64];
@@ -631,6 +632,10 @@ _FX void Ipc_CreateObjects(void)
     wcscpy(buffer, buffer2);
     wcscat(buffer, L"\\Global");
 
+    GLOBAL  = Dll_Alloc((wcslen(buffer) + 32) * sizeof(WCHAR));
+
+    wcscpy(GLOBAL, buffer);
+
     status = SbieApi_CreateDirOrLink(buffer, buffer2);
 
     if (! NT_SUCCESS(status)) {
@@ -676,7 +681,7 @@ _FX void Ipc_CreateObjects(void)
     wcscpy(buffer, CopyPath);
     wcscat(buffer, L"\\Global");
 
-    status = SbieApi_CreateDirOrLink(buffer, CopyPath);
+    status = SbieApi_CreateDirOrLink(buffer, GLOBAL);
 
     if (! NT_SUCCESS(status)) {
         errlvl = 41;
@@ -713,6 +718,8 @@ finish:
         Dll_Free(buffer);
     if(BNOLINKS)
         Dll_Free(BNOLINKS);
+    if(GLOBAL)
+        Dll_Free(GLOBAL);
     if(buffer2)
         Dll_Free(buffer2);
 
@@ -743,7 +750,7 @@ _FX NTSTATUS Ipc_GetName(
     if (OutIsBoxedPath)
         *OutIsBoxedPath = FALSE;
 
-    if (ObjectName) {
+    if (ObjectName && ObjectName != (UNICODE_STRING*)-1) {
         objname_len = ObjectName->Length & ~1;
         objname_buf = ObjectName->Buffer;
 
@@ -777,7 +784,7 @@ _FX NTSTATUS Ipc_GetName(
         name = Dll_GetTlsNameBuffer(
                         TlsData, TRUE_NAME_BUFFER, length + objname_len);
 
-        /*if ((! objname_len) || (! *objname_buf)) {
+      if (((! objname_len) || (! *objname_buf)) && ObjectName != (UNICODE_STRING*)-1) {
 
             //
             // an object handle was specified, but the object name is an
@@ -793,7 +800,7 @@ _FX NTSTATUS Ipc_GetName(
 
                 return STATUS_SUCCESS;
             }
-        }*/
+        }
 
         if (objname_len && *objname_buf == L'\\') {
 
@@ -4280,7 +4287,7 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
 
         WCHAR *TruePath;
         WCHAR *CopyPath;
-        NTSTATUS status = Ipc_GetName(DirectoryHandle, NULL, &TruePath, &CopyPath, NULL);
+        NTSTATUS status = Ipc_GetName(DirectoryHandle, (UNICODE_STRING*)-1, &TruePath, &CopyPath, NULL);
 
         if (!NT_SUCCESS(status))
             return status;

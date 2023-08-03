@@ -6,6 +6,7 @@
 #include "../MiscHelpers/Common/Common.h"
 #include "../MiscHelpers/Common/ComboInputDialog.h"
 #include "../MiscHelpers/Common/SettingsWidgets.h"
+#include "../AddonManager.h"
 #include "Helpers/WinAdmin.h"
 
 void COptionsWindow::CreateAdvanced()
@@ -76,7 +77,6 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.chkGuiTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkComTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkNetFwTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
-	connect(ui.chkApiTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkDbgTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkErrTrace, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
@@ -98,6 +98,10 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.btnDelHostProcess, SIGNAL(clicked(bool)), this, SLOT(OnDelHostProcess()));
 	connect(ui.chkShowHostProcTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowHostProcTmpl()));
 	connect(ui.chkConfidential, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged())); // todo notify premium feature
+
+	connect(ui.treeInjectDll, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnToggleInjectDll(QTreeWidgetItem *, int)));
+	connect(ui.treeInjectDll, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnDblClickInjedtDll(QTreeWidgetItem*, int)));
+	
 	connect(ui.chkHostProtect, SIGNAL(clicked(bool)), this, SLOT(OnHostProtectChanged()));
 	connect(ui.chkHostProtectMsg, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
@@ -134,6 +138,57 @@ void COptionsWindow::LoadAdvanced()
 	ui.chkOpenSamEndpoint->setChecked(m_pBox->GetBool("OpenSamEndpoint", false));
 	ui.chkOpenLsaEndpoint->setChecked(m_pBox->GetBool("OpenLsaEndpoint", false));
 
+	ui.treeInjectDll->clear();
+	QStringList InjectDll = m_pBox->GetTextList("InjectDll", false);
+	QStringList InjectDll64 = m_pBox->GetTextList("InjectDll64", false);
+#ifdef _M_ARM64
+	QStringList InjectDllARM64 = m_pBox->GetTextList("InjectDllARM64", false);
+#endif
+	foreach(const CAddonInfoPtr pAddon, theGUI->GetAddonManager()->GetAddons()) {
+		if (!pAddon->Installed)
+			continue;
+		QVariantMap InjectDlls = pAddon->Data["injectDlls"].toMap();
+		if (!InjectDlls.isEmpty()) 
+		{
+			int Found = 0;
+			int Count = 0;
+			foreach(const QString & Key, InjectDlls.keys()) {
+				QStringList List;
+				if (Key == "x64")		List = InjectDll;
+				else if (Key == "x86")	List = InjectDll64;
+#ifdef _M_ARM64
+				else if (Key == "a64")	List = InjectDllARM64;
+#endif
+				else
+					continue;
+				Count++;
+				foreach(const QString & DllPath, List) {
+					if (DllPath.endsWith(InjectDlls[Key].toString(), Qt::CaseInsensitive)) {
+						Found++;
+						break;
+					}
+				}
+			}
+
+			QTreeWidgetItem* pItem = new QTreeWidgetItem();
+			pItem->setData(0, Qt::UserRole, pAddon->Id);
+			pItem->setText(0, pAddon->GetLocalizedEntry("name"));
+			if (Found == Count) {
+				pItem->setCheckState(0, Qt::Checked);
+				pItem->setData(0, Qt::UserRole + 1, Qt::Checked);
+			} else if (Found > 0) {
+				pItem->setCheckState(0, Qt::PartiallyChecked);
+				pItem->setData(0, Qt::UserRole + 1, Qt::PartiallyChecked);
+			}
+			else {
+				pItem->setCheckState(0, Qt::Unchecked);
+				pItem->setData(0, Qt::UserRole + 1, Qt::Unchecked);
+			}
+			pItem->setText(1, pAddon->GetLocalizedEntry("description"));
+			ui.treeInjectDll->addTopLevelItem(pItem);
+		}
+	}
+
 	ui.chkHostProtect->setChecked(m_pBox->GetBool("ProtectHostImages", false));
 	ui.chkHostProtectMsg->setEnabled(ui.chkHostProtect->isChecked());
 	ui.chkHostProtectMsg->setChecked(m_pBox->GetBool("NotifyImageLoadDenied", true));
@@ -154,12 +209,6 @@ void COptionsWindow::LoadAdvanced()
 	ReadAdvancedCheck("NetFwTrace", ui.chkNetFwTrace, "*");
 	ui.chkDbgTrace->setChecked(m_pBox->GetBool("DebugTrace", false));
 	ui.chkErrTrace->setChecked(m_pBox->GetBool("ErrorTrace", false));
-	QSharedPointer<CSandBoxPlus> pBoxPlus = m_pBox.objectCast<CSandBoxPlus>();
-	if (pBoxPlus) {
-		QString logApiPath = theAPI->GetSbiePath() + "\\LogAPI\\logapi32.dll";
-		ui.chkApiTrace->setVisible(QFile::exists(logApiPath));
-		ui.chkApiTrace->setChecked(pBoxPlus->HasLogApi());
-	}
 
 	// triggers
 	ui.treeTriggers->clear();
@@ -276,8 +325,49 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkOpenSamEndpoint, "OpenSamEndpoint", "y", "");
 	WriteAdvancedCheck(ui.chkOpenLsaEndpoint, "OpenLsaEndpoint", "y", "");
 
+	QStringList InjectDll = m_pBox->GetTextList("InjectDll", false);
+	QStringList InjectDll64 = m_pBox->GetTextList("InjectDll64", false);
+#ifdef _M_ARM64
+	QStringList InjectDllARM64 = m_pBox->GetTextList("InjectDllARM64", false);
+#endif
+	for (int i = 0; i < ui.treeInjectDll->topLevelItemCount(); i++) {
+		QTreeWidgetItem* pItem = ui.treeInjectDll->topLevelItem(i);
+		CAddonPtr pAddon = theGUI->GetAddonManager()->GetAddon(pItem->data(0, Qt::UserRole).toString());
+		if (pAddon && pItem->checkState(0) != Qt::PartiallyChecked && pItem->checkState(0) != pItem->data(0, Qt::UserRole + 1))
+		{
+			QVariantMap InjectDlls = pAddon->Data["injectDlls"].toMap();
+			foreach(const QString & Key, InjectDlls.keys()) {
+				QStringList* pList;
+				if (Key == "x64")		pList = &InjectDll;
+				else if (Key == "x86")	pList = &InjectDll64;
+#ifdef _M_ARM64
+				else if (Key == "a64")	pList = &InjectDllARM64;
+#endif
+				else
+					continue;
+
+				// remove old entries
+				for (int i = 0; i < pList->size(); i++) {
+					if (pList->at(i).endsWith(InjectDlls[Key].toString(), Qt::CaseInsensitive))
+						pList->removeAt(i--);
+				}
+
+				// add new entries
+				if (pItem->checkState(0) == Qt::Checked)
+					pList->append(pAddon->Data["installPath"].toString() + InjectDlls[Key].toString());
+			}
+		}
+	}
+	m_pBox->UpdateTextList("InjectDll", InjectDll, false);
+	m_pBox->UpdateTextList("InjectDll64", InjectDll64, false);
+#ifdef _M_ARM64
+	m_pBox->UpdateTextList("InjectDllARM64", InjectDllARM64, false);
+#endif
+
 	WriteAdvancedCheck(ui.chkHostProtect, "ProtectHostImages", "y", "");
 	WriteAdvancedCheck(ui.chkHostProtectMsg, "NotifyImageLoadDenied", "", "n");
+
+
 	WriteGlobalCheck(ui.chkSbieLogon, "SandboxieLogon", false);
 
 	SaveOptionList();
@@ -294,9 +384,6 @@ void COptionsWindow::SaveAdvanced()
 	WriteAdvancedCheck(ui.chkNetFwTrace, "NetFwTrace", "*");
 	WriteAdvancedCheck(ui.chkDbgTrace, "DebugTrace", "y");
 	WriteAdvancedCheck(ui.chkErrTrace, "ErrorTrace", "y");
-	QSharedPointer<CSandBoxPlus> pBoxPlus = m_pBox.objectCast<CSandBoxPlus>();
-	if (pBoxPlus && ui.chkApiTrace->isVisible())
-		pBoxPlus->SetLogApi(ui.chkApiTrace->isChecked());
 
 	// triggers
 	QStringList StartProgram;
@@ -446,6 +533,20 @@ void COptionsWindow::OnNoWindowRename()
 		SetAccessEntry(eWnd, "", eOpen, "#");
 	else
 		DelAccessEntry(eWnd, "", eOpen, "#");
+}
+
+void COptionsWindow::OnToggleInjectDll(QTreeWidgetItem* pItem, int Column)
+{
+	OnAdvancedChanged();
+}
+
+void COptionsWindow::OnDblClickInjedtDll(QTreeWidgetItem* pItem, int Column)
+{
+	CAddonPtr pAddon = theGUI->GetAddonManager()->GetAddon(pItem->data(0, Qt::UserRole).toString());
+	if (!pAddon || pAddon->Data["configFile"].toString().isEmpty())
+		return;
+
+	theGUI->EditIni(theAPI->GetSbiePath() + pAddon->Data["installPath"].toString() + pAddon->Data["configFile"].toString());
 }
 
 void COptionsWindow::OnHostProtectChanged()

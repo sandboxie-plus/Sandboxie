@@ -499,7 +499,7 @@ bool CSbieUtils::CreateShortcut(const QString& StartExe, QString LinkPath, const
 		StartArgs += "/box:" + boxname;
 	if (!arguments.isEmpty()) {
 		if (!StartArgs.isEmpty()) StartArgs += " ";
-		if(arguments.contains(" "))
+		if(arguments.contains(" ") && arguments.left(1) != "\"")
 			StartArgs += "\"" + arguments + "\"";
 		else
 			StartArgs += arguments;

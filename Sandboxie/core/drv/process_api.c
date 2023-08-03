@@ -212,8 +212,22 @@ _FX NTSTATUS Process_Api_Query(PROCESS *proc, ULONG64 *parms)
     // this is the first SbieApi call by SbieDll
     //
 
-    if (proc)
+    if (proc && !proc->sbiedll_loaded) {
+
         proc->sbiedll_loaded = TRUE;
+
+        //
+        // On windows 10 it was observed that the PCA service is assigning its job 
+        // after sandboxie's job was already assigned, so we re check here,
+        // and when needed restart the process from the sbiedll outside a PCA job.
+        //
+
+        if (proc->forced_process && Driver_OsVersion >= DRIVER_WINDOWS_10) {
+
+            if (Process_IsInPcaJob(proc->pid))
+                proc->in_pca_job = TRUE;
+        }
+    }
 
     //
     // if a ProcessId was specified, then locate and lock the matching

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 #include <QAbstractEventDispatcher>
+#include <QSettings>
 
 #include <ntstatus.h>
 #define WIN32_NO_STATUS
@@ -348,6 +349,28 @@ CSymbolProvider* CSymbolProvider::Instance()
 
     if (MyBeginInitOnce(InitOnce))
     {
+/*#ifdef _WIN64
+        QSettings settings("HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows Kits\\Installed Roots", QSettings::NativeFormat);
+#else
+        QSettings settings("HKEY_LOCAL_MACHINE\\Software\\Wow6432Node\\Microsoft\\Windows Kits\\Installed Roots", QSettings::NativeFormat);
+#endif
+        QString KitsRoot = settings.value("KitsRoot10").toString(); // Windows 10 SDK
+        if(KitsRoot.isEmpty())
+            KitsRoot = settings.value("KitsRoot81").toString(); // Windows 8.1 SDK
+        if(KitsRoot.isEmpty())
+            KitsRoot = settings.value("KitsRoot").toString(); // Windows 8 SDK
+#if defined(_M_AMD64)
+        KitsRoot.append("\\Debuggers\\x64\\");
+#elif defined(_M_ARM64)
+        KitsRoot.append("\\Debuggers\\arm64\\");
+#else
+        KitsRoot.append("\\Debuggers\\x86\\");
+#endif
+
+        HMODULE DbgCoreMod = LoadLibrary((KitsRoot + "dbgcore.dll").toStdWString().c_str());
+        HMODULE DbgHelpMod = LoadLibrary((KitsRoot + "dbghelp.dll").toStdWString().c_str());
+        HMODULE SymSrvMod  = LoadLibrary((KitsRoot + "symsrv.dll").toStdWString().c_str());*/
+
         HMODULE DbgHelpMod = LoadLibrary(L"dbghelp.dll");
 
         __sys_SymFromAddr = (P_SymFromAddr)GetProcAddress(DbgHelpMod, "SymFromAddr");

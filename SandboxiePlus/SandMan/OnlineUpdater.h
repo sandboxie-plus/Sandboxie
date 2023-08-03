@@ -92,8 +92,10 @@ protected:
 
 	bool				AskDownload(const QVariantMap& Update);
 	
-	bool				RunUpdater(const QStringList& Params, bool bSilent, bool Wait = false);
-	bool				RunInstaller2(const QString& FilePath, bool bSilent);
+	friend class CAddonManager;
+
+	static SB_RESULT(int) RunUpdater(const QStringList& Params, bool bSilent, bool Wait = false);
+	static bool			RunInstaller2(const QString& FilePath, bool bSilent);
 
 	CNetworkAccessManager*	m_RequestManager;
 	CSbieProgressPtr	m_pUpdateProgress;

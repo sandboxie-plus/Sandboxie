@@ -88,6 +88,29 @@ std::wstring hexStr(unsigned char* data, int len)
 	return s;
 }
 
+
+std::wstring MkLower(std::wstring Str)
+{
+	for(std::wstring::size_type i = 0; i < Str.size(); i++)
+	{
+		std::wstring::value_type &Char = Str.at(i);
+		if((Char >= L'A') && (Char <= L'Z'))
+			Char += 32;
+	}
+	return Str;
+}
+
+std::wstring MkUpper(std::wstring Str)
+{
+	for(std::wstring::size_type i = 0; i < Str.size(); i++)
+	{
+		std::wstring::value_type &Char = Str.at(i);
+		if((Char >= L'a') && (Char <= L'z'))
+			Char -= 32;
+	}
+	return Str;
+}
+
 bool FileExists(const wchar_t* path)
 {
 	if (GetFileAttributes(path) == INVALID_FILE_ATTRIBUTES && GetLastError() == ERROR_FILE_NOT_FOUND)

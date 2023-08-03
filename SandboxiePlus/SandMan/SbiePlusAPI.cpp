@@ -121,7 +121,6 @@ void CSbiePlusAPI::OnStartFinished()
 
 CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSandBox(BoxName, pAPI)
 {
-	m_bLogApiFound = false;
 	m_bINetBlocked = false;
 	m_bINetExceptions = false;
 	m_bSharesAllowed = false;
@@ -228,7 +227,7 @@ void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 	}
 
 	SB_STATUS Status = SB_OK;
-	if (!Archive.Update(&Files, true, theConf->GetInt("Options/ExportCompression", 5)))  // 0, 1 - 9
+	if (!Archive.Update(&Files, true, theConf->GetInt("Options/ExportCompression", 3)))  // 0, 1 - 9
 		Status = SB_ERR((ESbieMsgCodes)SBX_7zCreateFailed);
 	
 	//if(!Status.IsError() && !pProgress->IsCanceled())
@@ -263,7 +262,7 @@ void CSandBoxPlus::ImportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 {
 	CArchive Archive(ImportPath);
 
-	if (Archive.Open() != 1) {
+	if (Archive.Open() != ERR_7Z_OK) {
 		pProgress->Finish(SB_ERR((ESbieMsgCodes)SBX_7zOpenFailed));
 		return;
 	}
@@ -321,16 +320,6 @@ SB_PROGRESS CSandBoxPlus::ImportBox(const QString& FileName)
 
 void CSandBoxPlus::UpdateDetails()
 {
-	//m_bLogApiFound = GetTextList("OpenPipePath", false).contains("\\Device\\NamedPipe\\LogAPI");
-	m_bLogApiFound = false;
-	QStringList InjectDlls = GetTextList("InjectDll", false);
-	foreach(const QString & InjectDll, InjectDlls) {
-		if (InjectDll.contains("logapi", Qt::CaseInsensitive)) {
-			m_bLogApiFound = true;
-			break;
-		}
-	}
-
 	m_bINetBlocked = false;
 	foreach(const QString& Entry, GetTextList("ClosedFilePath", false)) {
 		if (Entry == "!<InternetAccess>,InternetAccessDevices") {
@@ -516,6 +505,7 @@ void CSandBoxPlus::ScanStartMenu()
 		if(!pLink->Target.isEmpty() && pLink->Target != Link["Path"].toString())
 			bChanged = true;
 		pLink->Target = Link["Path"].toString();
+		pLink->Arguments = Link["Arguments"].toString();
 		pLink->Icon = Link["IconPath"].toString();
 		pLink->IconIndex = Link["IconIndex"].toInt();
 		pLink->WorkDir = Link["WorkingDir"].toString();
@@ -702,8 +692,6 @@ QString CSandBoxPlus::GetStatusStr() const
 	if(m_bPrivacyEnhanced)
 		Status.append(tr("Privacy Enhanced"));
 
-	if (m_bLogApiFound)
-		Status.append(tr("API Log"));
 	if (m_bINetBlocked) {
 		if(m_bINetExceptions)
 			Status.append(tr("No INet (with Exceptions)"));
@@ -744,29 +732,6 @@ CSandBoxPlus::EBoxTypes CSandBoxPlus::GetTypeImpl() const
 	if (m_bPrivacyEnhanced)
 		return eDefaultPlus;
 	return eDefault;
-}
-
-void CSandBoxPlus::SetLogApi(bool bEnable)
-{
-	if (bEnable)
-	{
-		//InsertText("OpenPipePath", "\\Device\\NamedPipe\\LogAPI");
-		InsertText("InjectDll", "\\LogAPI\\logapi32.dll");
-		InsertText("InjectDll64", "\\LogAPI\\logapi64.dll");
-#ifdef _M_ARM64
-		InsertText("InjectDllARM64", "\\LogAPI\\logapi64a.dll");
-#endif
-	}
-	else
-	{
-		//DelValue("OpenPipePath", "\\Device\\NamedPipe\\LogAPI");
-		DelValue("InjectDll", "\\LogAPI\\logapi32.dll");
-		DelValue("InjectDll64", "\\LogAPI\\logapi64.dll");
-#ifdef _M_ARM64
-		DelValue("InjectDllARM64", "\\LogAPI\\logapi64a.dll");
-#endif
-	}
-	m_bLogApiFound = bEnable;
 }
 
 void CSandBoxPlus::SetINetBlock(bool bEnable)

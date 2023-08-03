@@ -8,6 +8,14 @@
 
 #ifdef USE_7Z
 
+#define ERR_7Z_OK					0
+#define ERR_7Z_NO_INTERFACE			1
+#define ERR_7Z_ALREADY_OPEN			2
+#define ERR_7Z_FILE_NOT_EXIST		3
+#define ERR_7Z_OPEN_FAILED			4
+#define ERR_7Z_PASSWORD_REQUIRED	5
+#define ERR_7Z_UNSUPPORTED_FORMAT	6
+
 class MISCHELPERS_EXPORT CArchive
 {
 public:
@@ -50,7 +58,7 @@ protected:
 
 	QString						GetNextPart(QString FileName);
 
-	virtual void				LogError(const QString &Error) {}
+	virtual void				LogError(const QString& Error);
 
 	friend class CArchiveOpener;
 	friend class CArchiveExtractor;

@@ -4,17 +4,64 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.10.2 / 5.65.2] - 2023-07-31
+
+
+### Added
+- re-added option to suspend sandboxed processes [#3126](https://github.com/sandboxie-plus/Sandboxie/issues/3126)
+
+### Changed
+- changed format of the addon data [#3135](https://github.com/sandboxie-plus/Sandboxie/issues/3135)
+  - all users coming from versions 1.10.0 and 1.10.1 will need to reinstall the components in the addon manager
+- "OpenClipboard=n" now also denies write to clipboard [#1367](https://github.com/sandboxie-plus/Sandboxie/issues/1367)
+
+### Fixed
+- fixed issue with cross renaming of directories
+- fixed issue with auto scroll not working [#393](https://github.com/sandboxie-plus/Sandboxie/issues/393)
+- fixed UI issue with new box removal protection [#3104](https://github.com/sandboxie-plus/Sandboxie/issues/3104)
+- fixed issue with link argument handling [#2969](https://github.com/sandboxie-plus/Sandboxie/issues/2969)
+- fixed IPC issue introduced in 1.10.1 [#3132](https://github.com/sandboxie-plus/Sandboxie/issues/3132) [#3134](https://github.com/sandboxie-plus/Sandboxie/issues/3134)
+- fixed issue with pinned run entry icons
+- fixed UGlobalHotkey lib not being compatible with Qt6
+
+### Removed
+- removed hardcoded support for LogApiDll
+  - use addon manager and dll injection settings
 
 
 
-## [1.10.1 / 5.65.1] - 2023-07-??
+## [1.10.1 / 5.65.1] - 2023-07-24
+
+### Added
+- added UI option to change ini editor [#3116](https://github.com/sandboxie-plus/Sandboxie/issues/3116)
+- added separate protection against box removal and content deletion [#3104](https://github.com/sandboxie-plus/Sandboxie/issues/3104)
+- added "auto scroll" in Sbie messages, resource monitor, API call log context menu [#393](https://github.com/sandboxie-plus/Sandboxie/issues/393)
+
+### Changed
+- reworked NT Object Handle handling
+- "OpenClipboard=n" now is also implemented in user mode, making it work for green boxes
+- changed Delete V2 scheme to use drive letters in FilePaths.dat (remains backward compatible with using NT paths) [#3053](https://github.com/sandboxie-plus/Sandboxie/issues/3053)
+- improved robustness of snapshot merging [#3017](https://github.com/sandboxie-plus/Sandboxie/issues/3017)
 
 ### Fixed
 - fixed "Disable Security Isolation" causes a game to stop playing audio [#2893](https://github.com/sandboxie-plus/Sandboxie/issues/2893)
 - fixed NtQueryDirectoryObject not implemented [#2734](https://github.com/sandboxie-plus/Sandboxie/issues/2734)
+- fixed issue with working directory for run menu entries
+- fixed improper global symlink in sandboxed namespace [#3112](https://github.com/sandboxie-plus/Sandboxie/issues/3112)
+- fixed 'Addon already installed!' error when clicking 'Show Stack Trace' [#3114](https://github.com/sandboxie-plus/Sandboxie/issues/3114)
+- fixed existing BoxNameTitle=process.exe,- removed when toggling other options [#3106](https://github.com/sandboxie-plus/Sandboxie/issues/3106)
+- fixed asynchronously assigned PCA job not being properly detected [#1919](https://github.com/sandboxie-plus/Sandboxie/issues/1919)
+- fixed incompatibility with first Windows 10 release [#3117](https://github.com/sandboxie-plus/Sandboxie/issues/3117)
+- fixed remove sandbox only deletes the contents of the sandbox when an application is running in the sandbox [#3118](https://github.com/sandboxie-plus/Sandboxie/issues/3118)
+- fixed crash issue with not properly terminated script engine [#3120](https://github.com/sandboxie-plus/Sandboxie/issues/3120)
+- fixed ImDisk under Sandboxie supervision causes SBIE2337 and sometimes BSOD [#1092](https://github.com/sandboxie-plus/Sandboxie/issues/1092)
+- fixed snapshots don't merge duplicate directory junctions [#3016](https://github.com/sandboxie-plus/Sandboxie/issues/3016)
+- fixed snapshot related issue when using Delete V2 rename functionality
+- fixed issue with Delete V2 when using network shares
+- fixed issue when using "UseVolumeSerialNumbers=y" with accessing drive roots
+- fixed remove snapshot resurrects deleted files when using Delete V2 [#3015](https://github.com/sandboxie-plus/Sandboxie/issues/3015)
 
-### Changed
-- reworked Nt Object Handle handling
+
 
 
 

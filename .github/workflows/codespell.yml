@@ -88,6 +88,7 @@ jobs:
           echo 'dayly->daily' >> dictionary.txt
           echo 'erdinal->ordinal' >> dictionary.txt
           echo 'wizars->wizard' >> dictionary.txt
+          echo 'pined->pinned' >> dictionary.txt
           echo 'crome->Chrome' >> dictionary_code.txt
           echo 'chromim->Chromium' >> dictionary_code.txt
           echo 'kmdutill->kmdutil' >> dictionary_code.txt

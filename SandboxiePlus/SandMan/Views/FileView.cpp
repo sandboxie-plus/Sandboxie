@@ -6,6 +6,7 @@
 #include "../MiscHelpers/Common/TreeItemModel.h"
 #include "../MiscHelpers/Common/OtherFunctions.h"
 #include "../QSbieAPI/SbieUtils.h"
+#include "../Windows/SettingsWindow.h"
 
 CFileView::CFileView(QWidget *parent)
 	: QWidget(parent)
@@ -198,7 +199,8 @@ int openShellContextMenu(const QStringList& Files, void* parentWindow, const CSa
                 QString FoundPin;
                 QString FileName = Files.first();
                 foreach(const QString & RunOption, RunOptions) {
-		            QString CmdFile = pBoxPlus->GetCommandFile(Split2(RunOption, "|").second);
+		            QVariantMap Entry = GetRunEntry(RunOption);
+		            QString CmdFile = pBoxPlus->GetCommandFile(Entry["Command"].toString());
 		            if(CmdFile.compare(FileName, Qt::CaseInsensitive) == 0) {
                         FoundPin = RunOption;
                         break;

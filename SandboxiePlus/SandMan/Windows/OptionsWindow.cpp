@@ -879,6 +879,34 @@ void COptionsWindow::WriteTextList(const QString& Setting, const QStringList& Li
 		throw Status;
 }
 
+void COptionsWindow::WriteTextSafe(const QString& Name, const QString& Value)
+{
+	QStringList List = m_pBox->GetTextList(Name, false);
+
+	// clear all non per process (name=program.exe,value) entries 
+	for (int i = 0; i < List.count(); i++) {
+		if (!List[i].contains(","))
+			List.removeAt(i--);
+	}
+
+	// Prepand the global entry
+	if (!Value.isEmpty()) List.append(Value);
+
+	WriteTextList(Name, List);
+}
+
+QString COptionsWindow::ReadTextSafe(const QString& Name, const QString& Default)
+{
+	QStringList List = m_pBox->GetTextList(Name, false);
+
+	for (int i = 0; i < List.count(); i++) {
+		if (!List[i].contains(","))
+			return List[i];
+	}
+
+	return Default;
+}
+
 void COptionsWindow::SaveConfig()
 {
 	bool UpdatePaths = false;

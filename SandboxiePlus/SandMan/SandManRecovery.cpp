@@ -76,8 +76,8 @@ QStringList CSandMan::GetFileCheckers(const CSandBoxPtr& pBox)
 {
 	QStringList Checkers;
 
-	if (theGUI->GetAddonManager()->HasAddon("FileChecker"))
-		Checkers.append(pBox->Expand("powershell -exec bypass -nop -File \"%SbieHome%\\bin\\CheckFile.ps1\" -bin"));
+	if (!theGUI->GetAddonManager()->GetAddon("FileChecker", CAddonManager::eInstalled).isNull())
+		Checkers.append(pBox->Expand("powershell -exec bypass -nop -File \"%SbieHome%\\addons\\FileChecker\\CheckFile.ps1\" -bin"));
 	
 	if (!pBox.isNull()) {
 		foreach(const QString & Value, pBox->GetTextList("OnFileRecovery", true, false, true)) {

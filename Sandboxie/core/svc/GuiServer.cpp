@@ -4306,9 +4306,7 @@ void GuiServer::RunConsoleSlave(const WCHAR *evtname)
 
     HANDLE hEvent = OpenEvent(EVENT_MODIFY_STATE, FALSE, evtname);
 
-    const ULONG max_pids = 16000;
-    ULONG pids_len = max_pids * sizeof(ULONG);
-    ULONG *pids = (ULONG *)HeapAlloc(GetProcessHeap(), 0, pids_len);
+    DWORD pids[10]; // 2 should be enough but lets go with 10
 
     if (hEvent && pids) {
 
@@ -4329,18 +4327,13 @@ void GuiServer::RunConsoleSlave(const WCHAR *evtname)
 
             while (1) {
 
-                Sleep(2000);
+                Sleep(50);
 
-                ULONG num_pids = GetConsoleProcessList(pids, max_pids);
-                if (num_pids > 1 && num_pids < max_pids) {
-
-                    Sleep(2000);
+                ULONG num_pids = GetConsoleProcessList(pids, ARRAYSIZE(pids));
+                if (num_pids > 1)
                     break;
-                }
             }
         }
-
-        //HeapFree(GetProcessHeap(), 0, pids); // don't bother we ExitProcess aynways
     }
 
     ExitProcess(0);

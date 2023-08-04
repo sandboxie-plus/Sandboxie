@@ -122,6 +122,9 @@ bool CSupportDialog::CheckSupport(bool bOnRun)
 	return true;
 }
 
+extern int g_CertAmount;
+int CountSeats();
+
 bool CSupportDialog::ShowDialog(bool NoGo, int Wait)
 {
 	QDateTime InstallDate = GetSbieInstallationDate();
@@ -137,12 +140,18 @@ bool CSupportDialog::ShowDialog(bool NoGo, int Wait)
 	}
 	else
 #endif
-	if (IsBusinessUse()) 
+	if (CountSeats() > g_CertAmount)
+	{
+		Message = tr("The installed supporter certificate allows for <b>%1 seats</b> to be active.<br /><br />").arg(g_CertAmount);
+
+		Message += tr("<b>There seems to be however %1 Sandboxie-Plus instances on your network, <font color='red'>you need to obtain additional <a href=\"https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&tip=more\">support certificates</a></font>.</b><br /><br />").arg(CountSeats());
+	}
+	else if (IsBusinessUse()) 
 	{
 		if (g_CertInfo.expired) {
 			Days = -g_CertInfo.expirers_in_sec / (24 * 3600);
 
-			Message += tr("The installed supporter certificate <b>has expired %1 days ago</b> and <a href=\"https://sandboxie-plus.com/go.php?to=sbie-renew-cert\">must be renewed</a>.<br /><br />").arg(Days);
+			Message = tr("The installed supporter certificate <b>has expired %1 days ago</b> and <a href=\"https://sandboxie-plus.com/go.php?to=sbie-renew-cert\">must be renewed</a>.<br /><br />").arg(Days);
 		} else
 			Message = tr("<b>You have installed Sandboxie-Plus more than %1 days ago.</b><br /><br />").arg(Days);
 
@@ -153,9 +162,9 @@ bool CSupportDialog::ShowDialog(bool NoGo, int Wait)
 		bool bOnARM64 = (g_FeatureFlags & CSbieAPI::eSbieFeatureARM64) != 0;
 
 		if (g_CertInfo.outdated)
-			Message += tr("The installed supporter certificate is <b>outdated</b> and it is <u>not valid for<b> this version</b></u> of Sandboxie-Plus.<br /><br />");
+			Message = tr("The installed supporter certificate is <b>outdated</b> and it is <u>not valid for<b> this version</b></u> of Sandboxie-Plus.<br /><br />");
 		else if (g_CertInfo.expired)
-			Message += tr("The installed supporter certificate is <b>expired</b> and <u>should be renewed</u>.<br /><br />");
+			Message = tr("The installed supporter certificate is <b>expired</b> and <u>should be renewed</u>.<br /><br />");
 		else
 			Message = tr("<b>You have been using Sandboxie-Plus for more than %1 days now.</b><br /><br />").arg(Days);
 

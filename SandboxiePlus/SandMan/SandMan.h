@@ -91,6 +91,8 @@ public:
 	bool				RunSandboxed(const QStringList& Commands, QString BoxName = QString(), const QString& WrkDir = QString());
 	SB_RESULT(quint32)	RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
 
+	void				EditIni(const QString& IniPath, bool bPlus = false);
+
 	QIcon				GetBoxIcon(int boxType, bool inUse = false);// , bool inBusy = false);
 	QRgb				GetBoxColor(int boxType) { return m_BoxColors[boxType]; }
 	QIcon				GetColorIcon(QColor boxColor, bool inUse = false/*, bool bOut = false*/);

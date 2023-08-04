@@ -3,6 +3,77 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.10.3 / 5.65.3] - 2023-08-??
+
+### Added
+- added display of URL shortcut files in Run Menu [#3151](https://github.com/sandboxie-plus/Sandboxie/issues/3151)
+
+### Changed
+- improved business certificate handling
+
+### Fixed
+- fixed issues with pinned shortcuts
+- fixed Process Suspend/Resume context menu [#3156](https://github.com/sandboxie-plus/Sandboxie/issues/3156)
+- fixed issues with installers created with Qt [#2493](https://github.com/sandboxie-plus/Sandboxie/issues/2493) [#3153](https://github.com/sandboxie-plus/Sandboxie/issues/3153)
+
+
+
+## [1.10.2 / 5.65.2] - 2023-07-31
+
+### Added
+- re-added option to suspend sandboxed processes [#3126](https://github.com/sandboxie-plus/Sandboxie/issues/3126)
+
+### Changed
+- changed format of the addon data [#3135](https://github.com/sandboxie-plus/Sandboxie/issues/3135)
+  - all users coming from versions 1.10.0 and 1.10.1 will need to reinstall the components in the addon manager
+- "OpenClipboard=n" now also denies write to clipboard [#1367](https://github.com/sandboxie-plus/Sandboxie/issues/1367)
+
+### Fixed
+- fixed issue with cross renaming of directories
+- fixed issue with auto scroll not working [#393](https://github.com/sandboxie-plus/Sandboxie/issues/393)
+- fixed UI issue with new box removal protection [#3104](https://github.com/sandboxie-plus/Sandboxie/issues/3104)
+- fixed issue with link argument handling [#2969](https://github.com/sandboxie-plus/Sandboxie/issues/2969)
+- fixed IPC issue introduced in 1.10.1 [#3132](https://github.com/sandboxie-plus/Sandboxie/issues/3132) [#3134](https://github.com/sandboxie-plus/Sandboxie/issues/3134)
+- fixed issue with pinned run entry icons
+- fixed UGlobalHotkey library not being compatible with Qt6
+
+### Removed
+- removed hardcoded support for LogApiDll
+  - use the addon manager and DLL injection settings
+
+
+
+## [1.10.1 / 5.65.1] - 2023-07-24
+
+### Added
+- added UI option to change ini editor [#3116](https://github.com/sandboxie-plus/Sandboxie/issues/3116)
+- added separate protection against box removal and content deletion [#3104](https://github.com/sandboxie-plus/Sandboxie/issues/3104)
+- added "auto scroll" in Sbie messages, resource monitor, API call log context menu [#393](https://github.com/sandboxie-plus/Sandboxie/issues/393)
+
+### Changed
+- reworked NT Object Handle handling
+- "OpenClipboard=n" now is also implemented in user mode, making it work for green boxes
+- changed Delete V2 scheme to use drive letters in FilePaths.dat (remains backward compatible with using NT paths) [#3053](https://github.com/sandboxie-plus/Sandboxie/issues/3053)
+- improved robustness of snapshot merging [#3017](https://github.com/sandboxie-plus/Sandboxie/issues/3017)
+
+### Fixed
+- fixed "Disable Security Isolation" causes a game to stop playing audio [#2893](https://github.com/sandboxie-plus/Sandboxie/issues/2893)
+- fixed NtQueryDirectoryObject not implemented [#2734](https://github.com/sandboxie-plus/Sandboxie/issues/2734)
+- fixed issue with working directory for Run Menu entries
+- fixed improper global symlink in sandboxed namespace [#3112](https://github.com/sandboxie-plus/Sandboxie/issues/3112)
+- fixed 'Addon already installed!' error when clicking 'Show Stack Trace' [#3114](https://github.com/sandboxie-plus/Sandboxie/issues/3114)
+- fixed existing BoxNameTitle=process.exe,- removed when toggling other options [#3106](https://github.com/sandboxie-plus/Sandboxie/issues/3106)
+- fixed asynchronously assigned PCA job not being properly detected [#1919](https://github.com/sandboxie-plus/Sandboxie/issues/1919)
+- fixed incompatibility with first Windows 10 release [#3117](https://github.com/sandboxie-plus/Sandboxie/issues/3117)
+- fixed remove sandbox only deletes the contents of the sandbox when an application is running in the sandbox [#3118](https://github.com/sandboxie-plus/Sandboxie/issues/3118)
+- fixed crash issue with not properly terminated script engine [#3120](https://github.com/sandboxie-plus/Sandboxie/issues/3120)
+- fixed ImDisk under Sandboxie supervision causes SBIE2337 and sometimes BSOD [#1092](https://github.com/sandboxie-plus/Sandboxie/issues/1092)
+- fixed snapshots don't merge duplicate directory junctions [#3016](https://github.com/sandboxie-plus/Sandboxie/issues/3016)
+- fixed snapshot related issue when using Delete V2 rename functionality
+- fixed issue with Delete V2 when using network shares
+- fixed issue when using "UseVolumeSerialNumbers=y" with accessing drive roots
+- fixed remove snapshot resurrects deleted files when using Delete V2 [#3015](https://github.com/sandboxie-plus/Sandboxie/issues/3015)
+
 
 
 ## [1.10.0 / 5.65.0] - 2023-07-12
@@ -213,7 +284,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added a few UI debug options [#2816](https://github.com/sandboxie-plus/Sandboxie/issues/2816)
 
 ### Changed
-- run menu entries now can have custom icons
+- Run Menu entries now can have custom icons
 - the init edit page will automatically switch to edit when the user changes something
 - improved change handling in the global settings window
 - reorganized global options
@@ -307,7 +378,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.8.0 / 5.63.0] - 2023-02-27
 
 ### Added
-- Run menu now supports folders, to be used by entering foldername1\foldername2\entryname in the name column of the UI
+- Run Menu now supports folders, to be used by entering foldername1\foldername2\entryname in the Name column of the UI
 - added a tray indicator for pending updates
 - added virtualization for CreateDirectoryObject(Ex) and OpenDirectoryObject (improves security, prevents name squatting)
   - Note: this can be disabled using 'NtNamespaceIsolation=n'
@@ -380,7 +451,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with NtQueryDirectoryFile data alignment [#2443](https://github.com/sandboxie-plus/Sandboxie/issues/2443)
 - fixed issue with Microsoft Edge 111 dev build [#2631](https://github.com/sandboxie-plus/Sandboxie/issues/2631)
 - fixed issue with mio sockets [#2617](https://github.com/sandboxie-plus/Sandboxie/issues/2617)
-- fixed issue with run menu entries created from the options/settings window [#2610](https://github.com/sandboxie-plus/Sandboxie/issues/2610)
+- fixed issue with Run Menu entries created from the options/settings window [#2610](https://github.com/sandboxie-plus/Sandboxie/issues/2610)
 - fixed issues with the start menu when using snapshots [#2589](https://github.com/sandboxie-plus/Sandboxie/issues/2589)
 
 
@@ -530,7 +601,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.6.1 / 5.61.1] - 2022-12-04
 
 ### Added
-- added global option to introduce run menu entries to all boxes
+- added global option to introduce Run Menu entries to all boxes
 
 ### Changed
 - reorganized command prompt entries [#2451](https://github.com/sandboxie-plus/Sandboxie/issues/2451)
@@ -1139,7 +1210,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed pipe impersonation in compartment mode
 - fixed issue with box clean-up introduced in a recent build
 - fixed missing trace log clean-up command [#1773](https://github.com/sandboxie-plus/Sandboxie/issues/1773)
-- fixed inability to unpin programs that have been pinned to the run menu  [#1694](https://github.com/sandboxie-plus/Sandboxie/issues/1694)
+- fixed inability to unpin programs that have been pinned to the Run Menu [#1694](https://github.com/sandboxie-plus/Sandboxie/issues/1694)
 
 
 
@@ -1232,7 +1303,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with accessing network drives in privacy mode [#1617](https://github.com/sandboxie-plus/Sandboxie/issues/1617)
 - fixed issue with ping in compartment mode [#1608](https://github.com/sandboxie-plus/Sandboxie/issues/1608)
 - fixed SandMan UI freezing when a lot of processes are created and closed in a box [#1607](https://github.com/sandboxie-plus/Sandboxie/issues/1607)
-- fixed Editing existing 'Run Menu' Command Line entry not being recognized [#1648](https://github.com/sandboxie-plus/Sandboxie/issues/1648)
+- fixed editing of command line entry not being recognized in the Run Menu [#1648](https://github.com/sandboxie-plus/Sandboxie/issues/1648)
 - fixed blue screen issue in driver (thanks Diversenok)
 - fixed incompatibility with Windows 11 Insider Build 22563.1 [#1654](https://github.com/sandboxie-plus/Sandboxie/issues/1654)
 
@@ -1518,7 +1589,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with read only paths introduced in 1.0.0
 - fixed BSOD issue introduced in the 1.0.0 build [#1389](https://github.com/sandboxie-plus/Sandboxie/issues/1389)
 - fixed multiple BITS notifications while running sandboxed Chromium browsers (by isaak654) [ca320ec](https://github.com/sandboxie-plus/Sandboxie/commit/ca320ecc17180ff09a67bdefc524b30cf3540c08) [#1081](https://github.com/sandboxie-plus/Sandboxie/issues/1081)
-- fixed executables selection for "Run Menu" entries (by isaak654) [#1379](https://github.com/sandboxie-plus/Sandboxie/issues/1379)
+- fixed executables selection for Run Menu entries (by isaak654) [#1379](https://github.com/sandboxie-plus/Sandboxie/issues/1379)
 - fixed SetCursorPos and ClipCursor ignoring DPI awareness (by alvinhochun) [#1394](https://github.com/sandboxie-plus/Sandboxie/pull/1394)
 
 ### Removed
@@ -2592,7 +2663,7 @@ Fixed issue with Windows 7
 - added more advanced options to the sandbox options window
 - added file migration progress indicator
 - added more run commands and custom run commands per sandbox
-  - the box settings users can now specify programs to be available from the box run menu
+  - users can now specify programs to be available from the Run Menu of the sandbox
   - also processes can be pinned to that list from the presets menu
 - added more Windows 10 specific template presets
 - added ability to create desktop shortcuts to sandboxed items
@@ -2638,7 +2709,7 @@ Fixed issue with Windows 7
 - added new compatibility templates:
   - Windows 10 core UI component: OpenIpcPath=\BaseNamedObjects\[CoreUI]-* solving issues with Chinese Input and Emojis [#120](https://github.com/sandboxie-plus/Sandboxie/issues/120) [#88](https://github.com/sandboxie-plus/Sandboxie/issues/88)
   - Firefox Quantum, access to Windows's FontCachePort for compatibility with Windows 7
-- added experimental debug option "OriginalToken=y" which lets sandboxed processes retain their original unrestricted token
+- added experimental debug option "OriginalToken=y" which allows sandboxed processes to retain their original unrestricted token
   - This option is comparable with "OpenToken=y" and is intended only for testing and debugging, as it breaks most security measures (!)
 - added debug option "NoSandboxieDesktop=y" it disables the desktop proxy mechanism
   - Note: without an unrestricted token with this option applications won't be able to start

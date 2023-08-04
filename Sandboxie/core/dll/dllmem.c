@@ -338,7 +338,7 @@ ALIGNED WCHAR *Dll_GetTlsNameBuffer(THREAD_DATA *data, ULONG which, ULONG size)
     DbgTrace("Dll_GetTlsNameBuffer, %s, %d\r\n", func, which);
 #endif
 
-    if (which >= NAME_BUFFER_COUNT - 4)
+    if (which >= NAME_BUFFER_COUNT - 2)
         SbieApi_Log(2310, L"%d", which);
     if (which >= NAME_BUFFER_COUNT) {
         ExitProcess(-1);

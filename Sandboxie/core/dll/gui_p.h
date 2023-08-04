@@ -103,7 +103,11 @@ typedef HWND (*P_GetOpenClipboardWindow)(void);
 
 typedef DWORD (*P_GetClipboardSequenceNumber)(void);
 
+typedef HANDLE (*P_SetClipboardData)(UINT uFormat, HANDLE hMem);
+
 typedef HANDLE (*P_GetClipboardData)(UINT uFormat);
+
+typedef BOOL (*P_EmptyClipboard)();
 
 typedef int (*P_GetClipboardFormatName)(
     UINT format, void *lpszFormatName, int cchMaxCount);
@@ -577,7 +581,9 @@ GUI_SYS_VAR(SendInput)
 
 GUI_SYS_VAR(OpenClipboard)
 GUI_SYS_VAR(CloseClipboard)
+GUI_SYS_VAR(SetClipboardData);
 GUI_SYS_VAR(GetClipboardData);
+GUI_SYS_VAR(EmptyClipboard);
 GUI_SYS_VAR(GetClipboardOwner);
 GUI_SYS_VAR(GetOpenClipboardWindow);
 GUI_SYS_VAR(GetClipboardSequenceNumber);

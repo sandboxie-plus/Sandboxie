@@ -95,8 +95,6 @@ public:
 
 	virtual QString			GetStatusStr() const;
 
-	virtual void			SetLogApi(bool bEnable);
-	virtual bool			HasLogApi() const					{ return m_bLogApiFound; }
 
 	virtual void			SetINetBlock(bool bEnable);
 	virtual bool			IsINetBlocked() const				{ return m_bINetBlocked; }
@@ -163,9 +161,12 @@ public:
 	SB_STATUS				DeleteContentAsync(bool DeleteSnapshots = true, bool bOnAutoDelete = false);
 
 	struct SLink {
+		SLink() :Url(false), IconIndex(0) {}
 		QString Folder;
 		QString Name;
+		bool Url;
 		QString Target;
+		QString Arguments;
 		QString Icon;
 		int IconIndex;
 		QString WorkDir;
@@ -215,7 +216,6 @@ protected:
 
 	QList<QSharedPointer<CBoxJob>> m_JobQueue;
 
-	bool					m_bLogApiFound;
 	bool					m_bINetBlocked;
 	bool					m_bINetExceptions;
 	bool					m_bSharesAllowed;

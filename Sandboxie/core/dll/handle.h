@@ -1,5 +1,5 @@
 /*
- * Copyright 2021-2022 David Xanatos, xanasoft.com
+ * Copyright 2021-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -21,10 +21,11 @@
 
 
 //---------------------------------------------------------------------------
-// Defines
+// Structures and Types
 //---------------------------------------------------------------------------
 
-#define MAX_CLOSE_HANDLERS 4
+
+typedef void(*P_HandlerFunc)(HANDLE handle, void* param);
 
 
 //---------------------------------------------------------------------------
@@ -32,19 +33,17 @@
 //---------------------------------------------------------------------------
 
 
-typedef void(*P_CloseHandler)(HANDLE handle);
-
 VOID Handle_SetDeleteOnClose(HANDLE FileHandle, BOOLEAN DeleteOnClose);
 
-BOOLEAN Handle_RegisterCloseHandler(HANDLE FileHandle, P_CloseHandler CloseHandler);
+BOOLEAN Handle_RegisterHandler(HANDLE FileHandle, P_HandlerFunc CloseHandler, void* Params, BOOL bPropagate);
 
-BOOLEAN Handle_UnRegisterCloseHandler(HANDLE FileHandle, P_CloseHandler CloseHandler);
+VOID Handle_UnRegisterHandler(HANDLE FileHandle, P_HandlerFunc CloseHandler, void** pParams);
 
 VOID Handle_SetRelocationPath(HANDLE FileHandle, WCHAR* RelocationPath);
 
 WCHAR* Handle_GetRelocationPath(HANDLE FileHandle, ULONG ExtraLength);
 
-BOOLEAN Handle_FreeCloseHandler(HANDLE FileHandle, P_CloseHandler* CloseHandlers, BOOLEAN* DeleteOnClose);
+VOID Handle_ExecuteCloseHandler(HANDLE FileHandle, BOOLEAN* DeleteOnClose);
 
 
 //---------------------------------------------------------------------------

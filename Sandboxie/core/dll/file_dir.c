@@ -194,7 +194,7 @@ static NTSTATUS File_NtQueryVolumeInformationFile(
 
 NTSTATUS File_NtCloseImpl(HANDLE FileHandle);
 
-VOID File_NtCloseDir(HANDLE FileHandle);
+VOID File_NtCloseDir(HANDLE FileHandle, void* CloseParams);
 
 //---------------------------------------------------------------------------
 // Variables
@@ -484,7 +484,7 @@ _FX NTSTATUS File_Merge(
 
             } else {
 
-                Handle_UnRegisterCloseHandler(merge->handle, File_NtCloseDir);
+                Handle_UnRegisterHandler(merge->handle, File_NtCloseDir, NULL);
                 List_Remove(&File_DirHandles, merge);
                 File_MergeFree(merge);
             }
@@ -528,7 +528,7 @@ _FX NTSTATUS File_Merge(
         }
 
         List_Insert_After(&File_DirHandles, NULL, merge);
-        Handle_RegisterCloseHandler(merge->handle, File_NtCloseDir);
+        Handle_RegisterHandler(merge->handle, File_NtCloseDir, NULL, FALSE);
     }
 
     //
@@ -614,11 +614,24 @@ _FX NTSTATUS File_OpenForMerge(
         //
 
         WCHAR* OldTruePath = File_ResolveTruePath(TruePath, NULL, &TruePathFlags);
-        if (FILE_PATH_DELETED(TruePathFlags))
+        if (FILE_PATH_DELETED(TruePathFlags) && !FILE_PATH_RELOCATED(TruePathFlags))
             TruePathDeleted = TRUE;
         else if (OldTruePath) {
+
             OriginalPath = TruePath;
-            TruePath = OldTruePath;
+
+            if (File_Snapshot != NULL) {
+
+                //
+                // note: File_ResolveTruePath returns a buffer from the TMPL_NAME_BUFFER slot, 
+                // which is reused byFile_MakeSnapshotPath, so we need to make non reusable copy
+                // 
+
+        	    TruePath = Dll_GetTlsNameBuffer(TlsData, MISC_NAME_BUFFER, (wcslen(OldTruePath) + 1) * sizeof(WCHAR));
+                wcscpy(TruePath, OldTruePath);
+            }
+            else
+                TruePath = OldTruePath;
         }
     }
     else {
@@ -1535,7 +1548,7 @@ _FX NTSTATUS File_MergeDummy(
         }
 
         if (cmp != 0) { // skip duplicates
-        
+
             if (ins_point)
                 List_Insert_Before(cache_list, ins_point, cache_file);
             else
@@ -2267,8 +2280,6 @@ _FX NTSTATUS File_NtCloseImpl(HANDLE FileHandle)
     THREAD_DATA *TlsData = Dll_GetTlsData(&LastError);
 
     NTSTATUS status;
-    ULONG i;
-    P_CloseHandler CloseHandlers[MAX_CLOSE_HANDLERS];
     BOOLEAN DeleteOnClose = FALSE;
     UNICODE_STRING uni;
     WCHAR *DeletePath = NULL;
@@ -2308,13 +2319,7 @@ _FX NTSTATUS File_NtCloseImpl(HANDLE FileHandle)
     // and prepare the DeleteOnClose if its set
     //
 
-    if (Handle_FreeCloseHandler(FileHandle, &CloseHandlers[0], &DeleteOnClose)) {
-
-        for (i = 0; i < MAX_CLOSE_HANDLERS; i++) {
-            if(CloseHandlers[i] != NULL)
-                CloseHandlers[i](FileHandle);
-        }
-    }
+    Handle_ExecuteCloseHandler(FileHandle, &DeleteOnClose);
 
     //
     // prepare delete disposition if set
@@ -2397,7 +2402,7 @@ _FX NTSTATUS File_NtCloseImpl(HANDLE FileHandle)
 //---------------------------------------------------------------------------
 
 
-_FX VOID File_NtCloseDir(HANDLE FileHandle)
+_FX VOID File_NtCloseDir(HANDLE FileHandle, void* CloseParams)
 {
     FILE_MERGE *merge;
 
@@ -2407,7 +2412,6 @@ _FX VOID File_NtCloseDir(HANDLE FileHandle)
     while (merge) {
         FILE_MERGE *next = List_Next(merge);
         if (merge->handle == FileHandle) {
-            Handle_UnRegisterCloseHandler(merge->handle, File_NtCloseDir);
             List_Remove(&File_DirHandles, merge);
             File_MergeFree(merge);
         }

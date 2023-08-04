@@ -121,7 +121,6 @@ void CSbiePlusAPI::OnStartFinished()
 
 CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSandBox(BoxName, pAPI)
 {
-	m_bLogApiFound = false;
 	m_bINetBlocked = false;
 	m_bINetExceptions = false;
 	m_bSharesAllowed = false;
@@ -228,7 +227,7 @@ void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 	}
 
 	SB_STATUS Status = SB_OK;
-	if (!Archive.Update(&Files, true, theConf->GetInt("Options/ExportCompression", 5)))  // 0, 1 - 9
+	if (!Archive.Update(&Files, true, theConf->GetInt("Options/ExportCompression", 3)))  // 0, 1 - 9
 		Status = SB_ERR((ESbieMsgCodes)SBX_7zCreateFailed);
 	
 	//if(!Status.IsError() && !pProgress->IsCanceled())
@@ -263,7 +262,7 @@ void CSandBoxPlus::ImportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 {
 	CArchive Archive(ImportPath);
 
-	if (Archive.Open() != 1) {
+	if (Archive.Open() != ERR_7Z_OK) {
 		pProgress->Finish(SB_ERR((ESbieMsgCodes)SBX_7zOpenFailed));
 		return;
 	}
@@ -321,16 +320,6 @@ SB_PROGRESS CSandBoxPlus::ImportBox(const QString& FileName)
 
 void CSandBoxPlus::UpdateDetails()
 {
-	//m_bLogApiFound = GetTextList("OpenPipePath", false).contains("\\Device\\NamedPipe\\LogAPI");
-	m_bLogApiFound = false;
-	QStringList InjectDlls = GetTextList("InjectDll", false);
-	foreach(const QString & InjectDll, InjectDlls) {
-		if (InjectDll.contains("logapi", Qt::CaseInsensitive)) {
-			m_bLogApiFound = true;
-			break;
-		}
-	}
-
 	m_bINetBlocked = false;
 	foreach(const QString& Entry, GetTextList("ClosedFilePath", false)) {
 		if (Entry == "!<InternetAccess>,InternetAccessDevices") {
@@ -469,7 +458,7 @@ void CSandBoxPlus::ScanStartMenu()
 		foreach (const QString& Snapshot, SnapshotList)
 		{
 			QString BoxPath = theAPI->GetBoxedPath(this, QString::fromWCharArray(path), Snapshot);
-			QStringList	Files = ListDir(BoxPath, QStringList() << "*.lnk" << "*.url" << "*.pif", i >= 2); // no subdir scan for desktop as people like to put junk there
+			QStringList	Files = ListDir(BoxPath, QStringList() << "*.lnk" << "*.url", i >= 2); // no subdir scan for desktop as people like to put junk there
 			foreach(QString File, Files)
 			{
 				QString RealPath = theAPI->GetRealPath(this, BoxPath + "\\" + QString(File).replace("/", "\\"));
@@ -501,26 +490,57 @@ void CSandBoxPlus::ScanStartMenu()
 		if (!OldStartMenu.remove(FoundLink.SubPath.toLower()))
 			bChanged = true;
 
+		SLink* pLink = NULL;
+
 		StrPair PathName = Split2(FoundLink.SubPath, "/", true);
 		StrPair NameExt = Split2(PathName.second, ".", true);
-		if (NameExt.second.toLower() != "lnk")
-			continue; // todo url
+		if (NameExt.second.toLower() == "lnk") 
+		{
+			QVariantMap Link = ResolveShortcut(FoundLink.LinkPath);
+			if (!Link.contains("Path"))
+				continue;
 
-		QVariantMap Link = ResolveShortcut(FoundLink.LinkPath);
-		if (!Link.contains("Path"))
-			continue;
+			pLink = &m_StartMenu[FoundLink.SubPath.toLower()];
+			pLink->Folder = PathName.first;
+			pLink->Name = NameExt.first;
+			if (!pLink->Target.isEmpty() && pLink->Target != Link["Path"].toString())
+				bChanged = true;
 
-		SLink* pLink = &m_StartMenu[FoundLink.SubPath.toLower()];
-		pLink->Folder = PathName.first;
-		pLink->Name = NameExt.first;
-		if(!pLink->Target.isEmpty() && pLink->Target != Link["Path"].toString())
-			bChanged = true;
-		pLink->Target = Link["Path"].toString();
-		pLink->Icon = Link["IconPath"].toString();
-		pLink->IconIndex = Link["IconIndex"].toInt();
-		pLink->WorkDir = Link["WorkingDir"].toString();
+			pLink->Target = Link["Path"].toString();
+			pLink->Arguments = Link["Arguments"].toString();
+			pLink->Icon = Link["IconPath"].toString();
+			pLink->IconIndex = Link["IconIndex"].toInt();
+			pLink->WorkDir = Link["WorkingDir"].toString();	
+		}
+		else if (NameExt.second.toLower() == "url") 
+		{
+			std::wstring urlFile = FoundLink.LinkPath.toStdWString();
 
-		if (!pLink->Target.isEmpty() && !QFile::exists(pLink->Target) && !IsBoxexPath(pLink->Target))
+			auto ReadIni = [&urlFile](const wchar_t* Section, const wchar_t* Key) {
+				wchar_t strBuffer[0x1000];
+				DWORD Read = GetPrivateProfileStringW(Section, Key, L"", strBuffer, ARRSIZE(strBuffer), urlFile.c_str());
+				return QString::fromWCharArray(strBuffer, Read);
+			};
+
+			QString Url = ReadIni(L"InternetShortcut", L"URL");
+			if (Url.isEmpty())
+				continue;
+
+			pLink = &m_StartMenu[FoundLink.SubPath.toLower()];
+			pLink->Folder = PathName.first;
+			pLink->Name = NameExt.first;
+			if (!pLink->Target.isEmpty() && pLink->Target != Url)
+				bChanged = true;
+
+			pLink->Url = true;
+			pLink->Target = Url;
+			//pLink->Arguments = ;
+			pLink->Icon = ReadIni(L"InternetShortcut", L"IconFile");
+			pLink->IconIndex = ReadIni(L"InternetShortcut", L"IconIndex").toInt();
+			//pLink->WorkDir = ;
+		}
+
+		if (!pLink->Url && !pLink->Target.isEmpty() && !QFile::exists(pLink->Target) && !IsBoxexPath(pLink->Target))
 			pLink->Target = theAPI->GetBoxedPath(this, pLink->Target, FoundLink.Snapshot);
 		if (!pLink->WorkDir.isEmpty() && !QFile::exists(pLink->WorkDir) && !IsBoxexPath(pLink->WorkDir))
 			pLink->WorkDir = theAPI->GetBoxedPath(this, pLink->WorkDir, FoundLink.Snapshot);
@@ -702,8 +722,6 @@ QString CSandBoxPlus::GetStatusStr() const
 	if(m_bPrivacyEnhanced)
 		Status.append(tr("Privacy Enhanced"));
 
-	if (m_bLogApiFound)
-		Status.append(tr("API Log"));
 	if (m_bINetBlocked) {
 		if(m_bINetExceptions)
 			Status.append(tr("No INet (with Exceptions)"));
@@ -744,29 +762,6 @@ CSandBoxPlus::EBoxTypes CSandBoxPlus::GetTypeImpl() const
 	if (m_bPrivacyEnhanced)
 		return eDefaultPlus;
 	return eDefault;
-}
-
-void CSandBoxPlus::SetLogApi(bool bEnable)
-{
-	if (bEnable)
-	{
-		//InsertText("OpenPipePath", "\\Device\\NamedPipe\\LogAPI");
-		InsertText("InjectDll", "\\LogAPI\\logapi32.dll");
-		InsertText("InjectDll64", "\\LogAPI\\logapi64.dll");
-#ifdef _M_ARM64
-		InsertText("InjectDllARM64", "\\LogAPI\\logapi64a.dll");
-#endif
-	}
-	else
-	{
-		//DelValue("OpenPipePath", "\\Device\\NamedPipe\\LogAPI");
-		DelValue("InjectDll", "\\LogAPI\\logapi32.dll");
-		DelValue("InjectDll64", "\\LogAPI\\logapi64.dll");
-#ifdef _M_ARM64
-		DelValue("InjectDllARM64", "\\LogAPI\\logapi64a.dll");
-#endif
-	}
-	m_bLogApiFound = bEnable;
 }
 
 void CSandBoxPlus::SetINetBlock(bool bEnable)

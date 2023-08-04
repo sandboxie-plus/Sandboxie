@@ -147,7 +147,7 @@ _FX BOOLEAN Syscall_Init(void)
         return FALSE;
 
 #ifdef HOOK_WIN32K
-    if (Driver_OsBuild >= 10041 && Conf_Get_Boolean(NULL, L"EnableWin32kHooks", 0, TRUE)) {
+    if (Driver_OsBuild >= 14393 && Conf_Get_Boolean(NULL, L"EnableWin32kHooks", 0, TRUE)) {
 
         if (!Syscall_Init_List32())
             return FALSE;

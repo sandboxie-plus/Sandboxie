@@ -54,7 +54,7 @@ CBoxedProcess::CBoxedProcess(quint32 ProcessId, class CSandBox* pBox)
 	m_ReturnCode = STATUS_PENDING;
 
 	m_uTerminated = 0;
-	//m_bSuspended = IsSuspended();
+	m_bSuspended = false;
 
 	m_bIsWoW64 = false;
 }
@@ -275,6 +275,13 @@ void CBoxedProcess::InitProcessInfoImpl(void* ProcessHandle)
 	{
 		m_CommandLine = CBoxedProcess__GetPebString(ProcessHandle, PhpoCommandLine);
 	}
+
+	if (m_WorkingDir.isEmpty())
+	{
+		m_WorkingDir = CBoxedProcess__GetPebString(ProcessHandle, PhpoCurrentDirectory);
+	}
+
+	m_bSuspended = IsSuspended();
 }
 
 bool CBoxedProcess::InitProcessInfoEx()
@@ -286,14 +293,20 @@ bool CBoxedProcess::InitProcessInfoEx()
 	return true;
 }
 
-//extern "C"
-//{
-//	NTSYSCALLAPI NTSTATUS NTAPI NtTerminateProcess(_In_opt_ HANDLE ProcessHandle, _In_ NTSTATUS ExitStatus);
-//	NTSYSCALLAPI NTSTATUS NTAPI NtSuspendProcess(_In_ HANDLE ProcessHandle);
-//	NTSYSCALLAPI NTSTATUS NTAPI NtResumeProcess(_In_ HANDLE ProcessHandle);
-//}
+extern "C"
+{
+NTSYSCALLAPI NTSTATUS NTAPI NtTerminateProcess(_In_opt_ HANDLE ProcessHandle, _In_ NTSTATUS ExitStatus);
+NTSYSCALLAPI NTSTATUS NTAPI NtSuspendProcess(_In_ HANDLE ProcessHandle);
+NTSYSCALLAPI NTSTATUS NTAPI NtResumeProcess(_In_ HANDLE ProcessHandle);
 
-#include <TlHelp32.h>
+NTSYSCALLAPI NTSTATUS NTAPI NtGetNextThread(HANDLE ProcessHandle, HANDLE ThreadHandle, ACCESS_MASK DesiredAccess, ULONG HandleAttributes, ULONG Flags, PHANDLE NewThreadHandle);
+
+#define OBJ_KERNEL_EXCLUSIVE           0x00010000L
+#define OBJ_VALID_PRIVATE_ATTRIBUTES   0x00010000L
+#define OBJ_ALL_VALID_ATTRIBUTES (OBJ_VALID_PRIVATE_ATTRIBUTES | OBJ_VALID_ATTRIBUTES)
+}
+
+//#include <TlHelp32.h>
 
 SB_STATUS CBoxedProcess::Terminate()
 {
@@ -322,7 +335,7 @@ bool CBoxedProcess::IsTerminated(quint64 forMs) const
 	return ::GetTickCount64() - m_uTerminated > forMs;
 }
 
-/*SB_STATUS CBoxedProcess::SetSuspend(bool bSet)
+SB_STATUS CBoxedProcess::SetSuspend(bool bSet)
 {
 	HANDLE ProcessHandle = OpenProcess(PROCESS_SUSPEND_RESUME, FALSE, (DWORD)m_ProcessId);
 	if (ProcessHandle != INVALID_HANDLE_VALUE)
@@ -346,43 +359,30 @@ bool CBoxedProcess::IsSuspended() const
 {
 	bool isSuspended = true;
 
-	// todo: do that globally once per sec for all boxed processes
-
-	// Note: If the specified process is a 64-bit process and the caller is a 32-bit process, this function fails and the last error code is ERROR_PARTIAL_COPY (299).
-	HANDLE hThreadSnap = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
-	if (hThreadSnap == INVALID_HANDLE_VALUE)
-		return false;
-
-	THREADENTRY32 te32 = { 0 };
-	te32.dwSize = sizeof(THREADENTRY32);
-	if (Thread32First(hThreadSnap, &te32))
+	for (HANDLE hThread = NULL;;)
 	{
-		do
-		{
-			if (te32.th32OwnerProcessID != m_ProcessId)
-				continue;
-			
-			HANDLE hThread = OpenThread(THREAD_QUERY_INFORMATION, FALSE, te32.th32ThreadID);
+		HANDLE nNextThread = NULL;
+		NTSTATUS status = NtGetNextThread(m->Handle, hThread, THREAD_QUERY_INFORMATION | THREAD_SUSPEND_RESUME, 0, 0, &nNextThread);
+		if (hThread) NtClose(hThread);
+		if (!NT_SUCCESS(status))
+			break;
+		hThread = nNextThread;
 
-			ULONG SuspendCount = 0;
-			NTSTATUS status = NtQueryInformationThread(hThread, (THREADINFOCLASS)35/ThreadSuspendCount/, &SuspendCount, sizeof(ULONG), NULL);
-
-			CloseHandle(hThread);
-
-			if (SuspendCount == 0)
-			{
-				isSuspended = false;
-				break;
-			}
-			
-		} while (Thread32Next(hThreadSnap, &te32));
-	}
-	
-	CloseHandle(hThreadSnap);
+		ULONG SuspendCount = 0;
+		status = NtQueryInformationThread(hThread, (THREADINFOCLASS)35/*ThreadSuspendCount*/, &SuspendCount, sizeof(ULONG), NULL);
+		if (status == STATUS_INVALID_INFO_CLASS) { // windows 7
+			SuspendCount = SuspendThread(hThread);
+			ResumeThread(hThread);
+		}
+		if (SuspendCount == 0) {
+			isSuspended = false;
+			NtClose(hThread);
+			break;
+		}
+    }
 
 	return isSuspended;
 }
-*/
 
 void CBoxedProcess::ResolveSymbols(const QVector<quint64>& Addresses)
 {

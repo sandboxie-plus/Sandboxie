@@ -21,41 +21,41 @@
     <message>
         <location filename="AddonManager.cpp" line="234"/>
         <source>Addon Not Found</source>
-        <translation type="unfinished"></translation>
+        <translation>추가 기능을 찾을 수 없음</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="235"/>
         <source>Addon is not available for this platform</source>
         <oldsource>Addon is not available for this paltform</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>이 플랫폼에 추가 기능을 사용할 수 없습니다</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="236"/>
         <source>Missing installation instructions</source>
         <oldsource>Missing instalation instructions</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>설치 지침 누락</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="237"/>
         <source>Executing addon setup failed</source>
-        <translation type="unfinished"></translation>
+        <translation>추가 기능 설정 실행 실패</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="238"/>
         <source>Failed to delete a file during addon removal</source>
-        <translation type="unfinished"></translation>
+        <translation>추가 기능을 제거하는 동안 파일을 삭제하지 못했습니다</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="252"/>
         <source>Updater failed to perform plugin operation</source>
         <oldsource>Updater failed to to perform plugin operation</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>업데이트 프로그램이 플러그인 작업을 수행하지 못했습니다</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="254"/>
         <source>Updater failed to perform plugin operation, error: %1</source>
         <oldsource>Updater failed to to perform plugin operation, error: %1</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>업데이트 프로그램에서 플러그인 작업을 수행하지 못했습니다. 오류: %1</translation>
     </message>
     <message>
         <source>Addon already installed!</source>
@@ -4662,12 +4662,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="278"/>
         <source>Suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>일시중지</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="279"/>
         <source>Resume</source>
-        <translation type="unfinished"></translation>
+        <translation>재개</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1009"/>
@@ -5088,7 +5088,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1548"/>
         <source>Update Available</source>
-        <translation type="unfinished"></translation>
+        <translation>사용 가능한 업데이트</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1550"/>
@@ -5506,12 +5506,12 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/SupportDialog.cpp" line="145"/>
         <source>The installed supporter certificate allows for &lt;b&gt;%1 seats&lt;/b&gt; to be active.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>설치된 지원자 인증서를 통해 &lt;b&gt;%1 시트&lt;/b&gt;가 활성화됩니다.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="147"/>
         <source>&lt;b&gt;There seams to be howeever %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;네트워크에 %1 Sandboxie-Plus 인스턴스가 있지만, &lt;font color=&apos;red&apos;&gt; &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;후원 인증서&lt;/a&gt;&lt;/font&gt;를 얻어야 합니다.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="154"/>
@@ -7050,12 +7050,12 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1300"/>
         <source>Dlls &amp;&amp; Extensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Dll 및 확장자</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1349"/>
         <source>Description</source>
-        <translation type="unfinished">설명</translation>
+        <translation>설명</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1357"/>
@@ -7067,7 +7067,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1381"/>
         <source>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the addon manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxies 기능은 SbieDll.dll에 의해 시작할 때 각 샌드박스 프로세스에 로드될 수 있는 옵션 DLL을 사용하여 향상될 수 있습니다. 전역 설정의 애드온 관리자는 몇 가지 유용한 확장 기능을 제공합니다. 일단 설치되면 현재 박스에 대해 활성화할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1427"/>
@@ -8025,7 +8025,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1232"/>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>버전</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1237"/>

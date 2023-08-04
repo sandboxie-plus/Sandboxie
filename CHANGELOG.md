@@ -20,7 +20,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.10.2 / 5.65.2] - 2023-07-31
 
-
 ### Added
 - re-added option to suspend sandboxed processes [#3126](https://github.com/sandboxie-plus/Sandboxie/issues/3126)
 
@@ -36,11 +35,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with link argument handling [#2969](https://github.com/sandboxie-plus/Sandboxie/issues/2969)
 - fixed IPC issue introduced in 1.10.1 [#3132](https://github.com/sandboxie-plus/Sandboxie/issues/3132) [#3134](https://github.com/sandboxie-plus/Sandboxie/issues/3134)
 - fixed issue with pinned run entry icons
-- fixed UGlobalHotkey lib not being compatible with Qt6
+- fixed UGlobalHotkey library not being compatible with Qt6
 
 ### Removed
 - removed hardcoded support for LogApiDll
-  - use addon manager and dll injection settings
+  - use the addon manager and DLL injection settings
 
 
 
@@ -74,8 +73,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with Delete V2 when using network shares
 - fixed issue when using "UseVolumeSerialNumbers=y" with accessing drive roots
 - fixed remove snapshot resurrects deleted files when using Delete V2 [#3015](https://github.com/sandboxie-plus/Sandboxie/issues/3015)
-
-
 
 
 

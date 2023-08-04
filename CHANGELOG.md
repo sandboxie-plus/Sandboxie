@@ -14,7 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed issues with pinned shortcuts
 - fixed Process Suspend/Resume context menu [#3156](https://github.com/sandboxie-plus/Sandboxie/issues/3156)
-
+- fixed issues with Installers created with Qt [#2493](https://github.com/sandboxie-plus/Sandboxie/issues/2493) [#3153](https://github.com/sandboxie-plus/Sandboxie/issues/3153)
 
 
 

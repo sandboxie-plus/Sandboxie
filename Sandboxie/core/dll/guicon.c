@@ -222,7 +222,7 @@ _FX BOOL Gui_ConnectConsole(ULONG ShowFlag)
                     status = STATUS_NOT_SAME_DEVICE;
 
                 //
-                // wait for the count to inidcate the service has quit
+                // wait for the count to indicate the service has quit
                 //
 
                 typedef DWORD (*P_GetConsoleProcessList)(LPDWORD lpdwProcessList, DWORD dwProcessCount);

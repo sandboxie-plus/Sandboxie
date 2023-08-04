@@ -2332,37 +2332,37 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="671"/>
+        <location filename="SbiePlusAPI.cpp" line="701"/>
         <source>Disabled</source>
         <translation>Отключено</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="682"/>
+        <location filename="SbiePlusAPI.cpp" line="712"/>
         <source>OPEN Root Access</source>
         <translation>ОТКРЫТЬ Root-доступ</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="684"/>
+        <location filename="SbiePlusAPI.cpp" line="714"/>
         <source>Application Compartment</source>
         <translation>Контейнер для приложений</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="686"/>
+        <location filename="SbiePlusAPI.cpp" line="716"/>
         <source>NOT SECURE</source>
         <translation>НЕ БЕЗОПАСНЫЙ</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="688"/>
+        <location filename="SbiePlusAPI.cpp" line="718"/>
         <source>Reduced Isolation</source>
         <translation>Сниженная изоляция</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="690"/>
+        <location filename="SbiePlusAPI.cpp" line="720"/>
         <source>Enhanced Isolation</source>
         <translation>Повышенная изоляция</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="693"/>
+        <location filename="SbiePlusAPI.cpp" line="723"/>
         <source>Privacy Enhanced</source>
         <translation>Повышенная конфиденциальность</translation>
     </message>
@@ -2371,32 +2371,32 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">Журнал API</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="697"/>
+        <location filename="SbiePlusAPI.cpp" line="727"/>
         <source>No INet (with Exceptions)</source>
         <translation>Нет INet (с исключениями)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="699"/>
+        <location filename="SbiePlusAPI.cpp" line="729"/>
         <source>No INet</source>
         <translation>Без интернета</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="702"/>
+        <location filename="SbiePlusAPI.cpp" line="732"/>
         <source>Net Share</source>
         <translation>Общая сеть</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="704"/>
+        <location filename="SbiePlusAPI.cpp" line="734"/>
         <source>No Admin</source>
         <translation>Без прав администратора</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="707"/>
+        <location filename="SbiePlusAPI.cpp" line="737"/>
         <source>Auto Delete</source>
         <translation>Автоудаление</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="710"/>
+        <location filename="SbiePlusAPI.cpp" line="740"/>
         <source>Normal</source>
         <translation>Нормальный</translation>
     </message>
@@ -3887,37 +3887,37 @@ This file is part of Sandboxie and all change done to it will be reverted next t
 <context>
     <name>CSbieTemplatesEx</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1097"/>
+        <location filename="SbiePlusAPI.cpp" line="1127"/>
         <source>Failed to initialize COM</source>
         <translation>Не удалось инициализировать COM</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1103"/>
+        <location filename="SbiePlusAPI.cpp" line="1133"/>
         <source>Failed to create update session</source>
         <translation>Не удалось создать сеанс обновления</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1109"/>
+        <location filename="SbiePlusAPI.cpp" line="1139"/>
         <source>Failed to create update searcher</source>
         <translation>Не удалось создать средство поиска обновлений</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1115"/>
+        <location filename="SbiePlusAPI.cpp" line="1145"/>
         <source>Failed to set search options</source>
         <translation>Не удалось задать параметры поиска</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1123"/>
+        <location filename="SbiePlusAPI.cpp" line="1153"/>
         <source>Failed to search for updates</source>
         <translation>Не удалось найти обновления</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1129"/>
+        <location filename="SbiePlusAPI.cpp" line="1159"/>
         <source>Failed to retrieve update list from search result</source>
         <translation>Не удалось получить список обновлений из результатов поиска</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1136"/>
+        <location filename="SbiePlusAPI.cpp" line="1166"/>
         <source>Failed to get update count</source>
         <translation>Не удалось получить количество обновлений</translation>
     </message>
@@ -5190,7 +5190,8 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="147"/>
-        <source>&lt;b&gt;There seams to be howeever %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
+        <source>&lt;b&gt;There seems to be however %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
+        <oldsource>&lt;b&gt;There seams to be howeever %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

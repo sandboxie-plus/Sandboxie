@@ -2277,67 +2277,67 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="704"/>
+        <location filename="SbiePlusAPI.cpp" line="734"/>
         <source>No Admin</source>
         <translation>Yönetici Yok</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="699"/>
+        <location filename="SbiePlusAPI.cpp" line="729"/>
         <source>No INet</source>
         <translation>INet Yok</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="697"/>
+        <location filename="SbiePlusAPI.cpp" line="727"/>
         <source>No INet (with Exceptions)</source>
         <translation>INet Yok (İstisnalarla)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="707"/>
+        <location filename="SbiePlusAPI.cpp" line="737"/>
         <source>Auto Delete</source>
         <translation>Oto Silme</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="710"/>
+        <location filename="SbiePlusAPI.cpp" line="740"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="702"/>
+        <location filename="SbiePlusAPI.cpp" line="732"/>
         <source>Net Share</source>
         <translation>Net Paylaşımı</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="690"/>
+        <location filename="SbiePlusAPI.cpp" line="720"/>
         <source>Enhanced Isolation</source>
         <translation>Geliştirilmiş Yalıtım</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="688"/>
+        <location filename="SbiePlusAPI.cpp" line="718"/>
         <source>Reduced Isolation</source>
         <translation>Azaltılmış Yalıtım</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="671"/>
+        <location filename="SbiePlusAPI.cpp" line="701"/>
         <source>Disabled</source>
         <translation>Devre Dışı</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="682"/>
+        <location filename="SbiePlusAPI.cpp" line="712"/>
         <source>OPEN Root Access</source>
         <translation>AÇIK Kök Erişimi</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="684"/>
+        <location filename="SbiePlusAPI.cpp" line="714"/>
         <source>Application Compartment</source>
         <translation>Uygulama Bölmesi</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="686"/>
+        <location filename="SbiePlusAPI.cpp" line="716"/>
         <source>NOT SECURE</source>
         <translation>GÜVENLİ DEĞİL</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="693"/>
+        <location filename="SbiePlusAPI.cpp" line="723"/>
         <source>Privacy Enhanced</source>
         <translation>Gelişmiş Gizlilik</translation>
     </message>
@@ -3828,37 +3828,37 @@ Hayır şunları seçer: %2</translation>
 <context>
     <name>CSbieTemplatesEx</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1097"/>
+        <location filename="SbiePlusAPI.cpp" line="1127"/>
         <source>Failed to initialize COM</source>
         <translation>COM başlatılamadı</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1103"/>
+        <location filename="SbiePlusAPI.cpp" line="1133"/>
         <source>Failed to create update session</source>
         <translation>Güncelleme oturumu oluşturulamadı</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1109"/>
+        <location filename="SbiePlusAPI.cpp" line="1139"/>
         <source>Failed to create update searcher</source>
         <translation>Güncelleme arayıcısı oluşturulamadı</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1115"/>
+        <location filename="SbiePlusAPI.cpp" line="1145"/>
         <source>Failed to set search options</source>
         <translation>Arama seçenekleri ayarlanamadı</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1123"/>
+        <location filename="SbiePlusAPI.cpp" line="1153"/>
         <source>Failed to search for updates</source>
         <translation>Güncellemeler aranamadı</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1129"/>
+        <location filename="SbiePlusAPI.cpp" line="1159"/>
         <source>Failed to retrieve update list from search result</source>
         <translation>Arama sonucundan güncelleme listesi alınamadı</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1136"/>
+        <location filename="SbiePlusAPI.cpp" line="1166"/>
         <source>Failed to get update count</source>
         <translation>Güncelleme sayısı alınamadı</translation>
     </message>

@@ -2489,37 +2489,37 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="671"/>
+        <location filename="SbiePlusAPI.cpp" line="701"/>
         <source>Disabled</source>
         <translation>사용 안 함</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="682"/>
+        <location filename="SbiePlusAPI.cpp" line="712"/>
         <source>OPEN Root Access</source>
         <translation>루트 액세스 열기</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="684"/>
+        <location filename="SbiePlusAPI.cpp" line="714"/>
         <source>Application Compartment</source>
         <translation>응용 프로그램 구획</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="686"/>
+        <location filename="SbiePlusAPI.cpp" line="716"/>
         <source>NOT SECURE</source>
         <translation>안전하지 않음</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="688"/>
+        <location filename="SbiePlusAPI.cpp" line="718"/>
         <source>Reduced Isolation</source>
         <translation>격리 감소</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="690"/>
+        <location filename="SbiePlusAPI.cpp" line="720"/>
         <source>Enhanced Isolation</source>
         <translation>격리 강화</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="693"/>
+        <location filename="SbiePlusAPI.cpp" line="723"/>
         <source>Privacy Enhanced</source>
         <translation>개인 정보 강화</translation>
     </message>
@@ -2528,32 +2528,32 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">API 로그</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="697"/>
+        <location filename="SbiePlusAPI.cpp" line="727"/>
         <source>No INet (with Exceptions)</source>
         <translation>INET 없음 (예외 포함)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="699"/>
+        <location filename="SbiePlusAPI.cpp" line="729"/>
         <source>No INet</source>
         <translation>INet 없음</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="702"/>
+        <location filename="SbiePlusAPI.cpp" line="732"/>
         <source>Net Share</source>
         <translation>Net 공유</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="704"/>
+        <location filename="SbiePlusAPI.cpp" line="734"/>
         <source>No Admin</source>
         <translation>관리자 없음</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="707"/>
+        <location filename="SbiePlusAPI.cpp" line="737"/>
         <source>Auto Delete</source>
         <translation>자동 삭제</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="710"/>
+        <location filename="SbiePlusAPI.cpp" line="740"/>
         <source>Normal</source>
         <translation>일반</translation>
     </message>
@@ -4130,37 +4130,37 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 <context>
     <name>CSbieTemplatesEx</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1097"/>
+        <location filename="SbiePlusAPI.cpp" line="1127"/>
         <source>Failed to initialize COM</source>
         <translation>COM 초기화 실패</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1103"/>
+        <location filename="SbiePlusAPI.cpp" line="1133"/>
         <source>Failed to create update session</source>
         <translation>업데이트 세션을 생성하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1109"/>
+        <location filename="SbiePlusAPI.cpp" line="1139"/>
         <source>Failed to create update searcher</source>
         <translation>업데이트 검색기를 만들지 못했습니다</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1115"/>
+        <location filename="SbiePlusAPI.cpp" line="1145"/>
         <source>Failed to set search options</source>
         <translation>검색 옵션을 설정하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1123"/>
+        <location filename="SbiePlusAPI.cpp" line="1153"/>
         <source>Failed to search for updates</source>
         <translation>업데이트 검색 실패</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1129"/>
+        <location filename="SbiePlusAPI.cpp" line="1159"/>
         <source>Failed to retrieve update list from search result</source>
         <translation>검색 결과에서 업데이트 목록을 검색하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1136"/>
+        <location filename="SbiePlusAPI.cpp" line="1166"/>
         <source>Failed to get update count</source>
         <translation>업데이트 수를 가져오지 못했습니다</translation>
     </message>
@@ -5510,8 +5510,9 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="147"/>
-        <source>&lt;b&gt;There seams to be howeever %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
-        <translation>&lt;b&gt;네트워크에 %1 Sandboxie-Plus 인스턴스가 있지만, &lt;font color=&apos;red&apos;&gt; &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;후원 인증서&lt;/a&gt;&lt;/font&gt;를 얻어야 합니다.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
+        <source>&lt;b&gt;There seems to be however %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
+        <oldsource>&lt;b&gt;There seams to be howeever %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</oldsource>
+        <translation type="unfinished">&lt;b&gt;네트워크에 %1 Sandboxie-Plus 인스턴스가 있지만, &lt;font color=&apos;red&apos;&gt; &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;후원 인증서&lt;/a&gt;&lt;/font&gt;를 얻어야 합니다.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="154"/>

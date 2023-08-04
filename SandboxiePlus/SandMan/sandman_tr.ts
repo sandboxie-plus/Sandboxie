@@ -21,82 +21,37 @@
     <message>
         <location filename="AddonManager.cpp" line="234"/>
         <source>Addon Not Found</source>
-        <translation type="unfinished"></translation>
+        <translation>Eklenti Bulunamadı</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="235"/>
         <source>Addon is not available for this platform</source>
-        <oldsource>Addon is not available for this paltform</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Eklenti bu platform için mevcut değil</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="236"/>
         <source>Missing installation instructions</source>
-        <oldsource>Missing instalation instructions</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Kurulum talimatları eksik</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="237"/>
         <source>Executing addon setup failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Eklenti kurulumu yürütülemedi</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="238"/>
         <source>Failed to delete a file during addon removal</source>
-        <translation type="unfinished"></translation>
+        <translation>Eklenti kaldırma işlemi sırasında bir dosya silinemedi</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="252"/>
         <source>Updater failed to perform plugin operation</source>
-        <oldsource>Updater failed to to perform plugin operation</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Güncelleyici, eklenti işlemini gerçekleştiremedi</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="254"/>
         <source>Updater failed to perform plugin operation, error: %1</source>
-        <oldsource>Updater failed to to perform plugin operation, error: %1</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Addon already installed!</source>
-        <translation type="vanished">Eklenti zaten yüklü!</translation>
-    </message>
-    <message>
-        <source>Addon has no download url, addon may not be available for your platform.</source>
-        <translation type="vanished">Eklentinin indirme url&apos;si yok, eklenti platformunuz için mevcut olmayabilir.</translation>
-    </message>
-    <message>
-        <source>Downloading Addon %1</source>
-        <translation type="vanished">%1 Eklentisi İndiriliyor</translation>
-    </message>
-    <message>
-        <source>Download signature is not valid!</source>
-        <translation type="vanished">İndirme imzası geçerli değil!</translation>
-    </message>
-    <message>
-        <source>Installing Addon %1</source>
-        <translation type="vanished">%1 Eklentisi Yükleniyor</translation>
-    </message>
-    <message>
-        <source>Running Installer for %1</source>
-        <translation type="vanished">%1 için Yükleyici Çalıştırılıyor</translation>
-    </message>
-    <message>
-        <source>Failed to start installer (%1)!</source>
-        <translation type="vanished">Yükleyici başlatılamadı (%1)!</translation>
-    </message>
-    <message>
-        <source>Copying Files for %1</source>
-        <translation type="vanished">%1 için Dosyalar Kopyalanıyor</translation>
-    </message>
-    <message>
-        <source>Failed to unpack addon!</source>
-        <translation type="vanished">Eklenti paketi açılamadı!</translation>
-    </message>
-    <message>
-        <source>Addon Installation Failed!</source>
-        <oldsource>Addon Instalation Failed!</oldsource>
-        <translation type="vanished">Eklenti Kurulumu Başarısız!</translation>
+        <translation>Güncelleyici, eklenti işlemini gerçekleştiremedi, hata: %1</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="174"/>
@@ -112,18 +67,6 @@
         <location filename="AddonManager.cpp" line="214"/>
         <source>Addon not found!</source>
         <translation>Eklenti bulunamadı!</translation>
-    </message>
-    <message>
-        <source>Running Uninstaller for %1</source>
-        <translation type="vanished">%1 için Kaldırıcı çalıştırılıyor</translation>
-    </message>
-    <message>
-        <source>Failed to start uninstaller!</source>
-        <translation type="vanished">Kaldırıcı başlatılamadı!</translation>
-    </message>
-    <message>
-        <source>Addon Removal Failed!</source>
-        <translation type="vanished">Eklenti Kaldırma Başarısız!</translation>
     </message>
 </context>
 <context>
@@ -197,7 +140,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="486"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation>Sistemde kurulu korumalı alan programlarına korumalı alandan DLL yüklemesini önle</translation>
+        <translation>Sistemde kurulu korumalı alan programlarına korumalı alandan DLL&apos;lerin yüklenmesini önle</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="487"/>
@@ -1057,7 +1000,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
         <translation>Yeni güncelleme bulunamadı, Sandboxie-Plus&apos;ınız güncel.
 
-Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını sağlamak için, genellikle en son GitHub sürümünün gerisindedir.</translation>
+Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağlamak için, genellikle en son GitHub sürümünün gerisindedir.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="1047"/>
@@ -1244,7 +1187,6 @@ Not: Güncelleme denetimi, yalnızca test edilen güncellemelerin sunulmasını 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="19"/>
         <source>This option requires an active supporter certificate</source>
-        <oldsource>This option requires a valid supporter certificate</oldsource>
         <translation>Bu seçenek geçerli bir destekçi sertifikası gerektirir</translation>
     </message>
     <message>
@@ -2204,19 +2146,16 @@ Hata: </translation>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="531"/>
         <source>Like with any other security product, it&apos;s important to keep your Sandboxie-Plus up to date.</source>
-        <oldsource>Like with any other security product it&apos;s important to keep your Sandboxie-Plus up to date.</oldsource>
         <translation>Diğer tüm güvenlik ürünlerinde olduğu gibi, Sandboxie-Plus&apos;ınızı güncel tutmanız önemlidir.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Regularly check for all updates to Sandboxie-Plus and optional components</source>
-        <oldsource>Regularly Check for all updates to Sandboxie-Plus and optional components</oldsource>
         <translation>Sandboxie-Plus ve isteğe bağlı bileşenlere yönelik tüm güncellemeleri düzenli olarak denetle</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="540"/>
         <source>Let Sandboxie regularly check for latest updates.</source>
-        <oldsource>Let sandboxie regularly check for latest updates.</oldsource>
         <translation>Sandboxie&apos;nin en son güncellemeleri düzenli olarak denetlemesine izin verir.</translation>
     </message>
     <message>
@@ -2361,10 +2300,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SbiePlusAPI.cpp" line="710"/>
         <source>Normal</source>
         <translation>Normal</translation>
-    </message>
-    <message>
-        <source>API Log</source>
-        <translation type="vanished">API Günlüğü</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="702"/>
@@ -2958,7 +2893,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="SandMan.cpp" line="3447"/>
         <source>All processes in a sandbox must be stopped before it can be renamed.</source>
-        <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
         <translation>Bir korumalı alanın yeniden adlandırılabilmesi için oradaki tüm işlemlerin durdurulması gerekir.</translation>
     </message>
     <message>
@@ -4329,12 +4263,12 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="278"/>
         <source>Suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>Askıya Al</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="279"/>
         <source>Resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürdür</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="300"/>
@@ -4835,7 +4769,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1548"/>
         <source>Update Available</source>
-        <translation type="unfinished"></translation>
+        <translation>Güncelleme Mevcut</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1550"/>
@@ -5175,8 +5109,6 @@ Bu alandaki işlemler, ait oldukları korumalı alanı belirten özel bir işlem
         <location filename="Windows/SupportDialog.cpp" line="43"/>
         <source>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.
 If you are a Great Supporter on Patreon already, Sandboxie can check online for an update of your certificate.</source>
-        <oldsource>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.
-If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate.</oldsource>
         <translation>Bu Insider derlemesi, GREAT_PATREON, PERSONAL-HUGE veya CONTRIBUTOR türünde özel bir sertifika gerektirir.
  Halihazırda Great Patreaon destekçisiyseniz, Sandboxie sertifikanızın güncelliği çevrimiçi olarak denetlenebilir.</translation>
     </message>
@@ -5194,12 +5126,12 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/SupportDialog.cpp" line="145"/>
         <source>The installed supporter certificate allows for &lt;b&gt;%1 seats&lt;/b&gt; to be active.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Yüklü destekçi sertifikası, &lt;b&gt;%1 kişinin&lt;/b&gt; etkin olmasına izin verir.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="147"/>
-        <source>&lt;b&gt;There seams to be howeever %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>&lt;b&gt;There seems to be however %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
+        <translation>&lt;b&gt;Ancak ağınızda %1 Sandboxie-Plus örneği olduğu görülüyor, &lt;font color=&apos;red&apos;&gt;ek &lt;a href=&quot;https://sandboxie-plus.com/go.php? to=sbie-obtain-cert&amp;tip=more&quot;&gt;destek sertifikaları&lt;/a&gt; almanız gerekiyor.&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="154"/>
@@ -6370,22 +6302,22 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1368"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
-        <translation>Bir program korumalı alandan bir dll dosyası yüklemeye çalıştığında 1305 mesajını yayınla</translation>
+        <translation>Bir program korumalı alandan bir DLL dosyası yüklemeye çalıştığında 1305 mesajını yayınla</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1361"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation>Sistemde kurulu korumalı alan programlarına korumalı alandan DLL yüklemesini önle</translation>
+        <translation>Sistemde kurulu korumalı alan programlarına korumalı alandan DLL&apos;lerin yüklenmesini önle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1300"/>
         <source>Dlls &amp;&amp; Extensions</source>
-        <translation type="unfinished"></translation>
+        <translation>DLL&apos;ler &amp;&amp; Uzantılar</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1349"/>
         <source>Description</source>
-        <translation type="unfinished">Açıklama</translation>
+        <translation>Açıklama</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1357"/>
@@ -6393,12 +6325,12 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
         <translation>Sandboxie&apos;nin kaynak erişim kuralları, genellikle korumalı alan içinde bulunan program ikili dosyalarına göre ayrım yapar. OpenFilePath ve OpenKeyPath yalnızca ana bilgisayarda yerel olarak bulunan uygulama ikili dosyaları için çalışır. 
 Bu kısıtlama olmaksızın bir kural tanımlamak için OpenPipePath veya OpenConfPath kullanılmalıdır. Aynı şekilde, olumsuzlama ile tanımlanan tüm Closed(File|Key|Ipc)Path yönergeleri, örn. &apos;ClosedFilePath=! iexplore.exe,C:Users*&apos;, korumalı alan içinde bulunan ikili dosyalar için her zaman kapalı olacaktır. Her iki kısıtlama ilkesi de &quot;Erişim İlkeleri&quot; sayfasından devre dışı bırakılabilir.
-Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırılmış bir kopyasını oluşturmasını ve korunan kaynaklara erişmesini önlemek için yapılır. Başka bir istismar vektörü de bir kütüphanenin yetkili bir işleme yerleşerek ona izin verilen her şeye erişim hakkı elde etmesidir. Ana Bilgisayar Görüntü Koruması kullanılarak, bir korumalı alanda çalışan uygulamaların (ana bilgisayarda yüklü) korumalı alanda bulunan kütüphanleri yüklemesi engellenerek bu durum önlenebilir.</translation>
+Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırılmış bir kopyasını oluşturmasını ve korunan kaynaklara erişmesini önlemek için yapılır. Başka bir istismar vektörü de bir kütüphanenin yetkili bir işleme yerleşerek ona izin verilen her şeye erişim hakkı elde etmesidir. Ana Bilgisayar Görüntü Koruması kullanılarak, bir korumalı alanda çalışan uygulamaların (ana bilgisayarda yüklü) korumalı alanda bulunan kütüphaneleri yüklemesi engellenerek bu durum önlenebilir.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1381"/>
         <source>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the addon manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie&apos;nin işlevselliği, korumalı alanda herhangi bir işlem başlatıldığında SbieDll.dll tarafından ona yüklenebilen, isteğe bağlı DLL&apos;ler kullanılarak genişletilebilir. Genel ayarlardaki Eklenti Yöneticisinde bazı yararlı uzantılar sunulmaktadır. Bunlar kurulduktan sonra geçerli kutu için buradan etkinleştirilebilirler.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1427"/>
@@ -6651,10 +6583,6 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
         <location filename="Forms/OptionsWindow.ui" line="4030"/>
         <source>Option</source>
         <translation>Seçenek</translation>
-    </message>
-    <message>
-        <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
-        <translation type="vanished">API çağrı izleme (sbie dizinine logAPI yüklenmesini gerektirir)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4242"/>
@@ -7782,7 +7710,6 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="946"/>
         <source>Hide Sandboxie&apos;s own processes from the task list</source>
-        <oldsource>Hide sandboxie&apos;s own processes from the task list</oldsource>
         <translation>Sandboxie&apos;nin kendi işlemlerini görev listesinden gizle</translation>
     </message>
     <message>
@@ -7838,7 +7765,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1232"/>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürüm</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1237"/>

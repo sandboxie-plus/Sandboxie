@@ -4626,7 +4626,7 @@ NO seleccionará: %2</translation>
         <translation>Por favor ingrese un nuevo nombre de grupo</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1539"/>
+        <location filename="Views/SbieView.cpp" line="1540"/>
         <source>Do you want to terminate %1?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4766,7 +4766,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="1197"/>
         <location filename="Views/SbieView.cpp" line="1217"/>
-        <location filename="Views/SbieView.cpp" line="1632"/>
+        <location filename="Views/SbieView.cpp" line="1633"/>
         <source>This Sandbox is empty.</source>
         <translation>Esta Sandbox esta vacia.</translation>
     </message>
@@ -4855,7 +4855,7 @@ NO seleccionará: %2</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1445"/>
-        <location filename="Views/SbieView.cpp" line="1540"/>
+        <location filename="Views/SbieView.cpp" line="1541"/>
         <source>Terminate without asking</source>
         <translation>Terminar sin preguntar</translation>
     </message>
@@ -4866,8 +4866,8 @@ NO seleccionará: %2</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1514"/>
-        <location filename="Views/SbieView.cpp" line="1567"/>
+        <location filename="Views/SbieView.cpp" line="1515"/>
+        <location filename="Views/SbieView.cpp" line="1568"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Crear un Atajo a la sandbox %1</translation>
     </message>
@@ -4876,7 +4876,7 @@ NO seleccionará: %2</translation>
         <translation type="vanished">Usted quiere %1 %2?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1539"/>
+        <location filename="Views/SbieView.cpp" line="1540"/>
         <source>the selected processes</source>
         <translation>los procesos seleccionados</translation>
     </message>
@@ -4885,12 +4885,12 @@ NO seleccionará: %2</translation>
         <translation type="vanished">Desea %1 el(los) proceso(s) seleccionado(s)</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1591"/>
+        <location filename="Views/SbieView.cpp" line="1592"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Esta sandbox no tiene restricciones de Internet seteadas, desea activarlas?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1675"/>
+        <location filename="Views/SbieView.cpp" line="1676"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Esta sandbox esta deshabilitada, desea habilitarla?</translation>
     </message>

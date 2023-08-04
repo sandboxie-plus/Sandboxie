@@ -4384,7 +4384,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="1197"/>
         <location filename="Views/SbieView.cpp" line="1217"/>
-        <location filename="Views/SbieView.cpp" line="1632"/>
+        <location filename="Views/SbieView.cpp" line="1633"/>
         <source>This Sandbox is empty.</source>
         <translation>Эта песочница пуста.</translation>
     </message>
@@ -4464,7 +4464,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1445"/>
-        <location filename="Views/SbieView.cpp" line="1540"/>
+        <location filename="Views/SbieView.cpp" line="1541"/>
         <source>Terminate without asking</source>
         <translation>Завершить без запроса</translation>
     </message>
@@ -4474,28 +4474,28 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Cтартовое меню Sandboxie теперь будет отображено. Выберите приложение из меню, и Sandboxie создаст новый ярлык на вашем реальном рабочем столе, который вы можете использовать для вызова выбранного приложения под контролем Sandboxie.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1514"/>
-        <location filename="Views/SbieView.cpp" line="1567"/>
+        <location filename="Views/SbieView.cpp" line="1515"/>
+        <location filename="Views/SbieView.cpp" line="1568"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Создать ярлык для песочницы %1</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1539"/>
+        <location filename="Views/SbieView.cpp" line="1540"/>
         <source>Do you want to terminate %1?</source>
         <translation>Вы хотите завершить %1?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1539"/>
+        <location filename="Views/SbieView.cpp" line="1540"/>
         <source>the selected processes</source>
         <translation>выбранные процессы</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1591"/>
+        <location filename="Views/SbieView.cpp" line="1592"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>В этой песочнице нет ограничений на доступ к Интернет, вы хотите их включить?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1675"/>
+        <location filename="Views/SbieView.cpp" line="1676"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Эта песочница отключена, вы хотите ее включить?</translation>
     </message>

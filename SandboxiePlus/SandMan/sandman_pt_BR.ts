@@ -4754,13 +4754,13 @@ Não vou escolher: %2</translation>
         <translation type="unfinished">O menu Iniciar do Sandboxie agora será exibido. Selecione um aplicativo no menu e o Sandboxie criará um novo ícone de atalho em sua área de trabalho real, que você pode usar para invocar o aplicativo selecionado sob a supervisão do Sandboxie.</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1539"/>
+        <location filename="Views/SbieView.cpp" line="1540"/>
         <source>Do you want to terminate %1?</source>
         <oldsource>Do you want to %1 %2?</oldsource>
         <translation>Você quer terminar %1?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1539"/>
+        <location filename="Views/SbieView.cpp" line="1540"/>
         <source>the selected processes</source>
         <translation>os processos selecionados</translation>
     </message>
@@ -4840,7 +4840,7 @@ Não vou escolher: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="1197"/>
         <location filename="Views/SbieView.cpp" line="1217"/>
-        <location filename="Views/SbieView.cpp" line="1632"/>
+        <location filename="Views/SbieView.cpp" line="1633"/>
         <source>This Sandbox is empty.</source>
         <translation>Essa caixa está vazia.</translation>
     </message>
@@ -4877,13 +4877,13 @@ Não vou escolher: %2</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1445"/>
-        <location filename="Views/SbieView.cpp" line="1540"/>
+        <location filename="Views/SbieView.cpp" line="1541"/>
         <source>Terminate without asking</source>
         <translation>Terminar sem perguntar</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1514"/>
-        <location filename="Views/SbieView.cpp" line="1567"/>
+        <location filename="Views/SbieView.cpp" line="1515"/>
+        <location filename="Views/SbieView.cpp" line="1568"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Criar Atalho para a Caixa %1</translation>
     </message>
@@ -4893,12 +4893,12 @@ Não vou escolher: %2</translation>
         <translation type="vanished">Deseja %1 o(s) processo(s) selecionado(s)?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1591"/>
+        <location filename="Views/SbieView.cpp" line="1592"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Essa caixa não possui restrições à Internet. Deseja ativá-las?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1675"/>
+        <location filename="Views/SbieView.cpp" line="1676"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Essa caixa está desativada, deseja ativá-la?</translation>
     </message>

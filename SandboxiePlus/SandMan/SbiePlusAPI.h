@@ -161,8 +161,10 @@ public:
 	SB_STATUS				DeleteContentAsync(bool DeleteSnapshots = true, bool bOnAutoDelete = false);
 
 	struct SLink {
+		SLink() :Url(false), IconIndex(0) {}
 		QString Folder;
 		QString Name;
+		bool Url;
 		QString Target;
 		QString Arguments;
 		QString Icon;

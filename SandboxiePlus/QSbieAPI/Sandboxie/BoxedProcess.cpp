@@ -359,17 +359,21 @@ bool CBoxedProcess::IsSuspended() const
 {
 	bool isSuspended = true;
 
-    for(HANDLE hThread = NULL;;)
+	for (HANDLE hThread = NULL;;)
 	{
 		HANDLE nNextThread = NULL;
-        NTSTATUS status = NtGetNextThread(m->Handle, hThread, THREAD_QUERY_INFORMATION, 0, 0, &nNextThread);
-		if(hThread) NtClose(hThread);
+		NTSTATUS status = NtGetNextThread(m->Handle, hThread, THREAD_QUERY_INFORMATION | THREAD_SUSPEND_RESUME, 0, 0, &nNextThread);
+		if (hThread) NtClose(hThread);
 		if (!NT_SUCCESS(status))
 			break;
 		hThread = nNextThread;
 
 		ULONG SuspendCount = 0;
 		status = NtQueryInformationThread(hThread, (THREADINFOCLASS)35/*ThreadSuspendCount*/, &SuspendCount, sizeof(ULONG), NULL);
+		if (status == STATUS_INVALID_INFO_CLASS) { // windows 7
+			SuspendCount = SuspendThread(hThread);
+			ResumeThread(hThread);
+		}
 		if (SuspendCount == 0) {
 			isSuspended = false;
 			NtClose(hThread);

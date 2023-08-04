@@ -3,6 +3,17 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.10.3 / 5.65.3] - 2023-08-??
+
+### Changed
+- improved business certificate handling
+
+### Fixed
+- fixed issues with pinned shortcuts
+- fixed Process Suspend/Resume context menu [#3156](https://github.com/sandboxie-plus/Sandboxie/issues/3156)
+
+
+
 
 ## [1.10.2 / 5.65.2] - 2023-07-31
 

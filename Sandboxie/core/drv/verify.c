@@ -668,8 +668,6 @@ _FX NTSTATUS KphValidateCertificate()
     next:
         status = Conf_Read_Line(stream, line, &line_num);
     }
-
-    Stream_Close(stream);
     
 
     if(!NT_SUCCESS(status = MyFinishHash(&hashObj, &hash, &hashSize)))
@@ -845,6 +843,8 @@ CleanupExit:
                     MyFreeHash(&hashObj);
     if(hash)        ExFreePoolWithTag(hash, 'vhpK');
     if(signature)   Mem_Free(signature, signatureSize);
+
+    if(stream)      Stream_Close(stream);
 
     return status;
 }

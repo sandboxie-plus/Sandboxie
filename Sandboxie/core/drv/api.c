@@ -30,6 +30,7 @@
 #include "session.h"
 #include "common/my_version.h"
 #include "log_buff.h"
+#define KERNEL_MODE
 #include "verify.h"
 
 
@@ -1350,6 +1351,16 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
             else if (args->info_len.val == sizeof(ULONG)) {
                 ULONG* data = args->info_data.val;
                 *data = (ULONG)(Verify_CertInfo.State & 0xFFFFFFFF); // drop optional data
+            }
+            else
+                status = STATUS_BUFFER_TOO_SMALL;
+        }
+        else if (args->info_class.val == -2) {
+
+            if (args->info_len.val >= 37 * sizeof(wchar_t)) {
+                wchar_t* hwid = args->info_data.val;
+                extern wchar_t g_uuid_str[40];
+                wmemcpy(hwid, g_uuid_str, 37);
             }
             else
                 status = STATUS_BUFFER_TOO_SMALL;

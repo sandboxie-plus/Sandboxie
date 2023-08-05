@@ -508,6 +508,7 @@ _FX NTSTATUS KphValidateCertificate()
 
     WCHAR* type = NULL;
     WCHAR* level = NULL;
+    LONG amount = 1;
     //WCHAR* key = NULL;
     LARGE_INTEGER cert_date = { 0 };
 
@@ -516,8 +517,12 @@ _FX NTSTATUS KphValidateCertificate()
     if(!NT_SUCCESS(status = MyInitHash(&hashObj)))
         goto CleanupExit;
 
+    //
+    // read (Home Path)\Certificate.dat
+    //
+
     path_len = wcslen(Driver_HomePathDos) * sizeof(WCHAR);
-    path_len += 64;     // room for \Certificate.ini
+    path_len += 64;     // room for \Certificate.dat
     path = Mem_Alloc(Driver_Pool, path_len);
     line = Mem_Alloc(Driver_Pool, line_size);
     temp = Mem_Alloc(Driver_Pool, line_size);
@@ -525,10 +530,6 @@ _FX NTSTATUS KphValidateCertificate()
         status = STATUS_INSUFFICIENT_RESOURCES;
         goto CleanupExit;
     }
-
-    //
-    // read (Home Path)\Certificate.dat
-    //
 
     RtlStringCbPrintfW(path, path_len, path_cert, Driver_HomePathDos);
 
@@ -647,9 +648,19 @@ _FX NTSTATUS KphValidateCertificate()
         //else if (_wcsicmp(L"UPDATEKEY", name) == 0 && key == NULL) {
         //    key = Mem_AllocString(Driver_Pool, value);
         //}
+        else if (_wcsicmp(L"AMOUNT", name) == 0) {
+            amount = _wtol(value);
+        }
         else if (_wcsicmp(L"SOFTWARE", name) == 0) { // if software is specified it must be the right one
             if (_wcsicmp(value, SOFTWARE_NAME) != 0) {
                 status = STATUS_OBJECT_TYPE_MISMATCH;
+                goto CleanupExit;
+            }
+        }
+        else if (_wcsicmp(L"HWID", name) == 0) { // if HwId is specified it must be the right one
+            extern wchar_t g_uuid_str[40];
+            if (_wcsicmp(value, g_uuid_str) != 0) {
+                status = STATUS_FIRMWARE_IMAGE_INVALID;
                 goto CleanupExit;
             }
         }
@@ -836,4 +847,155 @@ CleanupExit:
     if(signature)   Mem_Free(signature, signatureSize);
 
     return status;
+}
+
+
+//---------------------------------------------------------------------------
+
+
+// SMBIOS Structure header as described at
+// see https://www.dmtf.org/sites/default/files/standards/documents/DSP0134_3.3.0.pdf (para 6.1.2)
+typedef struct _dmi_header
+{
+  UCHAR type;
+  UCHAR length;
+  USHORT handle;
+  UCHAR data[1];
+} dmi_header;
+
+// Structure needed to get the SMBIOS table using GetSystemFirmwareTable API.
+// see https://docs.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getsystemfirmwaretable
+typedef struct _RawSMBIOSData {
+  UCHAR  Used20CallingMethod;
+  UCHAR  SMBIOSMajorVersion;
+  UCHAR  SMBIOSMinorVersion;
+  UCHAR  DmiRevision;
+  DWORD  Length;
+  UCHAR  SMBIOSTableData[1];
+} RawSMBIOSData;
+
+#define SystemFirmwareTableInformation 76 
+
+BOOLEAN GetFwUuid(unsigned char* uuid)
+{
+    BOOLEAN result = FALSE;
+
+    SYSTEM_FIRMWARE_TABLE_INFORMATION sfti;
+    sfti.Action = SystemFirmwareTable_Get;
+    sfti.ProviderSignature = 'RSMB';
+    sfti.TableID = 0;
+    sfti.TableBufferLength = 0;
+
+    ULONG Length = sizeof(SYSTEM_FIRMWARE_TABLE_INFORMATION);
+    NTSTATUS status = ZwQuerySystemInformation(SystemFirmwareTableInformation, &sfti, Length, &Length);
+    if (status != STATUS_BUFFER_TOO_SMALL)
+        return result;
+
+    ULONG BufferSize = sfti.TableBufferLength;
+
+    Length = BufferSize + sizeof(SYSTEM_FIRMWARE_TABLE_INFORMATION);
+    SYSTEM_FIRMWARE_TABLE_INFORMATION* pSfti = ExAllocatePoolWithTag(PagedPool, Length, 'vhpK');
+    if (!pSfti)
+        return result;
+    *pSfti = sfti;
+    pSfti->TableBufferLength = BufferSize;
+
+    status = ZwQuerySystemInformation(SystemFirmwareTableInformation, pSfti, Length, &Length);
+    if (NT_SUCCESS(status)) 
+    {
+        RawSMBIOSData* smb = (RawSMBIOSData*)pSfti->TableBuffer;
+
+        for (UCHAR* data = smb->SMBIOSTableData; data < smb->SMBIOSTableData + smb->Length;)
+        {
+            dmi_header* h = (dmi_header*)data;
+            if (h->length < 4)
+                break;
+
+            //Search for System Information structure with type 0x01 (see para 7.2)
+            if (h->type == 0x01 && h->length >= 0x19)
+            {
+                data += 0x08; //UUID is at offset 0x08
+
+                // check if there is a valid UUID (not all 0x00 or all 0xff)
+                BOOLEAN all_zero = TRUE, all_one = TRUE;
+                for (int i = 0; i < 16 && (all_zero || all_one); i++)
+                {
+                    if (data[i] != 0x00) all_zero = FALSE;
+                    if (data[i] != 0xFF) all_one = FALSE;
+                }
+
+                if (!all_zero && !all_one)
+                {
+                    // As off version 2.6 of the SMBIOS specification, the first 3 fields
+                    // of the UUID are supposed to be encoded on little-endian. (para 7.2.1)
+                    *uuid++ = data[3];
+                    *uuid++ = data[2];
+                    *uuid++ = data[1];
+                    *uuid++ = data[0];
+                    *uuid++ = data[5];
+                    *uuid++ = data[4];
+                    *uuid++ = data[7];
+                    *uuid++ = data[6];
+                    for (int i = 8; i < 16; i++)
+                        *uuid++ = data[i];
+
+                    result = TRUE;
+                }
+
+                break;
+            }
+
+            //skip over formatted area
+            UCHAR* next = data + h->length;
+
+            //skip over unformatted area of the structure (marker is 0000h)
+            while (next < smb->SMBIOSTableData + smb->Length && (next[0] != 0 || next[1] != 0))
+                next++;
+
+            next += 2;
+
+            data = next;
+        }
+    }
+
+    ExFreePoolWithTag(pSfti, 'vhpK');
+
+    return result;
+}
+
+wchar_t* hexbyte(UCHAR b, wchar_t* ptr)
+{
+    static const wchar_t* digits = L"0123456789ABCDEF";
+    *ptr++ = digits[b >> 4];
+    *ptr++ = digits[b & 0x0f];
+    return ptr;
+}
+
+wchar_t g_uuid_str[40] = { 0 };
+
+void InitFwUuid()
+{
+    UCHAR uuid[16];
+    if (GetFwUuid(uuid))
+    {
+        wchar_t* ptr = g_uuid_str;
+        int i;
+        for (i = 0; i < 4; i++)
+            ptr = hexbyte(uuid[i], ptr);
+        *ptr++ = '-';
+        for (; i < 6; i++)
+            ptr = hexbyte(uuid[i], ptr);
+        *ptr++ = '-';
+        for (; i < 8; i++)
+            ptr = hexbyte(uuid[i], ptr);
+        *ptr++ = '-';
+        for (; i < 10; i++)
+            ptr = hexbyte(uuid[i], ptr);
+        *ptr++ = '-';
+        for (; i < 16; i++)
+            ptr = hexbyte(uuid[i], ptr);
+        *ptr++ = 0;
+
+        DbgPrint("sbie FW-UUID: %S\n", g_uuid_str);
+    }
 }

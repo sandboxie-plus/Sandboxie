@@ -6,10 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.10.3 / 5.65.3] - 2023-08-??
 
 ### Added
-- added display of URL shortcut files in Run Menu [#3151](https://github.com/sandboxie-plus/Sandboxie/issues/3151)
+- added support for URL shortcut files in Run Menu [#3151](https://github.com/sandboxie-plus/Sandboxie/issues/3151)
+- added workaround for NtQueryObject locking up in egsotic scenarios, to enable it use 'UseDriverObjLookup=y'
 
 ### Changed
-- improved business certificate handling
+- improved business certificate handling, added usage count and machine bount options
 
 ### Fixed
 - fixed issues with pinned shortcuts

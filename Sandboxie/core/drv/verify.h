@@ -85,6 +85,8 @@ enum ECertLevel {
 #define CERT_IS_TYPE(cert,t)        ((cert.type & 0b11100) == t)
 #define CERT_IS_SUBSCRIPTION(cert)  (CERT_IS_TYPE(cert, eCertBusiness) || CERT_IS_TYPE(cert, eCertSubscription) || cert.type == eCertEntryPatreon || CERT_IS_TYPE(cert, eCertEvaluation))
 #define CERT_IS_INSIDER(cert)		(CERT_IS_TYPE(cert, eCertEternal) || cert.type == eCertGreatPatreon)
-#define CERT_IS_LEVEL(cert,l)       (Verify_CertInfo.active && cert.level >= l)
+#define CERT_IS_LEVEL(cert,l)       (cert.active && cert.level >= l)
 
+#ifdef KERNEL_MODE
 extern SCertInfo Verify_CertInfo;
+#endif

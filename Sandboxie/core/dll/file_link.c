@@ -798,12 +798,13 @@ _FX WCHAR *File_TranslateTempLinks_2(WCHAR *input_str, ULONG input_len)
 
 _FX NTSTATUS File_GetFileName(HANDLE FileHandle, ULONG NameLen, WCHAR* NameBuf)
 {
-    //extern P_GetFinalPathNameByHandle __sys_GetFinalPathNameByHandleW;
-    //if (__sys_GetFinalPathNameByHandleW(FileHandle, NameBuf, NameLen, VOLUME_NAME_NT) > 0)
-    //    return STATUS_SUCCESS;
-    //return STATUS_UNSUCCESSFUL;
+    NTSTATUS status;
 
-    return SbieApi_GetFileName(FileHandle, NameLen, NameBuf);
+    status = SbieApi_GetFileName(FileHandle, NameBuf, &NameLen, NULL);
+
+    if (NT_SUCCESS(status) && !*NameBuf)
+        status = STATUS_OBJECT_PATH_NOT_FOUND;
+    return status;
 }
 
 

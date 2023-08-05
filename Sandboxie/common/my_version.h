@@ -23,7 +23,7 @@
 
 #define MY_VERSION_BINARY       5,65,2
 #define MY_VERSION_STRING       "5.65.2"
-#define MY_ABI_VERSION          0x56000
+#define MY_ABI_VERSION          0x56500
 
 // These #defines are used by either Resource Compiler or NSIS installer
 #define SBIE_INSTALLER_PATH		"..\\Bin\\"

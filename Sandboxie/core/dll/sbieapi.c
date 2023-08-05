@@ -946,8 +946,9 @@ _FX LONG SbieApi_RenameFile(
 
 _FX LONG SbieApi_GetFileName(
     HANDLE FileHandle,
-    ULONG NameLen,
-    WCHAR *NameBuf)
+    WCHAR *NameBuf,
+    ULONG *NameLen,
+    ULONG *ObjType)
 {
     NTSTATUS status;
     __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
@@ -958,6 +959,7 @@ _FX LONG SbieApi_GetFileName(
     args->handle.val64            = (ULONG64)(ULONG_PTR)FileHandle;
     args->name_len.val64          = (ULONG64)(ULONG_PTR)NameLen;
     args->name_buf.val64          = (ULONG64)(ULONG_PTR)NameBuf;
+    args->type_buf.val64          = (ULONG64)(ULONG_PTR)ObjType;
     status = SbieApi_Ioctl(parms);
 
     if (! NT_SUCCESS(status)) {

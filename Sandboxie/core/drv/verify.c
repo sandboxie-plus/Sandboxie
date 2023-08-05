@@ -996,6 +996,6 @@ void InitFwUuid()
             ptr = hexbyte(uuid[i], ptr);
         *ptr++ = 0;
 
-        //DbgPrint("sbie FW-UUID: %S\n", g_uuid_str);
+        DbgPrint("sbie FW-UUID: %S\n", g_uuid_str);
     }
 }

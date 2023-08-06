@@ -10,7 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added workaround for NtQueryObject locking up in exotic scenarios, to enable it use 'UseDriverObjLookup=y'
 
 ### Changed
-- improved business certificate handling, added usage count and machine count options
+- improved business certificate handling, added usage count and machine bound options
 
 ### Fixed
 - fixed issues with pinned shortcuts

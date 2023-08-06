@@ -1453,7 +1453,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 
 		//
-		// load addons apropriate for the current installation
+		// load addons appropriate for the current installation
 		//
 
 		std::shared_ptr<TAddonMap> pAddons;
@@ -1507,12 +1507,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 					if (!I->second->IsDefault)
 						continue;
 
-					// dont add default addons marked to be removed
+					// don't add default addons marked to be removed
 					auto F = std::find(remove_addons.begin(), remove_addons.end(), I->first);
 					if (F != remove_addons.end())
 						continue;
 
-					// dont add already added addons
+					// don't add already added addons
 					F = std::find(add_addons.begin(), add_addons.end(), I->first);
 					if (F != add_addons.end())
 						continue;

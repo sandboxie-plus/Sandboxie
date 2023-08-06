@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -1254,7 +1254,7 @@ _FX void *Token_RestrictHelper1(
                 &NewTokenObject);
 
 			//
-			// We restore here the original sid pointer as it was previusly
+			// Here we restore the original sid pointer as it was previously
 			// done in Token_ResetPrimary before dereferencing the token object.
 			//
 

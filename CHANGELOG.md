@@ -11,7 +11,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Addon Manager: added tooltip to version column with maintainer information [#3167](https://github.com/sandboxie-plus/Sandboxie/issues/3167)
 - added mechanism to open websites for addons [#3166](https://github.com/sandboxie-plus/Sandboxie/issues/3166)
 
-
 ### Changed
 - improved business certificate handling, added usage count and machine bound options
 

@@ -1560,7 +1560,7 @@ void CSettingsWindow::OnLoadAddon()
 		QString Info = pAddon->GetLocalizedEntry("description");
 
 		QString infoUrl = pAddon->Data["infoUrl"].toString();
-		if (!infoUrl.isEmpty()) Info += "<a href=\"" + infoUrl + "\">" + tr(" (info website)") + "</a>";
+		if (!infoUrl.isEmpty()) Info += " <a href=\"" + infoUrl + "\">" + tr("(info website)") + "</a>";
 		QLabel* pLabel = new QLabel(Info);
 		//pLabel->setToolTip(tr("by %1").arg(pAddon->Data["maintainer"].toString()));
 		connect(pLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));

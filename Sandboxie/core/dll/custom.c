@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -178,7 +178,7 @@ _FX UCHAR GetSetCustomLevel(UCHAR SetLevel)
 
         //
         // if UseRegDeleteV2 is set, check if RegPaths.dat was loaded
-        // if not it means the box was previusly a V1 box,
+        // if not it means the box was previously a V1 box,
         // hence return 0 and re run customization
         // 
         // note: DeleteShellAssocKeys deletes the sandboxie shell integration keys

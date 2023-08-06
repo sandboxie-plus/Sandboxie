@@ -478,7 +478,7 @@ check:
     }
 
     //
-    // check if there are any protected root folders and restict the access to
+    // check if there are any protected root folders and restrict the access to them
     //
 
     if (Iopb->MajorFunction == IRP_MJ_CREATE && File_ProtectedRoots.count != 0 && Data->Iopb->TargetFileObject) {

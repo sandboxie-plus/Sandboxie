@@ -7,12 +7,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added support for URL shortcut files in Run Menu [#3151](https://github.com/sandboxie-plus/Sandboxie/issues/3151)
-- added workaround for NtQueryObject locking up in egsotic scenarios, to enable it use 'UseDriverObjLookup=y'
-- Addon Manager: tootlip to version column with maintainer info [#3167](https://github.com/sandboxie-plus/Sandboxie/issues/3167)
-- Addes mechanism to open websites for addons [#3166](https://github.com/sandboxie-plus/Sandboxie/issues/3166)
+- added workaround for NtQueryObject locking up in exotic scenarios, to enable it use 'UseDriverObjLookup=y'
+- Addon Manager: added tooltip to version column with maintainer information [#3167](https://github.com/sandboxie-plus/Sandboxie/issues/3167)
+- added mechanism to open websites for addons [#3166](https://github.com/sandboxie-plus/Sandboxie/issues/3166)
+
 
 ### Changed
-- improved business certificate handling, added usage count and machine bount options
+- improved business certificate handling, added usage count and machine bound options
 
 ### Fixed
 - fixed issues with pinned shortcuts
@@ -55,7 +56,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - reworked NT Object Handle handling
-- "OpenClipboard=n" now is also implemented in user mode, making it work for green boxes
+- "OpenClipboard=n" now is also implemented in user mode, making it work for compartment boxes
 - changed Delete V2 scheme to use drive letters in FilePaths.dat (remains backward compatible with using NT paths) [#3053](https://github.com/sandboxie-plus/Sandboxie/issues/3053)
 - improved robustness of snapshot merging [#3017](https://github.com/sandboxie-plus/Sandboxie/issues/3017)
 

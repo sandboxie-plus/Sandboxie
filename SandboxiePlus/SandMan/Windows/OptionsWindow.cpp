@@ -889,7 +889,7 @@ void COptionsWindow::WriteTextSafe(const QString& Name, const QString& Value)
 			List.removeAt(i--);
 	}
 
-	// Prepand the global entry
+	// Prepend the global entry
 	if (!Value.isEmpty()) List.append(Value);
 
 	WriteTextList(Name, List);

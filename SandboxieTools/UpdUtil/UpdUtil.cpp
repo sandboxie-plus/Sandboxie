@@ -825,7 +825,7 @@ std::shared_ptr<SAddon> ReadAddon(const JSONObject& addon, const std::wstring& c
 
 	for (auto I = addon.begin(); I != addon.end(); ++I) {
 		if (I->first.find(L'-') != std::wstring::npos)
-			continue; // skip all entries containting "-"
+			continue; // skip all entries containing "-"
 		pAddon->Data.insert(*I);
 	}
 
@@ -1037,7 +1037,7 @@ int RemoveAddon(std::shared_ptr<SAddon> pAddon, const std::wstring& base_dir)
 	{
 		std::wstring cmdLine = ReadRegistryStringValue(pAddon->UninstallKey, L"UninstallString");
 		if(cmdLine.empty()) // when the expected uninstall key is not present,
-			return ret; // then seams addon was already uninstalled
+			return ret; // then it seems the addon was already uninstalled
 
 		STARTUPINFO si = { sizeof(si), 0 };
 		PROCESS_INFORMATION pi = { 0 };

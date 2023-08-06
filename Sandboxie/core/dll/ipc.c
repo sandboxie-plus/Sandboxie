@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -4197,7 +4197,7 @@ _FX NTSTATUS Ipc_MergeDirectoryObject(IPC_MERGE *merge, WCHAR* path, BOOLEAN joi
                 if (entry) {
 
                     if (entry->TypeName.Length == directoryInfo->TypeName.Length && memcmp(entry->TypeName.Buffer, directoryInfo->TypeName.Buffer, entry->TypeName.Length) == 0)
-                        continue; // identical entry, nothign to do
+                        continue; // identical entry, nothing to do
 
                     // same name but different type, remove old entry
                     List_Remove(&merge->objects, entry);

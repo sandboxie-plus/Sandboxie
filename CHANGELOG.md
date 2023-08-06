@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added support for URL shortcut files in Run Menu [#3151](https://github.com/sandboxie-plus/Sandboxie/issues/3151)
 - added workaround for NtQueryObject locking up in egsotic scenarios, to enable it use 'UseDriverObjLookup=y'
+- Addon Manager: tootlip to version column with maintainer info [#3167](https://github.com/sandboxie-plus/Sandboxie/issues/3167)
+- Addes mechanism to open websites for addons [#3166](https://github.com/sandboxie-plus/Sandboxie/issues/3166)
 
 ### Changed
 - improved business certificate handling, added usage count and machine bount options

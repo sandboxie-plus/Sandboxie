@@ -77,6 +77,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue when using "UseVolumeSerialNumbers=y" with accessing drive roots
 - fixed remove snapshot resurrects deleted files when using Delete V2 [#3015](https://github.com/sandboxie-plus/Sandboxie/issues/3015)
 
+### Removed
+- removed template support for Internet Download Manager [#991](https://github.com/sandboxie-plus/Sandboxie/issues/991#issuecomment-1646582375)
+
 
 
 ## [1.10.0 / 5.65.0] - 2023-07-12

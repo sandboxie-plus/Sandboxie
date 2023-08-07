@@ -4753,12 +4753,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1555"/>
         <source>by %1</source>
-        <translation type="unfinished"></translation>
+        <translation>von %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1563"/>
         <source>(info website)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Informationswebseite)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1590"/>

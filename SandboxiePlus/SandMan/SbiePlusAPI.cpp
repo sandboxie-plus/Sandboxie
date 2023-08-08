@@ -540,12 +540,14 @@ void CSandBoxPlus::ScanStartMenu()
 			//pLink->WorkDir = ;
 		}
 
-		if (!pLink->Url && !pLink->Target.isEmpty() && !QFile::exists(pLink->Target) && !IsBoxexPath(pLink->Target))
-			pLink->Target = theAPI->GetBoxedPath(this, pLink->Target, FoundLink.Snapshot);
-		if (!pLink->WorkDir.isEmpty() && !QFile::exists(pLink->WorkDir) && !IsBoxexPath(pLink->WorkDir))
-			pLink->WorkDir = theAPI->GetBoxedPath(this, pLink->WorkDir, FoundLink.Snapshot);
-		if (!pLink->Icon.isEmpty() && !QFile::exists(pLink->Icon) && !IsBoxexPath(pLink->Icon))
-			pLink->Icon = theAPI->GetBoxedPath(this, pLink->Icon, FoundLink.Snapshot);
+		if (pLink) {
+			if (!pLink->Url && !pLink->Target.isEmpty() && !QFile::exists(pLink->Target) && !IsBoxexPath(pLink->Target))
+				pLink->Target = theAPI->GetBoxedPath(this, pLink->Target, FoundLink.Snapshot);
+			if (!pLink->WorkDir.isEmpty() && !QFile::exists(pLink->WorkDir) && !IsBoxexPath(pLink->WorkDir))
+				pLink->WorkDir = theAPI->GetBoxedPath(this, pLink->WorkDir, FoundLink.Snapshot);
+			if (!pLink->Icon.isEmpty() && !QFile::exists(pLink->Icon) && !IsBoxexPath(pLink->Icon))
+				pLink->Icon = theAPI->GetBoxedPath(this, pLink->Icon, FoundLink.Snapshot);
+		}
 	}
 
 	foreach(const QString &Path, OldStartMenu)

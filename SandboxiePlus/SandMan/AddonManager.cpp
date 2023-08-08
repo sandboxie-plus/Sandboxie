@@ -249,9 +249,9 @@ void CAddonManager::RunUpdaterAsync(CAddonPtr pAddon, const QStringList& Params)
 #endif
 
 	if(Status.IsError())
-		pAddon->pProgress->Finish(SB_ERR(SB_OtherError, QVariantList() << tr("Updater failed to perform plugin operation")));
+		pAddon->pProgress->Finish(SB_ERR(SB_OtherError, QVariantList() << tr("Updater failed to to perform addon operation")));
 	else if(Status.GetValue() < 0)
-		pAddon->pProgress->Finish(SB_ERR(SB_OtherError, QVariantList() << tr("Updater failed to perform plugin operation, error: %1").arg(GetUpdErrorStr2(Status.GetValue()))));
+		pAddon->pProgress->Finish(SB_ERR(SB_OtherError, QVariantList() << tr("Updater failed to to perform addon operation, error: %1").arg(GetUpdErrorStr2(Status.GetValue()))));
 	else
 		pAddon->pProgress->Finish(SB_OK);
 	pAddon->pProgress.clear();

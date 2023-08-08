@@ -100,12 +100,15 @@ ECHO Copying SandMan translations
 mkdir %instPath%\translations\
 rem copy /y %~dp0..\SandboxiePlus\SandMan\sandman_*.qm %instPath%\translations\
 copy /y %~dp0..\SandboxiePlus\Build_SandMan_%archPath%\release\sandman_*.qm %instPath%\translations\
-rem copy /y %qtPath%\qttranslations\qt_*.qm %instPath%\translations\
-rem copy /y %qtPath%\qttranslations\qtbase_*.qm %instPath%\translations\
-rem copy /y %qtPath%\qttranslations\qtmultimedia_*.qm %instPath%\translations\
-copy /y %~dp0\qttranslations\qm\qt_*.qm %instPath%\translations\
-copy /y %~dp0\qttranslations\qm\qtbase_*.qm %instPath%\translations\
-copy /y %~dp0\qttranslations\qm\qtmultimedia_*.qm %instPath%\translations\
+IF NOT %archPath% == ARM64 (
+  copy /y %qtPath%\qttranslations\qt_*.qm %instPath%\translations\
+  copy /y %qtPath%\qttranslations\qtbase_*.qm %instPath%\translations\
+  copy /y %qtPath%\qttranslations\qtmultimedia_*.qm %instPath%\translations\
+) ELSE (
+  copy /y %~dp0\qttranslations\qm\qt_*.qm %instPath%\translations\
+  copy /y %~dp0\qttranslations\qm\qtbase_*.qm %instPath%\translations\
+  copy /y %~dp0\qttranslations\qm\qtmultimedia_*.qm %instPath%\translations\
+)
 
 IF NOT %archPath% == ARM64 (
 REM IF %archPath% == Win32 (

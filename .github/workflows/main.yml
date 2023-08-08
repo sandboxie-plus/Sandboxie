@@ -84,6 +84,9 @@ jobs:
 #      - name: Add Windows 7 compatible Qt6 DLLs
 #        run: Installer\fix_qt6_win7.cmd
 
+      - name: Add missing languages for Qt5 (issue 1528)
+        run: Installer\fix_qt5_languages.cmd Win32
+
       - name: Merging Builds
         run: Installer\merge_builds.cmd
 
@@ -241,7 +244,7 @@ jobs:
     # Merge everything together
     #
 
-      - name: Add missing languages for Qt5 x86 (issue 1528)
+      - name: Add missing languages for Qt5 (issue 1528)
         run: Installer\fix_qt5_languages.cmd Win32
 
       - name: Merging Builds

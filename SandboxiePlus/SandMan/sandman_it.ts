@@ -6,71 +6,125 @@
     <message>
         <location filename="AddonManager.cpp" line="160"/>
         <source>Do you want to download and install %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Si desidera scaricare e installare %1?</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="166"/>
         <source>Installing: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Installazione: %1</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="190"/>
         <source>Addon not found, please try updating the addon list in the global settings!</source>
-        <translation type="unfinished"></translation>
+        <translation>Componente aggiuntivo non trovato, provare ad aggiornare la lista dei componenti aggiuntivi nelle impostazioni globali!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="234"/>
         <source>Addon Not Found</source>
-        <translation type="unfinished"></translation>
+        <translation>Componente aggiuntivo non trovato</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="235"/>
         <source>Addon is not available for this platform</source>
-        <oldsource>Addon is not available for this paltform</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Il componente aggiuntivo non è disponibile per questa piattaforma</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="236"/>
         <source>Missing installation instructions</source>
-        <oldsource>Missing instalation instructions</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Istruzioni di installazione mancanti</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="237"/>
         <source>Executing addon setup failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Esecuzione della configurazione del componente aggiuntivo non riuscita</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="238"/>
         <source>Failed to delete a file during addon removal</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile eliminare un file durante la rimozione del componente aggiuntivo</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="252"/>
         <source>Updater failed to perform addon operation</source>
         <oldsource>Updater failed to perform plugin operation</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Il programma di aggiornamento non è riuscito a eseguire un&apos;operazione del componente aggiuntivo</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="254"/>
         <source>Updater failed to perform addon operation, error: %1</source>
         <oldsource>Updater failed to perform plugin operation, error: %1</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Il programma di aggiornamento non è riuscito a eseguire un&apos;operazione del componente aggiuntivo, errore: %1</translation>
+    </message>
+    <message>
+        <source>Addon already installed!</source>
+        <translation type="vanished">Componente aggiuntivo già installato!</translation>
+    </message>
+    <message>
+        <source>Addon has no download url, addon may not be available for your platform.</source>
+        <translation type="vanished">Il componente aggiuntivo non possiede un URL di download, il componente aggiuntivo potrebbe non essere disponibile per la tua piattaforma.</translation>
+    </message>
+    <message>
+        <source>Downloading Addon %1</source>
+        <translation type="vanished">Download in corso del componente aggiuntivo: %1</translation>
+    </message>
+    <message>
+        <source>Download signature is not valid!</source>
+        <translation type="vanished">La firma del file scaricato non è valida!</translation>
+    </message>
+    <message>
+        <source>Installing Addon %1</source>
+        <translation type="vanished">Installazione del componente aggiuntvo %1</translation>
+    </message>
+    <message>
+        <source>Running Installer for %1</source>
+        <translation type="vanished">Esecuzione dell&apos;installer per %1</translation>
+    </message>
+    <message>
+        <source>Failed to start installer (%1)!</source>
+        <oldsource>Failes to start installer (%1)!</oldsource>
+        <translation type="vanished">Impossibile avviare l&apos;installer (%1)!</translation>
+    </message>
+    <message>
+        <source>Copying Files for %1</source>
+        <translation type="vanished">Copia dei file per %1</translation>
+    </message>
+    <message>
+        <source>Failed to unpack addon!</source>
+        <oldsource>Failes to unpack addon!</oldsource>
+        <translation type="vanished">Impossibile estrarre il componente aggiuntivo!</translation>
+    </message>
+    <message>
+        <source>Addon Installation Failed!</source>
+        <oldsource>Addon Instalation Failed!</oldsource>
+        <translation type="vanished">Impossibile installare il componente aggiuntivo!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="174"/>
         <source>Do you want to remove %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vuoi rimuovere %1?</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="180"/>
         <source>Removing: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Rimozione: %1</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="214"/>
         <source>Addon not found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Componente aggiuntivo non trovato!</translation>
+    </message>
+    <message>
+        <source>Running Uninstaller for %1</source>
+        <translation type="vanished">Esecuzione uninstaller per %1</translation>
+    </message>
+    <message>
+        <source>Failed to start uninstaller!</source>
+        <oldsource>Failes to start uninstaller!</oldsource>
+        <translation type="vanished">Impossibile avviare l&apos;uninstaller!</translation>
+    </message>
+    <message>
+        <source>Addon Removal Failed!</source>
+        <translation type="vanished">Impossibile rimuovere il componente aggiuntivo!</translation>
     </message>
 </context>
 <context>
@@ -83,7 +137,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="433"/>
         <source>On this page advanced sandbox options can be configured.</source>
-        <translation>In questa sezione, è possibile configurare le opzioni avanzate per l&apos;area virtuale.</translation>
+        <translation>In questa sezione è possibile configurare le opzioni avanzate per l&apos;area virtuale.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="438"/>
@@ -167,23 +221,23 @@
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="227"/>
         <source>Troubleshooting Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Risoluzione guidata problemi</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="232"/>
         <source>Welcome to the Troubleshooting Wizard for Sandboxie-Plus. This interactive assistant is designed to help you in resolving sandboxing issues.</source>
-        <translation type="unfinished"></translation>
+        <translation>Benvenuto nella procedura guidata di risoluzione problemi per Sandboxie Plus. Questo assistente interattivo è progettato per aiutarti a risolvere problemi con l&apos;isolamento.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="275"/>
         <source>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerful. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retrieve the latest troubleshooting instructions.</source>
         <oldsource>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerfull. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retriev the latest troubleshooting instructions.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Con un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificato di supporto&lt;/a&gt; valido, la procedura guidata sarebbe ancor più efficace, in quanto avrebbe accesso al &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;database online delle soluzioni&lt;/a&gt; per scaricare le ultime istruzioni per la risoluzione dei problemi.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="313"/>
         <source>Another issue</source>
-        <translation type="unfinished"></translation>
+        <translation>Un altro problema</translation>
     </message>
 </context>
 <context>
@@ -191,39 +245,39 @@
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="28"/>
         <source>Troubleshooting Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Risoluzione guidata problemi</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="34"/>
         <source>Toggle Debugger</source>
-        <translation type="unfinished"></translation>
+        <translation>Attiva/disattiva debugger</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="100"/>
         <source>To debug troubleshooting scripts you need the V4 Script Debugger addon, do you want to download and install it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Per eseguire il debug degli script di risoluzione problemi è necessario il componente aggiuntivo V4 Script Debugger, si desidera scaricarlo e installarlo?</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="104"/>
         <source>Debugger Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Debugger attivato</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="159"/>
         <source>V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debugger could not be opened.</source>
         <oldsource>V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debuger could not be opened.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile inizializzare V4ScriptDebuggerBackend, probabilmente V4ScriptDebugger.dll e/o le sue dipendenze sono mancanti, impossibile aprire il debugger degli script.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="209"/>
         <source>A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an inconsistent state.</source>
         <oldsource>A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an incosistent state.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>È in corso una procedura di risoluzione problemi, annullare la procedura guidata la interromperà, questo potrebbe lasciare l&apos;area virtuale in uno stato incoerente.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="210"/>
         <source>Don&apos;t ask in future</source>
-        <translation type="unfinished">Non chiedere in futuro</translation>
+        <translation>Non chiedere in futuro</translation>
     </message>
 </context>
 <context>
@@ -231,7 +285,7 @@
     <message>
         <location filename="Engine/BoxEngine.cpp" line="202"/>
         <source>Uncaught exception at line %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore non gestito nella riga %1: %2</translation>
     </message>
 </context>
 <context>
@@ -239,7 +293,7 @@
     <message>
         <location filename="Windows/SelectBoxWindow.cpp" line="23"/>
         <source>Sandbox</source>
-        <translation type="unfinished">Elenco aree virtuali</translation>
+        <translation>Area virtuale</translation>
     </message>
 </context>
 <context>
@@ -534,14 +588,17 @@ Si prega di consultare la directory del profilo utente corretta.</translation>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1049"/>
         <source>Troubleshooting Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Risoluzione problemi completata</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1056"/>
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
 
 You can click Finish to close this wizard.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Tenere presente che l&apos;espressione &quot;concludere la procedura guidata&quot; ricorre anche altrove nella traduzione</translatorcomment>
+        <translation>Grazie per aver utilizzato la procedura di risoluzione problemi per Sandboxie Plus. Ci scusiamo per eventuali problemi riscontrati durante il processo. Se si hanno ulteriori domande o si necessita di ulteriore assistenza, non esitare a contattarci. Siamo qui per aiutare. Grazie per la comprensione e la cooperazione.
+
+Clicca su Fine per concludere la procedura guidata.</translation>
     </message>
 </context>
 <context>
@@ -742,17 +799,17 @@ You can use %USER% to save each users sandbox to an own folder.</source>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="326"/>
         <source>Select issue from group</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona problema da un gruppo</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="332"/>
         <source>Please specify the exact issue:</source>
-        <translation type="unfinished"></translation>
+        <translation>Specificare il problema esatto:</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="385"/>
         <source>Another issue</source>
-        <translation type="unfinished"></translation>
+        <translation>Un altro problema</translation>
     </message>
 </context>
 <context>
@@ -793,17 +850,17 @@ You can use %USER% to save each users sandbox to an own folder.</source>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="446"/>
         <source>Select issue from full list</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona problema dalla lista completa</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="457"/>
         <source>Search filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtro ricerca</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="513"/>
         <source>None of the above</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessuno dei precedenti</translation>
     </message>
 </context>
 <context>
@@ -1010,7 +1067,7 @@ You can use %USER% to save each users sandbox to an own folder.</source>
     <message>
         <location filename="OnlineUpdater.cpp" line="776"/>
         <source>Failed to download file from: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile scaricare il file da: %1</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="810"/>
@@ -1131,7 +1188,7 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="676"/>
         <source>Add special option:</source>
-        <translation>Aggiungi un&apos;opzione speciale:</translation>
+        <translation>Aggiungi opzione speciale:</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="827"/>
@@ -1189,7 +1246,7 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
         <location filename="Windows/OptionsGeneral.cpp" line="19"/>
         <source>This option requires an active supporter certificate</source>
         <oldsource>This option requires a valid supporter certificate</oldsource>
-        <translation type="unfinished">Questa opzione richiede un certificato di supporto</translation>
+        <translation>Questa opzione richiede un certificato di supporto</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="22"/>
@@ -1836,12 +1893,12 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
     <message>
         <location filename="Windows/PopUpWindow.h" line="65"/>
         <source>Troubleshooting</source>
-        <translation type="unfinished"></translation>
+        <translation>Risoluzione problemi</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="66"/>
         <source>Start troubleshooting wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Avvia procedura di risoluzione problemi</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="71"/>
@@ -1861,7 +1918,7 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
     <message>
         <location filename="Windows/PopUpWindow.h" line="89"/>
         <source> (%1)</source>
-        <translation type="unfinished"> (%1)</translation>
+        <translation> (%1)</translation>
     </message>
 </context>
 <context>
@@ -1998,7 +2055,7 @@ Nota: Il controllo degli aggiornamenti è solitamente indietro rispetto all&apos
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="162"/>
         <source>PID %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ID processo %1</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="187"/>
@@ -2150,7 +2207,7 @@ Percorso completo: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="582"/>
         <source>Recovering File(s)...</source>
-        <translation type="unfinished"></translation>
+        <translation>Recupero file...</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="588"/>
@@ -2163,25 +2220,27 @@ Percorso completo: %4</translation>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="579"/>
         <source>Troubleshooting ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Risoluzione problemi...</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="602"/>
         <source>This troubleshooting procedure could not be initialized. You can click on next to submit an issue report.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile inizializzare la procedura di risoluzione problemi. Clicca su Successivo per inviare una segnalazione del problema.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="714"/>
         <source>Something failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</source>
         <oldsource>Somethign failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Si è verificato un problema interno e la procedura di risoluzione problemi non può continuare. Clicca su Successivo per inviare una segnalazione del problema.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="715"/>
         <source>
 
 Error: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Errore: </translation>
     </message>
 </context>
 <context>
@@ -2189,121 +2248,123 @@ Error: </source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="530"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; updater</source>
-        <translation type="unfinished"></translation>
+        <translation>Configura updater di &lt;b&gt;Sandboxie Plus&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="531"/>
         <source>Like with any other security product, it&apos;s important to keep your Sandboxie-Plus up to date.</source>
         <oldsource>Like with any other security product it&apos;s important to keep your Sandboxie-Plus up to date.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Come qualsiasi prodotto pensato per la sicurezza, è importante mantenere Sandboxie Plus aggiornato.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="539"/>
         <source>Regularly check for all updates to Sandboxie-Plus and optional components</source>
         <oldsource>Regularly Check for all updates to Sandboxie-Plus and optional components</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Verifica regolarmente la presenza di aggiornamenti per Sandboxie Plus e i componenti facoltativi</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="540"/>
         <source>Let Sandboxie regularly check for latest updates.</source>
         <oldsource>Let sandboxie regularly check for latest updates.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Permetti a Sandboxie di verificare regolarmente la presenza di aggiornamenti.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="550"/>
         <source>Check for new Sandboxie-Plus versions:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verificare la presenza di nuove versioni di Sandboxie Plus:</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="551"/>
         <source>Check for new Sandboxie-Plus builds.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verificare la presenza di nuove build di Sandboxie Plus.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="557"/>
         <source>Select in which update channel to look for new Sandboxie-Plus builds:</source>
         <oldsource>Sellect in which update channel to look for new Sandboxie-Plus builds:</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona da quale canale di aggiornamento verificare la presenza di nuove build di Sandboxie Plus:</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="566"/>
         <source>In the Stable Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Nel canale stabile</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="567"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
-        <translation type="unfinished">Il canale stabile contiene le ultime versioni stabili pubblicate su GitHub.</translation>
+        <translation>Il canale stabile contiene le ultime versioni stabili pubblicate su GitHub.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="571"/>
         <source>In the Preview Channel - with newest experimental changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Nel canale di anteprima - contiene le novità sperimentali più recenti</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="572"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
-        <translation type="unfinished">Il canale di anteprima contiene le ultime versioni di anteprima pubblicate su GitHub.</translation>
+        <translation>Il canale di anteprima contiene le ultime versioni di anteprima pubblicate su GitHub.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="576"/>
         <source>In the Insider Channel - exclusive features</source>
-        <translation type="unfinished"></translation>
+        <translation>Nel canale insider - funzionalità esclusive</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="577"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il canale insider offre accesso anticipato alle nuove funzionalità e risoluzioni di bug che saranno successivamente rilasciate al pubblico, in aggiunta a tutti i miglioramenti rilevanti dal canale stabile.
+A differenza del canale di anteprima, non contiene modifiche non testate, potenzialmente problematiche o sperimentali che potrebbero non essere pronte per l&apos;uso comune.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="582"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Frase accorciata per uguagliare quella in SettingsWindow.ui</translatorcomment>
+        <translation>Info sul &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;canale insider&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="591"/>
         <source>Keep Compatibility Templates up to date and apply hotfixes</source>
         <oldsource>Keep Compatybility Templates up to date and apply hotfixes</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Mantieni aggiornati i modelli di compatibilità e applica hotfix</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="592"/>
         <source>Check for latest compatibility templates and hotfixes.</source>
         <oldsource>Check for latest compatybility tempaltes and hotfixes.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Verifica la presenza dei modelli di compatibilità e hotfix più recenti.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="596"/>
         <source>Get the latest Scripts for the Troubleshooting Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Ottieni gli script più recenti per la procedura di risoluzione problemi</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="597"/>
         <source>Check for latest troubleshooting scripts for the troubleshooting wizard.</source>
         <oldsource>Check for latest troubleshooting scripts for the troubleshooting wizars.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Verifica la presenza di script più recenti per la procedura di risoluzione problemi.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="601"/>
         <source>Keep the list of optional Addon components up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>Mantieni aggiornata la lista dei componenti aggiuntivi facoltativi</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="602"/>
         <source>Check for latest available addons.</source>
         <oldsource>Check for latest avaialble addons.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Verifica la presenza di componenti aggiuntivi più recenti.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="611"/>
         <source>Sandboxie-Plus applies strict application restrictions, which can lead to compatibility issues. Stay updated with Sandboxie-Plus, including compatibility templates and troubleshooting, to ensure smooth operation amid Windows updates and application changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Plus applica restrizioni ferree alle applicazioni, che potrebbero causare problemi di compatibilità. Mantieni aggiornato Sandboxie Plus, inclusi i modelli di compatibilità e risoluzione problemi, per garantire un corretto funzionamento in seguito ad aggiornamenti di Windows e delle applicazioni.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="617"/>
         <source>Access to the latest compatibility templates and the online troubleshooting database requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;accesso ai modelli di compatibilità più recenti e al database online di risoluzione problemi richiede un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificato di supporto&lt;/a&gt; valido.</translation>
     </message>
 </context>
 <context>
@@ -2452,6 +2513,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="1229"/>
         <source>Trace Log</source>
+        <translatorcomment>Sostituibile con &quot;Log di traccia&quot;, tuttavia &quot;Log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
         <translation>Log di accesso</translation>
     </message>
     <message>
@@ -2630,6 +2692,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="560"/>
         <source>Cleanup Trace Log</source>
+        <translatorcomment>Sostituibile con &quot;log di traccia&quot;, tuttavia &quot;log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
         <translation>Pulisci log di accesso</translation>
     </message>
     <message>
@@ -2663,6 +2726,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="576"/>
         <source>Trace Logging</source>
+        <translatorcomment>Sostituibile con &quot;log di traccia&quot;, tuttavia &quot;log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
         <translation>Attiva log di accesso</translation>
     </message>
     <message>
@@ -2689,7 +2753,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="184"/>
         <location filename="SandMan.cpp" line="2070"/>
         <source>Sandboxie-Plus Insider [%1]</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Plus Insider [%1]</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="473"/>
@@ -2699,7 +2763,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="474"/>
         <source>Troubleshooting Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Risoluzione guidata problemi</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="478"/>
@@ -2847,7 +2911,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="805"/>
         <source>New-Box Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu nuova area virtuale</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="814"/>
@@ -2859,17 +2923,17 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="822"/>
         <source>Edit-ini Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu modifica configurazione</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="867"/>
         <source>Toolbar Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Elementi barra degli strumenti</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="869"/>
         <source>Reset Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Reimposta barra degli strumenti</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1055"/>
@@ -3005,7 +3069,7 @@ Effettuare la pulizia?</translation>
     <message>
         <location filename="SandMan.cpp" line="2207"/>
         <source>Do you want the setup wizard to be omitted?</source>
-        <translation type="unfinished"></translation>
+        <translation>Si desidera saltare la configurazione guidata?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2496"/>
@@ -3195,7 +3259,7 @@ Scegliere No per selezionare: %2</translation>
         <location filename="SandMan.cpp" line="2406"/>
         <location filename="SandMan.cpp" line="2408"/>
         <source> (%1)</source>
-        <translation type="unfinished"> (%1)</translation>
+        <translation> (%1)</translation>
     </message>
     <message>
         <source>PID %1: </source>
@@ -3465,7 +3529,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
         <location filename="SandMan.cpp" line="3447"/>
         <source>All processes in a sandbox must be stopped before it can be renamed.</source>
         <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Tutti i processi dell&apos;area virtuale devono essere interrotti prima che possa essere rinominata.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3449"/>
@@ -3480,7 +3544,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="SandMan.cpp" line="3451"/>
         <source>Failed to move box image &apos;%1&apos; to &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile spostare l&apos;immagine dell&apos;area virtuale &apos;%1&apos; in &apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3452"/>
@@ -3546,12 +3610,12 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
         <location filename="SandMan.cpp" line="3466"/>
         <source>The content of an unmounted sandbox can not be deleted</source>
         <oldsource>The content of an un mounted sandbox can not be deleted</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Il contenuto di un&apos;area virtuale non montata non può essere eliminato</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3468"/>
         <source>%1</source>
-        <translation type="unfinished">%1</translation>
+        <translation>%1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3470"/>
@@ -3732,7 +3796,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Engine/SbieObject.cpp" line="204"/>
         <source>Run &amp;Un-Sandboxed</source>
-        <translation type="unfinished">Avvia all&apos;&amp;esterno dell&apos;area virtuale</translation>
+        <translation>Avvia all&apos;&amp;esterno dell&apos;area virtuale</translation>
     </message>
 </context>
 <context>
@@ -3929,37 +3993,37 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="SbiePlusAPI.cpp" line="1129"/>
         <source>Failed to initialize COM</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile inizializzare il componente COM</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1135"/>
         <source>Failed to create update session</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile creare una sessione di aggiornamento</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1141"/>
         <source>Failed to create update searcher</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile creare l&apos;interfaccia di ricerca</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1147"/>
         <source>Failed to set search options</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile impostare le opzioni di ricerca</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1155"/>
         <source>Failed to search for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricerca aggiornamenti fallita</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1161"/>
         <source>Failed to retrieve update list from search result</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile scaricare la lista di aggiornamenti dal risultato di ricerca</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1168"/>
         <source>Failed to get update count</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile ottenere il numero di aggiornamenti</translation>
     </message>
 </context>
 <context>
@@ -4046,7 +4110,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
         <location filename="Views/SbieView.cpp" line="206"/>
         <location filename="Views/SbieView.cpp" line="334"/>
         <source>Snapshots Manager</source>
-        <translation>Gestore istantanee</translation>
+        <translation>Gestione istantanee</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="207"/>
@@ -4170,7 +4234,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
         <location filename="Views/SbieView.cpp" line="154"/>
         <location filename="Views/SbieView.cpp" line="286"/>
         <source>Import Box</source>
-        <translation type="unfinished">Importa area virtuale</translation>
+        <translation>Importa area virtuale</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="266"/>
@@ -4292,12 +4356,12 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Views/SbieView.cpp" line="1022"/>
         <source>This name is already in use, please select an alternative box name</source>
-        <translation type="unfinished">Questo nome è già in uso, si prega di selezionare un nome alternativo per l&apos;area virtuale</translation>
+        <translation>Questo nome è già in uso, selezionare un nome alternativo per l&apos;area virtuale</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1036"/>
         <source>Importing: %1</source>
-        <translation type="unfinished">Importazione: %1</translation>
+        <translation>Importazione: %1</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1050"/>
@@ -4382,12 +4446,12 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Views/SbieView.cpp" line="278"/>
         <source>Suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>Sospendi</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="279"/>
         <source>Resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Riprendi</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="849"/>
@@ -4550,17 +4614,17 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Engine/ScriptManager.cpp" line="85"/>
         <source>Fatal error, failed to load troubleshooting instructions!</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore fatale, impossibile caricare le istruzioni per la risoluzione dei problemi!</translation>
     </message>
     <message>
         <location filename="Engine/ScriptManager.cpp" line="158"/>
         <source>Error, troubleshooting instructions duplicated %1 (%2 &lt;-&gt; %3)!</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore, istruzioni duplicate per la risoluzione dei problemi %1 (%2 &lt;-&gt; %3)!</translation>
     </message>
     <message>
         <location filename="Engine/ScriptManager.cpp" line="240"/>
         <source>Downloaded troubleshooting instructions are corrupted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le istruzioni scaricate per la risoluzione dei problemi sono corrotte!</translation>
     </message>
 </context>
 <context>
@@ -4661,22 +4725,22 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="268"/>
         <source>Every Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogni giorno</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="269"/>
         <source>Every Week</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogni settimana</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="270"/>
         <source>Every 2 Weeks</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogni 2 settimane</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="271"/>
         <source>Every 30 days</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogni 30 giorni</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="273"/>
@@ -4704,22 +4768,23 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1055"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Forse migliorabile</translatorcomment>
+        <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Per la build corrente, le funzioni Plus rimangono attive&lt;/font&gt;, ma non si ha più accesso ai servizi di Sandboxie Live, inclusi gli aggiornamenti di compatibilità e il database di risoluzione problemi.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1486"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sfortunatamente questo certificato non è valido per questa build, è necessario ottenere un nuovo certificato o tornare ad una build precedente.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1488"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
-        <translation type="unfinished"></translation>
+        <translation>Benché questo certificato sia scaduto, le funzionalità Plus rimangono attive per la versione attualmente installata. Tuttavia, non si avrà più accesso ai servizi di Sandboxie Live, inclusi gli aggiornamenti di compatibilità e il database di risoluzione problemi.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1490"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sfortunatamente questo certificato è scaduto, è necessario ottenere un certificato nuovo.</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
@@ -4758,17 +4823,17 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="511"/>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona font</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="513"/>
         <source>Reset font</source>
-        <translation type="unfinished"></translation>
+        <translation>Reimposta font</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="569"/>
         <source>%0, %1 pt</source>
-        <translation type="unfinished"></translation>
+        <translation>%0, %1 pt</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="671"/>
@@ -4857,27 +4922,28 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1548"/>
         <source>Update Available</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiornamento disponibile</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1550"/>
         <source>Installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Installato</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1555"/>
         <source>by %1</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Si tratta di un tooltip, perciò non ci sono problemi di lunghezza</translatorcomment>
+        <translation>componente sviluppato da %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1563"/>
         <source>(info website)</source>
-        <translation type="unfinished"></translation>
+        <translation>(info sito web)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1590"/>
         <source>This Addon is mandatory and can not be removed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Questo componente aggiuntivo è necessario e non può essere rimosso.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1599"/>
@@ -5042,7 +5108,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="245"/>
         <source>Performing Snapshot operation...</source>
-        <translation type="unfinished"></translation>
+        <translation>Creazione istantanea...</translation>
     </message>
 </context>
 <context>
@@ -5050,7 +5116,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Views/StackView.cpp" line="17"/>
         <source>#|Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>#|Simbolo</translation>
     </message>
 </context>
 <context>
@@ -5058,27 +5124,27 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="799"/>
         <source>Submit Issue Report</source>
-        <translation type="unfinished"></translation>
+        <translation>Invia segnalazione problema</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="810"/>
         <source>Detailed issue description</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrizione dettagliata del problema</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="814"/>
         <source>Attach Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Allega Sandboxie.ini</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="815"/>
         <source>Sandboxing compatibility is reliant on the configuration, hence attaching the Sandboxie.ini file helps a lot with finding the issue.</source>
-        <translation type="unfinished"></translation>
+        <translation>La compatibilità dell&apos;isolamento si basa sulla configurazione; allegare Sandboxie.ini aiuta notevolmente nella ricerca del problema.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="818"/>
         <source>Attach Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>Allega log</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="820"/>
@@ -5086,75 +5152,78 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
 Before sending, you can review the logs in the main window.</source>
         <oldsource>Select partially checked state to sends only message log but no trace log.
 Before sending you can review the logs in the main window.</oldsource>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Sostituibile con &quot;log di traccia&quot;, tuttavia &quot;log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
+        <translation>Lo stato parzialmente spuntato invia unicamente il log dei messaggi, ma non il log di accesso.
+Prima di inviare, è possibile visualizzare i log nella schermata principale.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="823"/>
         <source>Attach Crash Dumps</source>
-        <translation type="unfinished"></translation>
+        <translation>Allega dump di crash</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="824"/>
         <source>An application crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</source>
         <oldsource>An applicatin crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Una applicazione è andata in crash durante la procedura di risoluzione problemi, allegare un dump del crash può aiutare con il debugging.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="828"/>
         <source>Email address</source>
-        <translation type="unfinished"></translation>
+        <translation>Indirizzo email</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="829"/>
         <source>You have the option to provide an email address to receive a notification once a solution for your issue has been identified.</source>
-        <translation type="unfinished"></translation>
+        <translation>È possibile fornire un indirizzo email per ricevere una notifica una volta trovata una soluzione per il problema.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="837"/>
         <source>We apologize for the inconvenience you are currently facing with Sandboxie-Plus. </source>
-        <translation type="unfinished"></translation>
+        <translation>Ci scusiamo per il problema che si sta riscontrando con Sandboxie Plus. </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="844"/>
         <source>Unfortunately, the automated troubleshooting procedure failed. </source>
-        <translation type="unfinished"></translation>
+        <translation>Sfortunatamente, la procedura di risoluzione problemi automatica ha fallito. </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="850"/>
         <source>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described. </source>
-        <translation type="unfinished"></translation>
+        <translation>Purtroppo non è disponibile alcuna procedura di risoluzione problemi automatica per il problema descritto. </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="855"/>
         <source>If you wish to submit an issue report, please review the report below and click &apos;Finish&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se si desidera inviare una segnalazione del problema, controllare il riassunto sottostante e cliccare su &quot;Fine&quot;.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="954"/>
         <source>Compressing Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>Compressione dei log</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="986"/>
         <source>Compressing Dumps</source>
-        <translation type="unfinished"></translation>
+        <translation>Compressione dei dump</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1015"/>
         <source>Submitting issue report...</source>
-        <translation type="unfinished"></translation>
+        <translation>Invio segnalazione problema...</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1026"/>
         <source>Failed to submit issue report, error %1
 Try submitting without the log attached.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible inviare la segnalazione del problema, errore %1
+Provare ad inviare senza allegare il log.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1030"/>
         <source>Your issue report has been successfully submitted, thank you.</source>
         <oldsource>Your issue report have been successfully submitted, thank you.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Segnalazione correttamente inviata, grazie.</translation>
     </message>
 </context>
 <context>
@@ -5244,29 +5313,30 @@ I processi in questa area virtuale verranno eseguiti con un token di processo pe
 If you are a Great Supporter on Patreon already, Sandboxie can check online for an update of your certificate.</source>
         <oldsource>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.
 If you are a great patreaon supporter already, sandboxie can check online for an update of your certificate.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Questa build Insider richiede un certificato speciale del tipo GREAT_PATREON, PERSONAL_HUGE o CONTRIBUTOR.
+Se si è già un Great Supporter su Patreon, Sandboxie può verificare la presenza di un aggiornamento del tuo certificato online.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="51"/>
         <location filename="Windows/SupportDialog.cpp" line="325"/>
         <source>This Insider build requires a special certificate of type GREAT_PATREON, PERSONAL-HUGE, or CONTRIBUTOR.</source>
-        <translation type="unfinished"></translation>
+        <translation>Questa build insider richiede un certificato speciale GREAT_PATREON, PERSONAL-HUGE o CONTRIBUTOR.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="139"/>
         <source>This is a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;exclusive Insider build&lt;/a&gt; of Sandboxie-Plus it is only available to &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon Supporters&lt;/a&gt; on higher tiers as well as to project contributors and owners of a HUGE supporter certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Questa è una &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;build insider esclusiva&lt;/a&gt; di Sandboxie Plus disponibile solamente per i &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;sostenitori Patreon&lt;/a&gt; dei livelli più alti, ai contributori del progetto, e ai possessori di un certificato di supporto HUGE.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="145"/>
         <source>The installed supporter certificate allows for &lt;b&gt;%1 seats&lt;/b&gt; to be active.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Il certificato di supporto installato consente &lt;b&gt;%1 attivazioni&lt;/b&gt; al massimo.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="147"/>
         <source>&lt;b&gt;There seems to be however %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
-        <oldsource>&lt;b&gt;There seams to be howeever %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Forse migliorabile, ma non troppo</translatorcomment>
+        <translation type="unfinished">&lt;b&gt;Tuttavia, sembra che ci siano %1 istanze di Sandboxie Plus nella rete in uso, &lt;font color=&apos;red&apos;&gt;si prega di ottenere ulteriori &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;certificati di supporto&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="154"/>
@@ -5543,7 +5613,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Views/TraceView.cpp" line="299"/>
         <source>Trace</source>
-        <translation>Tracciamento</translation>
+        <translation>Traccia</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="300"/>
@@ -5558,7 +5628,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Views/TraceView.cpp" line="312"/>
         <source>Show Stack Trace</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra traccia di stack</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="317"/>
@@ -5568,22 +5638,24 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Views/TraceView.cpp" line="330"/>
         <source>Auto Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Scorrimento automatico</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="336"/>
         <source>Cleanup Trace Log</source>
+        <translatorcomment>Sostituibile con &quot;log di traccia&quot;, tuttavia &quot;log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
         <translation>Pulisci log di accesso</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="382"/>
         <source>To use the stack traces feature the DbgHelp.dll and SymSrv.dll are required, do you want to download and install them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Per usare la funzione di traccia dello stack sono richiesti i file DbgHelp.dll e SymSrv.dll, si desidera scaricarli e installarli?</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="707"/>
         <source>Save trace log to file</source>
-        <translation>Salva log su file</translation>
+        <translatorcomment>Sostituibile con &quot;log di traccia&quot;, tuttavia &quot;log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
+        <translation>Salva log di accesso su file</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="713"/>
@@ -5593,7 +5665,8 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Views/TraceView.cpp" line="733"/>
         <source>Saving TraceLog...</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Sostituibile con &quot;log di traccia&quot;, tuttavia &quot;log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
+        <translation>Salvataggio del log di accesso...</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -5678,6 +5751,13 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <source>Enable Windows Filtering Platform (WFP) support</source>
         <translation type="vanished">Attiva il supporto alla piattaforma di filtraggio di Windows (WFP)</translation>
+    </message>
+</context>
+<context>
+    <name>CWizardEngine</name>
+    <message>
+        <source>_Shadow</source>
+        <translation type="obsolete">_Shadow</translation>
     </message>
 </context>
 <context>
@@ -6431,14 +6511,19 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation>Impedisci ai programmi in esecuzione nell&apos;area virtuale (installati sul sistema host) di caricare file DLL</translation>
     </message>
     <message>
+        <location filename="Forms/OptionsWindow.ui" line="294"/>
+        <source>Partially checked means prevent box removal but not content deletion.</source>
+        <translation>La selezione parziale impedisce la rimozione dell&apos;area virtuale, ma non la cancellazione del contenuto.</translation>
+    </message>
+    <message>
         <location filename="Forms/OptionsWindow.ui" line="1300"/>
         <source>Dlls &amp;&amp; Extensions</source>
-        <translation type="unfinished"></translation>
+        <translation>DLL ed estensioni</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1349"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrizione</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1357"/>
@@ -6450,7 +6535,8 @@ In questo modo si impedisce che i processi dannosi all&apos;interno dell&apos;ar
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1381"/>
         <source>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the addon manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Segnalare eventuali errori di inglese direttamente all&apos;autore di Sandboxie Plus</translatorcomment>
+        <translation type="unfinished">La funzionalità di Sandboxie può essere migliorata utilizzando delle DLL facoltative che possono essere caricate all&apos;avvio in ogni processo dell&apos;area virtuale tramite il file SbieDll.dll. La gestione dei componenti aggiuntivi nelle impostazioni globali offre un paio di utili estensioni che, una volta installate, possono essere attivate qui per l&apos;area virtuale corrente.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1427"/>
@@ -6861,6 +6947,7 @@ Nota: le impostazioni dei programmi e delle cartelle forzate nell&apos;area virt
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4242"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
+        <translatorcomment>Sostituibile con &quot;log di traccia&quot;, tuttavia &quot;log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
         <translation>Registra tutti i SetError nel log di accesso (genera molto output)</translation>
     </message>
     <message>
@@ -6881,6 +6968,7 @@ Nota: le impostazioni dei programmi e delle cartelle forzate nell&apos;area virt
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4167"/>
         <source>Log Debug Output to the Trace Log</source>
+        <translatorcomment>Sostituibile con &quot;log di traccia&quot;, tuttavia &quot;log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
         <translation>Registra output di debug nel log di accesso</translation>
     </message>
     <message>
@@ -7091,11 +7179,6 @@ I seguenti valori sono specifici per l&apos;utente e salvati a livello globale p
         <location filename="Forms/OptionsWindow.ui" line="4566"/>
         <source>Screen Readers: JAWS, NVDA, Window-Eyes, System Access</source>
         <translation>Screen reader: JAWS, NVDA, Window-Eyes, System Access</translation>
-    </message>
-    <message>
-        <location filename="Forms/OptionsWindow.ui" line="294"/>
-        <source>Partially checked means prevent box removal but not content deletion.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="619"/>
@@ -7561,11 +7644,8 @@ area virtuale</translation>
         <translation>Mostra icone in rilievo per le aree virtuali e i processi</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="835"/>
-        <location filename="Forms/SettingsWindow.ui" line="956"/>
-        <source>Interface Options</source>
-        <oldsource>Display Options</oldsource>
-        <translation type="unfinished">Opzioni di visualizzazione</translation>
+        <source>Display Options</source>
+        <translation type="vanished">Opzioni di visualizzazione</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1076"/>
@@ -7695,12 +7775,12 @@ area virtuale</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="327"/>
         <source>Sandboxie may be issue &lt;a href=&quot;sbie://docs/sbiemessages&quot;&gt;SBIE Messages&lt;/a&gt; to the Message Log and shown them as Popups. Some messages are informational and notify of a common, or in some cases special, event that has occurred, other messages indicate an error condition.&lt;br /&gt;You can hide selected SBIE messages from being popped up, using the below list:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie potrebbe generare i &lt;a href=&quot;sbie://docs/sbiemessages&quot;&gt;Messaggi SBIE&lt;/a&gt; nel log dei messaggi e mostrarli come popup. Alcuni messaggi sono informativi e notificano un evento comune, o in alcuni casi speciale, che si è verificato, mentre altri indicano una condizione di errore.&lt;br /&gt;Tramite l&apos;elenco in basso, è possibile indicare i messaggi SBIE da non mostrare come popup:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="340"/>
         <source>Disable SBIE messages popups (they will still be logged to the Messages tab)</source>
-        <translation type="unfinished"></translation>
+        <translation>Disattiva le notifiche popup dei messaggi SBIE (verranno comunque registrati nella scheda Messaggi)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="527"/>
@@ -7711,12 +7791,12 @@ area virtuale</translation>
         <location filename="Forms/SettingsWindow.ui" line="946"/>
         <source>Hide Sandboxie&apos;s own processes from the task list</source>
         <oldsource>Hide sandboxie&apos;s own processes from the task list</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Nascondi i processi di Sandboxie dalla lista dei task</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1096"/>
         <source>Ini Editor Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Font dell&apos;editor</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1033"/>
@@ -7726,118 +7806,122 @@ area virtuale</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="979"/>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona font</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="989"/>
         <source>Reset font</source>
-        <translation type="unfinished"></translation>
+        <translation>Reimposta font</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1069"/>
         <source>Ini Options</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Qui ho forzato di proposito un ritorno a capo per ragioni di lunghezza</translatorcomment>
+        <translation type="unfinished">Opzioni editor di&lt;br /&gt;configurazione globale</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1119"/>
         <source>#</source>
-        <translation type="unfinished"></translation>
+        <translation>#</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1156"/>
         <source>External Ini Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor esterno</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1173"/>
         <source>Addons Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestione componenti aggiuntivi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1183"/>
         <source>Optional Addons</source>
-        <translation type="unfinished"></translation>
+        <translation>Componenti aggiuntivi facoltativi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1191"/>
         <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of addons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie Plus offre numerose opzioni e un supporto ad una vasta gamma di estensioni. In questa pagina, è possibile configurare l&apos;integrazione di componenti aggiuntivi, plugin, e altri componenti di terze parti. I componenti facoltativi possono essere scaricati dal web, e l&apos;installazione di alcuni potrebbe richiedere privilegi di amministratore.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1227"/>
         <source>Status</source>
-        <translation type="unfinished">Stato</translation>
+        <translation>Stato</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1232"/>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Versione</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1237"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrizione</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1245"/>
         <source>&lt;a href=&quot;sbie://addons&quot;&gt;update addon list now&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://addons&quot;&gt;aggiorna la lista dei componenti aggiuntivi&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1255"/>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Installa</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1279"/>
         <source>Sandboxie Support</source>
-        <translation type="unfinished"></translation>
+        <translation>Supporto Sandboxie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1411"/>
         <source>Sandboxie Updater</source>
-        <translation type="unfinished"></translation>
+        <translation>Updater Sandboxie</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1442"/>
         <source>Keep addon list up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>Mantieni aggiornata la lista dei componenti aggiuntivi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1456"/>
         <source>Update Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni aggiornamento</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1497"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il canale insider offre accesso anticipato alle nuove funzionalità e risoluzioni di bug che saranno successivamente rilasciate al pubblico, in aggiunta a tutti i miglioramenti rilevanti dal canale stabile.
+A differenza del canale di anteprima, non contiene modifiche non testate, potenzialmente problematiche o sperimentali che potrebbero non essere pronte per l&apos;uso comune.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1501"/>
         <source>Search in the Insider channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerca nel canale insider</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1548"/>
         <source>Check periodically for new Sandboxie-Plus versions</source>
-        <translation type="unfinished"></translation>
+        <translation>Controlla periodicamente gli aggiornamenti di Sandboxie Plus</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1558"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Frasi più lunghe non entrano</translatorcomment>
+        <translation>Info sul &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;canale insider&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1578"/>
         <source>Keep Troubleshooting scripts up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>Mantieni aggiornati gli script per la risoluzione problemi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1614"/>
         <source>Update Check Interval</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Frasi più lunghe non entrano</translatorcomment>
+        <translation>Controlla ogni:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1728"/>
@@ -7868,6 +7952,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SettingsWindow.ui" line="813"/>
         <source>Use a Page Tree in the Box Options instead of Nested Tabs *</source>
         <translation>Usa una struttura ad albero nelle opzioni dell&apos;area virtuale invece di schede annidate *</translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="835"/>
+        <location filename="Forms/SettingsWindow.ui" line="956"/>
+        <source>Interface Options</source>
+        <translation>Opzioni di interfaccia</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="866"/>
@@ -8059,7 +8149,7 @@ in modo diverso a seconda dell&apos;interfaccia di visualizzazione.</translation
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1815"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished">Usa autenticazione di Sandboxie invece di un token anonimo</translation>
+        <translation>Usa autenticazione di Sandboxie invece di un token anonimo</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1851"/>

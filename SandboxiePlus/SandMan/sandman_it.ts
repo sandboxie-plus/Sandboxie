@@ -7842,7 +7842,7 @@ area virtuale</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1191"/>
         <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of addons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
-        <translation>Sandboxie Plus offre numerose opzioni e un supporto ad una vasta gamma di estensioni. In questa pagina, è possibile configurare l&apos;integrazione di componenti aggiuntivi, plugin, e altri componenti di terze parti. I componenti facoltativi possono essere scaricati dal web, e l&apos;installazione di alcuni potrebbe richiedere privilegi di amministratore.</translation>
+        <translation>Sandboxie Plus offre numerose opzioni e un supporto ad una vasta gamma di estensioni. In questa pagina, è possibile configurare l&apos;integrazione di componenti aggiuntivi, plugin, e altri componenti di terze parti. I componenti facoltativi possono essere scaricati dal Web, e l&apos;installazione di alcuni potrebbe richiedere privilegi di amministratore.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1227"/>

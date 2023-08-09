@@ -256,8 +256,9 @@ LONG SbieApi_RenameFile(
 SBIEAPI_EXPORT
 LONG SbieApi_GetFileName(
     HANDLE FileHandle,
-    ULONG NameLen,
-    WCHAR *NameBuf);
+    WCHAR *NameBuf,
+    ULONG *NameLen,
+    ULONG *ObjType);
 
 //SBIEAPI_EXPORT
 LONG SbieApi_OpenFile(

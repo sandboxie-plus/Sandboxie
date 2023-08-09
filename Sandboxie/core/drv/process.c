@@ -38,6 +38,7 @@
 #include "thread.h"
 #include "wfp.h"
 #include "common/my_version.h"
+#define KERNEL_MODE
 #include "verify.h"
 
 

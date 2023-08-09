@@ -1550,9 +1550,21 @@ void CSettingsWindow::OnLoadAddon()
 				pItem->setText(1, tr("Installed"));
 		}
 		pItem->setText(2, pAddon->Data["version"].toString());
-		pItem->setText(3, pAddon->GetLocalizedEntry("description"));
+		QString Maker = pAddon->Data["maintainer"].toString();
+		if(!Maker.isEmpty())
+			pItem->setToolTip(2, tr("by %1").arg(Maker));
+		//pItem->setText(3, );
 
 		ui.treeAddons->addTopLevelItem(pItem);
+
+		QString Info = pAddon->GetLocalizedEntry("description");
+
+		QString infoUrl = pAddon->Data["infoUrl"].toString();
+		if (!infoUrl.isEmpty()) Info += " <a href=\"" + infoUrl + "\">" + tr("(info website)") + "</a>";
+		QLabel* pLabel = new QLabel(Info);
+		//pLabel->setToolTip(tr("by %1").arg(pAddon->Data["maintainer"].toString()));
+		connect(pLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+		ui.treeAddons->setItemWidget(pItem, 3, pLabel);
 	}
 }
 

@@ -753,7 +753,7 @@ _FX WCHAR *File_TranslateDosToNtPath2(const WCHAR *DosPath)
                     if (File_DriveAddSN && *drive->sn) {
 
                         //
-                        // if the volume serial numbers dont match return NULL
+                        // if the volume serial numbers don't match return NULL
                         //
 
                         if (_wcsnicmp(DosPath + 2, drive->sn, 9) != 0) {

@@ -1868,8 +1868,12 @@ void CSbieView::UpdateStartMenu(CSandBoxPlus* pBoxEx)
 		QMenu* pMenu = GetMenuFolder(Link.Folder, m_pMenuRunStart, m_MenuFolders);
 
 		QAction* pAction = pMenu->addAction(Link.Name, this, SLOT(OnSandBoxAction()));
-		QIcon Icon = LoadWindowsIcon(Link.Icon, Link.IconIndex);
-		if(Icon.isNull()) Icon = m_IconProvider.icon(QFileInfo(Link.Target));
+		QIcon Icon;
+		if (!Link.Icon.isEmpty()) 
+			Icon = LoadWindowsIcon(Link.Icon, Link.IconIndex);
+		else if (Link.Target.contains("://")) 
+			Icon = theGUI->GetIcon("Internet");
+		if (Icon.isNull()) Icon = m_IconProvider.icon(QFileInfo(Link.Target));
 		pAction->setIcon(Icon);
 		QString Command;
 		if(Link.Target.contains(" "))
@@ -1879,7 +1883,7 @@ void CSbieView::UpdateStartMenu(CSandBoxPlus* pBoxEx)
 		if(!Link.Arguments.isEmpty())
 			Command += " " + Link.Arguments;
 		pAction->setData(Command);
-		pAction->setProperty("Icon", Link.Icon.isEmpty() ? pBoxEx->GetCommandFile(Command) : Link.Icon);
+		if(!Link.Icon.isEmpty()) pAction->setProperty("Icon", Link.Icon);
 		pAction->setProperty("IconIndex", Link.IconIndex);
 		pAction->setProperty("WorkingDir", Link.WorkDir);
 	}
@@ -1909,12 +1913,16 @@ void CSbieView::UpdateRunMenu(const CSandBoxPtr& pBox)
 
 		StrPair FileIndex = Split2(Entry["Icon"].toString(), ",", true);
 
+		QString CmdFile = pBoxEx->GetCommandFile(Entry["Command"].toString());
+
 		QString IconFile;
 		int IconIndex = 0;
-		if (FileIndex.first.isEmpty())
-			IconFile = pBoxEx->GetCommandFile(Entry["Command"].toString());
+		if (FileIndex.first.isEmpty()) {
+			if (!CmdFile.contains("://"))
+				IconFile = CmdFile;
+		}
 		else if (FileIndex.second.isEmpty()) {
-			IconFile = pBoxEx->GetCommandFile(Entry["Command"].toString());
+			IconFile = CmdFile;
 			IconIndex = FileIndex.first.toInt();
 		}
 		else {
@@ -1923,7 +1931,13 @@ void CSbieView::UpdateRunMenu(const CSandBoxPtr& pBox)
 		}
 
 		QAction* pAction = pMenu->addAction(FolderName.second, this, SLOT(OnSandBoxAction()));
-		pAction->setIcon(LoadWindowsIcon(IconFile, IconIndex));
+		QIcon Icon;
+		if (!IconFile.isEmpty()) 
+			Icon = LoadWindowsIcon(IconFile, IconIndex);
+		else if (CmdFile.contains("://"))
+			Icon = theGUI->GetIcon("Internet");
+		if (Icon.isNull()) Icon = m_IconProvider.icon(QFileInfo(CmdFile));
+		pAction->setIcon(Icon);
 		pAction->setData(Entry["Command"].toString());
 		pAction->setProperty("Icon", IconFile);
 		pAction->setProperty("IconIndex", IconIndex);

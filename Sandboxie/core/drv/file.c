@@ -2127,107 +2127,115 @@ _FX NTSTATUS File_Api_Rename(PROCESS *proc, ULONG64 *parms)
 _FX NTSTATUS File_Api_GetName(PROCESS *proc, ULONG64 *parms)
 {
     API_GET_FILE_NAME_ARGS *args = (API_GET_FILE_NAME_ARGS *)parms;
-    FILE_OBJECT *object;
+    void *object;
     NTSTATUS status;
 
     status = ObReferenceObjectByHandle(
-        args->handle.val, 0, *IoFileObjectType, UserMode, &object, NULL);
-
-    if (NT_SUCCESS(status)) {
-
-        /*DbgPrint("Handle %08X DeviceObject %08X (Type %08X) ObjectName=<%*.*S>\n",
-            args->handle.val, object->DeviceObject,
-            object->DeviceObject ? object->DeviceObject->DeviceType : -1,
-            object->FileName.Length / sizeof(WCHAR), object->FileName.Length / sizeof(WCHAR), object->FileName.Buffer);*/
-
-        if (    (! object->DeviceObject)
-            ||  (! object->FileName.Length)
-            ||  (! object->FileName.Buffer)) {
-
-            ObDereferenceObject(object);
-            status = STATUS_BAD_DEVICE_TYPE;
-        }
-    }
+        args->handle.val, 0, NULL, UserMode, &object, NULL);
 
     if (NT_SUCCESS(status)) {
 
         POOL *pool = proc ? proc->pool : Driver_Pool;
         OBJECT_NAME_INFORMATION *Name = NULL;
         ULONG NameLength, len;
-        WCHAR *user;
+        WCHAR *name_buf;
+        ULONG *name_len;
+        WCHAR *type_buf;
 
         __try {
 
-            if (object->DeviceObject->DeviceType == FILE_DEVICE_DISK) {
+            void *object2 = object;
+            wchar_t* fileName_Buffer = NULL;
+            ULONG fileName_Length = 0;
 
-                //
-                // normal case for a file on a disk
-                //
+            POBJECT_TYPE objectType = pObGetObjectType(object);
+            if (*IoFileObjectType == objectType) {
 
-                status = Obj_GetName(pool, object, &Name, &NameLength);
-                if (NT_SUCCESS(status) && (Name == &Obj_Unnamed)) {
-                    Name = NULL;
-                    status = STATUS_OBJECT_PATH_NOT_FOUND;
-                }
+                FILE_OBJECT* fileObject = (FILE_OBJECT*)object;
+                if (fileObject->DeviceObject->DeviceType != FILE_DEVICE_DISK) {
 
-                if (NT_SUCCESS(status)) {
+                    object2 = fileObject->DeviceObject;
 
-                    len = Name->Name.Length
-                        + sizeof(WCHAR) * 2;  // null padding
-                    if (len > args->name_len.val)
-                        status = STATUS_BUFFER_TOO_SMALL;
-                    else {
+                    if (fileObject->FileName.Buffer && fileObject->DeviceObject->DeviceType != FILE_DEVICE_CONSOLE) {
 
-                        user = args->name_buf.val;
-                        ProbeForWrite(user, len, sizeof(WCHAR));
+                        fileName_Buffer = fileObject->FileName.Buffer;
+                        fileName_Length = fileObject->FileName.Length;
 
-                        memcpy(user, Name->Name.Buffer, Name->Name.Length);
-                        user += Name->Name.Length / sizeof(WCHAR);
-                        *user = L'\0';
+                        if (fileObject->DeviceObject->DeviceType == FILE_DEVICE_NETWORK_FILE_SYSTEM) {
 
-                        status = STATUS_SUCCESS;
+                            //
+                            // strip \;Q:000000000000b09f prefix 
+                            //
 
-                        //DbgPrint("Result DISK:  %S\n", args->name_buf.val);
+                            if (fileName_Buffer[1] == L';') {
+                                wchar_t* ptr = wcschr(fileName_Buffer + 2, L'\\');
+                                if (ptr) {
+                                    fileName_Length -= (ULONG)(ptr - fileName_Buffer);
+                                    fileName_Buffer = ptr;
+                                }
+                            }
+                        }
                     }
                 }
+            }
 
-            } else {
+            type_buf = args->type_buf.val;
+            if (type_buf) {
 
-                //
-                // not file or not on disk
-                //
+                len = objectType->Name.Length + sizeof(WCHAR);
 
-                status = Obj_GetName(
-                    pool, object->DeviceObject, &Name, &NameLength);
-                if (NT_SUCCESS(status) && (Name == &Obj_Unnamed)) {
-                    Name = NULL;
-                    status = STATUS_OBJECT_PATH_NOT_FOUND;
+                ProbeForWrite(type_buf, len, sizeof(WCHAR));
+
+                memcpy(type_buf, objectType->Name.Buffer, objectType->Name.Length);
+                type_buf += objectType->Name.Length / sizeof(wchar_t);
+                *type_buf = L'\0';
+            }
+
+            name_buf = args->name_buf.val;
+            name_len = args->name_len.val;
+            if (!name_buf || !name_len)
+                __leave;
+
+            status = Obj_GetName(pool, object2, &Name, &NameLength);
+            if (NT_SUCCESS(status) && (Name == &Obj_Unnamed)) {
+                Name = NULL;
+            //    status = STATUS_OBJECT_PATH_NOT_FOUND;
+            }
+
+            if (NT_SUCCESS(status)) {
+
+                len = sizeof(WCHAR);
+                if (Name) {
+                    len += Name->Name.Length;
+                    if (fileName_Buffer)
+                        len += fileName_Length;
                 }
 
-                if (NT_SUCCESS(status)) {
+                ProbeForWrite(name_len, sizeof(ULONG), sizeof(ULONG));
 
-                    len = Name->Name.Length
-                        + object->FileName.Length
-                        + sizeof(WCHAR) * 2;  // null padding
-                    if (len > args->name_len.val)
-                        status = STATUS_BUFFER_TOO_SMALL;
-                    else {
+                if (len > *name_len)
+                    status = STATUS_BUFFER_TOO_SMALL;
+                else {
 
-                        user = args->name_buf.val;
-                        ProbeForWrite(user, len, sizeof(WCHAR));
+                    ProbeForWrite(name_buf, len, sizeof(WCHAR));
 
-                        memcpy(user, Name->Name.Buffer, Name->Name.Length);
-                        user += Name->Name.Length / sizeof(WCHAR);
-                        memcpy(user, object->FileName.Buffer,
-                                     object->FileName.Length);
-                        user += object->FileName.Length / sizeof(WCHAR);
-                        *user = L'\0';
-
-                        status = STATUS_SUCCESS;
-
-                        //DbgPrint("Result MISC:  %S\n", args->name_buf.val);
+                    if (Name) {
+                        memcpy(name_buf, Name->Name.Buffer, Name->Name.Length);
+                        name_buf += Name->Name.Length / sizeof(WCHAR);
+                        if (fileName_Buffer) {
+                            memcpy(name_buf, fileName_Buffer, fileName_Length);
+                            name_buf += fileName_Length / sizeof(WCHAR);
+                        }
                     }
+                    *name_buf = L'\0';
+
+                    status = STATUS_SUCCESS;
+
+                    //DbgPrint("Result %d:  %S\n", object->DeviceObject->DeviceType, name_buf);
+                    //DbgPrint("Result %d:  %S | %S\n", object->DeviceObject->DeviceType, Name->Name.Buffer, object->FileName.Buffer);
                 }
+
+                *name_len = len;
             }
 
         } __except (EXCEPTION_EXECUTE_HANDLER) {

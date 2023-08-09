@@ -3,13 +3,25 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.10.3 / 5.65.3] - 2023-08-??
+
+## [1.10.4 / 5.65.4] - 2023-08-??
+
+### Fixed
+- fixed Sandboxie-Plus-x64-v1.10.3 crash on startup [#3174](https://github.com/sandboxie-plus/Sandboxie/issues/3174)
+- fixed issue with buttons not translated in the wizards [#3133](https://github.com/sandboxie-plus/Sandboxie/issues/3133)
+
+
+
+## [1.10.3 / 5.65.3] - 2023-08-06
 
 ### Added
-- added display of URL shortcut files in Run Menu [#3151](https://github.com/sandboxie-plus/Sandboxie/issues/3151)
+- added support for URL shortcut files in Run Menu [#3151](https://github.com/sandboxie-plus/Sandboxie/issues/3151)
+- added workaround for NtQueryObject locking up in exotic scenarios, to enable it use 'UseDriverObjLookup=y'
+- Addon Manager: added tooltip to version column with maintainer information [#3167](https://github.com/sandboxie-plus/Sandboxie/issues/3167)
+- added mechanism to open websites for addons [#3166](https://github.com/sandboxie-plus/Sandboxie/issues/3166)
 
 ### Changed
-- improved business certificate handling
+- improved business certificate handling, added usage count and machine bound options
 
 ### Fixed
 - fixed issues with pinned shortcuts
@@ -52,7 +64,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - reworked NT Object Handle handling
-- "OpenClipboard=n" now is also implemented in user mode, making it work for green boxes
+- "OpenClipboard=n" now is also implemented in user mode, making it work for compartment boxes
 - changed Delete V2 scheme to use drive letters in FilePaths.dat (remains backward compatible with using NT paths) [#3053](https://github.com/sandboxie-plus/Sandboxie/issues/3053)
 - improved robustness of snapshot merging [#3017](https://github.com/sandboxie-plus/Sandboxie/issues/3017)
 
@@ -73,6 +85,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with Delete V2 when using network shares
 - fixed issue when using "UseVolumeSerialNumbers=y" with accessing drive roots
 - fixed remove snapshot resurrects deleted files when using Delete V2 [#3015](https://github.com/sandboxie-plus/Sandboxie/issues/3015)
+
+### Removed
+- removed template support for Internet Download Manager [#991](https://github.com/sandboxie-plus/Sandboxie/issues/991#issuecomment-1646582375)
 
 
 

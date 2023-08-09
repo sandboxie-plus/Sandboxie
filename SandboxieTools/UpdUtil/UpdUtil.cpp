@@ -825,7 +825,7 @@ std::shared_ptr<SAddon> ReadAddon(const JSONObject& addon, const std::wstring& c
 
 	for (auto I = addon.begin(); I != addon.end(); ++I) {
 		if (I->first.find(L'-') != std::wstring::npos)
-			continue; // skip all entries containting "-"
+			continue; // skip all entries containing "-"
 		pAddon->Data.insert(*I);
 	}
 
@@ -1037,7 +1037,7 @@ int RemoveAddon(std::shared_ptr<SAddon> pAddon, const std::wstring& base_dir)
 	{
 		std::wstring cmdLine = ReadRegistryStringValue(pAddon->UninstallKey, L"UninstallString");
 		if(cmdLine.empty()) // when the expected uninstall key is not present,
-			return ret; // then seams addon was already uninstalled
+			return ret; // then it seems the addon was already uninstalled
 
 		STARTUPINFO si = { sizeof(si), 0 };
 		PROCESS_INFORMATION pi = { 0 };
@@ -1453,7 +1453,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 
 		//
-		// load addons apropriate for the current installation
+		// load addons appropriate for the current installation
 		//
 
 		std::shared_ptr<TAddonMap> pAddons;
@@ -1507,12 +1507,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 					if (!I->second->IsDefault)
 						continue;
 
-					// dont add default addons marked to be removed
+					// don't add default addons marked to be removed
 					auto F = std::find(remove_addons.begin(), remove_addons.end(), I->first);
 					if (F != remove_addons.end())
 						continue;
 
-					// dont add already added addons
+					// don't add already added addons
 					F = std::find(add_addons.begin(), add_addons.end(), I->first);
 					if (F != add_addons.end())
 						continue;

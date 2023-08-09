@@ -131,7 +131,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - clexanis, Mmoi-Fr, hippalectryon-0, Monsieur Pissou - French (provided by email)
 - bastik-1001, APMichael - German
 - timinoun - Hungarian (provided by email)
-- isaak654 - Italian
+- isaak654, DerivativeOfLog7 - Italian
 - VenusGirl - Korean
 - 7zip - Polish ([provided separately](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=20))
 - JNylson - Portuguese and Brazilian Portuguese

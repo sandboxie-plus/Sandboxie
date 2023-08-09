@@ -45,12 +45,14 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="252"/>
-        <source>Updater failed to perform plugin operation</source>
+        <source>Updater failed to perform addon operation</source>
+        <oldsource>Updater failed to perform plugin operation</oldsource>
         <translation>Il programma di aggiornamento non è riuscito a eseguire un&apos;operazione del componente aggiuntivo</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="254"/>
-        <source>Updater failed to perform plugin operation, error: %1</source>
+        <source>Updater failed to perform addon operation, error: %1</source>
+        <oldsource>Updater failed to perform plugin operation, error: %1</oldsource>
         <translation>Il programma di aggiornamento non è riuscito a eseguire un&apos;operazione del componente aggiuntivo, errore: %1</translation>
     </message>
     <message>
@@ -593,7 +595,7 @@ Si prega di consultare la directory del profilo utente corretta.</translation>
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
 
 You can click Finish to close this wizard.</source>
-        <translatorcomment>&quot;Chiudere questa procedura guidata&quot; non sono sicuro suoni bene</translatorcomment>
+        <translatorcomment>Tenere presente che l&apos;espressione &quot;concludere la procedura guidata&quot; ricorre anche altrove nella traduzione</translatorcomment>
         <translation>Grazie per aver utilizzato la procedura di risoluzione problemi per Sandboxie Plus. Ci scusiamo per eventuali problemi riscontrati durante il processo. Se si hanno ulteriori domande o si necessita di ulteriore assistenza, non esitare a contattarci. Siamo qui per aiutare. Grazie per la comprensione e la cooperazione.
 
 Clicca su Fine per concludere la procedura guidata.</translation>
@@ -2391,37 +2393,37 @@ A differenza del canale di anteprima, non contiene modifiche non testate, potenz
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="701"/>
+        <location filename="SbiePlusAPI.cpp" line="703"/>
         <source>Disabled</source>
         <translation>Disattivata</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="712"/>
+        <location filename="SbiePlusAPI.cpp" line="714"/>
         <source>OPEN Root Access</source>
         <translation>Accesso root APERTO</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="714"/>
+        <location filename="SbiePlusAPI.cpp" line="716"/>
         <source>Application Compartment</source>
         <translation>Compartimento applicazioni</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="716"/>
+        <location filename="SbiePlusAPI.cpp" line="718"/>
         <source>NOT SECURE</source>
         <translation>NON SICURA</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="718"/>
+        <location filename="SbiePlusAPI.cpp" line="720"/>
         <source>Reduced Isolation</source>
         <translation>Isolamento ridotto</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="720"/>
+        <location filename="SbiePlusAPI.cpp" line="722"/>
         <source>Enhanced Isolation</source>
         <translation>Isolamento avanzato</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="723"/>
+        <location filename="SbiePlusAPI.cpp" line="725"/>
         <source>Privacy Enhanced</source>
         <translation>Privacy avanzata</translation>
     </message>
@@ -2430,32 +2432,32 @@ A differenza del canale di anteprima, non contiene modifiche non testate, potenz
         <translation type="vanished">API Log</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="727"/>
+        <location filename="SbiePlusAPI.cpp" line="729"/>
         <source>No INet (with Exceptions)</source>
         <translation>No Internet (con eccezioni)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="729"/>
+        <location filename="SbiePlusAPI.cpp" line="731"/>
         <source>No INet</source>
         <translation>No Internet</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="732"/>
+        <location filename="SbiePlusAPI.cpp" line="734"/>
         <source>Net Share</source>
         <translation>Condivisione di rete</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="734"/>
+        <location filename="SbiePlusAPI.cpp" line="736"/>
         <source>No Admin</source>
         <translation>No Admin</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="737"/>
+        <location filename="SbiePlusAPI.cpp" line="739"/>
         <source>Auto Delete</source>
         <translation>Autoelimina contenuto</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="740"/>
+        <location filename="SbiePlusAPI.cpp" line="742"/>
         <source>Normal</source>
         <translation>Normale</translation>
     </message>
@@ -3986,37 +3988,37 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
 <context>
     <name>CSbieTemplatesEx</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1127"/>
+        <location filename="SbiePlusAPI.cpp" line="1129"/>
         <source>Failed to initialize COM</source>
         <translation>Impossibile inizializzare il componente COM</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1133"/>
+        <location filename="SbiePlusAPI.cpp" line="1135"/>
         <source>Failed to create update session</source>
         <translation>Impossibile creare una sessione di aggiornamento</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1139"/>
+        <location filename="SbiePlusAPI.cpp" line="1141"/>
         <source>Failed to create update searcher</source>
         <translation>Impossibile creare l&apos;interfaccia di ricerca</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1145"/>
+        <location filename="SbiePlusAPI.cpp" line="1147"/>
         <source>Failed to set search options</source>
         <translation>Impossibile impostare le opzioni di ricerca</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1153"/>
+        <location filename="SbiePlusAPI.cpp" line="1155"/>
         <source>Failed to search for updates</source>
         <translation>Ricerca aggiornamenti fallita</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1159"/>
+        <location filename="SbiePlusAPI.cpp" line="1161"/>
         <source>Failed to retrieve update list from search result</source>
         <translation>Impossibile scaricare la lista di aggiornamenti dal risultato di ricerca</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1166"/>
+        <location filename="SbiePlusAPI.cpp" line="1168"/>
         <source>Failed to get update count</source>
         <translation>Impossibile ottenere il numero di aggiornamenti</translation>
     </message>
@@ -4924,68 +4926,79 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
         <translation>Installato</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1578"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1555"/>
+        <source>by %1</source>
+        <translatorcomment>Si tratta di un tooltip, perciò non ci sono problemi di lunghezza</translatorcomment>
+        <translation>componente sviluppato da %1</translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1563"/>
+        <source>(info website)</source>
+        <translation>(info sito web)</translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1590"/>
         <source>This Addon is mandatory and can not be removed.</source>
         <translation>Questo componente aggiuntivo è necessario e non può essere rimosso.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1587"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1733"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1599"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1745"/>
         <source>Select Directory</source>
         <translation>Seleziona directory</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1616"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1628"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Controlla ora&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1693"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1705"/>
         <source>Please enter the new configuration password.</source>
         <translation>Immettere la nuova password di configurazione.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1697"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1709"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Reimmettere la nuova password di configurazione.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1702"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1714"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Le password non corrispondono, si prega di riprovare.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1714"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1726"/>
         <source>Process</source>
         <translation>Processo</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1714"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1726"/>
         <source>Folder</source>
         <translation>Cartella</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1724"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1736"/>
         <source>Please enter a program file name</source>
         <translation>Immettere il nome del programma (es. nomefile.exe)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1792"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1804"/>
         <source>Please enter the template identifier</source>
         <translation>Inserire l&apos;identificativo del modello</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1800"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1812"/>
         <source>Error: %1</source>
         <translation>Errore: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1825"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1837"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>Eliminare i modelli locali selezionati?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2032"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2044"/>
         <source>%1 (Current)</source>
         <translation>%1 (Attuale)</translation>
     </message>
@@ -5317,6 +5330,7 @@ Se si è già un Great Supporter su Patreon, Sandboxie può verificare la presen
     <message>
         <location filename="Windows/SupportDialog.cpp" line="147"/>
         <source>&lt;b&gt;There seems to be however %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
+        <translatorcomment>Forse migliorabile, ma non troppo</translatorcomment>
         <translation type="unfinished">&lt;b&gt;Tuttavia, sembra che ci siano %1 istanze di Sandboxie Plus nella rete in uso, &lt;font color=&apos;red&apos;&gt;si prega di ottenere ulteriori &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;certificati di supporto&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
@@ -6513,6 +6527,7 @@ In questo modo si impedisce che i processi dannosi all&apos;interno dell&apos;ar
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1381"/>
         <source>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the addon manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</source>
+        <translatorcomment>Segnalare eventuali errori di inglese direttamente all&apos;autore di Sandboxie Plus</translatorcomment>
         <translation type="unfinished">La funzionalità di Sandboxie può essere migliorata utilizzando delle DLL facoltative che possono essere caricate all&apos;avvio in ogni processo dell&apos;area virtuale tramite il file SbieDll.dll. La gestione dei componenti aggiuntivi nelle impostazioni globali offre un paio di utili estensioni che, una volta installate, possono essere attivate qui per l&apos;area virtuale corrente.</translation>
     </message>
     <message>

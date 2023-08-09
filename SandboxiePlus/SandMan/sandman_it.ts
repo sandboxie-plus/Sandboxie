@@ -2354,7 +2354,7 @@ A differenza del canale di anteprima, non contiene modifiche non testate, potenz
         <location filename="Wizards/SetupWizard.cpp" line="602"/>
         <source>Check for latest available addons.</source>
         <oldsource>Check for latest avaialble addons.</oldsource>
-        <translation>Verifica la presenza di componenti aggiuntivi più recenti</translation>
+        <translation>Verifica la presenza di componenti aggiuntivi più recenti.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="611"/>
@@ -2513,6 +2513,7 @@ A differenza del canale di anteprima, non contiene modifiche non testate, potenz
     <message>
         <location filename="SandMan.cpp" line="1229"/>
         <source>Trace Log</source>
+        <translatorcomment>Sostituibile con &quot;Log di traccia&quot;, tuttavia &quot;Log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
         <translation>Log di accesso</translation>
     </message>
     <message>
@@ -2691,6 +2692,7 @@ A differenza del canale di anteprima, non contiene modifiche non testate, potenz
     <message>
         <location filename="SandMan.cpp" line="560"/>
         <source>Cleanup Trace Log</source>
+        <translatorcomment>Sostituibile con &quot;log di traccia&quot;, tuttavia &quot;log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
         <translation>Pulisci log di accesso</translation>
     </message>
     <message>
@@ -2724,6 +2726,7 @@ A differenza del canale di anteprima, non contiene modifiche non testate, potenz
     <message>
         <location filename="SandMan.cpp" line="576"/>
         <source>Trace Logging</source>
+        <translatorcomment>Sostituibile con &quot;log di traccia&quot;, tuttavia &quot;log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
         <translation>Attiva log di accesso</translation>
     </message>
     <message>
@@ -4765,6 +4768,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1055"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
+        <translatorcomment>Forse migliorabile</translatorcomment>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Per la build corrente, le funzioni Plus rimangono attive&lt;/font&gt;, ma non si ha più accesso ai servizi di Sandboxie Live, inclusi gli aggiornamenti di compatibilità e il database di risoluzione problemi.</translation>
     </message>
     <message>
@@ -5148,7 +5152,8 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
 Before sending, you can review the logs in the main window.</source>
         <oldsource>Select partially checked state to sends only message log but no trace log.
 Before sending you can review the logs in the main window.</oldsource>
-        <translation>Lo stato parzialmente spuntato invia unicamente il log dei messaggi, ma non il log di traccia.
+        <translatorcomment>Sostituibile con &quot;log di traccia&quot;, tuttavia &quot;log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
+        <translation>Lo stato parzialmente spuntato invia unicamente il log dei messaggi, ma non il log di accesso.
 Prima di inviare, è possibile visualizzare i log nella schermata principale.</translation>
     </message>
     <message>
@@ -5608,7 +5613,7 @@ Se si è già un Great Supporter su Patreon, Sandboxie può verificare la presen
     <message>
         <location filename="Views/TraceView.cpp" line="299"/>
         <source>Trace</source>
-        <translation>Tracciamento</translation>
+        <translation>Traccia</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="300"/>
@@ -5638,6 +5643,7 @@ Se si è già un Great Supporter su Patreon, Sandboxie può verificare la presen
     <message>
         <location filename="Views/TraceView.cpp" line="336"/>
         <source>Cleanup Trace Log</source>
+        <translatorcomment>Sostituibile con &quot;log di traccia&quot;, tuttavia &quot;log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
         <translation>Pulisci log di accesso</translation>
     </message>
     <message>
@@ -5648,7 +5654,8 @@ Se si è già un Great Supporter su Patreon, Sandboxie può verificare la presen
     <message>
         <location filename="Views/TraceView.cpp" line="707"/>
         <source>Save trace log to file</source>
-        <translation>Salva log su file</translation>
+        <translatorcomment>Sostituibile con &quot;log di traccia&quot;, tuttavia &quot;log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
+        <translation>Salva log di accesso su file</translation>
     </message>
     <message>
         <location filename="Views/TraceView.cpp" line="713"/>
@@ -5658,7 +5665,8 @@ Se si è già un Great Supporter su Patreon, Sandboxie può verificare la presen
     <message>
         <location filename="Views/TraceView.cpp" line="733"/>
         <source>Saving TraceLog...</source>
-        <translation>Salvataggio del log di traccia...</translation>
+        <translatorcomment>Sostituibile con &quot;log di traccia&quot;, tuttavia &quot;log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
+        <translation>Salvataggio del log di accesso...</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -6939,6 +6947,7 @@ Nota: le impostazioni dei programmi e delle cartelle forzate nell&apos;area virt
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4242"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
+        <translatorcomment>Sostituibile con &quot;log di traccia&quot;, tuttavia &quot;log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
         <translation>Registra tutti i SetError nel log di accesso (genera molto output)</translation>
     </message>
     <message>
@@ -6959,6 +6968,7 @@ Nota: le impostazioni dei programmi e delle cartelle forzate nell&apos;area virt
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4167"/>
         <source>Log Debug Output to the Trace Log</source>
+        <translatorcomment>Sostituibile con &quot;log di traccia&quot;, tuttavia &quot;log di accesso&quot; mi sembra più adatto per i non esperti</translatorcomment>
         <translation>Registra output di debug nel log di accesso</translation>
     </message>
     <message>

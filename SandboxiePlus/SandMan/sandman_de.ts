@@ -46,14 +46,12 @@
     <message>
         <location filename="AddonManager.cpp" line="252"/>
         <source>Updater failed to perform addon operation</source>
-        <oldsource>Updater failed to perform plugin operation</oldsource>
-        <translation type="unfinished">Updater konnte Pluginvorgang nicht durchführen</translation>
+        <translation>Updater konnte Erweiterungsvorgang nicht durchführen</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="254"/>
         <source>Updater failed to perform addon operation, error: %1</source>
-        <oldsource>Updater failed to perform plugin operation, error: %1</oldsource>
-        <translation type="unfinished">Updater konnte Pluginvorgang nicht durchführen, Fehler: %1</translation>
+        <translation>Updater konnte Erweiterungsvorgang nicht durchführen, Fehler: %1</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="174"/>

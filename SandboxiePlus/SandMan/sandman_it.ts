@@ -850,7 +850,7 @@ You can use %USER% to save each users sandbox to an own folder.</source>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="446"/>
         <source>Select issue from full list</source>
-        <translation>Seleziona problema dalla lista completa</translation>
+        <translation>Seleziona il problema dall'elenco</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="457"/>

@@ -41,6 +41,7 @@
 #include "Engine/ScriptManager.h"
 #include "AddonManager.h"
 #include "Windows/PopUpWindow.h"
+#include "CustomStyles.h"
 
 CSbiePlusAPI* theAPI = NULL;
 
@@ -126,7 +127,6 @@ CSandMan::CSandMan(QWidget *parent)
 	theGUI = this;
 
 	m_DarkTheme = false;
-	m_FusionTheme = false;
 
 	QDesktopServices::setUrlHandler("http", this, "OpenUrl");
 	QDesktopServices::setUrlHandler("https", this, "OpenUrl");
@@ -3623,7 +3623,7 @@ void CSandMan::SetUITheme()
 		int iViewMode = theConf->GetInt("Options/ViewMode", 1);
 		QApplication::setStyle(QStyleFactory::create((bDark || iViewMode == 2) ? "Windows" : m_DefaultStyle));
 	}
-	m_FusionTheme = bFusion;
+	QApplication::setStyle(new KeepSubMenusVisibleStyle(new CustomTabStyle(QApplication::style())));
 
 
 	CTreeItemModel::SetDarkMode(bDark);

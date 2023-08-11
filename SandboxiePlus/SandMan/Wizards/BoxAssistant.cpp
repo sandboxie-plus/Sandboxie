@@ -21,6 +21,7 @@
 #include "../Views/TraceView.h"
 #include "../AddonManager.h"
 
+#include "../CustomStyles.h"
 
 CBoxAssistant::CBoxAssistant(QWidget *parent)
     : QWizard(parent)

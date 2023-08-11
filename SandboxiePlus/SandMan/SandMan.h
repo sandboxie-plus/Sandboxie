@@ -477,7 +477,6 @@ public:
 	QString				m_Language;
 	quint32				m_LanguageId;
 	bool				m_DarkTheme;
-	bool				m_FusionTheme;
 };
 
 

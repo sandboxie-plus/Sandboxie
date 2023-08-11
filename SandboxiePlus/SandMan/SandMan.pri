@@ -44,6 +44,7 @@ HEADERS += ./stdafx.h \
     ./Engine/V4ScriptDebuggerApi.h \
     ./Engine/JSEngineExt.h \
     ./Engine/WizardObject.h \
+    ./CustomStyles.h \
     ./AddonManager.h
 
 SOURCES += ./main.cpp \

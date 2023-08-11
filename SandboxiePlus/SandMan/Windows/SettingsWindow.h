@@ -2,16 +2,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_SettingsWindow.h"
-#include <QProxyStyle>
 #include "../../MiscHelpers/Common/SettingsWidgets.h"
-
-class CustomTabStyle : public QProxyStyle {
-public:
-	CustomTabStyle(QStyle* style = 0) : QProxyStyle(style) {}
-
-	QSize sizeFromContents(ContentsType type, const QStyleOption* option, const QSize& size, const QWidget* widget) const;
-	void drawControl(ControlElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget) const;
-};
 
 void FixTriStateBoxPallete(QWidget* pWidget);
 

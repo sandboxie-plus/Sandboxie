@@ -21,33 +21,6 @@
 #include <windows.h>
 #include <shellapi.h>
 
-QSize CustomTabStyle::sizeFromContents(ContentsType type, const QStyleOption* option, const QSize& size, const QWidget* widget) const {
-	QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
-	if (type == QStyle::CT_TabBarTab && widget->property("isSidebar").toBool()) {
-		s.transpose();
-		if(theGUI->m_FusionTheme)
-			s.setHeight(s.height() * 13 / 10);
-		else
-			s.setHeight(s.height() * 15 / 10);
-		s.setWidth(s.width() * 11 / 10); // for the the icon
-	}
-	return s;
-}
-
-void CustomTabStyle::drawControl(ControlElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget) const {
-	if (element == CE_TabBarTabLabel && widget->property("isSidebar").toBool()) {
-		if (const QStyleOptionTab* tab = qstyleoption_cast<const QStyleOptionTab*>(option)) {
-			QStyleOptionTab opt(*tab);
-			opt.shape = QTabBar::RoundedNorth;
-			//opt.iconSize = QSize(32, 32);
-			opt.iconSize = QSize(24, 24);
-			QProxyStyle::drawControl(element, &opt, painter, widget);
-			return;
-		}
-	}
-	QProxyStyle::drawControl(element, option, painter, widget);
-}
-
 
 void FixTriStateBoxPallete(QWidget* pWidget)
 {
@@ -143,8 +116,6 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	FixTriStateBoxPallete(this);
 
 	ui.tabs->setTabPosition(QTabWidget::West);
-	ui.tabs->tabBar()->setStyle(new CustomTabStyle(ui.tabs->tabBar()->style()));
-	ui.tabs->tabBar()->setProperty("isSidebar", true);
 
 	ui.tabs->setCurrentIndex(0);
 	ui.tabs->setTabIcon(0, CSandMan::GetIcon("Config"));

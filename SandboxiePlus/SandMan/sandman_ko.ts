@@ -49,13 +49,13 @@
         <location filename="AddonManager.cpp" line="252"/>
         <source>Updater failed to perform addon operation</source>
         <oldsource>Updater failed to perform plugin operation</oldsource>
-        <translation type="unfinished">업데이트 프로그램이 플러그인 작업을 수행하지 못했습니다</translation>
+        <translation>업데이트 프로그램이 플러그인 작업을 수행하지 못했습니다</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="254"/>
         <source>Updater failed to perform addon operation, error: %1</source>
         <oldsource>Updater failed to perform plugin operation, error: %1</oldsource>
-        <translation type="unfinished">업데이트 프로그램에서 플러그인 작업을 수행하지 못했습니다. 오류: %1</translation>
+        <translation>업데이트 프로그램에서 플러그인 작업을 수행하지 못했습니다. 오류: %1</translation>
     </message>
     <message>
         <source>Addon already installed!</source>
@@ -5098,12 +5098,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1526"/>
         <source>by %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1까지</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1534"/>
         <source>(info website)</source>
-        <translation type="unfinished"></translation>
+        <translation>(정보 웹사이트)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1561"/>
@@ -5522,7 +5522,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <location filename="Windows/SupportDialog.cpp" line="147"/>
         <source>&lt;b&gt;There seems to be however %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
         <oldsource>&lt;b&gt;There seams to be howeever %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</oldsource>
-        <translation type="unfinished">&lt;b&gt;네트워크에 %1 Sandboxie-Plus 인스턴스가 있지만, &lt;font color=&apos;red&apos;&gt; &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;후원 인증서&lt;/a&gt;&lt;/font&gt;를 얻어야 합니다.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>&lt;b&gt;네트워크에 %1개의 Sandboxie-Plus 인스턴스가 있는 것 같지만, &lt;font color=&apos;red&apos;&gt;추가 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;후원 인증서&lt;/a&gt;&lt;/font&gt;를 얻어야 합니다.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="154"/>

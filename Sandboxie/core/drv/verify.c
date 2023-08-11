@@ -789,6 +789,8 @@ _FX NTSTATUS KphValidateCertificate()
             else
                 Verify_CertInfo.level = eCertStandard;
         }
+        else if (CERT_IS_TYPE(Verify_CertInfo, eCertBusiness))
+            Verify_CertInfo.level = eCertStandard;
         // <<< scheme 1.1
         
         if(CertDbg)     DbgPrint("Sbie Cert level: %X\n", Verify_CertInfo.level);

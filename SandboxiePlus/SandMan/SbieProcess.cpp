@@ -97,8 +97,8 @@ QString CSbieProcess::GetStatusStr() const
 
 	if (m_uTerminated != 0)
 		Status = tr("Terminated");
-	//else if (m_bSuspended)
-	//	Status = tr("Suspended");
+	else if (m_bSuspended)
+		Status = tr("Suspended");
 	else {
 		Status = tr("Running");
 		if ((m_ProcessFlags & 0x00000002) != 0) // SBIE_FLAG_FORCED_PROCESS

@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.11.0 / 5.66.0] - 2023-08-??
+## [1.10.5 / 5.65.5] - 2023-08-12
 
 ### Changed
 - Don't close submenus on mouse-leave (thanks typpos) [#2963](https://github.com/sandboxie-plus/Sandboxie/issues/2963)

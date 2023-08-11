@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.10.4 / 5.65.4] - 2023-08-??
+## [1.10.4 / 5.65.4] - 2023-08-11
 
 ### Fixed
 - fixed Sandboxie-Plus-x64-v1.10.3 crash on startup [#3174](https://github.com/sandboxie-plus/Sandboxie/issues/3174)

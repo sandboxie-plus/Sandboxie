@@ -3770,6 +3770,11 @@ Hayır şunları seçer: %2</translation>
         <translation>Genel Posta İstemcisi</translation>
     </message>
     <message>
+        <location filename="SbieProcess.cpp" line="101"/>
+        <source>Suspended</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="SbieProcess.cpp" line="109"/>
         <source> Elevated</source>
         <translation> Yetkilendirilmiş</translation>

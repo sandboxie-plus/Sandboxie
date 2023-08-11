@@ -4067,6 +4067,11 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>Beëindigd</translation>
     </message>
     <message>
+        <location filename="SbieProcess.cpp" line="101"/>
+        <source>Suspended</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="SbieProcess.cpp" line="105"/>
         <source>Forced </source>
         <translation>Geforceerd</translation>

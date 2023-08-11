@@ -4097,6 +4097,11 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>종료</translation>
     </message>
     <message>
+        <location filename="SbieProcess.cpp" line="101"/>
+        <source>Suspended</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="SbieProcess.cpp" line="105"/>
         <source>Forced </source>
         <translation>강제 </translation>

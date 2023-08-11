@@ -3918,6 +3918,11 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
         <translation>Befejezett</translation>
     </message>
     <message>
+        <location filename="SbieProcess.cpp" line="101"/>
+        <source>Suspended</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="SbieProcess.cpp" line="105"/>
         <source>Forced </source>
         <translation>Kényszerített</translation>

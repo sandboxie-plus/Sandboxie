@@ -537,6 +537,8 @@ void CSandBoxPlus::ScanStartMenu()
 			//pLink->Arguments = ;
 			pLink->Icon = ReadIni(L"InternetShortcut", L"IconFile");
 			pLink->IconIndex = ReadIni(L"InternetShortcut", L"IconIndex").toInt();
+			if (pLink->Icon.isEmpty())
+				pLink->IconIndex = -1;
 			//pLink->WorkDir = ;
 		}
 

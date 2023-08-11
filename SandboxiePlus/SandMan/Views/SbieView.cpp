@@ -1869,10 +1869,10 @@ void CSbieView::UpdateStartMenu(CSandBoxPlus* pBoxEx)
 
 		QAction* pAction = pMenu->addAction(Link.Name, this, SLOT(OnSandBoxAction()));
 		QIcon Icon;
-		if (!Link.Icon.isEmpty()) 
-			Icon = LoadWindowsIcon(Link.Icon, Link.IconIndex);
-		else if (Link.Target.contains("://")) 
+		if(Link.IconIndex == -1)
 			Icon = theGUI->GetIcon("Internet");
+		else if (!Link.Icon.isEmpty()) 
+			Icon = LoadWindowsIcon(Link.Icon, Link.IconIndex);
 		if (Icon.isNull()) Icon = m_IconProvider.icon(QFileInfo(Link.Target));
 		pAction->setIcon(Icon);
 		QString Command;
@@ -1916,26 +1916,25 @@ void CSbieView::UpdateRunMenu(const CSandBoxPtr& pBox)
 		QString CmdFile = pBoxEx->GetCommandFile(Entry["Command"].toString());
 
 		QString IconFile;
-		int IconIndex = 0;
-		if (FileIndex.first.isEmpty()) {
-			if (!CmdFile.contains("://"))
-				IconFile = CmdFile;
-		}
-		else if (FileIndex.second.isEmpty()) {
+		int IconIndex ;
+		if (FileIndex.second.isEmpty()) {
 			IconFile = CmdFile;
 			IconIndex = FileIndex.first.toInt();
 		}
 		else {
-			IconFile = FileIndex.first.replace("%BoxRoot%", pBoxEx->GetFileRoot(), Qt::CaseInsensitive);
+			if (FileIndex.first.isEmpty())
+				IconFile = CmdFile;
+			else
+				IconFile = FileIndex.first.replace("%BoxRoot%", pBoxEx->GetFileRoot(), Qt::CaseInsensitive);
 			IconIndex = FileIndex.second.toInt();
 		}
 
 		QAction* pAction = pMenu->addAction(FolderName.second, this, SLOT(OnSandBoxAction()));
 		QIcon Icon;
-		if (!IconFile.isEmpty()) 
-			Icon = LoadWindowsIcon(IconFile, IconIndex);
-		else if (CmdFile.contains("://"))
+		if(IconIndex == -1)
 			Icon = theGUI->GetIcon("Internet");
+		else if (!IconFile.isEmpty()) 
+			Icon = LoadWindowsIcon(IconFile, IconIndex);
 		if (Icon.isNull()) Icon = m_IconProvider.icon(QFileInfo(CmdFile));
 		pAction->setIcon(Icon);
 		pAction->setData(Entry["Command"].toString());

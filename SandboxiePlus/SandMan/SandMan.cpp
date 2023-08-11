@@ -3035,6 +3035,7 @@ void CSandMan::OnProcView()
 					Sizes[1] = 100;
 					m_pPanelSplitter->setSizes(Sizes);
 				}
+				OnBoxSelected();
 			});
 		}
 	}

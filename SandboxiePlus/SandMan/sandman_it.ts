@@ -3960,7 +3960,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     <message>
         <location filename="SbieProcess.cpp" line="101"/>
         <source>Suspended</source>
-        <translation type="unfinished"></translation>
+        <translation>Sospeso</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="105"/>
@@ -7822,7 +7822,7 @@ area virtuale</translation>
         <location filename="Forms/SettingsWindow.ui" line="1069"/>
         <source>Ini Options</source>
         <translatorcomment>Qui ho forzato di proposito un ritorno a capo per ragioni di lunghezza</translatorcomment>
-        <translation type="unfinished">Opzioni editor di&lt;br /&gt;configurazione globale</translation>
+        <translation>Opzioni editor di&lt;br /&gt;configurazione</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1119"/>

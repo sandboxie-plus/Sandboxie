@@ -46,14 +46,12 @@
     <message>
         <location filename="AddonManager.cpp" line="252"/>
         <source>Updater failed to perform addon operation</source>
-        <oldsource>Updater failed to perform plugin operation</oldsource>
-        <translation type="unfinished">Güncelleyici, eklenti işlemini gerçekleştiremedi</translation>
+        <translation>Güncelleyici, eklenti işlemini gerçekleştiremedi</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="254"/>
         <source>Updater failed to perform addon operation, error: %1</source>
-        <oldsource>Updater failed to perform plugin operation, error: %1</oldsource>
-        <translation type="unfinished">Güncelleyici, eklenti işlemini gerçekleştiremedi, hata: %1</translation>
+        <translation>Güncelleyici, eklenti işlemini gerçekleştiremedi, hata: %1</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="174"/>
@@ -4781,12 +4779,12 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1526"/>
         <source>by %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 tarafından</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1534"/>
         <source>(info website)</source>
-        <translation type="unfinished"></translation>
+        <translation>(bilgi sitesi)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1561"/>

@@ -11,6 +11,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Don't close submenus on mouse-leave (thanks typpos) [#2963](https://github.com/sandboxie-plus/Sandboxie/issues/2963)
 
+### Fixed
+- fixed issue with verification of business certificates
 
 
 

@@ -1871,8 +1871,12 @@ void CSbieView::UpdateStartMenu(CSandBoxPlus* pBoxEx)
 		QIcon Icon;
 		if(Link.IconIndex == -1)
 			Icon = theGUI->GetIcon("Internet");
-		else if (!Link.Icon.isEmpty()) 
-			Icon = LoadWindowsIcon(Link.Icon, Link.IconIndex);
+		else if (!Link.Icon.isEmpty()) {
+			if(QFile::exists(Link.Icon))
+				Icon = LoadWindowsIcon(Link.Icon, Link.IconIndex);
+			else 
+				Icon = theGUI->GetIcon("File");
+		}
 		if (Icon.isNull()) Icon = m_IconProvider.icon(QFileInfo(Link.Target));
 		pAction->setIcon(Icon);
 		QString Command;
@@ -1933,8 +1937,12 @@ void CSbieView::UpdateRunMenu(const CSandBoxPtr& pBox)
 		QIcon Icon;
 		if(IconIndex == -1)
 			Icon = theGUI->GetIcon("Internet");
-		else if (!IconFile.isEmpty()) 
-			Icon = LoadWindowsIcon(IconFile, IconIndex);
+		else if (!IconFile.isEmpty()) {
+			if(QFile::exists(IconFile))
+				Icon = LoadWindowsIcon(IconFile, IconIndex);
+			else 
+				Icon = theGUI->GetIcon("File");
+		}
 		if (Icon.isNull()) Icon = m_IconProvider.icon(QFileInfo(CmdFile));
 		pAction->setIcon(Icon);
 		pAction->setData(Entry["Command"].toString());

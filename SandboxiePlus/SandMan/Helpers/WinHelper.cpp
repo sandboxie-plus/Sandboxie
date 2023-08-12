@@ -10,9 +10,56 @@
 #include <Shlwapi.h>
 #include <Shlobj.h>
 
+QString ResolveShortcutUrl(const QString& LinkPath)
+{
+    QUrl Url;
+
+    IShellLink* pShellLink = nullptr;
+    HRESULT hr = CoCreateInstance(CLSID_ShellLink, nullptr, CLSCTX_INPROC_SERVER, IID_IShellLink, reinterpret_cast<void**>(&pShellLink));
+
+    if (SUCCEEDED(hr)) 
+    {
+        IPersistFile* pPersistFile = nullptr;
+        hr = pShellLink->QueryInterface(IID_IPersistFile, reinterpret_cast<void**>(&pPersistFile));
+
+        if (SUCCEEDED(hr)) 
+        {
+            hr = pPersistFile->Load(LinkPath.toStdWString().c_str(), STGM_READ);
+
+            if (SUCCEEDED(hr)) 
+            {
+                PIDLIST_ABSOLUTE pidl;
+                hr = pShellLink->GetIDList(&pidl);
+
+                if (SUCCEEDED(hr)) 
+                {
+                    LPWSTR url = nullptr;
+                    SHGetNameFromIDList(pidl, SIGDN_URL, &url);
+                    
+                    if (url) {
+                        Url = QString::fromWCharArray(url);
+                        
+                        CoTaskMemFree(url);
+                    }
+
+                    CoTaskMemFree(pidl);
+                }
+            }
+
+            pPersistFile->Release();
+        }
+
+        pShellLink->Release();
+    }
+
+    if (Url.isLocalFile())
+        return Url.path().mid(1).replace("/", "\\");
+    return Url.toString();;
+}
+
 QVariantMap ResolveShortcut(const QString& LinkPath)
 {
-	QVariantMap Link;
+    QVariantMap Link;
 
     HRESULT hRes = E_FAIL;
     IShellLink* psl = NULL;
@@ -41,14 +88,14 @@ QVariantMap ResolveShortcut(const QString& LinkPath)
             {
                 // Get the path to the shortcut target
                 hRes = psl->GetPath(szPath, ARRAYSIZE(szPath), &wfd, SLGP_RAWPATH);
-                if (FAILED(hRes))
-                    return Link;
-				Link["Path"] = QString::fromWCharArray(szPath);
+                if (hRes == S_OK)
+                    Link["Path"] = QString::fromWCharArray(szPath);
+                else
+                    Link["Path"] = ResolveShortcutUrl(LinkPath);
 
                 hRes = psl->GetArguments(szPath, ARRAYSIZE(szPath));
-                if (FAILED(hRes))
-                    return Link;
-				Link["Arguments"] = QString::fromWCharArray(szPath);
+                if (!FAILED(hRes))
+                    Link["Arguments"] = QString::fromWCharArray(szPath);
 
                 hRes = psl->GetWorkingDirectory(szPath, ARRAYSIZE(szPath));
                 if (!FAILED(hRes))

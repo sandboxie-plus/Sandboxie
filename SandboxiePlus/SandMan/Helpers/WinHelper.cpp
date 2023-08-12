@@ -10,52 +10,6 @@
 #include <Shlwapi.h>
 #include <Shlobj.h>
 
-QString ResolveShortcutUrl(const QString& LinkPath)
-{
-    QUrl Url;
-
-    IShellLink* pShellLink = nullptr;
-    HRESULT hr = CoCreateInstance(CLSID_ShellLink, nullptr, CLSCTX_INPROC_SERVER, IID_IShellLink, reinterpret_cast<void**>(&pShellLink));
-
-    if (SUCCEEDED(hr)) 
-    {
-        IPersistFile* pPersistFile = nullptr;
-        hr = pShellLink->QueryInterface(IID_IPersistFile, reinterpret_cast<void**>(&pPersistFile));
-
-        if (SUCCEEDED(hr)) 
-        {
-            hr = pPersistFile->Load(LinkPath.toStdWString().c_str(), STGM_READ);
-
-            if (SUCCEEDED(hr)) 
-            {
-                PIDLIST_ABSOLUTE pidl;
-                hr = pShellLink->GetIDList(&pidl);
-
-                if (SUCCEEDED(hr)) 
-                {
-                    LPWSTR url = nullptr;
-                    SHGetNameFromIDList(pidl, SIGDN_URL, &url);
-                    
-                    if (url) {
-                        Url = QString::fromWCharArray(url);
-                        
-                        CoTaskMemFree(url);
-                    }
-
-                    CoTaskMemFree(pidl);
-                }
-            }
-
-            pPersistFile->Release();
-        }
-
-        pShellLink->Release();
-    }
-
-    if (Url.isLocalFile())
-        return Url.path().mid(1).replace("/", "\\");
-    return Url.toString();;
-}
 
 QVariantMap ResolveShortcut(const QString& LinkPath)
 {
@@ -91,7 +45,30 @@ QVariantMap ResolveShortcut(const QString& LinkPath)
                 if (hRes == S_OK)
                     Link["Path"] = QString::fromWCharArray(szPath);
                 else
-                    Link["Path"] = ResolveShortcutUrl(LinkPath);
+                {
+                    PIDLIST_ABSOLUTE pidl;
+                    hRes = psl->GetIDList(&pidl);
+
+                    if (SUCCEEDED(hRes)) 
+                    {
+                        LPWSTR url = nullptr;
+                        SHGetNameFromIDList(pidl, SIGDN_URL, &url);
+                    
+                        if (url) 
+                        {
+                            QUrl Url = QString::fromWCharArray(url);
+
+                            if (Url.isLocalFile())
+                                Link["Path"] = Url.path().mid(1).replace("/", "\\");
+                            else
+                                Link["Path"] = Url.toString();
+                        
+                            CoTaskMemFree(url);
+                        }
+
+                        CoTaskMemFree(pidl);
+                    }
+                }
 
                 hRes = psl->GetArguments(szPath, ARRAYSIZE(szPath));
                 if (!FAILED(hRes))

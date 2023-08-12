@@ -2356,37 +2356,37 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="703"/>
+        <location filename="SbiePlusAPI.cpp" line="705"/>
         <source>Disabled</source>
         <translation>Letiltva</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="714"/>
+        <location filename="SbiePlusAPI.cpp" line="716"/>
         <source>OPEN Root Access</source>
         <translation>Root Access NYITÁSA</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="716"/>
+        <location filename="SbiePlusAPI.cpp" line="718"/>
         <source>Application Compartment</source>
         <translation>Alkalmazás rekesz</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="718"/>
+        <location filename="SbiePlusAPI.cpp" line="720"/>
         <source>NOT SECURE</source>
         <translation>NEM BIZTONSÁGOS</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="720"/>
+        <location filename="SbiePlusAPI.cpp" line="722"/>
         <source>Reduced Isolation</source>
         <translation>Csökkentett izoláció</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="722"/>
+        <location filename="SbiePlusAPI.cpp" line="724"/>
         <source>Enhanced Isolation</source>
         <translation>Továbfejlesztett izoláció</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="725"/>
+        <location filename="SbiePlusAPI.cpp" line="727"/>
         <source>Privacy Enhanced</source>
         <translation>Továbbfejlesztett adatvédelem</translation>
     </message>
@@ -2395,32 +2395,32 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation type="vanished">API napló</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="729"/>
+        <location filename="SbiePlusAPI.cpp" line="731"/>
         <source>No INet (with Exceptions)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="731"/>
+        <location filename="SbiePlusAPI.cpp" line="733"/>
         <source>No INet</source>
         <translation>Nincs internet</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="734"/>
+        <location filename="SbiePlusAPI.cpp" line="736"/>
         <source>Net Share</source>
         <translation>Net megosztás (Net share)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="736"/>
+        <location filename="SbiePlusAPI.cpp" line="738"/>
         <source>No Admin</source>
         <translation>Nincs Admin</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="739"/>
+        <location filename="SbiePlusAPI.cpp" line="741"/>
         <source>Auto Delete</source>
         <translation>Automatikus törlés</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="742"/>
+        <location filename="SbiePlusAPI.cpp" line="744"/>
         <source>Normal</source>
         <translation>Normál</translation>
     </message>
@@ -3956,37 +3956,37 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
 <context>
     <name>CSbieTemplatesEx</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1129"/>
+        <location filename="SbiePlusAPI.cpp" line="1131"/>
         <source>Failed to initialize COM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1135"/>
+        <location filename="SbiePlusAPI.cpp" line="1137"/>
         <source>Failed to create update session</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1141"/>
+        <location filename="SbiePlusAPI.cpp" line="1143"/>
         <source>Failed to create update searcher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1147"/>
+        <location filename="SbiePlusAPI.cpp" line="1149"/>
         <source>Failed to set search options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1155"/>
+        <location filename="SbiePlusAPI.cpp" line="1157"/>
         <source>Failed to search for updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1161"/>
+        <location filename="SbiePlusAPI.cpp" line="1163"/>
         <source>Failed to retrieve update list from search result</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1168"/>
+        <location filename="SbiePlusAPI.cpp" line="1170"/>
         <source>Failed to get update count</source>
         <translation type="unfinished"></translation>
     </message>

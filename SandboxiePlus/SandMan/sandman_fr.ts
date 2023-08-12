@@ -2497,7 +2497,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les changements non 
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="703"/>
+        <location filename="SbiePlusAPI.cpp" line="705"/>
         <source>Disabled</source>
         <translation>Désactivé</translation>
     </message>
@@ -2510,32 +2510,32 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les changements non 
         <translation type="vanished">NON SÉCURISÉ (Configuration de débogage)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="714"/>
+        <location filename="SbiePlusAPI.cpp" line="716"/>
         <source>OPEN Root Access</source>
         <translation>OUVRIR l&apos;accès Racine</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="716"/>
+        <location filename="SbiePlusAPI.cpp" line="718"/>
         <source>Application Compartment</source>
         <translation>Conteneur d&apos;applications</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="718"/>
+        <location filename="SbiePlusAPI.cpp" line="720"/>
         <source>NOT SECURE</source>
         <translation>NON SÉCURISÉ</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="720"/>
+        <location filename="SbiePlusAPI.cpp" line="722"/>
         <source>Reduced Isolation</source>
         <translation>Isolation réduite</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="722"/>
+        <location filename="SbiePlusAPI.cpp" line="724"/>
         <source>Enhanced Isolation</source>
         <translation>Isolation renforcée</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="725"/>
+        <location filename="SbiePlusAPI.cpp" line="727"/>
         <source>Privacy Enhanced</source>
         <translation>Confidentialité renforcée</translation>
     </message>
@@ -2544,32 +2544,32 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les changements non 
         <translation type="vanished">Journal API</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="729"/>
+        <location filename="SbiePlusAPI.cpp" line="731"/>
         <source>No INet (with Exceptions)</source>
         <translation>Pas d&apos;INet (avec des exceptions)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="731"/>
+        <location filename="SbiePlusAPI.cpp" line="733"/>
         <source>No INet</source>
         <translation>Pas d&apos;INet</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="734"/>
+        <location filename="SbiePlusAPI.cpp" line="736"/>
         <source>Net Share</source>
         <translation>Partage réseau</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="736"/>
+        <location filename="SbiePlusAPI.cpp" line="738"/>
         <source>No Admin</source>
         <translation>Pas administrateur</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="739"/>
+        <location filename="SbiePlusAPI.cpp" line="741"/>
         <source>Auto Delete</source>
         <translation>Suppression automatique</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="742"/>
+        <location filename="SbiePlusAPI.cpp" line="744"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>
@@ -4302,37 +4302,37 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
 <context>
     <name>CSbieTemplatesEx</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1129"/>
+        <location filename="SbiePlusAPI.cpp" line="1131"/>
         <source>Failed to initialize COM</source>
         <translation>Échec d&apos;initialisation COM</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1135"/>
+        <location filename="SbiePlusAPI.cpp" line="1137"/>
         <source>Failed to create update session</source>
         <translation>Échec de création de la session de mise à jour</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1141"/>
+        <location filename="SbiePlusAPI.cpp" line="1143"/>
         <source>Failed to create update searcher</source>
         <translation>Échec de création de la recherche de mise à jour</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1147"/>
+        <location filename="SbiePlusAPI.cpp" line="1149"/>
         <source>Failed to set search options</source>
         <translation>Échec de définition des options de recherche</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1155"/>
+        <location filename="SbiePlusAPI.cpp" line="1157"/>
         <source>Failed to search for updates</source>
         <translation>Échec de recerche de mises à jour</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1161"/>
+        <location filename="SbiePlusAPI.cpp" line="1163"/>
         <source>Failed to retrieve update list from search result</source>
         <translation>Échec de récupération de la liste de mise à jour depuis les résultats de la recherche</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1168"/>
+        <location filename="SbiePlusAPI.cpp" line="1170"/>
         <source>Failed to get update count</source>
         <translation>Échec d&apos;obtention du décompte des mises à jour</translation>
     </message>

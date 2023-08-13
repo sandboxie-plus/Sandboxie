@@ -2282,68 +2282,68 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
 <context>
     <name>CSandBoxPlus</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="705"/>
+        <location filename="SbiePlusAPI.cpp" line="707"/>
         <source>Disabled</source>
         <translation>Deaktiviert</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="716"/>
+        <location filename="SbiePlusAPI.cpp" line="718"/>
         <source>OPEN Root Access</source>
         <translation>OFFENER Rootzugriff</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="718"/>
+        <location filename="SbiePlusAPI.cpp" line="720"/>
         <source>Application Compartment</source>
         <translation>Applikationsunterteilung</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="720"/>
+        <location filename="SbiePlusAPI.cpp" line="722"/>
         <source>NOT SECURE</source>
         <translation>NICHT SICHER</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="722"/>
+        <location filename="SbiePlusAPI.cpp" line="724"/>
         <source>Reduced Isolation</source>
         <translation>Reduzierte Isolation</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="724"/>
+        <location filename="SbiePlusAPI.cpp" line="726"/>
         <source>Enhanced Isolation</source>
         <translation>Erweiterte Isolation</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="727"/>
+        <location filename="SbiePlusAPI.cpp" line="729"/>
         <source>Privacy Enhanced</source>
         <translation>Verbesserte Privatsphäre</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="731"/>
+        <location filename="SbiePlusAPI.cpp" line="733"/>
         <source>No INet (with Exceptions)</source>
         <translation>Kein Internet (mit Ausnahmen)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="733"/>
+        <location filename="SbiePlusAPI.cpp" line="735"/>
         <source>No INet</source>
         <translation>Kein Internet</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="736"/>
+        <location filename="SbiePlusAPI.cpp" line="738"/>
         <source>Net Share</source>
         <translatorcomment>Kept original for lack of good German wording</translatorcomment>
         <translation>Netzwerkfreigabe (Net share)</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="738"/>
+        <location filename="SbiePlusAPI.cpp" line="740"/>
         <source>No Admin</source>
         <translation>Kein Admin</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="741"/>
+        <location filename="SbiePlusAPI.cpp" line="743"/>
         <source>Auto Delete</source>
         <translation>Automatisches Löschen</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="744"/>
+        <location filename="SbiePlusAPI.cpp" line="746"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>
@@ -3837,37 +3837,37 @@ This file is part of Sandboxie and all change done to it will be reverted next t
 <context>
     <name>CSbieTemplatesEx</name>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1131"/>
+        <location filename="SbiePlusAPI.cpp" line="1133"/>
         <source>Failed to initialize COM</source>
         <translation>COM konnte nicht initialisiert werden</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1137"/>
+        <location filename="SbiePlusAPI.cpp" line="1139"/>
         <source>Failed to create update session</source>
         <translation>Update-Sitzung konnte nicht erstellt werden</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1143"/>
+        <location filename="SbiePlusAPI.cpp" line="1145"/>
         <source>Failed to create update searcher</source>
         <translation>Update-Sucher konnte nicht erstellt werden</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1149"/>
+        <location filename="SbiePlusAPI.cpp" line="1151"/>
         <source>Failed to set search options</source>
         <translation>Suchoptionen konnten nicht festgelegt werden</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1157"/>
+        <location filename="SbiePlusAPI.cpp" line="1159"/>
         <source>Failed to search for updates</source>
         <translation>Suche nach Updates fehlgeschlagen</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1163"/>
+        <location filename="SbiePlusAPI.cpp" line="1165"/>
         <source>Failed to retrieve update list from search result</source>
         <translation>Update-Liste konnte nicht aus dem Suchergebnis abgerufen werden</translation>
     </message>
     <message>
-        <location filename="SbiePlusAPI.cpp" line="1170"/>
+        <location filename="SbiePlusAPI.cpp" line="1172"/>
         <source>Failed to get update count</source>
         <translation>Anzahl der Updates konnte nicht ermittelt werden</translation>
     </message>

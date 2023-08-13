@@ -1172,13 +1172,11 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/OptionsWindow.cpp" line="457"/>
         <location filename="Windows/OptionsAccess.cpp" line="24"/>
         <source>Browse for File</source>
-        <translatorcomment>Bouton pour ajouter un accès.</translatorcomment>
         <translation>Choisir un fichier</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="25"/>
         <source>Browse for Folder</source>
-        <translatorcomment>Bouton pour ajouter un accès.</translatorcomment>
         <translation>Choisir un dossier</translation>
     </message>
     <message>
@@ -4266,7 +4264,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="SbieProcess.cpp" line="101"/>
         <source>Suspended</source>
-        <translation type="unfinished"></translation>
+        <translation>Mis en pause</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="105"/>

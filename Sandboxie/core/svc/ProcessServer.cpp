@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -1044,10 +1044,10 @@ BOOL ProcessServer::RunSandboxedSetDacl(
             //
 
             //
-            // in Sandboxie version 5.57 instead of using the anonymous SID 
+            // since Sandboxie version 5.57 instead of using the anonymous SID 
             // we can use box specific custom SIDs,
             // when comparing we skip the revision and the SubAuthorityCount
-            // also we conpare only the domain portion of the SID as the rest 
+            // also we compare only the domain portion of the SID as the rest 
             // will be different for each box
             //
            

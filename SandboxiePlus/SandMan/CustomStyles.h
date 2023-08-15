@@ -46,7 +46,7 @@ public:
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-// Keeps submenus visible when the mosue leaves
+// Keeps submenus visible when the mouse leaves them
 //
 
 class KeepSubMenusVisibleStyle : public QProxyStyle {

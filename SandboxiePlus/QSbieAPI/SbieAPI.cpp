@@ -2065,24 +2065,29 @@ void CSbieAPI::ClearPassword()
 	m->Password.clear();
 }
 
-quint32 CSbieAPI::GetFeatureFlags()
+bool CSbieAPI::GetDriverInfo(quint32 InfoClass, void* pBuffer, size_t Size)
 {
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
 	API_QUERY_DRIVER_INFO_ARGS *args = (API_QUERY_DRIVER_INFO_ARGS*)parms;
 
-	ULONG flags = 0;
-	//ULONG len = sizeof(flags);
-
 	memset(parms, 0, sizeof(parms));
 	args->func_code = API_QUERY_DRIVER_INFO;
-	args->info_class.val = 0;
-	args->info_data.val = &flags;
-	//args->info_len.val = &len;
+	args->info_class.val = InfoClass;
+	args->info_data.val = pBuffer;
+	args->info_len.val = Size;
 
 	NTSTATUS status = m->IoControl(parms);
-	if (!NT_SUCCESS(status))
-		return 0;
+	if (!NT_SUCCESS(status)) {
+		memset(pBuffer, 0, Size);
+		return false;
+	}
+	return true;
+}
 
+quint32 CSbieAPI::GetFeatureFlags()
+{
+	quint32 flags = 0;
+	GetDriverInfo(0, &flags, sizeof(flags));
 	return flags;
 }
 
@@ -2107,27 +2112,6 @@ QString CSbieAPI::GetFeatureStr()
 		str.append("W32k");
 
 	return str.join(",");
-}
-
-quint64 CSbieAPI::GetCertState()
-{
-	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
-	API_QUERY_DRIVER_INFO_ARGS *args = (API_QUERY_DRIVER_INFO_ARGS*)parms;
-
-	ULONGLONG state = 0;
-	ULONG len = sizeof(state);
-
-	memset(parms, 0, sizeof(parms));
-	args->func_code = API_QUERY_DRIVER_INFO;
-	args->info_class.val = -1;
-	args->info_data.val = &state;
-	args->info_len.val = len;
-
-	NTSTATUS status = m->IoControl(parms);
-	if (!NT_SUCCESS(status))
-		return 0;
-
-	return state;
 }
 
 SB_STATUS CSbieAPI::SetSecureParam(const QString& Name, const void* data, size_t size)

@@ -4,6 +4,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.11.0 / 5.66.0] - 2023-08-??
+
+### Added
+- added certificate info to the about dialog
+- added support for new more flexible certificate style
+- added option for business customers to retrive hardware bound certificates from a serial number
+- added option to upgrade existing certificates using a upgrade serial number
+
+### Changed
+- Improved online updater code
+
+### Fixed
+- fixed Symbolic links created inside of sandbox don’t work properly [#3181](https://github.com/sandboxie-plus/Sandboxie/issues/3181)
+
+
 
 
 ## [1.10.5 / 5.65.5] - 2023-08-12

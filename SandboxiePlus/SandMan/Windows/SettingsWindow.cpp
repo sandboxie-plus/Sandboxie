@@ -272,7 +272,6 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	LoadSettings();
 
-
 	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
 
 	connect(theGUI, SIGNAL(DrivesChanged()), this, SLOT(UpdateDrives()));
@@ -442,11 +441,25 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	ui.txtCertificate->setPlaceholderText(
 		"NAME: User Name\n"
-		"LEVEL: ULTIMATE\n"
+		"TYPE: ULTIMATE\n"
 		"DATE: dd.mm.yyyy\n"
 		"UPDATEKEY: 00000000000000000000000000000000\n"
 		"SIGNATURE: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
 	);
+
+	if (g_CertInfo.active) {
+		QString Text = ui.lblSerial->text();
+		ui.lblSerial->setText(QString("<a href=\"_\">%1</a>").arg(Text));
+		ui.txtSerial->setVisible(false);
+		ui.btnGetCert->setVisible(false);
+		connect(ui.lblSerial, &QLabel::linkActivated, this, [=]() {
+			ui.lblSerial->setText(Text);
+			ui.txtSerial->setVisible(true);
+			ui.btnGetCert->setVisible(true);
+		});
+	}
+
+	connect(ui.btnGetCert, SIGNAL(clicked(bool)), this, SLOT(OnGetCert()));
 
 	connect(ui.chkNoCheck, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 
@@ -1008,7 +1021,8 @@ void CSettingsWindow::LoadSettings()
 void CSettingsWindow::UpdateCert()
 {
 	ui.lblCertExp->setVisible(false);
-	if (!g_Certificate.isEmpty()) 
+	//ui.lblCertLevel->setVisible(!g_Certificate.isEmpty());
+	if (!g_Certificate.isEmpty())
 	{
 		ui.txtCertificate->setPlainText(g_Certificate);
 		//ui.lblSupport->setVisible(false);
@@ -1018,34 +1032,160 @@ void CSettingsWindow::UpdateCert()
 			palette.setColor(QPalette::Text, Qt::black);
 		if (g_CertInfo.expired) {
 			palette.setColor(QPalette::Base, QColor(255, 255, 192));
-			QString infoMsg = tr("This supporter certificate has expired, please <a href=\"sbie://update/cert\">get an updated certificate</a>.");
+			QString infoMsg = tr("This supporter certificate has expired, please <a href=\"https://sandboxie-plus.com/go.php?to=sbie-renew-cert\">get an updated certificate</a>.");
 			if (g_CertInfo.active) {
 				if (g_CertInfo.grace_period)
-					infoMsg.append(tr("<br /><font color='red'>Plus features will be disabled in %1 days.</font>").arg((g_CertInfo.expirers_in_sec + 30*60*60*24) / (60*60*24)));
+					infoMsg.append(tr("<br /><font color='red'>Plus features will be disabled in %1 days.</font>").arg((g_CertInfo.expirers_in_sec + 30 * 60 * 60 * 24) / (60 * 60 * 24)));
 				else if (!g_CertInfo.outdated) // must be an expiren medium or large cert on an old build
 					infoMsg.append(tr("<br /><font color='red'>For the current build Plus features remain enabled</font>, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database."));
-			} else
+			}
+			else
 				infoMsg.append(tr("<br />Plus features are no longer enabled."));
 			ui.lblCertExp->setText(infoMsg);
 			ui.lblCertExp->setVisible(true);
 		}
 		else {
 			if (g_CertInfo.expirers_in_sec > 0 && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30)) {
-				ui.lblCertExp->setText(tr("This supporter certificate will <font color='red'>expire in %1 days</font>, please <a href=\"sbie://update/cert\">get an updated certificate</a>.").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
+				ui.lblCertExp->setText(tr("This supporter certificate will <font color='red'>expire in %1 days</font>, please <a href=\"https://sandboxie-plus.com/go.php?to=sbie-renew-cert\">get an updated certificate</a>.").arg(g_CertInfo.expirers_in_sec / (60 * 60 * 24)));
 				ui.lblCertExp->setVisible(true);
 			}
-/*#ifdef _DEBUG
-			else {
-				ui.lblCertExp->setText(tr("This supporter certificate is valid, <a href=\"sbie://update/cert\">check for an updated certificate</a>."));
-				ui.lblCertExp->setVisible(true);
-			}
-#endif*/
+			/*#ifdef _DEBUG
+						else {
+							ui.lblCertExp->setText(tr("This supporter certificate is valid, <a href=\"https://sandboxie-plus.com/go.php?to=sbie-renew-cert\">check for an updated certificate</a>."));
+							ui.lblCertExp->setVisible(true);
+						}
+			#endif*/
 			palette.setColor(QPalette::Base, QColor(192, 255, 192));
 		}
 		ui.txtCertificate->setPalette(palette);
+
+		//ui.lblCertLevel->setText(tr("Feature Level: %1").arg(GetCertLevel()));
+		//
+		//QStringList Infos;
+		//Infos += tr("Type: %1").arg(GetCertType());
+		//if (CERT_IS_INSIDER(g_CertInfo))
+		//	Infos += tr("Insider release capable");
+		//ui.lblCertLevel->setToolTip(Infos.join("\n"));
+
+		//if (CERT_IS_TYPE(g_CertInfo, eCertBusiness)) {
+		//	ScanForSeats();
+		//	QTimer::singleShot(1000, this, [=]() {
+		//		QString CntInfo = QString::number(CountSeats());
+		//		QString Amount = GetArguments(g_Certificate, L'\n', L':').value("AMOUNT");
+		//		if (!Amount.isEmpty())
+		//			CntInfo += "/" + Amount;
+		//		ui.lblCertCount->setText(CntInfo);
+		//		ui.lblCertCount->setToolTip(tr("Count of certificates in use"));
+		//	});
+		//}
 	}
 
 	ui.radInsider->setEnabled(CERT_IS_INSIDER(g_CertInfo));
+}
+
+void CSettingsWindow::OnGetCert()
+{
+	SB_PROGRESS Status = theGUI->m_pUpdater->GetSupportCert(ui.txtSerial->text(), this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
+	if (Status.GetStatus() == OP_ASYNC) {
+		theGUI->AddAsyncOp(Status.GetValue());
+		Status.GetValue()->ShowMessage(tr("Retreiving certificate..."));
+	}
+}
+
+void CSettingsWindow::OnCertData(const QByteArray& Certificate, const QVariantMap& Params)
+{
+	ui.txtCertificate->setPlainText(Certificate);
+	ApplyCert();
+}
+
+void CSettingsWindow::ApplyCert()
+{
+	if (!theAPI->IsConnected())
+		return;
+	
+	QByteArray Certificate = ui.txtCertificate->toPlainText().toUtf8();	
+	if (g_Certificate != Certificate) {
+
+		QPalette palette = QApplication::palette();
+
+		if (theGUI->m_DarkTheme)
+			palette.setColor(QPalette::Text, Qt::black);
+
+		ui.lblCertExp->setVisible(false);
+
+		bool bRet = ApplyCertificate(Certificate, this);
+
+		if (Certificate.isEmpty())
+			palette.setColor(QPalette::Base, Qt::white);
+		else if (!bRet) 
+			palette.setColor(QPalette::Base, QColor(255, 192, 192));
+		else 
+			palette.setColor(QPalette::Base, QColor(192, 255, 192));
+
+		ui.txtCertificate->setPalette(palette);
+	}
+
+	m_CertChanged = false;
+}
+
+QString CSettingsWindow::GetCertType()
+{
+	QString CertType;
+	if (CERT_IS_TYPE(g_CertInfo, eCertContributor))
+		CertType = tr("Contributor");
+	else if (CERT_IS_TYPE(g_CertInfo, eCertEternal))
+		CertType = tr("Eternal");
+	else if (CERT_IS_TYPE(g_CertInfo, eCertBusiness))
+		CertType = tr("Business");
+	else if (CERT_IS_TYPE(g_CertInfo, eCertPersonal))
+		CertType = tr("Personal");
+	else if (g_CertInfo.type == eCertGreatPatreon)
+		CertType = tr("Great Patreon");
+	else if (CERT_IS_TYPE(g_CertInfo, eCertPatreon))
+		CertType = tr("Patreon");
+	else if (g_CertInfo.type == eCertFamily)
+		CertType = tr("Family");
+	else if (CERT_IS_TYPE(g_CertInfo, eCertSubscription))
+		CertType = tr("Subscription");
+	else if (CERT_IS_TYPE(g_CertInfo, eCertEvaluation))
+		CertType = tr("Evaluation");
+	else
+		CertType = tr("Type %1").arg(g_CertInfo.type);
+	return CertType;
+}
+
+QColor CSettingsWindow::GetCertColor()
+{
+	if (CERT_IS_TYPE(g_CertInfo, eCertEternal))
+		return QColor(135, 0, 255, 255);
+	else if (CERT_IS_TYPE(g_CertInfo, eCertBusiness))
+		return QColor(211, 0, 0, 255);
+	else if (CERT_IS_TYPE(g_CertInfo, eCertPersonal))
+		return QColor(38, 127, 0, 255);
+	else if (CERT_IS_TYPE(g_CertInfo, eCertPatreon))
+		return QColor(38, 127, 0, 255);
+	else if (g_CertInfo.type == eCertFamily)
+		return QColor(0, 38, 255, 255);
+	else if (CERT_IS_TYPE(g_CertInfo, eCertSubscription))
+		return QColor(255, 106, 0, 255);
+	else if (CERT_IS_TYPE(g_CertInfo, eCertEvaluation))
+		return Qt::gray;
+	else
+		return Qt::black;
+}
+
+QString CSettingsWindow::GetCertLevel()
+{
+	QString CertLevel;
+	if (g_CertInfo.level == eCertStandard)
+		CertLevel = tr("Standard");
+	else if (g_CertInfo.level == eCertAdvanced)
+		CertLevel = tr("Advanced");
+	else if (g_CertInfo.level == eCertMaxLevel)
+		CertLevel = tr("Max Level");
+	else
+		CertLevel = tr("Level %1").arg(g_CertInfo.level);
+	return CertLevel;
 }
 
 void CSettingsWindow::UpdateUpdater()
@@ -1352,32 +1492,8 @@ void CSettingsWindow::SaveSettings()
 
 	theConf->SetValue("Options/AutoRunSoftCompat", !ui.chkNoCompat->isChecked());
 
-	if (m_CertChanged && theAPI->IsConnected())
-	{
-		QByteArray Certificate = ui.txtCertificate->toPlainText().toUtf8();	
-		if (g_Certificate != Certificate) {
-
-			QPalette palette = QApplication::palette();
-
-			if (theGUI->m_DarkTheme)
-				palette.setColor(QPalette::Text, Qt::black);
-
-			ui.lblCertExp->setVisible(false);
-
-			bool bRet = ApplyCertificate(Certificate, this);
-
-			if (Certificate.isEmpty())
-				palette.setColor(QPalette::Base, Qt::white);
-			else if (!bRet) 
-				palette.setColor(QPalette::Base, QColor(255, 192, 192));
-			else 
-				palette.setColor(QPalette::Base, QColor(192, 255, 192));
-
-			ui.txtCertificate->setPalette(palette);
-		}
-
-		m_CertChanged = false;
-	}
+	if(m_CertChanged)
+		ApplyCert();
 
 	theConf->SetValue("Options/NoSupportCheck", ui.chkNoCheck->isChecked());
 
@@ -1440,13 +1556,14 @@ bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* w
 		}
 	}
 	else if(!g_Certificate.isEmpty()){
+		g_Certificate.clear();
 		WindowsMoveFile(CertPath.replace("/", "\\"), "");
 	}
 
 	if (Certificate.isEmpty())
 		return false;
 
-	if (!theAPI->ReloadCert().IsError())
+	if (!theGUI->ReloadCert(widget).IsError())
 	{
 		g_FeatureFlags = theAPI->GetFeatureFlags();
 		g_Certificate = Certificate;
@@ -1468,8 +1585,6 @@ bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* w
 	}
 	else
 	{
-		QMessageBox::critical(widget, "Sandboxie-Plus", tr("This support certificate is not valid."));
-
 		g_CertInfo.State = 0;
 		g_Certificate.clear();
 		return false;

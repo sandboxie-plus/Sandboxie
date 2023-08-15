@@ -20,7 +20,7 @@
 #include <QHttpMultiPart>
 #include "../Views/TraceView.h"
 #include "../AddonManager.h"
-
+#include "../MiscHelpers/Common/NetworkAccessManager.h"
 #include "../CustomStyles.h"
 
 CBoxAssistant::CBoxAssistant(QWidget *parent)

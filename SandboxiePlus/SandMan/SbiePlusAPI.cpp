@@ -1105,7 +1105,7 @@ QString CSandBoxPlus::GetFullCommand(const QString& Command)
 // CSbieTemplatesEx
 //
 
-#include <ntstatus.h>
+//#include <ntstatus.h>
 #define WIN32_NO_STATUS
 typedef long NTSTATUS;
 #include <Windows.h>

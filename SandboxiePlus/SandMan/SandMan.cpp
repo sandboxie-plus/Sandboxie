@@ -2132,7 +2132,7 @@ void CSandMan::OnStatusChanged()
 
 		theAPI->WatchIni(true, theConf->GetBool("Options/WatchIni", true));
 
-		if (!theAPI->ReloadCert().IsError())
+		if (!ReloadCert().IsError())
 			CSettingsWindow::LoadCertificate();
 		else {
 			g_Certificate.clear();
@@ -2392,6 +2392,10 @@ void CSandMan::AddLogMessage(const QString& Message)
 
 void CSandMan::AddLogMessage(const QDateTime& TimeStamp, const QString& Message, const QString& Link)
 {
+	QRegularExpression tagExp("<[^>]*>");
+	QString TextMessage = Message;
+	TextMessage.remove(tagExp);
+
 	int last = m_pMessageLog->GetTree()->topLevelItemCount();
 	if (last > 0) {
 		QTreeWidgetItem* pItem = m_pMessageLog->GetTree()->topLevelItem(last-1);
@@ -2401,11 +2405,15 @@ void CSandMan::AddLogMessage(const QDateTime& TimeStamp, const QString& Message,
 				Count = 1;
 			Count++;
 			pItem->setData(0, Qt::UserRole, Count);
+#ifdef _DEBUG
+			pItem->setText(1, TextMessage + tr(" (%1)").arg(Count));
+#else
 			QLabel* pLabel = (QLabel*)m_pMessageLog->GetTree()->itemWidget(pItem, 1);
 			if(pLabel)
 				pLabel->setText(Message + tr(" (%1)").arg(Count));
 			else
 				pItem->setText(1, Message + tr(" (%1)").arg(Count));
+#endif
 			return;
 		}
 	}
@@ -2414,6 +2422,9 @@ void CSandMan::AddLogMessage(const QDateTime& TimeStamp, const QString& Message,
 	pItem->setText(0, TimeStamp.toString("hh:mm:ss.zzz"));
 	pItem->setData(1, Qt::UserRole, Message);
 	m_pMessageLog->GetTree()->addTopLevelItem(pItem);
+#ifdef _DEBUG
+	pItem->setText(1, TextMessage);
+#else
 	if (!Link.isEmpty()) {
 		QLabel* pLabel = new QLabel(Message);
 		pLabel->setContentsMargins(3, 0, 0, 0);
@@ -2422,13 +2433,11 @@ void CSandMan::AddLogMessage(const QDateTime& TimeStamp, const QString& Message,
 		connect(pLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 		m_pMessageLog->GetTree()->setItemWidget(pItem, 1, pLabel);
 
-		QRegularExpression tagExp("<[^>]*>");
-		QString TextMessage = Message;
-		TextMessage.remove(tagExp);
 		pItem->setText(1, TextMessage);
 	}
 	else
 		pItem->setText(1, Message);
+#endif
 		
 
 	m_pMessageLog->GetView()->verticalScrollBar()->setValue(m_pMessageLog->GetView()->verticalScrollBar()->maximum());
@@ -2575,11 +2584,45 @@ bool CSandMan::CheckCertificate(QWidget* pWidget)
 	return false;
 }
 
+SB_STATUS CSandMan::ReloadCert(QWidget* pWidget)
+{
+	SB_STATUS Status = theAPI->ReloadCert();
+
+	if (Status.IsError() && Status.GetStatus() != 0xC0000225 /*STATUS_NOT_FOUND*/) 
+	{
+		QString Info;
+		switch (Status.GetStatus())
+		{
+		case 0xC000000DL: /*STATUS_INVALID_PARAMETER*/
+		case 0xC0000079L: /*STATUS_INVALID_SECURITY_DESCR:*/
+		case 0xC000A000L: /*STATUS_INVALID_SIGNATURE:*/			Info = tr("The Certificate Signature is invalid!"); break;
+		case 0xC0000024L: /*STATUS_OBJECT_TYPE_MISMATCH:*/		Info = tr("The Certificate is not suitable for this product."); break;
+		case 0xC0000485L: /*STATUS_FIRMWARE_IMAGE_INVALID:*/	Info = tr("The Certificate is node locked."); break;
+		default:												Info = QString("0x%1").arg((quint32)Status.GetStatus(), 8, 16, QChar('0'));
+		}
+
+		QMessageBox::critical(pWidget ? pWidget : this, "Sandboxie-Plus", tr("The support certificate is not valid.\nError: %1").arg(Info));
+	}
+
+	return Status;
+}
+
 void InitCertSlot();
 
 void CSandMan::UpdateCertState()
 {
-	g_CertInfo.State = theAPI->GetCertState();
+	theAPI->GetDriverInfo(-1, &g_CertInfo.State, sizeof(g_CertInfo.State));
+
+#ifdef _DEBUG
+	qDebug() << "g_CertInfo" << g_CertInfo.State;
+	qDebug() << "g_CertInfo.active" << g_CertInfo.active;
+	qDebug() << "g_CertInfo.expired" << g_CertInfo.expired;
+	qDebug() << "g_CertInfo.outdated" << g_CertInfo.outdated;
+	qDebug() << "g_CertInfo.grace_period" << g_CertInfo.grace_period;
+	qDebug() << "g_CertInfo.type" << CSettingsWindow::GetCertType();
+	qDebug() << "g_CertInfo.level" << CSettingsWindow::GetCertLevel();
+#endif
+
 	if (g_CertInfo.active)
 	{
 		// behave as if there would be no certificate at all
@@ -2615,13 +2658,13 @@ void CSandMan::UpdateCertState()
 				g_CertInfo.outdated = 1;
 			}
 
-			// simulate this being a business certificate - only contributors and other insiders
-			if (CERT_IS_INSIDER(g_CertInfo) && theConf->GetBool("Debug/CertFakeBusiness", false))
-				g_CertInfo.type = eCertBusiness;
+			int Type = theConf->GetInt("Debug/CertFakeType", -1);
+			if (Type != -1)
+				g_CertInfo.type = Type << 2;
 
-			// simulate this being a evaluation certificate
-			if (theConf->GetBool("Debug/CertFakeEvaluation", false))
-				g_CertInfo.type = eCertBusiness;
+			int Level = theConf->GetInt("Debug/CertFakeLevel", -1);
+			if (Level != -1)
+				g_CertInfo.level = Level;
 		}
 	}
 
@@ -3548,8 +3591,6 @@ void CSandMan::OpenUrl(const QUrl& url)
 			m_pUpdater->RunInstaller(false);
 		else if (path == "/apply")
 			m_pUpdater->ApplyUpdate(false);
-		else if (path == "/cert")
-			m_pUpdater->UpdateCert();
 		else
 			OpenUrl("https://sandboxie-plus.com/sandboxie" + path);
 		return;
@@ -3801,7 +3842,43 @@ void CSandMan::OnAbout()
 		msgBox->setInformativeText(AboutText);
 
 		QIcon ico(QLatin1String(":/SandMan.png"));
-		msgBox->setIconPixmap(ico.pixmap(128, 128));
+		
+		QPixmap pix(128, 160);
+		pix.fill(Qt::transparent);
+
+		QPainter painter(&pix);
+		painter.drawPixmap(0, 0, ico.pixmap(128, 128));
+
+		if (g_CertInfo.active) 
+		{
+			//painter.setPen(Qt::blue);
+			//painter.drawRect(0, 0, 127, 159);
+
+			QFont font;
+			font.fromString("Cooper Black");
+			//font.setItalic(true);
+
+			font.setPointSize(12);
+			painter.setFont(font);
+			painter.setPen(CSettingsWindow::GetCertColor());
+
+			QString Type = CSettingsWindow::GetCertType();
+			//QSize TypeSize = QFontMetrics(painter.font()).size(Qt::TextSingleLine, Type);
+			//painter.drawText((128 - TypeSize.width()) / 2, 128, TypeSize.width(), TypeSize.height(), 0, Type);
+			painter.drawText(0, 128 - 8, 128, 16, Qt::AlignHCenter, Type);
+
+			if (g_CertInfo.level != eCertMaxLevel && g_CertInfo.level != eCertStandard) {
+
+				font.setPointSize(10);
+				painter.setFont(font);
+				painter.setPen(Qt::black);
+
+				QString Level = CSettingsWindow::GetCertLevel();
+				painter.drawText(0, 128 + 8, 120, 16, Qt::AlignRight, Level);
+			}
+		}
+
+		msgBox->setIconPixmap(pix);
 
 		SafeExec(msgBox);
 	}

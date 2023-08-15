@@ -55,6 +55,10 @@ public:
 
 	static void LoadCertificate(QString CertPath = QString());
 
+	static QString GetCertType();
+	static QColor GetCertColor();
+	static QString GetCertLevel();
+
 signals:
 	void OptionsChanged(bool bRebuildUI = false);
 	void Closed();
@@ -122,6 +126,9 @@ private slots:
 
 	void CertChanged();
 	void UpdateCert();
+	void OnGetCert();
+	void OnCertData(const QByteArray& Certificate, const QVariantMap& Params);
+	void ApplyCert();
 	void UpdateUpdater();
 
 	void GetUpdates();

@@ -107,6 +107,8 @@ public:
 	virtual SB_STATUS		LockConfig(const QString& NewPassword);
 	virtual void			ClearPassword();
 
+	virtual bool			GetDriverInfo(quint32 InfoClass, void* pBuffer, size_t Size);
+
 	enum EFeatureFlags
 	{
 		eSbieFeatureWFP			= 0x00000001,
@@ -121,7 +123,6 @@ public:
 
 	virtual quint32			GetFeatureFlags();
 	virtual QString			GetFeatureStr();
-	virtual quint64			GetCertState();
 
 	// Forced Processes
 	virtual SB_STATUS		DisableForceProcess(bool Set, int Seconds = 0);

@@ -6,7 +6,6 @@
 #include "../MiscHelpers/Common/TreeViewEx.h"
 #include "../MiscHelpers/Common/PanelView.h"
 #include "../MiscHelpers/Common/ProgressDialog.h"
-#include "../MiscHelpers/Common/NetworkAccessManager.h"
 #include <QTranslator>
 
 #include "../version.h"
@@ -105,6 +104,7 @@ public:
 	void				UpdateTheme();
 	void				UpdateTitleTheme(const HWND& hwnd);
 
+	SB_STATUS			ReloadCert(QWidget* pWidget = NULL);
 	void				UpdateCertState();
 
 	void				SaveMessageLog(QIODevice* pFile);
@@ -142,6 +142,7 @@ protected:
 	bool				m_bStopPending;
 	CBoxBorder*			m_pBoxBorder;
 	CSbieTemplatesEx*	m_SbieTemplates;
+
 	CScriptManager*		m_SbieScripts;
 	CAddonManager*		m_AddonManager;
 	

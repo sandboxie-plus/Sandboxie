@@ -4671,12 +4671,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1149"/>
         <source>Subscription</source>
-        <translation>Abonnement</translation>
+        <translation>Subscription</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1151"/>
         <source>Evaluation</source>
-        <translation>Bewertung</translation>
+        <translation>Evaluation</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1153"/>

@@ -16,7 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Improved online updater code
 
 ### Fixed
-- fixed Symbolic links created inside of sandbox don’t work properly [#3181](https://github.com/sandboxie-plus/Sandboxie/issues/3181)
+- fixed Symbolic links created inside of sandbox don't work properly [#3181](https://github.com/sandboxie-plus/Sandboxie/issues/3181)
 
 
 

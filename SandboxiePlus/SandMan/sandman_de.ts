@@ -2849,7 +2849,7 @@ Nein wählt: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2600"/>
         <source>The Certificate is node locked.</source>
-        <translation>Das Zertifikat ist gesperrt.</translation>
+        <translation>Das Zertifikat ist an ein anderes Gerät gebunden (node-locked).</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2604"/>

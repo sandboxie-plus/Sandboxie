@@ -579,29 +579,50 @@ Vänligen gå till korrekt användarprofilskatalog.</translation>
 <context>
     <name>CCertificatePage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="235"/>
+        <location filename="Wizards/SetupWizard.cpp" line="236"/>
         <source>Install your &lt;b&gt;Sandboxie-Plus&lt;/b&gt; support certificate</source>
         <translation>Installera ditt &lt;b&gt;Sandboxie-Plus&lt;/b&gt; supportcertifikat</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="236"/>
+        <location filename="Wizards/SetupWizard.cpp" line="237"/>
         <source>If you have a supporter certificate, please fill it into the field below.</source>
         <translation>Om du har ett supportercertifikat, vänligen ange det i fältet nedan.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="258"/>
+        <location filename="Wizards/SetupWizard.cpp" line="259"/>
+        <source>Retrieve certificate using Serial Number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/SetupWizard.cpp" line="265"/>
         <source>Start evaluation without a certificate for a limited period of time.</source>
         <translation>Starta en evaluering utan ett certifikat för en begränsad tidsperiod.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="286"/>
+        <location filename="Wizards/SetupWizard.cpp" line="293"/>
         <source>To use &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in a business setting, an appropriate &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt; for business use is required. If you do not yet have the required certificate(s), you can get those from the &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com web shop&lt;/a&gt;.</source>
         <translation>För att använda &lt;b&gt;Sandboxie-Plus&lt;/b&gt; i en affärsmiljö, krävs ett lämpligt &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supportcertifikat&lt;/a&gt; för affärsanvändande. Om du ännu inte har det krävda certifikatet kan du skaffa det eller dessa från &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com webbshop&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="300"/>
+        <location filename="Wizards/SetupWizard.cpp" line="307"/>
         <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
         <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; ger ytterligare funktioner och lådtyper exklusivt till &lt;u&gt;projektsupportrar&lt;/u&gt;. Lådor likt de integritetsutökade lådorna &lt;b&gt;&lt;font color=&apos;red&apos;&gt;skyddar användardata från olaglig tillgång&lt;/font&gt;&lt;/b&gt; av de sandlådade programmen. Om du ännu inte är en supporter, vänligen överväg då att &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporta projektet&lt;/a&gt; för att säkerställa fortsatt utveckling av Sandboxie och för att få ett &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supportercertifikat&lt;/a&gt;.</translation>
+    </message>
+    <message>
+        <location filename="Wizards/SetupWizard.cpp" line="344"/>
+        <source>Failed to retrive the certificate.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/SetupWizard.cpp" line="345"/>
+        <source>
+Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/SetupWizard.cpp" line="360"/>
+        <source>Retreiving certificate...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -785,12 +806,12 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
 <context>
     <name>CFinishPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="671"/>
+        <location filename="Wizards/SetupWizard.cpp" line="708"/>
         <source>Complete your configuration</source>
         <translation>Färdigställ din konfiguration</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="678"/>
+        <location filename="Wizards/SetupWizard.cpp" line="715"/>
         <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
         <translation>Nästan färdigt, klicka på Avsluta för att tillämpa alla valda alternativ och färdigställ guiden.</translation>
     </message>
@@ -857,6 +878,14 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
     </message>
 </context>
 <context>
+    <name>CGetFileJob</name>
+    <message>
+        <location filename="OnlineUpdater.cpp" line="192"/>
+        <source>Failed to download file from: %1</source>
+        <translation type="unfinished">Misslyckades att nedladda fil från: %1</translation>
+    </message>
+</context>
+<context>
     <name>CGroupPage</name>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="327"/>
@@ -877,32 +906,32 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
 <context>
     <name>CIntroPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="157"/>
+        <location filename="Wizards/SetupWizard.cpp" line="158"/>
         <source>Introduction</source>
         <translation>Introduktion</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="161"/>
+        <location filename="Wizards/SetupWizard.cpp" line="162"/>
         <source>Welcome to the Setup Wizard. This wizard will help you to configure your copy of &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. You can start this wizard at any time from the Sandbox-&gt;Maintenance menu if you do not wish to complete it now.</source>
         <translation>Välkommen till installationsguiden. Denna guide hjälper dig att konfigurera din kopia av &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. Du kan starta denna guide närsomhelst från menyn Sandlåda-&gt;Underhåll, om du inte vill fullfölja den nu.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="170"/>
+        <location filename="Wizards/SetupWizard.cpp" line="171"/>
         <source>Select how you would like to use Sandboxie-Plus</source>
         <translation>Välj hur du skulle vilja använda Sandboxie-Plus</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="173"/>
+        <location filename="Wizards/SetupWizard.cpp" line="174"/>
         <source>&amp;Personally, for private non-commercial use</source>
         <translation>&amp;Personligen, för privat icke-kommersiell användning</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="178"/>
+        <location filename="Wizards/SetupWizard.cpp" line="179"/>
         <source>&amp;Commercially, for business or enterprise use</source>
         <translation>&amp;Kommersiellt, för affärs- eller företagsanvändande</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="183"/>
+        <location filename="Wizards/SetupWizard.cpp" line="184"/>
         <source>Note: this option is persistent</source>
         <translation>Notera: detta alternativ är bestående</translation>
     </message>
@@ -1030,121 +1059,120 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
 <context>
     <name>COnlineUpdater</name>
     <message>
-        <location filename="OnlineUpdater.cpp" line="100"/>
+        <location filename="OnlineUpdater.cpp" line="303"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
         <translation>Vill du kontrollera om det finns en ny version av Sandboxie-Plus?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="101"/>
+        <location filename="OnlineUpdater.cpp" line="304"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Visa inte detta meddelande igen.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="238"/>
+        <location filename="OnlineUpdater.cpp" line="359"/>
         <source>Checking for updates...</source>
         <translation>Söker efter uppdateringar...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="278"/>
+        <location filename="OnlineUpdater.cpp" line="366"/>
         <source>server not reachable</source>
         <translation>onåbar server</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="279"/>
-        <location filename="OnlineUpdater.cpp" line="281"/>
+        <location filename="OnlineUpdater.cpp" line="367"/>
+        <location filename="OnlineUpdater.cpp" line="369"/>
         <source>Failed to check for updates, error: %1</source>
         <translation>Misslyckades att söka uppdateringar, fel: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="434"/>
+        <location filename="OnlineUpdater.cpp" line="526"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Vill du nerladda installeraren?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="436"/>
+        <location filename="OnlineUpdater.cpp" line="528"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Vill du nerladda uppdateringarna?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="438"/>
+        <location filename="OnlineUpdater.cpp" line="530"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;update page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Vill du gå till&lt;a href=&quot;%1&quot;&gt;uppdateringssidan&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="446"/>
+        <location filename="OnlineUpdater.cpp" line="538"/>
         <source>Don&apos;t show this update anymore.</source>
         <translation>Visa inte denna uppdatering något mer.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="564"/>
+        <location filename="OnlineUpdater.cpp" line="660"/>
         <source>Downloading updates...</source>
         <translation>Nerladdar uppdateringar...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="590"/>
+        <location filename="OnlineUpdater.cpp" line="686"/>
         <source>invalid parameter</source>
         <translation>ogiltig parameter</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="591"/>
+        <location filename="OnlineUpdater.cpp" line="687"/>
         <source>failed to download updated information</source>
         <oldsource>failed to download update informations</oldsource>
         <translation>misslyckades att nerladda uppdaterad information</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="592"/>
+        <location filename="OnlineUpdater.cpp" line="688"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
         <translation>misslyckades att ladda uppdaterad json-fil</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="593"/>
+        <location filename="OnlineUpdater.cpp" line="689"/>
         <source>failed to download a particular file</source>
         <translation>misslyckades att nerladda en särskild fil</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="594"/>
+        <location filename="OnlineUpdater.cpp" line="690"/>
         <source>failed to scan existing installation</source>
         <translation>misslyckades att skanna existerande installation</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="595"/>
+        <location filename="OnlineUpdater.cpp" line="691"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
         <translation>uppdaterad signatur är ogiltig!!!</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="596"/>
+        <location filename="OnlineUpdater.cpp" line="692"/>
         <source>downloaded file is corrupted</source>
         <translation>nerladdad fil är korrupt</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="597"/>
+        <location filename="OnlineUpdater.cpp" line="693"/>
         <source>internal error</source>
         <translation>internt fel</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="598"/>
+        <location filename="OnlineUpdater.cpp" line="694"/>
         <source>unknown error</source>
         <translation>okänt fel</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="622"/>
+        <location filename="OnlineUpdater.cpp" line="718"/>
         <source>Failed to download updates from server, error %1</source>
         <translation>Misslyckades att nerladda uppdateringar från servern, fel %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="641"/>
+        <location filename="OnlineUpdater.cpp" line="737"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Uppdateringar för Sandboxie-Plus har nerladdats.&lt;/p&gt;&lt;p&gt;Vill du tillämpa dessa uppdateringar? Om några program körs sandlådade, kommer de att avslutas.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="776"/>
         <source>Failed to download file from: %1</source>
-        <translation>Misslyckades att nedladda fil från: %1</translation>
+        <translation type="vanished">Misslyckades att nedladda fil från: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="810"/>
+        <location filename="OnlineUpdater.cpp" line="839"/>
         <source>Downloading installer...</source>
         <translation>Nerladdar installeraren...</translation>
     </message>
@@ -1153,17 +1181,17 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
         <translation type="vanished">Misslyckades att nerladda installeraren från: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="849"/>
+        <location filename="OnlineUpdater.cpp" line="879"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;En ny Sandboxie-Plus installerare har nerladdats till följande plats:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Vill du påbörja installationen? Om några program körs sandlådade, kommer de att avslutas.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="914"/>
+        <location filename="OnlineUpdater.cpp" line="944"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Vill du gå till &lt;a href=&quot;%1&quot;&gt;infosidan&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="922"/>
+        <location filename="OnlineUpdater.cpp" line="952"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>Visa inte detta besked i framtiden.</translation>
     </message>
@@ -1172,7 +1200,7 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
         <translation type="vanished">&lt;p&gt;Det finns en ny version av Sandboxie-Plus tillgänglig.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Ny version:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="428"/>
+        <location filename="OnlineUpdater.cpp" line="520"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;New version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;Det finns en ny version av Sandboxie-Plus tillgänglig.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;Ny version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
@@ -1189,7 +1217,7 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
         <translation type="vanished">Visa inte detta meddelande något mer.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="305"/>
+        <location filename="OnlineUpdater.cpp" line="394"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
@@ -1210,19 +1238,16 @@ Notera: Uppdateringskontrollen är ofta bakom senaste GitHub-utgivningen för at
         <translation type="vanished">&lt;p&gt;En Sandboxie-Plus uppdatering har nerladdats till följande plats:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Vill du påbörja installationen? Om några program körs sandlådade, kommer de avslutas.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1047"/>
         <source>Checking for certificate...</source>
-        <translation>Söker efter certifikat...</translation>
+        <translation type="vanished">Söker efter certifikat...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1088"/>
         <source>No certificate found on server!</source>
-        <translation>Inget certifikat hittades på servern!</translation>
+        <translation type="vanished">Inget certifikat hittades på servern!</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1093"/>
         <source>There is no updated certificate available.</source>
-        <translation>Det finns inget uppdaterat certifikat tillgängligt.</translation>
+        <translation type="vanished">Det finns inget uppdaterat certifikat tillgängligt.</translation>
     </message>
 </context>
 <context>
@@ -2373,122 +2398,122 @@ Fel: </translation>
 <context>
     <name>CSBUpdate</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="530"/>
+        <location filename="Wizards/SetupWizard.cpp" line="567"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; updater</source>
         <translation>Konfigurera &lt;b&gt;Sandboxie-Plus&lt;/b&gt; uppdaterare</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="531"/>
+        <location filename="Wizards/SetupWizard.cpp" line="568"/>
         <source>Like with any other security product, it&apos;s important to keep your Sandboxie-Plus up to date.</source>
         <oldsource>Like with any other security product it&apos;s important to keep your Sandboxie-Plus up to date.</oldsource>
         <translation>Likt med andra säkerhetsprodukter, så är det viktigt att hålla ditt Sandboxie-Plus uppdaterat.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="539"/>
+        <location filename="Wizards/SetupWizard.cpp" line="576"/>
         <source>Regularly check for all updates to Sandboxie-Plus and optional components</source>
         <oldsource>Regularly Check for all updates to Sandboxie-Plus and optional components</oldsource>
         <translation>Sök regelbundet efter alla uppdateringar till Sandboxie-Plus och valfria komponenter</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="540"/>
+        <location filename="Wizards/SetupWizard.cpp" line="577"/>
         <source>Let Sandboxie regularly check for latest updates.</source>
         <oldsource>Let sandboxie regularly check for latest updates.</oldsource>
         <translation>Låt Sandboxie regelbundet söka efter senaste uppdateringarna.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="550"/>
+        <location filename="Wizards/SetupWizard.cpp" line="587"/>
         <source>Check for new Sandboxie-Plus versions:</source>
         <translation>Sök efter nya Sandboxie-Plus versioner:</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="551"/>
+        <location filename="Wizards/SetupWizard.cpp" line="588"/>
         <source>Check for new Sandboxie-Plus builds.</source>
         <translation>Sök efter nya Sandboxie-Plus byggen.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="557"/>
+        <location filename="Wizards/SetupWizard.cpp" line="594"/>
         <source>Select in which update channel to look for new Sandboxie-Plus builds:</source>
         <oldsource>Sellect in which update channel to look for new Sandboxie-Plus builds:</oldsource>
         <translation>Välj vilken uppdateringskanal att titta i efter nya Sandboxie-Plus byggen:</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="566"/>
+        <location filename="Wizards/SetupWizard.cpp" line="603"/>
         <source>In the Stable Channel</source>
         <translation>I Stable-kanalen</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="567"/>
+        <location filename="Wizards/SetupWizard.cpp" line="604"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>Stable-kanalen innehåller de senaste stabila GitHub-utgivningarna.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="571"/>
+        <location filename="Wizards/SetupWizard.cpp" line="608"/>
         <source>In the Preview Channel - with newest experimental changes</source>
         <translation>I Preview-kanalen - med nyaste experimentella ändringarna</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="572"/>
+        <location filename="Wizards/SetupWizard.cpp" line="609"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>Preview-kanalen innehåller de senaste GitHub förutgivningarna.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="576"/>
+        <location filename="Wizards/SetupWizard.cpp" line="613"/>
         <source>In the Insider Channel - exclusive features</source>
         <translation>I Insider-kanalen - exklusiva egenskaper</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="577"/>
+        <location filename="Wizards/SetupWizard.cpp" line="614"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation>Insider-kanalen erbjuder tidig tillgång till nya egenskaper och buggfixar som slutligen släpps allmänt, samt alla relevanta förbättringar från stable-kanalen.
 Till skillnad från preview-kanalen, inkluderar den inte otestade eller experimentella ändringar som kanske inte är redo för bredare användning.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="582"/>
+        <location filename="Wizards/SetupWizard.cpp" line="619"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
         <translation>Mer om &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider-kanalen&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="591"/>
+        <location filename="Wizards/SetupWizard.cpp" line="628"/>
         <source>Keep Compatibility Templates up to date and apply hotfixes</source>
         <oldsource>Keep Compatybility Templates up to date and apply hotfixes</oldsource>
         <translation>Håll kompatibilitetsmallar uppdaterade och tillämpa snabbfixar</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="592"/>
+        <location filename="Wizards/SetupWizard.cpp" line="629"/>
         <source>Check for latest compatibility templates and hotfixes.</source>
         <oldsource>Check for latest compatybility tempaltes and hotfixes.</oldsource>
         <translation>Sök efter de senaste kompatibilitetsmallarna och snabbfixarna.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="596"/>
+        <location filename="Wizards/SetupWizard.cpp" line="633"/>
         <source>Get the latest Scripts for the Troubleshooting Wizard</source>
         <translation>Skaffa de senaste scripten för felsökningsguiden</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="597"/>
+        <location filename="Wizards/SetupWizard.cpp" line="634"/>
         <source>Check for latest troubleshooting scripts for the troubleshooting wizard.</source>
         <oldsource>Check for latest troubleshooting scripts for the troubleshooting wizars.</oldsource>
         <translation>Sök efter de senaste felsökningsscripten för felsökningsguiden.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="601"/>
+        <location filename="Wizards/SetupWizard.cpp" line="638"/>
         <source>Keep the list of optional Addon components up to date</source>
         <translation>Håll listan av valfria tilläggskomponenter uppdaterad</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="602"/>
+        <location filename="Wizards/SetupWizard.cpp" line="639"/>
         <source>Check for latest available addons.</source>
         <oldsource>Check for latest avaialble addons.</oldsource>
         <translation>Sök efter senaste tillgängliga tillägg.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="611"/>
+        <location filename="Wizards/SetupWizard.cpp" line="648"/>
         <source>Sandboxie-Plus applies strict application restrictions, which can lead to compatibility issues. Stay updated with Sandboxie-Plus, including compatibility templates and troubleshooting, to ensure smooth operation amid Windows updates and application changes.</source>
         <translation>Sandboxie-Plus tillämpar strikta applikationsbegränsningar, vilket kan leda till kompatibilitetsproblem. Var uppdaterad med Sandboxie-Plus, inklusive kompatibilitetsmallar och felsökning, för att säkerställa smidig funktion mitt ibland Windows uppdateringar och applikationers ändringar.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="617"/>
+        <location filename="Wizards/SetupWizard.cpp" line="654"/>
         <source>Access to the latest compatibility templates and the online troubleshooting database requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
         <translation>Tillgång till de senaste kompatibilitetsmallarna och den nätbaserade felsökningsdatabasen kräver ett giltigt &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supportercertifikat&lt;/a&gt;.</translation>
     </message>
@@ -2496,22 +2521,22 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade eller experime
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="3825"/>
+        <location filename="SandMan.cpp" line="3902"/>
         <source>Waiting for folder: %1</source>
         <translation>Väntar på mapp: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3826"/>
+        <location filename="SandMan.cpp" line="3903"/>
         <source>Deleting folder: %1</source>
         <translation>Raderar mapp: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3827"/>
+        <location filename="SandMan.cpp" line="3904"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>Sammanför mappar: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3828"/>
+        <location filename="SandMan.cpp" line="3905"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>Slutför sammanförande av ögonblicksbilder...</translation>
     </message>
@@ -2632,7 +2657,7 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade eller experime
         <translation>Installation</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2634"/>
+        <location filename="SandMan.cpp" line="2677"/>
         <source>The evaluation period has expired!!!</source>
         <translation>Utvärderingsperioden har utgått!</translation>
     </message>
@@ -2646,52 +2671,52 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade eller experime
         <translation type="vanished">Importerar :%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2768"/>
+        <location filename="SandMan.cpp" line="2811"/>
         <source>No Recovery</source>
         <translation>Inget återställande</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2774"/>
+        <location filename="SandMan.cpp" line="2817"/>
         <source>No Messages</source>
         <translation>Inga meddelanden</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2938"/>
+        <location filename="SandMan.cpp" line="2981"/>
         <source>Maintenance operation completed</source>
         <translation>Underhållsoperation avklarad</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3472"/>
+        <location filename="SandMan.cpp" line="3515"/>
         <source>Failed to create the box archive</source>
         <translation>Misslyckades att skapa lådarkivet</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3474"/>
+        <location filename="SandMan.cpp" line="3517"/>
         <source>Failed to unpack the box archive</source>
         <translation>Misslyckades att packa upp lådarkivet</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3475"/>
+        <location filename="SandMan.cpp" line="3518"/>
         <source>The selected 7z file is NOT a box archive</source>
         <translation>Den valda 7z-filen är INTE ett lådarkiv</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3715"/>
+        <location filename="SandMan.cpp" line="3756"/>
         <source>Reset Columns</source>
         <translation>Återställ kolumner</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3716"/>
+        <location filename="SandMan.cpp" line="3757"/>
         <source>Copy Cell</source>
         <translation>Kopiera cellen</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3717"/>
+        <location filename="SandMan.cpp" line="3758"/>
         <source>Copy Row</source>
         <translation>Kopiera raden</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3718"/>
+        <location filename="SandMan.cpp" line="3759"/>
         <source>Copy Panel</source>
         <translation>Kopiera panelen</translation>
     </message>
@@ -2978,7 +3003,7 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade eller experime
     </message>
     <message>
         <location filename="SandMan.cpp" line="481"/>
-        <location filename="SandMan.cpp" line="3799"/>
+        <location filename="SandMan.cpp" line="3840"/>
         <source>About Sandboxie-Plus</source>
         <translation>Om Sandboxie-Plus</translation>
     </message>
@@ -3148,9 +3173,9 @@ Vill du göra rensningen?</translation>
         <location filename="SandMan.cpp" line="1311"/>
         <location filename="SandMan.cpp" line="1747"/>
         <location filename="SandMan.cpp" line="2108"/>
-        <location filename="SandMan.cpp" line="2793"/>
-        <location filename="SandMan.cpp" line="3224"/>
-        <location filename="SandMan.cpp" line="3240"/>
+        <location filename="SandMan.cpp" line="2836"/>
+        <location filename="SandMan.cpp" line="3267"/>
+        <location filename="SandMan.cpp" line="3283"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Visa inte detta meddelande igen.</translation>
     </message>
@@ -3292,17 +3317,17 @@ Nej väljer: %2</translation>
         <translation>   -   INTE ansluten</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2496"/>
+        <location filename="SandMan.cpp" line="2505"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
         <translation>Programmet %1 startad i låda %2 kommer att avslutas om 5 minuter för att lådan konfigurerades att använda funktioner exklusivt tillgängliga för projektsupportrar.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2498"/>
+        <location filename="SandMan.cpp" line="2507"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
         <translation>Låda %1 är konfigurerad att använda funktioner exklusivt tillgängliga för projektsupportrar, dessa inställningar kommer ignoreras.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2499"/>
+        <location filename="SandMan.cpp" line="2508"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Bli en projektsupporter&lt;/a&gt;, och få ett &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supportercertifikat&lt;/a&gt;</translation>
     </message>
@@ -3315,7 +3340,7 @@ Nej väljer: %2</translation>
         <translation type="vanished">%1 (%2): </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2566"/>
+        <location filename="SandMan.cpp" line="2575"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>Den valda funktionsuppsättningen är endast tillgänglig för projektsupportrar. Processer startade i en låda med denna funktionsuppsättning aktiverad utan ett supportercertifikat kommer att avslutas efter 5 minuter.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Bli en projektsupporter&lt;/a&gt;, och få ett &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supportercertifikat&lt;/a&gt;</translation>
     </message>
@@ -3324,22 +3349,22 @@ Nej väljer: %2</translation>
         <translation type="vanished">Evalueringsperioden har utgått!</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2639"/>
+        <location filename="SandMan.cpp" line="2682"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
         <translation>Supportercertifikatet är inte giltigt för denna konstruktion, vänligen skaffa ett uppdaterat certifikat</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2642"/>
+        <location filename="SandMan.cpp" line="2685"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <translation>Supportercertifikatet har utgått%1, vänligen skaffa ett uppdaterat certifikat</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2643"/>
+        <location filename="SandMan.cpp" line="2686"/>
         <source>, but it remains valid for the current build</source>
         <translation>, men det förblir giltigt för nuvarande bygge</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2645"/>
+        <location filename="SandMan.cpp" line="2688"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
         <translation>Supportercertifikatet utgår om %1 dagar, vänligen skaffa ett uppdaterat certifikat</translation>
     </message>
@@ -3399,17 +3424,17 @@ Nej väljer: %2</translation>
 </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2686"/>
+        <location filename="SandMan.cpp" line="2729"/>
         <source>Only Administrators can change the config.</source>
         <translation>Endast administratörer kan ändra konfigurationen.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2696"/>
+        <location filename="SandMan.cpp" line="2739"/>
         <source>Please enter the configuration password.</source>
         <translation>Vänligen ange konfigurationslösenordet.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2704"/>
+        <location filename="SandMan.cpp" line="2747"/>
         <source>Login Failed: %1</source>
         <translation>Inloggning misslyckades: %1</translation>
     </message>
@@ -3422,49 +3447,49 @@ Nej väljer: %2</translation>
         <translation type="vanished">7-zip arkiv (*.7z)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2733"/>
+        <location filename="SandMan.cpp" line="2776"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
         <translation>Vill du avsluta alla processer i alla sandlådor?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2734"/>
+        <location filename="SandMan.cpp" line="2777"/>
         <source>Terminate all without asking</source>
         <translation>Avsluta alla utan att fråga</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2753"/>
+        <location filename="SandMan.cpp" line="2796"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
         <translation>Vänligen ange varaktigheten, i sekunder, för inaktivering av tvingade programs regler.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2792"/>
+        <location filename="SandMan.cpp" line="2835"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>Sandboxie-Plus startades i portabelt läge och det behöver skapa nödvändiga tjänster. Detta ger förfrågan om administrativa rättigheter.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2826"/>
+        <location filename="SandMan.cpp" line="2869"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
         <translation>FÖRSIKTIG: En annan agent (troligen SbieCtrl.exe) hanterar redan denna Sandboxie-session, vänligen stäng den först och återanslut för att ta över.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2929"/>
-        <location filename="SandMan.cpp" line="2931"/>
-        <location filename="SandMan.cpp" line="3499"/>
+        <location filename="SandMan.cpp" line="2972"/>
+        <location filename="SandMan.cpp" line="2974"/>
+        <location filename="SandMan.cpp" line="3542"/>
         <source>Sandboxie-Plus - Error</source>
         <translation>Sandboxie-Plus - Fel</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2929"/>
+        <location filename="SandMan.cpp" line="2972"/>
         <source>Failed to stop all Sandboxie components</source>
         <translation>Misslyckades att stoppa alla Sandboxie-komponenter</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2931"/>
+        <location filename="SandMan.cpp" line="2974"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>Misslyckades att starta krävda Sandboxie-komponenter</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2933"/>
+        <location filename="SandMan.cpp" line="2976"/>
         <source>Maintenance operation failed (%1)</source>
         <translation>Underhållsoperationen misslyckades (%1)</translation>
     </message>
@@ -3583,38 +3608,60 @@ Nej väljer: %2</translation>
         <translation>Autoborttager sandlåda %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2406"/>
-        <location filename="SandMan.cpp" line="2408"/>
+        <location filename="SandMan.cpp" line="2409"/>
+        <location filename="SandMan.cpp" line="2413"/>
+        <location filename="SandMan.cpp" line="2415"/>
         <source> (%1)</source>
         <translation> (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2830"/>
+        <location filename="SandMan.cpp" line="2598"/>
+        <source>The Certificate Signature is invalid!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2599"/>
+        <source>The Certificate is not suitable for this product.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2600"/>
+        <source>The Certificate is node locked.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2604"/>
+        <source>The support certificate is not valid.
+Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2873"/>
         <source>&lt;b&gt;ERROR:&lt;/b&gt; The Sandboxie-Plus Manager (SandMan.exe) does not have a valid signature (SandMan.exe.sig). Please download a trusted release from the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;official Download page&lt;/a&gt;.</source>
         <translation>&lt;b&gt;FEL:&lt;/b&gt; Sandboxie-Plus hanterare (SandMan.exe) har inte en giltig signatur (SandMan.exe.sig). Vänligen nedladda en betrodd utgåva från den &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;officiella nedladdningssidan&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2958"/>
+        <location filename="SandMan.cpp" line="3001"/>
         <source>Executing maintenance operation, please wait...</source>
         <translation>Verkställer underhållsoperationen, vänligen vänta...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3072"/>
+        <location filename="SandMan.cpp" line="3115"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
         <translation>I användargränssnittet i Plus, har denna funktion integrerats in i huvudsandlådans listöversikt.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3073"/>
+        <location filename="SandMan.cpp" line="3116"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
         <translation>Vid användning av låd-/gruppsnabbmenyn, kan du flytta lådor och grupper till andra grupper. Du kan också dra och släppa för att flytta omkring poster. Alternativt, du kan också använda piltangenterna medans du håller ner ALT för flytta poster upp och ner inom dess grupp.&lt;br /&gt;Du kan skapa nya lådor och grupper från menyn Sandlåda.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3141"/>
+        <location filename="SandMan.cpp" line="3184"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
         <translation>Vill du också återställa dolda meddelandelådor (Ja), eller bara alla loggmeddelanden (Nej)?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3222"/>
+        <location filename="SandMan.cpp" line="3265"/>
         <source>You are about to edit the Templates.ini, this is generally not recommended.
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
@@ -3623,244 +3670,244 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 Denna fil är en del av Sandboxie och alla ändringar gjorda i den återställs nästa gång Sandboxie uppdateras.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3238"/>
+        <location filename="SandMan.cpp" line="3281"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
         <translation>Ändringarna tillämpas automatiskt närhelst filen sparas.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3239"/>
+        <location filename="SandMan.cpp" line="3282"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
         <translation>Ändringarna tillämpas automatiskt så fort som redigeraren stängs.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3302"/>
+        <location filename="SandMan.cpp" line="3345"/>
         <source>Sandboxie config has been reloaded</source>
         <translation>Sandboxie-konfigurationen har laddats om</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3429"/>
+        <location filename="SandMan.cpp" line="3472"/>
         <source>Error Status: 0x%1 (%2)</source>
         <translation>Felstatus: 0x%1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3430"/>
+        <location filename="SandMan.cpp" line="3473"/>
         <source>Unknown</source>
         <translation>Okänd</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3432"/>
+        <location filename="SandMan.cpp" line="3475"/>
         <source>Administrator rights are required for this operation.</source>
         <translation>Administratörsrättigheter krävs för denna operation.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3433"/>
+        <location filename="SandMan.cpp" line="3476"/>
         <source>Failed to execute: %1</source>
         <translation>Misslyckades att verkställa: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3434"/>
+        <location filename="SandMan.cpp" line="3477"/>
         <source>Failed to connect to the driver</source>
         <translation>Misslyckades att ansluta till drivrutinen</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3435"/>
+        <location filename="SandMan.cpp" line="3478"/>
         <source>Failed to communicate with Sandboxie Service: %1</source>
         <translation>Misslyckades att kommunicera med Sandboxies tjänst: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3436"/>
+        <location filename="SandMan.cpp" line="3479"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
         <translation>En inkompatibel Sandboxie %1 hittades. Kompatibla versioner: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3437"/>
+        <location filename="SandMan.cpp" line="3480"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
         <translation>Kan inte finna Sandboxies installationssökväg.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3438"/>
+        <location filename="SandMan.cpp" line="3481"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
         <translation>Misslyckades att kopiera konfigurationen från sandlåda %1: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3439"/>
+        <location filename="SandMan.cpp" line="3482"/>
         <source>A sandbox of the name %1 already exists</source>
         <translation>En sandlåda med namnet %1 existerar redan</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3440"/>
+        <location filename="SandMan.cpp" line="3483"/>
         <source>Failed to delete sandbox %1: %2</source>
         <translation>Misslyckades att radera sandlåda %1: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3441"/>
+        <location filename="SandMan.cpp" line="3484"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
         <translation>Sandlådenamnet kan inte vara längre än 32 tecken.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3442"/>
+        <location filename="SandMan.cpp" line="3485"/>
         <source>The sandbox name can not be a device name.</source>
         <translation>Sandlådenamnet kan inte vara ett enhetsnamn.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3443"/>
+        <location filename="SandMan.cpp" line="3486"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
         <translation>Sandlådenamnet kan bara innehålla bokstäver, siffror och understrykningar vilka visas som utrymmen.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3444"/>
+        <location filename="SandMan.cpp" line="3487"/>
         <source>Failed to terminate all processes</source>
         <translation>Misslyckades att avsluta alla processer</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3445"/>
+        <location filename="SandMan.cpp" line="3488"/>
         <source>Delete protection is enabled for the sandbox</source>
         <translation>Raderingsskydd är aktiverat för sandlådan</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3446"/>
+        <location filename="SandMan.cpp" line="3489"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
         <translation>Alla sandlådeprocesser måste stoppas innan lådinnehållet kan raderas</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3447"/>
+        <location filename="SandMan.cpp" line="3490"/>
         <source>Error deleting sandbox folder: %1</source>
         <translation>Fel vid radering av sandlådemapp: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3448"/>
+        <location filename="SandMan.cpp" line="3491"/>
         <source>All processes in a sandbox must be stopped before it can be renamed.</source>
         <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
         <translation>Alla processer i en sandlåda behöver stoppas innan den kan namnändras.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3450"/>
+        <location filename="SandMan.cpp" line="3493"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
         <translation>En sandlåda måste tömmas innan den kan raderas.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3451"/>
+        <location filename="SandMan.cpp" line="3494"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>Misslyckades att flytta katalog &apos;%1&apos; till &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3452"/>
+        <location filename="SandMan.cpp" line="3495"/>
         <source>Failed to move box image &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>Misslyckades att flytta lådavbild %1 till %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3453"/>
+        <location filename="SandMan.cpp" line="3496"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
         <translation>Denna ögonblicksbildoperation kan inte utföras medan processer fortfarande kör i lådan.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3454"/>
+        <location filename="SandMan.cpp" line="3497"/>
         <source>Failed to create directory for new snapshot</source>
         <translation>Misslyckades att skapa katalog för ny ögonblicksbild</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3455"/>
+        <location filename="SandMan.cpp" line="3498"/>
         <source>Failed to copy box data files</source>
         <translation>Misslyckades att kopiera låddatafiler</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3456"/>
+        <location filename="SandMan.cpp" line="3499"/>
         <source>Snapshot not found</source>
         <translation>Ögonblicksbild hittades inte</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3457"/>
+        <location filename="SandMan.cpp" line="3500"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
         <translation>Fel vid sammanförande av ögonblicksbildkataloger &apos;%1&apos; med &apos;%2&apos;. Ögonblicksbilden har inte blivit helt sammanförd.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3458"/>
+        <location filename="SandMan.cpp" line="3501"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
         <translation>Misslyckades att ta bort gammal ögonblicksbildkatalog &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3459"/>
+        <location filename="SandMan.cpp" line="3502"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>Kan inte ta bort en ögonblicksbild som delas av flera senare ögonblicksbilder</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3460"/>
+        <location filename="SandMan.cpp" line="3503"/>
         <source>Failed to remove old box data files</source>
         <translation>Misslyckades att ta bort gamla låddatafiler</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3461"/>
+        <location filename="SandMan.cpp" line="3504"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
         <translation>Du är inte berättigad att uppdatera konfigurationen i sektion &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3462"/>
+        <location filename="SandMan.cpp" line="3505"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
         <translation>Misslyckades att ange konfigurationsinställning %1 i sektion %2: %3</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3463"/>
+        <location filename="SandMan.cpp" line="3506"/>
         <source>Can not create snapshot of an empty sandbox</source>
         <translation>Kan inte skapa ögonblicksbild av en tom sandlåda</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3464"/>
+        <location filename="SandMan.cpp" line="3507"/>
         <source>A sandbox with that name already exists</source>
         <translation>En sandlåda med det namnet existerar redan</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3465"/>
+        <location filename="SandMan.cpp" line="3508"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>Konfigurationslösenordet får inte vara längre än 64 tecken</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3466"/>
+        <location filename="SandMan.cpp" line="3509"/>
         <source>The operation was canceled by the user</source>
         <translation>Operationen avbröts av användaren</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3467"/>
+        <location filename="SandMan.cpp" line="3510"/>
         <source>The content of an unmounted sandbox can not be deleted</source>
         <oldsource>The content of an un mounted sandbox can not be deleted</oldsource>
         <translation>Innehållet i en omonterad sandlåda kan inte raderas</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3469"/>
+        <location filename="SandMan.cpp" line="3512"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3471"/>
+        <location filename="SandMan.cpp" line="3514"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
         <translation>Importera/Exportera ej tillgängligt, 7z.dll kunde ej laddas</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3719"/>
+        <location filename="SandMan.cpp" line="3760"/>
         <source>Case Sensitive</source>
         <translation>Skiftlägeskänslig</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3720"/>
+        <location filename="SandMan.cpp" line="3761"/>
         <source>RegExp</source>
         <translation>RegExp</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3721"/>
+        <location filename="SandMan.cpp" line="3762"/>
         <source>Highlight</source>
         <translation>Markera</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3722"/>
+        <location filename="SandMan.cpp" line="3763"/>
         <source>Close</source>
         <translation>Stäng</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3723"/>
+        <location filename="SandMan.cpp" line="3764"/>
         <source>&amp;Find ...</source>
         <translation>&amp;Hitta ...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3724"/>
+        <location filename="SandMan.cpp" line="3765"/>
         <source>All columns</source>
         <translation>Alla kolumner</translation>
     </message>
@@ -3869,7 +3916,7 @@ Denna fil är en del av Sandboxie och alla ändringar gjorda i den återställs 
         <translation type="vanished">Misslyckades att skapa lådarkiv</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3473"/>
+        <location filename="SandMan.cpp" line="3516"/>
         <source>Failed to open the 7z archive</source>
         <translation>Misslyckades att öppna 7z-arkivet</translation>
     </message>
@@ -3882,22 +3929,22 @@ Denna fil är en del av Sandboxie och alla ändringar gjorda i den återställs 
         <translation type="vanished">Den valda 7z-filen är INTE ett lådarkiv</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3477"/>
+        <location filename="SandMan.cpp" line="3520"/>
         <source>Unknown Error Status: 0x%1</source>
         <translation>Okänd felstatus: 0x%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3501"/>
+        <location filename="SandMan.cpp" line="3544"/>
         <source>Operation failed for %1 item(s).</source>
         <translation>Operationen misslyckades för %1 post(er).</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3563"/>
+        <location filename="SandMan.cpp" line="3604"/>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
         <translation>Vill du öppna %1 i en sandlådad (Ja) eller osandlådad (Nej) webbläsare?</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3564"/>
+        <location filename="SandMan.cpp" line="3605"/>
         <source>Remember choice for later.</source>
         <translation>Kom ihåg valet till senare.</translation>
     </message>
@@ -3958,23 +4005,23 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation type="vanished">&lt;p&gt;En Sandboxie-Plus uppdatering har nerladdats till följande plats:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Vill du påbörja installationen? Om några program körs sandlådade, kommer de avslutas.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3772"/>
+        <location filename="SandMan.cpp" line="3813"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</source>
         <oldsource>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</oldsource>
         <translation>&lt;h3&gt;Om Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Upphovsrättigheter (c) 2020-2023 av DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3780"/>
+        <location filename="SandMan.cpp" line="3821"/>
         <source>This copy of Sandboxie+ is certified for: %1</source>
         <translation>Denna kopia av Sandboxie-Plus är certifierad för: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3782"/>
+        <location filename="SandMan.cpp" line="3823"/>
         <source>Sandboxie+ is free for personal and non-commercial use.</source>
         <translation>Sandboxie-Plus är gratis för personlig och icke-kommersiell användning.</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3785"/>
+        <location filename="SandMan.cpp" line="3826"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>Sandboxie-Plus är en öppen källa fortsättning av Sandboxie.&lt;br /&gt;Besök &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; för mer information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Drivrutinsversion: %1&lt;br /&gt;Funktioner: %2&lt;br /&gt;&lt;br /&gt;Ikoner från &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
@@ -5051,21 +5098,21 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="531"/>
+        <location filename="Windows/SettingsWindow.cpp" line="544"/>
         <source>Search for settings</source>
         <oldsource>Search for Settings</oldsource>
         <translation>Sök efter inställningar</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="761"/>
-        <location filename="Windows/SettingsWindow.cpp" line="762"/>
-        <location filename="Windows/SettingsWindow.cpp" line="772"/>
+        <location filename="Windows/SettingsWindow.cpp" line="774"/>
+        <location filename="Windows/SettingsWindow.cpp" line="775"/>
+        <location filename="Windows/SettingsWindow.cpp" line="785"/>
         <source>Run &amp;Sandboxed</source>
         <translation>Kör &amp;sandlådad</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="793"/>
+        <location filename="Windows/SettingsWindow.cpp" line="806"/>
         <source>Sandboxed Web Browser</source>
         <translation>Sandlådad webbläsare</translation>
     </message>
@@ -5113,68 +5160,67 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation>Nerladda &amp; installera</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="345"/>
+        <location filename="Windows/SettingsWindow.cpp" line="344"/>
         <source>Browse for Program</source>
         <translation>Bläddra efter program</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="427"/>
+        <location filename="Windows/SettingsWindow.cpp" line="426"/>
         <source>Add %1 Template</source>
         <translation>Addera %1 mall</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="482"/>
+        <location filename="Windows/SettingsWindow.cpp" line="495"/>
         <source>Select font</source>
         <translation>Välj typsnitt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="484"/>
+        <location filename="Windows/SettingsWindow.cpp" line="497"/>
         <source>Reset font</source>
         <translation>Återställ typsnitt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="540"/>
+        <location filename="Windows/SettingsWindow.cpp" line="553"/>
         <source>%0, %1 pt</source>
         <translation>%0, %1 pt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="642"/>
+        <location filename="Windows/SettingsWindow.cpp" line="655"/>
         <source>Please enter message</source>
         <translation>Vänligen ange meddelande</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="674"/>
+        <location filename="Windows/SettingsWindow.cpp" line="687"/>
         <source>Select Program</source>
         <translation>Välj program</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="674"/>
+        <location filename="Windows/SettingsWindow.cpp" line="687"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Verkställare (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="678"/>
-        <location filename="Windows/SettingsWindow.cpp" line="694"/>
+        <location filename="Windows/SettingsWindow.cpp" line="691"/>
+        <location filename="Windows/SettingsWindow.cpp" line="707"/>
         <source>Please enter a menu title</source>
         <translation>Vänligen ange en menytitel</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="690"/>
+        <location filename="Windows/SettingsWindow.cpp" line="703"/>
         <source>Please enter a command</source>
         <translation>Vänligen ange ett kommando</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1021"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation>Detta supportercertifikat har utgått, vänligen &lt;a href=&quot;sbie://update/cert&quot;&gt;skaffa ett uppdaterat certifikat&lt;/a&gt;.</translation>
+        <translation type="vanished">Detta supportercertifikat har utgått, vänligen &lt;a href=&quot;sbie://update/cert&quot;&gt;skaffa ett uppdaterat certifikat&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1024"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1038"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus-egenskaper kommer inaktiveras om %1 dagar.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1026"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1040"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5183,144 +5229,227 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;För detta bygge  kvarstår Plus-egenskaperna aktiverade.&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1028"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1043"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Plus-egenskaperna är inte längre aktiverade.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1034"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation>Detta supportercertifikat kommer &lt;font color=&apos;red&apos;&gt;utgå om %1 dagar&lt;/font&gt;, vänligen &lt;a href=&quot;sbie://update/cert&quot;&gt;skaffa ett uppdaterat certifikat&lt;/a&gt;.</translation>
+        <translation type="vanished">Detta supportercertifikat kommer &lt;font color=&apos;red&apos;&gt;utgå om %1 dagar&lt;/font&gt;, vänligen &lt;a href=&quot;sbie://update/cert&quot;&gt;skaffa ett uppdaterat certifikat&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1065"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1205"/>
         <source>Supporter certificate required</source>
         <oldsource>Supproter certificate required</oldsource>
         <translation>Supportercertifikat krävs</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1174"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1314"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>Kör &amp;osandlådad</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1438"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1554"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>Detta ser inte ut som ett certifikat. Vänligen ange hela certifikatet, inte bara en del av det.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1457"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1574"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1459"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1576"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1461"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1578"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1471"/>
         <source>This support certificate is not valid.</source>
         <oldsource>This certificate is unfortunately expired.</oldsource>
-        <translation type="unfinished">Detta certifikat är tyvärr utgånget.</translation>
+        <translation type="obsolete">Detta certifikat är tyvärr utgånget.</translation>
     </message>
     <message>
         <source>This certificate is unfortunately outdated.</source>
         <translation type="vanished">Detta certifikat är tyvärr föråldrat.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1464"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1035"/>
+        <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1049"/>
+        <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1091"/>
+        <source>Retreiving certificate...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1135"/>
+        <source>Contributor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1137"/>
+        <source>Eternal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1139"/>
+        <source>Business</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1141"/>
+        <source>Personal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1143"/>
+        <source>Great Patreon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1145"/>
+        <source>Patreon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1147"/>
+        <source>Family</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1149"/>
+        <source>Subscription</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1151"/>
+        <source>Evaluation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1153"/>
+        <source>Type %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1181"/>
+        <source>Standard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1183"/>
+        <source>Advanced</source>
+        <translation type="unfinished">Avancerad</translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1185"/>
+        <source>Max Level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1187"/>
+        <source>Level %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1581"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Tack för att du stöder utvecklingen av Sandboxie-Plus.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1519"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1634"/>
         <source>Update Available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1521"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1636"/>
         <source>Installed</source>
         <translation>Installlerad</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1526"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1641"/>
         <source>by %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1534"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1649"/>
         <source>(info website)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1561"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1676"/>
         <source>This Addon is mandatory and can not be removed.</source>
         <translation>Detta tillägg är obligatoriskt och kan inte tas bort.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1570"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1716"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1685"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1831"/>
         <source>Select Directory</source>
         <translation>Välj katalog</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1599"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1714"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;Kontrollera nu&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1676"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1791"/>
         <source>Please enter the new configuration password.</source>
         <translation>Vänligen ange det nya konfigurationslösenordet.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1680"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1795"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>Vänligen återange det nya konfigurationslösenordet.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1685"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1800"/>
         <source>Passwords did not match, please retry.</source>
         <translation>Lösenorden stämde inte, vänligen försök igen.</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1697"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1812"/>
         <source>Process</source>
         <translation>Process</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1697"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1812"/>
         <source>Folder</source>
         <translation>Mapp</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1707"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1822"/>
         <source>Please enter a program file name</source>
         <translation>Vänligen ange ett programfilsnamn</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1775"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1890"/>
         <source>Please enter the template identifier</source>
         <translation>Vänligen ange mallidentifieraren</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1783"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1898"/>
         <source>Error: %1</source>
         <translation>Fel: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1808"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1923"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>Vill du verkligen radera de(n) valda lokala mall(arna)(en)?</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2015"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2130"/>
         <source>%1 (Current)</source>
         <translation>%1 (Nuvarande)</translation>
     </message>
@@ -5328,27 +5457,27 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
 <context>
     <name>CSetupWizard</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="32"/>
+        <location filename="Wizards/SetupWizard.cpp" line="33"/>
         <source>Setup Wizard</source>
         <translation>Inställningsguide</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="43"/>
+        <location filename="Wizards/SetupWizard.cpp" line="44"/>
         <source>The decision you make here will affect which page you get to see next.</source>
         <translation>Beslutet du gör här påverkar vilken sida du får se härnäst.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="46"/>
+        <location filename="Wizards/SetupWizard.cpp" line="47"/>
         <source>This help is likely not to be of any help.</source>
         <translation>Denna hjälp är troligen inte till någon hjälp.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="50"/>
+        <location filename="Wizards/SetupWizard.cpp" line="51"/>
         <source>Sorry, I already gave all the help I could.</source>
         <translation>Tyvärr, jag har redan givit all hjälp jag kunde.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="52"/>
+        <location filename="Wizards/SetupWizard.cpp" line="53"/>
         <source>Setup Wizard Help</source>
         <translation>Installationsguidehjälp</translation>
     </message>
@@ -5356,27 +5485,27 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
 <context>
     <name>CShellPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="457"/>
+        <location filename="Wizards/SetupWizard.cpp" line="494"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; shell integration</source>
         <translation>Konfigurera &lt;b&gt;Sandboxie-Plus&lt;/b&gt; skalintegration</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="458"/>
+        <location filename="Wizards/SetupWizard.cpp" line="495"/>
         <source>Configure how Sandboxie-Plus should integrate with your system.</source>
         <translation>Konfigurera hur Sandboxie-Plus ska integrera med ditt system.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="462"/>
+        <location filename="Wizards/SetupWizard.cpp" line="499"/>
         <source>Start UI with Windows</source>
         <translation>Starta programpanelen med Windows</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="467"/>
+        <location filename="Wizards/SetupWizard.cpp" line="504"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
         <translation>Addera Kör sandlådad till utforskarens snabbmeny</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="472"/>
+        <location filename="Wizards/SetupWizard.cpp" line="509"/>
         <source>Add desktop shortcut for starting Web browser under Sandboxie</source>
         <translation>Addera skrivbordsgenväg för start av webbläsare under Sandboxie</translation>
     </message>
@@ -6024,27 +6153,27 @@ Om du redan är en Great Supporter on Patreon, kan Sandboxie söka på nätet f�
 <context>
     <name>CUIPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="342"/>
+        <location filename="Wizards/SetupWizard.cpp" line="379"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; UI</source>
         <translation>Konfigurera &lt;b&gt;Sandboxie-Plus&lt;/b&gt; programpanel</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="343"/>
+        <location filename="Wizards/SetupWizard.cpp" line="380"/>
         <source>Select the user interface style you prefer.</source>
         <translation>Välj programpanelstilen du föredrar.</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="347"/>
+        <location filename="Wizards/SetupWizard.cpp" line="384"/>
         <source>&amp;Advanced UI for experts</source>
         <translation>&amp;Avancerad programpanel för experter</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="352"/>
+        <location filename="Wizards/SetupWizard.cpp" line="389"/>
         <source>&amp;Simple UI for beginners</source>
         <translation>&amp;Enkel programpanel för nybörjare</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="357"/>
+        <location filename="Wizards/SetupWizard.cpp" line="394"/>
         <source>&amp;Vintage SbieCtrl.exe UI</source>
         <translation>&amp;Äldre SbieCtrl.exe programpanel</translation>
     </message>
@@ -6053,12 +6182,12 @@ Om du redan är en Great Supporter on Patreon, kan Sandboxie söka på nätet f�
         <translation type="vanished">&amp;Sandboxie Classic:s programpanel</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="382"/>
+        <location filename="Wizards/SetupWizard.cpp" line="419"/>
         <source>Use Bright Mode</source>
         <translation>Använd ljust läge</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="386"/>
+        <location filename="Wizards/SetupWizard.cpp" line="423"/>
         <source>Use Dark Mode</source>
         <translation>Använd mörkt läge</translation>
     </message>
@@ -7821,27 +7950,27 @@ istället för &quot;*&quot;.</translation>
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="3815"/>
+        <location filename="SandMan.cpp" line="3892"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3816"/>
+        <location filename="SandMan.cpp" line="3893"/>
         <source>Apply</source>
         <translation>Tillämpa</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3817"/>
+        <location filename="SandMan.cpp" line="3894"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3818"/>
+        <location filename="SandMan.cpp" line="3895"/>
         <source>&amp;Yes</source>
         <translation>&amp;Ja</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3819"/>
+        <location filename="SandMan.cpp" line="3896"/>
         <source>&amp;No</source>
         <translation>&amp;Nej</translation>
     </message>
@@ -7989,7 +8118,7 @@ istället för &quot;*&quot;.</translation>
         <translation type="vanished">Använd mörkt tema (fullt tillämpat efter en omstart)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1907"/>
+        <location filename="Forms/SettingsWindow.ui" line="1935"/>
         <source>Watch Sandboxie.ini for changes</source>
         <translation>Ändringsbevaka Sandboxie.ini</translation>
     </message>
@@ -8188,7 +8317,7 @@ istället för &quot;*&quot;.</translation>
         <translation>Använd fusionstema</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1628"/>
+        <location filename="Forms/SettingsWindow.ui" line="1656"/>
         <source>Advanced Config</source>
         <translation>Avancerad konfiguration</translation>
     </message>
@@ -8197,42 +8326,42 @@ istället för &quot;*&quot;.</translation>
         <translation type="vanished">Separata användarmappar</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1808"/>
+        <location filename="Forms/SettingsWindow.ui" line="1836"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (experimental)</source>
         <translation>Haka fast valda Win32k systemanrop för att aktivera GPU-accelerering (experimentell)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1698"/>
+        <location filename="Forms/SettingsWindow.ui" line="1726"/>
         <source>Portable root folder</source>
         <translation>Portabel root-mapp</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1755"/>
+        <location filename="Forms/SettingsWindow.ui" line="1783"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
         <translation>Sandlåda &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registrets-root&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1801"/>
+        <location filename="Forms/SettingsWindow.ui" line="1829"/>
         <source>Sandboxing features</source>
         <translation>Sandlådeegenskaper</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1671"/>
+        <location filename="Forms/SettingsWindow.ui" line="1699"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1688"/>
+        <location filename="Forms/SettingsWindow.ui" line="1716"/>
         <source>Sandbox default</source>
         <translation>Sandlådestandard</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1735"/>
+        <location filename="Forms/SettingsWindow.ui" line="1763"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
         <translation>Sandlåda &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;filsystemets-root&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1748"/>
+        <location filename="Forms/SettingsWindow.ui" line="1776"/>
         <source>Activate Kernel Mode Object Filtering</source>
         <translation>Aktivera objektfiltrering i kernelläget</translation>
     </message>
@@ -8400,32 +8529,52 @@ istället för &quot;*&quot;.</translation>
         <translation>Sandboxie support</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1366"/>
+        <location filename="Forms/SettingsWindow.ui" line="1296"/>
+        <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="1338"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
         <translation>Supportrar av Sandboxie-Plus projektet kan erhålla ett &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supportercertifikat&lt;/a&gt;. Det är som en licens men för fantastiska personer som använder öppen källa program. :-)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1382"/>
+        <location filename="Forms/SettingsWindow.ui" line="1348"/>
+        <source>Get</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="1355"/>
+        <source>Retrieve/Upgrade/Renew certificate using Serial Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="1371"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. You can support the development by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;directly contributing to the project&lt;/a&gt;, showing your support by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt;, becoming a patron by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;subscribing on Patreon&lt;/a&gt;, or through a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;.&lt;br /&gt;Your support plays a vital role in the advancement and maintenance of Sandboxie.</source>
         <translation>Hålla Sandboxie uppdaterat med de rullande utgivningarna av Windows och kompatibelt med alla webbläsare är en aldrig upphörande ansträngning. Du kan stöda utvecklingen genom att &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;direkt bidra till projektet&lt;/a&gt;, visa ditt stöd genom att &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;köpa ett supportercertifikat&lt;/a&gt;, bli en patron genom att &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;prenumerera på Patreon&lt;/a&gt;, eller genom en &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;.&lt;br /&gt;Ditt stöd spelar en vital roll i förbättrandet och underhållet av Sandboxie.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1456"/>
+        <location filename="Forms/SettingsWindow.ui" line="1396"/>
+        <source>SBIE_-_____-_____-_____-_____</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="1484"/>
         <source>Update Settings</source>
         <translation>Uppdatera inställningar</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1614"/>
+        <location filename="Forms/SettingsWindow.ui" line="1642"/>
         <source>Update Check Interval</source>
         <translation>Intervall för uppdateringskontroll</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1728"/>
+        <location filename="Forms/SettingsWindow.ui" line="1756"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
         <translation>Använd Windows Filtering Platform för att begränsa nätverkstillgång</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1705"/>
+        <location filename="Forms/SettingsWindow.ui" line="1733"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
         <translation>Sandlåda &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;IPC-root&lt;/a&gt;: </translation>
     </message>
@@ -8434,66 +8583,66 @@ istället för &quot;*&quot;.</translation>
         <translation type="vanished">Använd en Sandboxie-inloggning istället för ett anonymt tecken (experimentellt)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1851"/>
+        <location filename="Forms/SettingsWindow.ui" line="1879"/>
         <source>Sandboxie.ini Presets</source>
         <translation>Sandboxie.ini förinställningar</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1935"/>
+        <location filename="Forms/SettingsWindow.ui" line="1963"/>
         <source>Program Control</source>
         <translation>Programkontroll</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2039"/>
+        <location filename="Forms/SettingsWindow.ui" line="2067"/>
         <source>App Templates</source>
         <translation>Appmallar</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2049"/>
+        <location filename="Forms/SettingsWindow.ui" line="2077"/>
         <source>App Compatibility</source>
         <translation>Appkompatibilitet</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="665"/>
         <location filename="Forms/SettingsWindow.ui" line="1222"/>
-        <location filename="Forms/SettingsWindow.ui" line="1967"/>
-        <location filename="Forms/SettingsWindow.ui" line="2077"/>
-        <location filename="Forms/SettingsWindow.ui" line="2210"/>
+        <location filename="Forms/SettingsWindow.ui" line="1995"/>
+        <location filename="Forms/SettingsWindow.ui" line="2105"/>
+        <location filename="Forms/SettingsWindow.ui" line="2238"/>
         <source>Name</source>
         <translation>Namn</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1972"/>
+        <location filename="Forms/SettingsWindow.ui" line="2000"/>
         <source>Path</source>
         <translation>Sökväg</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1994"/>
+        <location filename="Forms/SettingsWindow.ui" line="2022"/>
         <source>Remove Program</source>
         <translation>Ta bort program</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1980"/>
+        <location filename="Forms/SettingsWindow.ui" line="2008"/>
         <source>Add Program</source>
         <translation>Addera program</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2015"/>
+        <location filename="Forms/SettingsWindow.ui" line="2043"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
         <translation>När något av de följande programm startas utanför någon sandlåda, kommer Sandboxie utfärda meddelande SBIE1301.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2025"/>
+        <location filename="Forms/SettingsWindow.ui" line="2053"/>
         <source>Add Folder</source>
         <translation>Addera mapp</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2008"/>
+        <location filename="Forms/SettingsWindow.ui" line="2036"/>
         <source>Prevent the listed programs from starting on this system</source>
         <translation>Förhindra de listade programmen från att starta på detta system</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1987"/>
+        <location filename="Forms/SettingsWindow.ui" line="2015"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>Utfärda meddelande 1308 när ett program inte lyckas starta</translation>
     </message>
@@ -8513,59 +8662,59 @@ istället för &quot;*&quot;.</translation>
         <translation>Använd ny konfigureringsdialoglayout *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1411"/>
+        <location filename="Forms/SettingsWindow.ui" line="1439"/>
         <source>Sandboxie Updater</source>
         <translation>Sandboxie uppdaterare</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1442"/>
+        <location filename="Forms/SettingsWindow.ui" line="1470"/>
         <source>Keep addon list up to date</source>
         <translation>Håll tilläggslistan uppdaterad</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1497"/>
+        <location filename="Forms/SettingsWindow.ui" line="1525"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation>Insider-kanalen erbjuder tidig tillgång till nya egenskaper och buggfixar som slutligen kommer utges till allmänheten, likt väl som alla relevanta förbättringar från stable-kanalen.
 Till skillnad från preview-kanalen, inkluderar den inte otestade, möjligen förstörande, eller experimentella ändringar som kanske inte är färdiga för större användning.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1501"/>
+        <location filename="Forms/SettingsWindow.ui" line="1529"/>
         <source>Search in the Insider channel</source>
         <translation>Sök i Insider-kanalen</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1548"/>
+        <location filename="Forms/SettingsWindow.ui" line="1576"/>
         <source>Check periodically for new Sandboxie-Plus versions</source>
         <translation>Sök periodvis efter nya Sandboxie-Plus versioner</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1558"/>
+        <location filename="Forms/SettingsWindow.ui" line="1586"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
         <translation>Mer om &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;insider-kanalen&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1578"/>
+        <location filename="Forms/SettingsWindow.ui" line="1606"/>
         <source>Keep Troubleshooting scripts up to date</source>
         <translation>Håll felsökningsscript uppdaterade</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1815"/>
+        <location filename="Forms/SettingsWindow.ui" line="1843"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>Använd en Sandboxie-inloggning istället för ett anonymt tecken</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1945"/>
+        <location filename="Forms/SettingsWindow.ui" line="1973"/>
         <source>Program Alerts</source>
         <translation>Programalarm</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2001"/>
+        <location filename="Forms/SettingsWindow.ui" line="2029"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
         <translation>Utfärda meddelande 1301 när tvingade processer har inaktiverats</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1638"/>
+        <location filename="Forms/SettingsWindow.ui" line="1666"/>
         <source>Sandboxie Config</source>
         <oldsource>Config Protection</oldsource>
         <translation>Sandboxie-konfigurering</translation>
@@ -8593,7 +8742,7 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade, möjligen fö
     <message>
         <location filename="Forms/SettingsWindow.ui" line="770"/>
         <location filename="Forms/SettingsWindow.ui" line="1201"/>
-        <location filename="Forms/SettingsWindow.ui" line="2157"/>
+        <location filename="Forms/SettingsWindow.ui" line="2185"/>
         <source>Remove</source>
         <translation>Ta bort</translation>
     </message>
@@ -8612,37 +8761,37 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade, möjligen fö
         <translation type="vanished">Sandlådekonfigurering</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1718"/>
+        <location filename="Forms/SettingsWindow.ui" line="1746"/>
         <source>Default sandbox:</source>
         <translation>Standardsandlåda:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1893"/>
+        <location filename="Forms/SettingsWindow.ui" line="1921"/>
         <source>Config protection</source>
         <translation>Konfigurera skydd</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1921"/>
+        <location filename="Forms/SettingsWindow.ui" line="1949"/>
         <source>Clear password when main window becomes hidden</source>
         <translation>Rensa lösenord när huvudfönstret blir dolt</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1900"/>
+        <location filename="Forms/SettingsWindow.ui" line="1928"/>
         <source>Only Administrator user accounts can make changes</source>
         <translation>Endast administratörsanvändarkonton kan göra ändringar</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1914"/>
+        <location filename="Forms/SettingsWindow.ui" line="1942"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
         <translation>Endast administratörsanvändarkonton kan använda kommandot Pausa programtvingande</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1866"/>
+        <location filename="Forms/SettingsWindow.ui" line="1894"/>
         <source>Password must be entered in order to make changes</source>
         <translation>Lösenord måste anges för att kunna göra ändringar</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1859"/>
+        <location filename="Forms/SettingsWindow.ui" line="1887"/>
         <source>Change Password</source>
         <translation>Ändra lösenord</translation>
     </message>
@@ -8661,62 +8810,62 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade, möjligen fö
         <translation type="vanished">Kompatibilitet</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2069"/>
+        <location filename="Forms/SettingsWindow.ui" line="2097"/>
         <source>In the future, don&apos;t check software compatibility</source>
         <translation>Kontrollera inte programkompatibilitet i framtiden</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2085"/>
+        <location filename="Forms/SettingsWindow.ui" line="2113"/>
         <source>Enable</source>
         <translation>Aktivera</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2105"/>
+        <location filename="Forms/SettingsWindow.ui" line="2133"/>
         <source>Disable</source>
         <translation>Inaktivera</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2112"/>
+        <location filename="Forms/SettingsWindow.ui" line="2140"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
         <translation>Sandboxie har upptäckt följande mjukvaruapplikationer i ditt system. Klicka på OK för att tillämpa konfigurationsinställningarna, vilket kommer förbättra kompatibiliteten med dessa applikationer. Dessa konfigurationsinställningar kommer ha påverkan på alla existerande sandlådor samt även de nya.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2125"/>
+        <location filename="Forms/SettingsWindow.ui" line="2153"/>
         <source>Local Templates</source>
         <translation>Lokala mallar</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2176"/>
+        <location filename="Forms/SettingsWindow.ui" line="2204"/>
         <source>Add Template</source>
         <translation>Addera mall</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2196"/>
+        <location filename="Forms/SettingsWindow.ui" line="2224"/>
         <source>Text Filter</source>
         <translation>Textfilter</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2218"/>
+        <location filename="Forms/SettingsWindow.ui" line="2246"/>
         <source>This list contains user created custom templates for sandbox options</source>
         <translation>Denna lista innehåller användarskapade anpassade mallar för sandlådealternativ</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2235"/>
+        <location filename="Forms/SettingsWindow.ui" line="2263"/>
         <source>Edit ini Section</source>
         <translation>Redigera ini-sektionen</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2244"/>
+        <location filename="Forms/SettingsWindow.ui" line="2272"/>
         <source>Save</source>
         <translation>Spara</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2264"/>
+        <location filename="Forms/SettingsWindow.ui" line="2292"/>
         <source>Edit ini</source>
         <translation>Redigera ini</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2277"/>
+        <location filename="Forms/SettingsWindow.ui" line="2305"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
@@ -8725,42 +8874,42 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade, möjligen fö
         <translation type="vanished">Support</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1480"/>
+        <location filename="Forms/SettingsWindow.ui" line="1508"/>
         <source>Version Updates</source>
         <translation>Versionsuppdateringar</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1538"/>
+        <location filename="Forms/SettingsWindow.ui" line="1566"/>
         <source>New full versions from the selected release channel.</source>
         <translation>Nya fulla versioner från den valda utgivningskanalen.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1477"/>
+        <location filename="Forms/SettingsWindow.ui" line="1505"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
         <translation>Snabbfixar för den installerade versionen, uppdateringar till mallar.ini och översättningar.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1487"/>
+        <location filename="Forms/SettingsWindow.ui" line="1515"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>Preview-kanalen innehåller de senaste GitHub förutgivningarna.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1541"/>
+        <location filename="Forms/SettingsWindow.ui" line="1569"/>
         <source>New Versions</source>
         <translation>Nya versioner</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1401"/>
+        <location filename="Forms/SettingsWindow.ui" line="1312"/>
         <source>Enter the support certificate here</source>
         <translation>Ange supportcertifikatet här</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1585"/>
+        <location filename="Forms/SettingsWindow.ui" line="1613"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>Stable-kanalen innehåller de senaste stabila GitHub utgivningarna.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1588"/>
+        <location filename="Forms/SettingsWindow.ui" line="1616"/>
         <source>Search in the Stable channel</source>
         <translation>Sök i Stable-kanalen</translation>
     </message>
@@ -8769,7 +8918,7 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade, möjligen fö
         <translation type="vanished">Hålla Sandboxie uppdaterat med de rullande utgivningarna av Windows och kompatibelt med alla webbläsare är en aldrig upphörande strävan. Vänligen överväg att supporta detta jobb med en donation.&lt;br /&gt;Du kan supporta utvecklingen med en &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;PayPal donation&lt;/a&gt;, fungerar också med kreditkort.&lt;br /&gt;Eller förse kontinuerlig support med en &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon prenumeration&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1490"/>
+        <location filename="Forms/SettingsWindow.ui" line="1518"/>
         <source>Search in the Preview channel</source>
         <translation>Sök i Preview-kanalen</translation>
     </message>
@@ -8794,16 +8943,15 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade, möjligen fö
         <translation type="vanished">Hålla Sandboxie uppdaterat med det rullande utgivandet av Windows och kompatibelt med alla webbläsare är en aldrig upphörande strävan. Vänligen överväg att supporta detta arbete med en donation.&lt;br /&gt;Du kan supporta utvecklingen med en &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;gt;PayPal donation&lt;/a&gt;, fungerar också med kreditkort.&lt;br /&gt;Eller så kan du ge kontinuerlig support med en &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon prenumeration&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1330"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation>Detta supportercertifikat har utgått, vänligen &lt;a href=&quot;sbie://update/cert&quot;&gt;skaffa ett uppdaterat certifikat&lt;/a&gt;.</translation>
+        <translation type="vanished">Detta supportercertifikat har utgått, vänligen &lt;a href=&quot;sbie://update/cert&quot;&gt;skaffa ett uppdaterat certifikat&lt;/a&gt;.</translation>
     </message>
     <message>
         <source>Support Settings</source>
         <translation type="vanished">Supportinställningar</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1303"/>
+        <location filename="Forms/SettingsWindow.ui" line="1416"/>
         <source>In the future, don&apos;t notify about certificate expiration</source>
         <translation>Meddela inte om certifikatsutgång i framtiden</translation>
     </message>

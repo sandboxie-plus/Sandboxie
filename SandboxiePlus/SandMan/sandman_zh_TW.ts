@@ -574,29 +574,50 @@ Please browse to the correct user profile directory.</oldsource>
 <context>
     <name>CCertificatePage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="235"/>
+        <location filename="Wizards/SetupWizard.cpp" line="236"/>
         <source>Install your &lt;b&gt;Sandboxie-Plus&lt;/b&gt; support certificate</source>
         <translation>安裝您的 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 贊助者憑證</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="236"/>
+        <location filename="Wizards/SetupWizard.cpp" line="237"/>
         <source>If you have a supporter certificate, please fill it into the field below.</source>
         <translation>如果您有贊助者憑證，請填入以下欄位。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="258"/>
+        <location filename="Wizards/SetupWizard.cpp" line="259"/>
+        <source>Retrieve certificate using Serial Number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/SetupWizard.cpp" line="265"/>
         <source>Start evaluation without a certificate for a limited period of time.</source>
         <translation>在沒有贊助者憑證的情況下開始進行有限時間的試用。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="286"/>
+        <location filename="Wizards/SetupWizard.cpp" line="293"/>
         <source>To use &lt;b&gt;Sandboxie-Plus&lt;/b&gt; in a business setting, an appropriate &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;support certificate&lt;/a&gt; for business use is required. If you do not yet have the required certificate(s), you can get those from the &lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com web shop&lt;/a&gt;.</source>
         <translation>要在商業設定環境使用 &lt;b&gt;Sandboxie-Plus&lt;/b&gt;，需要適用於商業用途的&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;贊助者憑證&lt;/a&gt;。如果您還沒有所需的憑證，可以透過&lt;a href=&quot;https://xanasoft.com/shop/&quot;&gt;xanasoft.com 網路商店&lt;/a&gt;取得憑證。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="300"/>
+        <location filename="Wizards/SetupWizard.cpp" line="307"/>
         <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
         <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; 僅為&lt;u&gt;專案贊助者&lt;/u&gt;提供額外的功能和沙箱類型。例如隱私增強型沙箱，可對來自沙箱化程式非法存取使用者資料的行為&lt;b&gt;&lt;font color=&apos;red&apos;&gt;提供額外的使用者資料保護&lt;/font&gt;&lt;/b&gt;。如果您還不是贊助者，請考慮 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;贊助支援此專案&lt;/a&gt;來確保 Sandboxie 的開發工作，並以此取得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;贊助者憑證&lt;/a&gt;。</translation>
+    </message>
+    <message>
+        <location filename="Wizards/SetupWizard.cpp" line="344"/>
+        <source>Failed to retrive the certificate.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/SetupWizard.cpp" line="345"/>
+        <source>
+Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Wizards/SetupWizard.cpp" line="360"/>
+        <source>Retreiving certificate...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -760,12 +781,12 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CFinishPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="671"/>
+        <location filename="Wizards/SetupWizard.cpp" line="708"/>
         <source>Complete your configuration</source>
         <translation>完成您的組態</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="678"/>
+        <location filename="Wizards/SetupWizard.cpp" line="715"/>
         <source>Almost complete, click Finish to apply all selected options and conclude the wizard.</source>
         <translation>即將就緒，按下「完成」按鈕以套用所有選取的選項，並結束此精靈。</translation>
     </message>
@@ -832,6 +853,14 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     </message>
 </context>
 <context>
+    <name>CGetFileJob</name>
+    <message>
+        <location filename="OnlineUpdater.cpp" line="192"/>
+        <source>Failed to download file from: %1</source>
+        <translation type="unfinished">下載檔案失敗，來源: %1</translation>
+    </message>
+</context>
+<context>
     <name>CGroupPage</name>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="327"/>
@@ -852,32 +881,32 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CIntroPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="157"/>
+        <location filename="Wizards/SetupWizard.cpp" line="158"/>
         <source>Introduction</source>
         <translation>摘要資訊</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="161"/>
+        <location filename="Wizards/SetupWizard.cpp" line="162"/>
         <source>Welcome to the Setup Wizard. This wizard will help you to configure your copy of &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. You can start this wizard at any time from the Sandbox-&gt;Maintenance menu if you do not wish to complete it now.</source>
         <translation>歡迎來到設定精靈，本精靈將幫助您設定此 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 安裝之組態。如果您不希望現在完成，您可以從「沙箱 -&gt; 維護」選單中隨時重新啟動此精靈。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="170"/>
+        <location filename="Wizards/SetupWizard.cpp" line="171"/>
         <source>Select how you would like to use Sandboxie-Plus</source>
         <translation>選擇 Sandboxie-Plus 的使用方式</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="173"/>
+        <location filename="Wizards/SetupWizard.cpp" line="174"/>
         <source>&amp;Personally, for private non-commercial use</source>
         <translation>個人，用於私人非商業用途(&amp;P)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="178"/>
+        <location filename="Wizards/SetupWizard.cpp" line="179"/>
         <source>&amp;Commercially, for business or enterprise use</source>
         <translation>商業，用於企業或商業用途(&amp;C)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="183"/>
+        <location filename="Wizards/SetupWizard.cpp" line="184"/>
         <source>Note: this option is persistent</source>
         <translation>注意: 此選項無法在後續的設定中重新修改</translation>
     </message>
@@ -997,121 +1026,120 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>COnlineUpdater</name>
     <message>
-        <location filename="OnlineUpdater.cpp" line="100"/>
+        <location filename="OnlineUpdater.cpp" line="303"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
         <translation>您想要檢查 Sandboxie-Plus 是否存在新版本嗎？</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="101"/>
+        <location filename="OnlineUpdater.cpp" line="304"/>
         <source>Don&apos;t show this message again.</source>
         <translation>不再顯示此訊息。</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="238"/>
+        <location filename="OnlineUpdater.cpp" line="359"/>
         <source>Checking for updates...</source>
         <translation>檢查更新中...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="278"/>
+        <location filename="OnlineUpdater.cpp" line="366"/>
         <source>server not reachable</source>
         <translation>伺服器無法存取</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="279"/>
-        <location filename="OnlineUpdater.cpp" line="281"/>
+        <location filename="OnlineUpdater.cpp" line="367"/>
+        <location filename="OnlineUpdater.cpp" line="369"/>
         <source>Failed to check for updates, error: %1</source>
         <translation>檢查更新失敗，錯誤: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="434"/>
+        <location filename="OnlineUpdater.cpp" line="526"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
         <translation>&lt;p&gt;是否下載此安裝程式？&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="436"/>
+        <location filename="OnlineUpdater.cpp" line="528"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
         <translation>&lt;p&gt;是否下載此更新？&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="438"/>
+        <location filename="OnlineUpdater.cpp" line="530"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;update page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;是否前往&lt;a href=&quot;%1&quot;&gt;更新頁面&lt;/a&gt;？&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="446"/>
+        <location filename="OnlineUpdater.cpp" line="538"/>
         <source>Don&apos;t show this update anymore.</source>
         <translation>不再顯示此次更新。</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="564"/>
+        <location filename="OnlineUpdater.cpp" line="660"/>
         <source>Downloading updates...</source>
         <translation>正在下載更新...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="590"/>
+        <location filename="OnlineUpdater.cpp" line="686"/>
         <source>invalid parameter</source>
         <translation>無效參數</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="591"/>
+        <location filename="OnlineUpdater.cpp" line="687"/>
         <source>failed to download updated information</source>
         <oldsource>failed to download update informations</oldsource>
         <translation>下載更新資訊失敗</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="592"/>
+        <location filename="OnlineUpdater.cpp" line="688"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
         <translation>載入已更新的 Json 檔案失敗</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="593"/>
+        <location filename="OnlineUpdater.cpp" line="689"/>
         <source>failed to download a particular file</source>
         <translation>下載特定檔案失敗</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="594"/>
+        <location filename="OnlineUpdater.cpp" line="690"/>
         <source>failed to scan existing installation</source>
         <translation>掃描現有的安裝失敗</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="595"/>
+        <location filename="OnlineUpdater.cpp" line="691"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
         <translation>無效的更新檔簽章！！！</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="596"/>
+        <location filename="OnlineUpdater.cpp" line="692"/>
         <source>downloaded file is corrupted</source>
         <translation>下載的檔案已損毀</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="597"/>
+        <location filename="OnlineUpdater.cpp" line="693"/>
         <source>internal error</source>
         <translation>內部錯誤</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="598"/>
+        <location filename="OnlineUpdater.cpp" line="694"/>
         <source>unknown error</source>
         <translation>未知錯誤</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="622"/>
+        <location filename="OnlineUpdater.cpp" line="718"/>
         <source>Failed to download updates from server, error %1</source>
         <translation>從伺服器下載更新失敗，錯誤 %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="641"/>
+        <location filename="OnlineUpdater.cpp" line="737"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Sandboxie-Plus 的更新已下載。&lt;/p&gt;&lt;p&gt;是否要套用這些更新？如果任何程式正在沙箱化執行，都將被終止。&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="776"/>
         <source>Failed to download file from: %1</source>
-        <translation>下載檔案失敗，來源: %1</translation>
+        <translation type="vanished">下載檔案失敗，來源: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="810"/>
+        <location filename="OnlineUpdater.cpp" line="839"/>
         <source>Downloading installer...</source>
         <translation>正在下載安裝程式...</translation>
     </message>
@@ -1120,27 +1148,27 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <translation type="vanished">下載安裝程式失敗，來源: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="849"/>
+        <location filename="OnlineUpdater.cpp" line="879"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;一個新的 Sandboxie-Plus 安裝程式已被下載到以下位置:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;是否要開始安裝？如果任何程式正在沙箱化執行，都將被終止。&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="914"/>
+        <location filename="OnlineUpdater.cpp" line="944"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;您是否想要前往 &lt;a href=&quot;%1&quot;&gt;資訊頁面&lt;/a&gt;？&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="922"/>
+        <location filename="OnlineUpdater.cpp" line="952"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>此後不再顯示此公告。</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="428"/>
+        <location filename="OnlineUpdater.cpp" line="520"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;New version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;有新版本 Sandboxie-Plus 可用，&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;新版本:&lt;/font&gt;&lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="305"/>
+        <location filename="OnlineUpdater.cpp" line="394"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
@@ -1149,19 +1177,16 @@ Note: The update check is often behind the latest GitHub release to ensure that 
 注意: 更新檢查通常落後於最新的 GitHub 版本，以確保僅提供經過測試的更新。</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1047"/>
         <source>Checking for certificate...</source>
-        <translation>檢查憑證中...</translation>
+        <translation type="vanished">檢查憑證中...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1088"/>
         <source>No certificate found on server!</source>
-        <translation>未在伺服器中尋找到憑證！</translation>
+        <translation type="vanished">未在伺服器中尋找到憑證！</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="1093"/>
         <source>There is no updated certificate available.</source>
-        <translation>目前沒有可用的憑證更新。</translation>
+        <translation type="vanished">目前沒有可用的憑證更新。</translation>
     </message>
 </context>
 <context>
@@ -2291,122 +2316,122 @@ Error: </source>
 <context>
     <name>CSBUpdate</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="530"/>
+        <location filename="Wizards/SetupWizard.cpp" line="567"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; updater</source>
         <translation>設定 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 更新程式組態</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="531"/>
+        <location filename="Wizards/SetupWizard.cpp" line="568"/>
         <source>Like with any other security product, it&apos;s important to keep your Sandboxie-Plus up to date.</source>
         <oldsource>Like with any other security product it&apos;s important to keep your Sandboxie-Plus up to date.</oldsource>
         <translation type="unfinished">如同其他任何安全性產品，保持 Sandboxie-Plus 為最新非常重要。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="539"/>
+        <location filename="Wizards/SetupWizard.cpp" line="576"/>
         <source>Regularly check for all updates to Sandboxie-Plus and optional components</source>
         <oldsource>Regularly Check for all updates to Sandboxie-Plus and optional components</oldsource>
         <translation type="unfinished">經常檢查全部 Sandboxie-Plus 和可選組件的更新</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="540"/>
+        <location filename="Wizards/SetupWizard.cpp" line="577"/>
         <source>Let Sandboxie regularly check for latest updates.</source>
         <oldsource>Let sandboxie regularly check for latest updates.</oldsource>
         <translation type="unfinished">讓 Sandboxie 經常檢查最新更新。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="550"/>
+        <location filename="Wizards/SetupWizard.cpp" line="587"/>
         <source>Check for new Sandboxie-Plus versions:</source>
         <translation>檢查新的 Sandboxie-Plus 版本:</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="551"/>
+        <location filename="Wizards/SetupWizard.cpp" line="588"/>
         <source>Check for new Sandboxie-Plus builds.</source>
         <translation>檢查新的 Sandboxie-Plus 版本。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="557"/>
+        <location filename="Wizards/SetupWizard.cpp" line="594"/>
         <source>Select in which update channel to look for new Sandboxie-Plus builds:</source>
         <oldsource>Sellect in which update channel to look for new Sandboxie-Plus builds:</oldsource>
         <translation type="unfinished">選擇將在哪個更新通道中尋找新的 Sandboxie-Plus 組建:</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="566"/>
+        <location filename="Wizards/SetupWizard.cpp" line="603"/>
         <source>In the Stable Channel</source>
         <translation>在穩定通道</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="567"/>
+        <location filename="Wizards/SetupWizard.cpp" line="604"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>穩定通道包含最新的穩定 GitHub 發行版本。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="571"/>
+        <location filename="Wizards/SetupWizard.cpp" line="608"/>
         <source>In the Preview Channel - with newest experimental changes</source>
         <translation>在預覽通道 - 包含最新的實驗性變更</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="572"/>
+        <location filename="Wizards/SetupWizard.cpp" line="609"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>預覽通道包含最新的 GitHub 預先發行版本。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="576"/>
+        <location filename="Wizards/SetupWizard.cpp" line="613"/>
         <source>In the Insider Channel - exclusive features</source>
         <translation>在測試人員通道 - 包含專屬功能</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="577"/>
+        <location filename="Wizards/SetupWizard.cpp" line="614"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation>測試人員通道提供對「最終將公開發表的新功能和錯誤修復」的早期存取，同時包含穩定通道的所有相關改進。
 與預覽通道不同，它不包含未經測試、可能會破壞或可能尚未準備好供更廣泛使用的實驗性變更。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="582"/>
+        <location filename="Wizards/SetupWizard.cpp" line="619"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
         <translation>了解更多關於 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;測試人員通道&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="591"/>
+        <location filename="Wizards/SetupWizard.cpp" line="628"/>
         <source>Keep Compatibility Templates up to date and apply hotfixes</source>
         <oldsource>Keep Compatybility Templates up to date and apply hotfixes</oldsource>
         <translation>保持相容性範本為最新並套用緊急修補</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="592"/>
+        <location filename="Wizards/SetupWizard.cpp" line="629"/>
         <source>Check for latest compatibility templates and hotfixes.</source>
         <oldsource>Check for latest compatybility tempaltes and hotfixes.</oldsource>
         <translation>檢查最新的相容性範本和緊急修補。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="596"/>
+        <location filename="Wizards/SetupWizard.cpp" line="633"/>
         <source>Get the latest Scripts for the Troubleshooting Wizard</source>
         <translation>取得疑難排解精靈的最新腳本</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="597"/>
+        <location filename="Wizards/SetupWizard.cpp" line="634"/>
         <source>Check for latest troubleshooting scripts for the troubleshooting wizard.</source>
         <oldsource>Check for latest troubleshooting scripts for the troubleshooting wizars.</oldsource>
         <translation>為疑難排解精靈檢查最新的疑難排解腳本。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="601"/>
+        <location filename="Wizards/SetupWizard.cpp" line="638"/>
         <source>Keep the list of optional Addon components up to date</source>
         <translation>保持可選附加元件/組件為最新</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="602"/>
+        <location filename="Wizards/SetupWizard.cpp" line="639"/>
         <source>Check for latest available addons.</source>
         <oldsource>Check for latest avaialble addons.</oldsource>
         <translation>檢查最新的可用附加元件。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="611"/>
+        <location filename="Wizards/SetupWizard.cpp" line="648"/>
         <source>Sandboxie-Plus applies strict application restrictions, which can lead to compatibility issues. Stay updated with Sandboxie-Plus, including compatibility templates and troubleshooting, to ensure smooth operation amid Windows updates and application changes.</source>
         <translation>Sandboxie-Plus 套用了嚴格的應用程式限制，而這可能造成相容性問題。保持 Sandboxie-Plus 為最新版本 (包含相容性範本和疑難排解)，將保證 Wibdows 更新和應用程式變更時能有順暢的作業。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="617"/>
+        <location filename="Wizards/SetupWizard.cpp" line="654"/>
         <source>Access to the latest compatibility templates and the online troubleshooting database requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
         <translation>存取最新相容性範本和線上疑難排解資料庫需要有效的 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;贊助者憑證&lt;/a&gt;。</translation>
     </message>
@@ -2414,22 +2439,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
 <context>
     <name>CSandBox</name>
     <message>
-        <location filename="SandMan.cpp" line="3825"/>
+        <location filename="SandMan.cpp" line="3902"/>
         <source>Waiting for folder: %1</source>
         <translation>正在等待資料夾: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3826"/>
+        <location filename="SandMan.cpp" line="3903"/>
         <source>Deleting folder: %1</source>
         <translation>正在刪除資料夾: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3827"/>
+        <location filename="SandMan.cpp" line="3904"/>
         <source>Merging folders: %1 &amp;gt;&amp;gt; %2</source>
         <translation>正在合併資料夾: %1 &amp;gt;&amp;gt; %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3828"/>
+        <location filename="SandMan.cpp" line="3905"/>
         <source>Finishing Snapshot Merge...</source>
         <translation>正在完成快照合併...</translation>
     </message>
@@ -2515,22 +2540,22 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Sandboxie-Plus v%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3715"/>
+        <location filename="SandMan.cpp" line="3756"/>
         <source>Reset Columns</source>
         <translation>重設欄</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3716"/>
+        <location filename="SandMan.cpp" line="3757"/>
         <source>Copy Cell</source>
         <translation>複製單元格</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3717"/>
+        <location filename="SandMan.cpp" line="3758"/>
         <source>Copy Row</source>
         <translation>複製列</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3718"/>
+        <location filename="SandMan.cpp" line="3759"/>
         <source>Copy Panel</source>
         <translation>複製表格</translation>
     </message>
@@ -2793,7 +2818,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     </message>
     <message>
         <location filename="SandMan.cpp" line="481"/>
-        <location filename="SandMan.cpp" line="3799"/>
+        <location filename="SandMan.cpp" line="3840"/>
         <source>About Sandboxie-Plus</source>
         <translation>關於 Sandboxie-Plus</translation>
     </message>
@@ -2879,9 +2904,9 @@ Do you want to do the clean up?</source>
         <location filename="SandMan.cpp" line="1311"/>
         <location filename="SandMan.cpp" line="1747"/>
         <location filename="SandMan.cpp" line="2108"/>
-        <location filename="SandMan.cpp" line="2793"/>
-        <location filename="SandMan.cpp" line="3224"/>
-        <location filename="SandMan.cpp" line="3240"/>
+        <location filename="SandMan.cpp" line="2836"/>
+        <location filename="SandMan.cpp" line="3267"/>
+        <location filename="SandMan.cpp" line="3283"/>
         <source>Don&apos;t show this message again.</source>
         <translation>不再顯示此訊息。</translation>
     </message>
@@ -2971,19 +2996,19 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <translation>是否略過設定精靈？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2929"/>
-        <location filename="SandMan.cpp" line="2931"/>
-        <location filename="SandMan.cpp" line="3499"/>
+        <location filename="SandMan.cpp" line="2972"/>
+        <location filename="SandMan.cpp" line="2974"/>
+        <location filename="SandMan.cpp" line="3542"/>
         <source>Sandboxie-Plus - Error</source>
         <translation>Sandboxie-Plus - 錯誤</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2929"/>
+        <location filename="SandMan.cpp" line="2972"/>
         <source>Failed to stop all Sandboxie components</source>
         <translation>停止所有 Sandboxie 元件失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2931"/>
+        <location filename="SandMan.cpp" line="2974"/>
         <source>Failed to start required Sandboxie components</source>
         <translation>啟動所需 Sandboxie 元件失敗</translation>
     </message>
@@ -3030,7 +3055,7 @@ No will choose: %2</source>
         <translation type="vanished">%1 (%2): </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2566"/>
+        <location filename="SandMan.cpp" line="2575"/>
         <source>The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>選取的功能只對專案贊助者可用。如果沒有贊助者憑證，在啟用此功能的沙箱內啟動的處理程序，將在 5 分鐘後自動終止。&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;成為專案贊助者&lt;/a&gt;，以取得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;贊助者憑證&lt;/a&gt;</translation>
     </message>
@@ -3090,143 +3115,143 @@ No will choose: %2</source>
 </translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2686"/>
+        <location filename="SandMan.cpp" line="2729"/>
         <source>Only Administrators can change the config.</source>
         <translation>僅管理員可變更此組態。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2696"/>
+        <location filename="SandMan.cpp" line="2739"/>
         <source>Please enter the configuration password.</source>
         <translation>請輸入組態的密碼。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2704"/>
+        <location filename="SandMan.cpp" line="2747"/>
         <source>Login Failed: %1</source>
         <translation>登入失敗: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2733"/>
+        <location filename="SandMan.cpp" line="2776"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
         <translation>確定要終止所有沙箱中的所有處理程序嗎？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2734"/>
+        <location filename="SandMan.cpp" line="2777"/>
         <source>Terminate all without asking</source>
         <translation>終止全部並不再詢問</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2792"/>
+        <location filename="SandMan.cpp" line="2835"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>Sandboxie-Plus 已於便攜模式中啟動，需建立必要的服務。這將需要管理員權限。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2826"/>
+        <location filename="SandMan.cpp" line="2869"/>
         <source>CAUTION: Another agent (probably SbieCtrl.exe) is already managing this Sandboxie session, please close it first and reconnect to take over.</source>
         <translation>注意: 另一個代理 (可能是 SbieCtrl.exe) 已經在管理這個 Sandboxie 工作階段，請先關閉其他代理並重新連線進行接管控制。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2958"/>
+        <location filename="SandMan.cpp" line="3001"/>
         <source>Executing maintenance operation, please wait...</source>
         <translation>正在執行維護作業，請稍候...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3141"/>
+        <location filename="SandMan.cpp" line="3184"/>
         <source>Do you also want to reset hidden message boxes (yes), or only all log messages (no)?</source>
         <translation>請確認是否要重設已隱藏的訊息框 (選「是」)，或者僅重設所有日誌訊息 (選「否」)？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3238"/>
+        <location filename="SandMan.cpp" line="3281"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
         <translation>每當檔案儲存後更改將自動套用。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3239"/>
+        <location filename="SandMan.cpp" line="3282"/>
         <source>The changes will be applied automatically as soon as the editor is closed.</source>
         <translation>變更將在編輯器關閉後自動提交。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3429"/>
+        <location filename="SandMan.cpp" line="3472"/>
         <source>Error Status: 0x%1 (%2)</source>
         <translation>錯誤程式碼: 0x%1 (%2)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3430"/>
+        <location filename="SandMan.cpp" line="3473"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3450"/>
+        <location filename="SandMan.cpp" line="3493"/>
         <source>A sandbox must be emptied before it can be deleted.</source>
         <translation>刪除沙箱前必須先清空。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3455"/>
+        <location filename="SandMan.cpp" line="3498"/>
         <source>Failed to copy box data files</source>
         <translation>複製沙箱資料檔案失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3460"/>
+        <location filename="SandMan.cpp" line="3503"/>
         <source>Failed to remove old box data files</source>
         <translation>移除舊沙箱資料檔案失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3477"/>
+        <location filename="SandMan.cpp" line="3520"/>
         <source>Unknown Error Status: 0x%1</source>
         <translation>未知錯誤狀態: 0x%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3719"/>
+        <location filename="SandMan.cpp" line="3760"/>
         <source>Case Sensitive</source>
         <translation>區分大小寫</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3720"/>
+        <location filename="SandMan.cpp" line="3761"/>
         <source>RegExp</source>
         <translation>正規表示式</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3721"/>
+        <location filename="SandMan.cpp" line="3762"/>
         <source>Highlight</source>
         <translation>醒目提示</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3722"/>
+        <location filename="SandMan.cpp" line="3763"/>
         <source>Close</source>
         <translation>關閉</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3723"/>
+        <location filename="SandMan.cpp" line="3764"/>
         <source>&amp;Find ...</source>
         <translation>尋找(&amp;F)...</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3724"/>
+        <location filename="SandMan.cpp" line="3765"/>
         <source>All columns</source>
         <translation>所有欄</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3772"/>
+        <location filename="SandMan.cpp" line="3813"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</source>
         <oldsource>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2022 by DavidXanatos&lt;/p&gt;</oldsource>
         <translation>&lt;h3&gt;關於 Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;版本 %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3780"/>
+        <location filename="SandMan.cpp" line="3821"/>
         <source>This copy of Sandboxie+ is certified for: %1</source>
         <translation>此 Sandboxie+ 複本已授權給: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3782"/>
+        <location filename="SandMan.cpp" line="3823"/>
         <source>Sandboxie+ is free for personal and non-commercial use.</source>
         <translation>Sandboxie+ 可免費用於個人和非商業用途。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3785"/>
+        <location filename="SandMan.cpp" line="3826"/>
         <source>Sandboxie-Plus is an open source continuation of Sandboxie.&lt;br /&gt;Visit &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; for more information.&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;Driver version: %1&lt;br /&gt;Features: %2&lt;br /&gt;&lt;br /&gt;Icons from &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</source>
         <translation>Sandboxie-Plus 是著名程式 Sandboxie 自開源以來的一個延續。&lt;br /&gt;拜訪 &lt;a href=&quot;https://sandboxie-plus.com&quot;&gt;sandboxie-plus.com&lt;/a&gt; 來了解更多資訊。&lt;br /&gt;&lt;br /&gt;%3&lt;br /&gt;&lt;br /&gt;驅動版本: %1&lt;br /&gt;功能: %2&lt;br /&gt;&lt;br /&gt;圖示來源 &lt;a href=&quot;https://icons8.com&quot;&gt;icons8.com&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3432"/>
+        <location filename="SandMan.cpp" line="3475"/>
         <source>Administrator rights are required for this operation.</source>
         <translation>此操作需要管理員權限。</translation>
     </message>
@@ -3448,74 +3473,96 @@ No will choose: %2</source>
         <translation type="vanished">是否略過設定精靈？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2406"/>
-        <location filename="SandMan.cpp" line="2408"/>
+        <location filename="SandMan.cpp" line="2409"/>
+        <location filename="SandMan.cpp" line="2413"/>
+        <location filename="SandMan.cpp" line="2415"/>
         <source> (%1)</source>
         <translation> (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2496"/>
+        <location filename="SandMan.cpp" line="2505"/>
         <source>The program %1 started in box %2 will be terminated in 5 minutes because the box was configured to use features exclusively available to project supporters.</source>
         <translation>在沙箱 %2 中啟動的程式 %1 將在 5 分鐘之後自動終止，因為此沙箱被設定為使用專案贊助者的專有功能。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2498"/>
+        <location filename="SandMan.cpp" line="2507"/>
         <source>The box %1 is configured to use features exclusively available to project supporters, these presets will be ignored.</source>
         <translation>沙箱 %1 被設定為使用專案贊助者專有的沙箱類型，這些預設選項將被忽略。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2499"/>
+        <location filename="SandMan.cpp" line="2508"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
         <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;成為專案贊助者&lt;/a&gt;，以取得&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;贊助者憑證&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2634"/>
+        <location filename="SandMan.cpp" line="2598"/>
+        <source>The Certificate Signature is invalid!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2599"/>
+        <source>The Certificate is not suitable for this product.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2600"/>
+        <source>The Certificate is node locked.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2604"/>
+        <source>The support certificate is not valid.
+Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="SandMan.cpp" line="2677"/>
         <source>The evaluation period has expired!!!</source>
         <oldsource>The evaluation periode has expired!!!</oldsource>
         <translation>評估期已過！！！</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2753"/>
+        <location filename="SandMan.cpp" line="2796"/>
         <source>Please enter the duration, in seconds, for disabling Forced Programs rules.</source>
         <translation>請輸入「停用強制沙箱程式規則」的持續時間 (單位：秒)。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2768"/>
+        <location filename="SandMan.cpp" line="2811"/>
         <source>No Recovery</source>
         <translation>沒有復原檔案</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2774"/>
+        <location filename="SandMan.cpp" line="2817"/>
         <source>No Messages</source>
         <translation>沒有訊息</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2830"/>
+        <location filename="SandMan.cpp" line="2873"/>
         <source>&lt;b&gt;ERROR:&lt;/b&gt; The Sandboxie-Plus Manager (SandMan.exe) does not have a valid signature (SandMan.exe.sig). Please download a trusted release from the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;official Download page&lt;/a&gt;.</source>
         <translation>&lt;b&gt;錯誤:&lt;/b&gt; Sandboxie-Plus 管理員 (SandMan.exe) 沒有有效的數位簽章 (SandMan.exe.sig)。請從&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;官方下載頁面&lt;/a&gt;下載可信賴的版本。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2933"/>
+        <location filename="SandMan.cpp" line="2976"/>
         <source>Maintenance operation failed (%1)</source>
         <translation>維護作業執行失敗 (%1)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2938"/>
+        <location filename="SandMan.cpp" line="2981"/>
         <source>Maintenance operation completed</source>
         <translation>維護作業完成</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3072"/>
+        <location filename="SandMan.cpp" line="3115"/>
         <source>In the Plus UI, this functionality has been integrated into the main sandbox list view.</source>
         <translation>在 Plus UI 中，此功能已被整合到主沙箱清單檢視中。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3073"/>
+        <location filename="SandMan.cpp" line="3116"/>
         <source>Using the box/group context menu, you can move boxes and groups to other groups. You can also use drag and drop to move the items around. Alternatively, you can also use the arrow keys while holding ALT down to move items up and down within their group.&lt;br /&gt;You can create new boxes and groups from the Sandbox menu.</source>
         <translation>使用「沙箱/群組」右鍵選單，您可以將沙箱在沙箱群組之間移動。同時，您也可以透過 Alt + 方向鍵或滑鼠拖曳來整理清單。&lt;br /&gt;另外，您可以透過右鍵選單來新增「沙箱/群組」。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3222"/>
+        <location filename="SandMan.cpp" line="3265"/>
         <source>You are about to edit the Templates.ini, this is generally not recommended.
 This file is part of Sandboxie and all change done to it will be reverted next time Sandboxie is updated.</source>
         <oldsource>You are about to edit the Templates.ini, thsi is generally not recommeded.
@@ -3524,230 +3571,230 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 因為該檔案是 Sandboxie 的一部分並且所有的變更會在下次 Sandboxie 更新時被還原。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3302"/>
+        <location filename="SandMan.cpp" line="3345"/>
         <source>Sandboxie config has been reloaded</source>
         <translation>已重新載入 Sandboxie 組態</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3433"/>
+        <location filename="SandMan.cpp" line="3476"/>
         <source>Failed to execute: %1</source>
         <translation>執行失敗: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3434"/>
+        <location filename="SandMan.cpp" line="3477"/>
         <source>Failed to connect to the driver</source>
         <translation>連線驅動程式失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3435"/>
+        <location filename="SandMan.cpp" line="3478"/>
         <source>Failed to communicate with Sandboxie Service: %1</source>
         <translation>無法與 Sandboxie 服務建立聯絡: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3436"/>
+        <location filename="SandMan.cpp" line="3479"/>
         <source>An incompatible Sandboxie %1 was found. Compatible versions: %2</source>
         <translation>已發現不相容的 Sandboxie %1。相容版本為: %2</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3437"/>
+        <location filename="SandMan.cpp" line="3480"/>
         <source>Can&apos;t find Sandboxie installation path.</source>
         <translation>無法找到 Sandboxie 安裝路徑。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3438"/>
+        <location filename="SandMan.cpp" line="3481"/>
         <source>Failed to copy configuration from sandbox %1: %2</source>
         <translation>複製沙箱組態 %1: %2 失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3439"/>
+        <location filename="SandMan.cpp" line="3482"/>
         <source>A sandbox of the name %1 already exists</source>
         <translation>沙箱名稱 %1 已存在</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3440"/>
+        <location filename="SandMan.cpp" line="3483"/>
         <source>Failed to delete sandbox %1: %2</source>
         <translation>刪除沙箱 %1: %2 失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3441"/>
+        <location filename="SandMan.cpp" line="3484"/>
         <source>The sandbox name can not be longer than 32 characters.</source>
         <translation>沙箱名稱不能超過 32 個字元。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3442"/>
+        <location filename="SandMan.cpp" line="3485"/>
         <source>The sandbox name can not be a device name.</source>
         <translation>沙箱名稱不能為裝置名稱。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3443"/>
+        <location filename="SandMan.cpp" line="3486"/>
         <source>The sandbox name can contain only letters, digits and underscores which are displayed as spaces.</source>
         <translation>沙箱名稱不能為空白，只能包含字母、數字和下劃線。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3444"/>
+        <location filename="SandMan.cpp" line="3487"/>
         <source>Failed to terminate all processes</source>
         <translation>終止所有處理程序失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3445"/>
+        <location filename="SandMan.cpp" line="3488"/>
         <source>Delete protection is enabled for the sandbox</source>
         <translation>沙箱的刪除保護已被啟用</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3446"/>
+        <location filename="SandMan.cpp" line="3489"/>
         <source>All sandbox processes must be stopped before the box content can be deleted</source>
         <translation>在刪除沙箱內容之前，必須先停止沙箱內的所有處理程序</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3447"/>
+        <location filename="SandMan.cpp" line="3490"/>
         <source>Error deleting sandbox folder: %1</source>
         <translation>刪除沙箱資料夾錯誤: %1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3448"/>
+        <location filename="SandMan.cpp" line="3491"/>
         <source>All processes in a sandbox must be stopped before it can be renamed.</source>
         <oldsource>A all processes in a sandbox must be stopped before it can be renamed.</oldsource>
         <translation type="unfinished">在重新命名沙箱前，所有處理程序都應被停止。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3451"/>
+        <location filename="SandMan.cpp" line="3494"/>
         <source>Failed to move directory &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>移動目錄 &apos;%1&apos; 到 &apos;%2&apos; 失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3452"/>
+        <location filename="SandMan.cpp" line="3495"/>
         <source>Failed to move box image &apos;%1&apos; to &apos;%2&apos;</source>
         <translation>移動沙箱映像 &apos;%1&apos; 至 &apos;%2&apos; 失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3453"/>
+        <location filename="SandMan.cpp" line="3496"/>
         <source>This Snapshot operation can not be performed while processes are still running in the box.</source>
         <translation>因處理程序正在沙箱中執行，此快照操作無法完成。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3454"/>
+        <location filename="SandMan.cpp" line="3497"/>
         <source>Failed to create directory for new snapshot</source>
         <translation>為新快照建立目錄失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3456"/>
+        <location filename="SandMan.cpp" line="3499"/>
         <source>Snapshot not found</source>
         <translation>未發現快照</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3457"/>
+        <location filename="SandMan.cpp" line="3500"/>
         <source>Error merging snapshot directories &apos;%1&apos; with &apos;%2&apos;, the snapshot has not been fully merged.</source>
         <translation>合併快照目錄 &apos;%1&apos; 和 &apos;%2&apos; 錯誤，快照沒有被完全合併。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3458"/>
+        <location filename="SandMan.cpp" line="3501"/>
         <source>Failed to remove old snapshot directory &apos;%1&apos;</source>
         <translation>移除舊快照的目錄 &apos;%1&apos; 失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3459"/>
+        <location filename="SandMan.cpp" line="3502"/>
         <source>Can&apos;t remove a snapshot that is shared by multiple later snapshots</source>
         <translation>無法刪除由多個後續快照共享的快照</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3461"/>
+        <location filename="SandMan.cpp" line="3504"/>
         <source>You are not authorized to update configuration in section &apos;%1&apos;</source>
         <translation>您未被授權在 &apos;%1&apos; 更新組態</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3462"/>
+        <location filename="SandMan.cpp" line="3505"/>
         <source>Failed to set configuration setting %1 in section %2: %3</source>
         <translation>在 %2: %3 中設定組態選項 %1 失敗</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3463"/>
+        <location filename="SandMan.cpp" line="3506"/>
         <source>Can not create snapshot of an empty sandbox</source>
         <translation>無法為空的沙箱建立快照</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3464"/>
+        <location filename="SandMan.cpp" line="3507"/>
         <source>A sandbox with that name already exists</source>
         <translation>已存在同名沙箱</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3465"/>
+        <location filename="SandMan.cpp" line="3508"/>
         <source>The config password must not be longer than 64 characters</source>
         <translation>組態密碼不得超過 64 個字元</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3466"/>
+        <location filename="SandMan.cpp" line="3509"/>
         <source>The operation was canceled by the user</source>
         <translation>此操作已被使用者取消</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3467"/>
+        <location filename="SandMan.cpp" line="3510"/>
         <source>The content of an unmounted sandbox can not be deleted</source>
         <oldsource>The content of an un mounted sandbox can not be deleted</oldsource>
         <translation>未被裝載的沙箱之內容不可被刪除</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3469"/>
+        <location filename="SandMan.cpp" line="3512"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3471"/>
+        <location filename="SandMan.cpp" line="3514"/>
         <source>Import/Export not available, 7z.dll could not be loaded</source>
         <translation>匯入/匯出無法使用，無法載入 7z.dll</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3472"/>
+        <location filename="SandMan.cpp" line="3515"/>
         <source>Failed to create the box archive</source>
         <translation>無法建立沙箱封存檔案</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3473"/>
+        <location filename="SandMan.cpp" line="3516"/>
         <source>Failed to open the 7z archive</source>
         <translation>無法開啟 7z 封存檔案</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3474"/>
+        <location filename="SandMan.cpp" line="3517"/>
         <source>Failed to unpack the box archive</source>
         <translation>無法解壓縮沙箱封存檔案</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3475"/>
+        <location filename="SandMan.cpp" line="3518"/>
         <source>The selected 7z file is NOT a box archive</source>
         <translation>所選的 7z 檔案不是沙箱封存檔案</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3501"/>
+        <location filename="SandMan.cpp" line="3544"/>
         <source>Operation failed for %1 item(s).</source>
         <translation>%1 項操作失敗。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3563"/>
+        <location filename="SandMan.cpp" line="3604"/>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
         <translation>是否在沙箱化網頁瀏覽器開啟連結 %1 ？</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3564"/>
+        <location filename="SandMan.cpp" line="3605"/>
         <source>Remember choice for later.</source>
         <translation>記住選擇供之後使用。</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2639"/>
+        <location filename="SandMan.cpp" line="2682"/>
         <source>The supporter certificate is not valid for this build, please get an updated certificate</source>
         <translation>此贊助者憑證對此版本沙箱無效，請取得更新的憑證</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2642"/>
+        <location filename="SandMan.cpp" line="2685"/>
         <source>The supporter certificate has expired%1, please get an updated certificate</source>
         <oldsource>The supporter certificate is expired %1 days ago, please get an updated certificate</oldsource>
         <translation>此贊助者憑證已逾期%1，請取得更新的憑證</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2643"/>
+        <location filename="SandMan.cpp" line="2686"/>
         <source>, but it remains valid for the current build</source>
         <translation>，但它對目前組建的沙箱版本仍然有效</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="2645"/>
+        <location filename="SandMan.cpp" line="2688"/>
         <source>The supporter certificate will expire in %1 days, please get an updated certificate</source>
         <translation>此贊助者憑證將在 %1 天後逾期，請取得更新的憑證</translation>
     </message>
@@ -4793,40 +4840,125 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="531"/>
+        <location filename="Windows/SettingsWindow.cpp" line="544"/>
         <source>Search for settings</source>
         <translation>搜尋設定</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="761"/>
-        <location filename="Windows/SettingsWindow.cpp" line="762"/>
-        <location filename="Windows/SettingsWindow.cpp" line="772"/>
+        <location filename="Windows/SettingsWindow.cpp" line="774"/>
+        <location filename="Windows/SettingsWindow.cpp" line="775"/>
+        <location filename="Windows/SettingsWindow.cpp" line="785"/>
         <source>Run &amp;Sandboxed</source>
         <translation>在沙箱中執行(&amp;S)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1026"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1035"/>
+        <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1040"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1457"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1049"/>
+        <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1091"/>
+        <source>Retreiving certificate...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1135"/>
+        <source>Contributor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1137"/>
+        <source>Eternal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1139"/>
+        <source>Business</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1141"/>
+        <source>Personal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1143"/>
+        <source>Great Patreon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1145"/>
+        <source>Patreon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1147"/>
+        <source>Family</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1149"/>
+        <source>Subscription</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1151"/>
+        <source>Evaluation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1153"/>
+        <source>Type %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1181"/>
+        <source>Standard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1183"/>
+        <source>Advanced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1185"/>
+        <source>Max Level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1187"/>
+        <source>Level %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1574"/>
         <source>This certificate is unfortunately not valid for the current build, you need to get a new certificate or downgrade to an earlier build.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1459"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1576"/>
         <source>Although this certificate has expired, for the currently installed version plus features remain enabled. However, you will no longer have access to Sandboxie-Live services, including compatibility updates and the online troubleshooting database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1461"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1578"/>
         <source>This certificate has unfortunately expired, you need to get a new certificate.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
-        <location filename="Windows/SettingsWindow.cpp" line="793"/>
+        <location filename="Windows/SettingsWindow.cpp" line="806"/>
         <source>Sandboxed Web Browser</source>
         <translation>沙箱化網頁瀏覽器</translation>
     </message>
@@ -4849,63 +4981,62 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>下載並安裝</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="345"/>
+        <location filename="Windows/SettingsWindow.cpp" line="344"/>
         <source>Browse for Program</source>
         <translation>瀏覽程式</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="427"/>
+        <location filename="Windows/SettingsWindow.cpp" line="426"/>
         <source>Add %1 Template</source>
         <translation>加入 %1 範本</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="482"/>
+        <location filename="Windows/SettingsWindow.cpp" line="495"/>
         <source>Select font</source>
         <translation>選取字型</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="484"/>
+        <location filename="Windows/SettingsWindow.cpp" line="497"/>
         <source>Reset font</source>
         <translation>重設字型</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="540"/>
+        <location filename="Windows/SettingsWindow.cpp" line="553"/>
         <source>%0, %1 pt</source>
         <translation>%0, %1 pt</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="642"/>
+        <location filename="Windows/SettingsWindow.cpp" line="655"/>
         <source>Please enter message</source>
         <translation>請輸入訊息</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="674"/>
+        <location filename="Windows/SettingsWindow.cpp" line="687"/>
         <source>Select Program</source>
         <translation>選擇程式</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="674"/>
+        <location filename="Windows/SettingsWindow.cpp" line="687"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>可執行檔案 (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="678"/>
-        <location filename="Windows/SettingsWindow.cpp" line="694"/>
+        <location filename="Windows/SettingsWindow.cpp" line="691"/>
+        <location filename="Windows/SettingsWindow.cpp" line="707"/>
         <source>Please enter a menu title</source>
         <translation>請輸入一個選單標題</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="690"/>
+        <location filename="Windows/SettingsWindow.cpp" line="703"/>
         <source>Please enter a command</source>
         <translation>請輸入一則命令</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1021"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation>此贊助者憑證已逾期，請&lt;a href=&quot;sbie://update/cert&quot;&gt;取得新憑證&lt;/a&gt;。</translation>
+        <translation type="vanished">此贊助者憑證已逾期，請&lt;a href=&quot;sbie://update/cert&quot;&gt;取得新憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1024"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1038"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus 附加的進階功能將在 %1 天後被停用。&lt;/font&gt;</translation>
     </message>
@@ -4914,28 +5045,27 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;在此版本中，Plus 附加的進階功能仍是可用的。&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1028"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1043"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Plus 附加的進階功能已不再可用。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1034"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation>此贊助者憑證將&lt;font color=&apos;red&apos;&gt;在 %1 天後逾期&lt;/font&gt;，請&lt;a href=&quot;sbie://update/cert&quot;&gt;取得新憑證&lt;/a&gt;。</translation>
+        <translation type="vanished">此贊助者憑證將&lt;font color=&apos;red&apos;&gt;在 %1 天後逾期&lt;/font&gt;，請&lt;a href=&quot;sbie://update/cert&quot;&gt;取得新憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1065"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1205"/>
         <source>Supporter certificate required</source>
         <oldsource>Supproter certificate required</oldsource>
         <translation>需要贊助者憑證</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1174"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1314"/>
         <source>Run &amp;Un-Sandboxed</source>
         <translation>在沙箱外執行(&amp;U)</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1438"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1554"/>
         <source>This does not look like a certificate. Please enter the entire certificate, not just a portion of it.</source>
         <translation>這看起來不像是一份憑證。請輸入完整的憑證，而不僅僅是其中的一部分。</translation>
     </message>
@@ -4948,98 +5078,97 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">很不幸此憑證已廢止。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1464"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1581"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>感謝您對 Sandboxie-Plus 開發工作的支持。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1471"/>
         <source>This support certificate is not valid.</source>
-        <translation>此贊助者憑證無效。</translation>
+        <translation type="vanished">此贊助者憑證無效。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1519"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1634"/>
         <source>Update Available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1521"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1636"/>
         <source>Installed</source>
         <translation>已安裝</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1526"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1641"/>
         <source>by %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1534"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1649"/>
         <source>(info website)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1561"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1676"/>
         <source>This Addon is mandatory and can not be removed.</source>
         <translation>此附加元件具有強制性且不可被移除。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1570"/>
-        <location filename="Windows/SettingsWindow.cpp" line="1716"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1685"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1831"/>
         <source>Select Directory</source>
         <translation>選擇目錄</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1599"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1714"/>
         <source>&lt;a href=&quot;check&quot;&gt;Check Now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;check&quot;&gt;立即檢查&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1676"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1791"/>
         <source>Please enter the new configuration password.</source>
         <translation>請輸入新組態密碼。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1680"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1795"/>
         <source>Please re-enter the new configuration password.</source>
         <translation>請再次輸入新組態密碼。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1685"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1800"/>
         <source>Passwords did not match, please retry.</source>
         <translation>密碼不匹配，請重新輸入。</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1697"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1812"/>
         <source>Process</source>
         <translation>處理程序</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1697"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1812"/>
         <source>Folder</source>
         <translation>資料夾</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1707"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1822"/>
         <source>Please enter a program file name</source>
         <translation>請輸入一個程式檔案名稱</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1775"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1890"/>
         <source>Please enter the template identifier</source>
         <translation>請輸入範本識別碼</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1783"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1898"/>
         <source>Error: %1</source>
         <translation>錯誤: %1</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1808"/>
+        <location filename="Windows/SettingsWindow.cpp" line="1923"/>
         <source>Do you really want to delete the selected local template(s)?</source>
         <translation>要刪除所選取的本地範本嗎？</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="2015"/>
+        <location filename="Windows/SettingsWindow.cpp" line="2130"/>
         <source>%1 (Current)</source>
         <translation>%1 (目前)</translation>
     </message>
@@ -5047,27 +5176,27 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 <context>
     <name>CSetupWizard</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="32"/>
+        <location filename="Wizards/SetupWizard.cpp" line="33"/>
         <source>Setup Wizard</source>
         <translation>設定精靈</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="43"/>
+        <location filename="Wizards/SetupWizard.cpp" line="44"/>
         <source>The decision you make here will affect which page you get to see next.</source>
         <translation>您在這裡做出的決定將影響您接下來看到的頁面內容。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="46"/>
+        <location filename="Wizards/SetupWizard.cpp" line="47"/>
         <source>This help is likely not to be of any help.</source>
         <translation>此類幫助很可能沒用提供任何實質性幫助。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="50"/>
+        <location filename="Wizards/SetupWizard.cpp" line="51"/>
         <source>Sorry, I already gave all the help I could.</source>
         <translation>對不起，我已經提供了所有能給的協助。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="52"/>
+        <location filename="Wizards/SetupWizard.cpp" line="53"/>
         <source>Setup Wizard Help</source>
         <translation>設定精靈幫助</translation>
     </message>
@@ -5075,27 +5204,27 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 <context>
     <name>CShellPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="457"/>
+        <location filename="Wizards/SetupWizard.cpp" line="494"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; shell integration</source>
         <translation>設定 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 命令整合組態</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="458"/>
+        <location filename="Wizards/SetupWizard.cpp" line="495"/>
         <source>Configure how Sandboxie-Plus should integrate with your system.</source>
         <translation>設定 Sandboxie-Plus 應如何與您的系統整合。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="462"/>
+        <location filename="Wizards/SetupWizard.cpp" line="499"/>
         <source>Start UI with Windows</source>
         <translation>Windows 啟動時開啟使用者介面</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="467"/>
+        <location filename="Wizards/SetupWizard.cpp" line="504"/>
         <source>Add &apos;Run Sandboxed&apos; to the explorer context menu</source>
         <translation>在檔案總管右鍵新增「在沙箱中執行」</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="472"/>
+        <location filename="Wizards/SetupWizard.cpp" line="509"/>
         <source>Add desktop shortcut for starting Web browser under Sandboxie</source>
         <translation>加入在 Sandboxie 中開啟網頁瀏覽器的捷徑到桌面</translation>
     </message>
@@ -5743,37 +5872,37 @@ If you are a great patreaon supporter already, sandboxie can check online for an
 <context>
     <name>CUIPage</name>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="342"/>
+        <location filename="Wizards/SetupWizard.cpp" line="379"/>
         <source>Configure &lt;b&gt;Sandboxie-Plus&lt;/b&gt; UI</source>
         <translation>設定 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 使用者介面組態</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="343"/>
+        <location filename="Wizards/SetupWizard.cpp" line="380"/>
         <source>Select the user interface style you prefer.</source>
         <translation>選擇您喜歡的使用者介面風格。</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="347"/>
+        <location filename="Wizards/SetupWizard.cpp" line="384"/>
         <source>&amp;Advanced UI for experts</source>
         <translation>適合專家的進階使用者介面(&amp;A)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="352"/>
+        <location filename="Wizards/SetupWizard.cpp" line="389"/>
         <source>&amp;Simple UI for beginners</source>
         <translation>適合新手的簡易使用者介面(&amp;S)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="357"/>
+        <location filename="Wizards/SetupWizard.cpp" line="394"/>
         <source>&amp;Vintage SbieCtrl.exe UI</source>
         <translation>SbieCtrl 經典使用者介面(&amp;V)</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="382"/>
+        <location filename="Wizards/SetupWizard.cpp" line="419"/>
         <source>Use Bright Mode</source>
         <translation>使用淺色主題</translation>
     </message>
     <message>
-        <location filename="Wizards/SetupWizard.cpp" line="386"/>
+        <location filename="Wizards/SetupWizard.cpp" line="423"/>
         <source>Use Dark Mode</source>
         <translation>使用深色主題</translation>
     </message>
@@ -7352,27 +7481,27 @@ Please note that this values are currently user specific and saved globally for 
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="SandMan.cpp" line="3815"/>
+        <location filename="SandMan.cpp" line="3892"/>
         <source>OK</source>
         <translation>確定</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3816"/>
+        <location filename="SandMan.cpp" line="3893"/>
         <source>Apply</source>
         <translation>套用</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3817"/>
+        <location filename="SandMan.cpp" line="3894"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3818"/>
+        <location filename="SandMan.cpp" line="3895"/>
         <source>&amp;Yes</source>
         <translation>是(&amp;Y)</translation>
     </message>
     <message>
-        <location filename="SandMan.cpp" line="3819"/>
+        <location filename="SandMan.cpp" line="3896"/>
         <source>&amp;No</source>
         <translation>否(&amp;N)</translation>
     </message>
@@ -7567,42 +7696,42 @@ Please note that this values are currently user specific and saved globally for 
         <translation>* 部分核取的項目核取方塊之行為取決於其檢視模式。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1628"/>
+        <location filename="Forms/SettingsWindow.ui" line="1656"/>
         <source>Advanced Config</source>
         <translation>進階組態</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1748"/>
+        <location filename="Forms/SettingsWindow.ui" line="1776"/>
         <source>Activate Kernel Mode Object Filtering</source>
         <translation>啟動核心模式物件篩選</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1735"/>
+        <location filename="Forms/SettingsWindow.ui" line="1763"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;file system root&lt;/a&gt;: </source>
         <translation>沙箱 &lt;a href=&quot;sbie://docs/filerootpath&quot;&gt;檔案系統根目錄&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1921"/>
+        <location filename="Forms/SettingsWindow.ui" line="1949"/>
         <source>Clear password when main window becomes hidden</source>
         <translation>主視窗隱藏時清除密碼</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1705"/>
+        <location filename="Forms/SettingsWindow.ui" line="1733"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;ipc root&lt;/a&gt;: </source>
         <translation>沙箱 &lt;a href=&quot;sbie://docs/ipcrootpath&quot;&gt;IPC 根目錄&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1688"/>
+        <location filename="Forms/SettingsWindow.ui" line="1716"/>
         <source>Sandbox default</source>
         <translation>沙箱預設</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1893"/>
+        <location filename="Forms/SettingsWindow.ui" line="1921"/>
         <source>Config protection</source>
         <translation>組態保護</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1671"/>
+        <location filename="Forms/SettingsWindow.ui" line="1699"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -7779,68 +7908,88 @@ Please note that this values are currently user specific and saved globally for 
         <translation>Sandboxie 贊助</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1366"/>
+        <location filename="Forms/SettingsWindow.ui" line="1296"/>
+        <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="1338"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
         <translation>Sandboxie-Plus 專案的贊助者將收到&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;贊助者憑證&lt;/a&gt;。這類似於授權碼，但是是為擁抱開放原始碼軟體的優秀人士準備的。:-)</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1382"/>
+        <location filename="Forms/SettingsWindow.ui" line="1348"/>
+        <source>Get</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="1355"/>
+        <source>Retrieve/Upgrade/Renew certificate using Serial Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="1371"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. You can support the development by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;directly contributing to the project&lt;/a&gt;, showing your support by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt;, becoming a patron by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;subscribing on Patreon&lt;/a&gt;, or through a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;.&lt;br /&gt;Your support plays a vital role in the advancement and maintenance of Sandboxie.</source>
         <translation>使 Sandboxie 與 Windows 的持續性更新相同步，並和主流網頁瀏覽器保持相容性，是一項永無止境的努力。您可以透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;直接參與專案&lt;/a&gt;來支援開發、透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;購買贊助者憑證&lt;/a&gt;來表達您的支持、透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;在 Patreon 上訂閱&lt;/a&gt;成為贊助者、或者透過 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal 捐款&lt;/a&gt;。&lt;br /&gt;您的支持對 Sandboxie 的進步和維護至關重要。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1755"/>
+        <location filename="Forms/SettingsWindow.ui" line="1396"/>
+        <source>SBIE_-_____-_____-_____-_____</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Forms/SettingsWindow.ui" line="1783"/>
         <source>Sandbox &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;registry root&lt;/a&gt;: </source>
         <translation>沙箱 &lt;a href=&quot;sbie://docs/keyrootpath&quot;&gt;登錄根目錄&lt;/a&gt;: </translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1801"/>
+        <location filename="Forms/SettingsWindow.ui" line="1829"/>
         <source>Sandboxing features</source>
         <translation>沙箱功能</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1851"/>
+        <location filename="Forms/SettingsWindow.ui" line="1879"/>
         <source>Sandboxie.ini Presets</source>
         <translation>Sandboxie.ini 預設選項</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1859"/>
+        <location filename="Forms/SettingsWindow.ui" line="1887"/>
         <source>Change Password</source>
         <translation>變更密碼</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1866"/>
+        <location filename="Forms/SettingsWindow.ui" line="1894"/>
         <source>Password must be entered in order to make changes</source>
         <translation>必須輸入密碼以進行變更</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1900"/>
+        <location filename="Forms/SettingsWindow.ui" line="1928"/>
         <source>Only Administrator user accounts can make changes</source>
         <translation>僅限管理員帳戶進行變更</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1907"/>
+        <location filename="Forms/SettingsWindow.ui" line="1935"/>
         <source>Watch Sandboxie.ini for changes</source>
         <translation>追蹤 Sandboxie.ini 變更</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2039"/>
+        <location filename="Forms/SettingsWindow.ui" line="2067"/>
         <source>App Templates</source>
         <translation>軟體範本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2049"/>
+        <location filename="Forms/SettingsWindow.ui" line="2077"/>
         <source>App Compatibility</source>
         <translation>軟體相容性</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1914"/>
+        <location filename="Forms/SettingsWindow.ui" line="1942"/>
         <source>Only Administrator user accounts can use Pause Forcing Programs command</source>
         <oldsource>Only Administrator user accounts can use Pause Forced Programs Rules command</oldsource>
         <translation>僅管理員帳戶可使用「暫停強制沙箱程式」命令</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1698"/>
+        <location filename="Forms/SettingsWindow.ui" line="1726"/>
         <source>Portable root folder</source>
         <translation>便攜化根目錄</translation>
     </message>
@@ -7860,12 +8009,12 @@ Please note that this values are currently user specific and saved globally for 
         <translation>在系統匣中顯示圖示:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1728"/>
+        <location filename="Forms/SettingsWindow.ui" line="1756"/>
         <source>Use Windows Filtering Platform to restrict network access</source>
         <translation>使用 Windows 篩選平台 (WFP) 限制區域網路存取</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1808"/>
+        <location filename="Forms/SettingsWindow.ui" line="1836"/>
         <source>Hook selected Win32k system calls to enable GPU acceleration (experimental)</source>
         <translation>為選取的 Win32k 系統呼叫進行勾點以啟用 GPU 加速 (實驗性)</translation>
     </message>
@@ -7958,44 +8107,44 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="665"/>
         <location filename="Forms/SettingsWindow.ui" line="1222"/>
-        <location filename="Forms/SettingsWindow.ui" line="1967"/>
-        <location filename="Forms/SettingsWindow.ui" line="2077"/>
-        <location filename="Forms/SettingsWindow.ui" line="2210"/>
+        <location filename="Forms/SettingsWindow.ui" line="1995"/>
+        <location filename="Forms/SettingsWindow.ui" line="2105"/>
+        <location filename="Forms/SettingsWindow.ui" line="2238"/>
         <source>Name</source>
         <translation>名稱</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1972"/>
+        <location filename="Forms/SettingsWindow.ui" line="2000"/>
         <source>Path</source>
         <translation>路徑</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1994"/>
+        <location filename="Forms/SettingsWindow.ui" line="2022"/>
         <source>Remove Program</source>
         <translation>移除程式</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1980"/>
+        <location filename="Forms/SettingsWindow.ui" line="2008"/>
         <source>Add Program</source>
         <translation>加入程式</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2015"/>
+        <location filename="Forms/SettingsWindow.ui" line="2043"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
         <translation>當下列程式在任意沙箱之外啟動時，Sandboxie 將提示錯誤代碼 SBIE1301。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2025"/>
+        <location filename="Forms/SettingsWindow.ui" line="2053"/>
         <source>Add Folder</source>
         <translation>加入資料夾</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2008"/>
+        <location filename="Forms/SettingsWindow.ui" line="2036"/>
         <source>Prevent the listed programs from starting on this system</source>
         <translation>阻止下列程式在此系統中啟動</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1987"/>
+        <location filename="Forms/SettingsWindow.ui" line="2015"/>
         <source>Issue message 1308 when a program fails to start</source>
         <translation>當程式啟動失敗時提示錯誤代碼 1308</translation>
     </message>
@@ -8035,22 +8184,22 @@ Please note that this values are currently user specific and saved globally for 
         <translation>使用新的組態對話框佈局 *</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1935"/>
+        <location filename="Forms/SettingsWindow.ui" line="1963"/>
         <source>Program Control</source>
         <translation>應用程式控制</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1945"/>
+        <location filename="Forms/SettingsWindow.ui" line="1973"/>
         <source>Program Alerts</source>
         <translation>程式警報</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2001"/>
+        <location filename="Forms/SettingsWindow.ui" line="2029"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
         <translation>當強制沙箱處理程序被停用時，提示問題代碼 1301</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1638"/>
+        <location filename="Forms/SettingsWindow.ui" line="1666"/>
         <source>Sandboxie Config</source>
         <oldsource>Config Protection</oldsource>
         <translation>Sandboxie 組態</translation>
@@ -8088,7 +8237,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="770"/>
         <location filename="Forms/SettingsWindow.ui" line="1201"/>
-        <location filename="Forms/SettingsWindow.ui" line="2157"/>
+        <location filename="Forms/SettingsWindow.ui" line="2185"/>
         <source>Remove</source>
         <translation>移除</translation>
     </message>
@@ -8107,174 +8256,173 @@ Please note that this values are currently user specific and saved globally for 
         <translation type="vanished">使 Sandboxie 與 Windows 的持續性更新相同步，並和主流網頁瀏覽器保持相容性，是一項永無止境的努力。您可以透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;直接參與專案&lt;/a&gt;來支援開發、透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;購買贊助者憑證&lt;/a&gt;來表達您的支持、透過&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;在 Patreon 上訂閱&lt;/a&gt;成為贊助者、或者透過 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal 捐款&lt;/a&gt;。&lt;br /&gt;您的支持對 Sandboxie 的進步和維護至關重要。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1411"/>
+        <location filename="Forms/SettingsWindow.ui" line="1439"/>
         <source>Sandboxie Updater</source>
         <translation>Sandboxie 更新程式</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1442"/>
+        <location filename="Forms/SettingsWindow.ui" line="1470"/>
         <source>Keep addon list up to date</source>
         <translation>保持附加元件清單為最新</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1456"/>
+        <location filename="Forms/SettingsWindow.ui" line="1484"/>
         <source>Update Settings</source>
         <translation>更新設定</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1497"/>
+        <location filename="Forms/SettingsWindow.ui" line="1525"/>
         <source>The Insider channel offers early access to new features and bugfixes that will eventually be released to the public, as well as all relevant improvements from the stable channel. 
 Unlike the preview channel, it does not include untested, potentially breaking, or experimental changes that may not be ready for wider use.</source>
         <translation>Insider 通道提供對「最終將公開發表的新功能和錯誤修復」的早期存取，以及包含穩定通道的所有相關改進。
 與預覽通道不同，它不包含未經測試、可能會破壞或可能尚未準備好供更廣泛使用的實驗性變更。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1501"/>
+        <location filename="Forms/SettingsWindow.ui" line="1529"/>
         <source>Search in the Insider channel</source>
         <translation>在測試人員通道中搜尋</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1548"/>
+        <location filename="Forms/SettingsWindow.ui" line="1576"/>
         <source>Check periodically for new Sandboxie-Plus versions</source>
         <translation>定期檢查新的 Sandboxie-Plus 版本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1558"/>
+        <location filename="Forms/SettingsWindow.ui" line="1586"/>
         <source>More about the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;Insider Channel&lt;/a&gt;</source>
         <translation>了解更多關於 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;測試人員通道&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1578"/>
+        <location filename="Forms/SettingsWindow.ui" line="1606"/>
         <source>Keep Troubleshooting scripts up to date</source>
         <translation>保持疑難排解腳本為最新</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1614"/>
+        <location filename="Forms/SettingsWindow.ui" line="1642"/>
         <source>Update Check Interval</source>
         <translation>更新檢查間隔</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1718"/>
+        <location filename="Forms/SettingsWindow.ui" line="1746"/>
         <source>Default sandbox:</source>
         <translation>預設沙箱:</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1815"/>
+        <location filename="Forms/SettingsWindow.ui" line="1843"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>使用 Sandboxie 登入程序替代匿名權杖</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2069"/>
+        <location filename="Forms/SettingsWindow.ui" line="2097"/>
         <source>In the future, don&apos;t check software compatibility</source>
         <translation>以後不再檢查軟體相容性</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2085"/>
+        <location filename="Forms/SettingsWindow.ui" line="2113"/>
         <source>Enable</source>
         <translation>啟用</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2105"/>
+        <location filename="Forms/SettingsWindow.ui" line="2133"/>
         <source>Disable</source>
         <translation>停用</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2112"/>
+        <location filename="Forms/SettingsWindow.ui" line="2140"/>
         <source>Sandboxie has detected the following software applications in your system. Click OK to apply configuration settings, which will improve compatibility with these applications. These configuration settings will have effect in all existing sandboxes and in any new sandboxes.</source>
         <translation>Sandboxie 偵測到您的系統中安裝了以下軟體。按下「確定」套用設定，將改進與這些軟體的相容性。這些設定作用於所有沙箱，包括現存的和未來新增的沙箱。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2125"/>
+        <location filename="Forms/SettingsWindow.ui" line="2153"/>
         <source>Local Templates</source>
         <translation>本地範本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2176"/>
+        <location filename="Forms/SettingsWindow.ui" line="2204"/>
         <source>Add Template</source>
         <translation>加入範本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2196"/>
+        <location filename="Forms/SettingsWindow.ui" line="2224"/>
         <source>Text Filter</source>
         <translation>篩選文字</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2218"/>
+        <location filename="Forms/SettingsWindow.ui" line="2246"/>
         <source>This list contains user created custom templates for sandbox options</source>
         <translation>該清單包含使用者為沙箱選項建立的自訂範本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2235"/>
+        <location filename="Forms/SettingsWindow.ui" line="2263"/>
         <source>Edit ini Section</source>
         <translation>編輯 ini 區段</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2244"/>
+        <location filename="Forms/SettingsWindow.ui" line="2272"/>
         <source>Save</source>
         <translation>儲存</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2264"/>
+        <location filename="Forms/SettingsWindow.ui" line="2292"/>
         <source>Edit ini</source>
         <translation>編輯 ini</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="2277"/>
+        <location filename="Forms/SettingsWindow.ui" line="2305"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1480"/>
+        <location filename="Forms/SettingsWindow.ui" line="1508"/>
         <source>Version Updates</source>
         <translation>目前版本的更新</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1538"/>
+        <location filename="Forms/SettingsWindow.ui" line="1566"/>
         <source>New full versions from the selected release channel.</source>
         <translation>新的來自所選取發佈通道的完整版本。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1477"/>
+        <location filename="Forms/SettingsWindow.ui" line="1505"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
         <translation>更新已安裝版本的 Templates.ini 範本和翻譯的修補程式。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1330"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation>此贊助者憑證已逾期，請&lt;a href=&quot;sbie://update/cert&quot;&gt;取得新憑證&lt;/a&gt;。</translation>
+        <translation type="vanished">此贊助者憑證已逾期，請&lt;a href=&quot;sbie://update/cert&quot;&gt;取得新憑證&lt;/a&gt;。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1487"/>
+        <location filename="Forms/SettingsWindow.ui" line="1515"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>預覽通道包含最新的 GitHub 預先發佈版本。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1541"/>
+        <location filename="Forms/SettingsWindow.ui" line="1569"/>
         <source>New Versions</source>
         <translation>新版本</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1585"/>
+        <location filename="Forms/SettingsWindow.ui" line="1613"/>
         <source>The stable channel contains the latest stable GitHub releases.</source>
         <translation>穩定通道包含最新的 GitHub 穩定版本。</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1588"/>
+        <location filename="Forms/SettingsWindow.ui" line="1616"/>
         <source>Search in the Stable channel</source>
         <translation>在穩定通道中搜尋</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1490"/>
+        <location filename="Forms/SettingsWindow.ui" line="1518"/>
         <source>Search in the Preview channel</source>
         <translation>在預覽通道中搜尋</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1303"/>
+        <location filename="Forms/SettingsWindow.ui" line="1416"/>
         <source>In the future, don&apos;t notify about certificate expiration</source>
         <translation>不再通知憑證逾期的情況</translation>
     </message>
     <message>
-        <location filename="Forms/SettingsWindow.ui" line="1401"/>
+        <location filename="Forms/SettingsWindow.ui" line="1312"/>
         <source>Enter the support certificate here</source>
         <translation>在此輸入贊助者憑證</translation>
     </message>

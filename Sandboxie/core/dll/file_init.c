@@ -166,7 +166,7 @@ _FX BOOLEAN File_Init(void)
 			return FALSE;
 	}
 
-    if (Dll_OsBuild >= 6000) { // needed for File_GetFileName used indirectly by File_InitRecoverFolders
+    if (Dll_OsBuild >= 6000) {
 
         void *GetFinalPathNameByHandleW =
             GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32,

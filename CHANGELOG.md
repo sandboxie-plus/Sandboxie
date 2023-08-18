@@ -9,14 +9,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added certificate info to the about dialog
 - added support for new more flexible certificate style
-- added option for business customers to retrive hardware bound certificates from a serial number
-- added option to upgrade existing certificates using a upgrade serial number
+- added option for business customers to retrieve hardware-bound certificates from a serial number
+- added option to upgrade existing certificates using an upgrade serial number
 
 ### Changed
-- Improved online updater code
+- improved online updater code
 
 ### Fixed
-- fixed Symbolic links created inside of sandbox don't work properly [#3181](https://github.com/sandboxie-plus/Sandboxie/issues/3181)
+- fixed symbolic links created inside a sandbox not working properly [#3181](https://github.com/sandboxie-plus/Sandboxie/issues/3181)
 
 
 
@@ -24,7 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.10.5 / 5.65.5] - 2023-08-12
 
 ### Changed
-- Don't close submenus on mouse-leave (thanks typpos) [#2963](https://github.com/sandboxie-plus/Sandboxie/issues/2963)
+- submenus don't close on mouse-leave (thanks typpos) [#2963](https://github.com/sandboxie-plus/Sandboxie/issues/2963)
 
 ### Fixed
 - fixed issue with verification of business certificates
@@ -37,7 +37,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed Sandboxie-Plus-x64-v1.10.3 crash on startup [#3174](https://github.com/sandboxie-plus/Sandboxie/issues/3174)
-- fixed issue with buttons not translated in the wizards [#3133](https://github.com/sandboxie-plus/Sandboxie/issues/3133)
+- fixed issue with untranslated buttons in the wizard [#3133](https://github.com/sandboxie-plus/Sandboxie/issues/3133)
 
 
 
@@ -45,17 +45,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added support for URL shortcut files in Run Menu [#3151](https://github.com/sandboxie-plus/Sandboxie/issues/3151)
-- added workaround for NtQueryObject locking up in exotic scenarios, to enable it use 'UseDriverObjLookup=y'
-- Addon Manager: added tooltip to version column with maintainer information [#3167](https://github.com/sandboxie-plus/Sandboxie/issues/3167)
-- added mechanism to open websites for addons [#3166](https://github.com/sandboxie-plus/Sandboxie/issues/3166)
+- added workaround for NtQueryObject locking up under exotic circumstances; to enable use 'UseDriverObjLookup=y'
+- Addons Manager: added tooltip to version column with maintainer information [#3167](https://github.com/sandboxie-plus/Sandboxie/issues/3167)
+- added mechanism to open websites for add-ons [#3166](https://github.com/sandboxie-plus/Sandboxie/issues/3166)
 
 ### Changed
-- improved business certificate handling, added usage count and machine bound options
+- improved business certificate handling, added usage count and machine-bound options
 
 ### Fixed
 - fixed issues with pinned shortcuts
 - fixed Process Suspend/Resume context menu [#3156](https://github.com/sandboxie-plus/Sandboxie/issues/3156)
-- fixed issues with installers created with Qt [#2493](https://github.com/sandboxie-plus/Sandboxie/issues/2493) [#3153](https://github.com/sandboxie-plus/Sandboxie/issues/3153)
+- fixed issues with Qt-based installers [#2493](https://github.com/sandboxie-plus/Sandboxie/issues/2493) [#3153](https://github.com/sandboxie-plus/Sandboxie/issues/3153)
 
 
 
@@ -65,13 +65,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - re-added option to suspend sandboxed processes [#3126](https://github.com/sandboxie-plus/Sandboxie/issues/3126)
 
 ### Changed
-- changed format of the addon data [#3135](https://github.com/sandboxie-plus/Sandboxie/issues/3135)
-  - all users coming from versions 1.10.0 and 1.10.1 will need to reinstall the components in the addon manager
+- changed format of the add-on data [#3135](https://github.com/sandboxie-plus/Sandboxie/issues/3135)
+  - all users coming from versions 1.10.0 and 1.10.1 will need to reinstall the components in the Addon Manager
 - "OpenClipboard=n" now also denies write to clipboard [#1367](https://github.com/sandboxie-plus/Sandboxie/issues/1367)
 
 ### Fixed
-- fixed issue with cross renaming of directories
-- fixed issue with auto scroll not working [#393](https://github.com/sandboxie-plus/Sandboxie/issues/393)
+- fixed issue with cross-renaming of directories
+- fixed issue with auto-scroll not working [#393](https://github.com/sandboxie-plus/Sandboxie/issues/393)
 - fixed UI issue with new box removal protection [#3104](https://github.com/sandboxie-plus/Sandboxie/issues/3104)
 - fixed issue with link argument handling [#2969](https://github.com/sandboxie-plus/Sandboxie/issues/2969)
 - fixed IPC issue introduced in 1.10.1 [#3132](https://github.com/sandboxie-plus/Sandboxie/issues/3132) [#3134](https://github.com/sandboxie-plus/Sandboxie/issues/3134)
@@ -80,21 +80,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 - removed hardcoded support for LogApiDll
-  - use the addon manager and DLL injection settings
+  - use the Addon Manager and DLL injection settings
 
 
 
 ## [1.10.1 / 5.65.1] - 2023-07-24
 
 ### Added
-- added UI option to change ini editor [#3116](https://github.com/sandboxie-plus/Sandboxie/issues/3116)
+- added UI option to select a custom text editor to open Sandboxie.ini [#3116](https://github.com/sandboxie-plus/Sandboxie/issues/3116)
 - added separate protection against box removal and content deletion [#3104](https://github.com/sandboxie-plus/Sandboxie/issues/3104)
 - added "auto scroll" in Sbie messages, resource monitor, API call log context menu [#393](https://github.com/sandboxie-plus/Sandboxie/issues/393)
 
 ### Changed
-- reworked NT Object Handle handling
-- "OpenClipboard=n" now is also implemented in user mode, making it work for compartment boxes
-- changed Delete V2 scheme to use drive letters in FilePaths.dat (remains backward compatible with using NT paths) [#3053](https://github.com/sandboxie-plus/Sandboxie/issues/3053)
+- reworked handling of NT object handles
+- "OpenClipboard=n" is also implemented in user mode now, thus enabling it for compartment boxes as well
+- changed Delete V2 scheme to use drive letters in FilePaths.dat (backwards-compatibility with NT paths remains) [#3053](https://github.com/sandboxie-plus/Sandboxie/issues/3053)
 - improved robustness of snapshot merging [#3017](https://github.com/sandboxie-plus/Sandboxie/issues/3017)
 
 ### Fixed
@@ -102,17 +102,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed NtQueryDirectoryObject not implemented [#2734](https://github.com/sandboxie-plus/Sandboxie/issues/2734)
 - fixed issue with working directory for Run Menu entries
 - fixed improper global symlink in sandboxed namespace [#3112](https://github.com/sandboxie-plus/Sandboxie/issues/3112)
-- fixed 'Addon already installed!' error when clicking 'Show Stack Trace' [#3114](https://github.com/sandboxie-plus/Sandboxie/issues/3114)
+- fixed 'Add-on already installed!' error when clicking 'Show Stack Trace' [#3114](https://github.com/sandboxie-plus/Sandboxie/issues/3114)
 - fixed existing BoxNameTitle=process.exe,- removed when toggling other options [#3106](https://github.com/sandboxie-plus/Sandboxie/issues/3106)
 - fixed asynchronously assigned PCA job not being properly detected [#1919](https://github.com/sandboxie-plus/Sandboxie/issues/1919)
 - fixed incompatibility with first Windows 10 release [#3117](https://github.com/sandboxie-plus/Sandboxie/issues/3117)
 - fixed remove sandbox only deletes the contents of the sandbox when an application is running in the sandbox [#3118](https://github.com/sandboxie-plus/Sandboxie/issues/3118)
-- fixed crash issue with not properly terminated script engine [#3120](https://github.com/sandboxie-plus/Sandboxie/issues/3120)
+- fixed crash issue with the script engine not terminating properly [#3120](https://github.com/sandboxie-plus/Sandboxie/issues/3120)
 - fixed ImDisk under Sandboxie supervision causes SBIE2337 and sometimes BSOD [#1092](https://github.com/sandboxie-plus/Sandboxie/issues/1092)
-- fixed snapshots don't merge duplicate directory junctions [#3016](https://github.com/sandboxie-plus/Sandboxie/issues/3016)
-- fixed snapshot related issue when using Delete V2 rename functionality
+- fixed snapshots not merging duplicate directory junctions [#3016](https://github.com/sandboxie-plus/Sandboxie/issues/3016)
+- fixed snapshot-related issue when using Delete V2 rename functionality
 - fixed issue with Delete V2 when using network shares
-- fixed issue when using "UseVolumeSerialNumbers=y" with accessing drive roots
+- fixed issue with accessing drive roots when using "UseVolumeSerialNumbers=y" 
 - fixed remove snapshot resurrects deleted files when using Delete V2 [#3015](https://github.com/sandboxie-plus/Sandboxie/issues/3015)
 
 ### Removed
@@ -125,29 +125,29 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added box scripting engine to make SandMan more flexible
 - added scriptable troubleshooting wizard [#1875](https://github.com/sandboxie-plus/Sandboxie/issues/1875)
-- added addon manager which helps to install additional and third-party components, available addons:
+- added Addon Manager which helps to install additional and third-party components, available add-ons:
   - [ImDisk Toolkit](https://sourceforge.net/projects/imdisk-toolkit/) - used to create RAM Disks and other virtual drives
   - [V4 Script Debugger](https://github.com/DavidXanatos/NeoScriptTools) - used to debug troubleshooting scripts
   - [Microsoft Debug Help Library](https://learn.microsoft.com/en-us/windows/win32/debug/debug-help-library) - used for the stack trace feature introduced in 1.9.6
   - [signcheck.exe](https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck) - used to scan files on VirusTotal before recovering them
   - [SbieHide.dll](https://github.com/VeroFess/SbieHide) - a third-party DLL to hide SbieDll.dll
   - [LogAPI.dll](https://bsa.isoftware.nl/) - an API logging library used for Buster Sandbox Analyzer
-- added option to set the update interval to 1, 7, 14 and 30 days
-- added `What's new in Sandboxie-Plus` dialog in SbieCtrl.exe to praise the new features of the Plus UI
+- added option to set the update interval to 1, 7, 14 or 30 days
+- added `What's new in Sandboxie-Plus` dialog in SbieCtrl.exe to highlight the new features of the Plus UI
   - Note: this is shown after the installation of Sandboxie Classic
 - added "fixdacls" command to KmdUtil.exe, it repairs broken DACL entries on the Sandboxie folder to fix issues where SbieDll.dll fails to load
 - added option to hide Sandboxie's own processes [#3054](https://github.com/sandboxie-plus/Sandboxie/issues/3054)
 - added functionality to cache Sandboxie messages within the Plus UI [#2920](https://github.com/sandboxie-plus/Sandboxie/issues/2920)
-- added button to invoke troubleshooting wizard directly from the SBIE message popup
+- added button to invoke troubleshooting wizard directly from the SBIE message pop-up
 
 ### Changed
-- setup wizard has now a dedicated update configuration page
-  - this page will be shown once for all users who do not have updates enabled
+- the setup wizard now has a dedicated update configuration page
+  - Note: this page will be shown once for all users who do not have updates enabled
 - split the support page into Sandboxie Support and Sandboxie Updater tabs
 - when the troubleshooting.7z file is available, the script engine will be used to match compatibility templates
-  - this allows a better granularity in template selection by using the AppCompatibility.js script
-- reworked low level code injection mechanism to improve flexibility and debugging
-  - the main injection detour code is now written in C instead of Assembler and can properly report SbieDll.dll loading errors as SBIE2181
+  - Note: this allows a better granularity in template selection by using the AppCompatibility.js script
+- reworked low-level code injection mechanism to improve flexibility and debugging
+  - Note: the main injection detour code is now written in C instead of Assembler and can properly report SbieDll.dll loading errors as SBIE2181
 - improved session agent startup to be more flexible
 - improved SBIEMSG help handling, the link now contains message details allowing to point to a more exact document (if available)
 - updated certificate validation code
@@ -157,7 +157,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added workaround for Chrome not starting on Windows 11 with KB5027231 [#3040](https://github.com/sandboxie-plus/Sandboxie/issues/3040)
 - improved compatibility with procmon/stack traces for debug builds
 - fixed issue with non-standard command lines
-- fixed online updater not checking every 7 days, but daily
+- fixed online updater checking in daily instead of weekly intervals
 
 ### Removed
 - cleaned up duplicate code (thanks lmou523) [#3067](https://github.com/sandboxie-plus/Sandboxie/pull/3067)
@@ -187,9 +187,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed empty lines when using "Copy Panel" in Plus UI [#2995](https://github.com/sandboxie-plus/Sandboxie/issues/2995)
-- fixed Plus installer does not honor IniPath value when updating the current installed version (thanks offhub) [#2994](https://github.com/sandboxie-plus/Sandboxie/issues/2994)
+- fixed Plus installer not honouring IniPath value when updating the current installed version (thanks offhub) [#2994](https://github.com/sandboxie-plus/Sandboxie/issues/2994)
 - fixed timestamp on crash dumps
-- fixed Firefox 114 crashes in security enhanced box, when start restrictions are enabled (thanks offhub) [#3019](https://github.com/sandboxie-plus/Sandboxie/issues/3019)
+- fixed Firefox 114 crashes in security enhanced box, if start restrictions are enabled (thanks offhub) [#3019](https://github.com/sandboxie-plus/Sandboxie/issues/3019)
 - fixed a bug when there is no GUI proxy (thanks lmou523) [#3020](https://github.com/sandboxie-plus/Sandboxie/pull/3020)
 
 
@@ -203,14 +203,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed an issue with token manipulation in the SbieDrv driver
-- fixed "Reset all GUI options" does not reset all GUI sections as expected [#2967](https://github.com/sandboxie-plus/Sandboxie/issues/2967)
+- fixed "Reset all GUI options" not resetting all GUI sections as expected [#2967](https://github.com/sandboxie-plus/Sandboxie/issues/2967)
 - fixed sbie:// links below the Box Type presets [#2959](https://github.com/sandboxie-plus/Sandboxie/issues/2959#issuecomment-1565264161)
-- fixed "Reset all GUI options" makes all sandbox names disappear [#2972](https://github.com/sandboxie-plus/Sandboxie/issues/2972)
+- fixed "Reset all GUI options" causing all sandbox names to disappear [#2972](https://github.com/sandboxie-plus/Sandboxie/issues/2972)
 - fixed A game can't be launched properly from "Run from Start Menu" [#2969](https://github.com/sandboxie-plus/Sandboxie/issues/2969)
 - fixed drag and drop issue with Microsoft Excel data grid [9455e96](https://github.com/sandboxie-plus/Sandboxie/commit/9455e96a699cbc665f791e191f2a13bb40783ab0)
   - additional feedback for other drag and drop scenarios can be provided in [#856](https://github.com/sandboxie-plus/Sandboxie/issues/856)
 - fixed regression: DLL loading problem (Entry Point Not Found) [#2980](https://github.com/sandboxie-plus/Sandboxie/issues/2980)
-- fixed Sandboxie does not mark deleted files or registry keys while virtualization scheme v2 is active (1.9.4/1.9.5) [#2984](https://github.com/sandboxie-plus/Sandboxie/issues/2984)
+- fixed Sandboxie not marking deleted files or registry keys while virtualization scheme v2 is active (1.9.4/1.9.5) [#2984](https://github.com/sandboxie-plus/Sandboxie/issues/2984)
 - fixed SandMan: Timestamp of the Sandboxie.ini [#2985](https://github.com/sandboxie-plus/Sandboxie/issues/2985)
 - fixed crash after pressing the button "Show NT Object Tree" several times (Plus UI) [#2943](https://github.com/sandboxie-plus/Sandboxie/issues/2943)
 
@@ -220,7 +220,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added Turn SBIE message IDs into clickable links [#2953](https://github.com/sandboxie-plus/Sandboxie/issues/2953)
-- added Limiting the number of same log messages [#2856](https://github.com/sandboxie-plus/Sandboxie/issues/2856)
+- added a limit to the number of identical log messages [#2856](https://github.com/sandboxie-plus/Sandboxie/issues/2856)
 
 ### Fixed
 - fixed sbie:// links not working properly [#2959](https://github.com/sandboxie-plus/Sandboxie/issues/2959)
@@ -250,12 +250,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed behaviour on multiple selection (thanks okrc) [#2903](https://github.com/sandboxie-plus/Sandboxie/pull/2903)
 - fixed issue with default box grouping (thanks okrc) [#2910](https://github.com/sandboxie-plus/Sandboxie/pull/2910)
 - fixed issue with sandbox renaming [#2912](https://github.com/sandboxie-plus/Sandboxie/issues/2912)
-- fixed The checkbox for the Open System Protected Storage setting appears to be unchecked [#2866](https://github.com/sandboxie-plus/Sandboxie/issues/2866)
-- fixed Firewall Rules - Colors make testing difficult in dark mode [#2900](https://github.com/sandboxie-plus/Sandboxie/issues/2900)
+- fixed the checkbox for Open System Protected Storage appearing unchecked [#2866](https://github.com/sandboxie-plus/Sandboxie/issues/2866)
+- fixed Firewall Rules' lack of colour contrast making text hard to read [#2900](https://github.com/sandboxie-plus/Sandboxie/issues/2900)
 - fixed RecoverFolder shows GUID instead of folder name [#2918](https://github.com/sandboxie-plus/Sandboxie/issues/2918)
 - fixed System tray icon hourglass overlay gets stuck when operation is stopped [#2869](https://github.com/sandboxie-plus/Sandboxie/issues/2869)
 - fixed File Panel doesn't allow to adjust columns size in a permanent way [#2930](https://github.com/sandboxie-plus/Sandboxie/issues/2930)
-- fixed Renaming a box with sandboxed run entries can break those entries [#2921](https://github.com/sandboxie-plus/Sandboxie/issues/2921)
+- fixed renaming a box with sandboxed run entries can break those entries [#2921](https://github.com/sandboxie-plus/Sandboxie/issues/2921)
 - fixed WFP not enabled after Setup Wizard and other issues [#2915](https://github.com/sandboxie-plus/Sandboxie/issues/2915)
 - fixed Name column in the sandbox view should never be hidden [#2933](https://github.com/sandboxie-plus/Sandboxie/issues/2933)
 - fixed File Panel does not share the right-click options provided in the sandbox view columns [#2934](https://github.com/sandboxie-plus/Sandboxie/issues/2934)

@@ -831,34 +831,142 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
 
     P_NtCreateFile pNtCreateFile = __sys_NtCreateFile;
     P_NtClose pNtClose = __sys_NtClose;
-    if (! pNtCreateFile)
+    P_NtFsControlFile pNtFsControlFile = __sys_NtFsControlFile;
+    if (!pNtCreateFile) {
+        SbieApi_Log(2325, L"File_AddTempLink !pNtCreateFile");
         pNtCreateFile = NtCreateFile;
+    }
     if (! pNtClose)
         pNtClose = NtClose;
+    if (! pNtFsControlFile)
+        pNtFsControlFile = NtFsControlFile;
 
     stop = TRUE;
 
     InitializeObjectAttributes(
         &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
 
-    RtlInitUnicodeString(&objname, path);
+    BOOLEAN UserReparse = SbieApi_QueryConfBool(NULL, L"UseNewSymlinkResolver", FALSE);
 
-    status = pNtCreateFile(
-        &handle, FILE_READ_ATTRIBUTES | SYNCHRONIZE, &objattrs,
-        &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
-        FILE_OPEN, FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT,
-        NULL, 0);
+    if (UserReparse) {
+        
+        //
+        // first try the copy path
+        //
+
+        if (_wcsnicmp(path, Dll_BoxFilePath, Dll_BoxFilePathLen) != 0)
+        {
+            THREAD_DATA* TlsData = Dll_GetTlsData(NULL);
+
+            WCHAR* CopyPath = NULL;
+
+
+            Dll_PushTlsNameBuffer(TlsData);
+
+            File_GetCopyPath(path, &CopyPath);
+
+            //
+            // get tempalte file if present, and reparese the path
+            //
+
+            WCHAR* TmplName = File_FindSnapshotPath(CopyPath);
+            if (TmplName != NULL)
+                RtlInitUnicodeString(&objname, TmplName);
+            else
+                RtlInitUnicodeString(&objname, CopyPath);
+
+            status = pNtCreateFile(
+                &handle, FILE_GENERIC_READ | SYNCHRONIZE, &objattrs,
+                &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
+                FILE_OPEN, FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT | FILE_OPEN_REPARSE_POINT,
+                NULL, 0);
+
+            Dll_PopTlsNameBuffer(TlsData);
+        }
+        else
+            status = STATUS_BAD_INITIAL_PC;
+
+        //
+        // then try the true path
+        //
+
+        if (!NT_SUCCESS(status)) {
+
+            RtlInitUnicodeString(&objname, path);
+
+            status = pNtCreateFile(
+                &handle, FILE_GENERIC_READ | SYNCHRONIZE, &objattrs,
+                &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
+                FILE_OPEN, FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT | FILE_OPEN_REPARSE_POINT,
+                NULL, 0);
+        }
+    }
+    else {
+        
+        RtlInitUnicodeString(&objname, path);
+
+        status = pNtCreateFile(
+            &handle, FILE_READ_ATTRIBUTES | SYNCHRONIZE, &objattrs,
+            &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
+            FILE_OPEN, FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT,
+            NULL, 0);
+    }
 
     if (NT_SUCCESS(status)) {
+
+        if (UserReparse) {
+
+            REPARSE_DATA_BUFFER* reparseDataBuffer = Dll_AllocTemp(MAXIMUM_REPARSE_DATA_BUFFER_SIZE);
+            status = pNtFsControlFile(handle, NULL, NULL, NULL, &IoStatusBlock, FSCTL_GET_REPARSE_POINT, NULL, 0, reparseDataBuffer, MAXIMUM_REPARSE_DATA_BUFFER_SIZE);
+        
+            if (NT_SUCCESS(status)) {
+
+                WCHAR* input_str = reparseDataBuffer->MountPointReparseBuffer.PathBuffer;
+                if (_wcsnicmp(input_str, File_BQQB, 4) == 0)
+                    input_str = File_TranslateDosToNtPath(reparseDataBuffer->MountPointReparseBuffer.PathBuffer + 4);
+
+                newpath = File_TranslateTempLinks_2(input_str, wcslen(input_str));
+
+                if (input_str != reparseDataBuffer->MountPointReparseBuffer.PathBuffer)
+                    Dll_Free(input_str);
+
+                /*THREAD_DATA* TlsData = Dll_GetTlsData(NULL);
+
+                Dll_PushTlsNameBuffer(TlsData);
+
+                WCHAR* TruePath = NULL;
+                if (NT_SUCCESS(File_GetTruePath(newpath, &TruePath))) {
+
+                    Dll_Free(newpath);
+                    newpath = Dll_AllocTemp((wcslen(TruePath) + 1) * sizeof(WCHAR));
+                    wcscpy(newpath, TruePath);
+                }
+
+                Dll_PopTlsNameBuffer(TlsData);*/
+            }
+            else //if (status == STATUS_NOT_A_REPARSE_POINT) 
+            {
+                newpath = Dll_AllocTemp((wcslen(path) + 1) * sizeof(WCHAR));
+                wcscpy(newpath, path);
+                status = STATUS_SUCCESS;
+            }
+
+            Dll_Free(reparseDataBuffer);
+        }
 
         //
         // get the reparsed absolute path
         //
 
         const ULONG PATH_BUF_LEN = 1024;
-        newpath = Dll_AllocTemp(PATH_BUF_LEN);
 
-        status = File_GetFileName(handle, PATH_BUF_LEN - 4, newpath);
+        if (!UserReparse) {
+
+            newpath = Dll_AllocTemp(PATH_BUF_LEN);
+
+            status = File_GetFileName(handle, PATH_BUF_LEN - 4, newpath);
+        }
+
         if (NT_SUCCESS(status)) {
 
             //

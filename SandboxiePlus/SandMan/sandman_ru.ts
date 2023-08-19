@@ -21,81 +21,37 @@
     <message>
         <location filename="AddonManager.cpp" line="234"/>
         <source>Addon Not Found</source>
-        <translation type="unfinished"></translation>
+        <translation>Дополнение не найдено</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="235"/>
         <source>Addon is not available for this platform</source>
-        <oldsource>Addon is not available for this paltform</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Дополнение недоступно для этой платформы</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="236"/>
         <source>Missing installation instructions</source>
-        <oldsource>Missing instalation instructions</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Отсутствует инструкция по установке</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="237"/>
         <source>Executing addon setup failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось выполнить настройку дополнения</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="238"/>
         <source>Failed to delete a file during addon removal</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось удалить файл при удалении дополнения</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="252"/>
         <source>Updater failed to perform addon operation</source>
-        <oldsource>Updater failed to perform plugin operation</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Программе обновления не удалось выполнить операцию допонения</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="254"/>
         <source>Updater failed to perform addon operation, error: %1</source>
-        <oldsource>Updater failed to perform plugin operation, error: %1</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Addon already installed!</source>
-        <translation type="vanished">Дополнение уже установлено!</translation>
-    </message>
-    <message>
-        <source>Addon has no download url, addon may not be available for your platform.</source>
-        <translation type="vanished">Дополнение не имеет URL-адреса для загрузки, дополнение может быть недоступно для вашей платформы.</translation>
-    </message>
-    <message>
-        <source>Downloading Addon %1</source>
-        <translation type="vanished">Загрузка дополнения %1</translation>
-    </message>
-    <message>
-        <source>Download signature is not valid!</source>
-        <translation type="vanished">Недействительная подпись для загрузки!</translation>
-    </message>
-    <message>
-        <source>Installing Addon %1</source>
-        <translation type="vanished">Установка дополнения %1</translation>
-    </message>
-    <message>
-        <source>Running Installer for %1</source>
-        <translation type="vanished">Запуск установщика для %1</translation>
-    </message>
-    <message>
-        <source>Failed to start installer (%1)!</source>
-        <translation type="vanished">Не удалось запустить установщик (%1)!</translation>
-    </message>
-    <message>
-        <source>Copying Files for %1</source>
-        <translation type="vanished">Копирование файлов для %1</translation>
-    </message>
-    <message>
-        <source>Failed to unpack addon!</source>
-        <translation type="vanished">Не удалось распаковать дополнение!</translation>
-    </message>
-    <message>
-        <source>Addon Installation Failed!</source>
-        <translation type="vanished">Ошибка установки дополнения!</translation>
+        <translation>Программе обновления не удалось выполнить операцию допонения, ошибка: %1</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="174"/>
@@ -111,18 +67,6 @@
         <location filename="AddonManager.cpp" line="214"/>
         <source>Addon not found!</source>
         <translation>Дополнение не найдено!</translation>
-    </message>
-    <message>
-        <source>Running Uninstaller for %1</source>
-        <translation type="vanished">Запуск деинсталлятора для %1</translation>
-    </message>
-    <message>
-        <source>Failed to start uninstaller!</source>
-        <translation type="vanished">Не удалось запустить деинсталлятор!</translation>
-    </message>
-    <message>
-        <source>Addon Removal Failed!</source>
-        <translation type="vanished">Не удалось удалить дополнение!</translation>
     </message>
 </context>
 <context>
@@ -552,7 +496,7 @@ Please browse to the correct user profile directory.</source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="259"/>
         <source>Retrieve certificate using Serial Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Получить сертификат, используя серийный номер:</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="265"/>
@@ -572,18 +516,19 @@ Please browse to the correct user profile directory.</source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="344"/>
         <source>Failed to retrive the certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось получить сертификат.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="345"/>
         <source>
 Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Ошибка: %1</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="360"/>
         <source>Retreiving certificate...</source>
-        <translation type="unfinished"></translation>
+        <translation>Получение сертификата...</translation>
     </message>
 </context>
 <context>
@@ -805,7 +750,7 @@ You can use %USER% to save each users sandbox to an own folder.</source>
     <message>
         <location filename="OnlineUpdater.cpp" line="192"/>
         <source>Failed to download file from: %1</source>
-        <translation type="unfinished">Не удалось загрузить файл из: %1</translation>
+        <translation>Не удалось загрузить файл из: %1</translation>
     </message>
 </context>
 <context>
@@ -1048,10 +993,6 @@ You can use %USER% to save each users sandbox to an own folder.</source>
         <translation>&lt;p&gt;Обновления для Sandboxie-Plus были загружены.&lt;/p&gt;&lt;p&gt;Применить эти обновления? Если какие-либо программы работают в песочнице, они будут завершены.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>Failed to download file from: %1</source>
-        <translation type="vanished">Не удалось загрузить файл из: %1</translation>
-    </message>
-    <message>
         <location filename="OnlineUpdater.cpp" line="839"/>
         <source>Downloading installer...</source>
         <translation>Загрузка установщика...</translation>
@@ -1084,18 +1025,6 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Новых обновлений не найдено, у вас установлена последняя версия Sandboxie-Plus.
 
 Примечание: Найденное обновлениие часто отстает от версии доступной на GitHub, чтобы гарантировать, что предлагаются только проверенные обновления.</translation>
-    </message>
-    <message>
-        <source>Checking for certificate...</source>
-        <translation type="vanished">Проверка сертификата...</translation>
-    </message>
-    <message>
-        <source>No certificate found on server!</source>
-        <translation type="vanished">Сертификат не найден на сервере!</translation>
-    </message>
-    <message>
-        <source>There is no updated certificate available.</source>
-        <translation type="vanished">Обновленный сертификат недоступен.</translation>
     </message>
 </context>
 <context>
@@ -2392,10 +2321,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>Повышенная конфиденциальность</translation>
     </message>
     <message>
-        <source>API Log</source>
-        <translation type="vanished">Журнал API</translation>
-    </message>
-    <message>
         <location filename="SbiePlusAPI.cpp" line="733"/>
         <source>No INet (with Exceptions)</source>
         <translation>Нет INet (с исключениями)</translation>
@@ -3395,23 +3320,24 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2598"/>
         <source>The Certificate Signature is invalid!</source>
-        <translation type="unfinished"></translation>
+        <translation>Подпись сертификата недействительна!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2599"/>
         <source>The Certificate is not suitable for this product.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сертификат не подходит для этого продукта.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2600"/>
         <source>The Certificate is node locked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сертификат заблокирован на узле.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2604"/>
         <source>The support certificate is not valid.
 Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Сертификат поддержки недействителен.
+Ошибка: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2677"/>
@@ -3903,7 +3829,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="SbieProcess.cpp" line="101"/>
         <source>Suspended</source>
-        <translation type="unfinished"></translation>
+        <translation>Приостановлено</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="105"/>
@@ -4324,12 +4250,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="278"/>
         <source>Suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>Приостановить</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="279"/>
         <source>Resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Возобновить</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="299"/>
@@ -4710,7 +4636,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1035"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Срок действия этого сертификата сторонника истек. Пожалуйста, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;получите обновленный сертификат&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1040"/>
@@ -4720,82 +4646,82 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1049"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Срок действия этого сертификата сторонника &lt;font color=&apos;red&apos;&gt;истечет через %1&#xa0;дн.&lt;/font&gt;. Пожалуйста, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;получите обновленный сертификат&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1091"/>
         <source>Retreiving certificate...</source>
-        <translation type="unfinished"></translation>
+        <translation>Получение сертификата...</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1135"/>
         <source>Contributor</source>
-        <translation type="unfinished"></translation>
+        <translation>Участник</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1137"/>
         <source>Eternal</source>
-        <translation type="unfinished"></translation>
+        <translation>Вечный</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1139"/>
         <source>Business</source>
-        <translation type="unfinished"></translation>
+        <translation>Бизнес</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1141"/>
         <source>Personal</source>
-        <translation type="unfinished"></translation>
+        <translation>Персональный</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1143"/>
         <source>Great Patreon</source>
-        <translation type="unfinished"></translation>
+        <translation>Большой Patreon</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1145"/>
         <source>Patreon</source>
-        <translation type="unfinished"></translation>
+        <translation>Patreon</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1147"/>
         <source>Family</source>
-        <translation type="unfinished"></translation>
+        <translation>Семья</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1149"/>
         <source>Subscription</source>
-        <translation type="unfinished"></translation>
+        <translation>Подписка</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1151"/>
         <source>Evaluation</source>
-        <translation type="unfinished"></translation>
+        <translation>Оценка</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1153"/>
         <source>Type %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1181"/>
         <source>Standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Стандарт</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1183"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Расширенный</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1185"/>
         <source>Max Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимальный уровень</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1187"/>
         <source>Level %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Уровень %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1574"/>
@@ -4888,10 +4814,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Введите команду</translation>
     </message>
     <message>
-        <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="vanished">Срок действия этого сертификата сторонника истек, &lt;a href=&quot;sbie://update/cert&quot;&gt;получите обновленный сертификат&lt;/a&gt;.</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="1038"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Дополнительные функции будут отключены через %1 дн.&lt;/font&gt;</translation>
@@ -4900,10 +4822,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Windows/SettingsWindow.cpp" line="1043"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Дополнительные функции больше не включены.</translation>
-    </message>
-    <message>
-        <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="vanished">Срок действия этого сертификата сторонника &lt;font color=&apos;red&apos;&gt;истечет через %1 дн.&lt;/font&gt;, пожалуйста, &lt;a href=&quot;sbie://update/cert&quot;&gt;получите обновленный сертификат&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1205"/>
@@ -4926,13 +4844,9 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Спасибо за поддержку разработки Sandboxie-Plus.</translation>
     </message>
     <message>
-        <source>This support certificate is not valid.</source>
-        <translation type="vanished">Этот сертификат поддержки недействителен.</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="1634"/>
         <source>Update Available</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступно обновление</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1636"/>
@@ -4942,12 +4856,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1641"/>
         <source>by %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1649"/>
         <source>(info website)</source>
-        <translation type="unfinished"></translation>
+        <translation>(информационный сайт)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1676"/>
@@ -5330,13 +5244,12 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Windows/SupportDialog.cpp" line="145"/>
         <source>The installed supporter certificate allows for &lt;b&gt;%1 seats&lt;/b&gt; to be active.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Установленный сертификат поддержки позволяет активировать &lt;b&gt;%1 мест&lt;/b&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="147"/>
         <source>&lt;b&gt;There seems to be however %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</source>
-        <oldsource>&lt;b&gt;There seams to be howeever %1 Sandboxie-Plus instances on your network, &lt;font color=&apos;red&apos;&gt;you need to obtain additional &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;support certificates&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Однако в вашей сети имеется %1 экземпляр Sandboxie-Plus, &lt;font color=&apos;red&apos;&gt;вам нужно получить дополнительные &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&amp;tip=more&quot;&gt;сертификаты сторонника&lt;/a&gt;&lt;/font&gt;.&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="154"/>
@@ -5351,7 +5264,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Windows/SupportDialog.cpp" line="158"/>
         <source>&lt;u&gt;Commercial use of Sandboxie past the evaluation period&lt;/u&gt;, requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;support certificate&lt;/a&gt;.</source>
-        <translation>&lt;u&gt;Для коммерческого использования Sandboxie по истечении ознакомительного периода&lt;/u&gt;, требуется действующий &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;сертификат поддержки&lt;/a&gt;.</translation>
+        <translation>&lt;u&gt;Для коммерческого использования Sandboxie по истечении ознакомительного периода&lt;/u&gt;, требуется действующий &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;сертификат сторонника&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="165"/>
@@ -6367,17 +6280,17 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1300"/>
         <source>Dlls &amp;&amp; Extensions</source>
-        <translation type="unfinished"></translation>
+        <translation>DLL и расширения</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1349"/>
         <source>Description</source>
-        <translation type="unfinished">Описание</translation>
+        <translation>Описание</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1381"/>
         <source>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the addon manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Функциональность песочницы можно расширить с помощью дополнительных dll, которые можно загрузить в каждый изолированный процесс при запуске с помощью SbieDll.dll, диспетчер дополнений в глобальных настройках предлагает пару полезных расширений, после установки их можно включить здесь для текущей песочницы.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1953"/>
@@ -6852,10 +6765,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <location filename="Forms/OptionsWindow.ui" line="4071"/>
         <source>Tracing</source>
         <translation>Трассировка</translation>
-    </message>
-    <message>
-        <source>API call trace (requires LogAPI to be installed in the Sbie directory)</source>
-        <translation type="vanished">Трассировка вызовов API (требуется, чтобы LogAPI был установлен в каталоге Sbie)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4147"/>
@@ -7957,7 +7866,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1232"/>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Версия</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1269"/>
@@ -7967,22 +7876,22 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1296"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Срок действия этого сертификата сторонника истек. Пожалуйста, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;получите обновленный сертификат&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1348"/>
         <source>Get</source>
-        <translation type="unfinished"></translation>
+        <translation>Получить</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1355"/>
         <source>Retrieve/Upgrade/Renew certificate using Serial Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Получить/улучшить/обновить сертификат, используя серийный номер</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1396"/>
         <source>SBIE_-_____-_____-_____-_____</source>
-        <translation type="unfinished"></translation>
+        <translation>SBIE_-_____-_____-_____-_____</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1439"/>
@@ -8115,10 +8024,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SettingsWindow.ui" line="1505"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
         <translation>Хотпатчи для установленной версии, обновления Templates.ini и переводов.</translation>
-    </message>
-    <message>
-        <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="vanished">Срок действия этого сертификата сторонника истек, пожалуйста &lt;a href=&quot;sbie://update/cert&quot;&gt;получите обновленный сертификат&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1515"/>

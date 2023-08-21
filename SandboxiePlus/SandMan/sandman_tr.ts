@@ -497,7 +497,7 @@ Lütfen doğru kullanıcı profili dizinine göz atın.</translation>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="259"/>
         <source>Retrieve certificate using Serial Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sertifikayı Seri Numarasını kullanarak alın:</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="265"/>
@@ -517,18 +517,19 @@ Lütfen doğru kullanıcı profili dizinine göz atın.</translation>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="344"/>
         <source>Failed to retrive the certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sertifika alınamadı.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="345"/>
         <source>
 Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Hata: %1</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="360"/>
         <source>Retreiving certificate...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sertifika alınıyor...</translation>
     </message>
 </context>
 <context>
@@ -750,7 +751,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="OnlineUpdater.cpp" line="192"/>
         <source>Failed to download file from: %1</source>
-        <translation type="unfinished">Şu kaynaktan dosya indirilemedi: %1</translation>
+        <translation>Şu kaynaktan dosya indirilemedi: %1</translation>
     </message>
 </context>
 <context>
@@ -993,10 +994,6 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
         <translation>&lt;p&gt;Sandboxie-Plus güncellemeleri indirildi.&lt;/p&gt;&lt;p&gt;Bu güncellemeleri uygulamak istiyor musunuz? Herhangi bir program korumalı alanda çalışıyorsa sonlandırılacaktır.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>Failed to download file from: %1</source>
-        <translation type="vanished">Şu kaynaktan dosya indirilemedi: %1</translation>
-    </message>
-    <message>
         <location filename="OnlineUpdater.cpp" line="839"/>
         <source>Downloading installer...</source>
         <translation>Yükleyici indiriliyor...</translation>
@@ -1029,18 +1026,6 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Yeni güncelleme bulunamadı, Sandboxie-Plus&apos;ınız güncel.
 
 Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağlamak için, genellikle en son GitHub sürümünün gerisindedir.</translation>
-    </message>
-    <message>
-        <source>Checking for certificate...</source>
-        <translation type="vanished">Sertifika denetleniyor...</translation>
-    </message>
-    <message>
-        <source>No certificate found on server!</source>
-        <translation type="vanished">Sunucuda sertifika bulunamadı!</translation>
-    </message>
-    <message>
-        <source>There is no updated certificate available.</source>
-        <translation type="vanished">Yenilenmiş bir sertifika yok.</translation>
     </message>
 </context>
 <context>
@@ -2832,23 +2817,24 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="2598"/>
         <source>The Certificate Signature is invalid!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sertifika İmzası geçersiz!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2599"/>
         <source>The Certificate is not suitable for this product.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sertifika bu ürün için uygun değildir.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2600"/>
         <source>The Certificate is node locked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sertifika düğüm kilitli.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2604"/>
         <source>The support certificate is not valid.
 Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Destek sertifikası geçerli değil. 
+Hata: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2677"/>
@@ -3819,7 +3805,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SbieProcess.cpp" line="101"/>
         <source>Suspended</source>
-        <translation type="unfinished"></translation>
+        <translation>Askıya Alınmış</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="109"/>
@@ -4570,7 +4556,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1035"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu destekçi sertifikasının süresi doldu, lütfen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;güncellenmiş bir sertifika alın&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1038"/>
@@ -4585,82 +4571,82 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1049"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu destekçi sertifikası &lt;font color=&apos;red&apos;&gt;%1 gün içinde&lt;/font&gt; sona erecek, lütfen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot; &gt;güncellenmiş bir sertifika alın&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1091"/>
         <source>Retreiving certificate...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sertifika alınıyor...</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1135"/>
         <source>Contributor</source>
-        <translation type="unfinished"></translation>
+        <translation>Katılımcı</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1137"/>
         <source>Eternal</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürekli</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1139"/>
         <source>Business</source>
-        <translation type="unfinished"></translation>
+        <translation>İş</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1141"/>
         <source>Personal</source>
-        <translation type="unfinished"></translation>
+        <translation>Kişisel</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1143"/>
         <source>Great Patreon</source>
-        <translation type="unfinished"></translation>
+        <translation>Büyük Patreon</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1145"/>
         <source>Patreon</source>
-        <translation type="unfinished"></translation>
+        <translation>Patreon</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1147"/>
         <source>Family</source>
-        <translation type="unfinished"></translation>
+        <translation>Aile</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1149"/>
         <source>Subscription</source>
-        <translation type="unfinished"></translation>
+        <translation>Abonelik</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1151"/>
         <source>Evaluation</source>
-        <translation type="unfinished"></translation>
+        <translation>Deneme</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1153"/>
         <source>Type %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tür %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1181"/>
         <source>Standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Standart</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1183"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Gelişmiş</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1185"/>
         <source>Max Level</source>
-        <translation type="unfinished"></translation>
+        <translation>En Üst Seviye</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1187"/>
         <source>Level %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Seviye %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1574"/>
@@ -4701,10 +4687,6 @@ Hayır şunları seçer: %2</translation>
         <location filename="Windows/SettingsWindow.cpp" line="1581"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Sandboxie-Plus&apos;ın gelişimini desteklediğiniz için teşekkür ederiz.</translation>
-    </message>
-    <message>
-        <source>This support certificate is not valid.</source>
-        <translation type="vanished">Bu destek sertifikası geçerli değil.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="227"/>
@@ -4878,17 +4860,9 @@ Hayır şunları seçer: %2</translation>
         <translation>İndir &amp; Yükle</translation>
     </message>
     <message>
-        <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="vanished">Bu destekçi sertifikasının süresi doldu, lütfen &lt;a href=&quot;sbie://update/cert&quot;&gt;yenilenmiş bir sertifika alın&lt;/a&gt;.</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="1040"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Şu anda yüklü olan sürüm için Plus özellikleri etkin durumdadır&lt;/font&gt;. Ancak, bundan sonraki sürümlerde uyumluluk güncellemeleri ve çevrimiçi sorun giderme veritabanı da dahil olmak üzere Sandboxie-Live hizmetlerine erişiminiz olmayacak.</translation>
-    </message>
-    <message>
-        <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="vanished">Bu destekçi sertifikası &lt;font color=&apos;red&apos;&gt;%1 gün içinde sona erecek&lt;/font&gt;, lütfen &lt;a href=&quot;sbie://update/cert&quot;&gt;yenilenmiş bir sertifika alın&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1205"/>
@@ -6069,7 +6043,7 @@ günlüğe kaydetme özelleştirilebilir.
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1722"/>
         <source>Programs entered here, or programs started from entered locations, will be put in this sandbox automatically, unless they are explicitly started in another sandbox.</source>
-        <translation>Buraya girilen programlar veya girilen konumlardan başlatılan programlar, başka bir korumalı alanda açıkça belirtilmedikçe otomatik olarak bu alana yerleştirilecektir.</translation>
+        <translation>Buraya girilen programlar veya konumlardan başlatılan programlar, özellikle başka bir korumalı alanda başlatılmadıkça, otomatik olarak bu alana yerleştirilecektir.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1800"/>
@@ -6539,7 +6513,7 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1926"/>
         <source>Programs entered here will be allowed to break out of this sandbox when they start. It is also possible to capture them into another sandbox, for example to have your web browser always open in a dedicated box.</source>
-        <translation>Buraya girilen programlar, başlatıldıklarında, bu kormalı alanın dışına çıkmalarına izin verilecektir. Bunları başka bir korumalı alana geçirmek de mümkündür, örneğin web tarayıcınızın her zaman özel bir alanda açık olması gibi.</translation>
+        <translation>Buraya girilen programlar başlatıldıklarında bu korumalı alanın dışına çıkabilecektir. Bunları başka bir korumalı alana da aktarmak mümkündür. Örneğin web tarayıcınızın her zaman kendine adanmış bir alanda çalışması gibi.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1953"/>
@@ -6549,7 +6523,7 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2019"/>
         <source>Lingering programs will be automatically terminated if they are still running after all other processes have been terminated.</source>
-        <translation>Oyalayıcı programlar, diğer tüm işlemler sonlandırıldıktan sonra hala çalışıyorlarsa otomatik olarak sonlandırılacaktır.</translation>
+        <translation>Oyalayıcı programlar, diğer tüm işlemler sonlandırıldıktan sonra hâlâ çalışıyorsa otomatik olarak sonlandırılır.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2032"/>
@@ -7934,22 +7908,22 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1296"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu destekçi sertifikasının süresi doldu, lütfen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;güncellenmiş bir sertifika alın&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1348"/>
         <source>Get</source>
-        <translation type="unfinished"></translation>
+        <translation>Al</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1355"/>
         <source>Retrieve/Upgrade/Renew certificate using Serial Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Seri Numarasını Kullanarak Sertifika Al/Yükselt/Yenile</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1396"/>
         <source>SBIE_-_____-_____-_____-_____</source>
-        <translation type="unfinished"></translation>
+        <translation>SBIE_-_____-_____-_____-_____</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1439"/>
@@ -8077,10 +8051,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="Forms/SettingsWindow.ui" line="1505"/>
         <source>Hotpatches for the installed version, updates to the Templates.ini and translations.</source>
         <translation>Kurulu sürüm için hızlı yamalar, Templates.ini ve çeviri güncellemeleri.</translation>
-    </message>
-    <message>
-        <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="vanished">Bu destekçi sertifikasının süresi doldu, lütfen &lt;a href=&quot;sbie://update/cert&quot;&gt;yenilenmiş bir sertifika alın&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1416"/>

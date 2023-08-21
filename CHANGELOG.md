@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed symbolic links created inside a sandbox not working properly [#3181](https://github.com/sandboxie-plus/Sandboxie/issues/3181)
+- fixed Cut text in the Check for Updates popup [#3195] (https://github.com/sandboxie-plus/Sandboxie/issues/3195)
 
 
 

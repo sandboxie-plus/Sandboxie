@@ -21,6 +21,7 @@ public:
 		m_pMessageLabel = new QLabel(Prompt);
 		m_pMessageLabel->setMinimumWidth(300);
 		//m_pMessageLabel->setMinimumHeight(40);
+		m_pMessageLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
 		m_pMessageLabel->setWordWrap(true);
 		//m_pMessageLabel->setAlignment(Qt::AlignTop);
 		m_pMainLayout->addWidget(m_pMessageLabel, 0, 0, 1, 1);
@@ -36,7 +37,7 @@ public:
 		m_pButtonBox->setStandardButtons(QDialogButtonBox::Cancel);
 		m_pMainLayout->addWidget(m_pButtonBox, 2, 0, 1, 1);
  
-		setFixedSize(sizeHint());
+		//setFixedSize(sizeHint());
 
 		connect(m_pButtonBox,SIGNAL(rejected()),this,SIGNAL(Cancel()));
 

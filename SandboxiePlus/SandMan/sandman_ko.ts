@@ -236,7 +236,7 @@
         <location filename="Wizards/BoxAssistant.cpp" line="276"/>
         <source>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerful. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retrieve the latest troubleshooting instructions.</source>
         <oldsource>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerfull. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retriev the latest troubleshooting instructions.</oldsource>
-        <translation>유효한 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;지원자 인증서&lt;/a&gt;를 사용하면 마법사의 성능이 더욱 향상됩니다. &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;온라인 솔루션 데이터베이스&lt;/a&gt;에 액세스하여 최신 문제 해결 지침을 검색할 수 있습니다.</translation>
+        <translation>유효한 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;후원자 인증서&lt;/a&gt;를 사용하면 마법사의 성능이 더욱 향상됩니다. &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;온라인 솔루션 데이터베이스&lt;/a&gt;에 액세스하여 최신 문제 해결 지침을 검색할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="314"/>
@@ -587,7 +587,7 @@ Please browse to the correct user profile directory.</source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="259"/>
         <source>Retrieve certificate using Serial Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>일련 번호를 사용하여 인증서 검색:</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="265"/>
@@ -607,18 +607,19 @@ Please browse to the correct user profile directory.</source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="344"/>
         <source>Failed to retrive the certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>인증서를 검색하지 못했습니다.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="345"/>
         <source>
 Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+오류: %1</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="360"/>
         <source>Retreiving certificate...</source>
-        <translation type="unfinished"></translation>
+        <translation>인증서 검색 중...검색...</translation>
     </message>
 </context>
 <context>
@@ -858,7 +859,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="192"/>
         <source>Failed to download file from: %1</source>
-        <translation type="unfinished">파일 다운로드 실패 위치: %1</translation>
+        <translation>파일 다운로드 실패 위치: %1</translation>
     </message>
 </context>
 <context>
@@ -3590,23 +3591,24 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2598"/>
         <source>The Certificate Signature is invalid!</source>
-        <translation type="unfinished"></translation>
+        <translation>인증서 서명이 잘못되었습니다!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2599"/>
         <source>The Certificate is not suitable for this product.</source>
-        <translation type="unfinished"></translation>
+        <translation>인증서가 이 제품에 적합하지 않습니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2600"/>
         <source>The Certificate is node locked.</source>
-        <translation type="unfinished"></translation>
+        <translation>인증서가 노드 잠금 상태입니다.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2604"/>
         <source>The support certificate is not valid.
 Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>지원 인증서가 잘못되었습니다.
+오류: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2677"/>
@@ -4146,7 +4148,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SbieProcess.cpp" line="101"/>
         <source>Suspended</source>
-        <translation type="unfinished"></translation>
+        <translation>중지됨</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="105"/>
@@ -5008,7 +5010,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1035"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 후원자 인증서가 만료되었습니다. &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;업데이트된 인증서&lt;/a&gt;를 받으십시오.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1040"/>
@@ -5018,82 +5020,82 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1049"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 후원자 인증서는 &lt;font color=&apos;red&apos;&gt;%1일 후에 만료&lt;/font&gt;됩니다. &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;업데이트된 인증서&lt;/a&gt;를 받으십시오.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1091"/>
         <source>Retreiving certificate...</source>
-        <translation type="unfinished"></translation>
+        <translation>인증서를 가져오는 중...</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1135"/>
         <source>Contributor</source>
-        <translation type="unfinished"></translation>
+        <translation>기여자</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1137"/>
         <source>Eternal</source>
-        <translation type="unfinished"></translation>
+        <translation>영구</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1139"/>
         <source>Business</source>
-        <translation type="unfinished"></translation>
+        <translation>비지니스</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1141"/>
         <source>Personal</source>
-        <translation type="unfinished"></translation>
+        <translation>개인</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1143"/>
         <source>Great Patreon</source>
-        <translation type="unfinished"></translation>
+        <translation>Great Patreon</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1145"/>
         <source>Patreon</source>
-        <translation type="unfinished"></translation>
+        <translation>Patreon</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1147"/>
         <source>Family</source>
-        <translation type="unfinished"></translation>
+        <translation>패밀리</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1149"/>
         <source>Subscription</source>
-        <translation type="unfinished"></translation>
+        <translation>기부</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1151"/>
         <source>Evaluation</source>
-        <translation type="unfinished"></translation>
+        <translation>평가</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1153"/>
         <source>Type %1</source>
-        <translation type="unfinished"></translation>
+        <translation>유형 %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1181"/>
         <source>Standard</source>
-        <translation type="unfinished"></translation>
+        <translation>표준</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1183"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>고급</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1185"/>
         <source>Max Level</source>
-        <translation type="unfinished"></translation>
+        <translation>최대 수준</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1187"/>
         <source>Level %1</source>
-        <translation type="unfinished"></translation>
+        <translation>수준 %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1574"/>
@@ -5650,7 +5652,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/SupportDialog.cpp" line="145"/>
         <source>The installed supporter certificate allows for &lt;b&gt;%1 seats&lt;/b&gt; to be active.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation>설치된 지원자 인증서를 통해 &lt;b&gt;%1 시트&lt;/b&gt;가 활성화됩니다.&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>설치된 후원자 인증서를 통해 &lt;b&gt;%1 시트&lt;/b&gt;가 활성화됩니다.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="147"/>
@@ -8195,7 +8197,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1296"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 후원자 인증서가 만료되었습니다. &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;업데이트된 인증서&lt;/a&gt;를 받으십시오.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1338"/>
@@ -8205,12 +8207,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1348"/>
         <source>Get</source>
-        <translation type="unfinished"></translation>
+        <translation>받기</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1355"/>
         <source>Retrieve/Upgrade/Renew certificate using Serial Number</source>
-        <translation type="unfinished"></translation>
+        <translation>일련 번호를 사용하여 인증서 검색/업그레이드/갱신</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1371"/>
@@ -8220,7 +8222,7 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1396"/>
         <source>SBIE_-_____-_____-_____-_____</source>
-        <translation type="unfinished"></translation>
+        <translation>SBIE_-_____-_____-_____-_____</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1783"/>

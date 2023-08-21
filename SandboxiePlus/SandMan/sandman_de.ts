@@ -496,7 +496,7 @@ Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="259"/>
         <source>Retrieve certificate using Serial Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrufen des Zertifikats unter Verwendung der Seriennummer:</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="265"/>
@@ -516,18 +516,19 @@ Bitte navigieren Sie zum korrekten Nutzerprofilordner.</translation>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="344"/>
         <source>Failed to retrive the certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrufen des Zertifikats fehlgeschlagen.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="345"/>
         <source>
 Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Fehler: %1</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="360"/>
         <source>Retreiving certificate...</source>
-        <translation type="unfinished"></translation>
+        <translation>Rufe Zertifikat ab...</translation>
     </message>
 </context>
 <context>
@@ -749,7 +750,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="OnlineUpdater.cpp" line="192"/>
         <source>Failed to download file from: %1</source>
-        <translation type="unfinished">Fehler beim Laden der Datei von: %1</translation>
+        <translation>Fehler beim Laden der Datei von: %1</translation>
     </message>
 </context>
 <context>
@@ -992,10 +993,6 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
         <translation>&lt;p&gt;Updates für Sandboxie-Plus wurden runtergeladen.&lt;/p&gt;&lt;p&gt;Möchten Sie diese Updates anwenden? Falls Programme in einer Sandbox laufen, werden diese beendet.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>Failed to download file from: %1</source>
-        <translation type="vanished">Fehler beim Laden der Datei von: %1</translation>
-    </message>
-    <message>
         <location filename="OnlineUpdater.cpp" line="839"/>
         <source>Downloading installer...</source>
         <translation>Lade Installer...</translation>
@@ -1028,18 +1025,6 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Keine neuen Updates gefunden, Ihr Sandboxie-Plus ist aktuell.
 
 Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentlichungen, um sicherzustellen, dass nur getestete Updates angeboten werden.</translation>
-    </message>
-    <message>
-        <source>Checking for certificate...</source>
-        <translation type="vanished">Prüfe auf Zertifikat...</translation>
-    </message>
-    <message>
-        <source>No certificate found on server!</source>
-        <translation type="vanished">Kein Zertifikat auf dem Server gefunden!</translation>
-    </message>
-    <message>
-        <source>There is no updated certificate available.</source>
-        <translation type="vanished">Es ist kein aktuelles Zertifikat verfügbar.</translation>
     </message>
 </context>
 <context>
@@ -1154,7 +1139,6 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1123"/>
         <source>%1 (%2)</source>
-        <translatorcomment>Same as in source</translatorcomment>
         <translation>%1 (%2)</translation>
     </message>
     <message>
@@ -1180,7 +1164,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="50"/>
         <source>Display box name in title</source>
-        <translatorcomment>Extended the word title with the German word for Window to make sure it is understood</translatorcomment>
+        <translatorcomment>Extended the word title with the German word for Window to make sure it is understood.</translatorcomment>
         <translation>Den Boxnamen im Fenstertitel anzeigen</translation>
     </message>
     <message>
@@ -1191,7 +1175,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="53"/>
         <source>Show only when title is in focus</source>
-        <translatorcomment>Extended the word title with the German word for Window to make sure it is understood</translatorcomment>
+        <translatorcomment>Extended the word title with the German word for Window to make sure it is understood.</translatorcomment>
         <translation>Nur Anzeigen, wenn der Fenstertitel im Fokus ist</translation>
     </message>
     <message>
@@ -1357,7 +1341,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="727"/>
         <source>kilobytes (%1)</source>
-        <translatorcomment>Only capitalized</translatorcomment>
+        <translatorcomment>Only capitalized.</translatorcomment>
         <translation>Kilobytes (%1)</translation>
     </message>
     <message>
@@ -1982,7 +1966,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="187"/>
         <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
-        <translatorcomment>Kept &apos;print spooler&apos; in brackets to allow easier online lookup</translatorcomment>
+        <translatorcomment>Kept &apos;print spooler&apos; in brackets to allow easier online lookup.</translatorcomment>
         <translation>Möchten Sie der Druckerwarteschlange (print spooler) erlauben außerhalb der Sandbox für %1 (%2) zu schreiben?</translation>
     </message>
     <message>
@@ -2021,7 +2005,6 @@ Vollständiger Pfad: %4</translation>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="362"/>
         <source>%1 (%2)</source>
-        <translatorcomment>same as source</translatorcomment>
         <translation>%1 (%2)</translation>
     </message>
     <message>
@@ -2354,7 +2337,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SbiePlusAPI.cpp" line="738"/>
         <source>Net Share</source>
-        <translatorcomment>Kept original for lack of good German wording</translatorcomment>
+        <translatorcomment>Kept original for lack of good German wording.</translatorcomment>
         <translation>Netzwerkfreigabe (Net share)</translation>
     </message>
     <message>
@@ -2854,23 +2837,24 @@ Nein wählt: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2598"/>
         <source>The Certificate Signature is invalid!</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Zertifikatssignatur ist ungültig!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2599"/>
         <source>The Certificate is not suitable for this product.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Zertifikat ist für dieses Produkt nicht geeignet.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2600"/>
         <source>The Certificate is node locked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Zertifikat ist an ein anderes Gerät gebunden (node-locked).</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2604"/>
         <source>The support certificate is not valid.
 Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Unterstützerzertifikat ist nicht gültig.
+Fehler: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2869"/>
@@ -4635,87 +4619,96 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1035"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Unterstützerzertifikat ist abgelaufen, bitte &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;holen Sie sich ein erneuertes Zertifikat&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1049"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Unterstützerzertifikat wird &lt;font color=&apos;red&apos;&gt;in %1 Tagen ablaufen&lt;/font&gt;, bitte &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;holen Sie sich ein erneuertes Zertifikat&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1091"/>
         <source>Retreiving certificate...</source>
-        <translation type="unfinished"></translation>
+        <translation>Rufe Zertifikat ab...</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1135"/>
         <source>Contributor</source>
-        <translation type="unfinished"></translation>
+		<translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translation>Contributor</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1137"/>
         <source>Eternal</source>
-        <translation type="unfinished"></translation>
+		<translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translation>Eternal</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1139"/>
         <source>Business</source>
-        <translation type="unfinished"></translation>
+		<translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translation>Business</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1141"/>
         <source>Personal</source>
-        <translation type="unfinished"></translation>
+		<translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translation>Personal</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1143"/>
         <source>Great Patreon</source>
-        <translation type="unfinished"></translation>
+		<translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translation>Great Patreon</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1145"/>
         <source>Patreon</source>
-        <translation type="unfinished"></translation>
+		<translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translation>Patreon</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1147"/>
         <source>Family</source>
-        <translation type="unfinished"></translation>
+		<translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translation>Family</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1149"/>
         <source>Subscription</source>
-        <translation type="unfinished"></translation>
+		<translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translation>Subscription</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1151"/>
         <source>Evaluation</source>
-        <translation type="unfinished"></translation>
+		<translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translation>Evaluation</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1153"/>
         <source>Type %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1181"/>
         <source>Standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1183"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Erweitert</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1185"/>
         <source>Max Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximale Stufe</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1187"/>
         <source>Level %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Stufe %1</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1574"/>
@@ -4739,10 +4732,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Sandgeboxter Internetbrowser</translation>
     </message>
     <message>
-        <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="vanished">Dieses Unterstützerzertifikat ist abgelaufen, bitte &lt;a href=&quot;sbie://update/cert&quot;&gt;holen Sie sich ein erneuertes Zertifikat&lt;/a&gt;.</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="1038"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus features will be disabled in %1 days.&lt;/font&gt;</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;Plus-Funktionen werden in %1 Tagen deaktiviert.&lt;/font&gt;</translation>
@@ -4751,10 +4740,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Windows/SettingsWindow.cpp" line="1043"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Plus-Funktionen sind nicht länger aktiviert.</translation>
-    </message>
-    <message>
-        <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="vanished">Dieses Unterstützerzertifikat wird &lt;font color=&apos;red&apos;&gt;in %1 Tagen ablaufen&lt;/font&gt;, bitte &lt;a href=&quot;sbie://update/cert&quot;&gt;holen Sie sich ein erneuertes Zertifikat&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1314"/>
@@ -4869,10 +4854,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Windows/SettingsWindow.cpp" line="1581"/>
         <source>Thank you for supporting the development of Sandboxie-Plus.</source>
         <translation>Danke Ihnen für die Unterstützung der Entwicklung von Sandboxie-Plus.</translation>
-    </message>
-    <message>
-        <source>This support certificate is not valid.</source>
-        <translation type="vanished">Dieses Unterstützerzertifikat ist nicht gültig.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1634"/>
@@ -5440,7 +5421,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="180"/>
         <source>Allow direct access to %1 sync data</source>
-        <translatorcomment>Different structure on purpose</translatorcomment>
+        <translatorcomment>Different structure on purpose.</translatorcomment>
         <translation>Erlaube direkten Zugriff auf die zu synchronisierenden Daten von %1</translation>
     </message>
     <message>
@@ -7400,10 +7381,6 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <source>This supporter certificate has expired, please &lt;a href=&quot;sbie://update/cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="vanished">Dieses Unterstützerzertifikat ist abgelaufen, bitte &lt;a href=&quot;sbie://update/cert&quot;&gt;holen Sie sich ein erneuertes Zertifikat&lt;/a&gt;.</translation>
-    </message>
-    <message>
         <location filename="Forms/SettingsWindow.ui" line="1416"/>
         <source>In the future, don&apos;t notify about certificate expiration</source>
         <translation>Zukünftig nicht über ablaufende Zertifikate informieren</translation>
@@ -7983,22 +7960,22 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1296"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Unterstützerzertifikat ist abgelaufen, bitte &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;holen Sie sich ein erneuertes Zertifikat&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1348"/>
         <source>Get</source>
-        <translation type="unfinished"></translation>
+        <translation>Erhalten</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1355"/>
         <source>Retrieve/Upgrade/Renew certificate using Serial Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrufen/Aufwerten/Erneuern des Zertifikats unter Verwendung der Seriennummer</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1396"/>
         <source>SBIE_-_____-_____-_____-_____</source>
-        <translation type="unfinished"></translation>
+        <translation>SBIE_-_____-_____-_____-_____</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1439"/>

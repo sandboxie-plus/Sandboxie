@@ -40,7 +40,7 @@ Sandboxie Plus has a modern Qt-based UI, which supports all new features that ha
   * A browser compatibility wizard to create templates for unsupported browsers
   * Vintage View mode to reproduce the graphical appearance of Sandboxie Control
   * A troubleshooting wizard to assist users with their problems
-  * An add-on manager to extend or add functionality via additional components
+  * An Add-on manager to extend or add functionality via additional components
 
 More features can be spotted by finding the sign `=` through the shortcut key Ctrl+F in the [CHANGELOG.md](./CHANGELOG.md) file.
 

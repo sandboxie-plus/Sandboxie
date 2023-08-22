@@ -63,22 +63,20 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 		switch (BoxType)
 		{
 			case CSandBoxPlus::eHardenedPlus:
+                pBox->SetBool("UsePrivacyMode", true);
 			case CSandBoxPlus::eHardened:
 				pBox->SetBool("UseSecurityMode", true);
-				if(BoxType == CSandBoxPlus::eHardenedPlus)
-                    pBox->SetBool("UsePrivacyMode", true);
 				break;
+
 			case CSandBoxPlus::eDefaultPlus:
+                pBox->SetBool("UsePrivacyMode", true);
 			case CSandBoxPlus::eDefault:
-				pBox->SetBool("UseSecurityMode", false);
-				if(BoxType == CSandBoxPlus::eDefaultPlus)
-				    pBox->SetBool("UsePrivacyMode", true);
 				break;
+
 			case CSandBoxPlus::eAppBoxPlus:
+                pBox->SetBool("UsePrivacyMode", true);
 			case CSandBoxPlus::eAppBox:
 				pBox->SetBool("NoSecurityIsolation", true);
-                if(BoxType == CSandBoxPlus::eAppBoxPlus)
-				    pBox->SetBool("UsePrivacyMode", true);
 				//pBox->InsertText("Template", "NoUACProxy"); // proxy is always needed for exes in the box
 				pBox->InsertText("Template", "RpcPortBindingsExt");
 				break;
@@ -176,46 +174,113 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
 
     int row = 0;
     QGridLayout *layout = new QGridLayout;
+#ifndef USE_COMBO
+    layout->setSpacing(2);
+    QLabel* pTopLabel = new QLabel(tr("A sandbox isolates your host system from processes running within the box, "
+        "it prevents them from making permanent changes to other programs and data in your computer. "));
+#else
     QLabel* pTopLabel = new QLabel(tr("A sandbox isolates your host system from processes running within the box, "
         "it prevents them from making permanent changes to other programs and data in your computer. "
         "The level of isolation impacts your security as well as the compatibility with applications, "
         "hence there will be a different level of isolation depending on the selected Box Type. "
         "Sandboxie can also protect your personal data from being accessed by processes running under its supervision."));
+#endif
     pTopLabel->setWordWrap(true);
     layout->addWidget(pTopLabel, row++ , 0, 1, 3);
 
+    layout->addItem(new QSpacerItem(0, 3), row++, 0);
 
     layout->addWidget(new QLabel(tr("Enter box name:")), row++, 0);
 
     m_pBoxName = new QLineEdit();
-    m_pBoxName->setMaxLength(32);
-	QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
-	for (int i=0;; i++) {
-		QString NewName = "New Box";
-		if (i > 0) NewName.append(" " + QString::number(i));
-		if (Boxes.contains(NewName.toLower().replace(" ", "_")))
-			continue;
-		m_pBoxName->setText(NewName);
-		break;
-	}
+    m_pBoxName->setMaxLength(32); // BOXNAME_COUNT
+    m_pBoxName->setText(theAPI->MkNewName("New Box"));
     m_pBoxName->setFocus();
     layout->addWidget(m_pBoxName, row++, 1, 1, 2);
     registerField("boxName", m_pBoxName);
 
 
+    /*QLabel* pMore = new QLabel(tr("<a href=\"more\">More Types</a>"));
+    pMore->setAlignment(Qt::AlignRight);
+    connect(pMore, SIGNAL(linkActivated(const QString&)), this, SLOT(SnowMore()));
+    layout->addWidget(pMore, row, 2);*/
+
     layout->addWidget(new QLabel(tr("Select box type:")), row++, 0);
+
+#ifndef USE_COMBO
+    m_TypeGroup = new QButtonGroup();
+
+    auto AddBoxType = [&](const QString& label, int Type, const QString& tip = QString(), bool bCheck = false) {
+        QWidget* pW = bCheck ? (QWidget*)new QCheckBox() : (QWidget*)new QRadioButton();
+        pW->setToolTip(tip);
+        if(!bCheck) m_TypeGroup->addButton((QRadioButton*)pW, Type);
+        QHBoxLayout* pLayout = new QHBoxLayout();
+        pLayout->setContentsMargins(0,0,0,0);
+        pLayout->setSpacing(4);
+        pW->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+        pLayout->addWidget(pW);
+        QLabel* pLabel = new QLabel(label);
+        pLabel->setToolTip(tip);
+        pLayout->addWidget(pLabel);
+        connect(pLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+        pW = new QWidget();
+        pW->setLayout(pLayout);
+        layout->addWidget(pW, row, 1, 1, 2);
+        if (Type != -1) {
+            QLabel* pIcon = new QLabel();
+            pIcon->setPixmap(theGUI->GetBoxIcon(Type).pixmap(16, 16));
+            pIcon->setAlignment(Qt::AlignRight);
+            pIcon->setContentsMargins(0, 2, 4, 0);
+            pIcon->setToolTip(tip);
+            layout->addWidget(pIcon, row, 0);
+        }
+        row++;
+        //return qMakePair(pW, pIcon);
+    };
+
+    AddBoxType(tr("<a href=\"sbie://docs/security-mode\">Security Hardened</a> Sandbox with <a href=\"sbie://docs/privacy-mode\">Data Protection</a>"), (int)CSandBoxPlus::eHardenedPlus, 
+        tr("This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes. \n"
+            "It strictly limits access to user data, allowing processes within this box to only access C:\\Windows and C:\\Program Files directories. \n"
+            "The entire user profile remains hidden, ensuring maximum security."));
+    AddBoxType(tr("<a href=\"sbie://docs/security-mode\">Security Hardened</a> Sandbox"), (int)CSandBoxPlus::eHardened, 
+        tr("This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes."));
+    AddBoxType(tr("Sandbox with <a href=\"sbie://docs/privacy-mode\">Data Protection</a>"), (int)CSandBoxPlus::eDefaultPlus, 
+        tr("In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such, \n"
+            "only C:\\Windows and C:\\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure."));
+    AddBoxType(tr("Standard Sandbox"), (int)CSandBoxPlus::eDefault, 
+        tr("This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme. \n"
+            "Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space."));
+    AddBoxType(tr("<a href=\"sbie://docs/compartment-mode\">Application Compartment</a> Box with <a href=\"sbie://docs/privacy-mode\">Data Protection</a>"), (int)CSandBoxPlus::eAppBoxPlus, 
+        tr("This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. \n"
+            "While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment."));
+    AddBoxType(tr("<a href=\"sbie://docs/compartment-mode\">Application Compartment</a> Box"), (int)CSandBoxPlus::eAppBox, 
+        tr("This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. \n"
+            "While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment."));
+    
+    connect(m_TypeGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SIGNAL(typeChanged()));
+    registerField("boxType", this, "currentType", "typeChanged");
+
+    connect(m_TypeGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(OnBoxTypChanged()));
+
+    //QCheckBox* pMore = new QCheckBox(tr("Show More Types"));
+    //layout->addWidget(pMore, 4, 3);
+    //connect(pMore, &QCheckBox::toggled, [=](bool bValue) {
+    //          ...
+    //    });
+#else
+    bool bAll = true;
 
     m_pBoxType = new QComboBox();
 	m_pBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardenedPlus), tr("Hardened Sandbox with Data Protection"), (int)CSandBoxPlus::eHardenedPlus);
-	m_pBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardened), tr("Security Hardened Sandbox"), (int)CSandBoxPlus::eHardened);
+	if (bAll) m_pBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eHardened), tr("Security Hardened Sandbox"), (int)CSandBoxPlus::eHardened);
 	m_pBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eDefaultPlus), tr("Sandbox with Data Protection"), (int)CSandBoxPlus::eDefaultPlus);
 	m_pBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eDefault), tr("Standard Isolation Sandbox (Default)"), (int)CSandBoxPlus::eDefault);
 	//m_pBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eInsecure), tr("INSECURE Configuration (please change)"), (int)CSandBoxPlus::eInsecure);
-	m_pBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBoxPlus), tr("Application Compartment with Data Protection"), (int)CSandBoxPlus::eAppBoxPlus);
-	m_pBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBox), tr("Application Compartment (NO Isolation)"), (int)CSandBoxPlus::eAppBox);
+	if (bAll) m_pBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBoxPlus), tr("Application Compartment with Data Protection"), (int)CSandBoxPlus::eAppBoxPlus);
+	m_pBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBox), tr("Application Compartment Box"), (int)CSandBoxPlus::eAppBox);
     connect(m_pBoxType, SIGNAL(currentIndexChanged(int)), this, SLOT(OnBoxTypChanged()));
     layout->addWidget(m_pBoxType, row++, 1, 1, 2);
-    registerField("boxType", m_pBoxType);
+    registerField("boxType", m_pBoxType, "currentData", "currentIndexChanged");
 
     m_pInfoLabel = new QLabel();
     m_pInfoLabel->setWordWrap(true);
@@ -224,7 +289,7 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
     layout->addWidget(m_pInfoLabel, row++, 0, 1, 3);
 
     m_pBoxType->setCurrentIndex(3); // default
-
+#endif
 
     QWidget* pSpacer = new QWidget();
 	pSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -238,20 +303,37 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
 
     m_pAdvanced = new QCheckBox(tr("Configure advanced options"));
     m_pAdvanced->setChecked(theConf->GetBool("Options/AdvancedBoxWizard", false));
-    layout->addWidget(m_pAdvanced, row++, 2);
+    layout->addWidget(m_pAdvanced, row++, 2, 1, 1);
     connect(m_pAdvanced, SIGNAL(toggled(bool)), this, SLOT(OnAdvanced()));
 
     setLayout(layout);
 }
 
+void CBoxTypePage::setCurrentType(int type) 
+{
+    if(m_TypeGroup->buttons().count() < type)
+        m_TypeGroup->button(type)->setChecked(true);
+}
+
+int CBoxTypePage::currentType() 
+{ 
+    return m_TypeGroup->checkedId(); 
+}
+
 void CBoxTypePage::OnBoxTypChanged()
 {
+#ifndef USE_COMBO
+    int BoxType = m_TypeGroup->checkedId();
+#else
 	int BoxType = m_pBoxType->currentData().toInt();
 
 	m_pInfoLabel->setText(theGUI->GetBoxDescription(BoxType));
+#endif
 
-	if(BoxType != CSandBoxPlus::eDefault)
+    if(BoxType != CSandBoxPlus::eDefault)
 		theGUI->CheckCertificate(this);
+
+    emit completeChanged();
 }
 
 void CBoxTypePage::OnAdvanced()
@@ -281,6 +363,10 @@ int CBoxTypePage::nextId() const
 
 bool CBoxTypePage::isComplete() const
 {
+#ifndef USE_COMBO
+    if (m_TypeGroup->checkedId() == -1)
+        return false;
+#endif
     return true;
 }
 
@@ -292,6 +378,7 @@ bool CBoxTypePage::validatePage()
 
     if (m_bInstant && !m_pAdvanced->isChecked())
         return !((CNewBoxWizard*)wizard())->TryToCreateBox().IsError();
+
     return true;
 }
 
@@ -477,11 +564,11 @@ CAdvancedPage::CAdvancedPage(QWidget *parent)
     pBoxLabel->setFont(fnt);
     layout->addWidget(pBoxLabel, row++, 0);
 
-    QCheckBox* pBoxToken = new QCheckBox(tr("Use a Sandboxie login instead of an anonymous token"));
-    pBoxToken->setToolTip(tr("Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens."));
-    pBoxToken->setChecked(theConf->GetBool("BoxDefaults/BoxToken", false));
-    layout->addWidget(pBoxToken, row++, 1, 1, 3);
-    registerField("boxToken", pBoxToken);
+    m_pBoxToken = new QCheckBox(tr("Use a Sandboxie login instead of an anonymous token"));
+    m_pBoxToken->setToolTip(tr("Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens."));
+    m_pBoxToken->setChecked(theConf->GetBool("BoxDefaults/BoxToken", false));
+    layout->addWidget(m_pBoxToken, row++, 1, 1, 3);
+    registerField("boxToken", m_pBoxToken);
 
     QCheckBox* pImageProtection = new QCheckBox(tr("Prevent sandboxes programs installed on host from loading dll's from the sandbox"));
     pImageProtection->setToolTip(tr("This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them."));
@@ -510,9 +597,13 @@ int CAdvancedPage::nextId() const
 void CAdvancedPage::initializePage()
 {
     int BoxType = wizard()->field("boxType").toInt();
+
     bool bHardened = (BoxType == CSandBoxPlus::eHardenedPlus || BoxType == CSandBoxPlus::eHardened);
     m_pMSIServer->setEnabled(!bHardened);
     m_pShareAccess->setEnabled(!bHardened);
+
+    bool bAppBox = (BoxType == CSandBoxPlus::eAppBoxPlus || BoxType == CSandBoxPlus::eAppBox);
+    m_pBoxToken->setEnabled(!bAppBox);
 }
 
 bool CAdvancedPage::validatePage()

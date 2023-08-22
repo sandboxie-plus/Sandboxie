@@ -4634,55 +4634,55 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1135"/>
         <source>Contributor</source>
-		<translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
         <translation>Contributor</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1137"/>
         <source>Eternal</source>
-		<translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
         <translation>Eternal</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1139"/>
         <source>Business</source>
-		<translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
         <translation>Business</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1141"/>
         <source>Personal</source>
-		<translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
         <translation>Personal</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1143"/>
         <source>Great Patreon</source>
-		<translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
         <translation>Great Patreon</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1145"/>
         <source>Patreon</source>
-		<translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
         <translation>Patreon</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1147"/>
         <source>Family</source>
-		<translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
         <translation>Family</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1149"/>
         <source>Subscription</source>
-		<translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
         <translation>Subscription</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1151"/>
         <source>Evaluation</source>
-		<translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
         <translation>Evaluation</translation>
     </message>
     <message>

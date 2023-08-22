@@ -7,7 +7,7 @@
 
 Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT-based operating systems. It creates a sandbox-like isolated operating environment in which applications can be run or installed without permanently modifying local & mapped drives or the Windows registry. An isolated virtual environment allows controlled testing of untrusted programs and web surfing.<br>
 
-Sandboxie allows you to create virtually unlimited sandboxes to isolate programs from the host and each other, while also allowing you to run as many programs simultaneously in a single box as you wish.
+Sandboxie allows you to create virtually unlimited sandboxes and run them alone or simultaneously to isolate programs from the host and each other, while also allowing you to run as many programs simultaneously in a single box as you wish.
 
 |  System requirements  |      Release notes     |      Security policy      |      Contribution guidelines   |
 |         :---:         |          :---:         |          :---:            |          :---:                 |
@@ -27,9 +27,10 @@ Sandboxie Plus has a modern Qt-based UI, which supports all new features that ha
   * Snapshot Manager - takes a copy of any box in order to be restored when needed
   * Maintenance mode - allows to uninstall/install/start/stop Sandboxie driver and service when needed
   * Portable mode - you can run the installer and choose to extract all files to a directory
-  * Additional UI options to block access for Windows components like printer spooler and clipboard
+  * Additional UI options to block access to Windows components like printer spooler and clipboard
   * More customization options for Start/Run and Internet access restrictions
   * Privacy mode sandboxes that protect user data from illegitimate access
+  * Security enhanced sandboxes that restrict the availability of syscalls and endpoints
   * Global hotkey to terminate all boxed processes
   * A network firewall per sandbox which supports Windows Filtering Platform (WFP)
   * The list of sandboxes can be searched with the shortcut key Ctrl+F
@@ -38,6 +39,8 @@ Sandboxie Plus has a modern Qt-based UI, which supports all new features that ha
   * Integration of sandboxes into the Windows Start menu
   * A browser compatibility wizard to create templates for unsupported browsers
   * Vintage View mode to reproduce the graphical appearance of Sandboxie Control
+  * A troubleshooting wizard to assist users with their problems
+  * An add-on manager to extend or add functionality via additional components
 
 More features can be spotted by finding the sign `=` through the shortcut key Ctrl+F in the [CHANGELOG.md](./CHANGELOG.md) file.
 

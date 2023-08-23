@@ -290,7 +290,7 @@ Das gesamte Nutzerprofil bleibt verborgen, was maximale Sicherheit zusichert.</t
         <location filename="Wizards/NewBoxWizard.cpp" line="248"/>
         <source>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such, 
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</source>
-        <translation>In diesem Boxtyp,werden sandgeboxte Prozesse daran gehindert auf jegliche persönliche Nutzerdateien oder Daten zu zu greifen. Der Fokus ist der Schutz von Nutzerdaten, und daher, 
+        <translation>In diesem Boxtyp werden sandgeboxte Prozesse daran gehindert auf jegliche persönliche Nutzerdateien oder Daten zuzugreifen. Der Fokus ist der Schutz von Nutzerdaten, und daher, 
 sind nur die Ordner C:\Windows und C:\Programme für Prozesse innerhalb dieser Sandbox zugänglich. Dies stellt sicher, dass persönliche Dateien sicher bleiben.</translation>
     </message>
     <message>

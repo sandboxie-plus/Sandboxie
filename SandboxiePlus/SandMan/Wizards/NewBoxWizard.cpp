@@ -214,7 +214,7 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
         QWidget* pW = bCheck ? (QWidget*)new QCheckBox() : (QWidget*)new QRadioButton();
         if (theGUI->m_DarkTheme) {
             QPalette palette = QApplication::palette();
-            palette.setColor(QPalette::Base, Qt::darkGray);
+            palette.setColor(QPalette::Base, Qt::lightGray);
             palette.setColor(QPalette::Text, Qt::black);
             pW->setPalette(palette);
         }
@@ -310,7 +310,7 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
     m_pAdvanced = new QCheckBox(tr("Configure advanced options"));
     if (theGUI->m_DarkTheme) {
         QPalette palette = QApplication::palette();
-        palette.setColor(QPalette::Base, Qt::darkGray);
+        palette.setColor(QPalette::Base, Qt::lightGray);
         palette.setColor(QPalette::Text, Qt::black);
         m_pAdvanced->setPalette(palette);
     }

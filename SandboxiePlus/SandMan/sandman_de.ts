@@ -268,7 +268,7 @@
 It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories. 
 The entire user profile remains hidden, ensuring maximum security.</source>
         <translation>Dieser Boxtyp bietet das höchste Schutzlevel durch die signifikante Reduktion der Angriffsfläche für sandgeboxte Prozesse. 
-Es begrenzt rigoros den Zugriff auf Nutzerdaten, erlaubt Prozessen innerhalb dieser Box nur den Zugriff auf die Ordner C:\Windows und C:\Programme . 
+Es begrenzt rigoros den Zugriff auf Nutzerdaten, erlaubt Prozessen innerhalb dieser Box nur den Zugriff auf die Ordner C:\Windows und C:\Programme. 
 Das gesamte Nutzerprofil bleibt verborgen, was maximale Sicherheit zusichert.</translation>
     </message>
     <message>

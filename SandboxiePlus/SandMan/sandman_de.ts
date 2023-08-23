@@ -316,7 +316,7 @@ Applikationen können in dieser Sandbox ausgeführt werden, wobei sichergestellt
         <source>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. 
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</source>
         <translation>Dieser Boxtyp priorisiert die Kompatibilität, während weiterhin ein gutes Level an Isolation geboten wird. Er ist entworfen, um vertrauenswürdige Applikationen in separaten Unterteilungen auszuführen 
-Während der Level der Isolation reduziert ist, verglichen mit anderen Boxtypen, bietet er verbesserte Kompatibilität mit einer großen Bandbreite von Applikationen, was die reibungslose Ausführung on der sandgeboxten Umgebung sicherstellt.</translation>
+Während der Level der Isolation reduziert ist, verglichen mit anderen Boxtypen, bietet er verbesserte Kompatibilität mit einer großen Bandbreite von Applikationen, was die reibungslose Ausführung in der sandgeboxten Umgebung sicherstellt.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="256"/>

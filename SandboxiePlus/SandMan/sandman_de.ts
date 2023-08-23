@@ -303,7 +303,7 @@ sind nur die Ordner C:\Windows und C:\Programme für Prozesse innerhalb dieser S
         <source>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme. 
 Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</source>
         <translation>Dieser Boxtyp bietet das normale Verhalten von Sandboxie Classic. Er bietet Nutzern ein vertrautes und verlässliches Sandboxschema. 
-Applikationen können in dieser Sandbox ausgeführt werden, wobei sichergetellt wird, dass sie in einer kontrollierten und isolierten Umgebung laufen.</translation>
+Applikationen können in dieser Sandbox ausgeführt werden, wobei sichergestellt wird, dass sie in einer kontrollierten und isolierten Umgebung laufen.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="253"/>

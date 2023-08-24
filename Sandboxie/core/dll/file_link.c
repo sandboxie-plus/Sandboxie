@@ -832,14 +832,12 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
     P_NtCreateFile pNtCreateFile = __sys_NtCreateFile;
     P_NtClose pNtClose = __sys_NtClose;
     P_NtFsControlFile pNtFsControlFile = __sys_NtFsControlFile;
-    if (!pNtCreateFile) {
-        SbieApi_Log(2325, L"File_AddTempLink !pNtCreateFile");
-        pNtCreateFile = NtCreateFile;
-    }
-    if (! pNtClose)
-        pNtClose = NtClose;
-    if (! pNtFsControlFile)
-        pNtFsControlFile = NtFsControlFile;
+	if (! pNtCreateFile)
+		pNtCreateFile = NtCreateFile;
+	if (! pNtClose)
+		pNtClose = NtClose;
+	if (! pNtFsControlFile)
+		pNtFsControlFile = NtFsControlFile;
 
     stop = TRUE;
 

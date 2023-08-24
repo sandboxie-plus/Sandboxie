@@ -92,7 +92,7 @@ public:
 
 	void				EditIni(const QString& IniPath, bool bPlus = false);
 
-	QIcon				GetBoxIcon(int boxType, bool inUse = false);// , bool inBusy = false);
+	QIcon				GetBoxIcon(int boxType, bool inUse = false);
 	QRgb				GetBoxColor(int boxType) { return m_BoxColors[boxType]; }
 	QIcon				GetColorIcon(QColor boxColor, bool inUse = false/*, bool bOut = false*/);
 	QIcon				MakeIconBusy(const QIcon& Icon, int Index = 0);
@@ -164,13 +164,6 @@ protected:
 	};
 
 	QMap<int, QRgb> m_BoxColors;
-
-	//struct SBoxIcon {
-	//	QIcon Empty;
-	//	QIcon InUse;
-	//	//QIcon Busy;
-	//};
-	//QMap<int, SBoxIcon> m_BoxIcons;
 
 	class UGlobalHotkeys* m_pHotkeyManager;
 

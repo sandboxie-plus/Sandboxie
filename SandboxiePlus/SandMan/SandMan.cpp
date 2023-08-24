@@ -239,11 +239,6 @@ CSandMan::CSandMan(QWidget *parent)
 	connect(m_pHotkeyManager, SIGNAL(activated(size_t)), SLOT(OnHotKey(size_t)));
 	SetupHotKeys();
 
-	//for (int i = 0; i < eMaxColor; i++) {
-	//	m_BoxIcons[i].Empty = QIcon(QString(":/Boxes/Empty%1").arg(i));
-	//	m_BoxIcons[i].InUse = QIcon(QString(":/Boxes/Full%1").arg(i));
-	//}
-
 	m_BoxColors[CSandBoxPlus::eHardenedPlus] = qRgb(238,35,4);
 	m_BoxColors[CSandBoxPlus::eHardened] = qRgb(247,125,2);
 	m_BoxColors[CSandBoxPlus::eDefaultPlus] = qRgb(1,133,248);
@@ -1345,28 +1340,11 @@ void CSandMan::commitData(QSessionManager& manager)
 	theConf->Sync();
 }
 
-QIcon CSandMan::GetBoxIcon(int boxType, bool inUse)// , int iBusy)
+QIcon CSandMan::GetBoxIcon(int boxType, bool inUse)
 {
-	//EBoxColors color = eYellow;
 	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
-	if (iViewMode != 2) {
+	if (iViewMode != 2)
 		return GetColorIcon(m_BoxColors[boxType], inUse);
-		/*switch (boxType) {
-		case CSandBoxPlus::eHardenedPlus:		color = eRed; break;
-		case CSandBoxPlus::eHardened:			color = eOrang; break;
-		case CSandBoxPlus::eDefaultPlus:		color = eBlue; break;
-		case CSandBoxPlus::eDefault:			color = eYellow; break;
-		case CSandBoxPlus::eAppBoxPlus:			color = eCyan; break;
-		case CSandBoxPlus::eAppBox:				color = eGreen; break;
-		case CSandBoxPlus::eInsecure:			color = eMagenta; break;
-		case CSandBoxPlus::eOpen:				color = eWhite; break;
-		}*/
-	}
-	//if (inBusy)
-	//	return m_BoxIcons[color].Busy;
-	/*if (inUse)
-		return m_BoxIcons[color].InUse;
-	return m_BoxIcons[color].Empty;*/
 	return GetColorIcon(m_BoxColors[CSandBoxPlus::eDefault], inUse);
 }
 
@@ -1379,6 +1357,10 @@ QIcon CSandMan::GetColorIcon(QColor boxColor, bool inUse/*, bool bOut*/)
 	static QPixmap Frame;
 	if(Frame.isNull())
 		Frame = QPixmap(":/Boxes/Frame");
+
+	static QPixmap FrameDM;
+	if(FrameDM.isNull())
+		FrameDM = QPixmap(":/Boxes/FrameDM");
 
 	static QPixmap Items;
 	if(Items.isNull())
@@ -1408,7 +1390,10 @@ QIcon CSandMan::GetColorIcon(QColor boxColor, bool inUse/*, bool bOut*/)
 	//	painter.drawPixmap(0, 0, QPixmap::fromImage(MyOut));
 	//}
 	painter.drawPixmap(0, 0, QPixmap::fromImage(MySand));
-	painter.drawPixmap(0, 0, Frame);
+	if (m_DarkTheme)
+		painter.drawPixmap(0, 0, FrameDM);
+	else
+		painter.drawPixmap(0, 0, Frame);
 	if (inUse) 
 	{	
 		//rgb = change_hsv_c(rgb, -60, 2, 1); // yellow -> red

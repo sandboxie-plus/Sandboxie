@@ -168,7 +168,10 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Create new Sandbox"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    if (theGUI->m_DarkTheme)
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
+    else
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
 
     m_bInstant = theConf->GetBool("Options/InstantBoxWizard", false);
 

@@ -240,7 +240,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="179"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. </source>
-        <translation type="unfinished"></translation>
+        <translation>Eine Sandbox isoliert Ihr Hostsystem von Prozessen, die in dieser Box laufen, sie hindert diese daran permanente Änderungen an anderen Programmen oder Daten auf Ihrem Computer zu machen. </translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="182"/>
@@ -260,63 +260,68 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="247"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Sicherheitsgehärtete&lt;/a&gt; Sandbox mit &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Datenschutz&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="248"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes. 
 It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories. 
 The entire user profile remains hidden, ensuring maximum security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Boxtyp bietet das höchste Schutzlevel durch die signifikante Reduktion der Angriffsfläche für sandgeboxte Prozesse. 
+Es begrenzt rigoros den Zugriff auf Nutzerdaten, erlaubt Prozessen innerhalb dieser Box nur den Zugriff auf die Ordner C:\Windows und C:\Programme. 
+Das gesamte Nutzerprofil bleibt verborgen, was maximale Sicherheit zusichert.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="251"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Sicherheitsgehärtete&lt;/a&gt; Sandbox</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="252"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Boxtyp bietet das höchste Schutzlevel durch die signifikante Reduktion der Angriffsfläche für sandgeboxte Prozesse.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="253"/>
         <source>Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox mit &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Datenschutz&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="254"/>
         <source>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such, 
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</source>
-        <translation type="unfinished"></translation>
+        <translation>In diesem Boxtyp werden sandgeboxte Prozesse daran gehindert auf jegliche persönliche Nutzerdateien oder Daten zuzugreifen. Der Fokus ist der Schutz von Nutzerdaten, und daher, 
+sind nur die Ordner C:\Windows und C:\Programme für Prozesse innerhalb dieser Sandbox zugänglich. Dies stellt sicher, dass persönliche Dateien sicher bleiben.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="256"/>
         <source>Standard Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard Sandbox</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="257"/>
         <source>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme. 
 Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Boxtyp bietet das normale Verhalten von Sandboxie Classic. Er bietet Nutzern ein vertrautes und verlässliches Sandboxschema. 
+Applikationen können in dieser Sandbox ausgeführt werden, wobei sichergestellt wird, dass sie in einer kontrollierten und isolierten Umgebung laufen.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="259"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Applikationsunterteilungs&lt;/a&gt; Box mit &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Datenschutz&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="260"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="263"/>
         <source>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. 
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Boxtyp priorisiert die Kompatibilität, während weiterhin ein gutes Level an Isolation geboten wird. Er ist entworfen, um vertrauenswürdige Applikationen in separaten Unterteilungen auszuführen 
+Während der Level der Isolation reduziert ist, verglichen mit anderen Boxtypen, bietet er verbesserte Kompatibilität mit einer großen Bandbreite von Applikationen, was die reibungslose Ausführung in der sandgeboxten Umgebung sicherstellt.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="262"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Applikationsunterteilungs&lt;/a&gt; Box</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="280"/>
@@ -346,7 +351,7 @@ While the level of isolation is reduced compared to other box types, it offers i
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="286"/>
         <source>Application Compartment Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Applikationsunterteilungsbox</translation>
     </message>
     <message>
         <source>Application Compartment (NO Isolation)</source>

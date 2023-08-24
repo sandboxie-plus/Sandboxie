@@ -2475,7 +2475,7 @@ SB_RESULT(QStringList) CSbieAPI::ImBoxEnum()
 		reg_roots += len + 1;
 	}
 
-	return CSbieResult(Roots);
+	return CSbieResult<QStringList>(Roots);
 }
 
 SB_RESULT(QVariantMap) CSbieAPI::ImBoxQuery(const QString& Root)
@@ -2502,7 +2502,7 @@ SB_RESULT(QVariantMap) CSbieAPI::ImBoxQuery(const QString& Root)
 	Info["UsedSize"] = rpl->used_size;
 	Info["DiskRoot"] = QString::fromWCharArray(rpl->disk_root);
 
-	return CSbieResult(Info);
+	return CSbieResult<QVariantMap>(Info);
 }
 
 

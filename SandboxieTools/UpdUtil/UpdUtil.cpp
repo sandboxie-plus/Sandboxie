@@ -111,8 +111,8 @@ std::wstring Arch2Str(ULONG architecture)
 	switch (architecture)
 	{
 	case IMAGE_FILE_MACHINE_ARM64:	return L"a64";
-	case PROCESSOR_ARCHITECTURE_AMD64:	return L"x64";
-	case PROCESSOR_ARCHITECTURE_INTEL:	return L"x86";
+	case IMAGE_FILE_MACHINE_AMD64:	return L"x64";
+	case IMAGE_FILE_MACHINE_I386:	return L"x86";
 	default: return L"";
 	}
 }

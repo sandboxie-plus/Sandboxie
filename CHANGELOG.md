@@ -39,7 +39,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed Sandboxie-Plus-x64-v1.10.3 crash on startup [#3174](https://github.com/sandboxie-plus/Sandboxie/issues/3174)
-- fixed issue with untranslated buttons in the wizard [#3133](https://github.com/sandboxie-plus/Sandboxie/issues/3133)
+- fixed issue with untranslated buttons in all wizards [#3133](https://github.com/sandboxie-plus/Sandboxie/issues/3133)
 
 
 

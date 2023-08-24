@@ -132,80 +132,80 @@
 <context>
     <name>CAdvancedPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="519"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="531"/>
         <source>Advanced Sandbox options</source>
         <translation>高级沙盒选项</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="520"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="532"/>
         <source>On this page advanced sandbox options can be configured.</source>
         <translation>本页面用于配置沙盒的高级选项</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="525"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="537"/>
         <source>Network Access</source>
         <translation>网络权限</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="533"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="545"/>
         <source>Allow network/internet access</source>
         <translation>允许网络访问</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="534"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="546"/>
         <source>Block network/internet by denying access to Network devices</source>
         <translation>通过阻止访问网络设备禁用网络权限</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="536"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="548"/>
         <source>Block network/internet using Windows Filtering Platform</source>
         <translation>通过 Windows 筛选平台 (WFP) 禁用网络权限</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="541"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="553"/>
         <source>Allow access to network files and folders</source>
         <oldsource>Allow access to network files and fodlers</oldsource>
         <translation>允许访问网络文件与文件夹</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="542"/>
-        <location filename="Wizards/NewBoxWizard.cpp" line="558"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="554"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="570"/>
         <source>This option is not recommended for Hardened boxes</source>
         <oldsource>This option is not recomended for Hardened boxes</oldsource>
         <translation>不推荐加固型沙盒启用该选项</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="548"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="560"/>
         <source>Admin Options</source>
         <translation>管理员选项</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="552"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="564"/>
         <source>Make applications think they are running elevated</source>
         <translation>让应用认为自身在管理员权限下运行</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="557"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="569"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
         <translation>允许 MSIServer 在沙盒内使用系统令牌运行</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="563"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="575"/>
         <source>Box Options</source>
         <translation>沙盒选项</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="567"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="579"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>使用 Sandboxie 限权用户替代匿名令牌</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="573"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="585"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
         <translation>阻止安装在宿主上的沙盒程序从沙盒内部加载动态链接库(DLL)文件</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="574"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="586"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
         <oldsource>该功能可能对兼容性造成影响，因为它阻止了沙箱内的进程向主机进程写入数据，以及启动它们。</oldsource>
         <translation></translation>
@@ -215,7 +215,7 @@
         <translation type="vanished">使用 Sandboxie 限权用户，而不是匿名令牌 (实验性)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="568"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="580"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
         <translation>使用自定义沙盒令牌可以更好地将各个沙盒相互隔离，同时可以实现在任务管理器的用户栏中显示进程所属的沙盒。但是，某些第三方安全解决方案可能会与自定义令牌产生兼容性问题</translation>
     </message>
@@ -342,93 +342,93 @@
         <translation>选择沙盒类型：</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="241"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="247"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="242"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="248"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes. 
 It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories. 
 The entire user profile remains hidden, ensuring maximum security.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="245"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="251"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="246"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="252"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="247"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="253"/>
         <source>Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="248"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="254"/>
         <source>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such, 
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="250"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="256"/>
         <source>Standard Sandbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="251"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="257"/>
         <source>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme. 
 Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="253"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="259"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="254"/>
-        <location filename="Wizards/NewBoxWizard.cpp" line="257"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="260"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="263"/>
         <source>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. 
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="256"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="262"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="274"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="280"/>
         <source>Hardened Sandbox with Data Protection</source>
         <translation>带数据保护的加固型沙盒</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="275"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="281"/>
         <source>Security Hardened Sandbox</source>
         <translation>安全防护加固型沙盒</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="276"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="282"/>
         <source>Sandbox with Data Protection</source>
         <translation>带数据保护的沙盒</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="277"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="283"/>
         <source>Standard Isolation Sandbox (Default)</source>
         <translation>标准隔离沙盒(默认)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="279"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="285"/>
         <source>Application Compartment with Data Protection</source>
         <translation>带数据保护的应用隔间</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="280"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="286"/>
         <source>Application Compartment Box</source>
         <translation type="unfinished"></translation>
     </message>
@@ -437,17 +437,17 @@ While the level of isolation is reduced compared to other box types, it offers i
         <translation type="vanished">应用隔间(无隔离防护)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="298"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="304"/>
         <source>Remove after use</source>
         <translation>在使用结束后删除</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="299"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="305"/>
         <source>After the last process in the box terminates, all data in the box will be deleted and the box itself will be removed.</source>
         <translation>在沙盒中所有进程结束后，沙盒中所有数据及沙盒本身将会被删除</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="304"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="310"/>
         <source>Configure advanced options</source>
         <translation>高级选项</translation>
     </message>
@@ -775,13 +775,13 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CFilesPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="393"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="405"/>
         <source>Sandbox location and behavior</source>
         <oldsource>Sandbox location and behavioure</oldsource>
         <translation>沙盒位置与行为</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="394"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="406"/>
         <source>On this page the sandbox location and its behavior can be customized.
 You can use %USER% to save each users sandbox to an own folder.</source>
         <oldsource>On this page the sandbox location and its behaviorue can be customized.
@@ -790,64 +790,64 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 可以使用 %USER% 来将用户拥有的沙盒存储到自身的用户目录下</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="399"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="411"/>
         <source>Sandboxed Files</source>
         <translation>沙盒化文件</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="422"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="434"/>
         <source>Select Directory</source>
         <translation>选择目录</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="430"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="442"/>
         <source>Virtualization scheme</source>
         <translation>虚拟化方案</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="434"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="446"/>
         <source>Version 1</source>
         <translation>版本 1</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="435"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="447"/>
         <source>Version 2</source>
         <translation>版本 2</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="441"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="453"/>
         <source>Separate user folders</source>
         <translation>区分用户文件夹</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="446"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="458"/>
         <source>Use volume serial numbers for drives</source>
         <translation>使用驱动器的卷序列号</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="451"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="463"/>
         <source>Auto delete content when last process terminates</source>
         <translation>当所有进程结束后删除所有内容</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="458"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="470"/>
         <source>Enable Immediate Recovery of files from recovery locations</source>
         <translation>启用立即恢复功能</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="493"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="505"/>
         <source>The selected box location is not a valid path.</source>
         <oldsource>The sellected box location is not a valid path.</oldsource>
         <translation>所选的沙盒存储路径无效</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="498"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="510"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
         <oldsource>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</oldsource>
         <translation>所选的沙盒存储路径不是空的，推荐选择空文件夹或新建文件夹。确定要使用当前选择的文件夹吗？</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="503"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="515"/>
         <source>The selected box location is not placed on a currently available drive.</source>
         <oldsource>The selected box location not placed on a currently available drive.</oldsource>
         <translation>所选的沙盒存储路径所在的驱动器当前不可用</translation>
@@ -5497,34 +5497,34 @@ Try submitting without the log attached.</source>
 <context>
     <name>CSummaryPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="622"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="634"/>
         <source>Create the new Sandbox</source>
         <translation>创建新沙盒</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="630"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="642"/>
         <source>Almost complete, click Finish to create a new sandbox and conclude the wizard.</source>
         <translation>即将就绪, 点击完成按钮结束沙盒创建向导</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="639"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="651"/>
         <source>Save options as new defaults</source>
         <translation>保存选项为新的默认配置</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="650"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="662"/>
         <source>Don&apos;t show the summary page in future (unless advanced options were set)</source>
         <translation>以后不再显示总结页面 (除非启用高级选项)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="669"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="681"/>
         <source>
 This Sandbox will be saved to: %1</source>
         <translation>
 该沙盒将保存到: %1</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="672"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="684"/>
         <source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
         <oldsource>
@@ -5533,21 +5533,21 @@ This box&apos;s content will be DISCARDED when its closed, and the box will be r
 该沙盒中的内容将在所有程序结束后被删除，同时沙盒本身将被移除</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="674"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="686"/>
         <source>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
         <translation>
 该沙盒中的内容将在所有程序结束后被删除，仅适合临时数据</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="676"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="688"/>
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
         <translation>
 该沙盒中所有进程将无法访问网络和本地连接，以确保所有可访问的数据不被泄露</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="678"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="690"/>
         <source>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
         <oldsource>
@@ -5556,14 +5556,14 @@ This box will run the MSIServer (*.msi installer service) with a system token, t
 该沙盒允许 MSIServer (*.msi 安装服务) 在沙盒内使用系统令牌运行，这将改善兼容性但会影响安全隔离效果</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="680"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="692"/>
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
         <translation>
 该沙盒中所有进程将认为其运行在管理员模式下，即使实际上并没有该权限，这有助于在安全加固型沙盒中运行安装程序</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="682"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="694"/>
         <source>
 Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
         <oldsource>
@@ -5572,7 +5572,7 @@ Processes in this box will be running with a custom process token indicating the
 该沙箱中的进程将会以沙箱专属的自定义进程凭据运行</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="716"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="728"/>
         <source>Failed to create new box: %1</source>
         <translation>无法创建新沙盒: %1</translation>
     </message>

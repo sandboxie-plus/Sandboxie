@@ -217,7 +217,7 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
         QWidget* pW = bCheck ? (QWidget*)new QCheckBox() : (QWidget*)new QRadioButton();
         if (theGUI->m_DarkTheme) {
             QPalette palette = QApplication::palette();
-            palette.setColor(QPalette::Base, Qt::lightGray);
+            palette.setColor(QPalette::Base, Qt::white);
             palette.setColor(QPalette::Text, Qt::black);
             pW->setPalette(palette);
         }
@@ -311,12 +311,6 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
     registerField("autoRemove", pTemp);
 
     m_pAdvanced = new QCheckBox(tr("Configure advanced options"));
-    if (theGUI->m_DarkTheme) {
-        QPalette palette = QApplication::palette();
-        palette.setColor(QPalette::Base, Qt::lightGray);
-        palette.setColor(QPalette::Text, Qt::black);
-        m_pAdvanced->setPalette(palette);
-    }
     m_pAdvanced->setChecked(theConf->GetBool("Options/AdvancedBoxWizard", false));
     layout->addWidget(m_pAdvanced, row++, 2, 1, 1);
     connect(m_pAdvanced, SIGNAL(toggled(bool)), this, SLOT(OnAdvanced()));

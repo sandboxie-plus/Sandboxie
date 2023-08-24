@@ -177,6 +177,7 @@ copy /y %~dp0..\Sandboxie\install\Manifest2.txt %instPath%\
 
 ECHO Copying Sandboxie Tools
 
+copy /y %~dp0..\SandboxieTools\%archPath%\Release\ImBox.exe %instPath%\
 copy /y %~dp0..\SandboxieTools\%archPath%\Release\UpdUtil.exe %instPath%\
 
 

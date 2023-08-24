@@ -323,7 +323,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="179"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. </source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒将您的主机系统与沙盒内运行的进程隔离开来，防止它们对计算机中的其他程序和数据进行永久更改。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="182"/>
@@ -344,63 +344,67 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="247"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>具有&lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;数据保护&lt;/a&gt;且具有&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;安全强化&lt;/a&gt;的沙盒</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="248"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes. 
 It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories. 
 The entire user profile remains hidden, ensuring maximum security.</source>
-        <translation type="unfinished"></translation>
+        <translation>该沙盒类型通过显著减少暴露于沙盒进程的攻击面来提供最高级别的保护。
+它严格限制对用户数据的访问，该沙盒中的进程仅允许访问 C:\Windows 和 C:\Program Files 目录。
+整个用户配置文件保持隐藏状态，确保最大程度的安全性。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="251"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>具有&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;安全强化&lt;/a&gt;的沙盒</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="252"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>该沙盒类型通过显著减少暴露于沙盒进程的攻击面来提供最高级别的保护。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="253"/>
         <source>Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>具有&lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;数据保护&lt;/a&gt;的沙盒</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="254"/>
         <source>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such, 
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</source>
-        <translation type="unfinished"></translation>
+        <translation>在该沙盒类型中，沙盒进程被阻止访问任何个人用户文件或数据。 重点是保护用户数据，因此，该沙盒中运行的进程只能访问 C:\Windows 和 C:\Program Files 目录。 这可确保个人文件的安全。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="256"/>
         <source>Standard Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>标准沙盒</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="257"/>
         <source>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme. 
 Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</source>
-        <translation type="unfinished"></translation>
+        <translation>该沙盒类型提供 Sandboxie classic 的默认行为。 它为用户提供了熟悉且可靠的沙箱方案。
+应用程序可以在该沙盒内运行，确保它们的运行空间受控且隔离。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="259"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>具有&lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;数据保护&lt;/a&gt;的&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;应用程序隔离&lt;/a&gt;沙盒</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="260"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="263"/>
         <source>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. 
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</source>
-        <translation type="unfinished"></translation>
+        <translation>该沙盒类型优先考虑兼容性，同时仍然提供良好的隔离级别。 它设计用于在单独隔离的沙盒中运行受信任的应用程序。
+虽然与其他沙盒类型相比，其隔离级别有所降低，但它提供了与各种应用程序的更高兼容性，确保沙盒环境中应用的平稳运行。</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="262"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;应用程序隔离&lt;/a&gt;沙盒</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="280"/>
@@ -430,7 +434,7 @@ While the level of isolation is reduced compared to other box types, it offers i
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="286"/>
         <source>Application Compartment Box</source>
-        <translation type="unfinished"></translation>
+        <translation>应用程序隔离沙盒</translation>
     </message>
     <message>
         <source>Application Compartment (NO Isolation)</source>
@@ -4927,7 +4931,7 @@ Error: %1</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1035"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>此赞助者凭据已过期，请&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;更新凭据&lt;/a&gt;。</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
@@ -5046,7 +5050,7 @@ Error: %1</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1049"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>此赞助者凭据将&lt;font color=&apos;red&apos;&gt;在 %1 天后过期&lt;/font&gt;，请&lt;a href=&quot;sbie://update/cert&quot;&gt;更新凭据&lt;/a&gt;。</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1091"/>
@@ -8451,7 +8455,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1296"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>此赞助者凭据已过期，请&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;更新凭据&lt;/a&gt;。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1348"/>

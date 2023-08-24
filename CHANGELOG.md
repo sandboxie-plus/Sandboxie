@@ -14,11 +14,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - improved online updater code
-- replaced combobox with radio buttons in the box creation wizard resolvs [#1381](https://github.com/sandboxie-plus/Sandboxie/issues/1381)
+- replaced drop-down list with radio buttons in the box creation wizard [#1381](https://github.com/sandboxie-plus/Sandboxie/issues/1381)
 
 ### Fixed
 - fixed symbolic links created inside a sandbox not working properly [#3181](https://github.com/sandboxie-plus/Sandboxie/issues/3181)
-- fixed Cut text in the Check for Updates popup [#3195] (https://github.com/sandboxie-plus/Sandboxie/issues/3195)
+- fixed text cut-off issues in Plus UI pop-ups [#3195](https://github.com/sandboxie-plus/Sandboxie/issues/3195)
 
 
 

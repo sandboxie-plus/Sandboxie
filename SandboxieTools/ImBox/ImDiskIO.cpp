@@ -284,7 +284,7 @@ int CImDiskIO::DoComm()
 
     if (m->Proxy.empty()){
 #ifdef _M_ARM64
-	    ULONG64 ctr = _ReadStatusReg(ARM64_CNTVCT));
+	    ULONG64 ctr = _ReadStatusReg(ARM64_CNTVCT);
 #else
 	    ULONG64 ctr = __rdtsc();
 #endif

@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="DiskIO">
+      <UniqueIdentifier>{18b6bd43-6b61-479c-9521-c11f258edab7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{bc7ffeb4-7f05-4d22-8bac-4a4c52e81c2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImBox">
+      <UniqueIdentifier>{1b77499d-b9bc-4ca2-bfeb-67178cf2173b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DC">
+      <UniqueIdentifier>{05763154-ad55-4f59-8814-cc99a34a789f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DC\crypto_fast">
+      <UniqueIdentifier>{a1453092-4131-47d9-af56-b1bdbd2dc74a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DC\crypto_small">
+      <UniqueIdentifier>{542a7728-d999-4765-8d9b-10fb136d8c1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DC\crypto_fast\amd64">
+      <UniqueIdentifier>{463611fd-0b3f-48b3-a144-80ded44f16ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DC\crypto_fast\i386">
+      <UniqueIdentifier>{193ce094-ad88-4876-959c-a69daf6f3d2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DC\include">
+      <UniqueIdentifier>{5a9d2681-b190-4507-8415-79b235d0f8a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DC\include\boot">
+      <UniqueIdentifier>{28dac04f-502a-448f-83b8-db10b2a77c4f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractIO.h">
+      <Filter>DiskIO</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageFileIO.h">
+      <Filter>DiskIO</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalMemoryIO.h">
+      <Filter>DiskIO</Filter>
+    </ClInclude>
+    <ClInclude Include="VirtualMemoryIO.h">
+      <Filter>DiskIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\dirent.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\helpers.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="ImBox.h">
+      <Filter>ImBox</Filter>
+    </ClInclude>
+    <ClInclude Include="ImDiskIO.h">
+      <Filter>ImBox</Filter>
+    </ClInclude>
+    <ClInclude Include="CryptoIO.h">
+      <Filter>ImBox</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_fast\aes_asm.h">
+      <Filter>DC\crypto_fast</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_fast\aes_key.h">
+      <Filter>DC\crypto_fast</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_fast\aes_padlock.h">
+      <Filter>DC\crypto_fast</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_fast\crc32.h">
+      <Filter>DC\crypto_fast</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_fast\serpent.h">
+      <Filter>DC\crypto_fast</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_fast\sha512.h">
+      <Filter>DC\crypto_fast</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_fast\sha512_hmac.h">
+      <Filter>DC\crypto_fast</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_fast\sha512_hmac_drbg.h">
+      <Filter>DC\crypto_fast</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_fast\sha512_pkcs5_2.h">
+      <Filter>DC\crypto_fast</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_fast\twofish.h">
+      <Filter>DC\crypto_fast</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_fast\xts_aes_ni.h">
+      <Filter>DC\crypto_fast</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_fast\xts_fast.h">
+      <Filter>DC\crypto_fast</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_fast\xts_serpent_avx.h">
+      <Filter>DC\crypto_fast</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_fast\xts_serpent_sse2.h">
+      <Filter>DC\crypto_fast</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_small\aes_small.h">
+      <Filter>DC\crypto_small</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_small\serpent_small.h">
+      <Filter>DC\crypto_small</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_small\sha512_pkcs5_2_small.h">
+      <Filter>DC\crypto_small</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_small\sha512_small.h">
+      <Filter>DC\crypto_small</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_small\twofish_small.h">
+      <Filter>DC\crypto_small</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\crypto_small\xts_small.h">
+      <Filter>DC\crypto_small</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\include\volume.h">
+      <Filter>DC\include</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\include\boot\dc_header.h">
+      <Filter>DC\include\boot</Filter>
+    </ClInclude>
+    <ClInclude Include="dc\include\defines.h">
+      <Filter>DC\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ImageFileIO.cpp">
+      <Filter>DiskIO</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalMemoryIO.cpp">
+      <Filter>DiskIO</Filter>
+    </ClCompile>
+    <ClCompile Include="VirtualMemoryIO.cpp">
+      <Filter>DiskIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\helpers.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="ImDiskIO.cpp">
+      <Filter>ImBox</Filter>
+    </ClCompile>
+    <ClCompile Include="ImBox.cpp">
+      <Filter>ImBox</Filter>
+    </ClCompile>
+    <ClCompile Include="CryptoIO.cpp">
+      <Filter>ImBox</Filter>
+    </ClCompile>
+    <ClCompile Include="dc\crypto_fast\aes_key.c">
+      <Filter>DC\crypto_fast</Filter>
+    </ClCompile>
+    <ClCompile Include="dc\crypto_fast\crc32.c">
+      <Filter>DC\crypto_fast</Filter>
+    </ClCompile>
+    <ClCompile Include="dc\crypto_fast\serpent.c">
+      <Filter>DC\crypto_fast</Filter>
+    </ClCompile>
+    <ClCompile Include="dc\crypto_fast\sha512.c">
+      <Filter>DC\crypto_fast</Filter>
+    </ClCompile>
+    <ClCompile Include="dc\crypto_fast\sha512_hmac.c">
+      <Filter>DC\crypto_fast</Filter>
+    </ClCompile>
+    <ClCompile Include="dc\crypto_fast\sha512_hmac_drbg.c">
+      <Filter>DC\crypto_fast</Filter>
+    </ClCompile>
+    <ClCompile Include="dc\crypto_fast\sha512_pkcs5_2.c">
+      <Filter>DC\crypto_fast</Filter>
+    </ClCompile>
+    <ClCompile Include="dc\crypto_fast\twofish.c">
+      <Filter>DC\crypto_fast</Filter>
+    </ClCompile>
+    <ClCompile Include="dc\crypto_fast\xts_fast.c">
+      <Filter>DC\crypto_fast</Filter>
+    </ClCompile>
+    <ClCompile Include="dc\crypto_fast\xts_serpent_sse2.c">
+      <Filter>DC\crypto_fast</Filter>
+    </ClCompile>
+    <ClCompile Include="dc\crypto_small\aes_small.c">
+      <Filter>DC\crypto_small</Filter>
+    </ClCompile>
+    <ClCompile Include="dc\crypto_small\serpent_small.c">
+      <Filter>DC\crypto_small</Filter>
+    </ClCompile>
+    <ClCompile Include="dc\crypto_small\sha512_pkcs5_2_small.c">
+      <Filter>DC\crypto_small</Filter>
+    </ClCompile>
+    <ClCompile Include="dc\crypto_small\sha512_small.c">
+      <Filter>DC\crypto_small</Filter>
+    </ClCompile>
+    <ClCompile Include="dc\crypto_small\twofish_small.c">
+      <Filter>DC\crypto_small</Filter>
+    </ClCompile>
+    <ClCompile Include="dc\crypto_small\xts_small.c">
+      <Filter>DC\crypto_small</Filter>
+    </ClCompile>
+    <ClCompile Include="dc\dc_header.c">
+      <Filter>DC</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ImBox.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ImBox.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="small.ico">
+      <Filter>Header Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="dc\crypto_fast\amd64\aes_amd64.asm">
+      <Filter>DC\crypto_fast\amd64</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dc\crypto_fast\amd64\aes_padlock_amd64.asm">
+      <Filter>DC\crypto_fast\amd64</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dc\crypto_fast\amd64\twofish_amd64.asm">
+      <Filter>DC\crypto_fast\amd64</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dc\crypto_fast\amd64\xts_aes_ni_amd64.asm">
+      <Filter>DC\crypto_fast\amd64</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dc\crypto_fast\amd64\xts_serpent_avx_amd64.asm">
+      <Filter>DC\crypto_fast\amd64</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dc\crypto_fast\amd64\xts_serpent_sse2_amd64.asm">
+      <Filter>DC\crypto_fast\amd64</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dc\crypto_fast\i386\aes_i386.asm">
+      <Filter>DC\crypto_fast\i386</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dc\crypto_fast\i386\aes_padlock_i386.asm">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dc\crypto_fast\i386\twofish_i386.asm">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dc\crypto_fast\i386\xts_aes_ni_i386.asm">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dc\crypto_fast\i386\xts_serpent_avx_i386.asm">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dc\crypto_fast\i386\xts_serpent_sse2_i386.asm">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

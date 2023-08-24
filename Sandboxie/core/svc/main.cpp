@@ -22,6 +22,7 @@
 #include "stdafx.h"
 
 #include <Sddl.h>
+#include "MountManager.h"
 #include "DriverAssist.h"
 #include "PipeServer.h"
 #include "GuiServer.h"
@@ -233,6 +234,7 @@ DWORD InitializePipe(void)
     new IpHlpServer(pipeServer);
     new NetApiServer(pipeServer);
     new QueueServer(pipeServer);
+    new MountManager(pipeServer);
     new EpMapperServer(pipeServer);
 
     if (! pipeServer->Start())
@@ -285,6 +287,8 @@ DWORD WINAPI ServiceHandlerEx(
             pComServer->DeleteAllSlaves();
 
         DriverAssist::Shutdown();
+
+        MountManager::Shutdown();
 
     } else if (dwControl != SERVICE_CONTROL_INTERROGATE)
         return ERROR_CALL_NOT_IMPLEMENTED;

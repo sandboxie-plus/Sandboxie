@@ -31,6 +31,8 @@
 #include "core/svc/msgids.h"
 #include "core/svc/SbieIniWire.h"
 #include "core/svc/ProcessWire.h"
+#include "core/drv/api_defs.h"
+#include "core/svc/MountManagerWire.h"
 #include "common/my_version.h"
 
 
@@ -365,6 +367,80 @@ _FX BOOLEAN SbieDll_KillAll(ULONG SessionId, const WCHAR *BoxName)
     req.h.msgid = MSGID_PROCESS_KILL_ALL;
     req.session_id = SessionId;
     wcscpy(req.boxname, BoxName ? BoxName : Dll_BoxName);
+
+    rpl = SbieDll_CallServer(&req.h);
+
+    if (rpl) {
+        if (rpl->status == 0)
+            ok = TRUE;
+        Dll_Free(rpl);
+    }
+
+    return ok;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_Mount
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN SbieDll_Mount(const WCHAR* BoxName, const WCHAR* BoxKey, BOOLEAN Protect)
+{
+    ULONG req_len;
+    IMBOX_MOUNT_REQ* req;
+    MSG_HEADER *rpl = NULL;
+    ULONG file_path_len = 0;
+    ULONG reg_path_len;
+    BOOLEAN ok = FALSE;
+
+    if (!NT_SUCCESS(SbieApi_QueryBoxPath(BoxName, NULL, NULL, NULL, &file_path_len, NULL, NULL)))
+        return FALSE;
+
+    req_len = sizeof(IMBOX_MOUNT_REQ) + file_path_len;
+    req = Dll_Alloc(req_len);
+
+    req->h.length = req_len;
+    req->h.msgid = MSGID_IMBOX_MOUNT;
+
+    wcscpy(req->password, BoxKey);
+    req->protect_root = Protect;
+    req->auto_unmount = FALSE;
+
+    reg_path_len = MAX_REG_ROOT_LEN;
+    if (NT_SUCCESS(SbieApi_QueryBoxPath(BoxName, req->file_root, req->reg_root, NULL, &file_path_len, &reg_path_len, NULL))) {
+
+        rpl = SbieDll_CallServer(&req->h);
+    }
+    Dll_Free(req);
+
+    if (rpl) {
+        if (rpl->status == 0)
+            ok = TRUE;
+        Dll_Free(rpl);
+    }
+
+    return ok;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_Unmount
+//---------------------------------------------------------------------------
+
+
+_FX BOOLEAN SbieDll_Unmount(const WCHAR *BoxName)
+{
+    IMBOX_UNMOUNT_REQ req;
+    MSG_HEADER *rpl;
+    BOOLEAN ok = FALSE;
+
+    req.h.length = sizeof(IMBOX_UNMOUNT_REQ);
+    req.h.msgid = MSGID_IMBOX_UNMOUNT;
+
+    ULONG reg_len = MAX_REG_ROOT_LEN;
+    if (!NT_SUCCESS(SbieApi_QueryBoxPath(BoxName, NULL, req.reg_root, NULL, NULL, &reg_len, NULL)))
+        return FALSE;
 
     rpl = SbieDll_CallServer(&req.h);
 

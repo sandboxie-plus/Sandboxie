@@ -105,6 +105,9 @@ SbieDll_AssocQueryProgram=_SbieDll_AssocQueryProgram@4
 SbieDll_KillAll=_SbieDll_KillAll@8
 SbieDll_KillOne=_SbieDll_KillOne@4
 
+SbieDll_Mount=_SbieDll_Mount@12
+SbieDll_Unmount=_SbieDll_Unmount@4
+
 SbieDll_RegisterDllCallback=_SbieDll_RegisterDllCallback@4
 SbieDll_RunFromHome=_SbieDll_RunFromHome@16
 SbieDll_RunSandboxed=_SbieDll_RunSandboxed@24

@@ -9,6 +9,8 @@
 #include "../QSbieAPI/SbieUtils.h"
 #include "../Views/SbieView.h"
 #include "../MiscHelpers/Common/CheckableMessageBox.h"
+#include "../Windows/BoxImageWindow.h"
+#include "../AddonManager.h"
 
 
 CNewBoxWizard::CNewBoxWizard(bool bAlowTemp, QWidget *parent)
@@ -54,6 +56,35 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
     BoxName.replace(" ", "_");
 	int BoxType = field("boxType").toInt();
 
+    QString Password;
+    quint64 ImageSize = 0;
+    if (BoxType == CSandBoxPlus::ePrivate) {
+        CBoxImageWindow window(CBoxImageWindow::eNew, this);
+        if (theGUI->SafeExec(&window) == 1) {
+            Password = window.GetPassword();
+            ImageSize = window.GetImageSize();
+
+            if (theConf->GetBool("Options/WarnBoxCrypto", true)) {
+                bool State = false;
+                if(CCheckableMessageBox::question(this, "Sandboxie-Plus",
+                    tr("This sandbox content will be placed in an encrypted container file, "
+                        "please note that any corruption of the container's header will render all its content permanently innaccessible. "
+                        "Corruption can occur as a result of a BSOD, a storage hadrware failure, or a maliciouse application overwriting random files. "
+                        "This feature is provided under a strickt <b>No Backup No Mercy</b> policy, YOU the user are responsible for the data you put into an encrypted box. "
+                        "<br /><br />"
+                        "IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].")
+                    , tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::No, QMessageBox::Warning) != QDialogButtonBox::Yes)
+                        return SB_ERR(SB_Canceled);
+
+                if (State)
+                    theConf->SetValue("Options/WarnBoxCrypto", false);
+            }
+
+        }
+        else
+            return SB_ERR(SB_Canceled);
+    }
+
 	SB_STATUS Status = theAPI->CreateBox(BoxName, true);
 
 	if (!Status.IsError())
@@ -80,6 +111,12 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 				//pBox->InsertText("Template", "NoUACProxy"); // proxy is always needed for exes in the box
 				pBox->InsertText("Template", "RpcPortBindingsExt");
 				break;
+
+            case CSandBoxPlus::ePrivate: {
+                pBox->SetBool("UseFileImage", true);
+                pBox->SetBool("ConfidentialBox", true);
+                break;
+            }
 		}
 
 		QRgb rgb = theGUI->GetBoxColor(BoxType);
@@ -132,6 +169,9 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 
         if(field("imagesProtection").toBool())
             pBox->SetBool("ProtectHostImages", true);
+
+        if (!Password.isEmpty())
+            pBox->ImBoxCreate(ImageSize / 1024, Password);
 
         if (field("boxVersion").toInt() == 1) {
             if (theConf->GetBool("Options/WarnDeleteV2", true)) {
@@ -266,6 +306,11 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
         tr("This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. \n"
             "While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment."));
     
+    AddBoxType(tr("<a href=\"sbie://docs/boxencryption\">Encrypted</a> <a href=\"sbie://docs/black-box\">Confidential</a> Box"), (int)CSandBoxPlus::ePrivate,
+        tr("In this box type the sandbox uses an encrypted disk image as its root folder. This provides an additional layer of privacy and security. \n"
+            "Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes. \n"
+            "This ensures the utmost level of privacy and data protection within the confidential sandbox environment."));//, true);
+
     connect(m_TypeGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SIGNAL(typeChanged()));
     registerField("boxType", this, "currentType", "typeChanged");
 
@@ -287,6 +332,7 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
 	//m_pBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eInsecure), tr("INSECURE Configuration (please change)"), (int)CSandBoxPlus::eInsecure);
 	if (bAll) m_pBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBoxPlus), tr("Application Compartment with Data Protection"), (int)CSandBoxPlus::eAppBoxPlus);
 	m_pBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBox), tr("Application Compartment Box"), (int)CSandBoxPlus::eAppBox);
+    m_pBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::ePrivate), tr("Confidential Encrypted Box"), (int)CSandBoxPlus::ePrivate);
     connect(m_pBoxType, SIGNAL(currentIndexChanged(int)), this, SLOT(OnBoxTypChanged()));
     layout->addWidget(m_pBoxType, row++, 1, 1, 2);
     registerField("boxType", m_pBoxType, "currentData", "currentIndexChanged");
@@ -311,6 +357,12 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
     registerField("autoRemove", pTemp);
 
     m_pAdvanced = new QCheckBox(tr("Configure advanced options"));
+    if (theGUI->m_DarkTheme) {
+        QPalette palette = QApplication::palette();
+        palette.setColor(QPalette::Base, Qt::white);
+        palette.setColor(QPalette::Text, Qt::black);
+        m_pAdvanced->setPalette(palette);
+    }
     m_pAdvanced->setChecked(theConf->GetBool("Options/AdvancedBoxWizard", false));
     layout->addWidget(m_pAdvanced, row++, 2, 1, 1);
     connect(m_pAdvanced, SIGNAL(toggled(bool)), this, SLOT(OnAdvanced()));
@@ -340,7 +392,7 @@ void CBoxTypePage::OnBoxTypChanged()
 #endif
 
     if(BoxType != CSandBoxPlus::eDefault)
-		theGUI->CheckCertificate(this);
+		theGUI->CheckCertificate(this, BoxType == CSandBoxPlus::ePrivate);
 
     emit completeChanged();
 }
@@ -384,6 +436,17 @@ bool CBoxTypePage::validatePage()
     QString BoxName = field("boxName").toString();
     if (!theGUI->GetBoxView()->TestNameAndWarn(BoxName))
         return false;
+
+#ifndef USE_COMBO
+    int BoxType = m_TypeGroup->checkedId();
+#else
+	int BoxType = m_pBoxType->currentData().toInt();
+#endif
+
+    if ((BoxType == CSandBoxPlus::ePrivate || BoxType == CSandBoxPlus::ePrivatePlus) && !theGUI->IsImDiskReady()) {
+        theGUI->GetAddonManager()->TryInstallAddon("ImDisk", this, tr("To use ancrypted boxes you need to install the ImDisk driver, do you want to download and install it?"));
+        return false;
+    }
 
     if (m_bInstant && !m_pAdvanced->isChecked())
         return !((CNewBoxWizard*)wizard())->TryToCreateBox().IsError();

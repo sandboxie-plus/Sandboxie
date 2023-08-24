@@ -67,11 +67,19 @@ protected:
 
 	struct SSandBoxNode: STreeNode
 	{
-		SSandBoxNode(CTreeItemModel* pModel, const QVariant& Id) : STreeNode(pModel, Id) { inUse = false; bOpen = false; busyState = 0; boxType = -1; boxDel = false; boxNoForce = false; boxColor = 0; OrderNumber = 0; }
+		SSandBoxNode(CTreeItemModel* pModel, const QVariant& Id) : STreeNode(pModel, Id) { 
+			inUse = false;  
+			busyState = 0; 
+			boxType = -1; 
+			boxDel = false; 
+			boxNoForce = false; 
+			boxColor = 0; 
+			OrderNumber = 0; 
+			MountState = eNone;
+		}
 
 		CSandBoxPtr	pBox;
 		bool		inUse;
-		bool		bOpen;
 		int			busyState;
 		int			boxType;
 		bool		boxDel;
@@ -79,6 +87,12 @@ protected:
 		int			boxColor;
 		int			OrderNumber;
 		QString		BoxIcon;
+		enum EMountState{
+			eNone = 0,
+			eMounted,
+			eUnmounted,
+			eRamDisk
+		}			MountState;
 
 		CBoxedProcessPtr pProcess;
 	};

@@ -123,6 +123,14 @@
 #define MSGID_IPHLP_SEND_ECHO                   0x1C03
 #define MSGID_IPHLP_NOTIFICATION                0x1CFF
 
+#define MSGID_IMBOX                             0x1D00
+#define MSGID_IMBOX_CREATE                      0x1D01
+#define MSGID_IMBOX_MOUNT                       0x1D02
+#define MSGID_IMBOX_UNMOUNT                     0x1D03
+#define MSGID_IMBOX_ENUM                        0x1D04
+#define MSGID_IMBOX_QUERY                       0x1D05
+#define MSGID_IMBOX_UPDATE                      0x1D06
+
 #define MSGID_QUEUE                             0x1E00
 #define MSGID_QUEUE_CREATE                      0x1E01
 #define MSGID_QUEUE_GETREQ                      0x1E02

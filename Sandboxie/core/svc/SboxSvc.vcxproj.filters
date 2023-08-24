@@ -78,6 +78,12 @@
     <ClCompile Include="DriverAssistSid.cpp">
       <Filter>DriverAssist</Filter>
     </ClCompile>
+    <ClCompile Include="MountManager.cpp">
+      <Filter>MountManager</Filter>
+    </ClCompile>
+    <ClCompile Include="MountManagerHelpers.cpp">
+      <Filter>MountManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="misc.h" />
@@ -144,6 +150,12 @@
     <ClInclude Include="..\..\common\ini.h">
       <Filter>common</Filter>
     </ClInclude>
+    <ClInclude Include="MountManagerWire.h">
+      <Filter>MountManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MountManager.h">
+      <Filter>MountManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -163,6 +175,9 @@
     </Filter>
     <Filter Include="NetProxy">
       <UniqueIdentifier>{64abb84f-3356-45fc-a1ee-bbce8eaa90cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MountManager">
+      <UniqueIdentifier>{4c490d1f-52cb-4e6b-be53-6b120e0d271a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

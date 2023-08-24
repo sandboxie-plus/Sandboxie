@@ -91,11 +91,11 @@
 
 
 #define SPOOLER_PORT_ID				L"PrintSpooler"
-#define WPAD_PORT_ID				L"WPAD"
-#define GAME_CONFIG_STORE_PORT_ID	L"GamePort"
-#define SMART_CARD_PORT_ID			L"SmartCard"
-#define BT_PORT_ID					L"bthserv"
-#define SSDP_PORT_ID				L"ssdpsrv"
+//#define WPAD_PORT_ID				L"WPAD"
+//#define GAME_CONFIG_STORE_PORT_ID	L"GamePort"
+//#define SMART_CARD_PORT_ID			L"SmartCard"
+//#define BT_PORT_ID					L"bthserv"
+//#define SSDP_PORT_ID				L"ssdpsrv"
 
 //---------------------------------------------------------------------------
 

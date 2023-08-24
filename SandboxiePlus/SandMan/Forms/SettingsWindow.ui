@@ -1260,6 +1260,100 @@
              </item>
             </layout>
            </widget>
+           <widget class="QWidget" name="tabAddonConfig">
+            <attribute name="title">
+             <string>Addon Configuration</string>
+            </attribute>
+            <layout class="QGridLayout" name="gridLayout_40">
+             <item row="0" column="0">
+              <layout class="QGridLayout" name="gridLayout_39">
+               <item row="2" column="4">
+                <widget class="QLineEdit" name="txtRamLimit">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1" colspan="2">
+                <widget class="QCheckBox" name="chkRamDisk">
+                 <property name="text">
+                  <string>Enable Ram Disk creation</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="5">
+                <widget class="QLabel" name="lblRamLimit">
+                 <property name="text">
+                  <string>kilobytes</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="lblDiskImage">
+                 <property name="font">
+                  <font>
+                   <bold>true</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Disk Image Support</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <spacer name="verticalSpacer_13">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="3">
+                <widget class="QLabel" name="lblRamDisk">
+                 <property name="text">
+                  <string>RAM Limit</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="2" colspan="4">
+                <spacer name="horizontalSpacer_10">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="1" colspan="5">
+                <widget class="QLabel" name="lblImDisk">
+                 <property name="text">
+                  <string>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</string>
+                 </property>
+                 <property name="openExternalLinks">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
           </widget>
          </item>
         </layout>

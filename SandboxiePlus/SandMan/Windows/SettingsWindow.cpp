@@ -88,7 +88,7 @@ quint32 g_FeatureFlags = 0;
 QByteArray g_Certificate;
 SCertInfo g_CertInfo = { 0 };
 
-void COptionsWindow__AddCertIcon(QWidget* pOriginalWidget);
+void COptionsWindow__AddCertIcon(QWidget* pOriginalWidget, bool bAdvanced = false);
 
 CSettingsWindow::CSettingsWindow(QWidget* parent)
 	: CConfigDialog(parent)
@@ -142,7 +142,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	ui.tabsAddons->setCurrentIndex(0);
 	ui.tabsAddons->setTabIcon(0, CSandMan::GetIcon("Plugin"));
-	//ui.tabsAddons->setTabIcon(1, CSandMan::GetIcon("Qube"));
+	ui.tabsAddons->setTabIcon(1, CSandMan::GetIcon("Qube"));
 
 	ui.tabsSupport->setCurrentIndex(0);
 	ui.tabsSupport->setTabIcon(0, CSandMan::GetIcon("Cert"));
@@ -179,6 +179,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	AddIconToLabel(ui.lblDisplay, CSandMan::GetIcon("Advanced").pixmap(size,size));
 	AddIconToLabel(ui.lblIni, CSandMan::GetIcon("EditIni").pixmap(size,size));
+
+	AddIconToLabel(ui.lblDiskImage, CSandMan::GetIcon("Disk").pixmap(size,size));
 
 	AddIconToLabel(ui.lblBoxRoot, CSandMan::GetIcon("Sandbox").pixmap(size,size));
 	AddIconToLabel(ui.lblBoxFeatures, CSandMan::GetIcon("Miscellaneous").pixmap(size,size));
@@ -364,6 +366,16 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		theGUI->GetAddonManager()->UpdateAddons();
 	});
 
+	connect(ui.chkRamDisk, SIGNAL(stateChanged(int)), this, SLOT(OnRamDiskChange()));
+	connect(ui.lblImDisk, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+	QObject::connect(theGUI->GetAddonManager(), &CAddonManager::AddonInstalled, this, [=] {
+		if (!theGUI->GetAddonManager()->GetAddon("ImDisk", CAddonManager::eInstalled).isNull()) {
+			ui.lblImDisk->setVisible(false);
+			ui.chkRamDisk->setEnabled(true);
+			OnRamDiskChange();
+		}
+	});
+	connect(ui.txtRamLimit, SIGNAL(textChanged(const QString&)), this, SLOT(OnRamDiskChange()));
 	//
 
 	// Advanced Config
@@ -880,6 +892,9 @@ void CSettingsWindow::LoadSettings()
 
 	OnLoadAddon();
 
+	bool bImDiskReady = theGUI->IsImDiskReady();
+	ui.lblImDisk->setVisible(!bImDiskReady);
+
 	if (theAPI->IsConnected())
 	{
 		ui.treeMessages->clear();
@@ -911,6 +926,14 @@ void CSettingsWindow::LoadSettings()
 		//ui.chkSeparateUserFolders->setChecked(theAPI->GetGlobalSettings()->GetBool("SeparateUserFolders", true));
 		ui.regRoot->setText(theAPI->GetGlobalSettings()->GetText("KeyRootPath", KeyRootPath_Default));
 		ui.ipcRoot->setText(theAPI->GetGlobalSettings()->GetText("IpcRootPath", IpcRootPath_Default));
+
+		ui.chkRamDisk->setEnabled(bImDiskReady);
+		quint32 uDiskLimit = theAPI->GetGlobalSettings()->GetNum64("RamDiskSizeKb");
+		ui.chkRamDisk->setChecked(uDiskLimit > 0);
+		if(uDiskLimit > 0) ui.txtRamLimit->setText(QString::number(uDiskLimit));
+		m_HoldChange = true;
+		OnRamDiskChange();
+		m_HoldChange = false;
 
 		ui.chkWFP->setChecked(theAPI->GetGlobalSettings()->GetBool("NetworkEnableWFP", false));
 		ui.chkObjCb->setChecked(theAPI->GetGlobalSettings()->GetBool("EnableObjectFiltering", true));
@@ -955,6 +978,9 @@ void CSettingsWindow::LoadSettings()
 		ui.chkSbieLogon->setEnabled(false);
 		ui.regRoot->setEnabled(false);
 		ui.ipcRoot->setEnabled(false);
+		ui.chkRamDisk->setEnabled(false);
+		ui.txtRamLimit->setEnabled(false);
+		ui.lblRamLimit->setEnabled(false);
 		ui.chkAdminOnly->setEnabled(false);
 		ui.chkPassRequired->setEnabled(false);
 		ui.chkAdminOnlyFP->setEnabled(false);
@@ -1018,11 +1044,25 @@ void CSettingsWindow::LoadSettings()
 	ui.chkUpdateIssues->setEnabled(g_CertInfo.active && !g_CertInfo.expired);
 }
 
+void CSettingsWindow::OnRamDiskChange()
+{
+	if (ui.chkRamDisk->isChecked() && ui.txtRamLimit->text().isEmpty())
+		ui.txtRamLimit->setText(QString::number(2 * 1024 * 1024));
+
+	bool bEnabled = ui.chkRamDisk->isChecked() && ui.chkRamDisk->isEnabled();
+	ui.lblRamDisk->setEnabled(bEnabled);
+	ui.txtRamLimit->setEnabled(bEnabled);
+	ui.lblRamLimit->setEnabled(bEnabled);
+	ui.lblRamLimit->setText(tr("kilobytes (%1)").arg(FormatSize(ui.txtRamLimit->text().toULongLong() * 1024)));
+
+	OnGeneralChanged();
+}
+
 void CSettingsWindow::UpdateCert()
 {
 	ui.lblCertExp->setVisible(false);
 	//ui.lblCertLevel->setVisible(!g_Certificate.isEmpty());
-	if (!g_Certificate.isEmpty())
+	if (!g_Certificate.isEmpty()) 
 	{
 		ui.txtCertificate->setPlainText(g_Certificate);
 		//ui.lblSupport->setVisible(false);
@@ -1035,26 +1075,25 @@ void CSettingsWindow::UpdateCert()
 			QString infoMsg = tr("This supporter certificate has expired, please <a href=\"https://sandboxie-plus.com/go.php?to=sbie-renew-cert\">get an updated certificate</a>.");
 			if (g_CertInfo.active) {
 				if (g_CertInfo.grace_period)
-					infoMsg.append(tr("<br /><font color='red'>Plus features will be disabled in %1 days.</font>").arg((g_CertInfo.expirers_in_sec + 30 * 60 * 60 * 24) / (60 * 60 * 24)));
+					infoMsg.append(tr("<br /><font color='red'>Plus features will be disabled in %1 days.</font>").arg((g_CertInfo.expirers_in_sec + 30*60*60*24) / (60*60*24)));
 				else if (!g_CertInfo.outdated) // must be an expiren medium or large cert on an old build
 					infoMsg.append(tr("<br /><font color='red'>For the current build Plus features remain enabled</font>, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database."));
-			}
-			else
+			} else
 				infoMsg.append(tr("<br />Plus features are no longer enabled."));
 			ui.lblCertExp->setText(infoMsg);
 			ui.lblCertExp->setVisible(true);
 		}
 		else {
 			if (g_CertInfo.expirers_in_sec > 0 && g_CertInfo.expirers_in_sec < (60 * 60 * 24 * 30)) {
-				ui.lblCertExp->setText(tr("This supporter certificate will <font color='red'>expire in %1 days</font>, please <a href=\"https://sandboxie-plus.com/go.php?to=sbie-renew-cert\">get an updated certificate</a>.").arg(g_CertInfo.expirers_in_sec / (60 * 60 * 24)));
+				ui.lblCertExp->setText(tr("This supporter certificate will <font color='red'>expire in %1 days</font>, please <a href=\"https://sandboxie-plus.com/go.php?to=sbie-renew-cert\">get an updated certificate</a>.").arg(g_CertInfo.expirers_in_sec / (60*60*24)));
 				ui.lblCertExp->setVisible(true);
 			}
-			/*#ifdef _DEBUG
-						else {
-							ui.lblCertExp->setText(tr("This supporter certificate is valid, <a href=\"https://sandboxie-plus.com/go.php?to=sbie-renew-cert\">check for an updated certificate</a>."));
-							ui.lblCertExp->setVisible(true);
-						}
-			#endif*/
+/*#ifdef _DEBUG
+			else {
+				ui.lblCertExp->setText(tr("This supporter certificate is valid, <a href=\"https://sandboxie-plus.com/go.php?to=sbie-renew-cert\">check for an updated certificate</a>."));
+				ui.lblCertExp->setVisible(true);
+			}
+#endif*/
 			palette.setColor(QPalette::Base, QColor(192, 255, 192));
 		}
 		ui.txtCertificate->setPalette(palette);
@@ -1395,6 +1434,8 @@ void CSettingsWindow::SaveSettings()
 				//WriteAdvancedCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", "", "n");
 				WriteText("KeyRootPath", ui.regRoot->text()); //ui.regRoot->setText("\\REGISTRY\\USER\\Sandbox_%USER%_%SANDBOX%");
 				WriteText("IpcRootPath", ui.ipcRoot->text()); //ui.ipcRoot->setText("\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%");
+
+				WriteText("RamDiskSizeKb", ui.chkRamDisk->isChecked() ? ui.txtRamLimit->text() : "");
 
 				WriteAdvancedCheck(ui.chkWFP, "NetworkEnableWFP", "y", "");
 				WriteAdvancedCheck(ui.chkObjCb, "EnableObjectFiltering", "", "n");

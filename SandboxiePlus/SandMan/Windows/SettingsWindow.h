@@ -98,6 +98,8 @@ private slots:
 
 	void OnBrowse();
 
+	void OnRamDiskChange();
+
 	void OnProtectionChange();
 	void OnSetPassword();
 

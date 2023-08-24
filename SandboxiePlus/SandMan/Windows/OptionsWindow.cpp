@@ -160,6 +160,8 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	
 	m_HoldChange = false;
 
+	m_ImageSize = 2ull*1024*1024*1024;
+
 	QSharedPointer<CSandBoxPlus> pBoxPlus = m_pBox.objectCast<CSandBoxPlus>();
 	if (!pBoxPlus.isNull())
 		m_Programs = pBoxPlus->GetRecentPrograms();
@@ -207,7 +209,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabsSecurity->setCurrentIndex(0);
 	ui.tabsSecurity->setTabIcon(0, CSandMan::GetIcon("Shield7"));
 	ui.tabsSecurity->setTabIcon(1, CSandMan::GetIcon("Fence"));
-	ui.tabsSecurity->setTabIcon(2, CSandMan::GetIcon("Shield2"));
+	ui.tabsSecurity->setTabIcon(2, CSandMan::GetIcon("Shield15"));
 	ui.tabsSecurity->setTabIcon(3, CSandMan::GetIcon("Shield12"));
 
 	ui.tabsForce->setCurrentIndex(0);
@@ -221,8 +223,6 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabsInternet->setCurrentIndex(0);
 	ui.tabsInternet->setTabIcon(0, CSandMan::GetIcon("Program"));
 	ui.tabsInternet->setTabIcon(1, CSandMan::GetIcon("Wall"));
-	ui.tabsInternet->setTabIcon(2, CSandMan::GetIcon("DNS"));
-	ui.tabsInternet->setTabIcon(3, CSandMan::GetIcon("Proxy"));
 
 	ui.tabsAccess->setCurrentIndex(0);
 	ui.tabsAccess->setTabIcon(0, CSandMan::GetIcon("Folder"));
@@ -237,14 +237,17 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	ui.tabsRecovery->setTabIcon(0, CSandMan::GetIcon("QuickRecovery"));
 	ui.tabsRecovery->setTabIcon(1, CSandMan::GetIcon("ImmidiateRecovery"));
 
+	ui.tabsOther->setCurrentIndex(0);
+	ui.tabsOther->setTabIcon(0, CSandMan::GetIcon("Presets"));
+	ui.tabsOther->setTabIcon(1, CSandMan::GetIcon("Dll"));
+
 	ui.tabsAdvanced->setCurrentIndex(0);
 	ui.tabsAdvanced->setTabIcon(0, CSandMan::GetIcon("Presets"));
 	ui.tabsAdvanced->setTabIcon(1, CSandMan::GetIcon("Trigger"));
 	ui.tabsAdvanced->setTabIcon(2, CSandMan::GetIcon("Anon"));
 	ui.tabsAdvanced->setTabIcon(3, CSandMan::GetIcon("Users"));
-	ui.tabsAdvanced->setTabIcon(4, CSandMan::GetIcon("Presets"));
-	ui.tabsAdvanced->setTabIcon(5, CSandMan::GetIcon("SetLogging"));
-	ui.tabsAdvanced->setTabIcon(6, CSandMan::GetIcon("Bug"));
+	ui.tabsAdvanced->setTabIcon(4, CSandMan::GetIcon("SetLogging"));
+	ui.tabsAdvanced->setTabIcon(5, CSandMan::GetIcon("Bug"));
 
 	ui.tabsTemplates->setCurrentIndex(0);
 	ui.tabsTemplates->setTabIcon(0, CSandMan::GetIcon("Template"));
@@ -261,8 +264,6 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 
 	QWidget* pDummy = new QWidget(this);
 	pDummy->setVisible(false);
-
-	ui.tabs->removeTab(9); // remove unused variouse options tab
 
 	// merge recovery tabs
 	QWidget* pWidget3 = new QWidget();
@@ -355,6 +356,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	AddIconToLabel(ui.lblRawDisk, CSandMan::GetIcon("Disk").pixmap(size,size));
 	AddIconToLabel(ui.lblSecurity, CSandMan::GetIcon("Shield5").pixmap(size,size));
 	AddIconToLabel(ui.lblElevation, CSandMan::GetIcon("Shield9").pixmap(size,size));
+	AddIconToLabel(ui.lblBoxProtection, CSandMan::GetIcon("BoxConfig").pixmap(size,size));
 	AddIconToLabel(ui.lblNetwork, CSandMan::GetIcon("Network").pixmap(size,size));
 	AddIconToLabel(ui.lblPrinting, CSandMan::GetIcon("Printer").pixmap(size,size));
 	AddIconToLabel(ui.lblOther, CSandMan::GetIcon("NoAccess").pixmap(size,size));
@@ -954,7 +956,7 @@ void COptionsWindow::SaveConfig()
 	}
 	catch (SB_STATUS Status)
 	{
-		theGUI->CheckResults(QList<SB_STATUS>() << Status, this);
+		theGUI->CheckResults(QList<SB_STATUS>() << Status, theGUI);
 	}
 
 	m_pBox->SetRefreshOnChange(true);
@@ -964,11 +966,11 @@ void COptionsWindow::SaveConfig()
 		TriggerPathReload();
 }
 
-void COptionsWindow::apply()
+bool COptionsWindow::apply()
 {
 	if (m_pBox->GetText("Enabled").isEmpty() && !(m_Template && m_pBox->GetName().mid(9, 6).compare("Local_", Qt::CaseInsensitive) == 0)) {
 		QMessageBox::critical(this, "Sandboxie-Plus", tr("This sandbox has been deleted hence configuration can not be saved."));
-		return;
+		return false;
 	}
 
 	CloseINetEdit();
@@ -979,7 +981,20 @@ void COptionsWindow::apply()
 	if (!ui.btnEditIni->isEnabled())
 		SaveIniSection();
 	else
+	{
+		if (m_GeneralChanged) {
+			CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+			if (ui.chkEncrypt->isChecked() && !QFile::exists(pBoxEx->GetBoxImagePath())) {
+				if (m_Password.isEmpty())
+					OnSetPassword();
+				if (m_Password.isEmpty())
+					return false;
+				pBoxEx->ImBoxCreate(m_ImageSize / 1024, m_Password);
+			}
+		}
+
 		SaveConfig();
+	}
 
 	LoadConfig();
 
@@ -988,13 +1003,14 @@ void COptionsWindow::apply()
 	//emit OptionsChanged();
 
 	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
+
+	return true;
 }
 
 void COptionsWindow::ok()
 {
-	apply();
-
-	this->close();
+	if(apply())
+		close();
 }
 
 void COptionsWindow::reject()

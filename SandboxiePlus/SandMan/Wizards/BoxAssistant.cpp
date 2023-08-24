@@ -226,7 +226,10 @@ CBeginPage::CBeginPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Troubleshooting Wizard"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    if (theGUI->m_DarkTheme)
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
+    else
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
 
     int row = 0;
     m_pLayout = new QGridLayout;
@@ -325,7 +328,10 @@ CGroupPage::CGroupPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Select issue from group"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    if (theGUI->m_DarkTheme)
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
+    else
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
 
     int row = 0;
     m_pLayout = new QGridLayout;
@@ -445,7 +451,10 @@ CListPage::CListPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Select issue from full list"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    if (theGUI->m_DarkTheme)
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
+    else
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
 
     int row = 0;
     m_pLayout = new QGridLayout;
@@ -798,7 +807,10 @@ CSubmitPage::CSubmitPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Submit Issue Report"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    if (theGUI->m_DarkTheme)
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
+    else
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
 
     int row = 0;
     QGridLayout* pLayout = new QGridLayout;
@@ -1048,7 +1060,10 @@ CCompletePage::CCompletePage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Troubleshooting Completed"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    if (theGUI->m_DarkTheme)
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
+    else
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
 
     QVBoxLayout *pLayout = new QVBoxLayout;
 

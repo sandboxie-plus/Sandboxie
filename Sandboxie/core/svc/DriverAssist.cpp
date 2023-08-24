@@ -35,6 +35,7 @@
 #include "core/dll/sbiedll.h"
 #include "core/drv/api_defs.h"
 #include "sbieiniserver.h"
+#include "MountManager.h"
 
 //---------------------------------------------------------------------------
 // Variables
@@ -290,7 +291,7 @@ void DriverAssist::MsgWorkerThread(void *MyMsg)
     }
     else if (msgid == SVC_MOUNTED_HIVE) {
 
-        MountedHive(data_ptr);
+        HiveMounted(data_ptr);
 
     }
     else if (msgid == SVC_UNMOUNT_HIVE) {
@@ -583,40 +584,66 @@ BOOL VolHas8dot3Support(WCHAR* path)
 
 
 //---------------------------------------------------------------------------
-// MountedHive
+// HiveMounted
 //---------------------------------------------------------------------------
 
 
-void DriverAssist::MountedHive(void *_msg)
+void DriverAssist::HiveMounted(void *_msg)
 {
     SVC_REGHIVE_MSG *msg = (SVC_REGHIVE_MSG *)_msg;
 
+	ULONG errlvl = 0;
+    WCHAR* file_root_path = NULL;
+    WCHAR* reg_root_path = NULL;
+
+    ULONG file_len = 0;
+    ULONG reg_len = 0;
+    if (!NT_SUCCESS(SbieApi_QueryProcessPath((HANDLE)msg->process_id, NULL, NULL, NULL, &file_len, &reg_len, NULL))) {
+        errlvl = 0x12;
+        goto finish;
+    }
+    file_root_path = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, file_len + 16);
+    reg_root_path = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, reg_len + 16);
+    if (!file_root_path || !reg_root_path) {
+        errlvl = 0x13;
+        goto finish;
+    }
+    if (!NT_SUCCESS(SbieApi_QueryProcessPath((HANDLE)msg->process_id, file_root_path, reg_root_path, NULL, &file_len, &reg_len, NULL))) {
+        errlvl = 0x14;
+        goto finish;
+    }
+
+    //
+    // lock box root if present
+    //
+
+    MountManager::GetInstance()->LockBoxRoot(reg_root_path, msg->session_id);
+
+    //
+    // check if the box is located on a volume without 8.3 naming
+    // as this may cause issues with old installers
+    //
+
     if (SbieApi_QueryConfBool(msg->boxname, L"EnableVerboseChecks", FALSE)) {
 
-        NTSTATUS status;
-        ULONG len = 0;
-        WCHAR* path;
+        if (SbieDll_TranslateNtToDosPath(reg_root_path)) { // wcslen(reg_root_path) > 22 &&
 
-        status = SbieApi_QueryBoxPath(msg->boxname, NULL, NULL, NULL, &len, NULL, NULL);
-        if (status != 0) return;
+            if (!VolHas8dot3Support(reg_root_path)) {
 
-        path = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, len + 16);
-        if (!path) return;
-
-        status = SbieApi_QueryBoxPath(msg->boxname, path, NULL, NULL, &len, NULL, NULL);
-        if (status == 0 && wcslen(path) > 22) {
-
-            if (SbieDll_TranslateNtToDosPath(path)) {
-
-                if (!VolHas8dot3Support(path)) {
-
-                    SbieApi_LogEx(msg->session_id, 2227, L"%S (%S)", msg->boxname, path);
-                }
+                SbieApi_LogEx(msg->session_id, 2227, L"%S (%S)", msg->boxname, reg_root_path);
             }
         }
-
-        HeapFree(GetProcessHeap(), 0, path);
     }
+
+    //
+    // finish
+    //
+
+finish:
+    if (file_root_path) 
+        HeapFree(GetProcessHeap(), 0, file_root_path);
+    if (reg_root_path) 
+        HeapFree(GetProcessHeap(), 0, reg_root_path);
 }
 
 
@@ -697,7 +724,7 @@ void DriverAssist::UnmountHive(void *_msg)
 
     while (ShouldUnmount) {
 
-        WCHAR root_path[256];
+        WCHAR root_path[MAX_REG_ROOT_LEN];
         UNICODE_STRING root_uni;
         OBJECT_ATTRIBUTES root_objattrs;
         HANDLE root_key;
@@ -724,6 +751,15 @@ void DriverAssist::UnmountHive(void *_msg)
                 break;
             if (rc == 0)
                 NtClose(root_key);
+        }
+
+        if (rc == 0) {
+
+            //
+            // unmount box container if present
+            //
+
+            MountManager::GetInstance()->ReleaseBoxRoot(root_path, false, msg->session_id);
         }
 
         if (rc != 0)

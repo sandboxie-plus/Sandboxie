@@ -57,7 +57,9 @@ void DriverAssist::InjectLow(void *_msg)
     NTSTATUS status = 0;
 	ULONG errlvl = 0;
     UCHAR SandboxieLogonSid[SECURITY_MAX_SID_SIZE] = { 0 };
-		
+    WCHAR* file_root_path = NULL;
+    WCHAR* reg_root_path = NULL;
+
 	//
 	// open new process and verify process creation time
 	//
@@ -70,10 +72,36 @@ void DriverAssist::InjectLow(void *_msg)
 	}
 
 	WCHAR boxname[BOXNAME_COUNT];
-    WCHAR exename[99];
-	errlvl = SbieApi_QueryProcessEx2((HANDLE)msg->process_id, 96, boxname, exename, NULL, NULL, NULL);
-	if (errlvl != 0)
-		goto finish;
+    if (!NT_SUCCESS(SbieApi_QueryProcessEx2((HANDLE)msg->process_id, 0, boxname, NULL, NULL, NULL, NULL))) {
+        errlvl = 0x11;
+        goto finish;
+    }
+
+    ULONG file_len = 0;
+    ULONG reg_len = 0;
+    if (!NT_SUCCESS(SbieApi_QueryProcessPath((HANDLE)msg->process_id, NULL, NULL, NULL, &file_len, &reg_len, NULL))) {
+        errlvl = 0x12;
+        goto finish;
+    }
+    file_root_path = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, file_len + 16);
+    reg_root_path = (WCHAR*)HeapAlloc(GetProcessHeap(), 0, reg_len + 16);
+    if (!file_root_path || !reg_root_path) {
+        errlvl = 0x13;
+        goto finish;
+    }
+    if (!NT_SUCCESS(SbieApi_QueryProcessPath((HANDLE)msg->process_id, file_root_path, reg_root_path, NULL, &file_len, &reg_len, NULL))) {
+        errlvl = 0x14;
+        goto finish;
+    }
+
+    //
+	// notify the box manager about a new process
+	//
+
+    //BOOLEAN IsFirst = FALSE;
+    //if (!msg->bHostInject) {
+    //    IsFirst = BoxManager::GetInstance()->ProcessCreated(msg->process_id, boxname, reg_root_path, msg->session_id);
+    //}
 
 	//
 	// inject the lowlevel.dll into the target process
@@ -91,6 +119,7 @@ void DriverAssist::InjectLow(void *_msg)
     // NoSbieCons BEGIN
     sbieLow.bNoConsole = SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"NoSandboxieConsole", FALSE);
     // NoSbieCons END
+    //sbieLow.bIsFirst = IsFirst;
 
 	errlvl = SbieDll_InjectLow(hProcess, sbieLow.init_flags, TRUE);
 	if(errlvl != 0)
@@ -115,6 +144,17 @@ void DriverAssist::InjectLow(void *_msg)
     }
 
     //
+    // mount box container if needed
+    //
+
+    //if (IsFirst) {
+        if (!MountManager::GetInstance()->AcquireBoxRoot(boxname, reg_root_path, file_root_path, msg->session_id)) {
+            errlvl = 0xAA;
+            goto finish;
+        }
+    //}
+
+    //
     // notify driver that we successfully injected the lowlevel code
     //
 
@@ -133,6 +173,10 @@ void DriverAssist::InjectLow(void *_msg)
     //
 
 finish:
+    if (file_root_path) 
+        HeapFree(GetProcessHeap(), 0, file_root_path);
+    if (reg_root_path) 
+        HeapFree(GetProcessHeap(), 0, reg_root_path);
 
 #ifdef _M_ARM64
     if (errlvl == -1)

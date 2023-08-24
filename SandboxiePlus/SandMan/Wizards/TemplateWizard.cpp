@@ -256,7 +256,10 @@ CTemplateTypePage::CTemplateTypePage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Create new Template"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    if (theGUI->m_DarkTheme)
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
+    else
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
 
     int row = 0;
     QGridLayout *layout = new QGridLayout;
@@ -934,7 +937,10 @@ CFinishTemplatePage::CFinishTemplatePage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Create Web Browser Template"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    if (theGUI->m_DarkTheme)
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
+    else
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
 
     int row = 0;
     QGridLayout *layout = new QGridLayout;

@@ -13,6 +13,7 @@
 #include "../Views/FileView.h"
 #include "../Wizards/NewBoxWizard.h"
 #include "../Helpers/WinHelper.h"
+#include "../Windows/BoxImageWindow.h"
 #include "../MiscHelpers/Archive/Archive.h"
 #include "../Windows/SettingsWindow.h"
 
@@ -204,6 +205,8 @@ void CSbieView::CreateMenu()
 		m_pMenuExplore = m_pMenuContent->addAction(CSandMan::GetIcon("Explore"), tr("Explore Content"), this, SLOT(OnSandBoxAction()));
 		m_pMenuRegEdit = m_pMenuContent->addAction(CSandMan::GetIcon("RegEdit"), tr("Open Registry"), this, SLOT(OnSandBoxAction()));
 	m_pMenuSnapshots = m_pMenuBox->addAction(CSandMan::GetIcon("Snapshots"), tr("Snapshots Manager"), this, SLOT(OnSandBoxAction()));
+	m_pMenuMount = m_pMenuBox->addAction(CSandMan::GetIcon("LockOpen"), tr("Mount Box Image"), this, SLOT(OnSandBoxAction()));
+	m_pMenuUnmount = m_pMenuBox->addAction(CSandMan::GetIcon("LockClosed"), tr("Unmount Box Image"), this, SLOT(OnSandBoxAction()));
 	m_pMenuRecover = m_pMenuBox->addAction(CSandMan::GetIcon("Recover"), tr("Recover Files"), this, SLOT(OnSandBoxAction()));
 	m_pMenuCleanUp = m_pMenuBox->addAction(CSandMan::GetIcon("Erase"), tr("Delete Content"), this, SLOT(OnSandBoxAction()));
 	m_pMenuBox->addSeparator();
@@ -284,6 +287,7 @@ void CSbieView::CreateOldMenu()
 	m_pNewBox = m_pMenu->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnGroupAction()));
 	m_pAddGroupe = m_pMenu->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnGroupAction()));
 	m_pImportBox = m_pMenu->addAction(CSandMan::GetIcon("UnPackBox"), tr("Import Box"), this, SLOT(OnGroupAction()));
+	m_pImportBox->setEnabled(CArchive::IsInit());
 	
 
 	m_pMenuBox = new QMenu();
@@ -322,6 +326,8 @@ void CSbieView::CreateOldMenu()
 
 	m_pMenuBox->addSeparator();
 	m_pMenuEmptyBox = m_pMenuBox->addAction(CSandMan::GetIcon("EmptyAll"), tr("Terminate Programs"), this, SLOT(OnSandBoxAction()));
+	m_pMenuMount = m_pMenuBox->addAction(CSandMan::GetIcon("LockOpen"), tr("Mount Box Image"), this, SLOT(OnSandBoxAction()));
+	m_pMenuUnmount = m_pMenuBox->addAction(CSandMan::GetIcon("LockClosed"), tr("Unmount Box Image"), this, SLOT(OnSandBoxAction()));
 	m_pMenuRecover = m_pMenuBox->addAction(CSandMan::GetIcon("Recover"), tr("Quick Recover"), this, SLOT(OnSandBoxAction()));
 	m_pMenuCleanUp = m_pMenuBox->addAction(CSandMan::GetIcon("Erase"), tr("Delete Content"), this, SLOT(OnSandBoxAction()));
 	m_pMenuExplore = m_pMenuBox->addAction(CSandMan::GetIcon("Explore"), tr("Explore Content"), this, SLOT(OnSandBoxAction()));
@@ -540,6 +546,8 @@ void CSbieView::OnToolTipCallback(const QVariant& ID, QString& ToolTip)
 		ToolTip += tr("    File root: %1\n").arg(pBoxEx->GetFileRoot());
 		ToolTip += tr("    Registry root: %1\n").arg(pBoxEx->GetRegRoot());
 		ToolTip += tr("    IPC root: %1\n").arg(pBoxEx->GetIpcRoot());
+		if(!pBoxEx->GetMountRoot().isEmpty())
+			ToolTip += tr("    Disk root: %1\n").arg(pBoxEx->GetMountRoot());
 		
 		ToolTip += tr("Options:\n    ");
 		ToolTip += pBoxEx->GetStatusStr().replace(", ", "\n    ");
@@ -572,30 +580,48 @@ void CSbieView::OnCustomSortByColumn(int column)
 	}
 }
 
-bool CSbieView::UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBoxeCount, bool bBoxBusy)
+bool CSbieView::UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBoxeCount, bool bBoxBusy, bool bBoxNotMounted)
 {
 	QList<QAction*> MenuActions = m_pMenu->actions();
 
-	m_pStopAsync->setVisible(bBoxBusy);
-	m_pMenuRun->setEnabled(iSandBoxeCount == 1);
+	auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 
+	m_pStopAsync->setVisible(bBoxBusy);
+
+	m_pMenuMount->setVisible(bBoxNotMounted);
+	m_pMenuMount->setEnabled(iSandBoxeCount == 1);
+
+	if (bBoxBusy)
+		iSandBoxeCount = 0;
+
+	m_pMenuRun->setEnabled(iSandBoxeCount == 1);
 	if(iSandBoxeCount == 1)
 		UpdateRunMenu(pBox);
 
+	m_pMenuRename->setEnabled(iSandBoxeCount == 1 && pBoxEx->GetMountRoot().isEmpty());
+
+	if (bBoxNotMounted)
+		iSandBoxeCount = 0;
+
 	m_pMenuMkLink->setEnabled(iSandBoxeCount == 1);
 	m_pMenuTools->setEnabled(iSandBoxeCount == 1);
-	m_pMenuRename->setEnabled(iSandBoxeCount == 1);
+	m_pMenuUnmount->setVisible(pBoxEx && pBoxEx->UseImageFile() && !pBoxEx->GetMountRoot().isEmpty());
 	m_pMenuRecover->setEnabled(iSandBoxeCount == 1);
+	m_pMenuCleanUp->setEnabled(iSandBoxeCount > 0);
+	if (m_pMenuContent) m_pMenuContent->setEnabled(iSandBoxeCount > 0);
+	m_pMenuEmptyBox->setEnabled(iSandBoxeCount > 0);
 
 	if (m_pMenuPresets) {
 		m_pMenuPresets->setEnabled(iSandBoxeCount == 1);
-		m_pMenuPresetsShowUAC->setChecked(pBox && !pBox->GetBool("DropAdminRights", false) && !pBox->GetBool("FakeAdminRights", false));
-		m_pMenuPresetsNoAdmin->setChecked(pBox && pBox->GetBool("DropAdminRights", false) && !pBox->GetBool("FakeAdminRights", false));
-		m_pMenuPresetsFakeAdmin->setChecked(pBox && pBox->GetBool("DropAdminRights", false) && pBox->GetBool("FakeAdminRights", false));
-		m_pMenuPresetsINet->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->IsINetBlocked());
-		m_pMenuPresetsShares->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->HasSharesAccess());
-		m_pMenuPresetsRecovery->setChecked(pBox && pBox->GetBool("AutoRecover", false));
-		m_pMenuPresetsForce->setChecked(pBox && pBox->GetBool("DisableForceRules", false));
+		if (iSandBoxeCount == 1) {
+			m_pMenuPresetsShowUAC->setChecked(pBox && !pBox->GetBool("DropAdminRights", false) && !pBox->GetBool("FakeAdminRights", false));
+			m_pMenuPresetsNoAdmin->setChecked(pBox && pBox->GetBool("DropAdminRights", false) && !pBox->GetBool("FakeAdminRights", false));
+			m_pMenuPresetsFakeAdmin->setChecked(pBox && pBox->GetBool("DropAdminRights", false) && pBox->GetBool("FakeAdminRights", false));
+			m_pMenuPresetsINet->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->IsINetBlocked());
+			m_pMenuPresetsShares->setChecked(pBox && pBox.objectCast<CSandBoxPlus>()->HasSharesAccess());
+			m_pMenuPresetsRecovery->setChecked(pBox && pBox->GetBool("AutoRecover", false));
+			m_pMenuPresetsForce->setChecked(pBox && pBox->GetBool("DisableForceRules", false));
+		}
 	}
 
 	m_pMenuBrowse->setEnabled(iSandBoxeCount == 1);
@@ -655,6 +681,7 @@ bool CSbieView::UpdateMenu()
 
 	CSandBoxPtr pBox;
 	bool bBoxBusy = false;
+	bool bBoxNotMounted = false;
 	CBoxedProcessPtr pProcess;
 	int iProcessCount = 0;
 	int iSandBoxeCount = 0;
@@ -684,17 +711,17 @@ bool CSbieView::UpdateMenu()
 					iSandBoxeCount = -1;
 				else if (iSandBoxeCount != -1)
 					iSandBoxeCount++;
+
+				auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+				if(pBoxEx->IsBoxBusy())
+					bBoxBusy = true;
+				if (pBoxEx->UseImageFile() && pBoxEx->GetMountRoot().isEmpty())
+					bBoxNotMounted = true;
 			}
 			else
 				iGroupe++;
 		}
 	}
-
-	if (bBoxBusy) {
-		iSandBoxeCount = 0;
-		iGroupe = 0;
-	}
-
 
 	bool bAdvanced = theConf->GetInt("Options/ViewMode", 1) == 1
 		|| (QGuiApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0;
@@ -705,7 +732,7 @@ bool CSbieView::UpdateMenu()
 	if (!pProcess.isNull())
 		UpdateProcMenu(pProcess, iProcessCount, iSuspendedCount);
 
-	return UpdateMenu(bAdvanced, pBox, iSandBoxeCount, bBoxBusy);
+	return UpdateMenu(bAdvanced, pBox, iSandBoxeCount, bBoxBusy, bBoxNotMounted);
 }
 
 void CSbieView::OnMenu(const QPoint& Point)
@@ -1006,11 +1033,38 @@ QString CSbieView::AddNewBox(bool bAlowTemp)
 
 QString CSbieView::ImportSandbox()
 {
-	QString Value = QFileDialog::getOpenFileName(this, tr("Select file name"), "", tr("7-zip Archive (*.7z)"));
-	if (Value.isEmpty())
+	QString Path = QFileDialog::getOpenFileName(this, tr("Select file name"), "", tr("7-zip Archive (*.7z)"));
+	if (Path.isEmpty())
 		return "";
 
-	StrPair PathName = Split2(Value, "/", true);
+	QString Password;
+	quint64 ImageSize = 0;
+	
+	CArchive Archive(Path);
+	int Ret = Archive.Open();
+	if (Ret == ERR_7Z_PASSWORD_REQUIRED) {
+		for (;;) {
+			CBoxImageWindow window(CBoxImageWindow::eImport, this);
+			if (!theGUI->SafeExec(&window) == 1)
+				return "";
+			Archive.SetPassword(window.GetPassword());
+			Ret = Archive.Open();
+			if (Ret != ERR_7Z_OK) {
+				QMessageBox::critical(this, "Sandboxie-Plus", tr("Failed to open archive, wrong password?"));
+				continue;
+			}
+			Password = window.GetPassword();
+			ImageSize = window.GetImageSize();
+			break;
+		}
+	}
+	if (Ret != ERR_7Z_OK) {
+		QMessageBox::critical(this, "Sandboxie-Plus", tr("Failed to open archive (%1)!").arg(Ret));
+		return "";
+	}
+	Archive.Close();
+
+	StrPair PathName = Split2(Path, "/", true);
 	StrPair NameEx = Split2(PathName.second, ".", true);
 	QString Name = NameEx.first;
 
@@ -1029,11 +1083,19 @@ QString CSbieView::ImportSandbox()
 		pBox = theAPI->GetBoxByName(Name);
 		if (pBox) {
 			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
-			Status = pBoxEx->ImportBox(Value);
+
+			if (!Password.isEmpty()) {
+				Status = pBoxEx->ImBoxCreate(ImageSize / 1024, Password);
+				if (!Status.IsError())
+					Status = pBoxEx->ImBoxMount(Password, true, true);
+			}
+
+			if (!Status.IsError())
+				Status = pBoxEx->ImportBox(Path, Password);
 		}
 	}
 	if (Status.GetStatus() == OP_ASYNC) {
-		Status = theGUI->AddAsyncOp(Status.GetValue(), true, tr("Importing: %1").arg(Value));
+		Status = theGUI->AddAsyncOp(Status.GetValue(), true, tr("Importing: %1").arg(Path));
 		if (Status.IsError()) {
 			theGUI->DeleteBoxContent(pBox, CSandMan::eForDelete);
 			pBox->RemoveBox();
@@ -1316,15 +1378,24 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	}
 	else if (Action == m_pMenuExport)
 	{
-		QString Value = QFileDialog::getSaveFileName(this, tr("Select file name"), SandBoxes.first()->GetName() + ".7z", tr("7-zip Archive (*.7z)"));	
-		if (Value.isEmpty())
-			return;
-
 		CSandBoxPtr pBox = SandBoxes.first();
 		auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
-		SB_PROGRESS Status = pBoxEx->ExportBox(Value);
+
+		QString Path = QFileDialog::getSaveFileName(this, tr("Select file name"), SandBoxes.first()->GetName() + ".7z", tr("7-zip Archive (*.7z)"));	
+		if (Path.isEmpty())
+			return;
+
+		QString Password;
+		if (pBoxEx->UseImageFile()) {
+			CBoxImageWindow window(CBoxImageWindow::eExport, this);
+			if (!theGUI->SafeExec(&window) == 1)
+				return;
+			Password = window.GetPassword();
+		}
+
+		SB_PROGRESS Status = pBoxEx->ExportBox(Path, Password);
 		if (Status.GetStatus() == OP_ASYNC)
-			theGUI->AddAsyncOp(Status.GetValue(), false, tr("Exporting: %1").arg(Value));
+			theGUI->AddAsyncOp(Status.GetValue(), false, tr("Exporting: %1").arg(Path));
 		else
 			Results.append(Status);
 	}
@@ -1346,6 +1417,18 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		}
 		Results.append(Status);
 	}
+	else if (Action == m_pMenuMount)
+	{
+		Results.append(theGUI->ImBoxMount(SandBoxes.first()));
+	}
+	else if (Action == m_pMenuUnmount)
+	{
+		foreach(const CSandBoxPtr& pBox, SandBoxes) {
+			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
+			pBoxEx->TerminateAll();
+			Results.append(pBox->ImBoxUnmount());
+		}
+	}
 	else if (Action == m_pMenuRecover)
 	{
 		theGUI->ShowRecovery(SandBoxes.first());
@@ -1358,6 +1441,10 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		bool bChanged = false;
 		foreach(const CSandBoxPtr& pBox, SandBoxes)
 		{
+			auto pBoxPlus = pBox.objectCast<CSandBoxPlus>();
+			if (pBoxPlus->UseImageFile() && !pBoxPlus->GetMountRoot().isEmpty())
+				pBoxPlus->ImBoxUnmount();
+
 			SB_STATUS Status = SB_OK;
 
 			if (!pBox->GetBool("IsShadow")) {

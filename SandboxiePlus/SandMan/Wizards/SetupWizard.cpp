@@ -156,7 +156,10 @@ CIntroPage::CIntroPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Introduction"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    if (theGUI->m_DarkTheme)
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
+    else
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
 
     QVBoxLayout *layout = new QVBoxLayout;
     QLabel* pTopLabel = new QLabel(tr("Welcome to the Setup Wizard. This wizard will help you to configure your copy of <b>Sandboxie-Plus</b>. "
@@ -706,7 +709,10 @@ CFinishPage::CFinishPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Complete your configuration"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    if (theGUI->m_DarkTheme)
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
+    else
+        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
 
     QVBoxLayout *layout = new QVBoxLayout;
 

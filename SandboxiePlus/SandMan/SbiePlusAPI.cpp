@@ -126,11 +126,14 @@ CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSand
 	m_bSharesAllowed = false;
 	m_bDropRights = false;
 	
+	m_bRamDisk = false;
+	m_bImageFile = false;
 
 	m_bSecurityEnhanced = false;
 	m_bPrivacyEnhanced = false;
 	m_bApplicationCompartment = false;
 	m_iUnsecureDebugging = 0;
+	m_bEncryptedAndConfidential = false;
 	m_bRootAccessOpen = false;
 
 	m_TotalSize = theConf->GetValue("SizeCache/" + m_Name, -1).toLongLong();
@@ -186,7 +189,7 @@ protected:
 	CArchive* m_pArchive;
 };
 
-void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ExportPath, const QString& RootPath, const QString& Section)
+void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ExportPath, const QString& RootPath, const QString& Section, const QString& Password)
 {
 	//CArchive Archive(ExportPath + ".tmp");
 	CArchive Archive(ExportPath);
@@ -226,6 +229,9 @@ void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 			// this file is already present in the archive, this should not happen !!!
 	}
 
+	if (!Password.isEmpty())
+		Archive.SetPassword(Password);
+
 	SB_STATUS Status = SB_OK;
 	if (!Archive.Update(&Files, true, theConf->GetInt("Options/ExportCompression", 3)))  // 0, 1 - 9
 		Status = SB_ERR((ESbieMsgCodes)SBX_7zCreateFailed);
@@ -240,7 +246,7 @@ void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 	pProgress->Finish(Status);
 }
 
-SB_PROGRESS CSandBoxPlus::ExportBox(const QString& FileName)
+SB_PROGRESS CSandBoxPlus::ExportBox(const QString& FileName, const QString& Password)
 {
 	if (!CArchive::IsInit())
 		return SB_ERR((ESbieMsgCodes)SBX_7zNotReady);
@@ -254,13 +260,16 @@ SB_PROGRESS CSandBoxPlus::ExportBox(const QString& FileName)
 	QString Section = theAPI->SbieIniGetEx(m_Name, "");
 
 	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-	QtConcurrent::run(CSandBoxPlus::ExportBoxAsync, pProgress, FileName, m_FilePath, Section);
+	QtConcurrent::run(CSandBoxPlus::ExportBoxAsync, pProgress, FileName, m_FilePath, Section, Password);
 	return SB_PROGRESS(OP_ASYNC, pProgress);
 }
 
-void CSandBoxPlus::ImportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ImportPath, const QString& RootPath, const QString& BoxName)
+void CSandBoxPlus::ImportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ImportPath, const QString& RootPath, const QString& BoxName, const QString& Password)
 {
 	CArchive Archive(ImportPath);
+
+	if (!Password.isEmpty())
+		Archive.SetPassword(Password);
 
 	if (Archive.Open() != ERR_7Z_OK) {
 		pProgress->Finish(SB_ERR((ESbieMsgCodes)SBX_7zOpenFailed));
@@ -308,13 +317,13 @@ void CSandBoxPlus::ImportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 	pProgress->Finish(Status);
 }
 
-SB_PROGRESS CSandBoxPlus::ImportBox(const QString& FileName)
+SB_PROGRESS CSandBoxPlus::ImportBox(const QString& FileName, const QString& Password)
 {
 	if (!CArchive::IsInit())
 		return SB_ERR((ESbieMsgCodes)SBX_7zNotReady);
 
 	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-	QtConcurrent::run(CSandBoxPlus::ImportBoxAsync, pProgress, FileName, m_FilePath, m_Name);
+	QtConcurrent::run(CSandBoxPlus::ImportBoxAsync, pProgress, FileName, m_FilePath, m_Name, Password);
 	return SB_PROGRESS(OP_ASYNC, pProgress);
 }
 
@@ -348,6 +357,14 @@ void CSandBoxPlus::UpdateDetails()
 	m_bSharesAllowed = GetBool("BlockNetworkFiles", true) == false;
 
 	m_bDropRights = GetBool("DropAdminRights", false);
+
+	m_bRamDisk = GetBool("UseRamDisk", false);
+	m_bImageFile = GetBool("UseFileImage", false);
+
+	QStringList DenyHostAccess = GetTextList("DenyHostAccess", true, false, true);
+	//bool bIsPrivate = DenyHostAccess.contains("y", Qt::CaseInsensitive) || DenyHostAccess.contains("yes", Qt::CaseInsensitive)
+	//	|| DenyHostAccess.contains("*,y", Qt::CaseInsensitive) || DenyHostAccess.contains("*,yes", Qt::CaseInsensitive);
+	m_bEncryptedAndConfidential = m_bImageFile && GetBool("ConfidentialBox", false, true, true); // && bIsPrivate;
 
 	m_bRootAccessOpen = false;
 	foreach(const QString& Setting, QString("OpenFilePath|OpenKeyPath|OpenPipePath|OpenConfPath").split("|")) {
@@ -587,7 +604,18 @@ void CSandBoxPlus::UpdateSize(bool bReset)
 	if(bReset)
 		m_TotalSize = -1;
 
+	m_bImageFile = GetBool("UseFileImage", false);
+
 	m_IsEmpty = IsEmpty();
+
+	if (m_bImageFile) {
+		LARGE_INTEGER liSparseFileCompressedSize;
+		liSparseFileCompressedSize.LowPart = GetCompressedFileSize(GetBoxImagePath().toStdWString().c_str(), (LPDWORD)&liSparseFileCompressedSize.HighPart);
+		m_TotalSize = liSparseFileCompressedSize.QuadPart;
+	}
+
+	if (m_bImageFile && m_Mount.isEmpty())
+		return;
 
 	if(theConf->GetBool("Options/WatchBoxSize", false) && m_TotalSize == -1)
 		((CSbiePlusAPI*)theAPI)->m_BoxMonitor->ScanBox(this);
@@ -633,7 +661,17 @@ SB_STATUS CSandBoxPlus::RenameBox(const QString& NewName)
 
 	BeginModifyingBox(); 
 
+	QString OldBoxImagePath = GetBoxImagePath();
+
 	SB_STATUS Status = CSandBox::RenameBox(NewName); 
+
+	if (!Status.IsError() && QFile::exists(OldBoxImagePath)) {
+
+		((CSbiePlusAPI*)m_pAPI)->UpdateBoxPaths(this);
+
+		if(!QFile::rename(OldBoxImagePath, GetBoxImagePath()))
+			Status = SB_ERR(SB_FailedMoveImage, QVariantList() <<OldBoxImagePath << GetBoxImagePath(), 0xC0000001 /*STATUS_UNSUCCESSFUL*/);
+	}
 
 	ConnectEndSlot(Status); 
 
@@ -679,6 +717,8 @@ void CSandBoxPlus::EndModifyingBox()
 bool CSandBoxPlus::IsEmpty() const
 {
 	if (!CSandBox::IsEmpty())
+		return false;
+	if(m_bImageFile && QFile::exists(GetBoxImagePath()))
 		return false;
 	return true;
 }
@@ -751,6 +791,9 @@ CSandBoxPlus::EBoxTypes CSandBoxPlus::GetTypeImpl() const
 {
 	if (m_bRootAccessOpen)
 		return eOpen;
+
+	if (m_bEncryptedAndConfidential)
+		return ePrivate;
 
 	if (m_bApplicationCompartment && m_bPrivacyEnhanced)
 		return eAppBoxPlus;

@@ -128,6 +128,14 @@ public:
 	virtual SB_STATUS		DisableForceProcess(bool Set, int Seconds = 0);
 	virtual bool			AreForceProcessDisabled();
 
+	// Mount Manager
+	virtual SB_STATUS		ImBoxCreate(CSandBox* pBox, quint64 uSizeKb, const QString& Password = QString());
+	virtual SB_STATUS		ImBoxMount(CSandBox* pBox, const QString& Password = QString(), bool bProtect = false, bool bAutoUnmount = false);
+	virtual SB_STATUS		ImBoxUnmount(CSandBox* pBox);
+	virtual SB_RESULT(QStringList) ImBoxEnum();
+	virtual SB_RESULT(QVariantMap) ImBoxQuery(const QString& Root = QString());
+	//virtual SB_STATUS		ImBoxUpdate(  // todo
+
 	// Monitor
 	virtual SB_STATUS		EnableMonitor(bool Enable);
 	virtual bool			IsMonitoring();

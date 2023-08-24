@@ -378,7 +378,7 @@ void CTraceView::SetEnabled(bool bSet)
 
 void CTraceView::OnShowStack()
 {
-	if (!theGUI->GetAddonManager()->GetAddon("DbgHelp", CAddonManager::eInstalled).isNull())
+	if (m_pShowStack->isChecked() && !theGUI->GetAddonManager()->GetAddon("DbgHelp", CAddonManager::eInstalled).isNull())
         theGUI->GetAddonManager()->TryInstallAddon("DbgHelp", this, tr("To use the stack traces feature the DbgHelp.dll and SymSrv.dll are required, do you want to download and install them?"));
 	theAPI->GetGlobalSettings()->SetBool("MonitorStackTrace", m_pShowStack->isChecked());
 	m_pTrace->m_pStackView->setVisible(m_pShowStack->isChecked());

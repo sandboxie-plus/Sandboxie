@@ -38,7 +38,7 @@ signals:
 
 public slots:
 	void ok();
-	void apply();
+	bool apply();
 
 	void showTab(const QString& Name);
 
@@ -71,6 +71,9 @@ private slots:
 	void OnRunChanged() { m_GeneralChanged = true;  OnOptChanged(); }
 
 	void OnVmRead();
+
+	void OnDiskChanged();
+	void OnSetPassword();
 
 	void OnAddGroup();
 	void OnAddProg();
@@ -190,7 +193,8 @@ private slots:
 	void OnDelProcess();
 	void OnShowHiddenProcTmpl()		{ ShowHiddenProcTmpl(true); }
 
-	void OnAddHostProcess();
+	void OnHostProcessAllow();
+	void OnHostProcessDeny();
 	void OnDelHostProcess();
 	void OnShowHostProcTmpl()		{ ShowHostProcTmpl(true); }
 
@@ -315,6 +319,7 @@ public:
 		eReadOnly,
 		eBoxOnly,
 		eIgnoreUIPI,
+
 		eMaxAccessMode
 	};
 
@@ -325,6 +330,13 @@ public:
 		eRecoveryCheck,
 		eDeleteCmd
 	};
+
+	static QString AccessTypeToName(EAccessEntry Type);
+	static QPair<EAccessType, EAccessMode> SplitAccessType(EAccessEntry Type);
+
+	static QString	GetAccessTypeStr(EAccessType Type);
+	static QString	GetAccessModeStr(EAccessMode Mode);
+	static QString	GetAccessModeTip(EAccessMode Mode);
 
 protected:
 	void SetBoxColor(const QColor& color);
@@ -414,13 +426,9 @@ protected:
 	// access
 	void CreateAccess();
 
-	QString	AccessTypeToName(EAccessEntry Type);
 	void LoadAccessList();
 	void LoadAccessListTmpl(bool bUpdate = false);
 	void LoadAccessListTmpl(EAccessType Type, bool bChecked, bool bUpdate = false);
-	QString	GetAccessTypeStr(EAccessType Type);
-	QString	GetAccessModeStr(EAccessMode Mode);
-	QString	GetAccessModeTip(EAccessMode Mode);
 	void ParseAndAddAccessEntry(EAccessEntry EntryType, const QString& Value, bool disabled = false, const QString& Template = QString());
 	void ParseAndAddAccessEntry(EAccessType Type, EAccessMode Mode, const QString& Value, bool disabled = false, const QString& Template = QString());
 	QString ExpandPath(EAccessType Type, const QString& Path);
@@ -455,7 +463,7 @@ protected:
 	void ShowHiddenProcTmpl(bool bUpdate = false);
 	void ShowHostProcTmpl(bool bUpdate = false);
 	void AddHiddenProcEntry(const QString& Name, const QString& Template = QString());
-	void AddHostProcEntry(const QString& Name, bool Value = true, const QString& Template = QString());
+	void AddHostProcEntry(const QString& Name, bool Deny, const QString& Template = QString());
 	void CheckOpenCOM();
 	//
 
@@ -540,6 +548,9 @@ protected:
 	};
 
 	QMap<QString, SAdvOption> m_AdvOptions;
+
+	QString m_Password;
+	quint64 m_ImageSize;
 
 private:
 

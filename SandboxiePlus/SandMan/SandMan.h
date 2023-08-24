@@ -49,6 +49,8 @@ public:
 
 	static QString		GetVersion();
 
+	bool				IsImDiskReady() const { return m_ImDiskReady; }
+
 	bool				IsWFPEnabled() const;
 
 	SB_PROGRESS			RecoverFiles(const QString& BoxName, const QList<QPair<QString, QString>>& FileList, QWidget* pParent, int Action = 0);
@@ -89,6 +91,7 @@ public:
 
 	bool				RunSandboxed(const QStringList& Commands, QString BoxName = QString(), const QString& WrkDir = QString());
 	SB_RESULT(quint32)	RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
+	SB_STATUS			ImBoxMount(const CSandBoxPtr& pBox, bool bAutoUnmount = false);
 
 	void				EditIni(const QString& IniPath, bool bPlus = false);
 
@@ -99,7 +102,7 @@ public:
 	QIcon				IconAddOverlay(const QIcon& Icon, const QString& Name, int Size = 24);
 	QString				GetBoxDescription(int boxType);
 	
-	bool				CheckCertificate(QWidget* pWidget);
+	bool				CheckCertificate(QWidget* pWidget, bool bAdvanced = false);
 
 	void				UpdateTheme();
 	void				UpdateTitleTheme(const HWND& hwnd);
@@ -240,7 +243,8 @@ private slots:
 
 	void				OnSandBoxAction();
 	void				OnSettingsAction();
-	void				OnEmptyAll();
+	void				OnEmptyAll() { TerminateAll(false); }
+	void				OnLockAll() { TerminateAll(true); }
 	void				OnWndFinder();
 	void				OnBoxAssistant();
 	void				OnDisableForce();
@@ -299,6 +303,8 @@ private:
 	void				CreateBoxMenu(QMenu* pMenu, int iOffset = 0, int iSysTrayFilter = 0);
 
 	void				HandleMaintenance(SB_RESULT(void*) Status);
+
+	void				TerminateAll(bool bUnmount);
 
 	void				LoadState(bool bFull = true);
 	void				StoreState();
@@ -359,6 +365,7 @@ private:
 	QAction*			m_pNewGroup;
 	QAction*			m_pImportBox;
 	QAction*			m_pEmptyAll;
+	QAction*			m_pLockAll;
 	QAction*			m_pWndFinder;
 	QAction*			m_pDisableForce;
 	QAction*			m_pDisableForce2;
@@ -378,6 +385,7 @@ private:
 	QAction*			m_pStopSvc;
 	QAction*			m_pUninstallSvc;
 	QAction*			m_pStopAll;
+	QAction*			m_pImDiskCpl;
 	QAction*			m_pUninstallAll;
 	QAction*			m_pSetupWizard;
 	QAction*			m_pExit;
@@ -430,6 +438,7 @@ private:
 	QLabel*				m_pDisabledForce;
 	QLabel*				m_pDisabledRecovery;
 	QLabel*				m_pDisabledMessages;
+	QLabel*				m_pRamDiskInfo;
 
 	// for old menu
 	QMenu*				m_pSandbox;

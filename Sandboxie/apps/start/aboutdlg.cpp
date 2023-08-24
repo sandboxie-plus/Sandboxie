@@ -37,6 +37,7 @@
 #include "core/drv/api_defs.h"
 #include <time.h>
 #include "core/svc/InteractiveWire.h"
+#include "core/drv/verify.h"
 
 
 
@@ -283,10 +284,9 @@ bool DoAboutDialog(bool bReminder)
 
     if (g_bReminder) {
 
-        ULONG64 CertInfo = 0;
+        SCertInfo CertInfo = { 0 };
         SbieApi_Call(API_QUERY_DRIVER_INFO, 3, -1, (ULONG_PTR)&CertInfo, sizeof(CertInfo));
-
-        if (CertInfo & 1) // valid
+        if (CertInfo.active)
             return true;
 
         time_t InstallDate = 0;

@@ -91,7 +91,7 @@ private:
     // mounted registry hive
     //
 
-    void MountedHive(void *_msg);
+    void HiveMounted(void *_msg);
 
     //
     // unmount registry hive

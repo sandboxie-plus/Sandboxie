@@ -42,6 +42,7 @@ typedef long NTSTATUS;
 #include "..\..\Sandboxie\core\svc\sbieiniwire.h"
 #include "..\..\Sandboxie\core\svc\QueueWire.h"
 #include "..\..\Sandboxie\core\svc\InteractiveWire.h"
+#include "..\..\Sandboxie\core\svc\MountManagerWire.h"
 
 int _SB_STATUS_type = qRegisterMetaType<SB_STATUS>("SB_STATUS");
 
@@ -2361,6 +2362,149 @@ bool CSbieAPI::AreForceProcessDisabled()
 	CSbieAPI__ForceProcessControl(m, NULL, &uOldState);
 	return uOldState != FALSE;
 }
+
+///////////////////////////////////////////////////////////////////////////////
+// Mount Manager
+//
+
+SB_STATUS CSbieAPI::ImBoxCreate(CSandBox* pBox, quint64 uSizeKb, const QString& Password)
+{
+	std::wstring file_root = L"\\??\\" + pBox->GetFileRoot().toStdWString();
+	std::wstring password = Password.toStdWString();
+	if(password.length() > 128)
+		return SB_ERR(ERROR_INVALID_PARAMETER);
+
+	ULONG req_len = sizeof(IMBOX_CREATE_REQ);
+	req_len += file_root.length() * sizeof(wchar_t);
+	SScoped<IMBOX_CREATE_REQ> req(malloc(req_len));
+
+	req->h.length = req_len;
+	req->h.msgid = MSGID_IMBOX_CREATE;
+	req->image_size = uSizeKb;
+	wcscpy(req->password, password.c_str());
+	wcscpy(req->file_root, file_root.c_str());
+
+	SScoped<IMBOX_CREATE_RPL> rpl;
+	SB_STATUS Status = CallServer(&req->h, &rpl);
+	m_bBoxesDirty = true;
+	if (!Status)
+		return Status;
+	if (!rpl) 
+		return SB_ERR(ERROR_SERVER_DISABLED);
+	if (rpl->h.status != 0)
+		return SB_ERR(rpl->h.status);
+	return SB_OK;
+}
+
+SB_STATUS CSbieAPI::ImBoxMount(CSandBox* pBox, const QString& Password, bool bProtect, bool bAutoUnmount)
+{
+	std::wstring root = pBox->GetRegRoot().toStdWString();
+	if(root.length() >= MAX_REG_ROOT_LEN)
+		return SB_ERR(ERROR_INVALID_PARAMETER);
+	std::wstring file_root = L"\\??\\" + pBox->GetFileRoot().toStdWString();
+	std::wstring password = Password.toStdWString();
+	if(password.length() > 128)
+		return SB_ERR(ERROR_INVALID_PARAMETER);
+
+	ULONG req_len = sizeof(IMBOX_MOUNT_REQ);
+	req_len += file_root.length() * sizeof(wchar_t);
+	SScoped<IMBOX_MOUNT_REQ> req(malloc(req_len));
+
+	req->h.length = req_len;
+	req->h.msgid = MSGID_IMBOX_MOUNT;
+	wcscpy(req->password, password.c_str());
+	req->protect_root = bProtect;
+	req->auto_unmount = bAutoUnmount;
+	wcscpy(req->reg_root, root.c_str());
+	wcscpy(req->file_root, file_root.c_str());
+
+	SScoped<IMBOX_MOUNT_RPL> rpl;
+	SB_STATUS Status = CallServer(&req->h, &rpl);
+	m_bBoxesDirty = true;
+	if (!Status)
+		return Status;
+	if (!rpl) 
+		return SB_ERR(ERROR_SERVER_DISABLED);
+	if (rpl->h.status != 0)
+		return SB_ERR(rpl->h.status);
+	return SB_OK;
+}
+
+SB_STATUS CSbieAPI::ImBoxUnmount(CSandBox* pBox)
+{
+	std::wstring root = pBox->GetRegRoot().toStdWString();
+
+	IMBOX_UNMOUNT_REQ req;
+	req.h.length = sizeof(IMBOX_UNMOUNT_REQ);
+	req.h.msgid = MSGID_IMBOX_UNMOUNT;
+	wcscpy(req.reg_root, root.c_str());
+
+	SScoped<IMBOX_UNMOUNT_RPL> rpl;
+	SB_STATUS Status = CallServer(&req.h, &rpl);
+	m_bBoxesDirty = true;
+	if (!Status)
+		return Status;
+	if (!rpl) 
+		return SB_ERR(ERROR_SERVER_DISABLED);
+	if (rpl->h.status != 0)
+		return SB_ERR(rpl->h.status);
+	return SB_OK;
+}
+
+SB_RESULT(QStringList) CSbieAPI::ImBoxEnum()
+{
+	IMBOX_ENUM_REQ req;
+	req.h.length = sizeof(IMBOX_ENUM_REQ);
+	req.h.msgid = MSGID_IMBOX_ENUM;
+
+	SScoped<IMBOX_ENUM_RPL> rpl;
+	SB_STATUS Status = CallServer(&req.h, &rpl);
+	if (!Status)
+		return Status;
+	if (!rpl) 
+		return SB_ERR(ERROR_SERVER_DISABLED);
+	if (rpl->h.status != 0)
+		return SB_ERR(rpl->h.status);
+
+	QStringList Roots;
+
+	wchar_t* reg_roots = rpl->reg_roots;
+	while (*reg_roots) {
+		size_t len = wcslen(reg_roots);
+		Roots.append(QString::fromWCharArray(reg_roots, len));
+		reg_roots += len + 1;
+	}
+
+	return CSbieResult(Roots);
+}
+
+SB_RESULT(QVariantMap) CSbieAPI::ImBoxQuery(const QString& Root)
+{
+	std::wstring root = Root.toStdWString();
+
+	IMBOX_QUERY_REQ req;
+	req.h.length = sizeof(IMBOX_QUERY_REQ);
+	req.h.msgid = MSGID_IMBOX_QUERY;
+	wcscpy(req.reg_root, root.c_str());
+
+	SScoped<IMBOX_QUERY_RPL> rpl;
+	SB_STATUS Status = CallServer(&req.h, &rpl);
+	if (!Status)
+		return Status;
+	if (!rpl) 
+		return SB_ERR(ERROR_SERVER_DISABLED);
+	if (rpl->h.status != 0)
+		return SB_ERR(rpl->h.status);
+
+	QVariantMap Info;
+
+	Info["DiskSize"] = rpl->disk_size;
+	Info["UsedSize"] = rpl->used_size;
+	Info["DiskRoot"] = QString::fromWCharArray(rpl->disk_root);
+
+	return CSbieResult(Info);
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // Monitor

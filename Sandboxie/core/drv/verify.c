@@ -758,9 +758,9 @@ _FX NTSTATUS KphValidateCertificate()
             expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval((CSHORT)(level ? _wtoi(level) : 7), 0, 0); // x days, default 7
             Verify_CertInfo.level = eCertAdvanced;
         }
-        else if (level && _wcsicmp(type, L"STANDARD") == 0) 
+        else if (level && _wcsicmp(level, L"STANDARD") == 0) 
             Verify_CertInfo.level = eCertStandard;
-        else if (level && _wcsicmp(type, L"ADVANCED") == 0) 
+        else if (level && _wcsicmp(level, L"ADVANCED") == 0) 
             Verify_CertInfo.level = eCertAdvanced;
         // scheme 1.1 >>>
         else if (CERT_IS_TYPE(Verify_CertInfo, eCertPersonal) || CERT_IS_TYPE(Verify_CertInfo, eCertPatreon))

@@ -30,6 +30,7 @@
 #include "apps/common/RunBrowser.h"
 #include "common/win32_ntddk.h"
 #include "core/drv/api_defs.h"
+#include "core/drv/verify.h"
 
 
 //---------------------------------------------------------------------------
@@ -156,13 +157,12 @@ BOOL CAboutDialog::OnInitDialog()
     text.Format(L"%S\r\n%S", MY_COPYRIGHT_STRING, MY_COPYRIGHT_STRING_OLD);
     GetDlgItem(ID_ABOUT_COPYRIGHT)->SetWindowText(text);
 
-    ULONG64 CertInfo = 0;
+    SCertInfo CertInfo = { 0 };
     SbieApi_Call(API_QUERY_DRIVER_INFO, 3, -1, (ULONG_PTR)&CertInfo, sizeof(CertInfo));
-    if (CertInfo & 1) // valid
+    if (CertInfo.active)
         GetDlgItem(ID_ABOUT_INFO)->SetWindowText(CMyMsg(MSG_7988));
-    else if (CertInfo & 2) // expired
+    else if (CertInfo.expired) // expired && !active -> outdated
         GetDlgItem(ID_ABOUT_INFO)->SetWindowText(CMyMsg(MSG_7989));
-
 
     GetDlgItem(IDOK)->SetWindowText(CMyMsg(MSG_3001));
 

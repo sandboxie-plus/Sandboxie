@@ -426,6 +426,7 @@ _FX LONG SbieApi_LogMsgEx(
 
 
 _FX LONG SbieApi_LogMsgExt(
+	ULONG session_id,
 	ULONG msgid,
 	const WCHAR** strings)
 {
@@ -446,7 +447,7 @@ _FX LONG SbieApi_LogMsgExt(
 			temp += len;
 		}
 
-		status = SbieApi_LogMsgEx(-1, msgid, buff, (USHORT)size);
+		status = SbieApi_LogMsgEx(session_id, msgid, buff, (USHORT)size);
 
 		Dll_Free(buff);
 

@@ -7,6 +7,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.11.0 / 5.66.0] - 2023-08-??
 
 ### Added
+- added ImDisk driver integration, allowing to create boxes residing in a ramdisk
+- added Encrypted Sandbox support, with this feature you can create confidential boxes not leaking data to the host pc
+  - Using the ImDisk Driver and a new ImBox component utilizing the cryptographic implementation from [DiskCryptor](https://diskcryptor.org/) the sandbox root fodler is stored in an encrypted container file.
+  - Using the SbieDrv to prevent processes not belonging to the sandbox from accessing a encrypted sandboxes root folder
+  - With the ConfidentialBox=y option host process read acess to sandboxed processes is blocked
 - added certificate info to the about dialog
 - added support for new more flexible certificate style
 - added option for business customers to retrieve hardware-bound certificates from a serial number

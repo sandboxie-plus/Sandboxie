@@ -94,14 +94,16 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.btnDelProcess, SIGNAL(clicked(bool)), this, SLOT(OnDelProcess()));
 	connect(ui.chkShowHiddenProcTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowHiddenProcTmpl()));
 
-	connect(ui.btnAddHostProcess, SIGNAL(clicked(bool)), this, SLOT(OnAddHostProcess()));
+	connect(ui.btnHostProcessAllow, SIGNAL(clicked(bool)), this, SLOT(OnHostProcessAllow()));
+	connect(ui.btnHostProcessDeny, SIGNAL(clicked(bool)), this, SLOT(OnHostProcessDeny()));
 	connect(ui.btnDelHostProcess, SIGNAL(clicked(bool)), this, SLOT(OnDelHostProcess()));
 	connect(ui.chkShowHostProcTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowHostProcTmpl()));
-	connect(ui.chkConfidential, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged())); // todo notify premium feature
+	connect(ui.chkConfidential, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged())); // todo norify premium feaure
+	connect(ui.chkNotifyProtect, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
 	connect(ui.treeInjectDll, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnToggleInjectDll(QTreeWidgetItem *, int)));
 	connect(ui.treeInjectDll, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnDblClickInjedtDll(QTreeWidgetItem*, int)));
-	
+
 	connect(ui.chkHostProtect, SIGNAL(clicked(bool)), this, SLOT(OnHostProtectChanged()));
 	connect(ui.chkHostProtectMsg, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 
@@ -189,6 +191,7 @@ void COptionsWindow::LoadAdvanced()
 		}
 	}
 
+	
 	ui.chkHostProtect->setChecked(m_pBox->GetBool("ProtectHostImages", false));
 	ui.chkHostProtectMsg->setEnabled(ui.chkHostProtect->isChecked());
 	ui.chkHostProtectMsg->setChecked(m_pBox->GetBool("NotifyImageLoadDenied", true));
@@ -236,11 +239,16 @@ void COptionsWindow::LoadAdvanced()
 	ui.treeHostProc->clear();
 	foreach(const QString & Value, m_pBox->GetTextList("DenyHostAccess", m_Template)) {
 		StrPair NameVal = Split2(Value, ",");
-		AddHostProcEntry(NameVal.first, NameVal.second.left(0).toLower() != "y");
+		if (NameVal.second.isEmpty()) {
+			NameVal.second = NameVal.first;
+			NameVal.first = "*";
+		}
+		AddHostProcEntry(NameVal.first, NameVal.second.left(1).toLower() == "y");
 	}
 	ShowHostProcTmpl();
 
 	ui.chkConfidential->setChecked(m_pBox->GetBool("ConfidentialBox", false));
+	ui.chkNotifyProtect->setChecked(m_pBox->GetBool("NotifyBoxProtected", false));
 
 
 	QStringList Users = m_pBox->GetText("Enabled").split(",");
@@ -430,12 +438,12 @@ void COptionsWindow::SaveAdvanced()
 		int Type = pItem->data(0, Qt::UserRole).toInt();
 		if (Type == -1)
 			continue; // entry from template
-		DenyHostProcesses.append(pItem->text(0) + "," + (pItem->data(1, Qt::UserRole).toBool() ? "n" : "y")); 
+		DenyHostProcesses.append(pItem->text(0) + "," + (pItem->data(1, Qt::UserRole).toBool() ? "y" : "n")); 
 	}
 	WriteTextList("DenyHostAccess", DenyHostProcesses);
 
 	WriteAdvancedCheck(ui.chkConfidential, "ConfidentialBox", "y", "");
-
+	WriteAdvancedCheck(ui.chkNotifyProtect, "NotifyBoxProtected", "y", "");
 
 	QStringList Users;
 	for (int i = 0; i < ui.lstUsers->count(); i++)
@@ -931,13 +939,25 @@ void COptionsWindow::OnDelProcess()
 	OnOptChanged();
 }
 
-void COptionsWindow::OnAddHostProcess()
+void COptionsWindow::OnHostProcessAllow()
 {
-	QString Process = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a program file name"));
+	QString Process = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a program file name to allow access to this sandbox"));
 	if (Process.isEmpty())
 		return;
 
-	AddHostProcEntry(Process);
+	AddHostProcEntry(Process, false);
+
+	m_AdvancedChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::OnHostProcessDeny()
+{
+	QString Process = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter a program file name to deny access to this sandbox"));
+	if (Process.isEmpty())
+		return;
+
+	AddHostProcEntry(Process, true);
 
 	m_AdvancedChanged = true;
 	OnOptChanged();
@@ -983,7 +1003,7 @@ void COptionsWindow::ShowHostProcTmpl(bool bUpdate)
 		{
 			foreach(const QString & Value, m_pBox->GetTextListTmpl("DenyHostAccess", Template)) {
 				StrPair NameVal = Split2(Value, ",");
-				AddHostProcEntry(NameVal.first, NameVal.second.left(0).toLower() != "y", Template);
+				AddHostProcEntry(NameVal.first, NameVal.second.left(1).toLower() == "y", Template);
 			}
 		}
 	}
@@ -1010,13 +1030,13 @@ void COptionsWindow::AddHiddenProcEntry(const QString& Name, const QString& Temp
 	ui.treeHideProc->addTopLevelItem(pItem);
 }
 
-void COptionsWindow::AddHostProcEntry(const QString& Name, bool Value, const QString& Template)
+void COptionsWindow::AddHostProcEntry(const QString& Name, bool Deny, const QString& Template)
 {
 	QTreeWidgetItem* pItem = new QTreeWidgetItem();
 	pItem->setText(0, Name + (Template.isEmpty() ? "" : " (" + Template + ")"));
 	pItem->setData(0, Qt::UserRole, Template.isEmpty() ? 0 : -1);
-	pItem->setText(1, Value ? tr("Deny") : tr("Allow"));
-	pItem->setData(1, Qt::UserRole, Value);
+	pItem->setText(1, Deny ? tr("Deny") : tr("Allow"));
+	pItem->setData(1, Qt::UserRole, Deny);
 	ui.treeHostProc->addTopLevelItem(pItem);
 }
 

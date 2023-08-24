@@ -358,6 +358,20 @@ void Secure_InitSecurityDescriptors(void)
 
 
 //---------------------------------------------------------------------------
+// SbieDll_GetPublicSD
+//---------------------------------------------------------------------------
+
+
+_FX PSECURITY_DESCRIPTOR SbieDll_GetPublicSD()
+{
+    if (!Secure_EveryoneSD)
+        Secure_InitSecurityDescriptors();
+
+    return Secure_EveryoneSD;
+}
+
+
+//---------------------------------------------------------------------------
 // Secure_Init
 //---------------------------------------------------------------------------
 

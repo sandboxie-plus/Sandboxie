@@ -604,7 +604,7 @@ SBIE2244 Failed to mount box image, Password required
 .
 
 2246;pop;wrn;01
-SBIE2245 Failed to mount box image, ImBox error %2
+SBIE2246 Failed to mount box image, ImBox error %2
 .
 
 

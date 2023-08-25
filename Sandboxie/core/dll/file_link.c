@@ -832,19 +832,20 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
     P_NtCreateFile pNtCreateFile = __sys_NtCreateFile;
     P_NtClose pNtClose = __sys_NtClose;
     P_NtFsControlFile pNtFsControlFile = __sys_NtFsControlFile;
-	if (! pNtCreateFile)
-		pNtCreateFile = NtCreateFile;
-	if (! pNtClose)
-		pNtClose = NtClose;
-	if (! pNtFsControlFile)
-		pNtFsControlFile = NtFsControlFile;
+    // special case for File_InitRecoverFolders as its called bfore we hook those functions
+    if (! pNtCreateFile)
+        pNtCreateFile = NtCreateFile;
+    if (! pNtClose)
+        pNtClose = NtClose;
+    if (! pNtFsControlFile)
+        pNtFsControlFile = NtFsControlFile;
 
     stop = TRUE;
 
     InitializeObjectAttributes(
         &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
 
-    BOOLEAN UserReparse = SbieApi_QueryConfBool(NULL, L"UseNewSymlinkResolver", FALSE);
+    BOOLEAN UserReparse = SbieApi_QueryConfBool(NULL, L"UseNewSymlinkResolver", TRUE);
 
     if (UserReparse) {
         

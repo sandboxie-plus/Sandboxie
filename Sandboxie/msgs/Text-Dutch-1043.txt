@@ -5,7 +5,7 @@
 #  Latest update by RockyTDR on 2022-01-10
 # SbieDrv
 #
-# Initialization errors issued to to the System event Log
+# Initialization errors issued to the System event Log
 #----------------------------------------------------------------------------
 
 1101;evt;inf;01

@@ -553,7 +553,7 @@ SBIE2244 Fehler beim Einhängen des Boxabbildes, Passwort notwendig
 .
 
 2246;pop;wrn;01
-SBIE2245 Fehler beim Einhängen des Boxabbildes, ImBox-Fehler %2
+SBIE2246 Fehler beim Einhängen des Boxabbildes, ImBox-Fehler %2
 .
 
 #----------------------------------------------------------------------------

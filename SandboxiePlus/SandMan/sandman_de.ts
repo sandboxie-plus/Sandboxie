@@ -11,48 +11,48 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="40"/>
         <source>kilobytes</source>
-        <translation type="unfinished">Kilobytes</translation>
+        <translation>Kilobytes</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="61"/>
         <source>Protect Box Root from access by unsandboxed processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Schütze Boxquelle vor Zugriff durch nicht sangeboxte Prozesse</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="98"/>
         <location filename="Forms/BoxImageWindow.ui" line="162"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Beschriftungstext</translation>
+        <translation>Beschriftungstext</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="105"/>
         <source>Show Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Passwort</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="112"/>
         <source>Enter Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort eingeben</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="122"/>
         <source>New Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Passwort</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="132"/>
         <source>Repeat Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort wiederholen</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="142"/>
         <source>Disk Image Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Diskabbildgröße</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="152"/>
         <source>Encryption Cipher</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschlüsselungschiffre</translation>
     </message>
 </context>
 <context>
@@ -281,54 +281,56 @@
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="23"/>
         <source>Sandboxie-Plus - Password Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Passworteingabe</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="37"/>
         <source>Creating new box image, please enter a secure password, and choose a disk image size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erzeuge neues Boxabbild, bitte ein sicheres Passwort eingeben und die Diskabbildgröße wählen.</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="41"/>
         <source>Enter Box Image password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxabbildpasswort eingeben:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="45"/>
         <source>Enter Box Image passwords:</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxabbildpasswörter eingeben:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="48"/>
         <source>Enter Encryption passwords for archive export:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschlüsselungspasswörter für den Archivexport eingeben:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="51"/>
         <source>Enter Encryption passwords for archive import:</source>
-        <translation type="unfinished"></translation>
+        <translation>Entschlüsselungspasswörter für den Archivimport eingeben:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="114"/>
         <source>kilobytes (%1)</source>
-        <translation type="unfinished">Kilobytes (%1)</translation>
+        <translation>Kilobytes (%1)</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="125"/>
         <source>Passwords don&apos;t match!!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwörter stimmen nicht überein!!!</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="129"/>
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
-        <translation type="unfinished"></translation>
+        <translation>WARNUNG: Kurze Passwörter sind leicht durch Bruteforceangriffstechniken zu knacken!
+
+Es ist empfohlen ein Passwort von 20 oder mehr Zeichen zu wählen. Sind Sie sicher, dass Sie ein kurzes Passwort verwenden möchten?</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="145"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Boxdiskabbild muss mindestens 256 MB groß sein, empfohlen werden 2 GB.</translation>
     </message>
 </context>
 <context>
@@ -435,14 +437,16 @@ Während der Level der Isolation reduziert ist, verglichen mit anderen Boxtypen,
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="309"/>
         <source>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Encrypted&lt;/a&gt; &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Confidential&lt;/a&gt; Box</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Verschlüsselte&lt;/a&gt; &lt;a href=&quot;sbie://docs/black-box&quot;&gt;vertrauliche&lt;/a&gt; Box</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="310"/>
         <source>In this box type the sandbox uses an encrypted disk image as its root folder. This provides an additional layer of privacy and security. 
 Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes. 
 This ensures the utmost level of privacy and data protection within the confidential sandbox environment.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit diesem Boxtyp verwendet die Sandbox ein verschlüsseltes Diskabbild als Quellordner. Dies bietet eine zusätzliche Ebene von Privatsphäre und Sicherheit. 
+Zugriff zur virtuellen Disk, wenn eingehangen, ist auf Programme beschränkt, die innerhalb der Sandbox laufen. Sandboxie hinderte andere Prozesse des Hostsystems daran auf sandgeboxte Prozesse zuzugreifen. 
+Dies sichert das höchste Level von Privatsphäre und Datenschutz innerhalb der vertraulichen Sandboxumgebung zu.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="328"/>
@@ -477,12 +481,12 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="335"/>
         <source>Confidential Encrypted Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertrauliche verschlüsselte Box</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="447"/>
         <source>To use ancrypted boxes you need to install the ImDisk driver, do you want to download and install it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Um die verschlüsselten Boxen zu verwenden, müssen Sie den ImDisk-Treiber installieren. Möchten Sie diesen runterladen und installieren?</translation>
     </message>
     <message>
         <source>Application Compartment (NO Isolation)</source>
@@ -1074,7 +1078,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="70"/>
         <source>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently innaccessible. Corruption can occur as a result of a BSOD, a storage hadrware failure, or a maliciouse application overwriting random files. This feature is provided under a strickt &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Sandboxinhalt wird in einer verschlüsselten Containerdatei plaziert, bitte verstehen Sie, dass jegliche Korrumpierung des Containerheaders dessen Inhalt permanent unzugänglich machen wird. Korrumpierung kann auftreten durch das Ergebnis eines BSOD, eines Speicherhardwarefehlers, oder ein bösartigen Programms überschreibt zufällige Dateien. Diese Funktion wird unter dem strikten &lt;b&gt;Kein Backup Keine Gnade&lt;/b&gt; Grundsatz zur Verfügung gestellt, SIE, der Nutzer sind für die Daten, die Sie in einer verschlüsselten Box speichern verantwortlich. &lt;br /&gt;&lt;br /&gt;WENN SIE ZUSTIMMEN DIE VOLLE VERANTWORTUNG  FÜR IHRE DATEN ZU ÜBERNEHMEN KLICKEN SIE [JA], ANDERNFALLS KLICKEN SIE [NEIN].</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="180"/>
@@ -1346,12 +1350,12 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="944"/>
         <source>Please enter a program file name to allow access to this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte geben Sie einen Programmdateinamen ein, um Zugriff auf diese Sandbox zu erlauben</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="956"/>
         <source>Please enter a program file name to deny access to this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte geben Sie einen Programmdateinamen ein, um Zugriff auf diese Sandbox zu verbieten</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1038"/>
@@ -1436,12 +1440,12 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="23"/>
         <source>This option requires an active &lt;b&gt;advanced&lt;/b&gt; supporter certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Option erfordert ein aktives &lt;b&gt;erweitertes&lt;/b&gt; Unterstützerzertifikat</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="69"/>
         <source>Application Compartment</source>
-        <translation type="unfinished">Applikationsunterteilung</translation>
+        <translation>Applikationsunterteilung</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="119"/>
@@ -1491,7 +1495,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="330"/>
         <source>Change Password</source>
-        <translation type="unfinished">Passwort ändern</translation>
+        <translation>Passwort ändern</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="539"/>
@@ -1514,17 +1518,17 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1150"/>
         <source>The image file does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Abbilddatei existiert nicht</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1151"/>
         <source>The password is wrong</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Passwort ist falsch</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1152"/>
         <source>Unexpected error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Unerwarteter Fehler: %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="445"/>
@@ -2995,7 +2999,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SandMan.cpp" line="448"/>
         <source>Virtual Disks</source>
-        <translation type="unfinished"></translation>
+        <translation>Virtuelle Disks</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="489"/>
@@ -3006,7 +3010,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
         <location filename="SandMan.cpp" line="511"/>
         <location filename="SandMan.cpp" line="653"/>
         <source>Lock All Encrypted Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sperre alle verschlüsselten Boxen</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="822"/>
@@ -3061,7 +3065,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SandMan.cpp" line="1504"/>
         <source>This box will be &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;encrypted&lt;/a&gt; and &lt;a href=&quot;sbie://docs/black-box&quot;&gt;access to sandboxed processes will be guarded&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Box wird &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;verschlüsselt&lt;/a&gt; und &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Zugriff zu den sandgeboxten Prozessen wird geschützt&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1509"/>
@@ -3097,23 +3101,23 @@ Nein wählt: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2571"/>
         <source>The box %1 is configured to use features exclusively available to project supporters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Box %1 ist konfiguriert Funktionen zu nutzen, welche exklusiv für Projektunterstützer verfügbar sind.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2576"/>
         <source>The box %1 is configured to use features which require an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Box %1 ist konfiguriert Funktionen zu nutzen, welche ein &lt;b&gt;erweitertes&lt;/b&gt; Unterstützerzertifikat erfordern.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2578"/>
         <location filename="SandMan.cpp" line="2659"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Upgrade your Certificate&lt;/a&gt; to unlock advanced features.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Upgraden Sie Ihr Zertifikat&lt;/a&gt; um alle erweiterten Funktionen freizuschalten.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2657"/>
         <source>The selected feature requires an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Funktion erfordert ein &lt;b&gt;erweitertes&lt;/b&gt; Unterstützerzertifikat.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2668"/>
@@ -4431,13 +4435,13 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="208"/>
         <location filename="Views/SbieView.cpp" line="329"/>
         <source>Mount Box Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxabbild einhängen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="209"/>
         <location filename="Views/SbieView.cpp" line="330"/>
         <source>Unmount Box Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxabbild aushängen</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="269"/>
@@ -4528,7 +4532,8 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="550"/>
         <source>    Disk root: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Diskquelle: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="876"/>
@@ -4548,12 +4553,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="1053"/>
         <source>Failed to open archive, wrong password?</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Öffnen des Archivs, falsches Passwort?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1062"/>
         <source>Failed to open archive (%1)!</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Öffnen des Archivs (%1)!</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1076"/>
@@ -4936,7 +4941,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1056"/>
         <source>kilobytes (%1)</source>
-        <translation type="unfinished">Kilobytes (%1)</translation>
+        <translation>Kilobytes (%1)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1075"/>
@@ -7300,12 +7305,12 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="340"/>
         <source>Encrypt sandbox content</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxinhalt verschlüsseln</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="354"/>
         <source>When &lt;a href=&quot;sbie:// docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn &lt;a href=&quot;sbie:// docs/boxencryption&quot;&gt;Boxverschlüsselung&lt;/a&gt; eingeschaltet ist, wird der Boxquellenordner, inklusive des Registryhives auf einem verschlüsselten Diskabbild, durch die Verwendung von &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS Implementierung, gespeichert.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="401"/>
@@ -7315,17 +7320,17 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="414"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;addon://ImDisk&quot;&gt;Installiere ImDisk&lt;/a&gt; Treiber zur Aktivierung von Ramdisk- und Diskabbildunterstützung.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="445"/>
         <source>Store the sandbox content in a Ram Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichere den Sandboxinhalt in einer Ramdisk</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="462"/>
         <source>Set Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort setzen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="469"/>
@@ -7384,53 +7389,53 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1245"/>
         <source>Disable Security Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktiviere Sicherheitsisolation</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1347"/>
         <location filename="Forms/OptionsWindow.ui" line="1464"/>
         <source>Box Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Boxschutz</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1362"/>
         <source>Protect processes within this box from host processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Schütze Prozesse innerhalb dieser Box vor Hostprozessen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1415"/>
         <source>Allow Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Prozess erlauben</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1471"/>
         <source>Issue message 1318/1317 when a host process tries to access a sandboxed process/the box root</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebe Nachricht 1318/1317 aus, wenn ein Hostprozess versucht auf einen sandgeboxten Prozess oder die Boxquelle zuzugreifen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1478"/>
         <source>Sandboxie-Plus is able to create confidential sandboxes that provide robust protection against unauthorized surveillance or tampering by host processes. By utilizing an encrypted sandbox image, this feature delivers the highest level of operational confidentiality, ensuring the safety and integrity of sandboxed processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus ist in der Lage vertrauliche Sandboxen zu erzeugen, die einen robusten Schutz gegen unautorisierte Überwachung oder Manipulation durch Hostprozesse bieten. Durch die Verwendung eines verschlüsselten Sandboxabbildes liefert diese Funktion das höchste Level von operativer Vertraulichkeit, stellt die Sicherheit und Integrität von sandgeboxten Prozessen sicher.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1488"/>
         <source>Deny Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Prozess ablehnen</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1513"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished">Verwende einen Sandboxie-Login anstelle eines anonymen Token</translation>
+        <translation>Verwende einen Sandboxie-Login anstelle eines anonymen Token</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1963"/>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc…) extensions. Please review the security section for each option in the documentation before use.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SICHERHEITSWARNUNG&lt;/font&gt;:&lt;/b&gt; Die Verwendung von &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; und/oder &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in Kombination mit Open[File/Pipe]Path-Regeln kann die Sicherheit kompromittieren, genau so wie die Verwendug von &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; durch das Erlauben aller * oder unsicherer (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc…) Dateiendungen. Bitte sehen Sie sich den Sicherheitsabschnitt für jede Option in der Dokumentation an, bevor Sie diese verwenden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2739"/>
         <source>Configure which processes can access Desktop objects like Windows and alike.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguriere welche Prozesse Zugriff auf Desktopobjekte wie Fenster und dergleichen haben.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3489"/>
@@ -7500,12 +7505,12 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4275"/>
         <source>DNS Request Logging</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS Anfragenprotokollierung</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4296"/>
         <source>Syscall Trace (creates a lot of output)</source>
-        <translation type="unfinished"></translation>
+        <translation>Systemaufrufsrückverfolgung (Erzeugt große Ausgabemenge)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4506"/>
@@ -8358,32 +8363,32 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1265"/>
         <source>Addon Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Erweiterungskonfiguration</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1283"/>
         <source>Enable Ram Disk creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviere Ramdiskerzeugung</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1290"/>
         <source>kilobytes</source>
-        <translation type="unfinished">Kilobytes</translation>
+        <translation>Kilobytes</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1303"/>
         <source>Disk Image Support</source>
-        <translation type="unfinished"></translation>
+        <translation>Diskabbildunterstützung</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1323"/>
         <source>RAM Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>RAM Grenze</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1346"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;addon://ImDisk&quot;&gt;Installiere ImDisk&lt;/a&gt; Treiber zur Aktivierung von Ramdisk- und Diskabbildunterstützung.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1373"/>

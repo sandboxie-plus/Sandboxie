@@ -79,7 +79,7 @@ SBIE2230 Failed to mount root for %2
 .
 
 2231;pop;wrn;01
-SBIE2231 Junction Target missmatch %2
+SBIE2231 Junction Target mismatch %2
 .
 
 2232;pop;wrn;01
@@ -135,7 +135,7 @@ SBIE2244 Failed to mount box image, Password required
 .
 
 2246;pop;wrn;01
-SBIE2245 Failed to mount box image, ImBox error %2
+SBIE2246 Failed to mount box image, ImBox error %2
 .
 
 2302;pop;err;01
@@ -325,7 +325,7 @@ If you would prefer to use a UI to control these options, please upgrade to Sand
 .
 
 6007;txt;01
-Sandboxie Plus offers enhanced privacy protection by switching the old behavior from a black-list mode, i.e. allowing read access to the entire drive, except blocked by Closed Path or Write Path, to a white-list mode where sandboxed programs are only allowed to read generic system locations and read access to most user data must be first explicitly granted.
+Sandboxie Plus offers enhanced privacy protection by switching the old behavior from a black-list mode, i.e., allowing read access to the entire drive, except blocked by Closed Path or Write Path, to a white-list mode where sandboxed programs are only allowed to read generic system locations and read access to most user data must be first explicitly granted.
 
 The legacy UI of Sandboxie classic does not implement support for this mode of operation. Although it can be configured using the ini file, it is recommended to use the modern Sandboxie-Plus UI (SandMan.exe) if you want to use privacy enhanced boxes.
 .
@@ -335,7 +335,7 @@ The configuration %3 of box %2 requires a supporter certificate and can not be u
 .
 
 6009;pop;err;01
-The configuration %3 of box %2 requires a advanced supporter certificate.
+The configuration %3 of box %2 requires an advanced supporter certificate.
 .
 
 6010;txt;01

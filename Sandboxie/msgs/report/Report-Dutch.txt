@@ -67,7 +67,7 @@ SBIE2230 Failed to mount root for %2
 .
 
 2231;pop;wrn;01
-SBIE2231 Junction Target missmatch %2
+SBIE2231 Junction Target mismatch %2
 .
 
 2232;pop;wrn;01
@@ -123,7 +123,7 @@ SBIE2244 Failed to mount box image, Password required
 .
 
 2246;pop;wrn;01
-SBIE2245 Failed to mount box image, ImBox error %2
+SBIE2246 Failed to mount box image, ImBox error %2
 .
 
 2325;pop;err;01
@@ -179,7 +179,7 @@ The configuration %3 of box %2 requires a supporter certificate and can not be u
 .
 
 6009;pop;err;01
-The configuration %3 of box %2 requires a advanced supporter certificate.
+The configuration %3 of box %2 requires an advanced supporter certificate.
 .
 
 6010;txt;01

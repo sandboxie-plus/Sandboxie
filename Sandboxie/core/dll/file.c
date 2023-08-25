@@ -4029,11 +4029,16 @@ _FX NTSTATUS File_GetFileType(
 
     *FileType = 0;
 
+    P_NtQueryFullAttributesFile pNtQueryFullAttributesFile = __sys_NtQueryFullAttributesFile;
+    // special case for File_InitRecoverFolders as its called bfore we hook those functions
+    if (!pNtQueryFullAttributesFile)
+        pNtQueryFullAttributesFile = NtQueryFullAttributesFile;
+
     if (IsWritePath) {
         status = File_QueryFullAttributesDirectoryFile(
                             ObjectAttributes->ObjectName->Buffer, &info);
     } else {
-        status = __sys_NtQueryFullAttributesFile(ObjectAttributes, &info);
+        status = pNtQueryFullAttributesFile(ObjectAttributes, &info);
     }
 
     if (! NT_SUCCESS(status)) {

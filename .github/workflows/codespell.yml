@@ -96,6 +96,8 @@ jobs:
           echo 'crome->Chrome' >> dictionary_code.txt
           echo 'chromim->Chromium' >> dictionary_code.txt
           echo 'kmdutill->kmdutil' >> dictionary_code.txt
+          echo 'ancrypted->an crypted' >> dictionary_code.txt
+          echo 'hadrware->hardware' >> dictionary_code.txt
           echo 'sandbocie->Sandboxie' >> dictionary_code.txt
           echo 'sanboxie->Sandboxie' >> dictionary_code.txt
           echo "sandboxies->Sandboxie's, sandboxed" >> dictionary_code.txt

@@ -6,53 +6,53 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="26"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Form</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="40"/>
         <source>kilobytes</source>
-        <translation type="unfinished">kilobayt</translation>
+        <translation>kilobayt</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="61"/>
         <source>Protect Box Root from access by unsandboxed processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Alan Kökünü korumalı alanda çalışmayan işlemlerin erişiminden koru</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="98"/>
         <location filename="Forms/BoxImageWindow.ui" line="162"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Metin Etiketi</translation>
+        <translation>TextLabel</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="105"/>
         <source>Show Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Parolayı Göster</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="112"/>
         <source>Enter Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Parolayı Girin</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="122"/>
         <source>New Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni Parola</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="132"/>
         <source>Repeat Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Parolayı Tekrarla</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="142"/>
         <source>Disk Image Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Disk Görüntüsü Boyutu</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="152"/>
         <source>Encryption Cipher</source>
-        <translation type="unfinished"></translation>
+        <translation>Şifreleme Algoritması</translation>
     </message>
 </context>
 <context>
@@ -148,7 +148,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="606"/>
         <source>Block network/internet by denying access to Network devices</source>
-        <translation>Ağ cihazlarına erişimi engelleyerek ağı/interneti engelle</translation>
+        <translation>Ağ cihazlarına erişimi reddederek ağı/interneti engelleyin</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="608"/>
@@ -174,7 +174,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="624"/>
         <source>Make applications think they are running elevated</source>
-        <translation>Uygulamaların yetkilendirilmiş şekilde çalıştıklarını düşünmelerini sağla</translation>
+        <translation>Uygulamaların yetkilendirilmiş çalıştıklarını düşünmelerini sağla</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="629"/>
@@ -194,12 +194,12 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="645"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation>Sistemde kurulu korumalı alan programlarına korumalı alandan DLL&apos;lerin yüklenmesini önle</translation>
+        <translation>Korumalı alan programlarının korumalı alandan DLL yüklenmesini önle</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="646"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
-        <translation>Bu özellik, alanda konumlu işlemlerin ana bilgisayarda konumlu olanlara yazmasını ve hatta onları başlatmasını da engellediği için uyumluluğu azaltabilir.</translation>
+        <translation>Bu özellik, alanda konumlu işlemlerin ana sistemde konumlu olanlara yazmasını ve hatta onları başlatmasını da engellediği için uyumluluğu azaltabilir.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="640"/>
@@ -281,54 +281,55 @@
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="23"/>
         <source>Sandboxie-Plus - Password Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Parola Girişi</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="37"/>
         <source>Creating new box image, please enter a secure password, and choose a disk image size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yeni bir alan görüntüsü oluşturmak için lütfen güvenli bir parola girin ve disk görüntüsü boyutunu belirleyin.</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="41"/>
         <source>Enter Box Image password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alan Görüntüsü parolasını girin:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="45"/>
         <source>Enter Box Image passwords:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alan Görüntüsü parolalarını girin:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="48"/>
         <source>Enter Encryption passwords for archive export:</source>
-        <translation type="unfinished"></translation>
+        <translation>Arşivi dışa aktarmak için bir parola belirleyin:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="51"/>
         <source>Enter Encryption passwords for archive import:</source>
-        <translation type="unfinished"></translation>
+        <translation>Arşivi içe aktarmak için parolayı girin:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="114"/>
         <source>kilobytes (%1)</source>
-        <translation type="unfinished">kilobayt (%1)</translation>
+        <translation>kilobayt (%1)</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="125"/>
         <source>Passwords don&apos;t match!!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Parolalar eşleşmiyor!</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="129"/>
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
-        <translation type="unfinished"></translation>
+        <translation>UYARI: Kısa parolaların kaba kuvvet teknikleri kullanılarak kırılması kolaydır!
+20 veya daha fazla karakterden oluşan bir parola belirlemeniz önerilir. Kısa bir parola kullanmak istediğinizden emin misiniz?</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="145"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alan Disk Görüntüsünün boyutu en az 256 MB olmalıdır, 2 GB önerilir.</translation>
     </message>
 </context>
 <context>
@@ -349,12 +350,12 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="222"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. </source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan, ana sisteminizi korumalı alan içinde çalışan işlemlerden yalıtır ve onların diğer programlarda ve bilgisayarınızdaki verilerde kalıcı değişiklikler yapmasını engeller. </translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="225"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation>Korumalı alan, ana bilgisayar sisteminizi korumalı alan içinde çalışan işlemlerden yalıtır ve onların diğer programlarda ve bilgisayarınızdaki verilerde kalıcı değişiklikler yapmasını engeller. Yalıtım düzeyi, güvenliği ve uygulama uyumluluğunu etkiler, dolayısıyla seçili &apos;Alan Türüne&apos; bağlı olarak farklı bir yalıtım düzeyi sağlayacaktır. Sandboxie ayrıca kişisel verilerinize, kendi gözetimi altında çalışan işlemler tarafından erişilmesine karşı da koruyabilir.</translation>
+        <translation>Korumalı alan, ana sisteminizi korumalı alan içinde çalışan işlemlerden yalıtır ve onların diğer programlarda ve bilgisayarınızdaki verilerde kalıcı değişiklikler yapmasını engeller. Yalıtım düzeyi, güvenliği ve uygulama uyumluluğunu etkiler, dolayısıyla seçili &apos;Alan Türüne&apos; bağlı olarak farklı bir yalıtım düzeyi sağlayacaktır. Sandboxie ayrıca kişisel verilerinize, kendi gözetimi altında çalışan işlemler tarafından erişilmesine karşı da koruyabilir.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="236"/>
@@ -370,75 +371,81 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="290"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Veri Korumalı&lt;/a&gt; &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Güçlendirilmiş&lt;/a&gt; Alan</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="291"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes. 
 It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories. 
 The entire user profile remains hidden, ensuring maximum security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu alan türü, korumalı alan işlemlerinin maruz kalabileceği saldırı yüzeyini önemli ölçüde azaltarak en yüksek derecede koruma sağlar.
+Kullanıcı verilerine erişimi katı bir biçimde sınırlandırarak bu alandaki işlemlerin yalnızca C:\Windows ve C:\Program Files dizinlerine erişmesine izin verir.
+Kullanıcı profilinin tamamı gizlenerek en yüksek derecede güvenlik sağlanır.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="294"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Güvenliği Güçlendirilmiş&lt;/a&gt; Alan</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="295"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu alan türü, korumalı alan işlemlerinin maruz kalabileceği saldırı yüzeyini önemli ölçüde azaltarak en yüksek derecede koruma sağlar.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="296"/>
         <source>Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Veri Korumalı&lt;/a&gt; Alan</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="297"/>
         <source>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such, 
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu alan türü, korumalı alan işlemlerinin herhangi bir kişisel kullanıcı dosyasına veya verisine erişimi engeller. Odak noktası ise kullanıcı verilerinin korunmasıdır.
+Bu nedenle bu korumalı alanda çalışan işlemler yalnızca C:\Windows ve C:\Program Files dizinlerine erişebilir. Bu kısıtlama, kişisel dosyaların güvende kalmasını sağlar.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="299"/>
         <source>Standard Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Standart Korumalı Alan</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="300"/>
         <source>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme. 
 Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu alan türü, Sandboxie Classic&apos;in varsayılan davranışını sunar. Kullanıcıların alıştığı ve güvenilir bir korumalı alan şeması sunar. Uygulamalar bu korumalı alanda çalıştırılarak denetimli ve yalıtılmış bir alanda çalışmaları sağlanır.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="302"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Veri Korumalı&lt;/a&gt; &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Uygulama Bölmesi&lt;/a&gt; Alanı</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="303"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="306"/>
         <source>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. 
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu alan türü, uyumluluğa öncelik verirken iyi düzeyde yalıtım sağlar. Güvenilir uygulamaları ayrı bölmelerde çalıştırmak için tasarlanmıştır.
+Diğer alan türlerine göre yalıtım seviyesi azalırken, çok çeşitli uygulamalarla uyumluluğu arttırır ve böylece korumalı alanda sorunsuz çalışmalarını sağlar.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="305"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Uygulama Bölmesi&lt;/a&gt; Alanı</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="309"/>
         <source>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Encrypted&lt;/a&gt; &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Confidential&lt;/a&gt; Box</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Şifreli&lt;/a&gt; &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Gizli&lt;/a&gt; Alan</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="310"/>
         <source>In this box type the sandbox uses an encrypted disk image as its root folder. This provides an additional layer of privacy and security. 
 Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes. 
 This ensures the utmost level of privacy and data protection within the confidential sandbox environment.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu alan türü, korumalı alan kök dizini olarak şifrelenmiş bir disk görüntüsü kullanır. Böylece ek bir gizlilik ve güvenlik katmanı sağlar.
+Korumalı alan bağlandığında bu sanal diske yapılabilecek erişim korumalı alanda çalışan programlarla sınırlıdır. Sandboxie, ana sistemdeki diğer işlemlerin korumalı alanda çalışan işlemlere erişimini de engeller.
+Böylece gizli korumalı alan ortamında en üst düzeyde gizlilik ve veri koruma sağlar.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="328"/>
@@ -468,21 +475,17 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="334"/>
         <source>Application Compartment Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Uygulama Bölmesi</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="335"/>
         <source>Confidential Encrypted Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Gizli Şifreli Alan</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="447"/>
         <source>To use ancrypted boxes you need to install the ImDisk driver, do you want to download and install it?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Application Compartment (NO Isolation)</source>
-        <translation type="vanished">Uygulama Bölmesi (Yalıtım YOK)</translation>
+        <translation>Şifreli alanları kullanmak için ImDisk sürücüsünü yüklemeniz gerekir. Şimdi indirip yüklemek ister misiniz?</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="353"/>
@@ -1070,7 +1073,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="70"/>
         <source>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently innaccessible. Corruption can occur as a result of a BSOD, a storage hadrware failure, or a maliciouse application overwriting random files. This feature is provided under a strickt &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu korumalı alanın içeriği şifrelenmiş bir konteyner dosyasına yerleştirilecektir. Lütfen konteyner dosyasında oluşbilecek herhangi bir bozulmanın içeriğin tamamını kalıcı olarak erişilemez hale getireceğini unutmayın. Bu bozulma bir BSOD (Mavi Ekran), bir depolama donanım yazılımı arızası veya kötü amaçlı bir uygulamanın rastgele dosyaların üzerine yazması sonucunda meydana gelebilir. Bu özellik katı bir &lt;b&gt;Yedekleme Yok, Merhamet Yok!&lt;/b&gt; politikası kapsamında sağlanır. Şifrelenmiş bir alana koyduğunuz verilerden kullanıcı olarak SİZ KENDİNİZ sorumlusunuz. &lt;br /&gt;&lt;br /&gt;VERİLERİNİZİN TAM SORUMLULUĞUNU ALMAYI KABUL EDİYORSANIZ [EVET]&apos;E TIKLAYIN, AKSİ TAKDİRDE [HAYIR]&apos;A TIKLAYIN.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="180"/>
@@ -1280,10 +1283,6 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
         <translation>Lütfen yeni grup için bir isim girin</translation>
     </message>
     <message>
-        <source>Please enter a program file name</source>
-        <translation type="vanished">Lütfen bir program dosyası adı girin</translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsAccess.cpp" line="679"/>
         <source>Template values can not be removed.</source>
         <translation>Şablon değerleri kaldırılamaz.</translation>
@@ -1388,7 +1387,7 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="69"/>
         <source>Application Compartment</source>
-        <translation type="unfinished">Uygulama Bölmesi</translation>
+        <translation>Uygulama Bölmesi</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="948"/>
@@ -1408,16 +1407,12 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="23"/>
         <source>This option requires an active &lt;b&gt;advanced&lt;/b&gt; supporter certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu seçenek etkin bir &lt;b&gt;gelişmiş&lt;/b&gt; destekçi sertifikası gerektirir</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="25"/>
         <source>This option requires an active supporter certificate</source>
         <translation>Bu seçenek geçerli bir destekçi sertifikası gerektirir</translation>
-    </message>
-    <message>
-        <source>Supporter exclusive option</source>
-        <translation type="vanished">Destekçiye özel seçenek</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="54"/>
@@ -1573,7 +1568,7 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="329"/>
         <source>Deny access to host location and prevent creation of sandboxed copies.</source>
-        <translation>Ana bilgisayar konumuna erişimi reddeder ve korumalı alan kopyalarının oluşturulmasını önler.</translation>
+        <translation>Ana sistem konumuna erişimi reddeder ve korumalı alan kopyalarının oluşturulmasını önler.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="330"/>
@@ -1588,7 +1583,7 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="332"/>
         <source>Hide host files, folders or registry keys from sandboxed processes.</source>
-        <translation>Ana bilgisayar dosyalarını, klasörlerini veya kayıt defteri anahtarlarını korumalı alan işlemlerinden gizler.</translation>
+        <translation>Ana sistem dosyalarını, klasörlerini veya kayıt defteri anahtarlarını korumalı alan işlemlerinden gizler.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="333"/>
@@ -1812,10 +1807,6 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
         <translation>Veri Korumalı Uygulama Bölmesi</translation>
     </message>
     <message>
-        <source>Application Compartment (NO Isolation)</source>
-        <translation type="vanished">Uygulama Bölmesi (Yalıtım YOK)</translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsGeneral.cpp" line="119"/>
         <source>Custom icon</source>
         <translation>Özel simge</translation>
@@ -1858,7 +1849,7 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="330"/>
         <source>Change Password</source>
-        <translation type="unfinished">Parolayı değiştir</translation>
+        <translation>Parolayı Değiştir</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="539"/>
@@ -1891,17 +1882,17 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1150"/>
         <source>The image file does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Görüntü dosyası mevcut değil</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1151"/>
         <source>The password is wrong</source>
-        <translation type="unfinished"></translation>
+        <translation>Parola hatalı</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1152"/>
         <source>Unexpected error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Beklenmeyen hata: %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="315"/>
@@ -2005,12 +1996,12 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="944"/>
         <source>Please enter a program file name to allow access to this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu korumalı alana erişime izin vermek için lütfen bir program dosyası adı girin</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="956"/>
         <source>Please enter a program file name to deny access to this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu korumalı alana erişimi reddetmek için lütfen bir program dosyası adı girin</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1038"/>
@@ -2981,7 +2972,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="448"/>
         <source>Virtual Disks</source>
-        <translation type="unfinished"></translation>
+        <translation>Sanal Diskler</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="506"/>
@@ -2992,7 +2983,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <location filename="SandMan.cpp" line="511"/>
         <location filename="SandMan.cpp" line="653"/>
         <source>Lock All Encrypted Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Tüm Şifreli Alanları Kilitle</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="609"/>
@@ -3017,7 +3008,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="1504"/>
         <source>This box will be &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;encrypted&lt;/a&gt; and &lt;a href=&quot;sbie://docs/black-box&quot;&gt;access to sandboxed processes will be guarded&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu alan &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;şifrelenecek&lt;/a&gt; ve &lt;a href=&quot;sbie://docs/black-box&quot;&gt;korumalı alandaki işlemler izinsiz erişime karşı korunacak&lt;/a &gt;.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2002"/>
@@ -3077,23 +3068,23 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="2571"/>
         <source>The box %1 is configured to use features exclusively available to project supporters.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 alanı, yalnızca proje destekçilerine sunulan özellikleri kullanacak şekilde yapılandırılmıştır.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2576"/>
         <source>The box %1 is configured to use features which require an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 alanı, &lt;b&gt;gelişmiş&lt;/b&gt; destekçi sertifikası gerektiren özellikleri kullanacak şekilde yapılandırılmıştır.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2578"/>
         <location filename="SandMan.cpp" line="2659"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Upgrade your Certificate&lt;/a&gt; to unlock advanced features.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gelişmiş özelliklerin kilidini açmak için &lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Sertifikanızı yükseltin&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2657"/>
         <source>The selected feature requires an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seçilen özellik, &lt;b&gt;gelişmiş&lt;/b&gt; bir destekçi sertifikası gerektiriyor.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2698"/>
@@ -3135,7 +3126,7 @@ Hata: %1</translation>
     <message>
         <location filename="SandMan.cpp" line="2981"/>
         <source>&lt;b&gt;ERROR:&lt;/b&gt; The Sandboxie-Plus Manager (SandMan.exe) does not have a valid signature (SandMan.exe.sig). Please download a trusted release from the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;official Download page&lt;/a&gt;.</source>
-        <translation>&lt;b&gt;HATA:&lt;/b&gt; Sandboxie-Plus Yöneticisinin (SandMan.exe) geçerli bir imzaya sahip değil (SandMan.exe.sig). Lütfen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;resmi İndirme sayfasından&lt;/a&gt; güvenilir bir sürüm indirin.</translation>
+        <translation>&lt;b&gt;HATA:&lt;/b&gt; Sandboxie-Plus Yöneticisi (SandMan.exe) geçerli bir imzaya sahip değil (SandMan.exe.sig). Lütfen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get&quot;&gt;resmî indirme sayfasından&lt;/a&gt; güvenilir bir sürüm indirin.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3089"/>
@@ -4542,19 +4533,19 @@ Hayır şunları seçer: %2</translation>
         <location filename="Views/SbieView.cpp" line="173"/>
         <location filename="Views/SbieView.cpp" line="309"/>
         <source>(Host) Start Menu</source>
-        <translation>(Ana Bilgisayar) Başlat Menüsü</translation>
+        <translation>(Ana Sistem) Başlat Menüsü</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="208"/>
         <location filename="Views/SbieView.cpp" line="329"/>
         <source>Mount Box Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Alan Görüntüsünü Bağla</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="209"/>
         <location filename="Views/SbieView.cpp" line="330"/>
         <source>Unmount Box Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Alan Görüntüsünü Çıkar</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="236"/>
@@ -4658,7 +4649,8 @@ Hayır şunları seçer: %2</translation>
         <location filename="Views/SbieView.cpp" line="550"/>
         <source>    Disk root: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Disk kökü: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="876"/>
@@ -4673,12 +4665,12 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="1053"/>
         <source>Failed to open archive, wrong password?</source>
-        <translation type="unfinished"></translation>
+        <translation>Arşiv açılamadı, yanlış parola mı?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1062"/>
         <source>Failed to open archive (%1)!</source>
-        <translation type="unfinished"></translation>
+        <translation>Arşiv açılamadı (%1)!</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1076"/>
@@ -4868,7 +4860,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1056"/>
         <source>kilobytes (%1)</source>
-        <translation type="unfinished">kilobayt (%1)</translation>
+        <translation>kilobayt (%1)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1075"/>
@@ -6497,7 +6489,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4096"/>
         <source>Hide host processes from processes running in the sandbox.</source>
-        <translation>Korumalı alanda çalışan işlemlerden ana bilgisayar işlemlerini gizler.</translation>
+        <translation>Korumalı alanda çalışan işlemlerden ana sistem işlemlerini gizler.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="486"/>
@@ -6573,7 +6565,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1050"/>
         <source>Make applications think they are running elevated (allows to run installers safely)</source>
-        <translation>Uygulamaların yetkilendirilmiş şekilde çalıştıklarını düşünmelerini sağla (Yükleyicileri güvenli bir şekilde çalıştırmanıza izin verir)</translation>
+        <translation>Uygulamaların yetkilendirilmiş çalıştıklarını düşünmelerini sağla (Yükleyicileri güvenli bir şekilde çalıştırmanıza izin verir)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="839"/>
@@ -6648,12 +6640,12 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="340"/>
         <source>Encrypt sandbox content</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan içeriğini şifrele</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="354"/>
         <source>When &lt;a href=&quot;sbie:// docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Alan Şifreleme&lt;/a&gt; etkinleştirildiğinde, kayıt defteri kovanı da dahil olmak üzere alanın kök klasörü, &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;un&lt;/a&gt; AES-XTS uygulaması kullanılarak şifrelenmiş bir disk görüntüsünde depolanır.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="401"/>
@@ -6663,17 +6655,17 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="414"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bellek Diski ve Disk Görüntüsü desteğini etkinleştirmek için &lt;a href=&quot;addon://ImDisk&quot;&gt;ImDisk&lt;/a&gt; sürücüsünü yükleyin.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="445"/>
         <source>Store the sandbox content in a Ram Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan içeriğini bir Bellek Diskinde sakla</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="462"/>
         <source>Set Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Parola Ayarla</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="469"/>
@@ -6752,7 +6744,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1245"/>
         <source>Disable Security Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Güvenlik Yalıtımını Devre Dışı Bırak</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1320"/>
@@ -6763,47 +6755,47 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
         <location filename="Forms/OptionsWindow.ui" line="1347"/>
         <location filename="Forms/OptionsWindow.ui" line="1464"/>
         <source>Box Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Alan Koruması</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1362"/>
         <source>Protect processes within this box from host processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu alandaki işlemleri ana sistemdeki işlemlerinden koru</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1415"/>
         <source>Allow Process</source>
-        <translation type="unfinished"></translation>
+        <translation>İşleme İzin Ver</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1471"/>
         <source>Issue message 1318/1317 when a host process tries to access a sandboxed process/the box root</source>
-        <translation type="unfinished"></translation>
+        <translation>Ana sistemdeki bir işlem, korumalı alanda çalışan bir işleme/alan köküne erişmeye çalıştığında 1318/1317 mesajı yayınla</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1478"/>
         <source>Sandboxie-Plus is able to create confidential sandboxes that provide robust protection against unauthorized surveillance or tampering by host processes. By utilizing an encrypted sandbox image, this feature delivers the highest level of operational confidentiality, ensuring the safety and integrity of sandboxed processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus, yetkisiz gözetime veya ana sistem işlemleri tarafından yapılabilecek müdahalelere karşı sağlam koruma sağlayan gizli korumalı alanlar oluşturabilir. Bu özellik şifrelenmiş bir korumalı alan görüntüsü kullanarak en yüksek düzeyde operasyonel gizlilik sunar ve korumalı alanda çalışan tüm işlemlerin güvenliğini ve bütünlüğünü sağlar.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1488"/>
         <source>Deny Process</source>
-        <translation type="unfinished"></translation>
+        <translation>İşlemi Reddet</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1513"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished">Anonim kullanıcı yerine Sandboxie oturum açma belirteci kullan</translation>
+        <translation>Anonim kullanıcı yerine Sandboxie oturum açma belirteci kullan</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1963"/>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc…) extensions. Please review the security section for each option in the documentation before use.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;GÜVENLİK TAVSİYESİ&lt;/font&gt;:&lt;/b&gt; &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; ve/veya &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; ayarlarının Open[File/Pipe]Path yönergeleriyle birlikte kullanımı ya da &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; ayarının herhangi bir * veya güvensiz (*.exe;*.dll;*.ocx; *.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc…) uzantı ile kullanımı sistem güvenliğini tehlikeye atabilir. Lütfen bu ayarları kullanmadan önce her bir seçenek için belgelerdeki güvenlik bölümünü inceleyin.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2739"/>
         <source>Configure which processes can access Desktop objects like Windows and alike.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hangi işlemlerin pencereler ve benzeri masaüstü nesnelerine erişebileceğini yapılandırın.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3592"/>
@@ -6818,7 +6810,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3623"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
-        <translation>Sistemde kurulu korumalı alan programlarına korumalı alandan DLL&apos;lerin yüklenmesini önle</translation>
+        <translation>Korumalı alan programlarının korumalı alandan DLL yüklenmesini önle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3561"/>
@@ -6834,9 +6826,9 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
         <location filename="Forms/OptionsWindow.ui" line="3619"/>
         <source>Sandboxie’s resource access rules often discriminate against program binaries located inside the sandbox. OpenFilePath and OpenKeyPath work only for application binaries located on the host natively. In order to define a rule without this restriction, OpenPipePath or OpenConfPath must be used. Likewise, all Closed(File|Key|Ipc)Path directives which are defined by negation e.g. ‘ClosedFilePath=! iexplore.exe,C:Users*’ will be always closed for binaries located inside a sandbox. Both restriction policies can be disabled on the “Access policies” page.
 This is done to prevent rogue processes inside the sandbox from creating a renamed copy of themselves and accessing protected resources. Another exploit vector is the injection of a library into an authorized process to get access to everything it is allowed to access. Using Host Image Protection, this can be prevented by blocking applications (installed on the host) running inside a sandbox from loading libraries from the sandbox itself.</source>
-        <translation>Sandboxie&apos;nin kaynak erişim kuralları, genellikle korumalı alan içinde bulunan program ikili dosyalarına göre ayrım yapar. OpenFilePath ve OpenKeyPath yalnızca ana bilgisayarda yerel olarak bulunan uygulama ikili dosyaları için çalışır. 
+        <translation>Sandboxie&apos;nin kaynak erişim kuralları, genellikle korumalı alan içinde bulunan program ikili dosyalarına göre ayrım yapar. OpenFilePath ve OpenKeyPath yalnızca ana sistemde yerel olarak bulunan uygulama ikili dosyaları için çalışır. 
 Bu kısıtlama olmaksızın bir kural tanımlamak için OpenPipePath veya OpenConfPath kullanılmalıdır. Aynı şekilde, olumsuzlama ile tanımlanan tüm Closed(File|Key|Ipc)Path yönergeleri, örn. &apos;ClosedFilePath=! iexplore.exe,C:Users*&apos;, korumalı alan içinde bulunan ikili dosyalar için her zaman kapalı olacaktır. Her iki kısıtlama ilkesi de &quot;Erişim İlkeleri&quot; sayfasından devre dışı bırakılabilir.
-Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırılmış bir kopyasını oluşturmasını ve korunan kaynaklara erişmesini önlemek için yapılır. Başka bir istismar vektörü de bir kütüphanenin yetkili bir işleme yerleşerek ona izin verilen her şeye erişim hakkı elde etmesidir. Ana Bilgisayar Görüntü Koruması kullanılarak, bir korumalı alanda çalışan uygulamaların (ana bilgisayarda yüklü) korumalı alanda bulunan kütüphaneleri yüklemesi engellenerek bu durum önlenebilir.</translation>
+Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırılmış bir kopyasını oluşturmasını ve korunan kaynaklara erişmesini önlemek için yapılır. Başka bir istismar vektörü de bir kütüphanenin yetkili bir işleme yerleşerek ona izin verilen her şeye erişim hakkı elde etmesidir. Ana Sistem Görüntü Koruması kullanılarak, bir korumalı alanda çalışan uygulamaların (ana sistemde yüklü) korumalı alanda bulunan kütüphaneleri yüklemesi engellenerek bu durum önlenebilir.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3643"/>
@@ -6847,10 +6839,6 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
         <location filename="Forms/OptionsWindow.ui" line="1505"/>
         <source>Advanced Security</source>
         <translation>Gelişmiş Güvenlik</translation>
-    </message>
-    <message>
-        <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
-        <translation type="vanished">Anonim bir belirteç (deneysel) yerine Sandboxie oturum açmayı kullan</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1530"/>
@@ -6974,10 +6962,6 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
         <translation>Wnd Sınıfı</translation>
     </message>
     <message>
-        <source>Configure which processes can access desktop objects like windows and alike.</source>
-        <translation type="vanished">Hangi işlemlerin pencereler ve benzeri masaüstü nesnelerine erişebileceğini yapılandırın.</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="2752"/>
         <source>COM</source>
         <translation>COM</translation>
@@ -6995,7 +6979,7 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2857"/>
         <source>Don&apos;t use virtualized COM, Open access to hosts COM infrastructure (not recommended)</source>
-        <translation>Sanallaştırılmış COM kullanılmasın, Ana bilgisayar COM altyapısına açık erişim sağlar (Önerilmez)</translation>
+        <translation>Sanallaştırılmış COM kullanılmasın, ana sistem COM altyapısına açık erişim sağlar (Önerilmez)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2865"/>
@@ -7065,17 +7049,13 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1422"/>
         <source>Protect processes in this box from being accessed by specified unsandboxed host processes.</source>
-        <translation>Bu alandaki işlemlere korumalı alan dışındaki ana bilgisayar işlemleri tarafından erişilmesini engeller.</translation>
+        <translation>Bu alandaki işlemlere korumalı alan dışındaki ana sistem işlemleri tarafından erişilmesini engeller.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1436"/>
         <location filename="Forms/OptionsWindow.ui" line="4117"/>
         <source>Process</source>
         <translation>İşlem</translation>
-    </message>
-    <message>
-        <source>Block also read access to processes in this sandbox</source>
-        <translation type="vanished">Bu korumalı alandaki işlemlere okuma erişimini de engelle</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3735"/>
@@ -7098,10 +7078,6 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
         <translation>Tüm SetError Mesajlarını İzleme Günlüğüne Kaydet (Çok fazla çıktı oluşturur)</translation>
     </message>
     <message>
-        <source>Ntdll syscall Trace (creates a lot of output)</source>
-        <translation type="vanished">Ntdll Syscall İzleme (Çok fazla çıktı oluşturur)</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="513"/>
         <source>Prompt user for large file migration</source>
         <translation>Büyük dosya taşınması için kullanıcıya sor</translation>
@@ -7119,12 +7095,12 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4275"/>
         <source>DNS Request Logging</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS İstek Günlüğü</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4296"/>
         <source>Syscall Trace (creates a lot of output)</source>
-        <translation type="unfinished"></translation>
+        <translation>Syscall İzleme (Çok fazla çıktı oluşturur)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4574"/>
@@ -7412,10 +7388,6 @@ Lütfen bu değerlerin kullanıcıya özel olduğunu ve tüm alanlar için globa
         <translation>Güvenlik Yalıtımı, Sandboxie&apos;nin çok kısıtlı işlem belirteci kullanımı yoluyla korumalı alan kısıtlamalarını uygulamasının birincil yoludur. Bu devre dışı bırakılırsa, alan, uygulama bölmesi modunda çalıştırılır, yani artık sağlıklı bir güvenlik sağlayamaz ve yalnızca basit uygulama bölümlemesi sağlar.</translation>
     </message>
     <message>
-        <source>Disable Security Isolation (experimental)</source>
-        <translation type="vanished">Güvenlik Yalıtımını devre dışı bırak (Deneysel)</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="1303"/>
         <source>Security Isolation &amp; Filtering</source>
         <translation>Güvenlik Yalıtımı &amp; Filtreleme</translation>
@@ -7493,7 +7465,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3956"/>
         <source>These commands are executed only when a box is initialized. To make them run again, the box content must be deleted.</source>
-        <translation>Bu komutlar yalnızca bir alan ilk kullanıma hazırlandığında yürütülür. Tekrar çalıştırabilmeleri için alan içeriğinin silinmesi gerekir.</translation>
+        <translation>Bu komutlar yalnızca bir alan ilk kullanıma hazırlandığında yürütülür. Tekrar çalışması için alan içeriğinin silinmesi gerekir.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3959"/>
@@ -7683,7 +7655,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1981"/>
         <source>Change Password</source>
-        <translation>Parolayı değiştir</translation>
+        <translation>Parolayı Değiştir</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2043"/>
@@ -8149,7 +8121,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="541"/>
         <source>Integrate with Host Start Menu</source>
-        <translation>Ana Bilgisayar Başlat Menüsü ile entegre et</translation>
+        <translation>Ana Sistem Başlat Menüsü ile entegre et</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="805"/>
@@ -8301,32 +8273,32 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1265"/>
         <source>Addon Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Eklenti Yapılandırması</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1283"/>
         <source>Enable Ram Disk creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Bellek Diski oluşturmayı etkinleştir</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1290"/>
         <source>kilobytes</source>
-        <translation type="unfinished">kilobayt</translation>
+        <translation>kilobayt</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1303"/>
         <source>Disk Image Support</source>
-        <translation type="unfinished"></translation>
+        <translation>Disk Görüntüsü Desteği</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1323"/>
         <source>RAM Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Bellek Sınırı</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1346"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bellek Diski ve Disk Görüntüsü desteğini etkinleştirmek için &lt;a href=&quot;addon://ImDisk&quot;&gt;ImDisk&lt;/a&gt; sürücüsünü yükleyin.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1373"/>

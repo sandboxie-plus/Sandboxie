@@ -68,8 +68,8 @@ private slots:
     void OnAdvanced();
 
 private:
-    QComboBox*      m_pBoxType;
 #ifdef USE_COMBO
+    QComboBox*      m_pBoxType;
     QLabel*         m_pInfoLabel;
 #endif
     QLineEdit*      m_pBoxName;

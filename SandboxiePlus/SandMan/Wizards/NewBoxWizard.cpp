@@ -403,12 +403,16 @@ void CBoxTypePage::OnAdvanced()
     if (m_bInstant)
     {
         QString BoxName = m_pBoxName->text();
+#ifdef USE_COMBO
         int BoxType = m_pBoxType->currentIndex();
+#endif
 
         wizard()->restart();
 
         m_pBoxName->setText(BoxName);
+#ifdef USE_COMBO
         m_pBoxType->setCurrentIndex(BoxType);
+#endif
     }
 }
 

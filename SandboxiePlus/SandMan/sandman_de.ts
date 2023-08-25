@@ -16,7 +16,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="61"/>
         <source>Protect Box Root from access by unsandboxed processes</source>
-        <translation>Schütze Boxquelle vor Zugriff durch nicht sangeboxte Prozesse</translation>
+        <translation>Schütze Boxquelle vor Zugriff durch nicht sandgeboxte Prozesse</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="98"/>

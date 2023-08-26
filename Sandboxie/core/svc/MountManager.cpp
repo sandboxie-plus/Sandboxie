@@ -966,7 +966,7 @@ bool MountManager::AcquireBoxRoot(const WCHAR* boxname, const WCHAR* reg_root, c
 
     if (!pRoot->InUse) {
         std::shared_ptr<BOX_MOUNT>& pMount = UseRamDisk ? m_RamDisk : pRoot->Mount;
-        if (pMount && pRoot->Mount && !pRoot->Mount->NtPath.empty()) {
+        if (pMount && !pMount->NtPath.empty()) {
             std::wstring proxy = ImDiskQueryDeviceProxy(pMount->NtPath);
             if (_wcsnicmp(proxy.c_str(), L"\\BaseNamedObjects\\Global\\" IMBOX_PROXY, 25 + 11) != 0)
                 pMount->NtPath.clear();
@@ -1019,22 +1019,22 @@ bool MountManager::AcquireBoxRoot(const WCHAR* boxname, const WCHAR* reg_root, c
             
         if (!pRoot->Mount || pRoot->Mount->NtPath.empty())
             errlvl = 0x11;
-        else {
-            TargetNtPath = pRoot->Mount->NtPath + L"\\";
-            if (UseRamDisk) // ram disk is shared so individualize the folder names
-                TargetNtPath += boxname;
-            else
-                TargetNtPath += SBIEDISK_LABEL;
+        else
             pRoot->Path = file_root;
-        }
         //    pRoot->Mount->RefCount++;
     }
 
-    if (!TargetNtPath.empty()) {
+    if (errlvl == 0 && !pRoot->InUse) {
 
         //
         // Append box name and try to create
         //
+
+        TargetNtPath = pRoot->Mount->NtPath + L"\\";
+        if (UseRamDisk) // ram disk is shared so individualize the folder names
+            TargetNtPath += boxname;
+        else
+            TargetNtPath += SBIEDISK_LABEL;
 
         HANDLE handle = OpenOrCreateNtFolder(TargetNtPath.c_str());
         if (!handle)
@@ -1085,7 +1085,7 @@ void MountManager::LockBoxRoot(const WCHAR* reg_root, ULONG session_id)
     auto I = m_RootMap.find(reg_root);
     if (I != m_RootMap.end()) {
 //        SbieApi_LogEx(session_id, 2201, L"LockBoxRoot %S", reg_root);
-        I->second->InUse = false;
+        I->second->InUse = true;
     }
     
     LeaveCriticalSection(&m_CritSec);

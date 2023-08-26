@@ -261,7 +261,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="650"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
-        <oldsource>该功能可能对兼容性造成影响，因为它阻止了沙箱内的进程向主机进程写入数据，以及启动它们。</oldsource>
+        <oldsource>该功能可能对兼容性造成影响，因为它阻止了沙盒内的进程向主机进程写入数据，以及启动它们。</oldsource>
         <translation></translation>
     </message>
     <message>
@@ -284,7 +284,7 @@
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="236"/>
         <source>Welcome to the Troubleshooting Wizard for Sandboxie-Plus. This interactive assistant is designed to help you in resolving sandboxing issues.</source>
-        <translation>欢迎使用 Sandboxie Plus 故障排除向导。这个交互式助手旨在帮助您解决沙箱问题。</translation>
+        <translation>欢迎使用 Sandboxie Plus 故障排除向导。这个交互式助手旨在帮助您解决沙盒问题。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="279"/>
@@ -343,7 +343,7 @@
         <location filename="Wizards/BoxAssistant.cpp" line="210"/>
         <source>A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an inconsistent state.</source>
         <oldsource>A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an incosistent state.</oldsource>
-        <translation>正在进行故障排除程序，取消向导将中止它，这可能会使沙箱处于不一致的状态。</translation>
+        <translation>正在进行故障排除程序，取消向导将中止它，这可能会使沙盒处于不一致的状态。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="211"/>
@@ -496,7 +496,7 @@ only C:\Windows and C:\Program Files directories are accessible to processes run
         <location filename="Wizards/NewBoxWizard.cpp" line="300"/>
         <source>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme. 
 Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</source>
-        <translation>该沙盒类型提供 Sandboxie classic 的默认行为。 它为用户提供了熟悉且可靠的沙箱方案。
+        <translation>该沙盒类型提供 Sandboxie classic 的默认行为。 它为用户提供了熟悉且可靠的沙盒方案。
 应用程序可以在该沙盒内运行，确保它们的运行空间受控且隔离。</translation>
     </message>
     <message>
@@ -1103,7 +1103,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="165"/>
         <source>Welcome to the Setup Wizard. This wizard will help you to configure your copy of &lt;b&gt;Sandboxie-Plus&lt;/b&gt;. You can start this wizard at any time from the Sandbox-&gt;Maintenance menu if you do not wish to complete it now.</source>
-        <translation>欢迎来到设置指南，本指南将帮助配置你的 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 副本设置。如果你不希望现在就完成向导设置，你可以从 “沙盒 -&gt; 维护”菜单中随时重新启动此向导</translation>
+        <translation>欢迎来到设置向导，本向导将帮助配置你的 &lt;b&gt;Sandboxie-Plus&lt;/b&gt; 副本设置。如果你不希望现在就完成向导设置，你可以从 “沙盒 -&gt; 维护”菜单中随时重新启动此向导</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="174"/>
@@ -2960,7 +2960,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="460"/>
         <source>Setup Wizard</source>
-        <translation>设置指南</translation>
+        <translation>设置向导</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="463"/>
@@ -5533,7 +5533,7 @@ Error: %1</source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="33"/>
         <source>Setup Wizard</source>
-        <translation>设置指南</translation>
+        <translation>设置向导</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="44"/>
@@ -5826,7 +5826,7 @@ Processes in this box will be running with a custom process token indicating the
         <oldsource>
 Processes in this box will be running with a custom process token indicating the sandbox thay belong to.</oldsource>
         <translation>
-该沙箱中的进程将会以沙箱专属的自定义进程凭据运行</translation>
+该沙盒中的进程将会以沙盒专属的自定义进程凭据运行</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="795"/>
@@ -7070,7 +7070,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
 这样做是为了防止沙盒内的流氓进程创建自己的重命名副本并访问受保护的资源
 
 另一个漏洞载体是将一个动态链接库注入到一个被授权进程中，以获得对被授权进程所允许访问的一切资源的访问权
-使用主机映像保护，可以通过阻止在沙箱内运行的应用程序（安装在宿主上的）加载来自沙盒的动态链接库来防止此类现象</translation>
+使用主机映像保护，可以通过阻止在沙盒内运行的应用程序（安装在宿主上的）加载来自沙盒的动态链接库来防止此类现象</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3643"/>

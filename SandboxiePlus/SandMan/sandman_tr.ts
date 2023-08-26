@@ -69,17 +69,17 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="190"/>
-        <source>Addon not found, please try updating the addon list in the global settings!</source>
+        <source>Addon not found, please try updating the add-on list in the global settings!</source>
         <translation>Eklenti bulunamadı, lütfen genel ayarlardan eklenti listesini güncellemeyi deneyin!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="234"/>
-        <source>Addon Not Found</source>
+        <source>Add-on Not Found</source>
         <translation>Eklenti Bulunamadı</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="235"/>
-        <source>Addon is not available for this platform</source>
+        <source>Add-on is not available for this platform</source>
         <translation>Eklenti bu platform için mevcut değil</translation>
     </message>
     <message>
@@ -89,22 +89,22 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="237"/>
-        <source>Executing addon setup failed</source>
+        <source>Executing add-on setup failed</source>
         <translation>Eklenti kurulumu yürütülemedi</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="238"/>
-        <source>Failed to delete a file during addon removal</source>
+        <source>Failed to delete a file during add-on removal</source>
         <translation>Eklenti kaldırma işlemi sırasında bir dosya silinemedi</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="252"/>
-        <source>Updater failed to perform addon operation</source>
+        <source>Updater failed to perform add-on operation</source>
         <translation>Güncelleyici, eklenti işlemini gerçekleştiremedi</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="254"/>
-        <source>Updater failed to perform addon operation, error: %1</source>
+        <source>Updater failed to perform add-on operation, error: %1</source>
         <translation>Güncelleyici, eklenti işlemini gerçekleştiremedi, hata: %1</translation>
     </message>
     <message>
@@ -119,7 +119,7 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="214"/>
-        <source>Addon not found!</source>
+        <source>Add-on not found!</source>
         <translation>Eklenti bulunamadı!</translation>
     </message>
 </context>
@@ -244,7 +244,7 @@
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="101"/>
-        <source>To debug troubleshooting scripts you need the V4 Script Debugger addon, do you want to download and install it?</source>
+        <source>To debug troubleshooting scripts you need the V4 Script Debugger add-on, do you want to download and install it?</source>
         <translation>Sorun giderme betiklerinde hata ayıklamak için V4 Script Debugger eklentisine ihtiyacınız var, onu indirip yüklemek istiyor musunuz?</translation>
     </message>
     <message>
@@ -2477,12 +2477,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="641"/>
-        <source>Keep the list of optional Addon components up to date</source>
+        <source>Keep the list of optional Add-on components up to date</source>
         <translation>İsteğe bağlı Eklenti bileşenlerinin listesini güncel tut</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="642"/>
-        <source>Check for latest available addons.</source>
+        <source>Check for latest available add-ons.</source>
         <translation>Mevcut en son eklentileri denetler.</translation>
     </message>
     <message>
@@ -5205,7 +5205,7 @@ Hayır şunları seçer: %2</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1717"/>
-        <source>This Addon is mandatory and can not be removed.</source>
+        <source>This Add-on is mandatory and can not be removed.</source>
         <translation>Bu Eklenti zorunludur ve kaldırılamaz.</translation>
     </message>
     <message>
@@ -6644,7 +6644,7 @@ Not: Bir korumalı alana ilişkin Zorunlu Programlar ve Zorunlu Klasörler ayarl
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="354"/>
-        <source>When &lt;a href=&quot;sbie:// docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
+        <source>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
         <translation>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Alan Şifreleme&lt;/a&gt; etkinleştirildiğinde, kayıt defteri kovanı da dahil olmak üzere alanın kök klasörü, &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;un&lt;/a&gt; AES-XTS uygulaması kullanılarak şifrelenmiş bir disk görüntüsünde depolanır.</translation>
     </message>
     <message>
@@ -6832,7 +6832,7 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3643"/>
-        <source>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the addon manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</source>
+        <source>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</source>
         <translation>Sandboxie&apos;nin işlevselliği, korumalı alanda herhangi bir işlem başlatıldığında SbieDll.dll tarafından ona yüklenebilen, isteğe bağlı DLL&apos;ler kullanılarak genişletilebilir. Genel ayarlardaki Eklenti Yöneticisinde bazı yararlı uzantılar sunulmaktadır. Bunlar kurulduktan sonra geçerli kutu için buradan etkinleştirilebilirler.</translation>
     </message>
     <message>
@@ -8232,17 +8232,17 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1173"/>
-        <source>Addons Manager</source>
+        <source>Add-Ons Manager</source>
         <translation>Eklenti Yöneticisi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1183"/>
-        <source>Optional Addons</source>
+        <source>Optional Add-Ons</source>
         <translation>İsteğe Bağlı Eklentiler</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1191"/>
-        <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of addons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
+        <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of add-ons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
         <translation>Sandboxie-Plus çok sayıda seçenek sunar ve çok çeşitli uzantıları destekler. Bu sayfadan eklentilerin, uzantıların ve diğer üçüncü taraf bileşenlerin entegrasyonunu yapılandırabilirsiniz. İsteğe bağlı bileşenler web&apos;den indirilebilir ve bazı kurulumlar yönetici ayrıcalıkları gerektirebilir.</translation>
     </message>
     <message>
@@ -8262,7 +8262,7 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1245"/>
-        <source>&lt;a href=&quot;sbie://addons&quot;&gt;update addon list now&lt;/a&gt;</source>
+        <source>&lt;a href=&quot;sbie://addons&quot;&gt;update add-on list now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://addons&quot;&gt;Eklenti listesini şimdi güncelle&lt;/a&gt;</translation>
     </message>
     <message>
@@ -8272,7 +8272,7 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1265"/>
-        <source>Addon Configuration</source>
+        <source>Add-On Configuration</source>
         <translation>Eklenti Yapılandırması</translation>
     </message>
     <message>
@@ -8332,7 +8332,7 @@ The process match level has a higher priority than the specificity and describes
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1564"/>
-        <source>Keep addon list up to date</source>
+        <source>Keep add-on list up to date</source>
         <translation>Eklenti listesini güncel tut</translation>
     </message>
     <message>

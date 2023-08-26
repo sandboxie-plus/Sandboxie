@@ -1714,7 +1714,7 @@ void CSettingsWindow::OnRemoveAddon()
 	
 	QString Id = pItem->data(0, Qt::UserRole).toString();
 	if (Id.isEmpty()) {
-		QMessageBox::warning(this, "Sandboxie-Plus", tr("This Addon is mandatory and can not be removed."));
+		QMessageBox::warning(this, "Sandboxie-Plus", tr("This Add-on is mandatory and can not be removed."));
 		return;
 	}
 	SB_PROGRESS Status = theGUI->GetAddonManager()->TryRemoveAddon(Id, this);

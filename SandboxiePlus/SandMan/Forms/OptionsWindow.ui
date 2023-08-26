@@ -351,7 +351,7 @@
                <item row="6" column="2" colspan="4">
                 <widget class="QLabel" name="lblCrypto">
                  <property name="text">
-                  <string>When &lt;a href=&quot;sbie:// docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor's&lt;/a&gt; AES-XTS implementation.</string>
+                  <string>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor's&lt;/a&gt; AES-XTS implementation.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
@@ -3640,7 +3640,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the addon manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</string>
+                  <string>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>

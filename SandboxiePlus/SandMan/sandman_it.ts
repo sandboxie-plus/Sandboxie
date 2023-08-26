@@ -69,17 +69,17 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="190"/>
-        <source>Addon not found, please try updating the addon list in the global settings!</source>
+        <source>Addon not found, please try updating the add-on list in the global settings!</source>
         <translation>Componente aggiuntivo non trovato, provare ad aggiornare la lista dei componenti aggiuntivi nelle impostazioni globali!</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="234"/>
-        <source>Addon Not Found</source>
+        <source>Add-on Not Found</source>
         <translation>Componente aggiuntivo non trovato</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="235"/>
-        <source>Addon is not available for this platform</source>
+        <source>Add-on is not available for this platform</source>
         <translation>Il componente aggiuntivo non è disponibile per questa piattaforma</translation>
     </message>
     <message>
@@ -89,36 +89,36 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="237"/>
-        <source>Executing addon setup failed</source>
+        <source>Executing add-on setup failed</source>
         <translation>Esecuzione della configurazione del componente aggiuntivo non riuscita</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="238"/>
-        <source>Failed to delete a file during addon removal</source>
+        <source>Failed to delete a file during add-on removal</source>
         <translation>Impossibile eliminare un file durante la rimozione del componente aggiuntivo</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="252"/>
-        <source>Updater failed to perform addon operation</source>
+        <source>Updater failed to perform add-on operation</source>
         <oldsource>Updater failed to perform plugin operation</oldsource>
         <translation>Il programma di aggiornamento non è riuscito a eseguire un&apos;operazione del componente aggiuntivo</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="254"/>
-        <source>Updater failed to perform addon operation, error: %1</source>
+        <source>Updater failed to perform add-on operation, error: %1</source>
         <oldsource>Updater failed to perform plugin operation, error: %1</oldsource>
         <translation>Il programma di aggiornamento non è riuscito a eseguire un&apos;operazione del componente aggiuntivo, errore: %1</translation>
     </message>
     <message>
-        <source>Addon already installed!</source>
+        <source>Add-on already installed!</source>
         <translation type="vanished">Componente aggiuntivo già installato!</translation>
     </message>
     <message>
-        <source>Addon has no download url, addon may not be available for your platform.</source>
+        <source>Addon has no download url, add-on may not be available for your platform.</source>
         <translation type="vanished">Il componente aggiuntivo non possiede un URL di download, il componente aggiuntivo potrebbe non essere disponibile per la tua piattaforma.</translation>
     </message>
     <message>
-        <source>Downloading Addon %1</source>
+        <source>Downloading Add-on %1</source>
         <translation type="vanished">Download in corso del componente aggiuntivo: %1</translation>
     </message>
     <message>
@@ -126,7 +126,7 @@
         <translation type="vanished">La firma del file scaricato non è valida!</translation>
     </message>
     <message>
-        <source>Installing Addon %1</source>
+        <source>Installing Add-on %1</source>
         <translation type="vanished">Installazione del componente aggiuntvo %1</translation>
     </message>
     <message>
@@ -143,12 +143,12 @@
         <translation type="vanished">Copia dei file per %1</translation>
     </message>
     <message>
-        <source>Failed to unpack addon!</source>
+        <source>Failed to unpack add-on!</source>
         <oldsource>Failes to unpack addon!</oldsource>
         <translation type="vanished">Impossibile estrarre il componente aggiuntivo!</translation>
     </message>
     <message>
-        <source>Addon Installation Failed!</source>
+        <source>Add-on Installation Failed!</source>
         <oldsource>Addon Instalation Failed!</oldsource>
         <translation type="vanished">Impossibile installare il componente aggiuntivo!</translation>
     </message>
@@ -164,7 +164,7 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="214"/>
-        <source>Addon not found!</source>
+        <source>Add-on not found!</source>
         <translation>Componente aggiuntivo non trovato!</translation>
     </message>
     <message>
@@ -177,7 +177,7 @@
         <translation type="vanished">Impossibile avviare l&apos;uninstaller!</translation>
     </message>
     <message>
-        <source>Addon Removal Failed!</source>
+        <source>Add-on Removal Failed!</source>
         <translation type="vanished">Impossibile rimuovere il componente aggiuntivo!</translation>
     </message>
 </context>
@@ -308,7 +308,7 @@
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="101"/>
-        <source>To debug troubleshooting scripts you need the V4 Script Debugger addon, do you want to download and install it?</source>
+        <source>To debug troubleshooting scripts you need the V4 Script Debugger add-on, do you want to download and install it?</source>
         <translation>Per eseguire il debug degli script di risoluzione problemi è necessario il componente aggiuntivo V4 Script Debugger, si desidera scaricarlo e installarlo?</translation>
     </message>
     <message>
@@ -2619,12 +2619,12 @@ A differenza del canale di anteprima, non contiene modifiche non testate, potenz
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="641"/>
-        <source>Keep the list of optional Addon components up to date</source>
+        <source>Keep the list of optional Add-on components up to date</source>
         <translation>Mantieni aggiornata la lista dei componenti aggiuntivi facoltativi</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="642"/>
-        <source>Check for latest available addons.</source>
+        <source>Check for latest available add-ons.</source>
         <oldsource>Check for latest avaialble addons.</oldsource>
         <translation>Verifica la presenza di componenti aggiuntivi più recenti.</translation>
     </message>
@@ -5408,7 +5408,7 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1717"/>
-        <source>This Addon is mandatory and can not be removed.</source>
+        <source>This Add-on is mandatory and can not be removed.</source>
         <translation>Questo componente aggiuntivo è necessario e non può essere rimosso.</translation>
     </message>
     <message>
@@ -6591,7 +6591,7 @@ Se si è già un Great Supporter su Patreon, Sandboxie può verificare la presen
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="354"/>
-        <source>When &lt;a href=&quot;sbie:// docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
+        <source>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7077,7 +7077,7 @@ In questo modo si impedisce che i processi dannosi all&apos;interno dell&apos;ar
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3643"/>
-        <source>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the addon manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</source>
+        <source>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</source>
         <translatorcomment>Segnalare eventuali errori di inglese direttamente all&apos;autore di Sandboxie Plus</translatorcomment>
         <translation type="unfinished">La funzionalità di Sandboxie può essere migliorata utilizzando delle DLL facoltative che possono essere caricate all&apos;avvio in ogni processo dell&apos;area virtuale tramite il file SbieDll.dll. La gestione dei componenti aggiuntivi nelle impostazioni globali offre un paio di utili estensioni che, una volta installate, possono essere attivate qui per l&apos;area virtuale corrente.</translation>
     </message>
@@ -8377,17 +8377,17 @@ area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1173"/>
-        <source>Addons Manager</source>
+        <source>Add-Ons Manager</source>
         <translation>Gestione componenti aggiuntivi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1183"/>
-        <source>Optional Addons</source>
+        <source>Optional Add-Ons</source>
         <translation>Componenti aggiuntivi facoltativi</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1191"/>
-        <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of addons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
+        <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of add-ons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
         <translation>Sandboxie Plus offre numerose opzioni e un supporto ad una vasta gamma di estensioni. In questa pagina, è possibile configurare l&apos;integrazione di componenti aggiuntivi, plugin, e altri componenti di terze parti. I componenti facoltativi possono essere scaricati dal Web, e l&apos;installazione di alcuni potrebbe richiedere privilegi di amministratore.</translation>
     </message>
     <message>
@@ -8407,7 +8407,7 @@ area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1245"/>
-        <source>&lt;a href=&quot;sbie://addons&quot;&gt;update addon list now&lt;/a&gt;</source>
+        <source>&lt;a href=&quot;sbie://addons&quot;&gt;update add-on list now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://addons&quot;&gt;aggiorna la lista dei componenti aggiuntivi&lt;/a&gt;</translation>
     </message>
     <message>
@@ -8417,7 +8417,7 @@ area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1265"/>
-        <source>Addon Configuration</source>
+        <source>Add-On Configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8478,7 +8478,7 @@ area virtuale</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1564"/>
-        <source>Keep addon list up to date</source>
+        <source>Keep add-on list up to date</source>
         <translation>Mantieni aggiornata la lista dei componenti aggiuntivi</translation>
     </message>
     <message>

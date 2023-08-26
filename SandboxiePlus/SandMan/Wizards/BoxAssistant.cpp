@@ -98,7 +98,7 @@ void CBoxAssistant::OnToggleDebugger()
     m_bUseDebugger = !m_bUseDebugger;
 
     if (m_bUseDebugger && theGUI->GetAddonManager()->GetAddon("V4dbg", CAddonManager::eInstalled).isNull())
-        theGUI->GetAddonManager()->TryInstallAddon("V4dbg", this, tr("To debug troubleshooting scripts you need the V4 Script Debugger addon, do you want to download and install it?"));
+        theGUI->GetAddonManager()->TryInstallAddon("V4dbg", this, tr("To debug troubleshooting scripts you need the V4 Script Debugger add-on, do you want to download and install it?"));
 
     QString title = windowTitle();
     if (m_bUseDebugger)

@@ -69,17 +69,17 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="190"/>
-        <source>Addon not found, please try updating the addon list in the global settings!</source>
+        <source>Addon not found, please try updating the add-on list in the global settings!</source>
         <translation>未找到加载项，请尝试在全局设置中更新加载项列表！</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="234"/>
-        <source>Addon Not Found</source>
+        <source>Add-on Not Found</source>
         <translation>未找到加载项</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="235"/>
-        <source>Addon is not available for this platform</source>
+        <source>Add-on is not available for this platform</source>
         <oldsource>Addon is not available for this paltform</oldsource>
         <translation>加载项在当前平台不适用</translation>
     </message>
@@ -91,36 +91,36 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="237"/>
-        <source>Executing addon setup failed</source>
+        <source>Executing add-on setup failed</source>
         <translation>加载项安装失败</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="238"/>
-        <source>Failed to delete a file during addon removal</source>
+        <source>Failed to delete a file during add-on removal</source>
         <translation>移除加载项时删除文件失败</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="252"/>
-        <source>Updater failed to perform addon operation</source>
+        <source>Updater failed to perform add-on operation</source>
         <oldsource>Updater failed to perform plugin operation</oldsource>
         <translation>加载项更新失败</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="254"/>
-        <source>Updater failed to perform addon operation, error: %1</source>
+        <source>Updater failed to perform add-on operation, error: %1</source>
         <oldsource>Updater failed to perform plugin operation, error: %1</oldsource>
         <translation>加载项更新失败，错误： %1</translation>
     </message>
     <message>
-        <source>Addon already installed!</source>
+        <source>Add-on already installed!</source>
         <translation type="vanished">已安装加载项！</translation>
     </message>
     <message>
-        <source>Addon has no download url, addon may not be available for your platform.</source>
+        <source>Addon has no download url, add-on may not be available for your platform.</source>
         <translation type="vanished">加载项没有下载链接，该加载项可能不适用于您的平台。</translation>
     </message>
     <message>
-        <source>Downloading Addon %1</source>
+        <source>Downloading Add-on %1</source>
         <translation type="vanished">正在下载加载项%1</translation>
     </message>
     <message>
@@ -128,7 +128,7 @@
         <translation type="vanished">下载签名无效！</translation>
     </message>
     <message>
-        <source>Installing Addon %1</source>
+        <source>Installing Add-on %1</source>
         <translation type="vanished">正在安装加载项 %1</translation>
     </message>
     <message>
@@ -145,12 +145,12 @@
         <translation type="vanished">正在复制 %1 的文件</translation>
     </message>
     <message>
-        <source>Failed to unpack addon!</source>
+        <source>Failed to unpack add-on!</source>
         <oldsource>Failes to unpack addon!</oldsource>
         <translation type="vanished">无法解压缩加载项！</translation>
     </message>
     <message>
-        <source>Addon Installation Failed!</source>
+        <source>Add-on Installation Failed!</source>
         <oldsource>Addon Instalation Failed!</oldsource>
         <translation type="vanished">加载项安装失败！</translation>
     </message>
@@ -166,7 +166,7 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="214"/>
-        <source>Addon not found!</source>
+        <source>Add-on not found!</source>
         <translation>未找到加载项！</translation>
     </message>
     <message>
@@ -179,7 +179,7 @@
         <translation type="vanished">无法启动卸载程序！</translation>
     </message>
     <message>
-        <source>Addon Removal Failed!</source>
+        <source>Add-on Removal Failed!</source>
         <translation type="vanished">加载项删除失败！</translation>
     </message>
 </context>
@@ -312,7 +312,7 @@
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="101"/>
-        <source>To debug troubleshooting scripts you need the V4 Script Debugger addon, do you want to download and install it?</source>
+        <source>To debug troubleshooting scripts you need the V4 Script Debugger add-on, do you want to download and install it?</source>
         <translation>若进行调试，则需要V4 Script Debugger插件的调试脚本，是否要下载并安装它？</translation>
     </message>
     <message>
@@ -2674,12 +2674,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="641"/>
-        <source>Keep the list of optional Addon components up to date</source>
+        <source>Keep the list of optional Add-on components up to date</source>
         <translation>使可选加载项组件的列表保持最新</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="642"/>
-        <source>Check for latest available addons.</source>
+        <source>Check for latest available add-ons.</source>
         <oldsource>Check for latest avaialble addons.</oldsource>
         <translation>查看最新可用的插件。</translation>
     </message>
@@ -5463,7 +5463,7 @@ Error: %1</source>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1717"/>
-        <source>This Addon is mandatory and can not be removed.</source>
+        <source>This Add-on is mandatory and can not be removed.</source>
         <translation>此加载项是必需的，无法删除。</translation>
     </message>
     <message>
@@ -7074,7 +7074,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3643"/>
-        <source>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the addon manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</source>
+        <source>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</source>
         <translation>沙盒功能可以使用可选的dll文件来获得增强，这些dll文件可以在SbieDll.dll启动时加载到每个沙盒进程中，全局设置中的插件管理器提供了几个有用的扩展。安装后，就可以在这里为当前的沙盒启用。</translation>
     </message>
     <message>
@@ -7658,8 +7658,8 @@ Please note that this values are currently user specific and saved globally for 
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="354"/>
-        <source>When &lt;a href=&quot;sbie:// docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
-        <translation>当 &lt;a href=&quot;sbie:// docs/boxencryption&quot;&gt;沙盒加密&lt;/a&gt; 为沙盒根目录启用时，包括虚拟注册表在内，沙盒内容将会被存储在加密的磁盘映像中， 使用 &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS 实现。</translation>
+        <source>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
+        <translation>当 &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;沙盒加密&lt;/a&gt; 为沙盒根目录启用时，包括虚拟注册表在内，沙盒内容将会被存储在加密的磁盘映像中， 使用 &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS 实现。</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="401"/>
@@ -8743,17 +8743,17 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1173"/>
-        <source>Addons Manager</source>
+        <source>Add-Ons Manager</source>
         <translation>加载项管理器</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1183"/>
-        <source>Optional Addons</source>
+        <source>Optional Add-Ons</source>
         <translation>可选加载项</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1191"/>
-        <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of addons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
+        <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of add-ons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
         <translation>Sandboxie Plus提供了许多选项，并支持广泛的扩展。在这个页面上，您可以配置插件、插件和其他第三方组件。可选组件可以从网络下载，安装某些扩展可能需要管理员权限。</translation>
     </message>
     <message>
@@ -8773,7 +8773,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1245"/>
-        <source>&lt;a href=&quot;sbie://addons&quot;&gt;update addon list now&lt;/a&gt;</source>
+        <source>&lt;a href=&quot;sbie://addons&quot;&gt;update add-on list now&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://addons&quot;&gt;立即更新加载项列表&lt;/a&gt;</translation>
     </message>
     <message>
@@ -8783,7 +8783,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1265"/>
-        <source>Addon Configuration</source>
+        <source>Add-On Configuration</source>
         <translation>加载项配置</translation>
     </message>
     <message>
@@ -8843,7 +8843,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1564"/>
-        <source>Keep addon list up to date</source>
+        <source>Keep add-on list up to date</source>
         <translation>使加载项列表保持最新</translation>
     </message>
     <message>

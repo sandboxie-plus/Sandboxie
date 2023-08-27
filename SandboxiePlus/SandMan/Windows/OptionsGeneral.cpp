@@ -98,7 +98,6 @@ void COptionsWindow::CreateGeneral()
 		COptionsWindow__AddCertIcon(ui.chkConfidential, true);
 	if (!CERT_IS_LEVEL(g_CertInfo, eCertAdvanced)) {
 		COptionsWindow__AddCertIcon(ui.chkEncrypt, true);
-		COptionsWindow__AddCertIcon(ui.chkAllowEfs, true);
 	}
 
 

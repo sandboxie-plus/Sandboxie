@@ -770,7 +770,10 @@ _FX NTSTATUS KphValidateCertificate()
                 Verify_CertInfo.level = eCertMaxLevel;
             }
             else if (level && _wcsicmp(level, L"LARGE") == 0) { // 2 years - personal
-                Verify_CertInfo.level = eCertAdvanced;
+                if(CERT_IS_TYPE(Verify_CertInfo, eCertPatreon))
+                    Verify_CertInfo.level = eCertStandard2;
+                else
+                    Verify_CertInfo.level = eCertAdvanced;
                 expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval(0, 0, 2); // 2 years
             }
             else if (level && _wcsicmp(level, L"MEDIUM") == 0) { // 1 year - personal

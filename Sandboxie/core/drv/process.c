@@ -778,19 +778,29 @@ _FX PROCESS *Process_Create(
             exclusive_setting = L"NoSecurityIsolation";
         else if (proc->protect_host_images)
             exclusive_setting = L"ProtectHostImages";
-        else if (proc->confidential_box)
-            exclusive_setting = L"ConfidentialBox";
 
         if (exclusive_setting) {
 
             Log_Msg_Process(MSG_6004, proc->box->name, exclusive_setting, box->session_id, proc->pid);
 
-            //Pool_Delete(pool);
-            //Process_CreateTerminated(ProcessId, box->session_id);
-            //return NULL;
-            
             // allow the process to run for a sort while to allow the features to be evaluated
             Process_ScheduleKill(proc, 5*60*1000); // 5 minutes
+        }
+    }
+
+    if (!CERT_IS_LEVEL(Verify_CertInfo, eCertStandard2) && !proc->image_sbie) {
+        
+        const WCHAR* exclusive_setting = NULL;
+        if (proc->confidential_box)
+            exclusive_setting = L"ConfidentialBox";
+
+        if (exclusive_setting) {
+
+            Log_Msg_Process(MSG_6009, proc->box->name, exclusive_setting, box->session_id, proc->pid);
+
+            Pool_Delete(pool);
+            Process_CreateTerminated(ProcessId, box->session_id);
+            return NULL;
         }
     }
 

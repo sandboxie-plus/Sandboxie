@@ -78,7 +78,8 @@ enum ECertType {
 enum ECertLevel {
     eCertNoLevel        = 0b000,
     eCertStandard       = 0b010,
-    eCertAdvanced       = 0b100,
+    eCertStandard2      = 0b011,
+    eCertAdvanced       = 0b101,
     eCertMaxLevel       = 0b111,
 };
 

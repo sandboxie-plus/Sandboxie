@@ -523,6 +523,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	//COptionsWindow__AddCertIcon(ui.chkUpdateTemplates);
 	COptionsWindow__AddCertIcon(ui.chkUpdateIssues);
+	COptionsWindow__AddCertIcon(ui.chkRamDisk);
 
 	this->installEventFilter(this); // prevent enter from closing the dialog
 

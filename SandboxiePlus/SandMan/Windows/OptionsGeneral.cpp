@@ -87,15 +87,18 @@ void COptionsWindow::CreateGeneral()
 		}
 	}
 
-	if (g_Certificate.isEmpty()) {
+	if (!CERT_IS_LEVEL(g_CertInfo, eCertStandard)) {
 		QWidget* ExWidgets[] = { ui.chkSecurityMode, ui.chkLockDown, ui.chkRestrictDevices,
 			ui.chkPrivacy, ui.chkUseSpecificity,
-			ui.chkNoSecurityIsolation, ui.chkNoSecurityFiltering, ui.chkConfidential, ui.chkHostProtect, NULL };
+			ui.chkNoSecurityIsolation, ui.chkNoSecurityFiltering, ui.chkHostProtect, NULL };
 		for (QWidget** ExWidget = ExWidgets; *ExWidget != NULL; ExWidget++)
 			COptionsWindow__AddCertIcon(*ExWidget);
 	}
+	if (!CERT_IS_LEVEL(g_CertInfo, eCertStandard2))
+		COptionsWindow__AddCertIcon(ui.chkConfidential, true);
 	if (!CERT_IS_LEVEL(g_CertInfo, eCertAdvanced)) {
 		COptionsWindow__AddCertIcon(ui.chkEncrypt, true);
+		COptionsWindow__AddCertIcon(ui.chkAllowEfs, true);
 	}
 
 

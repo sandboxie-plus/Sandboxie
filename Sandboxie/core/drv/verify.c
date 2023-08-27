@@ -762,9 +762,9 @@ _FX NTSTATUS KphValidateCertificate()
             Verify_CertInfo.level = eCertStandard;
         else if (level && _wcsicmp(level, L"ADVANCED") == 0) 
             Verify_CertInfo.level = eCertAdvanced;
-        // scheme 1.1 >>>
         else if (CERT_IS_TYPE(Verify_CertInfo, eCertPersonal) || CERT_IS_TYPE(Verify_CertInfo, eCertPatreon))
         {
+            // scheme 1.1 >>>
             if (level && _wcsicmp(level, L"HUGE") == 0) {
                 Verify_CertInfo.type = eCertEternal;
                 Verify_CertInfo.level = eCertMaxLevel;
@@ -774,24 +774,24 @@ _FX NTSTATUS KphValidateCertificate()
                 expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval(0, 0, 2); // 2 years
             }
             else if (level && _wcsicmp(level, L"MEDIUM") == 0) { // 1 year - personal
-                Verify_CertInfo.level = eCertStandard;
+                Verify_CertInfo.level = eCertStandard2;
             }
             else if (level && _wcsicmp(level, L"ENTRY") == 0) { // PATREON-ENTRY new patreons get only 3 montgs for start
-                Verify_CertInfo.level = eCertStandard;
+                Verify_CertInfo.level = eCertStandard2;
                 if(CERT_IS_TYPE(Verify_CertInfo, eCertPatreon))
                     Verify_CertInfo.type = eCertEntryPatreon;
                 expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval(0, 3, 0);
             }
             else if (level && _wcsicmp(level, L"SMALL") == 0) { // 1 year - subscription
-                Verify_CertInfo.level = eCertStandard;
+                Verify_CertInfo.level = eCertStandard2;
                 Verify_CertInfo.type = eCertSubscription;
             }
             else
+            // <<< scheme 1.1
                 Verify_CertInfo.level = eCertStandard;
         }
         else if (CERT_IS_TYPE(Verify_CertInfo, eCertBusiness))
             Verify_CertInfo.level = eCertStandard;
-        // <<< scheme 1.1
         
         if(CertDbg)     DbgPrint("Sbie Cert level: %X\n", Verify_CertInfo.level);
 

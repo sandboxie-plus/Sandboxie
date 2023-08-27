@@ -6,17 +6,17 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="26"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulär</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="40"/>
         <source>kilobytes</source>
-        <translation type="unfinished">kilobyte</translation>
+        <translation>kilobyte</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="61"/>
         <source>Protect Box Root from access by unsandboxed processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Skydda lådans root från tillgång av osandlådade processer</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="98"/>
@@ -27,32 +27,32 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="105"/>
         <source>Show Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa lösenord</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="112"/>
         <source>Enter Password</source>
-        <translation type="unfinished"></translation>
+        <translation>För in lösenord</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="122"/>
         <source>New Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Nytt lösenord</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="132"/>
         <source>Repeat Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Upprepa lösenordet</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="142"/>
         <source>Disk Image Size</source>
-        <translation type="unfinished"></translation>
+        <translationDiskavbildsstorlek></translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="152"/>
         <source>Encryption Cipher</source>
-        <translation type="unfinished"></translation>
+        <translation>Krypteringschiffer</translation>
     </message>
 </context>
 <context>
@@ -75,41 +75,41 @@
     <message>
         <location filename="AddonManager.cpp" line="234"/>
         <source>Add-on Not Found</source>
-        <translation type="unfinished"></translation>
+        <translation>Tillägget hittades inte</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="235"/>
         <source>Add-on is not available for this platform</source>
         <oldsource>Addon is not available for this paltform</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Tillägg är inte tillgängligt för denna plattform</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="236"/>
         <source>Missing installation instructions</source>
-        <oldsource>Missing instalation instructions</oldsource>
-        <translation type="unfinished"></translation>
+        <oldsource>Missing installation instructions</oldsource>
+        <translation>Saknade installationsinstruktioner</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="237"/>
         <source>Executing add-on setup failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verkställande av tilläggsinstallation misslyckades</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="238"/>
         <source>Failed to delete a file during add-on removal</source>
-        <translation type="unfinished"></translation>
+        <translation>Misslyckades att radera en fil vid tilläggsborttagande</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="252"/>
         <source>Updater failed to perform add-on operation</source>
         <oldsource>Updater failed to perform plugin operation</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Uppdateraren lyckades inte utföra operationen för tillägget</translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="254"/>
         <source>Updater failed to perform add-on operation, error: %1</source>
         <oldsource>Updater failed to perform plugin operation, error: %1</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Uppdateraren lyckades inte utföra operationen för tillägget, fel: %1</translation>
     </message>
     <message>
         <source>Add-on already installed!</source>
@@ -363,54 +363,55 @@
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="23"/>
         <source>Sandboxie-Plus - Password Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Lösenordsinmatning</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="37"/>
         <source>Creating new box image, please enter a secure password, and choose a disk image size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Skapar ny lådavbild. Vänligen för in ett säkert lösenord, och välj en diskavbildsstorlek.</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="41"/>
         <source>Enter Box Image password:</source>
-        <translation type="unfinished"></translation>
+        <translation>För in lådavbildens lösenord:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="45"/>
         <source>Enter Box Image passwords:</source>
-        <translation type="unfinished"></translation>
+        <translation>För in lådavbildens lösenord:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="48"/>
         <source>Enter Encryption passwords for archive export:</source>
-        <translation type="unfinished"></translation>
+        <translation>För in krypteringslösenorden för arkivexport:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="51"/>
         <source>Enter Encryption passwords for archive import:</source>
-        <translation type="unfinished"></translation>
+        <translation>För in krypteringslösenorden för arkivimport:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="114"/>
         <source>kilobytes (%1)</source>
-        <translation type="unfinished">kilobytes (%1)</translation>
+        <translation>kilobytes (%1)</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="125"/>
         <source>Passwords don&apos;t match!!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Lösenorden matchar inte!</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="129"/>
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
+	<translation>VARNING: Korta lösenord är lätta att knäcka med s.k Brute Force tekniker!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
-        <translation type="unfinished"></translation>
+        <translation>Det rekommenderas att välja ett lösenord bestående av 20 tecken eller mer. Säkert att du vill använda ett kort lösenord?</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="145"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
-        <translation type="unfinished"></translation>
+        <translation>Låddiskavbilden måste vara minst 256MB i storlek, 2GB är rekommenderat.</translation>
     </message>
 </context>
 <context>
@@ -431,12 +432,12 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="222"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. </source>
-        <translation type="unfinished"></translation>
+        <translation>En sandlåda isolerar ditt värdsystem från processer körandes i lådan, den förhindrar dem från att göra permanenta ändringar till andra program och data i din dator.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="225"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
-        <translation>En sandlåda isolerar ditt värdsystem från processer körandes inuti lådan, den förhindrar dem från att göra permanenta ändringar i andra program och i data i din dator. Nivån av isolering påverkar din säkerhet såväl som kompatibiliteten med applikationer, därav kommer det vara olika nivåer av isolering beroende på den valda lådtypen. Sandboxie kan också skydda dina personliga data från tillgång av processer körandes under dess övervakning.</translation>
+        <translation>En sandlåda isolerar ditt värdsystem från processer körandes i lådan, den förhindrar dem från att göra permanenta ändringar i andra program och i data i din dator. Nivån av isolering påverkar din säkerhet såväl som kompatibiliteten med applikationer, därav kommer det vara olika nivåer av isolering beroende på den valda lådtypen. Sandboxie kan också skydda dina personliga data från tillgång av processer körandes under dess övervakning.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="236"/>
@@ -456,46 +457,49 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="290"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Säkerhetshärdad&lt;/a&gt; sandlåda med &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;dataskydd&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="291"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes. 
 It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories. 
 The entire user profile remains hidden, ensuring maximum security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Denna lådtyp erbjuder den högsta nivån av skydd via signifikant reducering av utsatt attackyta hos sandlådade processer.
+	Den begränsar strikt tillgång till användardata, tillåter processer i denna låda att endast tillgå C:\Windows and C:\Program Files kataloger.
+	Hela användarprofilen förblir dold, säkerställande maximal säkerhet.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="294"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Säkerhetshärdad&lt;/a&gt; sandlåda</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="295"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Denna lådtyp erbjuder den högsta nivån av skydd via signifikant reducering av utsatt attackyta hos sandlådade processer.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="296"/>
         <source>Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandlåda med &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;dataskydd&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="297"/>
         <source>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such, 
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</source>
-        <translation type="unfinished"></translation>
+        <translation>I denna lådtyp, är sandlådade processer förhindrade från att tillgå några personliga användarfiler eller data. Fokuset är på att skydda användardata, och då är, 
+	endast C:\Windows och C:\Program Files kataloger tillgängliga till processer körandes i denna sandlåda. Detta säkerställer att personliga filer förblir säkra.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="299"/>
         <source>Standard Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardsandlåda</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="300"/>
         <source>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme. 
 Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="302"/>

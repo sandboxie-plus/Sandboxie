@@ -31,7 +31,7 @@ CNewBoxWizard::CNewBoxWizard(bool bAlowTemp, QWidget *parent)
 
     setWindowTitle(tr("New Box Wizard"));
 
-    setMinimumWidth(600);
+    setMinimumWidth(600 * theConf->GetInt("Options/FontScaling", 100) / 100);
 }
 
 void CNewBoxWizard::showHelp()
@@ -208,10 +208,10 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Create new Sandbox"));
-    if (theGUI->m_DarkTheme)
-        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
-    else
-        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    QPixmap Logo = QPixmap(theGUI->m_DarkTheme ? ":/SideLogoDM.png" : ":/SideLogo.png");
+    int Scaling = theConf->GetInt("Options/FontScaling", 100);
+    if(Scaling !=  100) Logo = Logo.scaled(Logo.width() * Scaling / 100, Logo.height() * Scaling / 100);
+    setPixmap(QWizard::WatermarkPixmap, Logo);
 
     m_bInstant = theConf->GetBool("Options/InstantBoxWizard", false);
 
@@ -696,10 +696,10 @@ CSummaryPage::CSummaryPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Create the new Sandbox"));
-    if (theGUI->m_DarkTheme)
-        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
-    else
-        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    QPixmap Logo = QPixmap(theGUI->m_DarkTheme ? ":/SideLogoDM.png" : ":/SideLogo.png");
+    int Scaling = theConf->GetInt("Options/FontScaling", 100);
+    if(Scaling !=  100) Logo = Logo.scaled(Logo.width() * Scaling / 100, Logo.height() * Scaling / 100);
+    setPixmap(QWizard::WatermarkPixmap, Logo);
 
     int row = 0;
     QGridLayout *layout = new QGridLayout;
@@ -726,7 +726,7 @@ CSummaryPage::CSummaryPage(QWidget *parent)
 	pSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     layout->addWidget(pSpacer, row++, 1);
 
-    m_pSetInstant = new QCheckBox(tr("Don't show the summary page in future (unless advanced options were set)"));
+    m_pSetInstant = new QCheckBox(tr("Skip this summary page when advanced options are not set"));
     m_pSetInstant->setChecked(theConf->GetBool("Options/InstantBoxWizard", false));
     layout->addWidget(m_pSetInstant, row++, 1, 1, 2);
     

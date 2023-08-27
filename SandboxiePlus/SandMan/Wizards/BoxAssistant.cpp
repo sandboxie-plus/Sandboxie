@@ -226,10 +226,10 @@ CBeginPage::CBeginPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Troubleshooting Wizard"));
-    if (theGUI->m_DarkTheme)
-        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
-    else
-        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    QPixmap Logo = QPixmap(theGUI->m_DarkTheme ? ":/SideLogoDM.png" : ":/SideLogo.png");
+    int Scaling = theConf->GetInt("Options/FontScaling", 100);
+    if(Scaling !=  100) Logo = Logo.scaled(Logo.width() * Scaling / 100, Logo.height() * Scaling / 100);
+    setPixmap(QWizard::WatermarkPixmap, Logo);
 
     int row = 0;
     m_pLayout = new QGridLayout;
@@ -328,10 +328,10 @@ CGroupPage::CGroupPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Select issue from group"));
-    if (theGUI->m_DarkTheme)
-        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
-    else
-        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    QPixmap Logo = QPixmap(theGUI->m_DarkTheme ? ":/SideLogoDM.png" : ":/SideLogo.png");
+    int Scaling = theConf->GetInt("Options/FontScaling", 100);
+    if(Scaling !=  100) Logo = Logo.scaled(Logo.width() * Scaling / 100, Logo.height() * Scaling / 100);
+    setPixmap(QWizard::WatermarkPixmap, Logo);
 
     int row = 0;
     m_pLayout = new QGridLayout;
@@ -451,10 +451,10 @@ CListPage::CListPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Select issue from full list"));
-    if (theGUI->m_DarkTheme)
-        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
-    else
-        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    QPixmap Logo = QPixmap(theGUI->m_DarkTheme ? ":/SideLogoDM.png" : ":/SideLogo.png");
+    int Scaling = theConf->GetInt("Options/FontScaling", 100);
+    if(Scaling !=  100) Logo = Logo.scaled(Logo.width() * Scaling / 100, Logo.height() * Scaling / 100);
+    setPixmap(QWizard::WatermarkPixmap, Logo);
 
     int row = 0;
     m_pLayout = new QGridLayout;
@@ -807,10 +807,10 @@ CSubmitPage::CSubmitPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Submit Issue Report"));
-    if (theGUI->m_DarkTheme)
-        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
-    else
-        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    QPixmap Logo = QPixmap(theGUI->m_DarkTheme ? ":/SideLogoDM.png" : ":/SideLogo.png");
+    int Scaling = theConf->GetInt("Options/FontScaling", 100);
+    if(Scaling !=  100) Logo = Logo.scaled(Logo.width() * Scaling / 100, Logo.height() * Scaling / 100);
+    setPixmap(QWizard::WatermarkPixmap, Logo);
 
     int row = 0;
     QGridLayout* pLayout = new QGridLayout;
@@ -1060,10 +1060,10 @@ CCompletePage::CCompletePage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Troubleshooting Completed"));
-    if (theGUI->m_DarkTheme)
-        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
-    else
-        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    QPixmap Logo = QPixmap(theGUI->m_DarkTheme ? ":/SideLogoDM.png" : ":/SideLogo.png");
+    int Scaling = theConf->GetInt("Options/FontScaling", 100);
+    if(Scaling !=  100) Logo = Logo.scaled(Logo.width() * Scaling / 100, Logo.height() * Scaling / 100);
+    setPixmap(QWizard::WatermarkPixmap, Logo);
 
     QVBoxLayout *pLayout = new QVBoxLayout;
 

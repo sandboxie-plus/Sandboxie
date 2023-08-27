@@ -256,10 +256,10 @@ CTemplateTypePage::CTemplateTypePage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Create new Template"));
-    if (theGUI->m_DarkTheme)
-        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
-    else
-        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    QPixmap Logo = QPixmap(theGUI->m_DarkTheme ? ":/SideLogoDM.png" : ":/SideLogo.png");
+    int Scaling = theConf->GetInt("Options/FontScaling", 100);
+    if(Scaling !=  100) Logo = Logo.scaled(Logo.width() * Scaling / 100, Logo.height() * Scaling / 100);
+    setPixmap(QWizard::WatermarkPixmap, Logo);
 
     int row = 0;
     QGridLayout *layout = new QGridLayout;
@@ -937,10 +937,10 @@ CFinishTemplatePage::CFinishTemplatePage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Create Web Browser Template"));
-    if (theGUI->m_DarkTheme)
-        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogoDM.png"));
-    else
-        setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    QPixmap Logo = QPixmap(theGUI->m_DarkTheme ? ":/SideLogoDM.png" : ":/SideLogo.png");
+    int Scaling = theConf->GetInt("Options/FontScaling", 100);
+    if(Scaling !=  100) Logo = Logo.scaled(Logo.width() * Scaling / 100, Logo.height() * Scaling / 100);
+    setPixmap(QWizard::WatermarkPixmap, Logo);
 
     int row = 0;
     QGridLayout *layout = new QGridLayout;

@@ -638,8 +638,8 @@ CSBUpdate::CSBUpdate(QWidget *parent)
     layout->addWidget(m_pIssues, row++, 1, 1, rows-1);
     registerField("updateIssues", m_pIssues);
 
-    m_pAddons = new QCheckBox(tr("Keep the list of optional Addon components up to date"));
-    m_pAddons->setToolTip(tr("Check for latest available addons."));
+    m_pAddons = new QCheckBox(tr("Keep the list of optional Add-on components up to date"));
+    m_pAddons->setToolTip(tr("Check for latest available add-ons."));
     layout->addWidget(m_pAddons, row++, 1, 1, rows-1);
     registerField("updateAddons", m_pAddons);
 

@@ -69,17 +69,17 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="190"/>
-        <source>Addon not found, please try updating the addon list in the global settings!</source>
+        <source>Addon not found, please try updating the add-on list in the global settings!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="234"/>
-        <source>Addon Not Found</source>
+        <source>Add-on Not Found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="235"/>
-        <source>Addon is not available for this platform</source>
+        <source>Add-on is not available for this platform</source>
         <oldsource>Addon is not available for this paltform</oldsource>
         <translation type="unfinished"></translation>
     </message>
@@ -91,23 +91,23 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="237"/>
-        <source>Executing addon setup failed</source>
+        <source>Executing add-on setup failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="238"/>
-        <source>Failed to delete a file during addon removal</source>
+        <source>Failed to delete a file during add-on removal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="252"/>
-        <source>Updater failed to perform addon operation</source>
+        <source>Updater failed to perform add-on operation</source>
         <oldsource>Updater failed to perform plugin operation</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="AddonManager.cpp" line="254"/>
-        <source>Updater failed to perform addon operation, error: %1</source>
+        <source>Updater failed to perform add-on operation, error: %1</source>
         <oldsource>Updater failed to perform plugin operation, error: %1</oldsource>
         <translation type="unfinished"></translation>
     </message>
@@ -123,7 +123,7 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="214"/>
-        <source>Addon not found!</source>
+        <source>Add-on not found!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -256,7 +256,7 @@
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="101"/>
-        <source>To debug troubleshooting scripts you need the V4 Script Debugger addon, do you want to download and install it?</source>
+        <source>To debug troubleshooting scripts you need the V4 Script Debugger add-on, do you want to download and install it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2596,12 +2596,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="641"/>
-        <source>Keep the list of optional Addon components up to date</source>
+        <source>Keep the list of optional Add-on components up to date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="642"/>
-        <source>Check for latest available addons.</source>
+        <source>Check for latest available add-ons.</source>
         <oldsource>Check for latest avaialble addons.</oldsource>
         <translation type="unfinished"></translation>
     </message>
@@ -5394,7 +5394,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1717"/>
-        <source>This Addon is mandatory and can not be removed.</source>
+        <source>This Add-on is mandatory and can not be removed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6718,7 +6718,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="354"/>
-        <source>When &lt;a href=&quot;sbie:// docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
+        <source>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6897,7 +6897,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3643"/>
-        <source>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the addon manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</source>
+        <source>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8231,17 +8231,17 @@ Xin lưu ý rằng các giá trị này hiện là dành riêng cho người dù
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1173"/>
-        <source>Addons Manager</source>
+        <source>Add-Ons Manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1183"/>
-        <source>Optional Addons</source>
+        <source>Optional Add-Ons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1191"/>
-        <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of addons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
+        <source>Sandboxie-Plus offers numerous options and supports a wide range of extensions. On this page, you can configure the integration of add-ons, plugins, and other third-party components. Optional components can be downloaded from the web, and certain installations may require administrative privileges.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8261,7 +8261,7 @@ Xin lưu ý rằng các giá trị này hiện là dành riêng cho người dù
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1245"/>
-        <source>&lt;a href=&quot;sbie://addons&quot;&gt;update addon list now&lt;/a&gt;</source>
+        <source>&lt;a href=&quot;sbie://addons&quot;&gt;update add-on list now&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8271,7 +8271,7 @@ Xin lưu ý rằng các giá trị này hiện là dành riêng cho người dù
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1265"/>
-        <source>Addon Configuration</source>
+        <source>Add-On Configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8591,7 +8591,7 @@ Xin lưu ý rằng các giá trị này hiện là dành riêng cho người dù
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1564"/>
-        <source>Keep addon list up to date</source>
+        <source>Keep add-on list up to date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

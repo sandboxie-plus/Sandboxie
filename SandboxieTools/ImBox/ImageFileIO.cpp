@@ -118,13 +118,15 @@ int CImageFileIO::Init()
 bool CImageFileIO::DiskWrite(void* buf, int size, __int64 offset)
 {
 	SetFilePointerEx(m->Handle, *(LARGE_INTEGER*)&offset, NULL, FILE_BEGIN);
-	return !!WriteFile(m->Handle, buf, size, NULL, NULL);
+    DWORD BytesWritten;
+	return !!WriteFile(m->Handle, buf, size, &BytesWritten, NULL);
 }
 
 bool CImageFileIO::DiskRead(void* buf, int size, __int64 offset)
 {
 	SetFilePointerEx(m->Handle, *(LARGE_INTEGER*)&offset, NULL, FILE_BEGIN);
-	return !!ReadFile(m->Handle, buf, size, NULL, NULL);
+    DWORD BytesRead;
+	return !!ReadFile(m->Handle, buf, size, &BytesRead, NULL);
 }
 
 void CImageFileIO::TrimProcess(DEVICE_DATA_SET_RANGE* range, int n)

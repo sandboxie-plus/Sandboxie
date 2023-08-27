@@ -324,7 +324,8 @@ int CCryptoIO::BackupHeader(CAbstractIO* pIO, const std::wstring& Path)
 
 	HANDLE hFile = CreateFile(Path.c_str(), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_FLAG_NO_BUFFERING | FILE_FLAG_WRITE_THROUGH, NULL);
 	if (hFile != INVALID_HANDLE_VALUE) {
-		if (!WriteFile(hFile, header.ptr, sizeof(dc_header), NULL, NULL)) {
+		DWORD BytesWritten;
+		if (!WriteFile(hFile, header.ptr, sizeof(dc_header), &BytesWritten, NULL)) {
 			ret = ERR_FILE_NOT_OPENED;
 		}
 		CloseHandle(hFile);
@@ -349,7 +350,8 @@ int CCryptoIO::RestoreHeader(CAbstractIO* pIO, const std::wstring& Path)
 
 	HANDLE hFile = CreateFile(Path.c_str(), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_FLAG_NO_BUFFERING | FILE_FLAG_WRITE_THROUGH, NULL);
 	if (hFile != INVALID_HANDLE_VALUE) {
-		if (!ReadFile(hFile, header.ptr, sizeof(dc_header), NULL, NULL)) {
+		DWORD BytesRead;
+		if (!ReadFile(hFile, header.ptr, sizeof(dc_header), &BytesRead, NULL)) {
 			ret = ERR_FILE_NOT_OPENED;
 		}
 		CloseHandle(hFile);

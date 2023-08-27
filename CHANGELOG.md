@@ -16,6 +16,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue when re creating rambox junction
 - fixed Side logo cut-off in all wizards [#3227](https://github.com/sandboxie-plus/Sandboxie/issues/3227)
 - fixed Text cut-off in box creation wizard [#3226](https://github.com/sandboxie-plus/Sandboxie/issues/3226)
+- fixed windows 7 compatybility issue with ImBox.exe
+
 
 
 ## [1.11.0 / 5.66.0] - 2023-08-25

@@ -22,7 +22,7 @@
         <location filename="Forms/BoxImageWindow.ui" line="98"/>
         <location filename="Forms/BoxImageWindow.ui" line="162"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Textetikett</translation>
+        <translation>Textetikett</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="105"/>
@@ -403,11 +403,10 @@
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="129"/>
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
+	<translation>VARNING: Korta lösenord är lätta att knäcka med s.k Brute Force tekniker!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
-        <translation>VARNING: Korta lösenord är lätta att knäcka med s.k Brute Force tekniker!
-
-Det rekommenderas att välja ett lösenord bestående av 20 tecken eller mer. Säkert att du vill använda ett kort lösenord?</translation>
+        <translation>Det rekommenderas att välja ett lösenord bestående av 20 tecken eller mer. Säkert att du vill använda ett kort lösenord?</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="145"/>

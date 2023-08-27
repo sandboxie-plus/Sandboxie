@@ -403,10 +403,8 @@
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="129"/>
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
-
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
         <translation>VARNING: Korta lösenord är lätta att knäcka med s.k Brute Force tekniker!
-
 Det rekommenderas att välja ett lösenord bestående av 20 tecken eller mer. Säkert att du vill använda ett kort lösenord?</translation>
     </message>
     <message>

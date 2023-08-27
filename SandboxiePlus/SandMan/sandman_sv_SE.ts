@@ -47,7 +47,7 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="142"/>
         <source>Disk Image Size</source>
-        <translationDiskavbildsstorlek></translation>
+        <translation>Diskavbildsstorlek></translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="152"/>

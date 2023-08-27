@@ -69,7 +69,7 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="190"/>
-        <source>Addon not found, please try updating the add-on list in the global settings!</source>
+        <source>Add-on not found, please try updating the add-on list in the global settings!</source>
         <translation>未找到加载项，请尝试在全局设置中更新加载项列表！</translation>
     </message>
     <message>

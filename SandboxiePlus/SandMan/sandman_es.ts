@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+S<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="es_AR">
 <context>
@@ -69,7 +69,7 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="190"/>
-        <source>Addon not found, please try updating the add-on list in the global settings!</source>
+        <source>Add-on not found, please try updating the add-on list in the global settings!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

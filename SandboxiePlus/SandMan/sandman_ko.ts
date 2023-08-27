@@ -69,7 +69,7 @@
     </message>
     <message>
         <location filename="AddonManager.cpp" line="190"/>
-        <source>Addon not found, please try updating the add-on list in the global settings!</source>
+        <source>Add-on not found, please try updating the add-on list in the global settings!</source>
         <translation>추가 기능을 찾을 수 없습니다. 전역 설정에서 추가 기능 목록을 업데이트하십시오!</translation>
     </message>
     <message>

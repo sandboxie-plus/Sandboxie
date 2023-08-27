@@ -376,6 +376,13 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		}
 	});
 	connect(ui.txtRamLimit, SIGNAL(textChanged(const QString&)), this, SLOT(OnRamDiskChange()));
+	connect(ui.chkRamLetter, SIGNAL(stateChanged(int)), this, SLOT(OnRamDiskChange()));
+	connect(ui.cmbRamLetter, SIGNAL(currentIndexChanged(int)), this, SLOT(OnGeneralChanged()));
+	DWORD logical_drives = GetLogicalDrives();
+	for (CHAR search = 'D'; search <= 'Z'; search++) {
+		if ((logical_drives & (1 << (search - 'A'))) == 0)
+			ui.cmbRamLetter->addItem(QString("%1:\\").arg(QChar(search)));
+	}
 	//
 
 	// Advanced Config
@@ -521,9 +528,11 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked(bool)), this, SLOT(apply()));
 	connect(ui.buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
-	//COptionsWindow__AddCertIcon(ui.chkUpdateTemplates);
-	COptionsWindow__AddCertIcon(ui.chkUpdateIssues);
-	COptionsWindow__AddCertIcon(ui.chkRamDisk);
+	if (!CERT_IS_LEVEL(g_CertInfo, eCertStandard)) {
+		//COptionsWindow__AddCertIcon(ui.chkUpdateTemplates);
+		COptionsWindow__AddCertIcon(ui.chkUpdateIssues);
+		COptionsWindow__AddCertIcon(ui.chkRamDisk);
+	}
 
 	this->installEventFilter(this); // prevent enter from closing the dialog
 
@@ -932,6 +941,9 @@ void CSettingsWindow::LoadSettings()
 		quint32 uDiskLimit = theAPI->GetGlobalSettings()->GetNum64("RamDiskSizeKb");
 		ui.chkRamDisk->setChecked(uDiskLimit > 0);
 		if(uDiskLimit > 0) ui.txtRamLimit->setText(QString::number(uDiskLimit));
+		QString RamLetter = theAPI->GetGlobalSettings()->GetText("RamDiskLetter");
+		ui.chkRamLetter->setChecked(!RamLetter.isEmpty());
+		ui.cmbRamLetter->setCurrentText(RamLetter);
 		m_HoldChange = true;
 		OnRamDiskChange();
 		m_HoldChange = false;
@@ -1047,6 +1059,11 @@ void CSettingsWindow::LoadSettings()
 
 void CSettingsWindow::OnRamDiskChange()
 {
+	if (sender() == ui.chkRamDisk) {
+		if (ui.chkRamDisk->isChecked())
+			theGUI->CheckCertificate(this);
+	}
+
 	if (ui.chkRamDisk->isChecked() && ui.txtRamLimit->text().isEmpty())
 		ui.txtRamLimit->setText(QString::number(2 * 1024 * 1024));
 
@@ -1055,6 +1072,10 @@ void CSettingsWindow::OnRamDiskChange()
 	ui.txtRamLimit->setEnabled(bEnabled);
 	ui.lblRamLimit->setEnabled(bEnabled);
 	ui.lblRamLimit->setText(tr("kilobytes (%1)").arg(FormatSize(ui.txtRamLimit->text().toULongLong() * 1024)));
+
+	ui.chkRamLetter->setEnabled(bEnabled);
+	ui.cmbRamLetter->setEnabled(bEnabled && ui.chkRamLetter->isChecked());
+	ui.lblRamLetter->setEnabled(bEnabled && ui.chkRamLetter->isChecked());
 
 	OnGeneralChanged();
 }
@@ -1437,6 +1458,7 @@ void CSettingsWindow::SaveSettings()
 				WriteText("IpcRootPath", ui.ipcRoot->text()); //ui.ipcRoot->setText("\\Sandbox\\%USER%\\%SANDBOX%\\Session_%SESSION%");
 
 				WriteText("RamDiskSizeKb", ui.chkRamDisk->isChecked() ? ui.txtRamLimit->text() : "");
+				WriteText("RamDiskLetter", ui.chkRamLetter->isChecked() ? ui.cmbRamLetter->currentText() : "");
 
 				WriteAdvancedCheck(ui.chkWFP, "NetworkEnableWFP", "y", "");
 				WriteAdvancedCheck(ui.chkObjCb, "EnableObjectFiltering", "", "n");

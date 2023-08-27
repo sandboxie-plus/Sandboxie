@@ -729,7 +729,7 @@ retry:
 //---------------------------------------------------------------------------
 
 
-std::shared_ptr<BOX_MOUNT> MountManager::MountImDisk(const std::wstring& ImageFile, const wchar_t* pPassword, ULONG64 sizeKb, ULONG session_id)
+std::shared_ptr<BOX_MOUNT> MountManager::MountImDisk(const std::wstring& ImageFile, const wchar_t* pPassword, ULONG64 sizeKb, ULONG session_id, const wchar_t* drvLetter)
 {
     bool ok = false;
 
@@ -744,8 +744,17 @@ std::shared_ptr<BOX_MOUNT> MountManager::MountImDisk(const std::wstring& ImageFi
 
     // todo allow mounting without mount
 
-    WCHAR Drive[4] = L" :";
-    Drive[0] = ImDiskFindFreeDriveLetter();
+    WCHAR Drive[4] = L"\0:";
+    if (drvLetter) {
+        WCHAR letter = towupper(drvLetter[0]);
+        if (letter >= L'A' && letter <= L'Z' && drvLetter[1] == L':') {
+            DWORD logical_drives = GetLogicalDrives();
+            if((logical_drives & (1 << (letter - L'A'))) == 0)
+                Drive[0] = letter;
+        }
+    }
+    else
+        Drive[0] = ImDiskFindFreeDriveLetter();
     if (Drive[0] == 0) {
         SbieApi_LogEx(session_id, 2234, L"");
         return NULL;
@@ -842,8 +851,10 @@ std::shared_ptr<BOX_MOUNT> MountManager::MountImDisk(const std::wstring& ImageFi
                     
                 ok = true;
 
-                if (!DefineDosDevice(DDD_REMOVE_DEFINITION | DDD_EXACT_MATCH_ON_REMOVE | DDD_RAW_TARGET_PATH, Drive, pMount->NtPath.c_str())) {
-                    SbieApi_LogEx(session_id, 2235, L"%S", Drive);
+                if (!drvLetter) {
+                    if (!DefineDosDevice(DDD_REMOVE_DEFINITION | DDD_EXACT_MATCH_ON_REMOVE | DDD_RAW_TARGET_PATH, Drive, pMount->NtPath.c_str())) {
+                        SbieApi_LogEx(session_id, 2235, L"%S", Drive);
+                    }
                 }
             }
         }
@@ -998,8 +1009,11 @@ bool MountManager::AcquireBoxRoot(const WCHAR* boxname, const WCHAR* reg_root, c
                 ULONG sizeKb = SbieApi_QueryConfNumber(NULL, L"RamDiskSizeKb", 0);
 				if (sizeKb < 100*1024) // we want at lesat 100MB
 					SbieApi_LogEx(session_id, 2238, L"");
-				else
-                    m_RamDisk = MountImDisk(L"", NULL, sizeKb, session_id);
+                else {
+                    WCHAR drvLetter[32] = { 0 };
+                    SbieApi_QueryConf(NULL, L"RamDiskLetter", 0, drvLetter, ARRAYSIZE(drvLetter));
+                    m_RamDisk = MountImDisk(L"", NULL, sizeKb, session_id, *drvLetter ? drvLetter : NULL);
+                }
             }
             pRoot->Mount = m_RamDisk;
         }

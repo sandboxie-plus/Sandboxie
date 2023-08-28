@@ -1,4 +1,4 @@
-# Contributor Covenant Code of Conduct
+# Sandboxie's Code of Conduct
 
 ## Our Pledge
 

@@ -156,8 +156,8 @@ void COptionsWindow::LoadAdvanced()
 			int Count = 0;
 			foreach(const QString & Key, InjectDlls.keys()) {
 				QStringList List;
-				if (Key == "x64")		List = InjectDll;
-				else if (Key == "x86")	List = InjectDll64;
+				if (Key == "x64")		List = InjectDll64;
+				else if (Key == "x86")	List = InjectDll;
 #ifdef _M_ARM64
 				else if (Key == "a64")	List = InjectDllARM64;
 #endif
@@ -346,8 +346,8 @@ void COptionsWindow::SaveAdvanced()
 			QVariantMap InjectDlls = pAddon->Data["injectDlls"].toMap();
 			foreach(const QString & Key, InjectDlls.keys()) {
 				QStringList* pList;
-				if (Key == "x64")		pList = &InjectDll;
-				else if (Key == "x86")	pList = &InjectDll64;
+				if (Key == "x64")		pList = &InjectDll64;
+				else if (Key == "x86")	pList = &InjectDll;
 #ifdef _M_ARM64
 				else if (Key == "a64")	pList = &InjectDllARM64;
 #endif

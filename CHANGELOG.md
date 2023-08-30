@@ -10,13 +10,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added 'RamDiskLetter=R:\' option allowing to mount the ramdisk root to a drive letter
 
 ### Changed
-- changed the new optin layout to now be the default for non vintage views (can be changed back in the settings)
+- changed the new option layout to now be the default for non-vintage views (can be changed back in the settings)
 
 ### Fixed
-- fixed issue when re creating rambox junction
-- fixed Side logo cut-off in all wizards [#3227](https://github.com/sandboxie-plus/Sandboxie/issues/3227)
-- fixed Text cut-off in box creation wizard [#3226](https://github.com/sandboxie-plus/Sandboxie/issues/3226)
-- fixed windows 7 compatybility issue with ImBox.exe
+- fixed issue when re-creating a rambox junction
+- fixed Sandboxie logo scaling in the setup wizards [#3227](https://github.com/sandboxie-plus/Sandboxie/issues/3227)
+- fixed text cut-off in box creation wizard [#3226](https://github.com/sandboxie-plus/Sandboxie/issues/3226)
+- fixed Windows 7 compatibility issue with ImBox.exe
 - fixed issue with UseNewSymlinkResolver=y
 
 
@@ -24,13 +24,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.11.0 / 5.66.0] - 2023-08-25
 
 ### Added
-- added ImDisk driver integration, allowing to create boxes residing in a ramdisk
+- added ImDisk driver, allowing to create boxes residing in a ramdisk
 - added Encrypted Sandbox support, with this feature you can create confidential boxes not leaking data to the host pc
-  - Using the ImDisk Driver and a new ImBox component utilizing the cryptographic implementation from [DiskCryptor](https://diskcryptor.org/) the sandbox root fodler is stored in an encrypted container file.
-  - Using the SbieDrv to prevent processes not belonging to the sandbox from accessing a encrypted sandboxes root folder
-  - With the ConfidentialBox=y option host process read acess to sandboxed processes is blocked
+  - using the ImDisk Driver and a new ImBox component featuring the cryptographic implementation from [DiskCryptor](https://diskcryptor.org/) the sandbox root folder is stored in an encrypted container file
+  - using the SbieDrv to prevent processes not belonging to the sandbox from accessing an encrypted sandbox's root folder
+  - with the ConfidentialBox=y option the host process read access to sandboxed processes is blocked
 - added certificate info to the about dialog
-- added support for new more flexible certificate style
+- added support for a more flexible certificate style
 - added option for business customers to retrieve hardware-bound certificates from a serial number
 - added option to upgrade existing certificates using an upgrade serial number
 

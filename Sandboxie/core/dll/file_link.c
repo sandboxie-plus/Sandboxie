@@ -824,6 +824,7 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
     WCHAR *newpath;
     BOOLEAN stop;
     BOOLEAN bPermLinkPath = FALSE;
+    WCHAR* CopyPath = NULL;
 
     //
     // try to open the path
@@ -857,9 +858,6 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
         {
             THREAD_DATA* TlsData = Dll_GetTlsData(NULL);
 
-            WCHAR* CopyPath = NULL;
-
-
             Dll_PushTlsNameBuffer(TlsData);
 
             File_GetCopyPath(path, &CopyPath);
@@ -881,8 +879,11 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
                 NULL, 0);
 
             Dll_PopTlsNameBuffer(TlsData);
+
+            if (!NT_SUCCESS(status))
+                CopyPath = NULL;
         }
-        else
+        else // its already a copy path
             status = STATUS_BAD_INITIAL_PC;
 
         //
@@ -918,16 +919,21 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
             REPARSE_DATA_BUFFER* reparseDataBuffer = Dll_AllocTemp(MAXIMUM_REPARSE_DATA_BUFFER_SIZE);
             status = pNtFsControlFile(handle, NULL, NULL, NULL, &IoStatusBlock, FSCTL_GET_REPARSE_POINT, NULL, 0, reparseDataBuffer, MAXIMUM_REPARSE_DATA_BUFFER_SIZE);
         
+            newpath = NULL;
+
             if (NT_SUCCESS(status)) {
 
                 WCHAR* input_str = reparseDataBuffer->MountPointReparseBuffer.PathBuffer;
                 if (_wcsnicmp(input_str, File_BQQB, 4) == 0)
                     input_str = File_TranslateDosToNtPath(reparseDataBuffer->MountPointReparseBuffer.PathBuffer + 4);
 
-                newpath = File_TranslateTempLinks_2(input_str, wcslen(input_str));
+                if (input_str) {
 
-                if (input_str != reparseDataBuffer->MountPointReparseBuffer.PathBuffer)
-                    Dll_Free(input_str);
+                    newpath = File_TranslateTempLinks_2(input_str, wcslen(input_str));
+
+                    if (input_str != reparseDataBuffer->MountPointReparseBuffer.PathBuffer)
+                        Dll_Free(input_str);
+                }
 
                 /*THREAD_DATA* TlsData = Dll_GetTlsData(NULL);
 
@@ -943,10 +949,16 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
 
                 Dll_PopTlsNameBuffer(TlsData);*/
             }
-            else //if (status == STATUS_NOT_A_REPARSE_POINT) 
-            {
-                newpath = Dll_AllocTemp((wcslen(path) + 1) * sizeof(WCHAR));
-                wcscpy(newpath, path);
+            //else if (status == STATUS_NOT_A_REPARSE_POINT) 
+
+            if (!newpath) {
+
+                if (CopyPath) {
+                    newpath = Dll_AllocTemp((wcslen(path) + 1) * sizeof(WCHAR));
+                    wcscpy(newpath, path);
+                } else
+                    UserReparse = FALSE;
+
                 status = STATUS_SUCCESS;
             }
 

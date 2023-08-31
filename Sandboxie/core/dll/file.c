@@ -95,8 +95,10 @@
 
 struct _FILE_DRIVE;
 struct _FILE_LINK;
+struct _FILE_GUID;
 typedef struct _FILE_LINK FILE_LINK;
 typedef struct _FILE_DRIVE FILE_DRIVE;
+typedef struct _FILE_GUID FILE_GUID;
 
 
 

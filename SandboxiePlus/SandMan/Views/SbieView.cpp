@@ -393,6 +393,8 @@ void CSbieView::CreateOldMenu()
 		m_pMenuMarkForced = NULL;
 		m_pMenuMarkLinger = NULL;
 		m_pMenuMarkLeader = NULL;
+	m_pMenuSuspend = NULL;
+	m_pMenuResume = NULL;
 }
 
 void CSbieView::CreateGroupMenu()
@@ -670,8 +672,8 @@ void CSbieView::UpdateProcMenu(const CBoxedProcessPtr& pProcess, int iProcessCou
 		m_pMenuMarkLeader->setChecked(pProcess.objectCast<CSbieProcess>()->IsLeaderProgram());
 	}
 
-	m_pMenuSuspend->setEnabled(iProcessCount > iSuspendedCount);
-	m_pMenuResume->setEnabled(iSuspendedCount > 0);
+	if (m_pMenuSuspend) m_pMenuSuspend->setEnabled(iProcessCount > iSuspendedCount);
+	if (m_pMenuResume) m_pMenuResume->setEnabled(iSuspendedCount > 0);
 }
 
 bool CSbieView::UpdateMenu()
@@ -1887,11 +1889,13 @@ void CSbieView::OnMenuContextMenu(const QPoint& point)
 		QStringList RunOptions = pBoxPlus->GetTextList("RunCommand", true);
 
 		QString FoundPin;
-		QString FileName = pBoxPlus->GetCommandFile(LinkTarget);
+		QString Arguments;
+		QString FileName = pBoxPlus->GetCommandFile(LinkTarget, &Arguments);
 		foreach(const QString& RunOption, RunOptions) {
 			QVariantMap Entry = GetRunEntry(RunOption);
-			QString CmdFile = pBoxPlus->GetCommandFile(Entry["Command"].toString());
-			if(CmdFile.compare(FileName, Qt::CaseInsensitive) == 0) {
+			QString CurArgs;
+			QString CmdFile = pBoxPlus->GetCommandFile(Entry["Command"].toString(), &CurArgs);
+			if(CmdFile.compare(FileName, Qt::CaseInsensitive) == 0 && Arguments == CurArgs) {
 				FoundPin = RunOption;
 				break;
 			}

@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Text cut-off in box creation wizard [#3226](https://github.com/sandboxie-plus/Sandboxie/issues/3226)
 - fixed windows 7 compatybility issue with ImBox.exe
 - fixed issue with UseNewSymlinkResolver=y
+- fixed SandMan v1.10.5-1.11.0e crashed in Vintage view [#3264](https://github.com/sandboxie-plus/Sandboxie/issues/3264)
 
 
 

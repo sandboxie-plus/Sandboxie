@@ -1117,19 +1117,23 @@ QString CSandBoxPlus::MakeBoxCommand(const QString& FileName)
 	return BoxFileName.replace(m_FilePath, "%BoxRoot%", Qt::CaseInsensitive);
 }
 
-QString CSandBoxPlus::GetCommandFile(const QString& Command)
+QString CSandBoxPlus::GetCommandFile(const QString& Command, QString* Arguments)
 {
 	QString Path = Command;
+	int End;
 	if (Path.left(1) == "\"") {
-		int End = Path.indexOf("\"", 1);
+		End = Path.indexOf("\"", 1);
 		if (End != -1) Path = Path.mid(1, End - 1);
 	}
 	else {
-		int End = Path.indexOf(" ");
+		End = Path.indexOf(" ");
 		if (End != -1) Path.truncate(End);
 	}
 	//if (Path.left(1) == "\\")
 	//	Path.prepend(m_FilePath);
+
+	if (Arguments && End != -1) *Arguments = Command.mid(End + 1);
+
 	return Path.replace("%BoxRoot%", m_FilePath, Qt::CaseInsensitive);
 }
 

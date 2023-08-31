@@ -50,6 +50,15 @@ struct _FILE_LINK {
 
 };
 
+struct _FILE_GUID {
+    
+    LIST_ELEM list_elem;
+    WCHAR guid[38 + 1];
+    ULONG len;          // in characters, excluding NULL
+    WCHAR path[0];
+
+};
+
 
 //---------------------------------------------------------------------------
 // Functions
@@ -99,6 +108,7 @@ static FILE_DRIVE **File_Drives = NULL;
 
 static LIST *File_PermLinks = NULL;
 static LIST *File_TempLinks = NULL;
+static LIST *File_GuidLinks = NULL;
 
 
 //---------------------------------------------------------------------------
@@ -247,6 +257,60 @@ _FX FILE_DRIVE *File_GetDriveForLetter(WCHAR drive_letter)
     return drive;
 }
 
+
+//---------------------------------------------------------------------------
+// File_GetLinkForGuid
+//---------------------------------------------------------------------------
+
+
+_FX FILE_GUID *File_GetLinkForGuid(const WCHAR* guid_str)
+{
+    FILE_GUID *guid;
+
+    EnterCriticalSection(File_DrivesAndLinks_CritSec);
+
+    guid = List_Head(File_GuidLinks);
+    while (guid) {
+        if (_wcsnicmp(guid->guid, guid_str, 38) == 0)
+            break;
+        guid = List_Next(guid);
+    }
+
+    if(!guid)
+        LeaveCriticalSection(File_DrivesAndLinks_CritSec);
+
+    return guid;
+}
+
+
+//---------------------------------------------------------------------------
+// File_TranslateGuidToNtPath
+//---------------------------------------------------------------------------
+
+_FX WCHAR* File_TranslateGuidToNtPath(const WCHAR* input_str)
+{
+    ULONG len;
+    WCHAR* NtPath;
+
+    if (_wcsnicmp(input_str, L"\\??\\Volume{", 11) != 0)
+        return NULL;
+
+    FILE_GUID* guid = File_GetLinkForGuid(&input_str[10]);
+    if (guid) {
+
+        input_str += 48;
+        len = wcslen(input_str) + 1;
+        NtPath = Dll_Alloc((guid->len + len) * sizeof(WCHAR));
+        wmemcpy(NtPath, guid->path, guid->len);
+        wmemcpy(NtPath + guid->len, input_str, len);
+
+        LeaveCriticalSection(File_DrivesAndLinks_CritSec);
+
+        return NtPath;
+    }
+    
+    return NULL;
+}
 
 //---------------------------------------------------------------------------
 // File_AddLink
@@ -924,7 +988,9 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
             if (NT_SUCCESS(status)) {
 
                 WCHAR* input_str = reparseDataBuffer->MountPointReparseBuffer.PathBuffer;
-                if (_wcsnicmp(input_str, File_BQQB, 4) == 0)
+                if (_wcsnicmp(input_str, L"\\??\\Volume{", 11) == 0)
+                    input_str = File_TranslateGuidToNtPath(reparseDataBuffer->MountPointReparseBuffer.PathBuffer);
+                else if (_wcsnicmp(input_str, File_BQQB, 4) == 0)
                     input_str = File_TranslateDosToNtPath(reparseDataBuffer->MountPointReparseBuffer.PathBuffer + 4);
 
                 if (input_str) {

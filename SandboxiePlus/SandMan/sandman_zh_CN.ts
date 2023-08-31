@@ -812,7 +812,7 @@ Please browse to the correct user profile directory.</oldsource>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="310"/>
         <source>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; provides additional features and box types exclusively to &lt;u&gt;project supporters&lt;/u&gt;. Boxes like the Privacy Enhanced boxes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;protect user data from illicit access&lt;/font&gt;&lt;/b&gt; by the sandboxed programs. If you are not yet a supporter, then please consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;supporting the project&lt;/a&gt; to ensure further development of Sandboxie and to receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
-        <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; 为&lt;u&gt;项目赞助者&lt;/u&gt;提供额外的沙盒类型和其它高级功能。例如“隐私增强”类型的沙盒对来自沙盒化程序非法访问用户数据的行为&lt;b&gt;&lt;font color=&apos;red&apos;&gt;提供额外的用户数据保护&lt;/font&gt;&lt;/b&gt;。如果你还不是赞助者，请考虑 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠支持此项目&lt;/a&gt;来帮助 Sandboxie 的开发工作，并以此获取&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者凭据&lt;/a&gt;</translation>
+        <translation>&lt;b&gt;Sandboxie-Plus&lt;/b&gt; 为&lt;u&gt;项目赞助者&lt;/u&gt;提供额外的沙盒类型和其它高级功能。例如“隐私增强”类型的沙盒可以对来自沙盒化程序非法访问用户数据的行为&lt;b&gt;&lt;font color=&apos;red&apos;&gt;提供额外的用户数据保护&lt;/font&gt;&lt;/b&gt;。如果你还不是赞助者，请考虑&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;捐赠支持此项目&lt;/a&gt;来帮助 Sandboxie 的开发工作，并以此获取&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者凭据&lt;/a&gt;。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="347"/>
@@ -2609,12 +2609,12 @@ Error: </source>
         <location filename="Wizards/SetupWizard.cpp" line="597"/>
         <source>Select in which update channel to look for new Sandboxie-Plus builds:</source>
         <oldsource>Sellect in which update channel to look for new Sandboxie-Plus builds:</oldsource>
-        <translation>选择要在哪个更新通道中查找新的 Sandboxie Plus 版本:</translation>
+        <translation>选择要在哪个更新通道查找新的 Sandboxie Plus 版本:</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="606"/>
         <source>In the Stable Channel</source>
-        <translation>在稳定通道中</translation>
+        <translation>稳定版通道</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="607"/>
@@ -2624,7 +2624,7 @@ Error: </source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="611"/>
         <source>In the Preview Channel - with newest experimental changes</source>
-        <translation>在预览通道中-包含最新的实验性更改</translation>
+        <translation>预览版通道-包含最新的实验性更改</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="612"/>
@@ -2634,7 +2634,7 @@ Error: </source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="616"/>
         <source>In the Insider Channel - exclusive features</source>
-        <translation>在内部通道-独家功能</translation>
+        <translation>内部版通道-包含独家功能</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="617"/>
@@ -2685,7 +2685,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="651"/>
         <source>Sandboxie-Plus applies strict application restrictions, which can lead to compatibility issues. Stay updated with Sandboxie-Plus, including compatibility templates and troubleshooting, to ensure smooth operation amid Windows updates and application changes.</source>
-        <translation>Sandboxie Plus 应用了严格的应用程序限制，这可能会导致兼容性问题。让 Sandboxie Plus 及其兼容性模板和故障排除保持最新版本，以确保在 Windows 更新和应用程序更改期间顺利运行。</translation>
+        <translation>Sandboxie Plus 应用了严格的应用程序限制，这可能会导致兼容性问题。使 Sandboxie Plus （及其兼容性模板和故障排除向导）保持在最新版本，有利于在 Windows 更新和应用程序变动时无缝运行。</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="657"/>
@@ -3320,9 +3320,9 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <source>Sandboxie-Plus was running in portable mode, now it has to clean up the created services. This will prompt for administrative privileges.
 
 Do you want to do the clean up?</source>
-        <translation>Sandboxie-Plus 正运行于便携模式，现在将清理所创建的服务，这将寻求管理员权限
+        <translation>Sandboxie-Plus 正运行于便携模式，现在将清理所创建的服务。为此需要请求管理员权限
 
-是否确认清理？</translation>
+是否进行清理？</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1329"/>
@@ -3799,7 +3799,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="3390"/>
         <source>The changes will be applied automatically whenever the file gets saved.</source>
-        <translation>每次该文件被保存时，更改将自动应用</translation>
+        <translation type="unfinished">当文件被保存时，更改将自动应用</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3391"/>
@@ -5771,7 +5771,7 @@ Try submitting without the log attached.</source>
         <location filename="Wizards/NewBoxWizard.cpp" line="729"/>
         <source>Skip this summary page when advanced options are not set</source>
         <oldsource>Don&apos;t show the summary page in future (unless advanced options were set)</oldsource>
-        <translation type="unfinished">以后不再显示总结页面 (除非启用高级选项)</translation>
+        <translation>以后不再显示总结页面 (除非启用高级选项)</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="748"/>
@@ -8814,17 +8814,17 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1297"/>
         <source>Assign drive letter to Ram Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>为内存盘分配驱动器号</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1373"/>
         <source>When a Ram Disk is already mounted you need to unmount it for this option to take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>当已经装载内存盘时，您需要卸载它才能使此选项生效。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1376"/>
         <source>* takes effect on disk creation</source>
-        <translation type="unfinished"></translation>
+        <translation>* 在磁盘创建时生效</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1400"/>
@@ -8876,7 +8876,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1650"/>
         <source>Search in the Insider channel</source>
-        <translation>在内部通道中搜索</translation>
+        <translation>在内部版通道中搜索</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1697"/>

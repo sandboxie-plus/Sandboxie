@@ -22,7 +22,7 @@
         <location filename="Forms/BoxImageWindow.ui" line="98"/>
         <location filename="Forms/BoxImageWindow.ui" line="162"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Textetikett</translation>
+        <translation>Textetikett</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="105"/>
@@ -283,7 +283,7 @@
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="236"/>
         <source>Welcome to the Troubleshooting Wizard for Sandboxie-Plus. This interactive assistant is designed to help you in resolving sandboxing issues.</source>
-        <translation>Välkommen till felsökningsguiden för Sandboxie-Plus. Denna interaktiva assistent är designad för att hjälpa dig med att lösa sandlådningsproblem.</translation>
+        <translation>Välkommen till felsökningsguiden för Sandboxie-Plus. Denna interaktiva assistent är designad för att hjälpa dig att lösa sandlådningsproblem.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="279"/>
@@ -563,17 +563,17 @@ Detta säkerställer den yttersta nivån av integritets- och dataskydd inom den 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="334"/>
         <source>Application Compartment Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Applikationutrymmeslåda</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="335"/>
         <source>Confidential Encrypted Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfidentiell krypterad låda</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="451"/>
         <source>To use ancrypted boxes you need to install the ImDisk driver, do you want to download and install it?</source>
-        <translation type="unfinished"></translation>
+        <translation>För att använda krypterade lådor behöver du installera ImDisk:s drivrutin, vill du nerladda och installera den?</translation>
     </message>
     <message>
         <source>Application Compartment (NO Isolation)</source>
@@ -801,7 +801,7 @@ Vänligen gå till korrekt användarprofilskatalog.</translation>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="262"/>
         <source>Retrieve certificate using Serial Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hämta certifikat anändandes serienummer</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="268"/>
@@ -827,12 +827,13 @@ Vänligen gå till korrekt användarprofilskatalog.</translation>
         <location filename="Wizards/SetupWizard.cpp" line="348"/>
         <source>
 Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Fel: %1</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="363"/>
         <source>Retreiving certificate...</source>
-        <translation type="unfinished"></translation>
+        <translation>Hämtar certifikat...</translation>
     </message>
 </context>
 <context>
@@ -1092,7 +1093,7 @@ Du kan använda %ANVÄNDARE% för att spara varje användares sandlåda till en 
     <message>
         <location filename="OnlineUpdater.cpp" line="192"/>
         <source>Failed to download file from: %1</source>
-        <translation type="unfinished">Misslyckades att nedladda fil från: %1</translation>
+        <translation>Misslyckades att nedladda fil från: %1</translation>
     </message>
 </context>
 <context>
@@ -8092,12 +8093,12 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4275"/>
         <source>DNS Request Logging</source>
-        <translation type="unfinished"></translation>
+        <translation>Loggning av DNS-föfrågan</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4296"/>
         <source>Syscall Trace (creates a lot of output)</source>
-        <translation type="unfinished"></translation>
+        <translation>Syscall spår (skapar en logg av utdata)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4415"/>
@@ -8227,12 +8228,12 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="401"/>
         <source>Partially checked means prevent box removal but not content deletion.</source>
-        <translation type="unfinished"></translation>
+        <translation>Delvis kontrollerad betyder förhindra lådborttagning men inte innehållsradering.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2739"/>
         <source>Configure which processes can access Desktop objects like Windows and alike.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurera vilka processer som kan tillgå skrivbordsobjekt såsom Windows och liknande.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3275"/>
@@ -8252,7 +8253,7 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3551"/>
         <source>Use desktop object workaround for all processes</source>
-        <translation>Använd skrivbordsobjekt-lösningen för alla processer</translation>
+        <translation>Använd skrivbordsobjektlösningen för alla processer</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3831"/>
@@ -8751,7 +8752,7 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1950"/>
         <source>Sandboxing features</source>
-        <translation>Sandlådeegenskaper</translation>
+        <translation>Sandlådningsegenskaper</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1820"/>
@@ -8854,7 +8855,7 @@ istället för &quot;*&quot;.</translation>
         <location filename="Forms/SettingsWindow.ui" line="946"/>
         <source>Hide Sandboxie&apos;s own processes from the task list</source>
         <oldsource>Hide sandboxie&apos;s own processes from the task list</oldsource>
-        <translation type="unfinished">Dölj Sandboxie:s egna processer från aktivitetslistan</translation>
+        <translation>Dölj Sandboxie:s egna processer från aktivitetslistan</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1096"/>
@@ -8879,7 +8880,7 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1069"/>
         <source>Ini Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Ini-alternativ</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1119"/>
@@ -8889,7 +8890,7 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1156"/>
         <source>External Ini Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Extern ini-redigerare</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1173"/>
@@ -8914,7 +8915,7 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1232"/>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Version</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1237"/>
@@ -8934,37 +8935,37 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1265"/>
         <source>Add-On Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilläggskonfiguration</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1273"/>
         <source>Enable Ram Disk creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera RAM-disk skapande</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1280"/>
         <source>kilobytes</source>
-        <translation type="unfinished">kilobyte</translation>
+        <translation>kilobyte</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1297"/>
         <source>Assign drive letter to Ram Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilldela enhetsbokstav till RAM-disken</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1333"/>
         <source>Disk Image Support</source>
-        <translation type="unfinished"></translation>
+        <translation>Diskavbildsstöd</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1350"/>
         <source>RAM Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>RAM-gräns</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1317"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;addon://ImDisk&quot;&gt;Installera ImDisk:s&lt;/a&gt; drivrutin för att aktivera RAM-disk och diskavbildsstöd..</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1400"/>
@@ -8974,7 +8975,7 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1417"/>
         <source>This supporter certificate has expired, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Detta supportercertifikat har utgått, vänligen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;skaffa ett uppdaterat certifikat&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1459"/>
@@ -8984,12 +8985,12 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1469"/>
         <source>Get</source>
-        <translation type="unfinished"></translation>
+        <translation>Skaffa</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1476"/>
         <source>Retrieve/Upgrade/Renew certificate using Serial Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Hämta/Uppgradera/Förnya certifikat användandes serienummer</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1492"/>
@@ -8999,7 +9000,7 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1517"/>
         <source>SBIE_-_____-_____-_____-_____</source>
-        <translation type="unfinished"></translation>
+        <translation>SBIE_-_____-_____-_____-_____</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1605"/>
@@ -9107,12 +9108,12 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1373"/>
         <source>When a Ram Disk is already mounted you need to unmount it for this option to take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>När en RAM-disk redan är monterad behöver du avmontera den för att detta alternativ ska få effekt.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1376"/>
         <source>* takes effect on disk creation</source>
-        <translation type="unfinished"></translation>
+        <translation>* får effekt vid diskskapande</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1560"/>
@@ -9256,7 +9257,7 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade, möjligen fö
     <message>
         <location filename="Forms/SettingsWindow.ui" line="353"/>
         <source>Suppress pop-up notifications when in game / presentation mode</source>
-        <translation>Kväv popupp-meddelanden vid spel-/presentationsläge</translation>
+        <translation>Kväv popup-meddelanden vid spel-/presentationsläge</translation>
     </message>
     <message>
         <source>Compatibility</source>

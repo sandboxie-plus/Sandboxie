@@ -497,7 +497,7 @@ SBIE2230 Fehler beim Einhängen der Quelle für %2
 .
 
 2231;pop;wrn;01
-SBIE2231 Anschlussziel Umstimmigkeit %2
+SBIE2231 Anschlussziel Unstimmigkeit %2
 .
 
 2232;pop;wrn;01
@@ -525,7 +525,7 @@ SBIE2237 Fehler beim Aushängen der Quelle %2
 .
 
 2238;pop;wrn;01
-SBIE2238 RamDiskgröße ist nicht konfiguriert, oder zu klein, setzen Sie RamDiskSizeKb=1048576 (1GB in Kilobytes) in der [GlobalSettings] ini-Sektion.
+SBIE2238 Ramdiskgröße ist nicht konfiguriert, oder zu klein, setzen Sie RamDiskSizeKb=1048576 (1GB in Kilobytes) in der [GlobalSettings] ini-Sektion.
 .
 
 2239;pop;wrn;01

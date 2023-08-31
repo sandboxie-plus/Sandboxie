@@ -1238,13 +1238,11 @@ QColor CSettingsWindow::GetCertColor()
 QString CSettingsWindow::GetCertLevel()
 {
 	QString CertLevel;
-	if (g_CertInfo.level == eCertStandard)
-		CertLevel = tr("Standard");
-	else if (g_CertInfo.level == eCertAdvanced)
+	if (g_CertInfo.level == eCertAdvanced)
 		CertLevel = tr("Advanced");
 	else if (g_CertInfo.level == eCertMaxLevel)
 		CertLevel = tr("Max Level");
-	else
+	else if (g_CertInfo.level != eCertStandard && g_CertInfo.level != eCertStandard2)
 		CertLevel = tr("Level %1").arg(g_CertInfo.level);
 	return CertLevel;
 }

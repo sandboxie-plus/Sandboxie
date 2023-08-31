@@ -17,9 +17,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Sandboxie logo scaling in the setup wizards [#3227](https://github.com/sandboxie-plus/Sandboxie/issues/3227)
 - fixed text cut-off in box creation wizard [#3226](https://github.com/sandboxie-plus/Sandboxie/issues/3226)
 - fixed Windows 7 compatibility issue with ImBox.exe
-- fixed issue with UseNewSymlinkResolver=y
-- fixed SandMan v1.10.5-1.11.0e crashed in Vintage view [#3264](https://github.com/sandboxie-plus/Sandboxie/issues/3264)
-- fixed Not possible to pin more than one shortcut that points at the same file [#3259](https://github.com/sandboxie-plus/Sandboxie/issues/3259)
+- fixed issue with 'UseNewSymlinkResolver=y'
+- fixed SandMan crash in Vintage View mode [#3264](https://github.com/sandboxie-plus/Sandboxie/issues/3264)
+- fixed pinning of more than one shortcut that points at the same file [#3259](https://github.com/sandboxie-plus/Sandboxie/issues/3259)
 
 
 
@@ -28,9 +28,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added ImDisk driver, allowing to create boxes residing in a ramdisk
 - added Encrypted Sandbox support, with this feature you can create confidential boxes not leaking data to the host pc
-  - using the ImDisk Driver and a new ImBox component featuring the cryptographic implementation from [DiskCryptor](https://diskcryptor.org/) the sandbox root folder is stored in an encrypted container file
+  - using the ImDisk driver and a new ImBox component featuring the cryptographic implementation from [DiskCryptor](https://diskcryptor.org/) the sandbox root folder is stored in an encrypted container file
   - using the SbieDrv to prevent processes not belonging to the sandbox from accessing an encrypted sandbox's root folder
-  - with the ConfidentialBox=y option the host process read access to sandboxed processes is blocked
+  - with the 'ConfidentialBox=y' option the host process read access to sandboxed processes is blocked
 - added certificate info to the about dialog
 - added support for a more flexible certificate style
 - added option for business customers to retrieve hardware-bound certificates from a serial number

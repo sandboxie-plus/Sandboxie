@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed windows 7 compatybility issue with ImBox.exe
 - fixed issue with UseNewSymlinkResolver=y
 - fixed SandMan v1.10.5-1.11.0e crashed in Vintage view [#3264](https://github.com/sandboxie-plus/Sandboxie/issues/3264)
+- fixed Not possible to pin more than one shortcut that points at the same file [#3259](https://github.com/sandboxie-plus/Sandboxie/issues/3259)
 
 
 

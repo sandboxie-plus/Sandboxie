@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.11.1 / 5.66.1] - 2023-08-??
+## [1.11.1 / 5.66.1] - 2023-08-31
 
 ### Added
 - added 'RamDiskLetter=R:\' option allowing to mount the ramdisk root to a drive letter

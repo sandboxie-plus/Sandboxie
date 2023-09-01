@@ -719,13 +719,11 @@ _FX NTSTATUS KphValidateCertificate()
 
         if (!type) // type is mandatory 
             ;
-        else if (_wcsicmp(type, L"CONTRIBUTOR") == 0) {
+        else if (_wcsicmp(type, L"CONTRIBUTOR") == 0)
             Verify_CertInfo.type = eCertContributor;
-            Verify_CertInfo.level = eCertMaxLevel;
-        } else if (_wcsicmp(type, L"ETERNAL") == 0) {
+        else if (_wcsicmp(type, L"ETERNAL") == 0)
             Verify_CertInfo.type = eCertEternal;
-            Verify_CertInfo.level = eCertMaxLevel;
-        } else if (_wcsicmp(type, L"BUSINESS") == 0)
+        else if (_wcsicmp(type, L"BUSINESS") == 0)
             Verify_CertInfo.type = eCertBusiness;
         else if (_wcsicmp(type, L"EVALUATION") == 0 || _wcsicmp(type, L"TEST") == 0)
             Verify_CertInfo.type = eCertEvaluation;
@@ -753,48 +751,48 @@ _FX NTSTATUS KphValidateCertificate()
 
         if(CertDbg)     DbgPrint("Sbie Cert type: %X\n", Verify_CertInfo.type);
 
-        if (CERT_IS_TYPE(Verify_CertInfo, eCertEvaluation))
+        if (CERT_IS_TYPE(Verify_CertInfo, eCertEternal))
+            Verify_CertInfo.level = eCertMaxLevel;
+        else if (CERT_IS_TYPE(Verify_CertInfo, eCertEvaluation)) // in evaluation the level field holds the amount of days to allow evaluation for
         {
             expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval((CSHORT)(level ? _wtoi(level) : 7), 0, 0); // x days, default 7
             Verify_CertInfo.level = eCertAdvanced;
         }
-        else if (level && _wcsicmp(level, L"STANDARD") == 0) 
+        else if (!level || _wcsicmp(level, L"STANDARD") == 0) // not used, default does not have explicite level
             Verify_CertInfo.level = eCertStandard;
-        else if (level && _wcsicmp(level, L"ADVANCED") == 0) 
+        else if (_wcsicmp(level, L"ADVANCED") == 0) 
             Verify_CertInfo.level = eCertAdvanced;
+        // scheme 1.1 >>>
         else if (CERT_IS_TYPE(Verify_CertInfo, eCertPersonal) || CERT_IS_TYPE(Verify_CertInfo, eCertPatreon))
         {
-            // scheme 1.1 >>>
-            if (level && _wcsicmp(level, L"HUGE") == 0) {
+            if (_wcsicmp(level, L"HUGE") == 0) {
                 Verify_CertInfo.type = eCertEternal;
                 Verify_CertInfo.level = eCertMaxLevel;
             }
-            else if (level && _wcsicmp(level, L"LARGE") == 0) { // 2 years - personal
+            else if (_wcsicmp(level, L"LARGE") == 0) { // 2 years - personal
                 if(CERT_IS_TYPE(Verify_CertInfo, eCertPatreon))
                     Verify_CertInfo.level = eCertStandard2;
                 else
                     Verify_CertInfo.level = eCertAdvanced;
                 expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval(0, 0, 2); // 2 years
             }
-            else if (level && _wcsicmp(level, L"MEDIUM") == 0) { // 1 year - personal
+            else if (_wcsicmp(level, L"MEDIUM") == 0) { // 1 year - personal
                 Verify_CertInfo.level = eCertStandard2;
             }
-            else if (level && _wcsicmp(level, L"ENTRY") == 0) { // PATREON-ENTRY new patreons get only 3 montgs for start
+            else if (_wcsicmp(level, L"ENTRY") == 0) { // PATREON-ENTRY new patreons get only 3 montgs for start
                 Verify_CertInfo.level = eCertStandard2;
                 if(CERT_IS_TYPE(Verify_CertInfo, eCertPatreon))
                     Verify_CertInfo.type = eCertEntryPatreon;
                 expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval(0, 3, 0);
             }
-            else if (level && _wcsicmp(level, L"SMALL") == 0) { // 1 year - subscription
+            else if (_wcsicmp(level, L"SMALL") == 0) { // 1 year - subscription
                 Verify_CertInfo.level = eCertStandard2;
                 Verify_CertInfo.type = eCertSubscription;
             }
             else
-            // <<< scheme 1.1
                 Verify_CertInfo.level = eCertStandard;
         }
-        else if (CERT_IS_TYPE(Verify_CertInfo, eCertBusiness))
-            Verify_CertInfo.level = eCertStandard;
+        // <<< scheme 1.1
         
         if(CertDbg)     DbgPrint("Sbie Cert level: %X\n", Verify_CertInfo.level);
 

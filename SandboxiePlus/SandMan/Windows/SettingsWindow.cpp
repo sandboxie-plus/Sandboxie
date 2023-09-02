@@ -227,6 +227,10 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.cmbIntegrateMenu->addItem(tr("As sub group"));
 	ui.cmbIntegrateMenu->addItem(tr("Fully integrate"));
 
+	ui.cmbIntegrateDesk->addItem(tr("Don't integrate links"));
+	ui.cmbIntegrateDesk->addItem(tr("As sub group"));
+	ui.cmbIntegrateDesk->addItem(tr("Fully integrate"));
+
 	ui.cmbSysTray->addItem(tr("Don't show any icon"));
 	ui.cmbSysTray->addItem(tr("Show Plus icon"));
 	ui.cmbSysTray->addItem(tr("Show Classic icon"));
@@ -314,8 +318,9 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.chkAlwaysDefault, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkShellMenu2, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	
-	connect(ui.chkScanMenu, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
-	connect(ui.cmbIntegrateMenu, SIGNAL(currentIndexChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.chkScanMenu, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbIntegrateMenu, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.cmbIntegrateDesk, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 	
 	connect(ui.cmbSysTray, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.cmbTrayBoxes, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
@@ -902,6 +907,7 @@ void CSettingsWindow::LoadSettings()
 
 	ui.chkScanMenu->setChecked(theConf->GetBool("Options/ScanStartMenu", true));
 	ui.cmbIntegrateMenu->setCurrentIndex(theConf->GetInt("Options/IntegrateStartMenu", 0));
+	ui.cmbIntegrateDesk->setCurrentIndex(theConf->GetInt("Options/IntegrateDesktop", 0));
 	
 	ui.cmbSysTray->setCurrentIndex(theConf->GetInt("Options/SysTrayIcon", 1));
 	ui.cmbTrayBoxes->setCurrentIndex(theConf->GetInt("Options/SysTrayFilter", 0));
@@ -1410,11 +1416,11 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/ScanStartMenu", ui.chkScanMenu->isChecked());
 	int OldIntegrateStartMenu = theConf->GetInt("Options/IntegrateStartMenu", 0);
 	theConf->SetValue("Options/IntegrateStartMenu", ui.cmbIntegrateMenu->currentIndex());
-	if (ui.cmbIntegrateMenu->currentIndex() != OldIntegrateStartMenu) {
-		if (ui.cmbIntegrateMenu->currentIndex() == 0)
-			theGUI->ClearStartMenu();
-		else
-			theGUI->SyncStartMenu();
+	int OldIntegrateDesktop = theConf->GetInt("Options/IntegrateDesktop", 0);
+	theConf->SetValue("Options/IntegrateDesktop", ui.cmbIntegrateDesk->currentIndex());
+	if (ui.cmbIntegrateDesk->currentIndex() != OldIntegrateDesktop || ui.cmbIntegrateMenu->currentIndex() != OldIntegrateStartMenu) {
+		theGUI->ClearStartMenu();
+		theGUI->SyncStartMenu();
 	}
 
 	theConf->SetValue("Options/SysTrayIcon", ui.cmbSysTray->currentIndex());

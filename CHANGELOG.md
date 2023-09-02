@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added an option to terminate the UI by clicking close button [#3253](https://github.com/sandboxie-plus/Sandboxie/issues/3253)
 - added an option to restore Sandboxie that is minimized to the System Tray with a single click [#3251](https://github.com/sandboxie-plus/Sandboxie/issues/3251)
 - added an option to minimize Sandboxie to the System Tray by clicking minimize button [3252](https://github.com/sandboxie-plus/Sandboxie/issues/3252)
+- added an independent desktop integration setting [#3246](https://github.com/sandboxie-plus/Sandboxie/issues/3246)
 
 ### Changed
 - moved tray option to an own tab

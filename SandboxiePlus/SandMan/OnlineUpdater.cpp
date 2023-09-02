@@ -263,7 +263,7 @@ void COnlineUpdater::LoadState()
 			bIsInstallerReady = true;
 		}
 	}
-	QString OnNewRelease = theConf->GetString("Options/OnNewRelease", "download");
+	QString OnNewRelease = GetOnNewReleaseOption();
 	bool bCanRunInstaller = OnNewRelease == "install";
 
 	bool bIsUpdateReady = false;
@@ -278,13 +278,53 @@ void COnlineUpdater::LoadState()
 				bIsUpdateReady = true;
 		}
 	}
-	QString OnNewUpdate = theConf->GetString("Options/OnNewUpdate", "ignore");
+	QString OnNewUpdate = GetOnNewUpdateOption();
 	bool bCanApplyUpdate = OnNewUpdate == "install";
 
 	if (bIsInstallerReady && bCanRunInstaller)
 		m_CheckMode = ePendingInstall;
 	else if (bIsUpdateReady && bCanApplyUpdate)
 		m_CheckMode = ePendingUpdate;
+}
+
+QString COnlineUpdater::GetOnNewUpdateOption() const
+{
+	if (!g_CertInfo.active || g_CertInfo.expired);
+		return "ignore"; // this service requries a valid vcertificate
+	return theConf->GetString("Options/OnNewUpdate", "ignore");
+}
+
+QString COnlineUpdater::GetOnNewReleaseOption() const
+{
+	QString OnNewRelease = theConf->GetString("Options/OnNewRelease", "download");
+	if ((g_CertInfo.active && g_CertInfo.expired) && OnNewRelease == "install")
+		return "download"; // disable auto update on an active but expired personal certificate
+	return OnNewRelease;
+}
+
+bool COnlineUpdater::ShowCertWarningIfNeeded()
+{
+	//
+	// This function checks if this instalation uses a expired personal
+	// certificate which is active for the current build
+	// in which case it it shows a warning that updating to the latest build 
+	// will deactivate the certificate
+	//
+
+	if (!(g_CertInfo.active && g_CertInfo.expired))
+		return true;
+
+	QString Message = tr("Your Sandboxie-Plus supporter certificate is expired, howeever for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.\r\n\r\n"
+		"Do you still want to update?");
+	int Ret = QMessageBox("Sandboxie-Plus", Message, QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No | QMessageBox::Escape | QMessageBox::Default, QMessageBox::Cancel, theGUI).exec();
+	if (Ret == QMessageBox::Cancel) {
+		QTimer::singleShot(10, this, [=] {
+			theConf->DelValue("Updater/InstallerPath");
+			theConf->DelValue("Updater/UpdateVersion");
+			theGUI->UpdateLabel();
+		});
+	}
+	return Ret == QMessageBox::Yes;
 }
 
 void COnlineUpdater::Process() 
@@ -410,7 +450,7 @@ bool COnlineUpdater::HandleUpdate()
 		}
 	}
 
-	QString OnNewUpdate = theConf->GetString("Options/OnNewUpdate", "ignore");
+	QString OnNewUpdate = GetOnNewUpdateOption();
 
 	bool bNewUpdate = false;
 	QVariantMap Update = m_UpdateData["update"].toMap();
@@ -440,7 +480,7 @@ bool COnlineUpdater::HandleUpdate()
 	// solution: apply updates silently, then prompt to install new release, else prioritize installing new releases over updating the existing one
 	//
 
-	QString OnNewRelease = theConf->GetString("Options/OnNewRelease", "download");
+	QString OnNewRelease = GetOnNewReleaseOption();
 	bool bCanRunInstaller = (m_CheckMode == eAuto && OnNewRelease == "install");
 	bool bIsInstallerReady = false;
 	if (bNewRelease) 
@@ -732,6 +772,9 @@ void COnlineUpdater::OnPrepareFinished(int exitCode, QProcess::ExitStatus exitSt
 
 bool COnlineUpdater::ApplyUpdate(bool bSilent)
 {
+	if (!ShowCertWarningIfNeeded())
+		return false;
+
 	if (!bSilent)
 	{
 		QString Message = tr("<p>Updates for Sandboxie-Plus have been downloaded.</p><p>Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.</p>");
@@ -868,6 +911,9 @@ void COnlineUpdater::OnInstallerDownload(const QString& Path, const QVariantMap&
 
 bool COnlineUpdater::RunInstaller(bool bSilent)
 {
+	if (!ShowCertWarningIfNeeded())
+		return false;
+
 	QString FilePath = theConf->GetString("Updater/InstallerPath");
 	if (FilePath.isEmpty() || !QFile::exists(FilePath)) {
 		theConf->DelValue("Updater/InstallerPath");

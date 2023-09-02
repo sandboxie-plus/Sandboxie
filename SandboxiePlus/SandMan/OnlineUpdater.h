@@ -135,6 +135,10 @@ protected:
 	bool				HandleUserMessage(const QVariantMap& Data);
 	bool				HandleUpdate();
 
+	QString				GetOnNewUpdateOption() const;
+	QString				GetOnNewReleaseOption() const;
+	bool				ShowCertWarningIfNeeded();
+
 	enum EUpdateScope
 	{
 		eNone = 0,	// No files updated

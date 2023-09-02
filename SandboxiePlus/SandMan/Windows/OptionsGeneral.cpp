@@ -90,7 +90,7 @@ void COptionsWindow::CreateGeneral()
 	if (!CERT_IS_LEVEL(g_CertInfo, eCertStandard)) {
 		QWidget* ExWidgets[] = { ui.chkSecurityMode, ui.chkLockDown, ui.chkRestrictDevices,
 			ui.chkPrivacy, ui.chkUseSpecificity,
-			ui.chkNoSecurityIsolation, ui.chkNoSecurityFiltering, ui.chkHostProtect, NULL };
+			ui.chkNoSecurityIsolation, ui.chkNoSecurityFiltering, ui.chkHostProtect, ui.chkRamBox, NULL };
 		for (QWidget** ExWidget = ExWidgets; *ExWidget != NULL; ExWidget++)
 			COptionsWindow__AddCertIcon(*ExWidget);
 	}

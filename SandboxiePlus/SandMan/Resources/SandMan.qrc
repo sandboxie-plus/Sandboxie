@@ -179,6 +179,8 @@
         <file>Actions/ResetFont.png</file>
         <file>Actions/Dll.png</file>
         <file>SideLogoDM.png</file>
+        <file>Actions/TaskBar.png</file>
+        <file>Actions/Desktop.png</file>
     </qresource>
     <qresource prefix="/Boxes">
         <file alias="Busy">Boxes/BusyOverlay.png</file>

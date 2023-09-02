@@ -14,7 +14,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added an option to minimize Sandboxie to the System Tray by clicking minimize button [3252](https://github.com/sandboxie-plus/Sandboxie/issues/3252)
 
 ### Changed
-- moved tray option to an own tab 
+- moved tray option to an own tab
+- repalced some graphics with better compressed once (thanks idealths)
 
 ### Fixed
 - fixed subscription certificate recognition issue

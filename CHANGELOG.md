@@ -20,7 +20,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed subscription certificate recognition issue
-
+- fixed Side logo cut-off in the About window [#3249](https://github.com/sandboxie-plus/Sandboxie/issues/3249)
 
 
 ## [1.11.1 / 5.66.1] - 2023-08-31

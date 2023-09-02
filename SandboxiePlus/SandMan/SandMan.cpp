@@ -4005,9 +4005,9 @@ void CSandMan::OnAbout()
 			painter.setPen(CSettingsWindow::GetCertColor());
 
 			QString Type = CSettingsWindow::GetCertType();
-			//QSize TypeSize = QFontMetrics(painter.font()).size(Qt::TextSingleLine, Type);
+			QSize TypeSize = QFontMetrics(painter.font()).size(Qt::TextSingleLine, Type);
 			//painter.drawText((128 - TypeSize.width()) / 2, 128, TypeSize.width(), TypeSize.height(), 0, Type);
-			painter.drawText(0, 128 - 8, 128, 16, Qt::AlignHCenter, Type);
+			painter.drawText(0, 128 - 8, 128, TypeSize.height(), Qt::AlignHCenter, Type);
 
 			if (g_CertInfo.level != eCertMaxLevel && g_CertInfo.level != eCertStandard) {
 
@@ -4016,7 +4016,7 @@ void CSandMan::OnAbout()
 				painter.setPen(Qt::black);
 
 				QString Level = CSettingsWindow::GetCertLevel();
-				painter.drawText(0, 128 + 8, 120, 16, Qt::AlignRight, Level);
+				painter.drawText(0, 128 + 8, 120, TypeSize.height(), Qt::AlignRight, Level);
 			}
 		}
 

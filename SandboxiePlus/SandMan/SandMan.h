@@ -135,6 +135,7 @@ protected:
 	void				CheckSupport();
 
 	void				closeEvent(QCloseEvent* e);
+	void				changeEvent(QEvent* e);
 
 	void				dragEnterEvent(QDragEnterEvent* e);
 	void				dropEvent(QDropEvent* e);

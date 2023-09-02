@@ -134,7 +134,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	ui.tabsShell->setCurrentIndex(0);
 	ui.tabsShell->setTabIcon(0, CSandMan::GetIcon("Windows"));
-	ui.tabsShell->setTabIcon(1, CSandMan::GetIcon("Run"));
+	ui.tabsShell->setTabIcon(1, CSandMan::GetIcon("TaskBar"));
+	ui.tabsShell->setTabIcon(2, CSandMan::GetIcon("Run"));
 
 	ui.tabsGUI->setCurrentIndex(0);
 	ui.tabsGUI->setTabIcon(0, CSandMan::GetIcon("Interface"));
@@ -234,6 +235,10 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	ui.cmbTrayBoxes->addItem(tr("Active + Pinned"));
 	ui.cmbTrayBoxes->addItem(tr("Pinned Only"));
 
+	ui.cmbOnClose->addItem(tr("Close to Tray"), "ToTray");
+	ui.cmbOnClose->addItem(tr("Prompt before Close"), "Prompt");
+	ui.cmbOnClose->addItem(tr("Close"), "Close");
+
 	ui.cmbDPI->addItem(tr("None"), 0);
 	ui.cmbDPI->addItem(tr("Native"), 1);
 	ui.cmbDPI->addItem(tr("Qt"), 2);
@@ -315,7 +320,10 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.cmbSysTray, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.cmbTrayBoxes, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkCompactTray, SIGNAL(stateChanged(int)), this, SLOT(OnChangeGUI()));
+	connect(ui.cmbOnClose, SIGNAL(currentIndexChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkBoxOpsNotify, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkMinimize, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkSingleShow, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	//
 
 	// Interface Config
@@ -899,6 +907,9 @@ void CSettingsWindow::LoadSettings()
 	ui.cmbTrayBoxes->setCurrentIndex(theConf->GetInt("Options/SysTrayFilter", 0));
 	ui.chkCompactTray->setChecked(theConf->GetBool("Options/CompactTray", false));
 	ui.chkBoxOpsNotify->setChecked(theConf->GetBool("Options/AutoBoxOpsNotify", false));
+	ui.cmbOnClose->setCurrentIndex(ui.cmbOnClose->findData(theConf->GetString("Options/OnClose", "ToTray")));
+	ui.chkMinimize->setChecked(theConf->GetBool("Options/MinimizeToTray", false));
+	ui.chkSingleShow->setChecked(theConf->GetBool("Options/TraySingleClick", false));
 
 	OnLoadAddon();
 
@@ -1410,6 +1421,9 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/SysTrayFilter", ui.cmbTrayBoxes->currentIndex());
 	theConf->SetValue("Options/CompactTray", ui.chkCompactTray->isChecked());
 	theConf->SetValue("Options/AutoBoxOpsNotify", ui.chkBoxOpsNotify->isChecked());
+	theConf->SetValue("Options/OnClose", ui.cmbOnClose->currentData());
+	theConf->SetValue("Options/MinimizeToTray", ui.chkMinimize->isChecked());
+	theConf->SetValue("Options/TraySingleClick", ui.chkSingleShow->isChecked());
 
 	if (theAPI->IsConnected())
 	{
@@ -1676,6 +1690,10 @@ void CSettingsWindow::reject()
 
 void CSettingsWindow::OnOptChanged()
 {
+	QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui.cmbOnClose->model());
+	QStandardItem *item = model->item(0);
+	item->setFlags((ui.cmbSysTray->currentIndex() == 0) ? item->flags() & ~Qt::ItemIsEnabled : item->flags() | Qt::ItemIsEnabled);
+
 	if (m_HoldChange)
 		return;
 	ui.buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);

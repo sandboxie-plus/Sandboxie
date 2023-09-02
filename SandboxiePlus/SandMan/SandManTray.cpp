@@ -341,6 +341,10 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 {
 	static bool TriggerSet = false;
 	static bool NullifyTrigger = false;
+
+	if (theConf->GetBool("Options/TraySingleClick", false) && Reason == QSystemTrayIcon::Trigger)
+		Reason = QSystemTrayIcon::DoubleClick;
+
 	switch(Reason)
 	{
 		case QSystemTrayIcon::Context:

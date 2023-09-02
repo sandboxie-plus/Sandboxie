@@ -1295,7 +1295,8 @@ void CSandMan::closeEvent(QCloseEvent *e)
 {
 	if (!m_bExit)// && !theAPI->IsConnected())
 	{
-		if (m_pTrayIcon->isVisible())
+		QString OnClose = theConf->GetString("Options/OnClose", "ToTray");
+		if (m_pTrayIcon->isVisible() && OnClose.compare("ToTray", Qt::CaseInsensitive) == 0)
 		{
 			StoreState();
 			hide();
@@ -1306,7 +1307,7 @@ void CSandMan::closeEvent(QCloseEvent *e)
 			e->ignore();
 			return;
 		}
-		else
+		else if(OnClose.compare("Prompt", Qt::CaseInsensitive) == 0)
 		{
 			CExitDialog ExitDialog(tr("Do you want to close Sandboxie Manager?"));
 			if (!ExitDialog.exec())
@@ -1347,6 +1348,28 @@ void CSandMan::closeEvent(QCloseEvent *e)
 	}
 
 	QApplication::quit();
+}
+
+void CSandMan::changeEvent(QEvent* e)
+{
+	if (e->type() == QEvent::WindowStateChange) 
+	{
+        if (isMinimized()) 
+		{
+            if (m_pTrayIcon->isVisible() && theConf->GetBool("Options/MinimizeToTray", false))
+			{
+				StoreState();
+				hide();
+
+				if (theAPI->GetGlobalSettings()->GetBool("ForgetPassword", false))
+					theAPI->ClearPassword();
+
+				e->ignore();
+				return;
+			}
+        }
+    }
+    QMainWindow::changeEvent(e); 
 }
 
 void CSandMan::commitData(QSessionManager& manager)

@@ -1389,10 +1389,12 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="317"/>
-        <source>Your Sandboxie-Plus supporter certificate is expired, howeever for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.<byte value="xd"/>
-<byte value="xd"/>
+        <source>Your Sandboxie-Plus supporter certificate is expired, howeever for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
+
 Do you still want to update?</source>
-        <translation type="unfinished"></translation>
+        <translation>您的 Sandboxie-Plus 赞助者凭据已过期，但对于当前安装的版本，附加功能仍处于启用状态。当您进行更新后，赞助者独占功能将被禁用。
+
+您确定要进行更新吗？</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="434"/>
@@ -5155,17 +5157,17 @@ Error: %1</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="242"/>
         <source>Close to Tray</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭时最小化到托盘</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="243"/>
         <source>Prompt before Close</source>
-        <translation type="unfinished"></translation>
+        <translation>在关闭前提示</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="244"/>
         <source>Close</source>
-        <translation type="unfinished">关闭</translation>
+        <translation>关闭</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="246"/>
@@ -8838,27 +8840,27 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="577"/>
         <source>Integrate with Host Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>与主机桌面整合</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="593"/>
         <source>System Tray</source>
-        <translation type="unfinished"></translation>
+        <translation>任务栏托盘</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="692"/>
         <source>On main window close:</source>
-        <translation type="unfinished"></translation>
+        <translation>当关闭主窗口时：</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="699"/>
         <source>Open/Close from/to tray with a single click</source>
-        <translation type="unfinished"></translation>
+        <translation>单击即可打开/关闭托盘图标</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="706"/>
         <source>Minimize to tray</source>
-        <translation type="unfinished"></translation>
+        <translation>最小化到托盘</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1370"/>

@@ -572,7 +572,7 @@ int MountManager::CreateJunction(const std::wstring& TargetNtPath, const std::ws
 
     if (errlvl == 0 && JunctionTarget.empty()) {
                 
-        memset(buf, 0, sizeof(buf));
+        memset(&ReparseBuffer, 0, sizeof(buf));
         ReparseBuffer.ReparseTag = IO_REPARSE_TAG_MOUNT_POINT;
         ReparseBuffer.ReparseDataLength = 4 * sizeof(USHORT);
 
@@ -629,7 +629,7 @@ bool MountManager::RemoveJunction(const std::wstring& FileRootPath, ULONG sessio
         // remove junction
         //
 
-        memset(buf, 0, REPARSE_MOUNTPOINT_HEADER_SIZE);
+        memset(&ReparseBuffer, 0, REPARSE_MOUNTPOINT_HEADER_SIZE);
         ReparseBuffer.ReparseTag = IO_REPARSE_TAG_MOUNT_POINT;
         ok = !!::DeviceIoControl(handle, FSCTL_DELETE_REPARSE_POINT, &ReparseBuffer, REPARSE_MOUNTPOINT_HEADER_SIZE, NULL, 0, &dwRet, NULL);
 

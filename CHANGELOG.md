@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed subscription certificate recognition issue
 - fixed logo cut-off in the About window [#3249](https://github.com/sandboxie-plus/Sandboxie/issues/3249)
+- fixed issue with file recovery when using ramdisk
 
 
 ## [1.11.1 / 5.66.1] - 2023-08-31

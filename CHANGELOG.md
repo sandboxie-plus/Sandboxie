@@ -135,7 +135,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added UI option to select a custom text editor to open Sandboxie.ini [#3116](https://github.com/sandboxie-plus/Sandboxie/issues/3116)
 - added separate protection against box removal and content deletion [#3104](https://github.com/sandboxie-plus/Sandboxie/issues/3104)
-- added "auto scroll" in Sbie messages, resource monitor, API call log context menu [#393](https://github.com/sandboxie-plus/Sandboxie/issues/393)
+- added "auto scroll" option in the context menu of the Trace Log tab [#393](https://github.com/sandboxie-plus/Sandboxie/issues/393)
 
 ### Changed
 - reworked handling of NT object handles

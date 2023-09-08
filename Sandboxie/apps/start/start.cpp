@@ -665,15 +665,15 @@ BOOL Parse_Command_Line(void)
             if (end == L'\"')
                 ++cmd;
 
-        } else if (_wcsnicmp(cmd, L"mount", 5) == 0) {
-
-            Validate_Box_Name();
-            return die(SbieDll_Mount(BoxName, BoxKey, FALSE) ? EXIT_SUCCESS : EXIT_FAILURE);
-
         } else if (_wcsnicmp(cmd, L"mount_protected", 15) == 0) {
 
             Validate_Box_Name();
             return die(SbieDll_Mount(BoxName, BoxKey, TRUE) ? EXIT_SUCCESS : EXIT_FAILURE);
+
+        } else if (_wcsnicmp(cmd, L"mount", 5) == 0) {
+
+            Validate_Box_Name();
+            return die(SbieDll_Mount(BoxName, BoxKey, FALSE) ? EXIT_SUCCESS : EXIT_FAILURE);
 
         //
         // Command line switch /listpids

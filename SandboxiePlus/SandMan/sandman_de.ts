@@ -1234,7 +1234,9 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
         <source>Your Sandboxie-Plus supporter certificate is expired, howeever for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.<byte value="xd"/>
 <byte value="xd"/>
 Do you still want to update?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ihr Sandboxie-Plus Unterstützerzertifikat ist abgelaufen, die aktuell von Ihnen verwendete Version bleibt jedoch aktiv; falls Sie aber zu einer neueren Version wechseln, werden exklusive Unterstützerfunktionen deaktiviert.
+
+Möchten Sie dennoch updaten?</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="434"/>
@@ -5090,17 +5092,17 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="242"/>
         <source>Close to Tray</source>
-        <translation type="unfinished"></translation>
+        <translation>In den System-Tray schließen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="243"/>
         <source>Prompt before Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorm Schließen fragen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="244"/>
         <source>Close</source>
-        <translation type="unfinished">Schließen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="250"/>
@@ -8381,27 +8383,27 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="577"/>
         <source>Integrate with Host Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit dem Host-Desktop integrieren</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="593"/>
         <source>System Tray</source>
-        <translation type="unfinished"></translation>
+        <translation>System-Tray</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="692"/>
         <source>On main window close:</source>
-        <translation type="unfinished"></translation>
+        <translation>Beim Schließen des Hauptfensters:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="699"/>
         <source>Open/Close from/to tray with a single click</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffnen/Schließen vom/zum System-Tray mit einem einzelnen Klick</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="706"/>
         <source>Minimize to tray</source>
-        <translation type="unfinished"></translation>
+        <translation>In den System-Tray minimieren</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1370"/>

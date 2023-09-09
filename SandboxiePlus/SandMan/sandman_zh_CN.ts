@@ -1389,10 +1389,13 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="317"/>
-        <source>Your Sandboxie-Plus supporter certificate is expired, howeever for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
-
+        <source>Your Sandboxie-Plus supporter certificate is expired, howeever for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.<byte value="xd"/>
+<byte value="xd"/>
 Do you still want to update?</source>
-        <translation>您的 Sandboxie-Plus 赞助者凭据已过期，但对于当前安装的版本，附加功能仍处于启用状态。当您进行更新后，赞助者独占功能将被禁用。
+        <oldsource>Your Sandboxie-Plus supporter certificate is expired, howeever for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
+
+Do you still want to update?</oldsource>
+        <translation type="unfinished">您的 Sandboxie-Plus 赞助者凭据已过期，但对于当前安装的版本，附加功能仍处于启用状态。当您进行更新后，赞助者独占功能将被禁用。
 
 您确定要进行更新吗？</translation>
     </message>

@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.11.2 / 5.66.2] - 2023-08-
+## [1.11.2 / 5.66.2] - 2023-09-09
 
 ### Added
 - added update warning when updating with an expired personal certificate

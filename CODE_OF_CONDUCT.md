@@ -76,9 +76,11 @@ the consequences for any action they deem in violation of this Code of Conduct:
 **Community Impact**: Use of inappropriate language or other behavior deemed
 unprofessional or unwelcome in the community.
 
-**Consequence**: A written warning from community maintainers, providing
-clarity around the nature of the violation and an explanation of why the
-behavior was inappropriate. A public apology may be requested.
+**Consequence**: A warning from community maintainers, providing clarity in case
+of dispute around the nature of the violation or an explanation of why the
+behavior was inappropriate. Any failure to acknowledge the violation or unwanted
+replies aimed at diverting attention may lead to a removal, editing or rejection
+of comments, commits, code, wiki edits, issues, and other contributions.
 
 ### 2. Warning
 

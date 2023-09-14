@@ -11,12 +11,12 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="40"/>
         <source>kilobytes</source>
-        <translation type="unfinished">kilo-octets</translation>
+        <translation>kilo-octets</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="61"/>
         <source>Protect Box Root from access by unsandboxed processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Protéger la racine du bac à sable contre les accès des processus hôte</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="98"/>
@@ -27,32 +27,32 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="105"/>
         <source>Show Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher le mot de passe</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="112"/>
         <source>Enter Password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mot de passe</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="122"/>
         <source>New Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau mot de passe</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="132"/>
         <source>Repeat Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Répéter le mot de passe</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="142"/>
         <source>Disk Image Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille de l&apos;image disque</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="152"/>
         <source>Encryption Cipher</source>
-        <translation type="unfinished"></translation>
+        <translation>Algorithme de chiffrement</translation>
     </message>
 </context>
 <context>
@@ -295,54 +295,56 @@
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="23"/>
         <source>Sandboxie-Plus - Password Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Entrée de mot de passe</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="37"/>
         <source>Creating new box image, please enter a secure password, and choose a disk image size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Création d&apos;une nouvelle image du bac, merci d&apos;entrer un mot de passe sécurisé ainsi qu&apos;une taille pour l&apos;image disque.</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="41"/>
         <source>Enter Box Image password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mot de passe de l&apos;image du bac :</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="45"/>
         <source>Enter Box Image passwords:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mots de passe de l&apos;image du bac :</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="48"/>
         <source>Enter Encryption passwords for archive export:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mot de passe pour le chiffrement de l&apos;export de l&apos;archive :</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="51"/>
         <source>Enter Encryption passwords for archive import:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mot de passe pour le chiffrement de l&apos;import de l&apos;archive :</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="114"/>
         <source>kilobytes (%1)</source>
-        <translation type="unfinished">kilo-octets (%1)</translation>
+        <translation>kilo-octets (%1)</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="125"/>
         <source>Passwords don&apos;t match!!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Les mots de passe ne correspondent pas !</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="129"/>
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
-        <translation type="unfinished"></translation>
+        <translation>ATTENTION : les mots de passe courts sont simples à casser avec des techniques de force brute !
+
+Il est recommandé d&apos;utiliser un mot de passe d&apos;au moins 20 caractères. Êtes-vous sûr de vouloir utiliser un mot de passe court ?</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="145"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;image disque du bac doit être au minimum de 256Mo, 2Go sont recommandés.</translation>
     </message>
 </context>
 <context>
@@ -1009,7 +1011,7 @@ Vous pouvez utiliser « %USER% » pour enregistrer le bac de chaque utilisateur 
     <message>
         <location filename="OnlineUpdater.cpp" line="192"/>
         <source>Failed to download file from: %1</source>
-        <translation type="unfinished">Échec du téléchargement du fichier depuis : %1</translation>
+        <translation>Échec du téléchargement du fichier depuis : %1</translation>
     </message>
 </context>
 <context>
@@ -1207,8 +1209,8 @@ Vous pouvez utiliser « %USER% » pour enregistrer le bac de chaque utilisateur 
     <name>COnlineUpdater</name>
     <message>
         <location filename="OnlineUpdater.cpp" line="317"/>
-        <source>Your Sandboxie-Plus supporter certificate is expired, howeever for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.<byte value="xd"/>
-<byte value="xd"/>
+        <source>Your Sandboxie-Plus supporter certificate is expired, howeever for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
+
 Do you still want to update?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1744,12 +1746,12 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="944"/>
         <source>Please enter a program file name to allow access to this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Entrer le nom du fichier d&apos;un programme qui se verra autoriser l&apos;accès à ce bac à sable</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="956"/>
         <source>Please enter a program file name to deny access to this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Entrer le nom du fichier d&apos;un programme qui se verra refuser l&apos;accès à ce bac à sable</translation>
     </message>
     <message>
         <source>On Delete</source>
@@ -1962,17 +1964,17 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1152"/>
         <source>The image file does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier image n&apos;existe pas</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1153"/>
         <source>The password is wrong</source>
-        <translation type="unfinished"></translation>
+        <translation>Le mot de passe est invalide</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1154"/>
         <source>Unexpected error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur inatendue : %1</translation>
     </message>
     <message>
         <source>Please enter a program path</source>
@@ -3291,7 +3293,7 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
     <message>
         <location filename="SandMan.cpp" line="448"/>
         <source>Virtual Disks</source>
-        <translation type="unfinished"></translation>
+        <translation>Disques virtuels</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="488"/>
@@ -3334,7 +3336,7 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
         <location filename="SandMan.cpp" line="511"/>
         <location filename="SandMan.cpp" line="653"/>
         <source>Lock All Encrypted Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Verrouiller tous les bacs chiffrés</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="513"/>
@@ -3482,7 +3484,7 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
     <message>
         <location filename="SandMan.cpp" line="1527"/>
         <source>This box will be &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;encrypted&lt;/a&gt; and &lt;a href=&quot;sbie://docs/black-box&quot;&gt;access to sandboxed processes will be guarded&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce bac sera &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;chiffré&lt;/a&gt; et &lt;a href=&quot;sbie://docs/black-box&quot;&gt;l&apos;accès à ses processus protégé&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2511"/>
@@ -4801,13 +4803,13 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Views/SbieView.cpp" line="208"/>
         <location filename="Views/SbieView.cpp" line="329"/>
         <source>Mount Box Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Monter l&apos;image du bac</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="209"/>
         <location filename="Views/SbieView.cpp" line="330"/>
         <source>Unmount Box Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Démonter l&apos;image du bac</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="211"/>
@@ -5016,7 +5018,8 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Views/SbieView.cpp" line="552"/>
         <source>    Disk root: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Racine du disque : %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="554"/>
@@ -5033,12 +5036,12 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Views/SbieView.cpp" line="1055"/>
         <source>Failed to open archive, wrong password?</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de l&apos;ouverture de l&apos;archive, mauvais mot de passe ?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1064"/>
         <source>Failed to open archive (%1)!</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de l&apos;ouverture de l&apos;archive (%1) !</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1078"/>
@@ -5197,7 +5200,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Views/SbieView.cpp" line="1270"/>
         <location filename="Views/SbieView.cpp" line="1551"/>
         <source>Don&apos;t show this message again.</source>
-        <translation>Ne plus afficher ce message</translation>
+        <translation>Ne plus afficher ce message.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1261"/>
@@ -7352,53 +7355,53 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
     <message>
         <location filename="Forms/OptionsWindow.ui" line="340"/>
         <source>Encrypt sandbox content</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiffrer le contenu du bac</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="354"/>
         <source>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Quand le &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;chiffrement du bac&lt;/a&gt; est activé, le dossier racine du bac, incluant le registre, est enregistré dans une image disque chiffrée via l&apos;implémentation AES-XTS de &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="414"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;a href=&quot;addon://ImDisk&quot;&gt;Installer ImDisk&lt;/a&gt; afin d&apos;activer le support des disques en RAM.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="445"/>
         <source>Store the sandbox content in a Ram Disk</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Enregistre le contenu du bac dans un disque en RAM</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="462"/>
         <source>Set Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Définir un mot de passe</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1245"/>
         <source>Disable Security Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Désactiver l&apos;isolation de sécurité</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1347"/>
         <location filename="Forms/OptionsWindow.ui" line="1464"/>
         <source>Box Protection</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Protection du bac à sable</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1362"/>
         <source>Protect processes within this box from host processes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Protéger les processus de ce bac des processus hôte</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1415"/>
         <source>Allow Process</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Autoriser le processus</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1471"/>
         <source>Issue message 1318/1317 when a host process tries to access a sandboxed process/the box root</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Émettre un message 1318/1317 quand un processus hôte tente d&apos;accéder à un processus du bac ou ses fichiers</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1478"/>
@@ -7408,7 +7411,7 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1488"/>
         <source>Deny Process</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Interdire le processus</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1513"/>
@@ -8304,7 +8307,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2739"/>
         <source>Configure which processes can access Desktop objects like Windows and alike.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Configure les règles d&apos;accès aux objets du bureau, comme les fenêtres et assimilés.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3275"/>
@@ -8396,7 +8399,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4296"/>
         <source>Syscall Trace (creates a lot of output)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tracer les appels systèmes (est très verbeux)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4506"/>

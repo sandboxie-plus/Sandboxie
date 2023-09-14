@@ -44,9 +44,11 @@ CBoxImageWindow::CBoxImageWindow(EAction Action, QWidget *parent)
 	case eChange:
 		ui.lblInfo->setText(tr("Enter Box Image passwords:"));
 		ui.lblIcon->setPixmap(QPixmap::fromImage(QImage(":/Actions/LockClosed.png")));
+		break;
 	case eExport:
 		ui.lblInfo->setText(tr("Enter Encryption passwords for archive export:"));
 		ui.lblIcon->setPixmap(QPixmap::fromImage(QImage(":/Actions/LockClosed.png")));
+		break;
 	case eImport:
 		ui.lblInfo->setText(tr("Enter Encryption passwords for archive import:"));
 		ui.lblIcon->setPixmap(QPixmap::fromImage(QImage(":/Actions/LockOpen.png")));

@@ -82,7 +82,8 @@ int CArchive::Open()
 		// Open Archive
 		const UInt64 kMaxCheckStartPosition = 1 << 22; // 4MB
 		CMyComPtr<IArchiveOpenCallback> callback(new CArchiveOpener(this));
-		HRESULT Ret = InArchive->Open(new CArchiveIO(m_pDevice ? m_pDevice : new QFile(m_ArchivePath), QIODevice::ReadOnly, m_pDevice == NULL), &kMaxCheckStartPosition, callback);
+		CMyComPtr<IInStream> pStream = new CArchiveIO(m_pDevice ? m_pDevice : new QFile(m_ArchivePath), QIODevice::ReadOnly, m_pDevice == NULL);
+		HRESULT Ret = InArchive->Open(pStream, &kMaxCheckStartPosition, callback);
 		if(Ret != S_OK)
 		{
 			InArchive->Close();
@@ -313,7 +314,8 @@ bool CArchive::Update(QMap<int, QIODevice*> *FileList, bool bDelete, int Level)
 	}
 
     CMyComPtr<IArchiveUpdateCallback2> callback(new CArchiveUpdater(this, Files));
-	if(OutArchive->UpdateItems(new CArchiveIO(m_pDevice ? m_pDevice : pFile, QIODevice::WriteOnly, m_pDevice == NULL), FileCount(), callback) != S_OK)
+	CMyComPtr<ISequentialOutStream> pStream = new CArchiveIO(m_pDevice ? m_pDevice : pFile, QIODevice::WriteOnly, m_pDevice == NULL);
+	if(OutArchive->UpdateItems(pStream, FileCount(), callback) != S_OK)
 	{
 		LogError("Error(s) while updating Archive");
 		return false;

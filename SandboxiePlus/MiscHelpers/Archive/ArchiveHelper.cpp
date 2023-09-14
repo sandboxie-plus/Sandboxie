@@ -124,7 +124,7 @@ SPropertyNames::SPropertyNames()
 	Map.insert(kpidCreatorApp, "CreatorApp");
 	Map.insert(kpidSectorSize, "SectorSize");
 	Map.insert(kpidPosixAttrib, "PosixAttrib");
-	Map.insert(kpidLink, "Link");
+	Map.insert(kpidSymLink, "Link");
 	Map.insert(kpidError, "Error");
 	 
 	Map.insert(kpidTotalSize, "TotalSize");
@@ -152,5 +152,11 @@ QString GetPropertyName(PROPID PropID)
 #include "../../7-Zip/7z/CPP/Windows/PropVariant.cpp"
 #endif
 #endif
+
+#include "Archive.cpp"
+#include "ArchiveExtractor.cpp"
+#include "ArchiveInterface.cpp"
+#include "ArchiveOpener.cpp"
+#include "ArchiveUpdater.cpp"
 
 #endif

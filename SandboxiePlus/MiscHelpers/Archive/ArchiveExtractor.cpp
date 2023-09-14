@@ -72,7 +72,7 @@ STDMETHODIMP CArchiveExtractor::SetOperationResult (Int32 operationResult)
 		case NArchive::NExtract::NOperationResult::kOK:					
 			//TRACE(L"... Completed");					
 			break;
-		case NArchive::NExtract::NOperationResult::kUnSupportedMethod:	
+		case NArchive::NExtract::NOperationResult::kUnsupportedMethod:	
 			//TRACE(L"... Error (Un Supported Method)");	
 			m_pArchive->LogError(QString("File Extraction Fails (Un Supported Method): %1").arg(m_pArchive->FileProperty(m_Index, "Path").toString()));
 			m_pArchive->FileProperty(m_Index, "Error", "Un Supported Method");

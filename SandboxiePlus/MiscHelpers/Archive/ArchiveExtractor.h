@@ -6,23 +6,23 @@
 
 class CArchiveExtractor: public IArchiveExtractCallback, public ICryptoGetTextPassword, public CMyUnknownImp
 {
+	Z7_COM_UNKNOWN_IMP_2(IArchiveExtractCallback, ICryptoGetTextPassword)
 public:
-	MY_UNKNOWN_IMP2(IArchiveExtractCallback, ICryptoGetTextPassword)
 
 	CArchiveExtractor(CArchive* pArchive, const QMap<int,CArchiveIO*>& Files);
 	~CArchiveExtractor();
 
 	// IProgress
-	STDMETHOD(SetTotal)(UInt64 size);
-	STDMETHOD(SetCompleted)(const UInt64 *completeValue);
+	Z7_COM7F_IMF(SetTotal(UInt64 size));
+	Z7_COM7F_IMF(SetCompleted(const UInt64 *completeValue));
 
 	// IArchiveExtractCallback
-	STDMETHOD(PrepareOperation)(Int32 askExtractMode);
-	STDMETHOD(GetStream)(UInt32 index, ISequentialOutStream **outStream, Int32 askExtractMode);
-	STDMETHOD(SetOperationResult)(Int32 operationResult);
+	Z7_COM7F_IMF(PrepareOperation(Int32 askExtractMode));
+	Z7_COM7F_IMF(GetStream(UInt32 index, ISequentialOutStream **outStream, Int32 askExtractMode));
+	Z7_COM7F_IMF(SetOperationResult(Int32 operationResult));
 
 	// ICryptoGetTextPassword
-	STDMETHOD(CryptoGetTextPassword)(BSTR *password);
+	Z7_COM7F_IMF(CryptoGetTextPassword(BSTR *password));
 
 protected:
 	CArchive*				m_pArchive;

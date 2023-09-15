@@ -381,27 +381,27 @@
         <translation>输入磁盘映像密码：</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="48"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="49"/>
         <source>Enter Encryption passwords for archive export:</source>
         <translation>输入加密密码以导出备份：</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="51"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="53"/>
         <source>Enter Encryption passwords for archive import:</source>
         <translation>输入加密密码以导入备份：</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="114"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="116"/>
         <source>kilobytes (%1)</source>
         <translation>Kb (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="125"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="127"/>
         <source>Passwords don&apos;t match!!!</source>
         <translation>输入的密码不正确！</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="129"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="131"/>
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
@@ -410,7 +410,7 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
 推荐使用长度至少为 20 字符以上的密码。或者，您确认使用短密码吗？</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="145"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="147"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
         <translation>磁盘映像大小至少为 256Mb，推荐设置为 2Gb。</translation>
     </message>

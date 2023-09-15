@@ -382,27 +382,27 @@
         <translation>박스 이미지 암호 입력:</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="48"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="49"/>
         <source>Enter Encryption passwords for archive export:</source>
         <translation>압축파일 내보내기를 위한 암호화 암호 입력:</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="51"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="53"/>
         <source>Enter Encryption passwords for archive import:</source>
         <translation>압축파일 가져오기를 위한 암호화 암호 입력:</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="114"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="116"/>
         <source>kilobytes (%1)</source>
         <translation>킬로바이트 (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="125"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="127"/>
         <source>Passwords don&apos;t match!!!</source>
         <translation>암호가 일치하지 않습니다!!!</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="129"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="131"/>
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
@@ -411,7 +411,7 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
 20자 이상으로 구성된 암호를 선택하는 것이 좋습니다. 짧은 암호를 사용하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="145"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="147"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
         <translation>박스 디스크 이미지의 크기는 256MB 이상이어야 합니다. 2GB가 권장됩니다.</translation>
     </message>

@@ -313,27 +313,27 @@
         <translation>Mots de passe de l&apos;image du bac :</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="48"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="49"/>
         <source>Enter Encryption passwords for archive export:</source>
         <translation>Mot de passe pour le chiffrement de l&apos;export de l&apos;archive :</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="51"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="53"/>
         <source>Enter Encryption passwords for archive import:</source>
         <translation>Mot de passe pour le chiffrement de l&apos;import de l&apos;archive :</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="114"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="116"/>
         <source>kilobytes (%1)</source>
         <translation>kilo-octets (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="125"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="127"/>
         <source>Passwords don&apos;t match!!!</source>
         <translation>Les mots de passe ne correspondent pas !</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="129"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="131"/>
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
@@ -342,7 +342,7 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
 Il est recommandé d&apos;utiliser un mot de passe d&apos;au moins 20 caractères. Êtes-vous sûr de vouloir utiliser un mot de passe court ?</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="145"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="147"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
         <translation>L&apos;image disque du bac doit être au minimum de 256Mo, 2Go sont recommandés.</translation>
     </message>
@@ -1209,9 +1209,12 @@ Vous pouvez utiliser « %USER% » pour enregistrer le bac de chaque utilisateur 
     <name>COnlineUpdater</name>
     <message>
         <location filename="OnlineUpdater.cpp" line="317"/>
-        <source>Your Sandboxie-Plus supporter certificate is expired, howeever for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
-
+        <source>Your Sandboxie-Plus supporter certificate is expired, howeever for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.<byte value="xd"/>
+<byte value="xd"/>
 Do you still want to update?</source>
+        <oldsource>Your Sandboxie-Plus supporter certificate is expired, howeever for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
+
+Do you still want to update?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9002,7 +9005,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1390"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;a href=&quot;addon://ImDisk&quot;&gt;Installer ImDisk&lt;/a&gt; afin d&apos;activer le support des disques en RAM.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1473"/>

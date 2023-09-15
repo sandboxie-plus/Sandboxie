@@ -381,27 +381,27 @@
         <translation>För in lådavbildens lösenord:</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="48"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="49"/>
         <source>Enter Encryption passwords for archive export:</source>
         <translation>För in krypteringslösenorden för arkivexport:</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="51"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="53"/>
         <source>Enter Encryption passwords for archive import:</source>
         <translation>För in krypteringslösenorden för arkivimport:</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="114"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="116"/>
         <source>kilobytes (%1)</source>
         <translation>kilobytes (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="125"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="127"/>
         <source>Passwords don&apos;t match!!!</source>
         <translation>Lösenorden matchar inte!</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="129"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="131"/>
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
@@ -410,7 +410,7 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
 Det rekommenderas att välja ett lösenord bestående av 20 tecken eller mer. Säkert att du vill använda ett kort lösenord?</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="145"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="147"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
         <translation>Låddiskavbilden måste vara minst 256MB i storlek, 2GB är rekommenderat.</translation>
     </message>

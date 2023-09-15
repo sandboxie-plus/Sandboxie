@@ -299,27 +299,27 @@
         <translation>Boxabbildpasswörter eingeben:</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="48"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="49"/>
         <source>Enter Encryption passwords for archive export:</source>
         <translation>Verschlüsselungspasswörter für den Archivexport eingeben:</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="51"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="53"/>
         <source>Enter Encryption passwords for archive import:</source>
         <translation>Entschlüsselungspasswörter für den Archivimport eingeben:</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="114"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="116"/>
         <source>kilobytes (%1)</source>
         <translation>Kilobytes (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="125"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="127"/>
         <source>Passwords don&apos;t match!!!</source>
         <translation>Passwörter stimmen nicht überein!!!</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="129"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="131"/>
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
@@ -328,7 +328,7 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
 Es ist empfohlen ein Passwort von 20 oder mehr Zeichen zu wählen. Sind Sie sicher, dass Sie ein kurzes Passwort verwenden möchten?</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="145"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="147"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
         <translation>Das Boxdiskabbild muss mindestens 256 MB groß sein, empfohlen werden 2 GB.</translation>
     </message>

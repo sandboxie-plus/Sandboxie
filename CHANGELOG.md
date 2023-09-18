@@ -12,7 +12,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 ### Changed
-- updated 7z library to 23.01
+- updated 7z library to 23.01 [4ee1464](https://github.com/sandboxie-plus/Sandboxie/commit/4ee146430f70c91917fbcbfb77909b5b0b84a78c)
+
+### Fixed
+- fixed incorrect text display when changing the password of encrypted boxes or when exporting encrypted boxes [#3296](https://github.com/sandboxie-plus/Sandboxie/pull/3296)
 
 
 
@@ -24,31 +27,33 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added an option to restore a Sandboxie window which has been minimized to the System Tray with a single click [#3251](https://github.com/sandboxie-plus/Sandboxie/issues/3251)
 - added an option to minimize Sandboxie to the System Tray by clicking minimize button [3252](https://github.com/sandboxie-plus/Sandboxie/issues/3252)
 - added an independent desktop integration setting [#3246](https://github.com/sandboxie-plus/Sandboxie/issues/3246)
+- added template preset for AdGuard (Browser Assistant) [#3283](https://github.com/sandboxie-plus/Sandboxie/pull/3283)
 
 ### Changed
 - moved tray option to an own tab
-- replaced some graphics with better compressed ones (thanks idealths)
+- replaced some graphics with better compressed ones (thanks idealths) [1af82bb](https://github.com/sandboxie-plus/Sandboxie/commit/1af82bb39643e7470dd4839bf3cebe8a4acf9d06)
+- changed the /mount_protected command line switch to be checked before the /mount command line switch [#3289](https://github.com/sandboxie-plus/Sandboxie/pull/3289)
 
 ### Fixed
 - fixed subscription certificate recognition issue
 - fixed logo cut-off in the About window [#3249](https://github.com/sandboxie-plus/Sandboxie/issues/3249)
-- fixed issue with file recovery when using ramdisk
-
+- fixed issue with file recovery when using ramdisk [d82b62e](https://github.com/sandboxie-plus/Sandboxie/commit/d82b62ee78d865e21005b9b81dfa9dac9f524b90)
 
 ## [1.11.1 / 5.66.1] - 2023-08-31
 
 ### Added
-- added 'RamDiskLetter=R:\' option allowing to mount the ramdisk root to a drive letter
+- added 'RamDiskLetter=R:\' option allowing to mount the ramdisk root to a drive letter [938e0a8](https://github.com/sandboxie-plus/Sandboxie/commit/938e0a8c8d88e3780ece674c6702654d0b4e6ddc)
 
 ### Changed
-- changed the new option layout to be the default for non-vintage views (can be changed back in the settings)
+- changed the new option layout to be the default for non-vintage views (can be changed back in the settings) [94c3f5e](https://github.com/sandboxie-plus/Sandboxie/commit/94c3f5e35bf9e7c993557f2c9d4e6e5129e9d1df)
 
 ### Fixed
-- fixed issue when re-creating a rambox junction
+- fixed issue when re-creating a rambox junction [2542351](https://github.com/sandboxie-plus/Sandboxie/commit/254235136fa8b74ad147f03b646d4015208c14be)
 - fixed Sandboxie logo scaling in the setup wizards [#3227](https://github.com/sandboxie-plus/Sandboxie/issues/3227)
 - fixed text cut-off in box creation wizard [#3226](https://github.com/sandboxie-plus/Sandboxie/issues/3226)
-- fixed Windows 7 compatibility issue with ImBox.exe
-- fixed issue with 'UseNewSymlinkResolver=y'
+- fixed Windows 7 compatibility issue with ImBox.exe [1f0b2b7](https://github.com/sandboxie-plus/Sandboxie/commit/1f0b2b71ba47436252fd55eece2c3624085b46dc)
+- fixed a bug where InjectDll/InjectDll64 settings were not correctly added to the sandbox configuration [#3254](https://github.com/sandboxie-plus/Sandboxie/pull/3254)
+- fixed issue with 'UseNewSymlinkResolver=y' [01a2670](https://github.com/sandboxie-plus/Sandboxie/commit/01a2670b9cc6f00bdc81b990e0c75c2688fd54fd)
 - fixed SandMan crash in Vintage View mode [#3264](https://github.com/sandboxie-plus/Sandboxie/issues/3264)
 - fixed pinning of more than one shortcut that points at the same file [#3259](https://github.com/sandboxie-plus/Sandboxie/issues/3259)
 
@@ -77,7 +82,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
 ## [1.10.5 / 5.65.5] - 2023-08-12
 
 ### Changed
@@ -85,8 +89,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue with verification of business certificates
-
-
 
 
 

@@ -312,7 +312,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed the checkbox for Open System Protected Storage appearing unchecked [#2866](https://github.com/sandboxie-plus/Sandboxie/issues/2866)
 - fixed Firewall Rules' lack of colour contrast making text hard to read [#2900](https://github.com/sandboxie-plus/Sandboxie/issues/2900)
 - fixed RecoverFolder shows GUID instead of folder name [#2918](https://github.com/sandboxie-plus/Sandboxie/issues/2918)
-- fixed System tray icon hourglass overlay gets stuck when operation is stopped [#2869](https://github.com/sandboxie-plus/Sandboxie/issues/2869)
+- fixed hourglass icon overlay gets stuck in the system tray when operation is stopped [#2869](https://github.com/sandboxie-plus/Sandboxie/issues/2869)
 - fixed File Panel doesn't allow to adjust columns size in a permanent way [#2930](https://github.com/sandboxie-plus/Sandboxie/issues/2930)
 - fixed renaming a box with sandboxed run entries can break those entries [#2921](https://github.com/sandboxie-plus/Sandboxie/issues/2921)
 - fixed WFP not enabled after Setup Wizard and other issues [#2915](https://github.com/sandboxie-plus/Sandboxie/issues/2915)

@@ -25,7 +25,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added update warning when updating with an expired personal certificate
 - added an option to terminate the UI by clicking the close button [#3253](https://github.com/sandboxie-plus/Sandboxie/issues/3253)
 - added an option to restore a Sandboxie window which has been minimized to the System Tray with a single click [#3251](https://github.com/sandboxie-plus/Sandboxie/issues/3251)
-- added an option to minimize Sandboxie to the System Tray by clicking minimize button [3252](https://github.com/sandboxie-plus/Sandboxie/issues/3252)
+- added an option to minimize Sandboxie to the System Tray by clicking minimize button [#3252](https://github.com/sandboxie-plus/Sandboxie/issues/3252)
 - added an independent desktop integration setting [#3246](https://github.com/sandboxie-plus/Sandboxie/issues/3246)
 - added template preset for AdGuard (Browser Assistant) [#3283](https://github.com/sandboxie-plus/Sandboxie/pull/3283)
 

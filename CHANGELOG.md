@@ -12,7 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 ### Changed
-- updated 7z library to 23.01 [4ee1464](https://github.com/sandboxie-plus/Sandboxie/commit/4ee146430f70c91917fbcbfb77909b5b0b84a78c)
+- updated 7z library to version 23.01 [4ee1464](https://github.com/sandboxie-plus/Sandboxie/commit/4ee146430f70c91917fbcbfb77909b5b0b84a78c)
 
 ### Fixed
 - fixed incorrect text display when changing the password of encrypted boxes or when exporting encrypted boxes [#3296](https://github.com/sandboxie-plus/Sandboxie/pull/3296)

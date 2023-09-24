@@ -6,53 +6,53 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="26"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="40"/>
         <source>kilobytes</source>
-        <translation type="unfinished">килобайт</translation>
+        <translation>килобайт</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="61"/>
         <source>Protect Box Root from access by unsandboxed processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Защитить форму Root песочницы от доступа процессов вне песочницы</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="98"/>
         <location filename="Forms/BoxImageWindow.ui" line="162"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Текстовая метка</translation>
+        <translation>Текстовая метка</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="105"/>
         <source>Show Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать пароль</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="112"/>
         <source>Enter Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите пароль</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="122"/>
         <source>New Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Новый пароль</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="132"/>
         <source>Repeat Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторите пароль</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="142"/>
         <source>Disk Image Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер образа диска</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="152"/>
         <source>Encryption Cipher</source>
-        <translation type="unfinished"></translation>
+        <translation>Шифр шифрования</translation>
     </message>
 </context>
 <context>
@@ -281,54 +281,56 @@
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="23"/>
         <source>Sandboxie-Plus - Password Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Ввод пароля</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="37"/>
         <source>Creating new box image, please enter a secure password, and choose a disk image size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Создавая новый образ песочницы, введите безопасный пароль и выберите размер образа диска.</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="41"/>
         <source>Enter Box Image password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите пароль образа песочницы:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="45"/>
         <source>Enter Box Image passwords:</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите пароли к образам песочниц:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="49"/>
         <source>Enter Encryption passwords for archive export:</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите пароли шифрования для экспорта архива:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="53"/>
         <source>Enter Encryption passwords for archive import:</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите пароли шифрования для импорта архива:</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="116"/>
         <source>kilobytes (%1)</source>
-        <translation type="unfinished">килобайт (%1)</translation>
+        <translation>килобайт (%1)</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="127"/>
         <source>Passwords don&apos;t match!!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароли не совпадают!!!</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="131"/>
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
-        <translation type="unfinished"></translation>
+        <translation>ВНИМАНИЕ: короткие пароли легко взломать методом перебора!
+
+Рекомендуется выбирать пароль, состоящий из 20 и более символов. Вы уверены, что хотите использовать короткий пароль?</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="147"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер образа диска должен быть не менее 256 МБ, рекомендуется 2 ГБ.</translation>
     </message>
 </context>
 <context>
@@ -349,7 +351,7 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="222"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. </source>
-        <translation type="unfinished"></translation>
+        <translation>Песочница изолирует вашу хост-систему от процессов, выполняющихся внутри нее, и не позволяет им вносить необратимые изменения в другие программы и данные на вашем компьютере. </translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="225"/>
@@ -369,75 +371,82 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="290"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Песочница с &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;усиленной безопасностью&lt;/a&gt; и &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;защитой данных&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="291"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes. 
 It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories. 
 The entire user profile remains hidden, ensuring maximum security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот тип песочницы обеспечивает высочайший уровень защиты за счет значительного уменьшения поверхности атаки, подверженной изолированным процессам.
+Он строго ограничивает доступ к пользовательским данным, позволяя процессам в этой песочнице иметь доступ только к каталогам C:\Windows и C:\Program Files.
+Весь профиль пользователя остается скрытым, что обеспечивает максимальную безопасность.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="294"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Песочница с &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;усиленной безопасностью&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="295"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот тип песочницы обеспечивает высочайший уровень защиты за счет значительного уменьшения поверхности атаки, подверженной изолированным процессам.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="296"/>
         <source>Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Песочница с &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;защитой данных&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="297"/>
         <source>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such, 
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</source>
-        <translation type="unfinished"></translation>
+        <translation>В этом типе песочницы изолированным процессам запрещается доступ к каким-либо личным файлам или данным пользователя. Основное внимание уделяется защите пользовательских данных, поэтому
+только каталоги C:\Windows и C:\Program Files доступны процессам, работающим в этой песочнице. Это гарантирует, что личные файлы останутся в безопасности.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="299"/>
         <source>Standard Sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Стандартная песочница</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="300"/>
         <source>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme. 
 Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот тип песочницы предлагает поведение по умолчанию, как в Sandboxie classic. Он предоставляет пользователям знакомую и надежную схему песочницы. 
+Приложения можно запускать в этой песочнице, гарантируя, что они будут работать в контролируемом и изолированном пространстве.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="302"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Контейнер для приложений&lt;/a&gt; с &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;защитой данных&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="303"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="306"/>
         <source>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. 
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот тип песочницы отдает приоритет совместимости, обеспечивая при этом хороший уровень изоляции. Он предназначен для запуска доверенных приложений в отдельных контейнерах.
+Хотя уровень изоляции снижен по сравнению с другими типами песочниц, он обеспечивает улучшенную совместимость с широким спектром приложений, обеспечивая бесперебойную работу в изолированной среде.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="305"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Контейнер для приложений&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="309"/>
         <source>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Encrypted&lt;/a&gt; &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Confidential&lt;/a&gt; Box</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Зашифрованная&lt;/a&gt; &lt;a href=&quot;sbie://docs/black-box&quot;&gt;конфиденциальная&lt;/a&gt; песочница</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="310"/>
         <source>In this box type the sandbox uses an encrypted disk image as its root folder. This provides an additional layer of privacy and security. 
 Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes. 
 This ensures the utmost level of privacy and data protection within the confidential sandbox environment.</source>
-        <translation type="unfinished"></translation>
+        <translation>В этом типе песочницы использует зашифрованный образ диска в качестве корневой папки. Это обеспечивает дополнительный уровень конфиденциальности и безопасности.
+Доступ к виртуальному диску при подключении ограничен программами, работающими в песочнице. Sandboxie предотвращает доступ других процессов в хост-системе к изолированным процессам.
+Это обеспечивает максимальный уровень конфиденциальности и защиты данных в конфиденциальной изолированной среде.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="328"/>
@@ -467,21 +476,17 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="334"/>
         <source>Application Compartment Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Контейнер для приложений</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="335"/>
         <source>Confidential Encrypted Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфиденциальная зашифрованная песочница</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="451"/>
         <source>To use ancrypted boxes you need to install the ImDisk driver, do you want to download and install it?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Application Compartment (NO Isolation)</source>
-        <translation type="vanished">Контейнер для приложений (БЕЗ изоляции)</translation>
+        <translation>Для использования зашифрованных песочниц необходимо установить драйвер ImDisk, хотите его скачать и установить?</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="353"/>
@@ -1069,7 +1074,7 @@ You can use %USER% to save each users sandbox to an own folder.</source>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="70"/>
         <source>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently innaccessible. Corruption can occur as a result of a BSOD, a storage hadrware failure, or a maliciouse application overwriting random files. This feature is provided under a strickt &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</source>
-        <translation type="unfinished"></translation>
+        <translation>Содержимое этой песочницы будет помещено в зашифрованный файл-контейнер. Обратите внимание, что любое повреждение заголовка контейнера сделает все его содержимое навсегда недоступным. Повреждение может произойти в результате BSOD, сбоя программного обеспечения хранилища или перезаписи случайных файлов вредоносным приложением. Эта функция предоставляется в соответствии со строгой политикой &lt;b&gt;Нет резервного копирования, нет пощады&lt;/b&gt;. ВЫ, пользователь, несете ответственность за данные, которые вы помещаете в зашифрованный ящик. &lt;br /&gt;&lt;br /&gt;ЕСЛИ ВЫ СОГЛАСНЫ НЕСТИ ПОЛНУЮ ОТВЕТСТВЕННОСТЬ ЗА ВАШИ ДАННЫЕ, НАЖМИТЕ [ДА], В противном случае НАЖМИТЕ [НЕТ].</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="180"/>
@@ -1229,7 +1234,9 @@ You can use %USER% to save each users sandbox to an own folder.</source>
         <source>Your Sandboxie-Plus supporter certificate is expired, howeever for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.<byte value="xd"/>
 <byte value="xd"/>
 Do you still want to update?</source>
-        <translation type="unfinished"></translation>
+        <translation>Срок действия вашего сертификата поддержки Sandboxie-Plus истек, однако для текущей сборки, которую вы используете, он остается активным, а при обновлении до более новой сборки эксклюзивные функции поддержки будут отключены.
+
+Вы все еще хотите обновить?</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="434"/>
@@ -1568,16 +1575,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="944"/>
         <source>Please enter a program file name to allow access to this sandbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите имя файла программы, чтобы разрешить доступ к этой песочнице</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="956"/>
         <source>Please enter a program file name to deny access to this sandbox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please enter a program file name</source>
-        <translation type="vanished">Пожалуйста, введите имя файла программы</translation>
+        <translation>Введите имя файла программы, чтобы запретить доступ к этой песочнице</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="1038"/>
@@ -1617,10 +1620,6 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsGeneral.cpp" line="25"/>
         <source>This option requires an active supporter certificate</source>
         <translation>Для этой опции требуется действующий сертификат сторонника</translation>
-    </message>
-    <message>
-        <source>Supporter exclusive option</source>
-        <translation type="vanished">Эксклюзивная опция для сторонников</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="54"/>
@@ -1678,18 +1677,14 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Контейнер для приложений с защитой данных</translation>
     </message>
     <message>
-        <source>Application Compartment (NO Isolation)</source>
-        <translation type="vanished">Контейнер для приложений (БЕЗ изоляции)</translation>
-    </message>
-    <message>
         <location filename="Windows/OptionsGeneral.cpp" line="23"/>
         <source>This option requires an active &lt;b&gt;advanced&lt;/b&gt; supporter certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Для этой опции требуется активный &lt;b&gt;расширенный&lt;/b&gt; сертификат сторонника</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="69"/>
         <source>Application Compartment</source>
-        <translation type="unfinished">Контейнер для приложений</translation>
+        <translation>Контейнер для приложений</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="121"/>
@@ -1739,7 +1734,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="332"/>
         <source>Change Password</source>
-        <translation type="unfinished">Изменить пароль</translation>
+        <translation>Изменить пароль</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="541"/>
@@ -1777,17 +1772,17 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1152"/>
         <source>The image file does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл образа не существует</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1153"/>
         <source>The password is wrong</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль неправильный</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1154"/>
         <source>Unexpected error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Непредвиденная ошибка: %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="873"/>
@@ -3427,7 +3422,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="448"/>
         <source>Virtual Disks</source>
-        <translation type="unfinished"></translation>
+        <translation>Виртуальные диски</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="488"/>
@@ -3454,7 +3449,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="511"/>
         <location filename="SandMan.cpp" line="653"/>
         <source>Lock All Encrypted Boxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заблокировать все зашифрованные песочницы</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="622"/>
@@ -3528,7 +3523,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1527"/>
         <source>This box will be &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;encrypted&lt;/a&gt; and &lt;a href=&quot;sbie://docs/black-box&quot;&gt;access to sandboxed processes will be guarded&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Эта песочница будет &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;зашифрована&lt;/a&gt;, и &lt;a href=&quot;sbie://docs/black-box&quot;&gt;доступ к изолированным процессам будет защищен&lt;/a &gt;.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1766"/>
@@ -3590,23 +3585,23 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2604"/>
         <source>The box %1 is configured to use features exclusively available to project supporters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Песочница %1 настроена на использование функций, доступных исключительно сторонникам проекта.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2609"/>
         <source>The box %1 is configured to use features which require an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Песочница %1 настроена на использование функций, требующих &lt;b&gt;расширенного&lt;/b&gt; сертификата поддержки.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2611"/>
         <location filename="SandMan.cpp" line="2692"/>
         <source>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Upgrade your Certificate&lt;/a&gt; to unlock advanced features.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert&quot;&gt;Обновите свой сертификат&lt;/a&gt;, чтобы разблокировать расширенные функции.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2690"/>
         <source>The selected feature requires an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Для выбранной функции требуется &lt;b&gt;расширенный&lt;/b&gt; сертификат поддержки.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2731"/>
@@ -4515,13 +4510,13 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="208"/>
         <location filename="Views/SbieView.cpp" line="329"/>
         <source>Mount Box Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Подключить образ диска</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="209"/>
         <location filename="Views/SbieView.cpp" line="330"/>
         <source>Unmount Box Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключить образ песочницы</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="236"/>
@@ -4619,7 +4614,8 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="552"/>
         <source>    Disk root: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>    Корень диска: %1
+</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="878"/>
@@ -4639,12 +4635,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="1055"/>
         <source>Failed to open archive, wrong password?</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось открыть архив, неверный пароль?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1064"/>
         <source>Failed to open archive (%1)!</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось открыть архив (%1)!</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1078"/>
@@ -4901,17 +4897,17 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="242"/>
         <source>Close to Tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть в системный лоток</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="243"/>
         <source>Prompt before Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Запрос перед закрытием</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="244"/>
         <source>Close</source>
-        <translation type="unfinished">Закрыть</translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="246"/>
@@ -4973,7 +4969,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1091"/>
         <source>kilobytes (%1)</source>
-        <translation type="unfinished">килобайт (%1)</translation>
+        <translation>килобайт (%1)</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1114"/>
@@ -5044,10 +5040,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Windows/SettingsWindow.cpp" line="1231"/>
         <source>Type %1</source>
         <translation>Тип %1</translation>
-    </message>
-    <message>
-        <source>Standard</source>
-        <translation type="vanished">Стандарт</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1259"/>
@@ -5505,8 +5497,7 @@ Try submitting without the log attached.</source>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="729"/>
         <source>Skip this summary page when advanced options are not set</source>
-        <oldsource>Don&apos;t show the summary page in future (unless advanced options were set)</oldsource>
-        <translation type="unfinished">Не показывать страницу со сводкой в будущем (если не установлены дополнительные параметры)</translation>
+        <translation>Пропустить эту страницу сводки, если расширенные параметры не установлены</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="748"/>
@@ -6366,27 +6357,27 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="340"/>
         <source>Encrypt sandbox content</source>
-        <translation type="unfinished"></translation>
+        <translation>Шифровать содержимое песочницы</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="354"/>
         <source>When &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Box Encryption&lt;/a&gt; is enabled the box’s root folder, including its registry hive, is stored in an encrypted disk image, using &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; AES-XTS implementation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Когда &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;шифрование песочницы&lt;/a&gt; включено, ее корневая папка, включая куст реестра, сохраняется в зашифрованном образе диска с использованием &lt;a href=&quot;https://diskcryptor.org&quot;&gt;Disk Cryptor&apos;s&lt;/a&gt; реализация AES-XTS.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="414"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;addon://ImDisk&quot;&gt;Установить ImDisk&lt;/a&gt; драйвер, чтобы включить поддержку Ram Disk и Disk Image.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="445"/>
         <source>Store the sandbox content in a Ram Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Хранить содержимое песочницы на Ram Disk</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="462"/>
         <source>Set Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Задать пароль</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="469"/>
@@ -6470,7 +6461,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1245"/>
         <source>Disable Security Isolation</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключить изоляцию безопасности</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1320"/>
@@ -6481,47 +6472,47 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
         <location filename="Forms/OptionsWindow.ui" line="1347"/>
         <location filename="Forms/OptionsWindow.ui" line="1464"/>
         <source>Box Protection</source>
-        <translation type="unfinished"></translation>
+        <translation>Защита песочницы</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1362"/>
         <source>Protect processes within this box from host processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Защитить процессы внутри этой песочницы от хост-процессов</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1415"/>
         <source>Allow Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить процесс</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1471"/>
         <source>Issue message 1318/1317 when a host process tries to access a sandboxed process/the box root</source>
-        <translation type="unfinished"></translation>
+        <translation>Сообщение о проблеме 1318/1317, когда хост-процесс пытается получить доступ к изолированному процессу/корню песочницы</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1478"/>
         <source>Sandboxie-Plus is able to create confidential sandboxes that provide robust protection against unauthorized surveillance or tampering by host processes. By utilizing an encrypted sandbox image, this feature delivers the highest level of operational confidentiality, ensuring the safety and integrity of sandboxed processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus может создавать конфиденциальные песочницы, которые обеспечивают надежную защиту от несанкционированного наблюдения или вмешательства со стороны хост-процессов. Благодаря использованию зашифрованного образа песочницы эта функция обеспечивает высочайший уровень операционной конфиденциальности, гарантируя безопасность и целостность изолированных процессов.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1488"/>
         <source>Deny Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Запретить процесс</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1513"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
-        <translation type="unfinished">Использовать логин Sandboxie вместо анонимного токена</translation>
+        <translation>Использовать логин Sandboxie вместо анонимного токена</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1963"/>
         <source>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;SECURITY ADVISORY&lt;/font&gt;:&lt;/b&gt; Using &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; and/or &lt;a href=&quot;sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; in combination with Open[File/Pipe]Path directives can compromise security, as can the use of &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt;/a&gt; allowing any * or insecure (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1;etc…) extensions. Please review the security section for each option in the documentation before use.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;&lt;font color=&apos;red&apos;&gt;СОВЕТЫ ПО БЕЗОПАСНОСТИ&lt;/font&gt;:&lt;/b&gt; Использование &lt;a href=&quot;sbie://docs/breakoutfolder&quot;&gt;BreakoutFolder&lt;/a&gt; и/или &lt;a href=&quot; sbie://docs/breakoutprocess&quot;&gt;BreakoutProcess&lt;/a&gt; в сочетании с директивами Open[File/Pipe]Path может поставить под угрозу безопасность, равно как и использование &lt;a href=&quot;sbie://docs/breakoutdocument&quot;&gt;BreakoutDocument&lt; /a&gt; разрешает любые * или небезопасные (*.exe;*.dll;*.ocx;*.cmd;*.bat;*.lnk;*.pif;*.url;*.ps1; и т. д.) расширения. Перед использованием ознакомьтесь с разделом безопасности для каждого параметра в документации.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2739"/>
         <source>Configure which processes can access Desktop objects like Windows and alike.</source>
-        <translation type="unfinished"></translation>
+        <translation>Настроить, какие процессы могут получать доступ к объектам рабочего стола, таким как Windows и т.п.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3592"/>
@@ -6549,10 +6540,6 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
         <location filename="Forms/OptionsWindow.ui" line="1505"/>
         <source>Advanced Security</source>
         <translation>Расширенная безопасность</translation>
-    </message>
-    <message>
-        <source>Use a Sandboxie login instead of an anonymous token (experimental)</source>
-        <translation type="vanished">Использовать логин Sandboxie вместо анонимного токена (экспериментально)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1530"/>
@@ -6773,10 +6760,6 @@ To specify a process use &apos;$:program.exe&apos; as path.</source>
         <location filename="Forms/OptionsWindow.ui" line="2724"/>
         <source>Wnd Class</source>
         <translation>Wnd класс</translation>
-    </message>
-    <message>
-        <source>Configure which processes can access desktop objects like windows and alike.</source>
-        <translation type="vanished">Настройте, какие процессы могут получить доступ к объектам рабочего стола, таким как окна и т.п.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2752"/>
@@ -7094,10 +7077,6 @@ The process match level has a higher priority than the specificity and describes
         <translation>Разрешить изолированным программам управлять оборудованием/устройствами</translation>
     </message>
     <message>
-        <source>Disable Security Isolation (experimental)</source>
-        <translation type="vanished">Отключить изоляцию безопасности (экспериментально)</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="1252"/>
         <source>Open access to Windows Security Account Manager</source>
         <translation>Открытый доступ к диспетчеру учетных записей безопасности Windows</translation>
@@ -7311,10 +7290,6 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
         <translation>Процесс</translation>
     </message>
     <message>
-        <source>Block also read access to processes in this sandbox</source>
-        <translation type="vanished">Блокировать также доступ для чтения к процессам в этой песочнице</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="3735"/>
         <source>Add Option</source>
         <translation>Добавить опцию</translation>
@@ -7347,10 +7322,6 @@ instead of &quot;*&quot;.</source>
 &quot;D&quot; - Запрещенный доступ
 &quot;I&quot; - Игнорированные запросы доступа
 вместо &quot;*&quot;.</translation>
-    </message>
-    <message>
-        <source>Ntdll syscall Trace (creates a lot of output)</source>
-        <translation type="vanished">Трассировка системных вызовов Ntdll (создает много выходных данных)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4384"/>
@@ -7506,12 +7477,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4275"/>
         <source>DNS Request Logging</source>
-        <translation type="unfinished"></translation>
+        <translation>Журналирование DNS-запросов</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4296"/>
         <source>Syscall Trace (creates a lot of output)</source>
-        <translation type="unfinished"></translation>
+        <translation>Трассировка системных вызовов (создает много выходных данных)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4506"/>
@@ -8294,72 +8265,72 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1338"/>
         <source>Add-On Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфигурация дополнений</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1346"/>
         <source>Enable Ram Disk creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить создание Ram Disk</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1353"/>
         <source>kilobytes</source>
-        <translation type="unfinished">килобайт</translation>
+        <translation>килобайт</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1406"/>
         <source>Disk Image Support</source>
-        <translation type="unfinished"></translation>
+        <translation>Поддержка образа диска</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1423"/>
         <source>RAM Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничение ОЗУ</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1390"/>
         <source>&lt;a href=&quot;addon://ImDisk&quot;&gt;Install ImDisk&lt;/a&gt; driver to enable Ram Disk and Disk Image support.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;addon://ImDisk&quot;&gt;Установить ImDisk&lt;/a&gt; драйвер, чтобы включить поддержку Ram Disk и Disk Image.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="577"/>
         <source>Integrate with Host Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Интеграция с хостовым рабочим столом</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="593"/>
         <source>System Tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Системный лоток</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="692"/>
         <source>On main window close:</source>
-        <translation type="unfinished"></translation>
+        <translation>При закрытии главного окна:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="699"/>
         <source>Open/Close from/to tray with a single click</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть/закрыть из/в лоток одним щелчком мыши</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="706"/>
         <source>Minimize to tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть в системный лоток</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1370"/>
         <source>Assign drive letter to Ram Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Назначить букву диска Ram Disk</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1446"/>
         <source>When a Ram Disk is already mounted you need to unmount it for this option to take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Если Ram Disk уже смонтирован, вам необходимо отключить его, чтобы эта опция вступила в силу.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1449"/>
         <source>* takes effect on disk creation</source>
-        <translation type="unfinished"></translation>
+        <translation>* вступает в силу при создании диска</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1463"/>

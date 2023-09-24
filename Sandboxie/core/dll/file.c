@@ -7321,6 +7321,13 @@ _FX BOOLEAN SbieDll_TranslateNtToDosPath(WCHAR *path)
     const FILE_DRIVE *drive;
     ULONG path_len, prefix_len;
 
+    if (_wcsnicmp(path, L"\\??\\", 4) == 0) {
+    
+        wmemmove(path, path + 4, wcslen(path) - 4 + 1);
+    
+        return TRUE;
+    }
+
     if (! File_DrivesAndLinks_CritSec) {    // if not sandboxed
 
         File_DrivesAndLinks_CritSec = Dll_Alloc(sizeof(CRITICAL_SECTION));

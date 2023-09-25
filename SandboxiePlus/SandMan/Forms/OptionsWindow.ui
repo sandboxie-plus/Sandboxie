@@ -457,7 +457,7 @@
                 <widget class="QComboBox" name="cmbVersion"/>
                </item>
                <item row="5" column="5">
-                <widget class="QPushButton" name="btnPassword">
+                <widget class="QToolButton" name="btnPassword">
                  <property name="text">
                   <string>Set Password</string>
                  </property>

@@ -7,9 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.11.3 / 5.66.3] - 2023-09-
+## [1.11.3 / 5.66.3] - 2023-09-26
 
 ### Added
+added container header backup/restore option to the option windows
 
 ### Changed
 - updated 7z library to version 23.01 [4ee1464](https://github.com/sandboxie-plus/Sandboxie/commit/4ee146430f70c91917fbcbfb77909b5b0b84a78c)

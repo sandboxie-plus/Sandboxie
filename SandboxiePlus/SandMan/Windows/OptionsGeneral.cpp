@@ -328,8 +328,17 @@ void COptionsWindow::LoadGeneral()
 	if (ui.chkRamBox->isEnabled())
 		ui.chkEncrypt->setEnabled(!ui.chkRamBox->isChecked());
 	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
-	if (pBoxEx && QFile::exists(pBoxEx->GetBoxImagePath()))
+	if (pBoxEx && QFile::exists(pBoxEx->GetBoxImagePath())) 
+	{
+		if (!ui.btnPassword->menu()) {
+			QMenu* pCryptoMenu = new QMenu();
+			pCryptoMenu->addAction(tr("Backup Image Header"), this, SLOT(OnBackupHeader()));
+			pCryptoMenu->addAction(tr("Restore Image Header"), this, SLOT(OnRestoreHeader()));
+			ui.btnPassword->setPopupMode(QToolButton::MenuButtonPopup);
+			ui.btnPassword->setMenu(pCryptoMenu);
+		}
 		ui.btnPassword->setText(tr("Change Password"));
+	}
 	ui.btnPassword->setEnabled(!ui.chkRamBox->isChecked() && ui.chkEncrypt->isChecked() && pBoxEx && pBoxEx->GetMountRoot().isEmpty());
 
 	int iLimit = m_pBox->GetNum("CopyLimitKb", 80 * 1024);
@@ -1121,6 +1130,25 @@ void COptionsWindow::OnDiskChanged()
 	OnGeneralChanged();
 }
 
+bool COptionsWindow::RunImBox(const QStringList& Arguments)
+{
+	QProcess Process;
+	Process.start(theAPI->GetSbiePath() + "\\ImBox.exe", Arguments);
+	Process.waitForFinished();
+	int ret = Process.exitCode();
+	if (ret != ERR_OK) {
+		QString Message;
+		switch (ret) {
+		case ERR_FILE_NOT_OPENED:	Message = tr("The image file does not exist"); break;
+		case ERR_WRONG_PASSWORD:    Message = tr("The password is wrong"); break;
+		default:                    Message = tr("Unexpected error: %1").arg(ret); break;
+		}
+		QMessageBox::critical(this, "Sandboxie-Plus", Message);
+		return false;
+	}
+	return true;
+}
+
 void COptionsWindow::OnSetPassword()
 {
 	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
@@ -1134,27 +1162,45 @@ void COptionsWindow::OnSetPassword()
 			OnGeneralChanged();
 		}
 		else {
-			QString m_NewPassword = window.GetNewPassword();
 
 			QStringList Arguments;
 			Arguments.append("type=image");
 			Arguments.append("image=" + pBoxEx->GetBoxImagePath());
 			Arguments.append("key=" + m_Password);
-			Arguments.append("new_key=" + m_NewPassword);
+			Arguments.append("new_key=" + window.GetNewPassword());
 
-			QProcess Process;
-			Process.start(theAPI->GetSbiePath() + "\\ImBox.exe", Arguments);
-			Process.waitForFinished();
-			int ret = Process.exitCode();
-			if (ret != ERR_OK) {
-				QString Message;
-				switch (ret) {
-				case ERR_FILE_NOT_OPENED:	Message = tr("The image file does not exist"); break;
-				case ERR_WRONG_PASSWORD:    Message = tr("The password is wrong"); break;
-				default:                    Message = tr("Unexpected error: %1").arg(ret); break;
-				}
-				QMessageBox::critical(this, "Sandboxie-Plus", Message);
-			}
+			if (RunImBox(Arguments))
+				QMessageBox::information(this, "Sandboxie-Plus", tr("Image Password Changed"));
 		}
 	}
+}
+
+void COptionsWindow::OnBackupHeader()
+{
+	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+
+	QString FileName = QFileDialog::getSaveFileName(theGUI, tr("Backup Image Header for %1").arg(m_pBox->GetName()), "", QString("Image Header File (*.hdr)")).replace("/", "\\");
+
+	QStringList Arguments;
+	Arguments.append("type=image");
+	Arguments.append("image=" + pBoxEx->GetBoxImagePath());
+	Arguments.append("backup=" + FileName);
+
+	if (RunImBox(Arguments))
+		QMessageBox::information(this, "Sandboxie-Plus", tr("Image Header Backuped"));
+}
+
+void COptionsWindow::OnRestoreHeader()
+{
+	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+
+	QString FileName = QFileDialog::getOpenFileName(theGUI, tr("Backup Image Header for %1").arg(m_pBox->GetName()), "", QString("Image Header File (*.hdr)")).replace("/", "\\");
+
+	QStringList Arguments;
+	Arguments.append("type=image");
+	Arguments.append("image=" + pBoxEx->GetBoxImagePath());
+	Arguments.append("restore=" + FileName);
+
+	if (RunImBox(Arguments))
+		QMessageBox::information(this, "Sandboxie-Plus", tr("Image Header Restored"));
 }

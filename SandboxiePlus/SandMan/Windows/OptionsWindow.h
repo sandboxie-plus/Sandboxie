@@ -74,6 +74,8 @@ private slots:
 
 	void OnDiskChanged();
 	void OnSetPassword();
+	void OnBackupHeader();
+	void OnRestoreHeader();
 
 	void OnAddGroup();
 	void OnAddProg();
@@ -361,6 +363,8 @@ protected:
 	bool IsAccessEntrySet(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path);
 	void SetAccessEntry(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path);
 	void DelAccessEntry(EAccessType Type, const QString& Program, EAccessMode Mode, const QString& Path);
+
+	bool RunImBox(const QStringList& Arguments);
 
 	void LoadConfig();
 	void SaveConfig();

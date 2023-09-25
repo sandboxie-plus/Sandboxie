@@ -1230,10 +1230,13 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="317"/>
-        <source>Your Sandboxie-Plus supporter certificate is expired, howeever for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.<byte value="xd"/>
+        <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.<byte value="xd"/>
 <byte value="xd"/>
 Do you still want to update?</source>
-        <translation>Sandboxie-Plus destekçi sertifikanızın süresi doldu ancak kullandığınız mevcut derleme için destekçi sertifikanızın sunduğu bu özellikler etkin olmaya devam edecektir. Daha yeni bir derlemeye geçiş yaparsanız bu özellikler devre dışı bırakılacaktır.
+        <oldsource>Your Sandboxie-Plus supporter certificate is expired, howeever for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.<byte value="xd"/>
+<byte value="xd"/>
+Do you still want to update?</oldsource>
+        <translation type="unfinished">Sandboxie-Plus destekçi sertifikanızın süresi doldu ancak kullandığınız mevcut derleme için destekçi sertifikanızın sunduğu bu özellikler etkin olmaya devam edecektir. Daha yeni bir derlemeye geçiş yaparsanız bu özellikler devre dışı bırakılacaktır.
 Yine de güncellemek istiyor musunuz?</translation>
     </message>
     <message>

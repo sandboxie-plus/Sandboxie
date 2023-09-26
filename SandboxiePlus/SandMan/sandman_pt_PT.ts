@@ -1563,8 +1563,8 @@ Nota: A verificação de actualização geralmente está por trás da versão ma
         <location filename="Windows/OptionsAccess.cpp" line="632"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="663"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="738"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="569"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="665"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="578"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="674"/>
         <location filename="Windows/OptionsNetwork.cpp" line="461"/>
         <location filename="Windows/OptionsNetwork.cpp" line="554"/>
         <location filename="Windows/OptionsNetwork.cpp" line="667"/>
@@ -1576,8 +1576,8 @@ Nota: A verificação de actualização geralmente está por trás da versão ma
         <location filename="Windows/OptionsWindow.cpp" line="1089"/>
         <location filename="Windows/OptionsAccess.cpp" line="404"/>
         <location filename="Windows/OptionsAccess.cpp" line="636"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="574"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="669"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="583"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="678"/>
         <location filename="Windows/OptionsNetwork.cpp" line="193"/>
         <location filename="Windows/OptionsNetwork.cpp" line="466"/>
         <location filename="Windows/OptionsNetwork.cpp" line="558"/>
@@ -1612,7 +1612,7 @@ Nota: A verificação de actualização geralmente está por trás da versão ma
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="611"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="714"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="636"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="645"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
         <location filename="Windows/OptionsNetwork.cpp" line="533"/>
@@ -1908,52 +1908,83 @@ Nota: A verificação de actualização geralmente está por trás da versão ma
         <translation>Indeterminado</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="332"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="335"/>
+        <source>Backup Image Header</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="336"/>
+        <source>Restore Image Header</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="340"/>
         <source>Change Password</source>
         <translation type="unfinished">Mudar Palavra-passe</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="541"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="641"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="550"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="650"/>
         <source>Always copy</source>
         <translation>Sempre copiar</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="542"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="642"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="551"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="651"/>
         <source>Don&apos;t copy</source>
         <translation>Não copiar</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="543"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="643"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="552"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="652"/>
         <source>Copy empty</source>
         <translation>Copiar vazio</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="769"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="778"/>
         <source>kilobytes (%1)</source>
         <translatorcomment>Only capitalized</translatorcomment>
         <translation>Kilobytes (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="875"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="884"/>
         <source>Select color</source>
         <translation>Seleccionar cor</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1152"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1142"/>
         <source>The image file does not exist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1153"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1143"/>
         <source>The password is wrong</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1154"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1144"/>
         <source>Unexpected error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="1173"/>
+        <source>Image Password Changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="1182"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1197"/>
+        <source>Backup Image Header for %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="1190"/>
+        <source>Image Header Backuped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="1205"/>
+        <source>Image Header Restored</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1961,7 +1992,7 @@ Nota: A verificação de actualização geralmente está por trás da versão ma
         <translation type="vanished">Introduza o localização do programa</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="950"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="959"/>
         <source>Select Program</source>
         <translation>Seleccionar Programa</translation>
     </message>
@@ -1983,18 +2014,18 @@ Nota: A verificação de actualização geralmente está por trás da versão ma
         <translation type="vanished">Programa</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="950"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="959"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>Executáveis (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="954"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="975"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="963"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="984"/>
         <source>Please enter a menu title</source>
         <translation>Por favor introduza o título do menu</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="971"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="980"/>
         <source>Please enter a command</source>
         <translation>Por favor, digite um comando</translation>
     </message>

@@ -1612,8 +1612,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsAccess.cpp" line="632"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="663"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="738"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="569"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="665"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="578"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="674"/>
         <location filename="Windows/OptionsNetwork.cpp" line="461"/>
         <location filename="Windows/OptionsNetwork.cpp" line="554"/>
         <location filename="Windows/OptionsNetwork.cpp" line="667"/>
@@ -1625,8 +1625,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsWindow.cpp" line="1089"/>
         <location filename="Windows/OptionsAccess.cpp" line="404"/>
         <location filename="Windows/OptionsAccess.cpp" line="636"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="574"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="669"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="583"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="678"/>
         <location filename="Windows/OptionsNetwork.cpp" line="193"/>
         <location filename="Windows/OptionsNetwork.cpp" line="466"/>
         <location filename="Windows/OptionsNetwork.cpp" line="558"/>
@@ -1661,7 +1661,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="611"/>
         <location filename="Windows/OptionsAdvanced.cpp" line="714"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="636"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="645"/>
         <location filename="Windows/OptionsGrouping.cpp" line="234"/>
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
         <location filename="Windows/OptionsNetwork.cpp" line="533"/>
@@ -1954,57 +1954,88 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>불확실한</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="332"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="335"/>
+        <source>Backup Image Header</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="336"/>
+        <source>Restore Image Header</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="340"/>
         <source>Change Password</source>
         <translation>암호 변경</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="541"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="641"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="550"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="650"/>
         <source>Always copy</source>
         <translation>항상 복사</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="542"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="642"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="551"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="651"/>
         <source>Don&apos;t copy</source>
         <translation>복사 안 함</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="543"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="643"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="552"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="652"/>
         <source>Copy empty</source>
         <translation>빈 복사</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="769"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="778"/>
         <source>kilobytes (%1)</source>
         <translation>킬로바이트 (%1)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="875"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="884"/>
         <source>Select color</source>
         <translation>색상 선택</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="950"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="959"/>
         <source>Select Program</source>
         <translation>프로그램 선택</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1152"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1142"/>
         <source>The image file does not exist</source>
         <translation>이미지 파일이 없습니다</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1153"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1143"/>
         <source>The password is wrong</source>
         <translation>암호가 잘못되었습니다</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="1154"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1144"/>
         <source>Unexpected error: %1</source>
         <translation>예기치 않은 오류: %1</translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="1173"/>
+        <source>Image Password Changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="1182"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="1197"/>
+        <source>Backup Image Header for %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="1190"/>
+        <source>Image Header Backuped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="1205"/>
+        <source>Image Header Restored</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="873"/>
@@ -2012,18 +2043,18 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>서비스 식별자를 입력하십시오</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="950"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="959"/>
         <source>Executables (*.exe *.cmd)</source>
         <translation>실행 파일 (*.exe *.cmd)</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="954"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="975"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="963"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="984"/>
         <source>Please enter a menu title</source>
         <translation>메뉴 제목을 입력하십시오</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsGeneral.cpp" line="971"/>
+        <location filename="Windows/OptionsGeneral.cpp" line="980"/>
         <source>Please enter a command</source>
         <translation>명령을 입력하십시오</translation>
     </message>

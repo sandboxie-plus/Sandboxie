@@ -1073,7 +1073,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="70"/>
         <source>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently innaccessible. Corruption can occur as a result of a BSOD, a storage hadrware failure, or a maliciouse application overwriting random files. This feature is provided under a strickt &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</source>
-        <translation>Bu korumalı alanın içeriği şifrelenmiş bir konteyner dosyasına yerleştirilecektir. Lütfen konteyner dosyasında oluşbilecek herhangi bir bozulmanın içeriğin tamamını kalıcı olarak erişilemez hale getireceğini unutmayın. Bu bozulma bir BSOD (Mavi Ekran), bir depolama donanım yazılımı arızası veya kötü amaçlı bir uygulamanın rastgele dosyaların üzerine yazması sonucunda meydana gelebilir. Bu özellik katı bir &lt;b&gt;Yedekleme Yok, Merhamet Yok!&lt;/b&gt; politikası kapsamında sağlanır. Şifrelenmiş bir alana koyduğunuz verilerden kullanıcı olarak SİZ KENDİNİZ sorumlusunuz. &lt;br /&gt;&lt;br /&gt;VERİLERİNİZİN TAM SORUMLULUĞUNU ALMAYI KABUL EDİYORSANIZ [EVET]&apos;E TIKLAYIN, AKSİ TAKDİRDE [HAYIR]&apos;A TIKLAYIN.</translation>
+        <translation>Bu korumalı alanın içeriği şifrelenmiş bir konteyner dosyasına yerleştirilecektir. Lütfen konteyner dosyasında oluşabilecek herhangi bir bozulmanın içeriğin tamamını kalıcı olarak erişilemez hale getireceğini unutmayın. Bu bozulma bir BSOD (Mavi Ekran), bir depolama donanım yazılımı arızası veya kötü amaçlı bir uygulamanın rastgele dosyaların üzerine yazması sonucunda meydana gelebilir. Bu özellik katı bir &lt;b&gt;Yedekleme Yok, Merhamet Yok!&lt;/b&gt; politikası kapsamında sağlanır. Şifrelenmiş bir alana koyduğunuz verilerden kullanıcı olarak SİZ KENDİNİZ sorumlusunuz. &lt;br /&gt;&lt;br /&gt;VERİLERİNİZİN TAM SORUMLULUĞUNU ALMAYI KABUL EDİYORSANIZ [EVET]&apos;E TIKLAYIN, AKSİ TAKDİRDE [HAYIR]&apos;A TIKLAYIN.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="180"/>
@@ -1233,10 +1233,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.<byte value="xd"/>
 <byte value="xd"/>
 Do you still want to update?</source>
-        <oldsource>Your Sandboxie-Plus supporter certificate is expired, howeever for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.<byte value="xd"/>
-<byte value="xd"/>
-Do you still want to update?</oldsource>
-        <translation type="unfinished">Sandboxie-Plus destekçi sertifikanızın süresi doldu ancak kullandığınız mevcut derleme için destekçi sertifikanızın sunduğu bu özellikler etkin olmaya devam edecektir. Daha yeni bir derlemeye geçiş yaparsanız bu özellikler devre dışı bırakılacaktır.
+        <translation>Sandboxie-Plus destekçi sertifikanızın süresi doldu ancak kullandığınız mevcut derleme için destekçi sertifikanızın sunduğu bu özellikler etkin olmaya devam edecektir. Daha yeni bir derlemeye geçiş yaparsanız bu özellikler devre dışı bırakılacaktır.
 Yine de güncellemek istiyor musunuz?</translation>
     </message>
     <message>
@@ -1860,12 +1857,12 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="335"/>
         <source>Backup Image Header</source>
-        <translation type="unfinished"></translation>
+        <translation>Görüntü Başlığını Yedekle</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="336"/>
         <source>Restore Image Header</source>
-        <translation type="unfinished"></translation>
+        <translation>Görüntü Başlığını Geri Yükle</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="340"/>
@@ -1918,23 +1915,27 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1173"/>
         <source>Image Password Changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Görüntü Parolası Değiştirildi</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1182"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="1197"/>
         <source>Backup Image Header for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 için Görüntü Başlığını Yedekle</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1190"/>
         <source>Image Header Backuped</source>
-        <translation type="unfinished"></translation>
+        <translation>Görüntü Başlığı Yedeklendi</translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="1197"/>
+        <source>Restore Image Header for %1</source>
+        <translation>%1 için Görüntü Başlığını Geri Yükle</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1205"/>
         <source>Image Header Restored</source>
-        <translation type="unfinished"></translation>
+        <translation>Görüntü Başlığı Geri Yüklendi</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="315"/>

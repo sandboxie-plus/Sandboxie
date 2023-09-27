@@ -1,4 +1,4 @@
-# Sandboxie's Code of Conduct
+# Sandboxie Community Code of Conduct
 
 ## Our Pledge
 

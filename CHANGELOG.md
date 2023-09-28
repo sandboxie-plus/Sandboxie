@@ -11,26 +11,26 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 added container header backup/restore option to the option windows
 
 ### Changed
-- updated 7z library to version 23.01 [4ee1464](https://github.com/sandboxie-plus/Sandboxie/commit/4ee146430f70c91917fbcbfb77909b5b0b84a78c)
+- updated 7-Zip library to version 23.01 [4ee1464](https://github.com/sandboxie-plus/Sandboxie/commit/4ee146430f70c91917fbcbfb77909b5b0b84a78c)
 
 ### Fixed
 - fixed incorrect text display when changing the password of encrypted boxes or when exporting encrypted boxes [#3296](https://github.com/sandboxie-plus/Sandboxie/pull/3296)
-- fixed image files not being create as sparse files
+- fixed image files not being created as sparse files
 
 
 
 ## [1.11.2 / 5.66.2] - 2023-09-09
 
 ### Added
-- added update warning when updating with an expired personal certificate
+- added update warning if a personal certificate expires
 - added an option to terminate the UI by clicking the close button [#3253](https://github.com/sandboxie-plus/Sandboxie/issues/3253)
 - added an option to restore a Sandboxie window which has been minimized to the system tray with a single click [#3251](https://github.com/sandboxie-plus/Sandboxie/issues/3251)
 - added an option to minimize Sandboxie to the system tray by clicking minimize button [#3252](https://github.com/sandboxie-plus/Sandboxie/issues/3252)
 - added an independent desktop integration setting [#3246](https://github.com/sandboxie-plus/Sandboxie/issues/3246)
-- added template preset for AdGuard (Browser Assistant) [#3283](https://github.com/sandboxie-plus/Sandboxie/pull/3283)
+- added template preset for AdGuard Browser Assistant [#3283](https://github.com/sandboxie-plus/Sandboxie/pull/3283)
 
 ### Changed
-- moved tray option to an own tab
+- moved tray option to its own tab
 - replaced some graphics with better compressed ones (thanks idealths) [1af82bb](https://github.com/sandboxie-plus/Sandboxie/commit/1af82bb39643e7470dd4839bf3cebe8a4acf9d06)
 - changed the /mount_protected command line switch to be checked before the /mount command line switch [#3289](https://github.com/sandboxie-plus/Sandboxie/pull/3289)
 
@@ -368,7 +368,7 @@ added container header backup/restore option to the option windows
 - fixed memory corruption issue with Normal[File/Key]Path [#2588](https://github.com/sandboxie-plus/Sandboxie/issues/2588)
 - fixed DPI scaling in the snapshot manager window [#782](https://github.com/sandboxie-plus/Sandboxie/issues/782)
 - fixed issue with arm64 DialogProc hook [#2838](https://github.com/sandboxie-plus/Sandboxie/issues/2838)
-- fixed Qt6 compatibility issue with 7z FS implementation [#2681](https://github.com/sandboxie-plus/Sandboxie/issues/2681)
+- fixed Qt6 compatibility issue with 7-Zip FS implementation [#2681](https://github.com/sandboxie-plus/Sandboxie/issues/2681)
 - fixed issue with TLS support using Qt6 [#2682](https://github.com/sandboxie-plus/Sandboxie/issues/2682)
 - added template preset for Spotify [#2673](https://github.com/sandboxie-plus/Sandboxie/issues/2673)
 - added missing localisation to finder [#2845](https://github.com/sandboxie-plus/Sandboxie/issues/2845)
@@ -722,7 +722,7 @@ added container header backup/restore option to the option windows
 ## [1.6.0 / 5.61.0] - 2022-11-26
 
 ### Added
-- added ability to import/export boxes into 7z files
+- added ability to import/export boxes to 7-Zip files
 - added new update mechanism allowing for incremental updates
   - used for nightly test builds in the "live" update channel
   - used to update Templates.ini and translations after installation [#1105](https://github.com/sandboxie-plus/Sandboxie/issues/1105)

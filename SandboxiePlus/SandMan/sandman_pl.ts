@@ -1710,13 +1710,17 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1182"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="1197"/>
         <source>Backup Image Header for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1190"/>
         <source>Image Header Backuped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="1197"/>
+        <source>Restore Image Header for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

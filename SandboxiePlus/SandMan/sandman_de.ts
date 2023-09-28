@@ -1544,7 +1544,6 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1182"/>
-        <location filename="Windows/OptionsGeneral.cpp" line="1197"/>
         <source>Backup Image Header for %1</source>
         <translation>Sichere Abbildheader für %1</translation>
     </message>
@@ -1552,6 +1551,11 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <location filename="Windows/OptionsGeneral.cpp" line="1190"/>
         <source>Image Header Backuped</source>
         <translation>Abbildheader gesichert</translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsGeneral.cpp" line="1197"/>
+        <source>Restore Image Header for %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1205"/>

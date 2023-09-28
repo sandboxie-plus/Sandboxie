@@ -722,7 +722,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.6.0 / 5.61.0] - 2022-11-26
 
 ### Added
-- added ability to import/export boxes to 7-Zip files
+- added ability to import/export boxes to .7z files
 - added new update mechanism allowing for incremental updates
   - used for nightly test builds in the "live" update channel
   - used to update Templates.ini and translations after installation [#1105](https://github.com/sandboxie-plus/Sandboxie/issues/1105)

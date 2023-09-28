@@ -1234,10 +1234,7 @@ You can use %USER% to save each users sandbox to an own folder.</source>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.<byte value="xd"/>
 <byte value="xd"/>
 Do you still want to update?</source>
-        <oldsource>Your Sandboxie-Plus supporter certificate is expired, howeever for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.<byte value="xd"/>
-<byte value="xd"/>
-Do you still want to update?</oldsource>
-        <translation type="unfinished">Срок действия вашего сертификата поддержки Sandboxie-Plus истек, однако для текущей сборки, которую вы используете, он остается активным, а при обновлении до более новой сборки эксклюзивные функции поддержки будут отключены.
+        <translation>Срок действия вашего сертификата поддержки Sandboxie-Plus истек, однако для текущей сборки, которую вы используете, он остается активным, при обновлении до более новой сборки эксклюзивные функции поддержки будут отключены.
 
 Вы все еще хотите обновить?</translation>
     </message>
@@ -1737,12 +1734,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="335"/>
         <source>Backup Image Header</source>
-        <translation type="unfinished"></translation>
+        <translation>Резервная копия заголовка образа</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="336"/>
         <source>Restore Image Header</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановить заголовок образа</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="340"/>
@@ -1800,27 +1797,27 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1173"/>
         <source>Image Password Changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль образа изменен</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1182"/>
         <source>Backup Image Header for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Резервное копирование заголовка образа для %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1190"/>
         <source>Image Header Backuped</source>
-        <translation type="unfinished"></translation>
+        <translation>Резервная копия заголовка образа создана</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1197"/>
         <source>Restore Image Header for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановление заголовка образа для %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1205"/>
         <source>Image Header Restored</source>
-        <translation type="unfinished"></translation>
+        <translation>Заголовок образа восстановлен</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="873"/>

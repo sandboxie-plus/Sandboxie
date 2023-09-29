@@ -368,7 +368,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed memory corruption issue with Normal[File/Key]Path [#2588](https://github.com/sandboxie-plus/Sandboxie/issues/2588)
 - fixed DPI scaling in the snapshot manager window [#782](https://github.com/sandboxie-plus/Sandboxie/issues/782)
 - fixed issue with arm64 DialogProc hook [#2838](https://github.com/sandboxie-plus/Sandboxie/issues/2838)
-- fixed Qt6 compatibility issue with 7-Zip FS implementation [#2681](https://github.com/sandboxie-plus/Sandboxie/issues/2681)
+- fixed Qt6 compatibility issue with 7-Zip file system implementation [#2681](https://github.com/sandboxie-plus/Sandboxie/issues/2681)
 - fixed issue with TLS support using Qt6 [#2682](https://github.com/sandboxie-plus/Sandboxie/issues/2682)
 - added template preset for Spotify [#2673](https://github.com/sandboxie-plus/Sandboxie/issues/2673)
 - added missing localisation to finder [#2845](https://github.com/sandboxie-plus/Sandboxie/issues/2845)

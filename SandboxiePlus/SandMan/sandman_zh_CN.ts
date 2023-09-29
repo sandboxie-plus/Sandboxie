@@ -1392,9 +1392,6 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
-        <oldsource>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
-
-Do you still want to update?</oldsource>
         <translation>您的 Sandboxie-Plus 赞助者凭据已过期。您的凭据在当前版本中将保持激活。但当您进行更新后，赞助者独占功能将被禁用。
 
 您确定要进行更新吗？</translation>

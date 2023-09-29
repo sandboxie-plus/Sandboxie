@@ -1231,8 +1231,8 @@ You can use %USER% to save each users sandbox to an own folder.</source>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="317"/>
-        <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.<byte value="xd"/>
-<byte value="xd"/>
+        <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
+
 Do you still want to update?</source>
         <translation>Срок действия вашего сертификата поддержки Sandboxie-Plus истек, однако для текущей сборки, которую вы используете, он остается активным, при обновлении до более новой сборки эксклюзивные функции поддержки будут отключены.
 

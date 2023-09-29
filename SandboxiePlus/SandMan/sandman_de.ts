@@ -1231,8 +1231,8 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="317"/>
-        <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.<byte value="xd"/>
-<byte value="xd"/>
+        <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
+
 Do you still want to update?</source>
         <translation>Ihr Sandboxie-Plus Unterstützerzertifikat ist abgelaufen, die aktuell von Ihnen verwendete Version bleibt jedoch aktiv; falls Sie aber zu einer neueren Version wechseln, werden exklusive Unterstützerfunktionen deaktiviert.
 

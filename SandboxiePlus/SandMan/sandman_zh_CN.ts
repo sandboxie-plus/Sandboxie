@@ -1392,7 +1392,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
-        <translation type="unfinished">您的 Sandboxie-Plus 赞助者凭据已过期。您的凭据在当前版本中将保持激活。但当您进行更新后，赞助者独占功能将被禁用。
+        <translation>您的 Sandboxie-Plus 赞助者凭据已过期。您的凭据在当前版本中将保持激活。但当您进行更新后，赞助者独占功能将被禁用。
 
 您确定要进行更新吗？</translation>
     </message>
@@ -1676,12 +1676,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="335"/>
         <source>Backup Image Header</source>
-        <translation type="unfinished"></translation>
+        <translation>备份映像头</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="336"/>
         <source>Restore Image Header</source>
-        <translation type="unfinished"></translation>
+        <translation>恢复映像头</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="340"/>
@@ -1724,27 +1724,27 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1173"/>
         <source>Image Password Changed</source>
-        <translation type="unfinished"></translation>
+        <translation>映像密码已更改</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1182"/>
         <source>Backup Image Header for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>备份 %1 的映像头</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1190"/>
         <source>Image Header Backuped</source>
-        <translation type="unfinished"></translation>
+        <translation>映像头已备份</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1197"/>
         <source>Restore Image Header for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>恢复 %1 的映像头</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1205"/>
         <source>Image Header Restored</source>
-        <translation type="unfinished"></translation>
+        <translation>映像头已恢复</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="445"/>

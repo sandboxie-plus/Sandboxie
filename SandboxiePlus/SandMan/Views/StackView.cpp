@@ -50,9 +50,20 @@ void CStackView::Invalidate()
 	}
 }
 
+
 void CStackView::SetFilter(const QRegularExpression& Exp, bool bHighLight, int Col)
 {
-	CPanelWidgetEx::ApplyFilter(m_pStackList, Exp/*, bHighLight, Col*/);
+	CPanelWidgetEx::ApplyFilter(m_pStackList, &Exp/*, bHighLight, Col*/);
+}
+
+void CStackView::SetFilter(const QString& Exp, int iOptions, int Col) // -1 = any
+{
+	QScopedPointer<QRegularExpression> pRegExp;
+	if (!Exp.isEmpty()) {
+		QString ExpStr = ((iOptions & CFinder::eRegExp) == 0) ? Exp : (".*" + QRegularExpression::escape(Exp) + ".*");
+		pRegExp.reset(new QRegularExpression(ExpStr, (iOptions & CFinder::eCaseSens) != 0 ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption));
+	}
+	CPanelWidgetEx::ApplyFilter(m_pStackList, pRegExp.data()/*, bHighLight, Col*/);
 }
 
 void CStackView::ShowStack(const QVector<quint64>& Stack, const CBoxedProcessPtr& pProcess)

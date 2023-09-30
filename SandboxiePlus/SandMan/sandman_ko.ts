@@ -1252,7 +1252,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
-        <translation type="unfinished">Sandboxie-Plus 후원자 인증서가 만료되었지만 사용 중인 현재 빌드의 경우 최신 빌드 전용 지원자 기능으로 업데이트하면 사용할 수 없게 됩니다.
+        <translation>Sandboxie-Plus 후원자 인증서가 만료되었지만 사용 중인 현재 빌드의 경우 최신 빌드 전용 지원자 기능으로 업데이트하면 사용할 수 없게 됩니다.
 
 업데이트를 계속하시겠습니까?</translation>
     </message>
@@ -1953,12 +1953,12 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="335"/>
         <source>Backup Image Header</source>
-        <translation type="unfinished"></translation>
+        <translation>이미지 헤더 백업</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="336"/>
         <source>Restore Image Header</source>
-        <translation type="unfinished"></translation>
+        <translation>이미지 헤더 복원</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="340"/>
@@ -2016,27 +2016,27 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1173"/>
         <source>Image Password Changed</source>
-        <translation type="unfinished"></translation>
+        <translation>이미지 암호 변경됨</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1182"/>
         <source>Backup Image Header for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1에 대한 이미지 헤더 백업</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1190"/>
         <source>Image Header Backuped</source>
-        <translation type="unfinished"></translation>
+        <translation>이미지 헤더 백업됨</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1197"/>
         <source>Restore Image Header for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1에 대한 이미지 헤더 복원</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1205"/>
         <source>Image Header Restored</source>
-        <translation type="unfinished"></translation>
+        <translation>이미지 헤더 복원됨</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="873"/>

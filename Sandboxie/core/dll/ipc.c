@@ -4344,19 +4344,22 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
     ULONG EndIndex = indexCounter + CountToGo;
     for (; entry && indexCounter < EndIndex; indexCounter++) {
 
-        directoryInfo->Name.Length = entry->Name.Length;
-        directoryInfo->Name.MaximumLength = entry->Name.MaximumLength;
-        directoryInfo->Name.Buffer = ptr;
-        memcpy(ptr, entry->Name.Buffer, entry->Name.MaximumLength);
-        ptr += directoryInfo->Name.MaximumLength / sizeof(WCHAR);
+        if (directoryInfo) {
 
-        directoryInfo->TypeName.Length = entry->TypeName.Length;
-        directoryInfo->TypeName.MaximumLength = entry->TypeName.MaximumLength;
-        directoryInfo->TypeName.Buffer = ptr;
-        memcpy(ptr, entry->TypeName.Buffer, entry->TypeName.MaximumLength);
-        ptr += directoryInfo->TypeName.MaximumLength / sizeof(WCHAR);
+            directoryInfo->Name.Length = entry->Name.Length;
+            directoryInfo->Name.MaximumLength = entry->Name.MaximumLength;
+            directoryInfo->Name.Buffer = ptr;
+            memcpy(ptr, entry->Name.Buffer, entry->Name.MaximumLength);
+            ptr += directoryInfo->Name.MaximumLength / sizeof(WCHAR);
 
-        directoryInfo++;
+            directoryInfo->TypeName.Length = entry->TypeName.Length;
+            directoryInfo->TypeName.MaximumLength = entry->TypeName.MaximumLength;
+            directoryInfo->TypeName.Buffer = ptr;
+            memcpy(ptr, entry->TypeName.Buffer, entry->TypeName.MaximumLength);
+            ptr += directoryInfo->TypeName.MaximumLength / sizeof(WCHAR);
+
+            directoryInfo++;
+        }
 
         entry = List_Next(entry);
     }
@@ -4365,9 +4368,12 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
     // terminate listing with an empty entry
     //
 
-    directoryInfo->Name.Length = directoryInfo->TypeName.Length = 0;
-    directoryInfo->Name.MaximumLength = directoryInfo->TypeName.MaximumLength = 0;
-    directoryInfo->Name.Buffer = directoryInfo->TypeName.Buffer = NULL;
+    if (directoryInfo) {
+
+        directoryInfo->Name.Length = directoryInfo->TypeName.Length = 0;
+        directoryInfo->Name.MaximumLength = directoryInfo->TypeName.MaximumLength = 0;
+        directoryInfo->Name.Buffer = directoryInfo->TypeName.Buffer = NULL;
+    }
 
     //
     // set return values

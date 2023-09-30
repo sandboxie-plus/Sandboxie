@@ -834,7 +834,7 @@ _FX VOID Dll_Ordinal1(INJECT_DATA * inject)
 
         int MustRestartProcess = 0;
         if (Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB) {
-            if (!SbieApi_QueryConfBool(NULL, L"NoRestartOnPAC", FALSE))
+            if (!SbieApi_QueryConfBool(NULL, L"NoRestartOnPCA", FALSE))
                 MustRestartProcess = 1;
         }
 

@@ -963,9 +963,13 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
                 &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS,
                 FILE_OPEN, FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT | FILE_OPEN_REPARSE_POINT,
                 NULL, 0);
+
+            if (!NT_SUCCESS(status))
+                UserReparse = FALSE;
         }
     }
-    else {
+    
+    if (!UserReparse) {
         
         RtlInitUnicodeString(&objname, path);
 

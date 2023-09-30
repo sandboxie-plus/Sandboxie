@@ -11,13 +11,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ### Changed
-- improved lock all boxes behavioure [#3350](https://github.com/sandboxie-plus/Sandboxie/issues/3350)
-- fixed type in option name 'NoRestartOnPAC' -> 'NoRestartOnPCA'
+- improved behaviour with Lock All Encrypted Boxes option [#3350](https://github.com/sandboxie-plus/Sandboxie/issues/3350)
+- fixed typo in option name: 'NoRestartOnPAC' becomes 'NoRestartOnPCA'
 
 ### Fixed
 - fixed issue with unmounting protected images [#3347](https://github.com/sandboxie-plus/Sandboxie/issues/3347)
-- fixed Unable to turn off highlight in Sbie Messages search results [#3338](https://github.com/sandboxie-plus/Sandboxie/issues/3338)
-- fixed cannot display programs installed in the sandbox via Run from Start Menu [#3334](https://github.com/sandboxie-plus/Sandboxie/issues/3334)
+- fixed issue with highlighting not being able to be turned off in the Sbie Messages tab [#3338](https://github.com/sandboxie-plus/Sandboxie/issues/3338)
+- fixed issue with programs installed in the sandbox not being displayed via Run from Start Menu [#3334](https://github.com/sandboxie-plus/Sandboxie/issues/3334)
 - fixed issue with NtQueryDirectoryObject [#3310](https://github.com/sandboxie-plus/Sandboxie/issues/3310)
 
 

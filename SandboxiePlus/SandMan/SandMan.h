@@ -244,8 +244,8 @@ private slots:
 
 	void				OnSandBoxAction();
 	void				OnSettingsAction();
-	void				OnEmptyAll() { TerminateAll(false); }
-	void				OnLockAll() { TerminateAll(true); }
+	void				OnEmptyAll();
+	void				OnLockAll();
 	void				OnWndFinder();
 	void				OnBoxAssistant();
 	void				OnDisableForce();
@@ -304,8 +304,6 @@ private:
 	void				CreateBoxMenu(QMenu* pMenu, int iOffset = 0, int iSysTrayFilter = 0);
 
 	void				HandleMaintenance(SB_RESULT(void*) Status);
-
-	void				TerminateAll(bool bUnmount);
 
 	void				LoadState(bool bFull = true);
 	void				StoreState();

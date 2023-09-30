@@ -2901,13 +2901,13 @@ void CSandMan::OnSandBoxAction()
 		RunSandboxed(QStringList() << "run_dialog");
 }
 
-void CSandMan::TerminateAll(bool bUnmount)
+void CSandMan::OnEmptyAll()
 {
  	if (theConf->GetInt("Options/WarnTerminateAll", -1) == -1)
 	{
 		bool State = false;
 		if(CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Do you want to terminate all processes in all sandboxes?")
-			, tr("Terminate all without asking"), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) != QDialogButtonBox::Yes)
+			, tr("Don't ask in future"), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) != QDialogButtonBox::Yes)
 			return;
 
 		if (State)
@@ -2915,12 +2915,26 @@ void CSandMan::TerminateAll(bool bUnmount)
 	}
 
 	theAPI->TerminateAll();
+}
 
-	if (bUnmount) {
-		QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
-		foreach(const CSandBoxPtr & pBox, Boxes) {
-			if (!pBox->GetMountRoot().isEmpty())
-				pBox->ImBoxUnmount();
+void CSandMan::OnLockAll()
+{
+ 	if (theConf->GetInt("Options/WarnLockAll", -1) == -1)
+	{
+		bool State = false;
+		if(CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Do you want to terminate all processes in encrypted sandboxes, and unmount them?")
+			, tr("Don't ask in future"), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) != QDialogButtonBox::Yes)
+			return;
+
+		if (State)
+			theConf->SetValue("Options/WarnLockAll", 1);
+	}
+
+	QMap<QString, CSandBoxPtr> Boxes = theAPI->GetAllBoxes();
+	foreach(const CSandBoxPtr & pBox, Boxes) {
+		if (!pBox->GetMountRoot().isEmpty()) {
+			pBox->TerminateAll();
+			pBox->ImBoxUnmount();
 		}
 	}
 }

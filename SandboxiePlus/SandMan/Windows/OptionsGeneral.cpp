@@ -112,6 +112,7 @@ void COptionsWindow::CreateGeneral()
 
 	
 	ui.btnBorderColor->setPopupMode(QToolButton::MenuButtonPopup);
+	ui.btnBorderColor->setStyle(QStyleFactory::create("Fusion"));
 	QMenu* pColorMenu = new QMenu(this);
 
 	QWidgetAction* pActionWidget = new QWidgetAction(this);

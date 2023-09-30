@@ -602,16 +602,7 @@ bool CSbieView::UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBox
 
 	m_pMenuRename->setEnabled(iSandBoxeCount == 1 && pBoxEx->GetMountRoot().isEmpty());
 
-	if (bBoxNotMounted)
-		iSandBoxeCount = 0;
-
-	m_pMenuMkLink->setEnabled(iSandBoxeCount == 1);
-	m_pMenuTools->setEnabled(iSandBoxeCount == 1);
-	m_pMenuUnmount->setVisible(pBoxEx && pBoxEx->UseImageFile() && !pBoxEx->GetMountRoot().isEmpty());
-	m_pMenuRecover->setEnabled(iSandBoxeCount == 1);
-	m_pMenuCleanUp->setEnabled(iSandBoxeCount > 0);
-	if (m_pMenuContent) m_pMenuContent->setEnabled(iSandBoxeCount > 0);
-	m_pMenuEmptyBox->setEnabled(iSandBoxeCount > 0);
+	m_pMenuOptions->setEnabled(iSandBoxeCount == 1);
 
 	if (m_pMenuPresets) {
 		m_pMenuPresets->setEnabled(iSandBoxeCount == 1);
@@ -626,10 +617,20 @@ bool CSbieView::UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBox
 		}
 	}
 
+	if (bBoxNotMounted)
+		iSandBoxeCount = 0;
+
+	m_pMenuMkLink->setEnabled(iSandBoxeCount == 1);
+	m_pMenuTools->setEnabled(iSandBoxeCount == 1);
+	m_pMenuUnmount->setVisible(pBoxEx && pBoxEx->UseImageFile() && !pBoxEx->GetMountRoot().isEmpty());
+	m_pMenuRecover->setEnabled(iSandBoxeCount == 1);
+	m_pMenuCleanUp->setEnabled(iSandBoxeCount > 0);
+	if (m_pMenuContent) m_pMenuContent->setEnabled(iSandBoxeCount > 0);
+	m_pMenuEmptyBox->setEnabled(iSandBoxeCount > 0);
+
 	m_pMenuBrowse->setEnabled(iSandBoxeCount == 1);
 	m_pMenuExplore->setEnabled(iSandBoxeCount == 1);
 	if(m_pMenuRegEdit)m_pMenuRegEdit->setEnabled(iSandBoxeCount == 1);
-	m_pMenuOptions->setEnabled(iSandBoxeCount == 1);
 	m_pMenuSnapshots->setEnabled(iSandBoxeCount == 1);
 
 	m_pCopyCell->setVisible(bAdvanced);

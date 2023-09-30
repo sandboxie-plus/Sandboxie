@@ -1034,7 +1034,7 @@ _FX NTSTATUS File_Api_UnprotectRoot(PROCESS* proc, ULONG64* parms)
 
         PROTECTED_ROOT *next_root = List_Next(root);
 
-        if (root->reg_root_len = reg_root_len && _wcsicmp(root->reg_root, reg_root) == 0) {
+        if (root->reg_root_len == reg_root_len && _wcsicmp(root->reg_root, reg_root) == 0) {
 
             List_Remove(&File_ProtectedRoots, root);
 

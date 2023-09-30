@@ -5,6 +5,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+
+## [1.11.4 / 5.66.4] - 2023-10-
+
+ ### Fixed
+- fixed issue with unmounting protected images [#3347](https://github.com/sandboxie-plus/Sandboxie/issues/3347)
+
+
+
 ## [1.11.3 / 5.66.3] - 2023-09-27
 
 ### Added

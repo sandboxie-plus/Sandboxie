@@ -12,7 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - improved behaviour with Lock All Encrypted Boxes option [#3350](https://github.com/sandboxie-plus/Sandboxie/issues/3350)
-- fixed typo in option name: 'NoRestartOnPAC' becomes 'NoRestartOnPCA'
+- fixed typo in option name: 'NoRestartOnPAC' becomes 'NoRestartOnPCA' [0e175ee](https://github.com/sandboxie-plus/Sandboxie/commit/0e175eedfde50198a3fa7bdef3a91fdbad5f5226)
 
 ### Fixed
 - fixed issue with unmounting protected images [#3347](https://github.com/sandboxie-plus/Sandboxie/issues/3347)
@@ -25,7 +25,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.11.3 / 5.66.3] - 2023-09-27
 
 ### Added
-- added container header backup/restore option to the option windows
+- added container header backup/restore options to the Sandbox Options window [#post-3165085](https://www.wilderssecurity.com/threads/sandboxie-plus-v1-11-3.452487/#post-3165085)
 
 ### Changed
 - updated 7-Zip library to version 23.01 [4ee1464](https://github.com/sandboxie-plus/Sandboxie/commit/4ee146430f70c91917fbcbfb77909b5b0b84a78c)
@@ -1800,7 +1800,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - network traffic trace is now properly logged to the driver log instead of to the kernel debug log
-- Plus installer will autostart SandMan.exe after install to fix a taskbar icon issue [#3040211](https://www.wilderssecurity.com/threads/sandboxie-plus-0-9-7-test-build.440906/page-4#post-3040211)
+- Plus installer will autostart SandMan.exe after install to fix a taskbar icon issue [#post-3040211](https://www.wilderssecurity.com/threads/sandboxie-plus-0-9-7-test-build.440906/page-4#post-3040211)
 - Classic installer will show the license agreement when updating [#1187](https://github.com/sandboxie-plus/Sandboxie/issues/1187)
 
 ### Fixed

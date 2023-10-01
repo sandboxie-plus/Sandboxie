@@ -939,10 +939,17 @@ void CSbieAPI::UpdateDriveLetters()
 
 QString CSbieAPI::Nt2DosPath(QString NtPath, bool* pOk) const
 {
-	QReadLocker Lock(&m_DriveLettersMutex);
+	if (NtPath.left(11) == "\\??\\Volume{") {
+		wchar_t DeviceName [MAX_PATH];
+		std::wstring VolumeName = NtPath.mid(4, 44).toStdWString();
+		if (QueryDosDeviceW(VolumeName.c_str(), DeviceName, ARRAYSIZE(DeviceName)))
+			NtPath.replace(0, 48, QString::fromWCharArray(DeviceName));
+	}
 
 	if (NtPath.indexOf("\\device\\mup", 0, Qt::CaseInsensitive) == 0)
 		NtPath = "\\Device\\LanmanRedirector" + NtPath.mid(11);
+
+	QReadLocker Lock(&m_DriveLettersMutex);
 
 	for (QMap<QString, SDrive>::const_iterator I = m_DriveLetters.begin(); I != m_DriveLetters.end(); ++I)
 	{

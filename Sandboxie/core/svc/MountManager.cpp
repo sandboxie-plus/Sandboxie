@@ -506,7 +506,7 @@ HANDLE MountManager::OpenOrCreateNtFolder(const WCHAR* NtPath)
         if (__sys_SHCreateDirectoryExW(NULL, dosPath, NULL) != ERROR_SUCCESS)
             return NULL;
 
-        status = NtCreateFile(&handle, GENERIC_READ | GENERIC_WRITE, &objattrs, &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS, FILE_OPEN_IF, FILE_OPEN_REPARSE_POINT, NULL, 0);
+        status = NtCreateFile(&handle, GENERIC_READ | GENERIC_WRITE, &objattrs, &IoStatusBlock, NULL, 0, FILE_SHARE_VALID_FLAGS, FILE_OPEN_IF, FILE_DIRECTORY_FILE | FILE_OPEN_REPARSE_POINT, NULL, 0);
     }
     if (!NT_SUCCESS(status))
         return NULL;

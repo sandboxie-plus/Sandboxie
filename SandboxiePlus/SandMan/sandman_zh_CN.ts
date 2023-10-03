@@ -4050,12 +4050,12 @@ Error: %1</source>
         <location filename="SandMan.cpp" line="2910"/>
         <location filename="SandMan.cpp" line="2926"/>
         <source>Don&apos;t ask in future</source>
-        <translation type="unfinished">此后不再询问</translation>
+        <translation>此后不再询问</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2925"/>
         <source>Do you want to terminate all processes in encrypted sandboxes, and unmount them?</source>
-        <translation type="unfinished"></translation>
+        <translation>确定要终止加密沙盒中的所有进程并卸载加密沙盒吗？</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2951"/>

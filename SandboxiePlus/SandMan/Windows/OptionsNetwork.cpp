@@ -141,8 +141,8 @@ void COptionsWindow::LoadBlockINet()
 	for (int i = 0; i < ui.treeGroups->topLevelItemCount(); i++) 
 	{
 		QTreeWidgetItem* pGroupItem = ui.treeGroups->topLevelItem(i);
-		int Mode = GroupToINetMode(pGroupItem->data(0, Qt::UserRole).toString());
-		if (Mode == -1)
+		int GroupMode = GroupToINetMode(pGroupItem->data(0, Qt::UserRole).toString());
+		if (GroupMode == -1)
 			continue;
 		
 		for (int j = 0; j < pGroupItem->childCount(); j++)
@@ -150,8 +150,8 @@ void COptionsWindow::LoadBlockINet()
 			QString Value = pGroupItem->child(j)->data(0, Qt::UserRole).toString();
 
 			QTreeWidgetItem* pItem = new QTreeWidgetItem();
-			pItem->setCheckState(0, (Mode & 0x10) != 0 ? Qt::Unchecked : Qt::Checked);
-			Mode &= ~0x10;
+			pItem->setCheckState(0, (GroupMode & 0x10) != 0 ? Qt::Unchecked : Qt::Checked);
+			int Mode = GroupMode & ~0x10;
 			
 			SetProgramItem(Value, pItem, 0);
 	

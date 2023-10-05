@@ -727,8 +727,8 @@ _FX NTSTATUS KphValidateCertificate()
             Verify_CertInfo.type = eCertBusiness;
         else if (_wcsicmp(type, L"EVALUATION") == 0 || _wcsicmp(type, L"TEST") == 0)
             Verify_CertInfo.type = eCertEvaluation;
-        else if (_wcsicmp(type, L"SUBSCRIPTION") == 0)
-            Verify_CertInfo.type = eCertSubscription;
+        else if (_wcsicmp(type, L"HOME") == 0 || _wcsicmp(type, L"SUBSCRIPTION") == 0)
+            Verify_CertInfo.type = eCertHome;
         else if (_wcsicmp(type, L"FAMILYPACK") == 0)
             Verify_CertInfo.type = eCertFamily;
         // patreon >>>
@@ -787,7 +787,7 @@ _FX NTSTATUS KphValidateCertificate()
             }
             else if (_wcsicmp(level, L"SMALL") == 0) { // 1 year - subscription
                 Verify_CertInfo.level = eCertStandard2;
-                Verify_CertInfo.type = eCertSubscription;
+                Verify_CertInfo.type = eCertHome;
             }
             else
                 Verify_CertInfo.level = eCertStandard;

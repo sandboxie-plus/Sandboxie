@@ -1223,8 +1223,8 @@ QString CSettingsWindow::GetCertType()
 		CertType = tr("Patreon");
 	else if (g_CertInfo.type == eCertFamily)
 		CertType = tr("Family");
-	else if (CERT_IS_TYPE(g_CertInfo, eCertSubscription))
-		CertType = tr("Subscription");
+	else if (CERT_IS_TYPE(g_CertInfo, eCertHome))
+		CertType = tr("Home");
 	else if (CERT_IS_TYPE(g_CertInfo, eCertEvaluation))
 		CertType = tr("Evaluation");
 	else
@@ -1244,7 +1244,7 @@ QColor CSettingsWindow::GetCertColor()
 		return QColor(38, 127, 0, 255);
 	else if (g_CertInfo.type == eCertFamily)
 		return QColor(0, 38, 255, 255);
-	else if (CERT_IS_TYPE(g_CertInfo, eCertSubscription))
+	else if (CERT_IS_TYPE(g_CertInfo, eCertHome))
 		return QColor(255, 106, 0, 255);
 	else if (CERT_IS_TYPE(g_CertInfo, eCertEvaluation))
 		return Qt::gray;

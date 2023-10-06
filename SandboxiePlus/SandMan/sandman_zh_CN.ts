@@ -5258,6 +5258,11 @@ Error: %1</source>
         <translation>此赞助者凭据已过期，请&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;更新凭据&lt;/a&gt;。</translation>
     </message>
     <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1227"/>
+        <source>Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
         <location filename="Windows/SettingsWindow.cpp" line="841"/>
         <source>Sandboxed Web Browser</source>
@@ -5417,9 +5422,8 @@ Error: %1</source>
         <translation>家庭</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1227"/>
         <source>Subscription</source>
-        <translation>订阅</translation>
+        <translation type="vanished">订阅</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1229"/>

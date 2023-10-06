@@ -5270,6 +5270,11 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>Запустити в пісочниці (&amp;S)</translation>
     </message>
     <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1227"/>
+        <source>Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
         <location filename="Windows/SettingsWindow.cpp" line="841"/>
         <source>Sandboxed Web Browser</source>
@@ -5436,11 +5441,6 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1225"/>
         <source>Family</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1227"/>
-        <source>Subscription</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -5042,10 +5042,9 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Family</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1227"/>
         <source>Subscription</source>
         <translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
-        <translation>Subscription</translation>
+        <translation type="vanished">Subscription</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1229"/>
@@ -5222,6 +5221,11 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Windows/SettingsWindow.cpp" line="1119"/>
         <source>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;For the current build Plus features remain enabled&lt;/font&gt;, but you no longer have access to Sandboxie-Live services, including compatibility updates and the troubleshooting database.</source>
         <translation>&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;In der aktuellen Version bleiben die Plus-Funktionen aktiviert&lt;/font&gt;, aber Sie haben keinen Zugang mehr zu den Sandboxie-Live-Diensten, einschließlich Kompatibilitäts-Updates und der Onlineproblemlösungsdatenbank.</translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1227"/>
+        <source>Home</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1281"/>

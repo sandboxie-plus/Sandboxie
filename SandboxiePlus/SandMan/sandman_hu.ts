@@ -5221,7 +5221,7 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1227"/>
-        <source>Subscription</source>
+        <source>Home</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

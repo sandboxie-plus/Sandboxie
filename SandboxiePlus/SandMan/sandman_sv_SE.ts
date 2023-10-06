@@ -5718,9 +5718,8 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
         <translation>Familj</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1227"/>
         <source>Subscription</source>
-        <translation>Abonnemang</translation>
+        <translation type="vanished">Abonnemang</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1229"/>
@@ -5735,6 +5734,11 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
     <message>
         <source>Standard</source>
         <translation type="vanished">Standard</translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1227"/>
+        <source>Home</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1259"/>

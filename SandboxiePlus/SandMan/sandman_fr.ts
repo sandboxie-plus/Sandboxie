@@ -5745,11 +5745,6 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="1227"/>
-        <source>Subscription</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="1229"/>
         <source>Evaluation</source>
         <translation type="unfinished"></translation>
@@ -5797,6 +5792,11 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/SettingsWindow.cpp" line="1121"/>
         <source>&lt;br /&gt;Plus features are no longer enabled.</source>
         <translation>&lt;br /&gt;Les fonctions « Plus » ne sont plus activées.</translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="1227"/>
+        <source>Home</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1281"/>

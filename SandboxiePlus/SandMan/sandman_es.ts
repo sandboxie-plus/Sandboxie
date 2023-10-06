@@ -5618,7 +5618,7 @@ NO seleccionará: %2</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1227"/>
-        <source>Subscription</source>
+        <source>Home</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

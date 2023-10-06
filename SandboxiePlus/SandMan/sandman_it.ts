@@ -5275,9 +5275,13 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1227"/>
+        <source>Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Subscription</source>
         <translatorcomment>La traduzione dei tipi di certificati può generare confusione.</translatorcomment>
-        <translation>Subscription</translation>
+        <translation type="vanished">Subscription</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1229"/>

@@ -5268,7 +5268,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1227"/>
-        <source>Subscription</source>
+        <source>Home</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

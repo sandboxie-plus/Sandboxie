@@ -3158,10 +3158,6 @@ No will choose: %2</source>
         <translation>Вы хотите завершить все процессы во всех песочницах?</translation>
     </message>
     <message>
-        <source>Terminate all without asking</source>
-        <translation type="vanished">Завершить все, не спрашивая</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="2990"/>
         <source>Sandboxie-Plus was started in portable mode and it needs to create necessary services. This will prompt for administrative privileges.</source>
         <translation>Sandboxie-Plus запущен в портативном режиме, и ему нужно создать необходимые службы. Это потребует административных привилегий.</translation>
@@ -3668,12 +3664,12 @@ Error: %1</source>
         <location filename="SandMan.cpp" line="2910"/>
         <location filename="SandMan.cpp" line="2926"/>
         <source>Don&apos;t ask in future</source>
-        <translation type="unfinished">Не спрашивать в будущем</translation>
+        <translation>Не спрашивать в будущем</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2925"/>
         <source>Do you want to terminate all processes in encrypted sandboxes, and unmount them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите завершить все процессы в зашифрованных песочницах и размонтировать их?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2966"/>
@@ -5072,10 +5068,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Семья</translation>
     </message>
     <message>
-        <source>Subscription</source>
-        <translation type="vanished">Подписка</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="1229"/>
         <source>Evaluation</source>
         <translation>Оценка</translation>
@@ -5203,7 +5195,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1227"/>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Домашняя</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1281"/>

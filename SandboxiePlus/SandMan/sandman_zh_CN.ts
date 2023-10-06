@@ -5260,7 +5260,7 @@ Error: %1</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1227"/>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>主页</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>

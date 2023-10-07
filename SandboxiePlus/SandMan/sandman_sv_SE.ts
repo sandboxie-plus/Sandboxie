@@ -1283,7 +1283,9 @@ Korruption kan uppstå som ett resultat av en BSOD, lagringshårdvarufel, eller 
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ditt Sandboxie-Plus supportercertifikat är utgånget, hursom så är det fortfarande giltigt för nuvarande bygge som du använder, när du uppdaterar till ett nyare bygge kommer exklusiva supporteregenskaper att inaktiveras.
+
+Vill du fortfarande uppdatera?</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="343"/>
@@ -2049,12 +2051,12 @@ Notera: Uppdateringskontrollen är ofta bakom senaste GitHub-utgivningen för at
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="336"/>
         <source>Backup Image Header</source>
-        <translation type="unfinished"></translation>
+        <translation>Backa upp avbildsrubrik</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="337"/>
         <source>Restore Image Header</source>
-        <translation type="unfinished"></translation>
+        <translation>Återställ avbildsrubrik</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="341"/>
@@ -2128,27 +2130,27 @@ Notera: Uppdateringskontrollen är ofta bakom senaste GitHub-utgivningen för at
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1174"/>
         <source>Image Password Changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Avbildslösenord ändrades</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1183"/>
         <source>Backup Image Header for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Backa upp avbildsrubrik för %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1191"/>
         <source>Image Header Backuped</source>
-        <translation type="unfinished"></translation>
+        <translation>Avbildsrubrik uppbackad</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1198"/>
         <source>Restore Image Header for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Återställ avbildsrubrik för %1</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="1206"/>
         <source>Image Header Restored</source>
-        <translation type="unfinished"></translation>
+        <translation>Avbildsrubrik återställd</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGrouping.cpp" line="141"/>
@@ -2850,7 +2852,7 @@ Till skillnad från preview-kanalen, inkluderar den inte otestade eller experime
     <message>
         <location filename="SbiePlusAPI.cpp" line="758"/>
         <source>OPEN Root Access</source>
-        <translation type="unfinished">Öppna root-tillgång</translation>
+        <translation>Öppna root-tillgång</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="760"/>
@@ -3978,12 +3980,12 @@ Fel: %1</translation>
         <location filename="SandMan.cpp" line="2910"/>
         <location filename="SandMan.cpp" line="2926"/>
         <source>Don&apos;t ask in future</source>
-        <translation type="unfinished">Fråga inte i framtiden</translation>
+        <translation>Fråga inte i framtiden</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2925"/>
         <source>Do you want to terminate all processes in encrypted sandboxes, and unmount them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vill du avsluta alla processer i krypterade sandlådor, och avmontera dem?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3028"/>
@@ -5738,7 +5740,7 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1227"/>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Hem</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1259"/>
@@ -8937,22 +8939,22 @@ istället för &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="577"/>
         <source>Integrate with Host Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Integrera med Värdens skrivbord</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="593"/>
         <source>System Tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivitetsfältet</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="699"/>
         <source>Open/Close from/to tray with a single click</source>
-        <translation type="unfinished"></translation>
+        <translation>Öppna/Stäng från/till fältet med 1 klick</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="706"/>
         <source>Minimize to tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimera till fältet</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1052"/>

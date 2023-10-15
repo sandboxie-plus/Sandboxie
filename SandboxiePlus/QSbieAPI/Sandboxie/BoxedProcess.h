@@ -48,7 +48,8 @@ public:
 	virtual void			SetTerminated();
 
 	virtual SB_STATUS		SetSuspend(bool bSet);
-	virtual bool			IsSuspended() const;
+	//virtual bool			IsSuspended() const;
+	virtual bool			TestSuspended() const;
 
 	virtual bool			IsWoW64() const { return m_bIsWoW64; }
 

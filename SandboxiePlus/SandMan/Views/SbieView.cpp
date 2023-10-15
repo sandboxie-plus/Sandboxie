@@ -700,7 +700,7 @@ bool CSbieView::UpdateMenu()
 		{
 			m_CurProcesses.append(pProcess);
 			iProcessCount++;
-			if (pProcess->IsSuspended())
+			if (pProcess->TestSuspended())
 				iSuspendedCount++;
 		}
 		else

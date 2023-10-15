@@ -281,7 +281,7 @@ void CBoxedProcess::InitProcessInfoImpl(void* ProcessHandle)
 		m_WorkingDir = CBoxedProcess__GetPebString(ProcessHandle, PhpoCurrentDirectory);
 	}
 
-	m_bSuspended = IsSuspended();
+	TestSuspended();
 }
 
 bool CBoxedProcess::InitProcessInfoEx()
@@ -349,13 +349,13 @@ SB_STATUS CBoxedProcess::SetSuspend(bool bSet)
 
 		if (!NT_SUCCESS(status))
 			return SB_ERR(status);
-		m_bSuspended = IsSuspended();
+		TestSuspended();
 		return SB_OK;
 	}
 	return SB_ERR();
 }
 
-bool CBoxedProcess::IsSuspended() const
+bool CBoxedProcess::TestSuspended() const
 {
 	bool isSuspended = true;
 
@@ -381,6 +381,7 @@ bool CBoxedProcess::IsSuspended() const
 		}
     }
 
+	m_bSuspended = isSuspended;
 	return isSuspended;
 }
 

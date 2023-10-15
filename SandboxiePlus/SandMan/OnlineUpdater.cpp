@@ -289,7 +289,7 @@ void COnlineUpdater::LoadState()
 
 QString COnlineUpdater::GetOnNewUpdateOption() const
 {
-	if (!g_CertInfo.active || g_CertInfo.expired);
+	if (!g_CertInfo.active || g_CertInfo.expired)
 		return "ignore"; // this service requries a valid vcertificate
 	return theConf->GetString("Options/OnNewUpdate", "ignore");
 }

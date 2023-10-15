@@ -7,6 +7,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.11.5 / 5.66.5] - 2023-10-
+
+### Fixed
+- fixed issue with auto updater not offering version updates
+
+
 ## [1.11.4 / 5.66.4] - 2023-10-06
 
 

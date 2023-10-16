@@ -49,7 +49,7 @@ public:
 
 	virtual SB_STATUS		SetSuspend(bool bSet);
 	//virtual bool			IsSuspended() const;
-	virtual bool			TestSuspended() const;
+	virtual bool			TestSuspended();
 
 	virtual bool			IsWoW64() const { return m_bIsWoW64; }
 

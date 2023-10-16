@@ -3179,11 +3179,11 @@ Korumalı alanın dışına kaydet: Hotmail ve Messenger hesap bilgisi
 .
 
 4338;txt;02
-%2 tercih klasörüne doğrudan erişime izin ver
+%2 profil klasörüne doğrudan erişime izin ver
 .
 
 4339;txt;02
-%2 özelliğine doğrudan erişime izin ver
+%2 tercihlerine doğrudan erişime izin ver
 .
 
 4340;txt;01
@@ -3199,7 +3199,7 @@ Windows için %2 düzeltmesini etkinleştir
 .
 
 4356;txt;02
-%2 Yer İmlerine doğrudan erişime izin ver
+%2 yer imlerine doğrudan erişime izin ver
 .
 
 4357;txt;02

@@ -26,6 +26,7 @@
 #include "../Common/json/JSON.h"
 #include "UpdUtil.h"
 
+bool GetDriverInfo(DWORD InfoClass, void* pBuffer, size_t Size);
 
 extern "C" {
 	NTSTATUS CreateKeyPair(_In_ PCWSTR PrivFile, _In_ PCWSTR PubFile);

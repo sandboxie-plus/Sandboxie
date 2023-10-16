@@ -355,7 +355,7 @@ SB_STATUS CBoxedProcess::SetSuspend(bool bSet)
 	return SB_ERR();
 }
 
-bool CBoxedProcess::TestSuspended() const
+bool CBoxedProcess::TestSuspended()
 {
 	bool isSuspended = true;
 

@@ -159,3 +159,5 @@ const T* wildstrcmp(const T* Wild, const T* Str)
 bool FileExists(const wchar_t* path);
 
 void DbgPrint(const wchar_t* format, ...);
+
+std::multimap<std::wstring, std::wstring> GetArguments(const std::wstring& Arguments, wchar_t Separator = L';', wchar_t Assigner = L'=', std::wstring* First = NULL, bool bLowerKeys = false, bool bReadEsc = false);

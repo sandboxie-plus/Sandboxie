@@ -40,5 +40,6 @@
 #define ERROR_BAD_ADDON		(-13)
 #define ERROR_BAD_ADDON2	(-14)
 #define ERROR_DELETE		(-15)
+#define ERROR_GET_CERT		(-16)
 
 

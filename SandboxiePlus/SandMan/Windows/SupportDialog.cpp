@@ -64,6 +64,20 @@ bool CSupportDialog::CheckSupport(bool bOnRun)
 
 	QDateTime CurretnDate = QDateTime::currentDateTimeUtc();
 	int Days = InstallDate.daysTo(CurretnDate);
+
+	BYTE CertBlocked = 0;
+	theAPI->GetSecureParam("CertBlocked", &CertBlocked, sizeof(CertBlocked));
+	if (CertBlocked)
+	{
+		QString Message = tr("An attempt was made to use a blocked certificate on this system. This action violates the terms of use for the support certificate. "
+			"You must now purchase a valid certificate, as the usage of the free version has been restricted.");
+
+		CSupportDialog dialog(Message, NoGo, Days);
+		if(dialog.exec() == QDialog::Rejected)
+			PostQuitMessage(0);
+		return true;
+	}
+
 	if (Days < 40)
 		return false;
 

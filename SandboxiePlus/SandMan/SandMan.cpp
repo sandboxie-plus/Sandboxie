@@ -2721,7 +2721,24 @@ SB_STATUS CSandMan::ReloadCert(QWidget* pWidget)
 {
 	SB_STATUS Status = theAPI->ReloadCert();
 
-	if (Status.IsError() && Status.GetStatus() != 0xC0000225 /*STATUS_NOT_FOUND*/) 
+	if (!Status.IsError())
+	{
+		BYTE CertBlocked = 0;
+		theAPI->GetSecureParam("CertBlocked", &CertBlocked, sizeof(CertBlocked));
+		if (CertBlocked) {
+			CertBlocked = 0;
+			theAPI->SetSecureParam("CertBlocked", &CertBlocked, sizeof(CertBlocked));
+		}
+	}
+	else if (Status.GetStatus() == 0xC0000804L /*STATUS_CONTENT_BLOCKED*/)
+	{
+		QMessageBox::critical(pWidget ? pWidget : this, "Sandboxie-Plus", 
+			tr("The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!"));
+
+		BYTE CertBlocked = 1;
+		theAPI->SetSecureParam("CertBlocked", &CertBlocked, sizeof(CertBlocked));
+	}
+	else if (Status.GetStatus() != 0xC0000225L /*STATUS_NOT_FOUND*/) 
 	{
 		QString Info;
 		switch (Status.GetStatus())

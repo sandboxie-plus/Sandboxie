@@ -19,6 +19,9 @@
 #include "driver.h"
 #include "util.h"
 
+#include "api_defs.h"
+NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms);
+
 #include <bcrypt.h>
 
 #ifdef __BCRYPT_H__
@@ -281,6 +284,42 @@ CleanupExit:
     return status;
 }
 
+NTSTATUS KphVerifyBuffer(
+    _In_ PUCHAR Buffer,
+    _In_ ULONG BufferSize,
+    _In_ PUCHAR Signature,
+    _In_ ULONG SignatureSize
+    )
+{
+    NTSTATUS status;
+    MY_HASH_OBJ hashObj;
+    PVOID hash = NULL;
+    ULONG hashSize;
+
+    // Hash the Buffer.
+
+    if(!NT_SUCCESS(status = MyInitHash(&hashObj)))
+        goto CleanupExit;
+
+    MyHashData(&hashObj, Buffer, BufferSize);
+
+	if(!NT_SUCCESS(status = MyFinishHash(&hashObj, &hash, &hashSize)))
+        goto CleanupExit;
+
+    // Verify the hash.
+
+    if (!NT_SUCCESS(status = KphVerifySignature(hash, hashSize, Signature, SignatureSize)))
+    {
+        goto CleanupExit;
+    }
+
+CleanupExit:
+    if (hash)
+        ExFreePoolWithTag(hash, 'vhpK');
+ 
+    return status;
+}
+
 NTSTATUS KphReadSignature(    
     _In_ PUNICODE_STRING FileName,
     _Out_ PUCHAR *Signature,
@@ -509,7 +548,7 @@ _FX NTSTATUS KphValidateCertificate()
     WCHAR* type = NULL;
     WCHAR* level = NULL;
     LONG amount = 1;
-    //WCHAR* key = NULL;
+    WCHAR* key = NULL;
     LARGE_INTEGER cert_date = { 0 };
 
     Verify_CertInfo.State = 0; // clear
@@ -645,9 +684,9 @@ _FX NTSTATUS KphValidateCertificate()
         else if (_wcsicmp(L"LEVEL", name) == 0 && level == NULL) {
             level = Mem_AllocString(Driver_Pool, value);
         }
-        //else if (_wcsicmp(L"UPDATEKEY", name) == 0 && key == NULL) {
-        //    key = Mem_AllocString(Driver_Pool, value);
-        //}
+        else if (_wcsicmp(L"UPDATEKEY", name) == 0 && key == NULL) {
+            key = Mem_AllocString(Driver_Pool, value);
+        }
         else if (_wcsicmp(L"AMOUNT", name) == 0) {
             amount = _wtol(value);
         }
@@ -679,6 +718,49 @@ _FX NTSTATUS KphValidateCertificate()
     }
 
     status = KphVerifySignature(hash, hashSize, signature, signatureSize);
+
+    if (NT_SUCCESS(status) && key) {
+
+        ULONG key_len = wcslen(key);
+
+        ULONG blocklist_len = 0x4000;
+        CHAR* blocklist = Mem_Alloc(Driver_Pool, blocklist_len);
+        ULONG blocklist_size = 0;
+
+        API_SECURE_PARAM_ARGS args;
+        args.param_name.val = L"CertBlockList";
+        args.param_data.val = blocklist;
+        args.param_size.val = blocklist_len - 1;
+        args.param_size_out.val = &blocklist_size;
+        args.param_verify.val = TRUE;
+
+        if (NT_SUCCESS(Api_GetSecureParam(NULL, (ULONG64*)&args)) && blocklist_size > 0)
+        {
+            blocklist[blocklist_size] = 0;
+            CHAR *blocklist_end = blocklist + strlen(blocklist);
+            for (CHAR *end, *start = blocklist; start < blocklist_end; start = end + 1)
+            {
+                end = strchr(start, '\n');
+                if (!end) end = blocklist_end;
+
+                SIZE_T len = end - start;
+                if (len > 1 && start[len - 1] == '\r') len--;
+                
+                if (len > 0) {
+                    ULONG i = 0;
+                    for (; i < key_len && i < len && start[i] == key[i]; i++); // cmp CHAR vs. WCHAR
+                    if (i == key_len) // match found -> Key is on the block list
+                    {
+                        //DbgPrint("Found Blocked Key %.*s\n", start, len);
+                        status = STATUS_CONTENT_BLOCKED;
+                        break;
+                    }
+                }
+            }
+        }
+
+        Mem_Free(blocklist, blocklist_len);
+    }
 
     if (NT_SUCCESS(status)) {
 
@@ -841,7 +923,7 @@ CleanupExit:
 
     if (type)       Mem_FreeString(type);
     if (level)      Mem_FreeString(level);
-    //if (key)        Mem_FreeString(key);
+    if (key)        Mem_FreeString(key);
 
                     MyFreeHash(&hashObj);
     if(hash)        ExFreePoolWithTag(hash, 'vhpK');

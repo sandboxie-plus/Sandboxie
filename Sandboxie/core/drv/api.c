@@ -78,9 +78,9 @@ static NTSTATUS Api_ProcessExemptionControl(PROCESS *proc, ULONG64 *parms);
 
 static NTSTATUS Api_QueryDriverInfo(PROCESS *proc, ULONG64 *parms);
 
-static NTSTATUS Api_SetSecureParam(PROCESS *proc, ULONG64 *parms);
+       NTSTATUS Api_SetSecureParam(PROCESS *proc, ULONG64 *parms);
 
-static NTSTATUS Api_GetSecureParam(PROCESS *proc, ULONG64 *parms);
+       NTSTATUS Api_GetSecureParam(PROCESS *proc, ULONG64 *parms);
 
 
 //---------------------------------------------------------------------------
@@ -1447,6 +1447,7 @@ finish:
 // Api_GetSecureParam
 //---------------------------------------------------------------------------
 
+NTSTATUS KphVerifyBuffer(PUCHAR Buffer, ULONG BufferSize, PUCHAR Signature, ULONG SignatureSize);
 
 _FX NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms)
 {
@@ -1468,9 +1469,9 @@ _FX NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms)
         UNICODE_STRING KeyPath;
         RtlInitUnicodeString(&KeyPath, Api_ParamPath);
 
-        name_len = (wcslen(args->param_name.val) + 1) * sizeof(WCHAR);
+        name_len = (wcslen(args->param_name.val) + 3 + 1) * sizeof(WCHAR);
         name = Mem_Alloc(Driver_Pool, name_len);
-        memcpy(name, args->param_name.val, name_len);
+        wcscpy(name, args->param_name.val);
         UNICODE_STRING ValueName;
         RtlInitUnicodeString(&ValueName, name);
 
@@ -1484,11 +1485,34 @@ _FX NTSTATUS Api_GetSecureParam(PROCESS* proc, ULONG64* parms)
 
             ULONG length;
         	status = ZwQueryValueKey(handle, &ValueName, KeyValuePartialInformation, data, data_len, &length);
+
+            if (NT_SUCCESS(status) && args->param_verify.val)
+            {
+                wcscat(name, L"Sig");
+                RtlInitUnicodeString(&ValueName, name);
+
+                UCHAR data_sig[128];
+                ULONG length_sig;
+                status = ZwQueryValueKey(handle, &ValueName, KeyValuePartialInformation, data_sig, sizeof(data_sig), &length_sig);
+
+                if (NT_SUCCESS(status)) 
+                {
+                    PKEY_VALUE_PARTIAL_INFORMATION info = (PKEY_VALUE_PARTIAL_INFORMATION)data;
+                    PKEY_VALUE_PARTIAL_INFORMATION info_sig = (PKEY_VALUE_PARTIAL_INFORMATION)data_sig;
+                    status = KphVerifyBuffer(info->Data, info->DataLength, info_sig->Data, info_sig->DataLength);
+                }
+            }
+
 	        if (NT_SUCCESS(status))
 	        {
 		        PKEY_VALUE_PARTIAL_INFORMATION info = (PKEY_VALUE_PARTIAL_INFORMATION)data;
                 if (info->DataLength <= args->param_size.val)
+                {
                     memcpy(args->param_data.val, info->Data, info->DataLength);
+
+                    if (args->param_size_out.val)
+                        *args->param_size_out.val = info->DataLength;
+                }
                 else
                     status = STATUS_BUFFER_TOO_SMALL;
 	        }

@@ -1,8 +1,8 @@
 #pragma once
 
 #define VERSION_MJR		1
-#define VERSION_MIN 	11
-#define VERSION_REV 	4
+#define VERSION_MIN 	12
+#define VERSION_REV 	0
 #define VERSION_UPD 	0
 
 #ifndef STR

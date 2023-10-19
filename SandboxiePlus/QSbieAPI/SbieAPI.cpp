@@ -811,7 +811,7 @@ extern "C" {
 	NTSTATUS NTAPI RtlSetThreadErrorMode(IN ULONG NewMode, OUT PULONG OldMode);
 }
 
-ULONG CSbieAPI__GetVolumeSN(wchar_t* path)
+quint32 CSbieAPI::GetVolumeSN(const wchar_t* path, std::wstring* pLabel)
 {
     ULONG sn = 0;
     HANDLE handle;
@@ -849,8 +849,10 @@ ULONG CSbieAPI__GetVolumeSN(wchar_t* path)
             FILE_FS_VOLUME_INFORMATION volumeInfo;
             BYTE volumeInfoBuff[64];
         } u;
-        if (NT_SUCCESS(NtQueryVolumeInformationFile(handle, &iosb, &u.volumeInfo, sizeof(u), FileFsVolumeInformation)))
-            sn = u.volumeInfo.VolumeSerialNumber;
+		if (NT_SUCCESS(NtQueryVolumeInformationFile(handle, &iosb, &u.volumeInfo, sizeof(u), FileFsVolumeInformation))) {
+			sn = u.volumeInfo.VolumeSerialNumber;
+			if (pLabel) *pLabel = std::wstring(u.volumeInfo.VolumeLabel, u.volumeInfo.VolumeLabelLength/sizeof(wchar_t));
+		}
 
         NtClose(handle);
     }
@@ -925,7 +927,7 @@ void CSbieAPI::UpdateDriveLetters()
 			}
 			else {
 				Drive.Type = SDrive::EVolume;
-				if (ULONG sn = CSbieAPI__GetVolumeSN(lpTargetPath))
+				if (quint32 sn = GetVolumeSN(lpTargetPath))
 					Drive.Aux = QString("%1-%2").arg((ushort)HIWORD(sn), 4, 16, QChar('0')).arg((ushort)LOWORD(sn), 4, 16, QChar('0')).toUpper();
 			}
 			Key.append("\\");
@@ -2141,7 +2143,7 @@ SB_STATUS CSbieAPI::SetSecureParam(const QString& Name, const void* data, size_t
 	return SB_OK;
 }
 
-SB_STATUS CSbieAPI::GetSecureParam(const QString& Name, void* data, size_t size)
+SB_STATUS CSbieAPI::GetSecureParam(const QString& Name, void* data, size_t size, quint32* size_out, bool bVerify)
 {
 	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
 	API_SECURE_PARAM_ARGS *args = (API_SECURE_PARAM_ARGS*)parms;
@@ -2153,6 +2155,8 @@ SB_STATUS CSbieAPI::GetSecureParam(const QString& Name, void* data, size_t size)
 	args->param_name.val = (WCHAR*)name.c_str();
 	args->param_data.val = (void*)data;
 	args->param_size.val = size;
+	args->param_size_out.val = (ULONG*)size_out;
+	args->param_verify.val = bVerify;
 
 	NTSTATUS status = m->IoControl(parms);
 	if (!NT_SUCCESS(status))

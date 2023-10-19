@@ -3132,7 +3132,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="SandMan.cpp" line="2736"/>
         <source>The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanmaya çalıştığınız sertifika engellendi, yani geçersiz kılındı. Bunu kullanmaya yönelik herhangi bir girişim, kullanım şartlarının ihlali anlamına gelir!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2748"/>
@@ -5615,7 +5615,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Windows/SupportDialog.cpp" line="72"/>
         <source>An attempt was made to use a blocked certificate on this system. This action violates the terms of use for the support certificate. You must now purchase a valid certificate, as the usage of the free version has been restricted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu sistemde, engellenmiş bir sertifika kullanımı girişiminde bulunuldu. Bu eylem, destek sertifikasının kullanım koşullarını ihlal ediyor. Ücretsiz sürümün kullanımı kısıtlandığından dolayı artık geçerli bir sertifika satın almalısınız.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="153"/>

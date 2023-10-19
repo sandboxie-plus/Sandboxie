@@ -465,7 +465,7 @@ COptionsWindow::COptionsWindow(const QSharedPointer<CSbieIni>& pBox, const QStri
 	//ui.treeBreakout->setEditTriggers(QAbstractItemView::DoubleClicked);
 	ui.treeBreakout->setItemDelegateForColumn(0, new NoEditDelegate(this));
 	ui.treeBreakout->setItemDelegateForColumn(1, new ProgramsDelegate(this, ui.treeBreakout, -1, this));
-	connect(ui.treeBreakout, SIGNAL(itemChanged(QTreeWidgetItem *, int)), this, SLOT(OnForcedChanged(QTreeWidgetItem *, int)));
+	connect(ui.treeBreakout, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(OnForcedChanged()));
 	//
 
 	// Stop

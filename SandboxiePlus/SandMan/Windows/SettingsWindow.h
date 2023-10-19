@@ -108,6 +108,9 @@ private slots:
 	void OnAddWarnFolder();
 	void OnDelWarnProg();
 
+	void OnVolumeChanged();
+	void UpdateDrives();
+
 	void OnCompatChanged() { m_CompatChanged = true; OnOptChanged(); }
 	void OnTemplateClicked(QTreeWidgetItem* pItem, int Column);
 	void OnTemplateDoubleClicked(QTreeWidgetItem* pItem, int Column);
@@ -168,6 +171,7 @@ protected:
 	QString m_NewPassword;
 	bool	m_MessagesChanged;
 	bool	m_WarnProgsChanged;
+	bool    m_VolumeChanged;
 	bool	m_CompatChanged;
 	bool	m_RunChanged;
 	bool	m_ProtectionChanged;

@@ -34,6 +34,7 @@
 #include <QVariantAnimation>
 #include <QSessionManager>
 #include "Helpers/FullScreen.h"
+#include "Helpers/StorageInfo.h"
 #include "Helpers/WinHelper.h"
 #include "../QSbieAPI/Helpers/DbgHelper.h"
 #include "Windows/BoxImageWindow.h"
@@ -78,8 +79,8 @@ public:
 					/*DEV_BROADCAST_HDR* deviceBroadcast = (DEV_BROADCAST_HDR*)msg->lParam;
 					if (deviceBroadcast->dbch_devicetype == DBT_DEVTYP_VOLUME) {
 					}*/
-					if (theAPI)
-						theAPI->UpdateDriveLetters();
+					if (theGUI)
+						theGUI->UpdateDrives();
 				}
 				/*else if ((msg->wParam & 0xFF80) == 0xAA00 && msg->lParam == 'xobs') 
 				{
@@ -182,6 +183,7 @@ CSandMan::CSandMan(QWidget *parent)
 	connect(theAPI, SIGNAL(BoxClosed(const CSandBoxPtr&)), this, SLOT(OnBoxClosed(const CSandBoxPtr&)));
 	connect(theAPI, SIGNAL(BoxCleaned(CSandBoxPlus*)), this, SLOT(OnBoxCleaned(CSandBoxPlus*)));
 
+	UpdateDrives();
 
 #ifdef INSIDER_BUILD
 	QString appTitle = tr("Sandboxie-Plus Insider [%1]").arg(QString(__DATE__));
@@ -1843,6 +1845,99 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 	}
 }
 
+void CSandMan::UpdateDrives() 
+{
+	static bool UpdatePending = false;
+	if (!UpdatePending) {
+		UpdatePending = true;
+		QTimer::singleShot(10, this, []() {
+			UpdatePending = false;
+			//qDebug() << "update drives";
+
+			theAPI->UpdateDriveLetters();
+			theGUI->UpdateForceUSB();
+			emit theGUI->DrivesChanged();
+
+			/*auto volumes = ListAllVolumes();
+			auto drives = ListAllDrives();
+			qDebug() << "USB drives";
+			qDebug() << "==============";
+			for (auto I = volumes.begin(); I != volumes.end(); ++I) {
+				for (auto J = I->mountPoints.begin(); J != I->mountPoints.end(); ++J) {
+				
+					QString Device;
+					bool bOnUSB = false;
+					for (auto J = I->disks.begin(); J != I->disks.end(); ++J) {
+						SDriveInfo& info = drives[J->deviceName];
+						if (info.Enum == L"USBSTOR")
+							bOnUSB = true;
+						if (!Device.isEmpty())
+							Device += "+";
+						Device += QString::fromStdWString(info.Name);
+					}
+
+					if (bOnUSB) {
+						std::wstring label;
+						quint32 sn = CSbieAPI::GetVolumeSN(I->deviceName.c_str(), &label);
+						qDebug() << QString::fromStdWString(*J) << Device << QString("%1-%2").arg((ushort)HIWORD(sn), 4, 16, QChar('0')).arg((ushort)LOWORD(sn), 4, 16, QChar('0')).toUpper() << QString::fromStdWString(label);
+					}
+				}
+			}*/
+		});
+	}
+}
+
+void CSandMan::UpdateForceUSB()
+{
+	if (!theAPI->GetGlobalSettings()->GetBool("ForceUsbDrives", false))
+		return;
+
+	QString UsbSandbox = theAPI->GetGlobalSettings()->GetText("UsbSandbox", "USB_Box");
+
+	CSandBoxPtr pBox = theAPI->GetBoxByName(UsbSandbox);
+	if (pBox.isNull()) {
+		OnLogMessage(tr("USB sandbox not found; creating: %1").arg(UsbSandbox));
+		SB_PROGRESS Status = theAPI->CreateBox(UsbSandbox);
+		if (!Status.IsError())
+			pBox = theAPI->GetBoxByName(UsbSandbox);
+		if (pBox.isNull())
+			return;
+
+		pBox->SetBool("UseFileDeleteV2", true);
+		pBox->SetBool("UseRegDeleteV2", true);
+
+		//pBox->SetBool("SeparateUserFolders", false);
+
+		pBox->SetBool("UseVolumeSerialNumbers", true);
+	}
+
+	QStringList ForceMounts;
+	QStringList DisabledForceVolume = theAPI->GetGlobalSettings()->GetTextList("DisabledForceVolume", false);
+	auto volumes = ListAllVolumes();
+	auto drives = ListAllDrives();
+	for (auto I = volumes.begin(); I != volumes.end(); ++I) {
+
+		bool bOnUSB = false;
+		for (auto J = I->disks.begin(); J != I->disks.end(); ++J) {
+			SDriveInfo& info = drives[J->deviceName];
+			if (info.Enum == L"USBSTOR")
+				bOnUSB = true;
+		}
+
+		if (bOnUSB) {
+			quint32 sn = CSbieAPI::GetVolumeSN(I->deviceName.c_str());
+			QString SN = QString("%1-%2").arg((ushort)HIWORD(sn), 4, 16, QChar('0')).arg((ushort)LOWORD(sn), 4, 16, QChar('0')).toUpper();
+			if (!DisabledForceVolume.contains(SN)) {
+
+				for (auto J = I->mountPoints.begin(); J != I->mountPoints.end(); ++J)
+					ForceMounts.append(QString::fromStdWString(*J));
+			}
+		}
+	}
+
+	pBox->UpdateTextList("ForceFolder", ForceMounts, false);
+}
+
 void CSandMan::OnBoxSelected()
 {
 	CSandBoxPtr pBox;
@@ -2283,6 +2378,8 @@ void CSandMan::OnStatusChanged()
 				OnLogMessage(tr("Default sandbox not found; creating: %1").arg(DefaultBox));
 				theAPI->CreateBox(DefaultBox);
 			}
+
+			UpdateForceUSB();
 
 			if (theConf->GetBool("Options/CleanUpOnStart", false)) {
 
@@ -3377,6 +3474,7 @@ void CSandMan::OnResetMsgs()
 
 		theConf->DelValue("Options/AutoCleanupTemplates");
 		theConf->DelValue("Options/WarnTerminateAll");
+		theConf->DelValue("Options/WarnLockAll");
 		theConf->DelValue("Options/WarnTerminate");
 
 		theConf->DelValue("Options/InfoMkLink");

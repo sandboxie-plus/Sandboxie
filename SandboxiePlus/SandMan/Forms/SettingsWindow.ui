@@ -2252,6 +2252,71 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
              </item>
             </layout>
            </widget>
+           <widget class="QWidget" name="tabUSB">
+            <attribute name="title">
+             <string>USB Drive Sandboxing</string>
+            </attribute>
+            <layout class="QGridLayout" name="gridLayout_23">
+             <item row="0" column="0">
+              <layout class="QGridLayout" name="gridLayout_12">
+               <item row="1" column="1" colspan="2">
+                <widget class="QComboBox" name="cmbUsbSandbox">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" colspan="4">
+                <widget class="QTreeWidget" name="treeVolumes">
+                 <column>
+                  <property name="text">
+                   <string>Volume</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Information</string>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_9">
+                 <property name="text">
+                  <string>Sandbox for USB drives:</string>
+                 </property>
+                 <property name="textFormat">
+                  <enum>Qt::PlainText</enum>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0" colspan="2">
+                <widget class="QCheckBox" name="chkSandboxUsb">
+                 <property name="text">
+                  <string>Automatically sandbox all attached USB drives</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
+                <spacer name="horizontalSpacer_13">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
           </widget>
          </item>
         </layout>

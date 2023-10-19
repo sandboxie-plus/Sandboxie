@@ -21,6 +21,7 @@ HEADERS += ./stdafx.h \
     ./Helpers/FullScreen.h \
     ./Helpers/WinAdmin.h \
     ./Helpers/WinHelper.h \
+    ./Helpers/StorageInfo.h \
     ./Helpers/ReadDirectoryChanges.h \
     ./Helpers/ReadDirectoryChangesPrivate.h \
     ./Windows/RecoveryWindow.h \
@@ -68,6 +69,7 @@ SOURCES += ./main.cpp \
     ./Helpers/FullScreen.cpp \
     ./Helpers/WinAdmin.cpp \
     ./Helpers/WinHelper.cpp \
+    ./Helpers/StorageInfo.cpp \
     ./Helpers/ReadDirectoryChanges.cpp \
     ./Helpers/ReadDirectoryChangesPrivate.cpp \
     ./Helpers/WindowFromPointEx.cpp \

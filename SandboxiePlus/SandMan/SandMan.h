@@ -95,6 +95,9 @@ public:
 
 	void				EditIni(const QString& IniPath, bool bPlus = false);
 
+	void				UpdateDrives();
+	void				UpdateForceUSB();
+
 	QIcon				GetBoxIcon(int boxType, bool inUse = false);
 	QRgb				GetBoxColor(int boxType) { return m_BoxColors[boxType]; }
 	QIcon				GetColorIcon(QColor boxColor, bool inUse = false/*, bool bOut = false*/);
@@ -113,6 +116,8 @@ public:
 	void				SaveMessageLog(QIODevice* pFile);
 
 signals:
+	void				DrivesChanged();
+
 	void				CertUpdated();
 
 	void				Closed();

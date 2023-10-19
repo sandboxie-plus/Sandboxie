@@ -3362,7 +3362,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandMan.cpp" line="2736"/>
         <source>The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!</source>
-        <translation type="unfinished"></translation>
+        <translation>사용하려는 인증서가 차단되었습니다. 이는 해당 인증서가 원인으로 인해 무효화되었음을 의미합니다. 이 인증서를 사용하려는 시도는 사용 약관 위반에 해당합니다!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2927"/>
@@ -6055,7 +6055,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/SupportDialog.cpp" line="72"/>
         <source>An attempt was made to use a blocked certificate on this system. This action violates the terms of use for the support certificate. You must now purchase a valid certificate, as the usage of the free version has been restricted.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 시스템에서 차단된 인증서를 사용하려고 했습니다. 이 작업은 지원 인증서에 대한 사용 약관을 위반합니다. 무료 버전의 사용이 제한되었으므로 이제 유효한 인증서를 구입해야 합니다.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="153"/>

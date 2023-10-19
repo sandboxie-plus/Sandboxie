@@ -3155,7 +3155,7 @@ Nein wählt: %2</translation>
     <message>
         <location filename="SandMan.cpp" line="2736"/>
         <source>The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Zertifikat, das Sie zu verwenden versuchen, wurde gesperrt, was bedeutet, dass es aus gutem Grund für ungültig erklärt wurde. Jeder Versuch es zu verwenden, stellt einen Verstoß gegen die Nutzungsbedingungen dar!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2748"/>
@@ -3506,10 +3506,6 @@ Möchten Sie die Bereinigung durchführen?</translation>
         <location filename="SandMan.cpp" line="2926"/>
         <source>Do you want to terminate all processes in all sandboxes?</source>
         <translation>Möchten Sie alle Prozesse in allen Sandboxen beenden?</translation>
-    </message>
-    <message>
-        <source>Terminate all without asking</source>
-        <translation type="vanished">Alle ohne Rückfrage beenden</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3007"/>
@@ -5047,11 +5043,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>Family</translation>
     </message>
     <message>
-        <source>Subscription</source>
-        <translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
-        <translation type="vanished">Subscription</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="1229"/>
         <source>Evaluation</source>
         <translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
@@ -5230,7 +5221,8 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1227"/>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
+        <translation>Home</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1281"/>
@@ -5638,7 +5630,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Windows/SupportDialog.cpp" line="72"/>
         <source>An attempt was made to use a blocked certificate on this system. This action violates the terms of use for the support certificate. You must now purchase a valid certificate, as the usage of the free version has been restricted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es wurde versucht, ein gesperrtes Zertifikat auf diesem System zu verwenden. Diese Aktion verstößt gegen die Nutzungsbedingungen für das Unterstützerzertifikat. Sie müssen nun ein gültiges Zertifikat erwerben, da die Nutzung der kostenlosen Version eingeschränkt wurde.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="153"/>

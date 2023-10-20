@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added "get_cert SBIEX-XXXXX-XXXXX-XXXXX-XXXXX" command to UpdUtil.exe allowing to get a cert by serial using command line
 - added mechanism to revoke leaked or refunded certificates
 - added mechanism to automatically set USB drives as forced folders
+- added troubleshooting script for issue [#3318](https://github.com/sandboxie-plus/Sandboxie/issues/3318) with parental controls
 
 ### Changed
 - improved suspend process ahndling [#3375](https://github.com/sandboxie-plus/Sandboxie/issues/3375)

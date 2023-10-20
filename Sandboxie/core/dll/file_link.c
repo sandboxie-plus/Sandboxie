@@ -927,7 +927,7 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
             File_GetCopyPath(path, &CopyPath);
 
             //
-            // get tempalte file if present, and reparese the path
+            // get template file if present, and reparse the path
             //
 
             WCHAR* TmplName = File_FindSnapshotPath(CopyPath);

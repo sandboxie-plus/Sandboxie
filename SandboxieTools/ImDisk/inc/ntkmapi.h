@@ -291,7 +291,7 @@ typedef ULONG DEVICE_DATA_MANAGEMENT_SET_ACTION;
 //
 
 typedef struct _DEVICE_DATA_SET_RANGE {
-    LONGLONG    StartingOffset;        //in bytes,  must allign to sector
+    LONGLONG    StartingOffset;        //in bytes,  must align to sector
     ULONGLONG   LengthInBytes;         // multiple of sector size.
 } DEVICE_DATA_SET_RANGE, *PDEVICE_DATA_SET_RANGE;
 
@@ -309,10 +309,10 @@ typedef struct _DEVICE_MANAGE_DATA_SET_ATTRIBUTES {
 
     ULONG                               Flags;                  // Global flags across all actions
 
-    ULONG                               ParameterBlockOffset;   // must be alligned to corresponding structure allignment
+    ULONG                               ParameterBlockOffset;   // must be aligned to corresponding structure alignment
     ULONG                               ParameterBlockLength;   // 0 means Parameter Block does not exist.
 
-    ULONG                               DataSetRangesOffset;    // must be alligned to DEVICE_DATA_SET_RANGE structure allignment.
+    ULONG                               DataSetRangesOffset;    // must be aligned to DEVICE_DATA_SET_RANGE structure alignment.
     ULONG                               DataSetRangesLength;    // 0 means DataSetRanges Block does not exist.
 
 } DEVICE_MANAGE_DATA_SET_ATTRIBUTES, *PDEVICE_MANAGE_DATA_SET_ATTRIBUTES;
@@ -326,7 +326,7 @@ typedef struct _DEVICE_MANAGE_DATA_SET_ATTRIBUTES {
 //
 //======================== FSCTL_FILE_LEVEL_TRIM ===========================
 //
-//  Structure defintions for supporint file level trim
+//  Structure definitions for supporint file level trim
 //
 
 typedef struct _FILE_LEVEL_TRIM_RANGE {

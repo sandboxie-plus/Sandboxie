@@ -37,7 +37,7 @@ How the function in 7-Zip returns object for output parameter via pointer
 4) The caller must free or release object returned by the callee:
   PROPVARIANT   : VariantClear(&propvaiant)
   BSTR          : SysFreeString(bstr)
-  IUnknown* and derived interfaces  :  if (ptr) ptr->Relase()
+  IUnknown* and derived interfaces  :  if (ptr) ptr->Release()
 */
 
 

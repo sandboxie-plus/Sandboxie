@@ -68,9 +68,9 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
                 bool State = false;
                 if(CCheckableMessageBox::question(this, "Sandboxie-Plus",
                     tr("This sandbox content will be placed in an encrypted container file, "
-                        "please note that any corruption of the container's header will render all its content permanently innaccessible. "
-                        "Corruption can occur as a result of a BSOD, a storage hadrware failure, or a maliciouse application overwriting random files. "
-                        "This feature is provided under a strickt <b>No Backup No Mercy</b> policy, YOU the user are responsible for the data you put into an encrypted box. "
+                        "please note that any corruption of the container's header will render all its content permanently inaccessible. "
+                        "Corruption can occur as a result of a BSOD, a storage hardware failure, or a malicious application overwriting random files. "
+                        "This feature is provided under a strict <b>No Backup No Mercy</b> policy, YOU the user are responsible for the data you put into an encrypted box. "
                         "<br /><br />"
                         "IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].")
                     , tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::No, QMessageBox::Warning) != QDialogButtonBox::Yes)
@@ -448,7 +448,7 @@ bool CBoxTypePage::validatePage()
 #endif
 
     if ((BoxType == CSandBoxPlus::ePrivate || BoxType == CSandBoxPlus::ePrivatePlus) && !theGUI->IsImDiskReady()) {
-        theGUI->GetAddonManager()->TryInstallAddon("ImDisk", this, tr("To use ancrypted boxes you need to install the ImDisk driver, do you want to download and install it?"));
+        theGUI->GetAddonManager()->TryInstallAddon("ImDisk", this, tr("To use encrypted boxes you need to install the ImDisk driver, do you want to download and install it?"));
         return false;
     }
 

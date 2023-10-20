@@ -3640,7 +3640,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</string>
+                  <string>Sandboxie's functionality can be enhanced by using optional DLLs which can be loaded into each sandboxed process on start by the SbieDll.dll file, the add-on manager in the global settings offers a couple of useful extensions, once installed they can be enabled here for the current box.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>

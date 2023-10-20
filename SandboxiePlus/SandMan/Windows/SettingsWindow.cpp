@@ -1260,7 +1260,7 @@ void CSettingsWindow::OnGetCert()
 	SB_PROGRESS Status = theGUI->m_pUpdater->GetSupportCert(ui.txtSerial->text(), this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
 	if (Status.GetStatus() == OP_ASYNC) {
 		theGUI->AddAsyncOp(Status.GetValue());
-		Status.GetValue()->ShowMessage(tr("Retreiving certificate..."));
+		Status.GetValue()->ShowMessage(tr("Retrieving certificate..."));
 	}
 }
 

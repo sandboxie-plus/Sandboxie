@@ -414,7 +414,7 @@ MSG_HEADER *MountManager::QueryHandler(MSG_HEADER *msg)
         if (pRoot)
             pMount = pRoot->Mount;
     }
-    else if (m_RamDisk != NULL) { // empty root to querry ramdisk
+    else if (m_RamDisk != NULL) { // empty root to query ramdisk
         EnterCriticalSection(&m_CritSec);
         pMount = m_RamDisk;
     }
@@ -502,7 +502,7 @@ HANDLE MountManager::OpenOrCreateNtFolder(const WCHAR* NtPath)
             return NULL;
 
         WCHAR* dosPath = (WCHAR*)DosPath.c_str();
-        *wcsrchr(dosPath, L'\\') = L'\0'; // truncate path as we want the last fodler to be created with SbieDll_GetPublicSD
+        *wcsrchr(dosPath, L'\\') = L'\0'; // truncate path as we want the last folder to be created with SbieDll_GetPublicSD
         if (__sys_SHCreateDirectoryExW(NULL, dosPath, NULL) != ERROR_SUCCESS)
             return NULL;
 
@@ -673,7 +673,7 @@ std::shared_ptr<BOX_MOUNT> MountManager::FindImDisk(const std::wstring& ImageFil
 
     //
     // Find an already mounted RamDisk,
-    // we inspect the volume label to determin if its ours
+    // we inspect the volume label to determine if its ours
     // 
 
     std::vector<ULONG> DeviceList;
@@ -953,7 +953,7 @@ bool MountManager::AcquireBoxRoot(const WCHAR* boxname, const WCHAR* reg_root, c
     //
     // We use the [KeyRootPath] to uniquely identify a sandbox, the driver requires 
     // booth [KeyRootPath] as well as the hive file location [FileRootPath]\RegHive to match,
-    // hence eider is a good unique identifier, in case of a conflict the second sandbox start atempt fails.
+    // hence either is a good unique identifier, in case of a conflict the second sandbox start attempt fails.
     // As SbieApi_GetUnmountHive provides only [KeyRootPath] and no file path it is expedient to use it.
     //
 

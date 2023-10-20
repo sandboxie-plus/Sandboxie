@@ -31,14 +31,14 @@ void _stdcall sha512_pkcs5_2(int i_count, const void *pwd, size_t pwd_len, const
 
 	while (dklen != 0)
 	{
-		// first interation
+		// first iteration
 		sha512_hmac_init(&ctx, pwd, pwd_len);
 		sha512_hmac_hash(&ctx, salt, salt_len);
 		sha512_hmac_hash(&ctx, &block, sizeof(unsigned long));
 		sha512_hmac_done(&ctx, hmac);
 		memcpy(blk, hmac, SHA512_DIGEST_SIZE);
 
-		// next interations
+		// next iterations
 		for (i = 1; i < i_count; i++) 
 		{
 			sha512_hmac_init(&ctx, pwd, pwd_len);

@@ -137,7 +137,7 @@ int _stdcall sha512_hmac_drbg_generate( sha512_hmac_drbg_ctx *ctx, const void   
 	                                                               unsigned char *output,     size_t output_len )
 {
 	if ( (ctx->reseed_counter > SHA512_HMAC_DRBG_RESEED_INTERVAL) || // If reseed_counter > reseed_interval, then return an indication that a reseed is required
-		 (additional_len > SHA512_HMAC_DRBG_MAX_ADDITIONAL_BYTES) || // chech max_additional_input_length    (NIST SP 800-90A specification)
+		 (additional_len > SHA512_HMAC_DRBG_MAX_ADDITIONAL_BYTES) || // check max_additional_input_length    (NIST SP 800-90A specification)
 		 (output_len > SHA512_HMAC_DRBG_MAX_GENERATED_BYTES) )       // check max_number_of_bits_per_request (NIST SP 800-90A specification)
 	{
 		return -1;

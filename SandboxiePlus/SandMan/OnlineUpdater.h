@@ -115,6 +115,8 @@ public:
 	static quint32		CurrentVersion();
 	static quint32		VersionToInt(const QString& VersionStr);
 
+	static quint64		GetRandID();
+
 private slots:
 	void				OnRequestFinished();
 

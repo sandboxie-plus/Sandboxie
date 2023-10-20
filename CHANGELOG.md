@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - improved suspend process ahndling [#3375](https://github.com/sandboxie-plus/Sandboxie/issues/3375)
+- improved handling of issue reports
 
 ### Fixed
 - fixed issue with auto updater not offering version updates

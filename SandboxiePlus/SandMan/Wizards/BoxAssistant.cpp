@@ -22,6 +22,7 @@
 #include "../AddonManager.h"
 #include "../MiscHelpers/Common/NetworkAccessManager.h"
 #include "../CustomStyles.h"
+#include "../OnlineUpdater.h"
 
 CBoxAssistant::CBoxAssistant(QWidget *parent)
     : QWizard(parent)
@@ -1016,6 +1017,12 @@ bool CSubmitPage::validatePage()
         eMail.setBody(m_pMail->text().toUtf8());
         pMultiPart->append(eMail);
     }
+
+    quint64 RandID = COnlineUpdater::GetRandID();
+    QHttpPart randId;
+    randId.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"randId\""));
+    randId.setBody(QString::number(RandID, 16).rightJustified(16, '0').toUpper().toUtf8());
+    pMultiPart->append(randId);
 
     QUrl Url("https://sandboxie-plus.com/issues/submit.php");
     QNetworkRequest Request(Url);

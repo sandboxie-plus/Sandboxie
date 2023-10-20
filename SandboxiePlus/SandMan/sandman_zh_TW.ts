@@ -1681,7 +1681,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="52"/>
         <source>Force specified processes to wait for a debugger to attach.</source>
-        <translation>強制要求被指定的處理程序等待偵錯工具的附加。</translation>
+        <translation>強制要求被指定的處理程序等待偵錯工具的加入。</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="54"/>
@@ -3816,7 +3816,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1899"/>
         <source>USB sandbox not found; creating: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>找不到 USB 沙箱; 建立中: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2701"/>
@@ -3842,7 +3842,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2833"/>
         <source>The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!</source>
-        <translation type="unfinished"></translation>
+        <translation>您正在嘗試使用的憑證已被封鎖，這意味著其已因某些原因而失效。任何試圖使用它的行為都違反了使用條款！</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2845"/>
@@ -5268,7 +5268,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1187"/>
         <source>Volume not attached</source>
-        <translation type="unfinished"></translation>
+        <translation>未加入磁碟區</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1208"/>
@@ -5914,7 +5914,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Windows/SupportDialog.cpp" line="72"/>
         <source>An attempt was made to use a blocked certificate on this system. This action violates the terms of use for the support certificate. You must now purchase a valid certificate, as the usage of the free version has been restricted.</source>
-        <translation type="unfinished"></translation>
+        <translation>在此系統上偵測到使用已封鎖憑證的嘗試。此行為違反了贊助憑證的使用條款。現在您必須購買有效的憑證，因為免費版本的使用已被限制。</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="153"/>
@@ -8886,27 +8886,27 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2257"/>
         <source>USB Drive Sandboxing</source>
-        <translation type="unfinished"></translation>
+        <translation>USB 裝置沙箱化</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2273"/>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>磁碟區</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2278"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>資訊</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2286"/>
         <source>Sandbox for USB drives:</source>
-        <translation type="unfinished"></translation>
+        <translation>USB 裝置沙箱:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2299"/>
         <source>Automatically sandbox all attached USB drives</source>
-        <translation type="unfinished"></translation>
+        <translation>自動將所有加入的 USB 裝置沙箱化</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2356"/>

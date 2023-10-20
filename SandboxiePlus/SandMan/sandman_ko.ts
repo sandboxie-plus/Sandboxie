@@ -3857,7 +3857,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1899"/>
         <source>USB sandbox not found; creating: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">USB 샌드박스를 찾을 수 없습니다; 만들기: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2120"/>
@@ -5419,7 +5419,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1187"/>
         <source>Volume not attached</source>
-        <translation type="unfinished"></translation>
+        <translation>볼륨이 연결되지 않음</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1208"/>
@@ -8837,27 +8837,27 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2257"/>
         <source>USB Drive Sandboxing</source>
-        <translation type="unfinished"></translation>
+        <translation>USB 드라이브 샌드박스</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2273"/>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>볼륨</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2278"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>정보</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2286"/>
         <source>Sandbox for USB drives:</source>
-        <translation type="unfinished"></translation>
+        <translation>USB 드라이브용 샌드박스:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2299"/>
         <source>Automatically sandbox all attached USB drives</source>
-        <translation type="unfinished"></translation>
+        <translation>연결된 모든 USB 드라이브를 자동으로 샌드박스</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2326"/>

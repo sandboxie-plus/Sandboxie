@@ -159,7 +159,7 @@ void CPopUpWindow::AddLogMessage(quint32 MsgCode, const QStringList& MsgData, qu
 			BoxName = pProcess->GetBoxName();
 		}
 		else
-			ProcessName = tr("PID %1").arg(ProcessId);
+			ProcessName = QString("PID %1").arg(ProcessId);
 	}
 
 	QString Message = theGUI->FormatSbieMessage(MsgCode, MsgData, ProcessName);

@@ -103,8 +103,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	//flags &= ~Qt::WindowCloseButtonHint;
 	setWindowFlags(flags);
 
-	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
-	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	this->setWindowFlag(Qt::WindowStaysOnTopHint, theGUI->IsAlwaysOnTop());
 
 	ui.setupUi(this);
 	this->setWindowTitle(tr("Sandboxie Plus - Global Settings"));

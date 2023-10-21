@@ -107,6 +107,8 @@ public:
 	
 	bool				CheckCertificate(QWidget* pWidget, bool bAdvanced = false);
 
+	bool				IsAlwaysOnTop() const;
+
 	void				UpdateTheme();
 	void				UpdateTitleTheme(const HWND& hwnd);
 
@@ -459,6 +461,8 @@ private:
 	bool				m_bIconBusy;
 	bool				m_bIconSun;
 	int					m_iDeletingContent;
+
+	bool				m_bOnTop;
 
 	bool				m_bExit;
 

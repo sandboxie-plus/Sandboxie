@@ -228,8 +228,7 @@ CSupportDialog::CSupportDialog(const QString& Message, bool NoGo, int Wait, QWid
 	//setWindowState(Qt::WindowActive);
 	SetForegroundWindow((HWND)QWidget::winId());
 
-	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
-	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	this->setWindowFlag(Qt::WindowStaysOnTopHint, theGUI->IsAlwaysOnTop());
 
 	this->setWindowTitle(tr("Sandboxie-Plus - Support Reminder"));
 

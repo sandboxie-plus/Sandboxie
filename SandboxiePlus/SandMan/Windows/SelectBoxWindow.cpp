@@ -169,7 +169,7 @@ CSelectBoxWindow::CSelectBoxWindow(const QStringList& Commands, const QString& B
 	//setWindowState(Qt::WindowActive);
 	SetForegroundWindow((HWND)QWidget::winId());
 
-	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
+	bool bAlwaysOnTop = theGUI->IsAlwaysOnTop();
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
 	if (!bAlwaysOnTop) {

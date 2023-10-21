@@ -172,6 +172,7 @@ CSandMan::CSandMan(QWidget *parent)
 		QMessageBox::critical(this, "Sandboxie-Plus", tr("WARNING: Sandboxie-Plus.ini in %1 cannot be written to, settings will not be saved.").arg(theConf->GetConfigDir()));
 	}
 
+	m_bOnTop = false;
 	m_bExit = false;
 
 	m_ImDiskReady = true;
@@ -1358,6 +1359,12 @@ void CSandMan::changeEvent(QEvent* e)
 	{
         if (isMinimized()) 
 		{
+			if (m_bOnTop) {
+				m_bOnTop = false;
+				this->setWindowFlag(Qt::WindowStaysOnTopHint, m_bOnTop);
+				SafeShow(this);
+			}
+
             if (m_pTrayIcon->isVisible() && theConf->GetBool("Options/MinimizeToTray", false))
 			{
 				StoreState();
@@ -2574,22 +2581,18 @@ void CSandMan::OnHotKey(size_t id)
 		break;
 
 	case HK_TOP:
-		if (this->isActiveWindow() && m_pWndTopMost->isCheckable()) {
-			m_pWndTopMost->setChecked(false);
-			OnAlwaysTop();
-			return;
+		if (this->isActiveWindow() && m_bOnTop)
+			m_bOnTop = false;
+		else {
+			m_bOnTop = true;
+			
+			QTimer::singleShot(100, [this]() {
+				this->setWindowState((this->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+				SetForegroundWindow(MainWndHandle);
+			});
 		}
-
-		if (!isVisible()) {
-			CheckSupport();
-			show();
-		}
-		m_pWndTopMost->setChecked(true);
-		OnAlwaysTop();
-		QTimer::singleShot(100, [this]() { 
-			this->setWindowState((this->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
-			SetForegroundWindow(MainWndHandle);
-		} );
+		this->setWindowFlag(Qt::WindowStaysOnTopHint, m_bOnTop);
+		SafeShow(this);
 		break;
 	}
 }
@@ -3308,6 +3311,8 @@ void CSandMan::OnViewMode(QAction* pAction)
 
 void CSandMan::OnAlwaysTop()
 {
+	m_bOnTop = false;
+
 	StoreState();
 	bool bAlwaysOnTop = m_pWndTopMost->isChecked();
 	theConf->SetValue("Options/AlwaysOnTop", bAlwaysOnTop);
@@ -3317,6 +3322,11 @@ void CSandMan::OnAlwaysTop()
 
 	m_pPopUpWindow->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 	m_pProgressDialog->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+}
+
+bool CSandMan::IsAlwaysOnTop() const
+{
+	return m_bOnTop || theConf->GetBool("Options/AlwaysOnTop", false);
 }
 
 void CSandMan::OnRefresh()

@@ -800,8 +800,7 @@ CTraceWindow::CTraceWindow(QWidget *parent)
 
 	this->setWindowTitle(tr("Sandboxie-Plus - Trace Monitor"));
 
-	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
-	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	this->setWindowFlag(Qt::WindowStaysOnTopHint, theGUI->IsAlwaysOnTop());
 
 	QGridLayout* pLayout = new QGridLayout();
 	pLayout->setContentsMargins(3,3,3,3);

@@ -2551,7 +2551,8 @@ void CSandMan::CheckSupport()
 	}
 }
 
-#define HK_PANIC 1
+#define HK_PANIC	1
+#define HK_TOP		2
 
 void CSandMan::SetupHotKeys()
 {
@@ -2559,6 +2560,9 @@ void CSandMan::SetupHotKeys()
 
 	if (theConf->GetBool("Options/EnablePanicKey", false))
 		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PanicKeySequence", "Shift+Pause"), HK_PANIC);
+
+	if (theConf->GetBool("Options/EnableTopMostKey", false))
+		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PanicTopMostSequence", "Alt+Pause"), HK_TOP);
 }
 
 void CSandMan::OnHotKey(size_t id)
@@ -2567,6 +2571,25 @@ void CSandMan::OnHotKey(size_t id)
 	{
 	case HK_PANIC: 
 		theAPI->TerminateAll();
+		break;
+
+	case HK_TOP:
+		if (this->isActiveWindow() && m_pWndTopMost->isCheckable()) {
+			m_pWndTopMost->setChecked(false);
+			OnAlwaysTop();
+			return;
+		}
+
+		if (!isVisible()) {
+			CheckSupport();
+			show();
+		}
+		m_pWndTopMost->setChecked(true);
+		OnAlwaysTop();
+		QTimer::singleShot(100, [this]() { 
+			this->setWindowState((this->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+			SetForegroundWindow(MainWndHandle);
+		} );
 		break;
 	}
 }

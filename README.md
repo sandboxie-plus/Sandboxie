@@ -14,7 +14,7 @@ Sandboxie allows you to create virtually unlimited sandboxes and run them alone 
 
 ## ⏬ Download
 
-[![GitHub All Releases](https://img.shields.io/github/downloads/sandboxie-plus/Sandboxie/total?style=for-the-badge)](https://github.com/sandboxie-plus/Sandboxie/releases/latest)
+[Latest Release](https://github.com/sandboxie-plus/Sandboxie/releases/latest)
 
 ## 🚀 Features
 

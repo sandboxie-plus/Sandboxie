@@ -42,6 +42,6 @@
 "Webcam or Sound does not work when sandboxed": "Webcam oder Ton funktioniert nicht in einer Sandbox",
 "To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "Um die Webcam-Unterstützung unter Windows 11 zu aktivieren, muss das Isolationsniveau reduziert werden. \nWenn Sie fortfahren möchten, drücken Sie bitte auf WEITER und wählen eine Sandbox zur Modifikation aus. \n",
 "\nPlease note that this required preset works only with a valid supporter certificate!": "\nBitte beachten Sie, dass diese erforderliche Voreinstellung nur mit einem gültigen Unterstützerzertifikat funktioniert!",
-"Select which box to turn into a reduced isolation app compartment box.": "Wählen Sie, welche Box in eine Box mit reduziertem Isolations-App-Fach umgewandelt werden soll.",
+"Select which box to turn into a reduced isolation app compartment box.": "Wählen Sie, welche Box in eine Applikationsunterteilungsbox mit reduzierter Isolation umgewandelt werden soll.",
 "The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "Die Abhilfe wurde angewendet, bitte testen Sie die Webcam in %1 und geben an, ob das Problem behoben wurde."
 }

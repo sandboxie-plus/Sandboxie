@@ -2240,10 +2240,6 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
         <translation>Sandboxie-Plus Benachrichtigungen</translation>
     </message>
     <message>
-        <source>PID %1</source>
-        <translation type="vanished">PID %1</translation>
-    </message>
-    <message>
         <location filename="Windows/PopUpWindow.cpp" line="187"/>
         <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
         <translatorcomment>Kept &apos;print spooler&apos; in brackets to allow easier online lookup.</translatorcomment>
@@ -3107,7 +3103,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SandMan.cpp" line="1899"/>
         <source>USB sandbox not found; creating: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>USB-Sandbox nicht gefunden; erzeuge: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2301"/>
@@ -4992,7 +4988,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1187"/>
         <source>Volume not attached</source>
-        <translation type="unfinished"></translation>
+        <translation>Datenträger nicht eingesteckt</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1208"/>
@@ -8571,27 +8567,27 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2257"/>
         <source>USB Drive Sandboxing</source>
-        <translation type="unfinished"></translation>
+        <translation>USB-Laufwerk Sandboxing</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2273"/>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Datenträger</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2278"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2286"/>
         <source>Sandbox for USB drives:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandbox für USB-Laufwerke:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2299"/>
         <source>Automatically sandbox all attached USB drives</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch alle eingesteckten USB-Laufwerke sandboxen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2326"/>

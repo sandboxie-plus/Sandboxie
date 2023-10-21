@@ -1,10 +1,10 @@
 {
-"Description Text...": "Beschreibungs Text...",
-"Fix current issues": "Aktuelle problemem beheben",
-"Fix issues with sandboxing": "Sandbox probleme beheben",
+"Description Text...": "Beschreibungstext...",
+"Fix current issues": "Aktuelle Probleme beheben",
+"Fix issues with sandboxing": "Sandboxprobleme beheben",
 "An Application does not work properly when sandboxed": "Eine Anwendung funktioniert nicht richtig",
-"Issues with a web browser": "Probleme mit Web browser beheben",
-"Perform Sandbox maintenance": "Sandbox Wartung",
+"Issues with a web browser": "Probleme mit Webbrowser beheben",
+"Perform Sandbox maintenance": "Sandboxwartung durchführen",
 "Fix issues with the UI or Shell": "UI Fehler beheben",
 
 "Yes": "Ja",
@@ -15,7 +15,7 @@
 "Loaded %1 templates": "%1 Vorlagen geladen",
 
 "Browser shortcut is missing from the desktop": "Browser-Verknüpfung fehlt auf dem Desktop",
-"This procedure will add a browser shortcut to the desktop": "Dieses Verfahren wird eine Browser-Verknüpfung zum Desktop hinzufügen",
+"This procedure will add a browser shortcut to the desktop": "Dieser Vorgang wird eine Browser-Verknüpfung zum Desktop hinzufügen",
 "Default Browser": "Standardbrowser",
 "Another": "Ein anderer",
 "Select Browser": "Browser auswählen",
@@ -24,7 +24,7 @@
 "Select Browser Path": "Browserpfad auswählen",
 
 "Explorer Context Menu extension does not work": "Explorer-Kontextmenü-Erweiterung funktioniert nicht",
-"This procedure will re install the shell integration": "Dieses Verfahren wird die Shell-Integration neu installieren",
+"This procedure will re install the shell integration": "Dieser Vorgang wird die Shell-Integration neu installieren",
 "Add Run Sandboxed": "Führe in Sandbox aus hinzufügen",
 "Add Run Unsandboxed": "Führe ohne Sandbox aus hinzufügen",
 "Install legacy shell extensions": "Legacy-Shell-Erweiterungen installieren",
@@ -37,11 +37,11 @@
 "Disable DropAdminRights": "DropAdminRights deaktivieren",
 "Enable FakeAdminRights": "FakeAdminRights aktivieren",
 "running installer, pid: %1 press NEXT once it finishes to continue": "Installer wird ausgeführt, pid: %1 drücken Sie auf WEITER, sobald er fertig ist, um fortzufahren",
-"Was the issue resolved?": "Wurde das problem behoben?",
+"Was the issue resolved?": "Wurde das Problem behoben?",
 
 "Webcam or Sound does not work when sandboxed": "Webcam oder Ton funktioniert nicht in einer Sandbox",
 "To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "Um die Webcam-Unterstützung unter Windows 11 zu aktivieren, muss das Isolationsniveau reduziert werden. \nWenn Sie fortfahren möchten, drücken Sie bitte auf WEITER und wählen eine Sandbox zur Modifikation aus. \n",
-"\nPlease note that this required preset works only with a valid supporter certificate!": "\nBitte beachten Sie, dass dieses erforderliche Voreinstellung nur mit einem gültigen Unterstützerzertifikat funktioniert!",
-"Select which box to turn into a reduced isolation app compartment box.": "Wählen Sie, welche Box in eine Box mit reduziertem Isolations-App-Fach umgewandelt werden soll.",
-"The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "Die Milderung wurde angewendet, bitte testen Sie die Webcam in %1 und geben an, ob das Problem behoben wurde."
+"\nPlease note that this required preset works only with a valid supporter certificate!": "\nBitte beachten Sie, dass diese erforderliche Voreinstellung nur mit einem gültigen Unterstützerzertifikat funktioniert!",
+"Select which box to turn into a reduced isolation app compartment box.": "Wählen Sie, welche Box in eine Applikationsunterteilungsbox mit reduzierter Isolation umgewandelt werden soll.",
+"The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "Die Abhilfe wurde angewendet, bitte testen Sie die Webcam in %1 und geben an, ob das Problem behoben wurde."
 }

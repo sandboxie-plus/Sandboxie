@@ -951,8 +951,8 @@ bool MountManager::AcquireBoxRoot(const WCHAR* boxname, const WCHAR* reg_root, c
     BOOLEAN UseFileImage = SbieApi_QueryConfBool(boxname, L"UseFileImage", FALSE);
 
     //
-    // We use the [KeyRootPath] to uniquely identify a sandbox, the driver requires 
-    // booth [KeyRootPath] as well as the hive file location [FileRootPath]\RegHive to match,
+    // We use the [KeyRootPath] to uniquely identify a sandbox, the driver requires
+    // both [KeyRootPath] as well as the hive file location [FileRootPath]\RegHive to match,
     // hence either is a good unique identifier, in case of a conflict the second sandbox start attempt fails.
     // As SbieApi_GetUnmountHive provides only [KeyRootPath] and no file path it is expedient to use it.
     //

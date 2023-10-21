@@ -277,23 +277,23 @@
 <context>
     <name>CBeginPage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="228"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="229"/>
         <source>Troubleshooting Wizard</source>
         <translation>문제 해결 마법사</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="236"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="237"/>
         <source>Welcome to the Troubleshooting Wizard for Sandboxie-Plus. This interactive assistant is designed to help you in resolving sandboxing issues.</source>
         <translation>Sandboxie-Plus용 문제 해결 마법사입니다. 이 대화형 길잡이는 샌드박스 문제를 해결하는 데 도움이 되도록 설계되었습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="279"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="280"/>
         <source>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerful. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retrieve the latest troubleshooting instructions.</source>
         <oldsource>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerfull. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retriev the latest troubleshooting instructions.</oldsource>
         <translation>유효한 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;후원자 인증서&lt;/a&gt;를 사용하면 마법사의 성능이 더욱 향상됩니다. &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;온라인 솔루션 데이터베이스&lt;/a&gt;에 액세스하여 최신 문제 해결 지침을 검색할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="317"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="318"/>
         <source>Another issue</source>
         <translation>다른 문제</translation>
     </message>
@@ -301,22 +301,22 @@
 <context>
     <name>CBoxAssistant</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="29"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="30"/>
         <source>Troubleshooting Wizard</source>
         <translation>문제 해결 마법사</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="35"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="36"/>
         <source>Toggle Debugger</source>
         <translation>디버거 전환</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="101"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="102"/>
         <source>To debug troubleshooting scripts you need the V4 Script Debugger add-on, do you want to download and install it?</source>
         <translation>문제 해결 스크립트를 디버그하려면 V4 Script Debugger 추가 기능이 필요한데 다운로드하여 설치하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="105"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="106"/>
         <source>Debugger Enabled</source>
         <translation>디버거 사용</translation>
     </message>
@@ -334,19 +334,19 @@
         <translation type="vanished">오류, 문제 해결 지침이 %1 (%2 &lt;-&gt; %3) 중복되었습니다!</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="160"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="161"/>
         <source>V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debugger could not be opened.</source>
         <oldsource>V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debuger could not be opened.</oldsource>
         <translation>V4ScriptDebuggerBackend를 인스턴스화할 수 없습니다. V4ScriptDebugger.dll 및 해당 종속성이 누락되어 스크립트 디버거를 열 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="210"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="211"/>
         <source>A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an inconsistent state.</source>
         <oldsource>A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an incosistent state.</oldsource>
         <translation>문제 해결 절차가 진행 중입니다. 마법사를 취소하면 해당 마법사가 중단되고 샌드박스가 일관되지 않은 상태가 될 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="211"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="212"/>
         <source>Don&apos;t ask in future</source>
         <translation>나중에 묻지 않음</translation>
     </message>
@@ -843,12 +843,12 @@ Error: %1</source>
 <context>
     <name>CCompletePage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1062"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1069"/>
         <source>Troubleshooting Completed</source>
         <translation>문제 해결 완료</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1072"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1079"/>
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
 
 You can click Finish to close this wizard.</source>
@@ -1067,7 +1067,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CGetFileJob</name>
     <message>
-        <location filename="OnlineUpdater.cpp" line="192"/>
+        <location filename="OnlineUpdater.cpp" line="197"/>
         <source>Failed to download file from: %1</source>
         <translation>파일 다운로드 실패 위치: %1</translation>
     </message>
@@ -1075,17 +1075,17 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CGroupPage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="330"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="331"/>
         <source>Select issue from group</source>
         <translation>그룹에서 문제 선택</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="339"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="340"/>
         <source>Please specify the exact issue:</source>
         <translation>정확한 문제를 지정하십시오:</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="392"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="393"/>
         <source>Another issue</source>
         <translation>다른 문제</translation>
     </message>
@@ -1126,17 +1126,17 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>CListPage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="453"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="454"/>
         <source>Select issue from full list</source>
         <translation>전체 목록에서 문제 선택</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="467"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="468"/>
         <source>Search filter</source>
         <translation>검색 필터</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="523"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="524"/>
         <source>None of the above</source>
         <translation>위의 항목에 해당하지 않음</translation>
     </message>
@@ -1248,7 +1248,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 <context>
     <name>COnlineUpdater</name>
     <message>
-        <location filename="OnlineUpdater.cpp" line="317"/>
+        <location filename="OnlineUpdater.cpp" line="322"/>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
@@ -1257,111 +1257,111 @@ Do you still want to update?</source>
 업데이트를 계속하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="343"/>
+        <location filename="OnlineUpdater.cpp" line="348"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
         <translation>새 버전의 Sandboxie-Plus가 있는지 확인하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="344"/>
+        <location filename="OnlineUpdater.cpp" line="349"/>
         <source>Don&apos;t show this message again.</source>
         <translation>이 메시지를 다시 표시하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="399"/>
+        <location filename="OnlineUpdater.cpp" line="404"/>
         <source>Checking for updates...</source>
         <translation>업데이트를 확인하는 중...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="406"/>
+        <location filename="OnlineUpdater.cpp" line="411"/>
         <source>server not reachable</source>
         <translation>서버에 연결할 수 없음</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="407"/>
-        <location filename="OnlineUpdater.cpp" line="409"/>
+        <location filename="OnlineUpdater.cpp" line="412"/>
+        <location filename="OnlineUpdater.cpp" line="414"/>
         <source>Failed to check for updates, error: %1</source>
         <translation>업데이트를 확인하지 못했습니다. 오류: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="566"/>
+        <location filename="OnlineUpdater.cpp" line="571"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
         <translation>&lt;p&gt;설치 프로그램을 다운로드하시겠습니까?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="568"/>
+        <location filename="OnlineUpdater.cpp" line="573"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
         <translation>&lt;p&gt;업데이트를 다운로드하시겠습니까?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="570"/>
+        <location filename="OnlineUpdater.cpp" line="575"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;update page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;a href=&quot;%1&quot;&gt;업데이트 페이지&lt;/a&gt;로 이동하시겠습니까??&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="578"/>
+        <location filename="OnlineUpdater.cpp" line="583"/>
         <source>Don&apos;t show this update anymore.</source>
         <translation>이 업데이트를 더 이상 표시하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="700"/>
+        <location filename="OnlineUpdater.cpp" line="705"/>
         <source>Downloading updates...</source>
         <translation>업데이트 다운로드 중...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="726"/>
+        <location filename="OnlineUpdater.cpp" line="731"/>
         <source>invalid parameter</source>
         <translation>잘못된 매개변수</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="727"/>
+        <location filename="OnlineUpdater.cpp" line="732"/>
         <source>failed to download updated information</source>
         <oldsource>failed to download update informations</oldsource>
         <translation>업데이트 정보를 다운로드하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="728"/>
+        <location filename="OnlineUpdater.cpp" line="733"/>
         <source>failed to load updated json file</source>
         <oldsource>failed to load update json file</oldsource>
         <translation>업데이트 json 파일을 불러오지 못했습니다</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="729"/>
+        <location filename="OnlineUpdater.cpp" line="734"/>
         <source>failed to download a particular file</source>
         <translation>특정 파일을 다운로드하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="730"/>
+        <location filename="OnlineUpdater.cpp" line="735"/>
         <source>failed to scan existing installation</source>
         <translation>기존 설치를 검색하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="731"/>
+        <location filename="OnlineUpdater.cpp" line="736"/>
         <source>updated signature is invalid !!!</source>
         <oldsource>update signature is invalid !!!</oldsource>
         <translation>업데이트 서명이 잘못되었습니다 !!!</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="732"/>
+        <location filename="OnlineUpdater.cpp" line="737"/>
         <source>downloaded file is corrupted</source>
         <translation>다운로드한 파일이 손상되었습니다</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="733"/>
+        <location filename="OnlineUpdater.cpp" line="738"/>
         <source>internal error</source>
         <translation>내부 오류</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="734"/>
+        <location filename="OnlineUpdater.cpp" line="739"/>
         <source>unknown error</source>
         <translation>알 수 없는 오류</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="758"/>
+        <location filename="OnlineUpdater.cpp" line="763"/>
         <source>Failed to download updates from server, error %1</source>
         <translation>서버에서 업데이트를 다운로드하지 못했습니다, 오류 %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="780"/>
+        <location filename="OnlineUpdater.cpp" line="785"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Sandboxie-Plus에 대한 업데이트가 다운로드되었습니다.&lt;/p&gt;&lt;p&gt;이 업데이트를 적용하시겠습니까? 샌드박스로 실행 중인 프로그램이 있으면 프로그램이 종료됩니다.&lt;/p&gt;</translation>
     </message>
@@ -1370,7 +1370,7 @@ Do you still want to update?</source>
         <translation type="vanished">파일 다운로드 실패 위치: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="882"/>
+        <location filename="OnlineUpdater.cpp" line="887"/>
         <source>Downloading installer...</source>
         <translation>설치 프로그램을 다운로드하는 중...</translation>
     </message>
@@ -1379,17 +1379,17 @@ Do you still want to update?</source>
         <translation type="vanished">설치 관리자를 다운로드하지 못했습니다: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="925"/>
+        <location filename="OnlineUpdater.cpp" line="930"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;새 Sandboxie-Plus 설치 관리자가 다음 위치에 다운로드되었습니다:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;설치를 시작하시겠습니까? 샌드박스로 실행 중인 프로그램이 있으면 종료됩니다.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="990"/>
+        <location filename="OnlineUpdater.cpp" line="995"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt; &lt;a href=&quot;%1&quot;&gt;정보 페이지로 이동하시겠습니까&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="998"/>
+        <location filename="OnlineUpdater.cpp" line="1003"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>앞으로 이 공지사항을 표시하지 않습니다.</translation>
     </message>
@@ -1398,7 +1398,7 @@ Do you still want to update?</source>
         <translation type="vanished">&lt;p&gt;사용할 수 있는 새로운 버전의 Sandboxie-Plus가 있습니다.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;새 버전:&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="560"/>
+        <location filename="OnlineUpdater.cpp" line="565"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;New version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;사용할 수 있는 새로운 버전의 Sandboxie-Plus가 있습니다.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;새 버전:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
@@ -1415,7 +1415,7 @@ Do you still want to update?</source>
         <translation type="vanished">이 메시지를 더 이상 표시하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="434"/>
+        <location filename="OnlineUpdater.cpp" line="439"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
@@ -2472,9 +2472,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Sandboxie-Plus 알림</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="162"/>
         <source>PID %1</source>
-        <translation>PID %1</translation>
+        <translation type="vanished">PID %1</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="187"/>
@@ -2638,23 +2637,23 @@ Full path: %4</source>
 <context>
     <name>CRunPage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="589"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="590"/>
         <source>Troubleshooting ...</source>
         <translation>문제 해결...</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="612"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="613"/>
         <source>This troubleshooting procedure could not be initialized. You can click on next to submit an issue report.</source>
         <translation>이 문제 해결 절차를 초기화할 수 없습니다. 다음을 클릭하여 이슈 보고서를 제출할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="724"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="725"/>
         <source>Something failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</source>
         <oldsource>Somethign failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</oldsource>
         <translation>내부적으로 일부 오류가 발생했습니다. 이 문제 해결 절차를 계속할 수 없습니다. 다음을 클릭하여 이슈 보고서를 제출할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="725"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="726"/>
         <source>
 
 Error: </source>
@@ -5853,17 +5852,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
 <context>
     <name>CSubmitPage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="809"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="810"/>
         <source>Submit Issue Report</source>
         <translation>문제 보고서 제출</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="823"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="824"/>
         <source>Detailed issue description</source>
         <translation>상세 문제 설명</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="827"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="828"/>
         <source>Attach Sandboxie.ini</source>
         <translation>Sandboxie.ini 첨부</translation>
     </message>
@@ -5873,17 +5872,17 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation type="vanished">샌드박스 호환성은 구성에 따라 달라지므로 sandboxie.ini를 첨부하면 문제를 찾는 데 많은 도움이 됩니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="828"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="829"/>
         <source>Sandboxing compatibility is reliant on the configuration, hence attaching the Sandboxie.ini file helps a lot with finding the issue.</source>
         <translation>샌드박스 호환성은 구성에 따라 다르므로 Sandboxie.ini 파일을 첨부하면 문제를 찾는 데 많은 도움이 됩니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="831"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="832"/>
         <source>Attach Logs</source>
         <translation>로그 첨부</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="833"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="834"/>
         <source>Selecting partially checked state sends only the message log, but not the trace log.
 Before sending, you can review the logs in the main window.</source>
         <oldsource>Select partially checked state to sends only message log but no trace log.
@@ -5892,70 +5891,70 @@ Before sending you can review the logs in the main window.</oldsource>
 보내기 전에 기본 창에서 로그를 검토할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="836"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="837"/>
         <source>Attach Crash Dumps</source>
         <translation>충돌 덤프 연결</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="837"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="838"/>
         <source>An application crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</source>
         <oldsource>An applicatin crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</oldsource>
         <translation>문제 해결 절차 중에 응용 프로그램이 충돌한 경우 충돌 덤프를 첨부하면 디버깅에 도움이 될 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="841"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="842"/>
         <source>Email address</source>
         <translation>이메일주소</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="842"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="843"/>
         <source>You have the option to provide an email address to receive a notification once a solution for your issue has been identified.</source>
         <translation>문제에 대한 해결책이 확인되면 알림을 받을 이메일 주소를 제공할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="850"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="851"/>
         <source>We apologize for the inconvenience you are currently facing with Sandboxie-Plus. </source>
         <translation>현재 Sandboxie-Plus로 인해 불편을 끼쳐드린 점 사과드립니다. </translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="857"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="858"/>
         <source>Unfortunately, the automated troubleshooting procedure failed. </source>
         <translation>안타깝게도 자동화된 문제 해결 절차가 실패했습니다. </translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="863"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="864"/>
         <source>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described. </source>
         <translation>유감스럽게도 귀하가 설명한 특정 문제에 대해 사용할 수 있는 자동화된 문제 해결 절차가 없습니다. </translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="868"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="869"/>
         <source>If you wish to submit an issue report, please review the report below and click &apos;Finish&apos;.</source>
         <translation>문제 보고서를 제출하려면 아래 보고서를 검토하고 &apos;완료&apos;를 클릭하십시오.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="967"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="968"/>
         <source>Compressing Logs</source>
         <translation>로그 압축</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="999"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1000"/>
         <source>Compressing Dumps</source>
         <translation>덤프 압축</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1028"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1035"/>
         <source>Submitting issue report...</source>
         <translation>문제 보고서 제출 중...</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1039"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1046"/>
         <source>Failed to submit issue report, error %1
 Try submitting without the log attached.</source>
         <translation>문제 보고서를 제출하지 못했습니다. 오류 %1
 로그를 첨부하지 않고 제출해 보십시오.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1043"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1050"/>
         <source>Your issue report has been successfully submitted, thank you.</source>
         <oldsource>Your issue report have been successfully submitted, thank you.</oldsource>
         <translation>문제 보고서가 성공적으로 제출되었습니다. 감사합니다.</translation>

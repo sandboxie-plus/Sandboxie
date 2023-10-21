@@ -210,22 +210,22 @@
 <context>
     <name>CBeginPage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="228"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="229"/>
         <source>Troubleshooting Wizard</source>
         <translation>Мастер устранения неполадок</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="236"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="237"/>
         <source>Welcome to the Troubleshooting Wizard for Sandboxie-Plus. This interactive assistant is designed to help you in resolving sandboxing issues.</source>
         <translation>Добро пожаловать в Мастер устранения неполадок для Sandboxie-Plus. Этот интерактивный помощник призван помочь вам в решении проблем с песочницей.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="279"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="280"/>
         <source>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerful. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retrieve the latest troubleshooting instructions.</source>
         <translation>С действующим &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификатом поддержки&lt;/a&gt; мастер стал бы еще более мощным. Он может получить доступ к &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;онлайн-базе данных решений&lt;/a&gt;, чтобы получить последние инструкции по устранению неполадок.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="317"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="318"/>
         <source>Another issue</source>
         <translation>Другая проблема</translation>
     </message>
@@ -233,37 +233,37 @@
 <context>
     <name>CBoxAssistant</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="29"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="30"/>
         <source>Troubleshooting Wizard</source>
         <translation>Мастер устранения неполадок</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="35"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="36"/>
         <source>Toggle Debugger</source>
         <translation>Переключить отладчик</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="101"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="102"/>
         <source>To debug troubleshooting scripts you need the V4 Script Debugger add-on, do you want to download and install it?</source>
         <translation>Для отладки сценариев устранения неполадок вам понадобится надстройка V4 Script Debugger. Хотите загрузить и установить ее?</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="105"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="106"/>
         <source>Debugger Enabled</source>
         <translation>Отладчик включен</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="160"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="161"/>
         <source>V4ScriptDebuggerBackend could not be instantiated, probably V4ScriptDebugger.dll and or its dependencies are missing, script debugger could not be opened.</source>
         <translation>Не удалось создать экземпляр V4ScriptDebuggerBackend, возможно, V4ScriptDebugger.dll и/или его зависимости отсутствуют, не удалось открыть отладчик сценариев.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="210"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="211"/>
         <source>A troubleshooting procedure is in progress, canceling the wizard will abort it, this may leave the sandbox in an inconsistent state.</source>
         <translation>Выполняется процедура устранения неполадок, отмена мастера прервет ее, это может оставить песочницу в несогласованном состоянии.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="211"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="212"/>
         <source>Don&apos;t ask in future</source>
         <translation>Не спрашивать в будущем</translation>
     </message>
@@ -748,12 +748,12 @@ Error: %1</source>
 <context>
     <name>CCompletePage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1062"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1069"/>
         <source>Troubleshooting Completed</source>
         <translation>Устранение неполадок завершено</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1072"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1079"/>
         <source>Thank you for using the Troubleshooting Wizard for Sandboxie-Plus. We apologize for any inconvenience you experienced during the process. If you have any additional questions or need further assistance, please don&apos;t hesitate to reach out. We&apos;re here to help. Thank you for your understanding and cooperation. 
 
 You can click Finish to close this wizard.</source>
@@ -954,7 +954,7 @@ You can use %USER% to save each users sandbox to an own folder.</source>
 <context>
     <name>CGetFileJob</name>
     <message>
-        <location filename="OnlineUpdater.cpp" line="192"/>
+        <location filename="OnlineUpdater.cpp" line="197"/>
         <source>Failed to download file from: %1</source>
         <translation>Не удалось загрузить файл из: %1</translation>
     </message>
@@ -962,17 +962,17 @@ You can use %USER% to save each users sandbox to an own folder.</source>
 <context>
     <name>CGroupPage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="330"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="331"/>
         <source>Select issue from group</source>
         <translation>Выбрать проблему из группы</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="339"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="340"/>
         <source>Please specify the exact issue:</source>
         <translation>Укажите точную проблему:</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="392"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="393"/>
         <source>Another issue</source>
         <translation>Другая проблема</translation>
     </message>
@@ -1013,17 +1013,17 @@ You can use %USER% to save each users sandbox to an own folder.</source>
 <context>
     <name>CListPage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="453"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="454"/>
         <source>Select issue from full list</source>
         <translation>Выберите проблему из полного списка</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="467"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="468"/>
         <source>Search filter</source>
         <translation>Поисковый фильтр</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="523"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="524"/>
         <source>None of the above</source>
         <translation>Ни один из вышеперечисленных</translation>
     </message>
@@ -1099,138 +1099,138 @@ You can use %USER% to save each users sandbox to an own folder.</source>
 <context>
     <name>COnlineUpdater</name>
     <message>
-        <location filename="OnlineUpdater.cpp" line="343"/>
+        <location filename="OnlineUpdater.cpp" line="348"/>
         <source>Do you want to check if there is a new version of Sandboxie-Plus?</source>
         <translation>Вы хотите проверить, есть ли новая версия Sandboxie-Plus?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="344"/>
+        <location filename="OnlineUpdater.cpp" line="349"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Больше не показывать это сообщение.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="399"/>
+        <location filename="OnlineUpdater.cpp" line="404"/>
         <source>Checking for updates...</source>
         <translation>Проверка обновлений...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="406"/>
+        <location filename="OnlineUpdater.cpp" line="411"/>
         <source>server not reachable</source>
         <translation>сервер недоступен</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="407"/>
-        <location filename="OnlineUpdater.cpp" line="409"/>
+        <location filename="OnlineUpdater.cpp" line="412"/>
+        <location filename="OnlineUpdater.cpp" line="414"/>
         <source>Failed to check for updates, error: %1</source>
         <translation>Не удалось проверить обновления, ошибка: %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="566"/>
+        <location filename="OnlineUpdater.cpp" line="571"/>
         <source>&lt;p&gt;Do you want to download the installer?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Вы хотите загрузить установщик?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="568"/>
+        <location filename="OnlineUpdater.cpp" line="573"/>
         <source>&lt;p&gt;Do you want to download the updates?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Вы хотите загрузить обновления?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="570"/>
+        <location filename="OnlineUpdater.cpp" line="575"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;update page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Вы хотите перейти на &lt;a href=&quot;%1&quot;&gt;страницу обновления&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="578"/>
+        <location filename="OnlineUpdater.cpp" line="583"/>
         <source>Don&apos;t show this update anymore.</source>
         <translation>Больше не показывать это обновление.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="700"/>
+        <location filename="OnlineUpdater.cpp" line="705"/>
         <source>Downloading updates...</source>
         <translation>Загрузка обновлений...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="726"/>
+        <location filename="OnlineUpdater.cpp" line="731"/>
         <source>invalid parameter</source>
         <translation>неверный параметр</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="727"/>
+        <location filename="OnlineUpdater.cpp" line="732"/>
         <source>failed to download updated information</source>
         <translation>не удалось загрузить обновленную информацию</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="728"/>
+        <location filename="OnlineUpdater.cpp" line="733"/>
         <source>failed to load updated json file</source>
         <translation>не удалось загрузить обновленный json файл</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="729"/>
+        <location filename="OnlineUpdater.cpp" line="734"/>
         <source>failed to download a particular file</source>
         <translation>не удалось загрузить определенный файл</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="730"/>
+        <location filename="OnlineUpdater.cpp" line="735"/>
         <source>failed to scan existing installation</source>
         <translation>не удалось просканировать существующую установку</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="731"/>
+        <location filename="OnlineUpdater.cpp" line="736"/>
         <source>updated signature is invalid !!!</source>
         <translation>обновленная подпись недействительна !!!</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="732"/>
+        <location filename="OnlineUpdater.cpp" line="737"/>
         <source>downloaded file is corrupted</source>
         <translation>загруженный файл поврежден</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="733"/>
+        <location filename="OnlineUpdater.cpp" line="738"/>
         <source>internal error</source>
         <translation>внутренняя ошибка</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="734"/>
+        <location filename="OnlineUpdater.cpp" line="739"/>
         <source>unknown error</source>
         <translation>неизвестная ошибка</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="758"/>
+        <location filename="OnlineUpdater.cpp" line="763"/>
         <source>Failed to download updates from server, error %1</source>
         <translation>Не удалось загрузить обновления с сервера, ошибка %1</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="780"/>
+        <location filename="OnlineUpdater.cpp" line="785"/>
         <source>&lt;p&gt;Updates for Sandboxie-Plus have been downloaded.&lt;/p&gt;&lt;p&gt;Do you want to apply these updates? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Обновления для Sandboxie-Plus были загружены.&lt;/p&gt;&lt;p&gt;Применить эти обновления? Если какие-либо программы работают в песочнице, они будут завершены.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="882"/>
+        <location filename="OnlineUpdater.cpp" line="887"/>
         <source>Downloading installer...</source>
         <translation>Загрузка установщика...</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="925"/>
+        <location filename="OnlineUpdater.cpp" line="930"/>
         <source>&lt;p&gt;A new Sandboxie-Plus installer has been downloaded to the following location:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Do you want to begin the installation? If any programs are running sandboxed, they will be terminated.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Новый установщик Sandboxie-Plus загружен в следующую папку:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;%2&quot;&gt;%1&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Вы хотите начать установку? Если какие-либо программы работают в песочнице, они будут завершены.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="990"/>
+        <location filename="OnlineUpdater.cpp" line="995"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;info page&lt;/a&gt;?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Вы хотите перейти на &lt;a href=&quot;%1&quot;&gt;страницу с информацией&lt;/a&gt;?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="998"/>
+        <location filename="OnlineUpdater.cpp" line="1003"/>
         <source>Don&apos;t show this announcement in the future.</source>
         <translation>Не показывать это объявление в будущем.</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="560"/>
+        <location filename="OnlineUpdater.cpp" line="565"/>
         <source>&lt;p&gt;There is a new version of Sandboxie-Plus available.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;New version:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;Доступна новая версия Sandboxie-Plus.&lt;br /&gt;&lt;font color=&apos;red&apos;&gt;&lt;b&gt;Новая версия:&lt;/b&gt;&lt;/font&gt; &lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="317"/>
+        <location filename="OnlineUpdater.cpp" line="322"/>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
@@ -1239,7 +1239,7 @@ Do you still want to update?</source>
 Вы все еще хотите обновить?</translation>
     </message>
     <message>
-        <location filename="OnlineUpdater.cpp" line="434"/>
+        <location filename="OnlineUpdater.cpp" line="439"/>
         <source>No new updates found, your Sandboxie-Plus is up-to-date.
 
 Note: The update check is often behind the latest GitHub release to ensure that only tested updates are offered.</source>
@@ -2237,9 +2237,8 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>Уведомления Sandboxie-Plus</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="162"/>
         <source>PID %1</source>
-        <translation>Ид процесса %1</translation>
+        <translation type="vanished">Ид процесса %1</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="187"/>
@@ -2402,22 +2401,22 @@ Full path: %4</source>
 <context>
     <name>CRunPage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="589"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="590"/>
         <source>Troubleshooting ...</source>
         <translation>Поиск неисправностей ...</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="612"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="613"/>
         <source>This troubleshooting procedure could not be initialized. You can click on next to submit an issue report.</source>
         <translation>Эта процедура устранения неполадок не может быть инициализирована. Вы можете нажать &quot;Далее&quot;, чтобы отправить отчет о проблеме.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="724"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="725"/>
         <source>Something failed internally this troubleshooting procedure can not continue. You can click on next to submit an issue report.</source>
         <translation>Произошла внутренняя ошибка. Эта процедура устранения неполадок не может быть продолжена. Вы можете нажать &quot;Далее&quot;, чтобы отправить отчет о проблеме.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="725"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="726"/>
         <source>
 
 Error: </source>
@@ -5434,101 +5433,101 @@ This file is part of Sandboxie and all change done to it will be reverted next t
 <context>
     <name>CSubmitPage</name>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="809"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="810"/>
         <source>Submit Issue Report</source>
         <translation>Отправить отчет о проблеме</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="823"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="824"/>
         <source>Detailed issue description</source>
         <translation>Подробное описание проблемы</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="827"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="828"/>
         <source>Attach Sandboxie.ini</source>
         <translation>Прикрепить Sandboxie.ini</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="828"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="829"/>
         <source>Sandboxing compatibility is reliant on the configuration, hence attaching the Sandboxie.ini file helps a lot with finding the issue.</source>
         <translation>Совместимость с песочницей зависит от конфигурации, поэтому прикрепление файла Sandboxie.ini очень помогает в поиске проблемы.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="831"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="832"/>
         <source>Attach Logs</source>
         <translation>Прикрепите логи</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="833"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="834"/>
         <source>Selecting partially checked state sends only the message log, but not the trace log.
 Before sending, you can review the logs in the main window.</source>
         <translation>При выборе частично проверенного состояния отправляется только журнал сообщений, но не журнал трассировки.
 Перед отправкой вы можете просмотреть логи в главном окне.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="836"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="837"/>
         <source>Attach Crash Dumps</source>
         <translation>Прикрепть аварийные дампы</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="837"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="838"/>
         <source>An application crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</source>
         <translation>Произошел сбой приложения во время процедуры устранения неполадок, прикрепление аварийного дампа может помочь в отладке.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="841"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="842"/>
         <source>Email address</source>
         <translation>Адрес электронной почты</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="842"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="843"/>
         <source>You have the option to provide an email address to receive a notification once a solution for your issue has been identified.</source>
         <translation>У вас есть возможность указать адрес электронной почты для получения уведомления, как только решение вашей проблемы будет найдено.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="850"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="851"/>
         <source>We apologize for the inconvenience you are currently facing with Sandboxie-Plus. </source>
         <translation>Приносим извинения за неудобства, с которыми вы сталкиваетесь в настоящее время при работе с Sandboxie-Plus. </translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="857"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="858"/>
         <source>Unfortunately, the automated troubleshooting procedure failed. </source>
         <translation>К сожалению, автоматическая процедура устранения неполадок не удалась. </translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="863"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="864"/>
         <source>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described. </source>
         <translation>К сожалению, для описанной вами конкретной проблемы не существует автоматизированной процедуры устранения неполадок. </translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="868"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="869"/>
         <source>If you wish to submit an issue report, please review the report below and click &apos;Finish&apos;.</source>
         <translation>Если вы хотите отправить отчет о проблеме, просмотрите отчет ниже и нажмите &apos;Готово&apos;.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="967"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="968"/>
         <source>Compressing Logs</source>
         <translation>Сжатие логов</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="999"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1000"/>
         <source>Compressing Dumps</source>
         <translation>Сжатие дампов</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1028"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1035"/>
         <source>Submitting issue report...</source>
         <translation>Отправка отчета о проблеме...</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1039"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1046"/>
         <source>Failed to submit issue report, error %1
 Try submitting without the log attached.</source>
         <translation>Не удалось отправить отчет о проблеме, ошибка %1
 Попробуйте отправить без приложенного лога.</translation>
     </message>
     <message>
-        <location filename="Wizards/BoxAssistant.cpp" line="1043"/>
+        <location filename="Wizards/BoxAssistant.cpp" line="1050"/>
         <source>Your issue report has been successfully submitted, thank you.</source>
         <translation>Ваш отчет о проблеме был успешно отправлен, спасибо.</translation>
     </message>

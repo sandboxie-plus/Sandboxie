@@ -95,22 +95,31 @@ bool CSupportDialog::CheckSupport(bool bOnRun)
 	{
 		// Note: the old sandboxie showed a message after 30 days every 12 hours for 5 seconds
 		
-		int Interval;
-        if (Days > 730) Interval = 5 * 24;
-        else if (Days > 365) Interval = 10 * 24;
-        else if (Days > 180) Interval = 20 * 24;
-        else Interval = 30 * 24;
+		int Interval = 30 * 24; // in hours
 
-		//USHORT ReminderRevision = 0;
-		//theAPI->GetSecureParam("ReminderRevision", &ReminderRevision, sizeof(ReminderRevision));
+		USHORT ReminderShedule[2 * 11] = {
+		//  days,	itnerval,	
+			730,	1 * 24,
+			365,	5 * 24,
+			182,	10 * 24,
+			30,		30 * 24,
+			0
+		};
+		USHORT CurReminderRevision = 1;
 
-		USHORT ReminderShedule[2*11];
-		if (theAPI->GetSecureParam("ReminderShedule", &ReminderShedule, sizeof(ReminderShedule))) {
-			for (USHORT* Cur = ReminderShedule; (ULONG_PTR)Cur < (ULONG_PTR)ReminderShedule + sizeof(ReminderShedule) && *Cur != 0; Cur += 2) {
-				if (Days > Cur[0]) {
-					if (Cur[1] < Interval) Interval = Cur[1];
-					break;
-				}
+		USHORT ReminderRevision = 0;
+		theAPI->GetSecureParam("ReminderRevision", &ReminderRevision, sizeof(ReminderRevision));
+		if (ReminderRevision < CurReminderRevision) {
+			theAPI->SetSecureParam("ReminderShedule", &ReminderShedule, sizeof(ReminderShedule));
+			theAPI->SetSecureParam("ReminderRevision", &CurReminderRevision, sizeof(CurReminderRevision));
+		}
+		else if (ReminderRevision > CurReminderRevision)
+			theAPI->GetSecureParam("ReminderShedule", &ReminderShedule, sizeof(ReminderShedule));
+
+		for (USHORT* Cur = ReminderShedule; (ULONG_PTR)Cur < (ULONG_PTR)ReminderShedule + sizeof(ReminderShedule) && *Cur != 0; Cur += 2) {
+			if (Days > Cur[0]) {
+				if (Cur[1] < Interval) Interval = Cur[1];
+				break;
 			}
 		}
 

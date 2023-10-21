@@ -840,7 +840,7 @@ _FX NTSTATUS KphValidateCertificate()
             expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval((CSHORT)(level ? _wtoi(level) : 7), 0, 0); // x days, default 7
             Verify_CertInfo.level = eCertAdvanced;
         }
-        else if (!level || _wcsicmp(level, L"STANDARD") == 0) // not used, default does not have explicite level
+        else if (!level || _wcsicmp(level, L"STANDARD") == 0) // not used, default does not have explicit level
             Verify_CertInfo.level = eCertStandard;
         else if (_wcsicmp(level, L"ADVANCED") == 0) 
             Verify_CertInfo.level = eCertAdvanced;

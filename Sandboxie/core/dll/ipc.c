@@ -759,7 +759,7 @@ _FX NTSTATUS Ipc_GetName(
         //    //
         //    // Since in this mode we don't call Ipc_CreateObjects we don't have a boxed namespace
         //    // and are using existing namespaces only with a name suffix
-        //    // hence we can't use Global without system provileges, so we strip it
+        //    // hence we can't use Global without system privileges, so we strip it
         //    //
         //
         //    if (_wcsnicmp(objname_buf, L"Global\\", 7) == 0) {

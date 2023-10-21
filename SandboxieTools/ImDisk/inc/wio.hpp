@@ -111,7 +111,7 @@ ConnectTCP(LPCWSTR wszServer, LPCWSTR wszService)
   return ConnectTCP(wszServer, usPort);
 }
 
-/// Enhanced OVERLAPPED stucture with encapsulated API functions.
+/// Enhanced OVERLAPPED structure with encapsulated API functions.
 struct WOverlapped : public OVERLAPPED
 {
   BOOL Read(HANDLE hFile, LPVOID lpBuf, DWORD dwLength, DWORDLONG dwStart = 0)

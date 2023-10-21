@@ -156,7 +156,7 @@ DWORD WINAPI CImDiskIO_Thread(LPVOID lpThreadParameter)
 {
 	//
 	// !!! NOTE !!! After this thread was created the rest of the code does not touch 
-	// the m members which we use here so we dont bother with explicite synchronization
+	// the m members which we use here so we don't bother with explicit synchronization
 	// hence this thread is responsible freeing m
 	//
 
@@ -234,7 +234,7 @@ DWORD WINAPI CImDiskIO_Thread(LPVOID lpThreadParameter)
                     if (FormatVolume(Drive.c_str(), fs, label)) {
 
                         if (!IsVolumeUnRecognized(Device)) // check success
-                            DbgPrint(L"Successfully Formated: %s\n", m->Mount.c_str());
+                            DbgPrint(L"Successfully Formatted: %s\n", m->Mount.c_str());
                         else {
                             DbgPrint(L"Failed to Format: %s\n", m->Mount.c_str());
                 //            Sleep(1000);
@@ -324,7 +324,7 @@ int CImDiskIO::DoComm()
 	if (!m->Mount.empty()) {
 
         //
-        // clear format directive if formating is not allowed for this disk e.g. non empty image file
+        // clear format directive if formatting is not allowed for this disk e.g. non empty image file
         // to force format you can use imdisk: params="-p \"/fs:ntfs /q /y\""
         //
 

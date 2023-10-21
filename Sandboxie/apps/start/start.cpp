@@ -1680,7 +1680,7 @@ ULONG RestartInSandbox(void)
     // build command line.  note that we pass the current directory as an
     // environment variable which will be queried by Program_Start.  this
     // is because SbieSvc ProcessServer (used by SbieDll_RunSandboxed)
-    // does not necssarily share our dos device map, and will not be able
+    // does not necessarily share our dos device map, and will not be able
     // to change to a drive letter that isn't in its dos device map
     //
 

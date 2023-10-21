@@ -135,7 +135,7 @@ typedef struct tagIMBOX_QUERY_RPL    IMBOX_QUERY_RPL;
 
 
 //---------------------------------------------------------------------------
-// Mount Manager - Update box image proeprties
+// Mount Manager - Update box image properties
 //---------------------------------------------------------------------------
 
 

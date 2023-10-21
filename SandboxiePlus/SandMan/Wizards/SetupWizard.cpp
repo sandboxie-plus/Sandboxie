@@ -344,7 +344,7 @@ void CCertificatePage::OnCertData(const QByteArray& Certificate, const QVariantM
         wizard()->next();
     }
     else {
-        QString Message = tr("Failed to retrive the certificate.");
+        QString Message = tr("Failed to retrieve the certificate.");
         Message += tr("\nError: %1").arg(Params["error"].toString());
         QMessageBox::critical(this, "Sandboxie-Plus", Message);
     }
@@ -360,7 +360,7 @@ bool CCertificatePage::validatePage()
         SB_PROGRESS Status = theGUI->m_pUpdater->GetSupportCert(Serial, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
 	    if (Status.GetStatus() == OP_ASYNC) {
 		    theGUI->AddAsyncOp(Status.GetValue());
-            Status.GetValue()->ShowMessage(tr("Retreiving certificate..."));
+            Status.GetValue()->ShowMessage(tr("Retrieving certificate..."));
 	    }
         return false;
     }

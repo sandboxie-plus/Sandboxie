@@ -203,14 +203,14 @@ typedef struct _REPARSE_DATA_BUFFER {
 #define IO_REPARSE_TAG_IFSTEST_CONGRUENT        (0x00000009L)
 
 //
-//  Tag allocated to Moonwalk Univeral for HSM
+//  Tag allocated to Moonwalk Universal for HSM
 //  GUID: 257ABE42-5A28-4C8C-AC46-8FEA5619F18F
 //
 
 #define IO_REPARSE_TAG_MOONWALK_HSM             (0x0000000AL)
 
 //
-//  Tag allocated to Tsinghua Univeristy for Research purposes
+//  Tag allocated to Tsinghua University for Research purposes
 //  No released products should use this tag
 //  GUID: b86dff51-a31e-4bac-b3cf-e8cfe75c9fc2
 //

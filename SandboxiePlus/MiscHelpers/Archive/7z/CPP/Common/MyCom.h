@@ -204,7 +204,7 @@ protected:
 
   #ifdef _WIN32
   #if defined(__GNUC__) || defined(__clang__)
-  // virtual ~CMyUnknownImp() {} // to disable GCC/CLANG varnings
+  // virtual ~CMyUnknownImp() {} // to disable GCC/CLANG warnings
   #endif
   #endif
 };

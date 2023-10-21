@@ -215,9 +215,9 @@ twofish256_encrypt:
 	push	R1Q
 	push	rsi
 	push	rdi
-	; r8 contains the crypto tfm adress
-	; rdx contains the output adress
-	; rcx contains the input adress
+	; r8 contains the crypto tfm address
+	; rdx contains the output address
+	; rcx contains the input address
 	mov	rsi, rdx
 
 	mov	R1Q, [rcx]
@@ -270,9 +270,9 @@ twofish256_decrypt:
 	push	R1Q
 	push	rsi
 	push	rdi
-	; r8 contains the crypto tfm adress
-	; rdx contains the output adress
-	; rcx contains the input adress
+	; r8 contains the crypto tfm address
+	; rdx contains the output address
+	; rcx contains the input address
 	mov	rsi, rdx
 
 	mov	R1Q, [rcx]

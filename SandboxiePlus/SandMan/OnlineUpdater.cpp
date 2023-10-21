@@ -295,7 +295,7 @@ void COnlineUpdater::LoadState()
 QString COnlineUpdater::GetOnNewUpdateOption() const
 {
 	if (!g_CertInfo.active || g_CertInfo.expired)
-		return "ignore"; // this service requries a valid vcertificate
+		return "ignore"; // this service requires a valid certificate
 	return theConf->GetString("Options/OnNewUpdate", "ignore");
 }
 
@@ -310,9 +310,9 @@ QString COnlineUpdater::GetOnNewReleaseOption() const
 bool COnlineUpdater::ShowCertWarningIfNeeded()
 {
 	//
-	// This function checks if this instalation uses a expired personal
+	// This function checks if this installation uses a expired personal
 	// certificate which is active for the current build
-	// in which case it it shows a warning that updating to the latest build 
+	// in which case it shows a warning that updating to the latest build 
 	// will deactivate the certificate
 	//
 

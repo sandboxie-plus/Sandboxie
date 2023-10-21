@@ -22,7 +22,7 @@
 
 #pragma once
 
-#define _HAS_EXCEPTIONS 0		// we dont have exception support enabled
+#define _HAS_EXCEPTIONS 0		// we don't have exception support enabled
 
 #include <ntstatus.h>
 #define WIN32_NO_STATUS

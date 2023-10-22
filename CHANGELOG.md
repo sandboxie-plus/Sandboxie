@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Note: press the panic button hot key 3 times with less then 1 second between clicks to Terminate All with NO exceptions
 - added Customizable global hotkey that toggles the state of "pause forced programs" [#2441](https://github.com/sandboxie-plus/Sandboxie/issues/2441)
 - added Warn or prevent broad "forced folder" settings [#650](https://github.com/sandboxie-plus/Sandboxie/issues/650)
+- added CheckExpectFile function to Plus [#768](https://github.com/sandboxie-plus/Sandboxie/issues/768)
 
 ### Changed
 - improved suspend process ahndling [#3375](https://github.com/sandboxie-plus/Sandboxie/issues/3375)

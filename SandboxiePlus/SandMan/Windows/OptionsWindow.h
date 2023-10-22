@@ -89,12 +89,14 @@ private slots:
 	void OnDelForce();
 	void OnShowForceTmpl()			{ LoadForcedTmpl(true); }
 	void OnForcedChanged();
+	void OnForcedChanged(QTreeWidgetItem *pItem, int);
 
 	void OnBreakoutProg();
 	void OnBreakoutBrowse();
 	void OnBreakoutDir();
 	void OnDelBreakout();
 	void OnShowBreakoutTmpl()		{ LoadBreakoutTmpl(true); }
+	void OnBreakoutChanged(QTreeWidgetItem *pItem, int);
 
 	void OnAddLingering();
 	void OnDelStopProg();
@@ -390,6 +392,7 @@ protected:
 	void LoadBreakoutTmpl(bool bUpdate = false);
 	void AddBreakoutEntry(const QString& Name, int type, bool disabled = false, const QString& Template = QString());
 	void SaveForced();
+	bool CheckForcedItem(const QString& Value, int type);
 
 
 	void LoadStop();

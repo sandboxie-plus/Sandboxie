@@ -302,7 +302,7 @@ bool COptionsWindow::CheckForcedItem(const QString& Value, int type)
 			bDangerous = true; // sub path of C:\Windows
 	}
 
-	if (bDangerous && QMessageBox::warning(this, "Sandboxie-Plus", tr("The forcing the specified folder will most likely break windows, are you sure you want to proceed?")
+	if (bDangerous && QMessageBox::warning(this, "Sandboxie-Plus", tr("Forcing the specified folder will most likely break Windows, are you sure you want to proceed?")
 		, QDialogButtonBox::Yes, QDialogButtonBox::No) != QDialogButtonBox::Yes)
 		return false;
 	return true;

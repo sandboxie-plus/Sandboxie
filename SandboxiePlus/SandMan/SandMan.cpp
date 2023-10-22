@@ -2576,9 +2576,19 @@ void CSandMan::OnHotKey(size_t id)
 {
 	switch (id)
 	{
-	case HK_PANIC: 
-		theAPI->TerminateAll();
+	case HK_PANIC:
+	{
+		// terminate with no exceptions when clicked 3 times
+		static quint64 LastClickTick = 0;
+		static int LastClickCount = 0;
+		if (GetCurTick() - LastClickTick > 1000)
+			LastClickCount = 0;
+		LastClickCount++;
+		if(LastClickCount != 2) // skip second click as it may take more than a second
+			theAPI->TerminateAll(LastClickCount >= 3);
+		LastClickTick = GetCurTick();
 		break;
+	}
 
 	case HK_TOP:
 		if (this->isActiveWindow() && m_bOnTop)

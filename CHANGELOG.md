@@ -16,6 +16,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added "get_cert SBIEX-XXXXX-XXXXX-XXXXX-XXXXX" command to UpdUtil.exe allowing to get a cert by serial using command line
 - added mechanism to revoke leaked or refunded certificates
 - added new global hot key to bring sandman in fron as top most ALT+Break [#3320](https://github.com/sandboxie-plus/Sandboxie/issues/3320)
+- added Exclude specific boxes from 'Terminate all processes' [#3108](https://github.com/sandboxie-plus/Sandboxie/issues/3108)
+  - Note: press the panic button hot key 3 times with less then 1 second between clicks to Terminate All with NO exceptions
 
 ### Changed
 - improved suspend process ahndling [#3375](https://github.com/sandboxie-plus/Sandboxie/issues/3375)

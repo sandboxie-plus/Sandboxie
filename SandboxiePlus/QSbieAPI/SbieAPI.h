@@ -73,7 +73,7 @@ public:
 	virtual CSandBoxPtr		GetBoxByName(const QString &BoxName) const { return m_SandBoxes.value(BoxName.toLower()); }
 	virtual CBoxedProcessPtr GetProcessById(quint32 ProcessId) const;
 
-	virtual SB_STATUS		TerminateAll();
+	virtual SB_STATUS		TerminateAll(bool bNoExceptions = false);
 
 	virtual SB_STATUS		SetProcessExemption(quint32 process_id, quint32 action_id, bool NewState);
 	virtual bool			GetProcessExemption(quint32 process_id, quint32 action_id);

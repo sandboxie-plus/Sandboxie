@@ -11,6 +11,8 @@
 
 void COptionsWindow::CreateAdvanced()
 {
+	connect(ui.chkNoPanic, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
+
 	connect(ui.chkPreferExternalManifest, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkElevateCreateProcessFix, SIGNAL(clicked(bool)), this, SLOT(OnAdvancedChanged()));
 	connect(ui.chkNoWindowRename, SIGNAL(clicked(bool)), this, SLOT(OnNoWindowRename()));
@@ -115,6 +117,8 @@ void COptionsWindow::CreateAdvanced()
 
 void COptionsWindow::LoadAdvanced()
 {
+	ui.chkNoPanic->setChecked(m_pBox->GetBool("ExcludeFromTerminateAll", false));
+
 	ui.chkPreferExternalManifest->setChecked(m_pBox->GetBool("PreferExternalManifest", false));
 	ui.chkElevateCreateProcessFix->setChecked(m_pBox->GetBool("ApplyElevateCreateProcessFix", false));
 
@@ -309,6 +313,8 @@ void COptionsWindow::ShowTriggersTmpl(bool bUpdate)
 
 void COptionsWindow::SaveAdvanced()
 {
+	WriteAdvancedCheck(ui.chkNoPanic, "ExcludeFromTerminateAll", "y", "");
+
 	WriteAdvancedCheck(ui.chkPreferExternalManifest, "PreferExternalManifest", "y", "");
 	WriteAdvancedCheck(ui.chkElevateCreateProcessFix, "ApplyElevateCreateProcessFix", "y", "");
 

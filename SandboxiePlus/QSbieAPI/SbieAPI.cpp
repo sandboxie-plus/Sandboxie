@@ -1636,14 +1636,19 @@ SB_STATUS CSbieAPI::TerminateAll(const QString& BoxName)
 	return Status;
 }
 
-SB_STATUS CSbieAPI::TerminateAll()
+SB_STATUS CSbieAPI::TerminateAll(bool bNoExceptions)
 {
-	SB_STATUS Status = SB_OK;
+#ifdef _DEBUG
+	qDebug() << "TerminateAll" << bNoExceptions;
+#endif
+	bool bFailed = false;
 	foreach(const CSandBoxPtr& pBox, m_SandBoxes) {
+		if (!bNoExceptions && pBox->GetBool("ExcludeFromTerminateAll", false))
+			continue;
 		if (!pBox->TerminateAll())
-			Status = SB_ERR(SB_FailedKillAll);
+			bFailed = true;
 	}
-	return Status;
+	return bFailed ? SB_ERR(SB_FailedKillAll) : SB_OK;
 }
 
 SB_STATUS CSbieAPI::Terminate(quint32 ProcessId)

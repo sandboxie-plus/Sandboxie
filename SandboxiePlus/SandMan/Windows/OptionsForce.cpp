@@ -317,3 +317,7 @@ void COptionsWindow::OnForcedChanged(QTreeWidgetItem *pItem, int)
 	OnForcedChanged();
 }
 
+void COptionsWindow::OnBreakoutChanged(QTreeWidgetItem *pItem, int) 
+{
+	OnForcedChanged();
+}

@@ -485,8 +485,7 @@ Böylece gizli korumalı alan ortamında en üst düzeyde gizlilik ve veri korum
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="451"/>
         <source>To use encrypted boxes you need to install the ImDisk driver, do you want to download and install it?</source>
-        <oldsource>To use ancrypted boxes you need to install the ImDisk driver, do you want to download and install it?</oldsource>
-        <translation type="unfinished">Şifreli alanları kullanmak için ImDisk sürücüsünü yüklemeniz gerekir. Şimdi indirip yüklemek ister misiniz?</translation>
+        <translation>Şifreli alanları kullanmak için ImDisk sürücüsünü yüklemeniz gerekir. Şimdi indirip yüklemek ister misiniz?</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="353"/>
@@ -722,8 +721,7 @@ Lütfen doğru kullanıcı profili dizinine göz atın.</translation>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="347"/>
         <source>Failed to retrieve the certificate.</source>
-        <oldsource>Failed to retrive the certificate.</oldsource>
-        <translation type="unfinished">Sertifika alınamadı.</translation>
+        <translation>Sertifika alınamadı.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="348"/>
@@ -735,8 +733,7 @@ Hata: %1</translation>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="363"/>
         <source>Retrieving certificate...</source>
-        <oldsource>Retreiving certificate...</oldsource>
-        <translation type="unfinished">Sertifika alınıyor...</translation>
+        <translation>Sertifika alınıyor...</translation>
     </message>
 </context>
 <context>
@@ -1076,8 +1073,7 @@ Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER%
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="70"/>
         <source>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently inaccessible. Corruption can occur as a result of a BSOD, a storage hardware failure, or a malicious application overwriting random files. This feature is provided under a strict &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</source>
-        <oldsource>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently innaccessible. Corruption can occur as a result of a BSOD, a storage hadrware failure, or a maliciouse application overwriting random files. This feature is provided under a strickt &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</oldsource>
-        <translation type="unfinished">Bu korumalı alanın içeriği şifrelenmiş bir konteyner dosyasına yerleştirilecektir. Lütfen konteyner dosyasında oluşabilecek herhangi bir bozulmanın içeriğin tamamını kalıcı olarak erişilemez hale getireceğini unutmayın. Bu bozulma bir BSOD (Mavi Ekran), bir depolama donanım yazılımı arızası veya kötü amaçlı bir uygulamanın rastgele dosyaların üzerine yazması sonucunda meydana gelebilir. Bu özellik katı bir &lt;b&gt;Yedekleme Yoksa Merhamet Yok&lt;/b&gt; politikası kapsamında sağlanır. Şifrelenmiş bir alana koyduğunuz verilerden kullanıcı olarak SİZ KENDİNİZ sorumlusunuz. &lt;br /&gt;&lt;br /&gt;VERİLERİNİZİN TAM SORUMLULUĞUNU ALMAYI KABUL EDİYORSANIZ [EVET]&apos;E TIKLAYIN, AKSİ TAKDİRDE [HAYIR]&apos;A TIKLAYIN.</translation>
+        <translation>Bu korumalı alanın içeriği şifrelenmiş bir konteyner dosyasına yerleştirilecektir. Lütfen konteyner dosyasında oluşabilecek herhangi bir bozulmanın içeriğin tamamını kalıcı olarak erişilemez hale getireceğini unutmayın. Bu bozulma bir BSOD (Mavi Ekran), bir depolama donanım yazılımı arızası veya kötü amaçlı bir uygulamanın rastgele dosyaların üzerine yazması sonucunda meydana gelebilir. Bu özellik katı bir &lt;b&gt;Yedekleme Yoksa Merhamet Yok&lt;/b&gt; politikası kapsamında sağlanır. Şifrelenmiş bir alana koyduğunuz verilerden kullanıcı olarak SİZ KENDİNİZ sorumlusunuz. &lt;br /&gt;&lt;br /&gt;VERİLERİNİZİN TAM SORUMLULUĞUNU ALMAYI KABUL EDİYORSANIZ [EVET]&apos;E TIKLAYIN, AKSİ TAKDİRDE [HAYIR]&apos;A TIKLAYIN.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="180"/>
@@ -2258,10 +2254,6 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
         <location filename="Windows/PopUpWindow.cpp" line="187"/>
         <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
         <translation>Yazdırma biriktiricisinin %1 (%2) için korumalı alanın dışına yazmasına izin vermek istiyor musunuz?</translation>
-    </message>
-    <message>
-        <source>PID %1</source>
-        <translation type="vanished">PID %1</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="295"/>
@@ -4950,10 +4942,6 @@ Hayır şunları seçer: %2</translation>
         <translation>Bu destekçi sertifikası &lt;font color=&apos;red&apos;&gt;%1 gün içinde&lt;/font&gt; sona erecek, lütfen &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot; &gt;güncellenmiş bir sertifika alın&lt;/a&gt;.</translation>
     </message>
     <message>
-        <source>Retreiving certificate...</source>
-        <translation type="vanished">Sertifika alınıyor...</translation>
-    </message>
-    <message>
         <location filename="Windows/SettingsWindow.cpp" line="1311"/>
         <source>Contributor</source>
         <translation>Katılımcı</translation>
@@ -5250,7 +5238,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1267"/>
         <source>Retrieving certificate...</source>
-        <translation type="unfinished">Sertifika alınıyor...</translation>
+        <translation>Sertifika alınıyor...</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1325"/>
@@ -6922,8 +6910,7 @@ Bu, korumalı alan içindeki haydut işlemlerin kendilerinin yeniden adlandırı
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3643"/>
         <source>Sandboxie&apos;s functionality can be enhanced by using optional DLLs which can be loaded into each sandboxed process on start by the SbieDll.dll file, the add-on manager in the global settings offers a couple of useful extensions, once installed they can be enabled here for the current box.</source>
-        <oldsource>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</oldsource>
-        <translation type="unfinished">Sandboxie&apos;nin işlevselliği, korumalı alanda herhangi bir işlem başlatıldığında SbieDll.dll tarafından ona yüklenebilen, isteğe bağlı DLL&apos;ler kullanılarak genişletilebilir. Genel ayarlardaki Eklenti Yöneticisinde bazı yararlı uzantılar sunulmaktadır. Bunlar kurulduktan sonra geçerli kutu için buradan etkinleştirilebilirler.</translation>
+        <translation>Sandboxie&apos;nin işlevselliği, korumalı alanda herhangi bir işlem başlatıldığında SbieDll.dll tarafından ona yüklenebilen, isteğe bağlı DLL&apos;ler kullanılarak genişletilebilir. Genel ayarlardaki Eklenti Yöneticisinde bazı yararlı uzantılar sunulmaktadır. Bunlar kurulduktan sonra geçerli kutu için buradan etkinleştirilebilirler.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1505"/>
@@ -8393,7 +8380,7 @@ The process match level has a higher priority than the specificity and describes
     <message>
         <location filename="Forms/SettingsWindow.ui" line="205"/>
         <source>Hotkey for bringing sandman to the top:</source>
-        <translation type="unfinished"></translation>
+        <translation>SandMan penceresini üste getirmek için kısayol tuşu:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="587"/>

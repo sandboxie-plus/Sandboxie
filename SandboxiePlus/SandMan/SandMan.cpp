@@ -3199,7 +3199,7 @@ SB_RESULT(void*) CSandMan::StopSbie(bool andRemove)
 	SB_RESULT(void*) Status;
 
 	if (theAPI->IsConnected()) {
-		Status = theAPI->TerminateAll();
+		Status = theAPI->TerminateAll(true);
 		theAPI->Disconnect();
 	}
 	if (!Status.IsError()) {

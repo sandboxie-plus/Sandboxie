@@ -2560,6 +2560,7 @@ void CSandMan::CheckSupport()
 
 #define HK_PANIC	1
 #define HK_TOP		2
+#define HK_FORCE	3
 
 void CSandMan::SetupHotKeys()
 {
@@ -2569,7 +2570,10 @@ void CSandMan::SetupHotKeys()
 		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PanicKeySequence", "Shift+Pause"), HK_PANIC);
 
 	if (theConf->GetBool("Options/EnableTopMostKey", false))
-		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PanicTopMostSequence", "Alt+Pause"), HK_TOP);
+		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/TopMostSequence", "Alt+Pause"), HK_TOP);
+
+	if (theConf->GetBool("Options/EnablePauseForceKey", false))
+		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PauseForceKeySequence", "Ctrl+Alt+F"), HK_FORCE);
 }
 
 void CSandMan::OnHotKey(size_t id)
@@ -2595,7 +2599,6 @@ void CSandMan::OnHotKey(size_t id)
 			m_bOnTop = false;
 		else {
 			m_bOnTop = true;
-			
 			QTimer::singleShot(100, [this]() {
 				this->setWindowState((this->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
 				SetForegroundWindow(MainWndHandle);
@@ -2603,6 +2606,10 @@ void CSandMan::OnHotKey(size_t id)
 		}
 		this->setWindowFlag(Qt::WindowStaysOnTopHint, m_bOnTop);
 		SafeShow(this);
+		break;
+
+	case HK_FORCE:
+		theAPI->DisableForceProcess(!theAPI->AreForceProcessDisabled());
 		break;
 	}
 }

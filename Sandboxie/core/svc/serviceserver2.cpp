@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -334,7 +334,7 @@ ULONG ServiceServer::RunHandler2(
     if (ok) {
         errlvl = 0x21;
         ExePath = BuildPathForStartExe(idProcess, devmap, 
-                                        (type & SERVICE_WIN32_OWN_PROCESS) ? svcname : NULL, 
+                                        svcname ? (type & SERVICE_WIN32_OWN_PROCESS) ? svcname : L"*" : NULL, 
                                         path, NULL);
         if (! ExePath) {
             ok = FALSE;

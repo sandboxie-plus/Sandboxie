@@ -30,6 +30,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - fixed issue with auto updater not offering version updates
 - fixed issue with new symlink handling code [#3340](https://github.com/sandboxie-plus/Sandboxie/issues/3340)
+- fixed issue with Scm_StartServiceCtrlDispatcherX not behaving correctly when nor tun as service [#1246](https://github.com/sandboxie-plus/Sandboxie/issues/1246)
 
 ### Removed
 - removed obsolete /nosbiectrl switch [#3391](https://github.com/sandboxie-plus/Sandboxie/issues/3391)

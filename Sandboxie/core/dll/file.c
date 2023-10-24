@@ -2791,7 +2791,7 @@ ReparseLoop:
             ShareAccess, CreateDisposition, CreateOptions,
             EaBuffer, EaLength);
 
-        if (status == STATUS_ACCESS_DENIED &&
+        if ((status == STATUS_ACCESS_DENIED || status == STATUS_OBJECT_NAME_NOT_FOUND) &&
                 (FileFlags & FGN_REPARSED_OPEN_PATH)) {
 
             //

@@ -54,13 +54,13 @@ jobs:
 
     # Qt 6 is only required for ARM64 build currently.
     # - name: Install Qt6 x64
-    #   uses: jurplel/install-qt-action@v3
+    #   uses: jurplel/install-qt-action@v4
     #   with:
     #     version: '6.3.1'
     #     arch:  'win64_msvc2019_64'
 
     - name: Install Qt5 x64
-      uses: jurplel/install-qt-action@v3
+      uses: jurplel/install-qt-action@v4
       with:
         version: '5.15.2'
         arch:  'win64_msvc2019_64'

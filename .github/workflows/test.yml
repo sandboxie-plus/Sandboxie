@@ -35,7 +35,7 @@ jobs:
     #
 
 #      - name: Install Qt6 x64
-#        uses: jurplel/install-qt-action@v3
+#        uses: jurplel/install-qt-action@v4
 #        with:
 #      #    version: '6.2.4'
 #          version: '6.3.1'
@@ -46,7 +46,7 @@ jobs:
 #          cache: true
 
       - name: Install Qt5 x64
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
           version: '5.15.2'
       #    dir: ..
@@ -136,7 +136,7 @@ jobs:
     #
 
       - name: Install Qt6 ARM64
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
       #    version: '6.2.4'
           version: '6.3.1'
@@ -207,7 +207,7 @@ jobs:
     #
 
       - name: Install Qt5 x86
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
           version: '5.15.2'
       #    dir: ..

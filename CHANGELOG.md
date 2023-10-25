@@ -6,8 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
-## [1.12.0 / 5.67.0] - 2023-10-
+## [1.12.0 / 5.67.0] - 2023-10-25
 
 ### Added
 - added mechanism to automatically set USB drives as forced folders (Requires a supporter certificate)

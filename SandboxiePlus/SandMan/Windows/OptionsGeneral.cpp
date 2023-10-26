@@ -1114,7 +1114,7 @@ void COptionsWindow::OnDiskChanged()
 {
 	if (sender() == ui.chkEncrypt) {
 		if (ui.chkEncrypt->isChecked())
-			theGUI->CheckCertificate(this, true);
+			theGUI->CheckCertificate(this, 1);
 	}
 
 	if (ui.chkRamBox->isChecked()) {

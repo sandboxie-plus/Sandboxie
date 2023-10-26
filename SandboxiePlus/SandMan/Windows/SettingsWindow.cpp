@@ -1110,7 +1110,7 @@ void CSettingsWindow::OnRamDiskChange()
 {
 	if (sender() == ui.chkRamDisk) {
 		if (ui.chkRamDisk->isChecked())
-			theGUI->CheckCertificate(this);
+			theGUI->CheckCertificate(this, 2);
 	}
 
 	if (ui.chkRamDisk->isChecked() && ui.txtRamLimit->text().isEmpty())
@@ -1133,11 +1133,14 @@ void CSettingsWindow::OnVolumeChanged()
 { 
 	if (sender() == ui.chkSandboxUsb) {
 		if (ui.chkSandboxUsb->isChecked())
-			theGUI->CheckCertificate(this);
+			theGUI->CheckCertificate(this, 2);
 	}
 
-	ui.cmbUsbSandbox->setEnabled(ui.chkSandboxUsb->isChecked());
-	ui.treeVolumes->setEnabled(ui.chkSandboxUsb->isChecked());
+	ui.cmbUsbSandbox->setEnabled(ui.chkSandboxUsb->isChecked() && g_CertInfo.active);
+	ui.treeVolumes->setEnabled(ui.chkSandboxUsb->isChecked() && g_CertInfo.active);
+
+	if (!g_CertInfo.active)
+		return;
 
 	m_VolumeChanged = true; 
 	OnOptChanged();

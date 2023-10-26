@@ -2819,10 +2819,10 @@ void CSandMan::SaveMessageLog(QIODevice* pFile)
 		pFile->write((Msg.TimeStamp.toString("hh:mm:ss.zzz")  + "\t" + FormatSbieMessage(Msg.MsgCode, Msg.MsgData, Msg.ProcessName)).toLatin1() + "\n");
 }
 
-bool CSandMan::CheckCertificate(QWidget* pWidget, bool bAdvanced) 
+bool CSandMan::CheckCertificate(QWidget* pWidget, int iType) 
 {
 	QString Message;
-	if (bAdvanced)
+	if (iType == 1)
 	{
 		if (CERT_IS_LEVEL(g_CertInfo, eCertAdvanced))
 			return true;
@@ -2838,8 +2838,12 @@ bool CSandMan::CheckCertificate(QWidget* pWidget, bool bAdvanced)
 		if (g_CertInfo.active)
 			return true;
 
-		Message = tr("The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.<br />"
-			"<a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">Become a project supporter</a>, and receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>");
+		if(iType == 2)
+			Message = tr("The selected feature set is only available to project supporters.<br />"
+				"<a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">Become a project supporter</a>, and receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>");
+		else
+			Message = tr("The selected feature set is only available to project supporters. Processes started in a box with this feature set enabled without a supporter certificate will be terminated after 5 minutes.<br />"
+				"<a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">Become a project supporter</a>, and receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>");
 	}
 
 	QMessageBox msgBox(pWidget);

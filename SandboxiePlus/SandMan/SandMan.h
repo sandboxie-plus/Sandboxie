@@ -105,7 +105,7 @@ public:
 	QIcon				IconAddOverlay(const QIcon& Icon, const QString& Name, int Size = 24);
 	QString				GetBoxDescription(int boxType);
 	
-	bool				CheckCertificate(QWidget* pWidget, bool bAdvanced = false);
+	bool				CheckCertificate(QWidget* pWidget, int iType = 0);
 
 	bool				IsAlwaysOnTop() const;
 

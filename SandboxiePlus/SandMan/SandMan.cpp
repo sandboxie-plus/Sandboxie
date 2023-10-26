@@ -3926,9 +3926,24 @@ void CSandMan::OpenUrl(const QUrl& url)
 	if (iSandboxed == 2)
 	{
 		bool bCheck = false;
-		QString Message = tr("Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?").arg(url.toString());
-		QDialogButtonBox::StandardButton Ret = CCheckableMessageBox::question(this, "Sandboxie-Plus", Message , tr("Remember choice for later."), 
-			&bCheck, QDialogButtonBox::Yes | QDialogButtonBox::No | QDialogButtonBox::Cancel, QDialogButtonBox::Yes, QMessageBox::Question);
+		//QString Message = tr("Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?").arg(url.toString());
+		//QDialogButtonBox::StandardButton Ret = CCheckableMessageBox::question(this, "Sandboxie-Plus", Message , tr("Remember choice for later."), 
+		//	&bCheck, QDialogButtonBox::Yes | QDialogButtonBox::No | QDialogButtonBox::Cancel, QDialogButtonBox::Yes, QMessageBox::Question);
+
+		CCheckableMessageBox mb(this);
+		mb.setWindowTitle("Sandboxie-Plus");
+		mb.setIconPixmap(QMessageBox::standardIcon(QMessageBox::Question));
+		mb.setText(tr("Do you want to open %1 in a sandboxed or unsandboxed Web browser?").arg(url.toString()));
+		mb.setCheckBoxText(tr("Remember choice for later."));
+		mb.setChecked(bCheck);
+		mb.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No | QDialogButtonBox::Cancel);
+		mb.button(QDialogButtonBox::Yes)->setText(tr("Sandboxed"));
+		mb.button(QDialogButtonBox::No)->setText(tr("Unsandboxed"));
+		mb.setDefaultButton(QDialogButtonBox::Yes);
+		mb.exec();
+		bCheck = mb.isChecked();
+		QDialogButtonBox::StandardButton Ret = mb.clickedStandardButton();
+
 		if (Ret == QDialogButtonBox::Cancel) return;
 		iSandboxed = Ret == QDialogButtonBox::Yes ? 1 : 0;
 		if(bCheck) theConf->SetValue("Options/OpenUrlsSandboxed", iSandboxed);

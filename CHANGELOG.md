@@ -10,6 +10,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.12.1 / 5.67.1] - 2023-10-
 
+### Changed
+- improved open url dialog box [#3401](https://github.com/sandboxie-plus/Sandboxie/issues/3401)
+
+
 
 ## [1.12.0 / 5.67.0] - 2023-10-25
 

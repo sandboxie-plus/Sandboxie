@@ -97,9 +97,12 @@ jobs:
           echo 'maliciouse->malicious' >> dictionary.txt
           echo 'strickt->strict' >> dictionary.txt
           echo 'brak->break' >> dictionary.txt
-          echo "lets->let's" >> dictionary.txt
+          echo "lets->lets, let's" >> dictionary.txt
           echo 'booth->both' >> dictionary.txt
           echo 'vcertificate->certificate' >> dictionary.txt
+          echo 'fron->front' >> dictionary.txt
+          echo 'ahndling->handling' >> dictionary.txt
+          echo 'previwe->preview' >> dictionary.txt
           echo 'crome->Chrome' >> dictionary_code.txt
           echo 'chromim->Chromium' >> dictionary_code.txt
           echo 'kmdutill->kmdutil' >> dictionary_code.txt

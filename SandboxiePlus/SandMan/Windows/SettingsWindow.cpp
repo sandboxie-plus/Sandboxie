@@ -556,6 +556,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 		//COptionsWindow__AddCertIcon(ui.chkUpdateTemplates);
 		COptionsWindow__AddCertIcon(ui.chkUpdateIssues);
 		COptionsWindow__AddCertIcon(ui.chkRamDisk);
+		COptionsWindow__AddCertIcon(ui.chkSandboxUsb);
 	}
 
 	this->installEventFilter(this); // prevent enter from closing the dialog
@@ -1130,6 +1131,11 @@ void CSettingsWindow::OnRamDiskChange()
 
 void CSettingsWindow::OnVolumeChanged() 
 { 
+	if (sender() == ui.chkSandboxUsb) {
+		if (ui.chkSandboxUsb->isChecked())
+			theGUI->CheckCertificate(this);
+	}
+
 	ui.cmbUsbSandbox->setEnabled(ui.chkSandboxUsb->isChecked());
 	ui.treeVolumes->setEnabled(ui.chkSandboxUsb->isChecked());
 

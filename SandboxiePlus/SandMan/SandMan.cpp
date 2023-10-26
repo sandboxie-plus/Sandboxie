@@ -1896,7 +1896,7 @@ void CSandMan::UpdateDrives()
 
 void CSandMan::UpdateForceUSB()
 {
-	if (!theAPI->GetGlobalSettings()->GetBool("ForceUsbDrives", false))
+	if (!theAPI->GetGlobalSettings()->GetBool("ForceUsbDrives", false) || !g_CertInfo.active)
 		return;
 
 	QString UsbSandbox = theAPI->GetGlobalSettings()->GetText("UsbSandbox", "USB_Box");

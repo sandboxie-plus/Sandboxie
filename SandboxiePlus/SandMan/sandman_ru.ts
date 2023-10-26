@@ -222,7 +222,7 @@
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="280"/>
         <source>With a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; the wizard would be even more powerful. It could access the &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;online solution database&lt;/a&gt; to retrieve the latest troubleshooting instructions.</source>
-        <translation>С действующим &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификатом поддержки&lt;/a&gt; мастер стал бы еще более мощным. Он может получить доступ к &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;онлайн-базе данных решений&lt;/a&gt;, чтобы получить последние инструкции по устранению неполадок.</translation>
+        <translation>С действующим &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификатом сторонника&lt;/a&gt; мастер стал бы еще более мощным. Он может получить доступ к &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-issue-db&quot;&gt;онлайн-базе данных решений&lt;/a&gt;, чтобы получить последние инструкции по устранению неполадок.</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="318"/>
@@ -486,8 +486,7 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="451"/>
         <source>To use encrypted boxes you need to install the ImDisk driver, do you want to download and install it?</source>
-        <oldsource>To use ancrypted boxes you need to install the ImDisk driver, do you want to download and install it?</oldsource>
-        <translation type="unfinished">Для использования зашифрованных песочниц необходимо установить драйвер ImDisk, хотите его скачать и установить?</translation>
+        <translation>Для использования зашифрованных песочниц необходимо установить драйвер ImDisk, хотите его скачать и установить?</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="353"/>
@@ -723,8 +722,7 @@ Please browse to the correct user profile directory.</source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="347"/>
         <source>Failed to retrieve the certificate.</source>
-        <oldsource>Failed to retrive the certificate.</oldsource>
-        <translation type="unfinished">Не удалось получить сертификат.</translation>
+        <translation>Не удалось получить сертификат.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="348"/>
@@ -736,8 +734,7 @@ Error: %1</source>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="363"/>
         <source>Retrieving certificate...</source>
-        <oldsource>Retreiving certificate...</oldsource>
-        <translation type="unfinished">Получение сертификата...</translation>
+        <translation>Получение сертификата...</translation>
     </message>
 </context>
 <context>
@@ -1077,8 +1074,7 @@ You can use %USER% to save each users sandbox to an own folder.</source>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="70"/>
         <source>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently inaccessible. Corruption can occur as a result of a BSOD, a storage hardware failure, or a malicious application overwriting random files. This feature is provided under a strict &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</source>
-        <oldsource>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently innaccessible. Corruption can occur as a result of a BSOD, a storage hadrware failure, or a maliciouse application overwriting random files. This feature is provided under a strickt &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</oldsource>
-        <translation type="unfinished">Содержимое этой песочницы будет помещено в зашифрованный файл-контейнер. Обратите внимание, что любое повреждение заголовка контейнера сделает все его содержимое навсегда недоступным. Повреждение может произойти в результате BSOD, сбоя программного обеспечения хранилища или перезаписи случайных файлов вредоносным приложением. Эта функция предоставляется в соответствии со строгой политикой &lt;b&gt;Нет резервного копирования, нет пощады&lt;/b&gt;. ВЫ, пользователь, несете ответственность за данные, которые вы помещаете в зашифрованный ящик. &lt;br /&gt;&lt;br /&gt;ЕСЛИ ВЫ СОГЛАСНЫ НЕСТИ ПОЛНУЮ ОТВЕТСТВЕННОСТЬ ЗА ВАШИ ДАННЫЕ, НАЖМИТЕ [ДА], В противном случае НАЖМИТЕ [НЕТ].</translation>
+        <translation>Содержимое этой песочницы будет помещено в зашифрованный файл-контейнер. Обратите внимание, что любое повреждение заголовка контейнера сделает все его содержимое навсегда недоступным. Повреждение может произойти в результате BSOD, сбоя оборудования хранения или перезаписи случайных файлов вредоносным приложением. Эта функция предоставляется в соответствии со строгой политикой &lt;b&gt;Нет резервного копирования, нет пощады&lt;/b&gt;. ВЫ, пользователь, несете ответственность за данные, которые вы помещаете в зашифрованную песочницу. &lt;br /&gt;&lt;br /&gt;ЕСЛИ ВЫ СОГЛАСНЫ НЕСТИ ПОЛНУЮ ОТВЕТСТВЕННОСТЬ ЗА ВАШИ ДАННЫЕ, НАЖМИТЕ [ДА], В противном случае НАЖМИТЕ [НЕТ].</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="180"/>
@@ -1238,7 +1234,7 @@ You can use %USER% to save each users sandbox to an own folder.</source>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
-        <translation>Срок действия вашего сертификата поддержки Sandboxie-Plus истек, однако для текущей сборки, которую вы используете, он остается активным, при обновлении до более новой сборки эксклюзивные функции поддержки будут отключены.
+        <translation>Срок действия вашего сертификата сторонника Sandboxie-Plus истек, однако для текущей сборки, которую вы используете, он остается активным, при обновлении до более новой сборки эксклюзивные функции поддержки будут отключены.
 
 Вы все еще хотите обновить?</translation>
     </message>
@@ -1623,7 +1619,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
     <message>
         <location filename="Windows/OptionsForce.cpp" line="305"/>
         <source>Forcing the specified folder will most likely break Windows, are you sure you want to proceed?</source>
-        <translation type="unfinished"></translation>
+        <translation>Принудительное использование указанной папки, скорее всего, приведет к поломке Windows. Вы уверены, что хотите продолжить?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="25"/>
@@ -2019,7 +2015,13 @@ should contain the following file:
 
 The selected location does not contain this file.
 Please select a folder which contains this file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Альтернативное расположение для &apos;%1&apos;
+должен содержать следующий файл:
+
+%2
+
+Выбранное расположение не содержит этот файл.
+Пожалуйста, выберите папку, содержащую этот файл.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="186"/>
@@ -2255,10 +2257,6 @@ Please select a folder which contains this file.</source>
         <location filename="Windows/PopUpWindow.cpp" line="24"/>
         <source>Sandboxie-Plus Notifications</source>
         <translation>Уведомления Sandboxie-Plus</translation>
-    </message>
-    <message>
-        <source>PID %1</source>
-        <translation type="vanished">Ид процесса %1</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="187"/>
@@ -2557,7 +2555,7 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="657"/>
         <source>Access to the latest compatibility templates and the online troubleshooting database requires a valid &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;.</source>
-        <translation>Для доступа к последним шаблонам совместимости и онлайн-базе данных по устранению неполадок требуется действующий &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат поддержки&lt;/a&gt;.</translation>
+        <translation>Для доступа к последним шаблонам совместимости и онлайн-базе данных по устранению неполадок требуется действующий &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат сторонника&lt;/a&gt;.</translation>
     </message>
 </context>
 <context>
@@ -3582,7 +3580,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="1906"/>
         <source>USB sandbox not found; creating: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>USB-песочница не найдена; создание: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2127"/>
@@ -3644,7 +3642,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2749"/>
         <source>The box %1 is configured to use features which require an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
-        <translation>Песочница %1 настроена на использование функций, требующих &lt;b&gt;расширенного&lt;/b&gt; сертификата поддержки.</translation>
+        <translation>Песочница %1 настроена на использование функций, требующих &lt;b&gt;расширенного&lt;/b&gt; сертификата сторонника.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2751"/>
@@ -3655,12 +3653,12 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2830"/>
         <source>The selected feature requires an &lt;b&gt;advanced&lt;/b&gt; supporter certificate.</source>
-        <translation>Для выбранной функции требуется &lt;b&gt;расширенный&lt;/b&gt; сертификат поддержки.</translation>
+        <translation>Для выбранной функции требуется &lt;b&gt;расширенный&lt;/b&gt; сертификат сторонника.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2876"/>
         <source>The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!</source>
-        <translation type="unfinished"></translation>
+        <translation>Сертификат, который вы пытаетесь использовать, заблокирован, то есть он признан недействительным по определенной причине. Любая попытка его использования является нарушением условий его использования!</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2888"/>
@@ -3681,7 +3679,7 @@ No will choose: %2</source>
         <location filename="SandMan.cpp" line="2894"/>
         <source>The support certificate is not valid.
 Error: %1</source>
-        <translation>Сертификат поддержки недействителен.
+        <translation>Сертификат сторонника недействителен.
 Ошибка: %1</translation>
     </message>
     <message>
@@ -5044,7 +5042,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1196"/>
         <source>Volume not attached</source>
-        <translation type="unfinished"></translation>
+        <translation>Том не прикреплён</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1217"/>
@@ -5060,10 +5058,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Windows/SettingsWindow.cpp" line="1230"/>
         <source>This supporter certificate will &lt;font color=&apos;red&apos;&gt;expire in %1 days&lt;/font&gt;, please &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;get an updated certificate&lt;/a&gt;.</source>
         <translation>Срок действия этого сертификата сторонника &lt;font color=&apos;red&apos;&gt;истечет через %1&#xa0;дн.&lt;/font&gt;. Пожалуйста, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;получите обновленный сертификат&lt;/a&gt;.</translation>
-    </message>
-    <message>
-        <source>Retreiving certificate...</source>
-        <translation type="vanished">Получение сертификата...</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1316"/>
@@ -5228,7 +5222,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1272"/>
         <source>Retrieving certificate...</source>
-        <translation type="unfinished">Получение сертификата...</translation>
+        <translation>Получение сертификата...</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1330"/>
@@ -5651,17 +5645,17 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Windows/SupportDialog.cpp" line="72"/>
         <source>An attempt was made to use a blocked certificate on this system. This action violates the terms of use for the support certificate. You must now purchase a valid certificate, as the usage of the free version has been restricted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Была предпринята попытка использовать заблокированный сертификат в этой системе. Данное действие нарушает условия использования сертификата сторонника. Теперь вам необходимо приобрести действующий сертификат, поскольку использование бесплатной версии ограничено.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="162"/>
         <source>This is a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;exclusive Insider build&lt;/a&gt; of Sandboxie-Plus it is only available to &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;Patreon Supporters&lt;/a&gt; on higher tiers as well as to project contributors and owners of a HUGE supporter certificate.</source>
-        <translation>Это &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;эксклюзивная инсайдерская сборка&lt;/a&gt; Sandboxie-Plus. Она доступна только &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;поддерживающим Patreon&lt;/a&gt; на более высоких уровнях, а также участникам проекта и владельцам HUGE сертификата поддержки.</translation>
+        <translation>Это &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-insider&quot;&gt;эксклюзивная инсайдерская сборка&lt;/a&gt; Sandboxie-Plus. Она доступна только &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;поддерживающим Patreon&lt;/a&gt; на более высоких уровнях, а также участникам проекта и владельцам HUGE сертификата сторонника.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="168"/>
         <source>The installed supporter certificate allows for &lt;b&gt;%1 seats&lt;/b&gt; to be active.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation>Установленный сертификат поддержки позволяет активировать &lt;b&gt;%1 мест&lt;/b&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>Установленный сертификат сторонника позволяет активировать &lt;b&gt;%1 мест&lt;/b&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="170"/>
@@ -5671,7 +5665,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Windows/SupportDialog.cpp" line="177"/>
         <source>The installed supporter certificate &lt;b&gt;has expired %1 days ago&lt;/b&gt; and &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;must be renewed&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation>Срок действия установленного сертификата поддержки &lt;b&gt;истек %1&#xa0;дн. назад&lt;/b&gt; и его &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;необходимо обновить&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>Срок действия установленного сертификата сторонника &lt;b&gt;истек %1&#xa0;дн. назад&lt;/b&gt; и его &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;необходимо обновить&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="179"/>
@@ -5686,12 +5680,12 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Windows/SupportDialog.cpp" line="188"/>
         <source>The installed supporter certificate is &lt;b&gt;outdated&lt;/b&gt; and it is &lt;u&gt;not valid for&lt;b&gt; this version&lt;/b&gt;&lt;/u&gt; of Sandboxie-Plus.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation>Установленный сертификат поддержки &lt;b&gt;устарел&lt;/b&gt; и &lt;u&gt;недействителен для&lt;b&gt; этой версии&lt;/b&gt;&lt;/u&gt; Sandboxie-Plus.&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>Установленный сертификат сторонника &lt;b&gt;устарел&lt;/b&gt; и &lt;u&gt;недействителен для&lt;b&gt; этой версии&lt;/b&gt;&lt;/u&gt; Sandboxie-Plus.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="190"/>
         <source>The installed supporter certificate is &lt;b&gt;expired&lt;/b&gt; and &lt;u&gt;should be renewed&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation>Срок действия установленного сертификата поддержки &lt;b&gt;истек&lt;/b&gt;, и его &lt;u&gt;следует обновить&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>Срок действия установленного сертификата сторонника &lt;b&gt;истек&lt;/b&gt;, и его &lt;u&gt;следует обновить&lt;/u&gt;.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="192"/>
@@ -5701,7 +5695,7 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Windows/SupportDialog.cpp" line="195"/>
         <source>Sandboxie on ARM64 requires a valid supporter certificate for continued use.&lt;br /&gt;&lt;br /&gt;</source>
-        <translation>Для дальнейшего использования Sandboxie на ARM64 требуется действующий сертификат поддержки.&lt;br /&gt;&lt;br /&gt;</translation>
+        <translation>Для дальнейшего использования Sandboxie на ARM64 требуется действующий сертификат сторонника.&lt;br /&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="197"/>
@@ -5711,12 +5705,12 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Windows/SupportDialog.cpp" line="200"/>
         <source>Please continue &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;supporting the project&lt;/a&gt; by renewing your &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; and continue using the &lt;b&gt;enhanced functionality&lt;/b&gt; in new builds.</source>
-        <translation>Пожалуйста, продолжайте &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;поддерживать проект&lt;/a&gt;, обновив свой &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат поддержки&lt;/a&gt; и продолжать использовать &lt;b&gt;расширенные функции&lt;/b&gt; в новых сборках.</translation>
+        <translation>Пожалуйста, продолжайте &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-renew-cert&quot;&gt;поддерживать проект&lt;/a&gt;, обновив свой &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат сторонника&lt;/a&gt; и продолжать использовать &lt;b&gt;расширенные функции&lt;/b&gt; в новых сборках.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="203"/>
         <source>Sandboxie &lt;u&gt;without&lt;/u&gt; a valid supporter certificate will sometimes &lt;b&gt;&lt;font color=&apos;red&apos;&gt;pause for a few seconds&lt;/font&gt;&lt;/b&gt;. This pause allows you to consider &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt; or &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;earning one by contributing&lt;/a&gt; to the project. &lt;br /&gt;&lt;br /&gt;A &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt; not just removes this reminder, but also enables &lt;b&gt;exclusive enhanced functionality&lt;/b&gt; providing better security and compatibility.</source>
-        <translation>Sandboxie &lt;u&gt;без&lt;/u&gt; действительного сертификата поддержки иногда &lt;b&gt;&lt;font color=&apos;red&apos;&gt;приостанавливается на несколько секунд&lt;/font&gt;&lt;/b&gt;. Эта пауза позволяет рассмотреть возможность &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;приобретения сертификата поддержки&lt;/a&gt; или &lt;a href=&quot;https: //sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;заработать один, внося свой вклад&lt;/a&gt; в проект. &lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат поддержки&lt;/a&gt; не только удаляет это напоминание, но и включает &lt;b&gt;эксклюзивную расширенную функциональность&lt;/b&gt;, обеспечивающую лучшую безопасность и совместимость.</translation>
+        <translation>Sandboxie &lt;u&gt;без&lt;/u&gt; действительного сертификата сторонника иногда &lt;b&gt;&lt;font color=&apos;red&apos;&gt;приостанавливается на несколько секунд&lt;/font&gt;&lt;/b&gt;. Эта пауза позволяет рассмотреть возможность &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;приобретения сертификата сторонника&lt;/a&gt; или &lt;a href=&quot;https: //sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;заработать один, внося свой вклад&lt;/a&gt; в проект. &lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат сторонника&lt;/a&gt; не только удаляет это напоминание, но и включает &lt;b&gt;эксклюзивную расширенную функциональность&lt;/b&gt;, обеспечивающую лучшую безопасность и совместимость.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="233"/>
@@ -6601,12 +6595,12 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3557"/>
         <source>When the global hotkey is pressed 3 times in short succession this exception will be ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>При нажатии глобальной горячей клавиши 3 раза подряд это исключение будет проигнорировано.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3560"/>
         <source>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Исключить завершение этой песочницы при вызове &quot;Завершить все процессы&quot;.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3601"/>
@@ -6788,8 +6782,7 @@ This is done to prevent rogue processes inside the sandbox from creating a renam
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3652"/>
         <source>Sandboxie&apos;s functionality can be enhanced by using optional DLLs which can be loaded into each sandboxed process on start by the SbieDll.dll file, the add-on manager in the global settings offers a couple of useful extensions, once installed they can be enabled here for the current box.</source>
-        <oldsource>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</oldsource>
-        <translation type="unfinished">Функциональность песочницы можно расширить с помощью дополнительных dll, которые можно загрузить в каждый изолированный процесс при запуске с помощью SbieDll.dll, диспетчер дополнений в глобальных настройках предлагает пару полезных расширений, после установки их можно включить здесь для текущей песочницы.</translation>
+        <translation>Функциональность Sandboxie можно расширить с помощью дополнительных dll, которые можно загружать в каждый изолированный процесс при запуске с помощью SbieDll.dll. Менеджер надстроек в глобальных настройках предлагает несколько полезных расширений, после установки их можно включить здесь для текущей песочницы.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2044"/>
@@ -8014,12 +8007,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1556"/>
         <source>Supporters of the Sandboxie-Plus project can receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;. It&apos;s like a license key but for awesome people using open source software. :-)</source>
-        <translation>Сторонники проекта Sandboxie-Plus могут получить &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат поддержки&lt;/a&gt;. Это похоже на лицензионный ключ, но для замечательных людей, использующих программное обеспечение с открытым исходным кодом. :-)</translation>
+        <translation>Сторонники проекта Sandboxie-Plus могут получить &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат сторонника&lt;/a&gt;. Это похоже на лицензионный ключ, но для замечательных людей, использующих программное обеспечение с открытым исходным кодом. :-)</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1589"/>
         <source>Keeping Sandboxie up to date with the rolling releases of Windows and compatible with all web browsers is a never-ending endeavor. You can support the development by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;directly contributing to the project&lt;/a&gt;, showing your support by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;purchasing a supporter certificate&lt;/a&gt;, becoming a patron by &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=patreon&quot;&gt;subscribing on Patreon&lt;/a&gt;, or through a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;PayPal donation&lt;/a&gt;.&lt;br /&gt;Your support plays a vital role in the advancement and maintenance of Sandboxie.</source>
-        <translation>Поддержание Sandboxie в актуальном состоянии со скользящими выпусками Windows и совместимости со всеми веб-браузерами - это бесконечная работа. Вы можете поддержать разработку, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;внеся непосредственный вклад в проект&lt;/a&gt; и проявив свою поддержку &lt;a href= &quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;купив сертификат поддержки&lt;/a&gt;, стать покровителем &lt;a href=&quot;https://sandboxie-plus. com/go.php?to=patreon&quot;&gt;подписавшись на Patreon&lt;/a&gt; или через &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;пожертвование PayPal&lt;/ a&gt;.&lt;br /&gt;Ваша поддержка играет жизненно важную роль в развитии и обслуживании Sandboxie.</translation>
+        <translation>Поддержание Sandboxie в актуальном состоянии со скользящими выпусками Windows и совместимости со всеми веб-браузерами - это бесконечная работа. Вы можете поддержать разработку, &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-contribute&quot;&gt;внеся непосредственный вклад в проект&lt;/a&gt; и проявив свою поддержку &lt;a href= &quot;https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&quot;&gt;купив сертификат сторонника&lt;/a&gt;, стать покровителем &lt;a href=&quot;https://sandboxie-plus. com/go.php?to=patreon&quot;&gt;подписавшись на Patreon&lt;/a&gt; или через &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=donate&quot;&gt;пожертвование PayPal&lt;/ a&gt;.&lt;br /&gt;Ваша поддержка играет жизненно важную роль в развитии и обслуживании Sandboxie.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1999"/>
@@ -8390,12 +8383,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="184"/>
         <source>Hotkey for bringing sandman to the top:</source>
-        <translation type="unfinished"></translation>
+        <translation>Горячая клавиша для вывода sandman наверх:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="219"/>
         <source>Hotkey for suspending process/folder forcing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Горячая клавиша для принуд. приостановки процесса/папки:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="601"/>
@@ -8522,27 +8515,27 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2277"/>
         <source>USB Drive Sandboxing</source>
-        <translation type="unfinished"></translation>
+        <translation>Песочница с USB-накопителем</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2293"/>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Том</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2298"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2306"/>
         <source>Sandbox for USB drives:</source>
-        <translation type="unfinished"></translation>
+        <translation>Песочница для USB-накопителей:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2319"/>
         <source>Automatically sandbox all attached USB drives</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматически помещать в песочницу все подключенные USB-накопители</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2376"/>

@@ -14,6 +14,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - improved open url dialog box [#3401](https://github.com/sandboxie-plus/Sandboxie/issues/3401)
 
 
+### Fixed
+- fixed issue with key to bring sandman in fron as top most
+
 
 ## [1.12.0 / 5.67.0] - 2023-10-25
 

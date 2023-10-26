@@ -2570,7 +2570,7 @@ void CSandMan::SetupHotKeys()
 		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PanicKeySequence", "Shift+Pause"), HK_PANIC);
 
 	if (theConf->GetBool("Options/EnableTopMostKey", false))
-		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/TopMostSequence", "Alt+Pause"), HK_TOP);
+		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/TopMostKeySequence", "Alt+Pause"), HK_TOP);
 
 	if (theConf->GetBool("Options/EnablePauseForceKey", false))
 		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PauseForceKeySequence", "Ctrl+Alt+F"), HK_FORCE);

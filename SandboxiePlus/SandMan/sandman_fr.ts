@@ -505,7 +505,7 @@ Cela fournit le niveau ultime de confidentialité et de protection des données 
         <location filename="Wizards/NewBoxWizard.cpp" line="451"/>
         <source>To use encrypted boxes you need to install the ImDisk driver, do you want to download and install it?</source>
         <oldsource>To use ancrypted boxes you need to install the ImDisk driver, do you want to download and install it?</oldsource>
-        <translation type="unfinished">Afin d&apos;utiliser des bacs chiffrés, vous devez installer le pilote ImDisk. Voulez-vous le télécharger puis l&apos;installer ?</translation>
+        <translation>Afin d&apos;utiliser des bacs chiffrés, vous devez installer le pilote ImDisk. Voulez-vous le télécharger puis l&apos;installer ?</translation>
     </message>
     <message>
         <source>Application Compartment (NO Isolation)</source>
@@ -754,7 +754,7 @@ Veuillez naviguer vers la répertoire correct des profils d&apos;utilisateurs.</
         <location filename="Wizards/SetupWizard.cpp" line="347"/>
         <source>Failed to retrieve the certificate.</source>
         <oldsource>Failed to retrive the certificate.</oldsource>
-        <translation type="unfinished">Échec de récupération du certificat.</translation>
+        <translation>Échec de récupération du certificat.</translation>
     </message>
     <message>
         <location filename="Wizards/SetupWizard.cpp" line="348"/>
@@ -767,7 +767,7 @@ Erreur : %1</translation>
         <location filename="Wizards/SetupWizard.cpp" line="363"/>
         <source>Retrieving certificate...</source>
         <oldsource>Retreiving certificate...</oldsource>
-        <translation type="unfinished">Récupération du certificat...</translation>
+        <translation>Récupération du certificat...</translation>
     </message>
 </context>
 <context>
@@ -1193,7 +1193,7 @@ Utilisez « %USER% » pour enregistrer le bac de chaque utilisateur dans son pro
         <location filename="Wizards/NewBoxWizard.cpp" line="70"/>
         <source>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently inaccessible. Corruption can occur as a result of a BSOD, a storage hardware failure, or a malicious application overwriting random files. This feature is provided under a strict &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</source>
         <oldsource>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently innaccessible. Corruption can occur as a result of a BSOD, a storage hadrware failure, or a maliciouse application overwriting random files. This feature is provided under a strickt &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</oldsource>
-        <translation type="unfinished">Le contenu de ce bac à sable sera placé dans un fichier conteneur chiffré. Veuillez noter que toute corruption de l&apos;en-tête de ce conteneur rendra tout son contenu inaccessible de manière permanente. Une corruption peut survenir à la suite d&apos;un « écran bleu de la mort », d&apos;un échec matériel de stockage, ou d&apos;une application malveillante qui écraserait des fichiers au hasard. Cette fonction est fournie sous réserve d&apos;accepter cette politique stricte de &lt;b&gt;Pas de Sauvegarde, Pas de Pitié&lt;/b&gt; ; VOUS, l&apos;utilisateur, êtes responsables des données que vous placez dans un bac chiffré.&lt;br /&gt;&lt;br /&gt;SI VOUS ACCEPTEZ DE PRENDRE TOUTE LA RESPONSABILITÉ DE VOS DONNÉES APPUYEZ SUR [OUI], AUTREMENT APPUYEZ SUR [NON].</translation>
+        <translation>Le contenu de ce bac à sable sera placé dans un fichier conteneur chiffré. Veuillez noter que toute corruption de l&apos;en-tête de ce conteneur rendra tout son contenu inaccessible de manière permanente. Une corruption peut survenir à la suite d&apos;un « écran bleu de la mort », d&apos;un échec matériel de stockage, ou d&apos;une application malveillante qui écraserait des fichiers au hasard. Cette fonction est fournie sous réserve d&apos;accepter cette politique stricte de &lt;b&gt;Pas de Sauvegarde, Pas de Pitié&lt;/b&gt; ; VOUS, l&apos;utilisateur, êtes responsables des données que vous placez dans un bac chiffré.&lt;br /&gt;&lt;br /&gt;SI VOUS ACCEPTEZ DE PRENDRE TOUTE LA RESPONSABILITÉ DE VOS DONNÉES APPUYEZ SUR [OUI], AUTREMENT APPUYEZ SUR [NON].</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="180"/>
@@ -1822,7 +1822,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/OptionsForce.cpp" line="305"/>
         <source>Forcing the specified folder will most likely break Windows, are you sure you want to proceed?</source>
-        <translation type="unfinished"></translation>
+        <translation>Le forçage du dossier indiqué cassera très probablement Windows. Êtes-vous sûr de vouloir continuer ?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="25"/>
@@ -2256,7 +2256,13 @@ should contain the following file:
 
 The selected location does not contain this file.
 Please select a folder which contains this file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Un emplacement alternatif pour « %1 »
+doit contenir le fichier suivant :
+
+%2
+
+Ce n&apos;est pas le cas pour l&apos;emplacement choisi.
+Veuillez choisir un dossier contenant ce fichier.</translation>
     </message>
     <message>
         <source>Do you really want to delete the selected local template?</source>
@@ -3555,7 +3561,7 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
     <message>
         <location filename="SandMan.cpp" line="1906"/>
         <source>USB sandbox not found; creating: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bac à sable USB introuvable ; création : %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2651"/>
@@ -3588,7 +3594,7 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
     <message>
         <location filename="SandMan.cpp" line="2876"/>
         <source>The certificate you are attempting to use has been blocked, meaning it has been invalidated for cause. Any attempt to use it constitutes a breach of its terms of use!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le certificat que vous essayez d&apos;utiliser a été bloqué, ce qui veut dire qu&apos;il a été invalidé pour une bonne raison. Toute tentative de l&apos;utiliser constitue une violation de ses conditions d&apos;utilisation !</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2888"/>
@@ -5734,7 +5740,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1196"/>
         <source>Volume not attached</source>
-        <translation type="unfinished"></translation>
+        <translation>Volume non branché</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1217"/>
@@ -5842,7 +5848,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1272"/>
         <source>Retrieving certificate...</source>
-        <translation type="unfinished">Récupération du certificat...</translation>
+        <translation>Récupération du certificat...</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1330"/>
@@ -6293,7 +6299,7 @@ Si vous êtes déjà « Great Supporter » sur Patreon, Sandboxie peut vérifier
     <message>
         <location filename="Windows/SupportDialog.cpp" line="72"/>
         <source>An attempt was made to use a blocked certificate on this system. This action violates the terms of use for the support certificate. You must now purchase a valid certificate, as the usage of the free version has been restricted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Une tentative d&apos;utiliser un certtificat bloqué a été réalisée sur ce système. Cette action viole les conditions d&apos;utilisation du certificat d&apos;adhérent. Vous devez désormais acheter un certificat valide, car l&apos;utilisation de la version gratuite a été restreinte.</translation>
     </message>
     <message>
         <location filename="Windows/SupportDialog.cpp" line="162"/>
@@ -8399,7 +8405,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
         <location filename="Forms/OptionsWindow.ui" line="3652"/>
         <source>Sandboxie&apos;s functionality can be enhanced by using optional DLLs which can be loaded into each sandboxed process on start by the SbieDll.dll file, the add-on manager in the global settings offers a couple of useful extensions, once installed they can be enabled here for the current box.</source>
         <oldsource>Sandboxies functionality can be enhanced using optional dll’s which can be loaded into each sandboxed process on start by the SbieDll.dll, the add-on manager in the global settings offers a couple useful extensions, once installed they can be enabled here for the current box.</oldsource>
-        <translation type="unfinished">Les fonctions de Sandboxie peuvent être améliorées  en utilisant des DLL optionnels qui peuvent être chargés dans chaque processus dans un bac à sable lors de leur démarrage par SbieDll.dll. Le gestionnaire de modules dans les paramètres généraux offre quelques extensions utiles ; une fois installées, celles-ci peuvent être activées ici pour le bac à sable actuel.</translation>
+        <translation>Les fonctions de Sandboxie peuvent être améliorées en utilisant des DLL optionnels qui peuvent être chargés dans chaque processus dans un bac à sable lors de leur démarrage par SbieDll.dll. Le gestionnaire de modules dans les paramètres généraux offre quelques extensions utiles ; une fois installées, celles-ci peuvent être activées ici pour le bac à sable actuel.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1892"/>
@@ -8439,12 +8445,12 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3557"/>
         <source>When the global hotkey is pressed 3 times in short succession this exception will be ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lorsque le raccourci général est utilisé 3 fois rapidement et successivement, cette exception sera ignorée.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3560"/>
         <source>Exclude this sandbox from being terminated when &quot;Terminate All Processes&quot; is invoked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Empêcher ce bac à sable d&apos;être arrêté lorsque « Arrêter tous les processus » est invoqué.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3840"/>
@@ -8875,7 +8881,7 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="142"/>
         <source>SandMan Options</source>
-        <translation>Options de SandMan</translation>
+        <translation>Options du gestionnaire de Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="234"/>
@@ -9004,12 +9010,12 @@ Ceci est fait pour empêcher les processus malveillants à l&apos;intérieur du 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="184"/>
         <source>Hotkey for bringing sandman to the top:</source>
-        <translation type="unfinished"></translation>
+        <translation>Raccourci pour amener le gestionnaire de Sandboxie-Plus au premier plan :</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="219"/>
         <source>Hotkey for suspending process/folder forcing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Raccourci pour suspendre le forçage du processus/dossier :</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="601"/>
@@ -9251,27 +9257,27 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les changements non 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2277"/>
         <source>USB Drive Sandboxing</source>
-        <translation type="unfinished"></translation>
+        <translation>Mise en bac à sable des lecteurs USB</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2293"/>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Volume</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2298"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informations</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2306"/>
         <source>Sandbox for USB drives:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bac à sable pour les lecteurs USB :</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2319"/>
         <source>Automatically sandbox all attached USB drives</source>
-        <translation type="unfinished"></translation>
+        <translation>Placer automatiquement en bac à sable tous les lecteurs USB branchés</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2346"/>

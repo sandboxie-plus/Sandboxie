@@ -16,6 +16,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue with key to bring sandman in fron as top most
+- fixed issue with ThreadSuspendCount failing for already terminated threads [#3375](https://github.com/sandboxie-plus/Sandboxie/issues/3375)
+
 
 
 ## [1.12.0 / 5.67.0] - 2023-10-25

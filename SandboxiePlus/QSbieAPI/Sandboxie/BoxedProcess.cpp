@@ -369,6 +369,10 @@ bool CBoxedProcess::TestSuspended()
 			break;
 		hThread = nNextThread;
 
+		ULONG IsTerminated = 0;
+		if (NT_SUCCESS(NtQueryInformationThread(hThread, ThreadIsTerminated, &IsTerminated, sizeof(ULONG), NULL)) && IsTerminated)
+			continue;
+
 		ULONG SuspendCount = 0;
 		status = NtQueryInformationThread(hThread, (THREADINFOCLASS)35/*ThreadSuspendCount*/, &SuspendCount, sizeof(ULONG), NULL);
 		if (status == STATUS_INVALID_INFO_CLASS) { // windows 7

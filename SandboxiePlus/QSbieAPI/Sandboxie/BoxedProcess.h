@@ -30,7 +30,7 @@ public:
 	virtual ~CBoxedProcess();
 
 	virtual bool			InitProcessInfo();
-	virtual bool			InitProcessInfoEx();
+	virtual void			UpdateProcessInfo();
 
 	virtual quint32			GetProcessId() const { return m_ProcessId; }
 	virtual quint32			GetParendPID() const  { return m_ParendPID; }

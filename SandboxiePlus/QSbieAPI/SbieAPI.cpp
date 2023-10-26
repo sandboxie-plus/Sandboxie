@@ -1447,7 +1447,7 @@ SB_STATUS CSbieAPI::UpdateProcesses(int iKeep, bool bAllSessions)
 			pProcess->InitProcessInfo();
 		}
 
-		pProcess->InitProcessInfoEx();
+		pProcess->UpdateProcessInfo();
 	}
 
 	foreach(const CBoxedProcessPtr& pProcess, OldProcessList) 

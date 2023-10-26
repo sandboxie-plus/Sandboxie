@@ -12,7 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - improved open url dialog box [#3401](https://github.com/sandboxie-plus/Sandboxie/issues/3401)
-
+- improved suspended process detection
 
 ### Fixed
 - fixed issue with key to bring sandman in fron as top most

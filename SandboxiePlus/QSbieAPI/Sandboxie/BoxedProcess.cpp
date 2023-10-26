@@ -284,13 +284,14 @@ void CBoxedProcess::InitProcessInfoImpl(void* ProcessHandle)
 	TestSuspended();
 }
 
-bool CBoxedProcess::InitProcessInfoEx()
+void CBoxedProcess::UpdateProcessInfo()
 {
 	if (m_ProcessFlags == 0 && m_pBox)
 		m_ProcessFlags = m_pBox->Api()->QueryProcessInfo(m_ProcessId);
 	m_ImageType = m_pBox->Api()->QueryProcessInfo(m_ProcessId, 'gpit');
 
-	return true;
+	if (m_bSuspended)
+		TestSuspended();
 }
 
 extern "C"

@@ -681,6 +681,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - added user mode system call tracing, now syscalls can be logged in compartment boxes as well as all Win32k syscalls
+- added nt object view to trace log
 
 ### Changed
 - reworked trace log model, now it can load more than a million entries in less than one second

@@ -1020,6 +1020,9 @@ void CSettingsWindow::LoadSettings()
 			ui.cmbUsbSandbox->addItem(pBox->GetName().replace("_", " "));
 		ui.cmbUsbSandbox->setCurrentText(theAPI->GetGlobalSettings()->GetText("UsbSandbox", "USB_Box").replace("_", " "));
 
+		ui.cmbUsbSandbox->setEnabled(ui.chkSandboxUsb->isChecked() && g_CertInfo.active);
+		ui.treeVolumes->setEnabled(ui.chkSandboxUsb->isChecked() && g_CertInfo.active);
+
 		UpdateDrives();
 
 		m_VolumeChanged = false;

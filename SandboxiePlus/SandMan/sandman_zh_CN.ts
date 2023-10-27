@@ -3576,17 +3576,17 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandMan.cpp" line="3936"/>
         <source>Do you want to open %1 in a sandboxed or unsandboxed Web browser?</source>
-        <translation type="unfinished"></translation>
+        <translation>是否打开链接 %1？您可以选择是否使用沙盒中的浏览器打开。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3940"/>
         <source>Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒中的</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3941"/>
         <source>Unsandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>沙盒外的</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4100"/>
@@ -4064,7 +4064,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="SandMan.cpp" line="2842"/>
         <source>The selected feature set is only available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>您所选择的特性仅适用于项目赞助者。&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;成为项目赞助者&lt;/a&gt;, 获取一份 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;赞助者凭据&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2880"/>

@@ -1203,7 +1203,7 @@ void CSbieTemplatesEx::CollectUpdates()
 	res = updateSearcher->Search(criteria, &searchResult);
 	SysFreeString(criteria); }
 	if (FAILED(res)) {
-		theGUI->OnLogMessage(tr("Failed to search for updates"));
+		theGUI->OnLogMessage(tr("Failed to enumerate installed windows updates"));
 		goto cleanup;
 	}
 

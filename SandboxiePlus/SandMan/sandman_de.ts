@@ -3265,7 +3265,7 @@ Fehler: %1</translation>
     <message>
         <location filename="SandMan.cpp" line="3936"/>
         <source>Do you want to open %1 in a sandboxed or unsandboxed Web browser?</source>
-        <translation>Möchten Sie %1 in einem sandgeboxten or nicht sandgeboxten Webbrowser öffnem?</translation>
+        <translation>Möchten Sie %1 in einem sandgeboxten or nicht sandgeboxten Browser öffnen?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3940"/>

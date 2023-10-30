@@ -1,0 +1,80 @@
+﻿{
+"Description Text...": "Açıklama Metni...",
+"Fix current issues": "Mevcut sorunları düzeltin",
+"Fix issues with sandboxing": "Korumalı alan oluşturmayla ilgili sorunları düzeltin",
+"An Application does not work properly when sandboxed": "Bir uygulama korumalı alana alındığında düzgün çalışmıyor",
+"Issues with a web browser": "Web tarayıcısıyla ilgili sorunlar",
+"Perform Sandbox maintenance": "Korumalı alan bakımı gerçekleştirin",
+"Fix issues with the UI or Shell": "Kullanıcı arayüzü veya Kabuk ile ilgili sorunları düzeltin",
+
+"Yes": "Evet",
+"No": "Hayır",
+
+"App compatibility checker": "Uygulama uyumluluk denetleyicisi",
+"This script check which app compatibility templates needs to be enabled": "Bu komut dosyası hangi uygulama uyumluluk şablonlarının etkinleştirilmesi gerektiğini denetler",
+"Loaded %1 templates": "%1 şablon yüklendi",
+
+"Browser shortcut is missing from the desktop": "Masaüstünde tarayıcı kısayolu yok",
+"This procedure will add a browser shortcut to the desktop": "Bu prosedür masaüstüne bir tarayıcı kısayolu ekleyecektir",
+"Default Browser": "Varsayılan Tarayıcı",
+"Another": "Başka",
+"Select Browser": "Tarayıcıyı Seçin",
+"Select Sandbox": "Korumalı Alanı Seçin",
+"Select which browser you want to create a shortcut for and in what box": "Hangi tarayıcı için kısayol oluşturmak istediğinizi ve hangi alanda olduğunu seçin",
+"Select Browser Path": "Tarayıcı Yolunu Seçin",
+
+"Explorer Context Menu extension does not work": "Gezgin Bağlam Menüsü uzantısı çalışmıyor",
+"This procedure will re install the shell integration": "Bu prosedür kabuk entegrasyonunu yeniden kuracaktır",
+"Add Run Sandboxed": "Korumalı Alanda Çalıştırı ekle",
+"Add Run Unsandboxed": "Korumalı Alan Dışında Çalıştırmayı ekle",
+"Install legacy shell extensions": "Eski kabuk uzantılarını yükle",
+"Select which shell options should be reinstalled": "Hangi kabuk seçeneklerinin yeniden yüklenmesi gerektiğini seçin",
+
+"Failed to install application into a sandbox": "Uygulama korumalı alana yüklenemedi",
+"Enter Installer Path": "Yükleyici Yolunu Girin",
+"Select a sandbox to install into": "Yüklenecek korumalı alanı seçin",
+"This box has DropAdminRights enabled, preventing execution of installers. Do you want to disable this restriction, that will reduce the security level.": "Bu kutuda DropAdminRights etkinleştirildi, bu da yükleyicilerin yürütülmesini engelliyor. Bu kısıtlamayı devre dışı bırakmak istiyor musunuz, bu güvenlik düzeyini düşürecektir.",
+"Disable DropAdminRights": "DropAdminRights'ı devre dışı bırak",
+"Enable FakeAdminRights": "FakeAdminRights'ı etkinleştir",
+"running installer, pid: %1 press NEXT once it finishes to continue": "yükleyici çalışıyor, pid: %1 devam etmek için bittiğinde SONRAKİ'ne tıklayın",
+"Was the issue resolved?": "Sorun çözüldü mü?",
+
+"Webcam or Sound does not work when sandboxed": "Web kamerası veya Ses korumalı alanda çalışmıyor",
+"To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "Windows 11'de web kamerası desteğini etkinleştirmek için yalıtım düzeyinin düşürülmesi gerekir. \nDevam etmek istiyorsanız lütfen İLERİ'ye tıklayın ve değiştirilecek korumalı alanı seçin. \n",
+"\nPlease note that this required preset works only with a valid supporter certificate!": "\nLütfen bu gerekli ön ayarın yalnızca geçerli bir destekçi sertifikasıyla çalıştığını unutmayın!",
+"Select which box to turn into a reduced isolation app compartment box.": "Hangi alanın, yalıtımı azaltılmış uygulama bölmesine dönüştürüleceğini seçin.",
+"The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "Yalıtım azaltma uygulandı, lütfen %1 alanında web kamerasını deneyin ve sorunun çözülüp çözülmediğini belirtin.",
+
+"Select affected sandbox": "Etkilenen korumalı alanı seçin",
+"Enter Process Name": "İşlem Adını Girin",
+
+"Internet Access restrictions are in effect for the sandbox in which the program is running. The program is prohibited from accessing the Internet.": "Programın çalıştığı korumalı alan için İnternet Erişimi kısıtlamaları geçerlidir. Programın internete erişimi engellenmiş.",
+
+"Start/Run restrictions are in effect for the sandbox in which the program is running. The program is prohibited from starting or running.": "Programın çalıştığı korumalı alan için Başlat/Çalıştır kısıtlamaları geçerlidir. Programın başlatılması veya çalıştırılması engellenmiş.",
+
+"Failures to load SbieDll.dll when encountered by Chrome, or another software employing app containers, it is often caused by invalid DACL entries for the Sandboxie home directory. This mitigation measure will fix them, for this reason it will prompt for admin privileges which need to be granted for kmdutil.exe.": "Chrome veya uygulama konteynerı kullanan başka bir yazılımla karşılaşıldığında SbieDll.dll dosyasının yüklenememesi, genellikle Sandboxie ana dizini için geçersiz DACL girişlerinden kaynaklanır. Bu hafifletici önlem bunları düzeltecektir, bu nedenle gereken yönetici ayrıcalıkları kmdutil.exe için istenecektir.",
+"The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "DACL'ler ayarlandı. Lütfen uygulamanızı tekrar çalıştırmayı deneyin ve sorunun çözülüp çözülmediğini belirtin.",
+"DACLs fix did not resolve the issue": "DACL düzeltmesi sorunu çözmedi",
+
+"The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Mesaj, Sandboxie'nin SandboxieRpcSs veya SandboxieDcomLaunch yardımcı programlarından birini başlatamadığını belirtir. Mesajda belirtilen ad rpcss veya dcomlaunch olabilir.\n\nSorunu analiz etmemize yardımcı olması için sonraki sayfadan bir sorun raporu gönderebilirsiniz.",
+
+"Sandboxie was not able to execute one of its own programs. Check access permissions to the Sandboxie installation folder and/or reinstall Sandboxie.\n\nPossible Causes:\n1. Sandboxie was configured to block access to the folder containing its program files.\n2. A third-party (HIPS) security software was configured to block the execution of the program mentioned in the message.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Sandboxie kendi programlarından birini çalıştıramadı. Sandboxie kurulum klasörüne erişim izinlerini kontrol edin ve/veya Sandboxie'yi yeniden yükleyin.\n\nOlası Nedenler:\n1. Sandboxie, program dosyalarını içeren klasöre erişimi engelleyecek şekilde yapılandırılmıştır.\n2. Mesajda bahsedilen programın yürütülmesini engellemek için bir üçüncü taraf (HIPS) güvenlik yazılımı yapılandırıldı.\n\nSorunu analiz etmemize yardımcı olması için sonraki sayfadan bir sorun raporu gönderebilirsiniz.",
+
+"Do you want to open the box option dialog to change this preset?": "Bu ön ayarı değiştirmek için Alan Seçenekleri penceresini açmak istiyor musunuz?",
+"No, it is fine as it is": "Hayır, bu haliyle gayet iyi",
+"No, but I want to report a bug": "Hayır ama bir hata bildirmek istiyorum",
+
+"The message %1 is caused by the file migration limit being reached.": "%1 mesajı, dosya taşıma sınırına ulaşılmasından kaynaklanıyor.",
+
+"It seems you are using a non-administrative user account on a system with enabled parental controls, this is known to be incompatible with Sandboxie.\nYou have the following options to resolve the issue.": "Ebeveyn denetimlerinin etkin olduğu bir sistemde yönetici olmayan bir kullanıcı hesabı kullandığınız anlaşılıyor; bunun Sandboxie ile uyumlu olmadığı biliniyor.\nSorunu çözmek için aşağıdaki seçeneklere sahipsiniz.",
+
+"Sbie Message Code": "Sbie Mesaj Kodu",
+"Name affected process": "Etkilenen işlemi belirtin",
+"Please enter the SBIEMSG ID you have encountered.": "Lütfen karşılaştığınız SBIEMSG numarasını girin.",
+"There is no automated troubleshooting available for SBIE%1 yet.<br />": "Henüz SBIE%1 için otomatik sorun giderme özelliği mevcut değil.<br />",
+"The full message text is: %1<br />": "Tam mesaj metni: %1<br />",
+"Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "Bu ve diğer sbie mesajları hakkında daha fazla bilgi edinmek için <a href=\"%1\">online-documentation</a> sayfasını ziyaret edin.",
+"Would you like to collect some logs to help us resolve the issue.": "Sorunu çözmemize yardımcı olacak bazı günlükler toplamak ister misiniz?",
+"Now please run your application again to trigger the Sbie message.<br /><br />": "Şimdi lütfen Sbie mesajını tetiklemek için uygulamanızı tekrar çalıştırın.<br /><br />",
+"Press NEXT when you are done collecting logs.": "Günlükleri toplamayı tamamladığınızda SONRAKİ'ne tıklayın."
+}

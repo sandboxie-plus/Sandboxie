@@ -4522,7 +4522,7 @@ Error: %1</source>
         <location filename="SbiePlusAPI.cpp" line="1206"/>
         <source>Failed to enumerate installed Windows updates</source>
         <oldsource>Failed to search for updates</oldsource>
-        <translation type="unfinished">搜索更新失败</translation>
+        <translation>列举已安装的Windows更新失败</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1212"/>

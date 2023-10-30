@@ -4693,7 +4693,8 @@ Não vou definir: %2</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1206"/>
-        <source>Failed to search for updates</source>
+        <source>Failed to enumerate installed Windows updates</source>
+        <oldsource>Failed to search for updates</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -4773,8 +4773,9 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1206"/>
-        <source>Failed to search for updates</source>
-        <translation>Échec de recerche de mises à jour</translation>
+        <source>Failed to enumerate installed Windows updates</source>
+        <oldsource>Failed to search for updates</oldsource>
+        <translation type="unfinished">Échec de recerche de mises à jour</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1212"/>

@@ -4545,7 +4545,8 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1206"/>
-        <source>Failed to search for updates</source>
+        <source>Failed to enumerate installed Windows updates</source>
+        <oldsource>Failed to search for updates</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

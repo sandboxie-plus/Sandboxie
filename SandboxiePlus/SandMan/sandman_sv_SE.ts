@@ -4732,8 +4732,9 @@ Notera: Uppdateringskollen är ofta bakom senaste GitHub-utgivningen för att s�
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1206"/>
-        <source>Failed to search for updates</source>
-        <translation>Misslyckades söka uppdateringar</translation>
+        <source>Failed to enumerate installed Windows updates</source>
+        <oldsource>Failed to search for updates</oldsource>
+        <translation type="unfinished">Misslyckades söka uppdateringar</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1212"/>

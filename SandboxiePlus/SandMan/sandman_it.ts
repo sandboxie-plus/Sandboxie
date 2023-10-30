@@ -4453,8 +4453,9 @@ Questo file fa parte di Sandboxie e tutte le modifiche apportate ad esso saranno
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1206"/>
-        <source>Failed to search for updates</source>
-        <translation>Ricerca aggiornamenti fallita</translation>
+        <source>Failed to enumerate installed Windows updates</source>
+        <oldsource>Failed to search for updates</oldsource>
+        <translation type="unfinished">Ricerca aggiornamenti fallita</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1212"/>

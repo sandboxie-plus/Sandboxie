@@ -4684,8 +4684,9 @@ Uwaga: Sprawdzanie aktualizacji często pomija najnowsze wydania GitHub, aby zap
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1206"/>
-        <source>Failed to search for updates</source>
-        <translation>Nie udało się wyszukać aktualizacji</translation>
+        <source>Failed to enumerate installed Windows updates</source>
+        <oldsource>Failed to search for updates</oldsource>
+        <translation type="unfinished">Nie udało się wyszukać aktualizacji</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1212"/>

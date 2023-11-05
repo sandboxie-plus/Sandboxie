@@ -2409,6 +2409,10 @@ Wprowadź typ pliku (lub rozszerzenie pliku), by wyłączyć go z Natychmiastowe
 # Sandboxie Control:  Sandbox Settings:  Delete
 #----------------------------------------------------------------------------
 
+# 3841;txt;01
+# Delete::Invocation
+# .
+
 3841;txt;02
 Usuń
 .
@@ -2513,6 +2517,10 @@ Monitorowane foldery mają pierwszeństwo przed Monitorowanymi programami.
 3866;txt;01
 Wybierz folder, by dodać do listy monitorowanych folderów.
 .
+
+# 3871;txt;01
+# Program Start::Forced Programs
+# .
 
 3872;txt;01
 Monitorowane programy

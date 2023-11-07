@@ -3387,7 +3387,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     <message>
         <location filename="SandMan.cpp" line="2842"/>
         <source>The selected feature set is only available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>선택한 기능 세트는 프로젝트 후원자만 사용할 수 있습니다.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;프로젝트 후원자 되기&lt;/a&gt;, 및 &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;후원자 인증서 받기&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2880"/>
@@ -3654,17 +3654,17 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="3936"/>
         <source>Do you want to open %1 in a sandboxed or unsandboxed Web browser?</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스된 웹 브라우저 또는 샌드박스되지 않은 웹 브라우저에서 %1을(를) 여시겠습니까?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3940"/>
         <source>Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스됨</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3941"/>
         <source>Unsandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스되지 않음</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4100"/>
@@ -4608,7 +4608,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <location filename="SbiePlusAPI.cpp" line="1206"/>
         <source>Failed to enumerate installed Windows updates</source>
         <oldsource>Failed to search for updates</oldsource>
-        <translation type="unfinished">업데이트 검색 실패</translation>
+        <translation>설치된 Windows 업데이트를 열거하지 못했습니다</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1212"/>

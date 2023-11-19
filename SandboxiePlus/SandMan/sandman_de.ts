@@ -4259,8 +4259,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="SbiePlusAPI.cpp" line="1206"/>
         <source>Failed to enumerate installed Windows updates</source>
-        <oldsource>Failed to search for updates</oldsource>
-        <translation type="unfinished">Suche nach Updates fehlgeschlagen</translation>
+        <translation>Fehler beim Ermitteln der installierten Windowsupdates</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1212"/>
@@ -7346,9 +7345,9 @@ Der Prozessübereinstimmungslevel hat eine höhere Priorität als die Genauigkei
         <source>Configure the folder locations used by your other applications.
 
 Please note that this values are currently user specific and saved globally for all boxes.</source>
-        <translation>Konfiguriere die Ordnerspeicherorte, welche bei Ihren anderen Programmen genutzt werden.
+        <translation>Konfigurieren Sie die Ordnerspeicherorte, welche von Ihren anderen Programmen genutzt werden.
 
-Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global für alle Boxen gepeichert werden.</translation>
+Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global für alle Boxen gespeichert werden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3779"/>

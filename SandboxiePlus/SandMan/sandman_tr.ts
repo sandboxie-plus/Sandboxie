@@ -4254,8 +4254,7 @@ Hayır şunları seçer: %2</translation>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1206"/>
         <source>Failed to enumerate installed Windows updates</source>
-        <oldsource>Failed to search for updates</oldsource>
-        <translation type="unfinished">Güncellemeler aranamadı</translation>
+        <translation>Yüklü Windows güncellemeleri listelenemedi</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1212"/>

@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.12.1 / 5.67.1] - 2023-10-
+## [1.12.1 / 5.67.1] - 2023-11-23
 
 ### Changed
 - improved open url dialog box [#3401](https://github.com/sandboxie-plus/Sandboxie/issues/3401)
@@ -18,6 +18,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with key to bring sandman in fron as top most
 - fixed issue with ThreadSuspendCount failing for already terminated threads [#3375](https://github.com/sandboxie-plus/Sandboxie/issues/3375)
 - fixed message text [#3408](https://github.com/sandboxie-plus/Sandboxie/issues/3408)
+- fixed Firefox 120.0, SBIE2205 Service not implemented: CredWriteA [#3441](https://github.com/sandboxie-plus/Sandboxie/issues/3441)
+
 
 
 ## [1.12.0 / 5.67.0] - 2023-10-25

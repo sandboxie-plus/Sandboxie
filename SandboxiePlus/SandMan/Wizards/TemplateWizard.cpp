@@ -207,7 +207,7 @@ bool CTemplateWizard::CreateNewTemplate(CSandBox* pBox, ETemplateType Type, QWid
                         QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_Local_" + Section + "_Cookies_DirectAccess", theAPI));
                         pTemplate->SetText("Tmpl.Title", tr("Allow direct access to %1 cookies").arg(Name));
                         pTemplate->SetText("Tmpl.Class", "Local");
-                        pTemplate->AppendText("OpenFilePath", BrowserBinary + "," + ProfilePath + "*\\Cookies*");
+                        pTemplate->AppendText("OpenFilePath", BrowserBinary + "," + ProfilePath + "*\\Network\\Cookies*");
 
                         if (wizard.field("cookies").toBool() && pBox)
                             pBox->AppendText("Template", pTemplate->GetName().mid(9));

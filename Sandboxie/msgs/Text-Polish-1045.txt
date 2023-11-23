@@ -799,7 +799,7 @@ SBIE9234 Service startup error %2
 # .
 
 # 9205;evt;err;01
-SBIE9205 Błąd deskryptora bezpieczeństwa
+# SBIE9205 Błąd deskryptora bezpieczeństwa
 # .
 
 # 9206;evt;err;01
@@ -3952,7 +3952,7 @@ Domyślne ustawienia Sandboxie, zapewniają pełną ochronę, ale może będzies
 
 # 7978;txt;01
 # Aktualna data (%2) jest późniejsza niż data wysłana z serwera licencji (%3).
-.
+# .
 
 # 7982;txt;01
 # Serwer licencji nie określił przyczyny niepowodzenia aktywacji.

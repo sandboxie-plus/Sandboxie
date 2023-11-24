@@ -10,8 +10,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.12.2 / 5.67.2] - 2023-11-
 
 ### Fixed
-- FIXED SECURITY ISSUE ID-23 now blocking SeManageVolumePrivilege which allowed to read MFT data (thanks Diversenok)
-- fixed issue with MsEdge and AutoDelete [#post-3173507](https://www.wilderssecurity.com/threads/sandboxie-plus-v1-12-1-pre-release.452939/#post-3173507)
+- FIXED SECURITY ISSUE ID-23 SeManageVolumePrivilege is now blocked, as it allowed to read MFT data (thanks Diversenok)
+- fixed issue with Microsoft Edge when using AutoDelete option [#post-3173507](https://www.wilderssecurity.com/threads/sandboxie-plus-v1-12-1-pre-release.452939/#post-3173507)
 
 
 
@@ -23,7 +23,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue with key to bring SandMan in front as top most
-- fixed issue with ThreadSuspendCount failing for already terminated threads [#3375](https://github.com/sandboxie-plus/Sandboxie/issues/3375) (disputed)
+- fixed issue with ThreadSuspendCount failing for already terminated threads [25054d0](https://github.com/sandboxie-plus/Sandboxie/commit/25054d0b2bd34c12471eefdf6ba9550e50ef02e5)
 - fixed message text [#3408](https://github.com/sandboxie-plus/Sandboxie/issues/3408)
 - fixed warning issue with Firefox 120.0: `SBIE2205 Service not implemented: CredWriteA` [#3441](https://github.com/sandboxie-plus/Sandboxie/issues/3441)
 - fixed outdated Chromium paths [#3436](https://github.com/sandboxie-plus/Sandboxie/pull/3436)

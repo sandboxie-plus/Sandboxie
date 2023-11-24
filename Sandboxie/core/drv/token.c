@@ -177,7 +177,7 @@ UCHAR Sbie_Token_SourceName[5] = { 's', 'b', 'o', 'x', 0 };
 
 _FX BOOLEAN Token_Init(void)
 {
-    const ULONG NumBasePrivs = 6;
+    const ULONG NumBasePrivs = 7;
     const ULONG NumVistaPrivs = 1;
 
     // $Offset$ - Hard Offset Dependency
@@ -253,7 +253,8 @@ _FX BOOLEAN Token_Init(void)
     MySetPrivilege(3) = SE_SHUTDOWN_PRIVILEGE;
     MySetPrivilege(4) = SE_DEBUG_PRIVILEGE;
     MySetPrivilege(5) = SE_SYSTEMTIME_PRIVILEGE;
-    MySetPrivilege(6) = SE_TIME_ZONE_PRIVILEGE; // vista
+    MySetPrivilege(6) = SE_MANAGE_VOLUME_PRIVILEGE;
+    MySetPrivilege(7) = SE_TIME_ZONE_PRIVILEGE; // vista
 
 #undef MySetPrivilege
 

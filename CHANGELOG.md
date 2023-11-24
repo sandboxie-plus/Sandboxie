@@ -7,6 +7,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.12.2 / 5.67.2] - 2023-11-
+
+### Fixed
+- FIXED SECURITY ISSUE ID-23 now blocking SeManageVolumePrivilege which allowed to read MFT data (thanks Diversenok)
+- fixed issue with MsEdge and AutoDelete [#post-3173507](https://www.wilderssecurity.com/threads/sandboxie-plus-v1-12-1-pre-release.452939/#post-3173507)
+
+
 
 ## [1.12.1 / 5.67.1] - 2023-11-23
 

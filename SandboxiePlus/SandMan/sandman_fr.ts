@@ -3594,7 +3594,7 @@ Ce fichier fait partie de Sandboxie et toute modification faite sur lui sera ann
     <message>
         <location filename="SandMan.cpp" line="2842"/>
         <source>The selected feature set is only available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>La fonction choisie est uniquement disponible aux adhérents au projet.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Devenez un adhérent au projet&lt;/a&gt;, et recevez un &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;certificat d&apos;adhérent&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2880"/>
@@ -3664,17 +3664,17 @@ Erreur : %1</translation>
     <message>
         <location filename="SandMan.cpp" line="3936"/>
         <source>Do you want to open %1 in a sandboxed or unsandboxed Web browser?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous ouvrir %1 dans un navigateur web dans un bac à sable ou en dehors ?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3940"/>
         <source>Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Dans un bac à sable</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3941"/>
         <source>Unsandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>En dehors d&apos;un bac à sable</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4100"/>
@@ -4407,7 +4407,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     </message>
     <message>
         <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
-        <translation type="vanished">Voulez-vous ouvrir %1 dans un navigateur web en bac à sable (oui) ou en dehors du bac à sable (non) ?</translation>
+        <translation type="vanished">Voulez-vous ouvrir %1 dans un navigateur web dans le bac à sable (oui) ou en dehors (non) ?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3937"/>
@@ -4775,7 +4775,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="SbiePlusAPI.cpp" line="1206"/>
         <source>Failed to enumerate installed Windows updates</source>
         <oldsource>Failed to search for updates</oldsource>
-        <translation type="unfinished">Échec de recerche de mises à jour</translation>
+        <translation>Échec d&apos;énumération des mises à jour Windows installées</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1212"/>

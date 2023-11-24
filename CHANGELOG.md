@@ -11,14 +11,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.12.1 / 5.67.1] - 2023-11-23
 
 ### Changed
-- improved open url dialog box [#3401](https://github.com/sandboxie-plus/Sandboxie/issues/3401)
+- improved open URL dialog [#3401](https://github.com/sandboxie-plus/Sandboxie/issues/3401)
 - improved suspended process detection
 
 ### Fixed
-- fixed issue with key to bring sandman in fron as top most
-- fixed issue with ThreadSuspendCount failing for already terminated threads [#3375](https://github.com/sandboxie-plus/Sandboxie/issues/3375)
+- fixed issue with key to bring SandMan in front as top most
+- fixed issue with ThreadSuspendCount failing for already terminated threads [#3375](https://github.com/sandboxie-plus/Sandboxie/issues/3375) (disputed)
 - fixed message text [#3408](https://github.com/sandboxie-plus/Sandboxie/issues/3408)
-- fixed Firefox 120.0, SBIE2205 Service not implemented: CredWriteA [#3441](https://github.com/sandboxie-plus/Sandboxie/issues/3441)
+- fixed warning issue with Firefox 120.0: `SBIE2205 Service not implemented: CredWriteA` [#3441](https://github.com/sandboxie-plus/Sandboxie/issues/3441)
+- fixed outdated Chromium paths [#3436](https://github.com/sandboxie-plus/Sandboxie/pull/3436)
 
 
 
@@ -27,18 +28,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - added mechanism to automatically set USB drives as forced folders (Requires a supporter certificate)
 - added troubleshooting script for issue [#3318](https://github.com/sandboxie-plus/Sandboxie/issues/3318) with parental controls
-- started german translation of the troubleshooting scripts ...\SandboxiePlus\SandMan\Troubleshooting\lang_de.json [#3293](https://github.com/sandboxie-plus/Sandboxie/issues/3293)
-- added "get_cert SBIEX-XXXXX-XXXXX-XXXXX-XXXXX" command to UpdUtil.exe allowing to get a cert by serial using command line
+- started German translation of the troubleshooting scripts ...\SandboxiePlus\SandMan\Troubleshooting\lang_de.json [#3293](https://github.com/sandboxie-plus/Sandboxie/issues/3293)
+- added "get_cert SBIEX-XXXXX-XXXXX-XXXXX-XXXXX" command to UpdUtil.exe allowing to get a certificate by serial number using command line
 - added mechanism to revoke leaked or refunded certificates
-- added new global hot key to bring sandman in fron as top most ALT+Break [#3320](https://github.com/sandboxie-plus/Sandboxie/issues/3320)
-- added Exclude specific boxes from 'Terminate all processes' [#3108](https://github.com/sandboxie-plus/Sandboxie/issues/3108)
-  - Note: press the panic button hot key 3 times with less then 1 second between clicks to Terminate All with NO exceptions
-- added Customizable global hotkey that toggles the state of "pause forced programs" [#2441](https://github.com/sandboxie-plus/Sandboxie/issues/2441)
-- added Warn or prevent broad "forced folder" settings [#650](https://github.com/sandboxie-plus/Sandboxie/issues/650)
-- added CheckExpectFile function to Plus [#768](https://github.com/sandboxie-plus/Sandboxie/issues/768)
+- added new global hotkey to bring SandMan in front as top most ALT+Break [#3320](https://github.com/sandboxie-plus/Sandboxie/issues/3320)
+- added option to exclude specific boxes from 'Terminate all processes' [#3108](https://github.com/sandboxie-plus/Sandboxie/issues/3108)
+  - Note: press the panic button hotkey 3 times with less than 1 second between clicks to Terminate All with NO exceptions
+- added customizable global hotkey that toggles the state of "pause forced programs" [#2441](https://github.com/sandboxie-plus/Sandboxie/issues/2441)
+- added warning to prevent broad "forced folder" settings [#650](https://github.com/sandboxie-plus/Sandboxie/issues/650)
+- added CheckExpectFile function to Sandboxie Plus [#768](https://github.com/sandboxie-plus/Sandboxie/issues/768)
 
 ### Changed
-- improved suspend process ahndling [#3375](https://github.com/sandboxie-plus/Sandboxie/issues/3375)
+- improved suspend process handling [#3375](https://github.com/sandboxie-plus/Sandboxie/issues/3375)
 - improved handling of issue reports
 - updated reminder schedule
 
@@ -46,7 +47,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with auto updater not offering version updates
 - fixed issue with new symlink handling code [#3340](https://github.com/sandboxie-plus/Sandboxie/issues/3340)
 - fixed issue with Scm_StartServiceCtrlDispatcherX not behaving correctly when not run as service [#1246](https://github.com/sandboxie-plus/Sandboxie/issues/1246) [#3297](https://github.com/sandboxie-plus/Sandboxie/issues/3297)
-- fixed Issue with configuring the original folder of a symbolic link created using mklink to OpenPipePath [#3207](https://github.com/sandboxie-plus/Sandboxie/issues/3207)
+- fixed issue with configuring the original folder of a symbolic link created using mklink to OpenPipePath [#3207](https://github.com/sandboxie-plus/Sandboxie/issues/3207)
 
 ### Removed
 - removed obsolete /nosbiectrl switch [#3391](https://github.com/sandboxie-plus/Sandboxie/issues/3391)
@@ -68,7 +69,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed some GUI functions using the wrong box path if the FileRootPath value starts with Volume{GUID} [#3345](https://github.com/sandboxie-plus/Sandboxie/issues/3345)
 - fixed programs not running when they are kept in RAM and encrypted boxes if the sandbox root folder is not present [#3349](https://github.com/sandboxie-plus/Sandboxie/issues/3349)
 - fixed Process Restrictions toggle not working correctly [#3355](https://github.com/sandboxie-plus/Sandboxie/issues/3355)
-
 
 
 

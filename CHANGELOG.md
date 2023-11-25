@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - FIXED SECURITY ISSUE ID-23 SeManageVolumePrivilege is now blocked, as it allowed to read MFT data (thanks Diversenok)
 - fixed issue with Microsoft Edge when using AutoDelete option [#post-3173507](https://www.wilderssecurity.com/threads/sandboxie-plus-v1-12-1-pre-release.452939/#post-3173507)
+- fixed warning issue `Acrobat.exe: SBIE2205 Service not implemented: CredEnumerateA` [#issuecomment-1826280016](https://github.com/sandboxie-plus/Sandboxie/issues/3441#issuecomment-1826280016)
 
 
 

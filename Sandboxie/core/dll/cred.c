@@ -1480,6 +1480,7 @@ _FX BOOL Cred_CredReadA(
 _FX BOOL Cred_CredReadDomainCredentialsA(
     void *pTargetInfo, ULONG Flags, ULONG *pCount, void ***ppCredentials)
 {
+    // todo
     SbieApi_Log(2205, L"CredReadDomainCredentialsA");
     return __sys_CredReadDomainCredentialsA(
                                 pTargetInfo, Flags, pCount, ppCredentials);
@@ -1494,6 +1495,7 @@ _FX BOOL Cred_CredReadDomainCredentialsA(
 _FX BOOL Cred_CredEnumerateA(
     void *pFilter, ULONG Flags, ULONG *pCount, void ***ppCredentials)
 {
-    SbieApi_Log(2205, L"CredEnumerateA");
+    // todo
+    //SbieApi_Log(2205, L"CredEnumerateA");
     return __sys_CredEnumerateA(pFilter, Flags, pCount, ppCredentials);
 }

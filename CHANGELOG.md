@@ -13,7 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - FIXED SECURITY ISSUE ID-23 SeManageVolumePrivilege is now blocked, as it allowed to read MFT data (thanks Diversenok)
 - fixed issue with Microsoft Edge when using AutoDelete option [#post-3173507](https://www.wilderssecurity.com/threads/sandboxie-plus-v1-12-1-pre-release.452939/#post-3173507)
 - fixed warning issue `Acrobat.exe: SBIE2205 Service not implemented: CredEnumerateA` [#issuecomment-1826280016](https://github.com/sandboxie-plus/Sandboxie/issues/3441#issuecomment-1826280016)
-
+- fixed UNEXPECTED_KERNEL_MODE_TRAP BSOD when opening any web link from sandboxed Microsoft 365 app (e.g. Outlook, Word) [#3427](https://github.com/sandboxie-plus/Sandboxie/issues/3427)
 
 
 ## [1.12.1 / 5.67.1] - 2023-11-23

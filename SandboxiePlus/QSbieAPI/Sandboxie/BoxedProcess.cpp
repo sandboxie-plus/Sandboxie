@@ -370,7 +370,7 @@ bool CBoxedProcess::TestSuspended()
 		hThread = nNextThread;
 
 		ULONG IsTerminated = 0;
-		if (NT_SUCCESS(NtQueryInformationThread(hThread, ThreadIsTerminated, &IsTerminated, sizeof(ULONG), NULL)) && IsTerminated)
+		if (!NT_SUCCESS(NtQueryInformationThread(hThread, ThreadIsTerminated, &IsTerminated, sizeof(ULONG), NULL)) || IsTerminated)
 			continue;
 
 		ULONG SuspendCount = 0;

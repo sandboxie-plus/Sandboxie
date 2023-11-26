@@ -42,7 +42,7 @@
      <item row="4" column="1">
       <widget class="QCheckBox" name="chkEncrypt">
        <property name="toolTip">
-        <string>When sellected you will be prompted for a password after clicking OK</string>
+        <string>When selected you will be prompted for a password after clicking OK</string>
        </property>
        <property name="text">
         <string>Encrypt archive content</string>

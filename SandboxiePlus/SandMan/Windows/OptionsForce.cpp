@@ -287,9 +287,9 @@ bool COptionsWindow::CheckForcedItem(const QString& Value, int type)
 			bDangerous = true;
 		else if (Value.compare("taskmgr.exe", Qt::CaseInsensitive) == 0 || Value.compare(winPath + "\\system32\\taskmgr.exe", Qt::CaseInsensitive) == 0)
 			bDangerous = true;
-		else if (Value.contains("sbiesvc.exe", Qt::CaseInsensitive) == 0)
+		else if (Value.contains("sbiesvc.exe", Qt::CaseInsensitive))
 			bDangerous = true;
-		else if (Value.contains("sandman.exe", Qt::CaseInsensitive) == 0)
+		else if (Value.contains("sandman.exe", Qt::CaseInsensitive))
 			bDangerous = true;
 	}
 	else

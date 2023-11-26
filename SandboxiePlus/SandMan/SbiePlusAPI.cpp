@@ -189,7 +189,7 @@ protected:
 	CArchive* m_pArchive;
 };
 
-void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ExportPath, const QString& RootPath, const QString& Section, const QString& Password)
+void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ExportPath, const QString& RootPath, const QString& Section, const QString& Password, struct SCompressParams* Params)
 {
 	//CArchive Archive(ExportPath + ".tmp");
 	CArchive Archive(ExportPath);
@@ -233,7 +233,7 @@ void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 		Archive.SetPassword(Password);
 
 	SB_STATUS Status = SB_OK;
-	if (!Archive.Update(&Files, true, theConf->GetInt("Options/ExportCompression", 3)))  // 0, 1 - 9
+	if (!Archive.Update(&Files, true, Params))  // 0, 1 - 9
 		Status = SB_ERR((ESbieMsgCodes)SBX_7zCreateFailed);
 	
 	//if(!Status.IsError() && !pProgress->IsCanceled())
@@ -243,10 +243,12 @@ void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 
 	File.remove();
 
+	delete Params;
+
 	pProgress->Finish(Status);
 }
 
-SB_PROGRESS CSandBoxPlus::ExportBox(const QString& FileName, const QString& Password)
+SB_PROGRESS CSandBoxPlus::ExportBox(const QString& FileName, const QString& Password, int Level, bool Solid)
 {
 	if (!CArchive::IsInit())
 		return SB_ERR((ESbieMsgCodes)SBX_7zNotReady);
@@ -259,8 +261,12 @@ SB_PROGRESS CSandBoxPlus::ExportBox(const QString& FileName, const QString& Pass
 
 	QString Section = theAPI->SbieIniGetEx(m_Name, "");
 
+	SCompressParams* Params = new SCompressParams();
+	Params->iLevel = Level;
+	Params->bSolid = Solid;
+
 	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-	QtConcurrent::run(CSandBoxPlus::ExportBoxAsync, pProgress, FileName, m_FilePath, Section, Password);
+	QtConcurrent::run(CSandBoxPlus::ExportBoxAsync, pProgress, FileName, m_FilePath, Section, Password, Params);
 	return SB_PROGRESS(OP_ASYNC, pProgress);
 }
 

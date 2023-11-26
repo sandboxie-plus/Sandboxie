@@ -72,7 +72,7 @@ public:
 	CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI);
 	virtual ~CSandBoxPlus();
 
-	SB_PROGRESS				ExportBox(const QString& FileName, const QString& Password = "");
+	SB_PROGRESS				ExportBox(const QString& FileName, const QString& Password = "", int Level = 5, bool Solid = false);
 	SB_PROGRESS				ImportBox(const QString& FileName, const QString& Password = "");
 
 	virtual void			UpdateDetails();
@@ -220,7 +220,7 @@ protected:
 	void					AddJobToQueue(CBoxJob* pJob);
 	void					StartNextJob();
 
-	static void				ExportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ExportPath, const QString& RootPath, const QString& Section, const QString& Password = "");
+	static void				ExportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ExportPath, const QString& RootPath, const QString& Section, const QString& Password = "", struct SCompressParams* Params = NULL);
 	static void				ImportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ImportPath, const QString& RootPath, const QString& BoxName, const QString& Password = "");
 
 	bool					IsFileDeleted(const QString& RealPath, const QString& Snapshot, const QStringList& SnapshotList, const QMap<QString, QList<QString>>& DeletedPaths);

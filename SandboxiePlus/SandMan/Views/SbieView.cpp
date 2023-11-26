@@ -1384,19 +1384,25 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 		CSandBoxPtr pBox = SandBoxes.first();
 		auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
 
+		CCompressDialog optWnd(this);
+		if (pBoxEx->UseImageFile())
+			optWnd.SetMustEncrypt();
+		if (!theGUI->SafeExec(&optWnd) == 1)
+			return;
+
+		QString Password;
+		if (optWnd.UseEncryption()) {
+			CBoxImageWindow pwWnd(CBoxImageWindow::eExport, this);
+			if (!theGUI->SafeExec(&pwWnd) == 1)
+				return;
+			Password = pwWnd.GetPassword();
+		}
+
 		QString Path = QFileDialog::getSaveFileName(this, tr("Select file name"), SandBoxes.first()->GetName() + ".7z", tr("7-zip Archive (*.7z)"));	
 		if (Path.isEmpty())
 			return;
 
-		QString Password;
-		if (pBoxEx->UseImageFile()) {
-			CBoxImageWindow window(CBoxImageWindow::eExport, this);
-			if (!theGUI->SafeExec(&window) == 1)
-				return;
-			Password = window.GetPassword();
-		}
-
-		SB_PROGRESS Status = pBoxEx->ExportBox(Path, Password);
+		SB_PROGRESS Status = pBoxEx->ExportBox(Path, Password, optWnd.GetLevel(), optWnd.MakeSolid());
 		if (Status.GetStatus() == OP_ASYNC)
 			theGUI->AddAsyncOp(Status.GetValue(), false, tr("Exporting: %1").arg(Path));
 		else

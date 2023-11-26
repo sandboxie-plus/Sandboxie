@@ -9,6 +9,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.12.2 / 5.67.2] - 2023-11-
 
+### Added
+- added options dialog when exporting a box [#3409](https://github.com/sandboxie-plus/Sandboxie/issues/3409)
+
 ### Fixed
 - FIXED SECURITY ISSUE ID-23 SeManageVolumePrivilege is now blocked, as it allowed to read MFT data (thanks Diversenok)
 - fixed issue with Microsoft Edge when using AutoDelete option [#post-3173507](https://www.wilderssecurity.com/threads/sandboxie-plus-v1-12-1-pre-release.452939/#post-3173507)

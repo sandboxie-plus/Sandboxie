@@ -966,7 +966,9 @@ bool CSubmitPage::validatePage()
         }
 
         m_pUploadProgress->ShowMessage(tr("Compressing Logs"));
-        Archive.Update(&Files, true, 9);
+        SCompressParams Params;
+        Params.iLevel = 9;
+        Archive.Update(&Files, true, &Params);
         
         if (pSbieLogs->open(QIODevice::ReadOnly)) {
 
@@ -998,7 +1000,9 @@ bool CSubmitPage::validatePage()
         }
 
         m_pUploadProgress->ShowMessage(tr("Compressing Dumps"));
-        Archive.Update(&Files, true, 9);
+        SCompressParams Params;
+        Params.iLevel = 9;
+        Archive.Update(&Files, true, &Params);
 
         if (pSbieDumps->open(QIODevice::ReadOnly)) {
 

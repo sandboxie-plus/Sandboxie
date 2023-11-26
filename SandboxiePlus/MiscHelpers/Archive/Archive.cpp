@@ -216,7 +216,7 @@ bool CArchive::Close()
 	return false;
 }
 
-bool CArchive::Update(QMap<int, QIODevice*> *FileList, bool bDelete, int Level)
+bool CArchive::Update(QMap<int, QIODevice*> *FileList, bool bDelete, const SCompressParams* Params)
 {
 	if(!theArc.IsOperational())
 	{
@@ -263,10 +263,10 @@ bool CArchive::Update(QMap<int, QIODevice*> *FileList, bool bDelete, int Level)
 		const int kNumProps = sizeof(names) / sizeof(names[0]);
 		NWindows::NCOM::CPropVariant values[kNumProps] =
 		{
-			false,			// solid mode OFF
-			(UInt32)Level,	// compression level = 9 - ultra
-			//(UInt32)8,		// set number of CPU threads
-			true			// file name encryption (7z only)
+			(Params ? Params->bSolid : false),		// solid mode OFF
+			(UInt32)(Params ? Params->iLevel : 5),	// compression level = 9 - ultra
+			//(UInt32)8,							// set number of CPU threads
+			true									// file name encryption (7z only)
 		};
 
 		if(setProperties->SetProperties(names, values, kNumProps) != S_OK)

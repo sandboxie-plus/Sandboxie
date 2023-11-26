@@ -37,6 +37,7 @@ HEADERS += ./stdafx.h \
     ./Wizards/SetupWizard.h \
     ./Wizards/BoxAssistant.h \
     ./Windows/BoxImageWindow.h \
+    ./Windows/CompressDialog.h \
     ./Engine/BoxEngine.h \
     ./Engine/ScriptManager.h \
     ./Engine/BoxObject.h \
@@ -86,6 +87,7 @@ SOURCES += ./main.cpp \
     ./Wizards/SetupWizard.cpp \
     ./Wizards/BoxAssistant.cpp \
     ./Windows/BoxImageWindow.cpp \
+    ./Windows/CompressDialog.cpp \
     ./Engine/BoxEngine.cpp \
     ./Engine/ScriptManager.cpp \
     ./Engine/BoxObject.cpp \
@@ -101,7 +103,8 @@ FORMS += ./Forms/SelectBoxWindow.ui \
     ./Forms/RecoveryWindow.ui \
     ./Forms/SettingsWindow.ui \
     ./Forms/SnapshotsWindow.ui \
-    ./Forms/BoxImageWindow.ui
+    ./Forms/BoxImageWindow.ui \
+    ./Forms/CompressDialog.ui
 
 TRANSLATIONS += sandman_de.ts \
     sandman_en.ts \

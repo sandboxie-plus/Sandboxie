@@ -358,7 +358,8 @@ SB_STATUS CBoxedProcess::SetSuspend(bool bSet)
 
 bool CBoxedProcess::TestSuspended()
 {
-	bool isSuspended = true;
+	int iSuspended = 0;
+	int iRunning = 0;
 
 	for (HANDLE hThread = NULL;;)
 	{
@@ -379,15 +380,14 @@ bool CBoxedProcess::TestSuspended()
 			SuspendCount = SuspendThread(hThread);
 			ResumeThread(hThread);
 		}
-		if (SuspendCount == 0) {
-			isSuspended = false;
-			NtClose(hThread);
-			break;
-		}
+		if (SuspendCount > 0)
+			iSuspended++;
+		else
+			iRunning++;
     }
 
-	m_bSuspended = isSuspended;
-	return isSuspended;
+	m_bSuspended = iSuspended > 0 && iRunning == 0;
+	return m_bSuspended;
 }
 
 void CBoxedProcess::ResolveSymbols(const QVector<quint64>& Addresses)

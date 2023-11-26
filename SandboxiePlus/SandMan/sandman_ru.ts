@@ -1234,7 +1234,7 @@ You can use %USER% to save each users sandbox to an own folder.</source>
         <source>Your Sandboxie-Plus supporter certificate is expired, however for the current build you are using it remains active, when you update to a newer build exclusive supporter features will be disabled.
 
 Do you still want to update?</source>
-        <translation>Срок действия вашего сертификата сторонника Sandboxie-Plus истек, однако для текущей сборки, которую вы используете, он остается активным, при обновлении до более новой сборки эксклюзивные функции поддержки будут отключены.
+        <translation>Срок действия вашего сертификата сторонника Sandboxie-Plus истек, однако для текущей сборки, которую вы используете, он остается активным, при обновлении до более новой сборки эксклюзивные функции для сторонников будут отключены.
 
 Вы все еще хотите обновить?</translation>
     </message>
@@ -3232,17 +3232,17 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="3936"/>
         <source>Do you want to open %1 in a sandboxed or unsandboxed Web browser?</source>
-        <translation type="unfinished"></translation>
+        <translation>Хотите ли вы открыть %1 в изолированном или не изолированном веб-браузере?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3940"/>
         <source>Sandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>В песочнице</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3941"/>
         <source>Unsandboxed</source>
-        <translation type="unfinished"></translation>
+        <translation>Без песочницы</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4100"/>
@@ -3673,7 +3673,7 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="2842"/>
         <source>The selected feature set is only available to project supporters.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Become a project supporter&lt;/a&gt;, and receive a &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;supporter certificate&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбранный набор функций доступен только сторонникам проекта.&lt;br /&gt;&lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-get-cert&quot;&gt;Станьте сторонником проекта&lt;/a &gt; и получите &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-cert&quot;&gt;сертификат сторонника&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2880"/>
@@ -3954,10 +3954,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="SandMan.cpp" line="3869"/>
         <source>Operation failed for %1 item(s).</source>
         <translation>Операция не удалась для %1 элемента(ов).</translation>
-    </message>
-    <message>
-        <source>Do you want to open %1 in a sandboxed (yes) or unsandboxed (no) Web browser?</source>
-        <translation type="vanished">Вы хотите открыть %1 в изолированном (да) или не изолированном (нет) браузере?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3937"/>
@@ -4260,8 +4256,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="SbiePlusAPI.cpp" line="1206"/>
         <source>Failed to enumerate installed Windows updates</source>
-        <oldsource>Failed to search for updates</oldsource>
-        <translation type="unfinished">Не удалось найти обновления</translation>
+        <translation>Не удалось перечислить установленные обновления Windows</translation>
     </message>
     <message>
         <location filename="SbiePlusAPI.cpp" line="1212"/>

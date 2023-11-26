@@ -16,6 +16,7 @@
 #include "../Windows/BoxImageWindow.h"
 #include "../MiscHelpers/Archive/Archive.h"
 #include "../Windows/SettingsWindow.h"
+#include "../Windows/CompressDialog.h"
 
 #include "qt_windows.h"
 #include "qwindowdefs_win.h"

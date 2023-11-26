@@ -189,7 +189,7 @@ protected:
 	CArchive* m_pArchive;
 };
 
-void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ExportPath, const QString& RootPath, const QString& Section, const QString& Password, struct SCompressParams* Params)
+void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ExportPath, const QString& RootPath, const QString& Section, const QVariantMap& vParams)
 {
 	//CArchive Archive(ExportPath + ".tmp");
 	CArchive Archive(ExportPath);
@@ -229,11 +229,15 @@ void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 			// this file is already present in the archive, this should not happen !!!
 	}
 
-	if (!Password.isEmpty())
-		Archive.SetPassword(Password);
+	if (vParams.contains("password"))
+		Archive.SetPassword(vParams["password"].toString());
+
+    SCompressParams Params;
+	Params.iLevel = vParams["level"].toInt();
+	Params.bSolid = vParams["solid"].toBool();
 
 	SB_STATUS Status = SB_OK;
-	if (!Archive.Update(&Files, true, Params))  // 0, 1 - 9
+	if (!Archive.Update(&Files, true, &Params))
 		Status = SB_ERR((ESbieMsgCodes)SBX_7zCreateFailed);
 	
 	//if(!Status.IsError() && !pProgress->IsCanceled())
@@ -242,8 +246,6 @@ void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 	//	QFile::remove(ExportPath + ".tmp");
 
 	File.remove();
-
-	delete Params;
 
 	pProgress->Finish(Status);
 }
@@ -261,12 +263,14 @@ SB_PROGRESS CSandBoxPlus::ExportBox(const QString& FileName, const QString& Pass
 
 	QString Section = theAPI->SbieIniGetEx(m_Name, "");
 
-	SCompressParams* Params = new SCompressParams();
-	Params->iLevel = Level;
-	Params->bSolid = Solid;
+	QVariantMap vParams;
+	if (!Password.isEmpty())
+		vParams["password"] = Password;
+	vParams["level"] = Level;
+	vParams["solid"] = Solid;
 
 	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-	QtConcurrent::run(CSandBoxPlus::ExportBoxAsync, pProgress, FileName, m_FilePath, Section, Password, Params);
+	QtConcurrent::run(CSandBoxPlus::ExportBoxAsync, pProgress, FileName, m_FilePath, Section, vParams);
 	return SB_PROGRESS(OP_ASYNC, pProgress);
 }
 

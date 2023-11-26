@@ -202,6 +202,8 @@ void COptionsWindow::OnForceProg()
 	QString Value = SelectProgram();
 	if (Value.isEmpty())
 		return;
+	if (!CheckForcedItem(Value, (int)eProcess))
+		return;
 	AddForcedEntry(Value, (int)eProcess);
 	OnForcedChanged();
 }
@@ -210,8 +212,6 @@ void COptionsWindow::OnBreakoutProg()
 {
 	QString Value = SelectProgram();
 	if (Value.isEmpty())
-		return;
-	if (!CheckForcedItem(Value, (int)eProcess))
 		return;
 	AddBreakoutEntry(Value, (int)eProcess);
 	OnForcedChanged();

@@ -1503,7 +1503,7 @@
                <item row="3" column="2" colspan="2">
                 <widget class="QCheckBox" name="chkLessConfidential">
                  <property name="text">
-                  <string>Allow usefull windows processes access to protected processes</string>
+                  <string>Allow useful Windows processes access to protected processes</string>
                  </property>
                 </widget>
                </item>

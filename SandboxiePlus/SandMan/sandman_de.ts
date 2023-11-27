@@ -767,37 +767,37 @@ Klicken Sie auf Abschließen um den Assistenten zu schließen.</translation>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="23"/>
         <source>Sandboxie-Plus - Sandbox Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Sandbox Export</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="25"/>
         <source>Store</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="26"/>
         <source>Fastest</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnellste</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="27"/>
         <source>Fast</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnell</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="28"/>
         <source>Normal</source>
-        <translation type="unfinished">Normal</translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="29"/>
         <source>Maximum</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximum</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="30"/>
         <source>Ultra</source>
-        <translation type="unfinished"></translation>
+        <translation>Ultra</translation>
     </message>
 </context>
 <context>
@@ -1123,7 +1123,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
         <location filename="Wizards/NewBoxWizard.cpp" line="76"/>
         <location filename="Wizards/NewBoxWizard.cpp" line="183"/>
         <source>Don&apos;t show this message again.</source>
-        <translation>Diese Meldung nicht mehr anzeigen.</translation>
+        <translation>Diese Nachricht nicht mehr anzeigen.</translation>
     </message>
 </context>
 <context>
@@ -1144,7 +1144,7 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
     <message>
         <location filename="OnlineUpdater.cpp" line="350"/>
         <source>Don&apos;t show this message again.</source>
-        <translation>Diese Meldung nicht mehr anzeigen.</translation>
+        <translation>Diese Nachricht nicht mehr anzeigen.</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="405"/>
@@ -1830,8 +1830,7 @@ Bitte wählen Sie einen Ordner, der diese Datei enthält.</translation>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="305"/>
         <source>Forcing the specified entry will most likely break Windows, are you sure you want to proceed?</source>
-        <oldsource>Forcing the specified folder will most likely break Windows, are you sure you want to proceed?</oldsource>
-        <translation type="unfinished">Das Erzwingen des angegebenen Ordners wird höchstwahrscheinlich Windows unbrauchbar machen. Sind Sie sicher, dass Sie fortfahren möchten?</translation>
+        <translation>Das Erzwingen des angegebenen Eintrags wird höchstwahrscheinlich Windows unbrauchbar machen. Sind Sie sicher, dass Sie fortfahren möchten?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="186"/>
@@ -3811,7 +3810,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
         <location filename="SandMan.cpp" line="3592"/>
         <location filename="SandMan.cpp" line="3608"/>
         <source>Don&apos;t show this message again.</source>
-        <translation>Diese Meldung nicht mehr anzeigen.</translation>
+        <translation>Diese Nachricht nicht mehr anzeigen.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3288"/>
@@ -4705,7 +4704,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <location filename="Views/SbieView.cpp" line="1272"/>
         <location filename="Views/SbieView.cpp" line="1559"/>
         <source>Don&apos;t show this message again.</source>
-        <translation>Diese Meldung nicht mehr anzeigen.</translation>
+        <translation>Diese Nachricht nicht mehr anzeigen.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1263"/>
@@ -6119,37 +6118,37 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Forms/CompressDialog.ui" line="14"/>
         <source>Compress Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateien komprimieren</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="38"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Komprimierung</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="45"/>
         <source>When selected you will be prompted for a password after clicking OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Bei Auswahl werden Sie nach einem Klick auf OK zur Eingabe eines Passworts aufgefordert.</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="48"/>
         <source>Encrypt archive content</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivinhalte verschlüsseln</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="55"/>
         <source>Solid archiving improves compression ratios by treating multiple files as a single continuous data block. Ideal for a large number of small files, it makes the archive more compact but may increase the time required for extracting individual files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Solide Archivierung verbessert die Kompressionsverhältnisse, indem sie mehrere Dateien als einen einzigen zusammenhängenden Datenblock behandelt. Ideal für eine große Anzahl von kleinen Dateien. Sie macht das Archiv kompakter, kann aber den Zeitaufwand für das Extrahieren einzelner Dateien erhöhen.</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="58"/>
         <source>Create Solide Archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Solides Archiv erstellen</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="65"/>
         <source>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportieren Sie die Sandbox in ein 7z-Archiv, wählen Sie Ihre Komprimierungsrate und passen Sie zusätzliche Komprimierungseinstellungen an.</translation>
     </message>
 </context>
 <context>
@@ -6300,7 +6299,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Forms/OptionsWindow.ui" line="649"/>
         <source>Issue message 2102 when a file is too large</source>
-        <translation>Meldung 2102 ausgeben, wenn die Datei zu groß ist</translation>
+        <translation>Gebe Nachricht 2102 aus, wenn die Datei zu groß ist</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="374"/>
@@ -6515,7 +6514,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2214"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>Gebe Meldung 1308 aus, wenn ein Programmstart fehlschlägt</translation>
+        <translation>Gebe Nachricht 1308 aus, wenn ein Programmstart fehlschlägt</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="2265"/>
@@ -6545,7 +6544,7 @@ Wenn Sie bereits ein Great Supporter auf Patreon sind, kann Sandboxie online nac
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3025"/>
         <source>Issue message 1307 when a program is denied internet access</source>
-        <translation>Gebe Meldung 1307 aus, wenn einem Programm der Internetzugriff verweigert wurde</translation>
+        <translation>Gebe Nachricht 1307 aus, wenn einem Programm der Internetzugriff verweigert wurde</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3053"/>
@@ -6972,7 +6971,7 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3639"/>
         <source>Issue message 1305 when a program tries to load a sandboxed dll</source>
-        <translation>Gebe Meldung 1305 aus, wenn ein Programm versucht eine sandgeboxte DLL zu laden</translation>
+        <translation>Gebe Nachricht 1305 aus, wenn ein Programm versucht eine sandgeboxte DLL zu laden</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3632"/>
@@ -7932,7 +7931,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2243"/>
         <source>Issue message 1301 when forced processes has been disabled</source>
-        <translation>Gebe Meldung 1301 aus, wenn erzwungene Prozesse deaktiviert wurden</translation>
+        <translation>Gebe Nachricht 1301 aus, wenn erzwungene Prozesse deaktiviert wurden</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2542"/>
@@ -8449,7 +8448,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2257"/>
         <source>When any of the following programs is launched outside any sandbox, Sandboxie will issue message SBIE1301.</source>
-        <translation>Wenn eines der folgenden Programme außerhalb einer Sandbox gestartet wird, wird Sandboxie die Meldung SBIE1301 ausgeben.</translation>
+        <translation>Wenn eines der folgenden Programme außerhalb einer Sandbox gestartet wird, wird Sandboxie die Nachricht SBIE1301 ausgeben.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2267"/>
@@ -8696,7 +8695,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2229"/>
         <source>Issue message 1308 when a program fails to start</source>
-        <translation>Gebe Meldung 1308 aus, wenn ein Programmstart fehlschlägt</translation>
+        <translation>Gebe Nachricht 1308 aus, wenn ein Programmstart fehlschlägt</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="2277"/>

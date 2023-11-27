@@ -204,7 +204,7 @@
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="644"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
-        <translation>Özel bir Sandboxie belirteci kullanmak, birbirinden ayrı korumalı alanların daha iyi yalıtılmasını sağlar ve görev yöneticilerinin kullanıcı sütununda bir işlemin hangi alana ait olduğu gösterir. Ancak bazı 3. parti güvenlik çözümleri özel belirteçlerle sorun yaşayabilir.</translation>
+        <translation>Özel bir Sandboxie belirteci kullanmak, birbirinden ayrı korumalı alanların daha iyi yalıtılmasını sağlar ve görev yöneticilerinin kullanıcı sütununda bir işlemin hangi alana ait olduğunu gösterir. Ancak bazı 3. parti güvenlik çözümleri özel belirteçlerle sorun yaşayabilir.</translation>
     </message>
 </context>
 <context>
@@ -766,37 +766,37 @@ Bu sihirbazı kapatmak için Son&apos;a tıklayabilirsiniz.</translation>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="23"/>
         <source>Sandboxie-Plus - Sandbox Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Korumalı Alanı Dışa Aktarma</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="25"/>
         <source>Store</source>
-        <translation type="unfinished"></translation>
+        <translation>Sıkıştırmasız</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="26"/>
         <source>Fastest</source>
-        <translation type="unfinished"></translation>
+        <translation>En hızlı</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="27"/>
         <source>Fast</source>
-        <translation type="unfinished"></translation>
+        <translation>Hızlı</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="28"/>
         <source>Normal</source>
-        <translation type="unfinished">Normal</translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="29"/>
         <source>Maximum</source>
-        <translation type="unfinished"></translation>
+        <translation>Yüksek</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="30"/>
         <source>Ultra</source>
-        <translation type="unfinished"></translation>
+        <translation>Çok yüksek</translation>
     </message>
 </context>
 <context>
@@ -1359,8 +1359,7 @@ Not: Güncellemeler, yalnızca test edilen güncellemelerin sunulmasını sağla
     <message>
         <location filename="Windows/OptionsForce.cpp" line="305"/>
         <source>Forcing the specified entry will most likely break Windows, are you sure you want to proceed?</source>
-        <oldsource>Forcing the specified folder will most likely break Windows, are you sure you want to proceed?</oldsource>
-        <translation type="unfinished">Belirtilen klasörü zorlamak büyük olasılıkla Windows&apos;u bozacaktır, devam etmek istediğinizden emin misiniz?</translation>
+        <translation>Seçilen girişi zorlamak büyük olasılıkla Windows&apos;u bozabilir, devam etmek istediğinizden emin misiniz?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="186"/>
@@ -6103,37 +6102,37 @@ If you are a Great Supporter on Patreon already, Sandboxie can check online for 
     <message>
         <location filename="Forms/CompressDialog.ui" line="14"/>
         <source>Compress Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Dosyaları Sıkıştırma</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="38"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Sıkıştırma Düzeyi</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="45"/>
         <source>When selected you will be prompted for a password after clicking OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Seçildiğinde, Tamam&apos;ı tıkladıktan sonra bir parola girmeniz istenecektir</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="48"/>
         <source>Encrypt archive content</source>
-        <translation type="unfinished"></translation>
+        <translation>Arşiv içeriğini şifrele</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="55"/>
         <source>Solid archiving improves compression ratios by treating multiple files as a single continuous data block. Ideal for a large number of small files, it makes the archive more compact but may increase the time required for extracting individual files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Katı arşivleme, birden fazla dosyayı tek bir sürekli veri bloğu olarak sıkıştırarak sıkıştırma oranını artırır. Çok sayıda küçük dosya için uygundur; arşivi daha yoğun hale getirir ancak tek tek dosyaların çıkarılması için gereken süreyi arttırabilir.</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="58"/>
         <source>Create Solide Archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Katı Arşiv Oluştur</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="65"/>
         <source>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Korumalı alan&apos;ı 7-Zip arşivine aktarmadan önce sıkıştırma düzeyini seçebilir ve ek sıkıştırma ayarlarını özelleştirebilirsiniz.</translation>
     </message>
 </context>
 <context>

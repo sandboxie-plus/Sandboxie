@@ -197,6 +197,8 @@ private slots:
 	void OnDelProcess();
 	void OnShowHiddenProcTmpl()		{ ShowHiddenProcTmpl(true); }
 
+	void OnConfidentialChanged();
+	void OnLessConfidentialChanged();
 	void OnHostProcessAllow();
 	void OnHostProcessDeny();
 	void OnDelHostProcess();

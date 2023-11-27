@@ -1964,7 +1964,7 @@ MSG_HEADER *ProcessServer::ProcInfoHandler(MSG_HEADER *msg)
         if (QueryFullProcessImageNameW(ProcessHandle, 0, filename, &dwSize))
             ImagePath = filename;
 
-        // windows 8.1 and later
+        // Windows 8.1 and later
 #define ProcessCommandLineInformation ((PROCESSINFOCLASS)60)
         ULONG returnLength = 0;
         NTSTATUS status = NtQueryInformationProcess(ProcessHandle, ProcessCommandLineInformation, NULL, 0, &returnLength);
@@ -1978,7 +1978,7 @@ MSG_HEADER *ProcessServer::ProcInfoHandler(MSG_HEADER *msg)
         }
 #undef ProcessCommandLineInformation
 
-        if (CommandLine.empty()) // fall back to the win 7 method - requirers PROCESS_VM_READ
+        if (CommandLine.empty()) // fall back to the Win 7 method - requires PROCESS_VM_READ
             CommandLine = GetPebString(ProcessHandle, PhpoCommandLine);
 
         WorkingDir = GetPebString(ProcessHandle, PhpoCurrentDirectory);

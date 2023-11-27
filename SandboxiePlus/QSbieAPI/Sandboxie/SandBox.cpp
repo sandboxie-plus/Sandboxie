@@ -160,6 +160,11 @@ SB_STATUS CSandBox::TerminateAll()
 	return m_pAPI->TerminateAll(m_Name);
 }
 
+SB_STATUS CSandBox::SetSuspendedAll(bool bSuspended)
+{
+	return m_pAPI->SetSuspendedAll(m_Name, bSuspended);
+}
+
 bool CSandBox::IsEmpty() const
 {
 	return !QFile::exists(m_FilePath);

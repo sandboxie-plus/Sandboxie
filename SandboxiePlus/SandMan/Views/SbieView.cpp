@@ -1699,9 +1699,9 @@ void CSbieView::OnProcessAction(QAction* Action, const QList<CBoxedProcessPtr>& 
 		else if (Action == m_pMenuMarkLeader)
 			pProcess.objectCast<CSbieProcess>()->SetLeaderProgram(m_pMenuMarkLeader->isChecked());
 		else if (Action == m_pMenuSuspend)
-			Results.append(pProcess->SetSuspend(true));
+			Results.append(pProcess->SetSuspended(true));
 		else if (Action == m_pMenuResume)
-			Results.append(pProcess->SetSuspend(false));
+			Results.append(pProcess->SetSuspended(false));
 	}
 
 	theGUI->CheckResults(Results, this);

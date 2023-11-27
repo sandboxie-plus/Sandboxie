@@ -954,7 +954,7 @@ bool COnlineUpdater::RunInstaller(bool bSilent)
 
 bool COnlineUpdater::RunInstaller2(const QString& FilePath, bool bSilent)
 {
-	if (bSilent) 
+	if (bSilent && !theGUI->IsFullyPortable()) 
 	{
 		QStringList Params;
 		Params.append("run_setup");
@@ -975,8 +975,11 @@ bool COnlineUpdater::RunInstaller2(const QString& FilePath, bool bSilent)
 
 	std::wstring wFile = QString(FilePath).replace("/", "\\").toStdWString();
 	std::wstring wParams;
+	if(theGUI->IsFullyPortable())
+		wParams = L"/PORTABLE=1";
 #ifndef _DEBUG
-	wParams = L"/SILENT";
+	else
+		wParams = L"/SILENT";
 #endif
 
 	return RunElevated(wFile, wParams) == 0;

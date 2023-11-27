@@ -217,10 +217,15 @@ protected:
 	virtual SB_STATUS		TerminateAll(const QString& BoxName);
 	virtual SB_STATUS		Terminate(quint32 ProcessId);
 
+	virtual SB_STATUS		SetSuspendedAll(const QString& BoxName, bool bSuspended);
+	virtual SB_STATUS		SetSuspended(quint32 ProcessId, bool bSuspended);
+
 	virtual SB_STATUS		RunSandboxed(const QString& BoxName, const QString& Command, QString WrkDir = QString(), quint32 Flags = 0);
 
 	virtual SB_STATUS		UpdateBoxPaths(CSandBox* pSandBox);
 	virtual SB_STATUS		UpdateProcessInfo(const CBoxedProcessPtr& pProcess);
+
+	virtual SB_STATUS		GetProcessInfo(quint32 ProcessId, quint32* pParentId = NULL, quint32* pInfo = NULL, bool* pSuspended = NULL, QString* pImagePath = NULL, QString* pCommandLine = NULL, QString* pWorkingDir = NULL);
 
 	virtual void			GetUserPaths();
 

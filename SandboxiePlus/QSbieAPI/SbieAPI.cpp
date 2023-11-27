@@ -1585,6 +1585,40 @@ SB_STATUS CSbieAPI::UpdateProcessInfo(const CBoxedProcessPtr& pProcess)
 	return SB_OK;
 }
 
+SB_STATUS CSbieAPI::GetProcessInfo(quint32 ProcessId, quint32* pParentId, quint32* pInfo, bool* pSuspended, QString* pImagePath, QString* pCommandLine, QString* pWorkingDir)
+{
+	PROCESS_GET_INFO_REQ req;
+	req.h.length = sizeof(PROCESS_GET_INFO_REQ);
+	req.h.msgid = MSGID_PROCESS_GET_INFO;
+	req.dwProcessId = ProcessId;
+	req.dwInfoClasses = 0;
+
+	if(pParentId || pInfo)
+		req.dwInfoClasses |= SBIE_PROCESS_BASIC_INFO;
+	if(pSuspended)
+		req.dwInfoClasses |= SBIE_PROCESS_EXEC_INFO;
+	if(pImagePath || pCommandLine || pWorkingDir)
+		req.dwInfoClasses |= SBIE_PROCESS_PATHS_INFO;
+
+	SScoped<PROCESS_INFO_RPL> rpl;
+	SB_STATUS Status = CallServer(&req.h, &rpl);
+	if (!Status || !rpl)
+		return Status;
+	
+	if (!NT_SUCCESS(rpl->h.status))
+		return SB_ERR(rpl->h.status);
+
+	if (pParentId)		*pParentId	= rpl->dwParentId;
+	if (pInfo)			*pInfo		= rpl->dwInfo;
+	if (pSuspended)		*pSuspended = rpl->bSuspended;
+
+	if (pImagePath && rpl->app_ofs && rpl->app_len > 0)		*pImagePath   = QString::fromWCharArray((WCHAR*)((ULONG_PTR)rpl.Value() + rpl->app_ofs), rpl->app_len);
+	if (pCommandLine && rpl->cmd_ofs && rpl->cmd_len > 0)	*pCommandLine = QString::fromWCharArray((WCHAR*)((ULONG_PTR)rpl.Value() + rpl->cmd_ofs), rpl->cmd_len);
+	if (pWorkingDir && rpl->dir_ofs && rpl->dir_len > 0)	*pWorkingDir  = QString::fromWCharArray((WCHAR*)((ULONG_PTR)rpl.Value() + rpl->dir_ofs), rpl->dir_len);
+
+	return SB_OK;
+}
+
 CSandBoxPtr CSbieAPI::GetBoxByProcessId(quint32 ProcessId) const
 {
 	CBoxedProcessPtr pProcess = m_BoxedProxesses.value(ProcessId);
@@ -1657,6 +1691,42 @@ SB_STATUS CSbieAPI::Terminate(quint32 ProcessId)
 	req.h.length = sizeof(PROCESS_KILL_ONE_REQ);
 	req.h.msgid = MSGID_PROCESS_KILL_ONE;
 	req.pid = ProcessId;
+
+	SScoped<MSG_HEADER> rpl;
+	SB_STATUS Status = CallServer(&req.h, &rpl);
+	if (!Status || !rpl)
+		return Status;
+	if (rpl->status != 0)
+		Status = SB_ERR(rpl->status);
+	return Status;
+}
+
+SB_STATUS CSbieAPI::SetSuspendedAll(const QString& BoxName, bool bSuspended)
+{
+	PROCESS_SUSPEND_RESUME_ALL_REQ req;
+	req.h.length = sizeof(PROCESS_SUSPEND_RESUME_ALL_REQ);
+	req.h.msgid = MSGID_PROCESS_SUSPEND_RESUME_ALL;
+	req.session_id = -1;
+	BoxName.toWCharArray(req.boxname); // fix-me: potential overflow
+	req.boxname[BoxName.size()] = L'\0';
+	req.suspend = bSuspended ? TRUE : FALSE;
+
+	SScoped<MSG_HEADER> rpl;
+	SB_STATUS Status = CallServer(&req.h, &rpl);
+	if (!Status || !rpl)
+		return Status;
+	if(rpl->status != 0) 
+		Status = SB_ERR(rpl->status);
+	return Status;
+}
+
+SB_STATUS CSbieAPI::SetSuspended(quint32 ProcessId, bool bSuspended)
+{
+	PROCESS_SUSPEND_RESUME_ONE_REQ req;
+	req.h.length = sizeof(PROCESS_SUSPEND_RESUME_ONE_REQ);
+	req.h.msgid = MSGID_PROCESS_SUSPEND_RESUME_ONE;
+	req.pid = ProcessId;
+	req.suspend = bSuspended ? TRUE : FALSE;
 
 	SScoped<MSG_HEADER> rpl;
 	SB_STATUS Status = CallServer(&req.h, &rpl);

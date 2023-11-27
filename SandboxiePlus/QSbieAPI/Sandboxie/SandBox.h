@@ -55,6 +55,7 @@ public:
 	virtual SB_STATUS				RunStart(const QString& Command, bool Elevated = false);
 	virtual SB_STATUS				RunSandboxed(const QString& Command);
 	virtual SB_STATUS				TerminateAll();
+	virtual SB_STATUS				SetSuspendedAll(bool bSuspended);
 
 	virtual void					OpenBox() {}
 	virtual void					CloseBox() {}

@@ -7,17 +7,29 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.12.3 / 5.67.3] - 2023-11-
+
+### Fixed
+- FIXED SECURITY ISSUE ID-23 SeManageVolumePrivilege is now blocked, as it allowed to read MFT data (thanks Diversenok)
+- fixed Program launch when forcing prcesses into a confidential box [#3173](https://github.com/sandboxie-plus/Sandboxie/issues/3173)
+
+
 ## [1.12.2 / 5.67.2] - 2023-11-
 
 ### Added
 - added options dialog when exporting a box [#3409](https://github.com/sandboxie-plus/Sandboxie/issues/3409)
 
+### Changed
+- moved process info retreival to SbieSvc, resolves some information not being available in comaprtment type boxes when sandman does not run as admin.
+- moved Process Suspend/Resume to SbieSvc [#3156](https://github.com/sandboxie-plus/Sandboxie/issues/3156)
+
 ### Fixed
-- FIXED SECURITY ISSUE ID-23 SeManageVolumePrivilege is now blocked, as it allowed to read MFT data (thanks Diversenok)
 - fixed issue with Microsoft Edge when using AutoDelete option [#post-3173507](https://www.wilderssecurity.com/threads/sandboxie-plus-v1-12-1-pre-release.452939/#post-3173507)
 - fixed warning issue `Acrobat.exe: SBIE2205 Service not implemented: CredEnumerateA` [#issuecomment-1826280016](https://github.com/sandboxie-plus/Sandboxie/issues/3441#issuecomment-1826280016)
 - fixed UNEXPECTED_KERNEL_MODE_TRAP BSOD when opening any web link from sandboxed Microsoft 365 app (e.g. Outlook, Word) [#3427](https://github.com/sandboxie-plus/Sandboxie/issues/3427)
 - fixed issue with force process warning message
+- fixed Online updater does not respect portable mode [#3406](https://github.com/sandboxie-plus/Sandboxie/issues/3406)
+
 
 
 ## [1.12.1 / 5.67.1] - 2023-11-23

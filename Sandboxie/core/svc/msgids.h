@@ -46,6 +46,9 @@
 #define MSGID_PROCESS_SET_DEVICE_MAP            0x1206
 #define MSGID_PROCESS_OPEN_DEVICE_MAP           0x1207
 #define MSGID_PROCESS_RUN_UPDATER               0x1208
+#define MSGID_PROCESS_GET_INFO                  0x1209
+#define MSGID_PROCESS_SUSPEND_RESUME_ONE        0x120A
+#define MSGID_PROCESS_SUSPEND_RESUME_ALL        0x120B
 
 #define MSGID_SERVICE                           0x1300
 #define MSGID_SERVICE_START                     0x1301

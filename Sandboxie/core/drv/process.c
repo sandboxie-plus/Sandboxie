@@ -1359,9 +1359,7 @@ _FX BOOLEAN Process_NotifyProcess_Create(
             ULONG session_id = new_proc->box->session_id;
 
             new_proc->bHostInject = bHostInject;
-#ifdef DRV_BREAKOUT
             new_proc->starter_id = CallerId;
-#endif
             new_proc->parent_was_start_exe = parent_was_start_exe;
             new_proc->rights_dropped = parent_had_rights_dropped;
             new_proc->forced_process = process_is_forced;

@@ -811,7 +811,7 @@ _FX NTSTATUS KphValidateCertificate()
             Verify_CertInfo.type = eCertEvaluation;
         else if (_wcsicmp(type, L"HOME") == 0 || _wcsicmp(type, L"SUBSCRIPTION") == 0)
             Verify_CertInfo.type = eCertHome;
-        else if (_wcsicmp(type, L"FAMILYPACK") == 0)
+        else if (_wcsicmp(type, L"FAMILYPACK") == 0 || _wcsicmp(type, L"FAMILY") == 0)
             Verify_CertInfo.type = eCertFamily;
         // patreon >>>
         else if (wcsstr(type, L"PATREON") != NULL) // TYPE: [CLASS]_PATREON-[LEVEL]

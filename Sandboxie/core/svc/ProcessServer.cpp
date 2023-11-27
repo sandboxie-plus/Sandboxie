@@ -1716,7 +1716,18 @@ std::wstring GetPebString(HANDLE ProcessHandle, PEB_OFFSET Offset)
 #ifdef _WIN64
 	is64BitOperatingSystem = TRUE;
 #else // ! _WIN64
-	isWow64Process = CSbieAPI::IsWow64();
+    static bool IsWow64 = false;
+	static bool init = false;
+	if (!init)
+	{
+		ULONG_PTR wow64;
+		if (NT_SUCCESS(NtQueryInformationProcess(NtCurrentProcess(), ProcessWow64Information, &wow64, sizeof(ULONG_PTR), NULL))) {
+			IsWow64 = !!wow64;
+		}
+		init = true;
+	}
+
+    isWow64Process = IsWow64;
 	is64BitOperatingSystem = isWow64Process;
 #endif _WIN64
 

@@ -873,37 +873,37 @@ You can click Finish to close this wizard.</source>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="23"/>
         <source>Sandboxie-Plus - Sandbox Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Sandbox 내보내기</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="25"/>
         <source>Store</source>
-        <translation type="unfinished"></translation>
+        <translation>스토어</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="26"/>
         <source>Fastest</source>
-        <translation type="unfinished"></translation>
+        <translation>가장 빠른</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="27"/>
         <source>Fast</source>
-        <translation type="unfinished"></translation>
+        <translation>빠른</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="28"/>
         <source>Normal</source>
-        <translation type="unfinished">일반</translation>
+        <translation>일반</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="29"/>
         <source>Maximum</source>
-        <translation type="unfinished"></translation>
+        <translation>최대</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="30"/>
         <source>Ultra</source>
-        <translation type="unfinished"></translation>
+        <translation>울트라</translation>
     </message>
 </context>
 <context>
@@ -1872,7 +1872,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsForce.cpp" line="305"/>
         <source>Forcing the specified entry will most likely break Windows, are you sure you want to proceed?</source>
         <oldsource>Forcing the specified folder will most likely break Windows, are you sure you want to proceed?</oldsource>
-        <translation type="unfinished">지정한 폴더를 강제로 사용하면 Windows가 끊어질 가능성이 높습니다. 계속하시겠습니까?</translation>
+        <translation>지정한 폴더를 강제로 사용하면 Windows가 끊어질 가능성이 높습니다. 계속하시겠습니까?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="25"/>
@@ -6597,37 +6597,37 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/CompressDialog.ui" line="14"/>
         <source>Compress Files</source>
-        <translation type="unfinished"></translation>
+        <translation>파일 압축</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="38"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>압축</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="45"/>
         <source>When selected you will be prompted for a password after clicking OK</source>
-        <translation type="unfinished"></translation>
+        <translation>이 옵션을 선택하면 확인을 클릭한 후 암호를 입력하라는 메시지가 표시됩니다</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="48"/>
         <source>Encrypt archive content</source>
-        <translation type="unfinished"></translation>
+        <translation>압축파일 내용 암호화</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="55"/>
         <source>Solid archiving improves compression ratios by treating multiple files as a single continuous data block. Ideal for a large number of small files, it makes the archive more compact but may increase the time required for extracting individual files.</source>
-        <translation type="unfinished"></translation>
+        <translation>솔리드 압축파일은 여러 파일을 연속적인 하나의 데이터 블록으로 처리하여 압축률을 향상시킵니다. 많은 수의 작은 파일에 이상적이므로 아카이브를 보다 압축적으로 만들지만 개별 파일을 추출하는 데 필요한 시간을 늘릴 수 있습니다.</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="58"/>
         <source>Create Solide Archive</source>
-        <translation type="unfinished"></translation>
+        <translation>솔리드 압축파일 만들기</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="65"/>
         <source>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>샌드박스를 7z 압축파닐로 내보내고 압축률을 선택하고 추가 압축 설정을 사용자 정의합니다.</translation>
     </message>
 </context>
 <context>

@@ -7053,7 +7053,7 @@ Dies wird gemacht um bösartige Prozesse in einer Sandbox daran zu hindern, eine
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1506"/>
         <source>Allow useful Windows processes access to protected processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaube nützlichen Windows-Prozessen Zugriff auf geschützte Prozesse</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1978"/>

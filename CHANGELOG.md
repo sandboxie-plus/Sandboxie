@@ -18,7 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.12.2 / 5.67.2] - 2023-11-
+## [1.12.2 / 5.67.2] - 2023-11-28
 
 ### Added
 - added options dialog when exporting a box [#3409](https://github.com/sandboxie-plus/Sandboxie/issues/3409)

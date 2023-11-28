@@ -33,6 +33,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed UNEXPECTED_KERNEL_MODE_TRAP BSOD when opening any web link from sandboxed Microsoft 365 app (e.g. Outlook, Word) [#3427](https://github.com/sandboxie-plus/Sandboxie/issues/3427)
 - fixed issue with force process warning message
 - fixed online updater does not respect portable mode [#3406](https://github.com/sandboxie-plus/Sandboxie/issues/3406)
+- fixed Snapshot feature does not work on encrypted boxes [#3439](https://github.com/sandboxie-plus/Sandboxie/issues/3439)
 
 
 

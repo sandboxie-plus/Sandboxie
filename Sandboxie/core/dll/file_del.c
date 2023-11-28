@@ -672,7 +672,7 @@ _FX BOOLEAN File_LoadPathTree_internal(LIST* Root, const WCHAR* name, WCHAR* (*T
         } else
             Next = End + 1;
         LONG LineLen = (LONG)(End - Line);
-        if (LineLen > 1 && Line[LineLen - 1] == L'\r')
+        if (LineLen >= 1 && Line[LineLen - 1] == L'\r')
             LineLen -= 1;
         
         WCHAR savechar = Line[LineLen];

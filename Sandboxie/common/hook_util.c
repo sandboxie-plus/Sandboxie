@@ -323,7 +323,7 @@ ULONGLONG* findChromeTarget(unsigned char* addr)
             for (j = i + 1; j < MAX_FUNC_OPS && !ChromeTarget; j++) {
                 LDR ldr;
                 ldr.OP = ((ULONG*)addr)[j];
-                if (IS_LDR(ldr) && ldr.Rn == adrp.Rd) { // ldr.Rt can be different idealy x0 or its same as adrp.Rd
+                if (IS_LDR(ldr) && ldr.Rn == adrp.Rd) { // ldr.Rt can be different ideally x0 or its same as adrp.Rd
                     LONG delta = (adrp.immHi << 2 | adrp.immLo) << 12;
                     delta += (ldr.imm12 << ldr.size);
                     target = ((((UINT_PTR) & ((ULONG*)addr)[i]) & ~0xFFF) + delta);

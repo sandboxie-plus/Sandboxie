@@ -295,7 +295,7 @@ void COnlineUpdater::LoadState()
 QString COnlineUpdater::GetOnNewUpdateOption() const
 {
 	QString ReleaseChannel = theConf->GetString("Options/ReleaseChannel", "stable");
-	if (ReleaseChannel != "preview" && (!g_CertInfo.active || g_CertInfo.expired)) // allow revisions for previwe channel
+	if (ReleaseChannel != "preview" && (!g_CertInfo.active || g_CertInfo.expired)) // allow revisions for preview channel
 		return "ignore"; // this service requires a valid certificate
 	return theConf->GetString("Options/OnNewUpdate", "ignore");
 }

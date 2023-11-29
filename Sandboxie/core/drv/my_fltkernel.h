@@ -351,7 +351,7 @@ typedef union _FLT_PARAMETERS {
 
             //
             //  Type3InputBuffer: name changed from IO_STACK_LOCATION parameters
-            //  Note for this mothod, both input & output buffers are 'raw',
+            //  Note for this method, both input & output buffers are 'raw',
             //  i.e. unbuffered, and should be treated with caution ( either
             //  probed & captured before access, or use try-except to enclose
             //  access to the buffer)
@@ -451,7 +451,7 @@ typedef union _FLT_PARAMETERS {
 
             //
             //  Type3InputBuffer: name changed from IO_STACK_LOCATION parameters
-            //  Note for this mothod, both input & output buffers are 'raw',
+            //  Note for this method, both input & output buffers are 'raw',
             //  i.e. unbuffered, and should be treated with caution ( either
             //  probed & captured before access, or use try-except to enclose
             //  access to the buffer)

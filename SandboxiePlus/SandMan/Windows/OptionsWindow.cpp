@@ -1067,7 +1067,7 @@ void COptionsWindow::showTab(const QString& Name)
 	SafeShow(this);
 }
 
-void COptionsWindow::SetProgramItem(QString Program, QTreeWidgetItem* pItem, int Column, const QString& Sufix, bool bList)
+void COptionsWindow::SetProgramItem(QString Program, QTreeWidgetItem* pItem, int Column, const QString& Suffix, bool bList)
 {
 	pItem->setData(Column, Qt::UserRole, Program);
 	if (Program.left(1) == "<")
@@ -1076,7 +1076,7 @@ void COptionsWindow::SetProgramItem(QString Program, QTreeWidgetItem* pItem, int
 		Program = tr("All Programs");
 	else if(bList)
 		m_Programs.insert(Program);
-	pItem->setText(Column, Program + Sufix);
+	pItem->setText(Column, Program + Suffix);
 }
 
 QString COptionsWindow::SelectProgram(bool bOrGroup)

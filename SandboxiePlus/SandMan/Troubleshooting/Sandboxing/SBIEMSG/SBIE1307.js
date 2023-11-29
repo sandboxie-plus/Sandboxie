@@ -24,7 +24,7 @@ let message = tr('Internet Access restrictions are in effect for the sandbox in 
     { id: 'no', name: tr('No'), type: 'radio' },
   ];
   
-  message += '\n\n' + tr('Would you like to allow %1 to access the interent in future?', processName);
+  message += '\n\n' + tr('Would you like to allow %1 to access the internet in future?', processName);
   let ret = wizard.showForm(form, message);
   if (ret['yes'] == true) {
       let box = sbie.getBox(boxName);

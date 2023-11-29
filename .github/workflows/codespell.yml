@@ -102,6 +102,8 @@ jobs:
           echo 'fron->front' >> dictionary.txt
           echo 'ahndling->handling' >> dictionary.txt
           echo 'previwe->preview' >> dictionary.txt
+          echo 'variouse->various' >> dictionary.txt
+          echo 'resumeed->resumed' >> dictionary.txt
           echo 'crome->Chrome' >> dictionary_code.txt
           echo 'chromim->Chromium' >> dictionary_code.txt
           echo 'kmdutill->kmdutil' >> dictionary_code.txt

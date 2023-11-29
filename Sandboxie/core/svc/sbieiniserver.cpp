@@ -1065,7 +1065,7 @@ ULONG SbieIniServer::SetSetting(MSG_HEADER* msg)
     SIniSection* pSection = GetIniSection(req->section, true);
 
     //
-    // Check if this is a repalce section request and if so execute it
+    // Check if this is a replace section request and if so execute it
     //
 
     if (wcslen(req->setting) == 0 && have_value) 

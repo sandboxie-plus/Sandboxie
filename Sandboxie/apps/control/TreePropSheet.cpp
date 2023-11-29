@@ -529,7 +529,7 @@ CString CTreePropSheet::SplitPageTreePath(CString &strRest)
         }
         else if (nSeperatorPos>0)
         {
-            // if there is an odd number of backslashes infront of the
+            // if there is an odd number of backslashes in front of the
             // separator, than do not interpret it as separator
             int nBackslashCount = 0;
             for (int nPos = nSeperatorPos-1; nPos >= 0 && strRest[nPos]==_T('\\'); --nPos, ++nBackslashCount);

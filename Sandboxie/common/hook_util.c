@@ -17,7 +17,7 @@
  */
 
 //---------------------------------------------------------------------------
-// Variouse generic hooking helpers
+// Various generic hooking helpers
 //---------------------------------------------------------------------------
 
 #if defined(_M_ARM64) || defined(_M_ARM64EC)

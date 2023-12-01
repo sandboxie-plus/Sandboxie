@@ -368,7 +368,7 @@ _FX void Dll_InitInjected(void)
   //      //
   //      // instead of using a separate namespace
   //		// just replace all \ with _ and use it as a suffix rather then an actual path
-  //      // similarly a its done for named pipes already
+  //      // similar to what is done for named pipes already
   //      // this approach can help to reduce the footprint when running in portable mode
   //      // alternatively we could create volatile entries under AppContainerNamedObjects 
   //      //

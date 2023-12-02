@@ -5,9 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
-
-## [1.12.3 / 5.67.3] - 2023-11-
+## [1.12.3 / 5.67.3] - 2023-12-02
 
 ### Added
 - added template to add useful exclusions to confidential boxes

@@ -27,11 +27,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue with Microsoft Edge when using AutoDelete option [#post-3173507](https://www.wilderssecurity.com/threads/sandboxie-plus-v1-12-1-pre-release.452939/#post-3173507)
-- fixed warning `Acrobat.exe: SBIE2205 Service not implemented: CredEnumerateA` [#issuecomment-1826280016](https://github.com/sandboxie-plus/Sandboxie/issues/3441#issuecomment-1826280016)
+- fixed warning issue with Acrobat Reader: `SBIE2205 Service not implemented: CredEnumerateA` [#issuecomment-1826280016](https://github.com/sandboxie-plus/Sandboxie/issues/3441#issuecomment-1826280016)
 - fixed UNEXPECTED_KERNEL_MODE_TRAP BSOD when opening any web link from sandboxed Microsoft 365 app (e.g. Outlook, Word) [#3427](https://github.com/sandboxie-plus/Sandboxie/issues/3427)
 - fixed issue with force process warning message
 - fixed online updater not respecting portable mode [#3406](https://github.com/sandboxie-plus/Sandboxie/issues/3406)
-- fixed Snapshot feature not working on encrypted boxes [#3439](https://github.com/sandboxie-plus/Sandboxie/issues/3439)
+- fixed snapshot feature not working on encrypted boxes [#3439](https://github.com/sandboxie-plus/Sandboxie/issues/3439)
 
 
 
@@ -45,7 +45,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with hotkey to bring SandMan always-on-top
 - fixed issue with ThreadSuspendCount failing for already terminated threads [25054d0](https://github.com/sandboxie-plus/Sandboxie/commit/25054d0b2bd34c12471eefdf6ba9550e50ef02e5) [#3375](https://github.com/sandboxie-plus/Sandboxie/issues/3375)
 - fixed message text [#3408](https://github.com/sandboxie-plus/Sandboxie/issues/3408)
-- fixed warning issue with Firefox 120: `SBIE2205 Service not implemented: CredWriteA` [#3441](https://github.com/sandboxie-plus/Sandboxie/issues/3441)
+- fixed warning issue with Firefox 120.0: `SBIE2205 Service not implemented: CredWriteA` [#3441](https://github.com/sandboxie-plus/Sandboxie/issues/3441)
+- fixed warning issue with Firefox 120.0: `SBIE2205 Service not implemented: CredReadA` [#3453](https://github.com/sandboxie-plus/Sandboxie/issues/3453)
 - fixed outdated Chromium paths [#3436](https://github.com/sandboxie-plus/Sandboxie/pull/3436)
 
 

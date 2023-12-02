@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.12.3 / 5.67.3] - 2023-12-02
 
 ### Added
-- added template to add useful exclusions to confidential boxes
+- added template providing useful exclusions for confidential boxes
 
 ### Fixed
 - FIXED SECURITY ISSUE ID-23 SeManageVolumePrivilege is now blocked, as it allowed to read MFT data (thanks Diversenok)
@@ -27,11 +27,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed issue with Microsoft Edge when using AutoDelete option [#post-3173507](https://www.wilderssecurity.com/threads/sandboxie-plus-v1-12-1-pre-release.452939/#post-3173507)
-- fixed warning issue `Acrobat.exe: SBIE2205 Service not implemented: CredEnumerateA` [#issuecomment-1826280016](https://github.com/sandboxie-plus/Sandboxie/issues/3441#issuecomment-1826280016)
+- fixed warning `Acrobat.exe: SBIE2205 Service not implemented: CredEnumerateA` [#issuecomment-1826280016](https://github.com/sandboxie-plus/Sandboxie/issues/3441#issuecomment-1826280016)
 - fixed UNEXPECTED_KERNEL_MODE_TRAP BSOD when opening any web link from sandboxed Microsoft 365 app (e.g. Outlook, Word) [#3427](https://github.com/sandboxie-plus/Sandboxie/issues/3427)
 - fixed issue with force process warning message
-- fixed online updater does not respect portable mode [#3406](https://github.com/sandboxie-plus/Sandboxie/issues/3406)
-- fixed Snapshot feature does not work on encrypted boxes [#3439](https://github.com/sandboxie-plus/Sandboxie/issues/3439)
+- fixed online updater not respecting portable mode [#3406](https://github.com/sandboxie-plus/Sandboxie/issues/3406)
+- fixed Snapshot feature not working on encrypted boxes [#3439](https://github.com/sandboxie-plus/Sandboxie/issues/3439)
 
 
 
@@ -42,10 +42,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - improved suspended process detection
 
 ### Fixed
-- fixed issue with key to bring SandMan in front as top most
+- fixed issue with hotkey to bring SandMan always-on-top
 - fixed issue with ThreadSuspendCount failing for already terminated threads [25054d0](https://github.com/sandboxie-plus/Sandboxie/commit/25054d0b2bd34c12471eefdf6ba9550e50ef02e5) [#3375](https://github.com/sandboxie-plus/Sandboxie/issues/3375)
 - fixed message text [#3408](https://github.com/sandboxie-plus/Sandboxie/issues/3408)
-- fixed warning issue with Firefox 120.0: `SBIE2205 Service not implemented: CredWriteA` [#3441](https://github.com/sandboxie-plus/Sandboxie/issues/3441)
+- fixed warning issue with Firefox 120: `SBIE2205 Service not implemented: CredWriteA` [#3441](https://github.com/sandboxie-plus/Sandboxie/issues/3441)
 - fixed outdated Chromium paths [#3436](https://github.com/sandboxie-plus/Sandboxie/pull/3436)
 
 
@@ -53,15 +53,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.12.0 / 5.67.0] - 2023-10-25
 
 ### Added
-- added mechanism to automatically set USB drives as forced folders (Requires a supporter certificate)
-- added troubleshooting script for issue [#3318](https://github.com/sandboxie-plus/Sandboxie/issues/3318) with parental controls
+- added mechanism to automatically set USB drives as forced folders (requires a supporter certificate)
+- added troubleshooting script for parental controls [#3318](https://github.com/sandboxie-plus/Sandboxie/issues/3318)
 - started German translation of the troubleshooting scripts ...\SandboxiePlus\SandMan\Troubleshooting\lang_de.json [#3293](https://github.com/sandboxie-plus/Sandboxie/issues/3293)
-- added "get_cert SBIEX-XXXXX-XXXXX-XXXXX-XXXXX" command to UpdUtil.exe allowing to get a certificate by serial number using command line
+- added "get_cert SBIEX-XXXXX-XXXXX-XXXXX-XXXXX" command to UpdUtil.exe allowing to receive a certificate by serial number using command line
 - added mechanism to revoke leaked or refunded certificates
 - added new global hotkey to bring SandMan in front as top most ALT+Break [#3320](https://github.com/sandboxie-plus/Sandboxie/issues/3320)
 - added option to exclude specific boxes from 'Terminate all processes' [#3108](https://github.com/sandboxie-plus/Sandboxie/issues/3108)
-  - Note: press the panic button hotkey 3 times with less than 1 second between clicks to Terminate All with NO exceptions
-- added customizable global hotkey that toggles the state of "pause forced programs" [#2441](https://github.com/sandboxie-plus/Sandboxie/issues/2441)
+  - Note: press the panic button hotkey 3 times with less than 1 second between clicks to Terminate All without exceptions
+- added customizable global hotkey that toggles "pause forced programs" [#2441](https://github.com/sandboxie-plus/Sandboxie/issues/2441)
 - added warning to prevent broad "forced folder" settings [#650](https://github.com/sandboxie-plus/Sandboxie/issues/650)
 - added CheckExpectFile function to Sandboxie Plus [#768](https://github.com/sandboxie-plus/Sandboxie/issues/768)
 

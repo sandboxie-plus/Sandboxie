@@ -418,6 +418,7 @@ void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Pa
 	}
 
 	bool bNothing = true;
+	bool bAuto = m_CheckMode != eManual;
 
 	if (HandleUserMessage(Data))
 		bNothing = false;
@@ -432,7 +433,7 @@ void COnlineUpdater::OnUpdateData(const QVariantMap& Data, const QVariantMap& Pa
 		bNothing = false;
 	}
 
-	if (m_CheckMode != eManual) {
+	if (bAuto) {
 		int UpdateInterval = theConf->GetInt("Options/UpdateInterval", UPDATE_INTERVAL); // in seconds
 		theConf->SetValue("Options/NextCheckForUpdates", QDateTime::currentDateTime().addSecs(UpdateInterval).toSecsSinceEpoch());
 	}

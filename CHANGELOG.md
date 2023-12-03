@@ -5,6 +5,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.12.4 / 5.67.4] - 2023-12-
+
+### Fixed
+- fixed running sandboxed processes located in a imdisk volume [#3472](https://github.com/sandboxie-plus/Sandboxie/discussions/3472)
+
+
+
 ## [1.12.3 / 5.67.3] - 2023-12-02
 
 ### Added

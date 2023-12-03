@@ -7321,6 +7321,11 @@ _FX BOOLEAN SbieDll_TranslateNtToDosPath(WCHAR *path)
     const FILE_DRIVE *drive;
     ULONG path_len, prefix_len;
 
+    // 
+    // sometimes we get a DOS path with the \??\ prefix
+    // in such cases we just quickly strip it and are done
+    // 
+
     if (_wcsnicmp(path, L"\\??\\", 4) == 0) {
     
         wmemmove(path, path + 4, wcslen(path) - 4 + 1);
@@ -7364,6 +7369,20 @@ _FX BOOLEAN SbieDll_TranslateNtToDosPath(WCHAR *path)
             path[0] = drive_letter;
             path[1] = L':';
         }
+
+        return TRUE;
+    }
+
+    // 
+    // sometimes we have to use a path which has no drive letter
+    // to make this work we use the \\.\ prefix which replaces \Device\
+    // and is accepted by regular non NT Win32 APIs
+    // 
+
+    if (_wcsnicmp(path, L"\\Device\\", 8) == 0) {
+
+        wcscpy(path, L"\\\\.\\");
+        wmemmove(path + 4, path + 8, wcslen(path + 8) + 1);
 
         return TRUE;
     }

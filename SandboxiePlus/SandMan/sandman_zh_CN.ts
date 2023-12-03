@@ -7972,7 +7972,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1506"/>
         <source>Allow useful Windows processes access to protected processes</source>
-        <translation type="unfinished"></translation>
+        <translation>允许有用的 Windows 进程访问受保护的进程</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1513"/>

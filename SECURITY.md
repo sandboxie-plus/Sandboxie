@@ -34,7 +34,7 @@ fixed in: 1.0.16 / 5.55.16
 NtGetNextThread was not properly filtered by the sbie driver, hence a sandboxed process could obtain a handle on an unsandboxed thread with write privileges 
 The issue can be remedied on older sbie versions by enabling EnableObjectFiltering=y
 
-fixed in: [1.0.14 / 5.55.14
+fixed in: 1.0.14 / 5.55.14
 
 ### SECURITY ISSUE ID-18 (thanks Diversenok)
 NtCreateSymbolicLinkObject was not filtered

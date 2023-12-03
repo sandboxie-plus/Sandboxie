@@ -151,7 +151,7 @@ protected:
 	EUpdateScope		ScanUpdateFiles(const QVariantMap& Update);
 	EUpdateScope		GetFileScope(const QString& Path);
 
-	bool				AskDownload(const QVariantMap& Update);
+	bool				AskDownload(const QVariantMap& Update, bool bAuto);
 
 	static bool			RunInstaller2(const QString& FilePath, bool bSilent);
 

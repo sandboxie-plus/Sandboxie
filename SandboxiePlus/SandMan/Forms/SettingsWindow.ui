@@ -1722,7 +1722,7 @@
                   <string>Hotpatches for the installed version, updates to the Templates.ini and translations.</string>
                  </property>
                  <property name="text">
-                  <string>Version Updates</string>
+                  <string>Incremental Updates</string>
                  </property>
                 </widget>
                </item>
@@ -1754,13 +1754,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                  </property>
                 </widget>
                </item>
-               <item row="7" column="4" colspan="2">
-                <widget class="QLabel" name="lblRevision">
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
                <item row="7" column="3">
                 <widget class="QComboBox" name="cmbUpdate"/>
                </item>
@@ -1780,10 +1773,10 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                <item row="8" column="2">
                 <widget class="QLabel" name="label_25">
                  <property name="toolTip">
-                  <string>New full versions from the selected release channel.</string>
+                  <string>New full installers from the selected release channel.</string>
                  </property>
                  <property name="text">
-                  <string>New Versions</string>
+                  <string>Full Upgrades</string>
                  </property>
                 </widget>
                </item>
@@ -1857,6 +1850,20 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
                 <widget class="QLabel" name="label_5">
                  <property name="text">
                   <string>Update Check Interval</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="4" colspan="3">
+                <widget class="QLabel" name="lblRevision">
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="4" colspan="3">
+                <widget class="QLabel" name="lblRelease">
+                 <property name="text">
+                  <string/>
                  </property>
                 </widget>
                </item>

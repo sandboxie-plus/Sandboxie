@@ -37,12 +37,12 @@
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="122"/>
         <source>New Password</source>
-        <translation>Nouveau mot de passe</translation>
+        <translation>Mot de passe :</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="132"/>
         <source>Repeat Password</source>
-        <translation>Répéter le mot de passe</translation>
+        <translation>Répéter le mot de passe :</translation>
     </message>
     <message>
         <location filename="Forms/BoxImageWindow.ui" line="142"/>
@@ -315,12 +315,12 @@
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="49"/>
         <source>Enter Encryption passwords for archive export:</source>
-        <translation>Saisir les mots de passe de chiffrement pour l&apos;exportation de l&apos;archive :</translation>
+        <translation>Saisir le mot de passe de chiffrement pour exporter l&apos;archive :</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="53"/>
         <source>Enter Encryption passwords for archive import:</source>
-        <translation>Saisir les mots de passe de chiffrement pour l&apos;importation de l&apos;archive :</translation>
+        <translation>Saisir le mot de passe de chiffrement pour importer l&apos;archive :</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="116"/>
@@ -337,7 +337,7 @@
         <source>WARNING: Short passwords are easy to crack using brute force techniques!
 
 It is recommended to choose a password consisting of 20 or more characters. Are you sure you want to use a short password?</source>
-        <translation>ATTENTION : Les mots de passe couts sont faciles à casser en utilisant des techniques de force brute !
+        <translation>ATTENTION : Les mots de passe courts sont faciles à casser en utilisant des techniques de force brute !
 
 Il est recommandé de choisir un mot de passe comportant 20 caractères ou plus. Êtes-vous sûr de vouloir utiliser un mot de passe court ?</translation>
     </message>
@@ -800,37 +800,37 @@ Vous pouvez appuyer sur « Terminer » pour fermer cet assistant.</translation>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="23"/>
         <source>Sandboxie-Plus - Sandbox Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus - Exportation du bac à sable</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="25"/>
         <source>Store</source>
-        <translation type="unfinished"></translation>
+        <translation>Stockage</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="26"/>
         <source>Fastest</source>
-        <translation type="unfinished"></translation>
+        <translation>La plus rapide</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="27"/>
         <source>Fast</source>
-        <translation type="unfinished"></translation>
+        <translation>Rapide</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="28"/>
         <source>Normal</source>
-        <translation type="unfinished">Normal</translation>
+        <translation>Normale</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="29"/>
         <source>Maximum</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximale</translation>
     </message>
     <message>
         <location filename="Windows/CompressDialog.cpp" line="30"/>
         <source>Ultra</source>
-        <translation type="unfinished"></translation>
+        <translation>Ultra</translation>
     </message>
 </context>
 <context>
@@ -1861,7 +1861,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <location filename="Windows/OptionsForce.cpp" line="305"/>
         <source>Forcing the specified entry will most likely break Windows, are you sure you want to proceed?</source>
         <oldsource>Forcing the specified folder will most likely break Windows, are you sure you want to proceed?</oldsource>
-        <translation type="unfinished">Le forçage du dossier indiqué cassera très probablement Windows. Êtes-vous sûr de vouloir continuer ?</translation>
+        <translation>Le forçage de l&apos;entrée indiquée empêchera très probablement Windows de fonctionner. Êtes-vous sûr de vouloir continuer ?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="25"/>
@@ -4423,7 +4423,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="SandMan.cpp" line="3831"/>
         <source>Can not create snapshot of an empty sandbox</source>
-        <translation>Impossible de créer un instantané d&apos;un bac à sable vide</translation>
+        <translation>Impossible de créer un instantané d&apos;un bac à sable vide.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3832"/>
@@ -6799,37 +6799,38 @@ Si vous êtes déjà « Great Supporter » sur Patreon, Sandboxie peut vérifier
     <message>
         <location filename="Forms/CompressDialog.ui" line="14"/>
         <source>Compress Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Compression des fichiers</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="38"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Compression :</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="45"/>
         <source>When selected you will be prompted for a password after clicking OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Une fois sélectionné, un mot de passe vous sera demandé après avoir appuyé sur OK.</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="48"/>
         <source>Encrypt archive content</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiffrer le contenu de l&apos;archive</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="55"/>
         <source>Solid archiving improves compression ratios by treating multiple files as a single continuous data block. Ideal for a large number of small files, it makes the archive more compact but may increase the time required for extracting individual files.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;archivage compact améliore les ratios de compression en traitant les fichiers multiples comme un seul bloc continu de données.
+Idéal s&apos;il y a un grand nombre de petits fichiers, cela rendra l&apos;archive plus compacte mais peut augmenter le temps requis pour l&apos;extraction des fichiers individuels.</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="58"/>
         <source>Create Solide Archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer une archive compacte</translation>
     </message>
     <message>
         <location filename="Forms/CompressDialog.ui" line="65"/>
         <source>Export Sandbox to a 7z archive, Choose Your Compression Rate and Customize Additional Compression Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporte le bac à sable dans une archive 7z. Choisissez le ratio ainsi que d&apos;autres paramètres de compression.</translation>
     </message>
 </context>
 <context>
@@ -7620,7 +7621,7 @@ Si des processus directeurs sont définis, tous les autres sont traités comme d
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1506"/>
         <source>Allow useful Windows processes access to protected processes</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser les processus Windows utiles à accéder aux processus protégés</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1538"/>

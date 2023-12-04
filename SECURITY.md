@@ -62,7 +62,7 @@ fixed in: 0.7.0 / 5.48.0
 fixed in: 0.7.0 / 5.48.0
 
 ### SECURITY ISSUE ID-12 (thanks typpos) [#549](https://github.com/sandboxie-plus/Sandboxie/pull/549)
-A race condition in the driver allowed to obtain an elevated rights handle to a unsandboxed process
+A race condition in the driver allowed to obtain an elevated rights handle to an unsandboxed process
 
 fixed in: 0.7.0 / 5.48.0
 

@@ -490,7 +490,7 @@ bool COnlineUpdater::HandleUpdate()
 	bool bAllowAuto = g_CertInfo.active && !g_CertInfo.expired; // To use automatic updates a valid certificate is required
 
 	//
-	// if we allow for version updates but not for automatic instalation/download of new release 
+	// if we allow for version updates but not for automatic installation/download of new release 
 	// ignore the release and install it using the version updater
 	//
 

@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------
 # SbieDrv
 #
-# Initialization errors issued to to the System event Log
+# Initialization errors issued to the System event Log
 #----------------------------------------------------------------------------
 
 1101;evt;inf;01
@@ -707,7 +707,7 @@ Zadejte název programu nebo složky a Sandboxie je pro Vás otevře.
 .
 
 3104;txt;01
-Zadejte . (cílový charakter) k prozkoumání plochy Sanboxie.
+Zadejte . (cílový charakter) k prozkoumání plochy Sandboxie.
 .
 
 3105;txt;01
@@ -1495,7 +1495,7 @@ Kontrola aktualizace
 .
 
 3622;txt;01
-Chcete se připojit na web Sanboxie a zjistit, zda je k dispozici nová verze programu?
+Chcete se připojit na web Sandboxie a zjistit, zda je k dispozici nová verze programu?
 .
 
 3623;txt;01

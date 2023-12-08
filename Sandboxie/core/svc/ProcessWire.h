@@ -136,6 +136,75 @@ typedef struct tagPROCESS_RUN_SANDBOXED_RPL PROCESS_RUN_UPDATER_RPL;
 
 
 //---------------------------------------------------------------------------
+// Get Process Info
+//---------------------------------------------------------------------------
+
+#define SBIE_PROCESS_BASIC_INFO     1
+#define SBIE_PROCESS_EXEC_INFO      2
+#define SBIE_PROCESS_PATHS_INFO     4
+
+#define SBIE_PROCESS_ALL_INFO       7
+
+struct tagPROCESS_GET_INFO_REQ
+{
+    MSG_HEADER h;
+    ULONG dwProcessId;
+    ULONG dwInfoClasses;
+};
+
+struct tagPROCESS_INFO_RPL
+{
+    MSG_HEADER h;
+    // basic
+    ULONG dwParentId;
+    ULONG dwInfo;
+    // exec
+    BOOLEAN bSuspended;
+    // paths
+    ULONG app_ofs;      
+    ULONG app_len;
+    ULONG cmd_ofs;
+    ULONG cmd_len;
+    ULONG dir_ofs;
+    ULONG dir_len;
+};
+
+typedef struct tagPROCESS_GET_INFO_REQ PROCESS_GET_INFO_REQ;
+typedef struct tagPROCESS_INFO_RPL PROCESS_INFO_RPL;
+
+
+//---------------------------------------------------------------------------
+// Suspend/Resume One Process
+//---------------------------------------------------------------------------
+
+
+struct tagPROCESS_SUSPEND_RESUME_ONE_REQ
+{
+    MSG_HEADER h;
+    ULONG pid;
+    BOOLEAN suspend;
+};
+
+typedef struct tagPROCESS_SUSPEND_RESUME_ONE_REQ PROCESS_SUSPEND_RESUME_ONE_REQ;
+
+
+//---------------------------------------------------------------------------
+// Suspend/Resume All Process
+//---------------------------------------------------------------------------
+
+
+struct tagPROCESS_SUSPEND_RESUME_ALL_REQ
+{
+    MSG_HEADER h;
+    ULONG session_id;
+    WCHAR boxname[34];
+    BOOLEAN suspend;
+};
+
+typedef struct tagPROCESS_SUSPEND_RESUME_ALL_REQ PROCESS_SUSPEND_RESUME_ALL_REQ;
+
+
+//---------------------------------------------------------------------------
 
 
 #endif /* _MY_PROCESSWIRE_H */

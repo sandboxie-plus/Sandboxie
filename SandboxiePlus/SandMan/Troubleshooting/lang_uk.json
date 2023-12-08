@@ -1,0 +1,80 @@
+﻿{
+"Description Text...": "Description Text...",
+"Fix current issues": "Fix current issues",
+"Fix issues with sandboxing": "Fix issues with sandboxing",
+"An Application does not work properly when sandboxed": "An Application does not work properly when sandboxed",
+"Issues with a web browser": "Issues with a web browser",
+"Perform Sandbox maintenance": "Perform Sandbox maintenance",
+"Fix issues with the UI or Shell": "Fix issues with the UI or Shell",
+
+"Yes": "Yes",
+"No": "No",
+
+"App compatibility checker": "App compatibility checker",
+"This script check which app compatibility templates needs to be enabled": "This script check which app compatibility templates needs to be enabled",
+"Loaded %1 templates": "Loaded %1 templates",
+
+"Browser shortcut is missing from the desktop": "Browser shortcut is missing from the desktop",
+"This procedure will add a browser shortcut to the desktop": "This procedure will add a browser shortcut to the desktop",
+"Default Browser": "Default Browser",
+"Another": "Another",
+"Select Browser": "Select Browser",
+"Select Sandbox": "Select Sandbox",
+"Select which browser you want to create a shortcut for and in what box": "Select which browser you want to create a shortcut for and in what box",
+"Select Browser Path": "Select Browser Path",
+
+"Explorer Context Menu extension does not work": "Explorer Context Menu extension does not work",
+"This procedure will re install the shell integration": "This procedure will re install the shell integration",
+"Add Run Sandboxed": "Add Run Sandboxed",
+"Add Run Unsandboxed": "Add Run Unsandboxed",
+"Install legacy shell extensions": "Install legacy shell extensions",
+"Select which shell options should be reinstalled": "Select which shell options should be reinstalled",
+
+"Failed to install application into a sandbox": "Failed to install application into a sandbox",
+"Enter Installer Path": "Enter Installer Path",
+"Select a sandbox to install into": "Select a sandbox to install into",
+"This box has DropAdminRights enabled, preventing execution of installers. Do you want to disable this restriction, that will reduce the security level.": "This box has DropAdminRights enabled, preventing execution of installers. Do you want to disable this restriction, that will reduce the security level.",
+"Disable DropAdminRights": "Disable DropAdminRights",
+"Enable FakeAdminRights": "Enable FakeAdminRights",
+"running installer, pid: %1 press NEXT once it finishes to continue": "running installer, pid: %1 press NEXT once it finishes to continue",
+"Was the issue resolved?": "Was the issue resolved?",
+
+"Webcam or Sound does not work when sandboxed": "Webcam or Sound does not work when sandboxed",
+"To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n",
+"\nPlease note that this required preset works only with a valid supporter certificate!": "\nPlease note that this required preset works only with a valid supporter certificate!",
+"Select which box to turn into a reduced isolation app compartment box.": "Select which box to turn into a reduced isolation app compartment box.",
+"The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.",
+
+"Select affected sandbox": "Select affected sandbox",
+"Enter Process Name": "Enter Process Name",
+
+"Internet Access restrictions are in effect for the sandbox in which the program is running. The program is prohibited from accessing the Internet.": "Internet Access restrictions are in effect for the sandbox in which the program is running. The program is prohibited from accessing the Internet.",
+
+"Start/Run restrictions are in effect for the sandbox in which the program is running. The program is prohibited from starting or running.": "Start/Run restrictions are in effect for the sandbox in which the program is running. The program is prohibited from starting or running.",
+
+"Failures to load SbieDll.dll when encountered by Chrome, or another software employing app containers, it is often caused by invalid DACL entries for the Sandboxie home directory. This mitigation measure will fix them, for this reason it will prompt for admin privileges which need to be granted for kmdutil.exe.": "Failures to load SbieDll.dll when encountered by Chrome, or another software employing app containers, it is often caused by invalid DACL entries for the Sandboxie home directory. This mitigation measure will fix them, for this reason it will prompt for admin privileges which need to be granted for kmdutil.exe.",
+"The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.",
+"DACLs fix did not resolve the issue": "DACLs fix did not resolve the issue",
+
+"The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.",
+
+"Sandboxie was not able to execute one of its own programs. Check access permissions to the Sandboxie installation folder and/or reinstall Sandboxie.\n\nPossible Causes:\n1. Sandboxie was configured to block access to the folder containing its program files.\n2. A third-party (HIPS) security software was configured to block the execution of the program mentioned in the message.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Sandboxie was not able to execute one of its own programs. Check access permissions to the Sandboxie installation folder and/or reinstall Sandboxie.\n\nPossible Causes:\n1. Sandboxie was configured to block access to the folder containing its program files.\n2. A third-party (HIPS) security software was configured to block the execution of the program mentioned in the message.\n\nYou can submit an issue report on the next page to help us to analyze the issue.",
+
+"Do you want to open the box option dialog to change this preset?": "Do you want to open the box option dialog to change this preset?",
+"No, it is fine as it is": "No, it is fine as it is",
+"No, but I want to report a bug": "No, but I want to report a bug",
+
+"The message %1 is caused by the file migration limit being reached.": "The message %1 is caused by the file migration limit being reached.",
+
+"It seems you are using a non-administrative user account on a system with enabled parental controls, this is known to be incompatible with Sandboxie.\nYou have the following options to resolve the issue.": "It seems you are using a non-administrative user account on a system with enabled parental controls, this is known to be incompatible with Sandboxie.\nYou have the following options to resolve the issue.",
+
+"Sbie Message Code": "Sbie Message Code",
+"Name affected process": "Name affected process",
+"Please enter the SBIEMSG ID you have encountered.": "Please enter the SBIEMSG ID you have encountered.",
+"There is no automated troubleshooting available for SBIE%1 yet.<br />": "There is no automated troubleshooting available for SBIE%1 yet.<br />",
+"The full message text is: %1<br />": "The full message text is: %1<br />",
+"Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.",
+"Would you like to collect some logs to help us resolve the issue.": "Would you like to collect some logs to help us resolve the issue.",
+"Now please run your application again to trigger the Sbie message.<br /><br />": "Now please run your application again to trigger the Sbie message.<br /><br />",
+"Press NEXT when you are done collecting logs.": "Press NEXT when you are done collecting logs."
+}

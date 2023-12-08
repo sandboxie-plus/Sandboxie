@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------
 # SbieDrv
 #
-# Initialization errors issued to to the System evt Log
+# Initialization errors issued to the System evt Log
 #----------------------------------------------------------------------------
 
 1101;evt;inf;01

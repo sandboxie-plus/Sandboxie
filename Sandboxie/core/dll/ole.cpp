@@ -1066,7 +1066,7 @@ _FX HGLOBAL XDataObject::InitFormatIdList(HGLOBAL hData)
     if (! pIdList)
         return NULL;
 
-    HRESULT hr;
+    BOOL ok;
     HANDLE hFile;
     WCHAR *path = (WCHAR *)Dll_AllocTemp(8192);
 
@@ -1083,8 +1083,8 @@ _FX HGLOBAL XDataObject::InitFormatIdList(HGLOBAL hData)
         LPCITEMIDLIST pidl = pILCombine(GetPidl(0), GetPidl(count));
         if (pidl) {
 
-            hr = pSHGetPathFromIDList(pidl, path);
-            if (SUCCEEDED(hr)) {
+            ok = pSHGetPathFromIDList(pidl, path);
+            if (ok) {
 
                 hFile = CreateFileW(path,
                     GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING,
@@ -1128,8 +1128,8 @@ _FX HGLOBAL XDataObject::InitFormatIdList(HGLOBAL hData)
     // get the pidl for the parent folder in the sandbox
     //
 
-    hr = pSHGetPathFromIDList(GetPidl(0), path);
-    if (! SUCCEEDED(hr))
+    ok = pSHGetPathFromIDList(GetPidl(0), path);
+    if (!ok)
         goto finish;
 
     hFile = CreateFileW(path,
@@ -1153,8 +1153,8 @@ _FX HGLOBAL XDataObject::InitFormatIdList(HGLOBAL hData)
         LPCITEMIDLIST pidl = pILCombine(GetPidl(0), GetPidl(1));
         if (pidl) {
 
-            hr = pSHGetPathFromIDList(pidl, path);
-            if (SUCCEEDED(hr)) {
+            ok = pSHGetPathFromIDList(pidl, path);
+            if (ok) {
 
                 hFile = CreateFileW(path,
                     GENERIC_WRITE, FILE_SHARE_VALID_FLAGS, NULL,
@@ -1188,6 +1188,7 @@ _FX HGLOBAL XDataObject::InitFormatIdList(HGLOBAL hData)
 
     SbieDll_TranslateNtToDosPath(path);
 
+	HRESULT hr;
     LPITEMIDLIST pidl;
     ULONG flags = 0;
     hr = pSHILCreateFromPath(path, &pidl, &flags);

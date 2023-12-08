@@ -616,7 +616,7 @@ void SafeShow(QWidget* pWidget) {
 	if (Lock == false) {
 		Lock = true;
 		pWidget->show();
-		QApplication::processEvents(QEventLoop::ExcludeSocketNotifiers | QEventLoop::ExcludeSocketNotifiers);
+		QApplication::processEvents(QEventLoop::ExcludeSocketNotifiers);
 		Lock = false;
 	} else
 		pWidget->show();

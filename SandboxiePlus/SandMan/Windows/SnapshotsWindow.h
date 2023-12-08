@@ -46,7 +46,7 @@ protected:
 	QString						m_DefaultSnapshot;
 	QMap<QVariant, QVariantMap> m_SnapshotMap;
 
-	QVariant	m_SellectedID;
+	QVariant	m_SelectedID;
 	int			m_SaveInfoPending;
 
 private:

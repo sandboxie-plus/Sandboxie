@@ -1,5 +1,5 @@
 /*
- * Copyright 2021-2022 David Xanatos, xanasoft.com
+ * Copyright 2021-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -33,11 +33,24 @@
 // Structures and Types
 //---------------------------------------------------------------------------
 
+
+typedef struct _HANDLE_HANDLER
+{
+	LIST_ELEM list_elem;
+
+	P_HandlerFunc	Close;
+	void*			Param;
+
+	BOOL			bPropagate; // incompatible with Param, todo: add duplicate handler
+
+} HANDLE_HANDLER;
+
+
 typedef struct _HANDLE_STATE {
 
     BOOLEAN DeleteOnClose;
-    P_CloseHandler CloseHandlers[MAX_CLOSE_HANDLERS];
-    WCHAR* RelocationPath;
+    LIST    CloseHandlers;
+    WCHAR*  RelocationPath;
 
 } HANDLE_STATE;
 
@@ -145,21 +158,17 @@ _FX WCHAR* Handle_GetRelocationPath(HANDLE FileHandle, ULONG ExtraLength)
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Handle_FreeCloseHandler(HANDLE FileHandle, P_CloseHandler* CloseHandlers, BOOLEAN* DeleteOnClose)
+_FX VOID Handle_ExecuteCloseHandler(HANDLE FileHandle, BOOLEAN* DeleteOnClose)
 {
-    BOOLEAN HasCloseHandlers = FALSE;
+    LIST CloseHandlers;
 
     EnterCriticalSection(&Handle_StatusData_CritSec);
 
     HANDLE_STATE* state = (HANDLE_STATE*)map_get(&Handle_StatusData, FileHandle);
     if (state) {
 
-        HasCloseHandlers = TRUE;
-
-        if(CloseHandlers) 
-            memcpy(CloseHandlers, state->CloseHandlers, MAX_CLOSE_HANDLERS * sizeof(P_CloseHandler));
-        if(DeleteOnClose) *DeleteOnClose = state->DeleteOnClose;
-
+        *DeleteOnClose = state->DeleteOnClose;
+        CloseHandlers = state->CloseHandlers;
         if (state->RelocationPath) Dll_Free(state->RelocationPath);
     }
 
@@ -167,21 +176,32 @@ _FX BOOLEAN Handle_FreeCloseHandler(HANDLE FileHandle, P_CloseHandler* CloseHand
 
     LeaveCriticalSection(&Handle_StatusData_CritSec);
 
-    return HasCloseHandlers;
+    //
+    // execute all close handlers
+    //
+
+    if (state) {
+        while (1) {
+            HANDLE_HANDLER* handler = List_Head(&CloseHandlers);
+            if (!handler)
+                break;
+            handler->Close(FileHandle, handler->Param);
+            List_Remove(&CloseHandlers, handler);
+            Pool_Free(handler, sizeof(HANDLE_HANDLER));
+        }
+    }
 }
 
 
 //---------------------------------------------------------------------------
-// Handle_RegisterCloseHandler
+// Handle_RegisterHandler
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Handle_RegisterCloseHandler(HANDLE FileHandle, P_CloseHandler CloseHandler)
+_FX BOOLEAN Handle_RegisterHandler(HANDLE FileHandle, P_HandlerFunc CloseHandler, void* Params, BOOL bPropagate)
 {
     if (!FileHandle || FileHandle == (HANDLE)-1)
         return FALSE;
-
-    ULONG i;
 
     EnterCriticalSection(&Handle_StatusData_CritSec);
 
@@ -190,19 +210,30 @@ _FX BOOLEAN Handle_RegisterCloseHandler(HANDLE FileHandle, P_CloseHandler CloseH
         state = map_insert(&Handle_StatusData, FileHandle, NULL, sizeof(HANDLE_STATE));
     }
 
-    for (i = 0; i < MAX_CLOSE_HANDLERS; i++) {
-        if (state->CloseHandlers[i] == CloseHandler)
+    HANDLE_HANDLER* handler = List_Head(&state->CloseHandlers);
+    while (handler) 
+    {
+        if (handler->Close == CloseHandler)
             break; // already registered
-        if (state->CloseHandlers[i] == NULL) {
-            state->CloseHandlers[i] = CloseHandler; // set to empty slot
-            break;
-        }
+        handler = List_Next(handler);
+    }
+
+    if (handler == NULL) 
+    {
+        HANDLE_HANDLER* newNandler = Pool_Alloc(Dll_Pool, sizeof(HANDLE_HANDLER));
+        memzero(&newNandler->list_elem, sizeof(LIST_ELEM));
+
+        newNandler->Close = CloseHandler;
+        newNandler->Param = Params;
+        newNandler->bPropagate = bPropagate;
+
+        List_Insert_After(&state->CloseHandlers, NULL, newNandler);
     }
 
     LeaveCriticalSection(&Handle_StatusData_CritSec);
 
-    if (i == MAX_CLOSE_HANDLERS) {
-        SbieApi_Log(2301, L"No free CloseHandlers slot available");
+    if (handler != NULL) {
+        //SbieApi_Log(2301, L"CloseHandlers already registered"); // todo
         return FALSE;
     }
 
@@ -211,30 +242,31 @@ _FX BOOLEAN Handle_RegisterCloseHandler(HANDLE FileHandle, P_CloseHandler CloseH
 
 
 //---------------------------------------------------------------------------
-// Handle_UnRegisterCloseHandler
+// Handle_UnRegisterHandler
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Handle_UnRegisterCloseHandler(HANDLE FileHandle, P_CloseHandler CloseHandler)
+_FX VOID Handle_UnRegisterHandler(HANDLE FileHandle, P_HandlerFunc CloseHandler, void** pParams)
 {
-    ULONG i = MAX_CLOSE_HANDLERS;
-
     EnterCriticalSection(&Handle_StatusData_CritSec);
 
     HANDLE_STATE* state = map_get(&Handle_StatusData, FileHandle);
     if (state) {
 
-        for (i = 0; i < MAX_CLOSE_HANDLERS; i++) {
-            if (state->CloseHandlers[i] == CloseHandler) {
-                state->CloseHandlers[i] = NULL; // clear slot
+        HANDLE_HANDLER* handler = List_Head(&state->CloseHandlers);
+        while (handler) 
+        {
+            if (handler->Close == CloseHandler)
+            {
+                if (pParams) pParams = handler->Param;
+                List_Remove(&state->CloseHandlers, handler);
                 break;
             }
+            handler = List_Next(handler);
         }
     }
 
     LeaveCriticalSection(&Handle_StatusData_CritSec);
-
-    return i != MAX_CLOSE_HANDLERS;
 }
 
 
@@ -245,8 +277,6 @@ _FX BOOLEAN Handle_UnRegisterCloseHandler(HANDLE FileHandle, P_CloseHandler Clos
 
 _FX void Handle_SetupDuplicate(HANDLE OldFileHandle, HANDLE NewFileHandle)
 {
-    ULONG i;
-
     EnterCriticalSection(&Handle_StatusData_CritSec);
 
     HANDLE_STATE* state = map_get(&Handle_StatusData, OldFileHandle);
@@ -255,16 +285,15 @@ _FX void Handle_SetupDuplicate(HANDLE OldFileHandle, HANDLE NewFileHandle)
         if(state->RelocationPath)
             Handle_SetRelocationPath(NewFileHandle, state->RelocationPath);
 
-        // todo: add a flag to each CloseHandlers entry to indicate if it should be propagated or not
-        BOOLEAN found = FALSE;
-        for (i = 0; i < MAX_CLOSE_HANDLERS; i++) {
-            if (state->CloseHandlers[i] == File_NotifyRecover) {
-                found = TRUE;
+        HANDLE_HANDLER* handler = List_Head(&state->CloseHandlers);
+        while (handler) 
+        {
+            if (handler->bPropagate) {
+                Handle_RegisterHandler(NewFileHandle, handler->Close, NULL, TRUE);
                 break;
             }
+            handler = List_Next(handler);
         }
-        if(found)
-            Handle_RegisterCloseHandler(NewFileHandle, File_NotifyRecover);
     }
 
     LeaveCriticalSection(&Handle_StatusData_CritSec);

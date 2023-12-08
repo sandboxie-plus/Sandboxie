@@ -202,9 +202,10 @@ void COptionsWindow::OnForceProg()
 	QString Value = SelectProgram();
 	if (Value.isEmpty())
 		return;
+	if (!CheckForcedItem(Value, (int)eProcess))
+		return;
 	AddForcedEntry(Value, (int)eProcess);
-	m_ForcedChanged = true;
-	OnOptChanged();
+	OnForcedChanged();
 }
 
 void COptionsWindow::OnBreakoutProg()
@@ -213,8 +214,7 @@ void COptionsWindow::OnBreakoutProg()
 	if (Value.isEmpty())
 		return;
 	AddBreakoutEntry(Value, (int)eProcess);
-	m_ForcedChanged = true;
-	OnOptChanged();
+	OnForcedChanged();
 }
 
 void COptionsWindow::OnForceBrowse()
@@ -222,9 +222,10 @@ void COptionsWindow::OnForceBrowse()
 	QString Value = QFileDialog::getOpenFileName(this, tr("Select Executable File"), "", tr("Executable Files (*.exe)"));
 	if (Value.isEmpty())
 		return;
+	if (!CheckForcedItem(Value, (int)eProcess))
+		return;
 	AddForcedEntry(Split2(Value, "/", true).second, (int)eProcess);
-	m_ForcedChanged = true;
-	OnOptChanged();
+	OnForcedChanged();
 }
 
 void COptionsWindow::OnBreakoutBrowse()
@@ -233,8 +234,7 @@ void COptionsWindow::OnBreakoutBrowse()
 	if (Value.isEmpty())
 		return;
 	AddBreakoutEntry(Split2(Value, "/", true).second, (int)eProcess);
-	m_ForcedChanged = true;
-	OnOptChanged();
+	OnForcedChanged();
 }
 
 void COptionsWindow::OnForceDir()
@@ -242,9 +242,10 @@ void COptionsWindow::OnForceDir()
 	QString Value = QFileDialog::getExistingDirectory(this, tr("Select Directory")).replace("/", "\\");
 	if (Value.isEmpty())
 		return;
+	if (!CheckForcedItem(Value, (int)ePath))
+		return;
 	AddForcedEntry(Value, (int)ePath);
-	m_ForcedChanged = true;
-	OnOptChanged();
+	OnForcedChanged();
 }
 
 void COptionsWindow::OnBreakoutDir()
@@ -253,28 +254,70 @@ void COptionsWindow::OnBreakoutDir()
 	if (Value.isEmpty())
 		return;
 	AddBreakoutEntry(Value, (int)ePath);
-	m_ForcedChanged = true;
-	OnOptChanged();
+	OnForcedChanged();
 }
 
 void COptionsWindow::OnDelForce()
 {
 	DeleteAccessEntry(ui.treeForced->currentItem());
-	m_ForcedChanged = true;
-	OnOptChanged();
+	OnForcedChanged();
 }
 
 void COptionsWindow::OnDelBreakout()
 {
 	DeleteAccessEntry(ui.treeBreakout->currentItem());
-	m_ForcedChanged = true;
+	OnForcedChanged();
+}
+
+void COptionsWindow::OnForcedChanged()
+{
+	m_ForcedChanged = true; 
 	OnOptChanged();
 }
 
-void COptionsWindow::OnForcedChanged() 
+bool COptionsWindow::CheckForcedItem(const QString& Value, int type)
 {
-	//QString Test = pItem->data(1, Qt::UserRole).toString();
+	bool bDangerous = false;
+
+	QString winPath = QString::fromUtf8(qgetenv("SystemRoot"));
+
+	if (type == eProcess)
+	{
+		if (Value.compare("explorer.exe", Qt::CaseInsensitive) == 0 || Value.compare(winPath + "\\explorer.exe", Qt::CaseInsensitive) == 0)
+			bDangerous = true;
+		else if (Value.compare("taskmgr.exe", Qt::CaseInsensitive) == 0 || Value.compare(winPath + "\\system32\\taskmgr.exe", Qt::CaseInsensitive) == 0)
+			bDangerous = true;
+		else if (Value.contains("sbiesvc.exe", Qt::CaseInsensitive))
+			bDangerous = true;
+		else if (Value.contains("sandman.exe", Qt::CaseInsensitive))
+			bDangerous = true;
+	}
+	else
+	{
+		if (Value.left(3).compare(winPath.left(3), Qt::CaseInsensitive) == 0)
+			bDangerous = true; // SystemDrive (C:\)
+		else if (Value.compare(winPath, Qt::CaseInsensitive) == 0)
+			bDangerous = true; // SystemRoot (C:\Windows)
+		else if (Value.left(winPath.length() + 1).compare(winPath + "\\", Qt::CaseInsensitive) == 0)
+			bDangerous = true; // sub path of C:\Windows
+	}
+
+	if (bDangerous && QMessageBox::warning(this, "Sandboxie-Plus", tr("Forcing the specified entry will most likely break Windows, are you sure you want to proceed?")
+		, QDialogButtonBox::Yes, QDialogButtonBox::No) != QDialogButtonBox::Yes)
+		return false;
+	return true;
+}
+
+void COptionsWindow::OnForcedChanged(QTreeWidgetItem *pItem, int) 
+{
+	QString Value = pItem->data(1, Qt::UserRole).toString();
+	if (pItem->checkState(0) == Qt::Checked && !CheckForcedItem(Value, pItem->data(0, Qt::UserRole).toInt()))
+		pItem->setCheckState(0, Qt::Unchecked);
 	//qDebug() << Test;
-	m_ForcedChanged = true; 
-	OnOptChanged();
+	OnForcedChanged();
+}
+
+void COptionsWindow::OnBreakoutChanged(QTreeWidgetItem *pItem, int) 
+{
+	OnForcedChanged();
 }

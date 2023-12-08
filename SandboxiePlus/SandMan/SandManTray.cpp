@@ -98,6 +98,8 @@ void CSandMan::CreateTrayMenu()
 
 	m_pTrayMenu->addSeparator();
 	m_pTrayMenu->addAction(m_pEmptyAll);
+	m_pTrayMenu->addAction(m_pLockAll);
+	m_pTrayMenu->addSeparator();
 	m_pTrayMenu->addAction(m_pDisableForce2);
 	if(m_pDisableRecovery) m_pTrayMenu->addAction(m_pDisableRecovery);
 	if(m_pDisableMessages) m_pTrayMenu->addAction(m_pDisableMessages);
@@ -335,13 +337,14 @@ void CSandMan::OnBoxMenuHover(QAction* action)
 	}
 }
 
-double CSelectBoxWindow__GetBoxOrder(const QMap<QString, QStringList>& Groups, const QString& Name, double value = 0.0, int Depth = 0);
-QTreeWidgetItem* CSelectBoxWindow__GetBoxParent(const QMap<QString, QStringList>& Groups, QMap<QString, QTreeWidgetItem*>& GroupItems, QTreeWidget* treeBoxes, const QString& Name, int Depth = 0);
-
 void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 {
 	static bool TriggerSet = false;
 	static bool NullifyTrigger = false;
+
+	if (theConf->GetBool("Options/TraySingleClick", false) && Reason == QSystemTrayIcon::Trigger)
+		Reason = QSystemTrayIcon::DoubleClick;
+
 	switch(Reason)
 	{
 		case QSystemTrayIcon::Context:
@@ -364,7 +367,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 				if (theConf->GetBool("MainWindow/BoxTree_UseOrder", false)) {
 					QMultiMap<double, CSandBoxPtr> Boxes2;
 					foreach(const CSandBoxPtr &pBox, Boxes) {
-						Boxes2.insertMulti(CSelectBoxWindow__GetBoxOrder(Groups, pBox->GetName()), pBox);
+						Boxes2.insertMulti(CBoxPicker::GetBoxOrder(Groups, pBox->GetName()), pBox);
 					}
 					Boxes = Boxes2.values();
 				}
@@ -386,7 +389,7 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 							continue;
 					}
 
-					QTreeWidgetItem* pParent = CSelectBoxWindow__GetBoxParent(Groups, GroupItems, m_pTrayBoxes, pBox->GetName());
+					QTreeWidgetItem* pParent = CBoxPicker::GetBoxParent(Groups, GroupItems, m_pTrayBoxes, pBox->GetName());
 		
 					QTreeWidgetItem* pItem = new QTreeWidgetItem();
 					pItem->setText(0, pBox->GetName().replace("_", " "));

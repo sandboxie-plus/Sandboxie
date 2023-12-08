@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 #include <QAbstractEventDispatcher>
+#include <QSettings>
 
 #include <ntstatus.h>
 #define WIN32_NO_STATUS
@@ -108,6 +109,8 @@ void CSymbolProvider::run()
 	}
 }
 
+extern "C" BOOL CALLBACK SymbolCallbackFunction(HANDLE ProcessHandle, ULONG ActionCode, ULONG64 CallbackData, ULONG64 UserContext);
+
 QString CSymbolProvider::Resolve(quint64 pid, quint64 Address)
 {
     QMutexLocker Lock(&m_SymLock);
@@ -115,6 +118,8 @@ QString CSymbolProvider::Resolve(quint64 pid, quint64 Address)
     SWorker& Worker = m_Workers[pid];
     if (Worker.handle == 0) 
     {
+        Worker.pProvider = this;
+
         static ACCESS_MASK accesses[] =
         {
             //STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | 0xfff, // pre-Vista full access
@@ -133,7 +138,7 @@ QString CSymbolProvider::Resolve(quint64 pid, quint64 Address)
             Worker.handle = FakeHandle.fetchAndAddAcquire(4);
 
         __sys_SymInitialize((HANDLE)Worker.handle, NULL, TRUE);
-        //__sys_SymRegisterCallbackW64((HANDLE)Worker.handle, SymbolCallbackFunction, (ULONG64)&Worker);
+        __sys_SymRegisterCallbackW64((HANDLE)Worker.handle, SymbolCallbackFunction, (ULONG64)&Worker);
         __sys_SymSetSearchPathW((HANDLE)Worker.handle, m_SymPath.toStdWString().c_str());
     }
     Worker.last = GetTickCount64();
@@ -160,7 +165,7 @@ QString CSymbolProvider::Resolve(quint64 pid, quint64 Address)
     }
     else
     {
-        // Then this happens probably symsrv.dll is missing
+        // Then this happens, probably symsrv.dll is missing
 
         IMAGEHLP_MODULEW64 ModuleInfo;
         ModuleInfo.SizeOfStruct = sizeof(ModuleInfo);
@@ -174,6 +179,8 @@ QString CSymbolProvider::Resolve(quint64 pid, quint64 Address)
 void CSymbolProvider::ResolveAsync(quint64 pid, quint64 Address, QObject* receiver, const char* member)
 {
     CSymbolProvider* This = CSymbolProvider::Instance();
+    if (!This)
+        return;
 
     if (!QAbstractEventDispatcher::instance(QThread::currentThread())) {
         qWarning("CSymbolProvider::ResolveAsync() called with no event dispatcher");
@@ -188,7 +195,7 @@ void CSymbolProvider::ResolveAsync(quint64 pid, quint64 Address, QObject* receiv
 	This->m_JobQueue.append(pJob);
 }
 
-/*extern "C" BOOL CALLBACK SymbolCallbackFunction(HANDLE ProcessHandle, ULONG ActionCode, ULONG64 CallbackData, ULONG64 UserContext)
+extern "C" BOOL CALLBACK SymbolCallbackFunction(HANDLE ProcessHandle, ULONG ActionCode, ULONG64 CallbackData, ULONG64 UserContext)
 {
     CSymbolProvider::SWorker* pWorker = (CSymbolProvider::SWorker*)UserContext;
 
@@ -196,7 +203,7 @@ void CSymbolProvider::ResolveAsync(quint64 pid, quint64 Address, QObject* receiv
     {
     case CBA_DEFERRED_SYMBOL_LOAD_START:
         {
-            PIMAGEHLP_DEFERRED_SYMBOL_LOADW64 callbackData = (PIMAGEHLP_DEFERRED_SYMBOL_LOADW64)CallbackData;
+            /*PIMAGEHLP_DEFERRED_SYMBOL_LOADW64 callbackData = (PIMAGEHLP_DEFERRED_SYMBOL_LOADW64)CallbackData;
             
             IMAGEHLP_MODULEW64 ModuleInfo;
             ModuleInfo.SizeOfStruct = sizeof(ModuleInfo);
@@ -238,25 +245,26 @@ void CSymbolProvider::ResolveAsync(quint64 pid, quint64 Address, QObject* receiv
 
                     return TRUE;
                 }
-            }
+            }*/
         }
-        return FALSE;
+        break;
     case CBA_DEFERRED_SYMBOL_LOAD_COMPLETE:
         {
-            PIMAGEHLP_DEFERRED_SYMBOL_LOADW64 callbackData = (PIMAGEHLP_DEFERRED_SYMBOL_LOADW64)CallbackData;
+            /*PIMAGEHLP_DEFERRED_SYMBOL_LOADW64 callbackData = (PIMAGEHLP_DEFERRED_SYMBOL_LOADW64)CallbackData;
 
             if (callbackData->hFile)
             {
                 NtClose(callbackData->hFile);
                 callbackData->hFile = NULL;
             }
+            return TRUE;*/
         }
-        return TRUE;
+        break;
     case CBA_READ_MEMORY:
         {
             PIMAGEHLP_CBA_READ_MEMORY callbackData = (PIMAGEHLP_CBA_READ_MEMORY)CallbackData;
 
-            if ((pWorker->handle & 1) == 0)
+            /*if ((pWorker->handle & 1) == 0)
             {
                 if (NT_SUCCESS(NtReadVirtualMemory(
                     ProcessHandle,
@@ -268,19 +276,56 @@ void CSymbolProvider::ResolveAsync(quint64 pid, quint64 Address, QObject* receiv
                 {
                     return TRUE;
                 }
-            }
+            }*/
         }
-        return FALSE;
+        break;
     case CBA_DEFERRED_SYMBOL_LOAD_CANCEL:
         {
-            if (pWorker->last == 0) // terminating
-                return TRUE;
+            //if (pWorker->last == 0) // terminating
+            //    return TRUE;
+        }
+        break;
+    case CBA_XML_LOG:
+        {
+            PWSTR callbackData = (PWSTR)CallbackData;
+            QString data = QString::fromWCharArray(callbackData);
+            //qDebug() << data;
+
+            QVariantMap result;
+            QXmlStreamReader xmlReader(data);
+            while (!xmlReader.atEnd() && !xmlReader.hasError()) {
+                QXmlStreamReader::TokenType token = xmlReader.readNext();
+                if (token == QXmlStreamReader::StartElement) {
+                    QString elementName = xmlReader.name().toString();
+                    QVariantMap attributes;
+                    QXmlStreamAttributes xmlAttributes = xmlReader.attributes();
+                    for (const auto& attribute : xmlAttributes) {
+                        attributes.insert(attribute.name().toString(), attribute.value().toString());
+                    }
+
+                    result.insert(elementName, attributes);
+                }
+            }
+
+            QString Message;
+            if (!result.value("Activity").toMap()["details"].toString().isEmpty())
+                Message = result.value("Activity").toMap()["details"].toString();
+            //if (!result.value("Log").toMap()["message"].toString().isEmpty())
+            //    Message = result.value("Log").toMap()["message"].toString();
+            if (!result.value("Progress").toMap()["percent"].toString().isEmpty())
+                Message = pWorker->LastMessage + QString(" (%1%)").arg(result.value("Progress").toMap()["percent"].toString());
+            else if (!Message.isEmpty())
+                pWorker->LastMessage = Message;
+            if(!Message.isEmpty() || result.isEmpty())
+                emit pWorker->pProvider->StatusChanged(Message);
+
+            break;
         }
         break;
     }
 
     return FALSE;
-}*/
+}
 
 bool MyBeginInitOnce(QAtomicInt& InitOnce)
 {
@@ -298,18 +343,36 @@ bool MyBeginInitOnce(QAtomicInt& InitOnce)
     }
 }
 
-void MyEndInitOnce(QAtomicInt& InitOnce)
-{
-    InitOnce = 1;
-}
-
 CSymbolProvider* CSymbolProvider::Instance()
 {
     static QAtomicInt InitOnce = 0;
 
     if (MyBeginInitOnce(InitOnce))
     {
+/*#ifdef _WIN64
+        QSettings settings("HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows Kits\\Installed Roots", QSettings::NativeFormat);
+#else
+        QSettings settings("HKEY_LOCAL_MACHINE\\Software\\Wow6432Node\\Microsoft\\Windows Kits\\Installed Roots", QSettings::NativeFormat);
+#endif
+        QString KitsRoot = settings.value("KitsRoot10").toString(); // Windows 10 SDK
+        if(KitsRoot.isEmpty())
+            KitsRoot = settings.value("KitsRoot81").toString(); // Windows 8.1 SDK
+        if(KitsRoot.isEmpty())
+            KitsRoot = settings.value("KitsRoot").toString(); // Windows 8 SDK
+#if defined(_M_AMD64)
+        KitsRoot.append("\\Debuggers\\x64\\");
+#elif defined(_M_ARM64)
+        KitsRoot.append("\\Debuggers\\arm64\\");
+#else
+        KitsRoot.append("\\Debuggers\\x86\\");
+#endif
+
+        HMODULE DbgCoreMod = LoadLibrary((KitsRoot + "dbgcore.dll").toStdWString().c_str());
+        HMODULE DbgHelpMod = LoadLibrary((KitsRoot + "dbghelp.dll").toStdWString().c_str());
+        HMODULE SymSrvMod  = LoadLibrary((KitsRoot + "symsrv.dll").toStdWString().c_str());*/
+
         HMODULE DbgHelpMod = LoadLibrary(L"dbghelp.dll");
+
         __sys_SymFromAddr = (P_SymFromAddr)GetProcAddress(DbgHelpMod, "SymFromAddr");
         __sys_SymGetModuleInfoW64 = (P_SymGetModuleInfoW64)GetProcAddress(DbgHelpMod, "SymGetModuleInfoW64");
         __sys_SymSetOptions = (P_SymSetOptions)GetProcAddress(DbgHelpMod, "SymSetOptions");
@@ -318,6 +381,13 @@ CSymbolProvider* CSymbolProvider::Instance()
         __sys_SymInitialize = (P_SymInitialize)GetProcAddress(DbgHelpMod, "SymInitialize");
         __sys_SymCleanup = (P_SymCleanup)GetProcAddress(DbgHelpMod, "SymCleanup");
         __sys_SymRegisterCallbackW64 = (P_SymRegisterCallbackW64)GetProcAddress(DbgHelpMod, "SymRegisterCallbackW64");
+
+        if (!__sys_SymSetOptions) {
+            if (DbgHelpMod)
+                FreeLibrary(DbgHelpMod);
+            InitOnce = 0;
+            return NULL;
+        }
 
         __sys_SymSetOptions(
             __sys_SymGetOptions() | SYMOPT_UNDNAME |
@@ -328,7 +398,7 @@ CSymbolProvider* CSymbolProvider::Instance()
 
         g_SymbolProvider = new CSymbolProvider();
 
-        MyEndInitOnce(InitOnce);
+        InitOnce = 1;
     }
     
     return g_SymbolProvider;

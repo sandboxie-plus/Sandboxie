@@ -19,7 +19,7 @@ SbieApi_DisableForceProcess=_SbieApi_DisableForceProcess@8
 SbieApi_EnumBoxes=_SbieApi_EnumBoxes@8
 SbieApi_EnumProcessEx=_SbieApi_EnumProcessEx@20
 
-SbieApi_GetFileName=_SbieApi_GetFileName@12
+SbieApi_GetFileName=_SbieApi_GetFileName@16
 SbieApi_GetHomePath=_SbieApi_GetHomePath@16
 SbieApi_GetUnmountHive=_SbieApi_GetUnmountHive@4
 SbieApi_GetVersion=_SbieApi_GetVersion@4
@@ -104,6 +104,9 @@ SbieDll_AssocQueryProgram=_SbieDll_AssocQueryProgram@4
 
 SbieDll_KillAll=_SbieDll_KillAll@8
 SbieDll_KillOne=_SbieDll_KillOne@4
+
+SbieDll_Mount=_SbieDll_Mount@12
+SbieDll_Unmount=_SbieDll_Unmount@4
 
 SbieDll_RegisterDllCallback=_SbieDll_RegisterDllCallback@4
 SbieDll_RunFromHome=_SbieDll_RunFromHome@16

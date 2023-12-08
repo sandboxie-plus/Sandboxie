@@ -57,7 +57,7 @@ int RunElevated(const std::wstring& binaryPath, const std::wstring& Params, quin
 			success = GetExitCodeProcess(sei.hProcess, &ExitCode);
 		}
 		CloseHandle(sei.hProcess);
-		return success ? ExitCode : -103;
+		return success ? ExitCode : STATUS_PENDING;
 	}
 }
 

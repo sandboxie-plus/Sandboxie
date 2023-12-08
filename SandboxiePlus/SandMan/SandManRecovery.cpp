@@ -9,7 +9,7 @@ void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, 
 	{
 		CRecoveryWindow* pWnd = ShowRecovery(pBox, false);
 
-		//if (!theConf->GetBool("Options/AlwaysOnTop", false)) {
+		//if (!theGUI->IsAlwaysOnTop()) {
 		//	SetWindowPos((HWND)pWnd->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
 		//	QTimer::singleShot(100, this, [pWnd]() {
 		//		SetWindowPos((HWND)pWnd->winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
@@ -72,17 +72,27 @@ CRecoveryWindow* CSandMan::ShowRecovery(const CSandBoxPtr& pBox, bool bFind)
 	return pBoxEx->m_pRecoveryWnd;
 }
 
-SB_PROGRESS CSandMan::CheckFiles(const QString& BoxName, const QStringList& Files)
+QStringList CSandMan::GetFileCheckers(const CSandBoxPtr& pBox)
 {
-	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
 	QStringList Checkers;
+
+	if (!theGUI->GetAddonManager()->GetAddon("FileChecker", CAddonManager::eInstalled).isNull())
+		Checkers.append(pBox->Expand("powershell -exec bypass -nop -File \"%SbieHome%\\addons\\FileChecker\\CheckFile.ps1\" -bin"));
+	
 	if (!pBox.isNull()) {
 		foreach(const QString & Value, pBox->GetTextList("OnFileRecovery", true, false, true)) {
 			Checkers.append(pBox->Expand(Value));
 		}
 	}
-	QtConcurrent::run(CSandMan::CheckFilesAsync, pProgress, BoxName, Files, Checkers);
+
+	return Checkers;
+}
+
+SB_PROGRESS CSandMan::CheckFiles(const QString& BoxName, const QStringList& Files)
+{
+	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
+	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
+	QtConcurrent::run(CSandMan::CheckFilesAsync, pProgress, BoxName, Files, GetFileCheckers(pBox));
 	return SB_PROGRESS(OP_ASYNC, pProgress);
 }
 
@@ -124,13 +134,7 @@ SB_PROGRESS CSandMan::RecoverFiles(const QString& BoxName, const QList<QPair<QSt
 {
 	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
 	CSandBoxPtr pBox = theAPI->GetBoxByName(BoxName);
-	QStringList Checkers;
-	if (!pBox.isNull()) {
-		foreach(const QString & Value, pBox->GetTextList("OnFileRecovery", true, false, true)) {
-			Checkers.append(pBox->Expand(Value));
-		}
-	}
-	QtConcurrent::run(CSandMan::RecoverFilesAsync, qMakePair(pProgress, pParent), BoxName, FileList, Checkers, Action);
+	QtConcurrent::run(CSandMan::RecoverFilesAsync, qMakePair(pProgress, pParent), BoxName, FileList, GetFileCheckers(pBox), Action);
 	return SB_PROGRESS(OP_ASYNC, pProgress);
 }
 
@@ -352,8 +356,7 @@ void CRecoveryLogWnd::OnDblClick(QTreeWidgetItem* pItem)
 void CSandMan::OnRecoveryLog()
 {
 	if (!m_pRecoveryLogWnd->isVisible()) {
-		bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
-		m_pRecoveryLogWnd->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+		m_pRecoveryLogWnd->setWindowFlag(Qt::WindowStaysOnTopHint, theGUI->IsAlwaysOnTop());
 		SafeShow(m_pRecoveryLogWnd);
 	}
 }

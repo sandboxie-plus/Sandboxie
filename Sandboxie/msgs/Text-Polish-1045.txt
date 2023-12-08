@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------
 # SbieDrv
 #
-# Initialization errors issued to to the System evt Log
+# Initialization errors issued to the System evt Log
 #----------------------------------------------------------------------------
 
 1101;evt;inf;01
@@ -36,9 +36,9 @@ SBIE1106 błąd %2, szczegóły %3
 SBIE1108 Nie można przeanalizować procedury %2
 .
 
-1109;evt;err;01
-SBIE1109 Nieprawidłowe dane licencji: %2
-.
+# 1109;evt;err;01
+# SBIE1109 Nieprawidłowe dane licencji: %2
+# .
 
 1110;evt;err;01
 SBIE1110 Nie może przechwycić typu %3, błąd %2
@@ -108,9 +108,9 @@ SBIE1153 Inicjalizacja Sandboxie nie powiodła się. Zamknij wszystkie programy 
 SBIE1201 Brak pamięci
 .
 
-1202;pop;err;01
-SBIE1202 Nie można zaktualizować informacji o licencji:%2
-.
+# 1202;pop;err;01
+# SBIE1202 Nie można zaktualizować informacji o licencji:%2
+# .
 
 1203;pop;err;01
 SBIE1203 Nie można zbudować listy ścieżek dostępu (błąd w %2)
@@ -132,17 +132,17 @@ SBIE1212 Nie można utworzyć katalogu '%3' %2
 SBIE1213 Nie można utworzyć obiektu katalogu '%3' %2
 .
 
-1214;pop;err;01
-SBIE1214 Nie można wstrzyknąć SbieDll %2
-.
+# 1214;pop;err;01
+# SBIE1214 Nie można wstrzyknąć SbieDll %2
+# .
 
-1215;pop;err;01
-SBIE1215 Nie można określić ścieżki do obrazu procesu %2
-.
+# 1215;pop;err;01
+# SBIE1215 Nie można określić ścieżki do obrazu procesu %2
+# .
 
-1216;pop;err;01
-SBIE1216 Nie można określić ID bezpieczeństwa %2
-.
+# 1216;pop;err;01
+# SBIE1216 Nie można określić ID bezpieczeństwa %2
+# .
 
 # 1217;pop;err;01
 # SBIE1217 Nie można znaleźć procesu macierzystego
@@ -156,12 +156,16 @@ SBIE1216 Nie można określić ID bezpieczeństwa %2
 SBIE1222 Nie można ograniczyć identyfikatora: %2
 .
 
-1223;pop;err;01
-SBIE1223 Nie można zastąpić identyfikatora: %2
-.
+# 1223;pop;err;01
+# SBIE1223 Nie można zastąpić identyfikatora: %2
+# .
 
-1224;pop;err;01
-SBIE1224 Nie można określić identyfikatora: %2
+# 1224;pop;err;01
+# SBIE1224 Nie można określić identyfikatora: %2
+# .
+
+1231;pop;err;01
+SBIE1231 Initialization failed for process %3 %2
 .
 
 1241;pop;err;01
@@ -186,12 +190,16 @@ SBIE1301 Proces '%2' został uruchomiony poza piaskownicą
 # SBIE1302 Nie określono lub nie włączono piaskownicy '%2'
 # .
 
-1303;pop;inf;01
-SBIE1303 W tym samym czasie może być aktywna tylko jedna piaskownica
-.
+# 1303;pop;inf;01
+# SBIE1303 W tym samym czasie może być aktywna tylko jedna piaskownica
+# .
 
-1304;pop;inf;01
-SBIE1304 Zablokowano proces '%2' wejścia fałszywej klawiatury lub myszy
+# 1304;pop;inf;01
+# SBIE1304 Zablokowano proces '%2' wejścia fałszywej klawiatury lub myszy
+# .
+
+1305;pop;inf;02
+SBIE1305 Blocked sandboxed image from being loaded - %2
 .
 
 1306;pop;inf;01
@@ -210,13 +218,13 @@ SBIE1308 Z powodu ograniczeń nie można uruchomić programu - %2
 SBIE1309 Odmowa próby zmiany hasła konta
 .
 
-1310;pop;inf;01
-SBIE1310 Rozszerzone funkcje są wyłączone, do momentu powtórnego aktywowania licencji
-.
+# 1310;pop;inf;01
+# SBIE1310 Rozszerzone funkcje są wyłączone, do momentu powtórnego aktywowania licencji
+# .
 
-1311;pop;inf;01
-SBIE1311 Zablokowano próbę zmiany tapety pulpitu przez proces '%2'
-.
+# 1311;pop;inf;01
+# SBIE1311 Zablokowano próbę zmiany tapety pulpitu przez proces '%2'
+# .
 
 1312;pop;inf;01
 SBIE1312 Zablokowano uruchomienie 16-bitowego programu DOS w piaskownicy
@@ -230,8 +238,32 @@ SBIE1313 Zablokowany bezpośredni dostęp do dysku przez proces '%2'
 SBIE1314 Zablokowano żądanie zmiany ustawień sieci/firewalla przez proces '%2'
 .
 
-1315;pop;inf;01
-SBIE1315 Prawdopodobnie z powodu konfliktu z oprogramowaniem: %2
+# 1315;pop;inf;01
+# SBIE1315 Prawdopodobnie z powodu konfliktu z oprogramowaniem: %2
+# .
+
+1316;pop;inf;01
+SBIE1316 Blocked request to generate device event in the sandbox
+.
+
+1317;pop;inf;02
+SBIE1317 Blocked '%2' from trying to access sandbox file root '%3'
+.
+
+1318;pop;inf;02
+SBIE1318 Blocked '%2' from trying to access sandboxed process '%3'
+.
+
+1319;pop;inf;01
+SBIE1319 Blocked spooler print to file, %2 %3
+.
+
+1320;pop;wrn;01
+SBIE1320 To allow print spooler to write outside the sandbox for this process, please double-click on this message line
+.
+
+1399;pop;inf;01
+%0
 .
 
 #----------------------------------------------------------------------------
@@ -334,6 +366,35 @@ SBIE2108 Pomyślnie zakończono fałszowanie programu '%2'
 # SBIE2110 Przygotowywanie WinSxS uzależnień dla '%2'
 # .
 
+2111;pop;inf;01
+SBIE2111 Process is not accessible: %3, call %2
+.
+
+2112;pop;inf;01
+SBIE2112 Object is not accessible: %3, call %2
+.
+
+2113;pop;inf;01
+SBIE2113 File is too large to copy into sandbox, creating empty file - %2
+.
+
+2114;pop;inf;01
+SBIE2114 File is too large to copy into sandbox, denying access - %2
+.
+
+2115;pop;inf;01
+SBIE2115 File is too large to copy into sandbox, opening in read only - %2
+.
+
+2180;pop;inf;01
+SBIE2180 LowLevel.dll error %2
+.
+
+2181;pop;inf;01
+SBIE2181 LowLevel.dll detour failed to load SbieDll.dll into target process.
+.
+
+# %2 = Mozilla Firefox
 2191;pop;inf;01
 SBIE2191 Nie należy aktualizować %2, gdy jest uruchomiony w Sandboxie.
 .
@@ -344,6 +405,22 @@ SBIE2192 Aby uaktualnić program, uruchom go bez nadzoru Sandboxie
 
 2193;pop;inf;01
 SBIE2193 Pamiętaj, żeby usunąć piaskownicę po zakończeniu procesu aktualizacji.
+.
+
+2194;pop;inf;01
+SBIE2194 MSI installer requires %2 option to be set in the ini, what however weakens the isolation.
+.
+
+2195;pop;inf;01
+SBIE2195 To run Explorer.exe sandboxed, the access for COM infrastructure must not be Open.
+.
+
+2196;pop;inf;01
+SBIE2196 To run the MSI Installer sandboxed, the access for COM infrastructure must not be Open.
+.
+
+2198;pop;inf;01
+%0
 .
 
 2199;pop;inf;01
@@ -447,6 +524,88 @@ SBIE2222 Aby dodać program do ograniczonego dostępu do Uruchom, proszę klikn�
 2223;pop;wrn;01
 SBIE2223 Aby zwiększyć limit rozmiaru kopiowanych plików, proszę kliknąć dwukrotnie ten wiersz wiadomości
 .
+2224;pop;wrn;01
+SBIE2224 Sandboxed program has crashed: %2
+.
+
+2225;pop;wrn;01
+SBIE2225 An attempt was made to access an EFS file: %2
+.
+
+2226;pop;wrn;01
+SBIE2226 Process failed to start due to missing elevation, to resolve add "ApplyElevateCreateProcessFix=y" to the ini section for this box %2
+.
+
+2227;pop;wrn;01
+SBIE2227 '%2' is located on a volume which does not support 8.3 naming. This can cause issues with older applications and installers.
+.
+
+#----------------------------------------------------------------------------
+
+2230;pop;wrn;01
+SBIE2230 Failed to mount root for %2
+.
+
+2231;pop;wrn;01
+SBIE2231 Junction Target mismatch %2
+.
+
+2232;pop;wrn;01
+SBIE2232 The ImDisk Driver is not loaded
+.
+
+2233;pop;wrn;01
+SBIE2233 Cannot control the ImDisk Driver: %2
+.
+
+2234;pop;wrn;01
+SBIE2234 No free Drive letter found for temporary mount
+.
+
+2235;pop;wrn;01
+SBIE2235 Error undefining temporary drive letter: "%2"
+.
+
+2236;pop;wrn;01
+SBIE2236 %2 could not be invoked (perhaps it is not installed?)
+.
+
+2237;pop;wrn;01
+SBIE2237 Failed to unmount root %2
+.
+
+2238;pop;wrn;01
+SBIE2238 Ram Disk size is not configured, or to small, set RamDiskSizeKb=1048576 (1GB in Kilobytes) in the [GlobalSettings] ini section.
+.
+
+2239;pop;wrn;01
+SBIE2239 The root folder of sandbox %2 must be empty in order to mount a volume to it.
+.
+
+2240;pop;wrn;01
+SBIE2240 Timeout when trying to mount ImDisk volume %2
+.
+
+2241;pop;wrn;01
+SBIE2241 Box image file %2 could not be opened
+.
+
+2242;pop;wrn;01
+SBIE2242 Failed to mount box image, The specified cipher is not supported
+.
+
+2243;pop;wrn;01
+SBIE2243 Failed to mount box image, Wrong password
+.
+
+2244;pop;wrn;01
+SBIE2244 Failed to mount box image, Password required
+.
+
+2246;pop;wrn;01
+SBIE2246 Failed to mount box image, ImBox error %2
+.
+
 
 #----------------------------------------------------------------------------
 # SbieDrv
@@ -457,6 +616,11 @@ SBIE2223 Aby zwiększyć limit rozmiaru kopiowanych plików, proszę kliknąć d
 2301;pop;err;01
 SBIE2301 %2
 .
+
+2302;pop;err;01
+SBIE2302 Process image configuration conflict: %2
+.
+
 
 2303;pop;err;01
 SBIE2303 Nie można przechwycić %2
@@ -506,9 +670,9 @@ SBIE2313 Nie można wykonać %2
 SBIE2314 Anulowanie procesu %2
 .
 
-2315;pop;err;01
-SBIE2315 Nie można ustalić wykonywalnego obrazu
-.
+# 2315;pop;err;01
+# SBIE2315 Nie można ustalić wykonywalnego obrazu
+# .
 
 2316;pop;err;01
 SBIE2316 Uszkodzona pamięć
@@ -542,6 +706,10 @@ SBIE2322 Nie można przepisać Sandboxie.ini: %2
 SBIE2323 Błąd kryptografii: %2
 .
 
+2325;pop;err;01
+SBIE2325 Debug:  %2
+.
+
 2326;pop;err;01
 SBIE2326 Nie można przygotować rejestru: %2
 .
@@ -562,9 +730,33 @@ SBIE2332 Nie można uzyskać dostępu do pliku SbiePst.dat
 # SBIE2333 Znaleziono niezgodną bibliotekę DLL z oprogramowaniem: %2
 # .
 
-2334;pop;err;01
-SBIE2334 Nie można załadować pliku DLL: %2
+#2334;pop;err;01
+#SBIE2334 Nie można załadować pliku DLL: %2
+#.
+
+2335;pop;err;01
+SBIE2335 Initialization failed for process %2
 .
+
+2336;pop;err;01
+SBIE2336 Error in GUI server:  %2
+.
+
+2337;pop;err;01
+SBIE2337 Failed to start program:  %2
+.
+
+2338;pop;err;01
+SBIE2338 Encountered unsupported architecture in process:  %2
+.
+
+# 2398;txt;01
+# SBIE2398 Service suffers exception ... at address ...
+# .
+
+# 2399;txt;01
+# SBIE2399 Service fails with error ...
+# .
 
 #----------------------------------------------------------------------------
 # SbieSvc
@@ -586,60 +778,52 @@ SBIE9154 Różne wersje sterownika (SbieDrv) i usługi (SbieSvc)
 SBIE9156 Nie zakończono inicjalizacji sterownika
 .
 
-9201;evt;err;01
-SBIE9201 Błąd identyfikatora
+9234;evt;err;01
+SBIE9234 Service startup error %2
 .
 
-9202;evt;err;01
-SBIE9202 Błąd identyfikatora
-.
-
-9203;evt;err;01
-SBIE9202 Błąd identyfikatora
-.
-
-9204;evt;err;01
-SBIE9204 Błąd deskryptora bezpieczeństwa
-.
-
-9205;evt;err;01
-SBIE9205 Błąd deskryptora bezpieczeństwa
-.
-
-9206;evt;err;01
-SBIE9206 Błąd deskryptora bezpieczeństwa
-.
-
-9207;evt;err;01
-SBIE9207 Błąd deskryptora bezpieczeństwa
-.
-
-9208;evt;err;01
-SBIE9208 Nie można włączyć SeRestorePrivilege
-.
-
-9251;evt;err;01
-SBIE9251 Nie można utworzyć zdarzenia portu
-.
-
-9252;evt;err;01
-SBIE9252 Nie można utworzyć portu
-.
-
-9253;evt;err;01
-SBIE9253 Nie można utworzyć wątku portu
-.
-
-# 9302;evt;err;01
-# SBIE9302 Nie można utworzyć sekcji (instalacja urządzenia klasy)
+# 9201;evt;err;01
+# SBIE9201 Błąd identyfikatora
 # .
 
-# 9304;evt;err;01
-# SBIE9304 Nie można utworzyć sekcji (lista id urządzenia)
+# 9202;evt;err;01
+# SBIE9202 Błąd identyfikatora
 # .
 
-# 9305;evt;err;01
-# SBIE9305 Zakończ programy w piaskownicy, jeżeli są uruchomione
+# 9203;evt;err;01
+# SBIE9202 Błąd identyfikatora
+# .
+
+# 9204;evt;err;01
+# SBIE9204 Błąd deskryptora bezpieczeństwa
+# .
+
+# 9205;evt;err;01
+# SBIE9205 Błąd deskryptora bezpieczeństwa
+# .
+
+# 9206;evt;err;01
+# SBIE9206 Błąd deskryptora bezpieczeństwa
+# .
+
+# 9207;evt;err;01
+# SBIE9207 Błąd deskryptora bezpieczeństwa
+# .
+
+# 9208;evt;err;01
+# SBIE9208 Nie można włączyć SeRestorePrivilege
+# .
+
+# 9251;evt;err;01
+# SBIE9251 Nie można utworzyć zdarzenia portu
+# .
+
+# 9252;evt;err;01
+# SBIE9252 Nie można utworzyć portu
+# .
+
+# 9253;evt;err;01
+# SBIE9253 Nie można utworzyć wątku portu
 # .
 
 #----------------------------------------------------------------------------
@@ -698,6 +882,10 @@ Usuń polecenie z historii poleceń
 Wybierz piaskownicę, w której ma zostać uruchomiony program lub dokument.
 .
 
+3107;txt;01
+Type the name of a program or path to open the following file in the current sandbox:
+.
+
 3111;txt;01
       Sandboxie Menu start - %2  %0
 .
@@ -710,6 +898,7 @@ Pulpit
 (eksploruj folder)
 .
 
+# should match the localized folder name for Programs in the Start Menu folder
 3114;txt;01
 Programy
 .
@@ -752,9 +941,9 @@ Nie można znaleźć pliku wykonywalnego domyślnego klienta poczty
 Nie można uruchomić programu Sterowania Sandboxie
 .
 
-3211;txt;01
-Niewłaściwa wersja w Sandboxie.  Spróbuj ponownie zainstalować program.
-.
+# 3211;txt;01
+# Niewłaściwa wersja w Sandboxie.  Spróbuj ponownie zainstalować program.
+# .
 
 3212;txt;01
 Sterownik Sandboxie (SbieDrv) nie jest dostępny dla programów w piaskownicy.
@@ -803,45 +992,45 @@ Proszę zakończyć działanie uruchomionych programów w piaskownicy przed usun
 Polecenie 'Usuń' zakończyło się niepowodzeniem:  %0
 .
 
-3231;txt;01
-Masz zainstalowany Sandboxie dłużej niż 30 dni.
-.
+# 3231;txt;01
+# Masz zainstalowany Sandboxie dłużej niż 30 dni.
+# .
 
-3232;txt;01
-Sandboxie możesz stosować bezpłatnie i bez ograniczeń czasowych do użytku prywatnego.
-.
+# 3232;txt;01
+# Sandboxie możesz stosować bezpłatnie i bez ograniczeń czasowych do użytku prywatnego.
+# .
 
-3233;txt;01
-Wersja bezpłatna zrobi teraz przerwę na kilka sekund.
-.
+# 3233;txt;01
+# Wersja bezpłatna zrobi teraz przerwę na kilka sekund.
+# .
 
-3234;txt;01
-Wersja bezpłatna pozwala jednocześnie używać tylko jednej piaskownicy.
-.
+# 3234;txt;01
+# Wersja bezpłatna pozwala jednocześnie używać tylko jednej piaskownicy.
+# .
 
-3235;txt;01
-Te ograniczenia są usunięte w płatnej wersji Sandboxie.
-.
+# 3235;txt;01
+# Te ograniczenia są usunięte w płatnej wersji Sandboxie.
+# .
 
-3236;txt;01
-Dodatkowo płatna wersja umożliwia automatyczne uruchamianie wybranych programów w piaskownicy.
-.
+# 3236;txt;01
+# Dodatkowo płatna wersja umożliwia automatyczne uruchamianie wybranych programów w piaskownicy.
+# .
 
-3237;txt;01
-Aby uzyskać więcej informacji i móc nabyć program, proszę kliknąć w następujący link:
-.
+# 3237;txt;01
+# Aby uzyskać więcej informacji i móc nabyć program, proszę kliknąć w następujący link:
+# .
 
-3238;txt;01
-Proszę czekać %2, lub więcej sekund
-.
+# 3238;txt;01
+# Proszę czekać %2, lub więcej sekund
+# .
 
-3239;txt;01
-Kliknij, aby zamknąć to okno i kontynuować
-.
+# 3239;txt;01
+# Kliknij, aby zamknąć to okno i kontynuować
+# .
 
-3240;txt;01
-Kliknij, aby zamknąć to okno i zatrzymać
-.
+# 3240;txt;01
+# Kliknij, aby zamknąć to okno i zatrzymać
+# .
 
 3241;txt;01
 Sandboxie wymaga uprawnień administratora
@@ -917,6 +1106,10 @@ Zainstaluj ponownie Sandboxie, by rozwiązać ten problem.
 Przerwano.
 .
 
+# 3305;txt;01
+# Could not install tray icon.  Aborting.
+# .
+
 3306;txt;01
 W przyszłości, nie pokazuj tej wiadomości
 .
@@ -948,6 +1141,22 @@ Nieznany użytkownik, ustawienia konfiguracji nie będą zapisane
 
 3314;txt;01
 Wystąpił błąd podczas stosowania domyślnych ustawień dla piaskownicy '%2'
+.
+
+3315;txt;01
+Deleting Sandbox contents
+.
+
+3316;txt;01
+Do you want to abort the operation?
+.
+
+3317;txt;01
+Preparing to delete: %2
+.
+
+3318;txt;01
+Deleting: %2
 .
 
 # 3321;txt;01
@@ -1056,6 +1265,10 @@ Menu &kontekstowe%2Shift+F10
 &Log odzyskiwania
 .
 
+3426;txt;01
+&Always on Top
+.
+
 3431;txt;01
 Piask&ownica
 .
@@ -1092,9 +1305,9 @@ Ustaw układ i grupy
 &Zgodność oprogramowania
 .
 
-3503;txt;01
-Eksperymentalna ochrona (64-bit)
-.
+# 3503;txt;01
+# Eksperymentalna ochrona (64-bit)
+# .
 
 3444;txt;01
 Wyświetlaj ukryte wiado&mości
@@ -1124,6 +1337,22 @@ Prze&ładuj konfigurację
 &Ukryj wszystkie wskazówki
 .
 
+3504;txt;01
+&Support Sandboxie with Donations
+.
+
+3505;txt;01
+Contribute to Sandboxie
+.
+
+3506;txt;01
+Get Supporter Certificate
+.
+
+3507;txt;01
+Apply Supporter Certificate
+.
+
 3451;txt;01
 P&omoc
 .
@@ -1140,16 +1369,28 @@ Wprowadzenie — &samouczek
 Sprawdź dostępność akt&ualizacji
 .
 
-3455;txt;01
-Za&rejestruj Sandboxie
-.
+# 3455;txt;01
+# Za&rejestruj Sandboxie
+# .
 
 3456;txt;01
 &O programie Sandboxie
 .
 
-3458;txt;01
-Zezwól na bezpośredni dostęp do pamięci podręcznej czcionek Windows
+3457;txt;01
+&Sandboxie Forum (Web)
+.
+
+# 3458;txt;01
+# Zezwól na bezpośredni dostęp do pamięci podręcznej czcionek Windows
+# .
+
+3459;txt;01
+Allow direct access to qWave driver (Google Hangouts)
+.
+
+3460;txt;01
+Function hooking customizations
 .
 
 3461;txt;01
@@ -1174,6 +1415,18 @@ Uruchom z &Menu start
 
 3466;txt;01
 Uruchom &Windows Explorer
+.
+
+3467;txt;01
+Upgrade to Sandboxie-Plus
+.
+
+3468;txt;01
+Sandboxie-Plus Migration Guide
+.
+
+3469;txt;01
+What's new in Sandboxie-Plus
 .
 
 3471;txt;01
@@ -1214,6 +1467,10 @@ U&stawienia programu
 
 3483;txt;01
 &Dostęp do zasobu
+.
+
+3484;txt;01
+Resource Access
 .
 
 3485;txt;01
@@ -1416,32 +1673,32 @@ polecenia Zablokuj konfigurację, żeby wyłączyć ochronę hasłem.
 Publiczny
 .
 
-3542;txt;01
-Tryb Eksperymentalnej ochrony wzmacnia ochronę oferowaną
-przez Sandboxie 64-bit, i przesuwa ochronę na taki sam
-poziom, jaki oferuje Sandboxie 32-bit.
+# 3542;txt;01
+# Tryb Eksperymentalnej ochrony wzmacnia ochronę oferowaną
+# przez Sandboxie 64-bit, i przesuwa ochronę na taki sam
+# poziom, jaki oferuje Sandboxie 32-bit.
+# 
+# WAŻNE: Eksperymentalna ochrona korzysta z nieudokumentowanych
+# funkcji jądra systemu Windows. Przyszłe aktualizacje
+# Windows mogą zakłócić tryb Eksperymentalnej ochrony
+# i mogą spowodować niestabilność systemu.
+# 
+# UŻYWASZ NA WŁASNE RYZYKO.
+# 
+# Aby uaktywnić tryb Eksperymentalnej ochrony, musisz
+# teraz ponownie uruchomić komputer.
+# .
 
-WAŻNE: Eksperymentalna ochrona korzysta z nieudokumentowanych
-funkcji jądra systemu Windows. Przyszłe aktualizacje
-Windows mogą zakłócić tryb Eksperymentalnej ochrony
-i mogą spowodować niestabilność systemu.
-
-UŻYWASZ NA WŁASNE RYZYKO.
-
-Aby uaktywnić tryb Eksperymentalnej ochrony, musisz
-teraz ponownie uruchomić komputer.
-.
-
-3543;txt;01
-Aby wyłączyć tryb Eksperymentalnej ochrony, musisz
-teraz ponownie uruchomić komputer.
-
-Uwaga: funkcja obniżenia uprawnień zostanie włączona
-we wszystkich piaskownicach.
-.
+# 3543;txt;01
+# Aby wyłączyć tryb Eksperymentalnej ochrony, musisz
+# teraz ponownie uruchomić komputer.
+# 
+# Uwaga: funkcja obniżenia uprawnień zostanie włączona
+# we wszystkich piaskownicach.
+# .
 
 #----------------------------------------------------------------------------
-# Sandboxie Control Dialogs: About/Welcome
+# Sandboxie Control Dialogs: About
 #----------------------------------------------------------------------------
 
 3601;txt;01
@@ -2129,6 +2386,10 @@ Wyświetlaj ramkę, tylko wtedy, gdy kursor myszy znajduje się w pasku tytułu 
 # Sandboxie Control:  Sandbox Settings:  Recovery
 #----------------------------------------------------------------------------
 
+# 3821;txt;01
+# Recovery::Quick Recovery
+# .
+
 3821;txt;02
 Przywróć
 .
@@ -2140,6 +2401,10 @@ Szybkie przywracanie
 3823;txt;01
 Przed usunięciem piaskownicy, lub gdy wywołasz funkcję Szybkiego przywrócenia, to zawartość następujących folderów będzie sprawdzana w piaskownicy. Jeżeli jakieś pliki zostaną znalezione, otrzymasz możliwość łatwego ich odzyskania z piaskownicy.
 .
+
+# 3831;txt;01
+# Recovery::Immediate Recovery
+# .
 
 3832;txt;01
 Natychmiastowe przywracanie rozszerza Szybkie przywracanie przez automatyczne wywołanie funkcji przywracania, gdy tylko pliki zostaną utworzone.
@@ -2169,6 +2434,10 @@ Wprowadź typ pliku (lub rozszerzenie pliku), by wyłączyć go z Natychmiastowe
 # Sandboxie Control:  Sandbox Settings:  Delete
 #----------------------------------------------------------------------------
 
+# 3841;txt;01
+# Delete::Invocation
+# .
+
 3841;txt;02
 Usuń
 .
@@ -2196,6 +2465,10 @@ Piaskownica jak i jej zawartość może być chroniona przed usuwaniem, zarówno
 3847;txt;01
 Nigdy nie usuwaj piaskownicy, ani jej zawartości
 .
+
+# 3851;txt;01
+# Delete::Command
+# .
 
 3852;txt;01
 Polecenie usuń
@@ -2246,6 +2519,10 @@ Wprowadź nazwę nowej grupy
 # Sandboxie Control:  Sandbox Settings:  Forced Folders/Programs
 #----------------------------------------------------------------------------
 
+# 3861;txt;01
+# Program Start::Forced Folders
+# .
+
 3861;txt;02
 Uruchomienie programu
 .
@@ -2270,6 +2547,10 @@ Monitorowane foldery mają pierwszeństwo przed Monitorowanymi programami.
 Wybierz folder, by dodać do listy monitorowanych folderów.
 .
 
+# 3871;txt;01
+# Program Start::Forced Programs
+# .
+
 3872;txt;01
 Monitorowane programy
 .
@@ -2277,6 +2558,10 @@ Monitorowane programy
 3873;txt;01
 Gdy jakikolwiek z następujących programów jest uruchamiany poza piaskownicą, to jego uruchomienie będzie monitorowane w tej piaskownicy. Nie dotyczy programów uruchamianych z innej piaskownicy.
 .
+
+# 3961;txt;01
+# Program Start::Forced Users
+# .
 
 # 3962;txt;01
 # Monitorowani użytkownicy
@@ -2298,6 +2583,10 @@ Gdy jakikolwiek z następujących programów jest uruchamiany poza piaskownicą,
 # Sandboxie Control:  Sandbox Settings:  Linger/Leader Programs
 #----------------------------------------------------------------------------
 
+# 3881;txt;01
+# Program Stop::Lingering Programs
+# .
+
 3881;txt;02
 Zatrzymanie programu
 .
@@ -2309,6 +2598,10 @@ Oporne programy
 3883;txt;01
 Następujące programy będą automatycznie zamykane, jeżeli jeszcze działają w tej piaskownicy po zamknięciu innych programów.
 .
+
+# 3891;txt;01
+# Program Stop::Leader Programs
+# .
 
 3892;txt;01
 Wiodące programy
@@ -2363,6 +2656,10 @@ Można również zmienić ten limit, otwierając okno Ustawienia piaskownicy i r
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  Internet/Start Restrictions
 #----------------------------------------------------------------------------
+
+# 3911;txt;01
+# Restrictions::Internet Access
+# .
 
 3911;txt;02
 Ograniczenia
@@ -2436,49 +2733,61 @@ Aby zarządzać Ograniczeniami dostępu do Uruchom, otwórz okno Ustawienia pias
 # Sandboxie Control:  Sandbox Settings:  Low Level Access / Hardware Access
 #----------------------------------------------------------------------------
 
-3932;txt;01
-Dostęp niskiego poziomu
-.
+# 3931;txt;01
+# Restrictions::Low-Level Access
+# .
 
-3933;txt;01
-Następujące ustawienia drastycznie obniżają ochronę dostarczaną przez Sandboxie. Nie zaleca się aktywacji żadnego z tych ustawień.
-.
+# 3932;txt;01
+# Dostęp niskiego poziomu
+# .
 
-3934;txt;01
-Zezwól programom z piaskownicy na ładowanie sterowników w trybie jądra do systemu
-.
+# 3933;txt;01
+# Następujące ustawienia drastycznie obniżają ochronę dostarczaną przez Sandboxie. Nie zaleca się aktywacji żadnego z tych ustawień.
+# .
 
-3935;txt;01
-Zezwól programom z piaskownicy na ładowanie aplikacji (Win32) hookujących inne programy
-.
+# 3934;txt;01
+# Zezwól programom z piaskownicy na ładowanie sterowników w trybie jądra do systemu
+# .
 
-3936;txt;01
-Zezwól programom z piaskownicy na wytwarzanie fałszywych wejść klawiatury
-.
+# 3935;txt;01
+# Zezwól programom z piaskownicy na ładowanie aplikacji (Win32) hookujących inne programy
+# .
 
-3937;txt;01
-Zezwól programom z piaskownicy na zmianę tapety pulpitu i innych parametrów systemu
-.
+# 3936;txt;01
+# Zezwól programom z piaskownicy na wytwarzanie fałszywych wejść klawiatury
+# .
 
-3938;txt;01
-Zezwól programom z piaskownicy na zarządzanie konfiguracją urządzeń sprzętowych
-.
+# 3937;txt;01
+# Zezwól programom z piaskownicy na zmianę tapety pulpitu i innych parametrów systemu
+# .
 
-3952;txt;01
-Dostęp do sprzętu
-.
+# 3938;txt;01
+# Zezwól programom z piaskownicy na zarządzanie konfiguracją urządzeń sprzętowych
+# .
 
-3953;txt;01
-Zezwól programom w tej piaskownicy na zmianę hasła konta użytkownika
-.
+# 3951;txt;01
+# Restrictions::Hardware Access
+# .
 
-3954;txt;01
-Zezwalaj programom zmieniać parametry sieci i firewalla
-.
+# 3952;txt;01
+# Dostęp do sprzętu
+# .
+
+# 3953;txt;01
+# Zezwól programom w tej piaskownicy na zmianę hasła konta użytkownika
+# .
+
+# 3954;txt;01
+# Zezwalaj programom zmieniać parametry sieci i firewalla
+# .
 
 #----------------------------------------------------------------------------
 # Sandboxie Control:  Sandbox Settings:  Drop Rights
 #----------------------------------------------------------------------------
+
+# 3941;txt;01
+# Restrictions::Drop Rights
+# .
 
 3942;txt;01
 Obniżenie uprawnień
@@ -2496,13 +2805,13 @@ Jeżeli używasz konta administratora lub zaawansowanego użytkownika, Sandboxie
 Obniż uprawnienia administratorów i zaawansowanych użytkowników
 .
 
-3946;txt;01
-Zalecane jest, pozostawienie tego ustawienia włączonego, jako rekompensaty za brak niektórych środków ochrony Sandboxie w 64-bitowych wersjach systemu Windows.
-.
+# 3946;txt;01
+# Zalecane jest, pozostawienie tego ustawienia włączonego, jako rekompensaty za brak niektórych środków ochrony Sandboxie w 64-bitowych wersjach systemu Windows.
+# .
 
-3947;txt;01
-Aby uaktywnić zwiększoną ochronę 64-bitowego systemu Windows, użyj polecenia Eksperymentalna ochrona z menu Konfiguracja.
-.
+# 3947;txt;01
+# Aby uaktywnić zwiększoną ochronę 64-bitowego systemu Windows, użyj polecenia Eksperymentalna ochrona z menu Konfiguracja.
+# .
 
 3949;txt;01
 Obniżenie uprawnień jest włączone w piaskownicy '%2' i uniemożliwia korzystanie z uprawnień administratora.
@@ -2510,6 +2819,46 @@ Obniżenie uprawnień jest włączone w piaskownicy '%2' i uniemożliwia korzyst
 Kliknij OK, aby wyłączyć Obniżenie uprawnień w piaskownicy '%2' i zezwolić na używanie uprawnień administratora w tej piaskownicy.
 
 Ustawienia Obniżenia uprawnień zawsze można zmienić otwierając okno Ustawień piaskownicy i rozwijając grupę ustawień Ograniczenia.
+.
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Print Spooler
+#----------------------------------------------------------------------------
+
+# 3950;txt;01
+# Print Spooler
+# .
+
+# 3951;txt;01
+# The Windows Print Spooler runs outside of Sandboxie's supervision.  A sandboxed application that requests the Print Spooler print to a file will be blocked, because this file would be written outside the sandbox.
+# .
+
+# 3952;txt;01
+# If you wish to allow the Print Spooler to print to a file, you can enable this setting. It is recommended that you enable this option only when needed.
+# .
+
+# 3953;txt;01
+# Allow the Windows Print Spooler to print to file.
+# .
+
+#----------------------------------------------------------------------------
+# Sandboxie Control:  Sandbox Settings:  Network Files
+#----------------------------------------------------------------------------
+
+3955;txt;01
+Network Files
+.
+
+3956;txt;01
+Network files and folders are normally visible to sandboxed applications.
+.
+
+3957;txt;01
+If you wish to block sandboxed applications from accessing files and folders on your network, you can enable this setting. Individual files and folders can be opened for sandboxed applications by adding them under Resource Access -> File Access.
+.
+
+3958;txt;01
+Block network files and folders unless specifically opened.
 .
 
 #----------------------------------------------------------------------------
@@ -2706,6 +3055,14 @@ Dostęp do COM (OpenClsid)
 Programy z piaskownicy nie mogą komunikować się z obiektami COM , które należą do programów uruchomionych na zewnątrz piaskownicy, chyba że identyfikator klasy COM dopasuje jeden z następujących identyfikatorów klasy.
 .
 
+4104;txt;01
+Resource Access::Network Access
+.
+
+4105;txt;01
+Network Access (Firewall)
+.
+
 #----------------------------------------------------------------------------
 # Applications - General
 #----------------------------------------------------------------------------
@@ -2737,6 +3094,10 @@ Różne
 4207;txt;01
 Zwiększ wykorzystanie Sandboxie przez inne aplikacje, wybierając je z listy poniżej.
 .
+
+# 4208;txt;01
+# Applications::Folders
+# .
 
 4209;txt;01
 Foldery
@@ -2849,6 +3210,42 @@ Domyślna lista blokowanych portów TCP/IP
 
 4294;txt;01
 Zezwalaj programom na aktualizację listy szybkiego dostępu na pasku zadań Windows 7
+.
+
+4295;txt;01
+Default exclusions File Migration presets
+.
+
+4296;txt;01
+Default RPC Port Bindings
+.
+
+4297;txt;01
+Open Bluetooth RPC port
+.
+
+4298;txt;01
+Open Smart Card RPC port
+.
+
+4299;txt;01
+Open Simple Service Discovery Protocol (SSDP, UPnP) RPC port
+.
+
+4300;txt;01
+Open additional RPC Port Bindings
+.
+
+4306;txt;01
+Open RPC Port Bindings for UAC
+.
+
+4307;txt;01
+Block common telemetry processes
+.
+
+4308;txt;01
+Filter access to \Devices\
 .
 
 #----------------------------------------------------------------------------
@@ -2998,6 +3395,10 @@ Otwórz / Wybierz &plik
 # Applications - Accessibility
 #----------------------------------------------------------------------------
 
+# 4301;txt;01
+# Applications::Accessibility
+# .
+
 4302;txt;01
 Ułatwienie dostępu
 .
@@ -3082,6 +3483,14 @@ Zezwól na bezpośredni dostęp do ustawień %2
 Zezwól na bezpośredni dostęp do zarządzania sesjami %2
 .
 
+4341;txt;01
+Allow direct access to %2 notes
+.
+
+4342;txt;01
+Enable %2 compatibility workaround
+.
+
 4356;txt;02
 Zezwól na bezpośredni dostęp do zakładek %2
 .
@@ -3100,6 +3509,30 @@ Klient poczty
 
 4392;txt;01
 Następujące wykluczenia pozwalają klientom poczty uruchomionym w tej piaskownicy uzyskać dostęp do plików skrzynki pocztowej poza piaskownicą.
+.
+
+4393;txt;01
+Media Players
+.
+
+4394;txt;01
+The following exclusions allow Media players running in this sandbox to access files outside the sandbox.
+.
+
+4395;txt;01
+Allow %2 direct access to the Photo folder for easier screen capture.
+.
+
+4396;txt;01
+Torrent Clients
+.
+
+4397;txt;01
+The following exclusions allow Torrent clients running in this sandbox to access files outside the sandbox.
+.
+
+4398;txt;01
+Allow %2 direct access to the Music folder for easier music library management.
 .
 
 #----------------------------------------------------------------------------
@@ -3191,6 +3624,92 @@ Wstaw &grupę
 .
 
 #----------------------------------------------------------------------------
+# Plus Tips
+#----------------------------------------------------------------------------
+
+6001;txt;01
+The classic Sandboxie UI (SbieCtrl.exe) has very limited
+resource monitoring and event tracing capabilities.
+
+For optimal troubleshooting it is highly advisable 
+to install the new UI, Sandboxie-Plus (SandMan.exe),
+which provides excellent tracing and monitoring capabilities.
+
+Do you want to download Sandboxie-Plus now?
+.
+
+6002;txt;01
+Visit <a ID="whats_new">sandboxie-plus.com</a> to learn about the new functionality of Sandboxie-Plus,
+or directly click <a ID="upgrade">here</a> to download the latest Sandboxie-Plus installer.
+.
+
+6003;txt;01
+The legacy UI of Sandboxie classic does not implement support for the network firewall functionality.
+
+You can though configure the feature supported by the core components using the ini file, rules are structured like following:
+NetworkAccess=iexplorer.exe,Allow; Port=80,443; Address=192.168.0.1-192.168.100.255; Protocol=TCP
+
+If you prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features.
+.
+
+6004;pop;err;01
+The configuration %3 of box %2 requires a supporter certificate. Processes in this box will be terminated after 5 minutes. For prolonged use, please consider supporting this project.
+.
+
+6005;txt;01
+Note: Without administrative privileges installers will fail to start in the sandbox. Sandboxie-Plus offers an option to make many installers succeed without those privileges. You can enable this option also in the classic build manually, by adding "FakeAdminRights=y" to the ini section for this box.
+.
+
+6006;txt;01
+The legacy UI of Sandboxie classic implements only support for a couple of restriction options.
+
+Additional options like "ClosePrintSpooler=y", "OpenClipboard=n", "BlockNetParam=n" and much more can be set in the ini section for this box.
+The modern UI (SandMan.exe) also offers more customization options for Start/Run and Internet access restrictions.
+
+If you would prefer to use a UI to control these options, please upgrade to Sandboxie-Plus, which has full UI support for all new features.
+.
+
+6007;txt;01
+Sandboxie Plus offers enhanced privacy protection by switching the old behavior from a black-list mode, i.e., allowing read access to the entire drive, except blocked by Closed Path or Write Path, to a white-list mode where sandboxed programs are only allowed to read generic system locations and read access to most user data must be first explicitly granted.
+
+The legacy UI of Sandboxie classic does not implement support for this mode of operation. Although it can be configured using the ini file, it is recommended to use the modern Sandboxie-Plus UI (SandMan.exe) if you want to use privacy enhanced boxes.
+.
+
+6008;pop;err;01
+The configuration %3 of box %2 requires a supporter certificate and can not be used without it.
+.
+
+6009;pop;err;01
+The configuration %3 of box %2 requires an advanced supporter certificate.
+.
+
+6010;txt;01
+You have installed Sandboxie more than %2 days ago.
+
+So, you think David and the contributors are doing a great job?
+
+Why don't you show it by supporting the project and getting a Supporter Certificate?
+
+Sandboxie without a valid supporter certificate will now pause for a few seconds, to give you time to contemplate the possibility of supporting the project.
+.
+
+6011;txt;01
+Wait
+.
+
+6012;txt;01
+Continue
+.
+
+6013;txt;01
+Quit
+.
+
+6014;txt;01
+Get Certificate
+.
+
+#----------------------------------------------------------------------------
 # Getting Started Wizard
 #----------------------------------------------------------------------------
 
@@ -3270,190 +3789,219 @@ Dziękujemy za poświęcony czas na przejrzenie tego samouczka. Więcej samouczk
 Domyślne ustawienia Sandboxie, zapewniają pełną ochronę, ale może będziesz chciał przejrzeć polecenia konfiguracji piaskownicy w menu Piaskownica w oknie programu Sandboxie.
 .
 
-7866;txt;01
-W 64-bitowym systemie Windows, należy włączyć Eksperymentalną ochronę. Zobacz menu Konfiguracja w Sterowanie Sandboxie.
-.
+# 7866;txt;01
+# W 64-bitowym systemie Windows, należy włączyć Eksperymentalną ochronę. Zobacz menu Konfiguracja w Sterowanie Sandboxie.
+# .
 
 #----------------------------------------------------------------------------
 # License Manager
 #----------------------------------------------------------------------------
 
-7901;txt;01
-Menedżer licencji Sandboxie
-.
+# 7901;txt;01
+# Menedżer licencji Sandboxie
+# .
 
-7902;txt;01
-Kod systemu %2
-.
+# 7902;txt;01
+# Kod systemu %2
+# .
 
-7903;txt;01
-W przyszłości aktywuj licencję bez pytania
-.
-
-#----------------------------------------------------------------------------
-
-7921;txt;01
-Sandboxie jest zarejestrowane i licencja jest aktywowana.
-.
-
-7922;txt;01
-Wersja zarejestrowana, ale musisz ponownie aktywować licencję.
-.
-
-7923;txt;01
-Niezarejestrowana kopia. Zarejestruj dzisiaj!
-.
-
-7924;txt;01
-Licencja Sandboxie musi być reaktywowana za %2 dni.
-.
-
-7925;txt;01
-Licencja Sandboxie została teraz aktywowana.
-.
-
-7926;txt;01
-Data wygaśnięcia klucza produktu - %2.
-.
-
-7927;txt;01
-Klucz produktu nie posiada daty wygaśnięcia.
-.
+# 7903;txt;01
+# W przyszłości aktywuj licencję bez pytania
+# .
 
 #----------------------------------------------------------------------------
 
-7931;txt;01
-Twojej kopia Sandboxie jest zarejestrowana za pomocą przestarzałego klucza rejestracyjnego.
-.
+# 7921;txt;01
+# Sandboxie jest zarejestrowane i licencja jest aktywowana.
+# .
 
-7932;txt;01
-Proszę zezwolić Menedżerowi licencji na połączenie z serwerem licencji i uaktualnień starych kluczy rejestracyjnych na nowy klucz produktu. Za to uaktualnienie nie są pobierane jakiekolwiek opłaty.
-.
+# 7922;txt;01
+# Wersja zarejestrowana, ale musisz ponownie aktywować licencję.
+# .
 
-7933;txt;01
-Klucz rejestracyjny nie jest rozpoznawany przez Serwer licencji.
-.
+# was 3603;txt;01
+# 7923;txt;01
+# Niezarejestrowana kopia. Zarejestruj dzisiaj!
+# .
 
-7934;txt;01
-Jeżeli używałeś legalnego klucza rejestracji, za który zapłaciłeś, albo który był dostarczony Ci jako podarunek, lub jako element promocji, to prosimy wysłać e-mail do:
-.
+# 7924;txt;01
+# Licencja Sandboxie musi być reaktywowana za %2 dni.
+# .
 
-7935;txt;01
-Twój nowy klucz produktu to:
-.
+# 7925;txt;01
+# Licencja Sandboxie została teraz aktywowana.
+# .
 
-7936;txt;01
-Proszę przechowywać klucz produktu w bezpiecznym miejscu. Kliknij przycisk poniżej, aby skopiować klucza produktu do Schowka, z którego można wkleić go do dokumentu i wydrukować.
-.
+# 7926;txt;01
+# Data wygaśnięcia klucza produktu - %2.
+# .
 
-7937;txt;01
-&Uaktualnienie klucza rejestracyjnego do klucza produktu
-.
-
-#----------------------------------------------------------------------------
-
-7941;txt;01
-Rejestracja Sandboxie jest wykonywana za pomocą zapłaty trzeciej stronie. Rozpocznij proces rejestracji od odwiedzenia strony internetowej Sandboxie o poniższym adresie.
-.
-
-7942;txt;01
-Aby aktywować licencję Sandboxie, wprowadź klucz produktu, który figuruje w Twoim dowodzie wpłaty, a następnie kliknij przycisk, aby aktywować swoją licencję.
-.
-
-7943;txt;01
-Czy chcesz teraz wprowadzić nowy klucz produktu?
-.
-
-7944;txt;01
-&Aktywacja licencji
-.
-
-7945;txt;01
-Twoja kopia Sandboxie jest teraz zarejestrowana.
-.
-
-7946;txt;01
-Dziękuję za wspieranie Sandboxie!
-.
+# 7927;txt;01
+# Klucz produktu nie posiada daty wygaśnięcia.
+# .
 
 #----------------------------------------------------------------------------
 
-7951;txt;01
-Czy chcesz teraz aktywować licencję?
-.
+# 7931;txt;01
+# Twojej kopia Sandboxie jest zarejestrowana za pomocą przestarzałego klucza rejestracyjnego.
+# .
 
-7952;txt;01
-Proszę przejść na stronę internetową Sandboxie za pomocą poniższego linku, aby zamówić nowy klucz produktu.
-.
+# 7932;txt;01
+# Proszę zezwolić Menedżerowi licencji na połączenie z serwerem licencji i uaktualnień starych kluczy rejestracyjnych na nowy klucz produktu. Za to uaktualnienie nie są pobierane jakiekolwiek opłaty.
+# .
 
-7961;txt;01
-Wyczyść &informacje o licencji
-.
+# 7933;txt;01
+# Klucz rejestracyjny nie jest rozpoznawany przez Serwer licencji.
+# .
 
-7962;txt;01
-Czy na pewno chcesz wyczyścić informacje o licencji Sandboxie?
+# 7934;txt;01
+# Jeżeli używałeś legalnego klucza rejestracji, za który zapłaciłeś, albo który był dostarczony Ci jako podarunek, lub jako element promocji, to prosimy wysłać e-mail do:
+# .
 
-Możesz aktywować licencję w dowolnym czasie przez wprowadzenie klucza produktu.
-.
+# 7935;txt;01
+# Twój nowy klucz produktu to:
+# .
+
+# 7936;txt;01
+# Proszę przechowywać klucz produktu w bezpiecznym miejscu. Kliknij przycisk poniżej, aby skopiować klucza produktu do Schowka, z którego można wkleić go do dokumentu i wydrukować.
+# .
+
+# 7937;txt;01
+# &Uaktualnienie klucza rejestracyjnego do klucza produktu
+# .
 
 #----------------------------------------------------------------------------
 
-7971;txt;01
-To nie jest prawidłowy klucz produktu.
+# was 3612;txt;01
+# 7941;txt;01
+# Rejestracja Sandboxie jest wykonywana za pomocą zapłaty trzeciej stronie. Rozpocznij proces rejestracji od odwiedzenia strony internetowej Sandboxie o poniższym adresie.
+# .
+
+# 7942;txt;01
+# Aby aktywować licencję Sandboxie, wprowadź klucz produktu, który figuruje w Twoim dowodzie wpłaty, a następnie kliknij przycisk, aby aktywować swoją licencję.
+# .
+
+# 7943;txt;01
+# Czy chcesz teraz wprowadzić nowy klucz produktu?
+# .
+
+# 7944;txt;01
+# &Aktywacja licencji
+# .
+
+# was first line of 3617;txt;01
+# 7945;txt;01
+# Twoja kopia Sandboxie jest teraz zarejestrowana.
+# .
+
+# was second line of 3617;txt;01
+# 7946;txt;01
+# Dziękuję za wspieranie Sandboxie!
+# .
+
+#----------------------------------------------------------------------------
+
+# 7951;txt;01
+# Czy chcesz teraz aktywować licencję?
+# .
+
+# 7952;txt;01
+# Proszę przejść na stronę internetową Sandboxie za pomocą poniższego linku, aby zamówić nowy klucz produktu.
+# .
+
+# 7961;txt;01
+# Wyczyść &informacje o licencji
+# .
+
+# 7962;txt;01
+# Czy na pewno chcesz wyczyścić informacje o licencji Sandboxie?
+# 
+# Możesz aktywować licencję w dowolnym czasie przez wprowadzenie klucza produktu.
+# .
+
+#----------------------------------------------------------------------------
+
+# 7971;txt;01
+# To nie jest prawidłowy klucz produktu.
+# .
+
+# 7972;txt;01
+# To nie jest prawidłowy kod systemu.
+# .
+
+# 7973;txt;01
+# To nie jest prawidłowy klucz aktywacji. [%2]
+# .
+
+# 7974;txt;01
+# Nieprawidłowa odpowiedź Serwera licencji.
+# .
+
+# 7975;txt;01
+# Aktywacja produktu nie powiodła się:
+# .
+
+# 7976;txt;01
+# Czy chcesz spróbować ponownie teraz?
+# .
+
+# 7977;txt;01
+# Jeśli musisz aktywować Sandboxie na komputerze, który nie ma dostępu do internetu,
+# zobacz FAQ Licencjonowanie Sandboxie, by uzyskać informacje o aktywacji offline.
+# .
+
+# 7978;txt;01
+# Aktualna data (%2) jest późniejsza niż data wysłana z serwera licencji (%3).
+# .
+
+# 7982;txt;01
+# Serwer licencji nie określił przyczyny niepowodzenia aktywacji.
+# .
+
+# 7983;txt;01
+# Klucz produktu nie jest rozpoznawany przez Serwer licencji.
+# .
+
+# 7984;txt;01
+# Klucz produktu nie może być używany poza jego datą ważności %2.
+# .
+
+# 7985;txt;01
+# Klucz produktu został aktywowany na zbyt wielu komputerach.
+# .
+
+# 7986;txt;01
+# Klucz produktu został unieważniony, ponieważ został upubliczniony w internecie.
+# .
+
+# 7987;txt;01
+# Klucz produktu został unieważniony, ponieważ zamówienie zostało zwrócone.
+# .
+
+7988;txt;01
+Your Supporter Certificate is valid, Thank You :-)
 .
 
-7972;txt;01
-To nie jest prawidłowy kod systemu.
+7989;txt;01
+The Supporter Certificate has expired :'(
 .
 
-7973;txt;01
-To nie jest prawidłowy klucz aktywacji. [%2]
+7990;txt;01
+Please copy the entire Supporter Certificate into the clipboard and press OK.
 .
 
-7974;txt;01
-Nieprawidłowa odpowiedź Serwera licencji.
+7991;txt;01
+Failed to save certificate to file.
 .
 
-7975;txt;01
-Aktywacja produktu nie powiodła się:
+7992;txt;01
+The certificate is not valid.
 .
 
-7976;txt;01
-Czy chcesz spróbować ponownie teraz?
+7993;txt;01
+The certificate is valid and has been successfully applied.
 .
 
-7977;txt;01
-Jeśli musisz aktywować Sandboxie na komputerze, który nie ma dostępu do internetu,
-zobacz FAQ Licencjonowanie Sandboxie, by uzyskać informacje o aktywacji offline.
-.
-
-7978;txt;01
-Aktualna data (%2) jest późniejsza niż data wysłana z serwera licencji (%3).
-.
-
-7982;txt;01
-Serwer licencji nie określił przyczyny niepowodzenia aktywacji.
-.
-
-7983;txt;01
-Klucz produktu nie jest rozpoznawany przez Serwer licencji.
-.
-
-7984;txt;01
-Klucz produktu nie może być używany poza jego datą ważności %2.
-.
-
-7985;txt;01
-Klucz produktu został aktywowany na zbyt wielu komputerach.
-.
-
-7986;txt;01
-Klucz produktu został unieważniony, ponieważ został upubliczniony w internecie.
-.
-
-7987;txt;01
-Klucz produktu został unieważniony, ponieważ zamówienie zostało zwrócone.
-.
 
 #----------------------------------------------------------------------------
 # SandboxieInstall

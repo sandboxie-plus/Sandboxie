@@ -150,36 +150,48 @@
         <file>Actions/Windows.png</file>
         <file>Actions/Interface.png</file>
         <file>Actions/Notification.png</file>
+        <file>Actions/Network2.png</file>
+        <file>Actions/NetworkMgr.png</file>
+        <file>Actions/EthSocket.png</file>
+        <file>Actions/EthSocket2.png</file>
+        <file>Actions/NetCard.png</file>
+        <file>Actions/EthCable.png</file>
+        <file>Actions/EthPlug.png</file>
+        <file>Actions/Network3.png</file>
+        <file>Actions/LockOpen.png</file>
+        <file>Actions/LockClosed.png</file>
+        <file>Actions/RamDisk.png</file>
+        <file>Actions/BoxConfig.png</file>
+        <file>Actions/FirstAid.png</file>
+        <file>Actions/Forum.png</file>
+        <file>Actions/Help.png</file>
         <file>Actions/Stack.png</file>
+        <file>Actions/Warning.png</file>
         <file>Actions/PauseForce.png</file>
         <file>Actions/DisableMessagePopup.png</file>
         <file>Actions/DisableRecovery.png</file>
+        <file>Actions/Plugin.png</file>
+        <file>Actions/Plugins.png</file>
+        <file>Actions/AntiVir.png</file>
+        <file>Actions/SourceCode.png</file>
+        <file>Actions/Qube.png</file>
+        <file>Actions/Font.png</file>
+        <file>Actions/ResetFont.png</file>
+        <file>Actions/Dll.png</file>
+        <file>SideLogoDM.png</file>
+        <file>Actions/TaskBar.png</file>
+        <file>Actions/Desktop.png</file>
     </qresource>
     <qresource prefix="/Boxes">
-        <file alias="Empty3">Boxes/sandbox-b-empty.png</file>
-        <file alias="Full3">Boxes/sandbox-b-full.png</file>
-        <file alias="Empty4">Boxes/sandbox-c-empty.png</file>
-        <file alias="Full4">Boxes/sandbox-c-full.png</file>
-        <file alias="Empty2">Boxes/sandbox-g-empty.png</file>
-        <file alias="Full2">Boxes/sandbox-g-full.png</file>
-        <file alias="Empty5">Boxes/sandbox-m-empty.png</file>
-        <file alias="Full5">Boxes/sandbox-m-full.png</file>
-        <file alias="Empty1">Boxes/sandbox-r-empty.png</file>
-        <file alias="Full1">Boxes/sandbox-r-full.png</file>
-        <file alias="Empty0">Boxes/sandbox-y-empty.png</file>
-        <file alias="Full0">Boxes/sandbox-y-full.png</file>
-        <file alias="Empty6">Boxes/sandbox-o-empty.png</file>
-        <file alias="Full6">Boxes/sandbox-o-full.png</file>
         <file alias="Busy">Boxes/BusyOverlay.png</file>
         <file alias="Frame">Boxes/sandbox-frame.png</file>
         <file alias="Items">Boxes/sandbox-items.png</file>
         <file alias="Sand">Boxes/sandbox-sand.png</file>
-        <file alias="Empty7">Boxes/sandbox-w-empty.png</file>
-        <file alias="Full7">Boxes/sandbox-w-full.png</file>
         <file alias="Group">Boxes/sandbox-group.png</file>
         <file alias="Group2">Boxes/sandbox-group+.png</file>
         <file alias="Out">Boxes/sandbox-out.png</file>
         <file alias="AutoDel">Boxes/DelOverlay.png</file>
+        <file alias="FrameDM">Boxes/sandbox-frameDM.png</file>
     </qresource>
     <qresource prefix="/Assets">
         <file>Advanced.png</file>

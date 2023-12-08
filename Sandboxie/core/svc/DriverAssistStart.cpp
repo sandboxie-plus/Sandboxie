@@ -141,7 +141,51 @@ driver_started:
     }
 
     //
-    // version numbers match, continue with driver/service init
+    // version numbers match
+    //
+
+    if (ok) {
+        
+	    const char BlockList0[] =
+		    "2687F3F7D9DBF317A05251E2ED3C3D0A" "\r\n"
+		    "6AF28A3722ADC9FDB0F4B298508DD9E6" "\r\n"
+		    "54F2DF068889C1789AE9D7E948618EB6" "\r\n"
+		    "665FBAD025408A5B9355230EBD3381DC" "\r\n"
+
+            "63F49D96BDBA28F8428B4A5008D1A587" "\r\n"
+
+		    "622D831B13B70B7CFFEC12E3778BF740" "\r\n"
+		    "2FDEB3584ED4DA007C2A1D49CFFF1062" "\r\n"
+		    "413616148FA9D3793B0E9BA4A396D3EE" "\r\n"
+		    "CC4DCCD36A13097B4478ADEB0FEF00CD" "\r\n"
+		    "32DE2C3B8E8859B6ECB6FF98BDF8DB15"		;
+
+        const unsigned char BlockListSig0[64] =  {
+            0x22, 0x45, 0x90, 0x69, 0x5f, 0xb1, 0x3c, 0x7f,
+            0x8b, 0xbf, 0x9e, 0xd0, 0x75, 0x01, 0xaf, 0x2a, 
+            0x92, 0x70, 0x5c, 0x1a, 0xe8, 0xc1, 0x8e, 0x5f, 
+            0xcf, 0x36, 0x0f, 0xb3, 0xbd, 0x8d, 0x60, 0x02, 
+            0x37, 0x1a, 0xa5, 0x3a, 0xea, 0x14, 0x32, 0xd1, 
+            0x2e, 0xce, 0x86, 0x02, 0xe3, 0x21, 0x33, 0x0f, 
+            0x7e, 0xa2, 0x93, 0xc9, 0xd8, 0x24, 0xfd, 0xed, 
+            0x01, 0x62, 0x77, 0x59, 0x36, 0x16, 0xc7, 0x49
+        };
+
+        std::string BlockList;
+        BlockList.resize(0x1000, 0);
+        ULONG BlockListLen = 0;
+        SbieApi_Call(API_GET_SECURE_PARAM, 5, L"CertBlockList", (ULONG_PTR)BlockList.c_str(), BlockList.size(), (ULONG_PTR)&BlockListLen, 1);
+
+        if (BlockListLen < sizeof(BlockList0) - 1)
+        {
+            SbieApi_Call(API_SET_SECURE_PARAM, 3, L"CertBlockList", BlockList0, sizeof(BlockList0) - 1);
+            SbieApi_Call(API_SET_SECURE_PARAM, 3, L"CertBlockListSig", BlockListSig0, sizeof(BlockListSig0));
+            BlockList = BlockList0;
+        }
+    }
+
+    //
+    // continue with driver/service init
     //
 
     if (ok) {

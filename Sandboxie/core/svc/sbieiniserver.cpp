@@ -1065,7 +1065,7 @@ ULONG SbieIniServer::SetSetting(MSG_HEADER* msg)
     SIniSection* pSection = GetIniSection(req->section, true);
 
     //
-    // Check if this is a repalce section request and if so execute it
+    // Check if this is a replace section request and if so execute it
     //
 
     if (wcslen(req->setting) == 0 && have_value) 
@@ -1227,7 +1227,7 @@ ULONG SbieIniServer::DelSetting(MSG_HEADER* msg)
     {
         if (_wcsicmp(I->Name.c_str(), req->setting) == 0 && _wcsicmp(I->Value.c_str(), req->value) == 0) {
             I = pSection->Entries.erase(I);
-            // Note: we could brak here but lets finish in case tehre is a duplicate
+            // Note: we could break here, but let's finish in case there is a duplicate
         }
         else
             ++I;
@@ -2237,7 +2237,7 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool i
     NTSTATUS status = STATUS_UNSUCCESSFUL;
     HANDLE hToken = NULL;
     BOOL ok = TRUE;
-    WCHAR ctrlName[64] = { 0 };
+    WCHAR ctrlCmd[128] = { 0 };
 
     //
     // get token from caller session or caller process.  note that on
@@ -2311,19 +2311,19 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool i
         bool ok2 = SetUserSettingsSectionName(hToken);
         if (ok2) {
             SbieApi_QueryConfAsIs(
-                m_sectionname, _Setting2, 0, ctrlName, sizeof(ctrlName) - 2);
+                m_sectionname, _Setting2, 0, ctrlCmd, sizeof(ctrlCmd) - 2);
         }
         else {
             wcscpy(m_sectionname + 13, L"Default");   // UserSettings_Default
             SbieApi_QueryConfAsIs(
-                m_sectionname, _Setting2, 0, ctrlName, sizeof(ctrlName) - 2);
+                m_sectionname, _Setting2, 0, ctrlCmd, sizeof(ctrlCmd) - 2);
         }
 
     } else if (msg->length > sizeof(MSG_HEADER)) {
 
         ULONG len = (ULONG)(msg->length - sizeof(MSG_HEADER));
-        memcpy(ctrlName, (UCHAR*)msg + sizeof(MSG_HEADER), len);
-        ctrlName[len / sizeof(WCHAR)] = L'\0';
+        memcpy(ctrlCmd, (UCHAR*)msg + sizeof(MSG_HEADER), len);
+        ctrlCmd[len / sizeof(WCHAR)] = L'\0';
     }
 
     //
@@ -2334,17 +2334,24 @@ MSG_HEADER *SbieIniServer::RunSbieCtrl(MSG_HEADER *msg, HANDLE idProcess, bool i
 
         STARTUPINFO si;
         PROCESS_INFORMATION pi;
-
         WCHAR *args = NULL;
-        if (isSandboxed) {
-            if (*ctrlName)
-                args = L" -autorun";
-        } else {
-            if (!*ctrlName)
-                args = L" /open /sync";
+
+        //
+        // split the agent executable name from the arguments
+        //
+
+        WCHAR* end = (WCHAR*)SbieDll_FindArgumentEnd(ctrlCmd);
+        if (*end) {
+            *end++ = 0;
+            args = end;
         }
 
-        if (SbieDll_RunFromHome(*ctrlName ? ctrlName : SBIECTRL_EXE, args, &si, NULL)) {
+        //
+        // run the agent executable from the sbie home directory,
+        // when none was specified fallback to SBIECTRL_EXE
+        //
+
+        if (SbieDll_RunFromHome(*ctrlCmd ? ctrlCmd : SBIECTRL_EXE, args, &si, NULL)) {
 
             WCHAR *CmdLine = (WCHAR *)si.lpReserved;
 

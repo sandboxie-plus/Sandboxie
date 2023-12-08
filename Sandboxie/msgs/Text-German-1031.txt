@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------
 # SbieDrv
 #
-# Initialization errors issued to to the System evt Log
+# Initialization errors issued to the System evt Log
 #----------------------------------------------------------------------------
 
 1101;evt;inf;01
@@ -338,6 +338,14 @@ SBIE2114 Die Datei ist zu groß, um sie in die Sandbox zu kopieren, verweigere Z
 SBIE2115 Die Datei ist zu groß, um sie in die Sandbox zu kopieren, öffne Datei nur schreibgeschützt - %2
 .
 
+2180;pop;inf;01
+SBIE2180 LowLevel.dll Fehler %2
+.
+
+2181;pop;inf;01
+SBIE2181 Die LowLevel.dll Umleitung konnte SbieDll.dll nicht in den Zielprozess laden.
+.
+
 2191;pop;inf;01
 SBIE2191 %2 sollte nicht aktualisiert werden, wenn es mit Sandboxie ausgeführt wird.
 .
@@ -482,6 +490,70 @@ SBIE2226 Prozess konnte wegen fehlenden erhöhten Rechten nicht starten; zur Beh
 
 2227;pop;wrn;01
 SBIE2227 '%2' befindet sich auf einem Datenträger, welcher nicht das 8.3 Namensschema unterstützt. Dies kann zu Problemen mit älteren Anwendungen und Installationsprogrammen führen.
+.
+
+2230;pop;wrn;01
+SBIE2230 Fehler beim Einhängen der Quelle für %2
+.
+
+2231;pop;wrn;01
+SBIE2231 Anschlussziel Unstimmigkeit %2
+.
+
+2232;pop;wrn;01
+SBIE2232 Der ImDisk-Treiber ist nicht geladen
+.
+
+2233;pop;wrn;01
+SBIE2233 Kann den ImDisk-Treiber nicht kontrollieren: %2
+.
+
+2234;pop;wrn;01
+SBIE2234 Kein freier Laufwerksbuchstabe für temporäres einhängen gefunden
+.
+
+2235;pop;wrn;01
+SBIE2235 Fehler beim Entdefinieren des temporären Laufwerksbuchstabens: "%2"
+.
+
+2236;pop;wrn;01
+SBIE2236 %2 konnte nicht aufgerufen werden (Ist es möglicherweise nicht installiert?)
+.
+
+2237;pop;wrn;01
+SBIE2237 Fehler beim Aushängen der Quelle %2
+.
+
+2238;pop;wrn;01
+SBIE2238 Ramdiskgröße ist nicht konfiguriert, oder zu klein, setzen Sie RamDiskSizeKb=1048576 (1GB in Kilobytes) in der [GlobalSettings] ini-Sektion.
+.
+
+2239;pop;wrn;01
+SBIE2239 Der Quellordner der Sandbox %2 muss leer sein, um ein Laufwerk darin einhängen zu können.
+.
+
+2240;pop;wrn;01
+SBIE2240 Timeout beim Versuch des Einhängens von ImDisk Laufwerk %2
+.
+
+2241;pop;wrn;01
+SBIE2241 Boxabbilddatei %2 konnte nicht geöffnet werden
+.
+
+2242;pop;wrn;01
+SBIE2242 Fehler beim Einhängen des Boxabbildes, Die ausgewählte Chiffre wird nicht unterstützt
+.
+
+2243;pop;wrn;01
+SBIE2243 Fehler beim Einhängen des Boxabbildes, Falsches Passwort
+.
+
+2244;pop;wrn;01
+SBIE2244 Fehler beim Einhängen des Boxabbildes, Passwort notwendig
+.
+
+2246;pop;wrn;01
+SBIE2246 Fehler beim Einhängen des Boxabbildes, ImBox-Fehler %2
 .
 
 #----------------------------------------------------------------------------
@@ -1182,6 +1254,10 @@ Upgrade zu Sandboxie-Plus
 
 3468;txt;01
 Sandboxie-Plus Migrationsanleitung
+.
+
+3469;txt;01
+Was ist neu in Sandboxie-Plus
 .
 
 3471;txt;01
@@ -3258,6 +3334,14 @@ Falls Sie bevorzugen diese Optionen in einer UI zu kontrollieren, upgraden Sie b
 Sandboxie-Plus bietet verbesserten Privatsphärenschutz durch den Wechsel vom alten Verhalten eines Sperrlisten-Modus, z.B. dem Erlauben des Lesezugriffs auf das gesamte Laufwerk, ausschließlich blockierter Zugriffe durch Closed Path oder Write Path, zu einem Erlaubnislisten-Modus bei dem sandgeboxte Programme nur erlaubt wird auf generische Systemorte lesend zu zu greifen und Lesezugriff auf die meisten Nutzerdaten erst explizit gewährt werden muss.
 
 Die veraltete UI von Sandboxie Classic implementiert keine Unterstützung für diesen Betriebsmodus. Obwohl er durch die ini konfiguriert werden kann, ist es ratsam die moderne Sandboxie-Plus UI (SandMan.exe) zu verwenden, falls Sie die verbesserten Privatsphärenboxen nutzen möchten.
+.
+
+6008;pop;err;01
+Die Konfiguration %3 der Box %2 erfordert ein Unterstützerzertifikat und kann nicht ohne genutzt werden.
+.
+
+6009;pop;err;01
+Die Konfiguration %3 der Box %2 erfordert ein erweitertes Unterstützerzertifikat.
 .
 
 6010;txt;01

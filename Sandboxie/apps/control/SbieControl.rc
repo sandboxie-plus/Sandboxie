@@ -128,7 +128,8 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "3452",                        ID_HELP_TOPICS
         MENUITEM "3453",                        ID_HELP_TUTORIAL
-        MENUITEM "3468",                        ID_HELP_MIGRATION
+        MENUITEM "3469",                        ID_HELP_WHATSNEW
+        //MENUITEM "3468",                        ID_HELP_MIGRATION
         MENUITEM "3457",                        ID_HELP_FORUM
         MENUITEM SEPARATOR
         MENUITEM "3454",                        ID_HELP_UPDATE

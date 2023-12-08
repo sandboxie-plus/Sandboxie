@@ -90,9 +90,6 @@
     <ClCompile Include="Common\Xml.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="Common\qRC4.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
     <ClCompile Include="Common\NetworkAccessManager.cpp">
       <Filter>Common</Filter>
     </ClCompile>
@@ -159,9 +156,6 @@
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="Common\Xml.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\qRC4.h">
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="Common\OtherFunctions.h">

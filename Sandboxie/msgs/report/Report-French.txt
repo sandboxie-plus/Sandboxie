@@ -2,63 +2,7 @@
 * Missing Messages in Text-French-1036.txt
 *==========
 
-1317;pop;inf;02
-SBIE1317 Blocked '%2' from trying to access sandbox file root '%3'
-.
-
-1318;pop;inf;02
-SBIE1318 Blocked '%2' from trying to access sandboxed process '%3'
-.
-
-2113;pop;inf;01
-SBIE2113 File is too large to copy into sandbox, creating empty file - %2
-.
-
-2114;pop;inf;01
-SBIE2114 File is too large to copy into sandbox, denying access - %2
-.
-
-2115;pop;inf;01
-SBIE2115 File is too large to copy into sandbox, opening in read only - %2
-.
-
-2196;pop;inf;01
-SBIE2196 To run the MSI Installer sandboxed, the access for COM infrastructure must not be Open.
-.
-
 3001;txt;01
 &OK
-.
-
-3506;txt;01
-Get Supporter Certificate
-.
-
-3507;txt;01
-Apply Supporter Certificate
-.
-
-7988;txt;01
-Your Supporter Certificate is valid, Thank You :-)
-.
-
-7989;txt;01
-The Supporter Certificate has expired :'(
-.
-
-7990;txt;01
-Please copy the entire Supporter Certificate into the clipboard and press OK.
-.
-
-7991;txt;01
-Failed to save certificate to file.
-.
-
-7992;txt;01
-The certificate is not valid.
-.
-
-7993;txt;01
-The certificate is valid and has been successfully applied.
 .
 

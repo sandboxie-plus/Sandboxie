@@ -2,11 +2,5 @@
 * Missing Messages in Text-Russian-1049.txt
 *==========
 
-1317;pop;inf;02
-SBIE1317 Blocked '%2' from trying to access sandbox file root '%3'
-.
-
-1318;pop;inf;02
-SBIE1318 Blocked '%2' from trying to access sandboxed process '%3'
-.
+There are no missing messages.
 

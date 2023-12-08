@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------
 # SbieDrv
 #
-# Initialization errors issued to to the System event Log
+# Initialization errors issued to the System event Log
 #----------------------------------------------------------------------------
 
 1101;evt;inf;01
@@ -330,6 +330,15 @@ SBIE2114 Dosya, korumalı alana kopyalanamayacak kadar büyük, dosyaya erişim 
 SBIE2115 Dosya, korumalı alana kopyalanamayacak kadar büyük, dosya salt okunur olarak açılıyor - %2
 .
 
+2180;pop;inf;01
+SBIE2180 LowLevel.dll hatası %2
+.
+
+2181;pop;inf;01
+SBIE2181 LowLevel.dll dolambaçlı yoldan SbieDll.dll'yi hedef işleme yükleyemedi.
+.
+
+
 2191;pop;inf;01
 SBIE2191 %2, Sandboxie altında çalışırken güncellenmemelidir.
 .
@@ -473,6 +482,72 @@ SBIE2226 Eksik yetkilendirme nedeniyle işlem başlatılamadı, bunu çözmek i�
 .
 2227;pop;wrn;01
 SBIE2227 %2', 8.3 adlandırmasını desteklemeyen bir birimde bulunuyor. Bu durum, eski uygulamalar ve yükleyicilerde sorunlara neden olabilir.
+.
+
+#----------------------------------------------------------------------------
+
+2230;pop;wrn;01
+SBIE2230 %2 için kök bağlanamadı
+.
+
+2231;pop;wrn;01
+SBIE2231 Junction Hedefi uyumsuzluğu %2
+.
+
+2232;pop;wrn;01
+SBIE2232 ImDisk Sürücüsü yüklü değil
+.
+
+2233;pop;wrn;01
+SBIE2233 ImDisk Sürücüsü kontrol edilemiyor: %2
+.
+
+2234;pop;wrn;01
+SBIE2234 Geçici bağlama için boş sürücü harfi bulunamadı
+.
+
+2235;pop;wrn;01
+SBIE2235 Geçici sürücü harfinin tanımlanmasında hata oluştu: "%2"
+.
+
+2236;pop;wrn;01
+SBIE2236 %2 çağrılamadı (belki de yüklü değil?)
+.
+
+2237;pop;wrn;01
+SBIE2237 %2 kökünün bağlantısı çıkarılamadı
+.
+
+2238;pop;wrn;01
+SBIE2238 Bellek Diski boyutu yapılandırılmamış veya çok küçük. Yapılandırmanın [GlobalSettings] bölümüne RamDiskSizeKb=1048576 (Kilobayt cinsinden 1 GB) ekleyerek ayarlayın.
+.
+
+2239;pop;wrn;01
+SBIE2239 Bir birimin bağlanabilmesi için %2 korumalı alanının kök klasörünün boş olması gerekir.
+.
+
+2240;pop;wrn;01
+SBIE2240 %2 ImDisk birimini bağlamaya çalışırken zaman aşımı
+.
+
+2241;pop;wrn;01
+SBIE2241 %2 alan görüntüsü dosyası açılamadı
+.
+
+2242;pop;wrn;01
+SBIE2242 Alan görüntüsü bağlanamadı. Belirtilen şifreleme desteklenmiyor
+.
+
+2243;pop;wrn;01
+SBIE2243 Alan görüntüsü bağlanamadı, Yanlış parola
+.
+
+2244;pop;wrn;01
+SBIE2244 Alan görüntüsü bağlanamadı, Parola gerekli
+.
+
+2246;pop;wrn;01
+SBIE2246 Alan görüntüsü bağlanamadı, ImBox hatası %2
 .
 
 #----------------------------------------------------------------------------
@@ -1158,6 +1233,10 @@ Sandboxie-Plus'a Yükseltin
 
 3468;txt;01
 Sandboxie-Plus Taşıma Kılavuzu
+.
+
+3469;txt;01
+Sandboxie-Plus'taki Yenilikler
 .
 
 3471;txt;01
@@ -3100,11 +3179,11 @@ Korumalı alanın dışına kaydet: Hotmail ve Messenger hesap bilgisi
 .
 
 4338;txt;02
-%2 tercih klasörüne doğrudan erişime izin ver
+%2 profil klasörüne doğrudan erişime izin ver
 .
 
 4339;txt;02
-%2 özelliğine doğrudan erişime izin ver
+%2 tercihlerine doğrudan erişime izin ver
 .
 
 4340;txt;01
@@ -3120,7 +3199,7 @@ Windows için %2 düzeltmesini etkinleştir
 .
 
 4356;txt;02
-%2 Yer İmlerine doğrudan erişime izin ver
+%2 yer imlerine doğrudan erişime izin ver
 .
 
 4357;txt;02
@@ -3301,6 +3380,14 @@ Bu seçenekleri denetlemek için bir UI kullanmayı tercih ederseniz, lütfen t�
 Sandboxie Plus, eski davranışı olan kara listeme modundan - örn. Kapalı Yol veya Yazma Yolu tarafından engellenenler dışında tüm sürücüye okuma erişimi izni vererek - beyaz listeleme moduna geçerek korumalı alandaki programların yalnızca genel sistem konumlarını okumasına izin verir ve çoğu kullanıcı verisini okumak için bu konumlara özellikle okuma erişimi verilmelidir.
 
 Sandboxie classic'in eski kullanıcı arayüzü, bu çalışma modu için destek sunmaz. Ini dosyası kullanılarak yapılandırılabilse de, gizliliği artırılmış alanları kullanmak istiyorsanız modern Sandboxie-Plus UI'yi (SandMan.exe) kullanmanız önerilir.
+.
+
+6008;pop;err;01
+%2 alanının %3 yapılandırması bir destekçi sertifikası gerektirir ve bu sertifika olmadan kullanılamaz.
+.
+
+6009;pop;err;01
+%2 alanının %3 yapılandırması, gelişmiş bir destekçi sertifikası gerektiriyor.
 .
 
 6010;txt;01

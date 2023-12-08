@@ -49,6 +49,7 @@
 
 void List_Process_Ids(void);
 int Terminate_All_Processes(BOOL all_boxes);
+int Unmount_All_Boxes(BOOL all_boxes);
 int Delete_All_Sandboxes();
 
 extern WCHAR *DoRunDialog(HINSTANCE hInstance);
@@ -77,6 +78,7 @@ extern "C" {
 
 
 WCHAR BoxName[BOXNAME_COUNT];
+WCHAR BoxKey[128+1];
 
 PWSTR ChildCmdLine = NULL;
 BOOL run_mail_agent = FALSE;
@@ -90,7 +92,6 @@ BOOL auto_select_default_box = FALSE;
 WCHAR *StartMenuSectionName = NULL;
 BOOL run_silent = FALSE;
 BOOL keep_alive = FALSE;
-BOOL dont_start_sbie_ctrl = FALSE;
 BOOL hide_window = FALSE;
 BOOL wait_for_process = FALSE;
 BOOLEAN layout_rtl = FALSE;
@@ -433,6 +434,10 @@ BOOL Parse_Command_Line(void)
             if (_wcsnicmp(cmd, L"open_agent:", 11) == 0) {
                 cmd += 11;
                 tmp = Eat_String(cmd);
+                if (*cmd == L'\"') {
+                    cmd++;
+                    tmp--;
+                }
                 ULONG len = ULONG(tmp - cmd) * sizeof(WCHAR);
                 memcpy((WCHAR*)&buffer[req.length], cmd, len);
                 req.length += len;
@@ -573,16 +578,6 @@ BOOL Parse_Command_Line(void)
             SetEnvironmentVariable(env_name_x, env_value_x);
 
         //
-        // Command line switch /nosbiectrl
-        //
-
-        } else if (_wcsnicmp(cmd, L"nosbiectrl", 10) == 0) {
-
-            cmd += 10;
-
-            dont_start_sbie_ctrl = TRUE;
-
-        //
         // Command line switch /reload
         //
 
@@ -603,6 +598,71 @@ BOOL Parse_Command_Line(void)
         } else if (_wcsnicmp(cmd, L"terminate", 9) == 0) {
 
             return die(Terminate_All_Processes(FALSE));
+            
+        //
+        // Command line switch /unmount, /unmount_all
+        //
+
+        } else if (_wcsnicmp(cmd, L"unmount_all", 11) == 0) {
+
+            Terminate_All_Processes(TRUE);
+            return die(Unmount_All_Boxes(TRUE));
+
+        } else if (_wcsnicmp(cmd, L"unmount", 7) == 0) {
+
+            Terminate_All_Processes(FALSE);
+            return die(Unmount_All_Boxes(FALSE));
+
+        //
+        // Command line switch /key:[box password] /mount
+        //
+
+        } else if (_wcsnicmp(cmd, L"key:", 4) == 0) {
+
+            cmd += 4;
+
+            tmp = cmd;
+
+            //
+            // parameter specifies boxkey
+            //
+
+            WCHAR end = L' ';
+            if (*tmp == L'\"') {
+                ++tmp;
+                ++cmd;
+                end = L'\"';
+            }
+
+            while (*cmd && *cmd != end) {
+                ++cmd;
+            }
+
+            if (tmp == cmd || (cmd - tmp > ARRAYSIZE(BoxKey)-1)) {
+
+                if (run_silent)
+                    ExitProcess(ERROR_UNKNOWN_PROPERTY);
+
+                SetLastError(0);
+                Show_Error(SbieDll_FormatMessage1(MSG_3202, tmp));
+                return FALSE;
+            }
+
+            memzero(BoxKey, sizeof(BoxKey));
+            wcsncpy(BoxKey, tmp, (cmd - tmp));
+
+            if (end == L'\"')
+                ++cmd;
+
+        } else if (_wcsnicmp(cmd, L"mount_protected", 15) == 0) {
+
+            Validate_Box_Name();
+            return die(SbieDll_Mount(BoxName, BoxKey, TRUE) ? EXIT_SUCCESS : EXIT_FAILURE);
+
+        } else if (_wcsnicmp(cmd, L"mount", 5) == 0) {
+
+            Validate_Box_Name();
+            return die(SbieDll_Mount(BoxName, BoxKey, FALSE) ? EXIT_SUCCESS : EXIT_FAILURE);
 
         //
         // Command line switch /listpids
@@ -996,6 +1056,33 @@ int Terminate_All_Processes(BOOL all_boxes)
 
 
 //---------------------------------------------------------------------------
+// Unmount_All_Boxes
+//---------------------------------------------------------------------------
+
+
+int Unmount_All_Boxes(BOOL all_boxes)
+{
+    if (all_boxes) {
+
+        int index = -1;
+        while (1) {
+            index = SbieApi_EnumBoxes(index, BoxName);
+            if (index == -1)
+                break;
+            SbieDll_Unmount(BoxName);
+        }
+
+    } else {
+
+        Validate_Box_Name();
+        SbieDll_Unmount(BoxName);
+    }
+
+    return EXIT_SUCCESS;
+}
+
+
+//---------------------------------------------------------------------------
 // Program_Start
 //---------------------------------------------------------------------------
 
@@ -1220,8 +1307,8 @@ int Program_Start(void)
             WCHAR *parms = Eat_String(cmdline);
             if (parms && *parms) {
 
-                WCHAR *cmd2 = MyHeapAlloc(cmdline_len * sizeof(WCHAR));
-                WCHAR *arg2 = MyHeapAlloc(cmdline_len * sizeof(WCHAR));
+                WCHAR *cmd2 = MyHeapAlloc((cmdline_len + 1) * sizeof(WCHAR));
+                WCHAR *arg2 = MyHeapAlloc((cmdline_len + 1) * sizeof(WCHAR));
 
                 wcsncpy(cmd2, cmdline, parms - cmdline);
                 cmd2[parms - cmdline] = L'\0';
@@ -1582,7 +1669,7 @@ ULONG RestartInSandbox(void)
     // build command line.  note that we pass the current directory as an
     // environment variable which will be queried by Program_Start.  this
     // is because SbieSvc ProcessServer (used by SbieDll_RunSandboxed)
-    // does not necssarily share our dos device map, and will not be able
+    // does not necessarily share our dos device map, and will not be able
     // to change to a drive letter that isn't in its dos device map
     //
 

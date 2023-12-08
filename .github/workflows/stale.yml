@@ -24,7 +24,7 @@ jobs:
         stale-pr-label: "stale"
         remove-stale-when-updated: true
         exempt-all-assignees: true
-        any-of-issue-labels: "more info needed,answered?,Fixed ???,build issue,incorrect"
-        exempt-issue-labels: "Feature request,Low priority,Regression,Stalled work,ToDo ASAP,ToDo,Work in progress,Workaround,Known issue,Bug,suggestions,help wanted"
+        any-of-issue-labels: "more info needed,answered?,Fixed ???,incorrect"
+        exempt-issue-labels: "Feature request,Low priority,Regression,Stalled work,High priority,ToDo,Work in progress,Workaround,Known issue,Bug,suggestions,help wanted,build issue"
         any-of-pr-labels: "more info needed,answered?,incorrect"
-        exempt-pr-labels: "Feature request,Low priority,dependencies,Work in progress,Stalled work,ToDo ASAP,ToDo,help wanted"
+        exempt-pr-labels: "Feature request,Low priority,dependencies,Work in progress,Stalled work,High priority,ToDo,help wanted"

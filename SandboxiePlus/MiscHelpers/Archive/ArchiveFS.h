@@ -73,8 +73,11 @@ private:
 class MISCHELPERS_EXPORT C7zFileEngineHandler : public QObject, public QAbstractFileEngineHandler
 {
 public:
-    C7zFileEngineHandler(const QString& ArchivePath, const QString& Scheme, QObject* parent = NULL);
+    C7zFileEngineHandler(const QString& Scheme, QObject* parent = NULL);
     ~C7zFileEngineHandler();
+
+    bool Open(const QString& ArchivePath);
+    void Close();
 
     bool IsOpen()       { return m_pArchive != NULL; }
     QString Prefix()    { return m_Scheme; }

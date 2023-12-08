@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------
 # SbieDrv
 #
-# Initialization errors issued to to the System event Log
+# Initialization errors issued to the System event Log
 #----------------------------------------------------------------------------
 
 1101;evt;inf;01
@@ -246,6 +246,14 @@ SBIE1314 Blocage de la demande pour modifier les paramètres du pare-feu/réseau
 SBIE1316 Requête bloquée afin de générer un évènement de périphérique dans le bac à sable
 .
 
+1317;pop;inf;02
+SBIE1317 '%2' bloqué pour une tentative d'accès au fichier du bac à sable '%3'
+.
+
+1318;pop;inf;02
+SBIE1318 '%2' bloqué pour une tentative d'accès au processus du bac à sable '%3'
+.
+
 1319;pop;inf;01
 SBIE1319 Impression vers un fichier bloquée, %2 %3
 .
@@ -358,6 +366,26 @@ SBIE2111 Le processus n'est pas accessible : %3, appel %2
 SBIE2112 Objet non accessible : %3, appel %2
 .
 
+2113;pop;inf;01
+SBIE2113 Le fichier est trop grand pour être copié dans le bac à sable, création d'un fichier vide - %2
+.
+
+2114;pop;inf;01
+SBIE2114 Le fichier est trop grand pour être copié dans le bac à sable, refus de l'accès - %2
+.
+
+2115;pop;inf;01
+SBIE2115 Le fichier est trop grand pour être copié dans le bac à sable, overture en lecture seule - %2
+.
+
+2180;pop;inf;01
+SBIE2180 LowLevel.dll erreur %2
+.
+
+2181;pop;inf;01
+SBIE2181 LowLevel.dll a échoué l'injection de SbieDll.dll dans le processus ciblé.
+.
+
 2191;pop;inf;01
 SBIE2191 %2 ne devra pas être mis à jour pendant son fonctionnement dans Sandboxie.
 .
@@ -376,6 +404,10 @@ SBIE2194 L'installeur MSI a besoin que l'option %s soit placée dans le fichier 
 
 2195;pop;inf;01
 SBIE2195 Afin de lancer Explorer.exe dans un bac à sable, l'accès à l'infrastructure COM ne doit pas être sur « Autorisé ».
+.
+
+2196;pop;inf;01
+SBIE2196 Afin de lancer l'installateur MSI en bac à sable, l'accès à l'infrastructure COM ne doit pas être sur « Autorisé ».
 .
 
 2198;pop;inf;01
@@ -490,6 +522,70 @@ SBIE2226 Le processus n'a pas pu démarrer à cause d'une élévation manquante.
 
 2227;pop;wrn;01
 SBIE2227 '%2' se situe sur un volume ne supportant pas la convention de nommage 8.3. Il se peut que des problèmes surgissent avec d'anciennes applications ou installeurs.
+.
+
+2230;pop;wrn;01
+SBIE2230 Échec du montage de la racine de %2
+.
+
+2231;pop;wrn;01
+SBIE2231 Incohérence de la cible de la jonction %2
+.
+
+2232;pop;wrn;01
+SBIE2232 Le pilote ImDisk n'est pas chargé
+.
+
+2233;pop;wrn;01
+SBIE2233 Impossible de contrôler le pilote ImDisk : %2
+.
+
+2234;pop;wrn;01
+SBIE2234 Plus de lettre de disque disponible pour le montage temporaire
+.
+
+2235;pop;wrn;01
+SBIE2235 Erreur lors de la dé-attribution de la lettre du disque temporaire : "%2"
+.
+
+2236;pop;wrn;01
+SBIE2236 %2 n'a pas pu être invoqué (est-il installé ?)
+.
+
+2237;pop;wrn;01
+SBIE2237 Échec du démontage de la racine %2
+.
+
+2238;pop;wrn;01
+SBIE2238 La taille du disque en RAM n'a pas été configurée ou est trop petite, placez RamDiskSizeKb=1048576 (1Go en kilo-octets) dans la section [GlobalSettings] du fichier ini.
+.
+
+2239;pop;wrn;01
+SBIE2239 Le dossier racine du bac à sable %2 doit être vide afin de pouvoir y monter un volume.
+.
+
+2240;pop;wrn;01
+SBIE2240 Délai dépassé lors de la tentative de montage du volume ImDisk %2
+.
+
+2241;pop;wrn;01
+SBIE2241 L'image du bac %2 n'a pas pu être ouverte
+.
+
+2242;pop;wrn;01
+SBIE2242 Échec du montage de l'image du bac, L'algorithme cryptographique n'est pas supporté
+.
+
+2243;pop;wrn;01
+SBIE2243 Échec du montage de l'image du bac, Mot de passe invalide
+.
+
+2244;pop;wrn;01
+SBIE2244 Échec du montage de l'image du bac, Mot de passe requis
+.
+
+2246;pop;wrn;01
+SBIE2246 Échec du montage de l'image du bac, Erreur ImBox %2
 .
 
 2338;pop;err;01
@@ -1208,7 +1304,15 @@ Re&charger la configuration
 .
 
 3505;txt;01
-Contribuer à Sanboxie
+Contribuer à Sandboxie
+.
+
+3506;txt;01
+Obtenir un certificat d'adhérent
+.
+
+3507;txt;01
+Appliquer un certificat d'adhérent
 .
 
 3451;txt;01
@@ -1281,6 +1385,10 @@ Passer à Sandboxie-Plus
 
 3468;txt;01
 Guide de migration de Sandboxie-Plus
+.
+
+3469;txt;01
+Dernière nouveautés de Sandboxie-Plus
 .
 
 3471;txt;01
@@ -3531,6 +3639,14 @@ Sandboxie Plus renforce la confidentialité en passant d'un mode liste noire (ac
 L'interface utilisateur de Sandboxie Classic ne prend pas en charge ce mode de fonctionnement. Bien qu'il soit possible de le configurer à l'aide du fichier ini, il est recommandé d'utiliser l'interface moderne Sandboxie-Plus (SandMan.exe) si vous souhaitez utiliser des bacs à sable à confidentialité renforcée.
 .
 
+6008;pop;err;01
+La configuration %3 du bac à sable %2 requiert un certificat d'adhérent et ne peut être utilisé sans.
+.
+
+6009;pop;err;01
+La configuration %3 du bac à sable %2 requiert un certificat d'adhérent avancé.
+.
+
 6010;txt;01
 Sandboxie est installé depuis plus de %2 jours.
 
@@ -3825,6 +3941,30 @@ La configuration par défaut dans Sandboxie fournit une protection complète, ma
 # 7987;txt;01
 # Clé de produit annulée car la commande a été remboursée.
 # .
+
+7988;txt;01
+Votre certificat d'adhérent est valide, merci :-)
+.
+
+7989;txt;01
+Votre certificat d'adhérent a expiré :'(
+.
+
+7990;txt;01
+Copiez l'entièreté du certificat d'adhérent dans le presse-papier et cliquez sur OK.
+.
+
+7991;txt;01
+Échec de l'enregistrement du certificat dans le fichier.
+.
+
+7992;txt;01
+Le certificat n'est pas valide.
+.
+
+7993;txt;01
+Le certificat est valide et a été appliqué avec succès.
+.
 
 #----------------------------------------------------------------------------
 # SandboxieInstall

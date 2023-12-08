@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2022 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -348,7 +348,7 @@ _FX BOOLEAN File_RecordRecover(HANDLE FileHandle, const WCHAR *TruePath)
     //}
 
     if (IsRecoverable != FALSE)
-        Handle_RegisterCloseHandler(FileHandle, File_NotifyRecover);
+        Handle_RegisterHandler(FileHandle, File_NotifyRecover, NULL, TRUE);
 
     return IsRecoverable == TRUE;
 }
@@ -359,7 +359,7 @@ _FX BOOLEAN File_RecordRecover(HANDLE FileHandle, const WCHAR *TruePath)
 //---------------------------------------------------------------------------
 
 
-_FX void File_NotifyRecover(HANDLE FileHandle)
+_FX void File_NotifyRecover(HANDLE FileHandle, void* CloseParams)
 {
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
@@ -585,7 +585,7 @@ _FX void File_DoAutoRecover_2(BOOLEAN force, ULONG ticks)
                 status = File_GetName(NULL, &uni, &TruePath, &CopyPath, NULL);
 
 				const WCHAR* strings[] = { Dll_BoxName, rec->path, CopyPath, NULL };
-				SbieApi_LogMsgExt(2199, strings);
+				SbieApi_LogMsgExt(-1, 2199, strings);
 			}
             List_Remove(&File_RecPaths, rec);
         }

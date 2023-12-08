@@ -40,8 +40,12 @@ public:
     ~UGlobalHotkeys();
 protected:
     #if defined(Q_OS_WIN)
-    bool winEvent (MSG * message, long * result);
+    bool winEvent (MSG * message);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    bool nativeEvent(const QByteArray &eventType, void *message, qintptr *result);
+#else
     bool nativeEvent(const QByteArray &eventType, void *message, long *result);
+#endif
     #elif defined(Q_OS_LINUX)
     bool nativeEventFilter(const QByteArray &eventType, void *message, long *result);
     bool linuxEvent(xcb_generic_event_t *message);

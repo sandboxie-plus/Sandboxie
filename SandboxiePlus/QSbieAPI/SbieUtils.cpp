@@ -16,6 +16,54 @@ typedef long NTSTATUS;
 
 #include "SbieAPI.h"
 
+template <typename T>
+__forceinline bool charIsNull(const T* v) { return *v == 0; }
+__forceinline bool charIsNull(const QChar* v) { return v->isNull(); }
+
+template <typename T>
+bool wildcmpex(const T* Wild, const T* Str)
+{
+	const T *cp = NULL, *mp = NULL;
+
+	while (!charIsNull(Str) && (*Wild != '*'))
+	{
+		if ((*Wild != *Str) && (*Wild != '?'))
+			return false;
+		Wild++;
+		Str++;
+	}
+
+	while (!charIsNull(Str))
+	{
+		if (*Wild == '*')
+		{
+			if (charIsNull(++Wild))
+				return Str;
+			mp = Wild;
+			cp = Str + 1;
+		}
+		else if ((*Wild == *Str) || (*Wild == '?'))
+		{
+			Wild++;
+			Str++;
+		}
+		else
+		{
+			Wild = mp;
+			Str = cp++;
+		}
+	}
+
+	while (*Wild == '*')
+		Wild++;
+	return charIsNull(Wild);
+}
+
+bool CSbieUtils::WildCompare(const QString& L, const QString& R)
+{
+	return wildcmpex(L.data(), R.data());
+}
+
 int GetServiceStatus(const wchar_t* name)
 {
 	SC_HANDLE scm = OpenSCManager(nullptr, nullptr, SC_MANAGER_ENUMERATE_SERVICE);
@@ -442,10 +490,8 @@ void CSbieUtils::RemoveContextMenu2()
 //////////////////////////////////////////////////////////////////////////////
 // Shortcuts
 
-bool CSbieUtils::CreateShortcut(CSbieAPI* pApi, QString LinkPath, const QString &LinkName, const QString &boxname, const QString &arguments, const QString &iconPath, int iconIndex, const QString &workdir, bool bRunElevated)
+bool CSbieUtils::CreateShortcut(const QString& StartExe, QString LinkPath, const QString &LinkName, const QString &boxname, const QString &arguments, const QString &iconPath, int iconIndex, const QString &workdir, bool bRunElevated)
 {
-	QString StartExe = pApi->GetStartPath();
-
 	QString StartArgs;
 	if (bRunElevated)
 		StartArgs += "/elevated ";
@@ -453,7 +499,7 @@ bool CSbieUtils::CreateShortcut(CSbieAPI* pApi, QString LinkPath, const QString 
 		StartArgs += "/box:" + boxname;
 	if (!arguments.isEmpty()) {
 		if (!StartArgs.isEmpty()) StartArgs += " ";
-		if(arguments.contains(" "))
+		if(arguments.contains(" ") && arguments.left(1) != "\"")
 			StartArgs += "\"" + arguments + "\"";
 		else
 			StartArgs += arguments;
@@ -475,7 +521,7 @@ bool CSbieUtils::CreateShortcut(CSbieAPI* pApi, QString LinkPath, const QString 
 		if (!workdir.isEmpty())
 			pShellLink->SetWorkingDirectory(workdir.toStdWString().c_str());
 		if (!LinkName.isEmpty()) {
-			QString desc = QString("%1 [%2]").arg(LinkName).arg(boxname.isEmpty() ? pApi->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox") : boxname);
+			QString desc = QString("%1 [%2]").arg(LinkName).arg(boxname);
 			pShellLink->SetDescription(desc.toStdWString().c_str());
 		}
 

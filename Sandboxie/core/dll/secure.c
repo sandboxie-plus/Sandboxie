@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -353,6 +354,20 @@ void Secure_InitSecurityDescriptors(void)
 #undef MyAllocAndInitSD
 #undef MyAllocAndInitACL
 #undef MyAddAccessAllowedAce
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_GetPublicSD
+//---------------------------------------------------------------------------
+
+
+_FX PSECURITY_DESCRIPTOR SbieDll_GetPublicSD()
+{
+    if (!Secure_EveryoneSD)
+        Secure_InitSecurityDescriptors();
+
+    return Secure_EveryoneSD;
 }
 
 
@@ -738,7 +753,7 @@ _FX NTSTATUS Secure_NtDuplicateObject(
             }
 
             if (SourceHandle)
-                Key_NtClose(SourceHandle);
+                Key_NtClose(SourceHandle, NULL);
         }
 
     //

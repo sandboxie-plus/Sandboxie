@@ -426,6 +426,7 @@ _FX LONG SbieApi_LogMsgEx(
 
 
 _FX LONG SbieApi_LogMsgExt(
+	ULONG session_id,
 	ULONG msgid,
 	const WCHAR** strings)
 {
@@ -446,7 +447,7 @@ _FX LONG SbieApi_LogMsgExt(
 			temp += len;
 		}
 
-		status = SbieApi_LogMsgEx(-1, msgid, buff, (USHORT)size);
+		status = SbieApi_LogMsgEx(session_id, msgid, buff, (USHORT)size);
 
 		Dll_Free(buff);
 
@@ -667,7 +668,7 @@ _FX ULONG64 SbieApi_QueryProcessInfoEx(
 
 
 _FX LONG SbieApi_QueryBoxPath(
-    const WCHAR *box_name,              // WCHAR [34]
+    const WCHAR *box_name,              // WCHAR [BOXNAME_COUNT]
     WCHAR *out_file_path,
     WCHAR *out_key_path,
     WCHAR *out_ipc_path,
@@ -828,7 +829,7 @@ _FX LONG SbieApi_QueryPathList(
 
 
 _FX LONG SbieApi_EnumProcessEx(
-    const WCHAR *box_name,          // WCHAR [34]
+    const WCHAR *box_name,          // WCHAR [BOXNAME_COUNT]
     BOOLEAN all_sessions,
     ULONG which_session,            // -1 for current session
     ULONG *boxed_pids,              // ULONG [512]
@@ -946,8 +947,9 @@ _FX LONG SbieApi_RenameFile(
 
 _FX LONG SbieApi_GetFileName(
     HANDLE FileHandle,
-    ULONG NameLen,
-    WCHAR *NameBuf)
+    WCHAR *NameBuf,
+    ULONG *NameLen,
+    ULONG *ObjType)
 {
     NTSTATUS status;
     __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
@@ -958,6 +960,7 @@ _FX LONG SbieApi_GetFileName(
     args->handle.val64            = (ULONG64)(ULONG_PTR)FileHandle;
     args->name_len.val64          = (ULONG64)(ULONG_PTR)NameLen;
     args->name_buf.val64          = (ULONG64)(ULONG_PTR)NameBuf;
+    args->type_buf.val64          = (ULONG64)(ULONG_PTR)ObjType;
     status = SbieApi_Ioctl(parms);
 
     if (! NT_SUCCESS(status)) {
@@ -1432,7 +1435,7 @@ _FX ULONG SbieApi_QueryConfNumber(
 
 _FX LONG SbieApi_EnumBoxes(
     LONG index,                     // initialize to -1
-    WCHAR *box_name)                // WCHAR [34]
+    WCHAR *box_name)                // WCHAR [BOXNAME_COUNT]
 {
     return SbieApi_EnumBoxesEx(index, box_name, FALSE);
 }
@@ -1445,7 +1448,7 @@ _FX LONG SbieApi_EnumBoxes(
 
 _FX LONG SbieApi_EnumBoxesEx(
     LONG index,                     // initialize to -1
-    WCHAR *box_name,                // WCHAR [34]
+    WCHAR *box_name,                // WCHAR [BOXNAME_COUNT]
     BOOLEAN return_all_sections)
 {
     LONG rc;
@@ -1738,7 +1741,7 @@ _FX LONG SbieApi_SessionLeader(HANDLE TokenHandle, HANDLE *ProcessId)
 
 
 _FX LONG SbieApi_IsBoxEnabled(
-    const WCHAR *box_name)          // WCHAR [34]
+    const WCHAR *box_name)          // WCHAR [BOXNAME_COUNT]
 {
     NTSTATUS status;
     __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];

@@ -418,12 +418,12 @@ _FX NTSTATUS File_MigrateFile(
 
             ULONG Cur_Ticks = GetTickCount();
             if (Next_Status < Cur_Ticks) {
-                Next_Status = Cur_Ticks + 1000; // update prgress every second
+                Next_Status = Cur_Ticks + 1000; // update progress every second
 
                 WCHAR size_str[32];
                 Sbie_snwprintf(size_str, 32, L"%I64u", file_size);
                 const WCHAR* strings[] = { Dll_BoxName, TruePath, size_str, NULL };
-                SbieApi_LogMsgExt(2198, strings);
+                SbieApi_LogMsgExt(-1, 2198, strings);
             }
         }
 
@@ -443,6 +443,115 @@ _FX NTSTATUS File_MigrateFile(
         if (IsWritePath && status == STATUS_ACCESS_DENIED)
             status = STATUS_SUCCESS;
     }
+
+    //
+    // set information on the CopyPath file
+    //
+
+    if (NT_SUCCESS(status)) {
+
+        FILE_BASIC_INFORMATION info;
+
+        info.CreationTime.QuadPart = open_info.CreationTime.QuadPart;
+        info.LastAccessTime.QuadPart = open_info.LastAccessTime.QuadPart;
+        info.LastWriteTime.QuadPart = open_info.LastWriteTime.QuadPart;
+        info.ChangeTime.QuadPart = open_info.ChangeTime.QuadPart;
+        info.FileAttributes = open_info.FileAttributes;
+
+        status = File_SetAttributes(CopyHandle, CopyPath, &info);
+    }
+
+    NtClose(TrueHandle);
+    NtClose(CopyHandle);
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
+// File_MigrateJunction
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS File_MigrateJunction(
+    const WCHAR* TruePath, const WCHAR* CopyPath,
+    BOOLEAN IsWritePath)
+{
+    NTSTATUS status;
+    HANDLE TrueHandle, CopyHandle;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING objname;
+    IO_STATUS_BLOCK IoStatusBlock;
+    FILE_NETWORK_OPEN_INFORMATION open_info;
+
+    InitializeObjectAttributes(
+        &objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, Secure_NormalSD);
+
+    //
+    // open TruePath.  if we get a sharing violation trying to open it,
+    // try to get the driver to open it bypassing share access.  if even
+    // this fails, then we can't copy the data, but can still create an
+    // empty file
+    //
+
+    RtlInitUnicodeString(&objname, TruePath);
+
+    status = __sys_NtCreateFile(
+        &TrueHandle, FILE_GENERIC_READ, &objattrs, &IoStatusBlock,
+        NULL, 0, FILE_SHARE_VALID_FLAGS,
+        FILE_OPEN, FILE_OPEN_REPARSE_POINT | FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
+
+    /*if (IsWritePath && status == STATUS_ACCESS_DENIED)
+        status = STATUS_SHARING_VIOLATION;
+
+    if (status == STATUS_SHARING_VIOLATION) {
+
+        status = SbieApi_OpenFile(&TrueHandle, TruePath);
+    }*/
+
+    if (!NT_SUCCESS(status))
+        return status;
+
+    //
+    // query attributes and size of the TruePath file
+    //
+
+    status = __sys_NtQueryInformationFile(
+        TrueHandle, &IoStatusBlock, &open_info,
+        sizeof(FILE_NETWORK_OPEN_INFORMATION), FileNetworkOpenInformation);
+
+    //
+    // Get the reparse point data from the source
+    //
+
+    BYTE buf[MAXIMUM_REPARSE_DATA_BUFFER_SIZE];  // We need a large buffer
+    REPARSE_DATA_BUFFER* reparseDataBuffer = (REPARSE_DATA_BUFFER*)buf;
+    status = __sys_NtFsControlFile(TrueHandle, NULL, NULL, NULL, &IoStatusBlock, FSCTL_GET_REPARSE_POINT, NULL, 0, reparseDataBuffer, MAXIMUM_REPARSE_DATA_BUFFER_SIZE);
+
+    if (!NT_SUCCESS(status))
+        return status;
+
+    //
+    // Create the destination file with reparse point data
+    //
+
+    RtlInitUnicodeString(&objname, CopyPath);
+
+    status = __sys_NtCreateFile(
+        &CopyHandle, FILE_GENERIC_WRITE, &objattrs, &IoStatusBlock,
+        NULL, FILE_ATTRIBUTE_NORMAL, FILE_SHARE_VALID_FLAGS,
+        FILE_CREATE, FILE_SYNCHRONOUS_IO_NONALERT | FILE_DIRECTORY_FILE | FILE_OPEN_REPARSE_POINT,
+        NULL, 0);
+
+    if (!NT_SUCCESS(status))
+        return status;
+
+    //
+    // Set the reparse point data to the destination
+    //
+
+    #define REPARSE_MOUNTPOINT_HEADER_SIZE 8
+    status = __sys_NtFsControlFile(CopyHandle, NULL, NULL, NULL, &IoStatusBlock, FSCTL_SET_REPARSE_POINT, reparseDataBuffer, REPARSE_MOUNTPOINT_HEADER_SIZE + reparseDataBuffer->ReparseDataLength, NULL, 0);
 
     //
     // set information on the CopyPath file

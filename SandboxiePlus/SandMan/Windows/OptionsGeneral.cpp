@@ -8,36 +8,43 @@
 #include "../MiscHelpers/Common/SettingsWidgets.h"
 #include "Helpers/WinAdmin.h"
 #include "Helpers/WinHelper.h"
+#include "Windows/BoxImageWindow.h"
+#include "AddonManager.h"
+#include "../../../SandboxieTools/ImBox/ImBox.h"
 
 class CCertBadge: public QLabel
 {
 public:
-	CCertBadge(QWidget* parent = NULL): QLabel(parent) 
+	CCertBadge(bool bAdvanced, QWidget* parent = NULL): QLabel(parent) 
 	{
+		m_bAdvanced = bAdvanced;
 		setPixmap(QPixmap(":/Actions/Cert.png").scaled(16, 16, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-		if (!g_CertInfo.valid) {
-			setToolTip(COptionsWindow::tr("This option requires a valid supporter certificate"));
-			setCursor(Qt::PointingHandCursor);
-		} else {
-			setToolTip(COptionsWindow::tr("Supporter exclusive option"));
-		}
+		if(bAdvanced)
+			setToolTip(COptionsWindow::tr("This option requires an active <b>advanced</b> supporter certificate"));
+		else
+			setToolTip(COptionsWindow::tr("This option requires an active supporter certificate"));
+		setCursor(Qt::PointingHandCursor);
 	}
 
 protected:
 	void mousePressEvent(QMouseEvent* event)
 	{
-		if(!g_CertInfo.valid)
+		if(m_bAdvanced && g_CertInfo.active)
+			theGUI->OpenUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-upgrade-cert"));
+		else
 			theGUI->OpenUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert"));
 	}
+	bool m_bAdvanced;
 };
 
-void COptionsWindow__AddCertIcon(QWidget* pOriginalWidget)
+void COptionsWindow__AddCertIcon(QWidget* pOriginalWidget, bool bAdvanced = false)
 {
 	QWidget* pWidget = new QWidget();
 	QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
 	pLayout->setContentsMargins(0, 0, 0, 0);
 	pLayout->setSpacing(0);
-	pLayout->addWidget(new CCertBadge());
+	pLayout->addWidget(new CCertBadge(bAdvanced));
+	pLayout->setAlignment(Qt::AlignLeft);
 	pOriginalWidget->parentWidget()->layout()->replaceWidget(pOriginalWidget, pWidget);
 	pLayout->insertWidget(0, pOriginalWidget);
 }
@@ -59,12 +66,12 @@ void COptionsWindow::CreateGeneral()
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eDefault), tr("Standard Isolation Sandbox (Default)"), (int)CSandBoxPlus::eDefault);
 	//ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eInsecure), tr("INSECURE Configuration (please change)"), (int)CSandBoxPlus::eInsecure);
 	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBoxPlus), tr("Application Compartment with Data Protection"), (int)CSandBoxPlus::eAppBoxPlus);
-	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBox), tr("Application Compartment (NO Isolation)"), (int)CSandBoxPlus::eAppBox);
+	ui.cmbBoxType->addItem(theGUI->GetBoxIcon(CSandBoxPlus::eAppBox), tr("Application Compartment"), (int)CSandBoxPlus::eAppBox);
 
 	connect(ui.lblBoxInfo, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
 
 	ui.lblSupportCert->setVisible(false);
-	if (!g_CertInfo.valid)
+	if (!g_CertInfo.active)
 	{
 		ui.lblSupportCert->setVisible(true);
 		connect(ui.lblSupportCert, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
@@ -80,12 +87,17 @@ void COptionsWindow::CreateGeneral()
 		}
 	}
 
-	if (g_Certificate.isEmpty()) {
+	if (!CERT_IS_LEVEL(g_CertInfo, eCertStandard)) {
 		QWidget* ExWidgets[] = { ui.chkSecurityMode, ui.chkLockDown, ui.chkRestrictDevices,
 			ui.chkPrivacy, ui.chkUseSpecificity,
-			ui.chkNoSecurityIsolation, ui.chkNoSecurityFiltering, ui.chkConfidential, ui.chkHostProtect, NULL };
+			ui.chkNoSecurityIsolation, ui.chkNoSecurityFiltering, ui.chkHostProtect, ui.chkRamBox, NULL };
 		for (QWidget** ExWidget = ExWidgets; *ExWidget != NULL; ExWidget++)
 			COptionsWindow__AddCertIcon(*ExWidget);
+	}
+	if (!CERT_IS_LEVEL(g_CertInfo, eCertStandard2))
+		COptionsWindow__AddCertIcon(ui.chkConfidential, true);
+	if (!CERT_IS_LEVEL(g_CertInfo, eCertAdvanced)) {
+		COptionsWindow__AddCertIcon(ui.chkEncrypt, true);
 	}
 
 
@@ -100,6 +112,7 @@ void COptionsWindow::CreateGeneral()
 
 	
 	ui.btnBorderColor->setPopupMode(QToolButton::MenuButtonPopup);
+	ui.btnBorderColor->setStyle(QStyleFactory::create("Fusion"));
 	QMenu* pColorMenu = new QMenu(this);
 
 	QWidgetAction* pActionWidget = new QWidgetAction(this);
@@ -173,6 +186,25 @@ void COptionsWindow::CreateGeneral()
 	connect(ui.chkSeparateUserFolders, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkUseVolumeSerialNumbers, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 
+	connect(ui.chkRamBox, SIGNAL(clicked(bool)), this, SLOT(OnDiskChanged()));
+	connect(ui.chkEncrypt, SIGNAL(clicked(bool)), this, SLOT(OnDiskChanged()));
+	connect(ui.btnPassword, SIGNAL(clicked(bool)), this, SLOT(OnSetPassword()));
+
+	bool bImDiskReady = theGUI->IsImDiskReady();
+	ui.lblImDisk->setVisible(!bImDiskReady);
+	connect(ui.lblImDisk, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
+	QObject::connect(theGUI->GetAddonManager(), &CAddonManager::AddonInstalled, this, [=] {
+		if (!theGUI->GetAddonManager()->GetAddon("ImDisk", CAddonManager::eInstalled).isNull()) {
+			ui.lblImDisk->setVisible(false);
+			ui.chkRamBox->setEnabled(bEmpty);
+			ui.chkEncrypt->setEnabled(bEmpty);
+			ui.lblCrypto->setEnabled(true);
+		}
+	});
+	ui.chkRamBox->setEnabled(bImDiskReady && bEmpty);
+	ui.chkEncrypt->setEnabled(bImDiskReady && bEmpty);
+	ui.lblCrypto->setEnabled(bImDiskReady);
+
 	connect(ui.txtCopyLimit, SIGNAL(textChanged(const QString&)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkCopyLimit, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
 	connect(ui.chkCopyPrompt, SIGNAL(clicked(bool)), this, SLOT(OnGeneralChanged()));
@@ -206,7 +238,7 @@ void COptionsWindow::CreateGeneral()
 
 void COptionsWindow::LoadGeneral()
 {
-	QString BoxNameTitle = m_pBox->GetText("BoxNameTitle", "n", false, true, false);
+	QString BoxNameTitle = ReadTextSafe("BoxNameTitle", "n");
 	ui.cmbBoxIndicator->setCurrentIndex(ui.cmbBoxIndicator->findData(BoxNameTitle.toLower()));
 
 	QStringList BorderCfg = m_pBox->GetText("BorderColor").split(",");
@@ -263,12 +295,7 @@ void COptionsWindow::LoadGeneral()
 
 	ui.treeRun->clear();
 	foreach(const QString& Value, m_pBox->GetTextList("RunCommand", m_Template))
-	{
-		StrPair NameCmd = Split2(Value, "|");
-		StrPair NameIcon = Split2(NameCmd.first, ",");
-		QTreeWidgetItem* pItem = new QTreeWidgetItem();
-		AddRunItem(NameIcon.first, NameIcon.second, NameCmd.second);
-	}
+		AddRunItem(ui.treeRun, GetRunEntry(Value));
 
 	QString Action = m_pBox->GetText("DblClickAction");
 	int pos = -1;
@@ -297,6 +324,24 @@ void COptionsWindow::LoadGeneral()
 	ReadGlobalCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", theAPI->GetGlobalSettings()->GetBool("SeparateUserFolders", true));
 	ReadGlobalCheck(ui.chkUseVolumeSerialNumbers, "UseVolumeSerialNumbers", theAPI->GetGlobalSettings()->GetBool("UseVolumeSerialNumbers", false));
 
+	ui.chkRamBox->setChecked(m_pBox->GetBool("UseRamDisk", false));
+	ui.chkEncrypt->setChecked(m_pBox->GetBool("UseFileImage", false));
+	if (ui.chkRamBox->isEnabled())
+		ui.chkEncrypt->setEnabled(!ui.chkRamBox->isChecked());
+	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+	if (pBoxEx && QFile::exists(pBoxEx->GetBoxImagePath())) 
+	{
+		if (!ui.btnPassword->menu()) {
+			QMenu* pCryptoMenu = new QMenu();
+			pCryptoMenu->addAction(tr("Backup Image Header"), this, SLOT(OnBackupHeader()));
+			pCryptoMenu->addAction(tr("Restore Image Header"), this, SLOT(OnRestoreHeader()));
+			ui.btnPassword->setPopupMode(QToolButton::MenuButtonPopup);
+			ui.btnPassword->setMenu(pCryptoMenu);
+		}
+		ui.btnPassword->setText(tr("Change Password"));
+	}
+	ui.btnPassword->setEnabled(!ui.chkRamBox->isChecked() && ui.chkEncrypt->isChecked() && pBoxEx && pBoxEx->GetMountRoot().isEmpty());
+
 	int iLimit = m_pBox->GetNum("CopyLimitKb", 80 * 1024);
 	ui.chkCopyLimit->setChecked(iLimit != -1);
 	ui.txtCopyLimit->setText(QString::number(iLimit > 0 ? iLimit : 80 * 1024));
@@ -307,7 +352,12 @@ void COptionsWindow::LoadGeneral()
 	
 	LoadCopyRules();
 
-	ui.chkProtectBox->setChecked(m_pBox->GetBool("NeverDelete", false));
+	if (m_pBox->GetBool("NeverDelete", false))
+		ui.chkProtectBox->setCheckState(Qt::Checked);
+	else if (m_pBox->GetBool("NeverRemove", false))
+		ui.chkProtectBox->setCheckState(Qt::PartiallyChecked);
+	else
+		ui.chkProtectBox->setCheckState(Qt::Unchecked);
 	ui.chkAutoEmpty->setChecked(m_pBox->GetBool("AutoDelete", false));
 
 	ui.chkRawDiskRead->setChecked(m_pBox->GetBool("AllowRawDiskRead", false));
@@ -320,7 +370,11 @@ void COptionsWindow::LoadGeneral()
 
 void COptionsWindow::SaveGeneral()
 {
-	WriteText("BoxNameTitle", ui.cmbBoxIndicator->currentData().toString());
+	QString BoxNameTitle = ui.cmbBoxIndicator->currentData().toString();
+	if (BoxNameTitle == "n")
+		WriteTextSafe("BoxNameTitle", "");
+	else
+		WriteTextSafe("BoxNameTitle", BoxNameTitle);
 
 	QStringList BorderCfg;
 	BorderCfg.append(QString("#%1%2%3").arg(m_BorderColor.blue(), 2, 16, QChar('0')).arg(m_BorderColor.green(), 2, 16, QChar('0')).arg(m_BorderColor.red(), 2, 16, QChar('0')));
@@ -368,14 +422,9 @@ void COptionsWindow::SaveGeneral()
 
 
 	QStringList RunCommands;
-	for (int i = 0; i < ui.treeRun->topLevelItemCount(); i++) {
-		QTreeWidgetItem* pItem = ui.treeRun->topLevelItem(i);
-		if(pItem->text(1).isEmpty())
-			RunCommands.prepend(pItem->text(0) + "|" + pItem->text(2));
-		else
-			RunCommands.prepend(pItem->text(0) + "," + pItem->text(1) + "|" + pItem->text(2));
+	for (int i = 0; i < ui.treeRun->topLevelItemCount(); i++)
+		RunCommands.prepend(MakeRunEntry(ui.treeRun->topLevelItem(i)));
 
-	}
 	//WriteTextList("RunCommand", RunCommands);
 	m_pBox->DelValue("RunCommand");
 	foreach(const QString& Value, RunCommands)
@@ -406,16 +455,34 @@ void COptionsWindow::SaveGeneral()
 
 		WriteGlobalCheck(ui.chkSeparateUserFolders, "SeparateUserFolders", true);
 		WriteGlobalCheck(ui.chkUseVolumeSerialNumbers, "UseVolumeSerialNumbers", false);
+
+		WriteAdvancedCheck(ui.chkRamBox, "UseRamDisk", "y", "");
+		WriteAdvancedCheck(ui.chkEncrypt, "UseFileImage", "y", "");
 	}
 
-	WriteText("CopyLimitKb", ui.chkCopyLimit->isChecked() ? ui.txtCopyLimit->text() : "-1");
+	int iLimit = ui.chkCopyLimit->isChecked() ? ui.txtCopyLimit->text().toInt() : -1;
+	if(iLimit != 80 * 1024)
+		WriteText("CopyLimitKb", QString::number(iLimit));
+	else
+		m_pBox->DelValue("CopyLimitKb");
+
 	WriteAdvancedCheck(ui.chkCopyPrompt, "PromptForFileMigration", "", "n");
 	WriteAdvancedCheck(ui.chkNoCopyWarn, "CopyLimitSilent", "", "y");
 	WriteAdvancedCheck(ui.chkDenyWrite, "CopyBlockDenyWrite", "y", "");
 	WriteAdvancedCheck(ui.chkNoCopyMsg, "NotifyNoCopy", "y", "");
 
-
-	WriteAdvancedCheck(ui.chkProtectBox, "NeverDelete", "y", "");
+	if (ui.chkProtectBox->checkState() == Qt::Checked) {
+		m_pBox->SetText("NeverDelete", "y");
+		m_pBox->SetText("NeverRemove", "y");
+	}
+	else if (ui.chkProtectBox->checkState() == Qt::PartiallyChecked) {
+		m_pBox->DelValue("NeverDelete");
+		m_pBox->SetText("NeverRemove", "y");
+	}
+	else {
+		m_pBox->DelValue("NeverDelete");
+		m_pBox->DelValue("NeverRemove");
+	}
 	WriteAdvancedCheck(ui.chkAutoEmpty, "AutoDelete", "y", "");
 
 	WriteAdvancedCheck(ui.chkRawDiskRead, "AllowRawDiskRead", "y", "");
@@ -713,7 +780,7 @@ void COptionsWindow::OnGeneralChanged()
 	ui.chkCopyPrompt->setEnabled(ui.chkCopyLimit->isChecked());
 	ui.chkNoCopyWarn->setEnabled(ui.chkCopyLimit->isChecked() && !ui.chkCopyPrompt->isChecked());
 
-	ui.chkAutoEmpty->setEnabled(!ui.chkProtectBox->isChecked());
+	ui.chkAutoEmpty->setEnabled(ui.chkProtectBox->checkState() != Qt::Checked);
 
 	ui.chkOpenSpooler->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityIsolation->isChecked());
 	ui.chkPrintToFile->setEnabled(!ui.chkBlockSpooler->isChecked() && !ui.chkNoSecurityFiltering->isChecked());
@@ -899,7 +966,12 @@ void COptionsWindow::OnBrowsePath()
 		return;
 
 	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
-	AddRunItem(Name, "", "\"" + (pBoxEx ? pBoxEx->MakeBoxCommand(Value) : Value) + "\"");
+	
+	QVariantMap Entry;
+	Entry["Name"] = Name;
+	Entry["Command"] = "\"" + (pBoxEx ? pBoxEx->MakeBoxCommand(Value) : Value) + "\"";
+	AddRunItem(ui.treeRun, Entry);
+
 	m_GeneralChanged = true;
 	OnOptChanged();
 }
@@ -914,18 +986,12 @@ void COptionsWindow::OnAddCommand()
 	if (Name.isEmpty())
 		return;
 
-	AddRunItem(Name, "", Value);
-	OnRunChanged();
-}
+	QVariantMap Entry;
+	Entry["Name"] = Name;
+	Entry["Command"] = Value;
+	AddRunItem(ui.treeRun, Entry);
 
-void COptionsWindow::AddRunItem(const QString& Name, const QString& Icon, const QString& Command)
-{
-	QTreeWidgetItem* pItem = new QTreeWidgetItem();
-	pItem->setText(0, Name);
-	pItem->setText(1, Icon);
-	pItem->setText(2, Command);
-	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
-	ui.treeRun->addTopLevelItem(pItem);
+	OnRunChanged();
 }
 
 void COptionsWindow::OnCommandUp()
@@ -1042,4 +1108,100 @@ void COptionsWindow::OnVmRead()
 		DelAccessEntry(eIPC, "", eReadOnly, "$:*");
 	m_AdvancedChanged = true;
 	OnOptChanged();
+}
+
+void COptionsWindow::OnDiskChanged()
+{
+	if (sender() == ui.chkEncrypt) {
+		if (ui.chkEncrypt->isChecked())
+			theGUI->CheckCertificate(this, 1);
+	}
+
+	if (ui.chkRamBox->isChecked()) {
+		ui.chkEncrypt->setEnabled(false);
+		ui.chkEncrypt->setChecked(false);
+		ui.btnPassword->setEnabled(false);
+	}
+	else {
+		ui.chkEncrypt->setEnabled(true);
+		CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+		ui.btnPassword->setEnabled(ui.chkEncrypt->isChecked() && pBoxEx && pBoxEx->GetMountRoot().isEmpty());
+	}
+	
+	OnGeneralChanged();
+}
+
+bool COptionsWindow::RunImBox(const QStringList& Arguments)
+{
+	QProcess Process;
+	Process.start(theAPI->GetSbiePath() + "\\ImBox.exe", Arguments);
+	Process.waitForFinished();
+	int ret = Process.exitCode();
+	if (ret != ERR_OK) {
+		QString Message;
+		switch (ret) {
+		case ERR_FILE_NOT_OPENED:	Message = tr("The image file does not exist"); break;
+		case ERR_WRONG_PASSWORD:    Message = tr("The password is wrong"); break;
+		default:                    Message = tr("Unexpected error: %1").arg(ret); break;
+		}
+		QMessageBox::critical(this, "Sandboxie-Plus", Message);
+		return false;
+	}
+	return true;
+}
+
+void COptionsWindow::OnSetPassword()
+{
+	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+	bool bNew = !QFile::exists(pBoxEx->GetBoxImagePath());
+	CBoxImageWindow window(bNew ? CBoxImageWindow::eNew : CBoxImageWindow::eChange, this);
+	if (bNew) window.SetImageSize(m_ImageSize);
+	if (theGUI->SafeExec(&window) == 1) {
+		m_Password = window.GetPassword();
+		if (bNew) {
+			m_ImageSize = window.GetImageSize();
+			OnGeneralChanged();
+		}
+		else {
+
+			QStringList Arguments;
+			Arguments.append("type=image");
+			Arguments.append("image=" + pBoxEx->GetBoxImagePath());
+			Arguments.append("key=" + m_Password);
+			Arguments.append("new_key=" + window.GetNewPassword());
+
+			if (RunImBox(Arguments))
+				QMessageBox::information(this, "Sandboxie-Plus", tr("Image Password Changed"));
+		}
+	}
+}
+
+void COptionsWindow::OnBackupHeader()
+{
+	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+
+	QString FileName = QFileDialog::getSaveFileName(theGUI, tr("Backup Image Header for %1").arg(m_pBox->GetName()), "", QString("Image Header File (*.hdr)")).replace("/", "\\");
+
+	QStringList Arguments;
+	Arguments.append("type=image");
+	Arguments.append("image=" + pBoxEx->GetBoxImagePath());
+	Arguments.append("backup=" + FileName);
+
+	if (RunImBox(Arguments))
+		QMessageBox::information(this, "Sandboxie-Plus", tr("Image Header Backuped"));
+}
+
+void COptionsWindow::OnRestoreHeader()
+{
+	CSandBoxPlus* pBoxEx = qobject_cast<CSandBoxPlus*>(m_pBox.data());
+
+	QString FileName = QFileDialog::getOpenFileName(theGUI, tr("Restore Image Header for %1").arg(m_pBox->GetName()), "", QString("Image Header File (*.hdr)")).replace("/", "\\");
+
+	QStringList Arguments;
+	Arguments.append("type=image");
+	Arguments.append("image=" + pBoxEx->GetBoxImagePath());
+	Arguments.append("restore=" + FileName);
+
+	if (RunImBox(Arguments))
+		QMessageBox::information(this, "Sandboxie-Plus", tr("Image Header Restored"));
 }

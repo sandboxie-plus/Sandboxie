@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -219,7 +219,7 @@ _FX HANDLE Scm_CreateWaitableTimerW(
 //---------------------------------------------------------------------------
 
 
-_FX VOID Scm_TokenCloseHandler(HANDLE Handle) 
+_FX VOID Scm_TokenCloseHandler(HANDLE Handle, void* CloseParams) 
 {
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
@@ -241,7 +241,7 @@ _FX BOOL Scm_OpenProcessToken(HANDLE ProcessHandle, DWORD DesiredAccess, PHANDLE
 
     if (NT_SUCCESS(status) && ProcessHandle == GetCurrentProcess()) {
 
-        Handle_RegisterCloseHandler(*phTokenOut, Scm_TokenCloseHandler);
+        Handle_RegisterHandler(*phTokenOut, Scm_TokenCloseHandler, NULL, FALSE);
         TlsData->scm_last_own_token = *phTokenOut;
     }
 
@@ -262,7 +262,7 @@ _FX BOOL Scm_OpenThreadToken(HANDLE ThreadHandle, DWORD DesiredAccess, BOOL Open
 
     if (NT_SUCCESS(status) && ThreadHandle == GetCurrentThread()) {
 
-        Handle_RegisterCloseHandler(*phTokenOut, Scm_TokenCloseHandler);
+        Handle_RegisterHandler(*phTokenOut, Scm_TokenCloseHandler, NULL, FALSE);
         TlsData->scm_last_own_token = *phTokenOut;
     }
 

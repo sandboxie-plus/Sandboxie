@@ -55,6 +55,7 @@ class CMyFrame : public CFrameWnd
     CPoint m_TrayPoint;
 
     BOOL m_hidden;
+    BOOL m_ShowWhatsNew;
     //BOOL m_ShowWelcome;
     BOOL m_ReSyncShortcuts;
     BOOL m_AutoRunSoftCompat;
@@ -126,6 +127,7 @@ class CMyFrame : public CFrameWnd
     afx_msg void OnCmdHelpForum();
     afx_msg void OnCmdHelpUpdate();
     afx_msg void OnCmdHelpUpgrade();
+    afx_msg void OnCmdHelpWhatsNew();
     afx_msg void OnCmdHelpMigrate();
     afx_msg void OnCmdHelpGetCert();
     afx_msg void OnCmdHelpSetCert();
@@ -161,7 +163,7 @@ class CMyFrame : public CFrameWnd
 
 public:
 
-    CMyFrame(BOOL ForceVisible, BOOL ForceSync);
+    CMyFrame(BOOL ForceVisible, BOOL ForceSync, BOOL PostSetup);
     ~CMyFrame();
 
     static CWnd *m_GettingStartedWindow;

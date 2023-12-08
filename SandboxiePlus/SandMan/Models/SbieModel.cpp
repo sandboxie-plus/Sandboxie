@@ -126,6 +126,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 	bool bVintage = theConf->GetInt("Options/ViewMode", 1) == 2;
 	if (bVintage)
 		bPlus = false;
+	bool bHideCore = theConf->GetBool("Options/HideSbieProcesses", false);
 
 	foreach(const QString& Group, Groups.keys())
 	{
@@ -179,7 +180,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 
 	foreach (const CSandBoxPtr& pBox, BoxList)
 	{
-		if (!ShowHidden && !pBox->IsEnabled())
+		if (!ShowHidden && (!pBox->IsEnabled() /*|| pBox->GetBool("IsShadow")*/))
 			continue;
 
 		QVariant ID = pBox->GetName();
@@ -219,13 +220,30 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 
 		QMap<quint32, CBoxedProcessPtr> ProcessList = pBox->GetProcessList();
 
+		if (bHideCore) {
+			for (auto I = ProcessList.begin(); I != ProcessList.end();) {
+				if (I.value()->GetFileName().indexOf(theAPI->GetSbiePath() + "\\Sandboxie", Qt::CaseInsensitive) == 0)
+					I = ProcessList.erase(I);
+				else 
+					++I;
+			}
+		}
+
 		bool inUse = Sync(pBox, pNode->Path, ProcessList, New, Old, Added);
-		bool bOpen = pBoxEx->IsOpen();
-		bool Busy = pBoxEx->IsBusy();
+		bool Busy = pBoxEx->IsBoxBusy();
 		int boxType = pBoxEx->GetType();
 		bool boxDel = pBoxEx->IsAutoDelete();
 		bool boxNoForce = pBoxEx->IsForceDisabled();
 		int boxColor = pBoxEx->GetColor();
+		SSandBoxNode::EMountState mountState = SSandBoxNode::eNone;
+		if (pBoxEx->UseRamDisk()) 
+			mountState = SSandBoxNode::eRamDisk;
+		else if (pBoxEx->UseImageFile()) {
+			if(pBoxEx->GetMountRoot().isEmpty())
+				mountState = SSandBoxNode::eUnmounted;
+			else
+				mountState = SSandBoxNode::eMounted;
+		}
 		
 		QIcon Icon;
 		QString BoxIcon = pBox->GetText("BoxIcon");
@@ -241,10 +259,17 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 				pNode->BoxIcon = BoxIcon;
 			}
 		}
-		else if (pNode->inUse != inUse || pNode->bOpen != bOpen || (pNode->busyState || Busy) || pNode->boxType != boxType || pNode->boxColor != boxColor || pNode->boxDel != boxDel || pNode->boxNoForce != boxNoForce || !pNode->BoxIcon.isEmpty())
+		else if (pNode->inUse != inUse || 
+			(pNode->busyState || Busy) || 
+			pNode->boxType != boxType || 
+			pNode->boxColor != boxColor || 
+			pNode->boxDel != boxDel || 
+			pNode->boxNoForce != boxNoForce || 
+			!pNode->BoxIcon.isEmpty() ||
+			pNode->MountState != mountState
+			)
 		{
 			pNode->inUse = inUse;
-			pNode->bOpen = bOpen;
 			pNode->boxType = boxType;
 			pNode->boxColor = boxColor;
 			pNode->boxDel = boxDel;
@@ -255,6 +280,7 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 			else
 				Icon = theGUI->GetBoxIcon(boxType, inUse);
 			pNode->BoxIcon.clear();
+			pNode->MountState = mountState;
 		}
 
 		if (!Icon.isNull()) 
@@ -268,6 +294,12 @@ QList<QVariant> CSbieModel::Sync(const QMap<QString, CSandBoxPtr>& BoxList, cons
 				{
 					if(boxNoForce)
 						Icon = theGUI->IconAddOverlay(Icon, ":/IconDFP");
+					else if(mountState == SSandBoxNode::eRamDisk)
+						Icon = theGUI->IconAddOverlay(Icon, ":/Actions/RamDisk.png");
+					else if(mountState == SSandBoxNode::eMounted)
+						Icon = theGUI->IconAddOverlay(Icon, ":/Actions/LockOpen.png");
+					else if(mountState == SSandBoxNode::eUnmounted)
+						Icon = theGUI->IconAddOverlay(Icon, ":/Actions/LockClosed.png");
 					else if (boxDel && !bVintage)
 						Icon = theGUI->IconAddOverlay(Icon, ":/Boxes/AutoDel");
 				}
@@ -398,13 +430,13 @@ bool CSbieModel::Sync(const CSandBoxPtr& pBox, const QList<QVariant>& Path, cons
 
 			if (OverlayIcons) {
 				if (pProcess->HasSystemToken())
-					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/SystemShield.png", 20);
+					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/SystemShield.png");
 				else if (pProcess->HasElevatedToken())
-					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/AdminShield.png", 20);
+					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/AdminShield.png");
 				else if (pProcess->HasAppContainerToken())
-					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/AppContainer.png", 20); // AppContainer is also Restricted
+					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/AppContainer.png"); // AppContainer is also Restricted
 				else if (pProcess->HasRestrictedToken())
-					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/Restricted.png", 20);
+					Icon = theGUI->IconAddOverlay(Icon, ":/Actions/Restricted.png");
 			}
 
 			pNode->Icon = Icon;

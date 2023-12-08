@@ -270,7 +270,19 @@ void COptionsWindow::LoadFolders()
 
 void COptionsWindow::OnFolderChanged()
 {
-	//CPathEdit* pEdit = (CPathEdit*)sender();
+	CPathEdit* pEdit = (CPathEdit*)sender();
+
+	QSharedPointer<CSbieIni> pTemplateSettings = QSharedPointer<CSbieIni>(new CSbieIni("TemplateSettings", m_pBox->GetAPI()));
+
+	QString Folder = pEdit->property("key").toString();
+	QString Test = pTemplateSettings->GetText(Folder + ":ExpectFile", "", false, true, true);
+	QString Path = pEdit->GetText();
+	if (!Test.isEmpty() && !Path.isEmpty())
+	{
+		if (!QFile::exists(Path + "\\" + Test))
+			QMessageBox::warning(this, "Sandboxie-Plus", tr("An alternate location for '%1'\nshould contain the following file:\n\n%2\n\nThe selected location does not contain this file.\nPlease select a folder which contains this file.").arg(Folder).arg(Test));
+	}
+
 	m_FoldersChanged = true;
 	OnOptChanged();
 }
@@ -292,6 +304,7 @@ void COptionsWindow::ShowFolders()
 		pEdit->SetWindowsPaths();
 		pEdit->SetDefault(pTemplateSettings->GetText(Folder, "", false, true, true));
 		pEdit->SetText(pTemplateSettings->GetText(Folder + "." + UserName));
+		pEdit->setProperty("key", Folder);
 		connect(pEdit, SIGNAL(textChanged(const QString&)), this, SLOT(OnFolderChanged()));
 		ui.treeFolders->setItemWidget(pItem, 1, pEdit);
 	}

@@ -46,11 +46,13 @@ REM IF %archPath% == Win32 (
 	copy %qtPath%\bin\Qt5Network.dll %instPath%\
 	copy %qtPath%\bin\Qt5Widgets.dll %instPath%\
 	copy %qtPath%\bin\Qt5WinExtras.dll %instPath%\
+	copy %qtPath%\bin\Qt5Qml.dll %instPath%\
 ) ELSE (
 	copy %qtPath%\bin\Qt6Core.dll %instPath%\
 	copy %qtPath%\bin\Qt6Gui.dll %instPath%\
 	copy %qtPath%\bin\Qt6Network.dll %instPath%\
 	copy %qtPath%\bin\Qt6Widgets.dll %instPath%\
+	copy %qtPath%\bin\Qt6Qml.dll %instPath%\
 )
 
 
@@ -110,6 +112,8 @@ copy /y %qtPath%\translations\qtxmlpatterns_*.qm %instPath%\translations\
 
 "C:\Program Files\7-Zip\7z.exe" a %instPath%\translations.7z %instPath%\translations\*
 rmdir /S /Q %instPath%\translations\
+
+"C:\Program Files\7-Zip\7z.exe" a %instPath%\troubleshooting.7z %~dp0..\SandboxiePlus\SandMan\Troubleshooting\*
 
 ECHO Copying Sandboxie
 
@@ -173,7 +177,10 @@ copy /y %~dp0..\Sandboxie\install\Manifest2.txt %instPath%\
 
 ECHO Copying Sandboxie Tools
 
+copy /y %~dp0..\SandboxieTools\%archPath%\Release\ImBox.exe %instPath%\
+copy /y %~dp0..\SandboxieTools\%archPath%\Release\ImBox.pdb %instPath%\
 copy /y %~dp0..\SandboxieTools\%archPath%\Release\UpdUtil.exe %instPath%\
+copy /y %~dp0..\SandboxieTools\%archPath%\Release\UpdUtil.pdb %instPath%\
 
 
 

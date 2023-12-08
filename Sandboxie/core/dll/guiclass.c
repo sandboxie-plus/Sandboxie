@@ -1092,7 +1092,7 @@ _FX BOOLEAN Gui_IsWindowAccessible(HWND hWnd)
 
         WCHAR clsnm[256];
         ULONG have_clsnm = __sys_GetClassNameW(hWnd, clsnm, 255);
-        if (! have_clsnm)
+        if (! have_clsnm && Gui_UseProxyService)
             have_clsnm = Gui_GetClassName2(hWnd, clsnm, 255, TRUE);
         if (have_clsnm) {
 

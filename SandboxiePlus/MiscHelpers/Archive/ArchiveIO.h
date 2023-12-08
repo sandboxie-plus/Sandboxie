@@ -6,8 +6,8 @@
 
 class CArchiveIO: public IOutStream, public IInStream, public CMyUnknownImp
 {
+	Z7_COM_UNKNOWN_IMP_2(IOutStream, IInStream)
 public:
-	MY_UNKNOWN_IMP2(IOutStream, IInStream)
 
 	CArchiveIO(QIODevice* pFile, QIODevice::OpenMode Mode, bool bDelete = true)
 	{
@@ -28,7 +28,7 @@ public:
 		return m_pFile->open(Mode);
 	}
 
-	STDMETHOD(Read)(void *data, UInt32 size, UInt32 *processedSize)
+	Z7_COM7F_IMF(Read(void *data, UInt32 size, UInt32 *processedSize))
 	{
 		quint64 read = m_pFile->read((char*)data, size);
 		if(read == -1)
@@ -38,7 +38,7 @@ public:
 		return S_OK;
 	}
 
-	STDMETHOD(Write)(const void *data, UInt32 size, UInt32 *processedSize)
+	Z7_COM7F_IMF(Write(const void *data, UInt32 size, UInt32 *processedSize))
 	{
 		quint64 written = m_pFile->write((const char*)data, size);
 		if(written == -1)
@@ -48,7 +48,7 @@ public:
 		return S_OK;
 	}
 
-	STDMETHOD(Seek)(Int64 offset, UInt32 seekOrigin, UInt64 *newPosition)
+	Z7_COM7F_IMF(Seek(Int64 offset, UInt32 seekOrigin, UInt64 *newPosition))
 	{
 		switch(seekOrigin)
 		{
@@ -65,12 +65,12 @@ public:
 		return S_OK;
 	}
 
-	STDMETHOD(SetSize)(UInt64 newSize)
+	Z7_COM7F_IMF(SetSize(UInt64 newSize))
 	{
 		return S_OK;
 	}
 
-	STDMETHOD(GetSize)(UInt64 *size)
+	Z7_COM7F_IMF(GetSize(UInt64 *size))
 	{
 		*size = m_pFile->size();
 		return S_OK;

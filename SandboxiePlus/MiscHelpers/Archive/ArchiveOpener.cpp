@@ -9,6 +9,12 @@ CArchiveOpener::CArchiveOpener(CArchive* pArchive)
 	m_pArchive = pArchive;
 }
 
+CArchiveOpener::~CArchiveOpener()
+{
+	foreach(CArchiveIO* pFile, m_Files)
+		delete pFile;
+}
+
 STDMETHODIMP CArchiveOpener::GetProperty(PROPID propID, PROPVARIANT *value)
 {
 	NWindows::NCOM::CPropVariant prop;
@@ -35,7 +41,9 @@ STDMETHODIMP CArchiveOpener::GetStream(const wchar_t *name, IInStream **inStream
 	QString Path = m_pArchive->GetNextPart(QString::fromStdWString(name));
 	if(QFile::exists(Path))
 	{
-		CMyComPtr<IInStream> inStreamLoc(new CArchiveIO(new QFile(Path), QIODevice::ReadOnly));
+		CArchiveIO* pFile = new CArchiveIO(new QFile(Path), QIODevice::ReadOnly);
+		m_Files.append(pFile);
+		CMyComPtr<IInStream> inStreamLoc(pFile);
 		*inStream = inStreamLoc.Detach();
 		return S_OK;
 	}

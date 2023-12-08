@@ -102,6 +102,10 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_KillOne(ULONG ProcessId);
 SBIEDLL_EXPORT  BOOLEAN SbieDll_KillAll(
     ULONG SessionId, const WCHAR *BoxName);
 
+SBIEDLL_EXPORT  BOOLEAN SbieDll_Mount(const WCHAR *BoxName, const WCHAR * BoxKey, BOOLEAN Protect);
+
+SBIEDLL_EXPORT  BOOLEAN SbieDll_Unmount(const WCHAR *BoxName);
+
 SBIEDLL_EXPORT  ULONG SbieDll_GetTokenElevationType(void);
 
 SBIEDLL_EXPORT  WCHAR *SbieDll_FormatMessage(ULONG code, const WCHAR **ins);
@@ -232,6 +236,10 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_GetSettingsForName_bool(
 SBIEDLL_EXPORT  BOOLEAN SbieDll_GetBorderColor(const WCHAR* box_name, COLORREF* color, BOOL* title, int* width);
 
 SBIEDLL_EXPORT  BOOLEAN SbieDll_IsReservedFileName(const WCHAR* name);
+
+SBIEDLL_EXPORT  PSECURITY_DESCRIPTOR SbieDll_GetPublicSD();
+
+SBIEDLL_EXPORT  const WCHAR* SbieDll_FindArgumentEnd(const WCHAR* arguments);
 
 SBIEDLL_EXPORT  void DbgPrint(const char* format, ...);
 SBIEDLL_EXPORT  void DbgTrace(const char* format, ...);

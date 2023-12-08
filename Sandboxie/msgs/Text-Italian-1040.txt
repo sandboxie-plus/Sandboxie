@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------
 # SbieDrv
 #
-# Initialization errors issued to to the System event Log
+# Initialization errors issued to the System event Log
 #----------------------------------------------------------------------------
 
 1101;evt;inf;01
@@ -384,6 +384,14 @@ SBIE2114 Il file è troppo grande per essere copiato nell'area virtuale, accesso
 
 2115;pop;inf;01
 SBIE2115 Il file è troppo grande per essere copiato nell'area virtuale, aprire in sola lettura - %2
+.
+
+2180;pop;inf;01
+SBIE2180 Errore di LowLevel.dll: %2
+.
+
+2181;pop;inf;01
+SBIE2181 Il detour di LowLevel.dll non è riuscito a caricare SbieDll.dll nel processo di destinazione.
 .
 
 2191;pop;inf;01
@@ -1331,6 +1339,10 @@ Aggiorna a Sandboxie Plus
 
 3468;txt;01
 Guida di migrazione a Sandboxie Plus
+.
+
+3469;txt;01
+Novità di Sandboxie Plus
 .
 
 3471;txt;01

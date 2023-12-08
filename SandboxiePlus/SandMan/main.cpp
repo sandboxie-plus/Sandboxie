@@ -4,7 +4,6 @@
 #include "../QSbieAPI/SbieAPI.h"
 #include "../QtSingleApp/src/qtsingleapplication.h"
 #include "../QSbieAPI/SbieUtils.h"
-//#include "../MiscHelpers/Common/qRC4.h"
 #include "../MiscHelpers/Common/Common.h"
 #include <windows.h>
 #include "./Windows/SettingsWindow.h"
@@ -23,13 +22,15 @@ int main(int argc, char *argv[])
 	*wcsrchr(szPath, L'\\') = L'\0';
 	QString AppDir = QString::fromWCharArray(szPath);
 
-	if (QFile::exists(AppDir + "\\Certificate.dat")) {
+	if (QFile::exists(AppDir + "\\Certificate.dat"))
 		CSettingsWindow::LoadCertificate(AppDir + "\\Certificate.dat");
-		g_CertInfo.business = GetArguments(g_Certificate, L'\n', L':').value("TYPE").toUpper().contains("BUSINESS");
-	}
 
+	// use AppFolder/PlusData when present, else fallback to AppFolder
+	QString ConfDir = AppDir + "\\PlusData";
+	if(!QFile::exists(ConfDir))
+		ConfDir = AppDir;
 	// use a shared setting location when used in a business environment for easier administration
-	theConf = new CSettings(AppDir, "Sandboxie-Plus", g_CertInfo.business);
+	theConf = new CSettings(ConfDir, "Sandboxie-Plus");
 
 #ifndef _DEBUG
 	InitMiniDumpWriter(QString("SandMan-v%1").arg(CSandMan::GetVersion()).toStdWString().c_str() , QString(theConf->GetConfigDir()).replace("/", "\\").toStdWString().c_str());
@@ -101,22 +102,34 @@ int main(int argc, char *argv[])
 		g_PendingMessage = "Op:" + Op;
 	}
 
-	CmdPos = Args.indexOf("/box:__ask__", Qt::CaseInsensitive);
+	CmdPos = -1;
+	for (int i = 0; i < Args.size(); i++) {
+		if (Args[i].left(5).compare("/box:", Qt::CaseInsensitive) == 0)
+			CmdPos = i;
+	}
 	if (CmdPos != -1) {
 		// Note: a escaped command ending with \" will fail and unescape "
 		//QString CommandLine;
 		//for (int i = CmdPos + 1; i < Args.count(); i++)
 		//	CommandLine += "\"" + Args[i] + "\" ";
 		//g_PendingMessage = "Run:" + CommandLine.trimmed();
-		LPWSTR ChildCmdLine = wcsstr(GetCommandLineW(), L"/box:__ask__") + 13;
+		LPWSTR cmdLine0 = wcsstr(GetCommandLineW(), L"/box:");
+		if (!cmdLine0) return -1;
+		LPWSTR cmdLine = wcschr(cmdLine0 + 5, L' ');
+		if (!cmdLine) return -2;
 
 		if (IsBoxed) {
-			ShellExecute(NULL, L"open", ChildCmdLine, NULL, NULL, SW_SHOWNORMAL);
+			ShellExecute(NULL, L"open", cmdLine + 1, NULL, NULL, SW_SHOWNORMAL);
 			return 0;
 		}
 
-		g_PendingMessage = "Run:" + QString::fromWCharArray(ChildCmdLine);
+		g_PendingMessage = "Run:" + QString::fromWCharArray(cmdLine + 1);
+
 		g_PendingMessage += "\nFrom:" + QDir::currentPath();
+
+		QString BoxName = QString::fromWCharArray(cmdLine0 + 5, cmdLine - (cmdLine0 + 5));
+		if(BoxName != "__ask__") 
+			g_PendingMessage += "\nIn:" + BoxName;
 	}
 
 	if (IsBoxed) {

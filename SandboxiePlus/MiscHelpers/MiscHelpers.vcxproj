@@ -212,7 +212,6 @@
     <ClCompile Include="Common\MultiLineInputDialog.cpp" />
     <ClCompile Include="Common\OtherFunctions.cpp" />
     <ClCompile Include="Common\PanelView.cpp" />
-    <ClCompile Include="Common\qRC4.cpp" />
     <ClCompile Include="Common\NetworkAccessManager.cpp" />
     <ClCompile Include="Common\Settings.cpp" />
     <ClCompile Include="Common\SettingsWidgets.cpp" />
@@ -270,7 +269,6 @@
     <QtMoc Include="Common\NeonEffect.h" />
     <ClInclude Include="Common\OtherFunctions.h" />
     <ClInclude Include="Common\PoolAllocator.h" />
-    <ClInclude Include="Common\qRC4.h" />
     <QtMoc Include="Common\NetworkAccessManager.h" />
     <ClInclude Include="Common\Xml.h" />
     <ClInclude Include="MiscHelpers.h" />

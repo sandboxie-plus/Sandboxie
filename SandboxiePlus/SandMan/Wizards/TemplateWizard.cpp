@@ -207,7 +207,7 @@ bool CTemplateWizard::CreateNewTemplate(CSandBox* pBox, ETemplateType Type, QWid
                         QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_Local_" + Section + "_Cookies_DirectAccess", theAPI));
                         pTemplate->SetText("Tmpl.Title", tr("Allow direct access to %1 cookies").arg(Name));
                         pTemplate->SetText("Tmpl.Class", "Local");
-                        pTemplate->AppendText("OpenFilePath", BrowserBinary + "," + ProfilePath + "*\\Cookies*");
+                        pTemplate->AppendText("OpenFilePath", BrowserBinary + "," + ProfilePath + "*\\Network\\Cookies*");
 
                         if (wizard.field("cookies").toBool() && pBox)
                             pBox->AppendText("Template", pTemplate->GetName().mid(9));
@@ -256,7 +256,10 @@ CTemplateTypePage::CTemplateTypePage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Create new Template"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    QPixmap Logo = QPixmap(theGUI->m_DarkTheme ? ":/SideLogoDM.png" : ":/SideLogo.png");
+    int Scaling = theConf->GetInt("Options/FontScaling", 100);
+    if(Scaling !=  100) Logo = Logo.scaled(Logo.width() * Scaling / 100, Logo.height() * Scaling / 100);
+    setPixmap(QWizard::WatermarkPixmap, Logo);
 
     int row = 0;
     QGridLayout *layout = new QGridLayout;
@@ -336,7 +339,7 @@ CBrowserTypePage::CBrowserTypePage(QWidget *parent)
     layout->addWidget(new QLabel(tr("Enter browser name:")), row++, 0);
     
     m_pName = new QLineEdit();
-    m_pName->setMaxLength(32);
+    m_pName->setMaxLength(32); // BOXNAME_COUNT
     m_pName->setMaximumWidth(150);
     layout->addWidget(m_pName, row++, 0, 1, 1);
     connect(m_pName, SIGNAL(textChanged(const QString&)), this, SLOT(OnNameChanged()));
@@ -934,7 +937,10 @@ CFinishTemplatePage::CFinishTemplatePage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Create Web Browser Template"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    QPixmap Logo = QPixmap(theGUI->m_DarkTheme ? ":/SideLogoDM.png" : ":/SideLogo.png");
+    int Scaling = theConf->GetInt("Options/FontScaling", 100);
+    if(Scaling !=  100) Logo = Logo.scaled(Logo.width() * Scaling / 100, Logo.height() * Scaling / 100);
+    setPixmap(QWizard::WatermarkPixmap, Logo);
 
     int row = 0;
     QGridLayout *layout = new QGridLayout;

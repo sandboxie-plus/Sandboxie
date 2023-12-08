@@ -88,7 +88,7 @@ SBIEAPI_EXPORT LONG SbieApi_LogMsgEx(
 	ULONG session_id, ULONG msgid, const WCHAR* msg_data, USHORT msg_len);
 
 SBIEAPI_EXPORT LONG SbieApi_LogMsgExt(
-	ULONG msgid, const WCHAR** strings);
+	ULONG session_id, ULONG msgid, const WCHAR** strings);
 
 SBIEAPI_EXPORT
 LONG SbieApi_GetHomePath(
@@ -256,8 +256,9 @@ LONG SbieApi_RenameFile(
 SBIEAPI_EXPORT
 LONG SbieApi_GetFileName(
     HANDLE FileHandle,
-    ULONG NameLen,
-    WCHAR *NameBuf);
+    WCHAR *NameBuf,
+    ULONG *NameLen,
+    ULONG *ObjType);
 
 //SBIEAPI_EXPORT
 LONG SbieApi_OpenFile(

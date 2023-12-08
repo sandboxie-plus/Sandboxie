@@ -228,8 +228,6 @@ typedef struct __PUBLIC_OBJECT_TYPE_INFORMATION {
 
     ULONG Reserved [22];    // reserved for internal use
 
-    BYTE  ExtraPadding[48]; // NtQueryObject often requires more space than MSDN says
-
 } PUBLIC_OBJECT_TYPE_INFORMATION, *PPUBLIC_OBJECT_TYPE_INFORMATION;
 
 __declspec(dllimport) NTSTATUS __stdcall
@@ -585,6 +583,11 @@ typedef struct _FILE_DISPOSITION_INFORMATION_EX {
 typedef struct _FILE_POSITION_INFORMATION {
     LARGE_INTEGER CurrentByteOffset;
 } FILE_POSITION_INFORMATION, *PFILE_POSITION_INFORMATION;
+
+// FileEndOfFileInformation
+typedef struct _FILE_END_OF_FILE_INFORMATION {
+  LARGE_INTEGER EndOfFile;
+} FILE_END_OF_FILE_INFORMATION, *PFILE_END_OF_FILE_INFORMATION;
 
 // FileStreamInformation
 typedef struct _FILE_STREAM_INFORMATION {

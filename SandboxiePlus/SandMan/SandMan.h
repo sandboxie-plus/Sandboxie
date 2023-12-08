@@ -6,9 +6,7 @@
 #include "../MiscHelpers/Common/TreeViewEx.h"
 #include "../MiscHelpers/Common/PanelView.h"
 #include "../MiscHelpers/Common/ProgressDialog.h"
-#include "../MiscHelpers/Common/NetworkAccessManager.h"
 #include <QTranslator>
-#include "Windows/PopUpWindow.h"
 
 #include "../version.h"
 
@@ -16,11 +14,14 @@
 //#include "../QSbieAPI/SbieAPI.h"
 #include "SbiePlusAPI.h"
 
+class CPopUpWindow;
 class CSbieView;
 class CFileView;
 class CBoxBorder;
-class CSbieTemplates;
+class CSbieTemplatesEx;
 class CTraceView;
+class CScriptManager;
+class CAddonManager;
 
 struct ToolBarAction {
 	// Identifier of action stored in ini. Empty for separator.	
@@ -41,33 +42,41 @@ public:
 	CSandMan(QWidget *parent = Q_NULLPTR);
 	virtual ~CSandMan();
 
-	CSbieTemplates*		GetCompat() { return m_SbieTemplates; }
+	CSbieTemplatesEx*	GetCompat() { return m_SbieTemplates; }
+	void				CheckCompat(QObject* receiver, const char* member);
+	CScriptManager*		GetScripts() { return m_SbieScripts; }
+	CAddonManager*		GetAddonManager() { return m_AddonManager; }
 
 	static QString		GetVersion();
+
+	bool				IsImDiskReady() const { return m_ImDiskReady; }
 
 	bool				IsWFPEnabled() const;
 
 	SB_PROGRESS			RecoverFiles(const QString& BoxName, const QList<QPair<QString, QString>>& FileList, QWidget* pParent, int Action = 0);
+	static QStringList	GetFileCheckers(const CSandBoxPtr& pBox);
 	SB_PROGRESS			CheckFiles(const QString& BoxName, const QStringList& Files);
 
 	enum EDelMode {
-		eDefault,
+		eCleanUp,
 		eAuto,
 		eForDelete
 	};
 
 	SB_STATUS			DeleteBoxContent(const CSandBoxPtr& pBox, EDelMode Mode, bool DeleteSnapshots = true);
 
-	SB_STATUS			AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait = false, const QString& InitialMsg = QString());
+	void				UpdateProcesses();
+
+	SB_STATUS			AddAsyncOp(const CSbieProgressPtr& pProgress, bool bWait = false, const QString& InitialMsg = QString(), QWidget* pParent = NULL);
 	static QString		FormatError(const SB_STATUS& Error);
-	static void			CheckResults(QList<SB_STATUS> Results, bool bAsync = false);
+	void				CheckResults(QList<SB_STATUS> Results, QWidget* pParent, bool bAsync = false);
 
 	static QIcon		GetIcon(const QString& Name, int iAction = 1);
 
 	bool				IsFullyPortable();
 
 	bool				IsShowHidden() { return m_pShowHidden && m_pShowHidden->isChecked(); }
-	bool				KeepTerminated() { return m_pKeepTerminated && m_pKeepTerminated->isChecked(); }
+	bool				KeepTerminated();
 	bool				ShowAllSessions() { return m_pShowAllSessions && m_pShowAllSessions->isChecked(); }
 	bool				IsSilentMode();
 	bool				IsDisableRecovery() {return IsSilentMode() || m_pDisableRecovery && m_pDisableRecovery->isChecked();}
@@ -75,25 +84,42 @@ public:
 	CSbieView*			GetBoxView() { return m_pBoxView; }
 	CFileView*			GetFileView() { return m_pFileView; }
 
+	QString				FormatSbieMessage(quint32 MsgCode, const QStringList& MsgData, QString ProcessName, QString* pLink = NULL);
+	QString				MakeSbieMsgLink(quint32 MsgCode, const QStringList& MsgData, QString ProcessName);
+
 	int					SafeExec(QDialog* pDialog);
 
 	bool				RunSandboxed(const QStringList& Commands, QString BoxName = QString(), const QString& WrkDir = QString());
+	SB_RESULT(quint32)	RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
+	SB_STATUS			ImBoxMount(const CSandBoxPtr& pBox, bool bAutoUnmount = false);
 
-	QIcon				GetBoxIcon(int boxType, bool inUse = false);// , bool inBusy = false);
+	void				EditIni(const QString& IniPath, bool bPlus = false);
+
+	void				UpdateDrives();
+	void				UpdateForceUSB();
+
+	QIcon				GetBoxIcon(int boxType, bool inUse = false);
 	QRgb				GetBoxColor(int boxType) { return m_BoxColors[boxType]; }
 	QIcon				GetColorIcon(QColor boxColor, bool inUse = false/*, bool bOut = false*/);
 	QIcon				MakeIconBusy(const QIcon& Icon, int Index = 0);
 	QIcon				IconAddOverlay(const QIcon& Icon, const QString& Name, int Size = 24);
 	QString				GetBoxDescription(int boxType);
 	
-	bool				CheckCertificate(QWidget* pWidget);
+	bool				CheckCertificate(QWidget* pWidget, int iType = 0);
+
+	bool				IsAlwaysOnTop() const;
 
 	void				UpdateTheme();
 	void				UpdateTitleTheme(const HWND& hwnd);
 
+	SB_STATUS			ReloadCert(QWidget* pWidget = NULL);
 	void				UpdateCertState();
 
+	void				SaveMessageLog(QIODevice* pFile);
+
 signals:
+	void				DrivesChanged();
+
 	void				CertUpdated();
 
 	void				Closed();
@@ -108,12 +134,15 @@ protected:
 	static void			RecoverFilesAsync(QPair<const CSbieProgressPtr&,QWidget*> pParam, const QString& BoxName, const QList<QPair<QString, QString>>& FileList, const QStringList& Checkers, int Action = 0);
 	static void			CheckFilesAsync(const CSbieProgressPtr& pProgress, const QString& BoxName, const QStringList &Files, const QStringList& Checkers);
 
+	void				AddLogMessage(const QDateTime& TimeStamp, const QString& Message, const QString& Link = QString());
+
 	QIcon				GetTrayIcon(bool isConnected = true, bool bSun = false);
 	QString				GetTrayText(bool isConnected = true);
 
 	void				CheckSupport();
 
 	void				closeEvent(QCloseEvent* e);
+	void				changeEvent(QEvent* e);
 
 	void				dragEnterEvent(QDragEnterEvent* e);
 	void				dropEvent(QDropEvent* e);
@@ -123,9 +152,12 @@ protected:
 	bool				m_bConnectPending;
 	bool				m_bStopPending;
 	CBoxBorder*			m_pBoxBorder;
-	CSbieTemplates*		m_SbieTemplates;
+	CSbieTemplatesEx*	m_SbieTemplates;
+
+	CScriptManager*		m_SbieScripts;
+	CAddonManager*		m_AddonManager;
 	
-	QMap<CSbieProgress*, CSbieProgressPtr> m_pAsyncProgress;
+	QMap<CSbieProgress*, QPair<CSbieProgressPtr, QPointer<QWidget>>> m_pAsyncProgress;
 
 	QStringList			m_MissingTemplates;
 
@@ -144,14 +176,17 @@ protected:
 
 	QMap<int, QRgb> m_BoxColors;
 
-	//struct SBoxIcon {
-	//	QIcon Empty;
-	//	QIcon InUse;
-	//	//QIcon Busy;
-	//};
-	//QMap<int, SBoxIcon> m_BoxIcons;
-
 	class UGlobalHotkeys* m_pHotkeyManager;
+
+	bool				m_ImDiskReady;
+
+	struct SSbieMsg {
+		QDateTime TimeStamp;
+		quint32 MsgCode;
+		QStringList MsgData; 
+		QString ProcessName;
+	};
+	QVector<SSbieMsg>	m_MessageLog;
 
 public slots:
 	void				OnBoxSelected();
@@ -170,6 +205,10 @@ public slots:
 
 	bool				OpenRecovery(const CSandBoxPtr& pBox, bool& DeleteSnapshots, bool bCloseEmpty = false);
 	class CRecoveryWindow*	ShowRecovery(const CSandBoxPtr& pBox, bool bFind = true);
+
+	void				TryFix(quint32 MsgCode, const QStringList& MsgData, const QString& ProcessName, const QString& BoxName);
+
+	void				OpenCompat();
 
 	void				UpdateSettings(bool bRebuildUI);
 	void				RebuildUI();
@@ -213,7 +252,9 @@ private slots:
 	void				OnSandBoxAction();
 	void				OnSettingsAction();
 	void				OnEmptyAll();
+	void				OnLockAll();
 	void				OnWndFinder();
+	void				OnBoxAssistant();
 	void				OnDisableForce();
 	void				OnDisableForce2();
 	void				OnDisablePopUp();
@@ -233,6 +274,8 @@ private slots:
 	void				OnEditIni();
 	void				OnReloadIni();
 	void				OnMonitoring();
+
+	void				OnSymbolStatus(const QString& Message);
 
 	void				CheckForUpdates(bool bManual = true);
 
@@ -328,6 +371,7 @@ private:
 	QAction*			m_pNewGroup;
 	QAction*			m_pImportBox;
 	QAction*			m_pEmptyAll;
+	QAction*			m_pLockAll;
 	QAction*			m_pWndFinder;
 	QAction*			m_pDisableForce;
 	QAction*			m_pDisableForce2;
@@ -347,6 +391,7 @@ private:
 	QAction*			m_pStopSvc;
 	QAction*			m_pUninstallSvc;
 	QAction*			m_pStopAll;
+	QAction*			m_pImDiskCpl;
 	QAction*			m_pUninstallAll;
 	QAction*			m_pSetupWizard;
 	QAction*			m_pExit;
@@ -380,6 +425,9 @@ private:
 	QAction*			m_pReloadIni;
 	QAction*			m_pEnableMonitoring;
 
+	//QMenu*				m_pMenuTools;
+	QAction*			m_pBoxAssistant;
+
 	QAction*			m_pSeparator;
 	QLabel*				m_pLabel;
 
@@ -396,6 +444,7 @@ private:
 	QLabel*				m_pDisabledForce;
 	QLabel*				m_pDisabledRecovery;
 	QLabel*				m_pDisabledMessages;
+	QLabel*				m_pRamDiskInfo;
 
 	// for old menu
 	QMenu*				m_pSandbox;
@@ -412,6 +461,8 @@ private:
 	bool				m_bIconBusy;
 	bool				m_bIconSun;
 	int					m_iDeletingContent;
+
+	bool				m_bOnTop;
 
 	bool				m_bExit;
 
@@ -434,9 +485,9 @@ private:
 public:
 	class COnlineUpdater*m_pUpdater;
 
+	QString				m_Language;
 	quint32				m_LanguageId;
 	bool				m_DarkTheme;
-	bool				m_FusionTheme;
 };
 
 

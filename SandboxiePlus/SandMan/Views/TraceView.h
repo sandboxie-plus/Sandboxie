@@ -43,6 +43,7 @@ protected:
 	QTreeViewEx*		m_pTreeList;
 	CStackView*			m_pStackView;
 
+	QAction*			m_pAutoScroll;
 	//QRegularExpression	m_FilterExp;
 	QString				m_FilterExp;
 	bool				m_bHighLight;
@@ -71,6 +72,8 @@ public:
 
 	void				SetEnabled(bool bSet);
 
+	static bool			SaveToFile(QIODevice* pFile);
+
 public slots:
 	void				Refresh();
 	void				Clear();
@@ -92,6 +95,8 @@ private slots:
 protected:
 	void				timerEvent(QTimerEvent* pEvent);
 	int					m_uTimerID;
+
+	static void			SaveToFileAsync(const CSbieProgressPtr& pProgress, QVector<CTraceEntryPtr> ResourceLog, QIODevice* pFile);
 
 	struct SProgInfo
 	{

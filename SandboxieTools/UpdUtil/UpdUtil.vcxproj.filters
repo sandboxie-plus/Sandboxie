@@ -33,20 +33,20 @@
     <ClInclude Include="UpdUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Common\json\JSON.h">
+    <ClInclude Include="..\Common\dirent.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\helpers.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\WebUtils.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\json\JSON.h">
       <Filter>Common\json</Filter>
     </ClInclude>
-    <ClInclude Include="Common\json\JSONValue.h">
+    <ClInclude Include="..\Common\json\JSONValue.h">
       <Filter>Common\json</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\dirent.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\helpers.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\WebUtils.h">
-      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -56,23 +56,23 @@
     <ClCompile Include="UpdUtilWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Common\json\JSON.cpp">
+    <ClCompile Include="..\Common\base64.c">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\helpers.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\verify.c">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\WebUtils.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\json\JSON.cpp">
       <Filter>Common\json</Filter>
     </ClCompile>
-    <ClCompile Include="Common\json\JSONValue.cpp">
+    <ClCompile Include="..\Common\json\JSONValue.cpp">
       <Filter>Common\json</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\verify.c">
-      <Filter>Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\base64.c">
-      <Filter>Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\helpers.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\WebUtils.cpp">
-      <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

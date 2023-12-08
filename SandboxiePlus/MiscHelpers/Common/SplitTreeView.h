@@ -112,5 +112,5 @@ private:
 	QAbstractItemModel*		m_pModel;
 	COneColumnModel*		m_pOneModel;
 
-	int						m_LockSellection;
+	int						m_LockSelection;
 };

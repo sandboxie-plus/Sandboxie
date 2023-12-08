@@ -13,7 +13,7 @@ bool TestWriteRight(const QString& Path)
 	return TestFile.remove();
 }
 
-CSettings::CSettings(const QString& AppDir, const QString& AppName, bool bShared, QMap<QString, SSetting> DefaultValues, QObject* qObject) : QObject(qObject)
+CSettings::CSettings(const QString& AppDir, const QString& AppName, QMap<QString, SSetting> DefaultValues, QObject* qObject) : QObject(qObject)
 {
 	m_ConfigDir = AppDir;
 	if (!(m_bPortable = QFile::exists(m_ConfigDir + "/" + AppName + ".ini")))
@@ -22,13 +22,9 @@ CSettings::CSettings(const QString& AppDir, const QString& AppName, bool bShared
 		if (dirs.isEmpty())
 			m_ConfigDir = QDir::homePath() + "/." + AppName;
 		//
-		// if shared is set a new ini is created in the shared location 
-		// and if present take precedence over an ini in a user location
-		// however if the only existing ini is in a user location it will be used
+		// if ini is present in the shared location it take precedence over an ini in a user location
 		//
-		else if(bShared && dirs.count() > 2 && (
-		  QFile::exists(dirs[1] + "/" + AppName + "/" + AppName + ".ini") ||
-		 !QFile::exists(dirs[0] + "/" + AppName + "/" + AppName + ".ini") ))
+		else if(dirs.count() > 2 && QFile::exists(dirs[1] + "/" + AppName + "/" + AppName + ".ini"))
 			m_ConfigDir = dirs[1] + "/" + AppName;
 		else
 			m_ConfigDir = dirs[0] + "/" + AppName;

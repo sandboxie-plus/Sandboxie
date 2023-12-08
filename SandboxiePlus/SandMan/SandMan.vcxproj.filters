@@ -49,6 +49,12 @@
     <Filter Include="Wizards">
       <UniqueIdentifier>{4bf40c7e-2ce4-4528-813c-3b48b8c56155}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{7f2e2eea-0d08-44d4-af39-01390e441438}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Issues">
+      <UniqueIdentifier>{db551bfd-c355-40b8-a6db-516e75998d94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -88,9 +94,6 @@
       <Filter>Windows</Filter>
     </ClCompile>
     <ClCompile Include="Windows\RecoveryWindow.cpp">
-      <Filter>Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="Windows\NewBoxWindow.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
     <ClCompile Include="Helpers\FindTool.cpp">
@@ -192,6 +195,39 @@
     <ClCompile Include="Views\StackView.cpp">
       <Filter>Views</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\BoxImageWindow.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Wizards\BoxAssistant.cpp">
+      <Filter>Wizards</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\BoxEngine.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\BoxObject.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\SbieObject.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\SysObject.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\IniObject.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\JSEngineExt.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="AddonManager.cpp">
+      <Filter>SandMan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SandboxieTools\Common\verify.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ScriptManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -224,6 +260,12 @@
     <ClInclude Include="Helpers\WinHelper.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\V4ScriptDebuggerApi.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomStyles.h">
+      <Filter>SandMan</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="SandMan.h">
@@ -254,9 +296,6 @@
       <Filter>Windows</Filter>
     </QtMoc>
     <QtMoc Include="Windows\RecoveryWindow.h">
-      <Filter>Windows</Filter>
-    </QtMoc>
-    <QtMoc Include="Windows\NewBoxWindow.h">
       <Filter>Windows</Filter>
     </QtMoc>
     <QtMoc Include="Models\TraceModel.h">
@@ -301,6 +340,39 @@
     <QtMoc Include="Views\StackView.h">
       <Filter>Views</Filter>
     </QtMoc>
+    <QtMoc Include="Windows\BoxImageWindow.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
+    <QtMoc Include="Wizards\BoxAssistant.h">
+      <Filter>Wizards</Filter>
+    </QtMoc>
+    <QtMoc Include="Engine\BoxEngine.h">
+      <Filter>Engine</Filter>
+    </QtMoc>
+    <QtMoc Include="Engine\BoxObject.h">
+      <Filter>Engine</Filter>
+    </QtMoc>
+    <QtMoc Include="Engine\WizardObject.h">
+      <Filter>Engine</Filter>
+    </QtMoc>
+    <QtMoc Include="Engine\SysObject.h">
+      <Filter>Engine</Filter>
+    </QtMoc>
+    <QtMoc Include="Engine\SbieObject.h">
+      <Filter>Engine</Filter>
+    </QtMoc>
+    <QtMoc Include="Engine\IniObject.h">
+      <Filter>Engine</Filter>
+    </QtMoc>
+    <QtMoc Include="Engine\JSEngineExt.h">
+      <Filter>Engine</Filter>
+    </QtMoc>
+    <QtMoc Include="AddonManager.h">
+      <Filter>SandMan</Filter>
+    </QtMoc>
+    <QtMoc Include="Engine\ScriptManager.h">
+      <Filter>Engine</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resources\SandMan.qrc">
@@ -334,10 +406,10 @@
     <QtUic Include="Forms\RecoveryWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="Forms\NewBoxWindow.ui">
+    <QtUic Include="Forms\SelectBoxWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="Forms\SelectBoxWindow.ui">
+    <QtUic Include="Forms\BoxImageWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

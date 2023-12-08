@@ -17,8 +17,7 @@ CSnapshotsWindow::CSnapshotsWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	//flags &= ~Qt::WindowCloseButtonHint;
 	setWindowFlags(flags);
 
-	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
-	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	this->setWindowFlag(Qt::WindowStaysOnTopHint, theGUI->IsAlwaysOnTop());
 
 	ui.setupUi(this);
 	this->setWindowTitle(tr("%1 - Snapshots").arg(pBox->GetName()));
@@ -137,7 +136,7 @@ void CSnapshotsWindow::UpdateSnapshot(const QModelIndex& Index)
 	QVariant ID = m_pSnapshotModel->GetItemID(Index);
 
 	OnSaveInfo();
-	m_SellectedID = ID;
+	m_SelectedID = ID;
 
 	QVariantMap BoxSnapshot = m_SnapshotMap[ID];
 
@@ -164,7 +163,7 @@ void CSnapshotsWindow::OnSaveInfo()
 		return;
 	m_SaveInfoPending = 0;
 
-	m_pBox->SetSnapshotInfo(m_SellectedID.toString(), ui.txtName->text(), ui.txtInfo->toPlainText());
+	m_pBox->SetSnapshotInfo(m_SelectedID.toString(), ui.txtName->text(), ui.txtInfo->toPlainText());
 	UpdateSnapshots();
 }
 
@@ -242,9 +241,9 @@ void CSnapshotsWindow::HandleResult(SB_PROGRESS Status)
 	if (Status.GetStatus() == OP_ASYNC)
 	{
 		connect(Status.GetValue().data(), SIGNAL(Finished()), this, SLOT(UpdateSnapshots()));
-		theGUI->AddAsyncOp(Status.GetValue());
+		theGUI->AddAsyncOp(Status.GetValue(), false, tr("Performing Snapshot operation..."), this);
 	}
 	else if (Status.IsError())
-		CSandMan::CheckResults(QList<SB_STATUS>() << Status);
+		theGUI->CheckResults(QList<SB_STATUS>() << Status, this);
 	UpdateSnapshots();
 }

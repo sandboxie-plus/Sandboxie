@@ -31,7 +31,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, bool bImmediate, QWidg
 	//setWindowState(Qt::WindowActive);
 	SetForegroundWindow((HWND)QWidget::winId());
 
-	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false) || (bImmediate && theConf->GetBool("Options/RecoveryOnTop", true));
+	bool bAlwaysOnTop = theGUI->IsAlwaysOnTop() || (bImmediate && theConf->GetBool("Options/RecoveryOnTop", true));
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
 	if (!bAlwaysOnTop) {
@@ -579,7 +579,7 @@ void CRecoveryWindow::RecoverFiles(bool bBrowse, QString RecoveryFolder)
 	if (Status.GetStatus() == OP_ASYNC)
 	{
 		connect(Status.GetValue().data(), SIGNAL(Finished()), this, SLOT(FindFiles()));
-		theGUI->AddAsyncOp(Status.GetValue());
+		theGUI->AddAsyncOp(Status.GetValue(), false, tr("Recovering File(s)..."), this);
 	}
 }
 

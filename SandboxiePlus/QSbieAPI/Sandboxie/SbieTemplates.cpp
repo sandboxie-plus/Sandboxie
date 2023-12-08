@@ -18,6 +18,7 @@
 #include "stdafx.h"
 #include "SbieTemplates.h"
 #include "../SbieAPI.h"
+#include "../SbieUtils.h"
 
 #include <ntstatus.h>
 #define WIN32_NO_STATUS
@@ -38,21 +39,114 @@ CSbieTemplates::CSbieTemplates(CSbieAPI* pAPI, QObject* paretn)
 	InitExpandPaths(true);
 }
 
-bool CSbieTemplates::RunCheck()
+void CSbieTemplates::RunCheck()
 {
 	CollectObjects();
 	CollectClasses();
 	CollectServices();
 	CollectProducts();
+
 	CollectTemplates();
 
+	QStringList Used = m_pAPI->GetGlobalSettings()->GetTextList("Template", false);
+	QStringList Rejected = m_pAPI->GetGlobalSettings()->GetTextList("TemplateReject", false);
+
+	for(QMap<QString, int>::iterator I = m_Templates.begin(); I != m_Templates.end(); ++I)
+	{
+		int Value = eNone;
+		if (Used.contains(I.key(), Qt::CaseInsensitive))
+			Value |= eEnabled;
+		if (CheckTemplate(I.key()))
+			Value |= eRequired;
+		if (Rejected.contains(I.key() , Qt::CaseInsensitive))
+			Value |= eDisabled;
+		I.value() = Value;
+	}
+}
+
+void CSbieTemplates::CollectTemplates()
+{
+	m_Templates.clear();
+
+	QStringList Templates;
+	Templates.append(GetTemplateNames("EmailReader"));
+	Templates.append(GetTemplateNames("Print"));
+	Templates.append(GetTemplateNames("Security"));
+	Templates.append(GetTemplateNames("Desktop"));
+	Templates.append(GetTemplateNames("Download"));
+	Templates.append(GetTemplateNames("Misc"));
+	Templates.append(GetTemplateNames("WebBrowser"));
+	Templates.append(GetTemplateNames("MediaPlayer"));
+	Templates.append(GetTemplateNames("TorrentClient"));
+
+	foreach(const QString& Template, Templates)
+		m_Templates.insert(Template, 0);
+}
+
+void CSbieTemplates::SetCheckResult(const QStringList& Result)
+{
+	CollectTemplates();
+
+	QStringList Used = m_pAPI->GetGlobalSettings()->GetTextList("Template", false);
+	QStringList Rejected = m_pAPI->GetGlobalSettings()->GetTextList("TemplateReject", false);
+
+	for(QMap<QString, int>::iterator I = m_Templates.begin(); I != m_Templates.end(); ++I)
+	{
+		int Value = eNone;
+		if (Used.contains(I.key(), Qt::CaseInsensitive))
+			Value |= eEnabled;
+		if (Result.contains(I.key()))
+			Value |= eRequired;
+		if (Rejected.contains(I.key() , Qt::CaseInsensitive))
+			Value |= eDisabled;
+		I.value() = Value;
+	}
+}
+
+bool CSbieTemplates::GetCheckState()
+{
 	for (QMap<QString, int>::iterator I = m_Templates.begin(); I != m_Templates.end(); ++I)
 	{
 		if ((I.value() & eRequired) != 0 && (I.value() & eConfigured) == 0)
 			return true;
 	}
-
 	return false;
+}
+
+void CSbieTemplates::Reset()
+{
+	m_Objects.clear();
+	m_Classes.clear();
+	m_Services.clear();
+	m_Products.clear();
+}
+
+QStringList CSbieTemplates::GetObjects() 
+{ 
+	if (m_Objects.isEmpty())
+		CollectObjects();
+	return m_Objects; 
+}
+
+QStringList CSbieTemplates::GetClasses() 
+{ 
+	if (m_Classes.isEmpty())
+		CollectClasses();
+	return m_Classes; 
+}
+
+QStringList CSbieTemplates::GetServices() 
+{ 
+	if (m_Services.isEmpty())
+		CollectServices();
+	return m_Services; 
+}
+
+QStringList CSbieTemplates::GetProducts() 
+{ 
+	if (m_Products.isEmpty())
+		CollectProducts();
+	return m_Products; 
 }
 
 void CSbieTemplates::CollectObjects()
@@ -127,7 +221,7 @@ void CSbieTemplates::CollectObjects()
 			if (i == 0)
 				objdirs.append(objpath);
 			else
-				m_Objects.push_back(objpath.toLower().toStdWString());
+				m_Objects.append(objpath.toLower());
 		}
 	}
 
@@ -147,7 +241,7 @@ void CSbieTemplates::CollectClasses()
 		if (clsnm[0] && wcsncmp(clsnm, L"Sandbox:", 8) != 0)
 		{
 			_wcslwr(clsnm);
-			((CSbieTemplates*)lparam)->m_Classes.push_back(clsnm);
+			((CSbieTemplates*)lparam)->m_Classes.append(QString::fromWCharArray(clsnm));
 		}
 
 		return TRUE;
@@ -177,7 +271,7 @@ void CSbieTemplates::CollectServices()
 		for (ULONG i = 0; i < num; ++i)
 		{
 			_wcslwr(info[i].lpServiceName);
-			m_Services.push_back(info[i].lpServiceName);
+			m_Services.append(QString::fromWCharArray(info[i].lpServiceName));
 		}
 
 		if (ret)
@@ -215,7 +309,7 @@ void CSbieTemplates::CollectProducts()
 			rc = RegEnumKeyEx(hkey, index, name, &name_len, NULL, NULL, NULL, NULL);
 			if (rc == 0) {
 				_wcslwr(name);
-				m_Products.push_back(name);
+				m_Products.append(QString::fromWCharArray(name));
 			}
 		}
 
@@ -261,79 +355,6 @@ QStringList CSbieTemplates::GetTemplateNames(const QString& forClass)
 	return list;
 }
 
-void CSbieTemplates::CollectTemplates()
-{
-	m_Templates.clear();
-
-	QStringList Templates;
-	Templates.append(GetTemplateNames("EmailReader"));
-	Templates.append(GetTemplateNames("Print"));
-	Templates.append(GetTemplateNames("Security"));
-	Templates.append(GetTemplateNames("Desktop"));
-	Templates.append(GetTemplateNames("Download"));
-	Templates.append(GetTemplateNames("Misc"));
-	Templates.append(GetTemplateNames("WebBrowser"));
-	Templates.append(GetTemplateNames("MediaPlayer"));
-	Templates.append(GetTemplateNames("TorrentClient"));
-
-	foreach(const QString& Template, Templates)
-		m_Templates.insert(Template, 0);
-
-	QStringList Used = m_pAPI->GetGlobalSettings()->GetTextList("Template", false);
-	QStringList Rejected = m_pAPI->GetGlobalSettings()->GetTextList("TemplateReject", false);
-
-	for(QMap<QString, int>::iterator I = m_Templates.begin(); I != m_Templates.end(); ++I)
-	{
-		int Value = eNone;
-		if (Used.contains(I.key(), Qt::CaseInsensitive))
-			Value |= eEnabled;
-		if (CheckTemplate(I.key()))
-			Value |= eRequired;
-		if (Rejected.contains(I.key() , Qt::CaseInsensitive))
-			Value |= eDisabled;
-		I.value() = Value;
-	}
-}
-
-template <typename T>
-const T* wildcmpex(const T* Wild, const T* Str)
-{
-	const T *cp = NULL, *mp = NULL;
-
-	while ((*Str) && (*Wild != '*'))
-	{
-		if ((*Wild != *Str) && (*Wild != '?'))
-			return NULL;
-		Wild++;
-		Str++;
-	}
-
-	while (*Str)
-	{
-		if (*Wild == '*')
-		{
-			if (!*++Wild)
-				return Str;
-			mp = Wild;
-			cp = Str + 1;
-		}
-		else if ((*Wild == *Str) || (*Wild == '?'))
-		{
-			Wild++;
-			Str++;
-		}
-		else
-		{
-			Wild = mp;
-			Str = cp++;
-		}
-	}
-
-	while (*Wild == '*')
-		Wild++;
-	return *Wild ? NULL : Str;
-}
-
 bool CSbieTemplates::CheckTemplate(const QString& Name)
 {
 	QSharedPointer<CSbieIni> pTemplate = QSharedPointer<CSbieIni>(new CSbieIni("Template_" + Name, m_pAPI));
@@ -345,71 +366,54 @@ bool CSbieTemplates::CheckTemplate(const QString& Name)
 	if (!(scanIpc || scanWin || scanSvc))
 		return false;
 
-	std::list<std::wstring> Keys, Files;
 	QList<QPair<QString, QString>> settings = pTemplate->GetIniSection(0, true);
 	for(QList<QPair<QString, QString>>::iterator I = settings.begin(); I != settings.end(); ++I)
 	{
 		QString setting = I->first;
-
-		std::list<std::wstring> *List = NULL;
-		if (scanIpc && setting.compare("OpenIpcPath", Qt::CaseInsensitive) == 0)
-			List = &m_Objects;
-		else if (scanSvc && setting.compare("Tmpl.ScanIpc", Qt::CaseInsensitive) == 0)
-			List = &m_Objects;
-		else if (scanWin && setting.compare("OpenWinClass", Qt::CaseInsensitive) == 0)
-			List = &m_Classes;
-		else if (scanSvc && setting.compare("Tmpl.ScanWinClass", Qt::CaseInsensitive) == 0)
-			List = &m_Classes;
-		else if (scanSvc && setting.compare("Tmpl.ScanService", Qt::CaseInsensitive) == 0)
-			List = &m_Services;
-		else if (scanSvc && setting.compare("Tmpl.ScanProduct", Qt::CaseInsensitive) == 0)
-			List = &m_Products;
-		else if (scanSvc && setting.compare("Tmpl.ScanKey", Qt::CaseInsensitive) == 0)
-			List = &Keys;
-		else if (scanSvc && setting.compare("Tmpl.ScanFile", Qt::CaseInsensitive) == 0)
-			List = &Files;
-		else
-			continue;
-
 		QString value = I->second;
-		if(!value.isEmpty())
+
+		if (scanIpc && ((setting.compare("OpenIpcPath", Qt::CaseInsensitive) == 0) || setting.compare("Tmpl.ScanIpc", Qt::CaseInsensitive) == 0))
 		{
-			if (List == &Keys) {
-				if (CheckRegistryKey(value))
-					return true;
+			if (value.compare("\\RPC Control\\epmapper") == 0)
 				continue;
-			}
-			else if (List == &Files) {
-				if (CheckFile(value))
-					return true;
+			if (value.compare("\\RPC Control\\OLE*") == 0)
 				continue;
-			}
+			if (value.compare("\\RPC Control\\LRPC*") == 0)
+				continue;
+			if (value.compare("*\\BaseNamedObjects*\\NamedBuffer*mAH*Process*API*") == 0)
+				continue;
 
+			if (CheckObjects(value))
+				return true;
+		}
+		else if (scanWin && ((setting.compare("OpenWinClass", Qt::CaseInsensitive) == 0 || setting.compare("Tmpl.ScanWinClass", Qt::CaseInsensitive) == 0)))
+		{
 			// skip to unspecific entries
-			if (List == &m_Classes)
-			{
-				if(value.left(2).compare("*:") == 0)
-					continue;
-			}
-			if (List == &m_Objects)
-			{
-				if (value.compare("\\RPC Control\\epmapper") == 0)
-					continue;
-				if (value.compare("\\RPC Control\\OLE*") == 0)
-					continue;
-				if (value.compare("\\RPC Control\\LRPC*") == 0)
-					continue;
-				if (value.compare("*\\BaseNamedObjects*\\NamedBuffer*mAH*Process*API*") == 0)
-					continue;
-			}
-			//
+			if(value.left(2).compare("*:") == 0)
+				continue;
 
-			std::wstring wild = value.toLower().toStdWString();
-			for (std::list<std::wstring>::iterator I = List->begin(); I != List->end(); ++I)
-			{
-				if (wildcmpex(wild.c_str(), I->c_str()) != NULL)
-					return true;
-			}
+			if (CheckClasses(value))
+				return true;
+		}
+		else if (scanSvc && setting.compare("Tmpl.ScanService", Qt::CaseInsensitive) == 0)
+		{
+			if (CheckServices(value))
+				return true;
+		}
+		else if (scanSvc && setting.compare("Tmpl.ScanProduct", Qt::CaseInsensitive) == 0)
+		{
+			if (CheckProducts(value))
+				return true;
+		}
+		else if (scanSvc && setting.compare("Tmpl.ScanKey", Qt::CaseInsensitive) == 0)
+		{
+			if (CheckRegistryKey(value))
+				return true;
+		}
+		else if (scanSvc && setting.compare("Tmpl.ScanFile", Qt::CaseInsensitive) == 0)
+		{
+			if (CheckFile(ExpandPath(value)))
+				return true;
 		}
 	}
 
@@ -437,9 +441,53 @@ bool CSbieTemplates::CheckRegistryKey(const QString& Value)
 
 bool CSbieTemplates::CheckFile(const QString& Value)
 {
-	std::wstring path = ExpandPath(Value).toStdWString();
+	std::wstring path = Value.toStdWString();
 	if (GetFileAttributes(path.c_str()) != INVALID_FILE_ATTRIBUTES)
 		return true;
+	return false;
+}
+
+bool CSbieTemplates::CheckClasses(const QString& value)
+{
+	QString Value = value.toLower();
+	for (auto I = m_Classes.begin(); I != m_Classes.end(); ++I)
+	{
+		if (CSbieUtils::WildCompare(Value, *I))
+			return true;
+	}
+	return false;
+}
+
+bool CSbieTemplates::CheckServices(const QString& value)
+{
+	QString Value = value.toLower();
+	for (auto I = m_Services.begin(); I != m_Services.end(); ++I)
+	{
+		if (CSbieUtils::WildCompare(Value, *I))
+			return true;
+	}
+	return false;
+}
+
+bool CSbieTemplates::CheckProducts(const QString& value)
+{
+	QString Value = value.toLower();
+	for (auto I = m_Products.begin(); I != m_Products.end(); ++I)
+	{
+		if (CSbieUtils::WildCompare(Value, *I))
+			return true;
+	}
+	return false;
+}
+
+bool CSbieTemplates::CheckObjects(const QString& value)
+{
+	QString Value = value.toLower();
+	for (auto I = m_Objects.begin(); I != m_Objects.end(); ++I)
+	{
+		if (CSbieUtils::WildCompare(Value, *I))
+			return true;
+	}
 	return false;
 }
 

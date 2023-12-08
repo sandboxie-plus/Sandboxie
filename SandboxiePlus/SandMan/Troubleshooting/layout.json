@@ -1,0 +1,63 @@
+{
+    "entries": [
+        {
+            "description": "Description Text...",
+            "group": "root",
+            "icon": "Warning",
+            "id": "current",
+            "name": "Fix current issues",
+            "type": "group"
+        },
+        {
+            "description": "Description Text...",
+            "group": "root",
+            "icon": "Sandbox",
+            "id": "sandboxing",
+            "name": "Fix issues with sandboxing",
+            "type": "group",
+            "class": "sandboxing"
+        },
+        {
+            "description": "Description Text...",
+            "group": "sandboxing",
+            "id": "apps",
+            "name": "An Application does not work properly when sandboxed",
+            "type": "list"
+        },
+        {
+            "group": "sandboxing",
+            "id": "installer"
+        },
+        {
+            "group": "apps",
+            "id": "application",
+            "bold": true
+        },
+        {
+            "description": "Description Text...",
+            "group": "sandboxing",
+            "id": "browser",
+            "name": "Issues with a web browser",
+            "type": "group",
+            "class": "sandboxing"
+        },
+        {
+            "description": "Description Text...",
+            "group": "root",
+            "icon": "Maintenance",
+            "id": "maintenance",
+            "name": "Perform Sandbox maintenance",
+            "type": "group"
+        },
+        {
+            "description": "Description Text...",
+            "group": "root",
+            "icon": "Interface",
+            "id": "ui",
+            "name": "Fix issues with the UI or Shell",
+            "type": "group",
+            "class": "ui"
+        }
+    ],
+    "version": 1
+}

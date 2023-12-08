@@ -8,6 +8,20 @@
 
 #ifdef USE_7Z
 
+#define ERR_7Z_OK					0
+#define ERR_7Z_NO_INTERFACE			1
+#define ERR_7Z_ALREADY_OPEN			2
+#define ERR_7Z_FILE_NOT_EXIST		3
+#define ERR_7Z_OPEN_FAILED			4
+#define ERR_7Z_PASSWORD_REQUIRED	5
+#define ERR_7Z_UNSUPPORTED_FORMAT	6
+
+struct SCompressParams
+{
+	int iLevel = 0;
+	bool bSolid = false;
+};
+
 class MISCHELPERS_EXPORT CArchive
 {
 public:
@@ -26,7 +40,7 @@ public:
 	bool						Extract(QMap<int, QIODevice*> *FileList, bool bDelete = true);
 	bool						Close();
 
-	bool						Update(QMap<int, QIODevice*> *FileList, bool bDelete = true, int Level = 0);
+	bool						Update(QMap<int, QIODevice*> *FileList, bool bDelete = true, const SCompressParams* Params = NULL);
 
 	int							AddFile(QString Path);
 	int							FileCount()								{return m_Files.count();}
@@ -50,7 +64,7 @@ protected:
 
 	QString						GetNextPart(QString FileName);
 
-	virtual void				LogError(const QString &Error) {}
+	virtual void				LogError(const QString& Error);
 
 	friend class CArchiveOpener;
 	friend class CArchiveExtractor;

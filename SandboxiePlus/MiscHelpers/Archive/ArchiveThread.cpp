@@ -91,7 +91,7 @@ C7zWorker::C7zWorker(const QString &ArchivePath, const QString &WorkingPath, con
 
 	if(QFile::exists(ArchivePath))
 	{
-		if(!Open())
+		if(Open() != ERR_7Z_OK)
 			m_Errors.append("Open Failed");
 	}
 }
@@ -106,7 +106,7 @@ QMap<QString, quint64> C7zWorker::GetFileList()
 	QMap<QString, quint64> FileList;
 	if(!m_Mutex.tryLock(100))
 	{
-		//LogLine(LOG_DEBUG | LOG_ERROR, tr("atempted to get the file list of a already busy archive thread"));
+		//LogLine(LOG_DEBUG | LOG_ERROR, tr("attempted to get the file list of an already busy archive thread"));
 		return FileList;
 	}
 	
@@ -259,7 +259,7 @@ QMap<QString, quint64> CRarWorker::GetFileList()
 	QMap<QString, quint64> FileList;
 	if(!m_Mutex.tryLock(100))
 	{
-		//LogLine(LOG_DEBUG | LOG_ERROR, tr("atempted to get the file list of a already busy archive thread"));
+		//LogLine(LOG_DEBUG | LOG_ERROR, tr("attempted to get the file list of an already busy archive thread"));
 		return FileList;
 	}
 	

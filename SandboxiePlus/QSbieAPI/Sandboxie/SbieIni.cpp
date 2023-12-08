@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (c) 2020, David Xanatos
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -104,7 +104,7 @@ __int64 CSbieIni::GetNum64(const QString& Setting, __int64 Default, bool bWithGl
 {
 	QString StrValue = GetText(Setting, QString(), bWithGlobal, true, withTemplates);
 	bool ok;
-	__int64 Value = StrValue.toULongLong(&ok);
+	__int64 Value = StrValue.toLongLong(&ok);
 	if (!ok) return Default;
 	return Value;
 }
@@ -315,7 +315,7 @@ do_write:
 	}
 
 do_delete:
-	// Selete ini section
+	// Delete ini section
 	if (deleteOld)
 	{
 		SB_STATUS Status = m_pAPI->SbieIniSet(m_Name, "*", "", CSbieAPI::eIniUpdate, true);

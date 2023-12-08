@@ -3,6 +3,8 @@
 #define UPDATE_DOMAIN		"sandboxie-plus.com"
 
 #define UPDATE_FILE			"update.json"
+#define ADDONS_FILE			"addons.json"
+#define ADDONS_PATH			"\\addons\\"
 
 
 #define SCOPE_CORE_FILES	L"32\\SbieDll.dll\0"\
@@ -33,5 +35,11 @@
 #define ERROR_EXEC			(-8)
 #define ERROR_CANCELED		(-9)
 #define ERROR_INTERNAL		(-10)	// internal error, should not happen
+#define ERROR_NO_ADDON		(-11)	// addon not found
+#define ERROR_NO_ADDON2		(-12)	// no addon for this platform or framework
+#define ERROR_BAD_ADDON		(-13)
+#define ERROR_BAD_ADDON2	(-14)
+#define ERROR_DELETE		(-15)
+#define ERROR_GET_CERT		(-16)
 
 

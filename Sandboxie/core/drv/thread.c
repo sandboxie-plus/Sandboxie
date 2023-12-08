@@ -1239,6 +1239,9 @@ _FX ACCESS_MASK Thread_CheckObject_CommonEx(
                                 protect_process = FALSE;
                         }
 
+                        if (protect_process && cur_pid == proc2->starter_id && !proc2->initialized)
+                            protect_process = FALSE;
+
                         if (protect_process) {
 
                             if (Conf_Get_Boolean(proc2->box->name, L"NotifyBoxProtected", 0, FALSE)) {

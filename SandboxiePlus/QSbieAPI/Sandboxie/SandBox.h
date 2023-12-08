@@ -46,14 +46,16 @@ public:
 	virtual QString					GetFileRoot() const { return m_FilePath; }
 	virtual QString					GetRegRoot() const { return m_RegPath; }
 	virtual QString					GetIpcRoot() const { return m_IpcPath; }
+	virtual QString					GetMountRoot() const { return m_Mount; }
 
 	virtual QMap<quint32, CBoxedProcessPtr>	GetProcessList() const { return m_ProcessList; }
 
 	virtual int						GetActiveProcessCount() const { return m_ActiveProcessCount; }
 
-	virtual SB_STATUS				RunStart(const QString& Command, bool Elevated = false, const QString& WorkingDir = QString());
+	virtual SB_STATUS				RunStart(const QString& Command, bool Elevated = false);
 	virtual SB_STATUS				RunSandboxed(const QString& Command);
 	virtual SB_STATUS				TerminateAll();
+	virtual SB_STATUS				SetSuspendedAll(bool bSuspended);
 
 	virtual void					OpenBox() {}
 	virtual void					CloseBox() {}
@@ -77,6 +79,11 @@ public:
 	virtual SB_PROGRESS				SelectSnapshot(const QString& ID);
 	virtual SB_STATUS				SetSnapshotInfo(const QString& ID, const QString& Name, const QString& Description = QString());
 
+	// Mount Manager
+	virtual SB_STATUS				ImBoxCreate(quint64 uSizeKb, const QString& Password = QString());
+	virtual SB_STATUS				ImBoxMount(const QString& Password = QString(), bool bProtect = false, bool bAutoUnmount = false);
+	virtual SB_STATUS				ImBoxUnmount();
+
 	class CSbieAPI*					Api() { return m_pAPI; }
 
 protected:
@@ -86,11 +93,12 @@ protected:
 	static void						CleanBoxAsync(const CSbieProgressPtr& pProgress, const QStringList& BoxFolders);
 
 	static void						DeleteSnapshotAsync(const CSbieProgressPtr& pProgress, const QString& BoxPath, const QString& ID);
-	static void						MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QString& BoxPath, const QString& TargetID, const QString& SourceID);
+	static void						MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QString& BoxPath, const QString& TargetID, const QString& SourceID, const QPair<const QString, class CSbieAPI*>& params);
 
 	QString							m_FilePath;
 	QString							m_RegPath;
 	QString							m_IpcPath;
+	QString							m_Mount;
 	
 	bool							m_IsEnabled;
 	

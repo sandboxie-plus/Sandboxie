@@ -90,10 +90,10 @@ ULONG64 Dll_ProcessFlags = 0;
 #ifndef _WIN64
 BOOLEAN Dll_IsWow64 = FALSE;
 #endif
-#ifdef _M_X64
+#ifdef _M_ARM64EC
 BOOLEAN Dll_IsArm64ec = FALSE;
 #endif
-#ifndef _M_ARM64
+#ifndef _WIN64
 BOOLEAN Dll_IsXtAjit = FALSE;
 #endif
 BOOLEAN Dll_IsSystemSid = FALSE;
@@ -367,8 +367,8 @@ _FX void Dll_InitInjected(void)
   //
   //      //
   //      // instead of using a separate namespace
-  //		// just replace all \ with _ and use it as a sufix rather then an actual path
-  //      // similarly a its done for named pipes already
+  //		// just replace all \ with _ and use it as a suffix rather then an actual path
+  //      // similar to what is done for named pipes already
   //      // this approach can help to reduce the footprint when running in portable mode
   //      // alternatively we could create volatile entries under AppContainerNamedObjects 
   //      //
@@ -772,45 +772,19 @@ _FX void Dll_SelectImageType(void)
 //---------------------------------------------------------------------------
 
 
-_FX ULONG_PTR Dll_Ordinal1(
-    ULONG_PTR arg1, ULONG_PTR arg2, ULONG_PTR arg3,
-    ULONG_PTR arg4, ULONG_PTR arg5)
+_FX VOID Dll_Ordinal1(INJECT_DATA * inject)
 {
-    typedef ULONG_PTR (*P_RtlFindActivationContextSectionString)(
-                    ULONG_PTR arg1, ULONG_PTR arg2, ULONG_PTR arg3,
-                    ULONG_PTR arg4, ULONG_PTR arg5);
-    P_RtlFindActivationContextSectionString RtlFindActCtx;
-
-#if defined(_M_ARM64) || defined(_M_ARM64EC)
-    //
-    // on ARM64 we hook LdrLoadDll instead, using the prototype for 
-    // RtlFindActCtx is fine though as arguments 1-8 are passed in registers
-    // so if we set x4 or not does not matter in the least
-    //
-#endif
-
-    INJECT_DATA *inject;
-    SBIELOW_DATA *data;
-    ULONG dummy_prot;
+    SBIELOW_DATA *data = (SBIELOW_DATA *)inject->sbielow_data;
     BOOLEAN bHostInject = FALSE;
-        
-    extern HANDLE SbieApi_DeviceHandle;
-
-    //
-    // this code is invoked from our RtlFindActivationContextSectionString
-    // hook in core/low/entry.asm, with a parameter that points to the
-    // syscall/inject data area.  the first ULONG64 in this data area
-    // includes a pointer to the SbieLow data area
-    // 
-
-    inject = (struct _INJECT_DATA *)arg1;
-
-    data = (SBIELOW_DATA *)inject->sbielow_data;
 
     SbieApi_data = data;
 #ifdef _M_ARM64EC
+    // get the pointer to sys_call_list in the SYS_CALL_DATA struct
     SbieApi_SyscallPtr = (ULONG*)((ULONG64)data->syscall_data + sizeof(ULONG) + sizeof(ULONG) + (NATIVE_FUNCTION_SIZE * NATIVE_FUNCTION_COUNT));
 #endif
+
+    extern HANDLE SbieApi_DeviceHandle;
+    SbieApi_DeviceHandle = (HANDLE)data->api_device_handle;
 
     //
     // the SbieLow data area includes values that are useful to us
@@ -820,37 +794,14 @@ _FX ULONG_PTR Dll_Ordinal1(
     bHostInject = data->flags.bHostInject == 1;
 
 #ifndef _WIN64
-    Dll_IsWow64 = data->flags.is_wow64 == 1;
+    Dll_IsWow64 = data->flags.is_wow64 == 1; // x86 on x64 or arm64
 #endif
-#ifdef _M_X64
-    Dll_IsArm64ec = data->flags.is_arm64ec == 1;
+#ifdef _M_ARM64EC
+    Dll_IsArm64ec = data->flags.is_arm64ec == 1; // x64 on arm64
 #endif
-#ifndef _M_ARM64
-    Dll_IsXtAjit = data->flags.is_xtajit == 1;
+#ifndef _WIN64
+    Dll_IsXtAjit = data->flags.is_xtajit == 1; // x86 on arm64
 #endif
-
-    SbieApi_DeviceHandle = (HANDLE)data->api_device_handle;
-
-    //
-    // our RtlFindActivationContextSectionString hook already restored
-    // the original bytes, but we should still restore the page protection
-    //
-
-    VirtualProtect((void *)(ULONG_PTR)inject->RtlFindActCtx, 5,
-                   inject->RtlFindActCtx_Protect, &dummy_prot);
-
-    arg1 = (ULONG_PTR)inject->RtlFindActCtx_SavedArg1;
-
-    RtlFindActCtx = (P_RtlFindActivationContextSectionString)
-                                                    inject->RtlFindActCtx;
-
-    //
-    // make sbielow_data read only, as it contsins required
-    // nt dll function copies it must stay executive
-    //
-
-    VirtualProtect((void *)data, sizeof(SBIELOW_DATA),
-                   PAGE_EXECUTE_READ, &dummy_prot);
 
 
     if (!bHostInject)
@@ -883,7 +834,7 @@ _FX ULONG_PTR Dll_Ordinal1(
 
         int MustRestartProcess = 0;
         if (Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB) {
-            if (!SbieApi_QueryConfBool(NULL, L"NoRestartOnPAC", FALSE))
+            if (!SbieApi_QueryConfBool(NULL, L"NoRestartOnPCA", FALSE))
                 MustRestartProcess = 1;
         }
 
@@ -905,7 +856,7 @@ _FX ULONG_PTR Dll_Ordinal1(
         }
 
         //
-        // explorer needs sandboxed COM show warning and terminate when COM is not sandboxies
+        // explorer needs sandboxed COM to show a warning and terminate when COM is not sandboxed
         //
 
         if (Dll_ImageType == DLL_IMAGE_SHELL_EXPLORER && SbieDll_IsOpenCOM()) {
@@ -928,25 +879,6 @@ _FX ULONG_PTR Dll_Ordinal1(
     {
         Ldr_Inject_Init(TRUE);
     }
-	
-    //
-    // free the syscall/inject data area which is no longer needed
-    //
-
-#ifdef _M_ARM64EC
-    SbieApi_SyscallPtr = NULL;
-#endif
-    VirtualFree(inject, 0, MEM_RELEASE);
-
-    
-    //
-    // conclude the detour by passing control back to the original
-    // RtlFindActivationContextSectionString.  the detour code used
-    // jump rather than call to invoke this function (see entry.asm)
-    // so RtlFindActivationContextSectionString returns to its caller
-    //
-
-    return RtlFindActCtx(arg1, arg2, arg3, arg4, arg5);
 }
 
 

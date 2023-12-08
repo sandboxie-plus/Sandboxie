@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2021-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -755,6 +756,8 @@ BOOL Hook_Service_Control_Manager(void)
 
 BOOL Service_Start_ServiceMain(WCHAR *SvcName, const WCHAR *SvcDllName, const UCHAR *SvcProcName, BOOL UseMyStartServiceCtrlDispatcher)
 {
+    static const WCHAR *ServiceName_EnvVar =
+        L"00000000_" SBIE L"_SERVICE_NAME";
     HMODULE dll;
     LPSERVICE_MAIN_FUNCTION ServiceMain;
     ULONG table_len;
@@ -785,7 +788,7 @@ BOOL Service_Start_ServiceMain(WCHAR *SvcName, const WCHAR *SvcDllName, const UC
     table[0].lpServiceName = SvcName;
     table[0].lpServiceProc = ServiceMain;
 
-
+    SetEnvironmentVariable(ServiceName_EnvVar, SvcName);
 
     if (UseMyStartServiceCtrlDispatcher) {
         PROCESS_DATA *myData;

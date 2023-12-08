@@ -2,7 +2,6 @@
 #include "PopUpWindow.h"
 #include <windows.h>
 #include <QWindow>
-#include "SandMan.h"
 #include "../MiscHelpers/Common/Common.h"
 #include "../MiscHelpers/Common/Settings.h"
 #include "../SbiePlusAPI.h"
@@ -143,10 +142,28 @@ void CPopUpWindow::timerEvent(QTimerEvent* pEvent)
 	}
 }
 
-void CPopUpWindow::AddLogMessage(const QString& Message, quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId)
+void CPopUpWindow::AddLogMessage(quint32 MsgCode, const QStringList& MsgData, quint32 ProcessId)
 {
 	if (IsMessageHidden(MsgCode, MsgData))
 		return;
+
+	CBoxedProcessPtr pProcess;
+	QString ProcessName;
+	QString BoxName;
+	if (ProcessId == 4)
+		ProcessName = "System";
+	else {
+		pProcess = theAPI->GetProcessById(ProcessId);
+		if (!pProcess.isNull()) {
+			ProcessName = pProcess->GetProcessName();
+			BoxName = pProcess->GetBoxName();
+		}
+		else
+			ProcessName = QString("PID %1").arg(ProcessId);
+	}
+
+	QString Message = theGUI->FormatSbieMessage(MsgCode, MsgData, ProcessName);
+	QString Link = theGUI->MakeSbieMsgLink(MsgCode, MsgData, ProcessName);
 
 	int RowCounter = ui.table->rowCount();
 	if (RowCounter > 0) {
@@ -157,14 +174,13 @@ void CPopUpWindow::AddLogMessage(const QString& Message, quint32 MsgCode, const 
 		}
 	}
 
-	CPopUpMessage* pEntry = new CPopUpMessage(Message, MsgCode, MsgData, this);
+	CPopUpMessage* pEntry = new CPopUpMessage(Message, Link, MsgCode, MsgData, ProcessName, BoxName, this);
 	QObject::connect(pEntry, SIGNAL(Dismiss()), this, SLOT(OnDismissMessage()));
 	QObject::connect(pEntry, SIGNAL(Hide()), this, SLOT(OnHideMessage()));
 	AddEntry(pEntry);
 
 	if ((MsgCode & 0xFFFF) == 1319) // Blocked spooler print to file
 	{
-		CBoxedProcessPtr pProcess = theAPI->GetProcessById(ProcessId);
 		if (pProcess.isNull() || pProcess->IsTerminated())
 			return;
 
@@ -348,7 +364,7 @@ void CPopUpWindow::AddFileToRecover(const QString& FilePath, QString BoxPath, co
 	if (BoxPath.isEmpty()) // legacy case, no BoxName, no support for driver serial numbers
 		BoxPath = theAPI->GetBoxedPath(pBox->GetName(), FilePath);
 
-	CPopUpRecovery* pEntry = new CPopUpRecovery(Message, FilePath, BoxPath, pBox->GetName(), this);
+	CPopUpRecovery* pEntry = new CPopUpRecovery(Message, FilePath, theAPI->GetBoxedPath(pBox.data(), FilePath), pBox->GetName(), this);
 
 	QStringList RecoverTargets = theAPI->GetUserSettings()->GetTextList("SbieCtrl_RecoverTarget", true);
 	pEntry->m_pTarget->insertItems(pEntry->m_pTarget->count()-1, RecoverTargets);

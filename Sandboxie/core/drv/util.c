@@ -377,15 +377,17 @@ _FX BOOLEAN MyIsCallerSigned(void)
 // MyValidateCertificate
 //---------------------------------------------------------------------------
 
-BOOLEAN Driver_Certified = FALSE;
-
 NTSTATUS KphValidateCertificate();
+
+extern wchar_t g_uuid_str[40];
+void InitFwUuid();
 
 _FX NTSTATUS MyValidateCertificate(void)
 {
-    NTSTATUS status = KphValidateCertificate();
+    if(!*g_uuid_str)
+        InitFwUuid();
 
-    Driver_Certified = NT_SUCCESS(status);
+    NTSTATUS status = KphValidateCertificate();
 
     if (status == STATUS_ACCOUNT_EXPIRED)
         status = STATUS_SUCCESS;

@@ -147,6 +147,7 @@ BEGIN_MESSAGE_MAP(CMyFrame, CFrameWnd)
     ON_COMMAND(ID_HELP_FORUM,                   OnCmdHelpForum)
     ON_COMMAND(ID_HELP_UPDATE,                  OnCmdHelpUpdate)
     ON_COMMAND(ID_HELP_UPGRADE,                 OnCmdHelpUpgrade)
+    ON_COMMAND(ID_HELP_WHATSNEW,                OnCmdHelpWhatsNew)
     ON_COMMAND(ID_HELP_MIGRATION,               OnCmdHelpMigrate)
     ON_COMMAND(ID_HELP_GET_CERT,                OnCmdHelpGetCert)
     ON_COMMAND(ID_HELP_SET_CERT,                OnCmdHelpSetCert)
@@ -196,7 +197,7 @@ IMPLEMENT_MENUXP(CMyFrame, CFrameWnd)
 //---------------------------------------------------------------------------
 
 
-CMyFrame::CMyFrame(BOOL ForceVisible, BOOL ForceSync)
+CMyFrame::CMyFrame(BOOL ForceVisible, BOOL ForceSync, BOOL PostSetup)
 {
     m_mondlg = NULL;
     m_msgdlg = NULL;
@@ -204,6 +205,7 @@ CMyFrame::CMyFrame(BOOL ForceVisible, BOOL ForceSync)
     m_view = m_view_old = 0;
     m_hidden = FALSE;
 
+    m_ShowWhatsNew = PostSetup;
     //CUserSettings::GetInstance().GetBool(_ShowWelcome, m_ShowWelcome, TRUE);
     CUserSettings::GetInstance().GetBool(_AlwaysOnTop, m_AlwaysOnTop, FALSE);
 
@@ -998,6 +1000,7 @@ void CMyFrame::OnCmdHelpSupport()
 	CRunBrowser x(this, L"https://sandboxie-plus.com/go.php?to=donate");
 }
 
+
 //---------------------------------------------------------------------------
 // OnCmdHelpContribution
 //---------------------------------------------------------------------------
@@ -1008,6 +1011,7 @@ void CMyFrame::OnCmdHelpContribution()
 	CRunBrowser x(this, L"https://sandboxie-plus.com/go.php?to=sbie-contribute");
 }
 
+
 //---------------------------------------------------------------------------
 // OnCmdHelpTopics
 //---------------------------------------------------------------------------
@@ -1017,6 +1021,7 @@ void CMyFrame::OnCmdHelpTopics()
 {
     CRunBrowser::OpenHelp(this, L"HelpTopics");
 }
+
 
 //---------------------------------------------------------------------------
 // OnCmdHelpTutorial
@@ -1039,7 +1044,7 @@ void CMyFrame::OnCmdHelpTutorial()
 
 void CMyFrame::OnCmdHelpForum()
 {
-    CRunBrowser::OpenForum(this);
+    CRunBrowser x(this, L"https://sandboxie-plus.com/go.php?to=sbie-forum");
 }
 
 //---------------------------------------------------------------------------
@@ -1063,6 +1068,33 @@ void CMyFrame::OnCmdHelpUpgrade()
 	CRunBrowser x(this, L"https://sandboxie-plus.com/go.php?to=sbie-plus&tip=upgrade");
 }
 
+
+//---------------------------------------------------------------------------
+// OnCmdHelpWhatsNew
+//---------------------------------------------------------------------------
+
+extern "C" void OpenWebView(const WCHAR * url, const WCHAR * title);
+
+void CMyFrame::OnCmdHelpWhatsNew()
+{
+    CString url;
+    url.Format(L"https://sandboxie-plus.com/go.php?to=sbie-whatsnew&language=%d&version=%S", SbieDll_GetLanguage(NULL), MY_VERSION_STRING);
+
+    WCHAR path[MAX_PATH];
+    GetModuleFileName(NULL, path, sizeof(path) / sizeof(WCHAR) - 4);
+    WCHAR* ptr = wcsrchr(path, L'\\');
+    if (ptr) ptr[1] = L'\0';
+    CString file = CString(path) + L"whatsnew.html";
+    if (PathFileExists(file)) {
+        file.Replace(L"\\", L"/");
+        url = L"file:///" + file;
+    }
+
+    CMyMsg text(MSG_3469);
+    OpenWebView(url, text);
+}
+
+
 //---------------------------------------------------------------------------
 // OnCmdHelpMigrate
 //---------------------------------------------------------------------------
@@ -1073,6 +1105,15 @@ void CMyFrame::OnCmdHelpMigrate()
 {
     CString url;
     url.Format(L"https://sandboxie-plus.com/go.php?to=sbie-migration&language=%d", SbieDll_GetLanguage(NULL));
+
+    /*WCHAR path[MAX_PATH];
+    GetModuleFileName(NULL, path, sizeof(path) / sizeof(WCHAR) - 4);
+    WCHAR* ptr = wcsrchr(path, L'\\');
+    if (ptr) ptr[1] = L'\0';
+    CString url = L"file:///" + CString(path);
+    url.Replace(L"\\", L"/");
+    url.Append(L"static/plus-migration.html");*/
+
     CMyMsg text(MSG_3468);
     OpenWebView(url, text);
 }
@@ -2104,6 +2145,18 @@ void CMyFrame::OnTimer(UINT_PTR nIDEvent)
             CGettingStartedWizard wizard(this);
             return;
         }*/
+
+        //
+        // show what's new
+        //
+
+        if (m_ShowWhatsNew && (! inModalState)) {
+
+            m_ShowWhatsNew = FALSE;
+
+            OnCmdHelpWhatsNew();
+            return;
+        }
 
         //
         // resync shortcuts?  usually Sandboxie Control does not resync

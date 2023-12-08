@@ -78,6 +78,14 @@ SBIE2114 File is too large to copy into sandbox, denying access - %2
 SBIE2115 File is too large to copy into sandbox, opening in read only - %2
 .
 
+2180;pop;inf;01
+SBIE2180 LowLevel.dll error %2
+.
+
+2181;pop;inf;01
+SBIE2181 LowLevel.dll detour failed to load SbieDll.dll into target process.
+.
+
 2194;pop;inf;01
 SBIE2194 MSI installer requires %2 option to be set in the ini, what however weakens the isolation.
 .
@@ -124,6 +132,70 @@ SBIE2226 Process failed to start due to missing elevation, to resolve add "Apply
 
 2227;pop;wrn;01
 SBIE2227 '%2' is located on a volume which does not support 8.3 naming. This can cause issues with older applications and installers.
+.
+
+2230;pop;wrn;01
+SBIE2230 Failed to mount root for %2
+.
+
+2231;pop;wrn;01
+SBIE2231 Junction Target mismatch %2
+.
+
+2232;pop;wrn;01
+SBIE2232 The ImDisk Driver is not loaded
+.
+
+2233;pop;wrn;01
+SBIE2233 Cannot control the ImDisk Driver: %2
+.
+
+2234;pop;wrn;01
+SBIE2234 No free Drive letter found for temporary mount
+.
+
+2235;pop;wrn;01
+SBIE2235 Error undefining temporary drive letter: "%2"
+.
+
+2236;pop;wrn;01
+SBIE2236 %2 could not be invoked (perhaps it is not installed?)
+.
+
+2237;pop;wrn;01
+SBIE2237 Failed to unmount root %2
+.
+
+2238;pop;wrn;01
+SBIE2238 Ram Disk size is not configured, or to small, set RamDiskSizeKb=1048576 (1GB in Kilobytes) in the [GlobalSettings] ini section.
+.
+
+2239;pop;wrn;01
+SBIE2239 The root folder of sandbox %2 must be empty in order to mount a volume to it.
+.
+
+2240;pop;wrn;01
+SBIE2240 Timeout when trying to mount ImDisk volume %2
+.
+
+2241;pop;wrn;01
+SBIE2241 Box image file %2 could not be opened
+.
+
+2242;pop;wrn;01
+SBIE2242 Failed to mount box image, The specified cipher is not supported
+.
+
+2243;pop;wrn;01
+SBIE2243 Failed to mount box image, Wrong password
+.
+
+2244;pop;wrn;01
+SBIE2244 Failed to mount box image, Password required
+.
+
+2246;pop;wrn;01
+SBIE2246 Failed to mount box image, ImBox error %2
 .
 
 2302;pop;err;01
@@ -253,6 +325,10 @@ Upgrade to Sandboxie-Plus
 
 3468;txt;01
 Sandboxie-Plus Migration Guide
+.
+
+3469;txt;01
+What's new in Sandboxie-Plus
 .
 
 3484;txt;01
@@ -629,9 +705,17 @@ If you would prefer to use a UI to control these options, please upgrade to Sand
 .
 
 6007;txt;01
-Sandboxie Plus offers enhanced privacy protection by switching the old behavior from a black-list mode, i.e. allowing read access to the entire drive, except blocked by Closed Path or Write Path, to a white-list mode where sandboxed programs are only allowed to read generic system locations and read access to most user data must be first explicitly granted.
+Sandboxie Plus offers enhanced privacy protection by switching the old behavior from a black-list mode, i.e., allowing read access to the entire drive, except blocked by Closed Path or Write Path, to a white-list mode where sandboxed programs are only allowed to read generic system locations and read access to most user data must be first explicitly granted.
 
 The legacy UI of Sandboxie classic does not implement support for this mode of operation. Although it can be configured using the ini file, it is recommended to use the modern Sandboxie-Plus UI (SandMan.exe) if you want to use privacy enhanced boxes.
+.
+
+6008;pop;err;01
+The configuration %3 of box %2 requires a supporter certificate and can not be used without it.
+.
+
+6009;pop;err;01
+The configuration %3 of box %2 requires an advanced supporter certificate.
 .
 
 6010;txt;01

@@ -21,9 +21,9 @@ HEADERS += ./stdafx.h \
     ./Helpers/FullScreen.h \
     ./Helpers/WinAdmin.h \
     ./Helpers/WinHelper.h \
+    ./Helpers/StorageInfo.h \
     ./Helpers/ReadDirectoryChanges.h \
     ./Helpers/ReadDirectoryChangesPrivate.h \
-    ./Windows/NewBoxWindow.h \
     ./Windows/RecoveryWindow.h \
     ./Windows/PopUpWindow.h \
     ./Windows/SnapshotsWindow.h \
@@ -34,9 +34,24 @@ HEADERS += ./stdafx.h \
     ./OnlineUpdater.h \
     ./Wizards/NewBoxWizard.h \
     ./Wizards/TemplateWizard.h \
-    ./Wizards/SetupWizard.h
+    ./Wizards/SetupWizard.h \
+    ./Wizards/BoxAssistant.h \
+    ./Windows/BoxImageWindow.h \
+    ./Windows/CompressDialog.h \
+    ./Engine/BoxEngine.h \
+    ./Engine/ScriptManager.h \
+    ./Engine/BoxObject.h \
+    ./Engine/IniObject.h \
+    ./Engine/SbieObject.h \
+    ./Engine/SysObject.h \
+    ./Engine/V4ScriptDebuggerApi.h \
+    ./Engine/JSEngineExt.h \
+    ./Engine/WizardObject.h \
+    ./CustomStyles.h \
+    ./AddonManager.h
 
 SOURCES += ./main.cpp \
+    ../../SandboxieTools/Common/verify.c \
     ./stdafx.cpp \
     ./SandMan.cpp \
     ./SbiePlusAPI.cpp \
@@ -55,10 +70,10 @@ SOURCES += ./main.cpp \
     ./Helpers/FullScreen.cpp \
     ./Helpers/WinAdmin.cpp \
     ./Helpers/WinHelper.cpp \
+    ./Helpers/StorageInfo.cpp \
     ./Helpers/ReadDirectoryChanges.cpp \
     ./Helpers/ReadDirectoryChangesPrivate.cpp \
     ./Helpers/WindowFromPointEx.cpp \
-    ./Windows/NewBoxWindow.cpp \
     ./Windows/OptionsWindow.cpp \
     ./Windows/PopUpWindow.cpp \
     ./Windows/RecoveryWindow.cpp \
@@ -69,15 +84,27 @@ SOURCES += ./main.cpp \
     ./OnlineUpdater.cpp \
     ./Wizards/NewBoxWizard.cpp \
     ./Wizards/TemplateWizard.cpp \
-    ./Wizards/SetupWizard.cpp
+    ./Wizards/SetupWizard.cpp \
+    ./Wizards/BoxAssistant.cpp \
+    ./Windows/BoxImageWindow.cpp \
+    ./Windows/CompressDialog.cpp \
+    ./Engine/BoxEngine.cpp \
+    ./Engine/ScriptManager.cpp \
+    ./Engine/BoxObject.cpp \
+    ./Engine/IniObject.cpp \
+    ./Engine/SbieObject.cpp \
+    ./Engine/JSEngineExt.cpp \
+    ./Engine/SysObject.cpp \
+    ./AddonManager.cpp
 
-FORMS += ./Forms/NewBoxWindow.ui \
+FORMS += ./Forms/SelectBoxWindow.ui \
     ./Forms/OptionsWindow.ui \
     ./Forms/PopUpWindow.ui \
     ./Forms/RecoveryWindow.ui \
     ./Forms/SettingsWindow.ui \
     ./Forms/SnapshotsWindow.ui \
-    ./Forms/SelectBoxWindow.ui
+    ./Forms/BoxImageWindow.ui \
+    ./Forms/CompressDialog.ui
 
 TRANSLATIONS += sandman_de.ts \
     sandman_en.ts \

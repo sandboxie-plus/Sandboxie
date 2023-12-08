@@ -11,7 +11,9 @@ class QSBIEAPI_EXPORT CSbieTemplates : public QObject
 public:
 	CSbieTemplates(class CSbieAPI* pAPI, QObject* paretn = 0);
 
-	bool RunCheck();
+	virtual void RunCheck();
+	virtual void SetCheckResult(const QStringList& Result);
+	virtual bool GetCheckState();
 
 	enum EStates
 	{
@@ -22,7 +24,23 @@ public:
 		eConfigured = eEnabled | eDisabled
 	};
 
+	virtual void Reset();
+
+	QStringList GetObjects();
+	QStringList GetClasses();
+	QStringList GetServices();
+	QStringList GetProducts();
 	QMap<QString, int> GetTemplates() { return m_Templates; }
+
+
+	QString ExpandPath(QString path);
+
+	bool CheckRegistryKey(const QString& Value);
+	bool CheckFile(const QString& Value);
+	bool CheckClasses(const QString& Value);
+    bool CheckServices(const QString& Value);
+    bool CheckProducts(const QString& Value);
+    bool CheckObjects(const QString& Value);
 
 protected:
 	void CollectObjects();
@@ -34,16 +52,13 @@ protected:
 	QStringList GetTemplateNames(const QString& forClass);
 
 	bool CheckTemplate(const QString& Name);
-	bool CheckRegistryKey(const QString& Value);
-	bool CheckFile(const QString& Value);
 
 	void InitExpandPaths(bool WithUser);
-	QString ExpandPath(QString path);
 
-	std::list<std::wstring> m_Objects;
-	std::list<std::wstring> m_Classes;
-	std::list<std::wstring> m_Services;
-	std::list<std::wstring> m_Products;
+	QStringList m_Objects;
+	QStringList m_Classes;
+	QStringList m_Services;
+	QStringList m_Products;
 
 	QMap<QString, int> m_Templates;
 

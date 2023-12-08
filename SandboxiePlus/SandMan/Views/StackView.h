@@ -25,6 +25,7 @@ public slots:
 	//void					OnMenu(const QPoint &point);
 
 	void					SetFilter(const QRegularExpression& Exp, bool bHighLight = false, int Col = -1); // -1 = any
+	void					SetFilter(const QString& Exp, int iOptions = 0, int Col = -1); // -1 = any
 
 protected:
 	//virtual void				OnMenu(const QPoint& Point);

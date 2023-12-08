@@ -6,6 +6,7 @@
 #include "../MiscHelpers/Common/TreeItemModel.h"
 #include "../MiscHelpers/Common/OtherFunctions.h"
 #include "../QSbieAPI/SbieUtils.h"
+#include "../Windows/SettingsWindow.h"
 
 CFileView::CFileView(QWidget *parent)
 	: QWidget(parent)
@@ -175,7 +176,7 @@ int openShellContextMenu(const QStringList& Files, void* parentWindow, const CSa
         //details.aKeys = NULL;
         SHCreateDefaultContextMenu(&details, IID_IContextMenu, reinterpret_cast<LPVOID*>(&pContextMenu));
     }
-    if (!SUCCEEDED(!pContextMenu))
+    if (!pContextMenu)
         return 0;
 
     HMENU hMenu = CreatePopupMenu();
@@ -198,7 +199,8 @@ int openShellContextMenu(const QStringList& Files, void* parentWindow, const CSa
                 QString FoundPin;
                 QString FileName = Files.first();
                 foreach(const QString & RunOption, RunOptions) {
-		            QString CmdFile = pBoxPlus->GetCommandFile(Split2(RunOption, "|").second);
+		            QVariantMap Entry = GetRunEntry(RunOption);
+		            QString CmdFile = pBoxPlus->GetCommandFile(Entry["Command"].toString());
 		            if(CmdFile.compare(FileName, Qt::CaseInsensitive) == 0) {
                         FoundPin = RunOption;
                         break;
@@ -219,7 +221,7 @@ int openShellContextMenu(const QStringList& Files, void* parentWindow, const CSa
         std::wstring Str3 = CFileView::tr("Recover to Same Folder").toStdWString();
         addItemToShellContextMenu(hMenu, Str3.c_str(), MENU_RECOVER);
         
-        if (!pBox->GetTextList("OnFileRecovery", true, false, true).isEmpty()) {
+        if (!CSandMan::GetFileCheckers(pBox).isEmpty()) {
             std::wstring Str4 = CFileView::tr("Run Recovery Checks").toStdWString();
             addItemToShellContextMenu(hMenu, Str4.c_str(), MENU_CHECK_FILE);
         }
@@ -354,7 +356,8 @@ void CFileView::OnFileMenu(const QPoint&)
 			if (Path.isEmpty())
 				return;
 
-			CSbieUtils::CreateShortcut(theAPI, Path, LinkName, BoxName, LinkPath, LinkPath);
+            QString StartExe = theAPI->GetSbiePath() + "\\SandMan.exe";
+			CSbieUtils::CreateShortcut(StartExe, Path, LinkName, BoxName, LinkPath, LinkPath);
 
             break;
         }
@@ -387,8 +390,7 @@ CFileBrowserWindow::CFileBrowserWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	//flags &= ~Qt::WindowCloseButtonHint;
 	setWindowFlags(flags);
 
-	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
-	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	this->setWindowFlag(Qt::WindowStaysOnTopHint, theGUI->IsAlwaysOnTop());
 
     m_pMainLayout = new QGridLayout(this);
     m_FileView = new CFileView();

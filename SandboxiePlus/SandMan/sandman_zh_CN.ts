@@ -1330,7 +1330,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
     <message>
         <location filename="OnlineUpdater.cpp" line="598"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;是否前往&lt;a href=&quot;%1&quot;&gt;下载页面&lt;/a&gt;？&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="607"/>
@@ -5562,12 +5562,12 @@ Error: %1</source>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1402"/>
         <source>Supporter certificate required for access</source>
-        <translation type="unfinished"></translation>
+        <translation>需要赞助者凭据进行访问</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1417"/>
         <source>Supporter certificate required for automation</source>
-        <translation type="unfinished"></translation>
+        <translation>需要赞助者凭据进行自动化动作</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1820"/>
@@ -8601,7 +8601,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
         <location filename="Forms/SettingsWindow.ui" line="1725"/>
         <source>Incremental Updates</source>
         <oldsource>Version Updates</oldsource>
-        <translation type="unfinished">待更新版本：</translation>
+        <translation>增量更新</translation>
     </message>
     <message>
         <source>New full versions from the selected release channel.</source>
@@ -9163,12 +9163,12 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1776"/>
         <source>New full installers from the selected release channel.</source>
-        <translation type="unfinished"></translation>
+        <translation>所选发布频道的完整的安装程序。</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1779"/>
         <source>Full Upgrades</source>
-        <translation type="unfinished"></translation>
+        <translation>完整更新</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1786"/>

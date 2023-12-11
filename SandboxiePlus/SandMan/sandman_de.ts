@@ -1173,13 +1173,9 @@ Sie können %USER% verwenden, um für jeden Benutzer die Sandbox in einem eigene
         <translation>&lt;p&gt;Möchten Sie die Updates runterladen?&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;update page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;Möchten Sie zur &lt;a href=&quot;%1&quot;&gt;Updateseite&lt;/a&gt; gehen?&lt;/p&gt;</translation>
-    </message>
-    <message>
         <location filename="OnlineUpdater.cpp" line="598"/>
         <source>&lt;p&gt;Do you want to go to the &lt;a href=&quot;%1&quot;&gt;download page&lt;/a&gt;?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Möchten Sie zur &lt;a href=&quot;%1&quot;&gt;Downloadseite&lt;/a&gt; gehen?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="OnlineUpdater.cpp" line="607"/>
@@ -5150,12 +5146,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1402"/>
         <source>Supporter certificate required for access</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterstützerzertifikat notwendig für Zugriff</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1417"/>
         <source>Supporter certificate required for automation</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterstützerzertifikat notwendig zur Automatisierung</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1820"/>
@@ -5317,10 +5313,6 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <source>Home</source>
         <translatorcomment>Certificate type: a translation could lead to confusion.</translatorcomment>
         <translation>Home</translation>
-    </message>
-    <message>
-        <source>Supporter certificate required</source>
-        <translation type="vanished">Unterstützerzertifikat notwendig</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1827"/>
@@ -8185,12 +8177,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1725"/>
         <source>Incremental Updates</source>
-        <oldsource>Version Updates</oldsource>
-        <translation type="unfinished">Versionsupdates</translation>
-    </message>
-    <message>
-        <source>New full versions from the selected release channel.</source>
-        <translation type="vanished">Neue vollständige Versionen aus dem ausgewählten Veröffentlichungskanal beziehen.</translation>
+        <translation>Inkrementelle Updates</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1722"/>
@@ -8201,10 +8188,6 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <location filename="Forms/SettingsWindow.ui" line="1732"/>
         <source>The preview channel contains the latest GitHub pre-releases.</source>
         <translation>Der Vorschaukanal enthält die aktuellsten GitHub-Vorabveröffentlichungen.</translation>
-    </message>
-    <message>
-        <source>New Versions</source>
-        <translation type="vanished">Neue Versionen</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1823"/>
@@ -8677,12 +8660,12 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1776"/>
         <source>New full installers from the selected release channel.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue vollständige Installer aus dem ausgewählten Veröffentlichungskanal.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1779"/>
         <source>Full Upgrades</source>
-        <translation type="unfinished"></translation>
+        <translation>Vollständige Upgrades</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1786"/>

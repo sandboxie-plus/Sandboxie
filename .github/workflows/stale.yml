@@ -12,7 +12,7 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-    - uses: actions/stale@v8
+    - uses: actions/stale@v9
       with:
         operations-per-run: 50
         days-before-stale: 90

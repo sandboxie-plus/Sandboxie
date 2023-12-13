@@ -5,7 +5,7 @@
 "An Application does not work properly when sandboxed": "应用程序在沙盒内时无法正常工作",
 "Issues with a web browser": "网络浏览器问题",
 "Perform Sandbox maintenance": "执行沙盒维护操作",
-"Fix issues with the UI or Shell": "修复 用户界面（UI） 或 Shell 问题",
+"Fix issues with the UI or Shell": "解决 用户界面（UI） 或 Shell 问题",
 
 "Yes": "是",
 "No": "否",
@@ -36,7 +36,7 @@
 "This box has DropAdminRights enabled, preventing execution of installers. Do you want to disable this restriction, that will reduce the security level.": "此框启用了 撤销管理员和 Power User 用户组的权限 选项，阻止了安装程序执行。要禁用此限制吗？这将降低安全级别。",
 "Disable DropAdminRights": "关闭 撤销管理员和 Power User 用户组的权限 选项",
 "Enable FakeAdminRights": "启用 使应用程序认为自己已被提权运行 选项",
-"running installer, pid: %1 press NEXT once it finishes to continue": "正在运行安装程序,pid: %1 完成后按 NEXT 继续",
+"running installer, pid: %1 press NEXT once it finishes to continue": "正在运行安装程序，（pid: %1） 完成后按 下一步 继续",
 "Was the issue resolved?": "问题解决了吗?",
 
 "Webcam or Sound does not work when sandboxed": "网络摄像头或声音在沙盒中无法使用/不能播放",
@@ -76,5 +76,5 @@
 "Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "访问 <a href=\"%1\">在线文档</a> to 了解更多关于这个的信息，以及其他 Sbie 信息。",
 "Would you like to collect some logs to help us resolve the issue.": "是否要收集一些日志来帮助我们解决问题？",
 "Now please run your application again to trigger the Sbie message.<br /><br />": "现在，请再次运行您的应用程序以触发 Sbie 消息。<br /><br />",
-"Press NEXT when you are done collecting logs.": "完成日志收集后按 NEXT。"
+"Press NEXT when you are done collecting logs.": "完成日志收集后按 下一步 。"
 }

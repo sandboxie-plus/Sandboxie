@@ -991,22 +991,44 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
 
             if (NT_SUCCESS(status)) {
 
-                WCHAR* input_str = reparseDataBuffer->MountPointReparseBuffer.PathBuffer;
-                if (_wcsnicmp(input_str, L"\\??\\Volume{", 11) == 0)
-                    input_str = File_TranslateGuidToNtPath(reparseDataBuffer->MountPointReparseBuffer.PathBuffer);
-                else if (_wcsnicmp(input_str, File_BQQB, 4) == 0)
-                    input_str = File_TranslateDosToNtPath(reparseDataBuffer->MountPointReparseBuffer.PathBuffer + 4);
+                USHORT SubstituteNameLength = 0;
+                WCHAR* SubstituteNameBuffer = NULL;
+                //USHORT PrintNameLength = 0;
+                //WCHAR* PrintNameBuffer = NULL;
+                BOOL RelativePath = FALSE;
 
-                if (input_str) {
+                if (reparseDataBuffer->ReparseTag == IO_REPARSE_TAG_SYMLINK)
+                {
+                    SubstituteNameLength = reparseDataBuffer->SymbolicLinkReparseBuffer.SubstituteNameLength;
+                    SubstituteNameBuffer = &reparseDataBuffer->SymbolicLinkReparseBuffer.PathBuffer[reparseDataBuffer->SymbolicLinkReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
+                    if (reparseDataBuffer->SymbolicLinkReparseBuffer.Flags & SYMLINK_FLAG_RELATIVE)
+                        RelativePath = TRUE;
+                }
+                else if (reparseDataBuffer->ReparseTag == IO_REPARSE_TAG_MOUNT_POINT)
+                {
+                    SubstituteNameLength = reparseDataBuffer->MountPointReparseBuffer.SubstituteNameLength;
+                    SubstituteNameBuffer = &reparseDataBuffer->MountPointReparseBuffer.PathBuffer[reparseDataBuffer->MountPointReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
+                }
 
-                    ULONG input_len = wcslen(input_str);
-                    while (input_len > 0 && input_str[input_len - 1] == L'\\')
-                        input_len -= 1; // remove tailing back slash
-                        
-                    newpath = File_TranslateTempLinks_2(input_str, input_len);
+                if (SubstituteNameBuffer && !RelativePath) // todo RelativePath - for now we fall back to UserReparse = FALSE;
+                {
+                    WCHAR* input_str = SubstituteNameBuffer;
+                    if (_wcsnicmp(input_str, L"\\??\\Volume{", 11) == 0)
+                        input_str = File_TranslateGuidToNtPath(SubstituteNameBuffer);
+                    else if (_wcsnicmp(input_str, File_BQQB, 4) == 0)
+                        input_str = File_TranslateDosToNtPath(SubstituteNameBuffer + 4);
 
-                    if (input_str != reparseDataBuffer->MountPointReparseBuffer.PathBuffer)
-                        Dll_Free(input_str);
+                    if (input_str) {
+
+                        ULONG input_len = wcslen(input_str);
+                        while (input_len > 0 && input_str[input_len - 1] == L'\\')
+                            input_len -= 1; // remove tailing back slash
+
+                        newpath = File_TranslateTempLinks_2(input_str, input_len);
+
+                        if (input_str != SubstituteNameBuffer)
+                            Dll_Free(input_str);
+                    }
                 }
 
                 /*THREAD_DATA* TlsData = Dll_GetTlsData(NULL);

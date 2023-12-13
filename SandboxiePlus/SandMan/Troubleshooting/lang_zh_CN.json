@@ -40,17 +40,17 @@
 "Was the issue resolved?": "问题解决了吗?",
 
 "Webcam or Sound does not work when sandboxed": "网络摄像头或声音在沙盒中无法使用/不能播放",
-"To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "要在 Windows 11 上启用网络摄像头支持，必须降低隔离级别. \n如果要继续，请按NEXT并选择要修改的沙盒.\n",
+"To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "要在 Windows 11 上启用网络摄像头支持，必须降低隔离级别。\n如果要继续，请按 下一步 并选择要修改的沙盒。\n",
 "\nPlease note that this required preset works only with a valid supporter certificate!": "\n请注意，此必需的预设仅适用于有效的支持者证书！",
-"Select which box to turn into a reduced isolation app compartment box.": "选择将哪个沙盒转换为降低的隔离级别的沙盒.",
-"The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "已应用解决措施，请试用 %1 中的网络摄像头，并指示问题是否已解决.",
+"Select which box to turn into a reduced isolation app compartment box.": "选择将哪个沙盒转换为降低的隔离级别的沙盒。",
+"The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "已应用解决措施，请试用 %1 中的网络摄像头，并指示问题是否已解决。",
 
 "Select affected sandbox": "选择受影响的沙盒",
 "Enter Process Name": "输入进程名称",
 
-"Internet Access restrictions are in effect for the sandbox in which the program is running. The program is prohibited from accessing the Internet.": "Internet 访问限制 在运行该程序的沙盒被开启.因此该程序被禁止访问互联网.",
+"Internet Access restrictions are in effect for the sandbox in which the program is running. The program is prohibited from accessing the Internet.": "Internet 访问限制 在运行该程序的沙盒被开启，因此该程序被禁止访问互联网。",
 
-"Start/Run restrictions are in effect for the sandbox in which the program is running. The program is prohibited from starting or running.": "启动/运行限制 在运行该程序的沙盒被开启。该程序被禁止启动或运行.",
+"Start/Run restrictions are in effect for the sandbox in which the program is running. The program is prohibited from starting or running.": "启动/运行限制 在运行该程序的沙盒被开启，该程序被禁止启动或运行。",
 
 "Failures to load SbieDll.dll when encountered by Chrome, or another software employing app containers, it is often caused by invalid DACL entries for the Sandboxie home directory. This mitigation measure will fix them, for this reason it will prompt for admin privileges which need to be granted for kmdutil.exe.": "Chrome 或其他使用应用容器的软件遇到无法加载 SbieDll.dll 时，通常是由 Sandboxie 主目录的无效 DACL 条目引起的。此解决措施将修复它们，这将提示需要为 kmdutil.exe 授予管理员权限。",
 "The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "DACL 条目 已调整，请尝试再次运行应用程序，并指示问题是否已解决。",

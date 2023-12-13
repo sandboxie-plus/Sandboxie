@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed running sandboxed processes located in a imdisk volume [#3472](https://github.com/sandboxie-plus/Sandboxie/discussions/3472)
+- fixed sample 634d066fd4f9a8b201a3ddf346e880be unable to be terminate on windows 7 x64 [#3482](https://github.com/sandboxie-plus/Sandboxie/issues/3482)
 
 ### Changed
 - without an active, non expired, supporter certificate, automatic updates/downloads are not longer available for the stable channel

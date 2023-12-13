@@ -134,7 +134,7 @@ BOOL ProcessServer::KillProcess(ULONG ProcessId)
     if (! hProcess)
         LastError = GetLastError() * 10000;
     else {
-        ok = TerminateProcess(hProcess, 1);
+        ok = TerminateProcess(hProcess, DBG_TERMINATE_PROCESS);
         if (! ok)
             LastError = GetLastError();
         CloseHandle(hProcess);

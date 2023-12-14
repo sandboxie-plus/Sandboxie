@@ -1426,6 +1426,8 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 				theAPI->GetGlobalSettings()->SetText("DefaultBox", Value.replace(" ", "_"));
 		}
 		Results.append(Status);
+
+		SaveBoxGrouping();
 	}
 	else if (Action == m_pMenuMount)
 	{

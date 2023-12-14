@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.12.4 / 5.67.4] - 2023-12-
 
+### Added
+- added Show Date & Time in Sbie Messages tab [#3429](https://github.com/sandboxie-plus/Sandboxie/issues/3429)
+
 ### Changed
 - without an active, non expired, supporter certificate, automatic updates/downloads are not longer available for the stable channel
  - the autoamtic updater will still work and notify about new stable releases, the user will be guided to visit the download page and download the latest installer manually

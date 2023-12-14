@@ -2661,7 +2661,8 @@ void CSandMan::AddLogMessage(const QDateTime& TimeStamp, const QString& Message,
 	}
 
 	QTreeWidgetItem* pItem = new QTreeWidgetItem(); // Time|Message
-	pItem->setText(0, TimeStamp.toString("hh:mm:ss.zzz"));
+	pItem->setText(0, TimeStamp.toString("dd.MM.yyyy hh:mm:ss.zzz"));
+	//pItem->setToolTip(0, TimeStamp.toString("dd.MM.yyyy hh:mm:ss.zzz"));
 	pItem->setData(1, Qt::UserRole, Message);
 	m_pMessageLog->GetTree()->addTopLevelItem(pItem);
 #ifdef _DEBUG
@@ -2816,7 +2817,7 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 void CSandMan::SaveMessageLog(QIODevice* pFile)
 {
 	foreach(const SSbieMsg& Msg, m_MessageLog)
-		pFile->write((Msg.TimeStamp.toString("hh:mm:ss.zzz")  + "\t" + FormatSbieMessage(Msg.MsgCode, Msg.MsgData, Msg.ProcessName)).toLatin1() + "\n");
+		pFile->write((Msg.TimeStamp.toString("dd.MM.yyyy hh:mm:ss.zzz")  + "\t" + FormatSbieMessage(Msg.MsgCode, Msg.MsgData, Msg.ProcessName)).toLatin1() + "\n");
 }
 
 bool CSandMan::CheckCertificate(QWidget* pWidget, int iType) 

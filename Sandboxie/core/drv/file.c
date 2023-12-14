@@ -1021,7 +1021,8 @@ _FX BOOLEAN File_InitProcess(PROCESS *proc)
     // make sure the image path does not match a ClosedFilePath setting
     //
 
-    if (ok && proc->image_path && (! proc->image_sbie)) {
+    if (ok && proc->image_path && (! proc->image_sbie) 
+        && _wcsnicmp(proc->image_path, proc->box->file_path, (proc->box->file_path_len / sizeof(WCHAR)) - 1) != 0) {
 
 #ifdef USE_MATCH_PATH_EX
         ULONG mp_flags = Process_MatchPathEx(proc, proc->image_path, wcslen(proc->image_path), L'f', 

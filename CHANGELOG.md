@@ -13,13 +13,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - without an active, non expired, supporter certificate, automatic updates/downloads are not longer available for the stable channel
  - the autoamtic updater will still work and notify about new stable releases, the user will be guided to visit the download page and download the latest installer manually
+- cleanup button is also enabled when not connencted to core
 
 ### Fixed
 - fixed running sandboxed processes located in a imdisk volume [#3472](https://github.com/sandboxie-plus/Sandboxie/discussions/3472)
 - fixed sample 634d066fd4f9a8b201a3ddf346e880be unable to be terminate on windows 7 x64 [#3482](https://github.com/sandboxie-plus/Sandboxie/issues/3482)
 - fixed UseNewSymlinkResolver causes applications to create both the link and the target folder [#3481](https://github.com/sandboxie-plus/Sandboxie/issues/3481)
 - fixed Renaming a sandbox breaks Group hierarchy [#3430](https://github.com/sandboxie-plus/Sandboxie/issues/3430)
-
+- fixed Encrypted confidential Box + red box preset blocks box access to it's own root directories [#3475](https://github.com/sandboxie-plus/Sandboxie/issues/3475)
 
 
 

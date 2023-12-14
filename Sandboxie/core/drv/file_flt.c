@@ -503,6 +503,11 @@ check:
                     && _wcsnicmp(Name->Name.Buffer, root->file_root, root->file_root_len) == 0
                     ) {
 
+                    //DbgPrint("IRP_MJ_CREATE: %S\n", root->file_root);
+
+                    if (Util_IsProtectedProcess(PsGetCurrentProcessId()))
+                        break;
+
                     status = STATUS_ACCESS_DENIED;
 
                     if (proc && !proc->bHostInject) {

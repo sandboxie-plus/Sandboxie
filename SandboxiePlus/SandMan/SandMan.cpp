@@ -2498,10 +2498,6 @@ void CSandMan::UpdateState()
 	m_pDisableForce->setEnabled(isConnected);
 	m_pDisableForce2->setEnabled(isConnected);
 
-	//m_pCleanUpMenu->setEnabled(isConnected);
-	//m_pCleanUpButton->setEnabled(isConnected);
-	//m_pKeepTerminated->setEnabled(isConnected);
-
 	m_pEditIni->setEnabled(isConnected);
 	if(m_pEditIni2) m_pEditIni2->setEnabled(isConnected);
 	m_pReloadIni->setEnabled(isConnected);
@@ -2509,7 +2505,7 @@ void CSandMan::UpdateState()
 
 	if (m_pNewBoxButton) m_pNewBoxButton->setEnabled(isConnected);
 	if (m_pEditIniButton) m_pEditIniButton->setEnabled(isConnected);
-	if (m_pCleanUpButton) m_pCleanUpButton->setEnabled(isConnected);
+	//if (m_pCleanUpButton) m_pCleanUpButton->setEnabled(isConnected);
 }
 
 void CSandMan::OnMenuHover(QAction* action)

@@ -5,7 +5,7 @@ mkdir %~dp0\Assets
 
 mkdir %~dp0\Assets\Plus
 copy %~dp0\Languages.iss %~dp0\Assets\Plus\
-copy %~dp0\license.txt %~dp0\Assets\Plus\
+copy %~dp0..\LICENSE.Plus %~dp0\Assets\Plus\
 copy %~dp0\Sandboxie.ini %~dp0\Assets\Plus\
 copy %~dp0\Sandboxie-Plus.ini %~dp0\Assets\Plus\
 copy %~dp0\Sandboxie-Plus.iss %~dp0\Assets\Plus\

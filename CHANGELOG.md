@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - without an active, non expired, supporter certificate, automatic updates/downloads are not longer available for the stable channel
  - the autoamtic updater will still work and notify about new stable releases, the user will be guided to visit the download page and download the latest installer manually
 - cleanup button is also enabled when not connencted to core
+- the box creation wizard now alows to create a black box based on any otehr box type
 
 ### Fixed
 - fixed running sandboxed processes located in a imdisk volume [#3472](https://github.com/sandboxie-plus/Sandboxie/discussions/3472)

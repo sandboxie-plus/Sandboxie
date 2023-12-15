@@ -466,7 +466,7 @@ bool CBoxTypePage::validatePage()
 #endif
 
     if (BlackBox && !theGUI->IsImDiskReady()) {
-        theGUI->GetAddonManager()->TryInstallAddon("ImDisk", this, tr("To use ancrypted boxes you need to install the ImDisk driver, do you want to download and install it?"));
+        theGUI->GetAddonManager()->TryInstallAddon("ImDisk", this, tr("To use encrypted boxes you need to install the ImDisk driver, do you want to download and install it?"));
         return false;
     }
 

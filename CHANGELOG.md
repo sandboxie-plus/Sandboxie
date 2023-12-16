@@ -22,6 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed UseNewSymlinkResolver causes applications to create both the link and the target folder [#3481](https://github.com/sandboxie-plus/Sandboxie/issues/3481)
 - fixed Renaming a sandbox breaks Group hierarchy [#3430](https://github.com/sandboxie-plus/Sandboxie/issues/3430)
 - fixed Encrypted confidential Box + red box preset blocks box access to it's own root directories [#3475](https://github.com/sandboxie-plus/Sandboxie/issues/3475)
+- fixed SandMan-v1.12.3 crashed! [#3492](https://github.com/sandboxie-plus/Sandboxie/issues/3492)
 
 
 

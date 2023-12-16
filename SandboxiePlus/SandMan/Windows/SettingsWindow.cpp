@@ -1395,25 +1395,28 @@ void CSettingsWindow::UpdateUpdater()
 	{
 		ui.cmbInterval->setEnabled(true);
 
+		bool bAllowAuto;
 		if (ui.radStable->isChecked() && !bOk) {
 			ui.cmbUpdate->setEnabled(false);
 			ui.cmbUpdate->setCurrentIndex(ui.cmbUpdate->findData("ignore"));
 
 			ui.lblRevision->setText(tr("Supporter certificate required for access"));
+			bAllowAuto = false;
 		} else {
 			ui.cmbUpdate->setEnabled(true);
 
 			ui.lblRevision->setText(QString());
+			bAllowAuto = true;
 		}
 
 		ui.cmbRelease->setEnabled(true);
 		QStandardItemModel* model = qobject_cast<QStandardItemModel*>(ui.cmbRelease->model());
 		for (int i = 1; i < ui.cmbRelease->count(); i++) {
 			QStandardItem* item = model->item(i);
-			item->setFlags(bOk ? (item->flags() | Qt::ItemIsEnabled) : (item->flags() & ~Qt::ItemIsEnabled));
+			item->setFlags(bAllowAuto ? (item->flags() | Qt::ItemIsEnabled) : (item->flags() & ~Qt::ItemIsEnabled));
 		}
 
-		if(!bOk)
+		if(!bAllowAuto)
 			ui.lblRelease->setText(tr("Supporter certificate required for automation"));
 		else
 			ui.lblRelease->setText(QString());

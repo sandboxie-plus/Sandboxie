@@ -294,17 +294,27 @@ void COnlineUpdater::LoadState()
 
 QString COnlineUpdater::GetOnNewUpdateOption() const
 {
+	QString OnNewUpdate = theConf->GetString("Options/OnNewUpdate", "ignore");
+
 	QString ReleaseChannel = theConf->GetString("Options/ReleaseChannel", "stable");
-	if (ReleaseChannel != "preview" && (!g_CertInfo.active || g_CertInfo.expired)) // allow revisions for preview channel
+	if (ReleaseChannel != "preview" && (!g_CertInfo.active || g_CertInfo.expired)) // without active cert, allow revisions for preview channel
 		return "ignore"; // this service requires a valid certificate
-	return theConf->GetString("Options/OnNewUpdate", "ignore");
+
+	return OnNewUpdate;
 }
 
 QString COnlineUpdater::GetOnNewReleaseOption() const
 {
 	QString OnNewRelease = theConf->GetString("Options/OnNewRelease", "download");
-	if ((g_CertInfo.active && g_CertInfo.expired) && OnNewRelease == "install")
-		return "download"; // disable auto update on an active but expired personal certificate
+
+	if (OnNewRelease == "install" || OnNewRelease == "download") {
+		QString ReleaseChannel = theConf->GetString("Options/ReleaseChannel", "stable");
+		if (ReleaseChannel != "preview" && (!g_CertInfo.active || g_CertInfo.expired)) // without active cert, allow automated updates only for preview channel
+			return "notify"; // this service requires a valid certificate
+	}
+
+	//if ((g_CertInfo.active && g_CertInfo.expired) && OnNewRelease == "install")
+	//	return "download"; // disable auto update on an active but expired personal certificate
 	return OnNewRelease;
 }
 
@@ -489,14 +499,6 @@ bool COnlineUpdater::HandleUpdate()
 
 	bool bAllowAuto = g_CertInfo.active && !g_CertInfo.expired; // To use automatic updates a valid certificate is required
 
-	//
-	// if we allow for version updates but not for automatic installation/download of new release 
-	// ignore the release and install it using the version updater
-	//
-
-	if (bNewUpdate && bNewRelease && !bAllowAuto)
-		bNewRelease = false;
-
 	bool bCanRunInstaller = (m_CheckMode == eAuto && OnNewRelease == "install");
 	bool bIsInstallerReady = false;
 	if (bNewRelease) 
@@ -512,7 +514,7 @@ bool COnlineUpdater::HandleUpdate()
 			// clear when not up to date
 			theConf->DelValue("Updater/InstallerVersion");
 
-			if ((bAllowAuto && (bCanRunInstaller || (m_CheckMode == eAuto && OnNewRelease == "download"))) || AskDownload(Release, bAllowAuto))
+			if ((bCanRunInstaller || (m_CheckMode == eAuto && OnNewRelease == "download")) || AskDownload(Release, bAllowAuto))
 			{
 				if (DownloadInstaller(Release, m_CheckMode == eManual))
 					return true;

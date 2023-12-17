@@ -434,17 +434,13 @@ Diğer alan türlerine göre yalıtım seviyesi azalırken, çok çeşitli uygul
         <translation>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Uygulama Bölmesi&lt;/a&gt; Alanı</translation>
     </message>
     <message>
-        <source>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Encrypted&lt;/a&gt; &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Confidential&lt;/a&gt; Box</source>
-        <translation type="vanished">&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Şifreli&lt;/a&gt; &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Gizli&lt;/a&gt; Alan</translation>
-    </message>
-    <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="320"/>
         <source>In this box type the sandbox uses an encrypted disk image as its root folder. This provides an additional layer of privacy and security. 
 Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes. 
 This ensures the utmost level of privacy and data protection within the confidential sandbox environment.</source>
-        <translation>Bu alan türü, korumalı alan kök dizini olarak şifrelenmiş bir disk görüntüsü kullanır. Böylece ek bir gizlilik ve güvenlik katmanı sağlar.
-Korumalı alan bağlandığında bu sanal diske yapılabilecek erişim korumalı alanda çalışan programlarla sınırlıdır. Sandboxie, ana sistemdeki diğer işlemlerin korumalı alanda çalışan işlemlere erişimini de engeller.
-Böylece gizli korumalı alan ortamında en üst düzeyde gizlilik ve veri koruma sağlar.</translation>
+        <translation>Bu alan türü, korumalı alan kök dizini olarak şifrelenmiş bir disk görüntüsü kullanır. Bu ek bir gizlilik ve güvenlik katmanı sağlar.
+Korumalı alan sisteme bağlandığında onun sanal diskine erişebilecek programlar korumalı alan programlarıyla sınırlıdır. Sandboxie, ana sistem işlemlerinin korumalı alan işlemlerine erişimini de engeller.
+Bu şekilde gizli korumalı alan ortamında en yüksek düzeyde gizlilik ve veri koruması sağlanmış olur.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="342"/>
@@ -494,7 +490,7 @@ Böylece gizli korumalı alan ortamında en üst düzeyde gizlilik ve veri korum
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="319"/>
         <source>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Encrypt&lt;/a&gt; Box content and set &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Confidential&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Alan içeriğini &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Şifrele&lt;/a&gt; ve &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Gizle&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="368"/>

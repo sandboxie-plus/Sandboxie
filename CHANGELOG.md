@@ -8,13 +8,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.12.4 / 5.67.4] - 2023-12-
 
 ### Added
-- added Show Date & Time in Sbie Messages tab [#3429](https://github.com/sandboxie-plus/Sandboxie/issues/3429)
+- added display of Date & Time in the Sbie Messages tab [#3429](https://github.com/sandboxie-plus/Sandboxie/issues/3429)
 
 ### Changed
 - without an active, non expired, supporter certificate, automatic updates/downloads are not longer available for the stable channel
- - the autoamtic updater will still work and notify about new stable releases, the user will be guided to visit the download page and download the latest installer manually
-- cleanup button is also enabled when not connencted to core
-- the box creation wizard now alows to create a black box based on any otehr box type
+  - the autoamtic updater will still work and notify about new stable releases, the user will be guided to visit the download page and download the latest installer manually
+- the cleanup button is now also enabled when not connencted to core
+- the box creation wizard now allows to create a black box based on any other box type
 
 ### Fixed
 - fixed running sandboxed processes located in a imdisk volume [#3472](https://github.com/sandboxie-plus/Sandboxie/discussions/3472)
@@ -22,7 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed UseNewSymlinkResolver causes applications to create both the link and the target folder [#3481](https://github.com/sandboxie-plus/Sandboxie/issues/3481)
 - fixed Renaming a sandbox breaks Group hierarchy [#3430](https://github.com/sandboxie-plus/Sandboxie/issues/3430)
 - fixed Encrypted confidential Box + red box preset blocks box access to it's own root directories [#3475](https://github.com/sandboxie-plus/Sandboxie/issues/3475)
-- fixed SandMan-v1.12.3 crashed! [#3492](https://github.com/sandboxie-plus/Sandboxie/issues/3492)
+- fixed SandMan-v1.12.3 crashing [#3492](https://github.com/sandboxie-plus/Sandboxie/issues/3492)
 
 
 

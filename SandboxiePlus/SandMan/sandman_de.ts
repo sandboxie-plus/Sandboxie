@@ -495,7 +495,7 @@ Dies sichert das höchste Level von Privatsphäre und Datenschutz innerhalb der 
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="319"/>
         <source>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Encrypt&lt;/a&gt; Box content and set &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Confidential&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Verschlüssele&lt;/a&gt; Boxinhalt und aktiviere &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Vertraulichkeit&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="368"/>

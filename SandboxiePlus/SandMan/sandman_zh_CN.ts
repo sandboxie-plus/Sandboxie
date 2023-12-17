@@ -519,7 +519,7 @@ While the level of isolation is reduced compared to other box types, it offers i
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="319"/>
         <source>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Encrypt&lt;/a&gt; Box content and set &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Confidential&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;加密&lt;/a&gt; 沙盒内容并设置 &lt;a href=&quot;sbie://docs/black-box&quot;&gt;凭据&lt;/a&gt;</translation>
     </message>
     <message>
         <source>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Encrypted&lt;/a&gt; &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Confidential&lt;/a&gt; Box</source>

@@ -420,7 +420,8 @@ Le profil complet de l&apos;utilisateur demeure masqué, assurant ainsi une séc
         <location filename="Wizards/NewBoxWizard.cpp" line="302"/>
         <source>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such, 
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</source>
-        <translation>Avec ce type de bac, les processus dans le bac sont empêchés d&apos;accéder aux fichiers ou données de l&apos;utilisateur. L&apos;accent est mis sur la protection des données d&apos;utilisateur, et ainsi, seuls les répertoires « C:\Windows » et « C:\Program Files » sont accessibles aux processus lancés dans ce bac à sable. Ceci garantit que les fichiers personnels restent sécurisés.</translation>
+        <translation>Avec ce type de bac, les processus dans le bac sont empêchés d&apos;accéder aux fichiers ou données de l&apos;utilisateur. L&apos;accent est mis sur la protection des données d&apos;utilisateur, et ainsi,
+seuls les répertoires « C:\Windows » et « C:\Program Files » sont accessibles aux processus lancés dans ce bac à sable. Ceci garantit que les fichiers personnels restent sécurisés.</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="304"/>
@@ -455,7 +456,7 @@ Bien que le niveau d&apos;isolation soit réduit par rapport à d&apos;autres ty
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="319"/>
         <source>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Encrypt&lt;/a&gt; Box content and set &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Confidential&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Chiffrer&lt;/a&gt; le contenu du bac et le définir sur &lt;a href=&quot;sbie://docs/black-box&quot;&gt;« Confidentiel »&lt;/a&gt;</translation>
     </message>
     <message>
         <source>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Encrypted&lt;/a&gt; &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Confidential&lt;/a&gt; Box</source>
@@ -5887,12 +5888,12 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1403"/>
         <source>Supporter certificate required for access</source>
-        <translation type="unfinished"></translation>
+        <translation>Certificat d&apos;adhérent nécessaire pour l&apos;accès</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1420"/>
         <source>Supporter certificate required for automation</source>
-        <translation type="unfinished"></translation>
+        <translation>Certificat d&apos;adhérent nécessaire pour l&apos;automatisation</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="1823"/>
@@ -9338,12 +9339,12 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les changements non 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1776"/>
         <source>New full installers from the selected release channel.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveaux installeurs complets depuis le canal de la version choisie.</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1779"/>
         <source>Full Upgrades</source>
-        <translation type="unfinished"></translation>
+        <translation>Mises à jour complètes</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="1786"/>
@@ -9760,7 +9761,7 @@ Contrairement au canal des Aperçus, cela n&apos;inclut pas les changements non 
         <location filename="Forms/SettingsWindow.ui" line="1725"/>
         <source>Incremental Updates</source>
         <oldsource>Version Updates</oldsource>
-        <translation type="unfinished">Mises à jour de version :</translation>
+        <translation>Mises à jour incrémentielles</translation>
     </message>
     <message>
         <source>New full versions from the selected release channel.</source>

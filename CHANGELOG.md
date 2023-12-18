@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.12.4 / 5.67.4] - 2023-12-
+## [1.12.4 / 5.67.4] - 2023-12-18
 
 ### Added
 - added display of Date & Time in the Sbie Messages tab [#3429](https://github.com/sandboxie-plus/Sandboxie/issues/3429)

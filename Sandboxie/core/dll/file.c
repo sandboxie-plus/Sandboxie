@@ -7393,14 +7393,16 @@ _FX BOOLEAN SbieDll_TranslateNtToDosPath(WCHAR *path)
     // to make this work we use the \\.\ prefix which replaces \Device\
     // and is accepted by regular non NT Win32 APIs
     // 
+    // Note: fix me this makes chrome crash handler hang
+    // 
 
-    if (_wcsnicmp(path, L"\\Device\\", 8) == 0) {
+    /*if (_wcsnicmp(path, L"\\Device\\", 8) == 0) {
 
         wcscpy(path, L"\\\\.\\");
         wmemmove(path + 4, path + 8, wcslen(path + 8) + 1);
 
         return TRUE;
-    }
+    }*/
 
     return FALSE;
 }

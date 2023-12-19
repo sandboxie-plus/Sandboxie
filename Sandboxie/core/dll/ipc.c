@@ -4294,7 +4294,7 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
 
         Ipc_MergeDirectoryObject(merge, TruePath, FALSE);
 
-        ULONG len = wcslen(CopyPath); // fix root copy path, remove tailing '\\'
+        ULONG len = wcslen(CopyPath); // fix root copy path, remove trailing '\\'
         if (CopyPath[len - 1] == L'\\') CopyPath[len - 1] = 0;
 
         Ipc_MergeDirectoryObject(merge, CopyPath, TRUE);

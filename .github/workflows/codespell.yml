@@ -105,6 +105,7 @@ jobs:
           echo 'variouse->various' >> dictionary.txt
           echo 'resumeed->resumed' >> dictionary.txt
           echo 'autoamtic->automatic' >> dictionary.txt
+          echo 'connencted->connected' >> dictionary.txt
           echo 'crome->Chrome' >> dictionary_code.txt
           echo 'chromim->Chromium' >> dictionary_code.txt
           echo 'kmdutill->kmdutil' >> dictionary_code.txt

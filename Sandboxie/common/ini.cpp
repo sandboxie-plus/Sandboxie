@@ -59,7 +59,7 @@ void Ini_Read_ConfigEntry(WCHAR* line, WCHAR* end, std::list<SIniEntry>& entries
     {
         WCHAR* name_start = line;
         WCHAR* name_end = separator;
-        // trim tailing whitespaces
+        // trim trailing whitespaces
         while (name_end > name_start && (*(name_end-1) == L' ' || *(name_end-1) == L'\t')) name_end--; 
 
         WCHAR* value_start = separator+1;

@@ -1022,7 +1022,7 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
 
                         ULONG input_len = wcslen(input_str);
                         while (input_len > 0 && input_str[input_len - 1] == L'\\')
-                            input_len -= 1; // remove tailing back slash
+                            input_len -= 1; // remove trailing backslash
 
                         newpath = File_TranslateTempLinks_2(input_str, input_len);
 

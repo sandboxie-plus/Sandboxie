@@ -122,7 +122,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with programs installed in the sandbox not being displayed via Run from Start Menu [#3334](https://github.com/sandboxie-plus/Sandboxie/issues/3334)
 - fixed issue with NtQueryDirectoryObject [#3310](https://github.com/sandboxie-plus/Sandboxie/issues/3310)
 - fixed some GUI functions using the wrong box path if the FileRootPath value starts with Volume{GUID} [#3345](https://github.com/sandboxie-plus/Sandboxie/issues/3345)
-- fixed programs not running when they are kept in RAM and encrypted boxes if the sandbox root folder is not present [#3349](https://github.com/sandboxie-plus/Sandboxie/issues/3349)
+- fixed programs not running when they are kept in RAM [#3349](https://github.com/sandboxie-plus/Sandboxie/issues/3349)
 - fixed Process Restrictions toggle not working correctly [#3355](https://github.com/sandboxie-plus/Sandboxie/issues/3355)
 
 

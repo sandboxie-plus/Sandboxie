@@ -4,6 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.12.5 / 5.67.5] - 2023-12-19
+
+### Fixed
+- fixed bug with Chromium-based browsers affecting "--type=crashpad-handler" instances [#post-3177139](https://www.wilderssecurity.com/threads/sandboxie-plus-1-12-5.453131/#post-3177139)
+
+
 
 ## [1.12.4 / 5.67.4] - 2023-12-18
 

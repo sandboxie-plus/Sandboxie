@@ -91,7 +91,7 @@ jobs:
         run: Installer\get_assets.cmd
 
       - name: Upload installer assets
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Assets
           path: |
@@ -99,7 +99,7 @@ jobs:
           retention-days: 60
 
       - name: Upload Sandboxie x64
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Sandboxie_x64
           path: |
@@ -175,7 +175,7 @@ jobs:
         run: Installer\merge_builds.cmd
 
       - name: Upload Sandboxie ARM64
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Sandboxie_ARM64
           path: |
@@ -246,7 +246,7 @@ jobs:
         run: Installer\merge_builds.cmd
 
       - name: Upload Sandboxie x86
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Sandboxie_x86
           path: |

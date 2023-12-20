@@ -228,6 +228,12 @@
     <ClCompile Include="Engine\ScriptManager.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\CompressDialog.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Helpers\StorageInfo.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -265,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="CustomStyles.h">
       <Filter>SandMan</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\StorageInfo.h">
+      <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -373,6 +382,9 @@
     <QtMoc Include="Engine\ScriptManager.h">
       <Filter>Engine</Filter>
     </QtMoc>
+    <QtMoc Include="Windows\CompressDialog.h">
+      <Filter>Windows</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resources\SandMan.qrc">
@@ -410,6 +422,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="Forms\BoxImageWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Forms\CompressDialog.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

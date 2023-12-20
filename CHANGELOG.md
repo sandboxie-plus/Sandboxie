@@ -4,6 +4,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.12.6 / 5.67.6] - 2023-12-
+
+### Changed
+todo: improve behaviorue of toolbar customization menu
+
+### Fixed
+- fixed fix for [#3475](https://github.com/sandboxie-plus/Sandboxie/issues/3475) not working without FileRootPath being explicitly set
+
+
+
 ## [1.12.5 / 5.67.5] - 2023-12-19
 
 ### Fixed

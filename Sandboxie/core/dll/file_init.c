@@ -179,7 +179,7 @@ _FX BOOLEAN File_Init(void)
     
     Dll_BoxFileDosPath = Dll_Alloc((Dll_BoxFilePathLen + 1) * sizeof(WCHAR));
     wcscpy((WCHAR *)Dll_BoxFileDosPath, Dll_BoxFilePath);
-    if (!SbieDll_TranslateNtToDosPath((WCHAR *)Dll_BoxFileDosPath) || _wcsnicmp(Dll_BoxFileDosPath, L"\\\\.\\", 4) == 0) 
+    if (!SbieDll_TranslateNtToDosPath((WCHAR *)Dll_BoxFileDosPath) /*|| _wcsnicmp(Dll_BoxFileDosPath, L"\\\\.\\", 4) == 0*/)
     {
         Dll_Free((WCHAR *)Dll_BoxFileDosPath);
         Dll_BoxFileDosPath = NULL;
@@ -191,7 +191,8 @@ _FX BOOLEAN File_Init(void)
 
         ULONG BoxFilePathLen = (0x1000 + 1) * sizeof(WCHAR);
         WCHAR* BoxFilePathConf = Dll_AllocTemp(BoxFilePathLen);
-        SbieApi_QueryConf(NULL, L"FileRootPath", 0, BoxFilePathConf, BoxFilePathLen);
+		if (!NT_SUCCESS(SbieApi_QueryConf(NULL, L"FileRootPath", 0, BoxFilePathConf, BoxFilePathLen)))
+			SbieApi_QueryConf(NULL, L"\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%", CONF_JUST_EXPAND, BoxFilePathConf, BoxFilePathLen);
 
         if (SbieDll_TranslateNtToDosPath(BoxFilePathConf))
         {

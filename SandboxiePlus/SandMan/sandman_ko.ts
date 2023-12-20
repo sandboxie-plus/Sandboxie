@@ -3697,17 +3697,17 @@ No will choose: %2</source>
     <message>
         <location filename="SandMan.cpp" line="3933"/>
         <source>Do you want to open %1 in a sandboxed or unsandboxed Web browser?</source>
-        <translation>샌드박스된 웹 브라우저 또는 샌드박스되지 않은 웹 브라우저에서 %1을(를) 여시겠습니까?</translation>
+        <translation>샌드박스한 웹 브라우저 또는 샌드박스 안 한 웹 브라우저에서 %1을(를) 여시겠습니까?</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3937"/>
         <source>Sandboxed</source>
-        <translation>샌드박스됨</translation>
+        <translation>샌드박스함</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3938"/>
         <source>Unsandboxed</source>
-        <translation>샌드박스되지 않음</translation>
+        <translation>샌드박스 안 함</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4097"/>

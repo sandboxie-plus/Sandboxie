@@ -858,7 +858,7 @@ _FX void File_InitLinks(THREAD_DATA *TlsData)
         save_char = DeviceName[DeviceNameLen];
         DeviceName[DeviceNameLen] = L'\0';
 
-        if (Output2->MultiSzLength) {
+        if (Output2->MultiSzLength && *Output2->MultiSz) {
 
             WCHAR *DosPath = Output2->MultiSz;
             ULONG DosPathLen = wcslen(DosPath);
@@ -890,10 +890,10 @@ _FX void File_InitLinks(THREAD_DATA *TlsData)
                 //
 
                 WCHAR *FirstDosPath = DosPath;
-                File_AddLink(TRUE, DeviceName, FirstDosPath);
+                File_AddLink(TRUE, FirstDosPath, DeviceName);
                 DosPath += DosPathLen + 1;
                 while (*DosPath) {
-                    File_AddLink(TRUE, DosPath, FirstDosPath);
+                    File_AddLink(TRUE, DosPath, DeviceName);
                     DosPath += wcslen(DosPath) + 1;
                 }
             }

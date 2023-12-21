@@ -11,8 +11,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed Sandboxie-Plus 1.12.4 + failed to start start.exe in confidential box [#3514](https://github.com/sandboxie-plus/Sandboxie/issues/3514)
-- fixed fix for [#3475](https://github.com/sandboxie-plus/Sandboxie/issues/3475) not working without FileRootPath being explicitly set
 - fixed "The directory name is invalid" when starting a process in a encrypted private box [#3475](https://github.com/sandboxie-plus/Sandboxie/issues/3475)
+- fixed symbolic links created inside a sandbox not working properly [#3181](https://github.com/sandboxie-plus/Sandboxie/issues/3181)
+- fixed issue with drives mounted to multiple fodlers or a drive lettet and a folder
 
 
 

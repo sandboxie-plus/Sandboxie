@@ -1109,7 +1109,7 @@ int Program_Start(void)
     }
 
     //
-    // copy input command line, minus leading and tailing spaces
+    // copy input command line, minus leading and trailing spaces
     //
 
     while (ChildCmdLine && *ChildCmdLine == L' ')

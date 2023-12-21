@@ -745,7 +745,7 @@ void CTraceView::SaveToFileAsync(const CSbieProgressPtr& pProgress, QVector<CTra
 
 		if (LastTimeStamp != pEntry->GetTimeStamp()) {
 			LastTimeStamp = pEntry->GetTimeStamp();
-			LastTimeStampStr = QDateTime::fromMSecsSinceEpoch(pEntry->GetTimeStamp()).toString("hh:mm:ss.zzz").toUtf8();
+			LastTimeStampStr = QDateTime::fromMSecsSinceEpoch(pEntry->GetTimeStamp()).toString("dd.MM.yyyy hh:mm:ss.zzz").toUtf8();
 		}
 
 		pFile->write(LastTimeStampStr);

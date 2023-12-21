@@ -447,6 +447,36 @@ retry:
 
 
 //---------------------------------------------------------------------------
+// Util_IsProtectedProcess
+//---------------------------------------------------------------------------
+
+NTKERNELAPI BOOLEAN NTAPI PsIsProtectedProcess(_In_ PEPROCESS Process);
+
+_FX BOOLEAN Util_IsProtectedProcess(HANDLE pid)
+{
+    PEPROCESS ProcessObject;
+    NTSTATUS status;
+    BOOLEAN ret = FALSE;
+
+    //
+    // Check if this process is a protected process,
+    // as protected processes are integral windows processes or trusted antimalware services
+    // we allow such processes to access even confidential sandboxed programs.
+    //
+
+    status = PsLookupProcessByProcessId(pid, &ProcessObject);
+    if (NT_SUCCESS(status)) {
+        
+        ret = PsIsProtectedProcess(ProcessObject);
+
+        ObDereferenceObject(ProcessObject);
+    }
+
+    return ret;
+}
+
+
+//---------------------------------------------------------------------------
 // Util_GetTime
 //---------------------------------------------------------------------------
 

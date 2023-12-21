@@ -176,6 +176,35 @@ _FX BOOLEAN File_Init(void)
         }
     }
 
+    
+    Dll_BoxFileDosPath = Dll_Alloc((Dll_BoxFilePathLen + 1) * sizeof(WCHAR));
+    wcscpy((WCHAR *)Dll_BoxFileDosPath, Dll_BoxFilePath);
+    if (!SbieDll_TranslateNtToDosPath((WCHAR *)Dll_BoxFileDosPath) /*|| _wcsnicmp(Dll_BoxFileDosPath, L"\\\\.\\", 4) == 0*/)
+    {
+        Dll_Free((WCHAR *)Dll_BoxFileDosPath);
+        Dll_BoxFileDosPath = NULL;
+
+        //
+        // the root is redirected with a reparse point and the target device does not have a drvie letter
+        // implement workaround, see SbieDll_TranslateNtToDosPath
+        //
+
+        ULONG BoxFilePathLen = (0x1000 + 1) * sizeof(WCHAR);
+        WCHAR* BoxFilePathConf = Dll_AllocTemp(BoxFilePathLen);
+		if (!NT_SUCCESS(SbieApi_QueryConf(NULL, L"FileRootPath", 0, BoxFilePathConf, BoxFilePathLen)))
+			SbieApi_QueryConf(NULL, L"\\??\\%SystemDrive%\\Sandbox\\%USER%\\%SANDBOX%", CONF_JUST_EXPAND, BoxFilePathConf, BoxFilePathLen);
+
+        if (SbieDll_TranslateNtToDosPath(BoxFilePathConf))
+        {
+            Dll_BoxFileDosPathLen = wcslen(BoxFilePathConf);
+            Dll_BoxFileDosPath = Dll_Alloc((Dll_BoxFileDosPathLen + 1) * sizeof(WCHAR));
+            wcscpy((WCHAR *)Dll_BoxFileDosPath, BoxFilePathConf);
+        }
+        Dll_Free(BoxFilePathConf);
+    }
+    else
+        Dll_BoxFileDosPathLen = wcslen(Dll_BoxFileDosPath);
+
 	File_InitSnapshots();
 
     File_InitRecoverFolders();

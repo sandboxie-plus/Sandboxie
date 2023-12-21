@@ -299,6 +299,7 @@
     <ClCompile Include="Helpers\FullScreen.cpp" />
     <ClCompile Include="Helpers\ReadDirectoryChanges.cpp" />
     <ClCompile Include="Helpers\ReadDirectoryChangesPrivate.cpp" />
+    <ClCompile Include="Helpers\StorageInfo.cpp" />
     <ClCompile Include="Helpers\WinAdmin.cpp" />
     <ClCompile Include="Helpers\WindowFromPointEx.cpp" />
     <ClCompile Include="Helpers\WinHelper.cpp" />
@@ -347,6 +348,7 @@
     <ClCompile Include="Views\SbieView.cpp" />
     <ClCompile Include="Views\StackView.cpp" />
     <ClCompile Include="Views\TraceView.cpp" />
+    <ClCompile Include="Windows\CompressDialog.cpp" />
     <ClCompile Include="Windows\OptionsAccess.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -441,6 +443,7 @@
     <ClCompile Include="Wizards\TemplateWizard.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Windows\CompressDialog.h" />
     <QtMoc Include="Wizards\BoxAssistant.h" />
     <QtMoc Include="Windows\BoxImageWindow.h" />
     <QtMoc Include="Views\StackView.h" />
@@ -479,6 +482,7 @@
     <ClInclude Include="Helpers\FullScreen.h" />
     <ClInclude Include="Helpers\ReadDirectoryChanges.h" />
     <ClInclude Include="Helpers\ReadDirectoryChangesPrivate.h" />
+    <ClInclude Include="Helpers\StorageInfo.h" />
     <ClInclude Include="Helpers\ThreadSafeQueue.h" />
     <ClInclude Include="Helpers\WinAdmin.h" />
     <QtMoc Include="Models\MonitorModel.h" />
@@ -499,6 +503,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="Forms\BoxImageWindow.ui" />
+    <QtUic Include="Forms\CompressDialog.ui" />
     <QtUic Include="Forms\OptionsWindow.ui" />
     <QtUic Include="Forms\PopUpWindow.ui" />
     <QtUic Include="Forms\RecoveryWindow.ui" />

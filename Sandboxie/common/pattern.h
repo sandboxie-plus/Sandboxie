@@ -71,7 +71,7 @@ const WCHAR *Pattern_Source(PATTERN *pat);
 ULONG Pattern_Level(PATTERN *pat);
 
 //
-// Pattern_Wildcards:  returns count of wildcards in the pattern, not counting the tailing * when rpresent
+// Pattern_Wildcards:  returns count of wildcards in the pattern, not counting the trailing * when present
 //
 
 USHORT Pattern_Wildcards(PATTERN *pat);

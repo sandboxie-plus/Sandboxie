@@ -7350,6 +7350,21 @@ _FX BOOLEAN SbieDll_TranslateNtToDosPath(WCHAR *path)
     }
 
     path_len = wcslen(path);
+    
+    //
+    // workaround for hidden box root
+    //
+
+    if (Dll_BoxFileDosPathLen && Dll_BoxFilePathLen <= path_len && _wcsnicmp(path, Dll_BoxFilePath, Dll_BoxFilePathLen) == 0)
+    {
+        wmemmove(path + Dll_BoxFileDosPathLen, path + Dll_BoxFilePathLen, wcslen(path + Dll_BoxFilePathLen) + 1);
+        wmemcpy(path, Dll_BoxFileDosPath, Dll_BoxFileDosPathLen);
+        return TRUE;
+    }
+
+    //
+    // Find Dos Drive Letter
+    //
 
     drive = File_GetDriveForPath(path, path_len);
     if (drive)
@@ -7378,14 +7393,16 @@ _FX BOOLEAN SbieDll_TranslateNtToDosPath(WCHAR *path)
     // to make this work we use the \\.\ prefix which replaces \Device\
     // and is accepted by regular non NT Win32 APIs
     // 
+    // Note: fix me this makes chrome crash handler hang
+    // 
 
-    if (_wcsnicmp(path, L"\\Device\\", 8) == 0) {
+    /*if (_wcsnicmp(path, L"\\Device\\", 8) == 0) {
 
         wcscpy(path, L"\\\\.\\");
         wmemmove(path + 4, path + 8, wcslen(path + 8) + 1);
 
         return TRUE;
-    }
+    }*/
 
     return FALSE;
 }

@@ -272,7 +272,7 @@ void CSandMan::AddFileRecovered(const QString& BoxName, const QString& FilePath)
 	}
 
 	QTreeWidgetItem* pItem = new QTreeWidgetItem(); // Time|Box|FilePath
-	pItem->setText(0, QDateTime::currentDateTime().toString("hh:mm:ss.zzz"));
+	pItem->setText(0, QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss.zzz"));
 	pItem->setText(1, BoxName);
 	pItem->setText(2, FilePath);
 	pRecoveryLog->GetTree()->addTopLevelItem(pItem);

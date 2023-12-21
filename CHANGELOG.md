@@ -4,15 +4,41 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-
-## [1.12.4 / 5.67.4] - 2023-12-
-
-### Fixed
-- fixed running sandboxed processes located in a imdisk volume [#3472](https://github.com/sandboxie-plus/Sandboxie/discussions/3472)
+## [1.12.6 / 5.67.6] - 2023-12-
 
 ### Changed
-- without an active, non expired, supporter certificate, automatic updates/downloads are not longer available for the stable channel
- - the autoamtic updater will still work and notify about new stable releases, the user will be guided to visit the download page and download the latest installer manually
+todo: improve behaviorue of toolbar customization menu
+
+### Fixed
+- fixed fix for [#3475](https://github.com/sandboxie-plus/Sandboxie/issues/3475) not working without FileRootPath being explicitly set
+
+
+
+## [1.12.5 / 5.67.5] - 2023-12-19
+
+### Fixed
+- fixed bug with Chromium-based browsers affecting "--type=crashpad-handler" instances [#post-3177139](https://www.wilderssecurity.com/threads/sandboxie-plus-1-12-5.453131/#post-3177139)
+
+
+
+## [1.12.4 / 5.67.4] - 2023-12-18
+
+### Added
+- added display of Date & Time in the Sbie Messages tab [#3429](https://github.com/sandboxie-plus/Sandboxie/issues/3429)
+
+### Changed
+- without an active, non-expired, supporter certificate, automatic updates/downloads are no longer available for the stable channel
+  - the automatic updater will still work and notify about new stable releases, the user will be guided to visit the download page and download the latest installer manually
+- the cleanup button in SandMan UI is now enabled even when not connected to the Sandboxie core components
+- the box creation wizard now allows to create a black box based on any other box type
+
+### Fixed
+- fixed running sandboxed processes located in an ImDisk volume [#3472](https://github.com/sandboxie-plus/Sandboxie/discussions/3472)
+- fixed sample 634d066fd4f9a8b201a3ddf346e880be unable to be terminated on Windows 7 x64 [#3482](https://github.com/sandboxie-plus/Sandboxie/issues/3482)
+- fixed UseNewSymlinkResolver causing applications to create both the link and the target folder [#3481](https://github.com/sandboxie-plus/Sandboxie/issues/3481)
+- fixed issue with sandbox renaming that broke the group hierarchy [#3430](https://github.com/sandboxie-plus/Sandboxie/issues/3430)
+- fixed encrypted confidential sandbox with red box preset blocking access to its root directories [#3475](https://github.com/sandboxie-plus/Sandboxie/issues/3475)
+- fixed SandMan crash issue introduced in 1.12.0 [#3492](https://github.com/sandboxie-plus/Sandboxie/issues/3492)
 
 
 
@@ -106,7 +132,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed issue with programs installed in the sandbox not being displayed via Run from Start Menu [#3334](https://github.com/sandboxie-plus/Sandboxie/issues/3334)
 - fixed issue with NtQueryDirectoryObject [#3310](https://github.com/sandboxie-plus/Sandboxie/issues/3310)
 - fixed some GUI functions using the wrong box path if the FileRootPath value starts with Volume{GUID} [#3345](https://github.com/sandboxie-plus/Sandboxie/issues/3345)
-- fixed programs not running when they are kept in RAM and encrypted boxes if the sandbox root folder is not present [#3349](https://github.com/sandboxie-plus/Sandboxie/issues/3349)
+- fixed programs not running when they are kept in RAM [#3349](https://github.com/sandboxie-plus/Sandboxie/issues/3349)
 - fixed Process Restrictions toggle not working correctly [#3355](https://github.com/sandboxie-plus/Sandboxie/issues/3355)
 
 
@@ -277,7 +303,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed snapshots not merging duplicate directory junctions [#3016](https://github.com/sandboxie-plus/Sandboxie/issues/3016)
 - fixed snapshot-related issue when using Delete V2 rename functionality
 - fixed issue with Delete V2 when using network shares
-- fixed issue with accessing drive roots when using "UseVolumeSerialNumbers=y" 
+- fixed issue with accessing drive roots when using "UseVolumeSerialNumbers=y"
 - fixed remove snapshot resurrects deleted files when using Delete V2 [#3015](https://github.com/sandboxie-plus/Sandboxie/issues/3015)
 
 ### Removed

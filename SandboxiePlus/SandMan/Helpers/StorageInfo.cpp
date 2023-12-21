@@ -203,7 +203,7 @@ std::list<SVolumeInfo> ListAllVolumes()
                 info.mountPoints.push_back(mountPoint);
         }
 
-        volumeName[wcslen(volumeName) - 1] = 0; // strip tailing L'\\'
+        volumeName[wcslen(volumeName) - 1] = 0; // strip trailing L'\\'
 
         info.deviceName = QueryLinkTarget(volumeName);
 
@@ -229,10 +229,10 @@ std::wstring QueryDiskDeviceInterfaceString(PWSTR DeviceInterface, CONST DEVPROP
     WCHAR deviceInstanceId[MAX_DEVICE_ID_LEN + 1] = L"";
 
     if (CM_Get_Device_Interface_Property(DeviceInterface, &DEVPKEY_Device_InstanceId, &devicePropertyType, (PBYTE)deviceInstanceId, &deviceInstanceIdLength, 0 ) != CR_SUCCESS)
-        return FALSE;
+        return L"";
 
     if (CM_Locate_DevNode(&deviceInstanceHandle, deviceInstanceId, CM_LOCATE_DEVNODE_PHANTOM ) != CR_SUCCESS)
-        return FALSE;
+        return L"";
 
     bufferSize = 0x40;
     std::wstring deviceDescription;
@@ -290,9 +290,11 @@ std::map<std::wstring, SDriveInfo> ListAllDrives()
                 if (DeviceIoControl(deviceHandle, IOCTL_STORAGE_GET_DEVICE_NUMBER, NULL, 0, &result, sizeof(result), &dwRet, NULL))
                 {
                     std::wstring name = QueryDiskDeviceInterfaceString(deviceInterface, &DEVPKEY_Device_FriendlyName);
-                    std::wstring enumerator = QueryDiskDeviceInterfaceString(deviceInterface, &DEVPKEY_Device_EnumeratorName);
+                    if (!name.empty()) {
+                        std::wstring enumerator = QueryDiskDeviceInterfaceString(deviceInterface, &DEVPKEY_Device_EnumeratorName);
 
-                    drives[pdevice->prefix + std::to_wstring(result.DeviceNumber)] = SDriveInfo{ name , deviceInterface , enumerator};
+                        drives[pdevice->prefix + std::to_wstring(result.DeviceNumber)] = SDriveInfo{ name , deviceInterface , enumerator };
+                    }
                 }
                 // else // not connected
 

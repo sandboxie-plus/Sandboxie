@@ -266,10 +266,12 @@ extern const WCHAR *Dll_HomeDosPath;
 //extern ULONG Dll_HomeDosPathLen;
 
 extern const WCHAR *Dll_BoxFilePath;
+extern const WCHAR *Dll_BoxFileDosPath;
 extern const WCHAR *Dll_BoxKeyPath;
 extern const WCHAR *Dll_BoxIpcPath;
 
 extern ULONG Dll_BoxFilePathLen;
+extern ULONG Dll_BoxFileDosPathLen;
 extern ULONG Dll_BoxKeyPathLen;
 extern ULONG Dll_BoxIpcPathLen;
 extern ULONG Dll_SidStringLen;

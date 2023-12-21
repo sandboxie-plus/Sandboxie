@@ -55,10 +55,15 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
     QString BoxName = field("boxName").toString();
     BoxName.replace(" ", "_");
 	int BoxType = field("boxType").toInt();
+#ifndef USE_COMBO
+    bool BlackBox = field("blackBox").toBool();
+#else
+    bool BlackBox = CSandBoxPlus::ePrivate;
+#endif
 
     QString Password;
     quint64 ImageSize = 0;
-    if (BoxType == CSandBoxPlus::ePrivate) {
+    if (BlackBox) {
         CBoxImageWindow window(CBoxImageWindow::eNew, this);
         if (theGUI->SafeExec(&window) == 1) {
             Password = window.GetPassword();
@@ -111,13 +116,12 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 				//pBox->InsertText("Template", "NoUACProxy"); // proxy is always needed for exes in the box
 				pBox->InsertText("Template", "RpcPortBindingsExt");
 				break;
-
-            case CSandBoxPlus::ePrivate: {
-                pBox->SetBool("UseFileImage", true);
-                pBox->SetBool("ConfidentialBox", true);
-                break;
-            }
 		}
+
+        if (BlackBox) {
+            pBox->SetBool("UseFileImage", true);
+            pBox->SetBool("ConfidentialBox", true);
+        }
 
 		QRgb rgb = theGUI->GetBoxColor(BoxType);
 		pBox->SetText("BorderColor", QString("#%1%2%3").arg(qBlue(rgb), 2, 16, QChar('0')).arg(qGreen(rgb), 2, 16, QChar('0')).arg(qRed(rgb), 2, 16, QChar('0')) + ",ttl");
@@ -254,25 +258,25 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
     m_TypeGroup = new QButtonGroup();
 
     auto AddBoxType = [&](const QString& label, int Type, const QString& tip = QString(), bool bCheck = false) {
-        QWidget* pW = bCheck ? (QWidget*)new QCheckBox() : (QWidget*)new QRadioButton();
+        QAbstractButton* pC = bCheck ? (QAbstractButton*)new QCheckBox() : (QAbstractButton*)new QRadioButton();
         if (theGUI->m_DarkTheme) {
             QPalette palette = QApplication::palette();
             palette.setColor(QPalette::Base, Qt::white);
             palette.setColor(QPalette::Text, Qt::black);
-            pW->setPalette(palette);
+            pC->setPalette(palette);
         }
-        pW->setToolTip(tip);
-        if(!bCheck) m_TypeGroup->addButton((QRadioButton*)pW, Type);
+        pC->setToolTip(tip);
+        if(!bCheck) m_TypeGroup->addButton((QRadioButton*)pC, Type);
         QHBoxLayout* pLayout = new QHBoxLayout();
         pLayout->setContentsMargins(0,0,0,0);
         pLayout->setSpacing(4);
-        pW->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
-        pLayout->addWidget(pW);
+        pC->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+        pLayout->addWidget(pC);
         QLabel* pLabel = new QLabel(label);
         pLabel->setToolTip(tip);
         pLayout->addWidget(pLabel);
         connect(pLabel, SIGNAL(linkActivated(const QString&)), theGUI, SLOT(OpenUrl(const QString&)));
-        pW = new QWidget();
+        QWidget* pW = new QWidget();
         pW->setLayout(pLayout);
         layout->addWidget(pW, row, 1, 1, 2);
         if (Type != -1) {
@@ -285,6 +289,7 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
         }
         row++;
         //return qMakePair(pW, pIcon);
+        return pC;
     };
 
     AddBoxType(tr("<a href=\"sbie://docs/security-mode\">Security Hardened</a> Sandbox with <a href=\"sbie://docs/privacy-mode\">Data Protection</a>"), (int)CSandBoxPlus::eHardenedPlus, 
@@ -306,15 +311,24 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
         tr("This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. \n"
             "While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment."));
     
-    AddBoxType(tr("<a href=\"sbie://docs/boxencryption\">Encrypted</a> <a href=\"sbie://docs/black-box\">Confidential</a> Box"), (int)CSandBoxPlus::ePrivate,
+    QWidget* pGap = new QWidget();
+    pGap->setMinimumHeight(4);
+    layout->addWidget(pGap, row++, 1, 1, 2);
+
+    //AddBoxType(tr("<a href=\"sbie://docs/boxencryption\">Encrypted</a> <a href=\"sbie://docs/black-box\">Confidential</a> Box"), (int)CSandBoxPlus::ePrivate,
+    QWidget* pBlackBox = AddBoxType(tr("<a href=\"sbie://docs/boxencryption\">Encrypt</a> Box content and set <a href=\"sbie://docs/black-box\">Confidential</a>"), (int)CSandBoxPlus::ePrivate,
         tr("In this box type the sandbox uses an encrypted disk image as its root folder. This provides an additional layer of privacy and security. \n"
             "Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes. \n"
-            "This ensures the utmost level of privacy and data protection within the confidential sandbox environment."));//, true);
+            "This ensures the utmost level of privacy and data protection within the confidential sandbox environment."), true);
 
     connect(m_TypeGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SIGNAL(typeChanged()));
     registerField("boxType", this, "currentType", "typeChanged");
-
     connect(m_TypeGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(OnBoxTypChanged()));
+
+    connect(pBlackBox, SIGNAL(toggled(bool)), this, SIGNAL(typeChanged()));
+    registerField("blackBox", pBlackBox);
+    connect(pBlackBox, SIGNAL(toggled(bool)), this, SLOT(OnBoxTypChanged()));
+
 
     //QCheckBox* pMore = new QCheckBox(tr("Show More Types"));
     //layout->addWidget(pMore, 4, 3);
@@ -385,14 +399,16 @@ void CBoxTypePage::OnBoxTypChanged()
 {
 #ifndef USE_COMBO
     int BoxType = m_TypeGroup->checkedId();
+    bool BlackBox = field("blackBox").toBool();
 #else
 	int BoxType = m_pBoxType->currentData().toInt();
+    bool BlackBox = CSandBoxPlus::ePrivate;
 
 	m_pInfoLabel->setText(theGUI->GetBoxDescription(BoxType));
 #endif
 
-    if(BoxType != CSandBoxPlus::eDefault)
-		theGUI->CheckCertificate(this, BoxType == CSandBoxPlus::ePrivate);
+    if(BoxType != CSandBoxPlus::eDefault || BlackBox)
+		theGUI->CheckCertificate(this, BlackBox);
 
     emit completeChanged();
 }
@@ -443,11 +459,13 @@ bool CBoxTypePage::validatePage()
 
 #ifndef USE_COMBO
     int BoxType = m_TypeGroup->checkedId();
+    bool BlackBox = field("blackBox").toBool();
 #else
 	int BoxType = m_pBoxType->currentData().toInt();
+    bool BlackBox = (BoxType == CSandBoxPlus::ePrivate || BoxType == CSandBoxPlus::ePrivatePlus);
 #endif
 
-    if ((BoxType == CSandBoxPlus::ePrivate || BoxType == CSandBoxPlus::ePrivatePlus) && !theGUI->IsImDiskReady()) {
+    if (BlackBox && !theGUI->IsImDiskReady()) {
         theGUI->GetAddonManager()->TryInstallAddon("ImDisk", this, tr("To use encrypted boxes you need to install the ImDisk driver, do you want to download and install it?"));
         return false;
     }

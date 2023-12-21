@@ -663,6 +663,47 @@ _FX ULONG64 SbieApi_QueryProcessInfoEx(
 
 
 //---------------------------------------------------------------------------
+// SbieApi_QueryProcessInfoStr
+//---------------------------------------------------------------------------
+
+
+_FX LONG SbieApi_QueryProcessInfoStr(
+    HANDLE ProcessId,
+    ULONG info_type,
+    WCHAR *out_str,
+    ULONG *inout_str_len)
+{
+    NTSTATUS status;
+    __declspec(align(8)) UNICODE_STRING64 UniStr;
+    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+    API_QUERY_PROCESS_INFO_ARGS *args = (API_QUERY_PROCESS_INFO_ARGS *)parms;
+
+    memzero(parms, sizeof(parms));
+    args->func_code             = API_QUERY_PROCESS_INFO;
+
+    args->process_id.val64      = (ULONG64)(ULONG_PTR)ProcessId;
+    args->info_type.val64       = (ULONG64)(ULONG_PTR)info_type;
+    args->info_data.val64       = (ULONG64)(ULONG_PTR)inout_str_len;
+
+    if (out_str) {
+        UniStr.Length = 0;
+        UniStr.MaximumLength = (USHORT)*inout_str_len;
+        UniStr.Buffer = (ULONG64)(ULONG_PTR)out_str;
+        args->ext_data.val64 = (ULONG64)(ULONG_PTR)&UniStr;
+    }
+
+    status = SbieApi_Ioctl(parms);
+
+    if (!NT_SUCCESS(status)) {
+        if (out_str)
+            *out_str = L'\0';
+    }
+
+    return status;
+}
+
+
+//---------------------------------------------------------------------------
 // SbieApi_QueryBoxPath
 //---------------------------------------------------------------------------
 

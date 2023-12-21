@@ -357,9 +357,6 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 
     __try {
 
-        ULONG64 *data = args->info_data.val;
-        ProbeForWrite(data, sizeof(ULONG64), sizeof(ULONG64));
-
         if (args->info_type.val == 0) {
 
             ULONG64 flags = 0;
@@ -410,17 +407,23 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
                 flags = SBIE_FLAG_HOST_INJECT_PROCESS;
             }
 
-            *data = flags;
+            ProbeForWrite(args->info_data.val, sizeof(ULONG64), sizeof(ULONG64));
+            *args->info_data.val = flags;
 
         } else if (args->info_type.val == 'pril') {
 
-            *data = proc->integrity_level;
+            ProbeForWrite(args->info_data.val, sizeof(ULONG64), sizeof(ULONG64));
+            *args->info_data.val = proc->integrity_level;
 
         } else if (args->info_type.val == 'nt32') {
 
-            *data = proc->ntdll32_base;
+            ProbeForWrite(args->info_data.val, sizeof(ULONG64), sizeof(ULONG64));
+            *args->info_data.val = proc->ntdll32_base;
 
         } else if (args->info_type.val == 'ptok') { // primary token
+
+            ULONG64 *data = args->info_data.val;
+            ProbeForWrite(data, sizeof(ULONG64), sizeof(ULONG64));
 
 			if(is_caller_sandboxed)
 				status = STATUS_ACCESS_DENIED;
@@ -448,6 +451,9 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 			}
 
 		} else if (args->info_type.val == 'itok' || args->info_type.val == 'ttok') { // impersonation token / test thread token
+
+            ULONG64 *data = args->info_data.val;
+            ProbeForWrite(data, sizeof(ULONG64), sizeof(ULONG64));
 
 			if(is_caller_sandboxed)
 				status = STATUS_ACCESS_DENIED;
@@ -506,6 +512,9 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
 
 		} else if (args->info_type.val == 'ippt') { // is primary process token
 
+            ULONG64 *data = args->info_data.val;
+            ProbeForWrite(data, sizeof(ULONG64), sizeof(ULONG64));
+
             HANDLE handle = (HANDLE)(args->ext_data.val);
 
             OBJECT_TYPE* object;
@@ -524,11 +533,34 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
             
             proc->detected_image_type = (ULONG)(args->ext_data.val);
 
-            *data = 0;
-
         } else if (args->info_type.val == 'gpit') { // get process image type
             
-            *data = proc->detected_image_type;
+            ProbeForWrite(args->info_data.val, sizeof(ULONG64), sizeof(ULONG64));
+            *args->info_data.val = proc->detected_image_type;
+
+        } else if (args->info_type.val == 'root') {
+            
+            //
+            // When querygin a sandboxed process API_QUERY_PROCESS_PATH return the reparsed file root path
+            // this info class is used to retrive the raw i.e. not reparsed file root path
+            // 
+            // Note: API_QUERY_BOX_PATH when invoked by a sandboxed process also returns its reparsed file root path
+            //
+            
+            if(!proc->box->file_raw_path)
+                status = STATUS_VARIABLE_NOT_FOUND;
+            else
+            {
+                ULONG* file_path_len = (ULONG*)args->info_data.val64;
+                UNICODE_STRING64 *file_path = (UNICODE_STRING64*)args->ext_data.val64;
+
+                if (file_path_len) {
+                    ProbeForWrite(file_path_len, sizeof(ULONG), sizeof(ULONG));
+                    *file_path_len = proc->box->file_raw_path_len;
+                }
+
+                Api_CopyStringToUser(file_path, proc->box->file_raw_path, proc->box->file_raw_path_len);
+            }
 
         } else
             status = STATUS_INVALID_INFO_CLASS;

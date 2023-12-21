@@ -139,6 +139,13 @@ ULONG64 SbieApi_QueryProcessInfoEx(
     ULONG64 ext_data);
 
 SBIEAPI_EXPORT
+LONG SbieApi_QueryProcessInfoStr(
+    HANDLE ProcessId,
+    ULONG info_type,
+    WCHAR *out_str,
+    ULONG *inout_str_len);
+
+SBIEAPI_EXPORT
 LONG SbieApi_QueryBoxPath(
     const WCHAR *box_name,              // WCHAR [34]
     WCHAR *out_file_path,

@@ -533,6 +533,9 @@ _FX void File_AdjustBoxFilePath(PROCESS *proc, HANDLE handle)
 
                 path_len = (path_len + 1) * sizeof(WCHAR);
 
+                InterlockedExchangePointer(&box->file_raw_path, box->file_path);
+                InterlockedExchange(&box->file_raw_path_len, box->file_path_len);
+
                 InterlockedExchange(&box->file_path_len, 0);
                 InterlockedExchangePointer(&box->file_path, path);
                 InterlockedExchange(&box->file_path_len, path_len);
@@ -1252,7 +1255,7 @@ _FX NTSTATUS File_Generic_MyParseProc(
             }
         }
 
-    } else if (Box_IsBoxedPath(proc->box, file, &Name->Name))
+    } else if (Box_IsBoxedPath(proc->box, file, &Name->Name) || (proc->box->file_raw_path && Box_IsBoxedPath(proc->box, file_raw, &Name->Name)))
         IsBoxedPath = TRUE;
 
     //

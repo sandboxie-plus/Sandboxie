@@ -11,6 +11,7 @@ todo: improve behaviorue of toolbar customization menu
 
 ### Fixed
 - fixed fix for [#3475](https://github.com/sandboxie-plus/Sandboxie/issues/3475) not working without FileRootPath being explicitly set
+- fixed "The directory name is invalid" when starting a process in a encrypted private box [#3475](https://github.com/sandboxie-plus/Sandboxie/issues/3475)
 
 
 

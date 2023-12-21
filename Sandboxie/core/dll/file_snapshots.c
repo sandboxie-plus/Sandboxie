@@ -193,7 +193,7 @@ _FX WCHAR* File_MakeSnapshotPath(FILE_SNAPSHOT* Cur_Snapshot, const WCHAR* CopyP
 	if (!Cur_Snapshot)
 		return NULL;
 
-	ULONG prefixLen = File_FindBoxPrefixLength(CopyPath);
+	ULONG prefixLen = File_FindBoxPrefix(CopyPath);
 	if (prefixLen == 0)
 		return NULL;
 

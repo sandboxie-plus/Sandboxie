@@ -74,11 +74,13 @@ const WCHAR *Dll_HomeDosPath = NULL;
 //ULONG Dll_HomeDosPathLen = 0;
 
 const WCHAR *Dll_BoxFilePath = NULL;
+const WCHAR *Dll_BoxFileRawPath = NULL;
 const WCHAR *Dll_BoxFileDosPath = NULL;
 const WCHAR *Dll_BoxKeyPath = NULL;
 const WCHAR *Dll_BoxIpcPath = NULL;
 
 ULONG Dll_BoxFilePathLen = 0;
+ULONG Dll_BoxFileRawPathLen = 0;
 ULONG Dll_BoxFileDosPathLen = 0;
 ULONG Dll_BoxKeyPathLen = 0;
 ULONG Dll_BoxIpcPathLen = 0;

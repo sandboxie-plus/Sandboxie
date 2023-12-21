@@ -649,14 +649,29 @@ _FX NTSTATUS File_GetTruePathImpl(ULONG* p_length, WCHAR **OutTruePath, ULONG *O
     WCHAR* name;
     const FILE_DRIVE *drive;
 
+    struct {
+        const WCHAR* Path;
+        ULONG PathLen;
+    } BoxFilePaths[3] = {
+        Dll_BoxFilePath, Dll_BoxFilePathLen,
+        Dll_BoxFileRawPath, Dll_BoxFileRawPathLen,
+        File_AltBoxPath, File_AltBoxPathLen // ToDo: deprecated, remove - raw path is more reliable and covers all cases
+    }, *Dll_BoxFile;
+
 check_sandbox_prefix:
 
-    if (*p_length >= Dll_BoxFilePathLen &&
+    for (int i = 0; i < ARRAYSIZE(BoxFilePaths) && !*p_is_boxed_path; i++) {
+
+        Dll_BoxFile = &BoxFilePaths[i];
+        if (!Dll_BoxFile->Path)
+            continue;
+    
+    if (*p_length >= Dll_BoxFile->PathLen &&
             0 == Dll_NlsStrCmp(
-                *OutTruePath, Dll_BoxFilePath, Dll_BoxFilePathLen))
+                *OutTruePath, Dll_BoxFile->Path, Dll_BoxFile->PathLen))
     {
-        *OutTruePath += Dll_BoxFilePathLen;
-        *p_length -= Dll_BoxFilePathLen;
+        *OutTruePath += Dll_BoxFile->PathLen;
+        *p_length -= Dll_BoxFile->PathLen;
 
         if (! *p_length) {
             //
@@ -671,25 +686,6 @@ check_sandbox_prefix:
         *p_is_boxed_path = TRUE;
     }
 
-    if (File_AltBoxPath &&
-            *p_length >= File_AltBoxPathLen &&
-            0 == Dll_NlsStrCmp(
-                *OutTruePath, File_AltBoxPath, File_AltBoxPathLen))
-    {
-        *OutTruePath += File_AltBoxPathLen;
-        *p_length -= File_AltBoxPathLen;
-
-        if (! *p_length) {
-            //
-            // caller specified just the sandbox prefix
-            //
-            *OutTruePath = NULL;
-            return STATUS_BAD_INITIAL_PC;
-        }
-
-        if (OutFlags)
-            *OutFlags |= FGN_IS_BOXED_PATH;
-        *p_is_boxed_path = TRUE;
     }
      
 	//

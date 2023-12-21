@@ -189,23 +189,24 @@ _FX BOOLEAN File_Init(void)
         // implement workaround, see SbieDll_TranslateNtToDosPath
         //
 
-        ULONG BoxFilePathLen = 0;
-        if (NT_SUCCESS(SbieApi_QueryProcessInfoStr(0, 'root', NULL, &BoxFilePathLen))) 
+        ULONG BoxFileRawPathLen;
+        if (NT_SUCCESS(SbieApi_QueryProcessInfoStr(0, 'root', NULL, &BoxFileRawPathLen))) 
         {
-            WCHAR* BoxFilePathConf = Dll_AllocTemp(BoxFilePathLen);
-            if (NT_SUCCESS(SbieApi_QueryProcessInfoStr(0, 'root', BoxFilePathConf, &BoxFilePathLen))) 
+            Dll_BoxFileRawPath = Dll_AllocTemp(BoxFileRawPathLen);
+            if (NT_SUCCESS(SbieApi_QueryProcessInfoStr(0, 'root', (WCHAR*)Dll_BoxFileRawPath, &BoxFileRawPathLen))) 
             {
-                if (SbieDll_TranslateNtToDosPath(BoxFilePathConf))
-                {
-                    Dll_BoxFileDosPathLen = wcslen(BoxFilePathConf);
-                    Dll_BoxFileDosPath = Dll_Alloc((Dll_BoxFileDosPathLen + 1) * sizeof(WCHAR));
-                    wcscpy((WCHAR*)Dll_BoxFileDosPath, BoxFilePathConf);
+                Dll_BoxFileRawPathLen = wcslen(Dll_BoxFileRawPath);
+
+                Dll_BoxFileDosPath = Dll_Alloc(BoxFileRawPathLen);
+                wcscpy((WCHAR*)Dll_BoxFileDosPath, Dll_BoxFileRawPath);
+                if (!SbieDll_TranslateNtToDosPath((WCHAR*)Dll_BoxFileDosPath)) {
+                    Dll_Free((WCHAR *)Dll_BoxFileDosPath);
+                    Dll_BoxFileDosPath = NULL;
                 }
             }
-            Dll_Free(BoxFilePathConf);
         }
     }
-    else
+    if(Dll_BoxFileDosPath)
         Dll_BoxFileDosPathLen = wcslen(Dll_BoxFileDosPath);
 
 	File_InitSnapshots();

@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.12.6 / 5.67.6] - 2023-12-
 
 ### Changed
-todo: improve behaviorue of toolbar customization menu
+- improve behaviorue of toolbar customization menu
 
 ### Fixed
 - fixed Sandboxie-Plus 1.12.4 + failed to start start.exe in confidential box [#3514](https://github.com/sandboxie-plus/Sandboxie/issues/3514)

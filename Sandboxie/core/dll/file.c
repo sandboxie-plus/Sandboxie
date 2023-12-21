@@ -7418,7 +7418,7 @@ _FX WCHAR *File_GetTruePathForBoxedPath(const WCHAR *Path, BOOLEAN IsDosPath)
 
     if (NtPath) {
 
-        if (_wcsnicmp(NtPath, Dll_BoxFilePath, Dll_BoxFilePathLen) == 0) {
+        if (_wcsnicmp(NtPath, Dll_BoxFilePath, Dll_BoxFilePathLen) == 0 || (Dll_BoxFileRawPath && _wcsnicmp(NtPath, Dll_BoxFileRawPath, Dll_BoxFileRawPathLen) == 0)) {
 
             NTSTATUS status;
             UNICODE_STRING uni;

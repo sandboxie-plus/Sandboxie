@@ -447,6 +447,36 @@ retry:
 
 
 //---------------------------------------------------------------------------
+// Util_IsCsrssProcess
+//---------------------------------------------------------------------------
+
+NTKERNELAPI PCHAR NTAPI PsGetProcessImageFileName(_In_ PEPROCESS Process);
+
+_FX BOOLEAN Util_IsCsrssProcess(HANDLE pid)
+{
+    PEPROCESS ProcessObject;
+    NTSTATUS status;
+    PCHAR ImageFileName;
+    BOOLEAN ret = FALSE;
+
+    if (!MyIsProcessRunningAsSystemAccount(pid))
+        return FALSE;
+
+    status = PsLookupProcessByProcessId(pid, &ProcessObject);
+    if (NT_SUCCESS(status)) {
+
+        ImageFileName = PsGetProcessImageFileName(ProcessObject);
+
+        ret = (_stricmp(ImageFileName, "csrss.exe") == 0);
+
+        ObDereferenceObject(ProcessObject);
+    }
+
+    return ret;
+}
+
+
+//---------------------------------------------------------------------------
 // Util_IsProtectedProcess
 //---------------------------------------------------------------------------
 

@@ -109,6 +109,8 @@ NTSTATUS MyValidateCertificate(void);
 
 HANDLE Util_GetProcessPidByName(const WCHAR* name);
 
+BOOLEAN Util_IsCsrssProcess(HANDLE pid);
+
 BOOLEAN Util_IsProtectedProcess(HANDLE pid);
 
 LARGE_INTEGER Util_GetTimestamp(void);

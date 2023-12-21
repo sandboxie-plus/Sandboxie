@@ -505,7 +505,11 @@ check:
 
                     //DbgPrint("IRP_MJ_CREATE: %S\n", root->file_root);
 
-                    if (Util_IsProtectedProcess(PsGetCurrentProcessId()))
+                    //
+                    // csrss.exe needs acces to binaries of starting up processes,
+                    //
+
+                    if (Util_IsCsrssProcess(PsGetCurrentProcessId()))
                         break;
 
                     status = STATUS_ACCESS_DENIED;

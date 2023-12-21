@@ -1202,7 +1202,9 @@ _FX ACCESS_MASK Thread_CheckObject_CommonEx(
                         //
 
                         if (protect_process /*&& MyIsProcessRunningAsSystemAccount(cur_pid)*/) {
-                            if ((_wcsicmp(nptr, SBIESVC_EXE) == 0) || Util_IsProtectedProcess(cur_pid)
+                            if ((_wcsicmp(nptr, SBIESVC_EXE) == 0) 
+                                || Util_IsCsrssProcess(cur_pid)
+                                || Util_IsProtectedProcess(cur_pid)
                                 || (_wcsicmp(nptr, L"conhost.exe") == 0)
                                 || (_wcsicmp(nptr, L"taskmgr.exe") == 0) || (_wcsicmp(nptr, L"sandman.exe") == 0))
                                 protect_process = FALSE;

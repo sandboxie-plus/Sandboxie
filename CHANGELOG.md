@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 todo: improve behaviorue of toolbar customization menu
 
 ### Fixed
+- fixed Sandboxie-Plus 1.12.4 + failed to start start.exe in confidential box [#3514](https://github.com/sandboxie-plus/Sandboxie/issues/3514)
 - fixed fix for [#3475](https://github.com/sandboxie-plus/Sandboxie/issues/3475) not working without FileRootPath being explicitly set
 - fixed "The directory name is invalid" when starting a process in a encrypted private box [#3475](https://github.com/sandboxie-plus/Sandboxie/issues/3475)
 

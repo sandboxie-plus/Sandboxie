@@ -995,7 +995,7 @@ _FX NTSTATUS File_GetName(
                 // if the file/directory is located in the sandbox, we still need to check the path
                 //
 
-                ULONG prefixLen = File_FindBoxPrefixLength(name);
+                ULONG prefixLen = File_FindBoxPrefix(name);
                 if (prefixLen != 0) {
 
                     name += prefixLen;

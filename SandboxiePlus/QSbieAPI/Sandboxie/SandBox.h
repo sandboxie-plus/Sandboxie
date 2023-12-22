@@ -57,8 +57,8 @@ public:
 	virtual SB_STATUS				TerminateAll();
 	virtual SB_STATUS				SetSuspendedAll(bool bSuspended);
 
-	virtual void					OpenBox() {}
-	virtual void					CloseBox() {}
+	virtual void					OpenBox();
+	virtual void					CloseBox();
 
 	virtual bool					IsEnabled() const  { return m_IsEnabled; }
 
@@ -87,6 +87,7 @@ public:
 	class CSbieAPI*					Api() { return m_pAPI; }
 
 protected:
+	friend class CBoxedProcess;
 	friend class CSbieAPI;
 
 	SB_PROGRESS						CleanBoxFolders(const QStringList& BoxFolders);
@@ -96,6 +97,7 @@ protected:
 	static void						MergeSnapshotAsync(const CSbieProgressPtr& pProgress, const QString& BoxPath, const QString& TargetID, const QString& SourceID, const QPair<const QString, class CSbieAPI*>& params);
 
 	QString							m_FilePath;
+	QString							m_FileRePath; // reparsed Nt path
 	QString							m_RegPath;
 	QString							m_IpcPath;
 	QString							m_Mount;

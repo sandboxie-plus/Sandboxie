@@ -1541,11 +1541,11 @@ SB_STATUS CSbieAPI::UpdateBoxPaths(CSandBox* pSandBox)
 	if (!Status)
 		return Status;
 
-	QString FilePath = Nt2DosPath(QString::fromWCharArray(FileRoot.c_str(), wcslen(FileRoot.c_str())));
-	QString RegPath = QString::fromWCharArray(KeyRoot.c_str(), wcslen(KeyRoot.c_str()));
-	QString IpcPath = QString::fromWCharArray(IpcRoot.c_str(), wcslen(IpcRoot.c_str()));
+	QString FilePath = QString::fromWCharArray(FileRoot.c_str());
+	QString RegPath = QString::fromWCharArray(KeyRoot.c_str());
+	QString IpcPath = QString::fromWCharArray(IpcRoot.c_str());
 
-	pSandBox->SetBoxPaths(FilePath, RegPath, IpcPath);
+	pSandBox->SetBoxPaths(Nt2DosPath(FilePath), RegPath, IpcPath);
 	return SB_OK;
 }
 

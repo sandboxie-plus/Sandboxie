@@ -240,6 +240,9 @@ bool CBoxedProcess::InitProcessInfo()
 	SB_STATUS Status = m_pBox->Api()->GetProcessInfo(m_ProcessId, &m_ParendPID, &m_ProcessInfo.Flags, &m_bSuspended,
 		&m_ImagePath, &m_CommandLine, &m_WorkingDir);
 
+	if (m_ImagePath.left(8) == "\\Device\\" && m_ImagePath.left(m_pBox->m_FileRePath.length()).compare(m_pBox->m_FileRePath, Qt::CaseInsensitive) == 0)
+		m_ImagePath = m_pBox->m_FilePath + m_ImagePath.mid(m_pBox->m_FileRePath.length());
+	
 	return !Status.IsError();
 }
 

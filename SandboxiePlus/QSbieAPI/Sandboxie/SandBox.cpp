@@ -165,6 +165,23 @@ SB_STATUS CSandBox::SetSuspendedAll(bool bSuspended)
 	return m_pAPI->SetSuspendedAll(m_Name, bSuspended);
 }
 
+void CSandBox::OpenBox()
+{
+	HANDLE hFile = CreateFileW((LPCWSTR)m_FilePath.utf16(), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+	if (hFile != INVALID_HANDLE_VALUE) 
+	{
+		WCHAR targetPath[MAX_PATH];
+		if(GetFinalPathNameByHandleW(hFile, targetPath, MAX_PATH, FILE_NAME_NORMALIZED | VOLUME_NAME_NT))
+			m_FileRePath = QString::fromWCharArray(targetPath);
+		CloseHandle(hFile);
+	}
+}
+
+void CSandBox::CloseBox() 
+{
+	m_FileRePath.clear();
+}
+
 bool CSandBox::IsEmpty() const
 {
 	return !QFile::exists(m_FilePath);

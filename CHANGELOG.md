@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed symbolic links created inside a sandbox not working properly [#3181](https://github.com/sandboxie-plus/Sandboxie/issues/3181)
 - fixed issue with drives mounted to multiple fodlers or a drive lettet and a folder
 - fixed issue with file paths when using boxes a with relocated root (e.g. to an ImDisk volume)
+- fixed issue with explorer on windows 11 when usign SysCallLockDown=y [#3516](https://github.com/sandboxie-plus/Sandboxie/issues/3516)
 
 
 

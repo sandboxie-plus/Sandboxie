@@ -4,19 +4,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.12.6 / 5.67.6] - 2023-12-
+## [1.12.6 / 5.67.6] - 2024-01-
 
 ### Changed
-- improve behaviorue of toolbar customization menu
+- improved behaviour of toolbar customization menu
 
 ### Fixed
-- fixed Sandboxie-Plus 1.12.4 + failed to start start.exe in confidential box [#3514](https://github.com/sandboxie-plus/Sandboxie/issues/3514)
-- fixed "The directory name is invalid" when starting a process in a encrypted private box [#3475](https://github.com/sandboxie-plus/Sandboxie/issues/3475)
+- fixed issue introduced in 1.12.4 with start.exe failing to run in a confidential box [#3514](https://github.com/sandboxie-plus/Sandboxie/issues/3514)
+- fixed "The directory name is invalid" when starting a process in an encrypted private box [#3475](https://github.com/sandboxie-plus/Sandboxie/issues/3475)
 - fixed symbolic links created inside a sandbox not working properly [#3181](https://github.com/sandboxie-plus/Sandboxie/issues/3181)
-- fixed issue with drives mounted to multiple fodlers or a drive lettet and a folder
-- fixed issue with file paths when using boxes a with relocated root (e.g. to an ImDisk volume) [#3506](https://github.com/sandboxie-plus/Sandboxie/issues/3506)
-- fixed issue with explorer on windows 11 when usign SysCallLockDown=y [#3516](https://github.com/sandboxie-plus/Sandboxie/issues/3516)
-- fixed sandman not showing icons of processes located on a ImDisk volume
+- fixed issue with drives mounted to multiple folders or a drive letter and a folder
+- fixed issue with file paths when using sandboxes with relocated root (e.g. to an ImDisk volume) [#3506](https://github.com/sandboxie-plus/Sandboxie/issues/3506)
+- fixed issue with explorer on Windows 11 when using "SysCallLockDown=y" [#3516](https://github.com/sandboxie-plus/Sandboxie/issues/3516)
+- fixed SandMan not showing icons of processes located on an ImDisk volume
 
 
 

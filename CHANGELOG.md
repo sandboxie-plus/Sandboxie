@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.12.6 / 5.67.6] - 2024-01-
+## [1.12.6 / 5.67.6] - 2024-01-02
 
 ### Changed
 - improved behaviour of toolbar customization menu

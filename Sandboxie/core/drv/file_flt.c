@@ -506,7 +506,7 @@ check:
                     //DbgPrint("IRP_MJ_CREATE: %S\n", root->file_root);
 
                     //
-                    // csrss.exe needs acces to binaries of starting up processes.
+                    // csrss.exe needs access to binaries of starting up processes.
                     //
 
                     if (Util_IsCsrssProcess(PsGetCurrentProcessId()))

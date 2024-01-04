@@ -542,7 +542,7 @@ _FX NTSTATUS Process_Api_QueryInfo(PROCESS *proc, ULONG64 *parms)
             
             //
             // When querygin a sandboxed process API_QUERY_PROCESS_PATH return the reparsed file root path
-            // this info class is used to retrive the raw i.e. not reparsed file root path
+            // this info class is used to retrieve the raw i.e. not reparsed file root path
             // 
             // Note: API_QUERY_BOX_PATH when invoked by a sandboxed process also returns its reparsed file root path
             //

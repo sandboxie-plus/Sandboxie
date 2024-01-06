@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Make Duplicate Box Config keep the order of the original box configuration [#3523](https://github.com/sandboxie-plus/Sandboxie/issues/3523)
+- Save options as new defaults disappears from the Summary page [#3522](https://github.com/sandboxie-plus/Sandboxie/issues/3522)
 
 
 

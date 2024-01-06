@@ -53,6 +53,8 @@ class CBoxTypePage : public QWizardPage
 public:
     CBoxTypePage(bool bAlowTemp, QWidget *parent = nullptr);
 
+    void initializePage() override;
+
     int nextId() const override;
     bool isComplete() const override;
     bool validatePage() override;

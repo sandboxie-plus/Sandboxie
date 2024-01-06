@@ -21,7 +21,7 @@ CNewBoxWizard::CNewBoxWizard(bool bAlowTemp, QWidget *parent)
     setPage(Page_Advanced, new CAdvancedPage);
     setPage(Page_Summary, new CSummaryPage);
     
-    m_bAdvanced = false;
+    m_bAdvanced = theConf->GetBool("Options/AdvancedBoxWizard", false);
 
     setWizardStyle(ModernStyle);
     //setOption(HaveHelpButton, true);
@@ -377,11 +377,16 @@ CBoxTypePage::CBoxTypePage(bool bAlowTemp, QWidget *parent)
         palette.setColor(QPalette::Text, Qt::black);
         m_pAdvanced->setPalette(palette);
     }
-    m_pAdvanced->setChecked(theConf->GetBool("Options/AdvancedBoxWizard", false));
     layout->addWidget(m_pAdvanced, row++, 2, 1, 1);
     connect(m_pAdvanced, SIGNAL(toggled(bool)), this, SLOT(OnAdvanced()));
 
     setLayout(layout);
+}
+
+
+void CBoxTypePage::initializePage()
+{
+    m_pAdvanced->setChecked(((CNewBoxWizard*)wizard())->m_bAdvanced);
 }
 
 void CBoxTypePage::setCurrentType(int type) 

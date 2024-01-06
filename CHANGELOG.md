@@ -9,10 +9,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Make Duplicate Box Config keep the order of the original box configuration [#3523](https://github.com/sandboxie-plus/Sandboxie/issues/3523)
 - Save options as new defaults disappears from the Summary page [#3522](https://github.com/sandboxie-plus/Sandboxie/issues/3522)
-- Windows Explorer has difficulty navigating when running in a sandbox with data protection enabled on Windows 11 [#3517](https://github.com/sandboxie-plus/Sandboxie/issues/3517) [#3516](https://github.com/sandboxie-plus/Sandboxie/issues/3516)
+- fixed Windows Explorer has difficulty navigating when running in a sandbox with data protection enabled on Windows 11 [#3517](https://github.com/sandboxie-plus/Sandboxie/issues/3517) [#3516](https://github.com/sandboxie-plus/Sandboxie/issues/3516)
  - the default template for privacy boxes now sets NormalFilePath=%ProgramData%\Microsoft\
-- MessageBox with MB_DEFAULT_DESKTOP_ONLY or MB_SERVICE_NOTIFICATION can not display title and text correctly in security hardened box. [#3529](https://github.com/sandboxie-plus/Sandboxie/issues/3529)
-- Can't run npm inside security hardened sandbox on Windows 11 [#3505](https://github.com/sandboxie-plus/Sandboxie/issues/3505)
+- fixed MessageBox with MB_DEFAULT_DESKTOP_ONLY or MB_SERVICE_NOTIFICATION can not display title and text correctly in security hardened box. [#3529](https://github.com/sandboxie-plus/Sandboxie/issues/3529)
+- fixed Can't run npm inside security hardened sandbox on Windows 11 [#3505](https://github.com/sandboxie-plus/Sandboxie/issues/3505)
+- fixed [1.12.6] Symlink and open path issue [#3537](https://github.com/sandboxie-plus/Sandboxie/issues/3537)
+
+
+
 
 ## [1.12.6 / 5.67.6] - 2024-01-02
 

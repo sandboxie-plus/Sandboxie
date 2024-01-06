@@ -438,6 +438,7 @@ _FX NTSTATUS File_GetCopyPathImpl(WCHAR* TruePath, WCHAR **OutCopyPath, ULONG *O
     ULONG length;
     WCHAR* name;
     const FILE_DRIVE *drive;
+    const FILE_GUID* guid;
     ULONG PrefixLength;
     
     length = wcslen(TruePath);
@@ -577,26 +578,48 @@ _FX NTSTATUS File_GetCopyPathImpl(WCHAR* TruePath, WCHAR **OutCopyPath, ULONG *O
         else
             drive = File_GetDriveForUncPath(TruePath, length, &drive_len);
 
-        if (drive) {
+        if (!drive)
+            guid = File_GetGuidForPath(TruePath, length);
 
-            WCHAR drive_letter = drive->letter;
+        if (drive || guid) {
+
+            WCHAR drive_letter = 0;
+            WCHAR sn[10] = { 0 };
+            WCHAR drive_guid[38 + 1];
+
+            if (drive) {
+                drive_letter = drive->letter;
+                wcscpy(sn, drive->sn);
+            }
+            else { // if guid
+                wcscpy(drive_guid, guid->guid);
+                drive_len = guid->len;
+            }
 
             LeaveCriticalSection(File_DrivesAndLinks_CritSec);
 
             wmemcpy(name, _Drive, _DriveLen);
             name += _DriveLen;
-            *name = drive_letter;
-            ++name;
+            if (drive_letter) {
 
-            if (File_DriveAddSN && *drive->sn) {
-
-                *name = L'~';
+                *name = drive_letter;
                 ++name;
-                wcscpy(name, drive->sn);
-                name += 9;
-            }
+                
+                if (File_DriveAddSN && *sn) {
 
-            *name = L'\0';
+                    *name = L'~';
+                    ++name;
+                    wcscpy(name, sn);
+                    name += 9;
+                }
+
+                *name = L'\0';
+            }
+            else { // if guid
+
+                wcscpy(name, drive_guid);
+                name += wcslen(drive_guid); // = 38
+            }
 
             if (length == drive_len) {
 
@@ -669,6 +692,7 @@ _FX NTSTATUS File_GetTruePathImpl(ULONG length, WCHAR **OutTruePath, ULONG *OutF
     ULONG prefixLen = 0;
     WCHAR* name;
     const FILE_DRIVE *drive;
+    const FILE_GUID* guid;
 
 check_sandbox_prefix:
 
@@ -736,31 +760,49 @@ check_sandbox_prefix:
         _wcsnicmp(*OutTruePath, _Drive, _DriveLen - 1) == 0)
     {
         name = (*OutTruePath);
-        if (name[_DriveLen - 1] == L'\\')
-            drive = File_GetDriveForLetter(name[_DriveLen]);
-        else
-            drive = NULL;
 
-        if (! drive) {
+        drive = NULL;
+        guid = NULL;
+
+        if (name[_DriveLen - 1] == L'\\') {
+            if (name[_DriveLen] == L'{')
+                guid = File_GetLinkForGuid(&name[_DriveLen]);
+            else
+                drive = File_GetDriveForLetter(name[_DriveLen]);
+        }
+            
+
+        if (drive) {
+
+            ULONG len = _DriveLen + 1; /* drive letter */
+
+            // skip any suffix after the drive letter
+            if (File_DriveAddSN) {
+                WCHAR* ptr = wcschr(*OutTruePath + _DriveLen + 1, L'\\');
+                if (!ptr) ptr = wcschr(*OutTruePath + _DriveLen + 1, L'\0');
+                len = (ULONG)(ptr - *OutTruePath);
+            }
+
+            File_GetName_FixTruePrefix(TlsData,
+                OutTruePath, &length, len,
+                drive->path, drive->len);
+        }
+        else if (guid) {
+
+            ULONG len = _DriveLen + 38; /* drive guid*/
+
+            File_GetName_FixTruePrefix(TlsData,
+                OutTruePath, &length, len,
+                guid->path, guid->len);
+        }
+        else {
+
             //
             // caller specified invalid path for \sandbox\drive\x
             //
             *OutTruePath = NULL;
             return STATUS_BAD_INITIAL_PC;
         }
-
-        ULONG len = _DriveLen + 1; /* drive letter */
-
-        // skip any suffix after the drive letter
-        if (File_DriveAddSN) {
-            WCHAR* ptr = wcschr(*OutTruePath + _DriveLen + 1, L'\\');
-            if (!ptr) ptr = wcschr(*OutTruePath + _DriveLen + 1, L'\0');
-            len = (ULONG)(ptr - *OutTruePath);
-        }
-
-        File_GetName_FixTruePrefix(TlsData,
-            OutTruePath, &length, len,
-            drive->path, drive->len);
 
         if (p_convert_links_again) *p_convert_links_again = TRUE;
 
@@ -883,6 +925,7 @@ _FX NTSTATUS File_GetName(
     ULONG objname_len;
     WCHAR *objname_buf;
     const FILE_DRIVE *drive;
+    const FILE_GUID* guid;
     BOOLEAN have_trailing_backslash, add_trailing_backslash;
     BOOLEAN have_tilde;
     BOOLEAN convert_links_again;
@@ -917,6 +960,7 @@ _FX NTSTATUS File_GetName(
     }
 
     drive = NULL;
+    guid = NULL;
 
     free_true_path = FALSE;
 
@@ -1090,9 +1134,11 @@ _FX NTSTATUS File_GetName(
             // the next section of code from trying to translate symlinks
             //
 
-            drive = File_GetDriveForPath(
-                                objname_buf, objname_len / sizeof(WCHAR));
-            if (drive) {
+            drive = File_GetDriveForPath(objname_buf, objname_len / sizeof(WCHAR));
+            if(!drive)
+                guid = File_GetGuidForPath(objname_buf, objname_len / sizeof(WCHAR));
+
+            if (drive || guid) {
 
                 name = Dll_GetTlsNameBuffer(
                         TlsData, TRUE_NAME_BUFFER,
@@ -1106,7 +1152,7 @@ _FX NTSTATUS File_GetName(
             }
         }
 
-        if (drive) {
+        if (drive || guid) {
 
             File_GetName_ConvertLinks(
                 TlsData, OutTruePath, convert_wow64_link);
@@ -1202,7 +1248,7 @@ _FX NTSTATUS File_GetName(
     // if this is a named pipe or mail slot, return special status
     //
 
-    if ((! drive) && File_IsNamedPipe(*OutTruePath, NULL)) {
+    if (!drive && !guid && File_IsNamedPipe(*OutTruePath, NULL)) {
 
         return STATUS_BAD_INITIAL_PC;
     }

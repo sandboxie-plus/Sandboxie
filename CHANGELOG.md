@@ -4,6 +4,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.12.7 / 5.67.7] - 2024-01-??
+
+### Fixed
+- Make Duplicate Box Config keep the order of the original box configuration [#3523](https://github.com/sandboxie-plus/Sandboxie/issues/3523)
+
+
+
 ## [1.12.6 / 5.67.6] - 2024-01-02
 
 ### Changed

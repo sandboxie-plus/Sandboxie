@@ -225,6 +225,12 @@ MSG_HEADER *MountManager::CreateHandler(MSG_HEADER *msg)
 
     std::wstring ImageFile = GetImageFileName(req->file_root);
 
+    std::wstring RootPath(req->file_root, wcsrchr(req->file_root, L'\\'));
+    HANDLE handle = OpenOrCreateNtFolder(RootPath.c_str());
+    if (!handle)
+        return SHORT_REPLY(ERROR_PATH_NOT_FOUND);
+    CloseHandle(handle);
+
     std::shared_ptr<BOX_MOUNT> pMount = MountImDisk(ImageFile, req->password, req->image_size, session_id);
     if(!pMount)
         return SHORT_REPLY(ERROR_FUNCTION_FAILED);

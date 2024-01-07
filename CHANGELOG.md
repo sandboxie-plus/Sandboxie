@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
  - Note: when the volume later gets a drive letter the data under \drive\{guid} will be ignored!
 - fixed right click a sandbox shortcut - click run unsandboxed in order to open the file without sandbox [#3528](https://github.com/sandboxie-plus/Sandboxie/issues/3528)
  - Note: for the fix to take full effect the shell integration need to be re applied
+ - fixed Error Status: 0x0000065b (Function Failed During Execution) [#3504](https://github.com/sandboxie-plus/Sandboxie/issues/3504)
 
 
 

@@ -128,8 +128,10 @@ SB_STATUS CNewBoxWizard::TryToCreateBox()
 
 
         QString Location = field("boxLocation").toString();
-        if (!Location.isEmpty())
+        if (!Location.isEmpty()) {
             pBox->SetText("FileRootPath", Location);
+            theAPI->UpdateBoxPaths(pBox.data());
+        }
 
         if (field("boxVersion").toInt() == 1) {
             pBox->SetBool("UseFileDeleteV2", true);

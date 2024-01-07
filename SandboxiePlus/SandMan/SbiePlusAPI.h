@@ -44,6 +44,7 @@ signals:
 
 protected:
 	friend class CSandBoxPlus;
+	friend class CNewBoxWizard;
 
 	virtual CSandBox*		NewSandBox(const QString& BoxName, class CSbieAPI* pAPI);
 	virtual CBoxedProcess*	NewBoxedProcess(quint32 ProcessId, class CSandBox* pBox);

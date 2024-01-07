@@ -1521,7 +1521,7 @@ void CSettingsWindow::SaveSettings()
 
 	if (ui.chkShellMenu2->isChecked() != CSbieUtils::HasContextMenu2()) {
 		if (ui.chkShellMenu2->isChecked()) {
-			CSbieUtils::AddContextMenu2(QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe",
+			CSbieUtils::AddContextMenu2(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
 				tr("Run &Un-Sandboxed"),
 				QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
 		} else

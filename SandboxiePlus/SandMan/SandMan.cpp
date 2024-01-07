@@ -1603,11 +1603,11 @@ void CSandMan::OnMessage(const QString& MsgData)
 		QString BoxName;
 		QString CmdLine = Message.mid(4);
 
-		if (CmdLine.contains("\\start.exe", Qt::CaseInsensitive)) {
+		if (CmdLine.contains("\\start.exe", Qt::CaseInsensitive) || CmdLine.contains("\\sandman.exe", Qt::CaseInsensitive)) {
 			int pos = CmdLine.indexOf("/box:", 0, Qt::CaseInsensitive);
 			int pos2 = CmdLine.indexOf(" ", pos);
 			if (pos != -1 && pos2 != -1) {
-				BoxName = CmdLine.mid(pos + 5, pos2 - (pos + 5));
+				//BoxName = CmdLine.mid(pos + 5, pos2 - (pos + 5));
 				CmdLine = CmdLine.mid(pos2 + 1);
 			}
 		}
@@ -1633,7 +1633,7 @@ void CSandMan::OnMessage(const QString& MsgData)
 			BoxName = theAPI->GetGlobalSettings()->GetText("DefaultBox", "DefaultBox");
 
 		if (!BoxName.isEmpty())
-			RunStart(BoxName, CmdLine, false, WrkDir);
+			RunStart(BoxName == "*DFP*" ? "" : BoxName, CmdLine, false, WrkDir);
 		else
 			RunSandboxed(QStringList(CmdLine), BoxName, WrkDir);
 	}

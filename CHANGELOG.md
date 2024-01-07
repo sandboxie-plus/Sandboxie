@@ -14,7 +14,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed MessageBox with MB_DEFAULT_DESKTOP_ONLY or MB_SERVICE_NOTIFICATION can not display title and text correctly in security hardened box. [#3529](https://github.com/sandboxie-plus/Sandboxie/issues/3529)
 - fixed Can't run npm inside security hardened sandbox on Windows 11 [#3505](https://github.com/sandboxie-plus/Sandboxie/issues/3505)
 - fixed [1.12.6] Symlink and open path issue [#3537](https://github.com/sandboxie-plus/Sandboxie/issues/3537)
-
+ - when a volume without a asociated drive letter is encountered sbie uses \drive\{guid} instead of \drive\[letter]
+ - Note: when the volume later gets a drive letter the data under \drive\{guid} will be ignored!
+- fixed right click a sandbox shortcut - click run unsandboxed in order to open the file without sandbox [#3528](https://github.com/sandboxie-plus/Sandboxie/issues/3528)
+ - Note: for the fix to take full effect the shell integration need to be re applied
 
 
 

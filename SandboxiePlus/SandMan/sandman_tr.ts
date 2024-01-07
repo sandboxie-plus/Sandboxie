@@ -126,83 +126,83 @@
 <context>
     <name>CAdvancedPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="613"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="618"/>
         <source>Advanced Sandbox options</source>
         <translation>Gelişmiş Korumalı Alan Seçenekleri</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="614"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="619"/>
         <source>On this page advanced sandbox options can be configured.</source>
         <translation>Bu sayfada gelişmiş korumalı alan seçenekleri yapılandırılabilir.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="619"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="624"/>
         <source>Network Access</source>
         <translation>Ağ Erişimi</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="627"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="632"/>
         <source>Allow network/internet access</source>
         <translation>Ağ/internet erişimine izin ver</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="628"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="633"/>
         <source>Block network/internet by denying access to Network devices</source>
         <translation>Ağ cihazlarına erişimi reddederek ağı/interneti engelleyin</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="630"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="635"/>
         <source>Block network/internet using Windows Filtering Platform</source>
         <translation>Windows Filtreleme Platformunu kullanarak ağı/interneti engelle</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="635"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="640"/>
         <source>Allow access to network files and folders</source>
         <translation>Ağ dosyalarına ve klasörlerine erişime izin ver</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="636"/>
-        <location filename="Wizards/NewBoxWizard.cpp" line="652"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="641"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="657"/>
         <source>This option is not recommended for Hardened boxes</source>
         <translation>Güçlendirilmiş alanlar için bu seçenek önerilmez</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="642"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="647"/>
         <source>Admin Options</source>
         <translation>Yönetici Seçenekleri</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="646"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="651"/>
         <source>Make applications think they are running elevated</source>
         <translation>Uygulamaların yetkilendirilmiş çalıştıklarını düşünmelerini sağla</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="651"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="656"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
         <translation>MSIServer&apos;ın korumalı alan sistem belirteci ile çalışmasına izin ver</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="657"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="662"/>
         <source>Box Options</source>
         <translation>Alan Seçenekleri</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="661"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="666"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>Anonim kullanıcı yerine Sandboxie oturum açma belirteci kullan</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="667"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="672"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
         <translation>Korumalı alan programlarının korumalı alandan DLL yüklenmesini önle</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="668"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="673"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
         <translation>Bu özellik, alanda konumlu işlemlerin ana sistemde konumlu olanlara yazmasını ve hatta onları başlatmasını da engellediği için uyumluluğu azaltabilir.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="662"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="667"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
         <translation>Özel bir Sandboxie belirteci kullanmak, birbirinden ayrı korumalı alanların daha iyi yalıtılmasını sağlar ve görev yöneticilerinin kullanıcı sütununda bir işlemin hangi alana ait olduğunu gösterir. Ancak bazı 3. parti güvenlik çözümleri özel belirteçlerle sorun yaşayabilir.</translation>
     </message>
@@ -478,7 +478,7 @@ Bu şekilde gizli korumalı alan ortamında en yüksek düzeyde gizlilik ve veri
         <translation>Gizli Şifreli Alan</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="469"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="474"/>
         <source>To use encrypted boxes you need to install the ImDisk driver, do you want to download and install it?</source>
         <translation>Şifreli alanları kullanmak için ImDisk sürücüsünü yüklemeniz gerekir. Şimdi indirip yüklemek ister misiniz?</translation>
     </message>
@@ -848,74 +848,74 @@ Bu sihirbazı kapatmak için Son&apos;a tıklayabilirsiniz.</translation>
 <context>
     <name>CFilesPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="487"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="492"/>
         <source>Sandbox location and behavior</source>
         <translation>Korumalı Alan Konumu ve Davranışı</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="488"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="493"/>
         <source>On this page the sandbox location and its behavior can be customized.
 You can use %USER% to save each users sandbox to an own folder.</source>
         <translation>Bu sayfadan korumalı alan konumu ve davranışı özelleştirilebilir.
 Her kullanıcının korumalı alanını kendi klasörüne kaydetmek için %USER% kullanabilirsiniz.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="493"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="498"/>
         <source>Sandboxed Files</source>
         <translation>Korumalı Alan Dosyaları</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="516"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="521"/>
         <source>Select Directory</source>
         <translation>Dizin Seç</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="524"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="529"/>
         <source>Virtualization scheme</source>
         <translation>Sanallaştırma şeması</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="528"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="533"/>
         <source>Version 1</source>
         <translation>Sürüm 1</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="529"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="534"/>
         <source>Version 2</source>
         <translation>Sürüm 2</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="535"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="540"/>
         <source>Separate user folders</source>
         <translation>Ayrı kullanıcı klasörleri</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="540"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="545"/>
         <source>Use volume serial numbers for drives</source>
         <translation>Sürücüler için birim seri numaralarını kullan</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="545"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="550"/>
         <source>Auto delete content when last process terminates</source>
         <translation>Son işlem sona erdiğinde içeriği otomatik olarak sil</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="552"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="557"/>
         <source>Enable Immediate Recovery of files from recovery locations</source>
         <translation>Kurtarma konumlarındaki dosyalar için Anında Kurtarmayı etkinleştir</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="587"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="592"/>
         <source>The selected box location is not a valid path.</source>
         <translation>Seçilen alan konumu geçerli bir yol değildir.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="592"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="597"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
         <translation>Seçilen alan konumu zaten mevcut ve boş değil, yeni veya boş bir klasör seçmeniz önerilir. Mevcut klasörü kullanmak istediğinizden emin misiniz?</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="597"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="602"/>
         <source>The selected box location is not placed on a currently available drive.</source>
         <translation>Seçilen alan konumu şu anda kullanılabilir bir sürücüde bulunmuyor.</translation>
     </message>
@@ -5608,76 +5608,76 @@ Günlük eklemeden göndermeyi deneyin.</translation>
 <context>
     <name>CSummaryPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="716"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="721"/>
         <source>Create the new Sandbox</source>
         <translation>Yeni Korumalı Alanı Oluştur</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="727"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="732"/>
         <source>Almost complete, click Finish to create a new sandbox and conclude the wizard.</source>
         <translation>Neredeyse tamamlandı, yeni bir korumalı alan oluşturmak ve sihirbazı tamamlamak için Bitiş&apos;e tıklayın.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="736"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="741"/>
         <source>Save options as new defaults</source>
         <translation>Seçenekleri yeni varsayılanlar olarak kaydet</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="747"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="752"/>
         <source>Skip this summary page when advanced options are not set</source>
         <translation>Gelişmiş seçenekler ayarlanmadığında bu özet sayfasını atla</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="766"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="771"/>
         <source>
 This Sandbox will be saved to: %1</source>
         <translation>
 Bu Korumalı Alan şuraya kaydedilecek: %1</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="769"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="774"/>
         <source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
         <translation>
 Bu alandaki son işlem sona erdikten sonra alanın içeriği ATILACAKTIR ve alan kaldırılacaktır.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="771"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="776"/>
         <source>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
         <translation>
 Bu alan kapandığında kendi içeriğini ATACAKTIR, yalnızca geçici veriler için uygundur.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="773"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="778"/>
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
         <translation>
 Bu alandaki işlemler internete veya yerel ağa erişemez, böylece erişilen tüm verilerin gizli kalmasını sağlar.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="775"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="780"/>
         <source>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
         <translation>
 Bu alan, MSIServer&apos;ı (*.msi yükleyici hizmeti) bir sistem belirteci ile çalıştıracaktır, bu uyumluluğu artırır ancak güvenlik yalıtımını azaltır.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="777"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="782"/>
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
         <translation>
 Bu alandaki işlemler, aslında yönetici ayrıcalıklarına sahip olmadan, yönetici ayrıcalıklarıyla çalıştırıldıklarını düşünecektir. Böylece yükleyiciler güvenliği güçlendirilmiş bir alanda bile kullanılabilir.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="779"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="784"/>
         <source>
 Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
         <translation>
 Bu alandaki işlemler, ait oldukları korumalı alanı belirten özel bir işlem belirteci ile çalışacaktır.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="813"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="818"/>
         <source>Failed to create new box: %1</source>
         <translation>Yeni alan oluşturulamadı: %1</translation>
     </message>

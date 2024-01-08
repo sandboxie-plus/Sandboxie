@@ -130,80 +130,80 @@
 <context>
     <name>CAdvancedPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="618"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="620"/>
         <source>Advanced Sandbox options</source>
         <translation>Options de bac à sable avancées</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="619"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="621"/>
         <source>On this page advanced sandbox options can be configured.</source>
         <translation>Sur cette page peuvent être configurées les options de bac à sable avancées.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="624"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="626"/>
         <source>Network Access</source>
         <translation>Accès réseau</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="632"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="634"/>
         <source>Allow network/internet access</source>
         <translation>Autoriser l&apos;accès au réseau/à Internet</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="633"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="635"/>
         <source>Block network/internet by denying access to Network devices</source>
         <translation>Bloquer le réseau/Internet en refusant l&apos;accès aux périphériques réseau</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="635"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="637"/>
         <source>Block network/internet using Windows Filtering Platform</source>
         <translation>Bloquer le réseau/Internet en utilisant la plateforme de filtrage Windows</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="640"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="642"/>
         <source>Allow access to network files and folders</source>
         <oldsource>Allow access to network files and fodlers</oldsource>
         <translation>Autoriser l&apos;accès aux fichiers et dossiers réseau</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="641"/>
-        <location filename="Wizards/NewBoxWizard.cpp" line="657"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="643"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="659"/>
         <source>This option is not recommended for Hardened boxes</source>
         <oldsource>This option is not recomended for Hardened boxes</oldsource>
         <translation>Cette option n&apos;est pas recommandée pour les bacs renforcés</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="647"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="649"/>
         <source>Admin Options</source>
         <translation>Options d&apos;admin</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="651"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="653"/>
         <source>Make applications think they are running elevated</source>
         <translation>Faire croire aux applications qu&apos;elles ont des privilèges élevés</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="656"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="658"/>
         <source>Allow MSIServer to run with a sandboxed system token</source>
         <translation>Autoriser MSIServer à s&apos;exécuter dans le bac à sable avec un jeton système</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="662"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="664"/>
         <source>Box Options</source>
         <translation>Options du bac</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="666"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="668"/>
         <source>Use a Sandboxie login instead of an anonymous token</source>
         <translation>Utiliser un identifiant de Sandboxie au lieu d&apos;un jeton anonyme</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="672"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="674"/>
         <source>Prevent sandboxes programs installed on host from loading dll&apos;s from the sandbox</source>
         <translation>Empêcher les programmes d&apos;un bac installé sur l&apos;hôte de charger des DLL du bac</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="673"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="675"/>
         <source>This feature may reduce compatibility as it also prevents box located processes from writing to host located ones and even starting them.</source>
         <oldsource>This feature may reduce compatybility as it also prevents box located processes from writing to host located once and even starting them.</oldsource>
         <translation>Cette fonction peut réduire la compatibilité car elle empêche également les processus situés dans les bacs d&apos;écrire à ceux situés sur l&apos;hôte et même de les démarrer.</translation>
@@ -213,7 +213,7 @@
         <translation type="vanished">Utiliser un identifiant de Sandboxie au lieu d&apos;un jeton anonyme (expérimental)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="667"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="669"/>
         <source>Using a custom Sandboxie Token allows to isolate individual sandboxes from each other better, and it shows in the user column of task managers the name of the box a process belongs to. Some 3rd party security solutions may however have problems with custom tokens.</source>
         <translation>L&apos;utilisation d&apos;un jeton de Sandboxie personnalisé permet de mieux isoler les bacs à sable individuels entre eux, et d&apos;afficher dans la colonne Utilisateurs des gestionnaires des tâches le nom du bac dans lequel un processus s&apos;exécute. Certaines solutions de sécurité tierces peuvent cependant avoir des problèmes avec les jetons personnalisés.</translation>
     </message>
@@ -358,22 +358,22 @@ Il est recommandé de choisir un mot de passe comportant 20 caractères ou plus.
 <context>
     <name>CBoxTypePage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="214"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="216"/>
         <source>Create new Sandbox</source>
         <translation>Création d&apos;un nouveau bac à sable</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="226"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="228"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. </source>
         <translation>Un bac à sable isole votre système hôte des processus lancés dans le bac ; il les empêche de faire des changements permanents à d&apos;autres programmes ou données de votre ordinateur. </translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="229"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="231"/>
         <source>A sandbox isolates your host system from processes running within the box, it prevents them from making permanent changes to other programs and data in your computer. The level of isolation impacts your security as well as the compatibility with applications, hence there will be a different level of isolation depending on the selected Box Type. Sandboxie can also protect your personal data from being accessed by processes running under its supervision.</source>
         <translation>Un bac à sable isole le système hôte des processus lancés dans le bac. Cela les empêche de faire des changements permanents aux autres programmes ou aux données de votre ordinateur. Le niveau d&apos;isolation affecte la sécurité mais aussi la compatibilité avec les applications, c&apos;est pourquoi il y a différents niveaux d&apos;isolation en fonction du type de bac choisi. Sandboxie peut aussi empêcher l&apos;accès à vos données personnelles aux processus tournant sous sa supervision.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="240"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="242"/>
         <source>Enter box name:</source>
         <translation>Saisir le nom du bac :</translation>
     </message>
@@ -382,18 +382,18 @@ Il est recommandé de choisir un mot de passe comportant 20 caractères ou plus.
         <translation type="vanished">Nouveau bac</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="255"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="257"/>
         <source>Select box type:</source>
         <oldsource>Sellect box type:</oldsource>
         <translation>Choisir le type de bac :</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="295"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="297"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
         <translation>Bac à sable &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;à sécurité renforcée&lt;/a&gt; avec &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;protection des données&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="296"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="298"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes. 
 It strictly limits access to user data, allowing processes within this box to only access C:\Windows and C:\Program Files directories. 
 The entire user profile remains hidden, ensuring maximum security.</source>
@@ -402,59 +402,59 @@ Il limite l&apos;accès aux données de l&apos;utilisateur de manière stricte, 
 Le profil complet de l&apos;utilisateur demeure masqué, assurant ainsi une sécurité maximale.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="299"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="301"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox</source>
         <translation>Bac à sable &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;à sécurité renforcée&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="300"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="302"/>
         <source>This box type offers the highest level of protection by significantly reducing the attack surface exposed to sandboxed processes.</source>
         <translation>Ce type de bac offre le plus haut niveau de protection en résuisant de manière significative la surface d&apos;attaque exposée aux processus dans le bac.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="301"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="303"/>
         <source>Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
         <translation>Bac à sable avec &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;protection des données&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="302"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="304"/>
         <source>In this box type, sandboxed processes are prevented from accessing any personal user files or data. The focus is on protecting user data, and as such, 
 only C:\Windows and C:\Program Files directories are accessible to processes running within this sandbox. This ensures that personal files remain secure.</source>
         <translation>Avec ce type de bac, les processus dans le bac sont empêchés d&apos;accéder aux fichiers ou données de l&apos;utilisateur. L&apos;accent est mis sur la protection des données d&apos;utilisateur, et ainsi,
 seuls les répertoires « C:\Windows » et « C:\Program Files » sont accessibles aux processus lancés dans ce bac à sable. Ceci garantit que les fichiers personnels restent sécurisés.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="304"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="306"/>
         <source>Standard Sandbox</source>
         <translation>Bac à sable standard</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="305"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="307"/>
         <source>This box type offers the default behavior of Sandboxie classic. It provides users with a familiar and reliable sandboxing scheme. 
 Applications can be run within this sandbox, ensuring they operate within a controlled and isolated space.</source>
         <translation>Ce type de bac offre le comportement par défaut de la version classique de Sandboxie. Il fournit aux utilisateurs un schéma de mise en bac à sable familier et fiable.
 Les applications peuvent être lancées dans ce bac à sable, en s&apos;assurant qu&apos;elles opèrent dans un espace contrôlé et isolé.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="307"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="309"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
         <translation>Bac &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;conteneur d&apos;applications&lt;/a&gt; avec &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;protection des données&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="308"/>
-        <location filename="Wizards/NewBoxWizard.cpp" line="311"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="310"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="313"/>
         <source>This box type prioritizes compatibility while still providing a good level of isolation. It is designed for running trusted applications within separate compartments. 
 While the level of isolation is reduced compared to other box types, it offers improved compatibility with a wide range of applications, ensuring smooth operation within the sandboxed environment.</source>
         <translation>Ce type de bac donne la priorité à la compatibilité tout en fournissant un bon niveau d&apos;isolation. Il est destiné à lancer des applications fiables dans des compartiments séparés.
 Bien que le niveau d&apos;isolation soit réduit par rapport à d&apos;autres types de bac, il offre une compatibilité améliorée avec un large éventail d&apos;applications, assurant des opérations fluides au sein de l&apos;environnement du bac à sable.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="310"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="312"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box</source>
         <translation>Bac &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;conteneur d&apos;applications&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="319"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="321"/>
         <source>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Encrypt&lt;/a&gt; Box content and set &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Confidential&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Chiffrer&lt;/a&gt; le contenu du bac et le définir sur &lt;a href=&quot;sbie://docs/black-box&quot;&gt;« Confidentiel »&lt;/a&gt;</translation>
     </message>
@@ -463,7 +463,7 @@ Bien que le niveau d&apos;isolation soit réduit par rapport à d&apos;autres ty
         <translation type="vanished">Bac &lt;a href=&quot;sbie://docs/black-box&quot;&gt;confidentiel&lt;/a&gt; &lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;chiffré&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="320"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="322"/>
         <source>In this box type the sandbox uses an encrypted disk image as its root folder. This provides an additional layer of privacy and security. 
 Access to the virtual disk when mounted is restricted to programs running within the sandbox. Sandboxie prevents other processes on the host system from accessing the sandboxed processes. 
 This ensures the utmost level of privacy and data protection within the confidential sandbox environment.</source>
@@ -472,42 +472,42 @@ Lorsqu&apos;il est monté, l&apos;accès au disque virtuel est restreint aux pro
 Cela fournit le niveau ultime de confidentialité et de protection des données au sein d&apos;un environnement de bac à sable confidentiel.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="342"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="344"/>
         <source>Hardened Sandbox with Data Protection</source>
         <translation>Bac à sable renforcé avec protection des données</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="343"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="345"/>
         <source>Security Hardened Sandbox</source>
         <translation>Bac à sable à sécurité renforcée</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="344"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="346"/>
         <source>Sandbox with Data Protection</source>
         <translation>Bac à sable avec protection des données</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="345"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="347"/>
         <source>Standard Isolation Sandbox (Default)</source>
         <translation>Bac à sable à isolation standard (par défaut)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="347"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="349"/>
         <source>Application Compartment with Data Protection</source>
         <translation>Conteneur d&apos;applications avec protection des données      </translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="348"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="350"/>
         <source>Application Compartment Box</source>
         <translation>Bac conteneur d&apos;applications</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="349"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="351"/>
         <source>Confidential Encrypted Box</source>
         <translation>Bac chiffré confidentiel</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="474"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="476"/>
         <source>To use encrypted boxes you need to install the ImDisk driver, do you want to download and install it?</source>
         <oldsource>To use ancrypted boxes you need to install the ImDisk driver, do you want to download and install it?</oldsource>
         <translation>Afin d&apos;utiliser des bacs chiffrés, vous devez installer le pilote ImDisk. Voulez-vous le télécharger puis l&apos;installer ?</translation>
@@ -517,17 +517,17 @@ Cela fournit le niveau ultime de confidentialité et de protection des données 
         <translation type="vanished">Conteneur d&apos;applications (SANS isolation)</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="367"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="369"/>
         <source>Remove after use</source>
         <translation>Supprimer après utilisation</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="368"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="370"/>
         <source>After the last process in the box terminates, all data in the box will be deleted and the box itself will be removed.</source>
         <translation>Après la fermeture du dernier processus dans le bac, toutes les données du bac ainsi que le bac lui-même seront supprimés.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="373"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="375"/>
         <source>Configure advanced options</source>
         <translation>Configurer les options avancées</translation>
     </message>
@@ -907,13 +907,13 @@ Vous pouvez appuyer sur « Terminer » pour fermer cet assistant.</translation>
 <context>
     <name>CFilesPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="492"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="494"/>
         <source>Sandbox location and behavior</source>
         <oldsource>Sandbox location and behavioure</oldsource>
         <translation>Emplacement et comportement du bac à sable</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="493"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="495"/>
         <source>On this page the sandbox location and its behavior can be customized.
 You can use %USER% to save each users sandbox to an own folder.</source>
         <oldsource>On this page the sandbox location and its behaviorue can be customized.
@@ -922,64 +922,64 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
 Utilisez « %USER% » pour enregistrer le bac de chaque utilisateur dans son propre dossier.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="498"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="500"/>
         <source>Sandboxed Files</source>
         <translation>Fichiers dans le bac</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="521"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="523"/>
         <source>Select Directory</source>
         <translation>Choisir le répertoire</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="529"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="531"/>
         <source>Virtualization scheme</source>
         <translation>Schéma de virtualisation :</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="533"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="535"/>
         <source>Version 1</source>
         <translation>Version 1</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="534"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="536"/>
         <source>Version 2</source>
         <translation>Version 2</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="540"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="542"/>
         <source>Separate user folders</source>
         <translation>Séparer les dossiers d&apos;utilisateurs</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="545"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="547"/>
         <source>Use volume serial numbers for drives</source>
         <translation>Utiliser les numéros de série de volume des lecteurs</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="550"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="552"/>
         <source>Auto delete content when last process terminates</source>
         <translation>Supprimer automatiquement le contenu lorsque le dernier processus prend fin</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="557"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="559"/>
         <source>Enable Immediate Recovery of files from recovery locations</source>
         <translation>Activer la récupération immédiate des fichiers depuis les emplacements de récupération</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="592"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="594"/>
         <source>The selected box location is not a valid path.</source>
         <oldsource>The sellected box location is not a valid path.</oldsource>
         <translation>L&apos;emplacement de bac choisi n&apos;est pas un chemin valide.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="597"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="599"/>
         <source>The selected box location exists and is not empty, it is recommended to pick a new or empty folder. Are you sure you want to use an existing folder?</source>
         <oldsource>The sellected box location exists and is not empty, it is recomended to pick a new or empty folder. Are you sure you want to use an existing folder?</oldsource>
         <translation>L&apos;emplacement de bac choisi n&apos;est pas vide ; il est recommandé de choisir un répertoire nouveau ou vide. Êtes-vous sûr de vouloir utiliser un dossier existant ?</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="602"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="604"/>
         <source>The selected box location is not placed on a currently available drive.</source>
         <oldsource>The selected box location not placed on a currently available drive.</oldsource>
         <translation>L&apos;emplacement de bac choisi n&apos;est pas situé sur un lecteur actuellement disponible.</translation>
@@ -1239,14 +1239,14 @@ Utilisez « %USER% » pour enregistrer le bac de chaque utilisateur dans son pro
         <translation>Le contenu de ce bac à sable sera placé dans un fichier conteneur chiffré. Veuillez noter que toute corruption de l&apos;en-tête de ce conteneur rendra tout son contenu inaccessible de manière permanente. Une corruption peut survenir à la suite d&apos;un « écran bleu de la mort », d&apos;un échec matériel de stockage, ou d&apos;une application malveillante qui écraserait des fichiers au hasard. Cette fonction est fournie sous réserve d&apos;accepter cette politique stricte de &lt;b&gt;Pas de Sauvegarde, Pas de Pitié&lt;/b&gt; ; VOUS, l&apos;utilisateur, êtes responsables des données que vous placez dans un bac chiffré.&lt;br /&gt;&lt;br /&gt;SI VOUS ACCEPTEZ DE PRENDRE TOUTE LA RESPONSABILITÉ DE VOS DONNÉES APPUYEZ SUR [OUI], AUTREMENT APPUYEZ SUR [NON].</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="184"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="186"/>
         <source>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you experience any unexpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure group.</source>
         <oldsource>The new sandbox has been created using the new &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;Virtualization Scheme Version 2&lt;/a&gt;, if you expirience any unecpected issues with this box, please switch to the Virtualization Scheme to Version 1 and report the issue, the option to change this preset can be found in the Box Options in the Box Structure groupe.</oldsource>
         <translation>Le nouveau bac à sable a été créé en utilisant le nouveau &lt;a href=&quot;https://sandboxie-plus.com/go.php?to=sbie-delete-v2&quot;&gt;schéma de virtualisation version 2&lt;/a&gt;. Si vous rencontrez des problèmes inattendus avec ce bac, veuillez basculer le schéma de virtualisation sur la version 1 et signaler le problème. Cette option se trouve dans les paramètres du bac, dans « Options des fichiers » -&gt; « Structure de bac ».</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="81"/>
-        <location filename="Wizards/NewBoxWizard.cpp" line="187"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="189"/>
         <source>Don&apos;t show this message again.</source>
         <translation>Ne plus afficher ce message</translation>
     </message>
@@ -4539,7 +4539,7 @@ Remarque : La recherche de mise à jour est souvent en retard par rapport à la 
         <translation>Sandboxie-Plus - Viseur de fenêtre</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="136"/>
+        <location filename="main.cpp" line="164"/>
         <source>Sandboxie Manager can not be run sandboxed!</source>
         <translation>Le gestionnaire de Sandboxie ne peut pas être lancé dans un bac à sable !</translation>
     </message>
@@ -6271,35 +6271,35 @@ Veuillez le soumettre à nouveau, sans joindre le journal.</translation>
 <context>
     <name>CSummaryPage</name>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="721"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="723"/>
         <source>Create the new Sandbox</source>
         <translation>Création du nouveau bac à sable</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="732"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="734"/>
         <source>Almost complete, click Finish to create a new sandbox and conclude the wizard.</source>
         <translation>C&apos;est presque fini. Appuyez sur « Terminer » pour créer un nouveau bac et conclure l&apos;assistant.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="741"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="743"/>
         <source>Save options as new defaults</source>
         <translation>Enregistrer les options comme nouvelles options par défaut</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="752"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="754"/>
         <source>Skip this summary page when advanced options are not set</source>
         <oldsource>Don&apos;t show the summary page in future (unless advanced options were set)</oldsource>
         <translation>Ne plus afficher le résumé si des options avancées n&apos;ont pas été définies</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="771"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="773"/>
         <source>
 This Sandbox will be saved to: %1</source>
         <translation>
 Ce bac sera enregistré dans : %1</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="774"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="776"/>
         <source>
 This box&apos;s content will be DISCARDED when it&apos;s closed, and the box will be removed.</source>
         <oldsource>
@@ -6308,21 +6308,21 @@ This box&apos;s content will be DISCARDED when its closed, and the box will be r
 Le contenu de ce bac sera ÉLIMINÉ lors de sa fermeture, et le bac sera supprimé.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="776"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="778"/>
         <source>
 This box will DISCARD its content when its closed, its suitable only for temporary data.</source>
         <translation>
 Ce bac ÉLIMINERA son contenu lors de sa fermeture ; cela convient uniquement aux données temporaires.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="778"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="780"/>
         <source>
 Processes in this box will not be able to access the internet or the local network, this ensures all accessed data to stay confidential.</source>
         <translation>
 Les processus de ce bac ne seront pas capables d&apos;accéder à Internet ou au réseau local. Cela garantit que toutes les données consultées restent confidentielles.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="780"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="782"/>
         <source>
 This box will run the MSIServer (*.msi installer service) with a system token, this improves the compatibility but reduces the security isolation.</source>
         <oldsource>
@@ -6331,14 +6331,14 @@ This box will run the MSIServer (*.msi installer service) with a system token, t
 Ce bac lancera MSIServer (service d&apos;installation *.msi) avec un jeton système. Cela améliore la compatibilité, mais réduit l&apos;isolation de sécurité.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="782"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="784"/>
         <source>
 Processes in this box will think they are run with administrative privileges, without actually having them, hence installers can be used even in a security hardened box.</source>
         <translation>
 Les processus de ce bac penseront qu&apos;ils sont lancés avec des privilèges d&apos;administrateur, sans en fait les avoir. Les installeurs seront donc en mesure d&apos;être utilisés même dans un bac à sécurité renforcée.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="784"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="786"/>
         <source>
 Processes in this box will be running with a custom process token indicating the sandbox they belong to.</source>
         <oldsource>
@@ -6347,7 +6347,7 @@ Processes in this box will be running with a custom process token indicating the
 Les processus dans ce bac seront lancés avec un jeton de processus personnalisé indiquant à quel bac à sable ils appartiennent.</translation>
     </message>
     <message>
-        <location filename="Wizards/NewBoxWizard.cpp" line="818"/>
+        <location filename="Wizards/NewBoxWizard.cpp" line="820"/>
         <source>Failed to create new box: %1</source>
         <translation>Échec de création du nouveau bac : %1</translation>
     </message>

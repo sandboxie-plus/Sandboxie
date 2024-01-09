@@ -562,6 +562,36 @@ _FX void File_RemovePermLinks(const WCHAR *path)
 
 
 //---------------------------------------------------------------------------
+// File_GetDrivePrefixLength
+//---------------------------------------------------------------------------
+
+
+_FX ULONG File_GetDrivePrefixLength(const WCHAR *work_str, ULONG work_len)
+{
+    ULONG prefix_len = 0;
+
+    if (!FILE_IS_REDIRECTOR_OR_MUP(work_str, work_len)) {
+        const FILE_DRIVE *drive = File_GetDriveForPath(work_str, work_len);
+        if (drive) {
+            prefix_len = drive->len;
+            LeaveCriticalSection(File_DrivesAndLinks_CritSec);
+        }
+        else {
+            const FILE_GUID* guid = File_GetGuidForPath(work_str, work_len);
+            if (guid) {
+                prefix_len = guid->len;
+                LeaveCriticalSection(File_DrivesAndLinks_CritSec);
+            }
+        }
+    }
+
+    if (prefix_len == work_len)
+        prefix_len = 0;
+    return prefix_len;
+}
+
+
+//---------------------------------------------------------------------------
 // File_TranslateTempLinks
 //---------------------------------------------------------------------------
 
@@ -606,20 +636,8 @@ _FX WCHAR *File_TranslateTempLinks(
     // make sure the path is for a local drive
     //
 
-    if (1) {
-        const FILE_DRIVE *drive;
-        if (FILE_IS_REDIRECTOR_OR_MUP(TruePath, TruePath_len))
-            drive = NULL;
-        else
-            drive = File_GetDriveForPath(TruePath, TruePath_len);
-        if (drive) {
-            if (drive->len == TruePath_len)
-                drive = NULL;
-            LeaveCriticalSection(File_DrivesAndLinks_CritSec);
-        }
-        if (! drive)
-            return NULL;
-    }
+    if(!File_GetDrivePrefixLength(TruePath, TruePath_len))
+        return NULL;
 
     ret = NULL;
 
@@ -843,20 +861,8 @@ _FX WCHAR *File_TranslateTempLinks_2(WCHAR *input_str, ULONG input_len)
             // otherwise make sure we are dealing with a local drive
             //
 
-            const FILE_DRIVE *drive;
-            if (FILE_IS_REDIRECTOR_OR_MUP(work_str, work_len))
-                drive = NULL;
-            else {
-                drive = File_GetDriveForPath(work_str, work_len);
-                if (drive) {
-                    prefix_len = drive->len;
-                    LeaveCriticalSection(File_DrivesAndLinks_CritSec);
-                    if (prefix_len == work_len)
-                        drive = NULL;
-                }
-            }
-
-            if (! drive)
+            prefix_len = File_GetDrivePrefixLength(work_str, work_len);
+            if (!prefix_len)
                 break;
         }
 
@@ -1148,7 +1154,10 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
 
             if (! FILE_IS_REDIRECTOR_OR_MUP(newpath, len) && !bPermLinkPath) {
                 const FILE_DRIVE *drive = File_GetDriveForPath(newpath, len);
-                if (drive) {
+                const FILE_GUID *guid = NULL;
+                if(!drive)
+                    guid = File_GetGuidForPath(newpath, len);
+                if (drive || guid) {
                     LeaveCriticalSection(File_DrivesAndLinks_CritSec);
                     stop = FALSE;
                 }

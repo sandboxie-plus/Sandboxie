@@ -672,7 +672,7 @@ _FX BOOLEAN File_LoadPathTree_internal(LIST* Root, const WCHAR* name, WCHAR* (*T
         } else
             Next = End + 1;
         LONG LineLen = (LONG)(End - Line);
-        if (LineLen > 1 && Line[LineLen - 1] == L'\r')
+        if (LineLen >= 1 && Line[LineLen - 1] == L'\r')
             LineLen -= 1;
         
         WCHAR savechar = Line[LineLen];
@@ -753,7 +753,7 @@ _FX WCHAR *File_TranslateDosToNtPath2(const WCHAR *DosPath)
                     if (File_DriveAddSN && *drive->sn) {
 
                         //
-                        // if the volume serial numbers dont match return NULL
+                        // if the volume serial numbers don't match return NULL
                         //
 
                         if (_wcsnicmp(DosPath + 2, drive->sn, 9) != 0) {

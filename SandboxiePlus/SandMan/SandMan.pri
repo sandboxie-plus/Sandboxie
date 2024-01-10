@@ -21,6 +21,7 @@ HEADERS += ./stdafx.h \
     ./Helpers/FullScreen.h \
     ./Helpers/WinAdmin.h \
     ./Helpers/WinHelper.h \
+    ./Helpers/StorageInfo.h \
     ./Helpers/ReadDirectoryChanges.h \
     ./Helpers/ReadDirectoryChangesPrivate.h \
     ./Windows/RecoveryWindow.h \
@@ -35,6 +36,8 @@ HEADERS += ./stdafx.h \
     ./Wizards/TemplateWizard.h \
     ./Wizards/SetupWizard.h \
     ./Wizards/BoxAssistant.h \
+    ./Windows/BoxImageWindow.h \
+    ./Windows/CompressDialog.h \
     ./Engine/BoxEngine.h \
     ./Engine/ScriptManager.h \
     ./Engine/BoxObject.h \
@@ -44,6 +47,7 @@ HEADERS += ./stdafx.h \
     ./Engine/V4ScriptDebuggerApi.h \
     ./Engine/JSEngineExt.h \
     ./Engine/WizardObject.h \
+    ./CustomStyles.h \
     ./AddonManager.h
 
 SOURCES += ./main.cpp \
@@ -66,6 +70,7 @@ SOURCES += ./main.cpp \
     ./Helpers/FullScreen.cpp \
     ./Helpers/WinAdmin.cpp \
     ./Helpers/WinHelper.cpp \
+    ./Helpers/StorageInfo.cpp \
     ./Helpers/ReadDirectoryChanges.cpp \
     ./Helpers/ReadDirectoryChangesPrivate.cpp \
     ./Helpers/WindowFromPointEx.cpp \
@@ -81,6 +86,8 @@ SOURCES += ./main.cpp \
     ./Wizards/TemplateWizard.cpp \
     ./Wizards/SetupWizard.cpp \
     ./Wizards/BoxAssistant.cpp \
+    ./Windows/BoxImageWindow.cpp \
+    ./Windows/CompressDialog.cpp \
     ./Engine/BoxEngine.cpp \
     ./Engine/ScriptManager.cpp \
     ./Engine/BoxObject.cpp \
@@ -95,7 +102,9 @@ FORMS += ./Forms/SelectBoxWindow.ui \
     ./Forms/PopUpWindow.ui \
     ./Forms/RecoveryWindow.ui \
     ./Forms/SettingsWindow.ui \
-    ./Forms/SnapshotsWindow.ui
+    ./Forms/SnapshotsWindow.ui \
+    ./Forms/BoxImageWindow.ui \
+    ./Forms/CompressDialog.ui
 
 TRANSLATIONS += sandman_de.ts \
     sandman_en.ts \

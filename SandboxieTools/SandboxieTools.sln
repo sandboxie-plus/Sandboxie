@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.32802.440
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UpdUtil", "UpdUtil\UpdUtil.vcxproj", "{6DA9D833-9E5B-4BC6-B446-6DA34E5E616A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImBox", "ImBox\ImBox.vcxproj", "{96BCA164-BCD0-4839-B9FE-DA7E557481DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -27,6 +29,17 @@ Global
 		{6DA9D833-9E5B-4BC6-B446-6DA34E5E616A}.Release|x64.Build.0 = Release|x64
 		{6DA9D833-9E5B-4BC6-B446-6DA34E5E616A}.Release|x86.ActiveCfg = Release|Win32
 		{6DA9D833-9E5B-4BC6-B446-6DA34E5E616A}.Release|x86.Build.0 = Release|Win32
+		{96BCA164-BCD0-4839-B9FE-DA7E557481DB}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{96BCA164-BCD0-4839-B9FE-DA7E557481DB}.Debug|ARM64.Build.0 = Debug|ARM64
+		{96BCA164-BCD0-4839-B9FE-DA7E557481DB}.Debug|x64.ActiveCfg = Debug|x64
+		{96BCA164-BCD0-4839-B9FE-DA7E557481DB}.Debug|x64.Build.0 = Debug|x64
+		{96BCA164-BCD0-4839-B9FE-DA7E557481DB}.Debug|x86.ActiveCfg = Debug|Win32
+		{96BCA164-BCD0-4839-B9FE-DA7E557481DB}.Debug|x86.Build.0 = Debug|Win32
+		{96BCA164-BCD0-4839-B9FE-DA7E557481DB}.Release|ARM64.ActiveCfg = Release|Win32
+		{96BCA164-BCD0-4839-B9FE-DA7E557481DB}.Release|x64.ActiveCfg = Release|x64
+		{96BCA164-BCD0-4839-B9FE-DA7E557481DB}.Release|x64.Build.0 = Release|x64
+		{96BCA164-BCD0-4839-B9FE-DA7E557481DB}.Release|x86.ActiveCfg = Release|Win32
+		{96BCA164-BCD0-4839-B9FE-DA7E557481DB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -68,6 +68,11 @@ struct _BOX {
     WCHAR *file_path;
     ULONG file_path_len;                // in bytes, including NULL
 
+    // when the file_path was redirected by a reparse point, we keep the original 
+
+    WCHAR *file_raw_path;
+    ULONG file_raw_path_len;            // in bytes, including NULL
+
     // 2.  the registry entry point into the sandbox
     // (but note that the Registry.dat file resides below file_path)
     // default:  HKEY_CURRENT_USER\Sandbox\BoxName

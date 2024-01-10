@@ -20,7 +20,9 @@
 #include <QHttpMultiPart>
 #include "../Views/TraceView.h"
 #include "../AddonManager.h"
-
+#include "../MiscHelpers/Common/NetworkAccessManager.h"
+#include "../CustomStyles.h"
+#include "../OnlineUpdater.h"
 
 CBoxAssistant::CBoxAssistant(QWidget *parent)
     : QWizard(parent)
@@ -97,7 +99,7 @@ void CBoxAssistant::OnToggleDebugger()
     m_bUseDebugger = !m_bUseDebugger;
 
     if (m_bUseDebugger && theGUI->GetAddonManager()->GetAddon("V4dbg", CAddonManager::eInstalled).isNull())
-        theGUI->GetAddonManager()->TryInstallAddon("V4dbg", this, tr("To debug troubleshooting scripts you need the V4 Script Debugger addon, do you want to download and install it?"));
+        theGUI->GetAddonManager()->TryInstallAddon("V4dbg", this, tr("To debug troubleshooting scripts you need the V4 Script Debugger add-on, do you want to download and install it?"));
 
     QString title = windowTitle();
     if (m_bUseDebugger)
@@ -225,7 +227,10 @@ CBeginPage::CBeginPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Troubleshooting Wizard"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    QPixmap Logo = QPixmap(theGUI->m_DarkTheme ? ":/SideLogoDM.png" : ":/SideLogo.png");
+    int Scaling = theConf->GetInt("Options/FontScaling", 100);
+    if(Scaling !=  100) Logo = Logo.scaled(Logo.width() * Scaling / 100, Logo.height() * Scaling / 100);
+    setPixmap(QWizard::WatermarkPixmap, Logo);
 
     int row = 0;
     m_pLayout = new QGridLayout;
@@ -251,7 +256,7 @@ void CBeginPage::initializePage()
     auto AddIssue = [&](QVariantMap Issue) {
         QPushButton* pIssue = new QPushButton(theGUI->GetScripts()->Tr(Issue["name"].toString()));
         pIssue->setProperty("issue", Issue);
-        connect(pIssue, SIGNAL(pressed()), this, SLOT(OnCategory()));
+        connect(pIssue, SIGNAL(clicked(bool)), this, SLOT(OnCategory()));
         pIssue->setIcon(CSandMan::GetIcon(Issue["icon"].toString()));
         pIssue->setIconSize(QSize(32, 32));
         pIssue->setProperty("leftButton", true);
@@ -324,7 +329,10 @@ CGroupPage::CGroupPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Select issue from group"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    QPixmap Logo = QPixmap(theGUI->m_DarkTheme ? ":/SideLogoDM.png" : ":/SideLogo.png");
+    int Scaling = theConf->GetInt("Options/FontScaling", 100);
+    if(Scaling !=  100) Logo = Logo.scaled(Logo.width() * Scaling / 100, Logo.height() * Scaling / 100);
+    setPixmap(QWizard::WatermarkPixmap, Logo);
 
     int row = 0;
     m_pLayout = new QGridLayout;
@@ -444,7 +452,10 @@ CListPage::CListPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Select issue from full list"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    QPixmap Logo = QPixmap(theGUI->m_DarkTheme ? ":/SideLogoDM.png" : ":/SideLogo.png");
+    int Scaling = theConf->GetInt("Options/FontScaling", 100);
+    if(Scaling !=  100) Logo = Logo.scaled(Logo.width() * Scaling / 100, Logo.height() * Scaling / 100);
+    setPixmap(QWizard::WatermarkPixmap, Logo);
 
     int row = 0;
     m_pLayout = new QGridLayout;
@@ -797,7 +808,10 @@ CSubmitPage::CSubmitPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Submit Issue Report"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    QPixmap Logo = QPixmap(theGUI->m_DarkTheme ? ":/SideLogoDM.png" : ":/SideLogo.png");
+    int Scaling = theConf->GetInt("Options/FontScaling", 100);
+    if(Scaling !=  100) Logo = Logo.scaled(Logo.width() * Scaling / 100, Logo.height() * Scaling / 100);
+    setPixmap(QWizard::WatermarkPixmap, Logo);
 
     int row = 0;
     QGridLayout* pLayout = new QGridLayout;
@@ -952,7 +966,9 @@ bool CSubmitPage::validatePage()
         }
 
         m_pUploadProgress->ShowMessage(tr("Compressing Logs"));
-        Archive.Update(&Files, true, 9);
+        SCompressParams Params;
+        Params.iLevel = 9;
+        Archive.Update(&Files, true, &Params);
         
         if (pSbieLogs->open(QIODevice::ReadOnly)) {
 
@@ -984,7 +1000,9 @@ bool CSubmitPage::validatePage()
         }
 
         m_pUploadProgress->ShowMessage(tr("Compressing Dumps"));
-        Archive.Update(&Files, true, 9);
+        SCompressParams Params;
+        Params.iLevel = 9;
+        Archive.Update(&Files, true, &Params);
 
         if (pSbieDumps->open(QIODevice::ReadOnly)) {
 
@@ -1003,6 +1021,12 @@ bool CSubmitPage::validatePage()
         eMail.setBody(m_pMail->text().toUtf8());
         pMultiPart->append(eMail);
     }
+
+    quint64 RandID = COnlineUpdater::GetRandID();
+    QHttpPart randId;
+    randId.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"randId\""));
+    randId.setBody(QString::number(RandID, 16).rightJustified(16, '0').toUpper().toUtf8());
+    pMultiPart->append(randId);
 
     QUrl Url("https://sandboxie-plus.com/issues/submit.php");
     QNetworkRequest Request(Url);
@@ -1047,7 +1071,10 @@ CCompletePage::CCompletePage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Troubleshooting Completed"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    QPixmap Logo = QPixmap(theGUI->m_DarkTheme ? ":/SideLogoDM.png" : ":/SideLogo.png");
+    int Scaling = theConf->GetInt("Options/FontScaling", 100);
+    if(Scaling !=  100) Logo = Logo.scaled(Logo.width() * Scaling / 100, Logo.height() * Scaling / 100);
+    setPixmap(QWizard::WatermarkPixmap, Logo);
 
     QVBoxLayout *pLayout = new QVBoxLayout;
 

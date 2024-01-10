@@ -1,6 +1,5 @@
 #pragma once
 #include "../../MiscHelpers/Common/PanelView.h"
-#include "../../MiscHelpers/Common/FlexError.h"
 #include "../../QSbieAPI/SbieStatus.h"
 
 class CMultiErrorDialog : public QDialog

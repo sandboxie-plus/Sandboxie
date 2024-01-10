@@ -31,7 +31,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Check spelling errors
         run: |
@@ -84,18 +84,40 @@ jobs:
           echo 'hread->thread' >> dictionary.txt
           echo 'tamplete->template' >> dictionary.txt
           echo 'prising->praising' >> dictionary.txt
-          echo 'wi->we, will' >> dictionary.txt
+          echo 'wi->we, will, ' >> dictionary.txt
           echo 'dayly->daily' >> dictionary.txt
           echo 'erdinal->ordinal' >> dictionary.txt
           echo 'wizars->wizard' >> dictionary.txt
           echo 'pined->pinned' >> dictionary.txt
+          echo 'inidcate->indicate' >> dictionary.txt
+          echo 'unsoecific->unspecific' >> dictionary.txt
+          echo 'soecific->specific' >> dictionary.txt
+          echo 'cpecific->specific' >> dictionary.txt
+          echo 'incomatible->incompatible' >> dictionary.txt
+          echo 'maliciouse->malicious' >> dictionary.txt
+          echo 'strickt->strict' >> dictionary.txt
+          echo 'brak->break' >> dictionary.txt
+          echo 'booth->both' >> dictionary.txt
+          echo 'vcertificate->certificate' >> dictionary.txt
+          echo 'fron->front' >> dictionary.txt
+          echo 'ahndling->handling' >> dictionary.txt
+          echo 'previwe->preview' >> dictionary.txt
+          echo 'variouse->various' >> dictionary.txt
+          echo 'resumeed->resumed' >> dictionary.txt
+          echo 'autoamtic->automatic' >> dictionary.txt
+          echo 'connencted->connected' >> dictionary.txt
+          echo 'querygin->querying' >> dictionary.txt
           echo 'crome->Chrome' >> dictionary_code.txt
           echo 'chromim->Chromium' >> dictionary_code.txt
           echo 'kmdutill->kmdutil' >> dictionary_code.txt
+          echo 'ancrypted->encrypted' >> dictionary_code.txt
+          echo 'hadrware->hardware' >> dictionary_code.txt
           echo 'sandbocie->Sandboxie' >> dictionary_code.txt
           echo 'sanboxie->Sandboxie' >> dictionary_code.txt
-          echo "sandboxies->Sandboxie's, sandboxed" >> dictionary_code.txt
+          echo "sandboxies->Sandboxie's, sandboxed, " >> dictionary_code.txt
+          echo 'reparese->reparse' >> dictionary_code.txt
+          echo 'tailing->trailing' >> dictionary_code.txt
           # Only lowercase letters are allowed in --ignore-words-list
           codespell --dictionary=dictionary.txt --dictionary=dictionary_rare.txt --dictionary=dictionary_code.txt \
-          --ignore-words-list="wil,unknwn,tolen,pevent,doubleclick,parm,parms,etcp,ois,ba,ptd,modell,namesd,stdio,uint,errorstring,ontext,atend,deque,ecounter,nmake,namess,inh,daa,varient,lite,uis,emai,ws,slanguage,woh,tne,process'" \
-          --skip="./.git,./.github/workflows/codespell.yml,./dictionary*.txt,./Sandboxie/msgs/Text-*-*.txt,./Sandboxie/msgs/report/Report-*.txt,./SandboxiePlus/SandMan/*.ts,./Installer/Languages.iss,./Installer/isl/*.isl,./Sandboxie/common/Detours/Makefile,./Sandboxie/common/Detours/disasm.cpp,./Sandboxie/install/build.bat"
+          --ignore-words-list="wil,unknwn,tolen,pevent,doubleclick,parm,parms,etcp,ois,ba,ptd,modell,namesd,stdio,uint,errorstring,ontext,atend,deque,ecounter,nmake,namess,inh,daa,varient,lite,uis,emai,ws,slanguage,woh,tne,typpos,enew,shft,seh,ser,servent" \
+          --skip="./.git,./.github/workflows/codespell.yml,./dictionary*.txt,./Sandboxie/msgs/Text-*-*.txt,./Sandboxie/msgs/report/Report-*.txt,./SandboxiePlus/SandMan/*.ts,./Installer/Languages.iss,./Installer/isl/*.isl,./Sandboxie/common/Detours/Makefile,./Sandboxie/common/Detours/disasm.cpp,./Sandboxie/install/build.bat,./SandboxieTools/ImBox/dc/crypto_fast/xts_fast.c,./Sandboxie/apps/control/TreePropSheet.h,./Sandboxie/apps/control/PropPageFrame.h,./Sandboxie/apps/control/PropPageFrameDefault.h,./SandboxiePlus/SandMan/Troubleshooting/lang_*.json"

@@ -27,29 +27,9 @@ public:
 
 	static QString	ImageTypeToStr(quint32 type);
 
-	virtual bool	HasElevatedToken()							{ return m_ProcessInfo.IsElevated; }
-	virtual bool	HasSystemToken()							{ return m_ProcessInfo.IsSystem; }
-	virtual bool	HasRestrictedToken()						{ return m_ProcessInfo.IsRestricted; }
-	virtual bool	HasAppContainerToken()						{ return m_ProcessInfo.IsAppContainer; }
-
 protected:
 
-	virtual void			InitProcessInfoImpl(void* ProcessHandle);
+	//virtual void			InitProcessInfoImpl(void* ProcessHandle);
 
 	QMap<int, int>			m_RememberedActions;
-
-	// Flags
-	union
-	{
-		quint32 Flags;
-		struct
-		{
-			quint32
-				IsElevated : 1,
-				IsSystem : 1,
-				IsRestricted : 1,
-				IsAppContainer : 1,
-				Spare : 28;
-		};
-	}						m_ProcessInfo;
 };

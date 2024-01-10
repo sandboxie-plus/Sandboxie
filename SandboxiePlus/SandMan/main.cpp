@@ -102,15 +102,26 @@ int main(int argc, char *argv[])
 		g_PendingMessage = "Op:" + Op;
 	}
 
-	CmdPos = -1;
+	// Context Menu invocations
+	int BoxPos = -1;
 	for (int i = 0; i < Args.size(); i++) {
-		if (Args[i].left(5).compare("/box:", Qt::CaseInsensitive) == 0)
-			CmdPos = i;
+		if (Args[i].left(5).compare("/box:", Qt::CaseInsensitive) == 0) {
+			BoxPos = i;
+			break;
+		}
 	}
-	if (CmdPos != -1) {
+	int DfpPos = Args.indexOf("/disable_force", Qt::CaseInsensitive);
+	// the first argument wins
+	if (BoxPos != -1 && DfpPos != -1) {
+		if (BoxPos < DfpPos) DfpPos = -1;
+		else				 BoxPos = -1;
+	}
+	// run sandboxed
+	if (BoxPos != -1) 
+	{
 		// Note: a escaped command ending with \" will fail and unescape "
 		//QString CommandLine;
-		//for (int i = CmdPos + 1; i < Args.count(); i++)
+		//for (int i = BoxPos + 1; i < Args.count(); i++)
 		//	CommandLine += "\"" + Args[i] + "\" ";
 		//g_PendingMessage = "Run:" + CommandLine.trimmed();
 		LPWSTR cmdLine0 = wcsstr(GetCommandLineW(), L"/box:");
@@ -124,14 +135,31 @@ int main(int argc, char *argv[])
 		}
 
 		g_PendingMessage = "Run:" + QString::fromWCharArray(cmdLine + 1);
-
 		g_PendingMessage += "\nFrom:" + QDir::currentPath();
 
 		QString BoxName = QString::fromWCharArray(cmdLine0 + 5, cmdLine - (cmdLine0 + 5));
 		if(BoxName != "__ask__") 
 			g_PendingMessage += "\nIn:" + BoxName;
 	}
+	// run un sandboxed
+	if (DfpPos != -1)
+	{
+		LPWSTR cmdLine0 = wcsstr(GetCommandLineW(), L"/disable_force");
+		if (!cmdLine0) return -1;
+		LPWSTR cmdLine = cmdLine0 + 14;
 
+		if (IsBoxed) {
+			ShellExecute(NULL, L"open", cmdLine + 1, NULL, NULL, SW_SHOWNORMAL);
+			return 0;
+		}
+
+		g_PendingMessage = "Run:" + QString::fromWCharArray(cmdLine + 1);
+		g_PendingMessage += "\nFrom:" + QDir::currentPath();
+
+		g_PendingMessage += "\nIn:*DFP*";
+	}
+
+	
 	if (IsBoxed) {
 		QMessageBox::critical(NULL, "Sandboxie-Plus", CSandMan::tr("Sandboxie Manager can not be run sandboxed!"));
 		return -1;

@@ -200,7 +200,7 @@ void CSbieObject::ShellInstall(const QVariantMap& Options)
 {
 	CSettingsWindow::AddContextMenu(Options["legacy"].toBool());
 	if (Options["runUnBoxed"].toBool()) {
-		CSbieUtils::AddContextMenu2(QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe",
+		CSbieUtils::AddContextMenu2(QApplication::applicationDirPath().replace("/", "\\") + "\\SandMan.exe",
 			tr("Run &Un-Sandboxed"),
 			QApplication::applicationDirPath().replace("/", "\\") + "\\Start.exe");
 	}

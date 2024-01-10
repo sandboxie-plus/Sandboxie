@@ -390,8 +390,7 @@ CFileBrowserWindow::CFileBrowserWindow(const CSandBoxPtr& pBox, QWidget *parent)
 	//flags &= ~Qt::WindowCloseButtonHint;
 	setWindowFlags(flags);
 
-	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
-	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	this->setWindowFlag(Qt::WindowStaysOnTopHint, theGUI->IsAlwaysOnTop());
 
     m_pMainLayout = new QGridLayout(this);
     m_FileView = new CFileView();

@@ -418,12 +418,12 @@ _FX NTSTATUS File_MigrateFile(
 
             ULONG Cur_Ticks = GetTickCount();
             if (Next_Status < Cur_Ticks) {
-                Next_Status = Cur_Ticks + 1000; // update prgress every second
+                Next_Status = Cur_Ticks + 1000; // update progress every second
 
                 WCHAR size_str[32];
                 Sbie_snwprintf(size_str, 32, L"%I64u", file_size);
                 const WCHAR* strings[] = { Dll_BoxName, TruePath, size_str, NULL };
-                SbieApi_LogMsgExt(2198, strings);
+                SbieApi_LogMsgExt(-1, 2198, strings);
             }
         }
 

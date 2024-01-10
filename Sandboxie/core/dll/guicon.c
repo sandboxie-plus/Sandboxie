@@ -220,6 +220,25 @@ _FX BOOL Gui_ConnectConsole(ULONG ShowFlag)
 
                 if (! AttachConsole(rpl->process_id))
                     status = STATUS_NOT_SAME_DEVICE;
+
+                //
+                // wait for the count to indicate the service has quit
+                //
+
+                typedef DWORD (*P_GetConsoleProcessList)(LPDWORD lpdwProcessList, DWORD dwProcessCount);
+                P_GetConsoleProcessList GetConsoleProcessList = (P_GetConsoleProcessList)
+                    GetProcAddress(Dll_Kernel32, "GetConsoleProcessList");
+
+                DWORD pids[10]; // 2 should be enough but lets go with 10
+
+                while (1) {
+
+                    Sleep(50);
+
+                    ULONG num_pids = GetConsoleProcessList(pids, ARRAYSIZE(pids));
+                    if (num_pids < 2)
+                        break;
+                }
             }
 
             Dll_Free(rpl);
@@ -264,6 +283,7 @@ _FX void Gui_InitConsole2(void)
     HANDLE *Handles;
     HMODULE User32;
 
+    // $Workaround$ - 3rd party fix
     //
     // hack:  the Kaspersky process klwtblfs.exe is protected from
     // termination through TerminateProcess, so make sure we terminate

@@ -126,11 +126,14 @@ CSandBoxPlus::CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI) : CSand
 	m_bSharesAllowed = false;
 	m_bDropRights = false;
 	
+	m_bRamDisk = false;
+	m_bImageFile = false;
 
 	m_bSecurityEnhanced = false;
 	m_bPrivacyEnhanced = false;
 	m_bApplicationCompartment = false;
 	m_iUnsecureDebugging = 0;
+	m_bEncryptedAndConfidential = false;
 	m_bRootAccessOpen = false;
 
 	m_TotalSize = theConf->GetValue("SizeCache/" + m_Name, -1).toLongLong();
@@ -186,7 +189,7 @@ protected:
 	CArchive* m_pArchive;
 };
 
-void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ExportPath, const QString& RootPath, const QString& Section)
+void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ExportPath, const QString& RootPath, const QString& Section, const QVariantMap& vParams)
 {
 	//CArchive Archive(ExportPath + ".tmp");
 	CArchive Archive(ExportPath);
@@ -226,8 +229,15 @@ void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 			// this file is already present in the archive, this should not happen !!!
 	}
 
+	if (vParams.contains("password"))
+		Archive.SetPassword(vParams["password"].toString());
+
+    SCompressParams Params;
+	Params.iLevel = vParams["level"].toInt();
+	Params.bSolid = vParams["solid"].toBool();
+
 	SB_STATUS Status = SB_OK;
-	if (!Archive.Update(&Files, true, theConf->GetInt("Options/ExportCompression", 3)))  // 0, 1 - 9
+	if (!Archive.Update(&Files, true, &Params))
 		Status = SB_ERR((ESbieMsgCodes)SBX_7zCreateFailed);
 	
 	//if(!Status.IsError() && !pProgress->IsCanceled())
@@ -240,7 +250,7 @@ void CSandBoxPlus::ExportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 	pProgress->Finish(Status);
 }
 
-SB_PROGRESS CSandBoxPlus::ExportBox(const QString& FileName)
+SB_PROGRESS CSandBoxPlus::ExportBox(const QString& FileName, const QString& Password, int Level, bool Solid)
 {
 	if (!CArchive::IsInit())
 		return SB_ERR((ESbieMsgCodes)SBX_7zNotReady);
@@ -253,14 +263,23 @@ SB_PROGRESS CSandBoxPlus::ExportBox(const QString& FileName)
 
 	QString Section = theAPI->SbieIniGetEx(m_Name, "");
 
+	QVariantMap vParams;
+	if (!Password.isEmpty())
+		vParams["password"] = Password;
+	vParams["level"] = Level;
+	vParams["solid"] = Solid;
+
 	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-	QtConcurrent::run(CSandBoxPlus::ExportBoxAsync, pProgress, FileName, m_FilePath, Section);
+	QtConcurrent::run(CSandBoxPlus::ExportBoxAsync, pProgress, FileName, m_FilePath, Section, vParams);
 	return SB_PROGRESS(OP_ASYNC, pProgress);
 }
 
-void CSandBoxPlus::ImportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ImportPath, const QString& RootPath, const QString& BoxName)
+void CSandBoxPlus::ImportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ImportPath, const QString& RootPath, const QString& BoxName, const QString& Password)
 {
 	CArchive Archive(ImportPath);
+
+	if (!Password.isEmpty())
+		Archive.SetPassword(Password);
 
 	if (Archive.Open() != ERR_7Z_OK) {
 		pProgress->Finish(SB_ERR((ESbieMsgCodes)SBX_7zOpenFailed));
@@ -308,13 +327,13 @@ void CSandBoxPlus::ImportBoxAsync(const CSbieProgressPtr& pProgress, const QStri
 	pProgress->Finish(Status);
 }
 
-SB_PROGRESS CSandBoxPlus::ImportBox(const QString& FileName)
+SB_PROGRESS CSandBoxPlus::ImportBox(const QString& FileName, const QString& Password)
 {
 	if (!CArchive::IsInit())
 		return SB_ERR((ESbieMsgCodes)SBX_7zNotReady);
 
 	CSbieProgressPtr pProgress = CSbieProgressPtr(new CSbieProgress());
-	QtConcurrent::run(CSandBoxPlus::ImportBoxAsync, pProgress, FileName, m_FilePath, m_Name);
+	QtConcurrent::run(CSandBoxPlus::ImportBoxAsync, pProgress, FileName, m_FilePath, m_Name, Password);
 	return SB_PROGRESS(OP_ASYNC, pProgress);
 }
 
@@ -348,6 +367,14 @@ void CSandBoxPlus::UpdateDetails()
 	m_bSharesAllowed = GetBool("BlockNetworkFiles", true) == false;
 
 	m_bDropRights = GetBool("DropAdminRights", false);
+
+	m_bRamDisk = GetBool("UseRamDisk", false);
+	m_bImageFile = GetBool("UseFileImage", false);
+
+	QStringList DenyHostAccess = GetTextList("DenyHostAccess", true, false, true);
+	//bool bIsPrivate = DenyHostAccess.contains("y", Qt::CaseInsensitive) || DenyHostAccess.contains("yes", Qt::CaseInsensitive)
+	//	|| DenyHostAccess.contains("*,y", Qt::CaseInsensitive) || DenyHostAccess.contains("*,yes", Qt::CaseInsensitive);
+	m_bEncryptedAndConfidential = m_bImageFile && GetBool("ConfidentialBox", false, true, true); // && bIsPrivate;
 
 	m_bRootAccessOpen = false;
 	foreach(const QString& Setting, QString("OpenFilePath|OpenKeyPath|OpenPipePath|OpenConfPath").split("|")) {
@@ -458,7 +485,7 @@ void CSandBoxPlus::ScanStartMenu()
 		foreach (const QString& Snapshot, SnapshotList)
 		{
 			QString BoxPath = theAPI->GetBoxedPath(this, QString::fromWCharArray(path), Snapshot);
-			QStringList	Files = ListDir(BoxPath, QStringList() << "*.lnk" << "*.url" << "*.pif", i >= 2); // no subdir scan for desktop as people like to put junk there
+			QStringList	Files = ListDir(BoxPath, QStringList() << "*.lnk" << "*.url", i >= 2); // no subdir scan for desktop as people like to put junk there
 			foreach(QString File, Files)
 			{
 				QString RealPath = theAPI->GetRealPath(this, BoxPath + "\\" + QString(File).replace("/", "\\"));
@@ -490,32 +517,68 @@ void CSandBoxPlus::ScanStartMenu()
 		if (!OldStartMenu.remove(FoundLink.SubPath.toLower()))
 			bChanged = true;
 
+		SLink* pLink = NULL;
+
 		StrPair PathName = Split2(FoundLink.SubPath, "/", true);
 		StrPair NameExt = Split2(PathName.second, ".", true);
-		if (NameExt.second.toLower() != "lnk")
-			continue; // todo url
+		if (NameExt.second.toLower() == "lnk") 
+		{
+			QVariantMap Link = ResolveShortcut(FoundLink.LinkPath);
+			if (!Link.contains("Path"))
+				continue;
 
-		QVariantMap Link = ResolveShortcut(FoundLink.LinkPath);
-		if (!Link.contains("Path"))
-			continue;
+			pLink = &m_StartMenu[FoundLink.SubPath.toLower()];
+			pLink->Folder = PathName.first;
+			pLink->Name = NameExt.first;
+			if (!pLink->Target.isEmpty() && pLink->Target != Link["Path"].toString())
+				bChanged = true;
 
-		SLink* pLink = &m_StartMenu[FoundLink.SubPath.toLower()];
-		pLink->Folder = PathName.first;
-		pLink->Name = NameExt.first;
-		if(!pLink->Target.isEmpty() && pLink->Target != Link["Path"].toString())
-			bChanged = true;
-		pLink->Target = Link["Path"].toString();
-		pLink->Arguments = Link["Arguments"].toString();
-		pLink->Icon = Link["IconPath"].toString();
-		pLink->IconIndex = Link["IconIndex"].toInt();
-		pLink->WorkDir = Link["WorkingDir"].toString();
+			pLink->Target = Link["Path"].toString();
+			if(pLink->Target.mid(1,2) != ":\\")
+				pLink->Url = true;
+			pLink->Arguments = Link["Arguments"].toString();
+			pLink->Icon = Link["IconPath"].toString();
+			pLink->IconIndex = Link["IconIndex"].toInt();
+			pLink->WorkDir = Link["WorkingDir"].toString();	
+		}
+		else if (NameExt.second.toLower() == "url") 
+		{
+			std::wstring urlFile = FoundLink.LinkPath.toStdWString();
 
-		if (!pLink->Target.isEmpty() && !QFile::exists(pLink->Target) && !IsBoxexPath(pLink->Target))
-			pLink->Target = theAPI->GetBoxedPath(this, pLink->Target, FoundLink.Snapshot);
-		if (!pLink->WorkDir.isEmpty() && !QFile::exists(pLink->WorkDir) && !IsBoxexPath(pLink->WorkDir))
-			pLink->WorkDir = theAPI->GetBoxedPath(this, pLink->WorkDir, FoundLink.Snapshot);
-		if (!pLink->Icon.isEmpty() && !QFile::exists(pLink->Icon) && !IsBoxexPath(pLink->Icon))
-			pLink->Icon = theAPI->GetBoxedPath(this, pLink->Icon, FoundLink.Snapshot);
+			auto ReadIni = [&urlFile](const wchar_t* Section, const wchar_t* Key) {
+				wchar_t strBuffer[0x1000];
+				DWORD Read = GetPrivateProfileStringW(Section, Key, L"", strBuffer, ARRSIZE(strBuffer), urlFile.c_str());
+				return QString::fromWCharArray(strBuffer, Read);
+			};
+
+			QString Url = ReadIni(L"InternetShortcut", L"URL");
+			if (Url.isEmpty())
+				continue;
+
+			pLink = &m_StartMenu[FoundLink.SubPath.toLower()];
+			pLink->Folder = PathName.first;
+			pLink->Name = NameExt.first;
+			if (!pLink->Target.isEmpty() && pLink->Target != Url)
+				bChanged = true;
+
+			pLink->Url = true;
+			pLink->Target = Url;
+			//pLink->Arguments = ;
+			pLink->Icon = ReadIni(L"InternetShortcut", L"IconFile");
+			pLink->IconIndex = ReadIni(L"InternetShortcut", L"IconIndex").toInt();
+			if (pLink->Icon.isEmpty())
+				pLink->IconIndex = -1;
+			//pLink->WorkDir = ;
+		}
+
+		if (pLink) {
+			if (!pLink->Url && !pLink->Target.isEmpty() && !QFile::exists(pLink->Target) && !IsBoxexPath(pLink->Target))
+				pLink->Target = theAPI->GetBoxedPath(this, pLink->Target, FoundLink.Snapshot);
+			if (!pLink->WorkDir.isEmpty() && !QFile::exists(pLink->WorkDir) && !IsBoxexPath(pLink->WorkDir))
+				pLink->WorkDir = theAPI->GetBoxedPath(this, pLink->WorkDir, FoundLink.Snapshot);
+			if (!pLink->Icon.isEmpty() && !QFile::exists(pLink->Icon) && !IsBoxexPath(pLink->Icon))
+				pLink->Icon = theAPI->GetBoxedPath(this, pLink->Icon, FoundLink.Snapshot);
+		}
 	}
 
 	foreach(const QString &Path, OldStartMenu)
@@ -551,7 +614,18 @@ void CSandBoxPlus::UpdateSize(bool bReset)
 	if(bReset)
 		m_TotalSize = -1;
 
+	m_bImageFile = GetBool("UseFileImage", false);
+
 	m_IsEmpty = IsEmpty();
+
+	if (m_bImageFile) {
+		LARGE_INTEGER liSparseFileCompressedSize;
+		liSparseFileCompressedSize.LowPart = GetCompressedFileSize(GetBoxImagePath().toStdWString().c_str(), (LPDWORD)&liSparseFileCompressedSize.HighPart);
+		m_TotalSize = liSparseFileCompressedSize.QuadPart;
+	}
+
+	if (m_bImageFile && m_Mount.isEmpty())
+		return;
 
 	if(theConf->GetBool("Options/WatchBoxSize", false) && m_TotalSize == -1)
 		((CSbiePlusAPI*)theAPI)->m_BoxMonitor->ScanBox(this);
@@ -597,7 +671,17 @@ SB_STATUS CSandBoxPlus::RenameBox(const QString& NewName)
 
 	BeginModifyingBox(); 
 
+	QString OldBoxImagePath = GetBoxImagePath();
+
 	SB_STATUS Status = CSandBox::RenameBox(NewName); 
+
+	if (!Status.IsError() && QFile::exists(OldBoxImagePath)) {
+
+		((CSbiePlusAPI*)m_pAPI)->UpdateBoxPaths(this);
+
+		if(!QFile::rename(OldBoxImagePath, GetBoxImagePath()))
+			Status = SB_ERR(SB_FailedMoveImage, QVariantList() <<OldBoxImagePath << GetBoxImagePath(), 0xC0000001 /*STATUS_UNSUCCESSFUL*/);
+	}
 
 	ConnectEndSlot(Status); 
 
@@ -643,6 +727,8 @@ void CSandBoxPlus::EndModifyingBox()
 bool CSandBoxPlus::IsEmpty() const
 {
 	if (!CSandBox::IsEmpty())
+		return false;
+	if(m_bImageFile && QFile::exists(GetBoxImagePath()))
 		return false;
 	return true;
 }
@@ -715,6 +801,9 @@ CSandBoxPlus::EBoxTypes CSandBoxPlus::GetTypeImpl() const
 {
 	if (m_bRootAccessOpen)
 		return eOpen;
+
+	if (m_bEncryptedAndConfidential)
+		return ePrivate;
 
 	if (m_bApplicationCompartment && m_bPrivacyEnhanced)
 		return eAppBoxPlus;
@@ -1038,19 +1127,23 @@ QString CSandBoxPlus::MakeBoxCommand(const QString& FileName)
 	return BoxFileName.replace(m_FilePath, "%BoxRoot%", Qt::CaseInsensitive);
 }
 
-QString CSandBoxPlus::GetCommandFile(const QString& Command)
+QString CSandBoxPlus::GetCommandFile(const QString& Command, QString* Arguments)
 {
 	QString Path = Command;
+	int End;
 	if (Path.left(1) == "\"") {
-		int End = Path.indexOf("\"", 1);
+		End = Path.indexOf("\"", 1);
 		if (End != -1) Path = Path.mid(1, End - 1);
 	}
 	else {
-		int End = Path.indexOf(" ");
+		End = Path.indexOf(" ");
 		if (End != -1) Path.truncate(End);
 	}
 	//if (Path.left(1) == "\\")
 	//	Path.prepend(m_FilePath);
+
+	if (Arguments && End != -1) *Arguments = Command.mid(End + 1);
+
 	return Path.replace("%BoxRoot%", m_FilePath, Qt::CaseInsensitive);
 }
 
@@ -1069,7 +1162,7 @@ QString CSandBoxPlus::GetFullCommand(const QString& Command)
 // CSbieTemplatesEx
 //
 
-#include <ntstatus.h>
+//#include <ntstatus.h>
 #define WIN32_NO_STATUS
 typedef long NTSTATUS;
 #include <Windows.h>
@@ -1120,7 +1213,7 @@ void CSbieTemplatesEx::CollectUpdates()
 	res = updateSearcher->Search(criteria, &searchResult);
 	SysFreeString(criteria); }
 	if (FAILED(res)) {
-		theGUI->OnLogMessage(tr("Failed to search for updates"));
+		theGUI->OnLogMessage(tr("Failed to enumerate installed Windows updates"));
 		goto cleanup;
 	}
 

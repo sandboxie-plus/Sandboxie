@@ -28,9 +28,9 @@ ArchitecturesAllowed={#MyAppArch}
 ArchitecturesInstallIn64BitMode=x64 arm64
 AllowNoIcons=yes
 AlwaysRestart=no
-LicenseFile=.\license.txt
+LicenseFile=license.txt
 UsedUserAreasWarning=no
-VersionInfoCopyright=Copyright (C) 2020-2022 by David Xanatos (xanasoft.com)
+VersionInfoCopyright=Copyright (C) 2020-2023 by David Xanatos (xanasoft.com)
 VersionInfoVersion={#MyAppVersion}
 SetupIconFile=SandManInstall.ico
 

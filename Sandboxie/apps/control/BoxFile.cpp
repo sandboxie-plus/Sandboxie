@@ -320,7 +320,8 @@ bool CBoxFile::GetAbsolutePathForRecoveryFolder(WCHAR *buf, ULONG buf_len)
 
     if (NT_SUCCESS(status)) {
 
-        status = SbieApi_GetFileName(hFile, buf_len - 4, buf);
+        buf_len -= 4;
+        status = SbieApi_GetFileName(hFile, buf, &buf_len, NULL);
         if (status == 0 && SavePath.CompareNoCase(buf) != 0)
             converted = true;
 

@@ -10,7 +10,7 @@
 A supporter certificate is like a license key and enables the use of new supporter exclusive features, like [Privacy Mode](https://sandboxie-plus.com/privacy-mode/) or [Application Compartment](https://sandboxie-plus.com/compartment-mode/) sandboxes. See the [Feature Comparison](https://github.com/sandboxie-plus/sandboxie-docs/blob/main/Content/FeatureComparison.md) for more details and certificate options. <br>
 
 2. Get a [Patreon subscription](https://www.patreon.com/DavidXanatos) <br>
-Patreon certificates are valid for as long as the subscription is active and unlock all features. Patreons which ended their subscription are entitled to a residual certificate corresponding to the total amount of their support. See also [how to renew a Patreon supporter certificate](https://github.com/sandboxie-plus/Sandboxie/issues/2144).
+Patreon certificates are valid for as long as the subscription is active and unlock all features. Patreons who have ended their subscription are entitled to a residual certificate corresponding to the total amount of their support. See also [how to renew a Patreon supporter certificate](https://github.com/sandboxie-plus/Sandboxie/issues/2144).
 
 3. Donate with [PayPal](https://sandboxie-plus.com/go.php?to=donate)
 

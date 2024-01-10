@@ -98,6 +98,7 @@ void CSandMan::CreateTrayMenu()
 
 	m_pTrayMenu->addSeparator();
 	m_pTrayMenu->addAction(m_pEmptyAll);
+	m_pTrayMenu->addAction(m_pLockAll);
 	m_pTrayMenu->addSeparator();
 	m_pTrayMenu->addAction(m_pDisableForce2);
 	if(m_pDisableRecovery) m_pTrayMenu->addAction(m_pDisableRecovery);
@@ -340,6 +341,10 @@ void CSandMan::OnSysTray(QSystemTrayIcon::ActivationReason Reason)
 {
 	static bool TriggerSet = false;
 	static bool NullifyTrigger = false;
+
+	if (theConf->GetBool("Options/TraySingleClick", false) && Reason == QSystemTrayIcon::Trigger)
+		Reason = QSystemTrayIcon::DoubleClick;
+
 	switch(Reason)
 	{
 		case QSystemTrayIcon::Context:

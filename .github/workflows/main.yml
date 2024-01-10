@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v1.3
@@ -84,15 +84,24 @@ jobs:
 #      - name: Add Windows 7 compatible Qt6 DLLs
 #        run: Installer\fix_qt6_win7.cmd
 
-      - name: Merging Builds
-        run: Installer\merge_builds.cmd
+      - name: Add missing languages for Qt5 (issue 1528)
+        run: Installer\fix_qt5_languages.cmd Win32
+
+      - name: Get openssl binaries
+        run: Installer\get_openssl.cmd
+
+      - name: Get 7z binaries
+        run: Installer\get_7zip.cmd
+
+      - name: Merging Build
+        run: Installer\copy_build.cmd x64
 
       - name: Collect installer assets
         run: Installer\get_assets.cmd
 
       - name: Upload installer assets
         if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Assets
           path: |
@@ -101,7 +110,7 @@ jobs:
 
       - name: Upload Sandboxie x64
         if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Sandboxie_x64
           path: |
@@ -115,7 +124,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v1.3
@@ -134,8 +143,19 @@ jobs:
         run: msbuild /t:build Sandboxie\SandboxDll.sln /p:Configuration="SbieRelease" /p:Platform=ARM64EC -maxcpucount:8
 
     #
-    # Prepare Qt Framework
+    # Prepare Qt Framework for ARM64 we need also the x64 for soem utilities like qmake
     #
+
+      - name: Install Qt6 x64
+        uses: jurplel/install-qt-action@v3
+        with:
+      #    version: '6.2.4'
+          version: '6.3.1'
+      #    dir: ..
+      #    arch:  ${{ matrix.qt-target }}
+          arch:  'win64_msvc2019_64'
+      #    tools: 'tools_qtcreator,4.14.0-0-202012170949,qt.tools.qtcreator'
+          cache: true
 
       - name: Install Qt6 ARM64
         uses: jurplel/install-qt-action@v3
@@ -173,12 +193,18 @@ jobs:
     # Merge everything together
     #
 
-      - name: Merging Builds
-        run: Installer\merge_builds.cmd
+      - name: Get openssl binaries
+        run: Installer\get_openssl.cmd
+
+      - name: Get 7z binaries
+        run: Installer\get_7zip.cmd
+
+      - name: Merging Build
+        run: Installer\copy_build.cmd ARM64
 
       - name: Upload Sandboxie ARM64
         if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Sandboxie_ARM64
           path: |
@@ -192,7 +218,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup msbuild
         uses: microsoft/setup-msbuild@v1.3
@@ -241,15 +267,21 @@ jobs:
     # Merge everything together
     #
 
-      - name: Add missing languages for Qt5 x86 (issue 1528)
+      - name: Add missing languages for Qt5 (issue 1528)
         run: Installer\fix_qt5_languages.cmd Win32
 
-      - name: Merging Builds
-        run: Installer\merge_builds.cmd
+      - name: Get openssl binaries
+        run: Installer\get_openssl.cmd
+
+      - name: Get 7z binaries
+        run: Installer\get_7zip.cmd
+
+      - name: Merging Build
+        run: Installer\copy_build.cmd x86
 
       - name: Upload Sandboxie x86
         if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Sandboxie_x86
           path: |

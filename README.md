@@ -1,21 +1,20 @@
 # Sandboxie Plus / Classic
 
-[![Plus license](https://img.shields.io/badge/Plus%20license-Custom%20-blue.svg)](./Installer/license.txt) [![Classic license](https://img.shields.io/github/license/Sandboxie-Plus/Sandboxie?label=Classic%20license&color=blue)](./LICENSE) [![GitHub Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie.svg)](https://github.com/sandboxie-plus/Sandboxie/releases/latest) [![GitHub Pre-Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie/all.svg?label=pre-release)](https://github.com/sandboxie-plus/Sandboxie/releases) [![GitHub Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/main.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions) [![GitHub Codespell Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml)
+[![Plus license](https://img.shields.io/badge/Plus%20license-Custom%20-blue.svg)](./LICENSE.Plus) [![Classic license](https://img.shields.io/github/license/Sandboxie-Plus/Sandboxie?label=Classic%20license&color=blue)](./LICENSE.Classic) [![GitHub Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie.svg)](https://github.com/sandboxie-plus/Sandboxie/releases/latest) [![GitHub Pre-Release](https://img.shields.io/github/release/sandboxie-plus/Sandboxie/all.svg?label=pre-release)](https://github.com/sandboxie-plus/Sandboxie/releases) [![GitHub Build Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/main.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions) [![GitHub Codespell Status](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml/badge.svg)](https://github.com/sandboxie-plus/Sandboxie/actions/workflows/codespell.yml)
 
-| Note: This is a community fork that took place after the release of the Sandboxie source code and not the official continuation of the previous development (see the [project history](./README.md#-project-history)). |
-|      :---       |
+**Note: This is a community fork that took place after the release of the Sandboxie source code and not the official continuation of the previous development (see the [project history](./README.md#-project-history)).**
+
+|  System requirements  |      Release notes     |     Contribution guidelines   |      Security policy      |      Code of Conduct      |
+|         :---:         |          :---:         |          :---:                |          :---:            |          :---:            |
+| Windows 7 or higher, 32-bit or 64-bit. |  [CHANGELOG.md](./CHANGELOG.md)  |  [CONTRIBUTING.md](./CONTRIBUTING.md)  |   [SECURITY.md](./SECURITY.md)  |  [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)  |
 
 Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT-based operating systems. It creates a sandbox-like isolated operating environment in which applications can be run or installed without permanently modifying local & mapped drives or the Windows registry. An isolated virtual environment allows controlled testing of untrusted programs and web surfing.<br>
 
-Sandboxie allows you to create virtually unlimited sandboxes to isolate programs from the host and each other, while also allowing you to run as many programs simultaneously in a single box as you wish.
-
-|  System requirements  |      Release notes     |      Security policy      |      Contribution guidelines   |
-|         :---:         |          :---:         |          :---:            |          :---:                 |
-| Windows 7 or higher, 32-bit or 64-bit. |  [CHANGELOG.md](./CHANGELOG.md)  |   [SECURITY.md](./SECURITY.md)  |  [CONTRIBUTING.md](./CONTRIBUTING.md)  |
+Sandboxie allows you to create virtually unlimited sandboxes and run them alone or simultaneously to isolate programs from the host and each other, while also allowing you to run as many programs simultaneously in a single box as you wish.
 
 ## ⏬ Download
 
-[![GitHub All Releases](https://img.shields.io/github/downloads/sandboxie-plus/Sandboxie/total?style=for-the-badge)](https://github.com/sandboxie-plus/Sandboxie/releases/latest)
+[Latest Release](https://github.com/sandboxie-plus/Sandboxie/releases/latest)
 
 ## 🚀 Features
 
@@ -27,9 +26,10 @@ Sandboxie Plus has a modern Qt-based UI, which supports all new features that ha
   * Snapshot Manager - takes a copy of any box in order to be restored when needed
   * Maintenance mode - allows to uninstall/install/start/stop Sandboxie driver and service when needed
   * Portable mode - you can run the installer and choose to extract all files to a directory
-  * Additional UI options to block access for Windows components like printer spooler and clipboard
+  * Additional UI options to block access to Windows components like printer spooler and clipboard
   * More customization options for Start/Run and Internet access restrictions
   * Privacy mode sandboxes that protect user data from illegitimate access
+  * Security enhanced sandboxes that restrict the availability of syscalls and endpoints
   * Global hotkey to terminate all boxed processes
   * A network firewall per sandbox which supports Windows Filtering Platform (WFP)
   * The list of sandboxes can be searched with the shortcut key Ctrl+F
@@ -38,6 +38,8 @@ Sandboxie Plus has a modern Qt-based UI, which supports all new features that ha
   * Integration of sandboxes into the Windows Start menu
   * A browser compatibility wizard to create templates for unsupported browsers
   * Vintage View mode to reproduce the graphical appearance of Sandboxie Control
+  * A troubleshooting wizard to assist users with their problems
+  * An Add-on manager to extend or add functionality via additional components
 
 More features can be spotted by finding the sign `=` through the shortcut key Ctrl+F in the [CHANGELOG.md](./CHANGELOG.md) file.
 
@@ -131,13 +133,13 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - clexanis, Mmoi-Fr, hippalectryon-0, Monsieur Pissou - French (provided by email)
 - bastik-1001, APMichael - German
 - timinoun - Hungarian (provided by email)
-- isaak654 - Italian
+- isaak654, DerivativeOfLog7 - Italian
 - VenusGirl - Korean
 - 7zip - Polish ([provided separately](https://forum.xanasoft.com/viewtopic.php?f=12&t=4&start=20))
 - JNylson - Portuguese and Brazilian Portuguese
 - lufog - Russian
-- sebadamus - Spanish
-- 1FF - Swedish (provided by email)
+- LumitoLuma, sebadamus - Spanish
+- 1FF, Thatagata - Swedish (provided by email or pull request)
 - xorcan, fmbxnary, offhub - Turkish
 - SuperMaxusa, lufog - Ukrainian
 - GunGunGun - Vietnamese

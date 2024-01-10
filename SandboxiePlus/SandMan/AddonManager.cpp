@@ -187,7 +187,7 @@ SB_PROGRESS CAddonManager::InstallAddon(const QString& Id)
 {
 	CAddonPtr pAddon = GetAddon(Id, eNotINstalled);
 	if (!pAddon)
-		return SB_ERR(SB_OtherError, QVariantList() << tr("Addon not found, please try updating the addon list in the global settings!"));
+		return SB_ERR(SB_OtherError, QVariantList() << tr("Add-on not found, please try updating the add-on list in the global settings!"));
 
 	QFile::remove(theGUI->m_pUpdater->GetUpdateDir(true) + "/" ADDONS_FILE);
 	QFile::copy(theConf->GetConfigDir() + "/" ADDONS_FILE, theGUI->m_pUpdater->GetUpdateDir(true) + "/" ADDONS_FILE);
@@ -211,7 +211,7 @@ SB_PROGRESS CAddonManager::RemoveAddon(const QString& Id)
 {
 	CAddonPtr pAddon = GetAddon(Id, eInstalled);
 	if (!pAddon)
-		return SB_ERR(SB_OtherError, QVariantList() << tr("Addon not found!"));
+		return SB_ERR(SB_OtherError, QVariantList() << tr("Add-on not found!"));
 
 	QStringList Params;
 	Params.append("modify");
@@ -231,11 +231,11 @@ QString GetUpdErrorStr2(int exitCode)
 {
 	switch (exitCode)
 	{
-	case ERROR_NO_ADDON: return CAddonManager::tr("Addon Not Found");
-	case ERROR_NO_ADDON2: return CAddonManager::tr("Addon is not available for this platform");
+	case ERROR_NO_ADDON: return CAddonManager::tr("Add-on Not Found");
+	case ERROR_NO_ADDON2: return CAddonManager::tr("Add-on is not available for this platform");
 	case ERROR_BAD_ADDON: return CAddonManager::tr("Missing installation instructions");
-	case ERROR_BAD_ADDON2: return CAddonManager::tr("Executing addon setup failed");
-	case ERROR_DELETE: return CAddonManager::tr("Failed to delete a file during addon removal");
+	case ERROR_BAD_ADDON2: return CAddonManager::tr("Executing add-on setup failed");
+	case ERROR_DELETE: return CAddonManager::tr("Failed to delete a file during add-on removal");
 	default: return GetUpdErrorStr(exitCode);
 	}
 }
@@ -249,9 +249,9 @@ void CAddonManager::RunUpdaterAsync(CAddonPtr pAddon, const QStringList& Params)
 #endif
 
 	if(Status.IsError())
-		pAddon->pProgress->Finish(SB_ERR(SB_OtherError, QVariantList() << tr("Updater failed to perform plugin operation")));
+		pAddon->pProgress->Finish(SB_ERR(SB_OtherError, QVariantList() << tr("Updater failed to perform add-on operation")));
 	else if(Status.GetValue() < 0)
-		pAddon->pProgress->Finish(SB_ERR(SB_OtherError, QVariantList() << tr("Updater failed to perform plugin operation, error: %1").arg(GetUpdErrorStr2(Status.GetValue()))));
+		pAddon->pProgress->Finish(SB_ERR(SB_OtherError, QVariantList() << tr("Updater failed to perform add-on operation, error: %1").arg(GetUpdErrorStr2(Status.GetValue()))));
 	else
 		pAddon->pProgress->Finish(SB_OK);
 	pAddon->pProgress.clear();

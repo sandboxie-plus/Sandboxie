@@ -30,7 +30,7 @@ public:
 	virtual ~CBoxedProcess();
 
 	virtual bool			InitProcessInfo();
-	virtual bool			InitProcessInfoEx();
+	virtual void			UpdateProcessInfo();
 
 	virtual quint32			GetProcessId() const { return m_ProcessId; }
 	virtual quint32			GetParendPID() const  { return m_ParendPID; }
@@ -47,10 +47,16 @@ public:
 	virtual bool			IsTerminated(quint64 forMs = 0) const;
 	virtual void			SetTerminated();
 
-	virtual SB_STATUS		SetSuspend(bool bSet);
-	virtual bool			IsSuspended() const;
+	virtual SB_STATUS		SetSuspended(bool bSuspended);
+	//virtual bool			IsSuspended() const;
+	virtual bool			TestSuspended();
 
-	virtual bool			IsWoW64() const { return m_bIsWoW64; }
+	virtual bool			IsWoW64() const { return m_ProcessInfo.IsWoW64; }
+
+	virtual bool			HasElevatedToken() const { return m_ProcessInfo.IsElevated; }
+	virtual bool			HasSystemToken() const { return m_ProcessInfo.IsSystem; }
+	virtual bool			HasRestrictedToken() const { return m_ProcessInfo.IsRestricted; }
+	virtual bool			HasAppContainerToken() const { return m_ProcessInfo.IsAppContainer; }
 
 	virtual QString			GetBoxName() const { return m_BoxName; }
 	virtual class CSandBox* GetBoxPtr() const { return m_pBox; }
@@ -64,7 +70,7 @@ public slots:
 protected:
 	friend class CSbieAPI;
 
-	virtual void			InitProcessInfoImpl(void* ProcessHandle);
+	//virtual void			InitProcessInfoImpl(void* ProcessHandle);
 
 	quint32			m_ProcessId;
 	QString			m_BoxName;
@@ -80,7 +86,21 @@ protected:
 	quint32			m_ReturnCode;
 	quint64			m_uTerminated;
 	bool			m_bSuspended;
-	bool			m_bIsWoW64;
+	// Flags
+	union
+	{
+		quint32 Flags;
+		struct
+		{
+			quint32
+				IsWoW64 : 1,
+				IsElevated : 1,
+				IsSystem : 1,
+				IsRestricted : 1,
+				IsAppContainer : 1,
+				Spare : 27;
+		};
+	}						m_ProcessInfo;
 
 	class CSandBox*	m_pBox;
 

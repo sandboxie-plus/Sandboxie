@@ -744,7 +744,7 @@ _FX BOOL Proc_CreateAppContainerToken(
 _FX const WCHAR* SbieDll_FindArgumentEnd(const WCHAR* arguments)
 {
     //
-    // when suplying: "aaaa \"bb cc\"ddd\"e\\"f\" gg hh \\"ii \"jjjj kkkk"
+    // when supplying: "aaaa \"bb cc\"ddd\"e\\"f\" gg hh \\"ii \"jjjj kkkk"
     // to an application for (int i = 0; i < argc; i++) printf("%s\n", argv[i]); gives:
     // "aaaa", "bb ccddde\"f", "gg", "hh", "\"ii", "jjjj kkkk"
     // here we exactly replicate this parsing scheme

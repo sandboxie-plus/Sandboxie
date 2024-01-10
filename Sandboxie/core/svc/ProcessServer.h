@@ -47,15 +47,15 @@ protected:
 
     BOOL KillProcess(ULONG ProcessId);
 
-    MSG_HEADER *KillOneHandler(HANDLE CallerProcessId, MSG_HEADER *msg);
+    MSG_HEADER *KillOneHandler(MSG_HEADER *msg);
 
-    MSG_HEADER *KillAllHandler(HANDLE CallerProcessId, MSG_HEADER *msg);
+    MSG_HEADER *KillAllHandler(MSG_HEADER *msg);
 
     NTSTATUS KillAllHelper(const WCHAR *BoxName, ULONG SessionId, BOOLEAN TerminateJob = FALSE);
 
-    MSG_HEADER *SetDeviceMap(HANDLE CallerProcessId, MSG_HEADER *msg);
+    MSG_HEADER *SetDeviceMap(MSG_HEADER *msg);
 
-    MSG_HEADER *OpenDeviceMap(HANDLE CallerProcessId, MSG_HEADER *msg);
+    MSG_HEADER *OpenDeviceMap(MSG_HEADER *msg);
 
     //
     // Run Sandboxed
@@ -81,6 +81,16 @@ protected:
     //
 
     MSG_HEADER *RunUpdaterHandler(MSG_HEADER *msg);
+
+    //
+    // Process Management
+    //
+
+    MSG_HEADER *ProcInfoHandler(MSG_HEADER *msg);
+
+    MSG_HEADER *SuspendOneHandler(MSG_HEADER *msg);
+
+    MSG_HEADER *SuspendAllHandler(MSG_HEADER *msg);
 };
 
 

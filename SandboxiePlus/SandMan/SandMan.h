@@ -6,7 +6,6 @@
 #include "../MiscHelpers/Common/TreeViewEx.h"
 #include "../MiscHelpers/Common/PanelView.h"
 #include "../MiscHelpers/Common/ProgressDialog.h"
-#include "../MiscHelpers/Common/NetworkAccessManager.h"
 #include <QTranslator>
 
 #include "../version.h"
@@ -50,6 +49,8 @@ public:
 
 	static QString		GetVersion();
 
+	bool				IsImDiskReady() const { return m_ImDiskReady; }
+
 	bool				IsWFPEnabled() const;
 
 	SB_PROGRESS			RecoverFiles(const QString& BoxName, const QList<QPair<QString, QString>>& FileList, QWidget* pParent, int Action = 0);
@@ -90,26 +91,35 @@ public:
 
 	bool				RunSandboxed(const QStringList& Commands, QString BoxName = QString(), const QString& WrkDir = QString());
 	SB_RESULT(quint32)	RunStart(const QString& BoxName, const QString& Command, bool Elevated = false, const QString& WorkingDir = QString(), QProcess* pProcess = NULL);
+	SB_STATUS			ImBoxMount(const CSandBoxPtr& pBox, bool bAutoUnmount = false);
 
 	void				EditIni(const QString& IniPath, bool bPlus = false);
 
-	QIcon				GetBoxIcon(int boxType, bool inUse = false);// , bool inBusy = false);
+	void				UpdateDrives();
+	void				UpdateForceUSB();
+
+	QIcon				GetBoxIcon(int boxType, bool inUse = false);
 	QRgb				GetBoxColor(int boxType) { return m_BoxColors[boxType]; }
 	QIcon				GetColorIcon(QColor boxColor, bool inUse = false/*, bool bOut = false*/);
 	QIcon				MakeIconBusy(const QIcon& Icon, int Index = 0);
 	QIcon				IconAddOverlay(const QIcon& Icon, const QString& Name, int Size = 24);
 	QString				GetBoxDescription(int boxType);
 	
-	bool				CheckCertificate(QWidget* pWidget);
+	bool				CheckCertificate(QWidget* pWidget, int iType = 0);
+
+	bool				IsAlwaysOnTop() const;
 
 	void				UpdateTheme();
 	void				UpdateTitleTheme(const HWND& hwnd);
 
+	SB_STATUS			ReloadCert(QWidget* pWidget = NULL);
 	void				UpdateCertState();
 
 	void				SaveMessageLog(QIODevice* pFile);
 
 signals:
+	void				DrivesChanged();
+
 	void				CertUpdated();
 
 	void				Closed();
@@ -132,6 +142,7 @@ protected:
 	void				CheckSupport();
 
 	void				closeEvent(QCloseEvent* e);
+	void				changeEvent(QEvent* e);
 
 	void				dragEnterEvent(QDragEnterEvent* e);
 	void				dropEvent(QDropEvent* e);
@@ -142,6 +153,7 @@ protected:
 	bool				m_bStopPending;
 	CBoxBorder*			m_pBoxBorder;
 	CSbieTemplatesEx*	m_SbieTemplates;
+
 	CScriptManager*		m_SbieScripts;
 	CAddonManager*		m_AddonManager;
 	
@@ -163,13 +175,6 @@ protected:
 	};
 
 	QMap<int, QRgb> m_BoxColors;
-
-	//struct SBoxIcon {
-	//	QIcon Empty;
-	//	QIcon InUse;
-	//	//QIcon Busy;
-	//};
-	//QMap<int, SBoxIcon> m_BoxIcons;
 
 	class UGlobalHotkeys* m_pHotkeyManager;
 
@@ -247,6 +252,7 @@ private slots:
 	void				OnSandBoxAction();
 	void				OnSettingsAction();
 	void				OnEmptyAll();
+	void				OnLockAll();
 	void				OnWndFinder();
 	void				OnBoxAssistant();
 	void				OnDisableForce();
@@ -365,6 +371,7 @@ private:
 	QAction*			m_pNewGroup;
 	QAction*			m_pImportBox;
 	QAction*			m_pEmptyAll;
+	QAction*			m_pLockAll;
 	QAction*			m_pWndFinder;
 	QAction*			m_pDisableForce;
 	QAction*			m_pDisableForce2;
@@ -384,6 +391,7 @@ private:
 	QAction*			m_pStopSvc;
 	QAction*			m_pUninstallSvc;
 	QAction*			m_pStopAll;
+	QAction*			m_pImDiskCpl;
 	QAction*			m_pUninstallAll;
 	QAction*			m_pSetupWizard;
 	QAction*			m_pExit;
@@ -436,6 +444,7 @@ private:
 	QLabel*				m_pDisabledForce;
 	QLabel*				m_pDisabledRecovery;
 	QLabel*				m_pDisabledMessages;
+	QLabel*				m_pRamDiskInfo;
 
 	// for old menu
 	QMenu*				m_pSandbox;
@@ -452,6 +461,8 @@ private:
 	bool				m_bIconBusy;
 	bool				m_bIconSun;
 	int					m_iDeletingContent;
+
+	bool				m_bOnTop;
 
 	bool				m_bExit;
 
@@ -477,7 +488,6 @@ public:
 	QString				m_Language;
 	quint32				m_LanguageId;
 	bool				m_DarkTheme;
-	bool				m_FusionTheme;
 };
 
 

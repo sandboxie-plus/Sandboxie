@@ -26,6 +26,7 @@
 #include "../Common/json/JSON.h"
 #include "UpdUtil.h"
 
+bool GetDriverInfo(DWORD InfoClass, void* pBuffer, size_t Size);
 
 extern "C" {
 	NTSTATUS CreateKeyPair(_In_ PCWSTR PrivFile, _In_ PCWSTR PubFile);
@@ -111,8 +112,8 @@ std::wstring Arch2Str(ULONG architecture)
 	switch (architecture)
 	{
 	case IMAGE_FILE_MACHINE_ARM64:	return L"a64";
-	case PROCESSOR_ARCHITECTURE_AMD64:	return L"x64";
-	case PROCESSOR_ARCHITECTURE_INTEL:	return L"x86";
+	case IMAGE_FILE_MACHINE_AMD64:	return L"x64";
+	case IMAGE_FILE_MACHINE_I386:	return L"x86";
 	default: return L"";
 	}
 }
@@ -825,7 +826,7 @@ std::shared_ptr<SAddon> ReadAddon(const JSONObject& addon, const std::wstring& c
 
 	for (auto I = addon.begin(); I != addon.end(); ++I) {
 		if (I->first.find(L'-') != std::wstring::npos)
-			continue; // skip all entries containting "-"
+			continue; // skip all entries containing "-"
 		pAddon->Data.insert(*I);
 	}
 
@@ -1037,7 +1038,7 @@ int RemoveAddon(std::shared_ptr<SAddon> pAddon, const std::wstring& base_dir)
 	{
 		std::wstring cmdLine = ReadRegistryStringValue(pAddon->UninstallKey, L"UninstallString");
 		if(cmdLine.empty()) // when the expected uninstall key is not present,
-			return ret; // then seams addon was already uninstalled
+			return ret; // then it seems the addon was already uninstalled
 
 		STARTUPINFO si = { sizeof(si), 0 };
 		PROCESS_INFORMATION pi = { 0 };
@@ -1453,7 +1454,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 
 		//
-		// load addons apropriate for the current installation
+		// load addons appropriate for the current installation
 		//
 
 		std::shared_ptr<TAddonMap> pAddons;
@@ -1507,12 +1508,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 					if (!I->second->IsDefault)
 						continue;
 
-					// dont add default addons marked to be removed
+					// don't add default addons marked to be removed
 					auto F = std::find(remove_addons.begin(), remove_addons.end(), I->first);
 					if (F != remove_addons.end())
 						continue;
 
-					// dont add already added addons
+					// don't add already added addons
 					F = std::find(add_addons.begin(), add_addons.end(), I->first);
 					if (F != add_addons.end())
 						continue;
@@ -1634,10 +1635,173 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		return ret;
 	}
+	else if (arguments.size() >= 2 && arguments[0] == L"get_cert")
+	{
+		int ret = 0;
+
+		std::wstring serial = arguments[1];
+
+		std::wstring path = L"/get_cert.php?SN=" + serial;
+
+		if (serial.length() > 5 && toupper(serial[4]) == 'N') { // node locked business use
+			wchar_t uuid_str[40];
+			GetDriverInfo(-2, uuid_str, sizeof(uuid_str));
+			path += L"&HwId=" + std::wstring(uuid_str);
+		}
+
+		std::wstring file_path = base_dir + L"\\Certificate.dat";
+
+		char* aCert = NULL;
+		if (NT_SUCCESS(MyReadFile((wchar_t*)file_path.c_str(), 1024 * 1024, (PVOID*)&aCert, NULL)) && aCert != NULL) {
+			std::string sCert = aCert;
+			free(aCert);
+			auto Cert = GetArguments(std::wstring(sCert.begin(), sCert.end()), L'\n', L':');
+			auto F = Cert.find(L"UPDATEKEY");
+			if (F != Cert.end())
+				path += L"&UpdateKey=" + F->second;
+		}
+
+		ULONG lCert = 0;
+		if (WebDownload(_T(UPDATE_DOMAIN), path.c_str(), &aCert, &lCert) && aCert != NULL && *aCert) 
+		{
+			if (aCert[0] == L'{') {
+				JSONValue* jsonObject = JSON::Parse(aCert);
+				if (jsonObject) {
+					if (jsonObject->IsObject() && GetJSONBoolSafe(jsonObject->AsObject(), L"error"))
+					{
+						std::wcout << GetJSONStringSafe(jsonObject->AsObject(), L"errorMsg") << std::endl;
+
+						ret = ERROR_GET_CERT;
+					}
+					delete jsonObject;
+				}
+				free(aCert);
+			}
+		}
+		else
+		{
+			std::wcout << L"FAILED to call get_cert.php" << std::endl;
+
+			ret = ERROR_GET_CERT;
+		}
+
+		if (ret == 0 && !NT_SUCCESS(MyWriteFile((wchar_t*)file_path.c_str(), aCert, lCert)))
+			ret = ERROR_INTERNAL;
+
+		return ret;
+	}
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//
 
 
 	PrintUsage();
 	return ERROR_INVALID;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Driver API
+
+#define SANDBOXIE		L"Sandboxie"
+
+#define SBIESVC_PORT	L"\\RPC Control\\SbieSvcPort"
+#define MAX_REQUEST_LENGTH      (2048 * 1024)
+
+
+typedef struct _UNICODE_STRING64 {
+    USHORT Length;
+    USHORT MaximumLength;
+    __declspec(align(8)) unsigned __int64 Buffer;
+} UNICODE_STRING64;
+
+#include "..\..\Sandboxie\common\defines.h"
+
+#include "..\..\Sandboxie\core\drv\api_defs.h"
+#include "..\..\Sandboxie\core\drv\api_flags.h"
+
+HANDLE SbieApi_DeviceHandle = INVALID_HANDLE_VALUE;
+
+NTSTATUS SbieApi_Ioctl(ULONG64 *parms)
+{
+    NTSTATUS status;
+    OBJECT_ATTRIBUTES objattrs;
+    UNICODE_STRING uni;
+    IO_STATUS_BLOCK MyIoStatusBlock;
+
+    if (parms == NULL) {
+
+		if (SbieApi_DeviceHandle != INVALID_HANDLE_VALUE)
+			NtClose(SbieApi_DeviceHandle);
+
+        SbieApi_DeviceHandle = INVALID_HANDLE_VALUE;
+		return STATUS_SUCCESS;
+    }
+
+    if (SbieApi_DeviceHandle == INVALID_HANDLE_VALUE) {
+
+        RtlInitUnicodeString(&uni, API_DEVICE_NAME);
+        InitializeObjectAttributes(&objattrs, &uni, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+        status = NtOpenFile(
+            &SbieApi_DeviceHandle, FILE_GENERIC_READ, &objattrs, &MyIoStatusBlock,
+            FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, 0);
+
+        if (status == STATUS_OBJECT_NAME_NOT_FOUND || status == STATUS_NO_SUCH_DEVICE)
+            status = STATUS_SERVER_DISABLED;
+
+    } else
+        status = STATUS_SUCCESS;
+
+    if (status != STATUS_SUCCESS) {
+
+        SbieApi_DeviceHandle = INVALID_HANDLE_VALUE;
+
+    } else {
+
+        status = NtDeviceIoControlFile(
+            SbieApi_DeviceHandle, NULL, NULL, NULL, &MyIoStatusBlock,
+            API_SBIEDRV_CTLCODE, parms, sizeof(ULONG64) * 8, NULL, 0);
+    }
+
+    return status;
+}
+
+//LONG SbieApi_Call(ULONG api_code, LONG arg_num, ...) 
+//{
+//    va_list valist;
+//    NTSTATUS status;
+//    __declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+//
+//    memzero(parms, sizeof(parms));
+//    parms[0] = api_code;
+//
+//    if (arg_num >= (API_NUM_ARGS - 1))
+//        return STATUS_INVALID_PARAMETER;
+//
+//    va_start(valist, arg_num);
+//    for (LONG i = 1; i <= arg_num; i++)
+//        parms[i] = (ULONG64)va_arg(valist, ULONG_PTR);
+//    va_end(valist);
+//
+//    status = SbieApi_Ioctl(parms);
+//
+//    return status;
+//}
+
+bool GetDriverInfo(DWORD InfoClass, void* pBuffer, size_t Size)
+{
+	__declspec(align(8)) ULONG64 parms[API_NUM_ARGS];
+	API_QUERY_DRIVER_INFO_ARGS *args = (API_QUERY_DRIVER_INFO_ARGS*)parms;
+
+	memset(parms, 0, sizeof(parms));
+	args->func_code = API_QUERY_DRIVER_INFO;
+	args->info_class.val = InfoClass;
+	args->info_data.val = pBuffer;
+	args->info_len.val = Size;
+
+	NTSTATUS status = SbieApi_Ioctl(parms);
+	if (!NT_SUCCESS(status)) {
+		memset(pBuffer, 0, Size);
+		return false;
+	}
+	return true;
 }

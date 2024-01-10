@@ -7,23 +7,77 @@
 
 #define UPDATE_INTERVAL (7 * 24 * 60 * 60)
 
-class CGetUpdatesJob : public QObject
+class CUpdatesJob : public QObject
 {
 	Q_OBJECT
 
 protected:
 	friend class COnlineUpdater;
 
-	CGetUpdatesJob(const QVariantMap& Params, QObject* parent = nullptr) : QObject(parent) { m_Params = Params; }
-	virtual ~CGetUpdatesJob() {}
+	CUpdatesJob(const QVariantMap& Params, QObject* parent = nullptr) : QObject(parent) 
+	{
+		m_Params = Params; 
+		m_pProgress = CSbieProgressPtr(new CSbieProgress());
+	}
+	virtual ~CUpdatesJob() {}
 
-	QVariantMap	m_Params;
+	virtual void Finish(QNetworkReply* pReply) = 0;
+
+	QVariantMap			m_Params;
+	CSbieProgressPtr	m_pProgress;
+
+private slots:
+	void OnDownloadProgress(qint64 bytes, qint64 bytesTotal)
+	{
+		if (bytesTotal != 0 && !m_pProgress.isNull())
+			m_pProgress->Progress(100 * bytes / bytesTotal);
+	}
+};
+
+class CGetUpdatesJob : public CUpdatesJob
+{
+	Q_OBJECT
+
+protected:
+	friend class COnlineUpdater;
+
+	CGetUpdatesJob(const QVariantMap& Params, QObject* parent = nullptr) : CUpdatesJob(Params, parent) {}
+
+	virtual void Finish(QNetworkReply* pReply);
 
 signals:
 	void				UpdateData(const QVariantMap& Data, const QVariantMap& Params);
+};
+
+class CGetFileJob : public CUpdatesJob
+{
+	Q_OBJECT
+
+protected:
+	friend class COnlineUpdater;
+
+	CGetFileJob(const QVariantMap& Params, QObject* parent = nullptr) : CUpdatesJob(Params, parent) {}
+
+	virtual void Finish(QNetworkReply* pReply);
+
+signals:
 	void				Download(const QString& Path, const QVariantMap& Params);
 };
 
+class CGetCertJob : public CUpdatesJob
+{
+	Q_OBJECT
+
+protected:
+	friend class COnlineUpdater;
+
+	CGetCertJob(const QVariantMap& Params, QObject* parent = nullptr) : CUpdatesJob(Params, parent) {}
+
+	virtual void Finish(QNetworkReply* pReply);
+
+signals:
+	void				Certificate(const QByteArray& Certificate, const QVariantMap& Params);
+};
 
 class COnlineUpdater : public QObject
 {
@@ -31,15 +85,16 @@ class COnlineUpdater : public QObject
 public:
 	COnlineUpdater(QObject* parent);
 
-	void				Process();
+	SB_PROGRESS			GetUpdates(QObject* receiver, const char* member, const QVariantMap& Params = QVariantMap());
+	SB_PROGRESS			DownloadFile(const QString& Url, QObject* receiver, const char* member, const QVariantMap& Params = QVariantMap());
+	SB_PROGRESS			GetSupportCert(const QString& Serial, QObject* receiver, const char* member, const QVariantMap& Params = QVariantMap());
 
-	void				GetUpdates(QObject* receiver, const char* member, const QVariantMap& Params = QVariantMap());
-	void				DownloadFile(const QString& Url, QObject* receiver, const char* member, const QVariantMap& Params = QVariantMap());
+	static SB_RESULT(int) RunUpdater(const QStringList& Params, bool bSilent, bool Wait = false);
+
+	void				Process();
 
 	QVariantMap			GetUpdateData() { return m_UpdateData; }
 	QDateTime			GetLastUpdateTime() { return m_LastUpdate; }
-
-	void				UpdateCert(bool bWait = false);
 
 	void				CheckForUpdates(bool bManual = false);
 
@@ -55,17 +110,16 @@ public:
 	static int			GetCurrentUpdate();
 	static bool			IsVersionNewer(const QString& VersionStr);
 
-	QString				GetUpdateDir(bool bCreate = false);
+	static QString		GetUpdateDir(bool bCreate = false);
 
 	static quint32		CurrentVersion();
 	static quint32		VersionToInt(const QString& VersionStr);
 
+	static quint64		GetRandID();
+
 private slots:
-	void				OnUpdateCheck();
+	void				OnRequestFinished();
 
-	void				OnFileDownload();
-
-	void				OnDownloadProgress(qint64 bytes, qint64 bytesTotal);
 	void				OnInstallerDownload(const QString& Path, const QVariantMap& Params);
 
 	void				OnUpdateData(const QVariantMap& Data, const QVariantMap& Params);
@@ -74,11 +128,18 @@ private slots:
 	void				OnPrepareError();
 	void				OnPrepareFinished(int exitCode, QProcess::ExitStatus exitStatus);
 
-	void				OnCertCheck();
-
 protected:
+
+	void				StartJob(CUpdatesJob* pJob, const QUrl& Url);
+
+	void				LoadState();
+
 	bool				HandleUserMessage(const QVariantMap& Data);
 	bool				HandleUpdate();
+
+	QString				GetOnNewUpdateOption() const;
+	QString				GetOnNewReleaseOption() const;
+	bool				ShowCertWarningIfNeeded();
 
 	enum EUpdateScope
 	{
@@ -90,16 +151,12 @@ protected:
 	EUpdateScope		ScanUpdateFiles(const QVariantMap& Update);
 	EUpdateScope		GetFileScope(const QString& Path);
 
-	bool				AskDownload(const QVariantMap& Update);
-	
-	friend class CAddonManager;
+	bool				AskDownload(const QVariantMap& Update, bool bAuto);
 
-	static SB_RESULT(int) RunUpdater(const QStringList& Params, bool bSilent, bool Wait = false);
 	static bool			RunInstaller2(const QString& FilePath, bool bSilent);
 
 	CNetworkAccessManager*	m_RequestManager;
-	CSbieProgressPtr	m_pUpdateProgress;
-	QMap<QNetworkReply*, CGetUpdatesJob*> m_JobQueue;
+	QMap<QNetworkReply*, CUpdatesJob*> m_JobQueue;
 
 	QStringList			m_IgnoredUpdates;
 	enum ECHeckMode
@@ -112,5 +169,7 @@ protected:
 	}					m_CheckMode;
 	QVariantMap			m_UpdateData;
 	QDateTime			m_LastUpdate;
+
 	QProcess*			m_pUpdaterUtil;
+	CSbieProgressPtr	m_pUpdateProgress;
 };

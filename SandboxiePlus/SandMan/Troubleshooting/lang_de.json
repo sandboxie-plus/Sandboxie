@@ -1,0 +1,80 @@
+﻿{
+"Description Text...": "Beschreibungstext...",
+"Fix current issues": "Aktuelle Probleme beheben",
+"Fix issues with sandboxing": "Sandboxprobleme beheben",
+"An Application does not work properly when sandboxed": "Eine Anwendung funktioniert nicht richtig",
+"Issues with a web browser": "Probleme mit einem Webbrowser beheben",
+"Perform Sandbox maintenance": "Sandboxwartung durchführen",
+"Fix issues with the UI or Shell": "Problemen mit der Benutzeroberfläche beheben",
+
+"Yes": "Ja",
+"No": "Nein",
+
+"App compatibility checker": "App-Kompatibilitätsprüfer",
+"This script check which app compatibility templates needs to be enabled": "Dieses Skript überprüft, welche App-Kompatibilitätsvorlagen aktiviert werden müssen",
+"Loaded %1 templates": "%1 Vorlagen geladen",
+
+"Browser shortcut is missing from the desktop": "Browser-Verknüpfung fehlt auf dem Desktop",
+"This procedure will add a browser shortcut to the desktop": "Dieser Vorgang wird eine Browser-Verknüpfung zum Desktop hinzufügen",
+"Default Browser": "Standardbrowser",
+"Another": "Ein anderer",
+"Select Browser": "Browser auswählen",
+"Select Sandbox": "Sandbox auswählen",
+"Select which browser you want to create a shortcut for and in what box": "Wählen Sie aus, für welchen Browser Sie eine Verknüpfung erstellen möchten und in welcher Box",
+"Select Browser Path": "Browserpfad auswählen",
+
+"Explorer Context Menu extension does not work": "Explorer-Kontextmenüerweiterung funktioniert nicht",
+"This procedure will re install the shell integration": "Dieser Vorgang wird die Menüintegration neu installieren",
+"Add Run Sandboxed": "Starte Sandgeboxt hinzufügen",
+"Add Run Unsandboxed": "Starte Nicht-Sandgeboxt hinzufügen",
+"Install legacy shell extensions": "Legacy-Menüerweiterungen installieren",
+"Select which shell options should be reinstalled": "Wählen Sie aus, welche Menüoptionen neu installiert werden sollen",
+
+"Failed to install application into a sandbox": "Fehler beim Installieren der Anwendung in einer Sandbox",
+"Enter Installer Path": "Installerpfad eingeben",
+"Select a sandbox to install into": "Wählen Sie eine Sandbox zur Installation aus",
+"This box has DropAdminRights enabled, preventing execution of installers. Do you want to disable this restriction, that will reduce the security level.": "In dieser Box ist Adminrechte abgeben aktiviert, was die Ausführung von Installern verhindert. Möchten Sie diese Einschränkung deaktivieren, was das Sicherheitsniveau senken wird?",
+"Disable DropAdminRights": "Adminrechte abgeben deaktivieren",
+"Enable FakeAdminRights": "Adminrechte abgeben aktivieren",
+"running installer, pid: %1 press NEXT once it finishes to continue": "Installer wird ausgeführt, PID: %1 drücken Sie auf WEITER, sobald dieser fertig ist, um fortzufahren",
+"Was the issue resolved?": "Wurde das Problem behoben?",
+
+"Webcam or Sound does not work when sandboxed": "Webcam oder Ton funktioniert nicht in einer Sandbox",
+"To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "Um die Webcam-Unterstützung unter Windows 11 zu aktivieren, muss das Isolationsniveau reduziert werden. \nWenn Sie fortfahren möchten, drücken Sie bitte auf WEITER und wählen eine Sandbox zur Modifikation aus. \n",
+"\nPlease note that this required preset works only with a valid supporter certificate!": "\nBitte beachten Sie, dass diese erforderliche Voreinstellung nur mit einem gültigen Unterstützerzertifikat funktioniert!",
+"Select which box to turn into a reduced isolation app compartment box.": "Wählen Sie, welche Box in eine Applikationsunterteilungsbox mit reduzierter Isolation umgewandelt werden soll.",
+"The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "Die Umwandlung wurde durchgeführt, bitte testen Sie die Webcam in %1 und geben Sie an, ob das Problem behoben wurde.",
+
+"Select affected sandbox": "Betroffene Sandbox auswählen",
+"Enter Process Name": "Prozessname eingeben",
+
+"Internet Access restrictions are in effect for the sandbox in which the program is running. The program is prohibited from accessing the Internet.": "Für die Sandbox, in der das Programm ausgeführt wird, gelten Internetzugriffsbeschränkungen. Dem Programm ist der Zugriff auf das Internet untersagt.",
+
+"Start/Run restrictions are in effect for the sandbox in which the program is running. The program is prohibited from starting or running.": "Für die Sandbox, in der das Programm ausgeführt wird, gelten Start-/Ausführungsbeschränkungen. Das Programm darf nicht gestartet oder ausgeführt werden.",
+
+"Failures to load SbieDll.dll when encountered by Chrome, or another software employing app containers, it is often caused by invalid DACL entries for the Sandboxie home directory. This mitigation measure will fix them, for this reason it will prompt for admin privileges which need to be granted for kmdutil.exe.": "Wenn Chrome oder eine andere Software, die App-Container verwendet, die Datei SbieDll.dll nicht laden kann, wird dies häufig durch ungültige DACL-Einträge für das Sandboxie-Verzeichnis verursacht. Diese Maßnahme wird die DACL-Einträge beheben. Aus diesem Grund wird sie Adminrechte anfordern, die für kmdutil.exe gewährt werden müssen.",
+"The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "Die DACLs wurden angepasst. Bitte versuchen Sie, Ihre Anwendung erneut auszuführen und geben Sie an, ob das Problem behoben wurde.",
+"DACLs fix did not resolve the issue": "Korrektur der DACLs hat das Problem nicht behoben",
+
+"The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Die Nachricht zeigt an, dass Sandboxie nicht in der Lage war, eines der Hilfsprogramme SandboxieRpcSs oder SandboxieDcomLaunch zu starten. Der in der Nachricht angegebene Name kann rpcss oder dcomlaunch sein.\n\nAuf der nächsten Seite können Sie einen Problembericht einreichen, um uns bei der Analyse des Problems zu helfen.",
+
+"Sandboxie was not able to execute one of its own programs. Check access permissions to the Sandboxie installation folder and/or reinstall Sandboxie.\n\nPossible Causes:\n1. Sandboxie was configured to block access to the folder containing its program files.\n2. A third-party (HIPS) security software was configured to block the execution of the program mentioned in the message.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Sandboxie war nicht in der Lage, eines seiner eigenen Programme auszuführen. Überprüfen Sie die Zugriffsrechte auf den Sandboxie-Installationsordner und/oder installieren Sie Sandboxie neu.\n\nMögliche Ursachen:\n1. Sandboxie wurde so konfiguriert, dass der Zugriff auf den Ordner mit seinen Programmdateien blockiert wird.\n2. Eine Sicherheitssoftware eines Drittanbieters (HIPS) wurde so konfiguriert, dass sie die Ausführung des in der Nachricht genannten Programms blockiert.\n\nAuf der nächsten Seite können Sie einen Problembericht einreichen, um uns bei der Analyse des Problems zu helfen.",
+
+"Do you want to open the box option dialog to change this preset?": "Möchten Sie das Dialogfeld mit den Boxoptionen öffnen, um diese Voreinstellung zu ändern?",
+"No, it is fine as it is": "Nein, es ist gut so, wie es ist",
+"No, but I want to report a bug": "Nein, aber ich möchte einen Fehler melden",
+
+"The message %1 is caused by the file migration limit being reached.": "Die Nachricht %1 wird dadurch verursacht, dass das Limit für die Dateimigration erreicht wurde.",
+
+"It seems you are using a non-administrative user account on a system with enabled parental controls, this is known to be incompatible with Sandboxie.\nYou have the following options to resolve the issue.": "Es scheint, dass Sie ein nicht-administratives Benutzerkonto auf einem System mit aktivierter Kindersicherung verwenden, das bekanntermaßen nicht mit Sandboxie kompatibel ist.\nSie haben folgende Möglichkeiten, das Problem zu lösen.",
+
+"Sbie Message Code": "SBIE Nachrichten-Code",
+"Name affected process": "Name des betroffenen Prozesses",
+"Please enter the SBIEMSG ID you have encountered.": "Bitte geben Sie die SBIE Nachrichten-ID ein, auf die Sie gestoßen sind.",
+"There is no automated troubleshooting available for SBIE%1 yet.<br />": "Für SBIE%1 gibt es noch keine automatisierte Problembehebung.<br />",
+"The full message text is: %1<br />": "Der vollständige Nachrichtentext lautet: %1<br />",
+"Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "Besuchen Sie unsere <a href=\"%1\">Online-Dokumentation</a>, um mehr über diese und andere SBIE Nachrichten zu erfahren.",
+"Would you like to collect some logs to help us resolve the issue.": "Würden Sie gerne einige Protokolle sammeln, um uns bei der Lösung des Problems zu helfen?",
+"Now please run your application again to trigger the Sbie message.<br /><br />": "Führen Sie nun Ihre Anwendung erneut aus, um die SBIE Nachricht auszulösen.<br /><br />",
+"Press NEXT when you are done collecting logs.": "Drücken Sie auf WEITER, wenn Sie alle Protokolle gesammelt haben."
+}

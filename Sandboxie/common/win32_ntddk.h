@@ -228,8 +228,6 @@ typedef struct __PUBLIC_OBJECT_TYPE_INFORMATION {
 
     ULONG Reserved [22];    // reserved for internal use
 
-    BYTE  ExtraPadding[48]; // NtQueryObject often requires more space than MSDN says
-
 } PUBLIC_OBJECT_TYPE_INFORMATION, *PPUBLIC_OBJECT_TYPE_INFORMATION;
 
 __declspec(dllimport) NTSTATUS __stdcall

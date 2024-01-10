@@ -65,7 +65,7 @@ public:
 
 	QMap<QString, QStringList>	GetGroups() { return m_Groups; }
 
-	static bool					CreateShortcut(const QString& LinkPath, const QString& BoxName, const QString& IconPath = QString(), int IconIndex = 0, const QString& WorkDir = QString());
+	static bool					CreateShortcutEx(const QString& LinkPath, const QString& BoxName, QString LinkName = QString(), const QString& IconPath = QString(), int IconIndex = 0, const QString& WorkDir = QString());
 
 signals:
 	void						BoxSelected();
@@ -123,8 +123,8 @@ private:
 	void					CreateGroupMenu();
 	void					CreateTrayMenu();
 
-	bool					UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBoxeCount = 1, bool bBoxBusy = false);
-	void					UpdateProcMenu(const CBoxedProcessPtr &pProcess = CBoxedProcessPtr(), int iProcessCount = 0, int iSuspendedCount = 0);
+	bool					UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBoxeCount = 1, bool bBoxBusy = false, bool bBoxNotMounted = false);
+	void					UpdateProcMenu(const CBoxedProcessPtr &pProcess, int iProcessCount = 0, int iSuspendedCount = 0);
 	bool					UpdateMenu();
 	void					UpdateMoveMenu();
 	void					RenameGroup(const QString OldName, const QString NewName);
@@ -191,6 +191,8 @@ private:
 	QAction*				m_pMenuBrowse;
 	QAction*				m_pMenuRefresh;
 	QAction*				m_pMenuRegEdit;
+	QAction*				m_pMenuMount;
+	QAction*				m_pMenuUnmount;
 	QAction*				m_pMenuRecover;
 	QAction*				m_pMenuCleanUp;
 	QAction*				m_pMenuRemove;

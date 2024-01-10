@@ -294,7 +294,7 @@ InstrumentationCallbackAsm@0 proc
     push    eax
 
     mov     eax, 1                      ; Set EAX to 1 for comparison
-    cmp     fs:1b8h, eax                ; See if the recurion flag (Win10 TEB InstrumentationCallbackDisabled) has been set
+    cmp     fs:1b8h, eax                ; See if the recursion flag (Win10 TEB InstrumentationCallbackDisabled) has been set
     je      resume                      ; Jump and restore the registers if it has and resume
 
     pop     eax

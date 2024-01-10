@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -759,7 +759,7 @@ _FX NTSTATUS Ipc_GetName(
         //    //
         //    // Since in this mode we don't call Ipc_CreateObjects we don't have a boxed namespace
         //    // and are using existing namespaces only with a name suffix
-        //    // hence we can't use Global without system provileges, so we strip it
+        //    // hence we can't use Global without system privileges, so we strip it
         //    //
         //
         //    if (_wcsnicmp(objname_buf, L"Global\\", 7) == 0) {
@@ -4197,7 +4197,7 @@ _FX NTSTATUS Ipc_MergeDirectoryObject(IPC_MERGE *merge, WCHAR* path, BOOLEAN joi
                 if (entry) {
 
                     if (entry->TypeName.Length == directoryInfo->TypeName.Length && memcmp(entry->TypeName.Buffer, directoryInfo->TypeName.Buffer, entry->TypeName.Length) == 0)
-                        continue; // identical entry, nothign to do
+                        continue; // identical entry, nothing to do
 
                     // same name but different type, remove old entry
                     List_Remove(&merge->objects, entry);
@@ -4294,7 +4294,7 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
 
         Ipc_MergeDirectoryObject(merge, TruePath, FALSE);
 
-        ULONG len = wcslen(CopyPath); // fix root copy path, remove tailing '\\'
+        ULONG len = wcslen(CopyPath); // fix root copy path, remove trailing '\\'
         if (CopyPath[len - 1] == L'\\') CopyPath[len - 1] = 0;
 
         Ipc_MergeDirectoryObject(merge, CopyPath, TRUE);
@@ -4344,19 +4344,22 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
     ULONG EndIndex = indexCounter + CountToGo;
     for (; entry && indexCounter < EndIndex; indexCounter++) {
 
-        directoryInfo->Name.Length = entry->Name.Length;
-        directoryInfo->Name.MaximumLength = entry->Name.MaximumLength;
-        directoryInfo->Name.Buffer = ptr;
-        memcpy(ptr, entry->Name.Buffer, entry->Name.MaximumLength);
-        ptr += directoryInfo->Name.MaximumLength / sizeof(WCHAR);
+        if (directoryInfo) {
 
-        directoryInfo->TypeName.Length = entry->TypeName.Length;
-        directoryInfo->TypeName.MaximumLength = entry->TypeName.MaximumLength;
-        directoryInfo->TypeName.Buffer = ptr;
-        memcpy(ptr, entry->TypeName.Buffer, entry->TypeName.MaximumLength);
-        ptr += directoryInfo->TypeName.MaximumLength / sizeof(WCHAR);
+            directoryInfo->Name.Length = entry->Name.Length;
+            directoryInfo->Name.MaximumLength = entry->Name.MaximumLength;
+            directoryInfo->Name.Buffer = ptr;
+            memcpy(ptr, entry->Name.Buffer, entry->Name.MaximumLength);
+            ptr += directoryInfo->Name.MaximumLength / sizeof(WCHAR);
 
-        directoryInfo++;
+            directoryInfo->TypeName.Length = entry->TypeName.Length;
+            directoryInfo->TypeName.MaximumLength = entry->TypeName.MaximumLength;
+            directoryInfo->TypeName.Buffer = ptr;
+            memcpy(ptr, entry->TypeName.Buffer, entry->TypeName.MaximumLength);
+            ptr += directoryInfo->TypeName.MaximumLength / sizeof(WCHAR);
+
+            directoryInfo++;
+        }
 
         entry = List_Next(entry);
     }
@@ -4365,9 +4368,12 @@ _FX NTSTATUS Ipc_NtQueryDirectoryObject(
     // terminate listing with an empty entry
     //
 
-    directoryInfo->Name.Length = directoryInfo->TypeName.Length = 0;
-    directoryInfo->Name.MaximumLength = directoryInfo->TypeName.MaximumLength = 0;
-    directoryInfo->Name.Buffer = directoryInfo->TypeName.Buffer = NULL;
+    if (directoryInfo) {
+
+        directoryInfo->Name.Length = directoryInfo->TypeName.Length = 0;
+        directoryInfo->Name.MaximumLength = directoryInfo->TypeName.MaximumLength = 0;
+        directoryInfo->Name.Buffer = directoryInfo->TypeName.Buffer = NULL;
+    }
 
     //
     // set return values

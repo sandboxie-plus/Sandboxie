@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2023 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -1212,34 +1212,40 @@ _FX BOOL Scm_StartServiceCtrlDispatcherX(
         // run is not necessarily the first entry in the table.
         //
 
+        if (wcscmp(ServiceName, L"*") == 0) {
+
+            BOOLEAN TooMany;
+
+            if (IsUnicode) {
+
+                SERVICE_TABLE_ENTRYW *svc = (SERVICE_TABLE_ENTRYW *)ServiceTable;
+                ServiceName = svc->lpServiceName;
+                TooMany = (svc[1].lpServiceName || svc[1].lpServiceProc);
+
+            } else {
+
+                SERVICE_TABLE_ENTRYA *svc = (SERVICE_TABLE_ENTRYA *)ServiceTable;
+
+                ANSI_STRING ansi;
+                RtlInitString(&ansi, svc->lpServiceName);
+                RtlAnsiStringToUnicodeString(&uni, &ansi, TRUE);
+                ServiceName = uni.Buffer;
+
+                TooMany = (svc[1].lpServiceName || svc[1].lpServiceProc);
+            }
+
+            if (TooMany) {
+
+                SbieApi_Log(2205, L"StartServiceCtrlDispatcher");
+                //SetLastError(ERROR_INVALID_PARAMETER);
+                //return FALSE;
+            }
+        }
+
     } else {
 
-        BOOLEAN TooMany;
-
-        if (IsUnicode) {
-
-            SERVICE_TABLE_ENTRYW *svc = (SERVICE_TABLE_ENTRYW *)ServiceTable;
-            ServiceName = svc->lpServiceName;
-            TooMany = (svc[1].lpServiceName || svc[1].lpServiceProc);
-
-        } else {
-
-            SERVICE_TABLE_ENTRYA *svc = (SERVICE_TABLE_ENTRYA *)ServiceTable;
-
-            ANSI_STRING ansi;
-            RtlInitString(&ansi, svc->lpServiceName);
-            RtlAnsiStringToUnicodeString(&uni, &ansi, TRUE);
-            ServiceName = uni.Buffer;
-
-            TooMany = (svc[1].lpServiceName || svc[1].lpServiceProc);
-        }
-
-        if (TooMany) {
-
-            SbieApi_Log(2205, L"StartServiceCtrlDispatcher");
-            //SetLastError(ERROR_INVALID_PARAMETER);
-            //return FALSE;
-        }
+        SetLastError(ERROR_FAILED_SERVICE_CONTROLLER_CONNECT);
+        return FALSE;
     }
 
     WCHAR text[130];

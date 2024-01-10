@@ -1065,7 +1065,7 @@ ULONG SbieIniServer::SetSetting(MSG_HEADER* msg)
     SIniSection* pSection = GetIniSection(req->section, true);
 
     //
-    // Check if this is a repalce section request and if so execute it
+    // Check if this is a replace section request and if so execute it
     //
 
     if (wcslen(req->setting) == 0 && have_value) 
@@ -1227,7 +1227,7 @@ ULONG SbieIniServer::DelSetting(MSG_HEADER* msg)
     {
         if (_wcsicmp(I->Name.c_str(), req->setting) == 0 && _wcsicmp(I->Value.c_str(), req->value) == 0) {
             I = pSection->Entries.erase(I);
-            // Note: we could brak here but lets finish in case tehre is a duplicate
+            // Note: we could break here, but let's finish in case there is a duplicate
         }
         else
             ++I;

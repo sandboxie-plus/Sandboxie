@@ -95,8 +95,10 @@
 
 struct _FILE_DRIVE;
 struct _FILE_LINK;
+struct _FILE_GUID;
 typedef struct _FILE_LINK FILE_LINK;
 typedef struct _FILE_DRIVE FILE_DRIVE;
+typedef struct _FILE_GUID FILE_GUID;
 
 
 
@@ -104,8 +106,13 @@ typedef struct _FILE_DRIVE FILE_DRIVE;
 // Functions
 //---------------------------------------------------------------------------
 
-static ULONG File_FindBoxPrefixLength(const WCHAR* CopyPath);
+static ULONG File_FindBoxPrefix(const WCHAR* Path);
 
+NTSTATUS File_GetCopyPath(WCHAR *TruePath, WCHAR **OutCopyPath);
+
+NTSTATUS File_GetTruePath(WCHAR *CopyPath, WCHAR **OutTruePath);
+
+WCHAR* File_FindSnapshotPath(WCHAR* CopyPath);
 
 SBIEDLL_EXPORT NTSTATUS File_GetName(
     HANDLE RootDirectory, UNICODE_STRING *ObjectName,
@@ -318,6 +325,21 @@ static const ULONG File_MupLen = 12;
 
        const WCHAR *File_BQQB = L"\\??\\";
 
+static const ULONG _DeviceLen = 8;
+static const WCHAR *_Share = L"\\share\\";
+static const ULONG _ShareLen = 7;
+static const WCHAR *_Drive = L"\\drive\\";
+static const ULONG _DriveLen = 7;
+
+static const WCHAR *_User = L"\\user";
+static const ULONG _UserLen = 5;
+static const WCHAR *_UserAll = L"\\user\\all";
+static const ULONG _UserAllLen = 9;
+static const WCHAR *_UserCurrent = L"\\user\\current";
+static const ULONG _UserCurrentLen = 13;
+static const WCHAR *_UserPublic = L"\\user\\public";
+static const ULONG _UserPublicLen = 12;
+
 #ifdef WOW64_FS_REDIR
 static WCHAR *File_Wow64System32 = NULL;
 static ULONG  File_Wow64System32Len = 0;
@@ -368,19 +390,521 @@ static ULONG File_AltBoxPathLen = 0;
 
 
 //---------------------------------------------------------------------------
-// File_FindBoxPrefixLength
+// File_FindBoxPrefix
 //---------------------------------------------------------------------------
 
 
-_FX ULONG File_FindBoxPrefixLength(const WCHAR* CopyPath)
+_FX ULONG File_FindBoxPrefix(const WCHAR* Path)
 {
-	ULONG length = wcslen(CopyPath);
-	ULONG prefixLen = 0;
-	if (length >= Dll_BoxFilePathLen && 0 == Dll_NlsStrCmp(CopyPath, Dll_BoxFilePath, Dll_BoxFilePathLen))
-		prefixLen = Dll_BoxFilePathLen;
-	if (File_AltBoxPath && length >= File_AltBoxPathLen && 0 == Dll_NlsStrCmp(CopyPath, File_AltBoxPath, File_AltBoxPathLen))
-		prefixLen = File_AltBoxPathLen;
-	return prefixLen;
+    ULONG length = wcslen(Path);
+
+    struct {
+        const WCHAR* Path;
+        ULONG PathLen;
+    } BoxFilePaths[3] = {
+        Dll_BoxFilePath, Dll_BoxFilePathLen,
+        Dll_BoxFileRawPath, Dll_BoxFileRawPathLen,
+        File_AltBoxPath, File_AltBoxPathLen // ToDo: deprecated, remove - raw path is more reliable and covers all cases
+    }, *Dll_BoxFile;
+
+    for (int i = 0; i < ARRAYSIZE(BoxFilePaths); i++) {
+
+        Dll_BoxFile = &BoxFilePaths[i];
+        if (!Dll_BoxFile->Path)
+            continue;
+    
+        if (length >= Dll_BoxFile->PathLen &&
+                0 == Dll_NlsStrCmp(
+                    Path, Dll_BoxFile->Path, Dll_BoxFile->PathLen))
+        {
+            //if (Prefix) *Prefix = Dll_BoxFile->Path;
+            return Dll_BoxFile->PathLen;
+        }
+    }
+
+	return 0;
+}
+
+
+//---------------------------------------------------------------------------
+// File_GetCopyPathImpl
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS File_GetCopyPathImpl(WCHAR* TruePath, WCHAR **OutCopyPath, ULONG *OutFlags, WCHAR* snapshot_id, BOOLEAN have_trailing_backslash, BOOLEAN* p_add_trailing_backslash)
+{
+    THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+
+    ULONG length;
+    WCHAR* name;
+    const FILE_DRIVE *drive;
+    const FILE_GUID* guid;
+    ULONG PrefixLength;
+    
+    length = wcslen(TruePath);
+    name = Dll_GetTlsNameBuffer(
+                TlsData, COPY_NAME_BUFFER, Dll_BoxFilePathLen + length);
+
+    *OutCopyPath = name;
+
+    wmemcpy(name, Dll_BoxFilePath, Dll_BoxFilePathLen);
+    name += Dll_BoxFilePathLen;
+
+    //
+    // if we requested real paths, re add the snapshot prefix
+    //
+
+    if (snapshot_id && *snapshot_id) {
+
+        *name++ = L'\\';
+        wmemcpy(name, File_Snapshot_Prefix, File_Snapshot_PrefixLen);
+        name += File_Snapshot_PrefixLen;
+        ULONG len = wcslen(snapshot_id);
+        wmemcpy(name, snapshot_id, len);
+        name += len;
+    }
+
+
+    //
+    // if the true path points to a remote share or mapped drive,
+    // convert that to box the portable form "\share\computer\folder"
+    //
+
+    PrefixLength = 0;
+    if (length >= File_RedirectorLen && _wcsnicmp(TruePath, File_Redirector, File_RedirectorLen) == 0)
+        PrefixLength = File_RedirectorLen;
+    else if (length >= File_DfsClientRedirLen && _wcsnicmp(TruePath, File_DfsClientRedir, File_DfsClientRedirLen) == 0)
+        PrefixLength = File_DfsClientRedirLen;
+    else if (length >= File_HgfsRedirLen && _wcsnicmp(TruePath, File_HgfsRedir, File_HgfsRedirLen) == 0)
+        PrefixLength = File_HgfsRedirLen;
+    else if (length >= File_MupRedirLen && _wcsnicmp(TruePath, File_MupRedir, File_MupRedirLen) == 0)
+        PrefixLength = File_MupRedirLen;
+
+    if (PrefixLength) {
+
+        WCHAR *ptr = TruePath + PrefixLength;
+        if (*ptr == L';') {
+            ptr = wcschr(ptr, L'\\');
+            if (! ptr)
+                return STATUS_BAD_INITIAL_PC;
+            ++ptr;
+        }
+
+        wmemcpy(name, _Share, _ShareLen);
+        name += _ShareLen;
+
+        length = wcslen(ptr);
+        wmemcpy(name, ptr, length);
+
+        if (OutFlags)
+            *OutFlags |= FGN_NETWORK_SHARE;
+
+    // does this next section really need to be different than above?
+    } else if (length >= File_MupLen &&
+        _wcsnicmp(TruePath, File_Mup, File_MupLen) == 0) {
+
+        WCHAR *ptr = TruePath + File_MupLen;
+        if (*ptr == L';')   // like \Device\Mup\;RdpDr;:2\...
+            return STATUS_BAD_INITIAL_PC;
+        ptr = wcschr(ptr, L'\\');
+        if (File_IsPipeSuffix(ptr))
+            return STATUS_BAD_INITIAL_PC;
+
+        wmemcpy(name, _Share, _ShareLen);
+        name += _ShareLen;
+
+        length -= File_MupLen;
+        wmemcpy(name, TruePath + File_MupLen, length);
+
+        if (OutFlags)
+            *OutFlags |= FGN_NETWORK_SHARE;
+    }
+
+    //
+    // if the true path begins with the full path to the home folder
+    // for the AllUsers or for the current user, then we translate
+    // the copy path to the box portable form "\user\all" or
+    // "\user\current", respectively
+    //
+
+    else if (File_AllUsersLen && length >= File_AllUsersLen &&
+                0 == Dll_NlsStrCmp(
+                        TruePath, File_AllUsers, File_AllUsersLen))
+    {
+        wmemcpy(name, _UserAll, _UserAllLen);
+        name += _UserAllLen;
+
+        length -= File_AllUsersLen;
+        wmemcpy(name, TruePath + File_AllUsersLen, length);
+
+    }
+
+    else if (File_CurrentUserLen && length >= File_CurrentUserLen &&
+                0 == Dll_NlsStrCmp(
+                        TruePath, File_CurrentUser, File_CurrentUserLen))
+    {
+        wmemcpy(name, _UserCurrent, _UserCurrentLen);
+        name += _UserCurrentLen;
+
+        length -= File_CurrentUserLen;
+        wmemcpy(name, TruePath + File_CurrentUserLen, length);
+
+    }
+
+    else if (File_PublicUserLen && length >= File_PublicUserLen &&
+                0 == Dll_NlsStrCmp(
+                        TruePath, File_PublicUser, File_PublicUserLen))
+    {
+        wmemcpy(name, _UserPublic, _UserPublicLen);
+        name += _UserPublicLen;
+
+        length -= File_PublicUserLen;
+        wmemcpy(name, TruePath + File_PublicUserLen, length);
+    }
+
+    //
+    // otherwise, if the true path begins with the NT path for one of
+    // the known DosDevices drives, then translate to the box portable
+    // form "\drive\x"
+    //
+
+    else {
+
+        ULONG drive_len;
+
+        drive = File_GetDriveForPath(TruePath, length);
+        if (drive)
+            drive_len = drive->len;
+        else
+            drive = File_GetDriveForUncPath(TruePath, length, &drive_len);
+
+        if (!drive)
+            guid = File_GetGuidForPath(TruePath, length);
+
+        if (drive || guid) {
+
+            WCHAR drive_letter = 0;
+            WCHAR sn[10] = { 0 };
+            WCHAR drive_guid[38 + 1];
+
+            if (drive) {
+                drive_letter = drive->letter;
+                wcscpy(sn, drive->sn);
+            }
+            else { // if guid
+                wcscpy(drive_guid, guid->guid);
+                drive_len = guid->len;
+            }
+
+            LeaveCriticalSection(File_DrivesAndLinks_CritSec);
+
+            wmemcpy(name, _Drive, _DriveLen);
+            name += _DriveLen;
+            if (drive_letter) {
+
+                *name = drive_letter;
+                ++name;
+                
+                if (File_DriveAddSN && *sn) {
+
+                    *name = L'~';
+                    ++name;
+                    wcscpy(name, sn);
+                    name += 9;
+                }
+
+                *name = L'\0';
+            }
+            else { // if guid
+
+                wcscpy(name, drive_guid);
+                name += wcslen(drive_guid); // = 38
+            }
+
+            if (length == drive_len) {
+
+                //
+                // in the special case of a request to open the
+                // volume device itself, rather than any file within
+                // the device, we return a special status code
+                //
+
+                if (! have_trailing_backslash)
+                    return STATUS_BAD_INITIAL_PC;
+
+                //
+                // otherwise, caller must want to open the root
+                // directory of the device, so remember to add the
+                // trailing backslash before we're done
+                //
+
+                if (p_add_trailing_backslash) *p_add_trailing_backslash = TRUE;
+            }
+
+            length -= drive_len;
+            wmemcpy(name, TruePath + drive_len, length);
+
+        } else {
+
+            //
+            // if we couldn't find any matching logical drive, then
+            // we return STATUS_BAD_INITIAL_PC so this DLL does not
+            // try any further sandboxing.  (But the driver will still
+            // block any attempt to access disk devices.)
+            //
+
+            return STATUS_BAD_INITIAL_PC;
+        }
+    }
+
+    //
+    // null-terminate the copy path, and add the missing trailing
+    // backslash to the true path, if there was one
+    //
+
+    name += length;
+    *name = L'\0';
+
+    return STATUS_SUCCESS;
+}
+
+
+//---------------------------------------------------------------------------
+// File_GetCopyPath
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS File_GetCopyPath(WCHAR* TruePath, WCHAR **OutCopyPath)
+{
+    return File_GetCopyPathImpl(TruePath, OutCopyPath, NULL, NULL, FALSE, NULL);
+}
+
+
+//---------------------------------------------------------------------------
+// File_GetTruePathImpl
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS File_GetTruePathImpl(ULONG length, WCHAR **OutTruePath, ULONG *OutFlags, BOOLEAN* p_is_boxed_path, BOOLEAN no_relocation, WCHAR* snapshot_id, BOOLEAN* p_convert_links_again)
+{
+    THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+
+    ULONG prefixLen = 0;
+    WCHAR* name;
+    const FILE_DRIVE *drive;
+    const FILE_GUID* guid;
+
+check_sandbox_prefix:
+
+    prefixLen = File_FindBoxPrefix(*OutTruePath);
+    if (prefixLen) {
+
+        *OutTruePath += prefixLen;
+        length -= prefixLen;
+
+        if (! length) {
+            //
+            // caller specified just the sandbox prefix
+            //
+            *OutTruePath = NULL;
+            return STATUS_BAD_INITIAL_PC;
+        }
+
+        if (OutFlags)
+            *OutFlags |= FGN_IS_BOXED_PATH;
+        *p_is_boxed_path = TRUE;
+    }
+     
+	//
+	// If its a sandboxed file, check if its in the current image or in a snapshot
+	// If its in a snapshot remove the snapshot prefix
+	//
+
+	if (p_is_boxed_path) {
+		if (length >= 10 && 0 == Dll_NlsStrCmp(*OutTruePath + 1, File_Snapshot_Prefix, File_Snapshot_PrefixLen))
+		{
+			WCHAR* path = wcschr(*OutTruePath + 1 + File_Snapshot_PrefixLen, L'\\');
+			if (path == NULL) {
+				//
+				// caller specified just the sandbox snapshot prefix, or the path is to long
+				//
+                *OutTruePath = NULL;
+				return STATUS_BAD_INITIAL_PC;
+			}
+
+            if (no_relocation) {
+                ULONG len = (ULONG)(path - (*OutTruePath + 1 + File_Snapshot_PrefixLen));
+                if (len < FILE_MAX_SNAPSHOT_ID) {
+                    wmemcpy(snapshot_id, *OutTruePath + 1 + File_Snapshot_PrefixLen, len);
+                    snapshot_id[len] = L'\0';
+                }
+            }
+
+			length -= (ULONG)(path - *OutTruePath);
+			*OutTruePath = path;
+		}
+	}
+
+    //
+    // the true path may now begin with "\drive\x", for instance,
+    // if the process specified a RootDirectory handle that leads
+    // inside the box.  we have to change this box convention to
+    // full NT path of the drive letter.  a later section of code
+    // will change it back to \drive\x for the copy path.
+    //
+    // note that we temporarily use the COPY_NAME_BUFFER here, but
+    // that's ok because it hasn't been initialized yet
+    //
+
+    if (length >= (_DriveLen - 1) &&
+        _wcsnicmp(*OutTruePath, _Drive, _DriveLen - 1) == 0)
+    {
+        name = (*OutTruePath);
+
+        drive = NULL;
+        guid = NULL;
+
+        if (name[_DriveLen - 1] == L'\\') {
+            if (name[_DriveLen] == L'{')
+                guid = File_GetLinkForGuid(&name[_DriveLen]);
+            else
+                drive = File_GetDriveForLetter(name[_DriveLen]);
+        }
+            
+
+        if (drive) {
+
+            ULONG len = _DriveLen + 1; /* drive letter */
+
+            // skip any suffix after the drive letter
+            if (File_DriveAddSN) {
+                WCHAR* ptr = wcschr(*OutTruePath + _DriveLen + 1, L'\\');
+                if (!ptr) ptr = wcschr(*OutTruePath + _DriveLen + 1, L'\0');
+                len = (ULONG)(ptr - *OutTruePath);
+            }
+
+            File_GetName_FixTruePrefix(TlsData,
+                OutTruePath, &length, len,
+                drive->path, drive->len);
+        }
+        else if (guid) {
+
+            ULONG len = _DriveLen + 38; /* drive guid*/
+
+            File_GetName_FixTruePrefix(TlsData,
+                OutTruePath, &length, len,
+                guid->path, guid->len);
+        }
+        else {
+
+            //
+            // caller specified invalid path for \sandbox\drive\x
+            //
+            *OutTruePath = NULL;
+            return STATUS_BAD_INITIAL_PC;
+        }
+
+        if (p_convert_links_again) *p_convert_links_again = TRUE;
+
+        LeaveCriticalSection(File_DrivesAndLinks_CritSec);
+
+        goto check_sandbox_prefix;
+    }
+
+    //
+    // alternatively, the true path may begin with "\user\all" which,
+    // is a box convention for the AllUsers home folder.  or, with
+    // "\user\current", which is a box convention for the home folder
+    // of the current user.  both cases must be translated similarly
+    // to the "\drive\x" case above.
+    //
+    // note that we temporarily use the COPY_NAME_BUFFER here, but
+    // that's ok because it hasn't been initialized yet
+    //
+
+    else if (length >= _UserLen &&
+                _wcsnicmp(*OutTruePath, _User, _UserLen) == 0) {
+
+        if (File_AllUsersLen && length >= _UserAllLen &&
+               _wcsnicmp(*OutTruePath, _UserAll, _UserAllLen) == 0) {
+
+            File_GetName_FixTruePrefix(TlsData,
+                OutTruePath, &length, _UserAllLen,
+                File_AllUsers, File_AllUsersLen);
+
+        } else if (File_CurrentUserLen &&
+                    length >= _UserCurrentLen && _wcsnicmp(
+                        *OutTruePath, _UserCurrent, _UserCurrentLen) == 0) {
+
+            File_GetName_FixTruePrefix(TlsData,
+                OutTruePath, &length, _UserCurrentLen,
+                File_CurrentUser, File_CurrentUserLen);
+
+        } else if (File_PublicUserLen &&
+                    length >= _UserPublicLen && _wcsnicmp(
+                        *OutTruePath, _UserPublic, _UserPublicLen) == 0) {
+
+            File_GetName_FixTruePrefix(TlsData,
+                OutTruePath, &length, _UserPublicLen,
+                File_PublicUser, File_PublicUserLen);
+
+        } else {
+
+            //
+            // the path is "...\box\user..." but not for user\current or
+            // user\all, so restore the sandbox prefix and return special
+            // status for read-only access
+            //
+
+            name = Dll_GetTlsNameBuffer(
+                        TlsData, TRUE_NAME_BUFFER,
+                        (Dll_BoxFilePathLen + length + 1) * sizeof(WCHAR));
+
+            wmemmove(name + Dll_BoxFilePathLen, *OutTruePath, length + 1);
+            wmemcpy(name, Dll_BoxFilePath, Dll_BoxFilePathLen);
+
+            *OutTruePath = name;
+
+            return STATUS_BAD_INITIAL_PC;
+        }
+
+        if (p_convert_links_again) *p_convert_links_again = TRUE;
+    }
+
+    //
+    // alternatively, the true path may begin with "\share\..." which,
+    // is a box convention for remote shares.  in this case it has to
+    // be translated similarly to the "\drive\x" case above.
+    //
+
+    else if (length >= _ShareLen  &&
+             _wcsnicmp(*OutTruePath, _Share, _ShareLen) == 0) {
+
+        File_GetName_FixTruePrefix(TlsData,
+            OutTruePath, &length, _ShareLen,
+            File_Mup, File_MupLen);
+
+        if (p_convert_links_again) *p_convert_links_again = TRUE;
+    }
+
+    return STATUS_SUCCESS;
+}
+
+
+//---------------------------------------------------------------------------
+// File_GetTruePath
+//---------------------------------------------------------------------------
+
+
+_FX NTSTATUS File_GetTruePath(WCHAR *CopyPath, WCHAR **OutTruePath)
+{
+    ULONG length = wcslen(CopyPath);
+    BOOLEAN is_boxed_path = FALSE;
+    *OutTruePath = CopyPath;
+    NTSTATUS status = File_GetTruePathImpl(length, OutTruePath, NULL, &is_boxed_path, FALSE, NULL, NULL);
+    if (NT_SUCCESS(status) && !is_boxed_path)
+        return STATUS_BAD_INITIAL_STACK; // indicate with this error code that the path provided was already the true path
+    return status;
 }
 
 
@@ -392,22 +916,7 @@ _FX ULONG File_FindBoxPrefixLength(const WCHAR* CopyPath)
 _FX NTSTATUS File_GetName(
     HANDLE RootDirectory, UNICODE_STRING *ObjectName,
     WCHAR **OutTruePath, WCHAR **OutCopyPath, ULONG *OutFlags)
-{
-    static const ULONG _DeviceLen = 8;
-    static const WCHAR *_Share = L"\\share\\";
-    static const ULONG _ShareLen = 7;
-    static const WCHAR *_Drive = L"\\drive\\";
-    static const ULONG _DriveLen = 7;
-
-    static const WCHAR *_User = L"\\user";
-    static const ULONG _UserLen = 5;
-    static const WCHAR *_UserAll = L"\\user\\all";
-    static const ULONG _UserAllLen = 9;
-    static const WCHAR *_UserCurrent = L"\\user\\current";
-    static const ULONG _UserCurrentLen = 13;
-    static const WCHAR *_UserPublic = L"\\user\\public";
-    static const ULONG _UserPublicLen = 12;
-	
+{	
     THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
 
     NTSTATUS status;
@@ -416,12 +925,12 @@ _FX NTSTATUS File_GetName(
     ULONG objname_len;
     WCHAR *objname_buf;
     const FILE_DRIVE *drive;
+    const FILE_GUID* guid;
     BOOLEAN have_trailing_backslash, add_trailing_backslash;
     BOOLEAN have_tilde;
     BOOLEAN convert_links_again;
     BOOLEAN is_boxed_path;
     BOOLEAN free_true_path;
-    ULONG PrefixLength;
 
 #ifdef WOW64_FS_REDIR
     BOOLEAN convert_wow64_link = (File_Wow64FileLink) ? TRUE : FALSE;
@@ -451,6 +960,7 @@ _FX NTSTATUS File_GetName(
     }
 
     drive = NULL;
+    guid = NULL;
 
     free_true_path = FALSE;
 
@@ -529,7 +1039,7 @@ _FX NTSTATUS File_GetName(
                 // if the file/directory is located in the sandbox, we still need to check the path
                 //
 
-                ULONG prefixLen = File_FindBoxPrefixLength(name);
+                ULONG prefixLen = File_FindBoxPrefix(name);
                 if (prefixLen != 0) {
 
                     name += prefixLen;
@@ -624,9 +1134,11 @@ _FX NTSTATUS File_GetName(
             // the next section of code from trying to translate symlinks
             //
 
-            drive = File_GetDriveForPath(
-                                objname_buf, objname_len / sizeof(WCHAR));
-            if (drive) {
+            drive = File_GetDriveForPath(objname_buf, objname_len / sizeof(WCHAR));
+            if(!drive)
+                guid = File_GetGuidForPath(objname_buf, objname_len / sizeof(WCHAR));
+
+            if (drive || guid) {
 
                 name = Dll_GetTlsNameBuffer(
                         TlsData, TRUE_NAME_BUFFER,
@@ -640,7 +1152,7 @@ _FX NTSTATUS File_GetName(
             }
         }
 
-        if (drive) {
+        if (drive || guid) {
 
             File_GetName_ConvertLinks(
                 TlsData, OutTruePath, convert_wow64_link);
@@ -736,7 +1248,7 @@ _FX NTSTATUS File_GetName(
     // if this is a named pipe or mail slot, return special status
     //
 
-    if ((! drive) && File_IsNamedPipe(*OutTruePath, NULL)) {
+    if (!drive && !guid && File_IsNamedPipe(*OutTruePath, NULL)) {
 
         return STATUS_BAD_INITIAL_PC;
     }
@@ -767,202 +1279,11 @@ _FX NTSTATUS File_GetName(
 
 check_sandbox_prefix:
 
-    if (length >= Dll_BoxFilePathLen &&
-            0 == Dll_NlsStrCmp(
-                *OutTruePath, Dll_BoxFilePath, Dll_BoxFilePathLen))
-    {
-        *OutTruePath += Dll_BoxFilePathLen;
-        length -= Dll_BoxFilePathLen;
-
-        if (! length) {
-            //
-            // caller specified just the sandbox prefix
-            //
+    status = File_GetTruePathImpl(length, OutTruePath, OutFlags, &is_boxed_path, no_relocation, snapshot_id, &convert_links_again);
+    if (!NT_SUCCESS(status)) {
+        if(*OutTruePath == NULL)
             *OutTruePath = TruePath;
-            return STATUS_BAD_INITIAL_PC;
-        }
-
-        if (OutFlags)
-            *OutFlags |= FGN_IS_BOXED_PATH;
-        is_boxed_path = TRUE;
-    }
-
-    if (File_AltBoxPath &&
-            length >= File_AltBoxPathLen &&
-            0 == Dll_NlsStrCmp(
-                *OutTruePath, File_AltBoxPath, File_AltBoxPathLen))
-    {
-        *OutTruePath += File_AltBoxPathLen;
-        length -= File_AltBoxPathLen;
-
-        if (! length) {
-            //
-            // caller specified just the sandbox prefix
-            //
-            *OutTruePath = TruePath;
-            return STATUS_BAD_INITIAL_PC;
-        }
-
-        if (OutFlags)
-            *OutFlags |= FGN_IS_BOXED_PATH;
-        is_boxed_path = TRUE;
-    }
-
-	//
-	// If its a sandboxed file, check if its in the current image or in a snapshot
-	// If its in a snapshot remove the snapshot prefix
-	//
-
-	if (is_boxed_path) {
-		if (length >= 10 && 0 == Dll_NlsStrCmp(*OutTruePath + 1, File_Snapshot_Prefix, File_Snapshot_PrefixLen))
-		{
-			WCHAR* path = wcschr(*OutTruePath + 1 + File_Snapshot_PrefixLen, L'\\');
-			if (path == NULL) {
-
-				//
-				// caller specified just the sandbox snapshot prefix, or the path is to long
-				//
-
-				*OutTruePath = TruePath;
-				return STATUS_BAD_INITIAL_PC;
-			}
-
-            if (no_relocation) {
-                ULONG len = (ULONG)(path - (*OutTruePath + 1 + File_Snapshot_PrefixLen));
-                if (len < FILE_MAX_SNAPSHOT_ID) {
-                    wmemcpy(snapshot_id, *OutTruePath + 1 + File_Snapshot_PrefixLen, len);
-                    snapshot_id[len] = L'\0';
-                }
-            }
-
-			length -= (ULONG)(path - *OutTruePath);
-			*OutTruePath = path;
-		}
-	}
-
-    //
-    // the true path may now begin with "\drive\x", for instance,
-    // if the process specified a RootDirectory handle that leads
-    // inside the box.  we have to change this box convention to
-    // full NT path of the drive letter.  a later section of code
-    // will change it back to \drive\x for the copy path.
-    //
-    // note that we temporarily use the COPY_NAME_BUFFER here, but
-    // that's ok because it hasn't been initialized yet
-    //
-
-    if (length >= (_DriveLen - 1) &&
-        _wcsnicmp(*OutTruePath, _Drive, _DriveLen - 1) == 0)
-    {
-        name = (*OutTruePath);
-        if (name[_DriveLen - 1] == L'\\')
-            drive = File_GetDriveForLetter(name[_DriveLen]);
-        else
-            drive = NULL;
-
-        if (! drive) {
-            //
-            // caller specified invalid path for \sandbox\drive\x
-            //
-            *OutTruePath = TruePath;
-            return STATUS_BAD_INITIAL_PC;
-        }
-
-        ULONG len = _DriveLen + 1; /* drive letter */
-
-        // skip any suffix after the drive letter
-        if (File_DriveAddSN) {
-            WCHAR* ptr = wcschr(*OutTruePath + _DriveLen + 1, L'\\');
-            if (!ptr) ptr = wcschr(*OutTruePath + _DriveLen + 1, L'\0');
-            len = (ULONG)(ptr - *OutTruePath);
-        }
-
-        File_GetName_FixTruePrefix(TlsData,
-            OutTruePath, &length, len,
-            drive->path, drive->len);
-
-        convert_links_again = TRUE;
-
-        LeaveCriticalSection(File_DrivesAndLinks_CritSec);
-
-        goto check_sandbox_prefix;
-    }
-
-    //
-    // alternatively, the true path may begin with "\user\all" which,
-    // is a box convention for the AllUsers home folder.  or, with
-    // "\user\current", which is a box convention for the home folder
-    // of the current user.  both cases must be translated similarly
-    // to the "\drive\x" case above.
-    //
-    // note that we temporarily use the COPY_NAME_BUFFER here, but
-    // that's ok because it hasn't been initialized yet
-    //
-
-    else if (//SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE) && // if we disable File_InitUsers we don't need to do it here and below
-			 length >= _UserLen &&
-                _wcsnicmp(*OutTruePath, _User, _UserLen) == 0) {
-
-        if (File_AllUsersLen && length >= _UserAllLen &&
-               _wcsnicmp(*OutTruePath, _UserAll, _UserAllLen) == 0) {
-
-            File_GetName_FixTruePrefix(TlsData,
-                OutTruePath, &length, _UserAllLen,
-                File_AllUsers, File_AllUsersLen);
-
-        } else if (File_CurrentUserLen &&
-                    length >= _UserCurrentLen && _wcsnicmp(
-                        *OutTruePath, _UserCurrent, _UserCurrentLen) == 0) {
-
-            File_GetName_FixTruePrefix(TlsData,
-                OutTruePath, &length, _UserCurrentLen,
-                File_CurrentUser, File_CurrentUserLen);
-
-        } else if (File_PublicUserLen &&
-                    length >= _UserPublicLen && _wcsnicmp(
-                        *OutTruePath, _UserPublic, _UserPublicLen) == 0) {
-
-            File_GetName_FixTruePrefix(TlsData,
-                OutTruePath, &length, _UserPublicLen,
-                File_PublicUser, File_PublicUserLen);
-
-        } else {
-
-            //
-            // the path is "...\box\user..." but not for user\current or
-            // user\all, so restore the sandbox prefix and return special
-            // status for read-only access
-            //
-
-            name = Dll_GetTlsNameBuffer(
-                        TlsData, TRUE_NAME_BUFFER,
-                        (Dll_BoxFilePathLen + length + 1) * sizeof(WCHAR));
-
-            wmemmove(name + Dll_BoxFilePathLen, *OutTruePath, length + 1);
-            wmemcpy(name, Dll_BoxFilePath, Dll_BoxFilePathLen);
-
-            *OutTruePath = name;
-
-            return STATUS_BAD_INITIAL_PC;
-        }
-
-        convert_links_again = TRUE;
-    }
-
-    //
-    // alternatively, the true path may begin with "\share\..." which,
-    // is a box convention for remote shares.  in this case it has to
-    // be translated similarly to the "\drive\x" case above.
-    //
-
-    else if (length >= _ShareLen  &&
-             _wcsnicmp(*OutTruePath, _Share, _ShareLen) == 0) {
-
-        File_GetName_FixTruePrefix(TlsData,
-            OutTruePath, &length, _ShareLen,
-            File_Mup, File_MupLen);
-
-        convert_links_again = TRUE;
+        return status;
     }
 
     //
@@ -1032,13 +1353,7 @@ check_sandbox_prefix:
         // we need to go back
         //
 
-        if (length >= Dll_BoxFilePathLen &&
-                0 == Dll_NlsStrCmp(
-                        TruePath, Dll_BoxFilePath, Dll_BoxFilePathLen))
-            is_boxed_path = TRUE;
-        else if (File_AltBoxPath && length >= File_AltBoxPathLen &&
-                0 == Dll_NlsStrCmp(
-                        TruePath, File_AltBoxPath, File_AltBoxPathLen))
+        if(File_FindBoxPrefix(TruePath))
             is_boxed_path = TRUE;
         if (is_boxed_path) {
 
@@ -1109,209 +1424,9 @@ check_sandbox_prefix:
     // still be missing its null terminator.
     //
 
-    name = Dll_GetTlsNameBuffer(
-                TlsData, COPY_NAME_BUFFER, Dll_BoxFilePathLen + length);
-
-    *OutCopyPath = name;
-
-    wmemcpy(name, Dll_BoxFilePath, Dll_BoxFilePathLen);
-    name += Dll_BoxFilePathLen;
-
-    //
-    // if we requested real paths, re add the snapshot prefix
-    //
-
-    if (*snapshot_id) {
-
-        *name++ = L'\\';
-        wmemcpy(name, File_Snapshot_Prefix, File_Snapshot_PrefixLen);
-        name += File_Snapshot_PrefixLen;
-        ULONG len = wcslen(snapshot_id);
-        wmemcpy(name, snapshot_id, len);
-        name += len;
-    }
-
-
-    //
-    // if the true path points to a remote share or mapped drive,
-    // convert that to box the portable form "\share\computer\folder"
-    //
-
-    PrefixLength = 0;
-    if (length >= File_RedirectorLen && _wcsnicmp(TruePath, File_Redirector, File_RedirectorLen) == 0)
-        PrefixLength = File_RedirectorLen;
-    else if (length >= File_DfsClientRedirLen && _wcsnicmp(TruePath, File_DfsClientRedir, File_DfsClientRedirLen) == 0)
-        PrefixLength = File_DfsClientRedirLen;
-    else if (length >= File_HgfsRedirLen && _wcsnicmp(TruePath, File_HgfsRedir, File_HgfsRedirLen) == 0)
-        PrefixLength = File_HgfsRedirLen;
-    else if (length >= File_MupRedirLen && _wcsnicmp(TruePath, File_MupRedir, File_MupRedirLen) == 0)
-        PrefixLength = File_MupRedirLen;
-
-    if (PrefixLength) {
-
-        WCHAR *ptr = TruePath + PrefixLength;
-        if (*ptr == L';') {
-            ptr = wcschr(ptr, L'\\');
-            if (! ptr)
-                return STATUS_BAD_INITIAL_PC;
-            ++ptr;
-        }
-
-        wmemcpy(name, _Share, _ShareLen);
-        name += _ShareLen;
-
-        length = wcslen(ptr);
-        wmemcpy(name, ptr, length);
-
-        if (OutFlags)
-            *OutFlags |= FGN_NETWORK_SHARE;
-
-    // does this next section really need to be different than above?
-    } else if (length >= File_MupLen &&
-        _wcsnicmp(TruePath, File_Mup, File_MupLen) == 0) {
-
-        WCHAR *ptr = TruePath + File_MupLen;
-        if (*ptr == L';')   // like \Device\Mup\;RdpDr;:2\...
-            return STATUS_BAD_INITIAL_PC;
-        ptr = wcschr(ptr, L'\\');
-        if (File_IsPipeSuffix(ptr))
-            return STATUS_BAD_INITIAL_PC;
-
-        wmemcpy(name, _Share, _ShareLen);
-        name += _ShareLen;
-
-        length -= File_MupLen;
-        wmemcpy(name, TruePath + File_MupLen, length);
-
-        if (OutFlags)
-            *OutFlags |= FGN_NETWORK_SHARE;
-    }
-
-    //
-    // if the true path begins with the full path to the home folder
-    // for the AllUsers or for the current user, then we translate
-    // the copy path to the box portable form "\user\all" or
-    // "\user\current", respectively
-    //
-
-    else if (//SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE) && 
-			 File_AllUsersLen && length >= File_AllUsersLen &&
-                0 == Dll_NlsStrCmp(
-                        TruePath, File_AllUsers, File_AllUsersLen))
-    {
-        wmemcpy(name, _UserAll, _UserAllLen);
-        name += _UserAllLen;
-
-        length -= File_AllUsersLen;
-        wmemcpy(name, TruePath + File_AllUsersLen, length);
-
-    }
-
-    else if (//SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE) && 
-			 File_CurrentUserLen && length >= File_CurrentUserLen &&
-                0 == Dll_NlsStrCmp(
-                        TruePath, File_CurrentUser, File_CurrentUserLen))
-    {
-        wmemcpy(name, _UserCurrent, _UserCurrentLen);
-        name += _UserCurrentLen;
-
-        length -= File_CurrentUserLen;
-        wmemcpy(name, TruePath + File_CurrentUserLen, length);
-
-    }
-
-    else if (//SbieApi_QueryConfBool(NULL, L"SeparateUserFolders", TRUE) && 
-			 File_PublicUserLen && length >= File_PublicUserLen &&
-                0 == Dll_NlsStrCmp(
-                        TruePath, File_PublicUser, File_PublicUserLen))
-    {
-        wmemcpy(name, _UserPublic, _UserPublicLen);
-        name += _UserPublicLen;
-
-        length -= File_PublicUserLen;
-        wmemcpy(name, TruePath + File_PublicUserLen, length);
-    }
-
-    //
-    // otherwise, if the true path begins with the NT path for one of
-    // the known DosDevices drives, then translate to the box portable
-    // form "\drive\x"
-    //
-
-    else {
-
-        ULONG drive_len;
-
-        drive = File_GetDriveForPath(TruePath, length);
-        if (drive)
-            drive_len = drive->len;
-        else
-            drive = File_GetDriveForUncPath(TruePath, length, &drive_len);
-
-        if (drive) {
-
-            WCHAR drive_letter = drive->letter;
-
-            LeaveCriticalSection(File_DrivesAndLinks_CritSec);
-
-            wmemcpy(name, _Drive, _DriveLen);
-            name += _DriveLen;
-            *name = drive_letter;
-            ++name;
-
-            if (File_DriveAddSN && *drive->sn) {
-
-                *name = L'~';
-                ++name;
-                wcscpy(name, drive->sn);
-                name += 9;
-            }
-
-            *name = L'\0';
-
-            if (length == drive_len) {
-
-                //
-                // in the special case of a request to open the
-                // volume device itself, rather than any file within
-                // the device, we return a special status code
-                //
-
-                if (! have_trailing_backslash)
-                    return STATUS_BAD_INITIAL_PC;
-
-                //
-                // otherwise, caller must want to open the root
-                // directory of the device, so remember to add the
-                // trailing backslash before we're done
-                //
-
-                add_trailing_backslash = TRUE;
-            }
-
-            length -= drive_len;
-            wmemcpy(name, TruePath + drive_len, length);
-
-        } else {
-
-            //
-            // if we couldn't find any matching logical drive, then
-            // we return STATUS_BAD_INITIAL_PC so this DLL does not
-            // try any further sandboxing.  (But the driver will still
-            // block any attempt to access disk devices.)
-            //
-
-            return STATUS_BAD_INITIAL_PC;
-        }
-    }
-
-    //
-    // null-terminate the copy path, and add the missing trailing
-    // backslash to the true path, if there was one
-    //
-
-    name += length;
-    *name = L'\0';
+    status = File_GetCopyPathImpl(TruePath, OutCopyPath, OutFlags, snapshot_id, have_trailing_backslash, &add_trailing_backslash);
+    if (!NT_SUCCESS(status))
+        return status;
 
     if (add_trailing_backslash) {
         name = *OutTruePath;
@@ -2715,7 +2830,7 @@ ReparseLoop:
             ShareAccess, CreateDisposition, CreateOptions,
             EaBuffer, EaLength);
 
-        if (status == STATUS_ACCESS_DENIED &&
+        if ((status == STATUS_ACCESS_DENIED || status == STATUS_OBJECT_NAME_NOT_FOUND) &&
                 (FileFlags & FGN_REPARSED_OPEN_PATH)) {
 
             //
@@ -3955,11 +4070,16 @@ _FX NTSTATUS File_GetFileType(
 
     *FileType = 0;
 
+    P_NtQueryFullAttributesFile pNtQueryFullAttributesFile = __sys_NtQueryFullAttributesFile;
+    // special case for File_InitRecoverFolders as its called bfore we hook those functions
+    if (!pNtQueryFullAttributesFile)
+        pNtQueryFullAttributesFile = NtQueryFullAttributesFile;
+
     if (IsWritePath) {
         status = File_QueryFullAttributesDirectoryFile(
                             ObjectAttributes->ObjectName->Buffer, &info);
     } else {
-        status = __sys_NtQueryFullAttributesFile(ObjectAttributes, &info);
+        status = pNtQueryFullAttributesFile(ObjectAttributes, &info);
     }
 
     if (! NT_SUCCESS(status)) {
@@ -5323,14 +5443,24 @@ _FX NTSTATUS File_NtQueryInformationFile(
             // otherwise we do normal drive letter processing
             //
 
-            SbieDll_TranslateNtToDosPath(TruePath);
-            TruePathLen = wcslen(TruePath);
-            if (TruePathLen >= 2 && TruePath[1] == L':') {
-                if (TruePathLen == 2)
-                    TruePathLen = 0;
-                else {
-                    TruePath += 2;
-                    TruePathLen -= 2;
+            if (SbieDll_TranslateNtToDosPath(TruePath)) {
+                TruePathLen = wcslen(TruePath);
+                if (TruePathLen >= 2 && TruePath[1] == L':') {
+                    if (TruePathLen == 2)
+                        TruePathLen = 0;
+                    else {
+                        TruePath += 2;
+                        TruePathLen -= 2;
+                    }
+                }
+            }
+            else { // todo: fix-me this is not elegant
+                TruePathLen = wcslen(TruePath);
+                const FILE_GUID* guid = File_GetGuidForPath(TruePath, TruePathLen);
+                if (guid) {
+                    TruePath += guid->len;
+                    TruePathLen -= guid->len;
+                    LeaveCriticalSection(File_DrivesAndLinks_CritSec);
                 }
             }
         }
@@ -7240,6 +7370,18 @@ _FX BOOLEAN SbieDll_TranslateNtToDosPath(WCHAR *path)
     const FILE_DRIVE *drive;
     ULONG path_len, prefix_len;
 
+    // 
+    // sometimes we get a DOS path with the \??\ prefix
+    // in such cases we just quickly strip it and are done
+    // 
+
+    if (_wcsnicmp(path, L"\\??\\", 4) == 0) {
+    
+        wmemmove(path, path + 4, wcslen(path) - 4 + 1);
+    
+        return TRUE;
+    }
+
     if (! File_DrivesAndLinks_CritSec) {    // if not sandboxed
 
         File_DrivesAndLinks_CritSec = Dll_Alloc(sizeof(CRITICAL_SECTION));
@@ -7257,6 +7399,21 @@ _FX BOOLEAN SbieDll_TranslateNtToDosPath(WCHAR *path)
     }
 
     path_len = wcslen(path);
+    
+    //
+    // workaround for hidden box root
+    //
+
+    if (Dll_BoxFileDosPathLen && Dll_BoxFilePathLen <= path_len && _wcsnicmp(path, Dll_BoxFilePath, Dll_BoxFilePathLen) == 0)
+    {
+        wmemmove(path + Dll_BoxFileDosPathLen, path + Dll_BoxFilePathLen, wcslen(path + Dll_BoxFilePathLen) + 1);
+        wmemcpy(path, Dll_BoxFileDosPath, Dll_BoxFileDosPathLen);
+        return TRUE;
+    }
+
+    //
+    // Find Dos Drive Letter
+    //
 
     drive = File_GetDriveForPath(path, path_len);
     if (drive)
@@ -7280,6 +7437,22 @@ _FX BOOLEAN SbieDll_TranslateNtToDosPath(WCHAR *path)
         return TRUE;
     }
 
+    // 
+    // sometimes we have to use a path which has no drive letter
+    // to make this work we use the \\.\ prefix which replaces \Device\
+    // and is accepted by regular non NT Win32 APIs
+    // 
+    // Note: fix me this makes chrome crash handler hang
+    // 
+
+    /*if (_wcsnicmp(path, L"\\Device\\", 8) == 0) {
+
+        wcscpy(path, L"\\\\.\\");
+        wmemmove(path + 4, path + 8, wcslen(path + 8) + 1);
+
+        return TRUE;
+    }*/
+
     return FALSE;
 }
 
@@ -7301,7 +7474,7 @@ _FX WCHAR *File_GetTruePathForBoxedPath(const WCHAR *Path, BOOLEAN IsDosPath)
 
     if (NtPath) {
 
-        if (_wcsnicmp(NtPath, Dll_BoxFilePath, Dll_BoxFilePathLen) == 0) {
+        if (_wcsnicmp(NtPath, Dll_BoxFilePath, Dll_BoxFilePathLen) == 0 || (Dll_BoxFileRawPath && _wcsnicmp(NtPath, Dll_BoxFileRawPath, Dll_BoxFileRawPathLen) == 0)) {
 
             NTSTATUS status;
             UNICODE_STRING uni;

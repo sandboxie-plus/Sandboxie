@@ -38,6 +38,7 @@
 #include "thread.h"
 #include "wfp.h"
 #include "common/my_version.h"
+#define KERNEL_MODE
 #include "verify.h"
 
 
@@ -777,19 +778,29 @@ _FX PROCESS *Process_Create(
             exclusive_setting = L"NoSecurityIsolation";
         else if (proc->protect_host_images)
             exclusive_setting = L"ProtectHostImages";
-        else if (proc->confidential_box)
-            exclusive_setting = L"ConfidentialBox";
 
         if (exclusive_setting) {
 
             Log_Msg_Process(MSG_6004, proc->box->name, exclusive_setting, box->session_id, proc->pid);
 
-            //Pool_Delete(pool);
-            //Process_CreateTerminated(ProcessId, box->session_id);
-            //return NULL;
-            
             // allow the process to run for a sort while to allow the features to be evaluated
             Process_ScheduleKill(proc, 5*60*1000); // 5 minutes
+        }
+    }
+
+    if (!CERT_IS_LEVEL(Verify_CertInfo, eCertStandard2) && !proc->image_sbie) {
+        
+        const WCHAR* exclusive_setting = NULL;
+        if (proc->confidential_box)
+            exclusive_setting = L"ConfidentialBox";
+
+        if (exclusive_setting) {
+
+            Log_Msg_Process(MSG_6009, proc->box->name, exclusive_setting, box->session_id, proc->pid);
+
+            Pool_Delete(pool);
+            Process_CreateTerminated(ProcessId, box->session_id);
+            return NULL;
         }
     }
 
@@ -1348,9 +1359,7 @@ _FX BOOLEAN Process_NotifyProcess_Create(
             ULONG session_id = new_proc->box->session_id;
 
             new_proc->bHostInject = bHostInject;
-#ifdef DRV_BREAKOUT
             new_proc->starter_id = CallerId;
-#endif
             new_proc->parent_was_start_exe = parent_was_start_exe;
             new_proc->rights_dropped = parent_had_rights_dropped;
             new_proc->forced_process = process_is_forced;

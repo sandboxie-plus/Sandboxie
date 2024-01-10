@@ -66,9 +66,13 @@ public:
     bool isComplete() const override;
     bool validatePage() override;
 
+private slots:
+    void OnCertData(const QByteArray& Certificate, const QVariantMap& Params);
+
 private:
     QLabel* m_pTopLabel;
     QPlainTextEdit* m_pCertificate;
+    QLineEdit* m_pSerial;
     QCheckBox* m_pEvaluate;
 };
 

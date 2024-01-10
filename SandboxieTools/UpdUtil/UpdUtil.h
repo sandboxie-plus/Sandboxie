@@ -36,9 +36,10 @@
 #define ERROR_CANCELED		(-9)
 #define ERROR_INTERNAL		(-10)	// internal error, should not happen
 #define ERROR_NO_ADDON		(-11)	// addon not found
-#define ERROR_NO_ADDON2		(-12)	// no addon for this paltform or framework
+#define ERROR_NO_ADDON2		(-12)	// no addon for this platform or framework
 #define ERROR_BAD_ADDON		(-13)
 #define ERROR_BAD_ADDON2	(-14)
 #define ERROR_DELETE		(-15)
+#define ERROR_GET_CERT		(-16)
 
 

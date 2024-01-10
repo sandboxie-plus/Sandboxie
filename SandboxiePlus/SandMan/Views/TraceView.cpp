@@ -132,7 +132,7 @@ CTraceTree::CTraceTree(QWidget* parent)
 	QByteArray Split = theConf->GetBlob("MainWindow/TraceSplitter");
 	if(!Split.isEmpty())
 		m_pSplitter->restoreState(Split);
-	//else { // by default colapse the details panel
+	//else { // by default collapse the details panel
 	//	auto Sizes = m_pSplitter->sizes();
 	//	Sizes[1] = 0;
 	//	m_pSplitter->setSizes(Sizes);
@@ -378,7 +378,7 @@ void CTraceView::SetEnabled(bool bSet)
 
 void CTraceView::OnShowStack()
 {
-	if (!theGUI->GetAddonManager()->GetAddon("DbgHelp", CAddonManager::eInstalled).isNull())
+	if (m_pShowStack->isChecked() && !theGUI->GetAddonManager()->GetAddon("DbgHelp", CAddonManager::eInstalled).isNull())
         theGUI->GetAddonManager()->TryInstallAddon("DbgHelp", this, tr("To use the stack traces feature the DbgHelp.dll and SymSrv.dll are required, do you want to download and install them?"));
 	theAPI->GetGlobalSettings()->SetBool("MonitorStackTrace", m_pShowStack->isChecked());
 	m_pTrace->m_pStackView->setVisible(m_pShowStack->isChecked());
@@ -745,7 +745,7 @@ void CTraceView::SaveToFileAsync(const CSbieProgressPtr& pProgress, QVector<CTra
 
 		if (LastTimeStamp != pEntry->GetTimeStamp()) {
 			LastTimeStamp = pEntry->GetTimeStamp();
-			LastTimeStampStr = QDateTime::fromMSecsSinceEpoch(pEntry->GetTimeStamp()).toString("hh:mm:ss.zzz").toUtf8();
+			LastTimeStampStr = QDateTime::fromMSecsSinceEpoch(pEntry->GetTimeStamp()).toString("dd.MM.yyyy hh:mm:ss.zzz").toUtf8();
 		}
 
 		pFile->write(LastTimeStampStr);
@@ -800,8 +800,7 @@ CTraceWindow::CTraceWindow(QWidget *parent)
 
 	this->setWindowTitle(tr("Sandboxie-Plus - Trace Monitor"));
 
-	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
-	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	this->setWindowFlag(Qt::WindowStaysOnTopHint, theGUI->IsAlwaysOnTop());
 
 	QGridLayout* pLayout = new QGridLayout();
 	pLayout->setContentsMargins(3,3,3,3);

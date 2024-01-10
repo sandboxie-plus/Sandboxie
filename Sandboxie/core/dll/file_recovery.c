@@ -585,7 +585,7 @@ _FX void File_DoAutoRecover_2(BOOLEAN force, ULONG ticks)
                 status = File_GetName(NULL, &uni, &TruePath, &CopyPath, NULL);
 
 				const WCHAR* strings[] = { Dll_BoxName, rec->path, CopyPath, NULL };
-				SbieApi_LogMsgExt(2199, strings);
+				SbieApi_LogMsgExt(-1, 2199, strings);
 			}
             List_Remove(&File_RecPaths, rec);
         }

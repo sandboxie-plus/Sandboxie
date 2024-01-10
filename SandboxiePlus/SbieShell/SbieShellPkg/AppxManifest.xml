@@ -11,7 +11,7 @@
   xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
   xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
   IgnorableNamespaces="uap uap2 uap3 rescap desktop desktop4 desktop5 uap10 com">
-  <Identity Name="SandboxieShell" ProcessorArchitecture="neutral" Publisher="E=cert@tonalio.com, CN=Tonalio GmbH, O=Tonalio GmbH, STREET=Badner Strasse 8, L=Bad Voeslau, S=Niederoesterreich, C=AT, OID.1.3.6.1.4.1.311.60.2.1.1=Wiener Neustadt, OID.1.3.6.1.4.1.311.60.2.1.2=Niederoesterreich, OID.1.3.6.1.4.1.311.60.2.1.3=AT, SERIALNUMBER=475036h, OID.2.5.4.15=Private Organization" Version="1.0.0.0" />
+  <Identity Name="SandboxieShell" ProcessorArchitecture="neutral" Publisher="E=cert@tonalio.com, CN=Tonalio GmbH, O=Tonalio GmbH, STREET=Badner Strasse 8, L=Bad Voeslau, S=Niederösterreich, C=AT, OID.1.3.6.1.4.1.311.60.2.1.1=Wiener Neustadt, OID.1.3.6.1.4.1.311.60.2.1.2=Niederoesterreich, OID.1.3.6.1.4.1.311.60.2.1.3=AT, SERIALNUMBER=475036h, OID.2.5.4.15=Private Organization" Version="1.0.0.0" />
   <Properties>
     <DisplayName>SandboxieShell</DisplayName>
     <PublisherDisplayName>Sparse Package</PublisherDisplayName>

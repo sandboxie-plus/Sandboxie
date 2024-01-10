@@ -159,7 +159,7 @@ void CPopUpWindow::AddLogMessage(quint32 MsgCode, const QStringList& MsgData, qu
 			BoxName = pProcess->GetBoxName();
 		}
 		else
-			ProcessName = tr("PID %1").arg(ProcessId);
+			ProcessName = QString("PID %1").arg(ProcessId);
 	}
 
 	QString Message = theGUI->FormatSbieMessage(MsgCode, MsgData, ProcessName);
@@ -364,7 +364,7 @@ void CPopUpWindow::AddFileToRecover(const QString& FilePath, QString BoxPath, co
 	if (BoxPath.isEmpty()) // legacy case, no BoxName, no support for driver serial numbers
 		BoxPath = theAPI->GetBoxedPath(pBox->GetName(), FilePath);
 
-	CPopUpRecovery* pEntry = new CPopUpRecovery(Message, FilePath, BoxPath, pBox->GetName(), this);
+	CPopUpRecovery* pEntry = new CPopUpRecovery(Message, FilePath, theAPI->GetBoxedPath(pBox.data(), FilePath), pBox->GetName(), this);
 
 	QStringList RecoverTargets = theAPI->GetUserSettings()->GetTextList("SbieCtrl_RecoverTarget", true);
 	pEntry->m_pTarget->insertItems(pEntry->m_pTarget->count()-1, RecoverTargets);

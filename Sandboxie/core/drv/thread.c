@@ -1139,36 +1139,6 @@ finish:
 
 
 //---------------------------------------------------------------------------
-// Thread_IsProtectedProcess
-//---------------------------------------------------------------------------
-
-NTKERNELAPI BOOLEAN NTAPI PsIsProtectedProcess(_In_ PEPROCESS Process);
-
-_FX BOOLEAN Thread_IsProtectedProcess(HANDLE pid)
-{
-    PEPROCESS ProcessObject;
-    NTSTATUS status;
-    BOOLEAN ret = FALSE;
-
-    //
-    // Check if this process is a protected process,
-    // as protected processes are integral windows processes or trusted antimalware services
-    // we allow such processes to access even confidential sandboxed programs.
-    //
-
-    status = PsLookupProcessByProcessId(pid, &ProcessObject);
-    if (NT_SUCCESS(status)) {
-        
-        ret = PsIsProtectedProcess(ProcessObject);
-
-        ObDereferenceObject(ProcessObject);
-    }
-
-    return ret;
-}
-
-
-//---------------------------------------------------------------------------
 // Thread_CheckObject_CommonEx
 //---------------------------------------------------------------------------
 
@@ -1232,12 +1202,16 @@ _FX ACCESS_MASK Thread_CheckObject_CommonEx(
                         //
 
                         if (protect_process /*&& MyIsProcessRunningAsSystemAccount(cur_pid)*/) {
-                            if ((_wcsicmp(nptr, SBIESVC_EXE) == 0) || (_wcsicmp(nptr, L"csrss.exe") == 0)
+                            if ((_wcsicmp(nptr, SBIESVC_EXE) == 0) 
+                                || Util_IsCsrssProcess(cur_pid)
+                                || Util_IsProtectedProcess(cur_pid)
                                 || (_wcsicmp(nptr, L"conhost.exe") == 0)
-                                || (_wcsicmp(nptr, L"taskmgr.exe") == 0) || (_wcsicmp(nptr, L"sandman.exe") == 0)
-                                || Thread_IsProtectedProcess(cur_pid))
+                                || (_wcsicmp(nptr, L"taskmgr.exe") == 0) || (_wcsicmp(nptr, L"sandman.exe") == 0))
                                 protect_process = FALSE;
                         }
+
+                        if (protect_process && cur_pid == proc2->starter_id && !proc2->initialized)
+                            protect_process = FALSE;
 
                         if (protect_process) {
 

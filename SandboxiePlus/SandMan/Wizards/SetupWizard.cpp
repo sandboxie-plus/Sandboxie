@@ -7,6 +7,7 @@
 #include "Helpers/WinAdmin.h"
 #include <QButtonGroup>
 #include "../QSbieAPI/SbieUtils.h"
+#include "../OnlineUpdater.h"
 
 CSetupWizard::CSetupWizard(int iOldLevel, QWidget *parent)
     : QWizard(parent)
@@ -155,7 +156,10 @@ CIntroPage::CIntroPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Introduction"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    QPixmap Logo = QPixmap(theGUI->m_DarkTheme ? ":/SideLogoDM.png" : ":/SideLogo.png");
+    int Scaling = theConf->GetInt("Options/FontScaling", 100);
+    if(Scaling !=  100) Logo = Logo.scaled(Logo.width() * Scaling / 100, Logo.height() * Scaling / 100);
+    setPixmap(QWizard::WatermarkPixmap, Logo);
 
     QVBoxLayout *layout = new QVBoxLayout;
     QLabel* pTopLabel = new QLabel(tr("Welcome to the Setup Wizard. This wizard will help you to configure your copy of <b>Sandboxie-Plus</b>. "
@@ -246,7 +250,7 @@ CCertificatePage::CCertificatePage(QWidget *parent)
     m_pCertificate->setMaximumSize(QSize(16777215, 73));
     m_pCertificate->setPlaceholderText(
 		"NAME: User Name\n"
-		"LEVEL: ULTIMATE\n"
+		"TYPE: ULTIMATE\n"
 		"DATE: dd.mm.yyyy\n"
 		"UPDATEKEY: 00000000000000000000000000000000\n"
 		"SIGNATURE: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
@@ -255,6 +259,12 @@ CCertificatePage::CCertificatePage(QWidget *parent)
     connect(m_pCertificate, SIGNAL(textChanged()), this, SIGNAL(completeChanged()));
     registerField("useCertificate", m_pCertificate, "plainText");
     
+    layout->addWidget(new QLabel(tr("Retrieve certificate using Serial Number:")));
+
+    m_pSerial = new QLineEdit();
+    m_pSerial->setPlaceholderText("SBIE_-_____-_____-_____-_____");
+    layout->addWidget(m_pSerial);
+
     m_pEvaluate = new QCheckBox(tr("Start evaluation without a certificate for a limited period of time."));
     if (CERT_IS_TYPE(g_CertInfo, eCertEvaluation)) {
         m_pEvaluate->setEnabled(false);
@@ -305,6 +315,9 @@ void CCertificatePage::initializePage()
 
         m_pEvaluate->setVisible(false);
     }
+
+    m_pSerial->setVisible(true);
+    m_pSerial->clear();
 }
 
 int CCertificatePage::nextId() const
@@ -323,12 +336,39 @@ bool CCertificatePage::isComplete() const
     return QWizardPage::isComplete();
 }
 
+void CCertificatePage::OnCertData(const QByteArray& Certificate, const QVariantMap& Params)
+{
+    if (!Certificate.isEmpty()) {
+        m_pSerial->clear();
+        m_pCertificate->setPlainText(Certificate);
+        wizard()->next();
+    }
+    else {
+        QString Message = tr("Failed to retrieve the certificate.");
+        Message += tr("\nError: %1").arg(Params["error"].toString());
+        QMessageBox::critical(this, "Sandboxie-Plus", Message);
+    }
+}
+
 bool CCertificatePage::validatePage()
 {
-    QByteArray Certificate = m_pCertificate->toPlainText().toUtf8();
-    if (!m_pEvaluate->isChecked() && !Certificate.isEmpty() && g_Certificate != Certificate) {
-		return CSettingsWindow::ApplyCertificate(Certificate, this);
+    if (m_pEvaluate->isChecked())
+        return true;
+
+    QString Serial = m_pSerial->text();
+    if (!Serial.isEmpty()) {
+        SB_PROGRESS Status = theGUI->m_pUpdater->GetSupportCert(Serial, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
+	    if (Status.GetStatus() == OP_ASYNC) {
+		    theGUI->AddAsyncOp(Status.GetValue());
+            Status.GetValue()->ShowMessage(tr("Retrieving certificate..."));
+	    }
+        return false;
     }
+
+    QByteArray Certificate = m_pCertificate->toPlainText().toUtf8();
+    if (!Certificate.isEmpty() && Certificate != g_Certificate)
+		return CSettingsWindow::ApplyCertificate(Certificate, this);
+
     return true;
 }
 
@@ -598,8 +638,8 @@ CSBUpdate::CSBUpdate(QWidget *parent)
     layout->addWidget(m_pIssues, row++, 1, 1, rows-1);
     registerField("updateIssues", m_pIssues);
 
-    m_pAddons = new QCheckBox(tr("Keep the list of optional Addon components up to date"));
-    m_pAddons->setToolTip(tr("Check for latest available addons."));
+    m_pAddons = new QCheckBox(tr("Keep the list of optional Add-on components up to date"));
+    m_pAddons->setToolTip(tr("Check for latest available add-ons."));
     layout->addWidget(m_pAddons, row++, 1, 1, rows-1);
     registerField("updateAddons", m_pAddons);
 
@@ -669,7 +709,10 @@ CFinishPage::CFinishPage(QWidget *parent)
     : QWizardPage(parent)
 {
     setTitle(tr("Complete your configuration"));
-    setPixmap(QWizard::WatermarkPixmap, QPixmap(":/SideLogo.png"));
+    QPixmap Logo = QPixmap(theGUI->m_DarkTheme ? ":/SideLogoDM.png" : ":/SideLogo.png");
+    int Scaling = theConf->GetInt("Options/FontScaling", 100);
+    if(Scaling !=  100) Logo = Logo.scaled(Logo.width() * Scaling / 100, Logo.height() * Scaling / 100);
+    setPixmap(QWizard::WatermarkPixmap, Logo);
 
     QVBoxLayout *layout = new QVBoxLayout;
 

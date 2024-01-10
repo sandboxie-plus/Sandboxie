@@ -2,11 +2,5 @@
 * Missing Messages in Text-Turkish-1055.txt
 *==========
 
-2180;pop;inf;01
-SBIE2180 LowLevel.dll error %2
-.
-
-2181;pop;inf;01
-SBIE2181 LowLevel.dll detour failed to load SbieDll.dll into target process.
-.
+There are no missing messages.
 

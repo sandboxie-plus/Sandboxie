@@ -1432,9 +1432,9 @@ _FX NTSTATUS File_MergeDummy(
                 WCHAR* FakePath = Dll_AllocTemp(TruePathLen * sizeof(WCHAR) + 1 + name_len * sizeof(WCHAR) + 10);
 
                 wmemcpy(FakePath, TruePath, TruePathLen);
-                FakePath[TruePathLen++] = L'\\';
-                FakePath[TruePathLen] = L'\0';
-                end = &FakePath[TruePathLen];
+                FakePath[TruePathLen] = L'\\';
+                end = &FakePath[TruePathLen + 1];
+                *end = L'\0';
                 wmemcpy(end, ptr, name_len);
                 end[name_len] = L'\0';
 

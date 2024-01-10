@@ -58,9 +58,7 @@ struct _PROCESS {
     // process id
 
     HANDLE pid;
-#ifdef DRV_BREAKOUT
     HANDLE starter_id;
-#endif
 
     // process pool.  created on process creation.  it is freed in its
     // entirety when the process terminates

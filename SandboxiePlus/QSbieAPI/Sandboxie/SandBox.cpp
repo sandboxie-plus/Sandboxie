@@ -125,6 +125,13 @@ CSandBox::~CSandBox()
 
 void CSandBox::UpdateDetails()
 {
+	auto res = m_pAPI->ImBoxQuery(m_RegPath);
+	if (res.IsError()) {
+		m_Mount.clear();
+		return;
+	}
+	QVariantMap Info = res.GetValue();
+	m_Mount = Info["DiskRoot"].toString();
 }
 
 void CSandBox::SetBoxPaths(const QString& FilePath, const QString& RegPath, const QString& IpcPath)
@@ -151,6 +158,28 @@ SB_STATUS CSandBox::RunSandboxed(const QString& Command)
 SB_STATUS CSandBox::TerminateAll()
 {
 	return m_pAPI->TerminateAll(m_Name);
+}
+
+SB_STATUS CSandBox::SetSuspendedAll(bool bSuspended)
+{
+	return m_pAPI->SetSuspendedAll(m_Name, bSuspended);
+}
+
+void CSandBox::OpenBox()
+{
+	HANDLE hFile = CreateFileW((LPCWSTR)m_FilePath.utf16(), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+	if (hFile != INVALID_HANDLE_VALUE) 
+	{
+		WCHAR targetPath[MAX_PATH];
+		if(GetFinalPathNameByHandleW(hFile, targetPath, MAX_PATH, FILE_NAME_NORMALIZED | VOLUME_NAME_NT))
+			m_FileRePath = QString::fromWCharArray(targetPath);
+		CloseHandle(hFile);
+	}
+}
+
+void CSandBox::CloseBox() 
+{
+	m_FileRePath.clear();
 }
 
 bool CSandBox::IsEmpty() const
@@ -258,8 +287,14 @@ SB_STATUS CSandBox::RenameBox(const QString& NewName)
 				SetText("FileRootPath", FilePath.join("\\") + "\\%SANDBOX%");
 		}
 	}
-	
-	return RenameSection(NewName);
+
+	QString OldName = m_Name;
+	Status = RenameSection(NewName);
+	if (!Status.IsError()) {
+		CSandBoxPtr pBox = m_pAPI->m_SandBoxes.take(OldName.toLower());
+		if (pBox)m_pAPI->m_SandBoxes.insert(NewName.toLower(), pBox);
+	}
+	return Status;
 }
 
 SB_STATUS CSandBox::RemoveBox()
@@ -773,4 +808,19 @@ SB_STATUS CSandBox::SetSnapshotInfo(const QString& ID, const QString& Name, cons
 		ini.setValue("Snapshot_" + ID + "/Description", Description);
 
 	return SB_OK;
+}
+
+SB_STATUS CSandBox::ImBoxCreate(quint64 uSizeKb, const QString& Password)
+{
+	return m_pAPI->ImBoxCreate(this, uSizeKb, Password);
+}
+
+SB_STATUS CSandBox::ImBoxMount(const QString& Password, bool bProtect, bool bAutoUnmount)
+{
+	return m_pAPI->ImBoxMount(this, Password, bProtect, bAutoUnmount);
+}
+
+SB_STATUS CSandBox::ImBoxUnmount()
+{
+	return m_pAPI->ImBoxUnmount(this);
 }

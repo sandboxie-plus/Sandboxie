@@ -379,8 +379,14 @@ _FX BOOLEAN MyIsCallerSigned(void)
 
 NTSTATUS KphValidateCertificate();
 
+extern wchar_t g_uuid_str[40];
+void InitFwUuid();
+
 _FX NTSTATUS MyValidateCertificate(void)
 {
+    if(!*g_uuid_str)
+        InitFwUuid();
+
     NTSTATUS status = KphValidateCertificate();
 
     if (status == STATUS_ACCOUNT_EXPIRED)
@@ -437,6 +443,66 @@ retry:
     }
 
     return pid;
+}
+
+
+//---------------------------------------------------------------------------
+// Util_IsCsrssProcess
+//---------------------------------------------------------------------------
+
+NTKERNELAPI PCHAR NTAPI PsGetProcessImageFileName(_In_ PEPROCESS Process);
+
+_FX BOOLEAN Util_IsCsrssProcess(HANDLE pid)
+{
+    PEPROCESS ProcessObject;
+    NTSTATUS status;
+    PCHAR ImageFileName;
+    BOOLEAN ret = FALSE;
+
+    if (!MyIsProcessRunningAsSystemAccount(pid))
+        return FALSE;
+
+    status = PsLookupProcessByProcessId(pid, &ProcessObject);
+    if (NT_SUCCESS(status)) {
+
+        ImageFileName = PsGetProcessImageFileName(ProcessObject);
+
+        ret = (_stricmp(ImageFileName, "csrss.exe") == 0);
+
+        ObDereferenceObject(ProcessObject);
+    }
+
+    return ret;
+}
+
+
+//---------------------------------------------------------------------------
+// Util_IsProtectedProcess
+//---------------------------------------------------------------------------
+
+NTKERNELAPI BOOLEAN NTAPI PsIsProtectedProcess(_In_ PEPROCESS Process);
+
+_FX BOOLEAN Util_IsProtectedProcess(HANDLE pid)
+{
+    PEPROCESS ProcessObject;
+    NTSTATUS status;
+    BOOLEAN ret = FALSE;
+
+    //
+    // Check if this process is a protected process,
+    // as protected processes are integral windows processes or trusted antimalware services
+    // we allow such processes to access even confidential sandboxed programs.
+    //
+
+    status = PsLookupProcessByProcessId(pid, &ProcessObject);
+    if (NT_SUCCESS(status)) {
+        
+        ret = PsIsProtectedProcess(ProcessObject);
+
+        ObDereferenceObject(ProcessObject);
+    }
+
+    return ret;
 }
 
 

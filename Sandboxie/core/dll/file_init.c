@@ -166,7 +166,7 @@ _FX BOOLEAN File_Init(void)
 			return FALSE;
 	}
 
-    if (Dll_OsBuild >= 6000) { // needed for File_GetFileName used indirectly by File_InitRecoverFolders
+    if (Dll_OsBuild >= 6000) {
 
         void *GetFinalPathNameByHandleW =
             GetProcAddress(Dll_KernelBase ? Dll_KernelBase : Dll_Kernel32,
@@ -175,6 +175,39 @@ _FX BOOLEAN File_Init(void)
             SBIEDLL_HOOK(File_,GetFinalPathNameByHandleW);
         }
     }
+
+    
+    Dll_BoxFileDosPath = Dll_Alloc((Dll_BoxFilePathLen + 1) * sizeof(WCHAR));
+    wcscpy((WCHAR *)Dll_BoxFileDosPath, Dll_BoxFilePath);
+    if (!SbieDll_TranslateNtToDosPath((WCHAR *)Dll_BoxFileDosPath) /*|| _wcsnicmp(Dll_BoxFileDosPath, L"\\\\.\\", 4) == 0*/)
+    {
+        Dll_Free((WCHAR *)Dll_BoxFileDosPath);
+        Dll_BoxFileDosPath = NULL;
+
+        //
+        // the root is redirected with a reparse point and the target device does not have a drvie letter
+        // implement workaround, see SbieDll_TranslateNtToDosPath
+        //
+
+        ULONG BoxFileRawPathLen;
+        if (NT_SUCCESS(SbieApi_QueryProcessInfoStr(0, 'root', NULL, &BoxFileRawPathLen))) 
+        {
+            Dll_BoxFileRawPath = Dll_AllocTemp(BoxFileRawPathLen);
+            if (NT_SUCCESS(SbieApi_QueryProcessInfoStr(0, 'root', (WCHAR*)Dll_BoxFileRawPath, &BoxFileRawPathLen))) 
+            {
+                Dll_BoxFileRawPathLen = wcslen(Dll_BoxFileRawPath);
+
+                Dll_BoxFileDosPath = Dll_Alloc(BoxFileRawPathLen);
+                wcscpy((WCHAR*)Dll_BoxFileDosPath, Dll_BoxFileRawPath);
+                if (!SbieDll_TranslateNtToDosPath((WCHAR*)Dll_BoxFileDosPath)) {
+                    Dll_Free((WCHAR *)Dll_BoxFileDosPath);
+                    Dll_BoxFileDosPath = NULL;
+                }
+            }
+        }
+    }
+    if(Dll_BoxFileDosPath)
+        Dll_BoxFileDosPathLen = wcslen(Dll_BoxFileDosPath);
 
 	File_InitSnapshots();
 
@@ -422,6 +455,9 @@ _FX BOOLEAN File_InitDrives(ULONG DriveMask)
 
         File_TempLinks = Dll_Alloc(sizeof(LIST));
         List_Init(File_TempLinks);
+
+        File_GuidLinks = Dll_Alloc(sizeof(LIST));
+        List_Init(File_GuidLinks);
 
         CallInitLinks = TRUE;
 
@@ -702,6 +738,22 @@ _FX void File_InitLinks(THREAD_DATA *TlsData)
     MOUNTMGR_VOLUME_PATHS *Output2;
     ULONG index1;
     WCHAR save_char;
+    FILE_GUID* guid;
+    ULONG alloc_len;
+
+    //
+    // cleanup old guid entries
+    //
+
+    EnterCriticalSection(File_DrivesAndLinks_CritSec);
+    guid = List_Head(File_GuidLinks);
+    while (guid) {
+        FILE_LINK *next_guid = List_Next(guid);
+        List_Remove(File_GuidLinks, guid);
+        Dll_Free(guid);
+        guid = next_guid;
+    }
+    LeaveCriticalSection(File_DrivesAndLinks_CritSec);
 
     //
     // open mount point manager device
@@ -757,10 +809,30 @@ _FX void File_InitLinks(THREAD_DATA *TlsData)
         ULONG VolumeNameLen =
             MountPoint->SymbolicLinkNameLength / sizeof(WCHAR);
 
+        WCHAR text[256];
+        Sbie_snwprintf(text, 256, L"Found mountpoint: %.*s <-> %.*s", VolumeNameLen, VolumeName, DeviceNameLen, DeviceName);
+        SbieApi_MonitorPut2(MONITOR_DRIVE | MONITOR_TRACE, text, FALSE);
+
         if (VolumeNameLen != 48 && VolumeNameLen != 49)
             continue;
         if (_wcsnicmp(VolumeName, L"\\??\\Volume{", 11) != 0)
             continue;
+
+        //
+        // store guid to nt device association
+        //
+
+        alloc_len = sizeof(FILE_GUID)
+              + (VolumeNameLen + 1) * sizeof(WCHAR);
+        guid = Dll_Alloc(alloc_len);
+        wmemcpy(guid->guid, &VolumeName[10], 38);
+        guid->guid[38] = 0;
+        guid->len = DeviceNameLen;
+        wmemcpy(guid->path, DeviceName, DeviceNameLen);
+        guid->path[DeviceNameLen] = 0;
+        EnterCriticalSection(File_DrivesAndLinks_CritSec);
+        List_Insert_Before(File_GuidLinks, NULL, guid);
+        LeaveCriticalSection(File_DrivesAndLinks_CritSec);
 
         //
         // get all the DOS paths where the volume is mounted
@@ -786,7 +858,7 @@ _FX void File_InitLinks(THREAD_DATA *TlsData)
         save_char = DeviceName[DeviceNameLen];
         DeviceName[DeviceNameLen] = L'\0';
 
-        if (Output2->MultiSzLength) {
+        if (Output2->MultiSzLength && *Output2->MultiSz) {
 
             WCHAR *DosPath = Output2->MultiSz;
             ULONG DosPathLen = wcslen(DosPath);
@@ -818,10 +890,10 @@ _FX void File_InitLinks(THREAD_DATA *TlsData)
                 //
 
                 WCHAR *FirstDosPath = DosPath;
-                File_AddLink(TRUE, DeviceName, FirstDosPath);
+                File_AddLink(TRUE, FirstDosPath, DeviceName);
                 DosPath += DosPathLen + 1;
                 while (*DosPath) {
-                    File_AddLink(TRUE, DosPath, FirstDosPath);
+                    File_AddLink(TRUE, DosPath, DeviceName);
                     DosPath += wcslen(DosPath) + 1;
                 }
             }

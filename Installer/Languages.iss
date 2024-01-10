@@ -67,8 +67,8 @@ english.UninstallTaskLabel5=Remove configuration files and &sandboxes%nSelect th
 english.RefreshBuild=Download latest Templates.ini and translations
 
 ; Chinese Simplified
-ChineseSimplified.AddSandboxedMenu=添加“在沙盒中运行”菜单
-ChineseSimplified.AddSandboxedBrowser=为用 Sandboxie 启动网页浏览器添加桌面快捷方式
+ChineseSimplified.AddSandboxedMenu=添加“在沙盒中运行”右键菜单
+ChineseSimplified.AddSandboxedBrowser=添加用于在 Sandboxie 下启动网页浏览器的桌面快捷方式
 ChineseSimplified.SandboxieStartMenu1=在沙盒中运行程序
 ChineseSimplified.SandboxieStartMenu2=在沙盒中运行网页浏览器
 ChineseSimplified.SandboxieStartMenu3=Sandboxie 开始菜单
@@ -80,12 +80,12 @@ ChineseSimplified.CustomPageInstallMode=在这台计算机上安装 {#MyAppName}
 ChineseSimplified.CustomPageUpgradeMode=更新当前已安装的 {#MyAppName}
 ChineseSimplified.CustomPagePortableMode=提取全部文件到指定目录供便携化使用
 ChineseSimplified.RequiresWin7OrLater=Sandboxie-Plus 需要 Windows 7 或更高版本。
-ChineseSimplified.ClassicFound=检测到已安装 Sandboxie 原版，继续安装必须先将其卸载，是否开始卸载？
-ChineseSimplified.RunSandboxedMenu=在沙盒中运行(&S)
+ChineseSimplified.ClassicFound=检测到已安装 Sandboxie Classic 版本，如要继续安装必须先将其卸载，是否开始卸载？
+ChineseSimplified.RunSandboxedMenu=在 Sandboxie 中运行(&S)
 ChineseSimplified.UninstallTaskLabel1=选择卸载方式
 ChineseSimplified.UninstallTaskLabel2=要如何卸载 Sandboxie-Plus？
 ChineseSimplified.UninstallTaskLabel3=保留配置文件和所有沙盒(&K)%n如果您打算保留当前配置并重新安装 Sandboxie-Plus，请选择此项。
-ChineseSimplified.UninstallTaskLabel4=移除配置文件(&C)%n选择此选项将移除 Sandboxie.ini 和 Sandboxie-Plus.ini 配置文件，但会保留您的沙盒。
+ChineseSimplified.UninstallTaskLabel4=移除配置文件(&C)%n选择此选项将移除 Sandboxie.ini 和 Sandboxie-Plus.ini 配置文件，但会保留您在 Sandboxie-Plus 中创建的沙盒。
 ChineseSimplified.UninstallTaskLabel5=移除配置文件和所有沙盒(&S)%n选择此选项将会移除所有配置文件和沙盒，包括 FileRootPath 所定义的路径下的 Sandbox 文件夹。
 ChineseSimplified.RefreshBuild=下载最新的 Templates.ini 模板和翻译
 
@@ -365,12 +365,12 @@ spanish.UninstallTaskLabel4=Eliminar archivos de &configuración%nSeleccione est
 spanish.UninstallTaskLabel5=Eliminar archivos de configuración y las &sandboxes%nSeleccione esta opción para eliminar todos los archivos de configuración y las sandboxes, incluida la carpeta Sandbox ubicada en rutas personalizadas mediante FileRootPath.
 
 ; Swedish
-swedish.AddSandboxedMenu=Lägg till - Kör sandlådad, till snabbmenyn
-swedish.AddSandboxedBrowser=Lägg till skrivbordsgenväg för att starta webläsaren under Sandboxie
+swedish.AddSandboxedMenu=Lägg till Kör sandlådad, till snabbmenyn
+swedish.AddSandboxedBrowser=Lägg till skrivbordsgenväg för att starta webbläsaren under Sandboxie
 swedish.SandboxieStartMenu1=Kör valfritt program sandlådat
-swedish.SandboxieStartMenu2=Kör webläsaren sandlådad
+swedish.SandboxieStartMenu2=Kör webbläsaren sandlådad
 swedish.SandboxieStartMenu3=Sandboxie startmeny
-swedish.SandboxedBrowser=Sandlådad webläsare
+swedish.SandboxedBrowser=Sandlådad webbläsare
 swedish.CustomPageLabel1=Välj installationstyp
 swedish.CustomPageLabel2=Hur ska installeringen ske
 swedish.CustomPageLabel3=Välj installationsläget
@@ -384,7 +384,7 @@ swedish.UninstallTaskLabel1=Välj avinstallationstyp
 swedish.UninstallTaskLabel2=Hur vill du avinstallera Sandboxie-Plus?
 swedish.UninstallTaskLabel3=&Behåll konfigureringsfiler och sandlådor%nDetta är det rekommenderade alternativet om du tänker installera om Sandboxie-Plus, men vill behålla dina konfigurationsfiler och sandlådor.
 swedish.UninstallTaskLabel4=Ta bort &konfigurationsfilerna%nVälj detta alternativ för att ta bort Sandboxie.ini och Sandboxie-Plus.ini:s konfigurationsfiler men behålla sandlådorna oförändrade.
-swedish.UninstallTaskLabel5=Ta bort konfigurationsfiler och &sandlådor%nVälj detta alternativ för att ta bort alla konfigurationsfiler och sandlådor, även sandlådemappen lokaliserad i anpassade sökvägar med filrotsökvägen.
+swedish.UninstallTaskLabel5=Ta bort konfigurationsfiler och &sandlådor%nVälj detta alternativ för att ta bort alla konfigurationsfiler och sandlådor, även sandlådemappen lokaliserad i anpassade sökvägar med fil-root sökvägen.
 
 ; Turkish
 turkish.AddSandboxedMenu=Bağlam menüsüne "Korumalı Alanda Çalıştır" seçeneği ekle

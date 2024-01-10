@@ -84,8 +84,8 @@ bool CBoxObject::MakeShortcut(const QString& Target, const QVariantMap& Options)
         location = QStandardPaths::ApplicationsLocation;
     else if (Location.compare("documents", Qt::CaseInsensitive) == 0)
         location = QStandardPaths::DocumentsLocation;
+    QString Name = Options["name"].toString();
     if (location != -1) {
-        QString Name = Options["name"].toString();
         QString Path = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation).replace("/", "\\");
         if (Target == "default_browser")
             Path += "\\" + CSettingsWindow::tr("Sandboxed Web Browser") + ".lnk";
@@ -96,7 +96,7 @@ bool CBoxObject::MakeShortcut(const QString& Target, const QVariantMap& Options)
         QString StartExe = theAPI->GetSbiePath() + "\\SandMan.exe";
         return CSbieUtils::CreateShortcut(StartExe, Path, "", getName(), Target);
     }
-    return CSbieView::CreateShortcut(Target, getName(), Options["iconPath"].toString(), Options["iconIndex"].toInt(), Options["workDir"].toString());
+    return CSbieView::CreateShortcutEx(Target, getName(), Name, Options["iconPath"].toString(), Options["iconIndex"].toInt(), Options["workDir"].toString());
 }
 
 void CSBoxObject::ApplyChanges(bool bApply)

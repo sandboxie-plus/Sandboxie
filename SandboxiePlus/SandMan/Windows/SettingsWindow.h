@@ -2,16 +2,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_SettingsWindow.h"
-#include <QProxyStyle>
 #include "../../MiscHelpers/Common/SettingsWidgets.h"
-
-class CustomTabStyle : public QProxyStyle {
-public:
-	CustomTabStyle(QStyle* style = 0) : QProxyStyle(style) {}
-
-	QSize sizeFromContents(ContentsType type, const QStyleOption* option, const QSize& size, const QWidget* widget) const;
-	void drawControl(ControlElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget) const;
-};
 
 void FixTriStateBoxPallete(QWidget* pWidget);
 
@@ -64,6 +55,10 @@ public:
 
 	static void LoadCertificate(QString CertPath = QString());
 
+	static QString GetCertType();
+	static QColor GetCertColor();
+	static QString GetCertLevel();
+
 signals:
 	void OptionsChanged(bool bRebuildUI = false);
 	void Closed();
@@ -103,6 +98,8 @@ private slots:
 
 	void OnBrowse();
 
+	void OnRamDiskChange();
+
 	void OnProtectionChange();
 	void OnSetPassword();
 
@@ -110,6 +107,9 @@ private slots:
 	void OnAddWarnProg();
 	void OnAddWarnFolder();
 	void OnDelWarnProg();
+
+	void OnVolumeChanged();
+	void UpdateDrives();
 
 	void OnCompatChanged() { m_CompatChanged = true; OnOptChanged(); }
 	void OnTemplateClicked(QTreeWidgetItem* pItem, int Column);
@@ -131,6 +131,9 @@ private slots:
 
 	void CertChanged();
 	void UpdateCert();
+	void OnGetCert();
+	void OnCertData(const QByteArray& Certificate, const QVariantMap& Params);
+	void ApplyCert();
 	void UpdateUpdater();
 
 	void GetUpdates();
@@ -168,6 +171,7 @@ protected:
 	QString m_NewPassword;
 	bool	m_MessagesChanged;
 	bool	m_WarnProgsChanged;
+	bool    m_VolumeChanged;
 	bool	m_CompatChanged;
 	bool	m_RunChanged;
 	bool	m_ProtectionChanged;

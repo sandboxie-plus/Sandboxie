@@ -48,7 +48,7 @@ const GUID DETOUR_EXE_HELPER_GUID = { /* ea0251b9-5cde-41b5-98d0-2af4a26b0fee */
 
 //////////////////////////////////////////////////////////////////////////////
 //
-// Enumate through modules in the target process.
+// Enumerate through modules in the target process.
 //
 static BOOL WINAPI LoadNtHeaderFromProcess(HANDLE hProcess,
                                            HMODULE hModule,

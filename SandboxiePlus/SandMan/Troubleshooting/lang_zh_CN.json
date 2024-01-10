@@ -1,0 +1,80 @@
+﻿{
+"Description Text...": "选择适合你目前问题的解释说明...",
+"Fix current issues": "解决当前的问题",
+"Fix issues with sandboxing": "解决沙盒的问题",
+"An Application does not work properly when sandboxed": "应用程序在沙盒内时无法正常工作",
+"Issues with a web browser": "网络浏览器问题",
+"Perform Sandbox maintenance": "执行沙盒维护操作",
+"Fix issues with the UI or Shell": "解决 用户界面（UI） 或 Shell 问题",
+
+"Yes": "是",
+"No": "否",
+
+"App compatibility checker": "应用程序兼容性检查器",
+"This script check which app compatibility templates needs to be enabled": "此检查步骤需要启用问题应用的兼容性模板",
+"Loaded %1 templates": "已加载 %1 个模板",
+
+"Browser shortcut is missing from the desktop": "桌面上缺少沙盒中浏览器的快捷方式",
+"This procedure will add a browser shortcut to the desktop": "此步骤会将沙盒中浏览器的快捷方式添加到桌面",
+"Default Browser": "默认浏览器",
+"Another": "其他",
+"Select Browser": "选择浏览器",
+"Select Sandbox": "选择一个沙盒",
+"Select which browser you want to create a shortcut for and in what box": "选择要在哪个沙盒中为哪个浏览器创建快捷方式",
+"Select Browser Path": "选择浏览器路径",
+
+"Explorer Context Menu extension does not work": "资源管理器上下文菜单扩展不工作",
+"This procedure will re install the shell integration": "此步骤将重新安装 shell 集成",
+"Add Run Sandboxed": "安装沙盒内的",
+"Add Run Unsandboxed": "安装沙盒外的",
+"Install legacy shell extensions": "安装旧的 shell 扩展",
+"Select which shell options should be reinstalled": "选择应重新安装的 shell 选项",
+
+"Failed to install application into a sandbox": "无法将应用程序安装到沙盒中",
+"Enter Installer Path": "输入安装程序路径",
+"Select a sandbox to install into": "选择将要安装到的沙盒",
+"This box has DropAdminRights enabled, preventing execution of installers. Do you want to disable this restriction, that will reduce the security level.": "此框启用了 撤销管理员和 Power User 用户组的权限 选项，阻止了安装程序执行。要禁用此限制吗？这将降低安全级别。",
+"Disable DropAdminRights": "关闭 撤销管理员和 Power User 用户组的权限 选项",
+"Enable FakeAdminRights": "启用 使应用程序认为自己已被提权运行 选项",
+"running installer, pid: %1 press NEXT once it finishes to continue": "正在运行安装程序，（pid: %1） 完成后按 下一步 继续",
+"Was the issue resolved?": "问题解决了吗?",
+
+"Webcam or Sound does not work when sandboxed": "网络摄像头或声音在沙盒中无法使用/不能播放",
+"To enable webcam support on Windows 11, the isolation level must be reduced. \nIf you want to proceed, please press NEXT and select a sandbox to modify. \n": "要在 Windows 11 上启用网络摄像头支持，必须降低隔离级别。\n如果要继续，请按 下一步 并选择要修改的沙盒。\n",
+"\nPlease note that this required preset works only with a valid supporter certificate!": "\n请注意，此必需的预设仅适用于有效的支持者证书！",
+"Select which box to turn into a reduced isolation app compartment box.": "选择将哪个沙盒转换为降低的隔离级别的沙盒。",
+"The mitigation has been applied please try out the web cam in %1 and indicate if the issue has been resolved.": "已应用解决措施，请试用 %1 中的网络摄像头，并指示问题是否已解决。",
+
+"Select affected sandbox": "选择受影响的沙盒",
+"Enter Process Name": "输入进程名称",
+
+"Internet Access restrictions are in effect for the sandbox in which the program is running. The program is prohibited from accessing the Internet.": "Internet 访问限制 在运行该程序的沙盒被开启，因此该程序被禁止访问互联网。",
+
+"Start/Run restrictions are in effect for the sandbox in which the program is running. The program is prohibited from starting or running.": "启动/运行限制 在运行该程序的沙盒被开启，该程序被禁止启动或运行。",
+
+"Failures to load SbieDll.dll when encountered by Chrome, or another software employing app containers, it is often caused by invalid DACL entries for the Sandboxie home directory. This mitigation measure will fix them, for this reason it will prompt for admin privileges which need to be granted for kmdutil.exe.": "Chrome 或其他使用应用容器的软件遇到无法加载 SbieDll.dll 时，通常是由 Sandboxie 主目录的无效 DACL 条目引起的。此解决措施将修复它们，这将提示需要为 kmdutil.exe 授予管理员权限。",
+"The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "DACL 条目 已调整，请尝试再次运行应用程序，并指示问题是否已解决。",
+"DACLs fix did not resolve the issue": "DACL 条目修复 未解决问题",
+
+"The message indicates that Sandboxie was unable to start one of the helper programs SandboxieRpcSs or SandboxieDcomLaunch. The name noted in the message can be rpcss or dcomlaunch.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "该消息指示 Sandboxie 无法启动帮助程序 SandboxieRpcSs 或 SandboxieDcomLaunch 之一。消息中记下的名称可为 rpcss 或 dcomlaunch。\n\n您可以在下一页上提交问题报告，以帮助我们分析问题。",
+
+"Sandboxie was not able to execute one of its own programs. Check access permissions to the Sandboxie installation folder and/or reinstall Sandboxie.\n\nPossible Causes:\n1. Sandboxie was configured to block access to the folder containing its program files.\n2. A third-party (HIPS) security software was configured to block the execution of the program mentioned in the message.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Sandboxie 无法执行自己的程序之一。检查对 Sandboxie 安装文件夹 是否有访问权限和/或重新安装 Sandboxie。\n\n可能的原因:\n1. Sandboxie 被配置为阻止对包含其程序文件的文件夹的访问。\n2. 配置了第三方(HIPS)安全软件来阻止消息中提到的程序的执行。\n\n您可以在下一页提交问题报告，以帮助我们分析问题。",
+
+"Do you want to open the box option dialog to change this preset?": "是否要打开沙盒选项对话框来更改此预设？",
+"No, it is fine as it is": "不，就这样",
+"No, but I want to report a bug": "不，我要报告错误",
+
+"The message %1 is caused by the file migration limit being reached.": "消息 %1 是因为文件迁移请求达到限制引起的。",
+
+"It seems you are using a non-administrative user account on a system with enabled parental controls, this is known to be incompatible with Sandboxie.\nYou have the following options to resolve the issue.": "您似乎在启用了家长控制的系统上使用非管理用户帐户，显而易见，这与 Sandboxie 不兼容。\n您可以通过以下选项来解决此问题。",
+
+"Sbie Message Code": "Sbie 消息代码",
+"Name affected process": "受影响进程的名称",
+"Please enter the SBIEMSG ID you have encountered.": "请输入您遇到的 SBIEMSG ID。",
+"There is no automated troubleshooting available for SBIE%1 yet.<br />": "SBIE%1 暂时还没有可用的自动故障排除方法。<br />",
+"The full message text is: %1<br />": "完整的消息文本是: %1<br />",
+"Visit out <a href=\"%1\">online-documentation</a> to learn more about this, and other sbie messages.": "访问 <a href=\"%1\">在线文档</a> to 了解更多关于这个的信息，以及其他 Sbie 信息。",
+"Would you like to collect some logs to help us resolve the issue.": "是否要收集一些日志来帮助我们解决问题？",
+"Now please run your application again to trigger the Sbie message.<br /><br />": "现在，请再次运行您的应用程序以触发 Sbie 消息。<br /><br />",
+"Press NEXT when you are done collecting logs.": "完成日志收集后按 下一步 。"
+}

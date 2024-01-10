@@ -174,8 +174,12 @@ void CScriptManager::LoadIssues(const QString& IssueDir)
         Translation = ReadFileAsString(IssueDir + "lang_" + LangAux + ".json");
     }
 
-    if(!Translation.isEmpty())
-        m_Translation = QJsonDocument::fromJson(Translation.toUtf8()).toVariant().toMap();
+    if (!Translation.isEmpty()) {
+        QJsonParseError error;
+        m_Translation = QJsonDocument::fromJson(Translation.toUtf8(), &error).toVariant().toMap();
+        if (m_Translation.isEmpty())
+            qDebug() << error.errorString() << Translation.mid(error.offset, 100);
+    }
 }
 
 QString CScriptManager::GetIssueDir(C7zFileEngineHandler& IssueFS, QDateTime* pDate)

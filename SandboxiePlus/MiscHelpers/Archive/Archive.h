@@ -16,6 +16,12 @@
 #define ERR_7Z_PASSWORD_REQUIRED	5
 #define ERR_7Z_UNSUPPORTED_FORMAT	6
 
+struct SCompressParams
+{
+	int iLevel = 0;
+	bool bSolid = false;
+};
+
 class MISCHELPERS_EXPORT CArchive
 {
 public:
@@ -34,7 +40,7 @@ public:
 	bool						Extract(QMap<int, QIODevice*> *FileList, bool bDelete = true);
 	bool						Close();
 
-	bool						Update(QMap<int, QIODevice*> *FileList, bool bDelete = true, int Level = 0);
+	bool						Update(QMap<int, QIODevice*> *FileList, bool bDelete = true, const SCompressParams* Params = NULL);
 
 	int							AddFile(QString Path);
 	int							FileCount()								{return m_Files.count();}

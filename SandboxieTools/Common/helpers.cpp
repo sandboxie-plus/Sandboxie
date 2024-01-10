@@ -131,3 +131,105 @@ void DbgPrint(const wchar_t* format, ...)
 
     va_end(va_args);
 }
+
+std::multimap<std::wstring, std::wstring> GetArguments(const std::wstring& Arguments, wchar_t Separator, wchar_t Assigner, std::wstring* First, bool bLowerKeys, bool bReadEsc)
+{
+    std::multimap<std::wstring, std::wstring> ArgumentList;
+
+    bool bReadValue = false;
+    std::wstring Name;
+    std::wstring Value;
+    wchar_t Prime = L'\0';
+    bool bEsc = false;
+    for(size_t i = 0; i < Arguments.size(); i++)
+    {
+        wchar_t Char = Arguments.at(i);
+
+        if(Prime != L'\0') // inside a string
+        {
+            if(bEsc) // ESC sequence handling
+            {
+                switch(Char)
+                {
+                    case L'\\':	Value += L'\\';	break;
+                    case L'\'':	Value += L'\'';	break;
+                    case L'\"':	Value += L'\"';	break;
+                    case L'a':	Value += L'\a';	break;
+                    case L'b':	Value += L'\b';	break;
+                    case L'f':	Value += L'\f';	break;
+                    case L'n':	Value += L'\n';	break;
+                    case L'r':	Value += L'\r';	break;
+                    case L't':	Value += L'\t';	break;
+                    case L'v':	Value += L'\v';	break;
+                    default:	Value += L'?';	break;
+                }
+                bEsc = false;
+            }
+            else if(bReadEsc && Char == L'\\')
+                bEsc = true;
+            else if(Char == Prime) // end of the string
+                Prime = L'\0';
+            else
+            {
+                if(bReadValue)
+                    Value += Char;
+                else
+                    Name += Char;
+            }
+            continue;
+        }
+        else if(Char == L'"' || Char == L'\'') // begin of a string
+        {
+            Prime = Char;
+            continue;
+        }
+
+        if(/*Char == L' ' ||*/ Char == L'\t')
+            continue;
+
+        if(!bReadValue) // reading argument name, or value for default argument
+        {
+            if(Char == Separator)
+            {
+                if(First) {*First = Name; First = nullptr;}
+                else ArgumentList.insert({L"", Trimm(Name)});
+                Name.clear();
+            }
+            else if(Char == Assigner)
+                bReadValue = true;
+            else
+                Name += Char;
+        }
+        else
+        {
+            if(Char == Separator)
+            {
+                if (bLowerKeys) 
+                    std::transform(Name.begin(), Name.end(), Name.begin(), towlower);
+                ArgumentList.insert({Trimm(Name), Trimm(Value)});
+                Name.clear();
+                Value.clear();
+                bReadValue = false;
+            }
+            else
+                Value += Char;
+        }
+    }
+
+    if(!Name.empty())
+    {
+        if(bReadValue)
+        {
+            if (bLowerKeys) 
+                std::transform(Name.begin(), Name.end(), Name.begin(), towlower);
+            ArgumentList.insert({Name, Value});
+        }
+        else
+        {
+            if (First) { *First = Name; }
+            else ArgumentList.insert({L"", Name});
+        }
+    }
+
+    return ArgumentList;
+}

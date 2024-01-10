@@ -193,7 +193,7 @@ _FX WCHAR* File_MakeSnapshotPath(FILE_SNAPSHOT* Cur_Snapshot, const WCHAR* CopyP
 	if (!Cur_Snapshot)
 		return NULL;
 
-	ULONG prefixLen = File_FindBoxPrefixLength(CopyPath);
+	ULONG prefixLen = File_FindBoxPrefix(CopyPath);
 	if (prefixLen == 0)
 		return NULL;
 
@@ -430,6 +430,97 @@ _FX ULONG File_IsDeletedEx(const WCHAR* TruePath, const WCHAR* CopyPath, FILE_SN
 
 	return (Flags & FILE_DELETED_MASK);
 }
+
+//---------------------------------------------------------------------------
+// GetPrivateProfileStringNt
+//---------------------------------------------------------------------------
+
+
+//NTSTATUS GetPrivateProfileStringNt(const wchar_t* section, const wchar_t* key, const wchar_t* defaultVal, wchar_t* returnedString, size_t size, const wchar_t* fileNtPath) 
+//{
+//	BOOLEAN foundSection = FALSE;
+//	BOOLEAN foundKey = FALSE;
+//
+//	ULONG sectionLen = wcslen(section);
+//	ULONG keyLen = wcslen(key);
+//
+//    UNICODE_STRING objname;
+//    RtlInitUnicodeString(&objname, fileNtPath);
+//
+//    OBJECT_ATTRIBUTES objattrs;
+//    InitializeObjectAttributes(&objattrs, &objname, OBJ_CASE_INSENSITIVE, NULL, NULL);
+//
+//    HANDLE hIniFile;
+//    IO_STATUS_BLOCK IoStatusBlock;
+//	if (NT_SUCCESS(NtCreateFile(&hIniFile, GENERIC_READ | SYNCHRONIZE, &objattrs, &IoStatusBlock, NULL, 0, FILE_SHARE_READ, FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE, NULL, 0)))
+//	{
+//		LARGE_INTEGER fileSize;
+//		GetFileSizeEx(hIniFile, &fileSize);
+//
+//		char* iniDataPtr = (char*)Dll_Alloc((ULONG)fileSize.QuadPart + 128);
+//		DWORD bytesRead;
+//		ReadFile(hIniFile, iniDataPtr, (DWORD)fileSize.QuadPart, &bytesRead, NULL);
+//		iniDataPtr[bytesRead] = L'\0';
+//
+//        int ByteSize = MultiByteToWideChar(CP_UTF8, 0, (char*)iniDataPtr, bytesRead, NULL, 0) + 1;
+//        WCHAR* Buffer = (WCHAR*)Dll_Alloc(ByteSize * sizeof(wchar_t));
+//        bytesRead = MultiByteToWideChar(CP_UTF8, 0, (char*)iniDataPtr, bytesRead, Buffer, ByteSize);
+//		
+//		Dll_Free(iniDataPtr);
+//
+//		WCHAR* Next = Buffer;
+//		while (*Next) {
+//			WCHAR* Line = Next;
+//			WCHAR* End = wcschr(Line, L'\n');
+//			if (End == NULL) {
+//				End = wcschr(Line, L'\0');
+//				Next = End;
+//			}
+//			else
+//				Next = End + 1;
+//			ULONG LineLen = (ULONG)(End - Line);
+//			if (LineLen >= 1 && Line[LineLen - 1] == L'\r')
+//				LineLen -= 1;
+//
+//			WCHAR savechar = Line[LineLen];
+//			Line[LineLen] = L'\0';
+//
+//			WCHAR* ptr = Line;
+//			ULONG len = LineLen;
+//			while (*ptr == L' ' || *ptr == L'\t') { ptr++; len--; }
+//
+//			if (!foundSection)
+//			{
+//				if (ptr[0] == L'[' && len - 2 >= sectionLen && _wcsnicmp(ptr + 1, section, sectionLen) == 0 && ptr[1 + sectionLen] == L']')
+//					foundSection = TRUE;
+//			}
+//			else if (ptr[0] == L'[')
+//				foundSection = FALSE;
+//			else // in section
+//			{
+//				if (len - 1 >= keyLen && _wcsnicmp(ptr, key, keyLen) == 0 && ptr[keyLen] == L'=')
+//				{
+//					foundKey = TRUE;
+//					ptr += keyLen + 1;
+//					while (*ptr == L' ' || *ptr == L'\t') { ptr++; }
+//					wcscpy_s(returnedString, size, ptr);
+//					break;
+//				}
+//			}
+//
+//			Line[LineLen] = savechar;
+//		}
+//
+//		Dll_Free(Buffer);
+//
+//		NtClose(hIniFile);
+//	}
+//
+//	if (!foundKey)
+//		wcscpy_s(returnedString, size, defaultVal);
+//
+//	return STATUS_SUCCESS;
+//}
 
 
 //---------------------------------------------------------------------------

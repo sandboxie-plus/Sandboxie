@@ -9,7 +9,7 @@ void CSandMan::OnFileToRecover(const QString& BoxName, const QString& FilePath, 
 	{
 		CRecoveryWindow* pWnd = ShowRecovery(pBox, false);
 
-		//if (!theConf->GetBool("Options/AlwaysOnTop", false)) {
+		//if (!theGUI->IsAlwaysOnTop()) {
 		//	SetWindowPos((HWND)pWnd->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
 		//	QTimer::singleShot(100, this, [pWnd]() {
 		//		SetWindowPos((HWND)pWnd->winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
@@ -272,7 +272,7 @@ void CSandMan::AddFileRecovered(const QString& BoxName, const QString& FilePath)
 	}
 
 	QTreeWidgetItem* pItem = new QTreeWidgetItem(); // Time|Box|FilePath
-	pItem->setText(0, QDateTime::currentDateTime().toString("hh:mm:ss.zzz"));
+	pItem->setText(0, QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss.zzz"));
 	pItem->setText(1, BoxName);
 	pItem->setText(2, FilePath);
 	pRecoveryLog->GetTree()->addTopLevelItem(pItem);
@@ -356,8 +356,7 @@ void CRecoveryLogWnd::OnDblClick(QTreeWidgetItem* pItem)
 void CSandMan::OnRecoveryLog()
 {
 	if (!m_pRecoveryLogWnd->isVisible()) {
-		bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
-		m_pRecoveryLogWnd->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+		m_pRecoveryLogWnd->setWindowFlag(Qt::WindowStaysOnTopHint, theGUI->IsAlwaysOnTop());
 		SafeShow(m_pRecoveryLogWnd);
 	}
 }

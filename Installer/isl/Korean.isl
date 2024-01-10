@@ -76,7 +76,7 @@ PrivilegesRequiredOverrideCurrentUser=현재 사용자용으로 설치(&M)
 PrivilegesRequiredOverrideCurrentUserRecommended=현재 사용자용으로 설치 (추천)(&M)
 
 ; *** Misc. errors
-ErrorCreatingDir=설치 프로그램이 "%1" 디렉터리를 만들 수 없습니다.
+ErrorCreatingDir=설치 프로그램에서 "%1" 디렉터리를 만들지 못했습니다.
 ErrorTooManyFilesInDir="%1" 디렉터리에 파일이 너무 많아서 파일을 만들 수 없습니다
 
 ; *** Setup common messages
@@ -98,7 +98,7 @@ ButtonYes=예(&Y)
 ButtonYesToAll=모두 예(&A)
 ButtonNo=아니오(&N)
 ButtonNoToAll=모두 아니오(&O)
-ButtonFinish=종료(&F)
+ButtonFinish=마침(&F)
 ButtonBrowse=찾아보기(&B)...
 ButtonWizardBrowse=찾아보기(&R)...
 ButtonNewFolder=새 폴더 만들기(&M)
@@ -374,10 +374,11 @@ ShutdownBlockReasonUninstallingApp=%1을(를) 제거하는 중입니다.
 
 NameAndVersion=%1 버전 %2
 AdditionalIcons=바로가기 추가:
-CreateDesktopIcon=바탕화면에 바로가기 만들기(&D)
+CreateDesktopIcon=바탕 화면에 바로가기 만들기(&D)
 CreateQuickLaunchIcon=빠른 실행 아이콘 만들기(&Q)
 ProgramOnTheWeb=%1 웹페이지
-UninstallProgram=LaunchProgram=%1 실행
+UninstallProgram=%1 제거
+LaunchProgram=%1 실행
 AssocFileExtension=%1을 %2 파일 확장자에 연결
 AssocingFileExtension=%1을 %2 파일 확장자와 연결하는 중...
 AutoStartProgramGroupDescription=시작:

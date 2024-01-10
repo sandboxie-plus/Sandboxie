@@ -44,6 +44,7 @@ signals:
 
 protected:
 	friend class CSandBoxPlus;
+	friend class CNewBoxWizard;
 
 	virtual CSandBox*		NewSandBox(const QString& BoxName, class CSbieAPI* pAPI);
 	virtual CBoxedProcess*	NewBoxedProcess(quint32 ProcessId, class CSandBox* pBox);
@@ -72,8 +73,8 @@ public:
 	CSandBoxPlus(const QString& BoxName, class CSbieAPI* pAPI);
 	virtual ~CSandBoxPlus();
 
-	SB_PROGRESS				ExportBox(const QString& FileName);
-	SB_PROGRESS				ImportBox(const QString& FileName);
+	SB_PROGRESS				ExportBox(const QString& FileName, const QString& Password = "", int Level = 5, bool Solid = false);
+	SB_PROGRESS				ImportBox(const QString& FileName, const QString& Password = "");
 
 	virtual void			UpdateDetails();
 
@@ -91,10 +92,14 @@ public:
 	virtual SB_PROGRESS		RemoveSnapshot(const QString& ID)	{ BeginModifyingBox(); SB_PROGRESS Status = CSandBox::RemoveSnapshot(ID); ConnectEndSlot(Status); return Status; }
 	virtual SB_PROGRESS		SelectSnapshot(const QString& ID)	{ BeginModifyingBox(); SB_PROGRESS Status = CSandBox::SelectSnapshot(ID); ConnectEndSlot(Status); return Status; }
 
+	virtual SB_STATUS		ImBoxMount(const QString& Password = QString(), bool bProtect = false, bool bAutoUnmount = false) { BeginModifyingBox(); SB_STATUS Status = CSandBox::ImBoxMount(Password, bProtect, bAutoUnmount); ConnectEndSlot(Status); return Status; }
+	virtual SB_STATUS		ImBoxUnmount()						{ BeginModifyingBox(); SB_STATUS Status = CSandBox::ImBoxUnmount(); if(!Status.IsError()) m_Mount.clear(); ConnectEndSlot(Status); return Status; }
+
 	virtual bool			IsEmpty() const;
 
 	virtual QString			GetStatusStr() const;
 
+	virtual QString			GetBoxImagePath() const				{ return m_FilePath + ".box"; }
 
 	virtual void			SetINetBlock(bool bEnable);
 	virtual bool			IsINetBlocked() const				{ return m_bINetBlocked; }
@@ -104,6 +109,9 @@ public:
 
 	virtual void			SetDropRights(bool bEnable);
 	virtual bool			IsDropRights() const				{ return m_bDropRights; }
+
+	virtual bool			UseRamDisk() const					{ return m_bRamDisk; }
+	virtual bool			UseImageFile() const				{ return m_bImageFile; }
 
 	virtual bool			IsUnsecureDebugging() const			{ return m_iUnsecureDebugging != 0; }
 
@@ -130,7 +138,7 @@ public:
 	virtual void			SetSuspendRecovery(bool bSet = true) { m_SuspendRecovery = bSet; }
 
 	virtual QString			MakeBoxCommand(const QString& FileName);
-	virtual QString			GetCommandFile(const QString& Command);
+	virtual QString			GetCommandFile(const QString& Command, QString* Arguments = NULL);
 	virtual QString			GetFullCommand(const QString& Command);
 
 	const QSet<QString>&	GetRecentPrograms()					{ return m_RecentPrograms; }
@@ -143,8 +151,12 @@ public:
 		eDefault,
 		eAppBoxPlus,
 		eAppBox,
+
 		eInsecure,
 		eOpen,
+
+		ePrivatePlus,
+		ePrivate,
 
 		eUnknown
 	};
@@ -161,8 +173,10 @@ public:
 	SB_STATUS				DeleteContentAsync(bool DeleteSnapshots = true, bool bOnAutoDelete = false);
 
 	struct SLink {
+		SLink() :Url(false), IconIndex(0) {}
 		QString Folder;
 		QString Name;
+		bool Url;
 		QString Target;
 		QString Arguments;
 		QString Icon;
@@ -207,8 +221,8 @@ protected:
 	void					AddJobToQueue(CBoxJob* pJob);
 	void					StartNextJob();
 
-	static void				ExportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ExportPath, const QString& RootPath, const QString& Section);
-	static void				ImportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ImportPath, const QString& RootPath, const QString& BoxName);
+	static void				ExportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ExportPath, const QString& RootPath, const QString& Section, const QVariantMap& Params);
+	static void				ImportBoxAsync(const CSbieProgressPtr& pProgress, const QString& ImportPath, const QString& RootPath, const QString& BoxName, const QString& Password);
 
 	bool					IsFileDeleted(const QString& RealPath, const QString& Snapshot, const QStringList& SnapshotList, const QMap<QString, QList<QString>>& DeletedPaths);
 
@@ -219,10 +233,14 @@ protected:
 	bool					m_bSharesAllowed;
 	bool					m_bDropRights;
 
+	bool					m_bRamDisk;
+	bool					m_bImageFile;
+
 	bool					m_bSecurityEnhanced;
 	bool					m_bPrivacyEnhanced;
 	bool					m_bApplicationCompartment;
 	int						m_iUnsecureDebugging;
+	bool					m_bEncryptedAndConfidential;
 	bool					m_bRootAccessOpen;
 
 	quint64					m_TotalSize;

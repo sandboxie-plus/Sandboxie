@@ -5,9 +5,14 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this request!
-        To see if your feature request has already been reported, you can use the search box on the Issues and Discussions tabs.
-        Also, you may find your answer in our documentation hosted on GitHub: https://sandboxie-plus.github.io/sandboxie-docs
+        Thanks for taking the time to open this request!
+        Before you begin, please use the GitHub search bar to see if your feature request has already been reported.
+
+        Also, you may find your answer:
+        1. in the [sandboxie-docs](https://github.com/sandboxie-plus/sandboxie-docs) repository (currently there are [synchronization issues](https://github.com/sandboxie-plus/Sandboxie/discussions/1756) with sandboxie-plus.com)
+        2. in the other [support channels](https://github.com/sandboxie-plus/Sandboxie/discussions/1768#discussioncomment-2503401)
+        3. in the [cached copy](https://github.com/Sandboxie-Website-Archive/sandboxie-website-archive.github.io) of the old Sandboxie forum: `site:https://sandboxie-website-archive.github.io/www.sandboxie.com/old-forums/`
+        4. in the [contributing guidelines](https://github.com/sandboxie-plus/Sandboxie/blob/master/CONTRIBUTING.md)
   - type: textarea
     id: describe-feature
     attributes:

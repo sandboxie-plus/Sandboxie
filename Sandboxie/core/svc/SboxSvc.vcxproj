@@ -494,6 +494,8 @@
     <ClCompile Include="includes.cpp" />
     <ClCompile Include="iphlpserver.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MountManager.cpp" />
+    <ClCompile Include="MountManagerHelpers.cpp" />
     <ClCompile Include="namedpipeserver.cpp" />
     <ClCompile Include="netapiserver.cpp" />
     <ClCompile Include="pipeserver.cpp" />
@@ -581,6 +583,8 @@
     <ClInclude Include="iphlpserver.h" />
     <ClInclude Include="iphlpwire.h" />
     <ClInclude Include="misc.h" />
+    <ClInclude Include="MountManager.h" />
+    <ClInclude Include="MountManagerWire.h" />
     <ClInclude Include="msgids.h" />
     <ClInclude Include="namedpipeserver.h" />
     <ClInclude Include="namedpipewire.h" />

@@ -74,10 +74,14 @@ const WCHAR *Dll_HomeDosPath = NULL;
 //ULONG Dll_HomeDosPathLen = 0;
 
 const WCHAR *Dll_BoxFilePath = NULL;
+const WCHAR *Dll_BoxFileRawPath = NULL;
+const WCHAR *Dll_BoxFileDosPath = NULL;
 const WCHAR *Dll_BoxKeyPath = NULL;
 const WCHAR *Dll_BoxIpcPath = NULL;
 
 ULONG Dll_BoxFilePathLen = 0;
+ULONG Dll_BoxFileRawPathLen = 0;
+ULONG Dll_BoxFileDosPathLen = 0;
 ULONG Dll_BoxKeyPathLen = 0;
 ULONG Dll_BoxIpcPathLen = 0;
 ULONG Dll_SidStringLen = 0;
@@ -367,8 +371,8 @@ _FX void Dll_InitInjected(void)
   //
   //      //
   //      // instead of using a separate namespace
-  //		// just replace all \ with _ and use it as a sufix rather then an actual path
-  //      // similarly a its done for named pipes already
+  //		// just replace all \ with _ and use it as a suffix rather then an actual path
+  //      // similar to what is done for named pipes already
   //      // this approach can help to reduce the footprint when running in portable mode
   //      // alternatively we could create volatile entries under AppContainerNamedObjects 
   //      //
@@ -834,7 +838,7 @@ _FX VOID Dll_Ordinal1(INJECT_DATA * inject)
 
         int MustRestartProcess = 0;
         if (Dll_ProcessFlags & SBIE_FLAG_PROCESS_IN_PCA_JOB) {
-            if (!SbieApi_QueryConfBool(NULL, L"NoRestartOnPAC", FALSE))
+            if (!SbieApi_QueryConfBool(NULL, L"NoRestartOnPCA", FALSE))
                 MustRestartProcess = 1;
         }
 

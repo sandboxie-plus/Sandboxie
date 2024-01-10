@@ -80,14 +80,14 @@ bool CArchiveInterface::Init()
 	{
 		CArcInfoEx info;
 
-		if(ReadStringProp(getProp, getProp2, i, NArchive::kName, info.Name) != S_OK)
+		if(ReadStringProp(getProp, getProp2, i, NArchive::NHandlerPropID::kName, info.Name) != S_OK)
 		{
 			//LogLine(LOG_ERROR | LOG_DEBUG, QObject::tr("7z: Failed to get Formats %1 Name!").arg(i));
 			return false;
 		}
 
 		NWindows::NCOM::CPropVariant prop;
-		if (ReadProp(getProp, getProp2, i, NArchive::kClassID, prop) != S_OK)
+		if (ReadProp(getProp, getProp2, i, NArchive::NHandlerPropID::kClassID, prop) != S_OK)
 			continue;
 		if (prop.vt != VT_BSTR)
 			continue;
@@ -95,12 +95,12 @@ bool CArchiveInterface::Init()
 		prop.Clear();
 
 		QString ext, addExt;
-		if(ReadStringProp(getProp, getProp2, i, NArchive::kExtension, ext) != S_OK)
+		if(ReadStringProp(getProp, getProp2, i, NArchive::NHandlerPropID::kExtension, ext) != S_OK)
 		{
 			//LogLine(LOG_ERROR | LOG_DEBUG, QObject::tr("7z: Failed to get Formats %1 Property kExtension!").arg(i));
 			return false;
 		}
-		if(ReadStringProp(getProp, getProp2, i, NArchive::kAddExtension, addExt) != S_OK)
+		if(ReadStringProp(getProp, getProp2, i, NArchive::NHandlerPropID::kAddExtension, addExt) != S_OK)
 		{
 			//LogLine(LOG_ERROR | LOG_DEBUG, QObject::tr("7z: Failed to get Formats %1 Property kAddExtension!").arg(i));
 			return false;
@@ -109,9 +109,9 @@ bool CArchiveInterface::Init()
 
 		//TRACE(L"Archive Format %S supported %S, %S", QS2CS(info.Name), QS2CS(ext), QS2CS(addExt));
 
-		ReadBoolProp(getProp, getProp2, i, NArchive::kUpdate, info.UpdateEnabled);
+		ReadBoolProp(getProp, getProp2, i, NArchive::NHandlerPropID::kUpdate, info.UpdateEnabled);
 		if (info.UpdateEnabled)
-			ReadBoolProp(getProp, getProp2, i, NArchive::kKeepName, info.KeepName);
+			ReadBoolProp(getProp, getProp2, i, NArchive::NHandlerPropID::kKeepName, info.KeepName);
 
 #ifdef _SFX
 		if (ReadProp(getProp, getProp2, i, NArchive::kStartSignature, prop) == S_OK)

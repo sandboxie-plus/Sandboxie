@@ -82,7 +82,8 @@ int CArchive::Open()
 		// Open Archive
 		const UInt64 kMaxCheckStartPosition = 1 << 22; // 4MB
 		CMyComPtr<IArchiveOpenCallback> callback(new CArchiveOpener(this));
-		HRESULT Ret = InArchive->Open(new CArchiveIO(m_pDevice ? m_pDevice : new QFile(m_ArchivePath), QIODevice::ReadOnly, m_pDevice == NULL), &kMaxCheckStartPosition, callback);
+		CMyComPtr<IInStream> pStream = new CArchiveIO(m_pDevice ? m_pDevice : new QFile(m_ArchivePath), QIODevice::ReadOnly, m_pDevice == NULL);
+		HRESULT Ret = InArchive->Open(pStream, &kMaxCheckStartPosition, callback);
 		if(Ret != S_OK)
 		{
 			InArchive->Close();
@@ -215,7 +216,7 @@ bool CArchive::Close()
 	return false;
 }
 
-bool CArchive::Update(QMap<int, QIODevice*> *FileList, bool bDelete, int Level)
+bool CArchive::Update(QMap<int, QIODevice*> *FileList, bool bDelete, const SCompressParams* Params)
 {
 	if(!theArc.IsOperational())
 	{
@@ -262,10 +263,10 @@ bool CArchive::Update(QMap<int, QIODevice*> *FileList, bool bDelete, int Level)
 		const int kNumProps = sizeof(names) / sizeof(names[0]);
 		NWindows::NCOM::CPropVariant values[kNumProps] =
 		{
-			false,			// solid mode OFF
-			(UInt32)Level,	// compression level = 9 - ultra
-			//(UInt32)8,		// set number of CPU threads
-			true			// file name encryption (7z only)
+			(Params ? Params->bSolid : false),		// solid mode OFF
+			(UInt32)(Params ? Params->iLevel : 5),	// compression level = 9 - ultra
+			//(UInt32)8,							// set number of CPU threads
+			true									// file name encryption (7z only)
 		};
 
 		if(setProperties->SetProperties(names, values, kNumProps) != S_OK)
@@ -313,7 +314,8 @@ bool CArchive::Update(QMap<int, QIODevice*> *FileList, bool bDelete, int Level)
 	}
 
     CMyComPtr<IArchiveUpdateCallback2> callback(new CArchiveUpdater(this, Files));
-	if(OutArchive->UpdateItems(new CArchiveIO(m_pDevice ? m_pDevice : pFile, QIODevice::WriteOnly, m_pDevice == NULL), FileCount(), callback) != S_OK)
+	CMyComPtr<ISequentialOutStream> pStream = new CArchiveIO(m_pDevice ? m_pDevice : pFile, QIODevice::WriteOnly, m_pDevice == NULL);
+	if(OutArchive->UpdateItems(pStream, FileCount(), callback) != S_OK)
 	{
 		LogError("Error(s) while updating Archive");
 		return false;

@@ -31,7 +31,7 @@ CRecoveryWindow::CRecoveryWindow(const CSandBoxPtr& pBox, bool bImmediate, QWidg
 	//setWindowState(Qt::WindowActive);
 	SetForegroundWindow((HWND)QWidget::winId());
 
-	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false) || (bImmediate && theConf->GetBool("Options/RecoveryOnTop", true));
+	bool bAlwaysOnTop = theGUI->IsAlwaysOnTop() || (bImmediate && theConf->GetBool("Options/RecoveryOnTop", true));
 	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
 
 	if (!bAlwaysOnTop) {

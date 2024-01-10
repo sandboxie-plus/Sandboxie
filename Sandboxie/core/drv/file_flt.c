@@ -478,7 +478,7 @@ check:
     }
 
     //
-    // check if there are any protected root folders and restict the access to
+    // check if there are any protected root folders and restrict the access to them
     //
 
     if (Iopb->MajorFunction == IRP_MJ_CREATE && File_ProtectedRoots.count != 0 && Data->Iopb->TargetFileObject) {
@@ -502,6 +502,15 @@ check:
                     && (Name->Name.Buffer[root->file_root_len] == L'\0' || Name->Name.Buffer[root->file_root_len] == L'\\')
                     && _wcsnicmp(Name->Name.Buffer, root->file_root, root->file_root_len) == 0
                     ) {
+
+                    //DbgPrint("IRP_MJ_CREATE: %S\n", root->file_root);
+
+                    //
+                    // csrss.exe needs access to binaries of starting up processes.
+                    //
+
+                    if (Util_IsCsrssProcess(PsGetCurrentProcessId()))
+                        break;
 
                     status = STATUS_ACCESS_DENIED;
 
@@ -1034,7 +1043,7 @@ _FX NTSTATUS File_Api_UnprotectRoot(PROCESS* proc, ULONG64* parms)
 
         PROTECTED_ROOT *next_root = List_Next(root);
 
-        if (root->reg_root_len = reg_root_len && _wcsicmp(root->reg_root, reg_root) == 0) {
+        if (root->reg_root_len == reg_root_len && _wcsicmp(root->reg_root, reg_root) == 0) {
 
             List_Remove(&File_ProtectedRoots, root);
 

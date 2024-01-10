@@ -64,6 +64,20 @@ bool CSupportDialog::CheckSupport(bool bOnRun)
 
 	QDateTime CurretnDate = QDateTime::currentDateTimeUtc();
 	int Days = InstallDate.daysTo(CurretnDate);
+
+	BYTE CertBlocked = 0;
+	theAPI->GetSecureParam("CertBlocked", &CertBlocked, sizeof(CertBlocked));
+	if (CertBlocked)
+	{
+		QString Message = tr("An attempt was made to use a blocked certificate on this system. This action violates the terms of use for the support certificate. "
+			"You must now purchase a valid certificate, as the usage of the free version has been restricted.");
+
+		CSupportDialog dialog(Message, NoGo, Days);
+		if(dialog.exec() == QDialog::Rejected)
+			PostQuitMessage(0);
+		return true;
+	}
+
 	if (Days < 40)
 		return false;
 
@@ -81,22 +95,31 @@ bool CSupportDialog::CheckSupport(bool bOnRun)
 	{
 		// Note: the old sandboxie showed a message after 30 days every 12 hours for 5 seconds
 		
-		int Interval;
-        if (Days > 730) Interval = 5 * 24;
-        else if (Days > 365) Interval = 10 * 24;
-        else if (Days > 180) Interval = 20 * 24;
-        else Interval = 30 * 24;
+		int Interval = 30 * 24; // in hours
 
-		//USHORT ReminderRevision = 0;
-		//theAPI->GetSecureParam("ReminderRevision", &ReminderRevision, sizeof(ReminderRevision));
+		USHORT ReminderShedule[2 * 11] = {
+		//  days,	itnerval,	
+			730,	1 * 24,
+			365,	5 * 24,
+			182,	10 * 24,
+			30,		30 * 24,
+			0
+		};
+		USHORT CurReminderRevision = 1;
 
-		USHORT ReminderShedule[2*11];
-		if (theAPI->GetSecureParam("ReminderShedule", &ReminderShedule, sizeof(ReminderShedule))) {
-			for (USHORT* Cur = ReminderShedule; (ULONG_PTR)Cur < (ULONG_PTR)ReminderShedule + sizeof(ReminderShedule) && *Cur != 0; Cur += 2) {
-				if (Days > Cur[0]) {
-					if (Cur[1] < Interval) Interval = Cur[1];
-					break;
-				}
+		USHORT ReminderRevision = 0;
+		theAPI->GetSecureParam("ReminderRevision", &ReminderRevision, sizeof(ReminderRevision));
+		if (ReminderRevision < CurReminderRevision) {
+			theAPI->SetSecureParam("ReminderShedule", &ReminderShedule, sizeof(ReminderShedule));
+			theAPI->SetSecureParam("ReminderRevision", &CurReminderRevision, sizeof(CurReminderRevision));
+		}
+		else if (ReminderRevision > CurReminderRevision)
+			theAPI->GetSecureParam("ReminderShedule", &ReminderShedule, sizeof(ReminderShedule));
+
+		for (USHORT* Cur = ReminderShedule; (ULONG_PTR)Cur < (ULONG_PTR)ReminderShedule + sizeof(ReminderShedule) && *Cur != 0; Cur += 2) {
+			if (Days > Cur[0]) {
+				if (Cur[1] < Interval) Interval = Cur[1];
+				break;
 			}
 		}
 
@@ -144,7 +167,7 @@ bool CSupportDialog::ShowDialog(bool NoGo, int Wait)
 	{
 		Message = tr("The installed supporter certificate allows for <b>%1 seats</b> to be active.<br /><br />").arg(g_CertAmount);
 
-		Message += tr("<b>There seams to be howeever %1 Sandboxie-Plus instances on your network, <font color='red'>you need to obtain additional <a href=\"https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&tip=more\">support certificates</a></font>.</b><br /><br />").arg(CountSeats());
+		Message += tr("<b>There seems to be however %1 Sandboxie-Plus instances on your network, <font color='red'>you need to obtain additional <a href=\"https://sandboxie-plus.com/go.php?to=sbie-obtain-cert&tip=more\">support certificates</a></font>.</b><br /><br />").arg(CountSeats());
 	}
 	else if (IsBusinessUse()) 
 	{
@@ -205,8 +228,7 @@ CSupportDialog::CSupportDialog(const QString& Message, bool NoGo, int Wait, QWid
 	//setWindowState(Qt::WindowActive);
 	SetForegroundWindow((HWND)QWidget::winId());
 
-	bool bAlwaysOnTop = theConf->GetBool("Options/AlwaysOnTop", false);
-	this->setWindowFlag(Qt::WindowStaysOnTopHint, bAlwaysOnTop);
+	this->setWindowFlag(Qt::WindowStaysOnTopHint, theGUI->IsAlwaysOnTop());
 
 	this->setWindowTitle(tr("Sandboxie-Plus - Support Reminder"));
 

@@ -10,14 +10,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Make Duplicate Box Config keep the order of the original box configuration [#3523](https://github.com/sandboxie-plus/Sandboxie/issues/3523)
 - Save options as new defaults disappears from the Summary page [#3522](https://github.com/sandboxie-plus/Sandboxie/issues/3522)
 - fixed Windows Explorer has difficulty navigating when running in a sandbox with data protection enabled on Windows 11 [#3517](https://github.com/sandboxie-plus/Sandboxie/issues/3517) [#3516](https://github.com/sandboxie-plus/Sandboxie/issues/3516)
- - the default template for privacy boxes now sets NormalFilePath=%ProgramData%\Microsoft\
+  - the default template for privacy boxes now sets NormalFilePath=%ProgramData%\Microsoft\
 - fixed MessageBox with MB_DEFAULT_DESKTOP_ONLY or MB_SERVICE_NOTIFICATION can not display title and text correctly in security hardened box. [#3529](https://github.com/sandboxie-plus/Sandboxie/issues/3529)
 - fixed Can't run npm inside security hardened sandbox on Windows 11 [#3505](https://github.com/sandboxie-plus/Sandboxie/issues/3505)
 - fixed [1.12.6] Symlink and open path issue [#3537](https://github.com/sandboxie-plus/Sandboxie/issues/3537)
- - when a volume without a asociated drive letter is encountered sbie uses \drive\{guid} instead of \drive\[letter]
- - Note: when the volume later gets a drive letter the data under \drive\{guid} will be ignored!
+  - when a volume without a asociated drive letter is encountered sbie uses \drive\{guid} instead of \drive\[letter]
+  - Note: when the volume later gets a drive letter the data under \drive\{guid} will be ignored!
 - fixed right click a sandbox shortcut - click run unsandboxed in order to open the file without sandbox [#3528](https://github.com/sandboxie-plus/Sandboxie/issues/3528)
- - Note: for the fix to take full effect the shell integration need to be re applied
+  - Note: for the fix to take full effect the shell integration need to be re applied
 - fixed Error Status: 0x0000065b (Function Failed During Execution) [#3504](https://github.com/sandboxie-plus/Sandboxie/issues/3504)
 - fixed Privacy Enhanced Sandboxes are fully out of function with SBIE2204 error code [#3542](https://github.com/sandboxie-plus/Sandboxie/issues/3542)
 - fixed OpenFilePath directories are not enumerated within their parent folders [#3519](https://github.com/sandboxie-plus/Sandboxie/issues/3519)

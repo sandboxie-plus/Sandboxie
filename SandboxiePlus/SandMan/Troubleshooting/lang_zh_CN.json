@@ -24,7 +24,7 @@
 "Select Browser Path": "选择浏览器路径",
 
 "Explorer Context Menu extension does not work": "资源管理器上下界面扩展选项不工作（例如图标点击后无法正常工作）",
-"This procedure will re install the shell integration": "此步骤将重新安装 命令行集成",
+"This procedure will re install the shell integration": "此步骤将重新安装 命令行（Shell） 集成",
 "Add Run Sandboxed": "安装沙盒内的",
 "Add Run Unsandboxed": "安装沙盒外的",
 "Install legacy shell extensions": "安装旧的 shell 扩展",

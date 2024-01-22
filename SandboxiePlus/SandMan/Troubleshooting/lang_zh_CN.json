@@ -23,7 +23,7 @@
 "Select which browser you want to create a shortcut for and in what box": "选择要在哪个沙盒中为哪个浏览器创建快捷方式",
 "Select Browser Path": "选择浏览器路径",
 
-"Explorer Context Menu extension does not work": "资源管理器上下文菜单扩展不工作",
+"Explorer Context Menu extension does not work": "资源管理器上下界面扩展选项不工作（例如图标无法正常点击）",
 "This procedure will re install the shell integration": "此步骤将重新安装 shell 集成",
 "Add Run Sandboxed": "安装沙盒内的",
 "Add Run Unsandboxed": "安装沙盒外的",
@@ -61,12 +61,12 @@
 "Sandboxie was not able to execute one of its own programs. Check access permissions to the Sandboxie installation folder and/or reinstall Sandboxie.\n\nPossible Causes:\n1. Sandboxie was configured to block access to the folder containing its program files.\n2. A third-party (HIPS) security software was configured to block the execution of the program mentioned in the message.\n\nYou can submit an issue report on the next page to help us to analyze the issue.": "Sandboxie 无法执行自己的程序之一。检查对 Sandboxie 安装文件夹 是否有访问权限和/或重新安装 Sandboxie。\n\n可能的原因:\n1. Sandboxie 被配置为阻止对包含其程序文件的文件夹的访问。\n2. 配置了第三方(HIPS)安全软件来阻止消息中提到的程序的执行。\n\n您可以在下一页提交问题报告，以帮助我们分析问题。",
 
 "Do you want to open the box option dialog to change this preset?": "是否要打开沙盒选项对话框来更改此预设？",
-"No, it is fine as it is": "不，就这样",
+"No, it is fine as it is": "不，我觉得这样就好",
 "No, but I want to report a bug": "不，我要报告错误",
 
 "The message %1 is caused by the file migration limit being reached.": "消息 %1 是因为文件迁移请求达到限制引起的。",
 
-"It seems you are using a non-administrative user account on a system with enabled parental controls, this is known to be incompatible with Sandboxie.\nYou have the following options to resolve the issue.": "您似乎在启用了家长控制的系统上使用非管理用户帐户，显而易见，这与 Sandboxie 不兼容。\n您可以通过以下选项来解决此问题。",
+"It seems you are using a non-administrative user account on a system with enabled parental controls, this is known to be incompatible with Sandboxie.\nYou have the following options to resolve the issue.": "您似乎在启用了家长控制的系统上使用非管理员用户帐户，这显然与 Sandboxie 不兼容。\n您可以通过以下选项来解决此问题。",
 
 "Sbie Message Code": "Sbie 消息代码",
 "Name affected process": "受影响进程的名称",

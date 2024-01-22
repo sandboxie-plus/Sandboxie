@@ -5,7 +5,7 @@
 "An Application does not work properly when sandboxed": "应用程序在沙盒内时无法正常工作",
 "Issues with a web browser": "网络浏览器问题",
 "Perform Sandbox maintenance": "执行沙盒维护操作",
-"Fix issues with the UI or Shell": "解决 用户界面（UI） 或 Shell 问题",
+"Fix issues with the UI or Shell": "解决 用户界面（UI） 或 命令行（Shell） 问题",
 
 "Yes": "是",
 "No": "否",
@@ -23,8 +23,8 @@
 "Select which browser you want to create a shortcut for and in what box": "选择要在哪个沙盒中为哪个浏览器创建快捷方式",
 "Select Browser Path": "选择浏览器路径",
 
-"Explorer Context Menu extension does not work": "资源管理器上下界面扩展选项不工作（例如图标无法正常点击）",
-"This procedure will re install the shell integration": "此步骤将重新安装 shell 集成",
+"Explorer Context Menu extension does not work": "资源管理器上下界面扩展选项不工作（例如图标点击后无法正常工作）",
+"This procedure will re install the shell integration": "此步骤将重新安装 命令行集成",
 "Add Run Sandboxed": "安装沙盒内的",
 "Add Run Unsandboxed": "安装沙盒外的",
 "Install legacy shell extensions": "安装旧的 shell 扩展",
@@ -33,7 +33,7 @@
 "Failed to install application into a sandbox": "无法将应用程序安装到沙盒中",
 "Enter Installer Path": "输入安装程序路径",
 "Select a sandbox to install into": "选择将要安装到的沙盒",
-"This box has DropAdminRights enabled, preventing execution of installers. Do you want to disable this restriction, that will reduce the security level.": "此框启用了 撤销管理员和 Power User 用户组的权限 选项，阻止了安装程序执行。要禁用此限制吗？这将降低安全级别。",
+"This box has DropAdminRights enabled, preventing execution of installers. Do you want to disable this restriction, that will reduce the security level.": "此沙盒启用了 “撤销管理员和 Power User 用户组的权限” 选项，它阻止了安装程序执行。要禁用此限制吗？这将降低安全级别。",
 "Disable DropAdminRights": "关闭 撤销管理员和 Power User 用户组的权限 选项",
 "Enable FakeAdminRights": "启用 使应用程序认为自己已被提权运行 选项",
 "running installer, pid: %1 press NEXT once it finishes to continue": "正在运行安装程序，（pid: %1） 完成后按 下一步 继续",
@@ -48,9 +48,9 @@
 "Select affected sandbox": "选择受影响的沙盒",
 "Enter Process Name": "输入进程名称",
 
-"Internet Access restrictions are in effect for the sandbox in which the program is running. The program is prohibited from accessing the Internet.": "Internet 访问限制 在运行该程序的沙盒被开启，因此该程序被禁止访问互联网。",
+"Internet Access restrictions are in effect for the sandbox in which the program is running. The program is prohibited from accessing the Internet.": "“Internet 访问限制” 在运行该程序的沙盒被开启，因此该程序被禁止访问互联网。",
 
-"Start/Run restrictions are in effect for the sandbox in which the program is running. The program is prohibited from starting or running.": "启动/运行限制 在运行该程序的沙盒被开启，该程序被禁止启动或运行。",
+"Start/Run restrictions are in effect for the sandbox in which the program is running. The program is prohibited from starting or running.": "“启动/运行限制” 在运行该程序的沙盒被开启，该程序被禁止启动或运行。",
 
 "Failures to load SbieDll.dll when encountered by Chrome, or another software employing app containers, it is often caused by invalid DACL entries for the Sandboxie home directory. This mitigation measure will fix them, for this reason it will prompt for admin privileges which need to be granted for kmdutil.exe.": "Chrome 或其他使用应用容器的软件遇到无法加载 SbieDll.dll 时，通常是由 Sandboxie 主目录的无效 DACL 条目引起的。此解决措施将修复它们，这将提示需要为 kmdutil.exe 授予管理员权限。",
 "The DACLs have been adjusted, please try to run your application again and indicate if the issue has been resolved.": "DACL 条目 已调整，请尝试再次运行应用程序，并指示问题是否已解决。",
@@ -66,7 +66,7 @@
 
 "The message %1 is caused by the file migration limit being reached.": "消息 %1 是因为文件迁移请求达到限制引起的。",
 
-"It seems you are using a non-administrative user account on a system with enabled parental controls, this is known to be incompatible with Sandboxie.\nYou have the following options to resolve the issue.": "您似乎在启用了家长控制的系统上使用非管理员用户帐户，这显然与 Sandboxie 不兼容。\n您可以通过以下选项来解决此问题。",
+"It seems you are using a non-administrative user account on a system with enabled parental controls, this is known to be incompatible with Sandboxie.\nYou have the following options to resolve the issue.": "您似乎在启用了家长控制的系统上使用非管理员用户帐户，这与 Sandboxie 显然不兼容。\n您可以通过以下选项来解决此问题。",
 
 "Sbie Message Code": "Sbie 消息代码",
 "Name affected process": "受影响进程的名称",

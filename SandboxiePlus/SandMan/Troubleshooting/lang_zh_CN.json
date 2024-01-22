@@ -34,8 +34,8 @@
 "Enter Installer Path": "输入安装程序路径",
 "Select a sandbox to install into": "选择将要安装到的沙盒",
 "This box has DropAdminRights enabled, preventing execution of installers. Do you want to disable this restriction, that will reduce the security level.": "此沙盒启用了 “撤销管理员和 Power User 用户组的权限” 选项，它阻止了安装程序执行。要禁用此限制吗？这将降低安全级别。",
-"Disable DropAdminRights": "关闭 撤销管理员和 Power User 用户组的权限 选项",
-"Enable FakeAdminRights": "启用 使应用程序认为自己已被提权运行 选项",
+"Disable DropAdminRights": "关闭 “撤销管理员和 Power User 用户组的权限” 选项",
+"Enable FakeAdminRights": "启用 “使应用程序认为自己已被提权运行” 选项",
 "running installer, pid: %1 press NEXT once it finishes to continue": "正在运行安装程序，（pid: %1） 完成后按 下一步 继续",
 "Was the issue resolved?": "问题解决了吗?",
 

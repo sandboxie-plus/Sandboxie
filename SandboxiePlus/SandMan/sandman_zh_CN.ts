@@ -7999,7 +7999,7 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1470"/>
         <source>Allow Process</source>
-        <translation>所有进程</translation>
+        <translation>允许进程</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="1395"/>

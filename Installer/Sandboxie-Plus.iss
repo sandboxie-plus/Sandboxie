@@ -229,6 +229,7 @@ begin
     'german': Result := 'de';
     'hungarian': Result := 'hu';
     'italian': Result := 'it';
+    'japanese': Result := 'ja';
     'korean': Result := 'ko';
     'polish': Result := 'pl';
     'brazilianportuguese': Result := 'pt_BR';

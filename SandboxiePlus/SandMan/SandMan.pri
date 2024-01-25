@@ -112,6 +112,7 @@ TRANSLATIONS += sandman_de.ts \
     sandman_fr.ts \
     sandman_hu.ts \
     sandman_it.ts \
+    sandman_ja.ts \
     sandman_ko.ts \
     sandman_nl.ts \
     sandman_pl.ts \

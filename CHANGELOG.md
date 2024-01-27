@@ -4,10 +4,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.1x.x / 5.6x.x] - 2024-xx-xx
+## [1.12.8 / 5.67.8] - 2024-01-xx
 
 ### Added
 - added Japanese language on Plus UI [#3573](https://github.com/sandboxie-plus/Sandboxie/pull/3573)
+
+### Fixed
+- fixed SBIE2321 Cannot manage device map: [C0000034 / 11] [#2996](https://github.com/sandboxie-plus/Sandboxie/issues/2996)
 
 
 

@@ -1654,6 +1654,7 @@ void CSbieView::OnProcessAction(QAction* Action, const QList<CBoxedProcessPtr>& 
 			QString BoxName = pProcess->GetBoxName();
 			QString LinkName = pProcess->GetProcessName();
 			QString LinkPath = pProcess->GetFileName();
+			QString WorkingDir = pProcess->GetWorkingDir();
 
 			QString Path = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation).replace("/", "\\");
 			//Path = QFileDialog::getExistingDirectory(this, tr("Select Directory to create Shortcut in"), Path).replace("/", "\\");
@@ -1669,13 +1670,19 @@ void CSbieView::OnProcessAction(QAction* Action, const QList<CBoxedProcessPtr>& 
 				return;
 
 			QString StartExe = theAPI->GetSbiePath() + "\\SandMan.exe";
-			CSbieUtils::CreateShortcut(StartExe, Path, LinkName, BoxName, LinkPath, LinkPath);
+			CSbieUtils::CreateShortcut(StartExe, Path, LinkName, BoxName, LinkPath, LinkPath, 0, WorkingDir);
 		}
 		else if (Action == m_pMenuPinToRun)
 		{
 			CSandBoxPlus* pBoxPlus = pProcess.objectCast<CSbieProcess>()->GetBox();
 			if (m_pMenuPinToRun->isChecked())
-				pBoxPlus->InsertText("RunCommand", pProcess->GetProcessName() + "|\"" + pBoxPlus->MakeBoxCommand(pProcess->GetFileName()) + "\"");
+			{
+				QVariantMap Entry;
+				Entry["Name"] = pProcess->GetProcessName();
+				Entry["WorkingDir"] = pProcess->GetWorkingDir();
+				Entry["Command"] = pBoxPlus->MakeBoxCommand(pProcess->GetFileName());
+				pBoxPlus->InsertText("RunCommand", MakeRunEntry(Entry));
+			}
 			else if(!m_pMenuPinToRun->data().toString().isEmpty())
 				pBoxPlus->DelValue("RunCommand", m_pMenuPinToRun->data().toString());
 		}

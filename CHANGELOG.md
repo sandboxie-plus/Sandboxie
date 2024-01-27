@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed SBIE2321 Cannot manage device map: [C0000034 / 11] [#2996](https://github.com/sandboxie-plus/Sandboxie/issues/2996)
 - fixed Cannot run explorer.exe on emulate admin sandbox [#3516](https://github.com/sandboxie-plus/Sandboxie/issues/3516)
 - fixed potential BSOD issue with WFP when trace loging is enabled
+- fixed Run from Sandbox > Run > Program and Run from folder doesn't use the same working dir [#3555](https://github.com/sandboxie-plus/Sandboxie/issues/3555)
 
 
 

@@ -5,7 +5,7 @@
 "An Application does not work properly when sandboxed": "应用程序在沙盒内时无法正常工作",
 "Issues with a web browser": "网络浏览器问题",
 "Perform Sandbox maintenance": "执行沙盒维护操作",
-"Fix issues with the UI or Shell": "解决 用户界面（UI） 或 命令行工具（Shell） 问题",
+"Fix issues with the UI or Shell": "解决 用户界面（UI） 或 Windows 文件资源管理器（Shell） 问题",
 
 "Yes": "是",
 "No": "否",
@@ -23,12 +23,11 @@
 "Select which browser you want to create a shortcut for and in what box": "选择要在哪个沙盒中为哪个浏览器创建快捷方式",
 "Select Browser Path": "选择浏览器路径",
 
-"Explorer Context Menu extension does not work": "资源管理器上下界面扩展选项不工作（例如图标点击后无法正常工作）",
-"This procedure will re install the shell integration": "此步骤将重新安装 命令行工具（Shell） 集成",
+"This procedure will re install the shell integration": "此步骤将重新安装 Windows 文件资源管理器（Shell） 集成项",
 "Add Run Sandboxed": "安装沙盒内的",
 "Add Run Unsandboxed": "安装沙盒外的",
-"Install legacy shell extensions": "安装旧的 命令行工具（Shell） 扩展",
-"Select which shell options should be reinstalled": "选择应重新安装的 命令行工具（Shell） 选项",
+"Install legacy shell extensions": "安装旧的 Windows 文件资源管理器（Shell） 扩展",
+"Select which shell options should be reinstalled": "选择应重新安装的 Windows 文件资源管理器（Shell） 选项",
 
 "Failed to install application into a sandbox": "无法将应用程序安装到沙盒中",
 "Enter Installer Path": "输入安装程序路径",

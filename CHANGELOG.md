@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - fixed SBIE2321 Cannot manage device map: [C0000034 / 11] [#2996](https://github.com/sandboxie-plus/Sandboxie/issues/2996)
+- fixed Cannot run explorer.exe on emulate admin sandbox [#3516](https://github.com/sandboxie-plus/Sandboxie/issues/3516)
 
 
 

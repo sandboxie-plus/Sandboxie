@@ -865,28 +865,29 @@ void WFP_classify(
     
 		KeReleaseSpinLock(&WFP_MapLock, irql);
 
-
-        if (log){
+		// TODO: Fix-Me, no ETW logging for now, we are here at DISPATCH_LEVEL but Session_MonitorPut is using pagable memory,
+		// we need eider to create a loggin proxy using non paged pool, or change the tracking mechanism to use non paged pool itself.
+        /*if (log){
 
 			BOOLEAN send = (filter->filterId == WFP_send_filter_id_v4) || (filter->filterId == WFP_send_filter_id_v6);
 			BOOLEAN v6 = (filter->filterId == WFP_send_filter_id_v6) || (filter->filterId == WFP_recv_filter_id_v6);
 
-			/*
-			RtlStringCbPrintfW at DISPATCH_LEVEL or higher can cause a BSOD, 
-			the issue is with accessing unicode tables, which may be paged out.
+			
+			//RtlStringCbPrintfW at DISPATCH_LEVEL or higher can cause a BSOD, 
+			//the issue is with accessing unicode tables, which may be paged out.
 
-			The documentation for KdPrint() states it this way:
+			//The documentation for KdPrint() states it this way:
 
-			<wdk>
-			Format
-			Specifies a pointer to the format string to print. The Format string
-			supports all the printf-style formatting codes. However, the Unicode format
-			codes (%C, %S, %lc, %ls, %wc, %ws, and %wZ) can only be used with IRQL =
-			PASSIVE_LEVEL.
-			</wdk>
+			//<wdk>
+			//Format
+			//Specifies a pointer to the format string to print. The Format string
+			//supports all the printf-style formatting codes. However, the Unicode format
+			//codes (%C, %S, %lc, %ls, %wc, %ws, and %wZ) can only be used with IRQL =
+			//PASSIVE_LEVEL.
+			//</wdk>
 
-			RtlStringCbPrintfA is technically also not permitted so a better solution needs to be found
-			*/
+			//RtlStringCbPrintfA is technically also not permitted so a better solution needs to be found
+			
 
 			char trace_strA[256];
 			if (v6) {
@@ -909,7 +910,7 @@ void WFP_classify(
 			*wptr = L'\0';
 
             Session_MonitorPut(MONITOR_NETFW | (block ? MONITOR_DENY : MONITOR_OPEN), trace_str, PsGetCurrentProcessId());
-        }
+        }*/
 
 		if (block) {
 

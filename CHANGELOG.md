@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed Cannot run explorer.exe on emulate admin sandbox [#3516](https://github.com/sandboxie-plus/Sandboxie/issues/3516)
 - fixed potential BSOD issue with WFP when trace loging is enabled
 - fixed Run from Sandbox > Run > Program and Run from folder doesn't use the same working dir [#3555](https://github.com/sandboxie-plus/Sandboxie/issues/3555)
+- fixed UseNewSymlinkResolver causes applications to create both the link and the target folder [#3481](https://github.com/sandboxie-plus/Sandboxie/issues/3481)
 
 
 

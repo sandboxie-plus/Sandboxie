@@ -4315,7 +4315,7 @@ Hayır şunları seçer: %2</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1614"/>
-        <location filename="Views/SbieView.cpp" line="1667"/>
+        <location filename="Views/SbieView.cpp" line="1668"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>%1 korumalı alanına kısayol oluştur</translation>
     </message>
@@ -4510,7 +4510,7 @@ Hayır şunları seçer: %2</translation>
         <translation>Bu Korumalı Alana Zorla</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1691"/>
+        <location filename="Views/SbieView.cpp" line="1698"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Bu alanda İnternet kısıtlamaları yok, bunları etkinleştirmek istiyor musunuz?</translation>
     </message>
@@ -4538,14 +4538,14 @@ Hayır şunları seçer: %2</translation>
         <translation>Seçili alan(lar)daki tüm işlemleri sonlandırmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1775"/>
+        <location filename="Views/SbieView.cpp" line="1782"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Bu alan devre dışı, etkinleştirmek istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1263"/>
         <location filename="Views/SbieView.cpp" line="1283"/>
-        <location filename="Views/SbieView.cpp" line="1732"/>
+        <location filename="Views/SbieView.cpp" line="1739"/>
         <source>This Sandbox is empty.</source>
         <translation>Bu Korumalı Alan boş.</translation>
     </message>

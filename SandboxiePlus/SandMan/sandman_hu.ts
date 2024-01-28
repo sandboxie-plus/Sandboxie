@@ -4924,7 +4924,7 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
     <message>
         <location filename="Views/SbieView.cpp" line="1263"/>
         <location filename="Views/SbieView.cpp" line="1283"/>
-        <location filename="Views/SbieView.cpp" line="1732"/>
+        <location filename="Views/SbieView.cpp" line="1739"/>
         <source>This Sandbox is empty.</source>
         <translation>Ez a homokozó üres.</translation>
     </message>
@@ -5045,7 +5045,7 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1614"/>
-        <location filename="Views/SbieView.cpp" line="1667"/>
+        <location filename="Views/SbieView.cpp" line="1668"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Parancsikon létrehozása %1 homokozóhoz</translation>
     </message>
@@ -5061,12 +5061,12 @@ Ez a fájl a Sandboxie része, és minden rajta végzett módosítás vissza les
         <translation>A kiválasztott folyamatot&quot;&gt;</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1691"/>
+        <location filename="Views/SbieView.cpp" line="1698"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Ebben a homokozóban nincsenek internetkorlátozások. Engedélyezi a korlátozást?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1775"/>
+        <location filename="Views/SbieView.cpp" line="1782"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Ez a homokozó le van tiltva. Bekapcsolja?</translation>
     </message>

@@ -5055,7 +5055,7 @@ Error: %1</source>
     <message>
         <location filename="Views/SbieView.cpp" line="1263"/>
         <location filename="Views/SbieView.cpp" line="1283"/>
-        <location filename="Views/SbieView.cpp" line="1732"/>
+        <location filename="Views/SbieView.cpp" line="1739"/>
         <source>This Sandbox is empty.</source>
         <translation>此沙盒是空的</translation>
     </message>
@@ -5170,7 +5170,7 @@ Error: %1</source>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1614"/>
-        <location filename="Views/SbieView.cpp" line="1667"/>
+        <location filename="Views/SbieView.cpp" line="1668"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>为沙盒 %1 创建快捷方式</translation>
     </message>
@@ -5186,12 +5186,12 @@ Error: %1</source>
         <translation>选中的进程</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1691"/>
+        <location filename="Views/SbieView.cpp" line="1698"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>此沙盒无互联网限制，确定启用吗？</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1775"/>
+        <location filename="Views/SbieView.cpp" line="1782"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>此沙盒已禁用，确定启用吗？</translation>
     </message>

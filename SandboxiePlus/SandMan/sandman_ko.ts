@@ -5139,7 +5139,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     <message>
         <location filename="Views/SbieView.cpp" line="1263"/>
         <location filename="Views/SbieView.cpp" line="1283"/>
-        <location filename="Views/SbieView.cpp" line="1732"/>
+        <location filename="Views/SbieView.cpp" line="1739"/>
         <source>This Sandbox is empty.</source>
         <translation>샌드박스가 비어 있습니다.</translation>
     </message>
@@ -5260,7 +5260,7 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1614"/>
-        <location filename="Views/SbieView.cpp" line="1667"/>
+        <location filename="Views/SbieView.cpp" line="1668"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>샌드박스 %1 바로 가기 만들기</translation>
     </message>
@@ -5276,12 +5276,12 @@ This file is part of Sandboxie and all changed done to it will be reverted next 
         <translation>선택된 과정</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1691"/>
+        <location filename="Views/SbieView.cpp" line="1698"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>이 박스에는 인터넷 제한이 없습니다. 인터넷 제한을 사용하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1775"/>
+        <location filename="Views/SbieView.cpp" line="1782"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>이 샌드박스를 사용할 수 없습니다. 사용하시겠습니까?</translation>
     </message>

@@ -4713,7 +4713,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Views/SbieView.cpp" line="1263"/>
         <location filename="Views/SbieView.cpp" line="1283"/>
-        <location filename="Views/SbieView.cpp" line="1732"/>
+        <location filename="Views/SbieView.cpp" line="1739"/>
         <source>This Sandbox is empty.</source>
         <translation>Diese Sandbox ist leer.</translation>
     </message>
@@ -4775,12 +4775,12 @@ This file is part of Sandboxie and all change done to it will be reverted next t
         <translation>die ausgewählten Prozesse</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1691"/>
+        <location filename="Views/SbieView.cpp" line="1698"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
         <translation>Diese Sandbox hat keine Internetbeschränkungen, möchten Sie diese aktivieren?</translation>
     </message>
     <message>
-        <location filename="Views/SbieView.cpp" line="1775"/>
+        <location filename="Views/SbieView.cpp" line="1782"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
         <translation>Diese Sandbox ist deaktiviert. Möchten Sie diese aktivieren?</translation>
     </message>
@@ -4916,7 +4916,7 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1614"/>
-        <location filename="Views/SbieView.cpp" line="1667"/>
+        <location filename="Views/SbieView.cpp" line="1668"/>
         <source>Create Shortcut to sandbox %1</source>
         <translation>Verknüpfung zu Sandbox %1 erstellen</translation>
     </message>

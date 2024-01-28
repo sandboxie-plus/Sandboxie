@@ -1355,16 +1355,17 @@ check_sandbox_prefix:
 
         if(File_FindBoxPrefix(TruePath))
             is_boxed_path = TRUE;
+        
+        name = Dll_GetTlsNameBuffer(
+                TlsData, TRUE_NAME_BUFFER, (length + 1) * sizeof(WCHAR));
+        wmemcpy(name, TruePath, length + 1);
+
+        Dll_Free(TruePath);
+
+        TruePath = name;
+        *OutTruePath = TruePath;
+
         if (is_boxed_path) {
-
-            name = Dll_GetTlsNameBuffer(
-                    TlsData, TRUE_NAME_BUFFER, (length + 1) * sizeof(WCHAR));
-            wmemcpy(name, TruePath, length + 1);
-
-            Dll_Free(TruePath);
-
-            TruePath = name;
-            *OutTruePath = TruePath;
             convert_links_again = FALSE;
 
             goto check_sandbox_prefix;

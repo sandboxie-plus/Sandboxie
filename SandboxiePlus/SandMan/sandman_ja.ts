@@ -5457,99 +5457,101 @@ This file is part of Sandboxie and all change done to it will be reverted next t
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="810"/>
         <source>Submit Issue Report</source>
-        <translation type="unfinished"></translation>
+        <translation>問題レポートを提出する</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="824"/>
         <source>Detailed issue description</source>
-        <translation type="unfinished"></translation>
+        <translation>問題の詳細な説明</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="828"/>
         <source>Attach Sandboxie.ini</source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie.ini を添付する</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="829"/>
         <source>Sandboxing compatibility is reliant on the configuration, hence attaching the Sandboxie.ini file helps a lot with finding the issue.</source>
-        <translation type="unfinished"></translation>
+        <translation>サンドボックスの互換性は構成に依存するため、Sandboxie.ini ファイルを添付すると問題を確認するのに非常に役立ちます。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="832"/>
         <source>Attach Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>ログを添付する</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="834"/>
         <source>Selecting partially checked state sends only the message log, but not the trace log.
 Before sending, you can review the logs in the main window.</source>
-        <translation type="unfinished"></translation>
+        <translation>部分的にチェックされた状態を選択すると、メッセージログのみを送信し、トレースログは送信しません。
+送信する前に、メインウィンドウでログを確認することができます。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="837"/>
         <source>Attach Crash Dumps</source>
-        <translation type="unfinished"></translation>
+        <translation>クラッシュダンプを添付</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="838"/>
         <source>An application crashed during the troubleshooting procedure, attaching a crash dump can help with the debugging.</source>
-        <translation type="unfinished"></translation>
+        <translation>トラブルシューティング手順中にアプリケーションがクラッシュしました。クラッシュダンプを添付するとデバッグに役立ちます。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="842"/>
         <source>Email address</source>
-        <translation type="unfinished"></translation>
+        <translation>メールアドレス</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="843"/>
         <source>You have the option to provide an email address to receive a notification once a solution for your issue has been identified.</source>
-        <translation type="unfinished"></translation>
+        <translation>問題の解決策が特定された時に、通知を受け取るための電子メールアドレスを提供するオプションがあります。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="851"/>
         <source>We apologize for the inconvenience you are currently facing with Sandboxie-Plus. </source>
-        <translation type="unfinished"></translation>
+        <translation>Sandboxie-Plus に関して現在ご迷惑をお掛けして申し訳ありません。 </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="858"/>
         <source>Unfortunately, the automated troubleshooting procedure failed. </source>
-        <translation type="unfinished"></translation>
+        <translation>残念ながら、自動トラブルシューティング手順は失敗しました。 </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="864"/>
         <source>Regrettably, there is no automated troubleshooting procedure available for the specific issue you have described. </source>
-        <translation type="unfinished"></translation>
+        <translation>残念ながら、説明された特定の問題に対して利用できる自動トラブルシューティングの手順はありません。 </translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="869"/>
         <source>If you wish to submit an issue report, please review the report below and click &apos;Finish&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>問題レポートを提出したい場合は、以下のレポートを確認して「完了」をクリックしてください。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="968"/>
         <source>Compressing Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>ログを圧縮する</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1002"/>
         <source>Compressing Dumps</source>
-        <translation type="unfinished"></translation>
+        <translation>ダンプを圧縮する</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1039"/>
         <source>Submitting issue report...</source>
-        <translation type="unfinished"></translation>
+        <translation>レポートを提出しています...</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1050"/>
         <source>Failed to submit issue report, error %1
 Try submitting without the log attached.</source>
-        <translation type="unfinished"></translation>
+        <translation>問題レポートの提出に失敗しました。エラー %1
+ログ添付なしで、提出してみてください。</translation>
     </message>
     <message>
         <location filename="Wizards/BoxAssistant.cpp" line="1054"/>
         <source>Your issue report has been successfully submitted, thank you.</source>
-        <translation type="unfinished"></translation>
+        <translation>あなたの問題レポートは正常に提出されました。ありがとうございました。</translation>
     </message>
 </context>
 <context>

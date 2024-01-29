@@ -1827,17 +1827,20 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 
 	if (!m_MissingTemplates.isEmpty())
 	{
-		if (m_MissingTemplates[0] == "") {
-			m_MissingTemplates.clear();
-			return;
-		}
-
 		int CleanupTemplates = theConf->GetInt("Options/AutoCleanupTemplates", -1);
 		if (CleanupTemplates == -1)
 		{
+			QStringList AllTemplates;
+			foreach(const QSet<QString>& Templates, m_MissingTemplates) {
+				foreach(const QString & Template, Templates) {
+					if (!AllTemplates.contains(Template))
+						AllTemplates.append(Template);
+				}
+			}
+
 			bool State = false;
 			CleanupTemplates = CCheckableMessageBox::question(this, "Sandboxie-Plus", tr("Some compatibility templates (%1) are missing, probably deleted, do you want to remove them from all boxes?")
-				.arg(m_MissingTemplates.join(", "))
+				.arg(AllTemplates.join(", "))
 				, tr("Don't show this message again."), &State, QDialogButtonBox::Yes | QDialogButtonBox::No, QDialogButtonBox::Yes, QMessageBox::Information) == QDialogButtonBox::Yes ? 1 : 0;
 
 			if (State)
@@ -1846,18 +1849,26 @@ void CSandMan::timerEvent(QTimerEvent* pEvent)
 
 		if (CleanupTemplates)
 		{
-			foreach(const QString& Template, m_MissingTemplates)
+			for(auto I = m_MissingTemplates.begin(); I != m_MissingTemplates.end(); ++I)
 			{
-				theAPI->GetGlobalSettings()->DelValue("Template", Template);
-				foreach(const CSandBoxPtr& pBox, theAPI->GetAllBoxes())
-					pBox->DelValue("Template", Template);
+				QSharedPointer<CSbieIni> Section;
+				if (I.key() == "GlobalSettings")
+					Section = theAPI->GetGlobalSettings();
+				else 
+					Section = theAPI->GetBoxByName(I.key());
+				if (!Section) continue;
+
+				Section->SetRefreshOnChange(false);
+				foreach(const QString & Template, I.value())
+					Section->DelValue("Template", Template);
+				Section->SetRefreshOnChange(true);
 			}
+
+			theAPI->CommitIniChanges();
 
 			OnLogMessage(tr("Cleaned up removed templates..."));
 		}
 		m_MissingTemplates.clear();
-
-		m_MissingTemplates.append("");
 	}
 }
 
@@ -2738,8 +2749,8 @@ void CSandMan::OnLogSbieMessage(quint32 MsgCode, const QStringList& MsgData, qui
 
 	if ((MsgCode & 0xFFFF) == 1411) // removed/missing template
 	{
-		if(MsgData.size() >= 3 && !m_MissingTemplates.contains(MsgData[2]))
-			m_MissingTemplates.append(MsgData[2]);
+		if (MsgData.size() >= 3)
+			m_MissingTemplates[MsgData[1]].insert(MsgData[2]);
 	}
 
 	if ((MsgCode & 0xFFFF) == 6004 || (MsgCode & 0xFFFF) == 6008 || (MsgCode & 0xFFFF) == 6009) // certificate error

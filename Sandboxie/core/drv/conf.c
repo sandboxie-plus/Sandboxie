@@ -120,7 +120,7 @@ static NTSTATUS Conf_Merge_Global(
 
 static NTSTATUS Conf_Merge_Template(
     CONF_DATA *data, ULONG session_id,
-    const WCHAR *tmpl_name, CONF_SECTION *section);
+    const WCHAR *tmpl_name, CONF_SECTION *section, const WCHAR* name);
 
 static const WCHAR *Conf_Get_Helper(
     const WCHAR *section_name, const WCHAR *setting_name,
@@ -866,7 +866,7 @@ _FX NTSTATUS Conf_Merge_Templates(CONF_DATA *data, ULONG session_id)
             //
 
             status = Conf_Merge_Template(
-                data, session_id, setting->value, sandbox);
+                data, session_id, setting->value, sandbox, NULL);
 
             if (! NT_SUCCESS(status))
                 return status;
@@ -955,7 +955,7 @@ _FX NTSTATUS Conf_Merge_Global(
             //
 
             status = Conf_Merge_Template(
-                data, session_id, setting->value, sandbox);
+                data, session_id, setting->value, sandbox, L"GlobalSettings");
 
             if (! NT_SUCCESS(status))
                 return status;
@@ -985,7 +985,7 @@ _FX NTSTATUS Conf_Merge_Global(
 
 _FX NTSTATUS Conf_Merge_Template(
     CONF_DATA *data, ULONG session_id,
-    const WCHAR *tmpl_name, CONF_SECTION *section)
+    const WCHAR *tmpl_name, CONF_SECTION *section, const WCHAR* name)
 {
     CONF_SECTION *tmpl = NULL;
 
@@ -1036,7 +1036,7 @@ _FX NTSTATUS Conf_Merge_Template(
     } else {
 
         Log_Msg_Session(MSG_CONF_MISSING_TMPL,
-                        section->name, tmpl_name, session_id);
+                        name ? name : section->name, tmpl_name, session_id);
     }
 
     return STATUS_SUCCESS;

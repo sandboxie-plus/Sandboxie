@@ -159,7 +159,7 @@ protected:
 	
 	QMap<CSbieProgress*, QPair<CSbieProgressPtr, QPointer<QWidget>>> m_pAsyncProgress;
 
-	QStringList			m_MissingTemplates;
+	QMap<QString, QSet<QString>> m_MissingTemplates;
 
 	enum EBoxColors
 	{

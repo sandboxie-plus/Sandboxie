@@ -2577,49 +2577,49 @@ Vänligen välj en mapp som innehåller denna fil.</translation>
         <translation type="vanished">PID %1</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="187"/>
+        <location filename="Windows/PopUpWindow.cpp" line="201"/>
         <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
         <translation>Vill du tillåta Print Spooler att skriva utanför lådan för %1 (%2)?</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="295"/>
+        <location filename="Windows/PopUpWindow.cpp" line="309"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
         <translation>Vill du tillåta %4 (%5) att kopiera en %1 stor fil in i sandlåda: %2? 
 Filnamn: %3</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="301"/>
+        <location filename="Windows/PopUpWindow.cpp" line="315"/>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
         <translation>Vill du tillåta %1 (%2) tillgång till internet?
 Full sökväg: %3</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="360"/>
+        <location filename="Windows/PopUpWindow.cpp" line="374"/>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
         <translation>%1 är berättigat för omedelbart återställande från %2.
 Filen skrevs av: %3</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="362"/>
+        <location filename="Windows/PopUpWindow.cpp" line="376"/>
         <source>an UNKNOWN process.</source>
         <translation>en OKÄND process.</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="362"/>
+        <location filename="Windows/PopUpWindow.cpp" line="376"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="446"/>
-        <location filename="Windows/PopUpWindow.cpp" line="447"/>
+        <location filename="Windows/PopUpWindow.cpp" line="460"/>
+        <location filename="Windows/PopUpWindow.cpp" line="461"/>
         <source>UNKNOWN</source>
         <translation>OKÄND</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="453"/>
+        <location filename="Windows/PopUpWindow.cpp" line="467"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
         <translation>Flytta en stor fil %1 in i sandlåda %2, %3 kvar.

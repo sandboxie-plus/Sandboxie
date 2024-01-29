@@ -2428,49 +2428,49 @@ Please select a folder which contains this file.</source>
         <translation>Sandboxie-Plus meldingen</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="187"/>
+        <location filename="Windows/PopUpWindow.cpp" line="201"/>
         <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
         <translation>Wilt u de print spooler toestaan om buiten de sandbox te schrijven voor %1 (%2)?</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="295"/>
+        <location filename="Windows/PopUpWindow.cpp" line="309"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
         <translation>Wilt u %4 (%5) toestaan om een %1 groot bestand te kopiëren naar sandbox: %2?
 Bestandsnaam: %3</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="301"/>
+        <location filename="Windows/PopUpWindow.cpp" line="315"/>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
         <translation>Wilt u toestaan dat %1 (%2) toegang tot het internet heeft?
 Volledig pad: %3</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="360"/>
+        <location filename="Windows/PopUpWindow.cpp" line="374"/>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
         <translation>%1 komt in aanmerking voor snel herstel van %2.
 Het bestand is geschreven door: %3</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="362"/>
+        <location filename="Windows/PopUpWindow.cpp" line="376"/>
         <source>an UNKNOWN process.</source>
         <translation>een ONBEKEND proces.</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="362"/>
+        <location filename="Windows/PopUpWindow.cpp" line="376"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="446"/>
-        <location filename="Windows/PopUpWindow.cpp" line="447"/>
+        <location filename="Windows/PopUpWindow.cpp" line="460"/>
+        <location filename="Windows/PopUpWindow.cpp" line="461"/>
         <source>UNKNOWN</source>
         <translation>ONBEKEND</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="453"/>
+        <location filename="Windows/PopUpWindow.cpp" line="467"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
         <translation>Een groot bestand %1 migreren naar sandbox %2, %3 resterend.

@@ -2402,49 +2402,49 @@ Please select a folder which contains this file.</source>
         <translation>Sandboxie-Plus Thông báo</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="187"/>
+        <location filename="Windows/PopUpWindow.cpp" line="201"/>
         <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
         <translation>Bạn có muốn cho phép bộ đệm in ghi bên ngoài Sandbox cho %1 (%2)?</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="295"/>
+        <location filename="Windows/PopUpWindow.cpp" line="309"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
         <translation>Bạn có muốn cho phép %4 (%5) để sao chép một tệp lớn %1 vào Sandbox: %2?
 Tên tệp: %3</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="301"/>
+        <location filename="Windows/PopUpWindow.cpp" line="315"/>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
         <translation>Bạn có muốn cho phép %1 (%2) truy cập Internet?
 Đường dẫn đầy đủ: %3</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="360"/>
+        <location filename="Windows/PopUpWindow.cpp" line="374"/>
         <source>%1 is eligible for quick recovery from %2.
 The file was written by: %3</source>
         <translation>%1 đủ điều kiện để phục hồi nhanh chóng từ %2.
 Tệp được viết bởi: %3</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="362"/>
+        <location filename="Windows/PopUpWindow.cpp" line="376"/>
         <source>an UNKNOWN process.</source>
         <translation>một tiến trình KHÔNG RÕ NGUỒN GỐC.</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="362"/>
+        <location filename="Windows/PopUpWindow.cpp" line="376"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="446"/>
-        <location filename="Windows/PopUpWindow.cpp" line="447"/>
+        <location filename="Windows/PopUpWindow.cpp" line="460"/>
+        <location filename="Windows/PopUpWindow.cpp" line="461"/>
         <source>UNKNOWN</source>
         <translation>KHÔNG RÕ NGUỒN GỐC</translation>
     </message>
     <message>
-        <location filename="Windows/PopUpWindow.cpp" line="453"/>
+        <location filename="Windows/PopUpWindow.cpp" line="467"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
         <translation>Di chuyển một tệp lớn %1 vào Sandbox %2, %3 còn lại.

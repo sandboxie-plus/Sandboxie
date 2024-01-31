@@ -4,6 +4,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.12.9 / 5.67.9] - 2024-02-xx
+
+### Fixed
+- Fixed issue with Symlink Resolver introduced in previosue build [#3481](https://github.com/sandboxie-plus/Sandboxie/issues/3481)
+
+
+
 ## [1.12.8 / 5.67.8] - 2024-01-31
 
 ### Added

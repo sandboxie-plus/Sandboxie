@@ -930,7 +930,6 @@ _FX NTSTATUS File_GetName(
     BOOLEAN have_tilde;
     BOOLEAN convert_links_again;
     BOOLEAN is_boxed_path;
-    BOOLEAN free_true_path;
 
 #ifdef WOW64_FS_REDIR
     BOOLEAN convert_wow64_link = (File_Wow64FileLink) ? TRUE : FALSE;
@@ -961,8 +960,6 @@ _FX NTSTATUS File_GetName(
 
     drive = NULL;
     guid = NULL;
-
-    free_true_path = FALSE;
 
     //
     // if a root handle is specified, we query the full name of the
@@ -1376,8 +1373,6 @@ check_sandbox_prefix:
         // then continue to create the copy path
         //
 
-        free_true_path = TRUE;
-
         if (OutFlags) {
             ULONG mp_flags = File_MatchPath(TruePath, OutFlags);
             if (PATH_IS_OPEN(mp_flags))
@@ -1435,9 +1430,6 @@ check_sandbox_prefix:
         name[0] = L'\\';
         name[1] = L'\0';
     }
-
-    if (free_true_path)
-        Dll_Free(TruePath);
 
     //
     // debugging helper

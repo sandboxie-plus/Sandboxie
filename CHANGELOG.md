@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.12.8 / 5.67.8] - 2024-01-xx
+## [1.12.8 / 5.67.8] - 2024-01-31
 
 ### Added
 - added Japanese language on Plus UI [#3573](https://github.com/sandboxie-plus/Sandboxie/pull/3573)

@@ -143,7 +143,7 @@ jobs:
         run: msbuild /t:build Sandboxie\SandboxDll.sln /p:Configuration="SbieRelease" /p:Platform=ARM64EC -maxcpucount:8
 
     #
-    # Prepare Qt Framework for ARM64 we need also the x64 for soem utilities like qmake
+    # Prepare Qt Framework for ARM64 (we also need Qt x64 for some utilities like qmake)
     #
 
       - name: Install Qt6 x64

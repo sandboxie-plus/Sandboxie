@@ -107,6 +107,10 @@ jobs:
           echo 'autoamtic->automatic' >> dictionary.txt
           echo 'connencted->connected' >> dictionary.txt
           echo 'querygin->querying' >> dictionary.txt
+          echo 'soem->some' >> dictionary.txt
+          echo 'previosue->previous' >> dictionary.txt
+          echo 'bfore->before' >> dictionary.txt
+          echo 'lettet->letter' >> dictionary.txt
           echo 'crome->Chrome' >> dictionary_code.txt
           echo 'chromim->Chromium' >> dictionary_code.txt
           echo 'kmdutill->kmdutil' >> dictionary_code.txt

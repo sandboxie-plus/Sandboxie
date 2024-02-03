@@ -14,6 +14,8 @@ Sandboxie is a sandbox-based isolation software for 32-bit and 64-bit Windows NT
 
 Sandboxie allows you to create virtually unlimited sandboxes and run them alone or simultaneously to isolate programs from the host and each other, while also allowing you to run as many programs simultaneously in a single box as you wish.
 
+**Note: This is a community fork that took place after the release of the Sandboxie source code and not the official continuation of the previous development (see the [project history](./README.md#-project-history)).**
+
 ## ⏬ Download
 
 [Latest Release](https://github.com/sandboxie-plus/Sandboxie/releases/latest)

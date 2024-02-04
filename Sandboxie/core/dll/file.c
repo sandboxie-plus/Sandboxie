@@ -4064,7 +4064,7 @@ _FX NTSTATUS File_GetFileType(
     *FileType = 0;
 
     P_NtQueryFullAttributesFile pNtQueryFullAttributesFile = __sys_NtQueryFullAttributesFile;
-    // special case for File_InitRecoverFolders as its called bfore we hook those functions
+    // special case for File_InitRecoverFolders as it's called before we hook those functions
     if (!pNtQueryFullAttributesFile)
         pNtQueryFullAttributesFile = NtQueryFullAttributesFile;
 

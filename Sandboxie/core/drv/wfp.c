@@ -866,7 +866,7 @@ void WFP_classify(
 		KeReleaseSpinLock(&WFP_MapLock, irql);
 
 		// TODO: Fix-Me, no ETW logging for now, we are here at DISPATCH_LEVEL but Session_MonitorPut is using pagable memory,
-		// we need eider to create a loggin proxy using non paged pool, or change the tracking mechanism to use non paged pool itself.
+		// we need either to create a logging proxy using non-paged pool, or change the tracking mechanism to use non-paged pool itself.
         /*if (log){
 
 			BOOLEAN send = (filter->filterId == WFP_send_filter_id_v4) || (filter->filterId == WFP_send_filter_id_v6);

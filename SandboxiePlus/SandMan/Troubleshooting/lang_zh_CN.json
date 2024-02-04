@@ -27,7 +27,7 @@
 "This procedure will re install the shell integration": "此步骤将重新安装 Windows 资源管理器（Shell） 集成项",
 "Add Run Sandboxed": "安装沙盒内的",
 "Add Run Unsandboxed": "安装沙盒外的",
-"Install legacy shell extensions": "安装旧的 Windows 文件资源管理器（Shell） 扩展",
+"Install legacy shell extensions": "安装旧的 Windows 资源管理器（Shell） 扩展",
 "Select which shell options should be reinstalled": "选择应重新安装的 Windows 资源管理器（Shell） 选项",
 
 "Failed to install application into a sandbox": "无法将应用程序安装到沙盒中",

@@ -1014,7 +1014,7 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
 
     P_NtClose pNtClose = __sys_NtClose;
     P_NtFsControlFile pNtFsControlFile = __sys_NtFsControlFile;
-    // special case for File_InitRecoverFolders as its called bfore we hook those functions
+    // special case for File_InitRecoverFolders as its called before we hook those functions
     if (! pNtClose)
         pNtClose = NtClose;
     if (! pNtFsControlFile)

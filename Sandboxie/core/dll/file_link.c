@@ -930,7 +930,7 @@ _FX NTSTATUS File_OpenForAddTempLink(HANDLE* handle, WCHAR *path, ULONG CreateOp
     IO_STATUS_BLOCK IoStatusBlock;
 
     P_NtCreateFile pNtCreateFile = __sys_NtCreateFile;
-    // special case for File_InitRecoverFolders as its called bfore we hook those functions
+    // special case for File_InitRecoverFolders as it's called before we hook those functions
     if (! pNtCreateFile)
         pNtCreateFile = NtCreateFile;
 
@@ -970,7 +970,7 @@ _FX NTSTATUS File_OpenForAddTempLink(HANDLE* handle, WCHAR *path, ULONG CreateOp
         Dll_PopTlsNameBuffer(TlsData);
 
     }
-    else // its already a copy path
+    else // it's already a copy path
         status = STATUS_BAD_INITIAL_PC;
 
     //
@@ -1014,7 +1014,7 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
 
     P_NtClose pNtClose = __sys_NtClose;
     P_NtFsControlFile pNtFsControlFile = __sys_NtFsControlFile;
-    // special case for File_InitRecoverFolders as its called bfore we hook those functions
+    // special case for File_InitRecoverFolders as it's called before we hook those functions
     if (! pNtClose)
         pNtClose = NtClose;
     if (! pNtFsControlFile)

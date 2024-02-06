@@ -50,7 +50,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Setup msbuild
-      uses: microsoft/setup-msbuild@v1
+      uses: microsoft/setup-msbuild@v2
 
     # Qt 6 is only required for ARM64 build currently.
     # - name: Install Qt6 x64

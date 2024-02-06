@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.12.9 / 5.67.9] - 2024-02-xx
+## [1.12.9 / 5.67.9] - 2024-02-06
 
 ### Fixed
 - fixed issue with symlink resolver introduced in the previous build [#3481](https://github.com/sandboxie-plus/Sandboxie/issues/3481)

@@ -30,7 +30,7 @@ AllowNoIcons=yes
 AlwaysRestart=no
 LicenseFile=license.txt
 UsedUserAreasWarning=no
-VersionInfoCopyright=Copyright (C) 2020-2023 by David Xanatos (xanasoft.com)
+VersionInfoCopyright=Copyright (C) 2020-2024 by David Xanatos (xanasoft.com)
 VersionInfoVersion={#MyAppVersion}
 SetupIconFile=SandManInstall.ico
 

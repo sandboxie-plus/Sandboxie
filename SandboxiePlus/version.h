@@ -20,5 +20,5 @@
 
 #define MY_PRODUCT_NAME_STRING  "Sandboxie-Plus"
 #define MY_COMPANY_NAME_STRING  "sandboxie-plus.com"
-#define MY_COPYRIGHT_STRING     "Copyright (C) 2020-2023 by David Xanatos (xanasoft.com)"
+#define MY_COPYRIGHT_STRING     "Copyright (C) 2020-2024 by David Xanatos (xanasoft.com)"
 

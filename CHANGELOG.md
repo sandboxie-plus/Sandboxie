@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.13.0 / 5.68.0] - 2024-02-??
+## [1.13.0 / 5.68.0] - 2024-02-10
 
 ### Added
 - added advanced API trace functionality

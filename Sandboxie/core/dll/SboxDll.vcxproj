@@ -321,7 +321,6 @@
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
       <OptimizeReferences>false</OptimizeReferences>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
-      <CETCompat>true</CETCompat>
     </Link>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_UTILITY_PASS2;MY_ARM64_FLAG;%(PreprocessorDefinitions)</PreprocessorDefinitions>

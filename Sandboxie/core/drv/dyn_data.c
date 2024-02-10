@@ -946,7 +946,7 @@ _FX NTSTATUS Dyndata_LoadData()
             status = STATUS_INVALID_IMAGE_FORMAT;
         }
 #ifdef _M_ARM64
-        else if(Custom->Arch != IMAGE_FILE_MACHINE_ARM64) {
+        else if (Custom->Arch != IMAGE_FILE_MACHINE_ARM64) {
 #elif _WIN64
         else if (Custom->Arch != IMAGE_FILE_MACHINE_AMD64) {
 #else

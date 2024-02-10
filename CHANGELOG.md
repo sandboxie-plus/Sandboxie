@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - when sandboxie encounters a yet unsupported kernel build, token based isoaltion is disabled to prevent system instability
   - this safety mechanism is disabled on systems participating in the windows insider program
   - for systems in the insider program the latest known ofsets are tried
+- reworked part of the low level code injection mechanism to add compatybility with windows insider build 26040 and later
 
 ### Removed
 - cleaned up code and removed obsolete VC 6.0 workarounds

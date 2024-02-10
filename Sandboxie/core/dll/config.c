@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -589,6 +589,32 @@ BOOLEAN SbieDll_CheckStringInList(const WCHAR* string, const WCHAR* boxname, con
         ++index;
         if (NT_SUCCESS(status)) {
             if (_wcsicmp(buf, string) == 0) {
+                return TRUE;
+            }
+        }
+        else if (status != STATUS_BUFFER_TOO_SMALL)
+            break;
+    }
+    return FALSE;
+}
+
+
+//---------------------------------------------------------------------------
+// SbieDll_CheckStringInListA
+//---------------------------------------------------------------------------
+
+
+BOOLEAN SbieDll_CheckStringInListA(const char* string, const WCHAR* boxname, const WCHAR* setting)
+{
+    WCHAR buf[66];
+    ULONG index = 0;
+    while (1) {
+        NTSTATUS status = SbieApi_QueryConfAsIs(boxname, setting, index, buf, 64 * sizeof(WCHAR));
+        ++index;
+        if (NT_SUCCESS(status)) {
+            WCHAR* ptr = buf;
+            for (const char* tmp = string; *ptr && *tmp && *ptr == *tmp; ptr++, tmp++);
+            if (*ptr == L'\0') {
                 return TRUE;
             }
         }

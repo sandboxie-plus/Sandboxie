@@ -73,8 +73,6 @@ typedef struct _SCM_NOTIFY_GLOBAL {
 //---------------------------------------------------------------------------
 
 
-static BOOLEAN Scm_Notify_Init(HMODULE module);
-
 static DWORD Scm_NotifyServiceStatusChangeW(
     SC_HANDLE hService, DWORD dwNotifyMask, void *pNotifyBuffer);
 
@@ -111,40 +109,6 @@ static SCM_NOTIFY_GLOBAL *Scm_Notify_Global = NULL;
 
 static P_NotifyServiceStatusChange __sys_NotifyServiceStatusChangeA = NULL;
 static P_NotifyServiceStatusChange __sys_NotifyServiceStatusChangeW = NULL;
-
-
-//---------------------------------------------------------------------------
-// Scm_Notify_Init
-//---------------------------------------------------------------------------
-
-
-_FX BOOLEAN Scm_Notify_Init(HMODULE module)
-{
-    //
-    // NotifyServiceStatusChange is available on Windows Vista and later
-    //
-
-    if (Dll_OsBuild < 6000)
-        return TRUE;
-
-    //
-    // initialize critical section
-    //
-
-    Scm_Notify_CritSec = Dll_Alloc(sizeof(CRITICAL_SECTION));
-    InitializeCriticalSectionAndSpinCount(Scm_Notify_CritSec, 1000);
-
-    //
-    // hook the API
-    //
-
-    SCM_IMPORT_AW(NotifyServiceStatusChange);
-
-    SBIEDLL_HOOK_SCM(NotifyServiceStatusChangeA);
-    SBIEDLL_HOOK_SCM(NotifyServiceStatusChangeW);
-
-    return TRUE;
-}
 
 
 //---------------------------------------------------------------------------

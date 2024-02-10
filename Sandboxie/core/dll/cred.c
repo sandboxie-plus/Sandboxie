@@ -83,11 +83,6 @@ static BOOL Cred_CredGetTargetInfoW(
 static BOOL Cred_CredGetTargetInfoA(
     void *pTargetName, ULONG Flags, void **pTargetInfo);
 
-static BOOL Cred_CredRenameW(
-    void *OldTargetName, void *NewTargetName, ULONG Type, ULONG Flags);
-static BOOL Cred_CredRenameA(
-    void *OldTargetName, void *NewTargetName, ULONG Type, ULONG Flags);
-
 static BOOL Cred_CredDeleteW(const wchar_t *TargetName, ULONG Type, ULONG Flags);
 static BOOL Cred_CredDeleteA(const char *TargetName, ULONG Type, ULONG Flags);
 
@@ -123,9 +118,6 @@ P_CredReadDomainCredentials __sys_CredReadDomainCredentialsA = NULL;
 //P_CredGetTargetInfo      __sys_CredGetTargetInfoA    = NULL;
 //P_CredGetTargetInfo      __sys_CredGetTargetInfoW    = NULL;
 
-P_CredRename             __sys_CredRenameA           = NULL;
-P_CredRename             __sys_CredRenameW           = NULL;
-
 P_CredDelete             __sys_CredDeleteA           = NULL;
 P_CredDelete             __sys_CredDeleteW           = NULL;
 
@@ -156,7 +148,7 @@ static const WCHAR *Cred_DomainCred = L"DomainCred-";
 
 
 #define SBIEDLL_HOOK_CRED(proc)                                             \
-    *(ULONG_PTR *)&__sys_##proc = (ULONG_PTR)Ldr_GetProcAddrNew(DllName_advapi32, L#proc, #proc); \
+    *(ULONG_PTR *)&__sys_##proc = (ULONG_PTR)GetProcAddress(module, #proc); \
     if (*(ULONG_PTR *)&__sys_##proc) {                                      \
         *(ULONG_PTR *)&__sys_##proc = (ULONG_PTR)                           \
             SbieDll_Hook(#proc, __sys_##proc, Cred_##proc, module);         \
@@ -165,11 +157,11 @@ static const WCHAR *Cred_DomainCred = L"DomainCred-";
 
 
 //---------------------------------------------------------------------------
-// Cred_Init_AdvApi
+// Cred_Init
 //---------------------------------------------------------------------------
 
 
-_FX BOOLEAN Cred_Init_AdvApi(HMODULE module)
+_FX BOOLEAN Cred_Init(HMODULE module)
 {
     //
     // if OpenProtectedStorage or OpenCredentials is specified,
@@ -206,9 +198,6 @@ _FX BOOLEAN Cred_Init_AdvApi(HMODULE module)
 
     //SBIEDLL_HOOK_CRED(CredGetTargetInfoA);
     //SBIEDLL_HOOK_CRED(CredGetTargetInfoW);
-
-    SBIEDLL_HOOK_CRED(CredRenameA);
-    SBIEDLL_HOOK_CRED(CredRenameW);
 
     SBIEDLL_HOOK_CRED(CredDeleteA);
     SBIEDLL_HOOK_CRED(CredDeleteW);
@@ -1336,20 +1325,6 @@ _FX CREDENTIAL_TARGET_INFORMATIONW* Cred_CREDENTIAL_TARGET_INFORMATIONA2W(CREDEN
 
 
 //---------------------------------------------------------------------------
-// Cred_CredRenameW
-//---------------------------------------------------------------------------
-
-
-_FX BOOL Cred_CredRenameW(
-    void *OldTargetName, void *NewTargetName, ULONG Type, ULONG Flags)
-{
-    SbieApi_Log(2205, L"CredRenameW");
-    SetLastError(ERROR_NO_SUCH_LOGON_SESSION);
-    return FALSE;
-}
-
-
-//---------------------------------------------------------------------------
 // Cred_CredWriteA
 //---------------------------------------------------------------------------
 
@@ -1416,20 +1391,6 @@ _FX BOOL Cred_CredWriteDomainCredentialsA(
     SbieApi_Log(2205, L"CredGetTargetInfoA");
     return __sys_CredGetTargetInfoA(pTargetName, Flags, pTargetInfo);
 }*/
-
-
-//---------------------------------------------------------------------------
-// Cred_CredRenameA
-//---------------------------------------------------------------------------
-
-
-_FX BOOL Cred_CredRenameA(
-    void *OldTargetName, void *NewTargetName, ULONG Type, ULONG Flags)
-{
-    SbieApi_Log(2205, L"CredRenameA");
-    SetLastError(ERROR_NO_SUCH_LOGON_SESSION);
-    return FALSE;
-}
 
 
 //---------------------------------------------------------------------------

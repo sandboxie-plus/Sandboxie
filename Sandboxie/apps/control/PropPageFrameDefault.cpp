@@ -41,21 +41,6 @@
 namespace TreePropSheet
 {
 
-
-//uncomment the following line, if you don't have installed the
-//new platform SDK
-#define XPSUPPORT
-
-#ifdef XPSUPPORT
-#if _MSC_VER == 1200        // Visual C++ 6.0
-#include "c:\work\psdk\include\uxtheme.h"
-//#include "c:\work\psdk\include\tmschema.h"
-#else
-#include <uxtheme.h>
-//#include <tmschema.h>
-#endif
-#endif
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -69,17 +54,8 @@ static char THIS_FILE[] = __FILE__;
 #define THEMEAPITYPE(f)                 typedef HRESULT (__stdcall *_##f)
 #define THEMEAPITYPE_(t, f)         typedef t (__stdcall *_##f)
 #define THEMEAPIPTR(f)                  _##f m_p##f
-
-#ifdef XPSUPPORT
-    #define THEMECALL(f)                        return (*m_p##f)
-    #define GETTHEMECALL(f)                 m_p##f = (_##f)GetProcAddress(m_hThemeLib, #f)
-#else
-    void ThemeDummy(...) {ASSERT(FALSE);}
-    #define HTHEME                                  void*
-    #define TABP_PANE                               0
-    #define THEMECALL(f)                        return 0; ThemeDummy
-    #define GETTHEMECALL(f)                 m_p##f = NULL
-#endif
+#define THEMECALL(f)                        return (*m_p##f)
+#define GETTHEMECALL(f)                 m_p##f = (_##f)GetProcAddress(m_hThemeLib, #f)
 
 
 /**
@@ -123,7 +99,6 @@ public:
 
 // function pointers
 private:
-#ifdef XPSUPPORT
     THEMEAPITYPE_(BOOL, IsThemeActive)();
     THEMEAPIPTR(IsThemeActive);
 
@@ -138,7 +113,6 @@ private:
 
     THEMEAPITYPE(DrawThemeBackground)(HTHEME hTheme, HDC hdc, int iPartId, int iStateId, const RECT *pRect, OPTIONAL const RECT *pClipRect);
     THEMEAPIPTR(DrawThemeBackground);
-#endif
 
 // properties
 private:
@@ -155,7 +129,6 @@ static CThemeLib g_ThemeLib;
 CThemeLib::CThemeLib()
 :   m_hThemeLib(NULL)
 {
-#ifdef XPSUPPORT
     m_hThemeLib = LoadLibrary(_T("uxtheme.dll"));
     if (!m_hThemeLib)
         return;
@@ -165,7 +138,6 @@ CThemeLib::CThemeLib()
     GETTHEMECALL(CloseThemeData);
     GETTHEMECALL(GetThemeBackgroundContentRect);
     GETTHEMECALL(DrawThemeBackground);
-#endif
 }
 
 

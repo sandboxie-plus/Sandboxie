@@ -2423,6 +2423,15 @@ void CSandMan::OnStatusChanged()
 			}
 		}
 
+		int DynData = theAPI->IsDyndataActive();
+		if (DynData == 0)
+			QMessageBox::critical(this, "Sandboxie-Plus", tr("Your Windows build exceeds the current support capabilities of your Sandboxie version, "
+				"resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.\r\n"
+				"Please check if there is an update for sandboxie."));
+		else if (DynData == -1)
+			OnLogMessage(tr("Your Windows build exceeds the current known support capabilities of your Sandboxie version, "
+				"Sandboxie will attempt to use the last-known offsets which may cause system instability."));
+
 		if (isVisible())
 			CheckSupport();
 

@@ -1,5 +1,6 @@
 ;------------------------------------------------------------------------
 ; Copyright 2004-2020 Sandboxie Holdings, LLC 
+; Copyright 2020-2024 David Xanatos, xanasoft.com
 ;
 ; This program is free software: you can redistribute it and/or modify
 ;   it under the terms of the GNU General Public License as published by
@@ -356,3 +357,29 @@ endif
 InstrumentationCallbackAsm@0 endp
 
 PUBLIC C InstrumentationCallbackAsm@0
+
+
+
+;----------------------------------------------------------------------------
+; ApiInstrumentationProxy
+;----------------------------------------------------------------------------
+
+extern @ApiInstrumentation@8:near
+
+ApiInstrumentationAsm@0 proc
+
+    ; prepare arguments for instrumentation
+    lea ecx,[eax + 8] ; pName
+    lea edx,[esp + 4] ; pArgs
+
+    ; invoke api entry instrumentation
+    push eax
+    call @ApiInstrumentation@8
+    pop eax
+
+    ; jump to detour function
+	jmp dword ptr [eax]
+
+ApiInstrumentationAsm@0 endp
+
+PUBLIC C ApiInstrumentationAsm@0

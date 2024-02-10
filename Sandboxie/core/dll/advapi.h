@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -220,9 +221,6 @@ extern P_CredReadDomainCredentials __sys_CredReadDomainCredentialsA;
 
 //extern P_CredGetTargetInfo      __sys_CredGetTargetInfoA;
 //extern P_CredGetTargetInfo      __sys_CredGetTargetInfoW;
-
-extern P_CredRename             __sys_CredRenameA;
-extern P_CredRename             __sys_CredRenameW;
 
 extern P_CredDelete             __sys_CredDeleteA;
 extern P_CredDelete             __sys_CredDeleteW;

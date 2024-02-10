@@ -112,6 +112,7 @@
       <AdditionalDependencies>libucrt.lib;libvcruntime.lib;ntdll.lib;psapi.lib;SbieDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
+      <CETCompat>true</CETCompat>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
@@ -124,6 +125,7 @@
       <AdditionalDependencies>libucrt.lib;libvcruntime.lib;ntdll.lib;psapi.lib;SbieDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
+      <CETCompat>true</CETCompat>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|ARM64'">
@@ -151,6 +153,7 @@
       <AdditionalDependencies>libucrt.lib;libvcruntime.lib;ntdll.lib;psapi.lib;SbieDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
+      <CETCompat>true</CETCompat>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
@@ -165,6 +168,7 @@
       <AdditionalDependencies>libucrt.lib;libvcruntime.lib;ntdll.lib;psapi.lib;SbieDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
+      <CETCompat>true</CETCompat>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|ARM64'">

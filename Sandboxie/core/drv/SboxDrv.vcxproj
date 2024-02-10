@@ -490,6 +490,7 @@
     <ClCompile Include="conf_user.c" />
     <ClCompile Include="dll.c" />
     <ClCompile Include="driver.c" />
+    <ClCompile Include="dyn_data.c" />
     <ClCompile Include="file.c" />
     <ClCompile Include="file_ctrl.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='SbieRelease|Win32'">true</ExcludedFromBuild>
@@ -730,6 +731,7 @@
     <ClInclude Include="conf.h" />
     <ClInclude Include="dll.h" />
     <ClInclude Include="driver.h" />
+    <ClInclude Include="dyn_data.h" />
     <ClInclude Include="file.h" />
     <ClInclude Include="gui.h" />
     <ClInclude Include="hook.h">
@@ -750,6 +752,7 @@
     <ClInclude Include="thread.h" />
     <ClInclude Include="token.h" />
     <ClInclude Include="util.h" />
+    <ClInclude Include="verify.h" />
     <ClInclude Include="wfp.h" />
   </ItemGroup>
   <ItemGroup>

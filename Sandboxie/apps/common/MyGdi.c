@@ -27,10 +27,6 @@
 #include "MyGdi.h"
 
 #include <common/defines.h>
-#if _MSC_VER == 1200        // Visual C++ 6.0
-typedef ULONG ULONG_PTR;
-#endif
-
 
 //---------------------------------------------------------------------------
 // GdiPlus Imports

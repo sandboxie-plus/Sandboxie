@@ -126,6 +126,14 @@ static BOOL Scm_SetServiceStatus(
 static BOOL Scm_ControlService(
     SC_HANDLE hService, DWORD dwControl, SERVICE_STATUS *lpServiceStatus);
 
+static BOOL Scm_ControlServiceExA(
+    SC_HANDLE hService, DWORD dwControl,
+    ULONG dwInfoLevel, void *pControlParams);
+
+static BOOL Scm_ControlServiceExW(
+    SC_HANDLE hService, DWORD dwControl,
+    ULONG dwInfoLevel, void *pControlParams);
+
 static void Scm_DeletePermissions(const WCHAR *AppIdGuid);
 
 
@@ -1684,6 +1692,36 @@ _FX BOOL Scm_ControlService(
     }
 
     return Scm_QueryServiceStatus(hService, lpServiceStatus);
+}
+
+
+//---------------------------------------------------------------------------
+// Scm_ControlServiceA
+//---------------------------------------------------------------------------
+
+
+_FX BOOL Scm_ControlServiceExA(
+    SC_HANDLE hService, DWORD dwControl,
+    ULONG dwInfoLevel, void* pControlParams)
+{
+    PSERVICE_CONTROL_STATUS_REASON_PARAMSA pParams = (PSERVICE_CONTROL_STATUS_REASON_PARAMSA)pControlParams;
+
+    return Scm_ControlService(hService, dwControl, &pParams->ServiceStatus);
+}
+
+
+//---------------------------------------------------------------------------
+// Scm_ControlServiceW
+//---------------------------------------------------------------------------
+
+
+_FX BOOL Scm_ControlServiceExW(
+    SC_HANDLE hService, DWORD dwControl,
+    ULONG dwInfoLevel, void* pControlParams) 
+{
+    PSERVICE_CONTROL_STATUS_REASON_PARAMSW pParams = (PSERVICE_CONTROL_STATUS_REASON_PARAMSW)pControlParams;
+
+    return Scm_ControlService(hService, dwControl, &pParams->ServiceStatus);
 }
 
 

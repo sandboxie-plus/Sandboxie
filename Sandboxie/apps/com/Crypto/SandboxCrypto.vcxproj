@@ -114,6 +114,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;ntdll.lib;kernel32.lib;secur32.lib;advapi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <CETCompat>true</CETCompat>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
@@ -123,6 +124,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>SbieDll.lib;ntdll.lib;kernel32.lib;secur32.lib;advapi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <CETCompat>true</CETCompat>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|ARM64'">
@@ -139,6 +141,7 @@
     <ClCompile />
     <Link>
       <AdditionalDependencies>SbieDll.lib;ntdll.lib;kernel32.lib;secur32.lib;advapi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <CETCompat>true</CETCompat>
     </Link>
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -148,6 +151,7 @@
     <ClCompile />
     <Link>
       <AdditionalDependencies>SbieDll.lib;ntdll.lib;kernel32.lib;secur32.lib;advapi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <CETCompat>true</CETCompat>
     </Link>
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>

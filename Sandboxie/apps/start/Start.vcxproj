@@ -115,6 +115,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>libvcruntime.lib;libucrt.lib;ntdll.lib;User32.lib;Shell32.lib;Shlwapi.lib;Kernel32.lib;Gdi32.lib;SbieDll.lib;Ole32.lib;Common.lib;Advapi32.lib;Comctl32.lib;Comdlg32.lib;uuid.lib;Gdiplus.lib</AdditionalDependencies>
+      <CETCompat>true</CETCompat>
     </Link>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1200;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -130,6 +131,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>libvcruntime.lib;libucrt.lib;ntdll.lib;User32.lib;Shell32.lib;Shlwapi.lib;Kernel32.lib;Gdi32.lib;SbieDll.lib;Ole32.lib;Common.lib;Advapi32.lib;Comctl32.lib;Comdlg32.lib;uuid.lib;Gdiplus.lib</AdditionalDependencies>
+      <CETCompat>true</CETCompat>
     </Link>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1200;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -158,6 +160,7 @@
     <ClCompile />
     <Link>
       <AdditionalDependencies>libvcruntime.lib;libucrt.lib;ntdll.lib;User32.lib;Shell32.lib;Shlwapi.lib;Kernel32.lib;Gdi32.lib;SbieDll.lib;Ole32.lib;Common.lib;Advapi32.lib;Comctl32.lib;Comdlg32.lib;uuid.lib;Gdiplus.lib</AdditionalDependencies>
+      <CETCompat>true</CETCompat>
     </Link>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1200;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -175,6 +178,7 @@
     <Link>
       <AdditionalDependencies>libvcruntime.lib;libucrt.lib;ntdll.lib;User32.lib;Shell32.lib;Shlwapi.lib;Kernel32.lib;Gdi32.lib;SbieDll.lib;Ole32.lib;Common.lib;Advapi32.lib;Comctl32.lib;Comdlg32.lib;uuid.lib;Gdiplus.lib</AdditionalDependencies>
       <FullProgramDatabaseFile>true</FullProgramDatabaseFile>
+      <CETCompat>true</CETCompat>
     </Link>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1200;%(PreprocessorDefinitions)</PreprocessorDefinitions>

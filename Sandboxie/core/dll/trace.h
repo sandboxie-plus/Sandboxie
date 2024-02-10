@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2023 DavidXanatos, xanasoft.com
+ * Copyright 2020-2024 DavidXanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -28,6 +28,8 @@
 
 
 int Trace_Init(void);
+
+void Trace_Entry(void);
 
 WCHAR* Trace_FindModuleByAddress(void* address);
 

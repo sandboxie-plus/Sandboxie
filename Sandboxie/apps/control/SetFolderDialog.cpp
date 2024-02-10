@@ -175,11 +175,7 @@ CString CSetFolderDialog::GetFolder()
     }
     if (path.IsEmpty()) {
         WCHAR windir[MAX_PATH + 8];
-#if _MSC_VER == 1200        // Visual C++ 6.0
-        GetWindowsDirectory(windir, MAX_PATH);
-#else
         GetSystemWindowsDirectoryW(windir, MAX_PATH);
-#endif
         path = windir[0] + CString(L":\\Sandbox\\%USER%\\%SANDBOX%");
     }
     return path;

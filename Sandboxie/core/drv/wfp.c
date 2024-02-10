@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 David Xanatos, xanasoft.com
+ * Copyright 2021-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -57,7 +57,7 @@
 #define MONITOR_OTHER					0x0000000C
 #define MONITOR_NETFW					0x0000000D
 #define MONITOR_SCM						0x0000000E // Service Control Manager
-#define MONITOR_APICALL					0x0000000F // needs the logapi.dll
+#define MONITOR_APICALL					0x0000000F
 #define MONITOR_RPC						0x00000010
 #define MONITOR_TYPE_MASK				0x000000FF
 
@@ -131,6 +131,8 @@
 #define SBIE_FEATURE_FLAG_WIN32K_HOOK   0x00000020
 #define SBIE_FEATURE_FLAG_SECURITY_MODE	0x00000040
 
+#define SBIE_FEATURE_FLAG_DYNDATA_OK	0x10000000
+#define SBIE_FEATURE_FLAG_DYNDATA_EXP	0x20000000
 #define SBIE_FEATURE_FLAG_NEW_ARCH		0x40000000
 #define SBIE_FEATURE_FLAG_CERTIFIED		0x80000000
 

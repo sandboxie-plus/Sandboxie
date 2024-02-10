@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020 David Xanatos, xanasoft.com
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -45,6 +45,7 @@
 #include "util.h"
 #include "token.h"
 #include "wfp.h"
+#include "dyn_data.h"
 
 //---------------------------------------------------------------------------
 // Functions
@@ -94,6 +95,7 @@ WCHAR *Driver_Version = TEXT(MY_VERSION_STRING);
 
 ULONG Driver_OsVersion = 0;
 ULONG Driver_OsBuild = 0;
+BOOLEAN Driver_OsTestSigning = FALSE;
 
 POOL *Driver_Pool = NULL;
 
@@ -187,9 +189,13 @@ _FX NTSTATUS DriverEntry(
     }
 
     if (ok)
+        Dyndata_Init();
+
+    if (ok)
         ok = Driver_FindHomePath(RegistryPath);
 
-    MyValidateCertificate();
+    if (ok)
+        MyValidateCertificate();
 
     //
     // initialize simple utility modules.  these don't hook anything
@@ -277,12 +283,14 @@ _FX NTSTATUS DriverEntry(
 //---------------------------------------------------------------------------
 // Driver_CheckOsVersion
 //---------------------------------------------------------------------------
-unsigned int g_TrapFrameOffset = 0;
+
 
 _FX BOOLEAN Driver_CheckOsVersion(void)
 {
     ULONG MajorVersion, MinorVersion;
     WCHAR str[64];
+
+    Driver_OsTestSigning = MyIsTestSigning();
 
     //
     // make sure we're running on Windows XP (v5.1) or later (32-bit)
@@ -303,45 +311,27 @@ _FX BOOLEAN Driver_CheckOsVersion(void)
             (   MajorVersion == MajorVersionMin
              && MinorVersion >= MinorVersionMin)) {
 
-        // $Offset$ - Hard Offset Dependency
-
         if (MajorVersion == 10) { // for windows 11 its still 10
             Driver_OsVersion = DRIVER_WINDOWS_10;
-#ifdef _WIN64
-            g_TrapFrameOffset = 0x90;
-#endif
-
         }
         else if (MajorVersion == 6) {
 
             if (MinorVersion == 3 && Driver_OsBuild >= 9600) {
                 Driver_OsVersion = DRIVER_WINDOWS_81;
-#ifdef _WIN64
-                g_TrapFrameOffset = 0x90;
-#endif
             }
             else if (MinorVersion == 2 && Driver_OsBuild >= 9200) {
                 Driver_OsVersion = DRIVER_WINDOWS_8;
-#ifdef _WIN64
-                g_TrapFrameOffset = 0x90;
-#endif
             }
 
             else if (MinorVersion == 1 && Driver_OsBuild >= 7600) {
                 Driver_OsVersion = DRIVER_WINDOWS_7;
-#ifdef _WIN64
-                g_TrapFrameOffset = 0x1d8;
-#endif
             }
             else if (MinorVersion == 0 && Driver_OsBuild >= 6000) {
                 Driver_OsVersion = DRIVER_WINDOWS_VISTA;
-                g_TrapFrameOffset = 0x00;
             }
 
         }
         else {
-            g_TrapFrameOffset = 0x00;
-
             if (MinorVersion == 2)
                 Driver_OsVersion = DRIVER_WINDOWS_2003;
 
@@ -862,52 +852,4 @@ _FX NTSTATUS Driver_Api_Unload(PROCESS *proc, ULONG64 *parms)
     Driver_Object->DriverUnload = SbieDrv_DriverUnload;
 
     return STATUS_SUCCESS;
-}
-
-
-//---------------------------------------------------------------------------
-// Driver_GetRegDword
-//---------------------------------------------------------------------------
-
-
-_FX ULONG Driver_GetRegDword(
-    const WCHAR *KeyPath, const WCHAR *ValueName)
-{
-    NTSTATUS status;
-    RTL_QUERY_REGISTRY_TABLE qrt[2];
-    UNICODE_STRING uni;
-    ULONG value;
-
-    value = -1;
-
-    uni.Length = 4;
-    uni.MaximumLength = 4;
-    uni.Buffer = (WCHAR *)&value;
-
-    memzero(qrt, sizeof(qrt));
-    qrt[0].Flags =  RTL_QUERY_REGISTRY_REQUIRED |
-                    RTL_QUERY_REGISTRY_DIRECT |
-                    RTL_QUERY_REGISTRY_TYPECHECK |
-                    RTL_QUERY_REGISTRY_NOEXPAND;
-    qrt[0].Name = (WCHAR *)ValueName;
-    qrt[0].EntryContext = &uni;
-    qrt[0].DefaultType = (REG_DWORD << RTL_QUERY_REGISTRY_TYPECHECK_SHIFT) | REG_NONE;
-
-    status = RtlQueryRegistryValues(
-        RTL_REGISTRY_ABSOLUTE, KeyPath, qrt, NULL, NULL);
-
-    if (status != STATUS_SUCCESS)
-        return 0;
-
-    if (value == -1) {
-
-        //
-        // if value is not string, RtlQueryRegistryValues writes
-        // it directly into EntryContext
-        //
-
-        value = *(ULONG *)&uni;
-    }
-
-    return value;
 }

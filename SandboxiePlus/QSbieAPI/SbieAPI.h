@@ -124,6 +124,7 @@ public:
 
 	virtual quint32			GetFeatureFlags();
 	virtual QString			GetFeatureStr();
+	virtual int				IsDyndataActive();
 
 	// Forced Processes
 	virtual SB_STATUS		DisableForceProcess(bool Set, int Seconds = 0);

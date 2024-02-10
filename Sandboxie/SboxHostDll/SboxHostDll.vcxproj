@@ -116,6 +116,7 @@
       <AdditionalDependencies>SbieDll.lib;psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>
       </ShowProgress>
+      <CETCompat>true</CETCompat>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
@@ -129,6 +130,7 @@
       <AdditionalDependencies>SbieDll.lib;psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>
       </ShowProgress>
+      <CETCompat>true</CETCompat>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|ARM64'">
@@ -159,6 +161,7 @@
       <AdditionalDependencies>SbieDll.lib;psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>
       </ShowProgress>
+      <CETCompat>true</CETCompat>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
@@ -176,6 +179,7 @@
       <ShowProgress>
       </ShowProgress>
       <IgnoreSpecificDefaultLibraries>msvcprt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <CETCompat>true</CETCompat>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|ARM64'">

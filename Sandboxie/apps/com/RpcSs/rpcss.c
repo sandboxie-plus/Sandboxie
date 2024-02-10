@@ -49,6 +49,7 @@ const WCHAR *ComPlusCOMRegTable_Name = L"Global\\ComPlusCOMRegTable";
 
 const char *_localhost = "localhost";
 
+static ULONG_PTR __sys_CreateFileMappingW                       = 0;
 
 static ULONG_PTR __sys_bind                                     = 0;
 static ULONG_PTR __sys_listen                                   = 0;
@@ -391,6 +392,7 @@ _FX int __stdcall WinMain(
 
     WCHAR ServiceName[16];
     BOOL ok;
+    BOOL hook_success = TRUE;
 
     if (! (SbieApi_QueryProcessInfo(0, 0) & SBIE_FLAG_VALID_PROCESS))
         return EXIT_FAILURE;
@@ -420,6 +422,8 @@ _FX int __stdcall WinMain(
         // pretend we are the SCM
         if (!Hook_Service_Control_Manager())
             return EXIT_FAILURE;
+
+        HOOK_WIN32(CreateFileMappingW);
 
         // hook privilege-related functions
         if (!Hook_Privilege())

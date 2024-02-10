@@ -7,6 +7,7 @@ MISCHELPERS_EXPORT int vswprintf_l(wchar_t * _String, size_t _Count, const wchar
 #endif
 
 MISCHELPERS_EXPORT time_t GetTime();
+MISCHELPERS_EXPORT __time64_t GetTimeMs();
 MISCHELPERS_EXPORT quint64 GetCurTick();
 
 
@@ -117,7 +118,7 @@ MISCHELPERS_EXPORT bool InitConsole(bool bCreateIfNeeded = true);
 MISCHELPERS_EXPORT void SafeShow(QWidget* pWidget);
 
 template <typename T>
-QSet<T> ListToSet(const QList<T>& qList) { return QSet<QString>(qList.begin(), qList.end()); }
+QSet<T> ListToSet(const QList<T>& qList) { return QSet<T>(qList.begin(), qList.end()); }
 
 template <typename T>
-QList<T> SetToList(const QSet<T>& qSet) { return QList<QString>(qSet.begin(), qSet.end()); }
+QList<T> SetToList(const QSet<T>& qSet) { return QList<T>(qSet.begin(), qSet.end()); }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2021 David Xanatos, xanasoft.com
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -464,7 +464,6 @@ _FX BOOLEAN Syscall_Init_Table32(void)
 // Syscall_Api_Invoke32
 //---------------------------------------------------------------------------
 
-extern unsigned int g_TrapFrameOffset;
 
 _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
 {
@@ -548,9 +547,10 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
             || entry->handler3_func_support_procmon(proc, entry, user_args)
             )
         {
-            if (g_TrapFrameOffset) {
+            // $Offset$
+            if (Dyndata_Active && Dyndata_Config.TrapFrame_offset) {
 
-                pTrapFrame = (PKTRAP_FRAME) *(ULONG_PTR*)((UCHAR*)pThread + g_TrapFrameOffset);
+                pTrapFrame = (PKTRAP_FRAME) *(ULONG_PTR*)((UCHAR*)pThread + Dyndata_Config.TrapFrame_offset);
                 if (pTrapFrame) {
                     ret = pTrapFrame->Rip;
                     UserStack = pTrapFrame->Rsp;
@@ -605,7 +605,7 @@ _FX NTSTATUS Syscall_Api_Invoke32(PROCESS* proc, ULONG64* parms)
         }
 
 #ifdef _M_AMD64
-        if (g_TrapFrameOffset) {
+        if (Dyndata_Active && Dyndata_Config.TrapFrame_offset) {
             if (pTrapFrame) {
                 pTrapFrame->Rip = ret;
                 pTrapFrame->Rsp = UserStack;

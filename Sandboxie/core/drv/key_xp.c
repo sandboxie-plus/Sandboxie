@@ -176,10 +176,10 @@ _FX BOOLEAN Key_Init_XpHook(void)
         return FALSE;
     Key_ParseHooked = TRUE;
 
-    if (Driver_GetRegDword(L"\\Registry\\Machine\\System\\CurrentControlSet\\Services\\" L"klif", L"Type") == SERVICE_KERNEL_DRIVER)
+    if (GetRegDword(L"\\Registry\\Machine\\System\\CurrentControlSet\\Services\\" L"klif", L"Type") == SERVICE_KERNEL_DRIVER)
         Key_HookWaitForSingleObject();
 
-    if (Driver_GetRegDword(L"\\Registry\\Machine\\System\\CurrentControlSet\\Services\\" L"SAVOnAccessControl", L"Type") == SERVICE_FILE_SYSTEM_DRIVER)
+    if (GetRegDword(L"\\Registry\\Machine\\System\\CurrentControlSet\\Services\\" L"SAVOnAccessControl", L"Type") == SERVICE_FILE_SYSTEM_DRIVER)
         Key_NeverUnmountHives = TRUE;
 
     return TRUE;

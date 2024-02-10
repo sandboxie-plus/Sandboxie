@@ -51,33 +51,6 @@ static ULONG_PTR __sys_CreateFileW                              = 0;
 
 
 //---------------------------------------------------------------------------
-// my_CreateFileMapping
-//---------------------------------------------------------------------------
-
-
-HANDLE my_CreateFileMappingW(
-    HANDLE hFile,
-    LPSECURITY_ATTRIBUTES lpAttributes,
-    DWORD flProtect,
-    DWORD dwMaximumSizeHigh,
-    DWORD dwMaximumSizeLow,
-    LPCWSTR lpName)
-{
-    typedef HANDLE (__stdcall *P_CreateFileMappingW)(
-        HANDLE hFile,
-        LPSECURITY_ATTRIBUTES lpAttributes,
-        DWORD flProtect,
-        DWORD dwMaximumSizeHigh,
-        DWORD dwMaximumSizeLow,
-        LPCWSTR lpName);
-
-    return ((P_CreateFileMappingW)__sys_CreateFileMappingW)(
-        hFile, lpAttributes, flProtect,
-        dwMaximumSizeHigh, dwMaximumSizeLow, lpName);
-}
-
-
-//---------------------------------------------------------------------------
 // my_DuplicateHandle
 //---------------------------------------------------------------------------
 

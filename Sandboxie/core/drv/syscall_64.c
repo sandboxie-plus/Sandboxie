@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -22,6 +23,7 @@
 #ifdef _M_ARM64
 #include "common/arm64_asm.h"
 #endif
+#include "dyn_data.h"
 
 //---------------------------------------------------------------------------
 // System Service Descriptor Table
@@ -66,6 +68,45 @@ static void *Syscall_GetMasterServiceTable(void);
 //---------------------------------------------------------------------------
 
 
+_FX ULONG_PTR Syscall_GetKernelBase(void)
+{
+    NTSTATUS status;
+
+    UCHAR *ptr;
+    ULONG i;
+    ULONG_PTR kernel_base;
+
+    ptr = ExAllocatePoolWithTag(PagedPool, PAGE_SIZE, tzuk);
+    if (! ptr) {
+
+        Log_Msg0(MSG_1104);
+        return 0;
+    }
+
+    i = 0;
+    status = ZwQuerySystemInformation(
+        SystemModuleInformation, ptr, PAGE_SIZE, &i);
+
+    if (status != STATUS_SUCCESS &&
+        status != STATUS_INFO_LENGTH_MISMATCH) {
+
+        ExFreePoolWithTag(ptr, tzuk);
+        return 0;
+    }
+
+    kernel_base = ((SYSTEM_MODULE_INFORMATION *)ptr)->ModuleInfo[0].ImageBaseAddress;
+
+    ExFreePoolWithTag(ptr, tzuk);
+
+    return kernel_base;
+}
+
+
+//---------------------------------------------------------------------------
+// Syscall_GetMasterServiceTable
+//---------------------------------------------------------------------------
+
+
 _FX void *Syscall_GetMasterServiceTable(void)
 {
     NTSTATUS status;
@@ -74,7 +115,7 @@ _FX void *Syscall_GetMasterServiceTable(void)
     UNICODE_STRING uni;
     UCHAR *ptr;
     ULONG i;
-    ULONG_PTR nt, nt_from_code;
+    ULONG_PTR kernel_base;
     ULONG ofs32a;
     ULONG ofs32b;
 
@@ -92,28 +133,9 @@ _FX void *Syscall_GetMasterServiceTable(void)
     // this may be variable on Vista
     //
 
-    ptr = ExAllocatePoolWithTag(PagedPool, PAGE_SIZE, tzuk);
-    if (! ptr) {
-
-        Log_Msg0(MSG_1104);
+    kernel_base = Syscall_GetKernelBase();
+    if (!kernel_base)
         return NULL;
-    }
-
-    i = 0;
-    status = ZwQuerySystemInformation(
-        SystemModuleInformation, ptr, PAGE_SIZE, &i);
-
-    if (status != STATUS_SUCCESS &&
-        status != STATUS_INFO_LENGTH_MISMATCH) {
-
-        ExFreePoolWithTag(ptr, tzuk);
-        return NULL;
-    }
-
-    nt = ((SYSTEM_MODULE_INFORMATION *)ptr)->ModuleInfo[0].ImageBaseAddress;
-
-    ExFreePoolWithTag(ptr, tzuk);
-
 
     //
     // next, analyze KeAddSystemServiceTable to learn where shadow table is
@@ -128,7 +150,7 @@ _FX void *Syscall_GetMasterServiceTable(void)
 
     //MasterTable lookup for windows 11 on arm64
 
-    DbgPrint("Trying KeAddSystemServiceTable = %p, OS = %d, nt = %p, Pattern = ADRP ADD\n", ptr, Driver_OsBuild, nt);
+    DbgPrint("Trying KeAddSystemServiceTable = %p, OS = %d, kernel_base = %p, Pattern = ADRP ADD\n", ptr, Driver_OsBuild, kernel_base);
 
     for (i = 0; i < 0x40; i += 4, ptr += 4) {
 
@@ -148,25 +170,21 @@ _FX void *Syscall_GetMasterServiceTable(void)
                 delta += add.imm12;
 
                 // Note: ADRP clears the lower 12 bits of the PC
-                nt = ((ULONG_PTR)ptr & ~0xFFF) + delta;
+                MasterTable = (void*)(((ULONG_PTR)ptr & ~0xFFF) + delta);
 
-                DbgPrint("Found KeServiceDescriptorTableShadow = %p\n", nt);
-                return (void*)nt;
+                DbgPrint("Found KeServiceDescriptorTableShadow = %p\n", MasterTable);
+                return MasterTable;
             }
         }
     }
-
-    return 0;
 #else
 
     //MasterTable lookup for windows 11 insider 22563 or server 2022 20348
     if (Driver_OsBuild >= 20348) {
 
-        ULONG_PTR kernel_base = nt;
-
         DbgPrint("Trying KeAddSystemServiceTable = %p, OS = %d, Pattern = CMP MOV\n", ptr, Driver_OsBuild);
 
-        nt = 0;
+        ULONG_PTR nt = 0;
         //Look for the following instruction pattern
         //CMP target address, <register>       : [0x48 || 0x4c][0x39][<0x20][4 byte offset to target]
         //MOV qword[target address],<register> : [0x48 || 0x4c][0x89][<0x20][4 byte offset to target]
@@ -224,13 +242,12 @@ _FX void *Syscall_GetMasterServiceTable(void)
     //MasterTable lookup for windows 10
     if (Driver_OsBuild >= 10041) {
 
-        ULONG_PTR kernel_base = nt;
         RtlInitUnicodeString(&uni, L"KeAddSystemServiceTable");
         ptr = (UCHAR *)MmGetSystemRoutineAddress(&uni);
 
         DbgPrint("Trying KeAddSystemServiceTable = %p, OS = %d, Pattern = LEA MOV\n", ptr, Driver_OsBuild);
         
-        nt = 0;
+        ULONG_PTR nt = 0;
         //Look for the following instruction pattern
         //LEA <register>, target address       : [0x48 || 0x4c][0x8d][<0x20][4 byte offset to target]
         //MOV qword[target address],<register> : [0x48 || 0x4c][0x89][<0x20][4 byte offset to target]
@@ -290,101 +307,108 @@ _FX void *Syscall_GetMasterServiceTable(void)
             }
         }
 
-        return 0; //target address not found
+        //target address not found
     }
 
     //MasterTable lookup for windows 7 and 8
+    else {
 
-    //
-    // within the first 32 bytes, we expect the instruction "lea r11,nt"
-    // or any variation thereof, which looks like this:
-    // address:  4C xx xx ofs32
-    // such that (address + sizeof(instruction) + ofs32) == nt
-    //
-    // on Windows 8:  expect "lea rbx,nt" instead, which is 48 xx xx ofs32
-    //
-
-    nt_from_code = 0;
-
-    for (i = 0; i < 32; ++i) {
-        if (*ptr == 0x4C || *ptr == 0x48) {
-            ofs32a = *(ULONG *)&ptr[3];
-            nt_from_code = (ULONG_PTR)(ptr + 7 + (LONG_PTR)(LONG)ofs32a);
-            if (nt_from_code == nt) {
-                ptr += 7;
-                break;
-            }
-            nt_from_code = 0;
-        }
-        ++ptr;
-    }
-
-    if (nt != nt_from_code)
-        return NULL;
-
-    //
-    // within the next 32 bytes we expect two "cmp [xx+ofs32],0" instructions
-    // such that either ofs32 is less than 0x400000 bytes away from nt and
-    // are exactly 0x40 bytes apart (on Vista SP2:  0xC0 bytes apart)
-    //
-
-    ofs32a = -1;
-    ofs32b = -1;
-
-    for (i = 0; i < 32; ++i) {
-        if ((ptr[0] == 0x4A || ptr[0] == 0x4B) &&
-                ptr[1] == 0x83 && ptr[8] == 0x00)
-        {
-            if (ofs32a == -1)
-                ofs32a = *(ULONG *)&ptr[4];
-            else if (ofs32b == -1) {
-                ofs32b = *(ULONG *)&ptr[4];
-                break;
-            }
-        }
-        ++ptr;
-    }
-
-    if (ofs32a >= 0x400000 || ofs32b >= 0x400000) {
+        ULONG_PTR nt, nt_from_code;
 
         //
-        // alternatively on Windows 8: expect "cmp [rax+rbx+ofs32],0"
-        // followed by "lea rcx,[rbx+ofs32]
+        // within the first 32 bytes, we expect the instruction "lea r11,nt"
+        // or any variation thereof, which looks like this:
+        // address:  4C xx xx ofs32
+        // such that (address + sizeof(instruction) + ofs32) == nt
+        //
+        // on Windows 8:  expect "lea rbx,nt" instead, which is 48 xx xx ofs32
         //
 
-        ptr -= i;
+        nt = kernel_base;
+        nt_from_code = 0;
 
         for (i = 0; i < 32; ++i) {
-            if (ptr[0] == 0x48) {
-                if (ptr[1] == 0x83 && ptr[2] == 0xBC && ptr[3] == 0x18 &&
-                        ptr[8] == 0x00 && ofs32a == -1)
-                    ofs32a = *(ULONG *)&ptr[4];
-                else if (ptr[1] == 0x8D && ptr[2] == 0x8B && ofs32b == -1)
-                    ofs32b = *(ULONG *)&ptr[3];
-
+            if (*ptr == 0x4C || *ptr == 0x48) {
+                ofs32a = *(ULONG*)&ptr[3];
+                nt_from_code = (ULONG_PTR)(ptr + 7 + (LONG_PTR)(LONG)ofs32a);
+                if (nt_from_code == nt) {
+                    ptr += 7;
+                    break;
+                }
+                nt_from_code = 0;
             }
             ++ptr;
         }
+
+        if (nt != nt_from_code)
+            return NULL;
+
+        //
+        // within the next 32 bytes we expect two "cmp [xx+ofs32],0" instructions
+        // such that either ofs32 is less than 0x400000 bytes away from nt and
+        // are exactly 0x40 bytes apart (on Vista SP2:  0xC0 bytes apart)
+        //
+
+        ofs32a = -1;
+        ofs32b = -1;
+
+        for (i = 0; i < 32; ++i) {
+            if ((ptr[0] == 0x4A || ptr[0] == 0x4B) &&
+                ptr[1] == 0x83 && ptr[8] == 0x00)
+            {
+                if (ofs32a == -1)
+                    ofs32a = *(ULONG*)&ptr[4];
+                else if (ofs32b == -1) {
+                    ofs32b = *(ULONG*)&ptr[4];
+                    break;
+                }
+            }
+            ++ptr;
+        }
+
+        if (ofs32a >= 0x400000 || ofs32b >= 0x400000) {
+
+            //
+            // alternatively on Windows 8: expect "cmp [rax+rbx+ofs32],0"
+            // followed by "lea rcx,[rbx+ofs32]
+            //
+
+            ptr -= i;
+
+            for (i = 0; i < 32; ++i) {
+                if (ptr[0] == 0x48) {
+                    if (ptr[1] == 0x83 && ptr[2] == 0xBC && ptr[3] == 0x18 &&
+                        ptr[8] == 0x00 && ofs32a == -1)
+                        ofs32a = *(ULONG*)&ptr[4];
+                    else if (ptr[1] == 0x8D && ptr[2] == 0x8B && ofs32b == -1)
+                        ofs32b = *(ULONG*)&ptr[3];
+
+                }
+                ++ptr;
+            }
+        }
+
+        //
+        // the service descriptor tables should be less than 0x400000
+        // bytes from the start of the 'nt' module, and should be exactly
+        // 0x40 or 0xC0 bytes apart
+        //
+
+        if (ofs32a >= 0x400000 || ofs32b >= 0x400000)
+            return NULL;
+
+        // This code block is broken by KB4056892 (for Win 7-64 so far). This is the Intel Meltdown bug
+        //if (        (ofs32a - ofs32b != 0x40 && ofs32b - ofs32a != 0x40)
+        //         && (ofs32a - ofs32b != 0xC0 && ofs32b - ofs32a != 0xC0))
+        //    return NULL;
+
+        MasterTable = (void*)(nt + ofs32a);
+
+        return MasterTable;
     }
-
-    //
-    // the service descriptor tables should be less than 0x400000
-    // bytes from the start of the 'nt' module, and should be exactly
-    // 0x40 or 0xC0 bytes apart
-    //
-
-    if (ofs32a >= 0x400000 || ofs32b >= 0x400000)
-        return NULL;
-
-    // This code block is broken by KB4056892 (for Win 7-64 so far). This is the Intel Meltdown bug
-    //if (        (ofs32a - ofs32b != 0x40 && ofs32b - ofs32a != 0x40)
-    //         && (ofs32a - ofs32b != 0xC0 && ofs32b - ofs32a != 0xC0))
-    //    return NULL;
-
-    MasterTable = (void *)(nt + ofs32a);
-
-    return MasterTable;
 #endif
+
+    return 0;
 }
 
 
@@ -401,7 +425,16 @@ _FX void *Syscall_GetServiceTable(void)
     if (ShadowTable)
         return ShadowTable;
 
-    // $Offset$ - Hard Offset Dependency
+    // $Offset$
+    if (Dyndata_Active && Dyndata_Config.ServiceTable_offset != -1) {
+
+        ULONG_PTR kernel_base = Syscall_GetKernelBase();
+        if (!kernel_base)
+            return NULL;
+
+        ShadowTable = (SERVICE_DESCRIPTOR *)(kernel_base + Dyndata_Config.ServiceTable_offset);
+        return ShadowTable;
+    }
 
     //
     // the shadow table should be 0x40 bytes before the master table,

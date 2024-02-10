@@ -4,6 +4,25 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.13.0 / 5.68.0] - 2024-02-??
+
+### Added
+- added advanced API trace functionality
+
+### Changed
+- reworked scm hooking to improve windows 10 compatybility
+- reworked offset dependant handling of undocumented windows kernel objects
+  - the required offsets can be now updated independantly from the driver
+  - the DynData blob is digitally signed, when in testsigning mode the signature is howeever ignored
+  - when sandboxie encounters a yet unsupported kernel build, token based isoaltion is disabled to prevent system instability
+  - this safety mechanism is disabled on systems participating in the windows insider program
+  - for systems in the insider program the latest known ofsets are tried
+
+### Removed
+- cleaned up code and removed obsolete VC 6.0 workarounds
+
+
+
 
 ## [1.12.9 / 5.67.9] - 2024-02-06
 

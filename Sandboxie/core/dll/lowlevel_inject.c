@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2023 David Xanatos, xanasoft.com
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -650,6 +650,10 @@ _FX ULONG SbieDll_InjectLow_InitSyscalls(BOOLEAN drv_init)
 	//
 
 	extra->InjectData_offset = ULONG_DIFF(ptr, extra);
+
+
+	extra->Init_Lock = 0;
+
 
 	//
 	// adjust size of syscall buffer to include path strings

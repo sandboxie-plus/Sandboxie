@@ -27,6 +27,7 @@
 #include "log.h"
 #include "api.h"
 #include "util.h"
+#include "dyn_data.h"
 
 
 //---------------------------------------------------------------------------
@@ -331,30 +332,8 @@ _FX GUI_CLIPBOARD *Gui_GetClipboard(void)
     // Clipboard offset can be found in win32k!FindClipFormat
     // In windows 10 find the offset in win32kfull!FindClipFormat
 
-    ULONG Clipboard_Offset = 0;
-
-    // $Offset$ - Hard Offset Dependency
-
-#ifdef _WIN64
-    if (Driver_OsVersion <= DRIVER_WINDOWS_7) {
-        Clipboard_Offset = 0x58;
-    }
-    else if (Driver_OsBuild < 18980) {      // Covers Win 8 up through Win 10-18980
-        Clipboard_Offset = 0x60;
-    }
-    else
-        Clipboard_Offset = 0x80;
-
-#else ! _WIN64
-    if (Driver_OsVersion <= DRIVER_WINDOWS_7) {
-        Clipboard_Offset = 0x2c;
-    }
-    else if (Driver_OsBuild < 18980) {      // Covers Win 8 up through Win 10-18980
-        Clipboard_Offset = 0x30;
-    }
-    else
-        Clipboard_Offset = 0x40;
-#endif _WIN64
+    if (!Dyndata_Active)
+        return NULL;
 
     //
     // get the window station object to which caller is connected
@@ -377,7 +356,7 @@ _FX GUI_CLIPBOARD *Gui_GetClipboard(void)
     // get the clipboard data in the window station object
     //
 
-    Clipboard = (GUI_CLIPBOARD *) ((ULONG_PTR)WinStaObject + Clipboard_Offset);
+    Clipboard = (GUI_CLIPBOARD *) ((ULONG_PTR)WinStaObject + Dyndata_Config.Clipboard_offset);
 
     if (Clipboard->items && Clipboard->count)
         return Clipboard;

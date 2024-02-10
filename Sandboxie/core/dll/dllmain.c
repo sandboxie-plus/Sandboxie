@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2020-2023 David Xanatos, xanasoft.com
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -117,7 +117,6 @@ ULONG Dll_Windows = 0;
 
 const UCHAR *SbieDll_Version = MY_VERSION_STRING;
 
-BOOLEAN Dll_SbieTrace = FALSE;
 
 //extern ULONG64 __security_cookie = 0;
 
@@ -537,13 +536,6 @@ _FX void Dll_InitExeEntry(void)
     //
 
     //
-    // on Windows 8, we can't load advapi32.dll during Scm_SecHostDll
-    //
-    //
-
-    Scm_SecHostDll_W8();
-
-    //
     // hook DefWindowProc on Windows 7, after USER32 has been initialized
     //
 
@@ -602,9 +594,7 @@ _FX void Dll_InitExeEntry(void)
     // once we return here the process images entrypoint will be called
     //
 
-#ifdef WITH_DEBUG
-    DbgTrace("Dll_InitExeEntry completed");
-#endif
+    Trace_Entry();
     Dll_EntryComplete = TRUE;
 }
 

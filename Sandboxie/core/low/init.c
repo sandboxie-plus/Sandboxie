@@ -50,14 +50,13 @@ typedef long NTSTATUS;
 #else
 #define GET_ADDR_OF_PEB __readgsqword(0x60)
 #endif
-#define GET_ADDR_OF_PROCESS_HEAP ((ULONG_PTR *)(GET_ADDR_OF_PEB + 0x30))
-
+//#define GET_ADDR_OF_PROCESS_HEAP ((ULONG_PTR *)(GET_ADDR_OF_PEB + 0x30))
 
 #else ! _WIN64
 
 // Pointer to 32-bit ProcessHeap is at offset 0x0018 of 32-bit PEB
 #define GET_ADDR_OF_PEB __readfsdword(0x30)
-#define GET_ADDR_OF_PROCESS_HEAP ((ULONG_PTR *)(GET_ADDR_OF_PEB + 0x18))
+//#define GET_ADDR_OF_PROCESS_HEAP ((ULONG_PTR *)(GET_ADDR_OF_PEB + 0x18))
 
 #endif _WIN64
 
@@ -773,61 +772,98 @@ ULONG_PTR EntrypointC(SBIELOW_DATA *data, void *DetourCode, void *SystemService)
     // LdrInitializeThunk which stores new value into ProcessHeap which
     // will not be -1, thus releasing any waiting threads
     //
-    volatile ULONG_PTR *ProcessHeap = GET_ADDR_OF_PROCESS_HEAP;
+    //volatile ULONG_PTR *ProcessHeap = GET_ADDR_OF_PROCESS_HEAP;
 
-    ULONG_PTR OldProcessHeap =
+    if(!data->Init_Done)
+    {
+        SYSCALL_DATA* syscall_data;
+        SBIELOW_EXTRA_DATA *extra;
+
+        //
+        // Starting with Windows 11 build 26040 ProcessHeap must be 0 
+        // for the process initialisation to be successfull, hence from 
+        // now on we use Init_Lock in the SBIELOW_EXTRA_DATA to synchronize 
+        // the execution of the init code, the first thread to arrive here
+        // will encounter the initial 0 value and be allowed to execute
+        // the value will be changed to -1 indicating initialization in 
+        // progress. Subsequent threads will wait, untill the first thread, 
+        // once done changes the value to 1 indicating initialization completion. 
+        // 
+        // Since SBIELOW_EXTRA_DATA is freed by Ldr_Inject_Entry hence we need
+        // to also use Init_Done in SBIELOW_DATA its initially 0 and
+        // once the initialization is completed will be set to 1, such
+        // that later created threads can skip the initialization code.
+        //
+
+        syscall_data = (SYSCALL_DATA*)data->syscall_data;
+      
+        extra = (SBIELOW_EXTRA_DATA *) (data->syscall_data + syscall_data->extra_data_offset);
+
+        volatile ULONG_PTR *Init_Lock = &extra->Init_Lock;
+
 #ifdef _WIN64
-        _InterlockedCompareExchange64(ProcessHeap, -1, 0);
-
+        ULONG_PTR OldInit_Lock = _InterlockedCompareExchange64(Init_Lock, -1, 0);
 #else ! _WIN64
-                    _InterlockedCompareExchange(ProcessHeap, -1, 0);
+        ULONG_PTR OldInit_Lock = _InterlockedCompareExchange(Init_Lock, -1, 0);
 #endif _WIN64
 
-    if (OldProcessHeap == 0) {
+        if (OldInit_Lock == 0) {
 
-        //
-        // the first thread arrives here
-        //
+            //
+            // the first thread arrives here
+            //
 
-        // WaitForDebugger(data);
+            // WaitForDebugger(data);
 
-        //wchar_t text[] = { 't','e','s','t',0 };
-        //SbieApi_LogMsg(data->NtDeviceIoControlFile, data->api_device_handle, 1122, text);
+            //wchar_t text[] = { 't','e','s','t',0 };
+            //SbieApi_LogMsg(data->NtDeviceIoControlFile, data->api_device_handle, 1122, text);
 
-        PrepSyscalls(data, SystemService);
-        if (!data->flags.bHostInject && !data->flags.bNoSysHooks)
-            InitSyscalls(data, SystemService);
+            PrepSyscalls(data, SystemService);
+            if (!data->flags.bHostInject && !data->flags.bNoSysHooks)
+                InitSyscalls(data, SystemService);
 
-		InitInject(data, DetourCode);
+		    InitInject(data, DetourCode);
 
 #ifdef _WIN64
-        if (data->flags.is_wow64) {
+            if (data->flags.is_wow64) {
 
 #ifdef _M_ARM64
-            if(!data->flags.is_chpe32)
-		        DisableCHPE(data);
+                if(!data->flags.is_chpe32)
+		            DisableCHPE(data);
 #endif
-            if (!data->flags.bNoConsole)
-                InitConsoleWOW64(data);
-        }
+                if (!data->flags.bNoConsole)
+                    InitConsoleWOW64(data);
+            }
 #endif
 
-    } else if (OldProcessHeap == -1) {
+            // Set Init_Done 
+            UCHAR Init_Done = 1;
+            WriteMemorySafe(data, &data->Init_Done, sizeof(UCHAR), &Init_Done);
 
-        //
-        // any other threads arrive here and will wait for
-        // the first thread to finish initializing SbieLow
-        //
+            // Release waiting threads
+#ifdef _WIN64
+            _InterlockedExchange64(Init_Lock, 1);
+#else ! _WIN64
+            _InterlockedExchange(Init_Lock, 1);
+#endif _WIN64
 
-        LARGE_INTEGER delay;
-        delay.QuadPart = -SECONDS(3) / 100; // 0FFFFFFFFh 0FFFB6C20h
+        } else if (OldInit_Lock == -1) {
 
-        while (*ProcessHeap == -1) {
+            //
+            // any other threads arrive here and will wait for
+            // the first thread to finish initializing SbieLow
+            //
 
-            const P_NtDelayExecution NtDelayExecution =
-                (P_NtDelayExecution) &data->NtDelayExecution_code;
+            LARGE_INTEGER delay;
+            delay.QuadPart = -SECONDS(3) / 100; // 0FFFFFFFFh 0FFFB6C20h
 
-            NtDelayExecution(FALSE, &delay);
+            while (*Init_Lock == -1) {
+
+                const P_NtDelayExecution NtDelayExecution =
+                    (P_NtDelayExecution) &data->NtDelayExecution_code;
+
+                NtDelayExecution(FALSE, &delay);
+            }
         }
     }
 

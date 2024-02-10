@@ -141,6 +141,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>SbieDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <CETCompat>true</CETCompat>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|x64'">
@@ -154,6 +155,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>SbieDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <CETCompat>true</CETCompat>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieDebug|ARM64'">
@@ -183,6 +185,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>SbieDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <CETCompat>true</CETCompat>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|x64'">
@@ -197,6 +200,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>SbieDll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <CETCompat>true</CETCompat>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='SbieRelease|ARM64'">

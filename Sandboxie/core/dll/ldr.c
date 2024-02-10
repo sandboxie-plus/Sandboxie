@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
- * Copyright 2021-2023 David Xanatos, xanasoft.com
+ * Copyright 2021-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -184,7 +184,7 @@ static DLL Ldr_Dlls[] = {
     { L"ole32.dll",             Ole_Init,                       0}, // COM, OLE
     { L"combase.dll",           Com_Init_ComBase,               0}, // COM
     { L"rpcrt4.dll",            RpcRt_Init,                     0}, // RPC, epmapper
-    { L"sechost.dll",           Scm_SecHostDll,                 0}, // SCM
+    { L"sechost.dll",           SecHost_Init,                   0}, // SCM
     { L"shell32.dll",           SH32_Init,                      0},
     { L"shcore.dll",            Taskbar_SHCore_Init,            0}, // win 8, [Get/Set]CurrentProcessExplicitAppUserModelID
     { L"wtsapi32.dll",          Terminal_Init_WtsApi,           0},
@@ -851,7 +851,6 @@ _FX NTSTATUS Ldr_LdrLoadDll(
         }
         __sys_LdrUnlockLoaderLock(0, LdrCookie);
     }
-    Scm_SecHostDll_W8();
     return status;
 }
 
@@ -870,11 +869,8 @@ _FX NTSTATUS Ldr_Win10_LdrLoadDll(
     //
     // load the DLL 
     //
-    NTSTATUS status = 0;
 
-    status = Ldr_LdrLoadDllImpl(PathString, DllFlags, ModuleName, ModuleHandle);
-    Scm_SecHostDll_W8();
-    return status;
+    return Ldr_LdrLoadDllImpl(PathString, DllFlags, ModuleName, ModuleHandle);
 }
 
 //---------------------------------------------------------------------------
@@ -948,8 +944,6 @@ _FX ULONG_PTR Ldr_LdrResolveDelayLoadedAPI(
         UnknownParameter2, UnknownParameter3, UnknownParameter4);
 
     Ldr_CallDllCallbacks_WithLock();
-
-    Scm_SecHostDll_W8();
 
     return result;
 }
@@ -1122,7 +1116,7 @@ _FX void Ldr_MyDllCallbackNew(const WCHAR *ImageName, HMODULE ImageBase, BOOL Lo
             }
             else {
                 if (dll->state) {
-                    SbieDll_UnHookModule(ImageBase);
+                    //SbieDll_UnHookModule(ImageBase);
                     EnterCriticalSection(&Ldr_LoadedModules_CritSec);
                     dll->state = 0;
                     LeaveCriticalSection(&Ldr_LoadedModules_CritSec);
@@ -1132,6 +1126,11 @@ _FX void Ldr_MyDllCallbackNew(const WCHAR *ImageName, HMODULE ImageBase, BOOL Lo
         }
         ++dll;
     }
+
+    if (LoadState)
+        SbieDll_TraceModule(ImageBase);
+    else
+        SbieDll_UnHookModule(ImageBase);
 
     if (LoadState)
         Ldr_DetectImageType(ImageName);

@@ -1,5 +1,6 @@
 /*
  * Copyright 2004-2020 Sandboxie Holdings, LLC 
+ * Copyright 2020-2024 David Xanatos, xanasoft.com
  *
  * This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -116,9 +117,6 @@ extern P_NtCreateTokenEx                ZwCreateTokenEx;
 
 NTSTATUS Driver_Api_Unload(PROCESS *proc, ULONG64 *parms);
 
-ULONG Driver_GetRegDword(
-    const WCHAR *KeyPath, const WCHAR *ValueName);
-
 
 //---------------------------------------------------------------------------
 // Variables
@@ -137,6 +135,7 @@ extern WCHAR *Driver_Version;
 
 extern ULONG Driver_OsVersion;
 extern ULONG Driver_OsBuild;
+extern BOOLEAN Driver_OsTestSigning;
 
 extern POOL *Driver_Pool;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2023 David Xanatos, xanasoft.com
+ * Copyright (C) 2021-2024 David Xanatos, xanasoft.com
  *
  * Process Hacker is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -90,4 +90,5 @@ enum ECertLevel {
 
 #ifdef KERNEL_MODE
 extern SCertInfo Verify_CertInfo;
+NTSTATUS KphVerifyBuffer(PUCHAR Buffer, ULONG BufferSize, PUCHAR Signature, ULONG SignatureSize);
 #endif

@@ -1,5 +1,6 @@
 ;------------------------------------------------------------------------
 ; Copyright 2022 David Xanatos, xanasoft.com
+; Copyright 2020-2024 David Xanatos, xanasoft.com
 ;
 ; This program is free software: you can redistribute it and/or modify
 ;   it under the terms of the GNU General Public License as published by
@@ -53,6 +54,9 @@
     EXPORT InstrumentationCallbackAsm
     IMPORT __sys_RtlCaptureContext
     IMPORT InstrumentationCallback
+
+    EXPORT ApiInstrumentationAsm
+    IMPORT ApiInstrumentation
 
 
 ;----------------------------------------------------------------------------
@@ -407,6 +411,52 @@ InstrumentationCallbackAsm PROC
     ldp         x3, x1, [sp], #0x10         ; Pass the return value and the original LR to the callback
     bl          InstrumentationCallback     ; Call main instrumentation routine
     brk         #0xF000                     ; it should not return
+
+ ENDP
+
+
+
+;----------------------------------------------------------------------------
+; InstrumentationCallbackAsm
+;----------------------------------------------------------------------------
+
+
+ApiInstrumentationAsm PROC
+    
+    ;brk #0xF000
+
+    ; spill arguments on the stack
+    stp     x6, x7, [sp, #-0x10]!
+    stp     x4, x5, [sp, #-0x10]!
+    stp     x2, x3, [sp, #-0x10]!
+    stp     x0, x1, [sp, #-0x10]!
+    stp     fp, lr, [sp, #-0x10]!  
+
+    ; invoke api entry instrumentation
+    ; todo
+
+    mov     x0, x17
+    add     x0, x0, #8  ; pName
+
+    mov     x1, sp
+    add     x1, x1, #16 ; pArgs
+
+    stp     x16, x17, [sp, #-0x10]! 
+
+    bl      ApiInstrumentation
+
+    ldp     x16, x17, [sp], #0x10
+
+    ; restore arguments
+    ldp     fp, lr, [sp], #0x10
+    ldp     x0, x1, [sp], #0x10
+    ldp     x2, x3, [sp], #0x10
+    ldp     x4, x5, [sp], #0x10
+    ldp     x6, x7, [sp], #0x10
+
+    ; jump to detour function
+    ldr     x16, [x17]
+    br      x16
 
  ENDP
 

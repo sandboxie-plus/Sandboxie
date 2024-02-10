@@ -942,12 +942,15 @@ _FX NTSTATUS Dyndata_LoadData()
         // Check if the provided dyn data matches our system architecture
         //
 
+        if (Custom->Format != DYNDATA_FORMAT || Custom->Signature != DYNDATA_SIGN) {
+            status = STATUS_INVALID_IMAGE_FORMAT;
+        }
 #ifdef _M_ARM64
-        if(Custom->Arch != IMAGE_FILE_MACHINE_ARM64) {
+        else if(Custom->Arch != IMAGE_FILE_MACHINE_ARM64) {
 #elif _WIN64
-        if (Custom->Arch != IMAGE_FILE_MACHINE_AMD64) {
+        else if (Custom->Arch != IMAGE_FILE_MACHINE_AMD64) {
 #else
-        if (Custom->Arch != IMAGE_FILE_MACHINE_I386) {
+        else if (Custom->Arch != IMAGE_FILE_MACHINE_I386) {
 #endif
             status = STATUS_IMAGE_MACHINE_TYPE_MISMATCH;
         }

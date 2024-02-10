@@ -112,6 +112,18 @@ SBIE1203 Kann Pfad-Liste nicht erstellen (Fehler bei %2)
 SBIE1204 Sandbox-Erstellung fehlgeschlagen für %3 %2
 .
 
+1205;evt;pop;err;01
+SBIE1205 Ungültige dynamische Daten (DynData) in der Registry gefunden, Fehler: %2
+.
+
+1206;evt;pop;err;01
+SBIE1206 Ihre Windowsversion (%2) wird noch nicht durch Sandboxie unterstützt, Fehler: %3
+.
+
+1207;pop;err;01
+SBIE1207 Ihre Windowsversion (%2) wird noch nicht durch Sandboxie unterstützt, was bedeutet, dass Applikationen ohne Sicherheitsisolation laufen werden!
+.
+
 1211;pop;err;01
 SBIE1211 Initialisierung der Sandbox fehlgeschlagen für den Prozess %2
 .

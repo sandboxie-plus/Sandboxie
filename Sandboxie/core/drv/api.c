@@ -1341,10 +1341,13 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
                 FeatureFlags |= SBIE_FEATURE_FLAG_COMPARTMENTS;
             }
 
-            if (Dyndata_Active)
+            if (Dyndata_Active) {
+
                 FeatureFlags |= SBIE_FEATURE_FLAG_DYNDATA_OK;
-            if (Dyndata_Experimental)
-                FeatureFlags |= SBIE_FEATURE_FLAG_DYNDATA_EXP;
+
+                if (Dyndata_Config.Flags & DYNDATA_FLAG_EXP)
+                    FeatureFlags |= SBIE_FEATURE_FLAG_DYNDATA_EXP;
+            }
 
 #ifdef _M_ARM64
             FeatureFlags |= SBIE_FEATURE_FLAG_NEW_ARCH;

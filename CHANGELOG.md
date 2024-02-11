@@ -10,6 +10,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - added missing checkbox for api tracing
 
+### Changed
+- changed DynData format to add flags
+
 
 
 ## [1.13.0 / 5.68.0] - 2024-02-10

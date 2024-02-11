@@ -27,6 +27,12 @@
 #include "driver.h"
 #endif
 
+#define DYNDATA_FORMAT      1
+#define DYNDATA_VERSION     1
+#define DYNDATA_SIGN        'eibs'
+
+#define DYNDATA_FLAG_EXP    0x80000000
+
 //
 // Special values:
 //  OsBuild_max can be set to -1 indicating no upper bound
@@ -37,6 +43,8 @@ typedef struct _SBIE_DYNCONFIG
 {
     ULONG OsBuild_min;
     ULONG OsBuild_max;
+    ULONG Flags;
+    ULONG Reserved;
 
     USHORT Clipboard_offset;
 
@@ -76,7 +84,6 @@ typedef struct _SBIE_DYNDATA
 //const int y = FIELD_OFFSET(SBIE_DYNDATA, Configs);
 
 extern BOOLEAN Dyndata_Active;
-extern BOOLEAN Dyndata_Experimental;
 extern SBIE_DYNCONFIG Dyndata_Config;
 
 BOOLEAN Dyndata_Init();

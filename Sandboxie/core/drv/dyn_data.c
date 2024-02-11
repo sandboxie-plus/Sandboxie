@@ -26,15 +26,13 @@
 #include "verify.h"
 #endif
 
+const wchar_t Parameters[] = L"\\Parameters";
+
 #ifndef IMAGE_FILE_MACHINE_I386
 #define IMAGE_FILE_MACHINE_I386              0x014c  // Intel 386.
 #define IMAGE_FILE_MACHINE_AMD64             0x8664  // AMD64 (K8)
 #define IMAGE_FILE_MACHINE_ARM64             0xAA64  // ARM64 Little-Endian
 #endif
-
-#define DYNDATA_FORMAT  '1d'
-#define DYNDATA_VERSION 1
-#define DYNDATA_SIGN    'eibs'
 
 #define WIN11_LATEST    26052 // <-----
 #define SVR2025         26040
@@ -58,7 +56,6 @@
 //#define DYN_DEBUG
 
 BOOLEAN Dyndata_Active = FALSE;
-BOOLEAN Dyndata_Experimental = FALSE;
 SBIE_DYNCONFIG Dyndata_Config = { 0,0 };
 
 
@@ -99,6 +96,7 @@ _FX NTSTATUS Dyndata_InitDefault(PSBIE_DYNDATA* pDefault, ULONG* pDefaultSize)
     ASSERT(Default->Count == DataCount);
 
     ULONG Win11_latest = WIN11_LATEST;
+    ULONG Flags_latest = 0;
 
     //
     // If the PC is on the insider branch and the current build is newer then the last known one,
@@ -106,15 +104,41 @@ _FX NTSTATUS Dyndata_InitDefault(PSBIE_DYNDATA* pDefault, ULONG* pDefaultSize)
     //
     
     //Driver_OsBuild = 26060;
-    if (Driver_OsBuild > WIN11_LATEST)  {
-
-        DbgPrint("Sbie detected insider build %d, WIN_LATEST adjusted.\r\n", Driver_OsBuild);
-
+    if (Driver_OsBuild > WIN11_LATEST) 
+    {
         if (GetRegDword(L"\\Registry\\Machine\\Software\\Microsoft\\WindowsSelfHost\\Applicability", L"EnablePreviewBuilds") != 0) {
 
-            Win11_latest = -1;
+            DbgPrint("Sbie detected insider build %d, WIN_LATEST adjusted.\r\n", Driver_OsBuild);
 
-            Dyndata_Experimental = TRUE;
+            Win11_latest = -1;
+            Flags_latest |= DYNDATA_FLAG_EXP;
+        }
+        else
+        {
+            //
+            // Overwrite the max allowed build for the latest known offsets for testing,
+            // the ofsets readly change hence its likely to work.
+            // 
+            // L"\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Services\\SbieDrv\\Parameters"
+            // L"LatestMaxBuild"
+            //
+
+            ULONG path_len = wcslen(Driver_RegistryPath) * sizeof(WCHAR) + sizeof(Parameters);
+            WCHAR* path = Pool_Alloc(Driver_Pool, path_len);
+            if (path) {
+
+                wcscpy(path, Driver_RegistryPath);
+                wcscat(path, Parameters);
+
+                DWORD MaxBuild = GetRegDword(path, L"LatestMaxBuild");
+                if (MaxBuild > WIN11_LATEST)
+                {
+                    Win11_latest = MaxBuild;
+                    Flags_latest |= DYNDATA_FLAG_EXP;
+                }
+
+                Pool_Free(path, path_len);
+            }
         }
     }
 
@@ -132,6 +156,7 @@ _FX NTSTATUS Dyndata_InitDefault(PSBIE_DYNDATA* pDefault, ULONG* pDefaultSize)
     // 22000+ - ... // W11 - ...
     Data->OsBuild_max = 26020;
     Data->OsBuild_min = WIN11_FIRST;
+    //Data->Flags = Flags_latest;
 
     Data->Clipboard_offset = 0x80;
 
@@ -186,6 +211,7 @@ _FX NTSTATUS Dyndata_InitDefault(PSBIE_DYNDATA* pDefault, ULONG* pDefaultSize)
     // Server2025 / >= 26040
     Data->OsBuild_max = Win11_latest;
     Data->OsBuild_min = SVR2025;
+    Data->Flags = Flags_latest;
 
     Data->Clipboard_offset = 0x80;
 
@@ -905,7 +931,6 @@ _FX NTSTATUS Dyndata_LoadData()
     NTSTATUS status;
     WCHAR* path = NULL;
     ULONG  path_len = 0;
-    const wchar_t Parameters[] = L"\\Parameters";
 
     PSBIE_DYNDATA Default = NULL;
     ULONG DefaultSize = 0;
@@ -919,6 +944,7 @@ _FX NTSTATUS Dyndata_LoadData()
     //
     // load dyn data from registry
     // L"\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Services\\SbieDrv\\Parameters"
+    // L"DynData" / L"DynDataSig"
     //
 
     path_len = wcslen(Driver_RegistryPath) * sizeof(WCHAR) + sizeof(Parameters);

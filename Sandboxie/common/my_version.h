@@ -21,8 +21,8 @@
 #ifndef _MY_VERSION_H
 #define _MY_VERSION_H
 
-#define MY_VERSION_BINARY       5,68,0
-#define MY_VERSION_STRING       "5.68.0"
+#define MY_VERSION_BINARY       5,68,1
+#define MY_VERSION_STRING       "5.68.1"
 #define MY_ABI_VERSION          0x56800
 
 // These #defines are used by either Resource Compiler or NSIS installer

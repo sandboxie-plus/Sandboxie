@@ -4,6 +4,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+
+## [1.13.1 / 5.68.1] - 2024-02-??
+
+### Fixed
+- added missing checkbox for api tracing
+
+
+
 ## [1.13.0 / 5.68.0] - 2024-02-10
 
 ### Added
@@ -22,6 +30,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 - cleaned up code and removed obsolete VC 6.0 workarounds
+
+### Fixed
+- fixed incompatybility with windows insider build 26040 and later
 
 
 

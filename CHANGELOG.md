@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - this safety mechanism is disabled on systems participating in the windows insider program
   - for systems in the insider program the latest known ofsets are tried
 - reworked part of the low level code injection mechanism to add compatybility with windows insider build 26040 and later
+- enabled CET Shadow Stack Compatible Flag for core sandboxie binaries
 
 ### Removed
 - cleaned up code and removed obsolete VC 6.0 workarounds

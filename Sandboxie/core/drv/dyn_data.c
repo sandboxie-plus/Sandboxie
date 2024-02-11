@@ -59,18 +59,6 @@ BOOLEAN Dyndata_Active = FALSE;
 SBIE_DYNCONFIG Dyndata_Config = { 0,0 };
 
 
-//---------------------------------------------------------------------------
-// Dyn_InitData
-//---------------------------------------------------------------------------
-
-
-_FX NTSTATUS Dyndata_InitDefault(PSBIE_DYNDATA* pDefault, ULONG* pDefaultSize)
-{
-    
-
-    PSBIE_DYNDATA Default = NULL;
-    ULONG DefaultSize = 0;
-
 #define INIT_DATA(arch, count) \
     const size_t DataCount = count; \
     DefaultSize = FIELD_OFFSET(SBIE_DYNDATA, Configs) + ((sizeof(USHORT) + sizeof(SBIE_DYNCONFIG)) * DataCount) + sizeof(USHORT); \
@@ -95,53 +83,16 @@ _FX NTSTATUS Dyndata_InitDefault(PSBIE_DYNDATA* pDefault, ULONG* pDefaultSize)
     Default->Configs[Default->Count] = 0; \
     ASSERT(Default->Count == DataCount);
 
-    ULONG Win11_latest = WIN11_LATEST;
-    ULONG Flags_latest = 0;
 
-    //
-    // If the PC is on the insider branch and the current build is newer then the last known one,
-    // we set OsBuild_max = -1 to allow the lask known version of dyndata to be tried out.
-    //
-    
-    //Driver_OsBuild = 26060;
-    if (Driver_OsBuild > WIN11_LATEST) 
-    {
-        if (GetRegDword(L"\\Registry\\Machine\\Software\\Microsoft\\WindowsSelfHost\\Applicability", L"EnablePreviewBuilds") != 0) {
+//---------------------------------------------------------------------------
+// Dyn_InitData
+//---------------------------------------------------------------------------
 
-            DbgPrint("Sbie detected insider build %d, WIN_LATEST adjusted.\r\n", Driver_OsBuild);
 
-            Win11_latest = -1;
-            Flags_latest |= DYNDATA_FLAG_EXP;
-        }
-        else
-        {
-            //
-            // Overwrite the max allowed build for the latest known offsets for testing,
-            // the ofsets readly change hence its likely to work.
-            // 
-            // L"\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Services\\SbieDrv\\Parameters"
-            // L"LatestMaxBuild"
-            //
-
-            ULONG path_len = wcslen(Driver_RegistryPath) * sizeof(WCHAR) + sizeof(Parameters);
-            WCHAR* path = Pool_Alloc(Driver_Pool, path_len);
-            if (path) {
-
-                wcscpy(path, Driver_RegistryPath);
-                wcscat(path, Parameters);
-
-                DWORD MaxBuild = GetRegDword(path, L"LatestMaxBuild");
-                if (MaxBuild > WIN11_LATEST)
-                {
-                    Win11_latest = MaxBuild;
-                    Flags_latest |= DYNDATA_FLAG_EXP;
-                }
-
-                Pool_Free(path, path_len);
-            }
-        }
-    }
-
+_FX NTSTATUS Dyndata_InitDefault(PSBIE_DYNDATA* pDefault, ULONG* pDefaultSize)
+{
+    PSBIE_DYNDATA Default = NULL;
+    ULONG DefaultSize = 0;
 
 #ifdef _M_ARM64
 
@@ -156,7 +107,6 @@ _FX NTSTATUS Dyndata_InitDefault(PSBIE_DYNDATA* pDefault, ULONG* pDefaultSize)
     // 22000+ - ... // W11 - ...
     Data->OsBuild_max = 26020;
     Data->OsBuild_min = WIN11_FIRST;
-    //Data->Flags = Flags_latest;
 
     Data->Clipboard_offset = 0x80;
 
@@ -209,9 +159,8 @@ _FX NTSTATUS Dyndata_InitDefault(PSBIE_DYNDATA* pDefault, ULONG* pDefaultSize)
     BEGIN_DATA
 
     // Server2025 / >= 26040
-    Data->OsBuild_max = Win11_latest;
+    Data->OsBuild_max = WIN11_LATEST;
     Data->OsBuild_min = SVR2025;
-    Data->Flags = Flags_latest;
 
     Data->Clipboard_offset = 0x80;
 
@@ -912,12 +861,6 @@ _FX NTSTATUS Dyndata_InitDefault(PSBIE_DYNDATA* pDefault, ULONG* pDefaultSize)
 
 #endif _WIN64
 
-#undef DATA_COUNT
-#undef INIT_DATA
-#undef BEGIN_DATA
-#undef NEXT_DATA
-#undef END_DATA
-
     *pDefault = Default;
     *pDefaultSize = DefaultSize;
 
@@ -925,6 +868,11 @@ _FX NTSTATUS Dyndata_InitDefault(PSBIE_DYNDATA* pDefault, ULONG* pDefaultSize)
 }
 
 #ifndef ISSIGNTOOL
+
+//---------------------------------------------------------------------------
+// Dyndata_LoadData
+//---------------------------------------------------------------------------
+
 
 _FX NTSTATUS Dyndata_LoadData()
 {
@@ -940,9 +888,11 @@ _FX NTSTATUS Dyndata_LoadData()
     ULONG DyndataSize = 0;
 
     Dyndata_Active = FALSE;
+    memset(&Dyndata_Config, 0, sizeof(Dyndata_Config));
 
     //
     // load dyn data from registry
+    // 
     // L"\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Services\\SbieDrv\\Parameters"
     // L"DynData" / L"DynDataSig"
     //
@@ -1050,6 +1000,9 @@ _FX NTSTATUS Dyndata_LoadData()
     {
         status = STATUS_INCOMPATIBLE_FILE_MAP;
 
+        PSBIE_DYNCONFIG DataMatch = NULL;
+        PSBIE_DYNCONFIG DataExp = NULL;
+
         for (USHORT Index = 0; Index < Dyndata->Count; Index++)
         {
             USHORT Offset = Dyndata->Configs[Index];
@@ -1057,23 +1010,61 @@ _FX NTSTATUS Dyndata_LoadData()
             PSBIE_DYNCONFIG Data = (PSBIE_DYNCONFIG)((UCHAR*)Dyndata + Offset);
             if ((UCHAR*)Data > (UCHAR*)Dyndata + DyndataSize) continue;
 
+            //
+            // Find an exact match for the current windows build
+            //
+
             if (Driver_OsBuild >= Data->OsBuild_min && Driver_OsBuild <= Data->OsBuild_max)
             {
 //#ifdef DYN_DEBUG
                 DbgPrint("Sbie found DYNDATA %d <= %d <= %d\r\n", Data->OsBuild_min, Driver_OsBuild, Data->OsBuild_max);
 //#endif
-
-                USHORT Size = Dyndata->Size;
-                if (Size > sizeof(Dyndata_Config)) // if we have a bigger structire ignore new fields
-                    Size = sizeof(Dyndata_Config);
-                memcpy(&Dyndata_Config, Data, Size);
-                if (Size < sizeof(Dyndata_Config)) // if we have a smaller structure pad remaining fields with 0's
-                    memset(((UCHAR*)&Dyndata_Config) + Size, 0, sizeof(Dyndata_Config) - Size);
-
-                Dyndata_Active = TRUE;
-                status = STATUS_SUCCESS;
+                DataMatch = Data;
                 break;
             }
+
+            //
+            // Fallback: find the latest entry for which teh current os build greater or equal to the minimal supported build of this entry 
+            //
+
+            else if (Driver_OsBuild >= Data->OsBuild_min && DataExp == NULL)
+                DataExp = Data;
+        }
+
+        if (!DataMatch && DataExp)
+        {
+            if (GetRegDword(L"\\Registry\\Machine\\Software\\Microsoft\\WindowsSelfHost\\Applicability", L"EnablePreviewBuilds") != 0) 
+            {
+                DbgPrint("Sbie detected insider build %d\r\n", Driver_OsBuild);
+
+                DataMatch = DataExp;
+            }
+
+            //
+            // Allow the last offsets to be used with not yet known to be compatible windows builds
+            // 
+            // L"\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Services\\SbieDrv\\Parameters"
+            // L"AllowOutdatedOffsets"
+            //
+
+            else if(GetRegDword(path, L"AllowOutdatedOffsets"))
+            {
+                DataMatch = DataExp;
+            }
+        }
+
+        if (DataMatch)
+        {
+            USHORT Size = Dyndata->Size;
+            if (Size > sizeof(Dyndata_Config)) // if we have a bigger structure, ignore the new fields
+                Size = sizeof(Dyndata_Config);
+            memcpy(&Dyndata_Config, DataMatch, Size);
+
+            if (DataMatch == DataExp) // set experimental flag is this DynData are not an exact match
+                Dyndata_Config.Flags |= DYNDATA_FLAG_EXP;
+
+            Dyndata_Active = TRUE;
+            status = STATUS_SUCCESS;
         }
     }
 
@@ -1101,6 +1092,12 @@ finish:
 
     return status;
 }
+
+
+//---------------------------------------------------------------------------
+// Dyndata_Init
+//---------------------------------------------------------------------------
+
 
 _FX BOOLEAN Dyndata_Init()
 {

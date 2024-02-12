@@ -3159,16 +3159,6 @@ Unlike the preview channel, it does not include untested, potentially breaking, 
         <translation>   -   Ticari Olmayan kullanım için</translation>
     </message>
     <message>
-        <source>Your Windows build exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
-Please check if there is an update for sandboxie.</source>
-        <translation type="vanished">Windows derlemeniz, Sandboxie sürümünüzün mevcut destek yeteneklerini aşıyor ve belirteç tabanlı güvenlik yalıtımının devre dışı bırakılmasına neden oluyor. Sonuç olarak, tüm uygulamalar güvenlik yalıtımı olmadan Uygulama Bölmesi modunda çalışacaktır.
-Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</translation>
-    </message>
-    <message>
-        <source>Your Windows build exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
-        <translation type="vanished">Windows derlemeniz, Sandboxie sürümünüzün bilinen mevcut destek yeteneklerini aşıyor. Sandboxie, sistem kararsızlığına neden olabilecek bilinen son ofsetleri kullanmaya çalışacaktır.</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="2469"/>
         <source>Do you want the setup wizard to be omitted?</source>
         <translation>Kurulum sihirbazının çıkarılmasını istiyor musunuz?</translation>
@@ -3876,17 +3866,18 @@ Hayır şunları seçer: %2</translation>
         <location filename="SandMan.cpp" line="2442"/>
         <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
 Please check if there is an update for sandboxie.</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows derlemeniz %1, Sandboxie sürümünüzün mevcut destek yeteneklerini aşıyor ve belirteç tabanlı güvenlik yalıtımının devre dışı bırakılmasına neden oluyor. Sonuç olarak, tüm uygulamalar güvenlik yalıtımı olmadan Uygulama Bölmesi Modunda çalışacaktır.
+Lütfen Sandboxie için bir güncelleme olup olmadığını kontrol edin.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2451"/>
         <source>Don&apos;t show this message again for the current build.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mevcut derleme için bu mesajı bir daha gösterme.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2458"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows derlemeniz %1, Sandboxie sürümünüzün bilinen mevcut destek yeteneklerini aşıyor; Sandboxie bilinen son ofsetleri kullanmaya çalışacak ve bu da sistem kararsızlığına neden olabilir.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="3166"/>
@@ -7333,10 +7324,6 @@ Bir işlemi belirtmek için yol olarak &apos;$:program.exe&apos; kullanın.</tra
         <location filename="Forms/OptionsWindow.ui" line="3509"/>
         <source>Emulate sandboxed window station for all processes</source>
         <translation>Tüm işlemler için korumalı alan pencere istasyonunu taklit et</translation>
-    </message>
-    <message>
-        <source>DNS Request Logging</source>
-        <translation type="vanished">DNS İstek Günlüğü</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4434"/>

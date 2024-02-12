@@ -3180,16 +3180,6 @@ Nein wählt: %2</translation>
         <translation>Standard Sandbox nicht gefunden; erstelle: %1</translation>
     </message>
     <message>
-        <source>Your Windows build exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
-Please check if there is an update for sandboxie.</source>
-        <translation type="vanished">Ihre Windowsversion übersteigt die aktuell bekannten Unterstützungsmöglichkeiten Ihrer Sandboxieversion, daraus resultiert die Deaktivierung der tokenbasierten Sicherheitsisolation. Folglich werden alle Applikationen ohne Sicherheitsisolation im Applikationsunterteilungsmodus laufen.<byte value="xd"/>
-Bitte überprüfen Sie, ob es ein Update für Sandboxie gibt.</translation>
-    </message>
-    <message>
-        <source>Your Windows build exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
-        <translation type="vanished">Ihre Windowsversion übersteigt die aktuell bekannten Unterstützungsmöglichkeiten Ihrer Sandboxieversion, Sandboxie wird versuchen die zuletzt bekannten Versätze (Offsets) zu verwenden, was möglicherweise Systeminstabilität verursachen kann.</translation>
-    </message>
-    <message>
         <location filename="SandMan.cpp" line="2704"/>
         <location filename="SandMan.cpp" line="2708"/>
         <location filename="SandMan.cpp" line="2710"/>
@@ -3781,17 +3771,18 @@ Möchten Sie die Bereinigung durchführen?</translation>
         <location filename="SandMan.cpp" line="2442"/>
         <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
 Please check if there is an update for sandboxie.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ihre Windowsversion %1 übersteigt die aktuell bekannten Unterstützungsmöglichkeiten Ihrer Sandboxieversion, daraus resultiert die Deaktivierung der tokenbasierten Sicherheitsisolation. Folglich werden alle Applikationen ohne Sicherheitsisolation im Applikationsunterteilungsmodus laufen.<byte value="xd"/>
+Bitte überprüfen Sie, ob es ein Update für Sandboxie gibt.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2451"/>
         <source>Don&apos;t show this message again for the current build.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Nachricht für die aktuelle Windowsversion nicht mehr anzeigen.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2458"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ihre Windowsversion %1 übersteigt die aktuell bekannten Unterstützungsmöglichkeiten Ihrer Sandboxieversion, Sandboxie wird versuchen die zuletzt bekannten Versätze (Offsets) zu verwenden, was möglicherweise Systeminstabilität verursachen kann.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2469"/>
@@ -6813,7 +6804,7 @@ Notiz: Erzwungene Programme und Ordner für eine Sandbox finden keine Anwendung 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4257"/>
         <source>Pipe Trace</source>
-        <translation>Pipe Rückverfolgung</translation>
+        <translation>Pipe-Rückverfolgung</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4373"/>
@@ -6842,12 +6833,12 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4366"/>
         <source>GUI Trace</source>
-        <translation>GUI Rückverfolgung</translation>
+        <translation>GUI-Rückverfolgung</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4264"/>
         <source>API call Trace (traces all SBIE hooks)</source>
-        <translation type="unfinished"></translation>
+        <translation>API-Aufrufrückverfolgung (verfolgt alle SBIE-Hooks)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4305"/>
@@ -7709,13 +7700,9 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
         <translation>Option</translation>
     </message>
     <message>
-        <source>DNS Request Logging</source>
-        <translation type="vanished">DNS Anfragenprotokollierung</translation>
-    </message>
-    <message>
         <location filename="Forms/OptionsWindow.ui" line="4434"/>
         <source>Syscall Trace (creates a lot of output)</source>
-        <translation>Systemaufrufsrückverfolgung (Erzeugt große Ausgabemenge)</translation>
+        <translation>Systemaufrufrückverfolgung (erzeugt große Ausgabemenge)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4542"/>

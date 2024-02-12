@@ -383,7 +383,7 @@ Es recomendable elegir una contraseña de 20 o más caracteres. ¿Está seguro d
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="297"/>
         <source>&lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Security Hardened&lt;/a&gt; Sandbox with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation>Sandbox con &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Seguridad Endurecida&lt;/a&gt;. Sandbox con &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Protección de Datos&lt;/a&gt;</translation>
+        <translation>Sandbox con &lt;a href=&quot;sbie://docs/security-mode&quot;&gt;Seguridad Endurecida&lt;/a&gt; y &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Protección de Datos&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="298"/>
@@ -431,7 +431,7 @@ Las aplicaciones pueden ejecutarse dentro de este sandbox, asegurando que operen
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="309"/>
         <source>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Application Compartment&lt;/a&gt; Box with &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Data Protection&lt;/a&gt;</source>
-        <translation>&lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Compartimento de aplicación&lt;/a&gt; Caja con &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Protección de Datos&lt;/a&gt;</translation>
+        <translation>Caja de &lt;a href=&quot;sbie://docs/compartment-mode&quot;&gt;Compartimento de aplicación&lt;/a&gt; con &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;Protección de Datos&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="310"/>
@@ -449,7 +449,7 @@ Aunque el nivel de aislamiento es menor en comparación con otros tipos de cajas
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="321"/>
         <source>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Encrypt&lt;/a&gt; Box content and set &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Confidential&lt;/a&gt;</source>
-        <translation>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Encripta&lt;/a&gt; el contenido de la caja y lo marca &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Confidencial&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;sbie://docs/boxencryption&quot;&gt;Encripta&lt;/a&gt; el contenido de la caja y establecer como &lt;a href=&quot;sbie://docs/black-box&quot;&gt;Confidencial&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="322"/>
@@ -769,7 +769,7 @@ Error: %1</translation>
     <message>
         <location filename="BoxJob.h" line="36"/>
         <source>Deleting Content</source>
-        <translation>Borrar Contenido</translation>
+        <translation>Borrarndo Contenido</translation>
     </message>
 </context>
 <context>
@@ -1580,7 +1580,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="59"/>
         <source>Show only when title is in focus</source>
-        <translation></translation>
+        <translation>Mostrar solo cuando el título esté enfocado</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="60"/>
@@ -1799,12 +1799,12 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="975"/>
         <source>This sandbox has been deleted hence configuration can not be saved.</source>
-        <translation></translation>
+        <translation>Esta sandbox ha sido eliminada por lo que la configuración no se puede guardar.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1036"/>
         <source>Some changes haven&apos;t been saved yet, do you really want to close this options window?</source>
-        <translation></translation>
+        <translation>Algunos cambios aún no se han guardado, ¿desea realmente cerrar esta ventana de opciones?</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="779"/>
@@ -1823,7 +1823,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="960"/>
         <source>Select Program</source>
-        <translation></translation>
+        <translation>Seleccionar Programa</translation>
     </message>
     <message>
         <source>Executables (*.exe *.cmd);;All files (*.*)</source>
@@ -1847,7 +1847,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
         <location filename="Windows/OptionsGeneral.cpp" line="964"/>
         <location filename="Windows/OptionsGeneral.cpp" line="985"/>
         <source>Please enter a menu title</source>
-        <translation>Por favor un titulo de menu</translation>
+        <translation>Por favor introduzca un título de menu</translation>
     </message>
     <message>
         <location filename="Windows/OptionsGeneral.cpp" line="981"/>
@@ -1870,7 +1870,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsGrouping.cpp" line="141"/>
         <source>Please enter a name for the new group</source>
-        <translation>Por favor ingrese un nombre de  nuevo grupo</translation>
+        <translation>Por favor ingrese un nombre para el nuevo grupo</translation>
     </message>
     <message>
         <location filename="Windows/OptionsWindow.cpp" line="1085"/>
@@ -1880,7 +1880,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsGrouping.cpp" line="229"/>
         <source>Please select group first.</source>
-        <translation>Por favor selecciones un grupo primero.</translation>
+        <translation>Por favor seleccione un grupo primero.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsForce.cpp" line="111"/>
@@ -1919,7 +1919,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
         <location filename="Windows/OptionsRecovery.cpp" line="128"/>
         <location filename="Windows/OptionsRecovery.cpp" line="139"/>
         <source>Select Directory</source>
-        <translation></translation>
+        <translation>Seleccionar Directorio</translation>
     </message>
     <message>
         <source>Lingerer</source>
@@ -1991,7 +1991,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
         <location filename="Windows/OptionsAccess.cpp" line="335"/>
         <location filename="Windows/OptionsAccess.cpp" line="348"/>
         <source>Unknown</source>
-        <translation></translation>
+        <translation>Desconocido</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="325"/>
@@ -2066,7 +2066,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="353"/>
         <source>Select File</source>
-        <translation></translation>
+        <translation>Seleccionar Archivo</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="353"/>
@@ -2090,7 +2090,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="537"/>
         <source>COM objects must be specified by their GUID, like: {00000000-0000-0000-0000-000000000000}</source>
-        <translation>Objetos COM deben especificarse por su GUID, ejemplo: {00000000-0000-0000-0000-000000000000}</translation>
+        <translation>Los objetos COM deben especificarse por su GUID, como: {00000000-0000-0000-0000-000000000000}</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="543"/>
@@ -2120,12 +2120,12 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
         <location filename="Windows/OptionsGrouping.cpp" line="258"/>
         <location filename="Windows/OptionsNetwork.cpp" line="533"/>
         <source>Template values can not be edited.</source>
-        <translation></translation>
+        <translation>Los valores de plantilla no se pueden editar.</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="679"/>
         <source>Template values can not be removed.</source>
-        <translation></translation>
+        <translation>Los valores de plantilla no se pueden eliminar.</translation>
     </message>
     <message>
         <source>Exclusion</source>
@@ -2134,7 +2134,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsRecovery.cpp" line="150"/>
         <source>Please enter a file extension to be excluded</source>
-        <translation>Por favor ingrese una extension de archivo a ser excluida</translation>
+        <translation>Por favor ingrese una extensión de archivo a ser excluida</translation>
     </message>
     <message>
         <source>Please enter an auto exec command</source>
@@ -2152,7 +2152,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="95"/>
         <source>Custom Templates</source>
-        <translation>Templates personalizados</translation>
+        <translation>Plantillas personalizadas</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="96"/>
@@ -2172,12 +2172,12 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="99"/>
         <source>Desktop Utilities</source>
-        <translation>Utilidades de escritorio</translation>
+        <translation>Herramientas de escritorio</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="100"/>
         <source>Download Managers</source>
-        <translation>Administradores de descarga</translation>
+        <translation>Administradores de descargas</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="101"/>
@@ -2192,7 +2192,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="103"/>
         <source>Media Player</source>
-        <translation>Reproductor de multimedia</translation>
+        <translation>Reproductor multimedia</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="104"/>
@@ -2207,7 +2207,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="187"/>
         <source>Please enter the template identifier</source>
-        <translation>Por favor ingrese el identificador de template</translation>
+        <translation>Por favor ingrese el identificador de plantilla</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="195"/>
@@ -2222,7 +2222,7 @@ Nota: La comprobación de actualización a menudo está atrasada respecto al úl
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="228"/>
         <source>Only local templates can be removed!</source>
-        <translation>Solo los templates locales puede ser eliminados!</translation>
+        <translation>¡Solo las plantillas locales puede ser eliminados!</translation>
     </message>
     <message>
         <location filename="Windows/OptionsTemplates.cpp" line="283"/>
@@ -2342,7 +2342,7 @@ Por favor, selecciona una carpeta que contenga este archivo.</translation>
     <message>
         <location filename="Windows/PopUpWindow.h" line="72"/>
         <source>Remove this message from the list</source>
-        <translation>Remover este mensaje del listado</translation>
+        <translation>Eliminar este mensaje del listado</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="75"/>
@@ -2365,7 +2365,7 @@ Por favor, selecciona una carpeta que contenga este archivo.</translation>
     <message>
         <location filename="Windows/PopUpWindow.h" line="387"/>
         <source>Remove this progress indicator from the list</source>
-        <translation>Remover este indicador de progreso del listado</translation>
+        <translation>Eliminar este indicador de progreso del listado</translation>
     </message>
 </context>
 <context>
@@ -2378,7 +2378,7 @@ Por favor, selecciona una carpeta que contenga este archivo.</translation>
     <message>
         <location filename="Windows/PopUpWindow.h" line="138"/>
         <source>Yes</source>
-        <translation>Si</translation>
+        <translation>Sí</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="143"/>
@@ -2388,17 +2388,17 @@ Por favor, selecciona una carpeta que contenga este archivo.</translation>
     <message>
         <location filename="Windows/PopUpWindow.h" line="148"/>
         <source>Terminate</source>
-        <translation>Terminar</translation>
+        <translation>Finalizar</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="169"/>
         <source>Yes and add to allowed programs</source>
-        <translation>Si y agregar a programas permitidos</translation>
+        <translation>Sí y agregar a programas permitidos</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="204"/>
         <source>Requesting process terminated</source>
-        <translation>Solicitando proceso terminado</translation>
+        <translation>Proceso solicitante finalizado</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.h" line="209"/>
@@ -2484,25 +2484,25 @@ Por favor, selecciona una carpeta que contenga este archivo.</translation>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="24"/>
         <source>Sandboxie-Plus Notifications</source>
-        <translation>Sandboxie-Plus Notificaciones</translation>
+        <translation>Notificaciones de Sandboxie-Plus</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="208"/>
         <source>Do you want to allow the print spooler to write outside the sandbox for %1 (%2)?</source>
-        <translation>Queres que el administrador de impresion pueda escribir fuera de la sandbox for %1 (%2)?</translation>
+        <translation>¿Desea permitir que el servicio de cola de impresión escriba fuera del sandbox para %1 (%2)?</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="316"/>
         <source>Do you want to allow %4 (%5) to copy a %1 large file into sandbox: %2?
 File name: %3</source>
-        <translation>Queres permitir %4 (%5) copiar a %1 archivo grande dentro de la sandbox: %2
-Nombre de archivo: %3</translation>
+        <translation>¿Desea permitir que %4 (%5) copie un archivo de tamaño %1 a la sandbox: %2?
+Nombre del archivo: %3</translation>
     </message>
     <message>
         <location filename="Windows/PopUpWindow.cpp" line="322"/>
         <source>Do you want to allow %1 (%2) access to the internet?
 Full path: %3</source>
-        <translation>Queres permitir %1 (%2) acceder a internet?
+        <translation>¿Desea permitir que %1 (%2) acceda a Internet?
 Ruta completa: %3</translation>
     </message>
     <message>
@@ -2532,7 +2532,7 @@ El archivo fue escrito por: %3</translation>
         <location filename="Windows/PopUpWindow.cpp" line="474"/>
         <source>Migrating a large file %1 into the sandbox %2, %3 left.
 Full path: %4</source>
-        <translation>Migrando un archivo grande %1 dentro de la sandbox %2, %3 restantes.
+        <translation>Migrando un archivo grande %1 a la sandbox %2, %3 restantes.
 Ruta completa: %4</translation>
     </message>
 </context>
@@ -2570,12 +2570,12 @@ Ruta completa: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="70"/>
         <source>File Name</source>
-        <translation>Nombre de Archivo</translation>
+        <translation>Nombre del Archivo</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="71"/>
         <source>File Size</source>
-        <translation>Tamaño de Archivo</translation>
+        <translation>Tamaño del Archivo</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="72"/>
@@ -2590,7 +2590,7 @@ Ruta completa: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="112"/>
         <source>Delete everything, including all snapshots</source>
-        <translation>Borrar todo, inclusive todas las instantaneas</translation>
+        <translation>Borrar todo, incluidas todas las instantáneas</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="138"/>
@@ -2622,7 +2622,7 @@ Ruta completa: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="276"/>
         <source>Close until all programs stop in this box</source>
-        <translation>Cerrar cuando que todos los programas sean detenidos en esta caja</translation>
+        <translation>Cerrar hasta que todos los programas se detengan en esta caja</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="277"/>
@@ -2632,7 +2632,7 @@ Ruta completa: %4</translation>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="297"/>
         <source>There are %1 new files available to recover.</source>
-        <translation>Hay %1 nuevo archivo disponible para recuperar.</translation>
+        <translation>Hay %1 archivos nuevos disponibles para recuperar.</translation>
     </message>
     <message>
         <location filename="Windows/RecoveryWindow.cpp" line="582"/>
@@ -2836,7 +2836,7 @@ A diferencia del canal previo, no incluye cambios sin probar, potencialmente rom
     <message>
         <location filename="SandMan.cpp" line="4298"/>
         <source>Waiting for folder: %1</source>
-        <translation>Esperando carpeta: %1</translation>
+        <translation>Esperando a carpeta: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="4299"/>
@@ -2851,7 +2851,7 @@ A diferencia del canal previo, no incluye cambios sin probar, potencialmente rom
     <message>
         <location filename="SandMan.cpp" line="4301"/>
         <source>Finishing Snapshot Merge...</source>
-        <translation>Terminando fusionado de instantanea...</translation>
+        <translation>Terminando fusionado de instantánea...</translation>
     </message>
 </context>
 <context>
@@ -3630,7 +3630,7 @@ Error: %1</translation>
         <location filename="SandMan.cpp" line="4209"/>
         <source>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2024 by DavidXanatos&lt;/p&gt;</source>
         <oldsource>&lt;h3&gt;About Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Version %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2023 by DavidXanatos&lt;/p&gt;</oldsource>
-        <translation type="unfinished">&lt;h3&gt;Sobre Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Versión %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2024 por DavidXanatos&lt;/p&gt;</translation>
+        <translation>&lt;h3&gt;Sobre Sandboxie-Plus&lt;/h3&gt;&lt;p&gt;Versión %1&lt;/p&gt;&lt;p&gt;Copyright (c) 2020-2024 por DavidXanatos&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="1084"/>
@@ -3866,17 +3866,18 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
         <location filename="SandMan.cpp" line="2442"/>
         <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
 Please check if there is an update for sandboxie.</source>
-        <translation type="unfinished"></translation>
+        <translation>Su versión de Windows %1 supera las capacidades de soporte actuales de su versión de Sandboxie, lo que resulta en la desactivación del aislamiento de seguridad basado en tokens. Como consecuencia, todas las aplicaciones operarán en modo de compartimento de aplicación sin aislamiento seguro.
+Por favor, verifique si hay una actualización para Sandboxie.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2451"/>
         <source>Don&apos;t show this message again for the current build.</source>
-        <translation type="unfinished"></translation>
+        <translation>No mostrar este mensaje de nuevo para la versión actual.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2458"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
-        <translation type="unfinished"></translation>
+        <translation>Su versión de Windows %1 supera las capacidades de soporte actuales conocidas de su versión de Sandboxie, Sandboxie intentará utilizar los últimos desplazamientos conocidos, lo cual podría causar inestabilidad en el sistema.</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2469"/>
@@ -4526,7 +4527,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Models/SbieModel.cpp" line="599"/>
         <source>Path / Command Line</source>
-        <translation>Ruta / Linea de Comandos</translation>
+        <translation>Ruta / Línea de Comandos</translation>
     </message>
 </context>
 <context>
@@ -4534,7 +4535,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Engine/SbieObject.cpp" line="204"/>
         <source>Run &amp;Un-Sandboxed</source>
-        <translation>Ejecutar &amp;Sin-Sandbox</translation>
+        <translation>Ejecutar &amp;Sin-Aislamiento</translation>
     </message>
 </context>
 <context>
@@ -4572,7 +4573,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="SbieProcess.cpp" line="64"/>
         <source>MSI Installer</source>
-        <translation>MSI Installer</translation>
+        <translation>Instalador MSI</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="65"/>
@@ -4602,7 +4603,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="SbieProcess.cpp" line="70"/>
         <source>Windows Media Player</source>
-        <translation>Windows Media Player</translation>
+        <translation>Reproductor de Windows Media</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="71"/>
@@ -4643,7 +4644,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="SbieProcess.cpp" line="79"/>
         <source>Chromium Based</source>
-        <translation>Chromium Based</translation>
+        <translation>Basado en Chromium</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="80"/>
@@ -4673,17 +4674,17 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="SbieProcess.cpp" line="85"/>
         <source>Firefox Plugin Container</source>
-        <translation>Firefox Plugin Container</translation>
+        <translation>Contenedor de Plugin de Firefox</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="86"/>
         <source>Generic Web Browser</source>
-        <translation>Generic Web Browser</translation>
+        <translation>Navegador Web Genérico</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="87"/>
         <source>Generic Mail Client</source>
-        <translation>Generic Mail Client</translation>
+        <translation>Cliente de Correo Genérico</translation>
     </message>
     <message>
         <location filename="SbieProcess.cpp" line="88"/>
@@ -4776,7 +4777,7 @@ NO seleccionará: %2</translation>
         <location filename="Views/SbieView.cpp" line="154"/>
         <location filename="Views/SbieView.cpp" line="288"/>
         <source>Create New Box</source>
-        <translation>Crear una nueva Sandbox</translation>
+        <translation>Crear Nueva Caja</translation>
     </message>
     <message>
         <source>Add Group</source>
@@ -4785,7 +4786,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="410"/>
         <source>Remove Group</source>
-        <translation>Remover Grupo</translation>
+        <translation>Quitar Grupo</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="165"/>
@@ -4801,7 +4802,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="171"/>
         <source>Run from Start Menu</source>
-        <translation>Ejecutar desde Menu de Inicio</translation>
+        <translation>Ejecutar desde el Menú de Inicio</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="181"/>
@@ -4890,7 +4891,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="186"/>
         <source>Registry Editor</source>
-        <translation>Editor de registro</translation>
+        <translation>Editor del Registro</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="187"/>
@@ -4900,7 +4901,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="198"/>
         <source>Terminate All Programs</source>
-        <translation>Terminar Todos los Programas</translation>
+        <translation>Finalizar Todos los Programas</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="201"/>
@@ -4932,7 +4933,7 @@ NO seleccionará: %2</translation>
         <location filename="Views/SbieView.cpp" line="208"/>
         <location filename="Views/SbieView.cpp" line="341"/>
         <source>Snapshots Manager</source>
-        <translation>Administrador de Instantaneas</translation>
+        <translation>Administrador de Instantáneas</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="211"/>
@@ -5000,13 +5001,13 @@ NO seleccionará: %2</translation>
         <location filename="Views/SbieView.cpp" line="259"/>
         <location filename="Views/SbieView.cpp" line="365"/>
         <source>Remove Sandbox</source>
-        <translation>Remover Sandbox</translation>
+        <translation>Eliminar Sandbox</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="264"/>
         <location filename="Views/SbieView.cpp" line="387"/>
         <source>Terminate</source>
-        <translation>Terminar</translation>
+        <translation>Finalizar</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="267"/>
@@ -5017,7 +5018,7 @@ NO seleccionará: %2</translation>
         <location filename="Views/SbieView.cpp" line="103"/>
         <location filename="Views/SbieView.cpp" line="268"/>
         <source>Pin to Run Menu</source>
-        <translation>Pegar al Menu de Inicio</translation>
+        <translation>Anclar al Menú de Inicio</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="156"/>
@@ -5043,12 +5044,12 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="278"/>
         <source>Set Linger Process</source>
-        <translation>Setear Proceso Persistente</translation>
+        <translation>Establecer Proceso Persistente</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="280"/>
         <source>Set Leader Process</source>
-        <translation>Setear Proceso Lider</translation>
+        <translation>Establecer Proceso Lider</translation>
     </message>
     <message>
         <source>Run Sandboxed</source>
@@ -5108,28 +5109,28 @@ NO seleccionará: %2</translation>
         <location filename="Views/SbieView.cpp" line="549"/>
         <source>    File root: %1
 </source>
-        <translation>    Archivo root: %1
+        <translation>    Raíz del archivo: %1
 </translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="550"/>
         <source>    Registry root: %1
 </source>
-        <translation>    Registro root: %1
+        <translation>    Raíz del registro: %1
 </translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="551"/>
         <source>    IPC root: %1
 </source>
-        <translation>    IPC root: %1
+        <translation>    Raíz IPC: %1
 </translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="553"/>
         <source>    Disk root: %1
 </source>
-        <translation>    Raiz de disco: %1
+        <translation>    Raíz de disco: %1
 </translation>
     </message>
     <message>
@@ -5142,7 +5143,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="781"/>
         <source>[None]</source>
-        <translation>[None]</translation>
+        <translation>[Ninguno]</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1057"/>
@@ -5177,7 +5178,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="890"/>
         <source>Do you really want to remove the selected group(s)?</source>
-        <translation>Desea realmente eliminar el/los grupo/s seleccionado(s)?</translation>
+        <translation>¿Desea realmente eliminar el/los grupo/s seleccionado(s)?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="155"/>
@@ -5199,7 +5200,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="190"/>
         <source>Command Prompt</source>
-        <translation>Linea de comandos</translation>
+        <translation>Línea de comandos</translation>
     </message>
     <message>
         <source>Boxed Tools</source>
@@ -5208,12 +5209,12 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="191"/>
         <source>Command Prompt (as Admin)</source>
-        <translation>Linea de comandos (como Admin)</translation>
+        <translation>Línea de comandos (como Administrador)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="195"/>
         <source>Command Prompt (32-bit)</source>
-        <translation>Linea de comandos (32-bit)</translation>
+        <translation>Línea de comandos (32-bit)</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="180"/>
@@ -5234,7 +5235,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="200"/>
         <source>Box Content</source>
-        <translation>Contenido de caja</translation>
+        <translation>Contenido de la caja</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="207"/>
@@ -5269,7 +5270,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="880"/>
         <source>Please enter a new name for the Group.</source>
-        <translation>Por favor ingrese un n uevo nombre para el Grupo.</translation>
+        <translation>Por favor ingrese un nuevo nombre para el Grupo.</translation>
     </message>
     <message>
         <source>This Group name is already in use.</source>
@@ -5283,7 +5284,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="975"/>
         <source>A group can not be its own parent.</source>
-        <translation>Un grupo no puede ser su mismo padre.</translation>
+        <translation>Un grupo no puede ser su mismo pariente.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1142"/>
@@ -5312,17 +5313,17 @@ NO seleccionará: %2</translation>
         <location filename="Views/SbieView.cpp" line="1283"/>
         <location filename="Views/SbieView.cpp" line="1739"/>
         <source>This Sandbox is empty.</source>
-        <translation>Esta Sandbox esta vacia.</translation>
+        <translation>Esta Sandbox está vacía.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1290"/>
         <source>WARNING: The opened registry editor is not sandboxed, please be careful and only do changes to the pre-selected sandbox locations.</source>
-        <translation>PRECAUCION: El editor de registro abierto no esta ejecutado dentro de una sandbox, por favor sea cuidadoso y solo haga cambios en las ubicaciones por defecto de la sandbox.</translation>
+        <translation>ADVERTENCIA: El editor del registro abierto no está aislado, por favor tenga cuidado y solo realice cambios en las ubicaciones de la sandbox preseleccionadas.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1291"/>
         <source>Don&apos;t show this warning in future</source>
-        <translation>No mostrar esta adveertencia en el futuro</translation>
+        <translation>No mostrar esta advertencia en el futuro</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1347"/>
@@ -5354,13 +5355,13 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="1415"/>
         <source>Please enter a new name for the Sandbox.</source>
-        <translation>Por favor entre un nuevo nombre para esta Sandbox.</translation>
+        <translation>Por favor ingrese un nuevo nombre para la Sandbox.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1450"/>
         <source>Do you really want to remove the selected sandbox(es)?&lt;br /&gt;&lt;br /&gt;Warning: The box content will also be deleted!</source>
         <oldsource>Do you really want to remove the selected sandbox(es)?</oldsource>
-        <translation>Desea realmente remover la sandbox(es) seleccionada(s)?&lt;br /&gt;&lt;br /&gt;Precaución: el contenido de la caja tambien sera eliminado!</translation>
+        <translation>¿Desea realmente eliminar la(s) sandbox(es) seleccionada(s)?&lt;br /&gt;&lt;br /&gt;Advertencia: ¡el contenido de la caja tambien sera eliminado!</translation>
     </message>
     <message>
         <source>Deleting %1 content</source>
@@ -5369,24 +5370,24 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="1501"/>
         <source>This Sandbox is already empty.</source>
-        <translation>Esta Sandbox ya esta vacia.</translation>
+        <translation>Esta Sandbox ya está vacía.</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1513"/>
         <location filename="Views/SbieView.cpp" line="1518"/>
         <source>Do you want to delete the content of the selected sandbox?</source>
-        <translation>Desea realmente eliminar el contenido de la sandbox seleccionada?</translation>
+        <translation>¿Desea realmente eliminar el contenido de la sandbox seleccionada?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1514"/>
         <location filename="Views/SbieView.cpp" line="1527"/>
         <source>Also delete all Snapshots</source>
-        <translation>Borrar también todos las Instantaneas</translation>
+        <translation>Borrar también todas las Instantaneas</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1526"/>
         <source>Do you really want to delete the content of all selected sandboxes?</source>
-        <translation>Desea borrar el contenido de todas las Sandboxes seleccionadas?</translation>
+        <translation>¿Desea borrar el contenido de todas las sandboxes seleccionadas?</translation>
     </message>
     <message>
         <source>Do you really want to delete the content of multiple sandboxes?</source>
@@ -5395,13 +5396,13 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="1543"/>
         <source>Do you want to terminate all processes in the selected sandbox(es)?</source>
-        <translation>Desea realmente terminar todos los procesos en la/las sandbox(es) seleccionada(s)?</translation>
+        <translation>¿Desea realmente finalizar todos los procesos en la/las sandbox(es) seleccionada(s)?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1544"/>
         <location filename="Views/SbieView.cpp" line="1640"/>
         <source>Terminate without asking</source>
-        <translation>Terminar sin preguntar</translation>
+        <translation>Finalizar sin preguntar</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1559"/>
@@ -5431,12 +5432,12 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Views/SbieView.cpp" line="1698"/>
         <source>This box does not have Internet restrictions in place, do you want to enable them?</source>
-        <translation>Esta sandbox no tiene restricciones de Internet seteadas, desea activarlas?</translation>
+        <translation>Esta caja no tiene restricciones de Internet establecidas, ¿desea activarlas?</translation>
     </message>
     <message>
         <location filename="Views/SbieView.cpp" line="1782"/>
         <source>This sandbox is disabled, do you want to enable it?</source>
-        <translation>Esta sandbox esta deshabilitada, desea habilitarla?</translation>
+        <translation>Esta sandbox esta deshabilitada, ¿desea habilitarla?</translation>
     </message>
 </context>
 <context>
@@ -5462,12 +5463,12 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Windows/SelectBoxWindow.cpp" line="184"/>
         <source>Sandboxie-Plus - Run Sandboxed</source>
-        <translation>Sandboxie-Plus - Ejecutar Sandboxed</translation>
+        <translation>Sandboxie-Plus - Ejecutar Aislado</translation>
     </message>
     <message>
         <location filename="Windows/SelectBoxWindow.cpp" line="225"/>
         <source>Are you sure you want to run the program outside the sandbox?</source>
-        <translation>Está seguro de querer ejecutar el programa fuera de la sandbox?</translation>
+        <translation>¿Está seguro que quiere ejecutar el programa fuera de la sandbox?</translation>
     </message>
     <message>
         <location filename="Windows/SelectBoxWindow.cpp" line="240"/>
@@ -5494,7 +5495,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="206"/>
         <source>Auto Detection</source>
-        <translation>Auto Deteccion</translation>
+        <translation>Detección Automática</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="207"/>
@@ -5533,7 +5534,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="236"/>
         <source>Show Classic icon</source>
-        <translation>Mostrar ícono Clasico</translation>
+        <translation>Mostrar ícono Clásico</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="238"/>
@@ -5548,7 +5549,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="240"/>
         <source>Pinned Only</source>
-        <translation>Fijado solamente</translation>
+        <translation>Solamente Fijado</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="242"/>
@@ -5912,12 +5913,12 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2053"/>
         <source>Passwords did not match, please retry.</source>
-        <translation>Las contraseñas no son iguales, vuelva a intentar por favor.</translation>
+        <translation>Las contraseñas no son iguales, vuelva a intentarlo por favor.</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2065"/>
         <source>Process</source>
-        <translation>Procesos</translation>
+        <translation>Proceso</translation>
     </message>
     <message>
         <location filename="Windows/SettingsWindow.cpp" line="2065"/>
@@ -6011,7 +6012,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="23"/>
         <source>%1 - Snapshots</source>
-        <translation>%1 - instantánea</translation>
+        <translation>%1 - Instantáneas</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="37"/>
@@ -6031,7 +6032,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="172"/>
         <source>Please enter a name for the new Snapshot.</source>
-        <translation>Por favor ingrese un nombre para la nueva instantánea.</translation>
+        <translation>Por favor ingrese un nombre para la nueva Instantánea.</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="172"/>
@@ -6041,7 +6042,7 @@ NO seleccionará: %2</translation>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="195"/>
         <source>Do you really want to switch the active snapshot? Doing so will delete the current state!</source>
-        <translation>¿Esta seguro de querer cambiar la instantánea activa? Al hacerlo eliminará el estado actual!</translation>
+        <translation>¿Esta seguro de querer cambiar la instantánea activa? ¡Al hacerlo eliminará el estado actual!</translation>
     </message>
     <message>
         <location filename="Windows/SnapshotsWindow.cpp" line="229"/>
@@ -7656,7 +7657,7 @@ El proceso de nivel de coincidencia tiene mayor prioridad que la especificidad y
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4271"/>
         <source>Log all SetError&apos;s to Trace log (creates a lot of output)</source>
-        <translation>Logear todos los SetErrors al Log de Rastreo (crea mucha salida de datos)</translation>
+        <translation>Registrar todos los SetErrors al Log de Rastreo (crea mucha salida de datos)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4312"/>
@@ -7680,7 +7681,7 @@ El proceso de nivel de coincidencia tiene mayor prioridad que la especificidad y
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4326"/>
         <source>Log Debug Output to the Trace Log</source>
-        <translation>Logea salida de depuración al log de Rastreo</translation>
+        <translation>Registrar salida de depuración al log de Rastreo</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4373"/>
@@ -7692,10 +7693,10 @@ You can customize the logging using the ini by specifying
 &quot;D&quot; - Denied accesses
 &quot;I&quot; - Ignore access requests
 instead of &quot;*&quot;.</source>
-        <translation>Logea todos los eventos de acceso al log de recursos como son vistos por el controlador
+        <translation>Registrar todos los eventos de acceso al log de recursos como son vistos por el controlador
 
 Esta opción setea la mascara de evento a &quot;*&quot; - Eventos Acceso Total
-Ud. puede personalizar el logeo usando el ini especificando
+Usted puede personalizar el registro usando el ini especificando
 &quot;A&quot; - Accesos Permitidos
 &quot;D&quot; - Accesos Denegados
 &quot;I&quot; - Requerimientos de Accesos Ignorados
@@ -8384,7 +8385,7 @@ Nota: Las configuraciones de Programas Forzados y Carpetas Forzadas para una san
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4264"/>
         <source>API call Trace (traces all SBIE hooks)</source>
-        <translation type="unfinished"></translation>
+        <translation>Rastreo de llamadas API (rastrea todos los ganchos de SBIE)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4393"/>

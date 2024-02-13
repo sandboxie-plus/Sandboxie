@@ -8520,12 +8520,12 @@ Please note that this values are currently user specific and saved globally for 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="184"/>
         <source>Hotkey for bringing sandman to the top:</source>
-        <translation>將 Sandboxie 管理員置頂的快速鍵:</translation>
+        <translation>將 Sandboxie 管理員視窗置頂的快速鍵:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="219"/>
         <source>Hotkey for suspending process/folder forcing:</source>
-        <translation>強制暫停執行緒/資料夾的快速鍵:</translation>
+        <translation>暫停使用強制執行緒/資料夾的快速鍵:</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="601"/>

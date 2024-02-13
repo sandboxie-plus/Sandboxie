@@ -96,13 +96,33 @@ _FX NTSTATUS Dyndata_InitDefault(PSBIE_DYNDATA* pDefault, ULONG* pDefaultSize)
 
 #ifdef _M_ARM64
 
-#define DATA_COUNT 2
+#define DATA_COUNT 3
 
     INIT_DATA(IMAGE_FILE_MACHINE_ARM64, DATA_COUNT)
 
     BEGIN_DATA
 
-    // todo
+    // 22000+ - ... // W11 - ...
+    Data->OsBuild_max = WIN11_LATEST;
+    Data->OsBuild_min = SVR2025;
+
+    Data->Clipboard_offset = 0x80;
+
+    Data->ImpersonationData_offset = 0x518;
+
+    Data->RestrictedSidCount_offset = 0x80;
+    Data->RestrictedSids_offset = 0xA0;
+    Data->UserAndGroups_offset = 0x98;
+    Data->UserAndGroupCount_offset = 0x7c;
+
+    Data->Flags2_offset = 0x1E0;
+    Data->MitigationFlags_offset = 0xA90;
+    Data->SignatureLevel_offset = 0x938;
+
+    Data->ServiceTable_offset = -1;
+    //
+
+    NEXT_DATA
 
     // 22000+ - ... // W11 - ...
     Data->OsBuild_max = 26020;

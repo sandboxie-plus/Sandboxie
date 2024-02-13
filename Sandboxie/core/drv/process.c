@@ -810,7 +810,7 @@ _FX PROCESS *Process_Create(
     // and isseu a security warning MSG_1207
     //
 
-    if (!Dyndata_Active) {
+    if (!Dyndata_Active && !proc->bAppCompartment) {
 
         proc->bAppCompartment = TRUE;
 

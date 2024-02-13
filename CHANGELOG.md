@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - added missing checkbox for api tracing
+- fixed incompatybility with windows ARM64 insider build 26052 and later
 
 ### Changed
 - changed DynData format to add flags

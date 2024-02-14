@@ -3592,19 +3592,20 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     </message>
     <message>
         <location filename="SandMan.cpp" line="2442"/>
-        <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
+        <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</source>
-        <translation type="unfinished"></translation>
+        <translation>您的Windows版本 %1 超过了 Sandboxie 版本的当前支持范围，导致禁用了基于令牌的安全隔离。因此，所有应用程序都将在没有安全隔离的应用程序隔间模式下运行。
+请检查 Sandboxie 是否有更新。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2451"/>
         <source>Don&apos;t show this message again for the current build.</source>
-        <translation type="unfinished"></translation>
+        <translation>对于当前版本，不再显示此消息。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2458"/>
         <source>Your Windows build %1 exceeds the current known support capabilities of your Sandboxie version, Sandboxie will attempt to use the last-known offsets which may cause system instability.</source>
-        <translation type="unfinished"></translation>
+        <translation>您的Windows版本 %1 超过了 Sandboxie 版本的当前已知支持范围，Sandboxie 将尝试使用上一个已知的配置，这可能会导致系统不稳定。</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2469"/>
@@ -7189,7 +7190,7 @@ Note:  Forced Programs and Force Folders settings for a sandbox do not apply to 
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4264"/>
         <source>API call Trace (traces all SBIE hooks)</source>
-        <translation type="unfinished"></translation>
+        <translation>API 调用跟踪 (跟踪所有 SBIE 钩子)</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4427"/>

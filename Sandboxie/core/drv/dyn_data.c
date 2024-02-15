@@ -67,7 +67,7 @@ SBIE_DYNCONFIG Dyndata_Config = { 0,0 };
     if(!Default) \
         return STATUS_INSUFFICIENT_RESOURCES; \
     Default->Format = DYNDATA_FORMAT; \
-    Default->Verion = DYNDATA_VERSION; \
+    Default->Version = DYNDATA_VERSION; \
     Default->Signature = DYNDATA_SIGN; \
     Default->Arch = arch; \
     Default->Size = sizeof(SBIE_DYNCONFIG); 
@@ -394,7 +394,7 @@ _FX NTSTATUS Dyndata_InitDefault(PSBIE_DYNDATA* pDefault, ULONG* pDefaultSize)
 
     NEXT_DATA
     
-    // >= 16241 & <= 17655 / Flags4_offset in windows 10 FCU
+    // >= 16241 & <= 17655 / Flags4_offset in Windows 10 FCU
     Data->OsBuild_max = 17655;
     Data->OsBuild_min = 16241;
 
@@ -974,17 +974,17 @@ _FX NTSTATUS Dyndata_LoadData()
 
     //
     // select whichever version of dyndata is newer
-    // of they are same preffer build in
-    // when no dyndata was loaded use the hardcoded defaults
+    // if they are the same, prefer built-in version
+    // when no dyndata was loaded, use the hardcoded defaults
     //
 
-    if (NT_SUCCESS(status) && Custom && Custom->Verion > DYNDATA_VERSION)
+    if (NT_SUCCESS(status) && Custom && Custom->Version > DYNDATA_VERSION)
     {
         Dyndata = Custom;
         DyndataSize = CustomSize;
 
 #ifdef DYN_DEBUG
-        DbgPrint("Sbie selected DYNDATA version %d\r\n", Dyndata->Verion);
+        DbgPrint("Sbie selected DYNDATA version %d\r\n", Dyndata->Version);
 #endif
     }
     else 
@@ -1013,7 +1013,7 @@ _FX NTSTATUS Dyndata_LoadData()
     }
 
     //
-    // find siutable dynamic config for the current OS Build
+    // find suitable dynamic config for the current OS Build
     //
 
     if (NT_SUCCESS(status))
@@ -1031,7 +1031,7 @@ _FX NTSTATUS Dyndata_LoadData()
             if ((UCHAR*)Data > (UCHAR*)Dyndata + DyndataSize) continue;
 
             //
-            // Find an exact match for the current windows build
+            // Find an exact match for the current Windows build
             //
 
             if (Driver_OsBuild >= Data->OsBuild_min && Driver_OsBuild <= Data->OsBuild_max)
@@ -1044,7 +1044,7 @@ _FX NTSTATUS Dyndata_LoadData()
             }
 
             //
-            // Fallback: find the latest entry for which teh current os build greater or equal to the minimal supported build of this entry 
+            // Fallback: find the latest entry for which the current OS build is greater or equal to the minimal supported build of this entry
             //
 
             else if (Driver_OsBuild >= Data->OsBuild_min && DataExp == NULL)
@@ -1061,7 +1061,7 @@ _FX NTSTATUS Dyndata_LoadData()
             }
 
             //
-            // Allow the last offsets to be used with not yet known to be compatible windows builds
+            // Allow the last offsets to be used with not yet known to be compatible Windows builds
             // 
             // L"\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Services\\SbieDrv\\Parameters"
             // L"AllowOutdatedOffsets"
@@ -1080,7 +1080,7 @@ _FX NTSTATUS Dyndata_LoadData()
                 Size = sizeof(Dyndata_Config);
             memcpy(&Dyndata_Config, DataMatch, Size);
 
-            if (DataMatch == DataExp) // set experimental flag is this DynData are not an exact match
+            if (DataMatch == DataExp) // set experimental flag if this DynData is not an exact match
                 Dyndata_Config.Flags |= DYNDATA_FLAG_EXP;
 
             Dyndata_Active = TRUE;
@@ -1090,7 +1090,7 @@ _FX NTSTATUS Dyndata_LoadData()
 
     if (!Dyndata_Active) {
 //#ifdef DYN_DEBUG
-        DbgPrint("Sbie no comaptible DYNDATA found, OsBuild: %d\r\n", Driver_OsBuild);
+        DbgPrint("Sbie no compatible DYNDATA found, OsBuild: %d\r\n", Driver_OsBuild);
 //#endif
         WCHAR info[12];
         RtlStringCbPrintfW(info, sizeof(info), L"%d", Driver_OsBuild);

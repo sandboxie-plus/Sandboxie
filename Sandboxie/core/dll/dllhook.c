@@ -1145,7 +1145,7 @@ void* SbieDll_Hook_arm(
     }
 
     //
-    // restore protection and fluch instruction cache
+    // restore protection and flush instruction cache
     //
 
 	VirtualProtect(RegionBase, RegionSize, prot, &dummy_prot);
@@ -1195,7 +1195,7 @@ _FX void *SbieDll_HookFunc(
     // 
     // Note: this mechanism is only available during initialization as
     // at the end of Dll_Ordinal1 we dispose of the syscall/inject data area
-    // there fore any Nt function hooks must be set up from the get go
+    // therefore any Nt function hooks must be set up from the get go
     //
 
     extern ULONG* SbieApi_SyscallPtr;
@@ -1348,7 +1348,7 @@ _FX void *SbieDll_Hook(
     void* func = SbieDll_HookFunc(SourceFuncName, SourceFunc, DetourFunc, module);
 
     //
-    // when tracing api calls of normaly not hooked functions,
+    // when tracing API calls of functions that are not normally hooked,
     // we did not have an initial detour and have passed NULL
     // in this case we set the trampoline itself as final detour target
     //

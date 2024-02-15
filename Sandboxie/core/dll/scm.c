@@ -517,13 +517,13 @@ static const WCHAR *_TrustedInstaller = L"TrustedInstaller";
 _FX BOOLEAN Scm_Init(HMODULE module)
 {
     //
-    // As windows got older a lot of service related functions have been subsequently moved
-    // from advapi32.dll to the sechost.dll this happened continusly over many releases
-    // to solve this most elegantly we invoke the below code twice once when the sechost.dll 
-    // is loaded and once when advapi32.dll is loaded. The SBIEDLL_HOOK_SCM_EX tempalte was 
+    // As Windows got older, a lot of service-related functions have been subsequently moved
+    // from advapi32.dll to the sechost.dll. This happened continuously over many releases.
+    // To solve this more elegantly, we invoke the below code twice once when the sechost.dll
+    // is loaded and once when advapi32.dll is loaded. The SBIEDLL_HOOK_SCM_EX template was
     // designed such that it will only hook the first encounter of any given function.
     // 
-    // To work properly this mechanism necessitates the sechost.dll handler being called before 
+    // To work properly this mechanism necessitates the sechost.dll handler being called before
     // the one for advapi32.dll
     //
 
@@ -690,7 +690,7 @@ BOOLEAN SecHost_Init(HMODULE module)
         SBIEDLL_HOOK_SCM(SubscribeServiceChangeNotifications);
 
         //
-        // on windows 8 the cred functions have been moved deom advapi32.dll to sechost.dll
+        // on Windows 8, the cred functions have been moved from advapi32.dll to sechost.dll
         //
 
         if (!Cred_Init(module))
@@ -710,8 +710,8 @@ BOOLEAN Scm_HookRegisterServiceCtrlHandler(HMODULE module)
 {
 
 #ifndef _M_ARM64
-    // Note: with the last SMC rework the below comment is no logner true !!!
-    // $HookHack$ - Custom, not automated, Hook no longer applies to later windows 10 builds
+    // Note: with the last SCM rework, the below comment is no longer true !!!
+    // $HookHack$ - Custom, not automated, Hook no longer applies to later Windows 10 builds
 #ifdef _WIN64
     static const UCHAR PrologW[] = {
         0x45, 0x33, 0xC9,                       // xor r9d,r9d

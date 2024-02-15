@@ -8,8 +8,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.13.1 / 5.68.1] - 2024-02-??
 
 ### Fixed
-- added missing checkbox for api tracing
-- fixed incompatybility with windows ARM64 insider build 26052 and later
+- added missing checkbox for API tracing
+- fixed incompatibility with Windows ARM64 Insider build 26052 and later
 
 ### Changed
 - changed DynData format to add flags
@@ -22,22 +22,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - added advanced API trace functionality
 
 ### Changed
-- reworked scm hooking to improve windows 10 compatybility
-- reworked offset dependant handling of undocumented windows kernel objects
-  - the required offsets can be now updated independantly from the driver
-  - the DynData blob is digitally signed, when in testsigning mode the signature is howeever ignored
-  - when sandboxie encounters a yet unsupported kernel build, token based isoaltion is disabled to prevent system instability
-  - this safety mechanism is disabled on systems participating in the windows insider program
-  - for systems in the insider program the latest known ofsets are tried
-- reworked part of the low level code injection mechanism to add compatybility with windows insider build 26040 and later
-- enabled CET Shadow Stack Compatible Flag for core sandboxie binaries
+- reworked SCM hooking to improve Windows 10 compatibility
+- reworked offset dependent handling of undocumented Windows kernel objects
+  - the required offsets can be now updated independently from the driver
+  - the DynData blob is digitally signed, when in testsigning mode the signature is however ignored
+  - when Sandboxie encounters a yet unsupported kernel build, token based isolation is disabled to prevent system instability
+  - this safety mechanism is disabled on systems participating in the Windows Insider program
+  - for systems in the Insider program, the latest known offsets are tried
+- reworked part of the low level code injection mechanism to add compatibility with Windows Insider build 26040 and later
+- enabled CET Shadow Stack compatible flag for core Sandboxie binaries
 
 ### Removed
 - cleaned up code and removed obsolete VC 6.0 workarounds
 
 ### Fixed
-- fixed incompatybility with windows insider build 26040 and later
-
+- fixed incompatibility with Windows Insider build 26040 and later
 
 
 
@@ -1626,7 +1625,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed SandMan UI freezing when a lot of processes are created and closed in a box [#1607](https://github.com/sandboxie-plus/Sandboxie/issues/1607)
 - fixed editing of command line entry not being recognized in the Run Menu [#1648](https://github.com/sandboxie-plus/Sandboxie/issues/1648)
 - fixed blue screen issue in driver (thanks Diversenok)
-- fixed incompatibility with Windows 11 Insider Build 22563.1 [#1654](https://github.com/sandboxie-plus/Sandboxie/issues/1654)
+- fixed incompatibility with Windows 11 Insider build 22563.1 [#1654](https://github.com/sandboxie-plus/Sandboxie/issues/1654)
 
 
 
@@ -2717,7 +2716,7 @@ Fixed issue with Windows 7
 ### Fixed
 - fixed issues with window modality [#409](https://github.com/sandboxie-plus/Sandboxie/issues/409)
 - fixed issues when main window was set to be always on top [#417](https://github.com/sandboxie-plus/Sandboxie/issues/417)
-- fixed a driver issue with Windows 10 insider build 21286
+- fixed a driver issue with Windows 10 Insider build 21286
 - fixed issues with snapshot dialog [#416](https://github.com/sandboxie-plus/Sandboxie/issues/416)
 - fixed an issue when writing to a path that already exists in the snapshot but not outside [#415](https://github.com/sandboxie-plus/Sandboxie/issues/415)
 

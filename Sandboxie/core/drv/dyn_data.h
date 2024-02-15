@@ -70,7 +70,7 @@ typedef struct _SBIE_DYNCONFIG
 typedef struct _SBIE_DYNDATA
 {
     USHORT Format;
-    USHORT Verion;
+    USHORT Version;
     ULONG Signature;
     USHORT Arch;        // IMAGE_FILE_MACHINE_AMD64, IMAGE_FILE_MACHINE_ARM64, IMAGE_FILE_MACHINE_I386
     USHORT Reserved;

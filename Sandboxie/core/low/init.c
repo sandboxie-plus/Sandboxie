@@ -780,14 +780,14 @@ ULONG_PTR EntrypointC(SBIELOW_DATA *data, void *DetourCode, void *SystemService)
         SBIELOW_EXTRA_DATA *extra;
 
         //
-        // Starting with Windows 11 build 26040 ProcessHeap must be 0 
-        // for the process initialisation to be successfull, hence from 
-        // now on we use Init_Lock in the SBIELOW_EXTRA_DATA to synchronize 
+        // Starting with Windows 11 build 26040 ProcessHeap must be 0
+        // for the process initialisation to be successful, hence from
+        // now on we use Init_Lock in the SBIELOW_EXTRA_DATA to synchronize
         // the execution of the init code, the first thread to arrive here
         // will encounter the initial 0 value and be allowed to execute
-        // the value will be changed to -1 indicating initialization in 
-        // progress. Subsequent threads will wait, untill the first thread, 
-        // once done changes the value to 1 indicating initialization completion. 
+        // the value will be changed to -1 indicating initialization in
+        // progress. Subsequent threads will wait, until the first thread,
+        // once done changes the value to 1 indicating initialization completion.
         // 
         // Since SBIELOW_EXTRA_DATA is freed by Ldr_Inject_Entry hence we need
         // to also use Init_Done in SBIELOW_DATA its initially 0 and

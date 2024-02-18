@@ -98,6 +98,14 @@ SBIE1152 Trampoline 分配失败 %2
 SBIE1153 Sandboxie 初始化失败。关闭所有程序后重新安装 Sandboxie，或者重新启动您的计算机。
 .
 
+1205;evt;pop;err;01
+SBIE1205 注册表中的 DynData 无效, 错误: %2
+.
+
+1206;evt;pop;err;01
+SBIE1206 您的Windows版本 (%2) 尚未得到 Sandboxie 支持, 错误: %3
+.
+
 #----------------------------------------------------------------------------
 # SbieDrv
 #
@@ -118,6 +126,10 @@ SBIE1203 无法建立路径列表 (%2 错误)
 
 1204;pop;err;01
 SBIE1204 沙盒 %3 创建失败 %2
+.
+
+1207;pop;err;01
+SBIE1207 您的Windows版本 (%2) 尚未得到 Sandboxie 支持, 应用将在安全隔离外运行！
 .
 
 1211;pop;err;01
@@ -979,7 +991,7 @@ Sandboxie 驱动程序 (SbieDrv) 无法使用。
 # .
 
 # 3232;txt;01
-# Sandboxie 允许个人用户永久免费使用。
+# 只要您愿意，个人用户可以永久免费使用 Sandboxie。
 # .
 
 # 3233;txt;01

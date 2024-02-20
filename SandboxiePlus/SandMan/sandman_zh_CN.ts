@@ -695,12 +695,12 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="715"/>
         <source>Configure your Gecko based Browsers profile directories.</source>
-        <translation>配置基于 Gecko 核心的浏览器配置文件目录</translation>
+        <translation>配置基于 Gecko 内核的浏览器配置文件目录</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="719"/>
         <source>Configure your Chromium based Browsers profile directories.</source>
-        <translation>配置基于 Chromium 核心的浏览器配置文件目录</translation>
+        <translation>配置基于 Chromium 内核的浏览器配置文件目录</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="799"/>
@@ -768,12 +768,12 @@ Please browse to the correct user profile directory.</oldsource>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="454"/>
         <source>The browser appears to be Gecko based, like Mozilla Firefox and its derivatives.</source>
-        <translation>该浏览器似乎是基于 Gecko 核心的，例如 Mozilla Firefox 及其衍生发行版</translation>
+        <translation>该浏览器似乎是基于 Gecko 内核的，例如 Mozilla Firefox 及其衍生发行版</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="457"/>
         <source>The browser appears to be Chromium based, like Microsoft Edge or Google Chrome and its derivatives.</source>
-        <translation>该浏览器似乎是基于 Chromium 核心的，例如 Microsoft Edge 或 Google Chrome 及其衍生发行版</translation>
+        <translation>该浏览器似乎是基于 Chromium 内核的，例如 Microsoft Edge 或 Google Chrome 及其衍生发行版</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="460"/>
@@ -3592,11 +3592,11 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     </message>
     <message>
         <location filename="SandMan.cpp" line="2442"/>
-        <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
+        <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</source>
         <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</oldsource>
-        <translation type="unfinished">您的Windows版本 %1 超过了 Sandboxie 版本的当前支持范围，导致禁用了基于令牌的安全隔离。因此，所有应用程序都将在没有安全隔离的应用程序隔间模式下运行。
+        <translation>您的Windows版本 %1 超过了 Sandboxie 版本的当前支持范围，导致禁用了基于令牌的安全隔离功能。因此，所有应用程序都将在没有安全隔离的应用程序隔间模式下运行。
 请检查 Sandboxie 是否有更新。</translation>
     </message>
     <message>

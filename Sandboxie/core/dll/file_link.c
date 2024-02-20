@@ -1328,7 +1328,7 @@ _FX FILE_LINK *File_FindPermLinksForMatchPath(
     link = List_Head(File_PermLinks);
     while (link) {
 
-        const ULONG src_len = link->src_len;
+        /*const ULONG src_len = link->src_len;
 
         if (
 #ifdef WOW64_FS_REDIR
@@ -1337,6 +1337,19 @@ _FX FILE_LINK *File_FindPermLinksForMatchPath(
             name_len >= src_len &&
                 (name[src_len] == L'\\' || name[src_len] == L'\0') &&
                 _wcsnicmp(name, link->src, src_len) == 0) {
+
+            return link;
+        }*/
+
+        const ULONG dst_len = link->dst_len;
+
+        if (
+#ifdef WOW64_FS_REDIR
+            link != File_Wow64FileLink &&
+#endif WOW64_FS_REDIR
+            name_len >= dst_len &&
+                (name[dst_len] == L'\\' || name[dst_len] == L'\0') &&
+                _wcsnicmp(name, link->dst, dst_len) == 0) {
 
             return link;
         }

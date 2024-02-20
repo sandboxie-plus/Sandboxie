@@ -2692,6 +2692,12 @@ _FX NTSTATUS File_NtCreateFileImpl(
         }
     }
 
+    if (Dll_ApiTrace) {
+        WCHAR trace_str[2048];
+        ULONG len = Sbie_snwprintf(trace_str, 2048, L"File_NtCreateFileImpl %s DesiredAccess=0x%08X CreateDisposition=0x%08X CreateOptions=0x%08X", TruePath, DesiredAccess, CreateDisposition, CreateOptions);
+        SbieApi_MonitorPut2Ex(MONITOR_APICALL | MONITOR_TRACE, len, trace_str, FALSE, FALSE);
+    }
+
     SkipOriginalTry = (status == STATUS_BAD_INITIAL_PC);
 
     //if ( (wcsstr(TruePath, L"Harddisk0\\DR0") != 0) || wcsstr(TruePath, L"HarddiskVolume3") != 0) {
@@ -3831,6 +3837,12 @@ ReparseLoop:
 
     } __except (EXCEPTION_EXECUTE_HANDLER) {
         status = GetExceptionCode();
+    }
+
+    if (Dll_ApiTrace) {
+        WCHAR trace_str[2048];
+        ULONG len = Sbie_snwprintf(trace_str, 2048, L"File_NtCreateFileImpl status = 0x%08X", status);
+        SbieApi_MonitorPut2Ex(MONITOR_APICALL | MONITOR_TRACE, len, trace_str, FALSE, FALSE);
     }
 
     SetLastError(LastError);
@@ -5047,6 +5059,12 @@ _FX NTSTATUS File_NtQueryFullAttributesFileImpl(
         ObjectAttributes->RootDirectory, ObjectAttributes->ObjectName,
         &TruePath, &CopyPath, &FileFlags);
 
+    if (Dll_ApiTrace) {
+        WCHAR trace_str[2048];
+        ULONG len = Sbie_snwprintf(trace_str, 2048, L"File_NtQueryFullAttributesFileImpl %s", TruePath);
+        SbieApi_MonitorPut2Ex(MONITOR_APICALL | MONITOR_TRACE, len, trace_str, FALSE, FALSE);
+    }
+
     if (! NT_SUCCESS(status)) {
 
         if (status == STATUS_BAD_INITIAL_PC) {
@@ -5241,6 +5259,12 @@ _FX NTSTATUS File_NtQueryFullAttributesFileImpl(
         && (FileFlags & FGN_TRAILING_BACKSLASH)) {      // but trailing b.s
 
         status = STATUS_OBJECT_NAME_INVALID;
+    }
+
+    if (Dll_ApiTrace) {
+        WCHAR trace_str[2048];
+        ULONG len = Sbie_snwprintf(trace_str, 2048, L"File_NtQueryFullAttributesFileImpl status = 0x%08X", status);
+        SbieApi_MonitorPut2Ex(MONITOR_APICALL | MONITOR_TRACE, len, trace_str, FALSE, FALSE);
     }
 
     Dll_PopTlsNameBuffer(TlsData);
@@ -5563,6 +5587,12 @@ _FX ULONG File_GetFinalPathNameByHandleW(
         err = GetLastError();
     }
 
+    if (Dll_ApiTrace) {
+        WCHAR trace_str[2048];
+        ULONG len = Sbie_snwprintf(trace_str, 2048, L"File_GetFinalPathNameByHandleW %s", lpszFilePath);
+        SbieApi_MonitorPut2Ex(MONITOR_APICALL | MONITOR_TRACE, len, trace_str, FALSE, FALSE);
+    }
+
     SetLastError(err);
     return rc;
 }
@@ -5578,11 +5608,11 @@ _FX WCHAR *File_GetFinalPathNameByHandleW_2(WCHAR *TruePath, ULONG dwFlags)
     static const WCHAR *_DosPrefix = L"\\\\?\\UNC\\";
     const FILE_DRIVE *file_drive;
     const FILE_LINK *file_link;
-    const WCHAR *suffix;
+    const WCHAR *suffix, *suffix2;
     WCHAR *path;
     WCHAR *ReparsedPath;
     ULONG TruePath_len;
-    ULONG suffix_len;
+    ULONG suffix_len, suffix2_len;
     WCHAR drive_letter;
     BOOLEAN AddBackslash;
 
@@ -5679,6 +5709,7 @@ _FX WCHAR *File_GetFinalPathNameByHandleW_2(WCHAR *TruePath, ULONG dwFlags)
     ReparsedPath = NULL;
     AddBackslash = FALSE;
     drive_letter = 0;
+    suffix2 = NULL;
 
     file_link = File_FindPermLinksForMatchPath(TruePath, TruePath_len);
     if (file_link) {
@@ -5728,18 +5759,33 @@ _FX WCHAR *File_GetFinalPathNameByHandleW_2(WCHAR *TruePath, ULONG dwFlags)
 
             file_drive = File_GetDriveForPath(TruePath, TruePath_len);
             if (! file_drive) {
-                // release lock by File_FindPermLinksForMatchPath
-                LeaveCriticalSection(File_DrivesAndLinks_CritSec);
-                SetLastError(ERROR_PATH_NOT_FOUND);
-                return NULL;
+
+                file_drive = File_GetDriveForPath(file_link->src, file_link->src_len);
+                if (!file_drive) {
+
+                    // release lock by File_FindPermLinksForMatchPath
+                    LeaveCriticalSection(File_DrivesAndLinks_CritSec);
+                    SetLastError(ERROR_PATH_NOT_FOUND);
+                    return NULL;
+                }
+                else
+                {
+                    drive_letter = file_drive->letter;
+                    suffix = file_link->src + file_drive->len;
+                    suffix2 = TruePath + file_link->dst_len;
+
+                    // release lock by File_GetDriveForPath
+                    LeaveCriticalSection(File_DrivesAndLinks_CritSec);
+                }
             }
+            else
+            {
+                drive_letter = file_drive->letter;
+                suffix = TruePath + file_drive->len;
 
-            drive_letter = file_drive->letter;
-            suffix = TruePath + file_drive->len;
-
-            // release lock by File_GetDriveForPath
-            LeaveCriticalSection(File_DrivesAndLinks_CritSec);
-
+                // release lock by File_GetDriveForPath
+                LeaveCriticalSection(File_DrivesAndLinks_CritSec);
+            }
         }
 
         // release lock by File_FindPermLinksForMatchPath
@@ -5785,11 +5831,15 @@ _FX WCHAR *File_GetFinalPathNameByHandleW_2(WCHAR *TruePath, ULONG dwFlags)
     } else { // VOLUME_NAME_DOS
 
         suffix_len = wcslen(suffix);
-        path = Dll_AllocTemp((suffix_len + 16) * sizeof(WCHAR));
+        suffix2_len = suffix2 ? wcslen(suffix2) : 0;
+        path = Dll_AllocTemp((suffix_len + suffix2_len + 16) * sizeof(WCHAR));
         wmemcpy(path, _DosPrefix, 4);
         path[4] = drive_letter;
         path[5] = L':';
         wmemcpy(path + 6, suffix, suffix_len + 1);
+        if (suffix2)
+            wcscat(path, suffix2);
+
     }
 
     if (AddBackslash)

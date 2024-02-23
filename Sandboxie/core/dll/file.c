@@ -2681,6 +2681,10 @@ _FX NTSTATUS File_NtCreateFileImpl(
 
                 SbieApi_MonitorPut2(MONITOR_PIPE, TruePath, FALSE);
 
+                Dll_PopTlsNameBuffer(TlsData);
+
+                TlsData->file_NtCreateFile_lock = FALSE;
+
                 return __sys_NtCreateFile(
                     FileHandle, DesiredAccess, ObjectAttributes, IoStatusBlock,
                     AllocationSize, FileAttributes, ShareAccess, CreateDisposition,

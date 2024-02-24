@@ -813,6 +813,9 @@ _FX PROCESS *Process_Create(
     if (!Dyndata_Active && !proc->bAppCompartment) {
 
         proc->bAppCompartment = TRUE;
+		proc->always_close_for_boxed = FALSE;
+		proc->dont_open_for_boxed = FALSE;
+		proc->protect_host_images = FALSE;
 
         WCHAR info[12];
         RtlStringCbPrintfW(info, sizeof(info), L"%d", Driver_OsBuild);

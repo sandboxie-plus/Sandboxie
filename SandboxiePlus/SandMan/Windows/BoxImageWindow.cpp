@@ -133,6 +133,13 @@ void CBoxImageWindow::CheckPassword()
 				, QMessageBox::Yes, QMessageBox::No) != QMessageBox::Yes)
 				return;
 		}
+		if (ui.txtNewPassword->text().length() > 128) {
+			QMessageBox::warning(this, "Sandboxie-Plus", tr("The password is constrained to a maximum length of 128 characters. \n"
+				"This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, \n"
+				"increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.")
+				, QMessageBox::Ok);
+			return;
+		}
 
 		if (m_Action == eNew || m_Action == eExport)
 			m_Password = ui.txtNewPassword->text();

@@ -604,9 +604,6 @@ _FX WCHAR *File_TranslateTempLinks(
     WCHAR *ret;
     ULONG TruePath_len, ret_len;
 
-    if (File_NoReparse)
-        return NULL;
-
     //
     // entry
     //
@@ -1022,72 +1019,67 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
 
     stop = TRUE;
     newpath = NULL;
+    
+    status = File_OpenForAddTempLink(&handle, path, FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT | FILE_OPEN_REPARSE_POINT);
 
-    BOOLEAN UserReparse = SbieApi_QueryConfBool(NULL, L"UseNewSymlinkResolver", TRUE);
+    if (NT_SUCCESS(status)) {
 
-    if (UserReparse) {
-        
-        status = File_OpenForAddTempLink(&handle, path, FILE_DIRECTORY_FILE | FILE_SYNCHRONOUS_IO_NONALERT | FILE_OPEN_REPARSE_POINT);
+        REPARSE_DATA_BUFFER* reparseDataBuffer = Dll_AllocTemp(MAXIMUM_REPARSE_DATA_BUFFER_SIZE);
+        status = pNtFsControlFile(handle, NULL, NULL, NULL, &IoStatusBlock, FSCTL_GET_REPARSE_POINT, NULL, 0, reparseDataBuffer, MAXIMUM_REPARSE_DATA_BUFFER_SIZE);
 
         if (NT_SUCCESS(status)) {
 
-            REPARSE_DATA_BUFFER* reparseDataBuffer = Dll_AllocTemp(MAXIMUM_REPARSE_DATA_BUFFER_SIZE);
-            status = pNtFsControlFile(handle, NULL, NULL, NULL, &IoStatusBlock, FSCTL_GET_REPARSE_POINT, NULL, 0, reparseDataBuffer, MAXIMUM_REPARSE_DATA_BUFFER_SIZE);
+            WCHAR* SubstituteNameBuffer = NULL;
+            //WCHAR* PrintNameBuffer = NULL;
+            BOOL RelativePath = FALSE;
 
-            if (NT_SUCCESS(status)) {
+            if (reparseDataBuffer->ReparseTag == IO_REPARSE_TAG_SYMLINK)
+            {
+                SubstituteNameBuffer = &reparseDataBuffer->SymbolicLinkReparseBuffer.PathBuffer[reparseDataBuffer->SymbolicLinkReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
+                if (reparseDataBuffer->SymbolicLinkReparseBuffer.Flags & SYMLINK_FLAG_RELATIVE)
+                    RelativePath = TRUE;
+                SubstituteNameBuffer[reparseDataBuffer->SymbolicLinkReparseBuffer.SubstituteNameLength / sizeof(WCHAR)] = 0;
+            }
+            else if (reparseDataBuffer->ReparseTag == IO_REPARSE_TAG_MOUNT_POINT)
+            {
+                SubstituteNameBuffer = &reparseDataBuffer->MountPointReparseBuffer.PathBuffer[reparseDataBuffer->MountPointReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
+                SubstituteNameBuffer[reparseDataBuffer->MountPointReparseBuffer.SubstituteNameLength / sizeof(WCHAR)] = 0;
+            }
 
-                WCHAR* SubstituteNameBuffer = NULL;
-                //WCHAR* PrintNameBuffer = NULL;
-                BOOL RelativePath = FALSE;
-
-                if (reparseDataBuffer->ReparseTag == IO_REPARSE_TAG_SYMLINK)
+            if (SubstituteNameBuffer)
+            {
+                if (RelativePath)
                 {
-                    SubstituteNameBuffer = &reparseDataBuffer->SymbolicLinkReparseBuffer.PathBuffer[reparseDataBuffer->SymbolicLinkReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
-                    if (reparseDataBuffer->SymbolicLinkReparseBuffer.Flags & SYMLINK_FLAG_RELATIVE)
-                        RelativePath = TRUE;
-                    SubstituteNameBuffer[reparseDataBuffer->SymbolicLinkReparseBuffer.SubstituteNameLength / sizeof(WCHAR)] = 0;
+                        // todo RelativePath - for now we fall back to the old method
                 }
-                else if (reparseDataBuffer->ReparseTag == IO_REPARSE_TAG_MOUNT_POINT)
+                else
                 {
-                    SubstituteNameBuffer = &reparseDataBuffer->MountPointReparseBuffer.PathBuffer[reparseDataBuffer->MountPointReparseBuffer.SubstituteNameOffset/sizeof(WCHAR)];
-                    SubstituteNameBuffer[reparseDataBuffer->MountPointReparseBuffer.SubstituteNameLength / sizeof(WCHAR)] = 0;
-                }
+                    WCHAR* input_str = SubstituteNameBuffer;
+                    if (_wcsnicmp(input_str, L"\\??\\Volume{", 11) == 0)
+                        input_str = File_TranslateGuidToNtPath(SubstituteNameBuffer);
+                    else if (_wcsnicmp(input_str, File_BQQB, 4) == 0)
+                        input_str = File_TranslateDosToNtPath(SubstituteNameBuffer + 4);
 
-                if (SubstituteNameBuffer)
-                {
-                    if (RelativePath)
-                    {
-                         // todo RelativePath - for now we fall back to the old method
-                    }
-                    else
-                    {
-                        WCHAR* input_str = SubstituteNameBuffer;
-                        if (_wcsnicmp(input_str, L"\\??\\Volume{", 11) == 0)
-                            input_str = File_TranslateGuidToNtPath(SubstituteNameBuffer);
-                        else if (_wcsnicmp(input_str, File_BQQB, 4) == 0)
-                            input_str = File_TranslateDosToNtPath(SubstituteNameBuffer + 4);
+                    if (input_str) {
 
-                        if (input_str) {
+                        ULONG input_len = wcslen(input_str);
+                        while (input_len > 0 && input_str[input_len - 1] == L'\\')
+                            input_len -= 1; // remove trailing backslash
 
-                            ULONG input_len = wcslen(input_str);
-                            while (input_len > 0 && input_str[input_len - 1] == L'\\')
-                                input_len -= 1; // remove trailing backslash
+                        newpath = File_TranslateTempLinks_2(input_str, input_len);
 
-                            newpath = File_TranslateTempLinks_2(input_str, input_len);
-
-                            if (input_str != SubstituteNameBuffer)
-                                Dll_Free(input_str);
-                        }
+                        if (input_str != SubstituteNameBuffer)
+                            Dll_Free(input_str);
                     }
                 }
             }
-            //else if (status == STATUS_NOT_A_REPARSE_POINT) 
+        }
+        //else if (status == STATUS_NOT_A_REPARSE_POINT) 
             
 
-            Dll_Free(reparseDataBuffer);
+        Dll_Free(reparseDataBuffer);
 
-            pNtClose(handle);
-        }
+        pNtClose(handle);
     }
     
     const ULONG PATH_BUF_LEN = 1024;

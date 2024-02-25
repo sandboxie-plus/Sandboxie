@@ -17,6 +17,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - changed DynData format to add flags
+- Revert or provide a way to opt out of the new sandbox directory structure for volumes without drive letters [#3632](https://github.com/sandboxie-plus/Sandboxie/issues/3632)
+  - guid usage can be re-enabled with "UseVolumeGuidWhenNoLetter=y"
+
+### Removed
+- removed UseNewSymlinkResolver setting new mechanism is always used
 
 
 

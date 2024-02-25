@@ -2258,6 +2258,13 @@ void CSandMan::OnStartMenuChanged()
 
 void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 {
+	foreach(const QString & Value, pBox->GetTextList("OnBoxTerminate", true, false, true)) {
+		QString Value2 = pBox->Expand(Value);
+		CSbieProgressPtr pProgress = CSbieUtils::RunCommand(Value2, true);
+		if (!pProgress.isNull()) {
+			AddAsyncOp(pProgress, true, tr("Executing OnBoxTerminate: %1").arg(Value2));
+		}
+	}
 	if (!pBox->GetBool("NeverDelete", false))
 	{
 		if (pBox->GetBool("AutoDelete", false))

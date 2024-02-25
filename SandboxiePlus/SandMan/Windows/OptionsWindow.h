@@ -191,6 +191,7 @@ private slots:
 	void OnAddAutoExec();
 	void OnAddRecoveryCheck();
 	void OnAddDeleteCmd();
+	void OnAddTerminateCmd();
 	void OnDelAuto();
 
 	void OnAddProcess();
@@ -334,7 +335,8 @@ public:
 		eOnStartSvc,
 		eAutoExec,
 		eRecoveryCheck,
-		eDeleteCmd
+		eDeleteCmd,
+		eTerminateCmd
 	};
 
 	static QString AccessTypeToName(EAccessEntry Type);

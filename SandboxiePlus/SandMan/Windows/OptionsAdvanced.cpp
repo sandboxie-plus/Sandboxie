@@ -89,6 +89,7 @@ void COptionsWindow::CreateAdvanced()
 	connect(ui.btnAddAutoExec, SIGNAL(clicked(bool)), this, SLOT(OnAddAutoExec()));
 	connect(ui.btnAddRecoveryCmd, SIGNAL(clicked(bool)), this, SLOT(OnAddRecoveryCheck()));
 	connect(ui.btnAddDeleteCmd, SIGNAL(clicked(bool)), this, SLOT(OnAddDeleteCmd()));
+	connect(ui.btnAddTerminateCmd, SIGNAL(clicked(bool)), this, SLOT(OnAddTerminateCmd()));
 	connect(ui.btnDelAuto, SIGNAL(clicked(bool)), this, SLOT(OnDelAuto()));
 	connect(ui.chkShowTriggersTmpl, SIGNAL(clicked(bool)), this, SLOT(OnShowTriggersTmpl()));
 
@@ -411,6 +412,7 @@ void COptionsWindow::SaveAdvanced()
 	QStringList RecoveryCheck;
 	QStringList DeleteCommand;
 	QStringList AutoExec;
+	QStringList TerminateCommand;
 	for (int i = 0; i < ui.treeTriggers->topLevelItemCount(); i++) {
 		QTreeWidgetItem* pItem = ui.treeTriggers->topLevelItem(i);
 		switch (pItem->data(0, Qt::UserRole).toInt())
@@ -420,6 +422,7 @@ void COptionsWindow::SaveAdvanced()
 		case eAutoExec:		AutoExec.append(pItem->text(2)); break;
 		case eRecoveryCheck:		RecoveryCheck.append(pItem->text(2)); break;
 		case eDeleteCmd:	DeleteCommand.append(pItem->text(2)); break;
+		case eTerminateCmd:		TerminateCommand.append(pItem->text(2)); break;
 		}
 	}
 	WriteTextList("StartProgram", StartProgram);
@@ -427,6 +430,7 @@ void COptionsWindow::SaveAdvanced()
 	WriteTextList("AutoExec", AutoExec);
 	WriteTextList("OnFileRecovery", RecoveryCheck);
 	WriteTextList("OnBoxDelete", DeleteCommand);
+	WriteTextList("OnBoxTerminate", TerminateCommand);
 	//
 
 
@@ -874,6 +878,9 @@ void COptionsWindow::AddTriggerItem(const QString& Value, ETriggerAction Type, c
 			pItem->setText(0, tr("On Delete Content"));
 			pItem->setText(1, tr("Run Command"));
 			break;
+		case eTerminateCmd:
+			pItem->setText(0, tr("On Terminate"));
+			pItem->setText(1, tr("Run Command"));
 	}
 	pItem->setText(2, Value);
 	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
@@ -920,6 +927,17 @@ void COptionsWindow::OnAddDeleteCmd()
 		return;
 
 	AddTriggerItem(Value, eDeleteCmd);
+	m_AdvancedChanged = true;
+	OnOptChanged();
+}
+
+void COptionsWindow::OnAddTerminateCmd()
+{
+	QString Value = QInputDialog::getText(this, "Sandboxie-Plus", tr("Please enter the command line to be executed"), QLineEdit::Normal);
+	if (Value.isEmpty())
+		return;
+
+	AddTriggerItem(Value, eTerminateCmd);
 	m_AdvancedChanged = true;
 	OnOptChanged();
 }

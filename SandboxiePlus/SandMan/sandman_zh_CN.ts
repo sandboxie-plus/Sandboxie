@@ -410,7 +410,14 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
 推荐使用长度至少为 20 字符以上的密码。或者，您确认使用短密码吗？</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="147"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="137"/>
+        <source>The password is constrained to a maximum length of 128 characters. 
+This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
+increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BoxImageWindow.cpp" line="154"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
         <translation>磁盘映像大小至少为 256Mb，推荐设置为 2Gb。</translation>
     </message>
@@ -3592,11 +3599,11 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
     </message>
     <message>
         <location filename="SandMan.cpp" line="2442"/>
-        <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
+        <source>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.<byte value="xd"/>
 Please check if there is an update for sandboxie.</source>
         <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</oldsource>
-        <translation>您的Windows版本 %1 超过了 Sandboxie 版本的当前支持范围，导致禁用了基于令牌的安全隔离功能。因此，所有应用程序都将在没有安全隔离的应用程序隔间模式下运行。
+        <translation type="unfinished">您的Windows版本 %1 超过了 Sandboxie 版本的当前支持范围，导致禁用了基于令牌的安全隔离功能。因此，所有应用程序都将在没有安全隔离的应用程序隔间模式下运行。
 请检查 Sandboxie 是否有更新。</translation>
     </message>
     <message>

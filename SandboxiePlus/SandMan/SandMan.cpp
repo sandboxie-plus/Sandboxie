@@ -2265,6 +2265,7 @@ void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 			AddAsyncOp(pProgress, true, tr("Executing OnBoxTerminate: %1").arg(Value2));
 		}
 	}
+	
 	if (!pBox->GetBool("NeverDelete", false))
 	{
 		if (pBox->GetBool("AutoDelete", false))
@@ -2635,6 +2636,7 @@ void CSandMan::SetupHotKeys()
 
 	if (theConf->GetBool("Options/EnablePauseForceKey", false))
 		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PauseForceKeySequence", "Ctrl+Alt+F"), HK_FORCE);
+		
 	if (theConf->GetBool("Options/EnableSuspendKey", false))
 		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/SuspendKeySequence", "Ctrl+Pause"), HK_SUSPEND);
 }
@@ -2659,10 +2661,8 @@ void CSandMan::OnHotKey(size_t id)
 
 	case HK_SUSPEND:
 	{
-		
-		for (auto each : theAPI->GetAllBoxes()) {
+		for (auto each : theAPI->GetAllBoxes())
 			each->SetSuspendedAll(TRUE);
-		};
 		break;
 	}
 

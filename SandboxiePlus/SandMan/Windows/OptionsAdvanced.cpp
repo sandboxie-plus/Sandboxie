@@ -430,7 +430,7 @@ void COptionsWindow::SaveAdvanced()
 	WriteTextList("AutoExec", AutoExec);
 	WriteTextList("OnFileRecovery", RecoveryCheck);
 	WriteTextList("OnBoxDelete", DeleteCommand);
-	WriteTextList("OnBoxTerimate", TerminateCommand);
+	WriteTextList("OnBoxTerminate", TerminateCommand);
 	//
 
 

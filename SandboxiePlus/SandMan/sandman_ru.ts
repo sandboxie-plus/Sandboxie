@@ -328,7 +328,14 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
 Рекомендуется выбирать пароль, состоящий из 20 и более символов. Вы уверены, что хотите использовать короткий пароль?</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="147"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="137"/>
+        <source>The password is constrained to a maximum length of 128 characters. 
+This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
+increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BoxImageWindow.cpp" line="154"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
         <translation>Размер образа диска должен быть не менее 256 МБ, рекомендуется 2 ГБ.</translation>
     </message>

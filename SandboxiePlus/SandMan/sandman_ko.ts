@@ -411,7 +411,14 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
 20자 이상으로 구성된 암호를 선택하는 것이 좋습니다. 짧은 암호를 사용하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="147"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="137"/>
+        <source>The password is constrained to a maximum length of 128 characters. 
+This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
+increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BoxImageWindow.cpp" line="154"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
         <translation>박스 디스크 이미지의 크기는 256MB 이상이어야 합니다. 2GB가 권장됩니다.</translation>
     </message>

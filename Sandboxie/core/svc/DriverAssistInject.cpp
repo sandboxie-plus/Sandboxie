@@ -94,6 +94,9 @@ void DriverAssist::InjectLow(void *_msg)
         goto finish;
     }
 
+    ULONG64 ProcessFlags = SbieApi_QueryProcessInfo((HANDLE)msg->process_id, 0);
+    BOOLEAN CompartmentMode = (ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0;
+
     //
 	// notify the box manager about a new process
 	//
@@ -114,10 +117,10 @@ void DriverAssist::InjectLow(void *_msg)
 #endif
     sbieLow.bHostInject = msg->bHostInject;
     // NoSysCallHooks BEGIN
-    sbieLow.bNoSysHooks = SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"NoSysCallHooks", FALSE);
+    sbieLow.bNoSysHooks = CompartmentMode || SbieApi_QueryConfBool(boxname, L"NoSysCallHooks", FALSE);
     // NoSysCallHooks END
     // NoSbieCons BEGIN
-    sbieLow.bNoConsole = SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"NoSandboxieConsole", FALSE);
+    sbieLow.bNoConsole = CompartmentMode || SbieApi_QueryConfBool(boxname, L"NoSandboxieConsole", FALSE);
     // NoSbieCons END
     //sbieLow.bIsFirst = IsFirst;
 
@@ -130,7 +133,7 @@ void DriverAssist::InjectLow(void *_msg)
     //
 
     // NoSbieDesk BEGIN
-    if (!SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"NoSandboxieDesktop", FALSE))
+    if (!CompartmentMode && !SbieApi_QueryConfBool(boxname, L"NoSandboxieDesktop", FALSE))
     // NoSbieDesk END
     if (!msg->bHostInject)
     {

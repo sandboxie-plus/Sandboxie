@@ -12,6 +12,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - fixed incompatibility with Windows ARM64 Insider build 26052 and later
 - fixed [1.12.6] Symlink and open path issue [#3537](https://github.com/sandboxie-plus/Sandboxie/issues/3537)
 - In Application Compartment Box,There is a bug in file redirection,CreateDirectory Fail [#3637](https://github.com/sandboxie-plus/Sandboxie/issues/3637)
+- fixed issues with appcompartment mode compatybility fallback
+- fixed missing max password length check [#3639]https://github.com/sandboxie-plus/Sandboxie/issues/3639
 
 ### Changed
 - changed DynData format to add flags

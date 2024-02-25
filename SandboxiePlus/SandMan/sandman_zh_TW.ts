@@ -408,7 +408,14 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
 建議選擇由20個或更多字元組成的密碼。確定要使用短密碼嗎？</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="147"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="137"/>
+        <source>The password is constrained to a maximum length of 128 characters. 
+This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
+increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BoxImageWindow.cpp" line="154"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
         <translation>Box 磁碟映像的大小必須至少為 256 MB，建議使用 2GB。</translation>
     </message>

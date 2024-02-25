@@ -65,7 +65,7 @@ protected:
     WCHAR *RunSandboxedCopyString(MSG_HEADER *msg, ULONG ofs, ULONG len);
     HANDLE RunSandboxedGetToken(
             HANDLE CallerProcessHandle, bool CallerInSandbox,
-            const WCHAR *BoxName, const WCHAR* cmd);
+            const WCHAR *BoxName, const WCHAR* cmd, HANDLE CallerPid);
     BOOL RunSandboxedStartProcess(
             HANDLE PrimaryTokenHandle, LONG_PTR BoxNameOrModelPid,
             WCHAR *cmd, const WCHAR *dir, WCHAR *env, 

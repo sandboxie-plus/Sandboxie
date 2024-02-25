@@ -113,6 +113,8 @@ bool ServiceServer::CanAccessSCM(HANDLE idProcess)
 	SbieApi_QueryProcess(idProcess, boxname, exename, NULL, NULL); // if this fail we take the global config if present
 	if (SbieApi_QueryConfBool(boxname, L"UnrestrictedSCM", FALSE))
 		return true;
+    ULONG64 ProcessFlags = SbieApi_QueryProcessInfo(idProcess, 0);
+    BOOLEAN CompartmentMode = (ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0;
 
 	//
 	// DcomLaunch runs as user but needs to be able to access the SCM 
@@ -134,7 +136,7 @@ bool ServiceServer::CanAccessSCM(HANDLE idProcess)
 
 	HANDLE hToken = NULL;
     // OriginalToken BEGIN
-    if (SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)) {
+    if (CompartmentMode || SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)) {
         HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, (DWORD)(UINT_PTR)idProcess);
         if (hProcess != NULL) {
             OpenProcessToken(hProcess, TOKEN_IMPERSONATE | TOKEN_QUERY | TOKEN_DUPLICATE | STANDARD_RIGHTS_READ, &hToken);
@@ -328,8 +330,9 @@ ULONG ServiceServer::RunHandler2(
     BOOL  asSys;
 
     WCHAR boxname[BOXNAME_COUNT] = { 0 };
-
     SbieApi_QueryProcess(idProcess, boxname, NULL, NULL, NULL);
+    ULONG64 ProcessFlags = SbieApi_QueryProcessInfo(idProcess, 0);
+    BOOLEAN CompartmentMode = (ProcessFlags & SBIE_FLAG_APP_COMPARTMENT) != 0;
 
     if (ok) {
         errlvl = 0x21;
@@ -351,7 +354,7 @@ ULONG ServiceServer::RunHandler2(
             ok = OpenProcessToken(GetCurrentProcess(), TOKEN_RIGHTS, &hOldToken);
         }
         // OriginalToken BEGIN
-        else if (SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) || SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)) {
+        else if (CompartmentMode || SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE)) {
             HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, (ULONG)(ULONG_PTR)idProcess);
             if (!hProcess)
                 ok = FALSE;
@@ -393,7 +396,7 @@ ULONG ServiceServer::RunHandler2(
                 ok = ProcessServer::RunSandboxedSetDacl(hProcess, hNewToken, GENERIC_ALL, TRUE, idProcess);
             else if (SbieApi_QueryConfBool(boxname, L"AdjustBoxedSystem", TRUE))
                 // OriginalToken BEGIN
-                if (!SbieApi_QueryConfBool(boxname, L"NoSecurityIsolation", FALSE) && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
+                if (!CompartmentMode && !SbieApi_QueryConfBool(boxname, L"OriginalToken", FALSE))
                 // OriginalToken END
                 ok = ProcessServer::RunSandboxedSetDacl(hProcess, hNewToken, GENERIC_READ, FALSE);
 

@@ -342,7 +342,14 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
 Il est recommandé de choisir un mot de passe comportant 20 caractères ou plus. Êtes-vous sûr de vouloir utiliser un mot de passe court ?</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="147"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="137"/>
+        <source>The password is constrained to a maximum length of 128 characters. 
+This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
+increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BoxImageWindow.cpp" line="154"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
         <translation>L&apos;image de disque du bac doit avoir une taille d&apos;au moins 256 Mio ; 2 Gio sont recommandés.</translation>
     </message>

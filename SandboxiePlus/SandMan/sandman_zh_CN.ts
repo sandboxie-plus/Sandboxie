@@ -410,7 +410,14 @@ It is recommended to choose a password consisting of 20 or more characters. Are 
 推荐使用长度至少为 20 字符以上的密码。或者，您确认使用短密码吗？</translation>
     </message>
     <message>
-        <location filename="Windows/BoxImageWindow.cpp" line="147"/>
+        <location filename="Windows/BoxImageWindow.cpp" line="137"/>
+        <source>The password is constrained to a maximum length of 128 characters. 
+This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
+increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/BoxImageWindow.cpp" line="154"/>
         <source>The Box Disk Image must be at least 256 MB in size, 2GB are recommended.</source>
         <translation>磁盘映像大小至少为 256Mb，推荐设置为 2Gb。</translation>
     </message>
@@ -695,12 +702,12 @@ This ensures the utmost level of privacy and data protection within the confiden
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="715"/>
         <source>Configure your Gecko based Browsers profile directories.</source>
-        <translation>配置基于 Gecko 核心的浏览器配置文件目录</translation>
+        <translation>配置基于 Gecko 内核的浏览器配置文件目录</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="719"/>
         <source>Configure your Chromium based Browsers profile directories.</source>
-        <translation>配置基于 Chromium 核心的浏览器配置文件目录</translation>
+        <translation>配置基于 Chromium 内核的浏览器配置文件目录</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="799"/>
@@ -768,12 +775,12 @@ Please browse to the correct user profile directory.</oldsource>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="454"/>
         <source>The browser appears to be Gecko based, like Mozilla Firefox and its derivatives.</source>
-        <translation>该浏览器似乎是基于 Gecko 核心的，例如 Mozilla Firefox 及其衍生发行版</translation>
+        <translation>该浏览器似乎是基于 Gecko 内核的，例如 Mozilla Firefox 及其衍生发行版</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="457"/>
         <source>The browser appears to be Chromium based, like Microsoft Edge or Google Chrome and its derivatives.</source>
-        <translation>该浏览器似乎是基于 Chromium 核心的，例如 Microsoft Edge 或 Google Chrome 及其衍生发行版</translation>
+        <translation>该浏览器似乎是基于 Chromium 内核的，例如 Microsoft Edge 或 Google Chrome 及其衍生发行版</translation>
     </message>
     <message>
         <location filename="Wizards/TemplateWizard.cpp" line="460"/>
@@ -3596,7 +3603,7 @@ This box &lt;a href=&quot;sbie://docs/privacy-mode&quot;&gt;prevents access to a
 Please check if there is an update for sandboxie.</source>
         <oldsource>Your Windows build %1 exceeds the current support capabilities of your Sandboxie version, resulting in the disabling of token-based security isolation. Consequently, all applications will operate in application compartment mode without secure isolation.
 Please check if there is an update for sandboxie.</oldsource>
-        <translation type="unfinished">您的Windows版本 %1 超过了 Sandboxie 版本的当前支持范围，导致禁用了基于令牌的安全隔离。因此，所有应用程序都将在没有安全隔离的应用程序隔间模式下运行。
+        <translation type="unfinished">您的Windows版本 %1 超过了 Sandboxie 版本的当前支持范围，导致禁用了基于令牌的安全隔离功能。因此，所有应用程序都将在没有安全隔离的应用程序隔间模式下运行。
 请检查 Sandboxie 是否有更新。</translation>
     </message>
     <message>

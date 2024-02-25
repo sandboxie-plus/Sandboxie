@@ -332,7 +332,10 @@ Es ist empfohlen ein Passwort von 20 oder mehr Zeichen zu wählen. Sind Sie sich
         <source>The password is constrained to a maximum length of 128 characters. 
 This length permits approximately 384 bits of entropy with a passphrase composed of actual English words, 
 increases to 512 bits with the application of Leet (L337) speak modifications, and exceeds 768 bits when composed of entirely random printable ASCII characters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Passwort ist auf eine Länge von maximal 128 Zeichen beschränkt.
+Diese Länge erlaubt ungefähr 384 Bits Entropie mit einer Passphrase, die aus richtigen englischen Wörtern besteht.
+Die Entropie erhöht sich auf 512 Bits durch die Verwendung von Leet-(L337)-Speak, und übersteigt 768 Bits, wenn die Passphrase aus komplett zufälligen druckbaren ASCII Zeichen erzeugt wird.
+	</translation>
     </message>
     <message>
         <location filename="Windows/BoxImageWindow.cpp" line="154"/>

@@ -2258,6 +2258,13 @@ void CSandMan::OnStartMenuChanged()
 
 void CSandMan::OnBoxClosed(const CSandBoxPtr& pBox)
 {
+	foreach(const QString & Value, pBox->GetTextList("OnBoxTerminate", true, false, true)) {
+		QString Value2 = pBox->Expand(Value);
+		CSbieProgressPtr pProgress = CSbieUtils::RunCommand(Value2, true);
+		if (!pProgress.isNull()) {
+			AddAsyncOp(pProgress, true, tr("Executing OnBoxTerminate: %1").arg(Value2));
+		}
+	}
 	if (!pBox->GetBool("NeverDelete", false))
 	{
 		if (pBox->GetBool("AutoDelete", false))
@@ -2614,6 +2621,7 @@ void CSandMan::CheckSupport()
 #define HK_PANIC	1
 #define HK_TOP		2
 #define HK_FORCE	3
+#define HK_SUSPEND	4
 
 void CSandMan::SetupHotKeys()
 {
@@ -2627,6 +2635,8 @@ void CSandMan::SetupHotKeys()
 
 	if (theConf->GetBool("Options/EnablePauseForceKey", false))
 		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/PauseForceKeySequence", "Ctrl+Alt+F"), HK_FORCE);
+	if (theConf->GetBool("Options/EnableSuspendKey", false))
+		m_pHotkeyManager->registerHotkey(theConf->GetString("Options/SuspendKeySequence", "Ctrl+Pause"), HK_SUSPEND);
 }
 
 void CSandMan::OnHotKey(size_t id)
@@ -2644,6 +2654,15 @@ void CSandMan::OnHotKey(size_t id)
 		if(LastClickCount != 2) // skip second click as it may take more than a second
 			theAPI->TerminateAll(LastClickCount >= 3);
 		LastClickTick = GetCurTick();
+		break;
+	}
+
+	case HK_SUSPEND:
+	{
+		
+		for (auto each : theAPI->GetAllBoxes()) {
+			each->SetSuspendedAll(TRUE);
+		};
 		break;
 	}
 

@@ -298,6 +298,8 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 	connect(ui.keyTop, SIGNAL(keySequenceChanged(const QKeySequence &)), this, SLOT(OnOptChanged()));
 	connect(ui.chkPauseForce, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.keyPauseForce, SIGNAL(keySequenceChanged(const QKeySequence &)), this, SLOT(OnOptChanged()));
+	connect(ui.chkSuspend, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.keySuspend, SIGNAL(keySequenceChanged(const QKeySequence&)), this, SLOT(OnOptChanged()));
 	connect(ui.chkAsyncBoxOps, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 
 	connect(ui.chkSilentMode, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
@@ -918,6 +920,9 @@ void CSettingsWindow::LoadSettings()
 
 	ui.chkPauseForce->setChecked(theConf->GetBool("Options/EnablePauseForceKey", false));
 	ui.keyPauseForce->setKeySequence(QKeySequence(theConf->GetString("Options/PauseForceKeySequence", "Ctrl+Alt+F")));
+
+	ui.chkSuspend->setChecked(theConf->GetBool("Options/EnableSuspendKey", false));
+	ui.keySuspend->setKeySequence(QKeySequence(theConf->GetString("Options/SuspendKeySequence", "Ctrl+Pause")));
 
 	ui.chkMonitorSize->setChecked(theConf->GetBool("Options/WatchBoxSize", false));
 
@@ -1549,7 +1554,10 @@ void CSettingsWindow::SaveSettings()
 
 	theConf->SetValue("Options/EnablePauseForceKey", ui.chkPauseForce->isChecked());
 	theConf->SetValue("Options/PauseForceKeySequence", ui.keyPauseForce->keySequence().toString());
-	
+
+	theConf->SetValue("Options/EnableSuspendKey", ui.chkSuspend->isChecked());
+	theConf->SetValue("Options/SuspendKeySequence", ui.keySuspend->keySequence().toString());
+
 	theConf->SetValue("Options/WatchBoxSize", ui.chkMonitorSize->isChecked());
 
 	theConf->SetValue("Options/WatchIni", ui.chkWatchConfig->isChecked());

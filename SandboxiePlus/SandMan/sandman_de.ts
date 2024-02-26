@@ -1381,7 +1381,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="874"/>
         <source>On Init</source>
-        <translation>Beim initialisieren</translation>
+        <translation>Beim Initialisieren</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="878"/>
@@ -1396,7 +1396,7 @@ Notiz: Die Updateprüfung ist oft zeitversetzt zu den letzten GitHub-Veröffentl
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="886"/>
         <source>On Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Beim Beenden</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAdvanced.cpp" line="896"/>
@@ -3185,7 +3185,7 @@ Anders als der Vorschaukanal, enthält es keine ungetesteten, möglicherweise fe
     <message>
         <location filename="SandMan.cpp" line="2265"/>
         <source>Executing OnBoxTerminate: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Führe &apos;Beim Box Beenden&apos; aus: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2336"/>
@@ -3522,7 +3522,7 @@ Möchten Sie die Bereinigung durchführen?</translation>
     <message>
         <location filename="SandMan.cpp" line="2045"/>
         <source>Executing OnBoxDelete: %1</source>
-        <translation>Führe Beim Box löschen aus: %1</translation>
+        <translation>Führe &apos;Beim Box Löschen&apos; aus: %1</translation>
     </message>
     <message>
         <location filename="SandMan.cpp" line="2070"/>
@@ -6860,12 +6860,12 @@ an Stelle von &quot;*&quot;.</translation>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3967"/>
         <source>This command runs after all processes in the sandbox have finished.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Befehl wird ausgeführt, nachdem alle Prozesse in der Sandbox beendet wurden.</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="3970"/>
         <source>On Box Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Beim Box Beenden</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="4296"/>
@@ -8618,7 +8618,7 @@ Bitte beachten Sie, dass diese Werte aktuell nutzerspezifisch sind und global f�
     <message>
         <location filename="Forms/SettingsWindow.ui" line="159"/>
         <source>Hotkey for suspending all process</source>
-        <translation type="unfinished"></translation>
+        <translation>Hotkey zum Unterbrechen aller Prozesse</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="618"/>

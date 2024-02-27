@@ -24,7 +24,7 @@ class CScriptManager;
 class CAddonManager;
 
 struct ToolBarAction {
-	// Identifier of action stored in ini. Empty for separator.	
+	// Identifier of action stored in ini. Empty for separator.
 	QString scriptName = "";
 
 	// Not owned. Null for special cases.
@@ -104,7 +104,7 @@ public:
 	QIcon				MakeIconBusy(const QIcon& Icon, int Index = 0);
 	QIcon				IconAddOverlay(const QIcon& Icon, const QString& Name, int Size = 24);
 	QString				GetBoxDescription(int boxType);
-	
+
 	bool				CheckCertificate(QWidget* pWidget, int iType = 0);
 
 	bool				IsAlwaysOnTop() const;
@@ -156,7 +156,7 @@ protected:
 
 	CScriptManager*		m_SbieScripts;
 	CAddonManager*		m_AddonManager;
-	
+
 	QMap<CSbieProgress*, QPair<CSbieProgressPtr, QPointer<QWidget>>> m_pAsyncProgress;
 
 	QMap<QString, QSet<QString>> m_MissingTemplates;
@@ -183,7 +183,7 @@ protected:
 	struct SSbieMsg {
 		QDateTime TimeStamp;
 		quint32 MsgCode;
-		QStringList MsgData; 
+		QStringList MsgData;
 		QString ProcessName;
 	};
 	QVector<SSbieMsg>	m_MessageLog;

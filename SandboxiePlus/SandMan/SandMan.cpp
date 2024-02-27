@@ -507,6 +507,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pNewBox = m_pMenuFile->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnSandBoxAction()));
 		m_pNewGroup = m_pMenuFile->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnSandBoxAction()));
 		m_pImportBox = m_pMenuFile->addAction(CSandMan::GetIcon("UnPackBox"), tr("Import Box"), this, SLOT(OnSandBoxAction()));
+		
 		m_pImportBox->setEnabled(CArchive::IsInit());
 		m_pMenuFile->addSeparator();
 		m_pRunBoxed = m_pMenuFile->addAction(CSandMan::GetIcon("Run"), tr("Run Sandboxed"), this, SLOT(OnSandBoxAction()));
@@ -514,7 +515,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pLockAll = m_pMenuFile->addAction(CSandMan::GetIcon("LockClosed"), tr("Lock All Encrypted Boxes"), this, SLOT(OnLockAll()));
 		m_pMenuFile->addSeparator();
 		m_pWndFinder = m_pMenuFile->addAction(CSandMan::GetIcon("finder"), tr("Is Window Sandboxed?"), this, SLOT(OnWndFinder()));
-
+		
 	if(bAdvanced || theGUI->IsFullyPortable())
 		CreateMaintenanceMenu();
 	else {
@@ -537,6 +538,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 	}
 				
 		m_pMenuFile->addSeparator();
+		m_pRestart = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Restart As Admin"), this, SLOT(OnRestartAsAdmin()));
 		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Exit"), this, SLOT(OnExit()));
 
 
@@ -862,6 +864,7 @@ QList<ToolBarAction> CSandMan::GetAvailableToolBarActions()
 			ToolBarAction{ "CheckForUpdates", m_pUpdate },
 			ToolBarAction{ "About", m_pAbout },
 			ToolBarAction{ "", nullptr },        // separator
+			ToolBarAction{ "RestartAsAdmin", m_pRestart },
 			ToolBarAction{ "Exit", m_pExit },
 			ToolBarAction{ "", nullptr },        // separator
 			ToolBarAction{ "Contribute", m_pContribution }
@@ -1296,7 +1299,20 @@ void CSandMan::CheckForUpdates(bool bManual)
 }
 
 #include "SandManTray.cpp"
-
+void CSandMan::OnRestartAsAdmin() {
+	theAPI->Disconnect();
+	WCHAR buf[255] = { 0 };
+	GetModuleFileNameW(NULL, buf, 255);
+	SHELLEXECUTEINFO se;
+	memset(&se, 0, sizeof(SHELLEXECUTEINFO));
+	se.cbSize = sizeof(SHELLEXECUTEINFO);
+	se.lpVerb = L"runas";
+	se.lpFile = buf;
+	se.nShow = SW_HIDE;
+	se.fMask = 0;
+	ShellExecuteEx(&se);
+	OnExit();
+}
 void CSandMan::OnExit()
 {
 	m_bExit = true;

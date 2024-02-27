@@ -231,7 +231,9 @@ void COptionsWindow::LoadAdvanced()
 		AddTriggerItem(Value, eAutoExec);
 	foreach(const QString & Value, m_pBox->GetTextList("OnFileRecovery", m_Template))
 		AddTriggerItem(Value, eRecoveryCheck);
-	foreach(const QString& Value, m_pBox->GetTextList("OnBoxTerminate", m_Template))
+	foreach(const QString & Value, m_pBox->GetTextList("OnBoxDelete", m_Template))
+		AddTriggerItem(Value, eDeleteCmd);
+	foreach(const QString & Value, m_pBox->GetTextList("OnBoxTerminate", m_Template))
 		AddTriggerItem(Value, eTerminateCmd);
 
 	ShowTriggersTmpl();

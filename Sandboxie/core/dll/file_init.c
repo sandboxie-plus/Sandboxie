@@ -144,7 +144,7 @@ _FX BOOLEAN File_Init(void)
 
     File_DriveAddSN = SbieApi_QueryConfBool(NULL, L"UseVolumeSerialNumbers", FALSE);
 
-    File_NoReparse = SbieApi_QueryConfBool(NULL, L"NoPathReparse", FALSE);
+    File_UseVolumeGuid = SbieApi_QueryConfBool(NULL, L"UseVolumeGuidWhenNoLetter", FALSE);
 
     if (! File_InitDrives(0xFFFFFFFF))
         return FALSE;
@@ -878,6 +878,25 @@ _FX void File_InitLinks(THREAD_DATA *TlsData)
                     DosPath += wcslen(DosPath) + 1;
                 }
 
+			} else if (File_UseVolumeGuid) {
+
+                // handle the case where the volume is not mounted as a
+                // drive letter:
+                //     add reparse points for all mounted directories
+
+                //
+                // This behavioure creates \[BoxRoot]\drive\{guid} fodlers
+                // instead of using the first mount point on a volume with a letter
+                //
+
+                WCHAR *FirstDosPath = DosPath;
+                File_AddLink(TRUE, FirstDosPath, DeviceName);
+                DosPath += DosPathLen + 1;
+                while (*DosPath) {
+                    File_AddLink(TRUE, DosPath, DeviceName);
+                    DosPath += wcslen(DosPath) + 1;
+                }
+				
             } else {
 
                 //
@@ -889,11 +908,17 @@ _FX void File_InitLinks(THREAD_DATA *TlsData)
                 //     also to the first mounted directory
                 //
 
+                //
+                // Note: this behavioure makes the first mounted directory
+                // the location in the box where all files for that volume will be located
+                // other mount points will be redirected to this folder
+                //
+
                 WCHAR *FirstDosPath = DosPath;
-                File_AddLink(TRUE, FirstDosPath, DeviceName);
+                File_AddLink(TRUE, DeviceName, FirstDosPath);
                 DosPath += DosPathLen + 1;
                 while (*DosPath) {
-                    File_AddLink(TRUE, DosPath, DeviceName);
+                    File_AddLink(TRUE, DosPath, FirstDosPath);
                     DosPath += wcslen(DosPath) + 1;
                 }
             }

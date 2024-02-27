@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.13.1 / 5.68.1] - 2024-02-??
 
+### Added
+- Sandman, suspend all processes [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582) (thx Yeyixiao)
+- Add "On Terminate" trigger [#3584](https://github.com/sandboxie-plus/Sandboxie/issues/3584) (thx Yeyixiao)
+
 ### Fixed
 - added missing checkbox for API tracing
 - fixed incompatibility with Windows ARM64 Insider build 26052 and later
@@ -14,9 +18,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - In Application Compartment Box,There is a bug in file redirection,CreateDirectory Fail [#3637](https://github.com/sandboxie-plus/Sandboxie/issues/3637)
 - fixed issues with appcompartment mode compatybility fallback
 - fixed missing max password length check [#3639]https://github.com/sandboxie-plus/Sandboxie/issues/3639
+- Can't launch executables from volumes without a drive letter in a sandbox (regression) on windows 1803 and earlier [#3627](https://github.com/sandboxie-plus/Sandboxie/issues/3627)
 
 ### Changed
 - changed DynData format to add flags
+- Revert or provide a way to opt out of the new sandbox directory structure for volumes without drive letters [#3632](https://github.com/sandboxie-plus/Sandboxie/issues/3632)
+  - guid usage can be re-enabled with "UseVolumeGuidWhenNoLetter=y"
+
+### Removed
+- removed UseNewSymlinkResolver setting new mechanism is always used
 
 
 

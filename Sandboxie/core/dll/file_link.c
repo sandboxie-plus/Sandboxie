@@ -1320,19 +1320,6 @@ _FX FILE_LINK *File_FindPermLinksForMatchPath(
     link = List_Head(File_PermLinks);
     while (link) {
 
-        /*const ULONG src_len = link->src_len;
-
-        if (
-#ifdef WOW64_FS_REDIR
-            link != File_Wow64FileLink &&
-#endif WOW64_FS_REDIR
-            name_len >= src_len &&
-                (name[src_len] == L'\\' || name[src_len] == L'\0') &&
-                _wcsnicmp(name, link->src, src_len) == 0) {
-
-            return link;
-        }*/
-
         const ULONG dst_len = link->dst_len;
 
         if (

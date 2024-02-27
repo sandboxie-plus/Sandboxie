@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.13.1 / 5.68.1] - 2024-02-??
+## [1.13.1 / 5.68.1] - 2024-02-27
 
 ### Added
 - Sandman, suspend all processes [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582) (thx Yeyixiao)

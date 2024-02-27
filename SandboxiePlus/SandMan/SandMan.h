@@ -279,6 +279,8 @@ private slots:
 
 	void				CheckForUpdates(bool bManual = true);
 
+	void				OnRestartAsAdmin();
+
 	void				OnExit();
 	void				OnHelp();
 	void				OnAbout();
@@ -366,6 +368,7 @@ private:
 	QHBoxLayout*		m_pMenuLayout;
 
 	QMenu*				m_pMenuFile;
+	QAction*			m_pRestart;
 	QAction*			m_pRunBoxed;
 	QAction*			m_pNewBox;
 	QAction*			m_pNewGroup;

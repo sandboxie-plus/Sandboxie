@@ -691,7 +691,7 @@ void CSandMan::CreateOldMenus()
 				m_pSetupWizard = NULL;
 				//m_pUpdateCore = NULL;
 		}
-			
+		m_pRestart = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Restart As Admin"), this, SLOT(OnRestartAsAdmin()));
 		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Exit"), this, SLOT(OnExit()));
 
 	m_pMenuView = m_pMenuBar->addMenu(tr("&View"));

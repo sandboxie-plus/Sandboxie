@@ -313,6 +313,7 @@ CSettingsWindow::CSettingsWindow(QWidget* parent)
 
 	connect(ui.chkNotifyRecovery, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkShowRecovery, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
+	connect(ui.chkCheckDelete, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	connect(ui.chkRecoveryTop, SIGNAL(stateChanged(int)), this, SLOT(OnOptChanged()));
 	//
 
@@ -1557,6 +1558,8 @@ void CSettingsWindow::SaveSettings()
 
 	theConf->SetValue("Options/EnableSuspendKey", ui.chkSuspend->isChecked());
 	theConf->SetValue("Options/SuspendKeySequence", ui.keySuspend->keySequence().toString());
+
+	theConf->SetValue("Options/CheckAutoDelete", ui.chkCheckDelete->isChecked());
 
 	theConf->SetValue("Options/WatchBoxSize", ui.chkMonitorSize->isChecked());
 

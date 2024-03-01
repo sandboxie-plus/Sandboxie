@@ -1275,7 +1275,7 @@ You can use %USER% to save each users sandbox to an own fodler.</oldsource>
         <location filename="Wizards/NewBoxWizard.cpp" line="75"/>
         <source>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently inaccessible. Corruption can occur as a result of a BSOD, a storage hardware failure, or a malicious application overwriting random files. This feature is provided under a strict &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</source>
         <oldsource>This sandbox content will be placed in an encrypted container file, please note that any corruption of the container&apos;s header will render all its content permanently innaccessible. Corruption can occur as a result of a BSOD, a storage hadrware failure, or a maliciouse application overwriting random files. This feature is provided under a strickt &lt;b&gt;No Backup No Mercy&lt;/b&gt; policy, YOU the user are responsible for the data you put into an encrypted box. &lt;br /&gt;&lt;br /&gt;IF YOU AGREE TO TAKE FULL RESPONSIBILITY FOR YOUR DATA PRESS [YES], OTHERWISE PRESS [NO].</oldsource>
-        <translation>该沙盒的文件将会存储在加密的容器文件中，注意：容器头文件的任何损毁都可能导致容器内文件不可读取。同时，可能导致不限于蓝屏、死机、存储设备故障、或沙盒中恶意程序随机覆写文件。该功能以严格遵守 &lt;br /&gt;无备份、不宽容&lt;br /&gt;的形式提供，您需要自行为该加密沙盒中的文件承担风险。 &lt;br /&gt;&lt;br /&gt;如果您同意为您的数据自行承担风险则选择 [确认], 否则 [取消].</translation>
+        <translation>该沙盒的文件将会存储在加密的容器文件中，注意：容器头文件的任何损坏都可能导致容器内文件不可读取。同时，可能导致不限于蓝屏、死机、存储设备故障、或沙盒中恶意程序随机覆写文件。该功能以严格遵守 &lt;br /&gt;无备份、不宽容&lt;br /&gt;的形式提供，您需要自行为该加密沙盒中的文件承担风险。 &lt;br /&gt;&lt;br /&gt;如果您同意为您的数据自行承担风险则选择 [确认], 否则 [取消].</translation>
     </message>
     <message>
         <location filename="Wizards/NewBoxWizard.cpp" line="186"/>
@@ -1966,7 +1966,7 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <location filename="Windows/OptionsForce.cpp" line="305"/>
         <source>Forcing the specified entry will most likely break Windows, are you sure you want to proceed?</source>
         <oldsource>Forcing the specified folder will most likely break Windows, are you sure you want to proceed?</oldsource>
-        <translation>强制指定文件夹很可能会破坏 Windows，你确定要继续吗？</translation>
+        <translation>强制指定文件夹很可能会损坏 Windows，你确定要继续吗？</translation>
     </message>
     <message>
         <location filename="Windows/OptionsAccess.cpp" line="365"/>

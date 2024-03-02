@@ -363,9 +363,9 @@ static WCHAR *File_PublicUser = NULL;
 static ULONG File_PublicUserLen = 0;
 
 static BOOLEAN File_DriveAddSN = FALSE;
+static BOOLEAN File_UseVolumeGuid = FALSE;
 
 BOOLEAN File_Delete_v2 = FALSE;
-static BOOLEAN File_NoReparse = FALSE;
 
 static WCHAR *File_AltBoxPath = NULL;
 static ULONG File_AltBoxPathLen = 0;
@@ -572,13 +572,13 @@ _FX NTSTATUS File_GetCopyPathImpl(WCHAR* TruePath, WCHAR **OutCopyPath, ULONG *O
 
         ULONG drive_len;
 
+        guid = NULL;
         drive = File_GetDriveForPath(TruePath, length);
         if (drive)
             drive_len = drive->len;
         else
             drive = File_GetDriveForUncPath(TruePath, length, &drive_len);
-
-        if (!drive)
+        if (!drive && File_UseVolumeGuid)
             guid = File_GetGuidForPath(TruePath, length);
 
         if (drive || guid) {
@@ -763,9 +763,8 @@ check_sandbox_prefix:
 
         drive = NULL;
         guid = NULL;
-
         if (name[_DriveLen - 1] == L'\\') {
-            if (name[_DriveLen] == L'{')
+            if (name[_DriveLen] == L'{' && File_UseVolumeGuid)
                 guid = File_GetLinkForGuid(&name[_DriveLen]);
             else
                 drive = File_GetDriveForLetter(name[_DriveLen]);
@@ -1131,8 +1130,10 @@ _FX NTSTATUS File_GetName(
             // the next section of code from trying to translate symlinks
             //
 
-            drive = File_GetDriveForPath(objname_buf, objname_len / sizeof(WCHAR));
-            if(!drive)
+            guid = NULL;
+            drive = File_GetDriveForPath(
+                                objname_buf, objname_len / sizeof(WCHAR));
+            if(!drive && File_UseVolumeGuid)
                 guid = File_GetGuidForPath(objname_buf, objname_len / sizeof(WCHAR));
 
             if (drive || guid) {

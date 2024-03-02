@@ -1620,7 +1620,7 @@ _FX VOID ProtectScreen(HWND hWnd) {
 				HMODULE hDll = GetModuleHandleW(L"user32.dll");
 				if (hDll != NULL && hDll != INVALID_HANDLE_VALUE) {
 					typedef BOOL(*LPSETWINDOWDISPLAYAFFINITY)(HWND, DWORD);
-					LPSETWINDOWDISPLAYAFFINITY swda = GetProcAddress(hDll, "SetWindowDisplayAffinity");
+					LPSETWINDOWDISPLAYAFFINITY swda =(LPSETWINDOWDISPLAYAFFINITY) GetProcAddress(hDll, "SetWindowDisplayAffinity");
 					if (swda) {
 						swda(hWnd, 0x00000001);
 					}

@@ -909,7 +909,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkSandboxUrls->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/OpenUrlsSandboxed", 2)));
 
 	ui.chkShowRecovery->setChecked(theConf->GetBool("Options/ShowRecovery", false));
-	ui.chkCheckDelete->setChecked(!theConf->GetBool("Options/CleanUpOnStart", false));
+	ui.chkCheckDelete->setChecked(theConf->GetBool("Options/CleanUpOnStart", false));
 	ui.chkNotifyRecovery->setChecked(!theConf->GetBool("Options/InstantRecovery", true));
 	ui.chkRecoveryTop->setChecked(theConf->GetBool("Options/RecoveryOnTop", true));
 	ui.chkAsyncBoxOps->setChecked(theConf->GetBool("Options/UseAsyncBoxOps", false));
@@ -1560,7 +1560,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/EnableSuspendKey", ui.chkSuspend->isChecked());
 	theConf->SetValue("Options/SuspendKeySequence", ui.keySuspend->keySequence().toString());
 
-	theConf->SetValue("Options/CleanUpOnStart", !ui.chkCheckDelete->isChecked());
+	theConf->SetValue("Options/CleanUpOnStart", ui.chkCheckDelete->isChecked());
 
 	theConf->SetValue("Options/WatchBoxSize", ui.chkMonitorSize->isChecked());
 

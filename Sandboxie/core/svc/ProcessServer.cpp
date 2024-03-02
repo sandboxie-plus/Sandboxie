@@ -2106,8 +2106,6 @@ MSG_HEADER *ProcessServer::SuspendOneHandler(MSG_HEADER *msg)
 
 MSG_HEADER *ProcessServer::SuspendAllHandler(MSG_HEADER *msg)
 {
-    return SHORT_REPLY(STATUS_NOT_IMPLEMENTED);
-
     HANDLE CallerProcessId;
     ULONG TargetSessionId;
     WCHAR TargetBoxName[BOXNAME_COUNT];
@@ -2158,24 +2156,26 @@ MSG_HEADER *ProcessServer::SuspendAllHandler(MSG_HEADER *msg)
     //
 
     ULONG pid_count = 0;
-    SbieApi_EnumProcessEx(NULL, FALSE, -1, NULL, &pid_count); // query count
+    SbieApi_EnumProcessEx(TargetBoxName, FALSE, TargetSessionId, NULL, &pid_count); // query count
     pid_count += 128;
 
     ULONG* pids = (ULONG*)HeapAlloc(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, sizeof(ULONG) * pid_count);
-    SbieApi_EnumProcessEx(NULL, FALSE, -1, pids, &pid_count); // query pids
+    SbieApi_EnumProcessEx(TargetBoxName, FALSE, TargetSessionId, pids, &pid_count); // query pids
 
     for (ULONG i = 0; i < pid_count; ++i) {
 
         DWORD pids_i = pids[i];
 
         HANDLE hProcess = OpenProcess(PROCESS_SUSPEND_RESUME, FALSE, pids_i);
+        if (hProcess) {
 
-        if (req->suspend)
-            NtSuspendProcess(hProcess);
-        else 
-            NtResumeProcess(hProcess);
+            if (req->suspend)
+                NtSuspendProcess(hProcess);
+            else
+                NtResumeProcess(hProcess);
 
-        CloseHandle(hProcess);
+            CloseHandle(hProcess);
+        }
     }
     
     HeapFree(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, pids);

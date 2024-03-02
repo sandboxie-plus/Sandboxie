@@ -2677,8 +2677,11 @@ void CSandMan::OnHotKey(size_t id)
 
 	case HK_SUSPEND:
 	{
-		for (auto each : theAPI->GetAllBoxes())
-			each->SetSuspendedAll(TRUE);
+
+		for (auto each : theAPI->GetAllBoxes().toStdMap()) {
+			each.second->SetSuspendedAll(TRUE);
+		};
+
 		break;
 	}
 

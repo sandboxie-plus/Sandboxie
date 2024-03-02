@@ -1347,44 +1347,6 @@
              <string>Box Protection</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_15">
-             <item row="0" column="0" colspan="4">
-              <widget class="QLabel" name="label_52">
-               <property name="text">
-                <string>Sandboxie-Plus is able to create confidential sandboxes that provide robust protection against unauthorized surveillance or tampering by host processes. By utilizing an encrypted sandbox image, this feature delivers the highest level of operational confidentiality, ensuring the safety and integrity of sandboxed processes.</string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkConfidential">
-               <property name="text">
-                <string>Protect processes within this box from host processes</string>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="3">
-              <widget class="QPushButton" name="btnHostProcessDeny">
-               <property name="text">
-                <string>Deny Process</string>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="0" colspan="3">
-              <widget class="QCheckBox" name="chkNotifyProtect">
-               <property name="text">
-                <string>Issue message 1318/1317 when a host process tries to access a sandboxed process/the box root</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="2">
-              <widget class="QCheckBox" name="chkLessConfidential">
-               <property name="text">
-                <string>Allow useful Windows processes access to protected processes</string>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="2">
               <spacer name="horizontalSpacer_19">
                <property name="orientation">
@@ -1398,53 +1360,55 @@
                </property>
               </spacer>
              </item>
-             <item row="4" column="3">
-              <spacer name="verticalSpacer_40">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="8" column="3">
-              <spacer name="verticalSpacer_31">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>76</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="10" column="3">
-              <widget class="QPushButton" name="btnDelHostProcess">
+             <item row="12" column="0" colspan="3">
+              <widget class="QCheckBox" name="chkNotifyProtect">
                <property name="text">
-                <string>Remove</string>
+                <string>Issue message 1318/1317 when a host process tries to access a sandboxed process/the box root</string>
                </property>
               </widget>
              </item>
-             <item row="6" column="3">
-              <widget class="QPushButton" name="btnHostProcessAllow">
-               <property name="text">
-                <string>Allow Process</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0" colspan="3">
+             <item row="6" column="0" colspan="3">
               <widget class="QLabel" name="label_5">
                <property name="text">
                 <string>Protect processes in this box from being accessed by specified unsandboxed host processes.</string>
                </property>
                <property name="wordWrap">
                 <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkProtectWindow">
+               <property name="text">
+                <string>Prevents getting an image of the window in the sandbox.</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="3">
+              <widget class="QPushButton" name="btnDelHostProcess">
+               <property name="text">
+                <string>Remove</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="3">
+              <widget class="QPushButton" name="btnHostProcessDeny">
+               <property name="text">
+                <string>Deny Process</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1" colspan="2">
+              <widget class="QCheckBox" name="chkConfidential">
+               <property name="text">
+                <string>Protect processes within this box from host processes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QCheckBox" name="chkLessConfidential">
+               <property name="text">
+                <string>Allow useful Windows processes access to protected processes</string>
                </property>
               </widget>
              </item>
@@ -1467,14 +1431,30 @@
                </property>
               </widget>
              </item>
-             <item row="9" column="3">
+             <item row="10" column="3">
               <widget class="QCheckBox" name="chkShowHostProcTmpl">
                <property name="text">
                 <string>Show Templates</string>
                </property>
               </widget>
              </item>
-             <item row="6" column="0" rowspan="5" colspan="3">
+             <item row="1" column="0">
+              <widget class="QLabel" name="lblBoxProtection">
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                 <kerning>true</kerning>
+                </font>
+               </property>
+               <property name="toolTip">
+                <string>Protect the sandbox integrity itself</string>
+               </property>
+               <property name="text">
+                <string>Box Protection</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0" rowspan="5" colspan="3">
               <widget class="QTreeWidget" name="treeHostProc">
                <property name="sortingEnabled">
                 <bool>true</bool>
@@ -1496,29 +1476,48 @@
                </column>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="lblBoxProtection">
-               <property name="font">
-                <font>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                 <kerning>true</kerning>
-                </font>
-               </property>
-               <property name="toolTip">
-                <string>Protect the sandbox integrity itself</string>
-               </property>
+             <item row="7" column="3">
+              <widget class="QPushButton" name="btnHostProcessAllow">
                <property name="text">
-                <string>Box Protection</string>
+                <string>Allow Process</string>
                </property>
               </widget>
              </item>
-             <item row="4" column="1" colspan="2">
-              <widget class="QCheckBox" name="chkProtectWindow">
+             <item row="9" column="3">
+              <spacer name="verticalSpacer_31">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>76</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="0" column="0" colspan="4">
+              <widget class="QLabel" name="label_52">
                <property name="text">
-                <string>Prevents getting an image of the window in the sandbox.</string>
+                <string>Sandboxie-Plus is able to create confidential sandboxes that provide robust protection against unauthorized surveillance or tampering by host processes. By utilizing an encrypted sandbox image, this feature delivers the highest level of operational confidentiality, ensuring the safety and integrity of sandboxed processes.</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
                </property>
               </widget>
+             </item>
+             <item row="5" column="1">
+              <spacer name="verticalSpacer_41">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>

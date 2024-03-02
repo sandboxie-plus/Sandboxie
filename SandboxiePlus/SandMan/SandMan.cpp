@@ -507,7 +507,6 @@ void CSandMan::CreateMenus(bool bAdvanced)
 		m_pNewBox = m_pMenuFile->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnSandBoxAction()));
 		m_pNewGroup = m_pMenuFile->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnSandBoxAction()));
 		m_pImportBox = m_pMenuFile->addAction(CSandMan::GetIcon("UnPackBox"), tr("Import Box"), this, SLOT(OnSandBoxAction()));
-
 		m_pImportBox->setEnabled(CArchive::IsInit());
 		m_pMenuFile->addSeparator();
 		m_pRunBoxed = m_pMenuFile->addAction(CSandMan::GetIcon("Run"), tr("Run Sandboxed"), this, SLOT(OnSandBoxAction()));
@@ -538,7 +537,7 @@ void CSandMan::CreateMenus(bool bAdvanced)
 	}
 
 		m_pMenuFile->addSeparator();
-		m_pRestart = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Restart As Admin"), this, SLOT(OnRestartAsAdmin()));
+		m_pRestart = m_pMenuFile->addAction(CSandMan::GetIcon("Shield9"), tr("Restart As Admin"), this, SLOT(OnRestartAsAdmin()));
 		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Exit"), this, SLOT(OnExit()));
 
 
@@ -693,7 +692,7 @@ void CSandMan::CreateOldMenus()
 				m_pSetupWizard = NULL;
 				//m_pUpdateCore = NULL;
 		}
-		m_pRestart = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Restart As Admin"), this, SLOT(OnRestartAsAdmin()));
+		m_pRestart = m_pMenuFile->addAction(CSandMan::GetIcon("Shield9"), tr("Restart As Admin"), this, SLOT(OnRestartAsAdmin()));
 		m_pExit = m_pMenuFile->addAction(CSandMan::GetIcon("Exit"), tr("Exit"), this, SLOT(OnExit()));
 
 	m_pMenuView = m_pMenuBar->addMenu(tr("&View"));
@@ -1299,7 +1298,9 @@ void CSandMan::CheckForUpdates(bool bManual)
 }
 
 #include "SandManTray.cpp"
-void CSandMan::OnRestartAsAdmin() {
+
+void CSandMan::OnRestartAsAdmin() 
+{
 	theAPI->Disconnect();
 	WCHAR buf[255] = { 0 };
 	GetModuleFileNameW(NULL, buf, 255);
@@ -1313,6 +1314,7 @@ void CSandMan::OnRestartAsAdmin() {
 	ShellExecuteEx(&se);
 	OnExit();
 }
+
 void CSandMan::OnExit()
 {
 	m_bExit = true;
@@ -2677,11 +2679,8 @@ void CSandMan::OnHotKey(size_t id)
 
 	case HK_SUSPEND:
 	{
-
-		for (auto each : theAPI->GetAllBoxes().toStdMap()) {
-			each.second->SetSuspendedAll(TRUE);
-		}
-
+		for (auto each : theAPI->GetAllBoxes())
+			each->SetSuspendedAll(TRUE);
 		break;
 	}
 
@@ -2772,7 +2771,6 @@ void CSandMan::AddLogMessage(const QDateTime& TimeStamp, const QString& Message,
 	else
 		pItem->setText(1, Message);
 #endif
-
 
 	m_pMessageLog->GetView()->verticalScrollBar()->setValue(m_pMessageLog->GetView()->verticalScrollBar()->maximum());
 }

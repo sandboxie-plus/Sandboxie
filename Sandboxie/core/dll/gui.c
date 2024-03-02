@@ -1552,6 +1552,24 @@ _FX BOOLEAN Gui_CanForwardMsg(
 
 
 //---------------------------------------------------------------------------
+// Gui_ProtectScreen
+//---------------------------------------------------------------------------
+
+
+_FX VOID Gui_ProtectScreen(HWND hWnd)
+{
+    if (SbieApi_QueryConfBool(NULL, L"IsProtectScreen", FALSE))
+    {
+        typedef BOOL(*LPSETWINDOWDISPLAYAFFINITY)(HWND, DWORD);
+        LPSETWINDOWDISPLAYAFFINITY pSetWindowDisplayAffinity = (LPSETWINDOWDISPLAYAFFINITY)
+            Ldr_GetProcAddrNew(DllName_user32, L"SetWindowDisplayAffinity","SetWindowDisplayAffinity");
+        if (pSetWindowDisplayAffinity)
+            pSetWindowDisplayAffinity(hWnd, 0x00000001);
+    }
+}
+
+
+//---------------------------------------------------------------------------
 // Gui_WindowProcW
 //---------------------------------------------------------------------------
 
@@ -1575,6 +1593,9 @@ _FX LRESULT Gui_WindowProcW(
         new_lParam = (LPARAM)Gui_CreateTitleW((WCHAR *)lParam);
     else
         new_lParam = lParam;
+
+    if (uMsg == WM_CREATE)
+		Gui_ProtectScreen(hWnd);
 
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldW_Atom);
     if (DLL_IMAGE_OFFICE_EXCEL == Dll_ImageType) {
@@ -1608,29 +1629,6 @@ _FX LRESULT Gui_WindowProcW(
     return lResult;
 }
 
-_FX VOID ProtectScreen(HWND hWnd) {
-	WCHAR buffer[BOXNAME_COUNT] = { L"\0" };
-	SbieApi_QueryProcess(GetCurrentProcess(), buffer, 0, 0, 0);
-	if (SbieApi_QueryConfBool(buffer, L"IsProtectScreen", FALSE)) {
-		OSVERSIONINFOEX os;
-		os.dwOSVersionInfoSize = sizeof(os);
-		if (GetVersionEx(&os))
-		{
-			if (os.dwMajorVersion == 6) {
-				HMODULE hDll = GetModuleHandleW(L"user32.dll");
-				if (hDll != NULL && hDll != INVALID_HANDLE_VALUE) {
-					typedef BOOL(*LPSETWINDOWDISPLAYAFFINITY)(HWND, DWORD);
-					LPSETWINDOWDISPLAYAFFINITY swda =(LPSETWINDOWDISPLAYAFFINITY) GetProcAddress(hDll, "SetWindowDisplayAffinity");
-					if (swda) {
-						swda(hWnd, 0x00000001);
-					}
-
-				}
-			}
-		}
-	}
-}
-
 //---------------------------------------------------------------------------
 // Gui_WindowProcA
 //---------------------------------------------------------------------------
@@ -1651,11 +1649,12 @@ _FX LRESULT Gui_WindowProcA(
 
     if (uMsg == WM_SETTEXT && Gui_ShouldCreateTitle(hWnd))
         new_lParam = (LPARAM)Gui_CreateTitleA((UCHAR *)lParam);
-	if (uMsg == WM_CREATE)
-		ProtectScreen(hWnd);
     else
         new_lParam = lParam;
-
+		
+	if (uMsg == WM_CREATE)
+		Gui_ProtectScreen(hWnd);
+		
     wndproc = __sys_GetPropW(hWnd, (LPCWSTR)Gui_WindowProcOldA_Atom);
     lResult = __sys_CallWindowProcA(wndproc, hWnd, uMsg, wParam, new_lParam);
 
@@ -1679,8 +1678,10 @@ _FX LRESULT Gui_DefWindowProcW(
     if (uMsg == WM_SETTEXT && Gui_ShouldCreateTitle(hWnd))
         new_lParam = (LPARAM)Gui_CreateTitleW((WCHAR *)lParam);
 
-    else if (uMsg == WM_CREATE || uMsg == WM_NCCREATE)
+    else if (uMsg == WM_CREATE || uMsg == WM_NCCREATE) {
+        Gui_ProtectScreen(hWnd);
         Gui_CREATESTRUCT_Restore(lParam);
+    }
 
     lResult = __sys_DefWindowProcW(hWnd, uMsg, wParam, new_lParam);
 
@@ -1705,8 +1706,10 @@ _FX LRESULT Gui_DefWindowProcA(
     if (uMsg == WM_SETTEXT && Gui_ShouldCreateTitle(hWnd))
         new_lParam = (LPARAM)Gui_CreateTitleA((UCHAR *)lParam);
 
-    else if (uMsg == WM_CREATE || uMsg == WM_NCCREATE)
+    else if (uMsg == WM_CREATE || uMsg == WM_NCCREATE) {
+        Gui_ProtectScreen(hWnd);
         Gui_CREATESTRUCT_Restore(lParam);
+    }
 
     lResult = __sys_DefWindowProcA(hWnd, uMsg, wParam, new_lParam);
 

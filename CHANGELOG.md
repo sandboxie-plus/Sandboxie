@@ -7,34 +7,36 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.13.2 / 5.68.2] - 2024-02-??
 
 ### Added
-- Sandman, Menu entry to restart Sandman as admin [#3581](https://github.com/sandboxie-plus/Sandboxie/issues/3581) (thx Yeyixiao)
-- Added option to Block taking screencapture/screenshot of sandboxed processes (thx Yeyixiao)
-- Sandman, suspend all processes [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582)
+- added menu entry to restart Sandman as admin [#3581](https://github.com/sandboxie-plus/Sandboxie/issues/3581) (thx Yeyixiao)
+- added option to block taking screen capture/screenshot of sandboxed processes [#624](https://github.com/sandboxie-plus/Sandboxie/issues/624) (thx Yeyixiao)
+
+### Fixed
+- fixed shortcut issue with suspending all processes [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582#issuecomment-1969628215)
 
 
 
 ## [1.13.1 / 5.68.1] - 2024-02-27
 
 ### Added
-- Sandman, suspend all processes [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582) (thx Yeyixiao)
-- Add "On Terminate" trigger [#3584](https://github.com/sandboxie-plus/Sandboxie/issues/3584) (thx Yeyixiao)
+- added shortcut for suspending all processes in SandMan [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582) (thx Yeyixiao)
+- added "On Terminate" trigger [#3584](https://github.com/sandboxie-plus/Sandboxie/issues/3584) (thx Yeyixiao)
 
 ### Fixed
 - added missing checkbox for API tracing
 - fixed incompatibility with Windows ARM64 Insider build 26052 and later
-- fixed [1.12.6] Symlink and open path issue [#3537](https://github.com/sandboxie-plus/Sandboxie/issues/3537)
-- In Application Compartment Box,There is a bug in file redirection,CreateDirectory Fail [#3637](https://github.com/sandboxie-plus/Sandboxie/issues/3637)
-- fixed issues with appcompartment mode compatybility fallback
-- fixed missing max password length check [#3639]https://github.com/sandboxie-plus/Sandboxie/issues/3639
-- Can't launch executables from volumes without a drive letter in a sandbox (regression) on windows 1803 and earlier [#3627](https://github.com/sandboxie-plus/Sandboxie/issues/3627)
+- fixed symlink issue [#3537](https://github.com/sandboxie-plus/Sandboxie/issues/3537#issuecomment-1954496527)
+- fixed bug with file redirection in Application Compartment sandbox [#3637](https://github.com/sandboxie-plus/Sandboxie/issues/3637)
+- fixed issues with compartment mode compatibility fallback
+- fixed missing maximum password length check [#3639](https://github.com/sandboxie-plus/Sandboxie/issues/3639)
+- fixed issue with launching executables from volumes without a drive letter in a sandbox on Windows 1803 and earlier [#3627](https://github.com/sandboxie-plus/Sandboxie/issues/3627)
 
 ### Changed
 - changed DynData format to add flags
-- Revert or provide a way to opt out of the new sandbox directory structure for volumes without drive letters [#3632](https://github.com/sandboxie-plus/Sandboxie/issues/3632)
-  - guid usage can be re-enabled with "UseVolumeGuidWhenNoLetter=y"
+- reverted the new sandbox directory structure for volumes without drive letters [#3632](https://github.com/sandboxie-plus/Sandboxie/issues/3632)
+  - GUID usage can be re-enabled with "UseVolumeGuidWhenNoLetter=y"
 
 ### Removed
-- removed UseNewSymlinkResolver setting new mechanism is always used
+- removed UseNewSymlinkResolver setting, new mechanism is always used
 
 
 

@@ -909,6 +909,7 @@ void CSettingsWindow::LoadSettings()
 	ui.chkSandboxUrls->setCheckState(CSettingsWindow__Int2Chk(theConf->GetInt("Options/OpenUrlsSandboxed", 2)));
 
 	ui.chkShowRecovery->setChecked(theConf->GetBool("Options/ShowRecovery", false));
+	ui.chkCheckDelete->setChecked(!theConf->GetBool("Options/CleanUpOnStart", false));
 	ui.chkNotifyRecovery->setChecked(!theConf->GetBool("Options/InstantRecovery", true));
 	ui.chkRecoveryTop->setChecked(theConf->GetBool("Options/RecoveryOnTop", true));
 	ui.chkAsyncBoxOps->setChecked(theConf->GetBool("Options/UseAsyncBoxOps", false));
@@ -924,8 +925,6 @@ void CSettingsWindow::LoadSettings()
 
 	ui.chkSuspend->setChecked(theConf->GetBool("Options/EnableSuspendKey", false));
 	ui.keySuspend->setKeySequence(QKeySequence(theConf->GetString("Options/SuspendKeySequence", "Ctrl+Pause")));
-
-	ui.chkCheckDelete->setChecked(!theConf->GetBool("Options/CleanUpOnStart", false));
 
 	ui.chkMonitorSize->setChecked(theConf->GetBool("Options/WatchBoxSize", false));
 
@@ -1561,11 +1560,7 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/EnableSuspendKey", ui.chkSuspend->isChecked());
 	theConf->SetValue("Options/SuspendKeySequence", ui.keySuspend->keySequence().toString());
 
-<<<<<<< HEAD
 	theConf->SetValue("Options/CleanUpOnStart", !ui.chkCheckDelete->isChecked());
-=======
-	theConf->SetValue("Options/CheckAutoDelete", ui.chkCheckDelete->isChecked());
->>>>>>> cbb2b8660f0ba5f1e56841d78292bf64f7931de4
 
 	theConf->SetValue("Options/WatchBoxSize", ui.chkMonitorSize->isChecked());
 

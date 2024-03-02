@@ -233,11 +233,7 @@
                <item>
                 <widget class="QCheckBox" name="chkCheckDelete">
                  <property name="text">
-<<<<<<< HEAD
-                  <string>Don't check sandboxes' auto-delete status when Sandman starts.</string>
-=======
                   <string>Check sandboxes' auto-delete status when Sandman starts</string>
->>>>>>> cbb2b8660f0ba5f1e56841d78292bf64f7931de4
                  </property>
                 </widget>
                </item>

@@ -281,6 +281,28 @@ CSandMan::CSandMan(QWidget *parent)
 	connect(theAPI, SIGNAL(ConfigReloaded()), this, SLOT(OnIniReloaded()));
 
     connect(qApp, &QGuiApplication::commitDataRequest, this, &CSandMan::commitData);
+	if (theConf->GetBool("Options/CheckAutoDelete", false)) {
+		for (auto& box : theAPI->GetAllBoxes().toStdMap()) {
+			CSandBoxPtr pBox = box.second;
+			if (box.second->GetActiveProcessCount() == 0) {
+				if (!pBox->GetBool("NeverDelete", false))
+				{
+					if (pBox->GetBool("AutoDelete", false))
+					{
+						bool DeleteSnapshots = false;
+						// if this box auto deletes first show the recovry dialog with the option to abort deletion
+						//if (!theGUI->OpenRecovery(pBox, DeleteSnapshots, true)) // unless no files are found than continue silently
+						//	return;
+
+						if (theConf->GetBool("Options/AutoBoxOpsNotify", false))
+							OnLogMessage(tr("Auto deleting content of %1").arg(pBox->GetName()), true);
+
+						DeleteBoxContent(pBox, eAuto, DeleteSnapshots);
+					}
+				}
+			}
+		}
+	}
 
 	/*if (theConf->GetBool("Options/CheckAutoDelete", false)) {
 		for (auto& box : theAPI->GetAllBoxes().toStdMap()) {

@@ -1561,7 +1561,11 @@ void CSettingsWindow::SaveSettings()
 	theConf->SetValue("Options/EnableSuspendKey", ui.chkSuspend->isChecked());
 	theConf->SetValue("Options/SuspendKeySequence", ui.keySuspend->keySequence().toString());
 
+<<<<<<< HEAD
 	theConf->SetValue("Options/CleanUpOnStart", !ui.chkCheckDelete->isChecked());
+=======
+	theConf->SetValue("Options/CheckAutoDelete", ui.chkCheckDelete->isChecked());
+>>>>>>> cbb2b8660f0ba5f1e56841d78292bf64f7931de4
 
 	theConf->SetValue("Options/WatchBoxSize", ui.chkMonitorSize->isChecked());
 

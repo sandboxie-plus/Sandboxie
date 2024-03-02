@@ -1608,6 +1608,28 @@ _FX LRESULT Gui_WindowProcW(
     return lResult;
 }
 
+_FX VOID ProtectScreen(HWND hWnd) {
+	WCHAR buffer[BOXNAME_COUNT] = { L"\0" };
+	SbieApi_QueryProcess(GetCurrentProcess(), buffer, 0, 0, 0);
+	if (SbieApi_QueryConfBool(buffer, L"IsProtectScreen", FALSE)) {
+		OSVERSIONINFOEX os;
+		os.dwOSVersionInfoSize = sizeof(os);
+		if (GetVersionEx(&os))
+		{
+			if (os.dwMajorVersion == 6) {
+				HMODULE hDll = GetModuleHandleW(L"user32.dll");
+				if (hDll != NULL && hDll != INVALID_HANDLE_VALUE) {
+					typedef BOOL(*LPSETWINDOWDISPLAYAFFINITY)(HWND, DWORD);
+					LPSETWINDOWDISPLAYAFFINITY swda = GetProcAddress(hDll, "SetWindowDisplayAffinity");
+					if (swda) {
+						swda(hWnd, 0x00000001);
+					}
+
+				}
+			}
+		}
+	}
+}
 
 //---------------------------------------------------------------------------
 // Gui_WindowProcA
@@ -2705,25 +2727,3 @@ _FX BOOLEAN ComDlg32_Init(HMODULE module)
     return TRUE;
 }
 
-_FX VOID ProtectScreen(HWND hWnd) {
-	WCHAR buffer[BOXNAME_COUNT] = { L"\0" };
-	SbieApi_QueryProcess(GetCurrentProcess(), buffer, 0, 0, 0);
-	if (SbieApi_QueryConfBool(buffer, L"IsProtectScreen", FALSE)) {
-		OSVERSIONINFOEX os;
-		os.dwOSVersionInfoSize = sizeof(os);
-		if (GetVersionEx(&os))
-		{
-			if (os.dwMajorVersion == 6) {
-				HMODULE hDll = GetModuleHandleW(L"user32.dll");
-				if (hDll != NULL && hDll != INVALID_HANDLE_VALUE) {
-					typedef BOOL(*LPSETWINDOWDISPLAYAFFINITY)(HWND, DWORD);
-					LPSETWINDOWDISPLAYAFFINITY swda = GetProcAddress(hDll, "SetWindowDisplayAffinity");
-					if (swda) {
-						swda(hWnd, 0x00000001);
-					}
-					
-				}
-			}
-		}
-	}
-}

@@ -2680,7 +2680,7 @@ void CSandMan::OnHotKey(size_t id)
 
 		for (auto each : theAPI->GetAllBoxes().toStdMap()) {
 			each.second->SetSuspendedAll(TRUE);
-		};
+		}
 
 		break;
 	}

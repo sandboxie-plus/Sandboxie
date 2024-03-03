@@ -1171,8 +1171,14 @@ _FX FILE_LINK *File_AddTempLink(WCHAR *path)
             }
         }
 
-    } else
+    } else {
+
         newpath = path;
+
+        BOOLEAN use_rule_specificity = (Dll_ProcessFlags & SBIE_FLAG_RULE_SPECIFICITY) != 0;
+        if(use_rule_specificity)
+            stop = FALSE;
+    }
 
     //
     // add the new link and return

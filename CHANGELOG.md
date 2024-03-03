@@ -7,32 +7,32 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.13.2 / 5.68.2] - 2024-02-??
 
 ### Added
-- added menu entry to restart SandMan as admin [#3581](https://github.com/sandboxie-plus/Sandboxie/issues/3581) (thx Yeyixiao)
-- added option to prevent sandboxed programs from accessing the images of the window outside the sandbox [#1985](https://github.com/sandboxie-plus/Sandboxie/issues/1985) (thx Yeyixiao)
+- added menu entry to restart SandMan as admin [#3581](https://github.com/sandboxie-plus/Sandboxie/issues/3581) (thanks Yeyixiao)
+- added option to prevent sandboxed programs from accessing the images of the window outside the sandbox [#1985](https://github.com/sandboxie-plus/Sandboxie/issues/1985) (thanks Yeyixiao)
   - it can be enabled with "IsBlockCapture=y"
   - see the sandbox option "Block process from taking screenshots of windows not belonging to the containing sandbox" in SandMan UI
-- added option to block taking screen capture/screenshot of sandboxed processes [#624](https://github.com/sandboxie-plus/Sandboxie/issues/624) (thx Yeyixiao)
+- added option to block taking screen capture/screenshot of sandboxed processes [#624](https://github.com/sandboxie-plus/Sandboxie/issues/624) (thanks Yeyixiao)
   - it can be enabled with "IsProtectScreen=y"
   - see the sandbox option "Prevents getting an image of the window in the sandbox" in SandMan UI
-- added option to prevent sandboxed processes from interfering with power operations [#3640](https://github.com/sandboxie-plus/Sandboxie/issues/3640) (thx Yeyixiao)
+- added option to prevent sandboxed processes from interfering with power operations [#3640](https://github.com/sandboxie-plus/Sandboxie/issues/3640) (thanks Yeyixiao)
   - it can be enabled with "BlockInterferePower=y"
   - see the sandbox option "Prevents processes in the sandbox from interfering with power operations" in SandMan UI
-- added new pattern mechanism using a ** in a pattern as palceholder means an arbitrary path element but not containing a '\'
+- added new pattern mechanism using a `**` as a placeholder to indicate an arbitrary path element not containing a `'\'` [1ff2867](https://github.com/sandboxie-plus/Sandboxie/commit/1ff28679b0557a642d29f1651a90a8f7fec77171)
 
 ### Changed
 - reworked option for suspending all processes in SandMan (originally introduced in 1.13.1) [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582#issuecomment-1969628215)
 
 ### Fixed
 - fixed privacy mode, NormalFilePath and symbolic link issue [#3660](https://github.com/sandboxie-plus/Sandboxie/issues/3660)
-- fixed "Recycle bin for drive * is corrupted" [#3665] (https://github.com/sandboxie-plus/Sandboxie/issues/3665)
+- fixed Recycle Bin access in a sandbox with data protection [#3665](https://github.com/sandboxie-plus/Sandboxie/issues/3665)
 
 
 
 ## [1.13.1 / 5.68.1] - 2024-02-27
 
 ### Added
-- added option for suspending all processes in SandMan [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582) (thx Yeyixiao)
-- added "On Terminate" trigger [#3584](https://github.com/sandboxie-plus/Sandboxie/issues/3584) (thx Yeyixiao)
+- added option for suspending all processes in SandMan [#3582](https://github.com/sandboxie-plus/Sandboxie/issues/3582) (thanks Yeyixiao)
+- added "On Terminate" trigger [#3584](https://github.com/sandboxie-plus/Sandboxie/issues/3584) (thanks Yeyixiao)
 
 ### Changed
 - changed DynData format to add flags

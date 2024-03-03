@@ -380,6 +380,9 @@ _FX BOOLEAN Gui_Init(HMODULE module)
     Gui_UseProxyService = !Dll_CompartmentMode && !SbieApi_QueryConfBool(NULL, L"NoSandboxieDesktop", FALSE);
     // NoSbieDesk END
 
+	GUI_IMPORT___(GetWindowDC)
+	GUI_IMPORT___(GetDC)
+	GUI_IMPORT___(GetDCEx)
     GUI_IMPORT___(GetWindowThreadProcessId);
     GUI_IMPORT___(SetThreadDesktop);
     GUI_IMPORT___(SwitchDesktop);

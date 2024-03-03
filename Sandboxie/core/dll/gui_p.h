@@ -412,6 +412,12 @@ typedef int (*P_LoadString)(
 
 typedef BOOL (*P_SetProcessWindowStation)(HWINSTA hWinSta);
 
+typedef BOOL(*P_GetWindowDC)(HWND hWnd);
+
+typedef BOOL(*P_GetDC)(HWND hWnd);
+
+typedef BOOL(*P_GetDCEx)(HWND hWnd,HRGN hrgnClip,DWORD flags);
+
 typedef BOOL (*P_SetThreadDesktop)(HDESK hDesktop);
 
 typedef BOOL (*P_SwitchDesktop)(HDESK hDesktop);
@@ -534,6 +540,9 @@ extern ATOM Gui_WindowProcOldA_Atom;
 #endif
 #define GUI_SYS_VAR_2(nm)       GUI_SYS_VAR_AW(nm,A); GUI_SYS_VAR_AW(nm,W);
 
+GUI_SYS_VAR(GetDC)
+GUI_SYS_VAR(GetDCEx)
+GUI_SYS_VAR(GetWindowDC)
 
 GUI_SYS_VAR(ClipCursor)
 GUI_SYS_VAR(GetClipCursor)

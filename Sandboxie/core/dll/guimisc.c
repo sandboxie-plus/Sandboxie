@@ -176,7 +176,9 @@ _FX BOOLEAN Gui_InitMisc(HMODULE module)
         }
         SBIEDLL_HOOK_GUI(SwapMouseButton);
         SBIEDLL_HOOK_GUI(SetDoubleClickTime);
-
+		SBIEDLL_HOOK_GUI(GetWindowDC)
+		SBIEDLL_HOOK_GUI(GetDC)
+		SBIEDLL_HOOK_GUI(GetDCEx)
         if (Dll_OsBuild >= 6000) {
 
             //
@@ -1457,4 +1459,57 @@ _FX BOOL Gui_ImmAssociateContextEx(
     }
 
     return ok;
+}
+
+//---------------------------------------------------------------------------
+// Gui_GetDC
+//---------------------------------------------------------------------------
+
+
+_FX HDC Gui_GetDC(HWND hWnd)
+{
+	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+		if (hWnd == NULL || hWnd == GetDesktopWindow()) {
+			SetLastError(ERROR_ACCESS_DENIED);
+			return NULL;
+		}
+		ULONG_PTR pid, tid;
+		if (!Gui_IsSameBox(hWnd, pid, tid)) {
+			SetLastError(ERROR_ACCESS_DENIED);
+			return NULL;
+		}
+	}
+	return __sys_GetDC(hWnd);
+}
+
+_FX HDC Gui_GetWindowDC(HWND hWnd)
+{
+	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+		if (hWnd == NULL || hWnd == GetDesktopWindow()) {
+			SetLastError(ERROR_ACCESS_DENIED);
+			return NULL;
+		}
+		ULONG_PTR pid, tid;
+		if (!Gui_IsSameBox(hWnd, pid, tid)) {
+			SetLastError(ERROR_ACCESS_DENIED);
+			return NULL;
+		}
+	}
+	return __sys_GetWindowDC(hWnd);
+}
+
+_FX HDC Gui_GetDCEx(HWND hWnd,HRGN  hrgnClip,DWORD flags)
+{
+	if (SbieApi_QueryConfBool(NULL, L"IsBlockCapture", FALSE)) {
+		if (hWnd == NULL || hWnd == GetDesktopWindow()) {
+			SetLastError(ERROR_ACCESS_DENIED);
+			return NULL;
+		}
+		ULONG_PTR pid, tid;
+		if (!Gui_IsSameBox(hWnd, pid, tid)) {
+			SetLastError(ERROR_ACCESS_DENIED);
+			return NULL;
+		}
+	}
+	return __sys_GetWindowDC(hWnd);
 }
